@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { themeable } from '@instructure/ui-themeable'
 import { controllable } from '@instructure/ui-prop-types'
 import { I18nPropTypes, DateTime, Locale } from '@instructure/ui-i18n'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { deprecated, omitProps, pickProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { Select } from '../Select'
@@ -43,6 +43,7 @@ category: components
 **/
 @testable()
 @themeable(theme, styles)
+@deprecated('7.0.0', null, 'Use @instructure/ui-select instead')
 class TimeInput extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

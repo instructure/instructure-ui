@@ -23,14 +23,8 @@ example: true
       messages={[
       { text: 'Invalid name', type: 'error' }
       ]}
-      />
-    <Select label="Select Your Favorite Side Dish">
-      <option value="apples">Fresh Fruit</option>
-      <option value="oranges">Biscuits and Gravy</option>
-      <option value="bananas">Bacon</option>
-      <option value="watermelon">English Muffins</option>
-      <option value="pancakes">Pancakes</option>
-    </Select>
+    />
+    <TextInput label="Favorite Side Dish" />
     <RadioInputGroup
       name="beverage"
       description="Beverage of Choice"
@@ -60,15 +54,8 @@ example: true
     layout="columns"
     vAlign="top"
   >
-    <Select label="Select Your Dining Style">
-      <option value="fast-food">Fast Food</option>
-      <option value="buffet">Buffet</option>
-      <option value="bistro">Brasserie / Bistro</option>
-      <option value="cafe">Cafe Style</option>
-      <option value="destination">Destination / Formal Dining</option>
-    </Select>
-    <TextInput label="Favorite Lunch Outing"
-      />
+    <TextInput label="Dining Style" />
+    <TextInput label="Favorite Lunch Outing"/>
     <CheckboxGroup name="times"
       layout="stacked"
       onChange={function (value) { console.log(value) }}

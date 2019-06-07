@@ -26,7 +26,6 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import { experimental } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
@@ -35,10 +34,8 @@ import { uid } from '@instructure/uid'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
-@experimental()
 class Selectable extends Component {
   static propTypes = {
     /**
@@ -91,7 +88,6 @@ class Selectable extends Component {
      * @param {Function} renderProps.getOptionProps - Prop getter for option elements
      * @param {Function} renderProps.getDisabledOptionProps - Prop getter for disabled option elements
      * @param {Function} renderProps.getDescriptionProps - Prop getter for screenreader description element
-     * @param {Function} renderProps.getAnnouncementProps - Prop getter for screenreader announcement element
      */
     children: PropTypes.func,
     /**
@@ -332,15 +328,6 @@ class Selectable extends Component {
         getDescriptionProps: (props) => {
           return {
             id: this._descriptionId,
-            ...props
-          }
-        },
-
-        getAnnouncementProps: (props) => {
-          return {
-            role: 'log',
-            'aria-live': 'polite',
-            'aria-atomic': 'true',
             ...props
           }
         }

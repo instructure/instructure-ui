@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { DateTime, I18nPropTypes, Locale } from '@instructure/ui-i18n'
 import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
+import { deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { DateInput } from '../DateInput'
@@ -39,6 +40,7 @@ category: components
 ---
 **/
 @testable()
+@deprecated('7.0.0', null, 'Use @instructure/ui-date-input and @instructure/ui-select instead')
 class DateTimeInput extends Component {
   static propTypes = {
     /**
@@ -446,4 +448,3 @@ class DateTimeInput extends Component {
 
 export default DateTimeInput
 export { DateTimeInput }
-

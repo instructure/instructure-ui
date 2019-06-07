@@ -30,7 +30,7 @@ import { Children, controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { LayoutPropTypes } from '@instructure/ui-layout'
 import { error } from '@instructure/console/macro'
-import { omitProps } from '@instructure/ui-react-utils'
+import { deprecated, omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { SelectSingle } from './SelectSingle'
@@ -45,6 +45,7 @@ id: DeprecatedSelect
 ---
 **/
 @testable()
+@deprecated('7.0.0', null, 'Use @instructure/ui-select instead')
 class Select extends Component {
   static propTypes = {
     /**

@@ -2,6 +2,8 @@
 describes: TimeInput
 ---
 
+**DEPRECATED:** See examples of implementing a [Time Input Pattern](#TimeDate) using [Select](#Select).
+
 A TimeInput component is used to select a time from a list of allowed time values. The
 list of possible values can be configured via this component's props.
 

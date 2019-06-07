@@ -20,8 +20,7 @@ class Example extends React.Component {
     super(props)
 
     this.state = {
-      open: false,
-      size: 'auto'
+      open: false
     }
   }
 
@@ -29,10 +28,6 @@ class Example extends React.Component {
     this.setState(function (state) {
       return { open: !state.open }
     })
-  };
-
-  handleSelectChange = (e, o) => {
-    this.setState({ size: o.value })
   };
 
   handleFormSubmit = e => {
@@ -55,25 +50,8 @@ class Example extends React.Component {
   }
 
   render () {
-    const variants = [
-      {value: 'auto', label: 'Auto'},
-      {value: 'small', label: 'Small'},
-      {value: 'medium', label: 'Medium'},
-      {value: 'large', label: 'Large'},
-      {value: 'fullscreen', label: 'Full Screen'}
-    ]
-
     return (
       <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
-        <Select
-          onChange={this.handleSelectChange}
-          value={this.state.size}
-          label={<ScreenReaderContent>Modal size</ScreenReaderContent>}
-          inline
-        >
-          {variants.map((s) => <option value={s.value} key={s.value}>{s.label}</option>)}
-        </Select>
-        &nbsp;
         <Button onClick={this.handleButtonClick}>
           {this.state.open ? 'Close' : 'Open'} the Modal
         </Button>
@@ -82,7 +60,7 @@ class Example extends React.Component {
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
           onSubmit={this.handleFormSubmit}
-          size={this.state.size}
+          size="auto"
           label="Modal Dialog: Hello World"
           shouldCloseOnDocumentClick
         >
@@ -165,13 +143,11 @@ class Example extends React.Component {
         >
           <Modal.Header>
             {this.renderCloseButton()}
-            <Heading>This Modal contains an Autocomplete</Heading>
+            <Heading>This Modal is constrained to a parent</Heading>
           </Modal.Header>
           <Modal.Body>
             <View as="p" margin="none none small"><Text>{fpo}</Text></View>
-            <ModalAutoCompleteExample
-              label="Choose a state" defaultOption="12"
-              onChange={(e, o) => console.log(o.label)} />
+            <ModalAutoCompleteExample renderLabel="Choose a state" />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
@@ -193,6 +169,16 @@ class Example extends React.Component {
 }
 
 class ModalAutoCompleteExample extends React.Component {
+  state = {
+    isShowingOptions: false
+  }
+
+  handleShowOptions = () => {
+    this.setState({ isShowingOptions: true })
+  }
+  handleHideOptions = () => {
+    this.setState({ isShowingOptions: false })
+  }
   render () {
     const options = [
       'Alabama', 'Alaska', 'American Samoa', 'Arizona',
@@ -203,16 +189,11 @@ class ModalAutoCompleteExample extends React.Component {
     ]
 
     return (
-      <Select {...this.props}
-        editable
-        formatSelectedOption={(tag) => (
-          <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
-        )}
-      >
+      <Select {...this.props} isShowingOptions={this.state.isShowingOptions} onRequestShowOptions={this.handleShowOptions} onRequestHideOptions={this.handleHideOptions}>
         {options.map((label, index) => (
-          <option key={label} value={'' + index}>
+          <Select.Option key={label} id={'' + index}>
             {label}
-          </option>
+          </Select.Option>
         ))}
       </Select>
     )

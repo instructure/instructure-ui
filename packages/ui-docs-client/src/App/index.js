@@ -29,7 +29,6 @@ import GithubCorner from 'react-github-corner'
 
 import { themeable } from '@instructure/ui-themeable'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
-import { Select } from '@instructure/ui-forms'
 import { View, DrawerLayout } from '@instructure/ui-layout'
 import { Mask } from '@instructure/ui-overlays'
 import { Heading, Pill } from '@instructure/ui-elements'
@@ -39,6 +38,7 @@ import { Document } from '../Document'
 import { Header } from '../Header'
 import { Nav } from '../Nav'
 import { Theme } from '../Theme'
+import { Select } from '../Select'
 import { Section } from '../Section'
 import { Icons } from '../Icons'
 import { HamburgerButton } from '../HamburgerButton'
@@ -79,7 +79,8 @@ class App extends Component {
 
     this.state = {
       showMenu: false,
-      trayOverlay: false
+      trayOverlay: false,
+      themeKey: Object.keys(props.themes)[0]
     }
   }
 
@@ -142,7 +143,7 @@ class App extends Component {
         <div className={styles.themeSelect}>
           <Select
             name="theme"
-            label="Theme"
+            renderLabel="Theme"
             onChange={this.handleThemeChange}
             value={this.state.themeKey}
           >

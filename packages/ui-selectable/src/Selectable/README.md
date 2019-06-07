@@ -237,3 +237,16 @@ render(
   </View>
 )
 ```
+
+Selectable has very few opinions about how a combobox component should be composed. It mostly aims to ensure all the proper WAI-ARIA roles and attributes are set on the right elements at the right times. Selectable uses a combination of controllable props and prop getters to set these attributes and provide accessible behavior.
+
+#### Prop getters
+`Selectable` provides a number of different prop getters. Each getter is intended to be used with a particular element in your component. `getInputProps` should be used to obtain attributes relevant to the `input` element in a combobox component. `getTriggerProps` should be used for the element responsible for triggering the showing and hiding of the options list. If the `input` element is also the trigger, use both of these prop getters on that element.
+
+The only getter with a required argument is `getOptionProps` which requires an `id` be provided. However, it's best practice to set any props needed on an element via its prop getter. This just ensures you don't inadvertently override an essential value.
+
+#### Controllable props
+There are several controllable props available. These should be updated to reflect changes to the externally managed state of the combobox component. The `selectedOptionId` prop, for example, specifies which option(s) should be considered "selected" when rendered.
+
+#### Request callbacks
+A variety of request callbacks are provided as prompts for state updates. They do not actually make any changes to props or state on their own. `onRequestShowOptions`, for example, is fired when `Selectable` thinks its `isShowingOptions` prop should be updated to true. The consumer can always decide if and how to react to these prompts, but utilizing them reduces a lot of the boilerplate combobox logic the consumer would otherwise be responsible for providing.

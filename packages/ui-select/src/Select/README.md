@@ -25,13 +25,8 @@ class SingleSelectExample extends React.Component {
     announcement: null
   }
 
-  getOptionById (id) {
-    for (let i = 0; i < this.props.options.length; i++) {
-      const option = this.props.options[i]
-      if (option.id === id) {
-        return option
-      }
-    }
+  getOptionById (queryId) {
+    return this.props.options.find(({ id }) => id === queryId)
   }
 
   handleShowOptions = (event) => {
@@ -171,13 +166,8 @@ class AutocompleteExample extends React.Component {
     announcement: null
   }
 
-  getOptionById (id) {
-    for (let i = 0; i < this.props.options.length; i++) {
-      const option = this.props.options[i]
-      if (option.id === id) {
-        return option
-      }
-    }
+  getOptionById (queryId) {
+    return this.props.options.find(({ id }) => id === queryId)
   }
 
   getOptionsChangedMessage (newOptions) {
@@ -216,7 +206,8 @@ class AutocompleteExample extends React.Component {
       if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
         return {
           inputValue: onlyOption.label,
-          selectedOptionId: onlyOption.id
+          selectedOptionId: onlyOption.id,
+          filteredOptions: this.filterOptions('')
         }
       }
     }
@@ -405,13 +396,8 @@ class MultipleSelectExample extends React.Component {
     announcement: null
   }
 
-  getOptionById (id) {
-    for (let i = 0; i < this.props.options.length; i++) {
-      const option = this.props.options[i]
-      if (option.id === id) {
-        return option
-      }
-    }
+  getOptionById (queryId) {
+    return this.props.options.find(({ id }) => id === queryId)
   }
 
   getOptionsChangedMessage (newOptions) {
@@ -716,11 +702,11 @@ class GroupSelectExample extends React.Component {
   handleHighlightOption = (event, { id }) => {
     event.persist()
     const newOption = this.getOptionById(id)
-    this.setState({
+    this.setState((state) => ({
       highlightedOptionId: id,
       inputValue: event.type === 'keydown' ? newOption.label : state.inputValue,
       announcement: this.getGroupChangedMessage(newOption)
-    })
+    }))
   }
 
   handleSelectOption = (event, { id }) => {

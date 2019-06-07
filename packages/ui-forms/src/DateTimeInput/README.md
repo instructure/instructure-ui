@@ -2,6 +2,8 @@
 describes: DateTimeInput
 ---
 
+**DEPRECATED:** See examples of implementing a [DateTime Input Pattern](#TimeDate) using [Select](#Select) and [DateInput](#DateInput).
+
 A DateTimeInput component is used to enter a date-time value. It is built as a composition
 of the [DateInput](#DateInput) and [TimeInput](#TimeInput) components.
 

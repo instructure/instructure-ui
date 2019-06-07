@@ -1346,51 +1346,5 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getDescriptionProps).to.exist()
     })
   })
-
-  describe('getAnnouncementProps()', async () => {
-    it('should provide prop getter for announcement element', async () => {
-      const renderSpy = spy()
-      await mount(
-        <Selectable>
-          {(selectable) => {
-            renderSpy(selectable)
-            return null
-          }}
-        </Selectable>
-      )
-      expect(lastCall(renderSpy)[0].getAnnouncementProps).to.exist()
-    })
-
-    it('should set appropriate prop defaults', async () => {
-      await mount(
-        <Selectable>
-          {(selectable) => (
-            <span>
-              <input
-                type="text"
-                {...selectable.getTriggerProps()}
-                {...selectable.getInputProps()}
-              />
-              <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
-                  <li
-                    key={opt}
-                    {...selectable.getOptionProps({id: opt})}
-                  >
-                    {opt}
-                  </li>
-                ))}
-              </ul>
-              <span {...selectable.getAnnouncementProps()}>Announcement</span>
-            </span>
-          )}
-        </Selectable>
-      )
-      const announcement = await findWithText('Announcement')
-      expect(announcement.getAttribute('role')).to.equal('log')
-      expect(announcement.getAttribute('aria-live')).to.equal('polite')
-      expect(announcement.getAttribute('aria-atomic')).to.equal('true')
-    })
-  })
 })
 /* eslint-enable jsx-a11y/label-has-associated-control */

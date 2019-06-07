@@ -28,7 +28,6 @@
     "@babel/runtime": "^7",
     "@instructure/console": "^6.3.0",
     "@instructure/ui-dom-utils": "^6.3.0",
-    "@instructure/ui-react-utils": "^6.3.0",
     "@instructure/ui-testable": "^6.3.0",
     "@instructure/ui-themeable": "^6.3.0",
     "@instructure/ui-utils": "^6.3.0",
