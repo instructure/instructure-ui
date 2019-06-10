@@ -53,6 +53,10 @@ class Flex extends Component {
     */
     as: PropTypes.elementType,
     /**
+    * provides a reference to the underlying html root element
+    */
+    elementRef: PropTypes.func,
+    /**
     * Sets the flex-direction to row (horizontal) or column (vertical)
     */
     direction: PropTypes.oneOf(['row', 'column', 'row-reverse', 'column-reverse']),
@@ -90,6 +94,7 @@ class Flex extends Component {
   static defaultProps = {
     children: null,
     as: 'span',
+    elementRef: (el) => {},
     direction: 'row',
     justifyItems: 'start',
     inline: false,
@@ -127,6 +132,7 @@ class Flex extends Component {
 
     const {
       as,
+      elementRef,
       children,
       direction,
       height,
@@ -157,6 +163,7 @@ class Flex extends Component {
         <View
           {...props}
           className={classnames(classes, styles[direction])}
+          elementRef={elementRef}
           as={as}
           display={inline ? 'inline-flex' : 'flex'}
           width={width}

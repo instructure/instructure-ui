@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, within, wait } from '@instructure/ui-test-utils'
+import { expect, mount, within, wait, stub } from '@instructure/ui-test-utils'
 import { Flex } from '../index'
 
 describe('<Flex />', async () => {
@@ -228,6 +228,22 @@ describe('<Flex />', async () => {
       expect(item3.getComputedStyle()['flex-basis']).to.equal('100px')
       expect(item3.getComputedStyle()['min-width']).to.equal('100px')
       expect(item2.getComputedStyle()['flex-basis']).to.equal('auto')
+    })
+  })
+
+  it('should support an elementRef prop', async () => {
+    const elementRef = stub()
+    const subject = await mount(
+      <Flex elementRef={elementRef}>
+        <Flex.Item>Flex item 1</Flex.Item>
+        <Flex.Item>Flex item 2</Flex.Item>
+        <Flex.Item>Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
+      </Flex>
+    )
+
+    await wait(() => {
+      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
     })
   })
 

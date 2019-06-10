@@ -52,6 +52,10 @@ class FlexItem extends Component {
     * the element type to render as
     */
     as: PropTypes.elementType,
+    /**
+    * provides a reference to the underlying html root element
+    */
+    elementRef: PropTypes.func,
     children: PropTypes.node,
     /**
     * Inherits from the parent Flex component
@@ -94,6 +98,7 @@ class FlexItem extends Component {
 
   static defaultProps = {
     as: 'span',
+    elementRef: (el) => {},
     grow: false,
     shrink: false
   }
@@ -104,6 +109,7 @@ class FlexItem extends Component {
    const {
      align,
      as,
+     elementRef,
      children,
      direction,
      grow,
@@ -136,6 +142,7 @@ class FlexItem extends Component {
        {...props}
        className={classnames(classes)}
        style={style}
+       elementRef={elementRef}
        as={as}
        minHeight={dirColumn ? size : undefined}
        minWidth={direction === 'row' ? size : undefined}
