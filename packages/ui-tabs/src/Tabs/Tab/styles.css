@@ -24,7 +24,6 @@
 
 .default,
 .secondary {
-  order: -1;
   white-space: nowrap;
 }
 
@@ -32,14 +31,14 @@
   box-sizing: border-box;
   padding: 0.7em 1em;
   color: var(--secondaryColor);
-  margin-right: 0.2em; /* stylelint-disable-line property-blacklist */
+  margin-inline-end: 0.2em;
   margin-bottom: -0.0625rem; /* To overlay Tab over TabPanel top border */
   border: 0.0625rem solid transparent;
   border-top-left-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
   border-top-right-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
 
   &:first-of-type {
-    margin-left: 0; /* stylelint-disable-line property-blacklist */
+    margin-inline-start: 0;
   }
 
   &:not([aria-selected]):not([aria-disabled]):hover,
@@ -55,14 +54,8 @@
   }
 
   &[aria-selected] {
-    /* To overlay Tab over TabPanel top border */
-    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
-    z-index: 1;
+    z-index: var(--zIndex);
     border-bottom-color: var(--secondarySelectedBackground);
-  }
-
-  &:focus {
-    text-decoration: underline;
   }
 }
 
@@ -77,8 +70,7 @@
   padding: 1rem 1.25rem;
   line-height: 1;
   position: relative;
-  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
-  z-index: 1;
+  z-index: var(--zIndex);
   color: var(--defaultColor);
 
   &::after {
@@ -86,7 +78,7 @@
     height: 0.25rem;
     width: 100%;
     position: absolute;
-    left: 0; /* stylelint-disable-line property-blacklist */
+    inset-inline-start: 0;
     bottom: -0.0625rem;
 
     /* rules to animate from */
@@ -109,21 +101,6 @@
     animation-timing-function: ease-out;
     background-color: var(--defaultSelectedBorderColor);
   }
-
-  &:focus {
-    text-decoration: underline;
-  }
-}
-
-.screenreader-only {
-  height: 0.0625rem;
-  width: 0.0625rem;
-  margin: -0.0625rem;
-  padding: 0;
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  border: 0;
 }
 
 /* stylelint-enable no-descending-specificity */

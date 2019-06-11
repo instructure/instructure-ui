@@ -25,9 +25,8 @@ import { locator } from '@instructure/ui-test-utils'
 
 import { Tabs } from './index'
 
-const TabLocator = locator(Tabs.Tab.selector)
-const PanelLocator = locator(Tabs.Panel.selector)
-
+const TabLocator = locator('[role="tab"]')
+const PanelLocator = locator('[role="tabpanel"]')
 const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
 
 export default locator(Tabs.selector, {

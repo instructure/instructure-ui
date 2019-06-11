@@ -196,6 +196,8 @@ class View extends Component {
     */
     focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
 
+    shouldAnimateFocus: PropTypes.bool,
+
     /**
     * Activate a dotted outline around the component to make building your
     * layout easier
@@ -243,7 +245,8 @@ class View extends Component {
     insetInlineStart: undefined,
     insetInlineEnd: undefined,
     insetBlockStart: undefined,
-    insetBlockEnd: undefined
+    insetBlockEnd: undefined,
+    shouldAnimateFocus: true
   }
 
   componentDidMount () {
@@ -443,6 +446,7 @@ class View extends Component {
       position,
       focusPosition,
       focusColor,
+      shouldAnimateFocus,
       borderColor,
       size, // eslint-disable-line react/prop-types
       className // eslint-disable-line react/prop-types
@@ -453,7 +457,8 @@ class View extends Component {
     const focusOutlineClasses = position === 'relative' ? {
       [styles[this.focusRingRadius]]: true,
       [styles[`focusPosition--${focusPosition}`]]: true,
-      [styles[`focusColor--${focusColor}`]]: true
+      [styles[`focusColor--${focusColor}`]]: true,
+      [styles[`focusAnimation`]]: shouldAnimateFocus
     } : {}
 
     const classes = classnames({

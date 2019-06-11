@@ -24,7 +24,6 @@
 
 .minimal,
 .simple {
-  order: -1;
   white-space: nowrap;
 }
 
@@ -59,10 +58,6 @@
     /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 1;
     border-bottom-color: var(--simpleSelectedBackground);
-  }
-
-  &:focus {
-    text-decoration: underline;
   }
 }
 
@@ -109,21 +104,6 @@
     animation-timing-function: ease-out;
     background-color: var(--minimalSelectedBorderColor);
   }
-
-  &:focus {
-    text-decoration: underline;
-  }
-}
-
-.screenreader-only {
-  height: 0.0625rem;
-  width: 0.0625rem;
-  margin: -0.0625rem;
-  padding: 0;
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  border: 0;
 }
 
 /* stylelint-enable no-descending-specificity */

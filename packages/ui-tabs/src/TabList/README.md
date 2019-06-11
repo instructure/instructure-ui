@@ -2,6 +2,8 @@
 describes: TabList
 ---
 
+**DEPRECATED:** use the [Tabs](#Tabs) component from [@instructure/ui-tabs](#ui-tabs) instead.
+
 Accessible tabbed content component. You can use the TAB key to focus the component and
 arrow keys to navigate between panels of content. The default variant is `simple`.
 
@@ -13,7 +15,7 @@ example: true
 ---
 <TabList>
   <TabList.Panel title="First Tab">
-    <Text>Hello World</Text>
+    <Button>Focus Me</Button>
   </TabList.Panel>
   <TabList.Panel title="Disabled Tab" disabled>
     <Text>{lorem.paragraphs()}</Text>
@@ -43,7 +45,6 @@ example: true
 <TabList
   defaultSelectedIndex={2}
   variant="minimal"
-  size="medium"
   margin="large auto"
   padding="medium"
 >

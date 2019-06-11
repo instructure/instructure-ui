@@ -2,34 +2,56 @@
 describes: Tabs
 ---
 
-Accessible Tabs component. You can use the TAB key to focus the component and arrow keys to navigate between panels of content. To set a default panel that should be selected on initial render set the `defaultSelectedIndex`.
+Accessible Tabs component. You can use the TAB key to focus the component and arrow keys to navigate between panels of content. To set a default panel that should be selected on initial render set the `selected` prop on that `<Tabs.Panel>`.
 
-To restrict the width of the `<Tabs/>`, use the `size` prop. Add space around the entire component using the `margin` prop. Adjust the padding around the panel content via `padding` (default is `small`). Restrict the height of the panel using `minHeight` or `maxHeight`. Finally, switch the
-text alignment of the panel content with `textAlign`.
+To restrict the width of the `<Tabs/>`, use the `maxWidth` prop. Add space around the entire component using the `margin` prop. Adjust the padding around the panel content via `padding` (default is `small`) on each `<Tabs.Panel>`. Restrict the height of the panel using `minHeight` or `maxHeight`. Finally, switch the text alignment of the panel content with `textAlign`.
 
 ```js
 ---
 example: true
+render: false
 ---
-<Tabs
-  defaultSelectedIndex={2}
-  size="medium"
-  margin="large auto"
-  padding="medium"
->
-  <Tabs.Panel title="Tab A" textAlign="center" padding="large">
-    <Text>{lorem.paragraphs()}</Text>
-  </Tabs.Panel>
-  <Tabs.Panel title="Disabled Tab" disabled>
-    <Text>{lorem.paragraphs()}</Text>
-  </Tabs.Panel>
-  <Tabs.Panel title="Tab C">
-    <Text>{lorem.paragraphs()}</Text>
-  </Tabs.Panel>
-  <Tabs.Panel title="Tab D">
-    <Text>{lorem.paragraphs()}</Text>
-  </Tabs.Panel>
-</Tabs>
+class Example extends React.Component {
+  state = {
+    selectedIndex: 0
+  }
+  handleTabChange = (event, { index, id }) => {
+    this.setState({
+      selectedIndex: index
+    })
+  }
+  render () {
+    const { selectedIndex } = this.state
+    return (
+      <Tabs
+        margin="large auto"
+        padding="medium"
+        onRequestTabChange={this.handleTabChange}
+      >
+        <Tabs.Panel 
+          id="tabA"
+          renderTitle="Tab A" 
+          textAlign="center" 
+          padding="large" 
+          selected={selectedIndex === 0}
+        >
+          <Button>Focus Me</Button>
+        </Tabs.Panel>
+        <Tabs.Panel id="tabB" renderTitle="Disabled Tab" isDisabled>
+          {lorem.paragraphs()}
+        </Tabs.Panel>
+        <Tabs.Panel id="tabC" renderTitle="Tab C" isSelected={selectedIndex === 2}>
+          {lorem.paragraphs()}
+        </Tabs.Panel>
+        <Tabs.Panel id="tabD" renderTitle="Tab D" isSelected={selectedIndex === 3}>
+          {lorem.paragraphs()}
+        </Tabs.Panel>
+      </Tabs>
+    )
+  }
+}
+
+render(<Example />)
 ```
 
 ### Secondary Tabs
@@ -37,21 +59,44 @@ example: true
 ```js
 ---
 example: true
+render: false
 ---
-<Tabs variant="secondary">
-  <Tabs.Panel title="First Tab" minHeight="10rem" maxHeight="10rem">
-    <Text>Hello World</Text>
-  </Tabs.Panel>
-  <Tabs.Panel title="Disabled Tab" minHeight="10rem" maxHeight="10rem" disabled>
-    <Text>{lorem.paragraphs()}</Text>
-  </Tabs.Panel>
-  <Tabs.Panel title="Third Tab" minHeight="10rem" maxHeight="10rem">
-    <Text>{lorem.paragraphs()}</Text>
-  </Tabs.Panel>
-  <Tabs.Panel title="Fourth Tab" minHeight="10rem" maxHeight="10rem">
-    <Text>{lorem.paragraphs()}</Text>
-  </Tabs.Panel>
-</Tabs>
+class Example extends React.Component {
+  state = {
+    selectedIndex: 2
+  }
+  handleTabChange = (event, { index }) => {
+    this.setState({
+      selectedIndex: index
+    })
+  }
+  render () {
+    const { selectedIndex } = this.state
+    return (
+      <Tabs 
+        variant="secondary" 
+        onRequestTabChange={this.handleTabChange}
+        minHeight="10rem"
+        maxHeight="10rem"
+      >
+        <Tabs.Panel renderTitle="First Tab" isSelected={selectedIndex === 0}>
+          Hello World
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Disabled Tab" isDisabled>
+          {lorem.paragraphs()}
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isSelected={selectedIndex === 2}>
+          {lorem.paragraphs()}
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Fourth Tab" isSelected={selectedIndex === 3}>
+          {lorem.paragraphs()}
+        </Tabs.Panel>
+      </Tabs>
+    )
+  }
+}
+
+render(<Example />)
 ```
 
 ### Guidelines

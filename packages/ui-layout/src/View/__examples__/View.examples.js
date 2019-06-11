@@ -47,10 +47,11 @@ export default {
       focusPosition: 'offset',
       borderColor: 'info',
       overflowX: 'visible',
-      overflowY: 'visible'
+      overflowY: 'visible',
+      shouldAnimateFocus: false
     }
   },
-  excludeProps: ['padding', 'display', 'debug', 'focusColor', 'focusPosition', 'borderColor', 'overflowX', 'overflowY'],
+  excludeProps: ['padding', 'shouldAnimateFocus', 'display', 'debug', 'focusColor', 'focusPosition', 'borderColor', 'overflowX', 'overflowY'],
   filter: (props) => {
     return (
       // Border radius and border width list 0 in addition to none in their object values

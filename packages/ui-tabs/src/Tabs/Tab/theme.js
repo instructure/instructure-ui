@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, typography, spacing }) {
+export default function generator ({ colors, typography, stacking }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -36,7 +36,9 @@ export default function generator ({ colors, typography, spacing }) {
     secondaryColor: colors.textBrand,
     secondarySelectedBackground: colors.backgroundLightest,
     secondarySelectedBorderColor: colors.borderMedium,
-    secondarySelectedColor: colors.textDarkest
+    secondarySelectedColor: colors.textDarkest,
+
+    zIndex: stacking.above
   }
 }
 

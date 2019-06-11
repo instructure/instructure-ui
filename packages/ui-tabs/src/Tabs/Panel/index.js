@@ -27,8 +27,8 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { View } from '@instructure/ui-layout'
-import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import styles from './styles.css'
@@ -40,7 +40,11 @@ parent: Tabs
 id: Tabs.Panel
 ---
 **/
-@testable()
+@deprecated('7.0.0', {
+  title: 'renderTitle',
+  selected: 'isSelected',
+  disabled: 'isDisabled'
+})
 @themeable(theme, styles)
 class Panel extends Component {
   static propTypes = {
@@ -48,70 +52,81 @@ class Panel extends Component {
     * The content that will be rendered in the corresponding <Tab /> and will label
     * this `<Tabs.Panel />` for screen readers
     */
-    title: PropTypes.node.isRequired,
+    renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     children: PropTypes.node,
     variant: PropTypes.oneOf(['default', 'secondary']),
-    maxHeight: PropTypes.string,
-    minHeight: PropTypes.string,
+    isSelected: PropTypes.bool,
+    isDisabled: PropTypes.bool,
+    maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     id: PropTypes.string,
     labelledBy: PropTypes.string,
-    selected: PropTypes.bool,
-    disabled: PropTypes.bool,
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
-    * A ref to this `<Tabs.Panel />` component instance
+    * deprecated
     */
-    tabRef: PropTypes.func
+    title: PropTypes.node,
+    /**
+    * deprecated
+    */
+    selected: PropTypes.bool,
+    /**
+    * deprecated
+    */
+    disabled: PropTypes.bool,
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
     children: null,
     id: undefined,
-    disabled: false,
+    disabled: undefined,
+    isDisabled: false,
     maxHeight: undefined,
     minHeight: undefined,
     textAlign: 'start',
     variant: 'default',
     labelledBy: null,
-    selected: false,
+    selected: undefined,
+    isSelected: false,
     padding: 'small',
-    tabRef: (el) => {}
-  }
-
-  renderContent () {
-    const classes = {
-      [styles.content]: true,
-      [styles.overflow]: this.props.maxHeight
-    }
-    return (
-      <View
-        className={classnames(classes)}
-        maxHeight={this.props.maxHeight}
-        minHeight={this.props.minHeight}
-        as="div"
-        padding={this.props.padding}
-        textAlign={this.props.textAlign}
-      >
-        {this.props.children}
-      </View>
-    )
+    title: undefined,
+    elementRef: (el) => {}
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.variant]]: true
-    }
-    const isHidden = !this.props.selected || !!this.props.disabled
+    const {
+      selected,
+      disabled,
+      labelledBy,
+      variant,
+      id,
+      maxHeight,
+      minHeight,
+      padding,
+      textAlign,
+      children,
+      elementRef,
+      ...props
+    } = this.props
+    // TODO: clean this up when selected and disabled props are removed in 7.0:
+    const isSelected = selected || props.isSelected
+    const isDisabled = disabled || props.isDisabled
+    const isHidden = !isSelected || !!isDisabled
 
     return (
       <div
-        className={classnames(classes)}
+        {...passthroughProps(props)}
+        className={classnames({
+          [styles.root]: true,
+          [styles[variant]]: true
+        })}
         role="tabpanel"
-        id={this.props.id}
-        aria-labelledby={this.props.labelledBy}
+        id={id}
+        aria-labelledby={labelledBy}
         aria-hidden={isHidden ? 'true' : null}
+        ref={elementRef}
       >
         <Transition
           type="fade"
@@ -119,7 +134,19 @@ class Panel extends Component {
           unmountOnExit
           transitionExit={false}
         >
-        {this.renderContent()}
+          <View
+            className={classnames({
+              [styles.content]: true,
+              [styles.overflow]: maxHeight
+            })}
+            maxHeight={maxHeight}
+            minHeight={minHeight}
+            as="div"
+            padding={padding}
+            textAlign={textAlign}
+          >
+            {children}
+          </View>
         </Transition>
       </div>
     )

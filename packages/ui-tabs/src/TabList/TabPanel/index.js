@@ -29,6 +29,7 @@ import classnames from 'classnames'
 import { View } from '@instructure/ui-layout'
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import styles from './styles.css'
@@ -77,37 +78,30 @@ class TabPanel extends Component {
     tabRef: (el) => {}
   }
 
-  renderContent () {
-    const classes = {
-      [styles.content]: true,
-      [styles.overflow]: this.props.maxHeight
-    }
-    return (
-      <View
-        className={classnames(classes)}
-        maxHeight={this.props.maxHeight}
-        as="div"
-        padding={this.props.padding}
-        textAlign={this.props.textAlign}
-      >
-        {this.props.children}
-      </View>
-    )
-  }
-
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.variant]]: true
-    }
-    const isHidden = !this.props.selected || !!this.props.disabled
-
+    const {
+      selected,
+      disabled,
+      labelledBy,
+      variant,
+      id,
+      maxHeight,
+      padding,
+      textAlign,
+      children,
+      ...props
+    } = this.props
+    const isHidden = !selected || !!disabled
     return (
       <div
-        className={classnames(classes)}
+        {...passthroughProps(props)}
+        className={classnames({
+          [styles.root]: true,
+          [styles[variant]]: true
+        })}
         role="tabpanel"
-        id={this.props.id}
-        aria-labelledby={this.props.labelledBy}
+        id={id}
+        aria-labelledby={labelledBy}
         aria-hidden={isHidden ? 'true' : null}
       >
         <Transition
@@ -116,7 +110,18 @@ class TabPanel extends Component {
           unmountOnExit
           transitionExit={false}
         >
-        {this.renderContent()}
+          <View
+            className={classnames({
+              [styles.content]: true,
+              [styles.overflow]: maxHeight
+            })}
+            maxHeight={maxHeight}
+            as="div"
+            padding={padding}
+            textAlign={textAlign}
+          >
+            {children}
+          </View>
         </Transition>
       </div>
     )

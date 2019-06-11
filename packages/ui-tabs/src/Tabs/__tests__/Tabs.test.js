@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Tabs } from '../index'
 import TabsLocator from '../locator'
@@ -32,9 +32,9 @@ describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -47,9 +47,9 @@ describe('<Tabs />', async () => {
   it('should render with null children', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
         {null}
       </Tabs>
     )
@@ -60,53 +60,23 @@ describe('<Tabs />', async () => {
     expect(panels).to.have.length(3)
   })
 
-  it('should render screen reader only tabs', async () => {
-    await mount(
-      <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
-      </Tabs>
-    )
-
-    const tabs = await TabsLocator.find()
-    const screenReaderOnlyTabs = await tabs.findAllTabs('[role="tab"]')
-
-    expect(screenReaderOnlyTabs).to.have.length(3)
-  })
-
-  it('should render presentational only tabs', async () => {
-    await mount(
-      <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
-      </Tabs>
-    )
-
-    const tabs = await TabsLocator.find()
-    const presentationTabs = await tabs.findAllTabs('[role="presentation"]')
-
-    expect(presentationTabs).to.have.length(2)
-  })
-
   it('should render correct number of tabs', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
     const tabButtons = await tabs.findAllTabs()
 
-    // there should be 2 extra tabs for screen readers
-    expect(tabButtons.length).to.equal(5)
+    expect(tabButtons.length).to.equal(3)
   })
 
   it('should be okay with rendering without any children', async () => {
+    stub(console, 'warn') // suppress Focusable warnings
     let error = false
     try {
       await mount(
@@ -137,14 +107,14 @@ describe('<Tabs />', async () => {
 
     const subject = await mount(
       <Tabs componentRef={(el) => { tabs = el }}>
-        <Tabs.Panel title="foo" key="foo" />
+        <Tabs.Panel renderTitle="foo" key="foo" />
       </Tabs>
     )
 
     const verifyChildKeys = ({ children }) => {
       const childrenArray = Array.isArray(children) ? children : [children]
       childrenArray.forEach((child) => {
-        expect(child.props.title).to.equal(child.key)
+        expect(child.props.renderTitle).to.equal(child.key)
       })
     }
 
@@ -152,37 +122,20 @@ describe('<Tabs />', async () => {
 
     await subject.setProps({
       children: [
-        <Tabs.Panel title="foo" key="foo" />,
-        <Tabs.Panel title="bar" key="bar" />
+        <Tabs.Panel renderTitle="foo" key="foo" />,
+        <Tabs.Panel renderTitle="bar" key="bar" />
       ]
     })
 
     verifyChildKeys(tabs.props)
   })
 
-  it('requires an `onChange` prop with a `selectedIndex` prop', async () => {
-    let error = false
-    try {
-      await mount(
-        <Tabs selectedIndex={1}>
-          <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-          <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-          <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
-        </Tabs>
-      )
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true()
-  })
-
-  it('should default to selectedIndex being 0', async () => {
+  it('should default to selecting the first tab', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -193,12 +146,12 @@ describe('<Tabs />', async () => {
     expect(selectedTabsPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  it('should honor the defaultSelectedIndex prop', async () => {
+  it('should honor the isSelected prop', async () => {
     await mount(
-      <Tabs defaultSelectedIndex={1}>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+      <Tabs>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" isSelected>Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -211,10 +164,10 @@ describe('<Tabs />', async () => {
 
   it('should not allow selecting a disabled tab', async () => {
     await mount(
-      <Tabs defaultSelectedIndex={2}>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+      <Tabs>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled isSelected>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -224,88 +177,59 @@ describe('<Tabs />', async () => {
       expectEmpty: true
     })).to.not.exist()
 
+    expect(await tabs.findSelectedTab(':contains(First Tab)')).to.exist()
+
     const panels = await tabs.findAllTabPanels()
     expect(panels[2].getAttribute('aria-hidden')).to.equal('true')
   })
 
-  it('should call onChange when selection changes', async () => {
+  it('should call onRequestTabChange when selection changes via click', async () => {
     const onChange = stub()
 
     await mount(
-      <Tabs selectedIndex={0} onChange={onChange}>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+      <Tabs onRequestTabChange={onChange}>
+        <Tabs.Panel renderTitle="First Tab" isSelected>Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
-    const secondTab = await tabs.findTab(':contains(Second Tab)[role="presentation"]')
+    const secondTab = await tabs.findTab(':contains(Second Tab)')
 
     await secondTab.click()
 
-    expect(onChange).to.have.been.calledWith(1, 0)
+    await wait(() => {
+      expect(onChange).to.have.been.called()
+      expect(onChange.getCall(0).args[1].index).to.equal(1)
+    })
   })
 
-  it('should not update the selected tab when selectedIndex is set', async () => {
-    const onChange = stub()
-
+  it('should focus the selected tab when focus is set', async () => {
     await mount(
-      <Tabs selectedIndex={0} onChange={onChange}>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
-      </Tabs>
-    )
-
-    const tabs = await TabsLocator.find()
-
-    const secondTab = await tabs.findTab(':contains(Second Tab)[role="presentation"]')
-
-    await secondTab.click()
-
-    expect(await tabs.findSelectedTab(':contains(First Tab)')).to.exist()
-  })
-
-  it('should focus the defaultSelectedIndex tab when focus is set', async () => {
-    await mount(
-      <Tabs defaultSelectedIndex={1} focus>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+      <Tabs focus>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" isSelected>Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
     const secondTab = await tabs.findSelectedTab(':contains(Second Tab)')
-    expect(secondTab.focused()).to.be.true()
+
+    await wait(() => {
+      expect(secondTab).to.be.focused()
+    })
   })
 
-  it('should focus the selectedIndex tab when focus is set', async () => {
-    const subject = await mount(
-      <Tabs selectedIndex={1} onChange={() => {}} focus>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
-      </Tabs>
-    )
+  it('should call onRequestTabChange with keyboard arrow keys', async () => {
+    const onChange = stub()
 
-    const tabs = await TabsLocator.find()
-    const secondTab = await tabs.findSelectedTab(':contains(Second Tab)')
-    expect(secondTab.focused()).to.be.true()
-
-    await subject.setProps({ selectedIndex: 0 })
-
-    const firstTab = await tabs.findSelectedTab(':contains(First Tab)')
-    expect(firstTab.focused()).to.be.true()
-  })
-
-  it('should update the selected tab via keyboard arrow keys', async () => {
     await mount(
-      <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+      <Tabs onRequestTabChange={onChange}>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -314,110 +238,84 @@ describe('<Tabs />', async () => {
 
     await selectedTab.keyDown('left')
 
-    selectedTab = await tabs.findSelectedTab()
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.getCall(0).args[1].index).to.equal(1)
+    })
 
-    expect(selectedTab.getTextContent()).to.equal('Second Tab')
-
-    let selectedTabPanel = await tabs.findTabPanel(':contains(Tab 2 content)')
-    expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
-
-    selectedTab = await tabs.findSelectedTab()
+    onChange.resetHistory()
 
     await selectedTab.keyDown('right')
 
-    selectedTab = await tabs.findSelectedTab()
-    expect(selectedTab.getTextContent()).to.equal('First Tab')
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.getCall(0).args[1].index).to.equal(1)
+    })
 
-    selectedTabPanel = await tabs.findTabPanel(':contains(Tab 1 content)')
-    expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
+    onChange.resetHistory()
+
+    await selectedTab.keyDown('up')
+
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.getCall(0).args[1].index).to.equal(1)
+    })
+
+    onChange.resetHistory()
 
     await selectedTab.keyDown('down')
 
-    selectedTab = await tabs.findSelectedTab()
-    expect(selectedTab.getTextContent()).to.equal('Second Tab')
-
-    selectedTabPanel = await tabs.findTabPanel(':contains(Tab 2 content)')
-    expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
-  })
-
-  it('should update the selected tab via keyboard ENTER keys on screen reader tabs', async () => {
-    await mount(
-      <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
-      </Tabs>
-    )
-
-    const tabs = await TabsLocator.find()
-    const tabButton = await tabs.findTab(':contains(Second Tab)[role="tab"]')
-
-    await tabButton.keyDown('enter')
-
-    let selectedTab = await tabs.findSelectedTab()
-
-    expect(selectedTab.getTextContent()).to.equal('Second Tab')
-
-    const tabPanels = await tabs.findAllTabPanels()
-    expect(tabPanels[0].getAttribute('aria-hidden')).to.equal('true')
-    expect(tabPanels[1].getAttribute('aria-hidden')).to.not.exist()
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.getCall(0).args[1].index).to.equal(1)
+    })
   })
 
   it('should update the selected tab when clicked', async () => {
+    const onChange = stub()
     await mount(
-      <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+      <Tabs onRequestTabChange={onChange}>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
-    const secondTab = await tabs.findTab('[role="presentation"]:contains(Second Tab)')
+    const secondTab = await tabs.findTab(':contains(Second Tab)')
 
     await secondTab.click()
 
-    const selectedTab = await tabs.findSelectedTab()
-
-    expect(selectedTab.getTextContent()).to.equal('Second Tab')
-
-    const tabPanels = await tabs.findAllTabPanels()
-    expect(tabPanels[0].getAttribute('aria-hidden')).to.equal('true')
-    expect(tabPanels[1].getAttribute('aria-hidden')).to.not.exist()
+    await wait(() => {
+      expect(onChange).to.have.been.called()
+      expect(onChange.getCall(0).args[1].index).to.equal(1)
+    })
   })
 
-  it('should not change selectedIndex when clicking a disabled tab', async () => {
+  it('should not call onRequestTabChange when clicking a disabled tab', async () => {
     const onChange = stub()
     await mount(
-      <Tabs onChange={onChange}>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+      <Tabs onRequestTabChange={onChange}>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
-    const thirdTab = await tabs.findTab(':contains(Third Tab)[role="presentation"]')
+    const thirdTab = await tabs.findTab(':contains(Third Tab)')
 
     await thirdTab.click()
 
     expect(onChange).to.not.have.been.called()
-
-    const selectedTab = await tabs.findSelectedTab()
-
-    expect(selectedTab.getTextContent()).to.equal('First Tab')
-
-    const tabsPanels = await tabs.findAllTabPanels()
-    expect(tabsPanels[0].getAttribute('aria-hidden')).to.not.exist()
-    expect(tabsPanels[2].getAttribute('aria-hidden')).to.equal('true')
   })
 
   it('should meet a11y standards when set to the secondary variant', async () => {
     await mount(
       <Tabs variant="secondary">
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -428,9 +326,9 @@ describe('<Tabs />', async () => {
   it('should meet a11y standards when set to the default variant', async () => {
     await mount(
       <Tabs variant="default">
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -438,31 +336,17 @@ describe('<Tabs />', async () => {
     expect(await tabs.accessible()).to.be.true()
   })
 
-  it('should have appropriate aria attributes', async () => {
-    await mount(
-      <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
-      </Tabs>
-    )
-
-    const tabs = await TabsLocator.find()
-
-    expect(tabs.getAttribute('role')).to.equal('tablist')
-  })
-
   it('should link tabs with the corresponding panels via ids', async () => {
     await mount(
       <Tabs>
-        <Tabs.Panel title="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel title="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel title="Third Tab" disabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
-    const firstTab = await tabs.findTab(':contains(First Tab)[role="tab"]')
+    const firstTab = await tabs.findTab(':contains(First Tab)')
 
     const firstPanel = await tabs.findTabPanel(':contains(Tab 1 content)')
 
@@ -478,9 +362,9 @@ describe('<Tabs />', async () => {
     it('should still render the correct number of panels', async () => {
       await mount(
         <Tabs>
-          <Tabs.Panel title="A Tab">Contents of first tab.</Tabs.Panel>
-          <Tabs.Panel title="A Tab">Contents of second tab.</Tabs.Panel>
-          <Tabs.Panel title="A Tab" disabled>Contents of third tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle="A Tab">Contents of first tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle="A Tab">Contents of second tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle="A Tab" isDisabled>Contents of third tab.</Tabs.Panel>
         </Tabs>
       )
       const tabs = await TabsLocator.find()
@@ -494,9 +378,9 @@ describe('<Tabs />', async () => {
     it('should still render the correct number of panels', async () => {
       await mount(
         <Tabs>
-          <Tabs.Panel title={<div/>}>Contents of first tab.</Tabs.Panel>
-          <Tabs.Panel title={<span/>}>Contents of second tab.</Tabs.Panel>
-          <Tabs.Panel title={<img alt='example'/>} disabled>Contents of third tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle={<div/>}>Contents of first tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle={<span/>}>Contents of second tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle={<img alt='example'/>} isDisabled>Contents of third tab.</Tabs.Panel>
         </Tabs>
       )
       const tabs = await TabsLocator.find()

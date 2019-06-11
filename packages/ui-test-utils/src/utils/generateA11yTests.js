@@ -38,7 +38,9 @@ export function generateA11yTests ({ componentName, sections, renderExample }, o
             if (only[1] && index !== only[1]) return
 
             const Example = renderExample.bind(null, example)
-            const description = `with prop combination: ${JSON.stringify(example.componentProps, null, 2)} [${i},${j}]`
+            const description = process.env.DEBUG ?
+              `with prop combination: ${JSON.stringify(example.componentProps, null, 2)} [${i},${j}]` :
+              `combination ${j} is accessible`
             it(description, async () => {
               await mount(<Example />)
               expect(await accessible()).to.be.true()

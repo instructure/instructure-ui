@@ -27,7 +27,7 @@ import { expect, find, mount } from '@instructure/ui-test-utils'
 
 import { TabPanel } from '../index'
 
-describe('<TabPanel />', async () => {
+describe('<TabList.Panel />', async () => {
   it('should render children', async () => {
     await mount(<TabPanel selected title="Panel Title">Panel contents</TabPanel>)
 

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-.default,
-.secondary {
+.tabs {
   display: flex;
   flex-flow: row wrap;
 }

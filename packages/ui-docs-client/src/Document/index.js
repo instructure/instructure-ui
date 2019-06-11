@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { Link , Heading } from '@instructure/ui-elements'
 import { View } from '@instructure/ui-layout'
-import { TabList } from '@instructure/ui-tabs'
+import { Tabs } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
 
 import { Description } from '../Description'
@@ -49,6 +49,16 @@ class Document extends Component {
   static defaultProps = {
     description: undefined,
     themeKey: undefined
+  }
+
+  state = {
+    selectedDetailsTabIndex: 0
+  }
+
+  handleDetailsTabChange = (event, { index }) => {
+    this.setState({
+      selectedDetailsTabIndex: index
+    })
   }
 
   renderProps (doc) {
@@ -230,17 +240,17 @@ const { ${importName} } = require('${requirePath}')
 
     if (this.hasDetails(doc)) {
       details = (children.length > 0) ? (
-        <TabList>
-          <TabList.Panel title={doc.title} key={`${doc.id}TabPanel`}>
+        <Tabs onRequestTabChange={this.handleDetailsTabChange}>
+          <Tabs.Panel renderTitle={doc.title} key={`${doc.id}TabPanel`} isSelected={this.state.selectedDetailsTabIndex === 0}>
             {this.renderDetails(doc)}
-          </TabList.Panel>
-          {children.map(child => (
-            <TabList.Panel title={child.title} key={`${child.id}TabPanel`}>
+          </Tabs.Panel>
+          {children.map((child, index) => (
+            <Tabs.Panel renderTitle={child.title} key={`${child.id}TabPanel`} isSelected={this.state.selectedDetailsTabIndex === index + 1}>
               {this.renderDescription(child, child.description)}
               {this.renderDetails(child)}
-            </TabList.Panel>
+            </Tabs.Panel>
           ))}
-        </TabList>
+        </Tabs>
       ) : this.renderDetails(doc)
     }
 

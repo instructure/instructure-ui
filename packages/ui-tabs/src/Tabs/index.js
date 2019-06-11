@@ -24,16 +24,18 @@
 
 import React, { Component, createElement } from 'react'
 import PropTypes from 'prop-types'
+
 import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { View } from '@instructure/ui-layout'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
-import { matchComponentTypes, safeCloneElement } from '@instructure/ui-react-utils'
+import { Children } from '@instructure/ui-prop-types'
+import { deprecated, matchComponentTypes, safeCloneElement, passthroughProps } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
+import { Focusable } from '@instructure/ui-focusable'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
@@ -46,7 +48,12 @@ import theme from './theme'
 category: components
 ---
 **/
-
+@deprecated('7.0.0', {
+  size: 'maxWidth',
+  selectedIndex: true,
+  onChange: 'onRequestTabChange',
+  focus: true
+})
 @testable()
 @themeable(theme, styles)
 class Tabs extends Component {
@@ -54,27 +61,19 @@ class Tabs extends Component {
     /**
     * children of type `Tabs.Panel`
     */
-    children: ChildrenPropTypes.oneOf([Panel, null]),
-
+    children: Children.oneOf([Panel, null]),
     variant: PropTypes.oneOf(['default', 'secondary']),
     /**
-    * the index (zero based) of the panel that should be selected on initial render
+    * A screen ready only label for the list of tabs
     */
-    defaultSelectedIndex: PropTypes.number,
+    screenReaderLabel: PropTypes.string,
     /**
-    * the index (zero based) of the panel that should be selected (should be accompanied by `onChange`)
+    * Called when the selected tab should change
     */
-    selectedIndex: controllable(PropTypes.number, 'onChange', 'defaultSelectedIndex'),
-    /**
-    * Call this function when the selected tab changes. When used with `selectedIndex`,
-    * the component will not control its own state.
-    */
-    onChange: PropTypes.func,
-    /**
-    * the selected tab should be focused
-    */
-    focus: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    onRequestTabChange: PropTypes.func,
+    maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -87,292 +86,228 @@ class Tabs extends Component {
     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
     */
     padding: ThemeablePropTypes.spacing,
-    textAlign: PropTypes.oneOf(['start', 'center', 'end'])
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    elementRef: PropTypes.func,
+    /**
+    * deprecated
+    */
+    onChange: PropTypes.func,
+    /**
+    * deprecated
+    */
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    /**
+    * deprecated
+    */
+    selectedIndex: PropTypes.number,
+    /**
+    * deprecated
+    */
+    focus: PropTypes.bool
   }
 
   static defaultProps = {
-    children: null,
-    padding: 'small',
-    margin: 'none',
-    textAlign: 'start',
-    variant: 'default',
-    focus: false,
-    defaultSelectedIndex: 0,
-    onChange: undefined,
     selectedIndex: undefined,
-    size: 'medium'
+    variant: 'default',
+    padding: undefined,
+    textAlign: undefined,
+    size: undefined,
+    maxWidth: undefined,
+    maxHeight: undefined,
+    minHeight: undefined,
+    onChange: undefined,
+    onRequestTabChange: (event, { index, id }) => {},
+    margin: undefined,
+    children: null,
+    elementRef: (el) => {},
+    screenReaderLabel: undefined,
+    focus: undefined
   }
 
   static Panel = Panel
   static Tab = Tab
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      focus: props.focus
-    }
-
-    if (typeof props.selectedIndex === 'undefined') {
-      this.state.selectedIndex = props.defaultSelectedIndex
-    }
-
-    this._tabs = []
-    this._panels = []
-    this._srTabs = []
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const { focus, selectedIndex } = this.props
-    const { focus: nextFocus, selectedIndex: nextSelectedIndex } = nextProps
-
-    if (nextFocus !== focus || nextSelectedIndex !== selectedIndex) {
-      this.setState({ focus: nextFocus })
+  componentDidMount () {
+    if (this.props.focus) {
+      this.focus()
     }
   }
 
-  handleClick = (event, data) => {
-    const tab = this.getTab(data.index)
-
-    if (!tab.props.disabled) {
-      this.setSelected(data.index)
+  componentDidUpdate (prevProps) {
+    if (this.props.focus && !prevProps.focus) {
+      this.focus()
     }
   }
 
-  handleEnter = (event, data) => {
-    if (event.keyCode !== keycode.codes.enter && event.keyCode !== keycode.codes.return) {
-      return
-    }
-
-    const tab = this.getTab(data.index)
-
-    if (!tab.props.disabled) {
-      this.setSelected(data.index)
-    }
+  handleTabClick = (event, { index, id }) => {
+    const nextTab = this.getNextTab(index, 0)
+    this.fireOnChange(event, nextTab)
   }
 
-  handleKeyDown = (event, data) => {
-    let index = this.selectedIndex
-    let preventDefault = false
+  handleTabKeyDown = (event, { index }) => {
+    let nextTab
 
     if (event.keyCode === keycode.codes.up || event.keyCode === keycode.codes.left) {
       // Select next tab to the left
-      index = this.getIndex(index, -1)
-      preventDefault = true
+      nextTab = this.getNextTab(index, -1)
     } else if (event.keyCode === keycode.codes.down || event.keyCode === keycode.codes.right) {
       // Select next tab to the right
-      index = this.getIndex(index, 1)
-      preventDefault = true
+      nextTab = this.getNextTab(index, 1)
     }
 
-    if (preventDefault) {
+    if (nextTab) {
       event.preventDefault()
-    }
-
-    this.setSelected(index)
-  }
-
-  get selectedIndex () {
-    return (typeof this.props.selectedIndex === 'undefined') ? this.state.selectedIndex : this.props.selectedIndex
-  }
-
-  get tabIds () {
-    // cache tab ids for better performance and to prevent errors with animations
-    const ids = this._tabIds || []
-    let diff = ids.length - this.tabs.length
-
-    while (diff++ < 0) {
-      ids.push(uid('Tab'))
-    }
-
-    this._tabIds = ids
-
-    return ids
-  }
-
-  get tabs () {
-    return React.Children.toArray(this.props.children).map((child) => {
-      return matchComponentTypes(child, [Panel]) && child
-    })
-  }
-
-  setSelected (index) {
-    let selectedIndex
-
-    // Check index boundary
-    error(this.isValidIndex(index), `[Tabs] Invalid tab index: '${index}'.`)
-
-    const handleChange = () => {
-      if (typeof selectedIndex !== 'undefined' && typeof this.props.onChange === 'function') {
-        this.props.onChange(index, selectedIndex)
-      }
-    }
-
-    if (typeof this.props.selectedIndex === 'undefined') {
-      this.setState((state, props) => {
-        selectedIndex = state.selectedIndex
-
-        if (index !== selectedIndex) {
-          handleChange()
-          return { selectedIndex: index, focus: true }
-        } else {
-          return state
-        }
-      })
-    } else {
-      selectedIndex = this.props.selectedIndex
-      if (index !== selectedIndex) {
-        handleChange()
-      }
+      this.fireOnChange(event, nextTab)
     }
   }
 
-  getIndex (startIndex, step) {
-    const count = this.tabs.length
+  getNextTab (startIndex, step) {
+    const tabs = React.Children.toArray(this.props.children)
+      .map(child => matchComponentTypes(child, [Panel]) && child)
+    const count = tabs.length
     const change = (step < 0) ? step + count : step
 
-    error(this.isValidIndex(startIndex), `[Tabs] Invalid tab index: '${startIndex}'`)
+    error((startIndex >= 0 && startIndex < count), `[Tabs] Invalid tab index: '${startIndex}'.`)
 
-    let index = startIndex
+    let nextIndex = startIndex
+    let nextTab
+
     do {
-      index = (index + change) % count
-    } while (this.getTab(index).props.disabled)
+      nextIndex = (nextIndex + change) % count
+      nextTab = tabs[nextIndex]
+    } while (nextTab && nextTab.props && (nextTab.props.disabled || nextTab.props.isDisabled))
 
-    return index
+    error((nextIndex >= 0 && nextIndex < count), `[Tabs] Invalid tab index: '${nextIndex}'.`)
+
+    return { index: nextIndex, id: nextTab.id }
   }
 
-  isValidIndex (index) {
-    return (index >= 0 && index < this.tabs.length)
-  }
-
-  getTab (index) {
-    return this._tabs[index]
-  }
-
-  createScreenReaderTab (index, id, props) {
-    return createElement(Tab, {
-      variant: 'screenreader-only',
-      ref: (c) => {
-        this._srTabs[index] = c
-      },
-      key: `sr-tab-${id}`,
-      id: `sr-tab-${id}`,
-      controls: `panel-${id}`,
-      index,
-      selected: false,
-      disabled: props.disabled,
-      children: props.title,
-      onKeyDown: this.handleEnter,
-      onClick: this.handleClick
-    })
-  }
-
-  createTab (index, id, selected, props) {
-    const focus = selected && this.state.focus
-
-    return createElement(Tab, {
-      variant: this.props.variant,
-      ref: (c) => {
-        this._tabs[index] = c
-        if (typeof props.tabRef === 'function') {
-          props.tabRef(c)
-        }
-      },
-      key: `tab-${id}`,
-      id: `tab-${id}`,
-      controls: `panel-${id}`,
-      index,
-      selected,
-      focus,
-      role: selected ? 'tab' : 'presentation', // only the selected tab should be visible to screen readers
-      disabled: props.disabled,
-      children: props.title,
-      onClick: this.handleClick,
-      onKeyDown: this.handleKeyDown
-    })
-  }
-
-  clonePanel (index, id, selected, panel) {
-    return safeCloneElement(panel, {
-      ref: (c) => {
-        this._panels[index] = c
-      },
-      id: `panel-${id}`,
-      labelledBy: `tab-${id}`,
-      selected,
-      key: `panel-${id}`,
-      variant: this.props.variant,
-      padding: panel.props.padding || this.props.padding,
-      textAlign: panel.props.textAlign || this.props.textAlign
-    })
-  }
-
-  renderChildren () {
-    const children = []
-    const ids = this.tabIds
-    const tabs = this.tabs
-    const count = tabs.length
-
-    React.Children.forEach(this.props.children, (child, index) => {
-      if (matchComponentTypes(child, [Panel])) {
-        const selected = !child.props.disabled && (this.selectedIndex === index)
-        const id = ids[index]
-
-        // render screen reader only tabs before the selected tab
-        if (selected) {
-          for (let i = 0; i < index; i++) {
-            children.push(this.createScreenReaderTab(i, ids[i], tabs[i].props))
-          }
-        }
-
-        children.push(this.createTab(index, id, selected, child.props))
-
-        // render screen reader only tabs after the selected tab
-        if (selected) {
-          for (let i = index + 1; i < count; i++) {
-            children.push(this.createScreenReaderTab(i, ids[i], tabs[i].props))
-          }
-        }
-
-        children.push(this.clonePanel(index, id, selected, child))
-      } else {
-        children.push(child)
-      }
-    })
-
-    if (this.state.focus) {
-      // This fixes an issue with focus management.
-      //
-      // Ultimately, when focus is true, and an input has focus,
-      // and any change on that input causes a state change/re-render,
-      // focus gets sent back to the active tab, and input loses focus.
-      //
-      // Since the focus state only needs to be remembered
-      // for the current render, we can reset it once the
-      // render has happened.
-      //
-      // Don't use setState, because we don't want to re-render.
-      this.state.focus = false // eslint-disable-line react/no-direct-mutation-state
+  fireOnChange (event, { index, id }) {
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(event, { index })
     }
 
-    return children
+    if (typeof this.props.onRequestTabChange === 'function') {
+      this.props.onRequestTabChange(event, { index, id })
+    }
+  }
+
+  createTab (index, generatedId, selected, panel) {
+    const id = panel.props.id || generatedId
+    const disabled = panel.props.disabled || panel.props.isDisabled
+
+    return createElement(Tab, {
+      variant: this.props.variant,
+      key: `tab-${id}`,
+      id: `tab-${id}`,
+      controls: panel.props.id || `panel-${id}`,
+      index,
+      selected: undefined,
+      isSelected: selected,
+      disabled: undefined,
+      isDisabled: disabled,
+      children: panel.props.renderTitle || panel.props.title,
+      onClick: this.handleTabClick,
+      onKeyDown: this.handleTabKeyDown
+    })
+  }
+
+  clonePanel (index, generatedId, selected, panel) {
+    const id = panel.props.id || generatedId
+
+    return safeCloneElement(panel, {
+      id: panel.props.id || `panel-${id}`,
+      labelledBy: `tab-${id}`,
+      selected: undefined,
+      isSelected: selected,
+      key: panel.props.id || `panel-${id}`,
+      variant: this.props.variant,
+      padding: panel.props.padding || this.props.padding,
+      textAlign: panel.props.textAlign || this.props.textAlign,
+      maxHeight: panel.maxHeight || this.props.maxHeight,
+      minHeight: panel.minHeight || this.props.minHeight
+    })
+  }
+
+  handleFocusableRef = (el) => {
+    this._focusable = el
+  }
+
+  focus () {
+    this._focusable && typeof this._focusable.focus === 'function' && this._focusable.focus()
   }
 
   render () {
+    const panels = []
+    const tabs = []
+    const {
+      children,
+      elementRef,
+      size,
+      maxWidth,
+      variant,
+      margin,
+      screenReaderLabel,
+      onRequestTabChange,
+      onChange,
+      ...props
+    } = this.props
+
+    const selectedChildIndex = React.Children.toArray(children)
+      .filter(child => matchComponentTypes(child, [Panel]))
+      .findIndex(child => (child.props.selected || child.props.isSelected) && !(child.props.disabled || child.props.isDisabled))
+
+    let index = 0
+    let selectedIndex = props.selectedIndex || (selectedChildIndex >= 0 ? selectedChildIndex : 0)
+
+    React.Children.forEach(children, (child) => {
+      if (matchComponentTypes(child, [Panel])) {
+        const selected = !(child.props.disabled || child.props.isDisabled) &&
+          (child.props.selected || child.props.isSelected || selectedIndex === index)
+        const id = uid()
+
+        tabs.push(this.createTab(index, id, selected, child))
+        panels.push(this.clonePanel(index, id, selected, child))
+
+        index ++
+      } else {
+        panels.push(child)
+      }
+    })
+
     return (
       <View
+        {...passthroughProps(props)}
+        elementRef={elementRef}
+        maxWidth={maxWidth ? maxWidth : this.theme[size]}
+        margin={margin}
+        as="div"
         className={classnames({
-          [styles[this.props.variant]]: true
+          [styles[variant]]: true
         })}
-        maxWidth={this.theme[this.props.size]}
-        margin={this.props.margin}
-        role="tablist"
       >
-        {this.renderChildren()}
+        <Focusable ref={this.handleFocusableRef}>
+          {({ focusVisible }) => (
+            <View
+              as="div"
+              display="flex"
+              position="relative"
+              borderRadius="medium"
+              focused={focusVisible}
+              shouldAnimateFocus={false}
+              role="tablist"
+              className={styles.tabs}
+              aria-label={screenReaderLabel}
+            >
+              {tabs}
+            </View>
+          )}
+        </Focusable>
+        {panels}
       </View>
     )
   }
 }
 
 export default Tabs
-export { Tabs }
+export { Tabs, Panel }

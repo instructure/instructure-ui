@@ -32,6 +32,7 @@ const randomizeTestOrder = process.argv.some((arg) => arg === '--randomize')
 const baseWebpackConfig = require('@instructure/ui-webpack-config')
 
 const DEBUG = process.env.DEBUG
+const CI = process.env.CI
 const withCoverage = process.env.COVERAGE
 
 const CHROME_FLAGS = [
@@ -64,7 +65,13 @@ module.exports = function makeConfig ({
     }
   }
 
-  const reporters = ['mocha']
+  const reporters = []
+
+  if (CI) {
+    reporters.push('dots')
+  } else {
+    reporters.push('mocha')
+  }
 
   if (withCoverage) {
     reporters.push('coverage')

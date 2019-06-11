@@ -26,9 +26,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
-import { findDOMNode } from '@instructure/ui-dom-utils'
+import { passthroughProps, callRenderProp, deprecated } from '@instructure/ui-react-utils'
+import { View } from '@instructure/ui-layout'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -39,97 +39,97 @@ parent: Tabs
 id: Tabs.Tab
 ---
 **/
-@testable()
+@deprecated('7.0.0', {
+  selected: 'isSelected',
+  disabled: 'isDisabled'
+})
 @themeable(theme, styles)
 class Tab extends Component {
   static propTypes = {
-    variant: PropTypes.oneOf(['default', 'secondary', 'screenreader-only']),
+    variant: PropTypes.oneOf(['default', 'secondary']),
     id: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     controls: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
-    selected: PropTypes.bool,
-    focus: PropTypes.bool,
+    isDisabled: PropTypes.bool,
+    isSelected: PropTypes.bool,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
-    role: PropTypes.string,
-    children: PropTypes.node
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+    * deprecated
+    */
+    disabled: PropTypes.bool,
+    /**
+    * deprecated
+    */
+    selected: PropTypes.bool
   }
 
   static defaultProps = {
+    children: null,
     variant: 'default',
-    disabled: false,
-    selected: false,
-    focus: false,
-    role: 'tab',
-    onClick: (event, data) => {},
-    onKeyDown: (event, data) => {},
-    children: null
+    isDisabled: false,
+    disabled: undefined,
+    isSelected: false,
+    selected: undefined,
+    onClick: (event, { index, id }) => {},
+    onKeyDown: (event, { index, id }) => {}
   }
 
   handleClick = (event) => {
-    const { onClick, index, disabled } = this.props
-    if (!disabled) {
-      onClick(event, { index })
+    const { onClick, index, id, disabled, isDisabled } = this.props
+
+    if (disabled || isDisabled) {
+      return
     }
+
+    onClick(event, { index, id })
   }
 
   handleKeyDown = (event) => {
-    const { onKeyDown, index, disabled } = this.props
-    if (!disabled) {
-      onKeyDown(event, { index })
+    const { onKeyDown, index, id, disabled, isDisabled } = this.props
+
+    if (disabled || isDisabled) {
+      return
     }
-  }
 
-  syncNodeAttributes (node, props) {
-    if (props.selected) {
-      node.setAttribute('tabindex', 0)
-      if (props.focus) {
-        node.focus()
-      }
-    } else if (!props.disabled) {
-      node.setAttribute('tabindex', -1)
-    } else {
-      node.removeAttribute('tabindex')
-    }
-  }
-
-  componentDidMount () {
-    this.syncNodeAttributes(findDOMNode(this), this.props)
-  }
-
-  componentDidUpdate () {
-    this.syncNodeAttributes(findDOMNode(this), this.props)
-  }
-
-  renderIcon () {
-    return <span className={styles.icon} aria-hidden="true" aria-label="" />
+    onKeyDown(event, { index, id })
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.variant]]: true
-    }
-    const icon = this.props.variant !== 'screenreader-only' && this.renderIcon()
-    /* eslint-disable jsx-a11y/onclick-has-focus, jsx-a11y/no-static-element-interactions */
+    const {
+      id,
+      variant,
+      selected,
+      disabled,
+      controls,
+      children,
+      ...props
+    } = this.props
+
+    const isSelected = selected || props.isSelected
+    const isDisabled = disabled || props.isDisabled
+
     return (
-      <div
-        className={classnames(classes)}
-        role={this.props.role}
-        id={this.props.id}
+      <View
+        {...passthroughProps(props)}
+        as="div"
+        role='tab'
+        id={id}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        aria-selected={this.props.selected ? 'true' : null}
-        aria-disabled={this.props.disabled ? 'true' : null}
-        aria-hidden={this.props.role === 'presentation' ? 'true' : null}
-        aria-controls={this.props.controls}
+        className={classnames({
+          [styles.root]: true,
+          [styles[variant]]: true
+        })}
+        aria-selected={isSelected ? 'true' : null}
+        aria-disabled={isDisabled ? 'true' : null}
+        aria-controls={controls}
+        tabIndex={isSelected && !isDisabled ? '0' : null}
       >
-        {icon}
-        {this.props.children}
-      </div>
+        {callRenderProp(children)}
+      </View>
     )
-    /* eslint-enable jsx-a11y/onclick-has-focus, jsx-a11y/no-static-element-interactions */
   }
 }
 

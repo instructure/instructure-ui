@@ -175,10 +175,11 @@
     border-style: var(--focusOutlineStyle);
     border-width: var(--focusOutlineWidth);
     border-color: var(--focusOutlineColorDefault);
-    transition: all 0.2s;
-
-    /* properties to transition when focused */
     opacity: 0;
+  }
+
+  &.focusAnimation::before {
+    transition: all 0.2s;
     transform: scale(0.95);
   }
 

@@ -29,15 +29,15 @@ const contentLong = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ma
 
 export default {
   sectionProp: 'variant',
+  excludeProps: ['size', 'selectedIndex', 'onChange'],
   getComponentProps: (props) => {
     return {
       margin: 'large',
       padding: 'small',
-      defaultSelectedIndex: 2,
       children: [
         <Tabs.Panel key="1" title="Tab A">{contentLong}</Tabs.Panel>,
         <Tabs.Panel key="2" title="Tab B" disabled>{contentShort}</Tabs.Panel>,
-        <Tabs.Panel key="3" title="Tab C">{contentShort}</Tabs.Panel>,
+        <Tabs.Panel key="3" title="Tab C" selected>{contentShort}</Tabs.Panel>,
         <Tabs.Panel key="4" title="Tab D">{contentLong}</Tabs.Panel>
       ]
     }

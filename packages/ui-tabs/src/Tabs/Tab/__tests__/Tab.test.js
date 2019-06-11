@@ -27,7 +27,7 @@ import { expect, find, mount, stub } from '@instructure/ui-test-utils'
 
 import { Tab } from '../index'
 
-describe('<TabButton />', async () => {
+describe('<Tabs.Tab />', async () => {
   it('should render children', async () => {
     await mount(
       <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
@@ -58,35 +58,36 @@ describe('<TabButton />', async () => {
 
   it('should set the aria-selected attribute', async () => {
     await mount(
-      <Tab id="foo" index={0} controls="foo-panel" selected>Tab Label</Tab>
+      <Tab id="foo" index={0} controls="foo-panel" isSelected>Tab Label</Tab>
     )
     expect(await find('[role="tab"][aria-selected="true"]')).to.exist()
   })
 
   it('should set the aria-disabled attribute', async () => {
     await mount(
-      <Tab id="foo" index={0} controls="foo-panel" disabled>Tab Label</Tab>
+      <Tab id="foo" index={0} controls="foo-panel" isDisabled>Tab Label</Tab>
     )
     expect(await find('[role="tab"][aria-disabled="true"]')).to.exist()
   })
 
   it('should set the tabindex to 0 when selected', async () => {
     await mount(
-      <Tab id="foo" index={0} controls="foo-panel" selected>Tab Label</Tab>
+      <Tab id="foo" index={0} controls="foo-panel" isSelected>Tab Label</Tab>
     )
     expect(await find('[role="tab"][tabindex="0"]')).to.exist()
   })
 
-  it('should set the tabindex to -1 when not selected', async () => {
+  it('should not set the tabindex when not selected', async () => {
     await mount(
       <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
     )
-    expect(await find('[role="tab"][tabindex="-1"]')).to.exist()
+    const tab = await find('[role="tab"]')
+    expect(tab).to.not.have.attribute('tabindex')
   })
 
   it('should remove the tabindex attribute when disabled', async () => {
     await mount(
-      <Tab id="foo" index={0} controls="foo-panel" disabled>Tab Label</Tab>
+      <Tab id="foo" index={0} controls="foo-panel" isDisabled>Tab Label</Tab>
     )
 
     const tab = await find('[role="tab"]')
@@ -113,7 +114,7 @@ describe('<TabButton />', async () => {
     const onClick = stub()
 
     await mount(
-      <Tab id="foo" index={0} controls="foo-panel" onClick={onClick} disabled>
+      <Tab id="foo" index={0} controls="foo-panel" onClick={onClick} isDisabled>
         Tab Label
       </Tab>
     )
@@ -123,12 +124,18 @@ describe('<TabButton />', async () => {
     expect(onClick).to.not.have.been.called()
   })
 
-  it('should call onKeyDown when keys are pressed', async () => {
+  it('should call onKeyDown when keys are pressed and tab is selected', async () => {
     const onKeyDown = stub()
     const index = 2
 
     await mount(
-      <Tab id="foo" index={index} controls="foo-panel" onKeyDown={onKeyDown}>
+      <Tab
+        id="foo"
+        isSelected
+        index={index}
+        controls="foo-panel"
+        onKeyDown={onKeyDown}
+      >
         Tab Label
       </Tab>
     )
@@ -144,7 +151,7 @@ describe('<TabButton />', async () => {
     const onKeyDown = stub()
 
     await mount(
-      <Tab id="foo" index={0} controls="foo-panel" onKeyDown={onKeyDown} disabled>
+      <Tab id="foo" index={0} controls="foo-panel" onKeyDown={onKeyDown} isDisabled>
         Tab Label
       </Tab>
     )
@@ -159,27 +166,5 @@ describe('<TabButton />', async () => {
 
     expect(error).to.be.true()
     expect(onKeyDown).to.not.have.been.called()
-  })
-
-  it('should focus itself when focus is set and it is selected', async () => {
-    await mount(
-      <Tab id="foo" index={0} controls="foo-panel" selected focus>
-        Tab Label
-      </Tab>
-    )
-    const tab = await find('[role="tab"]')
-
-    expect(tab.focused()).to.be.true()
-  })
-
-  it('should not focus itself when it is not selected', async () => {
-    await mount(
-      <Tab id="foo" index={0} controls="foo-panel" selected={false} focus>
-        Tab Label
-      </Tab>
-    )
-    const tab = await find('[role="tab"]')
-
-    expect(tab.focused()).to.be.false()
   })
 })

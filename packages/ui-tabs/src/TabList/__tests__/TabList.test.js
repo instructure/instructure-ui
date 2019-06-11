@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { TabList, TabPanel } from '../index'
 import TabListLocator from '../locator'
@@ -60,36 +60,6 @@ describe('<TabList />', async () => {
     expect(panels).to.have.length(3)
   })
 
-  it('should render screen reader only tabs', async () => {
-    await mount(
-      <TabList>
-        <TabPanel title="First Tab">Tab 1 content</TabPanel>
-        <TabPanel title="Second Tab">Tab 2 content</TabPanel>
-        <TabPanel title="Third Tab" disabled>Tab 3 content</TabPanel>
-      </TabList>
-    )
-
-    const tablist = await TabListLocator.find()
-    const screenReaderOnlyTabs = await tablist.findAllTabs('[role="tab"]')
-
-    expect(screenReaderOnlyTabs).to.have.length(3)
-  })
-
-  it('should render presentational only tabs', async () => {
-    await mount(
-      <TabList>
-        <TabPanel title="First Tab">Tab 1 content</TabPanel>
-        <TabPanel title="Second Tab">Tab 2 content</TabPanel>
-        <TabPanel title="Third Tab" disabled>Tab 3 content</TabPanel>
-      </TabList>
-    )
-
-    const tablist = await TabListLocator.find()
-    const presentationTabs = await tablist.findAllTabs('[role="presentation"]')
-
-    expect(presentationTabs).to.have.length(2)
-  })
-
   it('should render correct number of tabs', async () => {
     await mount(
       <TabList>
@@ -102,11 +72,12 @@ describe('<TabList />', async () => {
     const tablist = await TabListLocator.find()
     const tabs = await tablist.findAllTabs()
 
-    // there should be 2 extra tabs for screen readers
-    expect(tabs.length).to.equal(5)
+    expect(tabs.length).to.equal(3)
   })
 
   it('should be okay with rendering without any children', async () => {
+    stub(console, 'warn') // suppress Focusable warnings
+
     let error = false
     try {
       await mount(
@@ -120,6 +91,8 @@ describe('<TabList />', async () => {
   })
 
   it('should not allow invalid children', async () => {
+    stub(console, 'warn') // suppress Focusable warnings
+
     let error = false
     try {
       await mount(
@@ -224,6 +197,8 @@ describe('<TabList />', async () => {
       expectEmpty: true
     })).to.not.exist()
 
+    expect(await tabList.findSelectedTab(':contains(First Tab)')).to.exist()
+
     const panels = await tabList.findAllTabPanels()
     expect(panels[2].getAttribute('aria-hidden')).to.equal('true')
   })
@@ -240,7 +215,7 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const secondTab = await tabList.findTab(':contains(Second Tab)[role="presentation"]')
+    const secondTab = await tabList.findTab(':contains(Second Tab)[role="tab"]')
 
     await secondTab.click()
 
@@ -260,14 +235,14 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
 
-    const secondTab = await tabList.findTab(':contains(Second Tab)[role="presentation"]')
+    const secondTab = await tabList.findTab(':contains(Second Tab)[role="tab"]')
 
     await secondTab.click()
 
     expect(await tabList.findSelectedTab(':contains(First Tab)')).to.exist()
   })
 
-  it('should focus the defaultSelectedIndex tab when focus is set', async () => {
+  it('should focus the defaultSelectedIndex tab when focus prop is set', async () => {
     await mount(
       <TabList defaultSelectedIndex={1} focus>
         <TabPanel title="First Tab">Tab 1 content</TabPanel>
@@ -278,10 +253,13 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
     const secondTab = await tabList.findSelectedTab(':contains(Second Tab)')
-    expect(secondTab.focused()).to.be.true()
+
+    await wait(() => {
+      expect(secondTab).to.be.focused()
+    })
   })
 
-  it('should focus the selectedIndex tab when focus is set', async () => {
+  it('should focus the selectedIndex tab when focus prop is set', async () => {
     const subject = await mount(
       <TabList selectedIndex={1} onChange={() => {}} focus>
         <TabPanel title="First Tab">Tab 1 content</TabPanel>
@@ -292,12 +270,18 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
     const secondTab = await tabList.findSelectedTab(':contains(Second Tab)')
-    expect(secondTab.focused()).to.be.true()
+
+    await wait(() => {
+      expect(secondTab).to.be.focused()
+    })
 
     await subject.setProps({ selectedIndex: 0 })
 
     const firstTab = await tabList.findSelectedTab(':contains(First Tab)')
-    expect(firstTab.focused()).to.be.true()
+
+    await wait(() => {
+      expect(firstTab).to.be.focused()
+    })
   })
 
   it('should update the selected tab via keyboard arrow keys', async () => {
@@ -340,29 +324,6 @@ describe('<TabList />', async () => {
     expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  it('should update the selected tab via keyboard ENTER keys on screen reader tabs', async () => {
-    await mount(
-      <TabList>
-        <TabPanel title="First Tab">Tab 1 content</TabPanel>
-        <TabPanel title="Second Tab">Tab 2 content</TabPanel>
-        <TabPanel title="Third Tab" disabled>Tab 3 content</TabPanel>
-      </TabList>
-    )
-
-    const tabList = await TabListLocator.find()
-    const tab = await tabList.findTab(':contains(Second Tab)[role="tab"]')
-
-    await tab.keyDown('enter')
-
-    let selectedTab = await tabList.findSelectedTab()
-
-    expect(selectedTab.getTextContent()).to.equal('Second Tab')
-
-    const tabPanels = await tabList.findAllTabPanels()
-    expect(tabPanels[0].getAttribute('aria-hidden')).to.equal('true')
-    expect(tabPanels[1].getAttribute('aria-hidden')).to.not.exist()
-  })
-
   it('should update the selected tab when clicked', async () => {
     await mount(
       <TabList>
@@ -373,7 +334,7 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const secondTab = await tabList.findTab('[role="presentation"]:contains(Second Tab)')
+    const secondTab = await tabList.findTab('[role="tab"]:contains(Second Tab)')
 
     await secondTab.click()
 
@@ -397,7 +358,7 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const thirdTab = await tabList.findTab(':contains(Third Tab)[role="presentation"]')
+    const thirdTab = await tabList.findTab(':contains(Third Tab)[role="tab"]')
 
     await thirdTab.click()
 
@@ -436,20 +397,6 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
     expect(await tabList.accessible()).to.be.true()
-  })
-
-  it('should have appropriate aria attributes', async () => {
-    await mount(
-      <TabList variant="minimal">
-        <TabPanel title="First Tab">Tab 1 content</TabPanel>
-        <TabPanel title="Second Tab">Tab 2 content</TabPanel>
-        <TabPanel title="Third Tab" disabled>Tab 3 content</TabPanel>
-      </TabList>
-    )
-
-    const tabList = await TabListLocator.find()
-
-    expect(tabList.getAttribute('role')).to.equal('tablist')
   })
 
   it('should link tabs with the corresponding panels via ids', async () => {

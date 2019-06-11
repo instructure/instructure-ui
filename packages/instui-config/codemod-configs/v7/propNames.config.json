@@ -3,5 +3,11 @@
     "7.0.0": [
       { "old": "closeButtonLabel", "new": "renderCloseButtonLabel" }
     ]
+  },
+  "Tabs": {
+    "7.0.0": [
+      { "old": "title", "new": "renderTitle" },
+      { "old": "onChange", "new": "onRequestTabChange" }
+    ]
   }
 }

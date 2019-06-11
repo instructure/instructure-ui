@@ -1,5 +1,9 @@
 .root {
   box-sizing: border-box;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--fontSize);
 }
 
 .content {
@@ -18,9 +22,6 @@
 
 .default,
 .secondary {
-  flex-basis: 100%;
-  min-width: 1px; /* stylelint-disable-line unit-blacklist */
-
   .content {
     border-left: none; /* stylelint-disable-line property-blacklist */
     border-right: none; /* stylelint-disable-line property-blacklist */
