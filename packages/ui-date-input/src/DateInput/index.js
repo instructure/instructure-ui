@@ -372,7 +372,7 @@ class DateInput extends Component {
           readOnly: interaction === 'readonly',
           required: isRequired,
           inline: isInline,
-          renderAfterInput: IconCalendarMonthLine
+          renderAfterInput: <IconCalendarMonthLine inline={false} />
         })}
       />
     )
