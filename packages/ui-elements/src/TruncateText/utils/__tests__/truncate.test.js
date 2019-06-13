@@ -24,6 +24,7 @@
 
 import React from 'react'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
+import { within } from '@instructure/ui-utils'
 
 import truncate from '../truncate'
 
@@ -148,7 +149,7 @@ describe('truncate', () => {
     const maxWidth = result.constraints.width
     const actualMax = textContainer.getBoundingClientRect().width
 
-    expect(maxWidth).to.equal(actualMax)
+    expect(within(maxWidth, actualMax, 1)).to.be.true()
   })
 
   it('should calculate `maxLines: auto` correctly', async () => {
