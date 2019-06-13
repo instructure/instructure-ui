@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
+
+
+### Bug Fixes
+
+* **ui-component-examples:** prevent OOM when generating View examples ([df5f505](https://github.com/instructure/instructure-ui/commit/df5f505))
+* **ui-layout:** pass down elementRef to Flex and Flex.Item ([4dfb941](https://github.com/instructure/instructure-ui/commit/4dfb941))
+
+
+### Features
+
+* **ui-layout:** Add focus styles to View ([2dd401c](https://github.com/instructure/instructure-ui/commit/2dd401c))
+
+
+
+
+
 # [6.3.0](https://github.com/instructure/instructure-ui/compare/v6.2.0...v6.3.0) (2019-05-28)
 
 

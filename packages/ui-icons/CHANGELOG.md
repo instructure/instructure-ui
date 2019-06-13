@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
+
+
+### Features
+
+* **ui-icons:** add closed-captioning icon ([58444ee](https://github.com/instructure/instructure-ui/commit/58444ee))
+* **ui-icons:** add miscellaneous 'table' icons to ui-icons ([8ec7a8b](https://github.com/instructure/instructure-ui/commit/8ec7a8b))
+* **ui-icons:** update solid version of 'Dashboard' and 'Inbox' icons ([33a8b4c](https://github.com/instructure/instructure-ui/commit/33a8b4c))
+* **ui-icons:** update svg exports for misc icons ([319abb7](https://github.com/instructure/instructure-ui/commit/319abb7))
+
+
+
+
+
 # [6.3.0](https://github.com/instructure/instructure-ui/compare/v6.2.0...v6.3.0) (2019-05-28)
 
 

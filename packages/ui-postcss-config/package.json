@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-postcss-config",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "description": "A shared postcss config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -17,8 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/canvas-supported-browsers": "^1",
-    "@instructure/config-loader": "^6.3.0",
-    "@instructure/postcss-themeable-styles": "^6.3.0",
+    "@instructure/config-loader": "^6.4.0",
+    "@instructure/postcss-themeable-styles": "^6.4.0",
     "autoprefixer": "^9.6.0",
     "cssnano-preset-default": "^4",
     "postcss": "^7",

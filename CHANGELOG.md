@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
+
+
+### Bug Fixes
+
+* **ui-breadcrumb:** separator color ([e0c7fe0](https://github.com/instructure/instructure-ui/commit/e0c7fe0))
+* **ui-component-examples:** prevent OOM when generating View examples ([df5f505](https://github.com/instructure/instructure-ui/commit/df5f505))
+* **ui-component-examples:** support components w/ no props/values ([4c76e2b](https://github.com/instructure/instructure-ui/commit/4c76e2b))
+* **ui-layout:** pass down elementRef to Flex and Flex.Item ([4dfb941](https://github.com/instructure/instructure-ui/commit/4dfb941))
+
+
+### Features
+
+* **ui-alerts:** add renderCloseButtonLabel to Alert ([4684530](https://github.com/instructure/instructure-ui/commit/4684530))
+* **ui-eslint-config:** enable react/no-typos rule ([d8fc415](https://github.com/instructure/instructure-ui/commit/d8fc415))
+* **ui-forms,ui-selectable:** deprecate ui-forms select ([1f7b53d](https://github.com/instructure/instructure-ui/commit/1f7b53d))
+* **ui-icons:** add closed-captioning icon ([58444ee](https://github.com/instructure/instructure-ui/commit/58444ee))
+* **ui-icons:** add miscellaneous 'table' icons to ui-icons ([8ec7a8b](https://github.com/instructure/instructure-ui/commit/8ec7a8b))
+* **ui-icons:** update solid version of 'Dashboard' and 'Inbox' icons ([33a8b4c](https://github.com/instructure/instructure-ui/commit/33a8b4c))
+* **ui-icons:** update svg exports for misc icons ([319abb7](https://github.com/instructure/instructure-ui/commit/319abb7))
+* **ui-layout:** Add focus styles to View ([2dd401c](https://github.com/instructure/instructure-ui/commit/2dd401c))
+* **ui-scripts:** add open-sandbox script ([093076a](https://github.com/instructure/instructure-ui/commit/093076a))
+* **ui-scripts:** addition of a monorepo open sandbox command ([7fd349d](https://github.com/instructure/instructure-ui/commit/7fd349d))
+* **ui-select:** add controlled select ([634ab1a](https://github.com/instructure/instructure-ui/commit/634ab1a))
+
+
+
+
+
 # [6.3.0](https://github.com/instructure/instructure-ui/compare/v6.2.0...v6.3.0) (2019-05-28)
 
 
