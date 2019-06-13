@@ -134,12 +134,6 @@ class TruncateText extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
-      this.setState(this.initialState)
-    }
-  }
-
   componentDidUpdate (prevProps, prevState) {
     const {
       children,
@@ -154,13 +148,17 @@ class TruncateText extends Component {
 
     if (children) {
       if (prevProps !== this.props) {
-        this.checkChildren()
-        this._text = ensureSingleChild(children)
+        // require the double render whenever props change
+        this.setState(this.initialState, () => {
+          this.checkChildren()
+          this._text = ensureSingleChild(children)
+        })
+        return
       }
 
-      if (!needsSecondRender && (isTruncated || this._prevTruncatedState)) {
+      if (!needsSecondRender && (isTruncated || this._wasTruncated)) {
         onUpdate(isTruncated, truncatedText)
-        this._prevTruncatedState = isTruncated
+        this._wasTruncated = isTruncated
       } else {
         this.truncate()
       }
