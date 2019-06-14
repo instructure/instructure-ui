@@ -22,7 +22,18 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { mount, expect, findAll, find, spy, wait, within } from '../index'
+import {
+  findWithLabel,
+  findWithTitle,
+  findWithText,
+  mount,
+  expect,
+  findAll,
+  find,
+  spy,
+  wait,
+  within
+} from '../index'
 
 describe('queries', async () => {
   it('throws an error message by default when nothing is found', async () => {
@@ -121,8 +132,8 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll(':textContent("Currently showing:")'))
-        .to.have.length(1)
+      expect(await findWithText('Currently showing:'))
+        .to.exist()
       expect(await findAll(':withText("Step 1 of 4")'))
         .to.have.length(1)
       expect(await findAll(':withText("Currently showing: Step 1 of 4")'))
@@ -187,6 +198,7 @@ describe('queries', async () => {
       )
       /* eslint-enable jsx-a11y/label-has-associated-control */
       expect(await findAll(':withLabel(Name)')).to.have.length(1)
+      expect(await findWithLabel('Name')).to.exist()
     })
 
     it('can find an input with a complex aria-labelledby attribute', async () => {
@@ -322,7 +334,7 @@ describe('queries', async () => {
         </svg>
       )
 
-      expect(await findAll(':withTitle(Close)')).to.have.length(1)
+      expect(await findWithTitle('Close')).to.exist()
     })
   })
 

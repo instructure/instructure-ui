@@ -34,6 +34,7 @@ const baseWebpackConfig = require('@instructure/ui-webpack-config')
 const DEBUG = process.env.DEBUG
 const CI = process.env.CI
 const withCoverage = process.env.COVERAGE
+const IS_SCOPED = process.env.UI_TEST_SCOPE_PATHS
 
 const CHROME_FLAGS = [
   '--no-sandbox',
@@ -89,7 +90,7 @@ module.exports = function makeConfig ({
           subdir: '.'
         }
       ],
-      check: coverageThreshold
+      check: IS_SCOPED ? undefined : coverageThreshold
     }
   }
 

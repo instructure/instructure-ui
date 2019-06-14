@@ -29,6 +29,10 @@ import { Select } from '../index'
 import SelectLocator from '../locator'
 
 describe('<Select />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   it('should render', async () => {
     await mount(
       <Select

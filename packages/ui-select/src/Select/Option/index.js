@@ -73,6 +73,7 @@ class Option extends Component {
     children: null
   }
 
+  /* istanbul ignore next */
   render () {
     // this component is only used for prop validation. Select.Option children
     // are parsed in Select and rendered as Options.Item components

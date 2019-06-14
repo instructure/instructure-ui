@@ -24,7 +24,7 @@
 
 import { expect } from '@instructure/ui-test-utils'
 
-import MediaQueryListProxy from './__testfixtures__/MediaQueryListProxy'
+import MediaQueryListProxy from './__testfixtures__/MediaQueryListProxy.fixture'
 
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 

@@ -36,6 +36,10 @@ describe('<Img />', () => {
   // eslint-disable-next-line max-len
   const image = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   describe('for a11y', () => {
     it('should meet standards', async () => {
       await mount(<Img src={image} />)

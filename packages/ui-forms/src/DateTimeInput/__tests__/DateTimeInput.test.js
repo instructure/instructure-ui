@@ -32,6 +32,10 @@ import { DateTimeInput } from '../index'
 import DateTimeInputLocator from '../locator'
 
 describe('<DateTimeInput />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   it('should use the default value', async () => {
     const locale = 'en-US'
     const timezone = 'US/Eastern'

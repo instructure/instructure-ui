@@ -26,7 +26,7 @@ import { deepEqual } from '@instructure/ui-utils'
 
 import generateExamples from '../generateExamples'
 import generatePropCombinations from '../generatePropCombinations'
-import TestComponent, { testComponentProps } from './__testfixtures__/TestComponent'
+import TestComponent, { testComponentProps } from './__testfixtures__/TestComponent.fixture'
 
 const displayName = 'TestComponent'
 

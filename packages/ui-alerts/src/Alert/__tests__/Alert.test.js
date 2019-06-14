@@ -34,6 +34,7 @@ describe('<Alert />', async () => {
   let srdiv
 
   beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
     srdiv = document.createElement('div')
     srdiv.id = '_alertLiveRegion'
     srdiv.setAttribute('role', 'alert')

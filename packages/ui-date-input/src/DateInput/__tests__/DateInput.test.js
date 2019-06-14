@@ -23,8 +23,10 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, generateA11yTests } from '@instructure/ui-test-utils'
 import { Calendar } from '@instructure/ui-calendar'
+
+import Examples from '../__examples__/DateInput.examples'
 
 import { DateInput } from '../index'
 import DateInputLocator from '../locator'
@@ -67,6 +69,10 @@ describe('<DateInput />', async () => {
 
     expect(await dateInput.findInput()).to.exist()
     expect(await dateInput.findCalendar()).to.exist()
+  })
+
+  describe('with generated examples', async () => {
+    generateA11yTests(Examples)
   })
 
   describe('input', async () => {

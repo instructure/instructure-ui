@@ -30,6 +30,10 @@ import SelectLocator from '../locator'
 import SelectExamples from '../__examples__/Select.examples'
 
 describe('<Select />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress experimental warnings
+  })
+
   const lastCall = spy => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
   const getOptions = (highlighted, selected, disabled) => (

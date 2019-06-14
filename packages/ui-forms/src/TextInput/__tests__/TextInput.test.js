@@ -29,6 +29,10 @@ import { TextInput } from '../index'
 import TextInputLocator from '../locator'
 
 describe('<TextInput/>', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   it('should accept a default value', async () => {
     await mount(
       <TextInput

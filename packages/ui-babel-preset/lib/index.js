@@ -123,10 +123,10 @@ module.exports = function (context, opts = {
           '**/*.fixture.js',
           '**/*.config.js',
           '**/*.conf.js',
-          '__tests__/**',
-          '__testfixtures__/**',
-          '__examples__/**',
-          '__fixtures__/**'
+          '__tests__/**/*.js',
+          '__testfixtures__/**/*.js',
+          '__examples__/**/*.js',
+          '__fixtures__/**/*.js'
         ]
       }]
     ].concat(plugins)

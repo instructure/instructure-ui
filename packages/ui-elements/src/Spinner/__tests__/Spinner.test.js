@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { View } from '@instructure/ui-layout'
 
@@ -56,7 +56,8 @@ describe('<Spinner />', async () => {
   })
 
   it('should log deprecation warnings', async () => {
-    const consoleWarn = spy(console, 'warn')
+    const consoleWarn = stub(console, 'warn')
+
     await mount(
       <Spinner title="Loading" renderTitle={() => "Title"} />
     )

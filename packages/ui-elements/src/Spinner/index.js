@@ -79,7 +79,7 @@ class Spinner extends Component {
     variant: 'default',
     margin: undefined,
     elementRef: undefined,
-    title:"Loading"
+    title: undefined
   }
 
   constructor (props) {

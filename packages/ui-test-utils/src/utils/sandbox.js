@@ -29,6 +29,7 @@ import ReactComponentWrapper from './reactComponentWrapper'
 
 import initConsole from './initConsole'
 
+/* istanbul ignore next */
 class Sandbox {
   constructor () {
     // eslint-disable-next-line no-console
@@ -203,6 +204,7 @@ class Sandbox {
   }
 }
 
+/* istanbul ignore next */
 function overrideWindowOnError (windowOnError) {
   return (err, url, line) => {
     const error = (typeof err === 'string') ? err : err.toString()
@@ -220,6 +222,7 @@ function overrideWindowOnError (windowOnError) {
   }
 }
 
+/* istanbul ignore next */
 function overrideConsoleError (consoleError) {
   return (first, ...rest) => {
     const error = (typeof first === 'string') ? first : first.toString()
@@ -241,6 +244,7 @@ function overrideConsoleError (consoleError) {
   }
 }
 
+/* istanbul ignore next */
 function setAttributes (element, attributes = []) {
   if (element && element.attributes) {
     [...element.attributes].forEach((attribute) => {

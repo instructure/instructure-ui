@@ -50,6 +50,7 @@ class Group extends Component {
     children: null
   }
 
+  /* istanbul ignore next */
   render () {
     // this component is only used for prop validation. Select.Group children
     // are parsed in Select and rendered as Options components

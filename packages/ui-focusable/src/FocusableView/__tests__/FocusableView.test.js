@@ -29,6 +29,10 @@ import { View } from '@instructure/ui-layout'
 import { FocusableView } from '../index'
 
 describe('<FocusableView />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   it('should render', async () => {
     const subject = await mount(
       <FocusableView>Focus Me!</FocusableView>

@@ -40,5 +40,9 @@ describe('uid', () => {
     }
     expect(results.size).to.be.eql(5000)
   })
+
+  it('adds a prefix', () => {
+    expect(uid('foo', 5)).to.startWith('foo__')
+  })
 })
 

@@ -30,6 +30,10 @@ import DateInputLocator from '../locator'
 import { DateInput } from '../index'
 
 describe('<DateInput />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   it('should use the default date value', async () => {
     await mount(
       <DateInput

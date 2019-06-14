@@ -39,6 +39,7 @@ export default {
     ],
     href: [null, 'instructure.design']
   },
+  excludeProps: ['margin', 'headingLevel', 'readOnly'],
   getComponentProps: () => {
     return {
       heading: 'I am a billboard',

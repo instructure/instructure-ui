@@ -23,13 +23,17 @@
  */
 
 import React from 'react'
-import { expect, mount, wait } from '@instructure/ui-test-utils'
+import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
 import { DateTime } from '@instructure/ui-i18n'
 
 import { TimeInput } from '../index'
 import TimeInputLocator from '../locator'
 
 describe('<TimeInput />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   it('should render', async () => {
     await mount(
       <TimeInput

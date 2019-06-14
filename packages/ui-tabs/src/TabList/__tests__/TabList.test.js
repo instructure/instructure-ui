@@ -29,6 +29,10 @@ import { TabList, TabPanel } from '../index'
 import TabListLocator from '../locator'
 
 describe('<TabList />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress deprecation warnings
+  })
+
   it('should render the correct number of panels', async () => {
     await mount(
       <TabList>
@@ -76,8 +80,6 @@ describe('<TabList />', async () => {
   })
 
   it('should be okay with rendering without any children', async () => {
-    stub(console, 'warn') // suppress Focusable warnings
-
     let error = false
     try {
       await mount(
@@ -91,8 +93,6 @@ describe('<TabList />', async () => {
   })
 
   it('should not allow invalid children', async () => {
-    stub(console, 'warn') // suppress Focusable warnings
-
     let error = false
     try {
       await mount(

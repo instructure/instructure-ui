@@ -92,6 +92,7 @@ async function firePointerEvent (element, fn, init, options = { clickable: true 
           )
         }
       } catch (e) {
+        /* istanbul ignore next */
         reject(e)
       }
     }, 0)
@@ -125,6 +126,7 @@ async function fireClickEvent (element, fn, init, options = { clickable: true, s
           )
         }
       } catch (e) {
+        /* istanbul ignore next */
         reject(e)
       }
     }, 0)
@@ -164,6 +166,7 @@ async function fireBlurEvent (element, fn, init, options = { focusable: true, si
           )
         }
       } catch (e) {
+        /* istanbul ignore next */
         reject(e)
       }
     }, 0)
@@ -203,6 +206,7 @@ async function fireFocusEvent (element, fn, init, options = { focusable: true, s
           )
         }
       } catch (e) {
+        /* istanbul ignore next */
         reject(e)
       }
     }, 0)
@@ -240,6 +244,7 @@ async function fireKeyboardEvent (element, fn, whichKey, init, options = { focus
           )
         }
       } catch (e) {
+        /* istanbul ignore next */
         reject(e)
       }
     }, 0)
