@@ -21,13 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { log } from '@instructure/console/macro'
 
-const handleCreateFromTemplate = require('./handleCreateFromTemplate')
-const handleCreatePackage = require('./handleCreatePackage')
-const handleOpenSandbox = require('./handleOpenSandbox')
-
-module.exports = {
-  handleCreateFromTemplate,
-  handleCreatePackage,
-  handleOpenSandbox
-}
+log('Hello World')

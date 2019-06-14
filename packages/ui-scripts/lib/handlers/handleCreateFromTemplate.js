@@ -29,7 +29,18 @@ const { info, error } = require('@instructure/command-utils')
 
 const replaceTemplateVariables = require('../utils/replaceTemplateVariables')
 
-module.exports = async ({ template, path: sourcePath, name, values }) => {
+module.exports = async ({ template, path: sourcePath, name, values: rawValues }) => {
+  let values = rawValues
+
+  if (typeof values === 'string') {
+    try {
+      values = JSON.parse(values)
+    } catch (err) {
+      error(`Unable to parse the JSON provided for the \`values\` argument. Encountered the follwing error:\n${err}`)
+      process.exit(1)
+    }
+  }
+
   info(`Creating \`${name}\` in \`${sourcePath}\``)
 
   const destPath = path.join(sourcePath, name)

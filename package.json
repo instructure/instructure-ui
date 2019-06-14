@@ -39,7 +39,7 @@
     "lint:commit": "ui-scripts --lint-commit",
     "lint:staged": "lint-staged",
     "generate:component": "./scripts/generate-component",
-    "generate:package": "./scripts/generate-package",
+    "generate:package": "instui create package",
     "generate:rfc": "./scripts/generate-rfc",
     "commit": "ui-scripts --commit",
     "install:react": "ui-scripts --install-react",

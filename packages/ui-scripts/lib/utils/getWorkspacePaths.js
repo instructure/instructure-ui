@@ -22,12 +22,21 @@
  * SOFTWARE.
  */
 
-const handleCreateFromTemplate = require('./handleCreateFromTemplate')
-const handleCreatePackage = require('./handleCreatePackage')
-const handleOpenSandbox = require('./handleOpenSandbox')
+const Project = require('@lerna/project')
 
-module.exports = {
-  handleCreateFromTemplate,
-  handleCreatePackage,
-  handleOpenSandbox
+module.exports = ({ path }) => {
+  try {
+    const { packageParentDirs } = new Project(path)
+
+    // Filter any duplicates
+    return packageParentDirs.reduce((result, dir) => {
+      if (!result.includes(dir)) {
+        result.push(dir)
+      }
+
+      return result
+    }, [])
+  } catch (err) {
+    return []
+  }
 }

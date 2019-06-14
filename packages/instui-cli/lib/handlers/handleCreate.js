@@ -23,24 +23,28 @@
  */
 
 const path = require('path')
-const { handleCreateFromTemplate } = require('@instructure/ui-scripts/lib/handlers')
+const { handleCreateFromTemplate, handleCreatePackage } = require('@instructure/ui-scripts/lib/handlers')
 
 module.exports = async ({ contentType, path: sourcePath, name }) => {
+  const pkgPath = `@instructure/template-${contentType}/package.json`
+  const version = require(pkgPath).version
+
   const templateDirname = 'template'
   const composeTemplatePath = pkgPath => path.join(path.dirname(pkgPath), templateDirname)
 
-  if (contentType === 'app') {
-    const pkgPath = '@instructure/template-app/package.json'
-    const version = require(pkgPath).version
+  const options = {
+    template: composeTemplatePath(require.resolve(pkgPath)),
+    path: sourcePath,
+    name,
+    values: {
+      'NAME': name,
+      'VERSION': version
+    }
+  }
 
-    handleCreateFromTemplate({
-      template: composeTemplatePath(require.resolve(pkgPath)),
-      path: sourcePath,
-      name,
-      values: {
-        'NAME': name,
-        'VERSION': version
-      }
-    })
+  if (contentType === 'app') {
+    handleCreateFromTemplate(options)
+  } else if (contentType === 'package') {
+    handleCreatePackage(options)
   }
 }

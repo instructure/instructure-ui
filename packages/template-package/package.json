@@ -1,0 +1,16 @@
+{
+  "name": "@instructure/template-package",
+  "version": "6.4.0",
+  "description": "A package containing template files to generate an instructure-ui package.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

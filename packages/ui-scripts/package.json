@@ -50,7 +50,8 @@
     "validate-commit-msg": "^2.14.0",
     "webpack-cli": "^3.3.3",
     "webpack-dev-server": "^3.7.1",
-    "yargs": "^13.2.4"
+    "yargs": "^13.2.4",
+    "yargs-interactive": "^2.1.0"
   },
   "optionalDependencies": {
     "@instructure/mocha-environment-jsdom": "^6.4.0",

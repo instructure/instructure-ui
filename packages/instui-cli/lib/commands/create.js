@@ -29,33 +29,42 @@ exports.command = 'create'
 exports.desc = 'Create content generated from Instructure UI template packages.'
 
 exports.builder = (yargs) => {
-  yargs.command(
-    'app',
-    'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.',
+  const generateCreateCommandArgs = ({ contentType, desc }) => [
+    contentType,
+    desc,
     (yargs) => {
       yargs.option('path', {
         alias: 'p',
-        describe: `The path where the app source will be generated.`,
-        default: process.cwd()
+        describe: `The path where the ${contentType} source will be generated.`,
       })
 
       yargs.option('name', {
         alias: 'n',
-        describe: `The name of the app.`
+        describe: `The name of the ${contentType}.`
       })
     },
     async (argv) => {
-      const {
-        path
-      } = argv
+      let { name, path } = argv
 
-      let name = argv.name
-
-      if (!name) {
-        name = await confirm('Please enter a name for your app: ')
+      if (!path && contentType === 'app') {
+        path = process.cwd()
       }
 
-      handleCreate({ contentType: 'app', path, name })
+      if (!name) {
+        name = await confirm(`Please enter a name for the ${contentType}: `)
+      }
+
+      handleCreate({ contentType, path, name })
     }
-  )
+  ]
+
+  yargs.command(...generateCreateCommandArgs({
+    contentType: 'app',
+    desc: 'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.'
+  }))
+
+  yargs.command(...generateCreateCommandArgs({
+    contentType: 'package',
+    desc: 'Create an Instructure UI package.'
+  }))
 }
