@@ -1,0 +1,8 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-AXIOS-174505:
+    - '@instructure/ui-scripts > storybook-chromatic > @chromaui/localtunnel > axios':
+        patched: '2019-06-14T20:34:42.700Z'
