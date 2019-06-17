@@ -150,6 +150,8 @@ render(
 #### Providing autocomplete behavior
 It's best practice to always provide autocomplete functionality to help users make a selection. The example below demonstrates one method of filtering options based on user input, but this logic should be customized to what works best for the application.
 
+> Note: Select makes some conditional assumptions about keyboard behavior. For example, if the list is NOT showing, up/down arrow keys and the space key, will show the list. Otherwise, the arrows will navigate options and the space key will type a space character.
+
 ```javascript
 ---
 example: true
@@ -255,22 +257,24 @@ class AutocompleteExample extends React.Component {
 
   handleHighlightOption = (event, { id }) => {
     event.persist()
-    const option = this.getOptionById(id).label
+    const option = this.getOptionById(id)
+    if (!option) return // prevent highlighting of empty option
     this.setState((state) => ({
       highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? option : state.inputValue,
-      announcement: option
+      inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+      announcement: option.label
     }))
   }
 
   handleSelectOption = (event, { id }) => {
-    const option = this.getOptionById(id).label
+    const option = this.getOptionById(id)
+    if (!option) return // prevent selecting of empty option
     this.setState({
       selectedOptionId: id,
-      inputValue: option,
+      inputValue: option.label,
       isShowingOptions: false,
       filteredOptions: this.props.options,
-      announcement: `${option} selected. List collapsed.`
+      announcement: `${option.label} selected. List collapsed.`
     })
   }
 
@@ -334,7 +338,6 @@ class AutocompleteExample extends React.Component {
             <Select.Option
               id="empty-option"
               key="empty-option"
-              isDisabled
             >
               ---
             </Select.Option>
@@ -474,22 +477,25 @@ class MultipleSelectExample extends React.Component {
 
   handleHighlightOption = (event, { id }) => {
     event.persist()
-    const option = this.getOptionById(id).label
+    const option = this.getOptionById(id)
+    if (!option) return // prevent highlighting empty option
     this.setState((state) => ({
       highlightedOptionId: id,
-      inputValue: event.type === 'keydown' ? option : state.inputValue,
-      announcement: option
+      inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+      announcement: option.label
     }))
   }
 
   handleSelectOption = (event, { id }) => {
+    const option = this.getOptionById(id)
+    if (!option) return // prevent selecting of empty option
     this.setState((state) => ({
       selectedOptionId: [...state.selectedOptionId, id],
       highlightedOptionId: null,
       filteredOptions: this.filterOptions(''),
       inputValue: '',
       isShowingOptions: false,
-      announcement: `${this.getOptionById(id).label} selected. List collapsed.`
+      announcement: `${option.label} selected. List collapsed.`
     }))
   }
 
@@ -590,7 +596,6 @@ class MultipleSelectExample extends React.Component {
             <Select.Option
               id="empty-option"
               key="empty-option"
-              isDisabled
             >
               ---
             </Select.Option>
@@ -820,6 +825,229 @@ render(
           { id: '4', label: 'Illinois' }
         ]
       }}
+    />
+  </View>
+)
+```
+
+#### Asynchronous option loading
+If no results match the user's search, it's recommended to leave `isShowingOptions` as `true` and to display an "empty option" as a way of communicating that there are no matches. Similarly, it's helpful to display a [Spinner](#Spinner) in an empty option while options load.
+
+```javascript
+---
+example: true
+render: false
+---
+
+class AsyncExample extends React.Component {
+  state = {
+    inputValue: '',
+    isShowingOptions: false,
+    isLoading: false,
+    highlightedOptionId: null,
+    selectedOptionId: null,
+    selectedOptionLabel: '',
+    filteredOptions: [],
+    announcement: null
+  }
+
+  timeoutId = null
+
+  getOptionById (queryId) {
+    return this.state.filteredOptions.find(({ id }) => id === queryId)
+  }
+
+  filterOptions = (value) => {
+    return this.props.options.filter(option => (
+      option.label.toLowerCase().startsWith(value.toLowerCase())
+    ))
+  }
+
+  matchValue () {
+    const {
+      filteredOptions,
+      inputValue,
+      selectedOptionId,
+      selectedOptionLabel
+    } = this.state
+
+    // an option matching user input exists
+    if (filteredOptions.length === 1) {
+      const onlyOption = filteredOptions[0]
+      // automatically select the matching option
+      if (onlyOption.label.toLowerCase() === inputValue.toLowerCase()) {
+        return {
+          inputValue: onlyOption.label,
+          selectedOptionId: onlyOption.id
+        }
+      }
+    }
+    // allow user to return to empty input and no selection
+    if (inputValue.length === 0) {
+      return { selectedOptionId: null, filteredOptions: [] }
+    }
+    // no match found, return selected option label to input
+    if (selectedOptionId) {
+      return { inputValue: selectedOptionLabel }
+    }
+  }
+
+  handleShowOptions = (event) => {
+    this.setState(({ filteredOptions }) => ({
+      isShowingOptions: true
+    }))
+  }
+
+  handleHideOptions = (event) => {
+    const { selectedOptionId, inputValue } = this.state
+    this.setState({
+      isShowingOptions: false,
+      highlightedOptionId: null,
+      announcement: 'List collapsed.',
+      ...this.matchValue()
+    })
+  }
+
+  handleBlur = (event) => {
+    this.setState({ highlightedOptionId: null })
+  }
+
+  handleHighlightOption = (event, { id }) => {
+    event.persist()
+    const option = this.getOptionById(id)
+    if (!option) return // prevent highlighting of empty option
+    this.setState((state) => ({
+      highlightedOptionId: id,
+      inputValue: event.type === 'keydown' ? option.label : state.inputValue,
+      announcement: option.label
+    }))
+  }
+
+  handleSelectOption = (event, { id }) => {
+    const option = this.getOptionById(id)
+    if (!option) return // prevent selecting of empty option
+    this.setState({
+      selectedOptionId: id,
+      selectedOptionLabel: option.label,
+      inputValue: option.label,
+      isShowingOptions: false,
+      announcement: `${option.label} selected. List collapsed.`,
+      filteredOptions: [this.getOptionById(id)]
+    })
+  }
+
+  handleInputChange = (event) => {
+    const value = event.target.value
+    clearTimeout(this.timeoutId)
+
+    if (!value || value === '') {
+      this.setState({
+        isLoading: false,
+        inputValue: value,
+        isShowingOptions: true,
+        selectedOptionId: null,
+        selectedOptionLabel: null,
+        filteredOptions: [],
+      })
+    } else {
+      this.setState({
+        isLoading: true,
+        inputValue: value,
+        isShowingOptions: true,
+        filteredOptions: [],
+        highlightedOptionId: null,
+        announcement: 'Loading options.'
+      })
+
+      this.timeoutId = setTimeout(() => {
+        const newOptions = this.filterOptions(value)
+        this.setState({
+          filteredOptions: newOptions,
+          isLoading: false,
+          announcement: `${newOptions.length} options available.`
+        })
+      }, 1500)
+    }
+  }
+
+  render () {
+    const {
+      inputValue,
+      isShowingOptions,
+      isLoading,
+      highlightedOptionId,
+      selectedOptionId,
+      filteredOptions,
+      announcement
+    } = this.state
+
+    return (
+      <div>
+        <Select
+          renderLabel="Async Select"
+          assistiveText="Type to search"
+          inputValue={inputValue}
+          isShowingOptions={isShowingOptions}
+          onBlur={this.handleBlur}
+          onInputChange={this.handleInputChange}
+          onRequestShowOptions={this.handleShowOptions}
+          onRequestHideOptions={this.handleHideOptions}
+          onRequestHighlightOption={this.handleHighlightOption}
+          onRequestSelectOption={this.handleSelectOption}
+        >
+          {filteredOptions.length > 0 ? filteredOptions.map((option) => {
+            return (
+              <Select.Option
+                id={option.id}
+                key={option.id}
+                isHighlighted={option.id === highlightedOptionId}
+                isSelected={option.id === selectedOptionId}
+                isDisabled={option.disabled}
+                renderBeforeLabel={!option.disabled ? IconUserSolid : IconUserLine}
+              >
+                {option.label}
+              </Select.Option>
+            )
+          }) : (
+            <Select.Option id="empty-option" key="empty-option">
+              {isLoading
+                ? <Spinner renderTitle="Loading" size="x-small" />
+                : inputValue !== '' ? 'No results' : 'Type to search'}
+            </Select.Option>
+          )}
+        </Select>
+        <Alert
+          liveRegion={() => document.getElementById('flash-messages')}
+          liveRegionPoliteness="assertive"
+          screenReaderOnly
+        >
+          { announcement }
+        </Alert>
+      </div>
+    )
+  }
+}
+
+render(
+  <View>
+    <AsyncExample
+      options={[
+        { id: '0', label: 'Aaron Aaronson' },
+        { id: '1', label: 'Amber Murphy' },
+        { id: '2', label: 'Andrew Miller' },
+        { id: '3', label: 'Barbara Ward' },
+        { id: '4', label: 'Byron Cranston', disabled: true },
+        { id: '5', label: 'Dennis Reynolds' },
+        { id: '6', label: 'Dee Reynolds' },
+        { id: '7', label: 'Ezra Betterthan' },
+        { id: '8', label: 'Jeff Spicoli' },
+        { id: '9', label: 'Joseph Smith' },
+        { id: '10', label: 'Jasmine Diaz' },
+        { id: '11', label: 'Martin Harris' },
+        { id: '12', label: 'Michael Morgan', disabled: true },
+        { id: '13', label: 'Michelle Rodriguez' },
+        { id: '14', label: 'Ziggy Stardust' },
+      ]}
     />
   </View>
 )

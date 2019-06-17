@@ -312,17 +312,25 @@ class Select extends Component {
     }
   }
 
-  handleInputContainerRef= (node) => {
+  handleInputContainerRef = (node) => {
     this._inputContainer = node
+  }
+
+  componentDidUpdate () {
+    // scroll option into view if needed
+    this.scrollToOption(this.highlightedOptionId)
   }
 
   scrollToOption (id) {
     if (this._listView) {
-      const item = this._listView.querySelector(`[id="${id}"]`).parentNode
+      const option = this._listView.querySelector(`[id="${id}"]`)
+      if (!option) return
+
+      const listItem = option.parentNode
       const parentTop = getBoundingClientRect(this._listView).top
-      const elemTop = getBoundingClientRect(item).top
+      const elemTop = getBoundingClientRect(listItem).top
       const parentBottom = parentTop + this._listView.clientHeight
-      const elemBottom = elemTop + item.clientHeight
+      const elemBottom = elemTop + listItem.clientHeight
 
       if (elemBottom > parentBottom) {
         this._listView.scrollTop += elemBottom - parentBottom
@@ -336,7 +344,6 @@ class Select extends Component {
     const { onRequestHighlightOption } = this.props
     if (id) {
       onRequestHighlightOption(event, { id })
-      this.scrollToOption(id) // scroll into view if needed
     }
   }
 
