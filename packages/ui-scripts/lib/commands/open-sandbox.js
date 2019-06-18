@@ -56,20 +56,7 @@ exports.builder = (yargs) => {
 
   yargs.option('scope', {
     type: 'string',
-    describe: 'The name of the child app. When this argument is present, it is assumed you are using a monorepo and the command executes the open sandbox script defined in the specified child app.',
-  })
-
-  yargs.option('root', {
-    type: 'string',
-    describe: ' When used with the scope argument defined, specifies the path to the root of the monorepo (defaults to the current working directory).',
-    default: process.cwd()
-  })
-
-  yargs.option('command', {
-    alias: ['c'],
-    type: 'string',
-    describe: 'When used with the scope argument defined, specifies the name of the open sandbox command in the child app.',
-    default: 'open:sandbox'
+    describe: 'The name of the child app. When this argument is present, it is assumed you are using a monorepo managed by lerna and the child app is opened in codesandbox.',
   })
 }
 
@@ -79,10 +66,8 @@ exports.handler = (argv) => {
     username,
     branch,
     path,
-    scope,
-    root,
-    command
+    scope
   } = argv
 
-  handleOpenSandbox({ repo, username, branch, path, scope, root, command })
+  handleOpenSandbox({ repo, username, branch, path, scope })
 }
