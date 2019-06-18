@@ -47,32 +47,34 @@ class Sandbox {
   async init () {
     initConsole()
 
-    const originalAddDocumentListener = document.addEventListener
-    const originalAddWindowListener = global.window.addEventListener
-    this._listeners = []
-    document.addEventListener = (...args) => {
-      this._listeners.push([document, args])
-      return originalAddDocumentListener(...args)
-    }
-    global.window.addEventListener = (...args) => {
-      this._listeners.push([window, args])
-      return originalAddWindowListener(...args)
-    }
-
-    const originalSetTimeout = global.setTimeout
     this._timeouts = []
-    global.setTimeout = (...args) => {
-      const timeoutId = originalSetTimeout(...args)
-      this._timeouts.push(timeoutId)
-      return timeoutId
+    const originalSetTimeout = global.setTimeout
+    if (typeof originalSetTimeout === 'function') {
+      global.setTimeout = (...args) => {
+        const timeoutId = originalSetTimeout(...args)
+        this._timeouts.push(timeoutId)
+        return timeoutId
+      }
     }
 
-    const originalRequestAnimationFrame = global.window.requestAnimationFrame
     this._raf = []
-    global.window.requestAnimationFrame = (...args) => {
-      const requestId = originalRequestAnimationFrame(...args)
-      this._raf.push(requestId)
-      return requestId
+    const originalWindowRequestAnimationFrame = window.requestAnimationFrame
+    if (typeof originalWindowRequestAnimationFrame === 'function') {
+      window.requestAnimationFrame = (...args) => {
+        const requestId = originalWindowRequestAnimationFrame.apply(window, args)
+        this._raf.push(requestId)
+        return requestId
+      }
+    }
+
+    // override mocha's onerror handler
+    if (typeof window.onerror === 'function') {
+      window.onerror = overrideWindowOnError(window.onerror)
+    }
+
+    // for prop-type warnings:
+    if (typeof console.error === 'function') {
+      console.error = overrideConsoleError(console.error)
     }
 
     this._sandbox = sinon.createSandbox()
@@ -87,32 +89,19 @@ class Sandbox {
       const addedNodes = Array.from(mutations).map(mutation => Array.from(mutation.addedNodes))
       this._addedNodes = this._addedNodes.concat(addedNodes)
     })
-    this._observer.observe(document.head, { childList: true })
-    this._observer.observe(document.body, { childList: true })
   }
 
   async setup () {
     document.documentElement.setAttribute('dir', 'ltr')
     document.documentElement.setAttribute('lang', 'en-US')
 
-    // override mocha's onerror handler
-    if (typeof global.window.onerror === 'function') {
-      this._originalWindowOnError = global.window.onerror
-      global.window.onerror = overrideWindowOnError(global.window.onerror)
-    }
-
-    // for prop-type warnings:
-    if (typeof console.error === 'function') {
-      this._originalConsoleError = console.error
-      console.error = overrideConsoleError(console.error)
-    }
-
     this._sandbox.restore()
-    if (global.window.fetch) {
+
+    if (window.fetch) {
       this._sandbox
-        .stub(global.window, 'fetch')
+        .stub(window, 'fetch')
         .callsFake(() => {
-          return Promise.resolve(new global.window.Response(JSON.stringify({
+          return Promise.resolve(new window.Response(JSON.stringify({
             'key' : 'value'
             }), { //the fetch API returns a resolved window Response object
             status: 200,
@@ -122,37 +111,30 @@ class Sandbox {
           }))
         })
     }
+
+    this._observer.observe(document.head, { childList: true })
+    this._observer.observe(document.body, { childList: true })
   }
 
   async teardown () {
     await ReactComponentWrapper.unmount()
 
-    this._timeouts.forEach((timeoutId) => {
-      clearTimeout(timeoutId)
-    })
-
-    this._raf.forEach((requestId) => {
-      global.window.cancelAnimationFrame(requestId)
-    })
-
-    this._listeners.forEach(([element, args]) => {
-      element.removeEventListener(...args)
-    })
-
     StyleSheet.flush()
 
     this._sandbox.restore()
 
-    global.window.localStorage && global.window.localStorage.clear()
-    global.window.sessionStorage &&  global.window.sessionStorage.clear()
+    this._timeouts.forEach((timeoutId) => {
+      clearTimeout(timeoutId)
+    })
+    this._timeouts = []
 
-    if (this._originalWindowOnError) {
-      global.window.onerror = this._originalWindowOnError
-    }
+    this._raf.forEach((requestId) => {
+      window.cancelAnimationFrame(requestId)
+    })
+    this._raf = []
 
-    if (this._originalConsoleError) {
-      console.error = this._originalConsoleError
-    }
+    window.localStorage && window.localStorage.clear()
+    window.sessionStorage && window.sessionStorage.clear()
 
     setAttributes(document.documentElement, this._attributes.document)
     setAttributes(document.body, this._attributes.body)
@@ -163,7 +145,7 @@ class Sandbox {
     this._addedNodes.forEach((node) => node && typeof node.remove === 'function' && node.remove())
     this._addedNodes = []
 
-    if (global.viewport) {
+    if (global.viewport && typeof global.viewport.reset === 'function') {
       global.viewport.reset()
     }
   }

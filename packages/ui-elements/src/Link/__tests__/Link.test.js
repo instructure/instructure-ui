@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, within, wait } from '@instructure/ui-test-utils'
 
 import { View } from '@instructure/ui-layout'
 
@@ -108,7 +108,9 @@ describe('<Link />', async () => {
 
     await link.click()
 
-    expect(onClick).to.have.been.called()
+    await wait(() => {
+      expect(onClick).to.have.been.called()
+    })
   })
 
   it('should provide a linkRef prop', async () => {

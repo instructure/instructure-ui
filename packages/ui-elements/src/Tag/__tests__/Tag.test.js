@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { View } from '@instructure/ui-layout'
 
@@ -45,7 +45,10 @@ describe('<Tag />', async () => {
     const tag = await TagLocator.find()
     const button = await tag.find('button')
     await button.click()
-    expect(onClick).to.have.been.called()
+
+    await wait(() => {
+      expect(onClick).to.have.been.called()
+    })
   })
 
   it('should render a close icon when it is dismissible and clickable', async () => {
