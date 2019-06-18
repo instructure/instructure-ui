@@ -45,7 +45,7 @@
   }
 }
 
-/* stylelint-disable selector-max-type, no-descending-specificity */
+/* stylelint-disable selector-max-type */
 
 .input,
 input[type].input {
@@ -58,7 +58,6 @@ input[type].input {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   appearance: none;
-  line-height: 1; /* reset global line height */
   margin: 0;
   width: 100%;
   display: block;
@@ -70,6 +69,7 @@ input[type].input {
   padding: 0 var(--padding);
   background: transparent;
   border: none;
+  vertical-align: baseline;
 
   &[autocomplete="off"]::-webkit-contacts-auto-fill-button {
     display: none !important; /* stylelint-disable-line declaration-no-important */
@@ -86,16 +86,19 @@ input[type].input {
   &.small {
     font-size: var(--smallFontSize);
     height: calc(var(--smallHeight) - (2 * var(--borderWidth)));
+    line-height: calc(var(--smallHeight) - (2 * var(--borderWidth)));
   }
 
   &.medium {
     font-size: var(--mediumFontSize);
     height: calc(var(--mediumHeight) - (2 * var(--borderWidth)));
+    line-height: calc(var(--mediumHeight) - (2 * var(--borderWidth)));
   }
 
   &.large {
     font-size: var(--largeFontSize);
     height: calc(var(--largeHeight) - (2 * var(--borderWidth)));
+    line-height: calc(var(--largeHeight) - (2 * var(--borderWidth)));
   }
 
   &.textAlign--start {
@@ -107,4 +110,4 @@ input[type].input {
   }
 }
 
-/* stylelint-enable selector-max-type, no-descending-specificity */
+/* stylelint-enable selector-max-type */

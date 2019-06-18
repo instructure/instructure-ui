@@ -46,7 +46,7 @@ export default {
  maxExamplesPerPage: 50,
  propValues: {
    placeholder: [undefined, 'Some placeholder content'],
-   value: [undefined, 'A text input value'],
+   value: [undefined, 'A text input value ʃ̬'],
    renderBeforeInput: [undefined, renderBeforeInput],
    renderAfterInput: [undefined, IconSearchLine],
    width: [undefined, '4em'],
