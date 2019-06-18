@@ -52,7 +52,7 @@ category: components
   size: 'maxWidth',
   selectedIndex: true,
   onChange: 'onRequestTabChange',
-  focus: true
+  focus: 'shouldFocusOnRender'
 })
 @testable()
 @themeable(theme, styles)
@@ -88,6 +88,7 @@ class Tabs extends Component {
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     elementRef: PropTypes.func,
+    shouldFocusOnRender: PropTypes.bool,
     /**
     * deprecated
     */
@@ -121,20 +122,21 @@ class Tabs extends Component {
     children: null,
     elementRef: (el) => {},
     screenReaderLabel: undefined,
-    focus: undefined
+    focus: undefined,
+    shouldFocusOnRender: false
   }
 
   static Panel = Panel
   static Tab = Tab
 
   componentDidMount () {
-    if (this.props.focus) {
+    if (this.props.focus || this.props.shouldFocusOnRender) {
       this.focus()
     }
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.focus && !prevProps.focus) {
+    if ((this.props.focus && !prevProps.focus) || (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender)) {
       this.focus()
     }
   }
