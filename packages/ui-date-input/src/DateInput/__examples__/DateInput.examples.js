@@ -59,7 +59,7 @@
    getComponentProps: (props) => {
      return {
        children: generateDays(),
-       label: 'Choose a date',
+       renderLabel: 'Choose a date',
        renderNavigationLabel: (
          <div>
            <div>August</div>

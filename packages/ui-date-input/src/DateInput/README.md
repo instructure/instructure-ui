@@ -217,7 +217,7 @@ class Example extends React.Component {
 
     return (
       <DateInput
-        label="Choose a date"
+        renderLabel="Choose a date"
         value={value}
         onChange={this.handleChange}
         width="20rem"

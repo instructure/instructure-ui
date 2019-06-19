@@ -31,7 +31,7 @@ import { Popover } from '@instructure/ui-overlays'
 import { Selectable } from '@instructure/ui-selectable'
 import { TextInput } from '@instructure/ui-text-input'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { callRenderProp, safeCloneElement } from '@instructure/ui-react-utils'
+import { callRenderProp, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
 import { LayoutPropTypes } from '@instructure/ui-layout'
 import { FormPropTypes } from '@instructure/ui-form-field'
@@ -45,6 +45,9 @@ import styles from './styles.css'
 category: components
 ---
 **/
+@deprecated('7.0.0', {
+  label: 'renderLabel'
+})
 @testable()
 @themeable(null, styles)
 class DateInput extends Component {
@@ -54,7 +57,11 @@ class DateInput extends Component {
     /**
     * Specifies the input label.
     */
-    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+        /**
+    * deprecated
+    */
+    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * Specifies the input value.
     */
@@ -194,6 +201,7 @@ class DateInput extends Component {
   }
 
   static defaultProps = {
+    label: undefined,
     value: '',
     size: 'medium',
     placeholder: null,
@@ -337,6 +345,7 @@ class DateInput extends Component {
   renderInput ({ getInputProps, getTriggerProps }) {
     const {
       label,
+      renderLabel,
       value,
       placeholder,
       onBlur,
@@ -358,7 +367,7 @@ class DateInput extends Component {
       <TextInput
         {...triggerProps}
         {...getInputProps({
-          label,
+          label: callRenderProp(renderLabel || label),
           value,
           placeholder,
           size,

@@ -57,7 +57,7 @@ describe('<DateInput />', async () => {
   it('should render an input and a calendar', async () => {
     await mount(
       <DateInput
-        label="Choose date"
+        renderLabel="Choose date"
         renderWeekdayLabels={weekdayLabels}
         isShowingCalendar
       >
@@ -75,12 +75,13 @@ describe('<DateInput />', async () => {
     generateA11yTests(Examples)
   })
 
+
   describe('input', async () => {
     it('should render a label', async () => {
-      const label = 'Choose date'
+      const renderLabel = 'Choose date'
       await mount(
         <DateInput
-          label={label}
+          renderLabel={renderLabel}
           renderWeekdayLabels={weekdayLabels}
         >
           {generateDays()}
@@ -89,14 +90,14 @@ describe('<DateInput />', async () => {
 
       const dateInput = await DateInputLocator.find()
       const input = await dateInput.findInput()
-      expect(input).to.have.label(label)
+      expect(input).to.have.label(renderLabel)
     })
 
     it('should set value', async () => {
       const value = 'January 5'
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           value={value}
           onChange={() => {}}
           renderWeekdayLabels={weekdayLabels}
@@ -115,7 +116,7 @@ describe('<DateInput />', async () => {
       const value = 'January 5'
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           onChange={onChange}
         >
@@ -135,7 +136,7 @@ describe('<DateInput />', async () => {
       const onBlur = stub()
       await mount(
         <DateInput
-          label="Choose a date"
+          renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
           onBlur={onBlur}
         >
@@ -153,7 +154,7 @@ describe('<DateInput />', async () => {
     it('should correctly set interaction type', async () => {
       const subject = await mount(
         <DateInput
-          label="Choose a date"
+          renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
           interaction="disabled"
         >
@@ -175,7 +176,7 @@ describe('<DateInput />', async () => {
 
       await mount(
         <DateInput
-          label="Choose a date"
+          renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
           placeholder={placeholder}
         >
@@ -192,7 +193,7 @@ describe('<DateInput />', async () => {
     it('should be requireable', async () => {
       await mount(
         <DateInput
-          label="Choose a date"
+          renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
           isRequired
         >
@@ -211,7 +212,7 @@ describe('<DateInput />', async () => {
 
       await mount(
         <DateInput
-          label="Choose a date"
+          renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
           inputRef={inputRef}
         >
@@ -229,7 +230,7 @@ describe('<DateInput />', async () => {
       const text = 'The selected date is invalid'
       await mount(
         <DateInput
-          label="Choose a date"
+          renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
           messages={[{ type: 'error', text }]}
         >
@@ -249,7 +250,7 @@ describe('<DateInput />', async () => {
     it('should show calendar when `isShowingCalendar` is set', async () => {
       const subject = await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
         >
           {generateDays()}
@@ -271,7 +272,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
           >
@@ -288,7 +289,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
           >
@@ -306,7 +307,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
           >
@@ -324,7 +325,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
             isShowingCalendar
@@ -343,7 +344,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
           >
@@ -361,7 +362,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
             isShowingCalendar
@@ -380,7 +381,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
           >
@@ -398,7 +399,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
             isShowingCalendar
@@ -417,7 +418,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
           >
@@ -435,7 +436,7 @@ describe('<DateInput />', async () => {
         const onRequestShowCalendar = stub()
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestShowCalendar={onRequestShowCalendar}
             interaction="disabled"
@@ -465,7 +466,7 @@ describe('<DateInput />', async () => {
 
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestHideCalendar={onRequestHideCalendar}
             onRequestValidateDate={onRequestValidateDate}
@@ -488,7 +489,7 @@ describe('<DateInput />', async () => {
 
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestHideCalendar={onRequestHideCalendar}
             onRequestValidateDate={onRequestValidateDate}
@@ -514,7 +515,7 @@ describe('<DateInput />', async () => {
 
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestHideCalendar={onRequestHideCalendar}
             onRequestValidateDate={onRequestValidateDate}
@@ -537,7 +538,7 @@ describe('<DateInput />', async () => {
 
         await mount(
           <DateInput
-            label="Choose date"
+            renderLabel="Choose date"
             renderWeekdayLabels={weekdayLabels}
             onRequestHideCalendar={onRequestHideCalendar}
             onRequestValidateDate={onRequestValidateDate}
@@ -567,7 +568,7 @@ describe('<DateInput />', async () => {
 
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           onRequestHideCalendar={onRequestHideCalendar}
           onRequestValidateDate={onRequestValidateDate}
@@ -591,7 +592,7 @@ describe('<DateInput />', async () => {
       const onRequestSelectNextDay = stub()
       const subject = await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           onRequestSelectNextDay={onRequestSelectNextDay}
         >
@@ -614,7 +615,7 @@ describe('<DateInput />', async () => {
       const onRequestSelectPrevDay = stub()
       const subject = await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           onRequestSelectPrevDay={onRequestSelectPrevDay}
         >
@@ -639,7 +640,7 @@ describe('<DateInput />', async () => {
 
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           onRequestRenderNextMonth={onRequestRenderNextMonth}
           onRequestRenderPrevMonth={onRequestRenderPrevMonth}
@@ -668,7 +669,7 @@ describe('<DateInput />', async () => {
       const label = 'January 2019'
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           renderNavigationLabel={<div>{label}</div>}
           isShowingCalendar
@@ -685,7 +686,7 @@ describe('<DateInput />', async () => {
     it('should render calendar weekday labels', async () => {
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           isShowingCalendar
         >
@@ -707,7 +708,7 @@ describe('<DateInput />', async () => {
     it('should render all focusable elements in calendar with tabIndex="-1"', async () => {
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           renderNextMonthButton={<button>next</button>}
           renderPrevMonthButton={<button>prev</button>}
@@ -733,7 +734,7 @@ describe('<DateInput />', async () => {
 
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           isShowingCalendar
         >
@@ -760,7 +761,7 @@ describe('<DateInput />', async () => {
 
       await mount(
         <DateInput
-          label="Choose date"
+          renderLabel="Choose date"
           renderWeekdayLabels={weekdayLabels}
           isShowingCalendar
         >

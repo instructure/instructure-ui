@@ -10,5 +10,10 @@
       { "old": "onChange", "new": "onRequestTabChange" },
       { "old": "focus", "new": "shouldFocusOnRender" }
     ]
+  },
+  "DateInput": {
+    "7.0.0": [
+      { "old": "label", "new": "renderLabel" }
+    ]
   }
 }
