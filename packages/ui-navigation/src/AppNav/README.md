@@ -18,7 +18,7 @@ example: true
   renderAfterItems={
     <Button
       variant="icon"
-      href="#"
+      onClick={() => console.log('Add')}
       icon={IconPlusSolid}
     >
       <ScreenReaderContent>Add something</ScreenReaderContent>
@@ -29,15 +29,17 @@ example: true
     renderLabel={<ScreenReaderContent>AltaVista</ScreenReaderContent>}
     renderIcon={<SVGIcon src={iconExample} inline={false} size="medium" color="primary" />}
     href="http://altavista.com"
+    target="_blank"
   />
   <AppNav.Item
     renderLabel="WebCrawler"
     href="http://webcrawler.com"
+    target="_blank"
   />
   <AppNav.Item
     isSelected
     renderLabel="Goooooogle"
-    onClick={() => 'google'}
+    onClick={() => console.log('google')}
     renderAfter={
       <Badge
         type="notification"
@@ -50,7 +52,7 @@ example: true
   />
   <AppNav.Item
     renderLabel="DuckDuckGo"
-    onClick={() => 'duck!'}
+    onClick={() => console.log('duck!')}
   />
 </AppNav>
 ```
