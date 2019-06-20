@@ -32,7 +32,7 @@ import { IconArrowOpenDownLine, IconArrowOpenUpLine } from '@instructure/ui-icon
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { omitProps, pickProps, callRenderProp, deprecated } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -43,22 +43,32 @@ category: components
 id: NumberInput
 ---
 **/
+@deprecated('7.0.0', {
+  label: 'renderLabel',
+  disabled: 'interaction',
+  readOnly: 'interaction',
+  required: 'isRequired',
+  inline: 'display'
+})
 @testable()
 @themeable(theme, styles)
 class NumberInput extends Component {
   static propTypes = {
     /**
-     * Whether or not to disable the input.
-     */
-    disabled: PropTypes.bool,
-    id: PropTypes.string,
-    inline: PropTypes.bool,
+    * The form field label.
+    */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
-     * A function that provides a reference to the actual input element.
-     */
-    inputRef: PropTypes.func,
-    label: PropTypes.node.isRequired,
-    layout: PropTypes.oneOf(['stacked', 'inline']),
+    * The id of the input. One is generated if not supplied.
+    */
+    id: PropTypes.string,
+    /**
+    * Specifies if interaction with the input is enabled, disabled, or readonly.
+    * When "disabled", the input changes visibly to indicate that it cannot
+    * receive user interactions. When "readonly" the input still cannot receive
+    * user interactions but it keeps the same styles as if it were enabled.
+    */
+    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
      * Object with shape: `{
      *   text: PropTypes.string,
@@ -66,73 +76,116 @@ class NumberInput extends Component {
      * }`
      */
     messages: PropTypes.arrayOf(FormPropTypes.message),
-    onBlur: PropTypes.func,
-    /**
-     * Called when the value of the input changes. The first argument is an
-     * event object; the second argument is the string value of the input.
-     */
-    onChange: PropTypes.func,
-    /**
-     * Called when the down arrow button is clicked, or the down arrow key is
-     * pressed.
-     */
-    onDecrement: PropTypes.func,
-    onFocus: PropTypes.func,
-    /**
-     * Called when the up arrow button is clicked, or the up arrow key is
-     * pressed.
-     */
-    onIncrement: PropTypes.func,
-    onKeyDown: PropTypes.func,
     /**
      * Html placeholder text to display when the input has no value. This
      * should be hint text, not a label replacement.
      */
     placeholder: PropTypes.string,
     /**
-     * Works just like disabled but keeps the same styles as if it were active.
-     */
-    readOnly: PropTypes.bool,
-    required: PropTypes.bool,
+    * Whether or not the text input is required.
+    */
+    isRequired: PropTypes.bool,
     /**
-     * Whether or not to diplay the up/down arrow buttons.
+     * Whether or not to display the up/down arrow buttons.
      */
     showArrows: PropTypes.bool,
+    /**
+    * The size of the input.
+    */
     size: PropTypes.oneOf(['medium', 'large']),
     /**
      * The value of the input (should be accompanied by an `onChange` prop).
      */
-    value: PropTypes.string,
-    width: PropTypes.string
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+    * The width of the input.
+    */
+    width: PropTypes.string,
+    /**
+    * The display of the root element.
+    */
+    display: PropTypes.oneOf(['inline-block', 'block']),
+    /**
+     * A function that provides a reference to the actual input element.
+     */
+    inputRef: PropTypes.func,
+    /**
+    * Callback fired when input receives focus.
+    */
+    onFocus: PropTypes.func,
+    /**
+    * Callback fired when the input loses focus.
+    */
+    onBlur: PropTypes.func,
+    /**
+    * Callback executed when the input fires a change event.
+    * @param {Object} event - the event object
+    * @param {Object} value - the string value of the input
+    */
+    onChange: PropTypes.func,
+    /**
+     * Called when the down arrow button is clicked, or the down arrow key is
+     * pressed.
+     */
+    onDecrement: PropTypes.func,
+    /**
+     * Called when the up arrow button is clicked, or the up arrow key is
+     * pressed.
+     */
+    onIncrement: PropTypes.func,
+    /**
+    * Callback fired when a key is pressed.
+    */
+    onKeyDown: PropTypes.func,
+    /**
+     * deprecated
+     */
+    label: PropTypes.node,
+    /**
+     * deprecated
+     */
+    disabled: PropTypes.bool,
+    /**
+     * deprecated
+     */
+    readOnly: PropTypes.bool,
+    /**
+     * deprecated
+     */
+    required: PropTypes.bool,
+    /**
+     * deprecated
+     */
+    inline: PropTypes.bool
   }
 
   static defaultProps = {
-    disabled: false,
     id: null,
-    inline: false,
-    inputRef: function (input) {},
-    layout: 'stacked',
+    interaction: 'enabled',
     messages: [],
-    onBlur: function (event) {},
-    onChange: function (event, value) {},
-    onDecrement: function (event) {},
-    onFocus: function (event) {},
-    onIncrement: function (event) {},
-    onKeyDown: function (event) {},
     placeholder: null,
-    readOnly: false,
-    required: false,
+    isRequired: false,
     showArrows: true,
     size: 'medium',
-    width: null,
-    value: undefined
+    value: undefined,
+    width: undefined,
+    display: 'block',
+    inputRef: (event) => {},
+    onFocus: (event) => {},
+    onBlur: (event) => {},
+    onChange: (event, value) => {},
+    onDecrement: (event) => {},
+    onIncrement: (event) => {},
+    onKeyDown: (event) => {},
+    label: undefined,
+    disabled: undefined,
+    readOnly: undefined,
+    required: undefined,
+    inline: undefined
   }
 
-  state = {
-    focus: false
-  }
-
-  input = null
+  state = { hasFocus: false }
+  _input = null
 
   get id () {
     if (this.props.id) {
@@ -152,17 +205,17 @@ class NumberInput extends Component {
   }
 
   handleRef = (element) => {
-    this.input = element
+    this._input = element
     this.props.inputRef(element)
   }
 
   handleFocus = (event) => {
-    this.setState({ focus: true })
+    this.setState({ hasFocus: true })
     this.props.onFocus(event)
   }
 
   handleBlur = (event) => {
-    this.setState({ focus: false })
+    this.setState({ hasFocus: false })
     this.props.onBlur(event)
   }
 
@@ -191,10 +244,12 @@ class NumberInput extends Component {
   }
 
   arrowClicked (event, callback) {
+    const { interaction, disabled, readOnly } = this.props
     event.preventDefault()
-    if (this.props.disabled || this.props.readOnly) return
-    this.input.focus()
-    callback(event)
+    if (interaction === 'enabled' && !readOnly && !disabled) {
+      this._input.focus()
+      callback(event)
+    }
   }
 
   renderArrows () {
@@ -222,11 +277,16 @@ class NumberInput extends Component {
 
   render () {
     const {
+      label,
+      renderLabel,
       disabled,
-      inline,
-      placeholder,
       readOnly,
+      interaction,
+      inline,
+      display,
+      placeholder,
       required,
+      isRequired,
       showArrows,
       size,
       value,
@@ -236,42 +296,45 @@ class NumberInput extends Component {
     return (
       <FormField
         {...pickProps(this.props, FormField.propTypes)}
+        label={callRenderProp(renderLabel || label)}
+        inline={display === 'inline-block' || inline}
         id={this.id}
       >
         <span
           className={classnames(styles.inputWidth, {
-            [styles.focus]: this.state.focus,
-            [styles.inline]: inline,
+            [styles.focus]: this.state.hasFocus,
             [styles.invalid]: this.invalid
           })}
           style={width ? { width } : null}
         >
           <span
             className={classnames(styles.inputContainer, {
-              [styles.disabled]: disabled,
-              [styles.focus]: this.state.focus,
+              [styles.disabled]: interaction === 'disabled' || disabled,
+              [styles.focus]: this.state.hasFocus,
               [styles.invalid]: this.invalid,
               [styles[size]]: size
             })}
           >
             <input
-              {...omitProps(this.props, { ...FormField.propTypes, ...NumberInput.propTypes })}
-              aria-disabled={disabled || readOnly ? 'true' : null}
-              aria-invalid={this.invalid ? 'true' : null}
-              aria-required={required}
+              {...omitProps(this.props, {
+                ...FormField.propTypes,
+                ...NumberInput.propTypes
+              })}
               className={styles.input}
-              disabled={disabled || readOnly}
+              aria-invalid={this.invalid ? 'true' : null}
               id={this.id}
+              type="text"
               inputMode="numeric"
-              onBlur={this.handleBlur}
-              onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onKeyDown={this.handleKeyDown}
               placeholder={placeholder}
               ref={this.handleRef}
-              required={required}
-              type="text"
+              required={isRequired || required}
               value={value}
+              disabled={interaction === 'disabled' || disabled}
+              readOnly={interaction === 'readonly' || readOnly}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              onChange={this.handleChange}
+              onKeyDown={this.handleKeyDown}
             />
             {showArrows ? this.renderArrows() : null}
           </span>

@@ -24,16 +24,17 @@
 
 import React from 'react'
 
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { NumberInput } from '../index'
 import NumberInputLocator from '../locator'
+import NumberInputExamples from '../__examples__/NumberInput.examples'
 
 describe('<NumberInput />', () => {
   it('sets value on the input', async () => {
     await mount(
       <NumberInput
-        label="Label"
+        renderLabel="Label"
         onChange={Function.prototype}
         value="42"
       />
@@ -44,9 +45,23 @@ describe('<NumberInput />', () => {
     expect(input).to.have.value('42')
   })
 
+  it('should accept a number for the value', async () => {
+    await mount(
+      <NumberInput
+        renderLabel="Label"
+        onChange={Function.prototype}
+        value={42}
+      />
+    )
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
+    expect(input).to.have.value('42')
+  })
+
   it('displays the label', async () => {
     await mount(
-      <NumberInput label="Label" />
+      <NumberInput renderLabel="Label" />
     )
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -57,7 +72,7 @@ describe('<NumberInput />', () => {
   it('passes the input element to inputRef', async () => {
     const inputRef = stub()
     await mount(
-      <NumberInput label="Label" inputRef={inputRef} />
+      <NumberInput renderLabel="Label" inputRef={inputRef} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -73,7 +88,7 @@ describe('<NumberInput />', () => {
     })
 
     await mount(
-      <NumberInput label="Label" onChange={onChange} />
+      <NumberInput renderLabel="Label" onChange={onChange} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -90,7 +105,7 @@ describe('<NumberInput />', () => {
   it('passes keyboard events to the onKeyDown handler', async () => {
     const onKeyDown = stub()
     await mount(
-      <NumberInput label="Label" onKeyDown={onKeyDown} />
+      <NumberInput renderLabel="Label" onKeyDown={onKeyDown} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -104,7 +119,7 @@ describe('<NumberInput />', () => {
   it('passes blur events to onBlur handler', async () => {
     const onBlur = stub()
     await mount(
-      <NumberInput label="Label" onBlur={onBlur} />
+      <NumberInput renderLabel="Label" onBlur={onBlur} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -118,7 +133,7 @@ describe('<NumberInput />', () => {
   it('passes focus events to onFocus handler', async () => {
     const onFocus = stub()
     await mount(
-      <NumberInput label="Label" onFocus={onFocus} />
+      <NumberInput renderLabel="Label" onFocus={onFocus} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -131,7 +146,7 @@ describe('<NumberInput />', () => {
 
   it('shows arrow buttons by default', async () => {
     await mount(
-      <NumberInput label="Label" />
+      <NumberInput renderLabel="Label" />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -142,7 +157,7 @@ describe('<NumberInput />', () => {
 
   it('hides arrow buttons when showArrows is false', async () => {
     await mount(
-      <NumberInput label="Label" showArrows={false} />
+      <NumberInput renderLabel="Label" showArrows={false} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -154,7 +169,7 @@ describe('<NumberInput />', () => {
   it('calls onIncrement when up arrow is clicked', async () => {
     const onIncrement = stub()
     await mount(
-      <NumberInput label="Label" onIncrement={onIncrement} />
+      <NumberInput renderLabel="Label" onIncrement={onIncrement} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -168,7 +183,7 @@ describe('<NumberInput />', () => {
   it('does not call onIncrement when read only', async () => {
     const onIncrement = stub()
     await mount(
-      <NumberInput label="Label" readOnly onIncrement={onIncrement} />
+      <NumberInput renderLabel="Label" interaction="readonly" onIncrement={onIncrement} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -182,7 +197,7 @@ describe('<NumberInput />', () => {
   it('calls onDecrement when down arrow is clicked', async () => {
     const onDecrement = stub()
     await mount(
-      <NumberInput label="Label" onDecrement={onDecrement} />
+      <NumberInput renderLabel="Label" onDecrement={onDecrement} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -196,7 +211,7 @@ describe('<NumberInput />', () => {
   it('does not call onDecrement when read only', async () => {
     const onDecrement = stub()
     await mount(
-      <NumberInput label="Label" readOnly onDecrement={onDecrement} />
+      <NumberInput renderLabel="Label" interaction="readonly" onDecrement={onDecrement} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -209,7 +224,7 @@ describe('<NumberInput />', () => {
 
   it('focuses the input when up arrow is clicked', async () => {
     await mount(
-      <NumberInput label="Label" />
+      <NumberInput renderLabel="Label" />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -226,7 +241,7 @@ describe('<NumberInput />', () => {
 
   it('focuses the input when down arrow is clicked', async () => {
     await mount(
-      <NumberInput label="Label" />
+      <NumberInput renderLabel="Label" />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -244,7 +259,7 @@ describe('<NumberInput />', () => {
   it('calls onIncrement when up arrow key is pressed', async () => {
     const onIncrement = stub()
     await mount(
-      <NumberInput label="Label" onIncrement={onIncrement} />
+      <NumberInput renderLabel="Label" onIncrement={onIncrement} />
     )
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -257,7 +272,7 @@ describe('<NumberInput />', () => {
   it('calls onDecrement when down arrow key is pressed', async () => {
     const onDecrement = stub()
     await mount(
-      <NumberInput label="Label" onDecrement={onDecrement} />
+      <NumberInput renderLabel="Label" onDecrement={onDecrement} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -270,7 +285,7 @@ describe('<NumberInput />', () => {
 
   it('does not move caret when up arrow key is pressed', async () => {
     await mount(
-      <NumberInput label="Label" />
+      <NumberInput renderLabel="Label" />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -283,7 +298,7 @@ describe('<NumberInput />', () => {
 
   it('does not move caret when down arrow key is pressed', async () => {
     await mount(
-      <NumberInput label="Label" />
+      <NumberInput renderLabel="Label" />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -296,7 +311,7 @@ describe('<NumberInput />', () => {
 
   it('handles other keyDown events normally', async () => {
     await mount(
-      <NumberInput label="Label" />
+      <NumberInput renderLabel="Label" />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -307,21 +322,7 @@ describe('<NumberInput />', () => {
     expect(event.preventDefault).not.to.have.been.called()
   })
 
-  describe('a11y', () => {
-    it('meets standards', async () => {
-      await mount(<NumberInput label="Label" />)
-      const numberInput = await NumberInputLocator.find()
-      expect(await numberInput.accessible()).to.be.true()
-    })
-
-    it('sets aria-invalid when there are error messages', async () => {
-      const messages = [{ type: 'error', text: 'some error message' }]
-      await mount(<NumberInput label="Label" messages={messages} />)
-
-      const numberInput = await NumberInputLocator.find()
-      const input = await numberInput.findInput()
-
-      expect(input).to.have.attribute('aria-invalid', 'true')
-    })
+  describe('with generated examples', async () => {
+    generateA11yTests(NumberInputExamples)
   })
 })

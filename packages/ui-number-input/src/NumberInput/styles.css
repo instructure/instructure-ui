@@ -61,11 +61,6 @@
     font-size: var(--largeFontSize);
     height: var(--largeHeight);
   }
-
-  &.inline {
-    display: inline-flex;
-    width: auto;
-  }
 }
 
 /* stylelint-disable selector-max-type, no-descending-specificity */

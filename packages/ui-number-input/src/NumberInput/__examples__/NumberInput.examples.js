@@ -23,16 +23,26 @@
  */
 
 export default {
-  sectionProp: 'layout',
+  sectionProp: 'size',
   maxExamplesPerPage: 50,
   propValues: {
-    defaultValue: [null, 500],
-    placeholder: [null, 'type something']
+    placeholder: [null, 'type something'],
+    layout: [null, 'inline']
   },
   getComponentProps: (props) => {
     return {
-      label: 'A number input',
-      readOnly: false
+      renderLabel: 'A number input',
+      inline: undefined,
+      disabled: undefined,
+      readOnly: undefined,
+      required: undefined
     }
+  },
+  filter: (props) => {
+    if (props.interaction === 'readonly') return true
+    if (props.isRequired) return true
+    if (props.layout === 'inline' && props.display === 'inline-block') return true
+
+    return false
   }
 }

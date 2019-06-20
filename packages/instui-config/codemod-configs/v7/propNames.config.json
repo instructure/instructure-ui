@@ -4,6 +4,24 @@
       { "old": "closeButtonLabel", "new": "renderCloseButtonLabel" }
     ]
   },
+  "NumberInput": {
+    "7.0.0": [
+      { "old": "label", "new": "renderLabel" },
+      { "old": "required", "new": "isRequired" },
+      { "old": "disabled", "new": "interaction", "values": [
+        { "old": true, "new": "disabled" },
+        { "old": false, "new": "enabled" }
+      ]},
+      { "old": "readOnly", "new": "interaction", "values": [
+        { "old": true, "new": "readonly" },
+        { "old": false, "new": "enabled" }
+      ]},
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-block" },
+        { "old": false, "new": "block" }
+      ]}
+    ]
+  },
   "Tabs": {
     "7.0.0": [
       { "old": "title", "new": "renderTitle" },

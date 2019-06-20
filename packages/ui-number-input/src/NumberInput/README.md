@@ -60,7 +60,7 @@ class Example extends React.Component {
     return {
       messages: null,
       number,
-      value: number.toString()
+      value: number
     }
   }
 
@@ -110,21 +110,23 @@ class Example extends React.Component {
         />
         <Checkbox
           checked={this.state.inline}
-          label="Inline layout"
+          label="Inline display"
           onChange={this.toggleInline}
         />
         <NumberInput
-          disabled={this.state.disabled}
-          label={`How old are you? (${this.MIN}-${this.MAX})`}
-          layout={this.state.inline ? 'inline' : null}
+          renderLabel={`How old are you? (${this.MIN}-${this.MAX})`}
+          display={this.state.inline ? 'inline-block' : null}
           messages={this.state.messages}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
           onDecrement={this.handleDecrement}
           onIncrement={this.handleIncrement}
           placeholder="Age (in years)"
-          readOnly={this.state.readOnly}
-          required
+          interaction={this.state.disabled
+            ? 'disabled'
+            : this.state.readOnly ? 'readonly' : 'enabled'
+          }
+          isRequired
           showArrows={this.state.showArrows}
           value={this.state.value}
         />
@@ -141,16 +143,17 @@ function isInteger (number) {
 render(<Example />)
 ```
 
+> Note: `NumberInput` accepts a string or number as its `value`. However, the value returned by the `onChange` callback is always a string and should be converted to a number before attempting to augment it.
 
-NumberInput comes in 2 sizes. The default size is "medium". 
+NumberInput comes in 2 sizes. The default size is "medium".
 
 ```js
 ---
 example: true
 ---
 <div>
-  <NumberInput label="Default-size input" /><br/>
-  <NumberInput size="large" label="Large-size input" />
+  <NumberInput renderLabel="Default-size input" /><br/>
+  <NumberInput size="large" renderLabel="Large-size input" />
 </div>
 ```
 
