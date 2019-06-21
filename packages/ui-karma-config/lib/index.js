@@ -66,13 +66,7 @@ module.exports = function makeConfig ({
     }
   }
 
-  const reporters = []
-
-  if (CI) {
-    reporters.push('dots')
-  } else {
-    reporters.push('mocha')
-  }
+  const reporters = ['mocha']
 
   if (withCoverage) {
     reporters.push('coverage')

@@ -31,13 +31,10 @@ export default {
   },
   getComponentProps: (props) => {
     return {
-      renderLabel: 'A number input',
-      inline: undefined,
-      disabled: undefined,
-      readOnly: undefined,
-      required: undefined
+      renderLabel: 'A number input'
     }
   },
+  excludeProps: ['required', 'readOnly', 'disabled', 'label', 'inline'],
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true

@@ -31,7 +31,7 @@ describe('<TextInput/>', async () => {
   it('should include a label', async () => {
     await mount(
       <TextInput
-        label="Name"
+        renderLabel="Name"
       />
     )
     const label = await find('label')
@@ -42,7 +42,7 @@ describe('<TextInput/>', async () => {
     let ref
     const subject = await mount(
       <TextInput
-        label="Name"
+        renderLabel="Name"
         componentRef={el => ref = el}
       />
     )
@@ -57,7 +57,7 @@ describe('<TextInput/>', async () => {
     const inputRef = stub()
     const subject = await mount(
       <TextInput
-        label="Name"
+        renderLabel="Name"
         inputRef={inputRef}
       />
     )
@@ -84,7 +84,7 @@ describe('<TextInput/>', async () => {
 
     const subject = await mount(
       <TextInput
-        label="Name"
+        renderLabel="Name"
         renderBeforeInput={() => contentBeforeSVG}
       />
     )
@@ -107,7 +107,7 @@ describe('<TextInput/>', async () => {
     let ref
     await mount(
       <TextInput
-        label="Name"
+        renderLabel="Name"
         defaultValue="bar"
         componentRef={el => ref = el}
       />
@@ -119,7 +119,7 @@ describe('<TextInput/>', async () => {
   it('should provide messageId to FormField', async () => {
     const subject = await mount(
       <TextInput
-        label="Name"
+        renderLabel="Name"
         messages={
           [{
             text: 'yup',
@@ -137,7 +137,7 @@ describe('<TextInput/>', async () => {
   it('should have equal messagesId and aria-describedby values', async () => {
     const subject = await mount(
       <TextInput
-        label="Name"
+        renderLabel="Name"
         messages={
           [{
             text: 'yup',
@@ -160,7 +160,7 @@ describe('<TextInput/>', async () => {
       const onChange = stub()
       const subject = await mount(
         <TextInput
-          label="Name"
+          renderLabel="Name"
           onChange={onChange}
         />
       )
@@ -175,7 +175,7 @@ describe('<TextInput/>', async () => {
       const onBlur = stub()
       const subject = await mount(
         <TextInput
-          label="Name"
+          renderLabel="Name"
           onBlur={onBlur}
         />
       )
@@ -190,7 +190,7 @@ describe('<TextInput/>', async () => {
       const onFocus = stub()
       const subject = await mount(
         <TextInput
-          label="Name"
+          renderLabel="Name"
           onFocus={onFocus}
         />
       )
@@ -206,7 +206,7 @@ describe('<TextInput/>', async () => {
     it('should meet standards', async () => {
       const subject = await mount(
         <TextInput
-          label="Name"
+          renderLabel="Name"
         />
       )
       const textInput = within(subject.getDOMNode())
@@ -216,7 +216,7 @@ describe('<TextInput/>', async () => {
     it('should set aria-invalid when errors prop is set', async () => {
       const subject = await mount(
         <TextInput
-          label="Name"
+          renderLabel="Name"
           messages={[{ type: 'error', text: 'some error message' }]}
         />
       )

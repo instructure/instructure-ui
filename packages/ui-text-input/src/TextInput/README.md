@@ -60,19 +60,21 @@ class ControlledTextInputExample extends React.Component {
           />
           <Checkbox
             checked={this.state.inline}
-            label="inline layout"
+            label="inline display"
             onChange={this.toggleInline}
           />
         </FormFieldGroup>
         <View display="block" margin="medium 0 0">
           <TextInput
-            label="What is your favorite band?"
+            renderLabel="What is your favorite band?"
+            display={this.state.inline ? 'inline-block' : null}
             value={this.state.value}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
-            disabled={this.state.disabled}
-            readOnly={this.state.readOnly}
-            layout={this.state.inline ? 'inline' : 'stacked'}
+            interaction={this.state.disabled
+              ? 'disabled'
+              : this.state.readOnly ? 'readonly' : 'enabled'
+            }
             messages={this.state.messages}
             renderAfterInput={<SVGIcon src={iconExample} />}
           />
@@ -113,7 +115,7 @@ class ExtraContentExample extends React.Component {
     return (
       <View as="div">
         <TextInput
-          label="What are Paula Panda's favorite ice cream flavors?"
+          renderLabel="What are Paula Panda's favorite ice cream flavors?"
           value={this.state.value}
           onChange={this.handleChange}
           renderBeforeInput={
@@ -181,8 +183,8 @@ example: true
 ---
 <div>
   <TextInput
-    label={<ScreenReaderContent>I am a hidden label</ScreenReaderContent>}
-    inline
+    renderLabel={<ScreenReaderContent>I am a hidden label</ScreenReaderContent>}
+    display="inline-block"
     width="4rem"
   />
   &nbsp;

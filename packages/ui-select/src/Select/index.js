@@ -583,7 +583,7 @@ class Select extends Component {
         {...triggerProps}
         {...getInputProps({
           id: this.id,
-          label: renderLabel,
+          renderLabel,
           placeholder,
           size,
           width,
@@ -591,10 +591,9 @@ class Select extends Component {
           value: inputValue,
           inputRef: createChainedFunction(ref, this.handleInputRef),
           inputContainerRef: this.handleInputContainerRef,
-          disabled: interaction === 'disabled',
-          readOnly: interaction === 'readonly',
-          required: isRequired,
-          inline: isInline,
+          interaction,
+          isRequired,
+          display: isInline ? 'inline-block' : 'block',
           renderBeforeInput,
           renderAfterInput: renderAfterInput || this.renderIcon(),
           onChange: onInputChange,

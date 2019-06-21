@@ -189,7 +189,6 @@ describe('<Select />', async () => {
       const input = await select.findInput()
 
       expect(input.getAttribute('required')).to.exist()
-      expect(input.getAttribute('aria-required')).to.equal('true')
     })
 
     it('should render with inputValue', async () => {

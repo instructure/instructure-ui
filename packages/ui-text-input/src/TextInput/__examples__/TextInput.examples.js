@@ -43,6 +43,7 @@ const renderBeforeInput = () => {
 }
 
 export default {
+ sectionProp: 'size',
  maxExamplesPerPage: 50,
  propValues: {
    placeholder: [undefined, 'Some placeholder content'],
@@ -54,18 +55,20 @@ export default {
  },
  getComponentProps: (props) => {
    return {
-     label: 'A text input',
-     readOnly: false,
-     required: false,
+     renderLabel: 'A text input',
+     isRequired: false,
      type: 'text',
      textAlign: 'start',
      onChange: () => {},
      layout: 'stacked'
    }
  },
+ excludeProps: ['required', 'readOnly', 'disabled', 'label', 'inline'],
  filter: (props) => {
    return (props.layout === 'inline' && props.inline === true && !props.width) ||
     (props.renderBeforeInput && props.width) ||
-    (props.renderAfterInput && props.width)
+    (props.renderAfterInput && props.width) ||
+    (props.interaction === 'readonly') ||
+    (props.placeholder && props.width)
  }
 }

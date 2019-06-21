@@ -367,7 +367,7 @@ class DateInput extends Component {
       <TextInput
         {...triggerProps}
         {...getInputProps({
-          label: callRenderProp(renderLabel || label),
+          renderLabel: callRenderProp(renderLabel || label),
           value,
           placeholder,
           size,
@@ -377,10 +377,9 @@ class DateInput extends Component {
           onChange: this.handleInputChange,
           onBlur: createChainedFunction(onBlur, this.handleHideCalendar),
           inputRef: createChainedFunction(ref, this.handleInputRef),
-          disabled: interaction === 'disabled',
-          readOnly: interaction === 'readonly',
-          required: isRequired,
-          inline: isInline,
+          interaction,
+          isRequired,
+          display: isInline ? 'inline-block' : 'block',
           renderAfterInput: <IconCalendarMonthLine inline={false} />
         })}
       />

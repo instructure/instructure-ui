@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { callRenderProp, omitProps, pickProps } from '@instructure/ui-react-utils'
+import { deprecated, callRenderProp, omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { Flex } from '@instructure/ui-layout'
@@ -42,12 +42,35 @@ import theme from './theme'
 category: components
 ---
 **/
+@deprecated('7.0.0', {
+  label: 'renderLabel',
+  disabled: 'interaction',
+  readOnly: 'interaction',
+  required: 'isRequired',
+  inline: 'display'
+})
 @themeable(theme, styles)
 class TextInput extends Component {
   static propTypes = {
+    /**
+    * The form field label.
+    */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+    * The type of input.
+    */
     type: PropTypes.oneOf(['text', 'email', 'url', 'tel', 'search', 'password']),
-    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+    * The id of the text input. One is generated if not supplied.
+    */
     id: PropTypes.string,
+    /**
+    * Specifies if interaction with the input is enabled, disabled, or readonly.
+    * When "disabled", the input changes visibly to indicate that it cannot
+    * receive user interactions. When "readonly" the input still cannot receive
+    * user interactions but it keeps the same styles as if it were enabled.
+    */
+    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
     * object with shape: `{
     * text: PropTypes.string,
@@ -55,25 +78,31 @@ class TextInput extends Component {
     *   }`
     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
+    /**
+    * The size of the text input.
+    */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    layout: PropTypes.oneOf(['stacked', 'inline']),
+    /**
+    * The text alignment of the input.
+    */
     textAlign: PropTypes.oneOf(['start', 'center']),
+    /**
+    * The width of the input.
+    */
     width: PropTypes.string,
-    inline: PropTypes.bool,
+    /**
+    * The display of the root element.
+    */
+    display: PropTypes.oneOf(['inline-block', 'block']),
     /**
     * Html placeholder text to display when the input has no value. This should be hint text, not a label
     * replacement.
     */
     placeholder: PropTypes.string,
     /**
-     * Whether or not to disable the input
-     */
-    disabled: PropTypes.bool,
-    /**
-     * Works just like disabled but keeps the same styles as if it were active
-     */
-    readOnly: PropTypes.bool,
-    required: PropTypes.bool,
+    * Whether or not the text input is required.
+    */
+    isRequired: PropTypes.bool,
     /**
     * a function that provides a reference to the actual input element
     */
@@ -94,25 +123,55 @@ class TextInput extends Component {
     * Content to display after the input text, such as an icon
     */
     renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+    * Callback executed when the input fires a change event.
+    * @param {Object} event - the event object
+    * @param {Object} value - the string value of the input
+    */
     onChange: PropTypes.func,
+    /**
+    * Callback fired when input loses focus.
+    */
     onBlur: PropTypes.func,
-    onFocus: PropTypes.func
+    /**
+    * Callback fired when input receives focus.
+    */
+    onFocus: PropTypes.func,
+    /**
+    * deprecated
+    */
+    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+    * deprecated
+    */
+    disabled: PropTypes.bool,
+    /**
+    * deprecated
+    */
+    readOnly: PropTypes.bool,
+    /**
+    * deprecated
+    */
+    required: PropTypes.bool,
+    /**
+    * deprecated
+    */
+    inline: PropTypes.bool
   }
 
   static defaultProps = {
+    renderLabel: undefined,
+    type: 'text',
     id: undefined,
-    required: false,
+    interaction: 'enabled',
+    isRequired: false,
     value: undefined,
-    inline: false,
+    display: 'block',
     placeholder: undefined,
     width: undefined,
-    label: undefined,
-    type: 'text',
     size: 'medium',
     textAlign: 'start',
     messages: [],
-    disabled: false,
-    readOnly: false,
     inputRef: function (input) {},
     inputContainerRef: function (container) {},
     onChange: function (event, value) {},
@@ -120,19 +179,20 @@ class TextInput extends Component {
     onFocus: function (event) {},
     renderBeforeInput: undefined,
     renderAfterInput: undefined,
-    layout: 'stacked'
+    label: undefined,
+    disabled: undefined,
+    readOnly: undefined,
+    required: undefined,
+    inline: undefined
   }
 
   constructor (props) {
     super()
-    this.state = { focused: false }
+    this.state = { hasFocus: false }
     this._defaultId = uid('TextInput')
     this._messagesId = uid('TextInput-messages')
   }
 
-  /**
-  * focus the input element
-  */
   focus () {
     this._input.focus()
   }
@@ -169,14 +229,14 @@ class TextInput extends Component {
   handleBlur = (event) => {
     this.props.onBlur(event)
     this.setState({
-      focused: false
+      hasFocus: false
     })
   }
 
   handleFocus = (event) => {
     this.props.onFocus(event)
     this.setState({
-      focused: true
+      hasFocus: true
     })
   }
 
@@ -189,10 +249,12 @@ class TextInput extends Component {
       value,
       disabled,
       readOnly,
-      required
+      interaction,
+      required,
+      isRequired
     } = this.props
 
-    const props = omitProps(this.props, TextInput.propTypes)
+    const props = omitProps(this.props, TextInput.propTypes, ['layout'])
 
     const inputClasses = {
       [styles.input]: true,
@@ -211,17 +273,16 @@ class TextInput extends Component {
     return (
       <input
         {...props}
+        className={classnames(inputClasses)}
         value={value}
         placeholder={placeholder}
         ref={this.handleInputRef}
         type={type}
         id={this.id}
-        required={required}
-        aria-required={required}
+        required={isRequired || required}
         aria-invalid={this.invalid ? 'true' : null}
-        disabled={disabled}
-        readOnly={readOnly}
-        className={classnames(inputClasses)}
+        disabled={interaction === 'disabled' || disabled}
+        readOnly={interaction === 'readonly' || readOnly}
         aria-describedby={descriptionIds !== '' ? descriptionIds : null}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
@@ -232,8 +293,13 @@ class TextInput extends Component {
 
   render () {
     const {
+      interaction,
       disabled,
       width,
+      inline,
+      display,
+      label,
+      renderLabel,
       renderBeforeInput,
       renderAfterInput
     } = this.props
@@ -242,16 +308,18 @@ class TextInput extends Component {
 
     const facadeClasses = {
       [styles.facade]: true,
-      [styles.disabled]: disabled,
+      [styles.disabled]: interaction === 'disabled' || disabled,
       [styles.invalid]: this.invalid,
-      [styles.focused]: this.state.focused
+      [styles.focused]: this.state.hasFocus
     }
 
     return (
       <FormField
         {...pickProps(this.props, FormField.propTypes)}
         id={this.id}
+        label={callRenderProp(renderLabel || label)}
         messagesId={this._messagesId}
+        inline={display === 'inline-block' || inline}
         width={width}
       >
         <span className={classnames(facadeClasses)}>
