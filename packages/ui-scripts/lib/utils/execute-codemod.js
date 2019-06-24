@@ -34,7 +34,8 @@ module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore 
     '-t',
     codemodPath,
     sourcePath,
-    `--config=${configPath}`
+    `--config=${configPath}`,
+    `--extensions=js,jsx`
   ]
 
   let ignoreArgs = []
