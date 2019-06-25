@@ -1,0 +1,41 @@
+---
+title: What's New?
+category: What's New?
+id: WhatsNew
+---
+
+## What's New in 6.5.0?
+
+### New InstUI Starter App Generator
+We were inspired by the simplicity of spinning up projects using [create React app](https://github.com/facebook/create-react-app), and wanted to provide that same convenience to build apps with Instructure UI. As of the latest release, you can now use `instui-cli` to generate react apps configured with Instructure UI's presets out of the box. This includes settings for webpack, babel, eslint, and postcss. The canvas theme is also already imported for you and ui-themeable is preinstalled with a simple themeable component example. All you have to do is start developing.
+
+```bash
+$ npx @instructure/instui-cli create app --name MyInstuiApp
+$ cd MyInstuiApp
+$ yarn && yarn start
+```
+
+For more detailed usage and documentation, hit up the `Quick Start` guide on the [instructure.design](#) homepage.
+
+#### Integration with Codesandbox
+
+[Codesandbox](https://codesandbox.io) makes it easy to share and edit code directly in the browser. All starter apps ship with an `open:sandbox` command which allows you to open your project in codesandbox if it is stored in a public GitHub repository. Fill in the `repository` field in your package.json, push your latest changes, and then do
+
+```bash
+$ yarn open:sandbox
+```
+
+### AppNav
+Many Instructure products appear inside the Canvas chrome &#151; a fancy way of saying that they appear to be part of Canvas to the user. [AppNav](#AppNav) provides a main navigation for these apps that works visually next to Canvas' global navigation. (Having said that, AppNav also works fine as a standalone nav outside of Canvas.)
+
+AppNav's navigation items can render as either links or buttons, and feature a `renderAfter` prop you can use to easily align an element such as a badge with the item's text. AppNav also provides a `renderAfterItems` prop that, you guessed it, renders content after the navigation items (a separate set of action buttons, for example).
+
+> AppNav is currently an experimental component because it is not responsive yet. Once we make the layout responsive, the experimental flag will be removed.
+
+### Select/Selectable/Options
+
+Keeping with our direction of moving to controlled-only components, [Select](#Select) has been rebuilt from the ground up as a *100% controlled component*. Combobox components like Select are used for a myriad of different use cases, and it's very difficult to prescribe functionality that fits every single one. To combat this recurring issue, we thought it best to make only the safest assumptions under the hood of Select and leave the specifics to the consumer.
+
+Select is composed using a number of our other components &#151; most notably [Selectable](#Selectable) and [Options](#Options). Selectable facilitates the creation of combobox widgets, providing the attributes needed to associate an input with a list of selectable options navigable by mouse, keyboard, and screen reader. Selectable was previously released as an experimental component, but is now fully implemented in both DateInput and Select and ready for action.
+
+Options is a component that provides views for a list of interactive list items. We realized this kind of view-only component could help consolidate styles in our existing components, like Select or Menu &#151; and facilitate the creation of new ones as well. Previously, if Select didn't quite fit your use case, you'd probably need to build something completely from scratch. Now, pairing Options and Selectable can provide a great starting point for a custom combobox.

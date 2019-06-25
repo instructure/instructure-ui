@@ -25,7 +25,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Heading, Link } from '@instructure/ui-elements'
+import { Button } from '@instructure/ui-buttons'
+import { Heading } from '@instructure/ui-elements'
+import { View } from '@instructure/ui-layout'
 import { themeable } from '@instructure/ui-themeable'
 
 import PandaLogo from './instui-panda.js'
@@ -51,16 +53,33 @@ class Header extends Component {
         </div>
         <div className={styles.banner} role="banner">
           <Heading level="h2" as="h1">
-            <Link href="#index">
+            <Button
+              variant="link"
+              size="large"
+              href="#index"
+              theme={{largePadding: '0.25rem', largeFontSize: '1.5rem', largeHeight: 'normal'}}
+            >
               {this.props.name || 'Documentation'}
-            </Link>
+            </Button>
           </Heading>
           { this.props.version && (
-            <div>
-              <Link href="#CHANGELOG">
+            <View display="block" margin="xx-small none none">
+              <Button
+                href="#CHANGELOG"
+                variant="link"
+                theme={{mediumPadding: '0.125rem', mediumHeight: 'normal'}}
+              >
                 v{this.props.version}
-              </Link>
-            </div>
+              </Button>
+              &nbsp;|&nbsp;
+              <Button
+                href="#WhatsNew"
+                variant="link"
+                theme={{mediumPadding: '0.125rem', mediumHeight: 'normal'}}
+              >
+                What&apos;s New?
+              </Button>
+            </View>
           ) }
         </div>
       </div>
