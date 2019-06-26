@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { TabList } from './TabList'
+export { TabList, TabPanel } from './TabList'
 export { Tabs } from './Tabs'

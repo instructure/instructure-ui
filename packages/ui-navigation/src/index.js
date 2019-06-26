@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Navigation } from './Navigation'
+export { Navigation, NavigationItem } from './Navigation'
 export { AppNav } from './AppNav'

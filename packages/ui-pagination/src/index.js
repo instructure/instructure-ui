@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export { Pagination } from './Pagination'
+export { Pagination, PaginationButton } from './Pagination'
