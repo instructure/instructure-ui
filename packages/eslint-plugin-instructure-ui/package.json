@@ -18,7 +18,10 @@
   "dependencies": {
     "@instructure/pkg-utils": "^6.4.0",
     "eslint-module-utils": "^2.4.0",
-    "eslint-plugin-import": "^2.17.3"
+    "eslint-plugin-import": "^2.18.0"
+  },
+  "peerDependencies": {
+    "eslint": "^5"
   },
   "publishConfig": {
     "access": "public"
