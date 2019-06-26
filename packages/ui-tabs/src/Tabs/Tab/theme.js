@@ -44,10 +44,10 @@ export default function generator ({ colors, typography, stacking }) {
 
 generator.canvas = function (variables) {
   return {
-    simpleColor: variables['ic-brand-primary'],
-    simpleSelectedColor: variables['ic-brand-font-color-dark'],
+    defaultColor: variables['ic-brand-font-color-dark'],
+    defaultSelectedBorderColor: variables['ic-brand-primary'],
 
-    minimalColor: variables['ic-brand-font-color-dark'],
-    minimalSelectedBorderColor: variables['ic-brand-primary']
+    secondaryColor: variables['ic-brand-primary'],
+    secondarySelectedColor: variables['ic-brand-font-color-dark']
   }
 }
