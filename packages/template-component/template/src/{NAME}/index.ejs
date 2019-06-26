@@ -22,14 +22,48 @@
  * SOFTWARE.
  */
 
-const handleCreateComponent = require('./handleCreateComponent')
-const handleCreateFromTemplate = require('./handleCreateFromTemplate')
-const handleCreatePackage = require('./handleCreatePackage')
-const handleOpenSandbox = require('./handleOpenSandbox')
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-module.exports = {
-  handleCreateComponent,
-  handleCreateFromTemplate,
-  handleCreatePackage,
-  handleOpenSandbox
+import { themeable } from '@instructure/ui-themeable'
+import { passthroughProps } from '@instructure/ui-react-utils'
+
+import styles from './styles.css'
+import theme from './theme'
+
+/**
+---
+category: components
+---
+**/
+@themeable(theme, styles)
+class <%= NAME %> extends Component {
+  static propTypes = {
+    /**
+    * FIXME: description of the children prop goes here
+    */
+    children: PropTypes.node,
+    elementRef: PropTypes.func
+  }
+
+  static defaultProps = {
+    children: null,
+    elementRef: (el) => {}
+  }
+
+  render () {
+    const { children, elementRef, ...props } = this.props
+    return (
+      <div
+        {...passthroughProps(props)}
+        ref={elementRef}
+        className={styles.root}
+      >
+        {children}
+      </div>
+    )
+  }
 }
+
+export { <%= NAME %> }
+export default <%= NAME %>

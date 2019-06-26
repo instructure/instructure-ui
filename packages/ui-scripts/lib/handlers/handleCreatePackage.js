@@ -24,12 +24,19 @@
 
 const yargsInteractive = require('yargs-interactive')
 const { info, error } = require('@instructure/command-utils')
+const Project = require('@lerna/project')
 
-const getWorkspacePaths = require('../utils/getWorkspacePaths')
 const handleCreateFromTemplate = require('./handleCreateFromTemplate')
+const promptContentName = require('../utils/promptContentName')
+const getWorkspacePaths = require('../utils/getWorkspacePaths')
 
-module.exports = async ({ template, path, name, values }) => {
+module.exports = async ({ template, path, name, values } = {}) => {
   let inputPath = path
+
+  const project = new Project(path)
+  const version = project.version
+
+  const packageName = await promptContentName({ name, contentType: 'package' })
 
   // No path provided, look at workspaces
   if (!inputPath) {
@@ -38,7 +45,7 @@ module.exports = async ({ template, path, name, values }) => {
 
     // Verify if there are any workspace paths available. If there aren't, we just go with cwd.
     if (workspacePaths.length > 0) {
-      info('\nThe following paths were detected in the current workspace using "workspaces" entry in your root package.json.\n')
+      info('The following paths were detected in the current workspace using the "workspaces" entry in your root package.json.')
 
       const alternative = 'Other (manually enter an alternative location)'
 
@@ -66,5 +73,14 @@ module.exports = async ({ template, path, name, values }) => {
     }
   }
 
-  handleCreateFromTemplate({ template, path: inputPath, name, values })
+  handleCreateFromTemplate({
+    template,
+    path: inputPath,
+    name: packageName,
+    values: generateValues({ values, name: packageName, version })
+  })
 }
+
+const generateValues = ({ values, name, version }) => typeof values === 'function'
+  ? values({ name, version })
+  : values

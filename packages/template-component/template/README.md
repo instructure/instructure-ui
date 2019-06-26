@@ -2,7 +2,7 @@
 category: packages
 ---
 
-## ${PACKAGE}
+## <%= PACKAGE %>
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
@@ -14,11 +14,11 @@ A UI component library made by Instructure Inc.
 ### Installation
 
 ```sh
-yarn add @instructure/${PACKAGE}
+yarn add @instructure/<%= PACKAGE %>
 ```
 
-[npm]: https://img.shields.io/npm/v/@instructure/${PACKAGE}.svg
-[npm-url]: https://npmjs.com/package/@instructure/${PACKAGE}
+[npm]: https://img.shields.io/npm/v/@instructure/<%= PACKAGE %>.svg
+[npm-url]: https://npmjs.com/package/@instructure/<%= PACKAGE %>
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

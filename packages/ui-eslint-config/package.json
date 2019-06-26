@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-eslint": "^10.0.2",
+    "eslint-plugin-ejs": "^0.0.2",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-instructure-ui": "^6.4.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",

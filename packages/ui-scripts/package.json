@@ -41,6 +41,7 @@
     "jscodeshift": "^0.6.4",
     "karma-cli": "^2.0.0",
     "lerna": "^3",
+    "lodash.template": "^4.4.0",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "open": "^6.3.0",

@@ -1,6 +1,6 @@
 {
-  "name": "@instructure/${NAME}",
-  "version": "${VERSION}",
+  "name": "@instructure/<%= NAME %>",
+  "version": "<%= VERSION %>",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -19,13 +19,11 @@
     "build:watch": "ui-build --watch"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "^${VERSION}",
-    "@instructure/ui-test-utils": "^${VERSION}"
-  },
   "dependencies": {
-    "@babel/runtime": "^7",
-    "@instructure/console": "^${VERSION}"
+<%= DEPENDENCIES %>
+  },
+  "devDependencies": {
+<%= DEV_DEPENDENCIES %>
   },
   "publishConfig": {
     "access": "public"

@@ -22,49 +22,68 @@
  * SOFTWARE.
  */
 
-const { confirm } = require('@instructure/command-utils')
 const { handleCreate } = require('../handlers')
 
 exports.command = 'create'
 exports.desc = 'Create content generated from Instructure UI template packages.'
 
 exports.builder = (yargs) => {
-  const generateCreateCommandArgs = ({ contentType, desc }) => [
-    contentType,
-    desc,
-    (yargs) => {
-      yargs.option('path', {
-        alias: 'p',
-        describe: `The path where the ${contentType} source will be generated.`,
-      })
+  const generatePathOption = ({ yargs, contentType }) => {
+    yargs.option('path', {
+      alias: 'p',
+      describe: `The path where the ${contentType} source will be generated.`,
+    })
+  }
 
-      yargs.option('name', {
-        alias: 'n',
-        describe: `The name of the ${contentType}.`
-      })
+  const generateNameOption = ({ yargs, contentType, formatInstructions = '' } = {}) => {
+    yargs.option('name', {
+      alias: 'n',
+      describe: `The name of the ${contentType}${formatInstructions}.`
+    })
+  }
+
+  const appCommand = 'app'
+  yargs.command(
+    appCommand,
+    'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.',
+    (yargs) => {
+      const options = { yargs, contentType: appCommand }
+      generatePathOption(options)
+      generateNameOption(options)
     },
     async (argv) => {
-      let { name, path } = argv
-
-      if (!path && contentType === 'app') {
-        path = process.cwd()
-      }
-
-      if (!name) {
-        name = await confirm(`Please enter a name for the ${contentType}: `)
-      }
-
-      handleCreate({ contentType, path, name })
+      const { name, path } = argv
+      handleCreate({ contentType: appCommand, path, name })
     }
-  ]
+  )
 
-  yargs.command(...generateCreateCommandArgs({
-    contentType: 'app',
-    desc: 'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.'
-  }))
+  const packageCommand = 'package'
+  yargs.command(
+    packageCommand,
+    'Create an Instructure UI package.',
+    (yargs) => {
+      const options = { yargs, contentType: packageCommand }
+      generatePathOption(options)
+      generateNameOption(options)
+    },
+    async (argv) => {
+      const { name, path } = argv
+      handleCreate({ contentType: packageCommand, path, name })
+    }
+  )
 
-  yargs.command(...generateCreateCommandArgs({
-    contentType: 'package',
-    desc: 'Create an Instructure UI package.'
-  }))
+  const componentCommand = 'component'
+  yargs.command(
+    componentCommand,
+    'Create an Instructure UI component.',
+    (yargs) => {
+      const options = { yargs, contentType: componentCommand }
+      generatePathOption(options)
+      generateNameOption({ ...options, formatInstructions: ' (in PascalCase, e.g. NumberInput)' })
+    },
+    async (argv) => {
+      const { name, path } = argv
+      handleCreate({ contentType: componentCommand, path, name })
+    }
+  )
 }

@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 module.exports = {
   extends: [
     'eslint:recommended',
@@ -35,7 +36,8 @@ module.exports = {
     'jsx-a11y',
     'mocha',
     'notice',
-    'instructure-ui'
+    'instructure-ui',
+    'ejs'
   ],
   env: {
     node: true,

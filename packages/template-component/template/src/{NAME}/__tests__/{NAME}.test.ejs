@@ -22,14 +22,24 @@
  * SOFTWARE.
  */
 
-const handleCreateComponent = require('./handleCreateComponent')
-const handleCreateFromTemplate = require('./handleCreateFromTemplate')
-const handleCreatePackage = require('./handleCreatePackage')
-const handleOpenSandbox = require('./handleOpenSandbox')
+import React from 'react'
+import { expect, mount, accessible, stub } from '@instructure/ui-test-utils'
 
-module.exports = {
-  handleCreateComponent,
-  handleCreateFromTemplate,
-  handleCreatePackage,
-  handleOpenSandbox
-}
+import { <%= NAME %> } from '../index'
+import <%= NAME %>Locator from '../locator'
+
+describe('<<%= NAME %> />', async () => {
+  it('should render', async () => {
+    await mount(<<%= NAME %> />)
+    const component = <%= NAME %>Locator.find()
+
+    expect(component).to.exist()
+  })
+
+  it('should be accessible', async () => {
+    const render = stub()
+    await mount(<<%= NAME %> render={render} />)
+
+    expect(await accessible()).to.be.true()
+  })
+})

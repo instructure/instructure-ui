@@ -2,23 +2,23 @@
 category: packages
 ---
 
-## <%= NAME %>
+## template-component
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+A package containing template files to generate an instructure-ui component.
 
 ### Installation
 
 ```sh
-yarn add @instructure/<%= NAME %>
+yarn add @instructure/template-component
 ```
 
-[npm]: https://img.shields.io/npm/v/@instructure/<%= NAME %>.svg
-[npm-url]: https://npmjs.com/package/@instructure/<%= NAME %>
+[npm]: https://img.shields.io/npm/v/@instructure/template-component.svg
+[npm-url]: https://npmjs.com/package/@instructure/template-component
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

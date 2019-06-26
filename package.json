@@ -38,7 +38,7 @@
     "lint:fix": "lerna run lint:fix --stream",
     "lint:commit": "ui-scripts --lint-commit",
     "lint:staged": "lint-staged",
-    "generate:component": "./scripts/generate-component",
+    "generate:component": "instui create component",
     "generate:package": "instui create package",
     "generate:rfc": "./scripts/generate-rfc",
     "commit": "ui-scripts --commit",

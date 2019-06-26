@@ -25,11 +25,14 @@
 const path = require('path')
 const fse = require('fs-extra')
 
+const yargsInteractive = require('yargs-interactive')
+
 const { info, error } = require('@instructure/command-utils')
 
-const replaceTemplateVariables = require('../utils/replaceTemplateVariables')
+const createFromTemplate = require('../utils/createFromTemplate')
+const promptContentName = require('../utils/promptContentName')
 
-module.exports = async ({ template, path: sourcePath, name, values: rawValues }) => {
+module.exports = async ({ template, name, path: sourcePath = process.cwd(), values: rawValues } = {}) => {
   let values = rawValues
 
   if (typeof values === 'string') {
@@ -41,20 +44,49 @@ module.exports = async ({ template, path: sourcePath, name, values: rawValues })
     }
   }
 
-  info(`Creating \`${name}\` in \`${sourcePath}\``)
+  const contentName = await promptContentName({ name })
 
-  const destPath = path.join(sourcePath, name)
+  const destPath = path.join(sourcePath, contentName)
 
-  await fse.copy(template, destPath).catch((err) => {
-    error('Failed to copy template files: ', err)
-    process.exit(1)
-  })
+  if (fse.existsSync(destPath)) {
+    info(`\`${destPath}\` already exists. If you choose to continue and overwrite it, it's existing contents may be lost.`)
+    const { overwrite } = await yargsInteractive()
+      .interactive({
+        interactive: { default: true },
+        overwrite: {
+          type: 'confirm',
+          describe: 'Would you like to continue and overwrite it?'
+        }
+      })
+
+    if (!overwrite) {
+      process.exit(0)
+    }
+
+    // Remove the destination if it's a dir. If it's a file, it will just be overwritten
+    // when the createFromTemplate func executes
+    if (fse.statSync(destPath).isDirectory()) {
+      fse.emptyDirSync(destPath)
+      fse.rmdirSync(destPath)
+    }
+  }
+
+  info(`Creating \`${contentName}\` in \`${sourcePath}\``)
 
   try {
-    replaceTemplateVariables({ root: destPath, values })
+    createFromTemplate({
+      template,
+      dest: destPath,
+      values: generateValues({ values, name: contentName })
+    })
   } catch (err) {
-    error('Encountered an error replacing template variables: ', err)
+    error('Encountered an error generating source from the template: ', err)
+    process.exit(1)
   }
 
   info('Success!')
 }
+
+const generateValues = ({ values, name }) => typeof values === 'function'
+  ? values({ name })
+  : values

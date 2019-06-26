@@ -22,24 +22,26 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { expect, mount, accessible, stub } from '@instructure/ui-test-utils'
+const yargsInteractive = require('yargs-interactive')
+const { error } = require('@instructure/command-utils')
 
-import { ${COMPONENT} } from '../index'
-import ${COMPONENT}Locator from '../locator'
+module.exports = async ({ name, contentType, formatInstructions = '', isRequired = true } = {}) => {
+  let contentName = name
+  if (!contentName) {
+    contentName = (await yargsInteractive()
+      .interactive({
+        interactive: { default: true },
+        contentName: {
+          type: 'input',
+          describe: `Enter a name${contentType ? ` for the ${contentType}` : ''}${formatInstructions}:`
+        }
+      })).contentName
+  }
 
-describe('<${COMPONENT} />', async () => {
-  it('should render', async () => {
-    await mount(<${COMPONENT} />)
-    const component = ${COMPONENT}Locator.find()
+  if (!contentName && isRequired) {
+    error('A name is required')
+    process.exit(0)
+  }
 
-    expect(component).to.exist()
-  })
-
-  it('should be accessible', async () => {
-    const render = stub()
-    await mount(<${COMPONENT} render={render} />)
-
-    expect(await accessible()).to.be.true()
-  })
-})
+  return contentName
+}

@@ -2,7 +2,7 @@
 category: packages
 ---
 
-## template-app
+## template-package
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
@@ -17,8 +17,8 @@ A package containing template files to generate an instructure-ui package.
 yarn add @instructure/template-package
 ```
 
-[npm]: https://img.shields.io/npm/v/@instructure/template-app.svg
-[npm-url]: https://npmjs.com/package/@instructure/template-app
+[npm]: https://img.shields.io/npm/v/@instructure/template-package.svg
+[npm-url]: https://npmjs.com/package/@instructure/template-package
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

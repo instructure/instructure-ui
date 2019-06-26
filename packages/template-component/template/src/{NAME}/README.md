@@ -1,8 +1,8 @@
 ---
-describes: ${COMPONENT}
+describes: <%= NAME %>
 ---
 
-A `${COMPONENT}` component [WIP]
+A `<%= NAME %>` component [WIP]
 
 ```javascript
 ---
@@ -11,7 +11,7 @@ render: false
 ---
 const Example = (props) => {
   return (
-    <${COMPONENT} />
+    <<%= NAME %>>Hello from <%= NAME %></<%= NAME %>>
   )
 }
 render(Example)

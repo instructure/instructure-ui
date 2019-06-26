@@ -7078,6 +7078,11 @@ eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
+eslint-plugin-ejs@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npmjs.org/eslint-plugin-ejs/-/eslint-plugin-ejs-0.0.2.tgz#d17be92e8010262491d11efbeba7d626681eb18d"
+  integrity sha1-0XvpLoAQJiSR0R7766fWJmgesY0=
+
 eslint-plugin-import@^2.18.0:
   version "2.18.0"
   resolved "https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.18.0.tgz#7a5ba8d32622fb35eb9c8db195c2090bd18a3678"
@@ -11610,7 +11615,7 @@ lodash.template@^3.0.0:
     lodash.restparam "^3.0.0"
     lodash.templatesettings "^3.0.0"
 
-lodash.template@^4.0.2, lodash.template@^4.2.4:
+lodash.template@^4.0.2, lodash.template@^4.2.4, lodash.template@^4.4.0:
   version "4.4.0"
   resolved "https://registry.npmjs.org/lodash.template/-/lodash.template-4.4.0.tgz#e73a0385c8355591746e020b99679c690e68fba0"
   integrity sha1-5zoDhcg1VZF0bgILmWecaQ5o+6A=

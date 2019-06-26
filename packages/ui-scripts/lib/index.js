@@ -72,6 +72,8 @@ function executeYargs () {
 // by setting the --help flag
 if (process.argv.includes('open-sandbox')) {
   executeYargs()
+} else if (process.argv.includes('create-component')) {
+  executeYargs()
 } else if (process.argv.includes('create-from-template')) {
   executeYargs()
 } else if (process.argv.includes('create-package')) {

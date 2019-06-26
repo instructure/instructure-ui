@@ -23,28 +23,64 @@
  */
 
 const path = require('path')
-const { handleCreateFromTemplate, handleCreatePackage } = require('@instructure/ui-scripts/lib/handlers')
 
-module.exports = async ({ contentType, path: sourcePath, name }) => {
-  const pkgPath = `@instructure/template-${contentType}/package.json`
-  const version = require(pkgPath).version
+const {
+  handleCreateComponent,
+  handleCreateFromTemplate,
+  handleCreatePackage
+} = require('@instructure/ui-scripts/lib/handlers')
+
+module.exports = async ({ contentType, path: sourcePath, name, initialVersion }) => {
+  const pkgPath = require.resolve(`@instructure/template-${contentType}/package.json`)
+  const pkg = require(pkgPath)
+
+  const dependencies = formatDependencies({ dependencies: pkg.dependencies })
+  const devDependencies = formatDependencies({ dependencies: pkg.devDependencies })
 
   const templateDirname = 'template'
-  const composeTemplatePath = pkgPath => path.join(path.dirname(pkgPath), templateDirname)
 
-  const options = {
-    template: composeTemplatePath(require.resolve(pkgPath)),
-    path: sourcePath,
-    name,
-    values: {
-      'NAME': name,
-      'VERSION': version
-    }
-  }
+  const template = path.join(path.dirname(pkgPath), templateDirname)
 
   if (contentType === 'app') {
-    handleCreateFromTemplate(options)
+    handleCreateFromTemplate({
+      template,
+      path: sourcePath,
+      name,
+      values: ({ name }) => ({
+        'NAME': name,
+        'DEPENDENCIES': dependencies,
+        'DEV_DEPENDENCIES': devDependencies
+      })
+    })
   } else if (contentType === 'package') {
-    handleCreatePackage(options)
+    handleCreatePackage({
+      template,
+      path: sourcePath,
+      name,
+      values: ({ name, version }) => ({
+        'NAME': name,
+        'VERSION': version,
+        'DEPENDENCIES': dependencies,
+        'DEV_DEPENDENCIES': devDependencies
+      })
+    })
+  } else if (contentType === 'component') {
+    await handleCreateComponent({
+      componentTemplate: path.join(template, 'src', '{NAME}'),
+      packageTemplate: template,
+      path: sourcePath,
+      name,
+      values: ({ name, packageName, version }) => ({
+        'NAME': name,
+        'PACKAGE': packageName,
+        'VERSION': version,
+        'DEPENDENCIES': dependencies,
+        'DEV_DEPENDENCIES': devDependencies
+      })
+    })
   }
+}
+
+const formatDependencies = ({ dependencies }) => {
+  return Object.keys(dependencies).map((dependency) => `\t\t"${dependency}": "${dependencies[dependency]}"`).join(',\n')
 }
