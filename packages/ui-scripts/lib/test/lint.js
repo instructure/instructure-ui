@@ -32,14 +32,14 @@ let csspaths = ['**/*.css']
 if (paths.length) {
   jspaths = paths.filter(p => (p.indexOf('.js') > -1))
   csspaths = paths.filter(p => (p.indexOf('.css') > -1)) || ['**/*.css']
+}
 
-  if (process.argv.includes('--fix')) {
-    if (jspaths.length) {
-      jspaths.push('--fix')
-    }
-    if (csspaths.length) {
-      csspaths.push('--fix')
-    }
+if (process.argv.includes('--fix')) {
+  if (jspaths.length) {
+    jspaths.unshift('--fix')
+  }
+  if (csspaths.length) {
+    csspaths.unshift('--fix')
   }
 }
 
