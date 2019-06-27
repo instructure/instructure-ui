@@ -155,6 +155,26 @@ describe('<TextInput/>', async () => {
     expect(messages).to.exist()
   })
 
+  it('should handle multiple aria-describedby ids', async () => {
+    const subject = await mount(
+      <TextInput
+        renderLabel="Name"
+        aria-describedby="assistive-id"
+        messages={
+          [{
+            text: 'yup',
+            type: 'error'
+          }]
+        }
+      />
+    )
+    const textInput = within(subject.getDOMNode())
+    const input = await textInput.find('input')
+    const ids = input.getAttribute('aria-describedby')
+
+    expect(ids).to.startWith('assistive-id TextInput-messages')
+  })
+
   describe('events', async () => {
     it('responds to onChange event', async () => {
       const onChange = stub()

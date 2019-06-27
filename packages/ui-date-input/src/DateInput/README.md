@@ -218,6 +218,7 @@ class Example extends React.Component {
     return (
       <DateInput
         renderLabel="Choose a date"
+        assistiveText="Type a date or use arrow keys to navigate date picker."
         value={value}
         onChange={this.handleChange}
         width="20rem"

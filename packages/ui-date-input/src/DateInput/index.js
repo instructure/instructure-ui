@@ -103,6 +103,11 @@ class DateInput extends Component {
     */
     isInline: PropTypes.bool,
     /**
+    * Additional helpful text to provide to screen readers about the operation
+    * of the component.
+    */
+    assistiveText: PropTypes.string,
+    /**
     * Controls the layout. When set to `stacked`, the label rests on top of the
     * input. When set to `inline` the label is next to the input.
     */
@@ -210,6 +215,7 @@ class DateInput extends Component {
     interaction: 'enabled',
     isRequired: false,
     isInline: false,
+    assistiveText: undefined,
     layout: 'stacked',
     width: null,
     inputRef: (el) => {},
@@ -389,7 +395,8 @@ class DateInput extends Component {
   render () {
     const {
       placement,
-      isShowingCalendar
+      isShowingCalendar,
+      assistiveText
     } = this.props
 
     const { selectedDateId } = this
@@ -409,10 +416,17 @@ class DateInput extends Component {
         getInputProps,
         getTriggerProps,
         getListProps,
-        getOptionProps
+        getOptionProps,
+        getDescriptionProps
       }) => (
         <span {...getRootProps({ className: styles.root })}>
           {this.renderInput({ getInputProps, getTriggerProps })}
+          <span
+            {...getDescriptionProps()}
+            className={styles.assistiveText}
+          >
+            { assistiveText }
+          </span>
           <Popover
             placement={placement}
             show={isShowingCalendar}

@@ -264,10 +264,12 @@ class TextInput extends Component {
 
     let descriptionIds = ''
     if (props['aria-describedby']) {
-      descriptionIds = `${props['aria-describedby'] }`
+      descriptionIds = `${props['aria-describedby']}`
     }
     if (this.hasMessages) {
-      descriptionIds += this._messagesId
+      descriptionIds = descriptionIds !== ''
+      ? `${descriptionIds} ${this._messagesId}`
+      : this._messagesId
     }
 
     return (
