@@ -25,6 +25,38 @@ For more detailed usage and documentation, hit up the `Quick Start` guide on the
 $ yarn open:sandbox
 ```
 
+### Prototyping with Instructure UI
+
+Our starter app and Codesandbox integration emerged from discussions about how we develop
+prototypes that can be shared between developers and designers. We needed a system that would
+allow us to easily:
+* Create prototypes using an Instructure UI development environment
+* Share and collaborate on prototypes with developers and designers
+* Get a higher fidelity representation of the UX than is possible with static prototyping
+* Share the actual interface code demonstrating what Instructure UI components should be used
+
+Codesandbox gave us most of this out of the box. In fact, we initially considered using
+it for our entire prototyping workflow. However, as our prototypes became larger Codesandbox
+was less performant in the browser. We also found that we preferred to work in our standard
+IDEs locally with our typical development configurations. Additionally, we were uncomfortable
+placing all the source in Codesandbox. It seemed too far removed from the rest of Instructure
+code currently living on GitHub, and we wanted to make sure we still had versioning.
+
+Speaking of GitHub, we discovered that GitHub Codesandbox integrations could offer compelling
+solutions to the issues above. With a little scripting we were able to come up with a workflow
+that would combine the best of both worlds. Here are some of the key ideas:
+* Prototypes with Instructure UI presets can easily be generated using the `instui create app` command
+* Prototypes can be edited and run locally in the developer's preferred IDE using their typical tools
+* Prototypes are committed to a single GitHub repository
+* When we want to share a prototype, we can simply open the GitHub source in Codesandbox (using the `open:sandbox` command mentioned above)
+* We can share the Codesandbox link with developers and designers
+* Any changes made in Codesandbox during the collaborative stages can be committed back to GitHub using Codesandbox
+
+Even though this workflow is WIP, we're excited about the possibilities. We hope you'll find some of
+this useful or at least mildly interesting. Also, if you have ideas or improvements reach out!
+We believe that better prototypes will mean better collaboration between engineering and product
+design, and ultimately better interfaces for our users.
+
 ### AppNav
 Many Instructure products appear inside the Canvas chrome &#151; a fancy way of saying that they appear to be part of Canvas to the user. [AppNav](#AppNav) provides a main navigation for these apps that works visually next to Canvas' global navigation. (Having said that, AppNav also works fine as a standalone nav outside of Canvas.)
 
