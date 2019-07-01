@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/instructure/instructure-ui/compare/v6.4.0...v6.5.0) (2019-07-01)
+
+
+### Features
+
+* **ui-icons:** add "code" icon ([b330455](https://github.com/instructure/instructure-ui/commit/b330455))
+* **ui-icons:** add text-direction rtl and ltr icons ([3b91145](https://github.com/instructure/instructure-ui/commit/3b91145))
+
+
+
+
+
 # [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
 
 

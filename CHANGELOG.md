@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/instructure/instructure-ui/compare/v6.4.0...v6.5.0) (2019-07-01)
+
+
+### Bug Fixes
+
+* add missing exports ([10044d4](https://github.com/instructure/instructure-ui/commit/10044d4))
+* **instui-config,ui-tabs:** deprecate focus prop and add shouldFocusOnRender ([6f26701](https://github.com/instructure/instructure-ui/commit/6f26701))
+* **ui-date-input:** align calendar icon ([32c9d9d](https://github.com/instructure/instructure-ui/commit/32c9d9d))
+* **ui-date-input,ui-text-input:** add assistiveText prop to DateInput ([20ed322](https://github.com/instructure/instructure-ui/commit/20ed322))
+* **ui-elements:** replace componentWillReceiveProps logic in TruncateText ([a7fa13d](https://github.com/instructure/instructure-ui/commit/a7fa13d))
+* **ui-number-input:** update NumberInput prop names ([7cad427](https://github.com/instructure/instructure-ui/commit/7cad427))
+* **ui-scripts:** Make fix flag work when no paths are passed to the lint command ([ed0cb15](https://github.com/instructure/instructure-ui/commit/ed0cb15))
+* **ui-select:** scroll logic and example updates ([fd91714](https://github.com/instructure/instructure-ui/commit/fd91714))
+* **ui-tabs:** tabbable content in a tab panel should be tabbable ([4753bd3](https://github.com/instructure/instructure-ui/commit/4753bd3))
+* **ui-tabs:** update canvas theme variables to new variants ([6472a51](https://github.com/instructure/instructure-ui/commit/6472a51))
+* **ui-test-utils:** remove window/document event listener cleanup ([9fb45b3](https://github.com/instructure/instructure-ui/commit/9fb45b3))
+* **ui-text-input:** set line height to prevent truncating descenders ([4cb3666](https://github.com/instructure/instructure-ui/commit/4cb3666))
+* **ui-text-input:** update TextInput prop names ([3aedab8](https://github.com/instructure/instructure-ui/commit/3aedab8))
+
+
+### Features
+
+* **instui-cli,template-app,ui-scripts:** add an instui starter app ([3f0f00e](https://github.com/instructure/instructure-ui/commit/3f0f00e))
+* **instui-cli,template-component,ui-scripts:** Generate component script ([8b8480e](https://github.com/instructure/instructure-ui/commit/8b8480e))
+* **instui-cli,template-package,ui-scripts:** move generate package script to instui-cli ([69f1613](https://github.com/instructure/instructure-ui/commit/69f1613))
+* **instui-config,ui-date-input:** dateInput change label prop to renderLabel ([a172999](https://github.com/instructure/instructure-ui/commit/a172999))
+* **ui-docs-client:** Add What's New page to docs ([64126d6](https://github.com/instructure/instructure-ui/commit/64126d6))
+* **ui-elements:** Added `wrap` prop to Text ([b17daba](https://github.com/instructure/instructure-ui/commit/b17daba))
+* **ui-icons:** add "code" icon ([b330455](https://github.com/instructure/instructure-ui/commit/b330455))
+* **ui-icons:** add text-direction rtl and ltr icons ([3b91145](https://github.com/instructure/instructure-ui/commit/3b91145))
+* **ui-navigation:** appNav component ([8f2d874](https://github.com/instructure/instructure-ui/commit/8f2d874))
+* **ui-scripts:** allow open sandbox script to function in monorepo without repo name or username ([919d966](https://github.com/instructure/instructure-ui/commit/919d966))
+* **ui-scripts:** expand codemod extensions to accept .jsx ([e217bb2](https://github.com/instructure/instructure-ui/commit/e217bb2))
+
+
+
+
+
 # [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
 
 

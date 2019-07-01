@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/instructure/instructure-ui/compare/v6.4.0...v6.5.0) (2019-07-01)
+
+
+### Features
+
+* **ui-elements:** Added `wrap` prop to Text ([b17daba](https://github.com/instructure/instructure-ui/commit/b17daba))
+
+
+
+
+
 # [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
 
 **Note:** Version bump only for package @instructure/ui-table

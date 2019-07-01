@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/instructure/instructure-ui/compare/v6.4.0...v6.5.0) (2019-07-01)
+
+
+### Bug Fixes
+
+* **ui-date-input:** align calendar icon ([32c9d9d](https://github.com/instructure/instructure-ui/commit/32c9d9d))
+* **ui-date-input,ui-text-input:** add assistiveText prop to DateInput ([20ed322](https://github.com/instructure/instructure-ui/commit/20ed322))
+* **ui-text-input:** update TextInput prop names ([3aedab8](https://github.com/instructure/instructure-ui/commit/3aedab8))
+
+
+### Features
+
+* **instui-config,ui-date-input:** dateInput change label prop to renderLabel ([a172999](https://github.com/instructure/instructure-ui/commit/a172999))
+
+
+
+
+
 # [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
 
 **Note:** Version bump only for package @instructure/ui-date-input

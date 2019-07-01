@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/instructure/instructure-ui/compare/v6.4.0...v6.5.0) (2019-07-01)
+
+
+### Features
+
+* **instui-cli,template-app,ui-scripts:** add an instui starter app ([3f0f00e](https://github.com/instructure/instructure-ui/commit/3f0f00e))
+* **ui-navigation:** appNav component ([8f2d874](https://github.com/instructure/instructure-ui/commit/8f2d874))
+
+
+
+
+
 # [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
 
 

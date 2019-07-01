@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/instructure/instructure-ui/compare/v6.4.0...v6.5.0) (2019-07-01)
+
+
+### Bug Fixes
+
+* **ui-scripts:** Make fix flag work when no paths are passed to the lint command ([ed0cb15](https://github.com/instructure/instructure-ui/commit/ed0cb15))
+
+
+### Features
+
+* **instui-cli,template-app,ui-scripts:** add an instui starter app ([3f0f00e](https://github.com/instructure/instructure-ui/commit/3f0f00e))
+* **instui-cli,template-component,ui-scripts:** Generate component script ([8b8480e](https://github.com/instructure/instructure-ui/commit/8b8480e))
+* **instui-cli,template-package,ui-scripts:** move generate package script to instui-cli ([69f1613](https://github.com/instructure/instructure-ui/commit/69f1613))
+* **ui-scripts:** allow open sandbox script to function in monorepo without repo name or username ([919d966](https://github.com/instructure/instructure-ui/commit/919d966))
+* **ui-scripts:** expand codemod extensions to accept .jsx ([e217bb2](https://github.com/instructure/instructure-ui/commit/e217bb2))
+
+
+
+
+
 # [6.4.0](https://github.com/instructure/instructure-ui/compare/v6.3.0...v6.4.0) (2019-06-13)
 
 
