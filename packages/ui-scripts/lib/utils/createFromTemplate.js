@@ -69,8 +69,6 @@ module.exports = (argv = {}) => {
     values = {}
   } = argv
 
-  const convertExtensions = { '.ejs': '.js' }
-
   // Replace any template vars in filenames/dirnames
   const replaceBasenameTemplateVars = ({ basename }) => {
     let newBasename = basename
@@ -103,9 +101,7 @@ module.exports = (argv = {}) => {
       const result = template(data)(values)
 
       const extension = path.extname(currentPath)
-      const newExtension = convertExtensions[extension]
-
-      const basename = newExtension ? `${path.basename(currentPath, extension)}${newExtension}` : path.basename(currentPath)
+      const basename = extension === '.ejs' ? path.basename(currentPath, extension) : path.basename(currentPath)
 
       fse.outputFileSync(
         path.join(path.dirname(destPath), replaceBasenameTemplateVars({ basename })),
