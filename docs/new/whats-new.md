@@ -1,6 +1,6 @@
 ---
 title: What's New?
-category: What's New?
+parent: index
 id: WhatsNew
 ---
 
