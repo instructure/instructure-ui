@@ -28,23 +28,18 @@ exports.command = 'open-sandbox'
 exports.desc = 'Open a GitHub project in codesandbox.'
 
 exports.builder = (yargs) => {
-  yargs.option('repo', {
-    alias: ['r', 'repository'],
-    type: 'string',
-    describe: 'The name of the Github repository.'
-  })
-
-  yargs.option('username', {
-    alias: 'u',
-    type: 'string',
-    describe: 'The username of the GitHub repository owner.'
-  })
-
   yargs.option('branch', {
     alias: 'b',
     type: 'string',
-    describe: 'The branch within the repository.',
+    describe: 'The branch within the GitHub repository.',
     default: 'master'
+  })
+
+  yargs.option('remote', {
+    alias: 'r',
+    type: 'string',
+    describe: 'The specified remote that will be used to find the GitHub repository.',
+    default: 'origin'
   })
 
   yargs.option('path', {
@@ -62,12 +57,11 @@ exports.builder = (yargs) => {
 
 exports.handler = (argv) => {
   const {
-    repo,
-    username,
     branch,
+    remote,
     path,
     scope
   } = argv
 
-  handleOpenSandbox({ repo, username, branch, path, scope })
+  handleOpenSandbox({ branch, remote, path, scope })
 }

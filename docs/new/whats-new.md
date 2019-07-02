@@ -19,7 +19,7 @@ For more detailed usage and documentation, hit up the `Quick Start` guide on the
 
 #### Integration with Codesandbox
 
-[Codesandbox](https://codesandbox.io) makes it easy to share and edit code directly in the browser. All starter apps ship with an `open:sandbox` command which allows you to open your project in codesandbox if it is stored in a public GitHub repository. Fill in the `repository` field in your package.json, push your latest changes, and then do
+[Codesandbox](https://codesandbox.io) makes it easy to share and edit code directly in the browser. All starter apps ship with an `open:sandbox` command which allows you to open your project in codesandbox if it is stored in a public GitHub repository. Push your latest changes, and then do:
 
 ```bash
 $ yarn open:sandbox

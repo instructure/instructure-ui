@@ -26,21 +26,15 @@ const path = require('path')
 const open = require('open')
 
 const { error, info, runCommandSync } = require('@instructure/command-utils')
-const { getPackageJSON } = require('@instructure/pkg-utils')
 
 const sandboxHost = require('@codesandbox/common/lib/utils/host').default
+const { sandboxUrl } = require('@codesandbox/common/lib/utils/url-generator')
 
-const {
-  gitHubRepoPattern,
-  gitHubToSandboxUrl,
-  sandboxUrl
-} = require('@codesandbox/common/lib/utils/url-generator')
+const parseGitUrl = require('git-url-parse')
 
-const parseGitUrl = require("git-url-parse")
-
-module.exports = ({ repo, username, branch, path: sourcePath, scope }) => {
+module.exports = ({ branch, remote, path: sourcePath, scope }) => {
   if (!scope) {
-    openSandbox({ repo, username, branch, sourcePath })
+    openSandbox({ branch, remote, sourcePath })
   } else {
     const result = runCommandSync('lerna', ['list', '--json'], [], { stdio: 'pipe' }).stdout
     const pkg = JSON.parse(result).find(({ name }) => name === scope)
@@ -50,58 +44,42 @@ module.exports = ({ repo, username, branch, path: sourcePath, scope }) => {
       process.exit(1)
     }
 
-    const { repository } = getPackageJSON()
     const { location } = pkg
 
     const appPath = path.relative(sourcePath, location)
 
-    let parsedUrl = {}
-    if (!repo || !username) {
-      try {
-        parsedUrl = parseGitUrl((repository || {}).url)
-      } catch {
-        error(`The following arguments were not provided:${!repo ? '\n  *  repo' : ''}${!username ? '\n  *  username' : ''}\nand the url specified in the \`repository\` field in the package.json does not exist or is invalid.`)
-        process.exit(1)
-      }
-    }
-
     openSandbox({
-      repo: repo || parsedUrl.name,
-      username: username || parsedUrl.owner,
       branch,
+      remote,
       sourcePath: appPath
     })
   }
 }
 
-const openSandbox = ({ repo, username, branch, sourcePath }) => {
-  let url = sandboxHost()
+const openSandbox = ({ branch, remote, sourcePath }) => {
+  const repository = runCommandSync('git', ['config', '--get', `remote.${remote}.url`], [], { stdio: 'pipe' }).stdout
 
-  if (repo && username) {
-    url += sandboxUrl({
-      git: {
-        username,
-        repo,
-        branch,
-        path: path.normalize(sourcePath)
-      }
-    })
-  } else {
-    const { repository } = getPackageJSON()
-    const repoUrl = (repository || {}).url
-
-    if (!repoUrl) {
-      error('In order to open with codesandbox both the GitHub repo name and username should be provided to this command, or the `url` in the `repository` field in this app\'s package.json should be specified.')
-      process.exit(1)
-    }
-
-    if (!gitHubRepoPattern.test(repoUrl)) {
-      error('Currently only projects hosted on GitHub can be opened with codesandbox.')
-      process.exit(1)
-    }
-
-    url += gitHubToSandboxUrl(repoUrl)
+  if (!repository) {
+    error('Could not find a git url corresponding to this project. In order to open with Codesandbox, your project should be hosted in a public GitHub repository.')
+    process.exit(1)
   }
+
+  let parsedUrl = {}
+  try {
+    parsedUrl = parseGitUrl(repository)
+  } catch {
+    error(`Could not retrieve the information necessary to open in Codesandbox from the following git repository url: ${repository}.`)
+    process.exit(1)
+  }
+
+  const url = `${sandboxHost()}${sandboxUrl({
+    git: {
+      username: parsedUrl.owner,
+      repo: parsedUrl.name,
+      branch,
+      path: path.normalize(sourcePath)
+    }
+  })}`
 
   info(`Opening sandbox at the following url:\n${url}\n\nIf you get an error accessing the url or don't see your changes:\n  *  Ensure that your GitHub repo exists and is set to public\n  *  Ensure you have pushed any local changes`)
 
