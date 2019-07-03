@@ -16,7 +16,9 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build",
-    "build:watch": "ui-build --watch"
+    "build:watch": "ui-build --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "devDependencies": {
@@ -49,7 +51,8 @@
     "gray-matter": "3.1.1",
     "marked": "^0.6.3",
     "prop-types": "^15",
-    "react-github-corner": "^2.1.0"
+    "react-github-corner": "^2.1.0",
+    "snyk": "^1.189.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16",
@@ -57,5 +60,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "snyk": true
 }
