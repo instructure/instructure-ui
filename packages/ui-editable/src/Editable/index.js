@@ -103,11 +103,9 @@ class Editable extends Component {
   componentDidMount () {
     if (this.props.mode === 'edit') {
       this.focusEditor()
-      document.addEventListener('keyup', this.handleEditESC)
     }
   }
   componentWillUnmount () {
-    document.removeEventListener('keyup', this.handleEditESC)
   }
 
   componentDidUpdate (prevProps) {
@@ -139,7 +137,6 @@ class Editable extends Component {
     if (this.props.mode !== 'view') {
       this.setState({showModeToggle: true})
       this.props.onChangeMode('view')
-      document.removeEventListener('keyup', this.handleEditESC)
     }
   }
 
@@ -148,7 +145,6 @@ class Editable extends Component {
       this.setState({showModeToggle: false})
       if (this.props.mode !== 'edit') {
         this.props.onChangeMode('edit')
-        document.addEventListener('keyup', this.handleEditESC)
       }
     }
   }
@@ -206,6 +202,7 @@ class Editable extends Component {
       onMouseOver: this.handleViewMouseOver,
       onMouseOut: this.handleViewMouseOut,
       onMouseDown: mode !== 'edit' ? this.handleViewClick : null,
+      onKeyUp: mode === 'edit' ? this.handleEditESC : null,
       readOnly,
       ...props
     }
