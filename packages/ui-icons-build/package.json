@@ -18,7 +18,7 @@
   "dependencies": {
     "@instructure/config-loader": "^6.5.0",
     "clean-sketch": "^1.0.1",
-    "del": "^4.1.1",
+    "del": "^5.0.0",
     "glob": "^7.1.4",
     "gulp": "^4",
     "gulp-changed": "^4.0.0",

@@ -26,7 +26,7 @@
     "@instructure/template-package": "^6.5.0",
     "@instructure/ui-codemods": "^6.5.0",
     "@instructure/ui-scripts": "^6.5.0",
-    "semver": "^6.1.2",
+    "semver": "^6.2.0",
     "yargs": "^13.2.4"
   },
   "publishConfig": {

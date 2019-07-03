@@ -32,7 +32,6 @@ const randomizeTestOrder = process.argv.some((arg) => arg === '--randomize')
 const baseWebpackConfig = require('@instructure/ui-webpack-config')
 
 const DEBUG = process.env.DEBUG
-const CI = process.env.CI
 const withCoverage = process.env.COVERAGE
 const IS_SCOPED = process.env.UI_TEST_SCOPE_PATHS
 

@@ -153,7 +153,7 @@ async function updateJiraIssues (issueKeys, jiraVersionName, config) {
       } catch (err) {
         error(`An error occured updating Jira issue ${issueKey}!`)
         error(err)
-        result = new Promise()
+        result = Promise.resolve()
       }
 
       return result

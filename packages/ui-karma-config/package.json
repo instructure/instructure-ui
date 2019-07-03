@@ -19,7 +19,7 @@
     "@instructure/config-loader": "^6.5.0",
     "@instructure/ui-webpack-config": "^6.5.0",
     "choma": "^1",
-    "globby": "^9.2.0",
+    "globby": "^10.0.0",
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",
