@@ -1,5 +1,5 @@
 ---
-category: Contributing/RFCs
+category: Getting Started/RFCs
 id: StepsRFC
 title: Steps
 ---

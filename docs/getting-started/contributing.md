@@ -1,10 +1,10 @@
 ---
-title: Getting Started
-category: Contributing
-order: 1
+title: Contributing
+category: Getting Started
+order: 2
 ---
 
-## Getting Started
+## Contributing
 
 ### Prerequisites and Installation
 

@@ -1,7 +1,7 @@
 ---
 title: Releases
-category: Contributing
-order: 6
+category: Getting Started
+order: 7
 ---
 
 ## Releases

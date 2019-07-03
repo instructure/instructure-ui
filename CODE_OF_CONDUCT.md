@@ -1,6 +1,6 @@
 ---
 title: Code of Conduct
-category: Contributing
+category: Getting Started
 ---
 
 ## Code of Conduct

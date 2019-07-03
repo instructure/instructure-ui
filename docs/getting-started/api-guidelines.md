@@ -1,6 +1,6 @@
 ---
 title: API Guidelines
-category: Contributing
+category: Getting Started
 order: 3
 ---
 

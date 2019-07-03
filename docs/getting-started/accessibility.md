@@ -1,7 +1,7 @@
 ---
 title: Accessibility
-category: Contributing
-order: 2
+category: Getting Started
+order: 4
 ---
 
 ## Accessibility
