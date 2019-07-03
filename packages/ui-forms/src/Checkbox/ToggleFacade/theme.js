@@ -30,6 +30,8 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
     borderWidth: borders.widthMedium,
     borderRadius: '4rem',
     marginEnd: spacing.small,
+    marginStart: spacing.small,
+    marginVertical: spacing.xSmall,
     checkedBackground: colors.backgroundSuccess,
     uncheckedIconColor: colors.textDark,
     checkedIconColor: colors.textSuccess,

@@ -95,7 +95,8 @@ class Checkbox extends Component {
     indeterminate: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['simple', 'toggle']),
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
+    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
   }
 
   static defaultProps = {
@@ -115,7 +116,8 @@ class Checkbox extends Component {
     defaultChecked: undefined,
     messages: undefined,
     id: undefined,
-    value: undefined
+    value: undefined,
+    labelPlacement: 'end'
   }
 
   constructor (props) {
@@ -217,13 +219,19 @@ class Checkbox extends Component {
       variant,
       label,
       readOnly,
-      indeterminate
+      indeterminate,
+      labelPlacement
     } = this.props
 
     const {
       hovered,
       focused
     } = this.state
+
+    error(
+      !(variant === 'simple' && labelPlacement !== 'end'),
+      `[Checkbox] The \`simple\` variant does not support the \`labelPlacement\` property.  Use the \`toggle\` variant instead.`
+    )
 
     if (variant === 'toggle') {
       return (
@@ -234,6 +242,7 @@ class Checkbox extends Component {
           focused={focused}
           checked={this.checked}
           readOnly={readOnly}
+          labelPlacement={labelPlacement}
         >
           {label}
         </ToggleFacade>

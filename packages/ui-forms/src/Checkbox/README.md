@@ -140,6 +140,23 @@ example: true
 </FormFieldGroup>
 ```
 
+To change the label placement for the toggle variety, use the labelPlacement prop.  The default
+placement is 'end'.
+
+*Note: the `simple` variant does not support the `labelPlacement`
+property.*
+
+```js
+---
+example: true
+---
+<FormFieldGroup description={<ScreenReaderContent>Toggle label examples</ScreenReaderContent>}>
+  <Checkbox label="Top" variant="toggle" labelPlacement="top" defaultChecked />
+  <Checkbox label="Start" variant="toggle" labelPlacement="start" />
+  <Checkbox label="End" variant="toggle" labelPlacement="end" defaultChecked />
+</FormFieldGroup>
+```
+
 You might want to hide the label text when using the toggle switch variant. Do that by wrapping
 the text in the [ScreenReaderContent](#ScreenReaderContent) component.
 

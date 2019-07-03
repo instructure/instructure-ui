@@ -45,7 +45,8 @@ class ToggleFacade extends Component {
     disabled: PropTypes.bool,
     readOnly: PropTypes.bool,
     focused: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
   }
 
   static defaultProps = {
@@ -53,7 +54,8 @@ class ToggleFacade extends Component {
     focused: false,
     size: 'medium',
     disabled: false,
-    readOnly: false
+    readOnly: false,
+    labelPlacement: 'end'
   }
 
   renderIcon () {
@@ -68,12 +70,33 @@ class ToggleFacade extends Component {
     }
   }
 
+  renderLabel () {
+    const {
+      children,
+      labelPlacement
+    } = this.props
+
+    const classes = {
+      [styles.label]: true,
+      [styles.top]: labelPlacement === 'top',
+      [styles.start]: labelPlacement === 'start',
+      [styles.end]: labelPlacement === 'end'
+    }
+
+    return (
+      <span className={classnames(classes)}>
+        {children}
+      </span>
+    )
+  }
+
   render () {
     const {
       size,
       checked,
       disabled,
-      focused
+      focused,
+      labelPlacement
     } = this.props
 
     const classes = {
@@ -81,11 +104,22 @@ class ToggleFacade extends Component {
       [styles.checked]: checked,
       [styles.disabled]: disabled,
       [styles.focused]: focused,
+      [styles.top]: labelPlacement === 'top',
+      [styles.start]: labelPlacement === 'start',
+      [styles.end]: labelPlacement === 'end',
       [styles[size]]: true
     }
 
+    let rootClasses = {
+      [styles.root]: true
+    }
+    if (labelPlacement === 'top') {
+      rootClasses[styles.top] = true
+    }
+
     return (
-      <span className={styles.root}>
+      <span className={classnames(rootClasses)}>
+        {(labelPlacement === 'top' || labelPlacement === 'start') && this.renderLabel()}
         <span className={classnames(classes)} aria-hidden="true">
           <span className={styles.icon}>
             <span className={styles.iconToggle}>
@@ -93,9 +127,7 @@ class ToggleFacade extends Component {
             </span>
           </span>
         </span>
-        <span className={styles.label}>
-          {this.props.children}
-        </span>
+        {labelPlacement === 'end' && this.renderLabel()}
       </span>
     )
   }

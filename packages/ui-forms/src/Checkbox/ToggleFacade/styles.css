@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.root.top {
+  display: block;
+}
+
 .root .facade {
   &.checked {
     background: var(--checkedBackground);
@@ -35,6 +39,20 @@
   }
 }
 
+.facade.start {
+  margin-inline-end: 0;
+  margin-inline-start: var(--marginStart);
+}
+
+.facade.end {
+  margin-inline-end: var(--marginEnd);
+  margin-inline-start: 0;
+}
+
+.facade.top {
+  margin-top: var(--marginVertical);
+}
+
 .facade {
   background: var(--background);
   border-color: var(--borderColor);
@@ -43,8 +61,6 @@
   user-select: none;
   position: relative;
   border-radius: 3rem;
-  margin-inline-end: var(--marginEnd);
-  margin-inline-start: 0;
   vertical-align: middle;
   box-shadow: inset 0 0 0 var(--borderWidth) var(--borderColor);
 
@@ -112,6 +128,14 @@
   font-family: var(--labelFontFamily);
   font-weight: var(--labelFontWeight);
   line-height: var(--labelLineHeight);
+}
+
+.label.start {
+  text-align: end;
+}
+
+.label.top {
+  display: block;
 }
 
 .small {
