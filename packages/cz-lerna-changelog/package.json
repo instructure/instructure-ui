@@ -12,7 +12,9 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint:fix": "ui-test --lint --fix",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "dependencies": {
@@ -21,12 +23,14 @@
     "chalk": "^2.4.2",
     "cz-customizable": "^6.2.0",
     "inquirer": "^6.4.1",
-    "inquirer-autocomplete-prompt": "^1.0.1"
+    "inquirer-autocomplete-prompt": "^1.0.1",
+    "snyk": "^1.189.0"
   },
   "peerDependencies": {
     "lerna": "^3"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "snyk": true
 }
