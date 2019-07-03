@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themeable",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,20 +20,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.5.0",
-    "@instructure/ui-test-utils": "^6.5.0",
-    "@instructure/ui-testable": "^6.5.0"
+    "@instructure/ui-babel-preset": "^6.6.0",
+    "@instructure/ui-test-utils": "^6.6.0",
+    "@instructure/ui-testable": "^6.6.0"
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/console": "^6.5.0",
-    "@instructure/ui-color-utils": "^6.5.0",
-    "@instructure/ui-decorator": "^6.5.0",
-    "@instructure/ui-dom-utils": "^6.5.0",
-    "@instructure/ui-react-utils": "^6.5.0",
-    "@instructure/ui-stylesheet": "^6.5.0",
-    "@instructure/ui-utils": "^6.5.0",
-    "@instructure/uid": "^6.5.0",
+    "@instructure/console": "^6.6.0",
+    "@instructure/ui-color-utils": "^6.6.0",
+    "@instructure/ui-decorator": "^6.6.0",
+    "@instructure/ui-dom-utils": "^6.6.0",
+    "@instructure/ui-react-utils": "^6.6.0",
+    "@instructure/ui-stylesheet": "^6.6.0",
+    "@instructure/ui-utils": "^6.6.0",
+    "@instructure/uid": "^6.6.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

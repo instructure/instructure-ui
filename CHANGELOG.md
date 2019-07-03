@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.6.0](https://github.com/instructure/instructure-ui/compare/v6.5.0...v6.6.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* **template-app,template-component,template-package:** remove npmignore files from template packages ([e0b7136](https://github.com/instructure/instructure-ui/commit/e0b7136))
+* **template-app,template-component,template-package,ui-scripts:** rename templates for npm ([1749abd](https://github.com/instructure/instructure-ui/commit/1749abd))
+
+
+### Features
+
+* **ui-scripts:** retrieve GitHub url from config instead of package.json ([c62b01e](https://github.com/instructure/instructure-ui/commit/c62b01e))
+
+
+
+
+
 # [6.5.0](https://github.com/instructure/instructure-ui/compare/v6.4.0...v6.5.0) (2019-07-01)
 
 
