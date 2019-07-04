@@ -1,0 +1,339 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-AXIOS-174505:
+    - '@instructure/ui-scripts > storybook-chromatic > @chromaui/localtunnel > axios':
+        patched: '2019-07-04T08:01:38.906Z'
+  SNYK-JS-LODASH-450202:
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-elements > @instructure/ui-overlays > @instructure/ui-buttons > @instructure/ui-layout > @instructure/ui-motion > @instructure/ui-themeable > @instructure/ui-react-utils > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/babel-plugin-themeable-styles > postcss-reporter > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > depcheck > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > commitizen > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > karma-coverage > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > karma > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > eslint > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > eslint-plugin-notice > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > eslint-plugin-import > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/babel-plugin-themeable-styles > css-modules-require-hook > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > @babel/core > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > yargs-interactive > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > eslint > table > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > stylelint > table > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > react-dev-utils > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > gh-pages > async > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @instructure/cz-lerna-changelog > cz-customizable > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > eslint > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > eslint-plugin-instructure-ui > eslint-plugin-import > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @instructure/cz-lerna-changelog > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > depcheck > @babel/traverse > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > babel-eslint > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > @instructure/babel-plugin-themeable-styles > css-modules-require-hook > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/babel-plugin-themeable-styles > @instructure/ui-postcss-config > postcss-reporter > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > webpack-dev-server > http-proxy-middleware > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > stylelint > postcss-reporter > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > mocha > yargs-unparser > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > commitizen > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @instructure/command-utils > concurrently > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > @babel/plugin-transform-classes > @babel/helper-function-name > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/core > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/bootstrap > @lerna/command > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > async > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > react-dev-utils > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > table > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > karma > log4js > streamroller > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @codesandbox/common > styled-components > babel-plugin-styled-components > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @instructure/cz-lerna-changelog > @semantic-release/commit-analyzer > conventional-commits-parser > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @instructure/cz-lerna-changelog > cz-customizable > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > babel-preset-minify > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > html-webpack-plugin > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jira-client > request-promise > request-promise-core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @codesandbox/common > styled-components > @babel/traverse > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > nyc > istanbul-lib-instrument > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @instructure/pkg-utils > @instructure/command-utils > concurrently > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > depcheck > @babel/traverse > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > babel-eslint > @babel/traverse > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/babel-plugin-themeable-styles > postcss-reporter > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > postcss-reporter > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/babel-plugin-themeable-styles > css-modules-require-hook > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > @babel/preset-env > @babel/plugin-transform-block-scoping > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/preset-env > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > nyc > istanbul-lib-instrument > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @codesandbox/common > styled-components > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > @instructure/babel-plugin-themeable-styles > css-modules-require-hook > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/traverse > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-stylelint-config > stylelint > postcss-jsx > @babel/core > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > babel-eslint > @babel/traverse > @babel/generator > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > depcheck > @babel/traverse > @babel/generator > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-babel-preset > @instructure/babel-plugin-themeable-styles > @instructure/ui-postcss-config > postcss-reporter > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/preset-env > @babel/plugin-transform-block-scoping > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/version > @lerna/conventional-commits > conventional-changelog-core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > @instructure/babel-plugin-themeable-styles > @instructure/pkg-utils > @instructure/command-utils > concurrently > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > eslint-plugin-instructure-ui > @instructure/pkg-utils > @instructure/command-utils > concurrently > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > react-docgen > @babel/core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/publish > @lerna/version > @lerna/command > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > storybook-chromatic > jsdom > request-promise-native > request-promise-core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > babel-preset-minify > babel-plugin-minify-dead-code-elimination > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > @storybook/ui > react-resize-detector > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > stylelint > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > react-dev-utils > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > karma > log4js > streamroller > async > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > react-docgen > async > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > async > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > nyc > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-babel-preset > @babel/preset-env > @babel/plugin-transform-modules-commonjs > @babel/helper-module-transforms > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @codesandbox/common > styled-components > @babel/traverse > @babel/helper-function-name > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/preset-env > @babel/plugin-transform-modules-amd > @babel/helper-module-transforms > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/traverse > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/core > @babel/traverse > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-stylelint-config > stylelint > postcss-jsx > @babel/core > @babel/traverse > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-eslint-config > babel-eslint > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > react-docgen > @babel/core > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > depcheck > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/changed > @lerna/version > @lerna/conventional-commits > conventional-changelog-core > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @codesandbox/common > styled-components > babel-plugin-styled-components > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/babel-plugin-themeable-styles > @instructure/pkg-utils > @instructure/command-utils > concurrently > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > @instructure/babel-plugin-themeable-styles > @instructure/ui-postcss-config > postcss-reporter > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/changed > @lerna/version > @lerna/prompt > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/version > @lerna/conventional-commits > conventional-recommended-bump > conventional-commits-parser > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/version > @lerna/conventional-commits > conventional-changelog-core > conventional-commits-parser > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/version > @lerna/conventional-commits > conventional-changelog-core > conventional-changelog-writer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > @instructure/babel-plugin-themeable-styles > @instructure/pkg-utils > @instructure/command-utils > concurrently > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-a11y > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/changed > @lerna/version > @lerna/conventional-commits > conventional-changelog-core > conventional-commits-parser > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/publish > @lerna/version > @lerna/conventional-commits > conventional-recommended-bump > conventional-commits-parser > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/publish > @lerna/npm-dist-tag > @lerna/otplease > @lerna/prompt > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/preset-env > @babel/plugin-transform-async-to-generator > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/preset-env > @babel/plugin-transform-modules-umd > @babel/helper-module-transforms > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > react-docgen > @babel/core > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > @babel/helpers > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/helpers > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > @babel/generator > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @codesandbox/common > styled-components > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > nyc > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/publish > @lerna/version > @lerna/conventional-commits > conventional-changelog-core > conventional-changelog-writer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-a11y > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/preset-env > @babel/plugin-transform-parameters > @babel/helper-call-delegate > @babel/traverse > @babel/generator > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/preset-env > @babel/plugin-transform-parameters > @babel/helper-call-delegate > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > react-docgen > @babel/core > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/helpers > @babel/traverse > @babel/generator > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-stylelint-config > stylelint > postcss-jsx > @babel/core > @babel/helpers > @babel/traverse > @babel/generator > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > @storybook/theming > @emotion/styled > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-elements > @instructure/ui-themeable > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-babel-preset > babel-plugin-istanbul > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > react-docgen > @babel/core > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/preset-env > @babel/plugin-transform-parameters > @babel/helper-call-delegate > @babel/traverse > @babel/helper-function-name > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-stylelint-config > stylelint > postcss-jsx > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > @storybook/theming > @emotion/core > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-elements > @instructure/ui-layout > @instructure/ui-a11y > @instructure/ui-react-utils > @instructure/ui-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/plugin-proposal-decorators > @babel/helper-create-class-features-plugin > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > jscodeshift > @babel/preset-env > @babel/plugin-proposal-async-generator-functions > @babel/helper-remap-async-to-generator > @babel/helper-wrap-function > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > react-docgen > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-plugin-react-docgen > react-docgen > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > stylelint > postcss-jsx > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > @storybook/ui > @storybook/theming > @emotion/core > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-elements > @instructure/ui-focusable > @instructure/ui-layout > @instructure/ui-themeable > @instructure/ui-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > babel-preset-react-app > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > @storybook/addons > @storybook/api > @storybook/theming > @emotion/core > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-elements > @instructure/ui-overlays > @instructure/ui-layout > @instructure/ui-a11y > @instructure/ui-themeable > @instructure/ui-react-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > @storybook/react > @storybook/core > @storybook/ui > @storybook/addons > @storybook/api > @storybook/theming > @emotion/core > @emotion/css > babel-plugin-emotion > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-elements > @instructure/ui-overlays > @instructure/ui-focusable > @instructure/ui-layout > @instructure/ui-a11y > @instructure/ui-themeable > @instructure/ui-react-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-karma-config > @instructure/ui-webpack-config > @instructure/ui-component-examples > @instructure/ui-elements > @instructure/ui-overlays > @instructure/ui-focusable > @instructure/ui-layout > @instructure/ui-portal > @instructure/ui-i18n > @instructure/ui-react-utils > @instructure/ui-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
+    - '@instructure/ui-scripts > lerna > @lerna/version > @lerna/prompt > inquirer > lodash':
+        patched: '2019-07-04T08:01:38.906Z'
