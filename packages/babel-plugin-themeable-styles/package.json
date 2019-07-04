@@ -12,7 +12,9 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint:fix": "ui-test --lint --fix",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "dependencies": {
@@ -25,7 +27,8 @@
     "loader-utils": "^1.2.3",
     "postcss": "^7",
     "postcss-modules": "^1.4.1",
-    "postcss-reporter": "^6.0.1"
+    "postcss-reporter": "^6.0.1",
+    "snyk": "^1.189.0"
   },
   "peerDependencies": {
     "@babel/core": "^7",
@@ -33,5 +36,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "snyk": true
 }

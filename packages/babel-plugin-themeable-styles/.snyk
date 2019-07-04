@@ -1,0 +1,16 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - postcss-reporter > lodash:
+        patched: '2019-07-04T08:06:56.720Z'
+    - css-modules-require-hook > lodash:
+        patched: '2019-07-04T08:06:56.720Z'
+    - '@babel/template > @babel/types > lodash':
+        patched: '2019-07-04T08:06:56.720Z'
+    - '@instructure/ui-postcss-config > postcss-reporter > lodash':
+        patched: '2019-07-04T08:06:56.720Z'
+    - '@instructure/pkg-utils > @instructure/command-utils > concurrently > lodash':
+        patched: '2019-07-04T08:06:56.720Z'
