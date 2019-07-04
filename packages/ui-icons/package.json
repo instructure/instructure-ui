@@ -15,7 +15,9 @@
     "clean": "gulp clean && ui-build --clean",
     "build": "gulp && ui-build __build__ --copy-files",
     "export": "gulp clean && gulp export && gulp",
-    "build:watch": "gulp watch && ui-build __build__ --watch --copy-files"
+    "build:watch": "gulp watch && ui-build __build__ --watch --copy-files",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "devDependencies": {
@@ -26,7 +28,8 @@
   "dependencies": {
     "@babel/runtime": "^7",
     "@instructure/ui-svg-images": "^6.6.0",
-    "prop-types": "^15"
+    "prop-types": "^15",
+    "snyk": "^1.189.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"
@@ -34,5 +37,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "snyk": true
 }
