@@ -13,7 +13,9 @@
   "scripts": {
     "test:jest": "jest",
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint:fix": "ui-test --lint --fix",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "devDependencies": {
@@ -21,9 +23,11 @@
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
-    "jscodeshift": "^0.6.4"
+    "jscodeshift": "^0.6.4",
+    "snyk": "^1.189.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "snyk": true
 }
