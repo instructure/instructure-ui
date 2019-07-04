@@ -12,7 +12,9 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint:fix": "ui-test --lint --fix",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "dependencies": {
@@ -37,9 +39,11 @@
     "through2": "^3.0.0",
     "vinyl": "^2.2.0",
     "vinyl-paths": "^3.0.0",
-    "which": "^1.3.1"
+    "which": "^1.3.1",
+    "snyk": "^1.189.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "snyk": true
 }
