@@ -1,0 +1,12 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - '@instructure/ui-react-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T06:21:26.749Z'
+    - '@instructure/ui-react-utils > @instructure/ui-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T06:21:26.749Z'
+    - '@instructure/ui-react-utils > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T06:21:26.749Z'
