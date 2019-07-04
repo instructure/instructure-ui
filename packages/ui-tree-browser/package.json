@@ -16,7 +16,9 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build",
-    "build:watch": "ui-build --watch"
+    "build:watch": "ui-build --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "devDependencies": {
@@ -34,7 +36,8 @@
     "@instructure/ui-utils": "^6.6.0",
     "classnames": "^2",
     "keycode": "^2",
-    "prop-types": "^15"
+    "prop-types": "^15",
+    "snyk": "^1.189.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"
@@ -42,5 +45,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "snyk": true
 }

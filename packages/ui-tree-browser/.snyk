@@ -1,0 +1,24 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - '@instructure/ui-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-react-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-themeable > @instructure/ui-react-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-elements > @instructure/ui-a11y > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-elements > @instructure/ui-layout > @instructure/ui-motion > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-elements > @instructure/ui-layout > @instructure/ui-a11y > @instructure/ui-react-utils > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-elements > @instructure/ui-overlays > @instructure/ui-buttons > @instructure/ui-layout > @instructure/ui-motion > @instructure/ui-react-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-annotate-as-pure > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-elements > @instructure/ui-overlays > @instructure/ui-buttons > @instructure/ui-a11y > @instructure/ui-themeable > @instructure/ui-react-utils > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
+    - '@instructure/ui-elements > @instructure/ui-overlays > @instructure/ui-focusable > @instructure/ui-layout > @instructure/ui-portal > @instructure/ui-i18n > @instructure/ui-react-utils > @instructure/ui-utils > @instructure/ui-dom-utils > @instructure/console > @babel/helper-module-imports > @babel/types > lodash':
+        patched: '2019-07-04T07:41:46.894Z'
