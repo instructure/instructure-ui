@@ -16,7 +16,9 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build",
-    "build:watch": "ui-build --watch"
+    "build:watch": "ui-build --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "license": "MIT",
   "devDependencies": {
@@ -24,10 +26,12 @@
   },
   "dependencies": {
     "@instructure/canvas-high-contrast-theme": "^6.6.0",
-    "@instructure/canvas-theme": "^6.6.0"
+    "@instructure/canvas-theme": "^6.6.0",
+    "snyk": "^1.189.0"
   },
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "snyk": true
 }
