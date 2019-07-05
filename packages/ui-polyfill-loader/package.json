@@ -5,7 +5,9 @@
   "main": "./index.js",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint:fix": "ui-test --lint --fix",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -19,9 +21,11 @@
     "@instructure/ui-babel-preset": "^6.6.0",
     "core-js-builder": "^3.1.4",
     "loader-utils": "^1.2.3",
-    "webpack": "^4"
+    "webpack": "^4",
+    "snyk": "^1.192.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "snyk": true
 }
