@@ -447,8 +447,8 @@ describe('<Menu />', async () => {
 
       await trigger.click()
 
-      let subMenu = await MenuLocator.find(':label(Flyout)')
-      let popover = await subMenu.findPopoverContent()
+      const subMenu = await MenuLocator.find(':label(Flyout)')
+      const popover = await subMenu.findPopoverContent()
 
       await wait (() => {
         expect(popover.containsFocus()).to.be.true()
@@ -460,10 +460,8 @@ describe('<Menu />', async () => {
         button: 0
       })
 
-      subMenu = await MenuLocator.find(':label(Flyout)')
-      popover = await subMenu.findPopoverContent({ expectEmpty: true })
-
-      expect(popover).to.not.exist()
+      expect(await (await MenuLocator.find(':label(Flyout)')).findPopoverContent({ expectEmpty: true }))
+        .to.not.exist()
     })
 
     it('it should close the sub-menu popover on left press', async () => {
@@ -483,7 +481,7 @@ describe('<Menu />', async () => {
       await trigger.click()
 
       const subMenu = await MenuLocator.find(':label(Flyout)')
-      let popover = await subMenu.findPopoverContent()
+      const popover = await subMenu.findPopoverContent()
 
       await wait (() => {
         expect(popover.containsFocus()).to.be.true()
@@ -491,9 +489,8 @@ describe('<Menu />', async () => {
 
       await popover.keyDown('left')
 
-      popover = await subMenu.findPopoverContent({ expectEmpty: true })
-
-      expect(popover).to.not.exist()
+      expect(await subMenu.findPopoverContent({ expectEmpty: true }))
+        .to.not.exist()
     })
 
     it('it should call onDismiss on tab press', async () => {

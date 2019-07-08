@@ -134,32 +134,27 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       const rootCollection = items[0]
 
       await rootCollection.click()
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
 
       const subCollection = await tree.findItem(':label(Sub Root 1)')
 
       await subCollection.click()
 
-      items = await tree.findAllItems()
-      expect(items.length).to.equal(5)
+      expect((await tree.findAllItems()).length).to.equal(5)
 
       await rootCollection.click()
 
-      items = await tree.findAllItems()
-      expect(items.length).to.equal(1)
+      expect((await tree.findAllItems()).length).to.equal(1)
 
       await rootCollection.click()
 
-      items = await tree.findAllItems()
-      expect(items.length).to.equal(5)
+      expect((await tree.findAllItems()).length).to.equal(5)
     })
 
     it('should not update expanded on click when set as explicit prop', async () => {
@@ -173,22 +168,17 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(4)
 
       await items[0].click()
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
 
       await (await tree.findItem(':label(Sub Root 1)')).click()
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
 
       expect(await tree.findItem(':label(Nested Sub Collection)', { expectEmpty: true }))
         .to.not.exist()
@@ -623,7 +613,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(1)
 
@@ -635,9 +625,8 @@ describe('<TreeBrowser />', async () => {
 
       await items[0].keyDown('right')
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length)
+        .to.equal(4)
     })
 
     it('should move focus down when right arrow is pressed on expanded collection', async () => {
@@ -651,7 +640,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(4)
 
@@ -667,9 +656,7 @@ describe('<TreeBrowser />', async () => {
         expect(items[1].focused()).to.be.true()
       })
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
     })
 
     it('should collapse expanded collection when left arrow is pressed', async () => {
@@ -683,7 +670,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(4)
 
@@ -694,9 +681,7 @@ describe('<TreeBrowser />', async () => {
         expect(items[0].focused()).to.be.true()
       })
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(1)
+      expect((await tree.findAllItems()).length).to.equal(1)
     })
 
     it('should move focus up when left arrow is pressed on collapsed collection', async () => {
@@ -710,7 +695,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(4)
 
@@ -724,9 +709,8 @@ describe('<TreeBrowser />', async () => {
         expect(firstItem.focused()).to.be.true()
       })
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length)
+        .to.equal(4)
     })
 
     it('should select the node on enter or space if selectionType is not "none"', async () => {
@@ -772,7 +756,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(1)
 
@@ -782,9 +766,7 @@ describe('<TreeBrowser />', async () => {
 
       await firstItem.keyDown('enter')
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(1)
+      expect((await tree.findAllItems()).length).to.equal(1)
     })
 
     it('should move to the top node without expanding/collapsing anything when home is pressed', async () => {
@@ -798,7 +780,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(4)
 
@@ -810,9 +792,7 @@ describe('<TreeBrowser />', async () => {
 
       expect(firstItem.focused()).to.be.true()
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
     })
 
     it('should move to the bottom node without expanding/collapsing anything when end is pressed', async () => {
@@ -826,7 +806,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      let items = await tree.findAllItems()
+      const items = await tree.findAllItems()
 
       const firstItem = items[0]
       const lastItem = items[3]
@@ -837,9 +817,7 @@ describe('<TreeBrowser />', async () => {
 
       expect(lastItem.focused()).to.be.true()
 
-      items = await tree.findAllItems()
-
-      expect(items.length).to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
     })
   })
 })

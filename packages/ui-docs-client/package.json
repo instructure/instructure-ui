@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@babel/standalone": "^7.4.5",
+    "@babel/standalone": "^7.5.4",
     "@instructure/ui-a11y": "^6.6.0",
     "@instructure/ui-buttons": "^6.6.0",
     "@instructure/ui-code-editor": "^6.6.0",
@@ -47,7 +47,7 @@
     "@instructure/ui-utils": "^6.6.0",
     "classnames": "^2",
     "gray-matter": "3.1.1",
-    "marked": "^0.6.3",
+    "marked": "^0.7.0",
     "prop-types": "^15",
     "react-github-corner": "^2.1.0"
   },

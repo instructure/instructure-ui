@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "axe-core": "^3.2.2"
+    "axe-core": "^3.3.0"
   },
   "publishConfig": {
     "access": "public"

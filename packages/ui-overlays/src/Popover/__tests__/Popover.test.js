@@ -229,31 +229,31 @@ describe('<Popover />', async () => {
 
       await trigger.focus()
 
-      let content = await popover.findContent()
+      const originalContent = await popover.findContent()
 
       await wait(() => {
-        expect(content.containsFocus()).to.be.false()
+        expect(originalContent.containsFocus()).to.be.false()
         expect(trigger.focused()).to.be.true()
       })
 
-      expect(content).to.exist()
+      expect(originalContent).to.exist()
 
       await trigger.keyDown('tab')
 
-      content = await popover.findContent()
+      const focusedContent = await popover.findContent()
 
       await wait(() => {
         expect(trigger.focused()).to.be.false()
-        expect(content.containsFocus()).to.be.true()
+        expect(focusedContent.containsFocus()).to.be.true()
       })
 
-      const button = await content.find('button')
+      const button = await focusedContent.find('button')
 
       await button.keyDown('tab')
 
-      content = await popover.findContent({ expectEmpty: true })
+      const blurredContent = await popover.findContent({ expectEmpty: true })
 
-      expect(content).to.not.exist()
+      expect(blurredContent).to.not.exist()
     })
   })
 })

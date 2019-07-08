@@ -462,6 +462,7 @@ class SelectField extends Component {
 
   handleKeyDown = event => {
     const key = keycode.names[event.keyCode]
+    // eslint-disable-next-line no-prototype-builtins
     if (this.keyMap.hasOwnProperty(key)) {
       if ((key !== 'enter' || this.expanded) && key !== 'space') {
         event.preventDefault()

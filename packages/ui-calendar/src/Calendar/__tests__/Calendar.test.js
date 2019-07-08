@@ -92,11 +92,11 @@ describe('<Calendar />', async () => {
     const calendar = await CalendarLocator.find()
     expect(calendar).to.exist()
 
-    let headers = await calendar.findAll('th')
-    expect(headers.length).to.equal(7)
+    const originalHeaders = await calendar.findAll('th')
+    expect(originalHeaders.length).to.equal(7)
 
     weekdayLabels.forEach((label, i) => {
-      expect(label).to.equal(headers[i].getTextContent())
+      expect(label).to.equal(originalHeaders[i].getTextContent())
     })
 
     const functionalWeekdayLabels = [
@@ -113,10 +113,10 @@ describe('<Calendar />', async () => {
       renderWeekdayLabels: functionalWeekdayLabels
     })
 
-    headers = await calendar.findAll('th')
+    const updatedHeaders = await calendar.findAll('th')
 
     functionalWeekdayLabels.forEach((functionalLabel, i) => {
-      expect(functionalLabel()).to.equal(headers[i].getTextContent())
+      expect(functionalLabel()).to.equal(updatedHeaders[i].getTextContent())
     })
   })
 
