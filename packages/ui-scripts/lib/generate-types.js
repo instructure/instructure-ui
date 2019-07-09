@@ -22,16 +22,31 @@
  * SOFTWARE.
  */
 
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
+const react2dts = require('react-to-typescript-definitions')
+const fs = require('fs').promises
+const globby = require('globby')
 
-process.exit(runCommandsConcurrently({
-  clean: getCommand('rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache',
-    '.cache',
-    'types'
-  ])
-}).status)
+async function run() {
+  const paths = await globby(['**/src/*/index.js'])
+  const tsDefinitions = paths.map(filePath =>  react2dts.generateFromFile(null, filePath)
+  )
+
+  try {
+    await fs.mkdir('./types')
+  } catch (e) {
+    if (e.code !== 'EEXIST') {
+      throw e
+    }
+  }
+
+  const joinedDefinitions = tsDefinitions
+                            .join('\n')
+                            // Get rid of all but the first import of React
+                            .replace(/(?!^)import \* as React from 'react';/g, '')
+                            // react2dts puts an default export on everything, remove it.
+                            .replace(/export default class/g, 'export class')
+
+  await fs.writeFile(`./types/index.d.ts`, joinedDefinitions)
+}
+
+run()

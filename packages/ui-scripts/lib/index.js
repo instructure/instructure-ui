@@ -48,7 +48,8 @@ const commands = [
   '--server',
   '--tag',
   '--deprecate',
-  '--vrt'
+  '--vrt',
+  '--types'
 ]
 
 function listCommands () {
@@ -116,6 +117,8 @@ if (process.argv.includes('open-sandbox')) {
   require('./tag')
 } else if (process.argv.includes('--deprecate')) {
   require('./deprecate')
+} else if (process.argv.includes('--types')) {
+  require('./generate-types')
 } else {
   error('[ui-scripts]: Invalid command!')
   listCommands()
