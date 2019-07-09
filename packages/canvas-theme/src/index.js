@@ -38,8 +38,8 @@ import { stacking } from './stacking'
 const key = 'canvas'
 
 const variables = {
-  borders,
   colors,
+  borders,
   transitions,
   typography,
   spacing,
@@ -79,8 +79,8 @@ const theme = ThemeRegistry.registerTheme({
 export default theme
 export {
   functionalColors,
-  borders,
   colors,
+  borders,
   transitions,
   typography,
   spacing,

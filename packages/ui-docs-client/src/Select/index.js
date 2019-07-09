@@ -31,6 +31,7 @@ class Select extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     id: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
@@ -41,6 +42,7 @@ class Select extends Component {
     id: undefined,
     value: undefined,
     onChange: (event, data) => {},
+    renderBeforeInput: null,
     children: null
   }
 
@@ -81,6 +83,7 @@ class Select extends Component {
       id,
       name,
       renderLabel,
+      renderBeforeInput,
       onChange,
       ...passthroughProps
     } = this.props
@@ -98,6 +101,7 @@ class Select extends Component {
         id={id}
         name={name}
         renderLabel={renderLabel}
+        renderBeforeInput={renderBeforeInput}
         inputValue={inputValue}
         isShowingOptions={isShowing}
         onRequestShowOptions={(e) => {
@@ -130,7 +134,7 @@ class Select extends Component {
         }}
       >
         {this._options.map(option => {
-          const { value, label, ...rest } = option
+          const { value, label, icon, ...rest } = option
           return (
             <UISelect.Option
               {...rest}
@@ -138,6 +142,7 @@ class Select extends Component {
               key={value}
               isHighlighted={highlightedValue === value}
               isSelected={selectedValue === value}
+              renderBeforeLabel={icon}
             >
               { label }
             </UISelect.Option>

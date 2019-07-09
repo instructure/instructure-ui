@@ -41,8 +41,8 @@ import {
 const key = 'instructure'
 
 const variables = {
-  borders,
   colors,
+  borders,
   transitions,
   typography,
   spacing,
@@ -60,8 +60,8 @@ const theme = ThemeRegistry.registerTheme({
 
 export default theme
 export {
-  borders,
   colors,
+  borders,
   transitions,
   typography,
   spacing,

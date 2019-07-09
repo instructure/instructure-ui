@@ -333,7 +333,7 @@ class App extends Component {
     } else if (theme) {
       return this.renderTheme(key)
     } else if (doc) {
-      return this.renderDocument(doc)
+      return this.renderDocument(doc, theme)
     } else {
       return this.renderError(key)
     }

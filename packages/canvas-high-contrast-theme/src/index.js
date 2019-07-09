@@ -41,6 +41,7 @@ import {
 const key = 'canvas-high-contrast'
 
 const variables = {
+  colors,
   borders,
   transitions,
   typography,
@@ -49,8 +50,7 @@ const variables = {
   media,
   breakpoints,
   shadows,
-  stacking,
-  colors
+  stacking
 }
 
 const theme = ThemeRegistry.registerTheme({
@@ -61,6 +61,7 @@ const theme = ThemeRegistry.registerTheme({
 
 export default theme
 export {
+  colors,
   borders,
   transitions,
   typography,
@@ -70,7 +71,6 @@ export {
   breakpoints,
   shadows,
   stacking,
-  colors,
   theme,
   key
 }

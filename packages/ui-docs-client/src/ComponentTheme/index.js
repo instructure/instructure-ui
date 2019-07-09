@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
 import { Table } from '@instructure/ui-table'
+import { View } from '@instructure/ui-view'
 
 import { ColorSwatch } from '../ColorSwatch'
 
@@ -36,22 +37,59 @@ import theme from './theme'
 @themeable(theme, styles)
 class ComponentTheme extends Component {
   static propTypes = {
-    theme: PropTypes.object.isRequired
+    theme: PropTypes.array.isRequired
+  }
+
+  static contextTypes = {
+    themeKey: PropTypes.string,
+    themes: PropTypes.object
+  }
+
+  mapColors (colorKey) {
+    const map = {}
+    Object.keys(colorKey).forEach((color) => {
+      const hex = colorKey[color]
+      if (typeof map[hex] === 'undefined') {
+        map[hex] = color
+      }
+    })
+    return map
   }
 
   renderRows () {
     const { theme } = this.props
+    const { themes, themeKey } = this.context
+    const variables = themes[themeKey].resource.variables
+    const colorKey = variables.colors.values ? variables.colors.values : variables.colors
+    const map = this.mapColors(colorKey)
 
     return Object.keys(theme).map((name) => {
       const value = theme[name]
+      const color = value.toString().charAt(0) === '#' ? map[value] : null
+
       return (
         <Table.Row key={name}>
           <Table.Cell>
             <code>{name}</code>
           </Table.Cell>
           <Table.Cell>
-            <ColorSwatch color={value} />
-            <code>{value}</code>
+            {(value.toString().charAt(0) === '#') ? (
+              <span>
+                <View margin="0 xx-small 0 0">
+                  <ColorSwatch color={value} />
+                </View>
+                <code>{color}</code>
+              </span>
+            ) : (value.toString().substring(0, 3) === 'rgb') ? (
+              <span>
+                <View margin="0 xx-small 0 0">
+                  <ColorSwatch color={value} />
+                  </View>
+                <code>{value}</code>
+              </span>
+            ) : (
+              <code>{value}</code>
+            )}
           </Table.Cell>
         </Table.Row>
       )

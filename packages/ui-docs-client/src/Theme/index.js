@@ -26,33 +26,69 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-table'
+import { Text } from '@instructure/ui-text'
 import { Heading } from '@instructure/ui-heading'
 import { PresentationContent } from '@instructure/ui-a11y-content'
+import { View } from '@instructure/ui-view'
 
 import { Description } from '../Description'
 import { ColorSwatch } from '../ColorSwatch'
+import { ThemeColors } from '../ThemeColors'
 
 class Theme extends Component {
   static propTypes = {
     themeKey: PropTypes.string.isRequired,
     variables: PropTypes.object.isRequired,
     requirePath: PropTypes.string.isRequired,
+    description: PropTypes.string,
     immutable: PropTypes.bool
   }
 
   static defaultProps = {
-    immutable: false
+    immutable: false,
+    description: undefined
+  }
+
+  _colorMap = {}
+
+  mapColors (colorKey) {
+    const map = {}
+    Object.keys(colorKey).forEach((color) => {
+      const hex = colorKey[color]
+      if (typeof map[hex] === 'undefined') {
+        map[hex] = color
+      }
+    })
+    return map
   }
 
   renderVariable (name, value) {
+    let valueText = value
+    let valueColor = ''
+    if (typeof value === 'object') {
+      valueColor = value.color
+      valueText = value.text
+    }
+    if (typeof valueText === 'string' && valueText.charAt(0) === '#' && this._colorMap) {
+      valueColor = valueText
+      valueText = this._colorMap[valueText]
+    }
     return (
       <Table.Row key={name}>
         <Table.Cell>
           <code>{name}</code>
         </Table.Cell>
         <Table.Cell>
-          <ColorSwatch color={value} />
-          <code>{value}</code>
+          {(valueColor.toString().charAt(0) === '#') ? (
+            <span>
+              <View margin="0 xx-small 0 0">
+                <ColorSwatch color={valueColor} />
+              </View>
+              <code>{valueText}</code>
+            </span>
+          ) : (
+            <code>{valueText}</code>
+          )}
         </Table.Cell>
       </Table.Row>
     )
@@ -64,38 +100,99 @@ class Theme extends Component {
     })
   }
 
-  renderSection (name, content) {
+  renderTable (name, content, sub = false) {
+    const headingLevel = sub ? 'h4' : 'h3'
+    const margin = sub ? 'small none small' : 'small none large'
+    const padding = 'small'
+    const label = name + 'variables'
     return (
-      <div>
-        <PresentationContent>
-          <Heading as="h3" margin="large 0 x-small 0">{name}</Heading>
-        </PresentationContent>
-        <Table caption={<h3>{name}</h3>} key={name} layout="fixed">
+      <View
+        key={label}
+        as="div"
+        padding={sub ? padding : 'none'}
+      >
+        <Heading as={headingLevel} level={headingLevel}>
+          {name}
+        </Heading>
+        <View
+          as="div"
+          background="light"
+          padding={!sub ? padding : 'none'}
+          margin={!sub ? margin : 'small none none'}
+          borderRadius="medium"
+        >
+        <Table caption={label} key={name} layout="fixed">
           <Table.Head>
             <Table.Row>
-              <Table.ColHeader id="Name">Name</Table.ColHeader>
-              <Table.ColHeader id="Value">Value</Table.ColHeader>
+              <Table.ColHeader id="Name" key="Name">Name</Table.ColHeader>
+              <Table.ColHeader id="Value" key="value">Value</Table.ColHeader>
             </Table.Row>
           </Table.Head>
           <Table.Body>
             {content}
           </Table.Body>
         </Table>
-      </div>
+        </View>
+      </View>
     )
+  }
+
+  renderSection (name, data) {
+    const subSections = []
+    let baseColors = {}
+    let newData = Object.assign({}, data)
+
+    if (name ==='colors' && data.values) {
+      baseColors = data.values
+      delete newData.values
+
+      this._colorMap = this.mapColors(baseColors)
+      subSections.push(<ThemeColors colors={baseColors}/>)
+    }
+
+    Object.keys(newData).forEach((key, index) => {
+      const item = data[key]
+      if (typeof item === 'object' ) {
+        const subData = {}
+        const subKeys = Object.keys(item)
+        subKeys.forEach((subKey, i) => {
+          const val = item[subKey]
+          subData[subKeys[i]] = {
+            text: val.charAt(0) === '#' ? this._colorMap[val] : val,
+            color: val.charAt(0) === '#' ? val : ''
+          }
+        })
+        // sub categories
+        subSections.push(this.renderTable(key, this.renderRows(subData), true))
+      }
+    })
+
+    if (subSections.length > 0) {
+      return (
+        <View key={name + 'variables'}>
+          <Heading as="h3" level="h3">{name}</Heading>
+          {data.description && <Text size="medium" as="p">{data.description}</Text>}
+          <View background="light" as="div" padding="none" margin="small none large" borderRadius="medium">
+            {React.Children.map(subSections, (sub) => (sub))}
+          </View>
+        </View>
+      )
+    } else {
+      return this.renderTable(name, this.renderRows(data))
+    }
   }
 
   render () {
     const sections = []
     const vars = []
 
-    const { themeKey, variables } = this.props
+    const { themeKey, variables, description } = this.props
 
     Object.keys(variables).forEach((name) => {
       const value = variables[name]
 
       if (value && typeof value === 'object') {
-        sections.push(this.renderSection(name, this.renderRows(value)))
+        sections.push(this.renderSection(name, value))
       } else {
         vars.push(this.renderVariable(name, value))
       }
@@ -108,8 +205,10 @@ class Theme extends Component {
     return (
       <div>
 
+        {description && <Text size="medium" as="p">{description}</Text>}
+
         {sections}
-        {vars.length > 0 && this.renderSection('brand variables', vars)}
+        {vars.length > 0 && this.renderTable('brand variables', vars)}
 
         <Description
           id={`${themeKey}ApplicationUsage`}
@@ -118,7 +217,7 @@ class Theme extends Component {
 
             ${'```js'}
             // before mounting your React application:
-            import { theme } from '${this.props.requirePath}'
+            import theme from '${this.props.requirePath}'
 
             theme.use(${params})
             ${'```'}
