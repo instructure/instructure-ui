@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const getPackages = require('@instructure/pkg-utils')
+const { getPackages } = require('@instructure/pkg-utils')
 const { info, error, runCommandAsync } = require('@instructure/command-utils')
 
 info(
