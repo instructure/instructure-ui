@@ -42,7 +42,7 @@ class ApplyTextDirection extends Component {
     /**
     * string 'ltr' or 'rtl' representing the document direction
     */
-    dir: PropTypes.oneOf(Object.values(TextDirectionContext.DIRECTION)),
+    dir: PropTypes.oneOf(['ltr', 'rtl']),
     /**
     * a single child (children must be wrapped in a single component/element) or function
     * returning a child called with the following arguments:
