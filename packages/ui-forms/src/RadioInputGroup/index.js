@@ -25,7 +25,7 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
@@ -72,9 +72,9 @@ class RadioInputGroup extends Component {
     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * children of type `RadioInput`
+    * any children (ones that aren't `RadioInput` are passed through)
     */
-    children: ChildrenPropTypes.oneOf([RadioInput]),
+    children: PropTypes.node,
     variant: PropTypes.oneOf(['simple', 'toggle']), // TODO: split toggle out to its own component
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf([
