@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.7.0](https://github.com/instructure/instructure-ui/compare/v6.6.0...v6.7.0) (2019-07-15)
+
+
+### Bug Fixes
+
+* **ui-editable:** move keyUp handler for escape handling ([4d197d3](https://github.com/instructure/instructure-ui/commit/4d197d3))
+
+
+
+
+
 # [6.6.0](https://github.com/instructure/instructure-ui/compare/v6.5.0...v6.6.0) (2019-07-03)
 
 **Note:** Version bump only for package @instructure/ui-editable
