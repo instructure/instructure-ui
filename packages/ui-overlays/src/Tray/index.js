@@ -326,7 +326,9 @@ class Tray extends Component {
                     liveRegion={liveRegion}
                     onDismiss={onDismiss}
                   >
-                    {children}
+                    <div className={styles.content}>
+                      {children}
+                    </div>
                   </Dialog>
                 )
               }

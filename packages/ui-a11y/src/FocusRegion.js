@@ -76,12 +76,18 @@ class FocusRegion {
 
   captureDocumentClick = event => {
     const { target } = event
-
     this._preventCloseOnDocumentClick = event.button !== 0 || contains(this._contextElement, target)
   }
 
   handleDocumentClick = event => {
     if (this._options.shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick) {
+      this.handleDismiss(event, true)
+    }
+  }
+
+  handleFrameClick = (event, frame) => {
+    if (!contains(this._contextElement, frame)) {
+      // dismiss if frame is not within the region
       this.handleDismiss(event, true)
     }
   }
@@ -117,6 +123,14 @@ class FocusRegion {
       if (this._options.shouldCloseOnDocumentClick) {
         this._listeners.push(addEventListener(doc, 'click', this.captureDocumentClick, true))
         this._listeners.push(addEventListener(doc, 'click', this.handleDocumentClick))
+
+        doc.getElementsByTagName('iframe').forEach((el) => {
+          // listen for mouseup events on any iframes in the document
+          const frameDoc = el.contentDocument || el.contentWindow.document
+          this._listeners.push(addEventListener(frameDoc, 'mouseup', (event) => {
+            this.handleFrameClick(event, el)
+          }))
+        })
       }
 
       if (this._options.shouldCloseOnEscape) {

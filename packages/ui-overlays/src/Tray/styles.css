@@ -19,6 +19,14 @@
   box-shadow: var(--boxShadow);
 }
 
+.placement--start,
+.placement--end,
+.placement--center {
+  .content {
+    min-height: 100vh;
+  }
+}
+
 .placement--top,
 .placement--bottom {
   inset-inline-start: 0;
