@@ -32,7 +32,7 @@
     "@storybook/theming": "^5.1.9",
     "react": "^15 || ^16",
     "react-dom": "^15 || ^16",
-    "story2sketch": "^1.5.0",
+    "story2sketch": "^1.6.1",
     "storybook-chromatic": "^1.4.0",
     "webpack-merge": "^4.2.1"
   }

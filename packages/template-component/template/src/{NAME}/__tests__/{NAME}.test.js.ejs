@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, accessible, stub } from '@instructure/ui-test-utils'
+import { expect, mount, accessible } from '@instructure/ui-test-utils'
 
 import { <%= NAME %> } from '../index'
 import <%= NAME %>Locator from '../locator'
@@ -37,7 +37,6 @@ describe('<<%= NAME %> />', async () => {
   })
 
   it('should be accessible', async () => {
-    const render = stub()
     await mount(<<%= NAME %> render={render} />)
 
     expect(await accessible()).to.be.true()

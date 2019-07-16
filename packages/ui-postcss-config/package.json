@@ -23,7 +23,7 @@
     "cssnano-preset-default": "^4",
     "postcss": "^7",
     "postcss-bidirection": "^2.6.0",
-    "postcss-custom-properties": "^9.0.1",
+    "postcss-custom-properties": "^9.0.2",
     "postcss-initial": "^3.0.0",
     "postcss-input-range": "4.0.0",
     "postcss-mixins": "^6.2.1",
