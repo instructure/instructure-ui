@@ -109,5 +109,8 @@
       "pre-commit": "yarn lint:staged",
       "pre-push": "yarn lint:commit"
     }
-  }
+  },
+  "browserslist": [
+    "extends @instructure/browserslist-config-instui"
+  ]
 }

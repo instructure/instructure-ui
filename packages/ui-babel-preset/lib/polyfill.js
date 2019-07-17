@@ -21,28 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-module.exports = [
-  'es.object.assign',
-  'es.object.values',
-  'es.object.keys',
-  'es.number.is-integer',
-  'es.array.includes',
-  'es.array.find',
-  'es.array.find-index',
-  'es.array.from',
-  'es.set',
-  'es.map',
-  'es.weak-set',
-  'es.promise',
-  'es.promise.finally',
-  'es.string.code-point-at',
-  'es.string.from-code-point',
-  'es.string.includes',
-  'es.string.repeat',
-  'es.string.starts-with',
-  'es.symbol',
-  'es.symbol.iterator',
-  'web.dom-collections.iterator',
-  'web.dom-collections.for-each'
-]
+const loadConfig = require('@instructure/config-loader')
+module.exports = loadConfig('polyfill', require('@instructure/browserslist-config-instui/polyfills')).modules

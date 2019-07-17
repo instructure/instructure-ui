@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/canvas-supported-browsers": "^1",
+    "@instructure/browserslist-config-instui": "^6.7.0",
     "@instructure/config-loader": "^6.7.0",
     "@instructure/postcss-themeable-styles": "^6.7.0",
     "autoprefixer": "^9.6.1",

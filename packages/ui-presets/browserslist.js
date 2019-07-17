@@ -22,9 +22,4 @@
  * SOFTWARE.
  */
 
-/**
- * You probably don't need to use this in your code, and can just use the
- * `@instructure/canvas-supported-browsers` npm module directly.
- * This is just provided for backwards-compatibility.
- */
-module.exports = require('@instructure/canvas-supported-browsers')
+module.exports = require('@instructure/browserslist-config-instui')

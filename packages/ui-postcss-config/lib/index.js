@@ -36,7 +36,7 @@ const CORE_PLUGINS_POST = [
       return `[dir="${direction}"] ${selector}`
     }
   }],
-  [require('autoprefixer'), { overrideBrowserslist: loadConfig('browserslist', require('@instructure/canvas-supported-browsers')) }],
+  [require('autoprefixer'), { overrideBrowserslist: loadConfig('browserslist', require('@instructure/browserslist-config-instui')) }],
   [require('postcss-initial')],
   [require('postcss-reporter'), { clearReportedMessages: true }]
 ]

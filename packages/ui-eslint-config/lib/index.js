@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const loadConfig = require('@instructure/config-loader')
 
 module.exports = {
   extends: [
@@ -29,7 +30,8 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
-    'plugin:instructure-ui/recommended'
+    'plugin:instructure-ui/recommended',
+    'plugin:compat/recommended'
   ],
   plugins: [
     'react',
@@ -93,6 +95,7 @@ module.exports = {
   settings: {
     react: {
       version: process.env.REACT_VERSION || '16.8.6'
-    }
+    },
+    polyfills: loadConfig('polyfill', require('@instructure/browserslist-config-instui/polyfills')).features || []
   }
 }
