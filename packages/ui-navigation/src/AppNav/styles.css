@@ -27,29 +27,43 @@
   border-bottom: var(--borderWidth) var(--borderStyle) var(--borderColor);
 }
 
-.root--hasRenderAfterItems {
+.root--hasRenderedContent {
   align-items: center;
 }
 
 .list {
   box-sizing: border-box;
   list-style-type: none;
+  height: var(--height);
   margin: 0;
   padding: 0;
   display: flex;
   align-items: center;
-  height: var(--height);
-}
-
-.list--hasRenderAfterItems {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0;
+  min-width: 0.0625rem;
+}
+
+.listJustify--start {
+  justify-content: flex-start;
+}
+
+.listJustify--center {
+  justify-content: center;
+}
+
+.listJustify--end {
+  justify-content: flex-end;
 }
 
 .listItem {
-  flex-shrink: 0;
   min-width: 0.0625rem;
   margin-inline-start: var(--horizontalMargin);
   margin-inline-end: 0;
+  flex-shrink: 0;
+}
+
+.listItem--isMenuTrigger {
+  flex-basis: var(--menuTriggerWidth);
 }

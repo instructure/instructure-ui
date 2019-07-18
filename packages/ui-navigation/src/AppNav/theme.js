@@ -29,6 +29,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     borderColor: colors.borderMedium,
     borderStyle: borders.style,
     borderWidth: borders.widthSmall,
-    horizontalMargin: spacing.xxSmall
+    horizontalMargin: spacing.xxSmall,
+    menuTriggerWidth: '7.5rem'
   }
 }

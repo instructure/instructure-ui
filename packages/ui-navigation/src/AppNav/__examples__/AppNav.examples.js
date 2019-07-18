@@ -34,6 +34,7 @@ export default {
     return {
       screenReaderLabel: "Navigation label",
       renderAfterItems: <span>renderAfter content!</span>,
+      visibleItemsCount: 3,
       children: [
         <AppNav.Item
           key="1"

@@ -36,7 +36,6 @@ import {
 import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
 
-import { Focusable } from '@instructure/ui-focusable'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
@@ -92,6 +91,9 @@ class Item extends Component {
      * The `pointer` cursor is used by default.
      */
     cursor: PropTypes.string,
+    /**
+    * Disables the link or button visually and functionally
+    */
     isDisabled: PropTypes.bool
   }
 
@@ -103,9 +105,13 @@ class Item extends Component {
     elementRef: undefined,
     renderIcon: undefined,
     renderAfter: undefined,
-    as: 'a',
+    as: undefined,
     cursor: 'pointer',
     isDisabled: false
+  }
+
+  state = {
+    focused: false
   }
 
   handleClick = (e) => {
@@ -120,6 +126,14 @@ class Item extends Component {
     } else if (typeof onClick === 'function') {
       onClick(e)
     }
+  }
+
+  handleFocus = () => {
+    this.setState({ focused: true })
+  }
+
+  handleBlur = () => {
+    this.setState({ focused: false })
   }
 
   render () {
@@ -157,29 +171,26 @@ class Item extends Component {
     })
 
     return (
-      <Focusable>
-      {({ focused }) => (
-        <View
-          {...passthroughProps(this.props)}
-          as={ElementType}
-          href={href}
-          onClick={this.handleClick}
-          disabled={isDisabled}
-          elementRef={elementRef}
-          display="flex"
-          position="relative"
-          borderRadius="medium"
-          isFocused={focused}
-          cursor={isDisabled ? 'not-allowed' : cursor}
-          className={classes}
-          __dangerouslyIgnoreExperimentalWarnings
-        >
-          {icon}
-          {labelIsForScreenReaders ? label : <span className={styles.label}>{label}</span>}
-          {renderAfter && callRenderProp(renderAfter)}
-        </View>
-      )}
-      </Focusable>
+      <View
+        {...passthroughProps(this.props)}
+        as={ElementType}
+        href={href}
+        onClick={this.handleClick}
+        disabled={isDisabled}
+        elementRef={elementRef}
+        display="flex"
+        position="relative"
+        borderRadius="medium"
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        isFocused={this.state.focused}
+        cursor={isDisabled ? 'not-allowed' : cursor}
+        className={classes}
+      >
+        {icon}
+        {labelIsForScreenReaders ? label : <span className={styles.label}>{label}</span>}
+        {renderAfter && callRenderProp(renderAfter)}
+      </View>
     )
   }
 }

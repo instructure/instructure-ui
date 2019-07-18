@@ -28,11 +28,15 @@ import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+
+import { addResizeListener, getBoundingClientRect } from '@instructure/ui-dom-utils'
+import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
+import { px } from '@instructure/ui-utils'
+import { debounce } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
-import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { View } from '@instructure/ui-view'
-
+import { Menu } from '@instructure/ui-menu'
 import { Item } from './Item'
 
 import styles from './styles.css'
@@ -57,6 +61,15 @@ class AppNav extends Component {
      */
     children: ChildrenPropTypes.oneOf([Item]),
     /**
+    * The rate (in ms) the component responds to container resizing or
+    * an update to one of its child items
+    */
+    debounce: PropTypes.number,
+    /**
+    * Content to display before the navigation items, such as a logo
+    */
+    renderBeforeItems: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
     * Content to display after the navigation items, aligned to the far end
     * of the navigation
     */
@@ -68,62 +81,199 @@ class AppNav extends Component {
     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * provides a reference to the underlying nav element
+    * Provides a reference to the underlying nav element
     */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    /**
+    * Customize the text displayed in the menu trigger when links overflow
+    * the overall nav width.
+    */
+    renderTruncateLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+    * Called whenever the navigation items are updated or the size of
+    * the navigation changes. Passes in the `visibleItemsCount` as
+    * a parameter.
+    */
+    onUpdate: PropTypes.func,
+    /**
+    * Sets the number of navigation items that are visible.
+    */
+    visibleItemsCount: PropTypes.number
   }
 
   static defaultProps = {
     children: null,
+    debounce: 300,
     margin: '0',
+    renderBeforeItems: undefined,
     renderAfterItems: undefined,
-    elementRef: undefined
+    elementRef: (el) => {},
+    renderTruncateLabel: () => 'More',
+    onUpdate: () => {},
+    visibleItemsCount: 0
   }
 
   static Item = Item
 
-  renderChildren () {
-    return Children.map(this.props.children, (child) => {
-      return (
-        <li className={styles.listItem}>
-          {child}
-        </li>
-      )
+  state = {
+    isMeasuring: false
+  }
+
+  _list = null
+  _menuTrigger = null
+
+  componentDidMount () {
+    this._debounced = debounce(this.handleResize, this.props.debounce, { leading: true, trailing: true })
+    this._resizeListener = addResizeListener(this._list, this._debounced)
+
+    this.handleResize()
+  }
+
+  componentWillUnmount () {
+    if (this._resizeListener) {
+      this._resizeListener.remove()
+    }
+
+    if (this._debounced) {
+      this._debounced.cancel()
+    }
+  }
+
+  // TODO: remove this when INSTUI-2262 is resolved
+  handleMenuDismiss = () => {
+    this._menuTrigger && this._menuTrigger.focus()
+  }
+
+  measureItems = () => {
+    const menuTriggerWidth = px(this.theme.menuTriggerWidth)
+    let visibleItemsCount = 0
+
+    if (this._list) {
+      let { width: navWidth } = getBoundingClientRect(this._list)
+
+      const itemWidths = Array.from(this._list.getElementsByTagName('li')).map((item) => {
+        const { width } = getBoundingClientRect(item)
+        return width
+      })
+
+      let currentWidth = 0
+
+      for (let i = 0; i < itemWidths.length; i++) {
+        currentWidth += itemWidths[i]
+
+        if (currentWidth <= (navWidth - menuTriggerWidth)) {
+          visibleItemsCount++
+        } else {
+          break
+        }
+      }
+    }
+
+    return { visibleItemsCount }
+  }
+
+  handleResize = () => {
+    this.setState({ isMeasuring: true }, () => {
+      const { visibleItemsCount } = this.measureItems()
+
+      this.props.onUpdate({ visibleItemsCount })
+      this.setState({ isMeasuring: false })
     })
+  }
+
+  renderListItem (item, isMenuTrigger, key) {
+    return (
+      <li
+        key={key}
+        className={classnames({
+          [styles.listItem]: true,
+          [styles['listItem--isMenuTrigger']]:
+            isMenuTrigger && this.props.visibleItemsCount > 0
+        })}
+      >
+        {item}
+      </li>
+    )
+  }
+
+  renderMenu (items) {
+    const menu = (
+      <Menu
+        onDismiss={this.handleMenuDismiss} // TODO: remove when INSTUI-2262 is resolved
+        trigger={
+          <AppNav.Item
+            elementRef={(el) => { this._menuTrigger = el }}
+            renderLabel={callRenderProp(this.props.renderTruncateLabel)}
+          />
+        }
+      >
+        {items.map((item, index) => {
+          return (
+            <Menu.Item
+              href={item.props.href ? item.props.href : null}
+              onClick={(item.props.onClick && !item.props.href) ? item.props.onClick : null}
+              key={index}>
+                {callRenderProp(item.props.renderLabel)}
+            </Menu.Item>
+          )})
+        }
+      </Menu>
+    )
+
+    return this.renderListItem(menu, true, null)
   }
 
   render () {
     const {
+      children,
+      visibleItemsCount,
       screenReaderLabel,
       margin,
       elementRef
     } = this.props
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, AppNav.propTypes),
+      AppNav
+    )
+
+    const { isMeasuring } = this.state
+    const childrenArray = Children.toArray(children)
+    const visibleChildren = isMeasuring ? children : childrenArray.splice(0, visibleItemsCount)
+    const hiddenChildren = isMeasuring ? [] : childrenArray
+    const renderBeforeItems = callRenderProp(this.props.renderBeforeItems)
     const renderAfterItems = callRenderProp(this.props.renderAfterItems)
+    const hasRenderedContent = renderBeforeItems || renderAfterItems
 
     return (
       <View
-        {...passthroughProps(this.props)}
+        {...passthroughProps}
         as="nav"
         className={classnames({
           [styles.root]: true,
-          [styles['root--hasRenderAfterItems']]: renderAfterItems
+          [styles['root--hasRenderedContent']]: hasRenderedContent
         })}
-        aria-label={screenReaderLabel}
         margin={margin}
-        display={renderAfterItems ? 'flex' : 'block'}
+        display={hasRenderedContent ? 'flex' : 'block'}
         elementRef={elementRef}
         __dangerouslyIgnoreExperimentalWarnings
       >
-        <ul className={classnames({
-          [styles.list]: true,
-          [styles['list--hasRenderAfterItems']]: renderAfterItems
-        })}>
-          {this.renderChildren()}
+        {renderBeforeItems &&
+          <span className={styles.renderBefore}>
+            {renderBeforeItems}
+          </span>
+        }
+        <ul
+          ref={el => this._list = el}
+          className={styles.list}
+          aria-label={callRenderProp(screenReaderLabel)}
+        >
+          {visibleChildren.map((child, index) => {
+            return this.renderListItem(child, false, index)
+          })}
+          {hiddenChildren.length > 0 && this.renderMenu(hiddenChildren)}
         </ul>
-
-        {
-          renderAfterItems &&
+        {renderAfterItems &&
           <span className={styles.renderAfter}>
             {renderAfterItems}
           </span>

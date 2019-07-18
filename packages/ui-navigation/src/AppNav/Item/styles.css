@@ -53,6 +53,8 @@ a.root,
 
 .label {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: var(--fontFamily);
   font-size: var(--fontSize);
   font-weight: var(--fontWeight);
