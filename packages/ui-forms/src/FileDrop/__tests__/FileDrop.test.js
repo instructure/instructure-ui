@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 
 import { FileDrop } from '../index'
 import FileDropLocator from '../locator'
@@ -351,6 +351,24 @@ describe('<FileDrop />', async () => {
       await label.dragLeave()
 
       expect(onDragLeave).to.have.been.called()
+    })
+  })
+
+  it('stops propagation when the ESC key is released and file browser is open', async () => {
+    await mount(<FileDrop label="fake label" />)
+
+    const fileDrop = await FileDropLocator.find()
+
+    await fileDrop.click()
+
+    await wait(() => {
+      expect(fileDrop).to.have.focus()
+    })
+
+    const event = await fileDrop.keyUp('escape')
+
+    await wait(() => {
+      expect(event.stopPropagation).to.have.been.called()
     })
   })
 })

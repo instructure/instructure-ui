@@ -179,7 +179,8 @@ class FileDrop extends Component {
   state = {
     isDragAccepted: false,
     isDragRejected: false,
-    focused: false
+    isFocused: false,
+    isFileBrowserDisplayed: false
   }
 
   enterCounter = 0
@@ -281,7 +282,7 @@ class FileDrop extends Component {
     return [acceptedFiles, rejectedFiles]
   }
 
-  handleDrop = (e) => {
+  handleChange = (e) => {
     const { onDrop, onDropAccepted, onDropRejected, enablePreview } = this.props
     const fileList = this.getDataTransferItems(e, enablePreview)
     const [acceptedFiles, rejectedFiles] = this.parseFiles(fileList)
@@ -301,7 +302,8 @@ class FileDrop extends Component {
 
     this.setState({
       isDragAccepted: false,
-      isDragRejected: false
+      isDragRejected: false,
+      isFileBrowserDisplayed: false
     })
   }
 
@@ -339,14 +341,36 @@ class FileDrop extends Component {
   }
 
   handleRef = (el) => { this.fileInputEl = el }
-  handleFocus = () => this.setState({ focused: true })
-  handleBlur = () => this.setState({ focused: false })
-  handleOnClick = (e) => {
-    if (this.fileInputEl.value && this.props.allowRepeatFileSelection) { this.fileInputEl.value = null }
-    this.props.onClick(e)
+
+  handleBlur = () => {
+    this.setState({
+      isFocused: false,
+      isFileBrowserDisplayed: false
+    })
   }
+
+  handleFocus = () => {
+    this.setState({
+      isFocused: true,
+      isFileBrowserDisplayed: false
+    })
+  }
+
+  handleClick = (e) => {
+    if (this.fileInputEl.value && this.props.allowRepeatFileSelection) { this.fileInputEl.value = null }
+
+    // focus the input (because FF won't)
+    this.fileInputEl.focus()
+
+    this.props.onClick(e)
+
+    this.setState({
+      isFileBrowserDisplayed: true
+    })
+  }
+
   handleKeyDown = (event) => {
-    if (this.state.focused && keyEventIsClickButton(event)){
+    if (this.state.isFocused && keyEventIsClickButton(event)){
       if (this.props.allowRepeatFileSelection){
         this.fileInputEl.value = null
       }
@@ -361,6 +385,19 @@ class FileDrop extends Component {
     }
   }
 
+  handleKeyUp = (event) => {
+    // This is to handle the case where ESC is pressed inside a Dialog so that
+    // closing the file browser dialog doesn't also close the Dialog.
+    if (event.keyCode === keycode.codes.esc && this.state.isFileBrowserDisplayed) {
+      event.stopPropagation()
+      event.nativeEvent.stopImmediatePropagation()
+
+      this.setState({
+        isFileBrowserDisplayed: false
+      })
+    }
+  }
+
   render () {
     const { allowMultiple, disabled, readOnly } = this.props
     const id = this.props.id || this.defaultId
@@ -369,7 +406,7 @@ class FileDrop extends Component {
       [styles.disabled]: disabled,
       [styles.dragRejected]: this.state.isDragRejected || this.invalid,
       [styles.dragAccepted]: this.state.isDragAccepted,
-      [styles.focused]: this.state.focused
+      [styles.focused]: this.state.isFocused
     }
     const props = omitProps(this.props, FileDrop.propTypes)
 
@@ -381,7 +418,7 @@ class FileDrop extends Component {
           onDragEnter={this.handleDragEnter}
           onDragOver={this.handleDragOver}
           onDragLeave={this.handleDragLeave}
-          onDrop={this.handleDrop}
+          onDrop={this.handleChange}
         >
           <span className={styles.labelContent}>
             <span className={styles.layout}>
@@ -391,7 +428,7 @@ class FileDrop extends Component {
         </label>
         <input
           {...props}
-          onClick={this.handleOnClick}
+          onClick={this.handleClick}
           type="file"
           className={styles.input}
           id={id}
@@ -399,9 +436,10 @@ class FileDrop extends Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
+          onKeyUp={this.handleKeyUp}
           multiple={allowMultiple}
           accept={this.acceptStr()}
-          onChange={this.handleDrop}
+          onChange={this.handleChange}
           aria-describedby={this.hasMessages ? this.messagesId : null}
           disabled={disabled || readOnly}
           aria-disabled={disabled || readOnly ? 'true' : null}
