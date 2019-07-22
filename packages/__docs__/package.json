@@ -24,7 +24,7 @@
     "@instructure/ui-babel-preset": "^6.7.0",
     "@instructure/ui-polyfill-loader": "^6.7.0",
     "@instructure/ui-webpack-config": "^6.7.0",
-    "raw-loader": "^3.0.0",
+    "raw-loader": "^3.1.0",
     "svg-inline-loader": "^0.8.0"
   },
   "dependencies": {

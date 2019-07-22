@@ -16,10 +16,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/register": "^7.4.4",
+    "@babel/register": "^7.5.5",
     "core-js": "^3",
     "jsdom-global": "^3.0.2",
-    "regenerator-runtime": "^0.13.2"
+    "regenerator-runtime": "^0.13.3"
   },
   "peerDependencies": {
     "jsdom": ">=10.0.0"

@@ -33,7 +33,7 @@
     "@instructure/ui-themeable": "^6.7.0",
     "@instructure/uid": "^6.7.0",
     "classnames": "^2",
-    "codemirror": "^5.48.0",
+    "codemirror": "^5.48.2",
     "prop-types": "^15",
     "react-codemirror2": "^6.0.0"
   },

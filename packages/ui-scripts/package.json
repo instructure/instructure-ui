@@ -21,16 +21,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.5.0",
+    "@babel/cli": "^7.5.5",
     "@codesandbox/common": "^1.0.5",
     "@instructure/command-utils": "^6.7.0",
     "@instructure/cz-lerna-changelog": "^6.7.0",
     "@instructure/pkg-utils": "^6.7.0",
     "@lerna/project": "^3",
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.0.3",
     "depcheck": "^0.8.3",
     "dotenv": "^8.0.0",
-    "eslint": "^6.0.1",
+    "eslint": "^6.1.0",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "gerritbot": "^1.0.3",
@@ -43,7 +43,7 @@
     "karma-cli": "^2.0.0",
     "lerna": "^3",
     "lodash.template": "^4.5.0",
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "open": "^6.4.0",
     "react-to-typescript-definitions": "^2.0.0",
@@ -59,7 +59,7 @@
   "optionalDependencies": {
     "@instructure/mocha-environment-jsdom": "^6.7.0",
     "@storybook/react": "^4 || ^5",
-    "storybook-chromatic": "^1"
+    "storybook-chromatic": "^2"
   },
   "peerDependencies": {
     "react": "^15 || ^16",
