@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+require('dotenv').config({ path: process.cwd() })
 const DEBUG = process.env.DEBUG
 const ENV = process.env.NODE_ENV || 'production'
 

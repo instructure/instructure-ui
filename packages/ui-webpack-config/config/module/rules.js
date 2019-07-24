@@ -25,6 +25,7 @@
 const path = require('path')
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
+const DISABLE_LINTER_FAILURE_ON_WARNING = (process.env.DISABLE_LINTER_FAILURE_ON_WARNING === '1') || false
 const exclude = [ /node_modules/, /\/lib\//, /\/es\// ]
 
 const babelLoader = {
@@ -41,7 +42,7 @@ module.exports = [
     exclude,
     loader: 'eslint-loader',
     options: {
-      failOnWarning: !DEBUG,
+      failOnWarning: !DEBUG && !DISABLE_LINTER_FAILURE_ON_WARNING,
       emitError: !DEBUG,
       emitWarning: DEBUG,
       failOnError: !DEBUG,

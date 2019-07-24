@@ -21,6 +21,7 @@
     "@instructure/ui-babel-preset": "^6.7.0",
     "@instructure/ui-component-examples": "^6.7.0",
     "css-loader": "^3.1.0",
+    "dotenv": "^8.0.0",
     "eslint-loader": "^2.2.1",
     "file-loader": "^4.1.0",
     "postcss-loader": "^3",
