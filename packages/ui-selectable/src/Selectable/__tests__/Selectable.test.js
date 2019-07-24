@@ -375,18 +375,23 @@ describe('<Selectable />', async () => {
 
       it('when escape is pressed' , async () => {
         const onRequestHideOptions = stub()
+        let defaultPrevented = false
         await mount(
-          <Selectable
-            isShowingOptions={true}
-            onRequestHideOptions={onRequestHideOptions}
-          >
-            {(selectable) => getSelectable(selectable)}
-          </Selectable>
+          /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
+          <div onKeyUp={(e) => { defaultPrevented = e.defaultPrevented}}>
+            <Selectable
+              isShowingOptions={true}
+              onRequestHideOptions={onRequestHideOptions}
+            >
+              {(selectable) => getSelectable(selectable)}
+            </Selectable>
+          </div>
         )
         const input = await find('input')
+        await input.keyUp('esc')
 
-        await input.keyDown('esc')
         expect(onRequestHideOptions).to.have.been.calledOnce()
+        expect(defaultPrevented).to.be.true()
       })
     })
 

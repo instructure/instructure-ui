@@ -162,12 +162,6 @@ class Selectable extends Component {
           this.handleOpenClose(event)
         }
         break
-      case 'esc':
-        if (isShowingOptions) {
-          // if options showing, hide them
-          this.handleOpenClose(event)
-        }
-        break
       case 'enter':
         if (highlightedOptionId) {
           // select highlighted option
@@ -212,6 +206,18 @@ class Selectable extends Component {
     }
   }
 
+  handleKeyUp = (event) => {
+    const { isShowingOptions } = this.props
+    const key = keycode.names[event.keyCode]
+
+    if (key === 'esc') {
+      if (isShowingOptions) {
+        // if options showing, hide them
+        this.handleOpenClose(event)
+      }
+    }
+  }
+
   render () {
     const {
       isShowingOptions,
@@ -250,6 +256,7 @@ class Selectable extends Component {
         getTriggerProps: ({
           ref,
           onKeyDown,
+          onKeyUp,
           ...rest
         } = {}) => {
           return {
@@ -262,6 +269,7 @@ class Selectable extends Component {
             'aria-describedby': this._descriptionId,
             'aria-activedescendant': isShowingOptions ? highlightedOptionId : null,
             onKeyDown: createChainedFunction(this.handleKeyDown, onKeyDown),
+            onKeyUp: createChainedFunction(this.handleKeyUp, onKeyUp),
             ...rest
           }
         },
@@ -291,7 +299,10 @@ class Selectable extends Component {
               event.preventDefault() // prevent trigger from losing focus
             }, onMouseDown),
             onClick: createChainedFunction((event) => {
-              event.stopPropagation() // prevent trigger from losing focus
+              // prevent synthetic event from firing on the document
+              // this event could inadvertently close a parent dialog
+              event.stopPropagation()
+              event.nativeEvent.stopImmediatePropagation()
             }, onClick),
             ...rest
           }

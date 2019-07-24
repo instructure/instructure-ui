@@ -533,7 +533,7 @@ class Select extends Component {
                 getDisabledOptionProps,
                 // for rendering separators appropriately
                 isFirstChild: index === 0,
-                isLastChild: index === children.length - 1,
+                isLastChild: index === Children.count(children) - 1,
                 afterGroup
               })
             }

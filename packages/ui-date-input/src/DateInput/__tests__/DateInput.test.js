@@ -501,7 +501,7 @@ describe('<DateInput />', async () => {
 
         const dateInput = await DateInputLocator.find()
         const input = await dateInput.findInput()
-        await input.keyDown('esc')
+        await input.keyUp('esc')
         expect(onRequestHideCalendar).to.have.been.calledOnce()
         expect(onRequestValidateDate).to.have.been.calledOnce()
       })

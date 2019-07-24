@@ -499,7 +499,7 @@ describe('<Select />', async () => {
         const select = await SelectLocator.find()
         const input = await select.findInput()
 
-        await input.keyDown('esc')
+        await input.keyUp('esc')
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
     })
