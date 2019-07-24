@@ -2,5 +2,9 @@
   {
     "pattern": "^@instructure/ui-forms/lib/components/TextInput",
     "replace": "@instructure/ui-text-input/lib/TextInput"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/components/View",
+    "replace": "@instructure/ui-view/lib/View"
   }
 ]

@@ -41,6 +41,7 @@
     "@instructure/ui-testable": "^6.10.0",
     "@instructure/ui-themeable": "^6.10.0",
     "@instructure/ui-utils": "^6.10.0",
+    "@instructure/ui-view": "^6.10.0",
     "@instructure/uid": "^6.10.0",
     "classnames": "^2",
     "keycode": "^2",

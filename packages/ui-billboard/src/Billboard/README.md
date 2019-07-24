@@ -32,7 +32,7 @@ _(see examples)_, and they will be sized correctly based on the Billboard's
 ---
 example: true
 ---
-<View as="div" width="400px" debug>
+<View as="div" width="400px" withVisualDebug>
   <Billboard
     margin="large"
     heading="404"
@@ -49,7 +49,7 @@ example: true
 ---
 example: true
 ---
-<View as="div" width="600px" debug>
+<View as="div" width="600px" withVisualDebug>
   <Billboard
     margin="large"
     message="Click this link"

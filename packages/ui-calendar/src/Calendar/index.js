@@ -26,7 +26,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { safeCloneElement, callRenderProp, omitProps } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
@@ -251,7 +251,7 @@ class Calendar extends Component {
         as={this.props.as}
         display="inline-block"
         padding="small"
-        background="default"
+        background="primary"
       >
         {this.renderHeader()}
         {this.renderBody()}

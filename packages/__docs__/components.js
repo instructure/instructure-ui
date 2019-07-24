@@ -83,11 +83,11 @@ export {
   ContextView,
   Media,
   Responsive,
-  View,
   Flex,
   DrawerLayout,
   Grid,
-  Position
+  Position,
+  View as DeprecatedView
 } from '@instructure/ui-layout'
 export { Transition } from '@instructure/ui-motion'
 export {
@@ -112,5 +112,6 @@ export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export { Tabs, TabList } from '@instructure/ui-tabs'
 export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
+export { View } from '@instructure/ui-view'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-
-import { View } from '../../View'
+import { View } from '@instructure/ui-view'
 
 export default {
   propValues: {
@@ -45,7 +44,7 @@ export default {
           width="3rem"
           height="3rem"
           borderRadius="large"
-          background="inverse"
+          background="primary-inverse"
         />
       )
     }

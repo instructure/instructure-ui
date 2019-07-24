@@ -18,7 +18,7 @@ example: true
     as="div"
     padding="xx-small none"
     maxWidth="480px"
-    debug
+    withVisualDebug
   >
     <Heading level="h1">
       <TruncateText>
@@ -71,7 +71,7 @@ example: true
     as="div"
     padding="small none"
     maxWidth="480px"
-    debug
+    withVisualDebug
   >
     <Text as="p" size="large">
       <TruncateText
@@ -100,7 +100,7 @@ example: true
     as="div"
     padding="small none"
     maxWidth="480px"
-    debug
+    withVisualDebug
   >
     <Text as="p">
       <TruncateText maxLines={4} ellipsis=" (...)">
@@ -139,7 +139,7 @@ example: true
     as="div"
     padding="small none"
     maxWidth="480px"
-    debug
+    withVisualDebug
   >
     <TruncateText position="middle">
       <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
@@ -150,7 +150,7 @@ example: true
     as="div"
     padding="small none"
     maxWidth="480px"
-    debug
+    withVisualDebug
   >
     <Link href="#">
       <TruncateText
@@ -201,7 +201,7 @@ class Example extends React.Component {
         as="div"
         padding="xx-small none"
         maxWidth="230px"
-        debug
+        withVisualDebug
       >
         {this.state.isTruncated ? (
           <Tooltip

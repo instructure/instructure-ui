@@ -43,7 +43,7 @@ export default {
   },
   getExampleProps: (props) => {
     return {
-      background: props.variant.includes('inverse') ? 'inverse' : 'default'
+      background: props.variant.includes('inverse') ? 'primary-inverse' : 'primary'
     }
   },
   filter: (props) => {

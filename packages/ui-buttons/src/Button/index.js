@@ -33,7 +33,8 @@ import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y'
 import { warn } from '@instructure/console/macro'
 
-import { View, Flex } from '@instructure/ui-layout'
+import { Flex } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
 import theme from './theme'

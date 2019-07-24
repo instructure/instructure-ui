@@ -34,7 +34,8 @@ import { testable } from '@instructure/ui-testable'
 import { matchComponentTypes, omitProps } from '@instructure/ui-react-utils'
 import { getBoundingClientRect, isActiveElement } from '@instructure/ui-dom-utils'
 
-import { View, LayoutPropTypes } from '@instructure/ui-layout'
+import { LayoutPropTypes } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { Selectable } from '@instructure/ui-selectable'
 import { Popover } from '@instructure/ui-overlays'
 import { TextInput } from '@instructure/ui-text-input'
@@ -507,7 +508,7 @@ class Select extends Component {
       overflowY: 'auto',
       maxHeight: this._optionHeight * visibleOptionsCount,
       maxWidth: optionsMaxWidth || this.width,
-      background: 'default',
+      background: 'primary',
       elementRef: (node) => this._listView = node
     } : { maxHeight: 0 }
 

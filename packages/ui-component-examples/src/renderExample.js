@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { Tooltip} from '@instructure/ui-overlays'
 import { Button } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
@@ -35,7 +35,7 @@ export default function renderExample ({ Component, componentProps, exampleProps
       key={key}
       display="block"
       padding="small"
-      background={exampleProps.background || 'default'}
+      background={exampleProps.background || 'primary'}
       width={exampleProps.width || '100%'}
       maxWidth={exampleProps.maxWidth || 'none'}
       height={exampleProps.height || 'auto'}

@@ -26,7 +26,7 @@ import React, { createElement } from 'react'
 import marked from 'marked'
 import grayMatter from 'gray-matter'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { Heading, Img, Link, Table } from '@instructure/ui-elements'
 import { CodeEditor } from '@instructure/ui-code-editor'
 

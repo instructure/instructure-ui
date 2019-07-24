@@ -30,7 +30,7 @@ import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { matchComponentTypes, safeCloneElement, omitProps , deprecated } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
 import theme from './theme'

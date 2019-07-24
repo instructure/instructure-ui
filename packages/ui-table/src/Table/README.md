@@ -473,7 +473,7 @@ class SelectableTable extends React.Component {
             <View
               as="div"
               padding="small"
-              background="inverse"
+              background="primary-inverse"
             >
               {`${selected.size} of ${rowIds.length} selected`}
             </View>

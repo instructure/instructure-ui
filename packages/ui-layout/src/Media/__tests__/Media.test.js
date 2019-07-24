@@ -25,8 +25,8 @@
 import React from 'react'
 
 import { expect, mount, within, stub } from '@instructure/ui-test-utils'
+import { View } from '@instructure/ui-view'
 import { Media } from '../index'
-import { View } from '../../View'
 
 describe('<Media />', async () => {
   // eslint-disable-next-line max-len

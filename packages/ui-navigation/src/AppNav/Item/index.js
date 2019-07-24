@@ -38,7 +38,7 @@ import { themeable } from '@instructure/ui-themeable'
 
 import { Focusable } from '@instructure/ui-focusable'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -169,7 +169,7 @@ class Item extends Component {
           display="flex"
           position="relative"
           borderRadius="medium"
-          focused={focused}
+          isFocused={focused}
           cursor={isDisabled ? 'not-allowed' : cursor}
           className={classes}
         >

@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { themeable } from '@instructure/ui-themeable'
 import { matchComponentTypes, safeCloneElement, omitProps } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import { Row } from '../Row'
 

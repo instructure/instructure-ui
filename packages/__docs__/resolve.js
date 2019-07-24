@@ -61,6 +61,7 @@ module.exports = {
     '@instructure/ui-toggle-details$': path.resolve(__dirname, '../ui-toggle-details/src/'),
     '@instructure/ui-tree-browser$': path.resolve(__dirname, '../ui-tree-browser/src/'),
     '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
+    '@instructure/ui-view$': path.resolve(__dirname, '../ui-view/src'),
     '@instructure/canvas-theme$': path.resolve(__dirname, '../canvas-theme/src/'),
     '@instructure/canvas-high-contrast-theme$': path.resolve(__dirname, '../canvas-high-contrast-theme/src/'),
     '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),

@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { Spinner } from '@instructure/ui-elements'
 
 import getOptionId from '../utils/getOptionId'
@@ -250,7 +250,7 @@ class SelectOptionsList extends Component {
         borderWidth="small"
         borderRadius="medium"
         shadow="resting"
-        background="default"
+        background="primary"
       >
         {!!this.props.expanded && (
           <ul

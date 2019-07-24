@@ -28,10 +28,10 @@ import classnames from 'classnames'
 
 import { themeable , ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
+import { View } from '@instructure/ui-view'
 
 import { LayoutPropTypes } from '../LayoutPropTypes'
 import { mirrorPlacement } from '../mirrorPlacement'
-import { View } from '../View'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -169,18 +169,19 @@ class ContextView extends Component {
         borderWidth="none"
         display="inline-block"
         as={as}
-        debug={debug}
+        withVisualDebug={debug}
         elementRef={elementRef}
         margin={margin}
         stacking={stacking}
       >
         <View
           className={styles.content}
+          display="block"
           borderRadius="medium"
           borderWidth="small"
-          display="block"
-          background={background}
-          debug={debug}
+          borderColor={background === 'default' ? 'primary' : 'transparent'}
+          background={background === 'default' ? 'primary' : 'primary-inverse'}
+          withVisualDebug={debug}
           height={height}
           width={width}
           maxHeight={maxHeight}

@@ -81,7 +81,7 @@ containing element, while maintaining the aspect ratio of the source image.
 ---
 example: true
 ---
-<View as="div" background="inverse" width="200px" height="200px" textAlign="center">
+<View as="div" background="primary-inverse" width="200px" height="200px" textAlign="center">
   <Img src={avatarPortrait} constrain="contain" />
 </View>
 ```

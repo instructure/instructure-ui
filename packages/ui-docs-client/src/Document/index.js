@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Link , Heading } from '@instructure/ui-elements'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
 

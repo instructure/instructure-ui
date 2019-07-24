@@ -29,7 +29,7 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { findDOMNode } from '@instructure/ui-dom-utils'
 import { findTabbable } from '@instructure/ui-a11y'
 import { error } from '@instructure/console/macro'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 /**
 ---

@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, find, stub, within } from '@instructure/ui-test-utils'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import { Table } from '../index'
 

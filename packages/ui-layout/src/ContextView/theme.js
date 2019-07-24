@@ -28,7 +28,7 @@ export default function generator ({ colors, borders }) {
     arrowBorderWidth: borders.widthSmall,
     arrowBackgroundColor: colors.white,
     arrowBorderColor: colors.tiara,
-    arrowBackgroundColorInverse: colors.oxford,
+    arrowBackgroundColorInverse: colors.licorice,
     arrowBorderColorInverse: 'transparent',
   }
 }

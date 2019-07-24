@@ -51,5 +51,20 @@
         { "old": false, "new": "block" }
       ]}
     ]
+  },
+  "View": {
+    "7.0.0": [
+      { "old": "borderColor", "new": "borderColor", "values": [
+        { "old": "inverse", "new": "transparent" },
+        { "old": "default", "new": "primary" }
+      ]},
+      { "old": "background", "new": "background", "values": [
+        { "old": "default", "new": "primary" },
+        { "old": "light", "new": "secondary" },
+        { "old": "inverse", "new": "primary-inverse" }
+      ]},
+      { "old": "focused", "new": "isFocused" },
+      { "old": "debug", "new": "withVisualDebug" }
+    ]
   }
 }

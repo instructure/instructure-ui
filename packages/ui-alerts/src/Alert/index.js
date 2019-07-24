@@ -31,7 +31,7 @@ import keycode from 'keycode'
 
 import { deprecated, callRenderProp } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
 import {
   IconCheckMarkSolid,

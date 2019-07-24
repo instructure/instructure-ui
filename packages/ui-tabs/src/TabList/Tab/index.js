@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
 import theme from './theme'

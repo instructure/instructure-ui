@@ -49,8 +49,8 @@ import theme from './theme'
 /**
 ---
 category: components
+id: DeprecatedView
 ---
-@module View
 **/
 @bidirectional()
 @themeable(theme, styles)

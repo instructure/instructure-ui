@@ -31,7 +31,8 @@ import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { Transition } from '@instructure/ui-motion'
 import { controllable } from '@instructure/ui-prop-types'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { Flex, View } from '@instructure/ui-layout'
+import { Flex } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid, IconArrowOpenDownSolid } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 
@@ -192,7 +193,7 @@ class ToggleGroup extends Component {
             elementRef={this.props.elementRef}
             display="block"
             borderRadius="medium"
-            background="default"
+            background="primary"
           >
             <Flex padding={(this.props.size === 'small') ? 'x-small' : 'small small small x-small'}>
               <Flex.Item>

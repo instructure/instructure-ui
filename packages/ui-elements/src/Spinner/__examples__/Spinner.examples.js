@@ -31,7 +31,7 @@ export default {
   },
   getExampleProps: (props) => {
     return {
-      background: props.variant === 'inverse' ? 'inverse' : 'default'
+      background: props.variant === 'inverse' ? 'primary-inverse' : 'primary'
     }
   }
 }

@@ -31,7 +31,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import { Item } from './Item'
 

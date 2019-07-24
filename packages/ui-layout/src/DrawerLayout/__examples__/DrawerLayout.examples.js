@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
+import { View } from '@instructure/ui-view'
 import { DrawerLayout } from '../index'
-import { View } from '../../View'
 
 export default {
   getComponentProps: (props) => {

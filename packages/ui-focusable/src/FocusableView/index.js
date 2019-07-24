@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { deprecated, omitProps } from '@instructure/ui-react-utils'
@@ -150,7 +150,7 @@ class FocusableView extends Component {
         display={display}
         as={as}
         cursor={cursor}
-        focused={focused}
+        isFocused={focused}
         position="relative"
         focusColor={this.focusColor}
         href={href}

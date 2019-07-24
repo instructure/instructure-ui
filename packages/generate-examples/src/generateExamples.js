@@ -25,7 +25,7 @@
 import React from 'react'
 import objectHash from 'object-hash'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import generatePropCombinations from './generatePropCombinations'
 

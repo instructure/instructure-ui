@@ -26,7 +26,7 @@ import React from 'react'
 
 import { expect, mount, stub, within, wait } from '@instructure/ui-test-utils'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import { Link } from '../index'
 import LinkLocator from '../locator'

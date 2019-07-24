@@ -36,6 +36,7 @@
     "@instructure/ui-react-utils": "^6.10.0",
     "@instructure/ui-testable": "^6.10.0",
     "@instructure/ui-themeable": "^6.10.0",
+    "@instructure/ui-view": "^6.10.0",
     "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"

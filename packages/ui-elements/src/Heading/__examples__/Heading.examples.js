@@ -43,7 +43,7 @@ export default {
       background: [
         'primary-inverse',
         'secondary-inverse'
-      ].includes(props.color) ? 'inverse' : 'default',
+      ].includes(props.color) ? 'primary-inverse' : 'primary',
       width: props.ellipsis ? '10rem' : '100%'
     }
   },

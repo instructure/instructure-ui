@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { Button } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-elements'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
 
 import PandaLogo from './instui-panda.js'

@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
 import { passthroughProps, callRenderProp, deprecated } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
 import theme from './theme'

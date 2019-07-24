@@ -450,7 +450,7 @@ class Example extends React.Component {
         as="div"
         padding="x-small"
         margin="0 auto xx-large auto"
-        background="default"
+        background="primary"
       >
         <View as="div" margin="0 0 medium 0" >
           <Select

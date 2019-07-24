@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import { deprecated, matchComponentTypes, safeCloneElement, passthroughProps } from '@instructure/ui-react-utils'
@@ -295,7 +295,7 @@ class Tabs extends Component {
               display="flex"
               position="relative"
               borderRadius="medium"
-              focused={focusVisible}
+              isFocused={focusVisible}
               shouldAnimateFocus={false}
               role="tablist"
               className={styles.tabs}

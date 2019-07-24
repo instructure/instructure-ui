@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import { Spinner } from '../index'
 import SpinnerLocator from '../locator'

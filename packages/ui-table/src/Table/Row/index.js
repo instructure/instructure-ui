@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, matchComponentTypes, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 
 import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'

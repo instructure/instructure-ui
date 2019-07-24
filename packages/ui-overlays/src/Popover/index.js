@@ -28,12 +28,12 @@ import keycode from 'keycode'
 
 import {
   ContextView,
-  View,
   Position,
   LayoutPropTypes,
   parsePlacement,
   mirrorHorizontalPlacement
 } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { Dialog } from '@instructure/ui-a11y'
 import { bidirectional } from '@instructure/ui-i18n'
 import { Children, controllable, element } from '@instructure/ui-prop-types'
@@ -536,7 +536,6 @@ class Popover extends Component {
       let viewProps = {
         ref: c => this._view = c,
         elementRef: this.props.contentRef,
-        background: this.props.variant,
         stacking: this.props.stacking,
         shadow: this.props.shadow,
         display: 'block'
@@ -548,12 +547,14 @@ class Popover extends Component {
         ViewElement = ContextView
         viewProps = {
           ...viewProps,
+          background: this.props.variant,
           placement: this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
         }
       } else {
         ViewElement = View
         viewProps = {
           ...viewProps,
+          background: this.props.variant === 'default' ? 'primary' : 'primary-inverse',
           borderWidth: 'small',
           borderRadius: 'medium'
         }

@@ -39,7 +39,7 @@ The `ui-layout` package contains the following components:
 - [Grid](#Grid)
 - [Media](#Media)
 - [Position](#Position)
-- [View](#View)
+- View will be removed in version 7.0.0. Use the [View from ui-view](#View) instead.
 
 ### Utilities
 The `ui-layout` package contains the following utilities:

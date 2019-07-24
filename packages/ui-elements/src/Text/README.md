@@ -103,12 +103,12 @@ exceed the bounds of their containers.
 example: true
 ---
 <div>
-  <View as="div" maxWidth="300px" margin="none none small" debug>
+  <View as="div" maxWidth="300px" margin="none none small" withVisualDebug>
     <Text>
       superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
     </Text>
   </View>
-  <View as="div" maxWidth="300px" debug>
+  <View as="div" maxWidth="300px" withVisualDebug>
     <Text wrap="break-word">
       superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
     </Text>

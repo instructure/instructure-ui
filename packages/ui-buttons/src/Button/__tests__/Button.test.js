@@ -25,7 +25,7 @@
 import React from 'react'
 import { mount, expect, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { IconTrashSolid } from '@instructure/ui-icons'
 
 import { Button } from '../index'

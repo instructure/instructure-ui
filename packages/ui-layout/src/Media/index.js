@@ -28,8 +28,7 @@ import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
-
-import { View } from '../View'
+import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
 import theme from './theme'

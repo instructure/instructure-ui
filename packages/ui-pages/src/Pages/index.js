@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 import { findTabbable } from '@instructure/ui-a11y'

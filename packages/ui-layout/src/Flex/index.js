@@ -29,8 +29,8 @@ import classnames from 'classnames'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
+import { View } from '@instructure/ui-view'
 
-import { View } from '../View'
 import { FlexItem } from './FlexItem'
 
 import styles from './styles.css'

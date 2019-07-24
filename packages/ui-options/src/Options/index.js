@@ -32,7 +32,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { uid } from '@instructure/uid/lib/uid'
 
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { Item } from './Item'
 import { Separator } from './Separator'
 
@@ -159,7 +159,7 @@ class Options extends Component {
           display="block"
           margin="none"
           padding="none"
-          background="default"
+          background="primary"
           aria-labelledby={renderLabel && this._labelId}
         >
           {this.renderChildren()}

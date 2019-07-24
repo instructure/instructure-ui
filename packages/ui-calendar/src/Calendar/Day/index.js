@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { FocusableView } from '@instructure/ui-focusable'
-import { View } from '@instructure/ui-layout'
+import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y'
 import { omitProps, callRenderProp, getElementType } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'

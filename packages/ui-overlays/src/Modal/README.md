@@ -155,7 +155,7 @@ class Example extends React.Component {
           </Modal.Footer>
         </Modal>
         <View
-          background="inverse"
+          background="primary-inverse"
           margin="medium auto none"
           display="block"
           width="25rem"

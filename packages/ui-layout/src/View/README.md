@@ -1,6 +1,30 @@
 ---
-describes: View
+describes: DeprecatedView
+id: DeprecatedView__README
 ---
+
+**DEPRECATED:** View will be removed from `ui-layout` in version 7.0.0. Use the [View from ui-view](#View) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package as well as the prop name and value changes listed below.
+
+These props have the same name, but their values have been updated to the following:
+#### `borderColor`
+| Old Value | New Value |
+|-----------|-----------|
+| default | primary |
+| inverse | transparent |
+
+#### `background`
+| Old Value | New Value |
+|-----------|-----------|
+| default | primary |
+| light | secondary |
+| inverse | primary-inverse |
+
+These props have updated names:
+- `focused` has been changed to `isFocused`
+- `debug` has been changed to `withVisualDebug`
 
 ### View &#151; the visual basis of instructure-UI
 
@@ -19,7 +43,7 @@ button itself.
 ---
 example: true
 ---
-<View
+<DeprecatedView
   as="div"
   margin="small"
   padding="large"
@@ -27,7 +51,7 @@ example: true
   background="default"
 >
   {lorem.sentence()}
-</View>
+</DeprecatedView>
 ```
 
 ### `background`
@@ -39,7 +63,7 @@ Change the background color using the `background` prop.
 example: true
 ---
 <div>
-  <View
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -48,8 +72,8 @@ example: true
     background="transparent"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -58,8 +82,8 @@ example: true
     background="default"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -68,8 +92,8 @@ example: true
     background="light"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -78,8 +102,8 @@ example: true
     background="inverse"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -88,8 +112,8 @@ example: true
     background="brand"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -98,8 +122,8 @@ example: true
     background="alert"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -108,8 +132,8 @@ example: true
     background="info"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -118,8 +142,8 @@ example: true
     background="success"
   >
     {lorem.sentence()}
-  </View>
-    <View
+  </DeprecatedView>
+    <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -128,8 +152,8 @@ example: true
     background="danger"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="inline-block"
     maxWidth="10rem"
@@ -138,7 +162,7 @@ example: true
     background="warning"
   >
     {lorem.sentence()}
-  </View>
+  </DeprecatedView>
 </div>
 ```
 
@@ -151,7 +175,7 @@ Add a CSS box-shadow to the View using the `shadow` prop.
 example: true
 ---
 <div>
-  <View
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -161,8 +185,8 @@ example: true
     shadow="resting"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -172,8 +196,8 @@ example: true
     shadow="above"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -183,7 +207,7 @@ example: true
     shadow="topmost"
   >
     {lorem.sentence()}
-  </View>
+  </DeprecatedView>
 </div>
 ```
 
@@ -198,7 +222,7 @@ to apply different border styles to individual edges.
 example: true
 ---
 <div>
-  <View
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -208,8 +232,8 @@ example: true
     borderWidth="small"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -219,8 +243,8 @@ example: true
     borderWidth="medium"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -230,8 +254,8 @@ example: true
     borderWidth="large none"
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     margin="small"
     padding="small"
@@ -239,7 +263,7 @@ example: true
     borderWidth="none none small none"
   >
     {lorem.sentence()}
-  </View>
+  </DeprecatedView>
 </div>
 ```
 
@@ -252,7 +276,7 @@ Change the color of View's border for different contexts via the `borderColor` p
 example: true
 ---
 <div>
-  <View
+  <DeprecatedView
     as="span"
     display="inline-block"
     margin="small"
@@ -261,8 +285,8 @@ example: true
     borderWidth="large"
   >
     default
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     margin="small"
@@ -272,8 +296,8 @@ example: true
     borderColor="info"
   >
     info
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     margin="small"
@@ -283,8 +307,8 @@ example: true
     borderColor="warning"
   >
     warning
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     margin="small"
@@ -294,8 +318,8 @@ example: true
     borderColor="danger"
   >
     danger
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     margin="small"
@@ -305,8 +329,8 @@ example: true
     borderColor="alert"
   >
     alert
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     margin="small"
@@ -316,8 +340,8 @@ example: true
     borderColor="success"
   >
     success
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     margin="small"
@@ -327,7 +351,7 @@ example: true
     borderColor="brand"
   >
     brand
-  </View>
+  </DeprecatedView>
 </div>
 ```
 
@@ -342,7 +366,7 @@ to apply different border radii to individual corners.
 example: true
 ---
 <div>
-  <View
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -353,8 +377,8 @@ example: true
     textAlign="center"
   >
     medium
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -365,8 +389,8 @@ example: true
     textAlign="center"
   >
     large large none none
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="span"
     display="inline-block"
     maxWidth="10rem"
@@ -377,8 +401,8 @@ example: true
     textAlign="center"
   >
     none none large large
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     display="inline-block"
     width="6rem"
     height="6rem"
@@ -389,8 +413,8 @@ example: true
     textAlign="center"
   >
     circle
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     display="inline-block"
     width="10rem"
     margin="small"
@@ -400,7 +424,7 @@ example: true
     textAlign="center"
   >
     pill
-  </View>
+  </DeprecatedView>
 </div>
 ```
 
@@ -417,13 +441,13 @@ as the other values.
 ---
 example: true
 ---
-<View
+<DeprecatedView
   position="relative"
   as="div"
   height="200px"
   borderWidth="small"
 >
-  <View
+  <DeprecatedView
     as="div"
     position="absolute"
     insetInlineEnd="100px"
@@ -432,8 +456,8 @@ example: true
     background="inverse"
   >
     Positioned View inside a View with relative positioning.
-  </View>
-</View>
+  </DeprecatedView>
+</DeprecatedView>
 ```
 
 ### `focused`
@@ -477,8 +501,8 @@ class FocusedExample extends React.Component {
     const { focused, focusPosition } = this.state
 
     return (
-      <View as="div">
-        <View as="div" background="default" padding="small" margin="0 0 small" borderWidth="small">
+      <DeprecatedView as="div">
+        <DeprecatedView as="div" background="default" padding="small" margin="0 0 small" borderWidth="small">
           <FormFieldGroup
             rowSpacing="small"
             description={<ScreenReaderContent>View focus outline examples</ScreenReaderContent>}
@@ -494,10 +518,10 @@ class FocusedExample extends React.Component {
               onChange={this.updateInset}
             />
           </FormFieldGroup>
-        </View>
-        <View as="div">
+        </DeprecatedView>
+        <DeprecatedView as="div">
           <code>borderRadius =</code>
-          <View
+          <DeprecatedView
             display="inline-block"
             margin="small"
             padding="small"
@@ -509,8 +533,8 @@ class FocusedExample extends React.Component {
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             small
-          </View>
-          <View
+          </DeprecatedView>
+          <DeprecatedView
             display="inline-block"
             margin="small"
             padding="small"
@@ -522,8 +546,8 @@ class FocusedExample extends React.Component {
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             medium
-          </View>
-          <View
+          </DeprecatedView>
+          <DeprecatedView
             display="inline-block"
             margin="small"
             padding="small"
@@ -535,8 +559,8 @@ class FocusedExample extends React.Component {
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             large
-          </View>
-          <View
+          </DeprecatedView>
+          <DeprecatedView
             display="inline-block"
             height="100px"
             width="100px"
@@ -558,9 +582,9 @@ class FocusedExample extends React.Component {
                 circle
               </Flex.Item>
             </Flex>
-          </View>
-          <View background="inverse" display="inline-block" padding="small">
-            <View
+          </DeprecatedView>
+          <DeprecatedView background="inverse" display="inline-block" padding="small">
+            <DeprecatedView
               display="block"
               margin="small"
               padding="small"
@@ -573,9 +597,9 @@ class FocusedExample extends React.Component {
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
               medium
-            </View>
-          </View>
-          <View
+            </DeprecatedView>
+          </DeprecatedView>
+          <DeprecatedView
             display="inline-block"
             margin="small"
             padding="small"
@@ -590,8 +614,8 @@ class FocusedExample extends React.Component {
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             pill
-          </View>
-          <View
+          </DeprecatedView>
+          <DeprecatedView
             display="inline-block"
             margin="small"
             padding="small"
@@ -604,9 +628,9 @@ class FocusedExample extends React.Component {
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             none large
-          </View>
-        </View>
-      </View>
+          </DeprecatedView>
+        </DeprecatedView>
+      </DeprecatedView>
     )
   }
 }
@@ -647,7 +671,7 @@ class OverflowExample extends React.Component {
 
   render () {
     return (
-      <View as="div">
+      <DeprecatedView as="div">
         <FormFieldGroup
           description={<ScreenReaderContent>Overflow example</ScreenReaderContent>}
           rowSpacing="small"
@@ -677,7 +701,7 @@ class OverflowExample extends React.Component {
             <RadioInput label="hidden" value="hidden" />
           </RadioInputGroup>
         </FormFieldGroup>
-        <View
+        <DeprecatedView
           as="div"
           height="7rem"
           width="20rem"
@@ -690,8 +714,8 @@ class OverflowExample extends React.Component {
             <Img src={avatarSquare} constrain="cover" />
           </div>
 
-        </View>
-      </View>
+        </DeprecatedView>
+      </DeprecatedView>
     )
   }
 }
@@ -708,35 +732,35 @@ Set the `debug` prop to see the View's boundaries.
 example: true
 ---
 <div>
-  <View
+  <DeprecatedView
     as="div"
     padding="large"
     debug
   >
     {lorem.sentence()}
-  </View>
-  <View
+  </DeprecatedView>
+  <DeprecatedView
     as="div"
     display="flex"
     debug
   >
-    <View
+    <DeprecatedView
       as="div"
       margin="small"
       padding="small"
       debug
     >
       {lorem.sentence()}
-    </View>
-    <View
+    </DeprecatedView>
+    <DeprecatedView
       as="div"
       margin="small"
       padding="small"
       debug
     >
       {lorem.sentence()}
-    </View>
-  </View>
+    </DeprecatedView>
+  </DeprecatedView>
 </div>
 ```
 
@@ -751,20 +775,20 @@ the header and paragraph are separated by bottom margin from the `<header>` View
 ---
 example: true
 ---
-<View
+<DeprecatedView
   as="section"
   padding="small"
   debug
 >
-  <View
+  <DeprecatedView
     as="header"
     margin="0 0 medium"
     debug
   >
   Some header content
-  </View>
+  </DeprecatedView>
   <Text as="p">{lorem.paragraph()}</Text>
-</View>
+</DeprecatedView>
 ```
 
 ### Inline Views
@@ -776,8 +800,8 @@ the View to display inline-block with other inline elements.
 ---
 example: true
 ---
-<View as="div" textAlign="center" padding="x-small" debug>
-  <View
+<DeprecatedView as="div" textAlign="center" padding="x-small" debug>
+  <DeprecatedView
     as="div"
     display="inline-block"
     debug
@@ -786,7 +810,7 @@ example: true
     padding="0 small 0 0"
   >
     {lorem.sentence()}
-  </View>
+  </DeprecatedView>
   <Button variant="success">Some action</Button>
-</View>
+</DeprecatedView>
 ```

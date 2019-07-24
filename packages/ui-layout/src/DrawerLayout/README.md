@@ -31,7 +31,7 @@ class Example extends React.Component {
       <View
         height="25rem"
         as="div"
-        background="default"
+        background="primary"
         style={{ position: 'relative' }}
       >
         { this.state.trayIsOverlayed && this.state.open && <Mask onClick={this.handleTrayDismiss} /> }
@@ -119,7 +119,7 @@ class Example extends React.Component {
       <View
         height="40rem"
         display="block"
-        background="default"
+        background="primary"
       >
         <DrawerLayout>
           <DrawerLayout.Tray

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 import React from 'react'
+import { View } from '@instructure/ui-view'
 
-import { View } from '../../View'
 import { Position } from '../index'
 
 export default {
@@ -64,7 +64,7 @@ export default {
       height: contentSize,
       borderWidth: 'small',
       textAlign: 'center',
-      background: 'light'
+      background: 'secondary'
     }
     const text = (
       <span style={{fontSize: '12px'}}>
@@ -85,7 +85,8 @@ export default {
             as="div"
             width={xStretch ? '100%' : targetSize}
             height={xStretch ? targetSize : '100%'}
-            background="inverse" />
+            background="primary-inverse"
+          />
         </Position.Target>,
         <Position.Content key="1">
           <View
@@ -102,7 +103,7 @@ export default {
             as="div"
             width={targetSize}
             height={targetSize}
-            background="inverse"
+            background="primary-inverse"
           />
         </Position.Target>,
         <Position.Content key="1">
@@ -126,7 +127,7 @@ export default {
       margin: 'small',
       textAlign: 'center',
       padding: yStretch ? paddingYStretch : xStretch ? paddingXStretch : paddingRegular,
-      debug: true
+      withVisualDebug: true
     }
   }
 }

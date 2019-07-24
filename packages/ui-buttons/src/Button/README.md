@@ -166,7 +166,7 @@ example: true
     const fullButton = matches.includes('fullButton')
 
     return (
-      <View borderWidth="small" background="default" padding="small" as="div">
+      <View borderWidth="small" background="primary" padding="small" as="div">
         <Text as="div">The <code>fullButton</code> query is <b>{fullButton ? 'true' : 'false'}</b>.</Text>
         <Button icon={IconUserLine} margin="small 0 0">
           {(fullButton) ? text : <ScreenReaderContent>{text}</ScreenReaderContent>}
