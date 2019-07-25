@@ -396,39 +396,39 @@ class Example extends React.Component {
                         <Media description={user.name}>
                           <Avatar name={user.name} />
                         </Media>
-                        <Table caption={<ScreenReaderContent>User details</ScreenReaderContent>}>
-                          <tbody>
-                            <tr>
-                              <td>Age</td>
-                              <td>{user.age}</td>
-                            </tr>
+                        <Table caption="User details">
+                          <Table.Body>
+                            <Table.Row>
+                              <Table.RowHeader>Age</Table.RowHeader>
+                              <Table.Cell>{user.age}</Table.Cell>
+                            </Table.Row>
                             {user.email && (
-                              <tr>
-                                <td>Email</td>
-                                <td>{user.email}</td>
-                              </tr>
+                              <Table.Row>
+                                <Table.RowHeader>Email</Table.RowHeader>
+                                <Table.Cell>{user.email}</Table.Cell>
+                              </Table.Row>
                             )}
                             {!isNaN(user.spouse) && (
-                              <tr>
-                                <td>Spouse</td>
-                                <td>
+                              <Table.Row>
+                                <Table.RowHeader>Spouse</Table.RowHeader>
+                                <Table.Cell>
                                   {this.renderUserMedia(this.findUser(user.spouse))}
-                                </td>
-                              </tr>
+                                </Table.Cell>
+                              </Table.Row>
                             )}
                             {Array.isArray(user.parents) && (
-                              <tr>
-                                <td>Parents</td>
-                                <td>
+                              <Table.Row>
+                                <Table.RowHeader>Parents</Table.RowHeader>
+                                <Table.Cell>
                                   {user.parents.map((parent, index) => {
                                     return (
                                       <div key={index}>{this.renderUserMedia(this.findUser(parent))}</div>
                                     )
                                   })}
-                                </td>
-                              </tr>
+                                </Table.Cell>
+                              </Table.Row>
                             )}
-                          </tbody>
+                          </Table.Body>
                         </Table>
                       </div>
                     )
