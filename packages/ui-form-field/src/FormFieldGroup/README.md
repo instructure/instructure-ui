@@ -95,7 +95,7 @@ example: true
       <RadioInput label="Bring it on... Ready for the full course" value="full-course" />
       <RadioInput label="Breakfast for dinner" value="breakfast" />
     </RadioInputGroup>
-    <TextInput label="If Not At Home - I'd LIke To Eat Dinner At"
+    <TextInput label="If Not At Home - I'd Like To Eat Dinner At"
       />
     <Checkbox label="Love to Eat Dessert After Dinner" value="medium" variant="toggle" />
   </FormFieldGroup>
