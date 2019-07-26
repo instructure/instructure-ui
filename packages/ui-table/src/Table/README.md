@@ -238,9 +238,6 @@ render(
 )
 ```
 
-> If you are using [TruncateText](#TruncateText) (or CSS ellipsis) in your Table, you need to set
-> the layout to `fixed`, or the text truncation will not work.
-
 ### A sortable table
 
 Resize the window to see how column headers turn into a combobox on narrow screen.
