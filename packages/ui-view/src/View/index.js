@@ -124,6 +124,7 @@ class View extends Component {
     borderColor: PropTypes.oneOf([
       'transparent',
       'primary',
+      'secondary',
       'brand',
       'info',
       'success',

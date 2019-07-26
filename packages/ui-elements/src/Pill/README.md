@@ -1,9 +1,25 @@
 ---
-describes: Pill
+describes: DeprecatedPill
+id: DeprecatedPill__README
 ---
+**DEPRECATED:** Pill will be removed from `ui-elements` in version 7.0.0. Use the [Pill from ui-pill](#Pill) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
+
+The `text` prop has switched to `children`. The `variant` prop has switched to `color`.
+
+Within the updated `color` prop:
+- **default** is now `primary`
+- **primary** is now `info`
+- **message** is now `alert`
+
+***
+
+### DeprecatedPill
 
 Displays short, contextual information about an item. Change the border
-and text color via the `variant` prop. Use the `margin` prop to add space around
+and text color via the `color` prop. Use the `margin` prop to add space around
 the component.
 
 ```js
@@ -11,51 +27,51 @@ the component.
 example: true
 ---
 <div>
-    <Pill
-      text="Excused"
-      margin="x-small"
-    />
-    <Pill
-      variant="danger"
-      text="Missing"
-      margin="x-small"
-    />
-    <Pill
-      variant="success"
-      text="Checked In"
-      margin="x-small"
-    />
-    <Pill
-      variant="primary"
-      text="Draft"
-      margin="x-small"
-    />
-    <Pill
-      variant="warning"
-      text="Late"
-      margin="x-small"
-    />
-    <Pill
-      variant="message"
-      text="Notification"
-      margin="x-small"
-    />
+  <DeprecatedPill
+    text="Excused"
+    margin="x-small"
+  />
+ <DeprecatedPill
+    variant="danger"
+   text="Missing"
+    margin="x-small"
+  />
+<DeprecatedPill
+   variant="success"
+   text="Checked In"
+   margin="x-small"
+ />
+ <DeprecatedPill
+   variant="primary"
+   text="Draft"
+   margin="x-small"
+ />
+ <DeprecatedPill
+   variant="warning"
+   text="Late"
+   margin="x-small"
+ />
+ <DeprecatedPill
+   variant="message"
+   text="Notification"
+   margin="x-small"
+ />
 </div>
 ```
+
 The component has a max-width, set by its theme. Any overflowing text will
 be handled via ellipses.
-
+ 
 ```js
 ---
 example: true
 ---
-<Pill
+<DeprecatedPill
   text="extraordinary superfluousness"
 />
 ```
 
 ### Guidelines
-
 
 ```js
 ---

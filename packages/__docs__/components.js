@@ -54,7 +54,7 @@ export {
   Heading,
   Img as DeprecatedImg,
   Link,
-  Pill,
+  Pill as DeprecatedPill,
   Progress,
   Rating,
   Spinner,
@@ -83,6 +83,7 @@ export {
 export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput } from '@instructure/ui-date-input'
+export { Pill } from '@instructure/ui-pill'
 export { TextInput } from '@instructure/ui-text-input'
  export {
   FormField,

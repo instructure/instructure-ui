@@ -27,41 +27,41 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-overlays'
+import { TruncateText } from '@instructure/ui-elements'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { passthroughProps, experimental } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
 
-import { TruncateText } from '../TruncateText'
-
 /**
 ---
-category: components/deprecated
-id: DeprecatedPill
+category: components
+experimental: true
 ---
 **/
 @testable()
+@experimental()
 @themeable(theme, styles)
 class Pill extends Component {
   static propTypes = {
-    text: PropTypes.node.isRequired,
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+    children: PropTypes.node.isRequired,
+    color: PropTypes.oneOf(['primary', 'info', 'success', 'danger', 'warning', 'alert']),
+    elementRef: PropTypes.func,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing,
-    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
-    elementRef: PropTypes.func,
-    as: PropTypes.elementType // eslint-disable-line react/require-default-props
+    margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {
     margin: undefined,
     elementRef: undefined,
-    variant: 'default'
+    color: 'primary'
   }
 
   constructor (props) {
@@ -81,44 +81,51 @@ class Pill extends Component {
   renderPill (focused, getTriggerProps) {
     const {
       margin,
-      text,
-      variant,
+      children,
+      color,
       as,
-      elementRef
+      elementRef,
+      ...props
     } = this.props
 
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Pill.propTypes),
-      Pill
-    )
-    const props = typeof getTriggerProps === 'function'
-      ? getTriggerProps(passthroughProps) : passthroughProps
+    const filteredProps = passthroughProps(props)
+
+    const containerProps = typeof getTriggerProps === 'function'
+      ? getTriggerProps(filteredProps) : filteredProps
 
     const classes = classnames({
       [styles.root]: true,
       [styles.truncated]: this.state.truncated,
-      [styles.focused]: focused,
-      [styles[variant]]: variant
+      [styles[color]]: color
     })
 
     return (
       <View
-        {...props}
-        className={classes}
+        {...containerProps}
         as={as}
         elementRef={elementRef}
         margin={margin}
-        display="inline-flex"
+        padding="0"
+        maxWidth={this.theme.maxWidth}
+        background="transparent"
+        borderRadius="pill"
+        borderWidth="0"
+        display="inline-block"
+        position="relative"
+        isFocused={focused}
+        focusColor="info"
         __dangerouslyIgnoreExperimentalWarnings
       >
-        <span className={styles.text}>
-          <TruncateText
-            onUpdate={(truncated) => {
-              this.handleTruncation(truncated)
-            }}
-          >
-            {text}
-          </TruncateText>
+        <span className={classes}>
+          <span className={styles.text}>
+            <TruncateText
+              onUpdate={(truncated) => {
+                this.handleTruncation(truncated)
+              }}
+            >
+              {children}
+            </TruncateText>
+          </span>
         </span>
       </View>
     )
@@ -127,7 +134,7 @@ class Pill extends Component {
   render () {
     if (this.state.truncated) {
       return (
-        <Tooltip tip={this.props.text}>
+        <Tooltip tip={this.props.children}>
           {({ focused, getTriggerProps }) => {
             return (
               this.renderPill(focused, getTriggerProps)

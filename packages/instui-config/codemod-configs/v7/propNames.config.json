@@ -121,6 +121,16 @@
       ]}
     ]
   },
+  "Pill": {
+    "7.0.0": [
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "primary" },
+        { "old": "primary", "new": "info" },
+        { "old": "message", "new": "alert" }
+      ] },
+      { "old": "text", "new": "children" }
+    ]
+  },
   "Text": {
     "7.0.0": [
       { "old": "color", "new": "color", "values": [

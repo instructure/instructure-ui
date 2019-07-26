@@ -59,6 +59,7 @@
     "@instructure/ui-overlays": "^6.12.0",
     "@instructure/ui-pages": "^6.12.0",
     "@instructure/ui-pagination": "^6.12.0",
+    "@instructure/ui-pill": "^6.12.0",
     "@instructure/ui-popover": "^6.12.0",
     "@instructure/ui-portal": "^6.12.0",
     "@instructure/ui-selectable": "^6.12.0",

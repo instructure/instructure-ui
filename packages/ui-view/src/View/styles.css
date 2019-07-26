@@ -54,6 +54,10 @@
   border-color: var(--borderColorPrimary);
 }
 
+.borderColor--secondary {
+  border-color: var(--borderColorSecondary);
+}
+
 .borderColor--brand {
   border-color: var(--borderColorBrand);
 }

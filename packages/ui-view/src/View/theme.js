@@ -45,6 +45,7 @@ export default function generator ({
     borderStyle: borders.style,
 
     borderColorPrimary: colors.borderMedium,
+    borderColorSecondary: colors.borderDark,
     borderColorSuccess: colors.borderSuccess,
     borderColorBrand: colors.borderBrand,
     borderColorInfo: colors.borderInfo,

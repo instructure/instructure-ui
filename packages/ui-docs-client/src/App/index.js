@@ -32,7 +32,8 @@ import { DrawerLayout } from '@instructure/ui-layout'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
-import { Heading, Pill } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-elements'
+import { Pill } from '@instructure/ui-pill'
 import { IconHeartSolid, IconGithubSolid } from '@instructure/ui-icons'
 
 import { Document } from '../Document'
@@ -209,7 +210,7 @@ class App extends Component {
     return (
       <div>
         { this.renderThemeSelect() }
-        { doc.experimental && <div><Pill text="Experimental" variant="primary" margin="small 0" /></div>}
+        { doc.experimental && <div><Pill color="info" margin="small 0" __dangerouslyIgnoreExperimentalWarnings>Experimental</Pill></div>}
         <Section id={doc.id} heading={heading}>
           <Document
             doc={{

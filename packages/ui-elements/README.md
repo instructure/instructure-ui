@@ -38,7 +38,7 @@ The `ui-elements` package contains the following:
 - [Link](#Link)
 - [List](#List)
 - [MetricsList](#MetricsList)
-- [Pill](#Pill)
+- Pill will be removed in version 7.0.0. Use the [Pill from ui-pill](#Pill) instead.
 - [Progress](#Progress)
 - [Rating](#Rating)
 - [Spinner](#Spinner)

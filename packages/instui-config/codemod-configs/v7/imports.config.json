@@ -20,6 +20,10 @@
     "replace": "@instructure/ui-view/lib/View"
   },
   {
+    "pattern": "^@instructure/ui-elements/lib/Pill",
+    "replace": "@instructure/ui-pill/lib/Pill"
+  },
+  {
     "pattern": "^@instructure/ui-layout/lib/Popover",
     "replace": "@instructure/ui-popover/lib/Popover"
   },

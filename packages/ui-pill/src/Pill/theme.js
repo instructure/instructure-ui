@@ -29,35 +29,18 @@ export default function generator ({ borders, colors, spacing, typography }) {
     padding: `0 ${spacing.xSmall}`,
     height: '1.3125rem',
     background: colors.backgroundLightest,
-    lineHeight: typography.lineHeightFit,
     textTransformStyle: 'uppercase',
     textFontSize: typography.fontSizeXSmall,
     textFontWeight: typography.fontWeightBold,
     maxWidth: '15rem',
-    color: colors.textDark,
-    primaryColor: colors.textBrand,
+    primaryColor: colors.textDark,
+    infoColor: colors.textInfo,
     dangerColor: colors.textDanger,
     successColor: colors.textSuccess,
     warningColor: colors.textWarning,
-    messageColor: colors.textAlert,
+    alertColor: colors.textAlert,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,
-    borderRadius: '999rem',
-    focusOutlineWidth: borders.widthMedium,
-    focusOutlineColor: colors.borderBrand,
-    focusOutlineStyle: borders.style
-  }
-}
-
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
-  return {
-    color: colors.textDarkest,
-    borderColor: colors.borderDarkest
-  }
-}
-
-generator.canvas = function (variables) {
-  return {
-    primaryColor: variables['ic-brand-primary']
+    borderRadius: '999rem'
   }
 }
