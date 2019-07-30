@@ -48,7 +48,7 @@
     "open": "^6.4.0",
     "react-to-typescript-definitions": "^2.0.0",
     "rimraf": "^2.6.3",
-    "semver": "^6.2.0",
+    "semver": "^6.3.0",
     "stylelint": "^10",
     "validate-commit-msg": "^2.14.0",
     "webpack-cli": "^3.3.6",

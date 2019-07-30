@@ -28,7 +28,7 @@
     "postcss-input-range": "4.0.0",
     "postcss-mixins": "^6.2.2",
     "postcss-nested": "^4.1.2",
-    "postcss-nesting": "^7.0.0",
+    "postcss-nesting": "^7.0.1",
     "postcss-reporter": "^6.0.1",
     "postcss-simple-vars": "^5.0.1"
   },

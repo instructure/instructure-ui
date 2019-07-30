@@ -32,7 +32,7 @@
     "recursive-readdir": "^2.2.0",
     "require-dir": "^1.2.0",
     "rimraf": "^2.4.3",
-    "svg-to-jsx": "^1.0.0",
+    "svg-to-jsx": "^1.0.1",
     "temporary": "^1.0.0",
     "through2": "^3.0.0",
     "vinyl": "^2.2.0",
