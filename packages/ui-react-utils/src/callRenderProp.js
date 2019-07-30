@@ -40,7 +40,10 @@ function callRenderProp (value) {
     // In react 16, `createElement` accepts a function. In react 15 we get an
     // error on rendering the result. Evaluate the function here if it is not a
     // react component.
-    if (!value.prototype.isReactComponent) {
+    if (!(
+      value.prototype && // fat arrow functions don't have a prototype
+      value.prototype.isReactComponent
+    )) {
       return value()
     }
 
