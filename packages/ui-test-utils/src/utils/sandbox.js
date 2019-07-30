@@ -35,7 +35,7 @@ class Sandbox {
     // eslint-disable-next-line no-console
     console.info('[ui-test-utils] Initializing test sandbox...')
     try {
-      // global Mocha (or Jest?) beforeEach
+      // global Mocha (or Jest?) hooks
       before(this.init.bind(this))
       beforeEach(this.setup.bind(this))
       afterEach(this.teardown.bind(this))
@@ -44,7 +44,7 @@ class Sandbox {
     }
   }
 
-  async init () {
+  init () {
     initConsole()
 
     this._timeouts = []
@@ -89,9 +89,17 @@ class Sandbox {
       const addedNodes = Array.from(mutations).map(mutation => Array.from(mutation.addedNodes))
       this._addedNodes = this._addedNodes.concat(addedNodes)
     })
+
+    resetViewport()
+
+    this.teardownComplete = true
   }
 
   async setup () {
+    if (!this.teardownComplete) {
+      await this.teardown()
+    }
+
     document.documentElement.setAttribute('dir', 'ltr')
     document.documentElement.setAttribute('lang', 'en-US')
 
@@ -145,9 +153,9 @@ class Sandbox {
     this._addedNodes.forEach((node) => node && typeof node.remove === 'function' && node.remove())
     this._addedNodes = []
 
-    if (global.viewport && typeof global.viewport.reset === 'function') {
-      global.viewport.reset()
-    }
+    resetViewport()
+
+    this.teardownComplete = true
   }
 
   stub (obj, method, fn) {
@@ -183,6 +191,12 @@ class Sandbox {
       console.error('[ui-test-utils] the `viewport` global has not been configured. See https://github.com/squidfunk/karma-viewport.')
     }
     return global.viewport
+  }
+}
+
+function resetViewport () {
+  if (global.viewport && typeof global.viewport.reset === 'function') {
+    global.viewport.reset()
   }
 }
 
