@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.8.0](https://github.com/instructure/instructure-ui/compare/v6.7.0...v6.8.0) (2019-07-31)
+
+
+### Bug Fixes
+
+* **template-component:** Update template and docs ([c1913e1](https://github.com/instructure/instructure-ui/commit/c1913e1))
+* **ui-a11y,ui-overlays:** fix tray/dialog document click behaviors ([1130a73](https://github.com/instructure/instructure-ui/commit/1130a73))
+* **ui-forms:** keep escape from closing modals when a file selection dialog is open ([321c246](https://github.com/instructure/instructure-ui/commit/321c246))
+* **ui-react-utils:** handle fat arrow functions in callRenderProp ([6e0d0c8](https://github.com/instructure/instructure-ui/commit/6e0d0c8))
+* **ui-select,ui-selectable:** stop event propagation from selectable ([fc75997](https://github.com/instructure/instructure-ui/commit/fc75997))
+* **ui-test-utils:** reset viewport in init/before hook ([f271a5b](https://github.com/instructure/instructure-ui/commit/f271a5b))
+
+
+### Features
+
+* **browserslist-config-instui,ui-eslint-config:** add browserslist pkg, browser compat linting ([6fcee36](https://github.com/instructure/instructure-ui/commit/6fcee36))
+* **ui-webpack-config:** Add a env var to disable linter failure on warnings ([ace5500](https://github.com/instructure/instructure-ui/commit/ace5500))
+
+
+
+
+
 # [6.7.0](https://github.com/instructure/instructure-ui/compare/v6.6.0...v6.7.0) (2019-07-15)
 
 

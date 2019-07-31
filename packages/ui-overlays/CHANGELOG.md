@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.8.0](https://github.com/instructure/instructure-ui/compare/v6.7.0...v6.8.0) (2019-07-31)
+
+
+### Bug Fixes
+
+* **ui-a11y,ui-overlays:** fix tray/dialog document click behaviors ([1130a73](https://github.com/instructure/instructure-ui/commit/1130a73))
+
+
+
+
+
 # [6.7.0](https://github.com/instructure/instructure-ui/compare/v6.6.0...v6.7.0) (2019-07-15)
 
 **Note:** Version bump only for package @instructure/ui-overlays
