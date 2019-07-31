@@ -34,7 +34,7 @@
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "gerritbot": "^1.0.3",
-    "gh-pages": "^2.0.1",
+    "gh-pages": "^2.1.0",
     "git-url-parse": "^11.1.2",
     "globby": "^10.0.1",
     "http-server": "^0.11.1",
