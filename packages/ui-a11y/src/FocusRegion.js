@@ -124,13 +124,14 @@ class FocusRegion {
         this._listeners.push(addEventListener(doc, 'click', this.captureDocumentClick, true))
         this._listeners.push(addEventListener(doc, 'click', this.handleDocumentClick))
 
-        doc.getElementsByTagName('iframe').forEach((el) => {
-          // listen for mouseup events on any iframes in the document
-          const frameDoc = el.contentDocument || el.contentWindow.document
-          this._listeners.push(addEventListener(frameDoc, 'mouseup', (event) => {
-            this.handleFrameClick(event, el)
-          }))
-        })
+        Array.from(doc.getElementsByTagName('iframe'))
+          .forEach((el) => {
+            // listen for mouseup events on any iframes in the document
+            const frameDoc = el.contentDocument || el.contentWindow.document
+            this._listeners.push(addEventListener(frameDoc, 'mouseup', (event) => {
+              this.handleFrameClick(event, el)
+            }))
+          })
       }
 
       if (this._options.shouldCloseOnEscape) {

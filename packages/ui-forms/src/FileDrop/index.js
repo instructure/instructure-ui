@@ -198,7 +198,7 @@ class FileDrop extends Component {
   }
 
   getDataTransferItems (event, enablePreview) {
-    let list = Array.prototype.slice.call(getEventFiles(event, this.fileInputEl))
+    let list = Array.from(getEventFiles(event, this.fileInputEl))
 
     if (list.length > 1) {
       list = this.props.allowMultiple ? list : [list[0]]

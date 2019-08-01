@@ -137,23 +137,22 @@ class Truncator {
 
   getNodeMap (rootNode) {
     const { truncate } = this._options
+    const nodes = Array.from(rootNode.childNodes)
     let map = []
     // parse child nodes and build a data map to associate each node with its data
-    for (let i = 0; i < rootNode.childNodes.length; i++) {
-      const node = rootNode.childNodes[i]
+    nodes.forEach((node) => {
       if (node.nodeType === 1 || node.nodeType === 3) {
         const visible = isVisible(node, false)
         const textContent = node.textContent + ' '
         map.push({
-          node: node,
+          node,
           data: truncate === 'word'
             // eslint-disable-next-line no-useless-escape
             ? visible ? textContent.match(/.*?[\.\s\/]+?/g) : ''
             : visible ? node.textContent.split('') : []
         })
       }
-    }
-
+    })
     return map
   }
 

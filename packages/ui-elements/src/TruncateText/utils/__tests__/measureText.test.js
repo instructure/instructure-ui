@@ -28,16 +28,8 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import measureText from '../measureText'
 
 describe('measureText', async () => {
-  const getNodes = (root) => {
-    let arr = []
-    for (let i = 0; i < root.childNodes.length; i++) {
-      const node = root.childNodes[i]
-      if (node.nodeType === 1 || node.nodeType === 3) {
-        arr.push(node)
-      }
-    }
-    return arr
-  }
+  const getNodes = root => Array.from(root.childNodes)
+    .filter(node => node.nodeType === 1 || node.nodeType === 3)
 
   it('should calculate width', async () => {
     let stage

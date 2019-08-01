@@ -226,7 +226,7 @@ class TreeBrowser extends Component {
   }
 
   getNavigableNodes () {
-    return [].slice.call(this._root.querySelectorAll('[role="treeitem"]'))
+    return Array.from(this._root.querySelectorAll('[role="treeitem"]'))
   }
 
   moveFocus (delta) {

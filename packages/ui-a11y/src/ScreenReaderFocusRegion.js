@@ -152,8 +152,8 @@ class ScreenReaderFocusRegion {
     if (node.tagName.toLowerCase() === 'iframe') {
       iframes.push(node)
     } else {
-      if (node.querySelectorAll) {
-        iframes = [...node.querySelectorAll('iframe')]
+      if (node.getElementsByTagName) {
+        iframes = Array.from(node.getElementsByTagName('iframe'))
       }
     }
 

@@ -148,7 +148,7 @@ describe('ScreenReaderFocusRegion', async () => {
       { addedNodes: [desc], removedNodes: [] }
     ])
 
-    content.childNodes.forEach((node) => {
+    Array.from(content.childNodes).forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist()
     })
   })

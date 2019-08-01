@@ -59,13 +59,14 @@ function findFocusable (el, filter, shouldSearchRootNode) {
   }
 
   const focusableSelector = 'a[href],frame,iframe,object,input:not([type=hidden]),select,textarea,button,*[tabindex]'
-  let matches = element.querySelectorAll(focusableSelector)
+
+  let matches = Array.from(element.querySelectorAll(focusableSelector))
 
   if (shouldSearchRootNode && elementMatches(element, focusableSelector)) {
     matches = [...matches, element]
   }
 
-  return [].slice.call(matches, 0).filter((el) => {
+  return matches.filter((el) => {
     if (typeof filter === 'function') {
       return filter(el) && focusable(el)
     } else {
