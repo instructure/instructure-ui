@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.8.1](https://github.com/instructure/instructure-ui/compare/v6.8.0...v6.8.1) (2019-08-02)
+
+
+### Bug Fixes
+
+* **ui-a11y:** convert getElementsByTagName results to Array ([4e7c07a](https://github.com/instructure/instructure-ui/commit/4e7c07a))
+
+
+
+
+
 # [6.8.0](https://github.com/instructure/instructure-ui/compare/v6.7.0...v6.8.0) (2019-07-31)
 
 

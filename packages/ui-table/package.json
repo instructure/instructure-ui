@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-table",
-  "version": "6.8.0",
+  "version": "6.8.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,21 +22,21 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.8.0",
-    "@instructure/ui-color-utils": "^6.8.0",
-    "@instructure/ui-test-utils": "^6.8.0"
+    "@instructure/ui-babel-preset": "^6.8.1",
+    "@instructure/ui-color-utils": "^6.8.1",
+    "@instructure/ui-test-utils": "^6.8.1"
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/ui-a11y": "^6.8.0",
-    "@instructure/ui-forms": "^6.8.0",
-    "@instructure/ui-icons": "^6.8.0",
-    "@instructure/ui-layout": "^6.8.0",
-    "@instructure/ui-prop-types": "^6.8.0",
-    "@instructure/ui-react-utils": "^6.8.0",
-    "@instructure/ui-testable": "^6.8.0",
-    "@instructure/ui-themeable": "^6.8.0",
-    "@instructure/ui-utils": "^6.8.0",
+    "@instructure/ui-a11y": "^6.8.1",
+    "@instructure/ui-forms": "^6.8.1",
+    "@instructure/ui-icons": "^6.8.1",
+    "@instructure/ui-layout": "^6.8.1",
+    "@instructure/ui-prop-types": "^6.8.1",
+    "@instructure/ui-react-utils": "^6.8.1",
+    "@instructure/ui-testable": "^6.8.1",
+    "@instructure/ui-themeable": "^6.8.1",
+    "@instructure/ui-utils": "^6.8.1",
     "classnames": "^2",
     "prop-types": "^15",
     "react": "^15 || ^16"
