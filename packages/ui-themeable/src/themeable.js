@@ -24,6 +24,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import newless from 'newless'
 
 import { decorator } from '@instructure/ui-decorator'
 import { isEmpty, shallowEqual, deepEqual } from '@instructure/ui-utils'
@@ -86,7 +87,12 @@ const {
 
 const emptyObj = {}
 
-const themeable = decorator((ComposedComponent, theme, styles = {}) => {
+const themeable = decorator((_ComposedComponent, theme, styles = {}) => {
+  // this is to make it work if ComposedComponent is a native `class` and this
+  // file has been transpiled to es5 by @babel/plugin-transform-classes.
+  // we can remove this once we stop transpiling `class`es
+  const ComposedComponent = newless(_ComposedComponent)
+
   const displayName = ComposedComponent.displayName || ComposedComponent.name
   let componentId = `${(styles && styles.componentId) || uid()}`
   if (process.env.NODE_ENV !== 'production') {
