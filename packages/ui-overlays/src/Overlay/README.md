@@ -40,7 +40,7 @@ class Example extends React.Component {
             onClick={() => { this.setState({ open: false })}}
             elementRef={this.handleMaskRef}
           >
-            <Spinner title="Loading" size="large" margin="0 0 0 medium" />
+            <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
           </Mask>
         </Overlay>
       </div>
