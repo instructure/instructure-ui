@@ -247,5 +247,23 @@ describe('<Table />', async () => {
 
       expect(icon).to.exist()
     })
+
+    it('creates proper aria-sort attributes (ascending)', async () => {
+      await renderSortableTable({
+        sortDirection: 'ascending',
+      })
+      const sortedHeader = await find('th[aria-sort="ascending"]')
+
+      expect(sortedHeader).to.exist()
+    })
+
+    it('creates proper aria-sort attributes (descending)', async () => {
+      await renderSortableTable({
+        sortDirection: 'descending',
+      })
+      const sortedHeader = await find('th[aria-sort="descending"]')
+
+      expect(sortedHeader).to.exist()
+    })
   })
 })

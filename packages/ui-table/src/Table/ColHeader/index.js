@@ -99,7 +99,7 @@ class ColHeader extends Component {
   }
 
   render () {
-    const { onRequestSort, width, textAlign, children } = this.props
+    const { onRequestSort, width, textAlign, children, sortDirection } = this.props
 
     return (
       <th
@@ -113,6 +113,7 @@ class ColHeader extends Component {
           width,
         }}
         scope="col"
+        aria-sort={ sortDirection }
       >
         {onRequestSort && (
           <button
