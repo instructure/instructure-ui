@@ -93,3 +93,13 @@ export default function generator ({
     ...makeThemeVars('border', borders)
   }
 }
+
+generator.canvas = function (variables) {
+  return {
+    focusColorInfo: variables['ic-brand-primary'],
+    backgroundBrand: variables['ic-brand-primary'],
+    backgroundInfo: variables['ic-brand-primary'],
+    borderColorBrand: variables['ic-brand-primary'],
+    borderColorInfo: variables['ic-brand-primary']
+  }
+}
