@@ -241,9 +241,10 @@ class Alert extends Component {
     if (this.getLiveRegion()) {
       const div = document.getElementById(this.srid)
       if (div) {
-        ReactDOM.unmountComponentAtNode(div)
-        const content = this.createScreenreaderContentNode()
-        ReactDOM.render(content, div)
+        ReactDOM.render(null, div, () => {
+          const content = this.createScreenreaderContentNode()
+          ReactDOM.render(content, div)
+        })
       }
     }
   }
@@ -293,7 +294,9 @@ class Alert extends Component {
       // take place internally so the transition runs
       this.close()
     } else {
-      this.updateScreenreaderAlert()
+      if (this.props.children !== prevProps.children) {
+        this.updateScreenreaderAlert()
+      }
     }
   }
 

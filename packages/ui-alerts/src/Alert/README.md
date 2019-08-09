@@ -146,6 +146,55 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+Alerts can be used to emit screenreader only messages too
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      message: null,
+      count: 1
+    }
+  }
+
+  changeMessage = () => {
+    this.setState({
+      message: `this is message ${this.state.count}`,
+      count: this.state.count + 1
+      })
+  }
+
+  clearMessage  =() => {
+    this.setState({
+      message: null,
+      count: this.state.count + 1})
+  }
+
+  render () {
+    return (
+      <div>
+        <Button onClick={this.changeMessage}>Change Message</Button>
+        <Button onClick={this.clearMessage} margin="0 0 0 small">Clear Message</Button>
+        <Alert
+          liveRegion={() => document.getElementById('flash-messages')}
+          screenReaderOnly
+         >
+            {this.state.message}
+        </Alert>
+      </div>
+    );
+  }
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js
