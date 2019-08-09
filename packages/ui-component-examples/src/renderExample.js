@@ -26,8 +26,8 @@ import { View } from '@instructure/ui-view'
 import { Tooltip} from '@instructure/ui-overlays'
 import { Button } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { Text } from '@instructure/ui-text'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 export default function renderExample ({ Component, componentProps, exampleProps, key }) {
   return (
@@ -52,7 +52,7 @@ export default function renderExample ({ Component, componentProps, exampleProps
           <Text color="secondary" __dangerouslyIgnoreExperimentalWarnings>
             <IconInfoLine />
           </Text>
-          <ScreenReaderContent>props</ScreenReaderContent>
+          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>props</ScreenReaderContent>
         </Button>
       </Tooltip>
     </View>

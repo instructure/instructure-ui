@@ -28,7 +28,7 @@ import ReactDOM from 'react-dom'
 
 import { themeable } from '@instructure/ui-themeable'
 import { Modal, Tooltip } from '@instructure/ui-overlays'
-import { AccessibleContent, ScreenReaderContent } from '@instructure/ui-a11y'
+import { AccessibleContent, ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { Checkbox } from '@instructure/ui-forms'
@@ -140,7 +140,7 @@ class Playground extends Component {
               </SVGIcon>
             }
           >
-            <ScreenReaderContent>Hide Code</ScreenReaderContent>
+            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Hide Code</ScreenReaderContent>
           </Button>
         </div>
         <CodeEditor
@@ -158,7 +158,7 @@ class Playground extends Component {
     return (
       <Checkbox
         label={
-          <AccessibleContent alt="Render component with right-to-left text direction">
+          <AccessibleContent __dangerouslyIgnoreExperimentalWarnings alt="Render component with right-to-left text direction">
             RTL
           </AccessibleContent>
         }
@@ -219,7 +219,7 @@ class Playground extends Component {
                       </SVGIcon>
                     }
                   >
-                    <ScreenReaderContent>Full screen view</ScreenReaderContent>
+                    <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Full screen view</ScreenReaderContent>
                   </Button>
                 </Tooltip>
               </Flex.Item>
@@ -235,7 +235,7 @@ class Playground extends Component {
                       </SVGIcon>
                     }
                   >
-                    <ScreenReaderContent>View code</ScreenReaderContent>
+                    <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>View code</ScreenReaderContent>
                   </Button>
                 </Tooltip>
               </Flex.Item>

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { omitProps, pickProps, getElementType } from '@instructure/ui-react-utils'
 import { Button } from '@instructure/ui-buttons'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Transition } from '@instructure/ui-motion'
 import { controllable } from '@instructure/ui-prop-types'
 import { isActiveElement } from '@instructure/ui-dom-utils'
@@ -156,7 +156,7 @@ class ToggleGroup extends Component {
         }}
         icon={this.renderIcon(expanded)}
       >
-        <ScreenReaderContent>{label}</ScreenReaderContent>
+        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{label}</ScreenReaderContent>
       </Button>
     )
   }

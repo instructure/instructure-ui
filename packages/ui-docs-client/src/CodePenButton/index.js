@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Tooltip } from '@instructure/ui-overlays'
 import { SVGIcon } from '@instructure/ui-svg-images'
 
@@ -79,7 +79,7 @@ class CodePenButton extends Component {
               </SVGIcon>
             }
           >
-            <ScreenReaderContent>{`Edit ${this.props.title} in Codepen`}</ScreenReaderContent>
+            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{`Edit ${this.props.title} in Codepen`}</ScreenReaderContent>
           </Button>
         </Tooltip>
       </form>

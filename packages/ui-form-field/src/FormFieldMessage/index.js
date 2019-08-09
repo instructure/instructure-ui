@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -67,7 +67,7 @@ class FormFieldMessage extends Component {
     return (
       (this.props.variant !== 'screenreader-only')
         ? <span className={classnames(classes)}>{this.props.children}</span>
-        : <ScreenReaderContent>{this.props.children}</ScreenReaderContent>
+        : <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{this.props.children}</ScreenReaderContent>
     )
   }
 }

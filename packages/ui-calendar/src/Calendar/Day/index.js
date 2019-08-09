@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import { FocusableView } from '@instructure/ui-focusable'
 import { View } from '@instructure/ui-view'
-import { AccessibleContent } from '@instructure/ui-a11y'
+import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { omitProps, callRenderProp, getElementType } from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 
@@ -200,7 +200,7 @@ class Day extends Component {
         elementRef={this.handleElementRef}
       >
         <span className={classes}>
-          <AccessibleContent alt={label}>
+          <AccessibleContent alt={label} __dangerouslyIgnoreExperimentalWarnings>
             {callRenderProp(children)}
           </AccessibleContent>
         </span>

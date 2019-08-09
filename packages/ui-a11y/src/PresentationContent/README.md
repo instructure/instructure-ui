@@ -1,6 +1,14 @@
 ---
-describes: PresentationContent
+describes: DeprecatedPresentationContent
+id: DeprecatedPresentationContent__README
 ---
+
+**DEPRECATED:** PresentationContent will be removed from `ui-a11y` in version 7.0.0. Use the [PresentationContent from ui-a11y-content](#PresentationContent) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package.
+
+***
 
 A component that *tries* to hide itself from screen readers, absolutely
 expecting that you're providing a more accessible version of the resource
@@ -18,9 +26,9 @@ Use of this component is discouraged unless there's no alternative
 ---
 example: true
 ---
-<PresentationContent>
+<DeprecatedPresentationContent>
   <Text>
     Presentational content here
   </Text>
-</PresentationContent>
+</DeprecatedPresentationContent>
 ```

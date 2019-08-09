@@ -30,7 +30,7 @@ import { Heading, Link } from '@instructure/ui-elements'
 import { TextInput } from '@instructure/ui-text-input'
 import { Select, Checkbox } from '@instructure/ui-forms'
 import { FormFieldGroup } from '@instructure/ui-form-field'
-import { ScreenReaderContent, AccessibleContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent, AccessibleContent } from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-overlays'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { themeable } from '@instructure/ui-themeable'
@@ -118,19 +118,19 @@ class Icons extends Component {
         <FormFieldGroup
           layout="columns"
           colSpacing="small"
-          description={<ScreenReaderContent>Filter Icons</ScreenReaderContent>}
+          description={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Filter Icons</ScreenReaderContent>}
           hAlign="end"
         >
           <TextInput
             placeholder="Filter icons..."
             value={this.state.query}
             onChange={this.handleSearchChange}
-            label={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
+            label={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Icon Name</ScreenReaderContent>}
             size="large"
           />
           <Select
             name="format"
-            label={<ScreenReaderContent>Icon Format</ScreenReaderContent>}
+            label={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Icon Format</ScreenReaderContent>}
             onChange={this.handleFormatChange}
             size="large"
             value={this.selectedFormatKey}
@@ -165,7 +165,7 @@ class Icons extends Component {
     return (
       <Checkbox
         label={
-          <AccessibleContent alt="Render icons with right-to-left text direction">
+          <AccessibleContent __dangerouslyIgnoreExperimentalWarnings alt="Render icons with right-to-left text direction">
             RTL
           </AccessibleContent>
         }

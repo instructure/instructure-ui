@@ -20,7 +20,7 @@ yarn add @instructure/ui-a11y
 
 ```js
 import React from 'react'
-import { AccessibleContent } from '@instructure/ui-a11y'
+import { Dialog } from '@instructure/ui-a11y'
 
 const MyAccessibleContent = () => {
   return (
@@ -33,10 +33,10 @@ const MyAccessibleContent = () => {
 
 ### Components
 The `ui-a11y` package contains the following components:
-- [AccessibleContent](#AccessibleContent)
+- `AccessibleContent` will be removed in version 7.0.0. Use the [AccessibleContent from ui-a11y-content](#AccessibleContent) instead.
 - [Dialog](#Dialog)
-- [PresentationContent](#PresentationContent)
-- [ScreenReaderContent](#ScreenReaderContent)
+- `PresentationContent` will be removed in version 7.0.0. Use the [PresentationContent from ui-a11y-content](#PresentationContent) instead.
+- `ScreenReaderContent` will be removed in version 7.0.0. Use the [ScreenReaderContent from ui-a11y-content](#ScreenReaderContent) instead.
 
 ### Utilities
 The `ui-a11y` package contains the following utilities:

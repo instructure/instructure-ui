@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { Button } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-elements'
 import { InlineSVG } from '@instructure/ui-svg-images'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { themeable } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -60,7 +60,7 @@ class Variant extends Component {
       icon = (
         <span>
           <i className={`${glyph.classes.join(' ')}`} aria-hidden="true" />
-          <ScreenReaderContent>{`${name} (${variant})`}</ScreenReaderContent>
+          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{`${name} (${variant})`}</ScreenReaderContent>
         </span>
       )
     }
@@ -73,7 +73,7 @@ class Variant extends Component {
           onClick={this.handleClick}
           icon={icon}
         >
-          <ScreenReaderContent>View Usage</ScreenReaderContent>
+          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>View Usage</ScreenReaderContent>
         </Button>
       </div>
     )

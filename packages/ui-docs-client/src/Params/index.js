@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-elements'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { compileMarkdown } from '../compileMarkdown'
 
@@ -62,7 +62,7 @@ class Params extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent>Parameters</ScreenReaderContent>} margin="0 0 large">
+      <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Parameters</ScreenReaderContent>} margin="0 0 large">
         <thead>
           <tr>
             <th scope="col">Param</th>

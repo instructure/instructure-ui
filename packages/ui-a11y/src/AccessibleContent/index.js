@@ -31,10 +31,11 @@ import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 /**
 ---
-category: components/utilities
+category: components/utilities/deprecated
+id: DeprecatedAccessibleContent
 ---
-@module AccessibleContent
 */
+
 class AccessibleContent extends Component {
   static propTypes = {
     alt: PropTypes.string,

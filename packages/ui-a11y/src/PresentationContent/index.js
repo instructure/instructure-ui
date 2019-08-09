@@ -29,10 +29,11 @@ import { omitProps, getElementType } from '@instructure/ui-react-utils'
 
 /**
 ---
-category: components/utilities
+category: components/utilities/deprecated
+id: DeprecatedPresentationContent
 ---
-@module PresentationContent
 **/
+
 class PresentationContent extends Component {
   static propTypes = {
     children: PropTypes.node,

@@ -32,7 +32,7 @@ import keycode from 'keycode'
 import { deprecated, callRenderProp } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import {
   IconCheckMarkSolid,
   IconInfoBorderlessSolid,
@@ -217,7 +217,7 @@ class Alert extends Component {
 
   createScreenreaderContentNode () {
     return (
-      <ScreenReaderContent>
+      <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
         {this.props.children}
       </ScreenReaderContent>
     )

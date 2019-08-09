@@ -28,7 +28,8 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import { Dialog, ScreenReaderContent, hasVisibleChildren } from '@instructure/ui-a11y'
+import { Dialog, hasVisibleChildren } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { FormField, FormFieldLayout, FormPropTypes } from '@instructure/ui-form-field'
 import { LayoutPropTypes, Position } from '@instructure/ui-layout'
 import { containsActiveElement, findDOMNode, isActiveElement } from '@instructure/ui-dom-utils'
@@ -627,7 +628,7 @@ class SelectField extends Component {
     )
 
     if (!hasVisibleChildren(this.props.label)) {
-      wrappedLabel = <ScreenReaderContent>{wrappedLabel}</ScreenReaderContent>
+      wrappedLabel = <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{wrappedLabel}</ScreenReaderContent>
     }
 
     return (
@@ -735,7 +736,7 @@ class SelectField extends Component {
         >
           {assistiveText}
         </span>
-        <ScreenReaderContent>
+        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
           <span
             role="log"
             aria-live="polite"

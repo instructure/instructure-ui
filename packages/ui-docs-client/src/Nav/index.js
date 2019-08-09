@@ -30,7 +30,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { Button } from '@instructure/ui-buttons'
 import { Text } from '@instructure/ui-text'
 import { TextInput } from '@instructure/ui-text-input'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconSearchLine } from '@instructure/ui-icons'
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 
@@ -346,7 +346,7 @@ class Nav extends Component {
           <TextInput
             placeholder="Find..."
             onChange={this.handleSearchChange}
-            renderLabel={<ScreenReaderContent>Search Documentation</ScreenReaderContent>}
+            renderLabel={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Search Documentation</ScreenReaderContent>}
             type="search"
             renderAfterInput={<IconSearchLine inline={false} />}
           />

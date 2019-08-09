@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
 import { Table } from '@instructure/ui-elements'
-import { ScreenReaderContent} from '@instructure/ui-a11y'
+import { ScreenReaderContent} from '@instructure/ui-a11y-content'
 
 import { ColorSwatch } from '../ColorSwatch'
 
@@ -62,7 +62,7 @@ class ComponentTheme extends Component {
   render () {
     return this.props.theme && Object.keys(this.props.theme).length > 0 ? (
       <div className={styles.root}>
-        <Table caption={<ScreenReaderContent>Component theme</ScreenReaderContent>}>
+        <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Component theme</ScreenReaderContent>}>
           <thead>
             <tr>
               <th scope="col">Name</th>

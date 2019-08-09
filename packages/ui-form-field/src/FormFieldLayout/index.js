@@ -26,7 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { ScreenReaderContent, hasVisibleChildren } from '@instructure/ui-a11y'
+import { hasVisibleChildren } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Grid } from '@instructure/ui-layout'
 import { error } from '@instructure/console/macro'
 import { themeable } from '@instructure/ui-themeable'
@@ -149,7 +150,7 @@ class FormFieldLayout extends Component {
     // note: the legend element must be the first child of a fieldset element for SR
     // so we render it twice in that case (once for SR-only and one that is visible)
     return (
-      <ScreenReaderContent as="legend">
+      <ScreenReaderContent as="legend" __dangerouslyIgnoreExperimentalWarnings>
         { this.props.label }
         { this.hasMessages && <FormFieldMessages messages={this.props.messages} /> }
       </ScreenReaderContent>

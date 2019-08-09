@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
 import { Table } from '@instructure/ui-elements'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { compileMarkdown } from '../compileMarkdown'
 
@@ -157,7 +157,7 @@ class Properties extends Component {
   render () {
     return (
       <div className={styles.root}>
-        <Table caption={<ScreenReaderContent>Component Properties</ScreenReaderContent>}>
+        <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Component Properties</ScreenReaderContent>}>
           <thead>
             <tr>
               <th scope="col">Prop</th>

@@ -18,5 +18,17 @@
   {
     "pattern": "^@instructure/ui-elements/lib/components/Text",
     "replace": "@instructure/ui-text/lib/Text"
+  },
+  {
+    "pattern": "^@instructure/ui-a11y/lib/components/AccessibleContent",
+    "replace": "@instructure/ui-a11y-content/lib/AccessibleContent"
+  },
+  {
+    "pattern": "^@instructure/ui-a11y/lib/components/PresentationContent",
+    "replace": "@instructure/ui-a11y-content/lib/PresentationContent"
+  },
+  {
+    "pattern": "^@instructure/ui-a11y/lib/components/ScreenReaderContent",
+    "replace": "@instructure/ui-a11y-content/lib/ScreenReaderContent"
   }
 ]

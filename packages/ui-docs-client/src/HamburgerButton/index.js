@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { Button } from '../Button'
 
@@ -66,7 +66,7 @@ class HamburgerButton extends Component {
       >
         <span className={classnames(classes)}>
           <span className={styles.line}>
-            <ScreenReaderContent>{children}</ScreenReaderContent>
+            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{children}</ScreenReaderContent>
           </span>
         </span>
       </Button>

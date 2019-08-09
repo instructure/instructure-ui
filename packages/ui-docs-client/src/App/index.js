@@ -28,9 +28,9 @@ import PropTypes from 'prop-types'
 import GithubCorner from 'react-github-corner'
 
 import { themeable } from '@instructure/ui-themeable'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { DrawerLayout } from '@instructure/ui-layout'
 import { View } from '@instructure/ui-view'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Heading, Pill } from '@instructure/ui-elements'
 import { IconHeartSolid, IconGithubSolid } from '@instructure/ui-icons'
@@ -289,7 +289,7 @@ class App extends Component {
         { repository && (
           <a href={repository} rel="noopener noreferrer" className={styles.githubLink} target="_blank">
             <IconGithubSolid className={styles.footerIcon} />
-            <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
+            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Contribute on Github</ScreenReaderContent>
           </a>
         ) }
       </div>

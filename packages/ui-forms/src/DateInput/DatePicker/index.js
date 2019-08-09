@@ -31,7 +31,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import { I18nPropTypes, DateTime, Locale } from '@instructure/ui-i18n'
 import { themeable } from '@instructure/ui-themeable'
 import { error } from '@instructure/console/macro'
-import { PresentationContent, ScreenReaderContent } from '@instructure/ui-a11y'
+import { PresentationContent, ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 
 import { DatePickerPagination } from './DatePickerPagination'
@@ -383,8 +383,8 @@ class DatePicker extends Component {
   renderHeaderCell (day) {
     return (
       <th className={styles.header} key={day.dayOfYear()}>
-        <PresentationContent>{day.format('dd')}</PresentationContent>
-        <ScreenReaderContent>{day.format('dddd')}</ScreenReaderContent>
+        <PresentationContent __dangerouslyIgnoreExperimentalWarnings>{day.format('dd')}</PresentationContent>
+        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{day.format('dddd')}</ScreenReaderContent>
       </th>
     )
   }

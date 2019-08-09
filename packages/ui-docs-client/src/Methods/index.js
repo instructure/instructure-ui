@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-elements'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { compileMarkdown } from '../compileMarkdown'
 
@@ -72,7 +72,7 @@ class Methods extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent>Parameters</ScreenReaderContent>}>
+      <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Parameters</ScreenReaderContent>}>
         <thead>
           <tr>
             <th scope="col">Name</th>

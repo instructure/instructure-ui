@@ -32,10 +32,11 @@ import styles from './styles.css'
 
 /**
 ---
-category: components/utilities
+category: components/utilities/deprecated
+id: DeprecatedScreenReaderContent
 ---
-@module ScreenReaderContent
 **/
+
 @themeable(null, styles)
 class ScreenReaderContent extends Component {
   static propTypes = {

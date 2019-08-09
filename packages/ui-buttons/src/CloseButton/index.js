@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { IconXSolid } from '@instructure/ui-icons'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
@@ -79,7 +79,7 @@ class CloseButton extends Component {
         })}
       >
         <Button {...pickProps(this.props, Button.propTypes)} icon={IconXSolid}>
-          <ScreenReaderContent>
+          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
             {this.props.children}
           </ScreenReaderContent>
         </Button>

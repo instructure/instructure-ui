@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import { Flex } from '@instructure/ui-layout'
 import { FocusableView } from '@instructure/ui-focusable'
 import { Button } from '@instructure/ui-buttons'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconEditLine } from '@instructure/ui-icons'
 import { warn } from '@instructure/console/macro'
 import { createChainedFunction } from '@instructure/ui-utils'
@@ -170,7 +170,7 @@ class InPlaceEdit extends Component {
         icon={isVisible ? IconEditLine : null}
         {...buttonProps}
       >
-        <ScreenReaderContent>{label}</ScreenReaderContent>
+        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{label}</ScreenReaderContent>
       </Button>
     )
   }

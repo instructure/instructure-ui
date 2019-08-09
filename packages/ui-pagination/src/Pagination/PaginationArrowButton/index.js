@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Button } from '@instructure/ui-buttons'
-import { PresentationContent, ScreenReaderContent } from '@instructure/ui-a11y'
+import { PresentationContent, ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Tooltip } from '@instructure/ui-overlays'
 import { IconArrowOpenStartSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
@@ -54,7 +54,7 @@ class PaginationArrowButton extends Component {
     return (
       <Tooltip
         on={['hover', 'focus']}
-        tip={<PresentationContent>{label}</PresentationContent>}
+        tip={<PresentationContent __dangerouslyIgnoreExperimentalWarnings>{label}</PresentationContent>}
       >
         <Button
           {...props}
@@ -63,7 +63,7 @@ class PaginationArrowButton extends Component {
           icon={Icon}
           rel={(props.href || props.to) ? direction : null}
         >
-          <ScreenReaderContent>{label}</ScreenReaderContent>
+          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{label}</ScreenReaderContent>
         </Button>
       </Tooltip>
     )

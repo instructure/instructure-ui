@@ -37,8 +37,8 @@ import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
 
 import { Focusable } from '@instructure/ui-focusable'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { View } from '@instructure/ui-view'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import styles from './styles.css'
 import theme from './theme'

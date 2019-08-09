@@ -35,7 +35,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 import { themeable } from '@instructure/ui-themeable'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { GridCol } from '../GridCol'
 

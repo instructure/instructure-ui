@@ -35,7 +35,7 @@ import {
   omitProps,
   pickProps
  } from '@instructure/ui-react-utils'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { GridRow } from './GridRow'
 import { GridCol } from './GridCol'

@@ -29,8 +29,8 @@ import classnames from 'classnames'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { matchComponentTypes, safeCloneElement, omitProps , deprecated } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { View } from '@instructure/ui-view'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -135,7 +135,7 @@ class Table extends Component {
         role={isStacked ? "table" : null}
         aria-label={isStacked ? caption : null}
       >
-        {!isStacked && <caption><ScreenReaderContent>{caption}</ScreenReaderContent></caption>}
+        {!isStacked && <caption><ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{caption}</ScreenReaderContent></caption>}
         {Children.map(children, (child) => {
           if (matchComponentTypes(child, [Head])) {
             return safeCloneElement(child, {

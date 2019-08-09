@@ -23,11 +23,16 @@
  */
 
 export {
-  AccessibleContent,
+  AccessibleContent as DeprecatedAccessibleContent,
   Dialog,
+  PresentationContent as DeprecatedPresentationContent,
+  ScreenReaderContent as DeprecatedScreenReaderContent
+} from '@instructure/ui-a11y'
+export {
+  AccessibleContent,
   PresentationContent,
   ScreenReaderContent
-} from '@instructure/ui-a11y'
+} from '@instructure/ui-a11y-content'
 export { Alert } from '@instructure/ui-alerts'
 export { Avatar } from '@instructure/ui-avatar'
 export { Billboard } from '@instructure/ui-billboard'

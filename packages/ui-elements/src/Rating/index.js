@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
@@ -144,7 +144,7 @@ class Rating extends Component {
         margin={margin}
         display="inline-block"
       >
-        <ScreenReaderContent>{valueText}</ScreenReaderContent>
+        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{valueText}</ScreenReaderContent>
         {
           [...Array(this.filled)].map((x, i) => (
             <RatingIcon

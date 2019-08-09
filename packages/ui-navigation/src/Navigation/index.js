@@ -31,7 +31,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
-import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { NavigationItem } from './NavigationItem'
 
@@ -171,7 +171,7 @@ class Navigation extends Component {
             aria-expanded={!this.minimized}
             onClick={this.handleNavToggle}
             icon={<IconMoveStartLine className={styles.toggleIcon}/>}
-            label={<ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>}
+            label={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{this.toggleMessage()}</ScreenReaderContent>}
           >
           </NavigationItem>
         </div>

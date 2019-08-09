@@ -25,8 +25,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { View } from '@instructure/ui-view'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 
@@ -201,7 +201,7 @@ class ProgressCircle extends Component {
         className={classnames(classes)}
         margin={this.props.margin}
       >
-        <ScreenReaderContent>
+        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
           <progress
             max={valueMax}
             value={valueNow}
