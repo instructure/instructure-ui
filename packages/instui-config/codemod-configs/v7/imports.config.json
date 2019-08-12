@@ -10,5 +10,9 @@
   {
     "pattern": "^@instructure/ui-elements/lib/components/Img",
     "replace": "@instructure/ui-img/lib/Img"
+  },
+  {
+    "pattern": "^@instructure/ui-elements/lib/components/Text",
+    "replace": "@instructure/ui-text/lib/Text"
   }
 ]

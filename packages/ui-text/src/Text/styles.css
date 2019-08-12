@@ -1,0 +1,224 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/* stylelint-disable selector-max-type */
+
+.root {
+  font-family: var(--fontFamily);
+
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sup {
+    top: -0.4em;
+  }
+
+  sub {
+    bottom: -0.4em;
+  }
+
+  pre,
+  code {
+    all: initial;
+    font-family: var(--fontFamilyMonospace);
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  b,
+  strong {
+    font-weight: var(--fontWeightBold);
+  }
+
+  p {
+    display: block;
+    padding: 0;
+    margin: var(--paragraphMargin);
+  }
+}
+
+input.root[type] {
+  outline: 0;
+  appearance: none;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  height: auto;
+  width: 100%;
+  line-height: inherit;
+  text-align: start;
+  box-shadow: none;
+  display: block;
+}
+
+.root,
+input.root[type] {
+  &:focus {
+    outline: none;
+  }
+
+  &.color-primary {
+    color: var(--primaryColor);
+  }
+
+  &.color-secondary {
+    color: var(--secondaryColor);
+  }
+
+  &.color-primary-inverse {
+    color: var(--primaryInverseColor);
+  }
+
+  &.color-secondary-inverse {
+    color: var(--secondaryInverseColor);
+  }
+
+  &.color-success {
+    color: var(--successColor);
+  }
+
+  &.color-brand {
+    color: var(--brandColor);
+  }
+
+  &.color-warning {
+    color: var(--warningColor);
+  }
+
+  &.color-danger {
+    color: var(--dangerColor);
+  }
+
+  &.color-alert {
+    color: var(--alertColor);
+  }
+
+  &.wrap-break-word {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  &.weight-normal {
+    font-weight: var(--fontWeightNormal);
+  }
+
+  &.weight-light {
+    font-weight: var(--fontWeightLight);
+  }
+
+  &.weight-bold {
+    font-weight: var(--fontWeightBold);
+  }
+
+  &.style-normal {
+    font-style: normal;
+  }
+
+  &.style-italic {
+    font-style: italic;
+  }
+
+  &.x-small {
+    font-size: var(--fontSizeXSmall);
+  }
+
+  &.small {
+    font-size: var(--fontSizeSmall);
+  }
+
+  &.medium {
+    font-size: var(--fontSizeMedium);
+  }
+
+  &.large {
+    font-size: var(--fontSizeLarge);
+  }
+
+  &.x-large {
+    font-size: var(--fontSizeXLarge);
+  }
+
+  &.xx-large {
+    font-size: var(--fontSizeXXLarge);
+  }
+
+  &.lineHeight-default {
+    line-height: var(--lineHeight);
+  }
+
+  &.lineHeight-fit {
+    line-height: var(--lineHeightFit);
+  }
+
+  &.lineHeight-condensed {
+    line-height: var(--lineHeightCondensed);
+  }
+
+  &.lineHeight-double {
+    line-height: var(--lineHeightDouble);
+  }
+
+  &.letterSpacing-normal {
+    letter-spacing: var(--letterSpacingNormal);
+  }
+
+  &.letterSpacing-condensed {
+    letter-spacing: var(--letterSpacingCondensed);
+  }
+
+  &.letterSpacing-expanded {
+    letter-spacing: var(--letterSpacingExpanded);
+  }
+
+  &.transform-none {
+    text-transform: none;
+  }
+
+  &.transform-capitalize {
+    text-transform: capitalize;
+  }
+
+  &.transform-uppercase {
+    text-transform: uppercase;
+  }
+
+  &.transform-lowercase {
+    text-transform: lowercase;
+  }
+}
+
+/* stylelint-enable selector-max-type */

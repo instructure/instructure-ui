@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
 import { Button } from '@instructure/ui-buttons'
-import { Text } from '@instructure/ui-elements'
+import { Text } from '@instructure/ui-text'
 import { TextInput } from '@instructure/ui-text-input'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { IconSearchLine } from '@instructure/ui-icons'
@@ -355,6 +355,7 @@ class Nav extends Component {
           { matches.length > 0
             ? matches
             : <Text
+              __dangerouslyIgnoreExperimentalWarnings
               weight="light"
               size="medium"
               theme={{ primaryColor: styles.color }}

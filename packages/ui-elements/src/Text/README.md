@@ -1,8 +1,18 @@
 ---
-describes: Text
+describes: DeprecatedText
+id: DeprecatedText__README
 ---
 
-A component for styling text content
+**DEPRECATED:** Text will be removed from `ui-elements` in version 7.0.0. Use the [Text from ui-text](#Text) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
+
+The `color` prop `error` has switched to `danger`.
+
+***
+
+A component for styling textual content
 
 ### Font sizes
 
@@ -11,12 +21,12 @@ A component for styling text content
 example: true
 ---
 <div>
-  <Text size="x-small">I&#39;m extra small</Text><br/>
-  <Text size="small">I&#39;m small</Text><br/>
-  <Text>I&#39;m medium</Text><br/>
-  <Text size="large">I&#39;m large</Text><br/>
-  <Text size="x-large">I&#39;m extra large</Text><br/>
-  <Text size="xx-large">I&#39;m extra extra large</Text>
+  <DeprecatedText size="x-small">I&#39;m extra small</DeprecatedText><br/>
+  <DeprecatedText size="small">I&#39;m small</DeprecatedText><br/>
+  <DeprecatedText>I&#39;m medium</DeprecatedText><br/>
+  <DeprecatedText size="large">I&#39;m large</DeprecatedText><br/>
+  <DeprecatedText size="x-large">I&#39;m extra large</DeprecatedText><br/>
+  <DeprecatedText size="xx-large">I&#39;m extra extra large</DeprecatedText>
 </div>
 ```
 
@@ -27,9 +37,9 @@ example: true
 example: true
 ---
 <div>
-  <Text weight="light">I&#39;m light text</Text><br/>
-  <Text>I&#39;m normal text</Text><br/>
-  <Text weight="bold">I&#39;m bold text</Text>
+  <DeprecatedText weight="light">I&#39;m light text</DeprecatedText><br/>
+  <DeprecatedText>I&#39;m normal text</DeprecatedText><br/>
+  <DeprecatedText weight="bold">I&#39;m bold text</DeprecatedText>
 </div>
 ```
 
@@ -40,8 +50,8 @@ example: true
 example: true
 ---
 <div>
-  <Text fontStyle="italic">I&#39;m italic text</Text><br/>
-  <Text>I&#39;m normal text</Text>
+  <DeprecatedText fontStyle="italic">I&#39;m italic text</DeprecatedText><br/>
+  <DeprecatedText>I&#39;m normal text</DeprecatedText>
 </div>
 ```
 
@@ -52,18 +62,18 @@ example: true
 example: true
 ---
 <div>
-  <Text lineHeight="fit">
+  <DeprecatedText lineHeight="fit">
     <p>{lorem.paragraph()}</p>
-  </Text>
-  <Text>
+  </DeprecatedText>
+  <DeprecatedText>
     <p>{lorem.paragraph()}</p>
-  </Text>
-  <Text lineHeight="condensed">
+  </DeprecatedText>
+  <DeprecatedText lineHeight="condensed">
     <p>{lorem.paragraph()}</p>
-  </Text>
-  <Text lineHeight="double">
+  </DeprecatedText>
+  <DeprecatedText lineHeight="double">
     <p>{lorem.paragraph()}</p>
-  </Text>
+  </DeprecatedText>
 </div>
 ```
 
@@ -74,9 +84,9 @@ example: true
 example: true
 ---
 <div>
-  <Text transform="capitalize">I&#39;m capitalized text</Text><br/>
-  <Text transform="uppercase">I&#39;m uppercase text</Text><br/>
-  <Text transform="lowercase">I&#39;M LOWERCASE TEXT</Text><br/>
+  <DeprecatedText transform="capitalize">I&#39;m capitalized text</DeprecatedText><br/>
+  <DeprecatedText transform="uppercase">I&#39;m uppercase text</DeprecatedText><br/>
+  <DeprecatedText transform="lowercase">I&#39;M LOWERCASE TEXT</DeprecatedText><br/>
 </div>
 ```
 
@@ -87,9 +97,9 @@ example: true
 example: true
 ---
 <div>
-  <Text letterSpacing="normal">I&#39;m normal text</Text><br/>
-  <Text letterSpacing="condensed">I&#39;m condensed text</Text><br/>
-  <Text letterSpacing="expanded" transform="uppercase">I&#39;m expanded uppercase text</Text><br/>
+  <DeprecatedText letterSpacing="normal">I&#39;m normal text</DeprecatedText><br/>
+  <DeprecatedText letterSpacing="condensed">I&#39;m condensed text</DeprecatedText><br/>
+  <DeprecatedText letterSpacing="expanded" transform="uppercase">I&#39;m expanded uppercase text</DeprecatedText><br/>
 </div>
 ```
 
@@ -104,14 +114,14 @@ example: true
 ---
 <div>
   <View as="div" maxWidth="300px" margin="none none small" withVisualDebug>
-    <Text>
+    <DeprecatedText>
       superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
-    </Text>
+    </DeprecatedText>
   </View>
   <View as="div" maxWidth="300px" withVisualDebug>
-    <Text wrap="break-word">
+    <DeprecatedText wrap="break-word">
       superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
-    </Text>
+    </DeprecatedText>
   </View>
 </div>
 ```
@@ -123,13 +133,13 @@ example: true
 example: true
 ---
 <div>
-  <Text color="primary">I&#39;m primary text</Text><br/>
-  <Text color="secondary">I&#39;m secondary text</Text><br/>
-  <Text color="brand">I&#39;m brand text</Text><br />
-  <Text color="success">I&#39;m success text</Text><br/>
-  <Text color="warning">I&#39;m warning text</Text><br/>
-  <Text color="error">I&#39;m error text</Text><br />
-  <Text color="alert">I&#39;m alert text</Text>
+  <DeprecatedText color="primary">I&#39;m primary text</DeprecatedText><br/>
+  <DeprecatedText color="secondary">I&#39;m secondary text</DeprecatedText><br/>
+  <DeprecatedText color="brand">I&#39;m brand text</DeprecatedText><br />
+  <DeprecatedText color="success">I&#39;m success text</DeprecatedText><br/>
+  <DeprecatedText color="warning">I&#39;m warning text</DeprecatedText><br/>
+  <DeprecatedText color="error">I&#39;m error text</DeprecatedText><br />
+  <DeprecatedText color="alert">I&#39;m alert text</DeprecatedText>
 </div>
 ```
 
@@ -139,8 +149,8 @@ example: true
 background: 'checkerboard-inverse'
 ---
 <div>
-  <Text color="primary-inverse">I&#39;m primary text</Text><br/>
-  <Text color="secondary-inverse">I&#39;m secondary text</Text>
+  <DeprecatedText color="primary-inverse">I&#39;m primary text</DeprecatedText><br/>
+  <DeprecatedText color="secondary-inverse">I&#39;m secondary text</DeprecatedText>
 </div>
 ```
 
@@ -150,7 +160,7 @@ background: 'checkerboard-inverse'
 ---
 example: true
 ---
-<Text>
+<DeprecatedText>
   <b>bold </b>
   <strong>strong </strong>
   <i>italic </i>
@@ -158,5 +168,5 @@ example: true
   <pre>preformatted</pre>
   <code>code</code>
   This<sup>is</sup> some<sub>text</sub>.
-</Text>
+</DeprecatedText>
 ```

@@ -1,10 +1,11 @@
 {
-  "name": "@instructure/ui-component-examples",
+  "name": "@instructure/ui-text",
   "version": "6.10.0",
-  "description": "A utility for automatically generating component examples",
+  "description": "A component for styling textual content",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -16,27 +17,21 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build",
-    "build:watch": "ui-build --watch"
+    "build:watch": "ui-build --watch",
+    "build:types": "ui-scripts --types"
   },
   "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7",
+    "@instructure/console": "^6.10.0",
+    "@instructure/ui-react-utils": "^6.10.0",
+    "@instructure/ui-themeable": "^6.10.0",
+    "classnames": "^2",
+    "prop-types": "^15"
+  },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6.10.0",
     "@instructure/ui-test-utils": "^6.10.0"
-  },
-  "dependencies": {
-    "@instructure/config-loader": "^6.10.0",
-    "@instructure/ui-a11y": "^6.10.0",
-    "@instructure/ui-buttons": "^6.10.0",
-    "@instructure/ui-elements": "^6.10.0",
-    "@instructure/ui-i18n": "^6.10.0",
-    "@instructure/ui-icons": "^6.10.0",
-    "@instructure/ui-overlays": "^6.10.0",
-    "@instructure/ui-text": "^6.10.0",
-    "@instructure/uid": "^6.10.0",
-    "@instructure/ui-view": "^6.10.0",
-    "loader-utils": "^1.2.3",
-    "prop-types": "^15",
-    "react-docgen": "^4"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

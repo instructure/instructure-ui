@@ -76,5 +76,12 @@
         { "old": false, "new": "block" }
       ]}
     ]
+  },
+  "Text": {
+    "7.0.0": [
+      { "old": "color", "new": "color", "values": [
+        { "old": "error", "new": "danger" }
+      ]}
+    ]
   }
 }

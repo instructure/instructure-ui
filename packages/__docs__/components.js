@@ -46,7 +46,7 @@ export {
   Spinner,
   Table as DeprecatedTable,
   Tag,
-  Text,
+  Text as DeprecatedText,
   TruncateText,
   List,
   MetricsList
@@ -111,6 +111,7 @@ export { Selectable } from '@instructure/ui-selectable'
 export { ApplyTheme } from '@instructure/ui-themeable'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export { Tabs, TabList } from '@instructure/ui-tabs'
+export { Text } from '@instructure/ui-text'
 export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export { View } from '@instructure/ui-view'

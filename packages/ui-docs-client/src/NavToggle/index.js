@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { ToggleDetails } from '@instructure/ui-toggle-details'
-import { Text } from '@instructure/ui-elements'
+import { Text } from '@instructure/ui-text'
 
 class NavToggle extends Component {
   static propTypes = {
@@ -77,6 +77,7 @@ class NavToggle extends Component {
 
     const summaryContent = (
       <Text
+        __dangerouslyIgnoreExperimentalWarnings
         weight={styles.textWeight}
         transform={styles.textTransform}
         size={styles.textSize}

@@ -44,6 +44,7 @@
     "@instructure/ui-select": "^6.10.0",
     "@instructure/ui-svg-images": "^6.10.0",
     "@instructure/ui-tabs": "^6.10.0",
+    "@instructure/ui-text": "6.10.0",
     "@instructure/ui-text-input": "^6.10.0",
     "@instructure/ui-themeable": "^6.10.0",
     "@instructure/ui-toggle-details": "^6.10.0",

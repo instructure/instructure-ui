@@ -24,9 +24,10 @@
 
 import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
+// eslint-disable-next-line instructure-ui/no-relative-package-imports
+import { Text } from '../../../../ui-text/lib/Text'
 
 import { TruncateText } from '../index'
-import { Text } from '../../Text'
 
 describe('<TruncateText />', async () => {
   const defaultText = 'Hello world! This is a long string that should truncate'

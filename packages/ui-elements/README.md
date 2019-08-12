@@ -44,7 +44,7 @@ The `ui-elements` package contains the following:
 - [Spinner](#Spinner)
 - [Table (deprecated)](#DeprecatedTable)
 - [Tag](#Tag)
-- [Text](#Text)
+- Text will be removed in version 7.0.0. Use the [Text from ui-text](#Text) instead.
 - [TruncateText](#TruncateText)
 
 ### Contribute
