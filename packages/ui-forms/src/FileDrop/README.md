@@ -38,10 +38,9 @@ example: true
       heading="Upload your image"
       message="Drag and drop, or click to browse your computer"
       hero={<Img src={placeholderImage(1200, 300)} />}
-      disabled
     />
   }
-  disabled
+  interaction="disabled"
 />
 ```
 

@@ -88,8 +88,13 @@
   }
 }
 
-.disabled {
+.functionallyDisabled {
+  cursor: not-allowed;
   pointer-events: none;
+}
+
+.visuallyDisabled {
+  opacity: 0.5;
 
   .labelContent {
     border-color: var(--disabledColor);

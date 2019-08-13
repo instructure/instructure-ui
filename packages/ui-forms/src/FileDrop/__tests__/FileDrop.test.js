@@ -43,6 +43,21 @@ describe('<FileDrop />', async () => {
     expect(await fileDrop.accessible()).to.be.true()
   })
 
+  describe('interactions', async () => {
+    it('should functionally disable the input if readonly', async () => {
+      await mount(
+        <FileDrop
+          label="Some label"
+          interaction="readonly"
+        />
+      )
+
+      const fileDrop = await FileDropLocator.find()
+      const input = await fileDrop.find('input')
+      expect(input.getDOMNode().disabled).to.be.true()
+    })
+  })
+
   describe('file-type checking when onDrop', async () => {
     it('responds to drop event', async () => {
       const onDrop = stub()

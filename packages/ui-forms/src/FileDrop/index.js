@@ -32,7 +32,7 @@ import { View } from '@instructure/ui-layout'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { deprecated, omitProps } from '@instructure/ui-react-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
@@ -61,7 +61,10 @@ const IS_MS = isBrowserMS()
 category: components
 ---
 **/
-
+@deprecated('7.0.0', {
+  disabled: 'interaction',
+  readOnly: 'interaction'
+})
 @testable()
 @themeable(theme, styles)
 class FileDrop extends Component {
@@ -139,13 +142,17 @@ class FileDrop extends Component {
      */
     allowRepeatFileSelection: PropTypes.bool,
     /**
-     * Whether or not to disable the input
+     * Deprecated - use `interaction` instead
      */
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool, // eslint-disable-line react/require-default-props
     /**
-     * Works just like disabled but keeps the same styles as if it were active
+     * Deprecated - use `interaction` instead
      */
-    readOnly: PropTypes.bool
+    readOnly: PropTypes.bool, // eslint-disable-line react/require-default-props
+    /**
+    * Specifies if interaction with the input is enabled, disabled, or readonly.
+    */
+    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly'])
   }
 
   static defaultProps = {
@@ -162,9 +169,8 @@ class FileDrop extends Component {
     allowRepeatFileSelection: true,
     maxSize: Infinity,
     minSize: 0,
-    readOnly: false,
+    interaction: 'enabled',
     messages: [],
-    disabled: false,
     id: undefined,
     accept: undefined
   }
@@ -325,7 +331,14 @@ class FileDrop extends Component {
   }
 
   renderLabel () {
-    const Label = this.props.label
+    const {
+      label,
+      interaction,
+      disabled,
+      readOnly
+    } = this.props
+
+    const Label = label
     if (typeof Label !== 'function') {
       return Label
     }
@@ -334,8 +347,9 @@ class FileDrop extends Component {
       <Label
         isDragAccepted={this.state.isDragAccepted}
         isDragRejected={this.state.isDragRejected}
-        disabled={this.props.disabled}
-        readOnly={this.props.readOnly}
+        disabled={interaction === 'disabled' || disabled}
+        readOnly={interaction === 'readonly' || readOnly}
+        interaction={interaction}
       />
     )
   }
@@ -399,11 +413,17 @@ class FileDrop extends Component {
   }
 
   render () {
-    const { allowMultiple, disabled, readOnly } = this.props
+    const { allowMultiple, disabled, readOnly, interaction } = this.props
     const id = this.props.id || this.defaultId
+
+    // make readonly input functionally disabled
+    const functionallyDisabled = disabled || readOnly ||
+      interaction === 'disabled' || interaction === 'readonly'
+
     const classes = {
       [styles.label]: true,
-      [styles.disabled]: disabled,
+      [styles.functionallyDisabled]: functionallyDisabled,
+      [styles.visuallyDisabled]: interaction === 'disabled' || disabled,
       [styles.dragRejected]: this.state.isDragRejected || this.invalid,
       [styles.dragAccepted]: this.state.isDragAccepted,
       [styles.focused]: this.state.isFocused
@@ -441,8 +461,7 @@ class FileDrop extends Component {
           accept={this.acceptStr()}
           onChange={this.handleChange}
           aria-describedby={this.hasMessages ? this.messagesId : null}
-          disabled={disabled || readOnly}
-          aria-disabled={disabled || readOnly ? 'true' : null}
+          disabled={functionallyDisabled}
         />
         {(this.hasMessages) ?
           <View display="block" margin="small 0 0">
