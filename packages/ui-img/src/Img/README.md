@@ -1,18 +1,6 @@
 ---
-describes: DeprecatedImg
-id: DeprecatedIMG__README
+describes: Img
 ---
-
-**DEPRECATED:** Img will be removed from `ui-elements` in version 7.0.0. Use the [Img from ui-img](#Img) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
-
-- **blur** has been updated to `withBlur`
-- **grayscale** has been updated to `withGrayscale`
-- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
-
-***
 
 An accessible image component
 
@@ -20,12 +8,12 @@ An accessible image component
 ---
 example: true
 ---
-<DeprecatedImg src={placeholderImage(250, 250)} />
+<Img src={placeholderImage(250, 250)} />
 ```
 
 ### Margin and display
 
-Use the `margin` prop to add space around `<Img />`. Setting the `inline` prop to `false` makes
+Use the `margin` prop to add space around `<Img />`. Setting the `display` prop to `block` makes
 the image a block-level element.
 
 ```js
@@ -33,9 +21,9 @@ the image a block-level element.
 example: true
 ---
 <View textAlign="center" as="div">
-  <DeprecatedImg margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
-  <DeprecatedImg margin="small" src={placeholderImage(200, 200)} />
-  <DeprecatedImg inline={false} margin="small auto" src={placeholderImage(400, 200)} />
+  <Img margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
+  <Img margin="small" src={placeholderImage(200, 200)} />
+  <Img display="block" margin="small auto" src={placeholderImage(400, 200)} />
 </View>
 ```
 
@@ -49,21 +37,21 @@ in mind that Internet Explorer currently ignores CSS blend mode rules.)
 example: true
 ---
   <View textAlign="center" as="div">
-    <DeprecatedImg
+    <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 7}}
+      overlay={{color: '#008ee2', opacity: 9, blend: 'overlay'}}
       alt="A placeholder image"
       margin="x-small"
     />
-    <DeprecatedImg
+    <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 7, blend: 'multiply'}}
+      overlay={{color: '#008ee2', opacity: 6, blend: 'multiply'}}
       alt="A placeholder image"
       margin="x-small"
     />
-    <DeprecatedImg
+    <Img
       src={placeholderImage(200, 200)}
-      overlay={{color: '#008ee2', opacity: 7, blend: 'screen'}}
+      overlay={{color: '#008ee2', opacity: 3}}
       alt="A placeholder image"
       margin="x-small"
     />
@@ -72,7 +60,7 @@ example: true
 
 ### Cover
 
-When the `constrain` prop is set to `cover` Image fills the *full* width and height of its
+When the `constrain` prop is set to `cover` the image fills the *full* width and height of its
 containing element, while maintaining the aspect ratio of the source image.
 
 ```js
@@ -80,13 +68,13 @@ containing element, while maintaining the aspect ratio of the source image.
 example: true
 ---
 <div style={{width: '66%', height: '11rem'}}>
-  <DeprecatedImg src={avatarSquare} constrain="cover" />
+  <Img src={avatarSquare} constrain="cover" />
 </div>
 ```
 
 ### Contain
 
-When the `constrain` prop is set to `contain` Image fits within the width and height of its
+When the `constrain` prop is set to `contain` the image fits within the width and height of its
 containing element, while maintaining the aspect ratio of the source image.
 
 ```js
@@ -94,7 +82,7 @@ containing element, while maintaining the aspect ratio of the source image.
 example: true
 ---
 <View as="div" background="primary-inverse" width="200px" height="200px" textAlign="center">
-  <DeprecatedImg src={avatarPortrait} constrain="contain" />
+  <Img src={avatarPortrait} constrain="contain" />
 </View>
 ```
 
@@ -108,14 +96,14 @@ are not supported in Internet Explorer.
 example: true
 ---
   <View textAlign="center" as="div">
-    <DeprecatedImg
-      grayscale
+    <Img
+      withGrayscale
       src={avatarSquare}
       alt="A placeholder image"
       margin="x-small"
     />
-    <DeprecatedImg
-      blur
+    <Img
+      withBlur
       src={avatarSquare}
       alt="A placeholder image"
       margin="x-small"

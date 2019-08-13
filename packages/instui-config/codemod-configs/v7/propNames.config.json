@@ -66,5 +66,15 @@
       { "old": "focused", "new": "isFocused" },
       { "old": "debug", "new": "withVisualDebug" }
     ]
+  },
+  "Img": {
+    "7.0.0": [
+      { "old": "grayscale", "new": "withGrayscale" },
+      { "old": "blur", "new": "withBlur" },
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-block" },
+        { "old": false, "new": "block" }
+      ]}
+    ]
   }
 }

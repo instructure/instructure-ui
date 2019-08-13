@@ -1,62 +1,43 @@
 ---
 category: packages
+experimental: true
 ---
 
-## ui-elements
+## ui-img
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+An accessible image component.
 
 ### Installation
 
 ```sh
-yarn add @instructure/ui-elements
-```
-
-### Usage
-
-```js
-import React from 'react'
-import { Avatar } from '@instructure/ui-elements'
-
-const MyAvatar = () => {
-  return (
-    <Avatar name="Kyle Montgomery" />
-  )
-}
+yarn add @instructure/ui-img
 ```
 
 ### Components
-The `ui-elements` package contains the following:
-- [Avatar](#Avatar)
-- [Badge](#Badge)
-- [Heading](#Heading)
-- Img will be removed in version 7.0.0. Use the [Img from ui-img](#Img) instead.
-- [Link](#Link)
-- [List](#List)
-- [MetricsList](#MetricsList)
-- [Pill](#Pill)
-- [Progress](#Progress)
-- [Rating](#Rating)
-- [Spinner](#Spinner)
-- [Table (deprecated)](#DeprecatedTable)
-- [Tag](#Tag)
-- [Text](#Text)
-- [TruncateText](#TruncateText)
+The `ui-img` package contains the following:
+- [Img](#Img)
 
+### Usage
+```jsx
+---
+example: false
+---
+<Img src={placeholderImage(250, 350)} alt="A Placeholder Image" />
+```
 ### Contribute
-
 See the [contributing guidelines](#contributing) for details.
 
 ### License
 
 [MIT](LICENSE)
 
-[npm]: https://img.shields.io/npm/v/@instructure/ui-elements.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-elements
+[npm]: https://img.shields.io/npm/v/@instructure/ui-img.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-img
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

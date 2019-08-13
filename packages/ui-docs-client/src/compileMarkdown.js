@@ -27,7 +27,8 @@ import marked from 'marked'
 import grayMatter from 'gray-matter'
 
 import { View } from '@instructure/ui-view'
-import { Heading, Img, Link, Table } from '@instructure/ui-elements'
+import { Heading, Link, Table } from '@instructure/ui-elements'
+import { Img } from '@instructure/ui-img'
 import { CodeEditor } from '@instructure/ui-code-editor'
 
 import { Playground } from './Playground'
@@ -41,7 +42,7 @@ const elements = {
   h2: ({ id, children }) => <Heading id={id} level="h1" as="h2" margin="x-large 0 small 0">{children}</Heading>,
   h3: ({ id, children }) => <Heading id={id} level="h3" margin="large 0 small 0">{children}</Heading>,
   h4: ({ id, children }) => <Heading id={id} level="h4" margin="large 0 small 0">{children}</Heading>,
-  img: ({ src, alt }) => <Img src={src} alt={alt} />,
+  img: ({ src, alt }) => <Img src={src} alt={alt} __dangerouslyIgnoreExperimentalWarnings />,
   table: ({ children }) => <Table>{children}</Table>,
   a: ({ href, title, target, name, children }) => {
     if (href) {

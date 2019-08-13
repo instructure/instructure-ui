@@ -21,41 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-
-import { IconAnnouncementLine } from '@instructure/ui-icons'
-import { Img } from '@instructure/ui-img'
-
-export default {
-  sectionProp: 'size',
-  maxExamplesPerPage: 50,
-  propValues: {
-    hero: [
-      function renderHero (size) {
-        return <IconAnnouncementLine size={size} />
-      },
-      <Img key="test" src={require('./testImage.jpg')} />,
-      null
-    ],
-    href: [null, 'instructure.design']
-  },
-  excludeProps: ['margin', 'headingLevel', 'readOnly'],
-  getComponentProps: () => {
-    return {
-      heading: 'I am a billboard',
-      message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
-      margin: 'medium small'
-    }
-  },
-  filter: (props) => {
-    return (
-      props.size !== 'medium' &&
-      !(
-        props.hero === null &&
-        props.headingLevel === 'h1' &&
-        props.headingAs === 'h1' &&
-        props.disabled === false
-      )
-    )
-  }
-}
+export { Img } from './Img'

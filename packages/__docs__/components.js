@@ -38,7 +38,7 @@ export {
   Avatar,
   Badge,
   Heading,
-  Img,
+  Img as DeprecatedImg,
   Link,
   Pill,
   Progress,
@@ -66,6 +66,7 @@ export {
   TextInput as DeprecatedTextInput,
   TimeInput
  } from '@instructure/ui-forms'
+export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput } from '@instructure/ui-date-input'
 export { TextInput } from '@instructure/ui-text-input'

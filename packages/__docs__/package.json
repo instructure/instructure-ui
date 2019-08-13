@@ -47,6 +47,7 @@
     "@instructure/ui-forms": "^6.10.0",
     "@instructure/ui-i18n": "^6.10.0",
     "@instructure/ui-icons": "^6.10.0",
+    "@instructure/ui-img": "^6.10.0",
     "@instructure/ui-layout": "^6.10.0",
     "@instructure/ui-menu": "^6.10.0",
     "@instructure/ui-motion": "^6.10.0",
