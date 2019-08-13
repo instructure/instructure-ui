@@ -60,21 +60,13 @@ const StyleSheet = {
   },
 
   flush () {
-    let sheet = canUseDOM ? window.THEMEABLE_STYLESHEET : THEMEABLE_STYLESHEET
-    if (sheet) {
-      sheet.flush()
+    if (THEMEABLE_STYLESHEET) {
+      THEMEABLE_STYLESHEET.flush()
     }
     STYLES = {}
     THEMEABLE_STYLESHEET = null
-    if (canUseDOM) {
-      window.THEMEABLE_STYLESHEET = null
-    }
   }
 }
-
-const canUseDOM = !!(typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement)
 
 function insert (rules) {
   const sheet = inject()
@@ -88,17 +80,11 @@ function insert (rules) {
 }
 
 function inject () {
-  let sheet = canUseDOM ? window.THEMEABLE_STYLESHEET : THEMEABLE_STYLESHEET
-
-  if (!sheet) {
-    sheet = THEMEABLE_STYLESHEET = createSheet()
-
-    if (canUseDOM) {
-      window.THEMEABLE_STYLESHEET = sheet
-    }
+  if (!THEMEABLE_STYLESHEET) {
+    THEMEABLE_STYLESHEET = createSheet()
   }
 
-  return sheet
+  return THEMEABLE_STYLESHEET
 }
 
 function createSheet () {

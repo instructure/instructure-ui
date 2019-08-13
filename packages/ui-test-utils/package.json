@@ -26,7 +26,6 @@
   "dependencies": {
     "@instructure/debounce": "^6.9.0",
     "@instructure/ui-axe-check": "^6.9.0",
-    "@instructure/ui-stylesheet": "^6.9.0",
     "@sheerun/mutationobserver-shim": "^0.3.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",

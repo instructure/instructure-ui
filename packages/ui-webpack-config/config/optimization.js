@@ -28,7 +28,10 @@ module.exports = {
   splitChunks: {
     chunks: 'all',
   },
-  runtimeChunk: true,
+  runtimeChunk: {
+    // so that old codepens still work
+    name: 'runtime~common'
+  },
   sideEffects: true,
   minimizer: [
     new TerserWebpackPlugin({
@@ -36,7 +39,10 @@ module.exports = {
       parallel: true,
       // sourceMap: true, // this breaks storybook in production env
       terserOptions: {
-        mangle: false
+        mangle: false,
+        output: {
+          semicolons: false
+        }
       }
     })
   ]

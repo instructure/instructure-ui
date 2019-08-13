@@ -30,21 +30,18 @@ import { decorator } from '@instructure/ui-decorator'
 import { isEmpty, shallowEqual, deepEqual } from '@instructure/ui-utils'
 import { warn } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
-import { StyleSheet } from '@instructure/ui-stylesheet'
 import { findDOMNode } from '@instructure/ui-dom-utils'
 
 import { ThemeContext } from './ThemeContext'
 import { applyVariablesToNode } from './applyVariablesToNode'
-import { getCssText } from './getCssText'
 import { setTextDirection } from './setTextDirection'
-import { ThemeRegistry } from './ThemeRegistry'
-import { toRules } from './transformCss'
 
-const {
+import {
   generateComponentTheme,
   generateTheme,
-  registerComponentTheme
-} = ThemeRegistry
+  registerComponentTheme,
+  mountComponentStyles
+} from './ThemeRegistry'
 
 /**
 * ---
@@ -147,11 +144,9 @@ const themeable = decorator((_ComposedComponent, theme, styles = {}) => {
     static generateTheme = generateThemeForContextKey
 
     componentWillMount () {
-      if (!StyleSheet.mounted(componentId)) {
-        const defaultTheme = generateThemeForContextKey()
-        const cssText = getCssText(template, defaultTheme, componentId)
-        StyleSheet.mount(componentId, toRules(cssText))
-      }
+      const defaultTheme = generateThemeForContextKey()
+      mountComponentStyles(template, defaultTheme, componentId)
+
       if (super.componentWillMount) {
         super.componentWillMount()
       }

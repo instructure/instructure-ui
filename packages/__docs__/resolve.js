@@ -35,6 +35,7 @@ module.exports = {
     '@instructure/ui-calendar$': path.resolve(__dirname, '../ui-calendar/src/'),
     '@instructure/ui-code-editor$': path.resolve(__dirname, '../ui-code-editor/src/'),
     '@instructure/ui-date-input$': path.resolve(__dirname, '../ui-date-input/src/'),
+    '@instructure/ui-docs-client$': path.resolve(__dirname, '../ui-docs-client/src/'),
     '@instructure/ui-editable$': path.resolve(__dirname, '../ui-editable/src/'),
     '@instructure/ui-elements$': path.resolve(__dirname, '../ui-elements/src/'),
     '@instructure/ui-focusable$': path.resolve(__dirname, '../ui-focusable/src/'),

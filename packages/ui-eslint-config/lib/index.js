@@ -77,6 +77,13 @@ module.exports = {
       templateFile: require.resolve('./copyright.js')
     }],
     'import/no-extraneous-dependencies': 'error',
+    'no-restricted-imports': ['warn', {
+      'patterns': [
+        '*/src',
+        '@instructure/ui-*/lib',
+        '@instructure/ui-*/es'
+      ]
+    }],
     'jsx-a11y/label-has-for': 0,
     'no-unused-expressions': ['error', {
       'allowShortCircuit': true,

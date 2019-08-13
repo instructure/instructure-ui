@@ -49,7 +49,6 @@ module.exports = [
           `${pkg.homepage}vendors~globals~ui-docs.js`,
           `${pkg.homepage}runtime~common.js`,
           `${pkg.homepage}common.js`,
-          `${pkg.homepage}runtime~globals.js`,
           `${pkg.homepage}globals.js`
         ].join(';')
       }
@@ -98,13 +97,13 @@ module.exports = [
       '**/InputModeListener.js'
     ],
     themes: [
-      require.resolve('@instructure/canvas-theme'),
-      require.resolve('@instructure/canvas-high-contrast-theme')
+      '@instructure/canvas-theme',
+      '@instructure/canvas-high-contrast-theme'
     ],
     icons: {
       packageName: '@instructure/ui-icons',
       formats: {
-        React: '@instructure/ui-icons/lib',
+        React: '@instructure/ui-icons',
         SVG: '@instructure/ui-icons/lib/svg',
         Font: '@instructure/ui-icons/lib/font'
       }

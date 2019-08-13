@@ -57,7 +57,7 @@ module.exports = function DocsLoader () {
       // Activate hot module replacement
       module.hot && module.hot.accept()
 
-      const renderClient = require('!!${require.resolve('@instructure/ui-docs-client')}').default
+      const { renderDocsClient } = require('@instructure/ui-docs-client')
       const getClientProps = require('!!${require.resolve('../utils/getClientProps')}')
 
       const props = getClientProps(
@@ -72,7 +72,7 @@ module.exports = function DocsLoader () {
 
       props.showMenu = ${showMenu}
 
-      renderClient(props, document.getElementById('app'))
+      renderDocsClient(props, document.getElementById('app'))
     `)
   }).catch((error) => {
     callback(error)
@@ -81,11 +81,9 @@ module.exports = function DocsLoader () {
 
 function parseThemes (themes = [], options) {
   return themes.map((theme) => {
-    const themePath = path.resolve(options.projectRoot, theme)
-    const pathInfo = getPathInfo(themePath, options, options.context)
     return `{
-        resource: require('${path.resolve(options.context, themePath)}').theme,
-        requirePath: '${pathInfo.packageName}'
+        resource: require('${theme}').theme,
+        requirePath: '${theme}'
       }`
   })
 }

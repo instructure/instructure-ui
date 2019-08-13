@@ -23,8 +23,6 @@
  */
 import sinon from 'sinon'
 
-import StyleSheet from '@instructure/ui-stylesheet'
-
 import ReactComponentWrapper from './reactComponentWrapper'
 
 import initConsole from './initConsole'
@@ -127,7 +125,11 @@ class Sandbox {
   async teardown () {
     await ReactComponentWrapper.unmount()
 
-    StyleSheet.flush()
+    // avoiding circular deps by not importing @instructure/ui-themeable here:
+    if (global.GLOBAL_THEME_REGISTRY) {
+      const { styleSheet } = global.GLOBAL_THEME_REGISTRY
+      styleSheet && styleSheet.flush()
+    }
 
     this._sandbox.restore()
 
