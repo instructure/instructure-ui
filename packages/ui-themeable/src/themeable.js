@@ -24,7 +24,6 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import newless from 'newless'
 
 import { decorator } from '@instructure/ui-decorator'
 import { isEmpty, shallowEqual, deepEqual } from '@instructure/ui-utils'
@@ -84,12 +83,24 @@ import {
 
 const emptyObj = {}
 
-const themeable = decorator((_ComposedComponent, theme, styles = {}) => {
-  // this is to make it work if ComposedComponent is a native `class` and this
-  // file has been transpiled to es5 by @babel/plugin-transform-classes.
-  // we can remove this once we stop transpiling `class`es
-  const ComposedComponent = newless(_ComposedComponent)
+/*
+ * Note: there are consumers (like canvas-lms and other edu org repos) that are
+ * consuming this file directly from "/src" (as opposed to "/es" or "/lib" like normal)
+ * because they need this file to not have the babel "class" transform ran against it
+ * (aka they need it to use real es6 `class`es, since you can't extend real es6
+ * class from es5 transpiled code)
+ *
+ * Which means that for the time being, we can't use any other es6/7/8 features in
+ * here that aren't supported by "last 2 edge versions" since we can't rely on babel
+ * to transpile them for those apps.
+ *
+ * So, that means don't use "static" class properties (like `static PropTypes = {...}`),
+ * or object spread (like "{...foo, ..bar}")" in this file until instUI 7 is released.
+ * Once we release instUI 7, the plan is to stop transpiling the "/es" dir for ie11
+ * so once we do that, this caveat no longer applies.
+ */
 
+const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name
   let componentId = `${(styles && styles.componentId) || uid()}`
   if (process.env.NODE_ENV !== 'production') {
@@ -117,9 +128,7 @@ const themeable = decorator((_ComposedComponent, theme, styles = {}) => {
   const getThemeFromContext = function (context) {
     const { theme } = getContext(context)
     if (theme && theme[contextKey]) {
-      return {
-        ...theme[contextKey]
-      }
+      return Object.assign({},  theme[contextKey])
     } else {
       return emptyObj
     }
@@ -128,20 +137,12 @@ const themeable = decorator((_ComposedComponent, theme, styles = {}) => {
     return generateComponentTheme(contextKey, themeKey, overrides)
   }
   class ThemeableComponent extends ComposedComponent {
-    _themeCache = null
-    _instanceId = uid(displayName)
-
-    static componentId = componentId
-    static theme = contextKey
-    static contextTypes = {
-      ...ComposedComponent.contextTypes,
-      ...ThemeContext.types
+    constructor() {
+      const res = super(...arguments)
+      this._themeCache = null
+      this._instanceId = uid(displayName)
+      return res
     }
-    static propTypes = {
-      ...ComposedComponent.propTypes,
-      theme: PropTypes.object // eslint-disable-line react/forbid-prop-types
-    }
-    static generateTheme = generateThemeForContextKey
 
     componentWillMount () {
       const defaultTheme = generateThemeForContextKey()
@@ -223,7 +224,7 @@ const themeable = decorator((_ComposedComponent, theme, styles = {}) => {
         } else {
           theme = isEmpty(theme)
             ? this.props.theme
-            : {...theme, ...this.props.theme}
+            : Object.assign({}, theme, this.props.theme)
         }
       }
       // pass in the component theme as overrides
@@ -231,6 +232,21 @@ const themeable = decorator((_ComposedComponent, theme, styles = {}) => {
       return this._themeCache
     }
   }
+
+  ThemeableComponent.componentId = componentId
+  ThemeableComponent.theme = contextKey
+  ThemeableComponent.contextTypes = Object.assign(
+    {},
+    ComposedComponent.contextTypes,
+    ThemeContext.types
+  )
+  ThemeableComponent.propTypes = Object.assign(
+    {},
+    ComposedComponent.propTypes,
+    { theme: PropTypes.object } // eslint-disable-line react/forbid-prop-types
+  )
+  ThemeableComponent.generateTheme = generateThemeForContextKey
+
   return ThemeableComponent
 })
 

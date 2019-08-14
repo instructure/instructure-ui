@@ -36,7 +36,6 @@
     "@instructure/ui-stylesheet": "^6.9.0",
     "@instructure/ui-utils": "^6.9.0",
     "@instructure/uid": "^6.9.0",
-    "newless": "^0.3.0",
     "prop-types": "^15"
   },
   "peerDependencies": {
