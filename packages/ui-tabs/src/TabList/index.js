@@ -306,6 +306,7 @@ class TabList extends Component {
       elementRef,
       variant,
       margin,
+      onChange,
       ...props
     } = this.props
 
