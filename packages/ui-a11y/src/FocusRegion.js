@@ -24,7 +24,7 @@
 
 import keycode from 'keycode'
 
-import { contains, addEventListener, ownerDocument } from '@instructure/ui-dom-utils'
+import { contains, addEventListener, getFrameDocumentSafe, ownerDocument } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { error } from '@instructure/console/macro'
 
@@ -127,10 +127,13 @@ class FocusRegion {
         Array.from(doc.getElementsByTagName('iframe'))
           .forEach((el) => {
             // listen for mouseup events on any iframes in the document
-            const frameDoc = el.contentDocument || el.contentWindow.document
-            this._listeners.push(addEventListener(frameDoc, 'mouseup', (event) => {
-              this.handleFrameClick(event, el)
-            }))
+            const frameDoc = getFrameDocumentSafe(el)
+
+            if(frameDoc) {
+              this._listeners.push(addEventListener(frameDoc, 'mouseup', (event) => {
+                this.handleFrameClick(event, el)
+              }))
+            }
           })
       }
 
