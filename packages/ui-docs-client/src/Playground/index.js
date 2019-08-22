@@ -32,7 +32,7 @@ import { AccessibleContent, ScreenReaderContent } from '@instructure/ui-a11y-con
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { Checkbox } from '@instructure/ui-forms'
-import { Flex } from '@instructure/ui-layout'
+import { Flex } from '@instructure/ui-flex'
 
 import { Preview } from '../Preview'
 import { CodePenButton } from '../CodePenButton'
@@ -203,10 +203,14 @@ class Playground extends Component {
 
         { this.state.showCode && this.renderEditor() }
 
-        <Flex alignItems="center" padding="xx-small 0 0">
-          <Flex.Item shrink grow>
+        <Flex
+          alignItems="center"
+          padding="xx-small 0 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
+          <Flex.Item shouldShrink shouldGrow>
 
-            <Flex>
+            <Flex __dangerouslyIgnoreExperimentalWarnings>
               <Flex.Item>
                 <Tooltip tip="Fullscreen" placement="bottom">
                   <Button

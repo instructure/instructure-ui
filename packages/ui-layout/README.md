@@ -35,7 +35,7 @@ const MyLayout = () => {
 The `ui-layout` package contains the following components:
 - [ContextView](#ContextView)
 - [DrawerLayout](#DrawerLayout)
-- [Flex](#Flex)
+- Flex will be removed in version 7.0.0. Use the [Flex from ui-flex](#Flex) instead.
 - [Grid](#Grid)
 - [Media](#Media)
 - [Position](#Position)

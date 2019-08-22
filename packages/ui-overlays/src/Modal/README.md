@@ -244,7 +244,7 @@ class Example extends React.Component {
         >
           <Modal.Header>
             <Flex>
-              <Flex.Item grow shrink>
+              <Flex.Item shouldGrow shouldShrink>
                 <Heading level="h2" ellipsis>A small image</Heading>
               </Flex.Item>
               <Flex.Item>
@@ -357,12 +357,12 @@ class Example extends React.Component {
         >
           <Modal.Header>
             <Flex>
-              <Flex.Item grow shrink>
+              <Flex.Item shouldGrow shouldShrink>
                 <Flex alignItems="center">
                   <Flex.Item margin="0 x-small 0 0">
                     <SVGIcon src={iconExample} size="small" title="Icon Example" />
                   </Flex.Item>
-                  <Flex.Item grow shrink>
+                  <Flex.Item shouldGrow shouldShrink>
                     <Heading level="h2" ellipsis>This Modal Contains Media</Heading>
                   </Flex.Item>
                 </Flex>

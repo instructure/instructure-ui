@@ -29,7 +29,7 @@ class Example extends React.Component {
   renderCloseButton () {
     return (
       <Flex>
-        <Flex.Item grow shrink>
+        <Flex.Item shouldGrow shouldShrink>
           <Heading>Hello</Heading>
         </Flex.Item>
         <Flex.Item>

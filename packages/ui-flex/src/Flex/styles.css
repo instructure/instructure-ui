@@ -22,43 +22,67 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { themeable } from '@instructure/ui-themeable'
-import { Flex } from '@instructure/ui-flex'
-
-import styles from './styles.css'
-import theme from './theme'
-
-@themeable(theme, styles)
-class Guidelines extends Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    children: null
-  }
-
-  render () {
-    return (
-      <Flex
-        wrap="wrap"
-        justifyItems="end"
-        alignItems="stretch"
-        margin="small none"
-        __dangerouslyIgnoreExperimentalWarnings
-      >
-        {React.Children.map(this.props.children, child => (
-          <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
-            {child}
-          </Flex.Item>
-        ))}
-      </Flex>
-    )
-  }
+.root {
+  font-family: var(--fontFamily);
+  box-sizing: border-box;
 }
 
-export default Guidelines
-export { Guidelines }
+.column {
+  flex-direction: column;
+}
+
+.column-reverse {
+  flex-direction: column-reverse;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.wrap--wrap {
+  flex-wrap: wrap;
+}
+
+.wrap--wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.justifyItems--start {
+  justify-content: flex-start;
+}
+
+.justifyItems--end {
+  justify-content: flex-end;
+}
+
+.justifyItems--center {
+  justify-content: center;
+}
+
+.justifyItems--space-around {
+  justify-content: space-around;
+}
+
+.justifyItems--space-between {
+  justify-content: space-between;
+}
+
+.alignItems--center {
+  align-items: center;
+}
+
+.alignItems--start {
+  align-items: flex-start;
+}
+
+.alignItems--end {
+  align-items: flex-end;
+}
+
+.alignItems--stretch {
+  align-items: stretch;
+}

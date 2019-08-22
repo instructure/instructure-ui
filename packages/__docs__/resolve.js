@@ -40,6 +40,7 @@ module.exports = {
     '@instructure/ui-docs-client$': path.resolve(__dirname, '../ui-docs-client/src/'),
     '@instructure/ui-editable$': path.resolve(__dirname, '../ui-editable/src/'),
     '@instructure/ui-elements$': path.resolve(__dirname, '../ui-elements/src/'),
+    '@instructure/ui-flex$': path.resolve(__dirname, '../ui-flex/src'),
     '@instructure/ui-focusable$': path.resolve(__dirname, '../ui-focusable/src/'),
     '@instructure/ui-forms$': path.resolve(__dirname, '../ui-forms/src/'),
     '@instructure/ui-form-field$': path.resolve(__dirname, '../ui-form-field/src/'),

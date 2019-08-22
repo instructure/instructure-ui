@@ -22,43 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { themeable } from '@instructure/ui-themeable'
-import { Flex } from '@instructure/ui-flex'
-
-import styles from './styles.css'
-import theme from './theme'
-
-@themeable(theme, styles)
-class Guidelines extends Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    children: null
-  }
-
-  render () {
-    return (
-      <Flex
-        wrap="wrap"
-        justifyItems="end"
-        alignItems="stretch"
-        margin="small none"
-        __dangerouslyIgnoreExperimentalWarnings
-      >
-        {React.Children.map(this.props.children, child => (
-          <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
-            {child}
-          </Flex.Item>
-        ))}
-      </Flex>
-    )
-  }
-}
-
-export default Guidelines
-export { Guidelines }
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

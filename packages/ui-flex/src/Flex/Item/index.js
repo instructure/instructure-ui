@@ -31,22 +31,21 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
-parent: DeprecatedFlex
-id: DeprecatedFlex.Item
+parent: Flex
+id: Flex.Item
 ---
 **/
-@themeable(theme, styles)
-class FlexItem extends Component {
+@themeable(null, styles)
+class Item extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
-    * overrides the parent Flex's alignItems prop, if needed
+    * The children to render inside the Item`
     */
-    align: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
+    children: PropTypes.node,
     /**
     * the element type to render as
     */
@@ -55,30 +54,11 @@ class FlexItem extends Component {
     * provides a reference to the underlying html root element
     */
     elementRef: PropTypes.func,
-    children: PropTypes.node,
-    /**
-    * Inherits from the parent Flex component
-    */
-    direction: PropTypes.oneOf(['row', 'column']),
-    /**
-    * Should the FlexItem grow to fill any available space?
-    */
-    grow: PropTypes.bool,
-    /**
-    * Should the FlexItem shrink (stopping at its `size`)?
-    */
-    shrink: PropTypes.bool,
-    /**
-    * Sets the base size of the FlexItem (width if direction is `row`; height if direction is `column`)
-    */
-    size: PropTypes.string,
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-
     margin: ThemeablePropTypes.spacing,
     /**
     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
@@ -87,23 +67,53 @@ class FlexItem extends Component {
     */
     padding: ThemeablePropTypes.spacing,
     /**
+    * overrides the parent Flex's alignItems prop, if needed
+    */
+    align: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
+    /**
+    * Inherits from the parent Flex component
+    */
+    direction: PropTypes.oneOf(['row', 'column']),
+    /**
+    * Designates the text alignment inside the Item
+    */
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    /**
+    * Handles horizontal overflow
+    */
+    overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+    /**
+    * Handles vertical overflow
+    */
+    overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+    /**
+    * Should the FlexItem grow to fill any available space?
+    */
+    shouldGrow: PropTypes.bool,
+    /**
+    * Should the FlexItem shrink (stopping at its `size`)?
+    */
+    shouldShrink: PropTypes.bool,
+    /**
+    * Sets the base size of the FlexItem (width if direction is `row`; height if direction is `column`)
+    */
+    size: PropTypes.string,
+    /**
     * Places dashed lines around the component's borders to help debug your layout
     */
-    visualDebug: PropTypes.bool,
-    overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-    overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible'])
+    withVisualDebug: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     as: 'span',
     elementRef: (el) => {},
-    grow: false,
-    shrink: false
+    shouldGrow: false,
+    shouldShrink: false
   }
 
   render () {
-   const props = omitProps(this.props, FlexItem.propTypes)
+   const props = omitProps(this.props, Item.propTypes)
 
    const {
      align,
@@ -111,15 +121,15 @@ class FlexItem extends Component {
      elementRef,
      children,
      direction,
-     grow,
+     shouldGrow,
      margin,
      overflowX,
      overflowY,
      padding,
-     shrink,
+     shouldShrink,
      size,
      textAlign,
-     visualDebug
+     withVisualDebug
    } = this.props
 
    const dirColumn = direction === 'column'
@@ -130,9 +140,8 @@ class FlexItem extends Component {
 
    const classes = {
      [styles.root]: true,
-     [styles.visualDebug]: visualDebug,
-     [styles.grow]: grow,
-     [styles.shrink]: shrink,
+     [styles.shouldGrow]: shouldGrow,
+     [styles.shouldShrink]: shouldShrink,
      [styles[`align--${align}`]]: align
    }
 
@@ -150,6 +159,7 @@ class FlexItem extends Component {
        padding={padding}
        overflowX={overflowX}
        overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
+       withVisualDebug={withVisualDebug}
      >
        {children}
      </View>
@@ -157,5 +167,5 @@ class FlexItem extends Component {
   }
 }
 
-export default FlexItem
-export { FlexItem }
+export default Item
+export { Item }

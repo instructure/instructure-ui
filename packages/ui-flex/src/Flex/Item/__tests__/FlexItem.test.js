@@ -22,43 +22,38 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
-import { themeable } from '@instructure/ui-themeable'
-import { Flex } from '@instructure/ui-flex'
+import { expect, mount, within, wait, stub } from '@instructure/ui-test-utils'
+import { Item } from '../index'
 
-import styles from './styles.css'
-import theme from './theme'
-
-@themeable(theme, styles)
-class Guidelines extends Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    children: null
-  }
-
-  render () {
-    return (
-      <Flex
-        wrap="wrap"
-        justifyItems="end"
-        alignItems="stretch"
-        margin="small none"
-        __dangerouslyIgnoreExperimentalWarnings
-      >
-        {React.Children.map(this.props.children, child => (
-          <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
-            {child}
-          </Flex.Item>
-        ))}
-      </Flex>
+describe('<Item />', async () => {
+  it('should render children', async () => {
+    const subject = await mount(
+      <Item>Flex item 1</Item>
     )
-  }
-}
+    const item = within(subject.getDOMNode())
+    expect(item.find(':contains(Flex item 1)')).to.exist()
+  })
 
-export default Guidelines
-export { Guidelines }
+  it('should support an elementRef prop', async () => {
+    const elementRef = stub()
+    const subject = await mount(
+      <Item elementRef={elementRef}>Flex item 2</Item>
+    )
+
+    await wait(() => {
+      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+    })
+  })
+
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <Item>Flex item 3</Item>
+    )
+
+    const item = within(subject.getDOMNode())
+
+    expect(await item.accessible()).to.be.true()
+  })
+})

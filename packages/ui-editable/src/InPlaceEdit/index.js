@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Flex } from '@instructure/ui-layout'
+import { Flex } from '@instructure/ui-flex'
 import { FocusableView } from '@instructure/ui-focusable'
 import { Button } from '@instructure/ui-buttons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -181,12 +181,13 @@ class InPlaceEdit extends Component {
     const buttonMargin = this.props.editButtonPlacement === 'start' ? '0 xx-small 0 0' : '0 0 0 xx-small'
     return (
       <Flex
-        inline={this.props.inline}
+        display={this.props.inline ? 'inline-flex' : 'flex'}
         direction={flexDir}
         justifyItems={justifyItems}
+        __dangerouslyIgnoreExperimentalWarnings
         {...getContainerProps()}
       >
-        <Flex.Item grow shrink>
+        <Flex.Item shouldGrow shouldShrink>
           { this.renderEditor(getEditorProps()) }
           { this.renderViewer(getViewerProps()) }
         </Flex.Item>

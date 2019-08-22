@@ -31,7 +31,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Transition } from '@instructure/ui-motion'
 import { controllable } from '@instructure/ui-prop-types'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { Flex } from '@instructure/ui-layout'
+import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid, IconArrowOpenDownSolid } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
@@ -195,11 +195,14 @@ class ToggleGroup extends Component {
             borderRadius="medium"
             background="primary"
           >
-            <Flex padding={(this.props.size === 'small') ? 'x-small' : 'small small small x-small'}>
+            <Flex
+              padding={(this.props.size === 'small') ? 'x-small' : 'small small small x-small'}
+              __dangerouslyIgnoreExperimentalWarnings
+            >
               <Flex.Item>
                 {this.renderToggle(getToggleProps(), expanded)}
               </Flex.Item>
-              <Flex.Item grow shrink padding="0 0 0 x-small">
+              <Flex.Item shouldGrow shouldShrink padding="0 0 0 x-small">
                 {this.props.summary}
               </Flex.Item>
             </Flex>

@@ -32,6 +32,7 @@
     "@instructure/ui-code-editor": "^6.10.0",
     "@instructure/ui-color-utils": "^6.10.0",
     "@instructure/ui-elements": "^6.10.0",
+    "@instructure/ui-flex": "^6.10.0",
     "@instructure/ui-form-field": "^6.10.0",
     "@instructure/ui-forms": "^6.10.0",
     "@instructure/ui-i18n": "^6.10.0",

@@ -32,16 +32,16 @@ const regular = [
 ]
 
 const shrink = [
-  <Flex.Item key="0" padding="x-small" shrink>
+  <Flex.Item key="0" padding="x-small" shouldShrink>
     Villum dolore eu fugiat nulla pariatur.
   </Flex.Item>,
-  <Flex.Item key="1" padding="x-small" shrink>
+  <Flex.Item key="1" padding="x-small" shouldShrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
   </Flex.Item>,
-  <Flex.Item key="2" padding="x-small" shrink>
+  <Flex.Item key="2" padding="x-small" shouldShrink>
     Duis aute irure.
   </Flex.Item>,
-  <Flex.Item key="3" padding="x-small" shrink>
+  <Flex.Item key="3" padding="x-small" shouldShrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   </Flex.Item>
 ]
@@ -50,7 +50,7 @@ const grow = [
   <Flex.Item key="0" padding="x-small" size="200px">
     I am always 200px.
   </Flex.Item>,
-  <Flex.Item key="1" padding="x-small" shrink grow size="200px">
+  <Flex.Item key="1" padding="x-small" shouldShrink shouldGrow size="200px">
     I can grow, and shrink down to 200px.
   </Flex.Item>,
   <Flex.Item key="2" padding="x-small" size="25%">
@@ -68,6 +68,6 @@ export default {
     ]
   },
   filter: (props) => {
-    return props.visualDebug || props.inline || props.direction === 'row-reverse' || props.direction === 'column-reverse'
+    return props.withVisualDebug || props.display || props.direction === 'row-reverse' || props.direction === 'column-reverse'
   }
 }

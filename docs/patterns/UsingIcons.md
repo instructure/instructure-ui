@@ -41,23 +41,23 @@ By default the Icon is set to a size of 1em, so it will scale to match the font-
 example: true
 ---
 <View as="div" margin="small" padding="medium" background="default">
-  <Flex wrapItems={true}>
-    <Flex.Item padding="small" grow>
+  <Flex wrap="wrap">
+    <Flex.Item padding="small" shouldGrow>
       <Heading>I <IconHeartLine /> the size of my parent heading </Heading>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text>I am an <b>x-small</b> icon <IconHeartLine size="x-small" /> overriding my parent font-size.</Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text>I am a <b>small</b> icon <IconHeartLine size="small" /> overriding my parent font-size.</Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text>I am a <b>medium</b> icon <IconHeartLine size="medium" /> overriding my parent font-size.</Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text as="div">I am a <b>large</b> icon <IconHeartLine size="large" /> overriding my parent font-size.</Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text>I am an <b>x-large</b> icon <IconHeartLine size="x-large" /> overriding my parent font-size.</Text>
     </Flex.Item>
   </Flex>
@@ -71,26 +71,26 @@ To change the color of the icon, use one of the predefined options for the `colo
 example: true
 ---
 <View as="div" margin="small" padding="medium" background="default">
-  <Flex wrapItems={true}>
-    <Flex.Item padding="small" grow>
+  <Flex wrap="wrap">
+    <Flex.Item padding="small" shouldGrow>
       <Text color="brand">I am inheriting my parents color <IconHeartLine /></Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text as="div">My icon should be primary <IconHeartLine color="primary" /></Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text as="div">My icon should be secondary <IconHeartLine color="secondary" /></Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text as="div">My icon should be brand <IconHeartLine color="brand" /></Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text as="div">My icon should be success <IconHeartLine color="success" /></Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text as="div">My icon should be error <IconHeartLine color="error" /></Text>
     </Flex.Item>
-    <Flex.Item padding="small" grow>
+    <Flex.Item padding="small" shouldGrow>
       <Text as="div">My icon should be warning <IconHeartLine color="warning" /></Text>
     </Flex.Item>
   </Flex>

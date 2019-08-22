@@ -91,6 +91,26 @@
       { "old": "debug", "new": "withVisualDebug" }
     ]
   },
+  "Flex": {
+    "7.0.0": [
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-flex" },
+        { "old": false, "new": "flex" }
+      ]},
+      { "old": "wrapItems", "new": "wrap", "values": [
+        { "old": true, "new": "wrap" },
+        { "old": false, "new": "no-wrap" }
+      ]},
+      { "old": "visualDebug", "new": "withVisualDebug" }
+    ]
+  },
+  "Flex.Item": {
+    "7.0.0": [
+      { "old": "grow", "new": "shouldGrow" },
+      { "old": "shrink", "new": "shouldShrink" },
+      { "old": "visualDebug", "new": "withVisualDebug" }
+    ]
+  },
   "Img": {
     "7.0.0": [
       { "old": "grayscale", "new": "withGrayscale" },

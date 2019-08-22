@@ -33,7 +33,7 @@ import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y'
 import { warn } from '@instructure/console/macro'
 
-import { Flex } from '@instructure/ui-layout'
+import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
@@ -278,9 +278,9 @@ class Button extends Component {
         cursor={disabled ? 'not-allowed' : cursor}
       >
         {hasTextAndIcon ? (
-          <Flex height="100%" width="100%">
+          <Flex height="100%" width="100%" __dangerouslyIgnoreExperimentalWarnings>
             <Flex.Item padding="0 x-small 0 0">{this.renderIcon()}</Flex.Item>
-            <Flex.Item  grow shrink>
+            <Flex.Item shouldGrow shouldShrink>
               <span className={styles.content}>{children}</span>
             </Flex.Item>
           </Flex>

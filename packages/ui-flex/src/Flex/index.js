@@ -28,27 +28,31 @@ import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
+import { safeCloneElement, passthroughProps, experimental } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import { FlexItem } from './FlexItem'
+import { Item } from './Item'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedFlex
+category: components
+experimental: true
 ---
+@module Flex
 **/
+@experimental()
 @themeable(theme, styles)
 class Flex extends Component {
+  static Item = Item
+
   static propTypes = {
     /**
     * Flex only accepts Flex.Item as a child
     */
-    children: ChildrenPropTypes.oneOf([FlexItem]),
+    children: ChildrenPropTypes.oneOf([Item]),
     /**
     * the element type to render as
     */
@@ -58,10 +62,6 @@ class Flex extends Component {
     */
     elementRef: PropTypes.func,
     /**
-    * Sets the flex-direction to row (horizontal) or column (vertical)
-    */
-    direction: PropTypes.oneOf(['row', 'column', 'row-reverse', 'column-reverse']),
-    /**
     * Sets the height of the component's container (optional)
     */
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -69,8 +69,6 @@ class Flex extends Component {
     * Sets the width of the component's container (optional)
     */
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    inline: PropTypes.bool,
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -83,13 +81,35 @@ class Flex extends Component {
     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
     */
     padding: ThemeablePropTypes.spacing,
+    /**
+    * Sets the CSS display rule for the component's container
+    */
+    display: PropTypes.oneOf(['flex', 'inline-flex']),
+    /**
+    * Designates the text alignment
+    */
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    /**
+    * Sets the flex-direction to row (horizontal) or column (vertical)
+    */
+    direction: PropTypes.oneOf(['row', 'column', 'row-reverse', 'column-reverse']),
+    /**
+    * Aligns Flex.Items on the vertical axis (horizontal if direction is column)
+    */
     alignItems: PropTypes.oneOf(['center', 'start', 'end', 'stretch']),
+    /**
+    * Aligns Flex.Items on the horizontal axis (vertical if direction is column)
+    */
     justifyItems: PropTypes.oneOf(['center', 'start', 'end', 'space-around', 'space-between']),
     /**
-    * Places dashed lines around the component's borders to help debug your layout
+    * Determines if the Flex.Items should wrap when they exceed their container's width
     */
-    visualDebug: PropTypes.bool,
-    wrapItems: PropTypes.bool
+    wrap: PropTypes.oneOf(['wrap', 'no-wrap', 'wrap-reverse']),
+    /**
+    * Activate a dotted outline around the component to make building your
+    * layout easier
+    */
+    withVisualDebug: PropTypes.bool
   }
 
   static defaultProps = {
@@ -98,9 +118,9 @@ class Flex extends Component {
     elementRef: (el) => {},
     direction: 'row',
     justifyItems: 'start',
-    inline: false,
-    visualDebug: false,
-    wrapItems: false,
+    display: 'flex',
+    withVisualDebug: false,
+    wrap: 'no-wrap',
     width: undefined,
     height: undefined,
     padding: undefined,
@@ -109,13 +129,11 @@ class Flex extends Component {
     textAlign: undefined
   }
 
-  static Item = FlexItem
-
   renderChildren () {
     return Children.map(this.props.children, (child) => {
       if (child) {
         return safeCloneElement(child, {
-          visualDebug: this.props.visualDebug,
+          withVisualDebug: this.props.withVisualDebug,
           ...child.props, /* child visualDebug prop should override parent */
           direction: this.props.direction.replace(/-reverse/, '')
         })
@@ -126,52 +144,47 @@ class Flex extends Component {
   }
 
   render () {
-    const props = omitProps(
-      this.props,
-      Flex.propTypes
-    )
-
     const {
       as,
       elementRef,
       children,
       direction,
       height,
-      inline,
+      display,
       margin,
       padding,
       justifyItems,
       textAlign,
-      visualDebug,
+      withVisualDebug,
       width,
-      wrapItems
+      wrap
     } = this.props
 
     // When flex direction is row, 'center' is the most useful default because it
-    // vertically aligns FlexItems. For column direction, though, we want 'stretch'.
+    // vertically aligns Items. For column direction, though, we want 'stretch'.
     const alignItems = this.props.alignItems || (direction === 'column' || direction === 'column-reverse' ? 'stretch' : 'center')
 
     const classes = {
       [styles.root]: true,
-      [styles.visualDebug]: visualDebug,
       [styles[`justifyItems--${justifyItems}`]]: true,
       [styles[`alignItems--${alignItems}`]]: true,
-      [styles.wrapItems]: wrapItems
+      [styles[`wrap--${wrap}`]]: wrap !== 'no-wrap'
     }
 
     if (children && React.Children.count(children) > 0) {
       return (
         <View
-          {...props}
+          {...passthroughProps(this.props)}
           className={classnames(classes, styles[direction])}
           elementRef={elementRef}
           as={as}
-          display={inline ? 'inline-flex' : 'flex'}
+          display={display}
           width={width}
           height={height}
           margin={margin}
           padding={padding}
           textAlign={textAlign}
+          withVisualDebug={withVisualDebug}
         >
           {this.renderChildren()}
         </View>
@@ -183,4 +196,4 @@ class Flex extends Component {
 }
 
 export default Flex
-export { Flex, FlexItem }
+export { Flex }

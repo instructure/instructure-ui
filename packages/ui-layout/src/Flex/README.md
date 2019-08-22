@@ -1,13 +1,21 @@
 ---
-describes: Flex
+describes: DeprecatedFlex
+id: DeprecatedFlex__README
 ---
 
-The Flex component makes it simple for developers to create multi-column
-layouts with flexbox.
+**DEPRECATED:** Flex will be removed from `ui-layout` in version 7.0.0. Use the [Flex from ui-flex](#Flex) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package and handle the prop name changes listed below.
+
+These props have updated names:
+- The `inline` boolean prop has been changed to `display: ['flex', 'inline-flex']`
+- The `wrapItems` boolean prop has been changed to `wrap: ['wrap', 'no-wrap', 'wrap-reverse']`
+- `visualDebug` has been changed to `withVisualDebug`
 
 ### Layout direction
 
-**Note:** Use the `visualDebug` property to see the borders of Flex/Flex.Item while developing!
+**Note:** Use the `visualDebug` property to see the borders of Flex/DeprecatedFlex.Item while developing!
 
 Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `direction` to
 `column` to stack your Flex.Items.
@@ -20,30 +28,30 @@ layout of stacked elements, it is simpler to use multiple [View](#View) componen
 example: true
 ---
 <div>
-  <Flex visualDebug margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
-  </Flex>
-  <Flex visualDebug direction="column" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
-  </Flex>
-  <Flex visualDebug direction="row-reverse" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
-  </Flex>
-  <Flex visualDebug direction="column-reverse">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
-  </Flex>
+  <DeprecatedFlex visualDebug margin="none none large">
+    <DeprecatedFlex.Item>One</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Two</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Three</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Four</DeprecatedFlex.Item>
+  </DeprecatedFlex>
+  <DeprecatedFlex visualDebug direction="column" margin="none none large">
+    <DeprecatedFlex.Item>One</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Two</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Three</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Four</DeprecatedFlex.Item>
+  </DeprecatedFlex>
+  <DeprecatedFlex visualDebug direction="row-reverse" margin="none none large">
+    <DeprecatedFlex.Item>One</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Two</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Three</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Four</DeprecatedFlex.Item>
+  </DeprecatedFlex>
+  <DeprecatedFlex visualDebug direction="column-reverse">
+    <DeprecatedFlex.Item>One</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Two</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Three</DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>Four</DeprecatedFlex.Item>
+  </DeprecatedFlex>
 </div>
 ```
 
@@ -56,20 +64,20 @@ their container.
 ---
 example: true
 ---
-<Flex visualDebug>
-  <Flex.Item padding="x-small">
+<DeprecatedFlex visualDebug>
+  <DeprecatedFlex.Item padding="x-small">
     Villum dolore eu fugiat nulla pariatur.
-  </Flex.Item>
-  <Flex.Item padding="x-small">
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  </Flex.Item>
-  <Flex.Item padding="x-small">
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small">
     Duis aute irure.
-  </Flex.Item>
-  <Flex.Item padding="x-small">
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 Adding the `shrink` property forces the Flex.Item to shrink as needed to fit inside its
@@ -79,20 +87,20 @@ container.
 ---
 example: true
 ---
-<Flex visualDebug>
-  <Flex.Item padding="x-small" shrink>
+<DeprecatedFlex visualDebug>
+  <DeprecatedFlex.Item padding="x-small" shrink>
     Villum dolore eu fugiat nulla pariatur.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shrink>
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small" shrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shrink>
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small" shrink>
     Duis aute irure.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shrink>
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small" shrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 The `grow` property forces the Flex.Item to expand to fill in any available space.
@@ -101,14 +109,14 @@ The `grow` property forces the Flex.Item to expand to fill in any available spac
 ---
 example: true
 ---
-<Flex visualDebug>
-  <Flex.Item padding="x-small" shrink grow>
+<DeprecatedFlex visualDebug>
+  <DeprecatedFlex.Item padding="x-small" shrink grow>
     I am growing and shrinking!
-  </Flex.Item>
-  <Flex.Item>
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item>
     I am not shrinking or growing.
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 The `size` property sets the base size (accepts px, em, rem) for the Flex.Item. If the
@@ -120,17 +128,17 @@ then it is the item's **height**. Flex.Items can `grow` beyond their `size`, but
 ---
 example: true
 ---
-<Flex visualDebug>
-  <Flex.Item padding="x-small" size="200px">
+<DeprecatedFlex visualDebug>
+  <DeprecatedFlex.Item padding="x-small" size="200px">
     I am always 200px.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shrink grow size="200px">
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small" shrink grow size="200px">
     I can grow, and shrink down to 200px.
-  </Flex.Item>
-  <Flex.Item padding="x-small" size="25%">
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item padding="x-small" size="25%">
     I am always 25%.
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 ### Aligning Flex.Items
@@ -143,20 +151,20 @@ property to change this behavior.
 ---
 example: true
 ---
-<Flex alignItems="end" visualDebug>
-  <Flex.Item>
+<DeprecatedFlex alignItems="end" visualDebug>
+  <DeprecatedFlex.Item>
     <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-  </Flex.Item>
-  <Flex.Item grow shrink>
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item grow shrink>
     I should be aligned to the bottom of the Avatar.
-  </Flex.Item>
-  <Flex.Item>
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item>
     Me, too.
-  </Flex.Item>
-  <Flex.Item align="start">
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item align="start">
     I am aligning myself to the top.
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 ### Justifying Flex.Items
@@ -167,41 +175,41 @@ Use the `justifyItems` property to change the justification of Flex.Items.
 example: true
 ---
 <div>
-  <Flex justifyItems="center" margin="0 0 large" visualDebug>
-    <Flex.Item>
+  <DeprecatedFlex justifyItems="center" margin="0 0 large" visualDebug>
+    <DeprecatedFlex.Item>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-    </Flex.Item>
-    <Flex.Item>
+    </DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>
       We are all centered!
-    </Flex.Item>
-    <Flex.Item>
+    </DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>
       Yeah!
-    </Flex.Item>
-  </Flex>
+    </DeprecatedFlex.Item>
+  </DeprecatedFlex>
 
-  <Flex justifyItems="space-between" visualDebug margin="0 0 large">
-    <Flex.Item>
+  <DeprecatedFlex justifyItems="space-between" visualDebug margin="0 0 large">
+    <DeprecatedFlex.Item>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-    </Flex.Item>
-    <Flex.Item>
+    </DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>
       Ah, a little more space.
-    </Flex.Item>
-    <Flex.Item>
+    </DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>
       Totally.
-    </Flex.Item>
-  </Flex>
+    </DeprecatedFlex.Item>
+  </DeprecatedFlex>
 
-  <Flex justifyItems="end" visualDebug>
-    <Flex.Item>
+  <DeprecatedFlex justifyItems="end" visualDebug>
+    <DeprecatedFlex.Item>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-    </Flex.Item>
-    <Flex.Item>
+    </DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>
       Smooshed again.
-    </Flex.Item>
-    <Flex.Item>
+    </DeprecatedFlex.Item>
+    <DeprecatedFlex.Item>
       Ugh.
-    </Flex.Item>
-  </Flex>
+    </DeprecatedFlex.Item>
+  </DeprecatedFlex>
 </div>
 ```
 
@@ -215,17 +223,17 @@ to `auto` to account for content overflow with a vertical scrollbar.
 ---
 example: true
 ---
-<Flex
+<DeprecatedFlex
   visualDebug
   direction="column"
 >
-  <Flex.Item padding="small">
+  <DeprecatedFlex.Item padding="small">
     <Heading>Pandas are cute, right?</Heading>
-  </Flex.Item>
-  <Flex.Item size="150px" padding="small">
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item size="150px" padding="small">
     <Img src={avatarSquare} />
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 ### A few common layouts
@@ -236,19 +244,19 @@ example: true
 ---
 example: true
 ---
-<Flex>
-  <Flex.Item grow shrink padding="none medium none none">
+<DeprecatedFlex>
+  <DeprecatedFlex.Item grow shrink padding="none medium none none">
     <Heading>Lorem ipsum dolor sit amet consectetur dolor sit</Heading>
-  </Flex.Item>
-  <Flex.Item>
+  </DeprecatedFlex.Item>
+  <DeprecatedFlex.Item>
     <Button margin="none x-small none none">
       Cancel
     </Button>
     <Button variant="success" icon={IconUserSolid}>
       Add user
     </Button>
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 #### Centered content (note the nested Flex components and use of the `wrapItems` property)
@@ -257,32 +265,32 @@ example: true
 ---
 example: true
 ---
-<Flex height="32rem" justifyItems="center" padding="large" visualDebug>
-  <Flex.Item shrink grow textAlign="center">
+<DeprecatedFlex height="32rem" justifyItems="center" padding="large" visualDebug>
+  <DeprecatedFlex.Item shrink grow textAlign="center">
 
     <Heading level="h1" margin="0 0 medium">An amazing thing!</Heading>
 
-    <Flex visualDebug wrapItems justifyItems="space-around" margin="0 0 medium">
-      <Flex.Item padding="small">
+    <DeprecatedFlex visualDebug wrapItems justifyItems="space-around" margin="0 0 medium">
+      <DeprecatedFlex.Item padding="small">
         <SVGIcon src={iconExample} size="medium" title="Icon Example" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
-      </Flex.Item>
-      <Flex.Item padding="small">
+      </DeprecatedFlex.Item>
+      <DeprecatedFlex.Item padding="small">
         <SVGIcon src={iconExample} size="medium" title="Icon Example" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
-      </Flex.Item>
-      <Flex.Item padding="small">
+      </DeprecatedFlex.Item>
+      <DeprecatedFlex.Item padding="small">
         <SVGIcon src={iconExample} size="medium" title="Icon Example" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
-      </Flex.Item>
-    </Flex>
+      </DeprecatedFlex.Item>
+    </DeprecatedFlex>
 
     <div>
       <Button variant="primary" size="large">Sign up now!</Button>
     </div>
 
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```
 
 #### Quick and dirty mobile app layout
@@ -292,41 +300,41 @@ example: true
 example: true
 ---
 
-<Flex height="400px" width="300px" as="div" direction="column" visualDebug>
+<DeprecatedFlex height="400px" width="300px" as="div" direction="column" visualDebug>
 
-  <Flex.Item padding="small" as="header" textAlign="center">
+  <DeprecatedFlex.Item padding="small" as="header" textAlign="center">
     <Heading level="h3">App</Heading>
-  </Flex.Item>
+  </DeprecatedFlex.Item>
 
-  <Flex.Item grow shrink padding="small" as="main">
+  <DeprecatedFlex.Item grow shrink padding="small" as="main">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </Flex.Item>
+  </DeprecatedFlex.Item>
 
-  <Flex.Item padding="small" as="footer">
+  <DeprecatedFlex.Item padding="small" as="footer">
 
-    <Flex visualDebug justifyItems="space-between">
-      <Flex.Item>
+    <DeprecatedFlex visualDebug justifyItems="space-between">
+      <DeprecatedFlex.Item>
         <Button variant="icon" icon={IconEmailLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
-      </Flex.Item>
-      <Flex.Item>
+      </DeprecatedFlex.Item>
+      <DeprecatedFlex.Item>
         <Button variant="icon" icon={IconPrinterLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
-      </Flex.Item>
-      <Flex.Item>
+      </DeprecatedFlex.Item>
+      <DeprecatedFlex.Item>
         <Button variant="icon" icon={IconCalendarDayLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
-      </Flex.Item>
-      <Flex.Item>
+      </DeprecatedFlex.Item>
+      <DeprecatedFlex.Item>
         <Button variant="icon" icon={IconSettingsLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
-      </Flex.Item>
-    </Flex>
+      </DeprecatedFlex.Item>
+    </DeprecatedFlex>
 
-  </Flex.Item>
-</Flex>
+  </DeprecatedFlex.Item>
+</DeprecatedFlex>
 ```

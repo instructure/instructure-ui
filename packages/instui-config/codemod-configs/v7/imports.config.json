@@ -34,5 +34,9 @@
   {
     "pattern": "^@instructure/ui-a11y/lib/components/ScreenReaderContent",
     "replace": "@instructure/ui-a11y-content/lib/ScreenReaderContent"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/components/Flex",
+    "replace": "@instructure/ui-flex/lib/Flex"
   }
 ]
