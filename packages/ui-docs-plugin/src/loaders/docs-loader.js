@@ -27,7 +27,6 @@ const globby = require('globby')
 const path = require('path')
 
 const getOptions = require('../utils/getOptions')
-const getPathInfo = require('../utils/getPathInfo')
 
 module.exports = function DocsLoader () {
   this.cacheable && this.cacheable()
@@ -57,7 +56,7 @@ module.exports = function DocsLoader () {
       // Activate hot module replacement
       module.hot && module.hot.accept()
 
-      const { renderDocsClient } = require('@instructure/ui-docs-client')
+      const renderDocsClient = require('@instructure/ui-docs-client').renderDocsClient
       const getClientProps = require('!!${require.resolve('../utils/getClientProps')}')
 
       const props = getClientProps(
