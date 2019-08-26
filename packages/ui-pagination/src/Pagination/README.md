@@ -78,11 +78,12 @@ class Example extends React.Component {
   }
 
   render () {
+    const {currentPage} = this.state
     const pages = Array(100000)
     pages[0] = this.renderPage(0)
     pages[pages.length - 1] = this.renderPage(pages.length - 1)
-    const visiblePageRangeStart = Math.max(this.state.currentPage - 1, 0)
-    const visiblePageRangeEnd = Math.min(this.state.currentPage + 4, pages.length - 1)
+    const visiblePageRangeStart = Math.min(pages.length - 4, Math.max(currentPage - 1, 1))
+    const visiblePageRangeEnd = Math.min(currentPage + 4, pages.length - 1)
     for (let i = visiblePageRangeStart; i < visiblePageRangeEnd; i++) {
       pages[i] = this.renderPage(i)
     }

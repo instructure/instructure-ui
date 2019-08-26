@@ -220,7 +220,7 @@ class Pagination extends Component {
       const firstIndex = 0
       const lastIndex = allPages.length - 1
 
-      const sliceStart = Math.max(currentPageIndex - 1, firstIndex)
+      const sliceStart = Math.min(lastIndex - 3, Math.max(currentPageIndex - 1, firstIndex))
       const sliceEnd = Math.min(currentPageIndex + 4, lastIndex)
 
       visiblePages = allPages.slice(sliceStart, sliceEnd)

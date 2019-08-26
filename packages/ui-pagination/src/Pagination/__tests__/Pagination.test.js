@@ -179,7 +179,7 @@ describe('<Pagination />', async () => {
         labelNext="Next"
         labelPrev="Prev"
       >
-        { buildPages(6, 5) }
+        { buildPages(9, 8) }
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
@@ -187,11 +187,11 @@ describe('<Pagination />', async () => {
     const paginationButtons = await pagination.findAllPageButtons()
     const ellipses = await pagination.findAll('[aria-hidden]:contains(…)')
 
-    expect(allButtons.length).to.equal(4)
-    expect(paginationButtons.length).to.equal(3)
+    expect(allButtons.length).to.equal(6)
+    expect(paginationButtons.length).to.equal(5)
     expect(ellipses.length).to.equal(1)
 
-    expect(pagination).to.have.text('Prev#0…#4#5')
+    expect(pagination).to.have.text('Prev#0…#5#6#7#8')
   })
 
   it('should truncate end', async () => {
