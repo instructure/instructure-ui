@@ -34,7 +34,7 @@ import React from 'react'
 * @param {object} props
 * @return {ReactElement} A renderable React element
 */
-function callRenderProp (value) {
+function callRenderProp (value, props = {}) {
   if (typeof value === 'function') {
     // TODO: Simplify this when we drop React 15
     // In react 16, `createElement` accepts a function. In react 15 we get an
@@ -44,10 +44,10 @@ function callRenderProp (value) {
       value.prototype && // fat arrow functions don't have a prototype
       value.prototype.isReactComponent
     )) {
-      return value()
+      return value(props)
     }
 
-    return React.createElement(value)
+    return React.createElement(value, props)
   }
 
   return value

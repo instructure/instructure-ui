@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { callRenderProp } from '../callRenderProp'
 
@@ -91,5 +92,39 @@ describe('callRenderProp', async () => {
     const subject = await mount(<div>{result}</div>)
 
     expect(subject.getDOMNode()).to.have.text('some text')
+  })
+
+  describe('passing props', async () => {
+    it('should pass props correctly to functions', async () => {
+      const someFunc = ({ shape }) => <div>{shape}</div>
+
+      const result = callRenderProp(someFunc, { shape: 'rectangle' })
+
+      const subject = await mount(<div>{result}</div>)
+
+      expect(subject.getDOMNode()).to.have.text('rectangle')
+    })
+
+    it('should pass props correctly to React classes', async () => {
+      class Foo extends React.Component {
+        static propTypes = {
+          shape: PropTypes.oneOf(['circle', 'rectangle'])
+        }
+
+        static defaultProps = {
+          shape: 'circle'
+        }
+
+        render () {
+          return <div>{this.props.shape}</div>
+        }
+      }
+
+      const result = callRenderProp(Foo, { shape: 'rectangle' })
+
+      const subject = await mount(<div>{result}</div>)
+
+      expect(subject.getDOMNode()).to.have.text('rectangle')
+    })
   })
 })
