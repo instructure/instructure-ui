@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.10.0](https://github.com/instructure/instructure-ui/compare/v6.9.0...v6.10.0) (2019-08-27)
+
+
+### Bug Fixes
+
+* **ui-stylesheet,ui-themeable:** error when gt 1 copies of themeable ([b1e8164](https://github.com/instructure/instructure-ui/commit/b1e8164))
+* **ui-themeable:** revert the "newless" change ([c4ce9ba](https://github.com/instructure/instructure-ui/commit/c4ce9ba))
+
+
+
+
+
 # [6.9.0](https://github.com/instructure/instructure-ui/compare/v6.8.1...v6.9.0) (2019-08-07)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.10.0](https://github.com/instructure/instructure-ui/compare/v6.9.0...v6.10.0) (2019-08-27)
+
+
+### Features
+
+* **ui-forms:** disabled/readOnly in FileDrop ([86f323c](https://github.com/instructure/instructure-ui/commit/86f323c))
+
+
+
+
+
 # [6.9.0](https://github.com/instructure/instructure-ui/compare/v6.8.1...v6.9.0) (2019-08-07)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/template-component",
-  "version": "6.9.0",
+  "version": "6.10.0",
   "description": "A package containing template files to generate an instructure-ui component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
@@ -15,15 +15,15 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/ui-react-utils": "^6.9.0",
-    "@instructure/ui-testable": "^6.9.0",
-    "@instructure/ui-themeable": "^6.9.0",
+    "@instructure/ui-react-utils": "^6.10.0",
+    "@instructure/ui-testable": "^6.10.0",
+    "@instructure/ui-themeable": "^6.10.0",
     "prop-types": "^15",
     "react": "^15 || ^16"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.9.0",
-    "@instructure/ui-color-utils": "^6.9.0",
-    "@instructure/ui-test-utils": "^6.9.0"
+    "@instructure/ui-babel-preset": "^6.10.0",
+    "@instructure/ui-color-utils": "^6.10.0",
+    "@instructure/ui-test-utils": "^6.10.0"
   }
 }

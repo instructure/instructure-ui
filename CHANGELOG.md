@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.10.0](https://github.com/instructure/instructure-ui/compare/v6.9.0...v6.10.0) (2019-08-27)
+
+
+### Bug Fixes
+
+* **ui-a11y:** prevent errors w/ x-domain iframes in FocusRegion ([83267f1](https://github.com/instructure/instructure-ui/commit/83267f1))
+* **ui-alerts:** fix React warnings emitted from Alert.updateScreenreaderAlert ([c97e64d](https://github.com/instructure/instructure-ui/commit/c97e64d))
+* **ui-docs-plugin:** fix docs in IE11 ([65a875c](https://github.com/instructure/instructure-ui/commit/65a875c))
+* **ui-layout:** Map theme vars to Canvas vars ([7f21fec](https://github.com/instructure/instructure-ui/commit/7f21fec))
+* **ui-pagination:** fix pagination buttons ([be78f69](https://github.com/instructure/instructure-ui/commit/be78f69))
+* **ui-stylesheet,ui-themeable:** error when gt 1 copies of themeable ([b1e8164](https://github.com/instructure/instructure-ui/commit/b1e8164))
+* **ui-table:** add aria-sort attributes to Table header ([eb802f1](https://github.com/instructure/instructure-ui/commit/eb802f1))
+* **ui-tabs:** don't pass through onChange attr ([3e185d1](https://github.com/instructure/instructure-ui/commit/3e185d1))
+* **ui-themeable:** revert the "newless" change ([c4ce9ba](https://github.com/instructure/instructure-ui/commit/c4ce9ba))
+
+
+### Features
+
+* **ui-forms:** disabled/readOnly in FileDrop ([86f323c](https://github.com/instructure/instructure-ui/commit/86f323c))
+
+
+
+
+
 # [6.9.0](https://github.com/instructure/instructure-ui/compare/v6.8.1...v6.9.0) (2019-08-07)
 
 
