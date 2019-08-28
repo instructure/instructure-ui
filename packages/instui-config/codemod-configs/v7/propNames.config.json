@@ -4,6 +4,15 @@
       { "old": "closeButtonLabel", "new": "renderCloseButtonLabel" }
     ]
   },
+  "Avatar": {
+    "7.0.0": [
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-block" },
+        { "old": false, "new": "block" }
+      ]},
+      { "old": "variant", "new": "shape" }
+    ]
+  },
   "NumberInput": {
     "7.0.0": [
       { "old": "label", "new": "renderLabel" },

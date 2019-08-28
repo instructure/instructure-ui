@@ -21,14 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default {
-  sectionProp: 'variant',
-  propValues: {
-    src: [null, require('./testImage.jpg')]
-  },
-  getComponentProps: (props) => {
-    return {
-      name: 'Kyle Montgomery'
-    }
-  }
-}
+export { Avatar } from './Avatar'

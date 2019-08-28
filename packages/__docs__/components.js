@@ -29,13 +29,14 @@ export {
   ScreenReaderContent
 } from '@instructure/ui-a11y'
 export { Alert } from '@instructure/ui-alerts'
+export { Avatar } from '@instructure/ui-avatar'
 export { Billboard } from '@instructure/ui-billboard'
 export { Button, CloseButton } from '@instructure/ui-buttons'
 export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
 export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export {
-  Avatar,
+  Avatar as DeprecatedAvatar,
   Badge,
   Heading,
   Img as DeprecatedImg,

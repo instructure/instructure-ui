@@ -1,5 +1,9 @@
 [
   {
+    "pattern": "^@instructure/ui-elements/lib/components/Avatar",
+    "replace": "@instructure/ui-avatar/lib/Avatar"
+  },
+  {
     "pattern": "^@instructure/ui-forms/lib/components/TextInput",
     "replace": "@instructure/ui-text-input/lib/TextInput"
   },

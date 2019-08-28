@@ -1,6 +1,17 @@
 ---
-describes: Avatar
+describes: DeprecatedAvatar
+id: DeprecatedAvatar__README
 ---
+
+**DEPRECATED:** Avatar will be removed from `ui-elements` in version 7.0.0. Use the [avatar from ui-avatar](#Avatar) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
+
+- **variant** has been updated to `shape`
+- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
+
+***
 
 When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
 
@@ -9,10 +20,10 @@ When an image src is not supplied the user's initials will display. The avatar c
 example: true
 ---
 <div>
-  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
-  <Avatar name="Sarah Robinson" margin="0 small 0 0" />
-  <Avatar name="Kyle Montgomery" src={avatarSquare} variant="rectangle" margin="0 small 0 0" />
-  <Avatar name="Kyle Montgomery" variant="rectangle" />
+  <DeprecatedAvatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
+  <DeprecatedAvatar name="Sarah Robinson" margin="0 small 0 0" />
+  <DeprecatedAvatar name="Kyle Montgomery" src={avatarSquare} variant="rectangle" margin="0 small 0 0" />
+  <DeprecatedAvatar name="Kyle Montgomery" variant="rectangle" />
 </div>
 ```
 
@@ -24,11 +35,11 @@ of its container.
 example: true
 ---
 <div>
-  <Avatar name="James Arias" size="x-small" margin="0 small 0 0" />
-  <Avatar name="Charles Kimball" size="small" margin="0 small 0 0" />
-  <Avatar name="Melissa Reed" size="medium" margin="0 small 0 0" />
-  <Avatar name="Heather Wheeler" size="large" margin="0 small 0 0" />
-  <Avatar name="David Herbert" size="x-large" />
+  <DeprecatedAvatar name="James Arias" size="x-small" margin="0 small 0 0" />
+  <DeprecatedAvatar name="Charles Kimball" size="small" margin="0 small 0 0" />
+  <DeprecatedAvatar name="Melissa Reed" size="medium" margin="0 small 0 0" />
+  <DeprecatedAvatar name="Heather Wheeler" size="large" margin="0 small 0 0" />
+  <DeprecatedAvatar name="David Herbert" size="x-large" />
 </div>
 ```
 ### Guidelines

@@ -31,7 +31,7 @@ const MyAvatar = () => {
 
 ### Components
 The `ui-elements` package contains the following:
-- [Avatar](#Avatar)
+- Avatar will be removed in version 7.0.0. Use the [Avatar from ui-avatar](#Avatar) instead.
 - [Badge](#Badge)
 - [Heading](#Heading)
 - Img will be removed in version 7.0.0. Use the [Img from ui-img](#Img) instead.

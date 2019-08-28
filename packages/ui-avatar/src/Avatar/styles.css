@@ -1,0 +1,91 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+.root {
+  height: 2.5em;
+  border-style: solid;
+  border-color: var(--borderColor);
+  box-sizing: border-box;
+  background-color: var(--background);
+  background-position: center;
+  background-size: cover;
+  background-clip: content-box;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  line-height: 0;
+  text-align: center;
+
+  &.auto {
+    font-size: inherit;
+    border-width: var(--borderWidthSmall);
+  }
+
+  &.x-small {
+    font-size: 0.75rem;
+    border-width: var(--borderWidthSmall);
+  }
+
+  &.small {
+    font-size: 1rem;
+    border-width: var(--borderWidthSmall);
+  }
+
+  &.medium {
+    font-size: 1.25rem;
+    border-width: var(--borderWidthMedium);
+  }
+
+  &.large {
+    font-size: 1.5rem;
+    border-width: var(--borderWidthMedium);
+  }
+
+  &.x-large {
+    font-size: 1.75rem;
+    border-width: var(--borderWidthMedium);
+  }
+}
+
+.initials {
+  color: var(--color);
+  line-height: 2.375em;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  letter-spacing: 0.0313em;
+}
+
+.loadImage {
+  display: none;
+}
+
+.circle {
+  width: 2.5em;
+  position: relative;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.rectangle {
+  width: 3em;
+}

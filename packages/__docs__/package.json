@@ -32,6 +32,7 @@
     "@instructure/canvas-theme": "^6.10.0",
     "@instructure/ui-a11y": "^6.10.0",
     "@instructure/ui-alerts": "^6.10.0",
+    "@instructure/ui-avatar": "^6.10.0",
     "@instructure/ui-billboard": "^6.10.0",
     "@instructure/ui-breadcrumb": "^6.10.0",
     "@instructure/ui-buttons": "^6.10.0",

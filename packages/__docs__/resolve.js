@@ -29,6 +29,7 @@ module.exports = {
     // set up aliases to get webpack to rebuild when we make changes to these packages
     '@instructure/ui-a11y$': path.resolve(__dirname, '../ui-a11y/src/'),
     '@instructure/ui-alerts$': path.resolve(__dirname, '../ui-alerts/src/'),
+    '@instructure/ui-avatar$': path.resolve(__dirname, '../ui-avatar/src/'),
     '@instructure/ui-billboard$': path.resolve(__dirname, '../ui-billboard/src/'),
     '@instructure/ui-breadcrumb$': path.resolve(__dirname, '../ui-breadcrumb/src/'),
     '@instructure/ui-buttons$': path.resolve(__dirname, '../ui-buttons/src/'),

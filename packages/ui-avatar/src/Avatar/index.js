@@ -27,7 +27,7 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { passthroughProps, experimental } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -35,12 +35,13 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedAvatar
+category: components
+experimental: true
 ---
 **/
 
 @testable()
+@experimental()
 @themeable(theme, styles)
 class Avatar extends Component {
   static propTypes = {
@@ -54,14 +55,14 @@ class Avatar extends Component {
     */
     alt: PropTypes.string,
     size: PropTypes.oneOf(['auto', 'x-small', 'small', 'medium', 'large', 'x-large']),
-    variant: PropTypes.oneOf(['circle', 'rectangle']),
+    shape: PropTypes.oneOf(['circle', 'rectangle']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
-    inline: PropTypes.bool,
+    display: PropTypes.oneOf(['inline-block', 'block']),
     /**
     * Callback fired when the avatar image has loaded
     */
@@ -82,8 +83,8 @@ class Avatar extends Component {
     margin: undefined,
     elementRef: undefined,
     size: 'medium',
-    variant: 'circle',
-    inline: true,
+    shape: 'circle',
+    display: 'inline-block',
     onImageLoaded: (event) => {}
   }
 
@@ -135,28 +136,25 @@ class Avatar extends Component {
   }
 
   render () {
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Avatar.propTypes),
-      Avatar
-    )
+    const { onImageLoaded, ...props } = this.props
 
     return (
       <View
-        {...passthroughProps}
+        {...passthroughProps(props)}
         style={{
           backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined
         }}
         className={classnames({
           [styles.root]: true,
           [styles[this.props.size]]: true,
-          [styles[this.props.variant]]: true
+          [styles[this.props.shape]]: true
         })}
         aria-label={this.props.alt ? this.props.alt : null}
         role={this.props.alt ? 'img' : null}
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        display={this.props.inline ? 'inline-block' : 'block'}
+        display={this.props.display}
       >
         {this.renderLoadImage()}
         {!this.state.loaded && this.renderInitials()}
