@@ -48,7 +48,7 @@ import { isDayDisabled } from "./utils/dateHelpers"
 
 /**
 ---
-category: components
+category: components/deprecated
 id: DeprecatedDateInput
 ---
 **/

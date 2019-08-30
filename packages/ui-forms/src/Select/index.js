@@ -40,7 +40,7 @@ import parseOptions from './utils/parseOptions'
 
 /**
 ---
-category: components
+category: components/deprecated
 id: DeprecatedSelect
 ---
 **/
