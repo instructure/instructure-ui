@@ -82,5 +82,5 @@ module.exports = async ({ contentType, path: sourcePath, name, initialVersion })
 }
 
 const formatDependencies = ({ dependencies }) => {
-  return Object.keys(dependencies).map((dependency) => `\t\t"${dependency}": "${dependencies[dependency]}"`).join(',\n')
+  return Object.keys(dependencies).map((dependency) => `    "${dependency}": "${dependencies[dependency]}"`).join(',\n')
 }
