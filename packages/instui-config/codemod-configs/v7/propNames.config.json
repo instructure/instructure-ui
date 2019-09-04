@@ -61,6 +61,21 @@
       ]}
     ]
   },
+  "Popover": {
+    "7.0.0": [
+      { "old": "show", "new": "isShowingContent" },
+      { "old": "label", "new": "screenReaderLabel" },
+      { "old": "alignArrow", "new": "shouldAlignArrow" },
+      { "old": "trackPosition", "new": "shouldTrackPosition" },
+      { "old": "defaultShow", "new": "defaultIsShowingContent" },
+      { "old": "onShow", "new": "onRequestShowContent" },
+      { "old": "onDismiss", "new": "onRequestHideContent" },
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "primary" },
+        { "old": "inverse", "new": "primary-inverse" }
+      ]},
+    ]
+  },
   "View": {
     "7.0.0": [
       { "old": "borderColor", "new": "borderColor", "values": [

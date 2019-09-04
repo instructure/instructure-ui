@@ -21,17 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
 
-import CalendarLocator from '@instructure/ui-calendar/lib/Calendar/locator'
-import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
-
-import { DateInput } from './index'
-
-export default locator(DateInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
-  findCalendar: async (element, ...args) => {
-    const content = await PopoverLocator.findContent(element, ...args)
-    return content ? CalendarLocator.find(content.getDOMNode()) : null
-  }
-})
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

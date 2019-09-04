@@ -12,6 +12,10 @@
     "replace": "@instructure/ui-view/lib/View"
   },
   {
+    "pattern": "^@instructure/ui-layout/lib/components/Popover",
+    "replace": "@instructure/ui-popover/lib/Popover"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/components/Img",
     "replace": "@instructure/ui-img/lib/Img"
   },

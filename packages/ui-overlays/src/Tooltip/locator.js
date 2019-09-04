@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
-
+import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
 import { Tooltip } from './index'
-import PopoverLocator from '../Popover/locator'
 
 export const customMethods = {
   findTrigger: (...args) => {

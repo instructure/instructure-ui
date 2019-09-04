@@ -55,6 +55,7 @@ module.exports = {
     '@instructure/ui-overlays$': path.resolve(__dirname, '../ui-overlays/src/'),
     '@instructure/ui-pagination$': path.resolve(__dirname, '../ui-pagination/src/'),
     '@instructure/ui-pages$': path.resolve(__dirname, '../ui-pages/src/'),
+    '@instructure/ui-popover$': path.resolve(__dirname, '../ui-popover/src/'),
     '@instructure/ui-portal$': path.resolve(__dirname, '../ui-portal/src/'),
     '@instructure/ui-select$': path.resolve(__dirname, '../ui-select/src/'),
     '@instructure/ui-selectable$': path.resolve(__dirname, '../ui-selectable/src/'),

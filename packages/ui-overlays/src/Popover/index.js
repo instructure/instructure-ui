@@ -24,29 +24,12 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import keycode from 'keycode'
 
-import {
-  ContextView,
-  Position,
-  LayoutPropTypes,
-  parsePlacement,
-  mirrorHorizontalPlacement
-} from '@instructure/ui-layout'
-import { View } from '@instructure/ui-view'
-import { Dialog } from '@instructure/ui-a11y'
+import { LayoutPropTypes } from '@instructure/ui-layout'
+import { Popover as UIPopover } from '@instructure/ui-popover'
 import { bidirectional } from '@instructure/ui-i18n'
 import { Children, controllable, element } from '@instructure/ui-prop-types'
-import {
-  findDOMNode,
-  containsActiveElement,
-  requestAnimationFrame,
-  handleMouseOverOut
-} from '@instructure/ui-dom-utils'
-import { ComponentIdentifier, safeCloneElement, pickProps } from '@instructure/ui-react-utils'
-import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
-import { uid } from '@instructure/uid'
+import { ComponentIdentifier } from '@instructure/ui-react-utils'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
@@ -62,7 +45,8 @@ class PopoverContent extends ComponentIdentifier {
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedPopover
 ---
 **/
 @testable()
@@ -311,329 +295,70 @@ class Popover extends Component {
     onKeyDown: undefined
   }
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      placement: props.placement,
-      offsetX: props.offsetX,
-      offsetY: props.offsetY
-    }
-
-    if (typeof props.show === 'undefined') {
-      this.state.show = props.defaultShow
-    }
-
-    this._id = this.props.id || uid('Popover')
-
-    this._raf = []
-  }
-
-  componentWillMount () {
-    this._handleMouseOver = handleMouseOverOut.bind(null, () => {
-      this.show()
-    })
-    this._handleMouseOut = handleMouseOverOut.bind(null, () => {
-      this.hide()
-    })
-  }
-
-  componentWillUnmount () {
-    this._raf.forEach(request => request.cancel())
-    this._raf = []
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return !(shallowEqual(this.props, nextProps) && shallowEqual(this.state, nextState))
-  }
-
   get placement () {
-    let { placement } = this.props
-
-    if (this.rtl) {
-      placement = mirrorHorizontalPlacement(placement, ' ')
-    }
-
-    return !this.shown && this.props.shouldRenderOffscreen ? 'offscreen' : placement
+    return this._popover && this._popover.placement
   }
 
   get shown () {
-    return (typeof this.props.show === 'undefined') ? this.state.show : this.props.show
-  }
-
-  show = () => {
-    if (typeof this.props.show === 'undefined') {
-      this.setState({ show: true })
-    }
-
-    if (typeof this.props.onToggle === 'function') {
-      this.props.onToggle(true)
-    }
-  }
-
-  hide = (e, documentClick) => {
-    const {
-      onDismiss,
-      onToggle,
-      show
-    } = this.props
-
-    if (typeof show === 'undefined') {
-      this.setState(({ show }) => {
-        if (show) {
-          onDismiss(e, documentClick)
-        }
-        return { show: false }
-      })
-    } else if (show) {
-      onDismiss(e, documentClick)
-    }
-
-    onToggle(false)
-  }
-
-  toggle = () => {
-    if (this.shown) {
-      this.hide()
-    } else {
-      this.show()
-    }
-  }
-
-  handleDialogDismiss = (...args) => {
-    if (!this.props.shouldReturnFocus && this.props.shouldFocusContentOnTriggerBlur) {
-      const trigger = findDOMNode(this._trigger)
-
-      if (trigger && typeof trigger.focus === 'function') {
-        trigger.focus()
-      }
-    }
-    this.hide(...args)
-  }
-
-  handleDialogBlur = (event) => {
-    if (event.keyCode === keycode.codes.tab && event.shiftKey && this.props.shouldFocusContentOnTriggerBlur) {
-      return
-    }
-    this.hide(event)
-  }
-
-  handleTriggerKeyDown = (event) => {
-    if (!this.props.shouldFocusContentOnTriggerBlur) {
-      return
-    }
-
-    if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
-      event.preventDefault()
-      this._raf.push(requestAnimationFrame(() => {
-        this._dialog && this._dialog.focus()
-      }))
-    }
-  }
-
-  handleTriggerBlur = (event) => {
-    if (this.props.on.indexOf('focus') > -1) {
-      this._raf.push(requestAnimationFrame(() => {
-        if (!containsActiveElement(this._view)) {
-          this.hide()
-        }
-      }))
-    }
-  }
-
-  handlePositionChanged = ({ placement }) => {
-    this.setState({
-      placement,
-      ...this.computeOffsets(placement)
-    })
-  }
-
-  renderTrigger () {
-    let trigger = ComponentIdentifier.pick(Popover.Trigger, this.props.children)
-
-    if (trigger) {
-      const { on, shouldContainFocus } = this.props
-      let onClick
-      let onFocus
-      let onMouseOut
-      let onMouseOver
-      let expanded
-
-      if (on.indexOf('click') > -1) {
-        onClick = () => {
-          this.toggle()
-        }
-      }
-
-      if (on.indexOf('hover') > -1) {
-        error(
-          !(on === 'hover'),
-          '[Popover] Specifying only the `"hover"` trigger limits the visibilty of the Popover to just mouse users. ' +
-          'Consider also including the `"focus"` trigger ' +
-          'so that touch and keyboard only users can see the Popover content as well.'
-        )
-
-        onMouseOver = this._handleMouseOver
-        onMouseOut = this._handleMouseOut
-      }
-
-      if (on.indexOf('focus') > -1) {
-        onFocus = () => {
-          this.show()
-        }
-      }
-
-      if (shouldContainFocus) {
-        // only set aria-expanded if popover can contain focus
-        expanded = this.shown ? 'true' : 'false'
-      } else {
-        expanded = null
-      }
-
-      trigger = safeCloneElement(trigger, {
-        ref: el => {
-          this._trigger = el
-        },
-        'aria-expanded': expanded,
-        onKeyDown: createChainedFunction(this.handleTriggerKeyDown, this.props.onKeyDown),
-        onClick: createChainedFunction(onClick, this.props.onClick),
-        onBlur: createChainedFunction(this.handleTriggerBlur, this.props.onBlur),
-        onFocus: createChainedFunction(onFocus, this.props.onFocus),
-        onMouseOut: createChainedFunction(onMouseOut, this.props.onMouseOut),
-        onMouseOver: createChainedFunction(onMouseOver, this.props.onMouseOver)
-      })
-    }
-
-    return trigger
+    return this._popover && this._popover.shown
   }
 
   get defaultFocusElement () {
-    return this.props.defaultFocusElement
+    return this._popover && this._popover.defaultFocusElement
   }
 
-  renderContent () {
-    let content = ComponentIdentifier.pick(Popover.Content, this.props.children)
-
-    if (this.shown) {
-      content = (
-        <Dialog
-          {...pickProps(this.props, Dialog.propTypes)}
-          ref={(el) => this._dialog = el}
-          display="block"
-          open={this.shown}
-          onBlur={this.handleDialogBlur}
-          onDismiss={this.handleDialogDismiss}
-          defaultFocusElement={this.defaultFocusElement}
-          shouldFocusOnOpen={!this.props.shouldFocusContentOnTriggerBlur}
-        >
-          {content}
-        </Dialog>
-      )
-    }
-
-    if (this.shown || this.props.shouldRenderOffscreen) {
-      let ViewElement
-      let viewProps = {
-        ref: c => this._view = c,
-        elementRef: this.props.contentRef,
-        stacking: this.props.stacking,
-        shadow: this.props.shadow,
-        display: 'block'
-      }
-
-      const { placement } = this.state
-
-      if (this.props.withArrow) {
-        ViewElement = ContextView
-        viewProps = {
-          ...viewProps,
-          background: this.props.variant,
-          placement: this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
-        }
-      } else {
-        ViewElement = View
-        viewProps = {
-          ...viewProps,
-          background: this.props.variant === 'default' ? 'primary' : 'primary-inverse',
-          borderWidth: 'small',
-          borderRadius: 'medium'
-        }
-      }
-
-      return (
-        <ViewElement {...viewProps}>
-          {content}
-        </ViewElement>
-      )
-    } else {
-      return null
-    }
+  show = (e) => {
+    this._popover && this._popover.show(e)
   }
 
-  computeOffsets (placement) {
-    let { offsetX, offsetY } = this.props
-
-    if (this.props.alignArrow && this._view) {
-      const secondaryPlacement = parsePlacement(placement)[1]
-      const { arrowSize, arrowBorderWidth } = this._view.theme
-      const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
-      if (secondaryPlacement === 'start') {
-        offsetX = offsetAmount
-      } else if (secondaryPlacement === 'end') {
-        offsetX = -offsetAmount
-      } else if (secondaryPlacement === 'top') {
-        offsetY = offsetAmount
-      } else if (secondaryPlacement === 'bottom') {
-        offsetY = -offsetAmount
-      }
-    }
-
-    return {
-      offsetX,
-      offsetY
-    }
+  hide = (e, documentClick) => {
+    this._popover && this._popover.hide(e, documentClick)
   }
 
-  get positionProps () {
-    return {
-      ...pickProps(this.props, Position.propTypes),
-      offsetX: this.state.offsetX,
-      offsetY: this.state.offsetY,
-      trackPosition: this.shown,
-      placement: this.placement,
-      onPositioned: createChainedFunction(this.handlePositionChanged, this.props.onShow),
-      onPositionChanged: this.handlePositionChanged,
-      target: this.props.positionTarget,
-      id: this._id
-    }
+  toggle = (e) => {
+    this._popover && this._popover.toggle(e)
   }
 
   render () {
-    const positionProps = this.positionProps
+    const {
+      show,
+      defaultShow,
+      label,
+      variant,
+      alignArrow,
+      trackPosition,
+      onShow,
+      onDismiss,
+      onToggle,
+      children,
+      ...passthroughProps
+    } = this.props
 
-    if (this.props.positionTarget) {
-      return (
-        <span>
-          {this.renderTrigger()}
-          <Position {...positionProps}>
-            <Position.Content>
-              {this.renderContent()}
-            </Position.Content>
-          </Position>
-        </span>
-      )
-    } else {
-      return (
-        <Position {...positionProps}>
-          <Position.Target>
-            {this.renderTrigger()}
-          </Position.Target>
-          <Position.Content>
-            {this.renderContent()}
-          </Position.Content>
-        </Position>
-      )
-    }
+    let trigger = ComponentIdentifier.pick(Popover.Trigger, children)
+    let content = ComponentIdentifier.pick(Popover.Content, children)
+
+    return (
+      <UIPopover
+        {...passthroughProps}
+        isShowingContent={show}
+        defaultIsShowingContent={defaultShow}
+        screenReaderLabel={label}
+        color={variant === 'inverse' ? 'primary-inverse' : 'primary'}
+        shouldAlignArrow={alignArrow}
+        shouldTrackPosition={trackPosition}
+        onRequestShowContent={() => onToggle(true)}
+        onRequestHideContent={(e, { documentClick }) => {
+          onDismiss(e, documentClick)
+          onToggle(false)
+        }}
+        onPositioned={onShow}
+        ref={(el) => this._popover = el}
+        renderTrigger={trigger}
+        __dangerouslyIgnoreExperimentalWarnings
+      >
+        { content }
+      </UIPopover>
+    )
   }
 }
 

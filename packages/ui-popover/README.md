@@ -1,54 +1,44 @@
 ---
 category: packages
+experimental: true
 ---
 
-## ui-overlays
+## ui-popover
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+A component for hiding or showing content based on user interaction.
 
 ### Installation
 
 ```sh
-yarn add @instructure/ui-overlays
+yarn add @instructure/ui-popover
 ```
 
 ### Usage
+For detailed usage and documentation, see [Popover](#Popover).
 
 ```js
 import React from 'react'
-import { Mask } from '@instructure/ui-overlays'
+import { Popover } from '@instructure/ui-popover'
 
-const MyMask = () => {
+const MyPopover = () => {
   return (
-    <Mask>
-      <Text>Hello mask</Text>
-    </Mask>
+    <Popover
+      on="click"
+      renderTrigger={<button>Click me!</button>}
+    >
+      Hello world
+    </Popover>
   )
 }
 ```
 
-### Components
-The `ui-overlays` package contains the following:
-- [Mask](#Mask)
-- [Modal](#Modal)
-- [Overlay](#Overlay)
-- Popover will be removed in version 7.0.0. Use the [Popover from ui-popover](#Popover) instead.
-- [Tooltip](#Tooltip)
-- [Tray](#Tray)
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
-
-[npm]: https://img.shields.io/npm/v/@instructure/ui-overlays.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-overlays
+[npm]: https://img.shields.io/npm/v/@instructure/ui-popover.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-popover
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

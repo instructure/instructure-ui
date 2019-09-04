@@ -31,7 +31,7 @@ import { LayoutPropTypes } from '@instructure/ui-layout'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { Popover } from '../Popover'
+import { Popover } from '@instructure/ui-popover'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -138,23 +138,20 @@ class Tooltip extends Component {
             shouldRenderOffscreen
             shouldReturnFocus={false}
             placement={this.props.placement}
-            variant={this.props.variant}
+            color={this.props.variant === 'inverse' ? 'primary-inverse' : 'primary'}
             mountNode={this.props.mountNode}
             constrain={this.props.constrain}
             shadow="none"
+            renderTrigger={() => this.renderTrigger(focused)}
+            __dangerouslyIgnoreExperimentalWarnings
           >
-            <Popover.Trigger>
-              {this.renderTrigger(focused)}
-            </Popover.Trigger>
-            <Popover.Content>
-              <span
-                id={this._id}
-                className={styles.root}
-                role="tooltip"
-              >
-                {this.props.tip}
-              </span>
-            </Popover.Content>
+            <span
+              id={this._id}
+              className={styles.root}
+              role="tooltip"
+            >
+              {this.props.tip}
+            </span>
           </Popover>
         )
       }} />

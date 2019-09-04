@@ -35,6 +35,7 @@
     "@instructure/ui-i18n": "^6.10.0",
     "@instructure/ui-layout": "^6.10.0",
     "@instructure/ui-motion": "^6.10.0",
+    "@instructure/ui-popover": "^6.10.0",
     "@instructure/ui-portal": "^6.10.0",
     "@instructure/ui-prop-types": "^6.10.0",
     "@instructure/ui-react-utils": "^6.10.0",

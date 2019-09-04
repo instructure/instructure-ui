@@ -37,7 +37,7 @@ import { getBoundingClientRect, isActiveElement } from '@instructure/ui-dom-util
 import { LayoutPropTypes } from '@instructure/ui-layout'
 import { View } from '@instructure/ui-view'
 import { Selectable } from '@instructure/ui-selectable'
-import { Popover } from '@instructure/ui-overlays'
+import { Popover } from '@instructure/ui-popover'
 import { TextInput } from '@instructure/ui-text-input'
 import { Options } from '@instructure/ui-options'
 import { IconArrowOpenDownLine, IconArrowOpenUpLine } from '@instructure/ui-icons'
@@ -654,17 +654,16 @@ class Select extends Component {
               constrain={constrain}
               placement={placement}
               positionTarget={this._inputContainer}
-              show={isShowingOptions}
+              isShowingContent={isShowingOptions}
               shouldReturnFocus={false}
               withArrow={false}
+              __dangerouslyIgnoreExperimentalWarnings
             >
-              <Popover.Content>
-                {this.renderList({
-                  getListProps,
-                  getOptionProps,
-                  getDisabledOptionProps
-                })}
-              </Popover.Content>
+              {this.renderList({
+                getListProps,
+                getOptionProps,
+                getDisabledOptionProps
+              })}
             </Popover>
           </span>
         )}

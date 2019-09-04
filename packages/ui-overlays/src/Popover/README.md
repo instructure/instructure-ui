@@ -1,6 +1,16 @@
 ---
-describes: Popover
+describes: DeprecatedPopover
+id: DeprecatedPopover__README
 ---
+
+**DEPRECATED:** Popover will be removed from `ui-overlays` in version 7.0.0. Use the [Popover from ui-popover](#Popover) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package as well as any props that have changed. However, there are some breaking changes that will need to be addressed manually. These changes and other things to note are described below.
+- `Popover.Trigger` and `Popover.Content` are no longer in use. The trigger is now defined via the `renderTrigger` prop and the `children` of a `Popover` will be rendered as the content.
+- Some callbacks have changed. Instead of `onShow`, `onDismiss`, and `onToggle`, there is only `onRequestShowContent` and `onRequestHideContent`. When Popover is controlled, these callbacks will also be fired as prompts for updating the `isShowingContent` prop.
+<br/><br/>
+
 Popovers are actionable containers that are triggered by click. When opened, it remains connected with element that triggered it. Popovers are on the same hierarchy as the [Tray](#Tray) but contains less content.
 
 ```js
@@ -45,7 +55,7 @@ class Example extends React.Component {
   render () {
     return (
       <View padding="large 0">
-        <Popover
+        <DeprecatedPopover
           on="click"
           show={this.state.showPopover}
           onDismiss={this.hidePopover}
@@ -56,14 +66,14 @@ class Example extends React.Component {
           offsetY="16px"
           mountNode={() => document.getElementById('main')}
         >
-          <Popover.Trigger>
+          <DeprecatedPopover.Trigger>
             <Button
               onClick={this.showPopover}
             >
               Sign In
             </Button>
-          </Popover.Trigger>
-          <Popover.Content>
+          </DeprecatedPopover.Trigger>
+          <DeprecatedPopover.Content>
             <View padding="medium" display="block" as="form">
               {this.renderCloseButton()}
               <FormFieldGroup description="Log In">
@@ -71,8 +81,8 @@ class Example extends React.Component {
                 <TextInput label="Password" type="password" />
               </FormFieldGroup>
             </View>
-          </Popover.Content>
-        </Popover>
+          </DeprecatedPopover.Content>
+        </DeprecatedPopover>
       </View>
     )
   }
@@ -82,7 +92,7 @@ render(<Example />)
 
 ```
 
->Note that `<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property set, it will trap focus inside the `<Popover />`.
+>Note that `<DeprecatedPopover />` can act as a dialog with a close button. With the `shouldContainFocus` property set, it will trap focus inside the `<DeprecatedPopover />`.
 
 
 The `alignArrow` prop will offset the popover content to adjust for the offset of the arrow.
@@ -96,19 +106,19 @@ class Example extends React.Component {
 render () {
   return (
       <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
-        <Popover
+        <DeprecatedPopover
           show
           placement="end top"
           alignArrow
           mountNode={() => document.getElementById('main')}
         >
-          <Popover.Trigger>
+          <DeprecatedPopover.Trigger>
             <div style={{display: 'inline-block', height: '3px', width: '3px', background: 'blue'}}/>
-          </Popover.Trigger>
-          <Popover.Content>
+          </DeprecatedPopover.Trigger>
+          <DeprecatedPopover.Content>
             <Heading>Small<br/>Target</Heading>
-          </Popover.Content>
-        </Popover>
+          </DeprecatedPopover.Content>
+        </DeprecatedPopover>
       </div>
   )
 }
@@ -117,9 +127,9 @@ render () {
 render(<Example />)
 ```
 
-If the `<Popover />` contains focusable content and should be rendered in the focus order
+If the `<DeprecatedPopover />` contains focusable content and should be rendered in the focus order
 immediately after the trigger, it can be configured using the `shouldFocusContentOnTriggerBlur`
-prop. Note that the `<Popover />` content must be rendered in the correct order in the document
+prop. Note that the `<DeprecatedPopover />` content must be rendered in the correct order in the document
 (using the `mountNode` prop).
 ```js
 ---
@@ -130,19 +140,19 @@ class Example extends React.Component {
 render () {
   return (
     <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
-      <Popover
+      <DeprecatedPopover
         on={['focus', 'click']}
         shouldContainFocus={false}
         shouldFocusContentOnTriggerBlur
         mountNode={() => document.getElementById('container')}
       >
-        <Popover.Trigger>
+        <DeprecatedPopover.Trigger>
           <Button margin="small">focus me</Button>
-        </Popover.Trigger>
-        <Popover.Content>
+        </DeprecatedPopover.Trigger>
+        <DeprecatedPopover.Content>
           <Button margin="small">focus me when trigger blurs</Button>
-        </Popover.Content>
-      </Popover>
+        </DeprecatedPopover.Content>
+      </DeprecatedPopover>
       <div id="container"/>
       <Button id="next" margin="small">focus me next</Button>
     </div>

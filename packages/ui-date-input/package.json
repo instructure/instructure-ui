@@ -30,7 +30,7 @@
     "@instructure/ui-form-field": "^6.10.0",
     "@instructure/ui-icons": "^6.10.0",
     "@instructure/ui-layout": "^6.10.0",
-    "@instructure/ui-overlays": "^6.10.0",
+    "@instructure/ui-popover": "^6.10.0",
     "@instructure/ui-prop-types": "^6.10.0",
     "@instructure/ui-react-utils": "^6.10.0",
     "@instructure/ui-selectable": "^6.10.0",

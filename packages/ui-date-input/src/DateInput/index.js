@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { Calendar } from '@instructure/ui-calendar'
 import { IconCalendarMonthLine } from '@instructure/ui-icons'
-import { Popover } from '@instructure/ui-overlays'
+import { Popover } from '@instructure/ui-popover'
 import { Selectable } from '@instructure/ui-selectable'
 import { TextInput } from '@instructure/ui-text-input'
 import { createChainedFunction } from '@instructure/ui-utils'
@@ -429,14 +429,13 @@ class DateInput extends Component {
           </span>
           <Popover
             placement={placement}
-            show={isShowingCalendar}
+            isShowingContent={isShowingCalendar}
             positionTarget={this._input}
             shouldReturnFocus={false}
             shouldFocusContentOnTriggerBlur
+            __dangerouslyIgnoreExperimentalWarnings
           >
-            <Popover.Content>
-              {this.renderCalendar({ getListProps, getOptionProps })}
-            </Popover.Content>
+            {this.renderCalendar({ getListProps, getOptionProps })}
           </Popover>
         </span>
       )}

@@ -103,8 +103,9 @@ export {
   Tooltip,
   Tray,
   Modal,
-  Popover
+  Popover as DeprecatedPopover
 } from '@instructure/ui-overlays'
+export { Popover } from '@instructure/ui-popover'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
 export { Navigation, AppNav } from '@instructure/ui-navigation'
 export { Menu } from '@instructure/ui-menu'

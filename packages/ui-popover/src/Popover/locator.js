@@ -21,17 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { locator } from '@instructure/ui-test-utils'
 
-import CalendarLocator from '@instructure/ui-calendar/lib/Calendar/locator'
-import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
+import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
+import { Popover } from './index'
 
-import { DateInput } from './index'
+export const PopoverTriggerLocator = locator('[data-popover-trigger]')
 
-export default locator(DateInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
-  findCalendar: async (element, ...args) => {
-    const content = await PopoverLocator.findContent(element, ...args)
-    return content ? CalendarLocator.find(content.getDOMNode()) : null
-  }
-})
+export const customMethods = {
+  findContent: (...args) => PositionLocator.findContent(...args),
+  findPositionTarget: (...args) => PositionLocator.findTarget(...args),
+  findTrigger: (...args) => PopoverTriggerLocator.find(...args)
+}
+
+export default locator(Popover.selector, customMethods)

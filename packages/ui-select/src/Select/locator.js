@@ -24,7 +24,7 @@
 import { locator } from '@instructure/ui-test-utils'
 
 import OptionsLocator from '@instructure/ui-options/lib/Options/locator'
-import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
+import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
 
 import { Select } from './index'
 
