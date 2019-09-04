@@ -108,6 +108,7 @@ class Pill extends Component {
         elementRef={elementRef}
         margin={margin}
         display="inline-flex"
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <span className={styles.text}>
           <TruncateText

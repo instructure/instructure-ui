@@ -42,6 +42,7 @@ import {
   omitProps,
   pickProps,
   passthroughProps,
+  experimental
 } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
@@ -50,10 +51,12 @@ import theme from './theme'
 /**
 ---
 category: components
+experimental: true
 ---
 @module View
 **/
 @bidirectional()
+@experimental()
 @themeable(theme, styles)
 class View extends Component {
   static propTypes = {

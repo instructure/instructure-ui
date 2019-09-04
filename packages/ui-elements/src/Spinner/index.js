@@ -126,6 +126,7 @@ class Spinner extends Component {
         elementRef={this.props.elementRef}
         className={classNames(classes)}
         margin={this.props.margin}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <svg
           className={styles.circle}

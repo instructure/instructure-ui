@@ -71,6 +71,7 @@
     "@instructure/ui-toggle-details": "^6.10.0",
     "@instructure/ui-tree-browser": "^6.10.0",
     "@instructure/ui-utils": "^6.10.0",
+    "@instructure/ui-view": "^6.10.0",
     "lorem-ipsum": "^1.0.6",
     "moment": "^2.23.0",
     "react": "^15 || ^16",

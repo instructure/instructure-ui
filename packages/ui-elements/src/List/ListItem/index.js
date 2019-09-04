@@ -120,6 +120,7 @@ class ListItem extends Component {
         padding={this.props.padding}
         className={classnames(classes)}
         elementRef={this.props.elementRef}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.props.children}
         {!noDelimiter && (

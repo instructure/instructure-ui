@@ -172,6 +172,7 @@ class Item extends Component {
           isFocused={focused}
           cursor={isDisabled ? 'not-allowed' : cursor}
           className={classes}
+          __dangerouslyIgnoreExperimentalWarnings
         >
           {icon}
           {labelIsForScreenReaders ? label : <span className={styles.label}>{label}</span>}

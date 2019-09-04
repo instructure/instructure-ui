@@ -22,6 +22,14 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+
+import { View as ExperimentalView } from '@instructure/ui-view'
+
+// Many docs examples that are unrelated to View are using View as a layout piece. Export it with ignored
+// experimental warnings here to avoid spamming warnings in unrelated component examples.
+export const View = (props) => <ExperimentalView {...props} __dangerouslyIgnoreExperimentalWarnings />
+
 export {
   AccessibleContent as DeprecatedAccessibleContent,
   Dialog,
@@ -122,6 +130,5 @@ export { Text } from '@instructure/ui-text'
 export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export { Flex} from '@instructure/ui-flex'
-export { View } from '@instructure/ui-view'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

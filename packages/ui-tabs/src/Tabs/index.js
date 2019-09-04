@@ -287,6 +287,7 @@ class Tabs extends Component {
         className={classnames({
           [styles[variant]]: true
         })}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <Focusable ref={this.handleFocusableRef}>
           {({ focusVisible }) => (
@@ -300,6 +301,7 @@ class Tabs extends Component {
               role="tablist"
               className={styles.tabs}
               aria-label={screenReaderLabel}
+              __dangerouslyIgnoreExperimentalWarnings
             >
               {tabs}
             </View>

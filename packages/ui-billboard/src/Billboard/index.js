@@ -216,6 +216,7 @@ class Billboard extends Component {
       <View
         as="div"
         margin={margin}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <View
           {...omitProps(this.props, { ...Billboard.propTypes, ...View.propTypes })}
@@ -227,6 +228,7 @@ class Billboard extends Component {
           onClick={this.handleClick}
           disabled={disabled}
           aria-disabled={(disabled || readOnly) ? 'true' : null}
+          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderContent()}
         </View>

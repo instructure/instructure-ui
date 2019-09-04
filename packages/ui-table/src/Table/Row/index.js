@@ -75,6 +75,7 @@ class Row extends Component {
           [styles.stacked]: isStacked,
         })}
         role={isStacked ? "row" : null}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {Children.map(children, (child, index) => {
           if (matchComponentTypes(child, [ColHeader])) {

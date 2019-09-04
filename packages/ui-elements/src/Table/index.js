@@ -114,6 +114,7 @@ class Table extends Component {
         as="table"
         className={classnames(classes)}
         margin={this.props.margin}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <caption>{this.props.caption}</caption>
         {this.props.children}

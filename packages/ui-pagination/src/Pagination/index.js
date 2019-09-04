@@ -206,6 +206,7 @@ class Pagination extends Component {
         padding={visibleLabel ? 'small' : '0'}
         display={visibleLabel ? display : 'auto'}
         id={this._labelId}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.props.label}
       </View>
@@ -245,7 +246,7 @@ class Pagination extends Component {
     }
 
     return (
-      <View display="inline-block">
+      <View display="inline-block" __dangerouslyIgnoreExperimentalWarnings>
         {this.transferDisabledPropToChildren(visiblePages)}
       </View>
     )
@@ -288,9 +289,10 @@ class Pagination extends Component {
         margin={this.props.margin}
         className={styles.root}
         aria-labelledby={this.props.label && this._labelId}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.props.label && this.renderLabel()}
-        <View display="inline-block" className={styles.pages}>
+        <View display="inline-block" className={styles.pages} __dangerouslyIgnoreExperimentalWarnings>
           {shouldShowPrevButton(this.props, currentPageIndex) &&
             this.renderArrowButton(
               this.props.labelPrev,

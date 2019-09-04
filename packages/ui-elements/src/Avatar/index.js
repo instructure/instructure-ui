@@ -157,6 +157,7 @@ class Avatar extends Component {
         elementRef={this.props.elementRef}
         margin={this.props.margin}
         display={this.props.inline ? 'inline-block' : 'block'}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.renderLoadImage()}
         {!this.state.loaded && this.renderInitials()}

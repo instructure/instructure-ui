@@ -70,6 +70,7 @@ class Cell extends Component {
           [styles[`textAlign--${textAlign}`]]: textAlign,
         })}
         role={isStacked ? "cell" : null}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {header && callRenderProp(header)}
         {header && ': '}

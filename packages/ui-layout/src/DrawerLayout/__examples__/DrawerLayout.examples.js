@@ -42,13 +42,14 @@ export default {
             textAlign="center"
             margin="large auto"
             padding="small"
+            __dangerouslyIgnoreExperimentalWarnings
           >
             Drawer tray
           </View>
         </DrawerLayout.Tray>,
         <DrawerLayout.Content key="1" label="Drawer content example">
           <div style={{background: 'white', height: '100%'}}>
-            <View as="div" padding="x-large">
+            <View as="div" padding="x-large" __dangerouslyIgnoreExperimentalWarnings>
               Drawer content
             </View>
           </div>

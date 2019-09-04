@@ -342,6 +342,7 @@ class TabList extends Component {
         className={classnames({
           [styles[variant]]: true
         })}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <Focusable ref={this.handleFocusableRef}>
           {({ focusVisible }) => (
@@ -354,6 +355,7 @@ class TabList extends Component {
                 shouldAnimateFocus={false}
                 role="tablist"
                 className={styles.tabs}
+                __dangerouslyIgnoreExperimentalWarnings
               >
                 {tabs}
               </View>

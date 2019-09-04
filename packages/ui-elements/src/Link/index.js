@@ -230,7 +230,7 @@ class Link extends Component {
     }
 
     return (
-      <View {...props}>
+      <View {...props} __dangerouslyIgnoreExperimentalWarnings>
         {(icon && iconPlacement === 'start') && this.renderIcon()}
         {children}
         {(icon && iconPlacement === 'end') && this.renderIcon()}

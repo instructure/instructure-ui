@@ -68,6 +68,7 @@ class Body extends Component {
         as={isStacked ? 'div' : 'tbody'}
         className={styles.root}
         role={isStacked ? "rowgroup" : null}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {Children.map(children, (child) => matchComponentTypes(child, [Row])
           ? safeCloneElement(child, {

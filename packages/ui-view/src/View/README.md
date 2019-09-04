@@ -250,7 +250,7 @@ example: true
     background="primary"
     borderWidth="large"
   >
-    default
+    primary
   </View>
   <View
     as="span"

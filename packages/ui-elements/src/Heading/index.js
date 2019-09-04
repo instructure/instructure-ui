@@ -115,6 +115,7 @@ class Heading extends Component {
        as={ElementType}
        margin={margin}
        elementRef={elementRef}
+        __dangerouslyIgnoreExperimentalWarnings
       >
        {children}
       </View>

@@ -173,6 +173,7 @@ class ContextView extends Component {
         elementRef={elementRef}
         margin={margin}
         stacking={stacking}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <View
           className={styles.content}
@@ -191,6 +192,7 @@ class ContextView extends Component {
           padding={padding}
           shadow={shadow}
           textAlign={textAlign}
+          __dangerouslyIgnoreExperimentalWarnings
         >
           <span
             className={classnames({

@@ -252,6 +252,7 @@ class Calendar extends Component {
         display="inline-block"
         padding="small"
         background="primary"
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.renderHeader()}
         {this.renderBody()}

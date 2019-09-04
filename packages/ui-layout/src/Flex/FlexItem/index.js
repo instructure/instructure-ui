@@ -150,6 +150,7 @@ class FlexItem extends Component {
        padding={padding}
        overflowX={overflowX}
        overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
+       __dangerouslyIgnoreExperimentalWarnings
      >
        {children}
      </View>

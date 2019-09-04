@@ -160,6 +160,7 @@ class Item extends Component {
        overflowX={overflowX}
        overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
        withVisualDebug={withVisualDebug}
+       __dangerouslyIgnoreExperimentalWarnings
      >
        {children}
      </View>

@@ -173,6 +173,7 @@ class Img extends Component {
           style={{
             backgroundImage: hasBackground ? `url(${src})` : undefined
           }}
+          __dangerouslyIgnoreExperimentalWarnings
         >
           {
             !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
@@ -197,6 +198,7 @@ class Img extends Component {
           {...imageProps}
           {...a11yProps}
           as="img"
+          __dangerouslyIgnoreExperimentalWarnings
         />
       )
     }

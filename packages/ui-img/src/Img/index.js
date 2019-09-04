@@ -143,7 +143,8 @@ class Img extends Component {
       height,
       margin,
       display,
-      elementRef
+      elementRef,
+      __dangerouslyIgnoreExperimentalWarnings: true
     }
 
     // if browser does not support ObjectFit CSS, and Img needs "constrain",

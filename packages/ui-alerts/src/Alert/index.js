@@ -331,7 +331,13 @@ class Alert extends Component {
   renderAlert () {
     const { classNames } = this.variantUI()
     return (
-      <View as="div" margin={this.props.margin} className={classNames} onKeyUp={this.handleKeyUp}>
+      <View
+        as="div"
+        margin={this.props.margin}
+        className={classNames}
+        onKeyUp={this.handleKeyUp}
+        __dangerouslyIgnoreExperimentalWarnings
+      >
         {this.renderIcon()}
         <div className={styles.content}>
           {this.props.children}

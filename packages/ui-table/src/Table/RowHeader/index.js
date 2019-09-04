@@ -70,6 +70,7 @@ class RowHeader extends Component {
         })}
         scope="row"
         role={isStacked ? "rowheader" : null}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {callRenderProp(children)}
       </View>

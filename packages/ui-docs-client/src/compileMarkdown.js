@@ -201,7 +201,7 @@ function createRenderer () {
 
         } else if (language.indexOf('_example') >= 0 || matter.data.example) {
           el = (
-            <View display="block" margin="medium none">
+            <View display="block" margin="medium none" __dangerouslyIgnoreExperimentalWarnings>
               {getComponent('Playground', data)}
             </View>
           )

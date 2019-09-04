@@ -144,6 +144,7 @@ class Panel extends Component {
             as="div"
             padding={padding}
             textAlign={textAlign}
+            __dangerouslyIgnoreExperimentalWarnings
           >
             {children}
           </View>

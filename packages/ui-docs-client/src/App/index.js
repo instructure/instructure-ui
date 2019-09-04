@@ -314,7 +314,7 @@ class App extends Component {
             mountNode={this.state.trayOverlay ? document.body : null}
             onDismiss={this.handleTrayDismiss}
           >
-            <View as="div" width="16rem">
+            <View as="div" width="16rem" __dangerouslyIgnoreExperimentalWarnings>
               <Header name={name} version={version} />
               <Nav
                 selected={this.state.key}
@@ -343,6 +343,7 @@ class App extends Component {
               ref={c => {
                 this._content = c
               }}
+              __dangerouslyIgnoreExperimentalWarnings
             >
               <div className={styles.main} id="main">
                 {this.renderContent(this.state.key)}

@@ -113,6 +113,7 @@ class AppNav extends Component {
         margin={margin}
         display={renderAfterItems ? 'flex' : 'block'}
         elementRef={elementRef}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <ul className={classnames({
           [styles.list]: true,

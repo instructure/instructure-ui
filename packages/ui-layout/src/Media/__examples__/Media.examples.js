@@ -45,6 +45,7 @@ export default {
           height="3rem"
           borderRadius="large"
           background="primary-inverse"
+          __dangerouslyIgnoreExperimentalWarnings
         />
       )
     }

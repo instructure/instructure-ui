@@ -152,6 +152,7 @@ class Tag extends Component {
         disabled={disabled || readOnly}
         display={null}
         title={title || ((typeof text === 'string') ? text : null)}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <span className={styles.text}>
           {text}

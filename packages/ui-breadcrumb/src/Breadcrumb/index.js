@@ -110,6 +110,7 @@ class Breadcrumb extends Component {
         as="div"
         margin={this.props.margin}
         aria-label={this.props.label}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <ol className={classnames(classes)}>
           {this.renderChildren()}
