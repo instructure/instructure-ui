@@ -52,10 +52,12 @@ const experimental = decorator((ComposedComponent, experimentalProps, message) =
 
   if (process.env.NODE_ENV !== 'production') {
     ExperimentalComponent.prototype.componentDidMount = function () {
-      if (experimentalProps) {
-        warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
-      } else {
-        warnExperimentalComponent(ComposedComponent.displayName, message)
+      if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
+        if (experimentalProps) {
+          warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
+        } else {
+          warnExperimentalComponent(ComposedComponent.displayName, message)
+        }
       }
 
       if (ComposedComponent.prototype.componentDidMount) {
@@ -64,10 +66,12 @@ const experimental = decorator((ComposedComponent, experimentalProps, message) =
     }
 
     ExperimentalComponent.prototype.componentWillReceiveProps = function (nextProps) {
-      if (experimentalProps) {
-        warnExperimentalProps(ComposedComponent.displayName, nextProps, experimentalProps, message)
-      } else {
-        warnExperimentalComponent(ComposedComponent.displayName, message)
+      if (!nextProps.__dangerouslyIgnoreExperimentalWarnings) {
+        if (experimentalProps) {
+          warnExperimentalProps(ComposedComponent.displayName, nextProps, experimentalProps, message)
+        } else {
+          warnExperimentalComponent(ComposedComponent.displayName, message)
+        }
       }
 
       if (ComposedComponent.prototype.componentWillReceiveProps) {

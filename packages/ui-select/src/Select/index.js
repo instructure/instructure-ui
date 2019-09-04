@@ -472,6 +472,7 @@ class Select extends Component {
         as="ul"
         role="group"
         renderLabel={renderLabel}
+        __dangerouslyIgnoreExperimentalWarnings
         {...omitProps(rest, {
           ...Options.propTypes,
           ...Group.propTypes
@@ -514,7 +515,10 @@ class Select extends Component {
 
     return (
       <View {...viewProps}>
-        <Options {...getListProps({ as: 'ul', elementRef: this.handleListRef })}>
+        <Options
+          {...getListProps({ as: 'ul', elementRef: this.handleListRef })}
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           {isShowingOptions ? Children.map(children, (child, index) => {
             if (!child || !matchComponentTypes(child, [Group, Option])) {
               return // ignore invalid children

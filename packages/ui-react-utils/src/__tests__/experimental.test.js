@@ -67,6 +67,15 @@ describe('@experimental', async () => {
       await expect(consoleWarn)
         .to.not.have.been.called()
     })
+
+    it('should not output a warning for an experimental prop when dangerously ignored', async () => {
+      const consoleWarn = spy(console, 'warn')
+
+      await mount(<ExperimentalComponent qux="Jane" __dangerouslyIgnoreExperimentalWarnings />)
+
+      await expect(consoleWarn)
+        .to.not.have.been.called()
+    })
   })
 
   describe('experimental component', async () => {
@@ -79,6 +88,14 @@ describe('@experimental', async () => {
 
       await expect(consoleWarn)
         .to.have.been.calledWithMatch(warning)
+    })
+
+    it('should not output a warning for a component when dangerously ignored', async () => {
+      const consoleWarn = spy(console, 'warn')
+      await mount(<ExperimentalComponent __dangerouslyIgnoreExperimentalWarnings />)
+
+      await expect(consoleWarn)
+        .to.not.have.been.called()
     })
   })
 })
