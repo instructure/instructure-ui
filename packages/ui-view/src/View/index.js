@@ -474,7 +474,7 @@ class View extends Component {
       [styles.root]: true,
       [styles.withVisualDebug]: withVisualDebug,
       [styles.withBorder]: this.withBorder,
-      [styles[`borderColor--${borderColor}`]]: borderColor,
+      [styles[`borderColor--${borderColor}`]]: this.withBorder,
       [styles[`textAlign--${textAlign}`]]: textAlign,
       [styles[`background--${background}`]]: background,
       [styles[`display--${display}`]]: display && display !== 'auto',
