@@ -61,11 +61,11 @@ const experimental = decorator((ComposedComponent, experimentalProps, message) =
       }
 
       if (ComposedComponent.prototype.componentDidMount) {
-        ComposedComponent.prototype.componentDidMount()
+        ComposedComponent.prototype.componentDidMount.call(this)
       }
     }
 
-    ExperimentalComponent.prototype.componentWillReceiveProps = function (nextProps) {
+    ExperimentalComponent.prototype.componentWillReceiveProps = function (nextProps, nextContext) {
       if (!nextProps.__dangerouslyIgnoreExperimentalWarnings) {
         if (experimentalProps) {
           warnExperimentalProps(ComposedComponent.displayName, nextProps, experimentalProps, message)
@@ -75,7 +75,7 @@ const experimental = decorator((ComposedComponent, experimentalProps, message) =
       }
 
       if (ComposedComponent.prototype.componentWillReceiveProps) {
-        ComposedComponent.prototype.componentWillReceiveProps(nextProps)
+        ComposedComponent.prototype.componentWillReceiveProps.call(this, nextProps, nextContext)
       }
     }
   }
