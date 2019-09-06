@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import { Dialog } from '@instructure/ui-a11y'
 import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps, safeCloneElement , matchComponentTypes } from '@instructure/ui-react-utils'
-import { createChainedFunction, Browser } from '@instructure/ui-utils'
+import { createChainedFunction, isIE11 } from '@instructure/ui-utils'
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import { themeable } from '@instructure/ui-themeable'
@@ -222,16 +222,12 @@ class Modal extends Component {
     return this.props.defaultFocusElement
   }
 
-  get ie11 () {
-    return Browser.msie && Browser.version > 10
-  }
-
   get DOMNode () {
     return this._DOMNode
   }
 
   get maskPlacement () {
-    if (this.ie11) {
+    if (isIE11) {
       return 'top'
     } else if (this.props.overflow === 'fit') {
       return 'stretch'

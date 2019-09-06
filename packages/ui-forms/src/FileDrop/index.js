@@ -33,6 +33,7 @@ import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { deprecated, omitProps } from '@instructure/ui-react-utils'
+import { isEdge } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
@@ -48,7 +49,7 @@ function keyEventIsClickButton (e) {
 function isBrowserMS () {
   let result = false
   try {
-    result = document.documentMode || /Edge/.test(navigator.userAgent)
+    result = document.documentMode || isEdge
   } catch (e) {} // eslint-disable-line no-empty
 
   return result

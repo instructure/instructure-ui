@@ -26,7 +26,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { Browser } from '@instructure/ui-utils'
 import { ContextView } from '@instructure/ui-layout'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
@@ -35,6 +34,7 @@ import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { isEdge } from '@instructure/ui-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -177,14 +177,12 @@ class RangeInput extends Component {
       readOnly
     } = this.props
 
-    const edge16Up = Browser.msedge && parseFloat(Browser.version) >= 16
-
     const props = omitProps(this.props, RangeInput.propTypes)
 
     const classes = {
       [styles.root]: true,
       [styles[size]]: size,
-      [styles.edge16Up]: edge16Up
+      [styles.edge16Up]: isEdge
     }
 
     /* eslint-disable jsx-a11y/no-redundant-roles */

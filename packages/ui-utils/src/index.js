@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export { Browser } from './Browser'
+export { isIE11 } from './isIE11'
 export { capitalizeFirstLetter } from './capitalizeFirstLetter'
 export { cloneArray } from './cloneArray'
 export { createChainedFunction } from './createChainedFunction'

@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { Browser } from '@instructure/ui-utils'
+import { isIE11 } from '@instructure/ui-utils'
 import { Img } from '@instructure/ui-elements'
 
 import styles from './styles.css'
@@ -126,8 +126,6 @@ class TreeButton extends Component {
       size
     } = this.props
 
-    const ie11 = Browser.msie && Browser.version > 10
-
     const classes = {
       [styles.root]: true,
       [styles[size]]: true,
@@ -135,7 +133,7 @@ class TreeButton extends Component {
       [styles.expanded]: expanded,
       [styles.selected]: selected,
       [styles.focused]: focused,
-      [styles.ie11]: ie11
+      [styles.ie11]: isIE11
     }
 
     // VoiceOver can't navigate without the buttons, even though they don't do anything

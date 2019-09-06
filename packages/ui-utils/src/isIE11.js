@@ -22,25 +22,13 @@
  * SOFTWARE.
  */
 
-import { canUseDOM } from '@instructure/ui-dom-utils'
-import { isEdge } from '@instructure/ui-utils'
+const userAgent = (typeof navigator !== 'undefined' && navigator.userAgent) || ''
 
-let cachedReturnVal
 /**
  * ---
- * category: utilities/DOM
+ * category: utilities
  * ---
- * check if CSS custom properties (CSS variables) are supported
- * @returns {Boolean} true if the DOM is available and CSS variables are supported
+ * A minimal check for IE11, since that's mostly all the browser detecting we do.
+ * Use when you don't need all of [bowser](https://www.npmjs.com/package/bowser).
  */
-function customPropertiesSupported () {
-  if (typeof cachedReturnVal !== 'undefined') return cachedReturnVal
-  return cachedReturnVal = (
-    canUseDOM &&
-    !isEdge && // polyfill edge until improved css variable support
-    window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--primary)')
-  )
-}
-
-export default customPropertiesSupported
-export { customPropertiesSupported }
+export const isIE11 = /msie|trident/i.test(userAgent)

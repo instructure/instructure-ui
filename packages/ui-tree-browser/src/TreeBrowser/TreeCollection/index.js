@@ -27,8 +27,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { Browser } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
+
+// remove when Edge sorts out styles-on-pseudo-elements issues:
+// https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/
+import { isEdge } from '@instructure/ui-utils'
 
 import { TreeButton } from '../TreeButton'
 
@@ -234,13 +237,9 @@ class TreeCollection extends Component {
       position
     } = this.props
 
-    // remove when Edge sorts out styles-on-pseudo-elements issues:
-    // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/
-    const edge15Up = Browser.msedge && Browser.version >= 15
-
     const classes = {
       [styles.root]: true,
-      [styles.edge]: edge15Up,
+      [styles.edge]: isEdge,
       [styles[size]]: true,
       [styles[variant]]: true,
       [styles.expanded]: expanded,

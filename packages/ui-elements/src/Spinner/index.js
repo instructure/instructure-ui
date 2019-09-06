@@ -28,7 +28,7 @@ import classNames from 'classnames'
 import { View } from '@instructure/ui-view'
 import { callRenderProp, omitProps, deprecated } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { Browser } from '@instructure/ui-utils'
+import { isIE11 } from '@instructure/ui-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
@@ -102,13 +102,11 @@ class Spinner extends Component {
   }
 
   render () {
-    const ie11 = Browser.msie && Browser.version > 10
-
     const classes = {
       [styles.root]: true,
       [styles[this.props.size]]: true,
       [styles[this.props.variant]]: true,
-      [styles.ie11]: ie11
+      [styles.ie11]: isIE11
     }
 
     const passthroughProps = View.omitViewProps(

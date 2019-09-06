@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import { Browser } from '@instructure/ui-utils'
 import { parseCss, ruleTypes } from './parseCss'
 
 /**
@@ -56,7 +55,6 @@ function isKeyframesSelector (rule) {
 
 /**
 * Parses a string of CSS into an array of rules objects (selector + declaration block)
-* Filters out any vendor rules that don't apply to the current browser
 * @param {String} CSS text to parse
 * @returns {Array} an array of rules objects
 */
@@ -65,9 +63,7 @@ function toRules (cssText) {
   let rules = []
 
   if (node.rules && node.rules.length > 0) {
-    rules = node.rules
-      .filter(filterUnusedVendorRule)
-      .map((rule) => toCssText(rule))
+    rules = node.rules.map((rule) => toCssText(rule))
   } else {
     const cssText = toCssText(node)
     if (cssText) {
@@ -117,19 +113,6 @@ function toCssText (node, text) {
 
   return result
 }
-
-const filterUnusedVendorRule = (() => {
-  const ms = '-ms-'
-  const moz = '-moz-'
-  const webkit = '-webkit-'
-
-  if (Browser.blink) return ({selector}) => !(selector.includes(ms) || selector.includes(moz))
-  if (Browser.webkit) return ({selector}) => !(selector.includes(ms) || selector.includes(moz))
-  if (Browser.gecko) return ({selector}) => !(selector.includes(ms) || selector.includes(webkit))
-  if (Browser.msedge) return ({selector}) => !(selector.includes(moz))
-  if (Browser.msie) return ({selector}) => !(selector.includes(moz) || selector.includes(webkit))
-  return () => true
-})()
 
 export default transformCss
 export { transformCss, toRules, isKeyframesSelector }

@@ -31,7 +31,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
-import { Browser } from '@instructure/ui-utils'
+import { isIE11 } from '@instructure/ui-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -86,7 +86,7 @@ class ModalBody extends Component {
     const isFit = overflow === 'fit'
 
     error(
-      !(Browser.msie && Browser.version > 10) || !isFit,
+      !isIE11 || !isFit,
       `[Modal] overflow="fit" is only supported with fullscreen modals in Internet Explorer`
     )
 
