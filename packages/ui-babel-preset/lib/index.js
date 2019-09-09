@@ -54,6 +54,18 @@ module.exports = function (context, opts = {
     ])
   }
 
+  // Work around https://github.com/babel/babel/issues/10261, which causes
+  // Babel to not use the runtime helpers for things like _objectSpread.
+  // Remove this once that babel issue is fixed
+  let babelHelperVersion = {}
+  try {
+    // eslint-disable-next-line import/no-extraneous-dependencies
+    const version = require('@babel/helpers/package.json').version
+    babelHelperVersion.version = version
+  } catch (e) {
+    // if something goes wrong, continue and don't try to explicitly set a helper version
+  }
+
   plugins = plugins.concat([
     require('babel-plugin-macros'),
     require('@babel/plugin-transform-destructuring').default,
@@ -62,6 +74,7 @@ module.exports = function (context, opts = {
     require('@babel/plugin-proposal-export-default-from').default,
     [require('@babel/plugin-proposal-object-rest-spread').default, { useBuiltIns: true }],
     [require('@babel/plugin-transform-runtime').default, {
+      ...babelHelperVersion,
       corejs: false,
       regenerator: true,
       helpers: true,
