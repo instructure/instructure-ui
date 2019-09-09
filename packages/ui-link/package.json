@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-breadcrumb",
+  "name": "@instructure/ui-link",
   "version": "6.13.0",
-  "description": "A UI component library made by Instructure Inc.",
+  "description": "A component for creating links",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -21,26 +21,26 @@
     "build:types": "ui-scripts --types"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.13.0",
-    "@instructure/ui-test-utils": "^6.13.0"
-  },
   "dependencies": {
     "@babel/runtime": "^7.5.0",
+    "@instructure/console": "^6.13.0",
     "@instructure/ui-a11y": "^6.13.0",
-    "@instructure/ui-elements": "^6.13.0",
+    "@instructure/ui-color-utils": "^6.13.0",
+    "@instructure/ui-dom-utils": "^6.13.0",
     "@instructure/ui-icons": "^6.13.0",
-    "@instructure/ui-link": "^6.13.0",
+    "@instructure/ui-view": "^6.13.0",
     "@instructure/ui-prop-types": "^6.13.0",
     "@instructure/ui-react-utils": "^6.13.0",
     "@instructure/ui-testable": "^6.13.0",
     "@instructure/ui-themeable": "^6.13.0",
-    "@instructure/ui-utils": "^6.13.0",
-    "@instructure/ui-view": "^6.13.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
-  "peerDependencies": {
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^6.13.0",
+    "@instructure/ui-test-utils": "^6.13.0"
+  },
+    "peerDependencies": {
     "react": "^15 || ^16"
   },
   "publishConfig": {

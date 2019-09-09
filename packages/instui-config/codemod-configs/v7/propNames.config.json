@@ -11,6 +11,53 @@
         { "old": false, "new": "block" }
       ]},
       { "old": "variant", "new": "shape" }
+  },
+  "DateInput": {
+    "7.0.0": [
+      { "old": "label", "new": "renderLabel" }
+    ]
+  },
+  "Flex": {
+    "7.0.0": [
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-flex" },
+        { "old": false, "new": "flex" }
+      ]},
+      { "old": "wrapItems", "new": "wrap", "values": [
+        { "old": true, "new": "wrap" },
+        { "old": false, "new": "no-wrap" }
+      ]},
+      { "old": "visualDebug", "new": "withVisualDebug" }
+    ]
+  },
+  "Flex.Item": {
+    "7.0.0": [
+      { "old": "grow", "new": "shouldGrow" },
+      { "old": "shrink", "new": "shouldShrink" },
+      { "old": "visualDebug", "new": "withVisualDebug" }
+    ]
+  },
+  "Img": {
+    "7.0.0": [
+      { "old": "grayscale", "new": "withGrayscale" },
+      { "old": "blur", "new": "withBlur" },
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-block" },
+        { "old": false, "new": "block" }
+      ]}
+    ]
+  },
+  "Link": {
+    "7.0.0": [
+      { "old": "disabled", "new": "interaction", "values": [
+        { "old": true, "new": "disabled" },
+        { "old": false, "new": "enabled" }
+      ]},
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "link" },
+        { "old": "inverse", "new": "link-inverse" }
+      ]},
+      { "old": "linkRef", "new": "elementRef" }
     ]
   },
   "NumberInput": {
@@ -31,6 +78,21 @@
       ]}
     ]
   },
+  "Popover": {
+    "7.0.0": [
+      { "old": "show", "new": "isShowingContent" },
+      { "old": "label", "new": "screenReaderLabel" },
+      { "old": "alignArrow", "new": "shouldAlignArrow" },
+      { "old": "trackPosition", "new": "shouldTrackPosition" },
+      { "old": "defaultShow", "new": "defaultIsShowingContent" },
+      { "old": "onShow", "new": "onRequestShowContent" },
+      { "old": "onDismiss", "new": "onRequestHideContent" },
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "primary" },
+        { "old": "inverse", "new": "primary-inverse" }
+      ]},
+    ]
+  },
   "Tabs": {
     "7.0.0": [
       { "old": "title", "new": "renderTitle" },
@@ -38,9 +100,11 @@
       { "old": "focus", "new": "shouldFocusOnRender" }
     ]
   },
-  "DateInput": {
+  "Text": {
     "7.0.0": [
-      { "old": "label", "new": "renderLabel" }
+      { "old": "color", "new": "color", "values": [
+        { "old": "error", "new": "danger" }
+      ]}
     ]
   },
   "TextInput": {

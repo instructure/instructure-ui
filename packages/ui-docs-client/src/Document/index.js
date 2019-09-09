@@ -25,7 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Link , Heading } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-elements'
+import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
@@ -113,7 +114,7 @@ class Document extends Component {
 
     return (
       <View as="div" margin="0 0 x-large 0" __dangerouslyIgnoreExperimentalWarnings>
-        <Link href={srcUrl}>
+        <Link href={srcUrl} __dangerouslyIgnoreExperimentalWarnings>
           {srcPath}
         </Link>
       </View>

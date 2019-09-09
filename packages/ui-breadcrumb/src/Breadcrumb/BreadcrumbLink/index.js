@@ -25,7 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Link, TruncateText } from '@instructure/ui-elements'
+import { TruncateText } from '@instructure/ui-elements'
+import { Link } from '@instructure/ui-link'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -91,6 +92,7 @@ class BreadcrumbLink extends Component {
         icon={icon}
         iconPlacement={iconPlacement}
         onClick={onClick}
+        __dangerouslyIgnoreExperimentalWarnings
       >
         <TruncateText>{children}</TruncateText>
       </Link>

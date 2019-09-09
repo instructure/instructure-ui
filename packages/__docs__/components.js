@@ -53,8 +53,8 @@ export {
   Badge,
   Heading,
   Img as DeprecatedImg,
-  Link,
   Pill as DeprecatedPill,
+  Link as DeprecatedLink,
   Progress,
   Rating,
   Spinner,
@@ -133,5 +133,6 @@ export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-d
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export { Flex } from '@instructure/ui-flex'
 export { FileDrop } from '@instructure/ui-file-drop'
+export { Link } from '@instructure/ui-link'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

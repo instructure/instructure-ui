@@ -1,6 +1,27 @@
 ---
-describes: Link
+describes: DeprecatedLink
+id: DeprecatedLink__README
 ---
+
+**DEPRECATED:** Link will be removed from `ui-elements` in version 7.0.0. Use the [Link from ui-link](#Link) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package and handle the prop name changes listed below.
+
+These props have been updated:
+- The `linkRef` prop will be removed in version 7. Use `elementRef` instead.
+- The `variant` prop has been changed to `color: ['link', 'link-inverse']`
+- The `disabled` boolean prop has been changed to `interaction: ['enabled', 'disabled']`
+
+ui-link](#Link) will also support a prop to control its text-decoration, to account for situations where
+Link is used within and without surrounding text. The following theme variables have been updated:
+
+- `textDecoration` has been replaced with `textDecorationWithinText` and `textDecorationOutsideText`
+- `hoverTextDecoration` has been replaced with `hoverTextDecorationWithinText` and `hoverTextDecorationOutsideText`
+
+Finally, Link's default behavior when the `renderIcon` prop is used in conjunction with `<TruncateText />` has changed:
+Link will now set its `display` prop to `inline-flex` instead of `flex`. Please check all areas where you are
+using Link with TruncateText. (The `display` prop can be manually reset to `flex`, if needed.)
 
 `Link` is intended for presenting actions __inline with other content__, such as within headings or sentences. Typically those actions navigate the user to a different view. If the action is not presented within other content or is grouped with other similar actions, use a [Button](#Button) with variant="link".
 
@@ -8,7 +29,7 @@ describes: Link
 ---
 example: true
 ---
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
+<Text>The quick brown fox <DeprecatedLink href="https://instructure.github.io/instructure-ui/">jumps</DeprecatedLink> over the lazy dog.</Text>
 ```
 
 ```js
@@ -16,7 +37,7 @@ example: true
 example: true
 background: 'checkerboard-inverse'
 ---
-<Text color="primary-inverse">The quick brown fox <Link variant="inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
+<Text color="primary-inverse">The quick brown fox <DeprecatedLink variant="inverse" href="https://instructure.github.io/instructure-ui/">jumps</DeprecatedLink> over the lazy dog.</Text>
 ```
 
 ### Adding margin
@@ -29,7 +50,7 @@ to add margin to the top or bottom of Link, wrap it inside a `<View />`.
 ---
 example: true
 ---
-<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
+<Text>The quick brown fox <DeprecatedLink href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</DeprecatedLink> over the lazy dog.</Text>
 ```
 
 ### Truncating text
@@ -42,14 +63,14 @@ example: true
 ---
 <View as="div">
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design/#Link">
+    <DeprecatedLink href="https://instructure.design/#Link">
       <TruncateText position="middle">{lorem.paragraph()}</TruncateText>
-    </Link>
+    </DeprecatedLink>
   </View>
   <View as="div">
-    <Link onClick={() => console.log('clicked')} icon={<IconUserLine size="small" />}>
+    <DeprecatedLink onClick={() => console.log('clicked')} icon={<IconUserLine size="small" />}>
       <TruncateText>{lorem.paragraph()}</TruncateText>
-    </Link>
+    </DeprecatedLink>
   </View>
 
 </View>
@@ -67,22 +88,22 @@ example: true
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" icon={<IconUserLine size="small" />}>Icon before text</Link> with the quick brown fox
+    <DeprecatedLink href="https://instructure.design" icon={<IconUserLine size="small" />}>Icon before text</DeprecatedLink> with the quick brown fox
   </View>
   <View as="div" margin="0 0 small">
-    This Link has an icon and displays inline with text. <Link
+    This Link has an icon and displays inline with text. <DeprecatedLink
       href="https://instructure.design"
       icon={<IconUserLine />}
       iconPlacement="end"
     >
       Icon appears after Link text
-    </Link>. This is more text after the link.
+    </DeprecatedLink>. This is more text after the link.
   </View>
   <View as="div">
     This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} icon={IconUserLine}>
+    <DeprecatedLink onClick={() => console.log('clicked!')} icon={IconUserLine}>
       <ScreenReaderContent>Descriptive text</ScreenReaderContent>
-    </Link>.
+    </DeprecatedLink>.
   </View>
 </div>
 ```

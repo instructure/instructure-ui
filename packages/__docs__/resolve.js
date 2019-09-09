@@ -47,6 +47,7 @@ module.exports = {
     '@instructure/ui-i18n$': path.resolve(__dirname, '../ui-i18n/src/'),
     '@instructure/ui-img$': path.resolve(__dirname, '../ui-img/src/'),
     '@instructure/ui-layout$': path.resolve(__dirname, '../ui-layout/src/'),
+    '@instructure/ui-link$': path.resolve(__dirname, '../ui-link/src'),
     '@instructure/ui-menu$': path.resolve(__dirname, '../ui-menu/src/'),
     '@instructure/ui-motion$': path.resolve(__dirname, '../ui-motion/src/'),
     '@instructure/ui-navigation$': path.resolve(__dirname, '../ui-navigation/src/'),

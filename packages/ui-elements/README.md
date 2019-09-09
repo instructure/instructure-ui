@@ -35,7 +35,7 @@ The `ui-elements` package contains the following:
 - [Badge](#Badge)
 - [Heading](#Heading)
 - Img will be removed in version 7.0.0. Use the [Img from ui-img](#Img) instead.
-- [Link](#Link)
+- Link will be removed in version 7.0.0. Use the [Link from ui-link](#Link) instead.
 - [List](#List)
 - [MetricsList](#MetricsList)
 - Pill will be removed in version 7.0.0. Use the [Pill from ui-pill](#Pill) instead.

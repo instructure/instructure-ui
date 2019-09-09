@@ -58,5 +58,9 @@
   {
     "pattern": "^@instructure/ui-forms/lib/FileDrop",
     "replace": "@instructure/ui-file-drop/lib/FileDrop"
+  },
+  {
+    "pattern": "^@instructure/ui-elements/lib/Link",
+    "replace": "@instructure/ui-link/lib/Link"
   }
 ]

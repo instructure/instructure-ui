@@ -27,8 +27,9 @@ import marked from 'marked'
 import grayMatter from 'gray-matter'
 
 import { View } from '@instructure/ui-view'
-import { Heading, Link, Table } from '@instructure/ui-elements'
+import { Heading, Table } from '@instructure/ui-elements'
 import { Img } from '@instructure/ui-img'
+import { Link } from '@instructure/ui-link'
 import { CodeEditor } from '@instructure/ui-code-editor'
 
 import { Playground } from './Playground'
@@ -46,7 +47,7 @@ const elements = {
   table: ({ children }) => <Table>{children}</Table>,
   a: ({ href, title, target, name, children }) => {
     if (href) {
-      return <Link href={href} title={title} target={target}>{children}</Link>
+      return <Link href={href} title={title} target={target} __dangerouslyIgnoreExperimentalWarnings>{children}</Link>
     } else {
       return <a name={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
     }

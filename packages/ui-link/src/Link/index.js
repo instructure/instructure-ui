@@ -29,8 +29,14 @@ import classnames from 'classnames'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { findFocusable, hasVisibleChildren } from '@instructure/ui-a11y'
-import { findDOMNode, isActiveElement } from '@instructure/ui-dom-utils'
-import { getElementType, matchComponentTypes, omitProps } from '@instructure/ui-react-utils'
+import { isActiveElement } from '@instructure/ui-dom-utils'
+import {
+  getElementType,
+  matchComponentTypes,
+  passthroughProps,
+  experimental,
+  callRenderProp
+} from '@instructure/ui-react-utils'
 import { warn } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
@@ -39,30 +45,42 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedLink
+category: components
+experimental: true
 ---
 **/
 @testable()
+@experimental()
 @themeable(theme, styles)
 class Link extends Component {
   static propTypes = {
-    href: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    variant: PropTypes.oneOf(['default', 'inverse']),
     /**
-    * provides a reference to the underlying focusable (`button` or `a`) element
+    * The text and/or icon displayed by the link
     */
-    linkRef: PropTypes.func,
+    children: PropTypes.node.isRequired,
     /**
-    * provides a reference to the underlying html element
+    * Sets the link's `href` attribute
+    */
+    href: PropTypes.string,
+    /**
+    * Designates Link's text color to accommodate light and dark backgrounds
+    */
+    color: PropTypes.oneOf(['link', 'link-inverse']),
+    /**
+    * Provides a reference to the underlying HTML element
     */
     elementRef: PropTypes.func,
     /**
-    * the element type to render as (will default to `<a>` if href is provided)
+    * The element type to render as (will default to `<a>` if href is provided)
     */
     as: PropTypes.elementType,
-    disabled: PropTypes.bool,
+    /**
+    * Determines if the link is enabled or disabled
+    */
+    interaction: PropTypes.oneOf(['enabled', 'disabled']),
+    /**
+    * Fires when the Link is clicked
+    */
     onClick: PropTypes.func,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -74,7 +92,7 @@ class Link extends Component {
     * Add an SVG icon to the Link. Do not add icons directly as
     * children.
     */
-    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
     * Place the icon before or after the text in the Link.
     */
@@ -82,27 +100,35 @@ class Link extends Component {
     /**
     * Set the CSS display property of the Link element. 'auto' sets no display property.
     */
-    display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex'])
+    display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex']),
+    /**
+    * Set `false` to remove default underline if Link does not appear inline with text
+    */
+    isWithinText: PropTypes.bool
   }
 
   static defaultProps = {
     href: undefined,
     elementRef: undefined,
-    disabled: false,
+    interaction: 'enabled',
     onClick: undefined,
     margin: undefined,
-    icon: undefined,
+    renderIcon: undefined,
     display: undefined,
-    variant: 'default',
+    color: 'link',
     as: undefined,
-    linkRef: function (link) {},
-    iconPlacement: 'start'
+    iconPlacement: 'start',
+    isWithinText: true
+  }
+
+  state = {
+    focused: false
   }
 
   handleClick = e => {
-    const { disabled, onClick } = this.props
+    const { interaction, onClick } = this.props
 
-    if (disabled) {
+    if (interaction === 'disabled') {
       e.preventDefault()
       e.stopPropagation()
     } else if (typeof onClick === 'function') {
@@ -110,39 +136,20 @@ class Link extends Component {
     }
   }
 
-  get display () {
-    if (this.props.display) {
-      return this.props.display // user-entered display property
+  handleElementRef = (el) => {
+    if (typeof this.props.elementRef === 'function') {
+      this.props.elementRef(el)
     }
-
-    if (this.props.icon) {
-      if (this.containsTruncateText) {
-        return 'flex' // TruncateText displays block, so avoid icon getting bumped
-      } else {
-        return 'inline-block' // avoid irregularly shaped focus outline
-      }
-    } else if (this.containsTruncateText) {
-      return 'block' // TruncateText displays block, so container needs to as well
-    } else {
-      return 'auto'
-    }
+    this._link = el
   }
 
-  get hasVisibleChildren () {
-    return hasVisibleChildren(this.props.children)
-  }
+  handleBlur = () => this.setState({
+    focused: false
+  })
 
-  get element () {
-    return getElementType(Link, this.props)
-  }
-
-  get focused () {
-    return isActiveElement(this._link)
-  }
-
-  get focusable () {
-    return findFocusable(this._link)
-  }
+  handleFocus = () => this.setState({
+    focused: true
+  })
 
   get containsTruncateText () {
     let truncateText = false
@@ -161,80 +168,95 @@ class Link extends Component {
     return truncateText
   }
 
+  get display () {
+    if (this.props.display) {
+      return this.props.display // user-entered display property
+    }
+
+    const { containsTruncateText } = this
+
+    if (this.props.renderIcon) {
+      return containsTruncateText ? 'inline-flex' : 'inline-block'
+    } else {
+      return containsTruncateText ? 'block' : 'auto'
+    }
+  }
+
+  get element () {
+    return getElementType(Link, this.props)
+  }
+
+  get focused () {
+    return isActiveElement(this._link)
+  }
+
+  get focusable () {
+    return findFocusable(this._link)
+  }
+
+  get hasVisibleChildren () {
+    return hasVisibleChildren(this.props.children)
+  }
+
   focus () {
-    findDOMNode(this._link).focus()
+    this._link && this._link.focus()
   }
 
   renderIcon () {
-    const Icon = this.props.icon
     warn( // if display prop is used, warn about icon or TruncateText
       this.props.display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )
 
-    if (typeof this.props.icon === 'function') {
-      return <span className={styles.icon}><Icon /></span>
-    } else if (Icon) {
-      return <span className={styles.icon}>{Icon}</span>
-    } else {
-      return null
-    }
+    return <span className={styles.icon}>{callRenderProp(this.props.renderIcon)}</span>
   }
 
   render () {
     const {
-      disabled,
+      interaction,
       children,
       onClick,
-      variant,
+      color,
       href,
       margin,
-      icon,
+      renderIcon,
       iconPlacement,
-      linkRef,
-      elementRef
+      isWithinText,
+      ...props
     } = this.props
 
     const classes = {
       [styles.root]: true,
-      [styles.inverse]: variant === 'inverse',
-      [styles[`iconPlacement--${iconPlacement}`]]: icon && this.hasVisibleChildren,
-      [styles.truncates]: this.containsTruncateText
+      [styles['color--link-inverse']]: color === 'link-inverse',
+      [styles[`iconPlacement--${iconPlacement}`]]: renderIcon && this.hasVisibleChildren,
+      [styles.truncates]: this.containsTruncateText,
+      [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
     }
 
     const role = onClick && this.element !== 'button' ? 'button' : null
     const type = (this.element === 'button' || this.element === 'input') ? 'button' : null
-    const tabIndex = (role === 'button' && !disabled) ? '0' : null
-
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Link.propTypes),
-      Link
-    )
-
-    const props = {
-      ...passthroughProps,
-      elementRef: (el) => {
-        this._link = el
-        if (typeof linkRef === 'function') linkRef(el)
-        if (typeof elementRef === 'function') elementRef(el)
-      },
-      as: this.element,
-      display: this.display,
-      margin: margin,
-      className: classnames(classes),
-      href: href,
-      onClick: this.handleClick,
-      'aria-disabled': disabled ? 'true' : null,
-      role,
-      type,
-      tabIndex
-    }
+    const tabIndex = (role === 'button' && interaction !== 'disabled') ? '0' : null
 
     return (
-      <View {...props} __dangerouslyIgnoreExperimentalWarnings>
-        {(icon && iconPlacement === 'start') && this.renderIcon()}
+      <View
+        {...passthroughProps(props)}
+        elementRef={this.handleElementRef}
+        as={this.element}
+        display={this.display}
+        margin={margin}
+        href={href}
+        onClick={this.handleClick}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        aria-disabled={interaction === 'disabled' ? 'true' : null}
+        role={role}
+        type={type}
+        tabIndex={tabIndex}
+        className={classnames(classes)}
+      >
+        {(renderIcon && iconPlacement === 'start') && this.renderIcon()}
         {children}
-        {(icon && iconPlacement === 'end') && this.renderIcon()}
+        {(renderIcon && iconPlacement === 'end') && this.renderIcon()}
       </View>
     )
   }

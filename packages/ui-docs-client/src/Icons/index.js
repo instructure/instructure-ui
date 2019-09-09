@@ -26,7 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { CloseButton } from '@instructure/ui-buttons'
-import { Heading, Link } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-elements'
+import { Link } from '@instructure/ui-link'
 import { TextInput } from '@instructure/ui-text-input'
 import { Select, Checkbox } from '@instructure/ui-forms'
 import { FormFieldGroup } from '@instructure/ui-form-field'
@@ -222,7 +223,9 @@ class MyIcon extends React.Component {
           language="javascript"
           readOnly
         />
-        { glyph.displayName && <p>See the <Link href="#SVGIcon">SVGIcon</Link> component for props and examples.</p> }
+        { glyph.displayName &&
+          <p>See the <Link href="#SVGIcon" __dangerouslyIgnoreExperimentalWarnings>SVGIcon</Link> component for props and examples.</p>
+        }
       </div>
     )
   }
