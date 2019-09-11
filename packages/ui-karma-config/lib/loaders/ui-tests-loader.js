@@ -52,7 +52,16 @@ module.exports = function (source, map) {
       let result
 
       if (testFilePaths.length > 0) {
-        const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
+        const testFileRequires = testFilePaths.map(filePath => `
+try {
+  require('./${path.relative(cwd, filePath)}')
+} catch(e) {
+  it('should successfully load ${filePath}', () => {
+    throw e
+  })
+}
+`
+      )
         result = `
 describe(':', async () => {
 ${testFileRequires.join(';\n')}
