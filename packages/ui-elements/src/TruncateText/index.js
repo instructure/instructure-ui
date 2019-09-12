@@ -30,7 +30,7 @@ import classNames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { debounce } from '@instructure/debounce'
 import { addResizeListener, canUseDOM } from '@instructure/ui-dom-utils'
-import { safeCloneElement, ensureSingleChild } from '@instructure/ui-react-utils'
+import { safeCloneElement, ensureSingleChild, hack } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
@@ -46,6 +46,7 @@ category: components
 **/
 @testable()
 @themeable(theme, styles)
+@hack(['shouldTruncateWhenInvisible'])
 class TruncateText extends Component {
   static propTypes = {
     /**
@@ -79,7 +80,13 @@ class TruncateText extends Component {
     /**
     * Callback when truncated text has changed
     */
-    onUpdate: PropTypes.func
+    onUpdate: PropTypes.func,
+    /**
+     * Force truncation of invisible elements (hack; will be removed in favor
+     * of a better fix)
+     */
+    // eslint-disable-next-line react/require-default-props
+    shouldTruncateWhenInvisible: PropTypes.bool
   }
 
   static defaultProps = {

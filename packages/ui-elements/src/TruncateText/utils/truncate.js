@@ -67,7 +67,8 @@ class Truncator {
       truncate: options.truncate || 'character',
       ellipsis: options.ellipsis || '\u2026',
       ignore: options.ignore || [' ', '.', ','],
-      lineHeight: options.lineHeight || 1.2
+      lineHeight: options.lineHeight || 1.2,
+      shouldTruncateWhenInvisible: options.shouldTruncateWhenInvisible
     }
 
     if (!element) {
@@ -136,20 +137,21 @@ class Truncator {
   }
 
   getNodeMap (rootNode) {
-    const { truncate } = this._options
+    const { shouldTruncateWhenInvisible, truncate } = this._options
     const nodes = Array.from(rootNode.childNodes)
     let map = []
     // parse child nodes and build a data map to associate each node with its data
     nodes.forEach((node) => {
       if (node.nodeType === 1 || node.nodeType === 3) {
-        const visible = isVisible(node, false)
+        const shouldTruncate =
+          shouldTruncateWhenInvisible ? true : isVisible(node, false)
         const textContent = node.textContent + ' '
         map.push({
           node,
           data: truncate === 'word'
             // eslint-disable-next-line no-useless-escape
-            ? visible ? textContent.match(/.*?[\.\s\/]+?/g) : ''
-            : visible ? node.textContent.split('') : []
+            ? shouldTruncate ? textContent.match(/.*?[\.\s\/]+?/g) : ''
+            : shouldTruncate ? node.textContent.split('') : []
         })
       }
     })

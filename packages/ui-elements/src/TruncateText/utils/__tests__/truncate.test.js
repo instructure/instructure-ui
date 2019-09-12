@@ -199,4 +199,36 @@ describe('truncate', () => {
     expect(stage.textContent).to.equal(content)
     expect(log).to.not.have.been.calledWith('hello world')
   })
+
+  it('should not truncate invisible elements', async () => {
+    let stage
+    await mount(
+      <div style={{width: '200px', opacity: 0}}>
+        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      </div>
+    )
+
+    truncate(stage)
+    const text = stage.textContent
+
+    expect(text).to.equal(defaultText)
+    expect(text.indexOf('\u2026')).to.equal(-1)
+  })
+
+  context('shouldTruncateWhenInvisible is true', () => {
+    it('should truncate invisible elements', async () => {
+      let stage
+      await mount(
+        <div style={{width: '200px', opacity: 0}}>
+          <span ref={(el) => { stage = el }}>{defaultText}</span>
+        </div>
+      )
+
+      truncate(stage, { shouldTruncateWhenInvisible: true })
+      const text = stage.textContent
+
+      expect(text.indexOf('truncate')).to.equal(-1)
+      expect(text.indexOf('\u2026')).to.not.equal(-1)
+    })
+  })
 })
