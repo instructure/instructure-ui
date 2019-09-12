@@ -188,9 +188,9 @@ describe('<Tabs />', async () => {
 
     await mount(
       <Tabs onRequestTabChange={onChange}>
-        <Tabs.Panel renderTitle="First Tab" isSelected>Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab" isSelected id="one">Tab 1 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" id="two">Tab 2 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled id="three">Tab 3 content</Tabs.Panel>
       </Tabs>
     )
 
@@ -202,6 +202,7 @@ describe('<Tabs />', async () => {
     await wait(() => {
       expect(onChange).to.have.been.called()
       expect(onChange.getCall(0).args[1].index).to.equal(1)
+      expect(onChange.getCall(0).args[1].id).to.equal('two')
     })
   })
 

@@ -181,7 +181,7 @@ class Tabs extends Component {
 
     error((nextIndex >= 0 && nextIndex < count), `[Tabs] Invalid tab index: '${nextIndex}'.`)
 
-    return { index: nextIndex, id: nextTab.id }
+    return { index: nextIndex, id: nextTab.props.id }
   }
 
   fireOnChange (event, { index, id }) {
