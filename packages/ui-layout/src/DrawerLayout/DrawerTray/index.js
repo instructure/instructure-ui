@@ -316,6 +316,7 @@ class DrawerTray extends Component {
                 liveRegion={liveRegion}
                 onDismiss={onDismiss}
                 as="div"
+                className={styles.content}
               >
                 {this.renderContent()}
               </Dialog>

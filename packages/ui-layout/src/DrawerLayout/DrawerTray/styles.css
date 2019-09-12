@@ -7,6 +7,12 @@
   box-sizing: content-box;
 }
 
+.content {
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: content-box;
+}
+
 .shadow {
   box-shadow: var(--boxShadow);
 }
