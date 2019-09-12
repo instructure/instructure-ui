@@ -22,16 +22,14 @@
  * SOFTWARE.
  */
 
-import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
-// eslint-disable-next-line no-restricted-imports
-import TooltipLocator from '@instructure/ui-tooltip/lib/Tooltip/locator'
-
-import { Pill } from './index'
-
-export default locator(Pill.selector, {
-  findTooltipContent: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    const tooltip = await TooltipLocator.find(element, options)
-    return tooltip ? tooltip.findContent(selector, options) : null
-  }
-})
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

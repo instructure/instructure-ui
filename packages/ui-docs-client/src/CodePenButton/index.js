@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { Tooltip } from '@instructure/ui-overlays'
+import { Tooltip } from '@instructure/ui-tooltip'
 import { SVGIcon } from '@instructure/ui-svg-images'
 
 import { Button } from '../Button'
@@ -64,7 +64,7 @@ class CodePenButton extends Component {
     return (
       <form action="https://codepen.io/pen/define" method="POST" target="_blank">
         <input type="hidden" name="data" value={JSON.stringify(data)} />
-        <Tooltip tip="Edit in Codepen" placement="bottom">
+        <Tooltip renderTip="Edit in Codepen" placement="bottom" __dangerouslyIgnoreExperimentalWarnings>
           <Button
             type="submit"
             size="small"

@@ -25,20 +25,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Focusable } from '@instructure/ui-focusable'
-import { getElementType, omitProps, ensureSingleChild  } from '@instructure/ui-react-utils'
 import { LayoutPropTypes } from '@instructure/ui-layout'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { Popover } from '@instructure/ui-popover'
+import { Tooltip as UITooltip } from '@instructure/ui-tooltip'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedTooltip
 ---
 **/
 @testable()
@@ -92,69 +91,32 @@ class Tooltip extends Component {
     constrain: 'window'
   }
 
-  constructor (props) {
-    super()
-
-    this._id = uid('Tooltip')
-  }
-
-  renderTrigger (focused) {
-    const { children, as } = this.props
-    const triggerProps = {
-      'aria-describedby': this._id
-    }
-
-    if (as) {
-      const Trigger = getElementType(Tooltip, this.props)
-      const props = omitProps(this.props, Tooltip.propTypes)
-      return (
-        <Trigger {...props} {...triggerProps}>
-          {children}
-        </Trigger>
-      )
-    } else if (typeof children === 'function') {
-      return children(
-        {
-          focused,
-          getTriggerProps: (props) => {
-            return {
-              ...triggerProps,
-              ...props
-            }
-          }
-        }
-      )
-    } else {
-      return ensureSingleChild(this.props.children, triggerProps)
-    }
-  }
+  _id = uid('Tooltip')
 
   render () {
+    const {
+      children,
+      tip,
+      variant,
+      on,
+      placement,
+      mountNode,
+      constrain,
+      ...passthroughProps
+    } = this.props
+
     return (
-      <Focusable render={({ focused }) => {
-        return (
-          <Popover
-            on={this.props.on}
-            shouldRenderOffscreen
-            shouldReturnFocus={false}
-            placement={this.props.placement}
-            color={this.props.variant === 'inverse' ? 'primary-inverse' : 'primary'}
-            mountNode={this.props.mountNode}
-            constrain={this.props.constrain}
-            shadow="none"
-            renderTrigger={() => this.renderTrigger(focused)}
-            __dangerouslyIgnoreExperimentalWarnings
-          >
-            <span
-              id={this._id}
-              className={styles.root}
-              role="tooltip"
-            >
-              {this.props.tip}
-            </span>
-          </Popover>
-        )
-      }} />
+      <UITooltip
+        {...passthroughProps}
+        renderTip={tip}
+        on={on}
+        color={variant === 'inverse' ? 'primary' : 'primary-inverse'}
+        placement={placement}
+        mountNode={mountNode}
+        constrain={constrain}
+      >
+        { children }
+      </UITooltip>
     )
   }
 }

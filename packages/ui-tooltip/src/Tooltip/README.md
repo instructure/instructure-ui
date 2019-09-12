@@ -1,73 +1,96 @@
 ---
-describes: DeprecatedTooltip
-id: DeprecatedTooltip__README
+describes: Tooltip
 ---
 
-**DEPRECATED:** Tooltip will be removed from `ui-overlays` in version 7.0.0. Use the [Tooltip from ui-tooltip](#Tooltip) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed.
-
-
-Tooltips are small text-only  contextual overlays that are triggered by hover/focus. Use anywhere additional explanation might be needed but space is limited on the triggering element.
+Tooltips are small text-only contextual overlays that are triggered by hover/focus. Use anywhere additional explanation might be needed but space is limited on the triggering element.
 
 > ### What about 'focusable' elements?
-> Content provided to the `tip` property __should not contain any focusable elements__. If you'd like to do
+> Content provided to the `renderTip` prop __should not contain any focusable elements__. If you'd like to do
 that you should use the [Popover](#Popover) component and handle focus management yourself or
 consider using a [Modal](#Modal) or a [Tray](#Tray) as those will work better on smaller screens.
 
+
+#### Uncontrolled Tooltips
 ```js
 ---
 example: true
 ---
 <div>
   <p>
-    <DeprecatedTooltip
-      tip="Hello. I'm a tool tip"
-      as={Link}
-      href="https://instructure.github.io/instructure-ui/"
-      mountNode={() => document.getElementById('main')}
-    >
-      Hover or focus me
-    </DeprecatedTooltip>
-  </p>
-  <p>
-    <DeprecatedTooltip
-      tip="Hello"
-      placement="end"
+    <Tooltip
+      renderTip="Hello. I'm a tool tip"
       as={Button}
-      mountNode={() => document.getElementById('main')}
+      onRequestShowContent={() => console.log('showing')}
+      onRequestHideContent={() => console.log('hidden')}
     >
       Hover or focus me
-    </DeprecatedTooltip>
+    </Tooltip>
   </p>
   <p>
-    <DeprecatedTooltip
-      variant="default"
-      tip="Hello"
+    <Tooltip
+      color="primary-inverse"
+      renderTip="Hello. I'm a tool tip"
       placement="bottom"
-      mountNode={() => document.getElementById('main')}
+      offsetX="5px"
     >
       <TextInput
-        inline
-        label="Enter some text"
+        display="inline-block"
+        renderLabel="Enter some text"
       >
         Hover or focus me
       </TextInput>
-    </DeprecatedTooltip>
+    </Tooltip>
   </p>
   <p>
-    <DeprecatedTooltip
-      tip="Hello. I'm a tool tip"
+    <Tooltip
+      renderTip="Hello. I'm a tool tip"
       placement="start"
       on={['click', 'hover', 'focus']}
     >
       <Button variant="icon" icon={IconInfoLine}>
         <ScreenReaderContent>toggle tooltip</ScreenReaderContent>
       </Button>
-    </DeprecatedTooltip>
+    </Tooltip>
   </p>
 </div>
+```
+
+#### Controlled Tooltips
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      isShowingContent: false
+    }
+  }
+
+  render () {
+    return (
+      <Tooltip
+        renderTip="Hello. I'm a tool tip"
+        isShowingContent={this.state.isShowingContent}
+        onRequestShowContent={(e) => {
+          this.setState({ isShowingContent: true })
+        }}
+        onRequestHideContent={(e) => {
+          this.setState({ isShowingContent: false })
+        }}
+      >
+        <Link>Hover or focus me</Link>
+      </Tooltip>
+    )
+  }
+}
+
+render(<Example />)
+
 ```
 
 ### Guidelines

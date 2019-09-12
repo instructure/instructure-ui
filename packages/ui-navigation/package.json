@@ -37,7 +37,7 @@
     "@instructure/ui-focusable": "^6.13.0",
     "@instructure/ui-icons": "^6.13.0",
     "@instructure/ui-menu": "^6.13.0",
-    "@instructure/ui-overlays": "^6.13.0",
+    "@instructure/ui-tooltip": "^6.13.0",
     "@instructure/ui-prop-types": "^6.13.0",
     "@instructure/ui-react-utils": "^6.13.0",
     "@instructure/ui-testable": "^6.13.0",

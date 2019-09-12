@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { themeable } from '@instructure/ui-themeable'
-import { Modal, Tooltip } from '@instructure/ui-overlays'
+import { Modal } from '@instructure/ui-overlays'
+import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent, ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { CodeEditor } from '@instructure/ui-code-editor'
@@ -212,7 +213,11 @@ class Playground extends Component {
 
             <Flex __dangerouslyIgnoreExperimentalWarnings>
               <Flex.Item>
-                <Tooltip tip="Fullscreen" placement="bottom">
+                <Tooltip
+                  renderTip="Fullscreen"
+                  placement="bottom"
+                  __dangerouslyIgnoreExperimentalWarnings
+                >
                   <Button
                     onClick={this.handleMaximize}
                     ref={(c) => { this._fullScreenButton = c }}
@@ -228,7 +233,11 @@ class Playground extends Component {
                 </Tooltip>
               </Flex.Item>
               <Flex.Item>
-                <Tooltip tip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
+                <Tooltip
+                  renderTip={this.state.showCode ? 'Hide Code' : 'Show Code'}
+                  placement="bottom"
+                  __dangerouslyIgnoreExperimentalWarnings
+                >
                   <Button
                     margin="0 x-small"
                     onClick={this.handleCodeToggle}

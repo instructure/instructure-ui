@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { Tooltip } from '@instructure/ui-overlays'
+import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-elements'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps, experimental } from '@instructure/ui-react-utils'
@@ -134,7 +134,10 @@ class Pill extends Component {
   render () {
     if (this.state.truncated) {
       return (
-        <Tooltip tip={this.props.children}>
+        <Tooltip
+          renderTip={this.props.children}
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           {({ focused, getTriggerProps }) => {
             return (
               this.renderPill(focused, getTriggerProps)

@@ -39,6 +39,7 @@
     "@instructure/ui-portal": "^6.13.0",
     "@instructure/ui-prop-types": "^6.13.0",
     "@instructure/ui-react-utils": "^6.13.0",
+    "@instructure/ui-tooltip": "^6.13.0",
     "@instructure/ui-testable": "^6.13.0",
     "@instructure/ui-themeable": "^6.13.0",
     "@instructure/ui-utils": "^6.13.0",

@@ -24,14 +24,18 @@
 
 import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
 // eslint-disable-next-line no-restricted-imports
-import TooltipLocator from '@instructure/ui-tooltip/lib/Tooltip/locator'
+import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
+import { Tooltip } from './index'
 
-import { Pill } from './index'
-
-export default locator(Pill.selector, {
-  findTooltipContent: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    const tooltip = await TooltipLocator.find(element, options)
-    return tooltip ? tooltip.findContent(selector, options) : null
+export const customMethods = {
+  findTrigger: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
+  },
+  findContent: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, '[role="tooltip"]', options)
   }
-})
+}
+
+export default locator(Tooltip.selector, customMethods)

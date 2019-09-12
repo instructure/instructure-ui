@@ -36,6 +36,10 @@
     "replace": "@instructure/ui-text/lib/Text"
   },
   {
+    "pattern": "^@instructure/ui-overlays/lib/Tooltip",
+    "replace": "@instructure/ui-tooltip/lib/Tooltip"
+  },
+  {
     "pattern": "^@instructure/ui-a11y/lib/AccessibleContent",
     "replace": "@instructure/ui-a11y-content/lib/AccessibleContent"
   },

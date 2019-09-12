@@ -61,6 +61,16 @@
       ]}
     ]
   },
+  "Tooltip": {
+    "7.0.0": [
+      { "old": "tip", "new": "renderTip" },
+      { "old": "defaultShow", "new": "defaultIsShowingContent" },
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "primary-inverse" },
+        { "old": "inverse", "new": "primary" }
+      ]},
+    ]
+  },
   "Popover": {
     "7.0.0": [
       { "old": "show", "new": "isShowingContent" },

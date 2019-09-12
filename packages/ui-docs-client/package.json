@@ -40,6 +40,7 @@
     "@instructure/ui-img": "^6.13.0",
     "@instructure/ui-layout": "^6.13.0",
     "@instructure/ui-overlays": "^6.13.0",
+    "@instructure/ui-tooltip": "^6.13.0",
     "@instructure/ui-pill": "^6.13.0",
     "@instructure/ui-prop-types": "^6.13.0",
     "@instructure/ui-react-utils": "^6.13.0",

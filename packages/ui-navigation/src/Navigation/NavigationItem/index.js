@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { Tooltip } from '@instructure/ui-overlays'
+import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y'
 
 import styles from './styles.css'
@@ -133,7 +133,11 @@ class NavigationItem extends Component {
 
     return (
       minimized && hasVisibleChildren(label) ? (
-        <Tooltip tip={label} placement='end'>
+        <Tooltip
+          renderTip={label}
+          placement='end'
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           {link}
         </Tooltip>
       ) : link

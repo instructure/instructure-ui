@@ -21,17 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
 
-import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
-// eslint-disable-next-line no-restricted-imports
-import TooltipLocator from '@instructure/ui-tooltip/lib/Tooltip/locator'
+export default {
+  maxExamplesPerPage: 50,
+  propValues: {
 
-import { Pill } from './index'
+  },
+  getComponentProps: (props) => {
+    return {
+      renderTip: 'Hello world',
+      isShowingContent: true,
+      children: <a href="/">Tooltip</a>
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      dir: props.dir,
+      as: 'div',
+      width: '100%',
+      height: '5rem',
+      margin: 'large small',
+      padding: 'large small',
+      textAlign: 'center'
+    }
+  },
+  filter: (props) => {
+    if (!props.defaultIsShowingContent) return true
 
-export default locator(Pill.selector, {
-  findTooltipContent: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    const tooltip = await TooltipLocator.find(element, options)
-    return tooltip ? tooltip.findContent(selector, options) : null
+    return false
   }
-})
+}
