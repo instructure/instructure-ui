@@ -47,7 +47,7 @@ function isVisible (el, recursive = true) {
   const parent = node.parentNode
   // skip text node, check parent
   if (node.nodeType === 3) {
-    return isVisible(parent)
+    return isVisible(parent, recursive)
   }
 
   const style = getComputedStyle(node)

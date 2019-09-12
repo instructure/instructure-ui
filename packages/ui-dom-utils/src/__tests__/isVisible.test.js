@@ -93,4 +93,19 @@ describe('isVisible', async () => {
     expect(nonrecursive).to.equal(true)
     expect(recursive).to.equal(false)
   })
+
+  it('should not recursively check text nodes', async () => {
+    await mount(
+      <div id="test" style={{visibility: 'hidden'}}>
+        <span>
+          <span id="test-2" style={{visibility: 'visible'}}>Hello world!</span>
+        </span>
+      </div>
+    )
+    const textNode = document.getElementById('test-2').childNodes[0]
+    const nonrecursive = isVisible(textNode, false)
+    const recursive = isVisible(textNode)
+    expect(nonrecursive).to.equal(true)
+    expect(recursive).to.equal(false)
+  })
 })
