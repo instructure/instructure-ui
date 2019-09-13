@@ -51,12 +51,26 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
 
     const issues = (issueKeys.length > 0) ? `\n\nIssues in this release: ${issueKeys.join(', ')}` : ''
 
-    const payload = {
-      'channel': config.slack_channel,
-      'username': SLACK_USERNAME,
-      'icon_emoji': config.slack_emoji,
-      'text': message + issues,
-      'link_names': 1
+    const payloadList = []
+
+    if (typeof config.slack_channel === 'string') {
+      payloadList.push({
+        'channel': config.slack_channel,
+        'username': SLACK_USERNAME,
+        'icon_emoji': config.slack_emoji,
+        'text': message + issues,
+        'link_names': 1
+      })
+    } else if (Array.isArray(config.slack_channel)) {
+      config.slack_channel.forEach(slackChannel => {
+        payloadList.push({
+          'channel': slackChannel,
+          'username': SLACK_USERNAME,
+          'icon_emoji': config.slack_emoji,
+          'text': message + issues,
+          'link_names': 1
+        })
+      })
     }
 
     const req = https.request({
@@ -65,7 +79,10 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
       method: 'POST'
     })
 
-    req.write(JSON.stringify(payload))
+    payloadList.forEach(payload => {
+      req.write(JSON.stringify(payload))
+    })
+
     req.end()
 
     info(`💬  Posted Slack Message: "${message + issues}"`)
