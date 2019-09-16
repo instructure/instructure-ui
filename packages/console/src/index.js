@@ -37,7 +37,7 @@ function getRenderStack () {
 }
 
 function logWithRenderStack (level, condition, message, ...args) {
-  if (!condition && process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production' && !condition) {
     const renderStack = getRenderStack()
 
     if (typeof console[level] === 'function') {
@@ -54,5 +54,6 @@ exports.info = (...args) => console.info(...args)
 exports.assert = (...args) => console.assert(...args)
 exports.debug = (...args) => console.debug(...args)
 exports.log = (...args) => console.log(...args)
+
 
 /* eslint-enable no-console */
