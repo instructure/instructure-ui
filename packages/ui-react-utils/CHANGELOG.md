@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.11.0](https://github.com/instructure/instructure-ui/compare/v6.10.0...v6.11.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **ui-react-utils:** provide correct contextual binding for lifecycle methods in experimental ([9aeeb19](https://github.com/instructure/instructure-ui/commit/9aeeb19))
+
+
+### Features
+
+* **ui-react-utils:** add flag to suppress experimental warnings ([d30e678](https://github.com/instructure/instructure-ui/commit/d30e678))
+* **ui-react-utils:** pass props in callRenderProp ([042bc84](https://github.com/instructure/instructure-ui/commit/042bc84))
+
+
+
+
+
 # [6.10.0](https://github.com/instructure/instructure-ui/compare/v6.9.0...v6.10.0) (2019-08-27)
 
 **Note:** Version bump only for package @instructure/ui-react-utils

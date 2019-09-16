@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.11.0](https://github.com/instructure/instructure-ui/compare/v6.10.0...v6.11.0) (2019-09-16)
+
+
+### Performance Improvements
+
+* **ui-utils:** stop using bowser for browser detection ([95f1232](https://github.com/instructure/instructure-ui/commit/95f1232))
+
+
+
+
+
 # [6.10.0](https://github.com/instructure/instructure-ui/compare/v6.9.0...v6.10.0) (2019-08-27)
 
 

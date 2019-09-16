@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.11.0](https://github.com/instructure/instructure-ui/compare/v6.10.0...v6.11.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **instui-cli:** fix incorrect spacing for dependencies when generating package ([b1bbfe9](https://github.com/instructure/instructure-ui/commit/b1bbfe9))
+* **ui-babel-preset:** ensure runtime helper is used for _objectSpread ([2eb42d7](https://github.com/instructure/instructure-ui/commit/2eb42d7))
+* **ui-karma-config:** run all tests if one test file fails to load ([a8dab36](https://github.com/instructure/instructure-ui/commit/a8dab36))
+* **ui-layout:** DrawerTray content needs 100% height ([500af47](https://github.com/instructure/instructure-ui/commit/500af47))
+* **ui-overlays:** do not unset duration for modals ([0b304e7](https://github.com/instructure/instructure-ui/commit/0b304e7))
+* **ui-react-utils:** provide correct contextual binding for lifecycle methods in experimental ([9aeeb19](https://github.com/instructure/instructure-ui/commit/9aeeb19))
+* **ui-tabs:** pass id in Tabs onRequestTabChange handler ([6d58611](https://github.com/instructure/instructure-ui/commit/6d58611))
+* **ui-view:** fix border colors in Edge HCM ([091dde3](https://github.com/instructure/instructure-ui/commit/091dde3))
+
+
+### Features
+
+* **ui-a11y-content,ui-a11y:** add ui-a11y-content package ([cb49c7a](https://github.com/instructure/instructure-ui/commit/cb49c7a))
+* **ui-avatar,ui-elements:** add ui-avatar package for Avatar component ([34a6001](https://github.com/instructure/instructure-ui/commit/34a6001))
+* **ui-elements,ui-img:** add ui-img package for Img Component ([c2e4e7d](https://github.com/instructure/instructure-ui/commit/c2e4e7d))
+* **ui-elements,ui-text:** add ui-text Package for Text Component ([5bdb65a](https://github.com/instructure/instructure-ui/commit/5bdb65a))
+* **ui-flex:** add ui-flex package ([98730ff](https://github.com/instructure/instructure-ui/commit/98730ff))
+* **ui-navigation:** Responsive AppNav ([dd843d0](https://github.com/instructure/instructure-ui/commit/dd843d0))
+* **ui-popover:** Add ui-popover package ([62c1165](https://github.com/instructure/instructure-ui/commit/62c1165))
+* **ui-react-utils:** add flag to suppress experimental warnings ([d30e678](https://github.com/instructure/instructure-ui/commit/d30e678))
+* **ui-react-utils:** pass props in callRenderProp ([042bc84](https://github.com/instructure/instructure-ui/commit/042bc84))
+* **ui-scripts:** enable ui-scripts to post to multiple slack channels ([ee796c2](https://github.com/instructure/instructure-ui/commit/ee796c2))
+* **ui-view:** add ui-view Package for View Component ([7799577](https://github.com/instructure/instructure-ui/commit/7799577))
+* **ui-view:** mark ui-view as experimental ([6b805fa](https://github.com/instructure/instructure-ui/commit/6b805fa))
+
+
+### Performance Improvements
+
+* **ui-utils:** stop using bowser for browser detection ([95f1232](https://github.com/instructure/instructure-ui/commit/95f1232))
+
+
+
+
+
 # [6.10.0](https://github.com/instructure/instructure-ui/compare/v6.9.0...v6.10.0) (2019-08-27)
 
 

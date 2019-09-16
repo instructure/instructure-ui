@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.11.0](https://github.com/instructure/instructure-ui/compare/v6.10.0...v6.11.0) (2019-09-16)
+
+
+### Features
+
+* **ui-a11y-content,ui-a11y:** add ui-a11y-content package ([cb49c7a](https://github.com/instructure/instructure-ui/commit/cb49c7a))
+* **ui-avatar,ui-elements:** add ui-avatar package for Avatar component ([34a6001](https://github.com/instructure/instructure-ui/commit/34a6001))
+* **ui-elements,ui-img:** add ui-img package for Img Component ([c2e4e7d](https://github.com/instructure/instructure-ui/commit/c2e4e7d))
+* **ui-elements,ui-text:** add ui-text Package for Text Component ([5bdb65a](https://github.com/instructure/instructure-ui/commit/5bdb65a))
+* **ui-flex:** add ui-flex package ([98730ff](https://github.com/instructure/instructure-ui/commit/98730ff))
+* **ui-popover:** Add ui-popover package ([62c1165](https://github.com/instructure/instructure-ui/commit/62c1165))
+* **ui-view:** add ui-view Package for View Component ([7799577](https://github.com/instructure/instructure-ui/commit/7799577))
+
+
+
+
+
 # [6.10.0](https://github.com/instructure/instructure-ui/compare/v6.9.0...v6.10.0) (2019-08-27)
 
 **Note:** Version bump only for package @instructure/instui-config
