@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-popover",
-  "version": "6.11.0",
+  "version": "6.12.0",
   "description": "A component for hiding or showing content based on user interaction.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -21,26 +21,26 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/console": "^6.11.0",
-    "@instructure/ui-a11y": "^6.11.0",
-    "@instructure/ui-dom-utils": "^6.11.0",
-    "@instructure/ui-i18n": "^6.11.0",
-    "@instructure/ui-layout": "^6.11.0",
-    "@instructure/ui-prop-types": "^6.11.0",
-    "@instructure/ui-react-utils": "^6.11.0",
-    "@instructure/ui-testable": "^6.11.0",
-    "@instructure/ui-themeable": "^6.11.0",
-    "@instructure/ui-utils": "^6.11.0",
-    "@instructure/ui-view": "^6.11.0",
-    "@instructure/uid": "^6.11.0",
+    "@instructure/console": "^6.12.0",
+    "@instructure/ui-a11y": "^6.12.0",
+    "@instructure/ui-dom-utils": "^6.12.0",
+    "@instructure/ui-i18n": "^6.12.0",
+    "@instructure/ui-layout": "^6.12.0",
+    "@instructure/ui-prop-types": "^6.12.0",
+    "@instructure/ui-react-utils": "^6.12.0",
+    "@instructure/ui-testable": "^6.12.0",
+    "@instructure/ui-themeable": "^6.12.0",
+    "@instructure/ui-utils": "^6.12.0",
+    "@instructure/ui-view": "^6.12.0",
+    "@instructure/uid": "^6.12.0",
     "keycode": "^2",
     "prop-types": "^15",
     "react": "^15 || ^16"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.11.0",
-    "@instructure/ui-color-utils": "^6.11.0",
-    "@instructure/ui-test-utils": "^6.11.0"
+    "@instructure/ui-babel-preset": "^6.12.0",
+    "@instructure/ui-color-utils": "^6.12.0",
+    "@instructure/ui-test-utils": "^6.12.0"
   },
   "publishConfig": {
     "access": "public"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.12.0](https://github.com/instructure/instructure-ui/compare/v6.11.0...v6.12.0) (2019-09-17)
+
+
+### Features
+
+* **ui-babel-preset:** add support for javascript optional chaining ([e56d64b](https://github.com/instructure/instructure-ui/commit/e56d64b))
+
+
+
+
+
 # [6.11.0](https://github.com/instructure/instructure-ui/compare/v6.10.0...v6.11.0) (2019-09-16)
 
 **Note:** Version bump only for package @instructure/ui-testable

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "6.11.0",
+  "version": "6.12.0",
   "description": "A library of @instructure/ui-themeable themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,11 +20,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.11.0"
+    "@instructure/ui-babel-preset": "^6.12.0"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "^6.11.0",
-    "@instructure/canvas-theme": "^6.11.0"
+    "@instructure/canvas-high-contrast-theme": "^6.12.0",
+    "@instructure/canvas-theme": "^6.12.0"
   },
   "publishConfig": {
     "access": "public"
