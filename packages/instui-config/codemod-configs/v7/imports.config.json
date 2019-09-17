@@ -50,5 +50,9 @@
   {
     "pattern": "^@instructure/ui-layout/lib/Flex",
     "replace": "@instructure/ui-flex/lib/Flex"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/FileDrop",
+    "replace": "@instructure/ui-file-drop/lib/FileDrop"
   }
 ]

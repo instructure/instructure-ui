@@ -137,5 +137,21 @@
         { "old": "error", "new": "danger" }
       ]}
     ]
+  },
+  "FileDrop": {
+    "7.0.0": [
+      { "old": "label", "new": "renderLabel" },
+      { "old": "enablePreview", "new": "shouldEnablePreview" },
+      { "old": "allowRepeatFileSelection", "new": "shouldAllowRepeats" },
+      { "old": "allowMultiple", "new": "shouldAllowMultiple" },
+      { "old": "disabled", "new": "interaction", "values": [
+        { "old": true, "new": "disabled" },
+        { "old": false, "new": "enabled" }
+      ]},
+      { "old": "readOnly", "new": "interaction", "values": [
+        { "old": true, "new": "readonly" },
+        { "old": false, "new": "enabled" }
+      ]},
+    ]
   }
 }

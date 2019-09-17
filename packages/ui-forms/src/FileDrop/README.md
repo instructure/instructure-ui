@@ -1,18 +1,32 @@
 ---
-describes: FileDrop
+describes: DeprecatedFileDrop
+id: DeprecatedFileDrop__README
 ---
 
-`FileDrop` is a consistent way to drag and drop, as well as browse your computer to upload a media file.
+**DEPRECATED:** DeprecatedFileDrop will be removed from `ui-forms` in version 7.0.0. Use the [FileDrop from ui-file-drop](#FileDrop) instead.
 
-The `isDragAccepted` and `isDragRejected` props can be used to signal to the user if
-the dragged files are going to be accepted or not (unfortunately, this only works as intended in Chrome
-and Firefox).
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package and handle the prop name changes listed below.
+
+These props have updated names:
+- The `label` prop has been changed to `renderLabel`
+- The `disabled` boolean prop has been changed to `interaction: disabled`
+- The `readOnly` boolean prop has been changed to `interaction: readonly`
+- The `enablePreview` boolean prop has been changed to `shouldEnablePreview`
+- The `allowRepeatFileSelection` boolean prop has been changed to `shouldAllowRepeats`
+- The `allowMultiple` boolean prop has been changed to `shouldAllowMultiple`
+
+The following callback props have been changed to create consistency among our
+components. Please see the new [FileDrop](#FileDrop) for updated docs:
+- `onDrop`
+- `onDropAccepted`
+- `onDropRejected`
 
 ```js
 ---
 example: true
 ---
-<FileDrop
+<DeprecatedFileDrop
   accept="image/*"
   onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
   onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
@@ -32,7 +46,7 @@ A disabled FileDrop
 ---
 example: true
 ---
-<FileDrop
+<DeprecatedFileDrop
   label={
     <Billboard
       heading="Upload your image"
@@ -62,7 +76,7 @@ example: true
   <Grid.Row>
     <Grid.Col>
 
-      <FileDrop
+      <DeprecatedFileDrop
         accept=".jpg"
         onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
         onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
@@ -79,7 +93,7 @@ example: true
     </Grid.Col>
     <Grid.Col>
 
-      <FileDrop
+      <DeprecatedFileDrop
         accept=".png"
         onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
         onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
@@ -95,7 +109,7 @@ example: true
     </Grid.Col>
     <Grid.Col>
 
-      <FileDrop
+      <DeprecatedFileDrop
         accept="video/*"
         onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
         onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
@@ -125,7 +139,7 @@ example: true
   <Grid.Row>
     <Grid.Col>
 
-      <FileDrop
+      <DeprecatedFileDrop
         allowMultiple={true}
         onDropAccepted={(files) => { console.log(`Files accepted ${files.map((f) => f.name).join(',')}`) }}
         label={
@@ -142,7 +156,7 @@ example: true
     </Grid.Col>
     <Grid.Col>
 
-      <FileDrop
+      <DeprecatedFileDrop
         label={
           <Billboard
             size="small"

@@ -1,0 +1,65 @@
+/* stylelint-disable selector-max-class */
+.root {
+  position: relative;
+}
+
+.label {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.input {
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: -0.0625rem;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+.labelContent {
+  display: block;
+  box-sizing: border-box;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+  z-index: 1;
+  text-align: center;
+  border-radius: var(--borderRadius);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--hoverBorderColor);
+  }
+}
+
+.layout {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--borderRadius);
+}
+
+.dragAccepted {
+  .labelContent {
+    border-color: var(--acceptedColor);
+  }
+}
+
+.dragRejected {
+  .labelContent {
+    border-color: var(--rejectedColor);
+  }
+}
+
+.functionallyDisabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.visuallyDisabled {
+  opacity: 0.5;
+}
+
+/* stylelint-enable selector-max-class */

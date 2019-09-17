@@ -71,7 +71,7 @@ export {
   CheckboxGroup,
   DateInput as DeprecatedDateInput,
   DateTimeInput,
-  FileDrop,
+  FileDrop as DeprecatedFileDrop,
   RadioInput,
   RadioInputGroup,
   RangeInput,
@@ -130,6 +130,7 @@ export { Tabs, TabList } from '@instructure/ui-tabs'
 export { Text } from '@instructure/ui-text'
 export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
-export { Flex} from '@instructure/ui-flex'
+export { Flex } from '@instructure/ui-flex'
+export { FileDrop } from '@instructure/ui-file-drop'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'
