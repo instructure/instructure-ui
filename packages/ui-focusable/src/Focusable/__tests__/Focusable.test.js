@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 
 import { expect, find, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 
@@ -339,5 +339,65 @@ describe('<Focusable />', async () => {
     await focusable.focus()
 
     expect(focusable.focused).to.equal(true)
+  })
+
+  it('should properly clear the focusable / focused state when focus is unexpectedly lost', async () => {
+    let buttonRef, focusableRef, inputRef, labelRef
+
+    class TestComponent extends Component {
+      state = {
+        checked: false,
+        disabled: false
+      }
+
+      render() {
+        const { checked, disabled } = this.state
+
+        return (
+          <div>
+            <Focusable ref={(el) => { focusableRef = el }}>
+              {
+                () => {
+                  return (
+                    <label ref={(el) => { labelRef = el }}>
+                      <input
+                        checked={checked}
+                        disabled={disabled}
+                        onChange={()=> { this.setState({ checked: true }) }}
+                        ref={(el) => { inputRef = el }}
+                        type="checkbox"
+                      />
+                    </label>
+                  )
+                }
+              }
+            </Focusable>
+            <button
+              onClick={() => { this.setState({ disabled: true }) }}
+              ref={(el) => { buttonRef = el }}
+            >
+              hello world
+            </button>
+          </div>
+        )
+      }
+    }
+
+    await mount(<TestComponent />)
+    await wait(() => {
+      expect(focusableRef.focused).to.equal(false)
+    })
+
+    const input = await find('input[type="checkbox"]')
+
+    await labelRef.click()
+    await wait(() => {
+      expect(input.focused()).to.equal(true)
+    })
+
+    await buttonRef.click()
+    await wait(() => {
+      expect(input.focused()).to.equal(false)
+    })
   })
 })

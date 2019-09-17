@@ -106,7 +106,14 @@ class Focusable extends Component {
   componentDidUpdate (prevProps, prevState) {
     const { focusable } = this
 
-    if (focusable !== this.state.focusable) {
+    if (!focusable && this.state.focusable) {
+      this.removeFocusableListeners()
+
+      this.setState({
+        focusable: false,
+        focused: false
+      })
+    } else if (focusable !== this.state.focusable) {
       this.removeFocusableListeners()
 
       if (this.state.focused) {
