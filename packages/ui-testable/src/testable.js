@@ -66,7 +66,7 @@ const testable = decorator((ComposedComponent) => {
         } catch (e) {
           console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
         }
-        if (node && node.getAttribute) {
+        if (node?.getAttribute) {
           const attribute = node.getAttribute(locator.attribute)
           const values = typeof attribute === 'string' ? attribute.split(/\s+/) : []
           if (!values.includes(locator.value)) {

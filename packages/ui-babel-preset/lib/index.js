@@ -73,6 +73,7 @@ module.exports = function (context, opts = {
     [require('@babel/plugin-proposal-class-properties').default, { loose: true }],
     require('@babel/plugin-proposal-export-default-from').default,
     [require('@babel/plugin-proposal-object-rest-spread').default, { useBuiltIns: true }],
+    require('@babel/plugin-proposal-optional-chaining').default,
     [require('@babel/plugin-transform-runtime').default, {
       ...babelHelperVersion,
       corejs: false,
