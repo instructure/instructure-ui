@@ -51,26 +51,12 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
 
     const issues = (issueKeys.length > 0) ? `\n\nIssues in this release: ${issueKeys.join(', ')}` : ''
 
-    const payloadList = []
-
-    if (typeof config.slack_channel === 'string') {
-      payloadList.push({
-        'channel': config.slack_channel,
-        'username': SLACK_USERNAME,
-        'icon_emoji': config.slack_emoji,
-        'text': message + issues,
-        'link_names': 1
-      })
-    } else if (Array.isArray(config.slack_channel)) {
-      config.slack_channel.forEach(slackChannel => {
-        payloadList.push({
-          'channel': slackChannel,
-          'username': SLACK_USERNAME,
-          'icon_emoji': config.slack_emoji,
-          'text': message + issues,
-          'link_names': 1
-        })
-      })
+    const payload = {
+      'channel': config.slack_channel,
+      'username': SLACK_USERNAME,
+      'icon_emoji': config.slack_emoji,
+      'text': message + issues,
+      'link_names': 1
     }
 
     const req = https.request({
@@ -79,10 +65,7 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
       method: 'POST'
     })
 
-    payloadList.forEach(payload => {
-      req.write(JSON.stringify(payload))
-    })
-
+    req.write(JSON.stringify(payload))
     req.end()
 
     info(`💬  Posted Slack Message: "${message + issues}"`)
@@ -91,20 +74,40 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
   }
 }
 
+function getConfigList (config = {}) {
+  const configList = []
+
+  if (typeof config.slack_channel === 'string') {
+    configList.push({ ...config, slack_channel: config.slack_channel })
+  } else if (Array.isArray(config.slack_channel)) {
+    config.slack_channel.forEach(slackChannel => {
+      configList.push({ ...config, slack_channel: slackChannel })
+    })
+  }
+
+  return configList
+}
+
 exports.postStableReleaseSlackMessage = (jiraVersion = {}, issueKeys = [], config = {}) => {
   const changelog = config.changelog_url ? `\n ${config.changelog_url}` : ''
   const releaseName = jiraVersion.url ? `<${jiraVersion.url}|${jiraVersion.name}>` : jiraVersion.name
-  postSlackMessage(
-    `PSA!\n *${releaseName} has been published!* :party:${changelog}`,
-    issueKeys,
-    config
-  )
+  const configList = getConfigList(config)
+  configList.forEach(config => {
+    postSlackMessage(
+      `PSA!\n *${releaseName} has been published!* :party:${changelog}`,
+      issueKeys,
+      config
+    )
+  })
 }
 
 exports.postReleaseCandidateSlackMessage = (releaseName, issueKeys, config = {}) => {
-  postSlackMessage(
-    `*A release candidate, ${releaseName} has been published!* :party:`,
-    issueKeys,
-    config
-  )
+  const configList = getConfigList(config)
+  configList.forEach(config => {
+    postSlackMessage(
+      `*A release candidate, ${releaseName} has been published!* :party:`,
+      issueKeys,
+      config
+    )
+  })
 }
