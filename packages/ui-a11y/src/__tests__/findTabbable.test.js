@@ -34,7 +34,7 @@ describe('findTabbable', async () => {
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       const subject = await mount(
         <div>
-          <a href="javascript://">Yep</a>
+          <a href="#">Yep</a>
           <div>Nope</div>
           <div tabIndex="1">Yep</div>
           <input type="text" value="Yep" readOnly />

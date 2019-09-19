@@ -27,7 +27,7 @@
     "@instructure/ui-codemods": "^6.12.0",
     "@instructure/ui-scripts": "^6.12.0",
     "semver": "^6.3.0",
-    "yargs": "^13.3.0"
+    "yargs": "^14.0.0"
   },
   "publishConfig": {
     "access": "public"

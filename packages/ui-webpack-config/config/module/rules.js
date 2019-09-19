@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 const path = require('path')
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
@@ -42,11 +41,10 @@ module.exports = [
     exclude,
     loader: 'eslint-loader',
     options: {
-      failOnWarning: !DEBUG && !DISABLE_LINTER_FAILURE_ON_WARNING,
-      emitError: !DEBUG,
-      emitWarning: DEBUG,
-      failOnError: !DEBUG,
-      fix: false,
+      failOnWarning: Boolean(!DEBUG && !DISABLE_LINTER_FAILURE_ON_WARNING),
+      emitError: Boolean(!DEBUG),
+      emitWarning: Boolean(DEBUG),
+      failOnError: Boolean(!DEBUG),
       quiet: true,
       ignorePath: path.join(process.cwd(), '.eslintignore')
     }

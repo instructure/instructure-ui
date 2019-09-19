@@ -24,7 +24,7 @@
     "gulp": "^4.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7",
+    "@babel/runtime": "^7.5.0",
     "@instructure/ui-svg-images": "^6.12.0",
     "prop-types": "^15"
   },

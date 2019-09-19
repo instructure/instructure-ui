@@ -33,15 +33,15 @@
     "chai-string": "^1.5.0",
     "dirty-chai": "^2.0.1",
     "keycode": "^2",
-    "pretty-format": "^24.8.0",
-    "sinon": "^7.3.2",
+    "pretty-format": "^24.9.0",
+    "sinon": "^7.4.2",
     "sinon-chai": "^3.3.0",
     "sizzle": "^2.3.4",
-    "wait-for-expect": "^1.2.0"
+    "wait-for-expect": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": "^15 || ^16",
+    "react-dom": "^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

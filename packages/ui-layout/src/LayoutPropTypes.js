@@ -28,13 +28,6 @@ import { element } from '@instructure/ui-prop-types'
 
 import { jsonToMediaQuery } from './jsonToMediaQuery'
 
-/**
- * ---
- * category: utilities/layout
- * ---
- * Custom prop types for `ui-layout` components.
- * @module LayoutPropTypes
- */
 const LayoutPropTypes = {
   /**
    * Verify that the given prop is a properly formatted query object
@@ -118,4 +111,13 @@ const LayoutPropTypes = {
 }
 
 export default LayoutPropTypes
-export { LayoutPropTypes }
+export {
+  /**
+ * ---
+ * category: utilities/layout
+ * ---
+ * Custom prop types for `ui-layout` components.
+ * @module LayoutPropTypes
+ */
+  LayoutPropTypes
+}

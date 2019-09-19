@@ -24,16 +24,6 @@
 
 import { parseCss, ruleTypes } from './parseCss'
 
-/**
-* ---
-* category: utilities/themes
-* ---
-* Transform a string of CSS
-* @module transformCss
-* @param {String} cssText CSS to parse and transform
-* @param {Function} transform a transform function to apply to each rule
-* @returns {String} the transformed CSS string
-*/
 function transformCss (cssText, transform) {
   let node = parseCss(cssText)
 
@@ -44,20 +34,10 @@ function transformCss (cssText, transform) {
   return toCssText(node)
 }
 
-/**
-* Checks if a rule is a keyframes selector/block
-* @param {Object} rule
-* @returns {Boolean} true if the rule is a keyframes rule
-*/
 function isKeyframesSelector (rule) {
   return rule.parent && rule.parent.type === ruleTypes.keyframes
 }
 
-/**
-* Parses a string of CSS into an array of rules objects (selector + declaration block)
-* @param {String} CSS text to parse
-* @returns {Array} an array of rules objects
-*/
 function toRules (cssText) {
   const node = parseCss(cssText)
   let rules = []

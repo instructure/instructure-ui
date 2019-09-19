@@ -24,13 +24,6 @@
 
 import { makeRequirable } from '@instructure/ui-prop-types'
 
-/**
- * ---
- * category: utilities/i18n
- * ---
- * Custom I18n prop types for React components.
- * @module I18nPropTypes
- */
 const I18nPropTypes = {
   /**
    *
@@ -69,4 +62,13 @@ const I18nPropTypes = {
 I18nPropTypes.iso8601.isRequired = makeRequirable(I18nPropTypes.iso8601)
 
 export default I18nPropTypes
-export { I18nPropTypes }
+export {
+/**
+ * ---
+ * category: utilities/i18n
+ * ---
+ * @module I18nPropTypes
+ * Custom I18n prop types for React components.
+ */
+  I18nPropTypes
+}

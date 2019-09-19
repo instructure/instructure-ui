@@ -22,47 +22,7 @@
  * SOFTWARE.
  */
 
-import { capitalizeFirstLetter } from './capitalizeFirstLetter'
+import { camelize } from './camelize'
+import { pascalize } from './pascalize'
 
-/**
- * ---
- * category: utilities
- * ---
- * @module convertCase
- */
-
-/**
- * Converts a hyphenated string to camel case
- *
- * Example inputs:
- *  - 'foo-bar'
- *  - 'baz-qux'
- *
- * Example outputs:
- *  - 'fooBar'
- *  - 'bazQux'
- *
- * @param {String} str
- * @returns {String} Returns camel cased string
-*/
-export function camelize (str) {
-  return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-}
-
-/**
- * Converts a hyphenated or camel cased string to pascal case
- *
- * Example inputs:
- *  - 'foo-bar'
- *  - 'baz-qux'
- *
- * Example outputs:
- *  - 'FooBar'
- *  - 'BazQux'
- *
- * @param {String} str
- * @returns {String} Returns pascal cased string
-*/
-export function pascalize (str) {
-  return capitalizeFirstLetter(camelize(str))
-}
+export { camelize, pascalize }

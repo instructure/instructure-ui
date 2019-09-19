@@ -25,58 +25,51 @@
 import React from 'react'
 import { makeRequirable } from './makeRequirable'
 
+const Children = {
 /**
- * ---
- * category: utilities/PropTypes
- * ---
- * @module Children
+ * Validate that the children of a component are one of the specified types.
+ *
+ * ```js
+ *  import { Children } from '@instructure/ui-prop-types'
+ *
+ *  class Example extends Component {
+ *    static propTypes = {
+ *      children: Children.oneOf([Foo, Bar, Baz])
+ *    }
+ *
+ *    render () {
+ *      return <div>{this.props.children}</div>
+ *    }
+ *  }
+ * ```
+ *
+ * This will allow children such as:
+ *
+ * ```jsx
+ *  <Example>
+ *    <Foo />
+ *  </Example>
+ * ```
+ *
+ *  OR
+ *
+ * ```jsx
+ *  <Example>
+ *    <Bar />
+ *    <Foo />
+ *  </Example>
+ * ```
+ *
+ * But will fail on something like:
+ *
+ * ```jsx
+ *  <Example>
+ *    <h1>Example</h1>
+ *    <Foo />
+ *  </Example>
+ * ```
+ * @returns {Error} if validation failed
  */
-
- const Children = {
-  /**
-   * Validate that the children of a component are one of the specified types.
-   *
-   * ```js
-   *  import { Children } from '@instructure/ui-prop-types'
-   *
-   *  class Example extends Component {
-   *    static propTypes = {
-   *      children: Children.oneOf([Foo, Bar, Baz])
-   *    }
-   *
-   *    render () {
-   *      return <div>{this.props.children}</div>
-  *    }
-  *  }
-  * ```
-  *
-  * This will allow children such as:
-  *
-  * ```jsx
-  *  <Example>
-  *    <Foo />
-  *  </Example>
-  * ```
-  *
-  *  OR
-  *
-  * ```jsx
-  *  <Example>
-  *    <Bar />
-  *    <Foo />
-  *  </Example>
-  * ```
-  *
-  * But will fail on something like:
-  *
-  * ```jsx
-  *  <Example>
-  *    <h1>Example</h1>
-  *    <Foo />
-  *  </Example>
-  * ```
-  * @returns {Error} if validation failed
-  */
   oneOf (validTypes) {
     function validator (props, propName, componentName) {
       const children = React.Children.toArray(props[propName])
@@ -339,5 +332,13 @@ const getDisplayName = (Component) => {
   return typeof Component === 'string' ? Component : (Component.displayName || Component.name)
 }
 
-export { Children }
 export default Children
+export {
+/**
+ * ---
+ * category: utilities/PropTypes
+ * ---
+ * @module Children
+ */
+  Children
+}

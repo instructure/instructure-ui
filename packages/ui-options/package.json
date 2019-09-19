@@ -28,7 +28,7 @@
     "@instructure/uid": "^6.12.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7",
+    "@babel/runtime": "^7.5.0",
     "@instructure/ui-icons": "^6.12.0",
     "@instructure/ui-prop-types": "^6.12.0",
     "@instructure/ui-react-utils": "^6.12.0",

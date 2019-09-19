@@ -28,12 +28,6 @@ import { camelize } from './camelize'
  * ---
  * category: utilities
  * ---
- * @module pascalize
- */
-
-
-
-/**
  * Converts a hyphenated or camel cased string to pascal case
  *
  * Example inputs:

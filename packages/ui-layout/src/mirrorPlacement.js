@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 const mirror = {
   center: 'center',
   start: 'end',
@@ -32,10 +33,6 @@ const mirror = {
 }
 
 /**
- * ---
- * category: utilities/layout
- * ---
- *
  * Given a string or array of one or two placement values, mirrors the placement
  * vertically or horizontally based on the first value.
  *
@@ -92,4 +89,14 @@ function executeMirrorFunction (placement, mirrorFunction, delimiter) {
 }
 
 export default mirrorPlacement
-export { mirrorPlacement, mirrorHorizontalPlacement, executeMirrorFunction }
+export {
+/**
+ * ---
+ * category: utilities/layout
+ * ---
+ * @module mirrorPlacement
+ **/
+  mirrorPlacement,
+  mirrorHorizontalPlacement,
+  executeMirrorFunction
+}
