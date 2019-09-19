@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-date-input",
+  "name": "@instructure/ui-position",
   "version": "6.13.0",
-  "description": "A UI component library made by Instructure Inc.",
+  "description": "A component for positioning content with respect to a designated target.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -16,32 +16,29 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build",
-    "build:watch": "ui-build --watch",
-    "build:types": "ui-scripts --types"
+    "build:watch": "ui-build --watch"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.13.0",
-    "@instructure/ui-test-utils": "^6.13.0"
-  },
   "dependencies": {
     "@babel/runtime": "^7.5.0",
-    "@instructure/ui-calendar": "^6.13.0",
-    "@instructure/ui-form-field": "^6.13.0",
-    "@instructure/ui-icons": "^6.13.0",
-    "@instructure/ui-position": "^6.13.0",
-    "@instructure/ui-popover": "^6.13.0",
-    "@instructure/ui-prop-types": "^6.13.0",
     "@instructure/ui-react-utils": "^6.13.0",
-    "@instructure/ui-selectable": "^6.13.0",
     "@instructure/ui-testable": "^6.13.0",
-    "@instructure/ui-text-input": "^6.13.0",
     "@instructure/ui-themeable": "^6.13.0",
+    "@instructure/ui-dom-utils": "^6.13.0",
     "@instructure/ui-utils": "^6.13.0",
-    "prop-types": "^15"
-  },
-  "peerDependencies": {
+    "@instructure/ui-prop-types": "^6.13.0",
+    "@instructure/ui-portal": "^6.13.0",
+    "@instructure/ui-view": "^6.13.0",
+    "@instructure/debounce": "^6.13.0",
+    "@instructure/uid": "^6.13.0",
+    "classnames": "^2",
+    "prop-types": "^15",
     "react": "^15 || ^16"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^6.13.0",
+    "@instructure/ui-color-utils": "^6.13.0",
+    "@instructure/ui-test-utils": "^6.13.0"
   },
   "publishConfig": {
     "access": "public"

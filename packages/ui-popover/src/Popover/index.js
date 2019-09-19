@@ -26,13 +26,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
+import { ContextView } from '@instructure/ui-layout'
 import {
-  ContextView,
   Position,
-  LayoutPropTypes,
+  PositionPropTypes,
   parsePlacement,
   mirrorHorizontalPlacement
-} from '@instructure/ui-layout'
+} from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { Dialog } from '@instructure/ui-a11y'
 import { bidirectional } from '@instructure/ui-i18n'
@@ -91,7 +91,7 @@ class Popover extends Component {
     /**
      * The placement of the content in relation to the trigger
      */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
     /**
     * Controls the shadow depth for the `<Popover />`
     */
@@ -125,7 +125,7 @@ class Popover extends Component {
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
      */
-    constrain: LayoutPropTypes.constrain,
+    constrain: PositionPropTypes.constrain,
     /**
      * Target element for positioning the Popover (if it differs from the trigger)
      */
@@ -134,7 +134,7 @@ class Popover extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<Popover />` (defaults to `document.body`)
      */
-    mountNode: LayoutPropTypes.mountNode,
+    mountNode: PositionPropTypes.mountNode,
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'
      */
@@ -295,9 +295,7 @@ class Popover extends Component {
 
     this._id = this.props.id || uid('Popover')
     this._raf = []
-  }
 
-  componentWillMount () {
     this._handleMouseOver = handleMouseOverOut.bind(null, (event) => {
       this.show(event)
     })
@@ -355,7 +353,7 @@ class Popover extends Component {
     return {
       offsetX: this.state.offsetX,
       offsetY: this.state.offsetY,
-      trackPosition: this.props.shouldTrackPosition && this.shown,
+      shouldTrackPosition: this.props.shouldTrackPosition && this.shown,
       insertAt: this.props.insertAt,
       placement: this.placement,
       constrain: this.props.constrain,
@@ -589,22 +587,22 @@ class Popover extends Component {
       return (
         <span>
           {this.renderTrigger()}
-          <Position {...positionProps}>
-            <Position.Content>
-              {this.renderContent()}
-            </Position.Content>
+          <Position
+            {...positionProps}
+            __dangerouslyIgnoreExperimentalWarnings
+          >
+            {this.renderContent()}
           </Position>
         </span>
       )
     } else {
       return (
-        <Position {...positionProps}>
-          <Position.Target>
-            {this.renderTrigger()}
-          </Position.Target>
-          <Position.Content>
-            {this.renderContent()}
-          </Position.Content>
+        <Position
+          {...positionProps}
+          renderTarget={this.renderTrigger()}
+          __dangerouslyIgnoreExperimentalWarnings
+        >
+          {this.renderContent()}
         </Position>
       )
     }

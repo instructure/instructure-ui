@@ -23,13 +23,17 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, within, wait } from '@instructure/ui-test-utils'
+import { expect, mount, spy, within, wait, stub } from '@instructure/ui-test-utils'
 
 import { Popover } from '../index'
 
 import PopoverLocator from '../locator'
 
 describe('<Popover />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress experimental warnings
+  })
+
   it('should not render content by default', async () => {
     await mount(
       <Popover on="click" renderTrigger={<button>Click Me</button>}>

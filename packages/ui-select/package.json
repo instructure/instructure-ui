@@ -32,7 +32,7 @@
     "@instructure/ui-elements": "^6.13.0",
     "@instructure/ui-form-field": "^6.13.0",
     "@instructure/ui-icons": "^6.13.0",
-    "@instructure/ui-layout": "^6.13.0",
+    "@instructure/ui-position": "^6.13.0",
     "@instructure/ui-options": "^6.13.0",
     "@instructure/ui-popover": "^6.13.0",
     "@instructure/ui-prop-types": "^6.13.0",

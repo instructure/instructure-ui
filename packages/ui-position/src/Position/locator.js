@@ -21,18 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { locator } from '@instructure/ui-test-utils'
-// eslint-disable-next-line no-restricted-imports
-import PositionLocator from '@instructure/ui-position/lib/Position/locator'
-import { Popover } from './index'
+import { Position } from './index'
 
-export const PopoverTriggerLocator = locator('[data-popover-trigger]')
+export const PositionTargetLocator = locator(`[${Position.targetLocatorAttribute}]`)
+export const PositionContentLocator = locator(`[${Position.contentLocatorAttribute}]`)
 
 export const customMethods = {
-  findContent: (...args) => PositionLocator.findContent(...args),
-  findPositionTarget: (...args) => PositionLocator.findTarget(...args),
-  findTrigger: (...args) => PopoverTriggerLocator.find(...args)
+  findTarget: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(Position.locatorAttribute)
+      return locator(`[${Position.targetLocatorAttribute}="${id}"]`)
+        .find(...args)
+    } else {
+      return null
+    }
+  },
+  findContent: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(Position.locatorAttribute)
+      return locator(`[${Position.contentLocatorAttribute}="${id}"]`)
+        .find(...args)
+    } else {
+      return null
+    }
+  }
 }
 
-export default locator(Popover.selector, customMethods)
+export default locator(Position.selector, customMethods)

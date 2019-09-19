@@ -22,17 +22,8 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
-// eslint-disable-next-line no-restricted-imports
-import PositionLocator from '@instructure/ui-position/lib/Position/locator'
-import { Popover } from './index'
-
-export const PopoverTriggerLocator = locator('[data-popover-trigger]')
-
-export const customMethods = {
-  findContent: (...args) => PositionLocator.findContent(...args),
-  findPositionTarget: (...args) => PositionLocator.findTarget(...args),
-  findTrigger: (...args) => PopoverTriggerLocator.find(...args)
+export default function ({ stacking }) {
+  return {
+    zIndex: stacking.topmost
+  }
 }
-
-export default locator(Popover.selector, customMethods)

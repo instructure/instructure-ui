@@ -62,6 +62,7 @@
     "@instructure/ui-pill": "^6.13.0",
     "@instructure/ui-popover": "^6.13.0",
     "@instructure/ui-portal": "^6.13.0",
+    "@instructure/ui-position": "^6.13.0",
     "@instructure/ui-selectable": "^6.13.0",
     "@instructure/ui-svg-images": "^6.13.0",
     "@instructure/ui-table": "^6.13.0",

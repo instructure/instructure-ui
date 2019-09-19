@@ -32,24 +32,6 @@ const mirror = {
   offscreen: 'offscreen'
 }
 
-/**
- * Given a string or array of one or two placement values, mirrors the placement
- * vertically or horizontally based on the first value.
- *
- * Examples
- * ```js
- * mirrorPlacement('top start') // input
- * ['bottom', 'start'] // output
- *
- * mirrorPlacement('top start', ' ') // input
- * 'bottom start' //output
- * ```
- *
- * @param {string|Array} placement - a string of the form '<value> <value>' or array [<value>, <value>]
- * @param {string} delimiter - when provided, a value with which the result array will be joined
- * @returns {string|Array} - an array of values or, if the delimiter was supplied, a string of
- *  delimiter separated values
- */
 function mirrorPlacement (placement, delimiter) {
   return executeMirrorFunction(placement, (first, second) => {
     return [mirror[first], second]
@@ -92,9 +74,25 @@ export default mirrorPlacement
 export {
 /**
  * ---
- * category: utilities/layout
- * id: deprecatedMirrorPlacement
+ * category: utilities/position
  * ---
+ * Given a string or array of one or two placement values, mirrors the placement
+ * vertically or horizontally based on the first value.
+ *
+ * Examples
+ * ```js
+ * mirrorPlacement('top start') // input
+ * ['bottom', 'start'] // output
+ *
+ * mirrorPlacement('top start', ' ') // input
+ * 'bottom start' //output
+ * ```
+ *
+ * @param {string|Array} placement - a string of the form '<value> <value>' or array [<value>, <value>]
+ * @param {string} delimiter - when provided, a value with which the result array will be joined
+ * @returns {string|Array} - an array of values or, if the delimiter was supplied, a string of
+ *  delimiter separated values
+ *
  * @module mirrorPlacement
  **/
   mirrorPlacement,

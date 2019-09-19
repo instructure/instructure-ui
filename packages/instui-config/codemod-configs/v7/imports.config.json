@@ -28,6 +28,34 @@
     "replace": "@instructure/ui-popover/lib/Popover"
   },
   {
+    "pattern": "^@instructure/ui-layout/lib/Position",
+    "replace": "@instructure/ui-position/lib/Position"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/calculateElementPosition",
+    "replace": "@instructure/ui-position/lib/calculateElementPosition"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/executeMirrorFucntion",
+    "replace": "@instructure/ui-position/lib/executeMirrorFucntion"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/mirrorHorizontalPlacement",
+    "replace": "@instructure/ui-position/lib/mirrorHorizontalPlacement"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/mirrorPlacement",
+    "replace": "@instructure/ui-position/lib/mirrorPlacement"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/parsePlacement",
+    "replace": "@instructure/ui-position/lib/parsePlacement"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/LayoutPropTypes",
+    "replace": "@instructure/ui-position/lib/PositionPropTypes"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/Img",
     "replace": "@instructure/ui-img/lib/Img"
   },

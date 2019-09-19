@@ -35,11 +35,16 @@ const MyLayout = () => {
 The `ui-layout` package contains the following components:
 - [ContextView](#ContextView)
 - [DrawerLayout](#DrawerLayout)
-- Flex will be removed in version 7.0.0. Use the [Flex from ui-flex](#Flex) instead.
 - [Grid](#Grid)
 - [Media](#Media)
-- [Position](#Position)
-- View will be removed in version 7.0.0. Use the [View from ui-view](#View) instead.
+
+### Deprecated components
+The following components have been deprecated and will be removed from the `ui-layout` package:
+- [Flex](#DeprecatedFlex) \(use [Flex from ui-flex](#Flex) instead)
+- [Position](#DeprecatedPosition) \(use [Position from ui-position](#Position) instead)
+- [View](#DeprecatedView) \(use [View from ui-view](#View) instead)
+
+Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
 
 ### Utilities
 The `ui-layout` package contains the following utilities:

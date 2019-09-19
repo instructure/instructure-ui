@@ -102,7 +102,7 @@ export {
   Flex as DeprecatedFlex,
   DrawerLayout,
   Grid,
-  Position,
+  Position as DeprecatedPosition,
   View as DeprecatedView
 } from '@instructure/ui-layout'
 export { Transition } from '@instructure/ui-motion'
@@ -114,6 +114,7 @@ export {
   Modal,
   Popover as DeprecatedPopover
 } from '@instructure/ui-overlays'
+export { Position } from '@instructure/ui-position'
 export { Popover } from '@instructure/ui-popover'
 export { Tooltip } from '@instructure/ui-tooltip'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'

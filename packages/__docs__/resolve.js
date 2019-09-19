@@ -59,6 +59,7 @@ module.exports = {
     '@instructure/ui-pages$': path.resolve(__dirname, '../ui-pages/src/'),
     '@instructure/ui-pill$': path.resolve(__dirname, '../ui-pill/src/'),
     '@instructure/ui-popover$': path.resolve(__dirname, '../ui-popover/src/'),
+    '@instructure/ui-position$': path.resolve(__dirname, '../ui-position/src/'),
     '@instructure/ui-portal$': path.resolve(__dirname, '../ui-portal/src/'),
     '@instructure/ui-select$': path.resolve(__dirname, '../ui-select/src/'),
     '@instructure/ui-selectable$': path.resolve(__dirname, '../ui-selectable/src/'),

@@ -33,7 +33,7 @@ import { TextInput } from '@instructure/ui-text-input'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { callRenderProp, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
-import { LayoutPropTypes } from '@instructure/ui-layout'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
@@ -132,7 +132,7 @@ class DateInput extends Component {
     /**
     * The placement of the calendar in relation to the input.
     */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
     /**
     * Controls whether or not the calendar is showing.
     */

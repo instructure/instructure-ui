@@ -29,7 +29,7 @@ import keycode from 'keycode'
 import { Popover } from '@instructure/ui-overlays'
 import { uid } from '@instructure/uid'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { LayoutPropTypes } from '@instructure/ui-layout'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { pickProps, safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { themeable } from '@instructure/ui-themeable'
@@ -72,7 +72,7 @@ class Menu extends Component {
     /**
      * If a trigger is supplied, where should the `<Menu />` be placed (relative to the trigger)
      */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
     /**
      * Should the `<Menu />` be open for the initial render
      */
@@ -126,13 +126,13 @@ class Menu extends Component {
      * If a trigger is supplied, an element or a function returning an element to use as the mount node
      * for the `<Menu />` (defaults to `document.body`)
      */
-    mountNode: LayoutPropTypes.mountNode,
+    mountNode: PositionPropTypes.mountNode,
     /**
      * The parent in which to constrain the menu.
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
      */
-    constrain: LayoutPropTypes.constrain,
+    constrain: PositionPropTypes.constrain,
     /**
      * If a trigger is supplied, an element, function returning an element, or array of elements that will not
      * be hidden from the screen reader when the `<Menu />` is open

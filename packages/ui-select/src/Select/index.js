@@ -34,7 +34,7 @@ import { testable } from '@instructure/ui-testable'
 import { matchComponentTypes, omitProps } from '@instructure/ui-react-utils'
 import { getBoundingClientRect, isActiveElement } from '@instructure/ui-dom-utils'
 
-import { LayoutPropTypes } from '@instructure/ui-layout'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { Selectable } from '@instructure/ui-selectable'
 import { Popover } from '@instructure/ui-popover'
@@ -131,11 +131,11 @@ class Select extends Component {
     /**
     * The placement of the options list.
     */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
     /**
     * The parent in which to constrain the placement.
     */
-    constrain: LayoutPropTypes.constrain,
+    constrain: PositionPropTypes.constrain,
     /**
     * Callback fired when text input receives focus.
     */

@@ -150,6 +150,12 @@
       ]}
     ]
   },
+  "Position": {
+    "7.0.0": [
+      { "old": "over", "new": "shouldPositionOverTarget"},
+      { "old": "trackPosition", "new": "shouldTrackPosition" }
+    ]
+  },
   "View": {
     "7.0.0": [
       { "old": "borderColor", "new": "borderColor", "values": [

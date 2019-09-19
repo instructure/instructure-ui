@@ -1,14 +1,6 @@
 ---
-describes: DeprecatedPosition
-id: DeprecatedPosition__README
+describes: Position
 ---
-
-**DEPRECATED:** Position will be removed from `ui-layout` in version 7.0.0. Use the [avatar from ui-position](#Position) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. However, there are some breaking changes that will need to be addressed manually. These changes and other things to note are described below.
-
-- `Position.Target` and `Position.Content` are no longer in use. The target is now defined via the `renderTarget` prop and the children of a Position will be rendered as the positioned content.
 
 A component that positions content with respect to a designated target.
 The `placement` prop indicates where the content will be placed in relation to
@@ -89,27 +81,25 @@ render () {
     >
       <ApplyTextDirection>
         {(dir, rtl) => (
-          <DeprecatedPosition
+          <Position
             placement={rtl ? mirrorHorizontalPlacement(placement, ' ') : placement}
             offsetX={offset.x}
             offsetY={offset.y}
             onPositionChanged={this.handlePositionChanged}
-          >
-            <DeprecatedPosition.Target>
+            renderTarget={
               <Button variant="primary" onClick={this.handleButtonClick}>
                 Change placement
               </Button>
-            </DeprecatedPosition.Target>
-            <DeprecatedPosition.Content>
-              <ContextView
-                placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted}
-                maxWidth="22rem" padding="small"
-              >
-                <Heading level="h3">{placement}</Heading>
-                <p>{fpo}</p>
-              </ContextView>
-            </DeprecatedPosition.Content>
-          </DeprecatedPosition>
+            }
+          >
+            <ContextView
+              placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted}
+              maxWidth="22rem" padding="small"
+            >
+              <Heading level="h3">{placement}</Heading>
+              <p>{fpo}</p>
+            </ContextView>
+          </Position>
         )
       }
       </ApplyTextDirection>
@@ -195,34 +185,29 @@ class Example extends React.Component {
       >
         <ApplyTextDirection>
           {(dir, rtl) => (
-            <DeprecatedPosition
+            <Position
               placement={rtl ? mirrorHorizontalPlacement(placement, ' ') : placement}
               offsetX={offsetX}
               offsetY={offsetY}
               mountNode={() => this._mountNode}
               onPositionChanged={this.handlePositionChanged}
-            >
-              <DeprecatedPosition.Target>
-                <Button
-                  variant="primary"
-                  onClick={this.handleButtonClick}
-                >
+              renderTarget={
+                <Button variant="primary" onClick={this.handleButtonClick}>
                   Change placement
                 </Button>
-              </DeprecatedPosition.Target>
-              <DeprecatedPosition.Content>
-                <ContextView
-                  placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted}
-                  maxWidth="20rem"
-                  padding="small"
-                >
-                  <Heading level="h3">{placement}</Heading>
-                  <p>
-                    {fpo}
-                  </p>
-                </ContextView>
-              </DeprecatedPosition.Content>
-            </DeprecatedPosition>
+              }
+            >
+              <ContextView
+                placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted}
+                maxWidth="20rem"
+                padding="small"
+              >
+                <Heading level="h3">{placement}</Heading>
+                <p>
+                  {fpo}
+                </p>
+              </ContextView>
+            </Position>
           )}
         </ApplyTextDirection>
       </View>
@@ -241,7 +226,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-[Experimental/WIP]: `over` prop with `stretch` placement.
+`over` prop with `stretch` placement.
 
 ```js
 ---
@@ -281,23 +266,12 @@ class Example extends React.Component {
       <div>
         <ApplyTextDirection>
           {(dir, rtl) => (
-            <DeprecatedPosition
+            <Position
               placement={rtl ? mirrorHorizontalPlacement(placement, ' ') : placement}
-              over
+              shouldPositionOverTarget
               insertAt="top"
               mountNode={() => this._mountNode}
-            >
-              <DeprecatedPosition.Content>
-                <div
-                  style={{
-                    backgroundColor: 'white',
-                    padding: '1rem'
-                  }}
-                >
-                  <Heading level="h3">{placement}</Heading>
-                </div>
-              </DeprecatedPosition.Content>
-              <DeprecatedPosition.Target>
+              renderTarget={
                 <div
                   ref={(c) => { this._mountNode = c }}
                   style={{
@@ -309,8 +283,17 @@ class Example extends React.Component {
                 >
                   {fpo}
                 </div>
-              </DeprecatedPosition.Target>
-            </DeprecatedPosition>
+              }
+            >
+              <div
+                style={{
+                  backgroundColor: 'white',
+                  padding: '1rem'
+                }}
+              >
+                <Heading level="h3">{placement}</Heading>
+              </div>
+            </Position>
           )}
         </ApplyTextDirection>
         <Button variant="primary" onClick={this.handleButtonClick}>
