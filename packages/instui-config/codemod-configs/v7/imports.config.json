@@ -1,42 +1,50 @@
 [
   {
-    "pattern": "^@instructure/ui-elements/lib/components/Avatar",
+    "pattern": "^@instructure/ui-elements/lib/Avatar",
     "replace": "@instructure/ui-avatar/lib/Avatar"
   },
   {
-    "pattern": "^@instructure/ui-forms/lib/components/TextInput",
+    "pattern": "^@instructure/ui-forms/lib/DateInput",
+    "replace": "@instructure/ui-date-input/lib/DateInput"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/TextInput",
     "replace": "@instructure/ui-text-input/lib/TextInput"
   },
   {
-    "pattern": "^@instructure/ui-layout/lib/components/View",
+    "pattern": "^@instructure/ui-forms/lib/Select",
+    "replace": "@instructure/ui-select/lib/Select"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/View",
     "replace": "@instructure/ui-view/lib/View"
   },
   {
-    "pattern": "^@instructure/ui-layout/lib/components/Popover",
+    "pattern": "^@instructure/ui-layout/lib/Popover",
     "replace": "@instructure/ui-popover/lib/Popover"
   },
   {
-    "pattern": "^@instructure/ui-elements/lib/components/Img",
+    "pattern": "^@instructure/ui-elements/lib/Img",
     "replace": "@instructure/ui-img/lib/Img"
   },
   {
-    "pattern": "^@instructure/ui-elements/lib/components/Text",
+    "pattern": "^@instructure/ui-elements/lib/Text",
     "replace": "@instructure/ui-text/lib/Text"
   },
   {
-    "pattern": "^@instructure/ui-a11y/lib/components/AccessibleContent",
+    "pattern": "^@instructure/ui-a11y/lib/AccessibleContent",
     "replace": "@instructure/ui-a11y-content/lib/AccessibleContent"
   },
   {
-    "pattern": "^@instructure/ui-a11y/lib/components/PresentationContent",
+    "pattern": "^@instructure/ui-a11y/lib/PresentationContent",
     "replace": "@instructure/ui-a11y-content/lib/PresentationContent"
   },
   {
-    "pattern": "^@instructure/ui-a11y/lib/components/ScreenReaderContent",
+    "pattern": "^@instructure/ui-a11y/lib/ScreenReaderContent",
     "replace": "@instructure/ui-a11y-content/lib/ScreenReaderContent"
   },
   {
-    "pattern": "^@instructure/ui-layout/lib/components/Flex",
+    "pattern": "^@instructure/ui-layout/lib/Flex",
     "replace": "@instructure/ui-flex/lib/Flex"
   }
 ]
