@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.13.0](https://github.com/instructure/instructure-ui/compare/v6.12.0...v6.13.0) (2019-09-24)
+
+
+### Performance Improvements
+
+* **console:** help terser dead-code-eliminate console funcs ([323c469](https://github.com/instructure/instructure-ui/commit/323c469))
+
+
+
+
+
 # [6.12.0](https://github.com/instructure/instructure-ui/compare/v6.11.0...v6.12.0) (2019-09-17)
 
 **Note:** Version bump only for package @instructure/console

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.13.0](https://github.com/instructure/instructure-ui/compare/v6.12.0...v6.13.0) (2019-09-24)
+
+
+### Bug Fixes
+
+* **instui-config:** fix v7 codemod paths ([918d38f](https://github.com/instructure/instructure-ui/commit/918d38f))
+* **ui-focusable:** fix focus race condition with label / checkbox ([54da3ed](https://github.com/instructure/instructure-ui/commit/54da3ed))
+* **ui-scripts:** follow-up fix to g/209544 ([bc6945b](https://github.com/instructure/instructure-ui/commit/bc6945b))
+
+
+### Features
+
+* **ui-elements:** allow TruncateText to force truncation of hidden text ([66bbf82](https://github.com/instructure/instructure-ui/commit/66bbf82))
+* **ui-elements,ui-pill:** add ui-pill package for the Pill Component ([4a71024](https://github.com/instructure/instructure-ui/commit/4a71024))
+* **ui-react-utils:** add hack decorator ([1351477](https://github.com/instructure/instructure-ui/commit/1351477))
+
+
+### Performance Improvements
+
+* **console:** help terser dead-code-eliminate console funcs ([323c469](https://github.com/instructure/instructure-ui/commit/323c469))
+
+
+
+
+
 # [6.12.0](https://github.com/instructure/instructure-ui/compare/v6.11.0...v6.12.0) (2019-09-17)
 
 
