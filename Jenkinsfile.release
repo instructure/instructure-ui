@@ -54,4 +54,11 @@ pipeline {
       }
     }
   }
+  post {
+    failure {
+      script {
+        slackSend channel: "#instui", message: "${env.JOB_NAME} ${env.BUILD_NUMBER} Failure (<${env.BUILD_URL}|Open>). Changes: \n - ${env.GERRIT_CHANGE_SUBJECT} [${env.GERRIT_CHANGE_OWNER_EMAIL}]"
+      }
+    }
+  }
 }
