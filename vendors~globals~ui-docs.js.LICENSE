@@ -1,0 +1,54 @@
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+/*!
+ * is-extendable <https://github.com/jonschlinkert/is-extendable>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+/*!
+ * strip-bom-string <https://github.com/jonschlinkert/strip-bom-string>
+ *
+ * Copyright (c) 2015, 2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+//! moment-timezone.js
+
+//! version : 0.5.26
+
+//! Copyright (c) JS Foundation and other contributors
+
+//! license : MIT
+
+//! github.com/moment/moment-timezone
+
+/*!
+ * Programatically add the following
+ */
+
+/*!
+ * escape-html
+ * Copyright(c) 2012-2013 TJ Holowaychuk
+ * Copyright(c) 2015 Andreas Lubbe
+ * Copyright(c) 2015 Tiancheng "Timothy" Gu
+ * MIT Licensed
+ */
