@@ -23,6 +23,7 @@
  */
 import { locator } from '@instructure/ui-test-utils'
 
+// eslint-disable-next-line no-restricted-imports
 import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
 import DatePickerLocator from './DatePicker/locator'
 

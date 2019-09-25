@@ -30,6 +30,7 @@ import { SelectField } from '../index'
 import optionsListStyles from '../../SelectOptionsList/styles.css'
 import styles from '../styles.css'
 
+// eslint-disable-next-line no-restricted-imports
 import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
 
 const InputLocator = locator('input[type="text"]')

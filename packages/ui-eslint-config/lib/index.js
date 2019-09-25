@@ -77,7 +77,7 @@ module.exports = {
       templateFile: require.resolve('./copyright.js')
     }],
     'import/no-extraneous-dependencies': 'error',
-    'no-restricted-imports': ['warn', {
+    'no-restricted-imports': ['error', {
       'patterns': [
         '*/src',
         '@instructure/ui-*/lib',

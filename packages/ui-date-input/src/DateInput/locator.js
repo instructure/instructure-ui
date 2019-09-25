@@ -23,7 +23,9 @@
  */
 import { locator } from '@instructure/ui-test-utils'
 
+// eslint-disable-next-line no-restricted-imports
 import CalendarLocator from '@instructure/ui-calendar/lib/Calendar/locator'
+// eslint-disable-next-line no-restricted-imports
 import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
 
 import { DateInput } from './index'

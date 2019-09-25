@@ -24,6 +24,7 @@
 
  import { locator } from '@instructure/ui-test-utils'
 
+ // eslint-disable-next-line no-restricted-imports
  import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
  import { Popover, PopoverTrigger, PopoverContent } from './index'
 

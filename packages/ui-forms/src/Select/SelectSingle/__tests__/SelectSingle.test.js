@@ -27,6 +27,7 @@ import { locator, expect, mount, stub, spy, wait } from '@instructure/ui-test-ut
 
 import { SelectSingle } from '../index'
 
+// eslint-disable-next-line no-restricted-imports
 import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
 
 const InputLocator = locator('input[type="text"]')

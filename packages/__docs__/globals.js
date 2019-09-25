@@ -33,7 +33,9 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-layout'
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')
 
+// eslint-disable-next-line no-restricted-imports
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
+// eslint-disable-next-line no-restricted-imports
 import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'

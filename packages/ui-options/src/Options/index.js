@@ -30,7 +30,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps, matchComponentTypes, callRenderProp, safeCloneElement, experimental } from '@instructure/ui-react-utils'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { uid } from '@instructure/uid/lib/uid'
+import { uid } from '@instructure/uid'
 
 import { View } from '@instructure/ui-view'
 import { Item } from './Item'

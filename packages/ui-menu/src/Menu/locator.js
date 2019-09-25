@@ -31,6 +31,7 @@ import { Menu } from './index'
 import MenuItemLocator from './MenuItem/locator'
 import MenuItemGroupLocator from './MenuItemGroup/locator'
 
+// eslint-disable-next-line no-restricted-imports
 import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
 
 const customMethods = {

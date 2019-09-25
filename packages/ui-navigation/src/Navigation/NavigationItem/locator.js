@@ -24,6 +24,7 @@
 import { locator  } from '@instructure/ui-test-utils'
 
 import { NavigationItem } from './index'
+// eslint-disable-next-line no-restricted-imports
 import TooltipLocator from '@instructure/ui-overlays/lib/Tooltip/locator'
 
 export default locator(NavigationItem.selector, {

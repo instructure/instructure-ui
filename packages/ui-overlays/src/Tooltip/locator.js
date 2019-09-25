@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
+// eslint-disable-next-line no-restricted-imports
 import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
 import { Tooltip } from './index'
 

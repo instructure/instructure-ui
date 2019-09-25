@@ -342,7 +342,7 @@ describe('<Focusable />', async () => {
   })
 
   it('should properly clear the focusable / focused state when focus is unexpectedly lost', async () => {
-    let buttonRef, focusableRef, inputRef, labelRef
+    let buttonRef, focusableRef, labelRef
 
     class TestComponent extends Component {
       state = {
@@ -364,7 +364,6 @@ describe('<Focusable />', async () => {
                         checked={checked}
                         disabled={disabled}
                         onChange={()=> { this.setState({ checked: true }) }}
-                        ref={(el) => { inputRef = el }}
                         type="checkbox"
                       />
                     </label>
