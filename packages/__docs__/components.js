@@ -51,7 +51,7 @@ export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export {
   Avatar as DeprecatedAvatar,
   Badge,
-  Heading,
+  Heading as DeprecatedHeading,
   Img as DeprecatedImg,
   Pill as DeprecatedPill,
   Link as DeprecatedLink,
@@ -135,5 +135,6 @@ export { TreeBrowser } from '@instructure/ui-tree-browser'
 export { Flex } from '@instructure/ui-flex'
 export { FileDrop } from '@instructure/ui-file-drop'
 export { Link } from '@instructure/ui-link'
+export { Heading } from '@instructure/ui-heading'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

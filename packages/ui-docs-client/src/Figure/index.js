@@ -29,12 +29,13 @@ import classnames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, ComponentIdentifier } from '@instructure/ui-react-utils'
 import { Children } from '@instructure/ui-prop-types'
+import { Heading } from '@instructure/ui-heading'
 import {
   IconCheckMarkSolid,
   IconNoSolid,
   IconA11ySolid
 } from '@instructure/ui-icons'
-import { Heading, List } from '@instructure/ui-elements'
+import { List } from '@instructure/ui-elements'
 import { Responsive } from '@instructure/ui-layout'
 import { View } from '@instructure/ui-view'
 
@@ -119,7 +120,12 @@ class Figure extends Component {
                 className={styles.icon}
               />
             </span> : null}
-            <Heading level="h3" as="h4" margin="medium 0 small small">
+            <Heading
+              level="h3"
+              as="h4"
+              margin="medium 0 small small"
+              __dangerouslyIgnoreExperimentalWarnings
+            >
               {title}
             </Heading>
             <List itemSpacing="small" margin="0 0 small 0">

@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Button } from '@instructure/ui-buttons'
-import { Heading } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-heading'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { themeable } from '@instructure/ui-themeable'
@@ -115,7 +115,7 @@ class Glyph extends Component {
           }
         </div>
         { info && <div className={styles.info}>{info}</div> }
-        <Heading level="h3">
+        <Heading level="h3" __dangerouslyIgnoreExperimentalWarnings>
           { firstVariant.glyphName.toLowerCase() }
         </Heading>
       </div>

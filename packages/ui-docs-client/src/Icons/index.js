@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { CloseButton } from '@instructure/ui-buttons'
-import { Heading } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-heading'
 import { Link } from '@instructure/ui-link'
 import { TextInput } from '@instructure/ui-text-input'
 import { Select, Checkbox } from '@instructure/ui-forms'
@@ -149,7 +149,7 @@ class Icons extends Component {
   renderFooter () {
     return (
       <div>
-        <Heading level="h3" margin="medium 0">
+        <Heading level="h3" margin="medium 0" __dangerouslyIgnoreExperimentalWarnings>
           Installation
         </Heading>
         <CodeEditor
@@ -214,7 +214,7 @@ class MyIcon extends React.Component {
 
     return (
       <div key={`${name}-${variant}`}>
-        <Heading level="h3" margin="small 0">
+        <Heading level="h3" margin="small 0" __dangerouslyIgnoreExperimentalWarnings>
           Usage
         </Heading>
         <CodeEditor
@@ -276,7 +276,9 @@ class MyIcon extends React.Component {
                 >
                   Close
                 </CloseButton>
-                <Heading>{`${glyph.glyphName} (${variant})`}</Heading>
+                <Heading __dangerouslyIgnoreExperimentalWarnings>
+                  {`${glyph.glyphName} (${variant})`}
+                </Heading>
               </Modal.Header>
               <Modal.Body>
                 {this.renderUsage(name, variant, glyph)}

@@ -90,5 +90,9 @@
   {
     "pattern": "^@instructure/ui-elements/lib/Link",
     "replace": "@instructure/ui-link/lib/Link"
+  },
+  {
+    "pattern": "^@instructure/ui-elements/lib/Heading",
+    "replace": "@instructure/ui-heading/lib/Heading"
   }
 ]

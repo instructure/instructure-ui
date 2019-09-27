@@ -24,8 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import { Heading } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-heading'
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
@@ -69,7 +68,12 @@ class Document extends Component {
     } = doc
     return props ? (
       <View margin="x-large 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
-        <Heading level="h3" id={`${id}Properties`} margin="0 0 small 0">
+        <Heading
+          level="h3"
+          id={`${id}Properties`}
+          margin="0 0 small 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           Properties
         </Heading>
         <Properties props={props} />
@@ -84,7 +88,12 @@ class Document extends Component {
 
     return theme && Object.keys(theme).length > 0 ? (
       <View margin="x-large 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
-        <Heading level="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
+        <Heading
+          level="h3"
+          id={`${doc.id}Theme`}
+          margin="0 0 small 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           Theme Variables
         </Heading>
         <ComponentTheme theme={theme} />
@@ -149,7 +158,12 @@ const { ${importName} } = require('${requirePath}')
 
     return (
       <View margin="xx-large 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
-        <Heading level="h3" id={`${id}Usage`} margin="0 0 small 0">
+        <Heading
+          level="h3"
+          id={`${id}Usage`}
+          margin="0 0 small 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           Usage
         </Heading>
         <View margin="0 0 small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
@@ -178,7 +192,12 @@ const { ${importName} } = require('${requirePath}')
 
     return params ? (
       <View margin="small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
-        <Heading level="h3" id={`${id}Parameters`} margin="0 0 small 0">
+        <Heading
+          level="h3"
+          id={`${id}Parameters`}
+          margin="0 0 small 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           Parameters
         </Heading>
         <Params params={params} />
@@ -194,7 +213,12 @@ const { ${importName} } = require('${requirePath}')
 
     return returns ? (
       <View margin="small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
-        <Heading level="h3" id={`${id}Returns`} margin="0 0 small 0">
+        <Heading
+          level="h3"
+          id={`${id}Returns`}
+          margin="0 0 small 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           Returns
         </Heading>
         <Returns types={returns} />
@@ -210,7 +234,12 @@ const { ${importName} } = require('${requirePath}')
 
     return (methods && methods.length > 0) ? (
       <View margin="small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
-        <Heading level="h3" id={`${id}Methods`} margin="0 0 small 0">
+        <Heading
+          level="h3"
+          id={`${id}Methods`}
+          margin="0 0 small 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           Methods
         </Heading>
         <Methods methods={methods} />
@@ -260,7 +289,13 @@ const { ${importName} } = require('${requirePath}')
     if (doc.sections) {
       sections = doc.sections.map(section => (
         <View margin="small 0" display="block" key={`${doc.id}.${section.name}`} __dangerouslyIgnoreExperimentalWarnings>
-          <Heading level="h3" color="secondary" id={`${doc.id}.${section.name}`} margin="large 0 small 0">
+          <Heading
+            level="h3"
+            color="secondary"
+            id={`${doc.id}.${section.name}`}
+            margin="large 0 small 0"
+            __dangerouslyIgnoreExperimentalWarnings
+          >
             { section.kind && <code>{section.kind}</code> }
             {section.title}
           </Heading>

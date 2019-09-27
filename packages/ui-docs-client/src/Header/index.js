@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Button } from '@instructure/ui-buttons'
-import { Heading } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
 
@@ -52,7 +52,7 @@ class Header extends Component {
           <PandaLogo />
         </div>
         <div className={styles.banner} role="banner">
-          <Heading level="h2" as="h1">
+          <Heading level="h2" as="h1" __dangerouslyIgnoreExperimentalWarnings>
             <Button
               variant="link"
               size="large"

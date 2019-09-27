@@ -32,7 +32,7 @@ import { DrawerLayout } from '@instructure/ui-layout'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
-import { Heading } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-heading'
 import { Pill } from '@instructure/ui-pill'
 import { IconHeartSolid, IconGithubSolid } from '@instructure/ui-icons'
 
@@ -166,7 +166,12 @@ class App extends Component {
     const theme = this.props.themes[themeKey]
     return (
       <Section id={themeKey}>
-        <Heading level="h1" as="h2" margin="0 0 medium 0">
+        <Heading
+          level="h1"
+          as="h2"
+          margin="0 0 medium 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           {themeKey}
         </Heading>
         <Theme
@@ -184,7 +189,12 @@ class App extends Component {
 
     return (
       <Section id={key}>
-        <Heading level="h1" as="h2" margin="0 0 medium 0">
+        <Heading
+          level="h1"
+          as="h2"
+          margin="0 0 medium 0"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
           Iconography
         </Heading>
         <Icons
@@ -247,7 +257,13 @@ class App extends Component {
   renderError () {
     return (
       <Section id="error">
-        <Heading level="h1" as="h2">Document not found</Heading>
+        <Heading
+          level="h1"
+          as="h2"
+          __dangerouslyIgnoreExperimentalWarnings
+        >
+          Document not found
+        </Heading>
       </Section>
     )
   }

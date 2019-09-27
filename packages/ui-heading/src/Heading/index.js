@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import { getElementType, deprecated, omitProps } from '@instructure/ui-react-utils'
+import { getElementType, experimental, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -36,40 +36,53 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedHeading
+category: components
+experimental: true
 ---
 **/
 
-@deprecated('7.0.0', {
-  ellipsis: '<TruncateText />'
-})
 @testable()
+@experimental()
 @themeable(theme, styles)
 class Heading extends Component {
-   static propTypes = {
-     border: PropTypes.oneOf(['none', 'top', 'bottom']),
-     children: childrenOrValue,
-     color: PropTypes.oneOf([
+  static propTypes = {
+    /**
+    * Add a top- or bottom-border to the Heading
+    */
+    border: PropTypes.oneOf(['none', 'top', 'bottom']),
+    /**
+    * The text content of the Heading
+    */
+    children: childrenOrValue,
+    /**
+    * The font color to render
+    */
+    color: PropTypes.oneOf([
       'primary',
       'secondary',
       'primary-inverse',
       'secondary-inverse',
       'inherit'
     ]),
-     level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
     /**
-    * the element type to render as (defaults to the level)
+    * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
     */
-     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-     ellipsis: PropTypes.bool,
+    level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
+    /**
+    * Choose the element Heading should render as. Will default to the `level` prop
+    * if not specified.
+    */
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-     margin: ThemeablePropTypes.spacing,
-     elementRef: PropTypes.func
+    margin: ThemeablePropTypes.spacing,
+    /**
+    * Provides a ref to the underlying HTML element
+    */
+    elementRef: PropTypes.func
    }
 
    static defaultProps = {
@@ -78,8 +91,7 @@ class Heading extends Component {
      elementRef: undefined,
      border: 'none',
      color: 'inherit',
-     level: 'h2',
-     ellipsis: false
+     level: 'h2'
    }
 
    render () {
@@ -88,9 +100,9 @@ class Heading extends Component {
       children,
       color,
       level,
-      ellipsis,
       margin,
-      elementRef
+      elementRef,
+      ...props
     } = this.props
 
     const ElementType = getElementType(Heading, this.props, () => {
@@ -101,27 +113,21 @@ class Heading extends Component {
       }
     })
 
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Heading.propTypes),
-      Heading
-    )
-
     return (
       <View
-       {...passthroughProps}
-       className={classnames({
-         [styles.root]: true,
-         [styles[level]]: true,
-         [styles[`color-${color}`]]: color,
-         [styles[`border-${border}`]]: border !== 'none',
-         [styles.ellipsis]: ellipsis
-       })}
-       as={ElementType}
-       margin={margin}
-       elementRef={elementRef}
+        {...passthroughProps(props)}
+        className={classnames({
+          [styles.root]: true,
+          [styles[`level--${level}`]]: true,
+          [styles[`color--${color}`]]: color,
+          [styles[`border--${border}`]]: border !== 'none'
+        })}
+        as={ElementType}
+        margin={margin}
+        elementRef={elementRef}
         __dangerouslyIgnoreExperimentalWarnings
       >
-       {children}
+        {children}
       </View>
     )
   }

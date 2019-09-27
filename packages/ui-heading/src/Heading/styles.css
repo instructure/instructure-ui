@@ -1,0 +1,93 @@
+.root {
+  font-family: var(--fontFamily);
+  line-height: var(--lineHeight);
+  margin: 0;
+}
+
+/* stylelint-disable-next-line selector-max-type */
+
+/* NOTE: the input styles exist to accommodate the InPlaceEdit component */
+input.root[type] {
+  outline: 0;
+  appearance: none;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: -0.375rem 0 0 0;   /* stylelint-disable-line unit-blacklist */
+  color: inherit;
+  height: auto;
+  width: 100%;
+  line-height: inherit;
+  text-align: start;
+  box-shadow: none;
+  display: block;
+
+  /* stylelint-disable-next-line selector-max-type */
+  &:focus {
+    outline: none;
+  }
+}
+
+.level--h1 {
+  font-size: var(--h1FontSize);
+  font-weight: var(--h1FontWeight);
+}
+
+.level--h2 {
+  font-size: var(--h2FontSize);
+  font-weight: var(--h2FontWeight);
+}
+
+.level--h3 {
+  font-size: var(--h3FontSize);
+  font-weight: var(--h3FontWeight);
+}
+
+.level--h4 {
+  font-size: var(--h4FontSize);
+  font-weight: var(--h4FontWeight);
+}
+
+.level--h5 {
+  font-size: var(--h5FontSize);
+  font-weight: var(--h5FontWeight);
+}
+
+.level--reset {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.border--top {
+  padding-top: var(--borderPadding);
+  border-top: var(--borderWidth) var(--borderStyle) var(--borderColor);
+}
+
+.border--bottom {
+  padding-bottom: var(--borderPadding);
+  border-bottom: var(--borderWidth) var(--borderStyle) var(--borderColor);
+}
+
+.color--inherit {
+  color: inherit;
+}
+
+.color--primary {
+  color: var(--primaryColor);
+}
+
+.color--secondary {
+  color: var(--secondaryColor);
+}
+
+.color--primary-inverse {
+  color: var(--primaryInverseColor);
+}
+
+.color--secondary-inverse {
+  color: var(--secondaryInverseColor);
+}

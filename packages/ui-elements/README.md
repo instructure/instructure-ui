@@ -33,9 +33,9 @@ const MyAvatar = () => {
 The `ui-elements` package contains the following:
 - Avatar will be removed in version 7.0.0. Use the [Avatar from ui-avatar](#Avatar) instead.
 - [Badge](#Badge)
-- [Heading](#Heading)
 - Img will be removed in version 7.0.0. Use the [Img from ui-img](#Img) instead.
 - Link will be removed in version 7.0.0. Use the [Link from ui-link](#Link) instead.
+- Heading will be removed in version 7.0.0. Use the [Heading from ui-heading](#Heading) instead.
 - [List](#List)
 - [MetricsList](#MetricsList)
 - Pill will be removed in version 7.0.0. Use the [Pill from ui-pill](#Pill) instead.

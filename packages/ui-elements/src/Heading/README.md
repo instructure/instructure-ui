@@ -1,12 +1,20 @@
 ---
-describes: Heading
+describes: DeprecatedHeading
+id: DeprecatedHeading__README
 ---
+
+**DEPRECATED:** DeprecatedHeading will be removed from `ui-elements` in version 7.0.0. Use the [Heading from ui-heading](#Heading) instead.
+
+### Important Upgrade Notes
+The following props have been updated in `ui-heading`:
+- The `ellipsis` prop has been removed. Please update your Headings to use [TruncateText](#TruncateText) for ellipsis instead.
+
 
 ```js
 ---
 example: true
 ---
-<Heading>Default Heading</Heading>
+<DeprecatedHeading>Default Heading</DeprecatedHeading>
 ```
 
 ### Heading level
@@ -19,12 +27,12 @@ Generate content headings, from h1 to h5. Use the `margin` prop to add margin.
 example: true
 ---
 <div>
-  <Heading level="h1" as="h2" margin="0 0 x-small">Heading level One</Heading>
-  <Heading level="h2" as="h1" margin="0 0 x-small">Heading level Two</Heading>
-  <Heading level="h3" margin="0 0 x-small">Heading level Three</Heading>
-  <Heading level="h4" margin="0 0 x-small">Heading level Four</Heading>
-  <Heading level="h5" margin="0 0 x-small">Heading level Five</Heading>
-  <Heading level="reset" as="h2">Heading level reset as a Two</Heading>
+  <DeprecatedHeading level="h1" as="h2" margin="0 0 x-small">Heading level One</DeprecatedHeading>
+  <DeprecatedHeading level="h2" as="h1" margin="0 0 x-small">Heading level Two</DeprecatedHeading>
+  <DeprecatedHeading level="h3" margin="0 0 x-small">Heading level Three</DeprecatedHeading>
+  <DeprecatedHeading level="h4" margin="0 0 x-small">Heading level Four</DeprecatedHeading>
+  <DeprecatedHeading level="h5" margin="0 0 x-small">Heading level Five</DeprecatedHeading>
+  <DeprecatedHeading level="reset" as="h2">Heading level reset as a Two</DeprecatedHeading>
 </div>
 ```
 
@@ -35,9 +43,9 @@ The default is for the color to inherit, but it can be set to `primary` or `seco
 example: true
 ---
 <div>
-  <Heading>I inherit my color via the CSS cascade (default)</Heading>
-  <Heading color="primary">I am primary color</Heading>
-  <Heading color="secondary">I am secondary color</Heading>
+  <DeprecatedHeading>I inherit my color via the CSS cascade (default)</DeprecatedHeading>
+  <DeprecatedHeading color="primary">I am primary color</DeprecatedHeading>
+  <DeprecatedHeading color="secondary">I am secondary color</DeprecatedHeading>
 </div>
 ```
 
@@ -47,8 +55,8 @@ example: true
 background: 'checkerboard-inverse'
 ---
 <div>
-  <Heading color="primary-inverse">I am primary-inverse color</Heading>
-  <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
+  <DeprecatedHeading color="primary-inverse">I am primary-inverse color</DeprecatedHeading>
+  <DeprecatedHeading color="secondary-inverse">I am secondary-inverse color</DeprecatedHeading>
 </div>
 ```
 
@@ -62,10 +70,10 @@ add either `top` or `bottom` borders to your heading.
 example: true
 ---
 <div>
-  <Heading level="h1" border="bottom">I have a bottom border</Heading>
+  <DeprecatedHeading level="h1" border="bottom">I have a bottom border</DeprecatedHeading>
   <br />
   <br />
-  <Heading border="top" level="h3">I have a top border</Heading>
+  <DeprecatedHeading border="top" level="h3">I have a top border</DeprecatedHeading>
 </div>
 ```
 
@@ -78,7 +86,7 @@ wrap. Any overflow will be truncated with an ellipsis `...`
 ---
 example: true
 ---
-<Heading level="h2" ellipsis>{lorem.paragraph()}</Heading>
+<DeprecatedHeading level="h2" ellipsis>{lorem.paragraph()}</DeprecatedHeading>
 ```
 
 ### Guidelines

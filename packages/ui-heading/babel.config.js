@@ -22,45 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { Heading } from '@instructure/ui-heading'
-
-class Section extends Component {
-  static propTypes = {
-    id: PropTypes.string,
-    heading: PropTypes.string,
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    children: null,
-    id: undefined,
-    heading: undefined
-  }
-
-  render () {
-    const heading = this.props.heading && (
-      <Heading
-        level="h1"
-        as="h2"
-        id={this.props.id}
-        __dangerouslyIgnoreExperimentalWarnings
-      >
-        {this.props.heading}
-      </Heading>
-    )
-    return (
-      <div>
-        {heading}
-        <div>
-          {this.props.children}
-        </div>
-      </div>
-    )
-  }
-}
-
-export default Section
-export { Section }
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

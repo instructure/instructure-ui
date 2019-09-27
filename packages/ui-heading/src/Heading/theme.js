@@ -22,45 +22,41 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+export default function generator ({ borders, colors, spacing, typography }) {
+  return {
+    fontFamily: typography.fontFamily,
+    lineHeight: typography.lineHeightFit,
 
-import { Heading } from '@instructure/ui-heading'
+    h1FontSize: typography.fontSizeXXLarge,
+    h1FontWeight: typography.fontWeightLight,
 
-class Section extends Component {
-  static propTypes = {
-    id: PropTypes.string,
-    heading: PropTypes.string,
-    children: PropTypes.node
-  }
+    h2FontSize: typography.fontSizeXLarge,
+    h2FontWeight: typography.fontWeightNormal,
 
-  static defaultProps = {
-    children: null,
-    id: undefined,
-    heading: undefined
-  }
+    h3FontSize: typography.fontSizeLarge,
+    h3FontWeight: typography.fontWeightBold,
 
-  render () {
-    const heading = this.props.heading && (
-      <Heading
-        level="h1"
-        as="h2"
-        id={this.props.id}
-        __dangerouslyIgnoreExperimentalWarnings
-      >
-        {this.props.heading}
-      </Heading>
-    )
-    return (
-      <div>
-        {heading}
-        <div>
-          {this.props.children}
-        </div>
-      </div>
-    )
+    h4FontSize: typography.fontSizeMedium,
+    h4FontWeight: typography.fontWeightBold,
+
+    h5FontSize: typography.fontSizeSmall,
+    h5FontWeight: typography.fontWeightNormal,
+
+    primaryInverseColor: colors.textLightest,
+    primaryColor: colors.textDarkest,
+
+    secondaryColor: colors.textDark,
+    secondaryInverseColor: colors.textLight,
+
+    borderPadding: spacing.xxxSmall,
+    borderColor: colors.borderMedium,
+    borderWidth: borders.widthSmall,
+    borderStyle: borders.style
   }
 }
 
-export default Section
-export { Section }
+generator.canvas = function (variables) {
+  return {
+    primaryColor: variables['ic-brand-font-color-dark']
+  }
+}

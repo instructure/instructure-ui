@@ -35,6 +35,7 @@
     "@instructure/ui-flex": "^6.13.0",
     "@instructure/ui-form-field": "^6.13.0",
     "@instructure/ui-forms": "^6.13.0",
+    "@instructure/ui-heading": "^6.13.0",
     "@instructure/ui-i18n": "^6.13.0",
     "@instructure/ui-icons": "^6.13.0",
     "@instructure/ui-img": "^6.13.0",

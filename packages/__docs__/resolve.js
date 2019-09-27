@@ -78,6 +78,7 @@ module.exports = {
     '@instructure/ui-react-utils$': path.resolve(__dirname, '../ui-react-utils/src/'),
     '@instructure/ui-dom-utils$': path.resolve(__dirname, '../ui-dom-utils/src/'),
     '@instructure/ui-color-utils$': path.resolve(__dirname, '../ui-color-utils/src/'),
-    '@instructure/ui-file-drop$': path.resolve(__dirname, '../ui-file-drop/src')
+    '@instructure/ui-file-drop$': path.resolve(__dirname, '../ui-file-drop/src'),
+    '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src')
   }
 }
