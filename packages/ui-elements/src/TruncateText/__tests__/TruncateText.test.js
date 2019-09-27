@@ -114,6 +114,27 @@ describe('<TruncateText />', async () => {
     })
   })
 
+  it('should re-render with new children if children change', async () => {
+    const subject = await mount(
+      <TruncateText>
+        <span>{defaultText}</span>
+      </TruncateText>
+    )
+
+    const renderedContent = within(subject.getDOMNode())
+    const text = renderedContent.getTextContent()
+
+    await subject.setProps({
+      children: (
+        <span>This is a different string of text</span>
+      )
+    })
+
+    await wait(() => {
+      expect(renderedContent.getTextContent()).to.not.equal(text)
+    })
+  })
+
   it('should call onUpdate when text changes', async () => {
     const onUpdate = stub()
 

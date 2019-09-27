@@ -205,7 +205,7 @@ class Example extends React.Component {
       >
         {this.state.isTruncated ? (
           <Tooltip
-            tip={this.props.message}
+            renderTip={this.props.message}
             mountNode={() => document.getElementById('main')}
           >
             { this.renderLink() }

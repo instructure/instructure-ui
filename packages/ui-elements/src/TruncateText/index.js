@@ -155,11 +155,13 @@ class TruncateText extends Component {
 
     if (children) {
       if (prevProps !== this.props) {
-        // require the double render whenever props change
-        this.setState(this.initialState, () => {
+        if (prevProps.children !== this.props.children) {
+          // reset internal text variable if children change
           this.checkChildren()
           this._text = ensureSingleChild(children)
-        })
+        }
+        // require the double render whenever props change
+        this.setState(this.initialState)
         return
       }
 
