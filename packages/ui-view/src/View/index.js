@@ -259,7 +259,27 @@ class View extends Component {
 
   componentDidMount () {
     error(
-      !this.verifySpanMargin(this._element, this.props.margin),
+      !((function verifySpanMargin (element, margin) {
+        if (!element) {
+          return
+        }
+        const marginValues = margin ? margin.split(' ') : null
+        const display = getComputedStyle(element).display
+
+        let verticalMargin = false
+
+        // either top or bottom margin are set
+        if (margin) {
+          if (marginValues[0] && (marginValues[0] !== 'none' && marginValues[0] !== '0')) {
+            verticalMargin = true
+          }
+          if (marginValues[2] && (marginValues[2] !== 'none' && marginValues[2] !== '0')) {
+            verticalMargin = true
+          }
+        }
+
+        return verticalMargin && display === 'inline'
+      })(this._element, this.props.margin)),
       `[View] display style is set to 'inline' and will allow for horizontal margins only.`
     )
   }
@@ -403,29 +423,6 @@ class View extends Component {
     }
 
     this._element = el
-  }
-
-  verifySpanMargin = (element, margin) => {
-    if (!element) {
-      return
-    }
-
-    const marginValues = margin ? margin.split(' ') : null
-    const display = getComputedStyle(element).display
-
-    let verticalMargin = false
-
-    // either top or bottom margin are set
-    if (margin) {
-      if (marginValues[0] && (marginValues[0] !== 'none' && marginValues[0] !== '0')) {
-        verticalMargin = true
-      }
-      if (marginValues[2] && (marginValues[2] !== 'none' && marginValues[2] !== '0')) {
-        verticalMargin = true
-      }
-    }
-
-    return verticalMargin && display === 'inline'
   }
 
   // verify that each value passed into ThemeablePropType is identical
