@@ -4,7 +4,7 @@ category: packages
 
 ## @instructure/ui-themeable
 
-The [@instructure/ui-themeable](#themeable) library is meant to be used along with a [babel plugin](#babel-plugin-themeable-styles)
+The [@instructure/ui-themeable](#ui-themeable) library is meant to be used along with a [babel plugin](#babel-plugin-themeable-styles)
 to import CSS styles and generate theme variables. With this framework, each UI component can be used in
 isolation and support multiple themes, including dynamic themes provided at runtime, while still working within
 a system of components that use a [shared global theme](#canvas).
