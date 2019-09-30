@@ -223,6 +223,25 @@ describe('<Alert />', async () => {
     })
   })
 
+  it('should set aria-atomic to the aria live region when isLiveRegionAtomic is present', async () => {
+    const liver = document.getElementById('_alertLiveRegion')
+    await mount(
+      <Alert
+        variant="success"
+        transition="none"
+        liveRegion={() => liver}
+        liveRegionPoliteness="polite"
+        isLiveRegionAtomic
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    expect(liver.innerText).to.include('Success: Sample alert text.')
+    expect(liver.getAttribute("aria-atomic")).to.equal('true')
+  })
+
+
   it('should close when told to, with transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     const subject = await mount(

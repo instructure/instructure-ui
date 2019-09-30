@@ -81,6 +81,10 @@ class Alert extends Component {
     */
     liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
     /**
+    * If the screenreader alert should be atomic
+    */
+    isLiveRegionAtomic: PropTypes.bool,
+    /**
      * If the alert should only be visible to screen readers
      */
     screenReaderOnly: PropTypes.bool,
@@ -119,6 +123,7 @@ class Alert extends Component {
     open: true,
     screenReaderOnly: false,
     liveRegionPoliteness: 'assertive',
+    isLiveRegionAtomic: false,
     onDismiss: undefined,
     liveRegion: undefined,
     renderCloseButtonLabel: undefined,
@@ -211,7 +216,7 @@ class Alert extends Component {
     if (liveRegion) {
       liveRegion.setAttribute('aria-live', this.props.liveRegionPoliteness)
       liveRegion.setAttribute('aria-relevant', 'additions text')
-      liveRegion.setAttribute('aria-atomic', 'false')
+      liveRegion.setAttribute('aria-atomic', this.props.isLiveRegionAtomic)
     }
   }
 

@@ -66,7 +66,8 @@ example: true
 
 Given a `liveRegion` property, Alerts will guarantee a screenreader will announce their text.
 Use `liveRegionPoliteness` to choose an `aria-live` politeness setting of either `polite`
-or `assertive` (default).
+or `assertive` (default). Use `isLiveRegionAtomic` to choose an `aria-atomic` setting 
+of either `true` or `false` (default).
 
 Due to a bug in some screen readers, the live region element should be static, either through
 server rendering or included in the static HTML file for the app. The Alert component will
@@ -183,6 +184,7 @@ class Example extends React.Component {
         <Button onClick={this.clearMessage} margin="0 0 0 small">Clear Message</Button>
         <Alert
           liveRegion={() => document.getElementById('flash-messages')}
+          isLiveRegionAtomic
           screenReaderOnly
          >
             {this.state.message}
@@ -224,6 +226,7 @@ guidelines: true
     <Figure.Item>If the alert requires user interaction to be dismissed, the alert should behave as a modal dialog. Focus should be set to the alert when it appears, remain in the alert until it is dismissed, and return to a logical place on the page when the alert is dismissed</Figure.Item>
     <Figure.Item>aria-live="polite" alerts will only be announced if the user is not currently doing anything. Polite should be used in most situations involving live regions that present new info to users</Figure.Item>
     <Figure.Item>aria-live="assertive" alerts will be announced to the user as soon as possible, but not necessarily immediately. Assertive should be used if there is information that a user must know about right away, for example, a warning message in a form that does validation on the fly</Figure.Item>
+    <Figure.Item>The aria-atomic=BOOLEAN is used to set whether or not the screen reader should always present the live region as a whole, even if only part of the region changes. The possible settings are: false or true. The default setting is false.</Figure.Item>
   </Figure>
 </Guidelines>
 ```
