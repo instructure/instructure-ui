@@ -21,24 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import { List } from '../index'
+import { locator } from '@instructure/ui-test-utils'
 
-export default {
-  sectionProp: 'size',
-  getComponentProps: (props) => {
-    return {
-      children: [
-        <List.Item key="1">Oranges</List.Item>,
-        <List.Item key="2">Pineapples</List.Item>,
-        <List.Item key="3">Bananas</List.Item>
-      ]
-    }
+import { List } from './index'
+
+const ListItemLocator = locator(List.Item.selector)
+
+export default locator(List.selector, {
+  findAllItems: (...args) => {
+    return ListItemLocator.findAll(...args)
   },
-  filter: (props) => {
-    return ['dashed', 'solid'].includes(props.delimiter) && props.variant === 'inline' ||
-    ['slash', 'pipe', 'arrow'].includes(props.delimiter) && props.variant !== 'inline' ||
-    props.delimiter !== 'none' && props.itemSpacing !== 'none' ||
-    props.as === 'ol' && props.variant !== 'default'
+  findItem: (...args) => {
+    return ListItemLocator.find(...args)
   }
-}
+})

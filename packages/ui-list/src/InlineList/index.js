@@ -23,34 +23,27 @@
  */
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import { ListItem } from './ListItem'
-
-import styles from './styles.css'
-import theme from './theme'
+import { Item } from './Item'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedList
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use List from ui-list instead')
 @testable()
-@themeable(theme, styles)
-class List extends Component {
+class InlineList extends Component {
   static propTypes = {
     /**
-    * Only accepts `<List.Item>` as a child
+    * Only accepts `<InlineList.Item>` as a child
     */
-    children: ChildrenPropTypes.oneOf([ListItem]),
+    children: ChildrenPropTypes.oneOf([Item]),
     as: PropTypes.oneOf(['ul', 'ol']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -59,8 +52,7 @@ class List extends Component {
     */
     margin: ThemeablePropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    variant: PropTypes.oneOf(['default', 'unstyled', 'inline']),
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow', 'dashed', 'solid']),
+    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
     /**
     * Sets the margin separating each ListItem.
     */
@@ -80,23 +72,21 @@ class List extends Component {
 
   static defaultProps = {
     children: null,
-    itemSpacing: undefined,
-    elementRef: undefined,
+    itemSpacing: 'none',
+    elementRef: (el) => {},
     as: 'ul',
     margin: 'none',
-    variant: 'default',
     delimiter: 'none',
     size: 'medium'
   }
 
-  static Item = ListItem
+  static Item = Item
 
   renderChildren () {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children
 
       return safeCloneElement(child, {
-        variant: this.props.variant,
         delimiter: this.props.delimiter,
         size: this.props.size,
         spacing: this.props.itemSpacing
@@ -105,32 +95,23 @@ class List extends Component {
   }
 
   render () {
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, List.propTypes),
-      List
-    )
 
     const {
       as,
       margin,
-      variant,
-      elementRef
+      elementRef,
+      ...rest
     } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[variant]]: variant,
-      [styles.unordered]: as === 'ul',
-      [styles.ordered]: as === 'ol'
-    }
 
     return (
       <View
-        {...passthroughProps}
-        className={classnames(classes)}
+        {...passthroughProps(rest)}
         as={as}
         margin={margin}
+        padding="0"
         elementRef={elementRef}
+        display="block"
+        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.renderChildren()}
       </View>
@@ -138,5 +119,5 @@ class List extends Component {
   }
 }
 
-export default List
-export { List, ListItem }
+export default InlineList
+export { InlineList }

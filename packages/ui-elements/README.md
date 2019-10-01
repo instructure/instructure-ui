@@ -36,7 +36,7 @@ The `ui-elements` package contains the following:
 - [Img](#DeprecatedImg) will be removed in version 7.0.0. Use [Img](#Img) from [ui-img](#ui-img).
 - [Link](#DeprecatedLink) will be removed in version 7.0.0. Use [Link](#Link) from [ui-link](#ui-link).
 - [Heading](#DeprecatedHeading) will be removed in version 7.0.0. Use the [Heading](#Heading) from [ui-heading](#ui-heading).
-- [List](#List)
+- [List](#DeprecatedList) will be removed in version 7.0.0. Use [List](#List) or [InlineList](#InlineList) from [ui-list](#ui-list).
 - [MetricsList](#DeprecatedMetricsList) will be removed in version 7.0.0. Use the [MetricGroup](#MetricGroup) or [Metric](#Metric) from [ui-metric](#ui-metric).
 - [Pill](#DeprecatedPill) will be removed in version 7.0.0. Use [Pill](#Pill) from [ui-pill](#ui-pill).
 - Progress will be removed in version 7.0.0. Use [ProgressBar](#ProgressBar) or [ProgressCircle](#ProgressCircle) from `ui-progress` instead.
@@ -46,6 +46,7 @@ The `ui-elements` package contains the following:
 - [Tag](#Tag)
 - [Text](#DeprecatedText) will be removed in version 7.0.0. Use [Text](#Text) from [ui-text](#ui-text).
 - [TruncateText](#TruncateText)
+
 
 ### Contribute
 

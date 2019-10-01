@@ -63,7 +63,7 @@ export {
   Tag,
   Text as DeprecatedText,
   TruncateText,
-  List,
+  List as DeprecatedList,
   MetricsList as DeprecatedMetricsList
 } from '@instructure/ui-elements'
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
@@ -121,6 +121,7 @@ export { Popover } from '@instructure/ui-popover'
 export { Tooltip } from '@instructure/ui-tooltip'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
 export { Navigation, AppNav } from '@instructure/ui-navigation'
+export { List, InlineList } from '@instructure/ui-list'
 export { Menu } from '@instructure/ui-menu'
 export { Options } from '@instructure/ui-options'
 export { Pagination } from '@instructure/ui-pagination'

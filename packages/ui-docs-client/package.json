@@ -41,6 +41,7 @@
     "@instructure/ui-img": "^6.14.0",
     "@instructure/ui-layout": "^6.14.0",
     "@instructure/ui-link": "^6.14.0",
+    "@instructure/ui-list": "^6.14.0",
     "@instructure/ui-overlays": "^6.14.0",
     "@instructure/ui-pill": "^6.14.0",
     "@instructure/ui-prop-types": "^6.14.0",

@@ -97,6 +97,7 @@ export default function generator ({
 
 generator.canvas = function (variables) {
   return {
+    color: variables['ic-brand-font-color-dark'],
     focusColorInfo: variables['ic-brand-primary'],
     backgroundBrand: variables['ic-brand-primary'],
     backgroundInfo: variables['ic-brand-primary'],

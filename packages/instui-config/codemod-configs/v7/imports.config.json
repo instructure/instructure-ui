@@ -24,6 +24,10 @@
     "replace": "@instructure/ui-metric/lib/MetricGroup"
   },
   {
+    "pattern": "^@instructure/ui-elements/lib/List",
+    "replace": "@instructure/ui-list/lib/List"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/Pill",
     "replace": "@instructure/ui-pill/lib/Pill"
   },

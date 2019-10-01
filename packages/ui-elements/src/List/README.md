@@ -1,6 +1,8 @@
 ---
-describes: List
+describes: DeprecatedList
+id: DeprecatedList__README
 ---
+**DEPRECATED:** List will be removed from `ui-elements` in version 7.0.0. Use the [List from ui-list](#List) or [InlineList from ui-list](#InlineList) instead.
 
 By default, `<List>` creates an unordered list of its children. Change the `as` prop to
 create an ordered list instead.
@@ -12,16 +14,16 @@ create an ordered list instead.
 example: true
 ---
 <div>
-  <List margin="0 0 small">
-    <List.Item>List item 1</List.Item>
-    <List.Item>List item 2</List.Item>
-    <List.Item>List item 3</List.Item>
-  </List>
-  <List as="ol">
-    <List.Item>List item 1</List.Item>
-    <List.Item>List item 2</List.Item>
-    <List.Item>List item 3</List.Item>
-  </List>
+  <DeprecatedList margin="0 0 small">
+    <DeprecatedList.Item>List item 1</DeprecatedList.Item>
+    <DeprecatedList.Item>List item 2</DeprecatedList.Item>
+    <DeprecatedList.Item>List item 3</DeprecatedList.Item>
+  </DeprecatedList>
+  <DeprecatedList as="ol">
+    <DeprecatedList.Item>List item 1</DeprecatedList.Item>
+    <DeprecatedList.Item>List item 2</DeprecatedList.Item>
+    <DeprecatedList.Item>List item 3</DeprecatedList.Item>
+  </DeprecatedList>
 </div>
 ```
 
@@ -34,11 +36,11 @@ links, etc.
 ---
 example: true
 ---
-<List variant="unstyled">
-  <List.Item><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
-  <List.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></List.Item>
-  <List.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></List.Item>
-</List>
+<DeprecatedList variant="unstyled">
+  <DeprecatedList.Item><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></DeprecatedList.Item>
+</DeprecatedList>
 ```
 
 ### `delimiter`
@@ -49,11 +51,11 @@ The `delimiter` lets you set a separator between items of the list.
 ---
 example: true
 ---
-<List delimiter="solid">
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>{lorem.sentence()}</List.Item>
-</List>
+<DeprecatedList delimiter="solid">
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+</DeprecatedList>
 ```
 
 For a dashed line, set `delimiter` to `dashed`:
@@ -62,11 +64,11 @@ For a dashed line, set `delimiter` to `dashed`:
 ---
 example: true
 ---
-<List delimiter="dashed" variant="unstyled">
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>{lorem.sentence()}</List.Item>
-</List>
+<DeprecatedList delimiter="dashed" variant="unstyled">
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+</DeprecatedList>
 ```
 
 ### `inline`
@@ -77,12 +79,12 @@ The `inline` variant renders a horizontal list of items. You can separate each `
 ---
 example: true
 ---
-<List variant="inline" size="small">
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>10pts</List.Item>
-  <List.Item><b>Due:</b> Jan 17, 2018</List.Item>
-  <List.Item><Link href="#">Submitted</Link></List.Item>
-</List>
+<DeprecatedList variant="inline" size="small">
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>10pts</DeprecatedList.Item>
+  <DeprecatedList.Item><b>Due:</b> Jan 17, 2018</DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="#">Submitted</Link></DeprecatedList.Item>
+</DeprecatedList>
 ```
 
 Inline list with a `pipe` delimiter.
@@ -91,12 +93,12 @@ Inline list with a `pipe` delimiter.
 ---
 example: true
 ---
-<List variant="inline" delimiter="pipe" size="small">
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>10pts</List.Item>
-  <List.Item><b>Due:</b> Jan 17, 2018</List.Item>
-  <List.Item><Link href="#">Submitted</Link></List.Item>
-</List>
+<DeprecatedList variant="inline" delimiter="pipe" size="small">
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>10pts</DeprecatedList.Item>
+  <DeprecatedList.Item><b>Due:</b> Jan 17, 2018</DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="#">Submitted</Link></DeprecatedList.Item>
+</DeprecatedList>
 ```
 
 Inline list with a `slash` delimiter.
@@ -105,12 +107,12 @@ Inline list with a `slash` delimiter.
 ---
 example: true
 ---
-<List variant="inline" delimiter="slash" size="small">
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>10pts</List.Item>
-  <List.Item><b>Due:</b> Jan 17, 2018</List.Item>
-  <List.Item><Link href="#">Submitted</Link></List.Item>
-</List>
+<DeprecatedList variant="inline" delimiter="slash" size="small">
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>10pts</DeprecatedList.Item>
+  <DeprecatedList.Item><b>Due:</b> Jan 17, 2018</DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="#">Submitted</Link></DeprecatedList.Item>
+</DeprecatedList>
 ```
 
 Inline list with a `arrow` delimiter.
@@ -119,12 +121,12 @@ Inline list with a `arrow` delimiter.
 ---
 example: true
 ---
-<List variant="inline" delimiter="arrow" size="small">
-  <List.Item>{lorem.sentence()}</List.Item>
-  <List.Item>10pts</List.Item>
-  <List.Item><b>Due:</b> Jan 17, 2018</List.Item>
-  <List.Item><Link href="#">Submitted</Link></List.Item>
-</List>
+<DeprecatedList variant="inline" delimiter="arrow" size="small">
+  <DeprecatedList.Item>{lorem.sentence()}</DeprecatedList.Item>
+  <DeprecatedList.Item>10pts</DeprecatedList.Item>
+  <DeprecatedList.Item><b>Due:</b> Jan 17, 2018</DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="#">Submitted</Link></DeprecatedList.Item>
+</DeprecatedList>
 ```
 
 ### Adding margin between List.Items
@@ -137,16 +139,16 @@ at the top/bottom or start/end of a List, the _first_ and _last_ List.Items will
 example: true
 ---
 <div>
-  <List variant="unstyled" itemSpacing="small">
-    <List.Item><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
-    <List.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></List.Item>
-    <List.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></List.Item>
-  </List>
-  <List variant="inline" margin="large 0 0" itemSpacing="large">
-    <List.Item><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
-    <List.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></List.Item>
-    <List.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></List.Item>
-  </List>
+  <DeprecatedList variant="unstyled" itemSpacing="small">
+    <DeprecatedList.Item><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></DeprecatedList.Item>
+    <DeprecatedList.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></DeprecatedList.Item>
+    <DeprecatedList.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></DeprecatedList.Item>
+  </DeprecatedList>
+  <DeprecatedList variant="inline" margin="large 0 0" itemSpacing="large">
+    <DeprecatedList.Item><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></DeprecatedList.Item>
+    <DeprecatedList.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></DeprecatedList.Item>
+    <DeprecatedList.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></DeprecatedList.Item>
+  </DeprecatedList>
 </div>
 ```
 
@@ -157,9 +159,9 @@ you need different spacing around certain List.Items in the List.
 ---
 example: true
 ---
-<List variant="unstyled" itemSpacing="small">
-  <List.Item margin="x-large"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></List.Item>
-  <List.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></List.Item>
-  <List.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></List.Item>
-</List>
+<DeprecatedList variant="unstyled" itemSpacing="small">
+  <DeprecatedList.Item margin="x-large"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="https://www.getbridge.com">Bridge by Instructure</Link></DeprecatedList.Item>
+  <DeprecatedList.Item><Link href="https://www.arcmedia.com">Arc by Instructure</Link></DeprecatedList.Item>
+</DeprecatedList>
 ```
