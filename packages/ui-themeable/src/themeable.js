@@ -133,8 +133,8 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
       return emptyObj
     }
   }
-  const generateThemeForContextKey = function (themeKey, overrides) {
-    return generateComponentTheme(contextKey, themeKey, overrides)
+  const generateThemeForContextKey = function (themeKey, contextTheme, props, overrides) {
+    return generateComponentTheme(contextKey, themeKey, contextTheme, props, overrides)
   }
   class ThemeableComponent extends ComposedComponent {
     constructor() {
@@ -210,25 +210,11 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
       if (this._themeCache !== null) {
         return this._themeCache
       }
-      const { immutable } = getContext(this.context)
-      let theme = getThemeFromContext(this.context)
-      if (this.props.theme && !isEmpty(this.props.theme)) {
-        if (!theme) {
-          theme = this.props.theme
-        } else if (immutable) {
-          warn(
-            false,
-            '[themeable] Parent theme is immutable. Cannot apply theme: %O',
-            this.props.theme
-          )
-        } else {
-          theme = isEmpty(theme)
-            ? this.props.theme
-            : Object.assign({}, theme, this.props.theme)
-        }
-      }
-      // pass in the component theme as overrides
-      this._themeCache = generateThemeForContextKey(null, theme)
+
+      const contextTheme = getThemeFromContext(this.context)
+      const { themeKey } = getContext(this.context)
+
+      this._themeCache = generateThemeForContextKey(themeKey, contextTheme, this.props)
       return this._themeCache
     }
   }
@@ -243,7 +229,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   ThemeableComponent.propTypes = Object.assign(
     {},
     ComposedComponent.propTypes,
-    { theme: PropTypes.object } // eslint-disable-line react/forbid-prop-types
+    { theme: PropTypes.oneOfType([PropTypes.func, PropTypes.object]) } // eslint-disable-line react/forbid-prop-types
   )
   ThemeableComponent.generateTheme = generateThemeForContextKey
 

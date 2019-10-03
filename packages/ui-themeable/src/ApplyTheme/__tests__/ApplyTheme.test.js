@@ -30,10 +30,11 @@ import { themeable } from '../../themeable'
 import { ApplyTheme } from '../index'
 
 describe('<ApplyTheme />', async () => {
-  const themeVariables = function () {
+  const themeVariables = function (variables, props) {
+    const { textColor, backgroundColor } = props
     return {
-      textColor: 'red',
-      backgroundColor: 'yellow'
+      textColor: textColor ? textColor : 'red',
+      backgroundColor: backgroundColor ? backgroundColor : 'yellow'
     }
   }
 
@@ -96,5 +97,28 @@ describe('<ApplyTheme />', async () => {
 
     expect(component.getComputedStyle().color).to.equal('rgb(0, 0, 255)') // blue
     expect(component.getComputedStyle().backgroundColor).to.equal('rgb(128, 128, 128)') // grey
+  })
+
+  it('can be overwritten by theme vars that are configured with component props', async () => {
+    const textColor = 'rgb(238, 130, 238)' // violet
+    const backgroundColor = 'rgb(255, 253, 208)' // cream
+
+    const contextTheme = {
+      [ThemeableComponent.theme]: {
+        textColor: 'green',
+        backgroundColor: 'grey'
+      }
+    }
+
+    await mount(
+      <ApplyTheme theme={contextTheme}>
+        <ThemeableComponent textColor={textColor} backgroundColor={backgroundColor} />
+      </ApplyTheme>
+    )
+
+    const component = await ThemeableComponentLocator.find()
+
+    expect(component.getComputedStyle().color).to.equal(textColor)
+    expect(component.getComputedStyle().backgroundColor).to.equal(backgroundColor)
   })
 })

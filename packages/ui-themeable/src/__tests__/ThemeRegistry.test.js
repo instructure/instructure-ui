@@ -39,9 +39,9 @@ describe('ThemeRegistry', () => {
   const KEY = Symbol('ThemedComponent')
   const registry = getRegistry()
 
-  const generator = function (vars) {
+  const generator = function (vars, props = {}) {
     return {
-      color: vars.red,
+      color: props.color || vars.red,
       linkColor: vars.blue,
       buttonPrimaryColor: vars.green,
       buttonPrimaryBackground: vars.purple
@@ -66,6 +66,10 @@ describe('ThemeRegistry', () => {
     blue: 'blue',
     green: 'green',
     purple: 'purple'
+  }
+
+  const props = {
+    color: 'orange'
   }
 
   let defaultTheme
@@ -136,24 +140,6 @@ describe('ThemeRegistry', () => {
 
       expect(theme[KEY].color).to.equal('maroon')
     })
-    it('should NOT allow overriding an accessible theme', () => {
-      const consoleWarn = spy(console, 'warn')
-
-      defaultTheme.use({ accessible: true })
-
-
-      const theme = generateTheme(undefined, {
-        red: 'maroon'
-      })
-
-      expect(consoleWarn)
-        .to.have.been.calledWith([
-          'Warning: [themeable] Theme, \'accessible\', is immutable.',
-          'Cannot apply overrides: {"red":"maroon"}'
-        ].join(' '))
-
-      expect(theme[KEY].color).to.equal('salmon')
-    })
   })
 
   describe('#generateComponentTheme', () => {
@@ -182,6 +168,35 @@ describe('ThemeRegistry', () => {
 
       expect(theme.linkColor).to.equal('turquoise')
     })
+    it('should pass any provided component props to the generator function', () => {
+      const theme = generateComponentTheme(KEY, null, null, props)
+
+      expect(theme.color).to.equal('orange')
+    })
+    it('should pass any provided component props to the generator function', () => {
+      const theme = generateComponentTheme(KEY, null, null, props)
+
+      expect(theme.color).to.equal('orange')
+    })
+    it('should call theme passed via props with component props when it is a function', () => {
+      const componentProps = {
+        variant: 'danger',
+        theme: (variables, props) => {
+          return {
+            linkColor: props.variant === 'danger' ? 'red' : 'blue'
+          }
+        }
+      }
+
+      const themeSpy = spy(componentProps, 'theme')
+
+      const theme = generateComponentTheme(KEY, null, null, componentProps)
+
+      const { args } = themeSpy.lastCall
+
+      expect(args[1]).to.deep.equal(componentProps)
+      expect(theme.linkColor).to.equal('red')
+    })
     it('should allow overriding the default theme', () => {
       const theme = generateComponentTheme(KEY, null, {
         linkColor: 'yellow'
@@ -195,23 +210,6 @@ describe('ThemeRegistry', () => {
       })
 
       expect(theme.color).to.equal('maroon')
-    })
-    it('should NOT allow overriding an accessible theme', () => {
-      const consoleWarn = spy(console, 'warn')
-
-      defaultTheme.use({ accessible: true })
-
-
-      const theme = generateComponentTheme(KEY, undefined, {
-        color: 'maroon'
-      })
-
-      expect(consoleWarn).to.have.been.calledWith([
-        'Warning: [themeable] Theme \'accessible\' is immutable.',
-        'Cannot apply overrides for \'Symbol(ThemedComponent)\': {"color":"maroon"}'
-      ].join(' '))
-
-      expect(theme.color).to.equal('salmon')
     })
     it('should generate a component theme when no themes are registered', () => {
       clearRegistry()

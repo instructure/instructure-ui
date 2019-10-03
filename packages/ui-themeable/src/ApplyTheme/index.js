@@ -44,6 +44,10 @@ class ApplyTheme extends Component {
     */
     theme: PropTypes.object,
     /**
+     * the theme key identifying the theme in the global theme registry
+     */
+    themeKey: PropTypes.string,
+    /**
     * accepts only one child (children must be wrapped in a single component/element)
     */
     children: PropTypes.node,
@@ -55,6 +59,7 @@ class ApplyTheme extends Component {
 
   static defaultProps = {
     theme: undefined,
+    themeKey: null,
     children: null,
     immutable: false
   }
@@ -67,6 +72,7 @@ class ApplyTheme extends Component {
 
   getChildContext () {
     let theme = this.props.theme || {}
+    const { themeKey } = this.props
 
     const parentThemeContext = ThemeContext.getThemeContext(this.context) || {}
 
@@ -81,7 +87,7 @@ class ApplyTheme extends Component {
       theme = mergeDeep(parentThemeContext.theme, theme)
     }
 
-    return ThemeContext.makeThemeContext(theme, parentThemeContext.immutable || this.props.immutable)
+    return ThemeContext.makeThemeContext(theme, themeKey, parentThemeContext.immutable || this.props.immutable)
   }
 
   render () {

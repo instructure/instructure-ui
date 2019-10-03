@@ -48,9 +48,10 @@ const ThemeContext = {
    * @param {Object} theme an object containing [themeable](#themeable) component themes
    * @param {Boolean} immutable prevent theme overrides?
    */
-  makeThemeContext (theme, immutable) {
+  makeThemeContext (theme, themeKey, immutable) {
     return {[CONTEXT_KEY]: {
       theme,
+      themeKey,
       immutable
     }}
   },

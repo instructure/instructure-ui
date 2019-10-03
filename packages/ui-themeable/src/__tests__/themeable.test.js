@@ -23,16 +23,19 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import PropTypes from 'prop-types'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { themeable } from '../themeable'
 import { ThemeContext } from '../ThemeContext'
 
 describe('@themeable', async () => {
-  const theme = function () {
+  const theme = function (variables, props = {}) {
+    const { textColor, backgroundColor } = props
+
     return {
-      textColor: 'rgb(0, 128, 0)',
-      backgroundColor: 'rgb(255, 255, 0)'
+      textColor: textColor ? textColor : 'rgb(0, 128, 0)',
+      backgroundColor: backgroundColor ? backgroundColor : 'rgb(255, 255, 0)'
     }
   }
   const styles = {
@@ -49,10 +52,18 @@ describe('@themeable', async () => {
   }
 
   class ExampleComponent extends React.Component {
+    static propTypes = {
+      children: PropTypes.node
+    }
+
+    static defaultProps = {
+      children: 'Hello World'
+    }
+
     render () {
       return (
         <div className={styles.root} data-scope={this.scope}>
-          Hello World
+          {this.props.children}
         </div>
       )
     }
@@ -110,6 +121,78 @@ describe('@themeable', async () => {
 
     expect(getComputedStyle(component).color).to.equal('rgb(0, 128, 0)') // green
     expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
+  })
+
+  it('Passes component props to the theme', async () => {
+    const textColor = 'rgb(128, 0, 128)' // purple
+    const backgroundColor = 'rgb(255, 165, 0)' // orange
+
+    const subject = await mount(<ThemeableComponent textColor={textColor} backgroundColor={backgroundColor} />)
+    const component = subject.getDOMNode()
+
+    expect(getComputedStyle(component).color).to.equal(textColor)
+    expect(getComputedStyle(component).backgroundColor).to.equal(backgroundColor)
+  })
+
+  it('Passes component props to the theme when it is passed via props functionally', async () => {
+    const textColor = 'rgb(128, 0, 128)' // purple
+    const backgroundColor = 'rgb(255, 165, 0)' // orange
+
+    const subject = await mount(
+      <ThemeableComponent
+        variant="default"
+        theme={(vars, props) => ({
+          textColor: props.variant === 'default' ? textColor : 'rgb(0, 128, 0)',
+          backgroundColor: props.variant === 'default' ? backgroundColor : 'rgb(255, 255, 0)'
+        })}
+      />
+    )
+    const component = subject.getDOMNode()
+
+    expect(getComputedStyle(component).color).to.equal(textColor)
+    expect(getComputedStyle(component).backgroundColor).to.equal(backgroundColor)
+  })
+
+  it('Allows for configuration through theme prop even when component props are used in the theme', async () => {
+    const textColor = 'rgb(238, 130, 238)' // violet
+    const backgroundColor = 'rgb(255, 253, 208)' // cream
+
+    const subject = await mount(
+      <ThemeableComponent
+        textColor="rgb(128, 0, 128)"
+        backgroundColor="rgb(255, 165, 0)"
+        theme={{
+          textColor,
+          backgroundColor
+        }}
+      />
+    )
+    const component = subject.getDOMNode()
+
+    expect(getComputedStyle(component).color).to.equal(textColor)
+    expect(getComputedStyle(component).backgroundColor).to.equal(backgroundColor)
+  })
+
+  it('Should scope the theme variables to multiple instances of the same component with different props set', async () => {
+    const textColorViolet = 'rgb(238, 130, 238)' // violet
+    const textColorOrange = 'rgb(255, 165, 0)' // orange
+
+    const violetChildren = 'Violet Text'
+    const orangeChildren = 'Orange Text'
+
+    const subject = await mount(
+      <div>
+        <ThemeableComponent textColor={textColorViolet}>{violetChildren}</ThemeableComponent>
+        <ThemeableComponent textColor={textColorOrange}>{orangeChildren}</ThemeableComponent>
+      </div>
+    )
+
+    const container = within(subject.getDOMNode())
+    const violetNode = await container.find(`:withText(${violetChildren})`)
+    const orangeNode = await container.find(`:withText(${orangeChildren})`)
+
+    expect(getComputedStyle(violetNode.getDOMNode()).color).to.equal(textColorViolet)
+    expect(getComputedStyle(orangeNode.getDOMNode()).color).to.equal(textColorOrange)
   })
 
   it('applies theme css variables to the root node', async () => {

@@ -199,6 +199,22 @@ function getRegisteredTheme (themeKey, defaultTheme = {}) {
   }
 }
 
+function getVariables (themeKey) {
+  return {
+    borders: { },
+    breakpoints: { },
+    colors: { },
+    forms: { },
+    media: { },
+    shadows: { },
+    spacing: { },
+    stacking: { },
+    transitions: { },
+    typography: { },
+    ...mergeWithDefaultThemeVariables(themeKey)
+  }
+}
+
 function getVariablesWithOverrides (themeKey, overrides) {
   const theme = getRegisteredTheme(themeKey)
   const variables = theme.variables || {}
@@ -254,11 +270,11 @@ function mergeWithDefaultThemeVariables (themeKey, overrides) {
  * @return {Object} A wrapped theme object
  */
 function makeComponentTheme (componentThemeFunction, themeKey) {
-  return function (variables) {
+  return function (variables, props) {
     let theme = {}
 
     if (typeof componentThemeFunction === 'function') {
-      theme = componentThemeFunction(variables)
+      theme = componentThemeFunction(variables, props)
     }
 
     // so that the components for the themeKey can
@@ -266,7 +282,7 @@ function makeComponentTheme (componentThemeFunction, themeKey) {
     let defaultComponentTheme = {}
 
     if (typeof componentThemeFunction[themeKey] === 'function') {
-      defaultComponentTheme = componentThemeFunction[themeKey](variables)
+      defaultComponentTheme = componentThemeFunction[themeKey](variables, props)
     }
 
     if (!isEmpty(defaultComponentTheme) && !isEmpty(theme)) {
@@ -347,7 +363,7 @@ function generateTheme (themeKey, overrides) {
 
   Object.getOwnPropertySymbols(components)
     .forEach((componentKey) => {
-      theme[componentKey] = components[componentKey](variables)
+      theme[componentKey] = components[componentKey](variables, {})
     })
 
   return theme
@@ -359,59 +375,71 @@ function generateTheme (themeKey, overrides) {
  *
  * @param {Symbol} key The theme key for the component (e.g., [Link.theme])
  * @param {String} themeKey The theme to use to generate the variables (falls back to the default theme)
- * @param {Object} overrides overrides for component level theme variables (usually user defined)
+ * @param {Object} contextTheme The theme provided by the context
+ * @param {Object} props The component props
  * @return {Object} A theme config for the component
  */
-function generateComponentTheme (componentKey, themeKey, overrides) {
+function generateComponentTheme(componentKey, themeKey, contextTheme = {}, props = {}) {
   const t = themeKey || getDefaultThemeKey()
   const theme = getRegisteredTheme(t)
 
   let componentTheme = {}
-  let cachedComponentTheme = theme[componentKey]
+  let componentPropOverrides = {}
+  let themePropOverrides = props.theme || {}
 
-  if (cachedComponentTheme) {
-    // use the cached component theme if it exists
-    componentTheme = cachedComponentTheme
-  } else {
-    const variables = {
-      borders: {},
-      breakpoints: {},
-      colors: {},
-      forms: {},
-      media: {},
-      shadows: {},
-      spacing: {},
-      stacking: {},
-      transitions: {},
-      typography: {},
-      ...mergeWithDefaultThemeVariables(themeKey)
-    }
+  const variables = getVariables(themeKey)
+  const cachedComponentTheme = theme[componentKey]
 
-    const componentThemeFunction = getRegisteredComponent(t, componentKey)
+  try {
+    if (cachedComponentTheme && isEmpty(props)) {
+      // use the cached component theme if it exists
+      componentTheme = cachedComponentTheme
+    } else {
+      // Otherwise generate component theme from the component theme function
+      const componentThemeFunction = getRegisteredComponent(t, componentKey)
 
-    if (typeof componentThemeFunction === 'function') {
-      try {
-        componentTheme = componentThemeFunction(variables)
-      } catch (e) {
-        error(false, `[themeable] ${e}`)
+      if (typeof componentThemeFunction === 'function') {
+        componentTheme = componentThemeFunction(variables, props)
       }
     }
-  }
 
-  if (isEmpty(overrides)) {
-    return (theme[componentKey] = componentTheme)
-  } else if (theme.immutable) {
-    warn(
-      false,
-      `[themeable] Theme '${t}' is immutable. Cannot apply overrides for '${componentKey.toString()}': ${JSON.stringify(overrides)}`
-    )
-    return componentTheme
-  } else if (isEmpty(componentTheme)) {
-    return overrides
-  } else {
-    return { ...componentTheme, ...overrides }
+    // Check we don't have props (which means we also don't have a theme prop) then check we don't have context theme.
+    // If that's the case, we update the cache and return the component theme.
+    if (isEmpty(props) && isEmpty(contextTheme)) {
+      return (theme[componentKey] = componentTheme)
+    }
+
+    // If theme prop passed by consumer is a function, provide any variables and props
+    if (typeof themePropOverrides === 'function') {
+      themePropOverrides = themePropOverrides(variables, props)
+    }
+
+    // If props are defined, the component theme here will contain the prop overrides
+    if (!isEmpty(props)) {
+      componentPropOverrides = componentTheme
+    }
+
+    return mergeDeep(cachedComponentTheme, contextTheme, componentPropOverrides, themePropOverrides)
+  } catch (e) {
+    error(false, `[themeable] ${e}`)
   }
 }
+
+// const generateComponentTheme = (componentKey, themeKey, contextTheme = {}, props = {}) => {
+//   const t = themeKey || getDefaultThemeKey()
+//   const theme = getRegisteredTheme(t)
+
+//   let cachedComponentTheme = theme.cache[componentKey]
+
+//   if (!props && cachedComponentTheme) {
+//     return cachedComponentTheme
+//   } else {
+//     const themeFromRegistry = mapComponentTheme(theme, t, componentKey, props, getRegisteredComponent(themeKey, componentKey))
+//     const themeFromContext = mapComponentTheme(theme, t, componentKey, props, contextTheme)
+//     const themeFromThemeProp = mapComponentTheme(theme, t, componentKey, props, props.theme)
+//     return mergeDeep(themeFromRegistry, themeFromContext, componentKey, themeFromThemeProp)
+//   }
+// }
 
 function getRegisteredThemes () {
   return getRegistry().themes

@@ -118,7 +118,6 @@ class Preview extends Component {
 
     const render = (el) => {
       const { themeKey, themes } = this.context
-      const theme = ApplyTheme.generateTheme(themeKey)
 
       let elToRender = (
         <ApplyTextDirection
@@ -132,6 +131,7 @@ class Preview extends Component {
       if (themeKey && themes[themeKey]) {
         elToRender = (
           <ApplyTheme
+            themeKey={themeKey}
             theme={theme}
             immutable={themes[themeKey].resource.immutable}
           >
