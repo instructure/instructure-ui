@@ -26,7 +26,8 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { omitProps } from '@instructure/ui-react-utils'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -34,19 +35,19 @@ import theme from './theme'
 
 /**
 ---
-parent: DeprecatedProgress
-id: DeprecatedProgressBar
+category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class ProgressBar extends Component {
   static propTypes = {
     /**
     * A label is required for accessibility
     */
-    label: PropTypes.string.isRequired,
+    screenReaderLabel: PropTypes.string.isRequired,
     /**
-    * Different-sized progress bars and circles
+    * Control the height of the progress bar
     */
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
     /**
@@ -58,89 +59,116 @@ class ProgressBar extends Component {
     */
     valueNow: PropTypes.number,
     /**
-    * A function that returns the current value formatted for screen readers
+    * A function for formatting the text provided to screen readers via `aria-valuenow`
     */
-    formatValueText: PropTypes.func,
+    formatScreenReaderValue: PropTypes.func,
     /**
     * A function to format the displayed value. If null the value will not display.
+    * Takes `valueNow` and `valueMax` as parameters.
     */
-    formatDisplayedValue: PropTypes.func,
+    renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * The bar changes to your theme's success color when complete
+    * Controls the overall color scheme of the component
     */
-    successColor: PropTypes.bool,
+    color: PropTypes.oneOf(['primary', 'primary-inverse']),
     /**
-    * Choose either a progress bar or circle. The `-inverse` variants are for
-    * when you need the Progress component to appear on inverse backgrounds
+    * Control the color of the progress meter. Defaults to showing theme success
+    * color on completion, based on `valueNow` and `valueMax`.
     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
+    meterColor: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
+    ]),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
+    /**
+    * Provides a reference to the component's root HTML element
+    */
     elementRef: PropTypes.func,
+    /**
+    * Set the element type of the component's root
+    */
     as: PropTypes.elementType
   }
 
   static defaultProps = {
-    formatValueText: (valueNow, valueMax) => `${valueNow} / ${valueMax}`,
+    formatScreenReaderValue: ({ valueNow, valueMax }) => `${valueNow} / ${valueMax}`,
     size: 'medium',
     valueMax: 100,
     valueNow: 0,
-    variant: 'default',
-    successColor: true,
     as: 'div',
-    formatDisplayedValue: undefined,
+    renderValue: undefined,
     margin: undefined,
-    elementRef: undefined
+    elementRef: undefined,
+    color: 'primary',
+
+    // default to showing `success` color on completion
+    meterColor: ({ valueNow, valueMax }) => valueNow / valueMax >= 1 ? 'success' : 'brand',
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true,
-      [styles.done]: this.props.successColor &&
-        (this.props.valueNow / this.props.valueMax >= 1)
-    }
-
     const {
-      formatDisplayedValue,
-      formatValueText,
+      renderValue,
+      formatScreenReaderValue,
       valueNow,
       valueMax,
-      label
+      screenReaderLabel,
+      size,
+      color,
+      meterColor,
+      ...props
     } = this.props
 
-    const valueText = formatValueText(valueNow, valueMax)
-    const value = (typeof formatDisplayedValue === 'function') && formatDisplayedValue(valueNow, valueMax)
+    const valueText = typeof formatScreenReaderValue === 'function'
+      && formatScreenReaderValue({ valueNow, valueMax })
+    // consolidating the label and aria-valuetext to put in aria-label because
+    // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
+    // But leaving aria-valuetext because JAWS ignores aria-label
+    const labelAndValueText = `${screenReaderLabel} ${valueText}`
 
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, ProgressBar.propTypes, ['animateOnMount']),
-      ProgressBar
-    )
+    const value = callRenderProp(renderValue, { valueNow, valueMax })
+
+    const meterColorClassName = typeof meterColor === 'function'
+      ? meterColor({ valueNow, valueMax }) : meterColor
+
+    const classes = {
+      [styles.root]: true,
+      [styles[`size--${size}`]]: true,
+      [styles[`color--${color}`]]: true,
+      [styles[`meterColor--${meterColorClassName}`]]: true
+    }
+
     /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <View
-        {...passthroughProps}
+        {...passthroughProps(props)}
         as={this.props.as}
         className={classnames(classes)}
         margin={this.props.margin}
         elementRef={this.props.elementRef}
         __dangerouslyIgnoreExperimentalWarnings
       >
-        <progress
-          className={styles.bar}
-          max={valueMax}
-          value={valueNow}
-          role="progressbar"
-          aria-valuetext={valueText}
-          aria-valuenow={valueNow}
-          aria-valuemax={valueMax}
-          aria-label={label}
-        />
+        <span className={styles.trackLayout}>
+
+          { /* creates bottom border effect - <progress /> hard to style x-browser */ }
+          <span className={styles.trackBorder}></span>
+
+          <progress
+            className={styles.track}
+            max={valueMax}
+            value={valueNow}
+            role="progressbar"
+            aria-valuetext={valueText}
+            aria-valuenow={valueNow}
+            aria-valuemax={valueMax}
+            aria-label={labelAndValueText}
+          />
+        </span>
+
         { value &&
           <span className={styles.value} aria-hidden="true">
             {value}

@@ -23,23 +23,23 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { View } from '@instructure/ui-view'
-import { omitProps } from '@instructure/ui-react-utils'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { deprecated } from '@instructure/ui-react-utils'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { ProgressBar } from '../ProgressBar'
+import { ProgressCircle } from '../ProgressCircle'
 
 /**
 ---
-parent: DeprecatedProgress
-id: DeprecatedProgressBar
+category: components
 ---
 **/
-@themeable(theme, styles)
-class ProgressBar extends Component {
+
+@deprecated('8.0.0', null, 'Use ProgressBar or ProgressCircle instead.')
+@testable()
+class Progress extends Component {
   static propTypes = {
     /**
     * A label is required for accessibility
@@ -66,6 +66,11 @@ class ProgressBar extends Component {
     */
     formatDisplayedValue: PropTypes.func,
     /**
+    * Animate the progress meter to the current value when the component
+    * has mounted
+    */
+    animateOnMount: PropTypes.bool,
+    /**
     * The bar changes to your theme's success color when complete
     */
     successColor: PropTypes.bool,
@@ -73,84 +78,65 @@ class ProgressBar extends Component {
     * Choose either a progress bar or circle. The `-inverse` variants are for
     * when you need the Progress component to appear on inverse backgrounds
     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
+    variant: PropTypes.oneOf(['bar', 'circle', 'bar-inverse', 'circle-inverse']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    as: PropTypes.elementType
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
     formatValueText: (valueNow, valueMax) => `${valueNow} / ${valueMax}`,
+    formatDisplayedValue: undefined,
     size: 'medium',
+    animateOnMount: false,
     valueMax: 100,
     valueNow: 0,
-    variant: 'default',
+    variant: 'bar',
     successColor: true,
-    as: 'div',
-    formatDisplayedValue: undefined,
-    margin: undefined,
-    elementRef: undefined
+    elementRef: (el) => {},
+    margin: undefined
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true,
-      [styles.done]: this.props.successColor &&
-        (this.props.valueNow / this.props.valueMax >= 1)
-    }
-
     const {
-      formatDisplayedValue,
-      formatValueText,
-      valueNow,
-      valueMax,
-      label
+      label,
+      successColor,
+      animateOnMount,
+      variant,
+      ...props
     } = this.props
 
-    const valueText = formatValueText(valueNow, valueMax)
-    const value = (typeof formatDisplayedValue === 'function') && formatDisplayedValue(valueNow, valueMax)
+    const childVariant = (variant === 'bar-inverse' || variant === 'circle-inverse')
+      ? 'primary-inverse' : 'primary'
 
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, ProgressBar.propTypes, ['animateOnMount']),
-      ProgressBar
-    )
-    /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
-    return (
-      <View
-        {...passthroughProps}
-        as={this.props.as}
-        className={classnames(classes)}
-        margin={this.props.margin}
-        elementRef={this.props.elementRef}
-        __dangerouslyIgnoreExperimentalWarnings
-      >
-        <progress
-          className={styles.bar}
-          max={valueMax}
-          value={valueNow}
-          role="progressbar"
-          aria-valuetext={valueText}
-          aria-valuenow={valueNow}
-          aria-valuemax={valueMax}
-          aria-label={label}
-        />
-        { value &&
-          <span className={styles.value} aria-hidden="true">
-            {value}
-          </span>
-        }
-      </View>
-    )
-    /* eslint-enable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
+    const formatValueText = typeof this.props.formatValueText === 'function' ?
+      ({ valueNow, valueMax }) => this.props.formatValueText(valueNow, valueMax) : undefined
+
+    const formatDisplayedValue = typeof this.props.formatDisplayedValue === 'function' ?
+      ({ valueNow, valueMax }) => this.props.formatDisplayedValue(valueNow, valueMax) : undefined
+
+    const isCircle = variant === 'circle' || variant === 'circle-inverse'
+
+    // translate legacy Progress props into props accepted by the new components
+    const updatedProps = {
+      ...props,
+      formatScreenReaderValue: formatValueText,
+      renderValue: formatDisplayedValue,
+      screenReaderLabel: label,
+      color: childVariant,
+      meterColor: !successColor ? 'brand' : undefined,
+      shouldAnimateOnMount: isCircle && animateOnMount,
+    }
+
+    return isCircle ?
+      <ProgressCircle {...updatedProps} /> :
+      <ProgressBar {...updatedProps} />
   }
 }
 
-export default ProgressBar
-export { ProgressBar }
+export default Progress
+export { Progress }

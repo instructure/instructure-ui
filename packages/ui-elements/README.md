@@ -39,7 +39,7 @@ The `ui-elements` package contains the following:
 - [List](#List)
 - [MetricsList](#MetricsList)
 - Pill will be removed in version 7.0.0. Use the [Pill from ui-pill](#Pill) instead.
-- [Progress](#Progress)
+- Progress will be removed in version 7.0.0. Use [ProgressBar](#ProgressBar) or [ProgressCircle](#ProgressCircle) from `ui-progress` instead.
 - [Rating](#Rating)
 - [Spinner](#Spinner)
 - [Table (deprecated)](#DeprecatedTable)

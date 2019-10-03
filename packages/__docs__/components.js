@@ -55,7 +55,7 @@ export {
   Img as DeprecatedImg,
   Pill as DeprecatedPill,
   Link as DeprecatedLink,
-  Progress,
+  Progress as DeprecatedProgress,
   Rating,
   Spinner,
   Table as DeprecatedTable,
@@ -136,5 +136,8 @@ export { Flex } from '@instructure/ui-flex'
 export { FileDrop } from '@instructure/ui-file-drop'
 export { Link } from '@instructure/ui-link'
 export { Heading } from '@instructure/ui-heading'
+export { Progress } from '@instructure/ui-progress'
+export { ProgressBar } from '@instructure/ui-progress'
+export { ProgressCircle } from '@instructure/ui-progress'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

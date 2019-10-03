@@ -25,9 +25,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { omitProps } from '@instructure/ui-react-utils'
+import { View } from '@instructure/ui-view'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -35,19 +36,19 @@ import theme from './theme'
 
 /**
 ---
-parent: DeprecatedProgress
-id: DeprecatedProgressCircle
+category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class ProgressCircle extends Component {
   static propTypes = {
     /**
     * A label is required for accessibility
     */
-    label: PropTypes.string.isRequired,
+    screenReaderLabel: PropTypes.string.isRequired,
     /**
-    * Different-sized progress bars and circles
+    * Control the height of the progress bar
     */
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
     /**
@@ -59,68 +60,82 @@ class ProgressCircle extends Component {
     */
     valueNow: PropTypes.number,
     /**
-    * A function that returns the current value formatted for screen readers
+    * A function for formatting the text provided to screen readers via `aria-valuenow`
     */
-    formatValueText: PropTypes.func,
+    formatScreenReaderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
     * A function to format the displayed value. If null the value will not display.
+    * Takes `valueNow` and `valueMax` as parameters.
     */
-    formatDisplayedValue: PropTypes.func,
+    renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * Animate the progress meter to the current value when the component
-    * has mounted
+    * Controls the overall color scheme of the component
     */
-    animateOnMount: PropTypes.bool,
+    color: PropTypes.oneOf(['primary', 'primary-inverse']),
     /**
-    * The bar changes to your theme's success color when complete
+    * Control the color of the progress meter. Defaults to showing theme success
+    * color on completion, based on `valueNow` and `valueMax`.
     */
-    successColor: PropTypes.bool,
-    /**
-    * Choose either a progress bar or circle. The `-inverse` variants are for
-    * when you need the Progress component to appear on inverse backgrounds
-    */
-    variant: PropTypes.oneOf(['default', 'inverse']),
+    meterColor: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
+    ]),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
+    /**
+    * Provides a reference to the component's root HTML element
+    */
     elementRef: PropTypes.func,
-    as: PropTypes.elementType
+    /**
+    * Set the element type of the component's root
+    */
+    as: PropTypes.elementType,
+    /**
+    * Animate the progress meter to the current value when the component
+    * has mounted
+    */
+    shouldAnimateOnMount: PropTypes.bool,
+    animationDelay: PropTypes.number
   }
 
   static defaultProps = {
-    formatValueText: (valueNow, valueMax) => `${valueNow} / ${valueMax}`,
+    formatScreenReaderValue: ({ valueNow, valueMax }) => `${valueNow} / ${valueMax}`,
     size: 'medium',
     valueMax: 100,
     valueNow: 0,
-    variant: 'default',
-    animateOnMount: false,
-    successColor: true,
     as: 'div',
-    formatDisplayedValue: undefined,
+    renderValue: undefined,
     margin: undefined,
-    elementRef: undefined
+    elementRef: undefined,
+    color: 'primary',
+    shouldAnimateOnMount: false,
+    animationDelay: undefined,
+
+    // default to showing `success` color on completion
+    meterColor: ({ valueNow, valueMax }) => valueNow / valueMax >= 1 ? 'success' : 'brand',
   }
 
   constructor (props) {
     super()
 
     this.state = {
-      animateOnMount: props.animateOnMount
+      shouldAnimateOnMount: props.shouldAnimateOnMount
     }
   }
 
   _timeouts = []
 
-  componentWillMount () {
-    if (this.state.animateOnMount) {
+  componentDidMount () {
+    if (this.state.shouldAnimateOnMount) {
       this._timeouts.push(setTimeout(() => {
         this.setState({
-          animateOnMount: false
+          shouldAnimateOnMount: false
         })
-      }, 500))
+      }, this.props.animationDelay || 500))
     }
   }
 
@@ -134,9 +149,12 @@ class ProgressCircle extends Component {
     return parseFloat(this.theme[`${camelSize}Circumference`])
   }
 
-  radius () {
+  get radii () {
     const camelSize = this.props.size === 'x-small' ? 'xSmall' : this.props.size
-    return this.theme[`${camelSize}Radius`]
+    return {
+      radius: this.theme[`${camelSize}Radius`],
+      borderOffsetRadius: this.theme[`${camelSize}BorderOffset`]
+    }
   }
 
   dashOffset () {
@@ -157,53 +175,52 @@ class ProgressCircle extends Component {
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true,
-      [styles.animateOnMount]: this.state.animateOnMount,
-      [styles.done]: this.props.successColor &&
-        this.props.valueNow / this.props.valueMax >= 1
-    }
-
     const {
-      formatDisplayedValue,
-      formatValueText,
+      color,
+      renderValue,
+      formatScreenReaderValue,
+      meterColor,
       valueNow,
       valueMax,
-      label
+      screenReaderLabel,
+      size,
+      ...props
     } = this.props
 
-    const valueText = formatValueText(valueNow, valueMax)
+    const meterColorClassName = typeof meterColor === 'function'
+      ? meterColor({ valueNow, valueMax }) : meterColor
 
+    const classes = {
+      [styles.root]: true,
+      [styles[`size--${size}`]]: true,
+      [styles[`color--${color}`]]: true,
+      [styles[`meterColor--${meterColorClassName}`]]: true,
+      [styles.shouldAnimateOnMount]: this.state.shouldAnimateOnMount
+    }
+
+    const valueText = typeof formatScreenReaderValue === 'function'
+      && formatScreenReaderValue({ valueNow, valueMax })
     // consolidating the label and aria-valuetext to put in aria-label because
     // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
     // But leaving aria-valuetext because JAWS ignores aria-label
-    const labelAndValueText = `${label} ${valueText}`
+    const labelAndValueText = `${screenReaderLabel} ${valueText}`
 
-    const value = (typeof formatDisplayedValue === 'function') && formatDisplayedValue(valueNow, valueMax)
+    const value = callRenderProp(renderValue, { valueNow, valueMax })
 
     const style = this.state.animateOnMount ? null : {
       strokeDashoffset: `${this.dashOffset()}em`
     }
 
-    const radius = this.radius()
-
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, ProgressCircle.propTypes, ['animateOnMount']),
-      ProgressCircle
-    )
-
     return (
       <View
-        {...passthroughProps}
+        {...passthroughProps(props)}
         as={this.props.as}
         elementRef={this.props.elementRef}
         className={classnames(classes)}
         margin={this.props.margin}
         __dangerouslyIgnoreExperimentalWarnings
       >
-        <ScreenReaderContent>
+        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
           <progress
             max={valueMax}
             value={valueNow}
@@ -224,18 +241,18 @@ class ProgressCircle extends Component {
           focusable="false"
         >
           <circle
-            className={styles.shadow}
-            role="presentation"
-            cx="50%"
-            cy="50%"
-            r={radius}
-          />
-          <circle
             className={styles.track}
             role="presentation"
             cx="50%"
             cy="50%"
-            r={radius}
+            r={this.radii.radius}
+          />
+          <circle
+            className={styles.border}
+            role="presentation"
+            cx="50%"
+            cy="50%"
+            r={this.radii.borderOffsetRadius}
           />
           <circle
             className={styles.meter}
@@ -243,7 +260,7 @@ class ProgressCircle extends Component {
             style={style}
             cx="50%"
             cy="50%"
-            r={radius}
+            r={this.radii.radius}
           />
         </svg>
       </View>

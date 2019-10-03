@@ -24,6 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { deprecated } from '@instructure/ui-react-utils'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
@@ -32,9 +33,12 @@ import { ProgressCircle } from './ProgressCircle'
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedProgress
 ---
 **/
+
+@deprecated('7.0.0', null, 'Use ProgressBar or ProgressCircle from ui-progress instead')
 @testable()
 class Progress extends Component {
   static propTypes = {

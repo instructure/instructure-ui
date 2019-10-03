@@ -1,20 +1,34 @@
 ---
-describes: DeprecatedProgress
-id: DeprecatedProgress__README
+describes: Progress
 ---
 
-**DEPRECATED:** DeprecatedProgress will be removed from `ui-elements` in version 7.0.0. Use
-[Progress from ui-progress](#Progress) as a 1-1 replacement, if you don't want to have to update
-any props.
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+    <Figure.Item>
+      <strong>DEPRECATED:</strong> Progress will be removed from <code>ui-progress</code> in version 8.0.0. Use <Link href="#ProgressBar">ProgressBar</Link> or <Link href="#ProgressCircle">ProgressCircle</Link> instead.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
-However, please note that **Progress will be removed in version 8.0.0** in favor of two separate
-components: [ProgressBar](#ProgressBar) and [ProgressCircle](#ProgressCircle). Upgrading is
-a simple matter of [updating a few props](#Progress).
+### Upgrading to ProgressBar or ProgressCircle
+
+- To render the `inverse` color scheme for the new components, use the `color` prop.
+- The `successColor` boolean has been removed. It has been replaced with `meterColor` in the new components. No
+  action here is necessary unless you have set `successColor={false}` to override the default behavior where Progress
+  turns to the `success` color on completion.
+- The `label` prop is now `screenReaderLabel`.
+- The `formatDisplayedValue` and `formatValueText` props have been updated to take an object
+  containing `valueNow` and `valueMax` as arguments.
+- ProgressBar and ProgressCircle are directly themeable through theme variables \o/
 
 ### Basic progress bar and circle
-Progress is an easy-to-customize progress bar or circle (a.k.a, doughnut).
 
-The Progress component defaults to a simple progress bar with no text
+Progress is an easy-to-customize progress bar or circle (a.k.a, doughnut). Progress defaults to a simple progress bar with no text
 output. The only required prop is `label`, which is needed for accessibility.
 
 To render the Progress component as a circle/doughnut instead, set the
@@ -25,9 +39,9 @@ To render the Progress component as a circle/doughnut instead, set the
 example: true
 ---
 <div>
-  <DeprecatedProgress label="Loading completion" valueNow={40} valueMax={60} />
+  <Progress label="Loading completion" valueNow={40} valueMax={60} />
   <br />
-  <DeprecatedProgress
+  <Progress
     label="Loading completion"
     variant="circle"
     valueNow={40}
@@ -46,27 +60,27 @@ around the progress bar/circle.
 example: true
 ---
 <div>
-  <DeprecatedProgress
+  <Progress
     label="Modules complete"
     size="x-small"
     valueNow={5}
     valueMax={20}
     margin="medium"
   />
-  <DeprecatedProgress
+  <Progress
     label="Modules complete"
     size="small"
     valueNow={10}
     valueMax={20}
     margin="large small xx-large x-small"
   />
-  <DeprecatedProgress
+  <Progress
     label="Modules complete"
     valueNow={15}
     valueMax={20}
     margin="x-small none large none"
   />
-  <DeprecatedProgress
+  <Progress
     label="Modules complete"
     size="large"
     valueNow={20}
@@ -74,7 +88,7 @@ example: true
     margin="x-large xx-small large none"
   />
   <div>
-    <DeprecatedProgress
+    <Progress
       label="Modules complete"
       size="x-small"
       variant="circle"
@@ -82,7 +96,7 @@ example: true
       valueMax={20}
       margin="xx-large"
     />
-    <DeprecatedProgress
+    <Progress
       label="Modules complete"
       size="small"
       variant="circle"
@@ -90,14 +104,14 @@ example: true
       valueMax={20}
       margin="xxx-small"
     />
-    <DeprecatedProgress
+    <Progress
       label="Modules complete"
       variant="circle"
       valueNow={15}
       valueMax={20}
       margin="large"
     />
-    <DeprecatedProgress
+    <Progress
       label="Modules complete"
       size="large"
       variant="circle"
@@ -128,7 +142,7 @@ via `formatValueText` for screenreader users.
 example: true
 ---
 <div>
-  <DeprecatedProgress
+  <Progress
     label="Percent complete"
     formatValueText={function (valueNow, valueMax) {
       return Math.round((valueNow / valueMax * 100)) + ' percent'
@@ -143,7 +157,7 @@ example: true
     valueMax={88}
     valueNow={33}
   />
-  <DeprecatedProgress
+  <Progress
     label="Percent complete"
     formatValueText={function (valueNow, valueMax) {
       return Math.round((valueNow / valueMax * 100)) + ' percent'
@@ -172,7 +186,7 @@ screenreader users.
 example: true
 ---
 <div>
-  <DeprecatedProgress
+  <Progress
     size="small"
     label="Chapters complete"
     formatValueText={function (valueNow, valueMax) {
@@ -188,7 +202,7 @@ example: true
     valueMax={88}
     valueNow={33}
   />
-  <DeprecatedProgress
+  <Progress
     label="Questions correct"
     formatValueText={function (valueNow, valueMax) {
       return valueNow + ' out of ' + valueMax
@@ -217,7 +231,7 @@ example: true
 example: true
 ---
 <div>
-  <DeprecatedProgress
+  <Progress
     label="Quiz score"
     formatValueText={function (valueNow, valueMax) {
       const passing = valueNow > (valueMax / 2) ? 'pass' : 'fail'
@@ -243,7 +257,7 @@ example: true
     valueNow={44}
     valueMax={124}
   />
-  <DeprecatedProgress
+  <Progress
     label="Quiz score"
     formatValueText={function (valueNow, valueMax) {
       const passing = valueNow > (valueMax / 2) ? 'pass' : 'fail'
@@ -285,7 +299,7 @@ Please note that you won't see any animation in IE11/Win7.
 example: true
 ---
 <div>
-  <DeprecatedProgress
+  <Progress
     animateOnMount
     label="Modules passed"
     formatValueText={function (valueNow, valueMax) {
@@ -319,7 +333,7 @@ example: true
 background: 'checkerboard-inverse'
 ---
 <div>
-  <DeprecatedProgress
+  <Progress
     label="Percent complete"
     formatValueText={function (valueNow, valueMax) {
       return Math.round((valueNow / valueMax * 100)) + ' percent'
@@ -334,7 +348,7 @@ background: 'checkerboard-inverse'
     variant="bar-inverse"
     valueNow={75}
   />
-  <DeprecatedProgress
+  <Progress
     label="Percent complete"
     formatValueText={function (valueNow, valueMax) {
       return Math.round((valueNow / valueMax * 100)) + ' percent'
@@ -350,7 +364,7 @@ background: 'checkerboard-inverse'
     variant="circle-inverse"
     valueNow={75}
   />
-  <DeprecatedProgress
+  <Progress
     label="Percent complete"
     formatValueText={function (valueNow, valueMax) {
       return valueNow + ' out of ' + valueMax
