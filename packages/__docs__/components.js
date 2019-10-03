@@ -64,7 +64,7 @@ export {
   Text as DeprecatedText,
   TruncateText,
   List,
-  MetricsList
+  MetricsList as DeprecatedMetricsList
 } from '@instructure/ui-elements'
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
 export {
@@ -106,6 +106,7 @@ export {
   Position as DeprecatedPosition,
   View as DeprecatedView
 } from '@instructure/ui-layout'
+export { MetricGroup, Metric, MetricsList } from '@instructure/ui-metric'
 export { Transition } from '@instructure/ui-motion'
 export {
   Mask,

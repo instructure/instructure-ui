@@ -1,6 +1,17 @@
 ---
-describes: MetricsList
+describes: DeprecatedMetricsList
+id: DeprecatedMetricsList__README
 ---
+
+**DEPRECATED:** MetricsList will be removed from `ui-elements` in version 7.0.0. Use the [MetricGroup](#MetricGroup) or [Metric](#Metric) from [ui-metric](#ui-metric) instead.
+
+### Important Upgrade Notes
+Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
+
+The MetricGroup accepts Metric as children, but it no longer uses the dot notation `(.Item)` as Metric can now be used as a standalone component. Note that Metric has a 
+`isGroupChild` boolean prop that automatically gets set when it is part of a MetricGroup in order to pass the appropriate aria roles.
+
+***
 
 The MetricsList component displays metrics (value + label) in rows.
 
@@ -8,11 +19,11 @@ The MetricsList component displays metrics (value + label) in rows.
 ---
 example: true
 ---
-<MetricsList>
-  <MetricsList.Item label="Grade" value="80%" />
-  <MetricsList.Item label="Late" value="4" />
-  <MetricsList.Item label="Missing" value="2" />
-</MetricsList>
+<DeprecatedMetricsList>
+  <DeprecatedMetricsList.Item label="Grade" value="80%" />
+  <DeprecatedMetricsList.Item label="Late" value="4" />
+  <DeprecatedMetricsList.Item label="Missing" value="2" />
+</DeprecatedMetricsList>
 ```
 
 ```js
@@ -20,23 +31,23 @@ example: true
 example: true
 ---
 <ContextView padding="small" placement="center start">
-  <MetricsList>
-    <MetricsList.Item
+  <DeprecatedMetricsList>
+    <DeprecatedMetricsList.Item
       label={<div>Average Grade<div>High 33%, Low 10%</div></div>}
       value="25%"
     />
-    <MetricsList.Item
+    <DeprecatedMetricsList.Item
       label={<div>Average Page Views</div>}
       value="12"
     />
-    <MetricsList.Item
+    <DeprecatedMetricsList.Item
       label={<div>Missing Submissions</div>}
       value="5"
     />
-    <MetricsList.Item
+    <DeprecatedMetricsList.Item
       label={<div>Late Submissions</div>}
       value="11"
     />
-  </MetricsList>
+  </DeprecatedMetricsList>
 </ContextView>
 ```

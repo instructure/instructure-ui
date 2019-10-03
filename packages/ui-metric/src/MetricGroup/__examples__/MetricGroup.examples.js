@@ -21,51 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
 
-import { Children } from '@instructure/ui-prop-types'
-import { themeable } from '@instructure/ui-themeable'
-import { testable } from '@instructure/ui-testable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
+import React from 'react'
+import { Metric } from '../../Metric'
 
-import { MetricsListItem } from './MetricsListItem'
-
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-category: components/deprecated
-id: DeprecatedMetricsList
----
-**/
-@deprecated('7.0.0', null, 'Use MetricGroup and Metric from ui-metric instead')
-@testable()
-@themeable(theme, styles)
-class MetricsList extends Component {
-  static propTypes = {
-    /**
-    * children of type `MetricsList.Item`
-    */
-    children: Children.oneOf([MetricsListItem])
-  }
-
-  static defaultProps = {
-    children: null
-  }
-
-  static Item = MetricsListItem
-
-  render() {
-    return (
-      <div
-        {...omitProps(this.props, MetricsList.propTypes)}
-        className={styles.root} role="grid" aria-readonly="true">
-        {this.props.children}
-      </div>
-    )
-  }
+const getMetric = (textAlign) => {
+  return [
+    <Metric
+      key="grade"
+      renderLabel="Final Assignment Grade"
+      renderValue="80%"
+      textAlign={textAlign}
+      isGroupChild
+    />,
+    <Metric
+      key="late"
+      renderLabel="Late Work"
+      renderValue="4"
+      textAlign={textAlign}
+      isGroupChild
+    />,
+    <Metric
+      key="missing"
+      renderLabel="Missing Assignment"
+      renderValue="2"
+      textAlign={textAlign}
+      isGroupChild
+    />
+  ]
 }
 
-export default MetricsList
-export { MetricsList, MetricsListItem }
+export default {
+  propValues: {
+    children: [
+      getMetric('start'),
+      getMetric('center'),
+      getMetric('end')
+    ]
+  }
+}

@@ -20,6 +20,10 @@
     "replace": "@instructure/ui-view/lib/View"
   },
   {
+    "pattern": "^@instructure/ui-elements/lib/MetricsList",
+    "replace": "@instructure/ui-metric/lib/MetricGroup"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/Pill",
     "replace": "@instructure/ui-pill/lib/Pill"
   },

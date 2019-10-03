@@ -22,50 +22,76 @@
  * SOFTWARE.
  */
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-import { Children } from '@instructure/ui-prop-types'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
-
-import { MetricsListItem } from './MetricsListItem'
+import { themeable } from '@instructure/ui-themeable'
+import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedMetricsList
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use MetricGroup and Metric from ui-metric instead')
 @testable()
 @themeable(theme, styles)
-class MetricsList extends Component {
+class Metric extends Component {
   static propTypes = {
-    /**
-    * children of type `MetricsList.Item`
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    /** Set to true when a child of MetricGroup so the appropriate
+    * aria labels get set
     */
-    children: Children.oneOf([MetricsListItem])
+    isGroupChild: PropTypes.bool
   }
-
   static defaultProps = {
-    children: null
+    textAlign: 'center',
+    renderLabel: undefined,
+    renderValue: undefined,
+    isGroupChild: false
   }
-
-  static Item = MetricsListItem
 
   render() {
+    const {
+      textAlign,
+      renderLabel,
+      renderValue,
+      isGroupChild,
+      ...rest
+    } = this.props
+
+    const classes = {
+      [styles.root]: true,
+      [styles[textAlign]]: true
+    }
+
     return (
       <div
-        {...omitProps(this.props, MetricsList.propTypes)}
-        className={styles.root} role="grid" aria-readonly="true">
-        {this.props.children}
+        {...passthroughProps(rest)}
+        role={ isGroupChild === true ? "row" : null }
+        className={classnames(classes)}
+      >
+        <div
+          role={ isGroupChild === true ? "rowheader" : null }
+          className={styles.label}
+        >
+          {callRenderProp(renderLabel)}
+        </div>
+        <div
+          role={ isGroupChild === true ? "gridcell" : null }
+          className={styles.value}
+        >
+          {callRenderProp(renderValue)}
+        </div>
       </div>
     )
   }
 }
 
-export default MetricsList
-export { MetricsList, MetricsListItem }
+export default Metric
+export { Metric }

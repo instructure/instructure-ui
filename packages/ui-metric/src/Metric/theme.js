@@ -21,51 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
 
-import { Children } from '@instructure/ui-prop-types'
-import { themeable } from '@instructure/ui-themeable'
-import { testable } from '@instructure/ui-testable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
+export default function generator ({ colors, typography, spacing }) {
+  return {
+    padding: `0 ${spacing.xSmall}`,
+    textAlign: 'center',
+    fontFamily: typography.fontFamily,
 
-import { MetricsListItem } from './MetricsListItem'
+    valueColor: colors.textDarkest,
+    valueFontSize: typography.fontSizeXLarge,
+    valueFontWeight: typography.fontWeightBold,
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-category: components/deprecated
-id: DeprecatedMetricsList
----
-**/
-@deprecated('7.0.0', null, 'Use MetricGroup and Metric from ui-metric instead')
-@testable()
-@themeable(theme, styles)
-class MetricsList extends Component {
-  static propTypes = {
-    /**
-    * children of type `MetricsList.Item`
-    */
-    children: Children.oneOf([MetricsListItem])
-  }
-
-  static defaultProps = {
-    children: null
-  }
-
-  static Item = MetricsListItem
-
-  render() {
-    return (
-      <div
-        {...omitProps(this.props, MetricsList.propTypes)}
-        className={styles.root} role="grid" aria-readonly="true">
-        {this.props.children}
-      </div>
-    )
+    labelColor: colors.textDarkest,
+    labelFontSize: typography.fontSizeXSmall
   }
 }
 
-export default MetricsList
-export { MetricsList, MetricsListItem }
+generator.canvas = function (variables) {
+  return {
+    valueColor: variables['ic-brand-font-color-dark'],
+    labelColor: variables['ic-brand-font-color-dark']
+  }
+}

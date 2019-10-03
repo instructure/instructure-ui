@@ -21,51 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { Children } from '@instructure/ui-prop-types'
-import { themeable } from '@instructure/ui-themeable'
+import { deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
-
-import { MetricsListItem } from './MetricsListItem'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedMetricsList
+parent: MetricsList
 ---
 **/
-@deprecated('7.0.0', null, 'Use MetricGroup and Metric from ui-metric instead')
+@deprecated('8.0.0', null, 'Use Metric instead.')
 @testable()
-@themeable(theme, styles)
-class MetricsList extends Component {
+class MetricsListItem extends Component {
   static propTypes = {
-    /**
-    * children of type `MetricsList.Item`
-    */
-    children: Children.oneOf([MetricsListItem])
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    label: PropTypes.node.isRequired,
+    value: PropTypes.node.isRequired
   }
-
   static defaultProps = {
-    children: null
+    textAlign: 'center'
   }
 
-  static Item = MetricsListItem
-
+  /* istanbul ignore next */
   render() {
-    return (
-      <div
-        {...omitProps(this.props, MetricsList.propTypes)}
-        className={styles.root} role="grid" aria-readonly="true">
-        {this.props.children}
-      </div>
-    )
+    // this component is only used for prop validation.
+    return null
   }
 }
 
-export default MetricsList
-export { MetricsList, MetricsListItem }
+export default MetricsListItem
+export { MetricsListItem }

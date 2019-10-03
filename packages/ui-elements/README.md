@@ -31,20 +31,20 @@ const MyAvatar = () => {
 
 ### Components
 The `ui-elements` package contains the following:
-- Avatar will be removed in version 7.0.0. Use the [Avatar from ui-avatar](#Avatar) instead.
+- [Avatar](#DeprecatedAvatar) will be removed in version 7.0.0. Use the [Avatar](#Avatar) from [ui-avatar](#ui-avatar).
 - [Badge](#Badge)
-- Img will be removed in version 7.0.0. Use the [Img from ui-img](#Img) instead.
-- Link will be removed in version 7.0.0. Use the [Link from ui-link](#Link) instead.
-- Heading will be removed in version 7.0.0. Use the [Heading from ui-heading](#Heading) instead.
+- [Img](#DeprecatedImg) will be removed in version 7.0.0. Use [Img](#Img) from [ui-img](#ui-img).
+- [Link](#DeprecatedLink) will be removed in version 7.0.0. Use [Link](#Link) from [ui-link](#ui-link).
+- [Heading](#DeprecatedHeading) will be removed in version 7.0.0. Use the [Heading](#Heading) from [ui-heading](#ui-heading).
 - [List](#List)
-- [MetricsList](#MetricsList)
-- Pill will be removed in version 7.0.0. Use the [Pill from ui-pill](#Pill) instead.
+- [MetricsList](#DeprecatedMetricsList) will be removed in version 7.0.0. Use the [MetricGroup](#MetricGroup) or [Metric](#Metric) from [ui-metric](#ui-metric).
+- [Pill](#DeprecatedPill) will be removed in version 7.0.0. Use [Pill](#Pill) from [ui-pill](#ui-pill).
 - Progress will be removed in version 7.0.0. Use [ProgressBar](#ProgressBar) or [ProgressCircle](#ProgressCircle) from `ui-progress` instead.
 - [Rating](#Rating)
 - [Spinner](#Spinner)
-- [Table (deprecated)](#DeprecatedTable)
+- [Table](#DeprecatedTable) has been deprecated within this package. Use [Table](#Table) from [ui-table](#ui-table).
 - [Tag](#Tag)
-- Text will be removed in version 7.0.0. Use the [Text from ui-text](#Text) instead.
+- [Text](#DeprecatedText) will be removed in version 7.0.0. Use [Text](#Text) from [ui-text](#ui-text).
 - [TruncateText](#TruncateText)
 
 ### Contribute

@@ -21,33 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+import React, { Children, Component } from 'react'
 
-import { Children } from '@instructure/ui-prop-types'
-import { themeable } from '@instructure/ui-themeable'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
 
 import { MetricsListItem } from './MetricsListItem'
-
-import styles from './styles.css'
-import theme from './theme'
+import { MetricGroup } from '../MetricGroup'
+import { Metric } from '../Metric'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedMetricsList
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use MetricGroup and Metric from ui-metric instead')
+@deprecated('8.0.0', null, 'Use MetricGroup instead.')
 @testable()
-@themeable(theme, styles)
 class MetricsList extends Component {
   static propTypes = {
     /**
     * children of type `MetricsList.Item`
     */
-    children: Children.oneOf([MetricsListItem])
+   children: ChildrenPropTypes.oneOf([MetricsListItem])
   }
 
   static defaultProps = {
@@ -56,13 +52,27 @@ class MetricsList extends Component {
 
   static Item = MetricsListItem
 
+  renderChildren () {
+    return Children.map(this.props.children, (child) => {
+      if (!child) return
+      const { label, value, ...rest } = child.props
+      return (
+        <Metric
+          {...rest}
+          renderLabel={label}
+          renderValue={value}
+          isGroupChild
+        />
+      )
+    })
+  }
+
   render() {
+
     return (
-      <div
-        {...omitProps(this.props, MetricsList.propTypes)}
-        className={styles.root} role="grid" aria-readonly="true">
-        {this.props.children}
-      </div>
+      <MetricGroup {...passthroughProps(this.props)}>
+        {this.renderChildren()}
+      </MetricGroup>
     )
   }
 }

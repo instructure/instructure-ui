@@ -34,8 +34,8 @@ import theme from './theme'
 
 /**
 ---
-parent: MetricsList
-id: MetricsList.Item
+parent: DeprecatedMetricsList
+id: DeprecatedMetricsList.Item
 ---
 **/
 @testable()

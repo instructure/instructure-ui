@@ -21,51 +21,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+import React, { Children, Component } from 'react'
 
-import { Children } from '@instructure/ui-prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
-
-import { MetricsListItem } from './MetricsListItem'
+import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
+import { Metric } from '../Metric'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedMetricsList
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use MetricGroup and Metric from ui-metric instead')
 @testable()
 @themeable(theme, styles)
-class MetricsList extends Component {
+class MetricGroup extends Component {
   static propTypes = {
     /**
-    * children of type `MetricsList.Item`
+    * children of type `Metric`
     */
-    children: Children.oneOf([MetricsListItem])
+    children: ChildrenPropTypes.oneOf([Metric])
   }
 
   static defaultProps = {
     children: null
   }
 
-  static Item = MetricsListItem
+  renderChildren () {
+    return Children.map(this.props.children, (child) => {
+      return safeCloneElement(child, {
+        isGroupChild: true
+      })
+    })
+  }
 
   render() {
     return (
       <div
-        {...omitProps(this.props, MetricsList.propTypes)}
-        className={styles.root} role="grid" aria-readonly="true">
-        {this.props.children}
+        {...passthroughProps(this.props)}
+        className={styles.root}
+        role="grid"
+        aria-readonly="true"
+      >
+        {this.renderChildren()}
       </div>
     )
   }
 }
 
-export default MetricsList
-export { MetricsList, MetricsListItem }
+export default MetricGroup
+export { MetricGroup }
