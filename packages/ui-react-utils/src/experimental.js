@@ -47,41 +47,39 @@ import { warn } from '@instructure/console/macro'
 * @param {string} message
 * @return {function} React component flagged as experimental
 */
-const experimental = decorator((ComposedComponent, experimentalProps, message) => {
-  class ExperimentalComponent extends ComposedComponent {}
+const experimental = process.env.NODE_ENV == 'production'
+  ? function(Component) {return Component}
+  : decorator((ComposedComponent, experimentalProps, message) => {
+    return class ExperimentalComponent extends ComposedComponent {
+      componentDidMount() {
+        if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
+          if (experimentalProps) {
+            warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
+          } else {
+            warnExperimentalComponent(ComposedComponent.displayName, message)
+          }
+        }
 
-  if (process.env.NODE_ENV !== 'production') {
-    ExperimentalComponent.prototype.componentDidMount = function () {
-      if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
-        if (experimentalProps) {
-          warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
-        } else {
-          warnExperimentalComponent(ComposedComponent.displayName, message)
+        if (super.componentDidMount) {
+          super.componentDidMount()
         }
       }
 
-      if (ComposedComponent.prototype.componentDidMount) {
-        ComposedComponent.prototype.componentDidMount.call(this)
-      }
-    }
+      componentWillReceiveProps(nextProps, nextContext) {
+        if (!nextProps.__dangerouslyIgnoreExperimentalWarnings) {
+          if (experimentalProps) {
+            warnExperimentalProps(ComposedComponent.displayName, nextProps, experimentalProps, message)
+          } else {
+            warnExperimentalComponent(ComposedComponent.displayName, message)
+          }
+        }
 
-    ExperimentalComponent.prototype.componentWillReceiveProps = function (nextProps, nextContext) {
-      if (!nextProps.__dangerouslyIgnoreExperimentalWarnings) {
-        if (experimentalProps) {
-          warnExperimentalProps(ComposedComponent.displayName, nextProps, experimentalProps, message)
-        } else {
-          warnExperimentalComponent(ComposedComponent.displayName, message)
+        if (super.componentWillReceiveProps) {
+          super.componentWillReceiveProps(nextProps, nextContext)
         }
       }
-
-      if (ComposedComponent.prototype.componentWillReceiveProps) {
-        ComposedComponent.prototype.componentWillReceiveProps.call(this, nextProps, nextContext)
-      }
     }
-  }
-
-  return ExperimentalComponent
-})
+  })
 
 function warnExperimentalProps (displayName, props, experimentalProps, message = '') {
   experimentalProps.forEach((experimentalProp) => {

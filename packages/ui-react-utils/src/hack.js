@@ -46,33 +46,31 @@ import { warn } from '@instructure/console/macro'
 * @param {string} message
 * @return {function} React component flagged as having hack props
 */
-const hack = decorator((ComposedComponent, hackProps, message) => {
-  class HackComponent extends ComposedComponent {}
+const hack = process.env.NODE_ENV == 'production'
+  ? function(Component) { return Component }
+  : decorator((ComposedComponent, hackProps, message) => {
+      return class HackComponent extends ComposedComponent {
+        componentDidMount() {
+          if (hackProps) {
+            warnHackProps(ComposedComponent.displayName, this.props, hackProps, message)
+          }
 
-  if (process.env.NODE_ENV !== 'production') {
-    HackComponent.prototype.componentDidMount = function () {
-      if (hackProps) {
-        warnHackProps(ComposedComponent.displayName, this.props, hackProps, message)
+          if (super.componentDidMount) {
+            super.componentDidMount()
+          }
+        }
+
+        componentWillReceiveProps(nextProps, nextContext) {
+          if (hackProps) {
+            warnHackProps(ComposedComponent.displayName, nextProps, hackProps, message)
+          }
+
+          if (super.componentWillReceiveProps) {
+            super.componentWillReceiveProps(nextProps, nextContext)
+          }
+        }
       }
-
-      if (ComposedComponent.prototype.componentDidMount) {
-        ComposedComponent.prototype.componentDidMount.call(this)
-      }
-    }
-
-    HackComponent.prototype.componentWillReceiveProps = function (nextProps, nextContext) {
-      if (hackProps) {
-        warnHackProps(ComposedComponent.displayName, nextProps, hackProps, message)
-      }
-
-      if (ComposedComponent.prototype.componentWillReceiveProps) {
-        ComposedComponent.prototype.componentWillReceiveProps.call(this, nextProps, nextContext)
-      }
-    }
-  }
-
-  return HackComponent
-})
+    })
 
 function warnHackProps (displayName, props, hackProps, message = '') {
   hackProps.forEach((hackProp) => {
