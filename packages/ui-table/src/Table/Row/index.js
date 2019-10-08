@@ -77,25 +77,27 @@ class Row extends Component {
         role={isStacked ? "row" : null}
         __dangerouslyIgnoreExperimentalWarnings
       >
-        {Children.map(children, (child, index) => {
-          if (matchComponentTypes(child, [ColHeader])) {
-            return child
-          }
-          if (matchComponentTypes(child, [RowHeader])) {
-            return safeCloneElement(child, {
-              key: child.props.name,
-              isStacked,
-            })
-          }
-          if (matchComponentTypes(child, [Cell])) {
-            return safeCloneElement(child, {
-              key: child.props.name,
-              isStacked,
-              header: headers && headers[index],
-            })
-          }
-          return null
-        })}
+        {Children.toArray(children)
+          .filter(Boolean)
+          .map((child, index) => {
+            if (matchComponentTypes(child, [ColHeader])) {
+              return child
+            }
+            if (matchComponentTypes(child, [RowHeader])) {
+              return safeCloneElement(child, {
+                key: child.props.name,
+                isStacked,
+              })
+            }
+            if (matchComponentTypes(child, [Cell])) {
+              return safeCloneElement(child, {
+                key: child.props.name,
+                isStacked,
+                header: headers && headers[index],
+              })
+            }
+            return null
+          })}
       </View>
     )
   }
