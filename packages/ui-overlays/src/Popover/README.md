@@ -5,12 +5,6 @@ id: DeprecatedPopover__README
 
 **DEPRECATED:** Popover will be removed from `ui-overlays` in version 7.0.0. Use the [Popover from ui-popover](#Popover) instead.
 
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. However, there are some breaking changes that will need to be addressed manually. These changes and other things to note are described below.
-- `Popover.Trigger` and `Popover.Content` are no longer in use. The trigger is now defined via the `renderTrigger` prop and the `children` of a `Popover` will be rendered as the content.
-- Some callbacks have changed. Instead of `onShow`, `onDismiss`, and `onToggle`, there is only `onRequestShowContent` and `onRequestHideContent`. When Popover is controlled, these callbacks will also be fired as prompts for updating the `isShowingContent` prop.
-<br/><br/>
-
 Popovers are actionable containers that are triggered by click. When opened, it remains connected with element that triggered it. Popovers are on the same hierarchy as the [Tray](#Tray) but contains less content.
 
 ```js

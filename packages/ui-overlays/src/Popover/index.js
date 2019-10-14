@@ -29,7 +29,7 @@ import { LayoutPropTypes } from '@instructure/ui-layout'
 import { Popover as UIPopover } from '@instructure/ui-popover'
 import { bidirectional } from '@instructure/ui-i18n'
 import { Children, controllable, element } from '@instructure/ui-prop-types'
-import { ComponentIdentifier } from '@instructure/ui-react-utils'
+import { ComponentIdentifier, deprecated } from '@instructure/ui-react-utils'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
@@ -49,6 +49,7 @@ category: components/deprecated
 id: DeprecatedPopover
 ---
 **/
+@deprecated('7.0.0', null, 'Use @instructure/ui-popover instead')
 @testable()
 @bidirectional()
 class Popover extends Component {
@@ -346,8 +347,10 @@ class Popover extends Component {
         color={variant === 'inverse' ? 'primary-inverse' : 'primary'}
         shouldAlignArrow={alignArrow}
         shouldTrackPosition={trackPosition}
-        onRequestShowContent={() => onToggle(true)}
-        onRequestHideContent={(e, { documentClick }) => {
+        onShowContent={() => {
+          onToggle(true)
+        }}
+        onHideContent={(e, { documentClick }) => {
           onDismiss(e, documentClick)
           onToggle(false)
         }}

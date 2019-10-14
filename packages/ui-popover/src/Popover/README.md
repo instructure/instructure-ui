@@ -1,7 +1,29 @@
 ---
 describes: Popover
 ---
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+    <Figure.Item>
+      <code>Popover.Trigger</code> and <code>Popover.Content</code> are no longer in use. The trigger is now defined via the <code>renderTrigger</code> prop and the <code>children</code> of a Popover will be rendered as the content.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>onToggle</code> callback has been replaced by <code>onShowContent</code> and <code>onHideContent</code> When controlled, these will also be called as prompts for updating the <code>isShowingContent</code> prop.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>onShow</code> callback has been renamed to <code>onPositioned</code>.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+
+```
+
 Popovers hide or show content as a result of user interaction, such as clicking, hovering, or focusing. When opened, the content remains connected to the element that triggered it. If you only need to display a small amount of text-only content, you might consider using a [Tooltip](#Tooltip). If you need to display a larger amount of content, a [Tray](#Tray) could be a better choice.
+
 
 #### Uncontrolled Popover
 ```js
@@ -18,8 +40,8 @@ example: true
   placement="top center"
   mountNode={() => document.getElementById('main')}
   onPositioned={() => console.log('positioned')}
-  onRequestShowContent={() => console.log('showing')}
-  onRequestHideContent={() => console.log('hidden')}
+  onShowContent={() => console.log('showing')}
+  onHideContent={() => console.log('hidden')}
 >
   <View padding="x-small" display="block" as="div" id="tip">
     Hello World
@@ -62,10 +84,10 @@ class Example extends React.Component {
         <Popover
           renderTrigger={<Button>Sign In</Button>}
           isShowingContent={this.state.isShowingContent}
-          onRequestShowContent={(e) => {
+          onShowContent={(e) => {
             this.setState({ isShowingContent: true })
           }}
-          onRequestHideContent={(e, { documentClick }) => {
+          onHideContent={(e, { documentClick }) => {
             this.setState({ isShowingContent: false })
           }}
           on="click"
@@ -145,10 +167,10 @@ class Example extends React.Component {
         <Popover
           renderTrigger={<Button margin="small">focus me</Button>}
           isShowingContent={this.state.isShowingContent}
-          onRequestShowContent={(e) => {
+          onShowContent={(e) => {
             this.setState({ isShowingContent: true })
           }}
-          onRequestHideContent={(e) => {
+          onHideContent={(e) => {
             this.setState({ isShowingContent: false })
           }}
           on={['focus', 'click']}

@@ -657,7 +657,6 @@ class Select extends Component {
               isShowingContent={isShowingOptions}
               shouldReturnFocus={false}
               withArrow={false}
-              __dangerouslyIgnoreExperimentalWarnings
             >
               {this.renderList({
                 getListProps,

@@ -44,9 +44,10 @@ import {
   handleMouseOverOut
 } from '@instructure/ui-dom-utils'
 import {
+  ComponentIdentifier,
   safeCloneElement,
   callRenderProp,
-  experimental
+  deprecated
 } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
@@ -54,16 +55,40 @@ import { uid } from '@instructure/uid'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
+@deprecated('8.0.0', null, 'Use Popover\'s `renderTrigger` prop instead.')
+@testable()
+class PopoverTrigger extends ComponentIdentifier {
+  static displayName = 'PopoverTrigger'
+}
+
+@deprecated('8.0.0', null, 'Use Popover\'s `children` instead.')
+@testable()
+class PopoverContent extends ComponentIdentifier {
+  static displayName = 'PopoverContent'
+}
+
 /**
 ---
 category: components
-experimental: true
 ---
 **/
+@deprecated('8.0.0', {
+  show: 'isShowingContent',
+  defaultShow: 'defaultIsShowingContent',
+  variant: 'color',
+  label: 'screenReaderLabel',
+  trackPosition: 'shouldTrackPosition',
+  alignArrow: 'shouldAlignArrow',
+  onShow: 'onShowContent',
+  onDismiss: 'onHideContent',
+  onToggle: 'onShowContent/onHideContent'
+})
 @testable()
-@experimental()
 @bidirectional()
 class Popover extends Component {
+  static Trigger = PopoverTrigger
+  static Content = PopoverContent
+
   static propTypes = {
     /**
     * Whether or not the `<Popover />` content is shown
@@ -188,12 +213,12 @@ class Popover extends Component {
      * Callback fired when content is shown. When controlled, this callback is
      * fired when the Popover expects to be shown
      */
-    onRequestShowContent: PropTypes.func,
+    onShowContent: PropTypes.func,
     /**
      * Callback fired when content is hidden. When controlled, this callback is
      * fired when the Popover expects to be hidden
      */
-    onRequestHideContent: PropTypes.func,
+    onHideContent: PropTypes.func,
     /**
      * Callback fired when content has been is initially positioned.
      * If `shouldRenderOffscreen` is true, it will only fire once, the first
@@ -235,7 +260,46 @@ class Popover extends Component {
     /**
      * The content to be shown by the popover
      */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+
+    /* eslint-disable react/require-default-props */
+    /**
+     * __Deprecated - use `isShowingContent` instead__
+     */
+    show: PropTypes.bool,
+    /**
+     * __Deprecated - use `defaultIsShowingContent` instead__
+     */
+    defaultShow: PropTypes.bool,
+    /**
+     * __Deprecated - use `color`__
+     */
+    variant: PropTypes.oneOf(['default', 'inverse']),
+    /**
+    * __Deprecated - use `shouldAlignArrow`__
+    */
+    alignArrow: PropTypes.bool,
+    /**
+     * __Deprecated - use `screenReaderLabel`__
+     */
+    label: PropTypes.string,
+    /**
+     * __Deprecated - use `shouldTrackPosition`__
+     */
+    trackPosition: PropTypes.bool,
+    /**
+     * __Deprecated - use `onShowContent`__
+     */
+    onShow: PropTypes.func,
+    /**
+     * __Deprecated - use `onHideContent`__
+     */
+    onDismiss: PropTypes.func,
+    /**
+     * __Deprecated - use `onShowContent` and `onHideContent`__
+     */
+    onToggle: PropTypes.func,
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -251,12 +315,12 @@ class Popover extends Component {
     contentRef: el => {},
     withArrow: true,
     constrain: 'window',
-    defaultFocusElement: null,
-    screenReaderLabel: null,
-    mountNode: null,
+    defaultFocusElement: undefined,
+    screenReaderLabel: undefined,
+    mountNode: undefined,
     insertAt: 'bottom',
-    liveRegion: null,
-    positionTarget: null,
+    liveRegion: undefined,
+    positionTarget: undefined,
     id: undefined,
     shouldAlignArrow: false,
     shouldTrackPosition: true,
@@ -266,8 +330,8 @@ class Popover extends Component {
     shouldCloseOnDocumentClick: true,
     shouldFocusContentOnTriggerBlur: false,
     shouldCloseOnEscape: true,
-    onRequestShowContent: (event) => {},
-    onRequestHideContent: (event, { documentClick }) => {},
+    onShowContent: (event) => {},
+    onHideContent: (event, { documentClick }) => {},
     onClick: (event) => {},
     onFocus: (event) => {},
     onBlur: (event) => {},
@@ -289,8 +353,8 @@ class Popover extends Component {
       offsetY: props.offsetY
     }
 
-    if (typeof props.isShowingContent === 'undefined') {
-      this.state.isShowingContent = props.defaultIsShowingContent
+    if (typeof props.isShowingContent === 'undefined' && typeof props.show === 'undefined') {
+      this.state.isShowingContent = props.defaultIsShowingContent || props.defaultShow
     }
 
     this._id = this.props.id || uid('Popover')
@@ -319,7 +383,7 @@ class Popover extends Component {
   computeOffsets (placement) {
     let { offsetX, offsetY } = this.props
 
-    if (this.props.shouldAlignArrow && this._view) {
+    if ((this.props.shouldAlignArrow || this.props.alignArrow) && this._view) {
       const secondaryPlacement = parsePlacement(placement)[1]
       const { arrowSize, arrowBorderWidth } = this._view.theme
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
@@ -353,12 +417,12 @@ class Popover extends Component {
     return {
       offsetX: this.state.offsetX,
       offsetY: this.state.offsetY,
-      shouldTrackPosition: this.props.shouldTrackPosition && this.shown,
+      shouldTrackPosition: (this.props.shouldTrackPosition || this.props.trackPosition) && this.shown,
       insertAt: this.props.insertAt,
       placement: this.placement,
       constrain: this.props.constrain,
-      onPositioned: createChainedFunction(this.handlePositionChanged, this.props.onPositioned),
-      onPositionChanged: createChainedFunction(this.handlePositionChanged, this.props.onPositionChanged),
+      onPositioned: this.handlePositioned,
+      onPositionChanged: this.handlePositionChanged,
       target: this.props.positionTarget,
       mountNode: this.props.mountNode,
       id: this._id
@@ -366,9 +430,12 @@ class Popover extends Component {
   }
 
   get shown () {
-    return (typeof this.props.isShowingContent === 'undefined')
+    return (
+      typeof this.props.isShowingContent === 'undefined' &&
+      typeof this.props.show === 'undefined'
+    )
       ? this.state.isShowingContent
-      : this.props.isShowingContent
+      : this.props.isShowingContent || this.props.show
   }
 
   get defaultFocusElement () {
@@ -376,26 +443,39 @@ class Popover extends Component {
   }
 
   show = (event) => {
-    if (typeof this.props.isShowingContent === 'undefined') {
+    if (typeof this.props.isShowingContent === 'undefined' &&
+      typeof this.props.show === 'undefined') {
       this.setState({ isShowingContent: true })
     }
-    this.props.onRequestShowContent(event)
+    this.props.onShowContent(event)
+    if (typeof this.props.onToggle === 'function') {
+      this.props.onToggle(true)
+    }
   }
 
   hide = (event, documentClick = false) => {
-    const { onRequestHideContent, isShowingContent } = this.props
+    const { onHideContent, isShowingContent, show, onToggle, onDismiss } = this.props
 
-    if (typeof isShowingContent === 'undefined') {
+    if (typeof isShowingContent === 'undefined' && typeof show === 'undefined') {
       // uncontrolled, set state, fire callbacks
       this.setState(({ isShowingContent }) => {
         if (isShowingContent) {
-          onRequestHideContent(event, { documentClick })
+          onHideContent(event, { documentClick })
+          if (typeof onDismiss === 'function') {
+            onDismiss(event, documentClick)
+          }
         }
         return { isShowingContent: false }
       })
-    } else if (isShowingContent) {
+    } else if (isShowingContent || show) {
       // controlled, fire callback
-      onRequestHideContent(event, { documentClick })
+      onHideContent(event, { documentClick })
+      if (typeof onDismiss === 'function') {
+        onDismiss(event, documentClick)
+      }
+    }
+    if (typeof onToggle === 'function') {
+      onToggle(false)
     }
   }
 
@@ -449,15 +529,32 @@ class Popover extends Component {
     }
   }
 
-  handlePositionChanged = ({ placement }) => {
+  handlePositioned = (position) => {
+    const placement = position.placement
     this.setState({
       placement,
       ...this.computeOffsets(placement)
     })
+    this.props.onPositioned(position)
+    if (typeof this.props.onShow === 'function') {
+      this.props.onShow(position)
+    }
+  }
+
+  handlePositionChanged = (position) => {
+    const placement = position.placement
+    this.setState({
+      placement,
+      ...this.computeOffsets(placement)
+    })
+    this.props.onPositionChanged(position)
   }
 
   renderTrigger () {
-    let trigger = callRenderProp(this.props.renderTrigger)
+    let trigger = ComponentIdentifier.pick(Popover.Trigger, this.props.children)
+    if (!trigger) {
+      trigger = callRenderProp(this.props.renderTrigger)
+    }
 
     if (trigger) {
       const { on, shouldContainFocus } = this.props
@@ -515,13 +612,16 @@ class Popover extends Component {
   }
 
   renderContent () {
-    let content = callRenderProp(this.props.children)
+    let content = ComponentIdentifier.pick(Popover.Content, this.props.children)
+    if (!content) {
+      content = callRenderProp(this.props.children)
+    }
 
     if (this.shown) {
       content = (
         <Dialog
           open={this.shown}
-          label={this.props.screenReaderLabel}
+          label={this.props.screenReaderLabel || this.props.label}
           ref={(el) => this._dialog = el}
           display="block"
           onBlur={this.handleDialogBlur}
@@ -541,10 +641,17 @@ class Popover extends Component {
 
     if (this.shown || this.props.shouldRenderOffscreen) {
       let ViewElement
+      let color = this.props.variant
+      if (color) {
+        color = color === 'inverse' ? 'primary-inverse' : 'primary'
+      } else {
+        color = this.props.color
+      }
+
       let viewProps = {
         ref: c => this._view = c,
         elementRef: this.props.contentRef,
-        background: this.props.color,
+        background: color,
         stacking: this.props.stacking,
         shadow: this.props.shadow,
         display: 'block'
@@ -557,7 +664,7 @@ class Popover extends Component {
         viewProps = {
           ...viewProps,
           // TODO: remove background override after contextview is updated
-          background: this.props.color === 'primary' ? 'default' : 'inverse',
+          background: color === 'primary' ? 'default' : 'inverse',
           placement: this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
         }
       } else {
@@ -610,4 +717,4 @@ class Popover extends Component {
 }
 
 export default Popover
-export { Popover }
+export { Popover, PopoverTrigger, PopoverContent }

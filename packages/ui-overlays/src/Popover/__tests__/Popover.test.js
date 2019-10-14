@@ -160,7 +160,7 @@ describe('<Popover />', async () => {
     it('should call onToggle', async () => {
       const onToggle = spy()
       await mount(
-        <Popover on="click" show={false} onToggle={onToggle}>
+        <Popover on="click" onToggle={onToggle}>
           <PopoverTrigger>
             <button>Click Me</button>
           </PopoverTrigger>

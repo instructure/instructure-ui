@@ -433,7 +433,6 @@ class DateInput extends Component {
             positionTarget={this._input}
             shouldReturnFocus={false}
             shouldFocusContentOnTriggerBlur
-            __dangerouslyIgnoreExperimentalWarnings
           >
             {this.renderCalendar({ getListProps, getOptionProps })}
           </Popover>

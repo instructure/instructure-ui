@@ -1,4 +1,3 @@
-
 {
   "Avatar": {
     "8.0.0": [
@@ -73,6 +72,21 @@
     "8.0.0": [
       { "old": "over", "new": "shouldPositionOverTarget"},
       { "old": "trackPosition", "new": "shouldTrackPosition" }
+    ]
+  },
+  "Popover": {
+    "8.0.0": [
+      { "old": "show", "new": "isShowingContent" },
+      { "old": "label", "new": "screenReaderLabel" },
+      { "old": "alignArrow", "new": "shouldAlignArrow" },
+      { "old": "trackPosition", "new": "shouldTrackPosition" },
+      { "old": "defaultShow", "new": "defaultIsShowingContent" },
+      { "old": "onShow", "new": "onPositioned" },
+      { "old": "onDismiss", "new": "onHideContent" },
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "primary" },
+        { "old": "inverse", "new": "primary-inverse" }
+      ]}
     ]
   },
   "View": {

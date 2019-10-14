@@ -211,11 +211,10 @@ class Tooltip extends Component {
         offsetX={offsetX}
         offsetY={offsetY}
         renderTrigger={() => this.renderTrigger()}
-        onRequestShowContent={onRequestShowContent}
-        onRequestHideContent={onRequestHideContent}
+        onShowContent={onRequestShowContent}
+        onHideContent={onRequestHideContent}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <span
           id={this._id}

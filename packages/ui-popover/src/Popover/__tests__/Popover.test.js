@@ -58,11 +58,11 @@ describe('<Popover />', async () => {
   testEventHandler('onBlur', 'focus', 'blur')
 
   it('should hide content when clicked outside content by default', async () => {
-    const onRequestHideContent = spy()
+    const onHideContent = spy()
     await mount(
       <Popover
         on="click"
-        onRequestHideContent={onRequestHideContent}
+        onHideContent={onHideContent}
         renderTrigger={<button>Click Me</button>}
       >
         <h2>Foo Bar Baz</h2>
@@ -88,15 +88,15 @@ describe('<Popover />', async () => {
     content = await popover.findContent({ expectEmpty: true })
 
     expect(content).to.not.exist()
-    expect(onRequestHideContent.lastCall.args[1].documentClick).to.be.true()
+    expect(onHideContent.lastCall.args[1].documentClick).to.be.true()
   })
 
   it('should hide content when trigger is clicked', async () => {
-    const onRequestHideContent = spy()
+    const onHideContent = spy()
     await mount(
       <Popover
         on="click"
-        onRequestHideContent={onRequestHideContent}
+        onHideContent={onHideContent}
         shouldCloseOnDocumentClick={false}
         renderTrigger={<button>Click Me</button>}
       >
@@ -113,7 +113,7 @@ describe('<Popover />', async () => {
     const content = await popover.findContent({ expectEmpty: true })
 
     expect(content).to.not.exist()
-    expect(onRequestHideContent.lastCall.args[1].documentClick).to.be.false()
+    expect(onHideContent.lastCall.args[1].documentClick).to.be.false()
   })
 
   it('should show content if defaultIsShowingContent is true', async () => {
@@ -171,16 +171,16 @@ describe('<Popover />', async () => {
       expect(content.getTextContent()).to.equal('Foo Bar Baz')
     })
 
-    it('should call onRequestShowContent and onRequestHideContent', async () => {
-      const onRequestShowContent = spy()
-      const onRequestHideContent = spy()
+    it('should call onShowContent and onHideContent', async () => {
+      const onShowContent = spy()
+      const onHideContent = spy()
       const subject = await mount(
         <Popover
           on="click"
           isShowingContent={false}
           shouldCloseOnDocumentClick={false}
-          onRequestShowContent={onRequestShowContent}
-          onRequestHideContent={onRequestHideContent}
+          onShowContent={onShowContent}
+          onHideContent={onHideContent}
           renderTrigger={<button>Click Me</button>}
         >
           <h2>Foo Bar Baz</h2>
@@ -190,12 +190,12 @@ describe('<Popover />', async () => {
       const trigger = await popover.findTrigger()
 
       await trigger.click()
-      expect(onRequestShowContent).to.have.been.calledOnce()
+      expect(onShowContent).to.have.been.calledOnce()
 
       await subject.setProps({ isShowingContent: true })
 
       await trigger.click()
-      expect(onRequestHideContent.lastCall.args[1].documentClick).to.be.false()
+      expect(onHideContent.lastCall.args[1].documentClick).to.be.false()
     })
 
     it('should not show content on click', async () => {
@@ -221,13 +221,13 @@ describe('<Popover />', async () => {
 
   describe('when shouldFocusContentOnTriggerBlur=true and shouldContainFocus=false', async () => {
     it('should move focus into the content when the trigger is blurred', async () => {
-      const onRequestHideContent = spy()
+      const onHideContent = spy()
       await mount(
         <span>
           <button>focus me first</button>
           <Popover
             isShowingContent={true}
-            onRequestHideContent={onRequestHideContent}
+            onHideContent={onHideContent}
             renderTrigger={<button>focus me</button>}
             on={['hover', 'focus', 'click']}
             mountNode={() => document.getElementById('container')}
@@ -260,7 +260,7 @@ describe('<Popover />', async () => {
       })
 
       await button.keyDown('tab')
-      expect(onRequestHideContent).to.have.been.calledOnce()
+      expect(onHideContent).to.have.been.calledOnce()
     })
   })
 })
