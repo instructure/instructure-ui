@@ -35,7 +35,7 @@ const testable = (
   // ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
   // We do this because adding those `data-cid` locators slows things down.
   !process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
-) ? Component => Component : decorator((ComposedComponent) => {
+) ? () => (Component => Component) : decorator((ComposedComponent) => {
 
   const displayName = ComposedComponent.displayName || ComposedComponent.name
   const locator = {

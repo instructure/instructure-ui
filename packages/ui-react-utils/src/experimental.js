@@ -48,7 +48,7 @@ import { warn } from '@instructure/console/macro'
 * @return {function} React component flagged as experimental
 */
 const experimental = process.env.NODE_ENV == 'production'
-  ? function(Component) {return Component}
+  ? () => (Component => Component)
   : decorator((ComposedComponent, experimentalProps, message) => {
     return class ExperimentalComponent extends ComposedComponent {
       componentDidMount() {

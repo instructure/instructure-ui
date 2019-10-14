@@ -47,7 +47,7 @@ import { warn } from '@instructure/console/macro'
 * @return {function} React component flagged as having hack props
 */
 const hack = process.env.NODE_ENV == 'production'
-  ? function(Component) { return Component }
+  ? () => (Component => Component)
   : decorator((ComposedComponent, hackProps, message) => {
       return class HackComponent extends ComposedComponent {
         componentDidMount() {

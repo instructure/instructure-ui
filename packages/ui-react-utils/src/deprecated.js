@@ -52,8 +52,11 @@ import { warn } from '@instructure/console/macro'
 */
 const deprecated = (() => {
   if (process.env.NODE_ENV === 'production') {
-    const deprecated = function (ComposedComponent) { return ComposedComponent }
+    const deprecated = function () {
+      return ComposedComponent => ComposedComponent
+    }
     deprecated.changedPackageWarning = () => {}
+
     return deprecated
   }
 
