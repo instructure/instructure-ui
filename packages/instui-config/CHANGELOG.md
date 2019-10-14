@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
+
+
+### Bug Fixes
+
+* **instui-config:** fix typos in propName codemod config ([81f1975](https://github.com/instructure/instructure-ui/commit/81f1975))
+
+
+### Features
+
+* **ui-file-drop:** add ui-file-drop package ([b275521](https://github.com/instructure/instructure-ui/commit/b275521))
+* **ui-heading:** add ui-heading package ([b681432](https://github.com/instructure/instructure-ui/commit/b681432))
+* **ui-link:** add ui-link package ([fa75902](https://github.com/instructure/instructure-ui/commit/fa75902))
+* **ui-position:** add ui-position package ([5511a88](https://github.com/instructure/instructure-ui/commit/5511a88))
+* **ui-tooltip:** add ui-tooltip package ([2e88e8a](https://github.com/instructure/instructure-ui/commit/2e88e8a))
+
+
+
+
+
 # [6.13.0](https://github.com/instructure/instructure-ui/compare/v6.12.0...v6.13.0) (2019-09-24)
 
 

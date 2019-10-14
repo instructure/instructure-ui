@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
+
+
+### Performance Improvements
+
+* **ui-view:** don't call verifySpanMargin in prod mode ([60e0c2f](https://github.com/instructure/instructure-ui/commit/60e0c2f))
+
+
+
+
+
 # [6.13.0](https://github.com/instructure/instructure-ui/compare/v6.12.0...v6.13.0) (2019-09-24)
 
 

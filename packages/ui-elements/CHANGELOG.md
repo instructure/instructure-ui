@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
+
+
+### Bug Fixes
+
+* **ui-elements:** fix TruncateText's componentDidUpdate logic ([5055515](https://github.com/instructure/instructure-ui/commit/5055515))
+
+
+### Features
+
+* **ui-heading:** add ui-heading package ([b681432](https://github.com/instructure/instructure-ui/commit/b681432))
+* **ui-link:** add ui-link package ([fa75902](https://github.com/instructure/instructure-ui/commit/fa75902))
+
+
+
+
+
 # [6.13.0](https://github.com/instructure/instructure-ui/compare/v6.12.0...v6.13.0) (2019-09-24)
 
 

@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
+
+
+### Bug Fixes
+
+* **instui-config:** fix typos in propName codemod config ([81f1975](https://github.com/instructure/instructure-ui/commit/81f1975))
+* **ui-elements:** fix TruncateText's componentDidUpdate logic ([5055515](https://github.com/instructure/instructure-ui/commit/5055515))
+* **ui-file-drop,ui-pill:** update babel ([a7a8489](https://github.com/instructure/instructure-ui/commit/a7a8489))
+* **ui-react-utils:** fix production errors for decorator functions ([f5da64c](https://github.com/instructure/instructure-ui/commit/f5da64c))
+* **ui-table:** ignore falsy children in Table.Row ([dae5db6](https://github.com/instructure/instructure-ui/commit/dae5db6))
+
+
+### Features
+
+* **ui-file-drop:** add ui-file-drop package ([b275521](https://github.com/instructure/instructure-ui/commit/b275521))
+* **ui-heading:** add ui-heading package ([b681432](https://github.com/instructure/instructure-ui/commit/b681432))
+* **ui-link:** add ui-link package ([fa75902](https://github.com/instructure/instructure-ui/commit/fa75902))
+* **ui-position:** add ui-position package ([5511a88](https://github.com/instructure/instructure-ui/commit/5511a88))
+* **ui-tooltip:** add ui-tooltip package ([2e88e8a](https://github.com/instructure/instructure-ui/commit/2e88e8a))
+
+
+### Performance Improvements
+
+* **ui-react-utils:** make dev-only decorators really noops in prod ([f2f4865](https://github.com/instructure/instructure-ui/commit/f2f4865))
+* **ui-testable:** make ui-testable have no cost in prod ([5ab79fa](https://github.com/instructure/instructure-ui/commit/5ab79fa))
+* **ui-view:** don't call verifySpanMargin in prod mode ([60e0c2f](https://github.com/instructure/instructure-ui/commit/60e0c2f))
+
+
+
+
+
 # [6.13.0](https://github.com/instructure/instructure-ui/compare/v6.12.0...v6.13.0) (2019-09-24)
 
 

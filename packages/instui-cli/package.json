@@ -1,6 +1,6 @@
 {
   "name": "@instructure/instui-cli",
-  "version": "6.13.0",
+  "version": "6.14.0",
   "description": "A cli for working with instructure-ui packages",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -19,13 +19,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "^6.13.0",
-    "@instructure/instui-config": "^6.13.0",
-    "@instructure/template-app": "^6.13.0",
-    "@instructure/template-component": "^6.13.0",
-    "@instructure/template-package": "^6.13.0",
-    "@instructure/ui-codemods": "^6.13.0",
-    "@instructure/ui-scripts": "^6.13.0",
+    "@instructure/command-utils": "^6.14.0",
+    "@instructure/instui-config": "^6.14.0",
+    "@instructure/template-app": "^6.14.0",
+    "@instructure/template-component": "^6.14.0",
+    "@instructure/template-package": "^6.14.0",
+    "@instructure/ui-codemods": "^6.14.0",
+    "@instructure/ui-scripts": "^6.14.0",
     "semver": "^6.3.0",
     "yargs": "^14.0.0"
   },
