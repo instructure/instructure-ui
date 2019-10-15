@@ -25,7 +25,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Focusable } from '@instructure/ui-focusable'
 import {
   getElementType,
   omitProps,
@@ -137,9 +136,19 @@ class Tooltip extends Component {
   }
 
   _id = uid('Tooltip')
+  state = { hasFocus: false }
 
-  renderTrigger (focused) {
+  handleFocus = (event) => {
+    this.setState({ hasFocus: true })
+  }
+
+  handleBlur = (event) => {
+    this.setState({ hasFocus: false })
+  }
+
+  renderTrigger () {
     const { children, as } = this.props
+    const { hasFocus } = this.state
     const triggerProps = {
       'aria-describedby': this._id
     }
@@ -155,7 +164,7 @@ class Tooltip extends Component {
     } else if (typeof children === 'function') {
       return children(
         {
-          focused,
+          focused: hasFocus,
           getTriggerProps: (props) => {
             return {
               ...triggerProps,
@@ -187,37 +196,35 @@ class Tooltip extends Component {
     } = this.props
 
     return (
-      <Focusable render={({ focused }) => {
-        return (
-          <Popover
-            {...passthroughProps(rest)}
-            isShowingContent={isShowingContent}
-            defaultIsShowingContent={defaultIsShowingContent}
-            on={on}
-            shouldRenderOffscreen
-            shouldReturnFocus={false}
-            placement={placement}
-            color={color === 'primary' ? 'primary-inverse' : 'primary'}
-            mountNode={mountNode}
-            constrain={constrain}
-            shadow="none"
-            offsetX={offsetX}
-            offsetY={offsetY}
-            renderTrigger={() => this.renderTrigger(focused)}
-            onRequestShowContent={onRequestShowContent}
-            onRequestHideContent={onRequestHideContent}
-            __dangerouslyIgnoreExperimentalWarnings
-          >
-            <span
-              id={this._id}
-              className={styles.root}
-              role="tooltip"
-            >
-              { callRenderProp(renderTip) }
-            </span>
-          </Popover>
-        )
-      }} />
+      <Popover
+        {...passthroughProps(rest)}
+        isShowingContent={isShowingContent}
+        defaultIsShowingContent={defaultIsShowingContent}
+        on={on}
+        shouldRenderOffscreen
+        shouldReturnFocus={false}
+        placement={placement}
+        color={color === 'primary' ? 'primary-inverse' : 'primary'}
+        mountNode={mountNode}
+        constrain={constrain}
+        shadow="none"
+        offsetX={offsetX}
+        offsetY={offsetY}
+        renderTrigger={() => this.renderTrigger()}
+        onRequestShowContent={onRequestShowContent}
+        onRequestHideContent={onRequestHideContent}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        __dangerouslyIgnoreExperimentalWarnings
+      >
+        <span
+          id={this._id}
+          className={styles.root}
+          role="tooltip"
+        >
+          { callRenderProp(renderTip) }
+        </span>
+      </Popover>
     )
   }
 }

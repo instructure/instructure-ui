@@ -83,7 +83,7 @@ class Example extends React.Component {
           this.setState({ isShowingContent: false })
         }}
       >
-        <Link>Hover or focus me</Link>
+        <Link href="#">Hover or focus me</Link>
       </Tooltip>
     )
   }

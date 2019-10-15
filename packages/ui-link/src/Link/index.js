@@ -79,10 +79,6 @@ class Link extends Component {
     */
     interaction: PropTypes.oneOf(['enabled', 'disabled']),
     /**
-    * Fires when the Link is clicked
-    */
-    onClick: PropTypes.func,
-    /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
@@ -104,37 +100,38 @@ class Link extends Component {
     /**
     * Set `false` to remove default underline if Link does not appear inline with text
     */
-    isWithinText: PropTypes.bool
+    isWithinText: PropTypes.bool,
+    /**
+    * Fires when the Link is clicked
+    */
+    onClick: PropTypes.func,
+    /**
+    * Fires when the Link gains focus
+    */
+    onFocus: PropTypes.func,
+    /**
+    * Fires when the Link loses focus
+    */
+    onBlur: PropTypes.func
   }
 
   static defaultProps = {
     href: undefined,
     elementRef: undefined,
     interaction: 'enabled',
-    onClick: undefined,
     margin: undefined,
     renderIcon: undefined,
     display: undefined,
     color: 'link',
     as: undefined,
     iconPlacement: 'start',
-    isWithinText: true
+    isWithinText: true,
+    onClick: undefined,
+    onFocus: undefined,
+    onBlur: undefined,
   }
 
-  state = {
-    focused: false
-  }
-
-  handleClick = e => {
-    const { interaction, onClick } = this.props
-
-    if (interaction === 'disabled') {
-      e.preventDefault()
-      e.stopPropagation()
-    } else if (typeof onClick === 'function') {
-      onClick(e)
-    }
-  }
+  state = { hasFocus: false }
 
   handleElementRef = (el) => {
     if (typeof this.props.elementRef === 'function') {
@@ -143,13 +140,30 @@ class Link extends Component {
     this._link = el
   }
 
-  handleBlur = () => this.setState({
-    focused: false
-  })
+  handleClick = (event) => {
+    const { interaction, onClick } = this.props
 
-  handleFocus = () => this.setState({
-    focused: true
-  })
+    if (interaction === 'disabled') {
+      event.preventDefault()
+      event.stopPropagation()
+    } else if (typeof onClick === 'function') {
+      onClick(event)
+    }
+  }
+
+  handleFocus = (event) => {
+    this.setState({ hasFocus: true })
+    if (typeof this.props.onFocus === 'function') {
+      this.props.onFocus(event)
+    }
+  }
+
+  handleBlur = (event) => {
+    this.setState({ hasFocus: false })
+    if (typeof this.props.onBlur === 'function') {
+      this.props.onBlur(event)
+    }
+  }
 
   get containsTruncateText () {
     let truncateText = false

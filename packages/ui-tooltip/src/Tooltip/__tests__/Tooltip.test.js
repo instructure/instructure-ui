@@ -208,7 +208,9 @@ describe('<Tooltip />', async () => {
       const trigger = await tip.findTrigger()
 
       await trigger.focus()
-      expect(onRequestShowContent).to.have.been.calledOnce()
+      await wait(() => {
+        expect(onRequestShowContent).to.have.been.calledOnce()
+      })
 
       await subject.setProps({ isShowingContent: true})
 

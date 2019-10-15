@@ -91,8 +91,6 @@ class Tooltip extends Component {
     constrain: 'window'
   }
 
-  _id = uid('Tooltip')
-
   render () {
     const {
       children,
