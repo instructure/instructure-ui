@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import { getElementType, experimental, passthroughProps } from '@instructure/ui-react-utils'
+import { deprecated, getElementType, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -37,12 +37,12 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
-
+@deprecated('8.0.0', {
+  ellipsis: '<TruncateText />'
+})
 @testable()
-@experimental()
 @themeable(theme, styles)
 class Heading extends Component {
   static propTypes = {
@@ -82,7 +82,14 @@ class Heading extends Component {
     /**
     * Provides a ref to the underlying HTML element
     */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use `<TruncateText /> instead`__
+    */
+    ellipsis: PropTypes.bool
+    /* eslint-enable react/require-default-props */
    }
 
    static defaultProps = {
@@ -102,6 +109,7 @@ class Heading extends Component {
       level,
       margin,
       elementRef,
+      ellipsis,
       ...props
     } = this.props
 
@@ -120,7 +128,8 @@ class Heading extends Component {
           [styles.root]: true,
           [styles[`level--${level}`]]: true,
           [styles[`color--${color}`]]: color,
-          [styles[`border--${border}`]]: border !== 'none'
+          [styles[`border--${border}`]]: border !== 'none',
+          [styles.ellipsis]: ellipsis
         })}
         as={ElementType}
         margin={margin}

@@ -52,7 +52,7 @@ class Header extends Component {
           <PandaLogo />
         </div>
         <div className={styles.banner} role="banner">
-          <Heading level="h2" as="h1" __dangerouslyIgnoreExperimentalWarnings>
+          <Heading level="h2" as="h1">
             <Button
               variant="link"
               size="large"

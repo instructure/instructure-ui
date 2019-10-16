@@ -5,11 +5,6 @@ id: DeprecatedHeading__README
 
 **DEPRECATED:** DeprecatedHeading will be removed from `ui-elements` in version 7.0.0. Use the [Heading from ui-heading](#Heading) instead.
 
-### Important Upgrade Notes
-The following props have been updated in `ui-heading`:
-- The `ellipsis` prop has been removed. Please update your Headings to use [TruncateText](#TruncateText) for ellipsis instead.
-
-
 ```js
 ---
 example: true

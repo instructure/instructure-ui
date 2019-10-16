@@ -149,7 +149,7 @@ class Icons extends Component {
   renderFooter () {
     return (
       <div>
-        <Heading level="h3" margin="medium 0" __dangerouslyIgnoreExperimentalWarnings>
+        <Heading level="h3" margin="medium 0">
           Installation
         </Heading>
         <CodeEditor
@@ -214,7 +214,7 @@ class MyIcon extends React.Component {
 
     return (
       <div key={`${name}-${variant}`}>
-        <Heading level="h3" margin="small 0" __dangerouslyIgnoreExperimentalWarnings>
+        <Heading level="h3" margin="small 0">
           Usage
         </Heading>
         <CodeEditor
@@ -276,7 +276,7 @@ class MyIcon extends React.Component {
                 >
                   Close
                 </CloseButton>
-                <Heading __dangerouslyIgnoreExperimentalWarnings>
+                <Heading>
                   {`${glyph.glyphName} (${variant})`}
                 </Heading>
               </Modal.Header>

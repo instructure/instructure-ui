@@ -2,6 +2,12 @@
 describes: Heading
 ---
 
+### Upgrade notes for our 8.0 release
+The following props will be updated in `ui-heading`:
+- The `ellipsis` prop will be removed. Please update your Headings to use [TruncateText](#TruncateText) for ellipsis instead.
+
+Heading is a component for creating typographic headings.
+
 ```js
 ---
 example: true
