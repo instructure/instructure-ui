@@ -27,7 +27,7 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, experimental } from '@instructure/ui-react-utils'
+import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { supportsObjectFit } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -37,11 +37,14 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
+@deprecated('8.0.0', {
+  grayscale: 'withGrayscale',
+  blur: 'withBlur',
+  inline: 'display'
+})
 @testable()
-@experimental()
 @themeable(theme, styles)
 class Img extends Component {
   static propTypes = {
@@ -68,7 +71,21 @@ class Img extends Component {
     constrain: PropTypes.oneOf(['cover', 'contain']),
     elementRef: PropTypes.func,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use `display`__
+    */
+   inline: PropTypes.bool,
+    /**
+    * __Deprecated - use `withGrayscale`__
+    */
+   grayscale: PropTypes.bool,
+    /**
+    * __Deprecated - use `withBlur`__
+    */
+   blur: PropTypes.bool,
+   /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -92,11 +109,11 @@ class Img extends Component {
     const blur = `blur(${this.theme.imageBlurAmount})`
     const grayscale = 'grayscale(1)'
 
-    if (this.props.withGrayscale && this.props.withBlur) {
+    if ((this.props.withGrayscale || this.props.grayscale) && (this.props.withBlur || this.props.blur)) {
       return `${blur} ${grayscale}`
-    } else if (this.props.withGrayscale) {
+    } else if (this.props.withGrayscale || this.props.grayscale) {
       return grayscale
-    } else if (this.props.withBlur) {
+    } else if (this.props.withBlur || this.props.blur) {
       return blur
     } else {
       return null
@@ -116,6 +133,9 @@ class Img extends Component {
       width,
       height,
       elementRef,
+      inline,
+      blur,
+      grayscale,
       ...props
     } = this.props
 
@@ -127,12 +147,12 @@ class Img extends Component {
       className: classnames({
         [styles.image]: true,
         [styles['has-overlay']]: overlay,
-        [styles['has-filter']]: withBlur || withGrayscale,
+        [styles['has-filter']]: withBlur || withGrayscale || blur || grayscale,
         [styles.cover]: this.supportsObjectFit && constrain === 'cover',
         [styles.contain]: this.supportsObjectFit && constrain === 'contain'
       }),
       style: {
-        filter: (withBlur || withGrayscale) ? this.renderFilter() : 'none'
+        filter: (withBlur || withGrayscale || blur || grayscale) ? this.renderFilter() : 'none'
       },
       src
     }
@@ -142,7 +162,7 @@ class Img extends Component {
       width,
       height,
       margin,
-      display,
+      display: (display === 'block' || inline === false) ? 'block' : 'inline-block',
       elementRef,
       __dangerouslyIgnoreExperimentalWarnings: true
     }

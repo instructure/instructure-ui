@@ -3,14 +3,7 @@ describes: DeprecatedImg
 id: DeprecatedIMG__README
 ---
 
-**DEPRECATED:** Img will be removed from `ui-elements` in version 7.0.0. Use the [Img from ui-img](#Img) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
-
-- **blur** has been updated to `withBlur`
-- **grayscale** has been updated to `withGrayscale`
-- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
+**DEPRECATED:** Img will be removed from `ui-elements` in version 7.0.0. Use the [Img](#Img) from [ui-img](#ui-img) instead.
 
 ***
 

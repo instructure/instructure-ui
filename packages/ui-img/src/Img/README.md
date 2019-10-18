@@ -1,6 +1,14 @@
 ---
 describes: Img
 ---
+### Important v8.0.0 upgrade notes
+Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
+
+- **blur** has been updated to `withBlur`
+- **grayscale** has been updated to `withGrayscale`
+- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
+
+***
 
 An accessible image component
 
