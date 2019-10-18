@@ -22,34 +22,8 @@
  * SOFTWARE.
  */
 import { decorator } from '@instructure/ui-decorator'
-
 import { warn } from '@instructure/console/macro'
 
-/**
-* ---
-* category: utilities/react
-* ---
-* Deprecate React component props. Warnings will display in the console when deprecated
-* props are used. Include the version number when the deprecated component will be removed.
-*
-* ```js
-*  class Example extends Component {
-*    static propTypes = {
-*      currentProp: PropTypes.func
-*    }
-*  }
-*  export default deprecated('7.0.0', {
-*    deprecatedProp: 'currentProp',
-*    nowNonExistentProp: true
-*  })(Example)
-* ```
-*
-* @module deprecated
-* @param {string} version
-* @param {object} oldProps (if this argument is null or undefined, the entire component is deprecated)
-* @param {string} message
-* @return {function} React component with deprecated props behavior
-*/
 const deprecated = (() => {
   if (process.env.NODE_ENV === 'production') {
     const deprecated = function () {
@@ -65,6 +39,31 @@ const deprecated = (() => {
   }
 
   const deprecated = decorator((ComposedComponent, version, oldProps, message) => {
+    /**
+    * ---
+    * category: utilities/react
+    * ---
+    * Deprecate React component props. Warnings will display in the console when deprecated
+    * props are used. Include the version number when the deprecated component will be removed.
+    *
+    * ```js
+    *  class Example extends Component {
+    *    static propTypes = {
+    *      currentProp: PropTypes.func
+    *    }
+    *  }
+    *  export default deprecated('7.0.0', {
+    *    deprecatedProp: 'currentProp',
+    *    nowNonExistentProp: true
+    *  })(Example)
+    * ```
+    *
+    * @param {string} version
+    * @param {object} oldProps (if this argument is null or undefined, the entire component is deprecated)
+    * @param {string} message
+    * @return {function} React component with deprecated props behavior
+    * @module deprecated
+    */
     class DeprecatedComponent extends ComposedComponent {}
 
     DeprecatedComponent.prototype.componentDidMount = function () {
@@ -79,15 +78,15 @@ const deprecated = (() => {
       }
     }
 
-      DeprecatedComponent.prototype.componentWillReceiveProps = function(nextProps, nextContext) {
+      DeprecatedComponent.prototype.componentDidUpdate = function(prevProps, prevState, prevContext) {
       if (oldProps) {
-        warnDeprecatedProps(ComposedComponent.displayName, version, nextProps, oldProps, message)
+        warnDeprecatedProps(ComposedComponent.displayName, version, this.props, oldProps, message)
       } else {
         warnDeprecatedComponent(version, ComposedComponent.displayName, message)
       }
 
-      if (ComposedComponent.prototype.componentWillReceiveProps) {
-        ComposedComponent.prototype.componentWillReceiveProps.call(this, nextProps, nextContext)
+      if (ComposedComponent.prototype.componentDidUpdate) {
+        ComposedComponent.prototype.componentDidUpdate.call(this, prevProps, prevState, prevContext)
       }
     }
     return DeprecatedComponent
@@ -133,6 +132,9 @@ const deprecated = (() => {
   }
   deprecated.warnDeprecatedProps = warnDeprecatedProps
 
+  function warnDeprecatedComponent (version, componentName, message) {
+    warn(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
+  }
   /**
    * ---
    * category: utilities
@@ -141,9 +143,6 @@ const deprecated = (() => {
    * @param {String} componentName the displayName of the component or Function.name of the utility function
    * @param {String} message a message to display as a console error in DEV env when condition is false
    */
-  function warnDeprecatedComponent (version, componentName, message) {
-    warn(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
-  }
   deprecated.warnDeprecatedComponent = warnDeprecatedComponent
 
   /**
@@ -160,7 +159,6 @@ const deprecated = (() => {
 
   return deprecated
 })()
-
 
 export default deprecated
 export { deprecated }

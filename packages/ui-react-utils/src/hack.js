@@ -60,13 +60,13 @@ const hack = process.env.NODE_ENV == 'production'
           }
         }
 
-        componentWillReceiveProps(nextProps, nextContext) {
+        componentDidUpdate(prevProps, prevState, prevContext) {
           if (hackProps) {
-            warnHackProps(ComposedComponent.displayName, nextProps, hackProps, message)
+            warnHackProps(ComposedComponent.displayName, this.props, hackProps, message)
           }
 
-          if (super.componentWillReceiveProps) {
-            super.componentWillReceiveProps(nextProps, nextContext)
+          if (super.componentDidUpdate) {
+            super.componentDidUpdate(prevProps, prevState, prevContext)
           }
         }
       }
@@ -82,4 +82,27 @@ function warnHackProps (displayName, props, hackProps, message = '') {
 }
 
 export default hack
-export { hack }
+export {
+  /**
+  * ---
+  * category: utilities/react
+  * ---
+  * Flag React component props as hack props.
+  * Warnings will display in the console when hack props are used.
+  *
+  * ```js
+  *  class Example extends Component {
+  *    static propTypes = {
+  *      currentProp: PropTypes.func
+  *    }
+  *  }
+  *  export default hack(['hackProp'])(Example)
+  * ```
+  *
+  * @module hack
+  * @param {array} hackProps
+  * @param {string} message
+  * @return {function} React component flagged as having hack props
+  */
+  hack
+}
