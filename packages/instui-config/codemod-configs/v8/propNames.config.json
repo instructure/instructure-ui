@@ -1,0 +1,119 @@
+
+{
+  "Avatar": {
+    "8.0.0": [
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-block" },
+        { "old": false, "new": "block" }
+      ]},
+      { "old": "variant", "new": "shape" }
+    ]
+  },
+  "Flex": {
+    "8.0.0": [
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-flex" },
+        { "old": false, "new": "flex" }
+      ]},
+      { "old": "wrapItems", "new": "wrap", "values": [
+        { "old": true, "new": "wrap" },
+        { "old": false, "new": "no-wrap" }
+      ]},
+      { "old": "visualDebug", "new": "withVisualDebug" }
+    ]
+  },
+  "Flex.Item": {
+    "8.0.0": [
+      { "old": "grow", "new": "shouldGrow" },
+      { "old": "shrink", "new": "shouldShrink" },
+      { "old": "visualDebug", "new": "withVisualDebug" }
+    ]
+  },
+  "Img": {
+    "8.0.0": [
+      { "old": "grayscale", "new": "withGrayscale" },
+      { "old": "blur", "new": "withBlur" },
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-block" },
+        { "old": false, "new": "block" }
+      ]}
+    ]
+  },
+  "Link": {
+    "8.0.0": [
+      { "old": "disabled", "new": "interaction", "values": [
+        { "old": true, "new": "disabled" },
+        { "old": false, "new": "enabled" }
+      ]},
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "link" },
+        { "old": "inverse", "new": "link-inverse" }
+      ]},
+      { "old": "linkRef", "new": "elementRef" }
+    ]
+  },
+  "Text": {
+    "8.0.0": [
+      { "old": "color", "new": "color", "values": [
+        { "old": "error", "new": "danger" }
+      ]}
+    ]
+  },
+  "Tooltip": {
+    "8.0.0": [
+      { "old": "tip", "new": "renderTip" },
+      { "old": "defaultShow", "new": "defaultIsShowingContent" },
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "primary-inverse" },
+        { "old": "inverse", "new": "primary" }
+      ]}
+    ]
+  },
+  "Position": {
+    "8.0.0": [
+      { "old": "over", "new": "shouldPositionOverTarget"},
+      { "old": "trackPosition", "new": "shouldTrackPosition" }
+    ]
+  },
+  "View": {
+    "8.0.0": [
+      { "old": "borderColor", "new": "borderColor", "values": [
+        { "old": "inverse", "new": "transparent" },
+        { "old": "default", "new": "primary" }
+      ]},
+      { "old": "background", "new": "background", "values": [
+        { "old": "default", "new": "primary" },
+        { "old": "light", "new": "secondary" },
+        { "old": "inverse", "new": "primary-inverse" }
+      ]},
+      { "old": "focused", "new": "isFocused" },
+      { "old": "debug", "new": "withVisualDebug" }
+    ]
+  },
+  "Pill": {
+    "8.0.0": [
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default", "new": "primary" },
+        { "old": "primary", "new": "info" },
+        { "old": "message", "new": "alert" }
+      ] },
+      { "old": "text", "new": "children" }
+    ]
+  },
+  "FileDrop": {
+    "8.0.0": [
+      { "old": "label", "new": "renderLabel" },
+      { "old": "enablePreview", "new": "shouldEnablePreview" },
+      { "old": "allowRepeatFileSelection", "new": "shouldAllowRepeats" },
+      { "old": "allowMultiple", "new": "shouldAllowMultiple" },
+      { "old": "disabled", "new": "interaction", "values": [
+        { "old": true, "new": "disabled" },
+        { "old": false, "new": "enabled" }
+      ]},
+      { "old": "readOnly", "new": "interaction", "values": [
+        { "old": true, "new": "readonly" },
+        { "old": false, "new": "enabled" }
+      ]}
+    ]
+  }
+}
