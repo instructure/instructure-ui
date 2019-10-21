@@ -21,12 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+//  TODO: remove color comment description once the error color is removed
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { passthroughProps, getElementType, experimental } from '@instructure/ui-react-utils'
+import { passthroughProps, getElementType, deprecated } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -34,11 +37,9 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
 
-@experimental()
 @themeable(theme, styles)
 class Text extends Component {
   static propTypes = {
@@ -47,17 +48,22 @@ class Text extends Component {
     */
     as: PropTypes.elementType,
     children: PropTypes.node,
-    color: PropTypes.oneOf([
+    /**
+    * One of: primary, secondary, brand, success, warning, danger, alert, primary-inverse, secondary-inverse
+    */
+    color: deprecated.deprecatePropValues(PropTypes.oneOf([
       'primary',
       'secondary',
       'brand',
       'success',
       'warning',
+      'error',
       'danger',
       'alert',
       'primary-inverse',
       'secondary-inverse'
     ]),
+    ['error'], 'It will be removed in version 8.0.0. Use `danger` instead.'),
     elementRef: PropTypes.func,
     fontStyle: PropTypes.oneOf([
       'italic',

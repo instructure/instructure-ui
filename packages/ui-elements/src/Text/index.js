@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { omitProps, getElementType, deprecated } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -37,7 +37,7 @@ category: components/deprecated
 id: DeprecatedText
 ---
 **/
-
+@deprecated('7.0.0', null, 'Use Text from ui-text instead')
 @themeable(theme, styles)
 class Text extends Component {
   static propTypes = {

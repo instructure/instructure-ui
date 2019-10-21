@@ -2,6 +2,17 @@
 describes: Text
 ---
 
+```js
+---
+guidelines: true
+---
+<Guidelines>
+<Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+<Figure.Item>The color prop <code>error</code> has been updated to <code>danger</code> for component consistency</Figure.Item>
+</Figure>
+</Guidelines>
+````
+
 A component for styling textual content
 
 ### Font sizes

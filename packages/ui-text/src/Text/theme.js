@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+//  TODO: delete error value once it has been removed in v8.0.0
+
 export default function generator ({ typography, colors, spacing }) {
   return {
     ...typography,
@@ -34,6 +36,7 @@ export default function generator ({ typography, colors, spacing }) {
 
     warningColor: colors.textWarning,
     brandColor: colors.textBrand,
+    errorColor: colors.textDanger,
     dangerColor: colors.textDanger,
     successColor: colors.textSuccess,
     alertColor: colors.textAlert,

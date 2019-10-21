@@ -355,7 +355,6 @@ class Nav extends Component {
           { matches.length > 0
             ? matches
             : <Text
-              __dangerouslyIgnoreExperimentalWarnings
               weight="light"
               size="medium"
               theme={{ primaryColor: styles.color }}

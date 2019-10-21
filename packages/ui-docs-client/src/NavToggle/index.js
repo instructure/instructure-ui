@@ -77,7 +77,6 @@ class NavToggle extends Component {
 
     const summaryContent = (
       <Text
-        __dangerouslyIgnoreExperimentalWarnings
         weight={styles.textWeight}
         transform={styles.textTransform}
         size={styles.textSize}

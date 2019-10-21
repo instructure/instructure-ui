@@ -3,12 +3,7 @@ describes: DeprecatedText
 id: DeprecatedText__README
 ---
 
-**DEPRECATED:** Text will be removed from `ui-elements` in version 7.0.0. Use the [Text from ui-text](#Text) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
-
-The `color` prop `error` has switched to `danger`.
+**DEPRECATED:** Text will be removed from `ui-elements` in version 7.0.0. Use the [Text](#Text) from [ui-text](#ui-text) instead.
 
 ***
 

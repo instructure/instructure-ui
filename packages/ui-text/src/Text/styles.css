@@ -118,6 +118,10 @@ input.root[type] {
     color: var(--warningColor);
   }
 
+  &.color-error {
+    color: var(--errorColor);
+  }
+
   &.color-danger {
     color: var(--dangerColor);
   }
