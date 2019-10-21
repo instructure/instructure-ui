@@ -27,7 +27,7 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -40,6 +40,7 @@ id: DeprecatedAvatar
 ---
 **/
 
+@deprecated('7.0.0', null, 'Use Avatar from ui-avatar instead')
 @testable()
 @themeable(theme, styles)
 class Avatar extends Component {

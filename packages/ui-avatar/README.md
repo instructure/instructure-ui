@@ -1,6 +1,5 @@
 ---
 category: packages
-experimental: true
 ---
 
 ## ui-avatar

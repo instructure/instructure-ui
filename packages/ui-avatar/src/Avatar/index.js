@@ -27,7 +27,7 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, experimental } from '@instructure/ui-react-utils'
+import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -36,12 +36,14 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
 
 @testable()
-@experimental()
+@deprecated('8.0.0', {
+  inline: 'display',
+  variant: 'shape'
+})
 @themeable(theme, styles)
 class Avatar extends Component {
   static propTypes = {
@@ -74,7 +76,17 @@ class Avatar extends Component {
     /**
     * provides a reference to the underlying html element
     */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use `display`__
+    */
+    inline: PropTypes.bool,
+    /**
+     * __Deprecated - use 'shape'__
+     */
+    variant: PropTypes.oneOf(['circle', 'rectangle'])
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -147,14 +159,14 @@ class Avatar extends Component {
         className={classnames({
           [styles.root]: true,
           [styles[this.props.size]]: true,
-          [styles[this.props.shape]]: true
+          [styles[this.props.variant || this.props.shape]]: true
         })}
         aria-label={this.props.alt ? this.props.alt : null}
         role={this.props.alt ? 'img' : null}
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        display={this.props.display}
+        display={(this.props.display === 'block' || this.props.inline === false) ? 'block' : 'inline-block'}
       >
         {this.renderLoadImage()}
         {!this.state.loaded && this.renderInitials()}

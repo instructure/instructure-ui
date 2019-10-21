@@ -3,13 +3,7 @@ describes: DeprecatedAvatar
 id: DeprecatedAvatar__README
 ---
 
-**DEPRECATED:** Avatar will be removed from `ui-elements` in version 7.0.0. Use the [avatar from ui-avatar](#Avatar) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
-
-- **variant** has been updated to `shape`
-- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
+**DEPRECATED:** Avatar will be removed from `ui-elements` in version 7.0.0. Use the [Avatar](#Avatar) from [ui-avatar](#ui-avatar) instead.
 
 ***
 

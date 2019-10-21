@@ -1,7 +1,13 @@
 ---
 describes: Avatar
-experimental: true
 ---
+### Important v8.0.0 upgrade notes
+Codemods are available to automatically update imports to the new package as well as any props that have changed. These prop changes and other things to note are described below.
+
+- **variant** has been updated to `shape`
+- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
+
+***
 
 When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
 
