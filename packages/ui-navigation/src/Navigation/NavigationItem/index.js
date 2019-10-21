@@ -133,11 +133,7 @@ class NavigationItem extends Component {
 
     return (
       minimized && hasVisibleChildren(label) ? (
-        <Tooltip
-          renderTip={label}
-          placement='end'
-          __dangerouslyIgnoreExperimentalWarnings
-        >
+        <Tooltip renderTip={label} placement='end'>
           {link}
         </Tooltip>
       ) : link

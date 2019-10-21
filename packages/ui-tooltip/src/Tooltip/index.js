@@ -31,7 +31,7 @@ import {
   ensureSingleChild,
   passthroughProps,
   callRenderProp,
-  experimental
+  deprecated
 } from '@instructure/ui-react-utils'
 import { LayoutPropTypes } from '@instructure/ui-layout'
 import { uid } from '@instructure/uid'
@@ -45,11 +45,13 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
+@deprecated('8.0.0', {
+  tip: 'renderTip',
+  variant: 'color'
+})
 @testable()
-@experimental()
 @themeable(theme, styles)
 class Tooltip extends Component {
   static propTypes = {
@@ -59,7 +61,10 @@ class Tooltip extends Component {
     * @param {Function} renderProps.getTriggerProps - Props to be spread onto the trigger element
     */
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    /**
+    * The content to render in the tooltip
+    */
+    renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * Whether or not the tooltip content is shown, when controlled
     */
@@ -118,10 +123,22 @@ class Tooltip extends Component {
      * Callback fired when content is hidden. When controlled, this callback is
      * fired when the tooltip expects to be hidden
      */
-    onRequestHideContent: PropTypes.func
+    onRequestHideContent: PropTypes.func,
+
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use `renderTip`__
+    */
+    tip: PropTypes.node,
+    /**
+    * __Deprecated - use `color`__
+    */
+    variant: PropTypes.oneOf(['default', 'inverse'])
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
+    renderTip: undefined,
     isShowingContent: undefined,
     defaultIsShowingContent: false,
     on: undefined,
@@ -185,15 +202,23 @@ class Tooltip extends Component {
       defaultIsShowingContent,
       on,
       placement,
-      color,
       mountNode,
       constrain,
       offsetX,
       offsetY,
       onRequestShowContent,
       onRequestHideContent,
+      tip,
+      variant,
       ...rest
     } = this.props
+
+    let color = this.props.variant
+    if (color) {
+      color = color === 'default' ? 'primary-inverse' : 'primary'
+    } else {
+      color = this.props.color
+    }
 
     return (
       <Popover
@@ -221,7 +246,7 @@ class Tooltip extends Component {
           className={styles.root}
           role="tooltip"
         >
-          { callRenderProp(renderTip) }
+          { renderTip ? callRenderProp(renderTip) : tip }
         </span>
       </Popover>
     )

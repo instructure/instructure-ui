@@ -213,11 +213,7 @@ class Playground extends Component {
 
             <Flex __dangerouslyIgnoreExperimentalWarnings>
               <Flex.Item>
-                <Tooltip
-                  renderTip="Fullscreen"
-                  placement="bottom"
-                  __dangerouslyIgnoreExperimentalWarnings
-                >
+                <Tooltip renderTip="Fullscreen" placement="bottom">
                   <Button
                     onClick={this.handleMaximize}
                     ref={(c) => { this._fullScreenButton = c }}
@@ -233,11 +229,7 @@ class Playground extends Component {
                 </Tooltip>
               </Flex.Item>
               <Flex.Item>
-                <Tooltip
-                  renderTip={this.state.showCode ? 'Hide Code' : 'Show Code'}
-                  placement="bottom"
-                  __dangerouslyIgnoreExperimentalWarnings
-                >
+                <Tooltip renderTip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
                   <Button
                     margin="0 x-small"
                     onClick={this.handleCodeToggle}

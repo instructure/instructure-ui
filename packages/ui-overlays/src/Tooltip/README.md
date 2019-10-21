@@ -5,9 +5,6 @@ id: DeprecatedTooltip__README
 
 **DEPRECATED:** Tooltip will be removed from `ui-overlays` in version 7.0.0. Use the [Tooltip from ui-tooltip](#Tooltip) instead.
 
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed.
-
 
 Tooltips are small text-only  contextual overlays that are triggered by hover/focus. Use anywhere additional explanation might be needed but space is limited on the triggering element.
 

@@ -134,10 +134,7 @@ class Pill extends Component {
   render () {
     if (this.state.truncated) {
       return (
-        <Tooltip
-          renderTip={this.props.children}
-          __dangerouslyIgnoreExperimentalWarnings
-        >
+        <Tooltip renderTip={this.props.children}>
           {({ focused, getTriggerProps }) => {
             return (
               this.renderPill(focused, getTriggerProps)

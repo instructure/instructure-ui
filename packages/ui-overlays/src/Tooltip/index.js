@@ -26,8 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { LayoutPropTypes } from '@instructure/ui-layout'
-import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
+import { deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { Tooltip as UITooltip } from '@instructure/ui-tooltip'
 
@@ -40,6 +40,7 @@ category: components/deprecated
 id: DeprecatedTooltip
 ---
 **/
+@deprecated('7.0.0', null, 'Use @instructure/ui-tooltip instead')
 @testable()
 @themeable(theme, styles)
 class Tooltip extends Component {
