@@ -136,7 +136,7 @@ class Table extends Component {
         aria-label={isStacked ? caption : null}
         __dangerouslyIgnoreExperimentalWarnings
       >
-        {!isStacked && <caption><ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{caption}</ScreenReaderContent></caption>}
+        {!isStacked && <caption><ScreenReaderContent>{caption}</ScreenReaderContent></caption>}
         {Children.map(children, (child) => {
           if (matchComponentTypes(child, [Head])) {
             return safeCloneElement(child, {

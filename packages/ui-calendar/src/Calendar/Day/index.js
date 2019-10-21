@@ -200,7 +200,7 @@ class Day extends Component {
         elementRef={this.handleElementRef}
       >
         <span className={classes}>
-          <AccessibleContent alt={label} __dangerouslyIgnoreExperimentalWarnings>
+          <AccessibleContent alt={label}>
             {callRenderProp(children)}
           </AccessibleContent>
         </span>

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { omitProps, getElementType, deprecated } from '@instructure/ui-react-utils'
 
 /**
 ---
@@ -33,6 +33,8 @@ category: components/utilities/deprecated
 id: DeprecatedPresentationContent
 ---
 **/
+
+@deprecated('7.0.0', null, 'Use PresentationContent from ui-a11y-content instead')
 
 class PresentationContent extends Component {
   static propTypes = {

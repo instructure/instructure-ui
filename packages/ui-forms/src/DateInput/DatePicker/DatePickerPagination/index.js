@@ -80,7 +80,7 @@ class DatePickerPagination extends Component {
             <IconArrowOpenEndSolid className={styles.arrowIcon} />
           }
         >
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{this.props.nextLabel}</ScreenReaderContent>
+          <ScreenReaderContent>{this.props.nextLabel}</ScreenReaderContent>
         </Button>
       </div>
     )

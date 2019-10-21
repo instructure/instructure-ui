@@ -383,8 +383,8 @@ class DatePicker extends Component {
   renderHeaderCell (day) {
     return (
       <th className={styles.header} key={day.dayOfYear()}>
-        <PresentationContent __dangerouslyIgnoreExperimentalWarnings>{day.format('dd')}</PresentationContent>
-        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{day.format('dddd')}</ScreenReaderContent>
+        <PresentationContent>{day.format('dd')}</PresentationContent>
+        <ScreenReaderContent>{day.format('dddd')}</ScreenReaderContent>
       </th>
     )
   }

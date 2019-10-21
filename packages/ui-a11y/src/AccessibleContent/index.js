@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { omitProps, getElementType, deprecated } from '@instructure/ui-react-utils'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
@@ -36,6 +36,7 @@ id: DeprecatedAccessibleContent
 ---
 */
 
+@deprecated('7.0.0', null, 'Use AccessibleContent from ui-a11y-content instead')
 class AccessibleContent extends Component {
   static propTypes = {
     alt: PropTypes.string,

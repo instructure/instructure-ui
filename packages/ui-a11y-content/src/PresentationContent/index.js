@@ -25,16 +25,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { passthroughProps, getElementType, experimental } from '@instructure/ui-react-utils'
+import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
 /**
 ---
 category: components/utilities
-experimental: true
 ---
 @module PresentationContent
 **/
-@experimental()
 class PresentationContent extends Component {
   static propTypes = {
     /**

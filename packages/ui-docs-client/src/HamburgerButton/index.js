@@ -66,7 +66,7 @@ class HamburgerButton extends Component {
       >
         <span className={classnames(classes)}>
           <span className={styles.line}>
-            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{children}</ScreenReaderContent>
+            <ScreenReaderContent>{children}</ScreenReaderContent>
           </span>
         </span>
       </Button>

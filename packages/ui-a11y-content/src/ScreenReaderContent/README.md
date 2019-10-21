@@ -1,6 +1,5 @@
 ---
 describes: ScreenReaderContent
-experimental: true
 ---
 
 The ScreenReaderContent component renders content that is accessible to

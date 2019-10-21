@@ -306,7 +306,7 @@ class App extends Component {
         { repository && (
           <a href={repository} rel="noopener noreferrer" className={styles.githubLink} target="_blank">
             <IconGithubSolid className={styles.footerIcon} />
-            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Contribute on Github</ScreenReaderContent>
+            <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
           </a>
         ) }
       </div>

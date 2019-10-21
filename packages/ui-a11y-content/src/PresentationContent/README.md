@@ -1,6 +1,5 @@
 ---
 describes: PresentationContent
-experimental: true
 ---
 
 A component that *tries* to hide itself from screen readers, absolutely

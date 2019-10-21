@@ -156,7 +156,7 @@ class ToggleGroup extends Component {
         }}
         icon={this.renderIcon(expanded)}
       >
-        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{label}</ScreenReaderContent>
+        <ScreenReaderContent>{label}</ScreenReaderContent>
       </Button>
     )
   }

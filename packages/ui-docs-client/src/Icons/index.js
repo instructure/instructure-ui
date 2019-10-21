@@ -119,19 +119,19 @@ class Icons extends Component {
         <FormFieldGroup
           layout="columns"
           colSpacing="small"
-          description={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Filter Icons</ScreenReaderContent>}
+          description={<ScreenReaderContent>Filter Icons</ScreenReaderContent>}
           hAlign="end"
         >
           <TextInput
             placeholder="Filter icons..."
             value={this.state.query}
             onChange={this.handleSearchChange}
-            label={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Icon Name</ScreenReaderContent>}
+            label={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
             size="large"
           />
           <Select
             name="format"
-            label={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Icon Format</ScreenReaderContent>}
+            label={<ScreenReaderContent>Icon Format</ScreenReaderContent>}
             onChange={this.handleFormatChange}
             size="large"
             value={this.selectedFormatKey}
@@ -166,7 +166,7 @@ class Icons extends Component {
     return (
       <Checkbox
         label={
-          <AccessibleContent __dangerouslyIgnoreExperimentalWarnings alt="Render icons with right-to-left text direction">
+          <AccessibleContent alt="Render icons with right-to-left text direction">
             RTL
           </AccessibleContent>
         }

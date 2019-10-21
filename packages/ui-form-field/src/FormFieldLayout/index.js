@@ -150,7 +150,7 @@ class FormFieldLayout extends Component {
     // note: the legend element must be the first child of a fieldset element for SR
     // so we render it twice in that case (once for SR-only and one that is visible)
     return (
-      <ScreenReaderContent as="legend" __dangerouslyIgnoreExperimentalWarnings>
+      <ScreenReaderContent as="legend">
         { this.props.label }
         { this.hasMessages && <FormFieldMessages messages={this.props.messages} /> }
       </ScreenReaderContent>

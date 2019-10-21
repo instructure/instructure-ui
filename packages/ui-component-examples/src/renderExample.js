@@ -53,7 +53,7 @@ export default function renderExample ({ Component, componentProps, exampleProps
           <Text color="secondary" __dangerouslyIgnoreExperimentalWarnings>
             <IconInfoLine />
           </Text>
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>props</ScreenReaderContent>
+          <ScreenReaderContent>props</ScreenReaderContent>
         </Button>
       </Tooltip>
     </View>

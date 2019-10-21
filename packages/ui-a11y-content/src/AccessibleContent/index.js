@@ -25,18 +25,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { passthroughProps, getElementType, experimental } from '@instructure/ui-react-utils'
+import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 /**
 ---
 category: components/utilities
-experimental: true
 ---
 @module AccessibleContent
 */
-@experimental()
 class AccessibleContent extends Component {
   static propTypes = {
     alt: PropTypes.string,

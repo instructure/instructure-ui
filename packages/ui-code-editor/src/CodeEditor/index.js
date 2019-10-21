@@ -139,7 +139,7 @@ class CodeEditor extends Component {
     return (
       <div className={classnames(classes)}>
         <label htmlFor={this._id}>
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{this.props.label}</ScreenReaderContent>
+          <ScreenReaderContent>{this.props.label}</ScreenReaderContent>
           <CodeMirror
             {...omitProps(this.props, CodeEditor.propTypes)}
             id={this._id}

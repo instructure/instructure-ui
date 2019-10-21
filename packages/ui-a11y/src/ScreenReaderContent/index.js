@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { omitProps, getElementType, deprecated } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 
@@ -37,6 +37,7 @@ id: DeprecatedScreenReaderContent
 ---
 **/
 
+@deprecated('7.0.0', null, 'Use ScreenReaderContent from ui-a11y-content instead')
 @themeable(null, styles)
 class ScreenReaderContent extends Component {
   static propTypes = {

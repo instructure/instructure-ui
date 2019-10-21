@@ -60,7 +60,7 @@ class Variant extends Component {
       icon = (
         <span>
           <i className={`${glyph.classes.join(' ')}`} aria-hidden="true" />
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{`${name} (${variant})`}</ScreenReaderContent>
+          <ScreenReaderContent>{`${name} (${variant})`}</ScreenReaderContent>
         </span>
       )
     }

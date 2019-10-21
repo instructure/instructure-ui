@@ -72,7 +72,7 @@ class Methods extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Parameters</ScreenReaderContent>}>
+      <Table caption={<ScreenReaderContent>Parameters</ScreenReaderContent>}>
         <thead>
           <tr>
             <th scope="col">Name</th>

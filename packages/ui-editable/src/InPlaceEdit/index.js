@@ -170,7 +170,7 @@ class InPlaceEdit extends Component {
         icon={isVisible ? IconEditLine : null}
         {...buttonProps}
       >
-        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{label}</ScreenReaderContent>
+        <ScreenReaderContent>{label}</ScreenReaderContent>
       </Button>
     )
   }

@@ -79,7 +79,7 @@ class CloseButton extends Component {
         })}
       >
         <Button {...pickProps(this.props, Button.propTypes)} icon={IconXSolid}>
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
+          <ScreenReaderContent>
             {this.props.children}
           </ScreenReaderContent>
         </Button>

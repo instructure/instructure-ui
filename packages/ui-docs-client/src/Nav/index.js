@@ -346,7 +346,7 @@ class Nav extends Component {
           <TextInput
             placeholder="Find..."
             onChange={this.handleSearchChange}
-            renderLabel={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Search Documentation</ScreenReaderContent>}
+            renderLabel={<ScreenReaderContent>Search Documentation</ScreenReaderContent>}
             type="search"
             renderAfterInput={<IconSearchLine inline={false} />}
           />

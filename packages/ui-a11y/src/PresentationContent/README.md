@@ -3,9 +3,9 @@ describes: DeprecatedPresentationContent
 id: DeprecatedPresentationContent__README
 ---
 
-**DEPRECATED:** PresentationContent will be removed from `ui-a11y` in version 7.0.0. Use the [PresentationContent from ui-a11y-content](#PresentationContent) instead.
+**DEPRECATED:** PresentationContent will be removed from `ui-a11y` in version 7.0.0. Use the [PresentationContent](#PresentationContent) from [ui-a11y-content](#ui-a11y-content) instead.
 
-### Important Upgrade Notes
+### Important upgrade notes
 Codemods are available to automatically update imports to the new package.
 
 ***

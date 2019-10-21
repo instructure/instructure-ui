@@ -1,6 +1,5 @@
 ---
 describes: AccessibleContent
-experimental: true
 ---
 
 AccessibleContent provides a textual alternative to the presentational content it is wrapping. It utilizes the `alt` prop that is very similar in concept to the 'alt' attribute of an HTML <img> tag.

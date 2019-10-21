@@ -26,18 +26,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { passthroughProps, getElementType, experimental } from '@instructure/ui-react-utils'
+import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 
 /**
 ---
 category: components/utilities
-experimental: true
 ---
 @module ScreenReaderContent
 **/
-@experimental()
 @themeable(null, styles)
 class ScreenReaderContent extends Component {
   static propTypes = {

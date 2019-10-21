@@ -222,7 +222,7 @@ class Alert extends Component {
 
   createScreenreaderContentNode () {
     return (
-      <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
+      <ScreenReaderContent>
         {this.props.children}
       </ScreenReaderContent>
     )

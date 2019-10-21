@@ -54,7 +54,7 @@ class PaginationArrowButton extends Component {
     return (
       <Tooltip
         on={['hover', 'focus']}
-        tip={<PresentationContent __dangerouslyIgnoreExperimentalWarnings>{label}</PresentationContent>}
+        tip={<PresentationContent>{label}</PresentationContent>}
       >
         <Button
           {...props}
@@ -63,7 +63,7 @@ class PaginationArrowButton extends Component {
           icon={Icon}
           rel={(props.href || props.to) ? direction : null}
         >
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{label}</ScreenReaderContent>
+          <ScreenReaderContent>{label}</ScreenReaderContent>
         </Button>
       </Tooltip>
     )

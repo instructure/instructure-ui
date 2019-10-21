@@ -67,7 +67,7 @@ class FormFieldMessage extends Component {
     return (
       (this.props.variant !== 'screenreader-only')
         ? <span className={classnames(classes)}>{this.props.children}</span>
-        : <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{this.props.children}</ScreenReaderContent>
+        : <ScreenReaderContent>{this.props.children}</ScreenReaderContent>
     )
   }
 }

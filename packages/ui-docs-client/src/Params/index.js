@@ -62,7 +62,7 @@ class Params extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Parameters</ScreenReaderContent>} margin="0 0 large">
+      <Table caption={<ScreenReaderContent>Parameters</ScreenReaderContent>} margin="0 0 large">
         <thead>
           <tr>
             <th scope="col">Param</th>

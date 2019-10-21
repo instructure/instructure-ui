@@ -3,9 +3,9 @@ describes: DeprecatedAccessibleContent
 id: DeprecatedAccessibleContent__README
 ---
 
-**DEPRECATED:** AccessibleContent will be removed from `ui-a11y` in version 7.0.0. Use the [AccessibleContent from ui-a11y-content](#AccessibleContent) instead.
+**DEPRECATED:** AccessibleContent will be removed from `ui-a11y` in version 7.0.0. Use the [AccessibleContent](#AccessibleContent) from [ui-a11y-content](#ui-a11y-content) instead.
 
-### Important Upgrade Notes
+### Important upgrade notes
 Codemods are available to automatically update imports to the new package.
 
 ***

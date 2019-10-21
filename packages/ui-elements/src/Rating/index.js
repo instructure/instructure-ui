@@ -145,7 +145,7 @@ class Rating extends Component {
         display="inline-block"
         __dangerouslyIgnoreExperimentalWarnings
       >
-        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{valueText}</ScreenReaderContent>
+        <ScreenReaderContent>{valueText}</ScreenReaderContent>
         {
           [...Array(this.filled)].map((x, i) => (
             <RatingIcon

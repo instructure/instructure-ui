@@ -79,7 +79,7 @@ class CodePenButton extends Component {
               </SVGIcon>
             }
           >
-            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{`Edit ${this.props.title} in Codepen`}</ScreenReaderContent>
+            <ScreenReaderContent>{`Edit ${this.props.title} in Codepen`}</ScreenReaderContent>
           </Button>
         </Tooltip>
       </form>

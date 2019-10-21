@@ -628,7 +628,7 @@ class SelectField extends Component {
     )
 
     if (!hasVisibleChildren(this.props.label)) {
-      wrappedLabel = <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{wrappedLabel}</ScreenReaderContent>
+      wrappedLabel = <ScreenReaderContent>{wrappedLabel}</ScreenReaderContent>
     }
 
     return (
@@ -736,7 +736,7 @@ class SelectField extends Component {
         >
           {assistiveText}
         </span>
-        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
+        <ScreenReaderContent>
           <span
             role="log"
             aria-live="polite"

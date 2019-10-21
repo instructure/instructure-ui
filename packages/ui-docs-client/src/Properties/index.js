@@ -157,7 +157,7 @@ class Properties extends Component {
   render () {
     return (
       <div className={styles.root}>
-        <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Component Properties</ScreenReaderContent>}>
+        <Table caption={<ScreenReaderContent>Component Properties</ScreenReaderContent>}>
           <thead>
             <tr>
               <th scope="col">Prop</th>

@@ -141,7 +141,7 @@ class Playground extends Component {
               </SVGIcon>
             }
           >
-            <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Hide Code</ScreenReaderContent>
+            <ScreenReaderContent>Hide Code</ScreenReaderContent>
           </Button>
         </div>
         <CodeEditor
@@ -159,7 +159,7 @@ class Playground extends Component {
     return (
       <Checkbox
         label={
-          <AccessibleContent __dangerouslyIgnoreExperimentalWarnings alt="Render component with right-to-left text direction">
+          <AccessibleContent alt="Render component with right-to-left text direction">
             RTL
           </AccessibleContent>
         }
@@ -224,7 +224,7 @@ class Playground extends Component {
                       </SVGIcon>
                     }
                   >
-                    <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Full screen view</ScreenReaderContent>
+                    <ScreenReaderContent>Full screen view</ScreenReaderContent>
                   </Button>
                 </Tooltip>
               </Flex.Item>
@@ -240,7 +240,7 @@ class Playground extends Component {
                       </SVGIcon>
                     }
                   >
-                    <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>View code</ScreenReaderContent>
+                    <ScreenReaderContent>View code</ScreenReaderContent>
                   </Button>
                 </Tooltip>
               </Flex.Item>

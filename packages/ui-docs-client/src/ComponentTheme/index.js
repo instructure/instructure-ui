@@ -62,7 +62,7 @@ class ComponentTheme extends Component {
   render () {
     return this.props.theme && Object.keys(this.props.theme).length > 0 ? (
       <div className={styles.root}>
-        <Table caption={<ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>Component theme</ScreenReaderContent>}>
+        <Table caption={<ScreenReaderContent>Component theme</ScreenReaderContent>}>
           <thead>
             <tr>
               <th scope="col">Name</th>
