@@ -21,6 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+// TODO: once the text prop is removed in v8.0.0 update children prop to isRequired
+// NOTE: when the variant prop is removed in v8.0.0 change 'default' color to 'primary'
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
@@ -29,7 +33,7 @@ import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-elements'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, experimental } from '@instructure/ui-react-utils'
+import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -38,27 +42,40 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
 @testable()
-@experimental()
+@deprecated('8.0.0', {
+  text: 'children',
+  variant: 'color'
+})
 @themeable(theme, styles)
 class Pill extends Component {
   static propTypes = {
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    children: PropTypes.node.isRequired,
-    color: PropTypes.oneOf(['primary', 'info', 'success', 'danger', 'warning', 'alert']),
+    children: PropTypes.node,
+    color: PropTypes.oneOf(['primary', 'success', 'danger', 'info', 'warning', 'alert']),
     elementRef: PropTypes.func,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use 'children'__
+    */
+    text: PropTypes.node,
+    /**
+    * __Deprecated - use 'color'__
+    */
+    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
+    children: undefined,
     margin: undefined,
     elementRef: undefined,
     color: 'primary'
@@ -82,9 +99,11 @@ class Pill extends Component {
     const {
       margin,
       children,
+      variant,
       color,
       as,
       elementRef,
+      text,
       ...props
     } = this.props
 
@@ -93,10 +112,21 @@ class Pill extends Component {
     const containerProps = typeof getTriggerProps === 'function'
       ? getTriggerProps(filteredProps) : filteredProps
 
+    let actualColor = variant
+    if (!actualColor) {
+      // usng new color props
+      actualColor = color
+    } else {
+      // using old variant
+      if (variant === 'primary') {
+        actualColor = 'oldPrimary'
+      }
+    }
+
     const classes = classnames({
       [styles.root]: true,
       [styles.truncated]: this.state.truncated,
-      [styles[color]]: color
+      [styles[actualColor]]: true
     })
 
     return (
@@ -123,7 +153,7 @@ class Pill extends Component {
                 this.handleTruncation(truncated)
               }}
             >
-              {children}
+              {children || text}
             </TruncateText>
           </span>
         </span>
@@ -134,7 +164,7 @@ class Pill extends Component {
   render () {
     if (this.state.truncated) {
       return (
-        <Tooltip renderTip={this.props.children}>
+        <Tooltip renderTip={this.props.children || this.props.text}>
           {({ focused, getTriggerProps }) => {
             return (
               this.renderPill(focused, getTriggerProps)

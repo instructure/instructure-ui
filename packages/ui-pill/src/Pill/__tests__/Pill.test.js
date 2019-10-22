@@ -40,6 +40,12 @@ describe('<Pill />', async () => {
     expect(await pill.find(':contains(Overdue)')).to.exist()
   })
 
+  it('should display text if passed via text prop', async () => {
+    await mount(<Pill text="On Time"></Pill>)
+    const pill = await PillLocator.find()
+    expect(await pill.find(':contains(On Time)')).to.exist()
+  })
+
   it('should render without a Tooltip when text does not overflow max-width', async () => {
     await mount(<Pill>hello</Pill>)
     const pill = await PillLocator.find()

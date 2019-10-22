@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+// TODO: For v8.0.0 we will map primaryColor to textDark and do away with default (color)
+// NOTE: This will make it so no pill is going to inherit the brand color per product design
+
 export default function generator ({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
@@ -33,12 +36,14 @@ export default function generator ({ borders, colors, spacing, typography }) {
     textFontSize: typography.fontSizeXSmall,
     textFontWeight: typography.fontWeightBold,
     maxWidth: '15rem',
+    color: colors.textDark,
     primaryColor: colors.textDark,
     infoColor: colors.textInfo,
     dangerColor: colors.textDanger,
     successColor: colors.textSuccess,
     warningColor: colors.textWarning,
     alertColor: colors.textAlert,
+    messageColor: colors.textAlert,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,
     borderRadius: '999rem'

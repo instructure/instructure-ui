@@ -220,7 +220,7 @@ class App extends Component {
     return (
       <div>
         { this.renderThemeSelect() }
-        { doc.experimental && <div><Pill color="info" margin="small 0" __dangerouslyIgnoreExperimentalWarnings>Experimental</Pill></div>}
+        { doc.experimental && <div><Pill color="info" margin="small 0">Experimental</Pill></div>}
         <Section id={doc.id} heading={heading}>
           <Document
             doc={{

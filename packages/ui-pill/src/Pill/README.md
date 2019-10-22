@@ -1,7 +1,19 @@
 ---
 describes: Pill
-experimental: true
 ---
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="none" title="Upgrade Notes for v8.0.0">
+    <Figure.Item>The <code>text</code> prop has been removed in favor of <code>children</code>.</Figure.Item>
+    <Figure.Item>The <code>variant</code> prop has switched to <code>color</code></Figure.Item>
+    <Figure.Item>Within the new <strong>color</strong> prop <code>default</code> is now <code>primary</code> (gray), <code>primary</code> has updated to <code>info</code> (blue) and <code>message</code> is now <code>alert</code></Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
 Displays short, contextual information about an item. Change the border
 and text color via the `color` prop. Use the `margin` prop to add space around
@@ -12,41 +24,41 @@ the component.
 example: true
 ---
 <div>
-    <Pill
-      margin="x-small"
-    >
-      Excused
-    </Pill>
-    <Pill
-      color="info"
-      margin="x-small"
-    >
-      Draft
-    </Pill>
-    <Pill
-      color="success"
-      margin="x-small"
-    >
-      Checked In
-    </Pill>
-    <Pill
-      color="danger"
-      margin="x-small"
-    >
-      Missing
-    </Pill>
-    <Pill
-      color="warning"
-      margin="x-small"
-    >
-      Late
-    </Pill>
-    <Pill
-      color="alert"
-      margin="x-small"
-    >
-      Notification
-    </Pill>
+  <Pill
+    margin="x-small"
+  >
+    Excused
+  </Pill>
+  <Pill
+    color="info"
+    margin="x-small"
+  >
+    Draft
+  </Pill>
+  <Pill
+    color="success"
+    margin="x-small"
+  >
+    Checked In
+  </Pill>
+  <Pill
+    color="danger"
+    margin="x-small"
+  >
+    Missing
+  </Pill>
+  <Pill
+    color="warning"
+    margin="x-small"
+  >
+    Late
+  </Pill>
+  <Pill
+    color="alert"
+    margin="x-small"
+  >
+    Notification
+  </Pill>
 </div>
 ```
 The component has a max-width, set by its theme. Any overflowing text will

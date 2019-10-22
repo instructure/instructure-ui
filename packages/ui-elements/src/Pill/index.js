@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-overlays'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -42,6 +42,7 @@ category: components/deprecated
 id: DeprecatedPill
 ---
 **/
+@deprecated('7.0.0', null, 'Use Pill from ui-pill instead')
 @testable()
 @themeable(theme, styles)
 class Pill extends Component {
