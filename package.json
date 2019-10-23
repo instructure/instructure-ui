@@ -67,7 +67,9 @@
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
-    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples"
+    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
+    "husky:pre-commit": "yarn lint:staged",
+    "husky:pre-push": "yarn lint:commit"
   },
   "license": "MIT",
   "resolutions": {
@@ -110,8 +112,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint:staged",
-      "pre-push": "yarn lint:commit"
+      "pre-commit": "yarn husky:pre-commit",
+      "pre-push": "yarn husky:pre-push"
     }
   },
   "browserslist": [

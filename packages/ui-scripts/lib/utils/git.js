@@ -30,6 +30,20 @@ const runGitCommand = exports.runGitCommand = function runGitCommand (args = [])
 }
 
 exports.commit = function () {
+  try {
+    runGitCommand(['commit', '--dry-run'])
+  } catch(err) {
+    error(err.stdout)
+    process.exit(1)
+  }
+
+  try {
+    runCommandSync('yarn', ['husky:pre-commit'])
+  } catch(err) {
+    error(err.stdout)
+    process.exit(1)
+  }
+
   return runCommandSync('git-cz')
 }
 
