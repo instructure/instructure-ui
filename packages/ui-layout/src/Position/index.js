@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
 import { element } from '@instructure/ui-prop-types'
-import { ComponentIdentifier } from '@instructure/ui-react-utils'
+import { ComponentIdentifier, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { Position as UIPosition, PositionPropTypes } from '@instructure/ui-position'
 
@@ -56,6 +56,7 @@ category: components/utilities/deprecated
 id: DeprecatedPosition
 ---
 **/
+@deprecated('7.0.0', null, 'Use @instructure/ui-position instead')
 @testable()
 @themeable(theme, styles)
 class Position extends Component {

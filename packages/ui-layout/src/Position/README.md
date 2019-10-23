@@ -3,16 +3,7 @@ describes: DeprecatedPosition
 id: DeprecatedPosition__README
 ---
 
-**DEPRECATED:** Position will be removed from `ui-layout` in version 7.0.0. Use the [avatar from ui-position](#Position) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. However, there are some breaking changes that will need to be addressed manually. These changes and other things to note are described below.
-
-- `Position.Target` and `Position.Content` are no longer in use. The target is now defined via the `renderTarget` prop and the children of a Position will be rendered as the positioned content.
-
-A component that positions content with respect to a designated target.
-The `placement` prop indicates where the content will be placed in relation to
-the target element.
+**DEPRECATED:** Position will be removed from `ui-layout` in version 7.0.0. Use the [Position from ui-position](#Position) instead.
 
 ### Internationalization
 `Position` placement can be internationalized for right to left languages. The

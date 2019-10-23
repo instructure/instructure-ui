@@ -694,10 +694,7 @@ class Popover extends Component {
       return (
         <span>
           {this.renderTrigger()}
-          <Position
-            {...positionProps}
-            __dangerouslyIgnoreExperimentalWarnings
-          >
+          <Position {...positionProps}>
             {this.renderContent()}
           </Position>
         </span>
@@ -707,7 +704,6 @@ class Popover extends Component {
         <Position
           {...positionProps}
           renderTarget={this.renderTrigger()}
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderContent()}
         </Position>

@@ -29,10 +29,11 @@ import classnames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { element } from '@instructure/ui-prop-types'
 import {
+  ComponentIdentifier,
   safeCloneElement,
   callRenderProp,
   ensureSingleChild,
-  experimental
+  deprecated
 } from '@instructure/ui-react-utils'
 import { addPositionChangeListener, findDOMNode } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
@@ -48,16 +49,38 @@ import { PositionPropTypes } from '../PositionPropTypes'
 import styles from './styles.css'
 import theme from './theme'
 
+@deprecated('8.0.0', null, 'Use Position\'s `renderTarget` prop instead.')
+@testable()
+class PositionTarget extends ComponentIdentifier {
+  static displayName = 'PositionTarget'
+  static locatorAttribute = 'data-position-target'
+}
+
+@deprecated('8.0.0', null, 'Use Posiition\'s `children` instead.')
+@testable()
+class PositionContent extends ComponentIdentifier {
+  static displayName = 'PositionContent'
+  static propTypes = {
+    children: PropTypes.node,
+    placement: PositionPropTypes.placement
+  }
+  static locatorAttribute = 'data-position-content'
+}
+
 /**
 ---
 category: components/utilities
-experimental: true
 ---
 **/
+@deprecated('8.0.0', {
+  trackPosition: 'shouldTrackPosition',
+  over: 'shouldPositionOverTarget'
+})
 @testable()
-@experimental()
 @themeable(theme, styles)
 class Position extends Component {
+  static Target = PositionTarget
+  static Content = PositionContent
   static locatorAttribute = 'data-position'
   static targetLocatorAttribute = 'data-position-target'
   static contentLocatorAttribute = 'data-position-content'
@@ -121,7 +144,18 @@ class Position extends Component {
     /**
      * The content to be positioned
      */
-    children: PropTypes.node
+    children: PropTypes.node,
+
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use `shouldTrackPosition`__
+    */
+    trackPosition: PropTypes.bool,
+    /**
+    * __Deprecated - use `shouldPositionOverTarget`__
+    */
+    over: PropTypes.bool
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -173,6 +207,8 @@ class Position extends Component {
 
     if (this.props.shouldTrackPosition !== prevProps.shouldTrackPosition) {
       this.props.shouldTrackPosition ? this.startTracking() : this.stopTracking()
+    } else if (this.props.trackPosition !== prevProps.trackPosition) {
+      this.props.trackPosition ? this.startTracking() : this.stopTracking()
     }
 
     const { style, placement } = this.state
@@ -227,7 +263,7 @@ class Position extends Component {
   handlePortalOpen = () => {
     this.position()
 
-    if (this.props.shouldTrackPosition) {
+    if (this.props.shouldTrackPosition || this.props.trackPosition) {
       this.startTracking()
     }
 
@@ -251,7 +287,7 @@ class Position extends Component {
       offsetY: props.offsetY,
       constrain: props.constrain,
       container: props.mountNode,
-      over: props.shouldPositionOverTarget
+      over: props.shouldPositionOverTarget || props.over
     })
   }
 
@@ -274,7 +310,11 @@ class Position extends Component {
   }
 
   renderContent () {
-    let content = ensureSingleChild(this.props.children)
+    let content = ComponentIdentifier.pick(Position.Content, this.props.children)
+    if (!content) {
+      content = ensureSingleChild(this.props.children)
+    }
+
     if (content) {
       content = safeCloneElement(content, {
         ref: el => { this._content = el },
@@ -305,7 +345,11 @@ class Position extends Component {
   }
 
   renderTarget () {
-    let target = callRenderProp(this.props.renderTarget)
+    let target = ComponentIdentifier.pick(Position.Target, this.props.children)
+    if (!target) {
+      target = callRenderProp(this.props.renderTarget)
+    }
+
     if (target) {
       return safeCloneElement(target, {
         ref: el => { this._target = el },
