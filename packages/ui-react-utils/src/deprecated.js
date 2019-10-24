@@ -55,6 +55,10 @@ const deprecated = (() => {
     const deprecated = function () {
       return ComposedComponent => ComposedComponent
     }
+
+    deprecated.deprecatePropValues = () => {}
+    deprecated.warnDeprecatedProps = () => {}
+    deprecated.warnDeprecatedComponent = () => {}
     deprecated.changedPackageWarning = () => {}
 
     return deprecated
@@ -90,7 +94,9 @@ const deprecated = (() => {
   })
 
   /**
-   *
+   * ---
+   * category: utilities
+   * ---
    * Trigger a console warning if the specified prop variant is deprecated
    *
    * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
@@ -100,6 +106,7 @@ const deprecated = (() => {
   deprecated.deprecatePropValues = (propType, deprecated = [], message) => {
     return (props, propName, componentName, ...rest) => {
       const isDeprecatedValue = deprecated.includes(props[propName])
+
       warn(
         (!isDeprecatedValue),
         `[${componentName}] The '${props[propName]}' value for the \`${propName}\` prop is deprecated. ${message || ''}`
@@ -131,7 +138,7 @@ const deprecated = (() => {
    * category: utilities
    * ---
    * @param {String} version the version of the package in which the component or function was deprecated
-    * @param {String} componentName the displayName of the component or Function.name of the utility function
+   * @param {String} componentName the displayName of the component or Function.name of the utility function
    * @param {String} message a message to display as a console error in DEV env when condition is false
    */
   function warnDeprecatedComponent (version, componentName, message) {
