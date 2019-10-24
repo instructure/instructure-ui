@@ -65,14 +65,19 @@ describe('<Pill />', async () => {
     })
   })
 
-  it('should apply focus styles when rendering with Tooltip', async () => {
+  it('should be focusable when it renders a Tooltip', async () => {
     const text = "some really super incredibly long text that will force overflow"
     await mount(<Pill text={text} />)
 
     const pill = await PillLocator.find()
 
     await pill.focus()
-    expect(await pill.find(`.${styles.focused}`)).to.exist()
+
+    const focusable = await pill.find(':focusable')
+
+    await wait(() => {
+      expect(focusable.focused()).to.be.true()
+    })
   })
 
   it('should meet a11y standards', async () => {
