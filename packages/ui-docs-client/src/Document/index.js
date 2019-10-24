@@ -123,7 +123,7 @@ class Document extends Component {
 
     return (
       <View as="div" margin="0 0 x-large 0" __dangerouslyIgnoreExperimentalWarnings>
-        <Link href={srcUrl} __dangerouslyIgnoreExperimentalWarnings>
+        <Link href={srcUrl}>
           {srcPath}
         </Link>
       </View>

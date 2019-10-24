@@ -48,7 +48,7 @@ const elements = {
   table: ({ children }) => <Table>{children}</Table>,
   a: ({ href, title, target, name, children }) => {
     if (href) {
-      return <Link href={href} title={title} target={target} __dangerouslyIgnoreExperimentalWarnings>{children}</Link>
+      return <Link href={href} title={title} target={target}>{children}</Link>
     } else {
       return <a name={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
     }

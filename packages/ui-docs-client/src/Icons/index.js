@@ -224,7 +224,7 @@ class MyIcon extends React.Component {
           readOnly
         />
         { glyph.displayName &&
-          <p>See the <Link href="#SVGIcon" __dangerouslyIgnoreExperimentalWarnings>SVGIcon</Link> component for props and examples.</p>
+          <p>See the <Link href="#SVGIcon">SVGIcon</Link> component for props and examples.</p>
         }
       </div>
     )

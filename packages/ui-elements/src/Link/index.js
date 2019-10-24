@@ -30,7 +30,7 @@ import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { findFocusable, hasVisibleChildren } from '@instructure/ui-a11y'
 import { findDOMNode, isActiveElement } from '@instructure/ui-dom-utils'
-import { getElementType, matchComponentTypes, omitProps } from '@instructure/ui-react-utils'
+import { deprecated, getElementType, matchComponentTypes, omitProps } from '@instructure/ui-react-utils'
 import { warn } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
@@ -43,6 +43,7 @@ category: components/deprecated
 id: DeprecatedLink
 ---
 **/
+@deprecated('7.0.0', null, 'Use Link from ui-link instead')
 @testable()
 @themeable(theme, styles)
 class Link extends Component {

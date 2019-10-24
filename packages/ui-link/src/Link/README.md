@@ -2,6 +2,27 @@
 describes: Link
 ---
 
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+    <Figure.Item>
+      The <code>linkRef</code> prop will be removed. Use <code>elementRef</code> instead.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>variant</code> prop will be removed. Use <code>color: ['link', 'link-inverse']</code> instead.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>disabled</code> boolean prop will be removed. Use <code>interaction: ['enabled', 'disabled']</code> instead.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
+
+### Where to use Link
+
 `Link` is intended for presenting actions __inline with other content__, such as within headings or sentences. Typically those actions navigate the user to a different view.
 
 ```js

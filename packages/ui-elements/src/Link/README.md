@@ -6,22 +6,19 @@ id: DeprecatedLink__README
 **DEPRECATED:** Link will be removed from `ui-elements` in version 7.0.0. Use the [Link from ui-link](#Link) instead.
 
 ### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package and handle the prop name changes listed below.
+Codemods will be available to automatically update imports to the new package.
 
-These props have been updated:
-- The `linkRef` prop will be removed in version 7. Use `elementRef` instead.
-- The `variant` prop has been changed to `color: ['link', 'link-inverse']`
-- The `disabled` boolean prop has been changed to `interaction: ['enabled', 'disabled']`
+The default behavior when `renderIcon` is used with `<TruncateText />` has changed in [Link from ui-link](#Link):
+Link now sets its `display` prop to `inline-flex` instead of `flex`. Please check all areas where you are
+using Link with TruncateText. (The `display` prop can be manually reset to `flex`, if needed.)
 
-ui-link](#Link) will also support a prop to control its text-decoration, to account for situations where
-Link is used within and without surrounding text. The following theme variables have been updated:
+[Link from ui-link](#Link) also supports a prop to control its text-decoration, to account for situations where
+Link is used within and without surrounding text. The following theme variables have been updated to accommodate this change:
 
 - `textDecoration` has been replaced with `textDecorationWithinText` and `textDecorationOutsideText`
 - `hoverTextDecoration` has been replaced with `hoverTextDecorationWithinText` and `hoverTextDecorationOutsideText`
 
-Finally, Link's default behavior when the `renderIcon` prop is used in conjunction with `<TruncateText />` has changed:
-Link will now set its `display` prop to `inline-flex` instead of `flex`. Please check all areas where you are
-using Link with TruncateText. (The `display` prop can be manually reset to `flex`, if needed.)
+### When to use Link
 
 `Link` is intended for presenting actions __inline with other content__, such as within headings or sentences. Typically those actions navigate the user to a different view. If the action is not presented within other content or is grouped with other similar actions, use a [Button](#Button) with variant="link".
 

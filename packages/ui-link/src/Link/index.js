@@ -31,10 +31,10 @@ import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { findFocusable, hasVisibleChildren } from '@instructure/ui-a11y'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import {
+  deprecated,
   getElementType,
   matchComponentTypes,
   passthroughProps,
-  experimental,
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { warn } from '@instructure/console/macro'
@@ -46,11 +46,14 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
+@deprecated('8.0.0', {
+  linkRef: 'elementRef',
+  variant: 'color',
+  disabled: 'interaction'
+})
 @testable()
-@experimental()
 @themeable(theme, styles)
 class Link extends Component {
   static propTypes = {
@@ -112,7 +115,22 @@ class Link extends Component {
     /**
     * Fires when the Link loses focus
     */
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
+
+    /* eslint-disable react/require-default-props */
+    /**
+    * __deprecated: use elementRef__
+    */
+    linkRef: PropTypes.func,
+    /**
+    * __deprecated: use color__
+    */
+    variant: PropTypes.oneOf(['default', 'inverse']),
+    /**
+    * __deprecated: use interaction__
+    */
+    disabled: PropTypes.bool
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -128,22 +146,26 @@ class Link extends Component {
     isWithinText: true,
     onClick: undefined,
     onFocus: undefined,
-    onBlur: undefined,
+    onBlur: undefined
   }
 
   state = { hasFocus: false }
 
   handleElementRef = (el) => {
-    if (typeof this.props.elementRef === 'function') {
-      this.props.elementRef(el)
-    }
+    const {
+      elementRef,
+      linkRef
+    } = this.props
+
     this._link = el
+    if (typeof linkRef === 'function') linkRef(el)
+    if (typeof elementRef === 'function') elementRef(el)
   }
 
   handleClick = (event) => {
-    const { interaction, onClick } = this.props
+    const { disabled, interaction, onClick } = this.props
 
-    if (interaction === 'disabled') {
+    if (interaction === 'disabled' || disabled) {
       event.preventDefault()
       event.stopPropagation()
     } else if (typeof onClick === 'function') {
@@ -236,20 +258,23 @@ class Link extends Component {
       renderIcon,
       iconPlacement,
       isWithinText,
+      variant,
+      disabled,
       ...props
     } = this.props
 
     const classes = {
       [styles.root]: true,
-      [styles['color--link-inverse']]: color === 'link-inverse',
+      [styles['color--link-inverse']]: variant === 'inverse' || color === 'link-inverse',
       [styles[`iconPlacement--${iconPlacement}`]]: renderIcon && this.hasVisibleChildren,
       [styles.truncates]: this.containsTruncateText,
       [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
     }
 
+    const isDisabled = interaction === 'disabled' || disabled
     const role = onClick && this.element !== 'button' ? 'button' : null
     const type = (this.element === 'button' || this.element === 'input') ? 'button' : null
-    const tabIndex = (role === 'button' && interaction !== 'disabled') ? '0' : null
+    const tabIndex = (role === 'button' && !isDisabled) ? '0' : null
 
     return (
       <View
@@ -262,7 +287,7 @@ class Link extends Component {
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        aria-disabled={interaction === 'disabled' ? 'true' : null}
+        aria-disabled={isDisabled ? 'true' : null}
         role={role}
         type={type}
         tabIndex={tabIndex}

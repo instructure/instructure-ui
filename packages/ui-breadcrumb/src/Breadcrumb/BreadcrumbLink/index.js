@@ -92,7 +92,6 @@ class BreadcrumbLink extends Component {
         icon={icon}
         iconPlacement={iconPlacement}
         onClick={onClick}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <TruncateText>{children}</TruncateText>
       </Link>
