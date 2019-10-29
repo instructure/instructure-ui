@@ -148,16 +148,11 @@ const themeable = decorator((ComposedComponent, theme, styles = {}, adapter) => 
       const res = super(...arguments)
       this._themeCache = null
       this._instanceId = uid(displayName)
-      return res
-    }
 
-    componentWillMount () {
       const defaultTheme = generateThemeForContextKey()
       mountComponentStyles(template, defaultTheme, componentId)
 
-      if (super.componentWillMount) {
-        super.componentWillMount()
-      }
+      return res
     }
     componentDidMount () {
       this.applyTheme()
@@ -181,16 +176,12 @@ const themeable = decorator((ComposedComponent, theme, styles = {}, adapter) => 
         !shallowEqual(this.context, nextContext)
       )
     }
-    componentWillUpdate (nextProps, nextState, nextContext) {
-      if (!deepEqual(nextProps.theme, this.props.theme) ||
-        !deepEqual(getThemeFromContext(nextContext), getThemeFromContext(this.context))) {
+    componentDidUpdate (prevProps, prevState, prevContext) {
+      if (!deepEqual(prevProps.theme, this.props.theme) ||
+        !deepEqual(getThemeFromContext(prevContext), getThemeFromContext(this.context))) {
         this._themeCache = null
       }
-      if (super.componentWillUpdate) {
-        super.componentWillUpdate(nextProps, nextState, nextContext)
-      }
-    }
-    componentDidUpdate (prevProps, prevState, prevContext) {
+
       this.applyTheme()
       if (super.componentDidUpdate) {
         super.componentDidUpdate(prevProps, prevState, prevContext)
