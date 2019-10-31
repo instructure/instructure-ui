@@ -2,6 +2,25 @@
 describes: FileDrop
 ---
 
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+    <Figure.Item>
+      The <code>label</code> prop is deprecated. Use <code>renderLabel</code> instead.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>disabled</code> and <code>readOnly</code> boolean props are deprecated. Use <code>interaction="disabled"</code> or <code>interaction="readonly"</code> instead.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>enablePreview</code>, <code>allowRepeatFileSelection</code>, and <code>allowMultiple</code> boolean props are deprecated. Use <code>shouldEnablePreview</code>, <code>shouldAllowRepeats</code>, and <code>shouldAllowMultiple</code>, respectively, instead.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
+
 `FileDrop` is a consistent way to drag and drop, as well as browse your computer to upload a media file.
 
 The `isDragAccepted` and `isDragRejected` props can be used to signal to the user if
@@ -14,8 +33,8 @@ example: true
 ---
 <FileDrop
   accept="image/*"
-  onDropAccepted={(event, { accepted }) => { console.log(`File accepted ${accepted[0].name}`) }}
-  onDropRejected={(event, { rejected }) => { console.log(`File rejected ${rejected[0].name}`) }}
+  onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
+  onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
   renderLabel={
     <Billboard
       heading="Upload your image"
@@ -57,8 +76,8 @@ example: true
 <div>
   <FileDrop
     accept=".png"
-    onDropAccepted={(event, { accepted }) => { console.log(`File accepted ${accepted[0].name}`) }}
-    onDropRejected={(event, { rejected }) => { console.log(`File rejected ${rejected[0].name}`) }}
+    onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
+    onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
     renderLabel={
       <Billboard
         size="small"
@@ -72,8 +91,8 @@ example: true
   />
   <FileDrop
     accept="video/*"
-    onDropAccepted={(event, { accepted }) => { console.log(`File accepted ${accepted[0].name}`) }}
-    onDropRejected={(event, { rejected }) => { console.log(`File rejected ${rejected[0].name}`) }}
+    onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
+    onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
     renderLabel={
       <Billboard
         size="small"
@@ -98,8 +117,8 @@ example: true
 ---
 <FileDrop
   accept=".jpg"
-  onDropAccepted={(event, { accepted }) => { console.log(`File accepted ${accepted[0].name}`) }}
-  onDropRejected={(event, { rejected }) => { console.log(`File rejected ${rejected[0].name}`) }}
+  onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
+  onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
   messages={[{ text: 'Invalid file type', type: 'error' }]}
   renderLabel={
     <Billboard
@@ -123,8 +142,8 @@ example: true
 ---
 <FileDrop
   shouldAllowMultiple={true}
-  onDropAccepted={(event, { accepted }) => {
-    console.log(`Files accepted: ${accepted.map((file) => file.name).join(', ')}`)
+  onDropAccepted={(files) => {
+    console.log(`Files accepted ${files.map((f) => f.name).join(',')}`)
   }}
   renderLabel={
     <Billboard

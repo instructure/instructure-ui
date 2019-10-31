@@ -32,7 +32,7 @@ import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { callRenderProp, experimental, passthroughProps } from '@instructure/ui-react-utils'
+import { callRenderProp, deprecated, passthroughProps } from '@instructure/ui-react-utils'
 import { isEdge } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
@@ -60,11 +60,17 @@ const IS_MS = isBrowserMS()
 /**
 ---
 category: components
-experimental: true
 ---
 **/
+@deprecated('8.0.0', {
+  label: 'renderLabel',
+  disabled: 'interaction',
+  readOnly: 'interaction',
+  enablePreview: 'shouldEnablePreview',
+  allowRepeatFileSelection: 'shouldAllowRepeats',
+  allowMultiple: 'shouldAllowMultiple'
+})
 @testable()
-@experimental()
 @themeable(theme, styles)
 class FileDrop extends Component {
   static propTypes = {
@@ -165,17 +171,46 @@ class FileDrop extends Component {
     * medium, large, x-large, xx-large. Apply these values via familiar
     * CSS-like shorthand. For example: margin="small auto large".
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+
+    /* eslint-disable react/require-default-props */
+
+    /**
+    * __deprecated: use `renderLabel`__
+    */
+    label: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    /**
+    * __deprecated: use `interaction`__
+    */
+    disabled: PropTypes.bool,
+    /**
+    * __deprecated: use `interaction`__
+    */
+    readOnly: PropTypes.bool,
+    /**
+    * __deprecated: use `shouldEnablePreview`__
+    */
+    enablePreview: PropTypes.bool,
+    /**
+    * __deprecated: use `shouldAllowRepeats`__
+    */
+    allowRepeatFileSelection: PropTypes.bool,
+    /**
+    * __deprecated: use `shouldAllowMultiple`__
+    */
+    allowMultiple: PropTypes.bool
+
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
     onClick: function(e) {},
-    onDrop: function (event, { accepted, rejected }) {},
-    onDropAccepted: function (event, { accepted }) {},
-    onDropRejected: function (event, { rejected }) {},
-    onDragEnter: function (event) {},
-    onDragOver: function (event) {},
-    onDragLeave: function (event) {},
+    onDrop: function (accepted, rejected, e) {},
+    onDropAccepted: function (accepted, e) {},
+    onDropRejected: function (rejected, e) {},
+    onDragEnter: function (e) {},
+    onDragOver: function (e) {},
+    onDragLeave: function (e) {},
     shouldEnablePreview: false,
     shouldAllowMultiple: false,
     shouldAllowRepeats: true,
@@ -214,17 +249,49 @@ class FileDrop extends Component {
     return this.props.messages && (this.props.messages.length > 0)
   }
 
+  get interaction () {
+    // TODO: no longer nec. when `disabled` and `readOnly` are removed
+    const {
+      interaction,
+      disabled,
+      readOnly
+    } = this.props
+
+    if (disabled) {
+      return 'disabled'
+    } else if (readOnly) {
+      return 'readonly'
+    } else {
+      return interaction
+    }
+  }
+
+  get shouldEnablePreview () {
+    // TODO: no longer nec. when `enablePreview` is removed
+    return this.props.enablePreview || this.props.shouldEnablePreview
+  }
+
+  get shouldAllowRepeats () {
+    // TODO: no longer nec. when `allowRepeatFileSelection` is removed
+    return this.props.allowRepeatFileSelection || this.props.shouldAllowRepeats
+  }
+
+  get shouldAllowMultiple () {
+    // TODO: no longer nec. when `allowMultiple` is removed
+    return this.props.allowMultiple || this.props.shouldAllowMultiple
+  }
+
   get invalid () {
     return this.hasMessages && this.props.messages.findIndex((message) => {
       return message.type === 'error'
     }) >= 0
   }
 
-  getDataTransferItems (event, shouldEnablePreview) {
-    let list = Array.from(getEventFiles(event, this.fileInputEl))
+  getDataTransferItems (e, shouldEnablePreview) {
+    let list = Array.from(getEventFiles(e, this.fileInputEl))
 
     if (list.length > 1) {
-      list = this.props.shouldAllowMultiple ? list : [list[0]]
+      list = this.shouldAllowMultiple ? list : [list[0]]
     }
 
     if (shouldEnablePreview) {
@@ -254,7 +321,7 @@ class FileDrop extends Component {
       isDragRejected: !allFilesAccepted
     })
 
-    this.props.onDragEnter(event)
+    this.props.onDragEnter(e)
   }
 
   handleDragOver = (e) => {
@@ -268,13 +335,13 @@ class FileDrop extends Component {
       // continue regardless of error
     }
 
-    this.props.onDragOver(event)
+    this.props.onDragOver(e)
 
     return false
   }
 
-  handleDragLeave = (event) => {
-    event.preventDefault()
+  handleDragLeave = (e) => {
+    e.preventDefault()
     this.enterCounter -= 1
 
     // Only deactivate once the dropzone and all children was left
@@ -287,40 +354,40 @@ class FileDrop extends Component {
       isDragRejected: false
     })
 
-    this.props.onDragLeave(event)
+    this.props.onDragLeave(e)
   }
 
   parseFiles (fileList) {
-    const acceptedFiles = []
-    const rejectedFiles = []
+    const accepted = []
+    const rejected = []
 
     fileList.forEach((file) => {
       if (this.fileAccepted(file) && this.fileMatchSize(file)) {
-        acceptedFiles.push(file)
+        accepted.push(file)
       } else {
-        rejectedFiles.push(file)
+        rejected.push(file)
       }
     })
 
-    return [acceptedFiles, rejectedFiles]
+    return [accepted, rejected]
   }
 
-  handleChange = (event) => {
-    const { onDrop, onDropAccepted, onDropRejected, shouldEnablePreview } = this.props
-    const fileList = this.getDataTransferItems(event, shouldEnablePreview)
+  handleChange = (e) => {
+    const { onDrop, onDropAccepted, onDropRejected } = this.props
+    const fileList = this.getDataTransferItems(e, this.shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
 
-    event.preventDefault()
+    e.preventDefault()
     this.enterCounter = 0
 
-    onDrop(event, { accepted, rejected })
-
-    if (accepted.length > 0) {
-      onDropAccepted(event, { accepted })
-    }
+    onDrop(accepted, rejected, e)
 
     if (rejected.length > 0) {
-      onDropRejected(event, { rejected })
+      onDropRejected(rejected, e)
+    }
+
+    if (accepted.length > 0) {
+      onDropAccepted(accepted, e)
     }
 
     this.setState({
@@ -349,14 +416,14 @@ class FileDrop extends Component {
 
   renderLabel () {
     const {
-      renderLabel,
-      interaction
+      label,
+      renderLabel
     } = this.props
 
-    return callRenderProp(renderLabel, {
+    return callRenderProp(label || renderLabel, {
       isDragAccepted: this.state.isDragAccepted,
       isDragRejected: this.state.isDragRejected,
-      interaction
+      interaction: this.interaction
     })
   }
 
@@ -376,41 +443,41 @@ class FileDrop extends Component {
     })
   }
 
-  handleClick = (event) => {
-    if (this.fileInputEl.value && this.props.shouldAllowRepeats) { this.fileInputEl.value = null }
+  handleClick = (e) => {
+    if (this.fileInputEl.value && this.shouldAllowRepeats) { this.fileInputEl.value = null }
 
     // focus the input (because FF won't)
     this.fileInputEl.focus()
 
-    this.props.onClick(event)
+    this.props.onClick(e)
 
     this.setState({
       isFileBrowserDisplayed: true
     })
   }
 
-  handleKeyDown = (event) => {
-    if (this.state.isFocused && keyEventIsClickButton(event)){
-      if (this.props.shouldAllowRepeats){
+  handleKeyDown = (e) => {
+    if (this.state.isFocused && keyEventIsClickButton(e)){
+      if (this.shouldAllowRepeats){
         this.fileInputEl.value = null
       }
       // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
       // So we need to apply this logic only on MS browsers
       /* istanbul ignore if  */
       if (IS_MS) {
-        event.stopPropagation()
-        event.preventDefault()
+        e.stopPropagation()
+        e.preventDefault()
         this.fileInputEl.click()
       }
     }
   }
 
-  handleKeyUp = (event) => {
+  handleKeyUp = (e) => {
     // This is to handle the case where ESC is pressed inside a Dialog so that
     // closing the file browser dialog doesn't also close the Dialog.
-    if (event.keyCode === keycode.codes.esc && this.state.isFileBrowserDisplayed) {
-      event.stopPropagation()
-      event.nativeEvent.stopImmediatePropagation()
+    if (e.keyCode === keycode.codes.esc && this.state.isFileBrowserDisplayed) {
+      e.stopPropagation()
+      e.nativeEvent.stopImmediatePropagation()
 
       this.setState({
         isFileBrowserDisplayed: false
@@ -420,8 +487,6 @@ class FileDrop extends Component {
 
   render () {
     const {
-      shouldAllowMultiple,
-      interaction,
       display,
       width,
       minWidth,
@@ -434,14 +499,15 @@ class FileDrop extends Component {
     const id = this.props.id || this.defaultId
 
     // make readonly input functionally disabled
-    const functionallyDisabled = interaction === 'disabled' || interaction === 'readonly'
+    const functionallyDisabled =
+      this.interaction === 'disabled' || this.interaction === 'readonly'
 
     const focusColor = (this.state.isDragRejected || this.invalid) ? 'danger' : undefined
 
     const classes = {
       [styles.label]: true,
       [styles.functionallyDisabled]: functionallyDisabled,
-      [styles.visuallyDisabled]: interaction === 'disabled',
+      [styles.visuallyDisabled]: this.interaction === 'disabled',
       [styles.dragRejected]: this.state.isDragRejected || this.invalid,
       [styles.dragAccepted]: this.state.isDragAccepted
     }
@@ -490,7 +556,7 @@ class FileDrop extends Component {
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
           onKeyUp={this.handleKeyUp}
-          multiple={shouldAllowMultiple}
+          multiple={this.shouldAllowMultiple}
           accept={this.acceptStr()}
           onChange={this.handleChange}
           aria-describedby={this.hasMessages ? this.messagesId : null}

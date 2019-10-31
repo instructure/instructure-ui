@@ -32,7 +32,7 @@ export default {
       accept: 'image/*',
       renderLabel: 'Upload a file',
       shouldEnablePreview: false,
-      allowAllowMultiple: false
+      shouldAllowMultiple: false
     }
   }
 }

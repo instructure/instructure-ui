@@ -32,7 +32,7 @@ import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { deprecated, omitProps } from '@instructure/ui-react-utils'
 import { isEdge } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
@@ -63,6 +63,7 @@ category: components/deprecated
 id: DeprecatedFileDrop
 ---
 **/
+@deprecated('7.0.0', null, 'Use FileDrop from ui-file-drop instead.')
 @testable()
 @themeable(theme, styles)
 class FileDrop extends Component {

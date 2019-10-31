@@ -6,21 +6,7 @@ id: DeprecatedFileDrop__README
 **DEPRECATED:** DeprecatedFileDrop will be removed from `ui-forms` in version 7.0.0. Use the [FileDrop from ui-file-drop](#FileDrop) instead.
 
 ### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package and handle the prop name changes listed below.
-
-These props have updated names:
-- The `label` prop has been changed to `renderLabel`
-- The `disabled` boolean prop has been changed to `interaction: disabled`
-- The `readOnly` boolean prop has been changed to `interaction: readonly`
-- The `enablePreview` boolean prop has been changed to `shouldEnablePreview`
-- The `allowRepeatFileSelection` boolean prop has been changed to `shouldAllowRepeats`
-- The `allowMultiple` boolean prop has been changed to `shouldAllowMultiple`
-
-The following callback props have been changed to create consistency among our
-components. Please see the new [FileDrop](#FileDrop) for updated docs:
-- `onDrop`
-- `onDropAccepted`
-- `onDropRejected`
+Codemods will be available to automatically update imports to the new package.
 
 ```js
 ---
