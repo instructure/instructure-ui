@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { safeCloneElement, passthroughProps, experimental } from '@instructure/ui-react-utils'
+import { safeCloneElement, passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { Item } from './Item'
@@ -39,11 +39,14 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 @module Flex
 **/
-@experimental()
+@deprecated('8.0.0', {
+  inline: 'display',
+  wrapItems: 'wrap',
+  visualDeug: 'withVisualDebug'
+})
 @themeable(theme, styles)
 class Flex extends Component {
   static Item = Item
@@ -109,7 +112,21 @@ class Flex extends Component {
     * Activate a dotted outline around the component to make building your
     * layout easier
     */
-    withVisualDebug: PropTypes.bool
+    withVisualDebug: PropTypes.bool,
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use 'display'__
+    */
+    inline: PropTypes.bool,
+    /**
+    * __Deprecated - use 'wrap'__
+    */
+    wrapItems: PropTypes.bool,
+    /**
+     * __Deprecated - use 'withVisualDebug'__
+     */
+    visualDebug: PropTypes.bool,
+   /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -133,7 +150,7 @@ class Flex extends Component {
     return Children.map(this.props.children, (child) => {
       if (child) {
         return safeCloneElement(child, {
-          withVisualDebug: this.props.withVisualDebug,
+          withVisualDebug: this.props.withVisualDebug || this.props.visualDebug,
           ...child.props, /* child visualDebug prop should override parent */
           direction: this.props.direction.replace(/-reverse/, '')
         })
@@ -157,18 +174,24 @@ class Flex extends Component {
       textAlign,
       withVisualDebug,
       width,
-      wrap
+      wrap,
+      visualDebug,
+      wrapItems,
+      inline
     } = this.props
 
     // When flex direction is row, 'center' is the most useful default because it
     // vertically aligns Items. For column direction, though, we want 'stretch'.
     const alignItems = this.props.alignItems || (direction === 'column' || direction === 'column-reverse' ? 'stretch' : 'center')
 
+    const backwardsDisplay = inline ? 'inline-flex' : null
+
     const classes = {
       [styles.root]: true,
       [styles[`justifyItems--${justifyItems}`]]: true,
       [styles[`alignItems--${alignItems}`]]: true,
-      [styles[`wrap--${wrap}`]]: wrap !== 'no-wrap'
+      [styles[`wrap--${wrap}`]]: wrap !== 'no-wrap',
+      [styles.wrapItems]: wrapItems
     }
 
     if (children && React.Children.count(children) > 0) {
@@ -178,13 +201,13 @@ class Flex extends Component {
           className={classnames(classes, styles[direction])}
           elementRef={elementRef}
           as={as}
-          display={display}
+          display={backwardsDisplay || display}
           width={width}
           height={height}
           margin={margin}
           padding={padding}
           textAlign={textAlign}
-          withVisualDebug={withVisualDebug}
+          withVisualDebug={withVisualDebug || visualDebug}
           __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderChildren()}

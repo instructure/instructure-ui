@@ -279,7 +279,7 @@ class Button extends Component {
         __dangerouslyIgnoreExperimentalWarnings
       >
         {hasTextAndIcon ? (
-          <Flex height="100%" width="100%" __dangerouslyIgnoreExperimentalWarnings>
+          <Flex height="100%" width="100%">
             <Flex.Item padding="0 x-small 0 0">{this.renderIcon()}</Flex.Item>
             <Flex.Item shouldGrow shouldShrink>
               <span className={styles.content}>{children}</span>

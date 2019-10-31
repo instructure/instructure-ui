@@ -207,7 +207,6 @@ class Playground extends Component {
         <Flex
           alignItems="center"
           padding="xx-small 0 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           <Flex.Item shouldShrink shouldGrow>
 

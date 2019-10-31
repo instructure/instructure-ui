@@ -51,6 +51,10 @@
   flex-wrap: wrap-reverse;
 }
 
+.wrapItems {
+  flex-wrap: wrap;
+}
+
 .justifyItems--start {
   justify-content: flex-start;
 }

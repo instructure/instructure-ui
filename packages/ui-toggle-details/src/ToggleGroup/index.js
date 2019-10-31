@@ -199,7 +199,6 @@ class ToggleGroup extends Component {
           >
             <Flex
               padding={(this.props.size === 'small') ? 'x-small' : 'small small small x-small'}
-              __dangerouslyIgnoreExperimentalWarnings
             >
               <Flex.Item>
                 {this.renderToggle(getToggleProps(), expanded)}

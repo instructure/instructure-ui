@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
+import { omitProps, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { FlexItem } from './FlexItem'
@@ -42,6 +42,7 @@ category: components/deprecated
 id: DeprecatedFlex
 ---
 **/
+@deprecated('7.0.0', null, 'Use Flex in ui-flex instead.')
 @themeable(theme, styles)
 class Flex extends Component {
   static propTypes = {

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, deprecated } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
@@ -38,6 +38,11 @@ parent: Flex
 id: Flex.Item
 ---
 **/
+@deprecated('8.0.0', {
+  grow: 'shouldGrow',
+  shrink: 'shouldShrink',
+  visualDeug: 'withVisualDebug'
+})
 @themeable(null, styles)
 class Item extends Component {
   /* eslint-disable react/require-default-props */
@@ -101,7 +106,21 @@ class Item extends Component {
     /**
     * Places dashed lines around the component's borders to help debug your layout
     */
-    withVisualDebug: PropTypes.bool
+    withVisualDebug: PropTypes.bool,
+    /* eslint-disable react/require-default-props */
+    /**
+    * __Deprecated - use 'shouldGrow'__
+    */
+   grow: PropTypes.bool,
+   /**
+   * __Deprecated - use 'shouldShrink'__
+   */
+   shrink: PropTypes.bool,
+   /**
+    * __Deprecated - use 'withVisualDebug'__
+    */
+   visualDebug: PropTypes.bool,
+  /* eslint-enable react/require-default-props */
   }
   /* eslint-enable react/require-default-props */
 
@@ -129,7 +148,10 @@ class Item extends Component {
      shouldShrink,
      size,
      textAlign,
-     withVisualDebug
+     withVisualDebug,
+     shrink,
+     grow,
+     visualDebug
    } = this.props
 
    const dirColumn = direction === 'column'
@@ -140,8 +162,8 @@ class Item extends Component {
 
    const classes = {
      [styles.root]: true,
-     [styles.shouldGrow]: shouldGrow,
-     [styles.shouldShrink]: shouldShrink,
+     [styles.shouldGrow]: grow || shouldGrow,
+     [styles.shouldShrink]: shrink || shouldShrink,
      [styles[`align--${align}`]]: align
    }
 
@@ -159,7 +181,7 @@ class Item extends Component {
        padding={padding}
        overflowX={overflowX}
        overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
-       withVisualDebug={withVisualDebug}
+       withVisualDebug={withVisualDebug || visualDebug}
        __dangerouslyIgnoreExperimentalWarnings
      >
        {children}

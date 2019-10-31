@@ -184,7 +184,6 @@ class InPlaceEdit extends Component {
         display={this.props.inline ? 'inline-flex' : 'flex'}
         direction={flexDir}
         justifyItems={justifyItems}
-        __dangerouslyIgnoreExperimentalWarnings
         {...getContainerProps()}
       >
         <Flex.Item shouldGrow shouldShrink>

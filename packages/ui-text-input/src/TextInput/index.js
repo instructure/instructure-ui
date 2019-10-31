@@ -341,7 +341,7 @@ class TextInput extends Component {
         <span className={classnames(facadeClasses)}>
           {
             renderBeforeOrAfter ?
-              <Flex wrap="wrap" __dangerouslyIgnoreExperimentalWarnings>
+              <Flex wrap="wrap">
                 {renderBeforeInput &&
                   <Flex.Item padding="0 0 0 small">
                     {callRenderProp(renderBeforeInput)}
