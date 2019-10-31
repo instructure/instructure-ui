@@ -20,8 +20,8 @@ example: true
     <Tooltip
       renderTip="Hello. I'm a tool tip"
       as={Button}
-      onRequestShowContent={() => console.log('showing')}
-      onRequestHideContent={() => console.log('hidden')}
+      onShowContent={() => console.log('showing')}
+      onHideContent={() => console.log('hidden')}
     >
       Hover or focus me
     </Tooltip>
@@ -76,10 +76,10 @@ class Example extends React.Component {
       <Tooltip
         renderTip="Hello. I'm a tool tip"
         isShowingContent={this.state.isShowingContent}
-        onRequestShowContent={(e) => {
+        onShowContent={(e) => {
           this.setState({ isShowingContent: true })
         }}
-        onRequestHideContent={(e) => {
+        onHideContent={(e) => {
           this.setState({ isShowingContent: false })
         }}
       >

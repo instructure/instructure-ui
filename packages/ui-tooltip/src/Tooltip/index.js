@@ -118,12 +118,12 @@ class Tooltip extends Component {
      * Callback fired when content is shown. When controlled, this callback is
      * fired when the tooltip expects to be shown
      */
-    onRequestShowContent: PropTypes.func,
+    onShowContent: PropTypes.func,
     /**
      * Callback fired when content is hidden. When controlled, this callback is
      * fired when the tooltip expects to be hidden
      */
-    onRequestHideContent: PropTypes.func,
+    onHideContent: PropTypes.func,
 
     /* eslint-disable react/require-default-props */
     /**
@@ -148,8 +148,8 @@ class Tooltip extends Component {
     constrain: 'window',
     offsetX: 0,
     offsetY: 0,
-    onRequestShowContent: (event) => {},
-    onRequestHideContent: (event, { documentClick }) => {}
+    onShowContent: (event) => {},
+    onHideContent: (event, { documentClick }) => {}
   }
 
   _id = uid('Tooltip')
@@ -206,8 +206,8 @@ class Tooltip extends Component {
       constrain,
       offsetX,
       offsetY,
-      onRequestShowContent,
-      onRequestHideContent,
+      onShowContent,
+      onHideContent,
       tip,
       variant,
       ...rest
@@ -236,8 +236,8 @@ class Tooltip extends Component {
         offsetX={offsetX}
         offsetY={offsetY}
         renderTrigger={() => this.renderTrigger()}
-        onShowContent={onRequestShowContent}
-        onHideContent={onRequestHideContent}
+        onShowContent={onShowContent}
+        onHideContent={onHideContent}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >

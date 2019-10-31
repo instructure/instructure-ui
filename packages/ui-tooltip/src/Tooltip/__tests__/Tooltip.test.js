@@ -191,15 +191,15 @@ describe('<Tooltip />', async () => {
       expect(content).to.exist()
     })
 
-    it('should call onRequestShowContent and on onRequestHideContent', async () => {
-      const onRequestShowContent = spy()
-      const onRequestHideContent = spy()
+    it('should call onShowContent and on onHideContent', async () => {
+      const onShowContent = spy()
+      const onHideContent = spy()
       const subject = await mount(
         <Tooltip
           renderTip={<h2>Hello</h2>}
           isShowingContent={false}
-          onRequestShowContent={onRequestShowContent}
-          onRequestHideContent={onRequestHideContent}
+          onShowContent={onShowContent}
+          onHideContent={onHideContent}
         >
           <a href="example.html">Hover or focus me</a>
         </Tooltip>
@@ -209,13 +209,13 @@ describe('<Tooltip />', async () => {
 
       await trigger.focus()
       await wait(() => {
-        expect(onRequestShowContent).to.have.been.calledOnce()
+        expect(onShowContent).to.have.been.calledOnce()
       })
 
       await subject.setProps({ isShowingContent: true})
 
       await trigger.mouseOut()
-      expect(onRequestHideContent).to.have.been.calledOnce()
+      expect(onHideContent).to.have.been.calledOnce()
     })
   })
 
