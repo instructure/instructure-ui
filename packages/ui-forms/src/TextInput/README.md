@@ -2,7 +2,7 @@
 describes: DeprecatedTextInput
 id: DeprecatedTextInput__README
 ---
-**DEPRECATED:** use the [controlled-only `TextInput` from ui-text-input](#TextInput) instead.
+**DEPRECATED:** use [TextInput from ui-text-input](#TextInput) instead.
 
 `TextInput` renders a custom HTML `input` element. It supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
 

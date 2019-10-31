@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { deprecated, callRenderProp, omitProps, pickProps } from '@instructure/ui-react-utils'
+import { deprecated, callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { Flex } from '@instructure/ui-flex'
@@ -64,6 +64,14 @@ class TextInput extends Component {
     * The id of the text input. One is generated if not supplied.
     */
     id: PropTypes.string,
+    /**
+    * the selected value (must be accompanied by an `onChange` prop)
+    */
+    value: controllable(PropTypes.string),
+    /**
+    * value to set on initial render
+    */
+    defaultValue: PropTypes.string,
     /**
     * Specifies if interaction with the input is enabled, disabled, or readonly.
     * When "disabled", the input changes visibly to indicate that it cannot
@@ -112,10 +120,6 @@ class TextInput extends Component {
     */
     inputContainerRef: PropTypes.func,
     /**
-    * the selected value (must be accompanied by an `onChange` prop)
-    */
-    value: controllable(PropTypes.string),
-    /**
     * Content to display before the input text, such as an icon
     */
     renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -137,26 +141,33 @@ class TextInput extends Component {
     * Callback fired when input receives focus.
     */
     onFocus: PropTypes.func,
+
+    /* eslint-disable react/require-default-props */
     /**
-    * deprecated
+    * __Deprecated - use `renderAfterInput`__
+    */
+    icon: PropTypes.func,
+    /**
+    * __Deprecated - use `renderLabel`__
     */
     label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * deprecated
+    * __Deprecated - use `interaction`__
     */
     disabled: PropTypes.bool,
     /**
-    * deprecated
+    * __Deprecated - use `interaction`__
     */
     readOnly: PropTypes.bool,
     /**
-    * deprecated
+    * __Deprecated - use `isRequired`__
     */
     required: PropTypes.bool,
     /**
-    * deprecated
+    * __Deprecated - use `display`__
     */
     inline: PropTypes.bool
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -166,6 +177,7 @@ class TextInput extends Component {
     interaction: 'enabled',
     isRequired: false,
     value: undefined,
+    defaultValue: undefined,
     display: 'block',
     placeholder: undefined,
     width: undefined,
@@ -179,11 +191,6 @@ class TextInput extends Component {
     onFocus: function (event) {},
     renderBeforeInput: undefined,
     renderAfterInput: undefined,
-    label: undefined,
-    disabled: undefined,
-    readOnly: undefined,
-    required: undefined,
-    inline: undefined
   }
 
   constructor (props) {
@@ -247,15 +254,16 @@ class TextInput extends Component {
       textAlign,
       placeholder,
       value,
+      defaultValue,
       disabled,
       readOnly,
       interaction,
       required,
-      isRequired
+      isRequired,
+      ...rest
     } = this.props
 
-    const props = omitProps(this.props, TextInput.propTypes, ['layout'])
-
+    const props = passthroughProps(rest)
     const inputClasses = {
       [styles.input]: true,
       [styles[size]]: size,
@@ -276,6 +284,7 @@ class TextInput extends Component {
       <input
         {...props}
         className={classnames(inputClasses)}
+        defaultValue={defaultValue}
         value={value}
         placeholder={placeholder}
         ref={this.handleInputRef}
@@ -303,10 +312,13 @@ class TextInput extends Component {
       label,
       renderLabel,
       renderBeforeInput,
-      renderAfterInput
+      renderAfterInput,
+      messages,
+      inputContainerRef,
+      icon
     } = this.props
 
-    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput
+    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput || icon
 
     const facadeClasses = {
       [styles.facade]: true,
@@ -317,12 +329,14 @@ class TextInput extends Component {
 
     return (
       <FormField
-        {...pickProps(this.props, FormField.propTypes)}
         id={this.id}
         label={callRenderProp(renderLabel || label)}
         messagesId={this._messagesId}
+        messages={messages}
         inline={display === 'inline-block' || inline}
         width={width}
+        inputContainerRef={inputContainerRef}
+        layout={this.props.layout} // eslint-disable-line react/prop-types
       >
         <span className={classnames(facadeClasses)}>
           {
@@ -343,9 +357,12 @@ class TextInput extends Component {
                     <Flex.Item shouldGrow shouldShrink>
                       {this.renderInput()}
                     </Flex.Item>
-                    {renderAfterInput &&
+                    {(renderAfterInput || icon) &&
                       <Flex.Item padding="0 small 0 0">
-                        {callRenderProp(renderAfterInput)}
+                        {renderAfterInput ?
+                          callRenderProp(renderAfterInput) :
+                          callRenderProp(icon)
+                        }
                       </Flex.Item>
                     }
                   </Flex>

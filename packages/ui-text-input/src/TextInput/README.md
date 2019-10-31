@@ -2,9 +2,22 @@
 describes: TextInput
 ---
 
-A **controlled-only** version of [`TextInput`](#DeprecatedTextInput): You must pass event handlers if you want it to respond to user input.
+`TextInput` is a custom styled `input` element. It supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
 
-TextInput supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
+### Uncontrolled TextInput
+
+```js
+---
+example: true
+---
+<TextInput
+  renderLabel="Name"
+  placeholder="Doe, John Doe"
+  onChange={(event, value) => { console.log(value) }}
+/>
+```
+
+#### Controlled TextInput
 
 ```javascript
 ---
