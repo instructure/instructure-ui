@@ -38,6 +38,7 @@ import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
+import { element } from '@instructure/ui-prop-types'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -115,6 +116,10 @@ class Tooltip extends Component {
      */
     offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
+     * Target element for positioning the Tooltip (if it differs from children/trigger)
+     */
+    positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
+    /**
      * Callback fired when content is shown. When controlled, this callback is
      * fired when the tooltip expects to be shown
      */
@@ -148,6 +153,7 @@ class Tooltip extends Component {
     constrain: 'window',
     offsetX: 0,
     offsetY: 0,
+    positionTarget: undefined,
     onShowContent: (event) => {},
     onHideContent: (event, { documentClick }) => {}
   }
@@ -206,6 +212,7 @@ class Tooltip extends Component {
       constrain,
       offsetX,
       offsetY,
+      positionTarget,
       onShowContent,
       onHideContent,
       tip,
@@ -235,6 +242,7 @@ class Tooltip extends Component {
         shadow="none"
         offsetX={offsetX}
         offsetY={offsetY}
+        positionTarget={positionTarget}
         renderTrigger={() => this.renderTrigger()}
         onShowContent={onShowContent}
         onHideContent={onHideContent}

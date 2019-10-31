@@ -30,6 +30,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { Tooltip as UITooltip } from '@instructure/ui-tooltip'
+import { element } from '@instructure/ui-prop-types'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -77,6 +78,10 @@ class Tooltip extends Component {
      */
     mountNode: LayoutPropTypes.mountNode,
     /**
+     * Target element for positioning the Tooltip (if it differs from children/trigger)
+     */
+    positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
+    /**
      * The parent in which to constrain the tooltip.
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
@@ -89,6 +94,7 @@ class Tooltip extends Component {
     variant: 'inverse',
     placement: 'top',
     mountNode: null,
+    positionTarget: undefined,
     constrain: 'window'
   }
 
@@ -100,6 +106,7 @@ class Tooltip extends Component {
       on,
       placement,
       mountNode,
+      positionTarget,
       constrain,
       ...passthroughProps
     } = this.props
@@ -112,6 +119,7 @@ class Tooltip extends Component {
         color={variant === 'inverse' ? 'primary' : 'primary-inverse'}
         placement={placement}
         mountNode={mountNode}
+        positionTarget={positionTarget}
         constrain={constrain}
       >
         { children }
