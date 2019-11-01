@@ -78,6 +78,7 @@ import {
 *
 * @param {function} theme - A function that generates the component theme variables.
 * @param {object} styles - The component styles object.
+* @param {function} adapter - A function for mapping deprecated theme vars to updated values.
 * @return {function} composes the themeable component.
 */
 
@@ -100,7 +101,7 @@ const emptyObj = {}
  * so once we do that, this caveat no longer applies.
  */
 
-const themeable = decorator((ComposedComponent, theme, styles = {}) => {
+const themeable = decorator((ComposedComponent, theme, styles = {}, adapter) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name
   let componentId = `${(styles && styles.componentId) || uid()}`
   if (process.env.NODE_ENV !== 'production') {
@@ -112,14 +113,20 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   }
 
   const contextKey = Symbol(componentId)
-  const template = (styles && typeof styles.template === 'function') ? styles.template : () => {
-    warn(
-      false,
-      '[themeable] Invalid styles for: %O. Use @instructure/babel-plugin-themeable-styles to transform CSS imports.',
-      displayName
-    )
-    return ''
+
+  let template = () => {}
+
+  if (styles) {
+    template = (typeof styles.template === 'function') ? styles.template : () => {
+      warn(
+        false,
+        '[themeable] Invalid styles for: %O. Use @instructure/babel-plugin-themeable-styles to transform CSS imports.',
+        displayName
+      )
+      return ''
+    }
   }
+
   registerComponentTheme(contextKey, theme)
   const getContext = function (context) {
     const themeContext = ThemeContext.getThemeContext(context)
@@ -212,6 +219,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
       }
       const { immutable } = getContext(this.context)
       let theme = getThemeFromContext(this.context)
+
       if (this.props.theme && !isEmpty(this.props.theme)) {
         if (!theme) {
           theme = this.props.theme
@@ -227,6 +235,12 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
             : Object.assign({}, theme, this.props.theme)
         }
       }
+
+      // If adapter is provided, pass any overrides
+      if (typeof adapter === 'function') {
+        theme = adapter({ theme, displayName })
+      }
+
       // pass in the component theme as overrides
       this._themeCache = generateThemeForContextKey(null, theme)
       return this._themeCache

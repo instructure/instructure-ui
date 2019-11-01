@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { themeable } from '../themeable'
 import { ThemeContext } from '../ThemeContext'
+import { createThemeAdapter } from '../createThemeAdapter'
 
 describe('@themeable', async () => {
   const theme = function () {
@@ -131,5 +132,47 @@ describe('@themeable', async () => {
 
     await subject.setProps({theme})
     expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('purple')
+  })
+
+  it('allows for overrides using the same name when an adapter is specified', async () => {
+    stub(console, 'warn')
+
+    const originalTheme = {
+      textColor: 'orange'
+    }
+
+    const map = {
+      contentColor: 'textColor'
+    }
+
+    const adapter = createThemeAdapter({ map, version: '20.0.0' })
+
+    const ThemeableAdapterComponent = themeable(originalTheme, styles, adapter)(ExampleComponent)
+
+    const subject = await mount(<ThemeableAdapterComponent theme={{ textColor: 'blue' }} />)
+    const component = subject.getDOMNode()
+
+    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('blue')
+  })
+
+  it('allows for overrides of a different name when an adapter is specified', async () => {
+    stub(console, 'warn')
+
+    const originalTheme = {
+      textColor: 'orange'
+    }
+
+    const map = {
+      contentColor: 'textColor'
+    }
+
+    const adapter = createThemeAdapter({ map, version: '20.0.0' })
+
+    const ThemeableAdapterComponent = themeable(originalTheme, styles, adapter)(ExampleComponent)
+
+    const subject = await mount(<ThemeableAdapterComponent theme={{ contentColor: 'blue' }} />)
+    const component = subject.getDOMNode()
+
+    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('blue')
   })
 })

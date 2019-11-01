@@ -46,6 +46,7 @@ export { cleanCss } from './cleanCss'
 export { ruleTypes } from './ruleTypes'
 export { parseCss } from './parseCss'
 export { ThemeRegistry } from './ThemeRegistry'
+export { createThemeAdapter } from './createThemeAdapter'
 
 export { themeable as default } from './themeable'
 export { themeable } from './themeable'
