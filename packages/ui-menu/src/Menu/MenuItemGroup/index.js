@@ -29,7 +29,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps, safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
-import { hasVisibleChildren } from '@instructure/ui-a11y'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { MenuItem } from '../MenuItem'

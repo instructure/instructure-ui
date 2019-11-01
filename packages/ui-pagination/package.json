@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.0",
-    "@instructure/ui-a11y": "^6.14.0",
+    "@instructure/ui-a11y-utils": "^6.14.0",
     "@instructure/ui-a11y-content": "^6.14.0",
     "@instructure/ui-buttons": "^6.14.0",
     "@instructure/ui-elements": "^6.14.0",
@@ -36,6 +36,7 @@
     "@instructure/ui-portal": "^6.14.0",
     "@instructure/ui-prop-types": "^6.14.0",
     "@instructure/ui-react-utils": "^6.14.0",
+    "@instructure/ui-dom-utils": "^6.14.0",
     "@instructure/ui-testable": "^6.14.0",
     "@instructure/ui-themeable": "^6.14.0",
     "@instructure/ui-utils": "^6.14.0",

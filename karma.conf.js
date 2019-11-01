@@ -29,9 +29,9 @@ module.exports = require('@instructure/ui-karma-config')({
   coverageThreshold: {
     global: {
       statements: 88,
-      branches: 77,
-      functions: 87,
-      lines: 89
+      branches: 76,
+      functions: 86,
+      lines: 88
     }
   },
   coverageDirectory: path.join(__dirname, '/coverage')

@@ -34,7 +34,7 @@ import {
   mirrorHorizontalPlacement
 } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
-import { Dialog } from '@instructure/ui-a11y'
+import { Dialog } from '@instructure/ui-dialog'
 import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
 import {

@@ -26,7 +26,8 @@ import { warn } from '@instructure/console/macro'
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/deprecated
+ * id: DeprecatedScreenReaderFocusRegion
  * ---
  * @module ScreenReaderFocusRegion
  * Utility that hides all DOM elements outside of a specified node. Used,

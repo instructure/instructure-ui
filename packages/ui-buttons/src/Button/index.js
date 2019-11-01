@@ -30,7 +30,7 @@ import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
-import { hasVisibleChildren } from '@instructure/ui-a11y'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { warn } from '@instructure/console/macro'
 
 import { Flex } from '@instructure/ui-flex'

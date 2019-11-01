@@ -28,9 +28,9 @@ import PropTypes from 'prop-types'
 import {
   addInputModeListener,
   addEventListener,
-  containsActiveElement
+  containsActiveElement,
+  findFocusable
 } from '@instructure/ui-dom-utils'
-import { findFocusable } from '@instructure/ui-a11y'
 import { warn } from '@instructure/console/macro'
 
 /**

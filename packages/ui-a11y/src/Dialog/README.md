@@ -1,6 +1,9 @@
 ---
-describes: Dialog
+describes: DeprecatedDialog
+id: DeprecatedDialog__README
 ---
+
+**DEPRECATED:** DeprecatedDialog will be removed from `ui-a11y` in version 7.0.0. Use the [Dialog from ui-dialog](#Dialog) instead.
 
 The `Dialog` component is a utility that is used by
 [Popover](#Popover), [Modal](#Modal) and [Tray](#Tray) for keyboard accessibility.

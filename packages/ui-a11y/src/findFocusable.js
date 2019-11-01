@@ -35,10 +35,12 @@
  **/
 
 import { getComputedStyle, findDOMNode, elementMatches } from '@instructure/ui-dom-utils'
+import { warn } from '@instructure/console'
 
 /**
 * ---
-* category: utilities/a11y
+* category: utilities/deprecated
+* id: deprecatedFindFocusable
 * ---
 *
 * Given an element, finds and returns all visible, focusable children.
@@ -52,6 +54,8 @@ import { getComputedStyle, findDOMNode, elementMatches } from '@instructure/ui-d
 * @returns {Array} array of all tabbable children
 */
 function findFocusable (el, filter, shouldSearchRootNode) {
+  warn(false, '[findFocusable] is deprecated. It has been moved from `@instructure/ui-a11y` to `@instructure/ui-dom-utils`')
+
   const element = findDOMNode(el)
 
   if (!element || typeof element.querySelectorAll !== 'function') {

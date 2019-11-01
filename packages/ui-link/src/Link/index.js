@@ -28,8 +28,8 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { findFocusable, hasVisibleChildren } from '@instructure/ui-a11y'
-import { isActiveElement } from '@instructure/ui-dom-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
+import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
   deprecated,
   getElementType,

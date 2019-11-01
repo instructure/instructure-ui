@@ -33,7 +33,7 @@ import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { Dialog } from '@instructure/ui-a11y'
+import { Dialog } from '@instructure/ui-dialog'
 import { Portal } from '@instructure/ui-portal'
 
 import { mirrorHorizontalPlacement } from '../../mirrorHorizontalPlacement'

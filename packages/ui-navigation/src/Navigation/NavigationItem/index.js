@@ -30,7 +30,7 @@ import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
-import { hasVisibleChildren } from '@instructure/ui-a11y'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 
 import styles from './styles.css'
 import theme from './theme'

@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.0",
-    "@instructure/ui-a11y": "^6.14.0",
     "@instructure/ui-elements": "^6.14.0",
     "@instructure/ui-icons": "^6.14.0",
     "@instructure/ui-link": "^6.14.0",

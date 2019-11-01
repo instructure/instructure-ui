@@ -34,7 +34,8 @@ import { findTabbable}  from './findTabbable'
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/deprecated
+ * id: deprecatedScopeTab
  * ---
  *
  * Scope tab in order to trap focus within a specified

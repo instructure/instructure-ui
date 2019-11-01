@@ -32,7 +32,7 @@ export const View = (props) => <ExperimentalView {...props} __dangerouslyIgnoreE
 
 export {
   AccessibleContent as DeprecatedAccessibleContent,
-  Dialog,
+  Dialog as DeprecatedDialog,
   PresentationContent as DeprecatedPresentationContent,
   ScreenReaderContent as DeprecatedScreenReaderContent
 } from '@instructure/ui-a11y'
@@ -47,6 +47,7 @@ export { Billboard } from '@instructure/ui-billboard'
 export { Button, CloseButton } from '@instructure/ui-buttons'
 export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
+export { Dialog } from '@instructure/ui-dialog'
 export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export {
   Avatar as DeprecatedAvatar,

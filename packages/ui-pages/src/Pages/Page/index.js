@@ -26,8 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
-import { findDOMNode } from '@instructure/ui-dom-utils'
-import { findTabbable } from '@instructure/ui-a11y'
+import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { error } from '@instructure/console/macro'
 import { View } from '@instructure/ui-view'
 

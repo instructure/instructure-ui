@@ -24,62 +24,51 @@
 
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
-import { getScrollParents } from '../getScrollParents'
+import { getOffsetParents } from '../getOffsetParents'
 
-describe('getScrollParents', async () => {
+describe('getOffsetParents', async () => {
   const node = (
     <div>
-      <div id="item-1">
-        <div id="item-2">
-          <span id="item-3">hello</span>
-          <span id="sibling-1">hello</span>
-          <span id="sibling-2">hello</span>
-          <span id="sibling-3">hello</span>
-        </div>
-      </div>
-      <div id="ht" style={{ height: '50px' }} />
-      <div id="scroll-parent" style={{ height: '200px', overflow: 'scroll' }}>
+      <div id="parent-1" style={{transform: '200px', position: 'relative'}}>
         <div>
-          <div id="scroll-child" style={{ height: '500px' }}>hello</div>
+          <div id="child-1" style={{ height: '500px' }}>hello</div>
         </div>
       </div>
 
-      <div id="scroll-parent-rel" style={{ height: '200px', overflow: 'scroll', position: 'relative' }}>
-        <div style={{ height: '200px', overflow: 'scroll' }}>
-          <div id="scroll-child-rel" style={{ height: '500px', position: 'absolute' }}>hello</div>
+      <div style={{ transform: '200px', position: 'absolute'}}>
+        <div style={{ position: 'absolute' }}>
+          <div id="child-2">hello</div>
         </div>
       </div>
 
-      <div style={{ height: '200px', overflow: 'scroll' }}>
-        <div id="scroll-child-fixed" style={{ height: '500px', position: 'fixed' }}>hello</div>
+      <div>
+        <div id="child-3">hello</div>
       </div>
     </div>
   )
 
-  it('should find scroll parent for inline elements', async () => {
+  it('should find offset parent for inline elements', async () => {
     await mount(node)
 
-    const child = document.getElementById('scroll-child')
-    const parent = document.getElementById('scroll-parent')
+    const child = document.getElementById('child-1')
+    const parent = document.getElementById('parent-1')
 
-    expect(getScrollParents(child)[0]).to.be.equal(parent)
+    expect(getOffsetParents(child)[0]).to.be.equal(parent)
   })
 
   it('should ignore static parents when absolute', async () => {
     await mount(node)
 
-    const child = document.getElementById('scroll-child-rel')
-    const parent = document.getElementById('scroll-parent-rel')
+    const child = document.getElementById('child-2')
 
-    expect(getScrollParents(child)[0]).to.be.equal(parent)
+    expect(getOffsetParents(child).length).to.be.equal(3)
   })
 
   it('should handle fixed', async () => {
     await mount(node)
 
-    const child = document.getElementById('scroll-child-fixed')
-    const scrollParent = getScrollParents(child)[0]
+    const child = document.getElementById('child-3')
 
-    expect(scrollParent === document).to.be.equal(true)
+    expect(getOffsetParents(child).length).to.be.equal(1)
   })
 })

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { omitProps, getElementType, deprecated } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
 import { error } from '@instructure/console/macro'
 
@@ -33,11 +33,12 @@ import { FocusRegionManager } from '../FocusRegionManager'
 
 /**
 ---
-category: components/utilities
+category: components/utilities/deprecated
+id: DeprecatedDialog
 ---
 @module Dialog
 **/
-
+@deprecated('7.0.0', null, 'Use Dialog from ui-dialog instead')
 class Dialog extends Component {
   static propTypes = {
     /**

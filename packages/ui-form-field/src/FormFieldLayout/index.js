@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { hasVisibleChildren } from '@instructure/ui-a11y'
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Grid } from '@instructure/ui-layout'
 import { error } from '@instructure/console/macro'

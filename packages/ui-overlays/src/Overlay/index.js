@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Dialog } from '@instructure/ui-a11y'
+import { Dialog } from '@instructure/ui-dialog'
 import { testable } from '@instructure/ui-testable'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'

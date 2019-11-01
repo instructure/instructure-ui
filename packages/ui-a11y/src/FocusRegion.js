@@ -34,7 +34,8 @@ import { KeyboardFocusRegion } from './KeyboardFocusRegion'
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/deprecated
+ * id: DeprecatedFocusRegion
  * ---
  * @module FocusRegion
  * Class for focus operations.

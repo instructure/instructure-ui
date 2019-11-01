@@ -26,7 +26,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { Dialog } from '@instructure/ui-a11y'
+import { Dialog } from '@instructure/ui-dialog'
 import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps, safeCloneElement , matchComponentTypes } from '@instructure/ui-react-utils'
 import { createChainedFunction, isIE11 } from '@instructure/ui-utils'

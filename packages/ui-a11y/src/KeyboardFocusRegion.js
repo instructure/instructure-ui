@@ -42,7 +42,8 @@ import { findFocusable } from './findFocusable'
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/deprecated
+ * id: DeprecatedKeyboardFocusRegion
  * ---
  * @module KeyboardFocusRegion
  * Class for focus operations.

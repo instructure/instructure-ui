@@ -28,7 +28,8 @@ let ENTRIES = []
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/deprecated
+ * id: DeprecatedFocusRegionManager
  * ---
  * @module FocusManager
  * Class for focus operations.

@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
+import { warn } from '@instructure/console'
 import { findFocusable } from './findFocusable'
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/deprecated
+ * id: deprecatedFindTabbable
  * ---
  *
  * Given an element, finds and returns all visible, tabbable children.
@@ -40,6 +42,8 @@ import { findFocusable } from './findFocusable'
  * @returns {Array} array of all tabbable children
  */
 function findTabbable (el, shouldSearchRootNode) {
+  warn(false, '[findTabbable] is deprecated. It has been moved from `@instructure/ui-a11y` to `@instructure/ui-dom-utils`')
+
   return findFocusable(el, (element) => {
     return !isInvalidTabIndex(element.getAttribute('tabindex'))
   }, shouldSearchRootNode)

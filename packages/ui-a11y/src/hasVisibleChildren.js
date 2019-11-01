@@ -24,18 +24,21 @@
 
 import React from 'react'
 import { matchComponentTypes } from '@instructure/ui-react-utils'
-
+import { warn } from '@instructure/console'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/deprecated
+ * id: deprecatedHasVisibleChildren
  * ---
  * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](#ScreenReaderContent).
  * @param {ReactChildren} children - A react component's children prop
  * @return {boolean} whether any of the children are visible
  */
 function hasVisibleChildren (children) {
+  warn(false, '[hasVisibleChildren] is deprecated. It has been moved from `@instructure/ui-a11y` to `@instructure/ui-a11y-utils`')
+
   let visible = false
 
   React.Children.forEach(children, (child) => {
