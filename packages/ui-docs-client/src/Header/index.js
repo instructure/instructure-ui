@@ -73,11 +73,11 @@ class Header extends Component {
               </Button>
               &nbsp;|&nbsp;
               <Button
-                href="#WhatsNew"
+                href="#Newsletter"
                 variant="link"
                 theme={{mediumPadding: '0.125rem', mediumHeight: 'normal'}}
               >
-                What&apos;s New?
+                Newsletter
               </Button>
             </View>
           ) }
