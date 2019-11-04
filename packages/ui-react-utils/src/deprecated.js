@@ -100,16 +100,18 @@ const deprecated = (() => {
    *
    * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
    * @param {array} deprecated - an array of the deprecated variant names
-   * @param {string} message - additional information to display with the warning (include the version in which they will be removed)
+   * @param {string|function} message - a string with additional information (like the version the prop will be removed) or a function returning a string
    */
   deprecated.deprecatePropValues = (propType, deprecated = [], message) => {
     return (props, propName, componentName, ...rest) => {
       const isDeprecatedValue = deprecated.includes(props[propName])
 
-      warn(
-        (!isDeprecatedValue),
-        `[${componentName}] The '${props[propName]}' value for the \`${propName}\` prop is deprecated. ${message || ''}`
+      const warningMessage = (message && typeof message === 'function') ? message({ props, propName, propValue: props[propName] }) : (
+        `The '${props[propName]}' value for the \`${propName}\` prop is deprecated. ${message || ''}`
       )
+
+      warn(!isDeprecatedValue, `[${componentName}] ${warningMessage}`)
+
       return isDeprecatedValue ? null : propType(props, propName, componentName, ...rest)
     }
   }
