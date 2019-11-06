@@ -30,6 +30,9 @@ import CalendarLocator from '../locator'
 import CalendarExamples from '../__examples__/Calendar.examples'
 
 describe('<Calendar />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress experimental warnings
+  })
   const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   const generateDays = (count = Calendar.DAY_COUNT) => {

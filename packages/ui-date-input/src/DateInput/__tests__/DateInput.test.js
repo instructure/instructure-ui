@@ -32,6 +32,9 @@ import { DateInput } from '../index'
 import DateInputLocator from '../locator'
 
 describe('<DateInput />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress experimental warnings
+  })
   const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
   const generateDays = (count = Calendar.DAY_COUNT) => {

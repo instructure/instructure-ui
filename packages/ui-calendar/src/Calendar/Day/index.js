@@ -26,7 +26,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { FocusableView } from '@instructure/ui-focusable'
 import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { omitProps, callRenderProp, getElementType } from '@instructure/ui-react-utils'
@@ -182,12 +181,15 @@ class Day extends Component {
     )
 
     return (
-      <FocusableView
+      <View
         {...passthroughProps}
         as={elementType}
         className={styles.root}
         display="inline-block"
         margin="xxx-small"
+        borderWidth="none"
+        borderColor="transparent"
+        background="transparent"
         cursor={elementType === 'button' || elementType === 'a'
           ? (isDisabled ? 'not-allowed' : 'pointer')
           : 'auto'
@@ -204,7 +206,7 @@ class Day extends Component {
             {callRenderProp(children)}
           </AccessibleContent>
         </span>
-      </FocusableView>
+      </View>
     )
   }
 }

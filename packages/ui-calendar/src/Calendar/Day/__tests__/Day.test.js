@@ -31,6 +31,9 @@ import DayLocator from '../locator'
 import DayExamples from '../__examples__/Day.examples'
 
 describe('Day', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress experimental warnings
+  })
   it('should render children', async () => {
     const subject = await mount(
       <Day
