@@ -63,7 +63,7 @@ class Header extends Component {
             </Button>
           </Heading>
           { this.props.version && (
-            <View display="block" margin="xx-small none none" __dangerouslyIgnoreExperimentalWarnings>
+            <View display="block" margin="xx-small none none">
               <Button
                 href="#CHANGELOG"
                 variant="link"

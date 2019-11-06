@@ -39,7 +39,6 @@ export default {
           width="2rem"
           height="2rem"
           borderWidth="small"
-          __dangerouslyIgnoreExperimentalWarnings
         />
       )
     }

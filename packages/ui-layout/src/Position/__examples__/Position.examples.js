@@ -86,7 +86,6 @@ export default {
             width={xStretch ? '100%' : targetSize}
             height={xStretch ? targetSize : '100%'}
             background="primary-inverse"
-            __dangerouslyIgnoreExperimentalWarnings
           />
         </Position.Target>,
         <Position.Content key="1">
@@ -94,7 +93,6 @@ export default {
             {...contentProps}
             width={xStretch ? null : contentSize}
             height={xStretch ? contentSize : null}
-            __dangerouslyIgnoreExperimentalWarnings
           >
             {text}
           </View>
@@ -106,11 +104,10 @@ export default {
             width={targetSize}
             height={targetSize}
             background="primary-inverse"
-            __dangerouslyIgnoreExperimentalWarnings
           />
         </Position.Target>,
         <Position.Content key="1">
-          <View {...contentProps} __dangerouslyIgnoreExperimentalWarnings>
+          <View {...contentProps}>
             {text}
           </View>
         </Position.Content>

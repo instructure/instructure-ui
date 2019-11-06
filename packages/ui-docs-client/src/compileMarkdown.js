@@ -203,7 +203,7 @@ function createRenderer () {
 
         } else if (language.indexOf('_example') >= 0 || matter.data.example) {
           el = (
-            <View display="block" margin="medium none" __dangerouslyIgnoreExperimentalWarnings>
+            <View display="block" margin="medium none">
               {getComponent('Playground', data)}
             </View>
           )

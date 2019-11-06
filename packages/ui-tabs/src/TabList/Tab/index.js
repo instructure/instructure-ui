@@ -107,7 +107,6 @@ class Tab extends Component {
         aria-disabled={disabled ? 'true' : null}
         aria-controls={controls}
         tabIndex={selected && !disabled ? '0' : null}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {children}
       </View>

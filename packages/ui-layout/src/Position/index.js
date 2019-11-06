@@ -183,7 +183,6 @@ class Position extends Component {
         shouldPositionOverTarget={over}
         onPositioned={onPositioned}
         onPositionChanged={onPositionChanged}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         { content }
       </UIPosition>

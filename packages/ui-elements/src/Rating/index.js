@@ -143,7 +143,6 @@ class Rating extends Component {
         className={classnames(classes)}
         margin={margin}
         display="inline-block"
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <ScreenReaderContent>{valueText}</ScreenReaderContent>
         {

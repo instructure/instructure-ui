@@ -75,7 +75,6 @@ class Row extends Component {
           [styles.stacked]: isStacked,
         })}
         role={isStacked ? "row" : null}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {Children.toArray(children)
           .filter(Boolean)

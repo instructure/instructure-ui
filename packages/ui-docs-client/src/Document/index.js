@@ -67,12 +67,11 @@ class Document extends Component {
       props
     } = doc
     return props ? (
-      <View margin="x-large 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
+      <View margin="x-large 0" display="block">
         <Heading
           level="h3"
           id={`${id}Properties`}
           margin="0 0 small 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Properties
         </Heading>
@@ -87,12 +86,11 @@ class Document extends Component {
     const theme = (typeof generateTheme === 'function') && generateTheme(themeKey)
 
     return theme && Object.keys(theme).length > 0 ? (
-      <View margin="x-large 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
+      <View margin="x-large 0" display="block">
         <Heading
           level="h3"
           id={`${doc.id}Theme`}
           margin="0 0 small 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Theme Variables
         </Heading>
@@ -122,7 +120,7 @@ class Document extends Component {
     if (!srcUrl) return
 
     return (
-      <View as="div" margin="0 0 x-large 0" __dangerouslyIgnoreExperimentalWarnings>
+      <View as="div" margin="0 0 x-large 0">
         <Link href={srcUrl}>
           {srcPath}
         </Link>
@@ -157,16 +155,15 @@ const { ${importName} } = require('${requirePath}')
     if (example.length === 0) return
 
     return (
-      <View margin="xx-large 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
+      <View margin="xx-large 0" display="block">
         <Heading
           level="h3"
           id={`${id}Usage`}
           margin="0 0 small 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Usage
         </Heading>
-        <View margin="0 0 small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
+        <View margin="0 0 small 0" display="block">
           <CodeEditor
             label={`How to install ${title}`}
             value={`yarn add ${packageName}`}
@@ -191,12 +188,11 @@ const { ${importName} } = require('${requirePath}')
     } = doc
 
     return params ? (
-      <View margin="small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
+      <View margin="small 0" display="block">
         <Heading
           level="h3"
           id={`${id}Parameters`}
           margin="0 0 small 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Parameters
         </Heading>
@@ -212,12 +208,11 @@ const { ${importName} } = require('${requirePath}')
     } = doc
 
     return returns ? (
-      <View margin="small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
+      <View margin="small 0" display="block">
         <Heading
           level="h3"
           id={`${id}Returns`}
           margin="0 0 small 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Returns
         </Heading>
@@ -233,12 +228,11 @@ const { ${importName} } = require('${requirePath}')
     } = doc
 
     return (methods && methods.length > 0) ? (
-      <View margin="small 0" display="block" __dangerouslyIgnoreExperimentalWarnings>
+      <View margin="small 0" display="block">
         <Heading
           level="h3"
           id={`${id}Methods`}
           margin="0 0 small 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Methods
         </Heading>
@@ -288,13 +282,12 @@ const { ${importName} } = require('${requirePath}')
 
     if (doc.sections) {
       sections = doc.sections.map(section => (
-        <View margin="small 0" display="block" key={`${doc.id}.${section.name}`} __dangerouslyIgnoreExperimentalWarnings>
+        <View margin="small 0" display="block" key={`${doc.id}.${section.name}`}>
           <Heading
             level="h3"
             color="secondary"
             id={`${doc.id}.${section.name}`}
             margin="large 0 small 0"
-            __dangerouslyIgnoreExperimentalWarnings
           >
             { section.kind && <code>{section.kind}</code> }
             {section.title}

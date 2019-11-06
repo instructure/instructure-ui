@@ -134,7 +134,6 @@ class Table extends Component {
         })}
         role={isStacked ? "table" : null}
         aria-label={isStacked ? caption : null}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {!isStacked && <caption><ScreenReaderContent>{caption}</ScreenReaderContent></caption>}
         {Children.map(children, (child) => {

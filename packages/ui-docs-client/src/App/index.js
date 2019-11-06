@@ -170,7 +170,6 @@ class App extends Component {
           level="h1"
           as="h2"
           margin="0 0 medium 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {themeKey}
         </Heading>
@@ -193,7 +192,6 @@ class App extends Component {
           level="h1"
           as="h2"
           margin="0 0 medium 0"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Iconography
         </Heading>
@@ -260,7 +258,6 @@ class App extends Component {
         <Heading
           level="h1"
           as="h2"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           Document not found
         </Heading>
@@ -331,7 +328,7 @@ class App extends Component {
             mountNode={this.state.trayOverlay ? document.body : null}
             onDismiss={this.handleTrayDismiss}
           >
-            <View as="div" width="16rem" __dangerouslyIgnoreExperimentalWarnings>
+            <View as="div" width="16rem">
               <Header name={name} version={version} />
               <Nav
                 selected={this.state.key}
@@ -360,7 +357,6 @@ class App extends Component {
               ref={c => {
                 this._content = c
               }}
-              __dangerouslyIgnoreExperimentalWarnings
             >
               <div className={styles.main} id="main">
                 {this.renderContent(this.state.key)}

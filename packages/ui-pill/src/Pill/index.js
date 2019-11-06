@@ -144,7 +144,6 @@ class Pill extends Component {
         position="relative"
         isFocused={focused}
         focusColor="info"
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <span className={classes}>
           <span className={styles.text}>

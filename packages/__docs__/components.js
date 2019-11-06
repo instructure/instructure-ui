@@ -28,7 +28,7 @@ import { View as ExperimentalView } from '@instructure/ui-view'
 
 // Many docs examples that are unrelated to View are using View as a layout piece. Export it with ignored
 // experimental warnings here to avoid spamming warnings in unrelated component examples.
-export const View = (props) => <ExperimentalView {...props} __dangerouslyIgnoreExperimentalWarnings />
+export const View = (props) => <ExperimentalView {...props} />
 
 export {
   AccessibleContent as DeprecatedAccessibleContent,

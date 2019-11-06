@@ -208,7 +208,6 @@ class Flex extends Component {
           padding={padding}
           textAlign={textAlign}
           withVisualDebug={withVisualDebug || visualDebug}
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderChildren()}
         </View>

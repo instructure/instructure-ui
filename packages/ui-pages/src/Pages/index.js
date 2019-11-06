@@ -177,7 +177,6 @@ class Pages extends Component {
         margin={this.props.margin}
         role="region"
         elementRef={(el) => { this._contentElement = el }}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.activePage}
       </View>

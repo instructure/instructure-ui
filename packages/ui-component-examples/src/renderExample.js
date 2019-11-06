@@ -40,7 +40,6 @@ export default function renderExample ({ Component, componentProps, exampleProps
       maxWidth={exampleProps.maxWidth || 'none'}
       height={exampleProps.height || 'auto'}
       maxHeight={exampleProps.maxHeight || 'none'}
-      __dangerouslyIgnoreExperimentalWarnings
       {...exampleProps}
     >
       <Component {...componentProps} />

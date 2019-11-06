@@ -131,7 +131,6 @@ class Billboard extends Component {
           level={headingLevel}
           as={headingAs}
           color="primary"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {heading}
         </Heading>
@@ -214,11 +213,7 @@ class Billboard extends Component {
     const Element = getElementType(Billboard, this.props)
 
     return (
-      <View
-        as="div"
-        margin={margin}
-        __dangerouslyIgnoreExperimentalWarnings
-      >
+      <View as="div" margin={margin}>
         <View
           {...omitProps(this.props, { ...Billboard.propTypes, ...View.propTypes })}
           type={(Element === 'button') ? 'button' : null}
@@ -229,7 +224,6 @@ class Billboard extends Component {
           onClick={this.handleClick}
           disabled={disabled}
           aria-disabled={(disabled || readOnly) ? 'true' : null}
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderContent()}
         </View>

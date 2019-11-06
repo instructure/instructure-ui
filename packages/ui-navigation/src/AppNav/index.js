@@ -256,7 +256,6 @@ class AppNav extends Component {
         margin={margin}
         display={hasRenderedContent ? 'flex' : 'block'}
         elementRef={elementRef}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {renderBeforeItems &&
           <span className={styles.renderBefore}>

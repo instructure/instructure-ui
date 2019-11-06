@@ -121,7 +121,6 @@ class Page extends Component {
         padding={props.padding}
         textAlign={props.textAlign}
         elementRef={(el) => { this._content = el }}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {
           (children && typeof children === 'function') ? children(history, navigateToPreviousPage) : children

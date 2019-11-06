@@ -173,7 +173,6 @@ class Flex extends Component {
           margin={margin}
           padding={padding}
           textAlign={textAlign}
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderChildren()}
         </View>

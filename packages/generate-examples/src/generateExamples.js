@@ -398,7 +398,6 @@ class ExampleGenerator {
               key={key}
               display="block"
               margin="small"
-              __dangerouslyIgnoreExperimentalWarnings
             >
               <Component {...componentProps} />
             </View>
@@ -412,10 +411,7 @@ class ExampleGenerator {
         /* eslint-disable react/display-name */
         function (examples, sectionName) {
           return (
-            <View
-              display="block"
-              __dangerouslyIgnoreExperimentalWarnings
-            >
+            <View display="block">
               {examples}
             </View>
           )

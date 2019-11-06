@@ -463,7 +463,7 @@ class FileDrop extends Component {
           disabled={functionallyDisabled}
         />
         {(this.hasMessages) ?
-          <View display="block" margin="small 0 0" __dangerouslyIgnoreExperimentalWarnings>
+          <View display="block" margin="small 0 0">
             <FormFieldMessages id={this.messagesId} messages={this.props.messages} />
           </View>
         : null}

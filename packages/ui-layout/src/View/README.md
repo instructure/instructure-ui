@@ -8,24 +8,6 @@ id: DeprecatedView__README
 ### Important Upgrade Notes
 Codemods are available to automatically update imports to the new package as well as the prop name and value changes listed below.
 
-These props have the same name, but their values have been updated to the following:
-#### `borderColor`
-| Old Value | New Value |
-|-----------|-----------|
-| default | primary |
-| inverse | transparent |
-
-#### `background`
-| Old Value | New Value |
-|-----------|-----------|
-| default | primary |
-| light | secondary |
-| inverse | primary-inverse |
-
-These props have updated names:
-- `focused` has been changed to `isFocused`
-- `debug` has been changed to `withVisualDebug`
-
 ### View &#151; the visual basis of instructure-UI
 
 View provides the base appearance for most of the components

@@ -218,7 +218,6 @@ class ProgressCircle extends Component {
         elementRef={this.props.elementRef}
         className={classnames(classes)}
         margin={this.props.margin}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
           <progress

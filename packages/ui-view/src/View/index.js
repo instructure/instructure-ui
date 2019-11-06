@@ -42,22 +42,25 @@ import {
   omitProps,
   pickProps,
   passthroughProps,
-  experimental
+  deprecated
 } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
+import { themeAdapter } from './themeAdapter'
 
 /**
 ---
 category: components
-experimental: true
 ---
 @module View
 **/
+@deprecated('8.0.0', {
+  focused: 'isFocused',
+  visualDebug: 'withVisualDebug'
+})
 @bidirectional()
-@experimental()
-@themeable(theme, styles)
+@themeable(theme, styles, themeAdapter)
 class View extends Component {
   static propTypes = {
     /**
@@ -121,7 +124,7 @@ class View extends Component {
     /**
     * Sets the color of the View border
     */
-    borderColor: PropTypes.oneOf([
+    borderColor: deprecated.deprecatePropValues(PropTypes.oneOf([
       'transparent',
       'primary',
       'secondary',
@@ -130,13 +133,20 @@ class View extends Component {
       'success',
       'warning',
       'alert',
-      'danger'
-    ]),
+      'danger',
+      'default',
+      'inverse'
+    ]), ['default', 'inverse'], ({ propName, propValue }) => (
+      `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
+         if (propValue === 'default') return `'primary'`
+         if (propValue === 'inverse') return `'transparent'`
+      })()}. Use that value instead.`
+    )),
 
     /**
     * Designates the background style of the `<View />`
     */
-    background: PropTypes.oneOf([
+    background: deprecated.deprecatePropValues(PropTypes.oneOf([
       'transparent',
       'primary',
       'secondary',
@@ -146,8 +156,17 @@ class View extends Component {
       'alert',
       'success',
       'danger',
-      'warning'
-    ]),
+      'warning',
+      'default',
+      'light',
+      'inverse'
+    ]), ['default', 'inverse', 'light'], ({ propName, propValue }) => (
+      `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
+         if (propValue === 'default') return `'primary'`
+         if (propValue === 'light') return `'secondary'`
+         if (propValue === 'inverse') return `'primary-inverse'`
+      })()}. Use that value instead.`
+    )),
 
     /**
     * Controls the shadow depth for the `<View />`
@@ -210,7 +229,19 @@ class View extends Component {
     * Activate a dotted outline around the component to make building your
     * layout easier
     */
-    withVisualDebug: PropTypes.bool
+    withVisualDebug: PropTypes.bool,
+    /* eslint-disable react/require-default-props */
+
+    /**
+    * __Deprecated - use 'isFocused'__
+    */
+    focused: PropTypes.bool,
+    /**
+    * __Deprecated - use 'withVisualDebug'__
+    */
+    visualDebug: PropTypes.bool,
+
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
@@ -286,11 +317,12 @@ class View extends Component {
 
   get isFocused () {
     const {
-      isFocused,
       position,
       display,
       focusPosition
     } = this.props
+
+    const isFocused = this.props.focused || this.props.isFocused
 
     if (isFocused) {
       error(
@@ -468,12 +500,12 @@ class View extends Component {
       [styles[this.focusRingRadius]]: true,
       [styles[`focusPosition--${focusPosition}`]]: true,
       [styles[`focusColor--${focusColor}`]]: true,
-      [styles[`focusAnimation`]]: shouldAnimateFocus
+      [styles.focusAnimation]: shouldAnimateFocus
     } : {}
 
     const classes = classnames({
       [styles.root]: true,
-      [styles.withVisualDebug]: withVisualDebug,
+      [styles.withVisualDebug]: withVisualDebug || this.props.visualDebug,
       [styles.withBorder]: this.withBorder,
       [styles[`borderColor--${borderColor}`]]: this.withBorder,
       [styles[`textAlign--${textAlign}`]]: textAlign,

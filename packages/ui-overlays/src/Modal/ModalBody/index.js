@@ -101,7 +101,6 @@ class ModalBody extends Component {
         className={classes}
         padding={padding}
         tabIndex="-1" // prevent FF from focusing view when scrollable
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {children}
       </View>

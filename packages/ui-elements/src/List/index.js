@@ -129,7 +129,6 @@ class List extends Component {
         as={as}
         margin={margin}
         elementRef={elementRef}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.renderChildren()}
       </View>

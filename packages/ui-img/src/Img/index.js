@@ -163,8 +163,7 @@ class Img extends Component {
       height,
       margin,
       display: (display === 'block' || inline === false) ? 'block' : 'inline-block',
-      elementRef,
-      __dangerouslyIgnoreExperimentalWarnings: true
+      elementRef
     }
 
     // if browser does not support ObjectFit CSS, and Img needs "constrain",

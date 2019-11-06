@@ -126,7 +126,6 @@ class Tab extends Component {
         aria-disabled={isDisabled ? 'true' : null}
         aria-controls={controls}
         tabIndex={isSelected && !isDisabled ? '0' : null}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {callRenderProp(children)}
       </View>

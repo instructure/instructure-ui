@@ -672,8 +672,7 @@ class Popover extends Component {
         viewProps = {
           ...viewProps,
           borderWidth: 'small',
-          borderRadius: 'medium',
-          __dangerouslyIgnoreExperimentalWarnings: true
+          borderRadius: 'medium'
         }
       }
 

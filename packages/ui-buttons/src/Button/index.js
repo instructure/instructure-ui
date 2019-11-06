@@ -276,7 +276,6 @@ class Button extends Component {
         as={this.elementType}
         margin={margin}
         cursor={disabled ? 'not-allowed' : cursor}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {hasTextAndIcon ? (
           <Flex height="100%" width="100%">

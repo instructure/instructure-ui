@@ -166,7 +166,6 @@ class FocusableView extends Component {
         tabIndex={onClick && !role ? (tabIndex || '0') : tabIndex}
         onClick={onClick}
         borderRadius={shape === 'circular' ? 'circle' : 'medium'}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {children}
       </View>

@@ -161,7 +161,6 @@ class Options extends Component {
           padding="none"
           background="primary"
           aria-labelledby={renderLabel && this._labelId}
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderChildren()}
         </View>

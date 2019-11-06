@@ -93,7 +93,6 @@ class Media extends Component {
         as="figure"
         margin={this.props.margin}
         maxWidth={this.theme[this.props.size]}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <div className={styles.figure}>
           {this.props.children}

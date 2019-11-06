@@ -341,7 +341,6 @@ class Alert extends Component {
         margin={this.props.margin}
         className={classNames}
         onKeyUp={this.handleKeyUp}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.renderIcon()}
         <div className={styles.content}>

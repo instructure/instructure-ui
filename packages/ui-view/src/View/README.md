@@ -2,6 +2,28 @@
 describes: View
 ---
 
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+    <Figure.Item>
+      The <code>focused</code> boolean prop is deprecated. Use <code>isFocused</code> instead.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>visualDebug</code> boolean prop is deprecated. Use <code>withVisualDebug</code> instead.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>background</code> values <code>default</code>, <code>inverse</code>, and <code>light</code> are deprecated. Use <code>primary</code>, <code>primary-inverse</code>, and <code>secondary</code>, respectively, instead.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>borderColor</code> values <code>default</code> and <code>inverse</code> are deprecated. Use <code>primary</code> and <code>transparent</code>, respectively, instead.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
+
 ### View &#151; the visual basis of instructure-UI
 
 View provides the base appearance for most of the components

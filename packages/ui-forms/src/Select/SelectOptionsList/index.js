@@ -251,7 +251,6 @@ class SelectOptionsList extends Component {
         borderRadius="medium"
         shadow="resting"
         background="primary"
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {!!this.props.expanded && (
           <ul

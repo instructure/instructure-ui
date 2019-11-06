@@ -514,7 +514,7 @@ class Select extends Component {
     } : { maxHeight: 0 }
 
     return (
-      <View {...viewProps} __dangerouslyIgnoreExperimentalWarnings>
+      <View {...viewProps}>
         <Options
           {...getListProps({ as: 'ul', elementRef: this.handleListRef })}
           __dangerouslyIgnoreExperimentalWarnings

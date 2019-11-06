@@ -520,7 +520,6 @@ class FileDrop extends Component {
         minWidth={minWidth}
         maxWidth={maxWidth}
         margin={margin}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <label
           className={classnames(classes)}
@@ -536,7 +535,6 @@ class FileDrop extends Component {
             isFocused={this.state.isFocused}
             borderRadius="large"
             focusColor={focusColor}
-            __dangerouslyIgnoreExperimentalWarnings
           >
             <span className={styles.labelContent}>
               <span className={styles.layout}>
@@ -563,7 +561,7 @@ class FileDrop extends Component {
           disabled={functionallyDisabled}
         />
         {(this.hasMessages) ?
-          <View display="block" margin="small 0 0" __dangerouslyIgnoreExperimentalWarnings>
+          <View display="block" margin="small 0 0">
             <FormFieldMessages id={this.messagesId} messages={this.props.messages} />
           </View>
         : null}

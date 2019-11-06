@@ -162,7 +162,6 @@ class Badge extends Component {
         title={(type === 'count' && this.countOverflow()) ? count : null}
         id={(!standalone) ? this._defaultId : null}
         display={standalone ? 'inline-block' : 'block'}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.renderOutput()}
       </View>
@@ -195,7 +194,6 @@ class Badge extends Component {
           elementRef={elementRef}
           className={styles.wrapper}
           display="inline-block"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderChildren()}
           {this.renderBadge()}

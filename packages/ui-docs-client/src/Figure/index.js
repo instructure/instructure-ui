@@ -103,7 +103,6 @@ class Figure extends Component {
         {...omitProps(mergedProps, Figure.propTypes, ['padding'])}
         as="figure"
         className={classnames(classes)}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {caption != null ?
           <figcaption className={styles.caption}>
@@ -124,7 +123,6 @@ class Figure extends Component {
               level="h3"
               as="h4"
               margin="medium 0 small small"
-              __dangerouslyIgnoreExperimentalWarnings
             >
               {title}
             </Heading>

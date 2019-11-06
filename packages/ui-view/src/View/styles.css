@@ -46,10 +46,12 @@
   border-style: var(--borderStyle);
 }
 
+.borderColor--inverse, /* TODO: remove in 8.0 */
 .borderColor--transparent {
   border-color: var(--borderColorTransparent);
 }
 
+.borderColor--default,  /* TODO: remove in 8.0 */
 .borderColor--primary {
   border-color: var(--borderColorPrimary);
 }
@@ -87,16 +89,19 @@
   background: none;
 }
 
+.background--default, /* TODO: remove in 8.0 */
 .background--primary {
   color: var(--color);
   background: var(--backgroundPrimary);
 }
 
+.background--light, /* TODO: remove in 8.0 */
 .background--secondary {
   color: var(--color);
   background: var(--backgroundSecondary);
 }
 
+.background--inverse, /* TODO: remove in 8.0 */
 .background--primary-inverse {
   color: var(--colorPrimaryInverse);
   background: var(--backgroundPrimaryInverse);

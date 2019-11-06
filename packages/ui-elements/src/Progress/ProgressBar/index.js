@@ -129,7 +129,6 @@ class ProgressBar extends Component {
         className={classnames(classes)}
         margin={this.props.margin}
         elementRef={this.props.elementRef}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <progress
           className={styles.bar}

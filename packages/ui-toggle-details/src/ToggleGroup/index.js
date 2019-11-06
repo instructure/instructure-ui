@@ -167,7 +167,6 @@ class ToggleGroup extends Component {
         {...detailsProps}
         display="block"
         borderWidth="small none none none"
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {(this.props.transition && this._shouldTransition) ?
           <Transition transitionOnMount in type="fade">
@@ -195,7 +194,6 @@ class ToggleGroup extends Component {
             display="block"
             borderRadius="medium"
             background="primary"
-            __dangerouslyIgnoreExperimentalWarnings
           >
             <Flex
               padding={(this.props.size === 'small') ? 'x-small' : 'small small small x-small'}

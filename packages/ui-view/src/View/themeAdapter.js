@@ -22,44 +22,15 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { createThemeAdapter } from '@instructure/ui-themeable'
 
-import { Heading } from '@instructure/ui-heading'
-
-class Section extends Component {
-  static propTypes = {
-    id: PropTypes.string,
-    heading: PropTypes.string,
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    children: null,
-    id: undefined,
-    heading: undefined
-  }
-
-  render () {
-    const heading = this.props.heading && (
-      <Heading
-        level="h1"
-        as="h2"
-        id={this.props.id}
-      >
-        {this.props.heading}
-      </Heading>
-    )
-    return (
-      <div>
-        {heading}
-        <div>
-          {this.props.children}
-        </div>
-      </div>
-    )
-  }
+const map = {
+  borderColorDefault: 'borderColorPrimary',
+  borderColorInverse: 'borderColorTransparent',
+  colorInverse: 'colorPrimaryInverse',
+  background: 'backgroundPrimary',
+  backgroundLight: 'backgroundSecondary',
+  backgroundInverse: 'backgroundPrimaryInverse'
 }
 
-export default Section
-export { Section }
+export const themeAdapter = createThemeAdapter({ map, version: '8.0.0' })
