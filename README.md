@@ -4,9 +4,7 @@ id: instructure-ui
 
 ## instructure-ui
 
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
-[![Code of Conduct][coc-badge]][coc]
+[![build-status][build-status]][build-status-url]&nbsp;&nbsp;&nbsp;[![MIT License][license-badge]][LICENSE]&nbsp;&nbsp;&nbsp;[![Code of Conduct][coc-badge]][coc]
 
 
 ## Usage
