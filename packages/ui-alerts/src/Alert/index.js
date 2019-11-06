@@ -281,14 +281,12 @@ class Alert extends Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
       this.initLiveRegion(liveRegion)
     }
-  }
 
-  componentDidMount () {
     this.handleTimeout()
     this.createScreenreaderAlert()
   }
