@@ -31,6 +31,7 @@ import {
   containsActiveElement,
   findFocusable
 } from '@instructure/ui-dom-utils'
+import { polyfill } from '@instructure/ui-react-utils'
 import { warn } from '@instructure/console/macro'
 
 /**
@@ -95,12 +96,13 @@ class Focusable extends Component {
     })
   }
 
-  componentWillReceiveProps (nextProps) {
+  getSnapshotBeforeUpdate (prevProps, prevState) {
     const { render, children } = this.props
     // prevent blur from firing when focusable element is replaced
-    if (nextProps.children !== children || nextProps.render !== render) {
+    if (prevProps.children !== children || prevProps.render !== render) {
       this.removeFocusableListeners()
     }
+    return null
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -244,6 +246,8 @@ class Focusable extends Component {
     }
   }
 }
+
+polyfill(Focusable)
 
 export default Focusable
 export { Focusable }
