@@ -107,7 +107,8 @@ gulp.task('generate-svgs-from-sketch', () => {
         { cleanupNumericValues: false },
         { removeUnknownsAndDefaults: false },
         { removeUselessStrokeAndFill: false },
-        { convertStyleToAttrs: true }
+        { convertStyleToAttrs: true },
+        { convertPathData: false }
       ]
     }))
     // clean up fills
