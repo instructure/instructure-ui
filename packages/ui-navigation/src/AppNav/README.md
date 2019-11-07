@@ -50,14 +50,14 @@ class AppNavExample extends React.Component {
           />
         }
         renderAfterItems={
-          <Button
-            variant="icon"
+          <IconButton
             onClick={() => console.log('Add')}
-            icon={IconPlusSolid}
+            renderIcon={IconPlusSolid}
             margin="0 0 0 x-small"
-          >
-            <ScreenReaderContent>Add something</ScreenReaderContent>
-          </Button>
+            screenReaderLabel="Add something"
+            withBorder={false}
+            withBackground={false}
+          />
         }
         renderTruncateLabel={function () {
           const hiddenItemsCount = totalItemsCount - visibleItemsCount

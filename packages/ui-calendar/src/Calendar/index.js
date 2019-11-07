@@ -60,16 +60,16 @@ class Calendar extends Component {
     children: ChildrenPropTypes.oneOf([Day]),
     /**
     * A button to render in the navigation header. The recommendation is to
-    * compose it with the [Button](#Button) component, setting the `variant` prop
-    * to `icon`, the `size` prop to `small`, and setting the `icon` prop to
-    * [IconArrowOpenEnd](#iconography).
+    * compose it with the [IconButton](#IconButton) component by setting the `size`
+    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
+    * `renderIcon` to [IconArrowOpenEnd](#iconography).
     */
     renderNextMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * A button to render in the navigation header. The recommendation is to
-    * compose it with the [Button](#Button) component, setting the `variant` prop
-    * to `icon`, the `size` prop to `small`, and setting the `icon` prop to
-    * [IconArrowOpenStart](#iconography).
+    * compose it with the [IconButton](#Button) component by setting the `size`
+    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
+    * `renderIcon` to [IconArrowOpenStart](#iconography).
     */
     renderPrevMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**

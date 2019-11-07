@@ -45,9 +45,12 @@ example: true
       placement="start"
       on={['click', 'hover', 'focus']}
     >
-      <Button variant="icon" icon={IconInfoLine}>
-        <ScreenReaderContent>toggle tooltip</ScreenReaderContent>
-      </Button>
+      <IconButton
+        renderIcon={IconInfoLine}
+        withBackground={false}
+        withBorder={false}
+        screenReaderLabel="Toggle Tooltip"
+      />
     </Tooltip>
   </p>
 </div>

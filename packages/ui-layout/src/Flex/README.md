@@ -314,27 +314,38 @@ example: true
 
     <DeprecatedFlex visualDebug justifyItems="space-between">
       <DeprecatedFlex.Item>
-        <Button variant="icon" icon={IconEmailLine}>
-          <ScreenReaderContent>Some app function</ScreenReaderContent>
-        </Button>
+        <IconButton
+          renderIcon={IconEmailLine}
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel="Some app function"
+        />
       </DeprecatedFlex.Item>
       <DeprecatedFlex.Item>
-        <Button variant="icon" icon={IconPrinterLine}>
-          <ScreenReaderContent>Some app function</ScreenReaderContent>
-        </Button>
+        <IconButton
+          renderIcon={IconPrinterLine}
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel="Some app function"
+        />
       </DeprecatedFlex.Item>
       <DeprecatedFlex.Item>
-        <Button variant="icon" icon={IconCalendarDayLine}>
-          <ScreenReaderContent>Some app function</ScreenReaderContent>
-        </Button>
+        <IconButton
+          renderIcon={IconCalendarDayLine}
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel="Some app function"
+        />
       </DeprecatedFlex.Item>
       <DeprecatedFlex.Item>
-        <Button variant="icon" icon={IconSettingsLine}>
-          <ScreenReaderContent>Some app function</ScreenReaderContent>
-        </Button>
+        <IconButton
+          renderIcon={IconSettingsLine}
+          withBackground={false}
+          withBorder={false}
+          screenReaderLabel="Some app function"
+        />
       </DeprecatedFlex.Item>
     </DeprecatedFlex>
-
   </DeprecatedFlex.Item>
 </DeprecatedFlex>
 ```

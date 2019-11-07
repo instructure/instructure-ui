@@ -34,7 +34,14 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Heading } from '@instructure/ui-heading'
 import { Pill } from '@instructure/ui-pill'
-import { IconHeartSolid, IconGithubSolid } from '@instructure/ui-icons'
+import { IconButton } from '@instructure/ui-buttons'
+
+import {
+  IconGithubSolid,
+  IconHamburgerSolid,
+  IconHeartSolid,
+  IconXSolid
+} from '@instructure/ui-icons'
 
 import { Document } from '../Document'
 import { Header } from '../Header'
@@ -43,7 +50,6 @@ import { Theme } from '../Theme'
 import { Select } from '../Select'
 import { Section } from '../Section'
 import { Icons } from '../Icons'
-import { HamburgerButton } from '../HamburgerButton'
 import { compileMarkdown } from '../compileMarkdown'
 import { LibraryPropType } from '../propTypes'
 
@@ -84,6 +90,8 @@ class App extends Component {
       trayOverlay: false,
       themeKey: Object.keys(props.themes)[0]
     }
+
+    this._menuTrigger = null
   }
 
   getChildContext () {
@@ -100,12 +108,12 @@ class App extends Component {
     })
   }
 
-  handleMenuToggle = () => {
-    this.setState((state) => {
-      return {
-        showMenu: !state.showMenu
-      }
-    })
+  handleMenuOpen = () => {
+    this.setState({ showMenu: true })
+  }
+
+  handleMenuClose = () => {
+    this.setState({ showMenu: false })
   }
 
   handleThemeChange = (event, option) => {
@@ -120,6 +128,12 @@ class App extends Component {
 
   handleTrayDismiss = (e) => {
     this.setState({showMenu: false})
+  }
+
+  handleTrayExited = (e) => {
+    // TODO: Remove this once we fix the issue where focus is lost if the focus
+    // later element changes while focus is being returned
+    this._menuTrigger && this._menuTrigger.focus()
   }
 
   componentDidMount () {
@@ -327,8 +341,29 @@ class App extends Component {
             open={this.state.showMenu}
             mountNode={this.state.trayOverlay ? document.body : null}
             onDismiss={this.handleTrayDismiss}
+            onExited={this.handleTrayExited}
           >
-            <View as="div" width="16rem">
+            <View
+              as="div"
+              width="16rem"
+              padding="medium none none none"
+              position="relative"
+            >
+              <View
+                as="div"
+                position="absolute"
+                insetInlineEnd="0rem"
+                insetBlockStart="0rem"
+              >
+                <IconButton
+                  renderIcon={IconXSolid}
+                  screenReaderLabel="Close Navigation"
+                  withBackground={false}
+                  withBorder={false}
+                  onClick={this.handleMenuClose}
+                  margin="small small none none"
+                />
+              </View>
               <Header name={name} version={version} />
               <Nav
                 selected={this.state.key}
@@ -340,15 +375,19 @@ class App extends Component {
             </View>
           </DrawerLayout.Tray>
           <DrawerLayout.Content label={this.state.key || this.props.library.name} role="main">
-            <div className={styles.hamburger}>
-              <HamburgerButton
-                onClick={this.handleMenuToggle}
-                controls="nav"
-                expanded={this.state.showMenu}
-              >
-                Toggle Navigation
-              </HamburgerButton>
-            </div>
+            {!this.state.showMenu && (
+              <div className={styles.hamburger}>
+                <IconButton
+                  renderIcon={IconHamburgerSolid}
+                  screenReaderLabel="Open Navigation"
+                  withBackground={false}
+                  withBorder={false}
+                  onClick={this.handleMenuOpen}
+                  elementRef={(el) => { this._menuTrigger = el }}
+                  size="large"
+                />
+              </div>
+            )}
             <View
               as="div"
               padding="x-large xx-large"

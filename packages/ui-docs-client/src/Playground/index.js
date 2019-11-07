@@ -29,15 +29,15 @@ import ReactDOM from 'react-dom'
 import { themeable } from '@instructure/ui-themeable'
 import { Modal } from '@instructure/ui-overlays'
 import { Tooltip } from '@instructure/ui-tooltip'
-import { AccessibleContent, ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { Checkbox } from '@instructure/ui-forms'
 import { Flex } from '@instructure/ui-flex'
+import { IconButton } from '@instructure/ui-buttons'
 
 import { Preview } from '../Preview'
 import { CodePenButton } from '../CodePenButton'
-import { Button } from '../Button'
 import { LibraryPropType } from '../propTypes'
 
 import styles from './styles.css'
@@ -131,18 +131,19 @@ class Playground extends Component {
     return (
       <div className={styles.editor}>
         <div className={styles.close}>
-          <Button
+          <IconButton
             size="small"
-            variant="icon-inverse"
             onClick={this.handleCodeToggle}
-            icon={
+            color="primary-inverse"
+            screenReaderLabel="Hide Code"
+            withBorder={false}
+            withBackground={false}
+            renderIcon={
               <SVGIcon viewBox="0 0 2000 2000">
                 {closeIconPath}
               </SVGIcon>
             }
-          >
-            <ScreenReaderContent>Hide Code</ScreenReaderContent>
-          </Button>
+          />
         </div>
         <CodeEditor
           label={`${this.props.title} Example Code`}
@@ -213,34 +214,38 @@ class Playground extends Component {
             <Flex __dangerouslyIgnoreExperimentalWarnings>
               <Flex.Item>
                 <Tooltip renderTip="Fullscreen" placement="bottom">
-                  <Button
+                  <IconButton
                     onClick={this.handleMaximize}
                     ref={(c) => { this._fullScreenButton = c }}
+                    color="primary"
                     size="small"
-                    icon={
+                    withBorder={false}
+                    withBackground={false}
+                    screenReaderLabel="Full screen view"
+                    renderIcon={
                       <SVGIcon viewBox="0 0 24 24">
                         {fullScreenIconPath}
                       </SVGIcon>
                     }
-                  >
-                    <ScreenReaderContent>Full screen view</ScreenReaderContent>
-                  </Button>
+                  />
                 </Tooltip>
               </Flex.Item>
               <Flex.Item>
                 <Tooltip renderTip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
-                  <Button
+                  <IconButton
                     margin="0 x-small"
                     onClick={this.handleCodeToggle}
+                    color="primary"
                     size="small"
-                    icon={
+                    withBorder={false}
+                    withBackground={false}
+                    screenReaderLabel={this.state.showCode ? 'Hide Code' : 'Show Code'}
+                    renderIcon={
                       <SVGIcon viewBox="0 0 32 32">
                         {codeIconPath}
                       </SVGIcon>
                     }
-                  >
-                    <ScreenReaderContent>View code</ScreenReaderContent>
-                  </Button>
+                  />
                 </Tooltip>
               </Flex.Item>
               { this.context.library.codepen && <Flex.Item>

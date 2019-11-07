@@ -25,8 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { CloseButton } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-heading'
+import { Flex } from '@instructure/ui-flex'
 import { Link } from '@instructure/ui-link'
 import { TextInput } from '@instructure/ui-text-input'
 import { Select, Checkbox } from '@instructure/ui-forms'
@@ -35,6 +35,8 @@ import { ScreenReaderContent, AccessibleContent } from '@instructure/ui-a11y-con
 import { Modal } from '@instructure/ui-overlays'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { themeable } from '@instructure/ui-themeable'
+import { IconXSolid } from '@instructure/ui-icons'
+import { IconButton } from '@instructure/ui-buttons'
 
 import { Glyph } from '../Glyph'
 
@@ -268,17 +270,22 @@ class MyIcon extends React.Component {
               shouldCloseOnDocumentClick
             >
               <Modal.Header>
-                <CloseButton
-                  placement="end"
-                  offset="medium"
-                  variant="icon"
-                  onClick={this.handleModalDismiss}
-                >
-                  Close
-                </CloseButton>
-                <Heading>
-                  {`${glyph.glyphName} (${variant})`}
-                </Heading>
+                <Flex justifyItems="space-between">
+                  <Flex.Item>
+                    <Heading>
+                      {`${glyph.glyphName} (${variant})`}
+                    </Heading>
+                  </Flex.Item>
+                  <Flex.Item>
+                    <IconButton
+                      onClick={this.handleModalDismiss}
+                      screenReaderLabel="Close"
+                      renderIcon={IconXSolid}
+                      withBorder={false}
+                      withBackground={false}
+                    />
+                  </Flex.Item>
+                </Flex>
               </Modal.Header>
               <Modal.Body>
                 {this.renderUsage(name, variant, glyph)}

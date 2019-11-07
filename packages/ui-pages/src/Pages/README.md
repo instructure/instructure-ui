@@ -30,13 +30,13 @@ class Example extends React.Component {
 
   renderBackButton (navigateToPreviousPage) {
     return (
-      <Button
-        variant="icon"
+      <IconButton
         onClick={navigateToPreviousPage}
-        icon={IconArrowOpenStartLine}
-      >
-        <ScreenReaderContent>Back to Page One</ScreenReaderContent>
-      </Button>
+        renderIcon={IconArrowOpenStartLine}
+        screenReaderLabel="Back to Page One"
+        withBorder={false}
+        withBackground={false}
+      />
     )
   }
 
@@ -119,13 +119,13 @@ class Example extends React.Component {
 
   renderBackButton (navigateToPreviousPage) {
     return (
-      <Button
-        variant="icon"
+      <IconButton
         onClick={navigateToPreviousPage}
-        icon={IconArrowStartLine}
-      >
-        <ScreenReaderContent>Back</ScreenReaderContent>
-      </Button>
+        renderIcon={IconArrowStartLine}
+        screenReaderLabel="Back"
+        withBorder={false}
+        withBackground={false}
+      />
     )
   }
 
@@ -311,25 +311,25 @@ class Example extends React.Component {
 
   renderBackButton (navigateToPreviousPage) {
     return (
-      <Button
-        variant="icon"
+      <IconButton
         onClick={navigateToPreviousPage}
-        icon={IconArrowOpenStartLine}
-      >
-        <ScreenReaderContent>Back</ScreenReaderContent>
-      </Button>
+        renderIcon={IconArrowOpenStartLine}
+        screenReaderLabel="Back"
+        withBorder={false}
+        withBackground={false}
+      />
     )
   }
 
   renderCloseButton () {
     return (
-      <Button
-        variant="icon"
+      <IconButton
         onClick={this.hidePopover}
-        icon={IconXLine}
-      >
-        <ScreenReaderContent>Close</ScreenReaderContent>
-      </Button>
+        renderIcon={IconXLine}
+        withBorder={false}
+        withBackground={false}
+        screenReaderLabel="Close"
+      />
     )
   }
 

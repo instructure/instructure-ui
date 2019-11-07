@@ -48,9 +48,7 @@ example: true
       <TextInput
         inline
         label="Enter some text"
-      >
-        Hover or focus me
-      </TextInput>
+      />
     </DeprecatedTooltip>
   </p>
   <p>
@@ -59,9 +57,12 @@ example: true
       placement="start"
       on={['click', 'hover', 'focus']}
     >
-      <Button variant="icon" icon={IconInfoLine}>
-        <ScreenReaderContent>toggle tooltip</ScreenReaderContent>
-      </Button>
+      <IconButton
+        renderIcon={IconInfoLine}
+        withBackground={false}
+        withBorder={false}
+        screenReaderLabel="Toggle Tooltip"
+      />
     </DeprecatedTooltip>
   </p>
 </div>

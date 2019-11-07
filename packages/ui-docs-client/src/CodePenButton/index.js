@@ -29,7 +29,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { SVGIcon } from '@instructure/ui-svg-images'
 
-import { Button } from '../Button'
+import { IconButton } from '@instructure/ui-buttons'
 
 class CodePenButton extends Component {
   static propTypes = {
@@ -65,10 +65,14 @@ class CodePenButton extends Component {
       <form action="https://codepen.io/pen/define" method="POST" target="_blank">
         <input type="hidden" name="data" value={JSON.stringify(data)} />
         <Tooltip renderTip="Edit in Codepen" placement="bottom">
-          <Button
+          <IconButton
             type="submit"
             size="small"
-            icon={
+            screenReaderLabel={`Edit ${this.props.title} in Codepen`}
+            withBorder={false}
+            withBackground={false}
+            color="primary"
+            renderIcon={
               <SVGIcon viewBox="0 0 1792 1792" title="Codepen">
                 <path
                   d="M216 1169l603 402v-359l-334-223zm-62-144l193-129-193-129v258zm819 546l603-402-269-180-334
@@ -78,9 +82,7 @@ class CodePenButton extends Component {
                 />
               </SVGIcon>
             }
-          >
-            <ScreenReaderContent>{`Edit ${this.props.title} in Codepen`}</ScreenReaderContent>
-          </Button>
+          />
         </Tooltip>
       </form>
     )

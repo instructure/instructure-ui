@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Button } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons'
 import { Heading } from '@instructure/ui-heading'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -67,14 +67,14 @@ class Variant extends Component {
 
     return (
       <div className={styles.variant}>
-        <Button
-          variant="icon"
+        <IconButton
           size="large"
           onClick={this.handleClick}
-          icon={icon}
-        >
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>View Usage</ScreenReaderContent>
-        </Button>
+          renderIcon={icon}
+          withBorder={false}
+          withBackground={false}
+          screenReaderLabel="View Usage"
+        />
       </div>
     )
   }

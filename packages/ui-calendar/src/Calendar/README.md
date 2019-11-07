@@ -89,21 +89,18 @@ class Example extends React.Component {
 
     const buttonProps = (type = 'prev') => ({
       size: 'small',
-      variant: 'icon',
-      icon: type === 'prev'
+      withBackground: false,
+      withBorder: false,
+      renderIcon: type === 'prev'
         ? <IconArrowOpenStartSolid color="primary" />
         : <IconArrowOpenEndSolid color="primary" />,
-      children: (
-        <ScreenReaderContent>
-          {type === 'prev' ? 'Previous month' : 'Next month'}
-        </ScreenReaderContent>
-      )
+      screenReaderLabel: type === 'prev' ? 'Previous month' : 'Next month'
     })
 
     return (
       <Calendar
-        renderPrevMonthButton={<Button {...buttonProps('prev')} />}
-        renderNextMonthButton={<Button {...buttonProps('next')} />}
+        renderPrevMonthButton={<IconButton {...buttonProps('prev')} />}
+        renderNextMonthButton={<IconButton {...buttonProps('next')} />}
         renderNavigationLabel={
           <span>
             <div>{date.format('MMMM')}</div>
@@ -161,6 +158,6 @@ the abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>,
 
 #### Rendering next and previous month buttons
 The `renderNextMonthButton` and `renderPrevMonthButton` can be supplied using the
-[Button](#Button) component with `variant` set to `icon`, the `size` prop set to
-`small`, and the `icon` prop set to [IconArrowOpenStart](#iconography) or
+[IconButton](#IconButton) component with the `size` prop set to
+`small`, the `withBackground` and `withBorder` props both set to `false`, and the `renderIcon` prop set to [IconArrowOpenStart](#iconography) or
 [IconArrowOpenEnd](#iconography).

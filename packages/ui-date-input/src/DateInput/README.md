@@ -204,15 +204,12 @@ class Example extends React.Component {
 
     const buttonProps = (type = 'prev') => ({
       size: 'small',
-      variant: 'icon',
-      icon: type === 'prev'
+      withBackground: false,
+      withBorder: false,
+      renderIcon: type === 'prev'
         ? <IconArrowOpenStartSolid color="primary" />
         : <IconArrowOpenEndSolid color="primary" />,
-      children: (
-        <ScreenReaderContent>
-          {type === 'prev' ? 'Previous month' : 'Next month'}
-        </ScreenReaderContent>
-      )
+      screenReaderLabel: type === 'prev' ? 'Previous month' : 'Next month'
     })
 
     return (
@@ -238,8 +235,8 @@ class Example extends React.Component {
             <div>{date.format('YYYY')}</div>
           </span>
         }
-        renderPrevMonthButton={<Button {...buttonProps('prev')} />}
-        renderNextMonthButton={<Button {...buttonProps('next')} />}
+        renderPrevMonthButton={<IconButton {...buttonProps('prev')} />}
+        renderNextMonthButton={<IconButton {...buttonProps('next')} />}
         renderWeekdayLabels={this.renderWeekdayLabels()}
       >
         {this.renderDays()}
