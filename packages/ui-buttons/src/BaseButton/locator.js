@@ -22,6 +22,12 @@
  * SOFTWARE.
  */
 
-export { BaseButton } from './BaseButton'
-export { Button } from './Button'
-export { CloseButton } from './CloseButton'
+import { locator, find } from '@instructure/ui-test-utils'
+
+import { BaseButton } from './index'
+
+export default locator(BaseButton.selector, {
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
+  }
+})

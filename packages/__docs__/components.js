@@ -44,7 +44,7 @@ export {
 export { Alert } from '@instructure/ui-alerts'
 export { Avatar } from '@instructure/ui-avatar'
 export { Billboard } from '@instructure/ui-billboard'
-export { Button, CloseButton } from '@instructure/ui-buttons'
+export { BaseButton, Button, CloseButton } from '@instructure/ui-buttons'
 export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
 export { Dialog } from '@instructure/ui-dialog'
