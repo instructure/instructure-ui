@@ -116,7 +116,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}, adapter) => 
 
   let template = () => {}
 
-  if (styles) {
+  if (styles && styles.template) {
     template = (typeof styles.template === 'function') ? styles.template : () => {
       warn(
         false,

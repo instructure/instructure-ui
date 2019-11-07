@@ -33,6 +33,7 @@ const MyButton = function () {
 The `ui-buttons` package contains the following:
 - [Button](#Button)
 - [CloseButton](#CloseButton)
+- [IconButton](#IconButton)
 
 ### Contribute
 See the [contributing guidelines](#contributing) for details.
