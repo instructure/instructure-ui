@@ -21,6 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
 
-export { ContextView } from './ContextView'
-export { View } from './View'
+export default {
+  sectionProp: 'background',
+  propValues: {
+    placement: [
+      'top',
+      'end',
+      'bottom',
+      'start'
+    ]
+  },
+  getComponentProps: (props) => {
+    return {
+      children: <span key="0">Hello World</span>,
+      padding: 'small',
+      debug: false
+    }
+  }
+}

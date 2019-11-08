@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { ContextView } from '@instructure/ui-layout'
+import { ContextView } from '@instructure/ui-view'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'

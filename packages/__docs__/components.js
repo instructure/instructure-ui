@@ -22,14 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-
-import { View as ExperimentalView } from '@instructure/ui-view'
-
-// Many docs examples that are unrelated to View are using View as a layout piece. Export it with ignored
-// experimental warnings here to avoid spamming warnings in unrelated component examples.
-export const View = (props) => <ExperimentalView {...props} />
-
 export {
   AccessibleContent as DeprecatedAccessibleContent,
   Dialog as DeprecatedDialog,
@@ -97,7 +89,7 @@ export { TextInput } from '@instructure/ui-text-input'
 export { Table } from '@instructure/ui-table'
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
 export {
-  ContextView,
+  ContextView as DeprecatedContextView,
   Media,
   Responsive,
   Flex as DeprecatedFlex,
@@ -145,5 +137,6 @@ export { Progress } from '@instructure/ui-progress'
 export { ProgressBar } from '@instructure/ui-progress'
 export { ProgressCircle } from '@instructure/ui-progress'
 export { Tag } from '@instructure/ui-tag'
+export { View, ContextView } from '@instructure/ui-view'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

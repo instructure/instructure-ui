@@ -26,24 +26,21 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
 import { themeable , ThemeablePropTypes } from '@instructure/ui-themeable'
-import { deprecated, omitProps } from '@instructure/ui-react-utils'
-import { View } from '@instructure/ui-view'
+import { omitProps } from '@instructure/ui-react-utils'
 
-import { LayoutPropTypes } from '../LayoutPropTypes'
-import { mirrorPlacement } from '../mirrorPlacement'
+import { View } from '../View'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedContextView
+category: components
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use ContextView from ui-view instead.')
 @themeable(theme, styles)
 class ContextView extends Component {
   static propTypes = {
@@ -103,7 +100,7 @@ class ContextView extends Component {
     * Specifies how the arrow for `<ContextView />` will be rendered.
     * Ex. `placement="top"` will render with an arrow pointing down.
     */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
 
     /**
     * Activate an outline around the component to make building your
@@ -159,7 +156,7 @@ class ContextView extends Component {
     } = this.props
 
     const classes = {
-      [styles.root]: true,
+      [styles.contextViewRoot]: true,
       [styles[`placement--${placement.replace(' ', '-')}`]]: true
     }
 

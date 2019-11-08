@@ -33,7 +33,6 @@ const MyLayout = () => {
 
 ### Components
 The `ui-layout` package contains the following components:
-- [ContextView](#ContextView)
 - [DrawerLayout](#DrawerLayout)
 - [Grid](#Grid)
 - [Media](#Media)
@@ -43,6 +42,7 @@ The following components have been deprecated and will be removed from the `ui-l
 - [Flex](#DeprecatedFlex) \(use [Flex from ui-flex](#Flex) instead)
 - [Position](#DeprecatedPosition) \(use [Position from ui-position](#Position) instead)
 - [View](#DeprecatedView) \(use [View from ui-view](#View) instead)
+- [ContextView](#DeprecatedContextView) \(use [ContextView from ui-view](#ContextView) instead)
 
 Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
 

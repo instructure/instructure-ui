@@ -26,14 +26,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import { ContextView } from '@instructure/ui-layout'
 import {
   Position,
   PositionPropTypes,
   parsePlacement,
   mirrorHorizontalPlacement
 } from '@instructure/ui-position'
-import { View } from '@instructure/ui-view'
+import { ContextView, View } from '@instructure/ui-view'
 import { Dialog } from '@instructure/ui-dialog'
 import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'

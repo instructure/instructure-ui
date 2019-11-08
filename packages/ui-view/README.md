@@ -19,10 +19,18 @@ yarn add @instructure/ui-view
 
 ### Components
 The `ui-view` package contains the following:
+- [ContextView](#ContextView)
 - [View](#View)
 
 ### Usage
-For detailed usage and documentation, see [View](#View).
+```js
+---
+example: true
+---
+<View as="div" padding="small" borderWidth="small">
+  Hello World
+</View>
+```
 
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-view.svg

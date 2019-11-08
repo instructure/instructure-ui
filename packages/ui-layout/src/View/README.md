@@ -6,7 +6,7 @@ id: DeprecatedView__README
 **DEPRECATED:** View will be removed from `ui-layout` in version 7.0.0. Use the [View from ui-view](#View) instead.
 
 ### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package as well as the prop name and value changes listed below.
+Codemods are available to automatically update imports to the new package.
 
 ### View &#151; the visual basis of instructure-UI
 

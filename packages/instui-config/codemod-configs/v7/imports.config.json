@@ -151,4 +151,8 @@
     "pattern": "^@instructure/ui-elements/lib/Tag",
     "replace": "@instructure/ui-tag/lib/Tag"
   },
+  {
+    "pattern": "^@instructure/ui-layout/lib/ContextView",
+    "replace": "@instructure/ui-view/lib/ContextView"
+  }
 ]

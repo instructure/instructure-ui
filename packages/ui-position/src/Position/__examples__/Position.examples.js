@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { View } from '@instructure/ui-view'
 
 export default {
   propValues: {
@@ -56,14 +55,7 @@ export default {
     const contentSize = '48px'
     const xStretch = props.placement == 'top stretch' || props.placement === 'bottom stretch'
     const yStretch = props.placement == 'end stretch' || props.placement === 'start stretch'
-    const contentProps = {
-      as: 'div',
-      width: contentSize,
-      height: contentSize,
-      borderWidth: 'small',
-      textAlign: 'center',
-      background: 'secondary'
-    }
+
     const text = (
       <span style={{fontSize: '12px'}}>
         {props.placement}
@@ -78,32 +70,46 @@ export default {
       offsetX: yStretch ? -parseInt(targetSize) : 0,
       offsetY: xStretch ? -parseInt(targetSize) : 0,
       renderTarget: xStretch || yStretch ? (
-        <View
-          as="div"
-          width={xStretch ? '100%' : targetSize}
-          height={xStretch ? targetSize : '100%'}
-          background="primary-inverse"
+        <div
+          style={{
+            width: xStretch ? '100%' : targetSize,
+            height: xStretch ? targetSize : '100%',
+            background: '#2d3b45'
+          }}
         />
       ) : (
-        <View
-          as="div"
-          width={targetSize}
-          height={targetSize}
-          background="primary-inverse"
+        <div
+          style={{
+            width: targetSize,
+            height: targetSize,
+            background: '#2d3b45'
+          }}
         />
       ),
       children: xStretch || yStretch ? (
-        <View
-          {...contentProps}
-          width={xStretch ? null : contentSize}
-          height={xStretch ? contentSize : null}
+        <div
+          style={{
+            width: xStretch ? null : contentSize,
+            height: xStretch ? contentSize : null,
+            border: '0.0625rem solid #ccc',
+            textAlign: 'center',
+            background: '#eee'
+          }}
         >
           {text}
-        </View>
+        </div>
       ) : (
-        <View {...contentProps}>
+        <div
+          style={{
+            width: contentSize,
+            height: contentSize,
+            border: '0.0625rem solid #ccc',
+            textAlign: 'center',
+            background: '#eee'
+          }}
+        >
           {text}
-        </View>
+        </div>
       )
     }
   },

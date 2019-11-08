@@ -30,7 +30,6 @@
     "@instructure/ui-testable": "^6.14.0",
     "@instructure/ui-themeable": "^6.14.0",
     "@instructure/ui-utils": "^6.14.0",
-    "@instructure/ui-view": "^6.14.0",
     "@instructure/uid": "^6.14.0",
     "classnames": "^2",
     "prop-types": "^15"
