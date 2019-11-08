@@ -532,7 +532,7 @@ class FileDrop extends Component {
           <View
             display="block"
             position="relative"
-            isFocused={this.state.isFocused}
+            withFocusOutline={this.state.isFocused}
             borderRadius="large"
             focusColor={focusColor}
           >

@@ -2,6 +2,7 @@
   box-sizing: border-box;
   font-family: var(--fontFamily);
   max-width: 100%;
+  overflow: visible;
 }
 
 .display--inline {
@@ -268,11 +269,12 @@
     border-radius: calc(var(--borderRadiusLarge) - (var(--focusOutlineInset) + var(--focusOutlineWidth)));
   }
 
-  &.isFocused {
+  &:focus {
     outline: none;
   }
 
-  &.isFocused::before {
+  &.shouldUseBrowserFocus:focus::before,
+  &.withFocusOutline::before {
     opacity: 1;
     transform: scale(1);
   }
@@ -301,7 +303,8 @@
 
   outline-style: none;
 
-  &.isFocused.focusPosition--inset {
+  &.focusPosition--inset.shouldUseBrowserFocus:focus,
+  &.focusPosition--inset.withFocusOutline {
     outline-width: var(--focusOutlineWidth);
     outline-style: var(--focusOutlineStyle);
   }

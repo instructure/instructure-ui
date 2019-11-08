@@ -142,7 +142,7 @@ class Pill extends Component {
         borderWidth="0"
         display="inline-block"
         position="relative"
-        isFocused={focused}
+        withFocusOutline={focused}
         focusColor="info"
       >
         <span className={classes}>

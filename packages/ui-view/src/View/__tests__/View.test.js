@@ -235,77 +235,93 @@ describe('<View />', async () => {
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
   })
 
-  it('should warn when isFocused is true without position=relative', async () => {
-    const consoleError = stub(console, 'error')
-    const warning = 'Warning: [View] the focus ring will only show if the `position` prop is `relative`.'
-    await mount(
-      <View isFocused>
-        <h1>Hello!</h1>
-      </View>
-    )
+  describe('withFocusOutline', async () => {
+    it('should warn when withFocusOutline is true without position=relative', async () => {
+      const consoleError = stub(console, 'error')
+      const warning = 'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
+      await mount(
+        <View withFocusOutline>
+          <h1>Hello!</h1>
+        </View>
+      )
 
-    expect(consoleError).to.be.calledWith(warning)
-  })
+      expect(consoleError).to.be.calledWith(warning)
+    })
 
-  it('should warn when isFocused is `true`, display is set to `inline`, and focusPosition is set to `offset`', async () => {
-    const consoleError = stub(console, 'error')
-    const warning = 'Warning: [View] when display is set to `inline` the focus ring will only show if `focusPosition` is set to `inset`.'
-    await mount(
-      <View
-        isFocused
-        display="inline"
-        focusPosition="offset"
-      >
-        <h1>Hello!</h1>
-      </View>
-    )
+    it('should warn when withFocusOutline is `true`, display is set to `inline`, and focusPosition is set to `offset`', async () => {
+      const consoleError = stub(console, 'error')
+      const warning = 'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
+      await mount(
+        <View
+          withFocusOutline
+          display="inline"
+          focusPosition="offset"
+        >
+          <h1>Hello!</h1>
+        </View>
+      )
 
-    expect(consoleError).to.be.calledWith(warning)
-  })
+      expect(consoleError).to.be.calledWith(warning)
+    })
 
-  it('should apply the correct focus ring depending on the border radius', async () => {
-    const subject = await mount(
-      <View
-        isFocused
-        position="relative"
-        display="block"
-      >
-        Hello
-      </View>
-    )
+    it('should apply the correct focus ring depending on the border radius', async () => {
+      const subject = await mount(
+        <View
+          withFocusOutline
+          position="relative"
+          display="block"
+        >
+          Hello
+        </View>
+      )
 
-    const view = within(subject.getDOMNode())
+      const view = within(subject.getDOMNode())
 
-    const baseRadiusStyle = 'focusRing--radius'
+      const baseRadiusStyle = 'focusRing--radius'
 
-    expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
+      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
 
-    await subject.setProps({ borderRadius: '0' })
-    expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
+      await subject.setProps({ borderRadius: '0' })
+      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
 
-    await subject.setProps({ borderRadius: 'none' })
-    expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
+      await subject.setProps({ borderRadius: 'none' })
+      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
 
-    await subject.setProps({ borderRadius: 'circle' })
-    expect(view).to.have.className(styles[`${baseRadiusStyle}Inherit`])
+      await subject.setProps({ borderRadius: 'circle' })
+      expect(view).to.have.className(styles[`${baseRadiusStyle}Inherit`])
 
-    await subject.setProps({ borderRadius: 'pill' })
-    expect(view).to.have.className(styles[`${baseRadiusStyle}Inherit`])
+      await subject.setProps({ borderRadius: 'pill' })
+      expect(view).to.have.className(styles[`${baseRadiusStyle}Inherit`])
 
-    await subject.setProps({ borderRadius: 'small'})
-    expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
+      await subject.setProps({ borderRadius: 'small'})
+      expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
 
-    await subject.setProps({ borderRadius: 'medium'})
-    expect(view).to.have.className(styles[`${baseRadiusStyle}Medium`])
+      await subject.setProps({ borderRadius: 'medium'})
+      expect(view).to.have.className(styles[`${baseRadiusStyle}Medium`])
 
-    await subject.setProps({ borderRadius: 'large'})
-    expect(view).to.have.className(styles[`${baseRadiusStyle}Large`])
+      await subject.setProps({ borderRadius: 'large'})
+      expect(view).to.have.className(styles[`${baseRadiusStyle}Large`])
 
-    await subject.setProps({ borderRadius: 'small small small'})
-    expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
+      await subject.setProps({ borderRadius: 'small small small'})
+      expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
 
-    await subject.setProps({ borderRadius: 'small small small medium'})
-    expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
+      await subject.setProps({ borderRadius: 'small small small medium'})
+      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
+    })
+
+    it('should use the native browser focus management when withFocusOutline is undefined', async () => {
+      const subject = await mount(
+        <View
+          as="button"
+          position="relative"
+        >
+          Hello
+        </View>
+      )
+
+      const view = within(subject.getDOMNode())
+      expect(view).to.have.className(styles.shouldUseBrowserFocus)
+    })
   })
 
   it('should meet a11y standards', async () => {

@@ -110,10 +110,6 @@ class Item extends Component {
     isDisabled: false
   }
 
-  state = {
-    focused: false
-  }
-
   handleClick = (e) => {
     const {
       isDisabled,
@@ -126,14 +122,6 @@ class Item extends Component {
     } else if (typeof onClick === 'function') {
       onClick(e)
     }
-  }
-
-  handleFocus = () => {
-    this.setState({ focused: true })
-  }
-
-  handleBlur = () => {
-    this.setState({ focused: false })
   }
 
   render () {
@@ -183,7 +171,6 @@ class Item extends Component {
         borderRadius="medium"
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        isFocused={this.state.focused}
         cursor={isDisabled ? 'not-allowed' : cursor}
         className={classes}
       >

@@ -295,7 +295,7 @@ class Tabs extends Component {
               display="flex"
               position="relative"
               borderRadius="medium"
-              isFocused={focusVisible}
+              withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
               role="tablist"
               className={styles.tabs}

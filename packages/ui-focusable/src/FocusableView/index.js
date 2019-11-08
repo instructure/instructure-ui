@@ -150,7 +150,7 @@ class FocusableView extends Component {
         display={display}
         as={as}
         cursor={cursor}
-        isFocused={focused}
+        withFocusOutline={focused}
         position="relative"
         focusColor={this.focusColor}
         href={href}

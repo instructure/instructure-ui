@@ -56,7 +56,7 @@ category: components
 @module View
 **/
 @deprecated('8.0.0', {
-  focused: 'isFocused',
+  focused: 'withFocusOutline',
   visualDebug: 'withVisualDebug'
 })
 @bidirectional()
@@ -206,9 +206,11 @@ class View extends Component {
     insetBlockEnd: PropTypes.string,
 
     /**
-     * When true and position prop is `relative`, show focus outline.
+     * Manually control if the `View` should display a focus outline. When left undefined (which is the default)
+     * the focus outline will display automatically if the `View` is focusable and receives focus. Note: the focus
+     * outline only will display when the `position` prop is set to `relative`.
      */
-    isFocused: PropTypes.bool,
+    withFocusOutline: PropTypes.bool,
 
     /**
      * Determines whether the focus outline displays offset or inset from the focused View
@@ -233,7 +235,7 @@ class View extends Component {
     /* eslint-disable react/require-default-props */
 
     /**
-    * __Deprecated - use 'isFocused'__
+    * __Deprecated - use 'withFocusOutline'__
     */
     focused: PropTypes.bool,
     /**
@@ -278,7 +280,7 @@ class View extends Component {
     minWidth: undefined,
     minHeight: undefined,
     position: 'static',
-    isFocused: false,
+    withFocusOutline: undefined,
     focusPosition: 'offset',
     focusColor: 'info',
     insetInlineStart: undefined,
@@ -315,28 +317,32 @@ class View extends Component {
     )
   }
 
-  get isFocused () {
+  get withFocusOutline () {
+    if (typeof this.props.withFocusOutline === 'undefined' && typeof this.props.focused === 'undefined') {
+      return undefined
+    }
+
     const {
       position,
       display,
       focusPosition
     } = this.props
 
-    const isFocused = this.props.focused || this.props.isFocused
+    const withFocusOutline = this.props.focused || this.props.withFocusOutline
 
-    if (isFocused) {
+    if (withFocusOutline) {
       error(
         display === 'inline' || position === 'relative',
-        '[View] the focus ring will only show if the `position` prop is `relative`.'
+        '[View] the focus outline will only show if the `position` prop is `relative`.'
       )
 
       error(
         display !== 'inline' || focusPosition === 'inset',
-        '[View] when display is set to `inline` the focus ring will only show if `focusPosition` is set to `inset`.'
+        '[View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
       )
     }
 
-    return isFocused
+    return withFocusOutline
   }
 
   get focusRingRadius () {
@@ -495,8 +501,12 @@ class View extends Component {
 
     const ElementType = getElementType(View, this.props)
 
+    const { withFocusOutline } = this
+
     const focusOutlineClasses = position === 'relative' || (display === 'inline' && focusPosition === 'inset') ? {
       [styles.focus]: true,
+      [styles.withFocusOutline]: withFocusOutline,
+      [styles.shouldUseBrowserFocus]: typeof withFocusOutline === 'undefined',
       [styles[this.focusRingRadius]]: true,
       [styles[`focusPosition--${focusPosition}`]]: true,
       [styles[`focusColor--${focusColor}`]]: true,
@@ -516,8 +526,6 @@ class View extends Component {
       [styles[`stacking--${stacking}`]]: stacking,
       [styles[`shadow--${shadow}`]]: shadow && shadow !== 'none',
       [styles[`position--${position}`]]: position !== 'static',
-      // leaving `focused` out of focusOutlineClasses so warning fires if position is not relative
-      [styles.isFocused]: this.isFocused,
       ...focusOutlineClasses,
       [className]: className
     })

@@ -120,7 +120,6 @@ class AppNav extends Component {
   }
 
   _list = null
-  _menuTrigger = null
 
   componentDidMount () {
     this._debounced = debounce(this.handleResize, this.props.debounce, { leading: true, trailing: true })
@@ -137,11 +136,6 @@ class AppNav extends Component {
     if (this._debounced) {
       this._debounced.cancel()
     }
-  }
-
-  // TODO: remove this when INSTUI-2262 is resolved
-  handleMenuDismiss = () => {
-    this._menuTrigger && this._menuTrigger.focus()
   }
 
   measureItems = () => {
@@ -201,10 +195,7 @@ class AppNav extends Component {
       <Menu
         onDismiss={this.handleMenuDismiss} // TODO: remove when INSTUI-2262 is resolved
         trigger={
-          <AppNav.Item
-            elementRef={(el) => { this._menuTrigger = el }}
-            renderLabel={callRenderProp(this.props.renderTruncateLabel)}
-          />
+          <AppNav.Item renderLabel={callRenderProp(this.props.renderTruncateLabel)} />
         }
       >
         {items.map((item, index) => {

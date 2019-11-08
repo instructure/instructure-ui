@@ -118,7 +118,7 @@
         { "old": "light", "new": "secondary" },
         { "old": "inverse", "new": "primary-inverse" }
       ]},
-      { "old": "focused", "new": "isFocused" },
+      { "old": "focused", "new": "withFocusOutline" },
       { "old": "debug", "new": "withVisualDebug" }
     ]
   },

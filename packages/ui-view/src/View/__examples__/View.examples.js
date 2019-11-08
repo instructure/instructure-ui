@@ -58,8 +58,8 @@ export default {
       // so we filter those here as they are redundant
       (
         props.borderRadius === 'none' || props.borderWidth === 'none' || props.background === 'transparent' ||
-        (props.focusPosition === 'inset' && !props.isFocused) ||
-        (props.isFocused && props.position !== 'relative')
+        (props.focusPosition === 'inset' && !props.withFocusOutline) ||
+        (props.withFocusOutline && props.position !== 'relative')
       )
     )
   }

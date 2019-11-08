@@ -9,7 +9,7 @@ guidelines: true
 <Guidelines>
   <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
     <Figure.Item>
-      The <code>focused</code> boolean prop is deprecated. Use <code>isFocused</code> instead.
+      The <code>focused</code> boolean prop is deprecated. Use <code>withFocusOutline</code> instead.
     </Figure.Item>
     <Figure.Item>
       The <code>visualDebug</code> boolean prop is deprecated. Use <code>withVisualDebug</code> instead.
@@ -448,18 +448,40 @@ example: true
 </View>
 ```
 
-### `isFocused`
+### Indicating that a View is focused
 
-Set `isFocused` to `true` to make View's "focus ring" display.
-
-`isFocused` supports the following `borderRadius` values: `circle`, `pill`, `small`, `medium`,
-and `large`. For Views with irregular border radius (e.g., `borderRadius="small large none medium"`),
-the focus ring will appear with square edges. The color of the focus outline can be
-changed for different contexts via the `focusColor` property.
+By default, if a `View` is rendered as a focusable element, a focus outline will display when it is focused for accessibility.
 
 > Note that `position` must be set to `relative` for the focus ring to display.
 (This restriction exists because the focus ring requires styling a pseudo element
 that has absolute positioning.)
+
+```javascript
+---
+example: true
+---
+<View
+  position="relative"
+  tabIndex="0"
+  role="button"
+  cursor="pointer"
+  display="block"
+  margin="large"
+  padding="small"
+>
+  Tab here to see the focus outline
+</View>
+```
+
+In some situations, you may want to manually control when the focus outline is displayed instead of leaving it up to the browser.
+This can be done using the `withFocusOutline` prop. Set it to `true` to make View's focus outline display or `false` to hide it.
+Be careful when overriding the display of the focus outline as it is essential for accessibility.
+
+The focus outline adjusts to account for the shape of the View. For example, the following values can be set for `borderRadius`:
+`circle`, `pill`, `small`, `medium`, and `large`. In each case, the border radius of the focus outline will automatically adjust
+to match the border radius of the corresponding View. For Views with irregular border radius (e.g., `borderRadius="small large none
+medium"`), the focus outline will appear with square edges. The color of the focus outline can be
+changed for different contexts via the `focusColor` property.
 
 
 ```javascript
@@ -496,7 +518,7 @@ class FocusedExample extends React.Component {
             description={<ScreenReaderContent>View focus outline examples</ScreenReaderContent>}
           >
             <Checkbox
-              label="isFocused"
+              label="withFocusOutline"
               checked={this.state.isFocused}
               onChange={this.updateFocused}
             />
@@ -517,7 +539,7 @@ class FocusedExample extends React.Component {
             borderRadius="small"
             borderWidth="small"
             position="relative"
-            isFocused={this.state.isFocused}
+            withFocusOutline={this.state.isFocused}
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             small
@@ -530,7 +552,7 @@ class FocusedExample extends React.Component {
             borderRadius="medium"
             borderWidth="small"
             position="relative"
-            isFocused={this.state.isFocused}
+            withFocusOutline={this.state.isFocused}
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             medium
@@ -543,7 +565,7 @@ class FocusedExample extends React.Component {
             borderRadius="large"
             borderWidth="small"
             position="relative"
-            isFocused={this.state.isFocused}
+            withFocusOutline={this.state.isFocused}
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             large
@@ -557,7 +579,7 @@ class FocusedExample extends React.Component {
             borderRadius="circle"
             borderWidth="small"
             position="relative"
-            isFocused={this.state.isFocused}
+            withFocusOutline={this.state.isFocused}
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             <Flex
@@ -580,7 +602,7 @@ class FocusedExample extends React.Component {
               borderRadius="large"
               borderWidth="small"
               position="relative"
-              isFocused={this.state.isFocused}
+              withFocusOutline={this.state.isFocused}
               focusColor="inverse"
               focusPosition={this.state.inset ? 'inset' : 'offset'}
             >
@@ -598,7 +620,7 @@ class FocusedExample extends React.Component {
             focusColor="success"
             width="100px"
             textAlign="center"
-            isFocused={this.state.isFocused}
+            withFocusOutline={this.state.isFocused}
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             pill
@@ -612,7 +634,7 @@ class FocusedExample extends React.Component {
             borderRadius="none large"
             focusColor="danger"
             position="relative"
-            isFocused={this.state.isFocused}
+            withFocusOutline={this.state.isFocused}
             focusPosition={this.state.inset ? 'inset' : 'offset'}
           >
             none large
