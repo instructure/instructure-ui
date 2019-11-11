@@ -33,24 +33,21 @@ import {
   safeCloneElement,
   matchComponentTypes,
   omitProps,
-  pickProps,
-  deprecated
+  pickProps
  } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { GridRow } from './GridRow'
-import { GridCol } from './GridCol'
+import { GridRow } from '../GridRow'
+import { GridCol } from '../GridCol'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedGrid
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-grid instead.')
 @themeable(theme, styles)
 class Grid extends Component {
   static propTypes = {

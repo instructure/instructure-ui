@@ -26,69 +26,80 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { capitalizeFirstLetter } from '@instructure/ui-utils'
 import {
   safeCloneElement,
   matchComponentTypes,
   omitProps,
-  pickProps,
-  deprecated
- } from '@instructure/ui-react-utils'
+  pickProps
+} from '@instructure/ui-react-utils'
+import { capitalizeFirstLetter } from '@instructure/ui-utils'
+import { themeable } from '@instructure/ui-themeable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { GridRow } from './GridRow'
-import { GridCol } from './GridCol'
+import { GridCol } from '../GridCol'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedGrid
+parent: Grid
+id: Grid.Row
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-grid instead.')
 @themeable(theme, styles)
-class Grid extends Component {
+class GridRow extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
-    children: ChildrenPropTypes.oneOf([GridRow, ScreenReaderContent]),
-    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+    children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     hAlign: PropTypes.oneOf(['start', 'center', 'end', 'space-around', 'space-between']),
     vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
     startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-    visualDebug: PropTypes.bool
+    visualDebug: PropTypes.bool,
+    isLastRow: PropTypes.bool
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    colSpacing: 'medium',
-    rowSpacing: 'medium',
-    hAlign: 'start',
-    startAt: 'small',
-    vAlign: 'top',
-    visualDebug: false,
-    children: null
+    children: null,
+    isLastRow: false
   }
 
-  static Row = GridRow
-  static Col = GridCol
-
   startAtClass () {
-    return !!this.props.startAt && (`startAt${capitalizeFirstLetter(this.props.startAt)}`)
+    return !!this.props.startAt &&
+      (
+        `startAt${capitalizeFirstLetter(this.props.startAt)}`
+      )
+  }
+
+  rowSpacingClass () {
+    return (
+      `rowSpacing${capitalizeFirstLetter(this.props.rowSpacing)}`
+    )
+  }
+
+  colSpacingClass () {
+    return (
+      `colSpacing${capitalizeFirstLetter(this.props.colSpacing)}`
+    )
   }
 
   renderChildren () {
-    const children = Children.toArray(this.props.children)
+    const {
+      children,
+      ...props
+    } = this.props
 
-    return children.map((child, index) => {
-      if (matchComponentTypes(child, [GridRow])) {
+    return Children.map(children, (child, index) => {
+      if (matchComponentTypes(child, [GridCol])) {
         return safeCloneElement(child, {
-          ...pickProps(this.props, Grid.propTypes),
+          ...pickProps(this.props, GridRow.propTypes),
           ...child.props, /* child props should override parent */
-          isLastRow: ((index + 1) === children.length)
+          isLastRow: props.isLastRow,
+          isLastCol: ((index + 1) === Children.count(children))
         })
       } else {
         return child // PropType validation should handle errors
@@ -99,11 +110,15 @@ class Grid extends Component {
   render () {
     const classes = {
       [styles.root]: true,
-      [styles[this.startAtClass()]]: !!this.props.startAt,
-      [styles.visualDebug]: this.props.visualDebug
+      [styles.lastRow]: this.props.isLastRow,
+      [styles[`hAlign--${this.props.hAlign}`]]: true,
+      [styles[`vAlign--${this.props.vAlign}`]]: true,
+      [styles[this.rowSpacingClass()]]: true,
+      [styles[this.colSpacingClass()]]: this.props.colSpacing !== 'none',
+      [styles[this.startAtClass()]]: !!this.props.startAt
     }
 
-    const props = omitProps(this.props, Grid.propTypes)
+    const props = omitProps(this.props, GridRow.propTypes)
 
     return (
       <span
@@ -116,5 +131,5 @@ class Grid extends Component {
   }
 }
 
-export default Grid
-export { Grid, GridRow, GridCol }
+export default GridRow
+export { GridRow }

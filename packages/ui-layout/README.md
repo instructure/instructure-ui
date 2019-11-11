@@ -34,12 +34,12 @@ const MyLayout = () => {
 ### Components
 The `ui-layout` package contains the following components:
 - [DrawerLayout](#DrawerLayout)
-- [Grid](#Grid)
 - [Media](#Media)
 
 ### Deprecated components
 The following components have been deprecated and will be removed from the `ui-layout` package:
 - [Flex](#DeprecatedFlex) \(use [Flex from ui-flex](#Flex) instead)
+- [Grid](#DeprecatedGrid) \(use [Grid](#Grid) from [ui-grid](#ui-grid) instead)
 - [Position](#DeprecatedPosition) \(use [Position from ui-position](#Position) instead)
 - [View](#DeprecatedView) \(use [View from ui-view](#View) instead)
 - [ContextView](#DeprecatedContextView) \(use [ContextView from ui-view](#ContextView) instead)

@@ -46,6 +46,7 @@ module.exports = {
     '@instructure/ui-a11y-utils$': path.resolve(__dirname, '../ui-a11y-utils/src/'),
     '@instructure/ui-forms$': path.resolve(__dirname, '../ui-forms/src/'),
     '@instructure/ui-form-field$': path.resolve(__dirname, '../ui-form-field/src/'),
+    '@instructure/ui-grid$': path.resolve(__dirname, '../ui-grid/src/'),
     '@instructure/ui-i18n$': path.resolve(__dirname, '../ui-i18n/src/'),
     '@instructure/ui-img$': path.resolve(__dirname, '../ui-img/src/'),
     '@instructure/ui-layout$': path.resolve(__dirname, '../ui-layout/src/'),

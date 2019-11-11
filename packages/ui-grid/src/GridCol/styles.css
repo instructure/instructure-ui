@@ -1,0 +1,234 @@
+/* stylelint-disable selector-max-class, at-rule-no-unknown */
+
+@define-mixin flex-column
+  $size: 1 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc($size / 12 * 99.999%);
+  max-width: calc($size / 12 * 99.999%);
+}
+
+@define-mixin column-offset
+  $size: 1 {
+  margin-inline-start: calc($size / 12 * 99.999%);
+  margin-inline-end: 0;
+}
+
+@define-mixin grid-columns-for-breakpoint
+  $breakpoint {
+  .$(breakpoint)--auto {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+  }
+
+  .$(breakpoint)--1 {
+    @mixin flex-column 1;
+  }
+
+  .$(breakpoint)--2 {
+    @mixin flex-column 2;
+  }
+
+  .$(breakpoint)--3 {
+    @mixin flex-column 3;
+  }
+
+  .$(breakpoint)--4 {
+    @mixin flex-column 4;
+  }
+
+  .$(breakpoint)--5 {
+    @mixin flex-column 5;
+  }
+
+  .$(breakpoint)--6 {
+    @mixin flex-column 6;
+  }
+
+  .$(breakpoint)--7 {
+    @mixin flex-column 7;
+  }
+
+  .$(breakpoint)--8 {
+    @mixin flex-column 8;
+  }
+
+  .$(breakpoint)--9 {
+    @mixin flex-column 9;
+  }
+
+  .$(breakpoint)--10 {
+    @mixin flex-column 10;
+  }
+
+  .$(breakpoint)--11 {
+    @mixin flex-column 11;
+  }
+
+  .$(breakpoint)-offset--1 {
+    @mixin column-offset 1;
+  }
+
+  .$(breakpoint)-offset--2 {
+    @mixin column-offset 2;
+  }
+
+  .$(breakpoint)-offset--3 {
+    @mixin column-offset 3;
+  }
+
+  .$(breakpoint)-offset--4 {
+    @mixin column-offset 4;
+  }
+
+  .$(breakpoint)-offset--5 {
+    @mixin column-offset 5;
+  }
+
+  .$(breakpoint)-offset--6 {
+    @mixin column-offset 6;
+  }
+
+  .$(breakpoint)-offset--7 {
+    @mixin column-offset 7;
+  }
+
+  .$(breakpoint)-offset--8 {
+    @mixin column-offset 8;
+  }
+
+  .$(breakpoint)-offset--9 {
+    @mixin column-offset 9;
+  }
+
+  .$(breakpoint)-offset--10 {
+    @mixin column-offset 10;
+  }
+
+  .$(breakpoint)-offset--11 {
+    @mixin column-offset 11;
+  }
+
+  .$(breakpoint)--12 {
+    flex: 0 0 100%;
+  }
+}
+
+@define-mixin start-grid-column {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%; /* stylelint-disable-line length-zero-no-unit */
+  margin-bottom: 0;
+  box-sizing: border-box;
+
+  &.rowSpacingSmall,
+  &.rowSpacingMedium,
+  &.rowSpacingLarge {
+    margin-bottom: 0;
+  }
+
+  &.colSpacingSmall {
+    padding-left: calc(var(--spacingSmall) / 2); /* stylelint-disable-line property-blacklist */
+    padding-right: calc(var(--spacingSmall) / 2); /* stylelint-disable-line property-blacklist */
+  }
+
+  &.colSpacingMedium {
+    padding-left: calc(var(--spacingMedium) / 2); /* stylelint-disable-line property-blacklist */
+    padding-right: calc(var(--spacingMedium) / 2); /* stylelint-disable-line property-blacklist */
+  }
+
+  &.colSpacingLarge {
+    padding-left: calc(var(--spacingLarge) / 2); /* stylelint-disable-line property-blacklist */
+    padding-right: calc(var(--spacingLarge) / 2); /* stylelint-disable-line property-blacklist */
+  }
+
+  &.vAlign--top {
+    align-self: flex-start;
+  }
+
+  &.vAlign--middle {
+    align-self: center;
+  }
+
+  &.vAlign--bottom {
+    align-self: flex-end;
+  }
+
+  &.textAlign--start {
+    text-align: start;
+  }
+
+  &.textAlign--end {
+    text-align: end;
+  }
+
+  &.textAlign--center {
+    text-align: center;
+  }
+
+  &.textAlign--inherit {
+    text-align: inherit;
+  }
+}
+
+.root {
+  display: block;
+  box-sizing: border-box;
+  text-align: inherit;
+  min-width: 0.0625rem;
+
+  &.rowSpacingSmall {
+    margin-bottom: var(--spacingSmall);
+  }
+
+  &.rowSpacingMedium {
+    margin-bottom: var(--spacingMedium);
+  }
+
+  &.rowSpacingLarge {
+    margin-bottom: var(--spacingLarge);
+  }
+
+  &.rowSpacingNone,
+  &.lastRow.lastCol {
+    margin-bottom: 0;
+  }
+}
+
+.startAtSmall {
+  @mixin start-grid-column;
+}
+
+@mixin grid-columns-for-breakpoint small;
+
+@media screen and (--mediumMin) {
+  .startAtMedium {
+    @mixin start-grid-column;
+  }
+
+  @mixin grid-columns-for-breakpoint medium;
+}
+
+@media screen and (--largeMin) {
+  .startAtLarge {
+    @mixin start-grid-column;
+  }
+
+  @mixin grid-columns-for-breakpoint large;
+}
+
+@media screen and (--xLargeMin) {
+  .startAtXLarge {
+    @mixin start-grid-column;
+  }
+
+  @mixin grid-columns-for-breakpoint x-large;
+}
+
+.visualDebug {
+  /* stylelint-disable-next-line color-named */
+  outline: 0.0625rem dashed red;
+}
+
+/* stylelint-enable at-rule-no-unknown */

@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { Grid } from '@instructure/ui-layout'
+import { Grid } from '@instructure/ui-grid'
 import { error } from '@instructure/console/macro'
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, pickProps, getElementType } from '@instructure/ui-react-utils'

@@ -44,8 +44,8 @@ import theme from './theme'
 
 /**
 ---
-parent: Grid
-id: Grid.Row
+parent: DeprecatedGrid
+id: DeprecatedGrid.Row
 ---
 **/
 @themeable(theme, styles)

@@ -38,8 +38,8 @@ const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 /**
 ---
-parent: DeprecatedGrid
-id: DeprecatedGrid.Col
+parent: Grid
+id: Grid.Col
 ---
 **/
 @themeable(theme, styles)

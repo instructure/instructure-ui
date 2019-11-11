@@ -1,14 +1,6 @@
 ---
-describes: DeprecatedGrid
-id: DeprecatedGrid__README
+describes: Grid
 ---
-
-**DEPRECATED:** Grid will be removed from ui-layout in version 7.0.0. Use [Grid](#Grid) from [ui-grid](#ui-grid) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package.
-
-___
 
 ### Create a basic column layout
 
@@ -23,19 +15,19 @@ exactly where your Grid columns are.
 example: true
 ---
 <div>
-  <DeprecatedGrid visualDebug>
-    <DeprecatedGrid.Row>
-      <DeprecatedGrid.Col>
+  <Grid visualDebug>
+    <Grid.Row>
+      <Grid.Col>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-    </DeprecatedGrid.Row>
-  </DeprecatedGrid>
+      </Grid.Col>
+    </Grid.Row>
+  </Grid>
   <p>
     {lorem.paragraph()}
   </p>
@@ -55,16 +47,16 @@ default, stacked columns have bottom margin for visual separation.
 ---
 example: true
 ---
-<DeprecatedGrid startAt="large" visualDebug>
-  <DeprecatedGrid.Row>
-    <DeprecatedGrid.Col>
+<Grid startAt="large" visualDebug>
+  <Grid.Row>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-    <DeprecatedGrid.Col>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-  </DeprecatedGrid.Row>
-</DeprecatedGrid>
+    </Grid.Col>
+  </Grid.Row>
+</Grid>
 ```
 
 ### Control the width of each column
@@ -93,19 +85,19 @@ breakpoint with the `width` prop. Please note the following:
 ---
 example: true
 ---
-<DeprecatedGrid visualDebug>
-  <DeprecatedGrid.Row>
-    <DeprecatedGrid.Col width={{small: 4, medium: 6, large: 3, xLarge: 6}}>
+<Grid visualDebug>
+  <Grid.Row>
+    <Grid.Col width={{small: 4, medium: 6, large: 3, xLarge: 6}}>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-    <DeprecatedGrid.Col width={{small: 4, medium: 4, large: 3, xLarge: 5}}>
+    </Grid.Col>
+    <Grid.Col width={{small: 4, medium: 4, large: 3, xLarge: 5}}>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-    <DeprecatedGrid.Col width={{small: 4, medium: 2, large: 6, xLarge: 1}}>
+    </Grid.Col>
+    <Grid.Col width={{small: 4, medium: 2, large: 6, xLarge: 1}}>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-  </DeprecatedGrid.Row>
-</DeprecatedGrid>
+    </Grid.Col>
+  </Grid.Row>
+</Grid>
 ```
 
 ### Add space/gutter between columns and rows
@@ -118,30 +110,30 @@ or remove it with `none`.
 ---
 example: true
 ---
-<DeprecatedGrid colSpacing="large" rowSpacing="small" visualDebug>
-  <DeprecatedGrid.Row>
-    <DeprecatedGrid.Col>
+<Grid colSpacing="large" rowSpacing="small" visualDebug>
+  <Grid.Row>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-    <DeprecatedGrid.Col>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-    <DeprecatedGrid.Col>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-  </DeprecatedGrid.Row>
-  <DeprecatedGrid.Row>
-    <DeprecatedGrid.Col>
+    </Grid.Col>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-    <DeprecatedGrid.Col>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-    <DeprecatedGrid.Col>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </DeprecatedGrid.Col>
-  </DeprecatedGrid.Row>
-</DeprecatedGrid>
+    </Grid.Col>
+  </Grid.Row>
+</Grid>
 ```
 
 Another useful method for spacing out `<Grid.Col>` elements is to use the `hAlign`
@@ -154,19 +146,19 @@ values: `start`, `center`, `end`, `space-around`, and `space-between`.
 ---
 example: true
 ---
-  <DeprecatedGrid hAlign="space-between" visualDebug>
-    <DeprecatedGrid.Row>
-      <DeprecatedGrid.Col width={2}>
+  <Grid hAlign="space-between" visualDebug>
+    <Grid.Row>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col width={4}>
+      </Grid.Col>
+      <Grid.Col width={4}>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col width={2}>
+      </Grid.Col>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-    </DeprecatedGrid.Row>
-  </DeprecatedGrid>
+      </Grid.Col>
+    </Grid.Row>
+  </Grid>
 ```
 
 #### `hAlign="space-around"`
@@ -175,19 +167,19 @@ example: true
 ---
 example: true
 ---
-  <DeprecatedGrid hAlign="space-around" visualDebug>
-    <DeprecatedGrid.Row>
-      <DeprecatedGrid.Col width={2}>
+  <Grid hAlign="space-around" visualDebug>
+    <Grid.Row>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col width={4}>
+      </Grid.Col>
+      <Grid.Col width={4}>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col width={2}>
+      </Grid.Col>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-    </DeprecatedGrid.Row>
-  </DeprecatedGrid>
+      </Grid.Col>
+    </Grid.Row>
+  </Grid>
 ```
 
 ### Vertically align your columns
@@ -199,19 +191,19 @@ below the Grid is set to vertically center its columns.
 ---
 example: true
 ---
-  <DeprecatedGrid vAlign="middle" visualDebug>
-    <DeprecatedGrid.Row>
-      <DeprecatedGrid.Col>
+  <Grid vAlign="middle" visualDebug>
+    <Grid.Row>
+      <Grid.Col>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </DeprecatedGrid.Col>
-    </DeprecatedGrid.Row>
-  </DeprecatedGrid>
+      </Grid.Col>
+    </Grid.Row>
+  </Grid>
 ```
 
 ### Putting it all together
@@ -232,16 +224,16 @@ to the right.
 ---
 example: true
 ---
-  <DeprecatedGrid startAt="medium" vAlign="middle" colSpacing="none">
-    <DeprecatedGrid.Row>
-      <DeprecatedGrid.Col>
+  <Grid startAt="medium" vAlign="middle" colSpacing="none">
+    <Grid.Row>
+      <Grid.Col>
         <Heading>I am a fairly lengthy heading for the page</Heading>
-      </DeprecatedGrid.Col>
-      <DeprecatedGrid.Col width="auto">
+      </Grid.Col>
+      <Grid.Col width="auto">
         <Button>Cancel</Button>
         &nbsp;
         <Button variant="primary" icon={IconAddSolid}>Widget</Button>
-      </DeprecatedGrid.Col>
-    </DeprecatedGrid.Row>
-  </DeprecatedGrid>
+      </Grid.Col>
+    </Grid.Row>
+  </Grid>
 ```
