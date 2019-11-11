@@ -64,6 +64,10 @@
     "replace": "@instructure/ui-position/lib/PositionPropTypes"
   },
   {
+    "pattern": "^@instructure/ui-elements/lib/Rating",
+    "replace": "@instructure/ui-rating/lib/Rating"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/Img",
     "replace": "@instructure/ui-img/lib/Img"
   },

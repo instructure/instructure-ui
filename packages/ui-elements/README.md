@@ -40,7 +40,7 @@ The `ui-elements` package contains the following:
 - [MetricsList](#DeprecatedMetricsList) will be removed in version 7.0.0. Use the [MetricGroup](#MetricGroup) or [Metric](#Metric) from [ui-metric](#ui-metric).
 - [Pill](#DeprecatedPill) will be removed in version 7.0.0. Use [Pill](#Pill) from [ui-pill](#ui-pill).
 - Progress will be removed in version 7.0.0. Use [ProgressBar](#ProgressBar) or [ProgressCircle](#ProgressCircle) from `ui-progress` instead.
-- [Rating](#Rating)
+- [Rating](#DeprecatedRating) will be removed in version 7.0.0. Use the [Rating](#Rating) in [ui-rating](#ui-rating).
 - [Spinner](#Spinner)
 - [Table](#DeprecatedTable) has been deprecated within this package. Use [Table](#Table) from [ui-table](#ui-table).
 - [Tag](#Tag)

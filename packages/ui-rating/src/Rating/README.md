@@ -1,23 +1,13 @@
 ---
-describes: DeprecatedRating
-id: DeprecatedRating
+describes: Rating
 ---
 
-**DEPRECATED:** Rating will be removed from ui-elements in version 7.0.0. Use [Rating](#Rating) from [ui-rating](#ui-rating) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package.
-
-___
-
-
-DeprecatedRating takes the `valueNow` and `valueMax` props and
+Rating takes the `valueNow` and `valueMax` props and
 outputs a 3- or 5-star rating. Decimals are rounded to the nearest
 whole number.
-
 ### 3- or 5-star ratings
 
-DeprecatedRating defaults to a 3-star rating system. Use `iconCount` to switch
+Rating defaults to a 3-star rating system. Use `iconCount` to switch
 to a 5-star system. Note how you can use the `formatValueText` prop to
 create readable text for screenreaders that will be outputted in the
 `aria-valuetext` attribute.
@@ -30,7 +20,7 @@ this feature using the `animateFill` prop.
 example: true
 ---
 <div>
-  <DeprecatedRating
+  <Rating
     formatValueText={function (currentRating, maxRating) {
       return currentRating + ' out of ' + maxRating
     }}
@@ -39,7 +29,7 @@ example: true
     valueMax={100}
   />
   <br />
-  <DeprecatedRating
+  <Rating
     animateFill
     formatValueText={function (currentRating, maxRating) {
       return currentRating + ' out of ' + maxRating
@@ -62,7 +52,7 @@ space around the actual rating.
 example: true
 ---
 <div>
-  <DeprecatedRating
+  <Rating
     label="Product rating"
     size="small"
     iconCount={5}
@@ -70,14 +60,14 @@ example: true
     valueMax={5}
     margin="x-small medium xx-small none"
   />
-  <DeprecatedRating
+  <Rating
     label="Overall rating of college experience"
     iconCount={5}
     valueNow={30}
     valueMax={100}
     margin="x-small xx-large"
   />
-  <DeprecatedRating
+  <Rating
     animateFill
     label="Rating of professor"
     size="large"

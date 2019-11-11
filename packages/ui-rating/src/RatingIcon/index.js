@@ -36,11 +36,9 @@ import theme from './theme'
 
 /**
 ---
-parent: DeprecatedRating
-id: DeprecatedRatingIcon
+parent: Rating
 ---
 **/
-
 @themeable(theme, styles)
 class RatingIcon extends Component {
   static propTypes = {

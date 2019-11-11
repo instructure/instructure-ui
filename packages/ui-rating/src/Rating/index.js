@@ -28,22 +28,20 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
-import { RatingIcon } from './RatingIcon'
+import { RatingIcon } from '../RatingIcon'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedRating
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-rating instead')
 @testable()
 @themeable(theme, styles)
 class Rating extends Component {

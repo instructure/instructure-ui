@@ -57,7 +57,7 @@ export {
   Pill as DeprecatedPill,
   Link as DeprecatedLink,
   Progress as DeprecatedProgress,
-  Rating,
+  Rating as DeprecatedRating,
   Spinner,
   Table as DeprecatedTable,
   Tag,
@@ -127,6 +127,7 @@ export { Options } from '@instructure/ui-options'
 export { Pagination } from '@instructure/ui-pagination'
 export { Pages } from '@instructure/ui-pages'
 export { Portal } from '@instructure/ui-portal'
+export { Rating } from '@instructure/ui-rating'
 export { Select } from '@instructure/ui-select'
 export { Selectable } from '@instructure/ui-selectable'
 export { ApplyTheme } from '@instructure/ui-themeable'
