@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { omitProps } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
@@ -38,8 +37,8 @@ import theme from './theme'
 
 /**
 ---
-parent: DeprecatedModal
-id: DeprecatedModal.Body
+parent: Modal
+id: Modal.Body
 ---
 **/
 @testable()
@@ -70,13 +69,11 @@ class ModalBody extends Component {
       overflow,
       variant,
       padding,
-      children
+      children,
+      ...rest
     } = this.props
 
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, ModalBody.propTypes),
-      ModalBody
-    )
+    const passthroughProps = View.omitViewProps(rest, ModalBody)
 
     const classes = classnames ({
       [styles.root]: true,

@@ -1,15 +1,12 @@
 ---
-describes: DeprecatedModal
-id: DeprecatedModal_README
+describes: Modal
 ---
-
-**DEPRECATED:** Modal will be removed from `ui-overlays` in version 7.0.0. Use the [Modal from ui-modal](#Modal) instead.
 
 The Modal is a dialog component that is centered in the viewport. The Modal
 overlays the application content and applies a mask to it.
 
 The default `padding` of the Modal content is `medium` but can be overridden
-by using the `padding` prop on the `<DeprecatedModal.Body/>` if the use case requires it.
+by using the `padding` prop on the `<Modal.Body/>` if the use case requires it.
 
 ```js
 ---
@@ -58,7 +55,7 @@ class Example extends React.Component {
         <Button onClick={this.handleButtonClick}>
           {this.state.open ? 'Close' : 'Open'} the Modal
         </Button>
-        <DeprecatedModal
+        <Modal
           as="form"
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
@@ -67,19 +64,19 @@ class Example extends React.Component {
           label="Modal Dialog: Hello World"
           shouldCloseOnDocumentClick
         >
-          <DeprecatedModal.Header>
+          <Modal.Header>
             {this.renderCloseButton()}
             <Heading>Hello World</Heading>
-          </DeprecatedModal.Header>
-          <DeprecatedModal.Body>
+          </Modal.Header>
+          <Modal.Body>
             <TextInput renderLabel="Example" placeholder="if you hit enter here, it should submit the form" />
             <Text lineHeight="double">{fpo}</Text>
-          </DeprecatedModal.Body>
-          <DeprecatedModal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
             <Button variant="primary" type="submit">Submit</Button>
-          </DeprecatedModal.Footer>
-        </DeprecatedModal>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
@@ -135,7 +132,7 @@ class Example extends React.Component {
         <Button onClick={this.handleButtonClick}>
           {this.state.open ? 'Close' : 'Open'} the Modal
         </Button>
-        <DeprecatedModal
+        <Modal
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
           size="fullscreen"
@@ -144,19 +141,19 @@ class Example extends React.Component {
           mountNode={() => document.getElementById('constrainExample')}
           constrain="parent"
         >
-          <DeprecatedModal.Header>
+          <Modal.Header>
             {this.renderCloseButton()}
             <Heading>This Modal is constrained to a parent</Heading>
-          </DeprecatedModal.Header>
-          <DeprecatedModal.Body>
+          </Modal.Header>
+          <Modal.Body>
             <View as="p" margin="none none small"><Text>{fpo}</Text></View>
             <ModalAutoCompleteExample renderLabel="Choose a state" />
-          </DeprecatedModal.Body>
-          <DeprecatedModal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
             <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
-          </DeprecatedModal.Footer>
-        </DeprecatedModal>
+          </Modal.Footer>
+        </Modal>
         <View
           background="primary-inverse"
           margin="medium auto none"
@@ -237,7 +234,7 @@ class Example extends React.Component {
         <Button onClick={this.handleButtonClick}>
           {this.state.open ? 'Close' : 'Open'} the Modal
         </Button>
-        <DeprecatedModal
+        <Modal
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
           size="auto"
@@ -245,10 +242,10 @@ class Example extends React.Component {
           shouldCloseOnDocumentClick
           variant="inverse"
         >
-          <DeprecatedModal.Header>
+          <Modal.Header>
             <Flex>
               <Flex.Item shouldGrow shouldShrink>
-                <Heading level="h2" ellipsis>A small image</Heading>
+                <Heading level="h2"><TruncateText>A small image</TruncateText></Heading>
               </Flex.Item>
               <Flex.Item>
                 <Button
@@ -260,18 +257,18 @@ class Example extends React.Component {
                 </Button>
               </Flex.Item>
             </Flex>
-          </DeprecatedModal.Header>
-          <DeprecatedModal.Body padding="none">
+          </Modal.Header>
+          <Modal.Body padding="none">
             <Img
               src={placeholderImage(500, 250)}
-              inline={false}
+              display="block"
               margin="0 auto"
             />
-          </DeprecatedModal.Body>
-          <DeprecatedModal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
-          </DeprecatedModal.Footer>
-        </DeprecatedModal>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
@@ -349,7 +346,7 @@ class Example extends React.Component {
         <Button onClick={this.handleButtonClick} margin="medium 0 0">
           {this.state.open ? 'Close' : 'Open'} the Modal
         </Button>
-        <DeprecatedModal
+        <Modal
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
           size={this.state.modalSize}
@@ -358,7 +355,7 @@ class Example extends React.Component {
           variant="inverse"
           overflow="fit"
         >
-          <DeprecatedModal.Header>
+          <Modal.Header>
             <Flex>
               <Flex.Item shouldGrow shouldShrink>
                 <Flex alignItems="center">
@@ -366,7 +363,7 @@ class Example extends React.Component {
                     <SVGIcon src={iconExample} size="small" title="Icon Example" />
                   </Flex.Item>
                   <Flex.Item shouldGrow shouldShrink>
-                    <Heading level="h2" ellipsis>This Modal Contains Media</Heading>
+                    <Heading level="h2"><TruncateText>This Modal Contains Media</TruncateText></Heading>
                   </Flex.Item>
                 </Flex>
               </Flex.Item>
@@ -384,18 +381,18 @@ class Example extends React.Component {
                 </Button>
               </Flex.Item>
             </Flex>
-          </DeprecatedModal.Header>
-          <DeprecatedModal.Body padding="none">
+          </Modal.Header>
+          <Modal.Body padding="none">
             <Img
               src={avatarSquare}
               constrain={this.state.imageFit}
-              inline={false}
+              display="block"
             />
-          </DeprecatedModal.Body>
-          <DeprecatedModal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
-          </DeprecatedModal.Footer>
-        </DeprecatedModal>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }

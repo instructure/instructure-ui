@@ -28,14 +28,14 @@ import classnames from 'classnames'
 
 import { Dialog } from '@instructure/ui-dialog'
 import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps, safeCloneElement, matchComponentTypes, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps, safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
 import { createChainedFunction, isIE11 } from '@instructure/ui-utils'
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
-import { Mask } from '../Mask'
+import { Mask } from '@instructure/ui-overlays'
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
 import { ModalFooter } from './ModalFooter'
@@ -45,11 +45,9 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedModal
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-modal instead')
 @testable()
 @themeable(theme, styles)
 class Modal extends Component {
@@ -260,7 +258,7 @@ class Modal extends Component {
     }
   }
 
-  renderChildren() {
+  renderChildren () {
     const {
       children,
       variant,
@@ -283,7 +281,7 @@ class Modal extends Component {
     })
   }
 
-  renderModal () {
+  renderDialog (props) {
     const {
       onDismiss,
       label,
@@ -291,16 +289,13 @@ class Modal extends Component {
       shouldReturnFocus,
       liveRegion,
       size,
-      variant,
-      contentRef,
-      constrain,
-      ...props
+      constrain
     } = this.props
 
     const dialog = (
       <Dialog
-        {...omitProps(props, Modal.propTypes)}
-        onDismiss={onDismiss}
+        {...passthroughProps(props)}
+        open
         label={label}
         defaultFocusElement={this.defaultFocusElement}
         shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
@@ -308,7 +303,7 @@ class Modal extends Component {
         shouldContainFocus
         shouldReturnFocus={shouldReturnFocus}
         liveRegion={liveRegion}
-        open
+        onDismiss={onDismiss}
         className={classnames({
           [styles.root]: true,
           [styles[size]]: true,
@@ -359,7 +354,9 @@ class Modal extends Component {
       onExit,
       onExiting,
       onExited,
-      constrain
+      constrain,
+      overflow,
+      ...passthroughProps
     } = this.props
 
     const portalIsOpen = open || this.state.transitioning
@@ -389,9 +386,9 @@ class Modal extends Component {
             {
               (constrain === 'parent') ?
                 <span className={styles.constrainContext}>
-                  {this.renderModal()}
+                  {this.renderDialog(passthroughProps)}
                 </span>
-                : this.renderModal()
+                : this.renderDialog(passthroughProps)
             }
           </Transition>
         )}

@@ -54,6 +54,7 @@
     "@instructure/ui-img": "^6.14.0",
     "@instructure/ui-layout": "^6.14.0",
     "@instructure/ui-menu": "^6.14.0",
+    "@instructure/ui-modal": "^6.14.0",
     "@instructure/ui-motion": "^6.14.0",
     "@instructure/ui-navigation": "^6.14.0",
     "@instructure/ui-number-input": "^6.14.0",

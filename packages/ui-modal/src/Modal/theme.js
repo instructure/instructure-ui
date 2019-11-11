@@ -22,50 +22,24 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+export default function ({ colors, borders, breakpoints, shadows, stacking, typography }) {
+  return {
+    fontFamily: typography.fontFamily,
+    textColor: colors.textDarkest,
+    background: colors.backgroundLightest,
+    borderColor: colors.borderMedium,
+    borderRadius: borders.radiusMedium,
 
-import { omitProps } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
-import { testable } from '@instructure/ui-testable'
+    inverseBackground: colors.backgroundBrandSecondary,
+    inverseTextColor: colors.textLightest,
 
-import styles from './styles.css'
-import theme from './theme'
+    autoMinWidth: breakpoints.xSmall,
+    smallMaxWidth: breakpoints.small,
+    mediumMaxWidth: breakpoints.medium,
+    largeMaxWidth: breakpoints.large,
 
-/**
----
-parent: DeprecatedModal
-id: DeprecatedModal.Footer
----
-**/
-@testable()
-@themeable(theme, styles)
-class ModalFooter extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse']),
-  }
+    boxShadow: shadows.depth3,
 
-  static defaultProps = {
-    variant: 'default',
-    children: null
-  }
-
-  render () {
-    const classes = {
-      [styles.root]: true,
-      [styles.inverse]: this.props.variant === 'inverse'
-    }
-
-    return (
-      <div className={classnames(classes)}
-        {...omitProps(this.props, ModalFooter.propTypes)}>
-        {this.props.children}
-      </div>
-    )
+    zIndex: stacking.topmost
   }
 }
-
-export default ModalFooter
-export { ModalFooter }

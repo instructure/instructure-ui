@@ -36,8 +36,8 @@ import theme from './theme'
 
 /**
 ---
-parent: Modal
-id: Modal.Header
+parent: DeprecatedModal
+id: DeprecatedModal.Header
 ---
 **/
 @testable()

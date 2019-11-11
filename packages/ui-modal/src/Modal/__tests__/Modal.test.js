@@ -318,6 +318,25 @@ describe('<Modal />', async () => {
       ).to.not.be.rejected()
     })
 
+    it('should not pass validation when children are invalid', async () => {
+      const consoleError = stub(console, 'error')
+      await mount(
+        <Modal
+          open
+          label="Modal Dialog"
+          shouldReturnFocus={false}
+        >
+          <Modal.Body>Foo Bar Baz</Modal.Body>
+          <Modal.Footer>
+            <button>Cancel</button>
+          </Modal.Footer>
+          <Modal.Header>Hello World</Modal.Header>
+        </Modal>
+      )
+      expect(consoleError)
+        .to.have.been.calledWithMatch('Expected children of Modal in one of the following formats:')
+    })
+
     it('should pass inverse variant to children when set', async () => {
       let headerRef
       let bodyRef

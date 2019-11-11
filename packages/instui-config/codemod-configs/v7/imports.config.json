@@ -80,6 +80,10 @@
     "replace": "@instructure/ui-tooltip/lib/Tooltip"
   },
   {
+    "pattern": "^@instructure/ui-overlays/lib/Modal",
+    "replace": "@instructure/ui-modal/lib/Modal"
+  },
+  {
     "pattern": "^@instructure/ui-a11y/lib/AccessibleContent",
     "replace": "@instructure/ui-a11y-content/lib/AccessibleContent"
   },

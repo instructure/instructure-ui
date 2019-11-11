@@ -22,50 +22,22 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import { locator } from '@instructure/ui-test-utils'
 
-import { omitProps } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
-import { testable } from '@instructure/ui-testable'
+import { Modal } from './index'
 
-import styles from './styles.css'
-import theme from './theme'
+const ModalHeaderLocator = locator(Modal.Header.selector)
+const ModalBodyLocator = locator(Modal.Body.selector)
+const ModalFooterLocator = locator(Modal.Footer.selector)
 
-/**
----
-parent: DeprecatedModal
-id: DeprecatedModal.Footer
----
-**/
-@testable()
-@themeable(theme, styles)
-class ModalFooter extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse']),
+export default locator(Modal.selector, {
+  findHeader: (...args) => {
+    return ModalHeaderLocator.find(...args)
+  },
+  findBody: (...args) => {
+    return ModalBodyLocator.find(...args)
+  },
+  findFooter: (...args)  => {
+    return ModalFooterLocator.find(...args)
   }
-
-  static defaultProps = {
-    variant: 'default',
-    children: null
-  }
-
-  render () {
-    const classes = {
-      [styles.root]: true,
-      [styles.inverse]: this.props.variant === 'inverse'
-    }
-
-    return (
-      <div className={classnames(classes)}
-        {...omitProps(this.props, ModalFooter.propTypes)}>
-        {this.props.children}
-      </div>
-    )
-  }
-}
-
-export default ModalFooter
-export { ModalFooter }
+})

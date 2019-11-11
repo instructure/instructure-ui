@@ -34,11 +34,14 @@ const MyMask = () => {
 ### Components
 The `ui-overlays` package contains the following:
 - [Mask](#Mask)
-- [Modal](#Modal)
 - [Overlay](#Overlay)
-- Popover will be removed in version 7.0.0. Use the [Popover from ui-popover](#Popover) instead.
-- Tooltip will be removed in version 7.0.0. Use the [Tooltip from ui-tooltip](#Tooltip) instead.
 - [Tray](#Tray)
+
+### Deprecated components
+The following components have been deprecated and will be removed from the `ui-overlays` package:
+- [Popover](#DeprecatedPopover) \(use [Popover from ui-popover](#Popover) instead)
+- [Tooltip](#DeprecatedTooltip) \(use [Tooltip from ui-tooltip](#Tooltip) instead)
+- [Modal](#DeprecatedModal) \(use [Modal from ui-modal](#Modal) instead)
 
 ### Contribute
 See the [contributing guidelines](#contributing) for details.

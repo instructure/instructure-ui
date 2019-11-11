@@ -22,50 +22,31 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 
-import { omitProps } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
-import { testable } from '@instructure/ui-testable'
+import { ModalFooter } from '../index'
 
-import styles from './styles.css'
-import theme from './theme'
+import styles from '../styles.css'
 
-/**
----
-parent: DeprecatedModal
-id: DeprecatedModal.Footer
----
-**/
-@testable()
-@themeable(theme, styles)
-class ModalFooter extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse']),
-  }
-
-  static defaultProps = {
-    variant: 'default',
-    children: null
-  }
-
-  render () {
-    const classes = {
-      [styles.root]: true,
-      [styles.inverse]: this.props.variant === 'inverse'
-    }
-
-    return (
-      <div className={classnames(classes)}
-        {...omitProps(this.props, ModalFooter.propTypes)}>
-        {this.props.children}
-      </div>
+describe('<ModalFooter />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
+      <ModalFooter />
     )
-  }
-}
 
-export default ModalFooter
-export { ModalFooter }
+    const footer = within(subject.getDOMNode())
+    expect(footer).to.exist()
+  })
+
+  it('should set inverse styles', async () => {
+    const subject = await mount(
+      <ModalFooter
+        variant="inverse" />
+    )
+
+    const footer = within(subject.getDOMNode())
+    expect(footer.hasClass(styles['inverse'])).to.be.true()
+  })
+
+})

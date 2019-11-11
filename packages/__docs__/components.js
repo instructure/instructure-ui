@@ -107,13 +107,14 @@ export {
   View as DeprecatedView
 } from '@instructure/ui-layout'
 export { MetricGroup, Metric, MetricsList } from '@instructure/ui-metric'
+export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
 export {
   Mask,
   Overlay,
   Tooltip as DeprecatedTooltip,
   Tray,
-  Modal,
+  Modal as DeprecatedModal,
   Popover as DeprecatedPopover
 } from '@instructure/ui-overlays'
 export { Position } from '@instructure/ui-position'

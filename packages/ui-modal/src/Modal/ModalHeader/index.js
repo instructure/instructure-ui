@@ -26,87 +26,57 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { View } from '@instructure/ui-view'
-import { omitProps } from '@instructure/ui-react-utils'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { matchComponentTypes, passthroughProps } from '@instructure/ui-react-utils'
+import { CloseButton } from '@instructure/ui-buttons'
+import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { error } from '@instructure/console/macro'
-import { isIE11 } from '@instructure/ui-utils'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-parent: DeprecatedModal
-id: DeprecatedModal.Body
+parent: Modal
+id: Modal.Header
 ---
 **/
 @testable()
 @themeable(theme, styles)
-class ModalBody extends Component {
+class ModalHeader extends Component {
   static propTypes = {
     children: PropTypes.node,
-    padding: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    as: PropTypes.elementType,
     variant: PropTypes.oneOf(['default', 'inverse']),
-    overflow: PropTypes.oneOf(['scroll', 'fit'])
   }
 
   static defaultProps = {
-    padding: 'medium',
-    as: 'div',
-    variant: 'default',
     children: null,
-    elementRef: undefined,
-    overflow: undefined
+    variant: 'default'
   }
 
   render () {
-    const {
-      as,
-      elementRef,
-      overflow,
-      variant,
-      padding,
-      children
-    } = this.props
+    const { children, variant, ...rest } = this.props
+    let usesCloseButton = false
 
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, ModalBody.propTypes),
-      ModalBody
-    )
-
-    const classes = classnames ({
-      [styles.root]: true,
-      [styles.inverse]: variant === 'inverse'
+    React.Children.forEach(children, (child) => {
+      if (child && matchComponentTypes(child, [CloseButton])) {
+        usesCloseButton = true
+      }
     })
 
-    const isFit = overflow === 'fit'
-
-    error(
-      !isIE11 || !isFit,
-      `[Modal] overflow="fit" is only supported with fullscreen modals in Internet Explorer`
-    )
+    const classes = {
+      [styles.root]: true,
+      [styles.inverse]: variant === 'inverse',
+      [styles.withCloseButton]: usesCloseButton === true
+    }
 
     return (
-      <View
-        {...passthroughProps}
-        display="block"
-        width={isFit ? '100%' : null}
-        height={isFit ? '100%' : null}
-        elementRef={elementRef}
-        as={as}
-        className={classes}
-        padding={padding}
-        tabIndex="-1" // prevent FF from focusing view when scrollable
-      >
+      <div className={classnames(classes)}
+        {...passthroughProps(rest)}>
         {children}
-      </View>
+      </div>
     )
   }
 }
 
-export default ModalBody
-export { ModalBody }
+export default ModalHeader
+export { ModalHeader }

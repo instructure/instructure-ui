@@ -21,43 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
 
-import { Popover } from '../'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-export default {
-  maxExamplesPerPage: 50,
-  propValues: {
-    withArrow: [true, false],
-    placement: ['bottom center'],
-    dir: [
-      'rtl',
-      'ltr'
-    ]
-  },
-  getComponentProps: (props) => {
-    return {
-      defaultShow: true,
-      placement: 'bottom center',
-      children: [
-        <Popover.Trigger key="trigger">
-          <button>Show Popup</button>
-        </Popover.Trigger>,
-        <Popover.Content key="content">
-          <h2>Hello World</h2>
-        </Popover.Content>
-      ]
+import { passthroughProps } from '@instructure/ui-react-utils'
+import { themeable } from '@instructure/ui-themeable'
+import { testable } from '@instructure/ui-testable'
+
+import styles from './styles.css'
+import theme from './theme'
+
+/**
+---
+parent: Modal
+id: Modal.Footer
+---
+**/
+@testable()
+@themeable(theme, styles)
+class ModalFooter extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    variant: PropTypes.oneOf(['default', 'inverse']),
+  }
+
+  static defaultProps = {
+    variant: 'default',
+    children: null
+  }
+
+  render () {
+    const { children, variant, ...rest } = this.props
+    const classes = {
+      [styles.root]: true,
+      [styles.inverse]: variant === 'inverse'
     }
-  },
-  getExampleProps: (props) => {
-    return {
-      dir: props.dir,
-      as: 'div',
-      width: '100%',
-      height: '10rem',
-      margin: 'small',
-      padding: 'small',
-      textAlign: 'center'
-    }
+
+    return (
+      <div className={classnames(classes)}
+        {...passthroughProps(rest)}>
+        {children}
+      </div>
+    )
   }
 }
+
+export default ModalFooter
+export { ModalFooter }

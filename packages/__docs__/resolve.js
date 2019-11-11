@@ -53,6 +53,7 @@ module.exports = {
     '@instructure/ui-list$': path.resolve(__dirname, '../ui-list/src/'),
     '@instructure/ui-menu$': path.resolve(__dirname, '../ui-menu/src/'),
     '@instructure/ui-metric$': path.resolve(__dirname, '../ui-metric/src/'),
+    '@instructure/ui-modal$': path.resolve(__dirname, '../ui-modal/src/'),
     '@instructure/ui-motion$': path.resolve(__dirname, '../ui-motion/src/'),
     '@instructure/ui-navigation$': path.resolve(__dirname, '../ui-navigation/src/'),
     '@instructure/ui-number-input$': path.resolve(__dirname, '../ui-number-input/src/'),

@@ -1,0 +1,13 @@
+.root {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  overflow-y: auto;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.inverse {
+  background: var(--inverseBackground);
+}
