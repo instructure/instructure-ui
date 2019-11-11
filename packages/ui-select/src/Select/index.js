@@ -206,7 +206,7 @@ class Select extends Component {
     constrain: 'window',
     onFocus: (event) => {},
     onBlur: (event) => {},
-    onInputChange: (event) => {},
+    onInputChange: undefined,
     onRequestShowOptions: (event) => {},
     onRequestHideOptions: (event) => {},
     onRequestHighlightOption: (event, data) => {},
@@ -596,7 +596,9 @@ class Select extends Component {
           value: inputValue,
           inputRef: createChainedFunction(ref, this.handleInputRef),
           inputContainerRef: this.handleInputContainerRef,
-          interaction,
+          interaction: interaction === 'enabled' && !onInputChange
+            ? 'readonly' // prevent keyboard cursor
+            : interaction,
           isRequired,
           display: isInline ? 'inline-block' : 'block',
           renderBeforeInput,

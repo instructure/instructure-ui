@@ -159,9 +159,35 @@ describe('<Select />', async () => {
       expect(input.getAttribute('id')).to.equal('customSelect')
     })
 
+    it('should render readonly when interaction="enabled" with no onInputChange', async () => {
+      await mount(
+        <Select renderLabel="Choose an option" />
+      )
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+
+      expect(input.getAttribute('readonly')).to.exist()
+      expect(input.getAttribute('disabled')).to.not.exist()
+    })
+
+    it('should not render readonly when interaction="enabled" with onInputChange', async () => {
+      await mount(
+        <Select renderLabel="Choose an option" onInputChange={() => {}} />
+      )
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+
+      expect(input.getAttribute('readonly')).to.not.exist()
+      expect(input.getAttribute('disabled')).to.not.exist()
+    })
+
     it('should render readonly when interaction="readonly"', async () => {
       await mount(
-        <Select renderLabel="Choose an option" interaction="readonly" />
+        <Select
+          renderLabel="Choose an option"
+          interaction="readonly"
+          onInputChange={() => {}}
+        />
       )
       const select = await SelectLocator.find()
       const input = await select.findInput()
@@ -172,7 +198,25 @@ describe('<Select />', async () => {
 
     it('should render disabled when interaction="disabled"', async () => {
       await mount(
-        <Select renderLabel="Choose an option" interaction="disabled" />
+        <Select
+          renderLabel="Choose an option"
+          interaction="disabled"
+          onInputChange={() => {}}
+        />
+      )
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+
+      expect(input.getAttribute('disabled')).to.exist()
+      expect(input.getAttribute('readonly')).to.not.exist()
+    })
+
+    it('should not render readonly when disabled', async () => {
+      await mount(
+        <Select
+          renderLabel="Choose an option"
+          interaction="disabled"
+        />
       )
       const select = await SelectLocator.find()
       const input = await select.findInput()
