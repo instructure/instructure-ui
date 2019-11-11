@@ -72,6 +72,7 @@ module.exports = {
     '@instructure/ui-svg-images$': path.resolve(__dirname, '../ui-svg-images/src/'),
     '@instructure/ui-table$': path.resolve(__dirname, '../ui-table/src/'),
     '@instructure/ui-tabs$': path.resolve(__dirname, '../ui-tabs/src/'),
+    '@instructure/ui-tag$': path.resolve(__dirname, '../ui-tag/src/'),
     '@instructure/ui-text$': path.resolve(__dirname, '../ui-text/src/'),
     '@instructure/ui-toggle-details$': path.resolve(__dirname, '../ui-toggle-details/src/'),
     '@instructure/ui-tooltip$': path.resolve(__dirname, '../ui-tooltip/src/'),

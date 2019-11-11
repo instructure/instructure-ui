@@ -28,7 +28,7 @@ import classNames from 'classnames'
 import { IconXSolid } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { deprecated, omitProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -37,12 +37,10 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedTag
+category: components
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use Tag from ui-tag instead.')
 @testable()
 @themeable(theme, styles)
 class Tag extends Component {
@@ -128,7 +126,7 @@ class Tag extends Component {
     } = this.props
 
     const classes = {
-      [styles.root]: true,
+      [styles.tagRoot]: true,
       [styles[variant]]: true,
       [styles[size]]: size,
       [styles.dismissible]: dismissible,

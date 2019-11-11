@@ -32,7 +32,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement, containsActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { Tag } from '@instructure/ui-elements'
+import { Tag } from '@instructure/ui-tag'
 import { SelectField } from '../SelectField'
 import getOptionId from '../utils/getOptionId'
 

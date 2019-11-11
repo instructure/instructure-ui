@@ -1,21 +1,14 @@
 ---
-describes: DeprecatedTag
-id: DeprecatedTag__README
+describes: Tag
 ---
 
-### This component is deprecated
-Tag will be removed from `ui-elements` in version 7.0.0. Use [Tag from ui-tag](#Tag) instead.
-
-### Important upgrade notes
-Codemods are available to automatically update imports to the new package.
-
-Use `<DeprecatedTag />` to represent a category or group in a form.
+Use `<Tag />` to represent a category or group in a form.
 
 ```js
 ---
 example: true
 ---
-<DeprecatedTag text="Static" margin="0 xx-small 0 0" />
+<Tag text="Static" margin="0 xx-small 0 0" />
 ```
 
 ### Dismissible
@@ -28,7 +21,7 @@ prop).
 ---
 example: true
 ---
-<DeprecatedTag
+<Tag
   text={
     <AccessibleContent alt="Remove dismissible tag">
       Dismissible tag
@@ -50,7 +43,7 @@ A `disabled` Tag.
 ---
 example: true
 ---
-<DeprecatedTag
+<Tag
   text="Dismissible Disabled"
   dismissible
   disabled
@@ -70,9 +63,9 @@ example: true
 example: true
 ---
 <div>
-  <DeprecatedTag text="Small" size="small" margin="0 xx-small 0 0" />
-  <DeprecatedTag text="Medium" margin="0 xx-small 0 0" />
-  <DeprecatedTag text="Large" size="large" margin="0 xx-small 0 0" />
+  <Tag text="Small" size="small" margin="0 xx-small 0 0" />
+  <Tag text="Medium" margin="0 xx-small 0 0" />
+  <Tag text="Large" size="large" margin="0 xx-small 0 0" />
 </div>
 ```
 
@@ -82,7 +75,7 @@ example: true
 ---
 example: true
 ---
-<DeprecatedTag
+<Tag
   text="Long string of text designed to trigger overflow"
 />
 ```
@@ -97,7 +90,7 @@ example: true
 ---
 <p>
   This is an
-  <DeprecatedTag
+  <Tag
     dismissible
     onClick={() => alert('Tag dismissed')}
     size="large"

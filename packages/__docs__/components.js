@@ -60,7 +60,7 @@ export {
   Rating as DeprecatedRating,
   Spinner,
   Table as DeprecatedTable,
-  Tag,
+  Tag as DeprecatedTag,
   Text as DeprecatedText,
   TruncateText,
   List as DeprecatedList,
@@ -143,5 +143,6 @@ export { Heading } from '@instructure/ui-heading'
 export { Progress } from '@instructure/ui-progress'
 export { ProgressBar } from '@instructure/ui-progress'
 export { ProgressCircle } from '@instructure/ui-progress'
+export { Tag } from '@instructure/ui-tag'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

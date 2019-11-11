@@ -43,7 +43,7 @@ The `ui-elements` package contains the following:
 - [Rating](#DeprecatedRating) will be removed in version 7.0.0. Use the [Rating](#Rating) in [ui-rating](#ui-rating).
 - [Spinner](#Spinner)
 - [Table](#DeprecatedTable) has been deprecated within this package. Use [Table](#Table) from [ui-table](#ui-table).
-- [Tag](#Tag)
+- [Tag](#DeprecatedTag) will be removed in version 7.0.0. Use [Tag](#Tag) from [ui-tag](#ui-tag).
 - [Text](#DeprecatedText) will be removed in version 7.0.0. Use [Text](#Text) from [ui-text](#ui-text).
 - [TruncateText](#TruncateText)
 

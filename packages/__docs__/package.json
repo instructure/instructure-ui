@@ -68,6 +68,7 @@
     "@instructure/ui-selectable": "^6.14.0",
     "@instructure/ui-svg-images": "^6.14.0",
     "@instructure/ui-table": "^6.14.0",
+    "@instructure/ui-tag": "^6.14.0",
     "@instructure/ui-tabs": "^6.14.0",
     "@instructure/ui-text": "^6.14.0",
     "@instructure/ui-text-input": "^6.14.0",
