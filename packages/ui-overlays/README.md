@@ -35,7 +35,9 @@ const MyMask = () => {
 The `ui-overlays` package contains the following:
 - [Mask](#Mask)
 - [Overlay](#Overlay)
-- [Tray](#Tray)
+- Popover will be removed in version 7.0.0. Use the [Popover from ui-popover](#Popover) instead.
+- Tooltip will be removed in version 7.0.0. Use the [Tooltip from ui-tooltip](#Tooltip) instead.
+- Tray will be removed in version 7.0.0. Use the [Tray from ui-tray](#Tray) instead.
 
 ### Deprecated components
 The following components have been deprecated and will be removed from the `ui-overlays` package:

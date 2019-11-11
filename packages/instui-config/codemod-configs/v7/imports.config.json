@@ -158,5 +158,9 @@
   {
     "pattern": "^@instructure/ui-layout/lib/Grid",
     "replace": "@instructure/ui-grid/lib/Grid"
-  }
+  },
+  {
+    "pattern": "^@instructure/ui-overlays/lib/Tray",
+    "replace": "@instructure/ui-tray/lib/Tray"
+  },
 ]

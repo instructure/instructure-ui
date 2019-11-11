@@ -1,13 +1,6 @@
 ---
-describes: DeprecatedTray
-id: DeprecatedTray__README
+describes: Tray
 ---
-
-### This component is deprecated
-Tray will be removed from `ui-overlays` in version 7.0.0. Use [Tray from ui-tray](#Tray) instead.
-
-### Important upgrade notes
-Codemods are available to automatically update imports to the new package.
 
 The Tray is an actionable container that is triggered by click and does not need to be connected to the element that triggered it. The Tray is on the same hierarchy as the Popover but contains more content. The Tray slides out from the top/bottom/start/end of the viewport.
 
@@ -61,7 +54,7 @@ class Example extends React.Component {
         >
           Show the Tray
         </Button>
-        <DeprecatedTray
+        <Tray
           label="Tray Example"
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
@@ -72,7 +65,7 @@ class Example extends React.Component {
             {this.renderCloseButton()}
             <Text as="p" lineHeight="double">{FPO}</Text>
           </View>
-        </DeprecatedTray>
+        </Tray>
       </div>
     )
   }

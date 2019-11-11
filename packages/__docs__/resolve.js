@@ -78,6 +78,7 @@ module.exports = {
     '@instructure/ui-text$': path.resolve(__dirname, '../ui-text/src/'),
     '@instructure/ui-toggle-details$': path.resolve(__dirname, '../ui-toggle-details/src/'),
     '@instructure/ui-tooltip$': path.resolve(__dirname, '../ui-tooltip/src/'),
+    '@instructure/ui-tray$': path.resolve(__dirname, '../ui-tray/src/'),
     '@instructure/ui-tree-browser$': path.resolve(__dirname, '../ui-tree-browser/src/'),
     '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
     '@instructure/ui-view$': path.resolve(__dirname, '../ui-view/src'),

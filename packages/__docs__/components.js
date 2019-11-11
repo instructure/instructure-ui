@@ -105,8 +105,8 @@ export {
   Mask,
   Overlay,
   Tooltip as DeprecatedTooltip,
-  Tray,
   Modal as DeprecatedModal,
+  Tray as DeprecatedTray,
   Popover as DeprecatedPopover
 } from '@instructure/ui-overlays'
 export { Position } from '@instructure/ui-position'
@@ -139,5 +139,6 @@ export { ProgressBar } from '@instructure/ui-progress'
 export { ProgressCircle } from '@instructure/ui-progress'
 export { Tag } from '@instructure/ui-tag'
 export { View, ContextView } from '@instructure/ui-view'
+export { Tray } from '@instructure/ui-tray'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

@@ -27,14 +27,14 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { Dialog } from '@instructure/ui-dialog'
-import { deprecated, omitProps } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
-import { mirrorHorizontalPlacement } from '@instructure/ui-layout'
+import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { Transition } from '@instructure/ui-motion'
 
 import styles from './styles.css'
@@ -42,11 +42,9 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedTray
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use Tray from ui-tray instead.')
 @testable()
 @bidirectional()
 @themeable(theme, styles)
