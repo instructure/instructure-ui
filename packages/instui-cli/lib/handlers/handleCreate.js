@@ -36,6 +36,7 @@ module.exports = async ({ contentType, path: sourcePath, name, initialVersion })
 
   const dependencies = formatDependencies({ dependencies: pkg.dependencies })
   const devDependencies = formatDependencies({ dependencies: pkg.devDependencies })
+  const peerDependencies = formatDependencies({ dependencies: pkg.peerDependencies })
 
   const templateDirname = 'template'
 
@@ -75,12 +76,15 @@ module.exports = async ({ contentType, path: sourcePath, name, initialVersion })
         'PACKAGE': packageName,
         'VERSION': version,
         'DEPENDENCIES': dependencies,
-        'DEV_DEPENDENCIES': devDependencies
+        'DEV_DEPENDENCIES': devDependencies,
+        'PEER_DEPENDENCIES': peerDependencies
       })
     })
   }
 }
 
 const formatDependencies = ({ dependencies }) => {
+  if (!dependencies) return ''
+
   return Object.keys(dependencies).map((dependency) => `    "${dependency}": "${dependencies[dependency]}"`).join(',\n')
 }
