@@ -1,5 +1,5 @@
 ---
-describes: TabList
+describes: DeprecatedTabList
 ---
 
 **DEPRECATED:** use the [Tabs](#Tabs) component from [@instructure/ui-tabs](#ui-tabs) instead.
@@ -13,27 +13,27 @@ arrow keys to navigate between panels of content. The default variant is `simple
 ---
 example: true
 ---
-<TabList>
-  <TabList.Panel title="First Tab">
+<DeprecatedTabList>
+  <DeprecatedTabList.Panel title="First Tab">
     <Button>Focus Me</Button>
-  </TabList.Panel>
-  <TabList.Panel title="Disabled Tab" disabled>
+  </DeprecatedTabList.Panel>
+  <DeprecatedTabList.Panel title="Disabled Tab" disabled>
     <Text>{lorem.paragraphs()}</Text>
-  </TabList.Panel>
-  <TabList.Panel title="Third Tab">
+  </DeprecatedTabList.Panel>
+  <DeprecatedTabList.Panel title="Third Tab">
     <Text>{lorem.paragraphs()}</Text>
-  </TabList.Panel>
-  <TabList.Panel title="Fourth Tab" maxHeight="10rem">
+  </DeprecatedTabList.Panel>
+  <DeprecatedTabList.Panel title="Fourth Tab" maxHeight="10rem">
     <Text>{lorem.paragraphs()}</Text>
-  </TabList.Panel>
-</TabList>
+  </DeprecatedTabList.Panel>
+</DeprecatedTabList>
 ```
 
 ### Minimal tabs
 
-To style `<TabList/>` as shown below, set the variant to `minimal`. To set a default panel that should be selected on initial render set the `defaultSelectedIndex`.
+To style `<DeprecatedTabList/>` as shown below, set the variant to `minimal`. To set a default panel that should be selected on initial render set the `defaultSelectedIndex`.
 
-To restrict the width of the `<TabList/>`, use the `size` prop. Add space around
+To restrict the width of the `<DeprecatedTabList/>`, use the `size` prop. Add space around
 the entire component using the `margin` prop. Adjust the padding around the
 panel content via `padding` (default is `small`). Finally, switch the
 text alignment of the panel content with `textAlign`.
@@ -42,25 +42,25 @@ text alignment of the panel content with `textAlign`.
 ---
 example: true
 ---
-<TabList
+<DeprecatedTabList
   defaultSelectedIndex={2}
   variant="minimal"
   margin="large auto"
   padding="medium"
 >
-  <TabList.Panel title="Tab A" textAlign="center" padding="large">
+  <DeprecatedTabList.Panel title="Tab A" textAlign="center" padding="large">
     <Text>{lorem.paragraphs()}</Text>
-  </TabList.Panel>
-  <TabList.Panel title="Disabled Tab" disabled>
+  </DeprecatedTabList.Panel>
+  <DeprecatedTabList.Panel title="Disabled Tab" disabled>
     <Text>{lorem.paragraphs()}</Text>
-  </TabList.Panel>
-  <TabList.Panel title="Tab C">
+  </DeprecatedTabList.Panel>
+  <DeprecatedTabList.Panel title="Tab C">
     <Text>{lorem.paragraphs()}</Text>
-  </TabList.Panel>
-  <TabList.Panel title="Tab D">
+  </DeprecatedTabList.Panel>
+  <DeprecatedTabList.Panel title="Tab D">
     <Text>{lorem.paragraphs()}</Text>
-  </TabList.Panel>
-</TabList>
+  </DeprecatedTabList.Panel>
+</DeprecatedTabList>
 ```
 ### Guidelines
 

@@ -45,7 +45,8 @@ import theme from './theme'
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedTabList
 ---
 **/
 @deprecated('7.0.0', null, 'Use the Tabs component instead.')
