@@ -28,7 +28,7 @@ import grayMatter from 'gray-matter'
 
 import { View } from '@instructure/ui-view'
 import { Heading } from '@instructure/ui-heading'
-import { Table } from '@instructure/ui-elements'
+import { Table } from '@instructure/ui-table'
 import { Img } from '@instructure/ui-img'
 import { Link } from '@instructure/ui-link'
 import { CodeEditor } from '@instructure/ui-code-editor'

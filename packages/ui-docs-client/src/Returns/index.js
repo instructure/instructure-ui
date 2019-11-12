@@ -25,8 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Table } from '@instructure/ui-elements'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { Table } from '@instructure/ui-table'
 
 import { compileMarkdown } from '../compileMarkdown'
 
@@ -39,10 +38,10 @@ class Returns extends Component {
     return this.props.types.map((type, index) => {
       const key = `${type.type}-${index}`
       return (
-        <tr key={key}>
-          <td><code>{this.renderType(type.type)}</code></td>
-          <td>{this.renderDescription(type.description)}</td>
-        </tr>
+        <Table.Row key={key}>
+          <Table.Cell><code>{this.renderType(type.type)}</code></Table.Cell>
+          <Table.Cell>{this.renderDescription(type.description)}</Table.Cell>
+        </Table.Row>
       )
     })
   }
@@ -61,16 +60,16 @@ class Returns extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent>Returns</ScreenReaderContent>} margin="0 0 large">
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table caption="Returns" margin="0 0 large">
+        <Table.Head>
+          <Table.Row>
+            <Table.ColHeader id="Type">Type</Table.ColHeader>
+            <Table.ColHeader id="Description">Description</Table.ColHeader>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {this.renderRows()}
-        </tbody>
+        </Table.Body>
       </Table>
     )
   }

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Table } from '@instructure/ui-elements'
+import { Table } from '@instructure/ui-table'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { compileMarkdown } from '../compileMarkdown'
@@ -38,12 +38,12 @@ class Params extends Component {
   renderRows () {
     return this.props.params.map((param) => {
       return (
-        <tr key={param.name}>
-          <td><code>{param.name}</code></td>
-          <td><code>{this.renderType(param.type)}</code></td>
-          <td><code>{param.defaultvalue}</code></td>
-          <td>{this.renderDescription(param.description)}</td>
-        </tr>
+        <Table.Row key={param.name}>
+          <Table.Cell><code>{param.name}</code></Table.Cell>
+          <Table.Cell><code>{this.renderType(param.type)}</code></Table.Cell>
+          <Table.Cell><code>{param.defaultvalue}</code></Table.Cell>
+          <Table.Cell>{this.renderDescription(param.description)}</Table.Cell>
+        </Table.Row>
       )
     })
   }
@@ -62,18 +62,18 @@ class Params extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent>Parameters</ScreenReaderContent>} margin="0 0 large">
-        <thead>
-          <tr>
-            <th scope="col">Param</th>
-            <th scope="col">Type</th>
-            <th scope="col">Default</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table caption="Parameters" margin="0 0 large">
+        <Table.Head>
+          <Table.Row>
+            <Table.ColHeader id="Param">Param</Table.ColHeader>
+            <Table.ColHeader id="Type">Type</Table.ColHeader>
+            <Table.ColHeader id="Default">Default</Table.ColHeader>
+            <Table.ColHeader id="Description">Description</Table.ColHeader>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
           {this.renderRows()}
-        </tbody>
+        </Table.Body>
       </Table>
     )
   }

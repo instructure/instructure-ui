@@ -26,8 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { Table } from '@instructure/ui-elements'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { Table } from '@instructure/ui-table'
 
 import { compileMarkdown } from '../compileMarkdown'
 
@@ -55,20 +54,20 @@ class Properties extends Component {
       .map((name) => {
         const prop = props[name]
         return (
-          <tr key={name}>
-            <td>
+          <Table.Row key={name}>
+            <Table.Cell>
               <code>{name}</code>
-            </td>
-            <td>
+            </Table.Cell>
+            <Table.Cell>
               <code>{this.renderType(prop.type)}</code>
-            </td>
-            <td>
+            </Table.Cell>
+            <Table.Cell>
               {this.renderDefault(prop)}
-            </td>
-            <td>
+            </Table.Cell>
+            <Table.Cell>
               {this.renderDescription(prop)}
-            </td>
-          </tr>
+            </Table.Cell>
+          </Table.Row>
         )
       })
   }
@@ -157,18 +156,18 @@ class Properties extends Component {
   render () {
     return (
       <div className={styles.root}>
-        <Table caption={<ScreenReaderContent>Component Properties</ScreenReaderContent>}>
-          <thead>
-            <tr>
-              <th scope="col">Prop</th>
-              <th scope="col">Type</th>
-              <th scope="col">Default</th>
-              <th scope="col">Description</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table caption="Component Properties">
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="Prop">Prop</Table.ColHeader>
+              <Table.ColHeader id="Type">Type</Table.ColHeader>
+              <Table.ColHeader id="Default">Default</Table.ColHeader>
+              <Table.ColHeader id="Description">Description</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
             {this.renderRows()}
-          </tbody>
+          </Table.Body>
         </Table>
       </div>
     )

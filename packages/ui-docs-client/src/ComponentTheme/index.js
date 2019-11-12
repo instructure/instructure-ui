@@ -26,8 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { Table } from '@instructure/ui-elements'
-import { ScreenReaderContent} from '@instructure/ui-a11y-content'
+import { Table } from '@instructure/ui-table'
 
 import { ColorSwatch } from '../ColorSwatch'
 
@@ -46,15 +45,15 @@ class ComponentTheme extends Component {
     return Object.keys(theme).map((name) => {
       const value = theme[name]
       return (
-        <tr key={name}>
-          <td>
+        <Table.Row key={name}>
+          <Table.Cell>
             <code>{name}</code>
-          </td>
-          <td>
+          </Table.Cell>
+          <Table.Cell>
             <ColorSwatch color={value} />
             <code>{value}</code>
-          </td>
-        </tr>
+          </Table.Cell>
+        </Table.Row>
       )
     })
   }
@@ -62,16 +61,16 @@ class ComponentTheme extends Component {
   render () {
     return this.props.theme && Object.keys(this.props.theme).length > 0 ? (
       <div className={styles.root}>
-        <Table caption={<ScreenReaderContent>Component theme</ScreenReaderContent>}>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Value</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table caption="Component theme">
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="name">Name</Table.ColHeader>
+              <Table.ColHeader id="value">Value</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
             {this.renderRows()}
-          </tbody>
+          </Table.Body>
         </Table>
       </div>
     ) : null

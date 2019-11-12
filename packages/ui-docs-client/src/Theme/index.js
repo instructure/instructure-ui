@@ -25,7 +25,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Table } from '@instructure/ui-elements'
+import { Table } from '@instructure/ui-table'
+import { Heading } from '@instructure/ui-heading'
+import { PresentationContent } from '@instructure/ui-a11y-content'
 
 import { Description } from '../Description'
 import { ColorSwatch } from '../ColorSwatch'
@@ -44,15 +46,15 @@ class Theme extends Component {
 
   renderVariable (name, value) {
     return (
-      <tr key={name}>
-        <td>
+      <Table.Row key={name}>
+        <Table.Cell>
           <code>{name}</code>
-        </td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>
           <ColorSwatch color={value} />
           <code>{value}</code>
-        </td>
-      </tr>
+        </Table.Cell>
+      </Table.Row>
     )
   }
 
@@ -64,17 +66,22 @@ class Theme extends Component {
 
   renderSection (name, content) {
     return (
-      <Table caption={<h3>{name}</h3>} key={name} margin="large 0 0">
-        <thead>
-          <tr>
-            <th scope="col" style={{ width: '50%' }} >Name</th>
-            <th scope="col" style={{ width: '50%' }} >Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {content}
-        </tbody>
-      </Table>
+      <div>
+        <PresentationContent>
+          <Heading as="h3" margin="large 0 x-small 0">{name}</Heading>
+        </PresentationContent>
+        <Table caption={<h3>{name}</h3>} key={name} layout="fixed">
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="Name">Name</Table.ColHeader>
+              <Table.ColHeader id="Value">Value</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            {content}
+          </Table.Body>
+        </Table>
+      </div>
     )
   }
 
