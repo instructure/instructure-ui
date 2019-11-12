@@ -35,13 +35,15 @@
     "@instructure/ui-view": "^6.14.0",
     "@instructure/uid": "^6.14.0",
     "keycode": "^2",
-    "prop-types": "^15",
-    "react": "^15 || ^16"
+    "prop-types": "^15"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6.14.0",
     "@instructure/ui-color-utils": "^6.14.0",
     "@instructure/ui-test-utils": "^6.14.0"
+  },
+  "peerDependencies": {
+    "react": "^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

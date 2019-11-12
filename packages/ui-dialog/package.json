@@ -24,8 +24,7 @@
     "@instructure/ui-react-utils": "^6.14.0",
     "@instructure/ui-testable": "^6.14.0",
     "@instructure/ui-themeable": "^6.14.0",
-    "prop-types": "^15",
-    "react": "^15 || ^16"
+    "prop-types": "^15"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6.14.0",
@@ -34,6 +33,9 @@
     "@instructure/ui-dom-utils": "^6.14.0",
     "@instructure/ui-a11y-utils": "^6.14.0",
     "@instructure/console": "^6.14.0"
+  },
+  "peerDependencies": {
+    "react": "^15 || ^16"
   },
   "publishConfig": {
     "access": "public"
