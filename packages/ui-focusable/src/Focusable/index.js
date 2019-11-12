@@ -125,7 +125,7 @@ class Focusable extends Component {
       this.addFocusableListeners(focusable, this.state.focused)
 
       this.setState({ focusable })
-    } else if (prevState.focused !== this.state.focused) {
+    } else {
       this.addFocusableListeners(focusable, this.state.focused)
     }
   }
@@ -141,9 +141,9 @@ class Focusable extends Component {
   addFocusableListeners (focusable, focused) {
     if (!focusable) return
 
-    if (focused) {
+    if (focused && !this._blurListener) {
       this._blurListener = addEventListener(focusable, 'blur', this.handleBlur, true)
-    } else {
+    } else if (!this._focusListener) {
       this._focusListener = addEventListener(focusable, 'focus', this.handleFocus, true)
     }
   }

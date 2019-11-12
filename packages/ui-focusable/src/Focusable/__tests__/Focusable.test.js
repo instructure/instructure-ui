@@ -341,6 +341,46 @@ describe('<Focusable />', async () => {
     expect(focusable.focused).to.equal(true)
   })
 
+  it('should properly restore the event handlers', async () => {
+    let inputRef
+
+    class TestComponent extends Component {
+      render() {
+        const { changeValue } = this.props
+
+        return (
+          <Focusable>
+            {
+              ({focusVisible}) => {
+                return (
+                  <input
+                    readOnly
+                    ref={(el) => { inputRef = el }}
+                    value={`${focusVisible}_${changeValue}`} />
+                )
+              }
+            }
+          </Focusable>
+        )
+      }
+    }
+
+    const subject = await mount(<TestComponent changeValue="A" />)
+    await wait(() => {
+      expect(inputRef.value).to.equal('false_A')
+    })
+
+    await subject.setProps({
+      changeValue: 'B'
+    })
+
+    await inputRef.focus()
+
+    await wait(() => {
+      expect(inputRef.value).to.equal('true_B')
+    })
+  })
+
   it('should properly clear the focusable / focused state when focus is unexpectedly lost', async () => {
     let buttonRef, focusableRef, labelRef
 
