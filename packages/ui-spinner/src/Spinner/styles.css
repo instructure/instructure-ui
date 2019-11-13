@@ -30,6 +30,10 @@
   overflow: hidden;
 }
 
+.circleTrack {
+  stroke: var(--trackColor);
+}
+
 .x-small {
   width: var(--xSmallSize);
   height: var(--xSmallSize);
@@ -37,10 +41,6 @@
   .circle {
     width: var(--xSmallSize);
     height: var(--xSmallSize);
-  }
-
-  .circleShadow {
-    stroke-width: calc(var(--xSmallBorderWidth) * 1.75);
   }
 
   .circleTrack,
@@ -61,10 +61,6 @@
   .circle {
     width: var(--smallSize);
     height: var(--smallSize);
-  }
-
-  .circleShadow {
-    stroke-width: calc(var(--smallBorderWidth) * 1.75);
   }
 
   .circleTrack,
@@ -88,10 +84,6 @@
     height: var(--mediumSize);
   }
 
-  .circleShadow {
-    stroke-width: calc(var(--mediumBorderWidth) * 1.75);
-  }
-
   .circleTrack,
   .circleSpin {
     stroke-width: var(--mediumBorderWidth);
@@ -111,10 +103,6 @@
     stroke-width: var(--largeBorderWidth);
     width: var(--largeSize);
     height: var(--largeSize);
-  }
-
-  .circleShadow {
-    stroke-width: calc(var(--largeBorderWidth) * 1.75);
   }
 
   .circleTrack,
@@ -140,7 +128,6 @@
 }
 
 .circleTrack,
-.circleShadow,
 .circleSpin {
   fill: none;
 }
@@ -161,28 +148,12 @@
 }
 
 .default {
-  .circleShadow {
-    stroke: none;
-  }
-
-  .circleTrack {
-    stroke: var(--trackColor);
-  }
-
   .circleSpin {
     stroke: var(--color);
   }
 }
 
 .inverse {
-  .circleShadow {
-    stroke: rgba(0, 0, 0, 0.3);
-  }
-
-  .circleTrack {
-    stroke: var(--inverseTrackColor);
-  }
-
   .circleSpin {
     stroke: var(--inverseColor);
   }

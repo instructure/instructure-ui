@@ -1,6 +1,12 @@
 ---
-describes: Spinner
+describes: DeprecatedSpinner
+id: DeprecatedSpinner__README
 ---
+
+**Deprecated** Spinner will be removed from `ui-elements` in version 7.0.0. Use [Spinner from ui-spinner](#Spinner) instead.
+
+### Important upgrade notes
+Codemods are available to automatically update imports to the new package.
 
 ### Choose from four sizes and add margin as needed
 
@@ -12,10 +18,10 @@ The `size` prop allows you to select from `x-small`, `small`, `medium` and `larg
 example: true
 ---
 <div>
-  <Spinner renderTitle="Loading" size="x-small" />
-  <Spinner renderTitle="Loading" size="small" margin="0 0 0 medium" />
-  <Spinner renderTitle="Loading" margin="0 0 0 medium" />
-  <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
+  <DeprecatedSpinner renderTitle="Loading" size="x-small" />
+  <DeprecatedSpinner renderTitle="Loading" size="small" margin="0 0 0 medium" />
+  <DeprecatedSpinner renderTitle="Loading" margin="0 0 0 medium" />
+  <DeprecatedSpinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
 </div>
 ```
 
@@ -29,7 +35,7 @@ color scheme designed to be more visible on dark backgrounds.
 example: true
 background: 'checkerboard-inverse'
 ---
-<Spinner renderTitle="Loading" variant="inverse" />
+<DeprecatedSpinner renderTitle="Loading" variant="inverse" />
 ```
 
 ### Translating the Screen Reader Title
@@ -41,7 +47,7 @@ This allows for translating the title text with another React component.
 ---
 example: true
 ---
-<Spinner renderTitle={() => "I'm translated!"} />
+<DeprecatedSpinner renderTitle={() => "I'm translated!"} />
 ```
 
 ### Internet Explorer

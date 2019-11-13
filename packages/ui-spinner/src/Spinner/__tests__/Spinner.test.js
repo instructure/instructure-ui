@@ -55,16 +55,6 @@ describe('<Spinner />', async () => {
     expect(await spinner.accessible()).to.be.true()
   })
 
-  it('should log deprecation warnings', async () => {
-    const consoleWarn = stub(console, 'warn')
-
-    await mount(
-      <Spinner title="Loading" renderTitle={() => "Title"} />
-    )
-    expect(consoleWarn)
-      .to.have.been.calledWithMatch('Warning: [Spinner] `title` is deprecated and will be removed in version 7.0.0.')
-  })
-
   describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',

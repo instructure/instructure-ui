@@ -23,29 +23,29 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import { Spinner as UISpinner } from '@instructure/ui-spinner'
-import { deprecated } from '@instructure/ui-react-utils'
+import { View } from '@instructure/ui-view'
+import { callRenderProp, deprecated, omitProps } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { isIE11 } from '@instructure/ui-utils'
+import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
+import { error } from '@instructure/console/macro'
 
+import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedSpinner
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use Spinner from ui-spinner instead.')
+@deprecated('8.0.0', { title: 'renderTitle' })
 @testable()
-@themeable(theme)
+@themeable(theme, styles)
 class Spinner extends Component {
   static propTypes = {
-    /**
-    * Give the spinner a title to be read by screenreaders (Deprecated)
-    */
-    title: PropTypes.string,
     /**
     * Give the spinner a title to be read by screenreaders
     */
@@ -65,21 +65,82 @@ class Spinner extends Component {
     */
     margin: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
-    as: PropTypes.elementType
+    as: PropTypes.elementType,
+
+    /* eslint-disable react/require-default-props */
+    title: PropTypes.string // remove in version 8.0.0
+    /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
+    renderTitle: undefined,
     as: 'div',
     size: 'medium',
     variant: 'default',
     margin: undefined,
-    elementRef: undefined,
-    renderTitle: undefined,
-    title: undefined
+    elementRef: undefined
+  }
+
+  constructor (props) {
+    super()
+
+    this.titleId = uid('Spinner')
+  }
+
+  radius () {
+    switch (this.props.size) {
+      case 'x-small':
+        return '0.5em'
+      case 'small':
+        return '1em'
+      case 'large':
+        return '2.25em'
+      default:
+        return '1.75em'
+    }
   }
 
   render () {
-    return <UISpinner {...this.props} />
+    const classes = {
+      [styles.root]: true,
+      [styles[this.props.size]]: true,
+      [styles[this.props.variant]]: true,
+      [styles.ie11]: isIE11
+    }
+
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Spinner.propTypes),
+      Spinner
+    )
+
+    const hasTitle = this.props.renderTitle || this.props.title
+    error(hasTitle, '[Spinner] The renderTitle prop is necessary for screen reader support.')
+
+    return (
+      <View
+        {...passthroughProps}
+        as={this.props.as}
+        elementRef={this.props.elementRef}
+        className={classNames(classes)}
+        margin={this.props.margin}
+      >
+        <svg
+          className={styles.circle}
+          role="img"
+          aria-labelledby={this.titleId}
+          focusable="false"
+        >
+          <title id={this.titleId}>{callRenderProp(this.props.renderTitle)}</title>
+          <g role="presentation">
+            {
+              this.props.variant !== 'inverse' &&
+              <circle className={styles.circleTrack} cx="50%" cy="50%" r={this.radius()} />
+            }
+            <circle className={styles.circleSpin} cx="50%" cy="50%" r={this.radius()} />
+          </g>
+        </svg>
+      </View>
+    )
   }
 }
 

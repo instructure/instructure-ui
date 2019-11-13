@@ -33,5 +33,10 @@
       { "old": "onChange", "new": "onRequestTabChange" },
       { "old": "focus", "new": "shouldFocusOnRender" }
     ]
-  }
+  },
+  "Spinner": {
+    "7.0.0": [
+      { "old": "title", "new": "renderTitle" }
+    ]
+  },
 }

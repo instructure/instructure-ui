@@ -167,4 +167,8 @@
     "pattern": "^@instructure/ui-overlays/lib/Tray",
     "replace": "@instructure/ui-tray/lib/Tray"
   },
+  {
+    "pattern": "^@instructure/ui-elements/lib/Spinner",
+    "replace": "@instructure/ui-spinner/lib/Spinner"
+  },
 ]

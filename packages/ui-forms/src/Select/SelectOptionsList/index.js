@@ -30,7 +30,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
 import { View } from '@instructure/ui-view'
-import { Spinner } from '@instructure/ui-elements'
+import { Spinner } from '@instructure/ui-spinner'
 
 import getOptionId from '../utils/getOptionId'
 

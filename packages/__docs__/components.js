@@ -50,7 +50,7 @@ export {
   Link as DeprecatedLink,
   Progress as DeprecatedProgress,
   Rating as DeprecatedRating,
-  Spinner,
+  Spinner as DeprecatedSpinner,
   Table as DeprecatedTable,
   Tag as DeprecatedTag,
   Text as DeprecatedText,
@@ -141,5 +141,6 @@ export { ProgressCircle } from '@instructure/ui-progress'
 export { Tag } from '@instructure/ui-tag'
 export { View, ContextView } from '@instructure/ui-view'
 export { Tray } from '@instructure/ui-tray'
+export { Spinner } from '@instructure/ui-spinner'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'

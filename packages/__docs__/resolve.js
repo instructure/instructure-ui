@@ -72,6 +72,7 @@ module.exports = {
     '@instructure/ui-rating$': path.resolve(__dirname, '../ui-rating/src/'),
     '@instructure/ui-select$': path.resolve(__dirname, '../ui-select/src/'),
     '@instructure/ui-selectable$': path.resolve(__dirname, '../ui-selectable/src/'),
+    '@instructure/ui-spinner$': path.resolve(__dirname, '../ui-spinner/src/'),
     '@instructure/ui-svg-images$': path.resolve(__dirname, '../ui-svg-images/src/'),
     '@instructure/ui-table$': path.resolve(__dirname, '../ui-table/src/'),
     '@instructure/ui-tabs$': path.resolve(__dirname, '../ui-tabs/src/'),
