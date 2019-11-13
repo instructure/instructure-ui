@@ -72,6 +72,10 @@
     "replace": "@instructure/ui-rating/lib/Rating"
   },
   {
+    "pattern": "^@instructure/ui-layout/lib/Responsive",
+    "replace": "@instructure/ui-responsive/lib/Responsive"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/Img",
     "replace": "@instructure/ui-img/lib/Img"
   },

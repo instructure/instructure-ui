@@ -26,21 +26,18 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { findDOMNode } from '@instructure/ui-dom-utils'
-import { deprecated } from '@instructure/ui-react-utils'
 import { deepEqual } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 
 import { addElementQueryMatchListener } from '../addElementQueryMatchListener'
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
-import { LayoutPropTypes } from '../LayoutPropTypes'
+import { ResponsivePropTypes } from '../ResponsivePropTypes'
 
 /**
 ---
-category: components/utilities/deprecated
-id: DeprecatedResponsive
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-responsive instead')
 class Responsive extends Component {
   static propTypes = {
     /**
@@ -52,7 +49,7 @@ class Responsive extends Component {
      * with keys representing the breakpoint condition and values representing a breakpoint value as a
      * string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}`
      */
-    query: PropTypes.objectOf(LayoutPropTypes.validQuery).isRequired,
+    query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
     /**
      * Consists of an object where the keys match the breakpoint names used in the query. The values
      * are objects with keys representing prop names and values representing prop values Ex.

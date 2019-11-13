@@ -41,6 +41,7 @@ The following components have been deprecated and will be removed from the `ui-l
 - [Flex](#DeprecatedFlex) \(use [Flex from ui-flex](#Flex) instead)
 - [Grid](#DeprecatedGrid) \(use [Grid](#Grid) from [ui-grid](#ui-grid) instead)
 - [Position](#DeprecatedPosition) \(use [Position from ui-position](#Position) instead)
+- [Responsive](#DeprecatedResponsive) \(use [Responsive from ui-responsive](#Responsive) instead)
 - [View](#DeprecatedView) \(use [View from ui-view](#View) instead)
 - [ContextView](#DeprecatedContextView) \(use [ContextView from ui-view](#ContextView) instead)
 

@@ -71,6 +71,7 @@ module.exports = {
     '@instructure/ui-progress$': path.resolve(__dirname, '../ui-progress/src'),
     '@instructure/ui-range-input$': path.resolve(__dirname, '../ui-range-input/src/'),
     '@instructure/ui-rating$': path.resolve(__dirname, '../ui-rating/src/'),
+    '@instructure/ui-responsive$': path.resolve(__dirname, '../ui-responsive/src/'),
     '@instructure/ui-select$': path.resolve(__dirname, '../ui-select/src/'),
     '@instructure/ui-selectable$': path.resolve(__dirname, '../ui-selectable/src/'),
     '@instructure/ui-spinner$': path.resolve(__dirname, '../ui-spinner/src/'),

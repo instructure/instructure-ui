@@ -92,7 +92,7 @@ export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
 export {
   ContextView as DeprecatedContextView,
   Media,
-  Responsive,
+  Responsive as DeprecatedResponsive,
   Flex as DeprecatedFlex,
   DrawerLayout,
   Grid as DeprecatedGrid,
@@ -124,6 +124,7 @@ export { Pages } from '@instructure/ui-pages'
 export { Portal } from '@instructure/ui-portal'
 export { RangeInput } from '@instructure/ui-range-input'
 export { Rating } from '@instructure/ui-rating'
+export { Responsive } from '@instructure/ui-responsive'
 export { Select } from '@instructure/ui-select'
 export { Selectable } from '@instructure/ui-selectable'
 export { ApplyTheme } from '@instructure/ui-themeable'
