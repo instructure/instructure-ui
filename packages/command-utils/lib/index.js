@@ -34,6 +34,11 @@ function info (...args) {
 }
 exports.info = info
 
+function warn(...args) {
+  console.warn(chalk.yellow('⚠️   ', ...args))
+}
+exports.warn = warn
+
 function error (...args) {
   console.error(chalk.red('⚠️   ', ...args))
 }

@@ -22,81 +22,10 @@
  * SOFTWARE.
  */
 
-const { getPackage } = require('@instructure/pkg-utils')
-const { info, error, runCommandSync } = require('@instructure/command-utils')
+const upgradePackages = require('@instructure/ui-upgrade-scripts/lib/utils/upgrade-packages')
+const { warn } = require('@instructure/command-utils')
 
-const verifyPackageJson = require('./utils/verify-package-json')
-
-async function updateResolutions ({ pkg, packages, path, version }) {
-  const originalResolutions = {...pkg.get('resolutions')}
-  const packageResolutions = {}
-
-  info(`${packages.length} packages to upgrade. Updating package.json resolutions...`)
-
-  packages.forEach((packageName) => {
-    try {
-      let upgradeVersion = version
-      if (!upgradeVersion) {
-        const { stdout } = runCommandSync('yarn', ['info', `${packageName}`, 'dist-tags', '--json'], [], { stdio: 'pipe'})
-        const { data } = JSON.parse(stdout)
-        if (data) {
-          upgradeVersion = data.latest
-        }
-      }
-      packageResolutions[packageName] = upgradeVersion
-    } catch (err) {
-      error(err)
-    }
-  })
-
-  pkg.set('resolutions', {
-    ...(originalResolutions || {}),
-    ...packageResolutions
-  })
-
-  await pkg.serialize()
-
-  try {
-    runCommandSync('yarn', ['--cwd', path])
-  } catch (err) {
-    error(err)
-  }
-
-  if (pkg) {
-    pkg.refresh()
-    pkg.set('resolutions', originalResolutions)
-    await pkg.serialize()
-  }
-}
-
-module.exports = async function upgradePackages ({ useResolutions = false, packageList = [], version, path } = {}) {
-  verifyPackageJson({ sourcePath: path })
-
-  const pkg = getPackage({ cwd: path })
-
-  const dependencies = Object.keys(pkg.get('dependencies') || {})
-  const devDependencies = Object.keys(pkg.get('devDependencies') || {})
-  const allDependencies = [...dependencies, ...devDependencies]
-
-  const packages = packageList.filter(pkg => allDependencies.includes(pkg))
-
-  if (useResolutions) {
-    info(`Updating resolutions in ${path}...`)
-    return updateResolutions({ pkg, packages, path, version })
-  } else {
-    info(`Upgrading packages in ${path} to ${version || 'latest'}`)
-
-    packages.forEach((packageName) => {
-      info(`Upgrading ${packageName}`)
-      try {
-        runCommandSync('yarn', ['remove', `${packageName}`, '--cwd', path])
-
-        const upgradeCommand = ['add', `${packageName}@${version || 'latest'}`, '--cwd', path]
-        if (devDependencies.includes(packageName)) upgradeCommand.push('--dev')
-        runCommandSync('yarn', upgradeCommand)
-      } catch (err) {
-        error(err)
-      }
-    })
-  }
+module.exports = function (args = {}) {
+  warn('`upgrade-packages` has been moved from \'@instructure/ui-scripts/lib/upgrade-packages\' to \'@instructure/ui-upgrade-scripts/lib/utils/upgrade-packages\'.')
+  upgradePackages(args)
 }

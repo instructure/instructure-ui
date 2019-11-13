@@ -22,46 +22,18 @@
  * SOFTWARE.
  */
 
-const { info, error } = require('@instructure/command-utils')
-const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execute-codemod')
+const path = require('path')
+const depcheck = require('depcheck')
 
-const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
-
-module.exports = ({ sourcePath, version, ignore }) => {
-  info(`Applying codemods to ${sourcePath}\n`)
-
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updateImports.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'imports.config.json',
-      version
-    }),
-    ignore
-  })
-
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updatePropNames.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'propNames.config.json',
-      version
-    }),
-    ignore
-  })
-}
-
-const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore }) => {
-  try {
-    const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
-
-    for (const configPath of configPaths) {
-      executeCodemod({ sourcePath, codemodPath, configPath, ignore })
+// See https://www.npmjs.com/package/depcheck for usage and options
+module.exports = ({ sourcePath, options }) => {
+  return new Promise((resolve, reject) => {
+    try {
+      depcheck(path.resolve(process.cwd(), sourcePath), (options || {}), (result) => {
+        resolve(result)
+      })
+    } catch (err) {
+      reject(err)
     }
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
+  })
 }

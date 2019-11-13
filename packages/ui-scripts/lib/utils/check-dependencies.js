@@ -22,18 +22,10 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const depcheck = require('depcheck')
+const checkDependencies = require('@instructure/ui-upgrade-scripts/lib/utils/check-dependencies')
+const { warn } = require('@instructure/command-utils')
 
-// See https://www.npmjs.com/package/depcheck for usage and options
-module.exports = ({ sourcePath, options }) => {
-  return new Promise((resolve, reject) => {
-    try {
-      depcheck(path.resolve(process.cwd(), sourcePath), (options || {}), (result) => {
-        resolve(result)
-      })
-    } catch (err) {
-      reject(err)
-    }
-  })
+module.exports = (args = {}) => {
+  warn('`check-dependencies` has been moved from \'@instructure/ui-scripts/lib/utils/check-dependencies\' to \'@instructure/ui-upgrade-scripts/lib/utils/check-dependencies\'.')
+  return checkDependencies(args)
 }

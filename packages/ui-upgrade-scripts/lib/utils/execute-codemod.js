@@ -22,46 +22,31 @@
  * SOFTWARE.
  */
 
-const { info, error } = require('@instructure/command-utils')
-const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execute-codemod')
+const { info, runCommandSync } = require('@instructure/command-utils')
 
-const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
+module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'] } = {}) => {
+  info(`Running ${codemodPath}...`)
+  info(`Source path: ${sourcePath}`)
+  info(`Config path: ${configPath}`)
+  info(`Ignoring: ${ignore.join(', ')}`)
 
-module.exports = ({ sourcePath, version, ignore }) => {
-  info(`Applying codemods to ${sourcePath}\n`)
-
-  executeCodemods({
+  const codemodCommand = [
+    '-t',
+    codemodPath,
     sourcePath,
-    codemodName: 'updateImports.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'imports.config.json',
-      version
-    }),
-    ignore
+    `--config=${configPath}`,
+    `--extensions=js,jsx`
+  ]
+
+  let ignoreArgs = []
+
+  ignore.forEach((ignore) => {
+    ignoreArgs = ignoreArgs.concat('--ignore-pattern', ignore)
   })
 
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updatePropNames.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'propNames.config.json',
-      version
-    }),
-    ignore
-  })
-}
-
-const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore }) => {
-  try {
-    const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
-
-    for (const configPath of configPaths) {
-      executeCodemod({ sourcePath, codemodPath, configPath, ignore })
-    }
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
+  runCommandSync('jscodeshift', [
+    ...codemodCommand,
+    // ignore-pattern args need to be placed after the other commands
+    ...ignoreArgs
+  ])
 }

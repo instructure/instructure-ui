@@ -23,8 +23,8 @@
  */
 
 const { info, error, confirm, runCommandSync } = require('@instructure/command-utils')
-const verifyPackageJson = require('@instructure/ui-scripts/lib/utils/verify-package-json')
-const checkDependencies = require('@instructure/ui-scripts/lib/utils/check-dependencies')
+const verifyPackageJson = require('@instructure/ui-upgrade-scripts/lib/utils/verify-package-json')
+const checkDependencies = require('@instructure/ui-upgrade-scripts/lib/utils/check-dependencies')
 
 const handleExecuteCodemods = require('./handleExecuteCodemods')
 const handleUpgradePackages = require('./handleUpgradePackages')

@@ -22,46 +22,14 @@
  * SOFTWARE.
  */
 
-const { info, error } = require('@instructure/command-utils')
-const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execute-codemod')
+const path = require('path')
+const fs = require('fs')
 
-const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
+const { error } = require('@instructure/command-utils')
 
-module.exports = ({ sourcePath, version, ignore }) => {
-  info(`Applying codemods to ${sourcePath}\n`)
-
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updateImports.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'imports.config.json',
-      version
-    }),
-    ignore
-  })
-
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updatePropNames.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'propNames.config.json',
-      version
-    }),
-    ignore
-  })
-}
-
-const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore }) => {
-  try {
-    const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
-
-    for (const configPath of configPaths) {
-      executeCodemod({ sourcePath, codemodPath, configPath, ignore })
-    }
-  } catch (err) {
-    error(err)
+module.exports = function ({ sourcePath }) {
+  if (!fs.existsSync(path.join(sourcePath, 'package.json'))) {
+    error(`No package.json found in ${sourcePath}`)
     process.exit(1)
   }
 }

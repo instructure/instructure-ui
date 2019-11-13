@@ -22,31 +22,10 @@
  * SOFTWARE.
  */
 
-const { info, runCommandSync } = require('@instructure/command-utils')
+const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execute-codemod')
+const { warn } = require('@instructure/command-utils')
 
-module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'] } = {}) => {
-  info(`Running ${codemodPath}...`)
-  info(`Source path: ${sourcePath}`)
-  info(`Config path: ${configPath}`)
-  info(`Ignoring: ${ignore.join(', ')}`)
-
-  const codemodCommand = [
-    '-t',
-    codemodPath,
-    sourcePath,
-    `--config=${configPath}`,
-    `--extensions=js,jsx`
-  ]
-
-  let ignoreArgs = []
-
-  ignore.forEach((ignore) => {
-    ignoreArgs = ignoreArgs.concat('--ignore-pattern', ignore)
-  })
-
-  runCommandSync('jscodeshift', [
-    ...codemodCommand,
-    // ignore-pattern args need to be placed after the other commands
-    ...ignoreArgs
-  ])
+module.exports = (args = {}) => {
+  warn('`execute-codemod` has been moved from \'@instructure/ui-scripts/lib/utils/execute-codemod\' to \'@instructure/ui-upgrade-scripts/lib/utils/execute-codemod\'.')
+  executeCodemod(args)
 }

@@ -11,10 +11,22 @@ category: packages
 
 A cli for working with instructure-ui packages.
 
-### Installation
+#### Using npx
+```bash
+$ npx @instructure/instui-cli create app --name MyInstuiApp
+```
 
-```sh
-npm install -g @instructure/instui-cli
+#### Globally installing `instui-cli` with `yarn` or `npm`
+```bash
+$ yarn global add @instructure/instui-cli
+```
+or
+```bash
+$ npm install -g @instructure/instui-cli
+```
+You now have access to `instui` commands
+```bash
+instui create app --name MyInstuiApp
 ```
 
 ### Available commands

@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/instui-cli",
+  "name": "@instructure/ui-upgrade-scripts",
   "version": "6.15.0",
-  "description": "A cli for working with instructure-ui packages",
+  "description": "A collection of UI scripts and utils to automate upgrades.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {
@@ -11,7 +11,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "bin": {
-    "instui": "./lib/index.js"
+    "ui-upgrade-scripts": "./lib/index.js"
   },
   "scripts": {
     "lint": "ui-test --lint",
@@ -20,17 +20,13 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/command-utils": "^6.15.0",
-    "@instructure/instui-config": "^6.15.0",
-    "@instructure/template-app": "^6.15.0",
-    "@instructure/template-component": "^6.15.0",
-    "@instructure/template-package": "^6.15.0",
-    "@instructure/ui-codemods": "^6.15.0",
-    "@instructure/ui-upgrade-scripts": "^6.15.0",
-    "@instructure/ui-scripts": "^6.15.0",
-    "semver": "^6.3.0",
+    "@instructure/pkg-utils": "^6.15.0",
+    "depcheck": "^0.9.1",
+    "jscodeshift": "^0.6.4",
     "yargs": "^14.0.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }

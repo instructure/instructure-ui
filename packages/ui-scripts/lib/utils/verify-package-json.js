@@ -22,14 +22,10 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const fs = require('fs')
+const verifyPackageJson = require('@instructure/ui-upgrade-scripts/lib/utils/verify-package-json')
+const { warn } = require('@instructure/command-utils')
 
-const { error } = require('@instructure/command-utils')
-
-module.exports = function ({ sourcePath }) {
-  if (!fs.existsSync(path.join(sourcePath, 'package.json'))) {
-    error(`No package.json found in ${sourcePath}`)
-    process.exit(1)
-  }
+module.exports = function (args = {}) {
+  warn('`verify-package-json` has been moved from \'@instructure/ui-scripts/lib/utils/verify-package-json\' to \'@instructure/ui-upgrade-scripts/lib/utils/verify-package-json\'.')
+  verifyPackageJson(args)
 }
