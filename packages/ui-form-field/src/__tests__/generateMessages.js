@@ -22,45 +22,21 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+const generateText = (type) => `${type} message`
 
-import { themeable } from '@instructure/ui-themeable'
-import { ToggleFacade as UIToggleFacade } from '@instructure/ui-checkbox'
+export default function generateMessages (
+  types = ['hint', 'success', 'error'],
+  withEmptyMessage = true,
+  text = generateText
+) {
+  const messages = [
+    ...types.map((type) => {
+      return [{
+        text: typeof text === 'function' ? text(type) : text,
+        type
+      }]
+    })
+  ]
 
-import theme from './theme'
-
-/**
----
-parent: DeprecatedCheckbox
-id: DeprecatedToggleFacade
----
-**/
-@themeable(theme)
-class ToggleFacade extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    checked: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    focused: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
-  }
-
-  static defaultProps = {
-    checked: false,
-    focused: false,
-    size: 'medium',
-    disabled: false,
-    readOnly: false,
-    labelPlacement: 'end'
-  }
-
-  render () {
-    return <UIToggleFacade {...this.props} />
-  }
+  return withEmptyMessage ? [[], ...messages] : messages
 }
-
-export default ToggleFacade
-export { ToggleFacade }

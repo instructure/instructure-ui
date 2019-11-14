@@ -22,45 +22,18 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+export default {
+  maxExamplesPerPage: 50,
+  sectionProp: 'variant',
 
-import { themeable } from '@instructure/ui-themeable'
-import { ToggleFacade as UIToggleFacade } from '@instructure/ui-checkbox'
-
-import theme from './theme'
-
-/**
----
-parent: DeprecatedCheckbox
-id: DeprecatedToggleFacade
----
-**/
-@themeable(theme)
-class ToggleFacade extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    checked: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    focused: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
-  }
-
-  static defaultProps = {
-    checked: false,
-    focused: false,
-    size: 'medium',
-    disabled: false,
-    readOnly: false,
-    labelPlacement: 'end'
-  }
-
-  render () {
-    return <UIToggleFacade {...this.props} />
+  getComponentProps: (props) => {
+    return {
+      value: 'example',
+      label: 'A checkbox component',
+      readOnly: false
+    }
+  },
+  filter: (props) => {
+    return props.variant === 'toggle' && props.indeterminate
   }
 }
-
-export default ToggleFacade
-export { ToggleFacade }

@@ -22,24 +22,24 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
-import { deprecated } from '@instructure/ui-react-utils'
-import { CheckboxGroup as UICheckboxGroup } from '@instructure/ui-checkbox'
+import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
+import { uid } from '@instructure/uid'
+import { matchComponentTypes, safeCloneElement, pickProps, omitProps } from '@instructure/ui-react-utils'
+import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedCheckboxGroup
+category: components
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use @instructure/ui-checkbox instead.')
+@testable()
 class CheckboxGroup extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -89,22 +89,92 @@ class CheckboxGroup extends Component {
     children: null
   }
 
-  _checkboxGroup = null
+  constructor (props) {
+    super()
 
-  get hasMessages () {
-    return this._checkboxGroup && this._checkboxGroup.hasMessages
+    if (typeof props.value === 'undefined') {
+      this.state = {
+        value: props.defaultValue
+      }
+    }
+
+    this._messagesId = uid('CheckboxGroup-messages')
   }
 
+  get hasMessages () {
+    return this.props.messages && (this.props.messages.length > 0)
+  }
+
+  handleChange = (e) => {
+    const newValue = this.value || []
+
+    if (this.props.disabled || this.props.readOnly) {
+      e.preventDefault()
+      return
+    }
+
+    if (e.target.checked) {
+      newValue.push(e.target.value)
+    } else {
+      newValue.splice(newValue.indexOf(e.target.value), 1)
+    }
+
+    if (typeof this.props.value === 'undefined') {
+      this.setState({value: newValue})
+    }
+
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(newValue)
+    }
+  };
+
   get value () {
-    return this._checkboxGroup && this._checkboxGroup.value
+    if (typeof this.props.value === 'undefined' && typeof this.state.value === 'undefined') {
+      return []
+    } else {
+      return (typeof this.props.value === 'undefined') ? [...this.state.value] : [...this.props.value]
+    }
+  }
+
+  renderChildren () {
+    const {
+      children,
+      name,
+      size,
+      disabled,
+      readOnly
+    } = this.props
+
+    return Children.map(children, (child, index) => {
+      if (matchComponentTypes(child, [Checkbox])) {
+        return safeCloneElement(child, {
+          key: `${child.props.name}`,
+          name,
+          disabled: (disabled || child.props.disabled),
+          readOnly: (readOnly || child.props.readOnly),
+          size,
+          checked: (this.value.indexOf(child.props.value) > -1),
+          onChange: this.handleChange,
+          width: child.props.width || 'auto',
+          'aria-describedby': this.hasMessages && this._messagesId
+        })
+      } else {
+        return child
+      }
+    })
   }
 
   render () {
     return (
-      <UICheckboxGroup
-        ref={(component) => { this._checkboxGroup = component }}
-        {...this.props}
-      />
+      <FormFieldGroup
+        {...omitProps(this.props, CheckboxGroup.propTypes)}
+        {...pickProps(this.props, FormFieldGroup.propTypes)}
+        rowSpacing="small"
+        vAlign="top"
+        messagesId={this._messagesId}
+      >
+        {this.renderChildren()}
+      </FormFieldGroup>
     )
   }
 }

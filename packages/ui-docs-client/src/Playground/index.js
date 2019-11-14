@@ -32,7 +32,7 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { CodeEditor } from '@instructure/ui-code-editor'
-import { Checkbox } from '@instructure/ui-forms'
+import { Checkbox } from '@instructure/ui-checkbox'
 import { Flex } from '@instructure/ui-flex'
 import { IconButton } from '@instructure/ui-buttons'
 

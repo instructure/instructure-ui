@@ -24,21 +24,19 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { SVGIcon } from '@instructure/ui-svg-images'
-import { IconCheckMarkSolid } from '@instructure/ui-icons'
 import { themeable } from '@instructure/ui-themeable'
+import { CheckboxFacade as UICheckboxFacade } from '@instructure/ui-checkbox'
 
-import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-parent: Checkbox
+parent: DeprecatedCheckbox
+id: DeprecatedCheckboxFacade
 ---
 **/
-@themeable(theme, styles)
+@themeable(theme)
 class CheckboxFacade extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -60,47 +58,8 @@ class CheckboxFacade extends Component {
     indeterminate: false
   }
 
-  renderIcon () {
-    if (this.props.indeterminate) {
-      return (
-        <SVGIcon viewBox="0 0 1920 1920" inline={false}>
-          <rect x="140" y="820" width="1640" height="280" />
-        </SVGIcon>
-      )
-    } else if (this.props.checked) {
-      return <IconCheckMarkSolid inline={false} />
-    } else {
-      return null
-    }
-  }
-
   render () {
-    const {
-      size,
-      checked,
-      focused,
-      hovered,
-      indeterminate
-    } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles.checked]: checked || indeterminate,
-      [styles.focused]: focused,
-      [styles.hovered]: hovered,
-      [styles[size]]: true
-    }
-
-    return (
-      <span className={classnames(classes)}>
-        <span className={styles.facade} aria-hidden="true">
-          {this.renderIcon()}
-        </span>
-        <span className={styles.label}>
-          {this.props.children}
-        </span>
-      </span>
-    )
+    return <UICheckboxFacade {...this.props} />
   }
 }
 

@@ -63,8 +63,8 @@ export {
 export { Expandable } from '@instructure/ui-expandable'
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
 export {
-  Checkbox,
-  CheckboxGroup,
+  Checkbox as DeprecatedCheckbox,
+  CheckboxGroup as DeprecatedCheckboxGroup,
   DateInput as DeprecatedDateInput,
   DateTimeInput,
   FileDrop as DeprecatedFileDrop,
@@ -120,6 +120,7 @@ export { Tooltip } from '@instructure/ui-tooltip'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
 export { DrawerLayout } from '@instructure/ui-drawer-layout'
 export { Grid } from '@instructure/ui-grid'
+export { Checkbox, CheckboxGroup, CheckboxFacade, ToggleFacade } from '@instructure/ui-checkbox'
 export { Navigation, AppNav } from '@instructure/ui-navigation'
 export { List, InlineList } from '@instructure/ui-list'
 export { Menu } from '@instructure/ui-menu'

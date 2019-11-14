@@ -24,19 +24,20 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
+import { IconCheckLine, IconXLine } from '@instructure/ui-icons'
 import { themeable } from '@instructure/ui-themeable'
-import { ToggleFacade as UIToggleFacade } from '@instructure/ui-checkbox'
 
+import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-parent: DeprecatedCheckbox
-id: DeprecatedToggleFacade
+parent: Checkbox
 ---
 **/
-@themeable(theme)
+@themeable(theme, styles)
 class ToggleFacade extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -57,8 +58,78 @@ class ToggleFacade extends Component {
     labelPlacement: 'end'
   }
 
+  renderIcon () {
+    if (this.props.checked) {
+      return (
+        <IconCheckLine className={styles.iconSVG} />
+      )
+    } else {
+      return (
+        <IconXLine className={styles.iconSVG} />
+      )
+    }
+  }
+
+  renderLabel () {
+    const {
+      children,
+      labelPlacement
+    } = this.props
+
+    const classes = {
+      [styles.label]: true,
+      [styles.top]: labelPlacement === 'top',
+      [styles.start]: labelPlacement === 'start',
+      [styles.end]: labelPlacement === 'end'
+    }
+
+    return (
+      <span className={classnames(classes)}>
+        {children}
+      </span>
+    )
+  }
+
   render () {
-    return <UIToggleFacade {...this.props} />
+    const {
+      size,
+      checked,
+      disabled,
+      focused,
+      labelPlacement
+    } = this.props
+
+    const classes = {
+      [styles.facade]: true,
+      [styles.checked]: checked,
+      [styles.disabled]: disabled,
+      [styles.focused]: focused,
+      [styles.top]: labelPlacement === 'top',
+      [styles.start]: labelPlacement === 'start',
+      [styles.end]: labelPlacement === 'end',
+      [styles[size]]: true
+    }
+
+    let rootClasses = {
+      [styles.root]: true
+    }
+    if (labelPlacement === 'top') {
+      rootClasses[styles.top] = true
+    }
+
+    return (
+      <span className={classnames(rootClasses)}>
+        {(labelPlacement === 'top' || labelPlacement === 'start') && this.renderLabel()}
+        <span className={classnames(classes)} aria-hidden="true">
+          <span className={styles.icon}>
+            <span className={styles.iconToggle}>
+              {this.renderIcon()}
+            </span>
+          </span>
+        </span>
+        {labelPlacement === 'end' && this.renderLabel()}
+      </span>
+    )
   }
 }
 

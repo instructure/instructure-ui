@@ -24,33 +24,19 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import keycode from 'keycode'
-import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldMessages   } from '@instructure/ui-form-field'
-import { createChainedFunction } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
-import { uid } from '@instructure/uid'
-import { isActiveElement } from '@instructure/ui-dom-utils'
-import { themeable } from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
-
-import { CheckboxFacade } from './CheckboxFacade'
-import { ToggleFacade } from './ToggleFacade'
-
-import styles from './styles.css'
-import theme from './theme'
+import { FormPropTypes  } from '@instructure/ui-form-field'
+import { deprecated } from '@instructure/ui-react-utils'
+import { Checkbox as UICheckbox } from '@instructure/ui-checkbox'
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedCheckbox
 ---
 **/
-
-@testable()
-@themeable(theme, styles)
+@deprecated('7.0.0', null, 'Use @instructure/ui-checkbox instead.')
 class Checkbox extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
@@ -120,210 +106,33 @@ class Checkbox extends Component {
     labelPlacement: 'end'
   }
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      focused: false,
-      hovered: false
-    }
-
-    if (typeof props.checked === 'undefined') {
-      this.state.checked = !!props.defaultChecked
-    }
-
-    this._defaultId = uid('Checkbox')
-  }
-
-  componentDidMount() {
-    // see https://github.com/facebook/react/issues/1798
-    this._input.indeterminate = this.props.indeterminate
-  }
-
-  componentDidUpdate(prevProps) {
-    // see https://github.com/facebook/react/issues/1798
-    if (prevProps.indeterminate !== this.props.indeterminate) {
-      this._input.indeterminate = this.props.indeterminate
-    }
-  }
-
-  handleChange = (e) => {
-    const { onChange, disabled, checked, readOnly } = this.props
-
-    if (disabled || readOnly) {
-      e.preventDefault()
-      return
-    }
-
-    if (typeof checked === 'undefined') {
-      this.setState({ checked: !this.state.checked })
-    }
-
-    if (typeof onChange === 'function') {
-      onChange(e)
-    }
-  }
-
-  handleKeyDown = (e) => {
-    if (this.props.variant === 'toggle' &&
-      (e.keyCode === keycode.codes.enter || e.keyCode === keycode.codes.return)) {
-      this._input.click()
-      e.preventDefault()
-    }
-  }
-
-  handleFocus = (e) => {
-    this.setState({
-      focused: true
-    })
-  }
-
-  handleBlur = (e) => {
-    this.setState({
-      focused: false
-    })
-  }
-
-  handleMouseOver = (e) => {
-    this.setState({
-      hovered: true
-    })
-  }
-
-  handleMouseOut = (e) => {
-    this.setState({
-      hovered: false
-    })
-  }
+  _checkbox = null
 
   get id () {
-    return this.props.id || this._defaultId
+    return this._checkbox && this._checkbox.id
   }
 
   get checked () {
-    return (typeof this.props.checked === 'undefined') ? this.state.checked : this.props.checked
+    return this._checkbox && this._checkbox.checked
   }
 
   get focused () {
-    return isActiveElement(this._input)
+    return this._checkbox && this._checkbox.focused
   }
 
   focus () {
-    this._input.focus()
-  }
-
-  renderFacade () {
-    const {
-      size,
-      disabled,
-      variant,
-      label,
-      readOnly,
-      indeterminate,
-      labelPlacement
-    } = this.props
-
-    const {
-      hovered,
-      focused
-    } = this.state
-
-    error(
-      !(variant === 'simple' && labelPlacement !== 'end'),
-      `[Checkbox] The \`simple\` variant does not support the \`labelPlacement\` property.  Use the \`toggle\` variant instead.`
-    )
-
-    if (variant === 'toggle') {
-      return (
-        <ToggleFacade
-          disabled={disabled}
-          size={size}
-          hovered={hovered}
-          focused={focused}
-          checked={this.checked}
-          readOnly={readOnly}
-          labelPlacement={labelPlacement}
-        >
-          {label}
-        </ToggleFacade>
-      )
-    } else {
-      return (
-        <CheckboxFacade
-          size={size}
-          hovered={hovered}
-          focused={focused}
-          checked={this.checked}
-          indeterminate={indeterminate}
-        >
-          {label}
-        </CheckboxFacade>
-      )
-    }
+    this._checkbox && this._checkbox.focus()
   }
 
   render () {
-    const {
-      inline,
-      disabled,
-      readOnly,
-      messages,
-      value,
-      onKeyDown,
-      onFocus,
-      onBlur,
-      onMouseOver,
-      onMouseOut,
-      indeterminate,
-      variant
-    } = this.props
-
-    const props = omitProps(this.props, Checkbox.propTypes)
-
-    const classes = {
-      [styles.root]: true,
-      [styles.disabled]: disabled,
-      [styles.inline]: inline
-    }
-
-    error(
-      !(variant === 'toggle' && indeterminate),
-      `[Checkbox] The \`toggle\` variant does not support the \`indeterminate\` property. Use the \`simple\` variant instead.`
-    )
-
-    /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-
     return (
-      <div
-        className={classnames(classes)}
-        onMouseOver={createChainedFunction(onMouseOver, this.handleMouseOver)}
-        onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
-      >
-        <input
-          {...props}
-          id={this.id}
-          value={value}
-          type="checkbox"
-          ref={(c) => { this._input = c }}
-          disabled={disabled || readOnly}
-          aria-checked={indeterminate ? 'mixed' : null}
-          className={styles.input}
-          onChange={this.handleChange}
-          onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
-          onFocus={createChainedFunction(onFocus, this.handleFocus)}
-          onBlur={createChainedFunction(onBlur, this.handleBlur)}
-          checked={this.checked}
-        />
-        <label htmlFor={this.id} className={styles.control}>
-          { this.renderFacade() }
-          <FormFieldMessages messages={messages} />
-        </label>
-      </div>
+      <UICheckbox
+        ref={(component) => { this._checkbox = component }}
+        {...this.props}
+      />
     )
-
-     /* eslint-enable jsx-a11y/mouse-events-have-key-events */
   }
 }
 
 export default Checkbox
-export { Checkbox, CheckboxFacade, ToggleFacade }
+export { Checkbox }

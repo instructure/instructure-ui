@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, borders, spacing, typography }) {
+export default function generator ({ colors, borders, spacing, typography }) {
   return {
     color: colors.textLightest,
     borderWidth: borders.widthSmall,

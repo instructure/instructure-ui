@@ -36,6 +36,14 @@
     "replace": "@instructure/ui-list/lib/List"
   },
   {
+    "pattern": "^@instructure/ui-forms/lib/Checkbox",
+    "replace": "@instructure/ui-checkbox/lib/Checkbox"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/CheckboxGroup",
+    "replace": "@instructure/ui-checkbox/lib/CheckboxGroup"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/Pill",
     "replace": "@instructure/ui-pill/lib/Pill"
   },

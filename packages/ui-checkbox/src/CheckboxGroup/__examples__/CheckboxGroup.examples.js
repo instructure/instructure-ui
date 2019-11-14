@@ -26,8 +26,6 @@ import React from 'react'
 
 import { Checkbox } from '../../Checkbox'
 
-import generateMessages from '../../__tests__/generateMessages'
-
 const getChildren = (variant) => {
   return [
     <Checkbox variant={variant} key="tennis" label="Tennis" value="tennis" />,
@@ -42,7 +40,6 @@ export default {
   maxExamplesPerPage: 50,
   propValues: {
     children: [getChildren('simple'), getChildren('toggle')],
-    messages: generateMessages()
   },
   getComponentProps: (props) => {
     return {

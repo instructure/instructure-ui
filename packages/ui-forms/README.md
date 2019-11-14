@@ -31,8 +31,7 @@ const MyTextInput = () => {
 
 ### Components
 The `ui-forms` package contains the following components:
-- [Checkbox](#Checkbox)
-- [CheckboxGroup](#CheckboxGroup)
+
 - [DateInput (deprecated)](#DeprecatedDateInput)
 - [DateTimeInput](#DateTimeInput)
 - [Select](#Select)
@@ -41,6 +40,8 @@ The `ui-forms` package contains the following components:
 
 ### Deprecated components
 The following components have been deprecated and will be removed from the `ui-forms` package:
+- [Checkbox](#DeprecatedCheckbox) \(use [Checkbox from `ui-checkbox`](#Checkbox) instead)
+- [CheckboxGroup](#DeprecatedCheckboxGroup) \(use [CheckboxGroup from `ui-checkbox`](#CheckboxGroup) instead)
 - [DateInput](#DeprecatedDateInput) \(use [DateInput from `ui-date-input`](#DateInput) instead)
 - [TextArea](#DeprecatedTextArea) \(use [TextArea from `ui-text-area`](#TextArea) instead)
 - [TextInput](#DeprecatedTextInput) \(use [TextInput from `ui-text-input`](#TextInput) instead)

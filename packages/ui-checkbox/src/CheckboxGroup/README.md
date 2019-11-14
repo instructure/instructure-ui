@@ -1,12 +1,6 @@
 ---
-describes: DeprecatedCheckboxGroup
-id: DeprecatedCheckboxGroup__README
+describes: CheckboxGroup
 ---
-
-**DEPRECATED:** CheckboxGroup will be removed from `ui-forms` in version 7.0.0. Use the [CheckboxGroup](#CheckboxGroup) from [ui-checkbox](#ui-checkbox) instead.
-
-___
-
 
 A `<CheckboxGroup/>` is a group of [Checkbox](#Checkbox) components that share the same name. You can
 set an array `value` for the entire group and it will handle setting the `checked` and `name` props for you.
@@ -17,27 +11,27 @@ The Checkbox components can be rendered vertically or horizontally using the `la
 example: true
 ---
 <FormFieldGroup description={<ScreenReaderContent>CheckboxGroup examples</ScreenReaderContent>}>
-  <DeprecatedCheckboxGroup name="sports"
+  <CheckboxGroup name="sports"
     onChange={function (value) { console.log(value) }}
     defaultValue={['football', 'volleyball']}
     description="Select your favorite sports"
   >
-    <DeprecatedCheckbox label="Football" value="football" />
-    <DeprecatedCheckbox label="Basketball" value="basketball" />
-    <DeprecatedCheckbox label="Volleyball" value="volleyball" />
-    <DeprecatedCheckbox label="Other" value="other" />
-  </DeprecatedCheckboxGroup>
-  <DeprecatedCheckboxGroup name="sports" size="small"
+    <Checkbox label="Football" value="football" />
+    <Checkbox label="Basketball" value="basketball" />
+    <Checkbox label="Volleyball" value="volleyball" />
+    <Checkbox label="Other" value="other" />
+  </CheckboxGroup>
+  <CheckboxGroup name="sports" size="small"
     layout="columns"
     onChange={function (value) { console.log(value) }}
     defaultValue={['football', 'volleyball']}
     description="Select your favorite sports"
   >
-    <DeprecatedCheckbox label="Football" value="football" />
-    <DeprecatedCheckbox label="Basketball" value="basketball" />
-    <DeprecatedCheckbox label="Volleyball" value="volleyball" />
-    <DeprecatedCheckbox label="Other" value="other" />
-  </DeprecatedCheckboxGroup>
+    <Checkbox label="Football" value="football" />
+    <Checkbox label="Basketball" value="basketball" />
+    <Checkbox label="Volleyball" value="volleyball" />
+    <Checkbox label="Other" value="other" />
+  </CheckboxGroup>
 </FormFieldGroup>
 ```
 
@@ -47,7 +41,7 @@ The `toggle` variant with `layout` prop set to `inline` and an error message:
 ---
 example: true
 ---
-<DeprecatedCheckboxGroup
+<CheckboxGroup
   name="sports2"
   layout="inline"
   messages={[
@@ -57,11 +51,11 @@ example: true
   defaultValue={['soccer', 'volleyball']}
   description="I wish to receive score alerts for"
 >
-  <DeprecatedCheckbox label="Football" value="football" variant="toggle" />
-  <DeprecatedCheckbox label="Basketball" value="basketball" variant="toggle" />
-  <DeprecatedCheckbox label="Volleyball" value="volleyball" variant="toggle" />
-  <DeprecatedCheckbox label="Soccer" value="soccer" variant="toggle" />
-</DeprecatedCheckboxGroup>
+  <Checkbox label="Football" value="football" variant="toggle" />
+  <Checkbox label="Basketball" value="basketball" variant="toggle" />
+  <Checkbox label="Volleyball" value="volleyball" variant="toggle" />
+  <Checkbox label="Soccer" value="soccer" variant="toggle" />
+</CheckboxGroup>
 ```
 
 You can set disable/readonly on a group and it works much the same way as a RadioInputGroup.
@@ -72,18 +66,18 @@ A `disabled` CheckboxGroup:
 ---
 example: true
 ---
-<DeprecatedCheckboxGroup
+<CheckboxGroup
   name="sports4"
   onChange={function (value) { console.log(value) }}
   defaultValue={['soccer', 'volleyball']}
   description="I wish to receive score alerts for"
   disabled
 >
-  <DeprecatedCheckbox label="Football" value="football" variant="toggle" />
-  <DeprecatedCheckbox label="Basketball" value="basketball" variant="toggle" />
-  <DeprecatedCheckbox label="Volleyball" value="volleyball" variant="toggle" />
-  <DeprecatedCheckbox label="Soccer" value="soccer" variant="toggle" />
-</DeprecatedCheckboxGroup>
+  <Checkbox label="Football" value="football" variant="toggle" />
+  <Checkbox label="Basketball" value="basketball" variant="toggle" />
+  <Checkbox label="Volleyball" value="volleyball" variant="toggle" />
+  <Checkbox label="Soccer" value="soccer" variant="toggle" />
+</CheckboxGroup>
 ```
 ### Guidelines
 

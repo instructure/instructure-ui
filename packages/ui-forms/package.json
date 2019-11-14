@@ -34,6 +34,7 @@
     "@instructure/ui-a11y-utils": "^6.15.0",
     "@instructure/ui-a11y-content": "^6.15.0",
     "@instructure/ui-buttons": "^6.15.0",
+    "@instructure/ui-checkbox": "^6.15.0",
     "@instructure/ui-dom-utils": "^6.15.0",
     "@instructure/ui-elements": "^6.15.0",
     "@instructure/ui-form-field": "^6.15.0",

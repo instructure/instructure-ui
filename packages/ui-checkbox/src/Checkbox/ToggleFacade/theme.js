@@ -22,52 +22,48 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, borders, spacing, typography }) {
+export default function generator ({ colors, borders, forms, shadows, spacing, typography }) {
   return {
     color: colors.textLightest,
-    borderWidth: borders.widthSmall,
-    borderColor: colors.borderDark,
-    borderRadius: borders.radiusMedium,
-    background: colors.backgroundLightest,
-    marginRight: spacing.xSmall,
-    padding: spacing.xxxSmall,
-
-    checkedBackground: colors.backgroundDarkest,
-    checkedBorderColor: colors.borderDarkest,
-
-    hoverBorderColor: colors.borderDarkest,
-
-    focusBorderColor: colors.borderBrand,
+    background: colors.backgroundLight,
+    borderColor: colors.borderMedium,
+    borderWidth: borders.widthMedium,
+    borderRadius: '4rem',
+    marginEnd: spacing.small,
+    marginStart: spacing.small,
+    marginVertical: spacing.xSmall,
+    checkedBackground: colors.backgroundSuccess,
+    uncheckedIconColor: colors.textDark,
+    checkedIconColor: colors.textSuccess,
+    focusOutlineColor: colors.borderBrand,
     focusBorderWidth: borders.widthMedium,
     focusBorderStyle: borders.style,
-
+    toggleBackground: colors.backgroundLightest,
+    toggleShadow: shadows.depth1,
+    baseSizeSmall: forms.inputHeightSmall,
+    baseSizeMedium: forms.inputHeightMedium,
+    baseSizeLarge: forms.inputHeightLarge,
     labelColor: colors.textDarkest,
-    checkedLabelColor: colors.textDarkest,
     labelFontFamily: typography.fontFamily,
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,
-
-    facadeSizeSmall: '1rem',
-    facadeSizeMedium: '1.25rem',
-    facadeSizeLarge: '1.75rem',
-
     labelFontSizeSmall: typography.fontSizeSmall,
     labelFontSizeMedium: typography.fontSizeMedium,
-    labelFontSizeLarge: typography.fontSizeLarge,
+    labelFontSizeLarge: typography.fontSizeLarge
+  }
+}
 
-    iconSizeSmall: '0.625rem',
-    iconSizeMedium: '0.75rem',
-    iconSizeLarge: '1rem'
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+  return {
+    uncheckedIconColor: colors.textDarkest,
+    background: colors.backgroundDarkest,
+    borderColor: colors.borderDarkest
   }
 }
 
 generator.canvas = function (variables) {
   return {
-    focusBorderColor: variables['ic-brand-primary'],
-    labelColor: variables['ic-brand-font-color-dark'],
-    checkedLabelColor: variables['ic-brand-font-color-dark'],
-    checkedBackground: variables['ic-brand-font-color-dark'],
-    checkedBorderColor: variables['ic-brand-font-color-dark'],
-    hoverBorderColor: variables['ic-brand-font-color-dark']
+    focusOutlineColor: variables['ic-brand-primary'],
+    labelColor: variables['ic-brand-font-color-dark']
   }
 }

@@ -32,6 +32,7 @@
     "@instructure/ui-code-editor": "^6.15.0",
     "@instructure/ui-color-utils": "^6.15.0",
     "@instructure/ui-drawer-layout": "^6.15.0",
+    "@instructure/ui-checkbox": "^6.15.0",
     "@instructure/ui-elements": "^6.15.0",
     "@instructure/ui-flex": "^6.15.0",
     "@instructure/ui-form-field": "^6.15.0",

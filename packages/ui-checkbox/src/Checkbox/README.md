@@ -1,11 +1,6 @@
 ---
-describes: DeprecatedCheckbox
-id: DeprecatedCheckbox__README
+describes: Checkbox
 ---
-
-**DEPRECATED:** Checkbox will be removed from `ui-forms` in version 7.0.0. Use the [Checkbox](#Checkbox) from [ui-checkbox](#ui-checkbox) instead.
-
-___
 
 By default, the Checkbox component is a custom styled HTML checkbox. To default the checkbox to checked,
 set the `defaultChecked` prop.
@@ -17,7 +12,7 @@ Adjust the size of the checkbox and label text via the `size` prop. The default 
 ---
 example: true
 ---
-<DeprecatedCheckbox label={lorem.sentence()} value="medium" defaultChecked />
+<Checkbox label={lorem.sentence()} value="medium" defaultChecked />
 ```
 
 The default Checkbox in its disabled state:
@@ -26,14 +21,14 @@ The default Checkbox in its disabled state:
 ---
 example: true
 ---
-<DeprecatedCheckboxGroup
+<CheckboxGroup
   defaultValue={['medium']}
   name="example"
   description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}
 >
-  <DeprecatedCheckbox label={lorem.sentence()} value="medium" disabled />
-  <DeprecatedCheckbox label={lorem.sentence()} value="small" disabled />
-</DeprecatedCheckboxGroup>
+  <Checkbox label={lorem.sentence()} value="medium" disabled />
+  <Checkbox label={lorem.sentence()} value="small" disabled />
+</CheckboxGroup>
 ```
 
 The `indeterminate` property triggers a visual state that handles
@@ -80,7 +75,7 @@ class Example extends React.Component {
         }
         rowSpacing="small"
       >
-        <DeprecatedCheckbox
+        <Checkbox
           aria-labelledby="groupLabel selectAllLabel"
           label={<span id="selectAllLabel">Select all courses</span>}
           value="all"
@@ -91,7 +86,7 @@ class Example extends React.Component {
           indeterminate={this.state.value.length > 0 && this.state.value.length < 3}
         />
         <View as="div" padding="0 0 0 medium">
-          <DeprecatedCheckbox
+          <Checkbox
             aria-labelledby="groupLabel eng203Label"
             label={<span id="eng203Label">English 203</span>}
             value="eng203"
@@ -101,7 +96,7 @@ class Example extends React.Component {
           />
         </View>
         <View as="div" padding="0 0 0 medium">
-          <DeprecatedCheckbox
+          <Checkbox
             aria-labelledby="groupLabel sci101Label"
             label={<span id="sci101Label">Science 101</span>}
             value="sci101"
@@ -113,7 +108,7 @@ class Example extends React.Component {
           />
         </View>
         <View as="div" padding="0 0 0 medium">
-          <DeprecatedCheckbox
+          <Checkbox
             aria-labelledby="groupLabel hist101Label"
             label={<span id="hist101Label">History 111</span>}
             value="his111"
@@ -139,9 +134,9 @@ Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch.
 example: true
 ---
 <FormFieldGroup description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}>
-  <DeprecatedCheckbox label="Small size" value="small" variant="toggle" size="small" defaultChecked />
-  <DeprecatedCheckbox label="Medium size" value="medium" variant="toggle" />
-  <DeprecatedCheckbox label="Large size" value="large" variant="toggle" size="large" defaultChecked />
+  <Checkbox label="Small size" value="small" variant="toggle" size="small" defaultChecked />
+  <Checkbox label="Medium size" value="medium" variant="toggle" />
+  <Checkbox label="Large size" value="large" variant="toggle" size="large" defaultChecked />
 </FormFieldGroup>
 ```
 
@@ -156,9 +151,9 @@ property.*
 example: true
 ---
 <FormFieldGroup description={<ScreenReaderContent>Toggle label examples</ScreenReaderContent>}>
-  <DeprecatedCheckbox label="Top" variant="toggle" labelPlacement="top" defaultChecked />
-  <DeprecatedCheckbox label="Start" variant="toggle" labelPlacement="start" />
-  <DeprecatedCheckbox label="End" variant="toggle" labelPlacement="end" defaultChecked />
+  <Checkbox label="Top" variant="toggle" labelPlacement="top" defaultChecked />
+  <Checkbox label="Start" variant="toggle" labelPlacement="start" />
+  <Checkbox label="End" variant="toggle" labelPlacement="end" defaultChecked />
 </FormFieldGroup>
 ```
 
@@ -169,7 +164,7 @@ the text in the [ScreenReaderContent](#ScreenReaderContent) component.
 ---
 example: true
 ---
-<DeprecatedCheckbox
+<Checkbox
   label={<ScreenReaderContent>Screenreader-accessible label</ScreenReaderContent>}
   value="accessible"
   variant="toggle"

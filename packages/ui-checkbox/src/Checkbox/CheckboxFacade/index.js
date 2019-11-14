@@ -24,43 +24,85 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
+import { SVGIcon } from '@instructure/ui-svg-images'
+import { IconCheckMarkSolid } from '@instructure/ui-icons'
 import { themeable } from '@instructure/ui-themeable'
-import { ToggleFacade as UIToggleFacade } from '@instructure/ui-checkbox'
 
+import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-parent: DeprecatedCheckbox
-id: DeprecatedToggleFacade
+parent: Checkbox
 ---
 **/
-@themeable(theme)
-class ToggleFacade extends Component {
+@themeable(theme, styles)
+class CheckboxFacade extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     checked: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
     focused: PropTypes.bool,
+    hovered: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
+    /**
+    * Visual state showing that child checkboxes are a combination of checked and unchecked
+    */
+    indeterminate: PropTypes.bool
   }
 
   static defaultProps = {
     checked: false,
     focused: false,
+    hovered: false,
     size: 'medium',
-    disabled: false,
-    readOnly: false,
-    labelPlacement: 'end'
+    indeterminate: false
+  }
+
+  renderIcon () {
+    if (this.props.indeterminate) {
+      return (
+        <SVGIcon viewBox="0 0 1920 1920" inline={false}>
+          <rect x="140" y="820" width="1640" height="280" />
+        </SVGIcon>
+      )
+    } else if (this.props.checked) {
+      return <IconCheckMarkSolid inline={false} />
+    } else {
+      return null
+    }
   }
 
   render () {
-    return <UIToggleFacade {...this.props} />
+    const {
+      size,
+      checked,
+      focused,
+      hovered,
+      indeterminate
+    } = this.props
+
+    const classes = {
+      [styles.root]: true,
+      [styles.checked]: checked || indeterminate,
+      [styles.focused]: focused,
+      [styles.hovered]: hovered,
+      [styles[size]]: true
+    }
+
+    return (
+      <span className={classnames(classes)}>
+        <span className={styles.facade} aria-hidden="true">
+          {this.renderIcon()}
+        </span>
+        <span className={styles.label}>
+          {this.props.children}
+        </span>
+      </span>
+    )
   }
 }
 
-export default ToggleFacade
-export { ToggleFacade }
+export default CheckboxFacade
+export { CheckboxFacade }
