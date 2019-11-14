@@ -36,9 +36,7 @@ example: true
       <TextInput
         display="inline-block"
         renderLabel="Enter some text"
-      >
-        Hover or focus me
-      </TextInput>
+      />
     </Tooltip>
   </p>
   <p>
