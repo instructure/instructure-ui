@@ -39,7 +39,7 @@ pipeline {
                   passwordVariable: 'JIRA_SECRET'
           ),
           usernamePassword(
-            credentialsId: 'a4c3be8a-0c49-4504-a5fa-a67bedb4a801',
+            credentialsId: 'npm-api-credentials',
             usernameVariable: 'NPM_USERNAME',
             passwordVariable: 'NPM_TOKEN'
           ),
