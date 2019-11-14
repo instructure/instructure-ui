@@ -1,6 +1,6 @@
 ---
 describes: DeprecatedRating
-id: DeprecatedRating
+id: DeprecatedRating__README
 ---
 
 **DEPRECATED:** Rating will be removed from ui-elements in version 7.0.0. Use [Rating](#Rating) from [ui-rating](#ui-rating) instead.
