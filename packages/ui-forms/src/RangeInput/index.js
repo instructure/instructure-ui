@@ -24,28 +24,26 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { ContextView } from '@instructure/ui-view'
 import { controllable } from '@instructure/ui-prop-types'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
-import { addEventListener } from '@instructure/ui-dom-utils'
-import { uid } from '@instructure/uid'
+import { FormPropTypes } from '@instructure/ui-form-field'
+import { RangeInput as UIRangeInput } from '@instructure/ui-range-input'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { isEdge } from '@instructure/ui-utils'
+import { deprecated } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedRangeInput
 ---
 **/
+
+@deprecated('7.0.0', null, 'Use RangeInput from ui-range-input instead.')
 @testable()
-@themeable(theme, styles)
+@themeable(theme)
 class RangeInput extends Component {
   static propTypes = {
     min: PropTypes.number.isRequired,
@@ -99,123 +97,27 @@ class RangeInput extends Component {
     messages: undefined
   }
 
-  constructor (props) {
-    super()
+  _rangeInput = null
 
-    if (typeof props.value === 'undefined') {
-      this.state = {
-        value: props.defaultValue
-      }
-    }
-
-    this.defaultId = uid('RangeInput')
+  get id () {
+    return this._rangeInput && this._rangeInput.id
   }
-
-  /* workaround for https://github.com/facebook/react/issues/554 */
-  componentDidMount () {
-    if (!this._input) {
-      return
-    }
-    // https://connect.microsoft.com/IE/Feedback/Details/856998
-    this.inputListener = addEventListener(this._input, 'input', this.handleChange)
-    this.changeListener = addEventListener(this._input, 'change', this.handleChange)
-  }
-
-  componentWillUnmount () {
-    if (!this._input) {
-      return
-    }
-    this.inputListener.remove()
-    this.changeListener.remove()
-  }
-  /* end workaround */
-
-  handleChange = (event) => {
-    const { onChange, value } = this.props
-
-    if (typeof value === 'undefined') {
-      this.setState({ value: event.target.value })
-    }
-
-    if (typeof onChange === 'function') {
-      onChange(event.target.value)
-    }
-  }
-
-  // controlled input must have an onChange, but we're handling it with native events
-  noopChange = () => {}
 
   get value () {
-    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
+    return this._rangeInput && this._rangeInput.value
   }
 
   get invalid () {
-    return this.props.messages && this.props.messages.findIndex((message) => { return message.type === 'error' }) >= 0
-  }
-
-  get id () {
-    return this.props.id || this.defaultId
-  }
-
-  renderValue () {
-    if (this.props.displayValue) {
-      return (
-        <ContextView background="inverse" placement="end center">
-          <output htmlFor={this.id} className={styles.value}>
-            {this.props.formatValue(this.value)}
-          </output>
-        </ContextView>
-      )
-    }
+    return this._rangeInput && this._rangeInput.invalid
   }
 
   render () {
-    const {
-      formatValue,
-      size,
-      disabled,
-      readOnly
-    } = this.props
-
-    const props = omitProps(this.props, RangeInput.propTypes)
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: size,
-      [styles.edge16Up]: isEdge
-    }
-
-    /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
-      <FormField
-        {...pickProps(this.props, FormField.propTypes)}
-        id={this.id}
-      >
-        <div className={classnames(classes)}>
-          <input
-            className={styles.input}
-            ref={(c) => { this._input = c }}
-            type="range"
-            role="slider"
-            id={this.id}
-            min={this.props.min}
-            max={this.props.max}
-            step={this.props.step}
-            value={this.value}
-            onChange={this.noopChange}
-            aria-valuenow={this.value}
-            aria-valuemin={this.props.min}
-            aria-valuemax={this.props.max}
-            aria-valuetext={formatValue(this.value, this.props.max)}
-            {...props}
-            disabled={disabled || readOnly}
-            aria-disabled={disabled || readOnly ? 'true' : null}
-          />
-          {this.renderValue()}
-        </div>
-      </FormField>
+      <UIRangeInput
+        ref={(component) => { this._rangeInput = component }}
+        {...this.props}
+      />
     )
-    /* eslint-enable jsx-a11y/no-redundant-roles */
   }
 }
 

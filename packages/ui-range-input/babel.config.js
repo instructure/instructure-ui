@@ -21,18 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import generateMessages from '../../__tests__/generateMessages'
 
-export default {
-  sectionProp: 'layout',
-  maxExamplesPerPage: 50,
-  propValues: {
-    messages: generateMessages()
-  },
-  getComponentProps: (props) => {
-    return {
-      label: 'Opacity',
-      onChange: () => {}
-    }
-  }
-}
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

@@ -67,12 +67,12 @@ export {
   FileDrop as DeprecatedFileDrop,
   RadioInput,
   RadioInputGroup,
-  RangeInput,
+  RangeInput as DeprecatedRangeInput,
   Select as DeprecatedSelect,
   TextArea,
   TextInput as DeprecatedTextInput,
   TimeInput
- } from '@instructure/ui-forms'
+} from '@instructure/ui-forms'
 export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput } from '@instructure/ui-date-input'
@@ -121,6 +121,7 @@ export { Options } from '@instructure/ui-options'
 export { Pagination } from '@instructure/ui-pagination'
 export { Pages } from '@instructure/ui-pages'
 export { Portal } from '@instructure/ui-portal'
+export { RangeInput } from '@instructure/ui-range-input'
 export { Rating } from '@instructure/ui-rating'
 export { Select } from '@instructure/ui-select'
 export { Selectable } from '@instructure/ui-selectable'

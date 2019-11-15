@@ -48,6 +48,8 @@ The following components have been deprecated and will be removed from the `ui-f
 - [DateInput](#DeprecatedDateInput) \(use [DateInput from `ui-date-input`](#DateInput) instead)
 - [TextInput](#DeprecatedTextInput) \(use [TextInput from `ui-text-input`](#TextInput) instead)
 - [FileDrop](#DeprecatedFileDrop) \(use [FileDrop from `ui-file-drop`](#FileDrop) instead)
+- [RangeInput](#DeprecatedRangeInput) \(use [RangeInput from `ui-range-input`](#RangeInput) instead)
+
 
 Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
 
