@@ -70,7 +70,7 @@ export {
   RadioInputGroup,
   RangeInput as DeprecatedRangeInput,
   Select as DeprecatedSelect,
-  TextArea,
+  TextArea as DeprecatedTextArea,
   TextInput as DeprecatedTextInput,
   TimeInput
 } from '@instructure/ui-forms'
@@ -133,6 +133,7 @@ export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export { Tabs, TabList as DeprecatedTabList } from '@instructure/ui-tabs'
 export { Text } from '@instructure/ui-text'
 export { Expandable as DeprecatedExpandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
+export { TextArea } from '@instructure/ui-text-area'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export { Flex } from '@instructure/ui-flex'
 export { FileDrop } from '@instructure/ui-file-drop'

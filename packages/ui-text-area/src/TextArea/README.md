@@ -1,10 +1,6 @@
 ---
-describes: DeprecatedTextArea
-id: DeprecatedTextArea__README
+describes: TextArea
 ---
-**DEPRECATED:** TextArea will be removed from `ui-forms` in version 7.0.0. Use the [TextArea](#TextArea) from [ui-text-area](#ui-text-area) instead.
-
-___
 
 TextArea renders a standard HTML `textarea` element. By default, TextArea will
 resize to fit its content. Use the `maxHeight` property to set a limit on the
@@ -15,37 +11,37 @@ component's height.
 example: true
 ---
 <div>
-  <DeprecatedTextArea
+  <TextArea
     label="Enter/delete text to see TextArea resize"
   />
   <br />
-  <DeprecatedTextArea
+  <TextArea
     label="I can't go any higher than 10rem (160px)"
     maxHeight="10rem"
   />
 </div>
 ```
 
-To allow the user to manually resize TextArea (in supported browsers), use the `resize` property.
+To allow the user to manually resize TextArea (in supported browsers), use the
+`resize` property.
 
 ```js
 ---
 example: true
 ---
 <FormFieldGroup description={<ScreenReaderContent>TextArea examples</ScreenReaderContent>}>
-  <DeprecatedTextArea label="Description" resize="vertical" />
-  <DeprecatedTextArea label="Description" resize="vertical" layout="inline" />
+  <TextArea label="Description" resize="vertical" />
+  <TextArea label="Description" resize="vertical" layout="inline" />
 </FormFieldGroup>
 ```
 
-A `TextArea` with errors:
+A `textarea` with errors:
 
 ```js
 ---
 example: true
 ---
-<DeprecatedTextArea
-  messages={[{ text: 'Invalid description', type: 'error' }]} label="Description" />
+<TextArea messages={[{ text: 'Invalid description', type: 'error' }]} label="Description" />
 ```
 
 A disabled `textarea`:
@@ -54,22 +50,22 @@ A disabled `textarea`:
 ---
 example: true
 ---
-<DeprecatedTextArea label="Description" defaultValue="Nice" disabled />
+<TextArea label="Description" defaultValue="Nice" disabled />
 ```
 
-A `TextArea` with a screenreader only label:
+A `textarea` with a screenreader only label:
 
 ```js
 ---
 example: true
 ---
-<DeprecatedTextArea
+<TextArea
   label={<ScreenReaderContent>Description</ScreenReaderContent>}
   placeholder="describe something"
 />
 ```
 
-An inline `TextArea` with a fixed width, initial height and maxHeight.
+An inline `textarea` with a fixed width, initial height and maxHeight.
 *Note: IE11 needs a `width` prop if the TextArea is `inline`.*
 
 ```js
@@ -77,7 +73,7 @@ An inline `TextArea` with a fixed width, initial height and maxHeight.
 example: true
 ---
 <div style={{ display: 'flex', alignItems: 'center' }}>
-  <DeprecatedTextArea
+  <TextArea
     label={<ScreenReaderContent>Label</ScreenReaderContent>}
     inline
     width="10em"
@@ -102,7 +98,7 @@ class Example extends React.Component {
 
   render () {
     return (
-      <DeprecatedTextArea
+      <TextArea
         label="Description"
         value={this.state.description}
         onChange={this.handleChange}

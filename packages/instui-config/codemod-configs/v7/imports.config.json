@@ -92,6 +92,10 @@
     "replace": "@instructure/ui-text/lib/Text"
   },
   {
+    "pattern": "^@instructure/ui-forms/lib/TextArea",
+    "replace": "@instructure/ui-text-area/lib/TextArea"
+  },
+  {
     "pattern": "^@instructure/ui-overlays/lib/Tooltip",
     "replace": "@instructure/ui-tooltip/lib/Tooltip"
   },

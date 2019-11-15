@@ -60,6 +60,7 @@ module.exports = {
     '@instructure/ui-motion$': path.resolve(__dirname, '../ui-motion/src/'),
     '@instructure/ui-navigation$': path.resolve(__dirname, '../ui-navigation/src/'),
     '@instructure/ui-number-input$': path.resolve(__dirname, '../ui-number-input/src/'),
+    '@instructure/ui-text-area$': path.resolve(__dirname, '../ui-text-area/src/'),
     '@instructure/ui-text-input$': path.resolve(__dirname, '../ui-text-input/src/'),
     '@instructure/ui-options$': path.resolve(__dirname, '../ui-options/src/'),
     '@instructure/ui-overlays$': path.resolve(__dirname, '../ui-overlays/src/'),

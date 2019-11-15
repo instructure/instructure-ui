@@ -24,34 +24,21 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
-import {
-  addEventListener,
-  addResizeListener,
-  findDOMNode,
-  isActiveElement,
-  requestAnimationFrame
-} from '@instructure/ui-dom-utils'
-import { debounce } from '@instructure/debounce'
-import { uid } from '@instructure/uid'
-import { px } from '@instructure/ui-utils'
-import { themeable } from '@instructure/ui-themeable'
-import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { FormPropTypes } from '@instructure/ui-form-field'
+import { deprecated } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { TextArea as UITextArea } from '@instructure/ui-text-area'
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedTextArea
 ---
 **/
-@testable()
-@themeable(theme, styles)
+@deprecated('7.0.0', null, 'Use @instructure/ui-text-area instead.')
+
 class TextArea extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
@@ -143,227 +130,38 @@ class TextArea extends Component {
     maxHeight: undefined
   }
 
-  constructor () {
-    super()
-
-    this._defaultId = uid('TextArea')
-  }
-
-  componentDidMount () {
-    this.autoGrow()
-  }
-
-  componentWillReceiveProps (nextProps) {
-    this.autoGrow()
-  }
-
-  componentWillUnmount () {
-    if (this._listener) {
-      this._listener.remove()
-    }
-
-    if (this._textareaResizeListener) {
-      this._textareaResizeListener.remove()
-    }
-
-    if (this._request) {
-      this._request.cancel()
-    }
-
-    if (this._debounced) {
-      this._debounced.cancel()
-    }
-  }
-
-  _textareaResize = (evt) => {
-    const textareaHeight = this._textarea.style.height
-
-    if (textareaHeight != this._height) {
-      this._manuallyResized = true
-      this._textarea.style.overflowY = 'auto'
-
-      // update container minHeight to ensure focus ring always wraps input
-      this._container.style.minHeight = textareaHeight
-    }
-  }
-
-  autoGrow () {
-    if (this.props.autoGrow) {
-      if (!this._debounced) {
-        this._debounced = debounce(this.grow, 200, {leading: false, trailing: true})
-      }
-
-      if (!this._listener) {
-        this._listener = addEventListener(window, 'resize', this._debounced)
-      }
-
-      if (this._textarea && !this._textareaResizeListener) {
-        this._textareaResizeListener = addResizeListener(this._textarea, this._textareaResize, ['height'])
-      }
-
-      this._request = requestAnimationFrame(this.grow)
-    }
-  }
-
-  grow = (evt) => {
-    if (!this._textarea || this._manuallyResized) {
-      return
-    }
-
-    const offset = this._textarea.offsetHeight - this._textarea.clientHeight
-    let height = ''
-
-    // Notes:
-    // 1. height has be reset to `auto` every time this method runs, or scrollHeight will not reset
-    // 2. `this._textarea.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
-    this._textarea.style.height = 'auto'
-    this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
-    height = (this._textarea.scrollHeight + offset) + 'px'
-
-    const maxHeight = px(this.props.maxHeight, findDOMNode(this))
-
-    if (
-      this.props.maxHeight &&
-      (this._textarea.scrollHeight > maxHeight)) {
-      this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
-    } else if (this.props.height) {
-      if (this._textarea.value === '') {
-        height = this.props.height
-      } else if (px(this.props.height, findDOMNode(this)) > this._textarea.scrollHeight) {
-        this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds height in pixels
-        height = this.props.height
-      }
-    }
-
-    // preserve container height to prevent scroll jumping on long textareas,
-    // but make sure container doesn't exceed maxHeight prop
-    const heightExceedsMax = px(height) > maxHeight
-    if (!heightExceedsMax) {
-      this._container.style.minHeight = height
-    }
-
-    this._height = height
-    this._textarea.style.height = height
-    this._textarea.scrollTop = this._textarea.scrollHeight
-  }
+  _textArea = null
 
   focus () {
-    this._textarea.focus()
-  }
-
-  handleChange = (event) => {
-    const { onChange, value, disabled, readOnly } = this.props
-
-    if (disabled || readOnly) {
-      event.preventDefault()
-      return
-    }
-
-    if (typeof value === 'undefined') { // if uncontrolled
-      this.autoGrow()
-    }
-
-    if (typeof onChange === 'function') {
-      onChange(event)
-    }
-  }
-
-  handleContainerRef = (node) => {
-    this._container = node
+    this._textArea && this._textArea.focus()
   }
 
   get minHeight () {
-    return this._textarea.style.minHeight
+    return this._textArea && this._textArea.minHeight
   }
 
   get invalid () {
-    return this.props.messages && this.props.messages.findIndex((message) => { return message.type === 'error' }) >= 0
+    return this._textArea && this._textArea.invalid
   }
 
   get id () {
-    return this.props.id || this._defaultId
+    return this._textArea && this._textArea.id
   }
 
   get focused () {
-    return isActiveElement(this._textarea)
+    return this._textArea && this._textArea.focused
   }
 
   get value () {
-    return this._textarea.value
+    return this._textArea && this._textArea.value
   }
 
   render () {
-    const {
-      autoGrow,
-      placeholder,
-      value,
-      defaultValue,
-      disabled,
-      readOnly,
-      required,
-      width,
-      height,
-      maxHeight,
-      textareaRef,
-      resize,
-      size
-    } = this.props
-
-    const props = omitProps(this.props, TextArea.propTypes)
-
-    const classes = {
-      [styles.textarea]: true,
-      [styles[size]]: true,
-      [styles.disabled]: disabled
-    }
-
-    const style = {
-      width: width,
-      resize: resize,
-      height: (!autoGrow) ? height : null,
-      maxHeight: maxHeight
-    }
-
-    const textarea = (
-      <textarea
-        {...props}
-        value={value}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        ref={(textarea, ...args) => {
-          this._textarea = textarea
-          textareaRef.apply(this, [textarea].concat(args))
-        }}
-        style={style}
-        id={this.id}
-        required={required}
-        aria-required={required}
-        aria-invalid={this.invalid ? 'true' : null}
-        disabled={disabled || readOnly}
-        className={classnames(classes)}
-        onChange={this.handleChange}
-      />
-    )
-
     return (
-      <FormField
-        {...pickProps(this.props, FormField.propTypes)}
-        vAlign="top"
-        id={this.id}
-        ref={(el) => { this._node = el }}
-      >
-        <div
-          className={styles.layout}
-          style={{
-            width: width,
-            maxHeight: maxHeight
-          }}
-          ref={this.handleContainerRef}
-        >
-          { textarea }
-          { (!disabled && !readOnly) ? <span className={styles.outline} aria-hidden="true"></span> : null }
-        </div>
-      </FormField>
+      <UITextArea
+        ref={(component) => { this._textArea = component }}
+        {...this.props}
+      />
     )
   }
 }
