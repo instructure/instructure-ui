@@ -22,8 +22,4 @@
  * SOFTWARE.
  */
 
-export { BaseButton } from './BaseButton'
-export { Button } from './Button'
-export { CloseButton } from './CloseButton'
-export { CondensedButton } from './CondensedButton'
-export { IconButton } from './IconButton'
+export { default } from '../BaseButton/theme'

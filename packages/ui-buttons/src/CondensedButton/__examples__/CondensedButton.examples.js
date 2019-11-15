@@ -22,8 +22,35 @@
  * SOFTWARE.
  */
 
-export { BaseButton } from './BaseButton'
-export { Button } from './Button'
-export { CloseButton } from './CloseButton'
-export { CondensedButton } from './CondensedButton'
-export { IconButton } from './IconButton'
+import React from 'react'
+
+const icon = (
+  <svg
+    title="myIcon"
+    height="1em"
+    width="1em"
+    style={{ fill: 'currentcolor' }}
+  >
+    <circle cx="0.5em" cy="0.5em" r="0.5em" />
+  </svg>
+)
+
+export default {
+  sectionProp: 'color',
+  propValues: {
+    renderIcon: [null, icon]
+  },
+  getComponentProps: (props) => {
+    return {
+      children: 'Example Button'
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.color.includes('inverse') ? 'primary-inverse' : 'primary'
+    }
+  },
+  filter: (props) => {
+    return props.interaction === 'readonly' || props.type !== 'button'
+  }
+}
