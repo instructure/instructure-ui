@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* **ui-dom-utils:** prevent recursive textNode checks ([c06a7f9](https://github.com/instructure/instructure-ui/commit/c06a7f9))
+* **ui-elements:** remove redundant TruncateText test ([ea222d3](https://github.com/instructure/instructure-ui/commit/ea222d3))
+* **ui-focusable:** fix edge case with getSnapshotBeforeUpdate ([895d131](https://github.com/instructure/instructure-ui/commit/895d131))
+* **ui-react-utils:** fix deprecated util functions in production ([1c09675](https://github.com/instructure/instructure-ui/commit/1c09675))
+* **ui-react-utils:** omit children from passthroughProps ([c0e9cff](https://github.com/instructure/instructure-ui/commit/c0e9cff))
+* **ui-select:** prevent cursor for uneditable selects ([2e2540a](https://github.com/instructure/instructure-ui/commit/2e2540a))
+* **ui-tooltip:** update Tooltip dependency ([98a1617](https://github.com/instructure/instructure-ui/commit/98a1617))
+* **ui-view:** allow View to use native browser focus ([7686f1b](https://github.com/instructure/instructure-ui/commit/7686f1b))
+
+
+### Features
+
+* ensure all packages have build script for types ([4891dc4](https://github.com/instructure/instructure-ui/commit/4891dc4))
+* Move React to a peer dependency ([9648ca3](https://github.com/instructure/instructure-ui/commit/9648ca3))
+* **instui-cli,template-component:** add react as a peer dep when generating components ([b8ca302](https://github.com/instructure/instructure-ui/commit/b8ca302))
+* **template-component:** include types in component generation template ([ae9ce15](https://github.com/instructure/instructure-ui/commit/ae9ce15))
+* **ui-a11y-content:** remove experimental flag from ui-a11y-content package ([ce96006](https://github.com/instructure/instructure-ui/commit/ce96006))
+* **ui-a11y-utils,ui-dialog:** add ui-a11y-utils and ui-dialog ([c88cf8e](https://github.com/instructure/instructure-ui/commit/c88cf8e))
+* **ui-alerts:** update deprecated lifeycles in Alert ([aac0930](https://github.com/instructure/instructure-ui/commit/aac0930))
+* **ui-alerts,Alert:** make aria-atomic configurable ([502b3d9](https://github.com/instructure/instructure-ui/commit/502b3d9))
+* **ui-avatar:** make ui-avatar backwards compatible ([c94255d](https://github.com/instructure/instructure-ui/commit/c94255d))
+* **ui-buttons:** add a BaseButton component ([dbb83cd](https://github.com/instructure/instructure-ui/commit/dbb83cd))
+* **ui-calendar:** reduce calendar test noise ([b5fea9b](https://github.com/instructure/instructure-ui/commit/b5fea9b))
+* **ui-docs-client:** Add first InstUI Insider content ([acc4744](https://github.com/instructure/instructure-ui/commit/acc4744))
+* **ui-docs-client,ui-elements:** ensure ui-docs-client is using Table from ui-table ([5788fce](https://github.com/instructure/instructure-ui/commit/5788fce))
+* **ui-file-drop:** make ui-file-drop backwards compatible ([0534ca2](https://github.com/instructure/instructure-ui/commit/0534ca2))
+* **ui-flex,ui-layout:** make ui-flex backwards compatible ([c11cc6b](https://github.com/instructure/instructure-ui/commit/c11cc6b))
+* **ui-focusable:** update deprecated lifecycles in Focusable ([696c998](https://github.com/instructure/instructure-ui/commit/696c998))
+* **ui-grid:** add ui-grid package ([3921f32](https://github.com/instructure/instructure-ui/commit/3921f32))
+* **ui-heading:** make ui-heading backwards compatible ([c4f9541](https://github.com/instructure/instructure-ui/commit/c4f9541))
+* **ui-icons-build,ui-icons:** fix icon build and add studio, certified ([90d01f4](https://github.com/instructure/instructure-ui/commit/90d01f4))
+* **ui-img:** make ui-img backwards compatible ([ff7d2b6](https://github.com/instructure/instructure-ui/commit/ff7d2b6))
+* **ui-link:** Make ui-link/Link backwards compatible ([3e62c49](https://github.com/instructure/instructure-ui/commit/3e62c49))
+* **ui-list:** add ui-list package ([7c867af](https://github.com/instructure/instructure-ui/commit/7c867af))
+* **ui-metric:** add ui-metric package ([d4b6dd3](https://github.com/instructure/instructure-ui/commit/d4b6dd3))
+* **ui-modal:** add ui-modal package ([a9c5cee](https://github.com/instructure/instructure-ui/commit/a9c5cee))
+* **ui-overlays,ui-tooltip:** expose positionTarget prop on Tooltip ([6c1a545](https://github.com/instructure/instructure-ui/commit/6c1a545))
+* **ui-pill:** make ui-pill backwards compatible ([480eeb7](https://github.com/instructure/instructure-ui/commit/480eeb7))
+* **ui-popover:** make ui-popover backwards compatible ([d9437ae](https://github.com/instructure/instructure-ui/commit/d9437ae))
+* **ui-position:** make ui-position backwards compatible ([24e90d1](https://github.com/instructure/instructure-ui/commit/24e90d1))
+* **ui-progress:** add ui-progress package ([4dfcf4a](https://github.com/instructure/instructure-ui/commit/4dfcf4a))
+* **ui-rating:** add ui-rating package ([3fa4129](https://github.com/instructure/instructure-ui/commit/3fa4129))
+* **ui-react-utils:** allow for completely custom message in deprecatePropValues ([9a86beb](https://github.com/instructure/instructure-ui/commit/9a86beb))
+* **ui-react-utils:** update deprecated lifecycles in decorators ([87295bf](https://github.com/instructure/instructure-ui/commit/87295bf))
+* **ui-tag:** ui-tag package ([dbf87ca](https://github.com/instructure/instructure-ui/commit/dbf87ca))
+* **ui-text:** make ui-text backwards compatible ([7aabd6a](https://github.com/instructure/instructure-ui/commit/7aabd6a))
+* **ui-text-input:** make ui-text-input backwards compatible ([b9d889d](https://github.com/instructure/instructure-ui/commit/b9d889d))
+* **ui-themeable:** allow components to specify a theme adapter ([8be3d42](https://github.com/instructure/instructure-ui/commit/8be3d42))
+* **ui-tooltip:** make ui-tooltip backwards compatible ([7608e7c](https://github.com/instructure/instructure-ui/commit/7608e7c))
+* **ui-tooltip:** update tooltip callback naming ([2b26d54](https://github.com/instructure/instructure-ui/commit/2b26d54))
+* **ui-view:** Make ui-view backwards-compatible ([7dd2a2f](https://github.com/instructure/instructure-ui/commit/7dd2a2f))
+* **ui-view:** move ContextView to ui-view package ([4601b4a](https://github.com/instructure/instructure-ui/commit/4601b4a))
+
+
+### Performance Improvements
+
+* **ui-tooltip:** remove Focusable from Tooltip ([83aa0c9](https://github.com/instructure/instructure-ui/commit/83aa0c9))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 

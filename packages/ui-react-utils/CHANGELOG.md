@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* **ui-react-utils:** fix deprecated util functions in production ([1c09675](https://github.com/instructure/instructure-ui/commit/1c09675))
+* **ui-react-utils:** omit children from passthroughProps ([c0e9cff](https://github.com/instructure/instructure-ui/commit/c0e9cff))
+
+
+### Features
+
+* **ui-focusable:** update deprecated lifecycles in Focusable ([696c998](https://github.com/instructure/instructure-ui/commit/696c998))
+* **ui-react-utils:** allow for completely custom message in deprecatePropValues ([9a86beb](https://github.com/instructure/instructure-ui/commit/9a86beb))
+* **ui-react-utils:** update deprecated lifecycles in decorators ([87295bf](https://github.com/instructure/instructure-ui/commit/87295bf))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 

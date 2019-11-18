@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Features
+
+* Move React to a peer dependency ([9648ca3](https://github.com/instructure/instructure-ui/commit/9648ca3))
+* **ui-flex,ui-layout:** make ui-flex backwards compatible ([c11cc6b](https://github.com/instructure/instructure-ui/commit/c11cc6b))
+* **ui-tag:** ui-tag package ([dbf87ca](https://github.com/instructure/instructure-ui/commit/dbf87ca))
+* **ui-text-input:** make ui-text-input backwards compatible ([b9d889d](https://github.com/instructure/instructure-ui/commit/b9d889d))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 **Note:** Version bump only for package @instructure/ui-text-input

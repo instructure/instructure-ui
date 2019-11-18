@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* **ui-view:** allow View to use native browser focus ([7686f1b](https://github.com/instructure/instructure-ui/commit/7686f1b))
+
+
+### Features
+
+* **ui-a11y-utils,ui-dialog:** add ui-a11y-utils and ui-dialog ([c88cf8e](https://github.com/instructure/instructure-ui/commit/c88cf8e))
+* **ui-grid:** add ui-grid package ([3921f32](https://github.com/instructure/instructure-ui/commit/3921f32))
+* **ui-list:** add ui-list package ([7c867af](https://github.com/instructure/instructure-ui/commit/7c867af))
+* **ui-metric:** add ui-metric package ([d4b6dd3](https://github.com/instructure/instructure-ui/commit/d4b6dd3))
+* **ui-modal:** add ui-modal package ([a9c5cee](https://github.com/instructure/instructure-ui/commit/a9c5cee))
+* **ui-popover:** make ui-popover backwards compatible ([d9437ae](https://github.com/instructure/instructure-ui/commit/d9437ae))
+* **ui-rating:** add ui-rating package ([3fa4129](https://github.com/instructure/instructure-ui/commit/3fa4129))
+* **ui-tag:** ui-tag package ([dbf87ca](https://github.com/instructure/instructure-ui/commit/dbf87ca))
+* **ui-text-input:** make ui-text-input backwards compatible ([b9d889d](https://github.com/instructure/instructure-ui/commit/b9d889d))
+* **ui-view:** move ContextView to ui-view package ([4601b4a](https://github.com/instructure/instructure-ui/commit/4601b4a))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 

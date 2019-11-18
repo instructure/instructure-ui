@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Features
+
+* **ui-a11y-utils,ui-dialog:** add ui-a11y-utils and ui-dialog ([c88cf8e](https://github.com/instructure/instructure-ui/commit/c88cf8e))
+* **ui-modal:** add ui-modal package ([a9c5cee](https://github.com/instructure/instructure-ui/commit/a9c5cee))
+* **ui-overlays,ui-tooltip:** expose positionTarget prop on Tooltip ([6c1a545](https://github.com/instructure/instructure-ui/commit/6c1a545))
+* **ui-popover:** make ui-popover backwards compatible ([d9437ae](https://github.com/instructure/instructure-ui/commit/d9437ae))
+* **ui-tooltip:** make ui-tooltip backwards compatible ([7608e7c](https://github.com/instructure/instructure-ui/commit/7608e7c))
+* **ui-view:** Make ui-view backwards-compatible ([7dd2a2f](https://github.com/instructure/instructure-ui/commit/7dd2a2f))
+
+
+### Performance Improvements
+
+* **ui-tooltip:** remove Focusable from Tooltip ([83aa0c9](https://github.com/instructure/instructure-ui/commit/83aa0c9))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 

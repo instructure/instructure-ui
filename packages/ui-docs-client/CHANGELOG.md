@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Features
+
+* **ui-a11y-content:** remove experimental flag from ui-a11y-content package ([ce96006](https://github.com/instructure/instructure-ui/commit/ce96006))
+* **ui-docs-client:** Add first InstUI Insider content ([acc4744](https://github.com/instructure/instructure-ui/commit/acc4744))
+* **ui-docs-client,ui-elements:** ensure ui-docs-client is using Table from ui-table ([5788fce](https://github.com/instructure/instructure-ui/commit/5788fce))
+* **ui-flex,ui-layout:** make ui-flex backwards compatible ([c11cc6b](https://github.com/instructure/instructure-ui/commit/c11cc6b))
+* **ui-heading:** make ui-heading backwards compatible ([c4f9541](https://github.com/instructure/instructure-ui/commit/c4f9541))
+* **ui-link:** Make ui-link/Link backwards compatible ([3e62c49](https://github.com/instructure/instructure-ui/commit/3e62c49))
+* **ui-list:** add ui-list package ([7c867af](https://github.com/instructure/instructure-ui/commit/7c867af))
+* **ui-pill:** make ui-pill backwards compatible ([480eeb7](https://github.com/instructure/instructure-ui/commit/480eeb7))
+* **ui-text:** make ui-text backwards compatible ([7aabd6a](https://github.com/instructure/instructure-ui/commit/7aabd6a))
+* **ui-tooltip:** make ui-tooltip backwards compatible ([7608e7c](https://github.com/instructure/instructure-ui/commit/7608e7c))
+* **ui-view:** Make ui-view backwards-compatible ([7dd2a2f](https://github.com/instructure/instructure-ui/commit/7dd2a2f))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 

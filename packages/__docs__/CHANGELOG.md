@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Features
+
+* **ui-a11y-utils,ui-dialog:** add ui-a11y-utils and ui-dialog ([c88cf8e](https://github.com/instructure/instructure-ui/commit/c88cf8e))
+* **ui-buttons:** add a BaseButton component ([dbb83cd](https://github.com/instructure/instructure-ui/commit/dbb83cd))
+* **ui-grid:** add ui-grid package ([3921f32](https://github.com/instructure/instructure-ui/commit/3921f32))
+* **ui-list:** add ui-list package ([7c867af](https://github.com/instructure/instructure-ui/commit/7c867af))
+* **ui-metric:** add ui-metric package ([d4b6dd3](https://github.com/instructure/instructure-ui/commit/d4b6dd3))
+* **ui-modal:** add ui-modal package ([a9c5cee](https://github.com/instructure/instructure-ui/commit/a9c5cee))
+* **ui-progress:** add ui-progress package ([4dfcf4a](https://github.com/instructure/instructure-ui/commit/4dfcf4a))
+* **ui-rating:** add ui-rating package ([3fa4129](https://github.com/instructure/instructure-ui/commit/3fa4129))
+* **ui-tag:** ui-tag package ([dbf87ca](https://github.com/instructure/instructure-ui/commit/dbf87ca))
+* **ui-view:** Make ui-view backwards-compatible ([7dd2a2f](https://github.com/instructure/instructure-ui/commit/7dd2a2f))
+* **ui-view:** move ContextView to ui-view package ([4601b4a](https://github.com/instructure/instructure-ui/commit/4601b4a))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 

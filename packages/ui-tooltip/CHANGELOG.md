@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* **ui-tooltip:** update Tooltip dependency ([98a1617](https://github.com/instructure/instructure-ui/commit/98a1617))
+
+
+### Features
+
+* ensure all packages have build script for types ([4891dc4](https://github.com/instructure/instructure-ui/commit/4891dc4))
+* Move React to a peer dependency ([9648ca3](https://github.com/instructure/instructure-ui/commit/9648ca3))
+* **ui-overlays,ui-tooltip:** expose positionTarget prop on Tooltip ([6c1a545](https://github.com/instructure/instructure-ui/commit/6c1a545))
+* **ui-popover:** make ui-popover backwards compatible ([d9437ae](https://github.com/instructure/instructure-ui/commit/d9437ae))
+* **ui-tooltip:** make ui-tooltip backwards compatible ([7608e7c](https://github.com/instructure/instructure-ui/commit/7608e7c))
+* **ui-tooltip:** update tooltip callback naming ([2b26d54](https://github.com/instructure/instructure-ui/commit/2b26d54))
+
+
+### Performance Improvements
+
+* **ui-tooltip:** remove Focusable from Tooltip ([83aa0c9](https://github.com/instructure/instructure-ui/commit/83aa0c9))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 

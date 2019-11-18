@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
+
+
+### Features
+
+* **instui-cli,template-component:** add react as a peer dep when generating components ([b8ca302](https://github.com/instructure/instructure-ui/commit/b8ca302))
+* **template-component:** include types in component generation template ([ae9ce15](https://github.com/instructure/instructure-ui/commit/ae9ce15))
+
+
+
+
+
 # [6.14.0](https://github.com/instructure/instructure-ui/compare/v6.13.0...v6.14.0) (2019-10-14)
 
 **Note:** Version bump only for package @instructure/template-component
