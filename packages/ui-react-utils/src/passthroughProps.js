@@ -70,7 +70,7 @@ function passthroughProps (props) {
 
   Object.keys(props)
     // style and className need to be explicitly passed through
-    .filter(propName => isPropValid(propName) && propName !== 'style' && propName !== 'className')
+    .filter(propName => isPropValid(propName) && propName !== 'style' && propName !== 'className' && propName !== 'children')
     .forEach((propName) => {
       validProps[propName] = props[propName]
     })
