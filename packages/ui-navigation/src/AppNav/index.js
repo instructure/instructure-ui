@@ -45,7 +45,6 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
 @testable()
