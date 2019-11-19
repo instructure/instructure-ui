@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
+const { warn } = require('@instructure/command-utils')
 const { handleCreateFromTemplate } = require('../handlers')
 
 exports.command = 'create-from-template'
-exports.desc = 'Copy template source file or directory to a specified destination and replace variables with designated values.'
+exports.desc = 'Copy template source file or directory to a specified destination and replace variables with designated values. (Note: This command has been moved to `@instructure/ui-template-scripts`)'
 
 exports.builder = (yargs) => {
   yargs.option('template', {
@@ -63,6 +64,8 @@ exports.handler = (argv) => {
     name,
     values
   } = argv
+
+  warn('This command has now been moved to `@instructure/ui-template-scripts`.')
 
   handleCreateFromTemplate({ template, path, name, values })
 }

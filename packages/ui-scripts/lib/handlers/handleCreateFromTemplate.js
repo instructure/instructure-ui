@@ -22,71 +22,10 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const fse = require('fs-extra')
+const { handleCreateFromTemplate } = require('@instructure/ui-template-scripts/lib/handlers')
+const { warn } = require('@instructure/command-utils')
 
-const yargsInteractive = require('yargs-interactive')
-
-const { info, error } = require('@instructure/command-utils')
-
-const createFromTemplate = require('../utils/createFromTemplate')
-const promptContentName = require('../utils/promptContentName')
-
-module.exports = async ({ template, name, path: sourcePath = process.cwd(), values: rawValues } = {}) => {
-  let values = rawValues
-
-  if (typeof values === 'string') {
-    try {
-      values = JSON.parse(values)
-    } catch (err) {
-      error(`Unable to parse the JSON provided for the \`values\` argument. Encountered the follwing error:\n${err}`)
-      process.exit(1)
-    }
-  }
-
-  const contentName = await promptContentName({ name })
-
-  const destPath = path.join(sourcePath, contentName)
-
-  if (fse.existsSync(destPath)) {
-    info(`\`${destPath}\` already exists. If you choose to continue and overwrite it, it's existing contents may be lost.`)
-    const { overwrite } = await yargsInteractive()
-      .interactive({
-        interactive: { default: true },
-        overwrite: {
-          type: 'confirm',
-          describe: 'Would you like to continue and overwrite it?'
-        }
-      })
-
-    if (!overwrite) {
-      process.exit(0)
-    }
-
-    // Remove the destination if it's a dir. If it's a file, it will just be overwritten
-    // when the createFromTemplate func executes
-    if (fse.statSync(destPath).isDirectory()) {
-      fse.emptyDirSync(destPath)
-      fse.rmdirSync(destPath)
-    }
-  }
-
-  info(`Creating \`${contentName}\` in \`${sourcePath}\``)
-
-  try {
-    createFromTemplate({
-      template,
-      dest: destPath,
-      values: generateValues({ values, name: contentName })
-    })
-  } catch (err) {
-    error('Encountered an error generating source from the template: ', err)
-    process.exit(1)
-  }
-
-  info('Success!')
+module.exports = async (args = {}) => {
+  warn('`handleCreateFromTemplate` has been moved from \'@instructure/ui-scripts/lib/handlers/handleCreateFromTemplate\' to \'@instructure/ui-template-scripts/lib/handlers/handleCreateFromTemplate\'.')
+  handleCreateFromTemplate(args)
 }
-
-const generateValues = ({ values, name }) => typeof values === 'function'
-  ? values({ name })
-  : values

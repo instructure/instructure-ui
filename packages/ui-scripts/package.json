@@ -25,6 +25,7 @@
     "@codesandbox/common": "^1.0.8",
     "@instructure/command-utils": "^6.15.0",
     "@instructure/cz-lerna-changelog": "^6.15.0",
+    "@instructure/ui-template-scripts": "^6.15.0",
     "@instructure/ui-upgrade-scripts": "^6.15.0",
     "@instructure/pkg-utils": "^6.15.0",
     "@lerna/project": "^3",
@@ -32,7 +33,6 @@
     "dotenv": "^8.1.0",
     "eslint": "^6.4.0",
     "find-up": "^4.1.0",
-    "fs-extra": "^8.1.0",
     "gerritbot": "^1.0.3",
     "gh-pages": "^2.1.1",
     "git-url-parse": "^11.1.2",
@@ -42,7 +42,6 @@
     "jscodeshift": "^0.6.4",
     "karma-cli": "^2.0.0",
     "lerna": "^3",
-    "lodash.template": "^4.5.0",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "open": "^6.4.0",
@@ -53,8 +52,7 @@
     "validate-commit-msg": "^2.14.0",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1",
-    "yargs": "^14.0.0",
-    "yargs-interactive": "^3.0.0"
+    "yargs": "^14.0.0"
   },
   "optionalDependencies": {
     "@instructure/mocha-environment-jsdom": "^6.15.0",

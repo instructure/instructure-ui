@@ -22,10 +22,26 @@
  * SOFTWARE.
  */
 
-const { handleCreatePackage } = require('@instructure/ui-template-scripts/lib/handlers')
-const { warn } = require('@instructure/command-utils')
+const yargsInteractive = require('yargs-interactive')
+const { error } = require('@instructure/command-utils')
 
-module.exports = async (args = {}) => {
-  warn('`handleCreatePackage` has been moved from \'@instructure/ui-scripts/lib/handlers/handleCreatePackage\' to \'@instructure/ui-template-scripts/lib/handlers/handleCreatePackage\'.')
-  handleCreatePackage(args)
+module.exports = async ({ name, contentType, formatInstructions = '', isRequired = true } = {}) => {
+  let contentName = name
+  if (!contentName) {
+    contentName = (await yargsInteractive()
+      .interactive({
+        interactive: { default: true },
+        contentName: {
+          type: 'input',
+          describe: `Enter a name${contentType ? ` for the ${contentType}` : ''}${formatInstructions}:`
+        }
+      })).contentName
+  }
+
+  if (!contentName && isRequired) {
+    error('A name is required')
+    process.exit(0)
+  }
+
+  return contentName
 }

@@ -22,10 +22,21 @@
  * SOFTWARE.
  */
 
-const { handleCreatePackage } = require('@instructure/ui-template-scripts/lib/handlers')
-const { warn } = require('@instructure/command-utils')
+const Project = require('@lerna/project')
 
-module.exports = async (args = {}) => {
-  warn('`handleCreatePackage` has been moved from \'@instructure/ui-scripts/lib/handlers/handleCreatePackage\' to \'@instructure/ui-template-scripts/lib/handlers/handleCreatePackage\'.')
-  handleCreatePackage(args)
+module.exports = ({ path }) => {
+  try {
+    const { packageParentDirs } = new Project(path)
+
+    // Filter any duplicates
+    return packageParentDirs.reduce((result, dir) => {
+      if (!result.includes(dir)) {
+        result.push(dir)
+      }
+
+      return result
+    }, [])
+  } catch (err) {
+    return []
+  }
 }

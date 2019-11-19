@@ -28,7 +28,7 @@ const {
   handleCreateComponent,
   handleCreateFromTemplate,
   handleCreatePackage
-} = require('@instructure/ui-scripts/lib/handlers')
+} = require('@instructure/ui-template-scripts/lib/handlers')
 
 module.exports = async ({ contentType, path: sourcePath, name, initialVersion }) => {
   const pkgPath = require.resolve(`@instructure/template-${contentType}/package.json`)

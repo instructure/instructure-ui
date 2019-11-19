@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-const { warn } = require('@instructure/command-utils')
 const { handleCreatePackage } = require('../handlers')
 
 exports.command = 'create-package'
-exports.desc = 'Generate a package from a template. (Note: This command has been moved to `@instructure/ui-template-scripts`)'
+exports.desc = 'Generate a package from a template.'
 
 exports.builder = (yargs) => {
   yargs.option('template', {
@@ -63,8 +62,6 @@ exports.handler = async (argv) => {
     name,
     values
   } = argv
-
-  warn('This command has now been moved to `@instructure/ui-template-scripts`.')
 
   handleCreatePackage({ template, path, name, values })
 }

@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-const { warn } = require('@instructure/command-utils')
-const { handleCreatePackage } = require('../handlers')
+const { handleCreateFromTemplate } = require('../handlers')
 
-exports.command = 'create-package'
-exports.desc = 'Generate a package from a template. (Note: This command has been moved to `@instructure/ui-template-scripts`)'
+exports.command = 'create-from-template'
+exports.desc = 'Copy template source file or directory to a specified destination and replace variables with designated values.'
 
 exports.builder = (yargs) => {
   yargs.option('template', {
@@ -39,24 +38,25 @@ exports.builder = (yargs) => {
   yargs.option('path', {
     alias: 'p',
     type: 'string',
-    describe: 'The path where the generated package will be located. If no path is provided, prompts for selection of workspace defined in the current working directory\'s package.json. If no workspaces are defined, defaults to the current working directory.'
+    describe: 'The path where the generated source will be located.',
+    default: process.cwd()
   })
 
   yargs.option('name', {
     alias: 'n',
     type: 'string',
-    describe: 'The name of the generated package.',
+    describe: 'The name of the generated source file or directory (Note: if generating a file, the name should include the file extension ex. "myFile.js").',
     demandOption: true
   })
 
   yargs.option('values', {
     type: 'string',
-    describe: 'A JSON string mapping variable names to values which will be used to replace variables in the template package. Ex. \'{"NAME":"my-package","VERSION":"12.0.0"}\'.',
+    describe: 'A JSON string mapping variable names to values which will be used to replace variables in the templates. Ex. \'{"NAME":"my-app","DESC":"A cool app"}\'.',
     default: '{}'
   })
 }
 
-exports.handler = async (argv) => {
+exports.handler = (argv) => {
   const {
     template,
     path,
@@ -64,7 +64,5 @@ exports.handler = async (argv) => {
     values
   } = argv
 
-  warn('This command has now been moved to `@instructure/ui-template-scripts`.')
-
-  handleCreatePackage({ template, path, name, values })
+  handleCreateFromTemplate({ template, path, name, values })
 }

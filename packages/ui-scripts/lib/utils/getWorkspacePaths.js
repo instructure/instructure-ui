@@ -22,21 +22,10 @@
  * SOFTWARE.
  */
 
-const Project = require('@lerna/project')
+const getWorkspacePaths = require('@instructure/ui-template-scripts/lib/utils/getWorkspacePaths')
+const { warn } = require('@instructure/command-utils')
 
-module.exports = ({ path }) => {
-  try {
-    const { packageParentDirs } = new Project(path)
-
-    // Filter any duplicates
-    return packageParentDirs.reduce((result, dir) => {
-      if (!result.includes(dir)) {
-        result.push(dir)
-      }
-
-      return result
-    }, [])
-  } catch (err) {
-    return []
-  }
+module.exports = function (args = {}) {
+  warn('`getWorkspacePaths` has been moved from \'@instructure/ui-scripts/lib/utils/getWorkspacePaths\' to \'@instructure/ui-template-scripts/lib/utils/getWorkspacePaths\'.')
+  return getWorkspacePaths(args)
 }

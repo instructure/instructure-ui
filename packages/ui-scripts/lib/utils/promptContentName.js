@@ -22,26 +22,10 @@
  * SOFTWARE.
  */
 
-const yargsInteractive = require('yargs-interactive')
-const { error } = require('@instructure/command-utils')
+const promptContentName = require('@instructure/ui-template-scripts/lib/utils/promptContentName')
+const { warn } = require('@instructure/command-utils')
 
-module.exports = async ({ name, contentType, formatInstructions = '', isRequired = true } = {}) => {
-  let contentName = name
-  if (!contentName) {
-    contentName = (await yargsInteractive()
-      .interactive({
-        interactive: { default: true },
-        contentName: {
-          type: 'input',
-          describe: `Enter a name${contentType ? ` for the ${contentType}` : ''}${formatInstructions}:`
-        }
-      })).contentName
-  }
-
-  if (!contentName && isRequired) {
-    error('A name is required')
-    process.exit(0)
-  }
-
-  return contentName
+module.exports = function (args = {}) {
+  warn('`promptContentName` has been moved from \'@instructure/ui-scripts/lib/utils/promptContentName\' to \'@instructure/ui-template-scripts/lib/utils/promptContentName\'.')
+  return promptContentName(args)
 }

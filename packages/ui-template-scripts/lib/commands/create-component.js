@@ -22,36 +22,42 @@
  * SOFTWARE.
  */
 
-const { warn } = require('@instructure/command-utils')
-const { handleCreatePackage } = require('../handlers')
+const { handleCreateComponent } = require('../handlers')
 
-exports.command = 'create-package'
-exports.desc = 'Generate a package from a template. (Note: This command has been moved to `@instructure/ui-template-scripts`)'
+exports.command = 'create-component'
+exports.desc = 'Generate a component within a new package or within an existing package.'
 
 exports.builder = (yargs) => {
   yargs.option('template', {
     alias: 't',
     type: 'string',
-    describe: 'The path to the template file or directory.',
+    describe: 'The path to the template file or directory for the component.',
     demandOption: true
   })
 
   yargs.option('path', {
     alias: 'p',
     type: 'string',
-    describe: 'The path where the generated package will be located. If no path is provided, prompts for selection of workspace defined in the current working directory\'s package.json. If no workspaces are defined, defaults to the current working directory.'
+    describe: 'The path where the generated component will be located. If the path is to a monorepo containing packages, optionally suggests packages to choose from where the component will be created.'
+  })
+
+  yargs.option('package-source', {
+    alias: 'packageSource',
+    type: 'string',
+    describe: 'The directory containing the package source code if the component is going to be created within an existing package.',
+    default: 'src'
   })
 
   yargs.option('name', {
     alias: 'n',
     type: 'string',
-    describe: 'The name of the generated package.',
+    describe: 'The name of the component (in PascalCase, e.g. NumberInput).',
     demandOption: true
   })
 
   yargs.option('values', {
     type: 'string',
-    describe: 'A JSON string mapping variable names to values which will be used to replace variables in the template package. Ex. \'{"NAME":"my-package","VERSION":"12.0.0"}\'.',
+    describe: 'A JSON string mapping variable names to values which will be used to replace variables in the template component. Ex. \'{"NAME":"MyComponent","VERSION":"12.0.0"}\'.',
     default: '{}'
   })
 }
@@ -60,11 +66,16 @@ exports.handler = async (argv) => {
   const {
     template,
     path,
+    packageSource,
     name,
     values
   } = argv
 
-  warn('This command has now been moved to `@instructure/ui-template-scripts`.')
-
-  handleCreatePackage({ template, path, name, values })
+  handleCreateComponent({
+    componentTemplate: template,
+    path,
+    packageSource,
+    name,
+    values
+  })
 }

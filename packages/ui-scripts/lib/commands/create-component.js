@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
+const { warn } = require('@instructure/command-utils')
 const { handleCreateComponent } = require('../handlers')
 
 exports.command = 'create-component'
-exports.desc = 'Generate a component within a new package or within an existing package.'
+exports.desc = 'Generate a component within a new package or within an existing package. (Note: This command has been moved to `@instructure/ui-template-scripts`)'
 
 exports.builder = (yargs) => {
   yargs.option('template', {
@@ -70,6 +71,8 @@ exports.handler = async (argv) => {
     name,
     values
   } = argv
+
+  warn('This command has now been moved to `@instructure/ui-template-scripts`.')
 
   handleCreateComponent({
     componentTemplate: template,

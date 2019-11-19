@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/instui-cli",
+  "name": "@instructure/ui-template-scripts",
   "version": "6.15.0",
-  "description": "A cli for working with instructure-ui packages",
+  "description": "A collection of UI scripts for generating code from templates.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {
@@ -11,7 +11,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "bin": {
-    "instui": "./lib/index.js"
+    "ui-template-scripts": "./lib/index.js"
   },
   "scripts": {
     "lint": "ui-test --lint",
@@ -20,17 +20,14 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/command-utils": "^6.15.0",
-    "@instructure/instui-config": "^6.15.0",
-    "@instructure/template-app": "^6.15.0",
-    "@instructure/template-component": "^6.15.0",
-    "@instructure/template-package": "^6.15.0",
-    "@instructure/ui-codemods": "^6.15.0",
-    "@instructure/ui-template-scripts": "^6.15.0",
-    "@instructure/ui-upgrade-scripts": "^6.15.0",
-    "semver": "^6.3.0",
-    "yargs": "^14.0.0"
+    "@lerna/project": "^3",
+    "fs-extra": "^8.1.0",
+    "lodash.template": "^4.5.0",
+    "yargs": "^14.0.0",
+    "yargs-interactive": "^3.0.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }

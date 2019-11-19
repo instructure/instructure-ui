@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 
-const { handleCreatePackage } = require('@instructure/ui-template-scripts/lib/handlers')
-const { warn } = require('@instructure/command-utils')
+const handleCreateComponent = require('./handleCreateComponent')
+const handleCreateFromTemplate = require('./handleCreateFromTemplate')
+const handleCreatePackage = require('./handleCreatePackage')
 
-module.exports = async (args = {}) => {
-  warn('`handleCreatePackage` has been moved from \'@instructure/ui-scripts/lib/handlers/handleCreatePackage\' to \'@instructure/ui-template-scripts/lib/handlers/handleCreatePackage\'.')
-  handleCreatePackage(args)
+module.exports = {
+  handleCreateComponent,
+  handleCreateFromTemplate,
+  handleCreatePackage
 }
