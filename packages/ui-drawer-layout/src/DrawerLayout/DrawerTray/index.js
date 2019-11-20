@@ -36,15 +36,15 @@ import { testable } from '@instructure/ui-testable'
 import { Dialog } from '@instructure/ui-dialog'
 import { Portal } from '@instructure/ui-portal'
 
-import { mirrorHorizontalPlacement } from '../../mirrorHorizontalPlacement'
+import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-parent: DeprecatedDrawerLayout
-id: DeprecatedDrawerLayout.Tray
+parent: DrawerLayout
+id: DrawerLayout.Tray
 ---
 **/
 @testable()
@@ -296,7 +296,7 @@ class DrawerTray extends Component {
           {...omitProps(props, DrawerTray.propTypes)}
           ref={this.handleContentRef}
           className={classnames({
-            [styles.drawerTrayRoot]: true,
+            [styles.root]: true,
             [styles.border]: border,
             [styles.shadow]: shadow && shouldOverlayTray,
             [styles[`placement--${this.placement}`]]: true

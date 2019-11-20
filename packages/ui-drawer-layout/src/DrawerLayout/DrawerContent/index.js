@@ -36,8 +36,8 @@ import theme from './theme'
 
 /**
 ---
-parent: DeprecatedDrawerLayout
-id: DeprecatedDrawerLayout.Content
+parent: DrawerLayout
+id: DrawerLayout.Content
 ---
 **/
 @testable()
@@ -124,7 +124,7 @@ class DrawerContent extends Component {
         ref={this.handleContentRef}
         aria-label={label}
         className={classnames({
-          [styles.drawerContentRoot]: true,
+          [styles.root]: true,
           [styles.transition]: this.state.shouldTransition
         })}
       >

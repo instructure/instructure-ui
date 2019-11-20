@@ -39,6 +39,7 @@ module.exports = {
     '@instructure/ui-date-input$': path.resolve(__dirname, '../ui-date-input/src/'),
     '@instructure/ui-dialog$': path.resolve(__dirname, '../ui-dialog/src/'),
     '@instructure/ui-docs-client$': path.resolve(__dirname, '../ui-docs-client/src/'),
+    '@instructure/ui-drawer-layout$': path.resolve(__dirname, '../ui-drawer-layout/src/'),
     '@instructure/ui-editable$': path.resolve(__dirname, '../ui-editable/src/'),
     '@instructure/ui-elements$': path.resolve(__dirname, '../ui-elements/src/'),
     '@instructure/ui-expandable$': path.resolve(__dirname, '../ui-expandable/src/'),

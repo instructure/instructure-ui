@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import GithubCorner from 'react-github-corner'
 
 import { themeable } from '@instructure/ui-themeable'
-import { DrawerLayout } from '@instructure/ui-layout'
+import { DrawerLayout } from '@instructure/ui-drawer-layout'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'

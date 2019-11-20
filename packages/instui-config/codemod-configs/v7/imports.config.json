@@ -60,6 +60,10 @@
     "replace": "@instructure/ui-position/lib/mirrorPlacement"
   },
   {
+    "pattern": "^@instructure/ui-layout/lib/DrawerLayout",
+    "replace": "@instructure/ui-drawer-layout/lib/DrawerLayout"
+  },
+  {
     "pattern": "^@instructure/ui-layout/lib/parsePlacement",
     "replace": "@instructure/ui-position/lib/parsePlacement"
   },

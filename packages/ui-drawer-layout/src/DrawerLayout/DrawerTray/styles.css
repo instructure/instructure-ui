@@ -1,4 +1,4 @@
-.drawerTrayRoot {
+.root {
   position: absolute;
   background-color: var(--background);
   z-index: var(--zIndex);

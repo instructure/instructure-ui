@@ -33,7 +33,6 @@ const MyLayout = () => {
 
 ### Components
 The `ui-layout` package contains the following components:
-- [DrawerLayout](#DrawerLayout)
 - [Media](#Media)
 
 ### Deprecated components
@@ -44,6 +43,7 @@ The following components have been deprecated and will be removed from the `ui-l
 - [Responsive](#DeprecatedResponsive) \(use [Responsive from ui-responsive](#Responsive) instead)
 - [View](#DeprecatedView) \(use [View from ui-view](#View) instead)
 - [ContextView](#DeprecatedContextView) \(use [ContextView from ui-view](#ContextView) instead)
+- [DrawerLayout](#DeprecatedDrawerLayout) \(use [DrawerLayout from ui-drawer-layout](#DrawerLayout) instead)
 
 Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
 

@@ -94,7 +94,7 @@ export {
   Media,
   Responsive as DeprecatedResponsive,
   Flex as DeprecatedFlex,
-  DrawerLayout,
+  DrawerLayout as DeprecatedDrawerLayout,
   Grid as DeprecatedGrid,
   Position as DeprecatedPosition,
   View as DeprecatedView
@@ -114,6 +114,7 @@ export { Position } from '@instructure/ui-position'
 export { Popover } from '@instructure/ui-popover'
 export { Tooltip } from '@instructure/ui-tooltip'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
+export { DrawerLayout } from '@instructure/ui-drawer-layout'
 export { Grid } from '@instructure/ui-grid'
 export { Navigation, AppNav } from '@instructure/ui-navigation'
 export { List, InlineList } from '@instructure/ui-list'

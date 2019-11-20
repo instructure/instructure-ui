@@ -1,13 +1,6 @@
 ---
-describes: DeprecatedDrawerLayout
-id: DeprecatedDrawerLayout__README
+describes: DrawerLayout
 ---
-
-### This component is deprecated
-DrawerLayout will be removed from `ui-layout` in version 7.0.0. Use [DrawerLayout from ui-drawer-layout](#DrawerLayout) instead.
-
-### Important upgrade notes
-Codemods are available to automatically update imports to the new package.
 
 The `<DrawerLayout />` component creates a layout consisting of both `<DrawerLayout.Tray />` and `<DrawerLayout.Content />`.
 The tray can be placed at the `start` or `end` position. When there is sufficient space available,
@@ -42,8 +35,8 @@ class Example extends React.Component {
         style={{ position: 'relative' }}
       >
         { this.state.trayIsOverlayed && this.state.open && <Mask onClick={this.handleTrayDismiss} /> }
-        <DeprecatedDrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
-          <DeprecatedDrawerLayout.Tray
+        <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
+          <DrawerLayout.Tray
             id="DrawerLayoutTrayExample1"
             open={this.state.open}
             placement="start"
@@ -70,8 +63,8 @@ class Example extends React.Component {
                 Hello from start tray with a small amount of placeholder content
               </Text>
             </View>
-          </DeprecatedDrawerLayout.Tray>
-          <DeprecatedDrawerLayout.Content label="Drawer content example">
+          </DrawerLayout.Tray>
+          <DrawerLayout.Content label="Drawer content example">
             <div style={{background: 'white', height: '100%'}}>
               <View as="div" padding="x-large">
                 <Heading border="bottom">A simple drawer layout</Heading>
@@ -98,8 +91,8 @@ class Example extends React.Component {
                 </Text>
               </View>
             </div>
-          </DeprecatedDrawerLayout.Content>
-        </DeprecatedDrawerLayout>
+          </DrawerLayout.Content>
+        </DrawerLayout>
       </View>
     )
   }
@@ -128,8 +121,8 @@ class Example extends React.Component {
         display="block"
         background="primary"
       >
-        <DeprecatedDrawerLayout>
-          <DeprecatedDrawerLayout.Tray
+        <DrawerLayout>
+          <DrawerLayout.Tray
             open={this.state.endOpen}
             placement="end"
             label="Drawer Tray End Example"
@@ -156,10 +149,10 @@ class Example extends React.Component {
                 Hello from end tray with a good amount of content as well
               </Text>
             </View>
-          </DeprecatedDrawerLayout.Tray>
-          <DeprecatedDrawerLayout.Content label="Drawer content example containing another layout">
-            <DeprecatedDrawerLayout>
-              <DeprecatedDrawerLayout.Tray
+          </DrawerLayout.Tray>
+          <DrawerLayout.Content label="Drawer content example containing another layout">
+            <DrawerLayout>
+              <DrawerLayout.Tray
                 label="Layout Tray Start Example"
                 open={this.state.startOpen}
                 placement="start"
@@ -187,8 +180,8 @@ class Example extends React.Component {
                     Hello from start tray with a small amount of placeholder content
                   </Text>
                 </View>
-              </DeprecatedDrawerLayout.Tray>
-              <DeprecatedDrawerLayout.Content label="Drawer content example containing a responsive ">
+              </DrawerLayout.Tray>
+              <DrawerLayout.Content label="Drawer content example containing a responsive ">
                 <div style={{background: 'white', height: '100%'}}>
                   <View as="div" padding="x-large">
                     <Heading border="bottom">A nested drawer layout</Heading>
@@ -235,10 +228,10 @@ class Example extends React.Component {
                     </Text>
                   </View>
                 </div>
-              </DeprecatedDrawerLayout.Content>
-            </DeprecatedDrawerLayout>
-          </DeprecatedDrawerLayout.Content>
-        </DeprecatedDrawerLayout>
+              </DrawerLayout.Content>
+            </DrawerLayout>
+          </DrawerLayout.Content>
+        </DrawerLayout>
       </View>
     )
   }

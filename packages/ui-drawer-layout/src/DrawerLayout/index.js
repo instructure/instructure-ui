@@ -27,14 +27,14 @@ import PropTypes from 'prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import { themeable } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { deprecated, matchComponentTypes, safeCloneElement } from '@instructure/ui-react-utils'
+import { matchComponentTypes, safeCloneElement } from '@instructure/ui-react-utils'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { px } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
-import { mirrorHorizontalPlacement } from '../mirrorHorizontalPlacement'
+import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { DrawerContent } from './DrawerContent'
 import { DrawerTray } from './DrawerTray'
 
@@ -43,11 +43,9 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedDrawerLayout
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use DrawerLayout from ui-drawer-layout instead.')
 @testable()
 @bidirectional()
 @themeable(theme, styles)
@@ -281,7 +279,7 @@ class DrawerLayout extends Component {
   render () {
     const props = { [DrawerLayout.locatorAttribute]: this._id }
     return (
-      <div {...props} className={styles.drawerLayoutRoot}>
+      <div {...props} className={styles.root}>
         {this.renderChildren()}
       </div>
     )
