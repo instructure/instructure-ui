@@ -32,6 +32,10 @@
     "replace": "@instructure/ui-pill/lib/Pill"
   },
   {
+    "pattern": "^@instructure/ui-toggle-details/lib/Expandable",
+    "replace": "@instructure/ui-expandable/lib/Expandable"
+  },
+  {
     "pattern": "^@instructure/ui-layout/lib/Popover",
     "replace": "@instructure/ui-popover/lib/Popover"
   },

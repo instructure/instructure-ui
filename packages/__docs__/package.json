@@ -46,6 +46,7 @@
     "@instructure/ui-docs-plugin": "^6.15.0",
     "@instructure/ui-editable": "^6.15.0",
     "@instructure/ui-elements": "^6.15.0",
+    "@instructure/ui-expandable": "^6.15.0",
     "@instructure/ui-focusable": "^6.15.0",
     "@instructure/ui-form-field": "^6.15.0",
     "@instructure/ui-forms": "^6.15.0",

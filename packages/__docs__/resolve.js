@@ -41,6 +41,7 @@ module.exports = {
     '@instructure/ui-docs-client$': path.resolve(__dirname, '../ui-docs-client/src/'),
     '@instructure/ui-editable$': path.resolve(__dirname, '../ui-editable/src/'),
     '@instructure/ui-elements$': path.resolve(__dirname, '../ui-elements/src/'),
+    '@instructure/ui-expandable$': path.resolve(__dirname, '../ui-expandable/src/'),
     '@instructure/ui-flex$': path.resolve(__dirname, '../ui-flex/src'),
     '@instructure/ui-focusable$': path.resolve(__dirname, '../ui-focusable/src/'),
     '@instructure/ui-a11y-utils$': path.resolve(__dirname, '../ui-a11y-utils/src/'),

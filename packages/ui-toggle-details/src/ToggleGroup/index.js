@@ -29,14 +29,13 @@ import { omitProps, pickProps, getElementType } from '@instructure/ui-react-util
 import { Button } from '@instructure/ui-buttons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Transition } from '@instructure/ui-motion'
+import { Expandable } from '@instructure/ui-expandable'
 import { controllable } from '@instructure/ui-prop-types'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid, IconArrowOpenDownSolid } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
-
-import { Expandable } from '../Expandable'
 
 /**
 ---

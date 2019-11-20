@@ -58,6 +58,7 @@ export {
   List as DeprecatedList,
   MetricsList as DeprecatedMetricsList
 } from '@instructure/ui-elements'
+export { Expandable } from '@instructure/ui-expandable'
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
 export {
   Checkbox,
@@ -129,7 +130,7 @@ export { ApplyTheme } from '@instructure/ui-themeable'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export { Tabs, TabList as DeprecatedTabList } from '@instructure/ui-tabs'
 export { Text } from '@instructure/ui-text'
-export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
+export { Expandable as DeprecatedExpandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export { Flex } from '@instructure/ui-flex'
 export { FileDrop } from '@instructure/ui-file-drop'

@@ -28,17 +28,14 @@ import PropTypes from 'prop-types'
 import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { deprecated } from '@instructure/ui-react-utils'
 
 const toggleExpanded = ({ expanded }) => ({ expanded: !expanded })
 
 /**
 ---
-category: components/utilities/deprecated
-id: DeprecatedExpandable
+category: components/utilities
 ---
 */
-@deprecated('7.0.0', null, 'Use @instructure/ui-expandable instead')
 class Expandable extends Component {
   static propTypes = {
     /**

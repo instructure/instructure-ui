@@ -28,13 +28,12 @@ import classnames from 'classnames'
 
 import { Button } from '@instructure/ui-buttons'
 import { IconArrowOpenEndSolid, IconArrowOpenDownSolid } from '@instructure/ui-icons'
+import { Expandable } from '@instructure/ui-expandable'
 import { themeable } from '@instructure/ui-themeable'
 import { controllable } from '@instructure/ui-prop-types'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
-
-import { Expandable } from '../Expandable'
 
 import styles from './styles.css'
 import theme from './theme'
