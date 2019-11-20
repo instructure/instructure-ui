@@ -88,6 +88,7 @@ module.exports = {
     '@instructure/ui-tooltip$': path.resolve(__dirname, '../ui-tooltip/src/'),
     '@instructure/ui-tray$': path.resolve(__dirname, '../ui-tray/src/'),
     '@instructure/ui-tree-browser$': path.resolve(__dirname, '../ui-tree-browser/src/'),
+    '@instructure/ui-truncate-text$': path.resolve(__dirname, '../ui-truncate-text/src/'),
     '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
     '@instructure/ui-view$': path.resolve(__dirname, '../ui-view/src/'),
     '@instructure/canvas-theme$': path.resolve(__dirname, '../canvas-theme/src/'),

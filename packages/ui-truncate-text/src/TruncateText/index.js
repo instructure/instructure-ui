@@ -30,7 +30,7 @@ import classNames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { debounce } from '@instructure/debounce'
 import { addResizeListener, canUseDOM } from '@instructure/ui-dom-utils'
-import { safeCloneElement, ensureSingleChild, hack, deprecated } from '@instructure/ui-react-utils'
+import { safeCloneElement, ensureSingleChild, hack } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
@@ -41,11 +41,9 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedTruncateText
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-truncate-text instead.')
 @testable()
 @themeable(theme, styles)
 @hack(['shouldTruncateWhenInvisible'])
@@ -273,7 +271,7 @@ class TruncateText extends Component {
     return (
       <span
         className={classNames({
-          [styles.istruncated]: true,
+          [styles.truncated]: true,
           [styles.auto]: maxLines === 'auto'
         })}
         ref={el => {

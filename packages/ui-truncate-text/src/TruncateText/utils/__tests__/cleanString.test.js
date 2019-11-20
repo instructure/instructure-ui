@@ -22,19 +22,36 @@
  * SOFTWARE.
  */
 
-.istruncated {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-family: var(--fontFamily);
-}
+import { expect } from '@instructure/ui-test-utils'
+import cleanString from '../cleanString'
 
-.auto {
-  height: 100%;
-}
+describe('cleanSring', async () => {
+  it('should remove spaces from start and end of string', async () => {
+    const string = ' Hello world '
 
-.spacer {
-  visibility: hidden;
-  max-height: 0;
-  display: block;
-}
+    const newString = cleanString(string, [' '])
+    expect(newString).to.equal('Hello world')
+  })
+
+  it('should remove spaces from only the end of string', async () => {
+    const string = ' Hello world '
+
+    const newString = cleanString(string, [' '], false)
+    expect(newString).to.equal(' Hello world')
+  })
+
+  it('should remove spaces and commas', async () => {
+    const string = ' Hello world,'
+
+    const newString = cleanString(string, [' ', ','])
+    expect(newString).to.equal('Hello world')
+  })
+
+
+  it('should do a thorough cleaning', async () => {
+    const string = 'Hello world. '
+
+    const newString = cleanString(string, [' ','.'], false, true, true)
+    expect(newString).to.equal('Hello world')
+  })
+})

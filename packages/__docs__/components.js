@@ -55,7 +55,7 @@ export {
   Table as DeprecatedTable,
   Tag as DeprecatedTag,
   Text as DeprecatedText,
-  TruncateText,
+  TruncateText as DeprecatedTruncateText,
   List as DeprecatedList,
   MetricsList as DeprecatedMetricsList
 } from '@instructure/ui-elements'
@@ -89,6 +89,7 @@ export { TextInput } from '@instructure/ui-text-input'
   FormFieldGroup,
 } from '@instructure/ui-form-field'
 export { Table } from '@instructure/ui-table'
+export { TruncateText } from '@instructure/ui-truncate-text'
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
 export {
   ContextView as DeprecatedContextView,

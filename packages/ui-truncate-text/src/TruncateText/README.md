@@ -1,11 +1,6 @@
 ---
-describes: DeprecatedTruncateText
-id: DeprecatedTruncateText__README
+describes: TruncateText
 ---
-
-**DEPRECATED:** TruncateText will be removed from `ui-elements` in version 7.0.0. Use the [TruncateText](#TruncateText) from [ui-truncate-text](#ui-truncate-text) instead.
-
-___
 
 A component for truncating text content.
 
@@ -26,9 +21,9 @@ example: true
     withVisualDebug
   >
     <Heading level="h1">
-      <DeprecatedTruncateText>
+      <TruncateText>
         {lorem.paragraph()}
-      </DeprecatedTruncateText>
+      </TruncateText>
     </Heading>
     <Text
       as="p"
@@ -37,18 +32,18 @@ example: true
       transform="uppercase"
       letterSpacing="expanded"
     >
-      <DeprecatedTruncateText>
+      <TruncateText>
         {lorem.paragraph()}
-      </DeprecatedTruncateText>
+      </TruncateText>
     </Text>
     <Text as="p">
-      <DeprecatedTruncateText>
+      <TruncateText>
         {lorem.paragraph()}
-      </DeprecatedTruncateText>
+      </TruncateText>
     </Text>
 
     <div>
-      <DeprecatedTruncateText
+      <TruncateText
         onUpdate={(truncated, text) => {
           console.log(truncated, text)
         }}
@@ -56,7 +51,7 @@ example: true
         <span>
           Regular sized text with <Link href="#">A Text Link </Link>and <Text weight="bold">some bold text.</Text>
         </span>
-      </DeprecatedTruncateText>
+      </TruncateText>
     </div>
 
   </View>
@@ -79,24 +74,24 @@ example: true
     withVisualDebug
   >
     <Text as="p" size="large">
-      <DeprecatedTruncateText
+      <TruncateText
         maxLines={2}
         truncate="word"
         ellipsis=" (...)"
       >
         {lorem.paragraph()}
-      </DeprecatedTruncateText>
+      </TruncateText>
       <Link href="#">Read More</Link>
     </Text>
 
     <Text as="p" lineHeight="double">
-      <DeprecatedTruncateText
+      <TruncateText
         maxLines={4}
         truncate="word"
         ellipsis=" (...)"
       >
         Esse aliqua minim veniam duis consectetur non sunt ea deserunt qui cillum laboris officia. Minim nulla commodo dolore reprehenderit commodo occaecat veniam ad consectetur mollit consectetur partur consectetur eiusmod dolor incididunt incididunt.
-      </DeprecatedTruncateText>
+      </TruncateText>
       <Link href="#">Read More</Link>
     </Text>
   </View>
@@ -108,23 +103,23 @@ example: true
     withVisualDebug
   >
     <Text as="p">
-      <DeprecatedTruncateText maxLines={4} ellipsis=" (...)">
+      <TruncateText maxLines={4} ellipsis=" (...)">
         <span>Esse aliqua minim veniam duis consectetur non sunt ea deserunt qui cillum laboris officia. <Link href="#">http://instructure.github.io/instructure-ui/#ui-elements</Link> occaecat veniam ad consectetur mollit consectetur partur consectetur eiusmod dolor incididunt incididunt.</span>
-      </DeprecatedTruncateText>
+      </TruncateText>
     </Text>
 
     <Text as="p">
-      <DeprecatedTruncateText maxLines={4} ellipsis=" (...)">
+      <TruncateText maxLines={4} ellipsis=" (...)">
         <span>Qui cillum laboris officia. <strong>supercalifragilisticexpialidocious</strong> occaecat veniam ad consectetur mollit consectetur partur consectetur eiusmod dolor incididunt incididunt. Esse aliqua minim veniam duis consectetur non sunt ea deserunt.</span>
-      </DeprecatedTruncateText>
+      </TruncateText>
     </Text>
   </View>
   <br />
   <div style={{height: '78px', border: 'solid 1px red'}}>
     <Text>
-      <DeprecatedTruncateText maxLines="auto" ellipsis=" (...)">
+      <TruncateText maxLines="auto" ellipsis=" (...)">
         Esse aliqua minim veniam duis consectetur non sunt ea deserunt qui cillum laboris officia. Minim nulla commodo dolore reprehenderit commodo occaecat veniam ad consectetur mollit consectetur partur consectetur eiusmod dolor incididunt incididunt.
-      </DeprecatedTruncateText>
+      </TruncateText>
     </Text>
   </div>
 </div>
@@ -146,9 +141,9 @@ example: true
     maxWidth="480px"
     withVisualDebug
   >
-    <DeprecatedTruncateText position="middle">
+    <TruncateText position="middle">
       <span>This line of text should be truncated from the middle of the string <strong>instead of the end.</strong></span>
-    </DeprecatedTruncateText>
+    </TruncateText>
   </View>
   <br />
   <View
@@ -158,13 +153,13 @@ example: true
     withVisualDebug
   >
     <Link href="#">
-      <DeprecatedTruncateText
+      <TruncateText
         position="middle"
         truncate="word"
         ellipsis=".../"
       >
         @instructure/ui-elements/somefakedir/tomakethislonger/lib/longer/TruncateText
-      </DeprecatedTruncateText>
+      </TruncateText>
     </Link>
   </View>
 </div>
@@ -193,9 +188,9 @@ class Example extends React.Component {
   renderLink () {
     return (
       <Link href="#">
-        <DeprecatedTruncateText onUpdate={this.handleUpdate}>
+        <TruncateText onUpdate={this.handleUpdate}>
           {this.props.message}
-        </DeprecatedTruncateText>
+        </TruncateText>
       </Link>
     )
   }

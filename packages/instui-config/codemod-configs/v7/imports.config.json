@@ -112,6 +112,10 @@
     "replace": "@instructure/ui-tooltip/lib/Tooltip"
   },
   {
+    "pattern": "^@instructure/ui-elements/lib/TruncateText",
+    "replace": "@instructure/ui-truncate-text/lib/TruncateText"
+  },
+  {
     "pattern": "^@instructure/ui-overlays/lib/Modal",
     "replace": "@instructure/ui-modal/lib/Modal"
   },

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-.istruncated {
+.truncated {
   display: block;
   overflow: hidden;
   word-wrap: break-word;

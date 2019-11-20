@@ -22,19 +22,9 @@
  * SOFTWARE.
  */
 
-.istruncated {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-family: var(--fontFamily);
-}
-
-.auto {
-  height: 100%;
-}
-
-.spacer {
-  visibility: hidden;
-  max-height: 0;
-  display: block;
+export default function generator ({ typography }) {
+  return {
+    fontFamily: typography.fontFamily,
+    lineHeight: typography.lineHeight
+  }
 }

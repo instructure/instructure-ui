@@ -21,20 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-.istruncated {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-family: var(--fontFamily);
-}
-
-.auto {
-  height: 100%;
-}
-
-.spacer {
-  visibility: hidden;
-  max-height: 0;
-  display: block;
-}
+export { TruncateText } from './TruncateText'

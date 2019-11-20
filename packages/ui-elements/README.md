@@ -45,7 +45,7 @@ The `ui-elements` package will be removed in version 7.0.0. Please update your i
 - [Table](#DeprecatedTable) has been deprecated within this package. Use [Table](#Table) from [ui-table](#ui-table).
 - [Tag](#DeprecatedTag) will be removed in version 7.0.0. Use [Tag](#Tag) from [ui-tag](#ui-tag).
 - [Text](#DeprecatedText) will be removed in version 7.0.0. Use [Text](#Text) from [ui-text](#ui-text).
-- [TruncateText](#TruncateText)
+- [TruncateText](#DeprecatedTruncateText) will be removed in version 7.0.0. Use [TruncateText](#TruncateText) from [ui-truncate-text](#ui-truncate-text).
 
 
 ### Contribute
