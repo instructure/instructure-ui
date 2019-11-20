@@ -35,9 +35,6 @@ The `ui-forms` package contains the following components:
 - [CheckboxGroup](#CheckboxGroup)
 - [DateInput (deprecated)](#DeprecatedDateInput)
 - [DateTimeInput](#DateTimeInput)
-- [RadioInput](#RadioInput)
-- [RadioInputGroup](#RadioInputGroup)
-- [RangeInput](#RangeInput)
 - [Select](#Select)
 - [TextInput (deprecated)](#DeprecatedTextInput)
 - [TimeInput](#TimeInput)
@@ -49,7 +46,8 @@ The following components have been deprecated and will be removed from the `ui-f
 - [TextInput](#DeprecatedTextInput) \(use [TextInput from `ui-text-input`](#TextInput) instead)
 - [FileDrop](#DeprecatedFileDrop) \(use [FileDrop from `ui-file-drop`](#FileDrop) instead)
 - [RangeInput](#DeprecatedRangeInput) \(use [RangeInput from `ui-range-input`](#RangeInput) instead)
-
+- [RadioInput](#DeprecatedRadioInput) \(use [RadioInput from `ui-radio-input`](#RadioInput) instead)
+- [RadioInputGroup](#DeprecatedRadioInputGroup) \(use [RadioInputGroup from `ui-radio-input`](#RadioInputGroup) instead)
 
 Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
 

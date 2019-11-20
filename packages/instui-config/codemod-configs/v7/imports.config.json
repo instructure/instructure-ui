@@ -76,6 +76,14 @@
     "replace": "@instructure/ui-position/lib/PositionPropTypes"
   },
   {
+    "pattern": "^@instructure/ui-forms/lib/RadioInput",
+    "replace": "@instructure/ui-radio-input/lib/RadioInput"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/RadioInputGroup",
+    "replace": "@instructure/ui-radio-input/lib/RadioInputGroup"
+  },
+  {
     "pattern": "^@instructure/ui-elements/lib/Rating",
     "replace": "@instructure/ui-rating/lib/Rating"
   },

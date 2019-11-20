@@ -22,23 +22,22 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
-import { uid } from '@instructure/uid'
-import { testable } from '@instructure/ui-testable'
-import { matchComponentTypes, safeCloneElement, omitProps, pickProps } from '@instructure/ui-react-utils'
+import { FormPropTypes } from '@instructure/ui-form-field'
+import { deprecated } from '@instructure/ui-react-utils'
+import { RadioInputGroup as UIRadioInputGroup } from '@instructure/ui-radio-input'
 
-import { RadioInput } from '../RadioInput'
 
 /**
 ---
-category: components
+category: components/deprecated
+id: DeprecatedRadioInputGroup
 ---
 **/
-@testable()
+@deprecated('7.0.0', null, 'Use @instructure/ui-radio-input instead.')
 class RadioInputGroup extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -97,100 +96,22 @@ class RadioInputGroup extends Component {
     onChange: undefined
   }
 
-  constructor (props) {
-    super()
-
-    if (typeof props.value === 'undefined') {
-      this.state = {
-        value: props.defaultValue
-      }
-    }
-
-    this._messagesId = uid('RadioInputGroup-messages')
-  }
+  _radioInputGroup = null
 
   get hasMessages () {
-    return this.props.messages && (this.props.messages.length > 0)
+    return this._radioInputGroup && this._radioInputGroup.hasMessages
   }
-
-  handleChange = (e) => {
-    const value = e.target.value
-
-    if (this.props.disabled || this.props.readOnly) {
-      e.preventDefault()
-      return
-    }
-
-    if (typeof this.props.value === 'undefined') {
-      this.setState({value})
-    }
-
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(e, value)
-    }
-  };
 
   get value () {
-    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
-  }
-
-  renderChildren () {
-    const {
-      children,
-      name,
-      variant,
-      size,
-      disabled,
-      readOnly
-    } = this.props
-
-    // This adds the passed in name property to each RadioInput component
-    // and checks the input whose value matches the value property
-    return Children.map(children, (child, index) => {
-      if (matchComponentTypes(child, [RadioInput])) {
-        const isChecked = this.value === child.props.value
-        const defaultFocus = !this.value && index === 0
-        return safeCloneElement(child, {
-          name,
-          disabled: (disabled || child.props.disabled),
-          variant,
-          size,
-          checked: isChecked,
-          onChange: this.handleChange,
-          readOnly: (readOnly || child.props.readOnly),
-          width: child.props.width || 'auto',
-          'aria-describedby': this.hasMessages && this._messagesId,
-          // only one radio in a group should be considered tabbable
-          // if a radio is checked, it should be the input to receive focus when tabbed to
-          // if none of the inputs are checked, the first should receive the focus
-          tabIndex: isChecked || defaultFocus ? '0' : '-1'
-        })
-      } else {
-        return child // ignore (but preserve) children that aren't RadioInput
-      }
-    })
+    return this._radioInputGroup && this._radioInputGroup.value
   }
 
   render () {
-    const {
-      variant,
-      layout
-    } = this.props
-
     return (
-      <FormFieldGroup
-        {...omitProps(this.props, RadioInputGroup.propTypes)}
-        {...pickProps(this.props, FormFieldGroup.propTypes)}
-        // TODO: split out toggle variant into its own component
-        layout={(layout === 'columns' && variant === 'toggle') ? 'stacked' : layout} // toggles already display in cols
-        vAlign={(variant === 'toggle') ? 'middle' : 'top'}
-        rowSpacing="small"
-        colSpacing={(variant === 'toggle') ? 'none' : 'small'} // keep toggles close together
-        startAt={(variant === 'toggle') ? 'small' : undefined}
-        messagesId={this._messagesId}
-      >
-        {this.renderChildren()}
-      </FormFieldGroup>
+      <UIRadioInputGroup
+        ref={(component) => { this._radioInputGroup = component }}
+        {...this.props}
+      />
     )
   }
 }

@@ -53,7 +53,7 @@ module.exports = {
     '@instructure/ui-i18n$': path.resolve(__dirname, '../ui-i18n/src/'),
     '@instructure/ui-img$': path.resolve(__dirname, '../ui-img/src/'),
     '@instructure/ui-layout$': path.resolve(__dirname, '../ui-layout/src/'),
-    '@instructure/ui-link$': path.resolve(__dirname, '../ui-link/src'),
+    '@instructure/ui-link$': path.resolve(__dirname, '../ui-link/src/'),
     '@instructure/ui-list$': path.resolve(__dirname, '../ui-list/src/'),
     '@instructure/ui-menu$': path.resolve(__dirname, '../ui-menu/src/'),
     '@instructure/ui-metric$': path.resolve(__dirname, '../ui-metric/src/'),
@@ -72,6 +72,7 @@ module.exports = {
     '@instructure/ui-position$': path.resolve(__dirname, '../ui-position/src/'),
     '@instructure/ui-portal$': path.resolve(__dirname, '../ui-portal/src/'),
     '@instructure/ui-progress$': path.resolve(__dirname, '../ui-progress/src'),
+    '@instructure/ui-radio-input$': path.resolve(__dirname, '../ui-radio-input/src/'),
     '@instructure/ui-range-input$': path.resolve(__dirname, '../ui-range-input/src/'),
     '@instructure/ui-rating$': path.resolve(__dirname, '../ui-rating/src/'),
     '@instructure/ui-responsive$': path.resolve(__dirname, '../ui-responsive/src/'),
@@ -88,14 +89,14 @@ module.exports = {
     '@instructure/ui-tray$': path.resolve(__dirname, '../ui-tray/src/'),
     '@instructure/ui-tree-browser$': path.resolve(__dirname, '../ui-tree-browser/src/'),
     '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
-    '@instructure/ui-view$': path.resolve(__dirname, '../ui-view/src'),
+    '@instructure/ui-view$': path.resolve(__dirname, '../ui-view/src/'),
     '@instructure/canvas-theme$': path.resolve(__dirname, '../canvas-theme/src/'),
     '@instructure/canvas-high-contrast-theme$': path.resolve(__dirname, '../canvas-high-contrast-theme/src/'),
     '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
     '@instructure/ui-react-utils$': path.resolve(__dirname, '../ui-react-utils/src/'),
     '@instructure/ui-dom-utils$': path.resolve(__dirname, '../ui-dom-utils/src/'),
     '@instructure/ui-color-utils$': path.resolve(__dirname, '../ui-color-utils/src/'),
-    '@instructure/ui-file-drop$': path.resolve(__dirname, '../ui-file-drop/src'),
-    '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src')
+    '@instructure/ui-file-drop$': path.resolve(__dirname, '../ui-file-drop/src/'),
+    '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src/')
   }
 }

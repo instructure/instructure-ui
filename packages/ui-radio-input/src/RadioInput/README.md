@@ -1,11 +1,6 @@
 ---
-describes: DeprecatedRadioInput
-id: DeprecatedRadioInput__README
+describes: RadioInput
 ---
-
-**DEPRECATED:** RadioInput will be removed from `ui-forms` in version 7.0.0. Use the [RadioInput](#RadioInput) from [ui-radio-input](#ui-radio-input) instead.
-
-___
 
 By default, the RadioInput component is a custom styled HTML radio button.
 
@@ -16,7 +11,7 @@ Adjust the size of the RadioInput and its label text via the `size` prop. The de
 ---
 example: true
 ---
-<DeprecatedRadioInput
+<RadioInput
   label="See RadioInputGroup for more details"
   value="foo"
   name="bar"

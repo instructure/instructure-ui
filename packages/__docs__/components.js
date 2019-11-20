@@ -67,8 +67,8 @@ export {
   DateInput as DeprecatedDateInput,
   DateTimeInput,
   FileDrop as DeprecatedFileDrop,
-  RadioInput,
-  RadioInputGroup,
+  RadioInput as DeprecatedRadioInput,
+  RadioInputGroup as DeprecatedRadioInputGroup,
   RangeInput as DeprecatedRangeInput,
   Select as DeprecatedSelect,
   TextArea as DeprecatedTextArea,
@@ -113,6 +113,7 @@ export {
 } from '@instructure/ui-overlays'
 export { Position } from '@instructure/ui-position'
 export { Popover } from '@instructure/ui-popover'
+export { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input'
 export { Tooltip } from '@instructure/ui-tooltip'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
 export { DrawerLayout } from '@instructure/ui-drawer-layout'

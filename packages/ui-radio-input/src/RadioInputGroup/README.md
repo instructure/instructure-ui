@@ -1,11 +1,6 @@
 ---
-describes: DeprecatedRadioInputGroup
-id: DeprecatedRadioInputGroup__README
+describes: RadioInputGroup
 ---
-
-**DEPRECATED:** RadioInputGroup will be removed from `ui-forms` in version 7.0.0. Use the [RadioInputGroup](#RadioInputGroup) from [ui-radio-input](#ui-radio-input) instead.
-
-___
 
 A RadioInputGroup is a group of RadioInput components. It will handle setting
 the name property on the RadioInput components for you and will set the selected item
@@ -29,9 +24,9 @@ function Example () {
     console.log(value)
   }
   return (
-    <DeprecatedRadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something">
-      {inputs.map(input => <DeprecatedRadioInput key={input.value} value={input.value} label={input.label} />)}
-    </DeprecatedRadioInputGroup>
+    <RadioInputGroup onChange={handleChange} name="example1" defaultValue="foo" description="Select something">
+      {inputs.map(input => <RadioInput key={input.value} value={input.value} label={input.label} />)}
+    </RadioInputGroup>
   )
 }
 render(<Example />)
@@ -52,13 +47,13 @@ function Example () {
     {value: 'baz', label: 'Country' }
   ]
   return (
-    <DeprecatedRadioInputGroup
+    <RadioInputGroup
       name="example2"
       defaultValue="foo"
       description="Select something"
       layout="inline">
-      {inputs.map(input => <DeprecatedRadioInput key={input.value} value={input.value} label={input.label} />)}
-    </DeprecatedRadioInputGroup>
+      {inputs.map(input => <RadioInput key={input.value} value={input.value} label={input.label} />)}
+    </RadioInputGroup>
   )
 }
 render(<Example />)
@@ -79,20 +74,20 @@ function Example () {
     {value: 'baz', label: 'Somewhat apathetic' }
   ]
   return (
-    <DeprecatedRadioInputGroup
+    <RadioInputGroup
       layout="columns"
       name="example3"
       defaultValue="foo"
       description="Select something"
     >
       {inputs.map(input =>
-        <DeprecatedRadioInput
+        <RadioInput
           key={input.value}
           value={input.value}
           label={input.label}
         />
       )}
-    </DeprecatedRadioInputGroup>
+    </RadioInputGroup>
   )
 }
 
@@ -106,44 +101,44 @@ Set the `variant` prop to `toggle` to have the RadioInputGroup display as a togg
 example: true
 ---
 <FormFieldGroup description={<ScreenReaderContent>Toggle examples</ScreenReaderContent>}>
- <DeprecatedRadioInputGroup
+ <RadioInputGroup
     name="featuresm"
     defaultValue="off"
     description="Small-size"
     variant="toggle"
     size="small">
-    <DeprecatedRadioInput label="Off" value="off" context="off" />
-    <DeprecatedRadioInput label="Allow" value="allow" />
-    <DeprecatedRadioInput label="On" value="on" />
-  </DeprecatedRadioInputGroup>
-  <DeprecatedRadioInputGroup
+    <RadioInput label="Off" value="off" context="off" />
+    <RadioInput label="Allow" value="allow" />
+    <RadioInput label="On" value="on" />
+  </RadioInputGroup>
+  <RadioInputGroup
     name="featuremed"
     defaultValue="allow"
     description="Medium-size (default)"
     variant="toggle">
-    <DeprecatedRadioInput label="Off" value="off" context="off" />
-    <DeprecatedRadioInput label="Allow" value="allow" />
-    <DeprecatedRadioInput label="On" value="on" />
-  </DeprecatedRadioInputGroup>
-  <DeprecatedRadioInputGroup
+    <RadioInput label="Off" value="off" context="off" />
+    <RadioInput label="Allow" value="allow" />
+    <RadioInput label="On" value="on" />
+  </RadioInputGroup>
+  <RadioInputGroup
     name="context"
     defaultValue="off"
     description="Context (background changes based on context set)"
     variant="toggle">
-    <DeprecatedRadioInput label="Off" value="off" context="danger" />
-    <DeprecatedRadioInput label="Allow" value="allow" context="warning" />
-    <DeprecatedRadioInput label="On" value="on" />
-  </DeprecatedRadioInputGroup>
-  <DeprecatedRadioInputGroup
+    <RadioInput label="Off" value="off" context="danger" />
+    <RadioInput label="Allow" value="allow" context="warning" />
+    <RadioInput label="On" value="on" />
+  </RadioInputGroup>
+  <RadioInputGroup
     name="featurelg"
     defaultValue="on"
     description="Large-size"
     variant="toggle"
     size="large">
-    <DeprecatedRadioInput label="Off" value="off" />
-    <DeprecatedRadioInput label="Allow" value="allow" />
-    <DeprecatedRadioInput label="On" value="on" />
-  </DeprecatedRadioInputGroup>
+    <RadioInput label="Off" value="off" />
+    <RadioInput label="Allow" value="allow" />
+    <RadioInput label="On" value="on" />
+  </RadioInputGroup>
 </FormFieldGroup>
 ```
 
@@ -153,27 +148,27 @@ Setting the `disabled` prop to `true` will disable the entire RadioInputGroup.
 ---
 example: true
 ---
-<DeprecatedRadioInputGroup
+<RadioInputGroup
   name="fruits1"
   description="Fruits"
   defaultValue="orange"
   disabled
 >
-  <DeprecatedRadioInput label="Apple" value="apple" />
-  <DeprecatedRadioInput label="Orange" value="orange" />
-  <DeprecatedRadioInput label="Banana" value="banana" />
-</DeprecatedRadioInputGroup>
+  <RadioInput label="Apple" value="apple" />
+  <RadioInput label="Orange" value="orange" />
+  <RadioInput label="Banana" value="banana" />
+</RadioInputGroup>
 ```
 
 ```js
 ---
 example: true
 ---
-<DeprecatedRadioInputGroup name="feature1" defaultValue="off" description="Super-awesome feature" variant="toggle" disabled>
-  <DeprecatedRadioInput label="Off" value="off" context="off" />
-  <DeprecatedRadioInput label="Allow" value="allow" />
-  <DeprecatedRadioInput label="On" value="on" />
-</DeprecatedRadioInputGroup>
+<RadioInputGroup name="feature1" defaultValue="off" description="Super-awesome feature" variant="toggle" disabled>
+  <RadioInput label="Off" value="off" context="off" />
+  <RadioInput label="Allow" value="allow" />
+  <RadioInput label="On" value="on" />
+</RadioInputGroup>
 ```
 
 Or disable an individual RadioInput component via its `disabled` prop.
@@ -182,27 +177,27 @@ Or disable an individual RadioInput component via its `disabled` prop.
 ---
 example: true
 ---
-<DeprecatedRadioInputGroup
+<RadioInputGroup
   name="fruits2"
   defaultValue="banana"
   description="Fruits"
   layout="columns"
 >
-  <DeprecatedRadioInput label="Apple" value="apple" />
-  <DeprecatedRadioInput label="Orange" value="orange" disabled />
-  <DeprecatedRadioInput label="Banana" value="banana" />
-</DeprecatedRadioInputGroup>
+  <RadioInput label="Apple" value="apple" />
+  <RadioInput label="Orange" value="orange" disabled />
+  <RadioInput label="Banana" value="banana" />
+</RadioInputGroup>
 ```
 
 ```js
 ---
 example: true
 ---
-<DeprecatedRadioInputGroup name="feature2" defaultValue="none" description="Super-awesome feature" variant="toggle">
-  <DeprecatedRadioInput label="None" value="none" context="off" />
-  <DeprecatedRadioInput label="Some" value="some" />
-  <DeprecatedRadioInput label="All" value="all" disabled />
-</DeprecatedRadioInputGroup>
+<RadioInputGroup name="feature2" defaultValue="none" description="Super-awesome feature" variant="toggle">
+  <RadioInput label="None" value="none" context="off" />
+  <RadioInput label="Some" value="some" />
+  <RadioInput label="All" value="all" disabled />
+</RadioInputGroup>
 ```
 
 If you would like to make the description visible only to screen readers you can use the
@@ -212,7 +207,7 @@ If you would like to make the description visible only to screen readers you can
 ---
 example: true
 ---
-<DeprecatedRadioInputGroup
+<RadioInputGroup
   name="fruit3"
   defaultValue="banana"
   description={
@@ -220,10 +215,10 @@ example: true
   }
   messages={[{ text: 'Invalid choice', type: 'error' }]}
 >
-  <DeprecatedRadioInput label="Apple" value="apple" />
-  <DeprecatedRadioInput label="Orange" value="orange" />
-  <DeprecatedRadioInput label="Banana" value="banana" />
-</DeprecatedRadioInputGroup>
+  <RadioInput label="Apple" value="apple" />
+  <RadioInput label="Orange" value="orange" />
+  <RadioInput label="Banana" value="banana" />
+</RadioInputGroup>
 ```
 ### Guidelines
 

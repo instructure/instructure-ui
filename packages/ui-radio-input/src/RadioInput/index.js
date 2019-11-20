@@ -24,17 +24,23 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-import { deprecated } from '@instructure/ui-react-utils'
+import { uid } from '@instructure/uid'
+import { themeable } from '@instructure/ui-themeable'
+import { testable } from '@instructure/ui-testable'
+import { omitProps } from '@instructure/ui-react-utils'
+import { isActiveElement } from '@instructure/ui-dom-utils'
 
-import { RadioInput as UIRadioInput } from '@instructure/ui-radio-input'
+import styles from './styles.css'
+import theme from './theme'
 /**
 ---
-category: components/deprecated
-id: DeprecatedRadioInput
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-radio-input instead.')
+@testable()
+@themeable(theme, styles)
 class RadioInput extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
@@ -76,30 +82,103 @@ class RadioInput extends Component {
     value: undefined
   }
 
-  _radioInput = null
+  constructor (props) {
+    super(props)
+
+    this.state = {}
+
+    if (typeof props.checked === 'undefined') {
+      this.state.checked = false
+    }
+
+    this._defaultId = uid('RadioInput')
+  }
+
+  handleClick = (e) => {
+    if (this.props.disabled || this.props.readOnly) {
+      e.preventDefault()
+      return
+    }
+
+    this.props.onClick(e)
+  }
+
+  handleChange = (e) => {
+    if (this.props.disabled || this.props.readOnly) {
+      e.preventDefault()
+      return
+    }
+
+    if (typeof this.props.checked === 'undefined') {
+      this.setState({ checked: !this.state.checked })
+    }
+
+    this.props.onChange(e)
+  }
 
   focus () {
-    this._radioInput && this._radioInput.focus()
+    this._input.focus()
   }
 
   get id () {
-    return this._radioInput && this._radioInput.id
+    return this.props.id || this._defaultId
   }
 
   get focused () {
-    return this._radioInput && this._radioInput.focused
+    return isActiveElement(this._input)
   }
 
   get checked () {
-    return this._radioInput && this._radioInput.checked
+    return (typeof this.props.checked === 'undefined') ? this.state.checked : this.props.checked
   }
 
   render () {
+    const {
+      disabled,
+      readOnly,
+      label,
+      variant,
+      size,
+      inline,
+      context,
+      value,
+      name
+    } = this.props
+
+    const props = omitProps(this.props, RadioInput.propTypes)
+
+    const classes = {
+      [styles.root]: true,
+      [styles.disabled]: disabled,
+      [styles[variant]]: true,
+      [styles[context]]: variant === 'toggle',
+      [styles[size]]: true,
+      [styles['inline']]: inline
+    }
+
     return (
-      <UIRadioInput
-        ref={(component) => { this._radioInput = component }}
-        {...this.props}
-      />
+      <div className={classnames(classes)}>
+        <input
+          {...props}
+          id={this.id}
+          ref={(c) => { this._input = c }}
+          value={value}
+          name={name}
+          checked={this.checked}
+          type="radio"
+          className={styles.input}
+          disabled={disabled || readOnly}
+          aria-disabled={disabled || readOnly ? 'true' : null}
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+        />
+        <label className={styles.control} htmlFor={this.id}>
+          <span className={styles.facade} aria-hidden="true" />
+          <span className={styles.label}>
+            {label}
+          </span>
+        </label>
+      </div>
     )
   }
 }

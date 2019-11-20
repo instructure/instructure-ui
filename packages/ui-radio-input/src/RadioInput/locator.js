@@ -21,48 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
 
-import generateMessages from '../../__tests__/generateMessages'
+import { locator } from '@instructure/ui-test-utils'
 
-import { RadioInput } from '../../RadioInput'
+import { RadioInput } from './index'
 
-let counter = 1
-const generateName = () => `Example${counter++}`
-
-export default {
-  sectionProp: 'variant',
-  maxExamplesPerPage: 50,
-  maxExamples: 600,
-  propValues: {
-    value: [undefined, 'mickey'], // eslint-disable-line no-undefined
-    messages: generateMessages()
-  },
-  getComponentProps: (props) => {
-    return {
-      name: generateName(),
-      size: 'medium',
-      layout: 'stacked',
-      description: 'A radio input group',
-      onChange: () => {},
-      readOnly: false,
-      children: [
-        <RadioInput
-          key="minnie"
-          value="minnie"
-          label="Minnie"
-        />,
-        <RadioInput
-          key="mickey"
-          value="mickey"
-          label="Mickey"
-        />,
-        <RadioInput
-          key="goofy"
-          value="goofy"
-          label="Goofy"
-        />
-      ]
-    }
-  }
-}
+export default locator(RadioInput.selector)
