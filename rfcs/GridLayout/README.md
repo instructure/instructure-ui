@@ -1,5 +1,5 @@
 ---
-category: Getting Started/RFCs
+describes: rfcs
 id: GridLayoutRFC
 title: GridLayout
 ---

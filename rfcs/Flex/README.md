@@ -1,5 +1,5 @@
 ---
-category: Getting Started/RFCs
+describes: rfcs
 title: Flex
 id: FlexRFC
 ---

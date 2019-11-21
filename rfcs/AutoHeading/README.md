@@ -1,5 +1,5 @@
 ---
-category: Getting Started/RFCs
+describes: rfcs
 id: AutoHeadingRFC
 title: Heading as="auto"
 ---

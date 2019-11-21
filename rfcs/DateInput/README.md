@@ -1,5 +1,5 @@
 ---
-category: Getting Started/RFCs
+describes: rfcs
 id: DateInputRFC
 title: DateInput disabled days
 ---
