@@ -35,6 +35,7 @@
     "@instructure/ui-a11y-utils": "^6.15.0",
     "@instructure/ui-alerts": "^6.15.0",
     "@instructure/ui-avatar": "^6.15.0",
+    "@instructure/ui-badge": "^6.15.0",
     "@instructure/ui-billboard": "^6.15.0",
     "@instructure/ui-breadcrumb": "^6.15.0",
     "@instructure/ui-buttons": "^6.15.0",

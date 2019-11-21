@@ -30,9 +30,9 @@ const MyAvatar = () => {
 ```
 
 ### Components
-The `ui-elements` package contains the following:
+The `ui-elements` package will be removed in version 7.0.0. Please update your imports as follows:
 - [Avatar](#DeprecatedAvatar) will be removed in version 7.0.0. Use the [Avatar](#Avatar) from [ui-avatar](#ui-avatar).
-- [Badge](#Badge)
+- [Badge](#DeprecatedBadge) will be removed in version 7.0.0. Use the [Badge](#Badge) from [ui-badge](#ui-badge).
 - [Img](#DeprecatedImg) will be removed in version 7.0.0. Use [Img](#Img) from [ui-img](#ui-img).
 - [Link](#DeprecatedLink) will be removed in version 7.0.0. Use [Link](#Link) from [ui-link](#ui-link).
 - [Heading](#DeprecatedHeading) will be removed in version 7.0.0. Use the [Heading](#Heading) from [ui-heading](#ui-heading).

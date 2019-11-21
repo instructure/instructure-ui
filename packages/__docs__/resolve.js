@@ -31,6 +31,7 @@ module.exports = {
     '@instructure/ui-a11y-content$': path.resolve(__dirname, '../ui-a11y-content/src/'),
     '@instructure/ui-alerts$': path.resolve(__dirname, '../ui-alerts/src/'),
     '@instructure/ui-avatar$': path.resolve(__dirname, '../ui-avatar/src/'),
+    '@instructure/ui-badge$': path.resolve(__dirname, '../ui-badge/src/'),
     '@instructure/ui-billboard$': path.resolve(__dirname, '../ui-billboard/src/'),
     '@instructure/ui-breadcrumb$': path.resolve(__dirname, '../ui-breadcrumb/src/'),
     '@instructure/ui-buttons$': path.resolve(__dirname, '../ui-buttons/src/'),

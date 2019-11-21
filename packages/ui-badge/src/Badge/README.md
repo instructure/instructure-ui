@@ -1,12 +1,6 @@
 ---
-describes: DeprecatedBadge
-id: DeprecatedBadge__README
+describes: Badge
 ---
-
-**Deprecated** Badge will be removed from `ui-elements` in version 7.0.0. Use [Badge from ui-badge](#Badge) instead.
-
-### Important upgrade notes
-Codemods are available to automatically update imports to the new package.
 
 ### Making badges accessible
 Badge counts are automatically fed to screenreaders through the `aria-describedby`
@@ -18,7 +12,7 @@ The examples below use the `formatOutput` prop to make the badge more screenread
 example: true
 ---
   <div>
-    <DeprecatedBadge
+    <Badge
       count={99}
       pulse
       margin="0 medium 0 0"
@@ -36,8 +30,8 @@ example: true
         withBorder={false}
         withBackground={false}
       />
-    </DeprecatedBadge>
-    <DeprecatedBadge
+    </Badge>
+    <Badge
       type="notification"
       formatOutput={function () {
         return <ScreenReaderContent>You have new edits to review</ScreenReaderContent>
@@ -49,7 +43,7 @@ example: true
         withBorder={false}
         withBackground={false}
       />
-    </DeprecatedBadge>
+    </Badge>
   </div>
 ```
 
@@ -64,12 +58,12 @@ Use the `countUntil` prop to set a limit for the count. The default for `formatO
 example: true
 ---
 <div>
-  <DeprecatedBadge count={105} countUntil={100} margin="0 medium 0 0">
+  <Badge count={105} countUntil={100} margin="0 medium 0 0">
     <Button>Inbox</Button>
-  </DeprecatedBadge>
-  <DeprecatedBadge count={250} countUntil={100}>
+  </Badge>
+  <Badge count={250} countUntil={100}>
     <Button>Assignments</Button>
-  </DeprecatedBadge>
+  </Badge>
 </div>
 ```
 
@@ -84,10 +78,10 @@ Setting `type="notification"` will render small circles that should not contain 
 example: true
 ---
 <div>
-  <DeprecatedBadge standalone count={6} margin="0 small 0 0" />
-  <DeprecatedBadge standalone variant="success" count={12} margin="0 small 0 0"  />
-  <DeprecatedBadge standalone variant="danger" count={18} countUntil={10} margin="0 small 0 0" />
-  <DeprecatedBadge
+  <Badge standalone count={6} margin="0 small 0 0" />
+  <Badge standalone variant="success" count={12} margin="0 small 0 0"  />
+  <Badge standalone variant="danger" count={18} countUntil={10} margin="0 small 0 0" />
+  <Badge
     type="notification"
     standalone
     formatOutput={function () {
@@ -95,7 +89,7 @@ example: true
     }}
     margin="0 small 0 0"
   />
-  <DeprecatedBadge
+  <Badge
     variant="success"
     type="notification"
     standalone
@@ -104,7 +98,7 @@ example: true
     }}
     margin="0 small 0 0"
   />
-  <DeprecatedBadge
+  <Badge
     variant="danger"
     type="notification"
     standalone
@@ -136,27 +130,27 @@ const EditButton = () => (
 const Example = () => (
   <div>
     <View as="div" margin="0 0 medium">
-      <DeprecatedBadge count={21} margin="0 large 0 0" placement="top start">
+      <Badge count={21} margin="0 large 0 0" placement="top start">
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge count={21} margin="0 large 0 0">
+      </Badge>
+      <Badge count={21} margin="0 large 0 0">
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge count={21} margin="0 large 0 0" placement="bottom start">
+      </Badge>
+      <Badge count={21} margin="0 large 0 0" placement="bottom start">
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge count={21} margin="0 large 0 0" placement="bottom end">
+      </Badge>
+      <Badge count={21} margin="0 large 0 0" placement="bottom end">
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge count={21} margin="0 large 0 0" placement="start center">
+      </Badge>
+      <Badge count={21} margin="0 large 0 0" placement="start center">
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge count={21} placement="end center">
+      </Badge>
+      <Badge count={21} placement="end center">
         <EditButton />
-      </DeprecatedBadge>
+      </Badge>
     </View>
     <View as="div">
-      <DeprecatedBadge
+      <Badge
         type="notification"
         margin="0 large 0 0"
         placement="top start"
@@ -165,8 +159,8 @@ const Example = () => (
         }}
       >
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge
+      </Badge>
+      <Badge
         type="notification"
         margin="0 large 0 0"
         formatOutput={function () {
@@ -174,8 +168,8 @@ const Example = () => (
         }}
       >
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge
+      </Badge>
+      <Badge
         type="notification"
         margin="0 large 0 0"
         placement="bottom start"
@@ -184,8 +178,8 @@ const Example = () => (
         }}
       >
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge
+      </Badge>
+      <Badge
         type="notification"
         margin="0 large 0 0"
         placement="bottom end"
@@ -194,8 +188,8 @@ const Example = () => (
         }}
       >
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge
+      </Badge>
+      <Badge
         type="notification"
         margin="0 large 0 0"
         placement="start center"
@@ -204,8 +198,8 @@ const Example = () => (
         }}
       >
         <EditButton />
-      </DeprecatedBadge>
-      <DeprecatedBadge
+      </Badge>
+      <Badge
         type="notification"
         placement="end center"
         formatOutput={function () {
@@ -213,7 +207,7 @@ const Example = () => (
         }}
       >
         <EditButton />
-      </DeprecatedBadge>
+      </Badge>
     </View>
   </div>
 )

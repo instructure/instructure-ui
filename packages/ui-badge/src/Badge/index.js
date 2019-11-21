@@ -25,10 +25,10 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { LayoutPropTypes } from '@instructure/ui-layout'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { deprecated, safeCloneElement } from '@instructure/ui-react-utils'
+import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
@@ -37,12 +37,10 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedBadge
+category: components
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use Badge from ui-badge instead.')
 @testable()
 @themeable(theme, styles)
 class Badge extends Component {
@@ -74,7 +72,7 @@ class Badge extends Component {
     * Supported values are `top start`, `top end`, `end center`, `bottom end`,
     * `bottom start`, and `start center`
     */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -150,7 +148,7 @@ class Badge extends Component {
       <View
         margin={(standalone) ? margin : 'none'}
         className={classnames({
-          [styles.badge]: true,
+          [styles.root]: true,
           [styles[type]]: type,
           [styles[variant]]: variant,
           [styles['positioned--top']]: placement.indexOf('top') > -1,

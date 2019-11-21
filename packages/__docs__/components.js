@@ -35,6 +35,7 @@ export {
 } from '@instructure/ui-a11y-content'
 export { Alert } from '@instructure/ui-alerts'
 export { Avatar } from '@instructure/ui-avatar'
+export { Badge } from '@instructure/ui-badge'
 export { Billboard } from '@instructure/ui-billboard'
 export { BaseButton, Button, CloseButton, CondensedButton, IconButton } from '@instructure/ui-buttons'
 export { Calendar } from '@instructure/ui-calendar'
@@ -43,7 +44,7 @@ export { Dialog } from '@instructure/ui-dialog'
 export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export {
   Avatar as DeprecatedAvatar,
-  Badge,
+  Badge as DeprecatedBadge,
   Heading as DeprecatedHeading,
   Img as DeprecatedImg,
   Pill as DeprecatedPill,

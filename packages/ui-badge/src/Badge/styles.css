@@ -1,0 +1,181 @@
+/* stylelint-disable selector-max-class, max-nesting-depth */
+
+.root {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  box-sizing: border-box;
+  pointer-events: none;
+  text-align: center;
+  color: var(--color);
+  font-size: var(--fontSize);
+  white-space: nowrap;
+  border-radius: var(--borderRadius);
+
+  &:not(.standalone) {
+    position: absolute;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+    z-index: var(--notificationZIndex);
+
+    &.positioned--top {
+      &.count {
+        top: calc(-1 * var(--countOffset));
+      }
+
+      &.notification {
+        top: var(--notificationOffset);
+      }
+    }
+
+    &.positioned--bottom {
+      &.count {
+        bottom: calc(-1 * var(--countOffset));
+      }
+
+      &.notification {
+        bottom: var(--notificationOffset);
+      }
+    }
+
+    &.positioned--start {
+      &.count {
+        inset-inline-start: calc(-1 * var(--countOffset));
+        inset-inline-end: auto;
+      }
+
+      &.notification {
+        inset-inline-start: var(--notificationOffset);
+        inset-inline-end: auto;
+      }
+    }
+
+    &.positioned--end {
+      &.count {
+        inset-inline-end: calc(-1 * var(--countOffset));
+        inset-inline-start: auto;
+      }
+
+      &.notification {
+        inset-inline-end: var(--notificationOffset);
+        inset-inline-start: auto;
+      }
+    }
+
+    &.positioned--center.positioned--end,
+    &.positioned--center.positioned--start {
+      &.count {
+        top: calc(50% - (var(--size) / 2));
+      }
+
+      &.notification {
+        top: calc(50% - (var(--sizeNotification) / 2));
+      }
+    }
+
+    /*
+    * The diagonally positioned badges looked better closer to
+    * the button/child, while the centered badges looked happier a
+    * bit further away. Hence the special treatment below.
+    */
+
+    &.positioned--center.positioned--start {
+      &.count {
+        inset-inline-start: auto;
+        inset-inline-end: calc(100% - var(--countOffset));
+      }
+
+      &.notification {
+        inset-inline-start: calc(-1 * var(--sizeNotification) / 2);
+        inset-inline-end: auto;
+      }
+    }
+
+    &.positioned--center.positioned--end {
+      &.count {
+        inset-inline-end: auto;
+        inset-inline-start: calc(100% - var(--countOffset));
+      }
+
+      &.notification {
+        inset-inline-end: calc(-1 * var(--sizeNotification) / 2);
+        inset-inline-start: auto;
+      }
+    }
+  }
+
+  &.count {
+    line-height: var(--size);
+    min-width: var(--size);
+    padding-inline-start: var(--padding);
+    padding-inline-end: var(--padding);
+  }
+
+  &.notification {
+    width: var(--sizeNotification);
+    height: var(--sizeNotification);
+  }
+}
+
+.danger {
+  background-color: var(--colorDanger);
+
+  &.pulse::before {
+    border-color: var(--colorDanger);
+  }
+}
+
+.success {
+  background-color: var(--colorSuccess);
+
+  &.pulse::before {
+    border-color: var(--colorSuccess);
+  }
+}
+
+.primary {
+  background-color: var(--colorPrimary);
+
+  &.pulse::before {
+    border-color: var(--colorPrimary);
+  }
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+.pulse {
+  position: relative;
+
+  &::before {
+    content: "";
+    width: calc(100% + 0.5rem);
+    height: calc(100% + 0.5rem);
+    border-radius: var(--borderRadius);
+    position: absolute;
+    top: -0.25rem;
+    inset-inline-end: auto;
+    inset-inline-start: -0.25rem;
+    box-sizing: border-box;
+    border: var(--pulseBorderThickness) solid;
+    opacity: 0;
+    transform: scale(0.75);
+    animation-name: pulse;
+    animation-duration: 1s;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+  }
+}
+
+.wrapper {
+  position: relative;
+  box-sizing: border-box;
+
+  svg { /* stylelint-disable-line selector-max-type */
+    display: block;
+  }
+}
+
+/* stylelint-enable selector-max-class, max-nesting-depth */
