@@ -1,0 +1,43 @@
+figure.root { /* stylelint-disable-line selector-max-type */
+  display: flex;
+  background: var(--background);
+  margin: 0;
+  padding: 0;
+  font-family: var(--fontFamily);
+}
+
+.top {
+  align-items: flex-start;
+}
+
+.center {
+  align-items: center;
+}
+
+figcaption.caption { /* stylelint-disable-line selector-max-type */
+  color: var(--color);
+  margin: 0;
+  padding: 0;
+}
+
+.figure {
+  margin-inline-start: 0;
+  margin-inline-end: var(--figureMargin);
+}
+
+.title {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: block;
+  margin: var(--titleMargin);
+  font-size: var(--titleFontSize);
+  font-weight: var(--titleFontWeight);
+  line-height: var(--titleLineHeight);
+}
+
+.description {
+  font-size: var(--descriptionFontSize);
+  line-height: var(--descriptionLineHeight);
+  font-weight: var(--descriptionFontWeight);
+}

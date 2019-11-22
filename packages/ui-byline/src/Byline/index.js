@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
@@ -35,24 +35,22 @@ import theme from './theme'
 
 /**
 ---
-category: components/deprecated
-id: DeprecatedMedia
+category: components
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-byline instead')
 @themeable(theme, styles)
-class Media extends Component {
+class Byline extends Component {
   static propTypes = {
     /**
-    * the media object
+    * the Byline visual/object
     */
     children: PropTypes.node.isRequired,
     /**
-    * the media title
+    * the Byline title
     */
     title: PropTypes.node,
     /**
-    * the media description
+    * the Byline description
     */
     description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     /**
@@ -80,8 +78,8 @@ class Media extends Component {
 
   render () {
     const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Media.propTypes),
-      Media
+      omitProps(this.props, Byline.propTypes),
+      Byline
     )
 
     return (
@@ -120,5 +118,5 @@ class Media extends Component {
   }
 }
 
-export default Media
-export { Media }
+export default Byline
+export { Byline }

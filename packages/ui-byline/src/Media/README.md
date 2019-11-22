@@ -1,9 +1,8 @@
 ---
-describes: DeprecatedMedia
-id: DeprecatedMedia__README
+describes: Media
 ---
 
-**DEPRECATED:** Media will be removed from `ui-layout` in version 7.0.0. Use [Byline](#Byline) from [ui-byline](#ui-byline) instead.
+**DEPRECATED:** Media will be removed from `ui-byline` in version 8.0.0. Use [Byline](#Byline) from [ui-byline](#ui-byline) instead.
 
 ___
 
@@ -13,9 +12,9 @@ A `Media` component with a caption:
 ---
 example: true
 ---
-<DeprecatedMedia description={lorem.sentence()}>
+<Media description={lorem.sentence()}>
   <Avatar name="Julia Chowder" />
-</DeprecatedMedia>
+</Media>
 ```
 
 Create a heading by using the `title` prop, and add space around the Media
@@ -29,7 +28,7 @@ setting the `alignContent` prop.
 ---
 example: true
 ---
-<DeprecatedMedia
+<Media
   margin="x-large auto"
   size="small"
   alignContent="top"
@@ -37,14 +36,14 @@ example: true
   description={lorem.paragraph()}
 >
   <Avatar name="Graham Taylor" />
-</DeprecatedMedia>
+</Media>
 ```
 
 ```js
 ---
 example: true
 ---
-<DeprecatedMedia 
+<Media 
   description={
     <View display="block" margin="0 0 0 x-small">
       <Heading level="h2">
@@ -60,5 +59,5 @@ example: true
     </View>
   }>
   <SVGIcon src={iconExample} title="love" size="small" color="success" />
-</DeprecatedMedia>
+</Media>
 ```

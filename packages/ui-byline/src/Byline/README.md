@@ -1,35 +1,30 @@
 ---
-describes: DeprecatedMedia
-id: DeprecatedMedia__README
+describes: Byline
 ---
 
-**DEPRECATED:** Media will be removed from `ui-layout` in version 7.0.0. Use [Byline](#Byline) from [ui-byline](#ui-byline) instead.
-
-___
-
-A `Media` component with a caption:
+A byline component with a visual and a caption:
 
 ```js
 ---
 example: true
 ---
-<DeprecatedMedia description={lorem.sentence()}>
-  <Avatar name="Julia Chowder" />
-</DeprecatedMedia>
+<Byline description={lorem.sentence()}>
+  <Avatar name="Julia Childer" />
+</Byline>
 ```
 
-Create a heading by using the `title` prop, and add space around the Media
+Create a heading by using the `title` prop, and add space around the Byline
 component via the `margin` prop. To constrain the component's width, use
 the `size` prop.
 
-You can also adjust the alignment of the media with the descriptive text by
+You can also adjust the alignment of the visual object with the descriptive text by
 setting the `alignContent` prop.
 
 ```js
 ---
 example: true
 ---
-<DeprecatedMedia
+<Byline
   margin="x-large auto"
   size="small"
   alignContent="top"
@@ -37,22 +32,22 @@ example: true
   description={lorem.paragraph()}
 >
   <Avatar name="Graham Taylor" />
-</DeprecatedMedia>
+</Byline>
 ```
 
 ```js
 ---
 example: true
 ---
-<DeprecatedMedia 
+<Byline
   description={
     <View display="block" margin="0 0 0 x-small">
       <Heading level="h2">
         <Link href="#">Clickable Heading</Link>
       </Heading>
-      <Text 
-        size="x-small" 
-        transform="uppercase" 
+      <Text
+        size="x-small"
+        transform="uppercase"
         letterSpacing="expanded"
       >
         Something here
@@ -60,5 +55,5 @@ example: true
     </View>
   }>
   <SVGIcon src={iconExample} title="love" size="small" color="success" />
-</DeprecatedMedia>
+</Byline>
 ```

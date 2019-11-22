@@ -8,6 +8,10 @@
     "replace": "@instructure/ui-badge/lib/Badge"
   },
   {
+    "pattern": "^@instructure/ui-layout/lib/Media",
+    "replace": "@instructure/ui-byline/lib/Byline"
+  },
+  {
     "pattern": "^@instructure/ui-forms/lib/DateInput",
     "replace": "@instructure/ui-date-input/lib/DateInput"
   },
