@@ -49,3 +49,9 @@ export default function generator ({ borders, colors, spacing, typography }) {
     borderRadius: '999rem'
   }
 }
+
+generator['instructure'] = function () {
+  return {
+    height: '1.5rem',
+  }
+}

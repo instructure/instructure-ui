@@ -30,6 +30,7 @@
   "dependencies": {
     "@instructure/canvas-high-contrast-theme": "^6.18.0",
     "@instructure/canvas-theme": "^6.18.0",
+    "@instructure/instructure-theme": "^6.18.0",
     "@instructure/ui-a11y": "^6.18.0",
     "@instructure/ui-a11y-content": "^6.18.0",
     "@instructure/ui-a11y-utils": "^6.18.0",

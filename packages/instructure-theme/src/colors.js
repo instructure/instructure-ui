@@ -22,31 +22,26 @@
  * SOFTWARE.
  */
 
-const typography = Object.freeze({
-  fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyDisplay: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
+ import { functionalColors } from '@instructure/canvas-theme'
 
-  fontSizeXSmall: '0.75rem', // 12px
-  fontSizeSmall: '0.875rem', // 14px
-  fontSizeMedium: '1rem', // 16px
-  fontSizeLarge: '1.375rem', // 22px
-  fontSizeXLarge: '1.75rem',  // 28px
-  fontSizeXXLarge: '2.375rem', // 38px
+ const values = {
+   brand: '#287A9F',
+   link: '#287A9F',
+   electric: '#287A9F',
+   shamrock: '#3D997E',
+   barney: '#5B5B5B',
+   crimson: '#EA2127',
+   fire: '#E17909',
+   licorice: '#28282A',
+   oxford: '#5B5B5B',
+   ash: '#6e6e6e',
+   slate: '#6e6e6e',
+   tiara: '#ccc',
+   porcelain: '#F0F2F3',
+   white: '#ffffff'
+ }
 
-  fontWeightLight: 300,
-  fontWeightNormal: 400,
-  fontWeightBold: 700,
+ const colors = Object.freeze(functionalColors(values))
 
-  lineHeight: 1.5, // 24px
-  lineHeightFit: 1.125,
-  lineHeightCondensed: 1.25,
-  lineHeightDouble: 2,
-
-  letterSpacingNormal: 0,
-  letterSpacingCondensed: '-0.0625rem',
-  letterSpacingExpanded: '0.0625rem'
-})
-
-export default typography
-export { typography }
+ export default colors
+ export { colors }

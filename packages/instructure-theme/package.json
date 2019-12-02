@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-themes",
+  "name": "@instructure/instructure-theme",
   "version": "6.18.0",
-  "description": "A library of @instructure/ui-themeable themes",
+  "description": "A theme for Instructure made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -20,12 +20,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.18.0"
+    "@instructure/ui-babel-preset": "^6.18.0",
+    "@instructure/ui-color-utils": "^6.18.0",
+    "@instructure/ui-test-utils": "^6.18.0"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "^6.18.0",
+    "@babel/runtime": "^7.5.0",
     "@instructure/canvas-theme": "^6.18.0",
-    "@instructure/instructure-theme": "^6.18.0"
+    "@instructure/ui-themeable": "^6.18.0"
   },
   "publishConfig": {
     "access": "public"

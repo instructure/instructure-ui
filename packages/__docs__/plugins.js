@@ -84,6 +84,7 @@ module.exports = [
       // packages to ignore:
       '**/canvas-theme/**',
       '**/canvas-high-contrast-theme/**',
+      '**/instructure-theme/**',
       '**/template-app/**',
       '**/template-component/**',
       '**/template-package/**',
@@ -99,7 +100,8 @@ module.exports = [
     ],
     themes: [
       '@instructure/canvas-theme',
-      '@instructure/canvas-high-contrast-theme'
+      '@instructure/canvas-high-contrast-theme',
+      '@instructure/instructure-theme'
     ],
     icons: {
       packageName: '@instructure/ui-icons',

@@ -22,31 +22,14 @@
  * SOFTWARE.
  */
 
-const typography = Object.freeze({
-  fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyDisplay: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
-
-  fontSizeXSmall: '0.75rem', // 12px
-  fontSizeSmall: '0.875rem', // 14px
-  fontSizeMedium: '1rem', // 16px
-  fontSizeLarge: '1.375rem', // 22px
-  fontSizeXLarge: '1.75rem',  // 28px
-  fontSizeXXLarge: '2.375rem', // 38px
-
-  fontWeightLight: 300,
-  fontWeightNormal: 400,
-  fontWeightBold: 700,
-
-  lineHeight: 1.5, // 24px
-  lineHeightFit: 1.125,
-  lineHeightCondensed: 1.25,
-  lineHeightDouble: 2,
-
-  letterSpacingNormal: 0,
-  letterSpacingCondensed: '-0.0625rem',
-  letterSpacingExpanded: '0.0625rem'
-})
-
-export default typography
-export { typography }
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

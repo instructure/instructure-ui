@@ -22,41 +22,41 @@
  * SOFTWARE.
  */
 
-export default function generator ({ borders, colors, spacing, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    lineHeight: typography.lineHeightFit,
+ export default function generator ({ borders, colors, spacing, typography }) {
+   return {
+     fontFamily: typography.fontFamily,
+     lineHeight: typography.lineHeightFit,
 
-    h1FontSize: typography.fontSizeXXLarge,
-    h1FontWeight: typography.fontWeightLight,
+     h1FontSize: typography.fontSizeXXLarge,
+     h1FontWeight: typography.fontWeightLight,
 
-    h2FontSize: typography.fontSizeXLarge,
-    h2FontWeight: typography.fontWeightNormal,
+     h2FontSize: typography.fontSizeXLarge,
+     h2FontWeight: typography.fontWeightNormal,
 
-    h3FontSize: typography.fontSizeLarge,
-    h3FontWeight: typography.fontWeightBold,
+     h3FontSize: typography.fontSizeLarge,
+     h3FontWeight: typography.fontWeightBold,
 
-    h4FontSize: typography.fontSizeMedium,
-    h4FontWeight: typography.fontWeightBold,
+     h4FontSize: typography.fontSizeMedium,
+     h4FontWeight: typography.fontWeightBold,
 
-    h5FontSize: typography.fontSizeSmall,
-    h5FontWeight: typography.fontWeightNormal,
+     h5FontSize: typography.fontSizeSmall,
+     h5FontWeight: typography.fontWeightNormal,
 
-    primaryInverseColor: colors.textLightest,
-    primaryColor: colors.textDarkest,
+     primaryInverseColor: colors.textLightest,
+     primaryColor: colors.textDarkest,
 
-    secondaryColor: colors.textDark,
-    secondaryInverseColor: colors.textLight,
+     secondaryColor: colors.textDark,
+     secondaryInverseColor: colors.textLight,
 
-    borderPadding: spacing.xxxSmall,
-    borderColor: colors.borderMedium,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style
-  }
-}
+     borderPadding: spacing.xxxSmall,
+     borderColor: colors.borderMedium,
+     borderWidth: borders.widthSmall,
+     borderStyle: borders.style
+   }
+ }
 
-generator.canvas = function (variables) {
-  return {
-    primaryColor: variables['ic-brand-font-color-dark']
-  }
-}
+ generator.canvas = function (variables) {
+   return {
+     primaryColor: variables['ic-brand-font-color-dark']
+   }
+ }

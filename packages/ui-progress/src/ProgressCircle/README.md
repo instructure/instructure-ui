@@ -42,7 +42,7 @@ example: true
     renderValue={function ({ valueNow, valueMax }) {
       return (
         <span>
-          <Text size="x-large" weight="bold">{valueNow}</Text>
+          <Text size="large" weight="bold">{valueNow}</Text>
           <br />
           <Text size="small">/&nbsp;</Text>
           <Text size="small">{valueMax}</Text>
@@ -64,13 +64,13 @@ example: true
     renderValue={function ({ valueNow, valueMax }) {
       if (valueNow > (valueMax / 2)) {
         return (
-          <Text weight="bold" size="x-large">
+          <Text weight="bold" size="large">
             PASS
           </Text>
         )
       } else {
         return (
-        <Text weight="bold" size="x-large">
+        <Text weight="bold" size="large">
           FAIL
         </Text>
         )

@@ -149,3 +149,16 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
     primaryInverseBorderColor: colors.borderMedium
   }
 }
+
+generator['instructure'] = function () {
+  return {
+    borderRadius: '999em',
+    smallPaddingTop: '0.5rem',
+    smallPaddingBottom: '0.4375rem',
+    mediumPaddingTop: '0.75rem',
+    mediumPaddingBottom: '0.75rem',
+    largePaddingTop: '1rem',
+    largePaddingBottom: '1rem',
+    largeFontSize: '1.125rem'
+  }
+}

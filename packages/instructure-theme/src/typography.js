@@ -23,22 +23,24 @@
  */
 
 const typography = Object.freeze({
-  fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyDisplay: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
+  fontFamily: `"Proxima Nova", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+  "Helvetica Neue", sans-serif`,
+  fontFamilyDisplay: '"Georgia", "Proxima Nova", sans-serif',
   fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
 
-  fontSizeXSmall: '0.75rem', // 12px
-  fontSizeSmall: '0.875rem', // 14px
-  fontSizeMedium: '1rem', // 16px
-  fontSizeLarge: '1.375rem', // 22px
-  fontSizeXLarge: '1.75rem',  // 28px
-  fontSizeXXLarge: '2.375rem', // 38px
+  fontSizeXSmall: '0.75rem',
+  fontSizeSmall: '0.875rem',
+  fontSizeMedium: '1rem',
+  fontSizeLarge: '1.25rem',
+  fontSizeXLarge: '2.25rem',
+  fontSizeXXLarge: '3rem',
 
   fontWeightLight: 300,
   fontWeightNormal: 400,
   fontWeightBold: 700,
 
-  lineHeight: 1.5, // 24px
+  lineHeight: 1.5,
   lineHeightFit: 1.125,
   lineHeightCondensed: 1.25,
   lineHeightDouble: 2,
