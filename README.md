@@ -26,7 +26,7 @@ Instructure-UI currently supports React 15 and higher.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](#LICENSE)
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
