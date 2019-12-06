@@ -144,10 +144,6 @@ class DrawerLayout extends Component {
     }
   }
 
-  handleContentRef = (el) => {
-    this._content = el
-  }
-
   handleTrayContentRef = (el) => {
     this._tray = el
   }
@@ -257,12 +253,21 @@ class DrawerLayout extends Component {
         })
       } else if (matchComponentTypes(child, [DrawerContent])) {
         contentCount++
+
+        const handleContentRef = (el) => {
+          this._content = el
+
+          if (typeof child.props.contentRef === 'function') {
+            child.props.contentRef(el)
+          }
+        }
+
         return (this.state.trayWidth !== null) ? safeCloneElement(child, {
           key: child.props.label,
           [DrawerContent.locatorAttribute]: this._id,
           style: this.contentStyle,
           onSizeChange: this.handleContentSizeChange,
-          contentRef: this.handleContentRef,
+          contentRef: handleContentRef,
           shouldTransition: !shouldOverlayTray
         }) : null
       } else {

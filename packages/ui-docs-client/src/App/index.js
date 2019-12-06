@@ -91,6 +91,7 @@ class App extends Component {
       themeKey: Object.keys(props.themes)[0]
     }
 
+    this._content = null
     this._menuTrigger = null
   }
 
@@ -103,9 +104,35 @@ class App extends Component {
   }
 
   updateKey = () => {
-    this.setState({
-      key: window.location.hash.slice(1) || 'index'
-    })
+    const { hash } = window.location
+
+    const path = hash && hash.split('/')
+
+    if (path) {
+      const [ page, id ] = path.map(entry => entry.replace('#', ''))
+
+      this.setState({
+        key: page || 'index'
+      }, () => {
+        if (id) {
+          // After setting state, if we have an id and it corresponds to an element
+          // that exists, scroll it into view
+          const linkedSection = document.getElementById(id)
+          linkedSection && linkedSection.scrollIntoView()
+        } else if (this._content) {
+          // If we don't have an id, scroll the content back to the top
+          this._content.scrollTop = 0
+        }
+      })
+    }
+  }
+
+  handleContentRef = (el) => {
+    this._content = el
+  }
+
+  handleMenuTriggerRef = (el) => {
+    this._menuTrigger = el
   }
 
   handleMenuOpen = () => {
@@ -140,12 +167,6 @@ class App extends Component {
     this.updateKey()
 
     window.addEventListener('hashchange', this.updateKey, false)
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if (prevState.key !== this.state.key && this._content) {
-      this._content.scrollTop = 0
-    }
   }
 
   componentWillUnmount () {
@@ -374,7 +395,11 @@ class App extends Component {
               />
             </View>
           </DrawerLayout.Tray>
-          <DrawerLayout.Content label={this.state.key || this.props.library.name} role="main">
+          <DrawerLayout.Content
+            label={this.state.key || this.props.library.name}
+            role="main"
+            contentRef={this.handleContentRef}
+          >
             {!this.state.showMenu && (
               <div className={styles.hamburger}>
                 <IconButton
@@ -383,7 +408,7 @@ class App extends Component {
                   withBackground={false}
                   withBorder={false}
                   onClick={this.handleMenuOpen}
-                  elementRef={(el) => { this._menuTrigger = el }}
+                  elementRef={this.handleMenuTriggerRef}
                   size="large"
                 />
               </div>
@@ -393,9 +418,6 @@ class App extends Component {
               padding="x-large xx-large"
               minWidth="18rem"
               height="100vh"
-              ref={c => {
-                this._content = c
-              }}
             >
               <div className={styles.main} id="main">
                 {this.renderContent(this.state.key)}
