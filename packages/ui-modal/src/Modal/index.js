@@ -67,6 +67,11 @@ class Modal extends Component {
       [ModalBody]
     ),
 
+    /**
+    * The element to render the dialog as, `span` by default
+    */
+    as: PropTypes.elementType,
+
     /*
      * The size of the `<Modal />` content
      */
@@ -185,6 +190,7 @@ class Modal extends Component {
     onExit: () => {},
     onExiting: () => {},
     onExited: () => {},
+    as: undefined,
     mountNode: null,
     insertAt: 'bottom',
     liveRegion: null,
@@ -209,11 +215,11 @@ class Modal extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.open && !nextProps.open) {
+  componentDidUpdate (prevProps) {
+    if (prevProps.open && !this.props.open) {
       // closing
       this.setState({
-        transitioning: this.props.transition !== null
+        transitioning: prevProps.transition !== null
       })
     }
   }
@@ -289,12 +295,14 @@ class Modal extends Component {
       shouldReturnFocus,
       liveRegion,
       size,
-      constrain
+      constrain,
+      as
     } = this.props
 
     const dialog = (
       <Dialog
         {...passthroughProps(props)}
+        as={as}
         open
         label={label}
         defaultFocusElement={this.defaultFocusElement}

@@ -127,6 +127,27 @@ describe('<Modal />', async () => {
     expect(body.getComputedStyle().color).to.equal('rgb(0, 0, 0)')
   })
 
+  it('should pass `as` prop to the dialog', async () => {
+    const subject = await mount(
+      <Modal
+        open
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <Modal.Body>Foo Bar Baz</Modal.Body>
+      </Modal>
+    )
+    const modal = await ModalLocator.find()
+    let dialog = await modal.find('[role="dialog"]')
+
+    expect(dialog.getTagName()).to.equal('span')
+
+    await subject.setProps({ as: 'form' })
+
+    dialog = await modal.find('[role="dialog"]')
+    expect(dialog.getTagName()).to.equal('form')
+  })
+
   it('should handle null children', async () => {
     await mount(
       <Modal
