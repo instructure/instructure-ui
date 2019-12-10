@@ -21,38 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator, find  } from '@instructure/ui-test-utils'
 
-import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+import { DeprecatedButton } from './index'
 
-import { CloseButton } from '../index'
-import { CloseButtonLocator } from '../CloseButtonLocator'
-
-describe('<CloseButton />', async () => {
-  beforeEach(() => {
-    stub(console, 'warn')
-  })
-
-  it('should render with x icon', async () => {
-    await mount(
-      <CloseButton>Close</CloseButton>
-    )
-    const button = await CloseButtonLocator.find()
-    const icon = await button.find('svg[name]')
-    expect(icon.getAttribute('name')).to.equal('IconX')
-  })
-
-  it('should pass the `onClick` prop', async () => {
-    const onClick = stub()
-
-    await mount(
-      <CloseButton onClick={onClick}>Hello</CloseButton>
-    )
-    const closeButtonRoot = await CloseButtonLocator.find()
-    const button = await closeButtonRoot.find(':focusable')
-
-    await button.click()
-
-    expect(onClick).to.have.been.calledOnce()
-  })
+export default locator(DeprecatedButton.selector, {
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
+  }
 })

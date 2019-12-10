@@ -23,332 +23,665 @@
  */
 
 import React from 'react'
-import { mount, expect, stub, generateA11yTests } from '@instructure/ui-test-utils'
-
-import { View } from '@instructure/ui-view'
-import { IconTrashSolid } from '@instructure/ui-icons'
+import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
 
 import { Button } from '../index'
 
 import { ButtonLocator } from '../ButtonLocator'
-import ButtonExamples from '../__examples__/Button.examples'
-
-import styles from '../styles.css'
 
 describe('<Button/>', async () => {
-  it('should render the children as button text', async () => {
-    await mount(
-      <Button>Hello World</Button>
-    )
-    expect(await ButtonLocator.find(':contains(Hello World)')).to.exist()
-  })
+  const icon = (
+    <svg
+      title="myIcon"
+      height="1em"
+      width="1em"
+      style={{ fill: 'currentcolor' }}
+    >
+      <circle cx="0.5em" cy="0.5em" r="0.5em" />
+    </svg>
+  )
+  const iconSelector = 'svg[title="myIcon"]'
 
-  it('should render a button', async () => {
-    await mount(
-      <Button>Hello World</Button>
-    )
-    expect(await ButtonLocator.find('button[type="button"]')).to.exist()
-  })
+  describe('Updated button tests (no variant set)', async () => {
+    it('should render children', async () => {
+      const children = 'Hello world'
 
-  it('should not error with a null child', async () => {
-    await mount(
-      <Button>Hello World{null}</Button>
-    )
-    expect( await ButtonLocator.find('button')).to.exist()
-  })
-
-  it('should render a link styled as a button if href is provided', async () => {
-    await mount(
-      <Button href='example.html'>Hello World</Button>
-    )
-    expect(await ButtonLocator.findAll('[href="example.html"]')).to.have.length(1)
-  })
-
-  it('should render as a link when `to` prop is provided', async () => {
-    await mount(
-      <Button to="/example">Test</Button>
-    )
-    const link = await ButtonLocator.find('a')
-    expect(link.getAttribute('to')).to.equal('/example')
-  })
-
-  it('should render designated tag if `as` prop is specified', async () => {
-    await mount(
-      <Button as='span'>Hello World</Button>
-    )
-    const span = await ButtonLocator.find()
-    expect(span.getTagName()).to.equal('span')
-  })
-
-  it('should set role="button"', async () => {
-    const onClick = stub()
-    await mount(
-      <Button as='span' onClick={onClick}>Hello World</Button>
-    )
-    expect(await ButtonLocator.find('[role="button"]')).to.exist()
-  })
-
-  it('should set tabIndex="0"', async () => {
-    const onClick = stub()
-    await mount(
-      <Button as='span' onClick={onClick}>Hello World</Button>
-    )
-    expect(await ButtonLocator.find('[tabIndex="0"]')).to.exist()
-  })
-
-  it('should pass down the type prop to the button element', async () => {
-    const onClick = stub()
-    await mount(
-      <Button type="submit" onClick={onClick}>Hello World</Button>
-    )
-    expect(await ButtonLocator.find('[type="submit"]')).to.exist()
-  })
-
-  it('should pass down an icon via the icon property', async () => {
-    await mount(
-      <Button icon={IconTrashSolid}>Hello World</Button>
-    )
-    const button = await ButtonLocator.find()
-    const icon = await button.find('svg[name]')
-    expect(icon.getAttribute('name')).to.equal('IconTrash')
-  })
-
-  it('should apply fluid-width styles when set to fluidWidth', async () => {
-    await mount(
-      <div style={{ width: '70px' }}>
-        <Button fluidWidth>More Than Just Hello World</Button>
-      </div>
-    )
-    const button = await ButtonLocator.find('button')
-    expect(button.hasClass(styles['width--fluid'])).to.be.true()
-  })
-
-  it('should not allow padding as a property', async () => {
-    const consoleError = stub(console, 'error')
-    await mount(
-      <Button padding='24px 4px 24px 8px'>Hello World</Button>
-    )
-    expect(consoleError).to.be.calledWith(`Warning: [Button] prop 'padding' is not allowed.`)
-  })
-
-  it('focuses with the focus helper', async () => {
-    const onFocus = stub()
-    await mount(
-      <Button onFocus={onFocus}>Hello World</Button>
-    )
-    const button = await ButtonLocator.find()
-    await button.focus()
-    expect(button.focused()).to.be.true()
-  })
-
-  it('should provide a buttonRef prop', async () => {
-    const buttonRef = stub()
-    await mount(
-      <Button buttonRef={buttonRef}>Hello World</Button>
-    )
-    const button = await ButtonLocator.find(':contains(Hello World)')
-    expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
-  })
-
-  describe('onClick', async () => {
-    it('should call onClick when clicked', async () => {
-      const onClick = stub()
       await mount(
-        <Button onClick={onClick}>Hello World</Button>
+        <Button>{children}</Button>
       )
-      const button = await ButtonLocator.find()
-      await button.click()
-      expect(onClick).to.have.been.calledOnce()
+
+      expect(await ButtonLocator.findWithText(children))
     })
 
-    it('should not call onClick when button is disabled', async () => {
-      const onClick = stub()
+    it('should provide a focused getter', async () => {
+      let componentRef = null
+
       await mount(
-        <Button
-          disabled
-          onClick={onClick}>Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      await button.click(null, { clickable: false })
-
-      expect(onClick).to.have.not.been.called()
-    })
-
-    it('should not call onClick when button is readOnly', async () => {
-      const onClick = stub()
-      await mount(
-        <Button
-          readOnly
-          onClick={onClick}>Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      await button.click(null, { clickable: false })
-
-      expect(onClick).to.have.not.been.called()
-    })
-
-    it('should not call onClick when button is disabled and an href prop is provided', async () => {
-      const onClick = stub()
-      await mount(
-        <Button
-          href="#">Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      await button.click()
-      expect(onClick).to.have.not.been.called()
-    })
-
-    it('should not call onClick when button is readOnly and an href prop is provided', async () => {
-      const onClick = stub()
-      await mount(
-        <Button
-          readOnly
-          onClick={onClick}
-          href="#">Hello World</Button>
+        <Button componentRef={(component) => { componentRef = component }}>Hello</Button>
       )
       const button = await ButtonLocator.find()
 
-      await button.click(null, { clickable: false })
+      await button.focus()
 
-      expect(onClick).to.have.not.been.called()
+      expect(componentRef.focused).to.be.true()
     })
 
-    it('should call onClick when space key is pressed if href is provided', async () => {
-      const onClick = stub()
+    it('should provide a focus function', async () => {
+      let componentRef = null
+
       await mount(
-        <Button
-          onClick={onClick}
-          href="#">Hello World</Button>
+        <Button componentRef={(component) => { componentRef = component }}>Hello</Button>
       )
       const button = await ButtonLocator.find()
-      await button.keyDown('space')
-      expect(onClick).to.have.been.called()
-    })
 
-    it('should call onClick when enter key is pressed when not a button or link', async () => {
-      const onClick = stub()
-      await mount(
-        <Button as="span" onClick={onClick}>Hello World</Button>
-      )
-      const span = await ButtonLocator.find('[type="button"]')
-      await span.keyDown('enter')
-      expect(onClick).to.have.been.called()
-    })
+      componentRef.focus()
 
-    it('should not call onClick when button is disabled and space key is pressed', async () => {
-      const onClick = stub()
-      await mount(
-        <Button
-          disabled
-          onClick={onClick}
-          href="#">Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      await button.keyDown('space')
-      expect(onClick).to.not.have.been.called()
-    })
-
-    it('should not call onClick when button is readOnly and space key is pressed', async () => {
-      const onClick = stub()
-      await mount(
-        <Button
-          readOnly
-          onClick={onClick}
-          href="#">Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      await button.keyDown('space')
-      expect(onClick).to.not.have.been.called()
-    })
-  })
-
-  describe('when passing down props to View', async () => {
-    const allowedProps = {
-      margin: 'small',
-      as: 'div',
-      cursor: 'move'
-    }
-
-    const ignore = [
-      'elementRef'
-    ]
-
-    Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, async () => {
-            const consoleError = stub(console, 'error')
-            const warning = `Warning: [Button] prop '${prop}' is not allowed.`
-            const props = { [prop]: 'foo' }
-            await mount(
-              <Button {...props}>Hello World</Button>
-            )
-            expect(consoleError).to.be.calledWith(warning)
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, async () => {
-            const props = { [prop]: allowedProps[prop] }
-            const consoleError = stub(console, 'error')
-            await mount(
-              <Button {...props}>Hello World</Button>
-            )
-            expect(consoleError).to.not.be.called()
-          })
-        }
-    })
-
-    it("passes cursor='pointer' to View by default", async () => {
-      await mount(
-        <Button>Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      const cursor = button.getComputedStyle().cursor
-      expect(cursor).to.equal('pointer')
-    })
-
-    it("passes cursor='not-allowed' to View when disabled", async () => {
-      await mount(
-        <Button disabled>Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      const cursor = button.getComputedStyle().cursor
-      expect(cursor).to.equal('not-allowed')
-    })
-  })
-
-  describe('for a11y', async () => {
-    describe('with generated examples', async () => {
-      generateA11yTests(ButtonExamples)
-    })
-
-    it('should meet standards when onClick is given', async () => {
-      const onClick = stub()
-      await mount(
-        <Button onClick={onClick}>Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      await button.click()
-      expect(await button.accessible()).to.be.true()
-    })
-
-    describe('when disabled', async () => {
-      it('sets the disabled attribute so that the button is not in tab order', async () => {
-        await mount(
-          <Button disabled>Hello World</Button>
-        )
-        const button = await ButtonLocator.find()
-        expect(button.getAttribute('disabled')).to.exist()
+      await wait(() => {
+        expect(button.focused()).to.be.true()
       })
     })
 
-    describe('when readOnly', () => {
-      it('sets the disabled attribute so that the button is not in tab order', async () => {
+    it('should pass the type attribute', async () => {
+      await mount(
+        <Button type="submit">Hello</Button>
+      )
+
+      expect(await ButtonLocator.find('[type="submit"]')).to.exist()
+    })
+
+    it('should pass the `elementRef` prop', async () => {
+      const elementRef = stub()
+
+      await mount(
+        <Button elementRef={elementRef}>Hello</Button>
+      )
+
+      const button = await ButtonLocator.find()
+      expect(elementRef).to.have.been.calledWith(button.getDOMNode())
+    })
+
+    it('should pass the `as` prop', async () => {
+      await mount(
+        <Button as="li">Hello</Button>
+      )
+
+      const button = await ButtonLocator.find()
+      expect(await button.find('li')).to.exist()
+    })
+
+    it('should pass the `interaction` prop when  set to disabled', async () => {
+      await mount(
+        <Button interaction="disabled">Hello</Button>
+      )
+
+      expect(await ButtonLocator.find('[disabled]')).to.exist()
+    })
+
+    it('should pass the `interaction` prop when  set to readonly', async () => {
+      await mount(
+        <Button interaction="readonly">Hello</Button>
+      )
+
+      expect(await ButtonLocator.find('[disabled]')).to.exist()
+    })
+
+    it('should pass the `href` prop', async () => {
+      await mount(
+        <Button href="#">Hello</Button>
+      )
+
+      expect(await ButtonLocator.find('[href="#"]')).to.exist()
+    })
+
+    it('should pass the `renderIcon` prop', async () => {
+      await mount(
+        <Button renderIcon={icon}>Hello</Button>
+      )
+
+      expect(await ButtonLocator.find(iconSelector)).to.exist()
+    })
+
+
+    it('should pass the `onClick` prop', async () => {
+      const onClick = stub()
+
+      await mount(
+        <Button onClick={onClick}>Hello</Button>
+      )
+      const button = await ButtonLocator.find()
+
+      await button.click()
+
+      expect(onClick).to.have.been.calledOnce()
+    })
+  })
+
+  describe('Deprecated button tests (no variant set)', async () => {
+    beforeEach(() => {
+      stub(console, 'warn')
+    })
+
+    it('should render the children as button text', async () => {
+      await mount(
+        <Button>Hello World</Button>
+      )
+      expect(await ButtonLocator.find(':contains(Hello World)')).to.exist()
+    })
+
+    it('should render a button', async () => {
+      await mount(
+        <Button>Hello World</Button>
+      )
+      expect(await ButtonLocator.find('button[type="button"]')).to.exist()
+    })
+
+    it('should not error with a null child', async () => {
+      await mount(
+        <Button>Hello World{null}</Button>
+      )
+      expect(await ButtonLocator.find('button')).to.exist()
+    })
+
+    it('should render a link styled as a button if href is provided', async () => {
+      await mount(
+        <Button href='example.html'>Hello World</Button>
+      )
+      expect(await ButtonLocator.findAll('[href="example.html"]')).to.have.length(1)
+    })
+
+    it('should render as a link when `to` prop is provided', async () => {
+      await mount(
+        <Button to="/example">Test</Button>
+      )
+      const link = await ButtonLocator.find('a')
+      expect(link.getAttribute('to')).to.equal('/example')
+    })
+
+    it('should render designated tag if `as` prop is specified', async () => {
+      await mount(
+        <Button as='span'>Hello World</Button>
+      )
+      const span = await ButtonLocator.find()
+      expect(span.getTagName()).to.equal('span')
+    })
+
+    it('should set role="button"', async () => {
+      const onClick = stub()
+      await mount(
+        <Button as='span' onClick={onClick}>Hello World</Button>
+      )
+      expect(await ButtonLocator.find('[role="button"]')).to.exist()
+    })
+
+    it('should set tabIndex="0"', async () => {
+      const onClick = stub()
+      await mount(
+        <Button as='span' onClick={onClick}>Hello World</Button>
+      )
+      expect(await ButtonLocator.find('[tabIndex="0"]')).to.exist()
+    })
+
+    it('should pass down the type prop to the button element', async () => {
+      const onClick = stub()
+      await mount(
+        <Button type="submit" onClick={onClick}>Hello World</Button>
+      )
+      expect(await ButtonLocator.find('[type="submit"]')).to.exist()
+    })
+
+    it('should pass down an icon via the icon property', async () => {
+      await mount(
+        <Button icon={icon}>Hello World</Button>
+      )
+      const button = await ButtonLocator.find()
+      expect(await button.find(iconSelector)).to.exist()
+    })
+
+    it('focuses with the focus helper', async () => {
+      const onFocus = stub()
+      await mount(
+        <Button onFocus={onFocus}>Hello World</Button>
+      )
+      const button = await ButtonLocator.find()
+      await button.focus()
+      expect(button.focused()).to.be.true()
+    })
+
+    it('should provide a buttonRef prop', async () => {
+      const buttonRef = stub()
+      await mount(
+        <Button buttonRef={buttonRef}>Hello World</Button>
+      )
+      const button = await ButtonLocator.find(':contains(Hello World)')
+      expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
+    })
+
+    describe('onClick', async () => {
+      it('should call onClick when clicked', async () => {
+        const onClick = stub()
         await mount(
-          <Button readOnly>Hello World</Button>
+          <Button onClick={onClick}>Hello World</Button>
         )
         const button = await ButtonLocator.find()
-        expect(button.getAttribute('disabled')).to.exist()
+        await button.click()
+        expect(onClick).to.have.been.calledOnce()
+      })
+
+      it('should not call onClick when button is disabled', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            disabled
+            onClick={onClick}
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click(null, { clickable: false })
+
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should not call onClick when button is readOnly', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            readOnly
+            onClick={onClick}
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click(null, { clickable: false })
+
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should not call onClick when button is disabled and an href prop is provided', async () => {
+        const onClick = stub()
+        await mount(
+          <Button  href="#">Hello World</Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click()
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should not call onClick when button is readOnly and an href prop is provided', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            readOnly
+            onClick={onClick}
+            href="#"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+
+        await button.click(null, { clickable: false })
+
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should call onClick when space key is pressed if href is provided', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            onClick={onClick}
+            href="#"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.keyDown('space')
+        expect(onClick).to.have.been.called()
+      })
+
+      it('should call onClick when enter key is pressed when not a button or link', async () => {
+        const onClick = stub()
+        await mount(
+          <Button  as="span" onClick={onClick}>Hello World</Button>
+        )
+        const span = await ButtonLocator.find('[type="button"]')
+        await span.keyDown('enter')
+        expect(onClick).to.have.been.called()
+      })
+
+      it('should not call onClick when button is disabled and space key is pressed', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            disabled
+            onClick={onClick}
+            href="#"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.keyDown('space')
+        expect(onClick).to.not.have.been.called()
+      })
+
+      it('should not call onClick when button is readOnly and space key is pressed', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            readOnly
+            onClick={onClick}
+            href="#"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.keyDown('space')
+        expect(onClick).to.not.have.been.called()
+      })
+    })
+
+    describe('for a11y', async () => {
+      it('should meet standards when onClick is given', async () => {
+        const onClick = stub()
+        await mount(
+          <Button onClick={onClick}>Hello World</Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click()
+        expect(await button.accessible()).to.be.true()
+      })
+
+      describe('when disabled', async () => {
+        it('sets the disabled attribute so that the button is not in tab order', async () => {
+          await mount(
+            <Button disabled>Hello World</Button>
+          )
+          const button = await ButtonLocator.find()
+          expect(button.getAttribute('disabled')).to.exist()
+        })
+      })
+
+      describe('when readOnly', () => {
+        it('sets the disabled attribute so that the button is not in tab order', async () => {
+          await mount(
+            <Button readOnly>Hello World</Button>
+          )
+          const button = await ButtonLocator.find()
+          expect(button.getAttribute('disabled')).to.exist()
+        })
+      })
+    })
+  })
+
+  describe('Deprecated button tests (variant set)', async () => {
+    beforeEach(() => {
+      stub(console, 'warn')
+    })
+
+    it('should render the children as button text', async () => {
+      await mount(
+        <Button variant="primary">Hello World</Button>
+      )
+      expect(await ButtonLocator.find(':contains(Hello World)')).to.exist()
+    })
+
+    it('should render a button', async () => {
+      await mount(
+        <Button variant="primary">Hello World</Button>
+      )
+      expect(await ButtonLocator.find('button[type="button"]')).to.exist()
+    })
+
+    it('should not error with a null child', async () => {
+      await mount(
+        <Button variant="primary">Hello World{null}</Button>
+      )
+      expect(await ButtonLocator.find('button')).to.exist()
+    })
+
+    it('should render a link styled as a button if href is provided', async () => {
+      await mount(
+        <Button variant="primary" href='example.html'>Hello World</Button>
+      )
+      expect(await ButtonLocator.findAll('[href="example.html"]')).to.have.length(1)
+    })
+
+    it('should render as a link when `to` prop is provided', async () => {
+      await mount(
+        <Button variant="primary" to="/example">Test</Button>
+      )
+      const link = await ButtonLocator.find('a')
+      expect(link.getAttribute('to')).to.equal('/example')
+    })
+
+    it('should render designated tag if `as` prop is specified', async () => {
+      await mount(
+        <Button variant="primary" as='span'>Hello World</Button>
+      )
+      const span = await ButtonLocator.find()
+      expect(span.getTagName()).to.equal('span')
+    })
+
+    it('should set role="button"', async () => {
+      const onClick = stub()
+      await mount(
+        <Button variant="primary" as='span' onClick={onClick}>Hello World</Button>
+      )
+      expect(await ButtonLocator.find('[role="button"]')).to.exist()
+    })
+
+    it('should set tabIndex="0"', async () => {
+      const onClick = stub()
+      await mount(
+        <Button variant="primary" as='span' onClick={onClick}>Hello World</Button>
+      )
+      expect(await ButtonLocator.find('[tabIndex="0"]')).to.exist()
+    })
+
+    it('should pass down the type prop to the button element', async () => {
+      const onClick = stub()
+      await mount(
+        <Button variant="primary" type="submit" onClick={onClick}>Hello World</Button>
+      )
+      expect(await ButtonLocator.find('[type="submit"]')).to.exist()
+    })
+
+    it('should pass down an icon via the icon property', async () => {
+      await mount(
+        <Button variant="primary" icon={icon}>Hello World</Button>
+      )
+      const button = await ButtonLocator.find()
+      expect(await button.find(iconSelector)).to.exist()
+    })
+
+    it('focuses with the focus helper', async () => {
+      const onFocus = stub()
+      await mount(
+        <Button variant="primary" onFocus={onFocus}>Hello World</Button>
+      )
+      const button = await ButtonLocator.find()
+      await button.focus()
+      expect(button.focused()).to.be.true()
+    })
+
+    it('should provide a buttonRef prop', async () => {
+      const buttonRef = stub()
+      await mount(
+        <Button variant="primary" buttonRef={buttonRef}>Hello World</Button>
+      )
+      const button = await ButtonLocator.find(':contains(Hello World)')
+      expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
+    })
+
+    describe('onClick', async () => {
+      it('should call onClick when clicked', async () => {
+        const onClick = stub()
+        await mount(
+          <Button variant="primary" onClick={onClick}>Hello World</Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click()
+        expect(onClick).to.have.been.calledOnce()
+      })
+
+      it('should not call onClick when button is disabled', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            disabled
+            onClick={onClick}
+            variant="primary"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click(null, { clickable: false })
+
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should not call onClick when button is readOnly', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            readOnly
+            onClick={onClick}
+            variant="primary"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click(null, { clickable: false })
+
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should not call onClick when button is disabled and an href prop is provided', async () => {
+        const onClick = stub()
+        await mount(
+          <Button variant="primary" href="#">Hello World</Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click()
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should not call onClick when button is readOnly and an href prop is provided', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            readOnly
+            onClick={onClick}
+            href="#"
+            variant="primary"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+
+        await button.click(null, { clickable: false })
+
+        expect(onClick).to.have.not.been.called()
+      })
+
+      it('should call onClick when space key is pressed if href is provided', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            onClick={onClick}
+            href="#"
+            variant="primary"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.keyDown('space')
+        expect(onClick).to.have.been.called()
+      })
+
+      it('should call onClick when enter key is pressed when not a button or link', async () => {
+        const onClick = stub()
+        await mount(
+          <Button variant="primary" as="span" onClick={onClick}>Hello World</Button>
+        )
+        const span = await ButtonLocator.find('[type="button"]')
+        await span.keyDown('enter')
+        expect(onClick).to.have.been.called()
+      })
+
+      it('should not call onClick when button is disabled and space key is pressed', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            disabled
+            onClick={onClick}
+            href="#"
+            variant="primary"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.keyDown('space')
+        expect(onClick).to.not.have.been.called()
+      })
+
+      it('should not call onClick when button is readOnly and space key is pressed', async () => {
+        const onClick = stub()
+        await mount(
+          <Button
+            readOnly
+            onClick={onClick}
+            href="#"
+            variant="primary"
+          >
+            Hello World
+          </Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.keyDown('space')
+        expect(onClick).to.not.have.been.called()
+      })
+    })
+
+    describe('for a11y', async () => {
+      it('should meet standards when onClick is given', async () => {
+        const onClick = stub()
+        await mount(
+          <Button variant="primary" onClick={onClick}>Hello World</Button>
+        )
+        const button = await ButtonLocator.find()
+        await button.click()
+        expect(await button.accessible()).to.be.true()
+      })
+
+      describe('when disabled', async () => {
+        it('sets the disabled attribute so that the button is not in tab order', async () => {
+          await mount(
+            <Button variant="primary" disabled>Hello World</Button>
+          )
+          const button = await ButtonLocator.find()
+          expect(button.getAttribute('disabled')).to.exist()
+        })
+      })
+
+      describe('when readOnly', () => {
+        it('sets the disabled attribute so that the button is not in tab order', async () => {
+          await mount(
+            <Button variant="primary" readOnly>Hello World</Button>
+          )
+          const button = await ButtonLocator.find()
+          expect(button.getAttribute('disabled')).to.exist()
+        })
       })
     })
   })

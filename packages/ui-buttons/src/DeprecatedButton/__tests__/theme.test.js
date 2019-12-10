@@ -25,11 +25,11 @@
 import { contrast } from '@instructure/ui-color-utils'
 import { expect } from '@instructure/ui-test-utils'
 
-import { Button } from '../index'
+import { DeprecatedButton } from '../index'
 
-describe('Button.theme', () => {
+describe('DeprecatedButton.theme', () => {
   describe('with the default theme', () => {
-    const variables = Button.generateTheme()
+    const variables = DeprecatedButton.generateTheme()
 
     describe('default', () => {
       it('should have a background and text colors that meet 3:1 contrast', () => {
@@ -78,7 +78,7 @@ describe('Button.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = Button.generateTheme('canvas-high-contrast')
+    const variables = DeprecatedButton.generateTheme('canvas-high-contrast')
 
     describe('default', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {

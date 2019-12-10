@@ -102,6 +102,27 @@ describe('createThemeAdapter', () => {
 
       expect(theme).to.deep.equal(updatedTheme)
     })
+
+    it('should include old values when `shouldIncludeOldValues` option is set', () => {
+      const theme = {
+        originalColor: 'orange',
+        originalFont: 'comic-sans',
+        originalBorder: 'none'
+      }
+
+      const updatedTheme = createThemeAdapter({ map, version, shouldIncludeOldValues: true })({ theme, displayName })
+
+      const expectedTheme = {
+        originalColor: 'orange',
+        originalFont: 'comic-sans',
+        originalBorder: 'none',
+        updatedColor: 'orange',
+        updatedFont: 'comic-sans',
+        updatedBorder: 'none'
+      }
+
+      expect(updatedTheme).to.deep.equal(expectedTheme)
+    })
   })
 
   describe('warnings', () => {

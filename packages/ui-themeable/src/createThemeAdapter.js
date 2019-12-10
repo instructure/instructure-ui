@@ -33,9 +33,10 @@ import { warn } from '@instructure/console/macro'
  * @param {Object} args
  * @param {Object} args.map an object mapping of old theme variable names to new theme variable names
  * @param {String} args.version a specified version in which the old theme variable will be removed
+ * @param {Boolean} args.shouldIncludeOldValues should the adapter include the old values in the new theme object (false by default)
  * @returns {Function} an adapter function that takes an object with `theme` and `displayName` properties as an argument
  */
-export const createThemeAdapter = ({ map = {}, version } = {}) => {
+export const createThemeAdapter = ({ map = {}, version, shouldIncludeOldValues = false } = {}) => {
   return ({ theme = {}, displayName } = {}) => {
     return Object.entries(theme).reduce((result, [key, value]) => {
       if (map[key]) {
@@ -44,7 +45,11 @@ export const createThemeAdapter = ({ map = {}, version } = {}) => {
           : ''}`
         )
 
-        return { ...result, [map[key]]: value }
+        return shouldIncludeOldValues ? {
+          ...result, [map[key]]: value, [key]: value
+        } : {
+          ...result, [map[key]]: value
+        }
       }
 
       return { ...result, [key]: value }

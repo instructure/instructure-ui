@@ -24,35 +24,33 @@
 
 import React from 'react'
 
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { IconTrashSolid } from '@instructure/ui-icons'
-
-const iconButton = (props) => {
-  return props.variant && (props.variant.includes('icon') || props.variant.includes('circle'))
-}
+const icon = (
+  <svg
+    title="myIcon"
+    height="1em"
+    width="1em"
+    style={{ fill: 'currentcolor' }}
+  >
+    <circle cx="0.5em" cy="0.5em" r="0.5em" />
+  </svg>
+)
 
 export default {
-  sectionProp: 'variant',
+  sectionProp: 'color',
   propValues: {
-    icon: [null, IconTrashSolid]
+    renderIcon: [null, icon]
   },
   getComponentProps: (props) => {
     return {
-      children: props.variant.includes('icon') || props.variant.includes('circle')
-        ? <ScreenReaderContent>Hello</ScreenReaderContent>
-        : 'Hello'
+      children: 'Hello'
     }
   },
   getExampleProps: (props) => {
     return {
-      background: props.variant.includes('inverse') ? 'primary-inverse' : 'primary'
+      background: props.color === 'primary-inverse' ? 'primary-inverse' : 'primary'
     }
   },
   filter: (props) => {
-    return (
-      iconButton(props) && props.icon === null ||
-      iconButton(props) && props.fluidWidth ||
-      props.type && props.type !== 'button' || props.disabled
-    )
+    return props.type !== 'button' || (props.textAlign === 'center' && props.display !== 'block')
   }
 }

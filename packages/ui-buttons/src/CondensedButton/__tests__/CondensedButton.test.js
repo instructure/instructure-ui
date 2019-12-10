@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
 
 import { CondensedButton } from '../index'
 import { CondensedButtonLocator } from '../CondensedButtonLocator'
@@ -49,6 +49,34 @@ describe('<CondensedButton/>', async () => {
     )
 
     expect(await CondensedButtonLocator.findWithText(children))
+  })
+
+  it('should provide a focused getter', async () => {
+    let componentRef = null
+
+    await mount(
+      <CondensedButton componentRef={(component) => { componentRef = component }}>Hello</CondensedButton>
+    )
+    const button = await CondensedButtonLocator.find()
+
+    await button.focus()
+
+    expect(componentRef.focused).to.be.true()
+  })
+
+  it('should provide a focus function', async () => {
+    let componentRef = null
+
+    await mount(
+      <CondensedButton componentRef={(component) => { componentRef = component }}>Hello</CondensedButton>
+    )
+    const button = await CondensedButtonLocator.find()
+
+    componentRef.focus()
+
+    await wait(() => {
+      expect(button.focused()).to.be.true()
+    })
   })
 
   it('should pass the type attribute', async () => {

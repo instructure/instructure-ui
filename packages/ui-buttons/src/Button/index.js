@@ -21,50 +21,116 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { warn } from '@instructure/console/macro'
+import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 
-import { Flex } from '@instructure/ui-flex'
-import { View } from '@instructure/ui-view'
+import { BaseButton } from '../BaseButton'
+import { DeprecatedButton } from '../DeprecatedButton'
 
-import styles from './styles.css'
+import { themeAdapter } from './themeAdapter'
+
+import generateDeprecatedTheme from '../DeprecatedButton/theme'
 import theme from './theme'
-
-const circleVariants = [
-  'circle-primary',
-  'circle-danger',
-  'circle-default'
-]
-
-const squareVariants = [
-  'circle-default',
-  'circle-primary',
-  'circle-danger',
-  'icon',
-  'icon-inverse'
-]
 
 /**
 ---
 category: components
 ---
 **/
-
+@deprecated('8.0.0', {
+  buttonRef: 'elementRef',
+  disabled: 'interaction',
+  readOnly: 'interaction',
+  fluidWidth: 'display',
+  icon: 'renderIcon',
+  variant: null
+}, 'See the following upgrade guide for more help updating https://instructure.design/#button-upgrade-guide')
 @testable()
-@themeable(theme, styles)
+@themeable(theme, null, themeAdapter)
 class Button extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    /**
+     * Specifies the `Button` children.
+     */
+    children: PropTypes.node,
+    /**
+     * Specifies the type of the `Button`'s underlying html element.
+     */
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
+    /**
+     * The size of the `Button`
+     */
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    /**
+     * Provides a reference to the `Button`'s underlying html element.
+     */
+    elementRef: PropTypes.func,
+    /**
+     * The element to render as the component root, `Button` by default.
+     */
+    as: PropTypes.elementType,
+    /**
+     * Specifies if interaction with the `Button` is enabled, disabled, or readonly.
+     */
+    interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
+    /**
+     * Specifies the color for the `Button`.
+     */
+    color: PropTypes.oneOf([
+      'primary',
+      'primary-inverse',
+      'secondary',
+      'success',
+      'danger'
+    ]),
+    /**
+     * Override the `Button`'s default focus outline color.
+     */
+    focusColor: PropTypes.oneOf(['info', 'inverse']),
+    /**
+     * The `Button` display property. When set to `inline-block`, the `Button` displays inline with other elements.
+     * When set to block, the `Button` expands to fill the width of the container.
+     */
+    display: PropTypes.oneOf(['inline-block', 'block']),
+    /**
+     * Sets the alignment of the `Button` children and/or icon.
+     */
+    textAlign: PropTypes.oneOf(['start', 'center']),
+    /**
+     * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
+     */
+    withBackground: PropTypes.bool,
+    /**
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
+    margin: ThemeablePropTypes.spacing,
+    /**
+     * Specify a mouse cursor to use when hovering over the button.
+     * The `pointer` cursor is used by default.
+     */
+    cursor: PropTypes.string,
+    /**
+     * Specifies an href attribute for the `Button`'s underlying html element.
+     */
+    href: PropTypes.string,
+    /**
+     * An icon, or function that returns an icon.
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+     * __Deprecated - use `elementRef` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
+     */
+    buttonRef: PropTypes.func,
+    /**
+     * __Deprecated - see the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse)__
+     */
     variant: PropTypes.oneOf([
       'default',
       'primary',
@@ -82,216 +148,180 @@ class Button extends Component {
       'icon-inverse'
     ]),
     /**
-    * provides a reference to the underlying focusable (`button` or `a`) element
-    */
-    buttonRef: PropTypes.func,
-    /**
-    * the element type to render as (will be `<a>` if href is provided)
-    */
-    as: PropTypes.elementType,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-    * should the `<Button/>` fill the width of its container
-    */
-    fluidWidth: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    href: PropTypes.string,
-    onClick: PropTypes.func,
-    /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
-    margin: ThemeablePropTypes.spacing,
-    /**
-    * Add an SVG icon to the button. Do not add icons directly as
-    * children.
-    */
-    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    /**
-     * Specify a mouse cursor to use when hovering over the button.
-     * The `pointer` cursor is used by default.
+     * __Deprecated - set `display="block"` and `textAlign="start"` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
      */
-    cursor: PropTypes.string,
-    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    fluidWidth: PropTypes.bool,
+    /**
+     * __Deprecated - set `interaction="disabled"` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
+     */
+    disabled: PropTypes.bool,
+    /**
+     * __Deprecated - set `interaction="readonly"` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
+     */
+    readOnly: PropTypes.bool,
+    /**
+     * __Deprecated - use `renderIcon` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
+     */
+    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
   }
 
   static defaultProps = {
-    as: 'button',
+    children: null,
     type: 'button',
-    variant: 'default',
     size: 'medium',
+    elementRef: (el) => { },
+    as: 'button',
+    interaction: 'enabled',
+    // TODO: Switch to 'secondary' in 8.0 when we drop variant
+    color: undefined,
+    focusColor: undefined,
+    display: 'inline-block',
+    textAlign: 'center',
+    withBackground: true,
     margin: '0',
-    fluidWidth: false,
-    buttonRef: function (button) {},
     cursor: 'pointer',
-    disabled: undefined,
-    onClick: undefined,
-    icon: undefined,
     href: undefined,
+    renderIcon: undefined,
+    buttonRef: undefined,
+    variant: undefined,
+    fluidWidth: undefined,
+    disabled: undefined,
     readOnly: undefined,
-    tabIndex: undefined
+    icon: undefined
   }
 
-  handleClick = e => {
-    const { disabled, readOnly, onClick } = this.props
+  _buttonComponent = null
 
-    if (disabled || readOnly) {
-      e.preventDefault()
-      e.stopPropagation()
-    } else if (typeof onClick === 'function') {
-      onClick(e)
+  get focused() {
+    return this._buttonComponent && this._buttonComponent.focused
+  }
+
+  focus() {
+    this._buttonComponent && this._buttonComponent.focus()
+  }
+
+  handleElementRef = (el) => {
+    const { elementRef, buttonRef } = this.props
+
+    elementRef(el)
+
+    if (typeof buttonRef === 'function') {
+      buttonRef(el)
     }
   }
 
-  handleKeyDown = e => {
-    const { disabled, readOnly, onClick, href } = this.props
+  handleButtonRef = (component) => {
+    this._buttonComponent = component
+  }
 
-    // behave like a button when space key is pressed
-    if (this.elementType !== 'button' && (e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter)) {
-      e.preventDefault()
-      e.stopPropagation()
+  scopeTheme = () => {
+    // TODO: Remove this function in version 8.0.0
+    // We only want to pass the theme vars that exist in the deprecated
+    // button, otherwise every theme var that is unique to the updated
+    // button gets injected into the style tag for the deprecated one
+    // (that ends up being a _massive_ amount of variables)
+    const { theme = {} } = this
+    const deprecatedTheme = (generateDeprecatedTheme() || {})
+    const deprecatedKeys = Object.keys(deprecatedTheme)
 
-      if ((typeof onClick === 'function') && !disabled && !readOnly) {
-        onClick(e)
+    return Object.entries(theme).reduce((result, [key, value]) => {
+      if (deprecatedKeys.includes(key)) {
+        return { ...result, [key]: value }
       }
-      if (href) {
-        findDOMNode(this._button).click() // eslint-disable-line react/no-find-dom-node
-      }
-    }
+
+      return result
+    }, {})
   }
 
-  get elementType () {
-    return getElementType(Button, this.props)
+  get interaction () {
+    const { interaction, disabled, readOnly } = this.props
+
+    if (disabled) return 'disabled'
+    if (readOnly) return 'readonly'
+
+    return interaction
   }
 
-  get focused () {
-    return isActiveElement(this._button)
-  }
-
-  focus () {
-    findDOMNode(this._button).focus() // eslint-disable-line react/no-find-dom-node
-  }
-
-  renderIcon () {
-    const Icon = this.props.icon
-    if (typeof this.props.icon === 'function') {
-      return <span className={styles.iconSVG}><Icon inline={false} /></span>
-    } else if (Icon) {
-      return <span className={styles.iconSVG}>{Icon}</span>
-    } else {
-      return null
-    }
-  }
-
-  buttonBorderRadius () {
-    if (circleVariants.includes(this.props.variant)) {
-      return 'circle'
-    } else {
-      return 'rounded'
-    }
-  }
-
-  buttonWidth (hasOnlyIcon) {
+  render() {
     const {
-      variant,
-      fluidWidth
-    } = this.props
-
-    if (hasOnlyIcon || squareVariants.includes(variant)) {
-      return 'icon'
-    } else if (fluidWidth) {
-      return 'fluid'
-    } else {
-      return 'auto'
-    }
-  }
-
-  render () {
-    const {
-      as,
-      buttonRef,
       children,
+      type,
+      size,
+      as,
+      color,
+      focusColor,
+      display,
+      textAlign,
+      withBackground,
+      margin,
       cursor,
-      disabled,
       href,
       icon,
-      margin,
-      onClick,
-      readOnly,
-      size,
-      type,
+      renderIcon,
       variant,
-      tabIndex
+      fluidWidth,
+      ...props
     } = this.props
 
-    const IHaveVisibleChildren = hasVisibleChildren(this.props.children)
-    const hasTextAndIcon = IHaveVisibleChildren && this.props.icon // any button with an icon + text label
-    const hasOnlyIcon = !IHaveVisibleChildren && this.props.icon // any button with just an icon visible
+    const {
+      theme = {},
+      interaction,
+    } = this
 
-    if (process.env.NODE_ENV !== 'production') {
-      // show warning if icon is added as a child
-      if (this.hasVisibleChildren) {
-        React.Children.forEach(children, (child) => {
-          const icon = child && child.type && typeof child.type.glyphName !== 'undefined'
-          warn(
-            !icon,
-            `[Button] Icons as children is deprecated. Please use the 'icon' prop instead.`
-          )
-        })
-      }
+    if (variant) {
+      return (
+        <DeprecatedButton
+          {...passthroughProps(props)}
+          type={type}
+          size={size}
+          as={as}
+          disabled={interaction === 'disabled'}
+          readOnly={interaction === 'readonly'}
+          margin={margin}
+          cursor={cursor}
+          href={href}
+          icon={renderIcon || icon}
+          fluidWidth={fluidWidth}
+          variant={variant}
+          buttonRef={this.handleElementRef}
+          ref={this.handleButtonRef}
+          theme={this.scopeTheme()}
+        >
+          {children}
+        </DeprecatedButton>
+      )
     }
 
-    // warn for unallowed view props
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Button.propTypes),
-      Button
-    )
+    const buttonProps = {
+      ...passthroughProps(props),
+      type,
+      size,
+      elementRef: this.handleElementRef,
+      ref: this.handleButtonRef,
+      as,
+      color,
+      interaction,
+      focusColor,
+      display,
+      textAlign,
+      withBackground,
+      margin,
+      cursor,
+      href,
+      renderIcon: renderIcon || icon,
+      theme,
+      __dangerouslyIgnoreExperimentalWarnings: true
+    }
+
+    if (fluidWidth) {
+      buttonProps.textAlign = 'start'
+      buttonProps.display = 'block'
+    }
 
     return (
-      <View
-        {...passthroughProps}
-        className={classnames({
-          [styles.root]: true,
-          [styles[variant]]: true,
-          [styles[size]]: size,
-          [styles[`width--${this.buttonWidth(hasOnlyIcon)}`]]: true,
-          [styles[`borderRadius--${this.buttonBorderRadius()}`]]: true,
-          [styles.disabled]: disabled,
-          [styles['has-icon']]: icon
-        })}
-        disabled={disabled || readOnly}
-        onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}
-        href={href}
-        type={href ? null : type}
-        role={onClick && as !== 'button' ? 'button' : null}
-        tabIndex={onClick && as ? (tabIndex || '0') : tabIndex}
-        elementRef={c => {
-          this._button = c
-          if (typeof buttonRef === 'function') buttonRef(c)
-        }}
-        display={null}
-        as={this.elementType}
-        margin={margin}
-        cursor={disabled ? 'not-allowed' : cursor}
-      >
-        {hasTextAndIcon ? (
-          <Flex height="100%" width="100%">
-            <Flex.Item padding="0 x-small 0 0">{this.renderIcon()}</Flex.Item>
-            <Flex.Item shouldGrow shouldShrink>
-              <span className={styles.content}>{children}</span>
-            </Flex.Item>
-          </Flex>
-        ) : (
-          // all other button layouts (icon only and text only)
-          <span className={styles.content}>
-            {icon && this.renderIcon()}
-            {children}
-          </span>
-        )}
-      </View>
+      <BaseButton {...buttonProps}>
+        {children}
+      </BaseButton>
     )
   }
 }

@@ -177,20 +177,43 @@ class BaseButton extends Component {
 
   _rootElement = null
 
-  get hasOnlyIconVisible() {
+  get hasOnlyIconVisible () {
     const { children, renderIcon } = this.props
     return renderIcon && !hasVisibleChildren(children)
   }
 
-  get elementType() {
+  get elementType () {
     return getElementType(BaseButton, this.props)
   }
 
-  get focused() {
+  get focusColor() {
+    const {
+      color,
+      focusColor,
+      withBackground
+    } = this.props
+
+    // Give user specified focusColor preference
+    if (focusColor) {
+      return focusColor
+    }
+
+    // The `primary-inverse` background has an info focus outline
+    // by default since it is replacing the `light` button variant.
+    // Override the focus color with info even though it is
+    // an inverse color
+    if (color === 'primary-inverse' && withBackground) {
+      return 'info'
+    }
+
+    return color.includes('inverse') ? 'inverse' : 'info'
+  }
+
+  get focused () {
     return isActiveElement(this._rootElement)
   }
 
-  focus() {
+  focus () {
     this._rootElement && this._rootElement.focus()
   }
 
@@ -316,8 +339,7 @@ class BaseButton extends Component {
       <View
         {...passthroughProps(props)}
         as={this.elementType}
-        // If `focusColor` prop is set, go with that. Otherwise provide defaults based on the color
-        focusColor={focusColor ? focusColor : (color.includes('inverse') ? 'inverse' : 'info')}
+        focusColor={this.focusColor}
         position="relative"
         display={display}
         width={display === 'block' ? '100%' : 'auto'}

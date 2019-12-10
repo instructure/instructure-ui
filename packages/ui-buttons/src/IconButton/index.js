@@ -87,6 +87,10 @@ class IconButton extends Component {
       'danger'
     ]),
     /**
+     * Override the `Button`'s default focus outline color.
+     */
+    focusColor: PropTypes.oneOf(['info', 'inverse']),
+    /**
      * Specifies if the `IconButton` shape should be a circle or rectangle.
      */
     shape: PropTypes.oneOf([
@@ -127,12 +131,23 @@ class IconButton extends Component {
     as: 'button',
     interaction: 'enabled',
     color: 'secondary',
+    focusColor: undefined,
     shape: 'rectangle',
     withBackground: true,
     withBorder: true,
     margin: '0',
     cursor: 'pointer',
     href: undefined
+  }
+
+  _baseButton = null
+
+  get focused () {
+    return this._baseButton && this._baseButton.focused
+  }
+
+  focus () {
+    this._baseButton && this._baseButton.focus()
   }
 
   render() {
@@ -146,6 +161,7 @@ class IconButton extends Component {
       as,
       interaction,
       color,
+      focusColor,
       shape,
       withBackground,
       withBorder,
@@ -166,6 +182,7 @@ class IconButton extends Component {
         as={as}
         interaction={interaction}
         color={color}
+        focusColor={focusColor}
         shape={shape}
         withBackground={withBackground}
         withBorder={withBorder}
@@ -174,6 +191,7 @@ class IconButton extends Component {
         href={href}
         renderIcon={children || renderIcon}
         theme={theme}
+        ref = {(component) => { this._baseButton = component }}
         __dangerouslyIgnoreExperimentalWarnings
       >
         <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>

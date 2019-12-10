@@ -22,37 +22,23 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+import { createThemeAdapter } from '@instructure/ui-themeable'
 
-import { CloseButton } from '../index'
-import { CloseButtonLocator } from '../CloseButtonLocator'
+const map = {
+  smallPadding: 'smallPaddingHorizontal',
+  mediumPadding: 'mediumPaddingHorizontal',
+  largePadding: 'largePaddingHorizontal',
 
-describe('<CloseButton />', async () => {
-  beforeEach(() => {
-    stub(console, 'warn')
-  })
+  defaultBackground: 'secondaryBackground',
+  defaultBorderColor: 'secondaryBorderColor',
+  defaultColor: 'secondaryColor',
+  defaultHoverBackground: 'secondaryHoverBackground',
+  defaultActiveBackground: 'secondaryActiveBackground',
+  defaultActiveBoxShadow: 'secondaryActiveBoxShadow'
+}
 
-  it('should render with x icon', async () => {
-    await mount(
-      <CloseButton>Close</CloseButton>
-    )
-    const button = await CloseButtonLocator.find()
-    const icon = await button.find('svg[name]')
-    expect(icon.getAttribute('name')).to.equal('IconX')
-  })
-
-  it('should pass the `onClick` prop', async () => {
-    const onClick = stub()
-
-    await mount(
-      <CloseButton onClick={onClick}>Hello</CloseButton>
-    )
-    const closeButtonRoot = await CloseButtonLocator.find()
-    const button = await closeButtonRoot.find(':focusable')
-
-    await button.click()
-
-    expect(onClick).to.have.been.calledOnce()
-  })
+export const themeAdapter = createThemeAdapter({
+  map,
+  version: '8.0.0',
+  shouldIncludeOldValues: true
 })

@@ -30,7 +30,7 @@ import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { Button } from '../Button'
 
@@ -67,20 +67,37 @@ class CloseButton extends Component {
   }
 
   render () {
-    const { placement, offset } = this.props
+    const {
+      children,
+      buttonRef,
+      size,
+      onClick,
+      margin,
+      placement,
+      offset,
+      variant,
+      ...props
+    } = this.props
 
     return (
       <span
-        {...omitProps(this.props, CloseButton.propTypes)}
+        {...passthroughProps(props)}
         className={classnames({
           [styles.root]: true,
           [styles[`placement--${placement}`]]: placement,
           [styles[`offset--${offset}`]]: offset
         })}
       >
-        <Button {...pickProps(this.props, Button.propTypes)} icon={IconXSolid}>
+        <Button
+          icon={IconXSolid}
+          elementRef={buttonRef}
+          size={size}
+          onClick={onClick}
+          margin={margin}
+          variant={variant}
+        >
           <ScreenReaderContent>
-            {this.props.children}
+            {children}
           </ScreenReaderContent>
         </Button>
       </span>

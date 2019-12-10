@@ -8,6 +8,35 @@
       { "old": "variant", "new": "shape" }
     ]
   },
+  "Button": {
+    "8.0.0": [
+      { "old": "buttonRef", "new": "elementRef" },
+      { "old": "disabled", "new": "interaction", "values": [
+        { "old": true, "new": "disabled" },
+        { "old": false }
+      ]},
+      { "old": "readOnly", "new": "interaction", "values": [
+        { "old": true, "new": "readonly" },
+        { "old": false }
+      ]},
+      { "old": "fluidWidth", "new": "display", "values": [
+        { "old": true, "new": "block" },
+        { "old": false }
+      ]},
+      { "old": "icon", "new": "renderIcon" },
+      { "old": "variant", "new": "color", "values": [
+        { "old": "default" },
+        { "old": "light", "new": "primary-inverse" },
+        { "old": "ghost", "new": "primary" },
+        { "old": "ghost-inverse", "new": "primary-inverse" },
+        { "old": "icon" },
+        { "old": "icon-inverse", "new": "primary-inverse" },
+        { "old": "circle-default" },
+        { "old": "circle-primary", "new": "primary" },
+        { "old": "circle-danger", "new": "danger" }
+      ]}
+    ]
+  },
   "Flex": {
     "8.0.0": [
       { "old": "inline", "new": "display", "values": [
@@ -42,7 +71,7 @@
     "8.0.0": [
       { "old": "disabled", "new": "interaction", "values": [
         { "old": true, "new": "disabled" },
-        { "old": false, "new": "enabled" }
+        { "old": false }
       ]},
       { "old": "variant", "new": "color", "values": [
         { "old": "default", "new": "link" },
@@ -64,11 +93,11 @@
       { "old": "required", "new": "isRequired" },
       { "old": "disabled", "new": "interaction", "values": [
         { "old": true, "new": "disabled" },
-        { "old": false, "new": "enabled" }
+        { "old": false }
       ]},
       { "old": "readOnly", "new": "interaction", "values": [
         { "old": true, "new": "readonly" },
-        { "old": false, "new": "enabled" }
+        { "old": false }
       ]},
       { "old": "inline", "new": "display", "values": [
         { "old": true, "new": "inline-block" },
@@ -140,11 +169,11 @@
       { "old": "allowMultiple", "new": "shouldAllowMultiple" },
       { "old": "disabled", "new": "interaction", "values": [
         { "old": true, "new": "disabled" },
-        { "old": false, "new": "enabled" }
+        { "old": false }
       ]},
       { "old": "readOnly", "new": "interaction", "values": [
         { "old": true, "new": "readonly" },
-        { "old": false, "new": "enabled" }
+        { "old": false }
       ]}
     ]
   }

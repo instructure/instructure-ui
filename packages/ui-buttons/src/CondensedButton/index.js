@@ -109,6 +109,16 @@ class CondensedButton extends Component {
     renderIcon: undefined
   }
 
+  _baseButton = null
+
+  get focused() {
+    return this._baseButton && this._baseButton.focused
+  }
+
+  focus() {
+    this._baseButton && this._baseButton.focus()
+  }
+
   render() {
     const {
       children,
@@ -144,6 +154,7 @@ class CondensedButton extends Component {
         href={href}
         renderIcon={renderIcon}
         theme={theme}
+        ref={(component) => { this._baseButton = component }}
         __dangerouslyIgnoreExperimentalWarnings
       >
         {children}

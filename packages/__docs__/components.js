@@ -37,7 +37,14 @@ export { Alert } from '@instructure/ui-alerts'
 export { Avatar } from '@instructure/ui-avatar'
 export { Badge } from '@instructure/ui-badge'
 export { Billboard } from '@instructure/ui-billboard'
-export { BaseButton, Button, CloseButton, CondensedButton, IconButton } from '@instructure/ui-buttons'
+export {
+  BaseButton,
+  Button,
+  CloseButton,
+  CondensedButton,
+  DeprecatedButton,
+  IconButton
+} from '@instructure/ui-buttons'
 export { Byline, Media } from '@instructure/ui-byline'
 export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
