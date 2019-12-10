@@ -109,7 +109,7 @@ class App extends Component {
     const path = hash && hash.split('/')
 
     if (path) {
-      const [ page, id ] = path.map(entry => entry.replace('#', ''))
+      const [ page, id ] = path.map(entry => decodeURI(entry.replace('#', '')))
 
       this.setState({
         key: page || 'index'

@@ -44,8 +44,7 @@ const elements = {
   h2: ({ id, children }) => <Heading id={id} level="h1" as="h2" margin="x-large 0 small 0">{children}</Heading>,
   h3: ({ id, children }) => <Heading id={id} level="h3" margin="large 0 small 0">{children}</Heading>,
   h4: ({ id, children }) => <Heading id={id} level="h4" margin="large 0 small 0">{children}</Heading>,
-  img: ({ src, alt }) => <Img src={src} alt={alt} __dangerouslyIgnoreExperimentalWarnings />,
-  table: ({ children }) => <Table>{children}</Table>,
+  img: ({ src, alt }) => <Img src={src} alt={alt} />,
   a: ({ href, title, target, name, children }) => {
     if (href) {
       return <Link href={href} title={title} target={target}>{children}</Link>
@@ -131,7 +130,8 @@ function createRenderer () {
 
     const elementProps = {
       ...props,
-      key: elementId
+      key: elementId,
+      id: (props || {}).id || `${elementId}`
     }
 
     tracker.elements[elementId] = createElement(
@@ -185,6 +185,21 @@ function createRenderer () {
         />
       )
     }
+  }
+
+  function formatId (rawId) {
+    let id = rawId
+
+    const modifications = [
+      { regex: new RegExp(/\s/, 'g'), replacement: '-' }, // Convert any whitespace to hyphens
+      { regex: new RegExp('/', 'g'), replacement: '-'} // We use this to parse the url so replace it with a hyphen
+    ]
+
+    modifications.forEach(({ regex, replacement }) => {
+      id = id.replace(regex, replacement)
+    })
+
+    return id.toLowerCase()
   }
 
   renderer.code = function (code, language) {
@@ -273,10 +288,10 @@ function createRenderer () {
   }
 
   renderer.heading = function (text, level) {
-    tracker.currentId = tracker.currentId.slice(0, level - 1)
-    tracker.currentId.push(text.replace(/\s/g, '-').toLowerCase())
+    tracker.currentId = tracker.currentId.filter(entry => entry.level < level)
+    tracker.currentId.push({ text: formatId(text), level })
 
-    const id = tracker.currentId.join('-')
+    const id = tracker.currentId.map(entry => entry.text).join('-')
     const lastToc = tracker.toc[tracker.toc.length - 1]
 
     if (!lastToc || lastToc.level > level) {
@@ -311,28 +326,35 @@ function createRenderer () {
   }
 
   renderer.table = function (header, body) {
-    return addElement('table', null, [
-      addElement('thead', null, header),
-      addElement('tbody', null, body)
+    // TODO: Figure out how we can add captions for a11y
+    //
+    // `marked`, the lib we're using to parse the markdown does not allow
+    // specification of a caption for the table. Look into an alternate
+    // lib for parsing or see if it's supported in a later version. In
+    // the meantime, adding an empty string as a caption to avoid throwing
+    // a docs error.
+    return addElement(Table, { caption: '' }, [
+      addElement(Table.Head, null, header),
+      addElement(Table.Body, null, body)
     ])
   }
 
   renderer.thead = function (content) {
-    return addElement('thead', null, content)
+    return addElement(Table.Head, null, content)
   }
 
   renderer.tbody = function (content) {
-    return addElement('tbody', null, content)
+    return addElement(Table.Body, null, content)
   }
 
   renderer.tablerow = function (content) {
-    return addElement('tr', null, content)
+    return addElement(Table.Row, null, content)
   }
 
   renderer.tablecell = function (content, flag) {
-    const tag = flag.header ? 'th' : 'td'
+    const tag = flag.header ? Table.ColHeader : Table.Cell
 
-    return addElement(tag, {className: flag.align ? `text-${flag.align}` : undefined}, content)
+    return addElement(tag, null, content)
   }
 
   renderer.codespan = function (text) {
