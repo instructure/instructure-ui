@@ -42,7 +42,7 @@ category: components/deprecated
 id: DeprecatedList
 ---
 **/
-@deprecated('7.0.0', null, 'Use List from ui-list instead')
+@deprecated('7.0.0', null, 'Use List from ui-list instead.')
 @testable()
 @themeable(theme, styles)
 class List extends Component {

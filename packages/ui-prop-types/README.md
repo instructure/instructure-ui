@@ -4,12 +4,23 @@ category: packages
 
 ## ui-prop-types
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A collection of custom prop type validators.
+
+### Functions
+The `ui-prop-types` package contains the following:
+- [children](#children)
+- [childrenOrValue](#childrenOrValue)
+- [controllable](#controllable)
+- [cursor](#cursor)
+- [element](#element)
+- [makeRequirable](#makeRequirable)
+- [xor](#xor)
+
 
 ### Installation
 
@@ -35,15 +46,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-### Functions
-The `ui-prop-types` package contains the following:
-- [children](#children)
-- [childrenOrValue](#childrenOrValue)
-- [controllable](#controllable)
-- [cursor](#cursor)
-- [element](#element)
-- [makeRequirable](#makeRequirable)
-- [xor](#xor)
+
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-prop-types.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-prop-types

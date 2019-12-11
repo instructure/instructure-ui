@@ -4,12 +4,17 @@ category: packages
 
 ## ui-badge
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A badge component
+A badge component.
+
+### Components
+The `ui-badge` package contains the following:
+- [Badge](#Badge)
+
 
 ### Installation
 
@@ -17,18 +22,21 @@ A badge component
 yarn add @instructure/ui-badge
 ```
 
-### Components
-The `ui-badge` package contains the following:
-- [Badge](#Badge)
-
 ### Usage
 ```jsx
 ---
 example: false
 ---
-<Badge count={99}>
-  <Button>Edits</Button>
-</Badge>
+import React from 'react'
+import { Badge } from '@instructure/ui-badge'
+
+const MyBadge = () => {
+  return (
+    <Badge count={99}>
+      <Button>Edits</Button>
+    </Badge>
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-badge.svg

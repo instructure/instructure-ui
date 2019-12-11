@@ -3,13 +3,10 @@ describes: DeprecatedTag
 id: DeprecatedTag__README
 ---
 
-### This component is deprecated
-Tag will be removed from `ui-elements` in version 7.0.0. Use [Tag from ui-tag](#Tag) instead.
+**DEPRECATED:** Tag will be removed from `ui-elements` in version 7.0.0. Use [Tag](#Tag) from [ui-tag](#ui-tag) instead. Codemods are available to automatically update imports to the new package.
+***
 
-### Important upgrade notes
-Codemods are available to automatically update imports to the new package.
-
-Use `<DeprecatedTag />` to represent a category or group in a form.
+Use `<Tag />` to represent a category or group in a form.
 
 ```js
 ---

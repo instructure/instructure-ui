@@ -49,7 +49,7 @@ category: components/deprecated
 id: DeprecatedPopover
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-popover instead')
+@deprecated('7.0.0', null, 'Use Popover from ui-popover instead.')
 @testable()
 @bidirectional()
 class Popover extends Component {

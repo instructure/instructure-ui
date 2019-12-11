@@ -4,11 +4,16 @@ category: packages
 
 ## ui-tree-browser
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
+A component for displaying a hierarchical view of information.
+
+### Components
+The `ui-tree-browser` package contains the following:
+- [TreeBrowser](#TreeBrowser)
 
 ### Installation
 
@@ -32,16 +37,6 @@ const MyTreeBrowser = () => {
 }
 ```
 
-### Components
-The `ui-tree-browser` package contains the following:
-- [TreeBrowser](#TreeBrowser)
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-tree-browser.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-tree-browser

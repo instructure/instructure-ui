@@ -4,12 +4,18 @@ category: packages
 
 ## ui-view
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component for basic styles including spacing, sizing, borders, display, positioning, and focus states.
+
+### Components
+The `ui-view` package contains the following:
+- [ContextView](#ContextView)
+- [View](#View)
+
 
 ### Installation
 
@@ -17,19 +23,21 @@ A component for basic styles including spacing, sizing, borders, display, positi
 yarn add @instructure/ui-view
 ```
 
-### Components
-The `ui-view` package contains the following:
-- [ContextView](#ContextView)
-- [View](#View)
-
 ### Usage
 ```js
 ---
-example: true
+example: false
 ---
-<View as="div" padding="small" borderWidth="small">
-  Hello World
-</View>
+import React from 'react'
+import { View } from '@instructure/ui-view'
+
+const MyView = () => {
+  return (
+    <View as="div" padding="small" borderWidth="small">
+      Hello World
+    </View>
+  )
+}
 ```
 
 

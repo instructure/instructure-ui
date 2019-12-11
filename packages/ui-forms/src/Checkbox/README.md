@@ -3,9 +3,8 @@ describes: DeprecatedCheckbox
 id: DeprecatedCheckbox__README
 ---
 
-**DEPRECATED:** Checkbox will be removed from `ui-forms` in version 7.0.0. Use the [Checkbox](#Checkbox) from [ui-checkbox](#ui-checkbox) instead.
-
-___
+**DEPRECATED:** Checkbox will be removed from `ui-forms` in version 7.0.0. Use the [Checkbox](#Checkbox) from [ui-checkbox](#ui-checkbox) instead. Codemods are available to automatically update imports to the new package.
+***
 
 By default, the Checkbox component is a custom styled HTML checkbox. To default the checkbox to checked,
 set the `defaultChecked` prop.

@@ -3,13 +3,8 @@ describes: DeprecatedProgress
 id: DeprecatedProgress__README
 ---
 
-**DEPRECATED:** DeprecatedProgress will be removed from `ui-elements` in version 7.0.0. Use
-[Progress from ui-progress](#Progress) as a 1-1 replacement, if you don't want to have to update
-any props.
-
-However, please note that **Progress will be removed in version 8.0.0** in favor of two separate
-components: [ProgressBar](#ProgressBar) and [ProgressCircle](#ProgressCircle). Upgrading is
-a simple matter of [updating a few props](#Progress).
+**DEPRECATED:** Progress will be removed from `ui-elements` in version 7.0.0. Use [Progress](#Progress) from [ui-progress](#ui-progress) instead. Codemods are available to automatically update imports to the new package.
+***
 
 ### Basic progress bar and circle
 Progress is an easy-to-customize progress bar or circle (a.k.a, doughnut).

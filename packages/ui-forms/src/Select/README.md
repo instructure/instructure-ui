@@ -3,7 +3,8 @@ describes: DeprecatedSelect
 id: DeprecatedSelect__README
 ---
 
-**DEPRECATED:** Use the controlled [Select from ui-select](#Select) instead. View that [documentation](#Select) for examples of managing state for a `Select`.
+**DEPRECATED:** Select will be removed from `ui-forms` in version 7.0.0. Use the controlled [Select](#Select) from [ui-select](#ui-select) instead. View [Select](#Select) for examples of managing state for a `Select`.
+***
 
 Select is an accessible, custom styled combobox component with optional autocomplete.
 - Select behaves similar to [Popover](#Popover) but provides additional semantic markup and focus behavior as a form input.

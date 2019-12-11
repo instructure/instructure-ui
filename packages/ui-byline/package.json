@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-byline",
   "version": "6.16.0",
-  "description": "A Byline component made by Instructure Inc.",
+  "description": "A Byline component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",

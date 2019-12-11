@@ -4,12 +4,12 @@ category: packages
 
 ## eslint-plugin-instructure-ui
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+An eslint configuration for Instructure UI.
 
 ### Installation
 

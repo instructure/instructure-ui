@@ -53,7 +53,7 @@ id: DeprecatedDateInput
 ---
 **/
 @testable()
-@deprecated('7.0.0', null, 'Use @instructure/ui-date-input instead')
+@deprecated('7.0.0', null, 'Use DateInput from ui-date-input instead.')
 @themeable(theme, styles)
 class DateInput extends Component {
   static propTypes = {

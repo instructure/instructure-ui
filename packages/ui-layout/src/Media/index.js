@@ -39,7 +39,7 @@ category: components/deprecated
 id: DeprecatedMedia
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-byline instead')
+@deprecated('7.0.0', null, 'Use Media from ui-byline instead.')
 @themeable(theme, styles)
 class Media extends Component {
   static propTypes = {

@@ -2,7 +2,8 @@
 describes: DeprecatedList
 id: DeprecatedList__README
 ---
-**DEPRECATED:** List will be removed from `ui-elements` in version 7.0.0. Use the [List from ui-list](#List) or [InlineList from ui-list](#InlineList) instead.
+**DEPRECATED:** List will be removed from `ui-elements` in version 7.0.0. Use the [List](#List) from [ui-list](#ui-list) instead. Codemods are available to automatically update imports to the new package.
+***
 
 By default, `<List>` creates an unordered list of its children. Change the `as` prop to
 create an ordered list instead.

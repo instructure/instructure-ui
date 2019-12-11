@@ -4,6 +4,7 @@ id: DeprecatedTable__README
 ---
 
 **DEPRECATED:** Table will be removed from `ui-elements` in version 7.0.0. Use the controlled-only [Table](#Table) from [ui-table](#ui-table) instead.
+***
 
 Note that the `caption` prop is required for accessibility. If you would
 rather hide the caption, wrap it inside a

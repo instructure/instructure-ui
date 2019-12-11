@@ -4,12 +4,17 @@ category: packages
 
 ## ui-dialog
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A utility component for managing keyboard accessibility and screen reader behavior.
+
+### Components
+The `ui-dialog` package contains the following:
+- [Dialog](#Dialog)
+
 
 ### Installation
 

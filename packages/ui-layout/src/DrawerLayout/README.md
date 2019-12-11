@@ -3,11 +3,8 @@ describes: DeprecatedDrawerLayout
 id: DeprecatedDrawerLayout__README
 ---
 
-### This component is deprecated
-DrawerLayout will be removed from `ui-layout` in version 7.0.0. Use [DrawerLayout from ui-drawer-layout](#DrawerLayout) instead.
-
-### Important upgrade notes
-Codemods are available to automatically update imports to the new package.
+**DEPRECATED:** DrawerLayout will be removed from `ui-layout` in version 7.0.0. Use [DrawerLayout](#DrawerLayout) from [ui-drawer-layout](#ui-drawer-layout) instead. Codemods are available to automatically update imports to the new package.
+***
 
 The `<DrawerLayout />` component creates a layout consisting of both `<DrawerLayout.Tray />` and `<DrawerLayout.Content />`.
 The tray can be placed at the `start` or `end` position. When there is sufficient space available,

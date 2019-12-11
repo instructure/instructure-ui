@@ -4,10 +4,18 @@ category: packages
 
 ## ui-tabs
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+### Components
+The `ui-tabs` package contains the following:
+- [Tabs](#Tabs)
+
+### Deprecated Components
+The following components will be removed in version 7.0.0.
+- [TabList](#TabList) \(use Tabs instead)
 
 
 ### Installation
@@ -18,7 +26,10 @@ yarn add @instructure/ui-tabs
 
 ### Usage
 
-```js
+```jsx
+---
+example: false
+---
 import React from 'react'
 import { Tabs } from '@instructure/ui-tabs'
 

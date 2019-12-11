@@ -4,12 +4,12 @@ category: packages
 
 ## ui-progress
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A styled HTML `<progress />` element
+A styled HTML 'progress' element
 
 ### Components
 The `ui-progress` package contains the following:
@@ -17,6 +17,11 @@ The `ui-progress` package contains the following:
 - [ProgressCircle](#ProgressCircle)
 - [Progress](#Progress): will be deprecated in version 8.0.0
 
+
+### Installation
+```sh
+yarn add @instructure/ui-progress
+```
 
 ### Usage
 ```jsx
@@ -30,10 +35,6 @@ example: false
 />
 ```
 
-### Installation
-```sh
-yarn add @instructure/ui-progress
-```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-progress.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-progress

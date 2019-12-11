@@ -4,24 +4,24 @@ category: packages
 
 ## ui-a11y-content
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 Utility components that help provide a good experience for users who navigate the web with a screen reader or keyboard.
-
-### Installation
-
-```sh
-yarn add @instructure/ui-a11y-content
-```
 
 ### Components
 The `ui-a11y-content` package contains the following components:
 - [AccessibleContent](#AccessibleContent)
 - [PresentationContent](#PresentationContent)
 - [ScreenReaderContent](#ScreenReaderContent)
+
+### Installation
+
+```sh
+yarn add @instructure/ui-a11y-content
+```
 
 ### Usage
 ``` jsx
@@ -56,13 +56,6 @@ example: false
   This content is not visible.
 </ScreenReaderContent>
 ```
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-a11y-content.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-a11y-content

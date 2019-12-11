@@ -3,7 +3,8 @@ describes: DeprecatedHeading
 id: DeprecatedHeading__README
 ---
 
-**DEPRECATED:** DeprecatedHeading will be removed from `ui-elements` in version 7.0.0. Use the [Heading from ui-heading](#Heading) instead.
+**DEPRECATED:** Heading will be removed from `ui-elements` in version 7.0.0. Use [Heading](#Heading) from [ui-heading](#ui-heading) instead. Codemods are available to automatically update imports to the new package.
+***
 
 ```js
 ---

@@ -4,10 +4,16 @@ category: packages
 
 ## ui-date-input
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+A date input component.
+
+### Components
+The `ui-date-input` package contains the following:
+- [DateInput](#DateInput)
 
 ### Installation
 
@@ -15,6 +21,7 @@ category: packages
 yarn add @instructure/ui-date-input
 ```
 
+### Usage
 For detailed usage and documentation, see [DateInput](#DateInput).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-date-input.svg

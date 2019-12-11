@@ -4,10 +4,15 @@ category: packages
 
 ## ui-selectable
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+### Components
+The `ui-selectable` package contains the following:
+- [Selectable](#Selectable)
+
 
 ### Installation
 
@@ -15,7 +20,8 @@ category: packages
 yarn add @instructure/ui-selectable
 ```
 
-For detailed usage and documentation, see [Selectable](#Selectable).
+### Usage
+For detailed usage and documentation, see Selectable examples.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-selectable.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-selectable

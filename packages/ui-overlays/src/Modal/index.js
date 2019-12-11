@@ -49,7 +49,7 @@ category: components/deprecated
 id: DeprecatedModal
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-modal instead')
+@deprecated('7.0.0', null, 'Use Modal from ui-modal instead.')
 @testable()
 @themeable(theme, styles)
 class Modal extends Component {

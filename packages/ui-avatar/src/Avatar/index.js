@@ -83,7 +83,7 @@ class Avatar extends Component {
     */
     inline: PropTypes.bool,
     /**
-     * __Deprecated - use 'shape'__
+     * __Deprecated - use `shape`__
      */
     variant: PropTypes.oneOf(['circle', 'rectangle'])
     /* eslint-enable react/require-default-props */

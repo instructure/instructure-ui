@@ -3,21 +3,16 @@ describes: DeprecatedRating
 id: DeprecatedRating__README
 ---
 
-**DEPRECATED:** Rating will be removed from ui-elements in version 7.0.0. Use [Rating](#Rating) from [ui-rating](#ui-rating) instead.
+**DEPRECATED:** Rating will be removed from ui-elements in version 7.0.0. Use [Rating](#Rating) from [ui-rating](#ui-rating) instead. Codemods are available to automatically update imports to the new package.
+***
 
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package.
-
-___
-
-
-DeprecatedRating takes the `valueNow` and `valueMax` props and
+Rating takes the `valueNow` and `valueMax` props and
 outputs a 3- or 5-star rating. Decimals are rounded to the nearest
 whole number.
 
 ### 3- or 5-star ratings
 
-DeprecatedRating defaults to a 3-star rating system. Use `iconCount` to switch
+Rating defaults to a 3-star rating system. Use `iconCount` to switch
 to a 5-star system. Note how you can use the `formatValueText` prop to
 create readable text for screenreaders that will be outputted in the
 `aria-valuetext` attribute.

@@ -4,12 +4,22 @@ category: packages
 
 ## ui-modal
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component for displaying content in a dialog overlay.
+
+### Components
+The `ui-modal` package contains the following:
+- [Modal](#Modal)
+
+### Installation
+
+```sh
+yarn add @instructure/ui-modal
+```
 
 ### Usage
 
@@ -20,7 +30,9 @@ import { Modal } from '@instructure/ui-modal'
 const MyModal = () => {
   return (
     <Modal>
-      <Modal.Header>My Modal</Modal.Header>
+      <Modal.Header>
+        My Modal
+      </Modal.Header>
       <Modal.Content>
         Hello world
       </Modal.Content>
@@ -28,12 +40,7 @@ const MyModal = () => {
   )
 }
 ```
-
-### Installation
-
-```sh
-yarn add @instructure/ui-modal
-```
+For detailed usage and documentation, see Modal examples.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-modal.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-modal

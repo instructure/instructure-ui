@@ -4,11 +4,31 @@ category: packages
 
 ## ui-forms
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
+### Components
+The `ui-forms` package contains the following components:
+
+- [TimeInput](#TimeInput)
+
+### Deprecated components
+The following components have been deprecated and will be removed from the `ui-forms` package:
+- [Checkbox](#DeprecatedCheckbox) \(use [Checkbox from `ui-checkbox`](#Checkbox) instead)
+- [CheckboxGroup](#DeprecatedCheckboxGroup) \(use [CheckboxGroup from `ui-checkbox`](#CheckboxGroup) instead)
+- [DateInput](#DeprecatedDateInput) \(use [DateInput from `ui-date-input`](#DateInput) instead)
+- [DateTimeInput](#DateTimeInput) \(use the [Time and Date Input Pattern](#TimeDate) using Select and DateInput instead)
+- [FileDrop](#DeprecatedFileDrop) \(use [FileDrop from `ui-file-drop`](#FileDrop) instead)
+- [RangeInput](#DeprecatedRangeInput) \(use [RangeInput from `ui-range-input`](#RangeInput) instead)
+- [RadioInput](#DeprecatedRadioInput) \(use [RadioInput from `ui-radio-input`](#RadioInput) instead)
+- [RadioInputGroup](#DeprecatedRadioInputGroup) \(use [RadioInputGroup from `ui-radio-input`](#RadioInputGroup) instead)
+- [Select](#DeprecatedSelect) \(use [Select from `ui-select`](#Select) instead)
+- [TextArea](#DeprecatedTextArea) \(use [TextArea from `ui-text-area`](#TextArea) instead)
+- [TextInput](#DeprecatedTextInput) \(use [TextInput from `ui-text-input`](#TextInput) instead)
+
+Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
 
 ### Installation
 
@@ -28,35 +48,6 @@ const MyTextInput = () => {
   )
 }
 ```
-
-### Components
-The `ui-forms` package contains the following components:
-
-- [DateInput (deprecated)](#DeprecatedDateInput)
-- [DateTimeInput](#DateTimeInput)
-- [Select](#Select)
-- [TextInput (deprecated)](#DeprecatedTextInput)
-- [TimeInput](#TimeInput)
-
-### Deprecated components
-The following components have been deprecated and will be removed from the `ui-forms` package:
-- [Checkbox](#DeprecatedCheckbox) \(use [Checkbox from `ui-checkbox`](#Checkbox) instead)
-- [CheckboxGroup](#DeprecatedCheckboxGroup) \(use [CheckboxGroup from `ui-checkbox`](#CheckboxGroup) instead)
-- [DateInput](#DeprecatedDateInput) \(use [DateInput from `ui-date-input`](#DateInput) instead)
-- [TextArea](#DeprecatedTextArea) \(use [TextArea from `ui-text-area`](#TextArea) instead)
-- [TextInput](#DeprecatedTextInput) \(use [TextInput from `ui-text-input`](#TextInput) instead)
-- [FileDrop](#DeprecatedFileDrop) \(use [FileDrop from `ui-file-drop`](#FileDrop) instead)
-- [RangeInput](#DeprecatedRangeInput) \(use [RangeInput from `ui-range-input`](#RangeInput) instead)
-- [RadioInput](#DeprecatedRadioInput) \(use [RadioInput from `ui-radio-input`](#RadioInput) instead)
-- [RadioInputGroup](#DeprecatedRadioInputGroup) \(use [RadioInputGroup from `ui-radio-input`](#RadioInputGroup) instead)
-
-Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-forms.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-forms

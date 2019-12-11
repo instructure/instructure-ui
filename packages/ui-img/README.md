@@ -4,12 +4,18 @@ category: packages
 
 ## ui-img
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 An accessible image component.
+
+
+### Components
+The `ui-img` package contains the following:
+- [Img](#Img)
+
 
 ### Installation
 
@@ -17,23 +23,20 @@ An accessible image component.
 yarn add @instructure/ui-img
 ```
 
-### Components
-The `ui-img` package contains the following:
-- [Img](#Img)
-
 ### Usage
 ```jsx
 ---
 example: false
 ---
-<Img src={placeholderImage(250, 350)} alt="A Placeholder Image" />
+import React from 'react'
+import { Img } from '@instructure/ui-img'
+
+const MyImg = () => {
+  return (
+    <Img src={placeholderImage(250, 350)} alt="A Placeholder Image" />
+  )
+}
 ```
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-img.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-img

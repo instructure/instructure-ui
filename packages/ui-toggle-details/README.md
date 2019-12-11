@@ -4,10 +4,17 @@ category: packages
 
 ## ui-toggle-details
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+A styled toggleable, accordion-like component.
+
+### Components
+The `ui-toggle-details` package contains the following:
+- [ToggleDetails](#ToggleDetails)
+- [ToggleGroup](#ToggleGroup)
 
 
 ### Installation
@@ -30,19 +37,6 @@ const MyToggleDetails = () => {
   )
 }
 ```
-
-### Components
-The `ui-toggle-details` package contains the following:
-- [ToggleDetails](#ToggleDetails)
-- [ToggleGroup](#ToggleGroup)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-toggle-details.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-toggle-details

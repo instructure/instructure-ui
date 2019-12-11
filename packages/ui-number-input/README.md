@@ -4,14 +4,17 @@ category: packages
 
 ## ui-number-input
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][license]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-This package contains the `NumberInput` component. This is a low-level
-controlled component that only handles rendering. All behavior (stepping, number
+A low-level controlled number input component that only handles rendering. All behavior (stepping, number
 parsing, localization, etc.) should be handled by a wrapper component.
+
+### Components
+- [NumberInput](#NumberInput)
+
 
 ### Installation
 
@@ -38,11 +41,8 @@ export default function Example () {
 }
 ```
 
-See [this working example][example] for details.
+For detailed usage and documentation, see component examples.
 
-### License
-
-[MIT][license]
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-number-input.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-number-input
@@ -55,5 +55,3 @@ See [this working example][example] for details.
 
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md
-
-[example]: https://instructure.design/#NumberInput

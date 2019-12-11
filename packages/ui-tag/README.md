@@ -4,12 +4,18 @@ category: packages
 
 ## ui-tag
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A tag component.
+
+
+### Components
+The `ui-tag` package contains the following:
+- [Tag](#Tag)
+
 
 ### Installation
 
@@ -17,16 +23,19 @@ A tag component.
 yarn add @instructure/ui-tag
 ```
 
-### Components
-The `ui-tag` package contains the following:
-- [Tag](#Tag)
-
 ### Usage
 ```jsx
 ---
 example: false
 ---
-<Tag text="Hello world" />
+import React from 'react'
+import { Tag } from '@instructure/ui-tag'
+
+const MySelect = () => {
+  return (
+    <Tag text="Hello world" />
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-tag.svg

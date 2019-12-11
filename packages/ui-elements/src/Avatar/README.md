@@ -4,7 +4,7 @@ id: DeprecatedAvatar__README
 ---
 
 **DEPRECATED:** Avatar will be removed from `ui-elements` in version 7.0.0. Use the [Avatar](#Avatar) from [ui-avatar](#ui-avatar) instead.
-
+Codemods are available to automatically update imports to the new package.
 ***
 
 When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.

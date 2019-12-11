@@ -4,25 +4,32 @@ category: packages
 
 ## ui-rating
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A static Rating Component.
+A static rating component.
+
+
+### Components
+The `ui-rating` package contains the following:
+- [Rating](#Rating)
+
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-rating
 ```
+
 ### Usage
 
 ```js
 import React from 'react'
 import { Rating } from '@instructure/ui-rating'
 
-const MyAvatar = () => {
+const MyRating = () => {
   return (
     <Rating
       label="Product rating"
@@ -35,18 +42,6 @@ const MyAvatar = () => {
   )
 }
 ```
-
-### Components
-The `ui-rating` package contains the following:
-- [Rating](#Rating)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-rating.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-rating

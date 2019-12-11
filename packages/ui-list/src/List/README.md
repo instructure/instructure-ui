@@ -8,10 +8,18 @@ guidelines: true
 ---
 <Guidelines>
   <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item><strong>variant has been deprecated</strong> and will be removed in v8.0.0.</Figure.Item>
-    <Figure.Item>List will now support an isUnstyled prop set to false allowing the equivelant of what <code>variant="default"</code> delivered.</Figure.Item>
-    <Figure.Item>Setting the isUnstyled prop to true will output what <code>variant="unstyled"</code> originally delivered.</Figure.Item>
-    <Figure.Item>InlineList will be the preferred path forward to render what <code>variant="inline"</code> originally delivered.</Figure.Item>
+    <Figure.Item>
+      <code>variant</code> has been deprecated and <strong>will be removed in v8.0.0.</strong>
+    </Figure.Item>
+    <Figure.Item>
+      List will now support an <code>isUnstyled</code> prop set to false allowing the equivelant of what <code>variant="default"</code> delivered.
+    </Figure.Item>
+    <Figure.Item>
+      Setting the <code>isUnstyled</code> prop to true will output what <code>variant="unstyled"</code> delivered.
+    </Figure.Item>
+    <Figure.Item>
+      <Link href="#InlineList">InlineList</Link> will be the preferred path forward to render what <code>variant="inline"</code> delivered.
+    </Figure.Item>
   </Figure>
 </Guidelines>
 ```

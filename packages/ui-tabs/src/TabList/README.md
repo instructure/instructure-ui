@@ -2,7 +2,8 @@
 describes: DeprecatedTabList
 ---
 
-**DEPRECATED:** use the [Tabs](#Tabs) component from [@instructure/ui-tabs](#ui-tabs) instead.
+**DEPRECATED:** TabList will be removed from `ui-tabs` in version 7.0.0. Use the [Tabs](#Tabs) component from [ui-tabs](#ui-tabs) instead.
+***
 
 Accessible tabbed content component. You can use the TAB key to focus the component and
 arrow keys to navigate between panels of content. The default variant is `simple`.

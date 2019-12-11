@@ -4,18 +4,24 @@ category: packages
 
 ## ui-grid
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+A grid component.
+
+### Components
+- [Grid](#Grid)
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-grid
 ```
+
+### Usage
+For detailed usage and documentation, see [Grid](#Grid).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-grid.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-grid

@@ -4,12 +4,17 @@ category: packages
 
 ## ui-checkbox
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A Checkbox and CheckboxGroup Component
+A styled HTML input type="checkbox" component.
+
+### Components
+The `ui-checkbox` package contains the following:
+- [Checkbox](#Checkbox)
+- [CheckboxGroup](#CheckboxGroup)
 
 ### Installation
 
@@ -28,12 +33,6 @@ const MyCheckbox = () => {
   )
 }
 ```
-
-### Components
-The ui-checkbox package contains the following:
-- [Checkbox](#Checkbox)
-- [CheckboxGroup](#CheckboxGroup)
-
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-checkbox.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-checkbox

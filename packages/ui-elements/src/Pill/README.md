@@ -2,11 +2,8 @@
 describes: DeprecatedPill
 id: DeprecatedPill__README
 ---
-**DEPRECATED:** Pill will be removed from `ui-elements` in version 7.0.0. Use the [Pill](#Pill) from [ui-pill](#ui-pill) instead.
-
+**DEPRECATED:** Pill will be removed from `ui-elements` in version 7.0.0. Use the [Pill](#Pill) from [ui-pill](#ui-pill) instead. Codemods are available to automatically update imports to the new package.
 ***
-
-### DeprecatedPill
 
 Displays short, contextual information about an item. Change the border
 and text color via the `color` prop. Use the `margin` prop to add space around the component.

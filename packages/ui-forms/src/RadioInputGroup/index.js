@@ -37,7 +37,7 @@ category: components/deprecated
 id: DeprecatedRadioInputGroup
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-radio-input instead.')
+@deprecated('7.0.0', null, 'Use RadioInputGroup from ui-radio-input instead.')
 class RadioInputGroup extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,

@@ -2,11 +2,11 @@
 category: packages
 ---
 
-## @instructure/postcss-themeable-styles
+## postcss-themeable-styles
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 For use with [@instructure/babel-plugin-themeable-styles](#babel-plugin-themeable-styles),

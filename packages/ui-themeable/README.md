@@ -2,23 +2,19 @@
 category: packages
 ---
 
-## @instructure/ui-themeable
+## ui-themeable
 
-The [@instructure/ui-themeable](#ui-themeable) library is meant to be used along with a [babel plugin](#babel-plugin-themeable-styles)
+
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
+[![Code of Conduct][coc-badge]][coc]
+
+
+The [ui-themeable](#ui-themeable) library is meant to be used along with a [babel plugin](#babel-plugin-themeable-styles)
 to import CSS styles and generate theme variables. With this framework, each UI component can be used in
 isolation and support multiple themes, including dynamic themes provided at runtime, while still working within
 a system of components that use a [shared global theme](#canvas).
-
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
-[![Code of Conduct][coc-badge]][coc]
-
-### Installation
-
-```sh
-yarn add @instructure/ui-themeable
-```
 
 ### Motivation
 
@@ -34,6 +30,12 @@ yarn add @instructure/ui-themeable
 
 6. Pre-render/server-side render support (inline critical CSS).
 
+
+### Installation
+
+```sh
+yarn add @instructure/ui-themeable
+```
 
 ### Usage
 

@@ -45,7 +45,7 @@ category: components/deprecated
 id: DeprecatedTruncateText
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-truncate-text instead.')
+@deprecated('7.0.0', null, 'Use TruncateText from ui-truncate-text instead.')
 @testable()
 @themeable(theme, styles)
 @hack(['shouldTruncateWhenInvisible'])

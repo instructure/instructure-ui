@@ -4,12 +4,17 @@ category: packages
 
 ## ui-select
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component for select and autocomplete behavior.
+
+### Components
+The `ui-select` package contains the following:
+- [Select](#Select)
+
 
 ### Installation
 
@@ -18,8 +23,6 @@ yarn add @instructure/ui-select
 ```
 
 ### Usage
-For detailed usage and documentation, see [Select](#Select).
-
 ```js
 import React from 'react'
 import { Select } from '@instructure/ui-select'
@@ -33,6 +36,8 @@ const MySelect = () => {
   )
 }
 ```
+For detailed usage and documentation, see Select examples.
+
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-select.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-select

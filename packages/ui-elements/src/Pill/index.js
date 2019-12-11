@@ -42,7 +42,7 @@ category: components/deprecated
 id: DeprecatedPill
 ---
 **/
-@deprecated('7.0.0', null, 'Use Pill from ui-pill instead')
+@deprecated('7.0.0', null, 'Use Pill from ui-pill instead.')
 @testable()
 @themeable(theme, styles)
 class Pill extends Component {

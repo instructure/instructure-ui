@@ -2,7 +2,8 @@
 describes: DeprecatedTextInput
 id: DeprecatedTextInput__README
 ---
-**DEPRECATED:** use [TextInput from ui-text-input](#TextInput) instead.
+**DEPRECATED:** TextInput wll be removed from `ui-forms` in version 7.0.0. Use [TextInput](#TextInput) from [ui-text-input](#ui-text-input) instead. Codemods are available to automatically update imports to the new package.
+***
 
 `TextInput` renders a custom HTML `input` element. It supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
 

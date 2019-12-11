@@ -2,14 +2,14 @@
 category: packages
 ---
 
-## @instructure/ui-docs-plugin
+## ui-docs-plugin
+
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
+[![Code of Conduct][coc-badge]][coc]
 
 A webpack plugin to generate documentation made by Instructure Inc.
-
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
-[![Code of Conduct][coc-badge]][coc]
 
 ### Installation
 
@@ -177,7 +177,10 @@ You can write documentation in markdown files or in code comment blocks in your 
 
 You can configure optional meta data about a document with [YAML](http://yaml.org/) front matter inside your markdown content.
 
-````md
+````js
+---
+example: false
+---
 ---
 category: guides/contributing
 id: code_of_conduct
@@ -194,10 +197,15 @@ Note: categories can be nested via the `/` delimiter.
 
 In README files you can add the meta data:
 
-```md
+````js
+---
+example: false
+---
 ---
 describes: MyComponent
-```
+---
+
+````
 
 To have the README file content serve as the description for the resource with the id 'MyComponent'. Usually this will
 be the `index.js` file in that directory.
@@ -261,8 +269,8 @@ readOnly: true
 From the root of the `instructure-ui` repo:
 
 1. Run `yarn build:watch`
-1. Run `yarn dev`
-1. Open [http://localhost:8080](http://localhost:8080) in your browser
+2. Run `yarn dev`
+3. Open [http://localhost:8080/](http://localhost:8080/) in your browser
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-docs-plugin.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-docs-plugin

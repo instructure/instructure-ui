@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-checkbox",
   "version": "6.16.0",
-  "description": "A Checkbox and CheckboxGroup Component",
+  "description": " styled HTML input type='checkbox' component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",

@@ -3,10 +3,8 @@ describes: DeprecatedLink
 id: DeprecatedLink__README
 ---
 
-**DEPRECATED:** Link will be removed from `ui-elements` in version 7.0.0. Use the [Link from ui-link](#Link) instead.
-
-### Important Upgrade Notes
-Codemods will be available to automatically update imports to the new package.
+**DEPRECATED:** Link will be removed from `ui-elements` in version 7.0.0. Use the [Link](#Link) from [ui-link](#ui-link) instead. Codemods are available to automatically update imports to the new package.
+***
 
 The default behavior when `renderIcon` is used with `<TruncateText />` has changed in [Link from ui-link](#Link):
 Link now sets its `display` prop to `inline-flex` instead of `flex`. Please check all areas where you are

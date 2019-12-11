@@ -238,9 +238,9 @@ render(
 )
 ```
 
-### A sortable table
+### A sortable table using our Responsive component
 
-Resize the window to see how column headers turn into a combobox on narrow screen.
+Resize the window to see how column headers transition into a Select for sorting table content when the traditional Table Header is no longer clickable. The Table layout itself switches from the horizontal view to the stacked view allowing content to be viewed without horizontal scrolling. See [Responsive](#Responsive) for more examples.
 
 ```javascript
 ---

@@ -43,10 +43,7 @@ category: components/deprecated
 id: DeprecatedTextInput
 ---
 **/
-@deprecated('7.0.0', null, deprecated.changedPackageWarning(
-  'ui-forms',
-  'ui-text-input'
-))
+@deprecated('7.0.0', null, 'Use TextInput from ui-text-input instead.')
 @testable()
 @themeable(theme, styles)
 class TextInput extends Component {

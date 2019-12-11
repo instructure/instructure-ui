@@ -4,9 +4,9 @@ category: packages
 
 ## ui-flex
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 Flex is a component that makes it easy to align content using flexbox CSS.
@@ -15,14 +15,13 @@ Flex is a component that makes it easy to align content using flexbox CSS.
 The `ui-flex` package contains the following:
 - [Flex](#Flex)
 
-### Usage
-For detailed usage and documentation, see [Flex](#Flex).
-
 ### Installation
 
 ```sh
 yarn add @instructure/ui-flex
 ```
+### Usage
+For detailed usage and documentation, see [Flex](#Flex).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-flex.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-flex

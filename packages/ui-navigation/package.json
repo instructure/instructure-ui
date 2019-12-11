@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-navigation",
   "version": "6.16.0",
-  "description": "",
+  "description": "Main and application level navigational components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",

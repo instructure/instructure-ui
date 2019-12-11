@@ -2,9 +2,18 @@
 describes: Media
 ---
 
-**DEPRECATED:** Media will be removed from `ui-byline` in version 8.0.0. Use [Byline](#Byline) from [ui-byline](#ui-byline) instead.
-
-___
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+    <Figure.Item>
+      <strong>DEPRECATED:</strong> Media will be removed from <code>ui-byline</code> in version 8.0.0. Use <Link href="#Byline">Byline</Link> instead.
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
 A `Media` component with a caption:
 

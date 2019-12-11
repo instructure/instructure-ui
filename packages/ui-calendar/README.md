@@ -4,10 +4,17 @@ category: packages
 
 ## ui-calendar
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+A calendar component
+
+### Components
+The `ui-calendar` package contains the following:
+- [Calendar](#Calendar)
+
 
 ### Installation
 
@@ -15,7 +22,9 @@ category: packages
 yarn add @instructure/ui-calendar
 ```
 
+### Usage
 For detailed usage and documentation, see [Calendar](#Calendar).
+
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-calendar.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-calendar

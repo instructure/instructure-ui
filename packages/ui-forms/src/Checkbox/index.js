@@ -38,7 +38,7 @@ category: components/deprecated
 id: DeprecatedCheckbox
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-checkbox instead.')
+@deprecated('7.0.0', null, 'Use Checkbox from ui-checkbox instead.')
 class Checkbox extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,

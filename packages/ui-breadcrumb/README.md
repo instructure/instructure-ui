@@ -4,16 +4,40 @@ category: packages
 
 ## ui-breadcrumb
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
+A breadcrumb component.
+
+### Components
+The `ui-breadcrumb` package contains the following:
+- [Breadcrumb](#Breadcrumb)
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-breadcrumb
+```
+
+### Usage
+```jsx
+---
+example: false
+---
+import React from 'react'
+import { Breadcrumb } from '@instructure/ui-breadcrumb'
+
+const MyBreadcrumb = () => {
+  return (
+    <Breadcrumb label="You are here">
+      <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">Course A</Breadcrumb.Link>
+      <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">Modules</Breadcrumb.Link>
+      <Breadcrumb.Link>A Great Module</Breadcrumb.Link>
+    </Breadcrumb>
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-breadcrumb.svg

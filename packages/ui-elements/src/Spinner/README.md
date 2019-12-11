@@ -3,10 +3,8 @@ describes: DeprecatedSpinner
 id: DeprecatedSpinner__README
 ---
 
-**Deprecated** Spinner will be removed from `ui-elements` in version 7.0.0. Use [Spinner from ui-spinner](#Spinner) instead.
-
-### Important upgrade notes
-Codemods are available to automatically update imports to the new package.
+**DEPRECATED:** Spinner will be removed from `ui-elements` in version 7.0.0. Use [Spinner](#Spinner) from [ui-spinner](#ui-spinner) instead. Codemods are available to automatically update imports to the new package.
+***
 
 ### Choose from four sizes and add margin as needed
 

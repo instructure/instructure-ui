@@ -4,10 +4,14 @@ category: packages
 
 ## ui-pagination
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+### Components
+The `ui-pagination` package contains the following:
+- [Pagination](#Pagination)
 
 
 ### Installation
@@ -32,16 +36,6 @@ const MyPagination = () => {
   )
 }
 ```
-
-### Components
-The `ui-pagination` package contains the following:
-- [Pagination](#Pagination)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-pagination.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-pagination

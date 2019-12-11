@@ -37,7 +37,7 @@ category: components/deprecated
 id: DeprecatedText
 ---
 **/
-@deprecated('7.0.0', null, 'Use Text from ui-text instead')
+@deprecated('7.0.0', null, 'Use Text from ui-text instead.')
 @themeable(theme, styles)
 class Text extends Component {
   static propTypes = {

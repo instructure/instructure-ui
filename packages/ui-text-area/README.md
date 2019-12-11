@@ -4,12 +4,17 @@ category: packages
 
 ## ui-text-area
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A TextArea Component.
+A styled HTML textarea Component.
+
+### Components
+The `ui-text-area` package contains the following:
+- [TextArea](#TextArea)
+
 
 ### Installation
 
@@ -32,18 +37,6 @@ const MyTextArea = () => {
   )
 }
 ```
-
-### Components
-The `ui-text-area` package contains the following:
-- [TextArea](#TextArea)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-text-area.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-text-area

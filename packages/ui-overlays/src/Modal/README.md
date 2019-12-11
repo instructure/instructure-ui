@@ -3,7 +3,8 @@ describes: DeprecatedModal
 id: DeprecatedModal_README
 ---
 
-**DEPRECATED:** Modal will be removed from `ui-overlays` in version 7.0.0. Use the [Modal from ui-modal](#Modal) instead.
+**DEPRECATED:** Modal will be removed from `ui-overlays` in version 7.0.0. Use the [Modal](#Modal) from [ui-modal](#ui-modal) instead. Codemods are available to automatically update imports to the new package.
+***
 
 The Modal is a dialog component that is centered in the viewport. The Modal
 overlays the application content and applies a mask to it.

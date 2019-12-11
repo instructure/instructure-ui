@@ -3,12 +3,19 @@ category: packages
 experimental: true
 ---
 
-## ui-options-list
+## ui-options
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+A view-only component for composing interactive lists and menus.
+
+### Components
+The `ui-options` package contains the following:
+- [Options](#Optioins)
+
 
 ### Installation
 

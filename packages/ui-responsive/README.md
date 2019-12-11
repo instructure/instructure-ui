@@ -4,18 +4,26 @@ category: packages
 
 ## ui-responsive
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component that allows for rendering a component differently based on either the element or the viewport size.
+
+### Components
+The `ui-responsive` package contains the following:
+- [Responsive](#Responsive)
+
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-responsive
 ```
+
+### Usage
+For detailed usage and documentation, see Responsive examples.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-responsive.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-responsive

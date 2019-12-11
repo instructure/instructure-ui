@@ -3,10 +3,9 @@ describes: DeprecatedBadge
 id: DeprecatedBadge__README
 ---
 
-**Deprecated** Badge will be removed from `ui-elements` in version 7.0.0. Use [Badge from ui-badge](#Badge) instead.
-
-### Important upgrade notes
+**DEPRECATED:** Badge will be removed from `ui-elements` in version 7.0.0. Use [Badge](#Badge) from [ui-badge](#ui-badge) instead.
 Codemods are available to automatically update imports to the new package.
+***
 
 ### Making badges accessible
 Badge counts are automatically fed to screenreaders through the `aria-describedby`

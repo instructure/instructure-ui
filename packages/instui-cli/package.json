@@ -1,7 +1,7 @@
 {
   "name": "@instructure/instui-cli",
   "version": "6.16.0",
-  "description": "A cli for working with instructure-ui packages",
+  "description": "A cli for working with Instructure UI packages",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {

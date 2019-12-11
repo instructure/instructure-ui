@@ -3,9 +3,8 @@ describes: DeprecatedRadioInputGroup
 id: DeprecatedRadioInputGroup__README
 ---
 
-**DEPRECATED:** RadioInputGroup will be removed from `ui-forms` in version 7.0.0. Use the [RadioInputGroup](#RadioInputGroup) from [ui-radio-input](#ui-radio-input) instead.
-
-___
+**DEPRECATED:** RadioInputGroup will be removed from `ui-forms` in version 7.0.0. Use the [RadioInputGroup](#RadioInputGroup) from [ui-radio-input](#ui-radio-input) instead. Codemods are available to automatically update imports to the new package.
+***
 
 A RadioInputGroup is a group of RadioInput components. It will handle setting
 the name property on the RadioInput components for you and will set the selected item

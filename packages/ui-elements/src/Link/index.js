@@ -43,7 +43,7 @@ category: components/deprecated
 id: DeprecatedLink
 ---
 **/
-@deprecated('7.0.0', null, 'Use Link from ui-link instead')
+@deprecated('7.0.0', null, 'Use Link from ui-link instead.')
 @testable()
 @themeable(theme, styles)
 class Link extends Component {

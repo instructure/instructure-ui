@@ -4,12 +4,17 @@ category: packages
 
 ## ui-position
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component for positioning content with respect to a designated target.
+
+### Components
+The `ui-position` package contains the following:
+- [Position](#Position)
+
 
 ### Installation
 
@@ -32,6 +37,7 @@ const MyPosition = () => {
   )
 }
 ```
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-position.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-position
 

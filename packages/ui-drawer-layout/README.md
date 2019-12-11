@@ -4,22 +4,24 @@ category: packages
 
 ## ui-drawer-layout
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A main-content-plus-tray layout component
+
+
+### Components
+The `ui-drawer-layout` package contains the following:
+- [DrawerLayout](#DrawerLayout)
+
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-drawer-layout
 ```
-
-### Components
-The `ui-drawer-layout` package contains the following:
-- [DrawerLayout](#DrawerLayout)
 
 ### Usage
 ```js

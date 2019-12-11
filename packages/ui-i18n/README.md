@@ -4,17 +4,12 @@ category: packages
 
 ## ui-i18n
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-
-### Installation
-
-```sh
-yarn add --dev @instructure/ui-i18n
-```
+Helper components and utilities for internationalization.
 
 ### Components
 The `ui-i18n` package contains the following:
@@ -28,6 +23,14 @@ The `ui-i18n` package contains the following utilities:
 - [Decimal](#Decimal)
 - [Locale](#Locale)
 
+### Installation
+
+```sh
+yarn add --dev @instructure/ui-i18n
+```
+
+### Usage
+For detailed usage and documentation, see individual components and utilities.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-i18n.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-i18n

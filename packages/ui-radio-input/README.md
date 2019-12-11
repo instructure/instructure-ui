@@ -4,12 +4,18 @@ category: packages
 
 ## ui-radio-input
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A RadioInput component made by Instructure Inc.
+A styled HTML input type="radio" element
+
+### Components
+The `ui-radio-input` package contains the following:
+- [RadioInput](#RadioInput)
+- [RadioInputGroup](#RadioInputGroup)
+
 
 ### Installation
 
@@ -32,10 +38,6 @@ const MyRadioInput = () => {
   )
 }
 ```
-### Components
-The ui-radio-input package contains the following:
-- [RadioInput](#RadioInput)
-- [RadioInputGroup](#RadioInputGroup)
 
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-radio-input.svg

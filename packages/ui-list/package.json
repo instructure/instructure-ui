@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-list",
   "version": "6.16.0",
-  "description": "Components for displaying vertical or horizontal Lists.",
+  "description": "Components for displaying vertical or horizontal lists.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",

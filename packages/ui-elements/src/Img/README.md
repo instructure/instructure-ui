@@ -3,7 +3,7 @@ describes: DeprecatedImg
 id: DeprecatedIMG__README
 ---
 
-**DEPRECATED:** Img will be removed from `ui-elements` in version 7.0.0. Use the [Img](#Img) from [ui-img](#ui-img) instead.
+**DEPRECATED:** Img will be removed from `ui-elements` in version 7.0.0. Use the [Img](#Img) from [ui-img](#ui-img) instead. Codemods are available to automatically update imports to the new package.
 
 ***
 

@@ -4,12 +4,18 @@ category: packages
 
 ## ui-table
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+A styled HTML table component.
+
+### Components
+
+The `ui-table` package contains the following:
+- [Table](#Table)
+
 
 ### Installation
 
@@ -17,12 +23,12 @@ A UI component library made by Instructure Inc.
 yarn add @instructure/ui-table
 ```
 
-### Components
-
-The `ui-table` package contains the following:
-- [Table](#Table)
-
-```javascript
+### Usage
+```jsx
+---
+example: false
+---
+import React from 'react'
 import { Table } from '@instructure/ui-table'
 
 const MyTable = () => {

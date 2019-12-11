@@ -3,15 +3,13 @@ describes: DeprecatedView
 id: DeprecatedView__README
 ---
 
-**DEPRECATED:** View will be removed from `ui-layout` in version 7.0.0. Use the [View from ui-view](#View) instead.
+**DEPRECATED:** View will be removed from `ui-layout` in version 7.0.0. Use the [View](#View) from [ui-view](#ui-view) instead. Codemods are available to automatically update imports to the new package.
+***
 
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package.
-
-### View &#151; the visual basis of instructure-UI
+### View &#151; the visual basis of Instructure UI
 
 View provides the base appearance for most of the components
-in instructure-UI.
+in Instructure UI.
 
 > **Because View provides access to so many visual styles, it
 can be easy to abuse.** Before you use View, ensure that the component

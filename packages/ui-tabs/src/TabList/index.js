@@ -49,7 +49,7 @@ category: components/deprecated
 id: DeprecatedTabList
 ---
 **/
-@deprecated('7.0.0', null, 'Use the Tabs component instead.')
+@deprecated('7.0.0', null, 'Use Tabs from ui-tabs instead.')
 @testable()
 @themeable(theme, styles)
 class TabList extends Component {

@@ -4,12 +4,17 @@ category: packages
 
 ## ui-tray
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+Tray component for secondary/menu content.
+
+### Components
+The `ui-tray` package contains the following:
+- [Tray](#Tray)
+
 
 ### Installation
 
@@ -17,12 +22,8 @@ A UI component library made by Instructure Inc.
 yarn add @instructure/ui-tray
 ```
 
-### Components
-The `ui-tray` package contains the following:
-- [Tray](#Tray)
-
 ### Usage
-See the [Tray](#Tray) documentation for a usage example.
+For detailed usage and documentation, see Tray examples.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-tray.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-tray

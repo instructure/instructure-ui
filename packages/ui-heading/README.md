@@ -4,9 +4,9 @@ category: packages
 
 ## ui-heading
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 Heading is a component for creating typographic headings.
@@ -15,24 +15,26 @@ Heading is a component for creating typographic headings.
 The `ui-heading` package contains the following:
 - [Heading](#Heading)
 
-### Usage
-```jsx
----
-example: false
----
-<Heading>I am a heading!</Heading>
-```
-
 ### Installation
 
 ```sh
 yarn add @instructure/ui-heading
 ```
+### Usage
+```jsx
+---
+example: false
+---
+import React from 'react'
+import { Heading } from '@instructure/ui-heading'
 
-### Contribute
-See the [contributing guidelines](#contributing) for details.
+const MyHeading = () => {
+  return (
+    <Heading>I am a heading!</Heading>
+  )
+}
+```
 
-### License
 [npm]: https://img.shields.io/npm/v/@instructure/ui-heading.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-heading
 

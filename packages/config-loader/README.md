@@ -4,12 +4,12 @@ category: packages
 
 ## config-loader
 
-A library to find and load config resource files in JSON (something.json or .somethingrc) or JS (somethingrc.js or something.config.js) or config data from package.json files.
-
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+A library to find and load config resource files in JSON (something.json or .somethingrc) or JS (somethingrc.js or something.config.js) or config data from package.json files.
 
 ### Installation
 

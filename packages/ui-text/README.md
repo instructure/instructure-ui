@@ -4,38 +4,40 @@ category: packages
 
 ## ui-text
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component for styling textual content.
+
+### Components
+The `ui-text` package contains the following:
+- [Text](#Text)
+
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-text
 ```
-### Components
-The `ui-text` package contains the following:
-- [Text](#Text)
 
 ### Usage
 ```jsx
 ---
 example: false
 ---
-<Text>
-  Whatever you want to display goes here.
-</Text>
+import React from 'react'
+import { Text } from '@instructure/ui-text'
+
+const MyText = () => {
+  return (
+    <Text>
+      Whatever you want to display goes here.
+    </Text>
+  )
+}
 ```
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-text.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-text

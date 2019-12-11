@@ -9,22 +9,26 @@ guidelines: true
 <Guidelines>
   <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
     <Figure.Item>
-      <strong>DEPRECATED:</strong> Progress will be removed from <code>ui-progress</code> in version 8.0.0. Use <Link href="#ProgressBar">ProgressBar</Link> or <Link href="#ProgressCircle">ProgressCircle</Link> instead.
+      <strong>DEPRECATED:</strong> <code>Progress</code> will be removed from <code>ui-progress</code> in version 8.0.0. Use <Link href="#ProgressBar">ProgressBar</Link> or <Link href="#ProgressCircle">ProgressCircle</Link> instead.
+    </Figure.Item>
+    <Figure.Item>
+      To render the <code>inverse</code> color scheme for the new ProgressBar or ProgressCircle components, use the <code>color</code> prop.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>successColor</code> boolean has been removed. It has been replaced with <code>meterColor</code> in the new components. No action here is necessary unless you have set <code>successColor={false}</code> to override the default behavior where Progress turns to the <code>success</code> color on completion.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>label</code> prop is now <code>screenReaderLabel</code>.
+    </Figure.Item>
+    <Figure.Item>
+      The <code>formatDisplayedValue</code> and <code>formatValueText</code> props have been updated to take an object containing <code>valueNow</code> and <code>valueMax</code> as arguments.
+    </Figure.Item>
+    <Figure.Item>
+      ProgressBar and ProgressCircle are directly themeable through theme variables \o/.
     </Figure.Item>
   </Figure>
 </Guidelines>
 ```
-
-### Upgrading to ProgressBar or ProgressCircle
-
-- To render the `inverse` color scheme for the new components, use the `color` prop.
-- The `successColor` boolean has been removed. It has been replaced with `meterColor` in the new components. No
-  action here is necessary unless you have set `successColor={false}` to override the default behavior where Progress
-  turns to the `success` color on completion.
-- The `label` prop is now `screenReaderLabel`.
-- The `formatDisplayedValue` and `formatValueText` props have been updated to take an object
-  containing `valueNow` and `valueMax` as arguments.
-- ProgressBar and ProgressCircle are directly themeable through theme variables \o/
 
 ### Basic progress bar and circle
 

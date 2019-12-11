@@ -39,7 +39,7 @@ id: DeprecatedCheckboxGroup
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use @instructure/ui-checkbox instead.')
+@deprecated('7.0.0', null, 'Use CheckboxGroup from ui-checkbox instead.')
 class CheckboxGroup extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,

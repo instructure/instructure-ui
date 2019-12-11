@@ -4,18 +4,24 @@ category: packages
 
 ## ui-metric
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A UI component for displaying Metrics.
 
 ### Components
-The 'ui-metric' package contains the following:
+The `ui-metric` package contains the following:
  - [Metric](#Metric)
  - [MetricGroup](#MetricGroup)
  - [MetricsList](#MetricsList)
+
+### Installation
+
+```sh
+yarn add @instructure/ui-metric
+```
 
 ### Usage
 ```jsx
@@ -34,20 +40,6 @@ example: false
   <Metric label="Late" value="4" />
   <Metric label="Missing" value="2" />
 </MetricGroup>
-```
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
-
-### Installation
-
-```sh
-yarn add @instructure/ui-metric
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-metric.svg

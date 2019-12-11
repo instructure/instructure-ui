@@ -4,10 +4,19 @@ category: packages
 
 ## ui-buttons
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+Accessible button components.
+
+### Components
+The `ui-buttons` package contains the following:
+- [Button](#Button)
+- [CloseButton](#CloseButton)
+- [CondensedButton](#CondensedButton)
+- [IconButton](#IconButton)
 
 
 ### Installation
@@ -29,19 +38,6 @@ const MyButton = function () {
 }
 ```
 
-### Components
-The `ui-buttons` package contains the following:
-- [Button](#Button)
-- [CloseButton](#CloseButton)
-- [CondensedButton](#CondensedButton)
-- [IconButton](#IconButton)
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-buttons.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-buttons

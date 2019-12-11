@@ -3,9 +3,8 @@ describes: DeprecatedMedia
 id: DeprecatedMedia__README
 ---
 
-**DEPRECATED:** Media will be removed from `ui-layout` in version 7.0.0. Use [Byline](#Byline) from [ui-byline](#ui-byline) instead.
-
-___
+**DEPRECATED:** Media will be removed from `ui-layout` in version 7.0.0. Use [Media](#Media) from [ui-byline](#ui-byline) instead. Codemods are available to automatically update imports to the new package.
+***
 
 A `Media` component with a caption:
 

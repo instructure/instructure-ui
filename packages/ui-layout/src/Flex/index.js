@@ -42,7 +42,7 @@ category: components/deprecated
 id: DeprecatedFlex
 ---
 **/
-@deprecated('7.0.0', null, 'Use Flex in ui-flex instead.')
+@deprecated('7.0.0', null, 'Use Flex from ui-flex instead.')
 @themeable(theme, styles)
 class Flex extends Component {
   static propTypes = {

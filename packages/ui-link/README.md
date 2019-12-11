@@ -4,9 +4,9 @@ category: packages
 
 ## ui-link
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A styled HTML link component
@@ -15,18 +15,25 @@ A styled HTML link component
 The `ui-link` package contains the following:
 - [Link](#Link)
 
+### Installation
+
+```sh
+yarn add @instructure/ui-link
+```
+
 ### Usage
 ```jsx
 ---
 example: false
 ---
-This is <Link href="http://instructure.design">a link</Link>!
-```
+import React from 'react'
+import { Link } from '@instructure/ui-link'
 
-### Installation
-
-```sh
-yarn add @instructure/ui-link
+const MyLink = () => {
+  return (
+    <Text>This is <Link href="http://instructure.design">a link</Link>!</Text>
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-link.svg

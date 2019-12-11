@@ -4,12 +4,17 @@ category: packages
 
 ## ui-text-input
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+A styled HTML text input component.
+
+### Components
+The `ui-text-input` package contains the following:
+- [TextInput](#TextInput)
+
 
 ### Installation
 
@@ -17,14 +22,11 @@ A UI component library made by Instructure Inc.
 yarn add @instructure/ui-text-input
 ```
 
-### Components
-The `ui-text-input` package contains the following:
-- [TextInput](#TextInput)
+### Usage
 
 ```javascript
 ---
-example: true
-render: false
+example: false
 ---
 class ControlledTextInputExample extends React.Component {
   constructor (props) {

@@ -3,12 +3,8 @@ describes: DeprecatedGrid
 id: DeprecatedGrid__README
 ---
 
-**DEPRECATED:** Grid will be removed from ui-layout in version 7.0.0. Use [Grid](#Grid) from [ui-grid](#ui-grid) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package.
-
-___
+**DEPRECATED:** Grid will be removed from ui-layout in version 7.0.0. Use [Grid](#Grid) from [ui-grid](#ui-grid) instead. Codemods are available to automatically update imports to the new package.
+***
 
 ### Create a basic column layout
 

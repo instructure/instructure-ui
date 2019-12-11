@@ -3,7 +3,8 @@ describes: DeprecatedTooltip
 id: DeprecatedTooltip__README
 ---
 
-**DEPRECATED:** Tooltip will be removed from `ui-overlays` in version 7.0.0. Use the [Tooltip from ui-tooltip](#Tooltip) instead.
+**DEPRECATED:** Tooltip will be removed from `ui-overlays` in version 7.0.0. Use the [Tooltip](#Tooltip) from [ui-tooltip](#ui-tooltip) instead. Codemods are available to automatically update imports to the new package.
+***
 
 
 Tooltips are small text-only  contextual overlays that are triggered by hover/focus. Use anywhere additional explanation might be needed but space is limited on the triggering element.
@@ -46,8 +47,8 @@ example: true
       mountNode={() => document.getElementById('main')}
     >
       <TextInput
-        inline
-        label="Enter some text"
+        width="15rem"
+        renderLabel="Enter some text"
       />
     </DeprecatedTooltip>
   </p>

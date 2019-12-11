@@ -4,10 +4,16 @@ category: packages
 
 ## ui-focusable
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+A utility used to identify when an element receives focus.
+
+### Components
+The `ui-focusable` package contains the following:
+- [Focusable](#Focusable)
 
 
 ### Installation
@@ -34,10 +40,6 @@ const MyFocusableElement = () => {
   )
 }
 ```
-
-### Components
-The `ui-focusable` package contains the following:
-- [Focusable](#Focusable)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-focusable.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-focusable

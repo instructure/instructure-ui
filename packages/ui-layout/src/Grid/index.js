@@ -50,7 +50,7 @@ category: components/deprecated
 id: DeprecatedGrid
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-grid instead.')
+@deprecated('7.0.0', null, 'Use Grid from ui-grid instead.')
 @themeable(theme, styles)
 class Grid extends Component {
   static propTypes = {

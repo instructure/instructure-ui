@@ -3,9 +3,8 @@ describes: DeprecatedRadioInput
 id: DeprecatedRadioInput__README
 ---
 
-**DEPRECATED:** RadioInput will be removed from `ui-forms` in version 7.0.0. Use the [RadioInput](#RadioInput) from [ui-radio-input](#ui-radio-input) instead.
-
-___
+**DEPRECATED:** RadioInput will be removed from `ui-forms` in version 7.0.0. Use the [RadioInput](#RadioInput) from [ui-radio-input](#ui-radio-input) instead. Codemods are available to automatically update imports to the new package.
+***
 
 By default, the RadioInput component is a custom styled HTML radio button.
 

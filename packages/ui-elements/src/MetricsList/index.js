@@ -39,7 +39,7 @@ category: components/deprecated
 id: DeprecatedMetricsList
 ---
 **/
-@deprecated('7.0.0', null, 'Use MetricGroup and Metric from ui-metric instead')
+@deprecated('7.0.0', null, 'Use MetricsList from ui-metric instead.')
 @testable()
 @themeable(theme, styles)
 class MetricsList extends Component {

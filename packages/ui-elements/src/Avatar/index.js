@@ -40,7 +40,7 @@ id: DeprecatedAvatar
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use Avatar from ui-avatar instead')
+@deprecated('7.0.0', null, 'Use Avatar from ui-avatar instead.')
 @testable()
 @themeable(theme, styles)
 class Avatar extends Component {

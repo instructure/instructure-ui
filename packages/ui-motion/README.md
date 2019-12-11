@@ -4,11 +4,14 @@ category: packages
 
 ## ui-motion
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
+### Components
+The `ui-motion` package contains the following:
+- [Transition](#Transition)
 
 ### Installation
 
@@ -31,13 +34,6 @@ const HeadingWithTransition = () => {
   )
 }
 ```
-
-### Components
-The `ui-motion` package contains the following:
-- [Transition](#Transition)
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-motion.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-motion

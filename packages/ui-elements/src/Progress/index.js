@@ -38,7 +38,7 @@ id: DeprecatedProgress
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use ProgressBar or ProgressCircle from ui-progress instead')
+@deprecated('7.0.0', null, 'Use Progress from ui-progress instead.')
 @testable()
 class Progress extends Component {
   static propTypes = {

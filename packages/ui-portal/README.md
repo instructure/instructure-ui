@@ -4,10 +4,16 @@ category: packages
 
 ## ui-portal
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+
+### Components
+The `ui-portal` package contains the following:
+- [Portal](#Portal)
+
 
 ### Installation
 
@@ -29,18 +35,6 @@ const MyPortal = () => {
   )
 }
 ```
-
-### Components
-The `ui-portal` package contains the following:
-- [Portal](#Portal)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-portal.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-portal

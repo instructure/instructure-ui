@@ -4,11 +4,23 @@ category: packages
 
 ## ui-a11y
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
+### Deprecated Components
+The `ui-a11y` package contains will be removed in v7.0.0. Please update your imports as follows:
+- `AccessibleContent` will be removed in version 7.0.0. Use [AccessibleContent](#AccessibleContent) from [ui-a11y-content](#ui-a11y-content) instead.
+- `PresentationContent` will be removed in version 7.0.0. Use [PresentationContent](#PresentationContent) [ui-a11y-content](#ui-a11y-content) instead.
+- `ScreenReaderContent` will be removed in version 7.0.0. Use [ScreenReaderContent](#ScreenReaderContent) [ui-a11y-content](#ui-a11y-content) instead.
+
+### Deprecated Utilities
+- `Dialog` will be removed in version 7.0.0. Use [Dialog](#Dialog) from [ui-dialog](#ui-dialog) instead.
+- `findTabbable` will be removed in version 7.0.0. Use [findTabbable](#findTabbable) from [ui-dom-utils](#ui-dom-utils) instead.
+- `findFocusable` will be removed in version 7.0.0. Use [findFocusable](#findFocusable) from [ui-dom-utils](#ui-dom-utils) instead.
+- `FocusRegion` will be removed in version 7.0.0. Use [FocusRegion](#FocusRegion) from [ui-a11y-utils](#ui-a11y-utils) instead.
+- `scopeTab` will be removed in version 7.0.0. Use [findTabbable](#findTabbable) from [ui-a11y-utils](#ui-a11y-utils) instead.
 
 ### Installation
 
@@ -30,28 +42,6 @@ const MyAccessibleContent = () => {
   )
 }
 ```
-
-### Components
-The `ui-a11y` package contains the following components:
-- `AccessibleContent` will be removed in version 7.0.0. Use the [AccessibleContent from ui-a11y-content](#AccessibleContent) instead.
-- [Dialog](#Dialog)
-- `PresentationContent` will be removed in version 7.0.0. Use the [PresentationContent from ui-a11y-content](#PresentationContent) instead.
-- `ScreenReaderContent` will be removed in version 7.0.0. Use the [ScreenReaderContent from ui-a11y-content](#ScreenReaderContent) instead.
-
-### Utilities
-The `ui-a11y` package contains the following utilities:
-- [findTabbable](#findTabbable)
-- [findFocusable](#findFocusable)
-- [FocusManager](#FocusManager)
-- [scopeTab](#scopeTab)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-a11y.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-a11y

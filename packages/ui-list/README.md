@@ -4,12 +4,19 @@ category: packages
 
 ## ui-list
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-Components for displaying vertical or horizontal Lists.
+Components for displaying vertical or horizontal lists.
+
+
+### Components
+The `ui-list` package contains the following:
+- [InlineList](#InlineList)
+- [List](#List)
+
 
 ### Installation
 
@@ -47,19 +54,6 @@ const MyList = () => {
   )
 }
 ```
-
-### Components
-The `ui-list` package contains the following:
-- [InlineList](#InlineList)
-- [List](#List)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-list.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-list

@@ -4,12 +4,19 @@ category: packages
 
 ## ui-truncate-text
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A TruncateText component made by Instructure Inc.
+
+
+### Components
+
+The `ui-truncate-text` package contains the following:
+- [TruncateText](#TruncateText)
+
 
 ### Installation
 
@@ -19,6 +26,9 @@ yarn add @instructure/ui-truncate-text
 
 ### Usage
 ```js
+---
+example: false
+---
 import React from 'react'
 import { TruncateText } from '@instructure/ui-truncate-text'
 
@@ -34,10 +44,6 @@ const MyTruncateText = () => {
 }
 ```
 
-### Components
-
-The ui-truncate-text package contains the following:
-- [TruncateText](#TruncateText)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-truncate-text.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-truncate-text

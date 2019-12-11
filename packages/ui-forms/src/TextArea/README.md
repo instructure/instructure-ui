@@ -2,9 +2,8 @@
 describes: DeprecatedTextArea
 id: DeprecatedTextArea__README
 ---
-**DEPRECATED:** TextArea will be removed from `ui-forms` in version 7.0.0. Use the [TextArea](#TextArea) from [ui-text-area](#ui-text-area) instead.
-
-___
+**DEPRECATED:** TextArea will be removed from `ui-forms` in version 7.0.0. Use the [TextArea](#TextArea) from [ui-text-area](#ui-text-area) instead. Codemods are available to automatically update imports to the new package.
+***
 
 TextArea renders a standard HTML `textarea` element. By default, TextArea will
 resize to fit its content. Use the `maxHeight` property to set a limit on the

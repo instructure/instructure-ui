@@ -4,10 +4,23 @@ category: packages
 
 ## ui-overlays
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+
+### Components
+The `ui-overlays` package contains the following:
+- [Mask](#Mask)
+- [Overlay](#Overlay)
+
+### Deprecated components
+The following components have been deprecated and will be removed from the `ui-overlays` package in v 7.0.0:
+- [Modal](#DeprecatedModal) \(use [Modal from ui-modal](#Modal) instead)
+- [Popover](#DeprecatedPopover) \(use [Popover from ui-popover](#Popover) instead)
+- [Tooltip](#DeprecatedTooltip) \(use [Tooltip from ui-tooltip](#Tooltip) instead)
+- [Tray](#DeprecatedTray) \(use [Tray from ui-tray](#Tray) instead)
 
 
 ### Installation
@@ -30,27 +43,6 @@ const MyMask = () => {
   )
 }
 ```
-
-### Components
-The `ui-overlays` package contains the following:
-- [Mask](#Mask)
-- [Overlay](#Overlay)
-- Popover will be removed in version 7.0.0. Use the [Popover from ui-popover](#Popover) instead.
-- Tooltip will be removed in version 7.0.0. Use the [Tooltip from ui-tooltip](#Tooltip) instead.
-- Tray will be removed in version 7.0.0. Use the [Tray from ui-tray](#Tray) instead.
-
-### Deprecated components
-The following components have been deprecated and will be removed from the `ui-overlays` package:
-- [Popover](#DeprecatedPopover) \(use [Popover from ui-popover](#Popover) instead)
-- [Tooltip](#DeprecatedTooltip) \(use [Tooltip from ui-tooltip](#Tooltip) instead)
-- [Modal](#DeprecatedModal) \(use [Modal from ui-modal](#Modal) instead)
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-overlays.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-overlays

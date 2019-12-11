@@ -4,12 +4,18 @@ category: packages
 
 ## ui-avatar
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 An image or letters that represents a user.
+
+
+
+### Components
+The `ui-avatar` package contains the following:
+- [Avatar](#Avatar)
 
 ### Installation
 
@@ -17,26 +23,25 @@ An image or letters that represents a user.
 yarn add @instructure/ui-avatar
 ```
 
-### Components
-The `ui-avatar` package contains the following:
-- [Avatar](#Avatar)
-
-
 ### Usage
 ```jsx
 ---
 example: false
 ---
-<Avatar name="Kyle Montgomery" src={avatarSquare} shape="rectangle" margin="0 small 0 0" />
+import React from 'react'
+import { Avatar } from '@instructure/ui-avatar'
+
+const MyAvatar = () => {
+  return (
+    <Avatar
+      name="Kyle Montgomery"
+      src={avatarSquare}
+      shape="rectangle"
+      margin="0 small 0 0"
+    />
+  )
+}
 ```
-
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-avatar.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-avatar

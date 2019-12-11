@@ -1,13 +1,19 @@
 ---
 describes: Avatar
 ---
-### Important v8.0.0 upgrade notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. These prop changes and other things to note are described below.
 
-- **variant** has been updated to `shape`
-- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
-
-***
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="none" title="Upgrade Notes for v8.0.0">
+    <Figure.Item>Codemods are available to automatically update imports to the new package as well as any props that have changed. These prop changes and other things to note are described below</Figure.Item>
+    <Figure.Item><code>variant</code> has been updated to <code>shape</code></Figure.Item>
+    <Figure.Item>the boolean <code>inline</code> has been updated to <code>display</code> with options ('inline-block' or 'block')</Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
 When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
 

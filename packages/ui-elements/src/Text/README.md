@@ -3,8 +3,7 @@ describes: DeprecatedText
 id: DeprecatedText__README
 ---
 
-**DEPRECATED:** Text will be removed from `ui-elements` in version 7.0.0. Use the [Text](#Text) from [ui-text](#ui-text) instead.
-
+**DEPRECATED:** Text will be removed from `ui-elements` in version 7.0.0. Use [Text](#Text) from [ui-text](#ui-text) instead. Codemods are available to automatically update imports to the new package.
 ***
 
 A component for styling textual content

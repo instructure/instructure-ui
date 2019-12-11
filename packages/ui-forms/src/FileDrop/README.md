@@ -3,10 +3,8 @@ describes: DeprecatedFileDrop
 id: DeprecatedFileDrop__README
 ---
 
-**DEPRECATED:** DeprecatedFileDrop will be removed from `ui-forms` in version 7.0.0. Use the [FileDrop from ui-file-drop](#FileDrop) instead.
-
-### Important Upgrade Notes
-Codemods will be available to automatically update imports to the new package.
+**DEPRECATED:** FileDrop will be removed from `ui-forms` in version 7.0.0. Use the [FileDrop](#FileDrop) from [ui-file-drop](#ui-file-drop) instead. Codemods will be available to automatically update imports to the new package.
+***
 
 ```js
 ---

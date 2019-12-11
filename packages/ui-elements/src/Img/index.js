@@ -44,7 +44,7 @@ id: DeprecatedImg
 @deprecated('7.0.0', {
   cover: 'constrain'
 })
-@deprecated('7.0.0', null, 'Use Img from ui-img instead')
+@deprecated('7.0.0', null, 'Use Img from ui-img instead.')
 @themeable(theme, styles)
 class Img extends Component {
   static propTypes = {

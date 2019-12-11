@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-i18n",
   "version": "6.16.0",
-  "description": "A UI component library made by Instructure Inc.",
+  "description": "Helper components and utilities for internationalization.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",

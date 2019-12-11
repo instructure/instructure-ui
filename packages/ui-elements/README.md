@@ -4,10 +4,28 @@ category: packages
 
 ## ui-elements
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+### Components
+The `ui-elements` package will be removed in version 7.0.0. Please update your imports as follows:
+- [Avatar](#DeprecatedAvatar) will be removed in version 7.0.0. Use [Avatar](#Avatar) from [ui-avatar](#ui-avatar).
+- [Badge](#DeprecatedBadge) will be removed in version 7.0.0. Use [Badge](#Badge) from [ui-badge](#ui-badge).
+- [Img](#DeprecatedImg) will be removed in version 7.0.0. Use [Img](#Img) from [ui-img](#ui-img).
+- [Link](#DeprecatedLink) will be removed in version 7.0.0. Use [Link](#Link) from [ui-link](#ui-link).
+- [Heading](#DeprecatedHeading) will be removed in version 7.0.0. Use [Heading](#Heading) from [ui-heading](#ui-heading).
+- [List](#DeprecatedList) will be removed in version 7.0.0. Use [List](#List) or [InlineList](#InlineList) from [ui-list](#ui-list).
+- [MetricsList](#DeprecatedMetricsList) will be removed in version 7.0.0. Use [MetricGroup](#MetricGroup) or [Metric](#Metric) from [ui-metric](#ui-metric).
+- [Pill](#DeprecatedPill) will be removed in version 7.0.0. Use [Pill](#Pill) from [ui-pill](#ui-pill).
+- [Progress](#DeprecatedProgress) will be removed in version 7.0.0. Use [ProgressBar](#ProgressBar) or [ProgressCircle](#ProgressCircle) from [ui-progress](#ui-progress).
+- [Rating](#DeprecatedRating) will be removed in version 7.0.0. Use [Rating](#Rating) in [ui-rating](#ui-rating).
+- [Spinner](#DeprecatedSpinner) will be removed in version 7.0.0. Use [Spinner](#Spinner) from [ui-spinner](#ui-spinner).
+- [Table](#DeprecatedTable) has been deprecated within this package. Use [Table](#Table) from [ui-table](#ui-table).
+- [Tag](#DeprecatedTag) will be removed in version 7.0.0. Use [Tag](#Tag) from [ui-tag](#ui-tag).
+- [Text](#DeprecatedText) will be removed in version 7.0.0. Use [Text](#Text) from [ui-text](#ui-text).
+- [TruncateText](#DeprecatedTruncateText) will be removed in version 7.0.0. Use [TruncateText](#TruncateText) from [ui-truncate-text](#ui-truncate-text).
 
 
 ### Installation
@@ -17,44 +35,7 @@ yarn add @instructure/ui-elements
 ```
 
 ### Usage
-
-```js
-import React from 'react'
-import { Avatar } from '@instructure/ui-elements'
-
-const MyAvatar = () => {
-  return (
-    <Avatar name="Kyle Montgomery" />
-  )
-}
-```
-
-### Components
-The `ui-elements` package will be removed in version 7.0.0. Please update your imports as follows:
-- [Avatar](#DeprecatedAvatar) will be removed in version 7.0.0. Use the [Avatar](#Avatar) from [ui-avatar](#ui-avatar).
-- [Badge](#DeprecatedBadge) will be removed in version 7.0.0. Use the [Badge](#Badge) from [ui-badge](#ui-badge).
-- [Img](#DeprecatedImg) will be removed in version 7.0.0. Use [Img](#Img) from [ui-img](#ui-img).
-- [Link](#DeprecatedLink) will be removed in version 7.0.0. Use [Link](#Link) from [ui-link](#ui-link).
-- [Heading](#DeprecatedHeading) will be removed in version 7.0.0. Use the [Heading](#Heading) from [ui-heading](#ui-heading).
-- [List](#DeprecatedList) will be removed in version 7.0.0. Use [List](#List) or [InlineList](#InlineList) from [ui-list](#ui-list).
-- [MetricsList](#DeprecatedMetricsList) will be removed in version 7.0.0. Use the [MetricGroup](#MetricGroup) or [Metric](#Metric) from [ui-metric](#ui-metric).
-- [Pill](#DeprecatedPill) will be removed in version 7.0.0. Use [Pill](#Pill) from [ui-pill](#ui-pill).
-- Progress will be removed in version 7.0.0. Use [ProgressBar](#ProgressBar) or [ProgressCircle](#ProgressCircle) from `ui-progress` instead.
-- [Rating](#DeprecatedRating) will be removed in version 7.0.0. Use the [Rating](#Rating) in [ui-rating](#ui-rating).
-- [Spinner](#DeprecatedSpinner) will be removed in version 7.0.0. Use [Spinner](#Spinner) from [ui-spinner](#ui-spinner).
-- [Table](#DeprecatedTable) has been deprecated within this package. Use [Table](#Table) from [ui-table](#ui-table).
-- [Tag](#DeprecatedTag) will be removed in version 7.0.0. Use [Tag](#Tag) from [ui-tag](#ui-tag).
-- [Text](#DeprecatedText) will be removed in version 7.0.0. Use [Text](#Text) from [ui-text](#ui-text).
-- [TruncateText](#DeprecatedTruncateText) will be removed in version 7.0.0. Use [TruncateText](#TruncateText) from [ui-truncate-text](#ui-truncate-text).
-
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
+For detailed usage and documentation, see individual components.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-elements.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-elements

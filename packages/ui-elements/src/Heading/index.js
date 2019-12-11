@@ -41,7 +41,7 @@ id: DeprecatedHeading
 ---
 **/
 
-@deprecated('7.0.0', null, 'Use Heading from ui-heading instead')
+@deprecated('7.0.0', null, 'Use Heading from ui-heading instead.')
 @testable()
 @themeable(theme, styles)
 class Heading extends Component {

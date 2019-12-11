@@ -3,9 +3,8 @@ describes: DeprecatedTruncateText
 id: DeprecatedTruncateText__README
 ---
 
-**DEPRECATED:** TruncateText will be removed from `ui-elements` in version 7.0.0. Use the [TruncateText](#TruncateText) from [ui-truncate-text](#ui-truncate-text) instead.
-
-___
+**DEPRECATED:** TruncateText will be removed from `ui-elements` in version 7.0.0. Use the [TruncateText](#TruncateText) from [ui-truncate-text](#ui-truncate-text) instead. Codemods are available to automatically update imports to the new package.
+***
 
 A component for truncating text content.
 

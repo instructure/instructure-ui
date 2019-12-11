@@ -3,9 +3,8 @@ describes: DeprecatedCheckboxGroup
 id: DeprecatedCheckboxGroup__README
 ---
 
-**DEPRECATED:** CheckboxGroup will be removed from `ui-forms` in version 7.0.0. Use the [CheckboxGroup](#CheckboxGroup) from [ui-checkbox](#ui-checkbox) instead.
-
-___
+**DEPRECATED:** CheckboxGroup will be removed from `ui-forms` in version 7.0.0. Use the [CheckboxGroup](#CheckboxGroup) from [ui-checkbox](#ui-checkbox) instead. Codemods are available to automatically update imports to the new package.
+***
 
 
 A `<CheckboxGroup/>` is a group of [Checkbox](#Checkbox) components that share the same name. You can

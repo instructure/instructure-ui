@@ -4,18 +4,24 @@ category: packages
 
 ## ui-byline
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+A byline component.
+
+### Components
+The `ui-byline` package contains the following:
+- [Byline](#Byline)
+- [Media](#Media) will be removed in v8.0.0, **use Byline instead**
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-byline
 ```
+
 ### Usage
 ```js
 import React from 'react'
@@ -29,12 +35,6 @@ const MyByline = () => {
   )
 }
 ```
-
-### Components
-The ui-byline package contains the following:
-- [Byline](#Byline)
-- [Media](#Media) will be removed in v8.0.0 - use Byline instead
-
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-byline.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-byline

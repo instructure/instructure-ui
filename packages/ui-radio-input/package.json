@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-radio-input",
   "version": "6.16.0",
-  "description": "A RadioInput component made by Instructure Inc.",
+  "description": "A styled HTML input type='radio' element",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",

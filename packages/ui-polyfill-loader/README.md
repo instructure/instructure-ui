@@ -4,14 +4,13 @@ category: packages
 
 ## babel-polyfill-loader
 
-A [webpack](https://www.npmjs.com/package/webpack) loader that generates a
-customized polyfill
-
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
+A [webpack](https://www.npmjs.com/package/webpack) loader that generates a
+customized polyfill
 ### Installation
 
 ```sh

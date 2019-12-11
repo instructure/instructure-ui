@@ -4,12 +4,17 @@ category: packages
 
 ## ui-tooltip
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component for showing small text-only overlays on hover/focus.
+
+### Components
+The `ui-tooltip` package contains the following:
+- [Tooltup](#Tooltip)
+
 
 ### Installation
 
@@ -18,7 +23,6 @@ yarn add @instructure/ui-tooltip
 ```
 
 ### Usage
-For detailed usage and documentation, see [Tooltip](#Tooltip).
 
 ```js
 import React from 'react'
@@ -32,6 +36,8 @@ const MyTooltip = () => {
   )
 }
 ```
+For detailed usage and documentation, see Tooltip examples.
+
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-tooltip.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-tooltip

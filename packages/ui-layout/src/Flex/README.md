@@ -3,15 +3,8 @@ describes: DeprecatedFlex
 id: DeprecatedFlex__README
 ---
 
-**DEPRECATED:** Flex will be removed from `ui-layout` in version 7.0.0. Use the [Flex from ui-flex](#Flex) instead.
-
-### Important Upgrade Notes
-Codemods are available to automatically update imports to the new package and handle the prop name changes listed below.
-
-These props have updated names:
-- The `inline` boolean prop has been changed to `display: ['flex', 'inline-flex']`
-- The `wrapItems` boolean prop has been changed to `wrap: ['wrap', 'no-wrap', 'wrap-reverse']`
-- `visualDebug` has been changed to `withVisualDebug`
+**DEPRECATED:** Flex will be removed from `ui-layout` in version 7.0.0. Use [Flex](#Flex) from [ui-flex](#ui-flex) instead. Codemods are available to automatically update imports to the new package.
+***
 
 ### Layout direction
 

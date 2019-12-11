@@ -4,10 +4,15 @@ category: packages
 
 ## ui-svg-images
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+### Components
+The `ui-svg-images` package contains the following:
+- [InlineSVG](#InlineSVG)
+- [SVGIcon](#SVGIcon)
 
 
 ### Installation
@@ -15,6 +20,9 @@ category: packages
 ```sh
 yarn add @instructure/ui-svg-images
 ```
+
+### Usage
+For detailed usage and documentation, see component examples.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-svg-images.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-svg-images

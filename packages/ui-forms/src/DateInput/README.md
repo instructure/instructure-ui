@@ -4,6 +4,7 @@ id: DeprecatedDateInput__README
 ---
 
 **DEPRECATED:** Use the controlled [DateInput from ui-date-input](#DateInput) instead. View that [documentation](#DateInput) for examples of managing state for a `DateInput`.
+***
 
 A DateInput component is used to input a date either with a
 [DatePicker](#DatePicker) in a [Popover](#Popover), or by typing a date into a

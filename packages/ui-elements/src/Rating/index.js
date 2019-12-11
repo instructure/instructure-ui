@@ -43,7 +43,7 @@ category: components/deprecated
 id: DeprecatedRating
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-rating instead')
+@deprecated('7.0.0', null, 'Use Rating from ui-rating instead.')
 @testable()
 @themeable(theme, styles)
 class Rating extends Component {

@@ -4,35 +4,44 @@ category: packages
 
 ## ui-billboard
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-Use Billboard for empty states, 404 pages, redirects, etc.
+A billboard component for empty states, 404 pages, redirects, etc.
+
+
+### Components
+The `ui-billboard` package contains the following:
+- [Billboard](#Billboard)
+
 
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-billboard
+yarn add @instructure/ui-billboard
 ```
 
 ### Usage
 
 ```js
 ---
-example: true
+example: false
 ---
-<Billboard
-  size="medium"
-  heading="Well, this is awkward."
-  message="Think there should be something here?"
-  hero={<Img src={placeholderImage(900, 500)} />} />
-```
+import React from 'react'
+import { Billboard } from '@instructure/ui-billboard'
 
-### Components
-The `ui-billboard` package contains the following:
-- [Billboard](#Billboard)
+const MyBillboard = () => {
+  return (
+    <Billboard
+      size="medium"
+      heading="Well, this is awkward."
+      message="Think there should be something here?"
+      hero={<Img src={placeholderImage(900, 500)} />} />
+  )
+}
+```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-billboard.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-billboard

@@ -4,22 +4,24 @@ category: packages
 
 ## ui-range-input
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A styled HTML range input.
+
+
+### Components
+The `ui-range-input` package contains the following:
+- [RangeInput](#RangeInput)
+
 
 ### Installation
 
 ```sh
 yarn add @instructure/ui-range-input
 ```
-
-### Components
-The `ui-range-input` package contains the following:
-- [RangeInput](#RangeInput)
 
 ### Usage
 ```jsx

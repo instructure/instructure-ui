@@ -4,11 +4,16 @@ category: packages
 
 ## ui-menu
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
+A dropdown menu component.
+
+### Components
+The `ui-menu` package contains the following:
+- [Menu](#Menu)
 
 ### Installation
 
@@ -31,16 +36,6 @@ const MyMenu = () => {
   )
 }
 ```
-
-### Components
-The `ui-menu` package contains the following:
-- [Menu](#Menu)
-
-### Contribute
-
-See the [contributing guidelines](#contributing) for details.
-
-### License
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-menu.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-menu

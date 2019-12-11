@@ -4,12 +4,12 @@ category: packages
 
 ## instui-config
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A package containing Instructure-UI specific configuration data for operations
+A package containing Instructure UI specific configuration data for operations
 such as upgrades and codemod scripts.
 
 ### Installation

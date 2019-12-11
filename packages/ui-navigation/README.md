@@ -4,10 +4,17 @@ category: packages
 
 ## ui-navigation
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+Main and application level navigational components.
+
+### Components
+The `ui-navigation` package contains the following:
+- [Navigation](#Navigation)
+- [AppNav](#AppNav)
 
 
 ### Installation
@@ -21,7 +28,7 @@ yarn add @instructure/ui-navigation
 ```js
 import React from 'react'
 import { Navigation } from '@instructure/ui-navigation'
-import { Avatar } from '@instructure/ui-elements'
+import { Avatar } from '@instructure/ui-avatar'
 
 const MyNavigation = () => {
   return (
@@ -35,17 +42,7 @@ const MyNavigation = () => {
   )
 }
 ```
-
-### Components
-The `ui-navigation` package contains the following:
-- [Navigation](#Navigation)
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
+For detailed usage and documentation, see individual component examples.
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-navigation.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-navigation

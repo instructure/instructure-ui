@@ -4,12 +4,17 @@ category: packages
 
 ## ui-popover
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A component for hiding or showing content based on user interaction.
+
+### Components
+The `ui-popover` package contains the following:
+- [Popover](#Popover)
+
 
 ### Installation
 

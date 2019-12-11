@@ -2,16 +2,16 @@
 category: packages
 ---
 
-## @instructure/ui-presets
+## ui-presets
+
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
+[![Code of Conduct][coc-badge]][coc]
 
 **DEPRECATED:** use the individual presets packages instead.
 
 Shared config for building and testing UI code.
-
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
-[![Code of Conduct][coc-badge]][coc]
 
 ### Installation
 

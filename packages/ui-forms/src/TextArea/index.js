@@ -37,7 +37,7 @@ category: components/deprecated
 id: DeprecatedTextArea
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-text-area instead.')
+@deprecated('7.0.0', null, 'Use TextArea from ui-text-area instead.')
 
 class TextArea extends Component {
   static propTypes = {

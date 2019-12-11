@@ -4,9 +4,9 @@ category: packages
 
 ## ui-file-drop
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 FileDrop is a flexible facade for an HTML file input.
@@ -16,14 +16,14 @@ FileDrop is a flexible facade for an HTML file input.
 The `ui-file-drop` package contains the following:
 - [FileDrop](#FileDrop)
 
-### Usage
-For detailed usage and documentation, see [FileDrop](#FileDrop).
-
 ### Installation
-
 ```sh
 yarn add @instructure/ui-file-drop
 ```
+
+### Usage
+For detailed usage and documentation, see [FileDrop](#FileDrop).
+
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-file-drop.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-file-drop

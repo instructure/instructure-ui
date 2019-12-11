@@ -41,7 +41,7 @@ category: components/deprecated
 id: DeprecatedTooltip
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-tooltip instead')
+@deprecated('7.0.0', null, 'Use Tooltip from ui-tooltip instead.')
 @testable()
 @themeable(theme, styles)
 class Tooltip extends Component {

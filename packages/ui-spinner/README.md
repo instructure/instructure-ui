@@ -4,12 +4,17 @@ category: packages
 
 ## ui-spinner
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A spinner/loading component
+
+### Components
+The `ui-spinner` package contains the following:
+- [Spinner](#Spinner)
+
 
 ### Installation
 
@@ -17,16 +22,19 @@ A spinner/loading component
 yarn add @instructure/ui-spinner
 ```
 
-### Components
-The `ui-spinner` package contains the following:
-- [Spinner](#Spinner)
-
 ### Usage
 ```jsx
 ---
 example: false
 ---
-<Spinner renderTitle="Loading" />
+import React from 'react'
+import { Spinner } from '@instructure/ui-spinner'
+
+const MySpinner = () => {
+  return (
+    <Spinner renderTitle="Loading" />
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-spinner.svg

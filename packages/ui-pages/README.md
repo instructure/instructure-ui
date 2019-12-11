@@ -4,12 +4,23 @@ category: packages
 
 ## ui-pages
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-### Example
+### Components
+The `ui-pages` package contains the following:
+- [Pages](#Pages)
+
+
+### Installation
+
+```sh
+yarn add @instructure/ui-pages
+```
+
+### Usage
 
 ```js
 import React from 'react'
@@ -27,12 +38,6 @@ const MyPages = () => {
     </Pages>
   )
 }
-```
-
-### Installation
-
-```sh
-yarn add @instructure/ui-pages
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-pages.svg

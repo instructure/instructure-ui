@@ -4,27 +4,27 @@ category: packages
 
 ## ui-editable
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
-
-### Installation
-
-```sh
-yarn add @instructure/ui-editable
-```
-
-### Usage
-
-It's best to look at source examples in the [Editable component docs.](#Editable)
+Supports in-place editing of content.
 
 ### Components
 The `ui-editable` packages contains the following:
 - [Editable](#Editable)
 - [InPlaceEdit](#InPlaceEdit)
+
+### Installation
+```sh
+yarn add @instructure/ui-editable
+```
+
+### Usage
+For detailed usage and documentation, see [Editable](#Editable).
+
+
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-editable.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-editable

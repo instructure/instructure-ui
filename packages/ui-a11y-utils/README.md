@@ -4,18 +4,13 @@ category: packages
 
 ## ui-a11y-utils
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A collection of utilities for managing focus and screen reader behavior
 
-### Installation
-
-```sh
-yarn add @instructure/ui-a11y-utils
-```
 ### Utilities
 The `ui-a11y-utils` package contains the following utilities:
 - [FocusRegion](#FocusRegion)
@@ -24,6 +19,13 @@ The `ui-a11y-utils` package contains the following utilities:
 - [FocusRegionManager](#FocusRegionManager)
 - [scopeTab](#scopeTab)
 - [hasVisibleChildren](#hasVisibleChildren)
+
+
+### Installation
+
+```sh
+yarn add @instructure/ui-a11y-utils
+```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-a11y-utils.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-a11y-utils

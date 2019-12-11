@@ -4,10 +4,16 @@ category: packages
 
 ## ui-alerts
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+An alert component.
+
+### Components
+The `ui-alerts` package contains the following:
+- [Alert](#Alert)
 
 
 ### Installation
@@ -28,17 +34,6 @@ const MyAlert = function () {
   )
 }
 ```
-
-### Components
-The `ui-alerts` package contains the following:
-- [Alert](#Alert)
-
-### Contribute
-See the [contributing guidelines](#contributing) for details.
-
-### License
-
-[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-alerts.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-alerts

@@ -4,10 +4,21 @@ category: packages
 
 ## ui-form-field
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][license]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
+
+Form layout components.
+### Components
+The `ui-form-field` package contains the following:
+- [FormField](#FormField)
+- [FormFieldGroup](#FormFieldGroup)
+- [FormFieldLabel](#FormFieldLabel)
+- [FormFieldLayout](#FormFieldLayout)
+- [FormFieldMessage](#FormFieldMessage)
+- [FormFieldMessages](#FormFieldMessages)
+  
 
 ### Installation
 
@@ -29,6 +40,8 @@ const MyFormField = () => {
   )
 }
 ```
+For detailed usage and documentation, see individual components.
+
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-form-field.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-form-field

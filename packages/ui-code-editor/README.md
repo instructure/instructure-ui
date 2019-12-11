@@ -4,12 +4,17 @@ category: packages
 
 ## ui-code-editor
 
-[![npm][npm]][npm-url]
-[![build-status][build-status]][build-status-url]
-[![MIT License][license-badge]][LICENSE]
+[![npm][npm]][npm-url]&nbsp;
+[![build-status][build-status]][build-status-url]&nbsp;
+[![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-A UI component library made by Instructure Inc.
+A code editor component.
+
+### Components
+The `ui-code-editor` package contains the following:
+- [CodeEditor](#CodeEditor)
+
 
 ### Installation
 

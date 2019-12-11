@@ -3,7 +3,8 @@ describes: DeprecatedPopover
 id: DeprecatedPopover__README
 ---
 
-**DEPRECATED:** Popover will be removed from `ui-overlays` in version 7.0.0. Use the [Popover from ui-popover](#Popover) instead.
+**DEPRECATED:** Popover will be removed from `ui-overlays` in version 7.0.0. Use the [Popover](#Popover) from [ui-popover](#ui-popover) instead. Codemods are available to automatically update imports to the new package.
+***
 
 Popovers are actionable containers that are triggered by click. When opened, it remains connected with element that triggered it. Popovers are on the same hierarchy as the [Tray](#Tray) but contains less content.
 
