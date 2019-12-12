@@ -30,6 +30,7 @@ export default function generator ({ colors, typography, borders, spacing }) {
     fontWeight: typography.fontWeightNormal,
     color: colors.textLink,
     textDecoration: 'underline',
+    textDecorationOutsideText: 'none',
 
     focusOutlineWidth: borders.widthMedium,
     focusOutlineColor: colors.borderBrand,

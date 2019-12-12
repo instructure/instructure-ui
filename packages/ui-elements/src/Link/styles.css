@@ -40,7 +40,14 @@ a.root,
 button.root {
   cursor: pointer;
   color: var(--color);
-  text-decoration: var(--textDecoration);
+
+  &.isWithinText {
+    text-decoration: var(--textDecoration);
+  }
+
+  &.isOutsideText {
+    text-decoration: var(--textDecorationOutsideText);
+  }
 
   &:focus {
     color: var(--color);

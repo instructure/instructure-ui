@@ -83,7 +83,11 @@ class Link extends Component {
     /**
     * Set the CSS display property of the Link element. 'auto' sets no display property.
     */
-    display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex'])
+    display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex']),
+    /**
+    * Set `false` to remove default underline if Link does not appear inline with text
+    */
+   isWithinText: PropTypes.bool
   }
 
   static defaultProps = {
@@ -97,7 +101,8 @@ class Link extends Component {
     variant: 'default',
     as: undefined,
     linkRef: function (link) {},
-    iconPlacement: 'start'
+    iconPlacement: 'start',
+    isWithinText: true
   }
 
   handleClick = e => {
@@ -193,14 +198,16 @@ class Link extends Component {
       icon,
       iconPlacement,
       linkRef,
-      elementRef
+      elementRef,
+      isWithinText
     } = this.props
 
     const classes = {
       [styles.root]: true,
       [styles.inverse]: variant === 'inverse',
       [styles[`iconPlacement--${iconPlacement}`]]: icon && this.hasVisibleChildren,
-      [styles.truncates]: this.containsTruncateText
+      [styles.truncates]: this.containsTruncateText,
+      [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
     }
 
     const role = onClick && this.element !== 'button' ? 'button' : null
