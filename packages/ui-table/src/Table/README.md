@@ -760,16 +760,17 @@ guidelines: true
 <Guidelines>
   <Figure recommendation="yes" title="Do">
     <Figure.Item>Column headers can be sortable</Figure.Item>
-    <Figure.Item>Use the <code>small</code> Buttons and Inputs inside cells</Figure.Item>
+    <Figure.Item>Use the <Link href="#CondensedButton">CondensedButton</Link> and <strong>small</strong> inputs inside cells</Figure.Item>
     <Figure.Item>Actions must relate to that row only</Figure.Item>
     <Figure.Item>Use horizontal and vertical alignment that makes sense with the content</Figure.Item>
-    <Figure.Item>Left align US dates and apply i18n</Figure.Item>
-    <Figure.Item>Left align text and alphanumeric</Figure.Item>
-    <Figure.Item>Right align quantities, decimals</Figure.Item>
-    <Figure.Item>Left align column headers, including currency</Figure.Item>
+    <Figure.Item>Start align US dates and apply i18n</Figure.Item>
+    <Figure.Item>Start align text and alphanumeric</Figure.Item>
+    <Figure.Item>Start align currency</Figure.Item>
+    <Figure.Item>End align quantities and decimals</Figure.Item>
+    <Figure.Item>Table headers should have the same start or end alignment as their column contents</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <Figure.Item>Center align more than 4 characters/numbers, choose left or right</Figure.Item>
+    <Figure.Item>Center align more than 4 characters/numbers, choose start or end</Figure.Item>
     <Figure.Item>Use to create a layout</Figure.Item>
     <Figure.Item>Use zebra stripes</Figure.Item>
     <Figure.Item>Bottom align ever</Figure.Item>

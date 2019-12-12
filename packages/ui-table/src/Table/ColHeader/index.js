@@ -124,8 +124,8 @@ class ColHeader extends Component {
               [styles[`flexDirection--${textAlign}`]]: true,
             })}
           >
-            {callRenderProp(children)}
             <div>
+              {callRenderProp(children)}
               {this.renderSortArrow()}
             </div>
           </button>
