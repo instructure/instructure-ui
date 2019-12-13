@@ -191,8 +191,8 @@ function createRenderer () {
     let id = rawId
 
     const modifications = [
-      { regex: new RegExp(/\s/, 'g'), replacement: '-' }, // Convert any whitespace to hyphens
-      { regex: new RegExp('/', 'g'), replacement: '-'} // We use this to parse the url so replace it with a hyphen
+      { regex: /\s/g, replacement: '-' }, // Convert any whitespace to hyphens
+      { regex: /\//g, replacement: '-'} // We use this to parse the url so replace it with a hyphen
     ]
 
     modifications.forEach(({ regex, replacement }) => {
