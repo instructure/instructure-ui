@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-stylesheet",
-  "version": "6.15.0",
+  "version": "6.16.0",
   "description": "A wrapper around a Glamor StyleSheet.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.15.0"
+    "@instructure/ui-babel-preset": "^6.16.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.0",

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.16.0](https://github.com/instructure/instructure-ui/compare/v6.15.0...v6.16.0) (2019-12-13)
+
+
+### Features
+
+* **ui-badge:** add ui-badge package ([8de4dae](https://github.com/instructure/instructure-ui/commit/8de4dae))
+* **ui-elements:** add isWithinText prop to ui-element Link ([9d0ee8e](https://github.com/instructure/instructure-ui/commit/9d0ee8e))
+* **ui-elements,ui-truncate-text:** add ui-truncate-text package ([75500f9](https://github.com/instructure/instructure-ui/commit/75500f9))
+* **ui-spinner:** ui-spinner and design updates ([c80c40c](https://github.com/instructure/instructure-ui/commit/c80c40c))
+
+
+
+
+
 # [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
 
 

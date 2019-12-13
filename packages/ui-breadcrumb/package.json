@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-breadcrumb",
-  "version": "6.15.0",
+  "version": "6.16.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,20 +22,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.15.0",
-    "@instructure/ui-test-utils": "^6.15.0"
+    "@instructure/ui-babel-preset": "^6.16.0",
+    "@instructure/ui-test-utils": "^6.16.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.0",
-    "@instructure/ui-elements": "^6.15.0",
-    "@instructure/ui-icons": "^6.15.0",
-    "@instructure/ui-link": "^6.15.0",
-    "@instructure/ui-prop-types": "^6.15.0",
-    "@instructure/ui-react-utils": "^6.15.0",
-    "@instructure/ui-testable": "^6.15.0",
-    "@instructure/ui-themeable": "^6.15.0",
-    "@instructure/ui-utils": "^6.15.0",
-    "@instructure/ui-view": "^6.15.0",
+    "@instructure/ui-elements": "^6.16.0",
+    "@instructure/ui-icons": "^6.16.0",
+    "@instructure/ui-link": "^6.16.0",
+    "@instructure/ui-prop-types": "^6.16.0",
+    "@instructure/ui-react-utils": "^6.16.0",
+    "@instructure/ui-testable": "^6.16.0",
+    "@instructure/ui-themeable": "^6.16.0",
+    "@instructure/ui-utils": "^6.16.0",
+    "@instructure/ui-view": "^6.16.0",
     "classnames": "^2",
     "prop-types": "^15"
   },

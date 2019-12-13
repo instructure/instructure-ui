@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.16.0](https://github.com/instructure/instructure-ui/compare/v6.15.0...v6.16.0) (2019-12-13)
+
+
+### Bug Fixes
+
+* **ui-docs-client:** remove unnecessary import of ScreenReaderContent ([07d453b](https://github.com/instructure/instructure-ui/commit/07d453b))
+
+
+### Features
+
+* **ui-checkbox:** add ui-checkbox package ([94840fa](https://github.com/instructure/instructure-ui/commit/94840fa))
+* **ui-docs-client:** make content within docs pages navigable via linking ([595f155](https://github.com/instructure/instructure-ui/commit/595f155))
+* **ui-docs-client:** updates to compileMarkdown for id generation ([832f7b2](https://github.com/instructure/instructure-ui/commit/832f7b2))
+* **ui-drawer-layout:** add ui-drawer-layout package ([2c59227](https://github.com/instructure/instructure-ui/commit/2c59227))
+
+
+
+
+
 # [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
 
 

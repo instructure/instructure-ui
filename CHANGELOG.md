@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.16.0](https://github.com/instructure/instructure-ui/compare/v6.15.0...v6.16.0) (2019-12-13)
+
+
+### Bug Fixes
+
+* **ui-a11y-utils:** fix ui-a11y-utils dependencies ([d431666](https://github.com/instructure/instructure-ui/commit/d431666))
+* **ui-docs-client:** remove unnecessary import of ScreenReaderContent ([07d453b](https://github.com/instructure/instructure-ui/commit/07d453b))
+* **ui-modal:** update deprecated lifecycles in modal ([eaa0c9d](https://github.com/instructure/instructure-ui/commit/eaa0c9d))
+* **ui-tooltip:** uncontrolled example broken ([9d19413](https://github.com/instructure/instructure-ui/commit/9d19413))
+
+
+### Features
+
+* **instui-cli,ui-scripts,ui-template-scripts:** add a new ui-template-scripts package ([e3669ba](https://github.com/instructure/instructure-ui/commit/e3669ba))
+* **instui-cli,ui-upgrade-scripts:** add a new ui-upgrade-scripts package ([f5067ee](https://github.com/instructure/instructure-ui/commit/f5067ee))
+* **ui-badge:** add ui-badge package ([8de4dae](https://github.com/instructure/instructure-ui/commit/8de4dae))
+* **ui-buttons:** add a CondensedButton component ([e807b1c](https://github.com/instructure/instructure-ui/commit/e807b1c))
+* **ui-buttons:** add an IconButton component ([e170d95](https://github.com/instructure/instructure-ui/commit/e170d95))
+* **ui-byline,ui-layout:** add ui-byline package ([4be733d](https://github.com/instructure/instructure-ui/commit/4be733d))
+* **ui-checkbox:** add ui-checkbox package ([94840fa](https://github.com/instructure/instructure-ui/commit/94840fa))
+* **ui-docs-client:** make content within docs pages navigable via linking ([595f155](https://github.com/instructure/instructure-ui/commit/595f155))
+* **ui-docs-client:** updates to compileMarkdown for id generation ([832f7b2](https://github.com/instructure/instructure-ui/commit/832f7b2))
+* **ui-drawer-layout:** add ui-drawer-layout package ([2c59227](https://github.com/instructure/instructure-ui/commit/2c59227))
+* **ui-elements:** add isWithinText prop to ui-element Link ([9d0ee8e](https://github.com/instructure/instructure-ui/commit/9d0ee8e))
+* **ui-elements,ui-truncate-text:** add ui-truncate-text package ([75500f9](https://github.com/instructure/instructure-ui/commit/75500f9))
+* **ui-expandable:** add ui-expandable package ([6e5bfd3](https://github.com/instructure/instructure-ui/commit/6e5bfd3))
+* **ui-forms,ui-radio-input:** add ui-radio-input package ([151edd9](https://github.com/instructure/instructure-ui/commit/151edd9))
+* **ui-forms,ui-text-area:** add ui-text-area package ([e116712](https://github.com/instructure/instructure-ui/commit/e116712))
+* **ui-navigation:** remove experimental pill from AppNav ([e460042](https://github.com/instructure/instructure-ui/commit/e460042))
+* **ui-range-input:** ui-range-input package ([48c2786](https://github.com/instructure/instructure-ui/commit/48c2786))
+* **ui-responsive:** add ui-responsive package ([13616d2](https://github.com/instructure/instructure-ui/commit/13616d2))
+* **ui-spinner:** ui-spinner and design updates ([c80c40c](https://github.com/instructure/instructure-ui/commit/c80c40c))
+* **ui-themeable:** update deprecated lifecycles in themeable ([a581b70](https://github.com/instructure/instructure-ui/commit/a581b70))
+* **ui-tray:** ui-tray package ([07d7399](https://github.com/instructure/instructure-ui/commit/07d7399))
+
+
+
+
+
 # [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
 
 

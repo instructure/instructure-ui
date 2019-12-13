@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.16.0](https://github.com/instructure/instructure-ui/compare/v6.15.0...v6.16.0) (2019-12-13)
+
+
+### Features
+
+* **ui-byline,ui-layout:** add ui-byline package ([4be733d](https://github.com/instructure/instructure-ui/commit/4be733d))
+* **ui-docs-client:** make content within docs pages navigable via linking ([595f155](https://github.com/instructure/instructure-ui/commit/595f155))
+* **ui-drawer-layout:** add ui-drawer-layout package ([2c59227](https://github.com/instructure/instructure-ui/commit/2c59227))
+* **ui-responsive:** add ui-responsive package ([13616d2](https://github.com/instructure/instructure-ui/commit/13616d2))
+
+
+
+
+
 # [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
 
 

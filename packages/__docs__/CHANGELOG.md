@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.16.0](https://github.com/instructure/instructure-ui/compare/v6.15.0...v6.16.0) (2019-12-13)
+
+
+### Features
+
+* **ui-badge:** add ui-badge package ([8de4dae](https://github.com/instructure/instructure-ui/commit/8de4dae))
+* **ui-buttons:** add a CondensedButton component ([e807b1c](https://github.com/instructure/instructure-ui/commit/e807b1c))
+* **ui-buttons:** add an IconButton component ([e170d95](https://github.com/instructure/instructure-ui/commit/e170d95))
+* **ui-byline,ui-layout:** add ui-byline package ([4be733d](https://github.com/instructure/instructure-ui/commit/4be733d))
+* **ui-checkbox:** add ui-checkbox package ([94840fa](https://github.com/instructure/instructure-ui/commit/94840fa))
+* **ui-drawer-layout:** add ui-drawer-layout package ([2c59227](https://github.com/instructure/instructure-ui/commit/2c59227))
+* **ui-elements,ui-truncate-text:** add ui-truncate-text package ([75500f9](https://github.com/instructure/instructure-ui/commit/75500f9))
+* **ui-expandable:** add ui-expandable package ([6e5bfd3](https://github.com/instructure/instructure-ui/commit/6e5bfd3))
+* **ui-forms,ui-radio-input:** add ui-radio-input package ([151edd9](https://github.com/instructure/instructure-ui/commit/151edd9))
+* **ui-forms,ui-text-area:** add ui-text-area package ([e116712](https://github.com/instructure/instructure-ui/commit/e116712))
+* **ui-range-input:** ui-range-input package ([48c2786](https://github.com/instructure/instructure-ui/commit/48c2786))
+* **ui-responsive:** add ui-responsive package ([13616d2](https://github.com/instructure/instructure-ui/commit/13616d2))
+* **ui-spinner:** ui-spinner and design updates ([c80c40c](https://github.com/instructure/instructure-ui/commit/c80c40c))
+* **ui-tray:** ui-tray package ([07d7399](https://github.com/instructure/instructure-ui/commit/07d7399))
+
+
+
+
+
 # [6.15.0](https://github.com/instructure/instructure-ui/compare/v6.14.0...v6.15.0) (2019-11-18)
 
 
