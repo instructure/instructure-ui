@@ -46,7 +46,9 @@ const MyComponent = () => {
 
 - Verify that the art-boards are exported as SVG to the `/svg` directory. There should be directories for each variant based on the art-board names (Line and Solid).
 
-- Run `yarn dev` from the repository root directory to start the local server and check the generated output.
+- To ensure everything rebuilds correctly run `yarn && yarn bootstrap`.
+
+- Finally run `yarn dev` from the repository root directory to start the local server and check the generated output.
 
 - Verify icons display correctly by checking under `iconography` in the main nav
 
