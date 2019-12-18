@@ -156,6 +156,7 @@ class Playground extends Component {
           onChange={this.handleChange}
           readOnly={this.props.readOnly}
           attachment="bottom"
+          language="jsx"
         />
       </div>
     )

@@ -41,7 +41,15 @@ const values = {
   white: '#FFFFFF'
 }
 
-const colors = Object.freeze(functionalColors(values))
+// Two Inst colors are not accessible, so adding them for display purposes only
+// in decorative elements
+const appendInaccessibleColors = {
+  ...functionalColors(values),
+  inaccessibleAlert: '#fccb0e',
+  inaccessibleWarning: '#f68e1f'
+}
+
+const colors = Object.freeze(appendInaccessibleColors)
 
 export default colors
 export { colors }

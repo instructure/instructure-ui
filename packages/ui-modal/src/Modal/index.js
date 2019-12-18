@@ -46,6 +46,7 @@ import theme from './theme'
 /**
 ---
 category: components
+tags: overlay, portal, dialog
 ---
 **/
 @testable()

@@ -22,13 +22,45 @@
  * SOFTWARE.
  */
 
-export default function ({ borders, colors, spacing }) {
-  return {
-    borderWidth: borders.widthMedium,
-    borderColor: colors.borderBrand,
-    linkPadding: spacing.xSmall,
-    linkMargin: '0.75rem 0 0.75rem 0.5rem',
-    linkColor: colors.textDarkest,
-    linkColorSelected: colors.link
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { View } from '@instructure/ui-view'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
+
+class ContentWrap extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    maxWidth: PropTypes.string,
+    padding: ThemeablePropTypes.spacing
+  }
+
+  static defaultProps = {
+    children: null,
+    maxWidth: '64rem',
+    padding: 'none medium'
+  }
+
+  render () {
+    const {
+      children,
+      maxWidth,
+      padding
+    } = this.props
+
+    return (
+      <View
+        display="block"
+        width="100%"
+        maxWidth={maxWidth}
+        padding={padding}
+        margin="none auto"
+      >
+        {children}
+      </View>
+    )
   }
 }
+
+export default ContentWrap
+export { ContentWrap }

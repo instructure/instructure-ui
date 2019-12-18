@@ -24,11 +24,13 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import GithubCorner from 'react-github-corner'
 import { Heading } from '@instructure/ui-heading'
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
+import { themeable } from '@instructure/ui-themeable'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -39,16 +41,23 @@ import { ComponentTheme } from '../ComponentTheme'
 
 import { DocPropType } from '../propTypes'
 
+import theme from './theme'
+
+@themeable(theme, null)
 class Document extends Component {
   static propTypes = {
     doc: DocPropType.isRequired,
     description: PropTypes.string,
-    themeKey: PropTypes.string
+    themeKey: PropTypes.string,
+    repository: PropTypes.string,
+    layout: PropTypes.string
   }
 
   static defaultProps = {
     description: undefined,
-    themeKey: undefined
+    themeKey: undefined,
+    repository: undefined,
+    layout: 'small'
   }
 
   state = {
@@ -76,7 +85,7 @@ class Document extends Component {
         >
           Properties
         </Heading>
-        <Properties props={props} />
+        <Properties props={props} layout={this.props.layout} />
       </View>
     ) : null
   }
@@ -196,7 +205,7 @@ import { ${importName} } from '${esPath}'
         >
           Parameters
         </Heading>
-        <Params params={params} />
+        <Params params={params} layout={this.props.layout} />
       </View>
     ) : null
   }
@@ -260,8 +269,9 @@ import { ${importName} } from '${esPath}'
   }
 
   render () {
-    const { doc } = this.props
+    const { doc, repository, layout } = this.props
     const children = doc.children || []
+
     let details = null
 
     if (this.hasDetails(doc)) {
@@ -308,6 +318,7 @@ import { ${importName} } from '${esPath}'
         { details }
         { sections }
         { doc.resource && this.renderUsage() }
+        { (repository && layout !== 'small') && <GithubCorner href={repository} bannerColor={this.theme.githubCornerColor} /> }
       </div>
     )
   }

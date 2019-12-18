@@ -7,18 +7,76 @@
 
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <!-- comment out instructure-themed font until 7.0
-      <link href='https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700' rel='stylesheet'>
-    -->
+    <!-- Proxima Nova fallback font for instructure theme -->
+    <link href='https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700' rel='stylesheet'>
+
+    <!-- font for canvas theme -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
+    <!-- homepage hero image -->
+    <link rel="preload" href="https://instui-docs.s3.us-east-2.amazonaws.com/hero2.jpg" as="image">
+
+    <!-- custom headline font -->
+    <link rel="preload" href="https://instui-docs.s3.us-east-2.amazonaws.com/tiempos-headline-web-bold.woff2" as="font" type="font/woff2" crossorigin>
+
     <style type="text/css">
+      @font-face {
+        font-family: "TiemposHeadlineWebBold";
+        src: url("https://instui-docs.s3.us-east-2.amazonaws.com/tiempos-headline-web-bold.woff2") format("woff2");
+      }
       body {
-        /* same as above
-        font-family: "Proxima Nova", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-        */
-        font-family: "Lato", Helvetica, Arial, sans-serif;
-        background-color: #fff;
+        font-family: "Proxima Nova", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      }
+      #app {
+        height: 100%;
+      }
+      @keyframes docsLoading {
+        to {
+          transform: scale(1) rotate(0);
+        }
+      }
+      .docsLoading {
+        text-align: center;
+        margin: 2rem auto;
+        width: 6rem;
+        height: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .docsLoading__Spinner {
+        display: inline-block;
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+      }
+      .docsLoading__Spinner::before, .docsLoading__Spinner::after {
+        content: "";
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #EA2127;
+        transform: scale(0) rotate(1turn);
+        animation-name: docsLoading;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+      .docsLoading__Spinner::after {
+        animation-direction: alternate-reverse;
+        background: #F68E1F;
+      }
+      .docsLoading__Text {
+        padding-top: 1rem;
+        text-transform: uppercase;
+        font-size: small;
+        color: #666;
       }
     </style>
 
@@ -38,8 +96,13 @@
   </head>
 
   <body>
-    <div id='flash-messages' role='alert'></div>
-    <div id="app">Loading...</div>
+    <div id="flash-messages" role="alert"></div>
+    <div id="app">
+      <div class="docsLoading">
+        <span class="docsLoading__Spinner" aria-hidden="true"></span>
+        <span class="docsLoading__Text">Loading&hellip;</span>
+      </div>
+    </div>
     <div id="nav"></div>
   </body>
 </html>

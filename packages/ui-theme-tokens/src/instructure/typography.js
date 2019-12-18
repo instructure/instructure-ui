@@ -32,6 +32,7 @@ const typography = Object.freeze({
   fontSizeXSmall: '0.75rem',
   fontSizeSmall: '0.875rem',
   fontSizeMedium: '1rem',
+
   fontSizeLarge: '1.25rem',
   fontSizeXLarge: '2.25rem',
   fontSizeXXLarge: '3rem',

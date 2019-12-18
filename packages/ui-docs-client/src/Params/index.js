@@ -31,7 +31,12 @@ import { compileMarkdown } from '../compileMarkdown'
 
 class Params extends Component {
   static propTypes = {
-    params: PropTypes.array.isRequired
+    params: PropTypes.array.isRequired,
+    layout: PropTypes.string
+  }
+
+  static defaultProps = {
+    layout: 'small'
   }
 
   renderRows () {
@@ -60,8 +65,14 @@ class Params extends Component {
   }
 
   render () {
+    const { layout } = this.props
+
     return (
-      <Table caption="Parameters" margin="0 0 large">
+      <Table
+        caption="Parameters"
+        margin="0 0 large"
+        layout={layout === 'small' ? 'stacked' : 'auto'}
+      >
         <Table.Head>
           <Table.Row>
             <Table.ColHeader id="Param">Param</Table.ColHeader>

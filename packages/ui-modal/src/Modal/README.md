@@ -386,6 +386,7 @@ class Example extends React.Component {
                   withBorder={false}
                   renderIcon={IconXSolid}
                   screenReaderLabel="Close"
+                  onClick={this.handleButtonClick}
                 />
               </Flex.Item>
             </Flex>
@@ -398,7 +399,7 @@ class Example extends React.Component {
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.handleButtonClick} withBackground={false} color="primary-inverse" type="submit">Submit</Button>
+            <Button onClick={this.handleButtonClick} withBackground={false} color="primary-inverse" type="submit">Close</Button>
           </Modal.Footer>
         </Modal>
       </div>

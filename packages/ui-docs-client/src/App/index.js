@@ -25,26 +25,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import GithubCorner from 'react-github-corner'
-
 import { themeable } from '@instructure/ui-themeable'
+import { Alert } from '@instructure/ui-alerts'
 import { DrawerLayout } from '@instructure/ui-drawer-layout'
+import { Flex } from '@instructure/ui-flex'
+import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Heading } from '@instructure/ui-heading'
 import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 
 import {
-  IconGithubSolid,
   IconHamburgerSolid,
-  IconHeartSolid,
+  IconHeartLine,
   IconXSolid
 } from '@instructure/ui-icons'
 
+import { ContentWrap } from '../ContentWrap'
 import { Document } from '../Document'
 import { Header } from '../Header'
+import { Hero } from '../Hero'
 import { Nav } from '../Nav'
 import { Theme } from '../Theme'
 import { Select } from '../Select'
@@ -59,13 +61,14 @@ import theme from './theme'
 @themeable(theme, styles)
 class App extends Component {
   static propTypes = {
+    library: LibraryPropType.isRequired,
     docs: PropTypes.object.isRequired,
     parents: PropTypes.object,
     sections: PropTypes.object,
     themes: PropTypes.object,
     icons: PropTypes.object,
     descriptions: PropTypes.object,
-    library: LibraryPropType.isRequired
+    trayWidth: PropTypes.number
   }
 
   static defaultProps = {
@@ -73,7 +76,8 @@ class App extends Component {
     themes: {},
     parents: {},
     sections: {},
-    descriptions: {}
+    descriptions: {},
+    trayWidth: 300
   }
 
   static childContextTypes = {
@@ -84,15 +88,34 @@ class App extends Component {
 
   constructor (props) {
     super()
+    // determine what page we're loading
+    const [page] = this.getPathInfo()
+
+    // if there's room for the tray + 700px, load with the tray open (unless it's the homepage)
+    const smallerScreen = window.matchMedia(`(max-width: ${props.trayWidth + 700}px)`).matches
+    const isHomepage = page === 'index' || typeof page === 'undefined'
+    const showTrayOnPageLoad = !smallerScreen && !isHomepage
 
     this.state = {
-      showMenu: false,
+      showMenu: showTrayOnPageLoad,
       trayOverlay: false,
-      themeKey: Object.keys(props.themes)[0]
+      themeKey: Object.keys(props.themes)[0],
+      contentWidth: undefined
     }
 
     this._content = null
     this._menuTrigger = null
+  }
+
+  componentDidMount () {
+    this._defaultDocumentTitle = document.title
+    this.updateKey()
+
+    window.addEventListener('hashchange', this.updateKey, false)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('hashchange', this.updateKey, false)
   }
 
   getChildContext () {
@@ -118,28 +141,52 @@ class App extends Component {
     }
   }
 
-  updateKey = () => {
+  getPathInfo = () => {
     const { hash } = window.location
 
     const path = hash && hash.split('/')
 
     if (path) {
       const [ page, id ] = path.map(entry => decodeURI(entry.replace('#', '')))
+      return [ page, id ]
+    }
+    return []
+  }
 
-      this.setState({
-        key: page || 'index'
-      }, () => {
-        this.trackPage(page || 'index')
-        if (id) {
-          // After setting state, if we have an id and it corresponds to an element
-          // that exists, scroll it into view
-          const linkedSection = document.getElementById(id)
-          linkedSection && linkedSection.scrollIntoView()
-        } else if (this._content) {
-          // If we don't have an id, scroll the content back to the top
-          this._content.scrollTop = 0
+  computeLayout = (contentWidth = this.state.contentWidth) => {
+    if (contentWidth >= 700 && contentWidth < 1100 ) {
+      return 'medium'
+    } else if (contentWidth >= 1100 && contentWidth < 1300) {
+      return 'large'
+    } else if (contentWidth >= 1300) {
+      return 'x-large'
+    } else {
+      return 'small'
+    }
+  }
+
+  updateKey = () => {
+    const [page, id] = this.getPathInfo()
+
+    if (page) {
+      this.setState(
+        ({ key, contentWidth, trayOverlay, showMenu }) => ({
+          key: page || 'index',
+          showMenu: this.handleShowTrayOnURLChange(key, contentWidth, trayOverlay, showMenu)
+        }),
+        () => {
+          this.trackPage(page || 'index')
+          if (id) {
+            // After setting state, if we have an id and it corresponds to an element
+            // that exists, scroll it into view
+            const linkedSection = document.getElementById(id)
+            linkedSection && linkedSection.scrollIntoView()
+          } else if (this._content) {
+            // If we don't have an id, scroll the content back to the top
+            this._content.scrollTop = 0
+          }
         }
-      })
+      )
     } else {
       this.trackPage('index')
     }
@@ -171,8 +218,35 @@ class App extends Component {
     this.setState({ trayOverlay: trayIsOverlayed })
   }
 
+  handleShowTrayOnURLChange = (key, contentWidth, trayOverlay, showMenu) => {
+    const userIsComingFromHomepage = key === 'index' || typeof key === 'undefined'
+
+    // homepage doesn't know the layout size on initial render
+    const layout = typeof key === 'undefined' ? this.computeLayout() : this.computeLayout(contentWidth)
+
+    const layoutIsLargeEnough = layout === 'large' || layout === 'x-large'
+
+    // if the menu tray is overlaying content, close it when the page changes
+    if (trayOverlay) {
+      return false
+    // if the user is coming from the homepage, make the tray show if the layout is large enough
+    } else if (userIsComingFromHomepage && layoutIsLargeEnough) {
+      return true
+    } else {
+      return showMenu
+    }
+  }
+
   handleTrayDismiss = (e) => {
-    this.setState({showMenu: false})
+    this.setState({ showMenu: false })
+  }
+
+  handleContentSizeChange = (size) => {
+    if (this.state.contentWidth !== size.width) {
+      this.setState({
+        contentWidth: size.width
+      })
+    }
   }
 
   handleTrayExited = (e) => {
@@ -181,22 +255,16 @@ class App extends Component {
     this._menuTrigger && this._menuTrigger.focus()
   }
 
-  componentDidMount () {
-    this._defaultDocumentTitle = document.title
-    this.updateKey()
-
-    window.addEventListener('hashchange', this.updateKey, false)
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('hashchange', this.updateKey, false)
-  }
-
   renderThemeSelect () {
     const themeKeys = Object.keys(this.props.themes)
+    const smallScreen = this.computeLayout() === 'small'
+
     return themeKeys.length > 1 ? (
-      <div className={styles.docsSectionHeader}>
-        <div className={styles.themeSelect}>
+      <Flex
+        margin={smallScreen ? 'none none medium' : 'none none x-small'}
+        justifyItems={!smallScreen ? 'end' : 'start'}
+      >
+        <Flex.Item shouldGrow={smallScreen} shouldShrink={smallScreen}>
           <Select
             name="theme"
             renderLabel="Theme"
@@ -211,21 +279,22 @@ class App extends Component {
               )
             })}
           </Select>
-        </div>
-      </div>
+        </Flex.Item>
+      </Flex>
     ) : null
   }
 
   renderTheme (themeKey) {
     const theme = this.props.themes[themeKey]
-    return (
-      <Section id={themeKey}>
+    const smallerScreens = this.computeLayout() === 'small' || this.computeLayout() === 'medium'
+    const themeContent = (
+      <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
         <Heading
           level="h1"
           as="h2"
           margin="0 0 medium 0"
         >
-          {themeKey}
+          Theme: {themeKey}
         </Heading>
         <Theme
           themeKey={themeKey}
@@ -233,19 +302,25 @@ class App extends Component {
           requirePath={theme.requirePath}
           immutable={theme.resource.immutable}
         />
+      </View>
+    )
+    return (
+      <Section id={themeKey}>
+        {this.renderWrappedContent(themeContent)}
       </Section>
     )
   }
 
   renderIcons (key) {
     const { icons } = this.props
+    const smallerScreens = this.computeLayout() === 'small' || this.computeLayout() === 'medium'
 
-    return (
-      <Section id={key}>
+    const iconContent = (
+      <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
         <Heading
           level="h1"
           as="h2"
-          margin="0 0 medium 0"
+          margin="0 0 medium"
         >
           Iconography
         </Heading>
@@ -254,11 +329,17 @@ class App extends Component {
           selectedFormat={key}
           formats={icons.formats}
         />
+      </View>
+    )
+
+    return (
+      <Section id={key}>
+        {this.renderWrappedContent(iconContent)}
       </Section>
     )
   }
 
-  renderDocument (doc) {
+  renderDocument (doc, repository) {
     const { descriptions, docs, parents } = this.props
     let children = []
 
@@ -268,9 +349,10 @@ class App extends Component {
 
     const description = descriptions[doc.id]
     const heading = (doc.extension !== '.md') ? doc.title : ''
+    const smallerScreens = this.computeLayout() === 'small' || this.computeLayout() === 'medium'
 
-    return (
-      <div>
+    const documentContent = (
+      <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
         { this.renderThemeSelect() }
         { doc.experimental && <div><Pill color="info" margin="small 0">Experimental</Pill></div>}
         <Section id={doc.id} heading={heading}>
@@ -281,9 +363,21 @@ class App extends Component {
             }}
             description={description || doc.description}
             themeKey={this.state.themeKey}
+            repository={repository}
+            layout={this.computeLayout()}
           />
         </Section>
-      </div>
+      </View>
+    )
+
+    return this.renderWrappedContent(documentContent)
+  }
+
+  renderWrappedContent (content, padding="large") {
+    return (
+      <ContentWrap padding={padding}>
+        {content}
+      </ContentWrap>
     )
   }
 
@@ -292,29 +386,60 @@ class App extends Component {
 
     return docs[library.name] ? (
       <Section id={library.name}>
-        {compileMarkdown(docs[library.name].description, { title: library.name })}
+        { /* only serve Instructure UI homepage to Instructure UI docs */ }
+        {library.name === 'instructure-ui' ?
+          this.renderHero() :
+          this.renderWrappedContent(
+            compileMarkdown(docs[library.name].description, { title: library.name }),
+            'medium large'
+        )}
       </Section>
     ) : null
+  }
+
+  renderHero () {
+    const { library, docs, themes } = this.props
+    const themeDocs = {}
+
+    Object.keys(themes).forEach((key) => {
+      themeDocs[key] = {
+        category: 'themes'
+      }
+    })
+    return (
+      <Hero
+        name={library.name}
+        docs={{...docs, ...themeDocs}}
+        description={library.description}
+        repository={library.repository}
+        version={library.version}
+        trayOverlay={this.state.trayOverlay}
+        layout={this.computeLayout()}
+      />
+    )
   }
 
   renderChangeLog () {
     const { docs } = this.props
     return docs.CHANGELOG ? (
       <Section id="CHANGELOG">
-        {compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' })}
+        {this.renderWrappedContent(compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' }))}
       </Section>
     ) : null
   }
 
   renderError () {
+    const errorContent = (
+      <Alert
+        variant="error"
+        margin="small"
+      >
+        <Text weight="bold">Document not found.</Text> Please use the search in the navigation to find any page in this documentation.
+      </Alert>
+    )
     return (
       <Section id="error">
-        <Heading
-          level="h1"
-          as="h2"
-        >
-          Document not found
-        </Heading>
+        {this.renderWrappedContent(errorContent)}
       </Section>
     )
   }
@@ -323,9 +448,10 @@ class App extends Component {
     const doc = this.props.docs[key]
     const theme = this.props.themes[key]
     const icon = this.props.icons.formats[key]
+    const { repository } = this.props.library
 
     if (!key || key === 'index') {
-      return this.renderIndex()
+      return this.renderIndex(this.computeLayout())
     } if (key === 'CHANGELOG') {
       return this.renderChangeLog()
     } else if (key === 'iconography' || icon) {
@@ -333,7 +459,7 @@ class App extends Component {
     } else if (theme) {
       return this.renderTheme(key)
     } else if (doc) {
-      return this.renderDocument(doc, theme)
+      return this.renderDocument(doc, repository)
     } else {
       return this.renderError(key)
     }
@@ -346,67 +472,67 @@ class App extends Component {
     } = this.props.library
 
     return author || repository ? (
-      <div className={styles.footer}>
+      <View
+        as="footer"
+        textAlign="center"
+        padding="large medium"
+      >
         { author && (
-          <span>
-            Made with &nbsp;
-            <IconHeartSolid className={styles.footerIcon} />
-            &nbsp; by {author}. &nbsp;
-          </span>
+          <AccessibleContent alt={`Made with love by ${author}`}>
+            <Text color="secondary" letterSpacing="expanded" transform="uppercase" size="small" lineHeight="fit">
+              Made with <IconHeartLine size="small" className={styles.footerIcon} color="error" /> by {author}.
+            </Text>
+          </AccessibleContent>
         ) }
-        { repository && (
-          <a href={repository} rel="noopener noreferrer" className={styles.githubLink} target="_blank">
-            <IconGithubSolid className={styles.footerIcon} />
-            <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
-          </a>
-        ) }
-      </div>
+      </View>
     ) : null
   }
 
   render () {
     const {
       name,
-      version,
-      repository
+      version
     } = this.props.library
+
+    const key = this.state.key
+    const showMenu = this.state.showMenu
+    const trayWidth = this.props.trayWidth
 
     return (
       <div className={styles.root}>
-        { this.state.trayOverlay && this.state.showMenu && <Mask onClick={this.handleMenuToggle} /> }
-        <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
+        { this.state.trayOverlay && showMenu && <Mask onClick={this.handleTrayDismiss} /> }
+        <DrawerLayout
+          minWidth="700px"
+          onOverlayTrayChange={this.handleOverlayTrayChange}
+        >
           <DrawerLayout.Tray
             label="Navigation"
             placement="start"
-            open={this.state.showMenu}
+            open={showMenu}
             mountNode={this.state.trayOverlay ? document.body : null}
             onDismiss={this.handleTrayDismiss}
             onExited={this.handleTrayExited}
           >
             <View
               as="div"
-              width="16rem"
-              padding="medium none none none"
-              position="relative"
+              width={trayWidth}
+              padding="small none none"
             >
-              <View
-                as="div"
-                position="absolute"
-                insetInlineEnd="0rem"
-                insetBlockStart="0rem"
-              >
+              <View display="block" textAlign="end" margin="xx-small x-small none">
                 <IconButton
                   renderIcon={IconXSolid}
                   screenReaderLabel="Close Navigation"
-                  withBackground={false}
                   withBorder={false}
+                  withBackground={false}
                   onClick={this.handleMenuClose}
-                  margin="small small none none"
+                  shape="circle"
+                  color="secondary"
+                  size="medium"
                 />
               </View>
-              <Header name={name} version={version} />
+              <Header name={name === 'instructure-ui' ? 'Instructure UI' : name} version={version} />
               <Nav
-                selected={this.state.key}
+                selected={key}
                 sections={this.props.sections}
                 docs={this.props.docs}
                 themes={this.props.themes}
@@ -415,37 +541,26 @@ class App extends Component {
             </View>
           </DrawerLayout.Tray>
           <DrawerLayout.Content
-            label={this.state.key || this.props.library.name}
+            label={key || this.props.library.name}
             role="main"
             contentRef={this.handleContentRef}
+            onSizeChange={this.handleContentSizeChange}
           >
-            {!this.state.showMenu && (
+            {!showMenu && (
               <div className={styles.hamburger}>
                 <IconButton
-                  renderIcon={IconHamburgerSolid}
-                  screenReaderLabel="Open Navigation"
-                  withBackground={false}
-                  withBorder={false}
                   onClick={this.handleMenuOpen}
                   elementRef={this.handleMenuTriggerRef}
-                  size="large"
+                  renderIcon={IconHamburgerSolid}
+                  screenReaderLabel="Open Navigation"
+                  shape="circle"
                 />
               </div>
             )}
-            <View
-              as="div"
-              padding="x-large xx-large"
-              minWidth="18rem"
-              height="100vh"
-            >
-              <div className={styles.main} id="main">
-                {this.renderContent(this.state.key)}
-                {this.renderFooter()}
-              </div>
-            </View>
+            {this.renderContent(key, this.computeLayout())}
+            {this.renderFooter()}
           </DrawerLayout.Content>
         </DrawerLayout>
-        { repository && <GithubCorner href={repository} /> }
       </div>
     )
   }

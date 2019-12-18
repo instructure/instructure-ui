@@ -29,7 +29,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { matchComponentTypes, safeCloneElement } from '@instructure/ui-react-utils'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
-import { px } from '@instructure/ui-utils'
+import { createChainedFunction, px } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
@@ -265,7 +265,7 @@ class DrawerLayout extends Component {
           key: child.props.label,
           [DrawerContent.locatorAttribute]: this._id,
           style: this.contentStyle,
-          onSizeChange: this.handleContentSizeChange,
+          onSizeChange: createChainedFunction(this.handleContentSizeChange, child.props.onSizeChange),
           contentRef: handleContentRef,
           shouldTransition: !shouldOverlayTray
         }) : null

@@ -29,6 +29,7 @@
     "@babel/runtime": "^7.9.2",
     "@babel/standalone": "^7.9.5",
     "@instructure/ui-a11y-content": "^6.26.0",
+    "@instructure/ui-alerts": "^6.26.0",
     "@instructure/ui-buttons": "^6.26.0",
     "@instructure/ui-checkbox": "^6.26.0",
     "@instructure/ui-code-editor": "^6.26.0",

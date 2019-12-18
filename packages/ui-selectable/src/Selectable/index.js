@@ -34,6 +34,7 @@ import { uid } from '@instructure/uid'
 /**
 ---
 category: components
+tags: autocomplete, typeahead, combobox, dropdown, search
 ---
 **/
 class Selectable extends Component {

@@ -48,6 +48,7 @@ import { Group } from './Group'
 /**
 ---
 category: components
+tags: form, field, dropdown
 experimental: true
 ---
 **/

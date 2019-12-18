@@ -1,0 +1,87 @@
+.root {
+  display: block;
+  position: relative;
+}
+
+.box {
+  display: block;
+  position: absolute;
+  width: 46%;
+  height: 46%;
+  opacity: 1;
+}
+
+@keyframes scaleUp {
+  to {
+    transform: scale(1);
+  }
+}
+
+.active,
+.blurred {
+  transform: rotate(45deg);
+}
+
+.blurred .box,
+.active .box {
+  transform: scale(0.5);
+  animation-name: scaleUp;
+  animation-duration: 0.5s;
+  animation-direction: alternate;
+}
+
+.active .box {
+  animation-iteration-count: infinite;
+}
+
+.blurred .box {
+  animation-fill-mode: forwards;
+}
+
+.success,
+.failure {
+  transform: scale(0.5);
+  animation-name: scaleUp;
+  animation-duration: 0.25s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+.box:nth-child(1) {
+  inset-inline-start: 0;
+  top: 0;
+  background: var(--colorBrand);
+}
+
+.box:nth-child(2) {
+  inset-inline-end: 0;
+  top: 0;
+  background: var(--colorAlert);
+  animation-delay: 0.1s;
+}
+
+.box:nth-child(3) {
+  inset-inline-start: 0;
+  bottom: 0;
+  background: var(--colorWarning);
+  animation-delay: 0.2s;
+}
+
+.box:nth-child(4) {
+  inset-inline-end: 0;
+  bottom: 0;
+  background: var(--colorDanger);
+  animation-delay: 0.3s;
+}
+
+.faceSuccess {
+  fill: var(--colorFaceSuccess);
+}
+
+.faceFailure {
+  fill: var(--colorFaceFailure);
+}
+
+.features {
+  fill: var(--colorFeatures);
+}

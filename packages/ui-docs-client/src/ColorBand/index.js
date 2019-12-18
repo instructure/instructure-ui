@@ -24,65 +24,63 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-import { ToggleDetails } from '@instructure/ui-toggle-details'
-import { Text } from '@instructure/ui-text'
+import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
+import { themeable } from '@instructure/ui-themeable'
 
-class NavToggle extends Component {
+import styles from './styles.css'
+import theme from './theme'
+
+@themeable(theme, styles)
+class ColorBand extends Component {
   static propTypes = {
-    summary: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf(['section', 'category']),
-    children: PropTypes.node
+    height: PropTypes.string
   }
 
   static defaultProps = {
-    variant: 'section',
-    children: null
-  }
-
-  focus () {
-    this._toggle.focus()
+    height: '1.25rem'
   }
 
   render () {
-    const {
-      summary,
-      variant,
-      ...props
-    } = this.props
-
-    const isSection = variant === 'section'
-
-    const summaryContent = (
-      <View display="block">
-        <Text
-          transform="capitalize"
-          size="medium"
-          color="primary"
-          lineHeight="fit"
-        >
-          {summary}
-        </Text>
-      </View>
-    )
-
     return (
       <View
         display="block"
-        padding="x-small none"
-        margin={isSection ? 'none' : 'none none none x-small'}
+        background="brand"
+        aria-hidden="true"
+        height={this.props.height}
       >
-        <ToggleDetails
-          ref={(c) => { this._toggle = c }}
-          fluidWidth
-          {...props}
-          summary={summaryContent}
-        />
+        <Flex height="100%" alignItems="stretch" justifyItems="end">
+          <Flex.Item size="7%">
+            <span className={
+              classnames({
+                [styles.tile]: true,
+                [styles.colorAlert]: true
+              })
+            }></span>
+          </Flex.Item>
+          <Flex.Item size="10%">
+            <span className={
+              classnames({
+                [styles.tile]: true,
+                [styles.colorWarning]: true
+              })
+            }></span>
+          </Flex.Item>
+          <Flex.Item size="15%">
+            <span className={
+              classnames({
+                [styles.tile]: true,
+                [styles.colorDanger]: true
+              })
+            }></span>
+          </Flex.Item>
+        </Flex>
       </View>
     )
   }
 }
 
-export default NavToggle
-export { NavToggle }
+export default ColorBand
+export { ColorBand }

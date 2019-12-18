@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders, typography }) {
+export default function ({ colors }) {
   return {
-    editorBorderRadius: borders.radiusMedium,
-    closeBackground: colors.backgroundBrand,
-    closeColor: colors.textLightest,
-    fontSize: typography.fontSizeMedium
+    colorBrand: colors.backgroundBrand,
+    colorDanger: colors.backgroundDanger,
+    colorAlert: colors.inaccessibleAlert || colors.backgroundAlert,
+    colorWarning: colors.inaccessibleWarning || colors.backgroundWarning,
+    colorFaceSuccess: colors.inaccessibleAlert || colors.backgroundAlert,
+    colorFaceFailure: colors.inaccessibleWarning || colors.backgroundWarning,
+    colorFeatures: colors.backgroundDarkest
   }
 }

@@ -36,7 +36,12 @@ import theme from './theme'
 @themeable(theme, styles)
 class Properties extends Component {
   static propTypes = {
-    props: PropTypes.object.isRequired
+    props: PropTypes.object.isRequired,
+    layout: PropTypes.string
+  }
+
+  static defaultProps = {
+    layout: 'small'
   }
 
   unquote (string) {
@@ -154,9 +159,14 @@ class Properties extends Component {
   }
 
   render () {
+    const { layout } = this.props
+
     return (
       <div className={styles.root}>
-        <Table caption="Component Properties">
+        <Table
+          caption="Component Properties"
+          layout={layout === 'small' ? 'stacked' : 'auto'}
+        >
           <Table.Head>
             <Table.Row>
               <Table.ColHeader id="Prop">Prop</Table.ColHeader>

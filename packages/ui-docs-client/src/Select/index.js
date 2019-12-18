@@ -115,10 +115,10 @@ class Select extends Component {
           })
         }}
         onRequestHighlightOption={(e, { id }) => {
-          e.persist()
+          const { type } = event
           this.setState({
             highlightedValue: id,
-            inputValue: event.type === 'keydown'
+            inputValue: type === 'keydown'
               ? this.getOptionByValue(id).label
               : inputValue,
           })

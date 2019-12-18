@@ -121,17 +121,17 @@ class Theme extends Component {
           margin={!sub ? margin : 'small none none'}
           borderRadius="medium"
         >
-        <Table caption={label} key={name} layout="fixed">
-          <Table.Head>
-            <Table.Row>
-              <Table.ColHeader id="Name" key="Name">Name</Table.ColHeader>
-              <Table.ColHeader id="Value" key="value">Value</Table.ColHeader>
-            </Table.Row>
-          </Table.Head>
-          <Table.Body>
-            {content}
-          </Table.Body>
-        </Table>
+          <Table caption={label} key={name} layout="fixed">
+            <Table.Head>
+              <Table.Row>
+                <Table.ColHeader id="Name" key="Name">Name</Table.ColHeader>
+                <Table.ColHeader id="Value" key="value">Value</Table.ColHeader>
+              </Table.Row>
+            </Table.Head>
+            <Table.Body>
+              {content}
+            </Table.Body>
+          </Table>
         </View>
       </View>
     )

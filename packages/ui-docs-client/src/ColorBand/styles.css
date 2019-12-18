@@ -1,0 +1,16 @@
+.tile {
+  display: block;
+  height: 100%;
+}
+
+.colorAlert {
+  background: var(--colorAlert);
+}
+
+.colorWarning {
+  background: var(--colorWarning);
+}
+
+.colorDanger {
+  background: var(--colorDanger);
+}

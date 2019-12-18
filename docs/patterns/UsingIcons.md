@@ -4,10 +4,10 @@ category: Patterns
 id: UsingIcons
 ---
 
-## Using Iconography
+## Using Icons
 
-### Icons and Accessibility
-By default the role is set to presentation. However, when the `title` prop is set, the role attribute is set to img. Include the `description` prop to further describe the icon.
+### Accessibility
+By default, the icon's `role` is set to `presentation`. However, when the `title` prop is set, the role attribute is set to `img`. Include the `description` prop to further describe the icon.
 
 ```js
 ---
@@ -18,8 +18,8 @@ example: true
 </View>
 ```
 
-### Line vs Solid Iconography
-The default choice for Iconography is the `Line` version. However, when an Icon appears on a dark or colored background the `Solid` version should be used.
+### Line vs Solid
+The default choice for iconography is the `Line` version. However, when an icon appears on a dark or colored background, the `Solid` version should be used.
 
 ```js
 ---
@@ -35,7 +35,7 @@ example: true
 ```
 
 ### Changing the Icon Size
-By default the Icon is set to a size of 1em, so it will scale to match the font-size of its parent element. To change the size of the icon, use one of the predefined options for the `size` prop. If you need a size that is not offered via the size prop, adjust the font-size on the icon’s parent element.
+By default, icons are set to a size of 1em, so they will scale to match the font-size of their parent element. To change the size of the icon, use one of the predefined options for the `size` prop. If you need a size that is not offered via the size prop, adjust the font-size on the icon's parent element.
 ```js
 ---
 example: true
@@ -73,7 +73,7 @@ example: true
 <View as="div" margin="small" padding="medium" background="default">
   <Flex wrap="wrap">
     <Flex.Item padding="small" shouldGrow>
-      <Text color="brand">I am inheriting my parents color <IconHeartLine /></Text>
+      <Text color="brand">I am inheriting my parent's color <IconHeartLine /></Text>
     </Flex.Item>
     <Flex.Item padding="small" shouldGrow>
       <Text as="div">My icon should be primary <IconHeartLine color="primary" /></Text>

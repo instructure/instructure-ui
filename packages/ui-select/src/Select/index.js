@@ -52,6 +52,7 @@ import theme from './theme'
 /**
 ---
 category: components
+tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 **/
 @testable()

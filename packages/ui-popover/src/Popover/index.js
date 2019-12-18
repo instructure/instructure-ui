@@ -70,6 +70,7 @@ class PopoverContent extends ComponentIdentifier {
 /**
 ---
 category: components
+tags: overlay, portal, dialog
 ---
 **/
 @deprecated('8.0.0', {

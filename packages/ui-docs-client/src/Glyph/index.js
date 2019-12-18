@@ -115,7 +115,7 @@ class Glyph extends Component {
           }
         </div>
         { info && <div className={styles.info}>{info}</div> }
-        <Heading level="h3">
+        <Heading level="h4" as="h3">
           { firstVariant.glyphName.toLowerCase() }
         </Heading>
       </div>

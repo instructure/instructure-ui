@@ -40,6 +40,7 @@ import theme from './theme'
 /**
 ---
 category: components
+tags: form, field
 ---
 **/
 @deprecated('7.0.0', {
