@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { Checkbox } from './Checkbox'
+export { Checkbox, CheckboxFacade, ToggleFacade } from './Checkbox'
 export { CheckboxGroup } from './CheckboxGroup'
 export { DateInput, DatePicker } from './DateInput'
 export { DateTimeInput } from './DateTimeInput'

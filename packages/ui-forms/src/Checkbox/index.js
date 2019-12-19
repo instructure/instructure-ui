@@ -29,6 +29,8 @@ import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes  } from '@instructure/ui-form-field'
 import { deprecated } from '@instructure/ui-react-utils'
 import { Checkbox as UICheckbox } from '@instructure/ui-checkbox'
+import { CheckboxFacade } from './CheckboxFacade'
+import { ToggleFacade } from './ToggleFacade'
 
 /**
 ---
@@ -135,4 +137,4 @@ class Checkbox extends Component {
 }
 
 export default Checkbox
-export { Checkbox }
+export { Checkbox, CheckboxFacade, ToggleFacade }
