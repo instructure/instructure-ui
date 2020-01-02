@@ -15,6 +15,9 @@
     "lint:fix": "ui-test --lint --fix"
   },
   "license": "MIT",
+  "dependencies": {
+    "globby": "^10.0.1"
+  },
   "publishConfig": {
     "access": "public"
   }

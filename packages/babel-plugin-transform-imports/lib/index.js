@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 
+const { dirname, join, relative } = require('path')
+const globby = require('globby')
+
+const transformName = 'babel-plugin-transform-imports'
+
 function getOptKeyFromSource (source, opts) {
   if (opts[source]) {
     return source
@@ -57,14 +62,46 @@ function transform (transformOption, importName, matches) {
     try {
       transformFn = isFunction ? transformOption : require(transformOption)
     } catch (error) {
-      console.error('[babel-plugin-transform-imports] failed to require transform file ' + transformOption)
+      console.error(`[${transformName}] failed to require transform file ${transformOption}`)
     }
 
     if (typeof transformFn !== 'function') {
-      console.error('[babel-plugin-transform-imports] expected transform function to be exported from ' + transformOption)
+      console.error(`[${transformName}] expected transform function to be exported from ${transformOption}`)
     }
 
-    return transformFn(importName, matches)
+    let importPath = importName
+
+    // Sometimes the import is not located at root level of the src. Examine the source of the specified package and if the designated
+    // import is not at the root level, construct a relative path from the source root to it's location.
+    if (matches && matches[1]) {
+      const packageName = matches[1]
+
+      try {
+        const sourceIndex = require.resolve(join(packageName, 'src'))
+        const sourceRoot = dirname(sourceIndex)
+
+        const importPaths = globby.sync(
+          [`${sourceRoot}/**/${importName}.js`, `${sourceRoot}/**/${importName}/index.js`],
+          { cwd: sourceRoot }
+        )
+
+        if (!importPaths || importPaths.length === 0) {
+          // If there are no import paths found it is the same as if globby or the require.resolve failed, we cannot construct a relative import path
+          // so throw an error and just fall back to using the import name as the path.
+          throw Error()
+        }
+
+        if (importPaths.length > 1) {
+          console.error(`[${transformName}] multiple modules found with the name '${importName}' in '${packageName}'. Continuing using the first match: '${importPaths[0]}'.`)
+        }
+
+        importPath = relative(sourceRoot, importPaths[0].endsWith('index.js') ? dirname(importPaths[0]) : importPaths[0])
+      } catch (error) {
+        console.error(`[${transformName}] no modules match '${importName}' in '${packageName}'. Continuing with '${importName}' as the import path. If that is unexpected or incorrect, make sure '${importName}' exists in '${packageName}' and you have run 'yarn install' to download the package source.`)
+      }
+    }
+
+    return transformFn(importPath, matches)
   }
 
   return transformOption.replace(/\$\{\s?([\w\d]*)\s?\}/ig, (str, g1) => {
@@ -84,7 +121,7 @@ module.exports = function transformImports ({ types: t }) {
         if (!opts) return
 
         if (!opts.transform) {
-          console.error('[babel-plugin-transform-imports] transform option is required for module ' + source.value)
+          console.error(`[${transformName}] transform option is required for module ${source.value}`)
           return
         }
 
