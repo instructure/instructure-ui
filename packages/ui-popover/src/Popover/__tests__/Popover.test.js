@@ -27,7 +27,7 @@ import { expect, mount, spy, within, wait, stub } from '@instructure/ui-test-uti
 
 import { Popover } from '../index'
 
-import PopoverLocator from '../locator'
+import { PopoverLocator } from '../PopoverLocator'
 
 describe('<Popover />', async () => {
   beforeEach(async () => {

@@ -21,19 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { DateInputLocator } from './DateInputLocator'
 
-// eslint-disable-next-line no-restricted-imports
-import CalendarLocator from '@instructure/ui-calendar/lib/Calendar/locator'
-// eslint-disable-next-line no-restricted-imports
-import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
-
-import { DateInput } from './index'
-
-export default locator(DateInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
-  findCalendar: async (element, ...args) => {
-    const content = await PopoverLocator.findContent(element, ...args)
-    return content ? CalendarLocator.find(content.getDOMNode()) : null
-  }
-})
+export { DateInputLocator }
+export default DateInputLocator

@@ -29,7 +29,7 @@ import { Calendar } from '@instructure/ui-calendar'
 import Examples from '../__examples__/DateInput.examples'
 
 import { DateInput } from '../index'
-import DateInputLocator from '../locator'
+import { DateInputLocator } from '../DateInputLocator'
 
 describe('<DateInput />', async () => {
   beforeEach(async () => {

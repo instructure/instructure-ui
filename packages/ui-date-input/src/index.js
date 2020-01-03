@@ -23,3 +23,4 @@
  */
 
 export { DateInput } from './DateInput'
+export { DateInputLocator } from './DateInput/DateInputLocator'

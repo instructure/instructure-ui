@@ -21,12 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Position } from './Position'
-export { PositionLocator, PositionContentLocator, PositionTargetLocator } from './Position/PositionLocator'
 
-export { calculateElementPosition } from './calculateElementPosition'
-export { executeMirrorFunction } from './executeMirrorFunction'
-export { PositionPropTypes } from './PositionPropTypes'
-export { mirrorHorizontalPlacement } from './mirrorHorizontalPlacement'
-export { mirrorPlacement } from './mirrorPlacement'
-export { parsePlacement } from './parsePlacement'
+import { locator } from '@instructure/ui-test-utils'
+import { PositionLocator } from '@instructure/ui-position'
+
+import { Popover } from './index'
+import { PopoverTriggerLocator } from './PopoverTriggerLocator'
+
+export const customMethods = {
+  findContent: (...args) => PositionLocator.findContent(...args),
+  findPositionTarget: (...args) => PositionLocator.findTarget(...args),
+  findTrigger: (...args) => PopoverTriggerLocator.find(...args)
+}
+
+export { PopoverTriggerLocator }
+export const PopoverLocator = locator(Popover.selector, customMethods)

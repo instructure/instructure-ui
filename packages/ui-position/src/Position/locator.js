@@ -21,31 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
-import { Position } from './index'
 
-export const PositionTargetLocator = locator(`[${Position.targetLocatorAttribute}]`)
-export const PositionContentLocator = locator(`[${Position.contentLocatorAttribute}]`)
+import { PositionLocator } from './PositionLocator'
 
-export const customMethods = {
-  findTarget: (element, ...args) => {
-    if (element && element.getAttribute) {
-      const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${Position.targetLocatorAttribute}="${id}"]`)
-        .find(...args)
-    } else {
-      return null
-    }
-  },
-  findContent: (element, ...args) => {
-    if (element && element.getAttribute) {
-      const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${Position.contentLocatorAttribute}="${id}"]`)
-        .find(...args)
-    } else {
-      return null
-    }
-  }
-}
+export { PositionContentLocator, PositionTargetLocator, customMethods } from './PositionLocator'
 
-export default locator(Position.selector, customMethods)
+export { PositionLocator }
+export default PositionLocator

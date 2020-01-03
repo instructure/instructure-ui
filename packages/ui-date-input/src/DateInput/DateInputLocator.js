@@ -21,12 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Position } from './Position'
-export { PositionLocator, PositionContentLocator, PositionTargetLocator } from './Position/PositionLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { calculateElementPosition } from './calculateElementPosition'
-export { executeMirrorFunction } from './executeMirrorFunction'
-export { PositionPropTypes } from './PositionPropTypes'
-export { mirrorHorizontalPlacement } from './mirrorHorizontalPlacement'
-export { mirrorPlacement } from './mirrorPlacement'
-export { parsePlacement } from './parsePlacement'
+import { CalendarLocator } from '@instructure/ui-calendar'
+import { PopoverLocator } from '@instructure/ui-popover'
+
+import { DateInput } from './index'
+
+export const DateInputLocator = locator(DateInput.selector, {
+  findInput: (...args) => locator('input').find(...args),
+  findCalendar: async (element, ...args) => {
+    const content = await PopoverLocator.findContent(element, ...args)
+    return content ? CalendarLocator.find(content.getDOMNode()) : null
+  }
+})

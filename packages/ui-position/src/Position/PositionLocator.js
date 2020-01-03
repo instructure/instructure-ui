@@ -21,12 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Position } from './Position'
-export { PositionLocator, PositionContentLocator, PositionTargetLocator } from './Position/PositionLocator'
+import { locator } from '@instructure/ui-test-utils'
+import { Position } from './index'
 
-export { calculateElementPosition } from './calculateElementPosition'
-export { executeMirrorFunction } from './executeMirrorFunction'
-export { PositionPropTypes } from './PositionPropTypes'
-export { mirrorHorizontalPlacement } from './mirrorHorizontalPlacement'
-export { mirrorPlacement } from './mirrorPlacement'
-export { parsePlacement } from './parsePlacement'
+import { PositionContentLocator } from './PositionContentLocator'
+import { PositionTargetLocator } from './PositionTargetLocator'
+
+export const customMethods = {
+  findTarget: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(Position.locatorAttribute)
+      return locator(`[${Position.targetLocatorAttribute}="${id}"]`)
+        .find(...args)
+    } else {
+      return null
+    }
+  },
+  findContent: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(Position.locatorAttribute)
+      return locator(`[${Position.contentLocatorAttribute}="${id}"]`)
+        .find(...args)
+    } else {
+      return null
+    }
+  }
+}
+
+export { PositionContentLocator }
+export { PositionTargetLocator }
+
+export const PositionLocator = locator(Position.selector, customMethods)

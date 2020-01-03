@@ -21,12 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Position } from './Position'
-export { PositionLocator, PositionContentLocator, PositionTargetLocator } from './Position/PositionLocator'
 
-export { calculateElementPosition } from './calculateElementPosition'
-export { executeMirrorFunction } from './executeMirrorFunction'
-export { PositionPropTypes } from './PositionPropTypes'
-export { mirrorHorizontalPlacement } from './mirrorHorizontalPlacement'
-export { mirrorPlacement } from './mirrorPlacement'
-export { parsePlacement } from './parsePlacement'
+import { locator } from '@instructure/ui-test-utils'
+
+export const PopoverTriggerLocator = locator('[data-popover-trigger]')
