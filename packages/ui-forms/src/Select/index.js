@@ -35,6 +35,8 @@ import { testable } from '@instructure/ui-testable'
 
 import { SelectSingle } from './SelectSingle'
 import { SelectMultiple } from './SelectMultiple'
+import { SelectField } from './SelectField'
+import { SelectOptionsList } from './SelectOptionsList'
 
 import parseOptions from './utils/parseOptions'
 
@@ -352,4 +354,4 @@ class Select extends Component {
 }
 
 export default Select
-export { Select }
+export { Select, SelectField, SelectOptionsList }
