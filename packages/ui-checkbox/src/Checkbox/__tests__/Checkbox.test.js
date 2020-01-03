@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Checkbox } from '../index'
-import CheckboxLocator from '../locator'
+import { CheckboxLocator } from '../CheckboxLocator'
 
 describe('<Checkbox />', async () => {
   it('renders an input with type "checkbox"', async () => {

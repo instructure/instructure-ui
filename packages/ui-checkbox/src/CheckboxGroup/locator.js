@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { CheckboxGroupLocator } from './CheckboxGroupLocator'
 
-import { CheckboxGroup } from './index'
-
-export default locator(CheckboxGroup.selector)
+export { CheckboxGroupLocator }
+export default CheckboxGroupLocator

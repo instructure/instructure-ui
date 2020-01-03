@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { CheckboxLocator } from './CheckboxLocator'
 
-import { Checkbox } from './index'
-
-export default locator(Checkbox.selector)
+export { CheckboxLocator }
+export default CheckboxLocator

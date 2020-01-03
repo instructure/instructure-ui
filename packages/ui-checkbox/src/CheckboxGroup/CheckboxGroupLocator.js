@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Checkbox, CheckboxFacade, ToggleFacade } from './Checkbox'
-export { CheckboxLocator } from './Checkbox/CheckboxLocator'
-export { CheckboxGroup } from './CheckboxGroup'
-export { CheckboxGroupLocator } from './CheckboxGroup/CheckboxGroupLocator'
+
+import { locator } from '@instructure/ui-test-utils'
+
+import { CheckboxGroup } from './index'
+
+export const CheckboxGroupLocator = locator(CheckboxGroup.selector)

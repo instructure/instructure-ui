@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
-import CheckboxGroupLocator from '../locator'
+import { CheckboxGroupLocator } from '../CheckboxGroupLocator'
 
 import { CheckboxGroup } from '../index'
 import { Checkbox } from '../../Checkbox'
