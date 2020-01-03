@@ -27,7 +27,7 @@ import React from 'react'
 import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { Day } from '../index'
-import DayLocator from '../locator'
+import { DayLocator } from '../DayLocator'
 import DayExamples from '../__examples__/Day.examples'
 
 describe('Day', async () => {

@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { Calendar } from '../index'
-import CalendarLocator from '../locator'
+import { CalendarLocator } from '../CalendarLocator'
 import CalendarExamples from '../__examples__/Calendar.examples'
 
 describe('<Calendar />', async () => {

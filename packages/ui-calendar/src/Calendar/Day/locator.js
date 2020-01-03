@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { DayLocator } from './DayLocator'
 
-import { Day } from './index'
-
-export default locator(Day.selector)
+export { DayLocator }
+export default DayLocator

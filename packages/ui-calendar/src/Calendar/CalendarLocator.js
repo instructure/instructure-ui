@@ -21,5 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Calendar } from './Calendar'
-export { CalendarLocator, DayLocator } from './Calendar/CalendarLocator'
+import { locator } from '@instructure/ui-test-utils'
+
+import { Calendar } from './index'
+import { DayLocator } from './Day/DayLocator'
+
+export { DayLocator }
+
+export const CalendarLocator = locator(Calendar.selector, {
+  findAllDays: (...args) => {
+    return DayLocator.findAll(...args)
+  },
+  findDay: (...args) => {
+    return DayLocator.find(...args)
+  }
+})
