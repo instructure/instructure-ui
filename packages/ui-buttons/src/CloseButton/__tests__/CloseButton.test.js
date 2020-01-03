@@ -26,7 +26,7 @@ import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
 
 import { CloseButton } from '../index'
-import CloseButtonLocator from '../locator'
+import { CloseButtonLocator } from '../CloseButtonLocator'
 
 describe('<CloseButton />', async () => {
   it('should render with x icon', async () => {

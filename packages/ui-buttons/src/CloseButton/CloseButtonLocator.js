@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { BaseButtonLocator } from './BaseButtonLocator'
+import { locator } from '@instructure/ui-test-utils'
+import { CloseButton } from './index'
 
-export { BaseButtonLocator }
-export default BaseButtonLocator
+export const CloseButtonLocator = locator(CloseButton.selector)

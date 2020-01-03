@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 
-import { BaseButtonLocator } from './BaseButtonLocator'
+import { locator, find } from '@instructure/ui-test-utils'
 
-export { BaseButtonLocator }
-export default BaseButtonLocator
+import { BaseButton } from './index'
+
+export const BaseButtonLocator = locator(BaseButton.selector, {
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
+  }
+})

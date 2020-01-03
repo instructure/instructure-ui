@@ -26,7 +26,7 @@ import React from 'react'
 import { mount, expect, stub } from '@instructure/ui-test-utils'
 
 import { IconButton } from '../index'
-import IconButtonLocator from '../locator'
+import { IconButtonLocator } from '../IconButtonLocator'
 
 describe('<IconButton/>', async () => {
   const icon = (

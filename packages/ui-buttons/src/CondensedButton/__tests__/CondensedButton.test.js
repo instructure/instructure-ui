@@ -26,7 +26,7 @@ import React from 'react'
 import { mount, expect, stub } from '@instructure/ui-test-utils'
 
 import { CondensedButton } from '../index'
-import CondensedButtonLocator from '../locator'
+import { CondensedButtonLocator } from '../CondensedButtonLocator'
 
 describe('<CondensedButton/>', async () => {
   const icon = (

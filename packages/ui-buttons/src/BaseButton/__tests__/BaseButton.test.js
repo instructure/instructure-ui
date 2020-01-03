@@ -27,7 +27,7 @@ import { mount, expect, stub } from '@instructure/ui-test-utils'
 
 import { BaseButton } from '../index'
 
-import BaseButtonLocator from '../locator'
+import { BaseButtonLocator } from '../BaseButtonLocator'
 
 describe('<BaseButton/>', async () => {
   beforeEach(async () => {

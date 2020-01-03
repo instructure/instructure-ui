@@ -30,7 +30,7 @@ import { IconTrashSolid } from '@instructure/ui-icons'
 
 import { Button } from '../index'
 
-import ButtonLocator from '../locator'
+import { ButtonLocator } from '../ButtonLocator'
 import ButtonExamples from '../__examples__/Button.examples'
 
 import styles from '../styles.css'

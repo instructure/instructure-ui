@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator  } from '@instructure/ui-test-utils'
-import { CloseButton } from './index'
-export default locator(CloseButton.selector)
+
+import { CloseButtonLocator } from './CloseButtonLocator'
+
+export { CloseButtonLocator }
+export default CloseButtonLocator
