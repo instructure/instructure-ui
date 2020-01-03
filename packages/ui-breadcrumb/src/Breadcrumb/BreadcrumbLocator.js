@@ -21,7 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { BreadcrumbLinkLocator } from './BreadcrumbLinkLocator'
+import { locator } from '@instructure/ui-test-utils'
+
+import { Breadcrumb } from './index'
+import { BreadcrumbLinkLocator } from './BreadcrumbLink/BreadcrumbLinkLocator'
 
 export { BreadcrumbLinkLocator }
-export default BreadcrumbLinkLocator
+
+export const BreadcrumbLocator = locator(Breadcrumb.selector, {
+  findAllLinks: (...args) => {
+    return BreadcrumbLinkLocator.findAll(...args)
+  },
+  findLink: (...args) => {
+    return BreadcrumbLinkLocator.find(...args)
+  }
+})

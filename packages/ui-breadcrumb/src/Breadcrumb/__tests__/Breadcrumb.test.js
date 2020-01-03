@@ -27,7 +27,7 @@ import React from 'react'
 import { expect, mount, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { Breadcrumb } from '../index'
-import BreadcrumbLocator from '../locator'
+import { BreadcrumbLocator } from '../BreadcrumbLocator'
 import BreadcrumbExamples from '../__examples__/Breadcrumb.examples'
 
 describe('<Breadcrumb />', async () => {

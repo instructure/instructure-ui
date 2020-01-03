@@ -23,3 +23,4 @@
  */
 
 export { Badge } from './Badge'
+export { BadgeLocator } from './Badge/BadgeLocator'

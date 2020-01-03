@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { Avatar } from '../index'
-import AvatarLocator from '../locator'
+import { AvatarLocator } from '../AvatarLocator'
 
 import styles from '../styles.css'
 

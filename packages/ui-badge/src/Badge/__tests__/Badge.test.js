@@ -27,7 +27,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { Badge } from '../index'
-import BadgeLocator from '../locator'
+import { BadgeLocator } from '../BadgeLocator'
 
 import styles from '../styles.css'
 

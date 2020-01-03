@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
 
-import { Avatar } from './index'
+import { AvatarLocator } from './AvatarLocator'
 
-export default locator(Avatar.selector)
+export { AvatarLocator }
+export default AvatarLocator

@@ -24,11 +24,10 @@
 
 import React from 'react'
 
-import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { BreadcrumbLink } from '../index'
-
-const BreadcrumbLinkLocator = locator(BreadcrumbLink.selector)
+import { BreadcrumbLinkLocator } from '../BreadcrumbLinkLocator'
 
 describe('<BreadcrumbLink />', async () => {
   it('should render a anchor tag when given an href prop', async () => {
