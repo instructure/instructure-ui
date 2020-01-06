@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { SelectLocator } from './SelectLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import { RadioInputGroup } from './index'
+
+export const RadioInputGroupLocator = locator(RadioInputGroup.selector)

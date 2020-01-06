@@ -22,8 +22,11 @@
  * SOFTWARE.
  */
 
-import { SelectLocator } from './SelectLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import { RangeInput } from './index'
+
+export const RangeInputLocator = locator(RangeInput.selector, {
+  findInput: (...args) => locator('input[type=range]').find(...args),
+  findOutput: (...args) => locator('output').find(...args)
+})

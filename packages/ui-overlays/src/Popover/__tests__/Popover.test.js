@@ -27,7 +27,7 @@ import { expect, mount, spy, within, wait } from '@instructure/ui-test-utils'
 
 import { Popover, PopoverTrigger, PopoverContent } from '../index'
 
-import PopoverLocator from '../locator'
+import { PopoverLocator } from '../PopoverLocator'
 
 describe('<Popover />', async () => {
   it('should not render content by default', async () => {

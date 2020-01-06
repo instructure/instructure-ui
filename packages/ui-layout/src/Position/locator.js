@@ -22,32 +22,9 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { PositionLocator } from './PositionLocator'
 
-import { Position } from './index'
+export { PositionContentLocator, PositionTargetLocator, customMethods } from './PositionLocator'
 
-export const PositionTargetLocator = locator(Position.Target.selector)
-export const PositionContentLocator = locator(Position.Content.selector)
-
-export const customMethods = {
-  findTarget: (element, ...args) => {
-    if (element && element.getAttribute) {
-      const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${Position.Target.locatorAttribute}="${id}"]`)
-        .find(...args)
-    } else {
-      return null
-    }
-  },
-  findContent: (element, ...args) => {
-    if (element && element.getAttribute) {
-      const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${Position.Content.locatorAttribute}="${id}"]`)
-        .find(...args)
-    } else {
-      return null
-    }
-  }
-}
-
-export default locator(Position.selector, customMethods)
+export { PositionLocator }
+export default PositionLocator

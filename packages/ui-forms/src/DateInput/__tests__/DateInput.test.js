@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
-import DateInputLocator from '../locator'
+import { DateInputLocator } from '../DateInputLocator'
 
 import { DateInput } from '../index'
 

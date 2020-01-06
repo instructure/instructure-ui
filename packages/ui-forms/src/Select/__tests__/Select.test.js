@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait, find } from '@instructure/ui-test-utils'
 
 import { Select } from '../index'
-import SelectLocator from '../locator'
+import { SelectLocator } from '../SelectLocator'
 
 describe('<Select />', async () => {
   beforeEach(async () => {

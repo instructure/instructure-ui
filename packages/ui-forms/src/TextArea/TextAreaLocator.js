@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-import { SelectLocator } from './SelectLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import { TextArea } from './index'
+
+export const TextAreaLocator = locator(TextArea.selector, {
+  findInput: (...args) => locator('textarea').find(...args)
+})

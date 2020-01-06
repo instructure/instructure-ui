@@ -22,8 +22,20 @@
  * SOFTWARE.
  */
 
-import { SelectLocator } from './SelectLocator'
+import { locator } from '@instructure/ui-test-utils'
+import { PositionLocator } from '@instructure/ui-layout'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import { Popover } from './index'
+
+import { PopoverTriggerLocator } from './PopoverTriggerLocator'
+
+export { PopoverContentLocator } from './PopoverContentLocator'
+export { PopoverTriggerLocator }
+
+export const customMethods = {
+  findContent: (...args) => PositionLocator.findContent(...args),
+  findPositionTarget: (...args) => PositionLocator.findTarget(...args),
+  findTrigger: (...args) => PopoverTriggerLocator.find(...args)
+}
+
+export const PopoverLocator = locator(Popover.selector, customMethods)

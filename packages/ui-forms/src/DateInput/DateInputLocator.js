@@ -21,9 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import { SelectLocator } from './SelectLocator'
+import { PopoverLocator } from '@instructure/ui-overlays'
+import { DatePickerLocator } from './DatePicker/DatePickerLocator'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import { DateInput } from './index'
+
+export { DatePickerLocator }
+
+export const DateInputLocator = locator(DateInput.selector, {
+  findInput: (...args) => locator('input').find(...args),
+  findDatePicker: async (element, ...args) => {
+    const content = await PopoverLocator.findContent(element)
+    return content ? DatePickerLocator.find(content.getDOMNode()) : null
+  }
+})

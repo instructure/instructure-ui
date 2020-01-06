@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { RadioInputGroupLocator } from './RadioInputGroupLocator'
 
-import { RadioInputGroup } from './index'
-
-export default locator(RadioInputGroup.selector)
+export { RadioInputGroupLocator }
+export default RadioInputGroupLocator

@@ -22,11 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { RangeInputLocator } from './RangeInputLocator'
 
-import { RangeInput } from './index'
-
-export default locator(RangeInput.selector, {
-  findInput: (...args) => locator('input[type=range]').find(...args),
-  findOutput: (...args) => locator('output').find(...args)
-})
+export { RangeInputLocator }
+export default RangeInputLocator

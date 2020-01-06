@@ -27,7 +27,7 @@ import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
 import { DateTime } from '@instructure/ui-i18n'
 
 import { TimeInput } from '../index'
-import TimeInputLocator from '../locator'
+import { TimeInputLocator } from '../TimeInputLocator'
 
 describe('<TimeInput />', async () => {
   beforeEach(async () => {

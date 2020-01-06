@@ -21,9 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import { SelectLocator } from './SelectLocator'
+import { DateTimeInput } from './index'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import { DateInputLocator } from '../DateInput/DateInputLocator'
+import { TimeInputLocator } from '../TimeInput/TimeInputLocator'
+
+export const DateTimeInputLocator = locator(DateTimeInput.selector, {
+  findDateInput: (...args) => DateInputLocator.find(...args),
+  findTimeInput: (...args) => TimeInputLocator.find(...args)
+})

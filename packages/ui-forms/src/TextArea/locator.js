@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { TextAreaLocator } from './TextAreaLocator'
 
-import { TextArea } from './index'
-
-export default locator(TextArea.selector, {
-  findInput: (...args) => locator('textarea').find(...args)
-})
+export { TextAreaLocator }
+export default TextAreaLocator

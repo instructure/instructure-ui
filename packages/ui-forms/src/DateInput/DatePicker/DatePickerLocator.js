@@ -21,9 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import { SelectLocator } from './SelectLocator'
+import { DatePicker } from './index'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import styles from './styles.css'
+
+const DateLocator = locator('[aria-current]')
+const CurrentDateLocator = locator('[aria-current="date"]')
+const SelectedDateLocator = locator(`.${styles.selected}`)
+
+export const DatePickerLocator = locator(DatePicker.selector, {
+  findCurrentDate: (...args) => CurrentDateLocator.find(...args),
+  findSelectedDate: (...args) => SelectedDateLocator.find(...args),
+  findDate: (...args) => DateLocator.find(...args),
+  findAllDates: (...args) => DateLocator.findAll(...args)
+})

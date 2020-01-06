@@ -28,7 +28,7 @@ import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
 import { within } from '@instructure/ui-utils'
 
 import { Position, PositionTarget, PositionContent } from '../index'
-import PositionLocator from '../locator'
+import { PositionLocator } from '../PositionLocator'
 
 describe('<Position />', async () => {
   const parentDefaults = {

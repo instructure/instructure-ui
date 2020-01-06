@@ -31,7 +31,7 @@ import { isSameDay } from "../../utils/dateHelpers"
 
 import { DatePicker } from '../index'
 
-import DatePickerLocator from '../locator'
+import { DatePickerLocator } from '../DatePickerLocator'
 import styles from '../styles.css'
 
 describe('<DatePicker />', async () => {

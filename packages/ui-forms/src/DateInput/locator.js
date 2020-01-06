@@ -21,20 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
 
-// eslint-disable-next-line no-restricted-imports
-import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
-import DatePickerLocator from './DatePicker/locator'
+import { DateInputLocator } from './DateInputLocator'
 
-import { DateInput } from './index'
-
-const DateInputLocator = locator(DateInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
-  findDatePicker: async (element, ...args) => {
-    const content = await PopoverLocator.findContent(element)
-    return content ? DatePickerLocator.find(content.getDOMNode()) : null
-  }
-})
-
+export { DateInputLocator }
 export default DateInputLocator

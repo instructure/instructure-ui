@@ -28,6 +28,7 @@ export { Flex, FlexItem } from './Flex'
 export { Grid, GridCol, GridRow } from './Grid'
 export { Media } from './Media'
 export { Position } from './Position'
+export { PositionLocator, PositionContentLocator, PositionTargetLocator } from './Position/PositionLocator'
 export { Responsive } from './Responsive'
 export { View } from './View'
 

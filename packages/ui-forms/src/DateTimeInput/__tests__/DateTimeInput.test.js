@@ -29,7 +29,7 @@ import { DateTime } from '@instructure/ui-i18n'
 
 import { DateTimeInput } from '../index'
 
-import DateTimeInputLocator from '../locator'
+import { DateTimeInputLocator } from '../DateTimeInputLocator'
 
 describe('<DateTimeInput />', async () => {
   beforeEach(async () => {

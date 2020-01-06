@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { TextInputLocator } from './TextInputLocator'
 
-import { TextInput } from './index'
-
-export default locator(TextInput.selector, {
-  findInput: (...args) => locator('input').find(...args)
-})
+export { TextInputLocator }
+export default TextInputLocator

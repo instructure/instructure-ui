@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { SelectLocator } from './SelectLocator'
+import { CheckboxGroupLocator } from './CheckboxGroupLocator'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+export { CheckboxGroupLocator }
+export default CheckboxGroupLocator

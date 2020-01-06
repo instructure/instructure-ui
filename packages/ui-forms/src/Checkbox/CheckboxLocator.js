@@ -22,8 +22,4 @@
  * SOFTWARE.
  */
 
-import { SelectLocator } from './SelectLocator'
-
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+export { CheckboxLocator } from '@instructure/ui-checkbox'

@@ -22,8 +22,30 @@
  * SOFTWARE.
  */
 
-import { SelectLocator } from './SelectLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { customMethods } from './SelectLocator'
-export { SelectLocator }
-export default SelectLocator
+import { PositionLocator } from '@instructure/ui-layout'
+
+import { Select } from './index'
+
+const InputLocator = locator('input[type="text"]')
+const OptionsListLocator = locator('ul')
+const OptionsLocator = locator('li')
+
+export const customMethods = {
+  findInput: (...args) => InputLocator.find(...args),
+  findOptionsList: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsListLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findOption: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findAllOptions: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.findAll(content.getDOMNode(), ...args) : []
+  }
+}
+
+export const SelectLocator = locator(Select.selector, customMethods)

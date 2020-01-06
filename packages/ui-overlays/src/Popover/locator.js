@@ -22,19 +22,9 @@
  * SOFTWARE.
  */
 
- import { locator } from '@instructure/ui-test-utils'
+import { PopoverLocator } from './PopoverLocator'
 
- // eslint-disable-next-line no-restricted-imports
- import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
- import { Popover, PopoverTrigger, PopoverContent } from './index'
+export { PopoverContentLocator, PopoverTriggerLocator, customMethods } from './PopoverLocator'
 
- export const PopoverTriggerLocator = locator(PopoverTrigger.selector)
- export const PopoverContentLocator = locator(PopoverContent.selector)
-
- export const customMethods = {
-   findContent: (...args) => PositionLocator.findContent(...args),
-   findPositionTarget: (...args) => PositionLocator.findTarget(...args),
-   findTrigger: (...args) => PopoverTriggerLocator.find(...args)
- }
-
-export default locator(Popover.selector, customMethods)
+export { PopoverLocator }
+export default PopoverLocator
