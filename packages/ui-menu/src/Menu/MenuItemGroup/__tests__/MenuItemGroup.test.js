@@ -29,7 +29,7 @@ import { MenuItem } from '../../MenuItem'
 import { MenuItemSeparator } from '../../MenuItemSeparator'
 import { MenuItemGroup } from '../index'
 
-import MenuItemGroupLocator from '../locator'
+import { MenuItemGroupLocator } from '../MenuItemGroupLocator'
 
 describe('<MenuItemGroup />', async () => {
   it('should render', async () => {

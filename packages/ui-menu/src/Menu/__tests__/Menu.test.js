@@ -26,7 +26,7 @@ import { within, expect, mount, stub, wait, accessible } from '@instructure/ui-t
 
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
 
-import MenuLocator from '../locator'
+import { MenuLocator } from '../MenuLocator'
 
 describe('<Menu />', async () => {
   describe('without a trigger', async () => {

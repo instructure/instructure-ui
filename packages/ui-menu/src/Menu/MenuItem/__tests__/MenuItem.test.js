@@ -26,12 +26,12 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { MenuItem } from '../index'
-import MenuItemFixture from '../locator'
+import { MenuItemLocator } from '../MenuItemLocator'
 
 describe('<MenuItem />', async () => {
   it('should render', async () => {
     await mount(<MenuItem>Hello</MenuItem>)
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
     expect(item).to.exist()
   })
 
@@ -40,7 +40,7 @@ describe('<MenuItem />', async () => {
       <MenuItem href="example.html">Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
     const link = await item.find('a[href="example.html"]')
 
     expect(link).to.exist()
@@ -51,7 +51,7 @@ describe('<MenuItem />', async () => {
       <MenuItem to="/example">Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
     const link = await item.find('a[to="/example"]')
 
     expect(link).to.exist()
@@ -63,7 +63,7 @@ describe('<MenuItem />', async () => {
       <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':contains(Hello)')
+    const item = await MenuItemLocator.find(':contains(Hello)')
 
     await item.click()
 
@@ -78,7 +78,7 @@ describe('<MenuItem />', async () => {
       <MenuItem onClick={onClick} value="foo">Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     await item.click()
 
@@ -91,7 +91,7 @@ describe('<MenuItem />', async () => {
       <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     await item.keyUp('space')
 
@@ -105,7 +105,7 @@ describe('<MenuItem />', async () => {
       <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     await item.keyDown('enter')
 
@@ -118,7 +118,7 @@ describe('<MenuItem />', async () => {
       <MenuItem onSelect={onSelect} disabled>Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     await item.click(null, { clickable: false })
     await item.keyUp('enter')
@@ -132,7 +132,7 @@ describe('<MenuItem />', async () => {
       <MenuItem>Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('tabIndex'))
       .to.equal('-1')
@@ -143,7 +143,7 @@ describe('<MenuItem />', async () => {
       <MenuItem controls="testId">Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('aria-controls'))
       .to.equal('testId')
@@ -154,7 +154,7 @@ describe('<MenuItem />', async () => {
       <MenuItem disabled>Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('aria-disabled'))
       .to.equal('true')
@@ -165,7 +165,7 @@ describe('<MenuItem />', async () => {
       <MenuItem type="checkbox" defaultSelected>Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('aria-checked'))
       .to.equal('true')
@@ -177,7 +177,7 @@ describe('<MenuItem />', async () => {
       <MenuItem type="checkbox" selected onSelect={onSelect}>Hello</MenuItem>
     )
 
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('aria-checked'))
       .to.equal('true')
@@ -187,7 +187,7 @@ describe('<MenuItem />', async () => {
     await mount(
       <MenuItem>Hello</MenuItem>
     )
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('role'))
       .to.equal('menuitem')
@@ -197,7 +197,7 @@ describe('<MenuItem />', async () => {
     await mount(
       <MenuItem type="checkbox">Hello</MenuItem>
     )
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('role'))
       .to.equal('menuitemcheckbox')
@@ -207,7 +207,7 @@ describe('<MenuItem />', async () => {
     await mount(
       <MenuItem type="radio">Hello</MenuItem>
     )
-    const item = await MenuItemFixture.find(':label(Hello)')
+    const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('role'))
       .to.equal('menuitemradio')

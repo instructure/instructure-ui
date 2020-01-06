@@ -21,10 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import {
+  locator,
+  parseQueryArguments
+} from '@instructure/ui-test-utils'
 
-import { MenuLocator } from './MenuLocator'
+import { PopoverLocator } from '@instructure/ui-overlays'
 
-export { MenuItemLocator, MenuItemGroupLocator } from './MenuLocator'
+import { Menu } from './index'
 
-export { MenuLocator }
-export default MenuLocator
+import { MenuItemLocator } from './MenuItem/MenuItemLocator'
+import { MenuItemGroupLocator } from './MenuItemGroup/MenuItemGroupLocator'
+
+const customMethods = {
+  findAllItems: (...args) => {
+    return MenuItemLocator.findAll(...args)
+  },
+  findItem: (...args) => {
+    return MenuItemLocator.find(...args)
+  },
+  findAllGroups: (...args) => {
+    return MenuItemGroupLocator.findAll(...args)
+  },
+  findGroup: (...args) => {
+    return MenuItemGroupLocator.find(...args)
+  },
+  findPopoverTrigger: (...args) => {
+    return PopoverLocator.findTrigger(...args)
+  },
+  findPopoverContent: (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, selector, {
+      ...options,
+      customMethods: {
+        ...options.customMethods,
+        ...customMethods
+      }
+    })
+  }
+}
+
+const MenuLocator = locator(Menu.selector, customMethods)
+
+export { MenuLocator, MenuItemLocator, MenuItemGroupLocator }

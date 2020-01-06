@@ -21,10 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import { MenuLocator } from './MenuLocator'
+import { MenuItem } from './index'
 
-export { MenuItemLocator, MenuItemGroupLocator } from './MenuLocator'
-
-export { MenuLocator }
-export default MenuLocator
+export const MenuItemLocator = locator(MenuItem.selector)
