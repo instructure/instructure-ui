@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { InlineList } from '../index'
-import InlineListLocator from '../locator'
+import { InlineListLocator } from '../InlineListLocator'
 
 describe('<InlineList />', async () => {
   it('should render list items and filter out null/falsy children', async () => {

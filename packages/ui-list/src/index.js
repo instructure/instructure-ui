@@ -23,4 +23,6 @@
  */
 
 export { InlineList } from './InlineList'
+export { InlineListLocator } from './InlineList/InlineListLocator'
 export { List } from './List'
+export { ListLocator } from './List/ListLocator'

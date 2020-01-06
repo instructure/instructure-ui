@@ -23,28 +23,28 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { Item } from '../index'
-const ItemLocator = locator(Item.selector)
+import { InlineListItemLocator } from '../InlineListItemLocator'
 
 describe('<Item />', async () => {
   it('should render children', async () => {
     await mount(<Item>hello</Item>)
-    const listItem = await ItemLocator.find()
+    const listItem = await InlineListItemLocator.find()
     expect(await listItem.find(':contains(hello)')).to.exist()
   })
 
   it('should render delimiter', async () => {
     await mount(<Item delimiter="slash">List item</Item>)
-    const listItem = await ItemLocator.find()
+    const listItem = await InlineListItemLocator.find()
     expect(await listItem.find('[aria-hidden="true"]')).to.exist()
   })
 
   it('should call elementRef', async () => {
     const elementRef = stub()
     await mount(<Item elementRef={elementRef}>List item</Item>)
-    const listItem = await ItemLocator.find()
+    const listItem = await InlineListItemLocator.find()
     expect(elementRef).to.have.been.calledWith(listItem.getDOMNode())
   })
 })

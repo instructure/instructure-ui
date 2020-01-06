@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { List } from '../index'
-import ListLocator from '../locator'
+import { ListLocator } from '../ListLocator'
 
 describe('<List />', async () => {
   it('should render list items and filter out null/falsy children', async () => {

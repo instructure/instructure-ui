@@ -21,17 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { InlineListLocator } from './InlineListLocator'
 
-import { InlineList } from './index'
-
-const InlineListItemLocator = locator(InlineList.Item.selector)
-
-export default locator(InlineList.selector, {
-  findAllItems: (...args) => {
-    return InlineListItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return InlineListItemLocator.find(...args)
-  }
-})
+export { InlineListLocator }
+export default InlineListLocator
