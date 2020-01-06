@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { Img } from '../index'
-import ImgLocator from '../locator'
+import { ImgLocator } from '../ImgLocator'
 
 import styles from '../styles.css'
 

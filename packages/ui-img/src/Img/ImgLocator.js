@@ -21,5 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Img } from './Img'
-export { ImgLocator } from './Img/ImgLocator'
+import { locator } from '@instructure/ui-test-utils'
+
+import { Img } from './index'
+
+export const ImgLocator = locator(Img.selector)
