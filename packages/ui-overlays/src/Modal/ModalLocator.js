@@ -21,14 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Mask } from './Mask'
-export { Modal } from './Modal'
-export { ModalLocator } from './Modal/ModalLocator'
-export { Overlay } from './Overlay'
-export { OverlayLocator } from './Overlay/OverlayLocator'
-export { Popover } from './Popover'
-export { PopoverLocator, PopoverContentLocator, PopoverTriggerLocator } from './Popover/PopoverLocator'
-export { Tooltip } from './Tooltip'
-export { TooltipLocator } from './Tooltip/TooltipLocator'
-export { Tray } from './Tray'
-export { TrayLocator } from './Tray/TrayLocator'
+
+import { locator } from '@instructure/ui-test-utils'
+
+import { Modal } from './index'
+
+const ModalHeaderLocator = locator(Modal.Header.selector)
+const ModalBodyLocator = locator(Modal.Body.selector)
+const ModalFooterLocator = locator(Modal.Footer.selector)
+
+export const ModalLocator = locator(Modal.selector, {
+  findHeader: (...args) => {
+    return ModalHeaderLocator.find(...args)
+  },
+  findBody: (...args) => {
+    return ModalBodyLocator.find(...args)
+  },
+  findFooter: (...args) => {
+    return ModalFooterLocator.find(...args)
+  }
+})

@@ -27,7 +27,7 @@ import React from 'react'
 import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { NumberInput } from '../index'
-import NumberInputLocator from '../locator'
+import { NumberInputLocator } from '../NumberInputLocator'
 import NumberInputExamples from '../__examples__/NumberInput.examples'
 
 describe('<NumberInput />', () => {

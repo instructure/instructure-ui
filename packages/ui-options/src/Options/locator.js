@@ -21,16 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { OptionsLocator } from './OptionsLocator'
 
-import { Options } from './index'
-import Item from './Item/locator'
-
-export default locator(Options.selector, {
-  findAllItems: (...args) => {
-    return Item.findAll(...args)
-  },
-  findItem: (...args) => {
-    return Item.find(...args)
-  }
-})
+export { OptionsLocator }
+export default OptionsLocator

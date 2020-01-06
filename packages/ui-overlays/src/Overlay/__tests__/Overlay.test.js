@@ -27,7 +27,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Overlay } from '../index'
 
-import OverlayLocator from '../locator'
+import { OverlayLocator } from '../OverlayLocator'
 
 describe('<Overlay />', async () => {
   it('should render nothing when closed', async () => {

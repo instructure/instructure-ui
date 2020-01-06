@@ -21,13 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { OptionsItemLocator } from './OptionsItemLocator'
 
-import OptionsLocator from '../locator'
-import { Item } from './index'
-
-export default locator(Item.selector, {
-  findNestedOptions: (...args) => {
-    return OptionsLocator.find(...args)
-  }
-})
+export { OptionsItemLocator }
+export default OptionsItemLocator

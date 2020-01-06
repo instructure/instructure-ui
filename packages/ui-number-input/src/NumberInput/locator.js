@@ -22,11 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { NumberInputLocator } from './NumberInputLocator'
 
-import { NumberInput } from './index'
-
-export default locator(NumberInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
-  findArrowButtons: (...args) => locator('button').findAll(...args)
-})
+export { NumberInputLocator }
+export default NumberInputLocator

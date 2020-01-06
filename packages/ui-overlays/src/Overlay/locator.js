@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { OverlayLocator } from './OverlayLocator'
 
-import { Overlay } from './index'
-
-export default locator(Overlay.selector)
+export { OverlayLocator }
+export default OverlayLocator

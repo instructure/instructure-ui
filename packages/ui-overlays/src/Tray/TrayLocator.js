@@ -21,14 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Mask } from './Mask'
-export { Modal } from './Modal'
-export { ModalLocator } from './Modal/ModalLocator'
-export { Overlay } from './Overlay'
-export { OverlayLocator } from './Overlay/OverlayLocator'
-export { Popover } from './Popover'
-export { PopoverLocator, PopoverContentLocator, PopoverTriggerLocator } from './Popover/PopoverLocator'
-export { Tooltip } from './Tooltip'
-export { TooltipLocator } from './Tooltip/TooltipLocator'
-export { Tray } from './Tray'
-export { TrayLocator } from './Tray/TrayLocator'
+
+import { locator } from '@instructure/ui-test-utils'
+
+import { Tray } from './index'
+
+export const TrayLocator = locator(Tray.selector)

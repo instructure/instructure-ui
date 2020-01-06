@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import { Modal } from '../index'
-import ModalLocator from '../locator'
+import { ModalLocator } from '../ModalLocator'
 import styles from '../styles.css'
 
 describe('<Modal />', async () => {

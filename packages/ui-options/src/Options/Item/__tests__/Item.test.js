@@ -28,7 +28,7 @@ import { expect, mount, stub, wait, generateA11yTests } from '@instructure/ui-te
 import { IconCheckSolid } from '@instructure/ui-icons'
 import { Options } from '../../index'
 import { Item } from '../index'
-import ItemLocator from '../locator'
+import { OptionsItemLocator as ItemLocator }from '../OptionsItemLocator'
 import styles from '../styles.css'
 import ItemExamples from '../__examples__/Item.examples'
 

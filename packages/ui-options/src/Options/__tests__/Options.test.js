@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { Options } from '../index'
-import OptionsLocator from '../locator'
+import { OptionsLocator } from '../OptionsLocator'
 import styles from '../Item/styles.css'
 import OptionsExamples from '../__examples__/Options.examples'
 

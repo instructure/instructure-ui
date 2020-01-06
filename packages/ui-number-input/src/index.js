@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { NumberInput } from './NumberInput'
+export { NumberInputLocator } from './NumberInput/NumberInputLocator'
