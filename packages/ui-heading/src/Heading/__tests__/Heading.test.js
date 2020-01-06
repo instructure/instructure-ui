@@ -27,7 +27,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { Heading } from '../index'
-import HeadingLocator from '../locator'
+import { HeadingLocator } from '../HeadingLocator'
 
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {

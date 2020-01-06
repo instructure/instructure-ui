@@ -23,10 +23,6 @@
  */
 import { locator } from '@instructure/ui-test-utils'
 
-import { Grid } from './index'
+import { Heading } from './index'
 
-const GridLocator = locator(Grid.locator, {
-  /* custom component query methods go here */
-})
-
-export default GridLocator
+export const HeadingLocator = locator(Heading.selector)
