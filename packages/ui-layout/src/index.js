@@ -24,6 +24,7 @@
 
 export { ContextView } from './ContextView'
 export { DrawerLayout, DrawerContent } from './DrawerLayout'
+export { DrawerLayoutLocator, DrawerContentLocator, DrawerTrayLocator } from './DrawerLayout/DrawerLayoutLocator'
 export { Flex, FlexItem } from './Flex'
 export { Grid, GridCol, GridRow } from './Grid'
 export { Media } from './Media'

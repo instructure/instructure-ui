@@ -26,8 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
 import { DrawerContent } from '../index'
 import styles from '../styles.css'
-
-const DrawerContentLocator = locator(DrawerContent.selector)
+import { DrawerContentLocator } from '../DrawerContentLocator'
 
 describe('<DrawerContent />', async () => {
   it('should render', async () => {

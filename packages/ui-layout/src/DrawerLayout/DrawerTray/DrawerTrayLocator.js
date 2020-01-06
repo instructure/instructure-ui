@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import { DrawerLayoutLocator } from './DrawerLayoutLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { DrawerContentLocator, DrawerTrayLocator } from './DrawerLayoutLocator'
+import { DrawerTray } from './index'
 
-export { DrawerLayoutLocator }
-export default DrawerLayoutLocator
+export const DrawerTrayLocator = locator(DrawerTray.selector)
