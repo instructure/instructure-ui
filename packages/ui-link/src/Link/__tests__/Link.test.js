@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub, within, wait } from '@instructure/ui-test-utils'
 import { Link } from '../index'
-import LinkLocator from '../locator'
+import { LinkLocator } from '../LinkLocator'
 
 class TruncateText extends React.Component {
   render () {
