@@ -27,7 +27,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 
 import { MetricGroup } from '../index'
 import { Metric } from '../../Metric'
-import MetricGroupLocator from '../locator'
+import { MetricGroupLocator } from '../MetricGroupLocator'
 
 describe('<MetricGroup />', async () => {
   it('should render children', async () => {

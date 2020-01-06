@@ -23,11 +23,11 @@
  */
 
 import React from 'react'
-import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
+import { expect, mount } from '@instructure/ui-test-utils'
 
 import { MetricsList } from '../index'
 import { MetricsListItem } from '../MetricsListItem'
-import MetricsListLocator from '../locator'
+import { MetricsListLocator } from '../MetricsListLocator'
 
 describe('<MetricsList />', async () => {
   it('should render children', async () => {

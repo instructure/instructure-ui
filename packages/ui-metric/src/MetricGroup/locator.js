@@ -21,18 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { MetricGroupLocator } from './MetricGroupLocator'
 
-import { Metric } from '../Metric'
-import { MetricGroup } from './index'
-
-const MetricGroupItemLocator = locator(Metric.selector)
-
-export default locator(MetricGroup.selector, {
-  findAllItems: (...args) => {
-    return MetricGroupItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return MetricGroupItemLocator.find(...args)
-  }
-})
+export { MetricGroupLocator }
+export default MetricGroupLocator

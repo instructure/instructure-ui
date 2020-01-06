@@ -23,6 +23,9 @@
  */
 
 export { Metric } from './Metric'
+export { MetricLocator } from './Metric/MetricLocator'
 export { MetricGroup } from './MetricGroup'
+export { MetricGroupLocator } from './MetricGroup/MetricGroupLocator'
 export { MetricsList, MetricsListItem } from './MetricsList'
+export { MetricsListLocator } from './MetricsList/MetricsListLocator'
 

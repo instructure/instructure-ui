@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { MetricLocator } from './MetricLocator'
 
-import { Metric } from './index'
-
-export default locator(Metric.selector)
+export { MetricLocator }
+export default MetricLocator

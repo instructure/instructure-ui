@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { Metric } from '../index'
-import MetricLocator from '../locator'
+import { MetricLocator } from '../MetricLocator'
 
 describe('<Metric />', async () => {
   it('should render the label', async () => {
