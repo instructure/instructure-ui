@@ -22,17 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { AppNavLocator } from './AppNavLocator'
 
-import { AppNav } from './index'
-
-import ItemLocator from './Item/locator'
-
-export default locator(AppNav.selector, {
-  findAllItems: (...args) => {
-    return ItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return ItemLocator.find(...args)
-  }
-})
+export { AppNavLocator }
+export default AppNavLocator

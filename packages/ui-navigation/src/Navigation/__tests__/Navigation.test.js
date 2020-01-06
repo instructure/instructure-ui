@@ -29,7 +29,7 @@ import { Badge } from '@instructure/ui-elements'
 import { IconAdminLine, IconDashboardLine } from '@instructure/ui-icons'
 
 import { Navigation, NavigationItem } from '../index'
-import NavigationLocator from '../locator'
+import { NavigationLocator } from '../NavigationLocator'
 
 import styles from '../styles.css'
 

@@ -22,9 +22,17 @@
  * SOFTWARE.
  */
 
-import { TooltipLocator } from './TooltipLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { customMethods } from './TooltipLocator'
+import { AppNav } from './index'
 
-export { TooltipLocator }
-export default TooltipLocator
+import { AppNavItemLocator } from './Item/AppNavItemLocator'
+
+export const AppNavLocator = locator(AppNav.selector, {
+  findAllItems: (...args) => {
+    return AppNavItemLocator.findAll(...args)
+  },
+  findItem: (...args) => {
+    return AppNavItemLocator.find(...args)
+  }
+})

@@ -27,7 +27,7 @@ import { mount, expect, stub } from '@instructure/ui-test-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Item } from '../index'
 
-import ItemLocator from '../locator'
+import { AppNavItemLocator as ItemLocator } from '../AppNavItemLocator'
 
 const icon = (
   <svg height="24" width="24">

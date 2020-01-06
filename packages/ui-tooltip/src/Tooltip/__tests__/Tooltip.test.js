@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, spy, wait, generateA11yTests } from '@instructure/ui-test-utils'
 import { Tooltip } from '../index'
 
-import TooltipLocator from '../locator'
+import { TooltipLocator } from '../TooltipLocator'
 import TooltipExamples from '../__examples__/Tooltip.examples'
 
 describe('<Tooltip />', async () => {

@@ -28,7 +28,7 @@ import { IconAdminLine } from '@instructure/ui-icons'
 
 import { NavigationItem } from '../index'
 
-import NavigationItemLocator from '../locator'
+import { NavigationItemLocator } from '../NavigationItemLocator'
 
 describe('<NavigationItem />', async () => {
   it('should render', async () => {

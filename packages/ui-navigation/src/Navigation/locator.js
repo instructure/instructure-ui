@@ -21,19 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator  } from '@instructure/ui-test-utils'
+import { NavigationLocator } from './NavigationLocator'
 
-import { Navigation } from './index'
+export { NavigationItemLocator } from './NavigationLocator'
 
-import NavigationItemLocator from './NavigationItem/locator'
-
-export default locator(Navigation.selector, {
-  findAllItems: (...args) => {
-    return NavigationItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return NavigationItemLocator.find(...args)
-  }
-})
-
-export { NavigationItemLocator }
+export { NavigationLocator }
+export default NavigationLocator

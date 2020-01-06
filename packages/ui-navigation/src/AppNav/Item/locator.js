@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator  } from '@instructure/ui-test-utils'
+import { AppNavItemLocator } from './AppNavItemLocator'
 
-import { Item } from './index'
-
-export default locator(Item.selector)
+export { AppNavItemLocator }
+export default AppNavItemLocator

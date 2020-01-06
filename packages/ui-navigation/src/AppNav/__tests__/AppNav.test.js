@@ -34,7 +34,7 @@ import {
 
 import AppNavExamples from '../__examples__/AppNav.examples'
 import { AppNav } from '../index'
-import AppNavLocator from '../locator'
+import { AppNavLocator } from '../AppNavLocator'
 
 describe('<AppNav />', async () => {
   describe('for a11y', () => {

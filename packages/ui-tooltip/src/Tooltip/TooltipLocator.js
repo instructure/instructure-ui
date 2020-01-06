@@ -22,9 +22,19 @@
  * SOFTWARE.
  */
 
-import { TooltipLocator } from './TooltipLocator'
+import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
+import { PopoverLocator } from '@instructure/ui-popover'
+import { Tooltip } from './index'
 
-export { customMethods } from './TooltipLocator'
+export const customMethods = {
+  findTrigger: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
+  },
+  findContent: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, '[role="tooltip"]', options)
+  }
+}
 
-export { TooltipLocator }
-export default TooltipLocator
+export const TooltipLocator = locator(Tooltip.selector, customMethods)

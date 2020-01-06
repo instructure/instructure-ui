@@ -21,10 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import { TooltipLocator } from './TooltipLocator'
+import { Navigation } from './index'
+import { NavigationItemLocator } from './NavigationItem/NavigationItemLocator'
 
-export { customMethods } from './TooltipLocator'
+export { NavigationItemLocator }
 
-export { TooltipLocator }
-export default TooltipLocator
+export const NavigationLocator = locator(Navigation.selector, {
+  findAllItems: (...args) => {
+    return NavigationItemLocator.findAll(...args)
+  },
+  findItem: (...args) => {
+    return NavigationItemLocator.find(...args)
+  }
+})

@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { TransitionLocator } from './TransitionLocator'
 
-import { Transition } from './index'
-
-export default locator(Transition.selector)
+export { TransitionLocator }
+export default TransitionLocator
