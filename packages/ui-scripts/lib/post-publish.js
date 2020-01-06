@@ -28,7 +28,6 @@ const { getConfig } = require('./utils/config')
 const {
  hasSlackConfig,
  postStableReleaseSlackMessage,
- postReleaseCandidateSlackMessage
 } = require('./utils/slack')
 const {
  hasJiraConfig,
@@ -40,7 +39,6 @@ const {
   createGitTagForRelease,
   setupGit,
   checkWorkingDirectory,
-  getIssuesInCommit,
   getIssuesInRelease
 } = require('./utils/git')
 
@@ -76,13 +74,6 @@ async function postPublish (packageName, releaseVersion, config = {}) {
 
     if (hasSlackConfig(config)) {
       postStableReleaseSlackMessage(jiraVersion, issueKeys, config)
-    }
-  } else {
-    if (hasJiraConfig(config)) {
-      issueKeys = await getIssuesInCommit(jiraProjectKey)
-    }
-    if (hasSlackConfig(config) && issueKeys.length > 0) {
-      postReleaseCandidateSlackMessage(jiraVersion.name, issueKeys, config)
     }
   }
 
