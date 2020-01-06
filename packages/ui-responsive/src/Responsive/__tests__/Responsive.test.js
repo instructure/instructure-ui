@@ -132,4 +132,25 @@ describe('<Responsive />', async () => {
     expect(consoleError)
       .to.be.calledWith(warning)
   })
+
+  it('should call render prop only once', async () => {
+    const renderSpy = spy()
+    await mount(
+      <div style={{ width: 200 }}>
+        <Responsive
+          query={{
+            small: { maxWidth: 300 },
+            medium: { minWidth: 300 },
+            large: { minWidth: 800 }
+          }}
+          render={(props, matches) => {
+            renderSpy(props, matches)
+            return <div>hello</div>
+          }}
+        />
+      </div>
+    )
+
+    expect(renderSpy).to.have.been.calledOnce()
+  })
 })

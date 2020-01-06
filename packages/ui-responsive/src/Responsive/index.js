@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { findDOMNode } from '@instructure/ui-dom-utils'
@@ -82,14 +82,11 @@ class Responsive extends Component {
     matches: []
   }
 
-  componentWillMount () {
+  componentDidMount () {
     error(
       (this.props.render || this.props.children),
       `[Responsive] must have either a \`render\` prop or \`children\` prop.`
     )
-  }
-
-  componentDidMount () {
     this._matchListener = this.addMatchListener(this.props.query, this.updateMatches)
   }
 
@@ -97,15 +94,12 @@ class Responsive extends Component {
     this.removeMatchListener()
   }
 
-  componentWillReceiveProps (nextProps) {
-    const {
-      match,
-      query
-    } = this.props
+  componentDidUpdate (prevProps) {
+    const { match, query } = this.props
 
-    if (match !== nextProps.match || !deepEqual(query, nextProps.query)) {
+    if (match !== prevProps.match || !deepEqual(query, prevProps.query)) {
       this.removeMatchListener()
-      this._matchListener = this.addMatchListener(nextProps.query, this.updateMatches, nextProps.match)
+      this._matchListener = this.addMatchListener(query, this.updateMatches, match)
     }
   }
 
@@ -170,10 +164,17 @@ class Responsive extends Component {
       children
     } = this.props
 
+    if (!this.renderedOnce) {
+      // Dont call render prop until component has rendered and obtained matches.
+      // Rendering an empty div initially is fast and unobtrusive.
+      this.renderedOnce = true
+      return <div/>
+    }
+
     // Render via the children or render method, whichever is supplied. If
     // both are supplied, give preference to children.
     const renderFunc = children || render
-    return renderFunc(this.mergeProps(matches, props), matches)
+    return renderFunc ? renderFunc(this.mergeProps(matches, props), matches) : null
   }
 }
 
