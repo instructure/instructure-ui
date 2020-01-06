@@ -22,7 +22,25 @@
  * SOFTWARE.
  */
 
-import { FileDropLocator } from './FileDropLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { FileDropLocator }
-export default FileDropLocator
+import { FileDrop } from './index'
+
+const fileInputLocator = locator('input[type="file"]')
+
+export const FileDropLocator = locator(FileDrop.selector, {
+  // the file input isn't visible in this component,
+  // so we need special locator methods to interact w/ it
+  click: async (element, init, options) => {
+    const input = await fileInputLocator.find(element, { visible: false })
+    return input.click(init, { ...options, clickable: false })
+  },
+  keyUp: async (element, whichKey, init, options) => {
+    const input = await fileInputLocator.find(element, { visible: false })
+    return input.keyUp(whichKey, init, { ...options, clickable: false })
+  },
+  keyDown: async (element, whichKey, init, options) => {
+    const input = await fileInputLocator.find(element, { visible: false })
+    return input.keyDown(whichKey, init, { ...options, clickable: false })
+  }
+})

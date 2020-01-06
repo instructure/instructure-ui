@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 
 import { FileDrop } from '../index'
-import FileDropLocator from '../locator'
+import { FileDropLocator } from '../FileDropLocator'
 
 describe('<FileDrop />', async () => {
   it('should render', async () => {
