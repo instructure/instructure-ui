@@ -21,7 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { MetricsListLocator } from './MetricsListLocator'
 
-export { MetricsListLocator }
-export default MetricsListLocator
+import { locator } from '@instructure/ui-test-utils'
+
+import { List } from './index'
+
+const ListItemLocator = locator(List.Item.selector)
+
+export const ListLocator = locator(List.selector, {
+  findAllItems: (...args) => {
+    return ListItemLocator.findAll(...args)
+  },
+  findItem: (...args) => {
+    return ListItemLocator.find(...args)
+  }
+})

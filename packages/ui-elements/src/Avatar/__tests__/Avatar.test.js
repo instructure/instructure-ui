@@ -28,7 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { View } from '@instructure/ui-view'
 
 import { Avatar } from '../index'
-import AvatarLocator from '../locator'
+import { AvatarLocator } from '../AvatarLocator'
 
 import styles from '../styles.css'
 

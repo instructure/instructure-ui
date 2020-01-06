@@ -22,17 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { ListLocator } from './ListLocator'
 
-import { List } from './index'
-
-const ListItemLocator = locator(List.Item.selector)
-
-export default locator(List.selector, {
-  findAllItems: (...args) => {
-    return ListItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return ListItemLocator.find(...args)
-  }
-})
+export { ListLocator }
+export default ListLocator

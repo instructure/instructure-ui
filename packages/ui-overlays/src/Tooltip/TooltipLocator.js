@@ -21,7 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { MetricsListLocator } from './MetricsListLocator'
+import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
+import { PopoverLocator } from '@instructure/ui-popover'
+import { Tooltip } from './index'
 
-export { MetricsListLocator }
-export default MetricsListLocator
+export const customMethods = {
+  findTrigger: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
+  },
+  findContent: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, '[role="tooltip"]', options)
+  }
+}
+
+export const TooltipLocator = locator(Tooltip.selector, customMethods)

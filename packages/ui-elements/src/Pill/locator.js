@@ -22,16 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
-// eslint-disable-next-line no-restricted-imports
-import TooltipLocator from '@instructure/ui-overlays/lib/Tooltip/locator'
+import { PillLocator } from './PillLocator'
 
-import { Pill } from './index'
-
-export default locator(Pill.selector, {
-  findTooltipContent: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    const tooltip = await TooltipLocator.find(element, options)
-    return tooltip ? tooltip.findContent(selector, options) : null
-  }
-})
+export { PillLocator }
+export default PillLocator

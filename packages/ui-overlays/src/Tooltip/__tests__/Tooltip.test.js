@@ -27,7 +27,7 @@ import { expect, mount, accessible, spy, wait } from '@instructure/ui-test-utils
 
 import { Tooltip } from '../index'
 
-import TooltipLocator from '../locator'
+import { TooltipLocator } from '../TooltipLocator'
 
 describe('<Tooltip />', async () => {
   describe('using as', async () => {

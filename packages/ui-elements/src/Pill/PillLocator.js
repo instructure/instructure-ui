@@ -21,7 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { MetricsListLocator } from './MetricsListLocator'
 
-export { MetricsListLocator }
-export default MetricsListLocator
+import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
+import { TooltipLocator } from '@instructure/ui-overlays'
+
+import { Pill } from './index'
+
+export const PillLocator = locator(Pill.selector, {
+  findTooltipContent: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    const tooltip = await TooltipLocator.find(element, options)
+    return tooltip ? tooltip.findContent(selector, options) : null
+  }
+})

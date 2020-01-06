@@ -30,7 +30,7 @@ import { View } from '@instructure/ui-view'
 import { List } from '../index'
 import { ListItem } from '../ListItem'
 
-import ListLocator from '../locator'
+import { ListLocator } from '../ListLocator'
 
 describe('<List />', async () => {
   it('should render list items and filter out null/falsy children', async () => {

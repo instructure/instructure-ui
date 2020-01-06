@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
 
-import { Progress } from './index'
+import { ProgressLocator } from './ProgressLocator'
 
-export default locator(Progress.selector)
+export { ProgressLocator }
+export default ProgressLocator

@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { BadgeLocator } from './BadgeLocator'
 
-import { Badge } from './index'
-
-export default locator(Badge.selector)
+export { BadgeLocator }
+export default BadgeLocator

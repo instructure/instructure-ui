@@ -28,9 +28,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { View } from '@instructure/ui-view'
 
 import { Pill } from '../index'
-import PillLocator from '../locator'
-
-import styles from '../styles.css'
+import { PillLocator } from '../PillLocator'
 
 describe('<Pill />', async () => {
   it('should render', async () => {

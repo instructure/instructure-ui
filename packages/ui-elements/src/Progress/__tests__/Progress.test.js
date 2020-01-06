@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { Progress } from '../index'
-import ProgressLocator from '../locator'
+import { ProgressLocator } from '../ProgressLocator'
 
 describe('<Progress />', async () => {
   it('should render', async () => {

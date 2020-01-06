@@ -28,7 +28,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { View } from '@instructure/ui-view'
 
 import { Tag } from '../index'
-import TagLocator from '../locator'
+import { TagLocator } from '../TagLocator'
 
 describe('<Tag />', async () => {
   it('should display text', async () => {

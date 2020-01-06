@@ -21,20 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
-// eslint-disable-next-line no-restricted-imports
-import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
-import { Tooltip } from './index'
 
-export const customMethods = {
-  findTrigger: (...args) => {
-    const { element, options } = parseQueryArguments(...args)
-    return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
-  },
-  findContent: (...args) => {
-    const { element, options } = parseQueryArguments(...args)
-    return PopoverLocator.findContent(element, '[role="tooltip"]', options)
-  }
-}
+import { TooltipLocator } from './TooltipLocator'
 
-export default locator(Tooltip.selector, customMethods)
+export { customMethods } from './TooltipLocator'
+
+export { TooltipLocator }
+export default TooltipLocator

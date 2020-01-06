@@ -21,7 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { MetricsListLocator } from './MetricsListLocator'
+import { locator, find } from '@instructure/ui-test-utils'
 
-export { MetricsListLocator }
-export default MetricsListLocator
+import { Link } from './index'
+
+export const LinkLocator = locator(Link.selector, {
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
+  }
+})

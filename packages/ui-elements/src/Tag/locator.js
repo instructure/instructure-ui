@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
 
-import { Tag } from './index'
+import { TagLocator } from './TagLocator'
 
-export default locator(Tag.selector)
+export { TagLocator }
+export default TagLocator

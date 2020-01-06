@@ -21,7 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { MetricsListLocator } from './MetricsListLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { MetricsListLocator }
-export default MetricsListLocator
+import { Rating } from './index'
+import styles from './RatingIcon/styles.css'
+
+const FilledIconLocator = locator(`.${styles.filled}`)
+
+export const RatingLocator = locator(Rating.selector, {
+  findAllFilledIcons: (...args) => {
+    return FilledIconLocator.findAll(...args)
+  }
+})

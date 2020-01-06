@@ -29,7 +29,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { View } from '@instructure/ui-view'
 
 import { Heading } from '../index'
-import HeadingLocator from '../locator'
+import { HeadingLocator } from '../HeadingLocator'
 
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {
