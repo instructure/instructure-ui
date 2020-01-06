@@ -21,5 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Modal } from './Modal'
-export { ModalLocator } from './Modal/ModalLocator'
+
+import { locator } from '@instructure/ui-test-utils'
+
+import { Modal } from './index'
+
+const ModalHeaderLocator = locator(Modal.Header.selector)
+const ModalBodyLocator = locator(Modal.Body.selector)
+const ModalFooterLocator = locator(Modal.Footer.selector)
+
+export const ModalLocator = locator(Modal.selector, {
+  findHeader: (...args) => {
+    return ModalHeaderLocator.find(...args)
+  },
+  findBody: (...args) => {
+    return ModalBodyLocator.find(...args)
+  },
+  findFooter: (...args) => {
+    return ModalFooterLocator.find(...args)
+  }
+})
