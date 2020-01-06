@@ -23,3 +23,4 @@
  */
 
 export { DrawerLayout } from './DrawerLayout'
+export { DrawerLayoutLocator, DrawerContentLocator, DrawerTrayLocator } from './DrawerLayout/DrawerLayoutLocator'

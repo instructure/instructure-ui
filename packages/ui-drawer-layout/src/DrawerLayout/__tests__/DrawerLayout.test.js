@@ -27,7 +27,7 @@ import { px, within } from '@instructure/ui-utils'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import DrawerLayoutFixture from '../__fixtures__/DrawerLayout.fixture'
-import DrawerLayoutLocator from '../locator'
+import { DrawerLayoutLocator } from '../DrawerLayoutLocator'
 
 describe('<DrawerLayout />', async () => {
   it('should render', async () => {

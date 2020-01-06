@@ -22,9 +22,23 @@
  * SOFTWARE.
  */
 
-import { DrawerLayoutLocator } from './DrawerLayoutLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { DrawerContentLocator, DrawerTrayLocator } from './DrawerLayoutLocator'
+import { DrawerLayout } from './index'
 
-export { DrawerLayoutLocator }
-export default DrawerLayoutLocator
+import { DrawerContentLocator } from './DrawerContent/DrawerContentLocator'
+import { DrawerTrayLocator } from './DrawerTray/DrawerTrayLocator'
+
+export { DrawerContentLocator, DrawerTrayLocator }
+
+export const DrawerLayoutLocator = locator(DrawerLayout.selector, {
+  findContent: (...args) => DrawerContentLocator.find(...args),
+  findTray: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(DrawerLayout.locatorAttribute)
+      return locator(`[${DrawerLayout.Tray.locatorAttribute}="${id}"]`).find(...args)
+    } else {
+      return null
+    }
+  }
+})
