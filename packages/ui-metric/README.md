@@ -28,18 +28,32 @@ yarn add @instructure/ui-metric
 ---
 example: false
 ---
-<Metric label="Grade" value="80%" />
+import React from 'react'
+import { Metric } from '@instructure/ui-metric'
+
+const MyMetric = () => {
+  return (
+    <Metric label="Grade" value="80%" />
+  )
+}
 ```
 
 ```jsx
 ---
 example: false
 ---
-<MetricGroup>
-  <Metric label="Grade" value="80%" />
-  <Metric label="Late" value="4" />
-  <Metric label="Missing" value="2" />
-</MetricGroup>
+import React from 'react'
+import { MetricGroup } from '@instructure/ui-metric'
+
+const MyGroup = () => {
+  return (
+    <MetricGroup>
+      <Metric label="Grade" value="80%" />
+      <Metric label="Late" value="4" />
+      <Metric label="Missing" value="2" />
+    </MetricGroup>
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-metric.svg

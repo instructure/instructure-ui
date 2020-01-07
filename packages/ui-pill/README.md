@@ -27,12 +27,19 @@ yarn add @instructure/ui-pill
 ---
 example: false
 ---
-  <Pill
-    color="info"
-    margin="x-small"
-  >
-    Draft
-  </Pill>
+import React from 'react'
+import { Pill } from '@instructure/ui-pill'
+
+const MyPill = () => {
+  return (
+    <Pill
+      color="info"
+      margin="x-small"
+    >
+      Draft
+    </Pill>
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-pill.svg

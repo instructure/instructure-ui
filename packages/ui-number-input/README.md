@@ -26,9 +26,9 @@ yarn add @instructure/ui-number-input
 
 ```js
 import React from 'react'
-import NumberInput from '@instructure/ui-number-input'
+import { NumberInput } from '@instructure/ui-number-input'
 
-export default function Example () {
+const MyNumber = () => {
   return (
     <NumberInput
       label="..."
@@ -41,7 +41,7 @@ export default function Example () {
 }
 ```
 
-For detailed usage and documentation, see component examples.
+For detailed usage and documentation, see NumberInput examples.
 
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-number-input.svg

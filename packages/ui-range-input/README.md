@@ -28,7 +28,19 @@ yarn add @instructure/ui-range-input
 ---
 example: false
 ---
-<RangeInput label="Grading range" defaultValue={50} max={100} min={0} />
+import React from 'react'
+import { RangeInput } from '@instructure/ui-range-input'
+
+const MyRange = () => {
+  return (
+    <RangeInput
+      label="Grading range"
+      defaultValue={50}
+      max={100}
+      min={0}
+    />
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-range-input.svg

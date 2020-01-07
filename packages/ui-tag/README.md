@@ -31,7 +31,7 @@ example: false
 import React from 'react'
 import { Tag } from '@instructure/ui-tag'
 
-const MySelect = () => {
+const MyTag = () => {
   return (
     <Tag text="Hello world" />
   )

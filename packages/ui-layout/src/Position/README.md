@@ -3,7 +3,8 @@ describes: DeprecatedPosition
 id: DeprecatedPosition__README
 ---
 
-**DEPRECATED:** Position will be removed from `ui-layout` in version 7.0.0. Use the [Position from ui-position](#Position) instead.
+**DEPRECATED:** Position will be removed from `ui-layout` in version 7.0.0. Use the [Position](#Position) from [ui-position](#ui-position) instead.
+***
 
 ### Internationalization
 `Position` placement can be internationalized for right to left languages. The

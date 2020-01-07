@@ -3,7 +3,8 @@ describes: DeprecatedResponsive
 id: DeprecatedResponsive__README
 ---
 
-**DEPRECATED:** Responsive will be removed from `ui-layout` in version 7.0.0. Use the [Responsive from ui-responsive](#Responsive) instead.
+**DEPRECATED:** Responsive will be removed from `ui-layout` in version 7.0.0. Use the [Responsive](#Responsive) from [ui-responsive](#ui-responsive) instead.
+***
 
 The `Responsive` component allows for rendering a component differently based on either
 the element or the viewport size.

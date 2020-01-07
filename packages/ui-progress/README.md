@@ -28,11 +28,18 @@ yarn add @instructure/ui-progress
 ---
 example: false
 ---
-<ProgressBar
-  screenReaderLabel="Loading completion"
-  valueNow={40}
-  valueMax={60}
-/>
+import React from 'react'
+import { ProgressBar } from '@instructure/ui-progress'
+
+const MyProgress = () => {
+  return (
+    <ProgressBar
+      screenReaderLabel="Loading completion"
+      valueNow={40}
+      valueMax={60}
+    />
+  )
+}
 ```
 
 

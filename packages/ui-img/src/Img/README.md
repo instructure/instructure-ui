@@ -1,14 +1,25 @@
 ---
 describes: Img
 ---
-### Important v8.0.0 upgrade notes
-Codemods are available to automatically update imports to the new package as well as any props that have changed. These changes and other things to note are described below.
 
-- **blur** has been updated to `withBlur`
-- **grayscale** has been updated to `withGrayscale`
-- the boolean **inline** has been updated to `display` with options ('inline-block', 'block)
-
-***
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
+    <Figure.Item>
+      The <code>blur</code> prop has been changed to <code>withBlur</code>
+    </Figure.Item>
+    <Figure.Item>
+      The <code>grayscale</code> prop has been changed to <code>withGrayscale</code>
+    </Figure.Item>
+    <Figure.Item>
+      The <code>inline</code> boolean prop has been changed to <code>display</code> with the options ('inline-block' or 'block')
+    </Figure.Item>
+  </Figure>
+</Guidelines>
+```
 
 An accessible image component
 

@@ -14,7 +14,7 @@ A view-only component for composing interactive lists and menus.
 
 ### Components
 The `ui-options` package contains the following:
-- [Options](#Optioins)
+- [Options](#Options)
 
 
 ### Installation
