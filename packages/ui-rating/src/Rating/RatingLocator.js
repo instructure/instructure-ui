@@ -21,7 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { RatingLocator } from './RatingLocator'
 
-export { RatingLocator }
-export default RatingLocator
+import { locator } from '@instructure/ui-test-utils'
+
+import { Rating } from './index'
+import styles from '../RatingIcon/styles.css'
+
+const FilledIconLocator = locator(`.${styles.filled}`)
+
+export const RatingLocator = locator(Rating.selector, {
+  findAllFilledIcons: (...args) => {
+    return FilledIconLocator.findAll(...args)
+  }
+})

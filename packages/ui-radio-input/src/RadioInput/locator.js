@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { RadioInputLocator } from './RadioInputLocator'
 
-import { RadioInput } from './index'
-
-export default locator(RadioInput.selector)
+export { RadioInputLocator }
+export default RadioInputLocator

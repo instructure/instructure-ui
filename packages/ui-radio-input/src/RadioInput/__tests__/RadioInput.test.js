@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { RadioInput } from '../index'
-import RadioInputLocator from '../locator'
+import { RadioInputLocator } from '../RadioInputLocator'
 
 describe('<RadioInput />', async () => {
   it('renders an input with type "radio"', async () => {

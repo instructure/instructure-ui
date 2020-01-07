@@ -21,7 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { RatingLocator } from './RatingLocator'
 
-export { RatingLocator }
-export default RatingLocator
+import { locator } from '@instructure/ui-test-utils'
+
+import { RangeInput } from './index'
+
+export const RangeInputLocator = locator(RangeInput.selector, {
+  findInput: (...args) => locator('input[type=range]').find(...args),
+  findOutput: (...args) => locator('output').find(...args)
+})

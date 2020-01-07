@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { RatingLocator } from './RatingLocator'
 
-export { RatingLocator }
-export default RatingLocator
+import { locator } from '@instructure/ui-test-utils'
+
+import { RadioInputGroup } from './index'
+
+export const RadioInputGroupLocator = locator(RadioInputGroup.selector)

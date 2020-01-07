@@ -28,7 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { View } from '@instructure/ui-view'
 
 import { Rating } from '../index'
-import RatingLocator from '../locator'
+import { RatingLocator } from '../RatingLocator'
 
 describe('<Rating />', async () => {
   it('should render the correct number of icons', async () => {

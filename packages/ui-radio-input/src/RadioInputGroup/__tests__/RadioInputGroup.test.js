@@ -28,7 +28,7 @@ import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
 import { RadioInput } from '../../RadioInput'
 import { RadioInputGroup } from '../index'
 
-import RadioInputGroupLocator from '../locator'
+import { RadioInputGroupLocator } from '../RadioInputGroupLocator'
 
 describe('<RadioInputGroup />', async () => {
   it('adds the name props to all RadioInput types', async () => {

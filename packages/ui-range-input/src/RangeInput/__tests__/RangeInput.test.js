@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { RangeInput } from '../index'
-import RangeInputLocator from '../locator'
+import { RangeInputLocator } from '../RangeInputLocator'
 
 describe('<RangeInput />', async () => {
   it('renders an input with type "range"', async () => {
