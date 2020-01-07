@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps, pickProps, getElementType } from '@instructure/ui-react-utils'
-import { Button } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
@@ -146,17 +146,18 @@ class ToggleGroup extends Component {
       label = toggleLabel
     }
     return (
-      <Button
+      <IconButton
         {...toggleProps}
-        variant="icon"
+        withBackground={false}
+        withBorder={false}
         size={(size === 'large') ? 'medium' : 'small'}
-        buttonRef={(el) => {
+        elementRef={(el) => {
           this._button = el
         }}
-        icon={this.renderIcon(expanded)}
+        screenReaderLabel={label}
       >
-        <ScreenReaderContent>{label}</ScreenReaderContent>
-      </Button>
+        {this.renderIcon(expanded)}
+      </IconButton>
     )
   }
 
