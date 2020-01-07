@@ -23,3 +23,4 @@
  */
 
 export { Pill } from './Pill'
+export { PillLocator } from './Pill/PillLocator'

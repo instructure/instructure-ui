@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, wait } from '@instructure/ui-test-utils'
 
 import { Pill } from '../index'
-import PillLocator from '../locator'
+import { PillLocator } from '../PillLocator'
 
 describe('<Pill />', async () => {
   it('should render', async () => {

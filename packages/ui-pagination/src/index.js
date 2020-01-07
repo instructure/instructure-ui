@@ -23,3 +23,4 @@
  */
 
 export { Pagination, PaginationButton } from './Pagination'
+export { PaginationLocator } from './Pagination/PaginationLocator'

@@ -28,7 +28,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 
 import { PaginationArrowButton } from '../index'
 
-import PaginationArrowButtonLocator from '../locator'
+import { PaginationArrowButtonLocator } from '../PaginationArrowButtonLocator'
 
 describe('<PaginationArrowButton />', async () => {
   it('should render', async () => {

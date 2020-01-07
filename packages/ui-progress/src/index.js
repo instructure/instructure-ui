@@ -23,5 +23,8 @@
  */
 
 export { Progress } from './Progress'
+export { ProgressLocator } from './Progress/ProgressLocator'
 export { ProgressBar } from './ProgressBar'
+export { ProgressBarLocator } from './ProgressBar/ProgressBarLocator'
 export { ProgressCircle } from './ProgressCircle'
+export { ProgressCircleLocator } from './ProgressCircle/ProgressCircleLocator'

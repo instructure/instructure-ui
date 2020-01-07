@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { ProgressBar } from '../index'
-import ProgressBarLocator from '../locator'
+import { ProgressBarLocator } from '../ProgressBarLocator'
 
 describe('<ProgressBar />', async () => {
   it('should render', async () => {

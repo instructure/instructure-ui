@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { ProgressCircle } from '../index'
-import ProgressCircleLocator from '../locator'
+import { ProgressCircleLocator } from '../ProgressCircleLocator'
 
 describe('<ProgressCircle />', async () => {
   it('should render', async () => {

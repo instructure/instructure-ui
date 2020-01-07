@@ -29,7 +29,7 @@ import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { Pagination, PaginationButton } from '../index'
-import PaginationLocator from '../locator'
+import { PaginationLocator } from '../PaginationLocator'
 
 const buildPages = (count = 4, current = 0) => {
   return Array.from(Array(count)).map((v, i) => {

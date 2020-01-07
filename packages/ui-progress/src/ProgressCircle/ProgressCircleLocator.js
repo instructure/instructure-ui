@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import { PillLocator } from './PillLocator'
+import { ProgressCircle } from './index'
 
-export { PillLocator }
-export default PillLocator
+export const ProgressCircleLocator = locator(ProgressCircle.selector)

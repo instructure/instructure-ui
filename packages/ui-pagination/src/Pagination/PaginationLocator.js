@@ -21,8 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import { PillLocator } from './PillLocator'
+import { PaginationArrowButtonLocator } from './PaginationArrowButton/PaginationArrowButtonLocator'
+import { Pagination } from './index'
 
-export { PillLocator }
-export default PillLocator
+const PaginationButtonLocator = locator(Pagination.Page.selector)
+
+export const PaginationLocator = locator(Pagination.selector, {
+  findAllPageButtons: async (...args) => PaginationButtonLocator.findAll(...args),
+  findPageButton: async (...args) => PaginationButtonLocator.find(...args),
+  findArrowButton: async (...args) => PaginationArrowButtonLocator.find(...args)
+})
