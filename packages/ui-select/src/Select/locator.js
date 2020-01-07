@@ -21,19 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { SelectLocator } from './SelectLocator'
 
-// eslint-disable-next-line no-restricted-imports
-import OptionsLocator from '@instructure/ui-options/lib/Options/locator'
-// eslint-disable-next-line no-restricted-imports
-import PopoverLocator from '@instructure/ui-popover/lib/Popover/locator'
-
-import { Select } from './index'
-
-export default locator(Select.selector, {
-  findInput: (...args) => locator('input').find(...args),
-  findOptionsList: async (element, ...args) => {
-    const content = await PopoverLocator.findContent(element, ...args)
-    return content ? OptionsLocator.find(content.getDOMNode()) : null
-  }
-})
+export { SelectLocator }
+export default SelectLocator

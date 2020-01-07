@@ -26,7 +26,7 @@ import React from 'react'
 import { mount, expect, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { InlineSVG } from '../index'
-import InlineSVGLocator from '../locator'
+import { InlineSVGLocator } from '../InlineSVGLocator'
 import InlineSVGExamples from '../__examples__/InlineSVG.examples'
 
 import styles from '../styles.css'

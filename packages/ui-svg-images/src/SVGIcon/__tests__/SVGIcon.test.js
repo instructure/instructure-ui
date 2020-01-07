@@ -26,7 +26,7 @@ import React from 'react'
 import { mount, expect, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { SVGIcon } from '../index'
-import SVGIconLocator from '../locator'
+import { SVGIconLocator } from '../SVGIconLocator'
 import SVGIconExamples from '../__examples__/SVGIcon.examples'
 
 import styles from '../styles.css'

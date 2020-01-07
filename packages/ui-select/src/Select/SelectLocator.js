@@ -21,6 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-export { Spinner } from './Spinner'
-export { SpinnerLocator } from './Spinner/SpinnerLocator'
+import { OptionsLocator } from '@instructure/ui-options'
+import { PopoverLocator } from '@instructure/ui-popover'
+
+import { Select } from './index'
+
+export const SelectLocator = locator(Select.selector, {
+  findInput: (...args) => locator('input').find(...args),
+  findOptionsList: async (element, ...args) => {
+    const content = await PopoverLocator.findContent(element, ...args)
+    return content ? OptionsLocator.find(content.getDOMNode()) : null
+  }
+})

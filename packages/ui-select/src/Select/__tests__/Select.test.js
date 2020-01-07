@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { Select } from '../index'
-import SelectLocator from '../locator'
+import { SelectLocator } from '../SelectLocator'
 import SelectExamples from '../__examples__/Select.examples'
 
 describe('<Select />', async () => {

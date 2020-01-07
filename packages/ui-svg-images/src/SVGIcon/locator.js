@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator  } from '@instructure/ui-test-utils'
+import { SVGIconLocator } from './SVGIconLocator'
 
-import { SVGIcon } from './index'
-
-export default locator(SVGIcon.selector)
+export { SVGIconLocator }
+export default SVGIconLocator

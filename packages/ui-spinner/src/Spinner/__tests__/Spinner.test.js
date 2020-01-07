@@ -28,7 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { View } from '@instructure/ui-view'
 
 import { Spinner } from '../index'
-import SpinnerLocator from '../locator'
+import { SpinnerLocator } from '../SpinnerLocator'
 
 describe('<Spinner />', async () => {
   it('should render', async () => {
