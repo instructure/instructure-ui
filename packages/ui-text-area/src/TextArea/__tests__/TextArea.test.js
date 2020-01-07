@@ -27,7 +27,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { TextArea } from '../index'
 
-import TextAreaLocator from '../locator'
+import { TextAreaLocator } from '../TextAreaLocator'
 import styles from '../styles.css'
 
 describe('TextArea', async () => {

@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Tabs } from '../index'
-import TabsLocator from '../locator'
+import { TabsLocator } from '../TabsLocator'
 
 describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {

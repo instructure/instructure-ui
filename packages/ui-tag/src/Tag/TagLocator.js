@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { TabList, TabPanel } from './TabList'
-export { TabListLocator } from './TabList/TabListLocator'
-export { Tabs } from './Tabs'
-export { TabsLocator } from './Tabs/TabsLocator'
+import { locator } from '@instructure/ui-test-utils'
+
+import { Tag } from './index'
+
+export const TagLocator = locator(Tag.selector)

@@ -23,3 +23,4 @@
  */
 
 export { Tag } from './Tag'
+export { TagLocator } from './Tag/TagLocator'

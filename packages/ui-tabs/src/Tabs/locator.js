@@ -21,28 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { TabsLocator } from './TabsLocator'
 
-import { Tabs } from './index'
-
-const TabLocator = locator('[role="tab"]')
-const PanelLocator = locator('[role="tabpanel"]')
-const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
-
-export default locator(Tabs.selector, {
-  findTab: (...args) => {
-    return TabLocator.find(...args)
-  },
-  findAllTabs: (...args) => {
-    return TabLocator.findAll(...args)
-  },
-  findSelectedTab: (...args) => {
-    return SelectedTabLocator.find( ...args)
-  },
-  findTabPanel: (...args) => {
-    return PanelLocator.find(...args)
-  },
-  findAllTabPanels: (...args) => {
-    return PanelLocator.findAll(...args)
-  }
-})
+export { TabsLocator }
+export default TabsLocator

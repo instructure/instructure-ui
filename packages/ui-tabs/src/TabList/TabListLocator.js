@@ -23,8 +23,27 @@
  */
 import { locator } from '@instructure/ui-test-utils'
 
-import { Table } from './index'
+import { TabList } from './index'
 
-export default locator(Table.locator, {
-  /* custom component query methods go here */
+const TabLocator = locator(TabList.Tab.selector)
+const TabPanelLocator = locator(TabList.Panel.selector)
+
+const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
+
+export const TabListLocator = locator(TabList.selector, {
+  findTab: (...args) => {
+    return TabLocator.find(...args)
+  },
+  findAllTabs: (...args) => {
+    return TabLocator.findAll(...args)
+  },
+  findSelectedTab: (...args) => {
+    return SelectedTabLocator.find(...args)
+  },
+  findTabPanel: (...args) => {
+    return TabPanelLocator.find(...args)
+  },
+  findAllTabPanels: (...args) => {
+    return TabPanelLocator.findAll(...args)
+  }
 })
