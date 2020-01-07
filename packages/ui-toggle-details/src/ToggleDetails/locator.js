@@ -21,23 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { ToggleDetailsLocator } from './ToggleDetailsLocator'
 
-import { ToggleDetails } from './index'
+export { customMethods } from './ToggleDetailsLocator'
 
-const ToggleLocator = locator('[aria-expanded][aria-controls]')
-
-export const customMethods = {
-  clickToggle: async (element, ...args) => (await ToggleLocator.find(element)).click(...args),
-  findToggle: (...args) => ToggleLocator.find(...args),
-  findContent: async (element, ...args) => {
-    const toggle = await ToggleLocator.find(element)
-    if (toggle) {
-      return locator(`#${toggle.getAttribute('aria-controls')}`).find(...args)
-    } else {
-      return null
-    }
-  }
-}
-
-export default locator(ToggleDetails.selector, customMethods)
+export { ToggleDetailsLocator }
+export default ToggleDetailsLocator

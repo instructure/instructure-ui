@@ -21,18 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { TreeBrowserLocator } from './TreeBrowserLocator'
 
-import { TreeBrowser } from './index'
-
-// TODO: if we make a TreeBrowserItem component + locator we could use it here.
-const TreeBrowserItemLocator =  locator('[role="treeitem"]')
-
-export default locator(TreeBrowser.selector, {
-  findAllItems: (...args) => {
-    return TreeBrowserItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return TreeBrowserItemLocator.find(...args)
-  }
-})
+export { TreeBrowserLocator }
+export default TreeBrowserLocator

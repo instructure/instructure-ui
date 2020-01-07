@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { ToggleGroupLocator } from './ToggleGroupLocator'
 
-export { customMethods } from './ToggleGroupLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { ToggleGroupLocator }
-export default ToggleGroupLocator
+import { Tray } from './index'
+
+export const TrayLocator = locator(Tray.selector)

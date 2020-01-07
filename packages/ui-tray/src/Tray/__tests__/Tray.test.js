@@ -27,7 +27,7 @@ import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import { Tray } from '../index'
-import TrayLocator from '../locator'
+import { TrayLocator } from '../TrayLocator'
 
 describe('<Tray />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {

@@ -24,4 +24,6 @@
 
 export { Expandable } from './Expandable'
 export { ToggleDetails } from './ToggleDetails'
+export { ToggleDetailsLocator } from './ToggleDetails/ToggleDetailsLocator'
 export { ToggleGroup } from './ToggleGroup'
+export { ToggleGroupLocator } from './ToggleGroup/ToggleGroupLocator'

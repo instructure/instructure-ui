@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { TrayLocator } from './TrayLocator'
 
-import { Tray } from './index'
-
-export default locator(Tray.selector)
+export { TrayLocator }
+export default TrayLocator

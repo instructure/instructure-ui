@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { TreeBrowser } from '../index'
 
-import TreeBrowserLocator from '../locator'
+import { TreeBrowserLocator } from '../TreeBrowserLocator'
 
 const COLLECTIONS_DATA = {
   2: { id: 2, name: 'Root Directory', collections: [3, 4], items: [1] },

@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import { ToggleDetails } from '../index'
-import ToggleDetailsLocator from '../locator'
+import { ToggleDetailsLocator } from '../ToggleDetailsLocator'
 
 describe('<ToggleDetails />', async () => {
   it('should hide its content', async () => {

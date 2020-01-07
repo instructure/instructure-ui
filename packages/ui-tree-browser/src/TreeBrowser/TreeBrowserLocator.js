@@ -21,9 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { ToggleGroupLocator } from './ToggleGroupLocator'
+import { locator } from '@instructure/ui-test-utils'
 
-export { customMethods } from './ToggleGroupLocator'
+import { TreeBrowser } from './index'
 
-export { ToggleGroupLocator }
-export default ToggleGroupLocator
+// TODO: if we make a TreeBrowserItem component + locator we could use it here.
+const TreeBrowserItemLocator = locator('[role="treeitem"]')
+
+export const TreeBrowserLocator = locator(TreeBrowser.selector, {
+  findAllItems: (...args) => {
+    return TreeBrowserItemLocator.findAll(...args)
+  },
+  findItem: (...args) => {
+    return TreeBrowserItemLocator.find(...args)
+  }
+})

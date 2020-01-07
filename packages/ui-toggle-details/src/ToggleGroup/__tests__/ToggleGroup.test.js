@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, spy, wait } from '@instructure/ui-test-utils'
 
 import { ToggleGroup } from '../index'
-import ToggleGroupLocator from '../locator'
+import { ToggleGroupLocator } from '../ToggleGroupLocator'
 
 describe('<ToggleGroup />', () => {
   it('should show its summary and hide its children by default', async () => {
