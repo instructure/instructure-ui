@@ -26,8 +26,7 @@ import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
 import { FocusableView } from '@instructure/ui-focusable'
-import { Button } from '@instructure/ui-buttons'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { IconButton } from '@instructure/ui-buttons'
 import { IconEditLine } from '@instructure/ui-icons'
 import { warn } from '@instructure/console/macro'
 import { createChainedFunction } from '@instructure/ui-utils'
@@ -63,7 +62,7 @@ class InPlaceEdit extends Component {
      * Function to render the edit button.
      *
      * @param {Object} { isVisible, onClick, onFocus, onBlur, buttonRef }
-     * @returns {eleemt} the edit button DOM sub-tree
+     * @returns {element} the edit button DOM sub-tree
      *
      * If you choose to use the default edit button, add `label` to the
      * incoming `props` parameter and call `InPlaceEdit.renderDefaultEditButton(props)`
@@ -152,7 +151,7 @@ class InPlaceEdit extends Component {
 
   renderEditButton ({ buttonRef, ...rest }) {
     return this.props.renderEditButton({
-      buttonRef: createChainedFunction(this.handleEditButtonRef, buttonRef),
+      elementRef: createChainedFunction(this.handleEditButtonRef, buttonRef),
       ...rest
     })
   }
@@ -164,14 +163,15 @@ class InPlaceEdit extends Component {
       return null
     }
     return (
-      <Button
+      <IconButton
         size="small"
-        variant="icon"
-        icon={isVisible ? IconEditLine : null}
+        screenReaderLabel={label}
+        withBackground={false}
+        withBorder={false}
         {...buttonProps}
       >
-        <ScreenReaderContent>{label}</ScreenReaderContent>
-      </Button>
+        { isVisible ? IconEditLine : null }
+      </IconButton>
     )
   }
 
