@@ -76,6 +76,7 @@ module.exports = [
       '**/locales/**',
       '**/theme.js',
       '**/locator.js',
+      '**/*Locator.js',
 
       // ignore index files that just re-export
       '**/src/index.js',

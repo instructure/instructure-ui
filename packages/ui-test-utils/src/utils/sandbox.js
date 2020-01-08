@@ -254,8 +254,15 @@ function setAttributes (element, attributes = []) {
   }
 }
 
-// only allow one Sandbox instance
-const sandbox = global.sandbox = global.sandbox || new Sandbox()
+let sandbox = {}
+
+// Don't initialize sandbox for development or production
+const ENV = process.env.NODE_ENV
+if (ENV !== 'development' && ENV !== 'production') {
+  // only allow one Sandbox instance
+  sandbox = global.sandbox = global.sandbox || new Sandbox()
+}
+
 const viewport = sandbox.viewport
 const mount = (element, context) => sandbox.mount(element, context)
 const unmount = sandbox.unmount
