@@ -48,7 +48,13 @@ class InlineSVG extends Component {
     title: PropTypes.string,
     description: PropTypes.string,
     focusable: PropTypes.bool,
+    /**
+     * To let the SVG expand to fill its container, use `auto`
+     */
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * To let the SVG expand to fill its container, use `auto`
+     */
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     inline: PropTypes.bool,
     color: PropTypes.oneOf([
@@ -73,8 +79,8 @@ class InlineSVG extends Component {
     description: '',
     inline: true,
     children: null,
-    width: undefined,
-    height: undefined,
+    width: '1em',
+    height: '1em',
     color: 'inherit'
   }
 
@@ -152,8 +158,6 @@ class InlineSVG extends Component {
   render () {
     const {
       style, // eslint-disable-line react/prop-types
-      width,
-      height,
       title,
       description,
       focusable,
@@ -162,6 +166,10 @@ class InlineSVG extends Component {
       color,
       ...props
     } = this.props
+
+    // if width or height are 'auto', don't supply anything to the SVG
+    const width = this.props.width === 'auto' ? null : this.props.width
+    const height = this.props.height === 'auto' ? null : this.props.height
 
     return (
       <svg
@@ -172,8 +180,8 @@ class InlineSVG extends Component {
           width,
           height
         }}
-        width={width || '1em'}
-        height={height || '1em'}
+        width={width}
+        height={height}
         aria-hidden={title ? null : 'true'}
         aria-labelledby={this.labelledBy}
         role={this.role}

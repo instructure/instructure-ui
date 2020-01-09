@@ -171,6 +171,22 @@ describe('<InlineSVG />', async () => {
     expect(height).to.equal('200px')
   })
 
+  it('should not set width/height attributes and styles when value is auto', async () => {
+    await mount(
+      <InlineSVG
+        src={SVG_SRC}
+        width='auto'
+        height='auto'
+      />
+    )
+    const svg = await InlineSVGLocator.find()
+
+    expect(svg.getDOMNode()).to.have.style('width', '')
+    expect(svg.getDOMNode()).to.have.style('height', '')
+    expect(svg.getAttribute('width')).to.not.exist()
+    expect(svg.getAttribute('height')).to.not.exist()
+  })
+
   it('should set focusable to false by default', async () => {
     await mount(
       <InlineSVG
