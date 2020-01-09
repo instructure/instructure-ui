@@ -23,12 +23,7 @@
  */
 export { Mask } from './Mask'
 export { Modal } from './Modal'
-export { ModalLocator } from './Modal/ModalLocator'
 export { Overlay } from './Overlay'
-export { OverlayLocator } from './Overlay/OverlayLocator'
 export { Popover } from './Popover'
-export { PopoverLocator, PopoverContentLocator, PopoverTriggerLocator } from './Popover/PopoverLocator'
 export { Tooltip } from './Tooltip'
-export { TooltipLocator } from './Tooltip/TooltipLocator'
 export { Tray } from './Tray'
-export { TrayLocator } from './Tray/TrayLocator'

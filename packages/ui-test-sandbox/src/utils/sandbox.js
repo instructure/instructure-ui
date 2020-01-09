@@ -31,14 +31,14 @@ import initConsole from './initConsole'
 class Sandbox {
   constructor() {
     // eslint-disable-next-line no-console
-    console.info('[ui-test-utils] Initializing test sandbox...')
+    console.info('[ui-test-sandbox] Initializing test sandbox...')
     try {
       // global Mocha (or Jest?) hooks
       before(this.init.bind(this))
       beforeEach(this.setup.bind(this))
       afterEach(this.teardown.bind(this))
     } catch (e) {
-      console.warn(`[ui-test-utils] error initializing test sandbox: ${e}`)
+      console.warn(`[ui-test-sandbox] error initializing test sandbox: ${e}`)
     }
   }
 
@@ -162,7 +162,7 @@ class Sandbox {
 
   stub(obj, method, fn) {
     if (!this._sandbox) {
-      throw new Error('[ui-test-utils] a stub cannot be created outside an `it`, `before`, or `beforeEach` block.')
+      throw new Error('[ui-test-sandbox] a stub cannot be created outside an `it`, `before`, or `beforeEach` block.')
     }
 
     if (typeof fn === 'function') {
@@ -174,7 +174,7 @@ class Sandbox {
 
   spy(obj, method) {
     if (!this._sandbox) {
-      throw new Error('[ui-test-utils] a spy cannot be created outside an `it`, `before`, or `beforeEach` block.')
+      throw new Error('[ui-test-sandbox] a spy cannot be created outside an `it`, `before`, or `beforeEach` block.')
     }
 
     return this._sandbox.spy(obj, method)
@@ -190,7 +190,7 @@ class Sandbox {
 
   viewport() {
     if (!global.viewport) {
-      console.error('[ui-test-utils] the `viewport` global has not been configured. See https://github.com/squidfunk/karma-viewport.')
+      console.error('[ui-test-sandbox] the `viewport` global has not been configured. See https://github.com/squidfunk/karma-viewport.')
     }
     return global.viewport
   }
@@ -254,15 +254,8 @@ function setAttributes(element, attributes = []) {
   }
 }
 
-let sandbox = {}
-
-// Don't initialize sandbox for development or production
-const ENV = process.env.NODE_ENV
-if (ENV !== 'development' && ENV !== 'production') {
-  // only allow one Sandbox instance
-  sandbox = global.sandbox = global.sandbox || new Sandbox()
-}
-
+// only allow one Sandbox instance
+const sandbox = global.sandbox = global.sandbox || new Sandbox()
 const viewport = sandbox.viewport
 const mount = (element, context) => sandbox.mount(element, context)
 const unmount = sandbox.unmount

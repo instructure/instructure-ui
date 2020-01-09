@@ -38,7 +38,7 @@ export function waitForQueryResult(
 ) {
   if (typeof element === 'undefined') {
     if (typeof document === 'undefined') {
-      throw new Error('[ui-test-utils] Could not find a valid HtmlElement for query.')
+      throw new Error('[ui-test-queries] Could not find a valid HtmlElement for query.')
     } else {
       // eslint-disable-next-line no-param-reassign
       element = document.body
@@ -59,7 +59,7 @@ export function waitForQueryResult(
           selector: JSON.stringify(queryFn)
         }
         onDone(new Error([
-          '[ui-test-utils] Invalid element query function.',
+          '[ui-test-queries] Invalid element query function.',
           lastResult.selector
         ].join('\n')), lastResult)
         return
@@ -104,7 +104,7 @@ export function waitForQueryResult(
     function onTimeout() {
       const timedoutError = new Error(
         [
-          `[ui-test-utils] Timed out waiting for Element query results...`,
+          `[ui-test-queries] Timed out waiting for Element query results...`,
           expectEmpty ? `Expected to find nothing but found ${lastResult.results}` : '',
           `with selector: "${lastResult.selector}"`,
           `element: ${elementToString(element, 7000, { highlight: false })}`

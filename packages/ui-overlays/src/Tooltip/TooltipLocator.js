@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
-import { PopoverLocator } from '@instructure/ui-popover'
+
+import { locator } from '@instructure/ui-test-locator'
+import { parseQueryArguments } from '@instructure/ui-test-queries'
+// eslint-disable-next-line no-restricted-imports
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 import { Tooltip } from './index'
 
 export const customMethods = {

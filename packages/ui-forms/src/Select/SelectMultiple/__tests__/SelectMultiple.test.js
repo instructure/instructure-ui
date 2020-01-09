@@ -25,9 +25,10 @@
 import React from 'react'
 import { locator, expect, mount, stub, spy } from '@instructure/ui-test-utils'
 
-import { SelectMultiple } from '../index'
+// eslint-disable-next-line no-restricted-imports
+import { PositionLocator } from '@instructure/ui-layout/es/Position/PositionLocator'
 
-import { PositionLocator } from '@instructure/ui-layout'
+import { SelectMultiple } from '../index'
 
 const InputLocator = locator('input[type="text"]')
 const OptionsLocator = locator('li')

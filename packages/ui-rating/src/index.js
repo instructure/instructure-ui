@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Rating } from './Rating'
-export { RatingLocator } from './Rating/RatingLocator'

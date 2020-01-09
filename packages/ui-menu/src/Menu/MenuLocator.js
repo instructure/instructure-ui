@@ -21,12 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  locator,
-  parseQueryArguments
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
+import { parseQueryArguments } from '@instructure/ui-test-queries'
 
-import { PopoverLocator } from '@instructure/ui-overlays'
+// eslint-disable-next-line no-restricted-imports
+import { PopoverLocator } from '@instructure/ui-overlays/es/Popover/PopoverLocator'
 
 import { Menu } from './index'
 

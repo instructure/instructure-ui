@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'
-export { MenuLocator, MenuItemLocator, MenuItemGroupLocator } from './Menu/MenuLocator'

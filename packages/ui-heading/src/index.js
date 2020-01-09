@@ -23,4 +23,3 @@
  */
 
 export { Heading } from './Heading'
-export { HeadingLocator } from './Heading/HeadingLocator'

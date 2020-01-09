@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 export { Position } from './Position'
-export { PositionLocator, PositionContentLocator, PositionTargetLocator } from './Position/PositionLocator'
 
 export { calculateElementPosition } from './calculateElementPosition'
 export { executeMirrorFunction } from './executeMirrorFunction'

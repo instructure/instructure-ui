@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Modal } from './Modal'
-export { ModalLocator } from './Modal/ModalLocator'

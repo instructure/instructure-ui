@@ -23,4 +23,3 @@
  */
 
 export { Spinner } from './Spinner'
-export { SpinnerLocator } from './Spinner/SpinnerLocator'

@@ -22,6 +22,4 @@
  * SOFTWARE.
  */
 export { TabList, TabPanel } from './TabList'
-export { TabListLocator } from './TabList/TabListLocator'
 export { Tabs } from './Tabs'
-export { TabsLocator } from './Tabs/TabsLocator'

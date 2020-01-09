@@ -23,12 +23,7 @@
  */
 
 export { BaseButton } from './BaseButton'
-export { BaseButtonLocator } from './BaseButton/BaseButtonLocator'
 export { Button } from './Button'
-export { ButtonLocator } from './Button/ButtonLocator'
 export { CloseButton } from './CloseButton'
-export { CloseButtonLocator } from './CloseButton/CloseButtonLocator'
 export { CondensedButton } from './CondensedButton'
-export { CondensedButtonLocator } from './CondensedButton/CondensedButtonLocator'
 export { IconButton } from './IconButton'
-export { IconButtonLocator } from './IconButton/IconButtonLocator'

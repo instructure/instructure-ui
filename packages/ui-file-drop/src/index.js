@@ -23,4 +23,3 @@
  */
 
 export { FileDrop } from './FileDrop'
-export { FileDropLocator } from './FileDrop/FileDropLocator'

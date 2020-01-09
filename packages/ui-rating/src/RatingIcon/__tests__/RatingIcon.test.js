@@ -26,7 +26,9 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { ApplyTheme } from '@instructure/ui-themeable'
-import { Transition, TransitionLocator } from '@instructure/ui-motion'
+import { Transition } from '@instructure/ui-motion'
+// eslint-disable-next-line no-restricted-imports
+import { TransitionLocator } from '@instructure/ui-motion/es/Transition/TransitionLocator'
 
 import { RatingIcon } from '../index'
 

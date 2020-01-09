@@ -23,4 +23,3 @@
  */
 
 export { Tray } from './Tray'
-export { TrayLocator } from './Tray/TrayLocator'

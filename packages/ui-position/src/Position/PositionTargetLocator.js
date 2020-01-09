@@ -23,6 +23,6 @@
  */
 
 import { Position } from './index'
-import { locator } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
 
 export const PositionTargetLocator = locator(`[${Position.targetLocatorAttribute}]`)

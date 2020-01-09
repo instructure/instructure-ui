@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Breadcrumb, BreadcrumbLink } from './Breadcrumb'
-export { BreadcrumbLocator, BreadcrumbLinkLocator } from './Breadcrumb/BreadcrumbLocator'

@@ -23,4 +23,3 @@
  */
 
 export { Link } from './Link'
-export { LinkLocator } from './Link/LinkLocator'

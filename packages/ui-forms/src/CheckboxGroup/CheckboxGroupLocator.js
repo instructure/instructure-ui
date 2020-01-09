@@ -22,4 +22,5 @@
  * SOFTWARE.
  */
 
-export { CheckboxGroupLocator } from '@instructure/ui-checkbox'
+// eslint-disable-next-line no-restricted-imports
+export { CheckboxGroupLocator } from '@instructure/ui-checkbox/es/CheckboxGroup/CheckboxGroupLocator'

@@ -91,7 +91,7 @@ function querySelectorFrames(element, selector, options) {
       try {
         doc = frame.contentDocument.documentElement
       } catch (e) {
-        console.warn(`[ui-test-utils] could not find document element for iframe: ${e}`)
+        console.warn(`[ui-test-queries] could not find document element for iframe: ${e}`)
       }
       return doc
     })
@@ -128,7 +128,7 @@ function matchesSelector(...args) {
 function throwQueryError(element, selector) {
   throw new Error(
     [
-      `[ui-test-utils] Invalid query arguments:`,
+      `[ui-test-queries] Invalid query arguments:`,
       `element: ${elementToString(element, 7000, { highlight: false })}`,
       `selector: ${JSON.stringify(selector)}`
     ]

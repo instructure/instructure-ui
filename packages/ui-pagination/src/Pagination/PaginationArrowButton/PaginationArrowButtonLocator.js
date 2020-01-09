@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-import { locator, find } from '@instructure/ui-test-utils'
-import { TooltipLocator } from '@instructure/ui-overlays'
+import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-queries'
+// eslint-disable-next-line no-restricted-imports
+import { TooltipLocator } from '@instructure/ui-overlays/es/Tooltip/TooltipLocator'
 
 import { PaginationArrowButton } from './index'
 

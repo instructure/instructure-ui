@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, find } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-queries'
 
 import { CondensedButton } from './index'
 

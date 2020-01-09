@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
 
 export const PopoverTriggerLocator = locator('[data-popover-trigger]')

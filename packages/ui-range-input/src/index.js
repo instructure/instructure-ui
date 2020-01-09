@@ -23,4 +23,3 @@
  */
 
 export { RangeInput } from './RangeInput'
-export { RangeInputLocator } from './RangeInput/RangeInputLocator'

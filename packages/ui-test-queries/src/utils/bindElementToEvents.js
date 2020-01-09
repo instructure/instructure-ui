@@ -88,7 +88,7 @@ async function firePointerEvent(element, fn, init, options = { clickable: true }
           resolve(fireEvent(init))
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a pointer event on an element that is not 'clickable': ${element}`)
+            new Error(`[ui-test-queries] could not fire a pointer event on an element that is not 'clickable': ${element}`)
           )
         }
       } catch (e) {
@@ -122,7 +122,7 @@ async function fireClickEvent(element, fn, init, options = { clickable: true, si
           }
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a click event on an element that is not 'clickable': ${element}`)
+            new Error(`[ui-test-queries] could not fire a click event on an element that is not 'clickable': ${element}`)
           )
         }
       } catch (e) {
@@ -151,7 +151,7 @@ async function fireBlurEvent(element, fn, init, options = { focusable: true, sim
           if (!options.simulate) {
             const fireEvent = fn.bind(null, focusable)
 
-            console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic blur.
+            console.warn(`[ui-test-queries] passing FocusEvent initilization prevents programmatic blur.
         Test event handlers (with event initialization) and focus state behavior separately.
         Note: this means that .focused will be true unless you call .blur without event initialization.`)
 
@@ -162,7 +162,7 @@ async function fireBlurEvent(element, fn, init, options = { focusable: true, sim
           }
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a 'blur' event on an element that is not 'focusable': ${element}`)
+            new Error(`[ui-test-queries] could not fire a 'blur' event on an element that is not 'focusable': ${element}`)
           )
         }
       } catch (e) {
@@ -194,7 +194,7 @@ async function fireFocusEvent(element, fn, init, options = { focusable: true, si
           } else {
             const fireEvent = fn.bind(null, focusable)
 
-            console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic focus.
+            console.warn(`[ui-test-queries] passing FocusEvent initilization prevents programmatic focus.
         Test event handlers (with event initialization) and focus state behavior separately.
         Note: this means that .focused will be false unless you call .focus without event initialization.`)
 
@@ -202,7 +202,7 @@ async function fireFocusEvent(element, fn, init, options = { focusable: true, si
           }
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a 'focus' event on an element that is not 'focusable': ${element}`)
+            new Error(`[ui-test-queries] could not fire a 'focus' event on an element that is not 'focusable': ${element}`)
           )
         }
       } catch (e) {
@@ -240,7 +240,7 @@ async function fireKeyboardEvent(element, fn, whichKey, init, options = { focusa
           }))
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a ${key} event on an element that is not 'focusable': ${element}`)
+            new Error(`[ui-test-queries] could not fire a ${key} event on an element that is not 'focusable': ${element}`)
           )
         }
       } catch (e) {

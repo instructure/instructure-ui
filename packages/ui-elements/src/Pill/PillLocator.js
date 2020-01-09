@@ -22,8 +22,11 @@
  * SOFTWARE.
  */
 
-import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
-import { TooltipLocator } from '@instructure/ui-overlays'
+import { locator } from '@instructure/ui-test-locator'
+import { parseQueryArguments } from '@instructure/ui-test-queries'
+
+// eslint-disable-next-line no-restricted-imports
+import { TooltipLocator } from '@instructure/ui-overlays/es/Tooltip/TooltipLocator'
 
 import { Pill } from './index'
 

@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { locator, find } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-queries'
 
 import { BaseButton } from './index'
 

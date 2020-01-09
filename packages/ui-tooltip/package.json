@@ -34,6 +34,8 @@
     "@instructure/ui-popover": "^6.16.0",
     "@instructure/ui-prop-types": "^6.16.0",
     "@instructure/ui-react-utils": "^6.14.0",
+    "@instructure/ui-test-locator": "^6.16.0",
+    "@instructure/ui-test-queries": "^6.16.0",
     "@instructure/ui-test-utils": "^6.16.0",
     "@instructure/uid": "^6.16.0"
   },

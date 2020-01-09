@@ -107,7 +107,7 @@ function getComputedStyle(element) {
   if (isElement(element)) {
     return getOwnerWindow(element).getComputedStyle(element)
   } else {
-    throw new Error(`[ui-test-utils] cannot get computed style for an invalid Element: ${element}`)
+    throw new Error(`[ui-test-queries] cannot get computed style for an invalid Element: ${element}`)
   }
 }
 
@@ -361,7 +361,7 @@ function accessible(element = document.body, options) {
   if (isElement(element)) {
     return runAxeCheck(element, options)
   } else {
-    throw new Error('[ui-test-utils] accessibility check can only run on a single, valid DOM Element!')
+    throw new Error('[ui-test-queries] accessibility check can only run on a single, valid DOM Element!')
   }
 }
 
@@ -376,7 +376,7 @@ function empty(element) {
   } else if (element && element.children) {
     return element.children.length === 0
   } else {
-    throw new Error(`[ui-test-utils] cannot determine if a non-element is empty: ${toString(element)}`)
+    throw new Error(`[ui-test-queries] cannot determine if a non-element is empty: ${toString(element)}`)
   }
 }
 

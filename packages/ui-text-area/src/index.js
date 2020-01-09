@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { TextArea } from './TextArea'
-export { TextAreaLocator } from './TextArea/TextAreaLocator'

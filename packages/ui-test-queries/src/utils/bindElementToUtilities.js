@@ -40,7 +40,7 @@ function bindElementToUtilities(element, customMethods = {}) {
   }
 
   if (!isElement(element)) {
-    throw new Error('[ui-test-utils] could not bind utilities to invalid DOM Element!')
+    throw new Error('[ui-test-queries] could not bind utilities to invalid DOM Element!')
   }
 
   return {

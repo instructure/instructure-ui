@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Img } from './Img'
-export { ImgLocator } from './Img/ImgLocator'

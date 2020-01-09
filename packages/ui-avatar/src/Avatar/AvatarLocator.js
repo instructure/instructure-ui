@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
 
 import { Avatar } from './index'
 

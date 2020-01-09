@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
 
-import { PopoverLocator } from '@instructure/ui-overlays'
+// eslint-disable-next-line no-restricted-imports
+import { PopoverLocator } from '@instructure/ui-overlays/es/Popover/PopoverLocator'
+
 import { DatePickerLocator } from './DatePicker/DatePickerLocator'
-
 import { DateInput } from './index'
 
 export { DatePickerLocator }

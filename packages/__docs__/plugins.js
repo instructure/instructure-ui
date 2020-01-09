@@ -88,7 +88,7 @@ module.exports = [
       '**/template-component/**',
       '**/template-package/**',
       '**/ui-component-examples/src/**',
-      '**/ui-test-utils/src/**',
+      '**/ui-test-*/src/**',
       '**/ui-docs-client/src/**',
       '**/ui-docs-plugin/src/**',
 

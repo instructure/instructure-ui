@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Transition } from './Transition'
-export { TransitionLocator } from './Transition/TransitionLocator'

@@ -40,7 +40,7 @@ async function _getQueryResult(
 
   if (typeof queryFn !== 'function') {
     throw new Error(
-      '[ui-test-utils] Invalid element query function.',
+      '[ui-test-queries] Invalid element query function.',
       JSON.stringify(queryFn)
     )
   }
@@ -63,7 +63,7 @@ async function _getQueryResult(
   } else if (!expectEmpty) {
     throw new Error(
       [
-        `[ui-test-utils] No matches found for Element query...`,
+        `[ui-test-queries] No matches found for Element query...`,
         `with selector: "${selector}"`,
         `element: ${elementToString(element, 7000, { highlight: false })}`
       ]
@@ -82,7 +82,7 @@ function getQueryResult(selectorFn, ...args) {
   const { element, selector, options } = parseQueryArguments(...args)
   if (typeof selectorFn !== 'function') {
     throw new Error(
-      '[ui-test-utils] Invalid element query function.',
+      '[ui-test-queries] Invalid element query function.',
       JSON.stringify(selectorFn)
     )
   }

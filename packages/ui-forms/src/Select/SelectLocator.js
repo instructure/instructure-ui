@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
 
-import { PositionLocator } from '@instructure/ui-layout'
+// eslint-disable-next-line no-restricted-imports
+import { PositionLocator } from '@instructure/ui-layout/es/Position/PositionLocator'
 
 import { Select } from './index'
 

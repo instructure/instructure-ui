@@ -23,6 +23,4 @@
  */
 
 export { InlineSVG } from './InlineSVG'
-export { InlineSVGLocator } from './InlineSVG/InlineSVGLocator'
 export { SVGIcon } from './SVGIcon'
-export { SVGIconLocator } from './SVGIcon/SVGIconLocator'

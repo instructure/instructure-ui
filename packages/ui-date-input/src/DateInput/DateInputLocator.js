@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-locator'
 
-import { CalendarLocator } from '@instructure/ui-calendar'
-import { PopoverLocator } from '@instructure/ui-popover'
+/* eslint-disable no-restricted-imports */
+import { CalendarLocator } from '@instructure/ui-calendar/es/Calendar/CalendarLocator'
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
+/* eslint-enable no-restricted-imports */
 
 import { DateInput } from './index'
 

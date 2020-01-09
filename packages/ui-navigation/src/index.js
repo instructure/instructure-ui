@@ -23,6 +23,4 @@
  */
 
 export { AppNav } from './AppNav'
-export { AppNavLocator } from './AppNav/AppNavLocator'
 export { Navigation, NavigationItem } from './Navigation'
-export { NavigationLocator } from './Navigation/NavigationLocator'

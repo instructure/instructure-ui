@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { TreeBrowser } from './TreeBrowser'
-export { TreeBrowserLocator } from './TreeBrowser/TreeBrowserLocator'

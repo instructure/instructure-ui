@@ -22,6 +22,4 @@
  * SOFTWARE.
  */
 export { RadioInput } from './RadioInput'
-export { RadioInputLocator } from './RadioInput/RadioInputLocator'
 export { RadioInputGroup } from './RadioInputGroup'
-export { RadioInputGroupLocator } from './RadioInputGroup/RadioInputGroupLocator'

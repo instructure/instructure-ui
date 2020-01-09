@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Avatar } from './Avatar'
-export { AvatarLocator } from './Avatar/AvatarLocator'

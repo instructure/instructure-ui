@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6.16.0",
+    "@instructure/ui-test-locator": "^6.16.0",
+    "@instructure/ui-test-queries": "^6.16.0",
     "@instructure/ui-test-utils": "^6.16.0"
   },
   "peerDependencies": {

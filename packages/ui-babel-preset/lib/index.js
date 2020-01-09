@@ -44,10 +44,23 @@ module.exports = function (context, opts = {
   if (opts.transformImports) {
     plugins.push([
       require('@instructure/babel-plugin-transform-imports'), {
-        '(@instructure\/ui-[^\/]+)$': { // eslint-disable-line no-useless-escape
+        '(@instructure\/ui-[^(\/|\\s)]+)$': { // eslint-disable-line no-useless-escape
           transform: (importName, matches) => {
-            if (!matches || !matches[1] || matches[1] === '@instructure/ui-test-utils') return
+            const ignore = [
+              '@instructure/ui-test-queries',
+              '@instructure/ui-test-sandbox',
+              '@instructure/ui-test-utils'
+            ]
+
+            if (!matches || !matches[1] || ignore.includes(matches[1])) return
             return `${matches[1]}/lib/${importName}`
+          }
+        },
+        // Convert any es imports to lib imports
+        '(@instructure\/ui-[^(\/|\\s)]+\/es\/[^\\s]+)$': { // eslint-disable-line no-useless-escape
+          transform: (importName, matches) => {
+            if (!matches || !matches[1]) return
+            return matches[1].replace(new RegExp('/es/'), '/lib/')
           }
         }
       }
