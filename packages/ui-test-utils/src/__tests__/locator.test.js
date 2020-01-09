@@ -71,7 +71,10 @@ const ComponentLocator = locator(Component.selector, {
 describe('locator', async () => {
   it('should handle components that render `null`', async () => {
     await mount(<Component hide />)
-    expect(await ComponentLocator.findAll({ expectEmpty: true })).to.have.length(0)
+
+    const result = await ComponentLocator.findAll({ expectEmpty: true })
+
+    expect(result).to.have.length(0)
   })
 
   it('should find component root elements without a selector', async () => {

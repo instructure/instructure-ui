@@ -21,77 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import prettyFormat from 'pretty-format'
+import { isElement } from './isElement'
 
-import { locator } from '@instructure/ui-test-locator'
+const { DOMElement, DOMCollection } = prettyFormat.plugins
 
-import {
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  firstOrNull,
-  wrapQueryResult,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
-} from '@instructure/ui-test-queries'
+function format(htmlElement, maxLength, options) {
+  if (htmlElement.documentElement) {
+    // eslint-disable-next-line no-param-reassign
+    htmlElement = htmlElement.documentElement
+  }
 
-import {
-  mount,
-  unmount,
-  stub,
-  spy,
-  viewport
-} from '@instructure/ui-test-sandbox'
+  const debugContent = prettyFormat(htmlElement, {
+    plugins: [DOMElement, DOMCollection],
+    printFunctionName: false,
+    highlight: true,
+    ...options,
+  })
+  return typeof maxLength !== 'undefined' && htmlElement.outerHTML.length > maxLength
+    ? `${debugContent.slice(0, maxLength)}...`
+    : debugContent
+}
 
-import './utils/shims'
-
-import { waitForExpect } from './utils/waitForExpect'
-import { expect } from './utils/expect'
-
-import { generateA11yTests } from './utils/generateA11yTests'
-
-// aliases for backwards compat:
-const within = wrapQueryResult
-const wrap = wrapQueryResult
-const wait = waitForExpect
+function elementToString(element, maxLength = 7000, options = { highlight: false }) {
+  if (isElement(element)) {
+    return format(element, maxLength, options)
+  } else if (typeof element.toString === 'function') {
+    return element.toString()
+  } else {
+    return JSON.stringify(element)
+  }
+}
 
 export {
-  generateA11yTests,
-  viewport,
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  locator,
-  firstOrNull,
-  within,
-  wrapQueryResult,
-  wrap,
-  waitForExpect,
-  wait,
-  expect,
-  mount,
-  unmount,
-  stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
+  elementToString
 }

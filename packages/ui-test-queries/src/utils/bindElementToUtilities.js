@@ -21,77 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { fireEvent } from './events'
 
-import { locator } from '@instructure/ui-test-locator'
+import * as helpers from './helpers'
+import * as queries from './queries'
+import { bindElementToMethods } from './bindElementToMethods'
+import { bindElementToEvents } from './bindElementToEvents'
+import { isElement } from './isElement'
 
-import {
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  firstOrNull,
-  wrapQueryResult,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
-} from '@instructure/ui-test-queries'
+function bindElementToUtilities(element, customMethods = {}) {
+  if (!element) {
+    return element
+  } else if (Array.isArray(element)) {
+    return element.map(el => bindElementToUtilities(el, customMethods))
+  } else if (typeof element.getDOMNode === 'function') {
+    // eslint-disable-next-line no-param-reassign
+    element = element.getDOMNode()
+  }
 
-import {
-  mount,
-  unmount,
-  stub,
-  spy,
-  viewport
-} from '@instructure/ui-test-sandbox'
+  if (!isElement(element)) {
+    throw new Error('[ui-test-utils] could not bind utilities to invalid DOM Element!')
+  }
 
-import './utils/shims'
-
-import { waitForExpect } from './utils/waitForExpect'
-import { expect } from './utils/expect'
-
-import { generateA11yTests } from './utils/generateA11yTests'
-
-// aliases for backwards compat:
-const within = wrapQueryResult
-const wrap = wrapQueryResult
-const wait = waitForExpect
+  return {
+    ...bindElementToMethods(element, queries),
+    ...bindElementToEvents(element, fireEvent),
+    ...bindElementToMethods(element, helpers),
+    ...bindElementToMethods(element, customMethods)
+  }
+}
 
 export {
-  generateA11yTests,
-  viewport,
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  locator,
-  firstOrNull,
-  within,
-  wrapQueryResult,
-  wrap,
-  waitForExpect,
-  wait,
-  expect,
-  mount,
-  unmount,
-  stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
+  bindElementToUtilities
 }

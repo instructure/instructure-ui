@@ -24,10 +24,7 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 
-import { elementToString } from './elementToString'
-import { wrapQueryResult } from './queryResult'
-import { isElement } from './isElement'
-import { matches } from './matchers'
+import { elementToString, wrapQueryResult, isElement, matches } from '@instructure/ui-test-queries'
 
 export default function assertions (chai, utils) {
   const { flag, inspect } = utils

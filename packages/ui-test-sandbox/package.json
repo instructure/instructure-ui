@@ -1,10 +1,11 @@
 {
-  "name": "@instructure/ui-test-utils",
+  "name": "@instructure/ui-test-sandbox",
   "version": "6.16.0",
-  "description": "A UI testing library made by Instructure Inc.",
+  "description": "A wrapper for sinon test sandbox and associated utilities.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -16,25 +17,17 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build",
-    "build:watch": "ui-build --watch"
+    "build:watch": "ui-build --watch",
+    "build:types": "ui-scripts --types"
   },
   "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.5.0",
+    "sinon": "^7.4.2"
+  },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6.16.0",
     "prop-types": "^15.6.2"
-  },
-  "dependencies": {
-    "@instructure/ui-test-locator": "^6.16.0",
-    "@instructure/ui-test-queries": "^6.16.0",
-    "@instructure/ui-test-sandbox": "^6.16.0",
-    "@sheerun/mutationobserver-shim": "^0.3.2",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "chai-exclude": "^2.0.2",
-    "chai-string": "^1.5.0",
-    "dirty-chai": "^2.0.1",
-    "sinon-chai": "^3.3.0",
-    "wait-for-expect": "^2.0.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16",
@@ -42,5 +35,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }

@@ -23,7 +23,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactComponentWrapper from '../utils/reactComponentWrapper'
+import { ReactComponentWrapper } from '@instructure/ui-test-sandbox'
 
 import { expect, stub } from '../index'
 

@@ -22,76 +22,12 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
-
-import {
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  firstOrNull,
-  wrapQueryResult,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
-} from '@instructure/ui-test-queries'
-
-import {
-  mount,
-  unmount,
-  stub,
-  spy,
-  viewport
-} from '@instructure/ui-test-sandbox'
-
-import './utils/shims'
-
-import { waitForExpect } from './utils/waitForExpect'
-import { expect } from './utils/expect'
-
-import { generateA11yTests } from './utils/generateA11yTests'
-
-// aliases for backwards compat:
-const within = wrapQueryResult
-const wrap = wrapQueryResult
-const wait = waitForExpect
-
 export {
-  generateA11yTests,
   viewport,
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  locator,
-  firstOrNull,
-  within,
-  wrapQueryResult,
-  wrap,
-  waitForExpect,
-  wait,
-  expect,
   mount,
   unmount,
   stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
-}
+  spy
+} from './utils/sandbox'
+
+export { ReactComponentWrapper } from './utils/reactComponentWrapper'

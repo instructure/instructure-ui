@@ -22,76 +22,28 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+import { normalizeText } from './normalizeText'
 
-import {
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  firstOrNull,
-  wrapQueryResult,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
-} from '@instructure/ui-test-queries'
+function getNodeText(element) {
+  if (element.matches('input[type=submit], input[type=button]')) {
+    return element.value
+  }
+  return Array.from(element.childNodes)
+    .map((child) => {
+      let textContent
 
-import {
-  mount,
-  unmount,
-  stub,
-  spy,
-  viewport
-} from '@instructure/ui-test-sandbox'
+      // filter out nodes that have the same textContent as the parent
+      if (child.nodeType === 3 ||
+        (child.nodeType === 1 && (normalizeText(element.textContent) !== normalizeText(child.textContent)))
+      ) {
+        textContent = child.textContent
+      }
 
-import './utils/shims'
-
-import { waitForExpect } from './utils/waitForExpect'
-import { expect } from './utils/expect'
-
-import { generateA11yTests } from './utils/generateA11yTests'
-
-// aliases for backwards compat:
-const within = wrapQueryResult
-const wrap = wrapQueryResult
-const wait = waitForExpect
+      return textContent || ''
+    })
+    .join('')
+}
 
 export {
-  generateA11yTests,
-  viewport,
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  locator,
-  firstOrNull,
-  within,
-  wrapQueryResult,
-  wrap,
-  waitForExpect,
-  wait,
-  expect,
-  mount,
-  unmount,
-  stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
+  getNodeText
 }

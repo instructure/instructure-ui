@@ -23,7 +23,10 @@
  */
 
 import React from 'react'
-import { expect, accessible, mount } from '../index'
+import { mount } from '@instructure/ui-test-sandbox'
+import { accessible } from '@instructure/ui-test-queries'
+
+import { expect } from './expect'
 
 export function generateA11yTests ({ componentName, sections, renderExample }, only = []) {
   describe(`${componentName} should meet accessibility standards`, async () => {

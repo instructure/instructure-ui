@@ -21,77 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { locator } from '@instructure/ui-test-locator'
-
-import {
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  firstOrNull,
-  wrapQueryResult,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
-} from '@instructure/ui-test-queries'
-
-import {
-  mount,
-  unmount,
-  stub,
-  spy,
-  viewport
-} from '@instructure/ui-test-sandbox'
-
-import './utils/shims'
-
-import { waitForExpect } from './utils/waitForExpect'
-import { expect } from './utils/expect'
-
-import { generateA11yTests } from './utils/generateA11yTests'
-
-// aliases for backwards compat:
-const within = wrapQueryResult
-const wrap = wrapQueryResult
-const wait = waitForExpect
+function normalizeText(text, { collapseWhitespace = true, trim = true } = {}) {
+  let normalizedText = text
+  normalizedText = trim ? normalizedText.trim() : normalizedText
+  normalizedText = collapseWhitespace
+    ? normalizedText.replace(/\s+/g, ' ')
+    : normalizedText
+  return normalizedText
+}
 
 export {
-  generateA11yTests,
-  viewport,
-  accessible,
-  parseQueryArguments,
-  findWithLabel,
-  findWithText,
-  findWithTitle,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  locator,
-  firstOrNull,
-  within,
-  wrapQueryResult,
-  wrap,
-  waitForExpect,
-  wait,
-  expect,
-  mount,
-  unmount,
-  stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
+  normalizeText
 }
