@@ -588,6 +588,14 @@ class Select extends Component {
 
     const passthroughProps = omitProps(rest, Select.propTypes)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
+    const isEditable = typeof onInputChange !== 'undefined'
+    // props to ensure screen readers treat uneditable selects as accessible
+    // popup buttons rather than comboboxes.
+    const uneditableProps = !isEditable ? {
+      role: 'button',
+      title: inputValue,
+      'aria-autocomplete': null
+    } : {}
 
     return (
       <TextInput
@@ -602,7 +610,7 @@ class Select extends Component {
           value: inputValue,
           inputRef: createChainedFunction(ref, this.handleInputRef),
           inputContainerRef: this.handleInputContainerRef,
-          interaction: interaction === 'enabled' && !onInputChange
+          interaction: interaction === 'enabled' && !isEditable
             ? 'readonly' // prevent keyboard cursor
             : interaction,
           isRequired,
@@ -611,7 +619,8 @@ class Select extends Component {
           renderAfterInput: renderAfterInput || this.renderIcon(),
           onChange: onInputChange,
           onFocus,
-          onBlur: createChainedFunction(onBlur, onRequestHideOptions)
+          onBlur: createChainedFunction(onBlur, onRequestHideOptions),
+          ...uneditableProps
         })}
       />
     )

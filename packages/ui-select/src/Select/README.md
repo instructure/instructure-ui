@@ -7,6 +7,8 @@ describes: Select
 - It should not be used for navigation or as a list of actions/functions. (see [Menu](#Menu)).
 - It can behave like a `<select>` element or implement autocomplete behavior.
 
+> Note: Before implementing Select, see if a [SimpleSelect](#SimpleSelect) will suffice.
+
 #### Managing state for a Select
 `Select` is a controlled-only component. The consuming app or component must manage any state needed. A variety of request callbacks are provided as prompts for state updates. `onRequestShowOptions`, for example, is fired when `Select` thinks the `isShowingOptions` prop should be updated to `true`. Of course, the consumer can always choose how to react to these callbacks.
 

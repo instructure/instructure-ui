@@ -47,7 +47,7 @@ id: DeprecatedSelect
 ---
 **/
 @testable()
-@deprecated('7.0.0', null, 'Use Select from ui-select instead.')
+@deprecated('7.0.0', null, 'Use SimpleSelect from ui-simple-select for basic configurations or Select from ui-select for more complex configuations.')
 class Select extends Component {
   static propTypes = {
     /**

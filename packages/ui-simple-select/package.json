@@ -1,0 +1,50 @@
+{
+  "name": "@instructure/ui-simple-select",
+  "version": "6.20.0",
+  "description": "A component for standard select element behavior.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch",
+    "build:types": "ui-scripts --types"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.5.0",
+    "@instructure/ui-themeable": "^6.20.0",
+    "@instructure/ui-testable": "^6.20.0",
+    "@instructure/console": "^6.20.0",
+    "@instructure/ui-react-utils": "^6.20.0",
+    "@instructure/ui-prop-types": "^6.20.0",
+    "@instructure/ui-form-field": "^6.20.0",
+    "@instructure/ui-position": "^6.20.0",
+    "@instructure/ui-select": "^6.20.0",
+    "@instructure/uid": "^6.20.0",
+    "prop-types": "^15"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^6.20.0",
+    "@instructure/ui-test-utils": "^6.20.0",
+    "@instructure/ui-test-locator": "^6.20.0",
+    "@instructure/ui-color-utils": "^6.20.0"
+  },
+  "peerDependencies": {
+    "react": "^15 || ^16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

@@ -12,16 +12,8 @@
     "replace": "@instructure/ui-byline/lib/Byline"
   },
   {
-    "pattern": "^@instructure/ui-forms/lib/DateInput",
-    "replace": "@instructure/ui-date-input/lib/DateInput"
-  },
-  {
     "pattern": "^@instructure/ui-forms/lib/TextInput",
     "replace": "@instructure/ui-text-input/lib/TextInput"
-  },
-  {
-    "pattern": "^@instructure/ui-forms/lib/Select",
-    "replace": "@instructure/ui-select/lib/Select"
   },
   {
     "pattern": "^@instructure/ui-layout/lib/View",

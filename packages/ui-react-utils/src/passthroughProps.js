@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import isPropValid from '@emotion/is-prop-valid'
+// list of "valid" props https://github.com/emotion-js/emotion/blob/master/packages/is-prop-valid/src/props.js
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
 const omit = (originalObject, keys) => {

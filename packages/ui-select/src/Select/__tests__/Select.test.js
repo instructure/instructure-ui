@@ -273,9 +273,21 @@ describe('<Select />', async () => {
       expect(input.getAttribute('aria-activedescendant')).to.not.exist()
     })
 
-    it('should set input role to "combobox"', async () => {
+    it('should set input role to "button" without onInputChange', async () => {
       await mount(
         <Select renderLabel="Choose an option">
+          {getOptions(defaultOptions[1])}
+        </Select>
+      )
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+
+      expect(input.getAttribute('role')).to.equal('button')
+    })
+
+    it('should set input role to "combobox" with onInputChange', async () => {
+      await mount(
+        <Select renderLabel="Choose an option" onInputChange={() => {}}>
           {getOptions(defaultOptions[1])}
         </Select>
       )

@@ -80,6 +80,7 @@ module.exports = {
     '@instructure/ui-responsive$': path.resolve(__dirname, '../ui-responsive/src/'),
     '@instructure/ui-select$': path.resolve(__dirname, '../ui-select/src/'),
     '@instructure/ui-selectable$': path.resolve(__dirname, '../ui-selectable/src/'),
+    '@instructure/ui-simple-select$': path.resolve(__dirname, '../ui-simple-select/src/'),
     '@instructure/ui-spinner$': path.resolve(__dirname, '../ui-spinner/src/'),
     '@instructure/ui-svg-images$': path.resolve(__dirname, '../ui-svg-images/src/'),
     '@instructure/ui-table$': path.resolve(__dirname, '../ui-table/src/'),

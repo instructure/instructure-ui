@@ -252,6 +252,7 @@ class TextInput extends Component {
     const {
       type,
       size,
+      display,
       textAlign,
       placeholder,
       value,
