@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
+import { polyfill } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 
 const toggleExpanded = ({ expanded }) => ({ expanded: !expanded })
@@ -90,14 +91,18 @@ class Expandable extends Component {
      return (typeof props.expanded === 'boolean')
    }
 
-   componentWillReceiveProps (nextProps) {
-     // if the component passes from controlled to uncontrolled, save the state
+   static getDerivedStateFromProps(nextProps, state) {
      if (
-       this.isControlled()
-       && !this.isControlled(nextProps)
-       && this.props.expanded !== this.state.expanded
+       // if component is controlled, keep internal state up to date
+       // with the `expanded` prop value
+       typeof nextProps.expanded === 'boolean' &&
+       nextProps.expanded !== state.expanded
      ) {
-       this.setState(toggleExpanded)
+       return {
+         expanded: nextProps.expanded
+       }
+     } else {
+       return null
      }
    }
 
@@ -134,6 +139,8 @@ class Expandable extends Component {
      }
    }
 }
+
+polyfill(Expandable)
 
 export default Expandable
 export { Expandable }
