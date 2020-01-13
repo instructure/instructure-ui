@@ -31,10 +31,12 @@ import { Heading } from '@instructure/ui-heading'
 import { Table } from '@instructure/ui-table'
 import { Img } from '@instructure/ui-img'
 import { Link } from '@instructure/ui-link'
+import { Text } from '@instructure/ui-text'
 import { CodeEditor } from '@instructure/ui-code-editor'
 
 import { Playground } from './Playground'
 import { Preview } from './Preview'
+import { compileAndRenderExample } from './compileAndRenderExample'
 
 import { trimIndent } from './trimIndent'
 
@@ -215,13 +217,23 @@ function createRenderer () {
 
         if (language.indexOf('_guidelines') >= 0 || matter.data.guidelines) {
           el = getComponent('Preview', {...data, background: 'light', frameless: true})
-
         } else if (language.indexOf('_example') >= 0 || matter.data.example) {
           el = (
             <View display="block" margin="medium none">
               {getComponent('Playground', data)}
             </View>
           )
+        } else if (language.indexOf('_embed') >=0 || matter.data.embed) {
+          compileAndRenderExample({
+            code: matter.content,
+            render: (_el) => {
+              el = _el
+            },
+            shouldCallRender: matter.data.render,
+            onError: (err) => {
+              el = <Text color="danger">{err.toString()}</Text>
+            }
+          })
         } else {
           el = getComponent('CodeEditor', data)
         }
@@ -229,7 +241,7 @@ function createRenderer () {
         el = <code>{code}</code>
       }
 
-      return {element: el, type: el.type.displayName}
+      return { element: el, type: el.type.displayName }
     }
 
     const Element = () => CodeComponent().element

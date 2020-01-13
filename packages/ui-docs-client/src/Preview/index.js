@@ -32,6 +32,8 @@ import { transform } from '@babel/standalone'
 import { ApplyTextDirection } from '@instructure/ui-i18n'
 import { themeable, ApplyTheme } from '@instructure/ui-themeable'
 
+import { compileAndRenderExample } from '../compileAndRenderExample'
+
 import styles from './styles.css'
 import theme from './theme'
 
@@ -143,19 +145,15 @@ class Preview extends Component {
       ReactDOM.render(elToRender, mountNode)
     }
 
-    try {
-      const compiledCode = this.compileCode(code)
-      const el = eval(compiledCode) // eslint-disable-line no-eval
-
-      if (this.props.render !== false) {
-        render(el)
-      }
-    } catch (err) {
-      this.handleError(err)
-    }
+    compileAndRenderExample({
+      code,
+      render,
+      shouldCallRender: this.props.render,
+      onError: this.handleError,
+    })
   }
 
-  handleError (err) {
+  handleError = (err) => {
     ReactDOM.unmountComponentAtNode(this._mountNode)
     this.setState({
       error: err.toString()
