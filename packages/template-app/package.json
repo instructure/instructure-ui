@@ -15,11 +15,13 @@
   },
   "dependencies": {
     "@instructure/canvas-theme": "^6.16.0",
-    "@instructure/ui-elements": "^6.16.0",
+    "@instructure/ui-heading": "^6.16.0",
     "@instructure/ui-icons": "^6.16.0",
     "@instructure/ui-layout": "^6.16.0",
     "@instructure/ui-svg-images": "^6.16.0",
+    "@instructure/ui-text": "^6.16.0",
     "@instructure/ui-themeable": "^6.16.0",
+    "@instructure/ui-view": "^6.16.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
