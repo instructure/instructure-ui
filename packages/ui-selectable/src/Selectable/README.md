@@ -215,23 +215,23 @@ render(
   <View>
     <CustomSelect
       options={[
-        { id: '0', value: '0', label: 'Alabama' },
-        { id: '1', value: '1', label: 'Alaska' },
-        { id: '2', value: '2', label: 'American Samoa' },
-        { id: '3', value: '3', label: 'Arizona' },
-        { id: '4', value: '4', label: 'Arkansas' },
-        { id: '5', value: '5', label: 'California' },
-        { id: '6', value: '6', label: 'Colorado' },
-        { id: '7', value: '7', label: 'Connecticut' },
-        { id: '8', value: '8', label: 'Delaware' },
-        { id: '9', value: '9', label: 'District Of Columbia' },
-        { id: '10', value: '10', label: 'Federated States Of Micronesia' },
-        { id: '11', value: '11', label: 'Florida' },
-        { id: '12', value: '12', label: 'Georgia' },
-        { id: '13', value: '13', label: 'Guam' },
-        { id: '14', value: '14', label: 'Hawaii' },
-        { id: '15', value: '15', label: 'Idaho' },
-        { id: '16', value: '16', label: 'Illinois' }
+        { id: 'opt0', value: '0', label: 'Alabama' },
+        { id: 'opt1', value: '1', label: 'Alaska' },
+        { id: 'opt2', value: '2', label: 'American Samoa' },
+        { id: 'opt3', value: '3', label: 'Arizona' },
+        { id: 'opt4', value: '4', label: 'Arkansas' },
+        { id: 'opt5', value: '5', label: 'California' },
+        { id: 'opt6', value: '6', label: 'Colorado' },
+        { id: 'opt7', value: '7', label: 'Connecticut' },
+        { id: 'opt8', value: '8', label: 'Delaware' },
+        { id: 'opt9', value: '9', label: 'District Of Columbia' },
+        { id: 'opt10', value: '10', label: 'Federated States Of Micronesia' },
+        { id: 'opt11', value: '11', label: 'Florida' },
+        { id: 'opt12', value: '12', label: 'Georgia' },
+        { id: 'opt13', value: '13', label: 'Guam' },
+        { id: 'opt14', value: '14', label: 'Hawaii' },
+        { id: 'opt15', value: '15', label: 'Idaho' },
+        { id: 'opt16', value: '16', label: 'Illinois' }
       ]}
     />
   </View>

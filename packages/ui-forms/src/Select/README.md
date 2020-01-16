@@ -370,7 +370,7 @@ render(
     <Example
       label="Choose a state"
       name="state"
-      defaultOption="12"
+      defaultOption="opt12"
       editable
     />
   </div>
@@ -448,14 +448,14 @@ render(
     <Example
       label="Choose a state"
       name="state"
-      defaultOption="12"
+      defaultOption="opt12"
       editable
     />
     <br />
     <Example
       label="Choose a few states"
       name="states"
-      defaultOption={["0", "12", "15"]}
+      defaultOption={["opt0", "opt12", "opt15"]}
       editable
       multiple
     />
@@ -480,23 +480,23 @@ class Example extends React.Component {
   };
 
   options = [
-    { value: '0', label: 'Alabama' },
-    { value: '1', label: 'Alaska' },
-    { value: '2', label: 'American Samoa' },
-    { value: '3', label: 'Arizona' },
-    { value: '4', label: 'Arkansas' },
-    { value: '5', label: 'California' },
-    { value: '6', label: 'Colorado' },
-    { value: '7', label: 'Connecticut' },
-    { value: '8', label: 'Delaware' },
-    { value: '9', label: 'District Of Columbia' },
-    { value: '10', label: 'Federated States Of Micronesia' },
-    { value: '11', label: 'Florida' },
-    { value: '12', label: 'Georgia' },
-    { value: '13', label: 'Guam' },
-    { value: '14', label: 'Hawaii' },
-    { value: '15', label: 'Idaho' },
-    { value: '16', label: 'Illinois' }
+    { value: 'opt0', label: 'Alabama' },
+    { value: 'opt1', label: 'Alaska' },
+    { value: 'opt2', label: 'American Samoa' },
+    { value: 'opt3', label: 'Arizona' },
+    { value: 'opt4', label: 'Arkansas' },
+    { value: 'opt5', label: 'California' },
+    { value: 'opt6', label: 'Colorado' },
+    { value: 'opt7', label: 'Connecticut' },
+    { value: 'opt8', label: 'Delaware' },
+    { value: 'opt9', label: 'District Of Columbia' },
+    { value: 'opt10', label: 'Federated States Of Micronesia' },
+    { value: 'opt11', label: 'Florida' },
+    { value: 'opt12', label: 'Georgia' },
+    { value: 'opt13', label: 'Guam' },
+    { value: 'opt14', label: 'Hawaii' },
+    { value: 'opt15', label: 'Idaho' },
+    { value: 'opt16', label: 'Illinois' }
   ];
 
   handleInputChange = (e, value) => {
@@ -565,12 +565,12 @@ render(
   <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
     <Example
       label="Choose a state"
-      defaultOption={{ value: '1', label: 'Alaska' }}
+      defaultOption={{ value: 'opt1', label: 'Alaska' }}
     />
     <br />
     <Example
       label="Choose a few states"
-      defaultOption={[{ value: '1', label: 'Alaska' }]}
+      defaultOption={[{ value: 'opt1', label: 'Alaska' }]}
       formatSelectedOption={(tag) => (
         <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
       )}
@@ -598,7 +598,7 @@ class Example extends React.Component {
   handleChange = (e, option) => this.setState({ option });
 
   handleFlorida = () => {
-    const florida = { value: '11', label: 'Florida' }
+    const florida = { value: 'opt11', label: 'Florida' }
     this.setState({
       option: this.props.multiple ? [florida] : florida
     });
@@ -606,9 +606,9 @@ class Example extends React.Component {
 
   handleIdaho = () => {
     const { option } = this.state
-    if (!option.find((o) => o.value === '15')) {
+    if (!option.find((o) => o.value === 'opt15')) {
       this.setState({
-        option: [...this.state.option, { value: '15', label: 'Idaho' }]
+        option: [...this.state.option, { value: 'opt15', label: 'Idaho' }]
       });
     }
   };
@@ -634,23 +634,23 @@ class Example extends React.Component {
           selectedOption={this.state.option}
           onChange={this.handleChange}
         >
-          <option value="0">Alabama</option>
-          <option value="1">Alaska</option>
-          <option value="2">American Samoa</option>
-          <option value="3">Arizona</option>
-          <option value="4">Arkansas</option>
-          <option value="5">California</option>
-          <option value="6">Colorado</option>
-          <option value="7">Connecticut</option>
-          <option value="8">Delaware</option>
-          <option value="9">District Of Columbia</option>
-          <option value="10">Federated States Of Micronesia</option>
-          <option value="11">Florida</option>
-          <option value="12">Georgia</option>
-          <option value="13">Guam</option>
-          <option value="14">Hawaii</option>
-          <option value="15">Idaho</option>
-          <option value="16">Illinois</option>
+          <option value="opt0">Alabama</option>
+          <option value="opt1">Alaska</option>
+          <option value="opt2">American Samoa</option>
+          <option value="opt3">Arizona</option>
+          <option value="opt4">Arkansas</option>
+          <option value="opt5">California</option>
+          <option value="opt6">Colorado</option>
+          <option value="opt7">Connecticut</option>
+          <option value="opt8">Delaware</option>
+          <option value="opt9">District Of Columbia</option>
+          <option value="opt10">Federated States Of Micronesia</option>
+          <option value="opt11">Florida</option>
+          <option value="opt12">Georgia</option>
+          <option value="opt13">Guam</option>
+          <option value="opt14">Hawaii</option>
+          <option value="opt15">Idaho</option>
+          <option value="opt16">Illinois</option>
         </DeprecatedSelect>
         <div>Value selected: {this.getOptionLabel()}</div>
         <br />
@@ -666,12 +666,12 @@ render(
   <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
     <Example
       label="Choose a state"
-      initialOption={{ value: '7', label: 'Connecticut' }}
+      initialOption={{ value: 'opt7', label: 'Connecticut' }}
     />
     <br />
     <Example
       label="Choose a few states"
-      initialOption={[{ value: '12', label: 'Georgia' }, { value: '16', label: 'Illinois' }]}
+      initialOption={[{ value: 'opt12', label: 'Georgia' }, { value: 'opt16', label: 'Illinois' }]}
       multiple
     />
   </div>
@@ -689,8 +689,8 @@ class Example extends React.Component {
   constructor () {
     super(...arguments)
     this.persistentOptions = [
-      { label: 'Apples', value: '0', dismissible: false },
-      { label: 'Bananas', value: '1', dismissible: false }
+      { label: 'Apples', value: 'opt0', dismissible: false },
+      { label: 'Bananas', value: 'opt1', dismissible: false }
     ]
     this.state = {
       options: [...this.persistentOptions]
@@ -726,12 +726,12 @@ class Example extends React.Component {
           selectedOption={this.state.options}
           onChange={this.handleChange}
         >
-          <option value="0">Apples</option>
-          <option value="1">Bananas</option>
-          <option value="2">Oranges</option>
-          <option value="3">Mangoes</option>
-          <option value="4">Pears</option>
-          <option value="5">Cherries</option>
+          <option value="opt0">Apples</option>
+          <option value="opt1">Bananas</option>
+          <option value="opt2">Oranges</option>
+          <option value="opt3">Mangoes</option>
+          <option value="opt4">Pears</option>
+          <option value="opt5">Cherries</option>
 
         </DeprecatedSelect>
         <div>Value selected: {this.getOptionLabel()}</div>
@@ -765,23 +765,23 @@ class Example extends React.Component {
           editable
           inline
         >
-          <option value="0">Alabama</option>
-          <option value="1">Alaska</option>
-          <option value="2">American Samoa</option>
-          <option value="3">Arizona</option>
-          <option value="4">Arkansas</option>
-          <option value="5">California</option>
-          <option value="6">Colorado</option>
-          <option value="7">Connecticut</option>
-          <option value="8">Delaware</option>
-          <option value="9">District Of Columbia</option>
-          <option value="10">Federated States Of Micronesia</option>
-          <option value="11">Florida</option>
-          <option value="12">Georgia</option>
-          <option value="13">Guam</option>
-          <option value="14">Hawaii</option>
-          <option value="15">Idaho</option>
-          <option value="16">Illinois</option>
+          <option value="opt0">Alabama</option>
+          <option value="opt1">Alaska</option>
+          <option value="opt2">American Samoa</option>
+          <option value="opt3">Arizona</option>
+          <option value="opt4">Arkansas</option>
+          <option value="opt5">California</option>
+          <option value="opt6">Colorado</option>
+          <option value="opt7">Connecticut</option>
+          <option value="opt8">Delaware</option>
+          <option value="opt9">District Of Columbia</option>
+          <option value="opt10">Federated States Of Micronesia</option>
+          <option value="opt11">Florida</option>
+          <option value="opt12">Georgia</option>
+          <option value="opt13">Guam</option>
+          <option value="opt14">Hawaii</option>
+          <option value="opt15">Idaho</option>
+          <option value="opt16">Illinois</option>
         </DeprecatedSelect>
         &nbsp;
         <Text>{this.props.width}</Text>

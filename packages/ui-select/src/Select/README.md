@@ -125,22 +125,22 @@ render(
   <View>
     <SingleSelectExample
       options={[
-        { id: '1', label: 'Alaska' },
-        { id: '2', label: 'American Samoa' },
-        { id: '3', label: 'Arizona' },
-        { id: '4', label: 'Arkansas' },
-        { id: '5', label: 'California' },
-        { id: '6', label: 'Colorado' },
-        { id: '7', label: 'Connecticut' },
-        { id: '8', label: 'Delaware' },
-        { id: '9', label: 'District Of Columbia' },
-        { id: '10', label: 'Federated States Of Micronesia' },
-        { id: '11', label: 'Florida' },
-        { id: '12', label: 'Georgia' },
-        { id: '13', label: 'Guam' },
-        { id: '14', label: 'Hawaii' },
-        { id: '15', label: 'Idaho' },
-        { id: '16', label: 'Illinois' }
+        { id: 'opt1', label: 'Alaska' },
+        { id: 'opt2', label: 'American Samoa' },
+        { id: 'opt3', label: 'Arizona' },
+        { id: 'opt4', label: 'Arkansas' },
+        { id: 'opt5', label: 'California' },
+        { id: 'opt6', label: 'Colorado' },
+        { id: 'opt7', label: 'Connecticut' },
+        { id: 'opt8', label: 'Delaware' },
+        { id: 'opt9', label: 'District Of Columbia' },
+        { id: 'opt10', label: 'Federated States Of Micronesia' },
+        { id: 'opt11', label: 'Florida' },
+        { id: 'opt12', label: 'Georgia (unavailable)' },
+        { id: 'opt13', label: 'Guam' },
+        { id: 'opt14', label: 'Hawaii' },
+        { id: 'opt15', label: 'Idaho' },
+        { id: 'opt16', label: 'Illinois' }
       ]}
     />
   </View>
@@ -359,21 +359,21 @@ render(
   <View>
     <AutocompleteExample
       options={[
-        { id: '0', label: 'Aaron Aaronson' },
-        { id: '1', label: 'Amber Murphy' },
-        { id: '2', label: 'Andrew Miller' },
-        { id: '3', label: 'Barbara Ward' },
-        { id: '4', label: 'Byron Cranston', disabled: true },
-        { id: '5', label: 'Dennis Reynolds' },
-        { id: '6', label: 'Dee Reynolds' },
-        { id: '7', label: 'Ezra Betterthan' },
-        { id: '8', label: 'Jeff Spicoli' },
-        { id: '9', label: 'Joseph Smith' },
-        { id: '10', label: 'Jasmine Diaz' },
-        { id: '11', label: 'Martin Harris' },
-        { id: '12', label: 'Michael Morgan', disabled: true },
-        { id: '13', label: 'Michelle Rodriguez' },
-        { id: '14', label: 'Ziggy Stardust' },
+        { id: 'opt0', label: 'Aaron Aaronson' },
+        { id: 'opt1', label: 'Amber Murphy' },
+        { id: 'opt2', label: 'Andrew Miller' },
+        { id: 'opt3', label: 'Barbara Ward' },
+        { id: 'opt4', label: 'Byron Cranston', disabled: true },
+        { id: 'opt5', label: 'Dennis Reynolds' },
+        { id: 'opt6', label: 'Dee Reynolds' },
+        { id: 'opt7', label: 'Ezra Betterthan' },
+        { id: 'opt8', label: 'Jeff Spicoli' },
+        { id: 'opt9', label: 'Joseph Smith' },
+        { id: 'opt10', label: 'Jasmine Diaz' },
+        { id: 'opt11', label: 'Martin Harris' },
+        { id: 'opt12', label: 'Michael Morgan', disabled: true },
+        { id: 'opt13', label: 'Michelle Rodriguez' },
+        { id: 'opt14', label: 'Ziggy Stardust' }
       ]}
     />
   </View>
@@ -394,7 +394,7 @@ class MultipleSelectExample extends React.Component {
     inputValue: '',
     isShowingOptions: false,
     highlightedOptionId: null,
-    selectedOptionId: ['1', '6'],
+    selectedOptionId: ['opt1', 'opt6'],
     filteredOptions: this.props.options,
     announcement: null
   }
@@ -617,22 +617,22 @@ render(
   <View>
     <MultipleSelectExample
       options={[
-        { id: '1', label: 'Alaska' },
-        { id: '2', label: 'American Samoa' },
-        { id: '3', label: 'Arizona' },
-        { id: '4', label: 'Arkansas' },
-        { id: '5', label: 'California' },
-        { id: '6', label: 'Colorado' },
-        { id: '7', label: 'Connecticut' },
-        { id: '8', label: 'Delaware' },
-        { id: '9', label: 'District Of Columbia' },
-        { id: '10', label: 'Federated States Of Micronesia' },
-        { id: '11', label: 'Florida' },
-        { id: '12', label: 'Georgia (unavailable)' },
-        { id: '13', label: 'Guam' },
-        { id: '14', label: 'Hawaii' },
-        { id: '15', label: 'Idaho' },
-        { id: '16', label: 'Illinois' }
+        { id: 'opt1', label: 'Alaska' },
+        { id: 'opt2', label: 'American Samoa' },
+        { id: 'opt3', label: 'Arizona' },
+        { id: 'opt4', label: 'Arkansas' },
+        { id: 'opt5', label: 'California' },
+        { id: 'opt6', label: 'Colorado' },
+        { id: 'opt7', label: 'Connecticut' },
+        { id: 'opt8', label: 'Delaware' },
+        { id: 'opt9', label: 'District Of Columbia' },
+        { id: 'opt10', label: 'Federated States Of Micronesia' },
+        { id: 'opt11', label: 'Florida' },
+        { id: 'opt12', label: 'Georgia (unavailable)' },
+        { id: 'opt13', label: 'Guam' },
+        { id: 'opt14', label: 'Hawaii' },
+        { id: 'opt15', label: 'Idaho' },
+        { id: 'opt16', label: 'Illinois' }
       ]}
     />
   </View>
@@ -813,15 +813,15 @@ render(
     <GroupSelectExample
       options={{
         'Western': [
-          { id: '5', label: 'Alaska' },
-          { id: '6', label: 'California' },
-          { id: '7', label: 'Colorado' },
-          { id: '8', label: 'Idaho' }
+          { id: 'opt5', label: 'Alaska' },
+          { id: 'opt6', label: 'California' },
+          { id: 'opt7', label: 'Colorado' },
+          { id: 'opt8', label: 'Idaho' }
         ],
         'Eastern': [
-          { id: '1', label: 'Alabama' },
-          { id: '2', label: 'Connecticut' },
-          { id: '3', label: 'Delaware' },
+          { id: 'opt1', label: 'Alabama' },
+          { id: 'opt2', label: 'Connecticut' },
+          { id: 'opt3', label: 'Delaware' },
           { id: '4', label: 'Illinois' }
         ]
       }}
@@ -1032,21 +1032,21 @@ render(
   <View>
     <AsyncExample
       options={[
-        { id: '0', label: 'Aaron Aaronson' },
-        { id: '1', label: 'Amber Murphy' },
-        { id: '2', label: 'Andrew Miller' },
-        { id: '3', label: 'Barbara Ward' },
-        { id: '4', label: 'Byron Cranston', disabled: true },
-        { id: '5', label: 'Dennis Reynolds' },
-        { id: '6', label: 'Dee Reynolds' },
-        { id: '7', label: 'Ezra Betterthan' },
-        { id: '8', label: 'Jeff Spicoli' },
-        { id: '9', label: 'Joseph Smith' },
-        { id: '10', label: 'Jasmine Diaz' },
-        { id: '11', label: 'Martin Harris' },
-        { id: '12', label: 'Michael Morgan', disabled: true },
-        { id: '13', label: 'Michelle Rodriguez' },
-        { id: '14', label: 'Ziggy Stardust' },
+        { id: 'opt0', label: 'Aaron Aaronson' },
+        { id: 'opt1', label: 'Amber Murphy' },
+        { id: 'opt2', label: 'Andrew Miller' },
+        { id: 'opt3', label: 'Barbara Ward' },
+        { id: 'opt4', label: 'Byron Cranston', disabled: true },
+        { id: 'opt5', label: 'Dennis Reynolds' },
+        { id: 'opt6', label: 'Dee Reynolds' },
+        { id: 'opt7', label: 'Ezra Betterthan' },
+        { id: 'opt8', label: 'Jeff Spicoli' },
+        { id: 'opt9', label: 'Joseph Smith' },
+        { id: 'opt10', label: 'Jasmine Diaz' },
+        { id: 'opt11', label: 'Martin Harris' },
+        { id: 'opt12', label: 'Michael Morgan', disabled: true },
+        { id: 'opt13', label: 'Michelle Rodriguez' },
+        { id: 'opt14', label: 'Ziggy Stardust' },
       ]}
     />
   </View>
