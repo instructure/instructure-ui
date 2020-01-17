@@ -52,7 +52,8 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
   return {
     textDecoration: 'underline',
     focusOutlineColor: colors.borderBrand,
-    focusInverseOutlineColor: colors.borderLightest
+    focusInverseOutlineColor: colors.borderLightest,
+    textDecorationOutsideText: 'underline'
   }
 }
 

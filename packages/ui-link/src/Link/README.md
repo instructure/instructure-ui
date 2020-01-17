@@ -56,7 +56,7 @@ example: true
 ### Underlines
 
 Link's primary use is inline with other content, which is why it is underlined by default. For rare situations where Link needs
-to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`.
+to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`. __Note: this only applies when outside high contrast mode. When inside high contrast mode, the link will always have an underline.__
 
 ```js
 ---

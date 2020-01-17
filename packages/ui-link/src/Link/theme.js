@@ -57,3 +57,10 @@ generator['canvas'] = function (variables) {
     hoverColor: darken(variables['ic-link-color'], 10)
   }
 }
+
+generator['canvas-high-contrast'] = function (variables) {
+  return {
+    textDecorationOutsideText: 'underline',
+    hoverTextDecorationOutsideText: 'none',
+  }
+}
