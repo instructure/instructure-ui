@@ -260,6 +260,7 @@ class NumberInput extends Component {
           className={styles.arrow}
           onMouseDown={this.handleClickUpArrow}
           tabIndex="-1"
+          type="button"
         >
           <IconArrowOpenUpLine />
         </button>
@@ -268,6 +269,7 @@ class NumberInput extends Component {
           className={styles.arrow}
           onMouseDown={this.handleClickDownArrow}
           tabIndex="-1"
+          type="button"
         >
           <IconArrowOpenDownLine />
         </button>
