@@ -30,7 +30,8 @@ module.exports = function (context, opts = {
   coverage: false,
   node: false,
   removeConsole: false,
-  transformImports: true
+  transformImports: true,
+  importTransforms: {}
 }) {
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
@@ -62,7 +63,8 @@ module.exports = function (context, opts = {
             if (!matches || !matches[1]) return
             return matches[1].replace(new RegExp('/es/'), '/lib/')
           }
-        }
+        },
+        ...(opts.importTransforms || {})
       }
     ])
   }
