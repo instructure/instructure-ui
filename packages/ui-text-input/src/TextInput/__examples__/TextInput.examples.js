@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { IconSearchLine } from '@instructure/ui-icons'
-import { Badge } from '@instructure/ui-elements'
+import { Badge } from '@instructure/ui-badge'
 import { Tag } from '@instructure/ui-tag'
 
 const renderBeforeInput = () => {

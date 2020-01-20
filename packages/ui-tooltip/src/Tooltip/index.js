@@ -33,7 +33,7 @@ import {
   callRenderProp,
   deprecated
 } from '@instructure/ui-react-utils'
-import { LayoutPropTypes } from '@instructure/ui-layout'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
@@ -95,18 +95,18 @@ class Tooltip extends Component {
      * (Note: if there is not room, it will position opposite. Ex. "top" will
      * automatically switch to "bottom")
      */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Tooltip />` (defaults to `document.body`)
      */
-    mountNode: LayoutPropTypes.mountNode,
+    mountNode: PositionPropTypes.mountNode,
     /**
      * The parent in which to constrain the tooltip.
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
      */
-    constrain: LayoutPropTypes.constrain,
+    constrain: PositionPropTypes.constrain,
     /**
      * The horizontal offset for the positioned content
      */
