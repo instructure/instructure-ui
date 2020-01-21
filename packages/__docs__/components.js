@@ -43,7 +43,8 @@ export {
   CloseButton,
   CondensedButton,
   DeprecatedButton,
-  IconButton
+  IconButton,
+  ToggleButton
 } from '@instructure/ui-buttons'
 export { Byline, Media } from '@instructure/ui-byline'
 export { Calendar } from '@instructure/ui-calendar'

@@ -22,10 +22,21 @@
  * SOFTWARE.
  */
 
-export { BaseButton } from './BaseButton'
-export { Button } from './Button'
-export { CloseButton } from './CloseButton'
-export { CondensedButton } from './CondensedButton'
-export { DeprecatedButton } from './DeprecatedButton'
-export { IconButton } from './IconButton'
-export { ToggleButton } from './ToggleButton'
+import { locator } from '@instructure/ui-test-locator'
+import { find, parseQueryArguments } from '@instructure/ui-test-queries'
+
+// eslint-disable-next-line no-restricted-imports
+import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
+
+import { ToggleButton } from './index'
+
+export const ToggleButtonLocator = locator(ToggleButton.selector, {
+  findTooltipContent: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    const tooltip = await TooltipLocator.find(element, options)
+    return tooltip ? tooltip.findContent(selector, options) : null
+  },
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
+  }
+})

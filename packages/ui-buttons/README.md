@@ -17,6 +17,7 @@ The `ui-buttons` package contains the following:
 - [CloseButton](#CloseButton)
 - [CondensedButton](#CondensedButton)
 - [IconButton](#IconButton)
+- [ToggleButton](#ToggleButton)
 
 
 ### Installation
