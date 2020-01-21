@@ -63,7 +63,7 @@ try {
 `
       )
         result = `
-describe(':', async () => {
+describe(':', () => {
 ${testFileRequires.join(';\n')}
 })
 `
