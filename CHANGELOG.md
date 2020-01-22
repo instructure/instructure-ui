@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.17.0](https://github.com/instructure/instructure-ui/compare/v6.16.0...v6.17.0) (2020-01-22)
+
+
+### Bug Fixes
+
+* Update Package READMEs and align deprecation statements ([8f892e4](https://github.com/instructure/instructure-ui/commit/8f892e4))
+* **docs:** Update MIT License link ([13a9dff](https://github.com/instructure/instructure-ui/commit/13a9dff))
+* **ui-billboard,ui-dialog,ui-expandable,ui-options,ui-text-input,ui-tooltip:** devDep audit ([c1f0dc0](https://github.com/instructure/instructure-ui/commit/c1f0dc0))
+* **ui-forms:** add back the export of CheckboxFacade and ToggleFacade ([e5dc547](https://github.com/instructure/instructure-ui/commit/e5dc547))
+* **ui-karma-config:** Stop eating top-level test suite errors ([7324d35](https://github.com/instructure/instructure-ui/commit/7324d35))
+* **ui-number-input:** add type="button" to buttons ([5f66aff](https://github.com/instructure/instructure-ui/commit/5f66aff))
+* **ui-table:** sort arrow should not change place based on cell alignment ([f1e0c29](https://github.com/instructure/instructure-ui/commit/f1e0c29))
+* **ui-test-utils:** prevent test sandbox initialization in production and development ([80d9bc1](https://github.com/instructure/instructure-ui/commit/80d9bc1))
+
+
+### Features
+
+* **babel-plugin-transform-imports:** allow imports that are not at the root level of src ([d239362](https://github.com/instructure/instructure-ui/commit/d239362))
+* **template-app:** update import paths to new packages ([bd78d0b](https://github.com/instructure/instructure-ui/commit/bd78d0b))
+* **ui-babel-preset:** allow for specifying additional import transforms ([908c8d5](https://github.com/instructure/instructure-ui/commit/908c8d5))
+* **ui-breadcrumb,ui-link,ui-elements:** address Links underlining ([388b8cc](https://github.com/instructure/instructure-ui/commit/388b8cc))
+* **ui-docs-client:** allow for embedding code inline with markdown ([aea7989](https://github.com/instructure/instructure-ui/commit/aea7989))
+* **ui-editable:** use IconButton internally for edit button ([8031721](https://github.com/instructure/instructure-ui/commit/8031721))
+* **ui-forms:** export old Select subcomponents ([ecbcbf6](https://github.com/instructure/instructure-ui/commit/ecbcbf6))
+* **ui-icons:** add 'audio-off' icon ([8f5030c](https://github.com/instructure/instructure-ui/commit/8f5030c))
+* **ui-icons:** add comments-off and comments-on icons ([650a42a](https://github.com/instructure/instructure-ui/commit/650a42a))
+* **ui-overlays:** update deprecated lifecycles in Overlay ([dddda64](https://github.com/instructure/instructure-ui/commit/dddda64))
+* **ui-pagination:** use IconButton internally for the "previous/next" ([a0075e1](https://github.com/instructure/instructure-ui/commit/a0075e1))
+* **ui-svg-images:** add `auto` height/width ([abf52f1](https://github.com/instructure/instructure-ui/commit/abf52f1))
+* **ui-toggle-details:** use IconButton internally for the toggle btn ([f1679c4](https://github.com/instructure/instructure-ui/commit/f1679c4))
+
+
+### Performance Improvements
+
+* **ui-responsive:** responsive performance enhancements ([5096c00](https://github.com/instructure/instructure-ui/commit/5096c00))
+
+
+
+
+
 # [6.16.0](https://github.com/instructure/instructure-ui/compare/v6.15.0...v6.16.0) (2019-12-13)
 
 

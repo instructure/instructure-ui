@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.17.0](https://github.com/instructure/instructure-ui/compare/v6.16.0...v6.17.0) (2020-01-22)
+
+
+### Bug Fixes
+
+* **ui-test-utils:** prevent test sandbox initialization in production and development ([80d9bc1](https://github.com/instructure/instructure-ui/commit/80d9bc1))
+
+
+
+
+
 # [6.16.0](https://github.com/instructure/instructure-ui/compare/v6.15.0...v6.16.0) (2019-12-13)
 
 
