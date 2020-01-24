@@ -324,9 +324,7 @@ class Alert extends Component {
 
     return closeButtonLabel
       ? <div className={styles.closeButton} key="closeButton">
-        <CloseButton onClick={this.close} size="small" variant="icon">
-          {closeButtonLabel}
-        </CloseButton>
+        <CloseButton onClick={this.close} size="small" screenReaderLabel={closeButtonLabel} />
       </div>
       : null
   }

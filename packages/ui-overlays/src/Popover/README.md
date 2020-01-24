@@ -39,11 +39,9 @@ class Example extends React.Component {
       <CloseButton
         placement="end"
         offset="x-small"
-        variant="icon"
         onClick={this.hidePopover}
-      >
-        Close
-      </CloseButton>
+        screenReaderLabel="Close"
+      />
     )
   }
 

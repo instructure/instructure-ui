@@ -27,14 +27,14 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { themeable } from '@instructure/ui-themeable'
-import { Modal } from '@instructure/ui-overlays'
+import { Modal } from '@instructure/ui-modal'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { Checkbox } from '@instructure/ui-checkbox'
 import { Flex } from '@instructure/ui-flex'
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton, CloseButton } from '@instructure/ui-buttons'
 
 import { Preview } from '../Preview'
 import { CodePenButton } from '../CodePenButton'
@@ -192,11 +192,16 @@ class Playground extends Component {
             <Modal
               open
               label={`Full screen view`}
-              closeButtonLabel="Close full screen view"
               size="fullscreen"
               onDismiss={this.handleMinimize}
             >
               <Modal.Body padding="0">
+                <CloseButton
+                  placement="end"
+                  offset="medium"
+                  onClick={this.handleMinimize}
+                  screenReaderLabel="Close"
+                />
                 {preview}
               </Modal.Body>
             </Modal>

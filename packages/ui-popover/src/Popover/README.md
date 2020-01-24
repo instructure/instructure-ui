@@ -70,11 +70,9 @@ class Example extends React.Component {
       <CloseButton
         placement="end"
         offset="x-small"
-        variant="icon"
         onClick={() => this.setState({ isShowingContent: false })}
-      >
-        Close
-      </CloseButton>
+        screenReaderLabel="Close"
+      />
     )
   }
 

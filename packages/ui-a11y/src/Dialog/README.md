@@ -50,9 +50,11 @@ class Example extends React.Component {
                 style={{position: 'relative'}}
                 padding="medium"
               >
-                <CloseButton placement="end" onClick={() => this.setState({ open: false })}>
-                  Close
-                </CloseButton>
+                <CloseButton
+                  placement="end"
+                  onClick={() => this.setState({ open: false })}
+                  screenReaderLabel="Close"
+                />
                 <FormFieldGroup
                   description={<Heading level="h4" as="span">Full name</Heading>}
                   layout="columns"

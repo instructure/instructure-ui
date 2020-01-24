@@ -57,11 +57,9 @@ class Example extends React.Component {
               <CloseButton
                 placement="end"
                 offset="small"
-                variant="icon"
                 onClick={this.handleTrayDismiss}
-              >
-                Close
-              </CloseButton>
+                screenReaderLabel="Close"
+              />
               <Avatar name="foo bar" margin="0 0 small 0" />
               <Text as="div" size="x-small">
                 Hello from start tray with a small amount of placeholder content
@@ -142,13 +140,11 @@ class Example extends React.Component {
               <CloseButton
                 placement="end"
                 offset="small"
-                variant="icon"
                 onClick={() => {
                   this.setState({ endOpen: false })
                 }}
-              >
-                Close
-              </CloseButton>
+                screenReaderLabel="Close"
+              />
               <Text as="div" size="x-small">
                 Hello from end tray with a good amount of content as well
               </Text>
@@ -172,13 +168,11 @@ class Example extends React.Component {
                   <CloseButton
                     placement="end"
                     offset="small"
-                    variant="icon"
                     onClick={() => {
                       this.setState({ startOpen: false })
                     }}
-                  >
-                    Close
-                  </CloseButton>
+                    screenReaderLabel="Close"
+                  />
                   <Avatar name="foo bar" margin="0 0 small 0" />
                   <Text as="div" size="x-small">
                     Hello from start tray with a small amount of placeholder content

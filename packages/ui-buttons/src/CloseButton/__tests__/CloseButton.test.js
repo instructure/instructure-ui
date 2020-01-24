@@ -35,7 +35,7 @@ describe('<CloseButton />', async () => {
 
   it('should render with x icon', async () => {
     await mount(
-      <CloseButton>Close</CloseButton>
+      <CloseButton screenReaderLabel="Close" />
     )
     const button = await CloseButtonLocator.find()
     const icon = await button.find('svg[name]')
@@ -46,7 +46,7 @@ describe('<CloseButton />', async () => {
     const onClick = stub()
 
     await mount(
-      <CloseButton onClick={onClick}>Hello</CloseButton>
+      <CloseButton onClick={onClick} screenReaderLabel="Hello" />
     )
     const closeButtonRoot = await CloseButtonLocator.find()
     const button = await closeButtonRoot.find(':focusable')

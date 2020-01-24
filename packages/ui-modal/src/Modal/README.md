@@ -41,11 +41,9 @@ class Example extends React.Component {
       <CloseButton
         placement="end"
         offset="medium"
-        variant="icon"
         onClick={this.handleButtonClick}
-      >
-        Close
-      </CloseButton>
+        screenReaderLabel="Close"
+      />
     )
   }
 
@@ -118,11 +116,9 @@ class Example extends React.Component {
       <CloseButton
         placement="end"
         offset="medium"
-        variant="icon"
         onClick={this.handleButtonClick}
-      >
-        Close
-      </CloseButton>
+        screenReaderLabel="Close"
+      />
     )
   }
 
@@ -248,13 +244,11 @@ class Example extends React.Component {
                 <Heading level="h2"><TruncateText>A small image</TruncateText></Heading>
               </Flex.Item>
               <Flex.Item>
-                <Button
-                  variant="icon-inverse"
-                  icon={IconXSolid}
+                <CloseButton
+                  color="primary-inverse"
                   onClick={this.handleButtonClick}
-                >
-                  <ScreenReaderContent>Close</ScreenReaderContent>
-                </Button>
+                  screenReaderLabel="Close"
+                />
               </Flex.Item>
             </Flex>
           </Modal.Header>
@@ -374,11 +368,11 @@ class Example extends React.Component {
                 <Button variant="icon-inverse" icon={IconDownloadSolid} margin="0 x-small 0 0">
                   <ScreenReaderContent>Download This</ScreenReaderContent>
                 </Button>
-                <Button variant="icon-inverse" icon={IconXSolid}
+                <CloseButton
+                  color="primary-inverse"
                   onClick={this.handleButtonClick}
-                >
-                  <ScreenReaderContent>Close</ScreenReaderContent>
-                </Button>
+                  screenReaderLabel="Close"
+                />
               </Flex.Item>
             </Flex>
           </Modal.Header>

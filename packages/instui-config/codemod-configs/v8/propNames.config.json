@@ -37,6 +37,23 @@
       ]}
     ]
   },
+  "CloseButton": {
+    "8.0.0": [
+      { "old": "buttonRef", "new": "elementRef" },
+      { "old": "disabled", "new": "interaction", "values": [
+        { "old": true, "new": "disabled" },
+        { "old": false }
+      ]},
+      { "old": "readOnly", "new": "interaction", "values": [
+        { "old": true, "new": "readonly" },
+        { "old": false }
+      ]},
+      { "old": "variant", "new": "color", "values": [
+        { "old": "icon" },
+        { "old": "icon-inverse", "new": "primary-inverse" }
+      ]}
+    ]
+  },
   "Flex": {
     "8.0.0": [
       { "old": "inline", "new": "display", "values": [
