@@ -30,7 +30,8 @@ const {
   DEBUG,
   UNMANGLED_CLASS_NAMES,
   DISABLE_SPEEDY_STYLESHEET,
-  USE_WEBPACK_CSS_LOADERS
+  USE_WEBPACK_CSS_LOADERS,
+  OMIT_INSTUI_DEPRECATION_WARNINGS
 } = process.env
 
 const args = process.argv.slice(2)
@@ -41,28 +42,30 @@ if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
-let command, envVars, webpackArgs
+let command, webpackArgs
+
+let envVars = [(OMIT_INSTUI_DEPRECATION_WARNINGS ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1` : false)]
 
 if (args.includes('--watch')) {
   command = 'webpack-dev-server'
-  envVars = [
+  envVars = envVars.concat([
     'NODE_ENV=development',
     'DEBUG=1',
     'UNMANGLED_CLASS_NAMES=1',
     'USE_WEBPACK_CSS_LOADERS=1',
-    'DISABLE_SPEEDY_STYLESHEET=1'
-  ]
+    'DISABLE_SPEEDY_STYLESHEET=1',
+  ]).filter(Boolean)
   webpackArgs = ['--mode=development', `--port=${port}`]
 } else {
   command = 'webpack'
-  envVars = [
+  envVars = envVars.concat([
     `NODE_ENV=${NODE_ENV || 'production'}`,
     'NODE_OPTIONS=--max_old_space_size=120000',
     (DEBUG ? `DEBUG=1` : false),
     (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
     (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false),
     (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false)
-  ].filter(Boolean)
+  ]).filter(Boolean)
   webpackArgs = ['--mode=production']
 }
 

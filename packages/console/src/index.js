@@ -23,6 +23,8 @@
  */
 const React = require('react')
 
+let loggedInitialDeprecationWarning = false
+
 /* eslint-disable no-console */
 
 function getRenderStack () {
@@ -36,11 +38,10 @@ function getRenderStack () {
   return renderStack
 }
 
-function logWithRenderStack (level, condition, message, ...args) {
+function logMessage (level, withRenderStack, condition, message, ...args) {
   if (process.env.NODE_ENV !== 'production' && !condition) {
-    const renderStack = getRenderStack()
-
     if (typeof console[level] === 'function') {
+      const renderStack = withRenderStack ? getRenderStack() : ''
       console[level](`Warning: ${message}`, ...args, renderStack)
     } else {
       throw new Error(`'${level}' is not a valid console method!`)
@@ -48,8 +49,21 @@ function logWithRenderStack (level, condition, message, ...args) {
   }
 }
 
-exports.error =  (...args) => logWithRenderStack('error', ...args)
-exports.warn = (...args) => logWithRenderStack('warn', ...args)
+function logDeprecated (condition, message, ...args) {
+  if (!process.env.OMIT_INSTUI_DEPRECATION_WARNINGS) {
+    logMessage('warn', true, condition, message, ...args)
+  } else if (!condition && !loggedInitialDeprecationWarning) {
+    loggedInitialDeprecationWarning = true
+    logMessage('warn', false, condition, [
+      'There are Instructure UI deprecation warnings that are being hidden because the `OMIT_INSTUI_DEPRECATION_WARNINGS` environment variable is set. Remove or unset this variable to see the full list of warnings in your console.',
+      'These warnings will give you advance notice of breaking changes and upgrade guidance to keep your code up to date with the latest Instructure UI versions.'
+    ].join('\n\n'))
+  }
+}
+
+exports.error = (...args) => logMessage('error', true, ...args)
+exports.warn = (...args) => logMessage('warn', true, ...args)
+exports.warnDeprecated = (...args) => logDeprecated(...args)
 exports.info = (...args) => console.info(...args)
 exports.assert = (...args) => console.assert(...args)
 exports.debug = (...args) => console.debug(...args)

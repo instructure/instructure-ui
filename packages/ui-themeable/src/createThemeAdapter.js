@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { warn } from '@instructure/console/macro'
+import { warnDeprecated } from '@instructure/console/macro'
 
 /**
  * ---
@@ -40,7 +40,7 @@ export const createThemeAdapter = ({ map = {}, version, shouldIncludeOldValues =
   return ({ theme = {}, displayName } = {}) => {
     return Object.entries(theme).reduce((result, [key, value]) => {
       if (map[key]) {
-        warn(false, `[${displayName}] The theme variable \`${key}\` has been changed to \`${map[key]}\`.${version
+        warnDeprecated(false, `[${displayName}] The theme variable \`${key}\` has been changed to \`${map[key]}\`.${version
           ? ` In version ${version}, \`${key}\` will no longer work as an override. Use \`${map[key]}\` instead.`
           : ''}`
         )

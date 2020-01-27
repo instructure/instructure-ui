@@ -29,7 +29,8 @@ const { getCommand, runCommandsConcurrently } = require('@instructure/command-ut
 const {
   UNMANGLED_CLASS_NAMES,
   DISABLE_SPEEDY_STYLESHEET,
-  USE_WEBPACK_CSS_LOADERS
+  USE_WEBPACK_CSS_LOADERS,
+  OMIT_INSTUI_DEPRECATION_WARNINGS
 } = process.env
 
 const args = process.argv.slice(2)
@@ -39,7 +40,8 @@ const karmaArgs = ['start']
 let envVars = [
   'NODE_ENV=test',
   `REACT_VERSION=${React.version}`,
-  'NODE_OPTIONS=--max_old_space_size=120000'
+  'NODE_OPTIONS=--max_old_space_size=120000',
+  (OMIT_INSTUI_DEPRECATION_WARNINGS ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1` : false)
 ]
 
 if (args.includes('--watch')) {
@@ -48,14 +50,14 @@ if (args.includes('--watch')) {
     `UNMANGLED_CLASS_NAMES=1`,
     `USE_WEBPACK_CSS_LOADERS=1`,
     'DISABLE_SPEEDY_STYLESHEET=1'
-  ])
+  ]).filter(Boolean)
 } else {
   envVars = envVars.concat([
     (`${React.version}`.startsWith('15') ? false : 'COVERAGE=1'),
     (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
     (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false),
     (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false)
-  ].filter(Boolean))
+  ]).filter(Boolean)
 }
 
 if (args.includes('--no-launch')) {

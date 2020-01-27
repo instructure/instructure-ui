@@ -29,7 +29,8 @@ const {
   NODE_ENV,
   DEBUG,
   UNMANGLED_CLASS_NAMES,
-  DISABLE_SPEEDY_STYLESHEET
+  DISABLE_SPEEDY_STYLESHEET,
+  OMIT_INSTUI_DEPRECATION_WARNINGS
 } = process.env
 
 const args = process.argv.slice(2)
@@ -46,14 +47,14 @@ if (args.includes('--copy-files')) {
 
 babelArgs = babelArgs.concat([src, '--ignore "src/**/*.test.js","src/**/__tests__/**"'])
 
-let envVars = []
+let envVars = [(OMIT_INSTUI_DEPRECATION_WARNINGS ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1` : false)]
 
 if (args.includes('--watch')) {
   envVars = envVars.concat([
     'NODE_ENV=development',
     'UNMANGLED_CLASS_NAMES=1',
     'DISABLE_SPEEDY_STYLESHEET=1'
-  ])
+  ]).filter(Boolean)
   babelArgs.push('--watch')
 } else {
   envVars = envVars.concat([

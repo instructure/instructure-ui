@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { decorator } from '@instructure/ui-decorator'
-import { warn } from '@instructure/console/macro'
+import { warnDeprecated } from '@instructure/console/macro'
 
 const deprecated = (() => {
   if (process.env.NODE_ENV === 'production') {
@@ -110,7 +110,7 @@ const deprecated = (() => {
         `The '${props[propName]}' value for the \`${propName}\` prop is deprecated. ${message || ''}`
       )
 
-      warn(!isDeprecatedValue, `[${componentName}] ${warningMessage}`)
+      warnDeprecated(!isDeprecatedValue, `[${componentName}] ${warningMessage}`)
 
       return isDeprecatedValue ? null : propType(props, propName, componentName, ...rest)
     }
@@ -125,17 +125,14 @@ const deprecated = (() => {
 
         const newPropMessage = newProp ? `. Use \`${newProp}\` instead` : ''
 
-        warn(
-          false,
-          `[${componentName}] \`${oldProp}\` is deprecated and will be removed in version ${version}${newPropMessage}. ${message}`,
-        )
+        warnDeprecated(false, `[${componentName}] \`${oldProp}\` is deprecated and will be removed in version ${version}${newPropMessage}. ${message}`)
       }
     })
   }
   deprecated.warnDeprecatedProps = warnDeprecatedProps
 
   function warnDeprecatedComponent (version, componentName, message) {
-    warn(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
+    warnDeprecated(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
   }
   /**
    * ---

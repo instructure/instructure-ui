@@ -48,4 +48,4 @@ function macro({ babel, references, state }) {
     })
   })
 }
-module.exports = exports.error = exports.warn = exports.info = exports.assert = exports.debug = exports.log = createMacro(macro)
+module.exports = exports.error = exports.warn = exports.warnDeprecated = exports.info = exports.assert = exports.debug = exports.log = createMacro(macro)

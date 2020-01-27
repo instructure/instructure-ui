@@ -29,7 +29,8 @@ const {
   DEBUG,
   UNMANGLED_CLASS_NAMES,
   DISABLE_SPEEDY_STYLESHEET,
-  USE_WEBPACK_CSS_LOADERS
+  USE_WEBPACK_CSS_LOADERS,
+  OMIT_INSTUI_DEPRECATION_WARNINGS
 } = process.env
 
 const args = process.argv.slice(2)
@@ -41,29 +42,31 @@ if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
-let command, commandArgs, envVars
+let command, commandArgs
+
+let envVars = [(OMIT_INSTUI_DEPRECATION_WARNINGS ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1` : false)]
 
 if (args.includes('--watch')) {
   command = 'start-storybook'
   commandArgs = ['-c', '.storybook', '-p', port]
-  envVars = [
+  envVars = envVars.concat([
     'NODE_ENV=development',
     'DEBUG=1',
     'UNMANGLED_CLASS_NAMES=1',
     'USE_WEBPACK_CSS_LOADERS=1',
     'DISABLE_SPEEDY_STYLESHEET=1'
-  ]
+  ]).filter(Boolean)
 } else {
   command = 'build-storybook'
   commandArgs = ['-c', '.storybook', '-o', '__build__']
-  envVars = [
+  envVars = envVars.concat([
     `NODE_ENV=production`,
     `NODE_PATH=${rootPath}`,
     (DEBUG ? `DEBUG=1` : false),
     (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
     (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false),
     (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false)
-  ].filter(Boolean)
+  ]).filter(Boolean)
 }
 
 process.exit(
