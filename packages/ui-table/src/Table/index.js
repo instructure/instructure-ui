@@ -56,7 +56,7 @@ class Table extends Component {
     /**
      * Set the table's caption for screen reader
      */
-    caption: PropTypes.string.isRequired,
+    caption: PropTypes.node.isRequired,
     /**
      * Build table via `Table.Head` and `Table.Body`
      */
