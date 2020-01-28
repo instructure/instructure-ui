@@ -41,6 +41,29 @@ describe('<Flex />', async () => {
     expect(subject.getDOMNode().children.length).to.equal(4)
   })
 
+  it('should render other markup as children', async () => {
+    const subject = await mount(
+      <Flex>
+        <div>foo</div>
+        <div>bar</div>
+        <div>baz</div>
+      </Flex>
+    )
+
+    expect(subject.getDOMNode().children.length).to.equal(3)
+  })
+
+  it('should render children when children is a function', async () => {
+    const subject = await mount(
+      <Flex>
+        {() => <div>hello world</div>}
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    expect(await flex.findWithText('hello world')).to.exist()
+  })
+
   it('should render no markup if there are no children', async () => {
     const subject = await mount(
       <Flex></Flex>

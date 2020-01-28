@@ -27,8 +27,13 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { safeCloneElement, passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import {
+  safeCloneElement,
+  passthroughProps,
+  deprecated,
+  matchComponentTypes,
+  callRenderProp
+} from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { Item } from './Item'
@@ -53,9 +58,11 @@ class Flex extends Component {
 
   static propTypes = {
     /**
-    * Flex only accepts Flex.Item as a child
+    * It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function
+    * returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props
+    * will not automatically be set on the children.
     */
-    children: ChildrenPropTypes.oneOf([Item]),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * the element type to render as
     */
@@ -146,14 +153,18 @@ class Flex extends Component {
     textAlign: undefined
   }
 
-  renderChildren () {
-    return Children.map(this.props.children, (child) => {
+  renderChildren (children) {
+    return Children.map(children, (child) => {
       if (child) {
-        return safeCloneElement(child, {
-          withVisualDebug: this.props.withVisualDebug || this.props.visualDebug,
-          ...child.props, /* child visualDebug prop should override parent */
-          direction: this.props.direction.replace(/-reverse/, '')
-        })
+        if (matchComponentTypes(child, ['Item'])) {
+          return safeCloneElement(child, {
+            withVisualDebug: this.props.withVisualDebug || this.props.visualDebug,
+            ...child.props, /* child visualDebug prop should override parent */
+            direction: this.props.direction.replace(/-reverse/, '')
+          })
+        } else {
+          return child
+        }
       } else {
         return null
       }
@@ -164,7 +175,6 @@ class Flex extends Component {
     const {
       as,
       elementRef,
-      children,
       direction,
       height,
       display,
@@ -179,6 +189,8 @@ class Flex extends Component {
       wrapItems,
       inline
     } = this.props
+
+    const children = callRenderProp(this.props.children)
 
     // When flex direction is row, 'center' is the most useful default because it
     // vertically aligns Items. For column direction, though, we want 'stretch'.
@@ -209,7 +221,7 @@ class Flex extends Component {
           textAlign={textAlign}
           withVisualDebug={withVisualDebug || visualDebug}
         >
-          {this.renderChildren()}
+          {this.renderChildren(children)}
         </View>
       )
     } else {
