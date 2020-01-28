@@ -31,7 +31,7 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
-import { TruncateText } from '@instructure/ui-elements'
+import { TruncateText } from '@instructure/ui-truncate-text'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
