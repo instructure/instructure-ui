@@ -35,7 +35,7 @@
     "@instructure/ui-dom-utils": "^6.17.0",
     "@instructure/ui-elements": "^6.17.0",
     "@instructure/ui-icons": "^6.17.0",
-    "@instructure/ui-overlays": "^6.17.0",
+    "@instructure/ui-popover": "^6.17.0",
     "@instructure/ui-position": "^6.17.0",
     "@instructure/ui-prop-types": "^6.17.0",
     "@instructure/ui-react-utils": "^6.17.0",

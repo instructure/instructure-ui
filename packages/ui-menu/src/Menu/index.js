@@ -26,11 +26,11 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import { Popover } from '@instructure/ui-overlays'
+import { Popover } from '@instructure/ui-popover'
 import { uid } from '@instructure/uid'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { PositionPropTypes } from '@instructure/ui-position'
-import { pickProps, safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
+import { safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { themeable } from '@instructure/ui-themeable'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
@@ -150,7 +150,11 @@ class Menu extends Component {
      * The type of `<Menu />`
      */
     type: PropTypes.oneOf(['flyout']),
-    id: PropTypes.string
+    id: PropTypes.string,
+    /**
+    * Whether or not an arrow pointing to the trigger should be rendered
+    */
+    withArrow: PropTypes.bool
   }
 
   static defaultProps = {
@@ -177,7 +181,8 @@ class Menu extends Component {
     shouldFocusTriggerOnClose: true,
     show: undefined,
     id: undefined,
-    type: undefined
+    type: undefined,
+    withArrow: true
   }
 
   static Item = MenuItem
@@ -527,40 +532,53 @@ class Menu extends Component {
 
   render () {
     const {
+      show,
+      defaultShow,
+      placement,
+      withArrow,
       trigger,
-      disabled
+      popoverRef,
+      disabled,
+      onDismiss,
+      onFocus,
+      onMouseOver
     } = this.props
 
     return trigger ? (
       <Popover
-        {...pickProps(this.props, Popover.propTypes)}
+        isShowingContent={show}
+        defaultIsShowingContent={defaultShow}
+        onHideContent={(event, { documentClick }) => {
+          onDismiss(event, documentClick)
+          this.handleToggle(false)
+        }}
+        onShowContent={() => this.handleToggle(true)}
+        placement={placement}
+        withArrow={withArrow}
         id={this._id}
         on={['click']}
         shouldContainFocus
         shouldReturnFocus
-        onToggle={this.handleToggle}
+        onFocus={onFocus}
+        onMouseOver={onMouseOver}
         ref={(el) => {
           this._popover = el
-          if (typeof this.props.popoverRef === 'function') {
-            this.props.popoverRef(el)
+          if (typeof popoverRef === 'function') {
+            popoverRef(el)
           }
         }}
+        renderTrigger={safeCloneElement(trigger, {
+          ref: (el) => {
+            this._trigger = el
+          },
+          'aria-haspopup': true,
+          id: this._labelId,
+          onMouseOver: this.handleTriggerMouseOver,
+          onKeyDown: this.handleTriggerKeyDown,
+          disabled: trigger.props.disabled || disabled
+        })}
       >
-        <Popover.Trigger>
-          {safeCloneElement(trigger, {
-            ref: (el) => {
-              this._trigger = el
-            },
-            'aria-haspopup': true,
-            id: this._labelId,
-            onMouseOver: this.handleTriggerMouseOver,
-            onKeyDown: this.handleTriggerKeyDown,
-            disabled: trigger.props.disabled || disabled
-          })}
-        </Popover.Trigger>
-        <Popover.Content>
           {this.renderMenu()}
-        </Popover.Content>
       </Popover>
     ) : this.renderMenu()
   }
