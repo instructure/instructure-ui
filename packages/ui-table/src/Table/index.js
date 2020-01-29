@@ -54,7 +54,8 @@ category: components
 class Table extends Component {
   static propTypes = {
     /**
-     * Set the table's caption for screen reader
+     * Provide a screen reader friendly description. Anything passed to this
+     * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
      */
     caption: PropTypes.node.isRequired,
     /**
