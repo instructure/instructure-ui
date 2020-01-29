@@ -84,29 +84,23 @@ function addElementQueryMatchListener (query, el, cb) {
   const node = findDOMNode(el)
   let matches = []
 
-  const updateElementMatches = (size) => {
-    const matchingQueries = parseQuery(query, node)(size)
-    const newMatches = Object.keys(matchingQueries)
-      .filter(key => matchingQueries[key])
-      .map(key => key)
-
-    // we only call back if the matches have changed
-    if (matches.length !== newMatches.length) {
-      matches = newMatches
-      cb(matches)
-    }
-
-    if (matches.filter(match => newMatches.indexOf(match) === -1).length > 0) {
+  const update = (size) => {
+    const newMatches = updateElementMatches(query, node, matches, size)
+    if (newMatches) {
       matches = newMatches
       cb(matches)
     }
   }
 
-  const debounced = debounce(updateElementMatches, 100, { leading: false, trailing: true })
+  const debounced = debounce(update, 100, { leading: false, trailing: true })
   const elementResizeListener = addResizeListener(node, debounced)
   const { width, height } = getBoundingClientRect(node)
+  const newMatches = update({ width, height }, query, node, matches)
 
-  updateElementMatches({ width, height })
+  if (newMatches) {
+    matches = newMatches
+    cb(matches)
+  }
 
   return {
     remove () {
@@ -121,5 +115,24 @@ function addElementQueryMatchListener (query, el, cb) {
   }
 }
 
+function updateElementMatches (query, el, matches = [], size) {
+  const node = findDOMNode(el)
+  const { width, height } = size || getBoundingClientRect(node)
+  const matchingQueries = parseQuery(query, node)({width, height})
+  const newMatches = Object.keys(matchingQueries)
+    .filter(key => matchingQueries[key])
+    .map(key => key)
+
+  // only return matches if they have changed
+  if (matches.length !== newMatches.length) {
+    return newMatches
+  }
+  if (matches.filter(match => newMatches.indexOf(match) === -1).length > 0) {
+    return newMatches
+  }
+
+  return null
+}
+
 export default addElementQueryMatchListener
-export { addElementQueryMatchListener }
+export { addElementQueryMatchListener, updateElementMatches }

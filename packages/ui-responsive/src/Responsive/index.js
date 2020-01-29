@@ -25,11 +25,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { findDOMNode } from '@instructure/ui-dom-utils'
 import { deepEqual } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 
-import { addElementQueryMatchListener } from '../addElementQueryMatchListener'
+import { addElementQueryMatchListener, updateElementMatches } from '../addElementQueryMatchListener'
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
 
@@ -79,7 +78,8 @@ class Responsive extends Component {
   _matchListener = null
 
   state = {
-    matches: []
+    matches: [],
+    hasRendered: false
   }
 
   componentDidMount () {
@@ -87,6 +87,19 @@ class Responsive extends Component {
       (this.props.render || this.props.children),
       `[Responsive] must have either a \`render\` prop or \`children\` prop.`
     )
+
+    if (this.props.match === 'element') {
+      // Because Responsive renders an empty div initially, it always needs to
+      // re-render with the children provided. If there are no matches the match
+      // listener won't trigger an update, so we handle this update explicitly.
+      const initialMatches = updateElementMatches(this.props.query, this) || []
+      this.setState({
+        matches: initialMatches,
+        hasRendered: true
+      })
+    } else {
+      this.setState({ hasRendered: true })
+    }
     this._matchListener = this.addMatchListener(this.props.query, this.updateMatches)
   }
 
@@ -107,8 +120,8 @@ class Responsive extends Component {
     const matchListener = match === 'element'
       ? addElementQueryMatchListener
       : addMediaQueryMatchListener
-
-    return matchListener(query, findDOMNode(this), updateMatches)
+    // TODO: refactor to use a ref to root div instead of `this`
+    return matchListener(query, this, updateMatches)
   }
 
   removeMatchListener () {
@@ -156,25 +169,22 @@ class Responsive extends Component {
   }
 
   render () {
-    const { matches } = this.state
-
-    const {
-      props,
-      render,
-      children
-    } = this.props
-
-    if (!this.renderedOnce) {
-      // Dont call render prop until component has rendered and obtained matches.
-      // Rendering an empty div initially is fast and unobtrusive.
-      this.renderedOnce = true
-      return <div/>
+    const { matches, hasRendered } = this.state
+    const { props, render, children } = this.props
+    let renderFunc
+    // Responsive needs to render once to measure the dom and obtain matches.
+    // Calling the render prop on this initial render can cause visual side
+    // effects and is slower than rendering an empty div.
+    if (hasRendered) {
+      // Render via the children or render method, whichever is supplied. If
+      // both are supplied, give preference to children.
+      renderFunc = children || render
     }
-
-    // Render via the children or render method, whichever is supplied. If
-    // both are supplied, give preference to children.
-    const renderFunc = children || render
-    return renderFunc ? renderFunc(this.mergeProps(matches, props), matches) : null
+    return (
+      <div>
+        {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
+      </div>
+    )
   }
 }
 
