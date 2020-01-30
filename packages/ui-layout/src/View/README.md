@@ -791,6 +791,6 @@ example: true
   >
     {lorem.sentence()}
   </DeprecatedView>
-  <Button variant="success">Some action</Button>
+  <Button color="success">Some Action</Button>
 </DeprecatedView>
 ```

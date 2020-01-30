@@ -91,8 +91,8 @@ render () {
             offsetY={offset.y}
             onPositionChanged={this.handlePositionChanged}
             renderTarget={
-              <Button variant="primary" onClick={this.handleButtonClick}>
-                Change placement
+              <Button color="primary" onClick={this.handleButtonClick}>
+                Change Placement
               </Button>
             }
           >
@@ -196,8 +196,8 @@ class Example extends React.Component {
               mountNode={() => this._mountNode}
               onPositionChanged={this.handlePositionChanged}
               renderTarget={
-                <Button variant="primary" onClick={this.handleButtonClick}>
-                  Change placement
+                <Button color="primary" onClick={this.handleButtonClick}>
+                  Change Placement
                 </Button>
               }
             >
@@ -300,8 +300,8 @@ class Example extends React.Component {
             </Position>
           )}
         </ApplyTextDirection>
-        <Button variant="primary" onClick={this.handleButtonClick}>
-          Change placement
+        <Button color="primary" onClick={this.handleButtonClick}>
+          Change Placement
         </Button>
       </div>
     )

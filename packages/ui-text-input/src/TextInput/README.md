@@ -201,7 +201,7 @@ example: true
     width="4rem"
   />
   &nbsp;
-  <Button>I am inline content</Button>
+  <Button>I Am Inline Content</Button>
 </div>
 ```
 

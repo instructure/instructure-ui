@@ -622,18 +622,18 @@ class Example extends React.Component {
   // Renders the edit button.
   renderEditButton = ({ isVisible, onClick, onFocus, onBlur, buttonRef }) => {
     return this.state.mode !== 'edit' ? (
-      <Button
+      <IconButton
         size="small"
-        variant="icon"
         margin="0 0 0 x-small"
-        icon={IconCalendarMonthLine}
+        withBackground={false}
+        withBorder={false}
+        renderIcon={IconCalendarMonthLine}
         onClick={onClick}
         onFocus={onFocus}
         onBlur={onBlur}
-        buttonRef={buttonRef}
-      >
-        <ScreenReaderContent>Edit when</ScreenReaderContent>
-      </Button>
+        elementRef={buttonRef}
+        screenReaderLabel="Edit when"
+      />
     ) : null
   }
 

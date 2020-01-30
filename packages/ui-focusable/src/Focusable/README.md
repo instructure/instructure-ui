@@ -46,7 +46,7 @@ example: true
     <div>
       {
         focused ? 
-          <Button href="#mainContentExample">Skip to content</Button> : 
+          <Link href="#mainContentExample">Skip to content</Link> : 
           <ScreenReaderContent tabIndex="0">Skip to content</ScreenReaderContent>
       }
       <View as="p" id="mainContentExample">

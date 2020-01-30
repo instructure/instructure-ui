@@ -26,8 +26,8 @@ The default choice for Iconography is the `Line` version. However, when an Icon 
 example: true
 ---
 <View as="div" margin="small">
-  <Button margin="small" icon={IconEyeLine}>Preview</Button>
-  <Button variant="primary" margin="small" icon={IconEyeSolid}>Preview</Button>
+  <Button margin="small" renderIcon={IconEyeLine}>Preview</Button>
+  <Button color="primary" margin="small" renderIcon={IconEyeSolid}>Preview</Button>
   <View margin="small" display="inline-block" width="20rem" background="primary-inverse" padding="small" textAlign="end">
     <IconExpandSolid size="small" />
   </View>

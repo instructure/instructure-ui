@@ -44,7 +44,7 @@ class Example extends React.Component {
     return (
       <CloseButton
         placement="end"
-        offset="medium"
+        offset="small"
         onClick={this.handleButtonClick}
         screenReaderLabel="Close"
       />
@@ -76,7 +76,7 @@ class Example extends React.Component {
           </DeprecatedModal.Body>
           <DeprecatedModal.Footer>
             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-            <Button variant="primary" type="submit">Submit</Button>
+            <Button color="primary" type="submit">Submit</Button>
           </DeprecatedModal.Footer>
         </DeprecatedModal>
       </div>
@@ -119,7 +119,7 @@ class Example extends React.Component {
     return (
       <CloseButton
         placement="end"
-        offset="medium"
+        offset="small"
         onClick={this.handleButtonClick}
         screenReaderLabel="Close"
       />
@@ -151,7 +151,7 @@ class Example extends React.Component {
           </DeprecatedModal.Body>
           <DeprecatedModal.Footer>
             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-            <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
+            <Button onClick={this.handleButtonClick} color="primary" type="submit">Submit</Button>
           </DeprecatedModal.Footer>
         </DeprecatedModal>
         <View
@@ -250,6 +250,8 @@ class Example extends React.Component {
               <Flex.Item>
                 <CloseButton
                   color="primary-inverse"
+                  placement="end"
+                  offset="small"
                   onClick={this.handleButtonClick}
                   screenReaderLabel="Close"
                 />
@@ -264,7 +266,7 @@ class Example extends React.Component {
             />
           </DeprecatedModal.Body>
           <DeprecatedModal.Footer>
-            <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
+            <Button onClick={this.handleButtonClick} color="primary-inverse" withBackground={false} type="submit">Done</Button>
           </DeprecatedModal.Footer>
         </DeprecatedModal>
       </div>
@@ -366,15 +368,27 @@ class Example extends React.Component {
                 </Flex>
               </Flex.Item>
               <Flex.Item>
-                <Button variant="icon-inverse" icon={IconPrinterSolid} margin="0 x-small">
-                  <ScreenReaderContent>Print This</ScreenReaderContent>
-                </Button>
-                <Button variant="icon-inverse" icon={IconDownloadSolid} margin="0 x-small 0 0">
-                  <ScreenReaderContent>Download This</ScreenReaderContent>
-                </Button>
-                <CloseButton
+                <IconButton
                   color="primary-inverse"
-                  onClick={this.handleButtonClick}
+                  withBackground={false}
+                  withBorder={false}
+                  renderIcon={IconPrinterSolid}
+                  screenReaderLabel="Print This Image"
+                  margin="0 x-small 0 0"
+                />
+                <IconButton
+                  color="primary-inverse"
+                  withBackground={false}
+                  withBorder={false}
+                  renderIcon={IconDownloadSolid}
+                  screenReaderLabel="Download This Image"
+                  margin="0 x-small 0 0"
+                />
+                <IconButton
+                  color="primary-inverse"
+                  withBackground={false}
+                  withBorder={false}
+                  renderIcon={IconXSolid}
                   screenReaderLabel="Close"
                 />
               </Flex.Item>
@@ -388,7 +402,7 @@ class Example extends React.Component {
             />
           </DeprecatedModal.Body>
           <DeprecatedModal.Footer>
-            <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
+            <Button onClick={this.handleButtonClick} color="primary-inverse" withBackground={false} type="submit">Done</Button>
           </DeprecatedModal.Footer>
         </DeprecatedModal>
       </div>

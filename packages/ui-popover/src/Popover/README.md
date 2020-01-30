@@ -69,7 +69,7 @@ class Example extends React.Component {
     return (
       <CloseButton
         placement="end"
-        offset="x-small"
+        offset="small"
         onClick={() => this.setState({ isShowingContent: false })}
         screenReaderLabel="Close"
       />
@@ -163,7 +163,7 @@ class Example extends React.Component {
     return (
       <div style={{ paddingBottom: 50, display: 'flex', justifyContent: 'center' }}>
         <Popover
-          renderTrigger={<Button margin="small">focus me</Button>}
+          renderTrigger={<Button margin="small">Focus Me</Button>}
           isShowingContent={this.state.isShowingContent}
           onShowContent={(e) => {
             this.setState({ isShowingContent: true })
@@ -176,10 +176,10 @@ class Example extends React.Component {
           shouldFocusContentOnTriggerBlur
           mountNode={() => document.getElementById('container')}
         >
-          <Button margin="small">focus me when trigger blurs</Button>
+          <Button margin="small">Focus Me When Trigger Blurs</Button>
         </Popover>
         <div id="container"/>
-        <Button id="next" margin="small">focus me next</Button>
+        <Button id="next" margin="small">Focus Me Next</Button>
       </div>
     )
   }

@@ -64,7 +64,7 @@ My hope would be that developers wouldn't need to understand what's happening un
     <Heading>Courses</Heading>
   </FlexItem>
   <FlexItem>
-    <Button>Add course</Button>
+    <Button>Add Course</Button>
   </FlexItem>
 </Flex>
 ```

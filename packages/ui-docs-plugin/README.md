@@ -235,7 +235,7 @@ yaml front matter to your code block:
 example: true
 background: 'checkerboard-inverse'
 ---
-<Button variant"ghost-inverse">Click Me</Button>
+<Button color="primary" withBackground={false}>Click Me</Button>
 ```
 ````
 

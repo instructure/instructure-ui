@@ -36,20 +36,20 @@ class Example extends React.Component {
       <CloseButton
         placement="end"
         offset="medium"
-        variant="icon"
+        screenReaderLabel="Close"
         onClick={this.handleButtonClick}
-      >
-        Close
-      </CloseButton>
+      />
     )
   }
 
   render () {
     return (
       <div>
-        <Button icon={IconTrashLine} onClick={this.handleButtonClick}>
-          <ScreenReaderContent>Delete the Assignment</ScreenReaderContent>
-        </Button>
+        <IconButton
+          renderIcon={IconTrashLine}
+          onClick={this.handleButtonClick}
+          screenReaderLabel="Delete the Assignment"
+        />
         <Modal
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
@@ -66,7 +66,7 @@ class Example extends React.Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleButtonClick}>Cancel</Button>&nbsp;
-            <Button onClick={this.handleButtonClick} variant="danger" type="submit">Delete</Button>
+            <Button onClick={this.handleButtonClick} color="danger" type="submit">Delete</Button>
           </Modal.Footer>
         </Modal>
       </div>

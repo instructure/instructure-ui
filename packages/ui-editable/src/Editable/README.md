@@ -51,7 +51,7 @@ class Example extends React.Component {
           onClick={onClick}
           onFocus={onFocus}
           onBlur={onBlur}
-          buttonRef={buttonRef}
+          elementRef={buttonRef}
         >
           Do it!
         </Button>

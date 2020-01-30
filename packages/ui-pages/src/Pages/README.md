@@ -52,12 +52,12 @@ class Example extends React.Component {
           return (
             <div>
               <View as="div" textAlign="end">
-                <Button 
-                  variant="link" 
+                <Link
+                  isWithinText={false}
                   onClick={this.handleLinkClick}
                 >
-                  Go to page 2
-                </Button>
+                  Go to Page Two
+                </Link>
               </View>
               <View as="div" margin="large 0 0 0" textAlign="center">
                 <Text as="div">Page One</Text>
@@ -148,7 +148,7 @@ class Example extends React.Component {
               </View>
               <Button
                 onClick={this.handleViewDetailsClick}
-                variant="primary"
+                color="primary"
               >
                 View Details
               </Button>
@@ -288,15 +288,15 @@ class Example extends React.Component {
   renderUserMedia (user) {
     return (
       <View as="div" margin="small 0">
-        <Button
-          variant="link"
+        <Link
+          isWithinText={false}
           onClick={this.handleDetailsButtonClick.bind(this, user.id)}
-          ref={(el) => { this._usersNav[user.id] = el }}
+          elementRef={(el) => { this._usersNav[user.id] = el }}
         >
           <Media description={user.name}>
             <Avatar name={user.name} />
           </Media>
-        </Button>
+        </Link>
       </View>
     )
   }

@@ -37,13 +37,12 @@ class Example extends React.Component {
           <Heading>Hello</Heading>
         </Flex.Item>
         <Flex.Item>
-          <Button
-            variant="icon"
-            icon={IconXLine}
+          <CloseButton
             onClick={this.hideTray}
-          >
-            <ScreenReaderContent>Close</ScreenReaderContent>
-          </Button>
+            screenReaderLabel="Close"
+            placement="end"
+            offset="small"
+          />
         </Flex.Item>
       </Flex>
     )

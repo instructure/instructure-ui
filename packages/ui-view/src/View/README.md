@@ -821,6 +821,6 @@ example: true
   >
     {lorem.sentence()}
   </View>
-  <Button variant="success">Some action</Button>
+  <Button color="success">Some Action</Button>
 </View>
 ```

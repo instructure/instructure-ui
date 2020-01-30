@@ -234,9 +234,8 @@ example: true
         <Heading>I am a fairly lengthy heading for the page</Heading>
       </DeprecatedGrid.Col>
       <DeprecatedGrid.Col width="auto">
-        <Button>Cancel</Button>
-        &nbsp;
-        <Button variant="primary" icon={IconAddSolid}>Widget</Button>
+        <Button margin="0 x-small 0 0">Cancel</Button>
+        <Button color="primary" renderIcon={IconAddSolid}>Widget</Button>
       </DeprecatedGrid.Col>
     </DeprecatedGrid.Row>
   </DeprecatedGrid>

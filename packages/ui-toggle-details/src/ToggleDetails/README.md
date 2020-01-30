@@ -39,7 +39,7 @@ class Example extends React.Component {
     return (
       <div>
         <Button onClick={this.handleToggle}>
-          This button {this.state.expanded ? 'collapses' : 'expands'}
+          This Button {this.state.expanded ? 'Collapses' : 'Expands'}
         </Button>
         <br />
         <br />

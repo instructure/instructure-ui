@@ -38,7 +38,7 @@ class Example extends React.Component {
     return (
       <CloseButton
         placement="end"
-        offset="x-small"
+        offset="small"
         onClick={this.hidePopover}
         screenReaderLabel="Close"
       />
@@ -140,14 +140,14 @@ render () {
         mountNode={() => document.getElementById('container')}
       >
         <DeprecatedPopover.Trigger>
-          <Button margin="small">focus me</Button>
+          <Button margin="small">Focus Me</Button>
         </DeprecatedPopover.Trigger>
         <DeprecatedPopover.Content>
-          <Button margin="small">focus me when trigger blurs</Button>
+          <Button margin="small">Focus Me When Trigger Blurs</Button>
         </DeprecatedPopover.Content>
       </DeprecatedPopover>
       <div id="container"/>
-      <Button id="next" margin="small">focus me next</Button>
+      <Button id="next" margin="small">Focus Me Next</Button>
     </div>
   )
 }

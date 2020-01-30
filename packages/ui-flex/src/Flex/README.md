@@ -262,7 +262,7 @@ example: true
     <Button margin="none x-small none none">
       Cancel
     </Button>
-    <Button variant="success" icon={IconUserSolid}>
+    <Button color="success" renderIcon={IconUserSolid}>
       Add user
     </Button>
   </Flex.Item>
@@ -296,7 +296,7 @@ example: true
     </Flex>
 
     <div>
-      <Button variant="primary" size="large">Sign up now!</Button>
+      <Button color="primary" size="large">Sign up now!</Button>
     </div>
 
   </Flex.Item>

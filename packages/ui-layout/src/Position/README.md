@@ -88,8 +88,8 @@ render () {
             onPositionChanged={this.handlePositionChanged}
           >
             <DeprecatedPosition.Target>
-              <Button variant="primary" onClick={this.handleButtonClick}>
-                Change placement
+              <Button color="primary" onClick={this.handleButtonClick}>
+                Change Placement
               </Button>
             </DeprecatedPosition.Target>
             <DeprecatedPosition.Content>
@@ -196,10 +196,10 @@ class Example extends React.Component {
             >
               <DeprecatedPosition.Target>
                 <Button
-                  variant="primary"
+                  color="primary"
                   onClick={this.handleButtonClick}
                 >
-                  Change placement
+                  Change Placement
                 </Button>
               </DeprecatedPosition.Target>
               <DeprecatedPosition.Content>
@@ -305,8 +305,8 @@ class Example extends React.Component {
             </DeprecatedPosition>
           )}
         </ApplyTextDirection>
-        <Button variant="primary" onClick={this.handleButtonClick}>
-          Change placement
+        <Button color="primary" onClick={this.handleButtonClick}>
+          Change Placement
         </Button>
       </div>
     )
