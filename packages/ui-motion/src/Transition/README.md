@@ -114,9 +114,9 @@ class Example extends React.Component {
     }
   }
 
-  handleDirectionChange = (e, o) => {
+  handleDirectionChange = (e, value) => {
     this.setState({
-      direction: o.value,
+      direction: value,
       in: true
     })
   };
@@ -154,15 +154,16 @@ class Example extends React.Component {
           return (
             <div>
               <div>
-                <Select
+                <RadioInputGroup
                   onChange={this.handleDirectionChange}
-                  value={this.state.direction}
-                  label={<ScreenReaderContent>Transition Direction</ScreenReaderContent>}
-                  inline
+                  name="slideExample"
+                  description={<ScreenReaderContent>Select a direction</ScreenReaderContent>}
+                  value={direction}
+                  variant="toggle"
                 >
-                  {directionVariants.map((s) => <option value={s.value} key={s.value}>{s.label}</option>)}
-                </Select>
-                <Button size="small" margin="small" onClick={this.handleButtonClick}>
+                  {directionVariants.map(dir => <RadioInput key={dir.value} value={dir.value} label={dir.label} />)}
+                </RadioInputGroup>
+                <Button size="small" margin="medium none small" onClick={this.handleButtonClick}>
                   Slide {this.state.in ? 'Out' : 'In'}
                 </Button>
               </div>

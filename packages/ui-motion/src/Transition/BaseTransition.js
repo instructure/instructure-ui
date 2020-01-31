@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { getClassList } from '@instructure/ui-dom-utils'
-import { ensureSingleChild, safeCloneElement} from '@instructure/ui-react-utils'
+import { ensureSingleChild, polyfill, safeCloneElement } from '@instructure/ui-react-utils'
 
 const STATES = {
   EXITED: -2,
@@ -186,13 +186,19 @@ class BaseTransition extends React.Component {
     this.startTransition(this.props.in, this.props.transitionOnMount)
   }
 
-  componentWillReceiveProps (nextProps, nextState) {
-    if (nextProps.in !== this.props.in && this.state.transitioning) {
-      this.clearTransition(this.props.transitionClassName)
+  getSnapshotBeforeUpdate (prevProps, prevState) {
+    if (this.props.in !== prevProps.in && prevState.transitioning) {
+      // direction changed before previous transition finished
+      return true
     }
+    return null
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState, cancelPrematurely) {
+    if (cancelPrematurely) {
+      this.clearTransition(prevProps.transitionClassName)
+    }
+
     if (this.props.transitionClassName !== prevProps.transitionClassName) {
       this.clearTransition(prevProps.transitionClassName)
     }
@@ -384,6 +390,8 @@ class BaseTransition extends React.Component {
     }
   }
 }
+
+polyfill(BaseTransition)
 
 export default BaseTransition
 export { BaseTransition }
