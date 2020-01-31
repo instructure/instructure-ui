@@ -4,7 +4,42 @@ parent: index
 id: Newsletter
 ---
 
-## November 4, 2019
+## February 2020
+
+### Button upgrades for 8.0
+You'll notice some updates to the [Button](#Button) component that shipped with the latest [release](#CHANGELOG). You can read more about the context and reasoning for these changes in the [upgrade guide](##button-upgrade-guide). In short, Button has evolved a lot over the years (being one of the earliest components in the library) and the existing `variant` prop was preventing the flexibility necessary to keep up with the demands of our consumers.
+
+We understand that Button is one of the most frequently used components, so we have done a few things (and are going to do a few more things) to make this upgrade as painless as possible.
+
+#### We are intentionally releasing these changes early
+We are yet to release version 7.0. These `Button` changes will not go into effect until version 8.0. This was deliberate. We wanted to give consumers as much time as possible to make these upgrades.
+
+#### The upgraded Button is completely backwards compatible
+Until we release version 8.0, `Button` is completely backwards compatible with previous props and theme variables. That means after upgrading to version 6.18.0, you should see no differences with your existing Button components. All props and theme variables applied should work exactly as they did before (though you will see some warnings helping you to know what needs updating, more on that later). If you do see any differences, let us know and we will push out a patch ASAP.
+
+#### We created an exhaustive upgrade guide to help with changes
+This [upgrade guide](##button-upgrade-guide) details every change you will need to make. It also includes example code for each possible variant and the upgraded equivalent.
+
+#### We will continue to improve our codemods
+Our codemods will work for simple configurations (we have those cases noted in the upgrade guide), but they still have limitations. We're going to look for ways to make them more intelligent to automate these updates where possible.
+
+#### We added an environment variable to de-dupe deprecation warnings
+If your application is anything like our documentation, you use [Button](#Button) all over the place. Deprecation warnings have already become quite noisy with the package migrations, with Button added into the mix the volume of those warnings is getting out of control. We know it's not feasible to upgrade everything at once (in fact, that would probably be a bad idea), and we want your console logs to stay clean in the meantime. With that in mind, we now provide an environment variable that will allow you to de-dupe deprecation warnings. You can read more about that in the following section.
+
+### De-dupe deprecation warnings
+We want our warnings to be helpful for consumers. Deprecation warnings will help you to stay up to date with the latest API updates and package migrations. However, with so much noise Instructure UI warnings were drowning out everything else in the console and hurting the developer experience. We still want to let you know that there are deprecation warnings, but it is sufficient to inform you of that fact once instead of a hundred times :) We're providing an environment variable that, when set, will warn you a single time that there are deprecation warnings. You can switch that flag off when you are ready to make your upgrades and get the full console output for each warning as you did before.
+
+To de-dupe deprecation warnings, set the following environment variable
+
+```js
+OMIT_INSTUI_DEPRECATION_WARNINGS=1
+```
+
+We attempted to group all deprecation warnings together so that we could omit them when that flag is set. If you see other warnings that relate to API changes or upgrades, please let us know and we'll submit a patch to group them with the others.
+
+As always, if there are other warnings outside of these that you find too noisy or unhelpful, please reach out. We are looking for ways to improve the developer experience moving forward and would love to have your feedback.
+
+## November 2019
 
 ### We're listening
 We recently conducted interviews with Instructure engineers to help us understand how InstUI is perceived and where we can improve. Interviews with our product designers are next. However, given the feedback we received from the engineering interviews, we’ve already arrived at one important conclusion (drumroll) &hellip;
