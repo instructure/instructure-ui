@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { PresentationContent } from '@instructure/ui-a11y-content'
-import { Tooltip } from '@instructure/ui-overlays'
+import { Tooltip } from '@instructure/ui-tooltip'
 import { IconArrowOpenStartSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 
@@ -54,7 +54,7 @@ class PaginationArrowButton extends Component {
     return (
       <Tooltip
         on={['hover', 'focus']}
-        tip={<PresentationContent>{label}</PresentationContent>}
+        renderTip={<PresentationContent>{label}</PresentationContent>}
       >
         <IconButton
           {...props}

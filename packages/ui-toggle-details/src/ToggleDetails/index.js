@@ -154,7 +154,7 @@ class ToggleDetails extends Component {
         <Button
           {...props}
           fluidWidth
-          buttonRef={this.getButtonRef}
+          elementRef={this.getButtonRef}
         >
           {summary}
         </Button>

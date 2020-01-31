@@ -52,14 +52,14 @@ class NavToggle extends Component {
     } = this.props
 
     const sectionStyles = {
-      color: '#0084D1',
+      color: '#2D3B45',
       textWeight: 'light',
       textTransform: 'uppercase',
       textSize: 'medium'
     }
 
     const categoryStyles = {
-      color: '#333',
+      color: '#2D3B45',
       textWeight: 'normal',
       textTransform: 'capitalize',
       textSize: 'medium'

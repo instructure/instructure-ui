@@ -35,7 +35,7 @@
     "@instructure/ui-dom-utils": "^6.18.0",
     "@instructure/ui-elements": "^6.18.0",
     "@instructure/ui-icons": "^6.18.0",
-    "@instructure/ui-overlays": "^6.18.0",
+    "@instructure/ui-tooltip": "^6.18.0",
     "@instructure/ui-portal": "^6.18.0",
     "@instructure/ui-prop-types": "^6.18.0",
     "@instructure/ui-react-utils": "^6.18.0",

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Button } from '@instructure/ui-buttons'
+import { BaseButton } from '@instructure/ui-buttons'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 /**
@@ -53,17 +53,18 @@ class PaginationButton extends Component {
   }
 
   render() {
-    const variant = this.props.current ? 'primary' : 'link'
     const exclude = this.props.current ? ['onClick', 'href'] : []
     const props = omitProps(this.props, PaginationButton.propTypes, exclude)
     return (
-      <Button
-        variant={variant}
+      <BaseButton
+        color="primary"
+        withBackground={this.props.current ? true : false}
+        withBorder={this.props.current ? true : false}
         {...props}
         aria-current={this.props.current ? 'page' : null}
       >
         {this.props.children}
-      </Button>
+      </BaseButton>
     )
   }
 }

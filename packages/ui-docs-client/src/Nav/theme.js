@@ -27,7 +27,7 @@ export default function ({ borders, colors, spacing }) {
     borderWidth: borders.widthMedium,
     borderColor: colors.borderBrand,
     linkPadding: spacing.xSmall,
-    linkMargin: '0.375rem 0 0.375rem 0.375rem',
+    linkMargin: '0.75rem 0 0.75rem 0.5rem',
     linkColor: colors.textDarkest,
     linkColorSelected: colors.link
   }

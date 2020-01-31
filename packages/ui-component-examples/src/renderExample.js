@@ -24,10 +24,8 @@
 import React from 'react'
 import { View } from '@instructure/ui-view'
 import { Tooltip} from '@instructure/ui-overlays'
-import { Button } from '@instructure/ui-buttons'
+import { IconButton } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
-import { Text } from '@instructure/ui-text'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 export default function renderExample ({ Component, componentProps, exampleProps, key }) {
   return (
@@ -48,12 +46,10 @@ export default function renderExample ({ Component, componentProps, exampleProps
         placement="bottom"
         on={['click']}
       >
-        <Button variant="icon" size="small">
-          <Text color="secondary" __dangerouslyIgnoreExperimentalWarnings>
-            <IconInfoLine />
-          </Text>
-          <ScreenReaderContent>props</ScreenReaderContent>
-        </Button>
+        <IconButton size="small"
+          renderIcon={IconInfoLine}
+          screenReaderLabel="props"
+        />
       </Tooltip>
     </View>
   )

@@ -52,7 +52,7 @@ order: 3
 
 ### Component Theme Variables
 
-- Theme variables should be camelCase, reflecting the corresponding CSS property when possible and prefixed with a semantic descriptor, using the following format: `[variation][state][CSS property]` e.g. (for `<Button variant="primary" />`, `primaryHoverBackground`).
+- Theme variables should be camelCase, reflecting the corresponding CSS property when possible and prefixed with a semantic descriptor, using the following format: `[variation][state][CSS property]` e.g. (for `<Button color="primary" />`, `primaryHoverBackground`).
 - Theme variables shouldn't include the component name because the component scope is added via the build. (`primaryHoverBackground` will be transformed into `--Button`)
 
 ### Component Lifecycle methods

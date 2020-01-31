@@ -25,8 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Button } from '@instructure/ui-buttons'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { IconButton } from '@instructure/ui-buttons'
 import { IconArrowOpenStartSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { themeable } from '@instructure/ui-themeable'
 
@@ -63,25 +62,25 @@ class DatePickerPagination extends Component {
   render () {
     return (
       <div className={styles.root}>
-        <Button
-          variant="icon"
+        <IconButton
+          withBackground={false}
+          withBorder={false}
           onClick={this.handlePrevClick}
-          icon={
+          renderIcon={
             <IconArrowOpenStartSolid className={styles.arrowIcon} />
           }
-        >
-          <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>{this.props.previousLabel}</ScreenReaderContent>
-        </Button>
+          screenReaderLabel={this.props.previousLabel}
+        />
         {this.props.children}
-        <Button
-          variant="icon"
+        <IconButton
+          withBackground={false}
+          withBorder={false}
           onClick={this.handleNextClick}
-          icon={
+          renderIcon={
             <IconArrowOpenEndSolid className={styles.arrowIcon} />
           }
-        >
-          <ScreenReaderContent>{this.props.nextLabel}</ScreenReaderContent>
-        </Button>
+          screenReaderLabel={this.props.nextLabel}
+        />
       </div>
     )
   }

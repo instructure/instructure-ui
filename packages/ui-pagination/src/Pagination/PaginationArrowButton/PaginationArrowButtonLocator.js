@@ -25,7 +25,7 @@
 import { locator } from '@instructure/ui-test-locator'
 import { find } from '@instructure/ui-test-queries'
 // eslint-disable-next-line no-restricted-imports
-import { TooltipLocator } from '@instructure/ui-overlays/es/Tooltip/TooltipLocator'
+import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
 
 import { PaginationArrowButton } from './index'
 

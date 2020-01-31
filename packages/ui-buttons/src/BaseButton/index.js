@@ -29,7 +29,7 @@ import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { getElementType, getInteraction, passthroughProps, callRenderProp, experimental } from '@instructure/ui-react-utils'
+import { getElementType, getInteraction, passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -42,11 +42,9 @@ import theme from './theme'
 /**
 ---
 category: components/utilities
-experimental: true
 ---
 **/
 
-@experimental()
 @testable()
 @themeable(theme, styles)
 class BaseButton extends Component {

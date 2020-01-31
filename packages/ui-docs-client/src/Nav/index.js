@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { Button } from '@instructure/ui-buttons'
+import { Link } from '@instructure/ui-link'
 import { Text } from '@instructure/ui-text'
 import { TextInput } from '@instructure/ui-text-input'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -191,9 +191,9 @@ class Nav extends Component {
           [styles.selectedLink]: docSelected
         })}
       >
-        <Button href={`#${docId}`} variant="link" theme={this.buttonTheme(docSelected)}>
+        <Link href={`#${docId}`} isWithinText={false} theme={this.buttonTheme(docSelected)} display="block">
           {docs[docId].title}
-        </Button>
+        </Link>
       </div>
     )
   }
@@ -298,9 +298,9 @@ class Nav extends Component {
               [styles['level--0']]: true
             })}
           >
-            <Button theme={this.buttonTheme(isSelected)} href={`#${themeKey}`} variant="link">
+            <Link theme={this.buttonTheme(isSelected)} href={`#${themeKey}`} isWithinText={false} display="block">
               {themeKey}
-            </Button>
+            </Link>
           </div>
         )
       })

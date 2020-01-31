@@ -88,6 +88,11 @@ class Pagination extends Component {
      * Accessible label for previous button
      */
     labelPrev: PropTypes.string,
+    /**
+    * The compact variant truncates the page navigation to show only the first,
+    * last, and pages immediately surrounding the current page. Fewer than 5 pages,
+    * no next/previous arrow buttons will be shown, and all pages will be listed
+    */
     variant: PropTypes.oneOf(['full', 'compact']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,

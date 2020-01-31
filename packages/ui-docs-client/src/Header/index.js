@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Button } from '@instructure/ui-buttons'
+import { Link } from '@instructure/ui-link'
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
@@ -53,32 +53,28 @@ class Header extends Component {
         </div>
         <div className={styles.banner} role="banner">
           <Heading level="h2" as="h1">
-            <Button
-              variant="link"
-              size="large"
+            <Link
+              isWithinText={false}
               href="#index"
-              theme={{largePadding: '0.25rem', largeFontSize: '1.5rem', largeHeight: 'normal'}}
             >
               {this.props.name || 'Documentation'}
-            </Button>
+            </Link>
           </Heading>
           { this.props.version && (
             <View display="block" margin="xx-small none none">
-              <Button
+              <Link
                 href="#CHANGELOG"
-                variant="link"
-                theme={{mediumPadding: '0.125rem', mediumHeight: 'normal'}}
+                isWithinText={false}
               >
                 v{this.props.version}
-              </Button>
+              </Link>
               &nbsp;|&nbsp;
-              <Button
+              <Link
                 href="#Newsletter"
-                variant="link"
-                theme={{mediumPadding: '0.125rem', mediumHeight: 'normal'}}
+                isWithinText={false}
               >
                 Newsletter
-              </Button>
+              </Link>
             </View>
           ) }
         </div>
