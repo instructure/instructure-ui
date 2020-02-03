@@ -33,6 +33,7 @@ import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
   deprecated,
   getElementType,
+  getInteraction,
   matchComponentTypes,
   passthroughProps,
   callRenderProp
@@ -50,8 +51,7 @@ category: components
 **/
 @deprecated('8.0.0', {
   linkRef: 'elementRef',
-  variant: 'color',
-  disabled: 'interaction'
+  variant: 'color'
 })
 @testable()
 @themeable(theme, styles)
@@ -125,18 +125,14 @@ class Link extends Component {
     /**
     * __deprecated: use color__
     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
-    /**
-    * __deprecated: use interaction__
-    */
-    disabled: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    variant: PropTypes.oneOf(['default', 'inverse'])
   }
 
   static defaultProps = {
     href: undefined,
     elementRef: undefined,
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` can also be supplied
+    interaction: undefined,
     margin: undefined,
     renderIcon: undefined,
     display: undefined,
@@ -163,9 +159,10 @@ class Link extends Component {
   }
 
   handleClick = (event) => {
-    const { disabled, interaction, onClick } = this.props
+    const { onClick } = this.props
+    const { interaction } = this
 
-    if (interaction === 'disabled' || disabled) {
+    if (interaction === 'disabled') {
       event.preventDefault()
       event.stopPropagation()
     } else if (typeof onClick === 'function') {
@@ -218,6 +215,10 @@ class Link extends Component {
     }
   }
 
+  get interaction () {
+    return getInteraction({ props: this.props, interactionTypes: ['disabled'] })
+  }
+
   get element () {
     return getElementType(Link, this.props)
   }
@@ -249,7 +250,6 @@ class Link extends Component {
 
   render () {
     const {
-      interaction,
       children,
       onClick,
       color,
@@ -259,7 +259,6 @@ class Link extends Component {
       iconPlacement,
       isWithinText,
       variant,
-      disabled,
       ...props
     } = this.props
 
@@ -271,7 +270,9 @@ class Link extends Component {
       [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
     }
 
-    const isDisabled = interaction === 'disabled' || disabled
+    const { interaction } = this
+
+    const isDisabled = interaction === 'disabled'
     const role = onClick && this.element !== 'button' ? 'button' : null
     const type = (this.element === 'button' || this.element === 'input') ? 'button' : null
     const tabIndex = (role === 'button' && !isDisabled) ? '0' : null

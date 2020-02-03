@@ -70,10 +70,6 @@
   },
   "Link": {
     "8.0.0": [
-      { "old": "disabled", "new": "interaction", "values": [
-        { "old": true, "new": "disabled" },
-        { "old": false }
-      ]},
       { "old": "variant", "new": "color", "values": [
         { "old": "default", "new": "link" },
         { "old": "inverse", "new": "link-inverse" }

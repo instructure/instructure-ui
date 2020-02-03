@@ -126,14 +126,29 @@ describe('<Link />', async () => {
   })
 
   describe('when interaction is disabled', async () => {
-    it('should apply aria-disabled', async () => {
+    it('should apply aria-disabled when interaction is disabled', async () => {
       await mount(<Link href="example.html" interaction="disabled">Hello World</Link>)
       expect(await LinkLocator.find('a[aria-disabled]')).to.exist()
     })
 
-    it('should not be clickable', async () => {
+    it('should apply aria-disabled when `disabled` is set', async () => {
+      await mount(<Link href="example.html" disabled>Hello World</Link>)
+      expect(await LinkLocator.find('a[aria-disabled]')).to.exist()
+    })
+
+    it('should not be clickable when interaction is disabled', async () => {
       const onClick = stub()
       await mount(<Link onClick={onClick} interaction="disabled">Hello World</Link>)
+
+      const link = await LinkLocator.find()
+      await link.click(null, { clickable: false })
+
+      expect(onClick).to.not.have.been.called()
+    })
+
+    it('should not be clickable when `disabled` is set', async () => {
+      const onClick = stub()
+      await mount(<Link onClick={onClick} disabled>Hello World</Link>)
 
       const link = await LinkLocator.find()
       await link.click(null, { clickable: false })

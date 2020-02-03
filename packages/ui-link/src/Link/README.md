@@ -14,9 +14,6 @@ guidelines: true
     <Figure.Item>
       The <code>variant</code> prop will be removed. Use <code>color: ['link', 'link-inverse']</code> instead.
     </Figure.Item>
-    <Figure.Item>
-      The <code>disabled</code> boolean prop will be removed. Use <code>interaction: ['enabled', 'disabled']</code> instead.
-    </Figure.Item>
   </Figure>
 </Guidelines>
 ```
