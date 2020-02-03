@@ -109,7 +109,7 @@ describe('<Button/>', async () => {
       expect(await button.find('li')).to.exist()
     })
 
-    it('should pass the `interaction` prop when  set to disabled', async () => {
+    it('should set the disabled attribute when `interaction` is set to disabled', async () => {
       await mount(
         <Button interaction="disabled">Hello</Button>
       )
@@ -117,9 +117,25 @@ describe('<Button/>', async () => {
       expect(await ButtonLocator.find('[disabled]')).to.exist()
     })
 
-    it('should pass the `interaction` prop when  set to readonly', async () => {
+    it('should set the disabled attribute when `disabled` is set', async () => {
+      await mount(
+        <Button disabled>Hello</Button>
+      )
+
+      expect(await ButtonLocator.find('[disabled]')).to.exist()
+    })
+
+    it('should set the disabled attribute when `interaction` is set to readonly', async () => {
       await mount(
         <Button interaction="readonly">Hello</Button>
+      )
+
+      expect(await ButtonLocator.find('[disabled]')).to.exist()
+    })
+
+    it('should set the disabled attribute when `readOnly` is set', async () => {
+      await mount(
+        <Button readOnly>Hello</Button>
       )
 
       expect(await ButtonLocator.find('[disabled]')).to.exist()

@@ -156,7 +156,7 @@ describe('<IconButton/>', async () => {
     expect(await button.find('li')).to.exist()
   })
 
-  it('should pass the `interaction` prop when  set to disabled', async () => {
+  it('should set the disabled attribute when `interaction` is set to disabled', async () => {
     await mount(
       <IconButton
         screenReaderLabel="some action"
@@ -168,12 +168,36 @@ describe('<IconButton/>', async () => {
     expect(await button.find('button[disabled]')).to.exist()
   })
 
-  it('should pass the `interaction` prop when  set to readonly', async () => {
+  it('should set the disabled attribute when `disabled` is set', async () => {
+    await mount(
+      <IconButton
+        screenReaderLabel="some action"
+        renderIcon={icon}
+        disabled
+      />
+    )
+    const button = await IconButtonLocator.find()
+    expect(await button.find('button[disabled]')).to.exist()
+  })
+
+  it('should set the disabled attribute when `interaction` is set to readonly', async () => {
     await mount(
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
         interaction="readonly"
+      />
+    )
+    const button = await IconButtonLocator.find()
+    expect(await button.find('button[disabled]')).to.exist()
+  })
+
+  it('should set the disabled attribute when `readOnly` is set', async () => {
+    await mount(
+      <IconButton
+        screenReaderLabel="some action"
+        renderIcon={icon}
+        readOnly
       />
     )
     const button = await IconButtonLocator.find()

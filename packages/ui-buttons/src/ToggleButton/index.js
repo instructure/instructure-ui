@@ -104,7 +104,8 @@ class ToggleButton extends Component {
   static defaultProps = {
     size: 'medium',
     as: 'button',
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     elementRef: (el) => {},
     renderIcon: () => {},
     onClick: () => {},

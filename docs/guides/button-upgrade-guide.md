@@ -46,8 +46,6 @@ The following props will need to be upgraded. They have been changed to be consi
 |----------|-----------------|-------------------|
 | `variant` | See the following sections for upgrade steps for each particular variant value | Partial: See [example section](#button-upgrade-guide/#v8-button-upgrade-guide-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse-upgrade-examples-with-visible-text) for details |
 | `buttonRef` | Change prop name to `elementRef` | Yes |
-| `disabled` | Do `interaction="disabled"` instead | Yes |
-| `readOnly` | Do `interaction="readonly"` instead | Yes |
 | `fluidWidth` | Set `display="block"` and `textAlign="start"` | Partial: `textAlign` will need to be set to `start` manually (it will be `center` by default) |
 | `icon` | Change prop name to `renderIcon` | Yes |
 

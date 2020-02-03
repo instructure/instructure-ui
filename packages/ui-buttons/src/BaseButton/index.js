@@ -29,7 +29,7 @@ import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { getElementType, passthroughProps, callRenderProp, experimental } from '@instructure/ui-react-utils'
+import { getElementType, getInteraction, passthroughProps, callRenderProp, experimental } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -157,7 +157,8 @@ class BaseButton extends Component {
     size: 'medium',
     elementRef: (el) => { },
     as: 'button',
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     color: 'secondary',
     focusColor: undefined,
     shape: 'rectangle',
@@ -184,6 +185,10 @@ class BaseButton extends Component {
 
   get elementType () {
     return getElementType(BaseButton, this.props)
+  }
+
+  get interaction () {
+    return getInteraction({ props: this.props })
   }
 
   get focusColor() {
@@ -223,7 +228,8 @@ class BaseButton extends Component {
   }
 
   handleClick = (event) => {
-    const { interaction, onClick } = this.props
+    const { onClick } = this.props
+    const { interaction } = this
 
     if (interaction !== 'enabled') {
       event.preventDefault()
@@ -237,7 +243,8 @@ class BaseButton extends Component {
   }
 
   handleKeyDown = event => {
-    const { interaction, onClick, onKeyDown, href } = this.props
+    const { onClick, onKeyDown, href } = this.props
+    const { interaction } = this
 
     onKeyDown(event)
 
@@ -296,7 +303,6 @@ class BaseButton extends Component {
       size,
       elementRef,
       as,
-      interaction,
       href,
       color,
       focusColor,
@@ -314,6 +320,7 @@ class BaseButton extends Component {
       ...props
     } = this.props
 
+    const { interaction } = this
     const isDisabled = interaction === 'disabled'
     const isReadOnly = interaction === 'readonly'
     const isEnabled = interaction === 'enabled'

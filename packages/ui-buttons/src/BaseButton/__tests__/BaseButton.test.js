@@ -152,10 +152,32 @@ describe('<BaseButton/>', async () => {
       expect(onClick).to.have.not.been.called()
     })
 
+    it('should not call onClick when disabled is set"', async () => {
+      const onClick = stub()
+      await mount(
+        <BaseButton disabled onClick={onClick}>Hello World</BaseButton>
+      )
+      const button = await BaseButtonLocator.find()
+      await button.click(null, { clickable: false })
+
+      expect(onClick).to.have.not.been.called()
+    })
+
     it('should not call onClick when interaction is "readonly"', async () => {
       const onClick = stub()
       await mount(
         <BaseButton interaction="readonly" onClick={onClick}>Hello World</BaseButton>
+      )
+      const button = await BaseButtonLocator.find()
+      await button.click(null, { clickable: false })
+
+      expect(onClick).to.have.not.been.called()
+    })
+
+    it('should not call onClick when readOnly is set', async () => {
+      const onClick = stub()
+      await mount(
+        <BaseButton readOnly onClick={onClick}>Hello World</BaseButton>
       )
       const button = await BaseButtonLocator.find()
       await button.click(null, { clickable: false })

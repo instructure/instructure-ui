@@ -107,7 +107,7 @@ describe('<CondensedButton/>', async () => {
     expect(await button.find('li')).to.exist()
   })
 
-  it('should pass the `interaction` prop when  set to disabled', async () => {
+  it('should set the disabled attribute when `interaction` is set to disabled', async () => {
     await mount(
       <CondensedButton interaction="disabled">Hello</CondensedButton>
     )
@@ -115,9 +115,25 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
-  it('should pass the `interaction` prop when  set to readonly', async () => {
+  it('should set the disabled attribute when `disabled` is set', async () => {
+    await mount(
+      <CondensedButton disabled>Hello</CondensedButton>
+    )
+
+    expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
+  })
+
+  it('should set the disabled attribute when `interaction` is set to readonly', async () => {
     await mount(
       <CondensedButton interaction="readonly">Hello</CondensedButton>
+    )
+
+    expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
+  })
+
+  it('should set the disabled attribute when `readOnly` is set', async () => {
+    await mount(
+      <CondensedButton readOnly>Hello</CondensedButton>
     )
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()

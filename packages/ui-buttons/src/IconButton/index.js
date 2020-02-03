@@ -129,7 +129,8 @@ class IconButton extends Component {
     size: 'medium',
     elementRef: (el) => { },
     as: 'button',
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     color: 'secondary',
     focusColor: undefined,
     shape: 'rectangle',
@@ -191,7 +192,7 @@ class IconButton extends Component {
         href={href}
         renderIcon={children || renderIcon}
         theme={theme}
-        ref = {(component) => { this._baseButton = component }}
+        ref={(component) => { this._baseButton = component }}
         __dangerouslyIgnoreExperimentalWarnings
       >
         <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>

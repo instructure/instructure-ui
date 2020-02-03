@@ -188,7 +188,7 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('li')).to.exist()
   })
 
-  it('should pass the `interaction` prop when  set to disabled', async () => {
+  it('should set the disabled attribute when `interaction` prop is set to disabled', async () => {
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -202,13 +202,41 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('button[disabled]')).to.exist()
   })
 
-  it('should pass the `interaction` prop when  set to readonly', async () => {
+  it('should set the disabled attribute when `disabled` prop is set', async () => {
+    await mount(
+      <ToggleButton
+        screenReaderLabel="This is a screen reader label"
+        renderIcon={icon}
+        renderTooltipContent="This is tooltip content"
+        disabled
+        status="pressed"
+      />
+    )
+    const button = await ToggleButtonLocator.find()
+    expect(await button.find('button[disabled]')).to.exist()
+  })
+
+  it('should set the disabled attribute when `interaction` prop is set to readonly', async () => {
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
         renderTooltipContent="This is tooltip content"
         interaction="readonly"
+        status="pressed"
+      />
+    )
+    const button = await ToggleButtonLocator.find()
+    expect(await button.find('button[disabled]')).to.exist()
+  })
+
+  it('should set the disabled attribute when `readOnly` prop is set', async () => {
+    await mount(
+      <ToggleButton
+        screenReaderLabel="This is a screen reader label"
+        renderIcon={icon}
+        renderTooltipContent="This is tooltip content"
+        readOnly
         status="pressed"
       />
     )

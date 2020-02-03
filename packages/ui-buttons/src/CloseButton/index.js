@@ -30,7 +30,7 @@ import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { getInteraction, passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 
 import { BaseButton } from '../BaseButton'
@@ -46,8 +46,6 @@ category: components
 @deprecated('8.0.0', {
   children: 'screenReaderLabel',
   buttonRef: 'elementRef',
-  disabled: 'interaction',
-  readOnly: 'interaction',
   variant: 'color'
 })
 @testable()
@@ -61,7 +59,7 @@ class CloseButton extends Component {
     /**
     * Specifies the color for the `CloseButton`.
     */
-    color: PropTypes.oneOf(['secondary', 'primary-inverse']),
+    color: PropTypes.oneOf(['primary', 'primary-inverse']),
     /**
     * Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly.
     */
@@ -126,15 +124,7 @@ class CloseButton extends Component {
     /**
     * __Deprecated - use `color` instead__
     */
-    variant: PropTypes.oneOf(['icon', 'icon-inverse']),
-    /**
-    * __Deprecated - set `interaction="disabled"` instead__
-    */
-    disabled: PropTypes.bool,
-    /**
-    * __Deprecated - set `interaction="readonly"` instead__
-    */
-    readOnly: PropTypes.bool,
+    variant: PropTypes.oneOf(['icon', 'icon-inverse'])
   }
 
   static defaultProps = {
@@ -145,6 +135,7 @@ class CloseButton extends Component {
     buttonRef: undefined,
     variant: undefined,
     color: undefined,
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
     disabled: undefined,
     readOnly: undefined,
@@ -174,21 +165,15 @@ class CloseButton extends Component {
   }
 
   get interaction () {
-    const { interaction, disabled, readOnly } = this.props
-
-    if (disabled) return 'disabled'
-    if (readOnly) return 'readonly'
-
-    return interaction
+    return getInteraction({ props: this.props })
   }
 
   get color () {
     const { color, variant } = this.props
 
-    if (variant === 'icon') return 'secondary'
-    if (variant === 'icon-inverse') return 'primary-inverse'
+    if (variant === 'icon-inverse' || color === 'primary-inverse') return 'primary-inverse'
 
-    return color
+    return 'secondary'
   }
 
   render () {

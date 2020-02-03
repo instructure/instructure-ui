@@ -9,19 +9,13 @@ guidelines: true
 <Guidelines>
   <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
     <Figure.Item>
-      The <code>variant</code> prop has been changed to <code>color: ['secondary', 'primary-inverse']</code>
+      The <code>variant</code> prop has been changed to <code>color: ['primary', 'primary-inverse']</code>
     </Figure.Item>
     <Figure.Item>
       The <code>children</code> prop has been changed to <code>screenReaderLabel</code>
     </Figure.Item>
     <Figure.Item>
       <code>buttonRef</code> has been changed to <code>elementRef</code>
-    </Figure.Item>
-    <Figure.Item>
-      <code>disabled</code> has been changed to <code>interaction="disabled"</code>
-    </Figure.Item>
-    <Figure.Item>
-      <code>readOnly</code> has been changed to <code>interaction="readonly"</code>
     </Figure.Item>
   </Figure>
 </Guidelines>

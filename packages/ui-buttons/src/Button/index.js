@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { getInteraction, passthroughProps, deprecated } from '@instructure/ui-react-utils'
 
 import { BaseButton } from '../BaseButton'
 import { DeprecatedButton } from '../DeprecatedButton'
@@ -44,8 +44,6 @@ category: components
 **/
 @deprecated('8.0.0', {
   buttonRef: 'elementRef',
-  disabled: 'interaction',
-  readOnly: 'interaction',
   fluidWidth: 'display',
   icon: 'renderIcon',
   variant: null
@@ -152,14 +150,6 @@ class Button extends Component {
      */
     fluidWidth: PropTypes.bool,
     /**
-     * __Deprecated - set `interaction="disabled"` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
-     */
-    disabled: PropTypes.bool,
-    /**
-     * __Deprecated - set `interaction="readonly"` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
-     */
-    readOnly: PropTypes.bool,
-    /**
      * __Deprecated - use `renderIcon` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
      */
     icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
@@ -171,7 +161,8 @@ class Button extends Component {
     size: 'medium',
     elementRef: (el) => { },
     as: 'button',
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     // TODO: Switch to 'secondary' in 8.0 when we drop variant
     color: undefined,
     focusColor: undefined,
@@ -185,8 +176,6 @@ class Button extends Component {
     buttonRef: undefined,
     variant: undefined,
     fluidWidth: undefined,
-    disabled: undefined,
-    readOnly: undefined,
     icon: undefined
   }
 
@@ -233,15 +222,6 @@ class Button extends Component {
     }, {})
   }
 
-  get interaction () {
-    const { interaction, disabled, readOnly } = this.props
-
-    if (disabled) return 'disabled'
-    if (readOnly) return 'readonly'
-
-    return interaction
-  }
-
   render() {
     const {
       children,
@@ -263,10 +243,8 @@ class Button extends Component {
       ...props
     } = this.props
 
-    const {
-      theme = {},
-      interaction,
-    } = this
+    const interaction = getInteraction({ props })
+    const { theme = {} } = this
 
     if (variant) {
       return (

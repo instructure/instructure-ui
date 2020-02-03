@@ -101,7 +101,8 @@ class CondensedButton extends Component {
     size: 'medium',
     elementRef: (el) => { },
     as: 'button',
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     color: 'primary',
     margin: '0',
     cursor: 'pointer',
