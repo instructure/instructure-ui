@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-upgrade-scripts",
-  "version": "6.17.0",
+  "version": "6.18.0",
   "description": "A collection of UI scripts and utils to automate upgrades.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -19,8 +19,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "^6.17.0",
-    "@instructure/pkg-utils": "^6.17.0",
+    "@instructure/command-utils": "^6.18.0",
+    "@instructure/pkg-utils": "^6.18.0",
     "depcheck": "^0.9.1",
     "jscodeshift": "^0.6.4",
     "yargs": "^14.0.0"

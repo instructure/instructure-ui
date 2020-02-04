@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.18.0](https://github.com/instructure/instructure-ui/compare/v6.17.0...v6.18.0) (2020-02-04)
+
+
+### Features
+
+* **instui-config,ui-buttons,ui-themeable:** upgrade Button ([ed73df1](https://github.com/instructure/instructure-ui/commit/ed73df1))
+* **ui-buttons:** Add ToggleButton component ([4e25cfc](https://github.com/instructure/instructure-ui/commit/4e25cfc))
+
+
+
+
+
 # [6.17.0](https://github.com/instructure/instructure-ui/compare/v6.16.0...v6.17.0) (2020-01-22)
 
 

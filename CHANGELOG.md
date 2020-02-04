@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.18.0](https://github.com/instructure/instructure-ui/compare/v6.17.0...v6.18.0) (2020-02-04)
+
+
+### Bug Fixes
+
+* **ui-flex:** adopt more children types ([1f2ac25](https://github.com/instructure/instructure-ui/commit/1f2ac25))
+* **ui-menu:** update Popover import to new package align updated props ([77176a7](https://github.com/instructure/instructure-ui/commit/77176a7))
+* **ui-pill:** update TruncateText import to new package ([8957e76](https://github.com/instructure/instructure-ui/commit/8957e76))
+* **ui-responsive:** responsive rendering fixes ([93627a6](https://github.com/instructure/instructure-ui/commit/93627a6))
+* **ui-table:** loosen caption prop ([97cf3e7](https://github.com/instructure/instructure-ui/commit/97cf3e7))
+
+
+### Features
+
+* **instui-config,ui-buttons,ui-react-utils:** un-deprecate disabled and readOnly in button ([8041bbf](https://github.com/instructure/instructure-ui/commit/8041bbf))
+* **instui-config,ui-buttons,ui-themeable:** upgrade Button ([ed73df1](https://github.com/instructure/instructure-ui/commit/ed73df1))
+* **ui-buttons:** Add ToggleButton component ([4e25cfc](https://github.com/instructure/instructure-ui/commit/4e25cfc))
+* **ui-buttons:** Update CloseButton to use upgraded Button props ([365e0ac](https://github.com/instructure/instructure-ui/commit/365e0ac))
+* **ui-react-utils,ui-scripts,ui-webpack-config:** env variable to omit deprecation warnings ([6cc3193](https://github.com/instructure/instructure-ui/commit/6cc3193))
+
+
+
+
+
 # [6.17.0](https://github.com/instructure/instructure-ui/compare/v6.16.0...v6.17.0) (2020-01-22)
 
 

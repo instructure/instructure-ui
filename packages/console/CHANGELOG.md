@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.18.0](https://github.com/instructure/instructure-ui/compare/v6.17.0...v6.18.0) (2020-02-04)
+
+
+### Features
+
+* **ui-react-utils,ui-scripts,ui-webpack-config:** env variable to omit deprecation warnings ([6cc3193](https://github.com/instructure/instructure-ui/commit/6cc3193))
+
+
+
+
+
 # [6.17.0](https://github.com/instructure/instructure-ui/compare/v6.16.0...v6.17.0) (2020-01-22)
 
 
