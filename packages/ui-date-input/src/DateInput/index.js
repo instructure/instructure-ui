@@ -31,7 +31,7 @@ import { Popover } from '@instructure/ui-popover'
 import { Selectable } from '@instructure/ui-selectable'
 import { TextInput } from '@instructure/ui-text-input'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { callRenderProp, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
+import { getInteraction, callRenderProp, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
 import { PositionPropTypes } from '@instructure/ui-position'
 import { FormPropTypes } from '@instructure/ui-form-field'
@@ -212,7 +212,8 @@ class DateInput extends Component {
     placeholder: null,
     onChange: (event) => {},
     onBlur: (event) => {},
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     isRequired: false,
     isInline: false,
     assistiveText: undefined,
@@ -252,6 +253,10 @@ class DateInput extends Component {
     return selectedDateId
   }
 
+  get interaction () {
+    return getInteraction({ props: this.props })
+  }
+
   formatDateId = (date) => {
     // ISO8601 strings may contain a space. Remove any spaces before using the
     // date as the id.
@@ -279,7 +284,8 @@ class DateInput extends Component {
   }
 
   handleShowCalendar = (event) => {
-    const { interaction, onRequestShowCalendar } = this.props
+    const { onRequestShowCalendar } = this.props
+    const { interaction } = this
 
     if (interaction === 'enabled') {
       onRequestShowCalendar(event)
@@ -355,7 +361,6 @@ class DateInput extends Component {
       value,
       placeholder,
       onBlur,
-      interaction,
       isRequired,
       size,
       isInline,
@@ -363,6 +368,8 @@ class DateInput extends Component {
       width,
       messages
     } = this.props
+
+    const { interaction } = this
 
     const {
       ref, // Apply this to the actual inputRef

@@ -32,7 +32,7 @@ import { IconArrowOpenDownLine, IconArrowOpenUpLine } from '@instructure/ui-icon
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps, callRenderProp, deprecated } from '@instructure/ui-react-utils'
+import { omitProps, pickProps, callRenderProp, deprecated, getInteraction } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -45,8 +45,6 @@ id: NumberInput
 **/
 @deprecated('7.0.0', {
   label: 'renderLabel',
-  disabled: 'interaction',
-  readOnly: 'interaction',
   required: 'isRequired',
   inline: 'display'
 })
@@ -144,14 +142,6 @@ class NumberInput extends Component {
     /**
      * deprecated
      */
-    disabled: PropTypes.bool,
-    /**
-     * deprecated
-     */
-    readOnly: PropTypes.bool,
-    /**
-     * deprecated
-     */
     required: PropTypes.bool,
     /**
      * deprecated
@@ -161,7 +151,8 @@ class NumberInput extends Component {
 
   static defaultProps = {
     id: null,
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     messages: [],
     placeholder: null,
     isRequired: false,
@@ -204,6 +195,10 @@ class NumberInput extends Component {
     )
   }
 
+  get interaction () {
+    return getInteraction({ props: this.props })
+  }
+
   handleRef = (element) => {
     this._input = element
     this.props.inputRef(element)
@@ -244,9 +239,10 @@ class NumberInput extends Component {
   }
 
   arrowClicked (event, callback) {
-    const { interaction, disabled, readOnly } = this.props
+    const { interaction } = this
+
     event.preventDefault()
-    if (interaction === 'enabled' && !readOnly && !disabled) {
+    if (interaction === 'enabled') {
       this._input.focus()
       callback(event)
     }
@@ -281,9 +277,6 @@ class NumberInput extends Component {
     const {
       label,
       renderLabel,
-      disabled,
-      readOnly,
-      interaction,
       inline,
       display,
       placeholder,
@@ -294,6 +287,8 @@ class NumberInput extends Component {
       value,
       width
     } = this.props
+
+    const { interaction } = this
 
     return (
       <FormField
@@ -311,7 +306,7 @@ class NumberInput extends Component {
         >
           <span
             className={classnames(styles.inputContainer, {
-              [styles.disabled]: interaction === 'disabled' || disabled,
+              [styles.disabled]: interaction === 'disabled',
               [styles.focus]: this.state.hasFocus,
               [styles.invalid]: this.invalid,
               [styles[size]]: size
@@ -331,8 +326,8 @@ class NumberInput extends Component {
               ref={this.handleRef}
               required={isRequired || required}
               value={value}
-              disabled={interaction === 'disabled' || disabled}
-              readOnly={interaction === 'readonly' || readOnly}
+              disabled={interaction === 'disabled'}
+              readOnly={interaction === 'readonly'}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               onChange={this.handleChange}

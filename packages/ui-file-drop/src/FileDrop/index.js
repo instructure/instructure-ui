@@ -32,7 +32,7 @@ import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { callRenderProp, deprecated, passthroughProps } from '@instructure/ui-react-utils'
+import { callRenderProp, deprecated, passthroughProps, getInteraction } from '@instructure/ui-react-utils'
 import { isEdge } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
@@ -64,8 +64,6 @@ category: components
 **/
 @deprecated('8.0.0', {
   label: 'renderLabel',
-  disabled: 'interaction',
-  readOnly: 'interaction',
   enablePreview: 'shouldEnablePreview',
   allowRepeatFileSelection: 'shouldAllowRepeats',
   allowMultiple: 'shouldAllowMultiple'
@@ -180,14 +178,6 @@ class FileDrop extends Component {
     */
     label: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * __deprecated: use `interaction`__
-    */
-    disabled: PropTypes.bool,
-    /**
-    * __deprecated: use `interaction`__
-    */
-    readOnly: PropTypes.bool,
-    /**
     * __deprecated: use `shouldEnablePreview`__
     */
     enablePreview: PropTypes.bool,
@@ -216,7 +206,8 @@ class FileDrop extends Component {
     shouldAllowRepeats: true,
     maxSize: Infinity,
     minSize: 0,
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     messages: [],
     id: undefined,
     accept: undefined,
@@ -250,20 +241,7 @@ class FileDrop extends Component {
   }
 
   get interaction () {
-    // TODO: no longer nec. when `disabled` and `readOnly` are removed
-    const {
-      interaction,
-      disabled,
-      readOnly
-    } = this.props
-
-    if (disabled) {
-      return 'disabled'
-    } else if (readOnly) {
-      return 'readonly'
-    } else {
-      return interaction
-    }
+    return getInteraction({ props: this.props })
   }
 
   get shouldEnablePreview () {

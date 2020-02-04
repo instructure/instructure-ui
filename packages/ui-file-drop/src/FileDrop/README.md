@@ -12,9 +12,6 @@ guidelines: true
       The <code>label</code> prop is deprecated. Use <code>renderLabel</code> instead.
     </Figure.Item>
     <Figure.Item>
-      The <code>disabled</code> and <code>readOnly</code> boolean props are deprecated. Use <code>interaction="disabled"</code> or <code>interaction="readonly"</code> instead.
-    </Figure.Item>
-    <Figure.Item>
       The <code>enablePreview</code>, <code>allowRepeatFileSelection</code>, and <code>allowMultiple</code> boolean props are deprecated. Use <code>shouldEnablePreview</code>, <code>shouldAllowRepeats</code>, and <code>shouldAllowMultiple</code>, respectively, instead.
     </Figure.Item>
   </Figure>

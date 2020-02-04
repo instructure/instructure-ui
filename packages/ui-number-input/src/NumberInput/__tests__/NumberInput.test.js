@@ -180,10 +180,24 @@ describe('<NumberInput />', () => {
     expect(onIncrement).to.have.been.calledOnce()
   })
 
-  it('does not call onIncrement when read only', async () => {
+  it('does not call onIncrement when `interaction` is set to readonly', async () => {
     const onIncrement = stub()
     await mount(
       <NumberInput renderLabel="Label" interaction="readonly" onIncrement={onIncrement} />
+    )
+
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
+    await buttons[0].mouseDown()
+
+    expect(onIncrement).not.to.have.been.called()
+  })
+
+  it('does not call onIncrement when `readOnly` is set', async () => {
+    const onIncrement = stub()
+    await mount(
+      <NumberInput renderLabel="Label" readOnly onIncrement={onIncrement} />
     )
 
     const numberInput = await NumberInputLocator.find()
@@ -208,10 +222,24 @@ describe('<NumberInput />', () => {
     expect(onDecrement).to.have.been.calledOnce()
   })
 
-  it('does not call onDecrement when read only', async () => {
+  it('does not call onDecrement when `interaction` is set to readonly', async () => {
     const onDecrement = stub()
     await mount(
       <NumberInput renderLabel="Label" interaction="readonly" onDecrement={onDecrement} />
+    )
+
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
+    await buttons[1].mouseDown()
+
+    expect(onDecrement).not.to.have.been.called()
+  })
+
+  it('does not call onDecrement when `readOnly` is set', async () => {
+    const onDecrement = stub()
+    await mount(
+      <NumberInput renderLabel="Label" readOnly onDecrement={onDecrement} />
     )
 
     const numberInput = await NumberInputLocator.find()

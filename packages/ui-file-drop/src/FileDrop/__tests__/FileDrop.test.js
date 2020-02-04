@@ -44,11 +44,50 @@ describe('<FileDrop />', async () => {
   })
 
   describe('interactions', async () => {
-    it('should functionally disable the input if readonly', async () => {
+    it('should functionally disable the input if `interaction` is set to disabled', async () => {
+      await mount(
+        <FileDrop
+          renderLabel="Some label"
+          interaction="disabled"
+        />
+      )
+
+      const fileDrop = await FileDropLocator.find()
+      const input = await fileDrop.find('input')
+      expect(input.getDOMNode().disabled).to.be.true()
+    })
+
+    it('should functionally disable the input if `disabled` is set', async () => {
+      await mount(
+        <FileDrop
+          renderLabel="Some label"
+          disabled
+        />
+      )
+
+      const fileDrop = await FileDropLocator.find()
+      const input = await fileDrop.find('input')
+      expect(input.getDOMNode().disabled).to.be.true()
+    })
+
+    it('should functionally disable the input if `interaction` is set to readonly', async () => {
       await mount(
         <FileDrop
           renderLabel="Some label"
           interaction="readonly"
+        />
+      )
+
+      const fileDrop = await FileDropLocator.find()
+      const input = await fileDrop.find('input')
+      expect(input.getDOMNode().disabled).to.be.true()
+    })
+
+    it('should functionally disable the input if `readOnly` is set', async () => {
+      await mount(
+        <FileDrop
+          renderLabel="Some label"
+          readOnly
         />
       )
 

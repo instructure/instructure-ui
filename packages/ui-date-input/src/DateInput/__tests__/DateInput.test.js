@@ -78,7 +78,6 @@ describe('<DateInput />', async () => {
     generateA11yTests(Examples)
   })
 
-
   describe('input', async () => {
     it('should render a label', async () => {
       const renderLabel = 'Choose date'
@@ -170,6 +169,38 @@ describe('<DateInput />', async () => {
       expect(await dateInput.findInput('[disabled]')).to.exist()
 
       await subject.setProps({ interaction: 'readonly' })
+
+      expect(await dateInput.findInput('[readonly]')).to.exist()
+    })
+
+    it('should correctly set disabled', async () => {
+      await mount(
+        <DateInput
+          renderLabel="Choose a date"
+          renderWeekdayLabels={weekdayLabels}
+          disabled
+        >
+          {generateDays()}
+        </DateInput>
+      )
+
+      const dateInput = await DateInputLocator.find()
+
+      expect(await dateInput.findInput('[disabled]')).to.exist()
+    })
+
+    it('should correctly set readOnly', async () => {
+      await mount(
+        <DateInput
+          renderLabel="Choose a date"
+          renderWeekdayLabels={weekdayLabels}
+          readOnly
+        >
+          {generateDays()}
+        </DateInput>
+      )
+
+      const dateInput = await DateInputLocator.find()
 
       expect(await dateInput.findInput('[readonly]')).to.exist()
     })

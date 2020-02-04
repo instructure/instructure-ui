@@ -222,6 +222,52 @@ describe('<TextInput/>', async () => {
     })
   })
 
+  describe('interaction', async () => {
+    it('should set the disabled attribute when `interaction` is disabled', async () => {
+      const subject = await mount(
+        <TextInput
+          renderLabel="Name"
+          interaction="disabled"
+        />
+      )
+      const textInput = within(subject.getDOMNode())
+      expect(await textInput.find('input[disabled]')).to.exist()
+    })
+
+    it('should set the disabled attribute when `disabled` is set', async () => {
+      const subject = await mount(
+        <TextInput
+          renderLabel="Name"
+          disabled
+        />
+      )
+      const textInput = within(subject.getDOMNode())
+      expect(await textInput.find('input[disabled]')).to.exist()
+    })
+
+    it('should set the readonly attribute when `interaction` is readonly', async () => {
+      const subject = await mount(
+        <TextInput
+          renderLabel="Name"
+          interaction="readonly"
+        />
+      )
+      const textInput = within(subject.getDOMNode())
+      expect(await textInput.find('input[readonly]')).to.exist()
+    })
+
+    it('should set the readonly attribute when `readOnly` is set', async () => {
+      const subject = await mount(
+        <TextInput
+          renderLabel="Name"
+          readOnly
+        />
+      )
+      const textInput = within(subject.getDOMNode())
+      expect(await textInput.find('input[readonly]')).to.exist()
+    })
+  })
+
   describe('for a11y', async () => {
     it('should meet standards', async () => {
       const subject = await mount(

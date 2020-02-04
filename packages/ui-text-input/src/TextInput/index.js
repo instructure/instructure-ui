@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { deprecated, callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
+import { deprecated, callRenderProp, getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { Flex } from '@instructure/ui-flex'
@@ -44,8 +44,6 @@ category: components
 **/
 @deprecated('7.0.0', {
   label: 'renderLabel',
-  disabled: 'interaction',
-  readOnly: 'interaction',
   required: 'isRequired',
   inline: 'display'
 })
@@ -152,14 +150,6 @@ class TextInput extends Component {
     */
     label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * __Deprecated - use `interaction`__
-    */
-    disabled: PropTypes.bool,
-    /**
-    * __Deprecated - use `interaction`__
-    */
-    readOnly: PropTypes.bool,
-    /**
     * __Deprecated - use `isRequired`__
     */
     required: PropTypes.bool,
@@ -174,7 +164,8 @@ class TextInput extends Component {
     renderLabel: undefined,
     type: 'text',
     id: undefined,
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     isRequired: false,
     value: undefined,
     defaultValue: undefined,
@@ -202,6 +193,10 @@ class TextInput extends Component {
 
   focus () {
     this._input.focus()
+  }
+
+  get interaction () {
+    return getInteraction({ props: this.props })
   }
 
   get hasMessages () {
@@ -255,15 +250,15 @@ class TextInput extends Component {
       placeholder,
       value,
       defaultValue,
-      disabled,
-      readOnly,
-      interaction,
       required,
       isRequired,
       ...rest
     } = this.props
 
     const props = passthroughProps(rest)
+
+    const { interaction } = this
+
     const inputClasses = {
       [styles.input]: true,
       [styles[size]]: size,
@@ -274,6 +269,7 @@ class TextInput extends Component {
     if (props['aria-describedby']) {
       descriptionIds = `${props['aria-describedby']}`
     }
+
     if (this.hasMessages) {
       descriptionIds = descriptionIds !== ''
       ? `${descriptionIds} ${this._messagesId}`
@@ -292,8 +288,8 @@ class TextInput extends Component {
         id={this.id}
         required={isRequired || required}
         aria-invalid={this.invalid ? 'true' : null}
-        disabled={interaction === 'disabled' || disabled}
-        readOnly={interaction === 'readonly' || readOnly}
+        disabled={interaction === 'disabled'}
+        readOnly={interaction === 'readonly'}
         aria-describedby={descriptionIds !== '' ? descriptionIds : null}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
@@ -304,8 +300,6 @@ class TextInput extends Component {
 
   render () {
     const {
-      interaction,
-      disabled,
       width,
       inline,
       display,
@@ -318,11 +312,13 @@ class TextInput extends Component {
       icon
     } = this.props
 
+    const { interaction } = this
+
     const renderBeforeOrAfter = renderBeforeInput || renderAfterInput || icon
 
     const facadeClasses = {
       [styles.facade]: true,
-      [styles.disabled]: interaction === 'disabled' || disabled,
+      [styles.disabled]: interaction === 'disabled',
       [styles.invalid]: this.invalid,
       [styles.focused]: this.state.hasFocus
     }

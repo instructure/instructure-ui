@@ -31,7 +31,7 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { matchComponentTypes, omitProps } from '@instructure/ui-react-utils'
+import { matchComponentTypes, omitProps, getInteraction } from '@instructure/ui-react-utils'
 import { getBoundingClientRect, isActiveElement } from '@instructure/ui-dom-utils'
 
 import { PositionPropTypes } from '@instructure/ui-position'
@@ -195,7 +195,8 @@ class Select extends Component {
     size: 'medium',
     assistiveText: undefined,
     placeholder: null,
-    interaction: 'enabled',
+    // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
+    interaction: undefined,
     isRequired: false,
     isInline: false,
     width: undefined,
@@ -246,6 +247,10 @@ class Select extends Component {
 
   get width () {
     return this._inputContainer && this._inputContainer.offsetWidth
+  }
+
+  get interaction () {
+    return getInteraction({ props: this.props })
   }
 
   get highlightedOptionId () {
@@ -359,7 +364,7 @@ class Select extends Component {
     const highlightedOptionId = this.highlightedOptionId
     const selectedOptionId = this.selectedOptionId
 
-    return this.props.interaction === 'enabled' ? {
+    return this.interaction === 'enabled' ? {
       onRequestShowOptions: (event) => {
         onRequestShowOptions(event)
         if (selectedOptionId && !Array.isArray(selectedOptionId)) {
@@ -565,7 +570,6 @@ class Select extends Component {
       renderLabel,
       inputValue,
       placeholder,
-      interaction,
       isRequired,
       size,
       isInline,
@@ -579,6 +583,8 @@ class Select extends Component {
       onRequestHideOptions,
       ...rest
     } = this.props
+
+    const { interaction } = this
 
     const passthroughProps = omitProps(rest, Select.propTypes)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })

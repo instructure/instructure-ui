@@ -140,13 +140,7 @@ class FileDrop extends Component {
      * Whether or not to allow the file browser to upload the same file more than once.
      */
     allowRepeatFileSelection: PropTypes.bool,
-    /**
-     * Deprecated - use `interaction` instead
-     */
     disabled: PropTypes.bool, // eslint-disable-line react/require-default-props
-    /**
-     * Deprecated - use `interaction` instead
-     */
     readOnly: PropTypes.bool, // eslint-disable-line react/require-default-props
     /**
     * Specifies if interaction with the input is enabled, disabled, or readonly.

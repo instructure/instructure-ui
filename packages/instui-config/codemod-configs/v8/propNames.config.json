@@ -88,14 +88,6 @@
     "8.0.0": [
       { "old": "label", "new": "renderLabel" },
       { "old": "required", "new": "isRequired" },
-      { "old": "disabled", "new": "interaction", "values": [
-        { "old": true, "new": "disabled" },
-        { "old": false }
-      ]},
-      { "old": "readOnly", "new": "interaction", "values": [
-        { "old": true, "new": "readonly" },
-        { "old": false }
-      ]},
       { "old": "inline", "new": "display", "values": [
         { "old": true, "new": "inline-block" },
         { "old": false, "new": "block" }
@@ -163,15 +155,7 @@
       { "old": "label", "new": "renderLabel" },
       { "old": "enablePreview", "new": "shouldEnablePreview" },
       { "old": "allowRepeatFileSelection", "new": "shouldAllowRepeats" },
-      { "old": "allowMultiple", "new": "shouldAllowMultiple" },
-      { "old": "disabled", "new": "interaction", "values": [
-        { "old": true, "new": "disabled" },
-        { "old": false }
-      ]},
-      { "old": "readOnly", "new": "interaction", "values": [
-        { "old": true, "new": "readonly" },
-        { "old": false }
-      ]}
+      { "old": "allowMultiple", "new": "shouldAllowMultiple" }
     ]
   }
 }
