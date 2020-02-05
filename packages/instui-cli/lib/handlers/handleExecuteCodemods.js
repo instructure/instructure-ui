@@ -27,7 +27,7 @@ const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execut
 
 const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
 
-module.exports = ({ sourcePath, version, ignore }) => {
+module.exports = ({ sourcePath, version, ignore, parser, parserConfig }) => {
   info(`Applying codemods to ${sourcePath}\n`)
 
   executeCodemods({
@@ -38,7 +38,9 @@ module.exports = ({ sourcePath, version, ignore }) => {
       name: 'imports.config.json',
       version
     }),
-    ignore
+    ignore,
+    parser,
+    parserConfig
   })
 
   executeCodemods({
@@ -49,16 +51,18 @@ module.exports = ({ sourcePath, version, ignore }) => {
       name: 'propNames.config.json',
       version
     }),
-    ignore
+    ignore,
+    parser,
+    parserConfig
   })
 }
 
-const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore }) => {
+const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore, parser, parserConfig }) => {
   try {
     const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
 
     for (const configPath of configPaths) {
-      executeCodemod({ sourcePath, codemodPath, configPath, ignore })
+      executeCodemod({ sourcePath, codemodPath, configPath, ignore, parser, parserConfig })
     }
   } catch (err) {
     error(err)

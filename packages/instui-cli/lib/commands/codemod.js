@@ -48,18 +48,34 @@ exports.builder = (yargs) => {
     describe: 'A semantic instructure-ui version number. When provided, the source will be modified to be compatible with the specified version. When omitted, the source will be modified to be compatible with the latest stable version.',
     default: null
   })
+
+  yargs.option('parser', {
+    type: 'string',
+    describe: 'jscodeshift `parser` argument for parsing source files.',
+    default: 'babylon'
+  })
+
+  yargs.option('parser-config', {
+    type: 'string',
+    describe: 'jscodeshift `parser-config` argument. A path to a JSON file containing a custom parser configuration for flow or babylon print transformed files to stdout, useful for development',
+    default: null
+  })
 }
 
 exports.handler = (argv) => {
   const {
     path,
     ignore,
-    version
+    version,
+    parser,
+    parserConfig
   } = argv
 
   handleExecuteCodemods({
     sourcePath: path,
     version,
-    ignore
+    ignore,
+    parser,
+    parserConfig
   })
 }

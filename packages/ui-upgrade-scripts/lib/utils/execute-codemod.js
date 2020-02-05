@@ -24,7 +24,7 @@
 
 const { info, runCommandSync } = require('@instructure/command-utils')
 
-module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'] } = {}) => {
+module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'], parser = 'babylon', parserConfig } = {}) => {
   info(`Running ${codemodPath}...`)
   info(`Source path: ${sourcePath}`)
   info(`Config path: ${configPath}`)
@@ -35,8 +35,13 @@ module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore 
     codemodPath,
     sourcePath,
     `--config=${configPath}`,
-    `--extensions=js,jsx`
+    `--extensions=js,jsx`,
+    `--parser=${parser}`
   ]
+
+  if (parserConfig) {
+    codemodCommand.push(`--parser-config=${parserConfig}`)
+  }
 
   let ignoreArgs = []
 
