@@ -20,6 +20,8 @@ As we've built out our library, we've learned a lot about component APIs. Button
     - [Upgrade examples for variant=”link” and has "padding overrides plus href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-an-href-attribute-and-padding-overrides)
     - [Upgrade examples for variant="link" and has "padding overrides and no href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-examples-for-link-variant-with-no-href-attribute-and-padding-overrides)
     - [Upgrade examples for variant="link" and has "no padding overrides and no href"](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-variant-link-or-link-inverse-upgrade-example-for-link-variant-with-no-href-attribute-and-no-padding-overrides)
+  - [Upgrading __CloseButton__](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-closebutton)
+    - [Upgrade examples for __CloseButton__](#button-upgrade-guide/#button-upgrade-for-version-8.0-upgrading-closebutton-upgrade-examples-for-closebutton)
 
 
 ### Props that need to be upgraded
@@ -726,4 +728,46 @@ embed: true
 <View display="inline-block" background="primary-inverse">
  <Button color="primary-inverse" withBackground={false} margin="small">Hello</Button>
 </View>
+```
+
+### Upgrading CloseButton
+
+The following table describes the upgrade process for [CloseButton](#CloseButton). Most of these changes are covered by automated codemods, except `children` will need to be changed to `screenReaderLabel` manually.
+
+| Previous | Upgraded | Codemods Available |
+|---------------|---------------|--------------------|
+| `buttonRef` | Change prop name to `elementRef` | Yes |
+| `children` | Pass children to the `screenReaderLabel` prop instead | No, will need to be changed manually |
+| `variant="icon"` | `color="primary"` (or remove the `variant` prop as `primary` is the default value) | Yes |
+| `variant="icon-inverse"` | `color="primary-inverse"` | Yes |
+
+#### Upgrade examples for CloseButton
+```javascript
+---
+embed: true
+---
+<CloseButton color="primary" margin="small" screenReaderLabel="Close" />
+```
+```js
+/* Previous */
+<CloseButton variant="icon">Close</CloseButton>
+
+/* Upgraded */
+<CloseButton color="primary" screenReaderLabel="Close" />
+```
+
+```javascript
+---
+embed: true
+---
+<View display="inline-block" background="primary-inverse" margin="medium 0 small 0">
+  <CloseButton color="primary-inverse" margin="small" screenReaderLabel="Close" />
+</View>
+```
+```js
+/* Previous */
+<CloseButton variant="icon-inverse">Close</CloseButton>
+
+/* Upgraded */
+<CloseButton color="primary-inverse" screenReaderLabel="Close" />
 ```
