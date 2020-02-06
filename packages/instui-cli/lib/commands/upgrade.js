@@ -47,14 +47,38 @@ exports.builder = (yargs) => {
     describe: 'A semantic instructure-ui version number. When provided, upgrades to the specified version. When omitted, upgrades to the latest stable version.',
     default: null
   })
+
+  yargs.option('npm-client', {
+    alias: 'npmClient',
+    type: 'string',
+    describe: 'The npm client to use',
+    choices: ['yarn', 'npm'],
+    default: 'yarn'
+  })
+
+  yargs.option('parser', {
+    type: 'string',
+    describe: 'jscodeshift `parser` argument for parsing source files.',
+    choices: ['babel', 'babylon', 'flow', 'ts', 'tsx'],
+    default: 'babylon'
+  })
+
+  yargs.option('parser-config', {
+    type: 'string',
+    describe: 'jscodeshift `parser-config` argument. A path to a JSON file containing a custom parser configuration for flow or babylon print transformed files to stdout, useful for development',
+    default: null
+  })
 }
 
 exports.handler = (argv) => {
   const {
     path,
     ignore,
-    version
+    version,
+    npmClient,
+    parser,
+    parserConfig
   } = argv
 
-  handleUpgrade({ sourcePath: path, ignore, version })
+  handleUpgrade({ sourcePath: path, ignore, version, npmClient, parser, parserConfig })
 }

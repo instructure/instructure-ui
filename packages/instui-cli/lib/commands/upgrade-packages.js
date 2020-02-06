@@ -37,7 +37,7 @@ exports.builder = (yargs) => {
 
   yargs.option('use-resolutions', {
     type: 'boolean',
-    describe: 'Perform the upgrade via resolutions (this will not modify your package.json).',
+    describe: 'When npm-client is set to yarn, perform the upgrade via resolutions (this will not modify your package.json).',
     default: false
   })
 
@@ -47,14 +47,23 @@ exports.builder = (yargs) => {
     describe: 'A semantic instructure-ui version number. When provided, packages will be upgraded to the specified version. When omitted, packages are upgraded to the latest stable version.',
     default: null
   })
+
+  yargs.option('npm-client', {
+    alias: 'npmClient',
+    type: 'string',
+    describe: 'The npm client to use',
+    choices: ['yarn', 'npm'],
+    default: 'yarn'
+  })
 }
 
 exports.handler = (argv) => {
   const {
     path,
     useResolutions,
-    version
+    version,
+    npmClient
   } = argv
 
-  handleUpgradePackages({ sourcePath: path, useResolutions, version })
+  handleUpgradePackages({ sourcePath: path, useResolutions, version, npmClient })
 }

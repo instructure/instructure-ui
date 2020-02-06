@@ -52,6 +52,7 @@ exports.builder = (yargs) => {
   yargs.option('parser', {
     type: 'string',
     describe: 'jscodeshift `parser` argument for parsing source files.',
+    choices: ['babel', 'babylon', 'flow', 'ts', 'tsx'],
     default: 'babylon'
   })
 

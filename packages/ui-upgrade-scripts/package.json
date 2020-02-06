@@ -21,7 +21,7 @@
   "dependencies": {
     "@instructure/command-utils": "^6.18.0",
     "@instructure/pkg-utils": "^6.18.0",
-    "depcheck": "^0.9.1",
+    "depcheck": "^0.9.2",
     "jscodeshift": "^0.6.4",
     "yargs": "^14.0.0"
   },

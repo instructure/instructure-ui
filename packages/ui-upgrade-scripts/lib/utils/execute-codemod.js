@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+const path = require('path')
 const { info, runCommandSync } = require('@instructure/command-utils')
 
 module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'], parser = 'babylon', parserConfig } = {}) => {
@@ -46,7 +47,7 @@ module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore 
   let ignoreArgs = []
 
   ignore.forEach((ignore) => {
-    ignoreArgs = ignoreArgs.concat('--ignore-pattern', ignore)
+    ignoreArgs = ignoreArgs.concat('--ignore-pattern', path.join(sourcePath, ignore))
   })
 
   runCommandSync('jscodeshift', [

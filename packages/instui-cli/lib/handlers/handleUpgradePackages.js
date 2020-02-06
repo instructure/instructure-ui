@@ -25,11 +25,12 @@
 const { handleUpgradeDependencies } = require('@instructure/ui-upgrade-scripts/lib/handlers')
 const { getPackageList } = require('../utils/getPackageLists')
 
-module.exports = ({ sourcePath, version, useResolutions }) => {
+module.exports = ({ sourcePath, version, useResolutions, npmClient }) => {
   handleUpgradeDependencies({
     sourcePath,
     dependencies: getPackageList({ version }),
     version,
-    useResolutions
+    useResolutions,
+    npmClient
   })
 }

@@ -69,34 +69,53 @@ async function updateResolutions({ pkg, packages, path, version }) {
   }
 }
 
-module.exports = async function upgradePackages({ useResolutions = false, packageList = [], version, path } = {}) {
+module.exports = function upgradePackages({ useResolutions = false, packageList = [], version, path, npmClient } = {}) {
   verifyPackageJson({ sourcePath: path })
 
   const pkg = getPackage({ cwd: path })
 
-  const dependencies = Object.keys(pkg.get('dependencies') || {})
-  const devDependencies = Object.keys(pkg.get('devDependencies') || {})
+  const pkgDependencies = Object.keys(pkg.get('dependencies') || {})
+  const pkgDevDependencies = Object.keys(pkg.get('devDependencies') || {})
+
+  const dependencies = packageList.filter(pkg => pkgDependencies.includes(pkg))
+  const devDependencies = packageList.filter(pkg => pkgDevDependencies.includes(pkg))
+
   const allDependencies = [...dependencies, ...devDependencies]
 
-  const packages = packageList.filter(pkg => allDependencies.includes(pkg))
+  if (allDependencies.length === 0) return
 
-  if (useResolutions) {
+  if (useResolutions && npmClient == 'yarn') {
     info(`Updating resolutions in ${path}...`)
-    return updateResolutions({ pkg, packages, path, version })
+    return updateResolutions({ pkg, packages: allDependencies, path, version })
   } else {
-    info(`Upgrading packages in ${path} to ${version || 'latest'}`)
+    info(`Upgrading ${allDependencies} in ${path} to ${version || 'latest'}`)
 
-    packages.forEach((packageName) => {
-      info(`Upgrading ${packageName}`)
-      try {
-        runCommandSync('yarn', ['remove', `${packageName}`, '--cwd', path])
+    const mapVersion = dependencies => dependencies.map(dep => `${dep}@${version || 'latest'}`)
 
-        const upgradeCommand = ['add', `${packageName}@${version || 'latest'}`, '--cwd', path]
-        if (devDependencies.includes(packageName)) upgradeCommand.push('--dev')
-        runCommandSync('yarn', upgradeCommand)
-      } catch (err) {
-        error(err)
+    try {
+      if (npmClient === 'yarn') {
+        runCommandSync('yarn', ['remove', ...allDependencies, '--cwd', path])
+
+        if (dependencies.length > 0) {
+          runCommandSync('yarn', ['add', ...mapVersion(dependencies), '--cwd', path])
+        }
+
+        if (devDependencies.length > 0) {
+          runCommandSync('yarn', ['add', ...mapVersion(devDependencies), '--cwd', path, '--dev'])
+        }
+      } else if (npmClient === 'npm') {
+        runCommandSync('npm', ['uninstall', '--prefix', path, ...allDependencies])
+
+        if (dependencies.length > 0) {
+          runCommandSync('npm', ['install', '--prefix', path, ...mapVersion(dependencies)])
+        }
+
+        if (devDependencies.length > 0) {
+          runCommandSync('npm', ['install', '--save-dev', '--prefix', path, ...mapVersion(devDependencies)])
+        }
       }
-    })
+    } catch (err) {
+      error(err)
+    }
   }
 }

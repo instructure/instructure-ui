@@ -37,7 +37,7 @@ exports.builder = (yargs) => {
 
   yargs.option('use-resolutions', {
     type: 'boolean',
-    describe: 'Perform the upgrade via resolutions (this will not modify your package.json).',
+    describe: 'When npm-client is set to yarn, perform the upgrade via resolutions (this will not modify your package.json).',
     default: false
   })
 
@@ -54,6 +54,14 @@ exports.builder = (yargs) => {
     describe: 'A semantic version number. When provided, dependencies will be upgraded to the specified version. When omitted, dependencies are upgraded to the latest stable version.',
     default: null
   })
+
+  yargs.option('npm-client', {
+    alias: 'npmClient',
+    type: 'string',
+    describe: 'The npm client to use',
+    choices: ['yarn', 'npm'],
+    default: 'yarn'
+  })
 }
 
 exports.handler = (argv) => {
@@ -61,8 +69,9 @@ exports.handler = (argv) => {
     path,
     useResolutions,
     dependencies,
-    version
+    version,
+    npmClient
   } = argv
 
-  handleUpgradeDependencies({ sourcePath: path, useResolutions, dependencies, version })
+  handleUpgradeDependencies({ sourcePath: path, useResolutions, dependencies, version, npmClient })
 }

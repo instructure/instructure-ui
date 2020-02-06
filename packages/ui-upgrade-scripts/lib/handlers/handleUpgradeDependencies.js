@@ -24,11 +24,12 @@
 
 const upgradePackages = require('../utils/upgrade-packages')
 
-module.exports = ({ sourcePath, version, dependencies, useResolutions }) => {
+module.exports = ({ sourcePath, version, dependencies, useResolutions, npmClient }) => {
   upgradePackages({
     path: sourcePath,
     packageList: dependencies,
     version,
-    useResolutions
+    useResolutions,
+    npmClient
   })
 }
