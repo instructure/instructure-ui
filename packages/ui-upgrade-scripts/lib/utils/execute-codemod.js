@@ -25,11 +25,10 @@
 const path = require('path')
 const { info, runCommandSync } = require('@instructure/command-utils')
 
-module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'], parser = 'babylon', parserConfig } = {}) => {
+module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = [], parser = 'babylon', parserConfig } = {}) => {
   info(`Running ${codemodPath}...`)
   info(`Source path: ${sourcePath}`)
   info(`Config path: ${configPath}`)
-  info(`Ignoring: ${ignore.join(', ')}`)
 
   const codemodCommand = [
     '-t',
@@ -44,10 +43,22 @@ module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore 
     codemodCommand.push(`--parser-config=${parserConfig}`)
   }
 
+  const defaultIgnores = [
+    '**/node_modules/**',
+    '**/symlink_to_node_modules/**',
+    '**/vendor/**',
+    '**/Jenkinsfile.js',
+    '**/*.tmpl.js'
+  ]
+
+  const allIgnores = ignore.concat(defaultIgnores)
+
+  info(`Ignoring: ${allIgnores.join(', ')}`)
+
   let ignoreArgs = []
 
-  ignore.forEach((ignore) => {
-    ignoreArgs = ignoreArgs.concat('--ignore-pattern', path.join(sourcePath, ignore))
+  allIgnores.forEach((ignore) => {
+    ignoreArgs = ignoreArgs.concat(['--ignore-pattern', path.join(sourcePath, ignore)])
   })
 
   runCommandSync('jscodeshift', [

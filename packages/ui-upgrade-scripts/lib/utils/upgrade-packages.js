@@ -69,7 +69,7 @@ async function updateResolutions({ pkg, packages, path, version }) {
   }
 }
 
-module.exports = function upgradePackages({ useResolutions = false, packageList = [], version, path, npmClient } = {}) {
+module.exports = function upgradePackages({ useResolutions = false, packageList = [], version, path, ignoreWorkspaceRootCheck, npmClient } = {}) {
   verifyPackageJson({ sourcePath: path })
 
   const pkg = getPackage({ cwd: path })
@@ -94,14 +94,16 @@ module.exports = function upgradePackages({ useResolutions = false, packageList 
 
     try {
       if (npmClient === 'yarn') {
-        runCommandSync('yarn', ['remove', ...allDependencies, '--cwd', path])
+        const composeYarnArgs = args => ignoreWorkspaceRootCheck ? [...args, '--ignore-workspace-root-check'] : args
+
+        runCommandSync('yarn', composeYarnArgs(['remove', ...allDependencies, '--cwd', path]))
 
         if (dependencies.length > 0) {
-          runCommandSync('yarn', ['add', ...mapVersion(dependencies), '--cwd', path])
+          runCommandSync('yarn', composeYarnArgs(['add', ...mapVersion(dependencies), '--cwd', path]))
         }
 
         if (devDependencies.length > 0) {
-          runCommandSync('yarn', ['add', ...mapVersion(devDependencies), '--cwd', path, '--dev'])
+          runCommandSync('yarn', composeYarnArgs(['add', ...mapVersion(devDependencies), '--cwd', path, '--dev']))
         }
       } else if (npmClient === 'npm') {
         runCommandSync('npm', ['uninstall', '--prefix', path, ...allDependencies])

@@ -48,6 +48,12 @@ exports.builder = (yargs) => {
     default: null
   })
 
+  yargs.option('ignore-workspace-root-check', {
+    type: 'boolean',
+    describe: 'When npm-client is set to yarn, set the `ignore-workspace-root-check` argument when this command executes `yarn add` and `yarn remove`',
+    default: false
+  })
+
   yargs.option('npm-client', {
     alias: 'npmClient',
     type: 'string',
@@ -62,8 +68,9 @@ exports.handler = (argv) => {
     path,
     useResolutions,
     version,
+    ignoreWorkspaceRootCheck,
     npmClient
   } = argv
 
-  handleUpgradePackages({ sourcePath: path, useResolutions, version, npmClient })
+  handleUpgradePackages({ sourcePath: path, useResolutions, version, ignoreWorkspaceRootCheck, npmClient })
 }

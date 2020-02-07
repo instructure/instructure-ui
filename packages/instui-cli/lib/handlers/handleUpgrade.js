@@ -34,7 +34,7 @@ const {
   getPackageList
 } = require('../utils/getPackageLists')
 
-module.exports = async ({ sourcePath, version, ignore, npmClient, parser, parserConfig }) => {
+module.exports = async ({ sourcePath, version, ignore, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig }) => {
   verifyPackageJson({ sourcePath })
 
   handleExecuteCodemods({ sourcePath, version, ignore, parser, parserConfig })
@@ -43,13 +43,13 @@ module.exports = async ({ sourcePath, version, ignore, npmClient, parser, parser
   const { missing, unused } = await checkInstuiDependencies({ sourcePath, version })
 
   // Remove any unused instructure ui packages
-  await executeRemoveUnusedPackages({ unusedPackages: unused, sourcePath, npmClient })
+  await executeRemoveUnusedPackages({ unusedPackages: unused, sourcePath, ignoreWorkspaceRootCheck, npmClient })
 
   // Upgrade instructure ui packages that are still in the project to the latest
-  handleUpgradePackages({ sourcePath, version, npmClient })
+  handleUpgradePackages({ sourcePath, version, ignoreWorkspaceRootCheck, npmClient })
 
   // Add any missing packages that were not listed in the project deps
-  await executeAddMissingPackages({ missingPackages: missing, sourcePath, npmClient })
+  await executeAddMissingPackages({ missingPackages: missing, version, sourcePath, ignoreWorkspaceRootCheck, npmClient })
 }
 
 const checkInstuiDependencies = async ({ sourcePath, version }) => {
@@ -69,7 +69,7 @@ const checkInstuiDependencies = async ({ sourcePath, version }) => {
   }
 }
 
-const executeRemoveUnusedPackages = async ({ unusedPackages, sourcePath, npmClient }) => {
+const executeRemoveUnusedPackages = async ({ unusedPackages, sourcePath, ignoreWorkspaceRootCheck, npmClient }) => {
   if (!unusedPackages || unusedPackages.length === 0) return
 
   const reply = await confirm(
@@ -82,12 +82,18 @@ Would you like this script to remove them from your project now? [y/n]
   if (['Y', 'y', 'Yes', 'yes'].includes(reply.trim())) {
     try {
       if (npmClient === 'yarn') {
-        runCommandSync('yarn', [
+        const yarnRemoveArgs = [
           'remove',
           ...unusedPackages,
           '--cwd',
           sourcePath
-        ])
+        ]
+
+        if (ignoreWorkspaceRootCheck) {
+          yarnRemoveArgs.push('--ignore-workspace-root-check')
+        }
+
+        runCommandSync('yarn', yarnRemoveArgs)
       } else if (npmClient === 'npm') {
         runCommandSync('npm', [
           'uninstall',
@@ -102,7 +108,7 @@ Would you like this script to remove them from your project now? [y/n]
   }
 }
 
-const executeAddMissingPackages = async ({ missingPackages, sourcePath, npmClient }) => {
+const executeAddMissingPackages = async ({ missingPackages, version, sourcePath, ignoreWorkspaceRootCheck, npmClient }) => {
   if (!missingPackages || missingPackages.length === 0) return
 
   const reply = await confirm(
@@ -115,15 +121,21 @@ Would you like this script to add them to your project now? [y/n]
 
   if (['Y', 'y', 'Yes', 'yes'].includes(reply.trim())) {
     try {
-      const packages = missingPackages.map(pkg => `${pkg}@latest`)
+      const packages = missingPackages.map(pkg => `${pkg}@${version || 'latest'}`)
 
       if (npmClient === 'yarn') {
-        runCommandSync('yarn', [
+        const yarnAddArgs = [
           'add',
           ...packages,
           '--cwd',
           sourcePath
-        ])
+        ]
+
+        if (ignoreWorkspaceRootCheck) {
+          yarnAddArgs.push('--ignore-workspace-root-check')
+        }
+
+        runCommandSync('yarn', yarnAddArgs)
       } else if (npmClient === 'npm') {
         runCommandSync('npm', [
           'install',
