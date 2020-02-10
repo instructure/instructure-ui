@@ -42,6 +42,8 @@
     "lint:fix": "lerna run lint:fix --stream",
     "lint:commit": "ui-scripts --lint-commit",
     "lint:staged": "lint-staged",
+    "update:package:list": "lerna run generate:package:list --stream --scope @instructure/instui-config",
+    "commit:package:list": "git add **/package-list.json",
     "generate:component": "instui create component",
     "generate:package": "instui create package",
     "generate:rfc": "./scripts/generate-rfc",
@@ -68,7 +70,7 @@
     "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
-    "husky:pre-commit": "yarn lint:staged",
+    "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged",
     "husky:pre-push": "yarn lint:commit"
   },
   "license": "MIT",

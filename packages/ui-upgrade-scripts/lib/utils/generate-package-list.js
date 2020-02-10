@@ -22,8 +22,22 @@
  * SOFTWARE.
  */
 
-const generatePackageList = require('@instructure/ui-upgrade-scripts/lib/utils/generate-package-list')
+const fse = require('fs-extra')
+const path = require('path')
+const { info, error, runCommandSync } = require('@instructure/command-utils')
 
-const outputDir = process.argv[3] || process.cwd()
+module.exports = ({ outputDir, name = 'package-list.json' }) => {
+  try {
+    const { stdout } = runCommandSync('lerna', ['list', '--json'], [], { stdio: 'pipe' })
+    const packages = JSON.parse(stdout)
+    const packageList = packages.map(pkg => pkg.name)
 
-generatePackageList({ outputDir })
+    const outputPath = path.join(outputDir, name)
+
+    fse.outputFileSync(outputPath, JSON.stringify(packageList, null, 1))
+
+    info(`Successfully generated package list at ${outputPath}`)
+  } catch (err) {
+    error(err)
+  }
+}

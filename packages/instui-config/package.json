@@ -9,8 +9,17 @@
   },
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "generate:package:list": "./scripts/generate-package-list.js"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@instructure/console": "^6.18.0",
+    "@instructure/pkg-utils": "^6.18.0",
+    "@instructure/ui-upgrade-scripts": "^6.18.0",
+    "semver": "^6.3.0"
   }
 }
