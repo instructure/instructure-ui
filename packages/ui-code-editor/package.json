@@ -31,11 +31,13 @@
     "@instructure/ui-dom-utils": "^6.26.0",
     "@instructure/ui-react-utils": "^6.26.0",
     "@instructure/ui-themeable": "^6.26.0",
+    "@instructure/ui-test-locator": "^6.26.0",
+    "@instructure/ui-testable": "^6.26.0",
     "@instructure/uid": "^6.26.0",
     "classnames": "^2",
     "codemirror": "^5.48.4",
     "prop-types": "^15",
-    "react-codemirror2": "^6.0.0"
+    "react-codemirror2": "^7.1.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

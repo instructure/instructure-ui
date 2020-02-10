@@ -27,9 +27,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
+import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { uid } from '@instructure/uid'
-import { omitProps } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -41,6 +42,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 class CodeEditor extends Component {
   static propTypes = {
@@ -64,10 +66,6 @@ class CodeEditor extends Component {
     options: PropTypes.object,
     attachment: PropTypes.oneOf(['bottom', 'top']),
     /**
-    * value to set on initial render
-    */
-    defaultValue: PropTypes.string,
-    /**
     * the selected value (when controlled via the `onChange` prop)
     */
     value: PropTypes.string
@@ -79,21 +77,14 @@ class CodeEditor extends Component {
     options: {
       styleActiveLine: true
     },
-    onChange: undefined,
+    onChange: (value) => {},
     attachment: undefined,
-    defaultValue: undefined,
     value: undefined
   }
 
   constructor (props) {
     super()
     this._id = uid('CodeEditor')
-
-    if (typeof props.value === 'undefined') {
-      this.state = {
-        value: props.defaultValue
-      }
-    }
   }
 
   focus () {
@@ -126,34 +117,32 @@ class CodeEditor extends Component {
     }
   }
 
-  get value () {
-    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
-  }
-
   render () {
+    const {
+      value,
+      label,
+      attachment,
+      readOnly,
+      onChange,
+      ...rest
+    } = this.props
+
     const classes = {
       [styles.root]: true,
-      [styles['attached--' + this.props.attachment]]: this.props.attachment
+      [styles['attached--' + attachment]]: attachment
     }
 
     return (
       <div className={classnames(classes)}>
         <label htmlFor={this._id}>
-          <ScreenReaderContent>{this.props.label}</ScreenReaderContent>
+          <ScreenReaderContent>{label}</ScreenReaderContent>
           <CodeMirror
-            {...omitProps(this.props, CodeEditor.propTypes)}
+            {...passthroughProps(rest)}
             id={this._id}
             options={this.options}
-            value={this.value}
+            value={value}
             onBeforeChange={(editor, data, value) => {
-              if (typeof this.props.value === 'undefined') {
-                this.setState({ value })
-              }
-            }}
-            onChange={(editor, data, value) => {
-              if (typeof this.props.onChange === 'function') {
-                this.props.onChange(value)
-              }
+              onChange(value)
             }}
             ref={(el) => { this.codeMirror = el }}
           />

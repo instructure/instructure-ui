@@ -21,38 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
-import { CodeEditor } from '../index'
+import { CodeEditor } from './index'
 
-import { CodeEditorLocator } from '../CodeEditorLocator'
-
-describe('<CodeEditor />', async () => {
-  it('should render', async () => {
-    await mount(
-      <CodeEditor label='foo' />
-    )
-    const editor = await CodeEditorLocator.find()
-    const input = await editor.findInput()
-
-    expect(input).to.exist()
-  })
-
-  it('should behave controlled', async () => {
-    const onChange = stub()
-    const subject = await mount(
-      <CodeEditor label='foo' value="hello worl" onChange={onChange} />
-    )
-    const editor = await CodeEditorLocator.find()
-    const input = await editor.findInput()
-
-    await input.typeIn('d')
-    expect(onChange).to.have.been.calledWith('hello world')
-    expect(editor.getTextContent()).to.include('hello worl')
-    expect(editor.getTextContent()).to.not.include('world')
-
-    await subject.setProps({ value: 'hello world'})
-    expect(editor.getTextContent()).to.include('hello world')
-  })
+export const CodeEditorLocator = locator(CodeEditor.selector, {
+  findInput: (...args) => locator('textarea').find(...args)
 })

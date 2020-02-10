@@ -152,9 +152,7 @@ class Playground extends Component {
         </div>
         <CodeEditor
           label={`${this.props.title} Example Code`}
-          // TODO: when CodeEditor works controlled, use value here instead.
-          // CodeEditor won't currently update from subsequent changes to props.code
-          defaultValue={code}
+          value={code}
           onChange={this.handleChange}
           readOnly={this.props.readOnly}
           attachment="bottom"
