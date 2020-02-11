@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-codemods",
-  "version": "6.18.0",
+  "version": "6.19.0",
   "description": "Codemod scripts to help upgrade Instructure UI libraries.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

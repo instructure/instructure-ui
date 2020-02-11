@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.19.0](https://github.com/instructure/instructure-ui/compare/v6.18.0...v6.19.0) (2020-02-11)
+
+
+### Features
+
+* **instructure-theme:** add instructure-theme ([df088ec](https://github.com/instructure/instructure-ui/commit/df088ec))
+* **ui-docs-client:** use updated Button throughout docs/components ([9f0be81](https://github.com/instructure/instructure-ui/commit/9f0be81))
+
+
+
+
+
 # [6.18.0](https://github.com/instructure/instructure-ui/compare/v6.17.0...v6.18.0) (2020-02-04)
 
 

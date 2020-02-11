@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.19.0](https://github.com/instructure/instructure-ui/compare/v6.18.0...v6.19.0) (2020-02-11)
+
+
+### Bug Fixes
+
+* **ui-expandable:** replace componentWillReceiveProps ([d59f529](https://github.com/instructure/instructure-ui/commit/d59f529))
+* **ui-select:** ensure Select.Group imports .Option ([8dc609f](https://github.com/instructure/instructure-ui/commit/8dc609f))
+
+
+### Features
+
+* undeprecate disabled and readOnly in inputs ([79cf68f](https://github.com/instructure/instructure-ui/commit/79cf68f))
+* **instructure-theme:** add instructure-theme ([df088ec](https://github.com/instructure/instructure-ui/commit/df088ec))
+* **instui-cli,instui-config,ui-upgrade-scripts:** eliminate parser errors when running codemods ([0430c6b](https://github.com/instructure/instructure-ui/commit/0430c6b))
+* **ui-docs-client:** use updated Button throughout docs/components ([9f0be81](https://github.com/instructure/instructure-ui/commit/9f0be81))
+* **ui-link:** un-deprecate disabled in Link ([a8df168](https://github.com/instructure/instructure-ui/commit/a8df168))
+
+
+
+
+
 # [6.18.0](https://github.com/instructure/instructure-ui/compare/v6.17.0...v6.18.0) (2020-02-04)
 
 

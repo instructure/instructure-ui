@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.19.0](https://github.com/instructure/instructure-ui/compare/v6.18.0...v6.19.0) (2020-02-11)
+
+
+### Features
+
+* **instui-cli,instui-config,ui-upgrade-scripts:** eliminate parser errors when running codemods ([0430c6b](https://github.com/instructure/instructure-ui/commit/0430c6b))
+
+
+
+
+
 # [6.18.0](https://github.com/instructure/instructure-ui/compare/v6.17.0...v6.18.0) (2020-02-04)
 
 **Note:** Version bump only for package @instructure/instui-cli
