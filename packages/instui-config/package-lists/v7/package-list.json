@@ -10,6 +10,7 @@
  "@instructure/cz-lerna-changelog",
  "@instructure/debounce",
  "eslint-plugin-instructure-ui",
+ "@instructure/instructure-theme",
  "@instructure/instui-cli",
  "@instructure/instui-config",
  "@instructure/mocha-environment-jsdom",
