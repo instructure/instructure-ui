@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { themeable } from '@instructure/ui-themeable'
+import { polyfill } from '@instructure/ui-react-utils'
 import { Modal } from '@instructure/ui-modal'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -73,6 +74,7 @@ class Playground extends Component {
   constructor (props) {
     super()
     this.state = {
+      defaultCode: props.code, // to track changes to code
       code: props.code,
       fullscreen: false,
       showCode: false,
@@ -80,14 +82,17 @@ class Playground extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { code } = nextProps
-    if (code) {
-      this.setState({
-        code
-      })
-    }
-  }
+  static getDerivedStateFromProps (nextProps, prevState) {
+     if (nextProps.code !== prevState.defaultCode) {
+       // code prop was updated, reset defaultCode and actual code state
+       return {
+         code: nextProps.code,
+         defaultCode: nextProps.code
+       }
+     } else {
+       return null
+     }
+   }
 
   componentDidUpdate (prevProps, prevState) {
     if (prevState.fullscreen === true && this.state.fullscreen === false) {
@@ -147,6 +152,8 @@ class Playground extends Component {
         </div>
         <CodeEditor
           label={`${this.props.title} Example Code`}
+          // TODO: when CodeEditor works controlled, use value here instead.
+          // CodeEditor won't currently update from subsequent changes to props.code
           defaultValue={code}
           onChange={this.handleChange}
           readOnly={this.props.readOnly}
@@ -272,6 +279,8 @@ class Playground extends Component {
     )
   }
 }
+
+polyfill(Playground)
 
 export default Playground
 export { Playground }
