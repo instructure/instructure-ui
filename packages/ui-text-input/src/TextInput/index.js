@@ -101,6 +101,11 @@ class TextInput extends Component {
     */
     display: PropTypes.oneOf(['inline-block', 'block']),
     /**
+    * Prevents the default behavior of wrapping the input and rendered content
+    * when available space is exceeded.
+    */
+    shouldNotWrap: PropTypes.bool,
+    /**
     * Html placeholder text to display when the input has no value. This should be hint text, not a label
     * replacement.
     */
@@ -170,6 +175,7 @@ class TextInput extends Component {
     value: undefined,
     defaultValue: undefined,
     display: 'block',
+    shouldNotWrap: false,
     placeholder: undefined,
     width: undefined,
     size: 'medium',
@@ -309,7 +315,8 @@ class TextInput extends Component {
       renderAfterInput,
       messages,
       inputContainerRef,
-      icon
+      icon,
+      shouldNotWrap
     } = this.props
 
     const { interaction } = this
@@ -337,7 +344,7 @@ class TextInput extends Component {
         <span className={classnames(facadeClasses)}>
           {
             renderBeforeOrAfter ?
-              <Flex wrap="wrap">
+              <Flex wrap={shouldNotWrap ? 'no-wrap' : 'wrap'}>
                 {renderBeforeInput &&
                   <Flex.Item padding="0 0 0 small">
                     {callRenderProp(renderBeforeInput)}

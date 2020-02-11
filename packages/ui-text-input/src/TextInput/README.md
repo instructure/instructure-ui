@@ -205,6 +205,48 @@ example: true
 </div>
 ```
 
+### `shouldNotWrap`
+
+If there is content rendered before the input (via `renderBeforeInput`), the
+input will wrap to a new line when the browser determines it does
+not have enough room (for most browsers, this is 20 characters). Wrapping allows
+the component to accommodate large lists of [Tags](#Tag), for example.
+
+If not desired, this behavior can be overridden by setting the `shouldNotWrap`
+boolean prop to `true`.
+
+```js
+---
+example: true
+---
+<View as="div" maxWidth="250px">
+  <TextInput
+    renderLabel="I will not wrap"
+    renderBeforeInput={<IconSearchLine inline={false} />}
+    renderAfterInput={<Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
+    shouldNotWrap
+  />
+  <View as="div" margin="medium none none">
+    <TextInput
+      renderLabel="I will wrap"
+      renderBeforeInput={
+        <div>
+          <Tag
+            text="English 101"
+            margin="xx-small xxx-small"
+          />
+          <Tag
+            text="History 205"
+            margin="xx-small xxx-small"
+          />
+        </div>
+      }
+      renderAfterInput={<Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
+    />
+  </View>
+</View>
+```
+
 ### Guidelines
 
 ```js
