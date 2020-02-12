@@ -125,6 +125,57 @@ describe('createThemeAdapter', () => {
     })
   })
 
+  describe('mapping a single variable to multiple values', () => {
+    it('should map a single old variable to multiple new variables when entry in map is an array', () => {
+      const theme = {
+        fontFamily: 'papyrus'
+      }
+
+      const map = {
+        fontFamily: [
+          'fontFamily1',
+          'fontFamily2',
+          'fontFamily3'
+        ]
+      }
+
+      const updatedTheme = createThemeAdapter({ map, version })({ theme, displayName })
+
+      const expectedTheme = {
+        fontFamily1: 'papyrus',
+        fontFamily2: 'papyrus',
+        fontFamily3: 'papyrus'
+      }
+
+      expect(updatedTheme).to.deep.equal(expectedTheme)
+    })
+
+    it('should preserve the original value when doing this mapping and `shouldIncludeOldValues` is set', () => {
+      const theme = {
+        fontFamily: 'papyrus'
+      }
+
+      const map = {
+        fontFamily: [
+          'fontFamily1',
+          'fontFamily2',
+          'fontFamily3'
+        ]
+      }
+
+      const updatedTheme = createThemeAdapter({ map, version, shouldIncludeOldValues: true })({ theme, displayName })
+
+      const expectedTheme = {
+        fontFamily: 'papyrus',
+        fontFamily1: 'papyrus',
+        fontFamily2: 'papyrus',
+        fontFamily3: 'papyrus'
+      }
+
+      expect(updatedTheme).to.deep.equal(expectedTheme)
+    })
+  })
+
   describe('warnings', () => {
     it('should not warn when keys are already updated', () => {
       const theme = {

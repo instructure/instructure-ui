@@ -40,15 +40,35 @@ export const createThemeAdapter = ({ map = {}, version, shouldIncludeOldValues =
   return ({ theme = {}, displayName } = {}) => {
     return Object.entries(theme).reduce((result, [key, value]) => {
       if (map[key]) {
-        warnDeprecated(false, `[${displayName}] The theme variable \`${key}\` has been changed to \`${map[key]}\`.${version
-          ? ` In version ${version}, \`${key}\` will no longer work as an override. Use \`${map[key]}\` instead.`
-          : ''}`
-        )
+        if (Array.isArray(map[key])) {
+          warnDeprecated(false, `[${displayName}] The theme variable \`${key}\` has been split into the following values \`${map[key].join(', ')}\`.${version
+            ? ` In version ${version}, \`${key}\` will no longer work as an override. Override each value individually instead.`
+            : ''}`
+          )
+        } else {
+          warnDeprecated(false, `[${displayName}] The theme variable \`${key}\` has been changed to \`${map[key]}\`.${version
+            ? ` In version ${version}, \`${key}\` will no longer work as an override. Use \`${map[key]}\` instead.`
+            : ''}`
+          )
+        }
+
+        let updatedThemeVars = {}
+
+        if (Array.isArray(map[key])) {
+          updatedThemeVars = map[key].reduce((result, updatedVar) => {
+            return {
+              ...result,
+              [updatedVar]: value
+            }
+          }, {})
+        } else {
+          updatedThemeVars = { [map[key]]: value }
+        }
 
         return shouldIncludeOldValues ? {
-          ...result, [map[key]]: value, [key]: value
+          ...result, ...updatedThemeVars, [key]: value
         } : {
-          ...result, [map[key]]: value
+          ...result, ...updatedThemeVars
         }
       }
 
