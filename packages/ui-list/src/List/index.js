@@ -178,4 +178,4 @@ class List extends Component {
 }
 
 export default List
-export { List }
+export { List, Item as ListItem }

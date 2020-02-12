@@ -116,7 +116,7 @@ from the `canvas-high-contrast` theme).
 
 ### Using theme variables in CSS
 
-Note: Don't worry about scoping your CSS variables (the [ui-themable](#ui-themeable) library will take care of that for you):
+Note: Don't worry about scoping your CSS variables (the [ui-themeable](#ui-themeable) library will take care of that for you):
 
 ```css
 .root {
@@ -147,7 +147,7 @@ The [babel plugin](#babel-plugin-themeable-styles) does a few things:
     so that variable values from `theme.js` can be injected into the CSS
     for browsers that don't support CSS variables.
 
- The [ui-themable](#ui-themeable) library will call the theme function and inject the resulting CSS string into the document
+ The [ui-themeable](#ui-themeable) library will call the theme function and inject the resulting CSS string into the document
  when the component mounts. If the browser supports CSS variables, it will
  inject namespaced CSS variables into the CSS before adding it to the document.
 
@@ -174,7 +174,7 @@ The [babel plugin](#babel-plugin-themeable-styles) does a few things:
  }
  ```
 
- The [ui-themable](#ui-themeable) library also supports runtime themes as follows:
+ The [ui-themeable](#ui-themeable) library also supports runtime themes as follows:
 
  For browsers that support CSS variables, it will add variables via the
  style attribute on the component root (when the theme is changed, either

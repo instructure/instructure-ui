@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export { Flex } from './Flex'
+export { Flex, FlexItem } from './Flex'

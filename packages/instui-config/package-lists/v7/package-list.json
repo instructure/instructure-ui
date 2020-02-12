@@ -120,5 +120,6 @@
  "@instructure/ui-utils",
  "@instructure/ui-view",
  "@instructure/ui-webpack-config",
+ "@instructure/ui",
  "@instructure/uid"
 ]

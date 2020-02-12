@@ -231,4 +231,4 @@ class Flex extends Component {
 }
 
 export default Flex
-export { Flex }
+export { Flex, Item as FlexItem }

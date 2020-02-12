@@ -23,4 +23,4 @@
  */
 
 export { InlineList } from './InlineList'
-export { List } from './List'
+export { List, ListItem } from './List'
