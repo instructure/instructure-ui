@@ -11,6 +11,10 @@ category: packages
 
 A utility component for show/hide functionality.
 
+### Utilities
+The `ui-expandable` package contains the following utilities:
+- [Expandable](#Expandable)
+
 ### Installation
 
 ```sh
