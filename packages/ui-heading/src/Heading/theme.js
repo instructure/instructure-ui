@@ -24,23 +24,27 @@
 
  export default function generator ({ borders, colors, spacing, typography }) {
    return {
-     fontFamily: typography.fontFamily,
      lineHeight: typography.lineHeightFit,
 
      h1FontSize: typography.fontSizeXXLarge,
      h1FontWeight: typography.fontWeightLight,
+     h1FontFamily: typography.fontFamily,
 
      h2FontSize: typography.fontSizeXLarge,
      h2FontWeight: typography.fontWeightNormal,
+     h2FontFamily: typography.fontFamily,
 
      h3FontSize: typography.fontSizeLarge,
      h3FontWeight: typography.fontWeightBold,
+     h3FontFamily: typography.fontFamily,
 
      h4FontSize: typography.fontSizeMedium,
      h4FontWeight: typography.fontWeightBold,
+     h4FontFamily: typography.fontFamily,
 
      h5FontSize: typography.fontSizeSmall,
      h5FontWeight: typography.fontWeightNormal,
+     h5FontFamily: typography.fontFamily,
 
      primaryInverseColor: colors.textLightest,
      primaryColor: colors.textDarkest,
@@ -60,3 +64,16 @@
      primaryColor: variables['ic-brand-font-color-dark']
    }
  }
+
+generator['instructure'] = function ({ typography }) {
+  return {
+    h1FontFamily: typography.fontFamilyHeading,
+    h2FontFamily: typography.fontFamilyHeading,
+    h3FontWeight: typography.fontWeightBold,
+    h3FontSize: '2.125rem',
+    h4FontWeight: typography.fontWeightBold,
+    h4FontSize: typography.fontSizeLarge,
+    h5FontWeight: typography.fontWeightBold,
+    h5FontSize: typography.fontSizeMedium
+  }
+}

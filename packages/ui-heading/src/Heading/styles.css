@@ -1,5 +1,4 @@
 .root {
-  font-family: var(--fontFamily);
   line-height: var(--lineHeight);
   margin: 0;
 }
@@ -31,26 +30,31 @@ input.root[type] {
 }
 
 .level--h1 {
+  font-family: var(--h1FontFamily);
   font-size: var(--h1FontSize);
   font-weight: var(--h1FontWeight);
 }
 
 .level--h2 {
+  font-family: var(--h2FontFamily);
   font-size: var(--h2FontSize);
   font-weight: var(--h2FontWeight);
 }
 
 .level--h3 {
+  font-family: var(--h3FontFamily);
   font-size: var(--h3FontSize);
   font-weight: var(--h3FontWeight);
 }
 
 .level--h4 {
+  font-family: var(--h4FontFamily);
   font-size: var(--h4FontSize);
   font-weight: var(--h4FontWeight);
 }
 
 .level--h5 {
+  font-family: var(--h5FontFamily);
   font-size: var(--h5FontSize);
   font-weight: var(--h5FontWeight);
 }

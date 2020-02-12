@@ -24,7 +24,6 @@
 
 const typography = Object.freeze({
   fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyDisplay: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
   fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
 
   fontSizeXSmall: '0.75rem', // 12px

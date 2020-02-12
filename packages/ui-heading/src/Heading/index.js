@@ -34,6 +34,8 @@ import { testable } from '@instructure/ui-testable'
 import styles from './styles.css'
 import theme from './theme'
 
+import { themeAdapter } from './themeAdapter'
+
 /**
 ---
 category: components
@@ -43,7 +45,7 @@ category: components
   ellipsis: '<TruncateText />'
 })
 @testable()
-@themeable(theme, styles)
+@themeable(theme, styles, themeAdapter)
 class Heading extends Component {
   static propTypes = {
     /**

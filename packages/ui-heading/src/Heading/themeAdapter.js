@@ -22,33 +22,19 @@
  * SOFTWARE.
  */
 
-const typography = Object.freeze({
-  fontFamily: `"Proxima Nova", "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-  "Helvetica Neue", sans-serif`,
-  fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
-  fontFamilyHeading: `"TiemposHeadlineWebBold", "Georgia", "Proxima Nova", sans-serif`,
+import { createThemeAdapter } from '@instructure/ui-themeable'
 
-  fontSizeXSmall: '0.75rem',
-  fontSizeSmall: '0.875rem',
-  fontSizeMedium: '1rem',
-  fontSizeLarge: '1.25rem',
-  fontSizeXLarge: '2.25rem',
-  fontSizeXXLarge: '3rem',
+const map = {
+  fontFamily: [
+    'h1FontFamily',
+    'h2FontFamily',
+    'h3FontFamily',
+    'h4FontFamily',
+    'h5FontFamily'
+  ],
+}
 
-  fontWeightLight: 300,
-  fontWeightNormal: 400,
-  fontWeightBold: 700,
-
-  lineHeight: 1.5,
-  lineHeightFit: 1.125,
-  lineHeightCondensed: 1.25,
-  lineHeightDouble: 2,
-
-  letterSpacingNormal: 0,
-  letterSpacingCondensed: '-0.0625rem',
-  letterSpacingExpanded: '0.0625rem'
+export const themeAdapter = createThemeAdapter({
+  map,
+  version: '8.0.0',
 })
-
-export default typography
-export { typography }
