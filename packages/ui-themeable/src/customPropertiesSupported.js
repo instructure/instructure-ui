@@ -35,10 +35,19 @@ let cachedReturnVal
  */
 function customPropertiesSupported () {
   if (typeof cachedReturnVal !== 'undefined') return cachedReturnVal
+
+  // Since JSDOM doesn't need to support CSS Custom properties to work correctly, we will
+  // say that they are supported if we are in JSDOM. This will keep unnecessary style tags
+  // from being added to the DOM, keeping test output clean.
+  const environmentIsJSDOM =
+    navigator && navigator.userAgent && navigator.userAgent.includes('jsdom')
+  const browserSupportsCustomProperties =
+    window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--primary)')
+
   return cachedReturnVal = (
     canUseDOM &&
     !isEdge && // polyfill edge until improved css variable support
-    window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--primary)')
+    (browserSupportsCustomProperties || environmentIsJSDOM)
   )
 }
 
