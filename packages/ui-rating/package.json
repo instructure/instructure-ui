@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-rating",
-  "version": "6.19.0",
+  "version": "6.20.0",
   "description": "A static rating component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -23,22 +23,22 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.5.0",
-    "@instructure/console": "^6.19.0",
-    "@instructure/ui-a11y-content": "^6.19.0",
-    "@instructure/ui-dom-utils": "^6.19.0",
-    "@instructure/ui-icons": "^6.19.0",
-    "@instructure/ui-motion": "^6.19.0",
-    "@instructure/ui-react-utils": "^6.19.0",
-    "@instructure/ui-testable": "^6.19.0",
-    "@instructure/ui-themeable": "^6.19.0",
-    "@instructure/ui-view": "^6.19.0",
+    "@instructure/console": "^6.20.0",
+    "@instructure/ui-a11y-content": "^6.20.0",
+    "@instructure/ui-dom-utils": "^6.20.0",
+    "@instructure/ui-icons": "^6.20.0",
+    "@instructure/ui-motion": "^6.20.0",
+    "@instructure/ui-react-utils": "^6.20.0",
+    "@instructure/ui-testable": "^6.20.0",
+    "@instructure/ui-themeable": "^6.20.0",
+    "@instructure/ui-view": "^6.20.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.19.0",
-    "@instructure/ui-test-locator": "^6.19.0",
-    "@instructure/ui-test-utils": "^6.19.0"
+    "@instructure/ui-babel-preset": "^6.20.0",
+    "@instructure/ui-test-locator": "^6.20.0",
+    "@instructure/ui-test-utils": "^6.20.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

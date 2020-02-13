@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.20.0](https://github.com/instructure/instructure-ui/compare/v6.19.0...v6.20.0) (2020-02-13)
+
+
+### Features
+
+* **ui-text-input:** Add shouldNotWrap property ([cca1201](https://github.com/instructure/instructure-ui/commit/cca1201))
+
+
+
+
+
 # [6.19.0](https://github.com/instructure/instructure-ui/compare/v6.18.0...v6.19.0) (2020-02-11)
 
 

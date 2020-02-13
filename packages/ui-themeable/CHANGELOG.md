@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.20.0](https://github.com/instructure/instructure-ui/compare/v6.19.0...v6.20.0) (2020-02-13)
+
+
+### Bug Fixes
+
+* **ui-themeable:** check JSDOM environment ([5ef3244](https://github.com/instructure/instructure-ui/commit/5ef3244))
+
+
+### Features
+
+* **ui-themeable:** allow theme adapter to map a single old value to multiple new values ([8b5bb3f](https://github.com/instructure/instructure-ui/commit/8b5bb3f))
+
+
+
+
+
 # [6.19.0](https://github.com/instructure/instructure-ui/compare/v6.18.0...v6.19.0) (2020-02-11)
 
 **Note:** Version bump only for package @instructure/ui-themeable

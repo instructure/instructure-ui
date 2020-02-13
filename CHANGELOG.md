@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.20.0](https://github.com/instructure/instructure-ui/compare/v6.19.0...v6.20.0) (2020-02-13)
+
+
+### Bug Fixes
+
+* **ui-themeable:** check JSDOM environment ([5ef3244](https://github.com/instructure/instructure-ui/commit/5ef3244))
+
+
+### Features
+
+* **ui-docs-client:** update deprecated lifecycle in Playground ([9c6888f](https://github.com/instructure/instructure-ui/commit/9c6888f))
+* **ui-motion:** update deprecated lifeycles from ui-motion ([9d0593e](https://github.com/instructure/instructure-ui/commit/9d0593e))
+* **ui-text-input:** Add shouldNotWrap property ([cca1201](https://github.com/instructure/instructure-ui/commit/cca1201))
+* **ui-themeable:** allow theme adapter to map a single old value to multiple new values ([8b5bb3f](https://github.com/instructure/instructure-ui/commit/8b5bb3f))
+
+
+
+
+
 # [6.19.0](https://github.com/instructure/instructure-ui/compare/v6.18.0...v6.19.0) (2020-02-11)
 
 

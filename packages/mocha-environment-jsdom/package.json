@@ -1,6 +1,6 @@
 {
   "name": "@instructure/mocha-environment-jsdom",
-  "version": "6.19.0",
+  "version": "6.20.0",
   "description": "jsdom environment setup for use with mocha tests",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

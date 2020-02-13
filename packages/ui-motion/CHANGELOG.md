@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.20.0](https://github.com/instructure/instructure-ui/compare/v6.19.0...v6.20.0) (2020-02-13)
+
+
+### Features
+
+* **ui-motion:** update deprecated lifeycles from ui-motion ([9d0593e](https://github.com/instructure/instructure-ui/commit/9d0593e))
+
+
+
+
+
 # [6.19.0](https://github.com/instructure/instructure-ui/compare/v6.18.0...v6.19.0) (2020-02-11)
 
 **Note:** Version bump only for package @instructure/ui-motion
