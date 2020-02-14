@@ -99,6 +99,11 @@
       ]}
     ]
   },
+  "TimeSelect": {
+    "8.0.0": [
+      { "old": "label", "new": "renderLabel" }
+    ]
+  },
   "Tooltip": {
     "8.0.0": [
       { "old": "tip", "new": "renderTip" },

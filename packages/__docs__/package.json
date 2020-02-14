@@ -82,6 +82,7 @@
     "@instructure/ui-text": "^6.21.0",
     "@instructure/ui-text-input": "^6.21.0",
     "@instructure/ui-themeable": "^6.21.0",
+    "@instructure/ui-time-select": "^6.21.0",
     "@instructure/ui-toggle-details": "^6.21.0",
     "@instructure/ui-tooltip": "^6.21.0",
     "@instructure/ui-tray": "^6.21.0",

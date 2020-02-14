@@ -112,6 +112,10 @@
     "replace": "@instructure/ui-text-area/lib/TextArea"
   },
   {
+    "pattern": "^@instructure/ui-forms/lib/TimeInput",
+    "replace": "@instructure/ui-time-select/lib/TimeSelect"
+  },
+  {
     "pattern": "^@instructure/ui-overlays/lib/Tooltip",
     "replace": "@instructure/ui-tooltip/lib/Tooltip"
   },

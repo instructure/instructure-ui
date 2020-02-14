@@ -108,6 +108,7 @@
  "@instructure/ui-text",
  "@instructure/ui-themeable",
  "@instructure/ui-themes",
+ "@instructure/ui-time-select",
  "@instructure/ui-toggle-details",
  "@instructure/ui-tooltip",
  "@instructure/ui-tray",

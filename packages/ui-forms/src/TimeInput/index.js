@@ -43,7 +43,7 @@ category: components
 **/
 @testable()
 @themeable(theme, styles)
-@deprecated('7.0.0', null, 'Use @instructure/ui-select instead')
+@deprecated('7.0.0', null, 'Use @instructure/ui-time-select instead')
 class TimeInput extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

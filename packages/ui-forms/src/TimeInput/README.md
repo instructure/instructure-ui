@@ -2,7 +2,7 @@
 describes: TimeInput
 ---
 
-**DEPRECATED:** See examples of implementing a [Time Input Pattern](#TimeDate) using [Select](#Select).
+**DEPRECATED:** TimeInput will be removed from `ui-forms` in version 7.0.0. Use [TimeSelect](#TimeSelect) from [ui-time-select](#ui-time-select) instead or see how to implement your own [Time Input Pattern](#TimeDate).
 
 A TimeInput component is used to select a time from a list of allowed time values. The
 list of possible values can be configured via this component's props.

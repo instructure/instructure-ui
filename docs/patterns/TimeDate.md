@@ -4,8 +4,8 @@ category: Patterns
 id: TimeDate
 ---
 
-### Time Input
-[Select](#Select) provides styling and accessible behavior out of the box, but we leave decisions about internationalization up to consumers. See that [documentation](#Select) for more examples of configuring a Select. The following example uses [Moment.js](https://momentjs.com/docs/#/parsing/) to demonstrate how you might create a time input in your app.
+### Time input
+The easiest way to get going with a time input is to use [TimeSelect](#TimeSelect). Should you need more customizability however, you can always configure a [Select](#Select) however you see fit. See that [documentation](#Select) for more examples of configuring a Select. The following example uses [Moment.js](https://momentjs.com/docs/#/parsing/) to demonstrate how you might create a time input in your app.
 
 ```js
 ---
@@ -208,8 +208,10 @@ render(<CustomTimeInput width="20rem" />)
 ```
 
 
-### DateTime Input
-Select can also be used with [DateInput](#DateInput) to create a DateTime component. See the DateInput [documentation](#DateInput) for more information around configuring a DateInput. The following example shows how to compose the two inputs with a [FormFieldGroup](#FormFieldGroup). Note: this is a readOnly example and will not respond to interaction.
+### Date and time
+`TimeSelect` can also be used with [DateInput](#DateInput) to create a DateTime component. See the DateInput [documentation](#DateInput) for more information around configuring a DateInput. The following example shows how to compose the two inputs with a [FormFieldGroup](#FormFieldGroup).
+
+> Note: this is a read only example and will not respond to interaction.
 
 ```javascript
 ---
@@ -217,7 +219,6 @@ example: true
 render: false
 ---
 
-// Utilities
 class CustomDateTimeInput extends React.Component {
   render() {
     return (
@@ -229,12 +230,12 @@ class CustomDateTimeInput extends React.Component {
         vAlign="top"
       >
         <DateInput
-          label="Date"
+          renderLabel="Date"
           width="20rem"
           interaction="readonly"
           renderWeekdayLabels={[]}
         />
-        <Select
+        <TimeSelect
           renderLabel="Time"
           width="20rem"
           interaction="readonly"
