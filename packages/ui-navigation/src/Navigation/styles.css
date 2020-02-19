@@ -38,7 +38,7 @@
     width: var(--minimizedWidth);
 
     & > .toggle {
-      transform: rotate(180deg);
+      transform: rotate3d(0, 1, 0, -180deg);
     }
   }
 }
@@ -56,13 +56,12 @@
 }
 
 .toggle {
-  box-sizing: border-box;
-  width: inherit;
+  transform: translate3d(0, 0, 0);
+  transition: all var(--toggleTransition);
 }
 
 .toggleIcon {
-  display: block;
-  width: 100%;
   fill: var(--fill);
+  margin: 0 auto;
 }
 /* stylelint-enable selector-max-class, no-descending-specificity */

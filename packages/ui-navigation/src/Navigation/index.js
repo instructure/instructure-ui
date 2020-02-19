@@ -170,7 +170,7 @@ class Navigation extends Component {
           <NavigationItem
             aria-expanded={!this.minimized}
             onClick={this.handleNavToggle}
-            icon={<IconMoveStartLine className={styles.toggleIcon}/>}
+            icon={<IconMoveStartLine className={styles.toggleIcon} inline={false} />}
             label={<ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>}
           >
           </NavigationItem>
