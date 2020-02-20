@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { decorator } from '@instructure/ui-decorator'
-import { isEmpty, shallowEqual, deepEqual } from '@instructure/ui-utils'
+import { isEmpty, shallowEqual, deepEqual, hash } from '@instructure/ui-utils'
 import { warn } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { findDOMNode } from '@instructure/ui-dom-utils'
@@ -103,7 +103,9 @@ const emptyObj = {}
 
 const themeable = decorator((ComposedComponent, theme, styles = {}, adapter) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name
-  let componentId = `${(styles && styles.componentId) || uid()}`
+
+  let componentId = `${(styles && styles.componentId) || hash(ComposedComponent, 8)}`
+
   if (process.env.NODE_ENV !== 'production') {
     componentId = `${displayName}__${componentId}`
     warn(
