@@ -8,6 +8,11 @@
       { "old": "variant", "new": "shape" }
     ]
   },
+  "Breadcrumb.Link": {
+    "8.0.0": [
+      { "old": "icon", "new": "renderIcon" }
+    ]
+  },
   "Button": {
     "8.0.0": [
       { "old": "buttonRef", "new": "elementRef" },
