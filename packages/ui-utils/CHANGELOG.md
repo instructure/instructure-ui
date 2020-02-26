@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.21.0](https://github.com/instructure/instructure-ui/compare/v6.20.0...v6.21.0) (2020-02-26)
+
+
+### Features
+
+* **ui-themeable:** use hash instead of randomly generated component id when styles are null ([62ac665](https://github.com/instructure/instructure-ui/commit/62ac665))
+
+
+
+
+
 # [6.20.0](https://github.com/instructure/instructure-ui/compare/v6.19.0...v6.20.0) (2020-02-13)
 
 **Note:** Version bump only for package @instructure/ui-utils

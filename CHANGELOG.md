@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.21.0](https://github.com/instructure/instructure-ui/compare/v6.20.0...v6.21.0) (2020-02-26)
+
+
+### Bug Fixes
+
+* **ui-breadcrumb:** ensure Breakcrumb.Link icon + renderIcon props work ([14e5f1c](https://github.com/instructure/instructure-ui/commit/14e5f1c))
+* **ui-navigation:** fix position/transition of Nav expand/collapse button ([c18dcab](https://github.com/instructure/instructure-ui/commit/c18dcab))
+
+
+### Features
+
+* **ui-heading:** Accept multiple font families ([da12bb8](https://github.com/instructure/instructure-ui/commit/da12bb8))
+* **ui-select:** Add a SimpleSelect component ([a7ed234](https://github.com/instructure/instructure-ui/commit/a7ed234))
+* **ui-themeable:** use hash instead of randomly generated component id when styles are null ([62ac665](https://github.com/instructure/instructure-ui/commit/62ac665))
+
+
+
+
+
 # [6.20.0](https://github.com/instructure/instructure-ui/compare/v6.19.0...v6.20.0) (2020-02-13)
 
 
