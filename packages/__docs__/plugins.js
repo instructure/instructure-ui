@@ -31,7 +31,7 @@ const pkg = require('../../package.json')
 module.exports = [
   new DocsPlugin({
     projectRoot,
-    title: `${pkg.name} : ${pkg.description} (${pkg.version})`,
+    title: `${pkg.name} - ${pkg.description} (${pkg.version})`,
     favicon: '../../logo.png',
     library: {
       name: pkg.name,

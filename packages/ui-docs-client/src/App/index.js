@@ -103,6 +103,21 @@ class App extends Component {
     }
   }
 
+  trackPage (page) {
+    let title = this._defaultDocumentTitle
+    if (page !== 'index') {
+      title = `${page} - ${this._defaultDocumentTitle}`
+    }
+
+    document.title = title
+
+    if (window.ga) {
+      window.ga('set', 'page', page)
+      window.ga('set', 'title', title)
+      window.ga('send', 'pageview')
+    }
+  }
+
   updateKey = () => {
     const { hash } = window.location
 
@@ -114,6 +129,7 @@ class App extends Component {
       this.setState({
         key: page || 'index'
       }, () => {
+        this.trackPage(page || 'index')
         if (id) {
           // After setting state, if we have an id and it corresponds to an element
           // that exists, scroll it into view
@@ -124,6 +140,8 @@ class App extends Component {
           this._content.scrollTop = 0
         }
       })
+    } else {
+      this.trackPage('index')
     }
   }
 
@@ -164,6 +182,7 @@ class App extends Component {
   }
 
   componentDidMount () {
+    this._defaultDocumentTitle = document.title
     this.updateKey()
 
     window.addEventListener('hashchange', this.updateKey, false)
