@@ -25,7 +25,6 @@
 export default function generator ({ colors, typography, spacing }) {
   return {
     padding: `0 ${spacing.xSmall}`,
-    textAlign: 'center',
     fontFamily: typography.fontFamily,
 
     valueColor: colors.textDarkest,

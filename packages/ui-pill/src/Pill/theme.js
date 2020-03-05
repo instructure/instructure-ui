@@ -28,7 +28,6 @@
 export default function generator ({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
     padding: `0 ${spacing.xSmall}`,
     height: '1.3125rem',
     background: colors.backgroundLightest,

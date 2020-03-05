@@ -42,7 +42,6 @@ export default function generator ({ colors, borders, spacing, typography, shado
     closeButtonMarginRight: spacing.xxSmall,
 
     iconColor: colors.textLightest,
-    iconBackground: colors.backgroundLightest,
 
     successBorderColor: colors.borderSuccess,
     successIconBackground: colors.backgroundSuccess,

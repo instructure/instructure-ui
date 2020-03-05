@@ -24,10 +24,6 @@
 
 export default function ({ colors, spacing, typography, borders }) {
   return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    fontSize: typography.fontSizeSmall,
-
     controlsTopMargin: spacing.small,
     borderRadius: borders.radiusMedium,
 

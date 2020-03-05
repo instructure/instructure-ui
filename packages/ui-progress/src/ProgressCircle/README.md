@@ -168,14 +168,14 @@ example: true
 />
 ```
 
-> `<ProgressBar />` defaults to setting the meter color to `success` when
+> `<ProgressCircle />` defaults to setting the meter color to `success` when
 complete.
 
 
 ### `renderValue` / `formatScreenReaderValue`
 
 Via the `renderValue` prop, developers can use `valueMax` and `valueNow` props to format the
-value that `<ProgressBar />` displays.
+value that `<ProgressCircle />` displays.
 
 > `renderValue` will not be spoken by screen readers. Any essential information
 in `renderValue` must also be conveyed via `formatScreenReaderValue` for screen reader users.

@@ -31,7 +31,6 @@ export default function generator ({ borders, colors, spacing, typography }) {
     paddingMedium: spacing.medium,
     paddingLarge: spacing.medium,
     iconColor: colors.textDark,
-    smallMargin: spacing.xSmall,
     mediumMargin: spacing.small,
     largeMargin: spacing.medium,
     iconHoverColor: colors.textLink,

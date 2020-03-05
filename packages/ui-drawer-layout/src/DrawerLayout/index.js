@@ -39,7 +39,6 @@ import { DrawerContent } from './DrawerContent'
 import { DrawerTray } from './DrawerTray'
 
 import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
@@ -48,7 +47,7 @@ category: components
 **/
 @testable()
 @bidirectional()
-@themeable(theme, styles)
+@themeable(styles)
 class DrawerLayout extends Component {
   static locatorAttribute = 'data-drawer-layout'
   static propTypes = {

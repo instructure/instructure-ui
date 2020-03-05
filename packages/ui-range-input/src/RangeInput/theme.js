@@ -40,7 +40,6 @@ export default function generator ({ colors, typography, spacing, forms }) {
 
     trackBackground: colors.backgroundDark,
 
-    valueBackground: colors.backgroundDarkest,
     valueColor: colors.textLightest,
     valueFontFamily: typography.fontFamily,
     valueFontWeight: typography.fontWeightNormal,

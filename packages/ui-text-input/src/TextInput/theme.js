@@ -32,8 +32,6 @@ export default function generator ({ colors, typography, borders, spacing, forms
     borderColor: colors.borderMedium,
     borderRadius: borders.radiusMedium,
 
-    iconColor: colors.textDarkest,
-
     color: colors.textDarkest,
     background: colors.backgroundLightest,
 
@@ -62,8 +60,6 @@ export default function generator ({ colors, typography, borders, spacing, forms
 generator.canvas = function (variables) {
   return {
     color: variables['ic-brand-font-color-dark'],
-    iconColor: variables['ic-brand-font-color-dark'],
-    focusBorderColor: variables['ic-brand-primary'],
     focusOutlineColor: variables['ic-brand-primary']
   }
 }

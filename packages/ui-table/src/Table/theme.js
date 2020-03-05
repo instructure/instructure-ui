@@ -36,6 +36,5 @@ export default function generator ({ colors, typography }) {
 generator.canvas = function (variables) {
   return {
     color: variables['ic-brand-font-color-dark'],
-    captionColor: variables['ic-brand-font-color-dark'],
   }
 }

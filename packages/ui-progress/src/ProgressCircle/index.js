@@ -48,7 +48,7 @@ class ProgressCircle extends Component {
     */
     screenReaderLabel: PropTypes.string.isRequired,
     /**
-    * Control the height of the progress bar
+    * Control the size of the progress circle
     */
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
     /**

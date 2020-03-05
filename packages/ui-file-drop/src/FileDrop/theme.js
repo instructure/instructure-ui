@@ -24,7 +24,7 @@
 
 export default function generator ({ borders, colors }) {
   return {
-    backgroundColor: colors.backgroundLightest,
+    backgroundColor: colors.backgroundLightest, // needed for testing
     borderRadius: borders.radiusLarge,
     borderWidth: borders.widthMedium,
     borderStyle: 'dashed',
