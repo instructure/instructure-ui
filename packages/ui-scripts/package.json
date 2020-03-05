@@ -60,7 +60,7 @@
     "storybook-chromatic": "^2"
   },
   "peerDependencies": {
-    "react": "^15 || ^16",
+    "react": "^16",
     "webpack": "^4"
   },
   "publishConfig": {

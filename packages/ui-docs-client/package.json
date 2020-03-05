@@ -68,8 +68,8 @@
     "react-github-corner": "^2.1.0"
   },
   "peerDependencies": {
-    "react": "^15 || ^16",
-    "react-dom": "^15 || ^16"
+    "react": "^16",
+    "react-dom": "^16"
   },
   "publishConfig": {
     "access": "public"

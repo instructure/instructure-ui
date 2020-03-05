@@ -34,8 +34,8 @@
     "react-lifecycles-compat": "^3.0.4"
   },
   "peerDependencies": {
-    "react": "^15 || ^16",
-    "react-dom": "^15 || ^16"
+    "react": "^16",
+    "react-dom": "^16"
   },
   "publishConfig": {
     "access": "public"

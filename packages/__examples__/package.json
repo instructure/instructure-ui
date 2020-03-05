@@ -30,8 +30,8 @@
     "@instructure/ui-webpack-config": "^6.26.0",
     "@storybook/react": "^5.2.1",
     "@storybook/theming": "^5.2.1",
-    "react": "^15 || ^16",
-    "react-dom": "^15 || ^16",
+    "react": "^16",
+    "react-dom": "^16",
     "story2sketch": "^1.7.0",
     "storybook-chromatic": "^2.0.0",
     "webpack-merge": "^4.2.1"

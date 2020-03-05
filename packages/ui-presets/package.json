@@ -30,7 +30,7 @@
     "@instructure/ui-webpack-config": "^6.26.0"
   },
   "peerDependencies": {
-    "react": "^15 || ^16"
+    "react": "^16"
   },
   "publishConfig": {
     "access": "public"

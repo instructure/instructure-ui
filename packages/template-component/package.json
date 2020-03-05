@@ -27,6 +27,6 @@
     "@instructure/ui-test-utils": "^6.26.0"
   },
   "peerDependencies": {
-    "react": "^15 || ^16"
+    "react": "^16"
   }
 }

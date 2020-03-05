@@ -28,7 +28,7 @@
     "prop-types": ">= 15.7.0"
   },
   "peerDependencies": {
-    "react": "^15 || ^16"
+    "react": "^16"
   },
   "publishConfig": {
     "access": "public"
