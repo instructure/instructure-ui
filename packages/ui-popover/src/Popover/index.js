@@ -53,6 +53,7 @@ import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
+import { FocusRegion } from '@instructure/ui-a11y-utils'
 
 @deprecated('8.0.0', null, 'Use Popover\'s `renderTrigger` prop instead.')
 @testable()
@@ -245,6 +246,11 @@ class Popover extends Component {
      */
     onKeyDown: PropTypes.func,
     /**
+     * Callback fired on keyup
+     */
+    onKeyUp: PropTypes.func,
+    /**
+    /**
      * Callback fired when mouse is over trigger
      */
     onMouseOver: PropTypes.func,
@@ -337,6 +343,7 @@ class Popover extends Component {
     onMouseOver: (event) => {},
     onMouseOut: (event) => {},
     onKeyDown: (event) => {},
+    onKeyUp: (event) => {},
     onPositioned: (position) => {},
     onPositionChanged: (position) => {},
     renderTrigger: null,
@@ -367,9 +374,38 @@ class Popover extends Component {
     })
   }
 
+  get isTooltip () {
+    return this.props.shouldRenderOffscreen
+      && !this.props.shouldReturnFocus
+      && !this.props.shouldContainFocus
+      && !this.props.shouldFocusContentOnTriggerBlur
+  }
+
+  componentDidMount () {
+    if (this.isTooltip) {
+      // if popover is being used as a tooltip with no focusable content
+      // manage its FocusRegion internally rather than registering it with
+      // the FocusRegionManager via Dialog
+      this._focusRegion = new FocusRegion(this._contentElement, {
+        shouldCloseOnEscape: false,
+        shouldCloseOnDocumentClick: true,
+        onDismiss: this.hide
+      })
+
+      if (this.shown) {
+        this._focusRegion.activate()
+      }
+    }
+  }
+
   componentWillUnmount () {
     this._raf.forEach(request => request.cancel())
     this._raf = []
+
+    if (this._focusRegion) {
+      this._focusRegion.deactivate()
+      this._focusRegion.blur()
+    }
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -377,6 +413,25 @@ class Popover extends Component {
       !shallowEqual(this.props, nextProps) ||
       !shallowEqual(this.state, nextState)
     )
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (this._focusRegion && this.isTooltip) {
+      // if focus region exists, popover is acting as a tooltip
+      // so we manually activate and deactivate the region when showing/hiding
+      if ((!prevProps.isShowingContent && this.props.isShowingContent)
+        || (!prevState.isShowingContent && this.state.isShowingContent)) {
+        // changed from hiding to showing
+        this._focusRegion.activate()
+        this._focusRegion.focus()
+      }
+
+      if ((prevProps.isShowingContent && !this.props.isShowingContent)
+        || (prevState.isShowingContent && !this.state.isShowingContent)) {
+        // changed from showing to hiding
+        this._focusRegion.deactivate()
+      }
+    }
   }
 
   computeOffsets (placement) {
@@ -518,6 +573,15 @@ class Popover extends Component {
     }
   }
 
+  handleTriggerKeyUp = (event) => {
+    if (event.keyCode === keycode.codes.esc && this.shown && this.isTooltip) {
+      // if popover is tooltip, it is managing its own focus region so we need
+      // to prevent esc keyup event from reaching FocusRegionManager
+      event.preventDefault()
+      this.hide(event)
+    }
+  }
+
   handleTriggerBlur = (event) => {
     if (this.props.on.indexOf('focus') > -1) {
       this._raf.push(requestAnimationFrame(() => {
@@ -599,6 +663,7 @@ class Popover extends Component {
         'aria-expanded': expanded,
         'data-popover-trigger': true,
         onKeyDown: createChainedFunction(this.handleTriggerKeyDown, this.props.onKeyDown),
+        onKeyUp: createChainedFunction(this.handleTriggerKeyUp, this.props.onKeyUp),
         onClick: createChainedFunction(onClick, this.props.onClick),
         onBlur: createChainedFunction(this.handleTriggerBlur, this.props.onBlur),
         onFocus: createChainedFunction(onFocus, this.props.onFocus),
@@ -616,7 +681,9 @@ class Popover extends Component {
       content = callRenderProp(this.props.children)
     }
 
-    if (this.shown) {
+    if (this.shown && !this.isTooltip) {
+      // if popover is NOT being used as a tooltip, create a Dialog
+      // to manage the content FocusRegion, when showing
       content = (
         <Dialog
           open={this.shown}
@@ -649,7 +716,10 @@ class Popover extends Component {
 
       let viewProps = {
         ref: c => this._view = c,
-        elementRef: this.props.contentRef,
+        elementRef: (el) => {
+          this._contentElement = el
+          this.props.contentRef(el)
+        },
         background: color,
         stacking: this.props.stacking,
         shadow: this.props.shadow,
