@@ -22,10 +22,14 @@
  * SOFTWARE.
  */
 
-import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
-import { theme as canvas } from '@instructure/canvas-theme'
-import { theme as instructure } from '@instructure/instructure-theme'
-import { theme as canvasAms } from '@instructure/canvas-ams-theme'
-
-export { canvas, canvasHighContrast, instructure, canvasAms }
-export default canvas
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

@@ -1,10 +1,11 @@
 {
-  "name": "@instructure/ui-themes",
+  "name": "@instructure/canvas-ams-theme",
   "version": "6.22.0",
-  "description": "A library of @instructure/ui-themeable themes",
+  "description": "A theme for Canvas AMS made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -16,17 +17,19 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build",
-    "build:watch": "ui-build --watch"
+    "build:watch": "ui-build --watch",
+    "build:types": "ui-scripts --types"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.22.0"
-  },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "^6.22.0",
+    "@babel/runtime": "^7.5.0",
     "@instructure/canvas-theme": "^6.22.0",
-    "@instructure/instructure-theme": "^6.22.0",
-    "@instructure/canvas-ams-theme": "^6.22.0"
+    "@instructure/ui-themeable": "^6.22.0"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^6.22.0",
+    "@instructure/ui-color-utils": "^6.22.0",
+    "@instructure/ui-test-utils": "^6.22.0"
   },
   "publishConfig": {
     "access": "public"

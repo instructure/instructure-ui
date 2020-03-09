@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { darken } from '@instructure/ui-color-utils'
+
 export default function generator ({ colors, typography, spacing, borders }) {
   return {
     fontSize: typography.fontSizeSmall,
@@ -63,5 +65,11 @@ generator['canvas'] = function (variables) {
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     linkTextDecoration: 'underline'
+  }
+}
+
+generator['canvas-ams'] = function ({ colors }) {
+  return {
+    hoverBackgroundColor: darken(colors.fullyAccessibleBrand, 10)
   }
 }

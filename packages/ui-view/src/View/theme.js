@@ -105,3 +105,10 @@ generator.canvas = function (variables) {
     borderColorInfo: variables['ic-brand-primary']
   }
 }
+
+generator['canvas-ams'] = function ({colors}) {
+  return {
+    focusColorInfo: colors.borderBrand
+  }
+}
+

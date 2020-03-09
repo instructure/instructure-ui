@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import { Text } from '@instructure/ui-elements'
 import { View } from '@instructure/ui-layout'
+import { ColorName } from '../ColorName'
 
 class ColorCard extends Component {
   static propTypes = {
@@ -65,18 +66,20 @@ class ColorCard extends Component {
         margin="0"
         padding="small"
       >
-        <div style={{position: 'relative'}}>
+        <div style={{position: 'relative',}}>
           <div style={{
             background: hex,
-            width: minimal ? '1rem' : '100%',
-            height: minimal ? '100%' : '6rem',
-            position: minimal ? 'absolute' : 'static',
-            margin: '0 0 2px'
+            width: minimal ? "1rem" : "100%",
+            height: minimal ? "100%" : "6rem",
+            position: minimal ? "absolute" : "static",
+            margin: '0 0 2px',
           }}/>
           <div style={minimal ? {paddingLeft: '1.5rem'} : {}}>
-            <Text as="figcaption" lineHeight="double">
-              <strong>{name.charAt(0).toUpperCase() + name.slice(1)}</strong>
-            </Text>
+            <ColorName
+              as="figcaption"
+              lineHeight="double"
+              name={name.charAt(0).toUpperCase() + name.slice(1)}
+            />
             <Text as="div" size="x-small">
               <strong>HEX:</strong> {hex}
             </Text>

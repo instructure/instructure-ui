@@ -98,6 +98,7 @@ module.exports = {
     '@instructure/canvas-theme$': path.resolve(__dirname, '../canvas-theme/src/'),
     '@instructure/canvas-high-contrast-theme$': path.resolve(__dirname, '../canvas-high-contrast-theme/src/'),
     '@instructure/instructure-theme$': path.resolve(__dirname, '../instructure-theme/src/'),
+    '@instructure/canvas-ams-theme$': path.resolve(__dirname, '../canvas-ams-theme/src/'),
     '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
     '@instructure/ui-react-utils$': path.resolve(__dirname, '../ui-react-utils/src/'),
     '@instructure/ui-dom-utils$': path.resolve(__dirname, '../ui-dom-utils/src/'),

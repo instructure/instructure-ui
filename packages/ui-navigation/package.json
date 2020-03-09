@@ -23,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6.22.0",
-    "@instructure/ui-color-utils": "^6.22.0",
     "@instructure/ui-test-locator": "^6.22.0",
     "@instructure/ui-test-utils": "^6.22.0"
   },
@@ -33,6 +32,7 @@
     "@instructure/debounce": "^6.22.0",
     "@instructure/ui-a11y-content": "^6.22.0",
     "@instructure/ui-a11y-utils": "^6.22.0",
+    "@instructure/ui-color-utils": "^6.22.0",
     "@instructure/ui-dom-utils": "^6.22.0",
     "@instructure/ui-elements": "^6.22.0",
     "@instructure/ui-focusable": "^6.22.0",

@@ -22,10 +22,54 @@
  * SOFTWARE.
  */
 
-import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
-import { theme as canvas } from '@instructure/canvas-theme'
-import { theme as instructure } from '@instructure/instructure-theme'
-import { theme as canvasAms } from '@instructure/canvas-ams-theme'
+import { ThemeRegistry } from '@instructure/ui-themeable'
 
-export { canvas, canvasHighContrast, instructure, canvasAms }
-export default canvas
+import { colors } from './colors'
+
+import {
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking
+} from '@instructure/canvas-theme'
+
+const key = 'canvas-ams'
+
+const variables = {
+  colors,
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking
+}
+
+const theme = ThemeRegistry.registerTheme({
+  key,
+  variables: { ...variables }
+})
+
+export default theme
+export {
+  colors,
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking,
+  theme,
+  key
+}

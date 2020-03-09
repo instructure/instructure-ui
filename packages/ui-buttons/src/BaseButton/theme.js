@@ -24,9 +24,9 @@
 
 import { alpha, darken } from '@instructure/ui-color-utils'
 
-const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
+export const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
 
-const generateButtonThemeVars = ({ style, textColor, ghostTextColor, backgroundColor, borderColor, ghostBorderColor = borderColor }) => ({
+export const generateButtonThemeVars = ({ style, textColor, ghostTextColor, backgroundColor, borderColor, ghostBorderColor = borderColor }) => ({
   [`${style}Color`]: textColor,
   [`${style}BorderColor`]: darken(borderColor, 10),
   [`${style}Background`]: backgroundColor,

@@ -34,6 +34,9 @@ describe('colors', () => {
     it('should meet 3:1 contrast as a text color with `backgroundLight` background', () => {
       expect(contrast(colors.textDarkest, colors.backgroundLight)).to.be.above(3)
     })
+    it('should meet 3:1 contrast as a text color with `masteryLevelNearMastery` background', () => {
+      expect(contrast(colors.textDarkest, colors.masteryLevelNearMastery)).to.be.above(3)
+    })
   })
   describe('textDark', () => {
     it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
@@ -69,6 +72,15 @@ describe('colors', () => {
     })
     it('should meet 3:1 contrast as a text color with `backgroundWarning` background', () => {
       expect(contrast(colors.textLightest, colors.backgroundWarning)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `masteryLevelExceedsMastery` background', () => {
+      expect(contrast(colors.textLightest, colors.masteryLevelExceedsMastery)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `masteryLevelMastery` background', () => {
+      expect(contrast(colors.textLightest, colors.masteryLevelMastery)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `masteryLevelRemediation` background', () => {
+      expect(contrast(colors.textLightest, colors.masteryLevelRemediation)).to.be.above(3)
     })
   })
   describe('textBrand', () => {
