@@ -137,6 +137,11 @@ class Select extends Component {
     */
     constrain: PositionPropTypes.constrain,
     /**
+     * An element or a function returning an element to use mount the options
+     * list to in the DOM (defaults to `document.body`)
+     */
+    mountNode: PositionPropTypes.mountNode,
+    /**
     * Callback fired when text input receives focus.
     */
     onFocus: PropTypes.func,
@@ -205,6 +210,7 @@ class Select extends Component {
     messages: undefined,
     placement: 'bottom stretch',
     constrain: 'window',
+    mountNode: undefined,
     onFocus: (event) => {},
     onBlur: (event) => {},
     onInputChange: undefined,
@@ -634,6 +640,7 @@ class Select extends Component {
       size,
       constrain,
       placement,
+      mountNode,
       assistiveText,
       isShowingOptions
     } = this.props
@@ -673,6 +680,7 @@ class Select extends Component {
             <Popover
               constrain={constrain}
               placement={placement}
+              mountNode={mountNode}
               positionTarget={this._inputContainer}
               isShowingContent={isShowingOptions}
               shouldReturnFocus={false}

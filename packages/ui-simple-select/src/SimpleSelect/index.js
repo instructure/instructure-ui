@@ -135,6 +135,11 @@ class SimpleSelect extends Component {
     */
     constrain: PositionPropTypes.constrain,
     /**
+     * An element or a function returning an element to use mount the options
+     * list to in the DOM (defaults to `document.body`)
+     */
+    mountNode: PositionPropTypes.mountNode,
+    /**
     * Callback fired when a new option is selected.
     * @param {Object} event - the event object
     * @param {Object} data - additional data
@@ -200,6 +205,7 @@ class SimpleSelect extends Component {
     visibleOptionsCount: 8,
     messages: undefined,
     placement: 'bottom stretch',
+    mountNode: undefined,
     constrain: 'window',
     onChange: (event, data) => {},
     onFocus: (event) => {},
@@ -469,6 +475,7 @@ class SimpleSelect extends Component {
       messages,
       placement,
       constrain,
+      mountNode,
       inputRef,
       listRef,
       renderEmptyOption,
@@ -500,6 +507,7 @@ class SimpleSelect extends Component {
         messages={messages}
         placement={placement}
         constrain={constrain}
+        mountNode={mountNode}
         ref={this.handleRef}
         inputRef={inputRef}
         listRef={listRef}
