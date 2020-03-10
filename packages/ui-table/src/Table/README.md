@@ -307,7 +307,7 @@ class SortableTable extends React.Component {
               caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
               {...props}
             >
-              <Table.Head>
+              <Table.Head renderSortLabel="Sort by">
                 <Table.Row>
                   {(headers || []).map(({ id, text }) => (
                     <Table.ColHeader
@@ -481,7 +481,7 @@ class SelectableTable extends React.Component {
               caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
               {...props}
             >
-              <Table.Head>
+              <Table.Head renderSortLabel={<ScreenReaderContent>Sort by</ScreenReaderContent>}>
                 <Table.Row>
                   <Table.ColHeader id="select">
                     <Checkbox

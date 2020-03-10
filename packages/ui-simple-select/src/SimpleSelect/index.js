@@ -376,9 +376,7 @@ class SimpleSelect extends Component {
       return
     }
 
-    const prevId = this.state.selectedOptionId
-    // selected option is not already selected
-    const option = prevId !== id ? this.getOption('id', id) : null
+    const option = this.getOption('id', id)
     const value = option && option.props.value
 
     if (this.isControlled) {
@@ -415,7 +413,7 @@ class SimpleSelect extends Component {
     return children
   }
 
-  renderEmptyOption() {
+  renderEmptyOption () {
     return (
       <Select.Option
         id={this._emptyOptionId}
@@ -428,7 +426,14 @@ class SimpleSelect extends Component {
   }
 
   renderOption (option) {
-    const {id, value, children, ...rest} = option.props
+    const {
+      id,
+      value,
+      children,
+      renderBeforeLabel,
+      renderAfterLabel,
+      ...rest
+    } = option.props
     return (
       <Select.Option
         id={id}
@@ -437,6 +442,8 @@ class SimpleSelect extends Component {
         isHighlighted={id === this.state.highlightedOptionId}
         isSelected={id === this.state.selectedOptionId}
         isDisabled={option.props.isDisabled}
+        renderBeforeLabel={renderBeforeLabel}
+        renderAfterLabel={renderAfterLabel}
         {...passthroughProps(rest)}
       >
         { children }
@@ -457,7 +464,7 @@ class SimpleSelect extends Component {
     )
   }
 
-  render() {
+  render () {
     const {
       renderLabel,
       value,

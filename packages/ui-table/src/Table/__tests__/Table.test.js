@@ -24,11 +24,16 @@
 
 import React from 'react'
 import { expect, mount, stub, find, findAll, within } from '@instructure/ui-test-utils'
-
+/* eslint-disable no-restricted-imports */
+import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSelect/SimpleSelectLocator'
+/* eslint-enable no-restricted-imports */
 import { Table } from '../index'
 import styles from '../Row/styles.css'
 
 describe('<Table />', async () => {
+  beforeEach(async () => {
+    stub(console, 'warn') // suppress experimental warnings
+  })
   const render = (props) => mount(
     <Table
       caption="Test table"
@@ -181,17 +186,21 @@ describe('<Table />', async () => {
   })
 
   describe('when table is sortable', async () => {
-    const renderSortableTable = (props, layout = 'auto') => mount(
+    const renderSortableTable = (props, handlers = {}, layout = 'auto') => mount(
       <Table
         caption="Sortable table"
         layout={layout}
       >
         <Table.Head>
           <Table.Row>
-            <Table.ColHeader id="foo" {...props}>Foo</Table.ColHeader>
-            <Table.ColHeader id="bar">Bar</Table.ColHeader>
+            <Table.ColHeader id="foo" {...props} {...handlers}>Foo</Table.ColHeader>
+            <Table.ColHeader id="bar" {...handlers}>Bar</Table.ColHeader>
           </Table.Row>
         </Table.Head>
+        <Table.Body>
+          <Table.Row></Table.Row>
+          <Table.Row></Table.Row>
+        </Table.Body>
       </Table>
     )
 
@@ -216,7 +225,7 @@ describe('<Table />', async () => {
     it('calls onRequestSort when column header is clicked', async () => {
       const onRequestSort = stub()
 
-      await renderSortableTable({
+      await renderSortableTable({},{
         onRequestSort,
       })
       const button = await find('th button')
@@ -228,20 +237,26 @@ describe('<Table />', async () => {
     it('can render table head as a combobox when in stacked layout', async () => {
       const sortFoo = stub()
 
-      await renderSortableTable({
+      await renderSortableTable({},{
         onRequestSort: sortFoo,
       }, 'stacked')
-      const input = await find('input[role="combobox"]')
+      const select = await SimpleSelectLocator.find()
+      const input = await select.findInput()
 
-      await input.keyDown('down')
-      await input.keyDown('enter')
+      await input.click()
+
+      const list = await select.findOptionsList()
+      const options = await list.findAll('[role="option"]')
+
+      await options[1].click()
       expect(sortFoo).to.have.been.calledOnce()
     })
 
     it('can render check mark for sorted column in stacked layout', async () => {
       await renderSortableTable({
-        onRequestSort: stub(),
-        sortDirection: 'ascending',
+        sortDirection: 'ascending'
+      },{
+        onRequestSort: stub()
       }, 'stacked')
       const icon = await find('svg[name="IconCheck"]')
 

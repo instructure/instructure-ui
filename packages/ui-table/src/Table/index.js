@@ -81,7 +81,7 @@ class Table extends Component {
      * while `fixed` forces columns of equal width. `stacked` renders table in one
      * column to be more readable on narrow screens
      */
-    layout: PropTypes.oneOf(['auto', 'fixed', 'stacked']),
+    layout: PropTypes.oneOf(['auto', 'fixed', 'stacked'])
   }
 
   static defaultProps = {
@@ -89,7 +89,7 @@ class Table extends Component {
     hover: false,
     layout: 'auto',
     margin: undefined,
-    elementRef: undefined
+    elementRef: undefined,
   }
 
   static Head = Head
@@ -141,7 +141,7 @@ class Table extends Component {
           if (matchComponentTypes(child, [Head])) {
             return safeCloneElement(child, {
               key: child.props.name,
-              isStacked,
+              isStacked
             })
           }
           if (matchComponentTypes(child, [Body])) {
@@ -149,7 +149,7 @@ class Table extends Component {
               key: child.props.name,
               isStacked,
               hover,
-              headers,
+              headers
             })
           }
           return null

@@ -26,10 +26,12 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { omitProps, matchComponentTypes } from '@instructure/ui-react-utils'
+import { omitProps, matchComponentTypes, callRenderProp } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { Select } from '@instructure/ui-forms'
+import { SimpleSelect } from '@instructure/ui-simple-select'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconCheckLine } from '@instructure/ui-icons'
+import { warn } from '@instructure/console'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -51,7 +53,8 @@ class Head extends Component {
      * `Table.Row`
      */
     children: ChildrenPropTypes.oneOf([Row]),
-    isStacked: PropTypes.bool
+    isStacked: PropTypes.bool,
+    renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   }
   /* eslint-enable react/require-default-props */
 
@@ -59,8 +62,27 @@ class Head extends Component {
     children: null
   }
 
+  get isSortable () {
+    const [ row ] = Children.toArray(this.props.children)
+    let sortable = false
+
+    Children.forEach(row.props.children, (colHeader) => {
+      if (matchComponentTypes(colHeader, [ColHeader])) {
+        if (colHeader.props.onRequestSort) sortable = true
+      }
+    })
+
+    return sortable
+  }
+
+  componentDidUpdate () {
+    if (this.isSortable && typeof this.props.renderSortLabel === 'undefined') {
+      warn(false, '[Table.Head] The `renderSortLabel` prop should be provided when Table is sortable.')
+    }
+  }
+
   renderSelect () {
-    const { children } = this.props
+    const { children, renderSortLabel } = this.props
     const [ row ] = Children.toArray(children)
 
     if (!matchComponentTypes(row, [Row])) {
@@ -88,31 +110,37 @@ class Head extends Component {
     if (!options.length) {
       return null
     }
-    const handleSelect = (event, { value }) => clickHandlers[value](event, {
-      id: value,
-    })
-
+    const handleSelect = (event, { value }) => {
+      clickHandlers[value](event, { id: value })
+    }
     return (
       <div role="rowgroup">
         <div role="row">
           <div role="cell" aria-colspan={count}>
-            <Select
-              label=""
-              selectedOption={selectedOption}
+            <SimpleSelect
+              __dangerouslyIgnoreExperimentalWarnings
+              renderLabel={renderSortLabel
+                ? callRenderProp(renderSortLabel)
+                : <ScreenReaderContent></ScreenReaderContent>
+              }
+              renderBeforeInput={selectedOption && IconCheckLine}
+              value={selectedOption}
               onChange={handleSelect}
             >
               {options.map((option) => (
-                <option
+                <SimpleSelect.Option
+                  id={option}
                   key={option}
                   value={option}
-                  icon={option === selectedOption
+                  renderBeforeLabel={option === selectedOption
                     ? IconCheckLine
-                    : () => <IconCheckLine style={{color: 'transparent'}} />}
+                    : () => <IconCheckLine style={{color: 'transparent'}} />
+                  }
                 >
                   {option}
-                </option>
+                </SimpleSelect.Option>
               ))}
-            </Select>
+            </SimpleSelect>
           </div>
         </div>
       </div>
