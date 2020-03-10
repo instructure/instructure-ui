@@ -537,6 +537,7 @@ class Menu extends Component {
       placement,
       withArrow,
       trigger,
+      mountNode,
       popoverRef,
       disabled,
       onDismiss,
@@ -553,6 +554,7 @@ class Menu extends Component {
           this.handleToggle(false)
         }}
         onShowContent={() => this.handleToggle(true)}
+        mountNode={mountNode}
         placement={placement}
         withArrow={withArrow}
         id={this._id}

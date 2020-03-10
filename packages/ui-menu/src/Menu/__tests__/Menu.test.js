@@ -157,6 +157,27 @@ describe('<Menu />', async () => {
   })
 
   describe('with a trigger', async () => {
+    it('should render into a mountNode', async () => {
+      const mountNode = document.createElement('div')
+
+      document.body.appendChild(mountNode)
+
+      await mount(
+        <Menu
+          defaultShow
+          mountNode={mountNode}
+          label="Settings"
+          trigger={<button>Settings</button>}
+        >
+          <MenuItem>Account</MenuItem>
+        </Menu>
+      )
+
+      expect(mountNode.innerText).to.equal('Account')
+
+      document.body.removeChild(mountNode)
+    })
+
     it('should set aria attributes properly', async () => {
       await mount(
         <Menu
