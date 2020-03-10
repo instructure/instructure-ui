@@ -31,7 +31,13 @@ import { Popover } from '@instructure/ui-popover'
 import { Selectable } from '@instructure/ui-selectable'
 import { TextInput } from '@instructure/ui-text-input'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { getInteraction, callRenderProp, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
+import {
+  getInteraction,
+  callRenderProp,
+  safeCloneElement,
+  deprecated,
+  passthroughProps
+} from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
 import { PositionPropTypes } from '@instructure/ui-position'
 import { FormPropTypes } from '@instructure/ui-form-field'
@@ -366,7 +372,15 @@ class DateInput extends Component {
       isInline,
       layout,
       width,
-      messages
+      messages,
+      onRequestValidateDate,
+      onRequestShowCalendar,
+      onRequestHideCalendar,
+      onRequestSelectNextDay,
+      onRequestSelectPrevDay,
+      onRequestRenderNextMonth,
+      onRequestRenderPrevMonth,
+      ...rest
     } = this.props
 
     const { interaction } = this
@@ -379,6 +393,7 @@ class DateInput extends Component {
     return (
       <TextInput
         {...triggerProps}
+        {...passthroughProps(rest)}
         {...getInputProps({
           renderLabel: callRenderProp(renderLabel || label),
           value,

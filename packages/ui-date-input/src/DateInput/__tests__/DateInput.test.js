@@ -74,10 +74,6 @@ describe('<DateInput />', async () => {
     expect(await dateInput.findCalendar()).to.exist()
   })
 
-  describe('with generated examples', async () => {
-    generateA11yTests(Examples)
-  })
-
   describe('input', async () => {
     it('should render a label', async () => {
       const renderLabel = 'Choose date'
@@ -277,6 +273,23 @@ describe('<DateInput />', async () => {
       await wait (() => {
         expect(dateInput).to.contain.text(text, { exact: false })
       })
+    })
+
+    it('should allow custom props to pass through', async () => {
+      await mount(
+        <DateInput
+          renderLabel="Choose a date"
+          renderWeekdayLabels={weekdayLabels}
+          data-custom-attr="true" name="my name"
+        >
+          {generateDays()}
+        </DateInput>
+      )
+      const dateInput = await DateInputLocator.find()
+      const input = await dateInput.findInput()
+
+      expect(input.getAttribute('data-custom-attr')).to.equal('true')
+      expect(input.getAttribute('name')).to.equal('my name')
     })
   })
 
@@ -822,4 +835,9 @@ describe('<DateInput />', async () => {
         .to.equal(selectedDay.getAttribute('id'))
     })
   })
+
+  describe('with generated examples', async () => {
+    generateA11yTests(Examples)
+  })
+
 })
