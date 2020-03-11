@@ -322,6 +322,21 @@ describe('<Select />', async () => {
       expect(input.getAttribute('data-custom-attr')).to.equal('true')
     })
 
+    it('should allow override of autoComplete prop', async () => {
+      const subject = await mount(
+        <Select renderLabel="Choose an option">
+          {getOptions()}
+        </Select>
+      )
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+
+      expect(input.getAttribute('autocomplete')).to.equal('off')
+
+      await subject.setProps({ autoComplete: 'false'})
+      expect(input.getAttribute('autocomplete')).to.equal('false')
+    })
+
     it('should provide a ref to the input element', async () => {
       const inputRef = stub()
       await mount(

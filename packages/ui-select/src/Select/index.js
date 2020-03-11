@@ -585,17 +585,20 @@ class Select extends Component {
     } = this.props
 
     const { interaction } = this
-
     const passthroughProps = omitProps(rest, Select.propTypes)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
     const isEditable = typeof onInputChange !== 'undefined'
     // props to ensure screen readers treat uneditable selects as accessible
     // popup buttons rather than comboboxes.
-    const uneditableProps = !isEditable ? {
+    const overrideProps = !isEditable ? {
       role: 'button',
       title: inputValue,
       'aria-autocomplete': null
     } : {}
+    // backdoor to autocomplete attr to work around chrome autofill issues
+    if (passthroughProps['autoComplete']) {
+      overrideProps.autoComplete = passthroughProps['autoComplete']
+    }
 
     return (
       <TextInput
@@ -620,7 +623,7 @@ class Select extends Component {
           onChange: onInputChange,
           onFocus,
           onBlur: createChainedFunction(onBlur, onRequestHideOptions),
-          ...uneditableProps
+          ...overrideProps
         })}
       />
     )
