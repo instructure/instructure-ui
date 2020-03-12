@@ -451,7 +451,9 @@ class View extends Component {
       // Flex.Item:
       'flexBasis',
       // Avatar:
-      'backgroundImage'
+      'backgroundImage',
+      // Popover:
+      'pointerEvents'
     ])
 
     if (cursor) {

@@ -745,6 +745,14 @@ class Popover extends Component {
         }
       }
 
+      if (this.isTooltip) {
+        // preventing pointerEvents reduces tooltip flicker
+        viewProps = {
+          ...viewProps,
+          style: { pointerEvents: 'none' }
+        }
+      }
+
       return (
         <ViewElement {...viewProps}>
           {content}

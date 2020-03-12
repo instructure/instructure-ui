@@ -62,7 +62,8 @@ describe('<View />', async () => {
       position: 'absolute',
       transform: 'translate(30px, 15px)',
       overflow: 'hidden',
-      display: 'block'
+      display: 'block',
+      pointerEvents: 'none'
     }
 
     const subject = await mount(
@@ -81,6 +82,7 @@ describe('<View />', async () => {
     expect(styles['transform']).to.equal('translate(30px, 15px)')
     expect(styles['overflow']).to.equal('hidden')
     expect(styles['display']).to.equal('block')
+    expect(styles['pointerEvents']).to.equal('none')
   })
 
   it('should pass flex style', async () => {

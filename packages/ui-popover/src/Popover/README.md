@@ -37,6 +37,7 @@ example: true
     </Link>
   }
   shouldRenderOffscreen
+  shouldReturnFocus={false}
   placement="top center"
   mountNode={() => document.getElementById('main')}
   onPositioned={() => console.log('positioned')}
