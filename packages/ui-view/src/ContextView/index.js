@@ -55,12 +55,15 @@ class ContextView extends Component {
     elementRef: PropTypes.func,
 
     /**
-    * Set the margin using familiar CSS shorthand
+    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
-
     /**
-    * Set the padding using familiar CSS shorthand
+    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
     */
     padding: ThemeablePropTypes.spacing,
 

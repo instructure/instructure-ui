@@ -63,9 +63,11 @@ class Pages extends Component {
     onPageIndexChange: PropTypes.func,
 
     /**
-    * Set the margin using familiar CSS shorthand
+    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing
+   margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {
