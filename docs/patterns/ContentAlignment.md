@@ -18,6 +18,7 @@ id: ContentAlignment
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View as="div" minHeight="31.25rem" minWidth="16.66rem">
   <Flex alignItems="stretch">

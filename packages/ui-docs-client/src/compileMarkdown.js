@@ -33,6 +33,7 @@ import { Img } from '@instructure/ui-img'
 import { Link } from '@instructure/ui-link'
 import { Text } from '@instructure/ui-text'
 import { CodeEditor } from '@instructure/ui-code-editor'
+import { ApplyTheme } from '@instructure/ui-themeable'
 
 import { Playground } from './Playground'
 import { Preview } from './Preview'
@@ -214,6 +215,7 @@ function createRenderer () {
         const matter = grayMatter(trimIndent(code))
         const readOnly = matter.data ? matter.data.readOnly : true
         const title = tracker.context.title || matter.data.title || 'Code example'
+        const theme = (matter.data || {}).theme
         const data = {matter, readOnly, title, language}
 
         if (language.indexOf('_guidelines') >= 0 || matter.data.guidelines) {
@@ -228,7 +230,7 @@ function createRenderer () {
           compileAndRenderExample({
             code: matter.content,
             render: (_el) => {
-              el = _el
+              el = theme ? <ApplyTheme theme={ApplyTheme.generateTheme(theme)}>{_el}</ApplyTheme> : _el
             },
             shouldCallRender: matter.data.render,
             onError: (err) => {

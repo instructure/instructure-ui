@@ -92,6 +92,7 @@ This table describes the upgrade process. If the `variant prop` is set to one of
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <div>
 <Button margin="medium small small 0">Default</Button><Button margin="medium 0 small 0" renderIcon={IconHeartLine}>Default</Button>
@@ -110,6 +111,7 @@ embed: true
  ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <div>
 <Button color="primary" margin="medium small small 0">Primary</Button><Button color="primary" margin="medium 0 small 0" renderIcon={IconHeartLine}>Primary</Button>
@@ -128,6 +130,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <div>
 <Button color="success" margin="medium small small 0">Success</Button><Button color="success" margin="medium 0 small 0" renderIcon={IconHeartLine}>Success</Button>
@@ -146,6 +149,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <div>
 <Button color="danger" margin="medium small small 0">Danger</Button><Button color="danger" margin="medium 0 small 0" renderIcon={IconHeartLine}>Danger</Button>
@@ -164,6 +168,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <div>
 <Button color="primary-inverse" margin="medium small small 0">Primary Inverse</Button><Button color="primary-inverse" margin="medium 0 small 0" renderIcon={IconHeartLine}>Primary Inverse</Button>
@@ -182,6 +187,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <div>
 <Button color="primary" withBackground={false} margin="medium small small 0">Ghost</Button><Button color="primary" withBackground={false} margin="medium 0 small 0" renderIcon={IconHeartLine}>Ghost</Button>
@@ -200,6 +206,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" padding="small" margin="medium 0 small 0" background="primary-inverse">
 <Button color="primary-inverse" withBackground={false} margin="0 small 0 0">Ghost Inverse</Button><Button color="primary-inverse" withBackground={false} renderIcon={IconHeartLine}>Ghost Inverse</Button>
@@ -253,6 +260,7 @@ Note, the same `color` values described in the previous section would apply to _
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Do something" withBorder={false} withBackground={false} margin="medium 0 small 0" />
 ```
@@ -277,6 +285,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" margin="medium 0 small 0" padding="small" background="primary-inverse">
   <IconButton color="primary-inverse" renderIcon={IconXSolid} screenReaderLabel="Do something" withBorder={false} withBackground={false}/>
@@ -304,6 +313,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
@@ -326,6 +336,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} color="primary" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
@@ -349,6 +360,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} color="success" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
@@ -372,6 +384,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} color="danger" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
@@ -395,6 +408,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} color="primary-inverse" screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
@@ -418,6 +432,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} color="primary" withBackground={false} screenReaderLabel="Do something" margin="medium 0 small 0" />
 ```
@@ -442,6 +457,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" padding="x-small" margin="medium 0 small 0" background="primary-inverse">
 <IconButton renderIcon={IconXSolid} color="primary-inverse" withBackground={false} screenReaderLabel="Do something" margin="small" />
@@ -469,6 +485,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Close something" shape="circle" margin="medium 0 small 0" />
 ```
@@ -492,6 +509,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Close something" color="primary" shape="circle" margin="medium 0 small 0" />
 ``` 
@@ -516,6 +534,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <IconButton renderIcon={IconXSolid} screenReaderLabel="Close something" color="danger" shape="circle" margin="medium 0 small 0" />
 ``` 
@@ -575,6 +594,7 @@ When a button with the `link` variant set needed to align with other content or 
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" padding="medium" margin="medium 0 small 0" borderWidth="small">
   Some description of something<br />
@@ -606,6 +626,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" padding="medium" margin="medium 0 small 0" background="primary-inverse">
   Some description of something
@@ -642,6 +663,7 @@ If the button has padding overrides as described above, but does not have an `hr
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
  <View display="inline-block" padding="medium" margin="medium 0 small 0" borderWidth="small">
    Some description of something
@@ -671,6 +693,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" padding="medium" margin="medium 0 small 0" background="primary-inverse">
   Some description of something
@@ -699,6 +722,7 @@ Consider using a Button with the `color` set to "primary" or "primary-inverse" a
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <Button color="primary" withBackground={false} margin="small">Hello</Button>
 ```
@@ -713,6 +737,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" background="primary-inverse" margin="medium 0 small 0" >
   <Button color="primary-inverse" withBackground={false} margin="small">Hello</Button>
@@ -745,6 +770,7 @@ The following table describes the upgrade process for [CloseButton](#CloseButton
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <CloseButton color="primary" margin="small" screenReaderLabel="Close" />
 ```
@@ -759,6 +785,7 @@ embed: true
 ```javascript
 ---
 embed: true
+theme: 'canvas'
 ---
 <View display="inline-block" background="primary-inverse" margin="medium 0 small 0">
   <CloseButton color="primary-inverse" margin="small" screenReaderLabel="Close" />
