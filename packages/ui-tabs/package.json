@@ -30,8 +30,10 @@
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@instructure/console": "^6.26.0",
+    "@instructure/debounce": "^6.26.0",
     "@instructure/ui-dom-utils": "^6.26.0",
     "@instructure/ui-focusable": "^6.26.0",
+    "@instructure/ui-i18n": "^6.26.0",
     "@instructure/ui-motion": "^6.26.0",
     "@instructure/ui-prop-types": "^6.26.0",
     "@instructure/ui-react-utils": "^6.26.0",

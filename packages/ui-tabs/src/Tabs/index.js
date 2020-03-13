@@ -36,6 +36,10 @@ import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Focusable } from '@instructure/ui-focusable'
+import { addResizeListener, getBoundingClientRect } from '@instructure/ui-dom-utils'
+import { debounce } from '@instructure/debounce'
+import { px } from '@instructure/ui-utils'
+import { bidirectional } from '@instructure/ui-i18n'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
@@ -55,6 +59,7 @@ category: components
   focus: 'shouldFocusOnRender'
 })
 @testable()
+@bidirectional()
 @themeable(theme, styles)
 class Tabs extends Component {
   static propTypes = {
@@ -88,6 +93,11 @@ class Tabs extends Component {
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     elementRef: PropTypes.func,
+    /**
+    * Choose whether Tabs should stack or scroll when they exceed the width of their
+    * container.
+    */
+    tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
     shouldFocusOnRender: PropTypes.bool,
     /**
     * deprecated
@@ -123,13 +133,33 @@ class Tabs extends Component {
     elementRef: (el) => {},
     screenReaderLabel: undefined,
     focus: undefined,
-    shouldFocusOnRender: false
+    shouldFocusOnRender: false,
+    tabOverflow: 'stack'
   }
 
   static Panel = Panel
   static Tab = Tab
 
+  constructor (props) {
+    super()
+
+    this._tabList = null
+    this._tabListPosition = null
+
+    this.state = {
+      withTabListOverflow: false
+    }
+  }
+
   componentDidMount () {
+    if (this.props.tabOverflow === 'scroll' && this._tabList) {
+      this.startScrollOverflow()
+
+      // make sure active tab is always visible
+      const activeTabEl = this._tabList.querySelector('[aria-selected="true"]')
+      this.showActiveTabIfOverlayed(activeTabEl)
+    }
+
     if (this.props.focus || this.props.shouldFocusOnRender) {
       this.focus()
     }
@@ -138,6 +168,88 @@ class Tabs extends Component {
   componentDidUpdate (prevProps) {
     if ((this.props.focus && !prevProps.focus) || (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender)) {
       this.focus()
+    }
+
+    // start event listeners for scroll overflow
+    if (prevProps.tabOverflow === 'stack' && this.props.tabOverflow === 'scroll') {
+      this.startScrollOverflow()
+    }
+
+    // cancel event listeners for scroll overflow
+    if (prevProps.tabOverflow === 'scroll' && this.props.tabOverflow === 'stack') {
+      this.cancelScrollOverflow()
+    }
+  }
+
+  componentWillUnmount () {
+    this.cancelScrollOverflow()
+  }
+
+  startScrollOverflow () {
+    this.handleResize()
+
+    this._debounced = debounce(this.handleResize, 300, { leading: true, trailing: true })
+    this._resizeListener = addResizeListener(this._tabList, this._debounced)
+    this._tabListPosition = getBoundingClientRect(this._tabList)
+  }
+
+  cancelScrollOverflow () {
+    if (this._resizeListener) {
+      this._resizeListener.remove()
+    }
+
+    if (this._debounced) {
+      this._debounced.cancel()
+    }
+  }
+
+  getOverlayWidth () {
+    const {
+      variant,
+      tabOverflow
+    } = this.props
+
+    if (tabOverflow === 'scroll') {
+      if (variant === 'default') {
+        return px(this.theme.scrollOverlayWidthDefault)
+      } else {
+        return px(this.theme.scrollOverlayWidthSecondary)
+      }
+    }
+  }
+
+  showActiveTabIfOverlayed (activeTabEl) {
+    if (
+      this._tabList
+      && this._tabListPosition
+      && typeof this._tabList.scrollTo === 'function' // test for scrollTo support
+    ) {
+      const rtl = this.dir === bidirectional.DIRECTION.rtl
+
+      const tabPosition = getBoundingClientRect(activeTabEl)
+      const tabListPosition = this._tabListPosition
+
+      const tabListBoundStart = rtl ? tabListPosition.left + this.getOverlayWidth() : tabListPosition.left
+      const tabListBoundEnd = rtl ?  tabListPosition.right : tabListPosition.right + this.getOverlayWidth()
+
+      const tabPositionStart = tabPosition.left
+      const tabPositionEnd = tabPosition.right
+
+      if (tabListBoundEnd > tabPositionEnd) {
+        const offset = Math.round(tabListBoundEnd - tabPositionEnd)
+        this._tabList.scrollTo({
+          top: 0,
+          left: this._tabList.scrollLeft + offset,
+          behavior: 'smooth'
+        })
+      } else if (tabListBoundStart > tabPositionStart) {
+        const offset = Math.round(tabListBoundStart - tabPositionStart)
+        this._tabList.scrollTo({
+          top: 0,
+          left: this._tabList.scrollLeft - offset,
+          behavior: 'smooth'
+        })
+      }
     }
   }
 
@@ -156,11 +268,18 @@ class Tabs extends Component {
       // Select next tab to the right
       nextTab = this.getNextTab(index, 1)
     }
-
     if (nextTab) {
       event.preventDefault()
       this.fireOnChange(event, nextTab)
     }
+  }
+
+  handleResize = () => {
+    this.setState({
+      withTabListOverflow: this._tabList.scrollWidth > this._tabList.offsetWidth,
+    })
+
+    this._tabListPosition = getBoundingClientRect(this._tabList)
   }
 
   getNextTab (startIndex, step) {
@@ -180,7 +299,6 @@ class Tabs extends Component {
     } while (nextTab && nextTab.props && (nextTab.props.disabled || nextTab.props.isDisabled))
 
     error((nextIndex >= 0 && nextIndex < count), `[Tabs] Invalid tab index: '${nextIndex}'.`)
-
     return { index: nextIndex, id: nextTab.props.id }
   }
 
@@ -192,6 +310,8 @@ class Tabs extends Component {
     if (typeof this.props.onRequestTabChange === 'function') {
       this.props.onRequestTabChange(event, { index, id })
     }
+
+    this.state.withTabListOverflow && this.showActiveTabIfOverlayed(this._tabList.querySelector(`#tab-${id}`))
   }
 
   createTab (index, generatedId, selected, panel) {
@@ -235,6 +355,10 @@ class Tabs extends Component {
     this._focusable = el
   }
 
+  handleTabListRef = (el) => {
+    this._tabList = el
+  }
+
   focus () {
     this._focusable && typeof this._focusable.focus === 'function' && this._focusable.focus()
   }
@@ -251,6 +375,7 @@ class Tabs extends Component {
       margin,
       screenReaderLabel,
       onRequestTabChange,
+      tabOverflow,
       onChange,
       ...props
     } = this.props
@@ -277,6 +402,19 @@ class Tabs extends Component {
       }
     })
 
+    const withScrollFade = tabOverflow === 'scroll' && this.state.withTabListOverflow
+
+    // suppress overlay whenever final Tab is active, or Firefox will cover it
+    const scrollOverlay =
+      selectedIndex !== React.Children.count(children) - 1 ?
+      <span key="overlay" className={styles.scrollOverlay} /> : null
+
+    const scrollFadeEls = [
+      // spacer element prevents final Tab from being obscured by scroll overflow gradient
+      <span key="spacer" className={styles.scrollSpacer} />,
+      scrollOverlay
+    ]
+
     return (
       <View
         {...passthroughProps(props)}
@@ -285,23 +423,32 @@ class Tabs extends Component {
         margin={margin}
         as="div"
         className={classnames({
-          [styles[variant]]: true
+          [styles[variant]]: true,
         })}
       >
         <Focusable ref={this.handleFocusableRef}>
           {({ focusVisible }) => (
             <View
               as="div"
-              display="flex"
               position="relative"
               borderRadius="medium"
               withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
-              role="tablist"
               className={styles.tabs}
-              aria-label={screenReaderLabel}
             >
-              {tabs}
+              <View
+                as="div"
+                role="tablist"
+                className={classnames({
+                  [styles.tabList]: true,
+                  [styles[`tabOverflow--${tabOverflow}`]]: true
+                })}
+                aria-label={screenReaderLabel}
+                elementRef={this.handleTabListRef}
+              >
+                {tabs}
+                { withScrollFade && scrollFadeEls }
+              </View>
             </View>
           )}
         </Focusable>

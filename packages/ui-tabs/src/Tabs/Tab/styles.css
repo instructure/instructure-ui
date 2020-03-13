@@ -28,14 +28,19 @@
 }
 
 .secondary {
-  box-sizing: border-box;
-  padding: 0.7em 1em;
+  /*
+  * if you change the horizontal-axis Tab padding below,
+  * update the with of the .scrollOverlay element
+  * in Tabs/styles.css for the secondary variant.
+  */
+  padding: 0.75rem 1rem;
   color: var(--secondaryColor);
   margin-inline-end: 0.2em;
   margin-bottom: -0.0625rem; /* To overlay Tab over TabPanel top border */
   border: 0.0625rem solid transparent;
   border-top-left-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
   border-top-right-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
+  position: relative;
 
   &:first-of-type {
     margin-inline-start: 0;
@@ -67,6 +72,11 @@
 }
 
 .default {
+  /*
+  * If you change the horizontal-axis Tab padding below,
+  * update the width of the .scrollOverlay element in
+  * Tabs/styles.css for the default variant.
+  */
   padding: 1rem 1.25rem;
   line-height: 1;
   position: relative;
@@ -75,11 +85,11 @@
 
   &::after {
     content: "";
-    height: 0.25rem;
+    height: 0.25rem; /* if this is updated, also update .withScrollFade in Tabs/styles.css */
     width: 100%;
     position: absolute;
     inset-inline-start: 0;
-    bottom: -0.0625rem;
+    bottom: 0;
 
     /* rules to animate from */
     opacity: 0;
@@ -95,11 +105,11 @@
   }
 
   &[aria-selected]::after {
+    background-color: var(--defaultSelectedBorderColor);
     animation-name: selectedTab;
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
-    background-color: var(--defaultSelectedBorderColor);
   }
 }
 

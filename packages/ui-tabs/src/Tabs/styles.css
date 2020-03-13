@@ -22,11 +22,73 @@
  * SOFTWARE.
  */
 
-.tabs {
+.default {
+  background: var(--defaultBackground);
+}
+
+.default .tabs {
+  /* give the selected default tab the appearance of overlaying the bottom border */
+  margin-bottom: calc(var(--tabVerticalOffset) * -1);
+}
+
+.tabList {
   display: flex;
+  width: 100%;
+}
+
+.tabOverflow--stack {
   flex-flow: row wrap;
 }
 
-.default {
-  background: var(--defaultBackground);
+.tabOverflow--scroll {
+  overflow-x: auto;
+}
+
+.default .tabOverflow--scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.default .tabOverflow--scroll::-webkit-scrollbar {
+  height: 0.0625rem;
+  background-color: transparent;
+}
+
+.default .tabOverflow--scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.scrollOverlay {
+  height: calc(100% - (var(--tabVerticalOffset) + 0.25rem));
+  position: absolute;
+  z-index: var(--zIndex);
+  top: 0;
+  inset-inline-end: 0;
+  background: linear-gradient(to left, var(--scrollFadeColor) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+[dir="rtl"] .scrollOverlay {
+  background: linear-gradient(to right, var(--scrollFadeColor) 0%, rgba(255, 255, 255, 0) 100%);
+  inset-inline-end: auto;
+  inset-inline-start: 0;
+}
+
+.default .scrollOverlay {
+  width: var(--scrollOverlayWidthDefault);
+}
+
+.secondary .scrollOverlay {
+  width: var(--scrollOverlayWidthSecondary);
+}
+
+.scrollSpacer {
+  flex-shrink: 0;
+}
+
+.default .scrollSpacer {
+  flex-basis: var(--scrollOverlayWidthDefault);
+}
+
+.secondary .scrollSpacer {
+  flex-basis: var(--scrollOverlayWidthSecondary);
 }

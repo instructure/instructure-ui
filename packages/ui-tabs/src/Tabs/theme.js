@@ -22,11 +22,16 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, breakpoints }) {
+export default function generator ({ borders, colors, breakpoints, stacking }) {
   return {
     defaultBackground: colors.backgroundLightest,
+    scrollFadeColor: colors.backgroundLightest,
+    tabVerticalOffset: borders.widthSmall, // gives effect of selected tab "bar" overlaying bottom border
+    zIndex: stacking.above,
     small: breakpoints.small,
     medium: breakpoints.medium,
-    large: breakpoints.large
+    large: breakpoints.large,
+    scrollOverlayWidthDefault: '5rem', /* 4 times the padding of a default Tab. If Tab padding changes, update this value. */
+    scrollOverlayWidthSecondary: '3rem' /* 3 times the padding of a secondary Tab. If Tab padding changes, update this value. */
   }
 }
