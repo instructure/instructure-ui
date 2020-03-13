@@ -30,6 +30,10 @@ const contentLong = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ma
 export default {
   sectionProp: 'variant',
   excludeProps: ['size', 'selectedIndex', 'onChange'],
+  filter: (props) => {
+    if (props.tabOverflow === 'scroll' && props.variant === 'secondary') return true
+    return false
+  },
   getComponentProps: (props) => {
     return {
       margin: 'large',

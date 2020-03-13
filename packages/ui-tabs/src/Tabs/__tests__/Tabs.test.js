@@ -28,6 +28,8 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
 
+import styles from '../styles.css'
+
 describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {
     await mount(
@@ -387,6 +389,34 @@ describe('<Tabs />', async () => {
       const tabs = await TabsLocator.find()
       const tabPanels = await tabs.findAllTabPanels()
       expect(tabPanels).to.have.length(3)
+    })
+  })
+
+
+  describe('with tabOverflow set to scroll', async () => {
+    it('should render a fade-out gradient when Tabs overflow', async () => {
+      const Example = ({ width }) => (
+        <div style={{ width }}>
+          <Tabs tabOverflow="scroll">
+            <Tabs.Panel renderTitle="Tab1">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab2">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab3">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab4">Contents of panel</Tabs.Panel>
+            <Tabs.Panel renderTitle="Tab5">Contents of panel</Tabs.Panel>
+          </Tabs>
+        </div>
+      )
+
+      const subject = await mount(<Example width="200px" />)
+      const tabs = await TabsLocator.find()
+
+      expect(await tabs.find(`.${styles['scrollOverlay']}`)).to.exist()
+      expect(await tabs.find(`.${styles['scrollSpacer']}`)).to.exist()
+
+      await subject.setProps({ width: '550px' })
+
+      expect(await tabs.find(`.${styles['scrollOverlay']}`, { expectEmpty: true })).to.not.exist()
+      expect(await tabs.find(`.${styles['scrollSpacer']}`, { expectEmpty: true })).to.not.exist()
     })
   })
 })
