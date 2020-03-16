@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.22.0](https://github.com/instructure/instructure-ui/compare/v6.21.0...v6.22.0) (2020-03-16)
+
+
+### Bug Fixes
+
+* **ui-date-input:** allow passthrough props in DateInput ([7228baa](https://github.com/instructure/instructure-ui/commit/7228baa))
+* **ui-popover:** allow tooltip to manage its focus region ([8391f4f](https://github.com/instructure/instructure-ui/commit/8391f4f))
+* **ui-tag:** show cut off letter descenders ([b4cad27](https://github.com/instructure/instructure-ui/commit/b4cad27))
+* **ui-time-select:** make TimeSelect test less brittle ([42a90c7](https://github.com/instructure/instructure-ui/commit/42a90c7))
+
+
+### Features
+
+* **canvas-theme,ui-docs-client:** theme color docs enhancements ([69a1938](https://github.com/instructure/instructure-ui/commit/69a1938))
+* **ui-docs-client:** add Google analytics to docs app ([748c1e2](https://github.com/instructure/instructure-ui/commit/748c1e2))
+* **ui-docs-client:** ensure button upgrade examples render 'canvas theme' ([4d68de9](https://github.com/instructure/instructure-ui/commit/4d68de9))
+* **ui-menu:** restore support for mountNode ([b53ec24](https://github.com/instructure/instructure-ui/commit/b53ec24))
+* **ui-select:** allow override of autocomplete attr in Select ([41e09ac](https://github.com/instructure/instructure-ui/commit/41e09ac))
+* **ui-select,ui-simple-select:** add mountNode prop to Select ([a8b60a6](https://github.com/instructure/instructure-ui/commit/a8b60a6))
+* **ui-time-select:** add TimeSelect component ([1dfa39b](https://github.com/instructure/instructure-ui/commit/1dfa39b))
+
+
+
+
+
 # [6.21.0](https://github.com/instructure/instructure-ui/compare/v6.20.0...v6.21.0) (2020-02-26)
 
 
