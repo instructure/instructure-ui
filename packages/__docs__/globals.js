@@ -33,6 +33,8 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-layout'
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')
 
+import debounce from '@instructure/debounce'
+
 // eslint-disable-next-line no-restricted-imports
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
 // eslint-disable-next-line no-restricted-imports
@@ -52,6 +54,7 @@ theme.use()
 
 const globals = {
   ...Components,
+  debounce,
   moment,
   locales: moment.locales(),
   avatarSquare,

@@ -31,6 +31,7 @@
     "@instructure/canvas-ams-theme": "^6.24.0",
     "@instructure/canvas-high-contrast-theme": "^6.24.0",
     "@instructure/canvas-theme": "^6.24.0",
+    "@instructure/debounce": "^6.24.0",
     "@instructure/instructure-theme": "^6.24.0",
     "@instructure/ui-a11y": "^6.24.0",
     "@instructure/ui-a11y-content": "^6.24.0",
