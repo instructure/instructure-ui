@@ -24,6 +24,6 @@
 
 export default function ({ colors }) {
   return {
-    inverseBackground: colors.backgroundSecondary,
+    inverseBackground: colors.backgroundBrandSecondary
   }
 }

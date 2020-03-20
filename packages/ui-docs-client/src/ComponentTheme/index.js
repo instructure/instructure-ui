@@ -64,7 +64,7 @@ class ComponentTheme extends Component {
     const map = this.mapColors(colorKey)
 
     return Object.keys(theme).map((name) => {
-      const value = theme[name]
+      const value = theme[name] || 'undefined'
       const color = value.toString().charAt(0) === '#' ? map[value] : null
 
       return (
