@@ -22,29 +22,29 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-
-const formatSource = require('./utils/formatSource')
-const requireUncached = require('./utils/requireUncached')
-
-const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
-
-module.exports = function (file, api, options) {
-  const j = api.jscodeshift
-  const c = path.resolve(process.cwd(), options.config)
-  const config = fs.existsSync(c) ? requireUncached(c) : null
-
-  if (!config) {
-    throw new Error(`Invalid config file "${c}"`)
-  }
-
-  const root = j(file.source)
-  let hasModifications = false
-
-  hasModifications = replaceDeprecatedImports(j, root, config, api) || hasModifications
-
-  return hasModifications
-    ? formatSource(root.toSource())
-    : null
+module.exports = {
+  transformDefaults: {
+    importType: 'named'
+  },
+  transforms: [
+    {
+      where: {
+        moduleName: 'Foo',
+        packageName: 'instructure-ui'
+      },
+      transform: {
+        importType: undefined,
+        importPath: '@instructure/ui-foo'
+      }
+    },
+    {
+      where: {
+        importPattern: '^instructure-ui/time'
+      },
+      transform: {
+        importType: undefined,
+        importPath: '@instructure/time'
+      }
+    }
+  ]
 }

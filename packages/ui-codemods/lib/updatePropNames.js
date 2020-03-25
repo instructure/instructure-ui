@@ -25,6 +25,7 @@
 const fs = require('fs')
 const path = require('path')
 
+const formatSource = require('./utils/formatSource')
 const requireUncached = require('./utils/requireUncached')
 const replaceDeprecatedProps = require('./helpers/replaceDeprecatedProps')
 
@@ -43,6 +44,6 @@ module.exports = function (file, api, options) {
   hasModifications = replaceDeprecatedProps(j, root, config) || hasModifications
 
   return hasModifications
-    ? root.toSource({ quote: 'single', tabWidth: 2 })
+    ? formatSource(root.toSource())
     : null
 }

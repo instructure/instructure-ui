@@ -22,29 +22,19 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
+module.exports = function findImportDeclaration (j, root, importPath) {
+  let importDeclaration
 
-const formatSource = require('./utils/formatSource')
-const requireUncached = require('./utils/requireUncached')
+  const declarationQueryResult = root.find(j.ImportDeclaration, {
+    source: {
+      type: 'StringLiteral',
+      value: importPath
+    }
+  })
 
-const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
-
-module.exports = function (file, api, options) {
-  const j = api.jscodeshift
-  const c = path.resolve(process.cwd(), options.config)
-  const config = fs.existsSync(c) ? requireUncached(c) : null
-
-  if (!config) {
-    throw new Error(`Invalid config file "${c}"`)
+  if (declarationQueryResult.length > 0) {
+    importDeclaration = declarationQueryResult.get()
   }
 
-  const root = j(file.source)
-  let hasModifications = false
-
-  hasModifications = replaceDeprecatedImports(j, root, config, api) || hasModifications
-
-  return hasModifications
-    ? formatSource(root.toSource())
-    : null
+  return importDeclaration
 }

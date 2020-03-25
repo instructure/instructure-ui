@@ -34,10 +34,10 @@ const {
   getPackageList
 } = require('../utils/getPackageLists')
 
-module.exports = async ({ sourcePath, version, ignore, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig }) => {
+module.exports = async ({ sourcePath, scopeModifications, version, ignore, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig }) => {
   verifyPackageJson({ sourcePath })
 
-  handleExecuteCodemods({ sourcePath, version, ignore, parser, parserConfig })
+  handleExecuteCodemods({ sourcePath, scopeModifications, version, ignore, parser, parserConfig })
 
   info('Auditing Instructure UI dependencies...')
   const { missing, unused } = await checkInstuiDependencies({ sourcePath, version })

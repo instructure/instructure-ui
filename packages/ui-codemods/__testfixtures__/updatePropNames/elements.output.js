@@ -1,1 +1,1 @@
-<Modal open onOpen={() => {}} />
+const Modal = <Modal open onOpen={() => {}} />

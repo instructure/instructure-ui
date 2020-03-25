@@ -35,6 +35,14 @@ exports.builder = (yargs) => {
     default: process.cwd()
   })
 
+  yargs.option('scopeModifications', {
+    alias: 'scope-modifications',
+    type: 'array',
+    describe: 'Specify the scope of the code modifications. For example, specifying only `imports` will limit the code changes to imports only.',
+    choices: ['imports', 'props'],
+    default: ['imports', 'props']
+  })
+
   yargs.option('ignore', {
     alias: 'i',
     type: 'array',
@@ -79,6 +87,7 @@ exports.builder = (yargs) => {
 exports.handler = (argv) => {
   const {
     path,
+    scopeModifications,
     ignore,
     version,
     ignoreWorkspaceRootCheck,
@@ -87,5 +96,5 @@ exports.handler = (argv) => {
     parserConfig
   } = argv
 
-  handleUpgrade({ sourcePath: path, ignore, version, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig })
+  handleUpgrade({ sourcePath: path, scopeModifications, ignore, version, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig })
 }

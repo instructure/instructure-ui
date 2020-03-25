@@ -27,34 +27,38 @@ const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execut
 
 const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
 
-module.exports = ({ sourcePath, version, ignore, parser, parserConfig }) => {
+module.exports = ({ sourcePath, scopeModifications, version, ignore, parser, parserConfig }) => {
   info(`Applying codemods to ${sourcePath}\n`)
 
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updateImports.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'imports.config.json',
-      version
-    }),
-    ignore,
-    parser,
-    parserConfig
-  })
+  if (scopeModifications.includes('imports')) {
+    executeCodemods({
+      sourcePath,
+      codemodName: 'updateImports.js',
+      configPaths: getInstuiConfigPaths({
+        type: 'codemod-configs',
+        name: 'imports.config.js',
+        version
+      }),
+      ignore,
+      parser,
+      parserConfig
+    })
+  }
 
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updatePropNames.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'propNames.config.json',
-      version
-    }),
-    ignore,
-    parser,
-    parserConfig
-  })
+  if (scopeModifications.includes('props')) {
+    executeCodemods({
+      sourcePath,
+      codemodName: 'updatePropNames.js',
+      configPaths: getInstuiConfigPaths({
+        type: 'codemod-configs',
+        name: 'propNames.config.json',
+        version
+      }),
+      ignore,
+      parser,
+      parserConfig
+    })
+  }
 }
 
 const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore, parser, parserConfig }) => {

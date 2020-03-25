@@ -22,29 +22,58 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-
-const formatSource = require('./utils/formatSource')
-const requireUncached = require('./utils/requireUncached')
-
-const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
-
-module.exports = function (file, api, options) {
-  const j = api.jscodeshift
-  const c = path.resolve(process.cwd(), options.config)
-  const config = fs.existsSync(c) ? requireUncached(c) : null
-
-  if (!config) {
-    throw new Error(`Invalid config file "${c}"`)
-  }
-
-  const root = j(file.source)
-  let hasModifications = false
-
-  hasModifications = replaceDeprecatedImports(j, root, config, api) || hasModifications
-
-  return hasModifications
-    ? formatSource(root.toSource())
-    : null
+module.exports = {
+  transformDefaults: {
+    importType: 'named'
+  },
+  transforms: [
+    {
+      where: {
+        moduleName: 'Foo',
+        packageName: '@instructure/ui-foo'
+      },
+      transform: {
+        importType: 'default'
+      }
+    },
+    {
+      where: {
+        moduleName: 'Baz',
+        packageName: 'stuff'
+      },
+      transform: {
+        importPath: '@other/stuff',
+        importType: 'default'
+      }
+    },
+    {
+      where: {
+        moduleName: 'Qux',
+        packageName: 'stuff'
+      },
+      transform: {
+        importPath: 'more-stuff',
+        importType: 'default'
+      }
+    },
+    {
+      where: {
+        importPath: 'thing1'
+      },
+      transform: {
+        importPath: 'thing2',
+        importType: 'default'
+      }
+    },
+    {
+      where: {
+        moduleName: 'themeable',
+        importPath: 'themeable'
+      },
+      transform: {
+        importPath: '@instructure/ui-themeable',
+        importType: 'default'
+      }
+    }
+  ]
 }

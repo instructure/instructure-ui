@@ -39,7 +39,7 @@
     "globby": "^10.0.1",
     "http-server": "^0.11.1",
     "jira-client": "^6.11.0",
-    "jscodeshift": "^0.6.4",
+    "jscodeshift": "^0.7.0",
     "karma-cli": "^2.0.0",
     "lerna": "^3",
     "mocha": "^6.2.0",

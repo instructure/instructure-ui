@@ -1,2 +1,3 @@
-__testfixtures__
-__tests__
+/node_modules/**
+/__testfixtures__/**
+/__tests__/**

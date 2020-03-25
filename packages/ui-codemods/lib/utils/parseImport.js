@@ -22,29 +22,50 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
 const path = require('path')
 
-const formatSource = require('./utils/formatSource')
-const requireUncached = require('./utils/requireUncached')
+module.exports = function parseImport(importPath) {
+  let parsedImport = {}
 
-const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
+  if (!importPath) return {}
 
-module.exports = function (file, api, options) {
-  const j = api.jscodeshift
-  const c = path.resolve(process.cwd(), options.config)
-  const config = fs.existsSync(c) ? requireUncached(c) : null
+  const splitPath = importPath.split('/')
 
-  if (!config) {
-    throw new Error(`Invalid config file "${c}"`)
+  const parseSourceAndModule = (entries = []) => {
+    if (entries.length === 0) return {}
+
+    const lastEntry = entries[entries.length - 1]
+
+    const moduleOffset = path.parse(lastEntry).name === 'index' ? 2 : 1
+
+    const moduleName = entries[entries.length - moduleOffset]
+
+    return {
+      moduleName: moduleName ? path.parse(moduleName).name : undefined,
+      sourcePath: entries.slice(0, entries.length - moduleOffset).join('/')
+    }
   }
 
-  const root = j(file.source)
-  let hasModifications = false
+  if (importPath[0] === '@') {
+    const [scope, name, ...rest] = splitPath
 
-  hasModifications = replaceDeprecatedImports(j, root, config, api) || hasModifications
+    parsedImport = {
+      scope,
+      name,
+      fullName: `${scope}/${name}`,
+      moduleName: `${scope}/${name}`,
+      ...parseSourceAndModule(rest)
+    }
+  } else {
+    const [name, ...rest] = splitPath
 
-  return hasModifications
-    ? formatSource(root.toSource())
-    : null
+    parsedImport = {
+      name,
+      fullName: name,
+      moduleName: name,
+      ...parseSourceAndModule(rest)
+    }
+  }
+
+  return parsedImport
 }

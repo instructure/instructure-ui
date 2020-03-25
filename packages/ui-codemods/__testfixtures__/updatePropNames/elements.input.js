@@ -1,1 +1,1 @@
-<Modal isOpen onReady={() => {}} closeButtonVariant="value" />
+const Modal = <Modal isOpen onReady={() => {}} closeButtonVariant="value" />
