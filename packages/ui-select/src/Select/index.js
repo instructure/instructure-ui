@@ -111,6 +111,11 @@ class Select extends Component {
     */
     width: PropTypes.string,
     /**
+    * The width of the text input, in characters, if a width is not explicitly
+    * provided via the `width` prop. Only applicable if `isInline={true}`.
+    */
+    htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
     * The max width the options list can be before option text wraps. If not
     * set, the list will only display as wide as the text input.
     */
@@ -205,6 +210,7 @@ class Select extends Component {
     isRequired: false,
     isInline: false,
     width: undefined,
+    htmlSize: undefined,
     optionsMaxWidth: undefined,
     visibleOptionsCount: 8,
     messages: undefined,
@@ -580,6 +586,7 @@ class Select extends Component {
       size,
       isInline,
       width,
+      htmlSize,
       messages,
       renderBeforeInput,
       renderAfterInput,
@@ -615,6 +622,7 @@ class Select extends Component {
           placeholder,
           size,
           width,
+          htmlSize,
           messages,
           value: inputValue,
           inputRef: createChainedFunction(ref, this.handleInputRef),

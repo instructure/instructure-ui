@@ -97,6 +97,11 @@ class TextInput extends Component {
     */
     width: PropTypes.string,
     /**
+    * The width of the input, in characters, if a width is not explicitly
+    * provided via the `width` prop. Only applicable if `isInline={true}`.
+    */
+    htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
     * The display of the root element.
     */
     display: PropTypes.oneOf(['inline-block', 'block']),
@@ -179,6 +184,7 @@ class TextInput extends Component {
     placeholder: undefined,
     width: undefined,
     size: 'medium',
+    htmlSize: undefined,
     textAlign: 'start',
     messages: [],
     inputRef: function (input) {},
@@ -252,6 +258,7 @@ class TextInput extends Component {
     const {
       type,
       size,
+      htmlSize,
       display,
       textAlign,
       placeholder,
@@ -298,6 +305,7 @@ class TextInput extends Component {
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
         aria-describedby={descriptionIds !== '' ? descriptionIds : null}
+        size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
