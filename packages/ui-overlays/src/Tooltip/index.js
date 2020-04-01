@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { LayoutPropTypes } from '@instructure/ui-layout'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { themeable } from '@instructure/ui-themeable'
 import { deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
@@ -71,12 +71,12 @@ class Tooltip extends Component {
      * (Note: if there is not room, it will position opposite. Ex. "top" will
      * automatically switch to "bottom").
      */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Tooltip />` (defaults to `document.body`)
      */
-    mountNode: LayoutPropTypes.mountNode,
+    mountNode: PositionPropTypes.mountNode,
     /**
      * Target element for positioning the Tooltip (if it differs from children/trigger)
      */
@@ -86,7 +86,7 @@ class Tooltip extends Component {
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
      */
-    constrain: LayoutPropTypes.constrain
+    constrain: PositionPropTypes.constrain
   }
 
   static defaultProps = {

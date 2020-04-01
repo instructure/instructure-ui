@@ -25,9 +25,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Heading, MetricsList, Text } from '@instructure/ui-elements'
-import { Responsive, ContextView, View, Flex } from '@instructure/ui-layout'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { MetricGroup, Metric } from '@instructure/ui-metric'
+import { Text } from '@instructure/ui-text'
+import { Heading } from '@instructure/ui-heading'
+import { ContextView, View } from '@instructure/ui-view'
+import { Flex } from '@instructure/ui-flex'
+import { Responsive } from '@instructure/ui-responsive'
 import { contrast } from '@instructure/ui-color-utils'
 
 import { ColorSwatch } from '../ColorSwatch'
@@ -76,7 +79,7 @@ class ThemeColors extends Component {
           return (
             <View as="div" padding="small">
               <Heading level="h4">theme palette</Heading>
-              <Flex wrapItems>
+              <Flex wrap="wrap">
                 {React.Children.map(cards, (child) => (
                   <Flex.Item size={props.colWidth} padding="small xx-small">
                     {child}
@@ -125,7 +128,7 @@ class ThemeColors extends Component {
 
     const ratio = `${contrastRatio}:1`
     const pass = <Text size="large" color="success">PASS</Text>
-    const fail = <Text size="large" color="error">FAIL</Text>
+    const fail = <Text size="large" color="danger">FAIL</Text>
 
     const normalWCAG = {
       canvascontrast: contrastRatio > 3.0,
@@ -135,9 +138,10 @@ class ThemeColors extends Component {
     return (
       <View as="div" padding="small small none">
         <Heading level="h4">contrast</Heading>
-        <Flex as="div" margin="small 0" background="default" alignItems="center" wrapItems>
+        <Flex as="div" margin="small 0" background="default" alignItems="center" wrap="wrap">
           <Flex.Item padding="small">
             <SimpleSelect
+              __dangerouslyIgnoreExperimentalWarnings
               name="color-1"
               defaultValue={this.state.backgroundColor}
               renderLabel="Background Color"
@@ -149,6 +153,7 @@ class ThemeColors extends Component {
           </Flex.Item>
           <Flex.Item padding="small">
             <SimpleSelect
+              __dangerouslyIgnoreExperimentalWarnings
               name="color-2"
               defaultValue={this.state.foregroundColor}
               renderLabel="Foreground Color"
@@ -161,20 +166,20 @@ class ThemeColors extends Component {
           {this.state.contrastRatio && (
             <Flex.Item padding="small">
               <ContextView padding="small" placement="center start">
-                <MetricsList>
-                  <MetricsList.Item
-                    label={<div>Contrast Ratio</div>}
-                    value={<Text size="large">{ratio}</Text>}
+                <MetricGroup>
+                  <Metric
+                    renderLabel={<div>Contrast Ratio</div>}
+                    renderValue={<Text size="large">{ratio}</Text>}
                   />
-                  <MetricsList.Item
-                    label={<div>Canvas 3:1</div>}
-                    value={normalWCAG.canvascontrast ? pass : fail}
+                  <Metric
+                    renderLabel={<div>Canvas 3:1</div>}
+                    renderValue={normalWCAG.canvascontrast ? pass : fail}
                   />
-                  <MetricsList.Item
-                    label={<div>WCAG AA</div>}
-                    value={normalWCAG.aa ? pass : fail}
+                  <Metric
+                    renderLabel={<div>WCAG AA</div>}
+                    renderValue={normalWCAG.aa ? pass : fail}
                   />
-                </MetricsList>
+                </MetricGroup>
               </ContextView>
             </Flex.Item>
           )}

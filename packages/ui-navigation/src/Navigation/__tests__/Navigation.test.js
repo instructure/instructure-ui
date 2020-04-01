@@ -25,7 +25,7 @@
 import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
 
-import { Badge } from '@instructure/ui-elements'
+import { Badge } from '@instructure/ui-badge'
 import { IconAdminLine, IconDashboardLine } from '@instructure/ui-icons'
 
 import { Navigation, NavigationItem } from '../index'

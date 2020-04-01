@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import { Table } from '@instructure/ui-table'
 import { Text } from '@instructure/ui-text'
 import { Heading } from '@instructure/ui-heading'
-import { PresentationContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view'
 
 import { Description } from '../Description'
@@ -116,7 +115,7 @@ class Theme extends Component {
         </Heading>
         <View
           as="div"
-          background="light"
+          background="secondary"
           padding={!sub ? padding : 'none'}
           margin={!sub ? margin : 'small none none'}
           borderRadius="medium"
@@ -172,7 +171,7 @@ class Theme extends Component {
         <View key={name + 'variables'}>
           <Heading as="h3" level="h3">{name}</Heading>
           {data.description && <Text size="medium" as="p">{data.description}</Text>}
-          <View background="light" as="div" padding="none" margin="small none large" borderRadius="medium">
+          <View background="secondary" as="div" padding="none" margin="small none large" borderRadius="medium">
             {React.Children.map(subSections, (sub) => (sub))}
           </View>
         </View>

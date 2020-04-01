@@ -35,7 +35,7 @@
     "@instructure/ui-dom-utils": "^6.22.0",
     "@instructure/ui-focusable": "^6.22.0",
     "@instructure/ui-i18n": "^6.22.0",
-    "@instructure/ui-layout": "^6.22.0",
+    "@instructure/ui-position": "^6.22.0",
     "@instructure/ui-motion": "^6.22.0",
     "@instructure/ui-popover": "^6.22.0",
     "@instructure/ui-portal": "^6.22.0",

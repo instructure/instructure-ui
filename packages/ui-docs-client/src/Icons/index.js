@@ -29,11 +29,11 @@ import { Heading } from '@instructure/ui-heading'
 import { Flex } from '@instructure/ui-flex'
 import { Link } from '@instructure/ui-link'
 import { TextInput } from '@instructure/ui-text-input'
-import { Select } from '@instructure/ui-forms'
+import { SimpleSelect } from '@instructure/ui-simple-select'
 import { Checkbox } from '@instructure/ui-checkbox'
 import { FormFieldGroup } from '@instructure/ui-form-field'
 import { ScreenReaderContent, AccessibleContent } from '@instructure/ui-a11y-content'
-import { Modal } from '@instructure/ui-overlays'
+import { Modal } from '@instructure/ui-modal'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { themeable } from '@instructure/ui-themeable'
 import { IconXSolid } from '@instructure/ui-icons'
@@ -129,20 +129,20 @@ class Icons extends Component {
             placeholder="Filter icons..."
             value={this.state.query}
             onChange={this.handleSearchChange}
-            label={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
+            renderLabel={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
             size="large"
           />
-          <Select
+          <SimpleSelect
             name="format"
-            label={<ScreenReaderContent>Icon Format</ScreenReaderContent>}
+            renderLabel={<ScreenReaderContent>Icon Format</ScreenReaderContent>}
             onChange={this.handleFormatChange}
             size="large"
             value={this.selectedFormatKey}
           >
             {Object.keys(formats).map(key => (
-              <option value={key} key={`${key}`}>{formats[key].format}</option>
+              <SimpleSelect.Option value={key} id={key} key={`${key}`}>{formats[key].format}</SimpleSelect.Option>
             ))}
-          </Select>
+          </SimpleSelect>
           {this.renderBidirectionToggle()}
         </FormFieldGroup>
       </div>

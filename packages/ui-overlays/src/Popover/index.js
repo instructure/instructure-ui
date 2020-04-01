@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { LayoutPropTypes } from '@instructure/ui-layout'
+import { PositionPropTypes } from '@instructure/ui-position'
 import { Popover as UIPopover } from '@instructure/ui-popover'
 import { bidirectional } from '@instructure/ui-i18n'
 import { Children, controllable, element } from '@instructure/ui-prop-types'
@@ -65,7 +65,7 @@ class Popover extends Component {
     /**
      * The placement of the content in relation to the trigger
      */
-    placement: LayoutPropTypes.placement,
+    placement: PositionPropTypes.placement,
 
     /**
      * The action that causes the Content to display (`click`, `hover`, `focus`)
@@ -216,13 +216,13 @@ class Popover extends Component {
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
      */
-    constrain: LayoutPropTypes.constrain,
+    constrain: PositionPropTypes.constrain,
 
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Popover />` (defaults to `document.body`)
      */
-    mountNode: LayoutPropTypes.mountNode,
+    mountNode: PositionPropTypes.mountNode,
 
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'

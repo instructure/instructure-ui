@@ -36,7 +36,7 @@ import {
   IconA11ySolid
 } from '@instructure/ui-icons'
 import { List } from '@instructure/ui-list'
-import { Responsive } from '@instructure/ui-layout'
+import { Responsive } from '@instructure/ui-responsive'
 import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'

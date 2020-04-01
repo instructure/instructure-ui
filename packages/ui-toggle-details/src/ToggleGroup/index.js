@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import { omitProps, pickProps, getElementType } from '@instructure/ui-react-utils'
 import { IconButton } from '@instructure/ui-buttons'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
 import { controllable } from '@instructure/ui-prop-types'

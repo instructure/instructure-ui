@@ -34,7 +34,7 @@ import { bidirectional } from '@instructure/ui-i18n'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
-import { mirrorHorizontalPlacement } from '@instructure/ui-layout'
+import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { Transition } from '@instructure/ui-motion'
 
 import styles from './styles.css'

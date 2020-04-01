@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { isIE11 } from '@instructure/ui-utils'
-import { Img } from '@instructure/ui-elements'
+import { Img } from '@instructure/ui-img'
 
 import styles from './styles.css'
 import theme from './theme'

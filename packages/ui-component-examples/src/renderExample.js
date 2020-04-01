@@ -23,7 +23,7 @@
  */
 import React from 'react'
 import { View } from '@instructure/ui-view'
-import { Tooltip} from '@instructure/ui-overlays'
+import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
 
@@ -42,7 +42,7 @@ export default function renderExample ({ Component, componentProps, exampleProps
     >
       <Component {...componentProps} />
       <Tooltip
-        tip={<pre>{JSON.stringify(componentProps,null,2)}</pre>}
+        renderTip={<pre>{JSON.stringify(componentProps,null,2)}</pre>}
         placement="bottom"
         on={['click']}
       >

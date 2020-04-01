@@ -25,8 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Text } from '@instructure/ui-elements'
-import { View } from '@instructure/ui-layout'
+import { Text } from '@instructure/ui-text'
+import { View } from '@instructure/ui-view'
 import { ColorName } from '../ColorName'
 
 class ColorCard extends Component {
@@ -60,7 +60,7 @@ class ColorCard extends Component {
       <View
         as="figure"
         key={name}
-        background="default"
+        background="primary"
         shadow="above"
         display="block"
         margin="0"
