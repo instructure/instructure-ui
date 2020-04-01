@@ -29,6 +29,12 @@ export default function generator(...args) {
   return baseThemeGenerator(...args)
 }
 
+/**
+ * We need to copy the theme-specific overrides from `BaseButton` before adding
+ * theme-specific overrides that only apply to `Button`
+ */
+Object.assign(generator, baseThemeGenerator)
+
 generator['canvas-ams'] = function ({ colors }) {
   return {
     // Overrides for secondary button
