@@ -27,7 +27,7 @@ export default function generator ({ typography, colors, borders }) {
     fontSize: typography.fontSizeMedium,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeightNormal,
+    lineHeight: typography.lineHeight,
     color: colors.textDarkest,
     background: colors.backgroundLightest,
     borderColor: colors.borderMedium,
