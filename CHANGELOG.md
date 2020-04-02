@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.23.0](https://github.com/instructure/instructure-ui/compare/v6.22.0...v6.23.0) (2020-04-02)
+
+
+### Bug Fixes
+
+* **ui-buttons:** fix canvas custom theming for primary Button text ([7672ee9](https://github.com/instructure/instructure-ui/commit/7672ee9))
+* **ui-buttons:** fix issue with button theme overrides ([4022c95](https://github.com/instructure/instructure-ui/commit/4022c95))
+* **ui-docs-client,ui-modal:** modalbody using undefined theme var ([66e0a16](https://github.com/instructure/instructure-ui/commit/66e0a16))
+* **ui-tabs:** correct mis-named theme variable for Tabs.Panel ([35ce38b](https://github.com/instructure/instructure-ui/commit/35ce38b))
+
+
+### Features
+
+* **instui-config,canvas-ams-theme,ui-themes,ui-view:** add canvas-ams-theme ([f31849f](https://github.com/instructure/instructure-ui/commit/f31849f))
+* **instui-config,ui-codemods,ui-scripts,ui-upgrade-scripts:** named imports for codemods ([a7db548](https://github.com/instructure/instructure-ui/commit/a7db548))
+* **ui-docs-client:** update deprecated components still in use ([4543717](https://github.com/instructure/instructure-ui/commit/4543717))
+* **ui-icons:** add-folder, add-media and record icons ([c1c7d67](https://github.com/instructure/instructure-ui/commit/c1c7d67))
+* **ui-select,ui-text-input:** allow size attr on Select/TextInput ([025a564](https://github.com/instructure/instructure-ui/commit/025a564))
+* **ui-simple-select,ui-table:** update select in sortable tables ([36e8b19](https://github.com/instructure/instructure-ui/commit/36e8b19))
+
+
+
+
+
 # [6.22.0](https://github.com/instructure/instructure-ui/compare/v6.21.0...v6.22.0) (2020-03-16)
 
 
