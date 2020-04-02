@@ -136,7 +136,7 @@ generator['canvas'] = function ({ colors, ...variables }) {
       style: 'primary',
       backgroundColor: variables['ic-brand-button--primary-bgd'],
       borderColor: variables['ic-brand-button--primary-bgd'],
-      textColor: colors.textLightest,
+      textColor: variables['ic-brand-button--primary-text'],
       ghostTextColor: variables['ic-brand-button--primary-bgd']
     }),
     primaryGhostHoverBackground: alpha(variables['ic-brand-button--primary-bgd'], 10)
