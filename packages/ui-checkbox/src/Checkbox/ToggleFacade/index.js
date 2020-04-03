@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { IconCheckLine, IconXLine } from '@instructure/ui-icons'
+import { IconCheckSolid, IconXSolid } from '@instructure/ui-icons'
 import { themeable } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -61,11 +61,11 @@ class ToggleFacade extends Component {
   renderIcon () {
     if (this.props.checked) {
       return (
-        <IconCheckLine className={styles.iconSVG} />
+        <IconCheckSolid className={styles.iconSVG} />
       )
     } else {
       return (
-        <IconXLine className={styles.iconSVG} />
+        <IconXSolid className={styles.iconSVG} />
       )
     }
   }

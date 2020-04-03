@@ -33,7 +33,7 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
     marginStart: spacing.small,
     marginVertical: spacing.xSmall,
     checkedBackground: colors.backgroundSuccess,
-    uncheckedIconColor: colors.textDark,
+    uncheckedIconColor: colors.textDarkest,
     checkedIconColor: colors.textSuccess,
     focusOutlineColor: colors.borderBrand,
     focusBorderWidth: borders.widthMedium,
@@ -55,7 +55,6 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
 
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
-    uncheckedIconColor: colors.textDarkest,
     background: colors.backgroundDarkest,
     borderColor: colors.borderDarkest
   }
