@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
+const {
+  handleExecuteCodemods,
+  handleViewParserConfig
+} = require('../handlers')
 
 exports.command = 'codemod'
 exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
@@ -66,9 +69,17 @@ exports.builder = (yargs) => {
 
   yargs.option('parser-config', {
     type: 'string',
-    describe: 'jscodeshift `parser-config` argument. A path to a JSON file containing a custom parser configuration for flow or babylon print transformed files to stdout, useful for development',
+    describe: 'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
     default: null
   })
+
+  yargs.command(
+    'view-parser-config',
+    'View the default instructure-ui parser configuration file that is supplied to jscodeshift when the codemods are executed',
+    () => {
+      handleViewParserConfig()
+    }
+  )
 }
 
 exports.handler = (argv) => {

@@ -79,7 +79,7 @@ exports.builder = (yargs) => {
 
   yargs.option('parser-config', {
     type: 'string',
-    describe: 'jscodeshift `parser-config` argument. A path to a JSON file containing a custom parser configuration for flow or babylon print transformed files to stdout, useful for development',
+    describe: 'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
     default: null
   })
 }

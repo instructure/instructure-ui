@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
-const handleViewParserConfig = require('./handleViewParserConfig')
+const fs = require('fs')
+const { info, error } = require('@instructure/command-utils')
+const getParserConfigPath = require('../utils/getParserConfigPath')
 
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages,
-  handleViewParserConfig
+module.exports = () => {
+  fs.readFile(getParserConfigPath(), (err, data) => {
+    if (err) {
+      error(err)
+    } else {
+      info(data)
+    }
+  })
 }

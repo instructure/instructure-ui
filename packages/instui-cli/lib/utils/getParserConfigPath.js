@@ -22,16 +22,8 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
-const handleViewParserConfig = require('./handleViewParserConfig')
+const parserConfigImport = '@instructure/instui-config/codemod-configs/parser-config.json'
 
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages,
-  handleViewParserConfig
+module.exports = () => {
+  return require.resolve(parserConfigImport)
 }
