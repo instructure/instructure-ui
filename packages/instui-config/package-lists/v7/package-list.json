@@ -111,6 +111,7 @@
  "@instructure/ui-themes",
  "@instructure/ui-time-select",
  "@instructure/ui-toggle-details",
+ "@instructure/ui-token-scripts",
  "@instructure/ui-tooltip",
  "@instructure/ui-tray",
  "@instructure/ui-tree-browser",
