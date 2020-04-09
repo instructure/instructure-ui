@@ -53,28 +53,6 @@ describe('<View />', async () => {
     expect(h1).to.have.length(1)
   })
 
-  it('should warn when as=span, display=auto, and vertical margins are set', async () => {
-    const consoleError = stub(console, 'error')
-    const warning = `Warning: [View] display style is set to 'inline' and will allow for horizontal margins only.`
-    await mount(
-      <View as="span" display="auto" margin="0 0 small 0">
-        <h1>Hello!</h1>
-      </View>
-    )
-    expect(consoleError)
-      .to.be.calledWith(warning)
-  })
-
-  it('should not warn when as=span, display=auto, and vertical margins are not set', async () => {
-    const consoleError = stub(console, 'error')
-    await mount(
-      <View as="span" display="auto" margin="none small">
-        <h1>Hello!</h1>
-      </View>
-    )
-    expect(consoleError).to.not.be.called()
-  })
-
   it('should pass whitelisted style attributes', async () => {
     const styleProps = {
       top: '10rem',
