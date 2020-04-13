@@ -69,7 +69,8 @@ class Document extends Component {
     return props ? (
       <View margin="x-large 0" display="block">
         <Heading
-          level="h3"
+          level="h2"
+          as="h3"
           id={`${id}Properties`}
           margin="0 0 small 0"
         >
@@ -88,7 +89,8 @@ class Document extends Component {
     return theme && Object.keys(theme).length > 0 ? (
       <View margin="x-large 0" display="block">
         <Heading
-          level="h3"
+          level="h2"
+          as="h3"
           id={`${doc.id}Theme`}
           margin="0 0 small 0"
         >
@@ -157,7 +159,8 @@ const { ${importName} } = require('${requirePath}')
     return (
       <View margin="xx-large 0" display="block">
         <Heading
-          level="h3"
+          level="h2"
+          as="h3"
           id={`${id}Usage`}
           margin="0 0 small 0"
         >
@@ -190,7 +193,8 @@ const { ${importName} } = require('${requirePath}')
     return params ? (
       <View margin="small 0" display="block">
         <Heading
-          level="h3"
+          level="h2"
+          as="h3"
           id={`${id}Parameters`}
           margin="0 0 small 0"
         >
@@ -210,7 +214,8 @@ const { ${importName} } = require('${requirePath}')
     return returns ? (
       <View margin="small 0" display="block">
         <Heading
-          level="h3"
+          level="h2"
+          as="h3"
           id={`${id}Returns`}
           margin="0 0 small 0"
         >
@@ -230,7 +235,8 @@ const { ${importName} } = require('${requirePath}')
     return (methods && methods.length > 0) ? (
       <View margin="small 0" display="block">
         <Heading
-          level="h3"
+          level="h2"
+          as="h3"
           id={`${id}Methods`}
           margin="0 0 small 0"
         >
@@ -284,7 +290,8 @@ const { ${importName} } = require('${requirePath}')
       sections = doc.sections.map(section => (
         <View margin="small 0" display="block" key={`${doc.id}.${section.name}`}>
           <Heading
-            level="h3"
+            level="h2"
+            as="h3"
             color="secondary"
             id={`${doc.id}.${section.name}`}
             margin="large 0 small 0"

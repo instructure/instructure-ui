@@ -152,7 +152,7 @@ class Icons extends Component {
   renderFooter () {
     return (
       <div>
-        <Heading level="h3" margin="medium 0">
+        <Heading level="h2" as="h3" margin="medium 0">
           Installation
         </Heading>
         <CodeEditor

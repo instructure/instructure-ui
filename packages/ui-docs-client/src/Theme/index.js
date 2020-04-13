@@ -100,7 +100,8 @@ class Theme extends Component {
   }
 
   renderTable (name, content, sub = false) {
-    const headingLevel = sub ? 'h4' : 'h3'
+    const headingElement = sub ? 'h4' : 'h3'
+    const headingLevel = sub ? 'h3' : 'h2'
     const margin = sub ? 'small none small' : 'small none large'
     const padding = 'small'
     const label = name + 'variables'
@@ -110,7 +111,7 @@ class Theme extends Component {
         as="div"
         padding={sub ? padding : 'none'}
       >
-        <Heading as={headingLevel} level={headingLevel}>
+        <Heading as={headingElement} level={headingLevel}>
           {name}
         </Heading>
         <View
@@ -169,7 +170,7 @@ class Theme extends Component {
     if (subSections.length > 0) {
       return (
         <View key={name + 'variables'}>
-          <Heading as="h3" level="h3">{name}</Heading>
+          <Heading as="h3" level="h2">{name}</Heading>
           {data.description && <Text size="medium" as="p">{data.description}</Text>}
           <View background="secondary" as="div" padding="none" margin="small none large" borderRadius="medium">
             {React.Children.map(subSections, (sub) => (sub))}

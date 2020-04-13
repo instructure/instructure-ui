@@ -47,7 +47,6 @@ class Guidelines extends Component {
         wrap="wrap"
         justifyItems="end"
         alignItems="stretch"
-        margin="small none"
       >
         {React.Children.map(this.props.children, child => (
           <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">

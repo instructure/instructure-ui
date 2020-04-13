@@ -78,7 +78,7 @@ class ThemeColors extends Component {
           })
           return (
             <View as="div" padding="small">
-              <Heading level="h4">theme palette</Heading>
+              <Heading level="h3" as="h4">theme palette</Heading>
               <Flex wrap="wrap">
                 {React.Children.map(cards, (child) => (
                   <Flex.Item size={props.colWidth} padding="small xx-small">
@@ -137,7 +137,7 @@ class ThemeColors extends Component {
 
     return (
       <View as="div" padding="small small none">
-        <Heading level="h4">contrast</Heading>
+        <Heading level="h3" as="h4">contrast</Heading>
         <Flex as="div" margin="small 0" background="default" alignItems="center" wrap="wrap">
           <Flex.Item padding="small">
             <SimpleSelect
