@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.24.0](https://github.com/instructure/instructure-ui/compare/v6.23.0...v6.24.0) (2020-04-14)
+
+
+### Bug Fixes
+
+* **ui-drawer-layout:** Fix no styles applied on root ([689780a](https://github.com/instructure/instructure-ui/commit/689780a))
+
+
+
+
+
 # [6.23.0](https://github.com/instructure/instructure-ui/compare/v6.22.0...v6.23.0) (2020-04-02)
 
 **Note:** Version bump only for package @instructure/ui-drawer-layout

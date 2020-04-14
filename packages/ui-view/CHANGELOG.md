@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.24.0](https://github.com/instructure/instructure-ui/compare/v6.23.0...v6.24.0) (2020-04-14)
+
+
+### Bug Fixes
+
+* **ui-view:** optimize View in test and prod ([3d4ea25](https://github.com/instructure/instructure-ui/commit/3d4ea25))
+
+
+
+
+
 # [6.23.0](https://github.com/instructure/instructure-ui/compare/v6.22.0...v6.23.0) (2020-04-02)
 
 

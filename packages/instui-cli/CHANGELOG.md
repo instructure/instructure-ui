@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.24.0](https://github.com/instructure/instructure-ui/compare/v6.23.0...v6.24.0) (2020-04-14)
+
+
+### Features
+
+* **instui-cli,instui-config:** add a default parser configuration file ([c25bb88](https://github.com/instructure/instructure-ui/commit/c25bb88))
+
+
+
+
+
 # [6.23.0](https://github.com/instructure/instructure-ui/compare/v6.22.0...v6.23.0) (2020-04-02)
 
 

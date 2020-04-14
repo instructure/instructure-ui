@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-simple-select",
-  "version": "6.23.0",
+  "version": "6.24.0",
   "description": "A component for standard select element behavior.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -23,22 +23,22 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.5.0",
-    "@instructure/console": "^6.23.0",
-    "@instructure/ui-form-field": "^6.23.0",
-    "@instructure/ui-position": "^6.23.0",
-    "@instructure/ui-prop-types": "^6.23.0",
-    "@instructure/ui-react-utils": "^6.23.0",
-    "@instructure/ui-select": "^6.23.0",
-    "@instructure/ui-testable": "^6.23.0",
-    "@instructure/ui-themeable": "^6.23.0",
-    "@instructure/uid": "^6.23.0",
+    "@instructure/console": "^6.24.0",
+    "@instructure/ui-form-field": "^6.24.0",
+    "@instructure/ui-position": "^6.24.0",
+    "@instructure/ui-prop-types": "^6.24.0",
+    "@instructure/ui-react-utils": "^6.24.0",
+    "@instructure/ui-select": "^6.24.0",
+    "@instructure/ui-testable": "^6.24.0",
+    "@instructure/ui-themeable": "^6.24.0",
+    "@instructure/uid": "^6.24.0",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.23.0",
-    "@instructure/ui-color-utils": "^6.23.0",
-    "@instructure/ui-test-locator": "^6.23.0",
-    "@instructure/ui-test-utils": "^6.23.0"
+    "@instructure/ui-babel-preset": "^6.24.0",
+    "@instructure/ui-color-utils": "^6.24.0",
+    "@instructure/ui-test-locator": "^6.24.0",
+    "@instructure/ui-test-utils": "^6.24.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

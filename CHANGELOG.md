@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.24.0](https://github.com/instructure/instructure-ui/compare/v6.23.0...v6.24.0) (2020-04-14)
+
+
+### Bug Fixes
+
+* **ui-drawer-layout:** Fix no styles applied on root ([689780a](https://github.com/instructure/instructure-ui/commit/689780a))
+* **ui-view:** optimize View in test and prod ([3d4ea25](https://github.com/instructure/instructure-ui/commit/3d4ea25))
+
+
+### Features
+
+* **instui-cli,instui-config:** add a default parser configuration file ([c25bb88](https://github.com/instructure/instructure-ui/commit/c25bb88))
+
+
+
+
+
 # [6.23.0](https://github.com/instructure/instructure-ui/compare/v6.22.0...v6.23.0) (2020-04-02)
 
 
