@@ -47,7 +47,7 @@ category: components
 **/
 @testable()
 @bidirectional()
-@themeable(styles)
+@themeable(null, styles)
 class DrawerLayout extends Component {
   static locatorAttribute = 'data-drawer-layout'
   static propTypes = {

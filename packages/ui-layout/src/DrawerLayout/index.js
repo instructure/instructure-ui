@@ -49,7 +49,7 @@ id: DeprecatedDrawerLayout
 @deprecated('7.0.0', null, 'Use DrawerLayout from ui-drawer-layout instead.')
 @testable()
 @bidirectional()
-@themeable(styles)
+@themeable(null, styles)
 class DrawerLayout extends Component {
   static locatorAttribute = 'data-drawer-layout'
   static propTypes = {
