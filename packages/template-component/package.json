@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.0",
+    "@babel/runtime": "^7.9.2",
     "@instructure/ui-react-utils": "^6.24.0",
     "@instructure/ui-testable": "^6.24.0",
     "@instructure/ui-themeable": "^6.24.0",

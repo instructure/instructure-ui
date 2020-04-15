@@ -23,7 +23,7 @@
     "@instructure/ui-babel-preset": "^6.24.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.0"
+    "@babel/runtime": "^7.9.2"
   },
   "publishConfig": {
     "access": "public"

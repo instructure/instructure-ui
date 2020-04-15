@@ -24,7 +24,7 @@
     "@instructure/ui-test-utils": "^6.24.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.0",
+    "@babel/runtime": "^7.9.2",
     "@emotion/is-prop-valid": "^0.8.3",
     "@instructure/console": "^6.24.0",
     "@instructure/ui-decorator": "^6.24.0",

@@ -25,8 +25,8 @@
     "@instructure/ui-babel-preset": "^6.24.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.0",
-    "@babel/standalone": "^7.6.0",
+    "@babel/runtime": "^7.9.2",
+    "@babel/standalone": "^7.9.5",
     "@instructure/ui-a11y-content": "^6.24.0",
     "@instructure/ui-buttons": "^6.24.0",
     "@instructure/ui-checkbox": "^6.24.0",

@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.5.0",
+    "@babel/runtime": "^7.9.2",
     "@instructure/ui-popover": "^6.24.0",
     "@instructure/ui-position": "^6.24.0",
     "@instructure/ui-prop-types": "^6.24.0",

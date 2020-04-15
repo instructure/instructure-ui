@@ -64,6 +64,7 @@ module.exports = {
     'es.string.includes',
     'es.string.repeat',
     'es.string.starts-with',
+    'es.string.trim-end',
     'es.symbol',
     'es.symbol.iterator',
     'es.weak-set',
