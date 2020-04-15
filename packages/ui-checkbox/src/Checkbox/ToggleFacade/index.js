@@ -31,13 +31,14 @@ import { themeable } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'
+import { themeAdapter } from './themeAdapter'
 
 /**
 ---
 parent: Checkbox
 ---
 **/
-@themeable(theme, styles)
+@themeable(theme, styles, themeAdapter)
 class ToggleFacade extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,

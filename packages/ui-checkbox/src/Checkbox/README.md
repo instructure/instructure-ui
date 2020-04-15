@@ -127,7 +127,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch.
+Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch. For __toggle only__ the size prop affects the size of the label and not the actual size of the switch.
 
 ```js
 ---

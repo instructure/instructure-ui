@@ -138,49 +138,30 @@
   display: block;
 }
 
-.small {
-  height: var(--baseSizeSmall);
-  width: calc(var(--baseSizeSmall) * 1.5);
+/* design wants all toggle switches to be the same size */
+.small,
+.medium,
+.large {
+  height: var(--toggleSize);
+  width: calc(var(--toggleSize) * 1.5);
 
   .icon {
     font-size: 0.875rem;
-    height: var(--baseSizeSmall);
-    width: var(--baseSizeSmall);
-  }
-
-  + .label {
-    font-size: var(--labelFontSizeSmall);
+    height: var(--toggleSize);
+    width: var(--toggleSize);
   }
 }
 
-.medium {
-  height: var(--baseSizeMedium);
-  width: calc(var(--baseSizeMedium) * 1.5);
-
-  .icon {
-    font-size: 1.125rem;
-    height: var(--baseSizeMedium);
-    width: var(--baseSizeMedium);
-  }
-
-  + .label {
-    font-size: var(--labelFontSizeMedium);
-  }
+.small + .label {
+  font-size: var(--labelFontSizeSmall);
 }
 
-.large {
-  height: var(--baseSizeLarge);
-  width: calc(var(--baseSizeLarge) * 1.5);
+.medium + .label {
+  font-size: var(--labelFontSizeMedium);
+}
 
-  .icon {
-    font-size: 1.5rem;
-    height: var(--baseSizeLarge);
-    width: var(--baseSizeLarge);
-  }
-
-  + .label {
-    font-size: var(--labelFontSizeLarge);
-  }
+.large + .label {
+  font-size: var(--labelFontSizeLarge);
 }
 
 /* stylelint-enable selector-max-class, no-descending-specificity */
