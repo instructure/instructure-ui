@@ -9,11 +9,6 @@ category: packages
 [![MIT License][license-badge]][LICENSE]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
-### Components
-The `ui-forms` package contains the following components:
-
-- [TimeInput](#TimeInput)
-
 ### Deprecated components
 The following components have been deprecated and will be removed from the `ui-forms` package:
 - [Checkbox](#DeprecatedCheckbox) \(use [Checkbox from `ui-checkbox`](#Checkbox) instead)
@@ -27,6 +22,7 @@ The following components have been deprecated and will be removed from the `ui-f
 - [Select](#DeprecatedSelect) \(use [Select from `ui-select`](#Select) instead)
 - [TextArea](#DeprecatedTextArea) \(use [TextArea from `ui-text-area`](#TextArea) instead)
 - [TextInput](#DeprecatedTextInput) \(use [TextInput from `ui-text-input`](#TextInput) instead)
+- [TimeInput](#DeprecatedTimeInput) \(use [TimeSelect from `ui-time-select`](#TimeSelect) instead)
 
 Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
 

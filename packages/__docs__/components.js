@@ -82,7 +82,7 @@ export {
   Select as DeprecatedSelect,
   TextArea as DeprecatedTextArea,
   TextInput as DeprecatedTextInput,
-  TimeInput
+  TimeInput as DeprecatedTimeInput
 } from '@instructure/ui-forms'
 export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
