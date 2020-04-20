@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import { I18nPropTypes, DateTime, Locale } from '@instructure/ui-i18n'
 import { controllable } from '@instructure/ui-prop-types'
 import {
-  experimental,
   deprecated,
   getInteraction,
   passthroughProps,
@@ -43,14 +42,12 @@ import { uid } from '@instructure/uid'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
 
 @deprecated('8.0.0', {
   label: 'renderLabel'
 })
-@experimental()
 @testable()
 class TimeSelect extends Component {
   static propTypes = {
