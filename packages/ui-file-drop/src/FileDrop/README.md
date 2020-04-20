@@ -33,11 +33,13 @@ example: true
   onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
   onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
   renderLabel={
-    <Billboard
-      heading="Upload your image"
-      message="Drag and drop, or click to browse your computer"
-      hero={<Img src={placeholderImage(1200, 300)} />}
-    />
+    <View as="div" padding="xx-large large" background="primary">
+      <IconModuleLine size="large" />
+      <Heading>Drop files here to add them to module</Heading>
+      <Text color="brand">
+        Drag and drop, or click to browse your computer
+      </Text>
+    </View>
   }
 />
 ```
@@ -72,18 +74,21 @@ example: true
 ---
 <div>
   <FileDrop
-    accept=".png"
+    accept=".csv"
     onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
     onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
     renderLabel={
-      <Billboard
-        size="small"
-        message="Only .png files"
-        hero={<IconImageLine />}
-      />
+      <View  background="secondary" as="div" textAlign="center" padding="x-large large">
+        <IconUploadSolid />
+        <Text as="div" weight="bold">
+          Upload document
+        </Text>
+        <Text>Drag and drop or <Text color="brand">browse your files</Text></Text>
+        <Text size="small" as="div" lineHeight="double">A single CSV document</Text>
+      </View>
     }
     display="inline-block"
-    width="12rem"
+    width="24rem"
     margin="x-small"
   />
   <FileDrop
@@ -143,13 +148,47 @@ example: true
     console.log(`Files accepted ${files.map((f) => f.name).join(',')}`)
   }}
   renderLabel={
-    <Billboard
-      size="small"
-      heading="Upload your files"
-      headingLevel="h3"
-      message="Allow multiple files"
-      hero={<IconFolderLine />}
-    />
+    <View as="div" textAlign="center" padding="large" margin="large 0 0 0">
+      <IconAnnotateLine color="brand" size="large" />
+      <Text as="div" color="brand">
+        Drag and Drop or Click to Browser your Computer
+      </Text>
+    </View>
   }
+  width="18rem"
+  height="16rem"
+  margin="x-small"
 />
+```
+
+### height Property
+
+If the `height` property is set to `100%`, the FileDrop container will fill the available vertical space.
+
+```js
+---
+example: true
+---
+<div style={{height: '30rem'}}>
+  <FileDrop
+    height="100%"
+    renderLabel={
+      <Flex direction="column" height="100%" alignItems="center" justifyItems="center">
+        <Flex.Item padding="small">
+          <IconPdfLine size="large" />
+        </Flex.Item>
+        <Flex.Item padding="small">
+          <Text size="large">
+            Drag and Drop or Click to Browser your Computer
+          </Text>
+        </Flex.Item>
+        <Flex.Item padding="small">
+          <Text color="secondary" size="small">
+            Accepted File Type is PDF
+          </Text>
+        </Flex.Item>
+      </Flex>
+    }
+  />
+</div>
 ```

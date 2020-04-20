@@ -153,6 +153,10 @@ class FileDrop extends Component {
     */
     display: PropTypes.oneOf(['block', 'inline-block']),
     /**
+    * Set the CSS `height` property on FileInput's outermost element
+    */
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
     * Set the CSS `width` property on FileInput's outermost element
     */
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -212,6 +216,7 @@ class FileDrop extends Component {
     id: undefined,
     accept: undefined,
     display: 'block',
+    height: undefined,
     width: undefined,
     minWidth: undefined,
     maxWidth: undefined,
@@ -466,6 +471,7 @@ class FileDrop extends Component {
   render () {
     const {
       display,
+      height,
       width,
       minWidth,
       maxWidth,
@@ -487,7 +493,8 @@ class FileDrop extends Component {
       [styles.functionallyDisabled]: functionallyDisabled,
       [styles.visuallyDisabled]: this.interaction === 'disabled',
       [styles.dragRejected]: this.state.isDragRejected || this.invalid,
-      [styles.dragAccepted]: this.state.isDragAccepted
+      [styles.dragAccepted]: this.state.isDragAccepted,
+      [styles.withHeight]: height
     }
 
     return (
@@ -498,6 +505,7 @@ class FileDrop extends Component {
         minWidth={minWidth}
         maxWidth={maxWidth}
         margin={margin}
+        height={height}
       >
         <label
           className={classnames(classes)}
@@ -513,10 +521,19 @@ class FileDrop extends Component {
             withFocusOutline={this.state.isFocused}
             borderRadius="large"
             focusColor={focusColor}
+            height={height}
           >
-            <span className={styles.labelContent}>
-              <span className={styles.layout}>
-                {this.renderLabel()}
+            <span className={classnames({
+              [styles.labelContent]: true,
+              [styles.withHeight]: height
+            })}>
+              <span className={classnames({
+                [styles.layout]: true,
+                [styles.withHeight]: height
+              })}>
+                <View height={height}>
+                  {this.renderLabel()}
+                </View>
               </span>
             </span>
           </View>

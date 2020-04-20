@@ -7,6 +7,10 @@
   display: block;
   box-sizing: border-box;
   position: relative;
+
+  &.withHeight {
+    height: 100%; /* force the content to fill the space set with the height prop */
+  }
 }
 
 .input {
@@ -33,12 +37,20 @@
   &:hover {
     border-color: var(--hoverBorderColor);
   }
+
+  &.withHeight {
+    height: 100%; /* force the content to fill the space set with the height prop */
+  }
 }
 
 .layout {
   display: block;
   overflow: hidden;
   border-radius: var(--borderRadius);
+
+  &.withHeight {
+    height: 100%; /* force the content to fill the space set with the height prop */
+  }
 }
 
 .dragAccepted {
