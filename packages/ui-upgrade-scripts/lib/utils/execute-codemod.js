@@ -25,7 +25,15 @@
 const path = require('path')
 const { info, runCommandSync } = require('@instructure/command-utils')
 
-module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = [], parser = 'babylon', parserConfig } = {}) => {
+module.exports = ({
+  sourcePath = process.cwd(),
+  codemodPath,
+  configPath,
+  ignore = [],
+  parser = 'babylon',
+  parserConfig,
+  isMetaComponentPackageMigration = false
+} = {}) => {
   info(`Running ${codemodPath}...`)
   info(`Source path: ${sourcePath}`)
   info(`Config path: ${configPath}`)
@@ -38,6 +46,10 @@ module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore 
     `--extensions=js,jsx`,
     `--parser=${parser}`
   ]
+
+  if (isMetaComponentPackageMigration) {
+    codemodCommand.push('--isMetaComponentPackageMigration')
+  }
 
   if (parserConfig) {
     codemodCommand.push(`--parser-config=${parserConfig}`)

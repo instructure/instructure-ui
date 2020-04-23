@@ -33,10 +33,18 @@ const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
 module.exports = function (file, api, options) {
   const j = api.jscodeshift
   const c = path.resolve(process.cwd(), options.config)
-  const config = fs.existsSync(c) ? requireUncached(c) : null
+  let config = fs.existsSync(c) ? requireUncached(c) : null
 
   if (!config) {
     throw new Error(`Invalid config file "${c}"`)
+  }
+
+  if (typeof config === 'function') {
+    const configOptions = {
+      isMetaComponentPackageMigration: options.isMetaComponentPackageMigration
+    }
+
+    config = config(configOptions)
   }
 
   const root = j(file.source)

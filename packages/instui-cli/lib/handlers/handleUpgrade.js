@@ -37,7 +37,7 @@ const {
 module.exports = async ({ sourcePath, scopeModifications, version, ignore, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig }) => {
   verifyPackageJson({ sourcePath })
 
-  handleExecuteCodemods({ sourcePath, scopeModifications, version, ignore, parser, parserConfig })
+  await handleExecuteCodemods({ sourcePath, scopeModifications, version, ignore, parser, parserConfig })
 
   info('Auditing Instructure UI dependencies...')
   const { missing, unused } = await checkInstuiDependencies({ sourcePath, version })

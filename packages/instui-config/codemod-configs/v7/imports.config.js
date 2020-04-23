@@ -22,18 +22,19 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  transformDefaults: {
-    importType: 'named'
-  },
-  transforms: [
+module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
+  const getImportPath = (importPath) => {
+    return isMetaComponentPackageMigration ? '@instructure/ui' : importPath
+  }
+
+  let transforms = [
     {
       where: {
         packageName: '@instructure/ui-elements',
         moduleName: 'Avatar'
       },
       transform: {
-        importPath: '@instructure/ui-avatar'
+        importPath: getImportPath('@instructure/ui-avatar')
       }
     },
     {
@@ -42,7 +43,7 @@ module.exports = {
         moduleName: 'Badge'
       },
       transform: {
-        importPath: '@instructure/ui-badge'
+        importPath: getImportPath('@instructure/ui-badge')
       }
     },
     {
@@ -54,7 +55,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-metric'
+        importPath: getImportPath('@instructure/ui-metric')
       }
     },
     {
@@ -66,7 +67,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-list'
+        importPath: getImportPath('@instructure/ui-list')
       }
     },
     {
@@ -75,7 +76,7 @@ module.exports = {
         moduleName: 'Pill'
       },
       transform: {
-        importPath: '@instructure/ui-pill'
+        importPath: getImportPath('@instructure/ui-pill')
       }
     },
     {
@@ -84,7 +85,7 @@ module.exports = {
         moduleName: 'Progress'
       },
       transform: {
-        importPath: '@instructure/ui-progress'
+        importPath: getImportPath('@instructure/ui-progress')
       }
     },
     {
@@ -93,7 +94,7 @@ module.exports = {
         moduleName: 'Rating'
       },
       transform: {
-        importPath: '@instructure/ui-rating'
+        importPath: getImportPath('@instructure/ui-rating')
       }
     },
     {
@@ -102,7 +103,7 @@ module.exports = {
         moduleName: 'Img'
       },
       transform: {
-        importPath: '@instructure/ui-img'
+        importPath: getImportPath('@instructure/ui-img')
       }
     },
     {
@@ -111,7 +112,7 @@ module.exports = {
         moduleName: 'Text'
       },
       transform: {
-        importPath: '@instructure/ui-text'
+        importPath: getImportPath('@instructure/ui-text')
       }
     },
     {
@@ -120,7 +121,7 @@ module.exports = {
         moduleName: 'TruncateText'
       },
       transform: {
-        importPath: '@instructure/ui-truncate-text'
+        importPath: getImportPath('@instructure/ui-truncate-text')
       }
     },
     {
@@ -129,7 +130,7 @@ module.exports = {
         moduleName: 'Link'
       },
       transform: {
-        importPath: '@instructure/ui-link'
+        importPath: getImportPath('@instructure/ui-link')
       }
     },
     {
@@ -138,7 +139,7 @@ module.exports = {
         moduleName: 'Heading'
       },
       transform: {
-        importPath: '@instructure/ui-heading'
+        importPath: getImportPath('@instructure/ui-heading')
       }
     },
     {
@@ -147,7 +148,7 @@ module.exports = {
         moduleName: 'Tag'
       },
       transform: {
-        importPath: '@instructure/ui-tag'
+        importPath: getImportPath('@instructure/ui-tag')
       }
     },
     {
@@ -156,7 +157,7 @@ module.exports = {
         moduleName: 'Spinner'
       },
       transform: {
-        importPath: '@instructure/ui-spinner'
+        importPath: getImportPath('@instructure/ui-spinner')
       }
     },
     {
@@ -166,7 +167,7 @@ module.exports = {
       },
       transform: {
         moduleName: 'Byline',
-        importPath: '@instructure/ui-byline'
+        importPath: getImportPath('@instructure/ui-byline')
       }
     },
     {
@@ -178,7 +179,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-view'
+        importPath: getImportPath('@instructure/ui-view')
       }
     },
     {
@@ -187,7 +188,17 @@ module.exports = {
         moduleNames: [
           'Position',
           'PositionContent',
-          'PositionTarget',
+          'PositionTarget'
+        ]
+      },
+      transform: {
+        importPath: getImportPath('@instructure/ui-position')
+      }
+    },
+    {
+      where: {
+        packageName: '@instructure/ui-layout',
+        moduleNames: [
           'calculateElementPosition',
           'executeMirrorFunction',
           'mirrorHorizontalPlacement',
@@ -208,14 +219,22 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-drawer-layout'
+        importPath: getImportPath('@instructure/ui-drawer-layout')
+      }
+    },
+    {
+      where: {
+        packageName: '@instructure/ui-layout',
+        moduleName: 'Responsive'
+      },
+      transform: {
+        importPath: getImportPath('@instructure/ui-responsive')
       }
     },
     {
       where: {
         packageName: '@instructure/ui-layout',
         moduleNames: [
-          'Responsive',
           'addElementQueryMatchListener',
           'addMediaQueryMatchListener',
           'parseQuery',
@@ -235,7 +254,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-flex'
+        importPath: getImportPath('@instructure/ui-flex')
       }
     },
     {
@@ -248,7 +267,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-grid'
+        importPath: getImportPath('@instructure/ui-grid')
       }
     },
     {
@@ -257,7 +276,7 @@ module.exports = {
         moduleName: 'TextInput'
       },
       transform: {
-        importPath: '@instructure/ui-text-input'
+        importPath: getImportPath('@instructure/ui-text-input')
       }
     },
     {
@@ -271,7 +290,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-checkbox'
+        importPath: getImportPath('@instructure/ui-checkbox')
       }
     },
     {
@@ -283,7 +302,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-radio-input'
+        importPath: getImportPath('@instructure/ui-radio-input')
       }
     },
     {
@@ -292,7 +311,7 @@ module.exports = {
         moduleName: 'RangeInput'
       },
       transform: {
-        importPath: '@instructure/ui-range-input'
+        importPath: getImportPath('@instructure/ui-range-input')
       }
     },
     {
@@ -301,7 +320,7 @@ module.exports = {
         moduleName: 'TextArea'
       },
       transform: {
-        importPath: '@instructure/ui-text-area'
+        importPath: getImportPath('@instructure/ui-text-area')
       }
     },
     {
@@ -310,7 +329,7 @@ module.exports = {
         moduleName: 'FileDrop'
       },
       transform: {
-        importPath: '@instructure/ui-file-drop'
+        importPath: getImportPath('@instructure/ui-file-drop')
       }
     },
     {
@@ -320,7 +339,7 @@ module.exports = {
       },
       transform: {
         moduleName: 'TimeSelect',
-        importPath: '@instructure/ui-time-select'
+        importPath: getImportPath('@instructure/ui-time-select')
       }
     },
     {
@@ -329,7 +348,7 @@ module.exports = {
         moduleName: 'Expandable'
       },
       transform: {
-        importPath: '@instructure/ui-expandable'
+        importPath: getImportPath('@instructure/ui-expandable')
       }
     },
     {
@@ -342,7 +361,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-popover'
+        importPath: getImportPath('@instructure/ui-popover')
       }
     },
     {
@@ -351,7 +370,7 @@ module.exports = {
         moduleName: 'Tooltip'
       },
       transform: {
-        importPath: '@instructure/ui-tooltip'
+        importPath: getImportPath('@instructure/ui-tooltip')
       }
     },
     {
@@ -365,7 +384,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-modal'
+        importPath: getImportPath('@instructure/ui-modal')
       }
     },
     {
@@ -374,7 +393,7 @@ module.exports = {
         moduleName: 'Tray'
       },
       transform: {
-        importPath: '@instructure/ui-tray'
+        importPath: getImportPath('@instructure/ui-tray')
       }
     },
     {
@@ -387,7 +406,7 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: '@instructure/ui-a11y-content'
+        importPath: getImportPath('@instructure/ui-a11y-content')
       }
     },
     {
@@ -396,7 +415,7 @@ module.exports = {
         moduleName: 'Dialog'
       },
       transform: {
-        importPath: '@instructure/ui-dialog'
+        importPath: getImportPath('@instructure/ui-dialog')
       }
     },
     {
@@ -418,4 +437,362 @@ module.exports = {
       }
     },
   ]
+
+  if (isMetaComponentPackageMigration) {
+    transforms = [
+      ...transforms,
+      {
+        where: {
+          packageName: '@instructure/ui-alerts',
+          moduleName: 'Alert',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-billboard',
+          moduleName: 'Billboard',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-breadcrumb',
+          moduleName: 'Breadcrumb',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-buttons',
+          moduleNames: [
+            'BaseButton',
+            'Button',
+            'CloseButton',
+            'CondensedButton',
+            'IconButton',
+            'ToggleButton'
+          ]
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-calendar',
+          moduleName: 'Calendar',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-code-editor',
+          moduleName: 'CodeEditor',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-date-input',
+          moduleName: 'DateInput',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-editable',
+          moduleNames: [
+            'InPlaceEdit',
+            'Editable'
+          ],
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-focusable',
+          moduleName: 'Focusable',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-form-field',
+          moduleNames: [
+            'FormField',
+            'FormFieldLabel',
+            'FormFieldMessage',
+            'FormFieldMessages',
+            'FormFieldLayout',
+            'FormFieldGroup',
+          ],
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-i18n',
+          moduleNames: [
+            'ApplyLocale',
+            'ApplyTextDirection'
+          ],
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-icons'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-list',
+          moduleNames: [
+            'List',
+            'InlineList'
+          ],
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-menu',
+          moduleNames: [
+            'Menu',
+            'MenuItemGroup',
+            'MenuItemSeparator',
+            'MenuItem'
+          ],
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-metric',
+          moduleNames: [
+            'MetricGroup',
+            'Metric'
+          ],
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-motion',
+          moduleName: 'Transition',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-navigation',
+          moduleNames: [
+            'Navigation',
+            'AppNav'
+          ]
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-number-input',
+          moduleName: 'NumberInput',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-options',
+          moduleName: 'Options',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-overlays',
+          moduleNames: [
+            'Mask',
+            'Overlay'
+          ]
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-pages',
+          moduleName: 'Pages',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-pagination',
+          moduleName: 'Pagination',
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-progress',
+          moduleNames: [
+            'ProgressBar',
+            'ProgressCircle'
+          ],
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-select',
+          moduleName: 'Select'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-selectable',
+          moduleName: 'Selectable'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-svg-images',
+          moduleNames: [
+            'InlineSVG',
+            'SVGIcon'
+          ]
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-table',
+          moduleName: 'Table'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-tabs',
+          moduleName: 'Tabs'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-select',
+          moduleName: 'Select'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-themeable',
+          moduleNames: [
+            'themeable',
+            'ApplyTheme'
+          ]
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-toggle-details',
+          moduleNames: [
+            'ToggleDetails',
+            'ToggleGroup'
+          ]
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-tree-browser',
+          moduleName: 'TreeBrowser'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+      {
+        where: {
+          packageName: '@instructure/ui-portal',
+          moduleName: 'Portal'
+        },
+        transform: {
+          importPath: '@instructure/ui'
+        }
+      },
+    ]
+  }
+
+  return {
+    transformDefaults: {
+      importType: 'named'
+    },
+    transforms
+  }
 }
