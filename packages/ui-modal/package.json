@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-modal",
-  "version": "6.24.0",
+  "version": "6.25.0",
   "description": "A component for displaying content in a dialog overlay",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,18 +22,18 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^6.24.0",
-    "@instructure/ui-buttons": "^6.24.0",
-    "@instructure/ui-dialog": "^6.24.0",
-    "@instructure/ui-motion": "^6.24.0",
-    "@instructure/ui-overlays": "^6.24.0",
-    "@instructure/ui-portal": "^6.24.0",
-    "@instructure/ui-prop-types": "^6.24.0",
-    "@instructure/ui-react-utils": "^6.24.0",
-    "@instructure/ui-testable": "^6.24.0",
-    "@instructure/ui-themeable": "^6.24.0",
-    "@instructure/ui-utils": "^6.24.0",
-    "@instructure/ui-view": "^6.24.0",
+    "@instructure/console": "^6.25.0",
+    "@instructure/ui-buttons": "^6.25.0",
+    "@instructure/ui-dialog": "^6.25.0",
+    "@instructure/ui-motion": "^6.25.0",
+    "@instructure/ui-overlays": "^6.25.0",
+    "@instructure/ui-portal": "^6.25.0",
+    "@instructure/ui-prop-types": "^6.25.0",
+    "@instructure/ui-react-utils": "^6.25.0",
+    "@instructure/ui-testable": "^6.25.0",
+    "@instructure/ui-themeable": "^6.25.0",
+    "@instructure/ui-utils": "^6.25.0",
+    "@instructure/ui-view": "^6.25.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
@@ -41,10 +41,10 @@
     "react": "^15 || ^16"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.24.0",
-    "@instructure/ui-color-utils": "^6.24.0",
-    "@instructure/ui-test-locator": "^6.24.0",
-    "@instructure/ui-test-utils": "^6.24.0"
+    "@instructure/ui-babel-preset": "^6.25.0",
+    "@instructure/ui-color-utils": "^6.25.0",
+    "@instructure/ui-test-locator": "^6.25.0",
+    "@instructure/ui-test-utils": "^6.25.0"
   },
   "publishConfig": {
     "access": "public"

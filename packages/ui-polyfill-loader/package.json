@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-polyfill-loader",
-  "version": "6.24.0",
+  "version": "6.25.0",
   "description": "A webpack loader that generates a customized polyfill",
   "main": "./index.js",
   "scripts": {
@@ -15,9 +15,9 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "license": "MIT",
   "dependencies": {
-    "@instructure/browserslist-config-instui": "^6.24.0",
-    "@instructure/config-loader": "^6.24.0",
-    "@instructure/ui-babel-preset": "^6.24.0",
+    "@instructure/browserslist-config-instui": "^6.25.0",
+    "@instructure/config-loader": "^6.25.0",
+    "@instructure/ui-babel-preset": "^6.25.0",
     "core-js-builder": "^3.2.1",
     "loader-utils": "^1.2.3",
     "webpack": "^4"

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-dom-utils",
-  "version": "6.24.0",
+  "version": "6.25.0",
   "description": "A DOM utility library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,12 +20,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.24.0",
-    "@instructure/ui-test-utils": "^6.24.0"
+    "@instructure/ui-babel-preset": "^6.25.0",
+    "@instructure/ui-test-utils": "^6.25.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^6.24.0"
+    "@instructure/console": "^6.25.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16",

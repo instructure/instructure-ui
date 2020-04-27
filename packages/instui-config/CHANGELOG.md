@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.25.0](https://github.com/instructure/instructure-ui/compare/v6.24.0...v6.25.0) (2020-04-27)
+
+
+### Bug Fixes
+
+* **instui-config:** publish import codemod configs to npm ([93fc574](https://github.com/instructure/instructure-ui/commit/93fc574))
+
+
+### Features
+
+* **instui-cli,instui-config,ui-codemods,ui-upgrade-scripts:** allow option to migrate to universal ([2090d6c](https://github.com/instructure/instructure-ui/commit/2090d6c))
+* **instui-config,ui:** add a universal export package ([9e74450](https://github.com/instructure/instructure-ui/commit/9e74450))
+
+
+
+
+
 # [6.24.0](https://github.com/instructure/instructure-ui/compare/v6.23.0...v6.24.0) (2020-04-14)
 
 
