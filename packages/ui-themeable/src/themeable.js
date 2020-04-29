@@ -198,9 +198,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}, adapter) => 
         DOMNode || findDOMNode(this), // eslint-disable-line react/no-find-dom-node
         this.theme,
         defaultTheme,
-        componentId,
-        template, // for IE 11
-        this.scope // for IE 11
+        componentId
       )
     }
     get scope () {

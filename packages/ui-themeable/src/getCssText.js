@@ -25,7 +25,6 @@
 import { replaceValuesWithVariableNames } from './replaceValuesWithVariableNames'
 import { formatVariableNames } from './formatVariableNames'
 import { applyCustomMediaToCss } from './applyCustomMediaToCss'
-import { customPropertiesSupported } from './customPropertiesSupported'
 
 /**
  * ---
@@ -38,26 +37,7 @@ import { customPropertiesSupported } from './customPropertiesSupported'
  * @param {string} prefix CSS variable prefix/namespace
  * @returns {String} css text
  */
-function getCssText () {
-  if (customPropertiesSupported()) {
-    return getCssTextWithVariables.apply(this, arguments)
-  } else {
-    return getCssTextWithPolyfill.apply(this, arguments)
-  }
-}
-
-function getCssTextWithPolyfill (template, variables) {
-  // inject variable values
-  let cssText = template(variables)
-
-  // inject valules for @custom-media rules
-  const customMedia = variables ? formatVariableNames(variables) : {}
-  cssText = applyCustomMediaToCss(cssText, customMedia)
-
-  return cssText
-}
-
-function getCssTextWithVariables (template, variables, prefix) {
+function getCssText (template, variables, prefix) {
   const variableNames = variables ? replaceValuesWithVariableNames(variables, prefix) : {}
 
   // inject the CSS variable names into the style template
@@ -98,4 +78,4 @@ function variablesToCSSText (variables = {}) {
 }
 
 export default getCssText
-export { getCssText, getCssTextWithPolyfill, getCssTextWithVariables }
+export { getCssText }

@@ -24,11 +24,8 @@
 
 import { isEmpty } from '@instructure/ui-utils'
 
-import { scopeStylesToNode } from './scopeStylesToNode'
 import { formatVariableNames } from './formatVariableNames'
 import { pickOverrides } from './pickOverrides'
-import { customPropertiesSupported } from './customPropertiesSupported'
-import { getCssTextWithPolyfill } from './getCssText'
 
 /**
  * ---
@@ -40,33 +37,8 @@ import { getCssTextWithPolyfill } from './getCssText'
  * @param {Object} variables JS variables
  * @param {Object} defaults Default JS variables
  * @param {String} prefix A variable prefix/namespace
- * @param {Function} template (for IE) A template function that returns the CSS as a string with variables injected
- * @param {String} scope (for IE) A scope to apply to the styles applied to domNode
  */
-function applyVariablesToNode () {
-  if (customPropertiesSupported()) {
-    applyVariablesToNodeStyle.apply(this, arguments)
-  } else {
-    applyVariablesPolyfillToNode.apply(this, arguments)
-  }
-}
-
-function applyVariablesPolyfillToNode (domNode, variables, defaults, prefix, template, scope) {
-  if (!domNode || isEmpty(variables)) {
-    return
-  }
-
-  const overrides = pickOverrides(defaults, variables)
-  let cssText = ''
-
-  if (overrides && Object.keys(overrides).length > 0) {
-    cssText = getCssTextWithPolyfill(template, {...defaults, ...variables})
-  }
-
-  scopeStylesToNode(domNode, cssText, scope)
-}
-
-function applyVariablesToNodeStyle (domNode, variables, defaults, prefix) {
+function applyVariablesToNode (domNode, variables, defaults, prefix) {
   if (!domNode || isEmpty(variables)) {
     return
   }
@@ -101,4 +73,4 @@ function setCustomProperties (domNode, properties) {
 }
 
 export default applyVariablesToNode
-export { applyVariablesToNode, applyVariablesPolyfillToNode, applyVariablesToNodeStyle }
+export { applyVariablesToNode }
