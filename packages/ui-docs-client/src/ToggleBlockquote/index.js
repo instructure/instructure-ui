@@ -23,22 +23,48 @@
  */
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 
-import { App } from './App'
-import { Figure } from './Figure'
-import { Guidelines } from './Guidelines'
-import { ToggleBlockquote } from './ToggleBlockquote'
+import { View } from '@instructure/ui-view'
+import { ToggleDetails } from '@instructure/ui-toggle-details'
+import { Heading } from '@instructure/ui-heading'
+import { Paragraph } from './Paragraph'
 
-function renderDocsClient (data, element) {
-  ReactDOM.render(<App {...data} />, element)
+class ToggleBlockquote extends React.Component {
+
+  static propTypes = {
+    summary: PropTypes.node.isRequired,
+    children: PropTypes.node
+  }
+  static defaultProps = {
+    children: null
+  }
+
+  static Paragraph = Paragraph
+
+  render () {
+    return (
+      <View
+        as="div"
+        margin="large 0"
+        padding="medium"
+        borderWidth="none none none large"
+        borderColor="info"
+        shadow="above"
+      >
+        <ToggleDetails
+          summary={
+            <Heading level="h3" as="h4">{this.props.summary}</Heading>
+          }
+          iconPosition="end"
+          defaultExpanded
+          fluidWidth
+        >
+          {this.props.children}
+        </ToggleDetails>
+      </View>
+    )
+  }
 }
 
-export {
-  renderDocsClient,
-  Figure,
-  Guidelines,
-  ToggleBlockquote
-}
-
-export default renderDocsClient
+export { ToggleBlockquote }
