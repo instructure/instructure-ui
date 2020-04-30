@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-billboard",
-  "version": "6.25.0",
+  "version": "6.26.0",
   "description": "A UI component to display empty states, 404 pages, redirects, etc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,18 +22,18 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.25.0",
-    "@instructure/ui-color-utils": "^6.25.0",
-    "@instructure/ui-icons": "^6.25.0",
-    "@instructure/ui-test-utils": "^6.25.0"
+    "@instructure/ui-babel-preset": "^6.26.0",
+    "@instructure/ui-color-utils": "^6.26.0",
+    "@instructure/ui-icons": "^6.26.0",
+    "@instructure/ui-test-utils": "^6.26.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-heading": "^6.25.0",
-    "@instructure/ui-img": "^6.25.0",
-    "@instructure/ui-react-utils": "^6.25.0",
-    "@instructure/ui-themeable": "^6.25.0",
-    "@instructure/ui-view": "^6.25.0",
+    "@instructure/ui-heading": "^6.26.0",
+    "@instructure/ui-img": "^6.26.0",
+    "@instructure/ui-react-utils": "^6.26.0",
+    "@instructure/ui-themeable": "^6.26.0",
+    "@instructure/ui-view": "^6.26.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
