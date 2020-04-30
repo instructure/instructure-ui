@@ -29,18 +29,13 @@ As we've built out our library, we've learned a lot about component APIs. Button
 ---
 embed: true
 ---
-<View as="div" margin="large 0" padding="medium" borderWidth="none none none large" borderColor="info" shadow="above">
-<ToggleDetails
-  summary={<Heading level="h3"><Text size="large" weight="normal">Creating a shared language</Text></Heading>}
-  iconPosition="end"
-  defaultExpanded
-  fluidWidth
+<ToggleBlockquote
+  summary="Creating a shared language"
 >
-  <View display="block" padding="small 0 0 0">
+  <ToggleBlockquote.Paragraph>
     When a prop is controlling a visual state, the naming should use language that is descriptive enough to be easily understood across disciplines. As we talked about Buttons with newcomers to our design system, they regularly used words like "color" and "shape" to describe the differences. We looked to leverage that same terminology in the component API to ease communication between all parties.
-  </View>
-</ToggleDetails>
-</View>
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
 ```
 The following props will need to be upgraded. They have been changed to be consistent with our [API guidelines](#api-guidelines).
  
@@ -59,21 +54,16 @@ The following props will need to be upgraded. They have been changed to be consi
 ---
 embed: true
 ---
-<View as="div" margin="large 0" padding="medium" borderWidth="none none none large" borderColor="info" shadow="above">
-<ToggleDetails
-  summary={<Heading level="h3"><Text size="large" weight="normal">Problems with the variant prop</Text></Heading>}
-  iconPosition="end"
-  defaultExpanded
-  fluidWidth
+<ToggleBlockquote
+  summary="Problems with the variant prop"
 >
-  <View display="block" padding="small 0 0 0">
+  <ToggleBlockquote.Paragraph>
     In the early stages of our library, <code>variant</code> was used when a component allowed multiple visual states. The Button <code>variant</code> prop initially controlled the color, but we soon needed things like icon-only buttons, buttons with a circular shape, and buttons without backgrounds or borders. Each time we needed a slight visual change in the button we had to tack on another <code>variant</code>. The list has grown to 14 variant types so far and counting. Names like <code>circle-danger</code> and <code>ghost-inverse</code> reflect the complex problem of trying to precisely capture multiple visual states in a single variant name. Some of these descriptions are incomplete. For example, when the variant is set to <code>icon</code>, having an icon as children is implied by the name. In contrast, <code>circle-danger</code> also expects only an icon as children but the variant name only describes the color and the shape. Should the name have actually been <code>icon-circle-danger</code>? Obviously not. This naming convention will become increasingly ridiculous as more and more attributes are added over time.
-  </View>
-  <View display="block" padding="small 0 0 0">
+  </ToggleBlockquote.Paragraph>
+  <ToggleBlockquote.Paragraph>
     Variant names that look like this are symptomatic of a component API that lacks specificity. By using precise and descriptive props, we can create naming conventions that are sustainable. The following sections detail these changes in the Button component. They describe how to remove the <code>variant</code> prop and replace it with more specific attributes.
-  </View>
-</ToggleDetails>
-</View>
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
 ```
 
 This table describes the upgrade process. If the `variant prop` is set to one of the following values, these changes will be necessary.
@@ -230,18 +220,13 @@ theme: 'canvas'
 ---
 embed: true
 ---
-<View as="div" margin="large 0" padding="medium" borderWidth="none none none large" borderColor="info" shadow="above">
-<ToggleDetails
-  summary={<Heading level="h3"><Text size="large" weight="normal">IconButton and separation of concerns</Text></Heading>}
-  iconPosition="end"
-  defaultExpanded
-  fluidWidth
+<ToggleBlockquote
+  summary="IconButton and separation of concerns"
 >
-  <View display="block" padding="small 0 0 0">
+  <ToggleBlockquote.Paragraph>
     Buttons with only an icon as visible children have some notable differences from Buttons with visible text. The shape of an icon-only button can be a circle or a square. It cannot be rendered to fill the entire width of the screen like a button with visible text. Additionally, icon-only buttons need descriptive text to provide context for assistive technologies. Building all this functionality into a single component becomes convoluted (a prop like <code>shape</code> would not do anything for buttons with visible text which would be confusing). Additionally, we wanted to make the requirement for <code>screenReaderLabel</code> explicit when using buttons with no visual text for improved accessibility. With these things in mind, the icon-only variants (<code>icon</code>, <code>icon-inverse</code>, <code>circle-default</code>, <code>circle-primary</code>, <code>circle-danger</code>) were moved to their own <Link href="#IconButton">IconButton</Link> component.
-  </View>
-</ToggleDetails>
-</View>
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
 ```
 
 This table describes the upgrade process if the `variant="icon"` prop is set but __no visible children/text__ are provided. These updates will also apply to any buttons with `variant="circle-` values. The following changes will be necessary.
@@ -567,18 +552,13 @@ One of the primary reasons the “link” variant was removed was to mitigate th
 ---
 embed: true
 ---
-<View as="div" margin="large 0" padding="medium" borderWidth="none none none large" borderColor="info" shadow="above">
-<ToggleDetails
-  summary={<Heading level="h3"><Text size="large" weight="normal">Clearing up the confusion between buttons and links</Text></Heading>}
-  iconPosition="end"
-  defaultExpanded
-  fluidWidth
+<ToggleBlockquote
+  summary="Clearing up the confusion between buttons and links"
 >
-  <View display="block" padding="small 0 0 0">
+  <ToggleBlockquote.Paragraph>
     Sometimes our UI contains buttons that share aesthetic similarities with links. The <code>link</code> variant was created to be used in these situations. Unfortunately, we've found that this variant has done nothing to help clarify the important functional differences between links and buttons. A button variant that underlines on hover is poor user experience as it signifies to the user linking behavior while in reality it behaves as a standard html button. With that in mind, the <code>link</code> variant will go away in version 8.0.0 in favor of alternative configurations that are detailed below. For further reading, <Link href="https://marcysutton.com/links-vs-buttons-in-modern-web-applications">Marcy Sutton does a fantastic job detailing use cases for buttons and links in this article.</Link>
-  </View>
-</ToggleDetails>
-</View>
+  </ToggleBlockquote.Paragraph>
+</ToggleBlockquote>
 ```
 
 This table describes the upgrade process if the `variant="link"` prop is set, and __an href is provided__. The following changes will be necessary.

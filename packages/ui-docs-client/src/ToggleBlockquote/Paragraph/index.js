@@ -23,22 +23,28 @@
  */
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 
-import { App } from './App'
-import { Figure } from './Figure'
-import { Guidelines } from './Guidelines'
-import { ToggleBlockquote } from './ToggleBlockquote'
+import { View } from '@instructure/ui-view'
 
-function renderDocsClient (data, element) {
-  ReactDOM.render(<App {...data} />, element)
+class Paragraph extends React.Component {
+
+  static propTypes = {
+    children: PropTypes.node
+  }
+  static defaultProps = {
+    children: null
+  }
+
+  static Paragraph = Paragraph
+
+  render () {
+    return (
+      <View as="div" margin="small 0">
+        {this.props.children}
+      </View>
+    )
+  }
 }
 
-export {
-  renderDocsClient,
-  Figure,
-  Guidelines,
-  ToggleBlockquote
-}
-
-export default renderDocsClient
+export { Paragraph }
