@@ -36,7 +36,7 @@ import { TimeInput } from '../TimeInput'
 
 /**
 ---
-category: components
+category: components/deprecated
 ---
 **/
 @testable()
