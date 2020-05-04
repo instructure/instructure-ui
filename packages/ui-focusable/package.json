@@ -3,8 +3,9 @@
   "version": "6.26.0",
   "description": "A utility used to identify when an element receives focus.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
+  "type": "module",
   "module": "./es/index.js",
+  "main": "./es/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",

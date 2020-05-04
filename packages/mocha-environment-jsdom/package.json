@@ -3,6 +3,7 @@
   "version": "6.26.0",
   "description": "jsdom environment setup for use with mocha tests",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

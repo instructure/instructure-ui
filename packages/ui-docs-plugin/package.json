@@ -3,6 +3,7 @@
   "version": "6.26.0",
   "description": "A webpack plugin to generate documentation made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
@@ -13,6 +14,7 @@
   "scripts": {
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
     "build": "ui-build --modules cjs",
     "build:watch": "ui-build --watch"
   },

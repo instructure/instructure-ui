@@ -3,6 +3,7 @@
   "version": "6.26.0",
   "description": "A babel plugin to transform CSS imports for themeable components",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

@@ -3,6 +3,7 @@
   "version": "6.26.0",
   "description": "Utilities for managing node packages in a monorepo.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

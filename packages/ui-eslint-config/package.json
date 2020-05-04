@@ -3,6 +3,7 @@
   "version": "6.26.0",
   "description": "A UI shared eslint config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

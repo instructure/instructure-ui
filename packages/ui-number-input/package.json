@@ -5,8 +5,9 @@
   "author": "Instructure, Inc. Engineering and Product Design",
   "homepage": "https://instructure.github.io/instructure-ui/",
   "license": "MIT",
-  "main": "./lib/index.js",
+  "type": "module",
   "module": "./es/index.js",
+  "main": "./es/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",

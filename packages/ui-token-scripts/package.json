@@ -3,6 +3,7 @@
   "version": "6.26.0",
   "description": "Utility scripts for generating cross-platform tokens from InstUI themes.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

@@ -3,7 +3,8 @@
   "version": "6.26.0",
   "description": "Helpers and utilities for queries in UI tests.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
+  "type": "module",
+  "main": "./es/index.js",
   "module": "./es/index.js",
   "types": "./types/index.d.ts",
   "repository": {

@@ -4,6 +4,7 @@
   "private": true,
   "description": "Shared build config files for UI libraries",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./index.js",
   "repository": {
     "type": "git",

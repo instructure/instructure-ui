@@ -65,15 +65,18 @@ if (args.includes('--watch')) {
   ]).filter(Boolean)
 }
 
-let modules = ['es', 'cjs']
+let modules = ['es']
 
 if (args.includes('--modules')) {
   //  eslint-disable-next-line no-unused-vars
   const [_, arg] = args.splice(args.indexOf('--modules'), 2)
+
   if (!arg) {
     throw new Error('Missing --modules argument')
   }
+
   modules = arg.split(',')
+
   if (modules.some(mod => !['es', 'cjs'].includes(mod))) {
     throw new Error(`Invalid --modules argument: '${arg}'`)
   }

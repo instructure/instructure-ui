@@ -3,8 +3,9 @@
   "version": "6.26.0",
   "description": "A high contrast theme for Canvas LMS made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
+  "type": "module",
   "module": "./es/index.js",
+  "main": "./es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"

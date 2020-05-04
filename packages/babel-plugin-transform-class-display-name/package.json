@@ -4,6 +4,7 @@
   "private": true,
   "description": "A babel plugin to add a displayName property to React component class declarations",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

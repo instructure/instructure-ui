@@ -1097,6 +1097,15 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     ]
   }
 
+  transforms.push({
+    where: {
+      importPattern: '^@instructure/.*/lib/.*'
+    },
+    transform: {
+      importPath: importPath => importPath.replace(new RegExp('/lib/'), '/es/')
+    }
+  })
+
   return {
     transformDefaults: {
       importType: 'named'

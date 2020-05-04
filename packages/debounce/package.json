@@ -3,7 +3,8 @@
   "version": "6.26.0",
   "description": "A debounce util made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./lib/index.js",
+  "type": "module",
+  "main": "./es/index.js",
   "module": "./es/index.js",
   "repository": {
     "type": "git",
