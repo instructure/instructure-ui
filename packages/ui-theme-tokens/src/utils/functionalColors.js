@@ -21,24 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const values = {
-  brand: '#008EE2',
-  link: '#008EE2',
-  electric: '#008EE2',
-  shamrock: '#00AC18',
-  barney: '#BF32A4',
-  crimson: '#EE0612',
-  fire: '#FC5E13',
-  licorice: '#2D3B45',
-  oxford: '#394B58',
-  ash: '#8B969E',
-  slate: '#8B969E',
-  tiara: '#C7CDD1',
-  porcelain: '#F5F5F5',
-  white: '#FFFFFF'
-}
 
-function functionalColors (colors) {
+function functionalColors(colors) {
   const text = {
     textDarkest: colors.licorice,
     textDark: colors.ash,
@@ -95,7 +79,5 @@ function functionalColors (colors) {
   }
 }
 
-const colors = Object.freeze(functionalColors(values))
-
-export default colors
-export { colors, functionalColors }
+export default functionalColors
+export { functionalColors }

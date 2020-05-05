@@ -24,15 +24,47 @@
 
 module.exports = [
   {
-    themePackage: '@instructure/canvas-theme'
+    themeKey: 'canvas',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas',
+    outputPackage: '@instructure/ui-theme-tokens',
+    groupOutput: true
   },
   {
-    themePackage: '@instructure/canvas-ams-theme'
+    themeKey: 'canvas',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas',
+    outputPackage: '@instructure/canvas-theme',
   },
   {
-    themePackage: '@instructure/canvas-high-contrast-theme'
+    themeKey: 'canvas-ams',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-ams',
+    outputPackage: '@instructure/ui-theme-tokens',
+    groupOutput: true
   },
   {
-    themePackage: '@instructure/instructure-theme'
-  }
+    themeKey: 'canvas-ams',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-ams',
+    outputPackage: '@instructure/canvas-ams-theme',
+  },
+  {
+    themeKey: 'canvas-high-contrast',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-high-contrast',
+    outputPackage: '@instructure/ui-theme-tokens',
+    groupOutput: true
+  },
+  {
+    themeKey: 'canvas-high-contrast',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-high-contrast',
+    outputPackage: '@instructure/canvas-high-contrast-theme',
+  },
+  {
+    themeKey: 'instructure',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/instructure',
+    outputPackage: '@instructure/ui-theme-tokens',
+    groupOutput: true
+  },
+  {
+    themeKey: 'instructure',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/instructure',
+    outputPackage: '@instructure/instructure-theme',
+  },
 ]

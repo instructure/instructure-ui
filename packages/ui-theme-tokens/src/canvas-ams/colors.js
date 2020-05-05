@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import { functionalColors } from '@instructure/canvas-theme'
+import { functionalColors } from '../utils/functionalColors'
 
-const defaultMappings = {
+const baseColors = {
   brand: '#5FA635',
   link: '#5FA635',
   electric: '#3098FA',
@@ -64,10 +64,10 @@ const webColors = {
 }
 
 const masteryLevels = {
-  masteryLevelExceedsMastery: defaultMappings.electric,
-  masteryLevelMastery: defaultMappings.shamrock,
+  masteryLevelExceedsMastery: baseColors.electric,
+  masteryLevelMastery: baseColors.shamrock,
   masteryLevelNearMastery: '#FBB918',
-  masteryLevelRemediation: defaultMappings.crimson,
+  masteryLevelRemediation: baseColors.crimson,
 }
 
 let {
@@ -75,7 +75,7 @@ let {
   text,
   background,
   border
-} = functionalColors(defaultMappings)
+} = functionalColors(baseColors)
 
 values = {
   ...values,
@@ -88,14 +88,14 @@ values = {
 text = {
   ...text,
   textBrand: fullyAccessibleBrand,
-  textDark: defaultMappings.oxford,
-  textInfo: defaultMappings.electric,
+  textDark: baseColors.oxford,
+  textInfo: baseColors.electric,
 }
 
 background = {
   ...background,
-  backgroundDark: defaultMappings.oxford,
-  backgroundInfo: defaultMappings.electric,
+  backgroundDark: baseColors.oxford,
+  backgroundInfo: baseColors.electric,
 }
 
 border = {

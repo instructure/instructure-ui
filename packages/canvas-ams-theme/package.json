@@ -23,13 +23,11 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/canvas-theme": "^6.26.0",
-    "@instructure/ui-themeable": "^6.26.0"
+    "@instructure/ui-themeable": "^6.26.0",
+    "@instructure/ui-theme-tokens": "^6.26.0"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.26.0",
-    "@instructure/ui-color-utils": "^6.26.0",
-    "@instructure/ui-test-utils": "^6.26.0"
+    "@instructure/ui-babel-preset": "^6.26.0"
   },
   "publishConfig": {
     "access": "public"

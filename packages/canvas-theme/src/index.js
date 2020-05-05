@@ -23,32 +23,22 @@
  */
 
 import { ThemeRegistry } from '@instructure/ui-themeable'
+import { canvas, functionalColors } from '@instructure/ui-theme-tokens'
 
-import { borders } from './borders'
-import { colors, functionalColors } from './colors'
-import { transitions } from './transitions'
-import { typography } from './typography'
-import { spacing } from './spacing'
-import { forms } from './forms'
-import { media } from './media'
-import { breakpoints } from './breakpoints'
-import { shadows } from './shadows'
-import { stacking } from './stacking'
-
-const key = 'canvas'
-
-const variables = {
-  colors,
+const {
   borders,
-  transitions,
-  typography,
-  spacing,
+  breakpoints,
+  colors,
   forms,
   media,
-  breakpoints,
   shadows,
-  stacking
-}
+  spacing,
+  stacking,
+  transitions,
+  typography
+} = canvas
+
+const key = 'canvas'
 
 const brandVariables = {
   /* Defaults for Canvas account branding variables: */
@@ -73,22 +63,22 @@ const brandVariables = {
 
 const theme = ThemeRegistry.registerTheme({
   key,
-  variables: { ...variables, ...brandVariables }
+  variables: { ...canvas, ...brandVariables }
 })
 
 export default theme
 export {
+  theme,
+  key,
   functionalColors,
-  colors,
   borders,
-  transitions,
-  typography,
-  spacing,
+  breakpoints,
+  colors,
   forms,
   media,
-  breakpoints,
   shadows,
+  spacing,
   stacking,
-  theme,
-  key
+  transitions,
+  typography
 }

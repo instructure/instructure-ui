@@ -24,17 +24,31 @@
 
 const path = require('path')
 const { error } = require('@instructure/command-utils')
-const handleMapThemeToSource = require('../handlers/handle-map-theme-to-source')
+const handleMapJsTokensToSource = require('../handlers/handle-map-js-tokens-to-source')
 const handleGenerateTokens = require('../handlers/handle-generate-tokens')
 
 exports.command = 'generate-tokens'
 exports.desc = 'Generate cross-platform design tokens for the given theme.'
 
 exports.builder = (yargs) => {
-  yargs.option('themePackage', {
+  yargs.option('sourceTokens', {
+    alias: 's',
+    type: 'string',
+    describe: 'Path to the JS source tokens for a theme.',
+    requiresArg: true
+  })
+
+  yargs.option('themeKey', {
     alias: 't',
     type: 'string',
-    describe: 'Package name for the source theme.',
+    describe: 'Unique key to identify the theme, used in output path and token namespacing.',
+    requiresArg: true
+  })
+
+  yargs.option('outputPackage', {
+    alias: 'p',
+    type: 'string',
+    describe: 'Package to output generated cross-platform tokens.',
     requiresArg: true
   })
 
@@ -44,23 +58,35 @@ exports.builder = (yargs) => {
     describe: 'Output directory for generated tokens within the source theme package.',
     default: 'tokens'
   })
+
+  yargs.option('groupOutput', {
+    alias: 'g',
+    type: 'boolean',
+    describe: 'Should generated tokens be grouped by theme in the output directory?',
+    default: false
+  })
 }
 
 exports.handler = (argv) => {
   const {
-    themePackage,
+    sourceTokens,
+    themeKey,
+    outputPackage,
     outputDir,
+    groupOutput
   } = argv
 
-  const { theme } = require(themePackage)
-  const styleDictionarySource = handleMapThemeToSource(theme)
-  const themePath = path.dirname(require.resolve(path.join(themePackage, 'package.json')))
-  const outputPath = path.join(themePath, outputDir)
+  const tokens = require(sourceTokens)
+  const styleDictionarySource = handleMapJsTokensToSource(tokens)
+  const themePath = path.dirname(require.resolve(path.join(outputPackage, 'package.json')))
+  const outputPath = groupOutput ?
+    path.join(themePath, outputDir, themeKey) :
+    path.join(themePath, outputDir)
   const sourcePath = path.join(outputPath, 'source.json')
 
   try {
     handleGenerateTokens({
-      theme,
+      themeKey,
       styleDictionarySource,
       outputPath,
       sourcePath

@@ -22,26 +22,4 @@
  * SOFTWARE.
  */
 
-import { functionalColors } from '@instructure/canvas-theme'
-
-const values = {
-  brand: '#287A9F',
-  link: '#287A9F',
-  electric: '#287A9F',
-  shamrock: '#3D997E',
-  barney: '#5B5B5B',
-  crimson: '#EA2127',
-  fire: '#E17909',
-  licorice: '#28282A',
-  oxford: '#5B5B5B',
-  ash: '#6E6E6E',
-  slate: '#6E6E6E',
-  tiara: '#CCCCCC',
-  porcelain: '#F0F2F3',
-  white: '#FFFFFF'
-}
-
-const colors = Object.freeze(functionalColors(values))
-
-export default colors
-export { colors }
+export * from './canvasHighContrast'

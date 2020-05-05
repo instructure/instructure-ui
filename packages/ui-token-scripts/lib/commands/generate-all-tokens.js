@@ -31,10 +31,25 @@ exports.desc = 'Generate cross-platform design tokens for all themes in configur
 exports.handler = (argv) => {
   const config = loadConfig('ui-token-scripts')
 
-  const commandsToRun = config.reduce((commands, { themePackage }) => {
+  const commandsToRun = config.reduce((commands, {
+    themeKey,
+    sourceTokens,
+    outputPackage,
+    groupOutput
+  }) => {
     return {
       ...commands,
-      [themePackage]: getCommand('ui-token-scripts', ['generate-tokens', '-t', themePackage])
+      [`${themeKey} - ${outputPackage}`]: getCommand('ui-token-scripts', [
+        'generate-tokens',
+        '-s',
+        sourceTokens,
+        '-t',
+        themeKey,
+        '-p',
+        outputPackage,
+        '-g',
+        groupOutput === true
+      ])
     }
   }, {})
 

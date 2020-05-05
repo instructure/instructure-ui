@@ -23,24 +23,32 @@
  */
 
 import { ThemeRegistry } from '@instructure/ui-themeable'
+import { instructure } from '@instructure/ui-theme-tokens'
 
-import { colors } from './colors'
-import { typography } from './typography'
-import { spacing } from './spacing'
-import { forms } from './forms'
-
-import {
+const {
   borders,
   breakpoints,
+  colors,
+  forms,
   media,
   shadows,
+  spacing,
   stacking,
-  transitions
- } from '@instructure/canvas-theme'
+  transitions,
+  typography
+} = instructure
 
 const key = 'instructure'
 
-const variables = {
+const theme = ThemeRegistry.registerTheme({
+  key,
+  variables: { ...instructure }
+})
+
+export default theme
+export {
+  theme,
+  key,
   colors,
   borders,
   transitions,
@@ -51,25 +59,4 @@ const variables = {
   breakpoints,
   shadows,
   stacking
-}
-
-const theme = ThemeRegistry.registerTheme({
-  key,
-  variables: { ...variables }
-})
-
-export default theme
-export {
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking,
-  theme,
-  key
 }

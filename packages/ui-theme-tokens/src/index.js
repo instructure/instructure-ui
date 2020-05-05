@@ -22,42 +22,14 @@
  * SOFTWARE.
  */
 
-import { ThemeRegistry } from '@instructure/ui-themeable'
-import { canvasHighContrast } from '@instructure/ui-theme-tokens'
+import { canvas } from './canvas'
+import { canvasAms } from './canvas-ams'
+import { canvasHighContrast } from './canvas-high-contrast'
+import { instructure } from './instructure'
 
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = canvasHighContrast
-
-const key = 'canvas-high-contrast'
-
-const theme = ThemeRegistry.registerTheme({
-  key,
-  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
-  variables: { ...canvasHighContrast }
-})
-
-export default theme
 export {
-  theme,
-  key,
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
+  canvas,
+  canvasAms,
+  canvasHighContrast,
+  instructure
 }

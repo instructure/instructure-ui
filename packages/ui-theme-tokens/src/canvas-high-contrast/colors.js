@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
- import { functionalColors } from '@instructure/canvas-theme'
+import { functionalColors } from '../utils/functionalColors'
 
- const values = {
+ const baseColors = {
    brand: '#0770A3',
    link: '#0770A3',
    electric: '#0770A3',
@@ -41,7 +41,7 @@
    white: '#FFFFFF'
  }
 
- const colors = Object.freeze(functionalColors(values))
+const colors = Object.freeze(functionalColors(baseColors))
 
  export default colors
  export { colors }

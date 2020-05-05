@@ -22,42 +22,26 @@
  * SOFTWARE.
  */
 
-import { ThemeRegistry } from '@instructure/ui-themeable'
-import { canvasHighContrast } from '@instructure/ui-theme-tokens'
+import { functionalColors } from '../utils/functionalColors'
 
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = canvasHighContrast
-
-const key = 'canvas-high-contrast'
-
-const theme = ThemeRegistry.registerTheme({
-  key,
-  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
-  variables: { ...canvasHighContrast }
-})
-
-export default theme
-export {
-  theme,
-  key,
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
+const baseColors = {
+  brand: '#008EE2',
+  link: '#008EE2',
+  electric: '#008EE2',
+  shamrock: '#00AC18',
+  barney: '#BF32A4',
+  crimson: '#EE0612',
+  fire: '#FC5E13',
+  licorice: '#2D3B45',
+  oxford: '#394B58',
+  ash: '#8B969E',
+  slate: '#8B969E',
+  tiara: '#C7CDD1',
+  porcelain: '#F5F5F5',
+  white: '#FFFFFF'
 }
+
+const colors = Object.freeze(functionalColors(baseColors))
+
+export default colors
+export { colors }

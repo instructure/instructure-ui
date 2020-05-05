@@ -22,42 +22,44 @@
  * SOFTWARE.
  */
 
-import { ThemeRegistry } from '@instructure/ui-themeable'
-import { canvasHighContrast } from '@instructure/ui-theme-tokens'
+const isPlainObject = require('lodash.isplainobject')
 
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = canvasHighContrast
+/**
+ * Transforms an InstUI theme object into the data structure expected by Style
+ * Dictionary. See: https://amzn.github.io/style-dictionary/#/properties
+ */
+module.exports = tokens => {
+  const mapTokenValue = tokenValue => ({ value: tokenValue })
+  const mapTokenGroup = tokenGroup => {
+    return Object
+      .entries(tokenGroup)
+      .reduce((mapped, [key, value]) => {
+        if (isPlainObject(value)) {
+          // Ignore nested objects
+          return mapped
+        }
 
-const key = 'canvas-high-contrast'
+        return {
+          ...mapped,
+          [key]: mapTokenValue(value)
+        }
+      }, {})
+  }
 
-const theme = ThemeRegistry.registerTheme({
-  key,
-  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
-  variables: { ...canvasHighContrast }
-})
+  const styleDictionarySource = Object
+    .entries(tokens)
+    // Exclude the "media" tokens, they are not cross-platform compatible
+    .filter(([key]) => !['media'].includes(key))
+    .reduce((mapped, [key, value]) => {
+      if (isPlainObject(value)) {
+        return {
+          ...mapped,
+          [key]: mapTokenGroup(value)
+        }
+      }
 
-export default theme
-export {
-  theme,
-  key,
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
+      return mapped
+    }, {})
+
+  return styleDictionarySource
 }

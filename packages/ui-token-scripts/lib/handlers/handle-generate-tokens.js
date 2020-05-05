@@ -28,7 +28,7 @@ const styleDictionary = require('style-dictionary')
 const { error } = require('@instructure/command-utils')
 
 module.exports = async ({
-  theme,
+  themeKey,
   sourcePath,
   styleDictionarySource,
   outputPath
@@ -41,7 +41,7 @@ module.exports = async ({
         platforms: {
           scss: {
             transformGroup: 'scss',
-            prefix: 'instui-' + theme.key,
+            prefix: 'instui-' + themeKey,
             buildPath: path.join(outputPath, 'scss/'),
             files: [
               {

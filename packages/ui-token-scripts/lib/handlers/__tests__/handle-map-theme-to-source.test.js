@@ -23,7 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import handleMapThemeToSource from '../handle-map-theme-to-source'
+import handleMapJsTokensToSource from '../handle-map-js-tokens-to-source'
 
 const values = {
   brand: '#333333',
@@ -48,17 +48,15 @@ const media = {
   mediumMin: 'min-width: 48rem'
 }
 
-const theme = {
-  variables: {
-    colors,
-    spacing,
-    media,
-    'ic-brand-primary': colors.textBrand
-  }
+const tokens = {
+  colors,
+  spacing,
+  media,
+  'ic-brand-primary': colors.textBrand
 }
 
 describe('handleMapThemeToSource', () => {
-  const mappedSource = handleMapThemeToSource(theme)
+  const mappedSource = handleMapJsTokensToSource(tokens)
 
   it('does not transform root level values', () => {
     expect(mappedSource).to.not.have.property('ic-brand-primary')

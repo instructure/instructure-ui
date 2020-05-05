@@ -23,43 +23,32 @@
  */
 
 import { ThemeRegistry } from '@instructure/ui-themeable'
+import { canvasAms } from '@instructure/ui-theme-tokens'
 
-import { colors } from './colors'
-
-import {
+const {
   borders,
-  transitions,
-  typography,
-  spacing,
+  breakpoints,
+  colors,
   forms,
   media,
-  breakpoints,
   shadows,
-  stacking
-} from '@instructure/canvas-theme'
+  spacing,
+  stacking,
+  transitions,
+  typography
+} = canvasAms
 
 const key = 'canvas-ams'
 
-const variables = {
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
-}
-
 const theme = ThemeRegistry.registerTheme({
   key,
-  variables: { ...variables }
+  variables: { ...canvasAms }
 })
 
 export default theme
 export {
+  theme,
+  key,
   colors,
   borders,
   transitions,
@@ -69,7 +58,5 @@ export {
   media,
   breakpoints,
   shadows,
-  stacking,
-  theme,
-  key
+  stacking
 }

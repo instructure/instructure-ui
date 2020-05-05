@@ -39,11 +39,15 @@ Generate cross-platform design tokens for all themes in configuration.
 
 module.exports = [
   {
-    themePackage: '@instructure/canvas-theme'
+    themeKey: 'canvas',
+    tokensPackage: '@instructure/ui-theme-tokens',
+    tokensPath: 'lib/canvas',
   },
   {
-    themePackage: '@instructure/canvas-high-contrast-theme'
-  }
+    themeKey: 'canvas-ams',
+    tokensPackage: '@instructure/ui-theme-tokens',
+    tokensPath: 'lib/canvas-ams',
+  },
 ]
 ```
 

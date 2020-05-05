@@ -86,6 +86,7 @@ module.exports = [
       '**/canvas-high-contrast-theme/**',
       '**/instructure-theme/**',
       '**/canvas-ams-theme/**',
+      '**/ui-theme-tokens/**',
       '**/template-app/**',
       '**/template-component/**',
       '**/template-package/**',

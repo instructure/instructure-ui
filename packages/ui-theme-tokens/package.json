@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/canvas-theme",
+  "name": "@instructure/ui-theme-tokens",
   "version": "6.26.0",
-  "description": "A theme for Canvas LMS made by Instructure Inc.",
+  "description": "Cross-platform theme tokens for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -20,12 +20,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.26.0"
+    "@instructure/ui-babel-preset": "^6.26.0",
+    "@instructure/ui-color-utils": "^6.26.0",
+    "@instructure/ui-test-utils": "^6.26.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-themeable": "^6.26.0",
-    "@instructure/ui-theme-tokens": "^6.26.0"
+    "@instructure/ui-themeable": "^6.26.0"
   },
   "publishConfig": {
     "access": "public"
