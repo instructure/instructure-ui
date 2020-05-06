@@ -176,7 +176,7 @@ class PositionedElement {
     // If there is more than one parent, the offset on the
     // documentElement should be calculated appropriately.
     // Otherwise we need to explictly account for that offset
-    let offsetY = parents.length > 1 ? 0 : doc.documentElement.offsetTop
+    let offsetY = parents.length > 1 ? 0 : getBoundingClientRect(doc.documentElement).top
     let offsetX = 0
     let scrollY = 0
 
