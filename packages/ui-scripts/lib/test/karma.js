@@ -53,7 +53,7 @@ if (args.includes('--watch')) {
   ]).filter(Boolean)
 } else {
   envVars = envVars.concat([
-    (`${React.version}`.startsWith('15') ? false : 'COVERAGE=1'),
+    (`${React.version}`.startsWith('15') || args.includes('--no-coverage') ? false : 'COVERAGE=1'),
     (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
     (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false),
     (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false)
@@ -70,6 +70,10 @@ if (args.includes('--no-headless')) {
 
 if (args.includes('--randomize')) {
   karmaArgs.push('--randomize')
+}
+
+if (args.includes('--no-lint')) {
+  karmaArgs.push('--no-lint')
 }
 
 const browsersArgIndex = args.findIndex(arg => arg.startsWith('--browsers='))
