@@ -4,6 +4,69 @@ parent: index
 id: Newsletter
 ---
 
+## May 2020
+
+### Version 7.0 is here!
+
+Happy Spring, InstUIers. After the past two months we've been through, I think we've all earned some warmer weather. Now that things are returning to normal-ish here at Instructure (after an amazing effort to welcome a lot of new online learners), we can resume publishing these updates on a regular basis.
+
+**And we're coming back with a bang: As you might have noticed, we've just released Instructure UI 7.0!** The 7.0 upgrade positions the library for future improvements and better ongoing maintainability:
+
+* Simplified organizational structure with individual packages for each component
+* React 15 no longer supported
+* Internet Explorer 11 no longer supported
+* Simplified build output (ES modules only)
+* A new look for our docs
+* A few component updates
+
+### Upgrading to 7.0
+
+#### Most changes have codemods...
+With version 7, almost every component has been moved to its own package to eliminate circular dependencies between packages and make the codebase more organized. We moved a lot of stuff around, but the good news is that fixing the vast majority of breaking changes in this release is a simple matter of updating component import paths. And the even better news is that codemods can do this busy work for you.
+
+Use the following command in your repo root to automate the import path updates:
+
+`npx @instructure/instui-cli codemod --scope-modifications imports`
+
+You'll be given the option to migrate your component import paths to individual component packages OR `@instructure/ui`.
+
+**Wait, what’s `@instructure/ui?`** Version 7 introduces a new package, `@instructure/ui`, that includes all Instructure UI components. Using this "universal" package means that your app no longer has to worry about what packages components live in. Yay! But if you choose to update your imports to `@instructure/ui` when you run the codemods, you'll want to make sure you have tree shaking configured to keep your bundle size down.
+
+[Codemod documentation can be found here.](#ui-codemods)
+
+#### ...but some changes don't
+For the few breaking changes that weren't possible to codemod, [we've prepared a guide](#v7-upgrade-guide) that details how to handle each upgrade:
+* `ui-forms/Select` has been removed. [Upgrade to `SimpleSelect`](#v7-upgrade-guide/upgrade-guide-for-version-7.0-select).
+* `ui-forms/DateInput` has been removed. [Upgrade to `ui-date-input/DateInput`](#v7-upgrade-guide/#upgrade-guide-for-version-7.0-dateinput).
+* `ui-forms/DateTimeInput` has been removed. [Replace with a combination of `DateInput` & `TimeSelect`](#v7-upgrade-guide/upgrade-guide-for-version-7.0-datetimeinput).
+* `ui-elements/Table` has been removed. [Upgrade to `ui-table/Table`](#v7-upgrade-guide/#upgrade-guide-for-version-7.0-table).
+
+#### Goodbye to old friends (and one frenemy)
+
+##### Internet Explorer
+We'll start with the frenemy. With version 7, Instructure UI lightens its load by dropping support for Internet Explorer 11. (As a point of reference, Development of IE came to an end in 2015, and Instructure's Canvas LMS software dropped support back in August 2019.) Not having to make the library backwards-compatible with an outdated, unmaintained browser allows us to remove a lot of polyfill dependencies, opens the door to simpler, more powerful component theming, and greatly speeds up the testing and QA end of things.
+
+##### React 15
+Support for React 15 is being dropped in version 7. This move allows us to begin to take advantage of React 16 features (fragments, better error handling, custom DOM attributes, and hooks) that will bring further improvements to the library in the future.
+
+##### Discontinued CommonJS build output
+We have discontinued CommonJS build output for components (found in each component package's lib directory). Moving forward, components will only provide ES modules output. This should reduce confusion, provide a single source of truth for build output, along with continued support for tree shaking. Codemods will be provided to transform import paths like this...
+
+`import { Avatar } from '@instructure/ui-avatar/lib/Avatar'`
+
+...into this:
+
+`import { Avatar } from '@instructure/ui-avatar'`
+
+##### DeprecatedAllTheThings
+If a component's name on instructure.design began with “Deprecated”, it has been removed in version 7. However, other than the four breaking changes listed in the previous section, all this means is that the component has moved to a new package. Updating will only mean running codemods.
+
+#### We're here to help
+We've endeavored to make this major version upgrade as painless as possible. If you run into any trouble, don't hesitate to reach out [via Github](https://github.com/instructure/instructure-ui), and we'll help get you back on track.
+
+Thanks for using Instructure UI!
+
+
 ## February 2020
 
 ### Button upgrades for 8.0
