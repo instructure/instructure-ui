@@ -71,26 +71,46 @@
     height: calc(var(--handleSize) / 2);
   }
 
+  /*
+    TODO: delete -ms- selectors once support for legacy Edge is
+    phased out. Chromium Edge ignores them.
+  */
+
+  /* stylelint-disable property-no-vendor-prefix, color-no-hex */
   &::-ms-track {
-    background: transparent;
-    border-width: var(--handleSize) 0;
+    border-width: 1rem 0;
   }
 
   &::-ms-fill-upper,
   &::-ms-fill-lower {
-    border-width: var(--handleSize) 0;
-    border-radius: calc(var(--handleSize) / 2);
-    background: var(--trackBackground);
+    border-width: 1.5rem 0;
+    border-radius: 0.75rem;
+    background: #2d3b45;
   }
 
   &::-ms-tooltip {
     display: none;
   }
-}
 
-/* patch broken MSEdge keyboard focus styles in 16 and up */
+  &::-ms-thumb {
+    -webkit-appearance: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    box-sizing: border-box;
+    border-radius: 100%;
+    background: #fff;
+    border: 0.25rem solid #2d3b45;
+    margin-top: 0.0625rem;
+  }
+}
+/* stylelint-enable property-no-vendor-prefix, color-no-hex */
+
+/*
+  TODO: delete selector below and remove isEdge util once legacy Edge support is
+  phased out.
+*/
 .edge16Up .input:focus {
-  outline: 0.0625rem solid var(--handleBackground);
+  outline: 0.125rem solid var(--handleBackground);
 }
 
 .value {
