@@ -266,6 +266,9 @@ DateTimeInput has been removed from ui-forms. See a __read only__ example of imp
 <!-- ///////////////////////////////////// -->
 
 ### Select
-Select within the ui-forms package has been removed; use [Select](/#Select) from `ui-select` instead. Similar to DateInput, Select is a controlled only component that will need to be composed in the consuming app. Examples are available for managing state within this new component. 
+Select within the ui-forms package has been removed; use [Select](#Select) from `ui-select` instead. Similar to DateInput, Select is a controlled only component that will need to be composed in the consuming app. Examples are available for managing state within this new component. 
 
 __Important note:__ If you do not need the level of customization that ui-select/Select provides, use SimpleSelect instead (available from the `ui-simple-select` package). SimpleSelect closely parallels the functionality of a standard HTML `<select>`. View the [SimpleSelect documentation](#SimpleSelect) for detailed examples.
+
+### Component Examples Loader
+If you are using the webpack component examples loader from [ui-component-examples](#ui-component-examples) note that the default functions for `renderPage` and `renderExample` are no longer supplied by the loader. These should be implemented in the consuming app.

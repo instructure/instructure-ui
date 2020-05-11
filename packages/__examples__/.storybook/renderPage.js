@@ -26,10 +26,10 @@ import React from 'react'
 import { ApplyLocale } from '@instructure/ui-i18n'
 
 // eslint-disable-next-line react/prop-types
-export default function renderPage ({ examples, renderExample }) {
+export function renderPage({ examples, renderExample }) {
   return (
     <ApplyLocale locale="en-US">
-      { examples.map(renderExample) }
+      {examples.map(renderExample)}
     </ApplyLocale>
   )
 }

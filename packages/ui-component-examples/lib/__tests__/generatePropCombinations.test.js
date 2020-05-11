@@ -32,8 +32,8 @@ describe('generatePropCombinations', () => {
   })
 
   it('should work for a single prop/value', () => {
-    expect(generatePropCombinations({ foo: ['a']}))
-      .to.deep.equal([{foo: 'a'}])
+    expect(generatePropCombinations({ foo: ['a'] }))
+      .to.deep.equal([{ foo: 'a' }])
   })
 
   it('should work for multiple values', () => {
@@ -41,8 +41,8 @@ describe('generatePropCombinations', () => {
       foo: ['a', 'b']
     }))
       .to.deep.equal([
-        {foo: 'a'},
-        {foo: 'b'}
+        { foo: 'a' },
+        { foo: 'b' }
       ])
   })
 
@@ -53,10 +53,10 @@ describe('generatePropCombinations', () => {
     })
     expect(result)
       .to.deep.equal([
-       {foo: 1, bar: 'a'},
-       {foo: 2, bar: 'a'},
-       {foo: 1, bar: 'b'},
-       {foo: 2, bar: 'b'}
+        { foo: 1, bar: 'a' },
+        { foo: 2, bar: 'a' },
+        { foo: 1, bar: 'b' },
+        { foo: 2, bar: 'b' }
       ])
   })
 
@@ -67,30 +67,30 @@ describe('generatePropCombinations', () => {
     })
     expect(result)
       .to.deep.equal([
-       {foo: 1, bar: 'a'},
-       {foo: 2, bar: 'a'},
-       {foo: 1, bar: 'b'},
-       {foo: 2, bar: 'b'},
-       {foo: 1, bar: 'c'},
-       {foo: 2, bar: 'c'}
+        { foo: 1, bar: 'a' },
+        { foo: 2, bar: 'a' },
+        { foo: 1, bar: 'b' },
+        { foo: 2, bar: 'b' },
+        { foo: 1, bar: 'c' },
+        { foo: 2, bar: 'c' }
       ])
   })
 
   it('should throw when a prop value is null', () => {
     expect(() => {
-      generatePropCombinations({foo: null})
+      generatePropCombinations({ foo: null })
     }).to.throw(Error)
   })
 
   it('should throw when a single prop has empty values', () => {
     expect(() => {
-      generatePropCombinations({foo: []})
+      generatePropCombinations({ foo: [] })
     }).to.throw(Error)
   })
 
   it('should throw when one of the props has empty prop values', () => {
     expect(() => {
-      generatePropCombinations({validField: [1, 2, 3], foo: []})
+      generatePropCombinations({ validField: [1, 2, 3], foo: [] })
     }).to.throw(Error)
   })
 })

@@ -30,7 +30,7 @@
  * @param {Object} propValues an object with the shape {propName: arrayOfPossibleValues}
  * @returns {Array} an array of all prop combinations [{propAName: propAValue, propBName: propBValue}]
  */
-export default function generatePropCombinations (propValues = {}) {
+module.exports = function generatePropCombinations(propValues = {}) {
   const propNames = Object.keys(propValues)
   let combos = []
 
@@ -42,7 +42,7 @@ export default function generatePropCombinations (propValues = {}) {
     const valuesForProp = propValues[propName]
 
     if (!Array.isArray(valuesForProp) || !valuesForProp.length) {
-      throw new Error(`[ui-component-examples] Please provide a non-empty array of possible values for prop ${propName}`)
+      throw new Error(`[ui-examples-loader] Please provide a non-empty array of possible values for prop ${propName}`)
     }
 
     const numValues = valuesForProp.length

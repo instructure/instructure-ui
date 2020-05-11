@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { resolver, parse } from 'react-docgen'
+const { resolver, parse } = require('react-docgen')
 
 /**
  * Given a relative path and the React component source, returns an object of all
@@ -59,12 +59,12 @@ import { resolver, parse } from 'react-docgen'
  * }
  * ```
  */
-export default function parsePropValues (fileSource) {
+module.exports = function parsePropValues(fileSource) {
   let parsedSrc = {}
   try {
     parsedSrc = parse(
-     fileSource,
-     resolver.findAllExportedComponentDefinitions
+      fileSource,
+      resolver.findAllExportedComponentDefinitions
     )
     if (Array.isArray(parsedSrc)) {
       parsedSrc = parsedSrc.pop()
@@ -78,7 +78,7 @@ export default function parsePropValues (fileSource) {
   return getPropValuesFromParsedProps(parsedSrc.props)
 }
 
-function getPropValuesFromParsedProps (parsedProps) {
+function getPropValuesFromParsedProps(parsedProps) {
   if (!parsedProps) return []
 
   const propValues = {}

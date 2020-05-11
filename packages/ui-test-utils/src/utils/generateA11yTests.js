@@ -28,7 +28,11 @@ import { accessible } from '@instructure/ui-test-queries'
 
 import { expect } from './expect'
 
-export function generateA11yTests ({ componentName, sections, renderExample }, only = []) {
+const renderExample = ({ Component, componentProps, key }) => (
+  <Component key={key} {...componentProps} />
+)
+
+export function generateA11yTests({ componentName, sections }, only = []) {
   describe(`${componentName} should meet accessibility standards`, async () => {
     sections.forEach(({ pages, sectionName, propName, propValue }, i) => {
       if (only[0] && i === only[0]) return

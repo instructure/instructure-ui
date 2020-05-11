@@ -27,26 +27,25 @@ import { expect } from '@instructure/ui-test-utils'
 
 import generateComponentExamples from '../generateComponentExamples'
 
-export default class TestComponent extends Component {
-  static propTypes = {
-    variant: PropTypes.oneOf(['circle', 'rectangle']),
-    show: PropTypes.bool,
-    message: PropTypes.object,
-    children: PropTypes.node
-  }
 
-  static defaultProps = {
-    variant: 'circle',
-    show: true,
-    message: null,
-    children: null
+class TestComponent extends Component {
+  render() {
+    return React.createElement('span')
   }
+}
 
-  render () {
-    return (
-      <span>{this.props.children}</span>
-    )
-  }
+TestComponent.propTypes = {
+  variant: PropTypes.oneOf(['circle', 'rectangle']),
+  show: PropTypes.bool,
+  message: PropTypes.object,
+  children: PropTypes.node
+}
+
+TestComponent.defaultProps = {
+  variant: 'circle',
+  show: true,
+  message: null,
+  children: null
 }
 
 describe('generateComponentExamples', () => {
@@ -63,27 +62,27 @@ describe('generateComponentExamples', () => {
     }
 
     expect(generateComponentExamples(TestComponent, config))
-    .excludingEvery(['key'])
-    .to.deep.equal([
-      {
-        sectionName: 'circle',
-        propName: 'variant',
-        propValue: 'circle',
-        pages: [
-          {
-            examples: [
-              {
-                Component: TestComponent,
-                componentProps: { variant: 'circle', show: true },
-                exampleProps: {}
-              }
-            ],
-            parameters: { delay: 200 },
-            index: 0
-          }
-        ]
-      }
-    ])
+      .excludingEvery(['key'])
+      .to.deep.equal([
+        {
+          sectionName: 'circle',
+          propName: 'variant',
+          propValue: 'circle',
+          pages: [
+            {
+              examples: [
+                {
+                  Component: TestComponent,
+                  componentProps: { variant: 'circle', show: true },
+                  exampleProps: {}
+                }
+              ],
+              parameters: { delay: 200 },
+              index: 0
+            }
+          ]
+        }
+      ])
   })
   it('should work with propValues defined', () => {
     const config = {

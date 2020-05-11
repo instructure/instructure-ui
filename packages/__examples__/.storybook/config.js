@@ -24,8 +24,6 @@
 
 // eslint-disable-next-line import/no-unresolved
 import '@instructure/ui-polyfill-loader!'
-
-import React from 'react'
 import 'storybook-chromatic'
 
 import { create } from '@storybook/theming'
@@ -33,6 +31,9 @@ import { getStorybook, storiesOf, configure, addParameters } from '@storybook/re
 
 import { theme } from '@instructure/canvas-theme'
 theme.use({ overrides: { transitions: { duration: '0ms' } } })
+
+import { renderExample } from './renderExample'
+import { renderPage } from './renderPage'
 
 // eslint-disable-next-line no-console
 console.log('Generating component examples...')
@@ -58,7 +59,7 @@ configure(() => {
   console.log(`Creating stories for ${examplesContext.keys().length} components...`)
 
   examplesContext.keys().map((requirePath) => {
-    examplesContext(requirePath).then(({ componentName, sections, renderPage, renderExample }) => {
+    examplesContext(requirePath).then(({ componentName, sections }) => {
       if (sections && sections.length > 0) {
         const stories = storiesOf(componentName, module)
 
@@ -68,7 +69,7 @@ configure(() => {
             numStories++
             stories
               .add(
-                `${sectionName}${pages.length > 1 ? ` (page ${i+1})` : ''}`,
+                `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
                 renderPage.bind(null, page),
                 { chromatic: page.parameters }
               )

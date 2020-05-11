@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-import path from 'path'
-import fs from 'fs'
-import loaderUtils from 'loader-utils'
-import parsePropValues from './parsePropValues'
-import loadConfig from '@instructure/config-loader'
+const path = require('path')
+const fs = require('fs')
+const loaderUtils = require('loader-utils')
+const loadConfig = require('@instructure/config-loader')
 
-export default function componentExamplesLoader (source, map, meta) {
+const parsePropValues = require('./parsePropValues')
+
+module.exports = function componentExamplesLoader(source, map, meta) {
   this.cacheable && this.cacheable()
 
   const loader = this
@@ -40,8 +41,6 @@ export default function componentExamplesLoader (source, map, meta) {
   }
 
   const generateComponentExamples = require.resolve('./generateComponentExamples')
-  const renderPage = require.resolve('./renderPage')
-  const renderExample = require.resolve('./renderExample')
   const configPath = `!!${loaderUtils.getRemainingRequest(loader)}`
 
   const getComponentPath = (typeof config.getComponentPath === 'function') ?
@@ -70,9 +69,7 @@ export default function componentExamplesLoader (source, map, meta) {
     }
 
     const result = `
-const generateComponentExamples = require(${JSON.stringify(generateComponentExamples)}).default
-const renderPage = require(${JSON.stringify(renderPage)}).default
-const renderExample = require(${JSON.stringify(renderExample)}).default
+const generateComponentExamples = require(${JSON.stringify(generateComponentExamples)})
 const config = require(${JSON.stringify(configPath)}).default
 
 // merge in generated prop values:
@@ -84,11 +81,19 @@ const Component = require(${JSON.stringify(componentPath)}).default
 
 config.maxExamples = Boolean(config.maxExamples) ? config.maxExamples : ${config.maxExamples}
 
+if (!config.renderPage) {
+  console.warn('A default is no longer provided for \`renderPage\`, you should supply it to the config instead')
+}
+
+if (!config.renderExample) {
+  console.warn('A default is no longer provided for \`renderExample\`, you should supply it to the config instead')
+}
+
 module.exports = {
  componentName: Component.displayName || Component.name,
  sections: generateComponentExamples(Component, config),
- renderPage: config.renderPage || renderPage,
- renderExample: config.renderExample || renderExample
+ renderPage: config.renderPage,
+ renderExample: config.renderExample
 }
 `
     return callback(null, result, map)

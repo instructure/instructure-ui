@@ -4,7 +4,6 @@
   "description": "A utility for automatically generating component examples",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
-  "module": "./es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -13,35 +12,23 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
-    "clean": "ui-build --clean",
-    "build": "ui-build",
-    "build:watch": "ui-build --watch"
+    "lint:fix": "ui-test --lint --fix"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.26.0",
-    "@instructure/ui-test-utils": "^6.26.0"
-  },
   "dependencies": {
     "@instructure/config-loader": "^6.26.0",
-    "@instructure/ui-a11y-content": "^6.26.0",
-    "@instructure/ui-buttons": "^6.26.0",
-    "@instructure/ui-i18n": "^6.26.0",
-    "@instructure/ui-icons": "^6.26.0",
-    "@instructure/ui-text": "^6.26.0",
-    "@instructure/ui-tooltip": "^6.26.0",
-    "@instructure/ui-view": "^6.26.0",
     "@instructure/uid": "^6.26.0",
     "loader-utils": "^1.2.3",
-    "prop-types": "^15",
     "react-docgen": "^4"
+  },
+  "devDependencies": {
+    "@instructure/ui-test-utils": "^6.26.0",
+    "prop-types": "^15"
   },
   "peerDependencies": {
     "react": "^16"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "sideEffects": false
+  }
 }

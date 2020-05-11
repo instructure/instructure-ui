@@ -21,19 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import uid from '@instructure/uid'
-import generatePropCombinations from './generatePropCombinations'
+const { uid } = require('@instructure/uid')
+const generatePropCombinations = require('./generatePropCombinations')
 
-export default function generateComponentExamples (Component, config = {
-    sectionProp: null,
-    propValues: {},
-    maxExamplesPerPage: null,
-    excludeProps: [],
-    getExampleProps: (props, index) => { return {} },
-    getComponentProps: (props, index) => { return {} },
-    getParameters: (examples, pageIndex) => { return {} },
-    filter: (props, index) => false
-  }) {
+module.exports = function generateComponentExamples(Component, config = {
+  sectionProp: null,
+  propValues: {},
+  maxExamplesPerPage: null,
+  excludeProps: [],
+  getExampleProps: (props, index) => { return {} },
+  getComponentProps: (props, index) => { return {} },
+  getParameters: (examples, pageIndex) => { return {} },
+  filter: (props, index) => false
+}) {
   const {
     sectionProp,
     excludeProps,
@@ -78,12 +78,12 @@ export default function generateComponentExamples (Component, config = {
       }
     }
 
-    return  exampleProps
+    return exampleProps
   }
 
   const addPage = (section) => {
     const page = {
-      examples : [],
+      examples: [],
       index: section.pages.length
     }
     section.pages.push(page)
@@ -186,7 +186,7 @@ export default function generateComponentExamples (Component, config = {
   return sections
 }
 
-function isEmpty (obj) {
+function isEmpty(obj) {
   if (typeof obj !== 'object') return true
   for (let key in obj) {
     if (hasOwnProperty.call(obj, key)) return false

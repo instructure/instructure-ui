@@ -44,12 +44,14 @@ module.exports = {
 }
 ```
 
+> Note: As of version 7, the component examples loader does not include default functions for `renderPage` and `renderExample`. These should be provided in the client of the consumer.
+
 #### Calling the `generateComponentExamples` function directly
 
 The `generateComponentExamples` function can be called directly as follows:
 
 ```js
-import generateComponentExamples from '@instructure/ui-component-examples'
+import { generateComponentExamples } from '@instructure/ui-component-examples'
 
 const result = generateComponentExamples(config)
 ```

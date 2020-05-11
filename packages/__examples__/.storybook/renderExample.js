@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
 
-export default function renderExample ({ Component, componentProps, exampleProps, key }) {
+export function renderExample({ Component, componentProps, exampleProps, key }) {
   return (
     <View
       key={key}
@@ -42,7 +43,7 @@ export default function renderExample ({ Component, componentProps, exampleProps
     >
       <Component {...componentProps} />
       <Tooltip
-        renderTip={<pre>{JSON.stringify(componentProps,null,2)}</pre>}
+        renderTip={<pre>{JSON.stringify(componentProps, null, 2)}</pre>}
         placement="bottom"
         on={['click']}
       >
