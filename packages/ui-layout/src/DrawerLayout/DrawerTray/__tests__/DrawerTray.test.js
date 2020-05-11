@@ -23,7 +23,7 @@
  */
 import React from 'react'
 
-import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { DrawerTray } from '../index'
 import styles from '../styles.css'
 import  { DrawerTrayLocator } from '../DrawerTrayLocator'

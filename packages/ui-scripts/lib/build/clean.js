@@ -30,6 +30,7 @@ process.exit(runCommandsConcurrently({
     'es',
     'dist',
     'lib',
+    'tokens',
     '.babel-cache',
     '.cache',
     'types'

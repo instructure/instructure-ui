@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 // eslint-disable-next-line instructure-ui/no-relative-package-imports
-import { Text } from '../../../../ui-text/lib/Text'
+import { Text } from '../../../../ui-text/es/Text'
 
 import { TruncateText } from '../index'
 

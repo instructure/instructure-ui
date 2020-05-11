@@ -17,7 +17,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@instructure/console": "^6.26.0",
+    "@instructure/command-utils": "^6.26.0",
     "@instructure/pkg-utils": "^6.26.0",
     "@instructure/ui-upgrade-scripts": "^6.26.0",
     "semver": "^6.3.0"

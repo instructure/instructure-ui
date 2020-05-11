@@ -27,7 +27,7 @@
 const path = require('path')
 const semver = require('semver')
 const { getPackageJSON } = require('@instructure/pkg-utils')
-const { error } = require('@instructure/console')
+const { error } = require('@instructure/command-utils')
 const generatePackageList = require('@instructure/ui-upgrade-scripts/lib/utils/generate-package-list')
 
 try {

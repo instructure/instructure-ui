@@ -109,9 +109,9 @@ module.exports = [
     icons: {
       packageName: '@instructure/ui-icons',
       formats: {
-        React: '@instructure/ui-icons',
-        SVG: '@instructure/ui-icons/lib/svg',
-        Font: '@instructure/ui-icons/lib/font'
+        React: '@instructure/ui-icons/es',
+        SVG: '@instructure/ui-icons/es/svg',
+        Font: '@instructure/ui-icons/es/font'
       }
     },
     template: './index.ejs'

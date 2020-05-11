@@ -27,6 +27,7 @@ const path = require('path')
 module.exports = {
   alias: {
     // set up aliases to get webpack to rebuild when we make changes to these packages
+    '@instructure/debounce$:': path.resolve(__dirname, '../debounce/src/'),
     '@instructure/ui-a11y$': path.resolve(__dirname, '../ui-a11y/src/'),
     '@instructure/ui-a11y-content$': path.resolve(__dirname, '../ui-a11y-content/src/'),
     '@instructure/ui-alerts$': path.resolve(__dirname, '../ui-alerts/src/'),

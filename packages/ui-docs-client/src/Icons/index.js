@@ -203,9 +203,6 @@ import { ${glyph.displayName} } from '${packageName}'
 /*** ES Modules (without tree shaking) ***/
 import { ${glyph.displayName} } from '${requirePath}/${glyph.displayName}'
 
-/*** CommonJS ***/
-const { ${glyph.displayName}  } = require('${requirePath}/${glyph.displayName}')
-
 class MyIcon extends React.Component {
   render() {
     return <${glyph.displayName} />

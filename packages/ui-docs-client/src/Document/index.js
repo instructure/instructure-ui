@@ -131,26 +131,22 @@ class Document extends Component {
   }
 
   renderUsage () {
-    const { requirePath, id, displayName, packageName, title, resource } = this.props.doc
+    const { esPath, id, displayName, packageName, title, resource } = this.props.doc
     const importName = displayName || resource.displayName || id
 
     let example = []
 
-    if (packageName && requirePath) {
+    if (packageName) {
       example.push(`\
 /*** ES Modules (with tree shaking) ***/
 import { ${importName} } from '${packageName}'
 `)
-example.push(`\
-/*** ES Modules (without tree shaking) ***/
-import { ${importName} } from '${requirePath}'
-`)
     }
 
-    if (requirePath) {
+    if (esPath) {
       example.push(`\
-/*** CommonJS ***/
-const { ${importName} } = require('${requirePath}')
+/*** ES Modules (without tree shaking) ***/
+import { ${importName} } from '${esPath}'
 `)
     }
 

@@ -28,17 +28,17 @@ import lorem from 'lorem-ipsum'
 import moment from 'moment'
 import 'moment/min/locales'
 
-import { mirrorHorizontalPlacement } from '@instructure/ui-layout'
+import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')
 
-import debounce from '@instructure/debounce'
+import { debounce } from '@instructure/debounce'
 
 // eslint-disable-next-line no-restricted-imports
-import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
+import '@instructure/ui-icons/es/font/Solid/InstructureIcons-Solid.css'
 // eslint-disable-next-line no-restricted-imports
-import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
+import '@instructure/ui-icons/es/font/Line/InstructureIcons-Line.css'
 
 import { DateTime } from '@instructure/ui-i18n'
 

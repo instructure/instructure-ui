@@ -30,6 +30,7 @@ let command = 'mocha'
 let args = [
   '**/*.test.js',
   '--colors',
+  '--require', 'esm',
   '--require', '@instructure/mocha-environment-jsdom',
   '--exit'
 ]
