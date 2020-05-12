@@ -73,14 +73,6 @@ class ComponentIdentifier extends Component {
     children: null
   }
 
-  /**
-   *
-   * Pick a specific child component from a component's children
-   *
-   * @param {Component} component The component to look for
-   * @param {Array} children The child components to look through
-   * @return {Component} The matching component if found, otherwise undefined
-   */
   static pick = (component, children) => {
     let result
 
@@ -104,4 +96,14 @@ class ComponentIdentifier extends Component {
 }
 
 export default ComponentIdentifier
-export { ComponentIdentifier }
+export {
+  /**
+  *
+  * Pick a specific child component from a component's children
+  *
+  * @param {Component} component The component to look for
+  * @param {Array} children The child components to look through
+  * @return {Component} The matching component if found, otherwise undefined
+  */
+  ComponentIdentifier
+}
