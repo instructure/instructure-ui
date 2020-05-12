@@ -48,11 +48,12 @@ module.exports = function (file, api, options) {
   }
 
   const root = j(file.source)
+
   let hasModifications = false
 
   hasModifications = replaceDeprecatedImports(j, root, config, api) || hasModifications
 
   return hasModifications
-    ? formatSource(root.toSource())
+    ? formatSource(root.toSource(), file.path)
     : null
 }
