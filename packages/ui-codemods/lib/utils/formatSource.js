@@ -24,8 +24,24 @@
 
 const prettier = require('prettier')
 
-module.exports = function formatSource (source) {
-  return prettier.format(source, {
+module.exports = function formatSource (source, sourcePath) {
+  let options = null
+
+  try {
+    options = prettier.resolveConfig.sync(sourcePath)
+
+    if (options) {
+      // Set the parser argument if the consumer did not set one to avoid a console warning
+      options = {
+        ...options,
+        parser: options.parser || 'babel'
+      }
+    }
+  } catch (err) {
+    // Will revert to the deafult prettier options if a config cannot be parsed
+  }
+
+  return prettier.format(source, options || {
     parser: 'babel',
     semi: false,
     singleQuote: true,
