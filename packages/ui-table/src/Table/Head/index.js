@@ -118,7 +118,6 @@ class Head extends Component {
         <div role="row">
           <div role="cell" aria-colspan={count}>
             <SimpleSelect
-              __dangerouslyIgnoreExperimentalWarnings
               renderLabel={renderSortLabel
                 ? callRenderProp(renderSortLabel)
                 : <ScreenReaderContent></ScreenReaderContent>

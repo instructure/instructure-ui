@@ -219,7 +219,7 @@ class ProgressCircle extends Component {
         className={classnames(classes)}
         margin={this.props.margin}
       >
-        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
+        <ScreenReaderContent>
           <progress
             max={valueMax}
             value={valueNow}

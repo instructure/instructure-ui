@@ -162,7 +162,6 @@ class List extends Component {
           margin={margin}
           elementRef={elementRef}
           display="block"
-          __dangerouslyIgnoreExperimentalWarnings
         >
           {this.renderChildren()}
         </View>

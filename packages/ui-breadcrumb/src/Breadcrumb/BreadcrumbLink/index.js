@@ -60,9 +60,9 @@ class BreadcrumbLink extends Component {
     /**
      * Add an icon to the Breadcrumb.Link
      */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.element]),
+    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * __Deprecated - use `renderIcon` instead
+    * __Deprecated - use renderIcon__
     */
     icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     /**

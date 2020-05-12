@@ -219,7 +219,6 @@ class CloseButton extends Component {
           href={href}
           cursor={cursor}
           tabIndex={tabIndex}
-          __dangerouslyIgnoreExperimentalWarnings
         >
           <ScreenReaderContent>
             {screenReaderLabel || children}

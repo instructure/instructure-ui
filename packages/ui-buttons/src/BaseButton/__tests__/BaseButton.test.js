@@ -31,7 +31,7 @@ import { BaseButtonLocator } from '../BaseButtonLocator'
 
 describe('<BaseButton/>', async () => {
   beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
+    stub(console, 'warn') // suppress deprecated warnings unti v8 release
   })
 
   it('should render the children as button text', async () => {

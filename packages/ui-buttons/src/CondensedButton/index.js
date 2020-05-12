@@ -156,7 +156,6 @@ class CondensedButton extends Component {
         renderIcon={renderIcon}
         theme={theme}
         ref={(component) => { this._baseButton = component }}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {children}
       </BaseButton>

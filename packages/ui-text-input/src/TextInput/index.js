@@ -366,7 +366,7 @@ class TextInput extends Component {
                     The input and content after input should not wrap, so they're in their own
                     Flex container
                   */}
-                  <Flex __dangerouslyIgnoreExperimentalWarnings>
+                  <Flex>
                     <Flex.Item shouldGrow shouldShrink>
                       {this.renderInput()}
                     </Flex.Item>

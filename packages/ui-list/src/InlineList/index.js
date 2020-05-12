@@ -111,7 +111,6 @@ class InlineList extends Component {
         padding="0"
         elementRef={elementRef}
         display="block"
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {this.renderChildren()}
       </View>

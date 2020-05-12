@@ -124,7 +124,6 @@ class Item extends Component {
         display="inline-block"
         maxWidth="100%"
         elementRef={elementRef}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {children}
         <span

@@ -57,10 +57,10 @@ class AccessibleContent extends Component {
 
     return (
       <ElementType {...passthroughProps(props)}>
-        <ScreenReaderContent __dangerouslyIgnoreExperimentalWarnings>
+        <ScreenReaderContent>
           {alt}
         </ScreenReaderContent>
-        <PresentationContent __dangerouslyIgnoreExperimentalWarnings>
+        <PresentationContent>
           {children}
         </PresentationContent>
       </ElementType>

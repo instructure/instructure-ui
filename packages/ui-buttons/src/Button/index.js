@@ -287,8 +287,7 @@ class Button extends Component {
       cursor,
       href,
       renderIcon: renderIcon || icon,
-      theme,
-      __dangerouslyIgnoreExperimentalWarnings: true
+      theme
     }
 
     if (fluidWidth) {

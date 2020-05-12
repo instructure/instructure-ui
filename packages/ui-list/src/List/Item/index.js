@@ -142,7 +142,6 @@ class Item extends Component {
         padding={padding}
         maxWidth="100%"
         elementRef={elementRef}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         {children}
 

@@ -193,7 +193,6 @@ class IconButton extends Component {
         renderIcon={children || renderIcon}
         theme={theme}
         ref={(component) => { this._baseButton = component }}
-        __dangerouslyIgnoreExperimentalWarnings
       >
         <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
       </BaseButton>

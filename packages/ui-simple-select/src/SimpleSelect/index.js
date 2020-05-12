@@ -36,8 +36,7 @@ import {
   matchComponentTypes,
   passthroughProps,
   callRenderProp,
-  getInteraction,
-  experimental
+  getInteraction
 } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { Select } from '@instructure/ui-select'
@@ -49,10 +48,8 @@ import { Group } from './Group'
 ---
 category: components
 tags: form, field, dropdown
-experimental: true
 ---
 **/
-@experimental()
 @testable()
 class SimpleSelect extends Component {
   static Option = Option

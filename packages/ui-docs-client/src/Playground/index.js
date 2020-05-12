@@ -222,7 +222,7 @@ class Playground extends Component {
         >
           <Flex.Item shouldShrink shouldGrow>
 
-            <Flex __dangerouslyIgnoreExperimentalWarnings>
+            <Flex>
               <Flex.Item>
                 <Tooltip renderTip="Fullscreen" placement="bottom">
                   <IconButton

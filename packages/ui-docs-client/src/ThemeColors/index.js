@@ -141,7 +141,6 @@ class ThemeColors extends Component {
         <Flex as="div" margin="small 0" background="default" alignItems="center" wrap="wrap">
           <Flex.Item padding="small">
             <SimpleSelect
-              __dangerouslyIgnoreExperimentalWarnings
               name="color-1"
               defaultValue={this.state.backgroundColor}
               renderLabel="Background Color"
@@ -153,7 +152,6 @@ class ThemeColors extends Component {
           </Flex.Item>
           <Flex.Item padding="small">
             <SimpleSelect
-              __dangerouslyIgnoreExperimentalWarnings
               name="color-2"
               defaultValue={this.state.foregroundColor}
               renderLabel="Foreground Color"

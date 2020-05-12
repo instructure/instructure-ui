@@ -22,13 +22,13 @@ example: true
 <Table caption='Tallest Roller Coasters'>
   <Table.Head>
     <Table.Row>
-      <Table.ColHeader>
+      <Table.ColHeader id="Roller Coaster">
         Roller Coaster
       </Table.ColHeader>
-      <Table.ColHeader>
+      <Table.ColHeader id="Height">
         Height
       </Table.ColHeader>
-      <Table.ColHeader>
+      <Table.ColHeader id="Amusement Park">
         Amusement Park
       </Table.ColHeader>
     </Table.Row>

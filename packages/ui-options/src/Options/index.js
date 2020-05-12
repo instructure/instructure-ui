@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps, matchComponentTypes, callRenderProp, safeCloneElement, experimental } from '@instructure/ui-react-utils'
+import { omitProps, matchComponentTypes, callRenderProp, safeCloneElement } from '@instructure/ui-react-utils'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { uid } from '@instructure/uid'
@@ -42,11 +42,9 @@ import theme from './theme'
 /**
 ---
 category: components
-experimental: true
 ---
 **/
 @testable()
-@experimental()
 @themeable(theme, styles)
 class Options extends Component {
   static Item = Item
