@@ -1,9 +1,0 @@
-.drawerContentRoot {
-  overflow-y: auto;
-  height: 100%;
-  box-sizing: content-box;
-}
-
-.transition {
-  transition: margin var(--duration);
-}

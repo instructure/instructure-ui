@@ -1,9 +1,0 @@
-.root {
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-around;
-  line-height: var(--lineHeight);
-  color: var(--color);
-}

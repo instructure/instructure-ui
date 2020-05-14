@@ -13,10 +13,6 @@ category: packages
 The `ui-tabs` package contains the following:
 - [Tabs](#Tabs)
 
-### Deprecated Components
-The following components will be removed in version 7.0.0.
-- [TabList](#DeprecatedTabList) \(use Tabs instead)
-
 
 ### Installation
 

@@ -15,14 +15,6 @@ The `ui-overlays` package contains the following:
 - [Mask](#Mask)
 - [Overlay](#Overlay)
 
-### Deprecated components
-The following components have been deprecated and will be removed from the `ui-overlays` package in v 7.0.0:
-- [Modal](#DeprecatedModal) \(use [Modal from ui-modal](#Modal) instead)
-- [Popover](#DeprecatedPopover) \(use [Popover from ui-popover](#Popover) instead)
-- [Tooltip](#DeprecatedTooltip) \(use [Tooltip from ui-tooltip](#Tooltip) instead)
-- [Tray](#DeprecatedTray) \(use [Tray from ui-tray](#Tray) instead)
-
-
 ### Installation
 
 ```sh

@@ -22,6 +22,5 @@
  * SOFTWARE.
  */
 
-export { Expandable } from './Expandable'
 export { ToggleDetails } from './ToggleDetails'
 export { ToggleGroup } from './ToggleGroup'

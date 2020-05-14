@@ -1,9 +1,0 @@
-.tag {
-  margin-top: calc(var(--tagTopMargin) + 0.125rem);
-  margin-inline-start: var(--tagStartMargin);
-  margin-inline-end: 0;
-
-  &:last-of-type {
-    margin-bottom: var(--tagTopMargin);
-  }
-}

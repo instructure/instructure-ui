@@ -23,12 +23,6 @@
  */
 
 export {
-  AccessibleContent as DeprecatedAccessibleContent,
-  Dialog as DeprecatedDialog,
-  PresentationContent as DeprecatedPresentationContent,
-  ScreenReaderContent as DeprecatedScreenReaderContent
-} from '@instructure/ui-a11y'
-export {
   AccessibleContent,
   PresentationContent,
   ScreenReaderContent
@@ -51,39 +45,8 @@ export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
 export { Dialog } from '@instructure/ui-dialog'
 export { Editable, InPlaceEdit } from '@instructure/ui-editable'
-export {
-  Avatar as DeprecatedAvatar,
-  Badge as DeprecatedBadge,
-  Heading as DeprecatedHeading,
-  Img as DeprecatedImg,
-  Pill as DeprecatedPill,
-  Link as DeprecatedLink,
-  Progress as DeprecatedProgress,
-  Rating as DeprecatedRating,
-  Spinner as DeprecatedSpinner,
-  Table as DeprecatedTable,
-  Tag as DeprecatedTag,
-  Text as DeprecatedText,
-  TruncateText as DeprecatedTruncateText,
-  List as DeprecatedList,
-  MetricsList as DeprecatedMetricsList
-} from '@instructure/ui-elements'
 export { Expandable } from '@instructure/ui-expandable'
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
-export {
-  Checkbox as DeprecatedCheckbox,
-  CheckboxGroup as DeprecatedCheckboxGroup,
-  DateInput as DeprecatedDateInput,
-  DateTimeInput,
-  FileDrop as DeprecatedFileDrop,
-  RadioInput as DeprecatedRadioInput,
-  RadioInputGroup as DeprecatedRadioInputGroup,
-  RangeInput as DeprecatedRangeInput,
-  Select as DeprecatedSelect,
-  TextArea as DeprecatedTextArea,
-  TextInput as DeprecatedTextInput,
-  TimeInput as DeprecatedTimeInput
-} from '@instructure/ui-forms'
 export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput } from '@instructure/ui-date-input'
@@ -100,27 +63,10 @@ export { TextInput } from '@instructure/ui-text-input'
 export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
-export {
-  ContextView as DeprecatedContextView,
-  Media as DeprecatedMedia,
-  Responsive as DeprecatedResponsive,
-  Flex as DeprecatedFlex,
-  DrawerLayout as DeprecatedDrawerLayout,
-  Grid as DeprecatedGrid,
-  Position as DeprecatedPosition,
-  View as DeprecatedView
-} from '@instructure/ui-layout'
 export { MetricGroup, Metric, MetricsList } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
-export {
-  Mask,
-  Overlay,
-  Tooltip as DeprecatedTooltip,
-  Modal as DeprecatedModal,
-  Tray as DeprecatedTray,
-  Popover as DeprecatedPopover
-} from '@instructure/ui-overlays'
+export { Mask, Overlay } from '@instructure/ui-overlays'
 export { Position } from '@instructure/ui-position'
 export { Popover } from '@instructure/ui-popover'
 export { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input'
@@ -144,10 +90,10 @@ export { SimpleSelect } from '@instructure/ui-simple-select'
 export { Selectable } from '@instructure/ui-selectable'
 export { ApplyTheme } from '@instructure/ui-themeable'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
-export { Tabs, TabList as DeprecatedTabList } from '@instructure/ui-tabs'
+export { Tabs } from '@instructure/ui-tabs'
 export { Text } from '@instructure/ui-text'
 export { TimeSelect } from '@instructure/ui-time-select'
-export { Expandable as DeprecatedExpandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
+export { ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { TextArea } from '@instructure/ui-text-area'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export { Flex } from '@instructure/ui-flex'

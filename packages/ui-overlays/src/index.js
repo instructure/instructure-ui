@@ -22,8 +22,4 @@
  * SOFTWARE.
  */
 export { Mask } from './Mask'
-export { Modal } from './Modal'
 export { Overlay } from './Overlay'
-export { Popover } from './Popover'
-export { Tooltip } from './Tooltip'
-export { Tray } from './Tray'

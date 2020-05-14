@@ -96,7 +96,6 @@ module.exports = [
       '**/ui-docs-plugin/src/**',
 
       // deprecated packages and modules:
-      '**/generate-examples/**',
       '**/ui-themeable/src/StyleSheet.js',
       '**/InputModeListener.js'
     ],

@@ -1,6 +1,0 @@
-**/.*
-**/__tests__
-**/__examples__
-**/__testfixtures__
-*.config.js
-*.conf.js
