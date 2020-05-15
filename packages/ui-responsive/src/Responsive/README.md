@@ -12,7 +12,7 @@ Breakpoints are defined by the `query` prop. Different props can be
 specified for each breakpoint using the `props` prop. These props are passed to the
 underlying component via the `Responsive` `render` or `children` props as functions.
 
-The following example using `Progress` renders as a circle when the element is under 30rem.
+The following example using `Avatar` renders as a circle when the element is under 30rem.
 
 ```js
 ---
@@ -21,27 +21,16 @@ example: true
 <Responsive
   query={{ small: { maxWidth: '30rem' }, large: { minWidth: '30rem' }}}
   props={{
-    small: { variant: 'circle', size: 'medium' },
-    large: { variant: 'bar', size: 'large' }
+    small: { shape: 'circle', size: 'medium' },
+    large: { shape: 'rectangle', size: 'x-large' }
   }}
   render={(props, matches) => {
     return (
       <div>
-        <Progress
+        <Avatar
           {...props}
-          valueNow={80}
-          valueMax={124}
-          label="Percent complete"
-          formatDisplayedValue={function (valueNow, valueMax) {
-            return (
-              <span>
-                <Text size="x-large" weight="bold">{valueNow}</Text>
-                <br />
-                <Text size="small">of </Text>
-                <Text size="small">{valueMax}</Text>
-              </span>
-            )
-          }}
+          name="Kyle Montgomery"
+          src={avatarSquare}
         />
       </div>
     )
