@@ -293,9 +293,9 @@ class Example extends React.Component {
           onClick={this.handleDetailsButtonClick.bind(this, user.id)}
           elementRef={(el) => { this._usersNav[user.id] = el }}
         >
-          <Media description={user.name}>
+          <Byline description={user.name}>
             <Avatar name={user.name} />
-          </Media>
+          </Byline>
         </Link>
       </View>
     )
@@ -338,106 +338,104 @@ class Example extends React.Component {
       <View padding="large 0">
         <Popover
           on="click"
-          show={this.state.showPopover}
+          isShowingContent={this.state.showPopover}
           shouldContainFocus
           shouldReturnFocus
-          label="Pages Dialog Example"
+          screenReaderLabel="Pages Dialog Example"
           placement="center end"
-          onDismiss={this.hidePopover}
-        >
-          <Popover.Trigger>
+          onHideContent={this.hidePopover}
+          renderTrigger={
             <Button onClick={this.showPopover}>
               View Users
             </Button>
-          </Popover.Trigger>
-          <Popover.Content>
-            <Pages
-              activePageIndex={this.state.activePageIndex}
-              onPageIndexChange={this.handlePagesBackButtonClick}
-              backButtonLabel="Back to previous page"
+          }
+        >
+          <Pages
+            activePageIndex={this.state.activePageIndex}
+            onPageIndexChange={this.handlePagesBackButtonClick}
+            backButtonLabel="Back to previous page"
+          >
+            <Pages.Page
+              defaultFocusElement={() => this._usersNav[this.state.lastPageIndex]}
             >
-              <Pages.Page
-                defaultFocusElement={() => this._usersNav[this.state.lastPageIndex]}
-              >
-              {(history, navigateToPreviousPage) => {
-                return (
-                  <div>
-                    <Grid hAlign="space-between">
-                      <Grid.Row>
-                        <Grid.Col width={9}>
-                          <Heading level="h1">Users</Heading>
-                        </Grid.Col>
-                        <Grid.Col width={3} textAlign="end">
-                          {this.renderNavigationButton(history, navigateToPreviousPage)}
-                        </Grid.Col>
-                      </Grid.Row>
-                    </Grid>
-                    {this.renderNavigation()}
-                  </div>
-                )
-              }}
-              </Pages.Page>
-              {USERS.map((user, index) => {
-                return (
-                  <Pages.Page key={index}>
-                  {(history, navigateToPreviousPage) => {
-                    return (
-                      <div>
-                        <Grid hAlign="space-between">
-                          <Grid.Row>
-                            <Grid.Col width={9}>
-                              <Heading level="h1">User Details</Heading>
-                            </Grid.Col>
-                            <Grid.Col width={3} textAlign="end">
-                              {this.renderNavigationButton(history, navigateToPreviousPage)}
-                            </Grid.Col>
-                          </Grid.Row>
-                        </Grid>
-                        <Media description={user.name}>
-                          <Avatar name={user.name} />
-                        </Media>
-                        <Table caption="User details">
-                          <Table.Body>
+            {(history, navigateToPreviousPage) => {
+              return (
+                <div>
+                  <Grid hAlign="space-between">
+                    <Grid.Row>
+                      <Grid.Col width={9}>
+                        <Heading level="h1">Users</Heading>
+                      </Grid.Col>
+                      <Grid.Col width={3} textAlign="end">
+                        {this.renderNavigationButton(history, navigateToPreviousPage)}
+                      </Grid.Col>
+                    </Grid.Row>
+                  </Grid>
+                  {this.renderNavigation()}
+                </div>
+              )
+            }}
+            </Pages.Page>
+            {USERS.map((user, index) => {
+              return (
+                <Pages.Page key={index}>
+                {(history, navigateToPreviousPage) => {
+                  return (
+                    <div>
+                      <Grid hAlign="space-between">
+                        <Grid.Row>
+                          <Grid.Col width={9}>
+                            <Heading level="h1">User Details</Heading>
+                          </Grid.Col>
+                          <Grid.Col width={3} textAlign="end">
+                            {this.renderNavigationButton(history, navigateToPreviousPage)}
+                          </Grid.Col>
+                        </Grid.Row>
+                      </Grid>
+                      <Byline description={user.name}>
+                        <Avatar name={user.name} />
+                      </Byline>
+                      <Table caption="User details">
+                        <Table.Body>
+                          <Table.Row>
+                            <Table.RowHeader>Age</Table.RowHeader>
+                            <Table.Cell>{user.age}</Table.Cell>
+                          </Table.Row>
+                          {user.email && (
                             <Table.Row>
-                              <Table.RowHeader>Age</Table.RowHeader>
-                              <Table.Cell>{user.age}</Table.Cell>
+                              <Table.RowHeader>Email</Table.RowHeader>
+                              <Table.Cell>{user.email}</Table.Cell>
                             </Table.Row>
-                            {user.email && (
-                              <Table.Row>
-                                <Table.RowHeader>Email</Table.RowHeader>
-                                <Table.Cell>{user.email}</Table.Cell>
-                              </Table.Row>
-                            )}
-                            {!isNaN(user.spouse) && (
-                              <Table.Row>
-                                <Table.RowHeader>Spouse</Table.RowHeader>
-                                <Table.Cell>
-                                  {this.renderUserMedia(this.findUser(user.spouse))}
-                                </Table.Cell>
-                              </Table.Row>
-                            )}
-                            {Array.isArray(user.parents) && (
-                              <Table.Row>
-                                <Table.RowHeader>Parents</Table.RowHeader>
-                                <Table.Cell>
-                                  {user.parents.map((parent, index) => {
-                                    return (
-                                      <div key={index}>{this.renderUserMedia(this.findUser(parent))}</div>
-                                    )
-                                  })}
-                                </Table.Cell>
-                              </Table.Row>
-                            )}
-                          </Table.Body>
-                        </Table>
-                      </div>
-                    )
-                  }}
-                  </Pages.Page>
-                )
-              })}
-            </Pages>
-          </Popover.Content>
+                          )}
+                          {!isNaN(user.spouse) && (
+                            <Table.Row>
+                              <Table.RowHeader>Spouse</Table.RowHeader>
+                              <Table.Cell>
+                                {this.renderUserMedia(this.findUser(user.spouse))}
+                              </Table.Cell>
+                            </Table.Row>
+                          )}
+                          {Array.isArray(user.parents) && (
+                            <Table.Row>
+                              <Table.RowHeader>Parents</Table.RowHeader>
+                              <Table.Cell>
+                                {user.parents.map((parent, index) => {
+                                  return (
+                                    <div key={index}>{this.renderUserMedia(this.findUser(parent))}</div>
+                                  )
+                                })}
+                              </Table.Cell>
+                            </Table.Row>
+                          )}
+                        </Table.Body>
+                      </Table>
+                    </div>
+                  )
+                }}
+                </Pages.Page>
+              )
+            })}
+          </Pages>
         </Popover>
       </View>
     )

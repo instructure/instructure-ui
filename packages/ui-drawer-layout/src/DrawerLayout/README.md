@@ -32,7 +32,7 @@ class Example extends React.Component {
         height="25rem"
         as="div"
         background="primary"
-        style={{ position: 'relative' }}
+        position="relative"
       >
         { this.state.trayIsOverlayed && this.state.open && <Mask onClick={this.handleTrayDismiss} /> }
         <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
