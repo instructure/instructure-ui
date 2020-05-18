@@ -52,8 +52,8 @@ import theme from './theme'
 category: components
 ---
 **/
-@deprecated('7.0.0', {
-  closeButtonLabel:'renderCloseButtonLabel'
+@deprecated('8.0.0', {
+  closeButtonLabel: 'renderCloseButtonLabel'
 })
 @themeable(theme, styles)
 class Alert extends Component {
@@ -97,7 +97,7 @@ class Alert extends Component {
     */
     renderCloseButtonLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * Close button label
+    * __Deprecated - use `renderCloseButtonLabel` instead__
     */
     closeButtonLabel: PropTypes.string,
     /**

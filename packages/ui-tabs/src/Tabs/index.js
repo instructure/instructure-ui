@@ -52,7 +52,8 @@ import theme from './theme'
 category: components
 ---
 **/
-@deprecated('7.0.0', {
+@deprecated('8.0.0', {
+  title: 'renderTitle',
   size: 'maxWidth',
   selectedIndex: true,
   onChange: 'onRequestTabChange',
@@ -100,19 +101,19 @@ class Tabs extends Component {
     tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
     shouldFocusOnRender: PropTypes.bool,
     /**
-    * deprecated
+    * __Deprecated - use `onRequestTabChange` instead__
     */
     onChange: PropTypes.func,
     /**
-    * deprecated
+    * __Deprecated__
     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * deprecated
+    * __Deprecated__
     */
     selectedIndex: PropTypes.number,
     /**
-    * deprecated
+    * __Deprecated - use `shouldFocusOnRender` instead__
     */
     focus: PropTypes.bool
   }

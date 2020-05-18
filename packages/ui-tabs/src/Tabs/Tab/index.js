@@ -39,7 +39,7 @@ parent: Tabs
 id: Tabs.Tab
 ---
 **/
-@deprecated('7.0.0', {
+@deprecated('8.0.0', {
   selected: 'isSelected',
   disabled: 'isDisabled'
 })
@@ -56,11 +56,11 @@ class Tab extends Component {
     onKeyDown: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * deprecated
+    * __Deprecated - use `isDisabled` instead__
     */
     disabled: PropTypes.bool,
     /**
-    * deprecated
+    * __Deprecated - use `isSelected` instead__
     */
     selected: PropTypes.bool
   }

@@ -51,7 +51,7 @@ import styles from './styles.css'
 category: components
 ---
 **/
-@deprecated('7.0.0', {
+@deprecated('8.0.0', {
   label: 'renderLabel'
 })
 @testable()
@@ -64,8 +64,8 @@ class DateInput extends Component {
     * Specifies the input label.
     */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-        /**
-    * deprecated
+    /**
+    * __Deprecated - use `renderLabel` instead__
     */
     label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**

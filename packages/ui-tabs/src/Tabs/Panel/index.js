@@ -40,7 +40,7 @@ parent: Tabs
 id: Tabs.Panel
 ---
 **/
-@deprecated('7.0.0', {
+@deprecated('8.0.0', {
   title: 'renderTitle',
   selected: 'isSelected',
   disabled: 'isDisabled'
@@ -64,15 +64,15 @@ class Panel extends Component {
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
-    * deprecated
+    * __Deprecated - use `renderTitle` instead__
     */
     title: PropTypes.node,
     /**
-    * deprecated
+    * __Deprecated - use `isSelected` instead__
     */
     selected: PropTypes.bool,
     /**
-    * deprecated
+    * __Deprecated - use `isDisabled` instead__
     */
     disabled: PropTypes.bool,
     elementRef: PropTypes.func

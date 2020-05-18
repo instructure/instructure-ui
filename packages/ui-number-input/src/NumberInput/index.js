@@ -43,7 +43,7 @@ category: components
 id: NumberInput
 ---
 **/
-@deprecated('7.0.0', {
+@deprecated('8.0.0', {
   label: 'renderLabel',
   required: 'isRequired',
   inline: 'display'
@@ -136,15 +136,15 @@ class NumberInput extends Component {
     */
     onKeyDown: PropTypes.func,
     /**
-     * deprecated
+     * __Deprecated - use `renderLabel` instead__
      */
     label: PropTypes.node,
     /**
-     * deprecated
+     * __Deprecated - use `isRequired` instead__
      */
     required: PropTypes.bool,
     /**
-     * deprecated
+     * __Deprecated - use `display` instead__
      */
     inline: PropTypes.bool
   }

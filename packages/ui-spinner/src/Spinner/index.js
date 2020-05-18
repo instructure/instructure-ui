@@ -67,8 +67,11 @@ class Spinner extends Component {
     elementRef: PropTypes.func,
     as: PropTypes.elementType,
 
+    /**
+     * __Deprecated - use `renderTitle` instead__
+     */
     /* eslint-disable react/require-default-props */
-    title: PropTypes.string // remove in version 8.0.0
+    title: PropTypes.string
     /* eslint-enable react/require-default-props */
   }
 

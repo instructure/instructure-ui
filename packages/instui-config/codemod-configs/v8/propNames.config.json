@@ -1,4 +1,9 @@
 {
+  "Alert": {
+    "8.0.0": [
+      { "old": "closeButtonLabel", "new": "renderCloseButtonLabel" }
+    ]
+  },
   "Avatar": {
     "8.0.0": [
       { "old": "inline", "new": "display", "values": [
@@ -43,6 +48,11 @@
       ]}
     ]
   },
+  "DateInput": {
+    "8.0.0": [
+      { "old": "label", "new": "renderLabel" }
+    ]
+  },
   "Flex": {
     "8.0.0": [
       { "old": "inline", "new": "display", "values": [
@@ -80,6 +90,41 @@
         { "old": "inverse", "new": "link-inverse" }
       ]},
       { "old": "linkRef", "new": "elementRef" }
+    ]
+  },
+  "NumberInput": {
+    "8.0.0": [
+      { "old": "label", "new": "renderLabel" },
+      { "old": "required", "new": "isRequired" },
+      { "old": "inline", "new": "display", "values": [
+        { "old": true, "new": "inline-block" },
+        { "old": false, "new": "block" }
+      ]}
+    ]
+  },
+  "Spinner": {
+    "8.0.0": [
+      { "old": "title", "new": "renderTitle" }
+    ]
+  },
+  "Tabs": {
+    "8.0.0": [
+      { "old": "title", "new": "renderTitle" },
+      { "old": "onChange", "new": "onRequestTabChange" },
+      { "old": "focus", "new": "shouldFocusOnRender" }
+    ]
+  },
+  "Tabs.Panel": {
+    "8.0.0": [
+      { "old": "title", "new": "renderTitle" },
+      { "old": "selected", "new": "isSelected" },
+      { "old": "disabled", "new": "isDisabled" }
+    ]
+  },
+  "Tabs.Tab": {
+    "8.0.0": [
+      { "old": "selected", "new": "isSelected" },
+      { "old": "disabled", "new": "isDisabled" }
     ]
   },
   "Text": {
