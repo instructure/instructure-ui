@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import { PaginationArrowButton } from '../index'
 
@@ -58,5 +58,22 @@ describe('<PaginationArrowButton />', async () => {
     const tooltip = await button.findTooltipContent()
 
     expect(tooltip).to.have.text('Label')
+  })
+
+  it('should provide a ref to the button element', async () => {
+    const buttonRef = spy()
+
+    await mount(
+      <PaginationArrowButton
+        direction="prev"
+        label="Label"
+        buttonRef={buttonRef}
+      />
+    )
+
+    const paginationArrow = await PaginationArrowButtonLocator.find()
+    const button = await paginationArrow.find('button')
+
+    expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
   })
 })

@@ -32,7 +32,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { Children } from '@instructure/ui-prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
-import { findTabbable } from '@instructure/ui-dom-utils'
+import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
@@ -136,48 +136,31 @@ class Pagination extends Component {
     super(...args)
 
     this._labelId = uid('Pagination')
+
+    this._prevButton = null
+    this._nextButton = null
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (!nextProps.shouldHandleFocus) {
-      return
-    }
+  getSnapshotBeforeUpdate () {
+    const activeElement = getActiveElement()
 
-    if (!propsHaveCompactView(this.props) && !propsHaveCompactView(nextProps)) {
-      return
-    }
-
-    const focusable = findTabbable(this._root)
-    if (
-      focusable[0] === document.activeElement &&
-      !shouldShowPrevButton(nextProps)
-    ) {
-      // Previous Page button has focus, but will no longer be rendered
-      this._moveFocusTo = 'first'
-      return
-    }
-
-    if (
-      focusable[focusable.length - 1] === document.activeElement &&
-      !shouldShowNextButton(nextProps)
-    ) {
-      // Next Page button has focus, but will no longer be rendered
-      this._moveFocusTo = 'last'
-      return
+    return {
+      prevButtonFocused: this._prevButton === activeElement,
+      nextButtonFocused: this._nextButton === activeElement
     }
   }
 
-  componentDidUpdate () {
-    if (this.props.shouldHandleFocus === false || this.compactView === false) {
+  componentDidUpdate (prevProps, prevState, snapshot) {
+    if (!this.props.shouldHandleFocus || (!propsHaveCompactView(prevProps) && !propsHaveCompactView(this.props))) {
       return
     }
 
-    if (this._moveFocusTo != null) {
+    const { prevButtonFocused, nextButtonFocused } = (snapshot || {})
+
+    if (prevButtonFocused || nextButtonFocused) {
       const focusable = findTabbable(this._root)
-      const focusIndex =
-        this._moveFocusTo === 'first' ? 0 : focusable.length - 1
+      const focusIndex = prevButtonFocused ? 0 : focusable.length - 1
       focusable[focusIndex].focus()
-      delete this._moveFocusTo
     }
   }
 
@@ -262,12 +245,22 @@ class Pagination extends Component {
     const { onClick, disabled } = this.props.children[
       currentPageIndex + direction
     ].props
+
+    const handleButtonRef = (el) => {
+      if (direction < 0) {
+        this._prevButton = el
+      } else {
+        this._nextButton = el
+      }
+    }
+
     return (
       <PaginationArrowButton
         direction={direction === -1 ? 'prev' : 'next'}
         label={label}
         onClick={onClick}
         disabled={disabled}
+        buttonRef={handleButtonRef}
       />
     )
   }

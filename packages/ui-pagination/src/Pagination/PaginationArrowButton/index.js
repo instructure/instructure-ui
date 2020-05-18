@@ -41,15 +41,17 @@ id: Pagination.Navigation
 class PaginationArrowButton extends Component {
   static propTypes = {
     direction: PropTypes.oneOf(['next', 'prev']),
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+    buttonRef: PropTypes.func
   }
 
   static defaultProps = {
-    direction: undefined
+    direction: undefined,
+    buttonRef: (el) => {}
   }
 
   render() {
-    const { label, direction, ...props } = this.props
+    const { label, direction, buttonRef, ...props } = this.props
     const Icon = direction === 'prev' ? IconArrowOpenStartSolid : IconArrowOpenEndSolid
     return (
       <Tooltip
@@ -63,6 +65,7 @@ class PaginationArrowButton extends Component {
           withBorder={false}
           screenReaderLabel={label}
           rel={(props.href || props.to) ? direction : null}
+          elementRef={buttonRef}
         >
           {Icon}
         </IconButton>
