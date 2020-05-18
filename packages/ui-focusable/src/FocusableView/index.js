@@ -39,7 +39,7 @@ import theme from './theme'
 parent: Focusable
 ---
 **/
-@deprecated('7.0.0', null, 'Use @instructure/ui-layout/View instead')
+@deprecated('8.0.0', null, 'Use @instructure/ui-view/View instead')
 @themeable(theme, styles)
 class FocusableView extends Component {
   static propTypes = {

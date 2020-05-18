@@ -43,7 +43,7 @@ category: components
 tags: form, field
 ---
 **/
-@deprecated('7.0.0', {
+@deprecated('8.0.0', {
   label: 'renderLabel',
   required: 'isRequired',
   inline: 'display'
