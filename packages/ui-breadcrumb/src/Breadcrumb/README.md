@@ -2,12 +2,50 @@
 describes: Breadcrumb
 ---
 
-Breadcrumbs enable users to quickly see their location within a path of navigation. Change the `size` prop to control the font-size of the breadcrumbs
-(default is `medium`).
+Breadcrumbs enable users to quickly see their location within a path of navigation.
+Long breadcrumb text will be automatically truncated, ensuring the list always
+remains on a single line.
 
-Long breadcrumb text will be automatically truncated, ensuring the
-breadcrumb list always remains on a single line. The `margin` prop can be
-used to add space around the breadcrumb list.
+**Breadcrumbs are best suited for tablet-sized (~768px) screens and larger.**
+For smaller screens, use a [Link](#Link) that returns the user to the previous page or view.
+The example below is implemented with [Responsive](#Responsive). Resize the browser window to see
+Breadcrumb become a Link at under 768px.
+
+```js
+---
+example: true
+---
+<Responsive
+  query={{
+    tablet: { minWidth: 768 }
+  }}
+>
+  {(props, matches) => {
+    if (matches.includes('tablet')) {
+      return (
+        <Breadcrumb label="You are here:">
+          <Breadcrumb.Link href="#">Student Forecast</Breadcrumb.Link>
+          <Breadcrumb.Link href="#">University of Utah</Breadcrumb.Link>
+          <Breadcrumb.Link href="#">University of Utah Colleges</Breadcrumb.Link>
+          <Breadcrumb.Link>College of Life Sciences</Breadcrumb.Link>
+        </Breadcrumb>
+      )
+    } else {
+      return (
+        <Link
+          href="#"
+          isWithinText={false}
+          renderIcon={IconArrowOpenStartLine}
+        >
+          <TruncateText>University of Utah Colleges</TruncateText>
+        </Link>
+      )
+    }
+  }}
+</Responsive>
+```
+
+Change the `size` prop to control the font-size of the breadcrumbs (default is `medium`).
 
 ```js
 ---
@@ -55,19 +93,7 @@ example: true
 </div>
 ```
 
-If you don't provide an href to `Breadcrumb.Link`, it will render as text.
-
-```js
----
-example: true
----
-<Breadcrumb label="You are here:">
-  <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">Course A</Breadcrumb.Link>
-  <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">Modules</Breadcrumb.Link>
-  <Breadcrumb.Link>A Great Module</Breadcrumb.Link>
-</Breadcrumb>
-```
-
+### Icons
 You can include icons in `Breadcrumb.Link`:
 
 ```js
@@ -95,6 +121,7 @@ guidelines: true
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Use Breadcrumb if you are taking users through a multi-step process</Figure.Item>
+    <Figure.Item>Use Breadcrumb in mobile layouts: use a Link to the previous page/view instead</Figure.Item>
   </Figure>
 </Guidelines>
 ```
