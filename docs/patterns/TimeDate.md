@@ -20,7 +20,7 @@ class CustomTimeInput extends React.Component {
     this._options = this.getOptions()
 
     this.state = {
-      inputValue: '',
+      inputValue: '11:59 PM',
       filteredOptions: this._options,
       isShowingOptions: false,
       highlightedOptionId: null,
@@ -211,7 +211,7 @@ render(<CustomTimeInput width="20rem" />)
 ### Date and time
 `TimeSelect` can also be used with [DateInput](#DateInput) to create a DateTime component. See the DateInput [documentation](#DateInput) for more information around configuring a DateInput. The following example shows how to compose the two inputs with a [FormFieldGroup](#FormFieldGroup).
 
-> Note: this is a read only example and will not respond to interaction.
+> __Note: this is a read only example and will not respond to interaction.__
 
 ```javascript
 ---

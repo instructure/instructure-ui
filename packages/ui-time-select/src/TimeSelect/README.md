@@ -29,7 +29,7 @@ render: false
 ---
 class Example extends React.Component {
   state = {
-    value: '1986-05-17T07:00:00.000Z'
+    value: '2020-05-18T23:59:00'
   }
 
   handleChange = (e, { value }) => {
@@ -52,4 +52,16 @@ class Example extends React.Component {
 render(
   <Example />
 )
+```
+
+### Guidelines
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <Figure.Item>Use a default value of 11:59 pm for implementations that have to do with due dates</Figure.Item>
+  </Figure>
+</Guidelines>
 ```
