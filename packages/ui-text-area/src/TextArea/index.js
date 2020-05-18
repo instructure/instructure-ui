@@ -31,7 +31,6 @@ import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import {
   addEventListener,
   addResizeListener,
-  findDOMNode,
   isActiveElement,
   requestAnimationFrame
 } from '@instructure/ui-dom-utils'
@@ -153,7 +152,7 @@ class TextArea extends Component {
     this.autoGrow()
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate () {
     this.autoGrow()
   }
 
@@ -190,7 +189,7 @@ class TextArea extends Component {
   autoGrow () {
     if (this.props.autoGrow) {
       if (!this._debounced) {
-        this._debounced = debounce(this.grow, 200, {leading: false, trailing: true})
+        this._debounced = debounce(this.grow, 200, { leading: false, trailing: true })
       }
 
       if (!this._listener) {
@@ -220,16 +219,14 @@ class TextArea extends Component {
     this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
     height = (this._textarea.scrollHeight + offset) + 'px'
 
-    const maxHeight = px(this.props.maxHeight, findDOMNode(this))
+    const maxHeight = px(this.props.maxHeight, this._container)
 
-    if (
-      this.props.maxHeight &&
-      (this._textarea.scrollHeight > maxHeight)) {
+    if (this.props.maxHeight && (this._textarea.scrollHeight > maxHeight)) {
       this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
     } else if (this.props.height) {
       if (this._textarea.value === '') {
         height = this.props.height
-      } else if (px(this.props.height, findDOMNode(this)) > this._textarea.scrollHeight) {
+      } else if (px(this.props.height, this._container) > this._textarea.scrollHeight) {
         this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds height in pixels
         height = this.props.height
       }
@@ -360,8 +357,8 @@ class TextArea extends Component {
           }}
           ref={this.handleContainerRef}
         >
-          { textarea }
-          { (!disabled && !readOnly) ? <span className={styles.outline} aria-hidden="true"></span> : null }
+          {textarea}
+          {(!disabled && !readOnly) ? <span className={styles.outline} aria-hidden="true"></span> : null}
         </div>
       </FormField>
     )

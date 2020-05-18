@@ -29,13 +29,10 @@ To allow the user to manually resize TextArea (in supported browsers), use the
 ---
 example: true
 ---
-<FormFieldGroup description={<ScreenReaderContent>TextArea examples</ScreenReaderContent>}>
-  <TextArea label="Description" resize="vertical" />
-  <TextArea label="Description" resize="vertical" layout="inline" />
-</FormFieldGroup>
+<TextArea label="Description" resize="vertical" />
 ```
 
-A `textarea` with errors:
+A `TextArea` with errors:
 
 ```js
 ---
@@ -44,16 +41,16 @@ example: true
 <TextArea messages={[{ text: 'Invalid description', type: 'error' }]} label="Description" />
 ```
 
-A disabled `textarea`:
+A disabled `TextArea`:
 
 ```js
 ---
 example: true
 ---
-<TextArea label="Description" defaultValue="Nice" disabled />
+<TextArea label="Description" disabled />
 ```
 
-A `textarea` with a screenreader only label:
+A `TextArea` with a screenreader only label:
 
 ```js
 ---
@@ -65,8 +62,7 @@ example: true
 />
 ```
 
-An inline `textarea` with a fixed width, initial height and maxHeight.
-*Note: IE11 needs a `width` prop if the TextArea is `inline`.*
+An inline `TextArea` with a fixed width, initial height and maxHeight.
 
 ```js
 ---
@@ -118,7 +114,6 @@ guidelines: true
 <Guidelines>
   <Figure recommendation="yes" title="Do">
     <Figure.Item>Align text to the left</Figure.Item>
-    <Figure.Item>Place labels on top or to the left (inline)</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <Figure.Item>Repeat label text if using placeholder text</Figure.Item>
