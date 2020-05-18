@@ -49,7 +49,7 @@
     "@instructure/ui-test-utils": "^6.16.0"
   },
   "peerDependencies": {
-    "react": "^16"
+    "react": "^16.8"
   },
   "publishConfig": {
     "access": "public"

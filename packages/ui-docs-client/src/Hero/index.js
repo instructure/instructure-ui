@@ -153,7 +153,7 @@ class Hero extends Component {
         </View>
         <List margin="none none x-large" itemSpacing="xx-small">
           <List.Item>
-            <Text weight="bold">React support:</Text> v16 and up
+            <Text weight="bold">React support:</Text> 16.8.0 and later
           </List.Item>
           <List.Item>
             <Text weight="bold">Browser support:</Text> The last two versions of all modern browsers (Firefox, Safari, Chrome, Edge).

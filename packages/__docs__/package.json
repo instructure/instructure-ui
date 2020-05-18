@@ -89,7 +89,7 @@
     "@instructure/ui-view": "^6.26.0",
     "lorem-ipsum": "^1.0.6",
     "moment": "^2.23.0",
-    "react": "^16",
-    "react-dom": "^16"
+    "react": "^16.8",
+    "react-dom": "^16.8"
   }
 }
