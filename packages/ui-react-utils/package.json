@@ -31,8 +31,7 @@
     "@instructure/ui-decorator": "^6.26.0",
     "@instructure/ui-dom-utils": "^6.26.0",
     "@instructure/ui-utils": "^6.26.0",
-    "prop-types": "^15",
-    "react-lifecycles-compat": "^3.0.4"
+    "prop-types": "^15"
   },
   "peerDependencies": {
     "react": "^16.8",

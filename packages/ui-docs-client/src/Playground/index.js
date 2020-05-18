@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { themeable } from '@instructure/ui-themeable'
-import { polyfill } from '@instructure/ui-react-utils'
 import { Modal } from '@instructure/ui-modal'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -278,8 +277,6 @@ class Playground extends Component {
     )
   }
 }
-
-polyfill(Playground)
 
 export default Playground
 export { Playground }

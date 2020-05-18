@@ -31,7 +31,6 @@ import {
   containsActiveElement,
   findFocusable
 } from '@instructure/ui-dom-utils'
-import { polyfill } from '@instructure/ui-react-utils'
 import { warn } from '@instructure/console/macro'
 
 /**
@@ -246,8 +245,6 @@ class Focusable extends Component {
     }
   }
 }
-
-polyfill(Focusable)
 
 export default Focusable
 export { Focusable }

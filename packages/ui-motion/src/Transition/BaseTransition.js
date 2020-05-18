@@ -26,7 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { getClassList } from '@instructure/ui-dom-utils'
-import { ensureSingleChild, polyfill, safeCloneElement } from '@instructure/ui-react-utils'
+import { ensureSingleChild, safeCloneElement } from '@instructure/ui-react-utils'
 
 const STATES = {
   EXITED: -2,
@@ -390,8 +390,6 @@ class BaseTransition extends React.Component {
     }
   }
 }
-
-polyfill(BaseTransition)
 
 export default BaseTransition
 export { BaseTransition }

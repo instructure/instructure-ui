@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
-import { polyfill } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 
 const toggleExpanded = ({ expanded }) => ({ expanded: !expanded })
@@ -139,8 +138,6 @@ class Expandable extends Component {
      }
    }
 }
-
-polyfill(Expandable)
 
 export default Expandable
 export { Expandable }
