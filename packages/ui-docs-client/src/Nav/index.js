@@ -371,6 +371,7 @@ import { NavToggle } from '../NavToggle'
             type="search"
             renderBeforeInput={<IconSearchLine inline={false} />}
             messages={!hasMatches ? errorMessage : null}
+            shouldNotWrap
           />
         </View>
         <View role="navigation" margin="medium none none" display="block">
