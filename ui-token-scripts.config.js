@@ -35,17 +35,6 @@ module.exports = [
     outputPackage: '@instructure/canvas-theme',
   },
   {
-    themeKey: 'canvas-ams',
-    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-ams',
-    outputPackage: '@instructure/ui-theme-tokens',
-    groupOutput: true
-  },
-  {
-    themeKey: 'canvas-ams',
-    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-ams',
-    outputPackage: '@instructure/canvas-ams-theme',
-  },
-  {
     themeKey: 'canvas-high-contrast',
     sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-high-contrast',
     outputPackage: '@instructure/ui-theme-tokens',

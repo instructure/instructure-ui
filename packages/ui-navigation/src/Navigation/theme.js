@@ -47,9 +47,3 @@ generator['canvas'] = function (variables) {
     fill: variables['ic-brand-global-nav-ic-icon-svg-fill']
   }
 }
-
-generator['canvas-ams'] = function ({colors}) {
-  return {
-    backgroundColor: colors.fullyAccessibleBrand,
-  }
-}

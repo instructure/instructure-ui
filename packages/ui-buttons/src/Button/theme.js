@@ -22,36 +22,4 @@
  * SOFTWARE.
  */
 
-import baseThemeGenerator, { activeShadow, generateButtonThemeVars } from '../BaseButton/theme'
-import { alpha } from '@instructure/ui-color-utils'
-
-export default function generator(...args) {
-  return baseThemeGenerator(...args)
-}
-
-/**
- * We need to copy the theme-specific overrides from `BaseButton` before adding
- * theme-specific overrides that only apply to `Button`
- */
-Object.assign(generator, baseThemeGenerator)
-
-generator['canvas-ams'] = function ({ colors }) {
-  return {
-    // Overrides for secondary button
-    ...generateButtonThemeVars({
-      style: 'secondary',
-      borderColor: colors.borderBrand,
-      backgroundColor: 'transparent',
-      textColor: colors.fullyAccessibleBrand,
-    }),
-    secondaryHoverBackground: alpha(colors.fullyAccessibleBrand, 10),
-    secondaryActiveBackground: 'transparent',
-    secondaryActiveBoxShadow: `${activeShadow} ${alpha(colors.fullyAccessibleBrand, 28)}`,
-    // Overrides for primary ghost button
-    primaryGhostColor: colors.textDarkest,
-    primaryGhostBorderColor: colors.textDarkest,
-    primaryGhostHoverBackground: alpha(colors.textDarkest, 10),
-    primaryGhostActiveBackground: 'transparent',
-    primaryGhostActiveBoxShadow: `${activeShadow} ${alpha(colors.textDarkest, 28)}`,
-  }
-}
+export { default } from '../BaseButton/theme'

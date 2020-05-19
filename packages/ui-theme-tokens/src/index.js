@@ -23,14 +23,12 @@
  */
 
 import { canvas } from './canvas'
-import { canvasAms } from './canvas-ams'
 import { canvasHighContrast } from './canvas-high-contrast'
 import { instructure } from './instructure'
 import { functionalColors } from './utils/functionalColors'
 
 export {
   canvas,
-  canvasAms,
   canvasHighContrast,
   instructure,
   functionalColors

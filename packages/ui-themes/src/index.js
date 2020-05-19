@@ -25,7 +25,6 @@
 import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
 import { theme as canvas } from '@instructure/canvas-theme'
 import { theme as instructure } from '@instructure/instructure-theme'
-import { theme as canvasAms } from '@instructure/canvas-ams-theme'
 
-export { canvas, canvasHighContrast, instructure, canvasAms }
+export { canvas, canvasHighContrast, instructure }
 export default canvas

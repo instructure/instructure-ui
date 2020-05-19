@@ -85,7 +85,6 @@ module.exports = [
       '**/canvas-theme/**',
       '**/canvas-high-contrast-theme/**',
       '**/instructure-theme/**',
-      '**/canvas-ams-theme/**',
       '**/ui-theme-tokens/**',
       '**/template-app/**',
       '**/template-component/**',
@@ -102,8 +101,7 @@ module.exports = [
     themes: [
       '@instructure/canvas-theme',
       '@instructure/canvas-high-contrast-theme',
-      '@instructure/instructure-theme',
-      '@instructure/canvas-ams-theme'
+      '@instructure/instructure-theme'
     ],
     icons: {
       packageName: '@instructure/ui-icons',

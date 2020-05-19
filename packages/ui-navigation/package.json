@@ -24,6 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6.26.0",
+    "@instructure/ui-color-utils": "^6.26.0",
     "@instructure/ui-test-locator": "^6.26.0",
     "@instructure/ui-test-utils": "^6.26.0"
   },
@@ -34,7 +35,6 @@
     "@instructure/ui-a11y-content": "^6.26.0",
     "@instructure/ui-a11y-utils": "^6.26.0",
     "@instructure/ui-badge": "^6.26.0",
-    "@instructure/ui-color-utils": "^6.26.0",
     "@instructure/ui-dom-utils": "^6.26.0",
     "@instructure/ui-focusable": "^6.26.0",
     "@instructure/ui-icons": "^6.26.0",

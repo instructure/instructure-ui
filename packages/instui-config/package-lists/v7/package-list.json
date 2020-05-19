@@ -2,7 +2,6 @@
  "@instructure/babel-plugin-themeable-styles",
  "@instructure/babel-plugin-transform-imports",
  "@instructure/browserslist-config-instui",
- "@instructure/canvas-ams-theme",
  "@instructure/canvas-high-contrast-theme",
  "@instructure/canvas-theme",
  "@instructure/command-utils",

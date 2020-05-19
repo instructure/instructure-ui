@@ -28,7 +28,6 @@
     "svg-inline-loader": "^0.8.0"
   },
   "dependencies": {
-    "@instructure/canvas-ams-theme": "^6.26.0",
     "@instructure/canvas-high-contrast-theme": "^6.26.0",
     "@instructure/canvas-theme": "^6.26.0",
     "@instructure/debounce": "^6.26.0",
