@@ -22,4 +22,29 @@
  * SOFTWARE.
  */
 
-export * from './canvas'
+import { borders } from './borders'
+import { colors } from './colors'
+import { transitions } from './transitions'
+import { typography } from './typography'
+import { spacing } from './spacing'
+import { forms } from './forms'
+import { media } from './media'
+import { breakpoints } from './breakpoints'
+import { shadows } from './shadows'
+import { stacking } from './stacking'
+
+const canvas = {
+  colors,
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking
+}
+
+export default canvas
+export { canvas }

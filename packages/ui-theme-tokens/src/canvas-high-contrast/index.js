@@ -22,4 +22,13 @@
  * SOFTWARE.
  */
 
-export * from './canvasHighContrast'
+import { canvas } from '../canvas'
+import { colors } from './colors'
+
+const canvasHighContrast = {
+  ...canvas,
+  colors,
+}
+
+export default canvasHighContrast
+export { canvasHighContrast }

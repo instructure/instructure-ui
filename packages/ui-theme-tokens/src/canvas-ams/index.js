@@ -22,4 +22,13 @@
  * SOFTWARE.
  */
 
-export * from './canvasAms'
+import { canvas } from '../canvas'
+import { colors } from './colors'
+
+const canvasAms = {
+  ...canvas,
+  colors,
+}
+
+export default canvasAms
+export { canvasAms }

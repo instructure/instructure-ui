@@ -76,7 +76,13 @@ exports.handler = (argv) => {
     groupOutput
   } = argv
 
-  const tokens = require(sourceTokens)
+  const tokens = require(sourceTokens).default
+
+  if (Object.keys(tokens).indexOf('colors') < 0) {
+    error('Invalid token source')
+    process.exit(1)
+  }
+
   const styleDictionarySource = handleMapJsTokensToSource(tokens)
   const themePath = path.dirname(require.resolve(path.join(outputPackage, 'package.json')))
   const outputPath = groupOutput ?

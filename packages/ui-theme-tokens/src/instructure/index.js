@@ -22,4 +22,19 @@
  * SOFTWARE.
  */
 
-export * from './instructure'
+import { canvas } from '../canvas'
+import { colors } from './colors'
+import { forms } from './forms'
+import { spacing } from './spacing'
+import { typography } from './typography'
+
+const instructure = {
+  ...canvas,
+  colors,
+  forms,
+  spacing,
+  typography
+}
+
+export default instructure
+export { instructure }
