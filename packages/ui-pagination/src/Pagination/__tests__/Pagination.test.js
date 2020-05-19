@@ -256,16 +256,21 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const prevButton = await pagination.findArrowButton(':label(Previous)')
+      const prevButtonWrapper = await pagination.findArrowButton(':label(Previous)')
+      const prevButton = await prevButtonWrapper.find('button')
 
       await prevButton.focus()
+
+      await wait(() => {
+        expect(prevButton.focused()).to.be.true()
+      })
 
       await subject.setProps({ children: buildPages(7, 0) })
 
       const button0 = await pagination.findPageButton(':label(#0)')
 
       await wait(() => {
-        expect(button0.containsFocus()).to.be.true()
+        expect(button0.focused()).to.be.true()
       })
     })
 
@@ -331,16 +336,21 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const nextButton = await pagination.findArrowButton(':label(Next)')
+      const nextButtonWrapper = await pagination.findArrowButton(':label(Next)')
+      const nextButton = await nextButtonWrapper.find('button')
 
       await nextButton.focus()
+
+      await wait(() => {
+        expect(nextButton.focused()).to.be.true()
+      })
 
       await subject.setProps({ children: buildPages(7, 6) })
 
       const button6 = await pagination.findPageButton(':label(#6)')
 
       await wait(() => {
-        expect(button6.containsFocus()).to.be.true()
+        expect(button6.focused()).to.be.true()
       })
     })
 
