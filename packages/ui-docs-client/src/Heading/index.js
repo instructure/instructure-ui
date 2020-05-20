@@ -22,9 +22,15 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders, typography }) {
-  return {
-    editorBorderRadius: borders.radiusMedium,
-    fontSize: typography.fontSizeMedium
-  }
-}
+import React from 'react'
+import { ApplyTheme } from '@instructure/ui-themeable'
+import { Heading as UIHeading } from '@instructure/ui-heading'
+
+const Heading = (props) => (
+  <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+    <UIHeading {...props} />
+  </ApplyTheme>
+)
+
+export default Heading
+export { Heading }

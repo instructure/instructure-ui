@@ -70,7 +70,6 @@ class CodePenButton extends Component {
             screenReaderLabel={`Edit ${this.props.title} in Codepen`}
             withBorder={false}
             withBackground={false}
-            color="primary"
             renderIcon={
               <SVGIcon viewBox="0 0 1792 1792" title="Codepen">
                 <path

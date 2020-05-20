@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { ApplyTheme } from '@instructure/ui-themeable'
 import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
@@ -73,12 +74,14 @@ class NavToggle extends Component {
         padding="x-small none"
         margin={isSection ? 'none' : 'none none none x-small'}
       >
-        <ToggleDetails
-          ref={(c) => { this._toggle = c }}
-          fluidWidth
-          {...props}
-          summary={summaryContent}
-        />
+        <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+          <ToggleDetails
+            ref={(c) => { this._toggle = c }}
+            fluidWidth
+            {...props}
+            summary={summaryContent}
+          />
+        </ApplyTheme>
       </View>
     )
   }

@@ -6,8 +6,7 @@
 }
 
 .close {
-  background-color: var(--closeBackground);
-  color: var(--closeColor);
+  background-color: rgba(0, 0, 0, 0.075);
   display: flex;
   justify-content: flex-end;
 }

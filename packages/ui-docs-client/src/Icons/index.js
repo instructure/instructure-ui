@@ -25,7 +25,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Heading } from '@instructure/ui-heading'
 import { Flex } from '@instructure/ui-flex'
 import { Link } from '@instructure/ui-link'
 import { TextInput } from '@instructure/ui-text-input'
@@ -40,6 +39,7 @@ import { IconXSolid } from '@instructure/ui-icons'
 import { IconButton } from '@instructure/ui-buttons'
 
 import { Glyph } from '../Glyph'
+import { Heading } from '../Heading'
 
 import styles from './styles.css'
 import theme from './theme'

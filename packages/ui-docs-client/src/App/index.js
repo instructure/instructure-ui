@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
+import { themeable, ApplyTheme } from '@instructure/ui-themeable'
 import { Alert } from '@instructure/ui-alerts'
 import { DrawerLayout } from '@instructure/ui-drawer-layout'
 import { Flex } from '@instructure/ui-flex'
@@ -33,7 +33,6 @@ import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
-import { Heading } from '@instructure/ui-heading'
 import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 
@@ -46,6 +45,7 @@ import {
 import { ContentWrap } from '../ContentWrap'
 import { Document } from '../Document'
 import { Header } from '../Header'
+import { Heading } from '../Heading'
 import { Hero } from '../Hero'
 import { Nav } from '../Nav'
 import { Theme } from '../Theme'
@@ -407,15 +407,17 @@ class App extends Component {
       }
     })
     return (
-      <Hero
-        name={library.name}
-        docs={{...docs, ...themeDocs}}
-        description={library.description}
-        repository={library.repository}
-        version={library.version}
-        trayOverlay={this.state.trayOverlay}
-        layout={this.computeLayout()}
-      />
+      <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+        <Hero
+          name={library.name}
+          docs={{...docs, ...themeDocs}}
+          description={library.description}
+          repository={library.repository}
+          version={library.version}
+          trayOverlay={this.state.trayOverlay}
+          layout={this.computeLayout()}
+        />
+      </ApplyTheme>
     )
   }
 
@@ -519,16 +521,18 @@ class App extends Component {
               padding="small none none"
             >
               <View display="block" textAlign="end" margin="xx-small x-small none">
-                <IconButton
-                  renderIcon={IconXSolid}
-                  screenReaderLabel="Close Navigation"
-                  withBorder={false}
-                  withBackground={false}
-                  onClick={this.handleMenuClose}
-                  shape="circle"
-                  color="secondary"
-                  size="medium"
-                />
+                <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+                  <IconButton
+                    renderIcon={IconXSolid}
+                    screenReaderLabel="Close Navigation"
+                    withBorder={false}
+                    withBackground={false}
+                    onClick={this.handleMenuClose}
+                    shape="circle"
+                    color="secondary"
+                    size="medium"
+                  />
+                </ApplyTheme>
               </View>
               <Header name={name === 'instructure-ui' ? 'Instructure UI' : name} version={version} />
               <Nav
@@ -548,13 +552,15 @@ class App extends Component {
           >
             {!showMenu && (
               <div className={styles.hamburger}>
-                <IconButton
-                  onClick={this.handleMenuOpen}
-                  elementRef={this.handleMenuTriggerRef}
-                  renderIcon={IconHamburgerSolid}
-                  screenReaderLabel="Open Navigation"
-                  shape="circle"
-                />
+                <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+                  <IconButton
+                    onClick={this.handleMenuOpen}
+                    elementRef={this.handleMenuTriggerRef}
+                    renderIcon={IconHamburgerSolid}
+                    screenReaderLabel="Open Navigation"
+                    shape="circle"
+                  />
+                </ApplyTheme>
               </div>
             )}
             {this.renderContent(key, this.computeLayout())}

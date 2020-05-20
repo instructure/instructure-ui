@@ -35,6 +35,7 @@ import { CodeEditor } from '@instructure/ui-code-editor'
 import { Checkbox } from '@instructure/ui-checkbox'
 import { Flex } from '@instructure/ui-flex'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
+import { IconXLine } from '@instructure/ui-icons'
 
 import { Preview } from '../Preview'
 import { CodePenButton } from '../CodePenButton'
@@ -138,15 +139,10 @@ class Playground extends Component {
           <IconButton
             size="small"
             onClick={this.handleCodeToggle}
-            color="primary-inverse"
             screenReaderLabel="Hide Code"
             withBorder={false}
             withBackground={false}
-            renderIcon={
-              <SVGIcon viewBox="0 0 2000 2000">
-                {closeIconPath}
-              </SVGIcon>
-            }
+            renderIcon={IconXLine}
           />
         </div>
         <CodeEditor
@@ -227,7 +223,6 @@ class Playground extends Component {
                   <IconButton
                     onClick={this.handleMaximize}
                     ref={(c) => { this._fullScreenButton = c }}
-                    color="primary"
                     size="small"
                     withBorder={false}
                     withBackground={false}
@@ -245,7 +240,6 @@ class Playground extends Component {
                   <IconButton
                     margin="0 x-small"
                     onClick={this.handleCodeToggle}
-                    color="primary"
                     size="small"
                     withBorder={false}
                     withBackground={false}

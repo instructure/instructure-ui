@@ -26,12 +26,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Heading } from '@instructure/ui-heading'
 import { Link } from '@instructure/ui-link'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
+
+import { Heading } from '../Heading'
 
 import theme from './theme'
 

@@ -27,15 +27,15 @@ import PropTypes from 'prop-types'
 
 import { MetricGroup, Metric } from '@instructure/ui-metric'
 import { Text } from '@instructure/ui-text'
-import { Heading } from '@instructure/ui-heading'
 import { ContextView, View } from '@instructure/ui-view'
 import { Flex } from '@instructure/ui-flex'
 import { Responsive } from '@instructure/ui-responsive'
 import { contrast } from '@instructure/ui-color-utils'
+import { SimpleSelect } from '@instructure/ui-simple-select'
 
 import { ColorSwatch } from '../ColorSwatch'
 import { ColorCard } from '../ColorCard'
-import { SimpleSelect } from '@instructure/ui-simple-select'
+import { Heading } from '../Heading'
 
 class ThemeColors extends Component {
   static propTypes = {

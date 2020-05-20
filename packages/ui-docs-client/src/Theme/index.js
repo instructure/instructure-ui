@@ -27,9 +27,9 @@ import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-table'
 import { Text } from '@instructure/ui-text'
-import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
 
+import { Heading } from '../Heading'
 import { Description } from '../Description'
 import { ColorSwatch } from '../ColorSwatch'
 import { ThemeColors } from '../ThemeColors'

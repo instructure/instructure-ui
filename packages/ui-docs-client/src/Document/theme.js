@@ -24,6 +24,6 @@
 
 export default function ({ colors }) {
   return {
-    githubCornerColor: colors.backgroundBrand
+    githubCornerColor: '#333'
   }
 }

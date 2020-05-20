@@ -25,7 +25,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import GithubCorner from 'react-github-corner'
-import { Heading } from '@instructure/ui-heading'
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
@@ -38,6 +37,7 @@ import { Params } from '../Params'
 import { Returns } from '../Returns'
 import { Methods } from '../Methods'
 import { ComponentTheme } from '../ComponentTheme'
+import { Heading } from '../Heading'
 
 import { DocPropType } from '../propTypes'
 

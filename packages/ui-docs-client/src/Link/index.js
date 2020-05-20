@@ -22,9 +22,15 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders, typography }) {
-  return {
-    editorBorderRadius: borders.radiusMedium,
-    fontSize: typography.fontSizeMedium
-  }
-}
+import React from 'react'
+import { ApplyTheme } from '@instructure/ui-themeable'
+import { Link as UILink } from '@instructure/ui-link'
+
+const Link = (props) => (
+  <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+    <UILink {...props} />
+  </ApplyTheme>
+)
+
+export default Link
+export { Link }

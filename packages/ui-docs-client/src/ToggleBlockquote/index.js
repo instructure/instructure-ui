@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { ToggleDetails } from '@instructure/ui-toggle-details'
-import { Heading } from '@instructure/ui-heading'
+import { Heading } from '../Heading'
 import { Paragraph } from './Paragraph'
 
 class ToggleBlockquote extends React.Component {

@@ -29,7 +29,6 @@ import classnames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, ComponentIdentifier } from '@instructure/ui-react-utils'
 import { Children } from '@instructure/ui-prop-types'
-import { Heading } from '@instructure/ui-heading'
 import {
   IconCheckMarkSolid,
   IconNoSolid,
@@ -38,6 +37,8 @@ import {
 import { List } from '@instructure/ui-list'
 import { Responsive } from '@instructure/ui-responsive'
 import { View } from '@instructure/ui-view'
+
+import { Heading } from '../Heading'
 
 import styles from './styles.css'
 import theme from './theme'

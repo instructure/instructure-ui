@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Heading } from '@instructure/ui-heading'
+import { Heading } from '../Heading'
 
 class Section extends Component {
   static propTypes = {

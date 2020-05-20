@@ -26,10 +26,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { IconButton } from '@instructure/ui-buttons'
-import { Heading } from '@instructure/ui-heading'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { themeable } from '@instructure/ui-themeable'
+
+import { Heading } from '../Heading'
 
 import styles from './styles.css'
 import theme from './theme'
