@@ -149,7 +149,6 @@ The updated import path for the Table component is `@instructure/ui-table`. The 
 ```javascript
 ---
 embed: true
-theme: 'canvas'
 ---
 <View as="div" margin="large">
   <Table caption="My Table">
