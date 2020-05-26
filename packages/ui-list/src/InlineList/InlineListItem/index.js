@@ -42,7 +42,7 @@ id: InlineList.Item
 **/
 @testable()
 @themeable(theme, styles)
-class Item extends Component {
+class InlineListItem extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
@@ -136,5 +136,5 @@ class Item extends Component {
   }
 }
 
-export default Item
-export { Item }
+export default InlineListItem
+export { InlineListItem }

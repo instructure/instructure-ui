@@ -23,28 +23,36 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
 
-import { Item } from '../index'
-import { InlineListItemLocator } from '../InlineListItemLocator'
+import { ListItem } from '../index'
+const ListItemLocator = locator(ListItem.selector)
 
-describe('<Item />', async () => {
+describe('<ListItem />', async () => {
   it('should render children', async () => {
-    await mount(<Item>hello</Item>)
-    const listItem = await InlineListItemLocator.find()
+    await mount(<ListItem>hello</ListItem>)
+    const listItem = await ListItemLocator.find()
     expect(await listItem.find(':contains(hello)')).to.exist()
   })
 
-  it('should render delimiter', async () => {
-    await mount(<Item delimiter="slash">List item</Item>)
-    const listItem = await InlineListItemLocator.find()
+  it('should not render delimiter by default', async () => {
+    await mount(<ListItem delimiter="none">List item</ListItem>)
+    const listItem = await ListItemLocator.find()
+    expect(await listItem.find('[aria-hidden="true"]', {
+      expectEmpty: true
+    })).to.not.exist()
+  })
+
+  it('should render delimiter when variant="inline"', async () => {
+    await mount(<ListItem variant="inline" delimiter="solid">List item</ListItem>)
+    const listItem = await ListItemLocator.find()
     expect(await listItem.find('[aria-hidden="true"]')).to.exist()
   })
 
   it('should call elementRef', async () => {
     const elementRef = stub()
-    await mount(<Item elementRef={elementRef}>List item</Item>)
-    const listItem = await InlineListItemLocator.find()
+    await mount(<ListItem elementRef={elementRef}>List item</ListItem>)
+    const listItem = await ListItemLocator.find()
     expect(elementRef).to.have.been.calledWith(listItem.getDOMNode())
   })
 })
