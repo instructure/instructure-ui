@@ -30,7 +30,7 @@ import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import { Item } from './Item'
+import { InlineListItem } from './InlineListItem'
 
 /**
 ---
@@ -43,7 +43,7 @@ class InlineList extends Component {
     /**
     * Only accepts `<InlineList.Item>` as a child
     */
-    children: ChildrenPropTypes.oneOf([Item]),
+    children: ChildrenPropTypes.oneOf([InlineListItem]),
     as: PropTypes.oneOf(['ul', 'ol']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -80,7 +80,7 @@ class InlineList extends Component {
     size: 'medium'
   }
 
-  static Item = Item
+  static Item = InlineListItem
 
   renderChildren () {
     return Children.map(this.props.children, (child) => {

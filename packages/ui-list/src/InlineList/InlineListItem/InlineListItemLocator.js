@@ -24,9 +24,9 @@
 import { locator } from '@instructure/ui-test-locator'
 
 import { InlineListLocator } from '../InlineListLocator'
-import { Item } from './index'
+import { InlineListItem } from './index'
 
-export const InlineListItemLocator = locator(Item.selector, {
+export const InlineListItemLocator = locator(InlineListItem.selector, {
   findNestedOptions: (...args) => {
     return InlineListLocator.find(...args)
   }

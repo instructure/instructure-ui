@@ -35,7 +35,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { InlineList } from '../InlineList'
-import { Item } from './Item'
+import { ListItem } from './ListItem'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -53,7 +53,7 @@ class List extends Component {
     /**
     * Only accepts `<List.Item>` as a child
     */
-    children: ChildrenPropTypes.oneOf([Item]),
+    children: ChildrenPropTypes.oneOf([ListItem]),
     as: PropTypes.oneOf(['ul', 'ol']),
     /**
      * One of: none, dashed, solid
@@ -113,7 +113,7 @@ class List extends Component {
     variant: undefined
   }
 
-  static Item = Item
+  static Item = ListItem
 
   renderChildren () {
     return Children.map(this.props.children, (child) => {
@@ -177,4 +177,4 @@ class List extends Component {
 }
 
 export default List
-export { List, Item as ListItem }
+export { List, ListItem }

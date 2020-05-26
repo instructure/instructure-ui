@@ -25,7 +25,7 @@ import { locator } from '@instructure/ui-test-locator'
 
 import { InlineList } from './index'
 
-import { InlineListItemLocator } from './Item/InlineListItemLocator'
+import { InlineListItemLocator } from './InlineListItem/InlineListItemLocator'
 
 export const InlineListLocator = locator(InlineList.selector, {
   findAllItems: (...args) => {
