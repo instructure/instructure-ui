@@ -38,8 +38,8 @@ const MyOptions = () => {
 }
 ```
 
-[npm]: https://img.shields.io/npm/v/@instructure/ui-options-list.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-options-list
+[npm]: https://img.shields.io/npm/v/@instructure/ui-options.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-options
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
