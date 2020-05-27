@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v7.0.0) (2020-05-27)
+
+
+### chore
+
+* remove canvas-ams-theme ([91f1336](https://github.com/instructure/instructure-ui/commit/91f1336))
+
+
+### BREAKING CHANGES
+
+* - Removed the `canvas-ams-theme` package. Use `canvas-theme` instead.
+
+Change-Id: I077f6b8cbbef9ee12e5904fb4c9dc4b48409acbb
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/237960
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+Reviewed-by: Steve Jensen <sejensen@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Product-Review: Steve Jensen <sejensen@instructure.com>
+Visual-Regression-Test: Steve Jensen <sejensen@instructure.com>
+
+
+
+
+
 # [6.26.0](https://github.com/instructure/instructure-ui/compare/v6.25.0...v6.26.0) (2020-04-30)
 
 **Note:** Version bump only for package @instructure/ui-themes

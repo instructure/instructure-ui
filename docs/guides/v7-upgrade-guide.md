@@ -30,7 +30,7 @@ embed: true
       Migrate off React 15
     </List.Item>
     <List.Item>
-      Ensure you are using React 16
+      Ensure you are using React 16.8.0 or later
     </List.Item>
     <List.Item>
       Drop support for Internet Explorer 11 (IE11)

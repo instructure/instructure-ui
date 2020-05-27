@@ -1,6 +1,6 @@
 {
   "name": "@instructure/pkg-utils",
-  "version": "6.26.0",
+  "version": "7.0.0",
   "description": "Utilities for managing node packages in a monorepo.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "^6.26.0",
+    "@instructure/command-utils": "^7.0.0",
     "@lerna/package": "^3",
     "read-pkg-up": "^6.0.0"
   },

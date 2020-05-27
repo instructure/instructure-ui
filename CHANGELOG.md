@@ -3,6 +3,161 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v7.0.0) (2020-05-27)
+
+> __Note:__ For instructions on upgrading to version 7.0.0 and more information about breaking changes, see [the upgrade guide](#v7-upgrade-guide).
+
+### Bug Fixes
+
+* **docs,ui-toggle-details:** update under the hood props + a couple README prop ([ccbb0b2](https://github.com/instructure/instructure-ui/commit/ccbb0b2))
+* **ui-code-editor:** make it work as a controlled component ([586de21](https://github.com/instructure/instructure-ui/commit/586de21))
+* **ui-docs-client:** Make sidebar search not wrap ([6015661](https://github.com/instructure/instructure-ui/commit/6015661))
+* **ui-list:** fix style collisions in the docs for list and inline list ([0d1b29a](https://github.com/instructure/instructure-ui/commit/0d1b29a))
+* **ui-popover:** reduce tooltip flickering ([461d3fe](https://github.com/instructure/instructure-ui/commit/461d3fe))
+* **ui-position:** account for offsetTop discrepency in firefox ([c46c4d1](https://github.com/instructure/instructure-ui/commit/c46c4d1))
+* **ui-range-input:** patch CSS for legacy Edge ([d7372fe](https://github.com/instructure/instructure-ui/commit/d7372fe))
+* **ui-react-utils:** ensure ComponentIdentifier renders in the docs ([044b9f3](https://github.com/instructure/instructure-ui/commit/044b9f3))
+* **ui-testable:** fixes for createSuper being undefined ([ce73f32](https://github.com/instructure/instructure-ui/commit/ce73f32))
+* **ui-theme-tokens,ui-token-scripts:** fix ui-token-scripts build ([e2e7105](https://github.com/instructure/instructure-ui/commit/e2e7105))
+
+
+### chore
+
+* bump minimum react version to 16.8.0 ([7a96f00](https://github.com/instructure/instructure-ui/commit/7a96f00))
+* remove references to React 15 ([4bb2426](https://github.com/instructure/instructure-ui/commit/4bb2426))
+* remove canvas-ams-theme ([91f1336](https://github.com/instructure/instructure-ui/commit/91f1336))
+* **ui-component-examples,ui-theme-tokens:** switch component examples loader to cjs ([3abd6ca](https://github.com/instructure/instructure-ui/commit/3abd6ca))
+* **ui-react-utils:** remove react-lifecycles-compat polyfill ([aa698ae](https://github.com/instructure/instructure-ui/commit/aa698ae))
+* **ui-themeable:** remove support for IE11 ([bf6f5f7](https://github.com/instructure/instructure-ui/commit/bf6f5f7))
+
+
+### Code Refactoring
+
+* decouple theme properties from ui-themeable ([d5a8827](https://github.com/instructure/instructure-ui/commit/d5a8827))
+
+
+### Features
+
+* remove 'experimental' tag along with '__dangerouslyIgnore...' ([92bf753](https://github.com/instructure/instructure-ui/commit/92bf753))
+* **docs:** Newsletter for version 7 release ([86ed6d3](https://github.com/instructure/instructure-ui/commit/86ed6d3))
+* **ui-breadcrumb:** Add responsive breadcrumb docs ([3ab5566](https://github.com/instructure/instructure-ui/commit/3ab5566))
+* **ui-codemods:** read consumer config for prettier if it exists when applying codemods ([e38cbf9](https://github.com/instructure/instructure-ui/commit/e38cbf9))
+* **ui-docs-client:** add a ToggleBlockquote to be used internally for upgrade guides ([0e87dc9](https://github.com/instructure/instructure-ui/commit/0e87dc9))
+* **ui-docs-client:** Docs/homepage refresh ([ee4957b](https://github.com/instructure/instructure-ui/commit/ee4957b))
+* **ui-icons:** add "sort" icon ([3a76f0b](https://github.com/instructure/instructure-ui/commit/3a76f0b))
+* **ui-icons:** added margin to 'add' and 'x' icons ([c7632c4](https://github.com/instructure/instructure-ui/commit/c7632c4))
+* **ui-scripts:** Add flags to ui-test to opt out of linting and coverage ([d4ea03e](https://github.com/instructure/instructure-ui/commit/d4ea03e))
+* **ui-tabs:** Responsive tabs ([df2c642](https://github.com/instructure/instructure-ui/commit/df2c642))
+* **ui-text-area:** update deprecated lifecycle ([7e13cb3](https://github.com/instructure/instructure-ui/commit/7e13cb3))
+
+
+### BREAKING CHANGES
+
+* - Removed the `canvas-ams-theme` package. Use `canvas-theme` instead.
+
+Change-Id: I077f6b8cbbef9ee12e5904fb4c9dc4b48409acbb
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/237960
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+Reviewed-by: Steve Jensen <sejensen@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Product-Review: Steve Jensen <sejensen@instructure.com>
+Visual-Regression-Test: Steve Jensen <sejensen@instructure.com>
+* **ui-react-utils:** - removed lifecycle polyfill from ui-react-utils
+
+TEST PLAN:
+- No regressions to Expandable, Focusable, Transition,
+or Playground
+- ui-react-utils should no longer export or document
+polyfill
+
+Change-Id: Ib714de4dc2a4ef048af2f43f272bcb8a2e545a5c
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/237790
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+Reviewed-by: Chris Guerrero <cguerrero@instructure.com>
+Product-Review: Ken Meleta <kmeleta@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Visual-Regression-Test: Ken Meleta <kmeleta@instructure.com>
+* - Minimum react and react-dom version raised to 16.8.0
+
+TEST PLAN:
+- no regressions in docs app
+- homepage should note the react version change
+- automated tests should pass
+
+Change-Id: I7cd9dd6423fb9524e0a1a0dd490caeee3a2c2c17
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/237727
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+Reviewed-by: Chris Guerrero <cguerrero@instructure.com>
+Product-Review: Steve Jensen <sejensen@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Visual-Regression-Test: Ken Meleta <kmeleta@instructure.com>
+* **ui-component-examples,ui-theme-tokens:** - renderPage and renderExample are no longer supplied by the webpack
+  component-examples-loader
+
+Change-Id: I5c632274264d7c934abc86f41399b8a7cda23e26
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/236873
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+Reviewed-by: Ken Meleta <kmeleta@instructure.com>
+Product-Review: Ken Meleta <kmeleta@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Visual-Regression-Test: Steve Jensen <sejensen@instructure.com>
+* Dropping support for React 15.
+
+TEST PLAN:
+- yarn dev/yarn start should work
+- yarn test/test:watch should work
+- there should be no mention of react 15 in code
+- there should be nothing depending on react 15
+or reactDOM 15
+
+Change-Id: I2c054c986421014ffe15f0402e14bd2725cbc267
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/229009
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Visual-Regression-Test: Ken Meleta <kmeleta@instructure.com>
+Reviewed-by: Steve Jensen <sejensen@instructure.com>
+Product-Review: Steve Jensen <sejensen@instructure.com>
+* - Changed arguments for `ui-token-scripts` commands
+- Changed structure of `ui-token-scripts` configuration file
+
+Change-Id: I33213d2350f9ce07c157a6ad3f8cd2e6bccb14e9
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/236552
+Reviewed-by: Steve Jensen <sejensen@instructure.com>
+Product-Review: Steve Jensen <sejensen@instructure.com>
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Visual-Regression-Test: Steve Jensen <sejensen@instructure.com>
+* **ui-code-editor:** CodeEditor is now controlled-only.
+
+TEST PLAN:
+- playground examples should work as before in docs
+- automated tests should pass
+- in dev environment, no react lifecycles warnings should
+show in console
+
+Change-Id: I68398d56447af2a03c9db51bee5cce96f1fe5bd2
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/224132
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+Reviewed-by: Chris Hart <chart@instructure.com>
+Visual-Regression-Test: Ken Meleta <kmeleta@instructure.com>
+Product-Review: Chris Hart <chart@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+* **ui-themeable:** - Removed support for IE11 by eliminating custom properties polyfill
+- Removed `scopeStylesToNode`, `scopeCssText`, and `customPropertiesSupported`
+  utility helpers.
+
+Change-Id: I41de82b6167f1aa9f25d87ddc279e5d3c5f0b413
+Reviewed-on: https://gerrit.instructure.com/c/instructure-ui/+/235818
+Tested-by: Service Cloud Jenkins <svc.cloudjenkins@instructure.com>
+Reviewed-by: Steve Jensen <sejensen@instructure.com>
+Product-Review: Steve Jensen <sejensen@instructure.com>
+QA-Review: Daniel Sasaki <dsasaki@instructure.com>
+Visual-Regression-Test: Chris Guerrero <cguerrero@instructure.com>
+
+
+
+
+
 # [6.26.0](https://github.com/instructure/instructure-ui/compare/v6.25.0...v6.26.0) (2020-04-30)
 
 

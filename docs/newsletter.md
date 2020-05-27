@@ -47,7 +47,7 @@ For the few breaking changes that weren't possible to codemod, [we've prepared a
 We'll start with the frenemy. With version 7, Instructure UI lightens its load by dropping support for Internet Explorer 11. (As a point of reference, Development of IE came to an end in 2015, and Instructure's Canvas LMS software dropped support back in August 2019.) Not having to make the library backwards-compatible with an outdated, unmaintained browser allows us to remove a lot of polyfill dependencies, opens the door to simpler, more powerful component theming, and greatly speeds up the testing and QA end of things.
 
 ##### React 15
-Support for React 15 is being dropped in version 7. This move allows us to begin to take advantage of React 16 features (fragments, better error handling, custom DOM attributes, and hooks) that will bring further improvements to the library in the future.
+Support for React 15 is being dropped in version 7. We will require React 16.8.0 or later moving forward. This will allow us to begin to take advantage of React 16 features (fragments, better error handling, custom DOM attributes, and hooks) that will bring further improvements to the library in the future.
 
 ##### Discontinued CommonJS build output
 We have discontinued CommonJS build output for components (found in each component package's lib directory). Moving forward, components will only provide ES modules output. This should reduce confusion, provide a single source of truth for build output, along with continued support for tree shaking. Codemods will be provided to transform import paths like this...
