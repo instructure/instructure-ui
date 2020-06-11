@@ -72,13 +72,13 @@ import { jsonToMediaQuery } from './jsonToMediaQuery'
  * ```
  *
  * @param {Object} query - object consisting of names and query objects
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {ReactComponent|DomNode} el - a DOM node or a function returning a DOM node
  * @param {function} cb - called with an array of the names of the currently
  * matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
 function addMediaQueryMatchListener (query, el, cb, matchMedia = defaultMatchMedia) {
-  const node = findDOMNode(el)
+  const node = typeof el === 'function' ? el() : el
 
   const updateMediaMatches = (mediaQueryLists) => {
     const matches = Object.keys(mediaQueryLists)

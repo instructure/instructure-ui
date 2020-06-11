@@ -53,7 +53,6 @@ class Hero extends Component {
     repository: PropTypes.string.isRequired,
     version: PropTypes.string.isRequired,
     layout: PropTypes.oneOf(['small', 'medium', 'large', 'x-large']).isRequired,
-    trayOverlay: PropTypes.bool.isRequired,
     description: PropTypes.string,
     docs: PropTypes.object
   }
@@ -344,7 +343,7 @@ class Hero extends Component {
                       withBackground={false}
                       color="primary-inverse"
                       href="#usage"
-                      margin="0 x-small 0 0"
+                      margin="0 x-small x-small 0"
                       size={bigScreen ? 'large' : 'medium'}
                     >
                       Developer Quick Start
@@ -355,7 +354,7 @@ class Hero extends Component {
                       renderIcon={IconGithubSolid}
                       href="https://github.com/instructure/instructure-ui"
                       size={bigScreen ? 'large' : 'medium'}
-                      margin="0 x-small 0 0"
+                      margin="0 x-small x-small 0"
                     >
                       Github
                     </Button>
@@ -365,6 +364,7 @@ class Hero extends Component {
                       color="success"
                       href="#v7-upgrade-guide"
                       size={bigScreen ? 'large' : 'medium'}
+                      margin="0 x-small x-small 0"
                     >
                       7.0 Upgrade Guide
                     </Button>

@@ -31,6 +31,7 @@ import { error } from '@instructure/console/macro'
 import { addElementQueryMatchListener, updateElementMatches } from '../addElementQueryMatchListener'
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
+import { findDOMNode } from '@instructure/ui-dom-utils'
 
 /**
 ---
@@ -121,7 +122,7 @@ class Responsive extends Component {
       ? addElementQueryMatchListener
       : addMediaQueryMatchListener
     // TODO: refactor to use a ref to root div instead of `this`
-    return matchListener(query, this, updateMatches)
+    return matchListener(query, () => findDOMNode(this), updateMatches)
   }
 
   removeMatchListener () {

@@ -64,6 +64,7 @@ blockquote {
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
+  display: flex;
 }
 
 .hamburger {
@@ -71,4 +72,21 @@ blockquote {
   z-index: var(--menuToggleZIndex);
   top: 1.25rem;
   inset-inline-start: 0.75rem;
+}
+
+.inlineNavigation {
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 100vh;
+  flex-shrink: 0;
+  border-inline-end-color: var(--navBorderColor);
+  border-inline-end-width: var(--navBorderWidth);
+  border-inline-end-style: solid;
+}
+
+.content {
+  flex-shrink: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
 }

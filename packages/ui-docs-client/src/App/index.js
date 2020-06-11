@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import { themeable, ApplyTheme } from '@instructure/ui-themeable'
 import { Alert } from '@instructure/ui-alerts'
-import { DrawerLayout } from '@instructure/ui-drawer-layout'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
@@ -35,6 +34,8 @@ import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
+import { Tray } from '@instructure/ui-tray'
+import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
 
 import {
   IconHamburgerSolid,
@@ -98,13 +99,13 @@ class App extends Component {
 
     this.state = {
       showMenu: showTrayOnPageLoad,
-      trayOverlay: false,
       themeKey: Object.keys(props.themes)[0],
-      contentWidth: undefined
+      layout: 'large'
     }
 
     this._content = null
     this._menuTrigger = null
+    this._mediaQueryListener = null
   }
 
   componentDidMount () {
@@ -112,10 +113,22 @@ class App extends Component {
     this.updateKey()
 
     window.addEventListener('hashchange', this.updateKey, false)
+
+    // TODO: Replace with the Responsive component later
+    // Using this method directly for now instead to avoid a call to findDOMNode
+    this._mediaQueryListener = addMediaQueryMatchListener({
+      medium: { minWidth: 700 },
+      large: { minWidth: 1100 },
+      'x-large': { minWidth: 1300 }
+    }, this._content, this.updateLayout)
   }
 
   componentWillUnmount () {
     window.removeEventListener('hashchange', this.updateKey, false)
+
+    if (this._mediaQueryListener) {
+      this._mediaQueryListener.remove()
+    }
   }
 
   getChildContext () {
@@ -153,16 +166,20 @@ class App extends Component {
     return []
   }
 
-  computeLayout = (contentWidth = this.state.contentWidth) => {
-    if (contentWidth >= 700 && contentWidth < 1100 ) {
-      return 'medium'
-    } else if (contentWidth >= 1100 && contentWidth < 1300) {
-      return 'large'
-    } else if (contentWidth >= 1300) {
-      return 'x-large'
-    } else {
-      return 'small'
+  updateLayout = (matches) => {
+    let layout = 'small'
+
+    if (matches.length > 0) {
+      if (matches.includes('medium') && matches.length === 1) {
+        layout = 'medium'
+      } else if (matches.includes('large') && matches.length === 2) {
+        layout = 'large'
+      } else if (matches.includes('x-large')) {
+        layout = 'x-large'
+      }
     }
+
+    this.setState({ layout })
   }
 
   updateKey = () => {
@@ -170,9 +187,9 @@ class App extends Component {
 
     if (page) {
       this.setState(
-        ({ key, contentWidth, trayOverlay, showMenu }) => ({
+        ({ key, showMenu }) => ({
           key: page || 'index',
-          showMenu: this.handleShowTrayOnURLChange(key, contentWidth, trayOverlay, showMenu)
+          showMenu: this.handleShowTrayOnURLChange(key, showMenu)
         }),
         () => {
           this.trackPage(page || 'index')
@@ -205,7 +222,9 @@ class App extends Component {
   }
 
   handleMenuClose = () => {
-    this.setState({ showMenu: false })
+    this.setState({ showMenu: false }, () => {
+      this._menuTrigger && this._menuTrigger.focus()
+    })
   }
 
   handleThemeChange = (event, option) => {
@@ -214,50 +233,24 @@ class App extends Component {
     })
   }
 
-  handleOverlayTrayChange = (trayIsOverlayed) => {
-    this.setState({ trayOverlay: trayIsOverlayed })
-  }
-
-  handleShowTrayOnURLChange = (key, contentWidth, trayOverlay, showMenu) => {
+  handleShowTrayOnURLChange = (key, showMenu) => {
     const userIsComingFromHomepage = key === 'index' || typeof key === 'undefined'
 
-    // homepage doesn't know the layout size on initial render
-    const layout = typeof key === 'undefined' ? this.computeLayout() : this.computeLayout(contentWidth)
+    const { layout } = this.state
 
-    const layoutIsLargeEnough = layout === 'large' || layout === 'x-large'
-
-    // if the menu tray is overlaying content, close it when the page changes
-    if (trayOverlay) {
-      return false
     // if the user is coming from the homepage, make the tray show if the layout is large enough
-    } else if (userIsComingFromHomepage && layoutIsLargeEnough) {
+    if (layout === 'small') {
+      return false
+    } else if (userIsComingFromHomepage) {
       return true
     } else {
       return showMenu
     }
   }
 
-  handleTrayDismiss = (e) => {
-    this.setState({ showMenu: false })
-  }
-
-  handleContentSizeChange = (size) => {
-    if (this.state.contentWidth !== size.width) {
-      this.setState({
-        contentWidth: size.width
-      })
-    }
-  }
-
-  handleTrayExited = (e) => {
-    // TODO: Remove this once we fix the issue where focus is lost if the focus
-    // later element changes while focus is being returned
-    this._menuTrigger && this._menuTrigger.focus()
-  }
-
   renderThemeSelect () {
     const themeKeys = Object.keys(this.props.themes)
-    const smallScreen = this.computeLayout() === 'small'
+    const smallScreen = this.state.layout === 'small'
 
     return themeKeys.length > 1 ? (
       <Flex
@@ -286,7 +279,10 @@ class App extends Component {
 
   renderTheme (themeKey) {
     const theme = this.props.themes[themeKey]
-    const smallerScreens = this.computeLayout() === 'small' || this.computeLayout() === 'medium'
+
+    const { layout } = this.state
+    const smallerScreens = layout === 'small' || layout === 'medium'
+
     const themeContent = (
       <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
         <Heading
@@ -313,7 +309,8 @@ class App extends Component {
 
   renderIcons (key) {
     const { icons } = this.props
-    const smallerScreens = this.computeLayout() === 'small' || this.computeLayout() === 'medium'
+    const { layout } = this.state
+    const smallerScreens = layout === 'small' || layout === 'medium'
 
     const iconContent = (
       <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
@@ -341,6 +338,8 @@ class App extends Component {
 
   renderDocument (doc, repository) {
     const { descriptions, docs, parents } = this.props
+    const { layout, themeKey } = this.state
+
     let children = []
 
     if (parents[doc.id]) {
@@ -349,10 +348,12 @@ class App extends Component {
 
     const description = descriptions[doc.id]
     const heading = (doc.extension !== '.md') ? doc.title : ''
-    const smallerScreens = this.computeLayout() === 'small' || this.computeLayout() === 'medium'
 
     const documentContent = (
-      <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
+      <View
+        as="div"
+        padding={(layout === 'small' || layout === 'medium') ? 'x-large none none large' : 'x-large none none'}
+      >
         { this.renderThemeSelect() }
         { doc.experimental && <div><Pill color="info" margin="small 0">Experimental</Pill></div>}
         <Section id={doc.id} heading={heading}>
@@ -362,9 +363,9 @@ class App extends Component {
               children
             }}
             description={description || doc.description}
-            themeKey={this.state.themeKey}
+            themeKey={themeKey}
             repository={repository}
-            layout={this.computeLayout()}
+            layout={layout}
           />
         </Section>
       </View>
@@ -399,6 +400,8 @@ class App extends Component {
 
   renderHero () {
     const { library, docs, themes } = this.props
+    const { layout } = this.state
+
     const themeDocs = {}
 
     Object.keys(themes).forEach((key) => {
@@ -414,8 +417,7 @@ class App extends Component {
           description={library.description}
           repository={library.repository}
           version={library.version}
-          trayOverlay={this.state.trayOverlay}
-          layout={this.computeLayout()}
+          layout={layout}
         />
       </ApplyTheme>
     )
@@ -453,7 +455,7 @@ class App extends Component {
     const { repository } = this.props.library
 
     if (!key || key === 'index') {
-      return this.renderIndex(this.computeLayout())
+      return this.renderIndex()
     } if (key === 'CHANGELOG') {
       return this.renderChangeLog()
     } else if (key === 'iconography' || icon) {
@@ -490,83 +492,96 @@ class App extends Component {
     ) : null
   }
 
-  render () {
+  renderNavigation () {
     const {
       name,
       version
     } = this.props.library
 
+    const { key, layout, showMenu } = this.state
+
+    // Render nothing when the menu is not shown and the layout isn't small
+    // When the layout is small, we still render the tray so that it can properly
+    // finish the exit transition
+    if (!showMenu && layout !== 'small') return
+
+    const navContent = (
+      <View
+        as="div"
+        padding="small none none"
+        minHeight="100vh"
+        width="18.75rem"
+      >
+        <View display="block" textAlign="end" margin="xx-small x-small none">
+          <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+            <IconButton
+              renderIcon={IconXSolid}
+              screenReaderLabel="Close Navigation"
+              withBorder={false}
+              withBackground={false}
+              onClick={this.handleMenuClose}
+              shape="circle"
+              color="secondary"
+              size="medium"
+            />
+          </ApplyTheme>
+        </View>
+        <Header name={name === 'instructure-ui' ? 'Instructure UI' : name} version={version} />
+        <Nav
+          selected={key}
+          sections={this.props.sections}
+          docs={this.props.docs}
+          themes={this.props.themes}
+          icons={this.props.icons}
+        />
+      </View>
+    )
+
+    return layout !== 'small' ? (
+      <nav className={styles.inlineNavigation}>
+        {navContent}
+      </nav>
+    ) : (
+      <Tray
+        label="Navigation"
+        open={showMenu}
+        onDismiss={this.handleMenuClose}
+      >
+        {navContent}
+      </Tray>
+    )
+  }
+
+  render () {
     const key = this.state.key
-    const showMenu = this.state.showMenu
-    const trayWidth = this.props.trayWidth
+    const { showMenu, layout } = this.state
 
     return (
       <div className={styles.root}>
-        { this.state.trayOverlay && showMenu && <Mask onClick={this.handleTrayDismiss} /> }
-        <DrawerLayout
-          minWidth="700px"
-          onOverlayTrayChange={this.handleOverlayTrayChange}
+        { showMenu && layout === 'small' && <Mask onClick={this.handleMenuClose} /> }
+        {this.renderNavigation()}
+        <div
+          className={styles.content}
+          label={key || this.props.library.name}
+          role="main"
+          ref={this.handleContentRef}
         >
-          <DrawerLayout.Tray
-            label="Navigation"
-            placement="start"
-            open={showMenu}
-            mountNode={this.state.trayOverlay ? document.body : null}
-            onDismiss={this.handleTrayDismiss}
-            onExited={this.handleTrayExited}
-          >
-            <View
-              as="div"
-              width={trayWidth}
-              padding="small none none"
-            >
-              <View display="block" textAlign="end" margin="xx-small x-small none">
-                <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
-                  <IconButton
-                    renderIcon={IconXSolid}
-                    screenReaderLabel="Close Navigation"
-                    withBorder={false}
-                    withBackground={false}
-                    onClick={this.handleMenuClose}
-                    shape="circle"
-                    color="secondary"
-                    size="medium"
-                  />
-                </ApplyTheme>
-              </View>
-              <Header name={name === 'instructure-ui' ? 'Instructure UI' : name} version={version} />
-              <Nav
-                selected={key}
-                sections={this.props.sections}
-                docs={this.props.docs}
-                themes={this.props.themes}
-                icons={this.props.icons}
-              />
-            </View>
-          </DrawerLayout.Tray>
-          <DrawerLayout.Content
-            label={key || this.props.library.name}
-            role="main"
-            contentRef={this.handleContentRef}
-            onSizeChange={this.handleContentSizeChange}
-          >
-            {!showMenu && (
-              <div className={styles.hamburger}>
-                <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
-                  <IconButton
-                    onClick={this.handleMenuOpen}
-                    elementRef={this.handleMenuTriggerRef}
-                    renderIcon={IconHamburgerSolid}
-                    screenReaderLabel="Open Navigation"
-                    shape="circle"
-                  />
-                </ApplyTheme>
-              </div>
-            )}
-            {this.renderContent(key, this.computeLayout())}
-            {this.renderFooter()}
-          </DrawerLayout.Content>
-        </DrawerLayout>
+          {!showMenu && (
+            <div className={styles.hamburger}>
+              <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+                <IconButton
+                  onClick={this.handleMenuOpen}
+                  elementRef={this.handleMenuTriggerRef}
+                  renderIcon={IconHamburgerSolid}
+                  screenReaderLabel="Open Navigation"
+                  shape="circle"
+                />
+              </ApplyTheme>
+            </div>
+          )}
+          {this.renderContent(key)}
+          {this.renderFooter()}
+        </div>
       </div>
     )
   }

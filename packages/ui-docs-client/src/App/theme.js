@@ -39,5 +39,7 @@ export default function ({ colors, typography, stacking, transitions, borders, s
     borderStyle: borders.style,
     borderColor: colors.tiara,
     menuToggleZIndex: stacking.above,
+    navBorderColor: colors.borderMedium,
+    navBorderWidth: borders.widthSmall
   }
 }

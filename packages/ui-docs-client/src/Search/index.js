@@ -262,6 +262,7 @@ class Search extends Component {
           onRequestHideOptions={this.handleHideOptions}
           onRequestHighlightOption={this.handleHighlightOption}
           onRequestSelectOption={this.handleSelectOption}
+          shouldNotWrap
           renderBeforeInput={
             <SearchStatus
               status={isLoading ? 'active' : 'inactive'}

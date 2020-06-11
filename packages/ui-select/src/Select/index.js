@@ -197,6 +197,11 @@ class Select extends Component {
     * Children of type `<Select.Option />` or `<Select.Group />`.
     */
     children: ChildrenPropTypes.oneOf([Group, Option]),
+    /**
+    * Prevents the default behavior of wrapping the input and rendered content
+    * when available space is exceeded.
+    */
+    shouldNotWrap: PropTypes.bool
   }
 
   static defaultProps = {
@@ -229,7 +234,8 @@ class Select extends Component {
     listRef: (node) => {},
     renderBeforeInput: null,
     renderAfterInput: null,
-    children: null
+    children: null,
+    shouldNotWrap: false
   }
 
   state = {
@@ -582,6 +588,7 @@ class Select extends Component {
       inputValue,
       placeholder,
       isRequired,
+      shouldNotWrap,
       size,
       isInline,
       width,
@@ -630,6 +637,7 @@ class Select extends Component {
             ? 'readonly' // prevent keyboard cursor
             : interaction,
           isRequired,
+          shouldNotWrap,
           display: isInline ? 'inline-block' : 'block',
           renderBeforeInput,
           renderAfterInput: renderAfterInput || this.renderIcon(),
