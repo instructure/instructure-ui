@@ -65,13 +65,24 @@ class ColHeader extends Component {
      * Callback fired when column header is clicked. Parameters: `(event, { id })`
      */
     onRequestSort: PropTypes.func,
+    /**
+     * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
+     */
+    scope: PropTypes.oneOf([
+      'row',
+      'col',
+      'rowgroup',
+      'colgroup',
+      'auto'
+    ])
   }
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     textAlign: 'start',
     sortDirection: 'none',
-    children: null
+    children: null,
+    scope: 'col'
   }
 
   handleClick = (event) => {
@@ -99,7 +110,14 @@ class ColHeader extends Component {
   }
 
   render () {
-    const { onRequestSort, width, textAlign, children, sortDirection } = this.props
+    const {
+      onRequestSort,
+      width,
+      textAlign,
+      children,
+      sortDirection,
+      scope
+    } = this.props
 
     return (
       <th
@@ -112,7 +130,7 @@ class ColHeader extends Component {
         style={{
           width,
         }}
-        scope="col"
+        scope={scope}
         aria-sort={ sortDirection }
       >
         {onRequestSort && (
