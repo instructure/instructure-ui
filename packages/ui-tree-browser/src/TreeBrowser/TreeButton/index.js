@@ -30,6 +30,7 @@ import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { isIE11 } from '@instructure/ui-utils'
 import { Img } from '@instructure/ui-img'
+import { callRenderProp } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -53,9 +54,9 @@ class TreeButton extends Component {
     type: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
-    collectionIcon: PropTypes.func,
-    collectionIconExpanded: PropTypes.func,
-    itemIcon: PropTypes.func,
+    collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     thumbnail: PropTypes.string,
     onClick: PropTypes.func,
     expanded: PropTypes.bool,
@@ -93,16 +94,23 @@ class TreeButton extends Component {
   }
 
   renderCollectionIcon () {
-    const Icon = this.props.expanded
-      ? this.props.collectionIconExpanded : this.props.collectionIcon
-    if (Icon) {
-      return <Icon className={styles.icon} />
+    const {
+      expanded,
+      collectionIcon,
+      collectionIconExpanded
+    } = this.props
+
+    if (collectionIcon || collectionIconExpanded) {
+      return <div className={styles.icon}>{callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}</div>
     }
   }
 
   renderItemImage () {
-    const thumbnail = this.props.thumbnail
-    const Icon = this.props.itemIcon
+    const {
+      thumbnail,
+      itemIcon
+    } = this.props
+
     if (thumbnail) {
       return (
         <div className={styles.thumbnail}>
@@ -110,8 +118,9 @@ class TreeButton extends Component {
         </div>
       )
     }
-    if (Icon) {
-      return <Icon className={styles.icon} />
+
+    if (itemIcon) {
+      return <div className={styles.icon}>{callRenderProp(itemIcon)}</div>
     }
   }
 

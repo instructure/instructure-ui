@@ -58,6 +58,13 @@ const IconDocument = (
   </svg>
 )
 
+const IconUser = (
+  <svg height="100" width="100">
+    <title>User icon</title>
+    <circle cx="50" cy="50" r="40" />
+  </svg>
+)
+
 describe('<TreeCollection />', async () => {
   it('should render', async () => {
     await mount(
@@ -223,6 +230,51 @@ describe('<TreeCollection />', async () => {
 
       expect(onItemClick).to.have.been.calledOnce()
       expect(onItemClick.lastCall.lastArg).to.deep.equal({id: 1, type: 'item'})
+    })
+
+    it('should correctly evaluate `getItemProps` for each item', async () => {
+      await mount(
+        <TreeCollection
+          id={1}
+          name="Coll 1"
+          collections={[
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
+          ]}
+          items={[
+            { id: 1, name: 'Item 1', icon: () => IconFolder },
+            { id: 2, name: 'Item 2', icon: () => IconUser },
+            { id: 2, name: 'Item 3' }
+          ]}
+          getItemProps={({ name, ...props }) => {
+            let itemIcon = IconDocument
+
+            if (name === 'Item 1') {
+              itemIcon = IconFolder
+            }
+
+            if (name === 'Item 2') {
+              itemIcon = IconUser
+            }
+
+            return {
+              ...props,
+              itemIcon,
+              name
+            }
+          }}
+          expanded={true}
+        />
+      )
+      const collection = await TreeCollectionLocator.find()
+
+      const item1 = await collection.find('button:contains(Item 1)')
+      expect(await item1.find('svg:title(Folder icon)')).to.exist()
+
+      const item2 = await collection.find('button:contains(Item 2)')
+      expect(await item2.find('svg:title(User icon)')).to.exist()
+
+      const item3 = await collection.find('button:contains(Item 3)')
+      expect(await item3.find('svg:title(Document icon)')).to.exist()
     })
   })
 })

@@ -60,9 +60,10 @@ class TreeCollection extends Component {
     selection: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
-    collectionIcon: PropTypes.func,
-    collectionIconExpanded: PropTypes.func,
-    itemIcon: PropTypes.func,
+    collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    getItemProps: PropTypes.func,
     onItemClick: PropTypes.func,
     onCollectionClick: PropTypes.func,
     onKeyDown: PropTypes.func,
@@ -87,6 +88,7 @@ class TreeCollection extends Component {
     collectionIconExpanded: undefined,
     collectionIcon: undefined,
     itemIcon: undefined,
+    getItemProps: props => props,
     numChildren: undefined,
     level: undefined,
     position: undefined
@@ -181,9 +183,33 @@ class TreeCollection extends Component {
   }
 
   renderItemNode (item, i, numChildren, numCollections) {
+    const {
+      selection,
+      level,
+      onItemClick,
+      onKeyDown,
+      getItemProps
+    } = this.props
+
     const ariaSelected = {}
-    if (this.props.selection) ariaSelected['aria-selected'] = (this.props.selection === `item_${item.id}`)
+
+    if (selection) {
+      ariaSelected['aria-selected'] = (selection === `item_${item.id}`)
+    }
+
     const itemHash = {id: item.id, type: 'item'}
+
+    const itemProps = getItemProps({
+      ...this.getCommonButtonProps(),
+      id: item.id,
+      name: item.name,
+      descriptor: item.descriptor,
+      thumbnail: item.thumbnail,
+      selected: selection === `item_${item.id}`,
+      focused: this.state.focused === `item_${item.id}`,
+      type: 'item'
+    })
+
     return (
       <li
         key={`i${i}`}
@@ -191,25 +217,16 @@ class TreeCollection extends Component {
         role="treeitem"
         aria-label={item.name}
         className={styles.item}
-        aria-level={this.props.level + 1}
+        aria-level={level + 1}
         aria-posinset={(i + 1) + numCollections}
         aria-setsize={numChildren}
-        onClick={(e, n) => this.props.onItemClick(e, itemHash)}
-        onKeyDown={(e, n) => this.props.onKeyDown(e, itemHash)}
+        onClick={(e, n) => onItemClick(e, itemHash)}
+        onKeyDown={(e, n) => onKeyDown(e, itemHash)}
         onFocus={(e, n) => this.handleFocus(e, itemHash)}
         onBlur={(e, n) => this.handleBlur(e, itemHash)}
         {...ariaSelected}
       >
-        <TreeButton
-          {...this.getCommonButtonProps()}
-          id={item.id}
-          name={item.name}
-          descriptor={item.descriptor}
-          thumbnail={item.thumbnail}
-          selected={this.props.selection === `item_${item.id}`}
-          focused={this.state.focused === `item_${item.id}`}
-          type="item"
-        />
+        <TreeButton {...itemProps} />
       </li>
     )
   }
