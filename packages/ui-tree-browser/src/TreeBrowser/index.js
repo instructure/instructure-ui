@@ -34,6 +34,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { TreeCollection } from './TreeCollection'
+import { TreeButton } from './TreeButton'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -81,9 +82,16 @@ class TreeBrowser extends Component {
     selectionType: PropTypes.oneOf(['none', 'single']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
-    collectionIcon: PropTypes.func,
-    collectionIconExpanded: PropTypes.func,
-    itemIcon: PropTypes.func,
+    collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+    * A function called with each item's props as an argument. The return value of this function is a
+    * props object which will be passed to the item when it is rendered. This is useful for situations where
+    * you need to render the item differently depending on it's props. For example, if you would like to
+    * display a different icon for items with a certain name.
+    */
+    getItemProps: PropTypes.func,
     /**
     * whether or not to show the root collection specified in rootId prop or
     * to begin with its immediate subcollections and items instead
@@ -105,6 +113,7 @@ class TreeBrowser extends Component {
     collectionIcon: IconFolderLine,
     collectionIconExpanded: IconFolderLine,
     itemIcon: IconDocumentLine,
+    getItemProps: props => props,
     defaultExpanded: [],
     selectionType: 'none',
     onItemClick: function (item) {},

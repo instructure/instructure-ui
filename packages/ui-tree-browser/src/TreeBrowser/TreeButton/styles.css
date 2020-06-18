@@ -101,6 +101,9 @@
   position: relative;
   z-index: 1; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   color: var(--iconColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .text {
