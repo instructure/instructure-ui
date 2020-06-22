@@ -57,52 +57,52 @@ class CodeEditor extends Component {
       'markdown',
       'yaml',
       'yml',
-      'bash'
+      'bash',
     ]),
     readOnly: PropTypes.bool,
     onChange: PropTypes.func,
     options: PropTypes.object,
     attachment: PropTypes.oneOf(['bottom', 'top']),
     /**
-    * value to set on initial render
-    */
+     * value to set on initial render
+     */
     defaultValue: PropTypes.string,
     /**
-    * the selected value (when controlled via the `onChange` prop)
-    */
-    value: PropTypes.string
+     * the selected value (when controlled via the `onChange` prop)
+     */
+    value: PropTypes.string,
   }
 
   static defaultProps = {
     language: 'jsx',
     readOnly: false,
     options: {
-      styleActiveLine: true
+      styleActiveLine: true,
     },
-    onChange: undefined,
+    onChange: (value) => {},
     attachment: undefined,
     defaultValue: undefined,
-    value: undefined
+    value: undefined,
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
     this._id = uid('CodeEditor')
 
     if (typeof props.value === 'undefined') {
       this.state = {
-        value: props.defaultValue
+        value: props.defaultValue,
       }
     }
   }
 
-  focus () {
+  focus() {
     if (this.codeMirror) {
       this.codeMirror.focus()
     }
   }
 
-  get mode () {
+  get mode() {
     const { language } = this.props
 
     if (language === 'json' || language === 'js') {
@@ -118,22 +118,24 @@ class CodeEditor extends Component {
     }
   }
 
-  get options () {
+  get options() {
     return {
       ...this.props.options,
       readOnly: this.props.readOnly,
-      mode: this.mode
+      mode: this.mode,
     }
   }
 
-  get value () {
-    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
+  get value() {
+    return typeof this.props.value === 'undefined'
+      ? this.state.value
+      : this.props.value
   }
 
-  render () {
+  render() {
     const classes = {
       [styles.root]: true,
-      [styles['attached--' + this.props.attachment]]: this.props.attachment
+      [styles['attached--' + this.props.attachment]]: this.props.attachment,
     }
 
     return (
@@ -149,13 +151,11 @@ class CodeEditor extends Component {
               if (typeof this.props.value === 'undefined') {
                 this.setState({ value })
               }
+              this.props.onChange(value)
             }}
-            onChange={(editor, data, value) => {
-              if (typeof this.props.onChange === 'function') {
-                this.props.onChange(value)
-              }
+            ref={(el) => {
+              this.codeMirror = el
             }}
-            ref={(el) => { this.codeMirror = el }}
           />
         </label>
       </div>

@@ -28,25 +28,24 @@ import { CodeEditor } from '../index'
 
 describe('<CodeEditor />', async () => {
   it('should render', async () => {
-    const subject = await mount(
-      <CodeEditor label='foo' />
-    )
+    const subject = await mount(<CodeEditor label="foo" />)
     expect(subject.getDOMNode()).to.exist()
   })
 
   it('should fire onChange when value is changed', async () => {
-    const text = 'hello world'
     const onChange = stub()
     const subject = await mount(
-      <CodeEditor label='foo' onChange={onChange} defaultValue="test" />
+      <CodeEditor label='foo' value="hello worl" onChange={onChange} />
     )
     const codeEditor = within(subject.getDOMNode())
+    const input = await codeEditor.find('textarea')
 
-    expect(codeEditor.getTextContent()).to.include('test')
+    await input.typeIn('d')
+    expect(onChange).to.have.been.calledWith('hello world')
+    expect(codeEditor.getTextContent()).to.include('hello worl')
+    expect(codeEditor.getTextContent()).to.not.include('world')
 
-    await subject.setProps({value: text})
-
-    expect(codeEditor.getTextContent()).to.include(text)
-    expect(onChange).to.have.been.calledWith(text)
+    await subject.setProps({ value: 'hello world' })
+    expect(codeEditor.getTextContent()).to.include('hello world')
   })
 })
