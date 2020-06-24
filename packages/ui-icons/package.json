@@ -5,7 +5,7 @@
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
   "module": "./es/index.js",
-  "main": "./es/index.js",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -14,7 +14,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "clean": "gulp clean && ui-build --clean",
-    "build": "gulp && ui-build __build__ --copy-files",
+    "build": "gulp && ui-build __build__ --copy-files --modules es,cjs",
     "export": "gulp clean && gulp export && gulp",
     "build:watch": "gulp watch && ui-build __build__ --watch --copy-files"
   },

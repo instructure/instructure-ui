@@ -23,7 +23,7 @@
  */
 
 import { canvas } from './canvas'
-import { canvasHighContrast } from './canvas-high-contrast'
+import { canvasHighContrast } from './canvasHighContrast'
 import { instructure } from './instructure'
 import { functionalColors } from './utils/functionalColors'
 

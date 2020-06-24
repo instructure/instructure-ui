@@ -36,13 +36,13 @@ module.exports = [
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-high-contrast',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvasHighContrast',
     outputPackage: '@instructure/ui-theme-tokens',
     groupOutput: true
   },
   {
     themeKey: 'canvas-high-contrast',
-    sourceTokens: '@instructure/ui-theme-tokens/lib/canvas-high-contrast',
+    sourceTokens: '@instructure/ui-theme-tokens/lib/canvasHighContrast',
     outputPackage: '@instructure/canvas-high-contrast-theme',
   },
   {

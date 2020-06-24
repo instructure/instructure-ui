@@ -4,7 +4,7 @@
   "description": "A UI a11y testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
-  "main": "./es/index.js",
+  "main": "./lib/index.js",
   "module": "./es/index.js",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
-    "build": "ui-build",
+    "build": "ui-build --modules es,cjs",
     "build:watch": "ui-build --watch"
   },
   "license": "MIT",

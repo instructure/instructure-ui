@@ -4,7 +4,7 @@
   "description": "Helpers and utilities for queries in UI tests.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
-  "main": "./es/index.js",
+  "main": "./lib/index.js",
   "module": "./es/index.js",
   "types": "./types/index.d.ts",
   "repository": {
@@ -17,7 +17,7 @@
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
-    "build": "ui-build",
+    "build": "ui-build --modules es,cjs",
     "build:watch": "ui-build --watch",
     "build:types": "ui-scripts --types"
   },
