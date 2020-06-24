@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-link",
-  "version": "6.26.0",
+  "version": "6.27.0",
   "description": "A component for creating links",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -23,24 +23,24 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^6.26.0",
-    "@instructure/ui-a11y-utils": "^6.26.0",
-    "@instructure/ui-color-utils": "^6.26.0",
-    "@instructure/ui-dom-utils": "^6.26.0",
-    "@instructure/ui-icons": "^6.26.0",
-    "@instructure/ui-prop-types": "^6.26.0",
-    "@instructure/ui-react-utils": "^6.26.0",
-    "@instructure/ui-testable": "^6.26.0",
-    "@instructure/ui-themeable": "^6.26.0",
-    "@instructure/ui-view": "^6.26.0",
+    "@instructure/console": "^6.27.0",
+    "@instructure/ui-a11y-utils": "^6.27.0",
+    "@instructure/ui-color-utils": "^6.27.0",
+    "@instructure/ui-dom-utils": "^6.27.0",
+    "@instructure/ui-icons": "^6.27.0",
+    "@instructure/ui-prop-types": "^6.27.0",
+    "@instructure/ui-react-utils": "^6.27.0",
+    "@instructure/ui-testable": "^6.27.0",
+    "@instructure/ui-themeable": "^6.27.0",
+    "@instructure/ui-view": "^6.27.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.26.0",
-    "@instructure/ui-test-locator": "^6.26.0",
-    "@instructure/ui-test-queries": "^6.26.0",
-    "@instructure/ui-test-utils": "^6.26.0"
+    "@instructure/ui-babel-preset": "^6.27.0",
+    "@instructure/ui-test-locator": "^6.27.0",
+    "@instructure/ui-test-queries": "^6.27.0",
+    "@instructure/ui-test-utils": "^6.27.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

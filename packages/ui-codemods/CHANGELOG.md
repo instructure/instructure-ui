@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.27.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v6.27.0) (2020-06-24)
+
+
+### Features
+
+* **ui-codemods:** read consumer config for prettier if it exists when applying codemods ([36967f5](https://github.com/instructure/instructure-ui/commit/36967f5))
+
+
+
+
+
 # [6.26.0](https://github.com/instructure/instructure-ui/compare/v6.25.0...v6.26.0) (2020-04-30)
 
 **Note:** Version bump only for package @instructure/ui-codemods

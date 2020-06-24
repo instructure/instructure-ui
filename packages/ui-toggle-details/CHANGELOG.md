@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.27.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v6.27.0) (2020-06-24)
+
+
+### Bug Fixes
+
+* **docs,ui-toggle-details:** update under the hood props + a couple README prop ([b5d9827](https://github.com/instructure/instructure-ui/commit/b5d9827))
+
+
+
+
+
 # [6.26.0](https://github.com/instructure/instructure-ui/compare/v6.25.0...v6.26.0) (2020-04-30)
 
 **Note:** Version bump only for package @instructure/ui-toggle-details

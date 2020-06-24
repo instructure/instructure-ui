@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.27.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v6.27.0) (2020-06-24)
+
+
+### Bug Fixes
+
+* **docs,ui-toggle-details:** update under the hood props + a couple README prop ([b5d9827](https://github.com/instructure/instructure-ui/commit/b5d9827))
+* **ui-code-editor:** fix controlled CodeEditor in v6 ([49424db](https://github.com/instructure/instructure-ui/commit/49424db))
+* **ui-list:** fix style collisions in the docs for list and inline list ([96af756](https://github.com/instructure/instructure-ui/commit/96af756))
+* **ui-popover:** reduce tooltip flickering ([7909946](https://github.com/instructure/instructure-ui/commit/7909946))
+* **ui-position:** account for offsetTop discrepency in firefox ([368e4b1](https://github.com/instructure/instructure-ui/commit/368e4b1))
+* **ui-range-input:** patch CSS for legacy Edge ([2cfdd0d](https://github.com/instructure/instructure-ui/commit/2cfdd0d))
+* **ui-react-utils:** ensure ComponentIdentifier renders in the docs ([05a14fd](https://github.com/instructure/instructure-ui/commit/05a14fd))
+* **ui-testable:** fixes for createSuper being undefined ([c9a3c91](https://github.com/instructure/instructure-ui/commit/c9a3c91))
+
+
+### Features
+
+* **docs:** Newsletter for version 7 release ([f953f95](https://github.com/instructure/instructure-ui/commit/f953f95))
+* **ui-breadcrumb:** Add responsive breadcrumb docs ([c2f128b](https://github.com/instructure/instructure-ui/commit/c2f128b))
+* **ui-codemods:** read consumer config for prettier if it exists when applying codemods ([36967f5](https://github.com/instructure/instructure-ui/commit/36967f5))
+* **ui-docs-client:** add a ToggleBlockquote to be used internally for upgrade guides ([2e620e1](https://github.com/instructure/instructure-ui/commit/2e620e1))
+* **ui-icons:** add "sort" icon ([426668c](https://github.com/instructure/instructure-ui/commit/426668c))
+* **ui-icons:** added margin to 'add' and 'x' icons ([6f76dab](https://github.com/instructure/instructure-ui/commit/6f76dab))
+* **ui-scripts:** Add flags to ui-test to opt out of linting and coverage ([983aef7](https://github.com/instructure/instructure-ui/commit/983aef7))
+* **ui-table:** allow valid values for ColHeader scope prop ([ffe14d9](https://github.com/instructure/instructure-ui/commit/ffe14d9))
+* **ui-tabs:** Responsive tabs ([a748360](https://github.com/instructure/instructure-ui/commit/a748360))
+* **ui-tree-browser:** allow specifying a different icon for each item ([b7309f7](https://github.com/instructure/instructure-ui/commit/b7309f7))
+
+
+
+
+
 # [6.26.0](https://github.com/instructure/instructure-ui/compare/v6.25.0...v6.26.0) (2020-04-30)
 
 
