@@ -1,6 +1,6 @@
 {
   "name": "@instructure/browserslist-config-instui",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "A shared browserslist config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",

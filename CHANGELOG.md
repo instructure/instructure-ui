@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.1.0](https://github.com/instructure/instructure-ui/compare/v7.0.0...v7.1.0) (2020-06-25)
+
+
+### Features
+
+* **ui-table:** allow valid values for ColHeader scope prop ([3133e55](https://github.com/instructure/instructure-ui/commit/3133e55))
+* **ui-tree-browser:** allow specifying a different icon for each item ([ea98f06](https://github.com/instructure/instructure-ui/commit/ea98f06))
+
+
+
+
+
 # [7.0.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v7.0.0) (2020-05-27)
 
 > __Note:__ For instructions on upgrading to version 7.0.0 and more information about breaking changes, see [the upgrade guide](#v7-upgrade-guide).

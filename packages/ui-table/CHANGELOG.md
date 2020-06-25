@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.1.0](https://github.com/instructure/instructure-ui/compare/v7.0.0...v7.1.0) (2020-06-25)
+
+
+### Features
+
+* **ui-table:** allow valid values for ColHeader scope prop ([3133e55](https://github.com/instructure/instructure-ui/commit/3133e55))
+
+
+
+
+
 # [7.0.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v7.0.0) (2020-05-27)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.1.0](https://github.com/instructure/instructure-ui/compare/v7.0.0...v7.1.0) (2020-06-25)
+
+
+### Features
+
+* **ui-tree-browser:** allow specifying a different icon for each item ([ea98f06](https://github.com/instructure/instructure-ui/commit/ea98f06))
+
+
+
+
+
 # [7.0.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v7.0.0) (2020-05-27)
 
 
