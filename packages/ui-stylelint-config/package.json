@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-stylelint-config",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "A UI shared stylelint config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",

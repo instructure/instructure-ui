@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-docs-plugin",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "A webpack plugin to generate documentation made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -20,11 +20,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.1.0"
+    "@instructure/ui-babel-preset": "^7.1.1"
   },
   "dependencies": {
-    "@instructure/config-loader": "^7.1.0",
-    "@instructure/ui-docs-client": "^7.1.0",
+    "@instructure/config-loader": "^7.1.1",
+    "@instructure/ui-docs-client": "^7.1.1",
     "favicons-webpack-plugin": "^1.0.2",
     "globby": "^10.0.1",
     "gray-matter": "3.1.1",
