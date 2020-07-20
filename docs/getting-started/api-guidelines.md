@@ -1,7 +1,7 @@
 ---
 title: API Guidelines
 category: Getting Started
-order: 3
+order: 4
 ---
 
 ## API Guidelines

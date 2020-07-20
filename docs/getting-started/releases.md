@@ -1,7 +1,7 @@
 ---
 title: Releases
 category: Getting Started
-order: 7
+order: 8
 ---
 
 ## Releases
