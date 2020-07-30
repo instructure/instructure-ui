@@ -63,7 +63,7 @@ function makePrompter() {
         } = answers
 
         const testplan = (answers.testplan) ? `\nTEST PLAN:\n${answers.testplan}\n\n` : ''
-        const issues = (footer) ? `\n\nrefs: ${footer}\n\n` : ''
+        const issues = (footer) ? `\n\nCloses: ${footer}\n\n` : ''
 
         let scope = '*'
 
