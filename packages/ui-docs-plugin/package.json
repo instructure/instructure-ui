@@ -29,7 +29,7 @@
     "globby": "^10.0.1",
     "gray-matter": "3.1.1",
     "html-webpack-plugin": "^3.2.0",
-    "jsdoc-api": "^5.0.3",
+    "jsdoc-api": "^6.0.0",
     "loader-utils": "^1.2.3",
     "react-docgen": "^4",
     "script-ext-html-webpack-plugin": "^2.1.4",

@@ -28,7 +28,7 @@ module.exports = function getJSDoc (source, error) {
   let doc = {}
 
   try {
-    const sections = jsdoc.explainSync({ source })
+    const sections = jsdoc.explainSync({ configure: require.resolve('@instructure/ui-docs-plugin/jsdoc.config.json'), source })
       .filter((section) => {
         return section.undocumented !== true && section.access !== 'private' && section.kind !== 'package'
       })
