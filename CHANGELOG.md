@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.1.3](https://github.com/instructure/instructure-ui/compare/v7.1.2...v7.1.3) (2020-08-10)
+
+
+### Bug Fixes
+
+* **ui-docs-plugin:** make sure utilities are categorized properly ([9dd6118](https://github.com/instructure/instructure-ui/commit/9dd6118))
+* **ui-options:** Don't let words overflow in Options component ([dbb6dfe](https://github.com/instructure/instructure-ui/commit/dbb6dfe))
+
+
+
+
+
 ## [7.1.2](https://github.com/instructure/instructure-ui/compare/v7.1.1...v7.1.2) (2020-07-17)
 
 **Note:** Version bump only for package instructure-ui

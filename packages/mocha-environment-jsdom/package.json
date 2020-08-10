@@ -1,6 +1,6 @@
 {
   "name": "@instructure/mocha-environment-jsdom",
-  "version": "7.1.2",
+  "version": "7.1.3",
   "description": "jsdom environment setup for use with mocha tests",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
