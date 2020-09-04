@@ -332,17 +332,17 @@ class SimpleSelect extends Component {
     this._select = node
   }
 
-  handleBlur = () => {
+  handleBlur = (event) => {
     this.setState({ highlightedOptionId: null })
     this.props.onBlur(event)
   }
 
-  handleShowOptions = () => {
+  handleShowOptions = (event) => {
     this.setState({ isShowingOptions: true })
     this.props.onShowOptions(event)
   }
 
-  handleHideOptions = () => {
+  handleHideOptions = (event) => {
     this.setState((state) => {
       const option = this.getOption('id', state.selectedOptionId)
       return {
