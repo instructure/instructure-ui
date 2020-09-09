@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.1.4](https://github.com/instructure/instructure-ui/compare/v7.1.3...v7.1.4) (2020-09-09)
+
+
+### Bug Fixes
+
+* **ui-simple-select:** add missing event args ([ab18a17](https://github.com/instructure/instructure-ui/commit/ab18a17))
+
+
+
+
+
 ## [7.1.3](https://github.com/instructure/instructure-ui/compare/v7.1.2...v7.1.3) (2020-08-10)
 
 

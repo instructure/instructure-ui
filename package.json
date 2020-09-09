@@ -2,7 +2,7 @@
   "name": "instructure-ui",
   "description": "A design system by Instructure Inc.",
   "private": true,
-  "version": "7.1.3",
+  "version": "7.1.4",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
