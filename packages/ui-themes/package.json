@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "7.1.4",
+  "version": "7.2.0",
   "description": "A library of @instructure/ui-themeable themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -21,12 +21,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.1.4"
+    "@instructure/ui-babel-preset": "^7.2.0"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "^7.1.4",
-    "@instructure/canvas-theme": "^7.1.4",
-    "@instructure/instructure-theme": "^7.1.4"
+    "@instructure/canvas-high-contrast-theme": "^7.2.0",
+    "@instructure/canvas-theme": "^7.2.0",
+    "@instructure/instructure-theme": "^7.2.0"
   },
   "publishConfig": {
     "access": "public"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.2.0](https://github.com/instructure/instructure-ui/compare/v7.1.4...v7.2.0) (2020-09-23)
+
+
+### Features
+
+* **ui-icons:** add new icons: compass, line-reader, notepad, protactor, review-screen, ruler ([ea218ca](https://github.com/instructure/instructure-ui/commit/ea218ca))
+
+
+
+
+
 ## [7.1.4](https://github.com/instructure/instructure-ui/compare/v7.1.3...v7.1.4) (2020-09-09)
 
 **Note:** Version bump only for package @instructure/ui-icons
