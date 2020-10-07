@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-byline",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "description": "A Byline component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -23,17 +23,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-react-utils": "^7.2.0",
-    "@instructure/ui-testable": "^7.2.0",
-    "@instructure/ui-themeable": "^7.2.0",
-    "@instructure/ui-view": "^7.2.0",
+    "@instructure/ui-react-utils": "^7.2.1",
+    "@instructure/ui-testable": "^7.2.1",
+    "@instructure/ui-themeable": "^7.2.1",
+    "@instructure/ui-view": "^7.2.1",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.2.0",
-    "@instructure/ui-color-utils": "^7.2.0",
-    "@instructure/ui-test-utils": "^7.2.0"
+    "@instructure/ui-babel-preset": "^7.2.1",
+    "@instructure/ui-color-utils": "^7.2.1",
+    "@instructure/ui-test-utils": "^7.2.1"
   },
   "peerDependencies": {
     "react": "^16.8"

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-icons",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "description": "Icon set for Instructure, Inc. products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -20,13 +20,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.2.0",
-    "@instructure/ui-icons-build": "^7.2.0",
+    "@instructure/ui-babel-preset": "^7.2.1",
+    "@instructure/ui-icons-build": "^7.2.1",
     "gulp": "^4.0.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-svg-images": "^7.2.0",
+    "@instructure/ui-svg-images": "^7.2.1",
     "prop-types": "^15"
   },
   "peerDependencies": {
