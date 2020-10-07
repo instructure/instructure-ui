@@ -7,19 +7,11 @@ pipeline {
     GIT_USERNAME="${GIT_USERNAME}"
     GIT_REMOTE_URL="${GIT_REMOTE_URL}"
     GIT_REMOTE_NAME="${GIT_REMOTE_NAME}"
-    GERRIT_HOST="${GERRIT_HOST}"
-    GERRIT_PORT="${GERRIT_PORT}"
-    GERRIT_CHANGE_NUMBER="${GERRIT_CHANGE_NUMBER}"
-    GERRIT_PATCHSET_NUMBER="${GERRIT_PATCHSET_NUMBER}"
     UV_THREADPOOL_SIZE=128
   }
 
   stages {
     stage('Release') {
-      when {
-        environment name: "GERRIT_EVENT_TYPE",
-        value: "change-merged"
-      }
       steps {
         withCredentials([
           sshUserPrivateKey(
@@ -57,7 +49,7 @@ pipeline {
   post {
     failure {
       script {
-        slackSend channel: "#uidev_rollcall", message: "<${env.BUILD_URL}|${env.JOB_NAME} ${env.BUILD_NUMBER} Failed>. Changes: \n - ${env.GERRIT_CHANGE_SUBJECT} [${env.GERRIT_CHANGE_OWNER_EMAIL}]"
+        slackSend channel: "#uidev_rollcall", message: "<${env.BUILD_URL}|${env.JOB_NAME} ${env.BUILD_NUMBER} Failed>."
       }
     }
   }
