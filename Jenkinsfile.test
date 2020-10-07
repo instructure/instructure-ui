@@ -15,4 +15,16 @@ pipeline {
       }
     }
   }
+  post {
+    always {
+       echo 'Post post action ran.'
+       echo "${payload}"
+    }
+    success {
+       echo 'Success post action ran.'
+    }
+    failure {
+       echo 'Failure post action ran.'
+    }
+  }
 }
