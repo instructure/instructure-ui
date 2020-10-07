@@ -19,7 +19,7 @@ pipeline {
     always {
        echo 'Post post action ran.'
        echo "${payload}"
-       echo '...'
+       echo '....'
     }
     success {
        echo 'Success post action ran.'
