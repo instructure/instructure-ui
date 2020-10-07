@@ -24,7 +24,6 @@
 const { getPackageJSON } = require('@instructure/pkg-utils')
 const { error, info } = require('@instructure/command-utils')
 
-const { GERRIT_CHANGE_NUMBER, GERRIT_PATCHSET_NUMBER } = process.env
 const {
   publishPackages,
   createNPMRCFile
@@ -34,7 +33,6 @@ const {
   checkIfCommitIsReviewed,
   isReleaseCommit
 } = require('./utils/git')
-const { postGerritReview } = require('./utils/gerrit')
 const {
   setupGit,
   checkWorkingDirectory
@@ -78,16 +76,4 @@ async function publish (packageName, currentVersion, preidAndTag, config = {}) {
     process.exit(1)
   }
 
-  if (GERRIT_CHANGE_NUMBER && GERRIT_PATCHSET_NUMBER) {
-    try {
-      await postGerritReview(
-        `${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER}`,
-        `Successfully published ${releasedVersion} for this commit.`
-      )
-      process.exit(0)
-    } catch (e) {
-      error(e)
-      process.exit(1)
-    }
-  }
 }
