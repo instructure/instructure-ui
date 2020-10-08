@@ -27,7 +27,6 @@ const { error, info, runCommandSync, runCommandAsync, confirm } = require('@inst
 const { getConfig } = require('./utils/config')
 const {
   checkWorkingDirectory,
-  checkIfCommitIsReviewed,
   isReleaseCommit,
   setupGit
 } = require('./utils/git')
@@ -51,13 +50,9 @@ async function fixPublish (packageName, currentVersion, releaseVersion, config =
 
   checkWorkingDirectory()
 
-  if (currentVersion === releaseVersion) {
-    if (isReleaseCommit(releaseVersion)) {
-      checkIfCommitIsReviewed()
-    } else {
+  if (currentVersion === releaseVersion && !isReleaseCommit(releaseVersion)) {
       error('Latest release should be run from a merged version bump commit!')
       process.exit(1)
-    }
   }
 
   info(`📦  Version: ${releaseVersion}, Tag: ${npmTag}`)
