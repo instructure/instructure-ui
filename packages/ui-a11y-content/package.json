@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-a11y-content",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "description": "Utility components that enhance the user experience of those that navigate the web with a screen reader or keyboard.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -24,18 +24,18 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.2.1",
-    "@instructure/ui-dom-utils": "^7.2.1",
-    "@instructure/ui-react-utils": "^7.2.1",
-    "@instructure/ui-themeable": "^7.2.1",
-    "@instructure/ui-utils": "^7.2.1",
-    "@instructure/uid": "^7.2.1",
+    "@instructure/console": "^7.2.2",
+    "@instructure/ui-dom-utils": "^7.2.2",
+    "@instructure/ui-react-utils": "^7.2.2",
+    "@instructure/ui-themeable": "^7.2.2",
+    "@instructure/ui-utils": "^7.2.2",
+    "@instructure/uid": "^7.2.2",
     "keycode": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.2.1",
-    "@instructure/ui-test-utils": "^7.2.1"
+    "@instructure/ui-babel-preset": "^7.2.2",
+    "@instructure/ui-test-utils": "^7.2.2"
   },
   "peerDependencies": {
     "react": "^16.8"
