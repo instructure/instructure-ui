@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-scripts",
-  "version": "7.2.2",
+  "version": "7.2.3",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -24,11 +24,11 @@
   "dependencies": {
     "@babel/cli": "^7.8.4",
     "@codesandbox/common": "^1.0.8",
-    "@instructure/command-utils": "^7.2.2",
-    "@instructure/cz-lerna-changelog": "^7.2.2",
-    "@instructure/pkg-utils": "^7.2.2",
-    "@instructure/ui-template-scripts": "^7.2.2",
-    "@instructure/ui-upgrade-scripts": "^7.2.2",
+    "@instructure/command-utils": "^7.2.3",
+    "@instructure/cz-lerna-changelog": "^7.2.3",
+    "@instructure/pkg-utils": "^7.2.3",
+    "@instructure/ui-template-scripts": "^7.2.3",
+    "@instructure/ui-upgrade-scripts": "^7.2.3",
     "@lerna/project": "^3",
     "commitizen": "^4.0.3",
     "dotenv": "^8.1.0",
@@ -57,7 +57,7 @@
     "yargs": "^14.0.0"
   },
   "optionalDependencies": {
-    "@instructure/mocha-environment-jsdom": "^7.2.2",
+    "@instructure/mocha-environment-jsdom": "^7.2.3",
     "@storybook/react": "^4 || ^5",
     "storybook-chromatic": "^2"
   },
