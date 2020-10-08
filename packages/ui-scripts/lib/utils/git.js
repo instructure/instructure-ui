@@ -140,23 +140,6 @@ exports.checkIfGitTagExists = function checkIfGitTagExists (version) {
   }
 }
 
-exports.checkIfCommitIsReviewed = function checkIfCommitIsReviewed () {
-  let result
-
-  try {
-    result = runGitCommand(['log', '-1', '--pretty=format:%B'])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
-  if (!result || result.indexOf('Reviewed-on') < 0) {
-    error('The release commit must be reviewed and merged prior to running the release!')
-    error('Use "git pull --rebase" to pull down the latest from the remote.')
-    process.exit(1)
-  }
-}
-
 exports.createGitTagForRelease = function createGitTagForRelease (version) {
   const tag = `v${version}`
   const { GIT_REMOTE_NAME } = process.env

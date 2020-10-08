@@ -30,7 +30,6 @@ const {
 } = require('./utils/npm')
 const {
   checkIfGitTagExists,
-  checkIfCommitIsReviewed,
   isReleaseCommit
 } = require('./utils/git')
 const {
@@ -58,7 +57,6 @@ async function publish (packageName, currentVersion, preidAndTag, config = {}) {
 
   if (isReleaseCommit(currentVersion)) {
     checkIfGitTagExists(currentVersion)
-    checkIfCommitIsReviewed()
     info(`📦  Currently on release commit for ${currentVersion} of ${packageName}.`)
     versionToRelease = currentVersion
     tag = preidAndTag || 'latest'
