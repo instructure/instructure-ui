@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-test-queries",
-  "version": "7.2.2",
+  "version": "7.2.3",
   "description": "Helpers and utilities for queries in UI tests.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -23,15 +23,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/debounce": "^7.2.2",
-    "@instructure/ui-axe-check": "^7.2.2",
-    "@instructure/ui-test-sandbox": "^7.2.2",
+    "@instructure/debounce": "^7.2.3",
+    "@instructure/ui-axe-check": "^7.2.3",
+    "@instructure/ui-test-sandbox": "^7.2.3",
     "keycode": "^2",
     "pretty-format": "^24.9.0",
     "sizzle": "^2.3.4"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.2.2"
+    "@instructure/ui-babel-preset": "^7.2.3"
   },
   "publishConfig": {
     "access": "public"
