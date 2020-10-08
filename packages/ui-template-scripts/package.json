@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-template-scripts",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "description": "A collection of UI scripts for generating code from templates.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "^7.2.1",
+    "@instructure/command-utils": "^7.2.2",
     "@lerna/project": "^3",
     "fs-extra": "^8.1.0",
     "lodash.template": "^4.5.0",
