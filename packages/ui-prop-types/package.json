@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-prop-types",
-  "version": "7.2.3",
+  "version": "7.2.4",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -21,8 +21,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.2.3",
-    "@instructure/ui-test-utils": "^7.2.3"
+    "@instructure/ui-babel-preset": "^7.2.4",
+    "@instructure/ui-test-utils": "^7.2.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
