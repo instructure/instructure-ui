@@ -1,6 +1,6 @@
 {
   "name": "@instructure/babel-plugin-transform-imports",
-  "version": "7.2.4",
+  "version": "7.3.0",
   "description": "A babel plugin made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
