@@ -9,6 +9,7 @@
  "@instructure/console",
  "@instructure/cz-lerna-changelog",
  "@instructure/debounce",
+ "@instructure/emotion",
  "eslint-plugin-instructure-ui",
  "@instructure/instructure-theme",
  "@instructure/instui-cli",
