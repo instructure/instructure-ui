@@ -23,9 +23,66 @@
  */
 import { decorator } from '@instructure/ui-decorator'
 import { warnDeprecated } from '@instructure/console/macro'
+import { useEffect } from 'react'
+
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
+
+const warnDeprecatedProps = (componentName, version, props, oldProps, message = '') => {
+  Object.keys(oldProps).forEach((oldProp) => {
+    if (typeof props[oldProp] !== 'undefined') {
+      const newProp = typeof oldProps[oldProp] === 'string'
+        ? oldProps[oldProp]
+        : null
+
+      const newPropMessage = newProp ? `. Use \`${newProp}\` instead` : ''
+
+      warnDeprecated(false, `[${componentName}] \`${oldProp}\` is deprecated and will be removed in version ${version}${newPropMessage}. ${message}`)
+    }
+  })
+}
+
+const warnDeprecatedComponent = (version, componentName, message) => {
+  warnDeprecated(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
+}
+
+/**
+ *
+ * category: utilities/react
+  * ---
+  * Deprecate React component props. Warnings will display in the console when deprecated
+  * props are used. Include the version number when the deprecated component will be removed.
+  *
+  * ```js
+  *  const Example = (props) => {
+  *    useDeprecated({componentName: Example.name, version: '8.0', oldProps: {
+  *     oldPropName1: 'newPropName1',
+  *     oldPropName2: 'newPropName2'
+  * }, props, message: 'This is a custom message.'})
+  * }
+  * ```
+ *
+ * @param {object} DeprecatedOptions
+ * @param {string} DeprecatedOptions.componentName the name of the deprecated component
+ * @param {string} DeprecatedOptions.version the version the component/props will be removed
+ * @param {object?} DeprecatedOptions.props the components props
+ * @param {object?} DeprecatedOptions.oldProps the deprecated props
+ * @param {string?} DeprecatedOptions.message custom message to show in the console
+ *
+ */
+const useDeprecated = ({ componentName, version, oldProps, message, props }) => {
+  useEffect(() => {
+    if (!IS_PRODUCTION) {
+      if (oldProps && props) {
+        warnDeprecatedProps(componentName, version, props, oldProps, message)
+      } else {
+        warnDeprecatedComponent(version, componentName, message)
+      }
+    }
+  }, [])
+}
 
 const deprecated = (() => {
-  if (process.env.NODE_ENV === 'production') {
+  if (IS_PRODUCTION) {
     const deprecated = function () {
       return ComposedComponent => ComposedComponent
     }
@@ -116,30 +173,13 @@ const deprecated = (() => {
     }
   }
 
-  function warnDeprecatedProps (componentName, version, props, oldProps, message = '') {
-    Object.keys(oldProps).forEach((oldProp) => {
-      if (typeof props[oldProp] !== 'undefined') {
-        const newProp = typeof oldProps[oldProp] === 'string'
-          ? oldProps[oldProp]
-          : null
-
-        const newPropMessage = newProp ? `. Use \`${newProp}\` instead` : ''
-
-        warnDeprecated(false, `[${componentName}] \`${oldProp}\` is deprecated and will be removed in version ${version}${newPropMessage}. ${message}`)
-      }
-    })
-  }
   deprecated.warnDeprecatedProps = warnDeprecatedProps
-
-  function warnDeprecatedComponent (version, componentName, message) {
-    warnDeprecated(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
-  }
   /**
    * ---
    * category: utilities
    * ---
    * @param {String} version the version of the package in which the component or function was deprecated
-   * @param {String} componentName the displayName of the component or Function.name of the utility function
+   * @param {String} componentName the displayName of th   e component or Function.name of the utility function
    * @param {String} message a message to display as a console error in DEV env when condition is false
    */
   deprecated.warnDeprecatedComponent = warnDeprecatedComponent
@@ -160,4 +200,4 @@ const deprecated = (() => {
 })()
 
 export default deprecated
-export { deprecated }
+export { deprecated, useDeprecated }

@@ -22,20 +22,72 @@
  * SOFTWARE.
  */
 
+import React, { useEffect, useState, useRef } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import { decorator } from '@instructure/ui-decorator'
 
-
-const testable = (
-  process.env.NODE_ENV === 'production' &&
+const APPEND_DATA_ATTRIBUTE = (
+  !process.env.NODE_ENV === 'production' ||
   // If you would like to the `data-cid` attributes on elements even in your
   // production builds (like if you are using them in your e2e builds or
   // something), you need to set the environment variable
   // ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
   // We do this because adding those `data-cid` locators slows things down.
-  !process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
-) ? () => (Component => Component) : decorator((ComposedComponent) => {
+  process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
+)
+
+const withTestable = APPEND_DATA_ATTRIBUTE ? (ComposedComponent) => ComposedComponent : (ComposedComponent) => {
+  const displayName = ComposedComponent.displayName || ComposedComponent.name
+  const locator = {
+    attribute: 'data-cid',
+    value: displayName
+  }
+  const selector = `[${locator.attribute}~="${locator.value}"]`
+
+  const TestableComponent = (props) => {
+    const [_testableUnmounted , setTestableUnmounted ] = useState(false)
+    const locatorTimeoutRef = useRef()
+    const nodeRef = useRef()
+
+    const handleElementRef = (ref) => {
+      nodeRef.current = ref
+    }
+
+    const appendLocatorAttribute = () => {
+      locatorTimeoutRef.current = setTimeout(() => {
+      if (_testableUnmounted) {
+        return
+      }
+      if (nodeRef.current?.getAttribute) {
+        const attribute = nodeRef.current.getAttribute(locator.attribute)
+        const values = typeof attribute === 'string' ? attribute.split(/\s+/) : []
+        if (!values.includes(locator.value)) {
+          values.push(locator.value)
+        }
+        nodeRef.current.setAttribute(locator.attribute, values.join(' '))
+      }
+    })
+  }
+
+    useEffect(() => {
+      appendLocatorAttribute()
+      return () => {
+        setTestableUnmounted(true)
+        clearTimeout(locatorTimeoutRef.current)
+      }
+    })
+
+    return <ComposedComponent elementRef={handleElementRef} {...props}/>
+  }
+
+  TestableComponent.selector = selector
+  TestableComponent.theme = ComposedComponent.theme
+
+  return TestableComponent
+}
+
+const testable = APPEND_DATA_ATTRIBUTE ? () => (Component => Component) : decorator((ComposedComponent) => {
 
   const displayName = ComposedComponent.displayName || ComposedComponent.name
   const locator = {
@@ -91,4 +143,4 @@ const testable = (
 })
 
 export default testable
-export { testable }
+export { testable, withTestable }
