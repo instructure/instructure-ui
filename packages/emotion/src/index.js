@@ -21,41 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { instructure } from '@instructure/ui-theme-tokens'
-
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = instructure
-
-const key = 'instructure'
-
-const theme = {
-  key,
-  ...instructure
-}
-
-export default theme
-export {
-  theme,
-  key,
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
-}
+export {EmotionThemeProvider} from "./EmotionThemeProvider"
+export {useStyle,useTheme} from "./useStyle"

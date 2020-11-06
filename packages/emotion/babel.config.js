@@ -22,40 +22,14 @@
  * SOFTWARE.
  */
 
-import { instructure } from '@instructure/ui-theme-tokens'
-
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = instructure
-
-const key = 'instructure'
-
-const theme = {
-  key,
-  ...instructure
-}
-
-export default theme
-export {
-  theme,
-  key,
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
-}
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production',
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+     }
+   ]]
+ }

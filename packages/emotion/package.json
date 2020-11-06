@@ -1,11 +1,11 @@
 {
-  "name": "@instructure/ui-avatar",
+  "name": "@instructure/emotion",
   "version": "7.3.2",
-  "description": "An image or letters that represents a user.",
+  "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
   "module": "./es/index.js",
-  "main": "./lib/index.js",
+  "main": "./es/index.js",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
@@ -17,28 +17,20 @@
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
-    "build": "ui-build --modules es,cjs",
+    "build": "ui-build",
     "build:watch": "ui-build --watch",
     "build:types": "ui-scripts --types"
   },
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.2",
-    "@instructure/ui-react-utils": "^7.3.2",
-    "@instructure/ui-testable": "^7.3.2",
-    "@instructure/ui-themeable": "^7.3.2",
-    "@instructure/ui-view": "^7.3.2",
-    "@instructure/ui-pill": "^7.3.2",
-    "@instructure/emotion": "^7.3.2",
     "@emotion/core": "^10.0.35",
-    "classnames": "^2",
-    "prop-types": "^15"
+    "@instructure/console": "^7.3.2",
+    "emotion-theming": "^10.0.27",
+    "lodash.merge": "*"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^7.3.2",
-    "@instructure/ui-color-utils": "^7.3.2",
-    "@instructure/ui-test-locator": "^7.3.2",
     "@instructure/ui-test-utils": "^7.3.2"
   },
   "peerDependencies": {

@@ -21,41 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { ThemeProvider } from 'emotion-theming'
+//repleace with our merge from util
+import merge from "lodash.merge"
 
-import { instructure } from '@instructure/ui-theme-tokens'
+function EmotionThemeProvider({children, theme = {}}){
 
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = instructure
+  //if fuction is given to theme prop, Emotion will repleace the theme with the return value
+  const getTheme = (theme) => (ancestorTheme = {}) => {
+    const teamName = ancestorTheme.key
+    const themeBasedOverride = theme?.themes?.[teamName]
+    const {themes,...globalOverride} = theme
 
-const key = 'instructure'
+    return (merge(ancestorTheme,merge(globalOverride,themeBasedOverride)))
+  }
 
-const theme = {
-  key,
-  ...instructure
+  return (
+    <ThemeProvider theme={getTheme(theme)}>
+    {children}
+    </ThemeProvider>
+  )
 }
 
-export default theme
-export {
-  theme,
-  key,
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
-}
+export default EmotionThemeProvider
+export {EmotionThemeProvider}
