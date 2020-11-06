@@ -21,41 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { useTheme } from 'emotion-theming'
 
-import { instructure } from '@instructure/ui-theme-tokens'
+function useStyle(componentName, generateStyle, themeOverride={}, props, state){
 
-const {
-  borders,
-  breakpoints,
-  colors,
-  forms,
-  media,
-  shadows,
-  spacing,
-  stacking,
-  transitions,
-  typography
-} = instructure
+  const theme = useTheme()
 
-const key = 'instructure'
+  const componentOverride=theme?.components && theme.components[componentName]
 
-const theme = {
-  key,
-  ...instructure
+  return generateStyle(theme, {...componentOverride,...themeOverride}, props, state)
 }
 
-export default theme
-export {
-  theme,
-  key,
-  colors,
-  borders,
-  transitions,
-  typography,
-  spacing,
-  forms,
-  media,
-  breakpoints,
-  shadows,
-  stacking
-}
+export default useStyle
+export {useStyle,useTheme}
