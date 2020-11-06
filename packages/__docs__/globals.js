@@ -50,7 +50,7 @@ import placeholderImage from './placeholder-image'
 import placeholderLogo from './placeholder-logo'
 
 import { theme } from '@instructure/canvas-theme'
-theme.use()
+//theme.use()
 
 const globals = {
   ...Components,
