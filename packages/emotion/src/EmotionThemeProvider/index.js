@@ -26,23 +26,23 @@ import { ThemeProvider } from 'emotion-theming'
 //repleace with our merge from util
 import merge from "lodash.merge"
 
-function EmotionThemeProvider({children, theme = {}}){
+function EmotionThemeProvider({ children, theme = {} }){
 
   //if fuction is given to theme prop, Emotion will repleace the theme with the return value
   const getTheme = (theme) => (ancestorTheme = {}) => {
-    const teamName = ancestorTheme.key
-    const themeBasedOverride = theme?.themes?.[teamName]
-    const {themes,...globalOverride} = theme
+    const themeName = ancestorTheme.key
+    const themeBasedOverride = theme?.themes?.[themeName]
+    const { themes,...globalOverride } = theme
 
-    return (merge(ancestorTheme,merge(globalOverride,themeBasedOverride)))
+    return merge(ancestorTheme, merge(globalOverride, themeBasedOverride))
   }
 
   return (
     <ThemeProvider theme={getTheme(theme)}>
-    {children}
+      {children}
     </ThemeProvider>
   )
 }
 
 export default EmotionThemeProvider
-export {EmotionThemeProvider}
+export { EmotionThemeProvider }
