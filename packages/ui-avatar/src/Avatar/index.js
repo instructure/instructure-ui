@@ -21,12 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
  /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import React, {useState} from 'react'
-import { useStyle, EmotionThemeProvider } from "@instructure/emotion"
-import generateStyle from "./styles"
+import { jsx } from '@emotion/core'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { useStyle } from "@instructure/emotion"
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { View } from '@instructure/ui-view'
+import { withTestable } from '@instructure/ui-testable'
+import { useDeprecated, passthroughProps } from '@instructure/ui-react-utils'
+import generateStyle from "./styles"
 
 /**
 ---
@@ -35,28 +40,23 @@ category: components
 **/
 
 const Avatar = (props) => {
-  const [loaded, setLoaded] = useState(false)
-  const {
-    themeOverride,
-    src,
-    display,
-    onImageLoaded,
-    name,
-    inline,
-    margin,
-    elementRef,
-    as,
-    alt,
-    } = props
+  useDeprecated({ componentName: Avatar.name, version: '8.0', oldProps: {
+  inline: 'display',
+  variant: 'shape'
+  }, props })
 
-  const styles = useStyle(Avatar.name,generateStyle, themeOverride, props, {loaded})
+  const [loaded, setLoaded] = useState(false)
+  const { onImageLoaded, ...restProps } = props
+
+  const styles = useStyle(Avatar.name, generateStyle, props.themeOverride, props, { loaded })
+
   const renderLoadImage =  () => {
     // This image element is visually hidden and is here for loading purposes only
     return (
       <img
-        src={src}
+        src={props.src}
         css={styles.loadImage}
-        alt={alt}
+        alt={props.alt}
         onLoad={handleImageLoaded}
         aria-hidden="true"
       />
@@ -77,7 +77,7 @@ const Avatar = (props) => {
   }
 
  const makeInitialsFromName = () => {
-    let nameForInitials = name
+    let nameForInitials = props.name
 
     if (!nameForInitials || typeof nameForInitials !== 'string') {
       return
@@ -97,13 +97,14 @@ const Avatar = (props) => {
 
  return (
       <View
+        {...passthroughProps(restProps)}
         css={styles.root}
-        aria-label={alt ? alt : null}
-        role={alt ? 'img' : null}
-        as={as}
-        elementRef={elementRef}
-        margin={margin}
-        display={(display === 'block' || inline === false) ? 'block' : 'inline-block'}
+        aria-label={props.alt ? props.alt : null}
+        role={props.alt ? 'img' : null}
+        as={props.as}
+        elementRef={props.elementRef}
+        margin={props.margin}
+        display={(props.display === 'block' || props.inline === false) ? 'block' : 'inline-block'}
       >
         {renderLoadImage()}
         {!loaded && renderInitials()}
@@ -111,13 +112,64 @@ const Avatar = (props) => {
     )
 }
 
-Avatar.defaultProps = {
-  size:'medium',
-  shape: 'circle',
-  display: 'inline-block',
-  onImageLoaded: (event) => {}
+Avatar.propTypes = {
+  name: PropTypes.string.isRequired,
+  /*
+  * URL of the image to display as the background image
+  */
+  src: PropTypes.string,
+  /*
+  * Accessible label
+  */
+  alt: PropTypes.string,
+  size: PropTypes.oneOf(['auto', 'x-small', 'small', 'medium', 'large', 'x-large']),
+  shape: PropTypes.oneOf(['circle', 'rectangle']),
+  /**
+  * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+  * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+  * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+  */
+  margin: ThemeablePropTypes.spacing,
+  display: PropTypes.oneOf(['inline-block', 'block']),
+  /**
+  * Callback fired when the avatar image has loaded
+  */
+  onImageLoaded: PropTypes.func,
+  /**
+  * the element type to render as
+  */
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  /**
+  * provides a reference to the underlying html element
+  */
+  elementRef: PropTypes.func,
+  /* eslint-disable react/require-default-props */
+  /**
+  * __Deprecated - use `display`__
+  */
+  inline: PropTypes.bool,
+  /**
+   * __Deprecated - use `shape`__
+   */
+  variant: PropTypes.oneOf(['circle', 'rectangle']),
+  /* eslint-enable react/require-default-props */
+  themeOverride: PropTypes.object
 }
 
+Avatar.defaultProps = {
+    src: undefined,
+    alt: undefined,
+    margin: undefined,
+    elementRef: undefined,
+    size: 'medium',
+    shape: 'circle',
+    display: 'inline-block',
+    onImageLoaded: () => {},
+    themeOverride: {}
+}
 
-export default Avatar
-export { Avatar }
+//TODO: remove this HOC call when we implement a new testing solution
+const Avatar__Testable = withTestable(Avatar)
+
+export default Avatar__Testable
+export { Avatar__Testable as Avatar }

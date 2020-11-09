@@ -22,14 +22,12 @@
  * SOFTWARE.
  */
 
-const generateStyle = (theme, themeOverride, {size, variant, shape, src}, {loaded}) => {
-
-  const themeSpecificStyles ={
-    canvas:{
+const generateStyle = (theme, themeOverride, { size, variant, shape, src }, { loaded }) => {
+  const themeSpecificStyles = {
+    canvas: {
       color:"red"
     }
   }
-
 
   const fromTheme = {
     color: theme?.colors?.textBrand,
@@ -44,23 +42,23 @@ const generateStyle = (theme, themeOverride, {size, variant, shape, src}, {loade
   }
 
   const sizeStyles = {
-    auto:{
-    fontSize: "inherit",
-    borderWidth: fromTheme.borderWidthSmall,
+    auto: {
+      fontSize: "inherit",
+      borderWidth: fromTheme.borderWidthSmall,
     },
-    "x-small":{
-    fontSize: "0.75rem",
-    borderWidth: fromTheme.borderWidthSmall
+    "x-small": {
+      fontSize: "0.75rem",
+      borderWidth: fromTheme.borderWidthSmall
     },
-    small:{
+    small: {
       fontSize: "1rem",
       borderWidth: fromTheme.borderWidthSmall
     },
-    medium:{
+    medium: {
       fontSize: "1.25rem",
       borderWidth: fromTheme.borderWidthMedium,
     },
-    large:{
+    large: {
       fontSize: "1.5rem",
       borderWidth: fromTheme.borderWidthMedium,
     },
@@ -81,8 +79,10 @@ const generateStyle = (theme, themeOverride, {size, variant, shape, src}, {loade
       width: "3em",
     }
   }
+
 return {
-  root:{
+  root: {
+    label: 'root',
     height: "2.5em",
     borderStyle: "solid",
     borderColor: fromTheme.borderColor,
@@ -99,18 +99,18 @@ return {
     ...sizeStyles[size],
     ...variantStyles[variant || shape]
   },
-  initials:{
+  initials: {
+    label: 'initials',
     color: fromTheme.color,
     lineHeight: "2.375em",
     fontFamily: fromTheme.fontFamily,
     fontWeight: fromTheme.fontWeight,
     letterSpacing: "0.0313em"
   },
-  loadImage:{
-      display: "none",
+  loadImage: {
+    label: 'loadImage',
+    display: "none"
   }
+ }
 }
-}
-
-
 export default generateStyle
