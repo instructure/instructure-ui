@@ -69,13 +69,13 @@ const generateStyle = (theme, themeOverride, { size, variant, shape, src }, { lo
   }
 
   const variantStyles = {
-    circle:{
+    circle: {
       width: "2.5em",
       position: "relative",
       borderRadius: "100%",
       overflow: "hidden",
     },
-    rectangle:{
+    rectangle: {
       width: "3em",
     }
   }
