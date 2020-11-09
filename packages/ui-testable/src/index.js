@@ -21,6 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { testable } from './testable'
+import { testable, withTestable } from './testable'
 export default testable
-export { testable }
+export { testable, withTestable }
