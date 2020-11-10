@@ -22,25 +22,19 @@
  * SOFTWARE.
  */
 
+const {
+  runCommandsConcurrently,
+  getCommand
+} = require('@instructure/command-utils')
 
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
-
-const paths = process.argv.slice(2).filter(arg => (arg.indexOf('--') == -1)) || []
+const paths =
+  process.argv.slice(2).filter((arg) => arg.indexOf('--') == -1) || []
 let jspaths = ['.']
 let csspaths = ['**/*.css']
 
 if (paths.length) {
-  jspaths = paths.filter(p => (p.indexOf('.js') > -1))
-  csspaths = paths.filter(p => (p.indexOf('.css') > -1)) || ['**/*.css']
-}
-
-if (process.argv.includes('--fix')) {
-  if (jspaths.length) {
-    jspaths.unshift('--fix')
-  }
-  if (csspaths.length) {
-    csspaths.unshift('--fix')
-  }
+  jspaths = paths.filter((p) => p.indexOf('.js') > -1)
+  csspaths = paths.filter((p) => p.indexOf('.css') > -1) || ['**/*.css']
 }
 
 let commands = {}
@@ -50,7 +44,10 @@ if (jspaths.length) {
 }
 
 if (csspaths.length) {
-  commands['stylelint'] = getCommand('stylelint', [...csspaths, '--allow-empty-input' ])
+  commands['stylelint'] = getCommand('stylelint', [
+    ...csspaths,
+    '--allow-empty-input'
+  ])
 }
 
 process.exit(runCommandsConcurrently(commands).status)
