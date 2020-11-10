@@ -108,8 +108,20 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint",
-    "*.css": "stylelint"
+    "*.js": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.css": [
+      "stylelint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,jsx,md,mdx,html}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
