@@ -28,13 +28,13 @@ const generateStyle = (
   { variant, color }
 ) => {
   //if any styling should depend on the theme itself, this object should specify it
-  const themeSpecificStlye = {
+  const themeSpecificStyle = {
     instructure: {
       height: '1.5rem'
     }
   }
   //maps the theme variables to component specific style variables, and overrides it with theme and user specified overrides
-  const fromTheme = {
+  const componentTheme = {
     fontFamily: typography?.fontFamily,
     padding: `0 ${spacing?.xSmall}`,
     height: '1.3125rem',
@@ -54,7 +54,7 @@ const generateStyle = (
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     borderRadius: '999rem',
-    ...themeSpecificStlye[themeName],
+    ...themeSpecificStyle[themeName],
     ...themeOverride
   }
 
@@ -64,40 +64,40 @@ const generateStyle = (
   //optional mappings can be provided based on - for example - props
   const colorStyles = {
     default: {
-      color: fromTheme.color,
-      borderColor: fromTheme.color
+      color: componentTheme.color,
+      borderColor: componentTheme.color
     },
     primary: {
-      color: fromTheme.primaryColor,
-      borderColor: fromTheme.primaryColor
+      color: componentTheme.primaryColor,
+      borderColor: componentTheme.primaryColor
     },
     oldPrimary: {
-      color: fromTheme.infoColor,
-      borderColor: fromTheme.infoColor
+      color: componentTheme.infoColor,
+      borderColor: componentTheme.infoColor
     },
     info: {
-      color: fromTheme.infoColor,
-      borderColor: fromTheme.infoColor
+      color: componentTheme.infoColor,
+      borderColor: componentTheme.infoColor
     },
     success: {
-      color: fromTheme.successColor,
-      borderColor: fromTheme.successColor
+      color: componentTheme.successColor,
+      borderColor: componentTheme.successColor
     },
     danger: {
-      color: fromTheme.dangerColor,
-      borderColor: fromTheme.dangerColor
+      color: componentTheme.dangerColor,
+      borderColor: componentTheme.dangerColor
     },
     warning: {
-      color: fromTheme.warningColor,
-      borderColor: fromTheme.warningColor
+      color: componentTheme.warningColor,
+      borderColor: componentTheme.warningColor
     },
     message: {
-      color: fromTheme.messageColor,
-      borderColor: fromTheme.messageColor
+      color: componentTheme.messageColor,
+      borderColor: componentTheme.messageColor
     },
     alert: {
-      color: fromTheme.alertColor,
-      borderColor: fromTheme.alertColor
+      color: componentTheme.alertColor,
+      borderColor: componentTheme.alertColor
     }
   }
 
@@ -106,25 +106,25 @@ const generateStyle = (
     root: {
       label: 'root',
       display: 'block',
-      fontFamily: fromTheme.fontFamily,
+      fontFamily: componentTheme.fontFamily,
       boxSizing: 'border-box',
-      padding: fromTheme.padding,
-      background: fromTheme.background,
-      borderWidth: fromTheme.borderWidth,
-      borderStyle: fromTheme.borderStyle,
-      borderRadius: fromTheme.borderRadius,
-      lineHeight: fromTheme.height - fromTheme.borderWidth * 2,
+      padding: componentTheme.padding,
+      background: componentTheme.background,
+      borderWidth: componentTheme.borderWidth,
+      borderStyle: componentTheme.borderStyle,
+      borderRadius: componentTheme.borderRadius,
+      lineHeight: componentTheme.height - componentTheme.borderWidth * 2,
       ...colorStyles[actualColor]
     },
     text: {
       label: 'text',
       boxSizing: 'border-box',
-      textTransform: fromTheme.textTransformStyle,
-      fontSize: fromTheme.textFontSize,
-      fontWeight: fromTheme.textFontWeight,
+      textTransform: componentTheme.textTransformStyle,
+      fontSize: componentTheme.textFontSize,
+      fontWeight: componentTheme.textFontWeight,
       letterSpacing: '0.0625rem'
     },
-    viewMaxWidth: fromTheme.maxWidth
+    viewMaxWidth: componentTheme.maxWidth
   }
 }
 

@@ -30,14 +30,19 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, { size, variant, shape, src }, { loaded }) => {
+const generateStyle = (
+  theme,
+  themeOverride,
+  { size, variant, shape, src },
+  { loaded }
+) => {
   const themeSpecificStyles = {
     canvas: {
       color: 'red'
     }
   }
 
-  const fromTheme = {
+  const componentTheme = {
     color: theme?.colors?.textBrand,
     background: theme?.colors?.backgroundLightest,
     borderWidthSmall: theme?.borders?.widthSmall,
@@ -52,73 +57,73 @@ const generateStyle = (theme, themeOverride, { size, variant, shape, src }, { lo
   const sizeStyles = {
     auto: {
       fontSize: 'inherit',
-      borderWidth: fromTheme.borderWidthSmall,
+      borderWidth: componentTheme.borderWidthSmall
     },
     'x-small': {
       fontSize: '0.75rem',
-      borderWidth: fromTheme.borderWidthSmall
+      borderWidth: componentTheme.borderWidthSmall
     },
     small: {
       fontSize: '1rem',
-      borderWidth: fromTheme.borderWidthSmall
+      borderWidth: componentTheme.borderWidthSmall
     },
     medium: {
       fontSize: '1.25rem',
-      borderWidth: fromTheme.borderWidthMedium,
+      borderWidth: componentTheme.borderWidthMedium
     },
     large: {
       fontSize: '1.5rem',
-      borderWidth: fromTheme.borderWidthMedium,
+      borderWidth: componentTheme.borderWidthMedium
     },
     'x-large': {
       fontSize: '1.75rem',
-      borderWidth: fromTheme.borderWidthMedium,
+      borderWidth: componentTheme.borderWidthMedium
     }
   }
 
   const variantStyles = {
     circle: {
-      width: "2.5em",
-      position: "relative",
-      borderRadius: "100%",
-      overflow: "hidden",
+      width: '2.5em',
+      position: 'relative',
+      borderRadius: '100%',
+      overflow: 'hidden'
     },
     rectangle: {
-      width: "3em",
+      width: '3em'
     }
   }
 
-return {
-  root: {
-    label: 'root',
-    height: '2.5em',
-    borderStyle: 'solid',
-    borderColor: fromTheme.borderColor,
-    boxSizing: 'border-box',
-    backgroundColor: fromTheme.background,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundClip: 'content-box',
-    backgroundRepeat: 'no-repeat',
-    overflow: 'hidden',
-    lineHeight: 0,
-    textAlign: 'center',
-    backgroundImage: loaded ? `url('${src}')` : undefined,
-    ...sizeStyles[size],
-    ...variantStyles[variant || shape]
-  },
-  initials: {
-    label: 'initials',
-    color: fromTheme.color,
-    lineHeight: '2.375em',
-    fontFamily: fromTheme.fontFamily,
-    fontWeight: fromTheme.fontWeight,
-    letterSpacing: '0.0313em'
-  },
-  loadImage: {
-    label: 'loadImage',
-    display: 'none'
+  return {
+    root: {
+      label: 'root',
+      height: '2.5em',
+      borderStyle: 'solid',
+      borderColor: componentTheme.borderColor,
+      boxSizing: 'border-box',
+      backgroundColor: componentTheme.background,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundClip: 'content-box',
+      backgroundRepeat: 'no-repeat',
+      overflow: 'hidden',
+      lineHeight: 0,
+      textAlign: 'center',
+      backgroundImage: loaded ? `url('${src}')` : undefined,
+      ...sizeStyles[size],
+      ...variantStyles[variant || shape]
+    },
+    initials: {
+      label: 'initials',
+      color: componentTheme.color,
+      lineHeight: '2.375em',
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: componentTheme.fontWeight,
+      letterSpacing: '0.0313em'
+    },
+    loadImage: {
+      label: 'loadImage',
+      display: 'none'
+    }
   }
- }
 }
 export default generateStyle
