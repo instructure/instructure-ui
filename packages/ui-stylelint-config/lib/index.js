@@ -23,10 +23,10 @@
  */
 
 module.exports = {
-  extends: 'stylelint-config-standard',
-  plugins: [ 'stylelint-declaration-strict-value' ],
+  extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
+  plugins: ['stylelint-declaration-strict-value'],
   rules: {
-    'scale-unlimited/declaration-strict-value': [[ 'z-index' ]],
+    'scale-unlimited/declaration-strict-value': [['z-index']],
 
     'block-no-empty': null,
     'unit-blacklist': ['px'],
@@ -35,9 +35,12 @@ module.exports = {
     'declaration-no-important': true,
     'value-no-vendor-prefix': true,
     'property-no-vendor-prefix': true,
-    'max-nesting-depth': [ 2, {
-      ignore: ['blockless-at-rules']
-    }],
+    'max-nesting-depth': [
+      2,
+      {
+        ignore: ['blockless-at-rules']
+      }
+    ],
     'number-max-precision': 4,
     'string-quotes': 'double',
     'time-min-milliseconds': 100,
@@ -51,9 +54,9 @@ module.exports = {
     'selector-class-pattern': '^[a-z]+[a-zA-Z0-9\\-]*[a-zA-Z0-9]*$',
 
     'declaration-property-value-blacklist': {
-      'text-align': [ 'left', 'right' ],
-      'float': [ 'left', 'right' ],
-      'clear': [ 'left', 'right' ]
+      'text-align': ['left', 'right'],
+      float: ['left', 'right'],
+      clear: ['left', 'right']
     },
 
     'property-blacklist': [

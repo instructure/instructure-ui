@@ -47,6 +47,7 @@
     "mocha": "^7.1.2",
     "nyc": "^14.1.1",
     "open": "^6.4.0",
+    "prettier": "^2.1.2",
     "react-to-typescript-definitions": "^2.0.0",
     "rimraf": "^3.0.0",
     "semver": "^6.3.0",
