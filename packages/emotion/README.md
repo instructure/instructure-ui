@@ -21,7 +21,7 @@ import App from  './App'
 import { EmotionThemeProvider } from  "@instructure/emotion"
 import { canvas, canvasHighContrast } from  "@instructure/ui-themes"
 
-const  RenderApp = () => {
+const RenderApp = () => {
 return (
 <EmotionThemeProvider theme={canvasHighContrast}>
 	<App/>
@@ -36,7 +36,7 @@ import SomeOtherComponent from  './SomeOtherComponent'
 import { EmotionThemeProvider } from  "@instructure/emotion"
 import { canvas, canvasHighContrast } from  "@instructure/ui-themes"
 
-const  SomeComponentUnderApp = () => {
+const SomeComponentUnderApp = () => {
 const themeOverride = {
 	colors:{
 		textAlert:"pink"
@@ -55,7 +55,7 @@ import SomeOtherComponent from  './SomeOtherComponent'
 import { EmotionThemeProvider } from  "@instructure/emotion"
 import { canvas, canvasHighContrast } from  "@instructure/ui-themes"
 
-const  SomeComponentUnderApp = () => {
+const SomeComponentUnderApp = () => {
 const themeOverride = {
 	themes:{
 		canvas:{
@@ -78,7 +78,7 @@ import SomeOtherComponent from  './SomeOtherComponent'
 import { EmotionThemeProvider } from  "@instructure/emotion"
 import { canvas, canvasHighContrast } from  "@instructure/ui-themes"
 
-const  SomeComponentUnderApp = () => {
+const SomeComponentUnderApp = () => {
 const themeOverride = {
 components:{
 	Avatar:{
@@ -98,7 +98,7 @@ import SomeOtherComponent from  './SomeOtherComponent'
 import { EmotionThemeProvider } from  "@instructure/emotion"
 import { canvas, canvasHighContrast } from  "@instructure/ui-themes"
 
-const  SomeComponentUnderApp = () => {
+const SomeComponentUnderApp = () => {
 const themeOverride = {
 	themes:{
 		canvas:{
@@ -134,58 +134,61 @@ You should write and export a ```function``` named ```generateStyle```
 
 ```js
 /**
- * Generates the style object from the theme and provided additional informations
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
- * @return {Oject}      The final style object, which will be used in the component
+ * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (theme, themeOverride, props, state) => {
 
-	//the name of the theme
-	const  themeName=theme.key
+	// the name of the theme
+	const themeName = theme.key
 
-	//if any styling should depend on the theme itself, this object should specify it
-	const  themeSpecificStlye = {
-		"canvas-high-contrast":{
-			primaryColor:  'red',
+	// if any styling should depend on the theme itself,
+	// this object should specify it
+	const themeSpecificStlye = {
+		'canvas-high-contrast': {
+			primaryColor: 'red',
 		},
 		canvas:{
-			primaryColor:  'blue',
+			primaryColor: 'blue',
 		}
 	}
-	//maps the theme variables to component specific style variables, and overrides it with theme and user specified overrides
-	const  fromTheme = {
-		primaryColor:  theme?.colors?.textBrand,
-		infoColor:  theme?.colors?.anotherColor,
-		background:  theme?.colors?.backgroundLightest,
+
+	// maps the theme variables to component specific style variables,
+	// and overrides it with theme and user specified overrides
+	const fromTheme = {
+		primaryColor: theme?.colors?.textBrand,
+		infoColor: theme?.colors?.anotherColor,
+		background: theme?.colors?.backgroundLightest,
 		...themeSpecificStlye[themeName],
 		...themeOverride
 	}
 
-	//optional mappings can be provided based on - for example - props
-	const  colorStyles = {
+	// optional mappings can be provided based on - for example - props
+	const colorStyles = {
 		primary: {
-			color:  fromTheme.primaryColor,
-			fontSize:"20px"
+			color: fromTheme.primaryColor,
+			fontSize: '20px'
 		},
 		info: {
-			color:  fromTheme.infoColor,
+			color: fromTheme.infoColor,
 		},
 	}
 
-	//return with the css you'd like to apply to the component
+	// return with the css you'd like to apply to the component
 	return {
-		root:{
-			display:  "block",
-			background:  fromTheme.background,
-			boxSizing:  "border-box",
-			...colorStyles[color]
+		root: {
+			display: 'block',
+			background: fromTheme.background,
+			boxSizing: 'border-box',
+			...colorStyles[color],
 		},
-		anotherClass:{
-			color: "green"
-			background:  fromTheme.infoColor,
+		anotherClass: {
+			color: 'green',
+			background: fromTheme.infoColor,
 		}
 	}
 }
@@ -197,29 +200,31 @@ Refactor the component to functional component. Any style logic that may take pl
 
 ```js
 /** @jsx jsx */
-import { jsx, css } from  '@emotion/core'
-import  React, {useState} from  'react'
-import { useStyle, EmotionThemeProvider } from  "@instructure/emotion"
-import  generateStyle  from  "./styles"
+import { jsx, css } from '@emotion/core'
+import React, { useState } from 'react'
+import { useStyle, EmotionThemeProvider } from '@instructure/emotion'
+import generateStyle from './styles'
 
-const  MyComponent = (props) => {
+const MyComponent = (props) => {
 
+    const styles = useStyle(Avatar.name, generateStyle, themeOverride, props, { ...anyStateYouNeed })}
 
-const  styles = useStyle(Avatar.name,generateStyle, themeOverride, props, {...anyStateYouNeed})}
-//...
-//very
-//important
-//component
-//stuff
-//...
-return (
-	<div css={styles.root}>
-		{//Magnificent content}
-		<div css={styles.anotherClass}>
-			{//Content that needs additional class to style}
-		</div>
-	</div>
-)
+    // ...
+    // very
+    // important
+    // component
+    // stuff
+    // ...
+
+    return (
+        <div css={styles.root}>
+            // Magnificent content
+            <div css={styles.anotherClass}>
+                // Content that needs additional class to style
+            </div>
+        </div>
+    )
+}
 ```
 
 [![npm][npm]][npm-url]
