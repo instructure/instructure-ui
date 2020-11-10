@@ -28,7 +28,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { useStyle, jsx } from "@instructure/emotion"
+import { useStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
@@ -36,7 +36,7 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps, useDeprecated } from '@instructure/ui-react-utils'
 import { withTestable } from '@instructure/ui-testable'
 
-import generateStyle from "./styles"
+import generateStyle from './styles'
 
 /**
 ---
@@ -44,10 +44,15 @@ category: components
 ---
 **/
 const Pill = (props) => {
-  useDeprecated({ componentName: Pill.name, version: '8.0.0', oldProps: {
-    text: 'children',
-    variant: 'color'
-  }, props })
+  useDeprecated({
+    componentName: Pill.name,
+    version: '8.0.0',
+    oldProps: {
+      text: 'children',
+      variant: 'color'
+    },
+    props
+  })
   const [truncated, setTruncated] = useState(false)
   const style = useStyle(Pill.name, generateStyle, props)
 
@@ -64,7 +69,10 @@ const Pill = (props) => {
     } = props
 
     const filteredProps = passthroughProps(restProps)
-    const containerProps = typeof getTriggerProps === 'function' ? getTriggerProps(filteredProps) : filteredProps
+    const containerProps =
+      typeof getTriggerProps === 'function'
+        ? getTriggerProps(filteredProps)
+        : filteredProps
 
     return (
       <View
@@ -93,36 +101,49 @@ const Pill = (props) => {
     )
   }
 
-  return (
-    truncated ?
-       (
-        <Tooltip renderTip={props.children || props.text}>
-          {({ focused, getTriggerProps }) => renderPill(focused, getTriggerProps)}
-        </Tooltip>
-      ) : renderPill()
+  return truncated ? (
+    <Tooltip renderTip={props.children || props.text}>
+      {({ focused, getTriggerProps }) => renderPill(focused, getTriggerProps)}
+    </Tooltip>
+  ) : (
+    renderPill()
   )
 }
 
 Pill.propTypes = {
   as: PropTypes.elementType, // eslint-disable-line react/require-default-props
   children: PropTypes.node,
-  color: PropTypes.oneOf(['primary', 'success', 'danger', 'info', 'warning', 'alert']),
+  color: PropTypes.oneOf([
+    'primary',
+    'success',
+    'danger',
+    'info',
+    'warning',
+    'alert'
+  ]),
   elementRef: PropTypes.func,
   /**
-  * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-  * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-  * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-  */
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
   margin: ThemeablePropTypes.spacing,
   /* eslint-disable react/require-default-props */
   /**
-  * __Deprecated - use 'children'__
-  */
+   * __Deprecated - use 'children'__
+   */
   text: PropTypes.node,
   /**
-  * __Deprecated - use 'color'__
-  */
-  variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
+   * __Deprecated - use 'color'__
+   */
+  variant: PropTypes.oneOf([
+    'default',
+    'success',
+    'danger',
+    'primary',
+    'warning',
+    'message'
+  ])
   /* eslint-enable react/require-default-props */
 }
 

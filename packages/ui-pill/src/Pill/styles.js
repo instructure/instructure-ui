@@ -22,15 +22,19 @@
  * SOFTWARE.
  */
 
-const generateStyle = ({ borders, colors, spacing, typography, key: themeName }, themeOverride, { variant, color}) => {
-	//if any styling should depend on the theme itself, this object should specify it
-	const themeSpecificStlye = {
-		instructure: {
-			height: '1.5rem'
-		}
-	}
-	//maps the theme variables to component specific style variables, and overrides it with theme and user specified overrides
-	const fromTheme = {
+const generateStyle = (
+  { borders, colors, spacing, typography, key: themeName },
+  themeOverride,
+  { variant, color }
+) => {
+  //if any styling should depend on the theme itself, this object should specify it
+  const themeSpecificStlye = {
+    instructure: {
+      height: '1.5rem'
+    }
+  }
+  //maps the theme variables to component specific style variables, and overrides it with theme and user specified overrides
+  const fromTheme = {
     fontFamily: typography?.fontFamily,
     padding: `0 ${spacing?.xSmall}`,
     height: '1.3125rem',
@@ -50,15 +54,15 @@ const generateStyle = ({ borders, colors, spacing, typography, key: themeName },
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     borderRadius: '999rem',
-		...themeSpecificStlye[themeName],
-		...themeOverride
-	}
+    ...themeSpecificStlye[themeName],
+    ...themeOverride
+  }
 
   const transformVariant = variant === 'primary' ? 'oldPrimary' : variant
   const actualColor = transformVariant || color
 
-	//optional mappings can be provided based on - for example - props
-	const colorStyles = {
+  //optional mappings can be provided based on - for example - props
+  const colorStyles = {
     default: {
       color: fromTheme.color,
       borderColor: fromTheme.color
@@ -95,33 +99,33 @@ const generateStyle = ({ borders, colors, spacing, typography, key: themeName },
       color: fromTheme.alertColor,
       borderColor: fromTheme.alertColor
     }
-	}
+  }
 
-	//return with the css you'd like to apply to the component
-	return {
-		root: {
+  //return with the css you'd like to apply to the component
+  return {
+    root: {
       label: 'root',
-      display: "block",
+      display: 'block',
       fontFamily: fromTheme.fontFamily,
-      boxSizing: "border-box",
+      boxSizing: 'border-box',
       padding: fromTheme.padding,
       background: fromTheme.background,
       borderWidth: fromTheme.borderWidth,
       borderStyle: fromTheme.borderStyle,
       borderRadius: fromTheme.borderRadius,
-      lineHeight: fromTheme.height - (fromTheme.borderWidth * 2),
-			...colorStyles[actualColor]
-		},
-		text: {
+      lineHeight: fromTheme.height - fromTheme.borderWidth * 2,
+      ...colorStyles[actualColor]
+    },
+    text: {
       label: 'text',
-      boxSizing: "border-box",
+      boxSizing: 'border-box',
       textTransform: fromTheme.textTransformStyle,
       fontSize: fromTheme.textFontSize,
       fontWeight: fromTheme.textFontWeight,
-      letterSpacing: "0.0625rem"
+      letterSpacing: '0.0625rem'
     },
     viewMaxWidth: fromTheme.maxWidth
-	}
+  }
 }
 
 export default generateStyle

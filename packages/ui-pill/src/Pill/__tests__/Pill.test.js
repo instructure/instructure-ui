@@ -53,7 +53,8 @@ describe('<Pill />', async () => {
   })
 
   it('should render a Tooltip when text overflows max-width', async () => {
-    const text = "some really super incredibly long text that will force overflow"
+    const text =
+      'some really super incredibly long text that will force overflow'
     await mount(<Pill>{text}</Pill>)
 
     const pill = await PillLocator.find()
