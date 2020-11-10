@@ -23,7 +23,7 @@
  */
 
 module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
+  extends: 'stylelint-config-standard',
   plugins: ['stylelint-declaration-strict-value'],
   rules: {
     'scale-unlimited/declaration-strict-value': [['z-index']],
