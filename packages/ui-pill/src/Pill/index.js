@@ -24,78 +24,39 @@
 
 // TODO: once the text prop is removed in v8.0.0 update children prop to isRequired
 // NOTE: when the variant prop is removed in v8.0.0 change 'default' color to 'primary'
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
+import { useStyle, jsx } from '@instructure/emotion'
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { passthroughProps, useDeprecated } from '@instructure/ui-react-utils'
+import { withTestable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@testable()
-@deprecated('8.0.0', {
-  text: 'children',
-  variant: 'color'
-})
-@themeable(theme, styles)
-class Pill extends Component {
-  static propTypes = {
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    children: PropTypes.node,
-    color: PropTypes.oneOf(['primary', 'success', 'danger', 'info', 'warning', 'alert']),
-    elementRef: PropTypes.func,
-    /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
-    margin: ThemeablePropTypes.spacing,
-    /* eslint-disable react/require-default-props */
-    /**
-    * __Deprecated - use 'children'__
-    */
-    text: PropTypes.node,
-    /**
-    * __Deprecated - use 'color'__
-    */
-    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
-    /* eslint-enable react/require-default-props */
-  }
+const Pill = (props) => {
+  useDeprecated({
+    componentName: Pill.name,
+    version: '8.0.0',
+    oldProps: {
+      text: 'children',
+      variant: 'color'
+    },
+    props
+  })
+  const [truncated, setTruncated] = useState(false)
+  const style = useStyle(Pill.name, generateStyle, props)
 
-  static defaultProps = {
-    children: undefined,
-    margin: undefined,
-    elementRef: undefined,
-    color: 'primary'
-  }
-
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      truncated: false
-    }
-  }
-
-  handleTruncation (truncated) {
-    this.setState({
-      truncated: truncated
-    })
-  }
-
-  renderPill (focused, getTriggerProps) {
+  const renderPill = (focused, getTriggerProps) => {
     const {
       margin,
       children,
@@ -104,30 +65,14 @@ class Pill extends Component {
       as,
       elementRef,
       text,
-      ...props
-    } = this.props
+      ...restProps
+    } = props
 
-    const filteredProps = passthroughProps(props)
-
-    const containerProps = typeof getTriggerProps === 'function'
-      ? getTriggerProps(filteredProps) : filteredProps
-
-    let actualColor = variant
-    if (!actualColor) {
-      // usng new color props
-      actualColor = color
-    } else {
-      // using old variant
-      if (variant === 'primary') {
-        actualColor = 'oldPrimary'
-      }
-    }
-
-    const classes = classnames({
-      [styles.root]: true,
-      [styles.truncated]: this.state.truncated,
-      [styles[actualColor]]: true
-    })
+    const filteredProps = passthroughProps(restProps)
+    const containerProps =
+      typeof getTriggerProps === 'function'
+        ? getTriggerProps(filteredProps)
+        : filteredProps
 
     return (
       <View
@@ -136,7 +81,7 @@ class Pill extends Component {
         elementRef={elementRef}
         margin={margin}
         padding="0"
-        maxWidth={this.theme.maxWidth}
+        maxWidth={style.viewMaxWidth}
         background="transparent"
         borderRadius="pill"
         borderWidth="0"
@@ -145,13 +90,9 @@ class Pill extends Component {
         withFocusOutline={focused}
         focusColor="info"
       >
-        <span className={classes}>
-          <span className={styles.text}>
-            <TruncateText
-              onUpdate={(truncated) => {
-                this.handleTruncation(truncated)
-              }}
-            >
+        <span css={style.root}>
+          <span css={style.text}>
+            <TruncateText onUpdate={(truncated) => setTruncated(truncated)}>
               {children || text}
             </TruncateText>
           </span>
@@ -160,22 +101,60 @@ class Pill extends Component {
     )
   }
 
-  render () {
-    if (this.state.truncated) {
-      return (
-        <Tooltip renderTip={this.props.children || this.props.text}>
-          {({ focused, getTriggerProps }) => {
-            return (
-              this.renderPill(focused, getTriggerProps)
-            )
-          }}
-        </Tooltip>
-      )
-    } else {
-      return this.renderPill()
-    }
-  }
+  return truncated ? (
+    <Tooltip renderTip={props.children || props.text}>
+      {({ focused, getTriggerProps }) => renderPill(focused, getTriggerProps)}
+    </Tooltip>
+  ) : (
+    renderPill()
+  )
 }
 
-export default Pill
-export { Pill }
+Pill.propTypes = {
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  children: PropTypes.node,
+  color: PropTypes.oneOf([
+    'primary',
+    'success',
+    'danger',
+    'info',
+    'warning',
+    'alert'
+  ]),
+  elementRef: PropTypes.func,
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /* eslint-disable react/require-default-props */
+  /**
+   * __Deprecated - use 'children'__
+   */
+  text: PropTypes.node,
+  /**
+   * __Deprecated - use 'color'__
+   */
+  variant: PropTypes.oneOf([
+    'default',
+    'success',
+    'danger',
+    'primary',
+    'warning',
+    'message'
+  ])
+  /* eslint-enable react/require-default-props */
+}
+
+Pill.defaultProps = {
+  children: undefined,
+  margin: undefined,
+  elementRef: undefined,
+  color: 'primary'
+}
+
+const Pill__Testable = withTestable(Pill)
+
+export default Pill__Testable
+export { Pill__Testable as Pill }

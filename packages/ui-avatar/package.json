@@ -31,7 +31,6 @@
     "@instructure/ui-view": "^7.2.4",
     "@instructure/ui-pill": "^7.2.4",
     "@instructure/emotion": "^7.2.4",
-    "@emotion/core": "^10.0.35",
     "classnames": "^2",
     "prop-types": "^15"
   },

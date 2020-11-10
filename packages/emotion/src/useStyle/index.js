@@ -23,13 +23,13 @@
  */
 import { useTheme } from 'emotion-theming'
 
-function useStyle(componentName, generateStyle, themeOverride={}, props, state){
+function useStyle(componentName, generateStyle, props, state){
 
   const theme = useTheme()
 
   const componentOverride=theme?.components && theme.components[componentName]
 
-  return generateStyle(theme, {...componentOverride,...themeOverride}, props, state)
+  return generateStyle(theme, {...componentOverride,...props?.themeOverride ?? {} }, props, state)
 }
 
 export default useStyle

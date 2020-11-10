@@ -32,16 +32,10 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:instructure-ui/recommended',
-    'plugin:compat/recommended'
+    'plugin:compat/recommended',
+    'prettier'
   ],
-  plugins: [
-    'react',
-    'jsx-a11y',
-    'mocha',
-    'notice',
-    'instructure-ui',
-    'ejs'
-  ],
+  plugins: ['react', 'jsx-a11y', 'mocha', 'notice', 'instructure-ui', 'ejs'],
   env: {
     node: true,
     browser: true,
@@ -50,15 +44,15 @@ module.exports = {
   },
   parser: 'babel-eslint',
   parserOptions: {
-   ecmaFeatures: {
-     legacyDecorators: true
-   }
+    ecmaFeatures: {
+      legacyDecorators: true
+    }
   },
   rules: {
     'import/no-unresolved':0,
     'react/no-deprecated': 0,
     'react/no-find-dom-node': 0,
-    'react/prop-types': [ 'error', { skipUndeclared: true } ],
+    'react/prop-types': ['error', { skipUndeclared: true }],
     'react/require-default-props': 'error',
     'react/no-typos': 'error',
     'no-console': ['error', { allow: ['warn', 'error'] }],
@@ -66,32 +60,37 @@ module.exports = {
       'warn',
       {
         args: 'none',
-        ignoreRestSiblings: true,
-      },
+        ignoreRestSiblings: true
+      }
     ],
     'no-shadow-restricted-names': 'error',
-    'semi': ['error', 'never'],
+    semi: ['error', 'never'],
     'semi-spacing': ['error', { before: false, after: true }],
     'no-trailing-spaces': 'error',
     'no-param-reassign': ['error', { props: true }],
-    'notice/notice': ['error', {
-      mustMatch: 'The MIT License \\(MIT\\)',
-      templateFile: require.resolve('./copyright.js')
-    }],
+    'notice/notice': [
+      'error',
+      {
+        mustMatch: 'The MIT License \\(MIT\\)',
+        templateFile: require.resolve('./copyright.js')
+      }
+    ],
     'import/no-extraneous-dependencies': 'error',
-    'no-restricted-imports': ['error', {
-      'patterns': [
-        '*/src',
-        '@instructure/ui-*/lib',
-        '@instructure/ui-*/es'
-      ]
-    }],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['*/src', '@instructure/ui-*/lib', '@instructure/ui-*/es']
+      }
+    ],
     'jsx-a11y/label-has-for': 0,
-    'no-unused-expressions': ['error', {
-      'allowShortCircuit': true,
-      'allowTernary': true,
-      'allowTaggedTemplates': true
-    }]
+    'no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+        allowTaggedTemplates: true
+      }
+    ]
   },
   overrides: [
     {
@@ -105,6 +104,10 @@ module.exports = {
     react: {
       version: process.env.REACT_VERSION || '16.8.6'
     },
-    polyfills: loadConfig('polyfill', require('@instructure/browserslist-config-instui/polyfills')).features || []
+    polyfills:
+      loadConfig(
+        'polyfill',
+        require('@instructure/browserslist-config-instui/polyfills')
+      ).features || []
   }
 }

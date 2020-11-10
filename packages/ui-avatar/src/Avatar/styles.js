@@ -22,10 +22,18 @@
  * SOFTWARE.
  */
 
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
 const generateStyle = (theme, themeOverride, { size, variant, shape, src }, { loaded }) => {
   const themeSpecificStyles = {
     canvas: {
-      color:"red"
+      color: 'red'
     }
   }
 
@@ -43,39 +51,39 @@ const generateStyle = (theme, themeOverride, { size, variant, shape, src }, { lo
 
   const sizeStyles = {
     auto: {
-      fontSize: "inherit",
+      fontSize: 'inherit',
       borderWidth: fromTheme.borderWidthSmall,
     },
-    "x-small": {
-      fontSize: "0.75rem",
+    'x-small': {
+      fontSize: '0.75rem',
       borderWidth: fromTheme.borderWidthSmall
     },
     small: {
-      fontSize: "1rem",
+      fontSize: '1rem',
       borderWidth: fromTheme.borderWidthSmall
     },
     medium: {
-      fontSize: "1.25rem",
+      fontSize: '1.25rem',
       borderWidth: fromTheme.borderWidthMedium,
     },
     large: {
-      fontSize: "1.5rem",
+      fontSize: '1.5rem',
       borderWidth: fromTheme.borderWidthMedium,
     },
-    "x-large": {
-      fontSize: "1.75rem",
+    'x-large': {
+      fontSize: '1.75rem',
       borderWidth: fromTheme.borderWidthMedium,
     }
   }
 
   const variantStyles = {
-    circle:{
+    circle: {
       width: "2.5em",
       position: "relative",
       borderRadius: "100%",
       overflow: "hidden",
     },
-    rectangle:{
+    rectangle: {
       width: "3em",
     }
   }
@@ -83,18 +91,18 @@ const generateStyle = (theme, themeOverride, { size, variant, shape, src }, { lo
 return {
   root: {
     label: 'root',
-    height: "2.5em",
-    borderStyle: "solid",
+    height: '2.5em',
+    borderStyle: 'solid',
     borderColor: fromTheme.borderColor,
-    boxSizing: "border-box",
+    boxSizing: 'border-box',
     backgroundColor: fromTheme.background,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundClip: "content-box",
-    backgroundRepeat: "no-repeat",
-    overflow: "hidden",
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundClip: 'content-box',
+    backgroundRepeat: 'no-repeat',
+    overflow: 'hidden',
     lineHeight: 0,
-    textAlign: "center",
+    textAlign: 'center',
     backgroundImage: loaded ? `url('${src}')` : undefined,
     ...sizeStyles[size],
     ...variantStyles[variant || shape]
@@ -102,14 +110,14 @@ return {
   initials: {
     label: 'initials',
     color: fromTheme.color,
-    lineHeight: "2.375em",
+    lineHeight: '2.375em',
     fontFamily: fromTheme.fontFamily,
     fontWeight: fromTheme.fontWeight,
-    letterSpacing: "0.0313em"
+    letterSpacing: '0.0313em'
   },
   loadImage: {
     label: 'loadImage',
-    display: "none"
+    display: 'none'
   }
  }
 }

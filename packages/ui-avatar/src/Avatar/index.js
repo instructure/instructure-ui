@@ -23,10 +23,9 @@
  */
 
  /** @jsx jsx */
-import { jsx } from '@emotion/core'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useStyle } from "@instructure/emotion"
+import { useStyle, jsx  } from "@instructure/emotion"
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { View } from '@instructure/ui-view'
 import { withTestable } from '@instructure/ui-testable'
@@ -48,7 +47,7 @@ const Avatar = (props) => {
   const [loaded, setLoaded] = useState(false)
   const { onImageLoaded, ...restProps } = props
 
-  const styles = useStyle(Avatar.name, generateStyle, props.themeOverride, props, { loaded })
+  const styles = useStyle(Avatar.name, generateStyle, props, { loaded })
 
   const renderLoadImage =  () => {
     // This image element is visually hidden and is here for loading purposes only

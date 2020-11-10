@@ -25,6 +25,7 @@
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@instructure/console": "^7.3.0",
+    "@instructure/emotion": "^7.2.4",
     "@instructure/ui-react-utils": "^7.3.0",
     "@instructure/ui-testable": "^7.3.0",
     "@instructure/ui-themeable": "^7.3.0",
