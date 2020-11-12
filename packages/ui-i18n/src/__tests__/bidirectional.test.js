@@ -25,16 +25,14 @@
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
-import { bidirectional } from '../bidirectional'
-import { TextDirectionContext } from '../TextDirectionContext'
+import { useBidirectional } from '../bidirectional'
+import { ApplyTextDirection } from '../ApplyTextDirection'
 
-@bidirectional()
-class BidirectionalComponent extends React.Component {
-  render() {
-    return <div data-dir={this.dir}>Hello World</div>
-  }
+const BidirectionalComponent = (props) => {
+  const { dir } = useBidirectional(props)
+
+  return <div data-dir={dir}>Hello World</div>
 }
-
 describe('@bidirectional', async () => {
   it('should take on the direction of the document by default', async () => {
     const subject = await mount(<BidirectionalComponent />)
@@ -48,12 +46,15 @@ describe('@bidirectional', async () => {
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
 
-  it('should give context preference when props and context are present', async () => {
-    const context = TextDirectionContext.makeTextDirectionContext('rtl')
-    const subject = await mount(<BidirectionalComponent dir="ltr" />, {
-      context
-    })
+  it('should give props preference when props and context are present', async () => {
+    const subject = await mount(
+      <ApplyTextDirection dir="ltr">
+        <BidirectionalComponent dir="rtl" />
+      </ApplyTextDirection>
+    )
 
-    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
+    expect(
+      subject.getDOMNode().childNodes[0].getAttribute('data-dir')
+    ).to.equal('rtl')
   })
 })

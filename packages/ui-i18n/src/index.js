@@ -23,8 +23,15 @@
  */
 
 export { ApplyLocale } from './ApplyLocale'
-export { ApplyTextDirection } from './ApplyTextDirection'
-export { bidirectional } from './bidirectional'
+export {
+  ApplyTextDirection,
+  useTextDirectionContext
+} from './ApplyTextDirection'
+export {
+  bidirectional,
+  withBidirectional,
+  useBidirectional
+} from './bidirectional'
 export { DateTime } from './DateTime'
 export { Decimal } from './Decimal'
 export { getTextDirection } from './getTextDirection'
