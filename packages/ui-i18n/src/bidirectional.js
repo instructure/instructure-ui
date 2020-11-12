@@ -21,11 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
 import PropTypes from 'prop-types'
 import { decorator } from '@instructure/ui-decorator'
 
 import { TextDirectionContext } from './TextDirectionContext'
 import { getTextDirection } from './getTextDirection'
+import { useTextDirectionContext } from './ApplyTextDirection'
 
 const { DIRECTION, getTextDirectionContext } = TextDirectionContext
 
@@ -86,5 +88,24 @@ const bidirectional = decorator((ComposedComponent) => {
 
 bidirectional.DIRECTION = DIRECTION
 
+const useBidirectional = (props = {}) => {
+  const context = useTextDirectionContext()
+  const dir = props.dir || context
+
+  return {
+    dir,
+    rtl: dir === DIRECTION.rtl,
+    ltr: dir === DIRECTION.ltr
+  }
+}
+
+const withBidirectional = (ComposedComponent) => {
+  return function BidirectionalComponent(props) {
+    const textDirectionContextValue = useBidirectional(props)
+
+    return <ComposedComponent {...{ ...props, ...textDirectionContextValue }} />
+  }
+}
+
 export default bidirectional
-export { bidirectional }
+export { bidirectional, useBidirectional, withBidirectional }
