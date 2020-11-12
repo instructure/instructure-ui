@@ -21,19 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-export default function generator ({ colors, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    separatorColor: colors.borderDark,
-
-    smallSeparatorFontSize: '0.5rem',
-    smallFontSize: typography.fontSizeSmall,
-
-    mediumSeparatorFontSize: '0.75rem',
-    mediumFontSize: typography.fontSizeMedium,
-
-    largeSeparatorFontSize: '1rem',
-    largeFontSize: typography.fontSizeLarge
-  }
-}
+module.exports = require('@instructure/ui-postcss-config')()

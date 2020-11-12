@@ -23,44 +23,67 @@
  */
 
 import React, { useState } from 'react'
-import {Avatar} from '@instructure/ui-avatar'
+import { Avatar } from '@instructure/ui-avatar'
+import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
 
 const components = {
-  Avatar:[
-    <Avatar key={"key"} themeOverride={{color:"blue"}} name="Sarah Robinson" margin="0 small 0 0" />,
-    <Avatar key={"key2"} name="Rarah Sobinson" margin="0 small 0 0" />],
-  }
+  Avatar: [
+    <Avatar
+      key={'key'}
+      themeOverride={{ color: 'blue' }}
+      name="Sarah Robinson"
+      margin="0 small 0 0"
+    />,
+    <Avatar key={'key2'} name="Rarah Sobinson" margin="0 small 0 0" />
+  ],
+  Breadcrumb: [
+    <Breadcrumb key={'breadcrumb1'} label={'Teszt'}>
+      <BreadcrumbLink key="breadcrumbLink1" onClick={() => {}}>
+        English 204
+      </BreadcrumbLink>
+      <BreadcrumbLink key="breadcrumbLink2" href="#">
+        The Rabbit Novels
+      </BreadcrumbLink>
+      <BreadcrumbLink key="breadcrumbLink3">Rabbit Is Rich</BreadcrumbLink>
+    </Breadcrumb>
+  ]
+}
 const App = () => {
-  const [ renderedComponent , setRenderedComponent] = useState()
+  const [renderedComponent, setRenderedComponent] = useState()
 
-   return (
-     <div style = {{display:"flex"}}>
-      <div style = {{flex:1, cursor:"pointer"}}>
-        {Object.keys(components).map((name)=>
+  return (
+    <div style={{ display: 'flex' }}>
+      <div style={{ flex: 1, cursor: 'pointer' }}>
+        {Object.keys(components).map((name) => (
           <button
-            onKeyPress={()=>{}}
-            style = {{
+            onKeyPress={() => {}}
+            style={{
               margin: 10,
-              height:30,
-              borderBottom:"solid",
-              borderWidth:1,
-              textAlign:"center",
-              lineHeight:"30px"
+              height: 30,
+              borderBottom: 'solid',
+              borderWidth: 1,
+              textAlign: 'center',
+              lineHeight: '30px'
             }}
-            key = {name}
-            onClick={()=>setRenderedComponent(name)}>
+            key={name}
+            onClick={() => setRenderedComponent(name)}
+          >
             {name}
           </button>
-        )}
-          </div>
-        <div style = {{flex:10}}>
-          <h1 style = {{textAlign:"center"}}>{renderedComponent}</h1>
-          {components[renderedComponent] &&components[renderedComponent][0] ? components[renderedComponent].map((component,index)=>
-          <div key = {`${renderedComponent}-${index}`}>{component} <hr  /></div>):components[renderedComponent]
-          }
-        </div>
-     </div>
-   )
+        ))}
+      </div>
+      <div style={{ flex: 10 }}>
+        <h1 style={{ textAlign: 'center' }}>{renderedComponent}</h1>
+        {components[renderedComponent] && components[renderedComponent][0]
+          ? components[renderedComponent].map((component, index) => (
+              <div key={`${renderedComponent}-${index}`}>
+                {component} <hr />
+              </div>
+            ))
+          : components[renderedComponent]}
+      </div>
+    </div>
+  )
 }
 
 export default App
