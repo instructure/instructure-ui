@@ -22,91 +22,90 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
+import { omitProps, useDeprecated } from '@instructure/ui-react-utils'
+import { withTestable } from '@instructure/ui-testable'
 
 /**
----
-parent: Breadcrumb
-id: Breadcrumb.Link
----
-**/
+ ---
+ parent: Breadcrumb
+ id: Breadcrumb.Link
+ ---
+ **/
 
-@testable()
-@deprecated('8.0.0', { icon: 'renderIcon' })
-class BreadcrumbLink extends Component {
-  static propTypes = {
-    /**
-    * Content to render as the crumb, generally should be text.
-    */
-    children: PropTypes.node.isRequired,
-    /**
-    * Link the crumb should direct to; if an href is provided, the crumb will render as a link
-    */
-    href: PropTypes.string,
-    /**
-    * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
-    */
-    onClick: PropTypes.func,
-    /**
-    * Sets the font-size of the breadcrumb text
-    */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Add an icon to the Breadcrumb.Link
-     */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-    * __Deprecated - use renderIcon__
-    */
-    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    /**
-    * Place the icon before or after the text in the Breadcrumb.Link
-    */
-    iconPlacement: PropTypes.oneOf(['start', 'end'])
-  }
+const BreadcrumbLink = (props) => {
+  useDeprecated({
+    componentName: BreadcrumbLink.name,
+    version: '8.0.0',
+    oldProps: {
+      icon: 'renderIcon'
+    },
+    props
+  })
 
-  static defaultProps = {
-    href: undefined,
-    onClick: undefined,
-    size: undefined,
-    renderIcon: undefined,
-    icon: undefined,
-    iconPlacement: undefined
-  }
+  const { children, href, renderIcon, iconPlacement, onClick, icon } = props
 
-  render () {
-    const {
-      children,
-      href,
-      renderIcon,
-      iconPlacement,
-      onClick,
-      icon
-    } = this.props
+  const restProps = omitProps(props, BreadcrumbLink.propTypes)
 
-    const props = omitProps(this.props, BreadcrumbLink.propTypes)
-
-    return (
-      <Link
-        as={this.element}
-        {...props}
-        href={href}
-        renderIcon={renderIcon || icon}
-        iconPlacement={iconPlacement}
-        onClick={onClick}
-        isWithinText={false}
-      >
-        <TruncateText>{children}</TruncateText>
-      </Link>
-    )
-  }
+  return (
+    <Link
+      {...restProps}
+      href={href}
+      renderIcon={renderIcon || icon}
+      iconPlacement={iconPlacement}
+      onClick={onClick}
+      isWithinText={false}
+    >
+      <TruncateText>{children}</TruncateText>
+    </Link>
+  )
 }
 
-export default BreadcrumbLink
-export { BreadcrumbLink }
+BreadcrumbLink.propTypes = {
+  /**
+   * Content to render as the crumb, generally should be text.
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Link the crumb should direct to; if an href is provided, the crumb will render as a link
+   */
+  href: PropTypes.string,
+  /**
+   * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
+   */
+  onClick: PropTypes.func,
+  /**
+   * Sets the font-size of the breadcrumb text
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Add an icon to the Breadcrumb.Link
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * __Deprecated - use renderIcon__
+   */
+  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  /**
+   * Place the icon before or after the text in the Breadcrumb.Link
+   */
+  iconPlacement: PropTypes.oneOf(['start', 'end'])
+}
+
+BreadcrumbLink.defaultProps = {
+  href: undefined,
+  onClick: undefined,
+  size: undefined,
+  renderIcon: undefined,
+  icon: undefined,
+  iconPlacement: undefined
+}
+
+const BreadcrumbLink__Testable = withTestable(BreadcrumbLink)
+
+export default BreadcrumbLink__Testable
+export { BreadcrumbLink__Testable as BreadcrumbLink }

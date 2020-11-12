@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
+    "@instructure/emotion": "^7.3.0",
     "@instructure/ui-icons": "^7.3.0",
     "@instructure/ui-link": "^7.3.0",
     "@instructure/ui-prop-types": "^7.3.0",

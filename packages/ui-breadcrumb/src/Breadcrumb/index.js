@@ -21,21 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
-import { testable } from '@instructure/ui-testable'
+import { withTestable } from '@instructure/ui-testable'
 
 import { BreadcrumbLink } from './BreadcrumbLink'
 
-import styles from './styles.css'
-import theme from './theme'
+import { useStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
+import { omitProps } from '@instructure/ui-react-utils'
+import { Link } from '@instructure/ui-link'
 
 /**
 ---
@@ -43,81 +44,71 @@ category: components
 ---
 **/
 
-@testable()
-@themeable(theme, styles)
-class Breadcrumb extends Component {
-  static propTypes = {
-    /**
-    * children of type Breadcrumb.Link
-    */
-    children: Children.oneOf([BreadcrumbLink]),
-    /**
-    * An accessible label for the navigation
-    */
-    label: PropTypes.string.isRequired,
-    /**
-    * Sets the font-size of the breadcrumb text
-    */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
-    margin: ThemeablePropTypes.spacing
-  }
+const Breadcrumb = (props) => {
+  const styles = useStyle(Breadcrumb.name, generateStyle, props, {})
 
-  static defaultProps = {
-    size: 'medium',
-    children: null,
-    margin: undefined
-  }
-
-  static Link = BreadcrumbLink
-
-  renderChildren () {
-    const numChildren = this.props.children ? this.props.children.length : 0
+  const renderChildren = () => {
+    const numChildren = props.children ? props.children.length : 0
     const style = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
-    return React.Children.map(this.props.children,
-      (child, index) => {
-        return (
-          <li className={styles.crumb} style={style}>
-            {child}
-            {
-              index < (numChildren - 1) &&
-                <IconArrowOpenEndSolid
-                  color="auto"
-                  className={styles.separator}
-                />
-            }
-          </li>
-        )
-      }
-    )
+    return React.Children.map(props.children, (child, index) => {
+      return (
+        <li css={styles.crumb} style={style}>
+          {child}
+          {index < numChildren - 1 && (
+            <IconArrowOpenEndSolid color="auto" css={styles.separator} />
+          )}
+        </li>
+      )
+    })
   }
 
-  render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true
-    }
+  const restProps = omitProps(props, Breadcrumb.propTypes)
 
-    return (
-      <View
-        role="navigation"
-        as="div"
-        margin={this.props.margin}
-        aria-label={this.props.label}
-      >
-        <ol className={classnames(classes)}>
-          {this.renderChildren()}
-        </ol>
-      </View>
-    )
-  }
+  return (
+    <View
+      {...restProps}
+      role="navigation"
+      as="div"
+      margin={props.margin}
+      aria-label={props.label}
+    >
+      <ol css={styles.root}>{renderChildren()}</ol>
+    </View>
+  )
 }
 
-export default Breadcrumb
-export { Breadcrumb, BreadcrumbLink }
+Breadcrumb.propTypes = {
+  /**
+   * children of type Breadcrumb.Link
+   */
+  children: Children.oneOf([BreadcrumbLink]),
+  /**
+   * An accessible label for the navigation
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * Sets the font-size of the breadcrumb text
+   */
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing
+}
+
+Breadcrumb.defaultProps = {
+  size: 'medium',
+  children: null,
+  margin: undefined
+}
+
+Breadcrumb.Link = BreadcrumbLink
+
+const Breadcrumb__Testable = withTestable(Breadcrumb)
+
+export default Breadcrumb__Testable
+export { Breadcrumb__Testable as Breadcrumb, BreadcrumbLink }
