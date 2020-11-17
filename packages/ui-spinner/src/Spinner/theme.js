@@ -22,10 +22,28 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors }) {
-  return {
-    trackColor: colors.backgroundLight,
-    color: colors.backgroundBrand,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+export default function generateComponentTheme(theme, themeOverride = {}) {
+  const { colors, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    'canvas-high-contrast': {
+      inverseColor: colors?.backgroundLightest
+    },
+    canvas: {
+      color: theme['ic-brand-primary']
+    }
+  }
+  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
+
+  const componentVariables = {
+    trackColor: colors?.backgroundLight,
+    color: colors?.backgroundBrand,
 
     xSmallSize: '1.5em',
     xSmallBorderWidth: '0.25em',
@@ -39,20 +57,12 @@ export default function generator({ colors }) {
     largeSize: '7em',
     largeBorderWidth: '0.75em',
 
-    inverseColor: colors.backgroundBrand
+    inverseColor: colors?.backgroundBrand
   }
-}
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
-  colors
-}) {
   return {
-    inverseColor: colors.backgroundLightest
-  }
-}
-
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-primary']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
