@@ -52,6 +52,7 @@
     "@instructure/ui-responsive": "^7.3.0",
     "@instructure/ui-select": "^7.3.0",
     "@instructure/ui-simple-select": "^7.3.0",
+    "@instructure/ui-spinner": "^7.3.0",
     "@instructure/ui-svg-images": "^7.3.0",
     "@instructure/ui-table": "^7.3.0",
     "@instructure/ui-tabs": "^7.3.0",
