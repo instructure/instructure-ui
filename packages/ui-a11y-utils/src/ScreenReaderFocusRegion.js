@@ -77,10 +77,15 @@ class ScreenReaderFocusRegion {
 
   hideNodes(nodes) {
     nodes.forEach((node) => {
+      const ariaLive =
+        typeof node.getAttribute === 'function' &&
+        node.getAttribute('aria-live')?.toLowerCase()
       if (
         node &&
         node.nodeType === 1 &&
         node.tagName.toLowerCase() !== 'script' &&
+        ariaLive !== 'assertive' &&
+        ariaLive !== 'polite' &&
         this._parents.indexOf(node) === -1 &&
         this._nodes.indexOf(node) === -1 &&
         this._liveRegion.indexOf(node) === -1 &&
