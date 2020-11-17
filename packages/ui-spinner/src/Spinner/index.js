@@ -21,81 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import {
   callRenderProp,
-  deprecated,
+  useDeprecated,
   omitProps
 } from '@instructure/ui-react-utils'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { isIE11 } from '@instructure/ui-utils'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { uid } from '@instructure/uid'
-import { testable } from '@instructure/ui-testable'
+import { withTestable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
 
-import styles from './styles.css'
-import theme from './theme'
+import { useStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', { title: 'renderTitle' })
-@testable()
-@themeable(theme, styles)
-class Spinner extends Component {
-  static propTypes = {
-    /**
-     * Give the spinner a title to be read by screenreaders
-     */
-    renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    /**
-     * Different-sized spinners
-     */
-    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
-    /**
-     * Different color schemes for use with light or dark backgrounds
-     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    as: PropTypes.elementType,
+const Spinner = (props) => {
+  useDeprecated({
+    componentName: Spinner.name,
+    version: '8.0.0',
+    oldProps: {
+      title: 'renderTitle'
+    },
+    props
+  })
 
-    /**
-     * __Deprecated - use `renderTitle` instead__
-     */
-    /* eslint-disable react/require-default-props */
-    title: PropTypes.string
-    /* eslint-enable react/require-default-props */
-  }
+  const styles = useStyle(Spinner.name, generateStyle, props, {})
 
-  static defaultProps = {
-    renderTitle: undefined,
-    as: 'div',
-    size: 'medium',
-    variant: 'default',
-    margin: undefined,
-    elementRef: undefined
-  }
+  const titleId = useMemo(() => uid('Spinner'), [])
 
-  constructor(props) {
-    super()
-
-    this.titleId = uid('Spinner')
-  }
-
-  radius() {
-    switch (this.props.size) {
+  const radius = () => {
+    switch (props.size) {
       case 'x-small':
         return '0.5em'
       case 'small':
@@ -107,63 +71,83 @@ class Spinner extends Component {
     }
   }
 
-  render() {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true,
-      [styles.ie11]: isIE11
-    }
+  const passthroughProps = View.omitViewProps(
+    omitProps(props, Spinner.propTypes),
+    Spinner
+  )
 
-    const passthroughProps = View.omitViewProps(
-      omitProps(this.props, Spinner.propTypes),
-      Spinner
-    )
+  const hasTitle = props.renderTitle || props.title
+  error(
+    hasTitle,
+    '[Spinner] The renderTitle prop is necessary for screen reader support.'
+  )
 
-    const hasTitle = this.props.renderTitle || this.props.title
-    error(
-      hasTitle,
-      '[Spinner] The renderTitle prop is necessary for screen reader support.'
-    )
-
-    return (
-      <View
-        {...passthroughProps}
-        as={this.props.as}
-        elementRef={this.props.elementRef}
-        className={classNames(classes)}
-        margin={this.props.margin}
+  return (
+    <View
+      {...passthroughProps}
+      as={props.as}
+      elementRef={props.elementRef}
+      css={styles.root}
+      margin={props.margin}
+    >
+      <svg
+        css={styles.circle}
+        role="img"
+        aria-labelledby={titleId}
+        focusable="false"
       >
-        <svg
-          className={styles.circle}
-          role="img"
-          aria-labelledby={this.titleId}
-          focusable="false"
-        >
-          <title id={this.titleId}>
-            {callRenderProp(this.props.renderTitle)}
-          </title>
-          <g role="presentation">
-            {this.props.variant !== 'inverse' && (
-              <circle
-                className={styles.circleTrack}
-                cx="50%"
-                cy="50%"
-                r={this.radius()}
-              />
-            )}
-            <circle
-              className={styles.circleSpin}
-              cx="50%"
-              cy="50%"
-              r={this.radius()}
-            />
-          </g>
-        </svg>
-      </View>
-    )
-  }
+        <title id={titleId}>{callRenderProp(props.renderTitle)}</title>
+        <g role="presentation">
+          {props.variant !== 'inverse' && (
+            <circle css={styles.circleTrack} cx="50%" cy="50%" r={radius()} />
+          )}
+          <circle css={styles.circleSpin} cx="50%" cy="50%" r={radius()} />
+        </g>
+      </svg>
+    </View>
+  )
 }
 
-export default Spinner
-export { Spinner }
+Spinner.propTypes = {
+  /**
+   * Give the spinner a title to be read by screenreaders
+   */
+  renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  /**
+   * Different-sized spinners
+   */
+  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+  /**
+   * Different color schemes for use with light or dark backgrounds
+   */
+  variant: PropTypes.oneOf(['default', 'inverse']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  elementRef: PropTypes.func,
+  as: PropTypes.elementType,
+
+  /**
+   * __Deprecated - use `renderTitle` instead__
+   */
+  /* eslint-disable react/require-default-props */
+  title: PropTypes.string
+  /* eslint-enable react/require-default-props */
+}
+
+Spinner.defaultProps = {
+  renderTitle: undefined,
+  as: 'div',
+  size: 'medium',
+  variant: 'default',
+  margin: undefined,
+  elementRef: undefined
+}
+
+const Spinner__Testable = withTestable(Spinner)
+
+export default Spinner__Testable
+export { Spinner__Testable as Spinner }

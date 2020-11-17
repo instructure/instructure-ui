@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { Spinner } from '../index'
 
-describe('Spinner.theme', () => {
+xdescribe('Spinner.theme', () => {
   describe('with the default theme', () => {
     const variables = Spinner.generateTheme()
 

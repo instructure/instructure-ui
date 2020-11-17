@@ -27,6 +27,7 @@ import { Avatar } from '@instructure/ui-avatar'
 import { Pill } from '@instructure/ui-pill'
 import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
+import { Spinner } from '@instructure/ui-spinner'
 
 const components = {
   Avatar: [
@@ -58,6 +59,12 @@ const components = {
       </BreadcrumbLink>
       <BreadcrumbLink key="breadcrumbLink3">Rabbit Is Rich</BreadcrumbLink>
     </Breadcrumb>
+  ],
+  Spinner: [
+    <Spinner key={'spinner1'} renderTitle="Spinner1" size="large" />,
+    <Spinner key={'spinner2'} renderTitle="Spinner2" />,
+    <Spinner key={'spinner3'} renderTitle="Spinner3" size="small" />,
+    <Spinner key={'spinner4'} renderTitle="Spinner4" size="x-small" />
   ],
   Flex: [
     <Flex key={'flex6'} withVisualDebug>

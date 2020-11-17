@@ -21,6 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { jsx, css } from '@emotion/core'
+export { jsx, css, keyframes } from '@emotion/core'
 export { EmotionThemeProvider } from './EmotionThemeProvider'
 export { useStyle, useTheme } from './useStyle'

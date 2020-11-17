@@ -616,7 +616,7 @@ class View extends Component {
 View.omitViewProps = (props, Component) => {
   if (process.env.NODE_ENV !== 'production') {
     Object.keys(pickProps(props, View.propTypes)).forEach((prop) => {
-      error(false, `[${Component.displayName}] prop '${prop}' is not allowed.`)
+      error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
     })
   }
 
