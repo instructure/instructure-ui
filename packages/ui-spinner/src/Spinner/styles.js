@@ -35,41 +35,7 @@ import { keyframes } from '@instructure/emotion'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (theme, themeOverride, { size, variant }, state) => {
-  const { colors, key: themeName } = theme
-
-  const themeSpecificStyle = {
-    'canvas-a11y': {
-      inverseColor: colors?.backgroundLightest
-    },
-    'canvas-high-contrast': {
-      inverseColor: colors?.backgroundLightest
-    },
-    canvas: {
-      color: theme['ic-brand-primary']
-    }
-  }
-
-  const componentTheme = {
-    trackColor: colors?.backgroundLight,
-    color: colors?.backgroundBrand,
-
-    xSmallSize: '1.5em',
-    xSmallBorderWidth: '0.25em',
-
-    smallSize: '3em',
-    smallBorderWidth: '0.375em',
-
-    mediumSize: '5em',
-    mediumBorderWidth: '0.5em',
-
-    largeSize: '7em',
-    largeBorderWidth: '0.75em',
-
-    inverseColor: colors?.backgroundBrand,
-
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
-  }
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
   const rotate = keyframes`
     to {
