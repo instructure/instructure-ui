@@ -204,6 +204,24 @@ describe('ScreenReaderFocusRegion', async () => {
     })
   })
 
+  it('should not apply aria-hidden to elements that have aria-live attributes', async () => {
+    const subject = await mount(
+      <div data-test-main role="main" aria-label="test app">
+        <div data-test-live aria-live="assertive"></div>
+        <div data-test-regular></div>
+        <div data-test-content></div>
+      </div>
+    )
+    const main = within(subject.getDOMNode())
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
+    screenReaderFocusRegion.activate()
+
+    const liveRegion = (await main.find('[data-test-live]')).getDOMNode()
+    const regularRegion = (await main.find('[data-test-regular]')).getDOMNode()
+    expect(liveRegion.getAttribute('aria-hidden')).to.not.exist()
+    expect(regularRegion.getAttribute('aria-hidden')).to.exist()
+  })
 
   it('should hide the body element of any iframes present on the page', async () => {
     const subject = await mount(
