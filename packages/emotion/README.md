@@ -140,23 +140,20 @@ Migrate components from themeable-based to emotion-based styling
 
 ### Migration steps
 
-#### 1.
+#### 1. Refactor the `theme.js`.
 
-You need to create a `styles.js` file next to the `theme.js` and `styles.css`. You will use the content of the two and merge into one style generator file.
-You should write and export a `function` named `generateStyle`
+It will receive the theme and themeOverride objects, contains the variables mapped for the component, and the theme-specific styles.
 
 ```js
 /**
- * Generates the style object from the theme and provided additional information
+ * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (theme, themeOverride, props, state) => {
-  // the name of the theme
-  const themeName = theme.key
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  // the props of theme you want to use
+  const { colors, borders, typography, key: themeName } = theme
 
   // if any styling should depend on the theme itself,
   // this object should specify it
@@ -169,15 +166,49 @@ const generateStyle = (theme, themeOverride, props, state) => {
     }
   }
 
-  // maps the theme variables to component specific style variables,
-  // and overrides it with theme and user specified overrides
-  const componentTheme = {
-    primaryColor: theme?.colors?.textBrand,
-    infoColor: theme?.colors?.anotherColor,
-    background: theme?.colors?.backgroundLightest,
+  // maps the theme variables to component specific style variables
+  const componentVariables = {
+    color: colors?.textBrand,
+    background: colors?.backgroundLightest,
+    borderWidthSmall: borders?.widthSmall,
+    borderWidthMedium: borders?.widthMedium,
+    borderColor: colors?.borderMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightBold
+  }
+
+  // return with the final theme object of the component
+  // with the added overrides
+  return {
+    ...componentVariables,
     ...themeSpecificStyle[themeName],
     ...themeOverride
   }
+}
+```
+
+#### 2. Create `styles.js` file
+
+You need to create a `styles.js` file next to the `theme.js`. (Don't forget the copyright block!)\
+Write and export a `function` named `generateStyle`.\
+Import the `generateComponentTheme` from `theme.js` and use it in `generateStyle`, passing the theme and themeOverride parameters.\
+You need to use the content of the `styles.css` and convert it to css-in-js. Use the passed component props and state where needed.\
+[Emotion's Object Styles documentation](https://emotion.sh/docs/object-styles)
+
+```js
+import generateComponentTheme from './theme'
+
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride, props, state) => {
+  // get the theme variables object for the component
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
   // optional mappings can be provided based on - for example - props
   const colorStyles = {
@@ -207,9 +238,10 @@ const generateStyle = (theme, themeOverride, props, state) => {
 export default generateStyle
 ```
 
-#### 2.
+#### 3. Refactor the component to functional component.
 
-Refactor the component to functional component. Any style logic that may take place inside it, you should move to the above mentioned `styles.js`.
+Import the style generator (`generateStyle`) and generate the style object with `useStyle`.\
+Any style logic that may take place inside it, you should move to `styles.js`.
 
 ```js
 /** @jsx jsx */
@@ -238,6 +270,42 @@ const MyComponent = (props) => {
         </div>
     )
 }
+```
+
+#### 4. Delete css file
+
+Once you implemented the css in `styles.js`, delete the `styles.css` file.
+
+#### 5. Theme tests
+
+For components with theme tests, you can use the `generateComponentTheme` to get the theme variables.\
+Import the themes needed for your tests.
+
+```js
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
+
+describe('YourComponent.theme', () => {
+  describe('with canvas theme', () => {
+    const variables = generateComponentTheme(canvas)
+
+    describe('default', () => {
+      it('should ensure background color and text color meet 3:1 contrast', () => {
+        expect(contrast(variables.background, variables.color)).to.be.above(3)
+      })
+    })
+  })
+
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = generateComponentTheme(canvasHighContrast)
+
+    describe('default', () => {
+      it('should ensure background color and text color meet 4.5:1 contrast', () => {
+        expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+      })
+    })
+  })
+})
 ```
 
 [![npm][npm]][npm-url]

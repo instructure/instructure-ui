@@ -24,29 +24,26 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
-import { Avatar } from '../index'
-
-//TODO: come up with a solution for theme testing
-xdescribe('Avatar.theme', () => {
-  describe('with the default theme', () => {
-    const variables = Avatar.generateTheme()
+describe('Avatar.theme', () => {
+  describe('with canvas theme', () => {
+    const variables = generateComponentTheme(canvas)
 
     describe('default', () => {
       it('should ensure background color and text color meet 3:1 contrast', () => {
-        expect(contrast(variables.background, variables.color))
-          .to.be.above(3)
+        expect(contrast(variables.background, variables.color)).to.be.above(3)
       })
     })
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = Avatar.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('default', () => {
       it('should ensure background color and text color meet 4.5:1 contrast', () => {
-        expect(contrast(variables.background, variables.color))
-          .to.be.above(4.5)
+        expect(contrast(variables.background, variables.color)).to.be.above(4.5)
       })
     })
   })

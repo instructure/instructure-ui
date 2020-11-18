@@ -24,18 +24,29 @@
 
 import React, { useState } from 'react'
 import { Avatar } from '@instructure/ui-avatar'
+import { Pill } from '@instructure/ui-pill'
 import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
 
 const components = {
   Avatar: [
     <Avatar
-      key={'key'}
+      key={'avatar1'}
       themeOverride={{ color: 'blue' }}
       name="Sarah Robinson"
       margin="0 small 0 0"
     />,
-    <Avatar key={'key2'} name="Rarah Sobinson" margin="0 small 0 0" />
+    <Avatar key={'avatar2'} name="Rarah Sobinson" margin="0 small 0 0" />,
+    <Avatar key={'avatar3'} name="Rarah Sobinson" shape="rectangle" />,
+    <Avatar
+      key={'avatar4'}
+      name="Rarah Sobinson"
+      size="x-large"
+      src={
+        'https://thumbs.dreamstime.com/b/cute-smiling-teacher-tutor-avatar-internet-learning-line-distant-education-web-study-school-chat-webinar-discussion-forum-185531323.jpg'
+      }
+    />
   ],
+  Pill: [<Pill key={'pill1'}>Pill teszt 1</Pill>],
   Breadcrumb: [
     <Breadcrumb key={'breadcrumb1'} label={'Teszt'}>
       <BreadcrumbLink key="breadcrumbLink1" onClick={() => {}}>

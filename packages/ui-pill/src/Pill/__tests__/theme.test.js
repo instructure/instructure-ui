@@ -24,14 +24,17 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { Pill } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Pill.theme', () => {
   describe('with the canvas theme', () => {
-    const variables = Pill.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.primaryColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.primaryColor)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
@@ -39,47 +42,67 @@ describe('Pill.theme', () => {
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.dangerColor)).to.be.above(3)
+      expect(contrast(variables.background, variables.dangerColor)).to.be.above(
+        3
+      )
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.successColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.successColor)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.warningColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.warningColor)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.alertColor)).to.be.above(3)
+      expect(contrast(variables.background, variables.alertColor)).to.be.above(
+        3
+      )
     })
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = Pill.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.primaryColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.primaryColor)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.infoColor)).to.be.above(4.5)
+      expect(contrast(variables.background, variables.infoColor)).to.be.above(
+        4.5
+      )
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.dangerColor)).to.be.above(3)
+      expect(contrast(variables.background, variables.dangerColor)).to.be.above(
+        3
+      )
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.successColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.successColor)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.warningColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.warningColor)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.alertColor)).to.be.above(3)
+      expect(contrast(variables.background, variables.alertColor)).to.be.above(
+        3
+      )
     })
   })
 })

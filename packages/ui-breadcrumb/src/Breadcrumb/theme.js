@@ -22,70 +22,36 @@
  * SOFTWARE.
  */
 
-.root {
-  height: 2.5em;
-  border-style: solid;
-  border-color: var(--borderColor);
-  box-sizing: border-box;
-  background-color: var(--background);
-  background-position: center;
-  background-size: cover;
-  background-clip: content-box;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  line-height: 0;
-  text-align: center;
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+export default function generateComponentTheme(theme, themeOverride = {}) {
+  const { colors, typography, key: themeName } = theme
 
-  &.auto {
-    font-size: inherit;
-    border-width: var(--borderWidthSmall);
+  const themeSpecificStyle = {}
+
+  // maps the theme variables to component specific style variables,
+  // and overrides it with theme and user specified overrides
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    separatorColor: colors?.borderDark,
+
+    smallSeparatorFontSize: '0.5rem',
+    smallFontSize: typography?.fontSizeSmall,
+
+    mediumSeparatorFontSize: '0.75rem',
+    mediumFontSize: typography?.fontSizeMedium,
+
+    largeSeparatorFontSize: '1rem',
+    largeFontSize: typography?.fontSizeLarge
   }
 
-  &.x-small {
-    font-size: 0.75rem;
-    border-width: var(--borderWidthSmall);
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
-
-  &.small {
-    font-size: 1rem;
-    border-width: var(--borderWidthSmall);
-  }
-
-  &.medium {
-    font-size: 1.25rem;
-    border-width: var(--borderWidthMedium);
-  }
-
-  &.large {
-    font-size: 1.5rem;
-    border-width: var(--borderWidthMedium);
-  }
-
-  &.x-large {
-    font-size: 1.75rem;
-    border-width: var(--borderWidthMedium);
-  }
-}
-
-.initials {
-  color: var(--color);
-  line-height: 2.375em;
-  font-family: var(--fontFamily);
-  font-weight: var(--fontWeight);
-  letter-spacing: 0.0313em;
-}
-
-.loadImage {
-  display: none;
-}
-
-.circle {
-  width: 2.5em;
-  position: relative;
-  border-radius: 100%;
-  overflow: hidden;
-}
-
-.rectangle {
-  width: 3em;
 }

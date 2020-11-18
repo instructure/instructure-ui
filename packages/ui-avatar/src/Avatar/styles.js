@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import generateComponentTheme from './theme'
+
 /**
  * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -36,23 +38,7 @@ const generateStyle = (
   { size, variant, shape, src },
   { loaded }
 ) => {
-  const themeSpecificStyles = {
-    canvas: {
-      color: 'red'
-    }
-  }
-
-  const componentTheme = {
-    color: theme?.colors?.textBrand,
-    background: theme?.colors?.backgroundLightest,
-    borderWidthSmall: theme?.borders?.widthSmall,
-    borderWidthMedium: theme?.borders?.widthMedium,
-    borderColor: theme?.colors?.borderMedium,
-    fontFamily: theme?.typography?.fontFamily,
-    fontWeight: theme?.typography?.fontWeightBold,
-    ...themeSpecificStyles[theme.key],
-    ...themeOverride
-  }
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
   const sizeStyles = {
     auto: {

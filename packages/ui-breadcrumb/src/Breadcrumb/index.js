@@ -36,7 +36,6 @@ import { BreadcrumbLink } from './BreadcrumbLink'
 import { useStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import { omitProps } from '@instructure/ui-react-utils'
-import { Link } from '@instructure/ui-link'
 
 /**
 ---

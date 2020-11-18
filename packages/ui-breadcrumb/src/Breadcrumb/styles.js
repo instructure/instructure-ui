@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import generateComponentTheme from './theme'
+
 /**
  * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -30,32 +32,8 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  { colors, typography, key: themeName },
-  themeOverride,
-  { size },
-  state
-) => {
-  const themeSpecificStyle = {}
-
-  // maps the theme variables to component specific style variables,
-  // and overrides it with theme and user specified overrides
-  const componentTheme = {
-    fontFamily: typography?.fontFamily,
-    separatorColor: colors?.borderDark,
-
-    smallSeparatorFontSize: '0.5rem',
-    smallFontSize: typography?.fontSizeSmall,
-
-    mediumSeparatorFontSize: '0.75rem',
-    mediumFontSize: typography?.fontSizeMedium,
-
-    largeSeparatorFontSize: '1rem',
-    largeFontSize: typography?.fontSizeLarge,
-
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
-  }
+const generateStyle = (theme, themeOverride, { size }, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
   const crumbSizeVariants = {
     small: {
@@ -96,9 +74,9 @@ const generateStyle = (
     }
   }
 
-  // return with the css you'd like to apply to the component
   return {
     root: {
+      label: 'root',
       fontFamily: componentTheme.fontFamily,
       margin: '0',
       padding: '0',
@@ -108,6 +86,7 @@ const generateStyle = (
       alignItems: 'center'
     },
     crumb: {
+      label: 'crumb',
       boxSizing: 'border-box',
       position: 'relative',
       ...crumbSizeVariants[size],
@@ -117,6 +96,7 @@ const generateStyle = (
       }
     },
     separator: {
+      label: 'separator',
       boxSizing: 'border-box',
       position: 'absolute',
       top: '50%',

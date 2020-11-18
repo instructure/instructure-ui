@@ -22,46 +22,22 @@
  * SOFTWARE.
  */
 
-const generateStyle = (
-  { borders, colors, spacing, typography, key: themeName },
-  themeOverride,
-  { variant, color }
-) => {
-  //if any styling should depend on the theme itself, this object should specify it
-  const themeSpecificStyle = {
-    instructure: {
-      height: '1.5rem'
-    }
-  }
-  //maps the theme variables to component specific style variables, and overrides it with theme and user specified overrides
-  const componentTheme = {
-    fontFamily: typography?.fontFamily,
-    padding: `0 ${spacing?.xSmall}`,
-    height: '1.3125rem',
-    background: colors?.backgroundLightest,
-    textTransformStyle: 'uppercase',
-    textFontSize: typography?.fontSizeXSmall,
-    textFontWeight: typography?.fontWeightBold,
-    maxWidth: '15rem',
-    color: colors?.textDark,
-    primaryColor: colors?.textDark,
-    infoColor: colors?.textInfo,
-    dangerColor: colors?.textDanger,
-    successColor: colors?.textSuccess,
-    warningColor: colors?.textWarning,
-    alertColor: colors?.textAlert,
-    messageColor: colors?.textAlert,
-    borderWidth: borders?.widthSmall,
-    borderStyle: borders?.style,
-    borderRadius: '999rem',
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
-  }
+import generateComponentTheme from './theme'
+
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride, { variant, color }, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
   const transformVariant = variant === 'primary' ? 'oldPrimary' : variant
   const actualColor = transformVariant || color
 
-  //optional mappings can be provided based on - for example - props
   const colorStyles = {
     default: {
       color: componentTheme.color,
@@ -101,7 +77,6 @@ const generateStyle = (
     }
   }
 
-  //return with the css you'd like to apply to the component
   return {
     root: {
       label: 'root',
@@ -113,7 +88,9 @@ const generateStyle = (
       borderWidth: componentTheme.borderWidth,
       borderStyle: componentTheme.borderStyle,
       borderRadius: componentTheme.borderRadius,
-      lineHeight: componentTheme.height - componentTheme.borderWidth * 2,
+
+      /* line-height does not account for top/bottom border width */
+      lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,
       ...colorStyles[actualColor]
     },
     text: {
