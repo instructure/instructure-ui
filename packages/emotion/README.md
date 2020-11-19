@@ -151,7 +151,7 @@ It will receive the theme and themeOverride objects, contains the variables mapp
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
+export default function generateComponentTheme(theme, themeOverride = {}) {
   // the props of theme you want to use
   const { colors, borders, typography, key: themeName } = theme
 
