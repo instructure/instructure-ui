@@ -6,20 +6,12 @@ order: 2
 
 ## Contributing
 
-### Prerequisites and Installation
-
->You'll need to have [Git](http://git-scm.com/) installed on your system.
->
->We use [Lerna](https://lernajs.io/) to manage inter-package dependencies in this monorepo.
->
->__Prerequisites__: Node.js v8+, Yarn v1.1.0+
-
 __Installation steps:__
 
 1. Install [Git](http://git-scm.com/).
-1. Install [Node](https://nodejs.org/en/)) and [nvm](https://github.com/creationix/nvm).
-1. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/).
-1. Clone this repository: `git clone gerrit:instructure-ui`.
+1. Install [Node 10.x](https://nodejs.org/en/)) (we recommend [nvm](https://github.com/creationix/nvm) to manage multiple Node versions).
+1. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/) (You will need v1.1.0+).
+1. Clone this repository: `git clone https://github.com/instructure/instructure-ui.git`.
 1. Run `cd instructure-ui`
 1. Run `yarn`
 1. Run `yarn bootstrap`
