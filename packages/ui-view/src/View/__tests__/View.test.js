@@ -27,8 +27,6 @@ import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { View } from '../../index'
 
-import styles from '../styles.css'
-
 describe('<View />', async () => {
   it('should render', async () => {
     const subject = await mount(
@@ -55,10 +53,10 @@ describe('<View />', async () => {
 
   it('should pass whitelisted style attributes', async () => {
     const styleProps = {
-      top: '10rem',
+      top: '160px',
       left: '5px',
       minWidth: '20px',
-      minHeight: '13rem',
+      minHeight: '208px',
       position: 'absolute',
       transform: 'translate(30px, 15px)',
       overflow: 'hidden',
@@ -72,14 +70,14 @@ describe('<View />', async () => {
       </View>
     )
 
-    const styles = subject.getDOMNode().style
+    const styles = getComputedStyle(subject.getDOMNode())
 
-    expect(styles['top']).to.equal('10rem')
+    expect(styles['top']).to.equal('160px')
     expect(styles['left']).to.equal('5px')
     expect(styles['minWidth']).to.equal('20px')
-    expect(styles['minHeight']).to.equal('13rem')
+    expect(styles['minHeight']).to.equal('208px')
     expect(styles['position']).to.equal('absolute')
-    expect(styles['transform']).to.equal('translate(30px, 15px)')
+    expect(styles['transform']).to.equal('matrix(1, 0, 0, 1, 30, 15)')
     expect(styles['overflow']).to.equal('hidden')
     expect(styles['display']).to.equal('block')
     expect(styles['pointerEvents']).to.equal('none')
@@ -87,13 +85,15 @@ describe('<View />', async () => {
 
   it('should pass flex style', async () => {
     const subject = await mount(
-      <View style={{ flexBasis: '30rem' }}>
+      <View style={{ flexBasis: '200px' }}>
         <h1>Hello!</h1>
       </View>
     )
 
-    const styles = subject.getDOMNode().style
-    expect(styles['flexBasis']).to.equal('30rem')
+    // debugger
+    const styles = getComputedStyle(subject.getDOMNode())
+
+    expect(styles['flexBasis']).to.equal('200px')
   })
 
   it('should not pass all styles', async () => {
@@ -109,11 +109,11 @@ describe('<View />', async () => {
       </View>
     )
 
-    const styles = subject.getDOMNode().style
+    const styles = getComputedStyle(subject.getDOMNode())
 
-    expect(styles['backgroundColor']).to.equal('')
-    expect(styles['borderStyle']).to.equal('')
-    expect(styles['opacity']).to.equal('')
+    expect(styles['backgroundColor']).to.equal('rgba(0, 0, 0, 0)')
+    expect(styles['borderStyle']).to.equal('none')
+    expect(styles['opacity']).to.equal('1')
   })
 
   it('should pass className', async () => {
@@ -146,7 +146,7 @@ describe('<View />', async () => {
       </View>
     )
 
-    const styles = subject.getDOMNode().style
+    const styles = getComputedStyle(subject.getDOMNode())
     expect(styles['cursor']).to.equal(cursor)
   })
 
@@ -209,7 +209,7 @@ describe('<View />', async () => {
     )
 
     const view = within(subject.getDOMNode())
-    expect(view.getComputedStyle().maxWidth).to.equal('100%')
+    expect(view.getComputedStyle().maxWidth).to.equal('none')
 
     await subject.setProps({ maxWidth: '200px' })
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
@@ -240,58 +240,6 @@ describe('<View />', async () => {
       )
 
       expect(consoleError).to.be.calledWith(warning)
-    })
-
-    it('should apply the correct focus ring depending on the border radius', async () => {
-      const subject = await mount(
-        <View withFocusOutline position="relative" display="block">
-          Hello
-        </View>
-      )
-
-      const view = within(subject.getDOMNode())
-
-      const baseRadiusStyle = 'focusRing--radius'
-
-      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
-
-      await subject.setProps({ borderRadius: '0' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
-
-      await subject.setProps({ borderRadius: 'none' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
-
-      await subject.setProps({ borderRadius: 'circle' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}Inherit`])
-
-      await subject.setProps({ borderRadius: 'pill' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}Inherit`])
-
-      await subject.setProps({ borderRadius: 'small' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
-
-      await subject.setProps({ borderRadius: 'medium' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}Medium`])
-
-      await subject.setProps({ borderRadius: 'large' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}Large`])
-
-      await subject.setProps({ borderRadius: 'small small small' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
-
-      await subject.setProps({ borderRadius: 'small small small medium' })
-      expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
-    })
-
-    it('should use the native browser focus management when withFocusOutline is undefined', async () => {
-      const subject = await mount(
-        <View as="button" position="relative">
-          Hello
-        </View>
-      )
-
-      const view = within(subject.getDOMNode())
-      expect(view).to.have.className(styles.shouldUseBrowserFocus)
     })
   })
 

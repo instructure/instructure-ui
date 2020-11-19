@@ -108,4 +108,4 @@ const withBidirectional = (ComposedComponent) => {
 }
 
 export default bidirectional
-export { bidirectional, useBidirectional, withBidirectional }
+export { bidirectional, useBidirectional, withBidirectional, DIRECTION }
