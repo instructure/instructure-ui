@@ -22,71 +22,22 @@
  * SOFTWARE.
  */
 
-.root {
-  font-family: var(--fontFamily);
-  box-sizing: border-box;
-}
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+export default function generateComponentTheme(theme, themeOverride = {}) {
+  const { key: themeName } = theme
 
-.column {
-  flex-direction: column;
-}
+  const themeSpecificStyle = {}
 
-.column-reverse {
-  flex-direction: column-reverse;
-}
+  const componentVariables = {}
 
-.row {
-  flex-direction: row;
-}
-
-.row-reverse {
-  flex-direction: row-reverse;
-}
-
-.wrap--wrap {
-  flex-wrap: wrap;
-}
-
-.wrap--wrap-reverse {
-  flex-wrap: wrap-reverse;
-}
-
-.wrapItems {
-  flex-wrap: wrap;
-}
-
-.justifyItems--start {
-  justify-content: flex-start;
-}
-
-.justifyItems--end {
-  justify-content: flex-end;
-}
-
-.justifyItems--center {
-  justify-content: center;
-}
-
-.justifyItems--space-around {
-  justify-content: space-around;
-}
-
-.justifyItems--space-between {
-  justify-content: space-between;
-}
-
-.alignItems--center {
-  align-items: center;
-}
-
-.alignItems--start {
-  align-items: flex-start;
-}
-
-.alignItems--end {
-  align-items: flex-end;
-}
-
-.alignItems--stretch {
-  align-items: stretch;
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
+  }
 }

@@ -62,7 +62,6 @@ example: true
 />
 ```
 
-
 ### Accept
 
 The `accept` prop dictates what type of files are allowed. It can be an array or comma-separated string of
@@ -174,19 +173,19 @@ example: true
     height="100%"
     renderLabel={
       <Flex direction="column" height="100%" alignItems="center" justifyItems="center">
-        <Flex.Item padding="small">
+        <FlexItem padding="small">
           <IconPdfLine size="large" />
-        </Flex.Item>
-        <Flex.Item padding="small">
+        </FlexItem>
+        <FlexItem padding="small">
           <Text size="large">
             Drag and Drop or Click to Browser your Computer
           </Text>
-        </Flex.Item>
-        <Flex.Item padding="small">
+        </FlexItem>
+        <FlexItem padding="small">
           <Text color="secondary" size="small">
             Accepted File Type is PDF
           </Text>
-        </Flex.Item>
+        </FlexItem>
       </Flex>
     }
   />

@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Button, IconButton } from '@instructure/ui-buttons'
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Img } from '@instructure/ui-img'
 import { Link } from '@instructure/ui-link'
 import { List } from '@instructure/ui-list'
@@ -206,24 +206,24 @@ class Hero extends Component {
         >
           <List.Item>
             <Flex>
-              <Flex.Item padding="none small none none">{checkmark}</Flex.Item>
-              <Flex.Item>
+              <FlexItem padding="none small none none">{checkmark}</FlexItem>
+              <FlexItem>
                 Leading screen readers: VoiceOver, NVDA, and JAWS (Firefox only)
-              </Flex.Item>
+              </FlexItem>
             </Flex>
           </List.Item>
           <List.Item>
             <Flex>
-              <Flex.Item padding="none small none none">{checkmark}</Flex.Item>
-              <Flex.Item shouldGrow shouldShrink>
+              <FlexItem padding="none small none none">{checkmark}</FlexItem>
+              <FlexItem shouldGrow shouldShrink>
                 Keyboard only navigation
-              </Flex.Item>
+              </FlexItem>
             </Flex>
           </List.Item>
           <List.Item>
             <Flex>
-              <Flex.Item padding="none small none none">{checkmark}</Flex.Item>
-              <Flex.Item>Right-to-left (RTL) languages</Flex.Item>
+              <FlexItem padding="none small none none">{checkmark}</FlexItem>
+              <FlexItem>Right-to-left (RTL) languages</FlexItem>
             </Flex>
           </List.Item>
         </List>
@@ -278,14 +278,14 @@ class Hero extends Component {
       <View as="aside">
         <View as="div" background="secondary" padding="large">
           <Flex>
-            <Flex.Item>
+            <FlexItem>
               <IconAnnouncementLine inline={false} size="small" />
-            </Flex.Item>
-            <Flex.Item padding="none none none small">
+            </FlexItem>
+            <FlexItem padding="none none none small">
               <Heading as="h3" level="h3">
                 What&apos;s New?
               </Heading>
-            </Flex.Item>
+            </FlexItem>
           </Flex>
           <View as="p" margin="medium none small">
             <Text weight="bold">
@@ -366,16 +366,16 @@ class Hero extends Component {
                 padding={bigScreen ? 'small' : 'small x-small'}
                 justifyItems="space-between"
               >
-                <Flex.Item size="4rem"></Flex.Item>
-                <Flex.Item
+                <FlexItem size="4rem"></FlexItem>
+                <FlexItem
                   shouldShrink={!bigScreen}
                   shouldGrow={!bigScreen}
                   size={bigScreen ? '36%' : null}
                   padding={bigScreen ? 'none' : 'none x-small none none'}
                 >
                   <Search options={this.props.docs} />
-                </Flex.Item>
-                <Flex.Item>
+                </FlexItem>
+                <FlexItem>
                   <IconButton
                     href="https://github.com/instructure/instructure-ui"
                     renderIcon={<IconGithubSolid />}
@@ -392,7 +392,7 @@ class Hero extends Component {
                     withBorder={false}
                     size={bigScreen ? 'large' : 'medium'}
                   />
-                </Flex.Item>
+                </FlexItem>
               </Flex>
             </View>
             <View display="block" className={styles.content}>
@@ -408,12 +408,12 @@ class Hero extends Component {
                   padding={bigScreen ? 'none x-large none none' : 'none'}
                 >
                   <Flex margin="0 0 large">
-                    <Flex.Item padding="0 x-small 0 0">
+                    <FlexItem padding="0 x-small 0 0">
                       <Heading as="h1" level="h3" color="primary-inverse">
                         Instructure UI
                       </Heading>
-                    </Flex.Item>
-                    <Flex.Item>
+                    </FlexItem>
+                    <FlexItem>
                       <Button
                         size="small"
                         withBackground={false}
@@ -422,7 +422,7 @@ class Hero extends Component {
                       >
                         {version}
                       </Button>
-                    </Flex.Item>
+                    </FlexItem>
                   </Flex>
 
                   <Heading
@@ -495,14 +495,14 @@ class Hero extends Component {
         >
           {bigScreen ? (
             <Flex alignItems="start" padding="medium none none">
-              <Flex.Item
+              <FlexItem
                 shouldGrow
                 shouldShrink
                 padding="none xx-large none none"
               >
                 {heroBodyContent}
-              </Flex.Item>
-              <Flex.Item size="32%">{sidebarContent}</Flex.Item>
+              </FlexItem>
+              <FlexItem size="32%">{sidebarContent}</FlexItem>
             </Flex>
           ) : (
             <div>

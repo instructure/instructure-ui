@@ -22,24 +22,50 @@
  * SOFTWARE.
  */
 
+import generateComponentTheme from './theme'
+
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-export default function generateComponentTheme(theme, themeOverride = {}) {
-  const { typography, key: themeName } = theme
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  const themeSpecificStyle = {}
+  const { grow, shouldGrow, shrink, shouldShrink, align, size } = props
 
-  const componentVariables = {
-    fontFamily: typography?.fontFamily
+  const root = {
+    label: 'root',
+    boxSizing: 'border-box',
+    minWidth: '0.0625rem',
+    flexBasis: size,
+    // initial value is 1, but we want 0 as our default,
+    // so users can opt in to shrink like they do grow
+    flexShrink: 0
   }
 
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+  if (grow || shouldGrow) {
+    root['flexGrow'] = 1
   }
+
+  if (shrink || shouldShrink) {
+    root['flexShrink'] = 1
+  }
+
+  const alignSelfValues = {
+    start: 'flex-start',
+    end: 'flex-end',
+    center: 'center',
+    stretch: 'stretch'
+  }
+  if (align) {
+    root['alignSelf'] = alignSelfValues[align]
+  }
+
+  return { root }
 }
+
+export default generateStyle

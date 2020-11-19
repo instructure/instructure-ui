@@ -39,7 +39,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -279,21 +279,21 @@ class BaseButton extends Component {
     )
 
     const flexChildren = hasOnlyIconVisible ? (
-      <Flex.Item>
+      <FlexItem>
         {wrappedIcon}
         {children}
-      </Flex.Item>
+      </FlexItem>
     ) : (
       [
-        <Flex.Item
+        <FlexItem
           key="icon"
           padding={`0 ${isCondensed ? 'xx-small' : 'x-small'} 0 0`}
         >
           {wrappedIcon}
-        </Flex.Item>,
-        <Flex.Item key="children" shouldShrink>
+        </FlexItem>,
+        <FlexItem key="children" shouldShrink>
           {wrappedChildren}
-        </Flex.Item>
+        </FlexItem>
       ]
     )
 

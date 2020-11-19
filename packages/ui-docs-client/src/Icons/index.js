@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Link } from '@instructure/ui-link'
 import { TextInput } from '@instructure/ui-text-input'
 import { SimpleSelect } from '@instructure/ui-simple-select'
@@ -279,10 +279,10 @@ class MyIcon extends React.Component {
           >
             <Modal.Header>
               <Flex justifyItems="space-between">
-                <Flex.Item>
+                <FlexItem>
                   <Heading>{`${glyph.glyphName} (${variant})`}</Heading>
-                </Flex.Item>
-                <Flex.Item>
+                </FlexItem>
+                <FlexItem>
                   <IconButton
                     onClick={this.handleModalDismiss}
                     screenReaderLabel="Close"
@@ -290,7 +290,7 @@ class MyIcon extends React.Component {
                     withBorder={false}
                     withBackground={false}
                   />
-                </Flex.Item>
+                </FlexItem>
               </Flex>
             </Modal.Header>
             <Modal.Body>{this.renderUsage(name, variant, glyph)}</Modal.Body>

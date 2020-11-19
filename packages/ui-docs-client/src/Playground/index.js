@@ -33,7 +33,7 @@ import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { Checkbox } from '@instructure/ui-checkbox'
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconXLine } from '@instructure/ui-icons'
 
@@ -229,9 +229,9 @@ class Playground extends Component {
         {this.state.showCode && this.renderEditor()}
 
         <Flex alignItems="center" padding="xx-small 0 0">
-          <Flex.Item shouldShrink shouldGrow>
+          <FlexItem shouldShrink shouldGrow>
             <Flex>
-              <Flex.Item>
+              <FlexItem>
                 <Tooltip renderTip="Fullscreen" placement="bottom">
                   <IconButton
                     onClick={this.handleMaximize}
@@ -249,8 +249,8 @@ class Playground extends Component {
                     }
                   />
                 </Tooltip>
-              </Flex.Item>
-              <Flex.Item>
+              </FlexItem>
+              <FlexItem>
                 <Tooltip
                   renderTip={this.state.showCode ? 'Hide Code' : 'Show Code'}
                   placement="bottom"
@@ -269,9 +269,9 @@ class Playground extends Component {
                     }
                   />
                 </Tooltip>
-              </Flex.Item>
+              </FlexItem>
               {this.context.library.codepen && (
-                <Flex.Item>
+                <FlexItem>
                   <CodePenButton
                     code={code}
                     title={`${this.props.title} Example`}
@@ -279,12 +279,12 @@ class Playground extends Component {
                     render={this.props.render}
                     options={this.context.library.codepen}
                   />
-                </Flex.Item>
+                </FlexItem>
               )}
             </Flex>
-          </Flex.Item>
+          </FlexItem>
 
-          <Flex.Item>{this.renderBidirectionToggle()}</Flex.Item>
+          <FlexItem>{this.renderBidirectionToggle()}</FlexItem>
         </Flex>
       </div>
     )

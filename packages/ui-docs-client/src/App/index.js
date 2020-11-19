@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { themeable, ApplyTheme } from '@instructure/ui-themeable'
 import { Alert } from '@instructure/ui-alerts'
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -264,7 +264,7 @@ class App extends Component {
         margin={smallScreen ? 'none none medium' : 'none none x-small'}
         justifyItems={!smallScreen ? 'end' : 'start'}
       >
-        <Flex.Item shouldGrow={smallScreen} shouldShrink={smallScreen}>
+        <FlexItem shouldGrow={smallScreen} shouldShrink={smallScreen}>
           <Select
             name="theme"
             renderLabel="Theme"
@@ -279,7 +279,7 @@ class App extends Component {
               )
             })}
           </Select>
-        </Flex.Item>
+        </FlexItem>
       </Flex>
     ) : null
   }

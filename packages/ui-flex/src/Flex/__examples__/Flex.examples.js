@@ -22,41 +22,41 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { Flex } from '../index'
+import { Flex, FlexItem } from '../index'
 
 const regular = [
-  <Flex.Item key="0">One</Flex.Item>,
-  <Flex.Item key="1">Two</Flex.Item>,
-  <Flex.Item key="2">Three</Flex.Item>,
-  <Flex.Item key="3">Four</Flex.Item>
+  <FlexItem key="0">One</FlexItem>,
+  <FlexItem key="1">Two</FlexItem>,
+  <FlexItem key="2">Three</FlexItem>,
+  <FlexItem key="3">Four</FlexItem>
 ]
 
 const shrink = [
-  <Flex.Item key="0" padding="x-small" shouldShrink>
+  <FlexItem key="0" padding="x-small" shouldShrink>
     Villum dolore eu fugiat nulla pariatur.
-  </Flex.Item>,
-  <Flex.Item key="1" padding="x-small" shouldShrink>
+  </FlexItem>,
+  <FlexItem key="1" padding="x-small" shouldShrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  </Flex.Item>,
-  <Flex.Item key="2" padding="x-small" shouldShrink>
+  </FlexItem>,
+  <FlexItem key="2" padding="x-small" shouldShrink>
     Duis aute irure.
-  </Flex.Item>,
-  <Flex.Item key="3" padding="x-small" shouldShrink>
+  </FlexItem>,
+  <FlexItem key="3" padding="x-small" shouldShrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua.
-  </Flex.Item>
+  </FlexItem>
 ]
 
 const grow = [
-  <Flex.Item key="0" padding="x-small" size="200px">
+  <FlexItem key="0" padding="x-small" size="200px">
     I am always 200px.
-  </Flex.Item>,
-  <Flex.Item key="1" padding="x-small" shouldShrink shouldGrow size="200px">
+  </FlexItem>,
+  <FlexItem key="1" padding="x-small" shouldShrink shouldGrow size="200px">
     I can grow, and shrink down to 200px.
-  </Flex.Item>,
-  <Flex.Item key="2" padding="x-small" size="25%">
+  </FlexItem>,
+  <FlexItem key="2" padding="x-small" size="25%">
     I am always 25%.
-  </Flex.Item>
+  </FlexItem>
 ]
 
 export default {

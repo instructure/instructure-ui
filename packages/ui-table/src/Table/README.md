@@ -33,7 +33,7 @@ class Example extends React.Component {
 
     return (
       <Flex alignItems="start">
-        <Flex.Item margin="small">
+        <FlexItem margin="small">
           <RadioInputGroup
             name="layout"
             description="layout"
@@ -44,14 +44,14 @@ class Example extends React.Component {
             <RadioInput label="fixed" value="fixed" />
             <RadioInput label="stacked" value="stacked" />
           </RadioInputGroup>
-        </Flex.Item>
-        <Flex.Item margin="small">
+        </FlexItem>
+        <FlexItem margin="small">
           <Checkbox
             label="hover"
             checked={hover}
             onChange={(e, value) => this.handleChange('hover', !hover)}
           />
-        </Flex.Item>
+        </FlexItem>
       </Flex>
     )
   }

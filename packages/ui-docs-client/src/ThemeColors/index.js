@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { MetricGroup, Metric } from '@instructure/ui-metric'
 import { Text } from '@instructure/ui-text'
 import { ContextView, View } from '@instructure/ui-view'
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Responsive } from '@instructure/ui-responsive'
 import { contrast } from '@instructure/ui-color-utils'
 import { SimpleSelect } from '@instructure/ui-simple-select'
@@ -87,9 +87,9 @@ class ThemeColors extends Component {
               </Heading>
               <Flex wrap="wrap">
                 {React.Children.map(cards, (child) => (
-                  <Flex.Item size={props.colWidth} padding="small xx-small">
+                  <FlexItem size={props.colWidth} padding="small xx-small">
                     {child}
-                  </Flex.Item>
+                  </FlexItem>
                 ))}
               </Flex>
             </View>
@@ -166,7 +166,7 @@ class ThemeColors extends Component {
           alignItems="center"
           wrap="wrap"
         >
-          <Flex.Item padding="small">
+          <FlexItem padding="small">
             <SimpleSelect
               name="color-1"
               defaultValue={this.state.backgroundColor}
@@ -180,8 +180,8 @@ class ThemeColors extends Component {
             >
               {React.Children.map(options, (option) => option)}
             </SimpleSelect>
-          </Flex.Item>
-          <Flex.Item padding="small">
+          </FlexItem>
+          <FlexItem padding="small">
             <SimpleSelect
               name="color-2"
               defaultValue={this.state.foregroundColor}
@@ -195,9 +195,9 @@ class ThemeColors extends Component {
             >
               {React.Children.map(options, (option) => option)}
             </SimpleSelect>
-          </Flex.Item>
+          </FlexItem>
           {this.state.contrastRatio && (
-            <Flex.Item padding="small">
+            <FlexItem padding="small">
               <ContextView padding="small" placement="center start">
                 <MetricGroup>
                   <Metric
@@ -214,7 +214,7 @@ class ThemeColors extends Component {
                   />
                 </MetricGroup>
               </ContextView>
-            </Flex.Item>
+            </FlexItem>
           )}
         </Flex>
       </View>
