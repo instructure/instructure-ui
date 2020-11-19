@@ -21,20 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-
-import {
-  themeable,
-  getShorthandPropValue,
-  ThemeablePropTypes,
-  mirrorShorthandEdges,
-  mirrorShorthandCorners
-} from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { useBidirectional } from '@instructure/ui-i18n'
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { error } from '@instructure/console/macro'
 import {
@@ -45,566 +37,342 @@ import {
   deprecated
 } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
-import { themeAdapter } from './themeAdapter'
+import { useStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 
-/**
----
-category: components
----
-@module View
-**/
-@deprecated('8.0.0', {
-  focused: 'withFocusOutline',
-  visualDebug: 'withVisualDebug'
-})
-@bidirectional()
-@themeable(theme, styles, themeAdapter)
-class View extends Component {
-  static propTypes = {
-    /**
-     * The element to render as the component root, `span` by default
-     */
-    as: PropTypes.elementType,
+const propTypes = {
+  /**
+   * The element to render as the component root, `span` by default
+   */
+  as: PropTypes.elementType,
 
-    /**
-     * provides a reference to the underlying html element
-     */
-    elementRef: PropTypes.func,
+  /**
+   * provides a reference to the underlying html element
+   */
+  elementRef: PropTypes.func,
 
-    /**
-     * By default the display prop is 'auto', meaning it takes on the
-     * display rules of the html element it's rendered as (see `as` prop).
-     */
-    display: PropTypes.oneOf([
-      'auto',
-      'inline',
-      'block',
-      'inline-block',
-      'flex',
-      'inline-flex'
+  /**
+   * By default the display prop is 'auto', meaning it takes on the
+   * display rules of the html element it's rendered as (see `as` prop).
+   */
+  display: PropTypes.oneOf([
+    'auto',
+    'inline',
+    'block',
+    'inline-block',
+    'flex',
+    'inline-flex'
+  ]),
+
+  overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+  overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+   */
+  padding: ThemeablePropTypes.spacing,
+
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * The children to render inside the `<View />`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Designates the text alignment within the `<View />`
+   */
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Accepts the familiar CSS shorthand to designate border widths corresponding
+   * to edges
+   */
+  borderWidth: ThemeablePropTypes.borderWidth,
+
+  /**
+   * Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be
+   * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
+   */
+  borderRadius: ThemeablePropTypes.borderRadius,
+
+  /**
+   * Sets the color of the View border
+   */
+  borderColor: deprecated.deprecatePropValues(
+    PropTypes.oneOf([
+      'transparent',
+      'primary',
+      'secondary',
+      'brand',
+      'info',
+      'success',
+      'warning',
+      'alert',
+      'danger',
+      'default',
+      'inverse'
     ]),
+    ['default', 'inverse'],
+    ({ propName, propValue }) =>
+      `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
+        if (propValue === 'default') return `'primary'`
+        if (propValue === 'inverse') return `'transparent'`
+      })()}. Use that value instead.`
+  ),
 
-    overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-    overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
-
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-     */
-    padding: ThemeablePropTypes.spacing,
-
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * The children to render inside the `<View />`
-     */
-    children: PropTypes.node,
-
-    /**
-     * Designates the text alignment within the `<View />`
-     */
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-
-    /**
-     * Accepts the familiar CSS shorthand to designate border widths corresponding
-     * to edges
-     */
-    borderWidth: ThemeablePropTypes.borderWidth,
-
-    /**
-     * Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be
-     * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
-     */
-    borderRadius: ThemeablePropTypes.borderRadius,
-
-    /**
-     * Sets the color of the View border
-     */
-    borderColor: deprecated.deprecatePropValues(
-      PropTypes.oneOf([
-        'transparent',
-        'primary',
-        'secondary',
-        'brand',
-        'info',
-        'success',
-        'warning',
-        'alert',
-        'danger',
-        'default',
-        'inverse'
-      ]),
-      ['default', 'inverse'],
-      ({ propName, propValue }) =>
-        `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
-          if (propValue === 'default') return `'primary'`
-          if (propValue === 'inverse') return `'transparent'`
-        })()}. Use that value instead.`
-    ),
-
-    /**
-     * Designates the background style of the `<View />`
-     */
-    background: deprecated.deprecatePropValues(
-      PropTypes.oneOf([
-        'transparent',
-        'primary',
-        'secondary',
-        'primary-inverse',
-        'brand',
-        'info',
-        'alert',
-        'success',
-        'danger',
-        'warning',
-        'default',
-        'light',
-        'inverse'
-      ]),
-      ['default', 'inverse', 'light'],
-      ({ propName, propValue }) =>
-        `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
-          if (propValue === 'default') return `'primary'`
-          if (propValue === 'light') return `'secondary'`
-          if (propValue === 'inverse') return `'primary-inverse'`
-        })()}. Use that value instead.`
-    ),
-
-    /**
-     * Controls the shadow depth for the `<View />`
-     */
-    shadow: ThemeablePropTypes.shadow,
-
-    /**
-     * Controls the z-index depth for the `<View />`
-     */
-    stacking: ThemeablePropTypes.stacking,
-
-    /**
-     * Specify a mouse cursor to use when hovering over the `<View />`
-     */
-    cursor: cursorPropTypes,
-
-    /**
-     * Specify a value for the CSS position property. Use `relative` if `focusable` will be true.
-     */
-    position: PropTypes.oneOf([
-      'static',
-      'absolute',
-      'relative',
-      'sticky',
-      'fixed'
+  /**
+   * Designates the background style of the `<View />`
+   */
+  background: deprecated.deprecatePropValues(
+    PropTypes.oneOf([
+      'transparent',
+      'primary',
+      'secondary',
+      'primary-inverse',
+      'brand',
+      'info',
+      'alert',
+      'success',
+      'danger',
+      'warning',
+      'default',
+      'light',
+      'inverse'
     ]),
+    ['default', 'inverse', 'light'],
+    ({ propName, propValue }) =>
+      `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
+        if (propValue === 'default') return `'primary'`
+        if (propValue === 'light') return `'secondary'`
+        if (propValue === 'inverse') return `'primary-inverse'`
+      })()}. Use that value instead.`
+  ),
 
-    /**
-     * The `left` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`.
-     */
-    insetInlineStart: PropTypes.string,
-    /**
-     * The `right` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`.
-     */
-    insetInlineEnd: PropTypes.string,
-    /**
-     * The `top` CSS property. Will not do anything if `position === "static"`.
-     */
-    insetBlockStart: PropTypes.string,
-    /**
-     * The `bottom` CSS property. Will not do anything if `position === "static"`.
-     */
-    insetBlockEnd: PropTypes.string,
+  /**
+   * Controls the shadow depth for the `<View />`
+   */
+  shadow: ThemeablePropTypes.shadow,
 
-    /**
-     * Manually control if the `View` should display a focus outline. When left undefined (which is the default)
-     * the focus outline will display automatically if the `View` is focusable and receives focus. Note: the focus
-     * outline only will display when the `position` prop is set to `relative`.
-     */
-    withFocusOutline: PropTypes.bool,
+  /**
+   * Controls the z-index depth for the `<View />`
+   */
+  stacking: ThemeablePropTypes.stacking,
 
-    /**
-     * Determines whether the focus outline displays offset or inset from the focused View
-     */
-    focusPosition: PropTypes.oneOf(['offset', 'inset']),
+  /**
+   * Specify a mouse cursor to use when hovering over the `<View />`
+   */
+  cursor: cursorPropTypes,
 
-    /**
-     * Determines the color of the focus outline
-     */
-    focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
+  /**
+   * Specify a value for the CSS position property. Use `relative` if `focusable` will be true.
+   */
+  position: PropTypes.oneOf([
+    'static',
+    'absolute',
+    'relative',
+    'sticky',
+    'fixed'
+  ]),
 
-    /**
-     * Determines if the focus ring should animate when it appears
-     */
-    shouldAnimateFocus: PropTypes.bool,
+  /**
+   * The `left` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`.
+   */
+  insetInlineStart: PropTypes.string,
+  /**
+   * The `right` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`.
+   */
+  insetInlineEnd: PropTypes.string,
+  /**
+   * The `top` CSS property. Will not do anything if `position === "static"`.
+   */
+  insetBlockStart: PropTypes.string,
+  /**
+   * The `bottom` CSS property. Will not do anything if `position === "static"`.
+   */
+  insetBlockEnd: PropTypes.string,
 
-    /**
-     * Activate a dotted outline around the component to make building your
-     * layout easier
-     */
-    withVisualDebug: PropTypes.bool,
-    /* eslint-disable react/require-default-props */
+  /**
+   * Manually control if the `View` should display a focus outline. When left undefined (which is the default)
+   * the focus outline will display automatically if the `View` is focusable and receives focus. Note: the focus
+   * outline only will display when the `position` prop is set to `relative`.
+   */
+  withFocusOutline: PropTypes.bool,
 
-    /**
-     * __Deprecated - use 'withFocusOutline'__
-     */
-    focused: PropTypes.bool,
-    /**
-     * __Deprecated - use 'withVisualDebug'__
-     */
-    visualDebug: PropTypes.bool
+  /**
+   * Determines whether the focus outline displays offset or inset from the focused View
+   */
+  focusPosition: PropTypes.oneOf(['offset', 'inset']),
 
-    /* eslint-enable react/require-default-props */
+  /**
+   * Determines the color of the focus outline
+   */
+  focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
+
+  /**
+   * Determines if the focus ring should animate when it appears
+   */
+  shouldAnimateFocus: PropTypes.bool,
+
+  /**
+   * Activate a dotted outline around the component to make building your
+   * layout easier
+   */
+  withVisualDebug: PropTypes.bool
+  /* eslint-disable react/require-default-props */
+}
+
+const defaultProps = {
+  display: 'auto',
+  // Note:
+  // - `as` will default to type span via getElementType, so for consistency and
+  // compatibility with Container we are leaving it undefined here. Otherwise
+  // it modifies behavior for consuming components because of the logic around
+  // default props in getElementType
+  as: undefined,
+  // - `textAlign` is undefined by default so that View can inherit text alignment
+  // from parents
+  textAlign: undefined,
+  // - Any props used to set inline styles should be undefined so that they
+  // don't break consuming components' CSS
+  overflowX: 'visible',
+  overflowY: 'visible',
+  shadow: undefined,
+  stacking: undefined,
+  withVisualDebug: false,
+  cursor: undefined,
+  borderWidth: undefined,
+  borderRadius: undefined,
+  borderColor: 'primary',
+  margin: undefined,
+  padding: undefined,
+  elementRef: undefined,
+  background: undefined,
+  children: null,
+  width: undefined,
+  height: undefined,
+  maxWidth: undefined,
+  maxHeight: undefined,
+  minWidth: undefined,
+  minHeight: undefined,
+  position: 'static',
+  withFocusOutline: undefined,
+  focusPosition: 'offset',
+  focusColor: 'info',
+  insetInlineStart: undefined,
+  insetInlineEnd: undefined,
+  insetBlockStart: undefined,
+  insetBlockEnd: undefined,
+  shouldAnimateFocus: true
+}
+
+const verifySpanMargin = (element, margin) => {
+  if (!element) {
+    return
+  }
+  const marginValues = margin ? margin.split(' ') : null
+  const display = getComputedStyle(element).display
+
+  let verticalMargin = false
+
+  // either top or bottom margin are set
+  if (margin) {
+    if (
+      marginValues[0] &&
+      marginValues[0] !== 'none' &&
+      marginValues[0] !== '0'
+    ) {
+      verticalMargin = true
+    }
+    if (
+      marginValues[2] &&
+      marginValues[2] !== 'none' &&
+      marginValues[2] !== '0'
+    ) {
+      verticalMargin = true
+    }
   }
 
-  static defaultProps = {
-    display: 'auto',
-    // Note:
-    // - `as` will default to type span via getElementType, so for consistency and
-    // compatibility with Container we are leaving it undefined here. Otherwise
-    // it modifies behavior for consuming components because of the logic around
-    // default props in getElementType
-    as: undefined,
-    // - `textAlign` is undefined by default so that View can inherit text alignment
-    // from parents
-    textAlign: undefined,
-    // - Any props used to set inline styles should be undefined so that they
-    // don't break consuming components' CSS
-    overflowX: 'visible',
-    overflowY: 'visible',
-    shadow: undefined,
-    stacking: undefined,
-    withVisualDebug: false,
-    cursor: undefined,
-    borderWidth: undefined,
-    borderRadius: undefined,
-    borderColor: 'primary',
-    margin: undefined,
-    padding: undefined,
-    elementRef: undefined,
-    background: undefined,
-    children: null,
-    width: undefined,
-    height: undefined,
-    maxWidth: undefined,
-    maxHeight: undefined,
-    minWidth: undefined,
-    minHeight: undefined,
-    position: 'static',
-    withFocusOutline: undefined,
-    focusPosition: 'offset',
-    focusColor: 'info',
-    insetInlineStart: undefined,
-    insetInlineEnd: undefined,
-    insetBlockStart: undefined,
-    insetBlockEnd: undefined,
-    shouldAnimateFocus: true
+  return verticalMargin && display === 'inline'
+}
+
+const View = (props) => {
+  const _element = React.useRef()
+  const dir = useBidirectional(props)
+  const styles = useStyle('View', generateStyle, { ...props, dir })
+
+  const handleElementRef = (el) => {
+    if (typeof props.elementRef === 'function') {
+      props.elementRef(el)
+    }
+
+    _element.current = el
   }
 
-  componentDidMount() {
+  React.useLayoutEffect(() => {
     // Not calling getComputedStyle can save hundreds of ms in tests and production
     if (process.env.NODE_ENV === 'development') {
       error(
-        !(function verifySpanMargin(element, margin) {
-          if (!element) {
-            return
-          }
-          const marginValues = margin ? margin.split(' ') : null
-          const display = getComputedStyle(element).display
-
-          let verticalMargin = false
-
-          // either top or bottom margin are set
-          if (margin) {
-            if (
-              marginValues[0] &&
-              marginValues[0] !== 'none' &&
-              marginValues[0] !== '0'
-            ) {
-              verticalMargin = true
-            }
-            if (
-              marginValues[2] &&
-              marginValues[2] !== 'none' &&
-              marginValues[2] !== '0'
-            ) {
-              verticalMargin = true
-            }
-          }
-
-          return verticalMargin && display === 'inline'
-        })(this._element, this.props.margin),
+        !verifySpanMargin(_element.current, props.margin),
         `[View] display style is set to 'inline' and will allow for horizontal margins only.`
       )
     }
-  }
+  }, [_element.current])
 
-  get withFocusOutline() {
-    if (
-      typeof this.props.withFocusOutline === 'undefined' &&
-      typeof this.props.focused === 'undefined'
-    ) {
-      return undefined
-    }
+  const {
+    children,
+    textAlign,
+    background,
+    display,
+    withVisualDebug,
+    width,
+    height,
+    minWidth,
+    minHeight,
+    maxWidth,
+    maxHeight,
+    overflowX,
+    overflowY,
+    stacking,
+    shadow,
+    position,
+    focusPosition,
+    focusColor,
+    shouldAnimateFocus,
+    borderColor,
+    className, // eslint-disable-line react/prop-types
+    ...restProps
+  } = props
 
-    const { position, display, focusPosition } = this.props
+  const ElementType = getElementType(View, props)
 
-    const withFocusOutline = this.props.focused || this.props.withFocusOutline
-
-    if (withFocusOutline) {
-      error(
-        display === 'inline' || position === 'relative',
-        '[View] the focus outline will only show if the `position` prop is `relative`.'
-      )
-
-      error(
-        display !== 'inline' || focusPosition === 'inset',
-        '[View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
-      )
-    }
-
-    return withFocusOutline
-  }
-
-  get focusRingRadius() {
-    const { borderRadius = '' } = this.props
-    const baseRadiusStyle = 'focusRing--radius'
-
-    const initialValue = borderRadius.trim().split(' ')[0]
-
-    if (this.verifyUniformValues(initialValue, borderRadius)) {
-      const capitalize = (str) =>
-        `${str.charAt(0).toUpperCase()}${str.slice(1)}`
-
-      if (['small', 'medium', 'large'].includes(initialValue))
-        return `${baseRadiusStyle}${capitalize(initialValue)}`
-      if (['circle', 'pill'].includes(initialValue))
-        return `${baseRadiusStyle}Inherit`
-    }
-
-    return `${baseRadiusStyle}None`
-  }
-
-  get withBorder() {
-    const { borderWidth } = this.props
-    return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
-  }
-
-  get borderStyle() {
-    let { borderRadius, borderWidth } = this.props
-
-    if (this.dir === bidirectional.DIRECTION.rtl) {
-      borderRadius = mirrorShorthandCorners(borderRadius)
-      borderWidth = mirrorShorthandEdges(borderWidth)
-    }
-
-    return {
-      borderRadius: getShorthandPropValue(
-        'View',
-        this.theme,
-        borderRadius,
-        'borderRadius'
-      ),
-      borderWidth: getShorthandPropValue(
-        'View',
-        this.theme,
-        borderWidth,
-        'borderWidth'
-      )
-    }
-  }
-
-  get spacingStyle() {
-    let { margin, padding } = this.props
-
-    if (this.dir === 'rtl') {
-      margin = mirrorShorthandEdges(margin)
-      padding = mirrorShorthandEdges(padding)
-    }
-
-    return {
-      margin: getShorthandPropValue('View', this.theme, margin, 'margin'),
-      padding: getShorthandPropValue('View', this.theme, padding, 'padding')
-    }
-  }
-
-  get offsetStyle() {
-    const {
-      insetBlockStart,
-      insetBlockEnd,
-      insetInlineStart,
-      insetInlineEnd
-    } = this.props
-
-    const rtl = this.dir === 'rtl'
-
-    const blockStart = {
-      top: insetBlockStart,
-      insetBlockStart
-    }
-
-    const blockEnd = {
-      bottom: insetBlockEnd,
-      insetBlockEnd
-    }
-
-    const horizontalOffsets = {
-      left: rtl ? insetInlineEnd : insetInlineStart,
-      right: rtl ? insetInlineStart : insetInlineEnd,
-      insetInlineStart,
-      insetInlineEnd
-    }
-
-    return {
-      ...blockStart,
-      ...blockEnd,
-      ...horizontalOffsets
-    }
-  }
-
-  get styleProps() {
-    const { cursor, style } = this.props // eslint-disable-line react/prop-types
-    const whitelisted = pickProps(style || {}, {}, [
-      // Position/calculateElementPosition:
-      'top',
-      'left',
-      'position',
-      'display',
-      'transform',
-      'overflow',
-      'minWidth',
-      'minHeight',
-      // Img:
-      'filter',
-      // FlexItem:
-      'flexBasis',
-      // Avatar:
-      'backgroundImage',
-      // Popover:
-      'pointerEvents'
-    ])
-
-    if (cursor) {
-      whitelisted.cursor = cursor
-    }
-
-    return whitelisted
-  }
-
-  handleElementRef = (el) => {
-    if (typeof this.props.elementRef === 'function') {
-      this.props.elementRef(el)
-    }
-
-    this._element = el
-  }
-
-  // verify that each value passed into ThemeablePropType is identical
-  verifyUniformValues = (initialValue, input) => {
-    if (typeof input !== 'string') return false
-
-    return input
-      .trim()
-      .split(' ')
-      .every((value) => initialValue === value)
-  }
-
-  render() {
-    const {
-      children,
-      textAlign,
-      background,
-      display,
-      withVisualDebug,
-      width,
-      height,
-      minWidth,
-      minHeight,
-      maxWidth,
-      maxHeight,
-      overflowX,
-      overflowY,
-      stacking,
-      shadow,
-      position,
-      focusPosition,
-      focusColor,
-      shouldAnimateFocus,
-      borderColor,
-      className, // eslint-disable-line react/prop-types
-      ...props
-    } = this.props
-
-    const ElementType = getElementType(View, this.props)
-
-    const { withFocusOutline } = this
-
-    const focusOutlineClasses =
-      position === 'relative' ||
-      (display === 'inline' && focusPosition === 'inset')
-        ? {
-            [styles.focus]: true,
-            [styles.withFocusOutline]: withFocusOutline,
-            [styles.shouldUseBrowserFocus]:
-              typeof withFocusOutline === 'undefined',
-            [styles[this.focusRingRadius]]: true,
-            [styles[`focusPosition--${focusPosition}`]]: true,
-            [styles[`focusColor--${focusColor}`]]: true,
-            [styles.focusAnimation]: shouldAnimateFocus
-          }
-        : {}
-
-    const classes = classnames({
-      [styles.root]: true,
-      [styles.withVisualDebug]: withVisualDebug || this.props.visualDebug,
-      [styles.withBorder]: this.withBorder,
-      [styles[`borderColor--${borderColor}`]]: this.withBorder,
-      [styles[`textAlign--${textAlign}`]]: textAlign,
-      [styles[`background--${background}`]]: background,
-      [styles[`display--${display}`]]: display && display !== 'auto',
-      [styles[`overflowX--${overflowX}`]]: overflowX && overflowX !== 'visible',
-      [styles[`overflowY--${overflowY}`]]: overflowY && overflowY !== 'visible',
-      [styles[`stacking--${stacking}`]]: stacking,
-      [styles[`shadow--${shadow}`]]: shadow && shadow !== 'none',
-      [styles[`position--${position}`]]: position !== 'static',
-      ...focusOutlineClasses,
-      [className]: className
-    })
-
-    return (
-      <ElementType
-        {...passthroughProps(props)}
-        className={classes}
-        style={{
-          ...this.spacingStyle,
-          ...this.borderStyle,
-          ...this.offsetStyle,
-          width,
-          height,
-          minWidth,
-          minHeight,
-          maxWidth,
-          maxHeight,
-          ...this.styleProps // whitelisted style props will override View defaults
-        }}
-        ref={this.handleElementRef}
-      >
-        {children}
-      </ElementType>
-    )
-  }
+  return (
+    <ElementType
+      {...passthroughProps(restProps)}
+      css={styles.root}
+      ref={handleElementRef}
+      className={className}
+    >
+      {children}
+    </ElementType>
+  )
 }
+
+View.propTypes = propTypes
+View.defaultProps = defaultProps
 
 // TODO: Remove this code once all components are using passthroughProps in place
 // of omitProps and have removed this function
@@ -622,6 +390,5 @@ View.omitViewProps = (props, Component) => {
 
   return omitProps(props, View.propTypes)
 }
-
 export default View
 export { View }
