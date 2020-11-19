@@ -26,82 +26,83 @@
 
 import { makeThemeVars } from '@instructure/ui-themeable'
 
-export default function generator({
-  typography,
-  colors,
-  borders,
-  spacing,
-  shadows,
-  stacking,
-  breakpoints,
-  transitions
-}) {
-  return {
-    fontFamily: typography.fontFamily,
+export default function generateComponentTheme(theme, themeOverride = {}) {
+  const { key: themeName } = theme
 
-    color: colors.textDarkest,
-    colorPrimaryInverse: colors.textLightest,
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark'],
+      focusColorInfo: theme['ic-brand-primary'],
+      backgroundBrand: theme['ic-brand-primary'],
+      backgroundInfo: theme['ic-brand-primary'],
+      borderColorBrand: theme['ic-brand-primary'],
+      borderColorInfo: theme['ic-brand-primary']
+    }
+  }
 
-    borderStyle: borders.style,
+  const componentVariables = {
+    fontFamily: theme?.typography?.fontFamily,
 
-    borderColorPrimary: colors.borderMedium,
-    borderColorSecondary: colors.borderDark,
-    borderColorSuccess: colors.borderSuccess,
-    borderColorBrand: colors.borderBrand,
-    borderColorInfo: colors.borderInfo,
-    borderColorAlert: colors.borderAlert,
-    borderColorWarning: colors.borderWarning,
-    borderColorDanger: colors.borderDanger,
+    color: theme?.colors?.textDarkest,
+    colorPrimaryInverse: theme?.colors?.textLightest,
+
+    borderStyle: theme?.borders?.style,
+
+    borderColorPrimary: theme?.colors?.borderMedium,
+    borderColorSecondary: theme?.colors?.borderDark,
+    borderColorSuccess: theme?.colors?.borderSuccess,
+    borderColorBrand: theme?.colors?.borderBrand,
+    borderColorInfo: theme?.colors?.borderInfo,
+    borderColorAlert: theme?.colors?.borderAlert,
+    borderColorWarning: theme?.colors?.borderWarning,
+    borderColorDanger: theme?.colors?.borderDanger,
     borderColorTransparent: 'transparent',
 
-    borderRadiusSmall: borders.radiusSmall,
-    borderRadiusMedium: borders.radiusMedium,
-    borderRadiusLarge: borders.radiusLarge,
+    borderRadiusSmall: theme?.borders?.radiusSmall,
+    borderRadiusMedium: theme?.borders?.radiusMedium,
+    borderRadiusLarge: theme?.borders?.radiusLarge,
 
-    debugOutlineColor: colors.borderDebug,
+    debugOutlineColor: theme?.colors?.borderDebug,
 
-    backgroundPrimary: colors.backgroundLightest,
-    backgroundSecondary: colors.backgroundLight,
-    backgroundPrimaryInverse: colors.backgroundDarkest,
-    backgroundBrand: colors.backgroundBrand,
-    backgroundInfo: colors.backgroundInfo,
-    backgroundAlert: colors.backgroundAlert,
-    backgroundSuccess: colors.backgroundSuccess,
-    backgroundDanger: colors.backgroundDanger,
-    backgroundWarning: colors.backgroundWarning,
+    backgroundPrimary: theme?.colors?.backgroundLightest,
+    backgroundSecondary: theme?.colors?.backgroundLight,
+    backgroundPrimaryInverse: theme?.colors?.backgroundDarkest,
+    backgroundBrand: theme?.colors?.backgroundBrand,
+    backgroundInfo: theme?.colors?.backgroundInfo,
+    backgroundAlert: theme?.colors?.backgroundAlert,
+    backgroundSuccess: theme?.colors?.backgroundSuccess,
+    backgroundDanger: theme?.colors?.backgroundDanger,
+    backgroundWarning: theme?.colors?.backgroundWarning,
 
     arrowSize: '0.5rem',
 
-    focusOutlineStyle: borders.style,
-    focusOutlineWidth: borders.widthMedium,
+    focusOutlineStyle: theme?.borders?.style,
+    focusOutlineWidth: theme?.borders?.widthMedium,
     focusOutlineOffset: '0.3125rem',
     focusOutlineInset: '0rem', // do not use unitless zero (for CSS calc())
 
-    focusColorInfo: colors.borderInfo,
-    focusColorDanger: colors.borderDanger,
-    focusColorSuccess: colors.borderSuccess,
-    focusColorInverse: colors.borderLightest,
+    focusColorInfo: theme?.colors?.borderInfo,
+    focusColorDanger: theme?.colors?.borderDanger,
+    focusColorSuccess: theme?.colors?.borderSuccess,
+    focusColorInverse: theme?.colors?.borderLightest,
 
-    xSmallMaxWidth: breakpoints.xSmall,
-    smallMaxWidth: breakpoints.small,
-    mediumMaxWidth: breakpoints.medium,
-    largeMaxWidth: breakpoints.large,
+    xSmallMaxWidth: theme?.breakpoints?.xSmall,
+    smallMaxWidth: theme?.breakpoints?.small,
+    mediumMaxWidth: theme?.breakpoints?.medium,
+    largeMaxWidth: theme?.breakpoints?.large,
 
-    ...makeThemeVars('margin', spacing),
-    ...makeThemeVars('padding', spacing),
-    ...makeThemeVars('shadow', shadows),
-    ...makeThemeVars('stacking', stacking),
-    ...makeThemeVars('border', borders)
+    ...makeThemeVars('margin', theme?.spacing ?? {}),
+    ...makeThemeVars('padding', theme?.spacing ?? {}),
+    ...makeThemeVars('shadow', theme?.shadows ?? {}),
+    ...makeThemeVars('stacking', theme?.stacking ?? {}),
+    ...makeThemeVars('border', theme?.borders ?? {}),
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
-}
 
-generator.canvas = function (variables) {
   return {
-    color: variables['ic-brand-font-color-dark'],
-    focusColorInfo: variables['ic-brand-primary'],
-    backgroundBrand: variables['ic-brand-primary'],
-    backgroundInfo: variables['ic-brand-primary'],
-    borderColorBrand: variables['ic-brand-primary'],
-    borderColorInfo: variables['ic-brand-primary']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }

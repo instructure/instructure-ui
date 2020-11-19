@@ -30,7 +30,8 @@ export {
 export {
   bidirectional,
   withBidirectional,
-  useBidirectional
+  useBidirectional,
+  DIRECTION
 } from './bidirectional'
 export { DateTime } from './DateTime'
 export { Decimal } from './Decimal'
