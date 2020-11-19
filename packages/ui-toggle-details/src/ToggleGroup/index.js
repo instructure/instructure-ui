@@ -35,7 +35,7 @@ import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
 import { controllable } from '@instructure/ui-prop-types'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 import {
   IconArrowOpenEndSolid,
@@ -202,12 +202,12 @@ class ToggleGroup extends Component {
                     : 'small small small x-small'
                 }
               >
-                <Flex.Item>
+                <FlexItem>
                   {this.renderToggle(getToggleProps(), expanded)}
-                </Flex.Item>
-                <Flex.Item shouldGrow shouldShrink padding="0 0 0 x-small">
+                </FlexItem>
+                <FlexItem shouldGrow shouldShrink padding="0 0 0 x-small">
                   {this.props.summary}
-                </Flex.Item>
+                </FlexItem>
               </Flex>
               {expanded ? (
                 this.renderDetails(getDetailsProps())

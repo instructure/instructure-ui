@@ -20,18 +20,19 @@ guidelines: true
   </Figure>
 </Guidelines>
 ```
+
 The Flex component makes it simple for developers to create multi-column
 layouts with flexbox.
 
 ### Layout direction
 
-**Note:** Use the `withVisualDebug` property to see the borders of Flex/Flex.Item while developing!
+**Note:** Use the `withVisualDebug` property to see the borders of Flex/FlexItem while developing!
 
 Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `direction` to
-`column` to stack your Flex.Items.
+`column` to stack your FlexItems.
 
 > **Unless your layout has a specific/finite height, you probably don't need `direction="column"`.** To create a
-layout of stacked elements, it is simpler to use multiple [View](#View) components with `display="block"`.
+> layout of stacked elements, it is simpler to use multiple [View](#View) components with `display="block"`.
 
 ```js
 ---
@@ -39,35 +40,35 @@ example: true
 ---
 <div>
   <Flex withVisualDebug margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <FlexItem>One</FlexItem>
+    <FlexItem>Two</FlexItem>
+    <FlexItem>Three</FlexItem>
+    <FlexItem>Four</FlexItem>
   </Flex>
   <Flex withVisualDebug direction="column" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <FlexItem>One</FlexItem>
+    <FlexItem>Two</FlexItem>
+    <FlexItem>Three</FlexItem>
+    <FlexItem>Four</FlexItem>
   </Flex>
   <Flex withVisualDebug direction="row-reverse" margin="none none large">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <FlexItem>One</FlexItem>
+    <FlexItem>Two</FlexItem>
+    <FlexItem>Three</FlexItem>
+    <FlexItem>Four</FlexItem>
   </Flex>
   <Flex withVisualDebug direction="column-reverse">
-    <Flex.Item>One</Flex.Item>
-    <Flex.Item>Two</Flex.Item>
-    <Flex.Item>Three</Flex.Item>
-    <Flex.Item>Four</Flex.Item>
+    <FlexItem>One</FlexItem>
+    <FlexItem>Two</FlexItem>
+    <FlexItem>Three</FlexItem>
+    <FlexItem>Four</FlexItem>
   </Flex>
 </div>
 ```
 
-### Sizing Flex.Items
+### Sizing FlexItems
 
-By default, Flex.Items **expand to fit their contents**, even if that means overflowing
+By default, FlexItems **expand to fit their contents**, even if that means overflowing
 their container.
 
 ```js
@@ -75,22 +76,22 @@ their container.
 example: true
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small">
+  <FlexItem padding="x-small">
     Villum dolore eu fugiat nulla pariatur.
-  </Flex.Item>
-  <Flex.Item padding="x-small">
+  </FlexItem>
+  <FlexItem padding="x-small">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  </Flex.Item>
-  <Flex.Item padding="x-small">
+  </FlexItem>
+  <FlexItem padding="x-small">
     Duis aute irure.
-  </Flex.Item>
-  <Flex.Item padding="x-small">
+  </FlexItem>
+  <FlexItem padding="x-small">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
-Adding the `shouldShrink` property forces the Flex.Item to shrink as needed to fit inside its
+Adding the `shouldShrink` property forces the FlexItem to shrink as needed to fit inside its
 container.
 
 ```js
@@ -98,40 +99,40 @@ container.
 example: true
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small" shouldShrink>
+  <FlexItem padding="x-small" shouldShrink>
     Villum dolore eu fugiat nulla pariatur.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink>
+  </FlexItem>
+  <FlexItem padding="x-small" shouldShrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink>
+  </FlexItem>
+  <FlexItem padding="x-small" shouldShrink>
     Duis aute irure.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink>
+  </FlexItem>
+  <FlexItem padding="x-small" shouldShrink>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
-The `shouldGrow` property forces the Flex.Item to expand to fill in any available space.
+The `shouldGrow` property forces the FlexItem to expand to fill in any available space.
 
 ```js
 ---
 example: true
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small" shouldShrink shouldGrow>
+  <FlexItem padding="x-small" shouldShrink shouldGrow>
     I am growing and shrinking!
-  </Flex.Item>
-  <Flex.Item>
+  </FlexItem>
+  <FlexItem>
     I am not shrinking or growing.
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
-The `size` property sets the base size (accepts px, em, rem) for the Flex.Item. If the
+The `size` property sets the base size (accepts px, em, rem) for the FlexItem. If the
 `direction` property is `row`, this is the item's **width**. If `direction` is `column`,
-then it is the item's **height**. Flex.Items can grow beyond their `size`, but cannot
+then it is the item's **height**. FlexItems can grow beyond their `size`, but cannot
 shrink to less than their `size`.
 
 ```js
@@ -139,46 +140,48 @@ shrink to less than their `size`.
 example: true
 ---
 <Flex withVisualDebug>
-  <Flex.Item padding="x-small" size="200px">
+  <FlexItem padding="x-small" size="200px">
     I am always 200px.
-  </Flex.Item>
-  <Flex.Item padding="x-small" shouldShrink shouldGrow size="200px">
+  </FlexItem>
+  <FlexItem padding="x-small" shouldShrink shouldGrow size="200px">
     I can grow, and shrink down to 200px.
-  </Flex.Item>
-  <Flex.Item padding="x-small" size="25%">
+  </FlexItem>
+  <FlexItem padding="x-small" size="25%">
     I am always 25%.
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
-### Aligning Flex.Items
-By default, Flex aligns its Flex.Items along the `center` of the axis. Use the `alignItems`
+### Aligning FlexItems
+
+By default, Flex aligns its FlexItems along the `center` of the axis. Use the `alignItems`
 property to change this behavior.
 
-`alignItems` can be overridden on individual Flex.Items through Flex.Item's `align` property.
+`alignItems` can be overridden on individual FlexItems through FlexItem's `align` property.
 
 ```js
 ---
 example: true
 ---
 <Flex alignItems="end" withVisualDebug>
-  <Flex.Item>
+  <FlexItem>
     <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-  </Flex.Item>
-  <Flex.Item shouldGrow shouldShrink>
+  </FlexItem>
+  <FlexItem shouldGrow shouldShrink>
     I should be aligned to the bottom of the Avatar.
-  </Flex.Item>
-  <Flex.Item>
+  </FlexItem>
+  <FlexItem>
     Me, too.
-  </Flex.Item>
-  <Flex.Item align="start">
+  </FlexItem>
+  <FlexItem align="start">
     I am aligning myself to the top.
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
-### Justifying Flex.Items
-Use the `justifyItems` property to change the justification of Flex.Items.
+### Justifying FlexItems
+
+Use the `justifyItems` property to change the justification of FlexItems.
 
 ```js
 ---
@@ -186,48 +189,49 @@ example: true
 ---
 <div>
   <Flex justifyItems="center" margin="0 0 large" withVisualDebug>
-    <Flex.Item>
+    <FlexItem>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-    </Flex.Item>
-    <Flex.Item>
+    </FlexItem>
+    <FlexItem>
       We are all centered!
-    </Flex.Item>
-    <Flex.Item>
+    </FlexItem>
+    <FlexItem>
       Yeah!
-    </Flex.Item>
+    </FlexItem>
   </Flex>
 
   <Flex justifyItems="space-between" withVisualDebug margin="0 0 large">
-    <Flex.Item>
+    <FlexItem>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-    </Flex.Item>
-    <Flex.Item>
+    </FlexItem>
+    <FlexItem>
       Ah, a little more space.
-    </Flex.Item>
-    <Flex.Item>
+    </FlexItem>
+    <FlexItem>
       Totally.
-    </Flex.Item>
+    </FlexItem>
   </Flex>
 
   <Flex justifyItems="end" withVisualDebug>
-    <Flex.Item>
+    <FlexItem>
       <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
-    </Flex.Item>
-    <Flex.Item>
+    </FlexItem>
+    <FlexItem>
       Smooshed again.
-    </Flex.Item>
-    <Flex.Item>
+    </FlexItem>
+    <FlexItem>
       Ugh.
-    </Flex.Item>
+    </FlexItem>
   </Flex>
 </div>
 ```
 
 ### Handling overflow
-When `direction` is set to `column`, Flex.Items' `overflowY` property is automagically set
+
+When `direction` is set to `column`, FlexItems' `overflowY` property is automagically set
 to `auto` to account for content overflow with a vertical scrollbar.
 
-> To override this default, simply set `overflowY` on the Flex.Item to either `visible` or `hidden`.
+> To override this default, simply set `overflowY` on the FlexItem to either `visible` or `hidden`.
 
 ```js
 ---
@@ -237,12 +241,12 @@ example: true
   withVisualDebug
   direction="column"
 >
-  <Flex.Item padding="small">
+  <FlexItem padding="small">
     <Heading>Pandas are cute, right?</Heading>
-  </Flex.Item>
-  <Flex.Item size="150px" padding="small">
+  </FlexItem>
+  <FlexItem size="150px" padding="small">
     <Img src={avatarSquare} />
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
@@ -255,17 +259,17 @@ example: true
 example: true
 ---
 <Flex>
-  <Flex.Item shouldGrow shouldShrink padding="none medium none none">
+  <FlexItem shouldGrow shouldShrink padding="none medium none none">
     <Heading>Lorem ipsum dolor sit amet consectetur dolor sit</Heading>
-  </Flex.Item>
-  <Flex.Item>
+  </FlexItem>
+  <FlexItem>
     <Button margin="none x-small none none">
       Cancel
     </Button>
     <Button color="success" renderIcon={IconUserSolid}>
       Add user
     </Button>
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
@@ -276,30 +280,30 @@ example: true
 example: true
 ---
 <Flex height="32rem" justifyItems="center" padding="large" withVisualDebug>
-  <Flex.Item shouldShrink shouldGrow textAlign="center">
+  <FlexItem shouldShrink shouldGrow textAlign="center">
 
     <Heading level="h1" margin="0 0 medium">An amazing thing!</Heading>
 
     <Flex withVisualDebug wrap="wrap" justifyItems="space-around" margin="0 0 medium">
-      <Flex.Item padding="small">
+      <FlexItem padding="small">
         <SVGIcon src={iconExample} size="medium" title="Icon Example" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
-      </Flex.Item>
-      <Flex.Item padding="small">
+      </FlexItem>
+      <FlexItem padding="small">
         <SVGIcon src={iconExample} size="medium" title="Icon Example" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
-      </Flex.Item>
-      <Flex.Item padding="small">
+      </FlexItem>
+      <FlexItem padding="small">
         <SVGIcon src={iconExample} size="medium" title="Icon Example" />
         <Text weight="bold" size="large" as="div">We love you!</Text>
-      </Flex.Item>
+      </FlexItem>
     </Flex>
 
     <div>
       <Button color="primary" size="large">Sign up now!</Button>
     </div>
 
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```
 
@@ -312,51 +316,51 @@ example: true
 
 <Flex height="400px" width="300px" as="div" direction="column" withVisualDebug>
 
-  <Flex.Item padding="small" as="header" textAlign="center">
+  <FlexItem padding="small" as="header" textAlign="center">
     <Heading level="h3">App</Heading>
-  </Flex.Item>
+  </FlexItem>
 
-  <Flex.Item shouldGrow shouldShrink padding="small" as="main">
+  <FlexItem shouldGrow shouldShrink padding="small" as="main">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </Flex.Item>
+  </FlexItem>
 
-  <Flex.Item padding="small" as="footer">
+  <FlexItem padding="small" as="footer">
 
     <Flex withVisualDebug justifyItems="space-between">
-      <Flex.Item>
+      <FlexItem>
         <IconButton
           renderIcon={IconEmailLine}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
         />
-      </Flex.Item>
-      <Flex.Item>
+      </FlexItem>
+      <FlexItem>
         <IconButton
           renderIcon={IconPrinterLine}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
         />
-      </Flex.Item>
-      <Flex.Item>
+      </FlexItem>
+      <FlexItem>
         <IconButton
           renderIcon={IconCalendarDayLine}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
         />
-      </Flex.Item>
-      <Flex.Item>
+      </FlexItem>
+      <FlexItem>
         <IconButton
           renderIcon={IconSettingsLine}
           withBackground={false}
           withBorder={false}
           screenReaderLabel="Some app function"
         />
-      </Flex.Item>
+      </FlexItem>
     </Flex>
 
-  </Flex.Item>
+  </FlexItem>
 </Flex>
 ```

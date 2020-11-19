@@ -42,12 +42,12 @@ example: true
 ---
 <View display="block" position="relative" background="primary" shadow="resting">
   <Flex height="6rem" justifyItems="space-between" alignItems="center" padding="medium">
-    <Flex.Item shouldShrink shouldGrow>
+    <FlexItem shouldShrink shouldGrow>
       <Heading level="h2">Some Heading Text</Heading>
-    </Flex.Item>
-    <Flex.Item padding="none none none medium">
+    </FlexItem>
+    <FlexItem padding="none none none medium">
       <CloseButton size="medium" screenReaderLabel="Close" />
-    </Flex.Item>
+    </FlexItem>
   </Flex>
 </View>
 ```
@@ -60,7 +60,7 @@ example: true
 ---
 <View display="block" position="relative" height="5rem" background="primary" shadow="resting">
   <Flex justifyItems="end">
-    <Flex.Item>
+    <FlexItem>
       <IconButton
         screenReaderLabel="Close"
         renderIcon={IconXSolid}
@@ -69,7 +69,7 @@ example: true
         withBorder={false}
         margin="small"
       />
-    </Flex.Item>
+    </FlexItem>
   </Flex>
 </View>
 ```

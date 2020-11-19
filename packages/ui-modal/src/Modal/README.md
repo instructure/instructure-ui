@@ -198,9 +198,10 @@ class ModalAutoCompleteExample extends React.Component {
 
 render(<Example />)
 ```
+
 ### Media (images, etc.) inside Modals
 
-> Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. *Note that the `inverse` Modal does not currently support text or form input content.*
+> Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. _Note that the `inverse` Modal does not currently support text or form input content._
 
 **If you are displaying small, relatively uniform images or videos inside Modal, the default settings should work well.** Modal.Body will expand to the height of the media you're displaying. If there is overflow, scrollbars will be available.
 
@@ -240,10 +241,10 @@ class Example extends React.Component {
         >
           <Modal.Header>
             <Flex>
-              <Flex.Item shouldGrow shouldShrink>
+              <FlexItem shouldGrow shouldShrink>
                 <Heading level="h2"><TruncateText>A small image</TruncateText></Heading>
-              </Flex.Item>
-              <Flex.Item>
+              </FlexItem>
+              <FlexItem>
                 <CloseButton
                   color="primary-inverse"
                   placement="end"
@@ -251,7 +252,7 @@ class Example extends React.Component {
                   onClick={this.handleButtonClick}
                   screenReaderLabel="Close"
                 />
-              </Flex.Item>
+              </FlexItem>
             </Flex>
           </Modal.Header>
           <Modal.Body padding="none">
@@ -353,17 +354,17 @@ class Example extends React.Component {
         >
           <Modal.Header>
             <Flex>
-              <Flex.Item shouldGrow shouldShrink>
+              <FlexItem shouldGrow shouldShrink>
                 <Flex alignItems="center">
-                  <Flex.Item margin="0 x-small 0 0">
+                  <FlexItem margin="0 x-small 0 0">
                     <SVGIcon src={iconExample} size="small" title="Icon Example" />
-                  </Flex.Item>
-                  <Flex.Item shouldGrow shouldShrink>
+                  </FlexItem>
+                  <FlexItem shouldGrow shouldShrink>
                     <Heading level="h2"><TruncateText>This Modal Contains Media</TruncateText></Heading>
-                  </Flex.Item>
+                  </FlexItem>
                 </Flex>
-              </Flex.Item>
-              <Flex.Item>
+              </FlexItem>
+              <FlexItem>
                 <IconButton
                   color="primary-inverse"
                   withBackground={false}
@@ -388,7 +389,7 @@ class Example extends React.Component {
                   screenReaderLabel="Close"
                   onClick={this.handleButtonClick}
                 />
-              </Flex.Item>
+              </FlexItem>
             </Flex>
           </Modal.Header>
           <Modal.Body padding="none">

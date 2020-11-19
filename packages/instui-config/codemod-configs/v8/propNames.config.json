@@ -1,72 +1,87 @@
 {
   "Alert": {
-    "8.0.0": [
-      { "old": "closeButtonLabel", "new": "renderCloseButtonLabel" }
-    ]
+    "8.0.0": [{ "old": "closeButtonLabel", "new": "renderCloseButtonLabel" }]
   },
   "Avatar": {
     "8.0.0": [
-      { "old": "inline", "new": "display", "values": [
-        { "old": true, "new": "inline-block" },
-        { "old": false, "new": "block" }
-      ]},
+      {
+        "old": "inline",
+        "new": "display",
+        "values": [
+          { "old": true, "new": "inline-block" },
+          { "old": false, "new": "block" }
+        ]
+      },
       { "old": "variant", "new": "shape" }
     ]
   },
   "Breadcrumb.Link": {
-    "8.0.0": [
-      { "old": "icon", "new": "renderIcon" }
-    ]
+    "8.0.0": [{ "old": "icon", "new": "renderIcon" }]
   },
   "Button": {
     "8.0.0": [
       { "old": "buttonRef", "new": "elementRef" },
-      { "old": "fluidWidth", "new": "display", "values": [
-        { "old": true, "new": "block" },
-        { "old": false }
-      ]},
+      {
+        "old": "fluidWidth",
+        "new": "display",
+        "values": [{ "old": true, "new": "block" }, { "old": false }]
+      },
       { "old": "icon", "new": "renderIcon" },
-      { "old": "variant", "new": "color", "values": [
-        { "old": "default" },
-        { "old": "light", "new": "primary-inverse" },
-        { "old": "ghost", "new": "primary" },
-        { "old": "ghost-inverse", "new": "primary-inverse" },
-        { "old": "icon" },
-        { "old": "icon-inverse", "new": "primary-inverse" },
-        { "old": "circle-default" },
-        { "old": "circle-primary", "new": "primary" },
-        { "old": "circle-danger", "new": "danger" }
-      ]}
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "default" },
+          { "old": "light", "new": "primary-inverse" },
+          { "old": "ghost", "new": "primary" },
+          { "old": "ghost-inverse", "new": "primary-inverse" },
+          { "old": "icon" },
+          { "old": "icon-inverse", "new": "primary-inverse" },
+          { "old": "circle-default" },
+          { "old": "circle-primary", "new": "primary" },
+          { "old": "circle-danger", "new": "danger" }
+        ]
+      }
     ]
   },
   "CloseButton": {
     "8.0.0": [
       { "old": "buttonRef", "new": "elementRef" },
-      { "old": "variant", "new": "color", "values": [
-        { "old": "icon" },
-        { "old": "icon-inverse", "new": "primary-inverse" }
-      ]}
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "icon" },
+          { "old": "icon-inverse", "new": "primary-inverse" }
+        ]
+      }
     ]
   },
   "DateInput": {
-    "8.0.0": [
-      { "old": "label", "new": "renderLabel" }
-    ]
+    "8.0.0": [{ "old": "label", "new": "renderLabel" }]
   },
   "Flex": {
     "8.0.0": [
-      { "old": "inline", "new": "display", "values": [
-        { "old": true, "new": "inline-flex" },
-        { "old": false, "new": "flex" }
-      ]},
-      { "old": "wrapItems", "new": "wrap", "values": [
-        { "old": true, "new": "wrap" },
-        { "old": false, "new": "no-wrap" }
-      ]},
+      {
+        "old": "inline",
+        "new": "display",
+        "values": [
+          { "old": true, "new": "inline-flex" },
+          { "old": false, "new": "flex" }
+        ]
+      },
+      {
+        "old": "wrapItems",
+        "new": "wrap",
+        "values": [
+          { "old": true, "new": "wrap" },
+          { "old": false, "new": "no-wrap" }
+        ]
+      },
       { "old": "visualDebug", "new": "withVisualDebug" }
     ]
   },
-  "Flex.Item": {
+  "FlexItem": {
     "8.0.0": [
       { "old": "grow", "new": "shouldGrow" },
       { "old": "shrink", "new": "shouldShrink" },
@@ -77,18 +92,26 @@
     "8.0.0": [
       { "old": "grayscale", "new": "withGrayscale" },
       { "old": "blur", "new": "withBlur" },
-      { "old": "inline", "new": "display", "values": [
-        { "old": true, "new": "inline-block" },
-        { "old": false, "new": "block" }
-      ]}
+      {
+        "old": "inline",
+        "new": "display",
+        "values": [
+          { "old": true, "new": "inline-block" },
+          { "old": false, "new": "block" }
+        ]
+      }
     ]
   },
   "Link": {
     "8.0.0": [
-      { "old": "variant", "new": "color", "values": [
-        { "old": "default", "new": "link" },
-        { "old": "inverse", "new": "link-inverse" }
-      ]},
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "default", "new": "link" },
+          { "old": "inverse", "new": "link-inverse" }
+        ]
+      },
       { "old": "linkRef", "new": "elementRef" }
     ]
   },
@@ -96,16 +119,18 @@
     "8.0.0": [
       { "old": "label", "new": "renderLabel" },
       { "old": "required", "new": "isRequired" },
-      { "old": "inline", "new": "display", "values": [
-        { "old": true, "new": "inline-block" },
-        { "old": false, "new": "block" }
-      ]}
+      {
+        "old": "inline",
+        "new": "display",
+        "values": [
+          { "old": true, "new": "inline-block" },
+          { "old": false, "new": "block" }
+        ]
+      }
     ]
   },
   "Spinner": {
-    "8.0.0": [
-      { "old": "title", "new": "renderTitle" }
-    ]
+    "8.0.0": [{ "old": "title", "new": "renderTitle" }]
   },
   "Tabs": {
     "8.0.0": [
@@ -129,39 +154,47 @@
   },
   "Text": {
     "8.0.0": [
-      { "old": "color", "new": "color", "values": [
-        { "old": "error", "new": "danger" }
-      ]}
+      {
+        "old": "color",
+        "new": "color",
+        "values": [{ "old": "error", "new": "danger" }]
+      }
     ]
   },
   "TextInput": {
     "8.0.0": [
       { "old": "label", "new": "renderLabel" },
       { "old": "required", "new": "isRequired" },
-      { "old": "inline", "new": "display", "values": [
-        { "old": true, "new": "inline-block" },
-        { "old": false, "new": "block" }
-      ]}
+      {
+        "old": "inline",
+        "new": "display",
+        "values": [
+          { "old": true, "new": "inline-block" },
+          { "old": false, "new": "block" }
+        ]
+      }
     ]
   },
   "TimeSelect": {
-    "8.0.0": [
-      { "old": "label", "new": "renderLabel" }
-    ]
+    "8.0.0": [{ "old": "label", "new": "renderLabel" }]
   },
   "Tooltip": {
     "8.0.0": [
       { "old": "tip", "new": "renderTip" },
       { "old": "defaultShow", "new": "defaultIsShowingContent" },
-      { "old": "variant", "new": "color", "values": [
-        { "old": "default", "new": "primary-inverse" },
-        { "old": "inverse", "new": "primary" }
-      ]}
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "default", "new": "primary-inverse" },
+          { "old": "inverse", "new": "primary" }
+        ]
+      }
     ]
   },
   "Position": {
     "8.0.0": [
-      { "old": "over", "new": "shouldPositionOverTarget"},
+      { "old": "over", "new": "shouldPositionOverTarget" },
       { "old": "trackPosition", "new": "shouldTrackPosition" }
     ]
   },
@@ -174,34 +207,50 @@
       { "old": "defaultShow", "new": "defaultIsShowingContent" },
       { "old": "onShow", "new": "onPositioned" },
       { "old": "onDismiss", "new": "onHideContent" },
-      { "old": "variant", "new": "color", "values": [
-        { "old": "default", "new": "primary" },
-        { "old": "inverse", "new": "primary-inverse" }
-      ]}
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "default", "new": "primary" },
+          { "old": "inverse", "new": "primary-inverse" }
+        ]
+      }
     ]
   },
   "View": {
     "8.0.0": [
-      { "old": "borderColor", "new": "borderColor", "values": [
-        { "old": "inverse", "new": "transparent" },
-        { "old": "default", "new": "primary" }
-      ]},
-      { "old": "background", "new": "background", "values": [
-        { "old": "default", "new": "primary" },
-        { "old": "light", "new": "secondary" },
-        { "old": "inverse", "new": "primary-inverse" }
-      ]},
+      {
+        "old": "borderColor",
+        "new": "borderColor",
+        "values": [
+          { "old": "inverse", "new": "transparent" },
+          { "old": "default", "new": "primary" }
+        ]
+      },
+      {
+        "old": "background",
+        "new": "background",
+        "values": [
+          { "old": "default", "new": "primary" },
+          { "old": "light", "new": "secondary" },
+          { "old": "inverse", "new": "primary-inverse" }
+        ]
+      },
       { "old": "focused", "new": "withFocusOutline" },
       { "old": "debug", "new": "withVisualDebug" }
     ]
   },
   "Pill": {
     "8.0.0": [
-      { "old": "variant", "new": "color", "values": [
-        { "old": "default", "new": "primary" },
-        { "old": "primary", "new": "info" },
-        { "old": "message", "new": "alert" }
-      ] },
+      {
+        "old": "variant",
+        "new": "color",
+        "values": [
+          { "old": "default", "new": "primary" },
+          { "old": "primary", "new": "info" },
+          { "old": "message", "new": "alert" }
+        ]
+      },
       { "old": "text", "new": "children" }
     ]
   },

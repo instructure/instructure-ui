@@ -37,7 +37,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { warn } from '@instructure/console/macro'
 
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
@@ -289,10 +289,10 @@ class DeprecatedButton extends Component {
       >
         {hasTextAndIcon ? (
           <Flex height="100%" width="100%">
-            <Flex.Item padding="0 x-small 0 0">{this.renderIcon()}</Flex.Item>
-            <Flex.Item shouldGrow shouldShrink>
+            <FlexItem padding="0 x-small 0 0">{this.renderIcon()}</FlexItem>
+            <FlexItem shouldGrow shouldShrink>
               <span className={styles.content}>{children}</span>
-            </Flex.Item>
+            </FlexItem>
           </Flex>
         ) : (
           // all other button layouts (icon only and text only)

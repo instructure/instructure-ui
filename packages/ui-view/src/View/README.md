@@ -30,12 +30,11 @@ View provides the base appearance for most of the components
 in Instructure UI.
 
 > **Because View provides access to so many visual styles, it
-can be easy to abuse.** Before you use View, ensure that the component
-you're trying to style doesn't already have access to the same props.
-For example, don't wrap a `<Button>` in a `<View>` just to add
-`margin` around the button: Instead, use the `margin` prop on the
-button itself.
-
+> can be easy to abuse.** Before you use View, ensure that the component
+> you're trying to style doesn't already have access to the same props.
+> For example, don't wrap a `<Button>` in a `<View>` just to add
+> `margin` around the button: Instead, use the `margin` prop on the
+> button itself.
 
 ```js
 ---
@@ -416,14 +415,13 @@ example: true
 </div>
 ```
 
-
 ### `position`
 
 `position` sets the CSS position rule for the component: `static`, `absolute`, `relative`,
 `sticky`, or `fixed`.
 
 > Note that `position="sticky"` is currently [not as fully supported](https://caniuse.com/#feat=css-sticky)
-as the other values.
+> as the other values.
 
 ```js
 ---
@@ -453,8 +451,8 @@ example: true
 By default, if a `View` is rendered as a focusable element, a focus outline will display when it is focused for accessibility.
 
 > Note that `position` must be set to `relative` for the focus ring to display.
-(This restriction exists because the focus ring requires styling a pseudo element
-that has absolute positioning.)
+> (This restriction exists because the focus ring requires styling a pseudo element
+> that has absolute positioning.)
 
 ```javascript
 ---
@@ -479,10 +477,8 @@ Be careful when overriding the display of the focus outline as it is essential f
 
 The focus outline adjusts to account for the shape of the View. For example, the following values can be set for `borderRadius`:
 `circle`, `pill`, `small`, `medium`, and `large`. In each case, the border radius of the focus outline will automatically adjust
-to match the border radius of the corresponding View. For Views with irregular border radius (e.g., `borderRadius="small large none
-medium"`), the focus outline will appear with square edges. The color of the focus outline can be
+to match the border radius of the corresponding View. For Views with irregular border radius (e.g., `borderRadius="small large none medium"`), the focus outline will appear with square edges. The color of the focus outline can be
 changed for different contexts via the `focusColor` property.
-
 
 ```javascript
 ---
@@ -588,9 +584,9 @@ class FocusedExample extends React.Component {
               alignItems="center"
               justifyItems="center"
             >
-              <Flex.Item>
+              <FlexItem>
                 circle
-              </Flex.Item>
+              </FlexItem>
             </Flex>
           </View>
           <View background="primary-inverse" display="inline-block" padding="small">
@@ -802,6 +798,7 @@ example: true
 ```
 
 ### Inline Views
+
 By default, View will render as a span which displays inline. When using the `as`
 prop to render a block level element, setting `display` to `inline-block`, styles
 the View to display inline-block with other inline elements.

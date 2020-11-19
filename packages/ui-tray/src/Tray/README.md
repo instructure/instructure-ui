@@ -4,7 +4,7 @@ describes: Tray
 
 The Tray is an actionable container that is triggered by click and does not need to be connected to the element that triggered it. The Tray is on the same hierarchy as the Popover but contains more content. The Tray slides out from the top/bottom/start/end of the viewport.
 
->Note that the `size` property only applies when the Tray is positioned at `start` or `end` and defines the width of the Tray.
+> Note that the `size` property only applies when the Tray is positioned at `start` or `end` and defines the width of the Tray.
 
 ```js
 ---
@@ -29,17 +29,17 @@ class Example extends React.Component {
   renderCloseButton () {
     return (
       <Flex>
-        <Flex.Item shouldGrow shouldShrink>
+        <FlexItem shouldGrow shouldShrink>
           <Heading>Hello</Heading>
-        </Flex.Item>
-        <Flex.Item>
+        </FlexItem>
+        <FlexItem>
           <CloseButton
             placement="end"
             offset="small"
             screenReaderLabel="Close"
             onClick={this.hideTray}
           />
-        </Flex.Item>
+        </FlexItem>
       </Flex>
     )
   }

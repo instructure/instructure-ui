@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Flex } from '@instructure/ui-flex'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { FocusableView } from '@instructure/ui-focusable'
 import { IconButton } from '@instructure/ui-buttons'
 import { IconEditLine } from '@instructure/ui-icons'
@@ -201,13 +201,13 @@ class InPlaceEdit extends Component {
         justifyItems={justifyItems}
         {...getContainerProps()}
       >
-        <Flex.Item shouldGrow shouldShrink>
+        <FlexItem shouldGrow shouldShrink>
           {this.renderEditor(getEditorProps())}
           {this.renderViewer(getViewerProps())}
-        </Flex.Item>
-        <Flex.Item margin={buttonMargin}>
+        </FlexItem>
+        <FlexItem margin={buttonMargin}>
           {this.renderEditButton(getEditButtonProps())}
-        </Flex.Item>
+        </FlexItem>
       </Flex>
     )
   }

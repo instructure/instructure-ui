@@ -25,6 +25,7 @@
 import React, { useState } from 'react'
 import { Avatar } from '@instructure/ui-avatar'
 import { Pill } from '@instructure/ui-pill'
+import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
 
 const components = {
@@ -57,6 +58,56 @@ const components = {
       </BreadcrumbLink>
       <BreadcrumbLink key="breadcrumbLink3">Rabbit Is Rich</BreadcrumbLink>
     </Breadcrumb>
+  ],
+  Flex: [
+    <Flex key={'flex6'} withVisualDebug>
+      <FlexItem shouldShrink shouldGrow>
+        I am growing and shrinking!
+      </FlexItem>
+      <FlexItem>I am not shrinking or growing.</FlexItem>
+    </Flex>,
+    <Flex key={'flex7'} withVisualDebug>
+      <FlexItem size="200px">I am always 200px.</FlexItem>
+      <FlexItem shouldShrink shouldGrow size="200px">
+        I can grow, and shrink down to 200px.
+      </FlexItem>
+      <FlexItem size="25%">I am always 25%.</FlexItem>
+    </Flex>,
+    <Flex key={'flex8'} alignItems="end" withVisualDebug>
+      <FlexItem>
+        <Avatar name="Sarah Robinson" size="large" />
+      </FlexItem>
+      <FlexItem shouldGrow shouldShrink>
+        I should be aligned to the bottom of the Avatar.
+      </FlexItem>
+      <FlexItem>Me, too.</FlexItem>
+      <FlexItem align="start">I am aligning myself to the top.</FlexItem>
+    </Flex>,
+    <div key={'flex9'}>
+      <Flex justifyItems="center" withVisualDebug>
+        <FlexItem>
+          <Avatar name="Sarah Robinson" size="large" />
+        </FlexItem>
+        <FlexItem>We are all centered!</FlexItem>
+        <FlexItem>Yeah!</FlexItem>
+      </Flex>
+
+      <Flex justifyItems="space-between" withVisualDebug>
+        <FlexItem>
+          <Avatar name="Sarah Robinson" size="large" />
+        </FlexItem>
+        <FlexItem>Ah, a little more space.</FlexItem>
+        <FlexItem>Totally.</FlexItem>
+      </Flex>
+
+      <Flex justifyItems="end" withVisualDebug>
+        <FlexItem>
+          <Avatar name="Sarah Robinson" size="large" />
+        </FlexItem>
+        <FlexItem>Smooshed again.</FlexItem>
+        <FlexItem>Ugh.</FlexItem>
+      </Flex>
+    </div>
   ]
 }
 const App = () => {

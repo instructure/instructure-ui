@@ -4,7 +4,6 @@ category: Patterns
 id: Search
 ---
 
-
 ## Search
 
 Make use of the following patterns when prompting users for a search query.
@@ -12,7 +11,6 @@ Make use of the following patterns when prompting users for a search query.
 ### Auto Activated Search
 
 Results are updated in real time as the user keys in the search term.
-
 
 ```js
 ---
@@ -56,7 +54,7 @@ class AutoActivatedSearchExample extends React.Component {
 
     this.setState({
       isLoading: true,
-      searchQuery: value 
+      searchQuery: value
     })
 
     this.timeoutId = setTimeout(() => {
@@ -227,7 +225,6 @@ guidelines: true
 Results are updated when a user triggers the search action, via keyboard or
 mouse.
 
-
 ```js
 ---
 render: false
@@ -282,7 +279,7 @@ class ActivatedSearchExample extends React.Component {
 
   renderClearButton = () => {
     if (!this.state.value.length) return;
-    
+
     return (
       <IconButton
           type="button"
@@ -312,7 +309,7 @@ class ActivatedSearchExample extends React.Component {
            onSubmit={this.handleSearch}
            autoComplete="off">
           <Flex>
-            <Flex.Item shouldGrow>
+            <FlexItem shouldGrow>
               <TextInput
                 renderLabel={
                   <ScreenReaderContent>Search fruits</ScreenReaderContent>
@@ -324,15 +321,15 @@ class ActivatedSearchExample extends React.Component {
                 renderBeforeInput={<IconSearchLine inline={false} />}
                 renderAfterInput={this.renderClearButton()}
               />
-            </Flex.Item>
-            <Flex.Item>
+            </FlexItem>
+            <FlexItem>
               <Button
                  color="primary"
                  margin="0 0 0 small"
                  onClick={this.handleSearch}>
                 Search
               </Button>
-            </Flex.Item>
+            </FlexItem>
           </Flex>
         </form>
         <View as="div" padding="medium 0 0">
@@ -419,7 +416,7 @@ guidelines: true
 Search performed within an autocomplete is used to populate the form field.
 If the desired result is not found, no action is ultimately taken with this
 pattern. It can be used for a single select, or a multi-select with tags. A
-search icon may or may not be used on the left, depending on the context. 
+search icon may or may not be used on the left, depending on the context.
 
 ```js
 ---
@@ -677,7 +674,7 @@ guidelines: true
 <Guidelines>
   <Figure recommendation="yes" title="Do">
     <Figure.Item>
-      Provide additional information when no results are found (e.g. "Sorry, no matches were found”, “No results found”, “User not found”) 
+      Provide additional information when no results are found (e.g. "Sorry, no matches were found”, “No results found”, “User not found”)
     </Figure.Item>
     <Figure.Item>
       Use a loading spinner if autocomplete results are being retrieved asynchronously
@@ -690,7 +687,6 @@ guidelines: true
 
 Use this reference to see how various states affect how the search input is
 rendered.
-
 
 ```js
 ---
