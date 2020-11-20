@@ -23,7 +23,6 @@
  */
 
 import generateComponentTheme from './theme'
-import { isIE11 } from '@instructure/ui-utils'
 import { keyframes } from '@instructure/emotion'
 
 /**
@@ -138,15 +137,6 @@ const generateStyle = (theme, themeOverride, { size, variant }, state) => {
     inverse: { stroke: componentTheme.inverseColor }
   }
 
-  const circleSpinIEVersion = isIE11
-    ? { strokeDashoffset: '100%' }
-    : {
-        animationName: morph,
-        animationDuration: '1.75s',
-        animationIterationCount: 'infinite',
-        animationTimingFunction: 'ease'
-      }
-
   return {
     root: {
       label: 'root',
@@ -179,9 +169,12 @@ const generateStyle = (theme, themeOverride, { size, variant }, state) => {
       label: 'circleSpin',
       fill: 'none',
       strokeLinecap: 'round',
+      animationName: morph,
+      animationDuration: '1.75s',
+      animationIterationCount: 'infinite',
+      animationTimingFunction: 'ease',
       ...circleSpinSizes[size],
-      ...circleSpinVariant[variant],
-      ...circleSpinIEVersion
+      ...circleSpinVariant[variant]
     }
   }
 }
