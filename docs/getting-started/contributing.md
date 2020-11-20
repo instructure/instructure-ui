@@ -18,6 +18,7 @@ __Installation steps:__
 
 Run `yarn run` to list the available commands.
 
+When you are ready with your changes open a pull request on Github to the `master` branch and we will review and merge it.
 
 ### Running the documentation app
 
