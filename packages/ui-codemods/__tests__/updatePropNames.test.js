@@ -31,7 +31,7 @@ const tests = ['elements', 'updateValues']
 jest.autoMockOff()
 
 describe('updatePropNames', () => {
-  tests.forEach(test => {
+  tests.forEach((test) => {
     defineTest(
       __dirname,
       'lib/updatePropNames',

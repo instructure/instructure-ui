@@ -36,7 +36,9 @@ export function generateA11yTests({ componentName, sections }, only = []) {
   describe(`${componentName} should meet accessibility standards`, async () => {
     sections.forEach(({ pages, sectionName, propName, propValue }, i) => {
       if (only[0] && i === only[0]) return
-      const description = propName ? `rendered with prop '${propName}' = '${propValue}'` : 'rendered'
+      const description = propName
+        ? `rendered with prop '${propName}' = '${propValue}'`
+        : 'rendered'
       describe(`${description}`, async () => {
         let rendered = 0
         let j = 0
@@ -45,9 +47,13 @@ export function generateA11yTests({ componentName, sections }, only = []) {
             const index = j + rendered
             if (only[1] && index !== only[1]) return
             const Example = renderExample.bind(null, example)
-            const description = process.env.DEBUG ?
-              `with prop combination: ${JSON.stringify(example.componentProps, null, 2)} [${i},${j}]` :
-              `${j}`
+            const description = process.env.DEBUG
+              ? `with prop combination: ${JSON.stringify(
+                  example.componentProps,
+                  null,
+                  2
+                )} [${i},${j}]`
+              : `${j}`
             it(description, async () => {
               await mount(<Example />)
               expect(await accessible()).to.be.true()

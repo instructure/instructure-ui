@@ -26,7 +26,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { matchComponentTypes, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  matchComponentTypes,
+  passthroughProps
+} from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
@@ -45,7 +48,7 @@ id: Modal.Header
 class ModalHeader extends Component {
   static propTypes = {
     children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse']),
+    variant: PropTypes.oneOf(['default', 'inverse'])
   }
 
   static defaultProps = {
@@ -53,7 +56,7 @@ class ModalHeader extends Component {
     variant: 'default'
   }
 
-  render () {
+  render() {
     const { children, variant, ...rest } = this.props
     let usesCloseButton = false
 
@@ -70,8 +73,7 @@ class ModalHeader extends Component {
     }
 
     return (
-      <div className={classnames(classes)}
-        {...passthroughProps(rest)}>
+      <div className={classnames(classes)} {...passthroughProps(rest)}>
         {children}
       </div>
     )

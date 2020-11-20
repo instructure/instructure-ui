@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default function generator ({ transitions }) {
+export default function generator({ transitions }) {
   return {
     duration: transitions.duration
   }

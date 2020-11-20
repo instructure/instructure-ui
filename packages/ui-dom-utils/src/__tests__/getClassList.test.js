@@ -28,9 +28,7 @@ import { getClassList } from '../getClassList'
 
 describe('getClassList', async () => {
   it('should provide classlist methods', async () => {
-    const subject = await mount(
-      <span className="foo bar baz">hello</span>
-    )
+    const subject = await mount(<span className="foo bar baz">hello</span>)
     const classes = getClassList(subject.getDOMNode())
 
     expect(classes.toArray().length).to.equal(3)

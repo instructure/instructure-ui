@@ -46,19 +46,19 @@ class FormFieldGroup extends Component {
   static propTypes = {
     description: PropTypes.node.isRequired,
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType,
     /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
+     * object with shape: `{
+     * text: PropTypes.string,
+     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     *   }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * id for the form field messages
-    */
+     * id for the form field messages
+     */
     messagesId: PropTypes.string,
     disabled: PropTypes.bool,
     children: PropTypes.node,
@@ -82,41 +82,45 @@ class FormFieldGroup extends Component {
     vAlign: 'middle'
   }
 
-  get invalid () {
+  get invalid() {
     return (
       this.props.messages &&
-      this.props.messages.findIndex(message => {
+      this.props.messages.findIndex((message) => {
         return message.type === 'error'
       }) >= 0
     )
   }
 
-  renderColumns () {
+  renderColumns() {
     return Children.map(this.props.children, (child, index) => {
-      return child
-        ? <Grid.Col width={child.props && child.props.width ? 'auto' : null} key={index}>
+      return child ? (
+        <Grid.Col
+          width={child.props && child.props.width ? 'auto' : null}
+          key={index}
+        >
           {child}
         </Grid.Col>
-        : null
+      ) : null
     })
   }
 
-  renderChildren () {
+  renderChildren() {
     return (
       <Grid
         colSpacing={this.props.colSpacing}
         rowSpacing={this.props.rowSpacing}
         vAlign={this.props.vAlign}
-        startAt={this.props.startAt || (this.props.layout === 'columns' ? 'medium' : null)}
+        startAt={
+          this.props.startAt ||
+          (this.props.layout === 'columns' ? 'medium' : null)
+        }
       >
-        <Grid.Row>
-          {this.renderColumns()}
-        </Grid.Row>
+        <Grid.Row>{this.renderColumns()}</Grid.Row>
       </Grid>
     )
   }
 
-  renderFields () {
+  renderFields() {
     return (
       <span
         key="fields"
@@ -131,7 +135,7 @@ class FormFieldGroup extends Component {
     )
   }
 
-  render () {
+  render() {
     return (
       <FormFieldLayout
         {...omitProps(this.props, FormFieldGroup.propTypes)}

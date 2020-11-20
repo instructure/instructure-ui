@@ -26,7 +26,7 @@
 
 import { makeThemeVars } from '@instructure/ui-themeable'
 
-export default function generator ({
+export default function generator({
   typography,
   colors,
   borders,

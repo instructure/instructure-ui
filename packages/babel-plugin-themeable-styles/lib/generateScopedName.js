@@ -26,10 +26,18 @@ const loaderUtils = require('loader-utils')
 const { getPackage } = require('@instructure/pkg-utils')
 
 const ENV = process.env.BABEL_ENV || process.env.NODE_ENV || 'development'
-const UNMANGLED_CLASS_NAMES = process.env.UNMANGLED_CLASS_NAMES ||
-  process.env.DEBUG || ENV === 'development'
+const UNMANGLED_CLASS_NAMES =
+  process.env.UNMANGLED_CLASS_NAMES ||
+  process.env.DEBUG ||
+  ENV === 'development'
 
-module.exports = function generateScopedName (getComponentId, config, name, filepath, css) {
+module.exports = function generateScopedName(
+  getComponentId,
+  config,
+  name,
+  filepath,
+  css
+) {
   const componentId = getComponentId()
   const context = {
     env: ENV,
@@ -40,7 +48,13 @@ module.exports = function generateScopedName (getComponentId, config, name, file
   let scopedNamePattern
 
   if (config && typeof config.generateScopedName === 'function') {
-    scopedNamePattern = config.generateScopedName(context, name, filepath, css, componentId)
+    scopedNamePattern = config.generateScopedName(
+      context,
+      name,
+      filepath,
+      css,
+      componentId
+    )
   } else if (config && typeof config.generateScopedName === 'string') {
     scopedNamePattern = config.generateScopedName
   } else if (UNMANGLED_CLASS_NAMES) {
@@ -48,10 +62,17 @@ module.exports = function generateScopedName (getComponentId, config, name, file
     const pkgName = pkg.name.split('/').pop()
     scopedNamePattern = `${pkgName}__[folder]--[local]`
   } else {
-    scopedNamePattern = `${componentId}_${loaderUtils.getHashDigest(name, 'md5', 'base52', 4)}`
+    scopedNamePattern = `${componentId}_${loaderUtils.getHashDigest(
+      name,
+      'md5',
+      'base52',
+      4
+    )}`
   }
 
   scopedNamePattern = scopedNamePattern.replace(/\[local\]/gi, name)
 
-  return loaderUtils.interpolateName(context, scopedNamePattern, { content: css })
+  return loaderUtils.interpolateName(context, scopedNamePattern, {
+    content: css
+  })
 }

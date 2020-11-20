@@ -45,16 +45,17 @@ describe('<MetricsList />', async () => {
 
   it('passes props through to MetricsList element', async () => {
     await mount(
-      <MetricsList
-        data-automation="foo"
-      >
+      <MetricsList data-automation="foo">
         <MetricsListItem label="Grade" value="80%" />
         <MetricsListItem label="Late" value="4" />
         <MetricsListItem label="Missing" value="2" />
       </MetricsList>
     )
 
-    expect(await MetricsListLocator.find()).to.have.attribute('data-automation', 'foo')
+    expect(await MetricsListLocator.find()).to.have.attribute(
+      'data-automation',
+      'foo'
+    )
   })
 
   describe('for a11y', async () => {

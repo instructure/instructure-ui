@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ spacing, typography }) {
+export default function generator({ spacing, typography }) {
   return {
     listPadding: spacing.large,
     orderedNumberFontWeight: typography.fontWeightBold,

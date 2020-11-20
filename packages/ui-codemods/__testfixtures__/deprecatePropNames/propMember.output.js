@@ -1,5 +1,7 @@
+/* eslint-disable */
+
 class Modal extends React.Component {
-  render () {
+  render() {
     this.props.open
     props.open
   }

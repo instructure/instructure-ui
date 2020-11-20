@@ -43,4 +43,3 @@ describe('makeThemeVars', () => {
     expect(result['marginXxLarge']).to.equal('baz')
   })
 })
-

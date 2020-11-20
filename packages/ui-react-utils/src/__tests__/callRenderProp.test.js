@@ -55,7 +55,7 @@ describe('callRenderProp', async () => {
 
   it('React classes', async () => {
     class Foo extends React.Component {
-      render () {
+      render() {
         return <div>hello</div>
       }
     }
@@ -68,7 +68,9 @@ describe('callRenderProp', async () => {
   })
 
   it('functions', async () => {
-    const Baz = function () { return 'some text'}
+    const Baz = function () {
+      return 'some text'
+    }
     const result = callRenderProp(Baz)
 
     const subject = await mount(<div>{result}</div>)
@@ -115,7 +117,7 @@ describe('callRenderProp', async () => {
           shape: 'circle'
         }
 
-        render () {
+        render() {
           return <div>{this.props.shape}</div>
         }
       }

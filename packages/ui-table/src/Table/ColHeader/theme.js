@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ typography, colors, borders, spacing }) {
+export default function generator({ typography, colors, borders, spacing }) {
   return {
     fontSize: typography.fontSizeMedium,
     fontFamily: typography.fontFamily,
@@ -38,6 +38,6 @@ export default function generator ({ typography, colors, borders, spacing }) {
 
     focusOutlineColor: colors.borderBrand,
     focusOutlineWidth: borders.widthMedium,
-    focusOutlineStyle: borders.style,
+    focusOutlineStyle: borders.style
   }
 }

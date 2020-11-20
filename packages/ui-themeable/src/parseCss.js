@@ -22,24 +22,23 @@
  * SOFTWARE.
  */
 
-
 /**
-* ---
-* category: utilities/themes
-* ---
-* Parses a CSS string into an AST object
-* @module parseCss
-* @param {String} cssText CSS string to parse
-* @returns {Object} AST for the CSS string
-*/
-function parseCss (cssText = '') {
+ * ---
+ * category: utilities/themes
+ * ---
+ * Parses a CSS string into an AST object
+ * @module parseCss
+ * @param {String} cssText CSS string to parse
+ * @returns {Object} AST for the CSS string
+ */
+function parseCss(cssText = '') {
   const cleaned = cleanCss(cssText)
   return parseLexed(lex(cleaned), cleaned)
 }
 
 /**
-* CSSRule types (https://developer.mozilla.org/en-US/docs/Web/API/CSSRule)
-*/
+ * CSSRule types (https://developer.mozilla.org/en-US/docs/Web/API/CSSRule)
+ */
 const ruleTypes = {
   style: 1,
   keyframes: 7,
@@ -47,19 +46,19 @@ const ruleTypes = {
 }
 
 /**
-* Removes comments and import statements from a CSS string
-* (to prep for parsing and applying transforms)
-* @param {String} cssText CSS string to parse
-* @returns {String} cleaned CSS string
-*/
-function cleanCss (text = '') {
+ * Removes comments and import statements from a CSS string
+ * (to prep for parsing and applying transforms)
+ * @param {String} cssText CSS string to parse
+ * @returns {String} cleaned CSS string
+ */
+function cleanCss(text = '') {
   // remove comments and imports
   return text
     .replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim, '')
     .replace(/@import[^;]*;/gim, '')
 }
 
-function lex (text) {
+function lex(text) {
   const rootNode = {
     start: 0,
     end: text.length
@@ -96,7 +95,7 @@ function lex (text) {
   return rootNode
 }
 
-function parseSelector (node, text) {
+function parseSelector(node, text) {
   const start = node.previous ? node.previous.end : node.parent.start
   const end = node.start - 1
 
@@ -108,7 +107,7 @@ function parseSelector (node, text) {
   return selector.trim()
 }
 
-function parseRuleType (selector) {
+function parseRuleType(selector) {
   if (selector.indexOf('@') === 0) {
     if (selector.indexOf('@media') === 0) {
       return ruleTypes.media
@@ -120,7 +119,7 @@ function parseRuleType (selector) {
   }
 }
 
-function parseLexed (node, text = '') {
+function parseLexed(node, text = '') {
   /* eslint-disable no-param-reassign */
 
   if (node.parent) {
@@ -131,7 +130,7 @@ function parseLexed (node, text = '') {
   node.cssText = text.substring(node.start, node.end - 1).trim()
 
   if (node.rules && node.rules.length > 0) {
-    node.rules = node.rules.map(rule => parseLexed(rule, text))
+    node.rules = node.rules.map((rule) => parseLexed(rule, text))
   }
 
   /* eslint-enable no-param-reassign */

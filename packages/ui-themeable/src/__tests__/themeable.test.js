@@ -50,7 +50,7 @@ describe('@themeable', async () => {
   }
 
   class ExampleComponent extends React.Component {
-    render () {
+    render() {
       return (
         <div className={styles.root} data-scope={this.scope}>
           Hello World
@@ -61,7 +61,8 @@ describe('@themeable', async () => {
 
   const ThemeableComponent = themeable(theme, styles)(ExampleComponent)
 
-  it('generates a valid component scope', async () => { // for IE/Edge
+  it('generates a valid component scope', async () => {
+    // for IE/Edge
     const subject = await mount(<ThemeableComponent />)
     const scope = subject.getDOMNode().getAttribute('data-scope')
 
@@ -77,7 +78,9 @@ describe('@themeable', async () => {
     const component = subject.getDOMNode()
 
     expect(getComputedStyle(component).color).to.equal('rgb(128, 0, 128)') // purple
-    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
+    expect(getComputedStyle(component).backgroundColor).to.equal(
+      'rgb(255, 255, 0)'
+    ) // yellow
   })
 
   it('ignores empty theme props', async () => {
@@ -85,7 +88,9 @@ describe('@themeable', async () => {
     const component = subject.getDOMNode()
 
     expect(getComputedStyle(component).color).to.equal('rgb(0, 128, 0)') // green
-    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
+    expect(getComputedStyle(component).backgroundColor).to.equal(
+      'rgb(255, 255, 0)'
+    ) // yellow
   })
 
   it('allows configuration through context', async () => {
@@ -102,7 +107,9 @@ describe('@themeable', async () => {
     const component = subject.getDOMNode()
 
     expect(getComputedStyle(component).color).to.equal('rgb(128, 0, 128)') // purple
-    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
+    expect(getComputedStyle(component).backgroundColor).to.equal(
+      'rgb(255, 255, 0)'
+    ) // yellow
   })
 
   it('falls back to the default theme', async () => {
@@ -110,7 +117,9 @@ describe('@themeable', async () => {
     const component = subject.getDOMNode()
 
     expect(getComputedStyle(component).color).to.equal('rgb(0, 128, 0)') // green
-    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
+    expect(getComputedStyle(component).backgroundColor).to.equal(
+      'rgb(255, 255, 0)'
+    ) // yellow
   })
 
   it('applies theme css variables to the root node', async () => {
@@ -120,7 +129,11 @@ describe('@themeable', async () => {
     const subject = await mount(<ThemeableComponent theme={theme} />)
     const component = subject.getDOMNode()
 
-    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('purple')
+    expect(
+      getComputedStyle(component).getPropertyValue(
+        `--${ThemeableComponent.componentId}-textColor`
+      )
+    ).to.equal('purple')
   })
 
   it('updates css variables when props are updated', async () => {
@@ -130,8 +143,12 @@ describe('@themeable', async () => {
     const subject = await mount(<ThemeableComponent />)
     const component = subject.getDOMNode()
 
-    await subject.setProps({theme})
-    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('purple')
+    await subject.setProps({ theme })
+    expect(
+      getComputedStyle(component).getPropertyValue(
+        `--${ThemeableComponent.componentId}-textColor`
+      )
+    ).to.equal('purple')
   })
 
   it('allows for overrides using the same name when an adapter is specified', async () => {
@@ -147,12 +164,22 @@ describe('@themeable', async () => {
 
     const adapter = createThemeAdapter({ map, version: '20.0.0' })
 
-    const ThemeableAdapterComponent = themeable(originalTheme, styles, adapter)(ExampleComponent)
+    const ThemeableAdapterComponent = themeable(
+      originalTheme,
+      styles,
+      adapter
+    )(ExampleComponent)
 
-    const subject = await mount(<ThemeableAdapterComponent theme={{ textColor: 'blue' }} />)
+    const subject = await mount(
+      <ThemeableAdapterComponent theme={{ textColor: 'blue' }} />
+    )
     const component = subject.getDOMNode()
 
-    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('blue')
+    expect(
+      getComputedStyle(component).getPropertyValue(
+        `--${ThemeableComponent.componentId}-textColor`
+      )
+    ).to.equal('blue')
   })
 
   it('allows for overrides of a different name when an adapter is specified', async () => {
@@ -168,11 +195,21 @@ describe('@themeable', async () => {
 
     const adapter = createThemeAdapter({ map, version: '20.0.0' })
 
-    const ThemeableAdapterComponent = themeable(originalTheme, styles, adapter)(ExampleComponent)
+    const ThemeableAdapterComponent = themeable(
+      originalTheme,
+      styles,
+      adapter
+    )(ExampleComponent)
 
-    const subject = await mount(<ThemeableAdapterComponent theme={{ contentColor: 'blue' }} />)
+    const subject = await mount(
+      <ThemeableAdapterComponent theme={{ contentColor: 'blue' }} />
+    )
     const component = subject.getDOMNode()
 
-    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('blue')
+    expect(
+      getComputedStyle(component).getPropertyValue(
+        `--${ThemeableComponent.componentId}-textColor`
+      )
+    ).to.equal('blue')
   })
 })

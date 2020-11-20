@@ -40,7 +40,7 @@ import { ownerDocument } from './ownerDocument'
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Array} offset parents
  */
-function getOffsetParents (el) {
+function getOffsetParents(el) {
   const parents = []
 
   if (!canUseDOM) {
@@ -53,15 +53,25 @@ function getOffsetParents (el) {
     let parent = node
 
     // eslint-disable-next-line no-cond-assign
-    while ((parent = parent.parentNode) && parent && parent.nodeType === 1 && parent.tagName !== 'BODY') {
+    while (
+      (parent = parent.parentNode) &&
+      parent &&
+      parent.nodeType === 1 &&
+      parent.tagName !== 'BODY'
+    ) {
       const style = getComputedStyle(parent)
-      const transform = style.getPropertyValue("-webkit-transform") ||
-                        style.getPropertyValue("-moz-transform") ||
-                        style.getPropertyValue("-ms-transform") ||
-                        style.getPropertyValue("-o-transform") ||
-                        style.getPropertyValue("transform") || 'none'
+      const transform =
+        style.getPropertyValue('-webkit-transform') ||
+        style.getPropertyValue('-moz-transform') ||
+        style.getPropertyValue('-ms-transform') ||
+        style.getPropertyValue('-o-transform') ||
+        style.getPropertyValue('transform') ||
+        'none'
       // initial value of transform can be 'none' or a matrix equivalent
-      const transformDefault = transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)' ? true : false
+      const transformDefault =
+        transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)'
+          ? true
+          : false
 
       if (style.position !== 'static' || !transformDefault) {
         parents.push(parent)

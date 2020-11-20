@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
@@ -38,54 +37,63 @@ import theme from './theme'
 
 @themeable(theme)
 class Header extends Component {
- static propTypes = {
-   name: PropTypes.string.isRequired,
-   version: PropTypes.string
- }
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    version: PropTypes.string
+  }
 
- static defaultProps = {
-   version: undefined
- }
+  static defaultProps = {
+    version: undefined
+  }
 
- render () {
-   const corpLogo = (
-     <InlineSVG viewBox="0 0 500 500" width="6rem" height="6rem">
-       <polygon fill="#2A7BA0" points="30.07,373.64 250.04,249.77 470,373.64 250.04,497.46 "/>
-       <polygon fill="#FDCC10" points="140.03,64.02 30.07,125.9 140.08,187.84 250.04,125.9 "/>
-       <polygon fill="#F78F20" points="249.99,2.08 140.08,63.97 250.04,125.9 359.99,64.02 "/>
-       <polygon fill="#EB2227" points="359.99,64.02 250.04,125.9 359.99,187.84 469.95,125.9 "/>
-     </InlineSVG>
-   )
+  render() {
+    const corpLogo = (
+      <InlineSVG viewBox="0 0 500 500" width="6rem" height="6rem">
+        <polygon
+          fill="#2A7BA0"
+          points="30.07,373.64 250.04,249.77 470,373.64 250.04,497.46 "
+        />
+        <polygon
+          fill="#FDCC10"
+          points="140.03,64.02 30.07,125.9 140.08,187.84 250.04,125.9 "
+        />
+        <polygon
+          fill="#F78F20"
+          points="249.99,2.08 140.08,63.97 250.04,125.9 359.99,64.02 "
+        />
+        <polygon
+          fill="#EB2227"
+          points="359.99,64.02 250.04,125.9 359.99,187.84 469.95,125.9 "
+        />
+      </InlineSVG>
+    )
 
-   return (
-     <View
-       role="banner"
-       as="div"
-       margin="none none medium"
-       padding="none medium"
-     >
-       <Heading level="h2" as="h1">
-         <Link
-           href="#index"
-           isWithinText={false}
-           display="block"
-         >
-           <View display="block" textAlign="center">
-             {corpLogo}
-             <View
-               display="block"
-               margin="small none none"
-             >
-               <Text size="large">
-                 {<span>{this.props.name} {this.props.version}</span> || 'Documentation'}
-               </Text>
-             </View>
-           </View>
-         </Link>
-       </Heading>
-     </View>
-   )
- }
+    return (
+      <View
+        role="banner"
+        as="div"
+        margin="none none medium"
+        padding="none medium"
+      >
+        <Heading level="h2" as="h1">
+          <Link href="#index" isWithinText={false} display="block">
+            <View display="block" textAlign="center">
+              {corpLogo}
+              <View display="block" margin="small none none">
+                <Text size="large">
+                  {(
+                    <span>
+                      {this.props.name} {this.props.version}
+                    </span>
+                  ) || 'Documentation'}
+                </Text>
+              </View>
+            </View>
+          </Link>
+        </Heading>
+      </View>
+    )
+  }
 }
 
 export default Header

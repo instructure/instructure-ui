@@ -30,12 +30,24 @@ import { ProgressCircleLocator } from '../ProgressCircleLocator'
 
 describe('<ProgressCircle />', async () => {
   it('should render', async () => {
-    await mount(<ProgressCircle screenReaderLabel="Chapters read" valueMax={60} valueNow={30} />)
+    await mount(
+      <ProgressCircle
+        screenReaderLabel="Chapters read"
+        valueMax={60}
+        valueNow={30}
+      />
+    )
     expect(await ProgressCircleLocator.find()).to.exist()
   })
 
   it('should render a progress element with correct aria attributes', async () => {
-    await mount(<ProgressCircle screenReaderLabel="Chapters read" valueMax={60} valueNow={30} />)
+    await mount(
+      <ProgressCircle
+        screenReaderLabel="Chapters read"
+        valueMax={60}
+        valueNow={30}
+      />
+    )
 
     const componentRoot = await ProgressCircleLocator.find()
     const progress = await componentRoot.find('progress')
@@ -52,13 +64,17 @@ describe('<ProgressCircle />', async () => {
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
-        formatScreenReaderValue={({ valueNow, valueMax }) => `${valueNow} chapters out of ${valueMax}`}
+        formatScreenReaderValue={({ valueNow, valueMax }) =>
+          `${valueNow} chapters out of ${valueMax}`
+        }
       />
     )
     const componentRoot = await ProgressCircleLocator.find()
     const progress = await componentRoot.find('progress')
 
-    expect(progress.getAttribute('aria-valuetext')).to.equal('30 chapters out of 60')
+    expect(progress.getAttribute('aria-valuetext')).to.equal(
+      '30 chapters out of 60'
+    )
   })
 
   it('should format the displayed text', async () => {

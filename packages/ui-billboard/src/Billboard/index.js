@@ -29,7 +29,11 @@ import classnames from 'classnames'
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, callRenderProp, getElementType } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  callRenderProp,
+  getElementType
+} from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -43,48 +47,48 @@ category: components
 class Billboard extends Component {
   static propTypes = {
     /**
-    * Provide an <Img> component or Instructure Icon for the hero image
-    */
+     * Provide an <Img> component or Instructure Icon for the hero image
+     */
     hero: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
-    * If you're using an icon, this prop will size it. Also sets the font-size
-    * of the headline and message.
-    */
+     * If you're using an icon, this prop will size it. Also sets the font-size
+     * of the headline and message.
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType,
     /**
-    * provides a reference to the underlying html root element
-    */
+     * provides a reference to the underlying html root element
+     */
     elementRef: PropTypes.func,
     /**
-    * The headline for the Billboard. Is styled as an h1 element by default
-    */
+     * The headline for the Billboard. Is styled as an h1 element by default
+     */
     heading: PropTypes.string,
     /**
-    * Choose the appropriately semantic tag for the heading
-    */
+     * Choose the appropriately semantic tag for the heading
+     */
     headingAs: PropTypes.oneOf(['h1', 'h2', 'h3', 'span']),
     /**
-    * Choose the font-size for the heading (see the Heading component)
-    */
+     * Choose the font-size for the heading (see the Heading component)
+     */
     headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4']),
     /**
-    * Instructions or information for the Billboard. Note: you should not pass
-    * interactive content to this prop if you are also providing an `href` or
-    * `onClick`. That would cause the Billboard to render as a button or link
-    * and would result in nested interactive content.
-    */
+     * Instructions or information for the Billboard. Note: you should not pass
+     * interactive content to this prop if you are also providing an `href` or
+     * `onClick`. That would cause the Billboard to render as a button or link
+     * and would result in nested interactive content.
+     */
     message: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * If you add an onClick prop, the Billboard renders as a clickable button
-    */
+     * If you add an onClick prop, the Billboard renders as a clickable button
+     */
     onClick: PropTypes.func,
     /**
-    * If `href` is provided, Billboard will render as a link
-    */
+     * If `href` is provided, Billboard will render as a link
+     */
     href: PropTypes.string,
     /**
      * Whether or not to disable the billboard
@@ -95,10 +99,10 @@ class Billboard extends Component {
      */
     readOnly: PropTypes.bool,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing
   }
 
@@ -118,31 +122,23 @@ class Billboard extends Component {
     elementRef: (el) => {}
   }
 
-  renderHeading () {
-    const {
-      headingLevel,
-      headingAs,
-      heading
-    } = this.props
+  renderHeading() {
+    const { headingLevel, headingAs, heading } = this.props
 
     return (
       <span className={styles.heading}>
-        <Heading
-          level={headingLevel}
-          as={headingAs}
-          color="primary"
-        >
+        <Heading level={headingLevel} as={headingAs} color="primary">
           {heading}
         </Heading>
       </span>
     )
   }
 
-  get heroIsFunction () {
+  get heroIsFunction() {
     return typeof this.props.hero === 'function'
   }
 
-  get SVGIconSize () {
+  get SVGIconSize() {
     const size = this.props.size
 
     // serve up appropriate SVGIcon size for each Billboard size
@@ -155,7 +151,7 @@ class Billboard extends Component {
     }
   }
 
-  renderHero () {
+  renderHero() {
     if (this.heroIsFunction) {
       return this.props.hero(this.SVGIconSize)
     } else {
@@ -163,27 +159,22 @@ class Billboard extends Component {
     }
   }
 
-  renderContent () {
-    const {
-      heading,
-      message,
-      hero
-    } = this.props
+  renderContent() {
+    const { heading, message, hero } = this.props
 
     return (
       <span className={styles.content}>
         {hero && <span className={styles.hero}>{this.renderHero()}</span>}
         {heading && this.renderHeading()}
-        {message && <span className={styles.message}>{callRenderProp(message)}</span>}
+        {message && (
+          <span className={styles.message}>{callRenderProp(message)}</span>
+        )}
       </span>
     )
   }
 
   handleClick = (e) => {
-    const {
-      readOnly,
-      onClick
-    } = this.props
+    const { readOnly, onClick } = this.props
 
     if (readOnly) {
       e.preventDefault()
@@ -193,7 +184,7 @@ class Billboard extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       href,
       disabled,
@@ -215,15 +206,18 @@ class Billboard extends Component {
     return (
       <View as="div" margin={margin}>
         <View
-          {...omitProps(this.props, { ...Billboard.propTypes, ...View.propTypes })}
-          type={(Element === 'button') ? 'button' : null}
+          {...omitProps(this.props, {
+            ...Billboard.propTypes,
+            ...View.propTypes
+          })}
+          type={Element === 'button' ? 'button' : null}
           as={Element}
           elementRef={elementRef}
           className={classnames(classes)}
           href={href}
           onClick={this.handleClick}
           disabled={disabled}
-          aria-disabled={(disabled || readOnly) ? 'true' : null}
+          aria-disabled={disabled || readOnly ? 'true' : null}
         >
           {this.renderContent()}
         </View>

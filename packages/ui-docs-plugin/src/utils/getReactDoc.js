@@ -26,11 +26,14 @@ const reactDocgen = require('react-docgen')
 
 const ERROR_MISSING_DEFINITION = 'No suitable component definition found.'
 
-module.exports = function getReactDoc (source, error) {
+module.exports = function getReactDoc(source, error) {
   let doc = {}
 
   try {
-    doc = reactDocgen.parse(source, reactDocgen.resolver.findAllExportedComponentDefinitions)
+    doc = reactDocgen.parse(
+      source,
+      reactDocgen.resolver.findAllExportedComponentDefinitions
+    )
     if (Array.isArray(doc)) {
       doc = doc.pop()
     }

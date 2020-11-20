@@ -31,22 +31,16 @@ import styles from '../styles.css'
 
 describe('<ModalHeader />', async () => {
   it('should render', async () => {
-    const subject = await mount(
-      <ModalHeader />
-    )
+    const subject = await mount(<ModalHeader />)
 
     const header = within(subject.getDOMNode())
     expect(header).to.exist()
   })
 
   it('should set inverse styles', async () => {
-    const subject = await mount(
-      <ModalHeader
-        variant="inverse" />
-    )
+    const subject = await mount(<ModalHeader variant="inverse" />)
 
     const header = within(subject.getDOMNode())
     expect(header).to.have.className(styles['inverse'])
   })
-
 })

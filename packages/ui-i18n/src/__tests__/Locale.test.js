@@ -47,4 +47,3 @@ describe('browserLocale', () => {
     expect(Locale.browserLocale(null, false)).to.equal('en-US')
   })
 })
-

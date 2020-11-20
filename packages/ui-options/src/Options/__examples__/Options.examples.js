@@ -30,9 +30,7 @@ export default {
   propValues: {
     children: [
       [
-        <Options.Item key="option-1">
-          Option one
-        </Options.Item>,
+        <Options.Item key="option-1">Option one</Options.Item>,
         <Options.Item key="option-2" variant="highlighted">
           Option two
         </Options.Item>,
@@ -51,33 +49,25 @@ export default {
         >
           Flyout menu option
         </Options.Item>,
-        <Options.Item key="option-2">
-          Option one
-        </Options.Item>,
+        <Options.Item key="option-2">Option one</Options.Item>,
         <Options.Separator key="sep-1" />,
         <Options key="sub-list" renderLabel={'Sub list'}>
-          <Options.Item variant="selected">
-            Sub option one
-          </Options.Item>
-          <Options.Item>
-            Sub option two
-          </Options.Item>
+          <Options.Item variant="selected">Sub option one</Options.Item>
+          <Options.Item>Sub option two</Options.Item>
         </Options>,
         <Options.Separator key="sep-2" />,
         <Options key="icon-list" renderLabel={'Icon List'}>
           <Options.Item renderBeforeLabel={IconCheckSolid}>
             Icon option one
           </Options.Item>
-          <Options.Item renderBeforeLabel={
-            <IconCheckSolid style={{opacity: 0}} />
-          }>
+          <Options.Item
+            renderBeforeLabel={<IconCheckSolid style={{ opacity: 0 }} />}
+          >
             Icon option two
           </Options.Item>
         </Options>,
         <Options.Separator key="sep-3" />,
-        <Options.Item key="option-3">
-          Option two
-        </Options.Item>
+        <Options.Item key="option-3">Option two</Options.Item>
       ]
     ]
   }

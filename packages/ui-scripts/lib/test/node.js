@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 const { getPackageJSON } = require('@instructure/pkg-utils')
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
+const {
+  runCommandsConcurrently,
+  getCommand
+} = require('@instructure/command-utils')
 
 const { main } = getPackageJSON()
 const commands = {

@@ -27,7 +27,10 @@ import PropTypes from 'prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import { themeable } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { matchComponentTypes, safeCloneElement } from '@instructure/ui-react-utils'
+import {
+  matchComponentTypes,
+  safeCloneElement
+} from '@instructure/ui-react-utils'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { createChainedFunction, px } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
@@ -80,7 +83,7 @@ class DrawerLayout extends Component {
   static Content = DrawerContent
   static Tray = DrawerTray
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -94,30 +97,30 @@ class DrawerLayout extends Component {
 
   _content = null
 
-  getChildContext () {
+  getChildContext() {
     return {
       shouldOverlayTray: this.state.shouldOverlayTray
     }
   }
 
-  get trayProps () {
-    const tray = Children.toArray(this.props.children).filter(
-      (child) => matchComponentTypes(child, [DrawerTray])
+  get trayProps() {
+    const tray = Children.toArray(this.props.children).filter((child) =>
+      matchComponentTypes(child, [DrawerTray])
     )[0]
     return tray.props
   }
 
-  get trayPlacement () {
+  get trayPlacement() {
     const { placement } = this.trayProps
     return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
-  get contentMargin () {
+  get contentMargin() {
     const trayWidth = this.state.trayWidth || 0
-    return (this.state.shouldOverlayTray) ? 0 : trayWidth
+    return this.state.shouldOverlayTray ? 0 : trayWidth
   }
 
-  get contentStyle () {
+  get contentStyle() {
     const shouldOverlayTray = this.shouldOverlayTray(
       this.props.minWidth,
       this.state.trayWidth,
@@ -147,19 +150,19 @@ class DrawerLayout extends Component {
     this._tray = el
   }
 
-  shouldOverlayTray (minWidth, trayWidth, contentWidth, trayIsOverlayed) {
+  shouldOverlayTray(minWidth, trayWidth, contentWidth, trayIsOverlayed) {
     if (!this._content) return false
 
     const minWidthPx = px(minWidth, this._content)
 
     if (trayIsOverlayed) {
-      return (contentWidth - trayWidth) < minWidthPx
+      return contentWidth - trayWidth < minWidthPx
     } else {
       return contentWidth < minWidthPx
     }
   }
 
-  getNextState (minWidth, trayWidth, contentWidth, trayIsOverlayed) {
+  getNextState(minWidth, trayWidth, contentWidth, trayIsOverlayed) {
     const shouldOverlayTray = this.shouldOverlayTray(
       minWidth,
       trayWidth,
@@ -174,7 +177,7 @@ class DrawerLayout extends Component {
     }
   }
 
-  notifyOverlayTrayChange (shouldOverlayTray) {
+  notifyOverlayTrayChange(shouldOverlayTray) {
     const { onOverlayTrayChange } = this.props
     if (typeof onOverlayTrayChange === 'function') {
       onOverlayTrayChange(shouldOverlayTray)
@@ -229,7 +232,7 @@ class DrawerLayout extends Component {
     this.handleTraySizeChange({ width: 0 })
   }
 
-  renderChildren () {
+  renderChildren() {
     let trayCount = 0
     let contentCount = 0
 
@@ -261,26 +264,37 @@ class DrawerLayout extends Component {
           }
         }
 
-        return (this.state.trayWidth !== null) ? safeCloneElement(child, {
-          key: child.props.label,
-          [DrawerContent.locatorAttribute]: this._id,
-          style: this.contentStyle,
-          onSizeChange: createChainedFunction(this.handleContentSizeChange, child.props.onSizeChange),
-          contentRef: handleContentRef,
-          shouldTransition: !shouldOverlayTray
-        }) : null
+        return this.state.trayWidth !== null
+          ? safeCloneElement(child, {
+              key: child.props.label,
+              [DrawerContent.locatorAttribute]: this._id,
+              style: this.contentStyle,
+              onSizeChange: createChainedFunction(
+                this.handleContentSizeChange,
+                child.props.onSizeChange
+              ),
+              contentRef: handleContentRef,
+              shouldTransition: !shouldOverlayTray
+            })
+          : null
       } else {
         return child
       }
     })
 
-    error((trayCount <= 1), `[DrawerLayout] Only one 'DrawerTray' per 'DrawerLayout' is supported.`)
-    error((contentCount <= 1), `[DrawerLayout] Only one 'DrawerContent' per 'DrawerLayout' is supported.`)
+    error(
+      trayCount <= 1,
+      `[DrawerLayout] Only one 'DrawerTray' per 'DrawerLayout' is supported.`
+    )
+    error(
+      contentCount <= 1,
+      `[DrawerLayout] Only one 'DrawerContent' per 'DrawerLayout' is supported.`
+    )
 
     return children
   }
 
-  render () {
+  render() {
     const props = { [DrawerLayout.locatorAttribute]: this._id }
     return (
       <div {...props} className={styles.root}>

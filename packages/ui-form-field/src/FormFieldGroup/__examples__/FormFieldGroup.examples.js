@@ -43,11 +43,12 @@ export default {
     }
   },
   filter: (props) => {
-    return  (
-      props.vAlign || props.startAt ||
-      props.layout === 'columns' && props.rowSpacing !== 'none' ||
-      props.layout === 'rows' && props.colSpacing !== 'none' ||
-      props.layout !== 'inline' && props.vAlign !== 'middle'
+    return (
+      props.vAlign ||
+      props.startAt ||
+      (props.layout === 'columns' && props.rowSpacing !== 'none') ||
+      (props.layout === 'rows' && props.colSpacing !== 'none') ||
+      (props.layout !== 'inline' && props.vAlign !== 'middle')
     )
   }
 }

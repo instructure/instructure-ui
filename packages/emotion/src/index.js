@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 export { jsx, css } from '@emotion/core'
-export { EmotionThemeProvider } from "./EmotionThemeProvider"
-export { useStyle, useTheme } from "./useStyle"
+export { EmotionThemeProvider } from './EmotionThemeProvider'
+export { useStyle, useTheme } from './useStyle'

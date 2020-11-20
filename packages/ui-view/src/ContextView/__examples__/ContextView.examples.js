@@ -26,12 +26,7 @@ import React from 'react'
 export default {
   sectionProp: 'background',
   propValues: {
-    placement: [
-      'top',
-      'end',
-      'bottom',
-      'start'
-    ]
+    placement: ['top', 'end', 'bottom', 'start']
   },
   getComponentProps: (props) => {
     return {

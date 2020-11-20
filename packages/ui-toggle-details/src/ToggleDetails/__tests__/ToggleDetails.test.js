@@ -32,17 +32,16 @@ describe('<ToggleDetails />', async () => {
   it('should hide its content', async () => {
     await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
 
-    expect(await ToggleDetailsLocator.find(':contains(Content)',  {
-      expectEmpty: true
-    })).to.not.exist()
+    expect(
+      await ToggleDetailsLocator.find(':contains(Content)', {
+        expectEmpty: true
+      })
+    ).to.not.exist()
   })
 
   it('should place the icon after the summary when prop is set', async () => {
     await mount(
-      <ToggleDetails
-        iconPosition="end"
-        summary="Click me"
-      >
+      <ToggleDetails iconPosition="end" summary="Click me">
         Content
       </ToggleDetails>
     )
@@ -61,7 +60,9 @@ describe('<ToggleDetails />', async () => {
     const toggle = await toggleDetails.findToggle()
     const content = await toggleDetails.findContent({ visible: false })
 
-    expect(toggle.getAttribute('aria-controls')).to.equal(content.getAttribute('id'))
+    expect(toggle.getAttribute('aria-controls')).to.equal(
+      content.getAttribute('id')
+    )
   })
 
   it('should have an aria-expanded attribute', async () => {
@@ -89,11 +90,7 @@ describe('<ToggleDetails />', async () => {
     })
 
     await mount(
-      <ToggleDetails
-        summary="Click me"
-        expanded={false}
-        onToggle={onToggle}
-      >
+      <ToggleDetails summary="Click me" expanded={false} onToggle={onToggle}>
         Details
       </ToggleDetails>
     )
@@ -108,7 +105,11 @@ describe('<ToggleDetails />', async () => {
   })
 
   it('should be initialized by defaultExpanded prop', async () => {
-    await mount(<ToggleDetails summary="Click me" defaultExpanded>Content</ToggleDetails>)
+    await mount(
+      <ToggleDetails summary="Click me" defaultExpanded>
+        Content
+      </ToggleDetails>
+    )
 
     const toggleDetails = await ToggleDetailsLocator.find()
 
@@ -131,7 +132,9 @@ describe('<ToggleDetails />', async () => {
     await mount(
       <ToggleDetails
         summary="Click me"
-        componentRef={(el) => { toggleRef = el }}
+        componentRef={(el) => {
+          toggleRef = el
+        }}
       >
         Content
       </ToggleDetails>

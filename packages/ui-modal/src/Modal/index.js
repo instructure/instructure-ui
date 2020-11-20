@@ -27,8 +27,15 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { Dialog } from '@instructure/ui-dialog'
-import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { passthroughProps, safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
+import {
+  element,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
+import {
+  passthroughProps,
+  safeCloneElement,
+  matchComponentTypes
+} from '@instructure/ui-react-utils'
 import { createChainedFunction, isIE11 } from '@instructure/ui-utils'
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
@@ -69,8 +76,8 @@ class Modal extends Component {
     ),
 
     /**
-    * The element to render the dialog as, `span` by default
-    */
+     * The element to render the dialog as, `span` by default
+     */
     as: PropTypes.elementType,
 
     /*
@@ -79,8 +86,8 @@ class Modal extends Component {
     size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
 
     /**
-    * Designates the background style of the `<Modal />`
-    */
+     * Designates the background style of the `<Modal />`
+     */
     variant: PropTypes.oneOf(['default', 'inverse']),
 
     /**
@@ -91,7 +98,10 @@ class Modal extends Component {
     /**
      * An element or a function returning an element to focus by default
      */
-    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    defaultFocusElement: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
 
     /**
      * Whether focus should be returned to the trigger when the `<Modal/>` is closed
@@ -138,7 +148,11 @@ class Modal extends Component {
      * An element, function returning an element, or array of elements that will not be hidden from
      * the screen reader when the `<Modal />` is open
      */
-    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+    liveRegion: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+      PropTypes.func
+    ]),
 
     transition: Transition.propTypes.type,
 
@@ -182,9 +196,9 @@ class Modal extends Component {
     size: 'auto',
     variant: 'default',
     transition: 'fade',
-    onOpen: event => {},
-    onClose: event => {},
-    onDismiss: event => {},
+    onOpen: (event) => {},
+    onClose: (event) => {},
+    onDismiss: (event) => {},
     onEnter: () => {},
     onEntering: () => {},
     onEntered: () => {},
@@ -195,7 +209,7 @@ class Modal extends Component {
     mountNode: null,
     insertAt: 'bottom',
     liveRegion: null,
-    contentRef: el => {},
+    contentRef: (el) => {},
     shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
     defaultFocusElement: null,
@@ -208,7 +222,7 @@ class Modal extends Component {
   static Body = ModalBody
   static Footer = ModalFooter
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -216,7 +230,7 @@ class Modal extends Component {
     }
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.open && !this.props.open) {
       // closing
       this.setState({
@@ -225,15 +239,15 @@ class Modal extends Component {
     }
   }
 
-  get defaultFocusElement () {
+  get defaultFocusElement() {
     return this.props.defaultFocusElement
   }
 
-  get DOMNode () {
+  get DOMNode() {
     return this._DOMNode
   }
 
-  get maskPlacement () {
+  get maskPlacement() {
     if (isIE11) {
       return 'top'
     } else if (this.props.overflow === 'fit') {
@@ -243,7 +257,7 @@ class Modal extends Component {
     }
   }
 
-  set DOMNode (el) {
+  set DOMNode(el) {
     this._DOMNode = el
   }
 
@@ -258,19 +272,15 @@ class Modal extends Component {
     })
   }
 
-  contentRef = el => {
+  contentRef = (el) => {
     this._content = el
     if (typeof this.props.contentRef === 'function') {
       this.props.contentRef(el)
     }
   }
 
-  renderChildren () {
-    const {
-      children,
-      variant,
-      overflow
-    } = this.props
+  renderChildren() {
+    const { children, variant, overflow } = this.props
 
     return Children.map(children, (child) => {
       if (!child) return // ignore null, falsy children
@@ -288,7 +298,7 @@ class Modal extends Component {
     })
   }
 
-  renderDialog (props) {
+  renderDialog(props) {
     const {
       onDismiss,
       label,
@@ -333,9 +343,10 @@ class Modal extends Component {
           className={classnames({
             [styles.fullscreenLayout]: true,
             [styles[`fullscreenLayout--${constrain}`]]: true
-          })}>
-            {dialog}
-          </span>
+          })}
+        >
+          {dialog}
+        </span>
       )
     } else {
       return (
@@ -349,7 +360,7 @@ class Modal extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       open,
       onOpen,
@@ -389,16 +400,19 @@ class Modal extends Component {
             onEntered={onEntered}
             onExit={onExit}
             onExiting={onExiting}
-            onExited={createChainedFunction(this.handleTransitionExited, onExited)}
+            onExited={createChainedFunction(
+              this.handleTransitionExited,
+              onExited
+            )}
             theme={this.ie11 ? { duration: '0s' } : null} // IE11 doesn't always complete transition
           >
-            {
-              (constrain === 'parent') ?
-                <span className={styles.constrainContext}>
-                  {this.renderDialog(passthroughProps)}
-                </span>
-                : this.renderDialog(passthroughProps)
-            }
+            {constrain === 'parent' ? (
+              <span className={styles.constrainContext}>
+                {this.renderDialog(passthroughProps)}
+              </span>
+            ) : (
+              this.renderDialog(passthroughProps)
+            )}
           </Transition>
         )}
       </Portal>

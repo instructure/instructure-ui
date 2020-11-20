@@ -31,9 +31,7 @@ import { OverlayLocator } from '../OverlayLocator'
 
 describe('<Overlay />', async () => {
   it('should render nothing when closed', async () => {
-    await mount(
-      <Overlay label="Overlay Example"/>
-    )
+    await mount(<Overlay label="Overlay Example" />)
     const overlay = await OverlayLocator.find({ expectEmpty: true })
     expect(overlay).to.not.exist()
   })
@@ -72,13 +70,7 @@ describe('<Overlay />', async () => {
 
   it('should support onOpen prop', async () => {
     const onOpen = stub()
-    await mount(
-      <Overlay
-        open
-        label="Overlay Example"
-        onOpen={onOpen}
-      />
-    )
+    await mount(<Overlay open label="Overlay Example" onOpen={onOpen} />)
 
     await wait(() => {
       expect(onOpen).to.have.been.calledOnce()
@@ -88,11 +80,7 @@ describe('<Overlay />', async () => {
   it('should support onClose prop', async () => {
     const onClose = stub()
     const subject = await mount(
-      <Overlay
-        open
-        label="Overlay Example"
-        onClose={onClose}
-      />
+      <Overlay open label="Overlay Example" onClose={onClose} />
     )
 
     expect(onClose).to.not.have.been.called()

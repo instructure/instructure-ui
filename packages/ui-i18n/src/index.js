@@ -31,4 +31,3 @@ export { getTextDirection } from './getTextDirection'
 export { I18nPropTypes } from './I18nPropTypes'
 export { Locale } from './Locale'
 export { TextDirectionContext } from './TextDirectionContext'
-

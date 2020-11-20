@@ -36,7 +36,9 @@ describe('<Tabs />', async () => {
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -51,7 +53,9 @@ describe('<Tabs />', async () => {
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
         {null}
       </Tabs>
     )
@@ -67,7 +71,9 @@ describe('<Tabs />', async () => {
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -81,9 +87,7 @@ describe('<Tabs />', async () => {
     stub(console, 'warn') // suppress Focusable warnings
     let error = false
     try {
-      await mount(
-        <Tabs></Tabs>
-      )
+      await mount(<Tabs></Tabs>)
     } catch (e) {
       error = true
     }
@@ -95,7 +99,9 @@ describe('<Tabs />', async () => {
     let error = false
     try {
       await mount(
-        <Tabs><div>foo</div></Tabs>
+        <Tabs>
+          <div>foo</div>
+        </Tabs>
       )
     } catch (e) {
       error = true
@@ -108,7 +114,11 @@ describe('<Tabs />', async () => {
     let tabs
 
     const subject = await mount(
-      <Tabs componentRef={(el) => { tabs = el }}>
+      <Tabs
+        componentRef={(el) => {
+          tabs = el
+        }}
+      >
         <Tabs.Panel renderTitle="foo" key="foo" />
       </Tabs>
     )
@@ -137,14 +147,18 @@ describe('<Tabs />', async () => {
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
 
     expect(await tabs.findSelectedTab(':contains(First Tab)')).to.exist()
-    const selectedTabsPanel = await tabs.findTabPanel(':contains(Tab 1 content)')
+    const selectedTabsPanel = await tabs.findTabPanel(
+      ':contains(Tab 1 content)'
+    )
     expect(selectedTabsPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
@@ -152,8 +166,12 @@ describe('<Tabs />', async () => {
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab" isSelected>Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" isSelected>
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -169,15 +187,19 @@ describe('<Tabs />', async () => {
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled isSelected>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled isSelected>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
     const tabs = await TabsLocator.find()
 
-    expect(await tabs.findSelectedTab(':contains(Third Tab)', {
-      expectEmpty: true
-    })).to.not.exist()
+    expect(
+      await tabs.findSelectedTab(':contains(Third Tab)', {
+        expectEmpty: true
+      })
+    ).to.not.exist()
 
     expect(await tabs.findSelectedTab(':contains(First Tab)')).to.exist()
 
@@ -190,9 +212,15 @@ describe('<Tabs />', async () => {
 
     await mount(
       <Tabs onRequestTabChange={onChange}>
-        <Tabs.Panel renderTitle="First Tab" isSelected id="one">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab" id="two">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled id="three">Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="First Tab" isSelected id="one">
+          Tab 1 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" id="two">
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled id="three">
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -212,8 +240,12 @@ describe('<Tabs />', async () => {
     await mount(
       <Tabs focus>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Second Tab" isSelected>Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Second Tab" isSelected>
+          Tab 2 content
+        </Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -232,7 +264,9 @@ describe('<Tabs />', async () => {
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -280,7 +314,9 @@ describe('<Tabs />', async () => {
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -301,7 +337,9 @@ describe('<Tabs />', async () => {
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -318,7 +356,9 @@ describe('<Tabs />', async () => {
       <Tabs variant="secondary">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -331,7 +371,9 @@ describe('<Tabs />', async () => {
       <Tabs variant="default">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -344,7 +386,9 @@ describe('<Tabs />', async () => {
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab">Tab 2 content</Tabs.Panel>
-        <Tabs.Panel renderTitle="Third Tab" isDisabled>Tab 3 content</Tabs.Panel>
+        <Tabs.Panel renderTitle="Third Tab" isDisabled>
+          Tab 3 content
+        </Tabs.Panel>
       </Tabs>
     )
 
@@ -353,13 +397,14 @@ describe('<Tabs />', async () => {
 
     const firstPanel = await tabs.findTabPanel(':contains(Tab 1 content)')
 
-    expect(firstTab.getAttribute('aria-controls'))
-      .to.equal(firstPanel.getAttribute('id'))
+    expect(firstTab.getAttribute('aria-controls')).to.equal(
+      firstPanel.getAttribute('id')
+    )
 
-    expect(firstPanel.getAttribute('aria-labelledby'))
-      .to.equal(firstTab.getAttribute('id'))
+    expect(firstPanel.getAttribute('aria-labelledby')).to.equal(
+      firstTab.getAttribute('id')
+    )
   })
-
 
   describe('with duplicate-named tabs', async () => {
     it('should still render the correct number of panels', async () => {
@@ -367,7 +412,9 @@ describe('<Tabs />', async () => {
         <Tabs>
           <Tabs.Panel renderTitle="A Tab">Contents of first tab.</Tabs.Panel>
           <Tabs.Panel renderTitle="A Tab">Contents of second tab.</Tabs.Panel>
-          <Tabs.Panel renderTitle="A Tab" isDisabled>Contents of third tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle="A Tab" isDisabled>
+            Contents of third tab.
+          </Tabs.Panel>
         </Tabs>
       )
       const tabs = await TabsLocator.find()
@@ -375,15 +422,18 @@ describe('<Tabs />', async () => {
       expect(tabPanels).to.have.length(3)
     })
   })
-
 
   describe('with nodes as tab titles', async () => {
     it('should still render the correct number of panels', async () => {
       await mount(
         <Tabs>
-          <Tabs.Panel renderTitle={<div/>}>Contents of first tab.</Tabs.Panel>
-          <Tabs.Panel renderTitle={<span/>}>Contents of second tab.</Tabs.Panel>
-          <Tabs.Panel renderTitle={<img alt='example'/>} isDisabled>Contents of third tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle={<div />}>Contents of first tab.</Tabs.Panel>
+          <Tabs.Panel renderTitle={<span />}>
+            Contents of second tab.
+          </Tabs.Panel>
+          <Tabs.Panel renderTitle={<img alt="example" />} isDisabled>
+            Contents of third tab.
+          </Tabs.Panel>
         </Tabs>
       )
       const tabs = await TabsLocator.find()
@@ -391,7 +441,6 @@ describe('<Tabs />', async () => {
       expect(tabPanels).to.have.length(3)
     })
   })
-
 
   describe('with tabOverflow set to scroll', async () => {
     it('should render a fade-out gradient when Tabs overflow', async () => {
@@ -415,8 +464,12 @@ describe('<Tabs />', async () => {
 
       await subject.setProps({ width: '550px' })
 
-      expect(await tabs.find(`.${styles['scrollOverlay']}`, { expectEmpty: true })).to.not.exist()
-      expect(await tabs.find(`.${styles['scrollSpacer']}`, { expectEmpty: true })).to.not.exist()
+      expect(
+        await tabs.find(`.${styles['scrollOverlay']}`, { expectEmpty: true })
+      ).to.not.exist()
+      expect(
+        await tabs.find(`.${styles['scrollSpacer']}`, { expectEmpty: true })
+      ).to.not.exist()
     })
   })
 })

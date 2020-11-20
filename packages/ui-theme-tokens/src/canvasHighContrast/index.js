@@ -27,7 +27,7 @@ import { colors } from './colors'
 
 const canvasHighContrast = {
   ...canvas,
-  colors,
+  colors
 }
 
 export default canvasHighContrast

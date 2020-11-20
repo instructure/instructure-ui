@@ -40,18 +40,33 @@ describe('getScrollParents', async () => {
       <div id="ht" style={{ height: '50px' }} />
       <div id="scroll-parent" style={{ height: '200px', overflow: 'scroll' }}>
         <div>
-          <div id="scroll-child" style={{ height: '500px' }}>hello</div>
+          <div id="scroll-child" style={{ height: '500px' }}>
+            hello
+          </div>
         </div>
       </div>
 
-      <div id="scroll-parent-rel" style={{ height: '200px', overflow: 'scroll', position: 'relative' }}>
+      <div
+        id="scroll-parent-rel"
+        style={{ height: '200px', overflow: 'scroll', position: 'relative' }}
+      >
         <div style={{ height: '200px', overflow: 'scroll' }}>
-          <div id="scroll-child-rel" style={{ height: '500px', position: 'absolute' }}>hello</div>
+          <div
+            id="scroll-child-rel"
+            style={{ height: '500px', position: 'absolute' }}
+          >
+            hello
+          </div>
         </div>
       </div>
 
       <div style={{ height: '200px', overflow: 'scroll' }}>
-        <div id="scroll-child-fixed" style={{ height: '500px', position: 'fixed' }}>hello</div>
+        <div
+          id="scroll-child-fixed"
+          style={{ height: '500px', position: 'fixed' }}
+        >
+          hello
+        </div>
       </div>
     </div>
   )

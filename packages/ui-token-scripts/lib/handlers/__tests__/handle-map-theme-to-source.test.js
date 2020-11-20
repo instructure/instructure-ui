@@ -26,11 +26,11 @@ import { expect } from '@instructure/ui-test-utils'
 import handleMapJsTokensToSource from '../handle-map-js-tokens-to-source'
 
 const values = {
-  brand: '#333333',
+  brand: '#333333'
 }
 
 const text = {
-  textBrand: values.brand,
+  textBrand: values.brand
 }
 
 const colors = {
@@ -63,7 +63,7 @@ describe('handleMapThemeToSource', () => {
   })
 
   it('transforms root level objects', () => {
-    expect(mappedSource.spacing).to.deep.equal({ medium: { value: '1.5rem' }})
+    expect(mappedSource.spacing).to.deep.equal({ medium: { value: '1.5rem' } })
   })
 
   it('transforms nested object values', () => {

@@ -42,7 +42,7 @@
  * @param {String} values - space delimited string values representing a CSS shorthand
  * @returns {String} a space delimited CSS shorthand string converted to RTL
  */
-function mirrorShorthandEdges (values) {
+function mirrorShorthandEdges(values) {
   if (typeof values !== 'string') {
     return
   }
@@ -50,8 +50,7 @@ function mirrorShorthandEdges (values) {
   const valuesArr = values.split(' ')
   if (valuesArr.length === 4) {
     // swap the 2nd and 4th values
-    [ valuesArr[1], valuesArr[3] ] =
-    [ valuesArr[3], valuesArr[1] ]
+    ;[valuesArr[1], valuesArr[3]] = [valuesArr[3], valuesArr[1]]
   }
 
   return valuesArr.join(' ')
@@ -70,7 +69,7 @@ function mirrorShorthandEdges (values) {
  * @param {String} values - space delimited string values representing a CSS shorthand
  * @returns {String} a space delimited CSS shorthand string converted to RTL
  */
-function mirrorShorthandCorners (values) {
+function mirrorShorthandCorners(values) {
   if (typeof values !== 'string') {
     return
   }
@@ -78,8 +77,7 @@ function mirrorShorthandCorners (values) {
   const valuesArr = values.split(' ')
   if (valuesArr.length === 2) {
     // swap the 1st and 2nd values
-    [ valuesArr[0], valuesArr[1] ] =
-    [ valuesArr[1], valuesArr[0] ]
+    ;[valuesArr[0], valuesArr[1]] = [valuesArr[1], valuesArr[0]]
   }
 
   if (valuesArr.length === 3) {
@@ -88,8 +86,12 @@ function mirrorShorthandCorners (values) {
   }
 
   if (valuesArr.length === 4) {
-    [ valuesArr[0], valuesArr[1], valuesArr[2], valuesArr[3] ] =
-    [ valuesArr[1], valuesArr[0], valuesArr[3], valuesArr[2] ]
+    ;[valuesArr[0], valuesArr[1], valuesArr[2], valuesArr[3]] = [
+      valuesArr[1],
+      valuesArr[0],
+      valuesArr[3],
+      valuesArr[2]
+    ]
   }
 
   return valuesArr.join(' ')

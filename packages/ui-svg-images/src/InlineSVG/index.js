@@ -84,21 +84,21 @@ class InlineSVG extends Component {
     color: 'inherit'
   }
 
-  static prepareSrc = src => {
+  static prepareSrc = (src) => {
     const pattern = /<svg[^>]*>((.|[\n\r])*)<\/svg>/
     const matches = pattern.exec(src)
 
     return matches ? matches[1] : src
   }
 
-  constructor () {
+  constructor() {
     super()
 
     this.titleId = uid('InlineSVG-title')
     this.descId = uid('InlineSVG-desc')
   }
 
-  get role () {
+  get role() {
     if (this.props.title) {
       return 'img'
     } else {
@@ -106,24 +106,16 @@ class InlineSVG extends Component {
     }
   }
 
-  renderTitle () {
+  renderTitle() {
     const { title } = this.props
-    return title
-      ? <title id={this.titleId}>
-        {title}
-      </title>
-      : null
+    return title ? <title id={this.titleId}>{title}</title> : null
   }
 
-  renderDesc (desc) {
-    return desc
-      ? <desc id={this.descId}>
-        {desc}
-      </desc>
-      : null
+  renderDesc(desc) {
+    return desc ? <desc id={this.descId}>{desc}</desc> : null
   }
 
-  get labelledBy () {
+  get labelledBy() {
     const ids = []
 
     if (this.props.title) {
@@ -137,7 +129,7 @@ class InlineSVG extends Component {
     return ids.length > 0 ? ids.join(' ') : null
   }
 
-  renderContent () {
+  renderContent() {
     if (this.props.src) {
       const src = InlineSVG.prepareSrc(this.props.src)
       return (
@@ -147,15 +139,11 @@ class InlineSVG extends Component {
         />
       )
     } else {
-      return (
-        <g role="presentation">
-          {this.props.children}
-        </g>
-      )
+      return <g role="presentation">{this.props.children}</g>
     }
   }
 
-  render () {
+  render() {
     const {
       style, // eslint-disable-line react/prop-types
       title,
@@ -202,7 +190,7 @@ class InlineSVG extends Component {
   }
 }
 
-function parseAttributes (src) {
+function parseAttributes(src) {
   const attributes = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
   const namesAndValuesRegExp = /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
@@ -216,7 +204,10 @@ function parseAttributes (src) {
 
     while (match != null) {
       if (excludes.indexOf(match[1]) === -1) {
-        attributes[match[1]] = match[2] || (match[3] ? match[3] : match[4] ? match[4] : match[5]) || match[1] // eslint-disable-line no-nested-ternary, max-len
+        attributes[match[1]] =
+          match[2] ||
+          (match[3] ? match[3] : match[4] ? match[4] : match[5]) ||
+          match[1] // eslint-disable-line no-nested-ternary, max-len
       }
       match = namesAndValuesRegExp.exec(attributesString)
     }

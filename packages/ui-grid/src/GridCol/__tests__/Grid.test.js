@@ -31,9 +31,7 @@ import { GridCol } from '../index'
 describe('<GridCol />', async () => {
   it('should render content in each column', async () => {
     const elementRef = stub()
-    const subject = await mount(
-      <GridCol elementRef={elementRef}>Foo</GridCol>
-    )
+    const subject = await mount(<GridCol elementRef={elementRef}>Foo</GridCol>)
 
     expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
   })

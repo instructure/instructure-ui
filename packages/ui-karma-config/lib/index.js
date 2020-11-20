@@ -50,7 +50,7 @@ const CHROME_FLAGS = [
   '--allow-file-access-from-files'
 ]
 
-module.exports = function makeConfig ({
+module.exports = function makeConfig({
   bundle,
   coverageDirectory,
   coverageThreshold
@@ -75,7 +75,7 @@ module.exports = function makeConfig ({
 
   if (withCoverage) {
     coverageReporter = {
-        reporters: [
+      reporters: [
         { type: 'text-summary' },
         {
           type: 'lcov',
@@ -87,7 +87,7 @@ module.exports = function makeConfig ({
     }
   }
 
-  return function config (config) {
+  return function config(config) {
     config.set({
       basePath: '',
 
@@ -158,7 +158,7 @@ module.exports = function makeConfig ({
         ...baseWebpackConfig,
         cache: !DEBUG,
         mode: 'development',
-        devtool: DEBUG ? 'cheap-module-source-map': 'none',
+        devtool: DEBUG ? 'cheap-module-source-map' : 'none',
         externals: {
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,
@@ -167,7 +167,7 @@ module.exports = function makeConfig ({
           // but the mocha npm package exports the mocha contructor function.
           // The choma script needs access to the mocha constructor so it can
           // monkey-patch it for random test ordering.
-          'mocha': 'mocha.constructor'
+          mocha: 'mocha.constructor'
         },
         resolveLoader: {
           alias: {

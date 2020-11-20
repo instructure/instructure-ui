@@ -43,11 +43,7 @@ describe('children', () => {
         children: <Foo />
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
       expect(oneOf(validProps)(...args)).to.not.exist()
 
@@ -69,11 +65,7 @@ describe('children', () => {
         children: <Baz />
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
       expect(oneOf(validProps)(...args)).to.be.an.instanceOf(Error)
 
@@ -91,7 +83,12 @@ describe('children', () => {
       ]
       expect(oneOf(validProps)(...args)).to.be.an.instanceOf(Error)
 
-      props.children = [<Bar key="bar1" />, <div key="div">hi</div>, <Foo key="foo" />, <Bar key="bar2" />]
+      props.children = [
+        <Bar key="bar1" />,
+        <div key="div">hi</div>,
+        <Foo key="foo" />,
+        <Bar key="bar2" />
+      ]
       expect(oneOf(validProps)(...args)).to.be.an.instanceOf(Error)
     })
 
@@ -102,11 +99,7 @@ describe('children', () => {
         children: <Bar />
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
       // Still validates correctly
       expect(oneOf(validProps).isRequired(...args)).to.not.exist()
@@ -128,33 +121,17 @@ describe('children', () => {
       const validProps = [Foo, Bar, Baz]
 
       const props = {
-        children: [
-          <Foo key="foo" />,
-          <Bar key="bar" />,
-          <Baz key="baz" />
-        ]
+        children: [<Foo key="foo" />, <Bar key="bar" />, <Baz key="baz" />]
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
       expect(oneOfEach(validProps)(...args)).to.not.exist()
 
-      props.children = [
-        <Baz key="baz" />,
-        <Foo key="foo" />,
-        <Bar key="bar" />
-      ]
+      props.children = [<Baz key="baz" />, <Foo key="foo" />, <Bar key="bar" />]
       expect(oneOfEach(validProps)(...args)).to.not.exist()
 
-      props.children = [
-        <Baz key="baz" />,
-        <Bar key="bar" />,
-        <Foo key="foo" />
-      ]
+      props.children = [<Baz key="baz" />, <Bar key="bar" />, <Foo key="foo" />]
       expect(oneOfEach(validProps)(...args)).to.not.exist()
     })
 
@@ -165,11 +142,7 @@ describe('children', () => {
         children: <Foo />
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
       expect(oneOfEach(validProps)(...args)).to.be.an.instanceOf(Error)
 
@@ -181,11 +154,7 @@ describe('children', () => {
       ]
       expect(oneOfEach(validProps)(...args)).to.be.an.instanceOf(Error)
 
-      props.children = [
-        <Foo key="foo" />,
-        'Hello world',
-        <Baz key="baz" />,
-      ]
+      props.children = [<Foo key="foo" />, 'Hello world', <Baz key="baz" />]
       expect(oneOfEach(validProps)(...args)).to.be.an.instanceOf(Error)
     })
   })
@@ -198,41 +167,23 @@ describe('children', () => {
       ]
 
       const props = {
-        children: [
-          <Foo key="foo" />
-        ]
+        children: [<Foo key="foo" />]
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
       expect(enforceOrder(...validTypeGroups)(...args)).to.not.exist()
 
-      props.children = [
-        <Foo key="foo" />,
-        <Bar key="bar" />
-      ]
+      props.children = [<Foo key="foo" />, <Bar key="bar" />]
       expect(enforceOrder(...validTypeGroups)(...args)).to.not.exist()
 
-      props.children = [
-        <Foo key="foo" />,
-        <Bar key="bar" />,
-        <Baz key="baz" />
-      ]
+      props.children = [<Foo key="foo" />, <Bar key="bar" />, <Baz key="baz" />]
       expect(enforceOrder(...validTypeGroups)(...args)).to.not.exist()
 
-      props.children = [
-        <Bar key="bar" />
-      ]
+      props.children = [<Bar key="bar" />]
       expect(enforceOrder(...validTypeGroups)(...args)).to.not.exist()
 
-      props.children = [
-        <Bar key="bar" />,
-        <Qux key="bar" />
-      ]
+      props.children = [<Bar key="bar" />, <Qux key="bar" />]
       expect(enforceOrder(...validTypeGroups)(...args)).to.not.exist()
     })
 
@@ -246,36 +197,31 @@ describe('children', () => {
         children: <Baz />
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
-      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(Error)
+      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(
+        Error
+      )
 
       props.children = <Qux />
-      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(Error)
+      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(
+        Error
+      )
 
-      props.children = [
-        <Foo key="foo" />,
-        <Baz key="baz" />,
-        <Bar key="bar" />
-      ]
-      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(Error)
+      props.children = [<Foo key="foo" />, <Baz key="baz" />, <Bar key="bar" />]
+      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(
+        Error
+      )
 
-      props.children = [
-        <Bar key="bar" />,
-        <Qux key="qux" />,
-        <Baz key="baz" />
-      ]
-      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(Error)
+      props.children = [<Bar key="bar" />, <Qux key="qux" />, <Baz key="baz" />]
+      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(
+        Error
+      )
 
-      props.children = [
-        <Bar key="bar" />,
-        <div key="qux">qux</div>
-      ]
-      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(Error)
+      props.children = [<Bar key="bar" />, <div key="qux">qux</div>]
+      expect(enforceOrder(...validTypeGroups)(...args)).to.be.an.instanceOf(
+        Error
+      )
     })
 
     it('can be required', () => {
@@ -288,23 +234,24 @@ describe('children', () => {
         children: <Foo />
       }
 
-      const args = [
-        props,
-        'children',
-        'TestComponent'
-      ]
+      const args = [props, 'children', 'TestComponent']
 
-      expect(enforceOrder(...validTypeGroups).isRequired(...args)).to.not.exist()
+      expect(
+        enforceOrder(...validTypeGroups).isRequired(...args)
+      ).to.not.exist()
 
       props.children = <Qux />
-      expect(enforceOrder(...validTypeGroups).isRequired(...args)).to.be.an.instanceOf(Error)
+      expect(
+        enforceOrder(...validTypeGroups).isRequired(...args)
+      ).to.be.an.instanceOf(Error)
 
       // Accepts a null child when not required
       props.children = null
       expect(enforceOrder(...validTypeGroups)(...args)).to.not.exist()
       // Requires the prop to be supplied when required
-      expect(enforceOrder(...validTypeGroups).isRequired(...args)).to.be.an.instanceOf(Error)
+      expect(
+        enforceOrder(...validTypeGroups).isRequired(...args)
+      ).to.be.an.instanceOf(Error)
     })
   })
 })
-

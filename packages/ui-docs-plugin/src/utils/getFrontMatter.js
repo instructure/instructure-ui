@@ -24,7 +24,7 @@
 
 const grayMatter = require('gray-matter')
 
-module.exports = function getFrontMatter (description = '') {
+module.exports = function getFrontMatter(description = '') {
   const matter = grayMatter(description)
 
   return {

@@ -32,8 +32,12 @@ describe('Tab.theme', async () => {
 
     describe('secondary variant', async () => {
       it('should ensure text and tab background meet 3:1 contrast', async () => {
-        expect(contrast(variables.secondarySelectedColor, variables.secondarySelectedBackground))
-          .to.be.above(3)
+        expect(
+          contrast(
+            variables.secondarySelectedColor,
+            variables.secondarySelectedBackground
+          )
+        ).to.be.above(3)
       })
     })
   })
@@ -43,8 +47,12 @@ describe('Tab.theme', async () => {
 
     describe('secondary variant', async () => {
       it('should ensure text and tab background meet 4.5:1 contrast', async () => {
-        expect(contrast(variables.secondarySelectedColor, variables.secondarySelectedBackground))
-          .to.be.above(4.5)
+        expect(
+          contrast(
+            variables.secondarySelectedColor,
+            variables.secondarySelectedBackground
+          )
+        ).to.be.above(4.5)
       })
     })
   })

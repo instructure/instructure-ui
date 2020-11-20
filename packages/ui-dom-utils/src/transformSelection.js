@@ -34,13 +34,8 @@
  * @param {string} cleanedValue - new value that will be given to the HTML element
  * @return {Object} resulting selection values
  */
-function transformSelection (element, cleanedValue) {
-  const {
-    selectionStart,
-    selectionEnd,
-    selectionDirection,
-    value
-  } = element
+function transformSelection(element, cleanedValue) {
+  const { selectionStart, selectionEnd, selectionDirection, value } = element
 
   return {
     selectionStart: transformCursor(selectionStart, value, cleanedValue),
@@ -58,7 +53,7 @@ function transformSelection (element, cleanedValue) {
  * @param {string} cleanedValue - original string with some characters removed
  * @returns {number} resulting cursor index
  */
-function transformCursor (cursorIndex, dirtyValue, cleanedValue) {
+function transformCursor(cursorIndex, dirtyValue, cleanedValue) {
   if (dirtyValue.length === cleanedValue.length) {
     return cursorIndex
   }

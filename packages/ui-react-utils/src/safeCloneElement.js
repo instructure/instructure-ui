@@ -28,21 +28,21 @@ import { warn } from '@instructure/console/macro'
 import { createChainedFunction } from '@instructure/ui-utils'
 
 /**
-* ---
-* category: utilities/react
-* ---
-* Clone a React element without overwriting refs.
-* @module safeCloneElement
-* @param {ReactElement} element
-* @param {object} props
-* @return {ReactElement}
-*/
-function safeCloneElement (element, props, ...children) {
+ * ---
+ * category: utilities/react
+ * ---
+ * Clone a React element without overwriting refs.
+ * @module safeCloneElement
+ * @param {ReactElement} element
+ * @param {object} props
+ * @return {ReactElement}
+ */
+function safeCloneElement(element, props, ...children) {
   const cloneRef = props.ref
   const originalRef = element.ref
-  const originalRefIsAFunction = (typeof originalRef === 'function')
+  const originalRefIsAFunction = typeof originalRef === 'function'
 
-  const mergedProps = {...props}
+  const mergedProps = { ...props }
 
   if (element.props.style && props.style) {
     // merge with existing styles
@@ -59,11 +59,15 @@ function safeCloneElement (element, props, ...children) {
     // If only one is a function it will just use that function with no extra overhead.
     // This is necessary in cases where props[prop] is `null` or `undefined` which would
     // otherwise unwantedly override element.props[prop].
-    if (prop.indexOf('on') === 0 && (
-        typeof props[prop] === 'function' ||
-        typeof element.props[prop] === 'function'
-    )) {
-      mergedProps[prop] = createChainedFunction(element.props[prop], props[prop])
+    if (
+      prop.indexOf('on') === 0 &&
+      (typeof props[prop] === 'function' ||
+        typeof element.props[prop] === 'function')
+    ) {
+      mergedProps[prop] = createChainedFunction(
+        element.props[prop],
+        props[prop]
+      )
     }
   })
 
@@ -71,18 +75,24 @@ function safeCloneElement (element, props, ...children) {
     return React.cloneElement(element, mergedProps, ...children)
   }
 
-  warn(originalRefIsAFunction,
+  warn(
+    originalRefIsAFunction,
     `Cloning an element with a ref that will be overwritten because the ref \
 is not a function. Use a composable callback-style ref instead. \
-Ignoring ref: ${originalRef}`)
+Ignoring ref: ${originalRef}`
+  )
 
-  return React.cloneElement(element, {
-    ...mergedProps,
-    ref (component) {
-      cloneRef(component)
-      originalRef(component)
-    }
-  }, ...children)
+  return React.cloneElement(
+    element,
+    {
+      ...mergedProps,
+      ref(component) {
+        cloneRef(component)
+        originalRef(component)
+      }
+    },
+    ...children
+  )
 }
 
 export default safeCloneElement

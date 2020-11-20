@@ -45,12 +45,7 @@ describe('<FileDrop />', async () => {
 
   describe('interactions', async () => {
     it('should functionally disable the input if `interaction` is set to disabled', async () => {
-      await mount(
-        <FileDrop
-          renderLabel="Some label"
-          interaction="disabled"
-        />
-      )
+      await mount(<FileDrop renderLabel="Some label" interaction="disabled" />)
 
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
@@ -58,12 +53,7 @@ describe('<FileDrop />', async () => {
     })
 
     it('should functionally disable the input if `disabled` is set', async () => {
-      await mount(
-        <FileDrop
-          renderLabel="Some label"
-          disabled
-        />
-      )
+      await mount(<FileDrop renderLabel="Some label" disabled />)
 
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
@@ -71,12 +61,7 @@ describe('<FileDrop />', async () => {
     })
 
     it('should functionally disable the input if `interaction` is set to readonly', async () => {
-      await mount(
-        <FileDrop
-          renderLabel="Some label"
-          interaction="readonly"
-        />
-      )
+      await mount(<FileDrop renderLabel="Some label" interaction="readonly" />)
 
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
@@ -84,12 +69,7 @@ describe('<FileDrop />', async () => {
     })
 
     it('should functionally disable the input if `readOnly` is set', async () => {
-      await mount(
-        <FileDrop
-          renderLabel="Some label"
-          readOnly
-        />
-      )
+      await mount(<FileDrop renderLabel="Some label" readOnly />)
 
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
@@ -332,11 +312,7 @@ describe('<FileDrop />', async () => {
 
   describe('label handling', async () => {
     it('renders element label directly', async () => {
-      const label = (
-        <section id="test-id">
-          This is an element label
-        </section>
-      )
+      const label = <section id="test-id">This is an element label</section>
 
       await mount(<FileDrop renderLabel={label} />)
 
@@ -348,7 +324,7 @@ describe('<FileDrop />', async () => {
       let result = {}
 
       const label = (props) => {
-        result = {...props}
+        result = { ...props }
         return null
       }
 
@@ -362,7 +338,7 @@ describe('<FileDrop />', async () => {
       let result = {}
 
       const label = (props) => {
-        result = {...props}
+        result = { ...props }
         return null
       }
 
@@ -376,7 +352,9 @@ describe('<FileDrop />', async () => {
   describe('onDrag events', async () => {
     it('responds to onDragEnter event', async () => {
       const onDragEnter = stub()
-      await mount(<FileDrop renderLabel="fake label" onDragEnter={onDragEnter} />)
+      await mount(
+        <FileDrop renderLabel="fake label" onDragEnter={onDragEnter} />
+      )
 
       const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
@@ -398,7 +376,9 @@ describe('<FileDrop />', async () => {
 
     it('responds to onDragLeave event', async () => {
       const onDragLeave = stub()
-      await mount(<FileDrop renderLabel="fake label" onDragLeave={onDragLeave} />)
+      await mount(
+        <FileDrop renderLabel="fake label" onDragLeave={onDragLeave} />
+      )
 
       const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')

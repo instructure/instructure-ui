@@ -28,7 +28,10 @@ import classnames from 'classnames'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable } from '@instructure/ui-themeable'
-import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import {
+  controllable,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -50,41 +53,37 @@ category: components
 class Navigation extends Component {
   static propTypes = {
     /**
-    * children of type Navigation.Item
-    */
+     * children of type Navigation.Item
+     */
     children: ChildrenPropTypes.oneOf([NavigationItem]),
     /**
-    * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
-    */
-    minimized: controllable(
-      PropTypes.bool,
-      'onMinimized',
-      'defaultMinimized'
-    ),
+     * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
+     */
+    minimized: controllable(PropTypes.bool, 'onMinimized', 'defaultMinimized'),
     /**
-    * Whether the `<Navigation />` is initially minimized (uncontrolled)
-    */
+     * Whether the `<Navigation />` is initially minimized (uncontrolled)
+     */
     defaultMinimized: PropTypes.bool,
     onMinimized: PropTypes.func,
     /**
-    * Screen reader label for the main Navigation
-    */
+     * Screen reader label for the main Navigation
+     */
     label: PropTypes.string.isRequired,
     /**
-    * Screen reader label for the toggle button expanded/minimized state
-    */
+     * Screen reader label for the toggle button expanded/minimized state
+     */
     toggleLabel: PropTypes.shape({
       expandedLabel: PropTypes.string,
       minimizedLabel: PropTypes.string
     }).isRequired,
     /**
-    * If the `<Navigation.Item>` goes to a new page, pass an href
-    */
+     * If the `<Navigation.Item>` goes to a new page, pass an href
+     */
     href: PropTypes.string,
     /**
-    * If the `<Navigation.Item>` does not go to a new page pass an onClick
-    */
-    onClick: PropTypes.func,
+     * If the `<Navigation.Item>` does not go to a new page pass an onClick
+     */
+    onClick: PropTypes.func
   }
 
   static defaultProps = {
@@ -98,22 +97,24 @@ class Navigation extends Component {
 
   static Item = NavigationItem
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     this.state = {
-      minimized: this.isControlled(props) ? props.minimized : !!props.defaultMinimized
+      minimized: this.isControlled(props)
+        ? props.minimized
+        : !!props.defaultMinimized
     }
   }
 
-  get minimized () {
+  get minimized() {
     if (this.isControlled()) {
       return !!this.props.minimized
     }
     return !!this.state.minimized
   }
 
-  isControlled (props = this.props) {
+  isControlled(props = this.props) {
     return typeof props.minimized === 'boolean'
   }
 
@@ -125,29 +126,23 @@ class Navigation extends Component {
     this.props.onMinimized(event, !this.minimized)
   }
 
-  renderChildren () {
+  renderChildren() {
     return Children.map(this.props.children, (child) => {
       const navItem = safeCloneElement(child, {
         minimized: this.state.minimized
       })
-      return (
-        <li className={styles.list}>
-          {navItem}
-        </li>
-      )
+      return <li className={styles.list}>{navItem}</li>
     })
   }
 
-  toggleMessage () {
-    return (this.state.minimized) ?
-      this.props.toggleLabel.minimizedLabel :
-      this.props.toggleLabel.expandedLabel
+  toggleMessage() {
+    return this.state.minimized
+      ? this.props.toggleLabel.minimizedLabel
+      : this.props.toggleLabel.expandedLabel
   }
 
-  render () {
-    const {
-      label
-    } = this.props
+  render() {
+    const { label } = this.props
 
     const props = omitProps(this.props, Navigation.propTypes, ['minimized'])
 
@@ -157,23 +152,19 @@ class Navigation extends Component {
     })
 
     return (
-      <nav
-        {...props}
-        className={navClasses}
-        aria-label={label}
-      >
-        <ul className={styles.content}>
-          {this.renderChildren()}
-        </ul>
-        <div
-          className={styles.toggle}>
+      <nav {...props} className={navClasses} aria-label={label}>
+        <ul className={styles.content}>{this.renderChildren()}</ul>
+        <div className={styles.toggle}>
           <NavigationItem
             aria-expanded={!this.minimized}
             onClick={this.handleNavToggle}
-            icon={<IconMoveStartLine className={styles.toggleIcon} inline={false} />}
-            label={<ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>}
-          >
-          </NavigationItem>
+            icon={
+              <IconMoveStartLine className={styles.toggleIcon} inline={false} />
+            }
+            label={
+              <ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>
+            }
+          ></NavigationItem>
         </div>
       </nav>
     )

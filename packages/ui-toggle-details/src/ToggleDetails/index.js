@@ -27,7 +27,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { Button } from '@instructure/ui-buttons'
-import { IconArrowOpenEndSolid, IconArrowOpenDownSolid } from '@instructure/ui-icons'
+import {
+  IconArrowOpenEndSolid,
+  IconArrowOpenDownSolid
+} from '@instructure/ui-icons'
 import { Expandable } from '@instructure/ui-expandable'
 import { themeable } from '@instructure/ui-themeable'
 import { controllable } from '@instructure/ui-prop-types'
@@ -49,45 +52,41 @@ class ToggleDetails extends Component {
   static propTypes = {
     variant: PropTypes.oneOf(['default', 'filled']),
     /**
-    * The summary that displays and can be interacted with
-    */
+     * The summary that displays and can be interacted with
+     */
     summary: PropTypes.node.isRequired,
     /**
-    * Whether the content is expanded or hidden
-    */
-    expanded: controllable(
-      PropTypes.bool,
-      'onToggle',
-      'defaultExpanded'
-    ),
+     * Whether the content is expanded or hidden
+     */
+    expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
     /**
-    * Whether the content is initially expanded or hidden (uncontrolled)
-    */
+     * Whether the content is initially expanded or hidden (uncontrolled)
+     */
     defaultExpanded: PropTypes.bool,
     onToggle: PropTypes.func,
     /**
-    * The icon to display next to the summary text when content is hidden
-    */
+     * The icon to display next to the summary text when content is hidden
+     */
     icon: PropTypes.func,
     /**
-    * The icon to display when content is expanded
-    */
+     * The icon to display when content is expanded
+     */
     iconExpanded: PropTypes.func,
     /**
-    * Icon position at the start or end of the summary text
-    */
+     * Icon position at the start or end of the summary text
+     */
     iconPosition: PropTypes.oneOf(['start', 'end']),
     /**
-    * should the summary fill the width of its container
-    */
+     * should the summary fill the width of its container
+     */
     fluidWidth: PropTypes.bool,
     /**
-    * The toggleable content passed inside the ToggleDetails component
-    */
+     * The toggleable content passed inside the ToggleDetails component
+     */
     children: PropTypes.node,
     /**
-    * Choose a size for the expand/collapse icon
-    */
+     * Choose a size for the expand/collapse icon
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large'])
   }
 
@@ -106,25 +105,22 @@ class ToggleDetails extends Component {
 
   shouldAnimateContent = false
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._button)
   }
 
-  focus () {
+  focus() {
     this._button.focus()
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.shouldAnimateContent = true
   }
 
-  getButtonRef = el => this._button = el
+  getButtonRef = (el) => (this._button = el)
 
-  renderSummary (expanded) {
-    const {
-      summary,
-      iconPosition
-    } = this.props
+  renderSummary(expanded) {
+    const { summary, iconPosition } = this.props
 
     return (
       <span className={styles.summary}>
@@ -135,11 +131,8 @@ class ToggleDetails extends Component {
     )
   }
 
-  renderToggle (toggleProps, expanded) {
-    const {
-      variant,
-      fluidWidth
-    } = this.props
+  renderToggle(toggleProps, expanded) {
+    const { variant, fluidWidth } = this.props
 
     const props = {
       ...omitProps(this.props, ToggleDetails.propTypes),
@@ -188,21 +181,23 @@ class ToggleDetails extends Component {
     }
   }
 
-  renderIcon (expanded) {
+  renderIcon(expanded) {
     const { iconPosition } = this.props
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
 
     return this.props.children ? (
-      <span className={classnames(styles.icon, {
-        [styles.iconStart]: iconPosition === 'start',
-        [styles.iconEnd]: iconPosition === 'end'
-      })}>
+      <span
+        className={classnames(styles.icon, {
+          [styles.iconStart]: iconPosition === 'start',
+          [styles.iconEnd]: iconPosition === 'end'
+        })}
+      >
         <Icon />
       </span>
     ) : null
   }
 
-  renderDetails (expanded, detailsProps) {
+  renderDetails(expanded, detailsProps) {
     const { children, size, iconPosition, fluidWidth } = this.props
 
     return (
@@ -220,22 +215,21 @@ class ToggleDetails extends Component {
     )
   }
 
-  renderContent () {
+  renderContent() {
     return (
-      <div className={classnames({ [styles.content]: this.shouldAnimateContent })}>
+      <div
+        className={classnames({ [styles.content]: this.shouldAnimateContent })}
+      >
         {this.props.children}
       </div>
     )
   }
 
-  render () {
-    const {
-      variant,
-      iconPosition,
-      fluidWidth
-    } = this.props
+  render() {
+    const { variant, iconPosition, fluidWidth } = this.props
 
-    const positionIconAtEnd = iconPosition === 'end' && (variant === 'filled' || fluidWidth)
+    const positionIconAtEnd =
+      iconPosition === 'end' && (variant === 'filled' || fluidWidth)
 
     const classes = {
       [styles.root]: true,
@@ -244,17 +238,15 @@ class ToggleDetails extends Component {
     }
 
     return (
-      <Expandable
-        {...pickProps(this.props, Expandable.propTypes)}
-      >
-      {({ expanded, getToggleProps, getDetailsProps}) => {
-        return (
-          <div className={classnames(classes)}>
-            {this.renderToggle(getToggleProps(), expanded)}
-            {this.renderDetails(expanded, getDetailsProps())}
-          </div>
-        )
-      }}
+      <Expandable {...pickProps(this.props, Expandable.propTypes)}>
+        {({ expanded, getToggleProps, getDetailsProps }) => {
+          return (
+            <div className={classnames(classes)}>
+              {this.renderToggle(getToggleProps(), expanded)}
+              {this.renderDetails(expanded, getDetailsProps())}
+            </div>
+          )
+        }}
       </Expandable>
     )
   }

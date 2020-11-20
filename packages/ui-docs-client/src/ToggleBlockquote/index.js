@@ -31,7 +31,6 @@ import { Heading } from '../Heading'
 import { Paragraph } from './Paragraph'
 
 class ToggleBlockquote extends React.Component {
-
   static propTypes = {
     summary: PropTypes.node.isRequired,
     children: PropTypes.node
@@ -42,7 +41,7 @@ class ToggleBlockquote extends React.Component {
 
   static Paragraph = Paragraph
 
-  render () {
+  render() {
     return (
       <View
         as="div"
@@ -54,7 +53,9 @@ class ToggleBlockquote extends React.Component {
       >
         <ToggleDetails
           summary={
-            <Heading level="h3" as="h4">{this.props.summary}</Heading>
+            <Heading level="h3" as="h4">
+              {this.props.summary}
+            </Heading>
           }
           iconPosition="end"
           defaultExpanded

@@ -38,9 +38,13 @@ import {
 describe('queries', async () => {
   it('throws an error message by default when nothing is found', async () => {
     await expect(findAll('[selected]', { timeout: 0 })).to.be.rejected()
-    await expect(findAll(':withLabel(pineapple)', { timeout: 0 })).to.be.rejected()
+    await expect(
+      findAll(':withLabel(pineapple)', { timeout: 0 })
+    ).to.be.rejected()
     await expect(findAll('pineapple', { timeout: 0 })).to.be.rejected()
-    await expect(findAll(':withText(pineapple)', { timeout: 0 })).to.be.rejected()
+    await expect(
+      findAll(':withText(pineapple)', { timeout: 0 })
+    ).to.be.rejected()
     await expect(findAll('table', { timeout: 100 })).to.be.rejected()
   })
 
@@ -68,12 +72,9 @@ describe('queries', async () => {
 
   describe('by locator', async () => {
     it('finds a single element', async () => {
-      await mount(
-        <div data-uid="Foo">hello world</div>
-      )
+      await mount(<div data-uid="Foo">hello world</div>)
 
-      expect(await find('[data-uid~="Foo"]'))
-        .to.exist()
+      expect(await find('[data-uid~="Foo"]')).to.exist()
     })
 
     it('finds multiple elements', async () => {
@@ -86,8 +87,7 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll('[data-uid~="Foo"]'))
-        .to.have.length(3)
+      expect(await findAll('[data-uid~="Foo"]')).to.have.length(3)
     })
 
     it('finds elements with space separated attribute values', async () => {
@@ -100,8 +100,7 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll('[data-uid~="Foo"]'))
-        .to.have.length(4)
+      expect(await findAll('[data-uid~="Foo"]')).to.have.length(4)
     })
 
     it('does not find elements with attribute values that are substrings', async () => {
@@ -114,8 +113,9 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll('[data-uid~="Foo"]', { expectEmpty: true }))
-        .to.have.length(0)
+      expect(
+        await findAll('[data-uid~="Foo"]', { expectEmpty: true })
+      ).to.have.length(0)
     })
   })
 
@@ -132,12 +132,11 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findWithText('Currently showing:'))
-        .to.exist()
-      expect(await findAll(':withText("Step 1 of 4")'))
-        .to.have.length(1)
-      expect(await findAll(':withText("Currently showing: Step 1 of 4")'))
-          .to.have.length(1)
+      expect(await findWithText('Currently showing:')).to.exist()
+      expect(await findAll(':withText("Step 1 of 4")')).to.have.length(1)
+      expect(
+        await findAll(':withText("Currently showing: Step 1 of 4")')
+      ).to.have.length(1)
     })
 
     it('can get elements by matching their nested contents', async () => {
@@ -147,8 +146,7 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll(':contains(Currently showing)'))
-        .to.have.length(4) // body, div (mount node), div, span
+      expect(await findAll(':contains(Currently showing)')).to.have.length(4) // body, div (mount node), div, span
     })
 
     it('should filter out non-matching results', async () => {
@@ -158,16 +156,19 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll('[data-locator="TestLocator"]:withText(Foo)', { expectEmpty: true }))
-        .to.have.length(0)
+      expect(
+        await findAll('[data-locator="TestLocator"]:withText(Foo)', {
+          expectEmpty: true
+        })
+      ).to.have.length(0)
     })
 
     it('can get elements by matching their text across adjacent text nodes', async () => {
       const div = document.createElement('div')
       const textNodeContent = ['£', '24', '.', '99']
       textNodeContent
-        .map(text => document.createTextNode(text))
-        .forEach(textNode => div.appendChild(textNode))
+        .map((text) => document.createTextNode(text))
+        .forEach((textNode) => div.appendChild(textNode))
 
       const subject = await mount(<div />)
       subject.getDOMNode().appendChild(div)
@@ -211,13 +212,13 @@ describe('queries', async () => {
         </div>
       )
       /* eslint-enable jsx-a11y/label-has-associated-control */
-      expect(await findAll(':label(Name)', { exact: false }))
-        .to.have.length(1)
+      expect(await findAll(':label(Name)', { exact: false })).to.have.length(1)
       expect(await findAll(':withLabel("(Last, First)")', { exact: false }))
         .to.have.length(1)
         .to.have.length(1)
-      expect(await findAll(':withLabel("Name (Last, First)")', { exact: false }))
-        .to.have.length(1)
+      expect(
+        await findAll(':withLabel("Name (Last, First)")', { exact: false })
+      ).to.have.length(1)
     })
 
     it('can find an input with an id via the `for` attribute', async () => {
@@ -228,7 +229,9 @@ describe('queries', async () => {
             <input id="first.id" />
           </div>
           <div>
-            <label htmlFor="last-id"><span>Last name</span></label>
+            <label htmlFor="last-id">
+              <span>Last name</span>
+            </label>
             <input id="last-id" />
           </div>
         </div>
@@ -248,22 +251,25 @@ describe('queries', async () => {
     })
 
     it('can find an input nested in a label', async () => {
-      await mount(<label>Name<input /></label>)
+      await mount(
+        <label>
+          Name
+          <input />
+        </label>
+      )
       expect(await findAll(':withLabel(Name)')).to.have.length(1)
     })
 
     it('handles a label with no form control', async () => {
       // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label>First name</label>)
-      expect(await find(':withLabel(Name)', { expectEmpty: true }))
-        .to.be.null()
+      expect(await find(':withLabel(Name)', { expectEmpty: true })).to.be.null()
     })
 
     it('handles a totally empty label', async () => {
       // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label />)
-      expect(await find(':withLabel(" ")', { expectEmpty: true }))
-        .to.be.null()
+      expect(await find(':withLabel(" ")', { expectEmpty: true })).to.be.null()
     })
 
     it('can find an input with an aria-label', async () => {
@@ -280,7 +286,9 @@ describe('queries', async () => {
       await mount(
         <fieldset>
           <legend>Full name</legend>
-          <label>First name <input type="text"/></label>
+          <label>
+            First name <input type="text" />
+          </label>
         </fieldset>
       )
       expect(await findAll(':withLabel(Full name)')).to.have.length(1)
@@ -321,7 +329,9 @@ describe('queries', async () => {
       )
 
       expect(await findAll(':title(Delete)')).to.have.length(1)
-      expect(await findAll(':withTitle(Ignore)', { exact: false })).to.have.length(2)
+      expect(
+        await findAll(':withTitle(Ignore)', { exact: false })
+      ).to.have.length(2)
     })
 
     it('can find an SVG element by its title', async () => {
@@ -342,9 +352,9 @@ describe('queries', async () => {
     it('can find an element by its value', async () => {
       await mount(
         <div>
-          <input type="text"/>
-          <input type="text" defaultValue="Norris"/>
-          <input type="text"/>
+          <input type="text" />
+          <input type="text" defaultValue="Norris" />
+          <input type="text" />
         </div>
       )
       expect(await findAll('[value="Norris"]')).to.have.length(1)
@@ -355,9 +365,9 @@ describe('queries', async () => {
     it('can find an element by attribute', async () => {
       await mount(
         <div>
-          <input type="text"/>
-          <input type="text" defaultValue="Norris"/>
-          <input type="text"/>
+          <input type="text" />
+          <input type="text" defaultValue="Norris" />
+          <input type="text" />
         </div>
       )
       expect(await findAll('input[type]')).to.have.length(3)
@@ -365,12 +375,11 @@ describe('queries', async () => {
     it('can find an element by attribute name and value', async () => {
       await mount(
         <div>
-          <input type="text"/>
+          <input type="text" />
           <input type="password" />
         </div>
       )
-      expect(await findAll('input[type="password"]'))
-        .to.have.length(1)
+      expect(await findAll('input[type="password"]')).to.have.length(1)
     })
   })
 
@@ -378,7 +387,7 @@ describe('queries', async () => {
     it('can find a matching parent element', async () => {
       await mount(
         <form>
-          <input type="text"/>
+          <input type="text" />
         </form>
       )
       const input = await find('input')
@@ -388,7 +397,7 @@ describe('queries', async () => {
     it('includes the element itself', async () => {
       await mount(
         <form>
-          <input type="text"/>
+          <input type="text" />
         </form>
       )
       const input1 = await find('input')
@@ -403,7 +412,7 @@ describe('queries', async () => {
         <div data-foo="bar">
           <div>
             <div data-foo="baz">
-              <input type="text"/>
+              <input type="text" />
             </div>
           </div>
         </div>
@@ -434,9 +443,7 @@ describe('queries', async () => {
   describe('event helpers', async () => {
     describe('#focus', async () => {
       it('should programmtically move focus', async () => {
-        await mount(
-          <button>hello</button>
-        )
+        await mount(<button>hello</button>)
         const button = await find('button')
         await button.focus()
         expect(button.focused()).to.be.true()
@@ -446,9 +453,7 @@ describe('queries', async () => {
           e.persist() // so that we can get the native event later
         })
 
-        await mount(
-          <button onFocus={handleFocus}>hello</button>
-        )
+        await mount(<button onFocus={handleFocus}>hello</button>)
 
         const button = await find('button')
 

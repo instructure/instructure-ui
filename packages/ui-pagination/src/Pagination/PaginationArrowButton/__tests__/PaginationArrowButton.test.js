@@ -32,24 +32,14 @@ import { PaginationArrowButtonLocator } from '../PaginationArrowButtonLocator'
 
 describe('<PaginationArrowButton />', async () => {
   it('should render', async () => {
-    await mount(
-      <PaginationArrowButton
-        direction="prev"
-        label="Label"
-      />
-    )
+    await mount(<PaginationArrowButton direction="prev" label="Label" />)
 
     const button = await PaginationArrowButtonLocator.find()
     expect(button).to.exist()
   })
 
   it('should display tooltips', async () => {
-    await mount(
-      <PaginationArrowButton
-        direction="prev"
-        label="Label"
-      />
-    )
+    await mount(<PaginationArrowButton direction="prev" label="Label" />)
 
     const button = await PaginationArrowButtonLocator.find()
 

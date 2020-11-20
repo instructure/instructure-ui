@@ -83,7 +83,7 @@ class Focusable extends Component {
     focusable: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { focusable, focused } = this
     this.addFocusableListeners(focusable, focused)
     this._inputModeListener = addInputModeListener({
@@ -95,7 +95,7 @@ class Focusable extends Component {
     })
   }
 
-  getSnapshotBeforeUpdate (prevProps, prevState) {
+  getSnapshotBeforeUpdate(prevProps, prevState) {
     const { render, children } = this.props
     // prevent blur from firing when focusable element is replaced
     if (prevProps.children !== children || prevProps.render !== render) {
@@ -104,7 +104,7 @@ class Focusable extends Component {
     return null
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { focusable } = this
 
     if (!focusable && this.state.focusable) {
@@ -129,7 +129,7 @@ class Focusable extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this._inputModeListener) {
       this._inputModeListener.remove()
       this._inputModeListener = null
@@ -137,29 +137,39 @@ class Focusable extends Component {
     this.removeFocusableListeners()
   }
 
-  addFocusableListeners (focusable, focused) {
+  addFocusableListeners(focusable, focused) {
     if (!focusable) return
 
     if (focused && !this._blurListener) {
-      this._blurListener = addEventListener(focusable, 'blur', this.handleBlur, true)
+      this._blurListener = addEventListener(
+        focusable,
+        'blur',
+        this.handleBlur,
+        true
+      )
     } else if (!this._focusListener) {
-      this._focusListener = addEventListener(focusable, 'focus', this.handleFocus, true)
+      this._focusListener = addEventListener(
+        focusable,
+        'focus',
+        this.handleFocus,
+        true
+      )
     }
   }
 
-  removeFocusableListeners () {
+  removeFocusableListeners() {
     this.removeFocusListener()
     this.removeBlurListener()
   }
 
-  removeFocusListener () {
+  removeFocusListener() {
     if (this._focusListener) {
       this._focusListener.remove()
       this._focusListener = null
     }
   }
 
-  removeBlurListener () {
+  removeBlurListener() {
     if (this._blurListener) {
       this._blurListener.remove()
       this._blurListener = null
@@ -170,52 +180,56 @@ class Focusable extends Component {
     this.forceUpdate()
   }
 
-  handleFocus = event => {
+  handleFocus = (event) => {
     this.removeFocusListener()
     this.setState({ focused: true })
   }
 
-  handleBlur = event => {
+  handleBlur = (event) => {
     this.removeBlurListener()
     this.setState({ focused: false })
   }
 
-  get focused () {
+  get focused() {
     return containsActiveElement(this)
   }
 
-  get focusable () {
+  get focusable() {
     let focusable = findFocusable(this, () => true, true) || []
-    const focusableCount = focusable && focusable.length || 0
+    const focusableCount = (focusable && focusable.length) || 0
 
-    warn(focusableCount === 1, `[Focusable] Exactly one focusable child is required (${focusableCount} found).`)
+    warn(
+      focusableCount === 1,
+      `[Focusable] Exactly one focusable child is required (${focusableCount} found).`
+    )
 
     focusable = focusable ? focusable[0] : false
 
-    if (focusable && typeof focusable.focus === 'function')  {
+    if (focusable && typeof focusable.focus === 'function') {
       return focusable
     } else {
       return false
     }
   }
 
-  get focusVisible () {
+  get focusVisible() {
     const { focusable, focused } = this.state
     return this.isFocusVisible(focusable, focused)
   }
 
-  focus () {
+  focus() {
     const { focusable } = this
     if (focusable) {
       focusable.focus()
     }
   }
 
-  isFocusVisible (focusable, focused) {
+  isFocusVisible(focusable, focused) {
     if (!focusable || !focused) return false
 
     // always show focus for keyboard input mode
-    if (this._inputModeListener && this._inputModeListener.isKeyboardMode()) return true
+    if (this._inputModeListener && this._inputModeListener.isKeyboardMode())
+      return true
 
     const { tagName, type, isContentEditable } = focusable
 
@@ -234,14 +248,18 @@ class Focusable extends Component {
     return false
   }
 
-  render () {
+  render() {
     const { children, render = children } = this.props
     const { focusable, focused } = this.state
 
     if (typeof render === 'function') {
-      return render({ focused, focusable, focusVisible: this.isFocusVisible(focusable, focused) })
+      return render({
+        focused,
+        focusable,
+        focusVisible: this.isFocusVisible(focusable, focused)
+      })
     } else {
-     return null
+      return null
     }
   }
 }

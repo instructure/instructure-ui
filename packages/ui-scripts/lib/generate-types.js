@@ -28,7 +28,8 @@ const globby = require('globby')
 
 async function run() {
   const paths = await globby(['**/src/*/index.js'])
-  const tsDefinitions = paths.map(filePath =>  react2dts.generateFromFile(null, filePath)
+  const tsDefinitions = paths.map((filePath) =>
+    react2dts.generateFromFile(null, filePath)
   )
 
   try {
@@ -40,11 +41,11 @@ async function run() {
   }
 
   const joinedDefinitions = tsDefinitions
-                            .join('\n')
-                            // Get rid of all but the first import of React
-                            .replace(/(?!^)import \* as React from 'react';/g, '')
-                            // react2dts puts an default export on everything, remove it.
-                            .replace(/export default class/g, 'export class')
+    .join('\n')
+    // Get rid of all but the first import of React
+    .replace(/(?!^)import \* as React from 'react';/g, '')
+    // react2dts puts an default export on everything, remove it.
+    .replace(/export default class/g, 'export class')
 
   await fs.writeFile(`./types/index.d.ts`, joinedDefinitions)
 }

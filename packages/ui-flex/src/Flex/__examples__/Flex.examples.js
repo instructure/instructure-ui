@@ -42,7 +42,8 @@ const shrink = [
     Duis aute irure.
   </Flex.Item>,
   <Flex.Item key="3" padding="x-small" shouldShrink>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua.
   </Flex.Item>
 ]
 
@@ -61,13 +62,14 @@ const grow = [
 export default {
   maxExamplesPerPage: 50,
   propValues: {
-    children: [
-      regular,
-      shrink,
-      grow
-    ]
+    children: [regular, shrink, grow]
   },
   filter: (props) => {
-    return props.withVisualDebug || props.display || props.direction === 'row-reverse' || props.direction === 'column-reverse'
+    return (
+      props.withVisualDebug ||
+      props.display ||
+      props.direction === 'row-reverse' ||
+      props.direction === 'column-reverse'
+    )
   }
 }

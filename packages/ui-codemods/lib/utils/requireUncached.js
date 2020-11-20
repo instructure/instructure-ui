@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports = function requireUncached (module) {
+module.exports = function requireUncached(module) {
   delete require.cache[require.resolve(module)]
   return require(module)
 }

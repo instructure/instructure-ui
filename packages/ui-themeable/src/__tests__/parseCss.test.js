@@ -50,7 +50,9 @@ describe('parseCss', () => {
       const result = parseCss(cssText)
 
       expect(result.rules.length).to.equal(4)
-      expect(result.rules[0].cssText).to.equal('color: var(--Component-textColor);')
+      expect(result.rules[0].cssText).to.equal(
+        'color: var(--Component-textColor);'
+      )
       expect(result.rules[0].selector).to.equal('.Component__root')
       expect(result.rules[0].type).to.equal(ruleTypes.style)
 
@@ -63,4 +65,3 @@ describe('parseCss', () => {
     })
   })
 })
-

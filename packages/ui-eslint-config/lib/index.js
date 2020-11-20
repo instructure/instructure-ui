@@ -49,7 +49,7 @@ module.exports = {
     }
   },
   rules: {
-    'import/no-unresolved':0,
+    'import/no-unresolved': 0,
     'react/no-deprecated': 0,
     'react/no-find-dom-node': 0,
     'react/prop-types': ['error', { skipUndeclared: true }],

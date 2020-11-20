@@ -38,12 +38,12 @@ const render = ({
   const { isVisible, buttonRef, ...buttonProps } = getEditButtonProps()
   const { onBlur, editorRef } = getEditorProps()
   return (
-    <div
-      {...getContainerProps()}
-    >
-      { mode === 'view' && <div {...getViewerProps()}>text</div>}
-      { mode === 'edit' && <input ref={editorRef} onBlur={onBlur} defaultValue="textvalue" /> }
-      { <button {...buttonProps}>edit</button> }
+    <div {...getContainerProps()}>
+      {mode === 'view' && <div {...getViewerProps()}>text</div>}
+      {mode === 'edit' && (
+        <input ref={editorRef} onBlur={onBlur} defaultValue="textvalue" />
+      )}
+      {<button {...buttonProps}>edit</button>}
     </div>
   )
 }
@@ -51,26 +51,14 @@ const render = ({
 describe('<Editable />', async () => {
   it('should render view mode', async () => {
     const renderSpy = spy(render)
-    await mount(
-      <Editable
-        mode="view"
-        onChangeMode={noop}
-        render={renderSpy}
-      />
-    )
+    await mount(<Editable mode="view" onChangeMode={noop} render={renderSpy} />)
     const args = renderSpy.lastCall.args[0]
     expect(args.mode).to.equal('view')
   })
 
   it('should render edit mode', async () => {
     const renderSpy = spy(render)
-    await mount(
-      <Editable
-        mode="edit"
-        onChangeMode={noop}
-        render={renderSpy}
-      />
-    )
+    await mount(<Editable mode="edit" onChangeMode={noop} render={renderSpy} />)
     const args = renderSpy.lastCall.args[0]
     expect(args.mode).to.equal('edit')
   })
@@ -79,11 +67,7 @@ describe('<Editable />', async () => {
     const renderSpy = spy(render)
     const onChangeModeSpy = spy((newMode) => {})
     const subject = await mount(
-      <Editable
-        mode="view"
-        onChangeMode={onChangeModeSpy}
-        render={renderSpy}
-      />
+      <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
     let args = renderSpy.lastCall.args[0]
     expect(args.mode).to.equal('view')
@@ -102,11 +86,7 @@ describe('<Editable />', async () => {
     const onChangeModeSpy = spy((newMode) => {})
     const renderSpy = spy(render)
     const subject = await mount(
-      <Editable
-        mode="view"
-        onChangeMode={onChangeModeSpy}
-        render={renderSpy}
-      />
+      <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
     const renderProps = renderSpy.lastCall.args[0]
     expect(renderProps.mode).to.equal('view')
@@ -122,11 +102,7 @@ describe('<Editable />', async () => {
     const onChangeModeSpy = spy((newMode) => {})
     const renderSpy = spy(render)
     const subject = await mount(
-      <Editable
-        mode="view"
-        onChangeMode={onChangeModeSpy}
-        render={renderSpy}
-      />
+      <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
 
     let props = renderSpy.lastCall.args[0].getEditButtonProps()
@@ -150,11 +126,7 @@ describe('<Editable />', async () => {
     const onChangeModeSpy = spy((newMode) => {})
     const renderSpy = spy(render)
     const subject = await mount(
-      <Editable
-        mode="edit"
-        onChangeMode={onChangeModeSpy}
-        render={renderSpy}
-      />
+      <Editable mode="edit" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
     let args = renderSpy.lastCall.args[0]
     expect(args.mode).to.equal('edit')
@@ -173,11 +145,7 @@ describe('<Editable />', async () => {
   it('should change to view mode on escape', async () => {
     const onChangeModeSpy = spy((newMode) => {})
     const subject = await mount(
-      <Editable
-        mode="edit"
-        onChangeMode={onChangeModeSpy}
-        render={render}
-      />
+      <Editable mode="edit" onChangeMode={onChangeModeSpy} render={render} />
     )
     const editable = within(subject.getDOMNode())
 
@@ -204,11 +172,11 @@ describe('<Editable />', async () => {
       />
     )
 
-    await subject.setProps({value: 'bar'})
+    await subject.setProps({ value: 'bar' })
 
     expect(onChangeSpy).not.to.have.been.called()
 
-    await subject.setProps({mode: "view"})
+    await subject.setProps({ mode: 'view' })
 
     const arg = onChangeSpy.lastCall.args[0]
     expect(arg).to.equal('bar')

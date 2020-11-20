@@ -27,7 +27,7 @@ import { createThemeAdapter } from '@instructure/ui-themeable'
 const map = {
   baseSizeSmall: 'toggleSize',
   baseSizeMedium: 'toggleSize',
-  baseSizeLarge: 'toggleSize',
+  baseSizeLarge: 'toggleSize'
 }
 
 export const themeAdapter = createThemeAdapter({ map, version: '8.0.0' })

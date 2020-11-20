@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, borders, stacking }) {
+export default function generator({ colors, borders, stacking }) {
   return {
     zIndex: stacking.topmost,
     background: 'rgba(255, 255, 255, 0.75)',

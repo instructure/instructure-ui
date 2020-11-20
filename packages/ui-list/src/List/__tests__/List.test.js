@@ -50,10 +50,7 @@ describe('<List />', async () => {
     const consoleError = stub(console, 'error')
     const warning = `Warning: [List] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
     await mount(
-      <List
-        delimiter="dashed"
-        itemSpacing="large"
-      >
+      <List delimiter="dashed" itemSpacing="large">
         <List.Item>List item 1</List.Item>
         <List.Item>List item 2</List.Item>
         <List.Item>List item 3</List.Item>
@@ -61,8 +58,7 @@ describe('<List />', async () => {
       </List>
     )
 
-    expect(consoleError)
-    .to.be.calledWith(warning)
+    expect(consoleError).to.be.calledWith(warning)
   })
 
   it('should render an ordered list', async () => {

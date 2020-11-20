@@ -37,7 +37,7 @@ import { ownerDocument } from './ownerDocument'
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @return {object} rect - object with top, left coords and height and width
  */
-function getBoundingClientRect (el) {
+function getBoundingClientRect(el) {
   const rect = { top: 0, left: 0, height: 0, width: 0 }
 
   if (!canUseDOM) {
@@ -90,8 +90,14 @@ function getBoundingClientRect (el) {
 
   /* eslint-disable no-mixed-operators */
   return {
-    top: rect.top + (window.pageYOffset || docEl.scrollTop) - (docEl.clientTop || 0),
-    left: rect.left + (window.pageXOffset || docEl.scrollLeft) - (docEl.clientLeft || 0),
+    top:
+      rect.top +
+      (window.pageYOffset || docEl.scrollTop) -
+      (docEl.clientTop || 0),
+    left:
+      rect.left +
+      (window.pageXOffset || docEl.scrollLeft) -
+      (docEl.clientLeft || 0),
     width: (rect.width == null ? node.offsetWidth : rect.width) || 0,
     height: (rect.height == null ? node.offsetHeight : rect.height) || 0,
     right: doc.body.clientWidth - rect.width - rect.left,

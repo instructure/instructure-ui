@@ -46,8 +46,8 @@ class Dialog extends Component {
     children: PropTypes.node,
 
     /**
-    * The element to render as the component root, `span` by default
-    */
+     * The element to render as the component root, `span` by default
+     */
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
 
     display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
@@ -70,7 +70,10 @@ class Dialog extends Component {
     /**
      * An element or a function returning an element to focus by default
      */
-    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    defaultFocusElement: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
 
     /**
      * An element or a function returning an element that wraps the content of the `<Dialog />`
@@ -81,7 +84,11 @@ class Dialog extends Component {
      * An element, function returning an element, or array of elements that will not be hidden from
      * the screen reader when the `<Dialog />` is open
      */
-    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+    liveRegion: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+      PropTypes.func
+    ]),
     shouldContainFocus: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.oneOf(['keyboard', 'screenreader'])
@@ -112,13 +119,13 @@ class Dialog extends Component {
   _raf = []
   _focusRegion = null
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.open) {
       this.open()
     }
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { open } = this.props
 
     if (open && !prevProps.open) {
@@ -132,38 +139,39 @@ class Dialog extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.props.open) {
       this.close()
     }
 
-    this._raf.forEach(request => request.cancel())
+    this._raf.forEach((request) => request.cancel())
     this._raf = []
   }
 
-  open () {
-    const {
-      open,
-      contentElement,
-      ...options
-    } = this.props
+  open() {
+    const { open, contentElement, ...options } = this.props
 
-    this._raf.push(requestAnimationFrame(() => {
-      this._focusRegion = FocusRegionManager.activateRegion(this.contentElement, {
-        ...options
+    this._raf.push(
+      requestAnimationFrame(() => {
+        this._focusRegion = FocusRegionManager.activateRegion(
+          this.contentElement,
+          {
+            ...options
+          }
+        )
       })
-    }))
+    )
   }
 
-  close () {
+  close() {
     if (this._focusRegion) {
       FocusRegionManager.blurRegion(this.contentElement, this._focusRegion.id)
     }
   }
 
-  focus () {
+  focus() {
     if (!this.props.open || !this.contentElement) {
-      error(false, '[Dialog] Can\'t focus a Dialog that isn\'t open.')
+      error(false, "[Dialog] Can't focus a Dialog that isn't open.")
       return
     }
 
@@ -172,20 +180,20 @@ class Dialog extends Component {
     }
   }
 
-  blur () {
+  blur() {
     if (!this.props.open || !this.contentElement) {
-      error(false, '[Dialog] Can\'t blur a Dialog that isn\'t open.')
+      error(false, "[Dialog] Can't blur a Dialog that isn't open.")
       return
     }
 
     this.close()
   }
 
-  getRef = el => {
+  getRef = (el) => {
     this._root = el
   }
 
-  get contentElement () {
+  get contentElement() {
     let contentElement = findDOMNode(this.props.contentElement)
 
     if (!contentElement) {
@@ -195,13 +203,15 @@ class Dialog extends Component {
     return contentElement
   }
 
-  get focused () {
-    return this.contentElement &&
+  get focused() {
+    return (
+      this.contentElement &&
       this._focusRegion &&
       FocusRegionManager.isFocused(this.contentElement, this._focusRegion.id)
+    )
   }
 
-  render () {
+  render() {
     const ElementType = getElementType(Dialog, this.props)
     return this.props.open ? (
       <ElementType

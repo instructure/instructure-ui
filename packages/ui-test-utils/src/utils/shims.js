@@ -27,12 +27,17 @@ if (typeof document === 'undefined') {
   console.error(`[ui-test-utils] requires access to the DOM API!`)
 }
 // jsdom doesn't provide Date on the window object and we need it for wait-for-expect
-global.window.Date = (global.window.Date && global.window.Date.now) ? global.window.Date : global.Date
+global.window.Date =
+  global.window.Date && global.window.Date.now
+    ? global.window.Date
+    : global.Date
 // shims:
 global.MutationObserver = window.MutationObserver || MutationObserverShim
-global.setImmediate = window.setImmediate || function setImmediate(fn) {
-  return setTimeout(fn, 0)
-}
+global.setImmediate =
+  window.setImmediate ||
+  function setImmediate(fn) {
+    return setTimeout(fn, 0)
+  }
 if (!global.Element.prototype.matches) {
   // polyfill for IE and JSDOM
   global.Element.prototype.matches = global.Element.prototype.msMatchesSelector

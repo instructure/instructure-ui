@@ -33,11 +33,7 @@ describe('I18nPropTypes', () => {
 
     it('should not return error when provided with a valid ISO8601 string', () => {
       const props = { date: null }
-      const args = [
-        props,
-        'date',
-        'TestComponent'
-      ]
+      const args = [props, 'date', 'TestComponent']
 
       const validISO8601Strings = [
         '2009-12T12:34',
@@ -89,11 +85,7 @@ describe('I18nPropTypes', () => {
 
     it('should return error when provided with an invalid ISO8601 string', () => {
       const props = { date: null }
-      const args = [
-        props,
-        'date',
-        'TestComponent'
-      ]
+      const args = [props, 'date', 'TestComponent']
 
       const invalidISO8601Strings = [
         'some text',

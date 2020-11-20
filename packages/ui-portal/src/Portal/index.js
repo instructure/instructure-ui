@@ -71,8 +71,8 @@ class Portal extends Component {
      */
     children: PropTypes.node,
     /**
-    * provides a reference to the underlying html element
-    */
+     * provides a reference to the underlying html element
+     */
     elementRef: PropTypes.func
   }
 
@@ -95,10 +95,12 @@ class Portal extends Component {
     }
   }
 
-  render () {
-    return IS_CREATE_PORTAL_SUPPORTED ?
-      <ReactPortal {...this.props} elementRef={this.handleElementRef} /> :
+  render() {
+    return IS_CREATE_PORTAL_SUPPORTED ? (
+      <ReactPortal {...this.props} elementRef={this.handleElementRef} />
+    ) : (
       <SubtreePortal {...this.props} elementRef={this.handleElementRef} />
+    )
   }
 }
 

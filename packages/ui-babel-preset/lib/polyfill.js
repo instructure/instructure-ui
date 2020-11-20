@@ -22,4 +22,7 @@
  * SOFTWARE.
  */
 const loadConfig = require('@instructure/config-loader')
-module.exports = loadConfig('polyfill', require('@instructure/browserslist-config-instui/polyfills')).modules
+module.exports = loadConfig(
+  'polyfill',
+  require('@instructure/browserslist-config-instui/polyfills')
+).modules

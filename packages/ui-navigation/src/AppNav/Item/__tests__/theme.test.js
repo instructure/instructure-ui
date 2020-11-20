@@ -32,11 +32,15 @@ describe('AppNav.Item.theme', () => {
     const variables = Item.generateTheme()
 
     it('should have a background and text color that meets 3:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.textColor)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundColor, variables.textColor)
+      ).to.be.above(3)
     })
 
     it('should have a background and selected item text color that meets 3:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.textColorSelected)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundColor, variables.textColorSelected)
+      ).to.be.above(3)
     })
   })
 
@@ -44,11 +48,15 @@ describe('AppNav.Item.theme', () => {
     const variables = Item.generateTheme('canvas-high-contrast')
 
     it('should have a background and text color that meets 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.textColor)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundColor, variables.textColor)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and selected item text color that meets 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.textColorSelected)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundColor, variables.textColorSelected)
+      ).to.be.above(4.5)
     })
   })
 })

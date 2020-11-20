@@ -31,11 +31,15 @@ exports.builder = (yargs) => {
   const generatePathOption = ({ yargs, contentType }) => {
     yargs.option('path', {
       alias: 'p',
-      describe: `The path where the ${contentType} source will be generated.`,
+      describe: `The path where the ${contentType} source will be generated.`
     })
   }
 
-  const generateNameOption = ({ yargs, contentType, formatInstructions = '' } = {}) => {
+  const generateNameOption = ({
+    yargs,
+    contentType,
+    formatInstructions = ''
+  } = {}) => {
     yargs.option('name', {
       alias: 'n',
       describe: `The name of the ${contentType}${formatInstructions}.`
@@ -79,7 +83,10 @@ exports.builder = (yargs) => {
     (yargs) => {
       const options = { yargs, contentType: componentCommand }
       generatePathOption(options)
-      generateNameOption({ ...options, formatInstructions: ' (in PascalCase, e.g. NumberInput)' })
+      generateNameOption({
+        ...options,
+        formatInstructions: ' (in PascalCase, e.g. NumberInput)'
+      })
     },
     async (argv) => {
       const { name, path } = argv

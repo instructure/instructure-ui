@@ -40,7 +40,9 @@ describe('<Navigation />', async () => {
         label="Main navigation"
         toggleLabel={{
           expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation'}}>
+          minimizedLabel: 'Expand Navigation'
+        }}
+      >
         <NavigationItem
           icon={<IconDashboardLine />}
           label="Dashboard"
@@ -59,7 +61,9 @@ describe('<Navigation />', async () => {
         label="Main navigation"
         toggleLabel={{
           expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation'}}>
+          minimizedLabel: 'Expand Navigation'
+        }}
+      >
         <NavigationItem
           icon={<IconDashboardLine />}
           label="Dashboard"
@@ -77,14 +81,20 @@ describe('<Navigation />', async () => {
         label="Main navigation"
         toggleLabel={{
           expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation'}}>
+          minimizedLabel: 'Expand Navigation'
+        }}
+      >
         <NavigationItem
           icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdminLine /></Badge>}
+          icon={
+            <Badge count={99}>
+              <IconAdminLine />
+            </Badge>
+          }
           label="Inbox"
           href="#"
         />
@@ -104,14 +114,20 @@ describe('<Navigation />', async () => {
         label="Main navigation"
         toggleLabel={{
           expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation'}}>
+          minimizedLabel: 'Expand Navigation'
+        }}
+      >
         <NavigationItem
           icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdminLine /></Badge>}
+          icon={
+            <Badge count={99}>
+              <IconAdminLine />
+            </Badge>
+          }
           label="Inbox"
           href="#"
         />
@@ -130,15 +146,20 @@ describe('<Navigation />', async () => {
         label="Main navigation"
         toggleLabel={{
           expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation'}}
-        >
+          minimizedLabel: 'Expand Navigation'
+        }}
+      >
         <NavigationItem
           icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdminLine /></Badge>}
+          icon={
+            <Badge count={99}>
+              <IconAdminLine />
+            </Badge>
+          }
           label="Inbox"
           href="#"
         />
@@ -156,15 +177,20 @@ describe('<Navigation />', async () => {
         label="Main navigation"
         toggleLabel={{
           expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation'}}
-        >
+          minimizedLabel: 'Expand Navigation'
+        }}
+      >
         <NavigationItem
           icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdminLine /></Badge>}
+          icon={
+            <Badge count={99}>
+              <IconAdminLine />
+            </Badge>
+          }
           label="Inbox"
           href="#"
         />

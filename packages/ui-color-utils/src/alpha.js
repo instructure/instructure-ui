@@ -33,8 +33,10 @@ import Color from 'tinycolor2'
  * @param {Number} percent
  * @returns {String} color as rgb string
  */
-function alpha (color, percent) {
-  return Color(color).setAlpha(percent / 100).toRgbString()
+function alpha(color, percent) {
+  return Color(color)
+    .setAlpha(percent / 100)
+    .toRgbString()
 }
 
 export { alpha }

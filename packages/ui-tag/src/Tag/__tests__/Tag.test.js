@@ -71,7 +71,7 @@ describe('<Tag />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .filter((prop) => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
@@ -81,8 +81,7 @@ describe('<Tag />', async () => {
             }
             const consoleError = stub(console, 'error')
             await mount(<Tag text="Summer" {...props} />)
-            expect(consoleError)
-              .to.be.calledWith(warning)
+            expect(consoleError).to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
@@ -92,6 +91,6 @@ describe('<Tag />', async () => {
             expect(consoleError).to.not.be.called()
           })
         }
-    })
+      })
   })
 })

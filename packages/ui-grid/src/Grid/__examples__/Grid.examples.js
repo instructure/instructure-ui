@@ -24,8 +24,10 @@
 import React from 'react'
 import { Grid } from '../index'
 
-const text1 = 'Occaecat quis qui anim quis cillum eu. Exercitation consectetur aute dolore adipisicing consectetur consectetur aliquip.'
-const text2 = 'Fugiat nisi Lorem non irure sunt ipsum excepteur. Incididunt in id culpa id reprehenderit minim. Cillum est occaecat proident qui sit laboris proident in voluptate minim amet deserunt. Laboris cupidatat nulla consequat nostrud Lorem.'
+const text1 =
+  'Occaecat quis qui anim quis cillum eu. Exercitation consectetur aute dolore adipisicing consectetur consectetur aliquip.'
+const text2 =
+  'Fugiat nisi Lorem non irure sunt ipsum excepteur. Incididunt in id culpa id reprehenderit minim. Cillum est occaecat proident qui sit laboris proident in voluptate minim amet deserunt. Laboris cupidatat nulla consequat nostrud Lorem.'
 
 const regular = (
   <Grid.Row>
@@ -45,17 +47,16 @@ const widths = (
 
 export default {
   propValues: {
-    children: [
-      regular,
-      widths
-    ],
-    hAlign: [ 'start', 'center', 'end', 'space-around', 'space-between' ],
-    vAlign: [ 'top', 'middle', 'bottom' ]
+    children: [regular, widths],
+    hAlign: ['start', 'center', 'end', 'space-around', 'space-between'],
+    vAlign: ['top', 'middle', 'bottom']
   },
   filter: (props) => {
-    return props.startAt ||
+    return (
+      props.startAt ||
       props.visualDebug ||
       (props.rowSpacing && props.rowSpacing !== 'medium') ||
       (props.colSpacing && props.colSpacing !== 'small')
+    )
   }
 }

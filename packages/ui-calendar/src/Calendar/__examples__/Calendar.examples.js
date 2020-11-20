@@ -101,7 +101,7 @@ export default {
   propValues: {
     children: [defaultDays, outsideMonthStates, insideMonthStates],
     renderPrevMonthButton: [null, <button key="prev">{'<'}</button>],
-    renderNextMonthButton: [null, <button key="next">{'>'}</button>],
+    renderNextMonthButton: [null, <button key="next">{'>'}</button>]
   },
   getComponentProps: (props) => {
     return {
@@ -115,12 +115,11 @@ export default {
     }
   },
   filter: (props) => {
-    const {
-      renderPrevMonthButton,
-      renderNextMonthButton
-    } = props
+    const { renderPrevMonthButton, renderNextMonthButton } = props
 
-    return (!renderPrevMonthButton && renderNextMonthButton) ||
+    return (
+      (!renderPrevMonthButton && renderNextMonthButton) ||
       (!renderNextMonthButton && renderPrevMonthButton)
+    )
   }
 }

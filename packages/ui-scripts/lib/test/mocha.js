@@ -24,14 +24,20 @@
 
 const fs = require('fs')
 const path = require('path')
-const { runCommandsConcurrently, getCommand, resolveBin } = require('@instructure/command-utils')
+const {
+  runCommandsConcurrently,
+  getCommand,
+  resolveBin
+} = require('@instructure/command-utils')
 
 let command = 'mocha'
 let args = [
   '**/*.test.js',
   '--colors',
-  '--require', 'esm',
-  '--require', '@instructure/mocha-environment-jsdom',
+  '--require',
+  'esm',
+  '--require',
+  '@instructure/mocha-environment-jsdom',
   '--exit'
 ]
 
@@ -47,9 +53,7 @@ if (process.argv.includes('--watch')) {
   args.push('--watch')
 } else if (process.argv.includes('--coverage')) {
   command = 'nyc'
-  args = [
-    resolveBin('mocha')
-  ].concat(args)
+  args = [resolveBin('mocha')].concat(args)
 }
 
 const commands = {

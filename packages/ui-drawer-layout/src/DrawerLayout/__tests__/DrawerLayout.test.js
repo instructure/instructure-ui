@@ -31,9 +31,7 @@ import { DrawerLayoutLocator } from '../DrawerLayoutLocator'
 
 describe('<DrawerLayout />', async () => {
   it('should render', async () => {
-    await mount(
-      <DrawerLayoutFixture />
-    )
+    await mount(<DrawerLayoutFixture />)
     const layout = await DrawerLayoutLocator.find()
 
     expect(layout).to.exist()
@@ -41,11 +39,7 @@ describe('<DrawerLayout />', async () => {
 
   it('should render a DrawerTray and DrawerContent', async () => {
     await mount(
-      <DrawerLayoutFixture
-        open={true}
-        layoutWidth="800px"
-        trayWidth="250px"
-      />
+      <DrawerLayoutFixture open={true} layoutWidth="800px" trayWidth="250px" />
     )
 
     const layout = await DrawerLayoutLocator.find()
@@ -58,11 +52,7 @@ describe('<DrawerLayout />', async () => {
 
   it(`with no overlay, layout content should have margin equal to tray width with placement=start`, async () => {
     await mount(
-      <DrawerLayoutFixture
-        open={true}
-        layoutWidth="800px"
-        trayWidth="250px"
-      />
+      <DrawerLayoutFixture open={true} layoutWidth="800px" trayWidth="250px" />
     )
 
     const layout = await DrawerLayoutLocator.find()
@@ -95,11 +85,7 @@ describe('<DrawerLayout />', async () => {
 
   it(`with overlay, layout content should have a margin of zero with placement=start`, async () => {
     await mount(
-      <DrawerLayoutFixture
-        open={true}
-        layoutWidth="700px"
-        trayWidth="250px"
-      />
+      <DrawerLayoutFixture open={true} layoutWidth="700px" trayWidth="250px" />
     )
 
     const layout = await DrawerLayoutLocator.find()
@@ -185,7 +171,7 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  it('the tray should not overlay on open when there is enough space', async() => {
+  it('the tray should not overlay on open when there is enough space', async () => {
     const onOverlayTrayChange = stub()
     const subject = await mount(
       <DrawerLayoutFixture
@@ -195,7 +181,7 @@ describe('<DrawerLayout />', async () => {
       />
     )
 
-    subject.setProps({open: true})
+    subject.setProps({ open: true })
 
     await wait(() => {
       expect(onOverlayTrayChange.lastCall.args[0]).to.be.false()

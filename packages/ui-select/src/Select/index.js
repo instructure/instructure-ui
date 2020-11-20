@@ -31,8 +31,15 @@ import { FormPropTypes } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { matchComponentTypes, omitProps, getInteraction } from '@instructure/ui-react-utils'
-import { getBoundingClientRect, isActiveElement } from '@instructure/ui-dom-utils'
+import {
+  matchComponentTypes,
+  omitProps,
+  getInteraction
+} from '@instructure/ui-react-utils'
+import {
+  getBoundingClientRect,
+  isActiveElement
+} from '@instructure/ui-dom-utils'
 
 import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
@@ -40,7 +47,10 @@ import { Selectable } from '@instructure/ui-selectable'
 import { Popover } from '@instructure/ui-popover'
 import { TextInput } from '@instructure/ui-text-input'
 import { Options } from '@instructure/ui-options'
-import { IconArrowOpenDownLine, IconArrowOpenUpLine } from '@instructure/ui-icons'
+import {
+  IconArrowOpenDownLine,
+  IconArrowOpenUpLine
+} from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
 
 import { Group } from './Group'
@@ -62,85 +72,86 @@ class Select extends Component {
   static Group = Group
   static propTypes = {
     /**
-    * The form field label.
-    */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * The form field label.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
-    * The value to display in the text input.
-    */
+     * The value to display in the text input.
+     */
     inputValue: PropTypes.string,
     /**
-    * Whether or not to show the options list.
-    */
+     * Whether or not to show the options list.
+     */
     isShowingOptions: PropTypes.bool,
     /**
-    * The id of the text input. One is generated if not supplied.
-    */
+     * The id of the text input. One is generated if not supplied.
+     */
     id: PropTypes.string,
     /**
-    * The size of the text input.
-    */
+     * The size of the text input.
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Additional helpful text to provide to screen readers about the operation
-    * of the component.
-    */
+     * Additional helpful text to provide to screen readers about the operation
+     * of the component.
+     */
     assistiveText: PropTypes.string,
     /**
-    * Html placeholder text to display when the input has no value. This should
-    * be hint text, not a label replacement.
-    */
+     * Html placeholder text to display when the input has no value. This should
+     * be hint text, not a label replacement.
+     */
     placeholder: PropTypes.string,
     /**
-    * Specifies if interaction with the input is enabled, disabled, or readonly.
-    * When "disabled", the input changes visibly to indicate that it cannot
-    * receive user interactions. When "readonly" the input still cannot receive
-    * user interactions but it keeps the same styles as if it were enabled.
-    */
+     * Specifies if interaction with the input is enabled, disabled, or readonly.
+     * When "disabled", the input changes visibly to indicate that it cannot
+     * receive user interactions. When "readonly" the input still cannot receive
+     * user interactions but it keeps the same styles as if it were enabled.
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
-    * Whether or not the text input is required.
-    */
+     * Whether or not the text input is required.
+     */
     isRequired: PropTypes.bool,
     /**
-    * Whether the input is rendered inline with other elements or if it
-    * is rendered as a block level element.
-    */
+     * Whether the input is rendered inline with other elements or if it
+     * is rendered as a block level element.
+     */
     isInline: PropTypes.bool,
     /**
-    * The width of the text input.
-    */
+     * The width of the text input.
+     */
     width: PropTypes.string,
     /**
-    * The width of the text input, in characters, if a width is not explicitly
-    * provided via the `width` prop. Only applicable if `isInline={true}`.
-    */
+     * The width of the text input, in characters, if a width is not explicitly
+     * provided via the `width` prop. Only applicable if `isInline={true}`.
+     */
     htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * The max width the options list can be before option text wraps. If not
-    * set, the list will only display as wide as the text input.
-    */
+     * The max width the options list can be before option text wraps. If not
+     * set, the list will only display as wide as the text input.
+     */
     optionsMaxWidth: PropTypes.string,
     /**
-    * The number of options that should be visible before having to scroll.
-    */
+     * The number of options that should be visible before having to scroll.
+     */
     visibleOptionsCount: PropTypes.number,
     /**
-    * Displays messages and validation for the input. It should be an object
-    * with the following shape:
-    * `{
-    *   text: PropTypes.string,
-    *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    * }`
-    */
+     * Displays messages and validation for the input. It should be an object
+     * with the following shape:
+     * `{
+     *   text: PropTypes.string,
+     *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     * }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * The placement of the options list.
-    */
+     * The placement of the options list.
+     */
     placement: PositionPropTypes.placement,
     /**
-    * The parent in which to constrain the placement.
-    */
+     * The parent in which to constrain the placement.
+     */
     constrain: PositionPropTypes.constrain,
     /**
      * An element or a function returning an element to use mount the options
@@ -148,59 +159,59 @@ class Select extends Component {
      */
     mountNode: PositionPropTypes.mountNode,
     /**
-    * Callback fired when text input receives focus.
-    */
+     * Callback fired when text input receives focus.
+     */
     onFocus: PropTypes.func,
     /**
-    * Callback fired when text input loses focus.
-    */
+     * Callback fired when text input loses focus.
+     */
     onBlur: PropTypes.func,
     /**
-    * Callback fired when text input value changes.
-    */
+     * Callback fired when text input value changes.
+     */
     onInputChange: PropTypes.func,
     /**
-    * Callback fired requesting that the options list be shown.
-    */
+     * Callback fired requesting that the options list be shown.
+     */
     onRequestShowOptions: PropTypes.func,
     /**
-    * Callback fired requesting that the options list be hidden.
-    */
+     * Callback fired requesting that the options list be hidden.
+     */
     onRequestHideOptions: PropTypes.func,
     /**
-    * Callback fired requesting a particular option be highlighted.
-    */
+     * Callback fired requesting a particular option be highlighted.
+     */
     onRequestHighlightOption: PropTypes.func,
     /**
-    * Callback fired requesting a particular option be selected.
-    */
+     * Callback fired requesting a particular option be selected.
+     */
     onRequestSelectOption: PropTypes.func,
     /**
-    * A ref to the html `input` element.
-    */
+     * A ref to the html `input` element.
+     */
     inputRef: PropTypes.func,
     /**
-    * A ref to the html `ul` element.
-    */
+     * A ref to the html `ul` element.
+     */
     listRef: PropTypes.func,
     /**
-    * Content to display before the text input. This will commonly be an icon or
-    * tags to show multiple selections.
-    */
+     * Content to display before the text input. This will commonly be an icon or
+     * tags to show multiple selections.
+     */
     renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display after the text input. This content will replace the
-    * default arrow icons.
-    */
+     * Content to display after the text input. This content will replace the
+     * default arrow icons.
+     */
     renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Children of type `<Select.Option />` or `<Select.Group />`.
-    */
+     * Children of type `<Select.Option />` or `<Select.Group />`.
+     */
     children: ChildrenPropTypes.oneOf([Group, Option]),
     /**
-    * Prevents the default behavior of wrapping the input and rendered content
-    * when available space is exceeded.
-    */
+     * Prevents the default behavior of wrapping the input and rendered content
+     * when available space is exceeded.
+     */
     shouldNotWrap: PropTypes.bool
   }
 
@@ -252,27 +263,27 @@ class Select extends Component {
   // best guess for first calculation of list height
   _optionHeight = 36
 
-  focus () {
+  focus() {
     this._input && this._input.focus()
   }
 
-  get focused () {
+  get focused() {
     return this._input && isActiveElement(this._input)
   }
 
-  get id () {
+  get id() {
     return this.props.id || this._defaultId
   }
 
-  get width () {
+  get width() {
     return this._inputContainer && this._inputContainer.offsetWidth
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
-  get highlightedOptionId () {
+  get highlightedOptionId() {
     let highlightedOptionId = null
     Children.toArray(this.props.children).forEach((child) => {
       if (matchComponentTypes(child, [Group])) {
@@ -294,7 +305,7 @@ class Select extends Component {
     return highlightedOptionId
   }
 
-  get selectedOptionId () {
+  get selectedOptionId() {
     let selectedOptionId = []
     Children.toArray(this.props.children).forEach((child) => {
       if (matchComponentTypes(child, [Group])) {
@@ -341,12 +352,12 @@ class Select extends Component {
     this._inputContainer = node
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     // scroll option into view if needed
     this.scrollToOption(this.highlightedOptionId)
   }
 
-  scrollToOption (id) {
+  scrollToOption(id) {
     if (this._listView) {
       const option = this._listView.querySelector(`[id="${id}"]`)
       if (!option) return
@@ -365,14 +376,14 @@ class Select extends Component {
     }
   }
 
-  highlightOption (event, id) {
+  highlightOption(event, id) {
     const { onRequestHighlightOption } = this.props
     if (id) {
       onRequestHighlightOption(event, { id })
     }
   }
 
-  getEventHandlers () {
+  getEventHandlers() {
     const {
       isShowingOptions,
       onRequestShowOptions,
@@ -383,52 +394,58 @@ class Select extends Component {
     const highlightedOptionId = this.highlightedOptionId
     const selectedOptionId = this.selectedOptionId
 
-    return this.interaction === 'enabled' ? {
-      onRequestShowOptions: (event) => {
-        onRequestShowOptions(event)
-        if (selectedOptionId && !Array.isArray(selectedOptionId)) {
-          // highlight selected option on show
-          this.highlightOption(event, selectedOptionId)
-        }
-      },
-      onRequestHideOptions: (event) => {
-        onRequestHideOptions(event)
-      },
-      onRequestHighlightOption: (event, { id, direction }) => {
-        if (!isShowingOptions) return
-        // if id exists, use that
-        let highlightId = this._optionIds.indexOf(id) > -1 ? id : null
-        if (!highlightId) {
-          if (!highlightedOptionId) {
-            // nothing highlighted yet, highlight first option
-            highlightId = this._optionIds[0]
-          } else {
-            // find next id based on direction
-            const index = this._optionIds.indexOf(highlightedOptionId)
-            highlightId = index > -1 ? this._optionIds[index + direction] : null
+    return this.interaction === 'enabled'
+      ? {
+          onRequestShowOptions: (event) => {
+            onRequestShowOptions(event)
+            if (selectedOptionId && !Array.isArray(selectedOptionId)) {
+              // highlight selected option on show
+              this.highlightOption(event, selectedOptionId)
+            }
+          },
+          onRequestHideOptions: (event) => {
+            onRequestHideOptions(event)
+          },
+          onRequestHighlightOption: (event, { id, direction }) => {
+            if (!isShowingOptions) return
+            // if id exists, use that
+            let highlightId = this._optionIds.indexOf(id) > -1 ? id : null
+            if (!highlightId) {
+              if (!highlightedOptionId) {
+                // nothing highlighted yet, highlight first option
+                highlightId = this._optionIds[0]
+              } else {
+                // find next id based on direction
+                const index = this._optionIds.indexOf(highlightedOptionId)
+                highlightId =
+                  index > -1 ? this._optionIds[index + direction] : null
+              }
+            }
+            if (highlightId) {
+              // only highlight if id exists as a valid option
+              this.highlightOption(event, highlightId)
+            }
+          },
+          onRequestHighlightFirstOption: (event) => {
+            this.highlightOption(event, this._optionIds[0])
+          },
+          onRequestHighlightLastOption: (event) => {
+            this.highlightOption(
+              event,
+              this._optionIds[this._optionIds.length - 1]
+            )
+          },
+          onRequestSelectOption: (event, { id }) => {
+            if (id && this._optionIds.indexOf(id) !== -1) {
+              // only select if id exists as a valid option
+              onRequestSelectOption(event, { id })
+            }
           }
         }
-        if (highlightId) {
-          // only highlight if id exists as a valid option
-          this.highlightOption(event, highlightId)
-        }
-      },
-      onRequestHighlightFirstOption: (event) => {
-        this.highlightOption(event, this._optionIds[0])
-      },
-      onRequestHighlightLastOption: (event) => {
-        this.highlightOption(event, this._optionIds[this._optionIds.length - 1])
-      },
-      onRequestSelectOption: (event, { id }) => {
-        if (id && this._optionIds.indexOf(id) !== -1) {
-          // only select if id exists as a valid option
-          onRequestSelectOption(event, { id })
-        }
-      }
-    } : {}
+      : {}
   }
 
-  renderOption (option, data) {
+  renderOption(option, data) {
     const { getOptionProps, getDisabledOptionProps } = data
     const {
       id,
@@ -461,20 +478,16 @@ class Select extends Component {
     // should option be treated as disabled
     if (isDisabled) {
       optionProps.variant = 'disabled'
-      optionProps = {...optionProps, ...getDisabledOptionProps()}
+      optionProps = { ...optionProps, ...getDisabledOptionProps() }
     } else {
       // track as valid option if not disabled
       this._optionIds.push(id)
     }
 
-    return (
-      <Options.Item {...optionProps}>
-        {children}
-      </Options.Item>
-    )
+    return <Options.Item {...optionProps}>{children}</Options.Item>
   }
 
-  renderGroup (group, data) {
+  renderGroup(group, data) {
     const {
       getOptionProps,
       getDisabledOptionProps,
@@ -517,7 +530,7 @@ class Select extends Component {
     return groupChildren
   }
 
-  renderList (data) {
+  renderList(data) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
     const {
       isShowingOptions,
@@ -527,61 +540,66 @@ class Select extends Component {
     } = this.props
 
     let lastWasGroup = false
-    let viewProps = isShowingOptions ? {
-      display: 'block',
-      overflowY: 'auto',
-      maxHeight: this._optionHeight * visibleOptionsCount,
-      maxWidth: optionsMaxWidth || this.width,
-      background: 'primary',
-      elementRef: (node) => this._listView = node
-    } : { maxHeight: 0 }
+    let viewProps = isShowingOptions
+      ? {
+          display: 'block',
+          overflowY: 'auto',
+          maxHeight: this._optionHeight * visibleOptionsCount,
+          maxWidth: optionsMaxWidth || this.width,
+          background: 'primary',
+          elementRef: (node) => (this._listView = node)
+        }
+      : { maxHeight: 0 }
 
     return (
       <View {...viewProps}>
         <Options
           {...getListProps({ as: 'ul', elementRef: this.handleListRef })}
         >
-          {isShowingOptions ? Children.map(children, (child, index) => {
-            if (!child || !matchComponentTypes(child, [Group, Option])) {
-              return // ignore invalid children
-            }
-            if (matchComponentTypes(child, [Option])) {
-              lastWasGroup = false
-              return this.renderOption(child, {
-                getOptionProps,
-                getDisabledOptionProps
+          {isShowingOptions
+            ? Children.map(children, (child, index) => {
+                if (!child || !matchComponentTypes(child, [Group, Option])) {
+                  return // ignore invalid children
+                }
+                if (matchComponentTypes(child, [Option])) {
+                  lastWasGroup = false
+                  return this.renderOption(child, {
+                    getOptionProps,
+                    getDisabledOptionProps
+                  })
+                }
+                if (matchComponentTypes(child, [Group])) {
+                  const afterGroup = lastWasGroup ? true : false
+                  lastWasGroup = true
+                  return this.renderGroup(child, {
+                    getOptionProps,
+                    getDisabledOptionProps,
+                    // for rendering separators appropriately
+                    isFirstChild: index === 0,
+                    isLastChild: index === Children.count(children) - 1,
+                    afterGroup
+                  })
+                }
               })
-            }
-            if (matchComponentTypes(child, [Group])) {
-              const afterGroup = lastWasGroup ? true : false
-              lastWasGroup = true
-              return this.renderGroup(child, {
-                getOptionProps,
-                getDisabledOptionProps,
-                // for rendering separators appropriately
-                isFirstChild: index === 0,
-                isLastChild: index === Children.count(children) - 1,
-                afterGroup
-              })
-            }
-          }) : null}
+            : null}
         </Options>
       </View>
     )
   }
 
-  renderIcon () {
+  renderIcon() {
     return (
       <span className={styles.icon}>
-        {this.props.isShowingOptions
-          ? <IconArrowOpenUpLine inline={false} />
-          : <IconArrowOpenDownLine inline={false} />
-        }
+        {this.props.isShowingOptions ? (
+          <IconArrowOpenUpLine inline={false} />
+        ) : (
+          <IconArrowOpenDownLine inline={false} />
+        )}
       </span>
     )
   }
 
-  renderInput (data) {
+  renderInput(data) {
     const { getInputProps, getTriggerProps } = data
     const {
       renderLabel,
@@ -609,11 +627,13 @@ class Select extends Component {
     const isEditable = typeof onInputChange !== 'undefined'
     // props to ensure screen readers treat uneditable selects as accessible
     // popup buttons rather than comboboxes.
-    const overrideProps = !isEditable ? {
-      role: 'button',
-      title: inputValue,
-      'aria-autocomplete': null
-    } : {}
+    const overrideProps = !isEditable
+      ? {
+          role: 'button',
+          title: inputValue,
+          'aria-autocomplete': null
+        }
+      : {}
     // backdoor to autocomplete attr to work around chrome autofill issues
     if (passthroughProps['autoComplete']) {
       overrideProps.autoComplete = passthroughProps['autoComplete']
@@ -633,9 +653,10 @@ class Select extends Component {
           value: inputValue,
           inputRef: createChainedFunction(ref, this.handleInputRef),
           inputContainerRef: this.handleInputContainerRef,
-          interaction: interaction === 'enabled' && !isEditable
-            ? 'readonly' // prevent keyboard cursor
-            : interaction,
+          interaction:
+            interaction === 'enabled' && !isEditable
+              ? 'readonly' // prevent keyboard cursor
+              : interaction,
           isRequired,
           shouldNotWrap,
           display: isInline ? 'inline-block' : 'block',
@@ -650,7 +671,7 @@ class Select extends Component {
     )
   }
 
-  render () {
+  render() {
     const {
       size,
       constrain,
@@ -686,11 +707,8 @@ class Select extends Component {
         }) => (
           <span {...getRootProps({ className: classes })}>
             {this.renderInput({ getInputProps, getTriggerProps })}
-            <span
-              {...getDescriptionProps()}
-              className={styles.assistiveText}
-            >
-              { assistiveText }
+            <span {...getDescriptionProps()} className={styles.assistiveText}>
+              {assistiveText}
             </span>
             <Popover
               constrain={constrain}

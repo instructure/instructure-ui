@@ -25,16 +25,23 @@ const { runCommandSync } = require('@instructure/command-utils')
 const path = require('path')
 const getPackages = require('./get-packages')
 
-module.exports = function getChangedPackages (commitIsh = 'HEAD^1', allPackages) {
+module.exports = function getChangedPackages(
+  commitIsh = 'HEAD^1',
+  allPackages
+) {
   allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
 
-  const result = runCommandSync('git', ['diff', commitIsh, '--name-only'], [], { stdio: 'pipe' }).stdout
+  const result = runCommandSync('git', ['diff', commitIsh, '--name-only'], [], {
+    stdio: 'pipe'
+  }).stdout
   const changedFiles = result.split('\n')
 
-  return allPackages
-    .filter((pkg) => {
-      const relativePath = path.relative('.', pkg.location) + path.sep
-      return changedFiles
-        .findIndex(changedFile => changedFile.startsWith(relativePath)) >= 0
-    })
+  return allPackages.filter((pkg) => {
+    const relativePath = path.relative('.', pkg.location) + path.sep
+    return (
+      changedFiles.findIndex((changedFile) =>
+        changedFile.startsWith(relativePath)
+      ) >= 0
+    )
+  })
 }

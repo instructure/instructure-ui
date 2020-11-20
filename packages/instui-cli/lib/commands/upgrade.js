@@ -25,20 +25,23 @@
 const { handleUpgrade } = require('../handlers')
 
 exports.command = 'upgrade'
-exports.desc = 'Upgrades instructure-ui in a designated repository to the latest stable version including upgrading packages and applying codemods.'
+exports.desc =
+  'Upgrades instructure-ui in a designated repository to the latest stable version including upgrading packages and applying codemods.'
 
 exports.builder = (yargs) => {
   yargs.option('path', {
     alias: 'p',
     type: 'string',
-    describe: 'The path to the repo containing instructure-ui dependencies (defaults to current working directory).',
+    describe:
+      'The path to the repo containing instructure-ui dependencies (defaults to current working directory).',
     default: process.cwd()
   })
 
   yargs.option('scopeModifications', {
     alias: 'scope-modifications',
     type: 'array',
-    describe: 'Specify the scope of the code modifications. For example, specifying only `imports` will limit the code changes to imports only.',
+    describe:
+      'Specify the scope of the code modifications. For example, specifying only `imports` will limit the code changes to imports only.',
     choices: ['imports', 'props'],
     default: ['imports', 'props']
   })
@@ -46,19 +49,22 @@ exports.builder = (yargs) => {
   yargs.option('ignore', {
     alias: 'i',
     type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the upgrade codemods are applied (ex. **/node_modules/**).'
+    describe:
+      'One or multiple glob path patterns for files/directories that will be ignored when the upgrade codemods are applied (ex. **/node_modules/**).'
   })
 
   yargs.option('version', {
     alias: 'v',
     type: 'string',
-    describe: 'A semantic instructure-ui version number. When provided, upgrades to the specified version. When omitted, upgrades to the latest stable version.',
+    describe:
+      'A semantic instructure-ui version number. When provided, upgrades to the specified version. When omitted, upgrades to the latest stable version.',
     default: null
   })
 
   yargs.option('ignore-workspace-root-check', {
     type: 'boolean',
-    describe: 'When npm-client is set to yarn, set the `ignore-workspace-root-check` argument when this command executes `yarn add` and `yarn remove`',
+    describe:
+      'When npm-client is set to yarn, set the `ignore-workspace-root-check` argument when this command executes `yarn add` and `yarn remove`',
     default: false
   })
 
@@ -79,7 +85,8 @@ exports.builder = (yargs) => {
 
   yargs.option('parser-config', {
     type: 'string',
-    describe: 'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
+    describe:
+      'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
     default: null
   })
 }
@@ -96,5 +103,14 @@ exports.handler = (argv) => {
     parserConfig
   } = argv
 
-  handleUpgrade({ sourcePath: path, scopeModifications, ignore, version, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig })
+  handleUpgrade({
+    sourcePath: path,
+    scopeModifications,
+    ignore,
+    version,
+    ignoreWorkspaceRootCheck,
+    npmClient,
+    parser,
+    parserConfig
+  })
 }

@@ -31,8 +31,9 @@ export const customMethods = {
   findTarget: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${Position.targetLocatorAttribute}="${id}"]`)
-        .find(...args)
+      return locator(`[${Position.targetLocatorAttribute}="${id}"]`).find(
+        ...args
+      )
     } else {
       return null
     }
@@ -40,8 +41,9 @@ export const customMethods = {
   findContent: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${Position.contentLocatorAttribute}="${id}"]`)
-        .find(...args)
+      return locator(`[${Position.contentLocatorAttribute}="${id}"]`).find(
+        ...args
+      )
     } else {
       return null
     }

@@ -34,8 +34,14 @@ describe('truncate', () => {
   it('should truncate text when no options are given', async () => {
     let stage
     await mount(
-      <div style={{width: '200px'}}>
-        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      <div style={{ width: '200px' }}>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {defaultText}
+        </span>
       </div>
     )
 
@@ -49,8 +55,14 @@ describe('truncate', () => {
   it('should truncate in the middle of a string', async () => {
     let stage
     await mount(
-      <div style={{width: '200px'}}>
-        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      <div style={{ width: '200px' }}>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {defaultText}
+        </span>
       </div>
     )
 
@@ -66,8 +78,14 @@ describe('truncate', () => {
   it('should truncate at words', async () => {
     let stage
     await mount(
-      <div style={{width: '220px'}}>
-        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      <div style={{ width: '220px' }}>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {defaultText}
+        </span>
       </div>
     )
 
@@ -83,8 +101,14 @@ describe('truncate', () => {
   it('should allow custom ellipsis', async () => {
     let stage
     await mount(
-      <div style={{width: '200px'}}>
-        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      <div style={{ width: '200px' }}>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {defaultText}
+        </span>
       </div>
     )
 
@@ -97,9 +121,15 @@ describe('truncate', () => {
   it('should preserve node structure', async () => {
     let stage
     await mount(
-      <div style={{width: '200px'}}>
-        <p ref={(el) => { stage = el }} className="testClass">
-          Hello world! <strong>This is a</strong> long string that <em>should truncate</em>
+      <div style={{ width: '200px' }}>
+        <p
+          ref={(el) => {
+            stage = el
+          }}
+          className="testClass"
+        >
+          Hello world! <strong>This is a</strong> long string that{' '}
+          <em>should truncate</em>
         </p>
       </div>
     )
@@ -117,9 +147,23 @@ describe('truncate', () => {
     let stage
     let link
     await mount(
-      <div style={{width: '200px'}}>
-        <span ref={(el) => { stage = el }}>
-          This is a <a ref={(el) => { link = el }} href="http://google.com" className="tester">text link</a> with classes and an href.
+      <div style={{ width: '200px' }}>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          This is a{' '}
+          <a
+            ref={(el) => {
+              link = el
+            }}
+            href="http://google.com"
+            className="tester"
+          >
+            text link
+          </a>{' '}
+          with classes and an href.
         </span>
       </div>
     )
@@ -134,11 +178,23 @@ describe('truncate', () => {
   it('should calculate max width properly', async () => {
     let textContainer, stage
     await mount(
-      <div style={{width: 'auto'}}>
+      <div style={{ width: 'auto' }}>
         <div>
-          <span ref={(el) => { textContainer = el }}>{defaultText}</span>
-          <div style={{width: '100px'}}>
-            <div ref={(el) => { stage = el }}>{defaultText}</div>
+          <span
+            ref={(el) => {
+              textContainer = el
+            }}
+          >
+            {defaultText}
+          </span>
+          <div style={{ width: '100px' }}>
+            <div
+              ref={(el) => {
+                stage = el
+              }}
+            >
+              {defaultText}
+            </div>
           </div>
         </div>
       </div>
@@ -156,14 +212,20 @@ describe('truncate', () => {
     let stage
     await mount(
       <div style={{ width: '50px', height: '180px', lineHeight: 2.8 }}>
-        <span ref={(el) => { stage = el }}>{defaultText}</span>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {defaultText}
+        </span>
       </div>
     )
 
-    const result = truncate(stage, {maxLines: 'auto'})
+    const result = truncate(stage, { maxLines: 'auto' })
     const text = stage.textContent
 
-    expect(text).to.not.equal({defaultText})
+    expect(text).to.not.equal({ defaultText })
     expect(text.length).to.not.equal(1)
     expect(result.constraints.lines).to.equal(4)
   })
@@ -172,7 +234,13 @@ describe('truncate', () => {
     let stage
     await mount(
       <div style={{ width: '200px', height: '200px', lineHeight: 1.4 }}>
-        <span ref={(el) => { stage = el }}>{defaultText}</span>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {defaultText}
+        </span>
       </div>
     )
 
@@ -190,7 +258,13 @@ describe('truncate', () => {
     let stage
     await mount(
       <div style={{ width: '1000px', height: '200px' }}>
-        <span ref={(el) => { stage = el }}>{content}</span>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {content}
+        </span>
       </div>
     )
 
@@ -203,8 +277,14 @@ describe('truncate', () => {
   it('should truncate when visually hidden', async () => {
     let stage
     await mount(
-      <div style={{width: '200px', opacity: 0}}>
-        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      <div style={{ width: '200px', opacity: 0 }}>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
+          {defaultText}
+        </span>
       </div>
     )
 

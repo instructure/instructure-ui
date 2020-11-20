@@ -30,14 +30,16 @@ import { Media } from '../index'
 
 describe('<Media />', async () => {
   // eslint-disable-next-line max-len
-  const image = <img alt="" src="data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw==" />
+  const image = (
+    <img
+      alt=""
+      src="data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=="
+    />
+  )
 
   it('should render', async () => {
     const subject = await mount(
-      <Media
-        title="Hello World"
-        description="Test Image"
-      >
+      <Media title="Hello World" description="Test Image">
         {image}
       </Media>
     )
@@ -51,18 +53,12 @@ describe('<Media />', async () => {
         <h2>
           <a href="https://instructure.design">Clickable Heading</a>
         </h2>
-        <p>
-          Something here
-        </p>
+        <p>Something here</p>
       </div>
     )
 
     const subject = await mount(
-      <Media
-        description={description}
-      >
-        {image}
-      </Media>
+      <Media description={description}>{image}</Media>
     )
 
     const media = within(subject.getDOMNode())
@@ -71,10 +67,7 @@ describe('<Media />', async () => {
 
   it('should meet a11y standards', async () => {
     const subject = await mount(
-      <Media
-        title="Hello World"
-        description="Test Image"
-      >
+      <Media title="Hello World" description="Test Image">
         {image}
       </Media>
     )
@@ -84,24 +77,17 @@ describe('<Media />', async () => {
   })
 
   it(`should render a figure by default`, async () => {
-    expect(await mount(
-      <Media>
-        {image}
-      </Media>
-    ))
+    expect(await mount(<Media>{image}</Media>))
 
     expect(await find('figure')).to.exist()
   })
 
   it(`should not allow the 'as' prop`, async () => {
     const consoleError = stub(console, 'error')
-    await mount(
-      <Media as="foo">
-        {image}
-      </Media>
+    await mount(<Media as="foo">{image}</Media>)
+    expect(consoleError).to.be.calledWith(
+      "Warning: [Byline] prop 'as' is not allowed."
     )
-    expect(consoleError)
-      .to.be.calledWith('Warning: [Byline] prop \'as\' is not allowed.')
   })
 
   describe('when passing down props to View', async () => {
@@ -109,12 +95,13 @@ describe('<Media />', async () => {
       margin: 'small'
     }
 
-    const ignore = [
-      'elementRef'
-    ]
+    const ignore = ['elementRef']
 
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
+      .filter(
+        (prop) =>
+          prop !== 'theme' && prop !== 'children' && !ignore.includes(prop)
+      )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
@@ -123,23 +110,17 @@ describe('<Media />', async () => {
             const props = {
               [prop]: 'foo'
             }
-            await mount(
-              <Media {...props}>{image}</Media>
-            )
-            expect(consoleError)
-              .to.be.calledWith(warning)
+            await mount(<Media {...props}>{image}</Media>)
+            expect(consoleError).to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
-            await mount(
-              <Media {...props}>{image}</Media>
-            )
-            expect(consoleError)
-              .to.not.be.called()
+            await mount(<Media {...props}>{image}</Media>)
+            expect(consoleError).to.not.be.called()
           })
         }
-    })
+      })
   })
 })

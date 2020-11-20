@@ -35,39 +35,25 @@ const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<SVGIcon />', async () => {
   it('should render', async () => {
-   await mount(
-    <SVGIcon src={SVG_SRC} />
-    )
+    await mount(<SVGIcon src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon).to.exist()
   })
 
   it('should set rotate to 0 by default', async () => {
-   await mount(
-    <SVGIcon src={SVG_SRC} />
-    )
+    await mount(<SVGIcon src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('0')
   })
 
   it('should allow rotate prop to be overridden', async () => {
-    await mount(
-      <SVGIcon
-        rotate="90"
-        src={SVG_SRC}
-      />
-    )
+    await mount(<SVGIcon rotate="90" src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('90')
   })
 
   it('should set size', async () => {
-    await mount(
-      <SVGIcon
-        size='large'
-        src={SVG_SRC}
-      />
-    )
+    await mount(<SVGIcon size="large" src={SVG_SRC} />)
     const subject = await SVGIconLocator.find()
     expect(subject.hasClass(styles['size--large'])).to.be.true()
   })

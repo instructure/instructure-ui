@@ -23,7 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, generateA11yTests, stub, wait } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  generateA11yTests,
+  stub,
+  wait
+} from '@instructure/ui-test-utils'
 
 import { DateTime } from '@instructure/ui-i18n'
 import { TimeSelect } from '../index'
@@ -35,12 +41,10 @@ describe('<TimeSelect />', async () => {
     stub(console, 'warn') // suppress experimental warnings
   })
 
-  const lastCall = spy => spy.lastCall.args
+  const lastCall = (spy) => spy.lastCall.args
 
   it('should render an input and list', async () => {
-    await mount(
-      <TimeSelect renderLabel="Choose a time" />
-    )
+    await mount(<TimeSelect renderLabel="Choose a time" />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
     let list = await select.findOptionsList({ expectEmpty: true })
@@ -54,7 +58,7 @@ describe('<TimeSelect />', async () => {
     expect(list).to.exist()
   })
 
-  it('should fire onChange when selected option changes' , async () => {
+  it('should fire onChange when selected option changes', async () => {
     const onChange = stub()
     await mount(
       <TimeSelect
@@ -74,14 +78,9 @@ describe('<TimeSelect />', async () => {
     expect(lastCall(onChange)[1].value).to.exist()
   })
 
-  it('should fire onFocus when input gains focus' , async () => {
+  it('should fire onFocus when input gains focus', async () => {
     const onFocus = stub()
-    await mount(
-      <TimeSelect
-        renderLabel="Choose a time"
-        onFocus={onFocus}
-      />
-    )
+    await mount(<TimeSelect renderLabel="Choose a time" onFocus={onFocus} />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
 
@@ -92,14 +91,9 @@ describe('<TimeSelect />', async () => {
     })
   })
 
-  it('should behave uncontrolled' , async () => {
+  it('should behave uncontrolled', async () => {
     const onChange = stub()
-    await mount(
-      <TimeSelect
-        renderLabel="Choose a time"
-        onChange={onChange}
-      />
-    )
+    await mount(<TimeSelect renderLabel="Choose a time" onChange={onChange} />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
 
@@ -113,7 +107,7 @@ describe('<TimeSelect />', async () => {
     expect(input.getAttribute('value')).to.equal('12:00 AM')
   })
 
-  it('should behave controlled' , async () => {
+  it('should behave controlled', async () => {
     const onChange = stub()
     const value = DateTime.parse('1986-05-17T05:00:00.000Z', 'en', 'US/Eastern')
     const subject = await mount(
@@ -134,12 +128,16 @@ describe('<TimeSelect />', async () => {
     const options = await list.findAll('[role="option"]')
 
     await options[3].click()
-    await subject.setProps({value: lastCall(onChange)[1].value})
+    await subject.setProps({ value: lastCall(onChange)[1].value })
     expect(input.getAttribute('value')).to.equal(options[3].getTextContent())
   })
 
-  it('should render a default value' , async () => {
-    const defaultValue = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
+  it('should render a default value', async () => {
+    const defaultValue = DateTime.parse(
+      '1986-05-17T18:00:00.000Z',
+      'en',
+      'US/Eastern'
+    )
     const onChange = stub()
 
     await mount(
@@ -158,7 +156,11 @@ describe('<TimeSelect />', async () => {
 
   it('should display value when both defaultValue and value are set', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
-    const defaultValue = DateTime.parse('1986-05-25T19:00:00.000Z', 'en', 'US/Eastern')
+    const defaultValue = DateTime.parse(
+      '1986-05-25T19:00:00.000Z',
+      'en',
+      'US/Eastern'
+    )
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -173,13 +175,8 @@ describe('<TimeSelect />', async () => {
     expect(input.getDOMNode().value).to.equal(value.format('LT'))
   })
 
-  it('should default to the first option if defaultToFirstOption is true' , async () => {
-    await mount(
-      <TimeSelect
-        renderLabel="Choose a time"
-        defaultToFirstOption
-      />
-    )
+  it('should default to the first option if defaultToFirstOption is true', async () => {
+    await mount(<TimeSelect renderLabel="Choose a time" defaultToFirstOption />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
 
@@ -188,8 +185,16 @@ describe('<TimeSelect />', async () => {
 
   it('should use the specified timezone', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Central')
-    const oneHourBackValue = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Mountain')
-    const oneHourForwardBackValue = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
+    const oneHourBackValue = DateTime.parse(
+      '1986-05-17T18:00:00.000Z',
+      'en',
+      'US/Mountain'
+    )
+    const oneHourForwardBackValue = DateTime.parse(
+      '1986-05-17T18:00:00.000Z',
+      'en',
+      'US/Eastern'
+    )
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -200,8 +205,12 @@ describe('<TimeSelect />', async () => {
     const timeInput = await TimeSelectLocator.find()
     const input = await timeInput.findInput()
 
-    expect(input.getAttribute('value')).to.not.equal(oneHourBackValue.format('LT'))
-    expect(input.getAttribute('value')).to.not.equal(oneHourForwardBackValue.format('LT'))
+    expect(input.getAttribute('value')).to.not.equal(
+      oneHourBackValue.format('LT')
+    )
+    expect(input.getAttribute('value')).to.not.equal(
+      oneHourForwardBackValue.format('LT')
+    )
   })
 
   it('should use the specified locale', async () => {
@@ -218,7 +227,9 @@ describe('<TimeSelect />', async () => {
     const input = await timeInput.findInput()
 
     expect(input.getAttribute('value')).to.not.equal(value.format('LT'))
-    expect(input.getAttribute('value')).to.equal(value.locale('fr').format('LT'))
+    expect(input.getAttribute('value')).to.equal(
+      value.locale('fr').format('LT')
+    )
   })
 
   it('should use the specified step value', async () => {
@@ -242,16 +253,18 @@ describe('<TimeSelect />', async () => {
 
       expect(input.getAttribute('value')).to.equal(value.format('LT'))
 
-      expect(options[0].getTextContent()).to.equal(value.hour(0).minute(0).format('LT'))
-      expect(options[1].getTextContent()).to.equal(value.hour(0).minute(15).format('LT'))
+      expect(options[0].getTextContent()).to.equal(
+        value.hour(0).minute(0).format('LT')
+      )
+      expect(options[1].getTextContent()).to.equal(
+        value.hour(0).minute(15).format('LT')
+      )
     })
   })
 
   describe('input', async () => {
     it('should render with a custom id if given', async () => {
-      await mount(
-        <TimeSelect renderLabel="Choose a time" id="timeSelect" />
-      )
+      await mount(<TimeSelect renderLabel="Choose a time" id="timeSelect" />)
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()
 
@@ -260,10 +273,7 @@ describe('<TimeSelect />', async () => {
 
     it('should render readonly when interaction="readonly"', async () => {
       await mount(
-        <TimeSelect
-          renderLabel="Choose a time"
-          interaction="readonly"
-        />
+        <TimeSelect renderLabel="Choose a time" interaction="readonly" />
       )
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()
@@ -274,10 +284,7 @@ describe('<TimeSelect />', async () => {
 
     it('should render disabled when interaction="disabled"', async () => {
       await mount(
-        <TimeSelect
-          renderLabel="Choose a time"
-          interaction="disabled"
-        />
+        <TimeSelect renderLabel="Choose a time" interaction="disabled" />
       )
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()
@@ -287,9 +294,7 @@ describe('<TimeSelect />', async () => {
     })
 
     it('should render required when isRequired is true', async () => {
-      await mount(
-        <TimeSelect renderLabel="Choose a time" isRequired />
-      )
+      await mount(<TimeSelect renderLabel="Choose a time" isRequired />)
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()
 
@@ -321,12 +326,7 @@ describe('<TimeSelect />', async () => {
   describe('list', async () => {
     it('should provide a ref to the list element', async () => {
       const listRef = stub()
-      await mount(
-        <TimeSelect
-          renderLabel="Choose a time"
-          listRef={listRef}
-        />
-      )
+      await mount(<TimeSelect renderLabel="Choose a time" listRef={listRef} />)
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()
 

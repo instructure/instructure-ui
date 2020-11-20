@@ -32,11 +32,17 @@ const parseMajorVersion = ({ version }) => {
 }
 
 module.exports = ({ name, type, version } = {}) => {
-  const root = path.resolve(path.dirname(require.resolve('@instructure/instui-config/package.json')), type)
+  const root = path.resolve(
+    path.dirname(require.resolve('@instructure/instui-config/package.json')),
+    type
+  )
 
   const paths = []
   fs.readdirSync(root).forEach((dirName) => {
-    if (!version || parseMajorVersion({ version: dirName }) <= parseMajorVersion({ version })) {
+    if (
+      !version ||
+      parseMajorVersion({ version: dirName }) <= parseMajorVersion({ version })
+    ) {
       const filePath = path.join(root, dirName, name)
       if (fs.existsSync(filePath)) {
         paths.push(filePath)

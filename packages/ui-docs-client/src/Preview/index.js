@@ -49,7 +49,13 @@ class Preview extends Component {
     frameless: PropTypes.bool,
     inverse: PropTypes.bool,
     rtl: PropTypes.bool,
-    background: PropTypes.oneOf(['checkerboard', 'checkerboard-inverse', 'inverse', 'light', 'none'])
+    background: PropTypes.oneOf([
+      'checkerboard',
+      'checkerboard-inverse',
+      'inverse',
+      'light',
+      'none'
+    ])
   }
 
   static defaultProps = {
@@ -66,7 +72,7 @@ class Preview extends Component {
     themeKey: PropTypes.string
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -74,19 +80,22 @@ class Preview extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.code) {
       this.executeCode(this.props.code)
     }
   }
 
-  componentDidUpdate (prevProps) {
-    if (this.props.code !== prevProps.code || this.props.rtl !== prevProps.rtl) {
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.code !== prevProps.code ||
+      this.props.rtl !== prevProps.rtl
+    ) {
       this.executeCode(this.props.code)
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this._mountNode) {
       ReactDOM.unmountComponentAtNode(this._mountNode)
     }
@@ -96,18 +105,14 @@ class Preview extends Component {
     }
   }
 
-  compileCode (code) {
+  compileCode(code) {
     return transform(code, {
-      presets: [
-        'es2015',
-        ['stage-1', { decoratorsLegacy: true }],
-        'react'
-      ],
+      presets: ['es2015', ['stage-1', { decoratorsLegacy: true }], 'react'],
       plugins: ['proposal-object-rest-spread']
     }).code
   }
 
-  executeCode (code) {
+  executeCode(code) {
     const mountNode = this._mountNode
 
     ReactDOM.unmountComponentAtNode(mountNode)
@@ -124,7 +129,11 @@ class Preview extends Component {
 
       let elToRender = (
         <ApplyTextDirection
-          dir={this.props.rtl ? ApplyTextDirection.DIRECTION.rtl : ApplyTextDirection.DIRECTION.ltr}
+          dir={
+            this.props.rtl
+              ? ApplyTextDirection.DIRECTION.rtl
+              : ApplyTextDirection.DIRECTION.ltr
+          }
           as="div"
         >
           {el}
@@ -149,7 +158,7 @@ class Preview extends Component {
       code,
       render,
       shouldCallRender: this.props.render,
-      onError: this.handleError,
+      onError: this.handleError
     })
   }
 
@@ -160,9 +169,15 @@ class Preview extends Component {
     })
   }
 
-  renderContent () {
+  renderContent() {
     // Add div around content so parent's `display: flex` doesn't mess up component styles
-    const content = <div ref={(el) => { this._mountNode = el }} />
+    const content = (
+      <div
+        ref={(el) => {
+          this._mountNode = el
+        }}
+      />
+    )
 
     if (this.props.background === 'none') {
       return <div>{content}</div>
@@ -171,7 +186,7 @@ class Preview extends Component {
     }
   }
 
-  render () {
+  render() {
     const classes = {
       [styles.root]: true,
       [styles.error]: this.state.error,
@@ -183,7 +198,9 @@ class Preview extends Component {
     return (
       <div className={classnames(classes)}>
         {this.renderContent()}
-        {this.state.error && <pre className={styles.error}>{this.state.error}</pre>}
+        {this.state.error && (
+          <pre className={styles.error}>{this.state.error}</pre>
+        )}
       </div>
     )
   }

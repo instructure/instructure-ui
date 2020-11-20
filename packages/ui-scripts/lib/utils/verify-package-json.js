@@ -26,6 +26,8 @@ const verifyPackageJson = require('@instructure/ui-upgrade-scripts/lib/utils/ver
 const { warn } = require('@instructure/command-utils')
 
 module.exports = function (args = {}) {
-  warn('`verify-package-json` has been moved from \'@instructure/ui-scripts/lib/utils/verify-package-json\' to \'@instructure/ui-upgrade-scripts/lib/utils/verify-package-json\'.')
+  warn(
+    "`verify-package-json` has been moved from '@instructure/ui-scripts/lib/utils/verify-package-json' to '@instructure/ui-upgrade-scripts/lib/utils/verify-package-json'."
+  )
   verifyPackageJson(args)
 }

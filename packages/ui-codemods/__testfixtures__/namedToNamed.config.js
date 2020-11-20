@@ -92,7 +92,7 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: ['Modal', 'Tray', 'Popover'],
+        moduleNames: ['Modal', 'Tray', 'Popover']
       },
       transform: {
         importPath: '@instructure/ui-overlays'

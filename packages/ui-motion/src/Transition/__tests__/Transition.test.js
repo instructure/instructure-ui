@@ -23,13 +23,27 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, within, find } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  within,
+  find
+} from '@instructure/ui-test-utils'
 
 import { Transition } from '../index'
 import styles from '../styles.css'
 
 describe('<Transition />', async () => {
-  const types = ['fade', 'scale', 'slide-down', 'slide-up', 'slide-left', 'slide-right']
+  const types = [
+    'fade',
+    'scale',
+    'slide-down',
+    'slide-up',
+    'slide-left',
+    'slide-right'
+  ]
 
   const expectTypeClass = function (type) {
     it(`should correctly apply classes for '${type}'`, async () => {
@@ -59,7 +73,7 @@ describe('<Transition />', async () => {
     const transition = within(subject.getDOMNode())
     expect(transition.hasClass(styles['fade--entered'])).to.be.true()
 
-    await subject.setProps({in: false})
+    await subject.setProps({ in: false })
     await wait(() => {
       expect(transition.hasClass(styles['fade--exited'])).to.be.true()
     })
@@ -67,20 +81,16 @@ describe('<Transition />', async () => {
 
   it('should remove component from DOM when `unmountOnExit` is set', async () => {
     const subject = await mount(
-      <Transition
-        type="fade"
-        in={true}
-        unmountOnExit={true}
-      >
+      <Transition type="fade" in={true} unmountOnExit={true}>
         <div>hello</div>
       </Transition>
     )
 
     expect(subject.getDOMNode()).to.exist()
 
-    await subject.setProps({in: false})
+    await subject.setProps({ in: false })
 
-    expect(await find(':contains(hello)', { expectEmpty: true})).to.not.exist()
+    expect(await find(':contains(hello)', { expectEmpty: true })).to.not.exist()
   })
 
   it('should not execute enter transition with `transitionEnter` set to false', async () => {
@@ -96,7 +106,7 @@ describe('<Transition />', async () => {
       </Transition>
     )
 
-    await subject.setProps({in: true})
+    await subject.setProps({ in: true })
     expect(onEntering).to.not.have.been.called()
   })
 
@@ -113,7 +123,7 @@ describe('<Transition />', async () => {
       </Transition>
     )
 
-    await subject.setProps({in: false})
+    await subject.setProps({ in: false })
     expect(onExiting).to.not.have.been.called()
   })
 
@@ -129,7 +139,7 @@ describe('<Transition />', async () => {
         onEnter={onEnter}
         onEntering={onEntering}
         onEntered={onEntered}
-        >
+      >
         <div>hello</div>
       </Transition>
     )
@@ -153,12 +163,12 @@ describe('<Transition />', async () => {
         onExit={onExit}
         onExiting={onExiting}
         onExited={onExited}
-        >
+      >
         <div>hello</div>
       </Transition>
     )
 
-    await subject.setProps({in: false})
+    await subject.setProps({ in: false })
 
     await wait(() => {
       expect(onExit).to.have.been.called()

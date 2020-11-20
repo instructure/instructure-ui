@@ -40,14 +40,16 @@ const MenuContext = {
     })
   },
 
-  makeMenuContext ({ registerMenuItem, removeMenuItem }) {
-    return {[CONTEXT_KEY]: {
-      registerMenuItem,
-      removeMenuItem
-    }}
+  makeMenuContext({ registerMenuItem, removeMenuItem }) {
+    return {
+      [CONTEXT_KEY]: {
+        registerMenuItem,
+        removeMenuItem
+      }
+    }
   },
 
-  getMenuContext (context) {
+  getMenuContext(context) {
     if (context) {
       return context[CONTEXT_KEY]
     }

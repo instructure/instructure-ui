@@ -36,10 +36,12 @@ describe('Tag.theme', () => {
     variants.forEach((variant) => {
       context(`with the ${variant} variant`, () => {
         it('should have a background and text colors that meet 3:1 contrast', () => {
-          expect(contrast(
-            variables[`${variant}Background`],
-            variables[`${variant}TextColor`]
-          )).to.be.above(3)
+          expect(
+            contrast(
+              variables[`${variant}Background`],
+              variables[`${variant}TextColor`]
+            )
+          ).to.be.above(3)
         })
       })
     })
@@ -51,10 +53,12 @@ describe('Tag.theme', () => {
     variants.forEach((variant) => {
       context(`with the ${variant} variant`, () => {
         it('should have a background and text colors that meet 4.5:1 contrast', () => {
-          expect(contrast(
-            variables[`${variant}Background`],
-            variables[`${variant}TextColor`]
-          )).to.be.above(4.5)
+          expect(
+            contrast(
+              variables[`${variant}Background`],
+              variables[`${variant}TextColor`]
+            )
+          ).to.be.above(4.5)
         })
       })
     })

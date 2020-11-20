@@ -24,7 +24,14 @@
 
 import React from 'react'
 
-import { expect, mount, stub, wait, within, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  within,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import { Alert } from '../index'
 import AlertExamples from '../__examples__/Alert.examples'
@@ -93,7 +100,11 @@ describe('<Alert />', async () => {
   it('should call `onDismiss` when the close button is clicked with renderCloseButtonLabel', async () => {
     const onDismiss = stub()
     const subject = await mount(
-      <Alert variant="success" renderCloseButtonLabel={<div>Close</div>} onDismiss={onDismiss}>
+      <Alert
+        variant="success"
+        renderCloseButtonLabel={<div>Close</div>}
+        onDismiss={onDismiss}
+      >
         Success: Sample alert text.
       </Alert>
     )
@@ -127,7 +138,9 @@ describe('<Alert />', async () => {
       )
 
       const alert = within(subject.getDOMNode())
-      const icon = await alert.find(`[name=${variantModifications.iconComponent}]`)
+      const icon = await alert.find(
+        `[name=${variantModifications.iconComponent}]`
+      )
       expect(icon).to.exist()
     })
   }
@@ -189,7 +202,7 @@ describe('<Alert />', async () => {
     )
 
     expect(liver.innerText).to.include('Success: Sample alert text.')
-    expect(liver.getAttribute("aria-live")).to.equal('polite')
+    expect(liver.getAttribute('aria-live')).to.equal('polite')
   })
 
   describe('with `screenReaderOnly', async () => {
@@ -210,12 +223,10 @@ describe('<Alert />', async () => {
 
     it('should warn if `liveRegion` is not defined', async () => {
       const consoleError = stub(console, 'error')
-      const warning = 'Warning: [Alert] The \'screenReaderOnly\' prop must be used in conjunction with \'liveRegion\'.'
+      const warning =
+        "Warning: [Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'."
       await mount(
-        <Alert
-          variant="success"
-          screenReaderOnly={true}
-        >
+        <Alert variant="success" screenReaderOnly={true}>
           Success: Sample alert text.
         </Alert>
       )
@@ -238,17 +249,13 @@ describe('<Alert />', async () => {
     )
 
     expect(liver.innerText).to.include('Success: Sample alert text.')
-    expect(liver.getAttribute("aria-atomic")).to.equal('true')
+    expect(liver.getAttribute('aria-atomic')).to.equal('true')
   })
-
 
   it('should close when told to, with transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     const subject = await mount(
-      <Alert
-        variant="success"
-        liveRegion={() => liver}
-      >
+      <Alert variant="success" liveRegion={() => liver}>
         Success: Sample alert text.
       </Alert>
     )
@@ -267,11 +274,7 @@ describe('<Alert />', async () => {
   it('should close when told to, without transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     const subject = await mount(
-      <Alert
-        variant="success"
-        transition="none"
-        liveRegion={() => liver}
-      >
+      <Alert variant="success" transition="none" liveRegion={() => liver}>
         Success: Sample alert text.
       </Alert>
     )

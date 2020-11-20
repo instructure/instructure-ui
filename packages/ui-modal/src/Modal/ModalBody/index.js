@@ -62,7 +62,7 @@ class ModalBody extends Component {
     overflow: undefined
   }
 
-  render () {
+  render() {
     const {
       as,
       elementRef,
@@ -75,7 +75,7 @@ class ModalBody extends Component {
 
     const passthroughProps = View.omitViewProps(rest, ModalBody)
 
-    const classes = classnames ({
+    const classes = classnames({
       [styles.root]: true,
       [styles.inverse]: variant === 'inverse'
     })

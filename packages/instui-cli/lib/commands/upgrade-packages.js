@@ -31,26 +31,30 @@ exports.builder = (yargs) => {
   yargs.option('path', {
     alias: 'p',
     type: 'string',
-    describe: 'The path to the repo containing instructure-ui dependencies (defaults to current working directory).',
+    describe:
+      'The path to the repo containing instructure-ui dependencies (defaults to current working directory).',
     default: process.cwd()
   })
 
   yargs.option('use-resolutions', {
     type: 'boolean',
-    describe: 'When npm-client is set to yarn, perform the upgrade via resolutions (this will not modify your package.json).',
+    describe:
+      'When npm-client is set to yarn, perform the upgrade via resolutions (this will not modify your package.json).',
     default: false
   })
 
   yargs.option('version', {
     alias: 'v',
     type: 'string',
-    describe: 'A semantic instructure-ui version number. When provided, packages will be upgraded to the specified version. When omitted, packages are upgraded to the latest stable version.',
+    describe:
+      'A semantic instructure-ui version number. When provided, packages will be upgraded to the specified version. When omitted, packages are upgraded to the latest stable version.',
     default: null
   })
 
   yargs.option('ignore-workspace-root-check', {
     type: 'boolean',
-    describe: 'When npm-client is set to yarn, set the `ignore-workspace-root-check` argument when this command executes `yarn add` and `yarn remove`',
+    describe:
+      'When npm-client is set to yarn, set the `ignore-workspace-root-check` argument when this command executes `yarn add` and `yarn remove`',
     default: false
   })
 
@@ -72,5 +76,11 @@ exports.handler = (argv) => {
     npmClient
   } = argv
 
-  handleUpgradePackages({ sourcePath: path, useResolutions, version, ignoreWorkspaceRootCheck, npmClient })
+  handleUpgradePackages({
+    sourcePath: path,
+    useResolutions,
+    version,
+    ignoreWorkspaceRootCheck,
+    npmClient
+  })
 }

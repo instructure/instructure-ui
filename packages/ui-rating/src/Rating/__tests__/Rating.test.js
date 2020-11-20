@@ -107,7 +107,7 @@ describe('<Rating />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .filter((prop) => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
@@ -117,25 +117,16 @@ describe('<Rating />', async () => {
               [prop]: 'foo'
             }
             await mount(
-              <Rating
-                label="Course rating"
-                iconCount={5}
-                {...props}
-              />
+              <Rating label="Course rating" iconCount={5} {...props} />
             )
-            expect(consoleError)
-              .to.be.calledWith(warning)
+            expect(consoleError).to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
             await mount(
-              <Rating
-                label="Course rating"
-                iconCount={5}
-                {...props}
-              />
+              <Rating label="Course rating" iconCount={5} {...props} />
             )
             expect(consoleError).to.not.be.called()
           })

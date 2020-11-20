@@ -31,26 +31,38 @@ describe('FileDrop.theme', () => {
   describe('with the canvas theme', () => {
     const variables = FileDrop.generateTheme()
     it('should have background and hover highlight colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.hoverBorderColor)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundColor, variables.hoverBorderColor)
+      ).to.be.above(3)
     })
     it('should have background and accepted highlight colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.acceptedColor)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundColor, variables.acceptedColor)
+      ).to.be.above(3)
     })
     it('should have background and rejected highlight colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.rejectedColor)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundColor, variables.rejectedColor)
+      ).to.be.above(3)
     })
   })
 
   describe('with the high contrast canvas theme', () => {
     const variables = FileDrop.generateTheme('canvas-high-contrast')
     it('should have background and hover highlight colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.hoverBorderColor)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundColor, variables.hoverBorderColor)
+      ).to.be.above(4.5)
     })
     it('should have background and accepted highlight colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.acceptedColor)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundColor, variables.acceptedColor)
+      ).to.be.above(4.5)
     })
     it('should have background and rejected highlight colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.rejectedColor)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundColor, variables.rejectedColor)
+      ).to.be.above(4.5)
     })
   })
 })

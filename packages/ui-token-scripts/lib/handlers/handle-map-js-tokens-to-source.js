@@ -28,26 +28,23 @@ const isPlainObject = require('lodash.isplainobject')
  * Transforms an InstUI theme object into the data structure expected by Style
  * Dictionary. See: https://amzn.github.io/style-dictionary/#/properties
  */
-module.exports = tokens => {
-  const mapTokenValue = tokenValue => ({ value: tokenValue })
-  const mapTokenGroup = tokenGroup => {
-    return Object
-      .entries(tokenGroup)
-      .reduce((mapped, [key, value]) => {
-        if (isPlainObject(value)) {
-          // Ignore nested objects
-          return mapped
-        }
+module.exports = (tokens) => {
+  const mapTokenValue = (tokenValue) => ({ value: tokenValue })
+  const mapTokenGroup = (tokenGroup) => {
+    return Object.entries(tokenGroup).reduce((mapped, [key, value]) => {
+      if (isPlainObject(value)) {
+        // Ignore nested objects
+        return mapped
+      }
 
-        return {
-          ...mapped,
-          [key]: mapTokenValue(value)
-        }
-      }, {})
+      return {
+        ...mapped,
+        [key]: mapTokenValue(value)
+      }
+    }, {})
   }
 
-  const styleDictionarySource = Object
-    .entries(tokens)
+  const styleDictionarySource = Object.entries(tokens)
     // Exclude the "media" tokens, they are not cross-platform compatible
     .filter(([key]) => !['media'].includes(key))
     .reduce((mapped, [key, value]) => {

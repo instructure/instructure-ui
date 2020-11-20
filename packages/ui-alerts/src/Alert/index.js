@@ -59,59 +59,62 @@ category: components
 class Alert extends Component {
   static propTypes = {
     /**
-    * content to be rendered within Alert
-    */
+     * content to be rendered within Alert
+     */
     children: PropTypes.node,
     /**
-    * Determines color and icon
-    */
+     * Determines color and icon
+     */
     variant: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Function that returns the DIV where screenreader alerts will be placed.
-    */
+     * Function that returns the DIV where screenreader alerts will be placed.
+     */
     liveRegion: PropTypes.func,
     /**
-    * Choose the politeness level of screenreader alerts.
-    */
+     * Choose the politeness level of screenreader alerts.
+     */
     liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
     /**
-    * If the screenreader alert should be atomic
-    */
+     * If the screenreader alert should be atomic
+     */
     isLiveRegionAtomic: PropTypes.bool,
     /**
      * If the alert should only be visible to screen readers
      */
     screenReaderOnly: PropTypes.bool,
     /**
-    * Milliseconds until the Alert is dismissed automatically
-    */
+     * Milliseconds until the Alert is dismissed automatically
+     */
     timeout: PropTypes.number,
     /**
-    * Close button label. Can be a React component
-    */
-    renderCloseButtonLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+     * Close button label. Can be a React component
+     */
+    renderCloseButtonLabel: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.node
+    ]),
     /**
-    * __Deprecated - use `renderCloseButtonLabel` instead__
-    */
+     * __Deprecated - use `renderCloseButtonLabel` instead__
+     */
     closeButtonLabel: PropTypes.string,
     /**
-    * Callback after the alert is closed
-    */
+     * Callback after the alert is closed
+     */
     onDismiss: PropTypes.func,
     /**
-    * Transition used to make the alert appear and disappear
-    */
+     * Transition used to make the alert appear and disappear
+     */
     transition: PropTypes.oneOf(['none', 'fade']),
     /**
-    * if open transitions from truthy to falsey, it's a signal to close and unmount the alert.
-    * This is necessary to close the alert from the outside and still run the transition.
-    */
+     * if open transitions from truthy to falsey, it's a signal to close and unmount the alert.
+     * This is necessary to close the alert from the outside and still run the transition.
+     */
     open: PropTypes.bool
   }
 
@@ -131,7 +134,7 @@ class Alert extends Component {
     children: null
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -141,7 +144,7 @@ class Alert extends Component {
 
   _timeouts = []
 
-  variantUI () {
+  variantUI() {
     return {
       error: {
         Icon: IconNoSolid,
@@ -172,8 +175,8 @@ class Alert extends Component {
     }
   }
 
-  clearTimeouts () {
-    this._timeouts.forEach(timeout => clearTimeout(timeout))
+  clearTimeouts() {
+    this._timeouts.forEach((timeout) => clearTimeout(timeout))
     this._timeouts = []
   }
 
@@ -194,11 +197,11 @@ class Alert extends Component {
   }
 
   // duck type for a dom node
-  isDOMNode (n) {
+  isDOMNode(n) {
     return n && typeof n === 'object' && n.nodeType === 1
   }
 
-  getLiveRegion () {
+  getLiveRegion() {
     let lr = null
     if (typeof this.props.liveRegion === 'function') {
       lr = this.props.liveRegion()
@@ -207,7 +210,7 @@ class Alert extends Component {
     return this.isDOMNode(lr) ? lr : null
   }
 
-  initLiveRegion (liveRegion) {
+  initLiveRegion(liveRegion) {
     error(
       liveRegion.getAttribute('role') === 'alert',
       `[Alert] live region must have role='alert' set on page load in order to announce content`
@@ -220,15 +223,11 @@ class Alert extends Component {
     }
   }
 
-  createScreenreaderContentNode () {
-    return (
-      <ScreenReaderContent>
-        {this.props.children}
-      </ScreenReaderContent>
-    )
+  createScreenreaderContentNode() {
+    return <ScreenReaderContent>{this.props.children}</ScreenReaderContent>
   }
 
-  createScreenreaderAlert () {
+  createScreenreaderAlert() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
       this.srid = uid('Alert')
@@ -242,7 +241,7 @@ class Alert extends Component {
     }
   }
 
-  updateScreenreaderAlert () {
+  updateScreenreaderAlert() {
     if (this.getLiveRegion()) {
       const div = document.getElementById(this.srid)
       if (div) {
@@ -254,7 +253,7 @@ class Alert extends Component {
     }
   }
 
-  removeScreenreaderAlert () {
+  removeScreenreaderAlert() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
       const div = document.getElementById(this.srid)
@@ -275,13 +274,16 @@ class Alert extends Component {
     }
   }
 
-  handleKeyUp = event => {
-    if ((this.props.renderCloseButtonLabel || this.props.closeButtonLabel) && event.keyCode === keycode.codes.esc) {
+  handleKeyUp = (event) => {
+    if (
+      (this.props.renderCloseButtonLabel || this.props.closeButtonLabel) &&
+      event.keyCode === keycode.codes.esc
+    ) {
       this.close()
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
       this.initLiveRegion(liveRegion)
@@ -291,7 +293,7 @@ class Alert extends Component {
     this.createScreenreaderAlert()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (!!this.props.open === false && !!this.props.open !== !!prevProps.open) {
       // this outside world is asking us to close the alert, which needs to
       // take place internally so the transition runs
@@ -303,12 +305,12 @@ class Alert extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.removeScreenreaderAlert()
     this.clearTimeouts()
   }
 
-  renderIcon () {
+  renderIcon() {
     const { Icon } = this.variantUI()
     return (
       <div className={styles.icon}>
@@ -317,19 +319,24 @@ class Alert extends Component {
     )
   }
 
-  renderCloseButton () {
-    const closeButtonLabel = (this.props.renderCloseButtonLabel
-      && callRenderProp(this.props.renderCloseButtonLabel))
-      || this.props.closeButtonLabel
+  renderCloseButton() {
+    const closeButtonLabel =
+      (this.props.renderCloseButtonLabel &&
+        callRenderProp(this.props.renderCloseButtonLabel)) ||
+      this.props.closeButtonLabel
 
-    return closeButtonLabel
-      ? <div className={styles.closeButton} key="closeButton">
-        <CloseButton onClick={this.close} size="small" screenReaderLabel={closeButtonLabel} />
+    return closeButtonLabel ? (
+      <div className={styles.closeButton} key="closeButton">
+        <CloseButton
+          onClick={this.close}
+          size="small"
+          screenReaderLabel={closeButtonLabel}
+        />
       </div>
-      : null
+    ) : null
   }
 
-  renderAlert () {
+  renderAlert() {
     const { classNames } = this.variantUI()
     return (
       <View
@@ -339,15 +346,13 @@ class Alert extends Component {
         onKeyUp={this.handleKeyUp}
       >
         {this.renderIcon()}
-        <div className={styles.content}>
-          {this.props.children}
-        </div>
+        <div className={styles.content}>{this.props.children}</div>
         {this.renderCloseButton()}
       </View>
     )
   }
 
-  render () {
+  render() {
     // Don't render anything if screen reader only
     if (this.props.screenReaderOnly) {
       error(

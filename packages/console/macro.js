@@ -27,11 +27,15 @@ const annotateAsPure = require('@babel/helper-annotate-as-pure').default
 const { addNamed } = require('@babel/helper-module-imports')
 
 function macro({ babel, references, state }) {
-  Object.keys(references).forEach(referenceKey => {
-    const runtimeNode  = addNamed(state.file.path, referenceKey, '@instructure/console')
+  Object.keys(references).forEach((referenceKey) => {
+    const runtimeNode = addNamed(
+      state.file.path,
+      referenceKey,
+      '@instructure/console'
+    )
     const t = babel.types
 
-    references[referenceKey].reverse().forEach(reference => {
+    references[referenceKey].reverse().forEach((reference) => {
       const path = reference.parentPath
 
       reference.replaceWith(t.cloneDeep(runtimeNode))
@@ -48,4 +52,6 @@ function macro({ babel, references, state }) {
     })
   })
 }
-module.exports = exports.error = exports.warn = exports.warnDeprecated = exports.info = exports.assert = exports.debug = exports.log = createMacro(macro)
+module.exports = exports.error = exports.warn = exports.warnDeprecated = exports.info = exports.assert = exports.debug = exports.log = createMacro(
+  macro
+)

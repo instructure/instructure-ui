@@ -41,21 +41,21 @@ category: components
 class InlineList extends Component {
   static propTypes = {
     /**
-    * Only accepts `<InlineList.Item>` as a child
-    */
+     * Only accepts `<InlineList.Item>` as a child
+     */
     children: ChildrenPropTypes.oneOf([InlineListItem]),
     as: PropTypes.oneOf(['ul', 'ol']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
     /**
-    * Sets the margin separating each ListItem.
-    */
+     * Sets the margin separating each ListItem.
+     */
     itemSpacing: PropTypes.oneOf([
       'none',
       'xxx-small',
@@ -82,7 +82,7 @@ class InlineList extends Component {
 
   static Item = InlineListItem
 
-  renderChildren () {
+  renderChildren() {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children
 
@@ -94,14 +94,8 @@ class InlineList extends Component {
     })
   }
 
-  render () {
-
-    const {
-      as,
-      margin,
-      elementRef,
-      ...rest
-    } = this.props
+  render() {
+    const { as, margin, elementRef, ...rest } = this.props
 
     return (
       <View

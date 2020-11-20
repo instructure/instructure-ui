@@ -28,7 +28,11 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
-import { omitProps, callRenderProp, getElementType } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  callRenderProp,
+  getElementType
+} from '@instructure/ui-react-utils'
 import { I18nPropTypes } from '@instructure/ui-i18n'
 
 import testable from '@instructure/ui-testable'
@@ -48,58 +52,58 @@ id: Calendar.Day
 class Day extends Component {
   static propTypes = {
     /**
-    * The rendered representation of the corresponding date.
-    */
+     * The rendered representation of the corresponding date.
+     */
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * An ISO 8601 formatted string representing the date corresponding to
-    * this `<Calendar.Day />`
-    */
+     * An ISO 8601 formatted string representing the date corresponding to
+     * this `<Calendar.Day />`
+     */
     date: I18nPropTypes.iso8601.isRequired,
     /**
-    * Accessible label to provide more context for the date to assistive
-    * technologies. This should consist of more than just a numerical date value.
-    * It should also include the month and the year. Ex. instead of just `1`,
-    * provide `1 August 2019`.
-    */
+     * Accessible label to provide more context for the date to assistive
+     * technologies. This should consist of more than just a numerical date value.
+     * It should also include the month and the year. Ex. instead of just `1`,
+     * provide `1 August 2019`.
+     */
     label: PropTypes.string.isRequired,
     /**
-    * Is the `<Calendar.Day />` disabled
-    */
+     * Is the `<Calendar.Day />` disabled
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled']),
     /**
-    * Is the `<Calendar.Day />` selected
-    */
+     * Is the `<Calendar.Day />` selected
+     */
     isSelected: PropTypes.bool,
     /**
-    * Is the `<Calendar.Day />` today
-    */
+     * Is the `<Calendar.Day />` today
+     */
     isToday: PropTypes.bool,
     /**
-    * Is the `<Calendar.Day />` located outside the current rendered month
-    */
+     * Is the `<Calendar.Day />` located outside the current rendered month
+     */
     isOutsideMonth: PropTypes.bool,
     /**
-    * Callback fired on click.
-    * @param {Object} event - the click event
-    * @param {Object} data - additional data
-    * @param data.date - the date of the corresponding `<Calendar.Day />`
-    */
+     * Callback fired on click.
+     * @param {Object} event - the click event
+     * @param {Object} data - additional data
+     * @param data.date - the date of the corresponding `<Calendar.Day />`
+     */
     onClick: PropTypes.func,
     /**
-    * Callback fired on key down.
-    * @param {Object} event - the key down event
-    * @param {Object} data - additional data
-    * @param data.date - the date of the corresponding `<Calendar.Day />`
-    */
+     * Callback fired on key down.
+     * @param {Object} event - the key down event
+     * @param {Object} data - additional data
+     * @param data.date - the date of the corresponding `<Calendar.Day />`
+     */
     onKeyDown: PropTypes.func,
     /**
-    * A ref function for the underlying DOM element.
-    */
+     * A ref function for the underlying DOM element.
+     */
     elementRef: PropTypes.func,
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType // eslint-disable-line react/require-default-props
   }
 
@@ -114,17 +118,17 @@ class Day extends Component {
     children: null
   }
 
-  get isDisabled () {
+  get isDisabled() {
     const { interaction } = this.props
     return interaction === 'disabled'
   }
 
-  get elementType () {
+  get elementType() {
     const { as } = this.props
     return as || getElementType(Day, this.props)
   }
 
-  shouldApplyAriaSelected () {
+  shouldApplyAriaSelected() {
     const { role } = this.props // eslint-disable-line react/prop-types
     return ['option', 'gridcell'].indexOf(role) > -1
   }
@@ -148,7 +152,7 @@ class Day extends Component {
     elementRef(el)
   }
 
-  render () {
+  render() {
     const {
       children,
       label,
@@ -162,10 +166,7 @@ class Day extends Component {
       ...props
     } = this.props
 
-    const {
-      elementType,
-      isDisabled
-    } = this
+    const { elementType, isDisabled } = this
 
     const classes = classnames({
       [styles.day]: true,
@@ -190,13 +191,22 @@ class Day extends Component {
         borderWidth="none"
         borderColor="transparent"
         background="transparent"
-        cursor={elementType === 'button' || elementType === 'a'
-          ? (isDisabled ? 'not-allowed' : 'pointer')
-          : 'auto'
+        cursor={
+          elementType === 'button' || elementType === 'a'
+            ? isDisabled
+              ? 'not-allowed'
+              : 'pointer'
+            : 'auto'
         }
         disabled={isDisabled}
         aria-current={isToday ? 'date' : null}
-        aria-selected={this.shouldApplyAriaSelected() ? (isSelected ? 'true' : 'false') : null}
+        aria-selected={
+          this.shouldApplyAriaSelected()
+            ? isSelected
+              ? 'true'
+              : 'false'
+            : null
+        }
         onClick={onClick && this.handleClick}
         onKeyDown={onKeyDown && this.handleKeyDown}
         elementRef={this.handleElementRef}

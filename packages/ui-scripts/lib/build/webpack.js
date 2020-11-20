@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
+const {
+  runCommandsConcurrently,
+  getCommand
+} = require('@instructure/command-utils')
 
 const {
   NODE_ENV,
@@ -36,7 +38,7 @@ const {
 
 const args = process.argv.slice(2)
 
-const portIndex = args.findIndex(arg => arg === '-p')
+const portIndex = args.findIndex((arg) => arg === '-p')
 let port = '8080'
 if (portIndex > 0) {
   port = args[portIndex + 1]
@@ -44,31 +46,41 @@ if (portIndex > 0) {
 
 let command, webpackArgs
 
-let envVars = [(OMIT_INSTUI_DEPRECATION_WARNINGS ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1` : false)]
+let envVars = [
+  OMIT_INSTUI_DEPRECATION_WARNINGS
+    ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
+    : false
+]
 
 if (args.includes('--watch')) {
   command = 'webpack-dev-server'
-  envVars = envVars.concat([
-    'NODE_ENV=development',
-    'DEBUG=1',
-    'UNMANGLED_CLASS_NAMES=1',
-    'USE_WEBPACK_CSS_LOADERS=1',
-    'DISABLE_SPEEDY_STYLESHEET=1',
-  ]).filter(Boolean)
+  envVars = envVars
+    .concat([
+      'NODE_ENV=development',
+      'DEBUG=1',
+      'UNMANGLED_CLASS_NAMES=1',
+      'USE_WEBPACK_CSS_LOADERS=1',
+      'DISABLE_SPEEDY_STYLESHEET=1'
+    ])
+    .filter(Boolean)
   webpackArgs = ['--mode=development', `--port=${port}`]
 } else {
   command = 'webpack'
-  envVars = envVars.concat([
-    `NODE_ENV=${NODE_ENV || 'production'}`,
-    'NODE_OPTIONS=--max_old_space_size=120000',
-    (DEBUG ? `DEBUG=1` : false),
-    (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
-    (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false),
-    (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false)
-  ]).filter(Boolean)
+  envVars = envVars
+    .concat([
+      `NODE_ENV=${NODE_ENV || 'production'}`,
+      'NODE_OPTIONS=--max_old_space_size=120000',
+      DEBUG ? `DEBUG=1` : false,
+      UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
+      USE_WEBPACK_CSS_LOADERS ? `USE_WEBPACK_CSS_LOADERS=1` : false,
+      DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false
+    ])
+    .filter(Boolean)
   webpackArgs = ['--mode=production']
 }
 
-process.exit(runCommandsConcurrently({
-  webpack: getCommand(command, webpackArgs, envVars)
-}).status)
+process.exit(
+  runCommandsConcurrently({
+    webpack: getCommand(command, webpackArgs, envVars)
+  }).status
+)

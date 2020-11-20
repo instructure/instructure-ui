@@ -37,51 +37,62 @@ import { ownerWindow } from '@instructure/ui-dom-utils'
  * @param {Function} validSource an optional function that would restrict message handling to a specified source.
  * @returns {Function} a function that decorates a React component with the behavior
  */
- const windowMessageListener = decorator((ComposedComponent, messageHandler, validSource) => {
-   return class extends ComposedComponent {
-     static postMessage = function (target, message, origin) {
-       target.postMessage(message, origin)
-     }
+const windowMessageListener = decorator(
+  (ComposedComponent, messageHandler, validSource) => {
+    return class extends ComposedComponent {
+      static postMessage = function (target, message, origin) {
+        target.postMessage(message, origin)
+      }
 
-     componentDidMount () {
-       const win = ownerWindow(this)
+      componentDidMount() {
+        const win = ownerWindow(this)
 
-       win.addEventListener('message', this.handleMessage, false)
+        win.addEventListener('message', this.handleMessage, false)
 
-       if (super.componentDidMount) {
-         super.componentDidMount()
-       }
-     }
+        if (super.componentDidMount) {
+          super.componentDidMount()
+        }
+      }
 
-     componentWillUnmount () {
-       const win = ownerWindow(this)
-       win.removeEventListener('message', this.handleMessage, false)
+      componentWillUnmount() {
+        const win = ownerWindow(this)
+        win.removeEventListener('message', this.handleMessage, false)
 
-       if (super.componentDidMount) {
-         super.componentDidMount()
-       }
-     }
+        if (super.componentDidMount) {
+          super.componentDidMount()
+        }
+      }
 
-     sourceIsValid (eventSource) {
-       const expectedSource = (typeof validSource === 'function') ? validSource.call(this) : validSource
-       if (!expectedSource) {
-         return true
-       } else if (eventSource) {
-         const sourceFrame = eventSource.frameElement
-         const sourceName = sourceFrame ? sourceFrame.getAttribute('name') : null
-         return sourceName === expectedSource
-       } else {
-         return false
-       }
-     }
+      sourceIsValid(eventSource) {
+        const expectedSource =
+          typeof validSource === 'function'
+            ? validSource.call(this)
+            : validSource
+        if (!expectedSource) {
+          return true
+        } else if (eventSource) {
+          const sourceFrame = eventSource.frameElement
+          const sourceName = sourceFrame
+            ? sourceFrame.getAttribute('name')
+            : null
+          return sourceName === expectedSource
+        } else {
+          return false
+        }
+      }
 
-     handleMessage = (e) => {
-       if (this.sourceIsValid(e.source) && e.origin === origin(this) && e.data) {
-         messageHandler.call(this, e.data)
-       }
-     }
-   }
- })
+      handleMessage = (e) => {
+        if (
+          this.sourceIsValid(e.source) &&
+          e.origin === origin(this) &&
+          e.data
+        ) {
+          messageHandler.call(this, e.data)
+        }
+      }
+    }
+  }
+)
 
 /**
  * Return the origin of the owner window of the DOM element
@@ -91,11 +102,10 @@ import { ownerWindow } from '@instructure/ui-dom-utils'
  * @param {DOMElement} node
  * @returns {String} the origin
  */
-function origin (node) {
+function origin(node) {
   const ownWindow = ownerWindow(node)
 
   const { location } = ownWindow
-
 
   if (location.protocol === 'file:') {
     return '*'

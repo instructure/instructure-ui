@@ -28,7 +28,7 @@ const path = require('path')
 
 const getOptions = require('../utils/getOptions')
 
-module.exports = function DocsLoader () {
+module.exports = function DocsLoader() {
   this.cacheable && this.cacheable()
 
   const callback = this.async()
@@ -37,27 +37,40 @@ module.exports = function DocsLoader () {
   const options = getOptions(loaderOptions)
 
   const processFile = (filepath) => {
-    return `require('!!${require.resolve('./docgen-loader')}?${JSON.stringify(loaderOptions)}!${filepath}')`
+    return `require('!!${require.resolve('./docgen-loader')}?${JSON.stringify(
+      loaderOptions
+    )}!${filepath}')`
   }
 
   const themes = parseThemes(options.themes, options)
   const icons = parseIcons(options.icons)
 
-  const files = options.files.map(file => path.resolve(options.projectRoot, file))
+  const files = options.files.map((file) =>
+    path.resolve(options.projectRoot, file)
+  )
 
-  const ignore = options.ignore ? options.ignore.map(file => path.resolve(options.projectRoot, file)) : undefined
+  const ignore = options.ignore
+    ? options.ignore.map((file) => path.resolve(options.projectRoot, file))
+    : undefined
 
   const showMenu = options.showMenu ? 'true' : 'false'
 
-  globby(files, { ignore }).then((matches) => {
-    const docs = matches.map((filepath) => processFile(path.resolve(options.context, filepath)))
+  globby(files, { ignore })
+    .then((matches) => {
+      const docs = matches.map((filepath) =>
+        processFile(path.resolve(options.context, filepath))
+      )
 
-    callback(null, `
+      callback(
+        null,
+        `
       // Activate hot module replacement
       module.hot && module.hot.accept()
 
       const renderDocsClient = require('@instructure/ui-docs-client').renderDocsClient
-      const getClientProps = require('!!${require.resolve('../utils/getClientProps')}')
+      const getClientProps = require('!!${require.resolve(
+        '../utils/getClientProps'
+      )}')
 
       const props = getClientProps(
         [
@@ -72,13 +85,15 @@ module.exports = function DocsLoader () {
       props.showMenu = ${showMenu}
 
       renderDocsClient(props, document.getElementById('app'))
-    `)
-  }).catch((error) => {
-    callback(error)
-  })
+    `
+      )
+    })
+    .catch((error) => {
+      callback(error)
+    })
 }
 
-function parseThemes (themes = [], options) {
+function parseThemes(themes = [], options) {
   return themes.map((theme) => {
     return `{
         resource: require('${theme}').theme,
@@ -87,7 +102,7 @@ function parseThemes (themes = [], options) {
   })
 }
 
-function parseIcons (icons = {}) {
+function parseIcons(icons = {}) {
   const formats = Object.keys(icons.formats || []).map((format) => {
     const requirePath = icons.formats[format]
     const packageName = icons.packageName

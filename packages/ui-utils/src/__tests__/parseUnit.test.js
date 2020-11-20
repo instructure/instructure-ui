@@ -78,4 +78,3 @@ describe('parseUnit', () => {
     expect(parseUnit('70vmin')[1]).to.equal('vmin')
   })
 })
-

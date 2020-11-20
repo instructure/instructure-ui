@@ -52,16 +52,16 @@ class RangeInput extends Component {
     min: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired,
     /**
-    * value to set on initial render
-    */
+     * value to set on initial render
+     */
     defaultValue: PropTypes.number,
     /**
-    * the selected value (must be accompanied by an `onChange` prop)
-    */
+     * the selected value (must be accompanied by an `onChange` prop)
+     */
     value: controllable(PropTypes.number),
     /**
-    * when used with the `value` prop, the component will not control its own state
-    */
+     * when used with the `value` prop, the component will not control its own state
+     */
     onChange: PropTypes.func,
     messages: PropTypes.arrayOf(FormPropTypes.message),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
@@ -69,13 +69,13 @@ class RangeInput extends Component {
     id: PropTypes.string,
     label: PropTypes.node.isRequired,
     /**
-    * whether to display the current value
-    */
+     * whether to display the current value
+     */
     displayValue: PropTypes.bool,
     step: PropTypes.number,
     /**
-    * A function to format the displayed value
-    */
+     * A function to format the displayed value
+     */
     formatValue: PropTypes.func,
     inline: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -100,7 +100,7 @@ class RangeInput extends Component {
     messages: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     if (typeof props.value === 'undefined') {
@@ -113,16 +113,24 @@ class RangeInput extends Component {
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */
-  componentDidMount () {
+  componentDidMount() {
     if (!this._input) {
       return
     }
     // https://connect.microsoft.com/IE/Feedback/Details/856998
-    this.inputListener = addEventListener(this._input, 'input', this.handleChange)
-    this.changeListener = addEventListener(this._input, 'change', this.handleChange)
+    this.inputListener = addEventListener(
+      this._input,
+      'input',
+      this.handleChange
+    )
+    this.changeListener = addEventListener(
+      this._input,
+      'change',
+      this.handleChange
+    )
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (!this._input) {
       return
     }
@@ -146,19 +154,26 @@ class RangeInput extends Component {
   // controlled input must have an onChange, but we're handling it with native events
   noopChange = () => {}
 
-  get value () {
-    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
+  get value() {
+    return typeof this.props.value === 'undefined'
+      ? this.state.value
+      : this.props.value
   }
 
-  get invalid () {
-    return this.props.messages && this.props.messages.findIndex((message) => { return message.type === 'error' }) >= 0
+  get invalid() {
+    return (
+      this.props.messages &&
+      this.props.messages.findIndex((message) => {
+        return message.type === 'error'
+      }) >= 0
+    )
   }
 
-  get id () {
+  get id() {
     return this.props.id || this.defaultId
   }
 
-  renderValue () {
+  renderValue() {
     if (this.props.displayValue) {
       return (
         <ContextView background="inverse" placement="end center">
@@ -170,13 +185,8 @@ class RangeInput extends Component {
     }
   }
 
-  render () {
-    const {
-      formatValue,
-      size,
-      disabled,
-      readOnly
-    } = this.props
+  render() {
+    const { formatValue, size, disabled, readOnly } = this.props
 
     const props = omitProps(this.props, RangeInput.propTypes)
 
@@ -188,14 +198,13 @@ class RangeInput extends Component {
 
     /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
-      <FormField
-        {...pickProps(this.props, FormField.propTypes)}
-        id={this.id}
-      >
+      <FormField {...pickProps(this.props, FormField.propTypes)} id={this.id}>
         <div className={classnames(classes)}>
           <input
             className={styles.input}
-            ref={(c) => { this._input = c }}
+            ref={(c) => {
+              this._input = c
+            }}
             type="range"
             role="slider"
             id={this.id}

@@ -1,26 +1,26 @@
 /*
-* The MIT License (MIT)
-*
-* Copyright (c) 2015 - present Instructure, Inc.
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -58,73 +58,79 @@ category: components
 class Link extends Component {
   static propTypes = {
     /**
-    * The text and/or icon displayed by the link
-    */
+     * The text and/or icon displayed by the link
+     */
     children: PropTypes.node.isRequired,
     /**
-    * Sets the link's `href` attribute
-    */
+     * Sets the link's `href` attribute
+     */
     href: PropTypes.string,
     /**
-    * Designates Link's text color to accommodate light and dark backgrounds
-    */
+     * Designates Link's text color to accommodate light and dark backgrounds
+     */
     color: PropTypes.oneOf(['link', 'link-inverse']),
     /**
-    * Provides a reference to the underlying HTML element
-    */
+     * Provides a reference to the underlying HTML element
+     */
     elementRef: PropTypes.func,
     /**
-    * The element type to render as (will default to `<a>` if href is provided)
-    */
+     * The element type to render as (will default to `<a>` if href is provided)
+     */
     as: PropTypes.elementType,
     /**
-    * Determines if the link is enabled or disabled
-    */
+     * Determines if the link is enabled or disabled
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Add an SVG icon to the Link. Do not add icons directly as
-    * children.
-    */
+     * Add an SVG icon to the Link. Do not add icons directly as
+     * children.
+     */
     renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * Place the icon before or after the text in the Link.
-    */
+     * Place the icon before or after the text in the Link.
+     */
     iconPlacement: PropTypes.oneOf(['start', 'end']),
     /**
-    * Set the CSS display property of the Link element. 'auto' sets no display property.
-    */
-    display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex']),
+     * Set the CSS display property of the Link element. 'auto' sets no display property.
+     */
+    display: PropTypes.oneOf([
+      'auto',
+      'block',
+      'inline-block',
+      'flex',
+      'inline-flex'
+    ]),
     /**
-    * Set `false` to remove default underline if Link does not appear inline with text
-    */
+     * Set `false` to remove default underline if Link does not appear inline with text
+     */
     isWithinText: PropTypes.bool,
     /**
-    * Fires when the Link is clicked
-    */
+     * Fires when the Link is clicked
+     */
     onClick: PropTypes.func,
     /**
-    * Fires when the Link gains focus
-    */
+     * Fires when the Link gains focus
+     */
     onFocus: PropTypes.func,
     /**
-    * Fires when the Link loses focus
-    */
+     * Fires when the Link loses focus
+     */
     onBlur: PropTypes.func,
 
     /* eslint-disable react/require-default-props */
     /**
-    * __deprecated: use elementRef__
-    */
+     * __deprecated: use elementRef__
+     */
     linkRef: PropTypes.func,
     /**
-    * __deprecated: use color__
-    */
+     * __deprecated: use color__
+     */
     variant: PropTypes.oneOf(['default', 'inverse'])
   }
 
@@ -148,10 +154,7 @@ class Link extends Component {
   state = { hasFocus: false }
 
   handleElementRef = (el) => {
-    const {
-      elementRef,
-      linkRef
-    } = this.props
+    const { elementRef, linkRef } = this.props
 
     this._link = el
     if (typeof linkRef === 'function') linkRef(el)
@@ -184,7 +187,7 @@ class Link extends Component {
     }
   }
 
-  get containsTruncateText () {
+  get containsTruncateText() {
     let truncateText = false
 
     React.Children.forEach(this.props.children, (child) => {
@@ -193,7 +196,8 @@ class Link extends Component {
       }
     })
 
-    warn( // if display prop is used, warn about icon or TruncateText
+    warn(
+      // if display prop is used, warn about icon or TruncateText
       !truncateText || this.props.display === undefined,
       '[Link] Using the display property with TruncateText may cause layout issues.'
     )
@@ -201,7 +205,7 @@ class Link extends Component {
     return truncateText
   }
 
-  get display () {
+  get display() {
     if (this.props.display) {
       return this.props.display // user-entered display property
     }
@@ -215,40 +219,45 @@ class Link extends Component {
     }
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props, interactionTypes: ['disabled'] })
   }
 
-  get element () {
+  get element() {
     return getElementType(Link, this.props)
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._link)
   }
 
-  get focusable () {
+  get focusable() {
     return findFocusable(this._link)
   }
 
-  get hasVisibleChildren () {
+  get hasVisibleChildren() {
     return hasVisibleChildren(this.props.children)
   }
 
-  focus () {
+  focus() {
     this._link && this._link.focus()
   }
 
-  renderIcon () {
-    warn( // if display prop is used, warn about icon or TruncateText
+  renderIcon() {
+    warn(
+      // if display prop is used, warn about icon or TruncateText
       this.props.display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )
 
-    return <span className={styles.icon}>{callRenderProp(this.props.renderIcon)}</span>
+    return (
+      <span className={styles.icon}>
+        {callRenderProp(this.props.renderIcon)}
+      </span>
+    )
   }
 
-  render () {
+  render() {
     const {
       children,
       onClick,
@@ -264,8 +273,10 @@ class Link extends Component {
 
     const classes = {
       [styles.root]: true,
-      [styles['color--link-inverse']]: variant === 'inverse' || color === 'link-inverse',
-      [styles[`iconPlacement--${iconPlacement}`]]: renderIcon && this.hasVisibleChildren,
+      [styles['color--link-inverse']]:
+        variant === 'inverse' || color === 'link-inverse',
+      [styles[`iconPlacement--${iconPlacement}`]]:
+        renderIcon && this.hasVisibleChildren,
       [styles.truncates]: this.containsTruncateText,
       [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
     }
@@ -274,8 +285,9 @@ class Link extends Component {
 
     const isDisabled = interaction === 'disabled'
     const role = onClick && this.element !== 'button' ? 'button' : null
-    const type = (this.element === 'button' || this.element === 'input') ? 'button' : null
-    const tabIndex = (role === 'button' && !isDisabled) ? '0' : null
+    const type =
+      this.element === 'button' || this.element === 'input' ? 'button' : null
+    const tabIndex = role === 'button' && !isDisabled ? '0' : null
 
     return (
       <View
@@ -294,9 +306,9 @@ class Link extends Component {
         tabIndex={tabIndex}
         className={classnames(classes)}
       >
-        {(renderIcon && iconPlacement === 'start') && this.renderIcon()}
+        {renderIcon && iconPlacement === 'start' && this.renderIcon()}
         {children}
-        {(renderIcon && iconPlacement === 'end') && this.renderIcon()}
+        {renderIcon && iconPlacement === 'end' && this.renderIcon()}
       </View>
     )
   }

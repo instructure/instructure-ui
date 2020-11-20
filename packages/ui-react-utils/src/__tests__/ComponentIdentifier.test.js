@@ -41,7 +41,7 @@ describe('ComponentIdentifier', async () => {
       children: null
     }
 
-    render () {
+    render() {
       const trigger = ComponentIdentifier.pick(Trigger, this.props.children)
 
       return (
@@ -58,7 +58,7 @@ describe('ComponentIdentifier', async () => {
     await mount(
       <App>
         <Trigger>
-          <button ref={el => buttonRef = el}>Click Me</button>
+          <button ref={(el) => (buttonRef = el)}>Click Me</button>
         </Trigger>
       </App>
     )
@@ -87,7 +87,7 @@ describe('ComponentIdentifier', async () => {
     await mount(
       <App>
         <Trigger onClick={onClick}>
-          <button ref={el => buttonRef = el}>Click Me</button>
+          <button ref={(el) => (buttonRef = el)}>Click Me</button>
         </Trigger>
       </App>
     )

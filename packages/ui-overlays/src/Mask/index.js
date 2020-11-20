@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import noScroll from 'no-scroll'
 
 import { themeable } from '@instructure/ui-themeable'
-import { ensureSingleChild , omitProps } from '@instructure/ui-react-utils'
+import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -58,27 +58,27 @@ class Mask extends Component {
     elementRef: (el) => {}
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.fullscreen) {
       noScroll.on()
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.props.fullscreen) {
       noScroll.off()
     }
   }
 
-  handleElementRef = el => {
+  handleElementRef = (el) => {
     this.props.elementRef(el)
   }
 
-  contentRef = el => {
+  contentRef = (el) => {
     this._content = el
   }
 
-  render () {
+  render() {
     const content = ensureSingleChild(this.props.children, {
       ref: this.contentRef
     })
@@ -100,11 +100,7 @@ class Mask extends Component {
       props.tabIndex = -1
     }
 
-    return (
-      <span {...props}>
-        {content}
-      </span>
-    )
+    return <span {...props}>{content}</span>
   }
 }
 

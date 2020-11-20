@@ -40,8 +40,8 @@ import { camelize } from './camelize'
  *
  * @param {String} str
  * @returns {String} Returns pascal cased string
-*/
-function pascalize (str) {
+ */
+function pascalize(str) {
   return capitalizeFirstLetter(camelize(str))
 }
 

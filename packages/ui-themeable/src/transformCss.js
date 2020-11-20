@@ -24,7 +24,7 @@
 
 import { parseCss, ruleTypes } from './parseCss'
 
-function transformCss (cssText, transform) {
+function transformCss(cssText, transform) {
   let node = parseCss(cssText)
 
   if (typeof transform === 'function') {
@@ -34,11 +34,11 @@ function transformCss (cssText, transform) {
   return toCssText(node)
 }
 
-function isKeyframesSelector (rule) {
+function isKeyframesSelector(rule) {
   return rule.parent && rule.parent.type === ruleTypes.keyframes
 }
 
-function toRules (cssText) {
+function toRules(cssText) {
   const node = parseCss(cssText)
   let rules = []
 
@@ -54,7 +54,7 @@ function toRules (cssText) {
   return rules
 }
 
-function transformNode (node, transform) {
+function transformNode(node, transform) {
   if (!node) {
     return
   }
@@ -64,14 +64,14 @@ function transformNode (node, transform) {
   }
 
   const rules = node.rules || []
-  const transformed = {...node}
+  const transformed = { ...node }
 
   transformed.rules = rules.map((rule) => transformNode(rule, transform))
 
   return transformed
 }
 
-function toCssText (node, text) {
+function toCssText(node, text) {
   let cssText = ''
   let result = text || ''
 

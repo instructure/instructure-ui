@@ -23,17 +23,12 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  mount,
-  stub,
-  locator
-} from '@instructure/ui-test-utils'
+import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
 
 import { TreeCollection } from '../index'
 
 // TODO: if we make a TreeBrowserItem component + locator we could use it here.
-const TreeBrowserItemLocator =  locator('[role="treeitem"]')
+const TreeBrowserItemLocator = locator('[role="treeitem"]')
 
 const TreeCollectionLocator = locator(TreeCollection.selector, {
   findAllItems: (...args) => {
@@ -72,11 +67,9 @@ describe('<TreeCollection />', async () => {
         id={1}
         name="Coll 1"
         collections={[
-          {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+          { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
         ]}
-        items={[
-          {id: 1, name: 'Item 1'}
-        ]}
+        items={[{ id: 1, name: 'Item 1' }]}
       />
     )
     const collection = await TreeCollectionLocator.find()
@@ -90,11 +83,9 @@ describe('<TreeCollection />', async () => {
           id={1}
           name="Coll 1"
           collections={[
-            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
           ]}
-          items={[
-            {id: 1, name: 'Item 1'}
-          ]}
+          items={[{ id: 1, name: 'Item 1' }]}
           collectionIcon={() => IconFolder}
           collectionIconExpanded={() => IconFolder}
           itemIcon={() => IconDocument}
@@ -116,11 +107,9 @@ describe('<TreeCollection />', async () => {
           id={1}
           name="Coll 1"
           collections={[
-            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
           ]}
-          items={[
-            {id: 1, name: 'Item 1'}
-          ]}
+          items={[{ id: 1, name: 'Item 1' }]}
         />
       )
 
@@ -136,11 +125,9 @@ describe('<TreeCollection />', async () => {
           id={1}
           name="Coll 1"
           collections={[
-            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
           ]}
-          items={[
-            {id: 1, name: 'Item 1'}
-          ]}
+          items={[{ id: 1, name: 'Item 1' }]}
           selection="collection_1"
         />
       )
@@ -159,11 +146,9 @@ describe('<TreeCollection />', async () => {
             id={1}
             name="Coll 1"
             collections={[
-              {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+              { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
             ]}
-            items={[
-              {id: 1, name: 'Item 1'}
-            ]}
+            items={[{ id: 1, name: 'Item 1' }]}
             onCollectionClick={onCollectionClick}
           />
         )
@@ -190,11 +175,9 @@ describe('<TreeCollection />', async () => {
           id={1}
           name="Coll 1"
           collections={[
-            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
           ]}
-          items={[
-            {id: 1, name: 'Item 1'}
-          ]}
+          items={[{ id: 1, name: 'Item 1' }]}
           expanded={true}
         />
       )
@@ -213,11 +196,9 @@ describe('<TreeCollection />', async () => {
           id={1}
           name="Coll 1"
           collections={[
-            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
           ]}
-          items={[
-            {id: 1, name: 'Item 1'}
-          ]}
+          items={[{ id: 1, name: 'Item 1' }]}
           onItemClick={onItemClick}
           expanded={true}
         />
@@ -229,7 +210,10 @@ describe('<TreeCollection />', async () => {
       await item.click()
 
       expect(onItemClick).to.have.been.calledOnce()
-      expect(onItemClick.lastCall.lastArg).to.deep.equal({id: 1, type: 'item'})
+      expect(onItemClick.lastCall.lastArg).to.deep.equal({
+        id: 1,
+        type: 'item'
+      })
     })
 
     it('should correctly evaluate `getItemProps` for each item', async () => {
