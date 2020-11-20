@@ -47,10 +47,12 @@ class Media extends Component {
 
   _byLine = null
 
-  render () {
+  render() {
     return (
       <Byline
-        ref={(component) => { this._byLine = component }}
+        ref={(component) => {
+          this._byLine = component
+        }}
         {...this.props}
       />
     )

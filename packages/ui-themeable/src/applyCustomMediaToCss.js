@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 /**
  * ---
  * category: utilities/themes
@@ -34,7 +33,7 @@
  * @param {Object|Function} variables object containing custom media variables, or a function that returns the variables object that will be lazy-evaluated only if there are matched media query
  * @returns {String} CSS text with custom media values applied
  */
-function applyCustomMediaToCss (cssText, variables) {
+function applyCustomMediaToCss(cssText, variables) {
   const matches = getMatches(cssText, /@media\s*[^(]*\((--[^)]+)\)?/g)
   let result = cssText
 
@@ -42,7 +41,10 @@ function applyCustomMediaToCss (cssText, variables) {
     const vars = typeof variables === 'function' ? variables() : variables
 
     matches.forEach((match) => {
-      const matcher = new RegExp(match[1].replace(/[\\^$*+?.()|[\]{}]/g, '\\$&'), 'gm')
+      const matcher = new RegExp(
+        match[1].replace(/[\\^$*+?.()|[\]{}]/g, '\\$&'),
+        'gm'
+      )
 
       result = result.replace(matcher, vars[match[1]])
     })
@@ -51,7 +53,7 @@ function applyCustomMediaToCss (cssText, variables) {
   return result
 }
 
-function getMatches (str, regex) {
+function getMatches(str, regex) {
   const matches = []
   let match
   let matcher = regex

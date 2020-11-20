@@ -35,14 +35,14 @@ let _mode = MODES.keyboard
 let _registeredCount = 0
 let _modeChangeHandlers = {}
 
-const handleInitialPointerMove = event => {
+const handleInitialPointerMove = (event) => {
   // Work around a Safari quirk that fires a mousemove on <html> whenever the
   // window blurs, even if you're tabbing out of the page. ¯\_(ツ)_/¯
-  if (event.target.nodeName.toLowerCase() === "html") {
+  if (event.target.nodeName.toLowerCase() === 'html') {
     return
   }
   handleInputModeChange(_mode, MODES.pointer)
-  _moveListeners.forEach(listener => listener.remove())
+  _moveListeners.forEach((listener) => listener.remove())
 }
 
 const handleInputModeChange = (currentMode, newMode) => {
@@ -50,7 +50,9 @@ const handleInputModeChange = (currentMode, newMode) => {
 
   _mode = newMode
 
-  Object.keys(_modeChangeHandlers).forEach(handlerId => _modeChangeHandlers[handlerId](currentMode, newMode))
+  Object.keys(_modeChangeHandlers).forEach((handlerId) =>
+    _modeChangeHandlers[handlerId](currentMode, newMode)
+  )
 }
 
 const handleKeyDown = () => {
@@ -63,31 +65,57 @@ const handlePointerDown = () => {
 
 const addMoveListeners = () => {
   if (_moveListeners.length === 0) {
-    _moveListeners.push(addEventListener(document, 'mousemove', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'mousedown', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'mouseup', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'pointermove', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'pointerdown', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'pointerup', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'touchmove', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'touchstart', handleInitialPointerMove, true))
-    _moveListeners.push(addEventListener(document, 'touchend', handleInitialPointerMove, true))
+    _moveListeners.push(
+      addEventListener(document, 'mousemove', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'mousedown', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'mouseup', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'pointermove', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'pointerdown', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'pointerup', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'touchmove', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'touchstart', handleInitialPointerMove, true)
+    )
+    _moveListeners.push(
+      addEventListener(document, 'touchend', handleInitialPointerMove, true)
+    )
   }
 }
 
 const addDownListeners = () => {
   if (_downListeners.length === 0) {
-    _downListeners.push(addEventListener(document, 'keydown', handleKeyDown, true))
-    _downListeners.push(addEventListener(document, 'mousedown', handlePointerDown, true))
-    _downListeners.push(addEventListener(document, 'pointerdown', handlePointerDown, true))
-    _downListeners.push(addEventListener(document, 'touchstart', handlePointerDown, true))
+    _downListeners.push(
+      addEventListener(document, 'keydown', handleKeyDown, true)
+    )
+    _downListeners.push(
+      addEventListener(document, 'mousedown', handlePointerDown, true)
+    )
+    _downListeners.push(
+      addEventListener(document, 'pointerdown', handlePointerDown, true)
+    )
+    _downListeners.push(
+      addEventListener(document, 'touchstart', handlePointerDown, true)
+    )
   }
 }
 
 const removeListeners = () => {
-  _moveListeners.forEach(listener => listener.remove())
+  _moveListeners.forEach((listener) => listener.remove())
   _moveListeners = []
-  _downListeners.forEach(listener => listener.remove())
+  _downListeners.forEach((listener) => listener.remove())
   _downListeners = []
 }
 
@@ -105,7 +133,7 @@ const addInputModeListener = ({ onInputModeChange }) => {
 
   return {
     isKeyboardMode: () => {
-      return (_mode === MODES.keyboard)
+      return _mode === MODES.keyboard
     },
     remove: () => {
       if (_registeredCount === 1) {

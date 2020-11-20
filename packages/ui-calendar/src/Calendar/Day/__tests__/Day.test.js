@@ -24,7 +24,12 @@
 
 import React from 'react'
 
-import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import { Day } from '../index'
 import { DayLocator } from '../DayLocator'
@@ -36,10 +41,7 @@ describe('Day', async () => {
   })
   it('should render children', async () => {
     const subject = await mount(
-      <Day
-        date="2019-08-02"
-        label="1 August 2019 Friday"
-      >
+      <Day date="2019-08-02" label="1 August 2019 Friday">
         8
       </Day>
     )
@@ -56,10 +58,7 @@ describe('Day', async () => {
   it('should have an accessible label', async () => {
     const label = '1 August 2019 Friday'
     await mount(
-      <Day
-        date="2019-08-02"
-        label={label}
-      >
+      <Day date="2019-08-02" label={label}>
         8
       </Day>
     )
@@ -69,55 +68,41 @@ describe('Day', async () => {
 
   it('should set aria-current="date" when `isToday`', async () => {
     const subject = await mount(
-      <Day
-        date="2019-08-02"
-        label="1 August 2019 Friday"
-        isToday
-      >
+      <Day date="2019-08-02" label="1 August 2019 Friday" isToday>
         8
       </Day>
     )
 
-    expect(await DayLocator.find(
-      '[aria-current="date"]'
-    )).to.exist()
+    expect(await DayLocator.find('[aria-current="date"]')).to.exist()
 
     await subject.setProps({ isToday: false })
 
-    expect(await DayLocator.find(
-      '[aria-current="date"]',
-      { expectEmpty: true }
-    )).to.not.exist()
+    expect(
+      await DayLocator.find('[aria-current="date"]', { expectEmpty: true })
+    ).to.not.exist()
   })
 
   it('should not set aria-selected without a role', async () => {
     const subject = await mount(
-      <Day
-        date="2019-08-02"
-        label="1 August 2019 Friday"
-      >
+      <Day date="2019-08-02" label="1 August 2019 Friday">
         8
       </Day>
     )
 
-    expect(await DayLocator.find(
-      '[aria-selected]', { expectEmpty: true }
-    )).to.not.exist()
+    expect(
+      await DayLocator.find('[aria-selected]', { expectEmpty: true })
+    ).to.not.exist()
 
     await subject.setProps({ isSelected: true })
 
-    expect(await DayLocator.find(
-      '[aria-selected]', { expectEmpty: true }
-    )).to.not.exist()
+    expect(
+      await DayLocator.find('[aria-selected]', { expectEmpty: true })
+    ).to.not.exist()
   })
 
   it('should set aria-selected="true/false" when `isSelected` and `role` is `option` or `gridcell`', async () => {
     const subject = await mount(
-      <Day
-        date="2019-08-02"
-        label="1 August 2019 Friday"
-        role="option"
-      >
+      <Day date="2019-08-02" label="1 August 2019 Friday" role="option">
         8
       </Day>
     )
@@ -139,11 +124,7 @@ describe('Day', async () => {
     const date = '2019-08-02'
 
     await mount(
-      <Day
-        date={date}
-        label="1 August 2019 Friday"
-        onClick={onClick}
-      >
+      <Day date={date} label="1 August 2019 Friday" onClick={onClick}>
         8
       </Day>
     )
@@ -225,10 +206,7 @@ describe('Day', async () => {
   describe('element type', async () => {
     it('should render as a span by default', async () => {
       await mount(
-        <Day
-          date="2019-08-02"
-          label="1 August 2019 Friday"
-        >
+        <Day date="2019-08-02" label="1 August 2019 Friday">
           8
         </Day>
       )
@@ -239,11 +217,7 @@ describe('Day', async () => {
 
     it('should render as a button when onClick is provided', async () => {
       await mount(
-        <Day
-          date="2019-08-02"
-          label="1 August 2019 Friday"
-          onClick={() => {}}
-        >
+        <Day date="2019-08-02" label="1 August 2019 Friday" onClick={() => {}}>
           8
         </Day>
       )

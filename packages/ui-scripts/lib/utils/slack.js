@@ -25,12 +25,9 @@
 const https = require('https')
 const { info, error } = require('@instructure/command-utils')
 
-const {
- SLACK_USERNAME,
- SLACK_WEBHOOK
-} = process.env
+const { SLACK_USERNAME, SLACK_WEBHOOK } = process.env
 
-function hasSlackConfig (config = {}) {
+function hasSlackConfig(config = {}) {
   const hasEnv = SLACK_USERNAME && SLACK_WEBHOOK
   const hasConfig = !!config.slack_channel
 
@@ -45,18 +42,25 @@ Set SLACK_USERNAME and SLACK_WEBHOOK environment variables to enable.`)
 }
 exports.hasSlackConfig = hasSlackConfig
 
-function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':robot_face:'}) {
+function postSlackMessage(
+  message,
+  issueKeys = [],
+  config = { slack_emoji: ':robot_face:' }
+) {
   if (config.slack_channel && SLACK_WEBHOOK) {
     info(`💬  Pinging slack channel: ${config.slack_channel}`)
 
-    const issues = (issueKeys.length > 0) ? `\n\nIssues in this release: ${issueKeys.join(', ')}` : ''
+    const issues =
+      issueKeys.length > 0
+        ? `\n\nIssues in this release: ${issueKeys.join(', ')}`
+        : ''
 
     const payload = {
-      'channel': config.slack_channel,
-      'username': SLACK_USERNAME,
-      'icon_emoji': config.slack_emoji,
-      'text': message + issues,
-      'link_names': 1
+      channel: config.slack_channel,
+      username: SLACK_USERNAME,
+      icon_emoji: config.slack_emoji,
+      text: message + issues,
+      link_names: 1
     }
 
     const req = https.request({
@@ -74,13 +78,13 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
   }
 }
 
-function getConfigList (config = {}) {
+function getConfigList(config = {}) {
   const configList = []
 
   if (typeof config.slack_channel === 'string') {
     configList.push({ ...config, slack_channel: config.slack_channel })
   } else if (Array.isArray(config.slack_channel)) {
-    config.slack_channel.forEach(slackChannel => {
+    config.slack_channel.forEach((slackChannel) => {
       configList.push({ ...config, slack_channel: slackChannel })
     })
   }
@@ -88,11 +92,17 @@ function getConfigList (config = {}) {
   return configList
 }
 
-exports.postStableReleaseSlackMessage = (jiraVersion = {}, issueKeys = [], config = {}) => {
+exports.postStableReleaseSlackMessage = (
+  jiraVersion = {},
+  issueKeys = [],
+  config = {}
+) => {
   const changelog = config.changelog_url ? `\n ${config.changelog_url}` : ''
-  const releaseName = jiraVersion.url ? `<${jiraVersion.url}|${jiraVersion.name}>` : jiraVersion.name
+  const releaseName = jiraVersion.url
+    ? `<${jiraVersion.url}|${jiraVersion.name}>`
+    : jiraVersion.name
   const configList = getConfigList(config)
-  configList.forEach(config => {
+  configList.forEach((config) => {
     postSlackMessage(
       `PSA!\n *${releaseName} has been published!* :party:${changelog}`,
       issueKeys,
@@ -101,9 +111,13 @@ exports.postStableReleaseSlackMessage = (jiraVersion = {}, issueKeys = [], confi
   })
 }
 
-exports.postReleaseCandidateSlackMessage = (releaseName, issueKeys, config = {}) => {
+exports.postReleaseCandidateSlackMessage = (
+  releaseName,
+  issueKeys,
+  config = {}
+) => {
   const configList = getConfigList(config)
-  configList.forEach(config => {
+  configList.forEach((config) => {
     postSlackMessage(
       `*A release candidate, ${releaseName} has been published!* :party:`,
       issueKeys,

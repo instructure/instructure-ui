@@ -32,7 +32,9 @@ describe('NavigationItem.theme', () => {
     const variables = NavigationItem.generateTheme()
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.fontColor)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundColor, variables.fontColor)
+      ).to.be.above(3)
     })
   })
 
@@ -40,7 +42,9 @@ describe('NavigationItem.theme', () => {
     const variables = NavigationItem.generateTheme('canvas-high-contrast')
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundColor, variables.fontColor)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundColor, variables.fontColor)
+      ).to.be.above(4.5)
     })
   })
 })

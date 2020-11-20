@@ -27,7 +27,10 @@ export function bindElementToMethods(element, methods) {
       bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
       return bound
     } else {
-      throw new Error(`[ui-test-queries] cannot bind to a non-function of type ${typeof fn}`, key)
+      throw new Error(
+        `[ui-test-queries] cannot bind to a non-function of type ${typeof fn}`,
+        key
+      )
     }
   }, {})
 }

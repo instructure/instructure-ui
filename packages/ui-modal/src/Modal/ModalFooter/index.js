@@ -44,7 +44,7 @@ id: Modal.Footer
 class ModalFooter extends Component {
   static propTypes = {
     children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse']),
+    variant: PropTypes.oneOf(['default', 'inverse'])
   }
 
   static defaultProps = {
@@ -52,7 +52,7 @@ class ModalFooter extends Component {
     children: null
   }
 
-  render () {
+  render() {
     const { children, variant, ...rest } = this.props
     const classes = {
       [styles.root]: true,
@@ -60,8 +60,7 @@ class ModalFooter extends Component {
     }
 
     return (
-      <div className={classnames(classes)}
-        {...passthroughProps(rest)}>
+      <div className={classnames(classes)} {...passthroughProps(rest)}>
         {children}
       </div>
     )

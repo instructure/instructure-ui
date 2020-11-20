@@ -54,13 +54,13 @@ class FormFieldLabel extends Component {
   static propTypes = {
     as: PropTypes.elementType,
     children: PropTypes.node.isRequired
-  };
+  }
 
   static defaultProps = {
     as: 'span'
-  };
+  }
 
-  render () {
+  render() {
     const ElementType = getElementType(FormFieldLabel, this.props)
 
     const classes = {

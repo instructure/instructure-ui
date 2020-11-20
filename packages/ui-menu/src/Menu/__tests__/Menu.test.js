@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { within, expect, mount, stub, wait, accessible } from '@instructure/ui-test-utils'
+import {
+  within,
+  expect,
+  mount,
+  stub,
+  wait,
+  accessible
+} from '@instructure/ui-test-utils'
 
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
 
@@ -72,10 +79,7 @@ describe('<Menu />', async () => {
     it('should call onSelect when menu item is selected', async () => {
       const onSelect = stub()
       await mount(
-        <Menu
-          label="Settings"
-          onSelect={onSelect}
-        >
+        <Menu label="Settings" onSelect={onSelect}>
           <MenuItem value="Account">Account</MenuItem>
         </Menu>
       )
@@ -92,11 +96,7 @@ describe('<Menu />', async () => {
     it('should not call onSelect when disabled', async () => {
       const onSelect = stub()
       await mount(
-        <Menu
-          label="Settings"
-          onSelect={onSelect}
-          disabled
-        >
+        <Menu label="Settings" onSelect={onSelect} disabled>
           <MenuItem value="Account">Account</MenuItem>
         </Menu>
       )
@@ -111,9 +111,7 @@ describe('<Menu />', async () => {
 
     it('should move focus properly', async () => {
       await mount(
-        <Menu
-          label="Settings"
-        >
+        <Menu label="Settings">
           <MenuItem value="Account">Account</MenuItem>
         </Menu>
       )
@@ -133,10 +131,7 @@ describe('<Menu />', async () => {
     it('should provide a menu ref', async () => {
       const menuRef = stub()
       await mount(
-        <Menu
-          label="Settings"
-          menuRef={menuRef}
-        >
+        <Menu label="Settings" menuRef={menuRef}>
           <MenuItem value="Account">Account</MenuItem>
         </Menu>
       )
@@ -180,18 +175,13 @@ describe('<Menu />', async () => {
 
     it('should set aria attributes properly', async () => {
       await mount(
-        <Menu
-          trigger={<button>Settings</button>}
-          defaultShow
-        >
+        <Menu trigger={<button>Settings</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
           <MenuItem type="radio" defaultChecked>
             Default (Grid view)
           </MenuItem>
-          <MenuItem type="radio">
-            Individual (List view)
-          </MenuItem>
+          <MenuItem type="radio">Individual (List view)</MenuItem>
           <MenuItem type="checkbox" defaultChecked>
             Include Anchor Standards
           </MenuItem>
@@ -207,16 +197,15 @@ describe('<Menu />', async () => {
       const menu = await popover.find(`[role="menu"]`)
 
       expect(menu).to.exist()
-      expect(menu.getAttribute('aria-labelledby')).to.equal(trigger.getAttribute('id'))
+      expect(menu.getAttribute('aria-labelledby')).to.equal(
+        trigger.getAttribute('id')
+      )
     })
 
     it('should call onFocus on focus', async () => {
       const onFocus = stub()
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-          onFocus={onFocus}
-        >
+        <Menu trigger={<button>More</button>} onFocus={onFocus}>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -232,11 +221,7 @@ describe('<Menu />', async () => {
 
     it('should render when show and onToggle props are set', async () => {
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-          show
-          onToggle={() => {}}
-        >
+        <Menu trigger={<button>More</button>} show onToggle={() => {}}>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -252,9 +237,7 @@ describe('<Menu />', async () => {
 
     it('should not show by default', async () => {
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-        >
+        <Menu trigger={<button>More</button>}>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -270,10 +253,7 @@ describe('<Menu />', async () => {
 
     it('should accept a default show', async () => {
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-          defaultShow
-        >
+        <Menu trigger={<button>More</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -288,11 +268,7 @@ describe('<Menu />', async () => {
     it('should provide a menu ref', async () => {
       const menuRef = stub()
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-          defaultShow
-          menuRef={menuRef}
-        >
+        <Menu trigger={<button>More</button>} defaultShow menuRef={menuRef}>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -323,10 +299,7 @@ describe('<Menu />', async () => {
 
     it('should focus the menu first', async () => {
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-          defaultShow
-        >
+        <Menu trigger={<button>More</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -352,10 +325,7 @@ describe('<Menu />', async () => {
     it('should call onToggle on click', async () => {
       const onToggle = stub()
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-          onToggle={onToggle}
-        >
+        <Menu trigger={<button>More</button>} onToggle={onToggle}>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -371,9 +341,7 @@ describe('<Menu />', async () => {
 
     it('should have an aria-haspopup attribute', async () => {
       await mount(
-        <Menu
-          trigger={<button>More</button>}
-        >
+        <Menu trigger={<button>More</button>}>
           <MenuItem>Learning Mastery</MenuItem>
           <MenuItem disabled>Gradebook</MenuItem>
         </Menu>
@@ -388,9 +356,7 @@ describe('<Menu />', async () => {
     describe('for a11y', async () => {
       it('should meet standards when menu is closed', async () => {
         await mount(
-          <Menu
-            trigger={<button>More</button>}
-          >
+          <Menu trigger={<button>More</button>}>
             <MenuItem>Learning Mastery</MenuItem>
             <MenuItem disabled>Gradebook</MenuItem>
           </Menu>
@@ -401,10 +367,7 @@ describe('<Menu />', async () => {
 
       it('should meet standards when menu is open', async () => {
         await mount(
-          <Menu
-            trigger={<button>More</button>}
-            defaultShow
-          >
+          <Menu trigger={<button>More</button>} defaultShow>
             <MenuItem>Learning Mastery</MenuItem>
             <MenuItem disabled>Gradebook</MenuItem>
           </Menu>
@@ -416,18 +379,17 @@ describe('<Menu />', async () => {
   })
 
   describe('with a sub-menu', async () => {
-
     describe('...and keyboard and mouse interaction', async () => {
-      testShowFlyoutOnEvent({type: 'click'})
-      testShowFlyoutOnEvent({type: 'mouseOver'})
-      testShowFlyoutOnEvent({type: 'keyDown', which: 'right'})
-      testShowFlyoutOnEvent({type: 'keyUp', which: 'space'})
-      testShowFlyoutOnEvent({type: 'keyDown', which: 'enter'})
+      testShowFlyoutOnEvent({ type: 'click' })
+      testShowFlyoutOnEvent({ type: 'mouseOver' })
+      testShowFlyoutOnEvent({ type: 'keyDown', which: 'right' })
+      testShowFlyoutOnEvent({ type: 'keyUp', which: 'space' })
+      testShowFlyoutOnEvent({ type: 'keyDown', which: 'enter' })
 
-      testFocusFlyoutOnEvent({type: 'click'})
-      testFocusFlyoutOnEvent({type: 'keyDown', which: 'right'})
-      testFocusFlyoutOnEvent({type: 'keyUp', which: 'space'})
-      testFocusFlyoutOnEvent({type: 'keyDown', which: 'enter'})
+      testFocusFlyoutOnEvent({ type: 'click' })
+      testFocusFlyoutOnEvent({ type: 'keyDown', which: 'right' })
+      testFocusFlyoutOnEvent({ type: 'keyUp', which: 'space' })
+      testFocusFlyoutOnEvent({ type: 'keyDown', which: 'enter' })
     })
 
     it('it should not open the sub-menu popover when disabled', async () => {
@@ -471,7 +433,7 @@ describe('<Menu />', async () => {
       const subMenu = await MenuLocator.find(':label(Flyout)')
       const popover = await subMenu.findPopoverContent()
 
-      await wait (() => {
+      await wait(() => {
         expect(popover.containsFocus()).to.be.true()
       })
 
@@ -481,8 +443,11 @@ describe('<Menu />', async () => {
         button: 0
       })
 
-      expect(await (await MenuLocator.find(':label(Flyout)')).findPopoverContent({ expectEmpty: true }))
-        .to.not.exist()
+      expect(
+        await (await MenuLocator.find(':label(Flyout)')).findPopoverContent({
+          expectEmpty: true
+        })
+      ).to.not.exist()
     })
 
     it('it should close the sub-menu popover on left press', async () => {
@@ -504,14 +469,15 @@ describe('<Menu />', async () => {
       const subMenu = await MenuLocator.find(':label(Flyout)')
       const popover = await subMenu.findPopoverContent()
 
-      await wait (() => {
+      await wait(() => {
         expect(popover.containsFocus()).to.be.true()
       })
 
       await popover.keyDown('left')
 
-      expect(await subMenu.findPopoverContent({ expectEmpty: true }))
-        .to.not.exist()
+      expect(
+        await subMenu.findPopoverContent({ expectEmpty: true })
+      ).to.not.exist()
     })
 
     it('it should call onDismiss on tab press', async () => {
@@ -534,7 +500,7 @@ describe('<Menu />', async () => {
       const subMenu = await MenuLocator.find(':label(Flyout)')
       const popover = await subMenu.findPopoverContent()
 
-      await wait (() => {
+      await wait(() => {
         expect(popover.containsFocus()).to.be.true()
       })
 
@@ -563,7 +529,7 @@ describe('<Menu />', async () => {
       const subMenu = await MenuLocator.find(':label(Flyout)')
       const popover = await subMenu.findPopoverContent()
 
-      await wait (() => {
+      await wait(() => {
         expect(popover.containsFocus()).to.be.true()
       })
 
@@ -597,12 +563,11 @@ describe('<Menu />', async () => {
       const subMenu = await MenuLocator.find(':label(Flyout)')
       const popover = await subMenu.findPopoverContent()
 
-      await wait (() => {
+      await wait(() => {
         expect(popover.containsFocus()).to.be.true()
       })
 
-      await within(trigger.getOwnerDocument().documentElement)
-        .click()
+      await within(trigger.getOwnerDocument().documentElement).click()
 
       expect(onToggle).to.have.been.calledTwice()
       expect(onToggle.getCall(1).args[0]).to.equal(false)
@@ -633,8 +598,10 @@ describe('<Menu />', async () => {
   })
 })
 
-function testShowFlyoutOnEvent (event) {
-  it(`should show flyout menu on ${event.type} ${event.which || ''}`, async () => {
+function testShowFlyoutOnEvent(event) {
+  it(`should show flyout menu on ${event.type} ${
+    event.which || ''
+  }`, async () => {
     await mount(
       <Menu label="Parent">
         <Menu label="Flyout">
@@ -657,8 +624,10 @@ function testShowFlyoutOnEvent (event) {
   })
 }
 
-function testFocusFlyoutOnEvent (event) {
-  it(`expect flyout menu to be focused on ${event.type} ${event.which || ''}`, async () => {
+function testFocusFlyoutOnEvent(event) {
+  it(`expect flyout menu to be focused on ${event.type} ${
+    event.which || ''
+  }`, async () => {
     await mount(
       <Menu label="Parent">
         <Menu label="Flyout">
@@ -677,7 +646,7 @@ function testFocusFlyoutOnEvent (event) {
     const subMenu = await MenuLocator.find(':label(Flyout)')
     const popover = await subMenu.findPopoverContent()
 
-    await wait (() => {
+    await wait(() => {
       expect(popover.containsFocus()).to.be.true()
     })
   })

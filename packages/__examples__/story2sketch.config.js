@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 module.exports = {
-  output: "stories.asketch.json",
+  output: 'stories.asketch.json',
   concurrency: 2
 }

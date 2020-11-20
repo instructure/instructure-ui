@@ -42,17 +42,17 @@ import styles from './styles.css'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 const fastFindIndex = (arr, fn) =>
-  Number(Object.keys(arr).find(k => fn(arr[Number(k)])))
+  Number(Object.keys(arr).find((k) => fn(arr[Number(k)])))
 
-function propsHaveCompactView (props) {
+function propsHaveCompactView(props) {
   return props.variant === 'compact' && props.children.length > 5
 }
 
-function shouldShowPrevButton (props, currentPageIndex) {
+function shouldShowPrevButton(props, currentPageIndex) {
   return propsHaveCompactView(props) && currentPageIndex > 0
 }
 
-function shouldShowNextButton (props, currentPageIndex) {
+function shouldShowNextButton(props, currentPageIndex) {
   return (
     propsHaveCompactView(props) && currentPageIndex < props.children.length - 1
   )
@@ -89,10 +89,10 @@ class Pagination extends Component {
      */
     labelPrev: PropTypes.string,
     /**
-    * The compact variant truncates the page navigation to show only the first,
-    * last, and pages immediately surrounding the current page. Fewer than 5 pages,
-    * no next/previous arrow buttons will be shown, and all pages will be listed
-    */
+     * The compact variant truncates the page navigation to show only the first,
+     * last, and pages immediately surrounding the current page. Fewer than 5 pages,
+     * no next/previous arrow buttons will be shown, and all pages will be listed
+     */
     variant: PropTypes.oneOf(['full', 'compact']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -125,14 +125,14 @@ class Pagination extends Component {
     disabled: false,
     variant: 'full',
     as: 'div',
-    elementRef: el => {},
+    elementRef: (el) => {},
     shouldHandleFocus: true
   }
 
   static Page = PaginationButton
   static Navigation = PaginationArrowButton
 
-  constructor (...args) {
+  constructor(...args) {
     super(...args)
 
     this._labelId = uid('Pagination')
@@ -141,7 +141,7 @@ class Pagination extends Component {
     this._nextButton = null
   }
 
-  getSnapshotBeforeUpdate () {
+  getSnapshotBeforeUpdate() {
     const activeElement = getActiveElement()
 
     return {
@@ -150,12 +150,15 @@ class Pagination extends Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    if (!this.props.shouldHandleFocus || (!propsHaveCompactView(prevProps) && !propsHaveCompactView(this.props))) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      !this.props.shouldHandleFocus ||
+      (!propsHaveCompactView(prevProps) && !propsHaveCompactView(this.props))
+    ) {
       return
     }
 
-    const { prevButtonFocused, nextButtonFocused } = (snapshot || {})
+    const { prevButtonFocused, nextButtonFocused } = snapshot || {}
 
     if (prevButtonFocused || nextButtonFocused) {
       const focusable = findTabbable(this._root)
@@ -164,13 +167,13 @@ class Pagination extends Component {
     }
   }
 
-  get compactView () {
+  get compactView() {
     return propsHaveCompactView(this.props)
   }
 
   transferDisabledPropToChildren(children) {
     return this.props.disabled
-      ? React.Children.map(children, page =>
+      ? React.Children.map(children, (page) =>
           React.cloneElement(page, { disabled: this.props.disabled })
         )
       : children
@@ -185,7 +188,7 @@ class Pagination extends Component {
     }
   }
 
-  renderLabel () {
+  renderLabel() {
     const display = this.props.variant === 'compact' ? 'block' : 'inline-block'
     const visibleLabel = hasVisibleChildren(this.props.label)
 
@@ -201,7 +204,7 @@ class Pagination extends Component {
     )
   }
 
-  renderPages (currentPageIndex) {
+  renderPages(currentPageIndex) {
     const allPages = this.props.children
     let visiblePages = allPages
 
@@ -209,7 +212,10 @@ class Pagination extends Component {
       const firstIndex = 0
       const lastIndex = allPages.length - 1
 
-      const sliceStart = Math.min(lastIndex - 3, Math.max(currentPageIndex - 1, firstIndex))
+      const sliceStart = Math.min(
+        lastIndex - 3,
+        Math.max(currentPageIndex - 1, firstIndex)
+      )
       const sliceEnd = Math.min(currentPageIndex + 4, lastIndex)
 
       visiblePages = allPages.slice(sliceStart, sliceEnd)
@@ -240,7 +246,7 @@ class Pagination extends Component {
     )
   }
 
-  renderArrowButton (label, direction, currentPageIndex) {
+  renderArrowButton(label, direction, currentPageIndex) {
     // eslint-disable-next-line react/prop-types
     const { onClick, disabled } = this.props.children[
       currentPageIndex + direction
@@ -265,12 +271,12 @@ class Pagination extends Component {
     )
   }
 
-  render () {
+  render() {
     if (!this.props.children) return null
 
     const currentPageIndex = fastFindIndex(
       this.props.children,
-      p => p && p.props && p.props.current
+      (p) => p && p.props && p.props.current
     )
 
     const passthroughProps = View.omitViewProps(
@@ -291,18 +297,10 @@ class Pagination extends Component {
         {this.props.label && this.renderLabel()}
         <View display="inline-block" className={styles.pages}>
           {shouldShowPrevButton(this.props, currentPageIndex) &&
-            this.renderArrowButton(
-              this.props.labelPrev,
-              -1,
-              currentPageIndex
-            )}
+            this.renderArrowButton(this.props.labelPrev, -1, currentPageIndex)}
           {this.renderPages(currentPageIndex)}
           {shouldShowNextButton(this.props, currentPageIndex) &&
-            this.renderArrowButton(
-              this.props.labelNext,
-              1,
-              currentPageIndex
-            )}
+            this.renderArrowButton(this.props.labelNext, 1, currentPageIndex)}
         </View>
       </View>
     )

@@ -24,7 +24,7 @@
 
 //  TODO: remove values for pipe, slash and arrow in version 8.0.0
 
-export default function generator ({ borders, colors, spacing, typography }) {
+export default function generator({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,

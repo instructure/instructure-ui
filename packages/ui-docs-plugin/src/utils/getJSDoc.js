@@ -24,19 +24,32 @@
 
 const jsdoc = require('jsdoc-api')
 
-module.exports = function getJSDoc (source, error) {
+module.exports = function getJSDoc(source, error) {
   let doc = {}
 
   try {
-    const sections = jsdoc.explainSync({ configure: require.resolve('@instructure/ui-docs-plugin/jsdoc.config.json'), source })
-      .filter((section) => {
-        return section.undocumented !== true && section.access !== 'private' && section.kind !== 'package'
+    const sections = jsdoc
+      .explainSync({
+        configure: require.resolve(
+          '@instructure/ui-docs-plugin/jsdoc.config.json'
+        ),
+        source
       })
-    const module = sections.filter(section => section.kind === 'module')[0] || sections[0] || {}
+      .filter((section) => {
+        return (
+          section.undocumented !== true &&
+          section.access !== 'private' &&
+          section.kind !== 'package'
+        )
+      })
+    const module =
+      sections.filter((section) => section.kind === 'module')[0] ||
+      sections[0] ||
+      {}
     doc = {
       ...module,
       sections: sections
-        .filter(section => section.longname !== module.longname)
+        .filter((section) => section.longname !== module.longname)
         .map((section) => {
           const name = section.longname.replace(`${module.longname}.`, '')
           return {

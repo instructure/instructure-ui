@@ -32,7 +32,9 @@ export default {
     renderValue: [
       null,
       // eslint-disable-next-line react/display-name
-      ({ valueNow, valueMax }) => <span>{Math.round(valueNow / valueMax * 100)}</span>
+      ({ valueNow, valueMax }) => (
+        <span>{Math.round((valueNow / valueMax) * 100)}</span>
+      )
     ]
   },
   getComponentProps: (props) => {
@@ -43,9 +45,10 @@ export default {
   },
   getExampleProps: (props) => {
     return {
-      background: props.color.includes('inverse') ? 'primary-inverse' : 'primary'
+      background: props.color.includes('inverse')
+        ? 'primary-inverse'
+        : 'primary'
     }
   },
-  filter: (props) => {
-  }
+  filter: (props) => {}
 }

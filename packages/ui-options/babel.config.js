@@ -22,12 +22,14 @@
  * SOFTWARE.
  */
 
- module.exports = {
-   presets: [[
-     require('@instructure/ui-babel-preset'),
-     {
-      coverage: Boolean(process.env.COVERAGE),
-      esModules: Boolean(process.env.ES_MODULES)
-     }
-   ]]
- }
+module.exports = {
+  presets: [
+    [
+      require('@instructure/ui-babel-preset'),
+      {
+        coverage: Boolean(process.env.COVERAGE),
+        esModules: Boolean(process.env.ES_MODULES)
+      }
+    ]
+  ]
+}

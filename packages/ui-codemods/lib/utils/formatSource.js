@@ -24,7 +24,7 @@
 
 const prettier = require('prettier')
 
-module.exports = function formatSource (source, sourcePath) {
+module.exports = function formatSource(source, sourcePath) {
   let options = null
 
   try {
@@ -41,10 +41,13 @@ module.exports = function formatSource (source, sourcePath) {
     // Will revert to the deafult prettier options if a config cannot be parsed
   }
 
-  return prettier.format(source, options || {
-    parser: 'babel',
-    semi: false,
-    singleQuote: true,
-    trailingComma: 'none'
-  })
+  return prettier.format(
+    source,
+    options || {
+      parser: 'babel',
+      semi: false,
+      singleQuote: true,
+      trailingComma: 'none'
+    }
+  )
 }

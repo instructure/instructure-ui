@@ -34,7 +34,7 @@ import {
 
 import { mirrorPlacement } from './mirrorPlacement'
 
-function calculateElementPosition (element, target, options) {
+function calculateElementPosition(element, target, options) {
   if (!element || options.placement === 'offscreen') {
     // hide offscreen content at the bottom of the DOM from screenreaders
     // unless content is contained somewhere else
@@ -60,7 +60,7 @@ function calculateElementPosition (element, target, options) {
 }
 
 class PositionedElement {
-  constructor (element, placement, offset = { top: 0, left: 0 }) {
+  constructor(element, placement, offset = { top: 0, left: 0 }) {
     this.node = findDOMNode(element)
 
     if (typeof placement === 'string') {
@@ -76,49 +76,49 @@ class PositionedElement {
     this._offset = offsetToPx(offset, this.size)
   }
 
-  get width () {
+  get width() {
     return this.rect.width
   }
 
-  get height () {
+  get height() {
     return this.rect.height
   }
 
-  get size () {
+  get size() {
     return {
       width: this.width,
       height: this.height
     }
   }
 
-  get position () {
+  get position() {
     return {
       top: this.rect.top,
       left: this.rect.left
     }
   }
 
-  get hasVerticalPlacement () {
+  get hasVerticalPlacement() {
     return ['top', 'bottom'].indexOf(this.placement[0]) >= 0
   }
 
-  get hasHorizontalPlacement () {
+  get hasHorizontalPlacement() {
     return ['start', 'end'].indexOf(this.placement[0]) >= 0
   }
 
-  get shouldStretchVertically () {
+  get shouldStretchVertically() {
     return this.placement[1] === 'stretch' && this.hasVerticalPlacement
   }
 
-  get shouldStretchHorizontally () {
+  get shouldStretchHorizontally() {
     return this.placement[1] === 'stretch' && this.hasHorizontalPlacement
   }
 
-  get mirroredPlacement () {
+  get mirroredPlacement() {
     return mirrorPlacement(this.placement)
   }
 
-  calculateOffset (placement) {
+  calculateOffset(placement) {
     const offsetMap = {
       top: 0,
       start: 0,
@@ -131,7 +131,7 @@ class PositionedElement {
     let [first, second] = placement
 
     if (['start', 'end'].indexOf(first) >= 0) {
-      [first, second] = [second, first]
+      ;[first, second] = [second, first]
     }
 
     let top = 0
@@ -145,10 +145,13 @@ class PositionedElement {
       left = offsetMap[second]
     }
 
-    return addOffsets([offsetToPx({ top, left }, this.size), parseOffset(this._offset, this.placement)])
+    return addOffsets([
+      offsetToPx({ top, left }, this.size),
+      parseOffset(this._offset, this.placement)
+    ])
   }
 
-  get scrollParentsOffset () {
+  get scrollParentsOffset() {
     const parents = getScrollParents(this.node)
 
     let offsetY = 0
@@ -158,14 +161,16 @@ class PositionedElement {
       const parent = parents[i]
       const child = parents[i - 1]
 
-      offsetY = offsetY + (this.normalizeScrollTop(parent) - this.normalizeScrollTop(child))
+      offsetY =
+        offsetY +
+        (this.normalizeScrollTop(parent) - this.normalizeScrollTop(child))
       offsetX = offsetX + (parent.scrollLeft - child.scrollLeft)
     }
 
     return { top: offsetY, left: offsetX }
   }
 
-  get positionedParentsOffset () {
+  get positionedParentsOffset() {
     // If the element container is within a positioned
     // element, it will position absolutely with respect to that
     // ancestor. We calculate the offset between the child and
@@ -176,7 +181,8 @@ class PositionedElement {
     // If there is more than one parent, the offset on the
     // documentElement should be calculated appropriately.
     // Otherwise we need to explictly account for that offset
-    let offsetY = parents.length > 1 ? 0 : getBoundingClientRect(doc.documentElement).top
+    let offsetY =
+      parents.length > 1 ? 0 : getBoundingClientRect(doc.documentElement).top
     let offsetX = 0
     let scrollY = 0
 
@@ -203,7 +209,7 @@ class PositionedElement {
     return { top: offsetY, left: offsetX }
   }
 
-  normalizeScrollTop (element) {
+  normalizeScrollTop(element) {
     // Account for cross browser differences with scrollTop attribute on the
     // body element https://bugs.chromium.org/p/chromium/issues/detail?id=766938
     return ownerDocument(this.node).body === element ? 0 : element.scrollTop
@@ -211,7 +217,7 @@ class PositionedElement {
 }
 
 class PositionData {
-  constructor (element, target, options) {
+  constructor(element, target, options) {
     this.options = options || {}
 
     const { container, constrain, placement, over } = this.options
@@ -220,7 +226,10 @@ class PositionData {
 
     this.container = container || ownerDocument(element).body
 
-    this.element = new PositionedElement(element, placement, { top: this.options.offsetY, left: this.options.offsetX })
+    this.element = new PositionedElement(element, placement, {
+      top: this.options.offsetY,
+      left: this.options.offsetX
+    })
 
     this.target = new PositionedElement(
       target || this.container,
@@ -240,7 +249,7 @@ class PositionData {
     }
   }
 
-  get offset () {
+  get offset() {
     const { top, left } = this.target.calculateOffset(this.element.placement)
 
     const offset = addOffsets([
@@ -255,19 +264,19 @@ class PositionData {
     }
   }
 
-  get placement () {
+  get placement() {
     return formatPlacement(this.element.placement)
   }
 
-  get minWidth () {
+  get minWidth() {
     return this.element.shouldStretchVertically ? this.target.width : null
   }
 
-  get minHeight () {
+  get minHeight() {
     return this.element.shouldStretchHorizontally ? this.target.height : null
   }
 
-  get position () {
+  get position() {
     const win = ownerWindow(this.target.node)
 
     let { left, top } = addOffsets([this.target.position, this.offset])
@@ -275,7 +284,8 @@ class PositionData {
     if (canUseDOM && win.matchMedia) {
       const retina =
         win.matchMedia('only screen and (min-resolution: 1.3dppx)').matches ||
-        win.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)').matches
+        win.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)')
+          .matches
       if (!retina) {
         left = Math.round(left)
         top = Math.round(top)
@@ -285,7 +295,7 @@ class PositionData {
     return { left, top }
   }
 
-  get style () {
+  get style() {
     return {
       top: 0,
       left: 0,
@@ -296,14 +306,18 @@ class PositionData {
     }
   }
 
-  overflow (element) {
+  overflow(element) {
     const parentWindow = ownerWindow(element)
     const elementBounds = getBoundingClientRect(element)
     const windowBounds = getBoundingClientRect(parentWindow)
     const offsets = addOffsets([this.target.position, this.offset])
     const parentOffset = {
-      top: this.element.positionedParentsOffset.top + this.element.scrollParentsOffset.top,
-      left: this.element.positionedParentsOffset.left + this.element.scrollParentsOffset.left
+      top:
+        this.element.positionedParentsOffset.top +
+        this.element.scrollParentsOffset.top,
+      left:
+        this.element.positionedParentsOffset.left +
+        this.element.scrollParentsOffset.left
     }
 
     let left = offsets.left + parentOffset.left
@@ -313,37 +327,40 @@ class PositionData {
     let bottom = offsets.top + this.element.height + parentOffset.top
 
     // adjust for vertical placements
-    if (this.element.placement[0] === "bottom") {
+    if (this.element.placement[0] === 'bottom') {
       top -= this.element.height + this.target.height
-    } else if (this.element.placement[0] === "top") {
+    } else if (this.element.placement[0] === 'top') {
       bottom += this.element.height + this.target.height
     }
 
-    if (this.element.placement[1] === "start") {
+    if (this.element.placement[1] === 'start') {
       left -= this.element.width - this.target.width
-    } else if (this.element.placement[1] === "end") {
+    } else if (this.element.placement[1] === 'end') {
       right += this.element.width - this.target.width
     }
 
     // adjust for horizontal placements
-    if (this.element.placement[1] === "top") {
+    if (this.element.placement[1] === 'top') {
       top -= this.element.height - this.target.height
-    } else if (this.element.placement[1] === "bottom") {
+    } else if (this.element.placement[1] === 'bottom') {
       bottom += this.element.height - this.target.height
     }
 
-    if (this.element.placement[0] === "end") {
+    if (this.element.placement[0] === 'end') {
       left -= this.element.width + this.target.width
-    } else if (this.element.placement[0] === "start") {
+    } else if (this.element.placement[0] === 'start') {
       right += this.element.width + this.target.width
     }
 
-    const bounds = element === parentWindow ? elementBounds : {
-      top: windowBounds.top + elementBounds.top,
-      bottom: elementBounds.top + elementBounds.height,
-      left: windowBounds.left + elementBounds.left,
-      right: elementBounds.left + elementBounds.width
-    }
+    const bounds =
+      element === parentWindow
+        ? elementBounds
+        : {
+            top: windowBounds.top + elementBounds.top,
+            bottom: elementBounds.top + elementBounds.height,
+            left: windowBounds.left + elementBounds.left,
+            right: elementBounds.left + elementBounds.width
+          }
 
     return {
       top: top < bounds.top ? bounds.top - top : 0,
@@ -353,7 +370,7 @@ class PositionData {
     }
   }
 
-  constrainTo (element) {
+  constrainTo(element) {
     if (!element) return
 
     const overflow = this.overflow(element)
@@ -361,7 +378,7 @@ class PositionData {
       top: overflow.top > 0,
       bottom: overflow.bottom > 0,
       left: overflow.left > 0,
-      right: overflow.right > 0,
+      right: overflow.right > 0
     }
 
     if (this.element.hasVerticalPlacement) {
@@ -389,7 +406,6 @@ class PositionData {
           this.element.placement[0] = 'top'
           this.target.placement[0] = 'bottom'
         }
-
       } else if (oob.top) {
         // if top bound broken, position below
         this.element.placement[0] = 'bottom'
@@ -435,7 +451,7 @@ class PositionData {
   }
 }
 
-function addOffsets (offsets) {
+function addOffsets(offsets) {
   return offsets.reduce(
     (sum, offset) => {
       return {
@@ -447,7 +463,7 @@ function addOffsets (offsets) {
   )
 }
 
-function parseOffset (offset, placement) {
+function parseOffset(offset, placement) {
   let { top, left } = offset
 
   if (placement[0] === 'bottom') {
@@ -464,17 +480,17 @@ function parseOffset (offset, placement) {
   }
 }
 
-function offsetToPx (offset, size) {
+function offsetToPx(offset, size) {
   let { left, top } = offset
 
   if (typeof left === 'string' && left.indexOf('%') !== -1) {
-    left = parseFloat(left, 10) / 100 * size.width // eslint-disable-line no-mixed-operators
+    left = (parseFloat(left, 10) / 100) * size.width // eslint-disable-line no-mixed-operators
   } else {
     left = parseFloat(left, 10)
   }
 
   if (typeof top === 'string' && top.indexOf('%') !== -1) {
-    top = parseFloat(top, 10) / 100 * size.height // eslint-disable-line no-mixed-operators
+    top = (parseFloat(top, 10) / 100) * size.height // eslint-disable-line no-mixed-operators
   } else {
     top = parseFloat(top, 10)
   }
@@ -482,16 +498,16 @@ function offsetToPx (offset, size) {
   return { top, left }
 }
 
-function sortPlacement (placement) {
+function sortPlacement(placement) {
   let [first, second] = placement
 
   if (first === 'center' || first === 'stretch') {
-    [first, second] = [second, first]
+    ;[first, second] = [second, first]
   }
   return [first, second]
 }
 
-function parsePlacement (placement) {
+function parsePlacement(placement) {
   let parsed = placement.split(' ')
 
   if (parsed.length === 1) {
@@ -501,7 +517,7 @@ function parsePlacement (placement) {
   return sortPlacement(parsed)
 }
 
-function formatPlacement (placement) {
+function formatPlacement(placement) {
   return placement.join(' ')
 }
 

@@ -33,7 +33,6 @@ import { shallowEqual } from '@instructure/ui-utils'
 
 /* istanbul ignore file */
 
-
 /**
 ---
 private: true
@@ -73,8 +72,8 @@ class SubtreePortal extends Component {
      */
     children: PropTypes.node,
     /**
-    * provides a reference to the underlying html element
-    */
+     * provides a reference to the underlying html element
+     */
     elementRef: PropTypes.func
   }
 
@@ -88,27 +87,29 @@ class SubtreePortal extends Component {
     elementRef: (el) => {}
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.renderPortal(this.props)
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    return !(shallowEqual(this.props, nextProps) && shallowEqual(this.state, nextState))
+  shouldComponentUpdate(nextProps, nextState) {
+    return !(
+      shallowEqual(this.props, nextProps) && shallowEqual(this.state, nextState)
+    )
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.renderPortal(nextProps)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.removePortal(this.props)
   }
 
-  render () {
+  render() {
     return null
   }
 
-  renderPortal (props) {
+  renderPortal(props) {
     const {
       open,
       insertAt,
@@ -126,11 +127,7 @@ class SubtreePortal extends Component {
 
     // Wrap text in a span since subtree will only render a single top-level node
     if (typeof content === 'string' && content.length > 0) {
-      content = (
-        <span>
-          {content}
-        </span>
-      )
+      content = <span>{content}</span>
     }
 
     // Render subtree if Portal is open and has children to render
@@ -161,23 +158,32 @@ class SubtreePortal extends Component {
       // Notify that subtree has been rendered if props ask for it
       const handleMount = () => {
         // Only fire onOpen if Portal was closed and is now open
-        if ((isInitialMount || (!this.props.open && open)) && typeof onOpen === 'function') {
+        if (
+          (isInitialMount || (!this.props.open && open)) &&
+          typeof onOpen === 'function'
+        ) {
           onOpen(this.DOMNode)
         }
       }
 
-      ReactDOM.unstable_renderSubtreeIntoContainer(this, content, this.DOMNode, handleMount)
+      ReactDOM.unstable_renderSubtreeIntoContainer(
+        this,
+        content,
+        this.DOMNode,
+        handleMount
+      )
     } else {
       this.removePortal(props)
     }
   }
 
-  removePortal (props) {
+  removePortal(props) {
     let unmounted
 
     if (this.DOMNode) {
       unmounted = ReactDOM.unmountComponentAtNode(this.DOMNode)
-      this.DOMNode.parentNode && this.DOMNode.parentNode.removeChild(this.DOMNode)
+      this.DOMNode.parentNode &&
+        this.DOMNode.parentNode.removeChild(this.DOMNode)
       this.DOMNode = null
       this.props.elementRef(this.DOMNode)
     }
@@ -187,7 +193,7 @@ class SubtreePortal extends Component {
     }
   }
 
-  get mountNode () {
+  get mountNode() {
     let mountNode
 
     if (typeof this.props.mountNode === 'function') {
@@ -203,16 +209,16 @@ class SubtreePortal extends Component {
     return mountNode
   }
 
-  get DOMNode () {
+  get DOMNode() {
     return this._node
   }
 
-  set DOMNode (el) {
+  set DOMNode(el) {
     this._node = el
   }
 
   // for backwards compatibility:
-  get node () {
+  get node() {
     return this.DOMNode
   }
 }

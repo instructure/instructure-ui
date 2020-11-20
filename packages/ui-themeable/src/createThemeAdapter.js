@@ -36,19 +36,35 @@ import { warnDeprecated } from '@instructure/console/macro'
  * @param {Boolean} args.shouldIncludeOldValues should the adapter include the old values in the new theme object (false by default)
  * @returns {Function} an adapter function that takes an object with `theme` and `displayName` properties as an argument
  */
-export const createThemeAdapter = ({ map = {}, version, shouldIncludeOldValues = false } = {}) => {
+export const createThemeAdapter = ({
+  map = {},
+  version,
+  shouldIncludeOldValues = false
+} = {}) => {
   return ({ theme = {}, displayName } = {}) => {
     return Object.entries(theme).reduce((result, [key, value]) => {
       if (map[key]) {
         if (Array.isArray(map[key])) {
-          warnDeprecated(false, `[${displayName}] The theme variable \`${key}\` has been split into the following values \`${map[key].join(', ')}\`.${version
-            ? ` In version ${version}, \`${key}\` will no longer work as an override. Override each value individually instead.`
-            : ''}`
+          warnDeprecated(
+            false,
+            `[${displayName}] The theme variable \`${key}\` has been split into the following values \`${map[
+              key
+            ].join(', ')}\`.${
+              version
+                ? ` In version ${version}, \`${key}\` will no longer work as an override. Override each value individually instead.`
+                : ''
+            }`
           )
         } else {
-          warnDeprecated(false, `[${displayName}] The theme variable \`${key}\` has been changed to \`${map[key]}\`.${version
-            ? ` In version ${version}, \`${key}\` will no longer work as an override. Use \`${map[key]}\` instead.`
-            : ''}`
+          warnDeprecated(
+            false,
+            `[${displayName}] The theme variable \`${key}\` has been changed to \`${
+              map[key]
+            }\`.${
+              version
+                ? ` In version ${version}, \`${key}\` will no longer work as an override. Use \`${map[key]}\` instead.`
+                : ''
+            }`
           )
         }
 
@@ -65,11 +81,16 @@ export const createThemeAdapter = ({ map = {}, version, shouldIncludeOldValues =
           updatedThemeVars = { [map[key]]: value }
         }
 
-        return shouldIncludeOldValues ? {
-          ...result, ...updatedThemeVars, [key]: value
-        } : {
-          ...result, ...updatedThemeVars
-        }
+        return shouldIncludeOldValues
+          ? {
+              ...result,
+              ...updatedThemeVars,
+              [key]: value
+            }
+          : {
+              ...result,
+              ...updatedThemeVars
+            }
       }
 
       return { ...result, [key]: value }

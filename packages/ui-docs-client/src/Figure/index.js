@@ -49,7 +49,6 @@ class FigureItem extends ComponentIdentifier {
 
 @themeable(theme, styles)
 class Figure extends Component {
-
   static propTypes = {
     title: PropTypes.node,
     caption: PropTypes.node,
@@ -70,7 +69,7 @@ class Figure extends Component {
 
   static Item = FigureItem
 
-  get recommendationIcon () {
+  get recommendationIcon() {
     if (this.props.recommendation === 'yes') {
       return IconCheckMarkSolid
     } else if (this.props.recommendation === 'no') {
@@ -82,8 +81,8 @@ class Figure extends Component {
     }
   }
 
-  renderFigure (props) {
-    const mergedProps = {...this.props, ...props}
+  renderFigure(props) {
+    const mergedProps = { ...this.props, ...props }
     const {
       title,
       caption,
@@ -105,13 +104,11 @@ class Figure extends Component {
         as="figure"
         className={classnames(classes)}
       >
-        {caption != null ?
-          <figcaption className={styles.caption}>
-            {caption}
-          </figcaption>  : null
-        }
+        {caption != null ? (
+          <figcaption className={styles.caption}>{caption}</figcaption>
+        ) : null}
         <span className={styles.content}>
-          {recommendation !== 'none' ?
+          {recommendation !== 'none' ? (
             <span className={styles.iconContainer}>
               <this.recommendationIcon
                 title={iconTitle}
@@ -119,35 +116,28 @@ class Figure extends Component {
                 inline={false}
                 className={styles.icon}
               />
-            </span> : null}
-            <Heading
-              level="h3"
-              as="h4"
-              margin="medium 0 small small"
-            >
-              {title}
-            </Heading>
-            <List itemSpacing="small" margin="0 0 small 0">
-              {React.Children.map(children, child => {
-                return (
-                  <List.Item>{child}</List.Item>
-                )
-              })}
-            </List>
+            </span>
+          ) : null}
+          <Heading level="h3" as="h4" margin="medium 0 small small">
+            {title}
+          </Heading>
+          <List itemSpacing="small" margin="0 0 small 0">
+            {React.Children.map(children, (child) => {
+              return <List.Item>{child}</List.Item>
+            })}
+          </List>
         </span>
       </View>
     )
   }
 
-  render () {
-    const {
-      float
-    } = this.props
+  render() {
+    const { float } = this.props
 
     if (float !== 'none') {
       return (
         <Responsive
-          query={{ small: { maxWidth: '40rem' }, large: { minWidth: '40rem' }}}
+          query={{ small: { maxWidth: '40rem' }, large: { minWidth: '40rem' } }}
           props={{
             small: { float: 'none' },
             large: { float: float }

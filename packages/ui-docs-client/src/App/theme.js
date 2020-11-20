@@ -22,7 +22,15 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography, stacking, transitions, borders, shadows, spacing }) {
+export default function ({
+  colors,
+  typography,
+  stacking,
+  transitions,
+  borders,
+  shadows,
+  spacing
+}) {
   return {
     background: colors.backgroundLightest,
     color: colors.textDarkest,

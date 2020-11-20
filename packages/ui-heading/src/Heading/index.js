@@ -28,7 +28,11 @@ import classnames from 'classnames'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import { deprecated, getElementType, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  deprecated,
+  getElementType,
+  passthroughProps
+} from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -49,16 +53,16 @@ category: components
 class Heading extends Component {
   static propTypes = {
     /**
-    * Add a top- or bottom-border to the Heading
-    */
+     * Add a top- or bottom-border to the Heading
+     */
     border: PropTypes.oneOf(['none', 'top', 'bottom']),
     /**
-    * The text content of the Heading
-    */
+     * The text content of the Heading
+     */
     children: childrenOrValue,
     /**
-    * The font color to render
-    */
+     * The font color to render
+     */
     color: PropTypes.oneOf([
       'primary',
       'secondary',
@@ -67,44 +71,44 @@ class Heading extends Component {
       'inherit'
     ]),
     /**
-    * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
-    */
+     * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
+     */
     level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
     /**
-    * Choose the element Heading should render as. Will default to the `level` prop
-    * if not specified.
-    */
+     * Choose the element Heading should render as. Will default to the `level` prop
+     * if not specified.
+     */
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Provides a ref to the underlying HTML element
-    */
+     * Provides a ref to the underlying HTML element
+     */
     elementRef: PropTypes.func,
 
     /* eslint-disable react/require-default-props */
     /**
-    * __Deprecated - use `<TruncateText /> instead`__
-    */
+     * __Deprecated - use `<TruncateText /> instead`__
+     */
     ellipsis: PropTypes.bool
     /* eslint-enable react/require-default-props */
-   }
+  }
 
-   static defaultProps = {
-     children: null,
-     margin: undefined,
-     elementRef: undefined,
-     border: 'none',
-     color: 'inherit',
-     level: 'h2'
-   }
+  static defaultProps = {
+    children: null,
+    margin: undefined,
+    elementRef: undefined,
+    border: 'none',
+    color: 'inherit',
+    level: 'h2'
+  }
 
-   render () {
-     const {
+  render() {
+    const {
       border,
       children,
       color,
@@ -117,9 +121,9 @@ class Heading extends Component {
 
     const ElementType = getElementType(Heading, this.props, () => {
       if (level === 'reset') {
-       return 'span'
+        return 'span'
       } else {
-       return level
+        return level
       }
     })
 

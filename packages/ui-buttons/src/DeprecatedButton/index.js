@@ -28,7 +28,11 @@ import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, getElementType, deprecated } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  getElementType,
+  deprecated
+} from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { warn } from '@instructure/console/macro'
@@ -39,11 +43,7 @@ import { View } from '@instructure/ui-view'
 import styles from './styles.css'
 import theme from './theme'
 
-const circleVariants = [
-  'circle-primary',
-  'circle-danger',
-  'circle-default'
-]
+const circleVariants = ['circle-primary', 'circle-danger', 'circle-default']
 
 const squareVariants = [
   'circle-default',
@@ -87,32 +87,32 @@ class DeprecatedButton extends Component {
       'icon-inverse'
     ]),
     /**
-    * provides a reference to the underlying focusable (`button` or `a`) element
-    */
+     * provides a reference to the underlying focusable (`button` or `a`) element
+     */
     buttonRef: PropTypes.func,
     /**
-    * the element type to render as (will be `<a>` if href is provided)
-    */
+     * the element type to render as (will be `<a>` if href is provided)
+     */
     as: PropTypes.elementType,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * should the `<DeprecatedButton/>` fill the width of its container
-    */
+     * should the `<DeprecatedButton/>` fill the width of its container
+     */
     fluidWidth: PropTypes.bool,
     disabled: PropTypes.bool,
     readOnly: PropTypes.bool,
     href: PropTypes.string,
     onClick: PropTypes.func,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Add an SVG icon to the button. Do not add icons directly as
-    * children.
-    */
+     * Add an SVG icon to the button. Do not add icons directly as
+     * children.
+     */
     icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     /**
      * Specify a mouse cursor to use when hovering over the button.
@@ -139,7 +139,7 @@ class DeprecatedButton extends Component {
     tabIndex: undefined
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     const { disabled, readOnly, onClick } = this.props
 
     if (disabled || readOnly) {
@@ -150,15 +150,18 @@ class DeprecatedButton extends Component {
     }
   }
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     const { disabled, readOnly, onClick, href } = this.props
 
     // behave like a button when space key is pressed
-    if (this.elementType !== 'button' && (e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter)) {
+    if (
+      this.elementType !== 'button' &&
+      (e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter)
+    ) {
       e.preventDefault()
       e.stopPropagation()
 
-      if ((typeof onClick === 'function') && !disabled && !readOnly) {
+      if (typeof onClick === 'function' && !disabled && !readOnly) {
         onClick(e)
       }
       if (href) {
@@ -167,22 +170,26 @@ class DeprecatedButton extends Component {
     }
   }
 
-  get elementType () {
+  get elementType() {
     return getElementType(DeprecatedButton, this.props)
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._button)
   }
 
-  focus () {
+  focus() {
     this._button && this._button.focus()
   }
 
-  renderIcon () {
+  renderIcon() {
     const Icon = this.props.icon
     if (typeof this.props.icon === 'function') {
-      return <span className={styles.iconSVG}><Icon inline={false} /></span>
+      return (
+        <span className={styles.iconSVG}>
+          <Icon inline={false} />
+        </span>
+      )
     } else if (Icon) {
       return <span className={styles.iconSVG}>{Icon}</span>
     } else {
@@ -190,7 +197,7 @@ class DeprecatedButton extends Component {
     }
   }
 
-  buttonBorderRadius () {
+  buttonBorderRadius() {
     if (circleVariants.includes(this.props.variant)) {
       return 'circle'
     } else {
@@ -198,11 +205,8 @@ class DeprecatedButton extends Component {
     }
   }
 
-  buttonWidth (hasOnlyIcon) {
-    const {
-      variant,
-      fluidWidth
-    } = this.props
+  buttonWidth(hasOnlyIcon) {
+    const { variant, fluidWidth } = this.props
 
     if (hasOnlyIcon || squareVariants.includes(variant)) {
       return 'icon'
@@ -213,7 +217,7 @@ class DeprecatedButton extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       as,
       buttonRef,
@@ -239,7 +243,8 @@ class DeprecatedButton extends Component {
       // show warning if icon is added as a child
       if (this.hasVisibleChildren) {
         React.Children.forEach(children, (child) => {
-          const icon = child && child.type && typeof child.type.glyphName !== 'undefined'
+          const icon =
+            child && child.type && typeof child.type.glyphName !== 'undefined'
           warn(
             !icon,
             `[DeprecatedButton] Icons as children is deprecated. Please use the 'icon' prop instead.`
@@ -272,8 +277,8 @@ class DeprecatedButton extends Component {
         href={href}
         type={href ? null : type}
         role={onClick && as !== 'button' ? 'button' : null}
-        tabIndex={onClick && as ? (tabIndex || '0') : tabIndex}
-        elementRef={c => {
+        tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
+        elementRef={(c) => {
           this._button = c
           if (typeof buttonRef === 'function') buttonRef(c)
         }}

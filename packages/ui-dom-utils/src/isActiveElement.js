@@ -35,9 +35,9 @@ import { getActiveElement } from './getActiveElement'
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {boolean} if the element is the active element
  */
-function isActiveElement (el) {
+function isActiveElement(el) {
   const node = el && findDOMNode(el)
-  return (node && getActiveElement() === node)
+  return node && getActiveElement() === node
 }
 
 export default isActiveElement

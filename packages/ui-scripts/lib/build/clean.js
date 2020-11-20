@@ -22,17 +22,22 @@
  * SOFTWARE.
  */
 
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
+const {
+  runCommandsConcurrently,
+  getCommand
+} = require('@instructure/command-utils')
 
-process.exit(runCommandsConcurrently({
-  clean: getCommand('rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    'tokens',
-    '.babel-cache',
-    '.cache',
-    'types'
-  ])
-}).status)
+process.exit(
+  runCommandsConcurrently({
+    clean: getCommand('rimraf', [
+      '__build__',
+      'es',
+      'dist',
+      'lib',
+      'tokens',
+      '.babel-cache',
+      '.cache',
+      'types'
+    ])
+  }).status
+)

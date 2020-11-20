@@ -29,7 +29,9 @@ import { hasVisibleChildren } from '../hasVisibleChildren'
 
 describe('hasVisibleChildren', async () => {
   it('should not count ScreenReaderContent as visible content', async () => {
-    expect(hasVisibleChildren(<ScreenReaderContent>Foo</ScreenReaderContent>)).to.be.false()
+    expect(
+      hasVisibleChildren(<ScreenReaderContent>Foo</ScreenReaderContent>)
+    ).to.be.false()
   })
   it('should count everything else as visible', async () => {
     expect(hasVisibleChildren(<div>Foo</div>)).to.be.true()

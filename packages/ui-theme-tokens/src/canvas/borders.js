@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 // use for consistency between buttons, text inputs, etc.
 
 const borders = Object.freeze({

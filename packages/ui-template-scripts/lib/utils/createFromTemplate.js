@@ -63,17 +63,16 @@ const template = require('lodash.template')
  * @param {Object} argv.values - A mapping of template variable names to replacement values.
  */
 module.exports = (argv = {}) => {
-  const {
-    template: templatePath,
-    dest,
-    values = {}
-  } = argv
+  const { template: templatePath, dest, values = {} } = argv
 
   // Replace any template vars in filenames/dirnames
   const replaceBasenameTemplateVars = ({ basename }) => {
     let newBasename = basename
     Object.keys(values).forEach((templateValue) => {
-      newBasename = newBasename.replace(new RegExp(`{${templateValue}}`, 'g'), values[templateValue])
+      newBasename = newBasename.replace(
+        new RegExp(`{${templateValue}}`, 'g'),
+        values[templateValue]
+      )
     })
 
     return newBasename
@@ -84,7 +83,10 @@ module.exports = (argv = {}) => {
       // Create the directory at the dest path
       const basename = path.basename(currentPath)
       const newBasename = replaceBasenameTemplateVars({ basename })
-      const outputPath = basename !== newBasename ? path.join(path.dirname(destPath), newBasename) : destPath
+      const outputPath =
+        basename !== newBasename
+          ? path.join(path.dirname(destPath), newBasename)
+          : destPath
       fse.mkdirSync(outputPath)
 
       const items = fse.readdirSync(currentPath)
@@ -101,10 +103,16 @@ module.exports = (argv = {}) => {
       const result = template(data)(values)
 
       const extension = path.extname(currentPath)
-      const basename = extension === '.ejs' ? path.basename(currentPath, extension) : path.basename(currentPath)
+      const basename =
+        extension === '.ejs'
+          ? path.basename(currentPath, extension)
+          : path.basename(currentPath)
 
       fse.outputFileSync(
-        path.join(path.dirname(destPath), replaceBasenameTemplateVars({ basename })),
+        path.join(
+          path.dirname(destPath),
+          replaceBasenameTemplateVars({ basename })
+        ),
         result,
         'utf-8'
       )

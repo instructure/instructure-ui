@@ -25,7 +25,12 @@
 import { wrapQueryResult } from './utils/queryResult'
 import { debug, accessible } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
-import { querySelectorAll, querySelectorAllWithin, querySelector, matchesSelector } from './utils/selectors'
+import {
+  querySelectorAll,
+  querySelectorAllWithin,
+  querySelector,
+  matchesSelector
+} from './utils/selectors'
 import { parseQueryArguments } from './utils/parseQueryArguments'
 import { isElement } from './utils/isElement'
 import { elementToString } from './utils/elementToString'

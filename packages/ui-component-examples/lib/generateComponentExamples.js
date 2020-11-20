@@ -24,21 +24,26 @@
 const { uid } = require('@instructure/uid')
 const generatePropCombinations = require('./generatePropCombinations')
 
-module.exports = function generateComponentExamples(Component, config = {
-  sectionProp: null,
-  propValues: {},
-  maxExamplesPerPage: null,
-  excludeProps: [],
-  getExampleProps: (props, index) => { return {} },
-  getComponentProps: (props, index) => { return {} },
-  getParameters: (examples, pageIndex) => { return {} },
-  filter: (props, index) => false
-}) {
-  const {
-    sectionProp,
-    excludeProps,
-    filter
-  } = config
+module.exports = function generateComponentExamples(
+  Component,
+  config = {
+    sectionProp: null,
+    propValues: {},
+    maxExamplesPerPage: null,
+    excludeProps: [],
+    getExampleProps: (props, index) => {
+      return {}
+    },
+    getComponentProps: (props, index) => {
+      return {}
+    },
+    getParameters: (examples, pageIndex) => {
+      return {}
+    },
+    filter: (props, index) => false
+  }
+) {
+  const { sectionProp, excludeProps, filter } = config
 
   const PROPS_CACHE = []
   const sections = []
@@ -91,7 +96,9 @@ module.exports = function generateComponentExamples(Component, config = {
   }
 
   const addExample = (sectionName = 'Examples', example) => {
-    let section = sections.find(section => section.sectionName === sectionName)
+    let section = sections.find(
+      (section) => section.sectionName === sectionName
+    )
     if (!section) {
       section = {
         sectionName: sectionName,
@@ -112,7 +119,11 @@ module.exports = function generateComponentExamples(Component, config = {
 
     if (!page) {
       page = addPage(section)
-    } else if (maxExamplesPerPage && page.examples.length % maxExamplesPerPage === 0 && page.examples.length > 0) {
+    } else if (
+      maxExamplesPerPage &&
+      page.examples.length % maxExamplesPerPage === 0 &&
+      page.examples.length > 0
+    ) {
       page = addPage(section)
     }
 
@@ -124,7 +135,7 @@ module.exports = function generateComponentExamples(Component, config = {
     const exampleProps = getExampleProps(props)
     const key = uid()
     const propsString = JSON.stringify(componentProps)
-    const ignore = (typeof filter === 'function') ? filter(componentProps) : false
+    const ignore = typeof filter === 'function' ? filter(componentProps) : false
 
     if (!ignore && !PROPS_CACHE.includes(propsString)) {
       exampleCount++
@@ -156,7 +167,11 @@ module.exports = function generateComponentExamples(Component, config = {
     }
 
     // eslint-disable-next-line no-console
-    console.info(`Generating examples for ${Component.displayName} (${Object.keys(propValues).length} props)...`)
+    console.info(
+      `Generating examples for ${Component.displayName} (${
+        Object.keys(propValues).length
+      } props)...`
+    )
 
     const combos = generatePropCombinations(propValues).filter(Boolean)
     let index = 0
@@ -170,11 +185,15 @@ module.exports = function generateComponentExamples(Component, config = {
   }
 
   if (exampleCount >= maxExamples) {
-    console.error(`Too many examples for ${Component.displayName}! Add a filter to the config.`)
+    console.error(
+      `Too many examples for ${Component.displayName}! Add a filter to the config.`
+    )
   }
 
   // eslint-disable-next-line no-console
-  console.info(`Generated ${exampleCount} examples for ${Component.displayName}`)
+  console.info(
+    `Generated ${exampleCount} examples for ${Component.displayName}`
+  )
 
   sections.forEach(({ pages }) => {
     pages.forEach((page, index) => {

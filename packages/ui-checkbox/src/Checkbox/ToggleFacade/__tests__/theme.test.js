@@ -32,13 +32,15 @@ describe('ToggleFacade.theme', () => {
     const variables = ToggleFacade.generateTheme()
 
     it('should ensure icon meets 3:1 contrast', () => {
-      expect(contrast(variables.uncheckedIconColor, variables.toggleBackground))
-        .to.be.above(3)
+      expect(
+        contrast(variables.uncheckedIconColor, variables.toggleBackground)
+      ).to.be.above(3)
     })
 
     it('should ensure icon meets 3:1 contrast when checked', () => {
-      expect(contrast(variables.checkedIconColor, variables.toggleBackground))
-        .to.be.above(3)
+      expect(
+        contrast(variables.checkedIconColor, variables.toggleBackground)
+      ).to.be.above(3)
     })
   })
 
@@ -46,13 +48,15 @@ describe('ToggleFacade.theme', () => {
     const variables = ToggleFacade.generateTheme('canvas-high-contrast')
 
     it('should ensure icon meets 4.5:1 contrast', () => {
-      expect(contrast(variables.uncheckedIconColor, variables.toggleBackground))
-        .to.be.above(4.5)
+      expect(
+        contrast(variables.uncheckedIconColor, variables.toggleBackground)
+      ).to.be.above(4.5)
     })
 
     it('should ensure icon meets 4.5:1 contrast when checked', () => {
-      expect(contrast(variables.checkedIconColor, variables.toggleBackground))
-        .to.be.above(4.5)
+      expect(
+        contrast(variables.checkedIconColor, variables.toggleBackground)
+      ).to.be.above(4.5)
     })
   })
 })

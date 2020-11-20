@@ -85,11 +85,8 @@ class ComponentIdentifier extends Component {
     return result
   }
 
-  render () {
-    const {
-      children,
-      ...props
-    } = this.props
+  render() {
+    const { children, ...props } = this.props
 
     return ensureSingleChild(children, props)
   }
@@ -98,12 +95,12 @@ class ComponentIdentifier extends Component {
 export default ComponentIdentifier
 export {
   /**
-  *
-  * Pick a specific child component from a component's children
-  *
-  * @param {Component} component The component to look for
-  * @param {Array} children The child components to look through
-  * @return {Component} The matching component if found, otherwise undefined
-  */
+   *
+   * Pick a specific child component from a component's children
+   *
+   * @param {Component} component The component to look for
+   * @param {Array} children The child components to look through
+   * @return {Component} The matching component if found, otherwise undefined
+   */
   ComponentIdentifier
 }

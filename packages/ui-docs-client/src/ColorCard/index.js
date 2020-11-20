@@ -41,7 +41,7 @@ class ColorCard extends Component {
     name: undefined
   }
 
-  hexToRgb (hex) {
+  hexToRgb(hex) {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     if (!result) {
       return
@@ -54,7 +54,7 @@ class ColorCard extends Component {
     return `${rgb.r},${rgb.g},${rgb.b}`
   }
 
-  render () {
+  render() {
     const { name, hex, minimal } = this.props
     return (
       <View
@@ -66,15 +66,17 @@ class ColorCard extends Component {
         margin="0"
         padding="small"
       >
-        <div style={{position: 'relative',}}>
-          <div style={{
-            background: hex,
-            width: minimal ? "1rem" : "100%",
-            height: minimal ? "100%" : "6rem",
-            position: minimal ? "absolute" : "static",
-            margin: '0 0 2px',
-          }}/>
-          <div style={minimal ? {paddingLeft: '1.5rem'} : {}}>
+        <div style={{ position: 'relative' }}>
+          <div
+            style={{
+              background: hex,
+              width: minimal ? '1rem' : '100%',
+              height: minimal ? '100%' : '6rem',
+              position: minimal ? 'absolute' : 'static',
+              margin: '0 0 2px'
+            }}
+          />
+          <div style={minimal ? { paddingLeft: '1.5rem' } : {}}>
             <ColorName
               as="figcaption"
               lineHeight="double"

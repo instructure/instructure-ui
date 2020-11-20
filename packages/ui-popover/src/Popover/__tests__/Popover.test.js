@@ -23,7 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, within, wait, stub } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  spy,
+  within,
+  wait,
+  stub
+} from '@instructure/ui-test-utils'
 
 import { Popover } from '../index'
 
@@ -51,7 +58,9 @@ describe('<Popover />', async () => {
 
   testShowContent('click', 'click')
   testShowContent('focus', 'focus')
-  testShowContent('hover', 'mouseOver', { relatedTarget: document.documentElement })
+  testShowContent('hover', 'mouseOver', {
+    relatedTarget: document.documentElement
+  })
 
   testEventHandler('onClick', 'click')
   testEventHandler('onFocus', 'focus')
@@ -265,7 +274,7 @@ describe('<Popover />', async () => {
   })
 })
 
-function testShowContent (on, eventType, eventInit) {
+function testShowContent(on, eventType, eventInit) {
   it(`should show content on ${on}`, async () => {
     const onValue = [on, on === 'hover' ? 'focus' : null]
     await mount(
@@ -285,7 +294,7 @@ function testShowContent (on, eventType, eventInit) {
   })
 }
 
-function testEventHandler (handler, ...eventType) {
+function testEventHandler(handler, ...eventType) {
   it(`should fire ${handler} handler`, async () => {
     const handlerSpy = spy()
     const props = {

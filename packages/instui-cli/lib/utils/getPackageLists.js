@@ -25,11 +25,12 @@
 const { error } = require('@instructure/command-utils')
 const getInstuiConfigPaths = require('./getInstuiConfigPaths')
 
-const getPackageListPaths = ({ version } = {}) => getInstuiConfigPaths({
-  type: 'package-lists',
-  name: 'package-list.json',
-  version
-})
+const getPackageListPaths = ({ version } = {}) =>
+  getInstuiConfigPaths({
+    type: 'package-lists',
+    name: 'package-list.json',
+    version
+  })
 
 exports.getPackageList = ({ version } = {}) => {
   const packageListPaths = getPackageListPaths({ version })

@@ -54,20 +54,14 @@ describe('<Flex />', async () => {
   })
 
   it('should render children when children is a function', async () => {
-    const subject = await mount(
-      <Flex>
-        {() => <div>hello world</div>}
-      </Flex>
-    )
+    const subject = await mount(<Flex>{() => <div>hello world</div>}</Flex>)
 
     const flex = within(subject.getDOMNode())
     expect(await flex.findWithText('hello world')).to.exist()
   })
 
   it('should render no markup if there are no children', async () => {
-    const subject = await mount(
-      <Flex></Flex>
-    )
+    const subject = await mount(<Flex></Flex>)
 
     expect(subject.getDOMNode()).to.not.exist()
   })
@@ -145,7 +139,9 @@ describe('<Flex />', async () => {
     const flex = within(subject.getDOMNode())
 
     await wait(() => {
-      expect(flex.getComputedStyle()['justify-content']).to.equal('space-between')
+      expect(flex.getComputedStyle()['justify-content']).to.equal(
+        'space-between'
+      )
     })
   })
 

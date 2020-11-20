@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
-function trimIndent (str) {
-  const lines = `${str.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split('\n')
+function trimIndent(str) {
+  const lines = `${str.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split(
+    '\n'
+  )
   let indent = false
   let trimmed = ''
 

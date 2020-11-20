@@ -25,70 +25,75 @@
 import moment from 'moment-timezone'
 
 /**
-* ---
-* category: utilities/i18n
-* ---
-* A wrapper for [moment](https://momentjs.com/) utils.
-* @module DateTime
-*/
+ * ---
+ * category: utilities/i18n
+ * ---
+ * A wrapper for [moment](https://momentjs.com/) utils.
+ * @module DateTime
+ */
 
 /**
-* Return an instance of a [moment](https://momentjs.com) initialized with the current date + time
-* @param {String} locale
-* @param {String} timezone
-* @returns {Object} an instance of a moment.
-*/
-function now (locale, timezone) {
+ * Return an instance of a [moment](https://momentjs.com) initialized with the current date + time
+ * @param {String} locale
+ * @param {String} timezone
+ * @returns {Object} an instance of a moment.
+ */
+function now(locale, timezone) {
   _checkParams(locale, timezone)
   return moment().locale(locale).tz(timezone)
 }
 
 /**
-* Parses a string into a localized ISO 8601 string with timezone
-* @param {String} dateString
-* @param {String} locale
-* @param {String} timezone
-* @returns {String} ISO 8601 string
-*/
-function parse (dateString, locale, timezone) {
+ * Parses a string into a localized ISO 8601 string with timezone
+ * @param {String} dateString
+ * @param {String} locale
+ * @param {String} timezone
+ * @returns {String} ISO 8601 string
+ */
+function parse(dateString, locale, timezone) {
   _checkParams(locale, timezone)
   // list all available localized formats, from most specific to least
-  return moment.tz(dateString, [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'], locale, timezone)
+  return moment.tz(
+    dateString,
+    [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'],
+    locale,
+    timezone
+  )
 }
 
 /**
-* Determines if a string is a valid ISO 8601 string
-* @param {String} dateString
-* @returns {Boolean} true if dateString is a valid ISO 8601 string
-*/
-function isValid (dateString) {
+ * Determines if a string is a valid ISO 8601 string
+ * @param {String} dateString
+ * @returns {Boolean} true if dateString is a valid ISO 8601 string
+ */
+function isValid(dateString) {
   return moment(dateString, [moment.ISO_8601]).isValid()
 }
 
 /**
-* Get the users's time zone (or guess)
-* see https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
-* @returns {String} a time zone identifier (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-*/
-function browserTimeZone () {
+ * Get the users's time zone (or guess)
+ * see https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
+ * @returns {String} a time zone identifier (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+ */
+function browserTimeZone() {
   return moment.tz.guess()
 }
 
 /**
-* Return a localized date + time with timezone as a ISO 8601 string
-* @param {String} dateString
-* @param {String} locale
-* @param {String} timezone
-* @param {String} format
-* @returns {String} Localized ISO 8601 string
-*/
-function toLocaleString (dateString, locale, timezone, format) {
+ * Return a localized date + time with timezone as a ISO 8601 string
+ * @param {String} dateString
+ * @param {String} locale
+ * @param {String} timezone
+ * @param {String} format
+ * @returns {String} Localized ISO 8601 string
+ */
+function toLocaleString(dateString, locale, timezone, format) {
   const d = parse(dateString, locale, timezone)
   const iso8601format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
   return format ? d.format(format) : d.format(iso8601format)
 }
 
-function _checkParams (locale, timezone) {
+function _checkParams(locale, timezone) {
   if (locale == null) throw Error('locale must be specified')
   if (timezone == null) throw Error('timezone must be specified')
 }

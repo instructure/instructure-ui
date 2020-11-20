@@ -42,7 +42,7 @@ class ThemeColors extends Component {
     colors: PropTypes.object.isRequired
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     const first = props.colors[Object.keys(props.colors)[0]]
     this.state = {
@@ -52,15 +52,15 @@ class ThemeColors extends Component {
     }
   }
 
-  renderColorCards () {
+  renderColorCards() {
     const { colors } = this.props
 
     return (
       <Responsive
         query={{
           xsmall: { maxWidth: '23rem' },
-          small: { minWidth: '23rem'},
-          medium: { minWidth: '36rem'},
+          small: { minWidth: '23rem' },
+          medium: { minWidth: '36rem' },
           large: { minWidth: '50rem' }
         }}
         props={{
@@ -73,12 +73,18 @@ class ThemeColors extends Component {
           const cards = []
           Object.keys(colors).forEach((color, index) => {
             cards.push(
-              <ColorCard hex={colors[color]} name={color} minimal={props.minimal} />
+              <ColorCard
+                hex={colors[color]}
+                name={color}
+                minimal={props.minimal}
+              />
             )
           })
           return (
             <View as="div" padding="small">
-              <Heading level="h3" as="h4">theme palette</Heading>
+              <Heading level="h3" as="h4">
+                theme palette
+              </Heading>
               <Flex wrap="wrap">
                 {React.Children.map(cards, (child) => (
                   <Flex.Item size={props.colWidth} padding="small xx-small">
@@ -110,16 +116,21 @@ class ThemeColors extends Component {
     }
   }
 
-  renderContrastChecker () {
+  renderContrastChecker() {
     const { colors } = this.props
     const { contrastRatio } = this.state
     const values = []
-    const options = Object.keys(colors).map(color => {
+    const options = Object.keys(colors).map((color) => {
       const val = colors[color]
       if (values.indexOf(val) === -1) {
         values.push(val)
         return (
-          <SimpleSelect.Option key={color} id={val} value={val} renderBeforeLabel={() => (<ColorSwatch color={val} />)}>
+          <SimpleSelect.Option
+            key={color}
+            id={val}
+            value={val}
+            renderBeforeLabel={() => <ColorSwatch color={val} />}
+          >
             {color}
           </SimpleSelect.Option>
         )
@@ -127,8 +138,16 @@ class ThemeColors extends Component {
     })
 
     const ratio = `${contrastRatio}:1`
-    const pass = <Text size="large" color="success">PASS</Text>
-    const fail = <Text size="large" color="danger">FAIL</Text>
+    const pass = (
+      <Text size="large" color="success">
+        PASS
+      </Text>
+    )
+    const fail = (
+      <Text size="large" color="danger">
+        FAIL
+      </Text>
+    )
 
     const normalWCAG = {
       canvascontrast: contrastRatio > 3.0,
@@ -137,17 +156,29 @@ class ThemeColors extends Component {
 
     return (
       <View as="div" padding="small small none">
-        <Heading level="h3" as="h4">contrast</Heading>
-        <Flex as="div" margin="small 0" background="default" alignItems="center" wrap="wrap">
+        <Heading level="h3" as="h4">
+          contrast
+        </Heading>
+        <Flex
+          as="div"
+          margin="small 0"
+          background="default"
+          alignItems="center"
+          wrap="wrap"
+        >
           <Flex.Item padding="small">
             <SimpleSelect
               name="color-1"
               defaultValue={this.state.backgroundColor}
               renderLabel="Background Color"
-              renderBeforeInput={<ColorSwatch color={this.state.backgroundColor} />}
-              onChange={(e, {value}) => this.handleContrastChange(value, 'background')}
+              renderBeforeInput={
+                <ColorSwatch color={this.state.backgroundColor} />
+              }
+              onChange={(e, { value }) =>
+                this.handleContrastChange(value, 'background')
+              }
             >
-              {React.Children.map(options, option => option)}
+              {React.Children.map(options, (option) => option)}
             </SimpleSelect>
           </Flex.Item>
           <Flex.Item padding="small">
@@ -155,10 +186,14 @@ class ThemeColors extends Component {
               name="color-2"
               defaultValue={this.state.foregroundColor}
               renderLabel="Foreground Color"
-              renderBeforeInput={<ColorSwatch color={this.state.foregroundColor} />}
-              onChange={(e, {value}) => this.handleContrastChange(value, 'foreground')}
+              renderBeforeInput={
+                <ColorSwatch color={this.state.foregroundColor} />
+              }
+              onChange={(e, { value }) =>
+                this.handleContrastChange(value, 'foreground')
+              }
             >
-              {React.Children.map(options, option => option)}
+              {React.Children.map(options, (option) => option)}
             </SimpleSelect>
           </Flex.Item>
           {this.state.contrastRatio && (
@@ -186,7 +221,7 @@ class ThemeColors extends Component {
     )
   }
 
-  render () {
+  render() {
     return (
       <div>
         {this.renderColorCards()}

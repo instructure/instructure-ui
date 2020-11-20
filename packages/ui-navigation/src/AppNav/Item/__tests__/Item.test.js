@@ -38,12 +38,7 @@ const icon = (
 
 describe('<AppNav.Item />', async () => {
   it('should render label text', async () => {
-    await mount(
-      <Item
-        renderLabel="Some label"
-        href='#'
-      />
-    )
+    await mount(<Item renderLabel="Some label" href="#" />)
     const item = await ItemLocator.find()
     expect(await item.find(':contains(Some label)')).to.exist()
   })
@@ -53,7 +48,7 @@ describe('<AppNav.Item />', async () => {
       <Item
         renderIcon={icon}
         renderLabel={<ScreenReaderContent>Some label</ScreenReaderContent>}
-        href='#'
+        href="#"
       />
     )
     const item = await ItemLocator.find()
@@ -66,7 +61,7 @@ describe('<AppNav.Item />', async () => {
     await mount(
       <Item
         renderLabel="Some label"
-        href='#'
+        href="#"
         renderAfter={<strong>I am rendered after!</strong>}
       />
     )
@@ -76,12 +71,7 @@ describe('<AppNav.Item />', async () => {
 
   it('should respond to an onClick event', async () => {
     const onClick = stub()
-    await mount(
-      <Item
-        renderLabel="Some label"
-        onClick={onClick}
-      />
-    )
+    await mount(<Item renderLabel="Some label" onClick={onClick} />)
     const item = await ItemLocator.find()
 
     const button = await item.find('button')
@@ -92,7 +82,8 @@ describe('<AppNav.Item />', async () => {
 
   it('should output a console error if icon is used with non-screenreader label text', async () => {
     const consoleError = stub(console, 'error')
-    const warning = 'Warning: [AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'
+    const warning =
+      'Warning: [AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'
     await mount(
       <Item
         renderIcon={icon}

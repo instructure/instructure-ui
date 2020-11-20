@@ -30,11 +30,7 @@ import { ToggleButtonLocator } from '../ToggleButtonLocator'
 
 describe('<ToggleButton />', async () => {
   const icon = (
-    <svg
-      title="myIcon"
-      height="1em"
-      width="1em"
-    >
+    <svg title="myIcon" height="1em" width="1em">
       <circle cx="0.5em" cy="0.5em" r="0.5em" />
     </svg>
   )

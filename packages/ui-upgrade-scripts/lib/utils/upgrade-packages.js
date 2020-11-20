@@ -31,13 +31,20 @@ async function updateResolutions({ pkg, packages, path, version }) {
   const originalResolutions = { ...pkg.get('resolutions') }
   const packageResolutions = {}
 
-  info(`${packages.length} packages to upgrade. Updating package.json resolutions...`)
+  info(
+    `${packages.length} packages to upgrade. Updating package.json resolutions...`
+  )
 
   packages.forEach((packageName) => {
     try {
       let upgradeVersion = version
       if (!upgradeVersion) {
-        const { stdout } = runCommandSync('yarn', ['info', `${packageName}`, 'dist-tags', '--json'], [], { stdio: 'pipe' })
+        const { stdout } = runCommandSync(
+          'yarn',
+          ['info', `${packageName}`, 'dist-tags', '--json'],
+          [],
+          { stdio: 'pipe' }
+        )
         const { data } = JSON.parse(stdout)
         if (data) {
           upgradeVersion = data.latest
@@ -69,7 +76,14 @@ async function updateResolutions({ pkg, packages, path, version }) {
   }
 }
 
-module.exports = function upgradePackages({ useResolutions = false, packageList = [], version, path, ignoreWorkspaceRootCheck, npmClient } = {}) {
+module.exports = function upgradePackages({
+  useResolutions = false,
+  packageList = [],
+  version,
+  path,
+  ignoreWorkspaceRootCheck,
+  npmClient
+} = {}) {
   verifyPackageJson({ sourcePath: path })
 
   const pkg = getPackage({ cwd: path })
@@ -77,8 +91,12 @@ module.exports = function upgradePackages({ useResolutions = false, packageList 
   const pkgDependencies = Object.keys(pkg.get('dependencies') || {})
   const pkgDevDependencies = Object.keys(pkg.get('devDependencies') || {})
 
-  const dependencies = packageList.filter(pkg => pkgDependencies.includes(pkg))
-  const devDependencies = packageList.filter(pkg => pkgDevDependencies.includes(pkg))
+  const dependencies = packageList.filter((pkg) =>
+    pkgDependencies.includes(pkg)
+  )
+  const devDependencies = packageList.filter((pkg) =>
+    pkgDevDependencies.includes(pkg)
+  )
 
   const allDependencies = [...dependencies, ...devDependencies]
 
@@ -90,30 +108,65 @@ module.exports = function upgradePackages({ useResolutions = false, packageList 
   } else {
     info(`Upgrading ${allDependencies} in ${path} to ${version || 'latest'}`)
 
-    const mapVersion = dependencies => dependencies.map(dep => `${dep}@${version || 'latest'}`)
+    const mapVersion = (dependencies) =>
+      dependencies.map((dep) => `${dep}@${version || 'latest'}`)
 
     try {
       if (npmClient === 'yarn') {
-        const composeYarnArgs = args => ignoreWorkspaceRootCheck ? [...args, '--ignore-workspace-root-check'] : args
+        const composeYarnArgs = (args) =>
+          ignoreWorkspaceRootCheck
+            ? [...args, '--ignore-workspace-root-check']
+            : args
 
-        runCommandSync('yarn', composeYarnArgs(['remove', ...allDependencies, '--cwd', path]))
+        runCommandSync(
+          'yarn',
+          composeYarnArgs(['remove', ...allDependencies, '--cwd', path])
+        )
 
         if (dependencies.length > 0) {
-          runCommandSync('yarn', composeYarnArgs(['add', ...mapVersion(dependencies), '--cwd', path]))
+          runCommandSync(
+            'yarn',
+            composeYarnArgs(['add', ...mapVersion(dependencies), '--cwd', path])
+          )
         }
 
         if (devDependencies.length > 0) {
-          runCommandSync('yarn', composeYarnArgs(['add', ...mapVersion(devDependencies), '--cwd', path, '--dev']))
+          runCommandSync(
+            'yarn',
+            composeYarnArgs([
+              'add',
+              ...mapVersion(devDependencies),
+              '--cwd',
+              path,
+              '--dev'
+            ])
+          )
         }
       } else if (npmClient === 'npm') {
-        runCommandSync('npm', ['uninstall', '--prefix', path, ...allDependencies])
+        runCommandSync('npm', [
+          'uninstall',
+          '--prefix',
+          path,
+          ...allDependencies
+        ])
 
         if (dependencies.length > 0) {
-          runCommandSync('npm', ['install', '--prefix', path, ...mapVersion(dependencies)])
+          runCommandSync('npm', [
+            'install',
+            '--prefix',
+            path,
+            ...mapVersion(dependencies)
+          ])
         }
 
         if (devDependencies.length > 0) {
-          runCommandSync('npm', ['install', '--save-dev', '--prefix', path, ...mapVersion(devDependencies)])
+          runCommandSync('npm', [
+            'install',
+            '--save-dev',
+            '--prefix',
+            path,
+            ...mapVersion(devDependencies)
+          ])
         }
       }
     } catch (err) {

@@ -40,14 +40,15 @@ export default {
   },
   getExampleProps: (props) => {
     return {
-      background: [
-        'primary-inverse',
-        'secondary-inverse'
-      ].includes(props.color) ? 'primary-inverse' : 'primary'
+      background: ['primary-inverse', 'secondary-inverse'].includes(props.color)
+        ? 'primary-inverse'
+        : 'primary'
     }
   },
   filter: (props) => {
-    return props.type === 'notification' && props.countUntil ||
-    props.standalone && props.placement !== 'start top'
+    return (
+      (props.type === 'notification' && props.countUntil) ||
+      (props.standalone && props.placement !== 'start top')
+    )
   }
 }

@@ -24,13 +24,18 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 
-import { elementToString, wrapQueryResult, isElement, matches } from '@instructure/ui-test-queries'
+import {
+  elementToString,
+  wrapQueryResult,
+  isElement,
+  matches
+} from '@instructure/ui-test-queries'
 
-export default function assertions (chai, utils) {
+export default function assertions(chai, utils) {
   const { flag, inspect } = utils
   const { Assertion } = chai
 
-  function wrapObj (obj) {
+  function wrapObj(obj) {
     if (obj && typeof obj.getDOMNode === 'function') {
       return obj
     }
@@ -48,7 +53,7 @@ export default function assertions (chai, utils) {
     }
   }
 
-  function addAssertion (name, assertion) {
+  function addAssertion(name, assertion) {
     if (Assertion.prototype[name]) {
       overwriteMethod(name, assertion)
     } else {
@@ -56,37 +61,41 @@ export default function assertions (chai, utils) {
     }
   }
 
-  function overwriteProperty (name, assertion) {
+  function overwriteProperty(name, assertion) {
     Assertion.overwriteProperty(name, function (_super) {
       return wrapOverwriteAssertion(assertion, _super)
     })
   }
 
-  function overwriteMethod (name, assertion) {
+  function overwriteMethod(name, assertion) {
     Assertion.overwriteMethod(name, function (_super) {
       return wrapOverwriteAssertion(assertion, _super)
     })
   }
 
-  function addMethod (name, assertion) {
+  function addMethod(name, assertion) {
     Assertion.addMethod(name, wrapAssertion(assertion))
   }
 
-  function addChainableMethod (name, assertion) {
+  function addChainableMethod(name, assertion) {
     Assertion.addChainableMethod(name, wrapAssertion(assertion))
   }
 
-  function overwriteChainableMethod (name, assertion) {
-    Assertion.overwriteChainableMethod(name, function (_super) {
-      return wrapOverwriteAssertion(assertion, _super)
-    }, function (_super) {
-      return function () {
-        _super.call(this)
+  function overwriteChainableMethod(name, assertion) {
+    Assertion.overwriteChainableMethod(
+      name,
+      function (_super) {
+        return wrapOverwriteAssertion(assertion, _super)
+      },
+      function (_super) {
+        return function () {
+          _super.call(this)
+        }
       }
-    })
+    )
   }
 
-  function wrapOverwriteAssertion (assertion, _super) {
+  function wrapOverwriteAssertion(assertion, _super) {
     return function (arg1, arg2) {
       const wrapper = wrapObj(flag(this, 'object'))
 
@@ -106,7 +115,7 @@ export default function assertions (chai, utils) {
     }
   }
 
-  function wrapAssertion (assertion) {
+  function wrapAssertion(assertion) {
     return function (arg1, arg2) {
       const wrapper = wrapObj(flag(this, 'object'))
 
@@ -134,27 +143,38 @@ export default function assertions (chai, utils) {
     flag(this, 'negate', true)
   })
 
-  addChainableMethod('exactly', function exactly ({ flag, arg1 }) {
+  addChainableMethod('exactly', function exactly({ flag, arg1 }) {
     flag(this, 'exactlyCount', arg1)
   })
 
-  addAssertion('text', function text ({ wrapper, markup, flag, arg1, arg2, sig }) {
+  addAssertion('text', function text({
+    wrapper,
+    markup,
+    flag,
+    arg1,
+    arg2,
+    sig
+  }) {
     const actual = wrapper.text()
 
     if (typeof arg1 !== 'undefined') {
       if (flag(this, 'contains')) {
         this.assert(
           actual && actual.indexOf(String(arg1)) > -1,
-          () => `expected ${sig} to contain text #{exp}, but it has #{act} ${markup()}`,
-          () => `expected ${sig} not to contain text #{exp}, but it has #{act} ${markup()}`,
+          () =>
+            `expected ${sig} to contain text #{exp}, but it has #{act} ${markup()}`,
+          () =>
+            `expected ${sig} not to contain text #{exp}, but it has #{act} ${markup()}`,
           arg1,
           actual
         )
       } else {
         this.assert(
           actual && matches(actual, arg1, arg2),
-          () => `expected ${sig} to have text #{exp}, but it has #{act} ${markup()}`,
-          () => `expected ${sig} to not have text #{exp}, but it has #{act} ${markup()}`,
+          () =>
+            `expected ${sig} to have text #{exp}, but it has #{act} ${markup()}`,
+          () =>
+            `expected ${sig} to not have text #{exp}, but it has #{act} ${markup()}`,
           arg1,
           actual
         )
@@ -164,30 +184,38 @@ export default function assertions (chai, utils) {
     flag(this, 'object', actual)
   })
 
-  overwriteChainableMethod('contain', function contain ({ wrapper, markup, arg1, sig }) {
+  overwriteChainableMethod('contain', function contain({
+    wrapper,
+    markup,
+    arg1,
+    sig
+  }) {
     if (arg1) {
       this.assert(
         wrapper && wrapper.contains(arg1),
         () => `expected ${sig} to contain ${elementToString(arg1)} ${markup()}`,
-        () => `expected ${sig} to not contain ${elementToString(arg1)} ${markup()}`,
+        () =>
+          `expected ${sig} to not contain ${elementToString(arg1)} ${markup()}`,
         arg1
       )
     }
   })
 
-  addAssertion('className', function className ({ wrapper, markup, arg1, sig }) {
+  addAssertion('className', function className({ wrapper, markup, arg1, sig }) {
     const actual = wrapper.classNames()
 
     this.assert(
       wrapper && wrapper.hasClass(arg1),
-      () => `expected ${sig} to have a #{exp} class, but it has #{act} ${markup()}`,
-      () => `expected ${sig} to not have a #{exp} class, but it has #{act} ${markup()}`,
+      () =>
+        `expected ${sig} to have a #{exp} class, but it has #{act} ${markup()}`,
+      () =>
+        `expected ${sig} to not have a #{exp} class, but it has #{act} ${markup()}`,
       arg1,
       actual
     )
   })
 
-  addAssertion('match', function match ({ wrapper, markup, arg1, sig }) {
+  addAssertion('match', function match({ wrapper, markup, arg1, sig }) {
     this.assert(
       wrapper && wrapper.matches(arg1),
       () => `expected ${sig} to match #{exp} ${markup()}`,
@@ -197,18 +225,27 @@ export default function assertions (chai, utils) {
   })
 
   addAssertion('visible', booleanAssertion('visible', 'visible'))
-  addAssertion('descendants', listAndCountAssertion('descendants', 'descendants'))
+  addAssertion(
+    'descendants',
+    listAndCountAssertion('descendants', 'descendants')
+  )
   addAssertion('children', listAndCountAssertion('children', 'children'))
   addAssertion('ancestors', listAndCountAssertion('ancestors', 'ancestors'))
   addAssertion('parents', listAndCountAssertion('parents', 'parents'))
   addAssertion('attribute', propAndValueAssertion('attribute', 'attribute'))
   addAssertion('style', propAndValueAssertion('style', 'computed CSS style'))
-  addAssertion('bounds', propAndValueAssertion('bounds', 'bounding client rect'))
+  addAssertion(
+    'bounds',
+    propAndValueAssertion('bounds', 'bounding client rect')
+  )
   addAssertion('tagName', valueAssertion('tagName', 'tag name'))
   addAssertion('id', valueAssertion('id', 'id'))
   addAssertion('visible', booleanAssertion('visible', 'visible'))
   addAssertion('clickable', booleanAssertion('clickable', 'clickable'))
-  addAssertion('focus', booleanAssertion('containsFocus', 'focused or contain the focused element'))
+  addAssertion(
+    'focus',
+    booleanAssertion('containsFocus', 'focused or contain the focused element')
+  )
   addAssertion('focused', booleanAssertion('focused', 'focused'))
   addAssertion('focusable', booleanAssertion('focusable', 'focusable'))
   addAssertion('tabbable', booleanAssertion('tabbable', 'tabbable'))
@@ -224,7 +261,7 @@ export default function assertions (chai, utils) {
   addAssertion('label', valueAssertion('label', 'label'))
 }
 
-function getActual (wrapper, assertion, ...args) {
+function getActual(wrapper, assertion, ...args) {
   const methodOrProperty = wrapper ? wrapper[assertion] : undefined
   if (typeof methodOrProperty === 'function') {
     return methodOrProperty(...args)
@@ -233,7 +270,7 @@ function getActual (wrapper, assertion, ...args) {
   }
 }
 
-function propAndValueAssertion (assertion, desc) {
+function propAndValueAssertion(assertion, desc) {
   return function (args) {
     const { wrapper, markup, flag, inspect, arg1, arg2, arg3, sig } = args
     const actual = getActual(wrapper, assertion, arg1)
@@ -241,8 +278,14 @@ function propAndValueAssertion (assertion, desc) {
     if (arg2) {
       this.assert(
         actual && matches(actual, arg2, arg3),
-        () => `expected ${sig} to have a ${inspect(arg1)} ${desc} with the value #{exp}, but the value was #{act} ${markup()}`,
-        () => `expected ${sig} to not have a ${inspect(arg1)} ${desc} with the value #{act} ${markup()}`,
+        () =>
+          `expected ${sig} to have a ${inspect(
+            arg1
+          )} ${desc} with the value #{exp}, but the value was #{act} ${markup()}`,
+        () =>
+          `expected ${sig} to not have a ${inspect(
+            arg1
+          )} ${desc} with the value #{act} ${markup()}`,
         arg2,
         actual
       )
@@ -260,7 +303,7 @@ function propAndValueAssertion (assertion, desc) {
   }
 }
 
-function booleanAssertion (assertion, desc) {
+function booleanAssertion(assertion, desc) {
   return function ({ wrapper, markup, sig }) {
     const actual = getActual(wrapper, assertion)
     this.assert(
@@ -271,21 +314,23 @@ function booleanAssertion (assertion, desc) {
   }
 }
 
-function valueAssertion (assertion, desc) {
+function valueAssertion(assertion, desc) {
   return function ({ wrapper, markup, arg1, arg2, sig }) {
     const actual = getActual(wrapper, assertion)
 
     this.assert(
       matches(actual, arg1, arg2),
-      () => `expected ${sig} to have a #{exp} ${desc}, but it has #{act} ${markup()}`,
-      () => `expected ${sig} to not have a #{exp} ${desc}, but it has #{act} ${markup()}`,
+      () =>
+        `expected ${sig} to have a #{exp} ${desc}, but it has #{act} ${markup()}`,
+      () =>
+        `expected ${sig} to not have a #{exp} ${desc}, but it has #{act} ${markup()}`,
       arg1,
       actual
     )
   }
 }
 
-function listAndCountAssertion (assertion, desc) {
+function listAndCountAssertion(assertion, desc) {
   return function ({ wrapper, markup, arg1, sig, flag }) {
     const exactlyCount = flag(this, 'exactlyCount')
     const actual = getActual(wrapper, assertion, arg1)
@@ -293,17 +338,19 @@ function listAndCountAssertion (assertion, desc) {
 
     if (exactlyCount || exactlyCount === 0) {
       this.assert(
-          count === exactlyCount,
-          () => `expected ${sig} to have ${exactlyCount} ${desc} #{exp} but actually found ${count} ${markup()}`,
-          () => `expected ${sig} to not have ${exactlyCount} ${desc} #{exp} but actually found ${count} ${markup()}`,
-          arg1
+        count === exactlyCount,
+        () =>
+          `expected ${sig} to have ${exactlyCount} ${desc} #{exp} but actually found ${count} ${markup()}`,
+        () =>
+          `expected ${sig} to not have ${exactlyCount} ${desc} #{exp} but actually found ${count} ${markup()}`,
+        arg1
       )
     } else {
       this.assert(
-          (count > 0),
-          () => `expected ${sig} to have ${desc} #{exp} ${markup()}`,
-          () => `expected ${sig} to not have ${desc} #{exp} ${markup()}`,
-          arg1
+        count > 0,
+        () => `expected ${sig} to have ${desc} #{exp} ${markup()}`,
+        () => `expected ${sig} to not have ${desc} #{exp} ${markup()}`,
+        arg1
       )
     }
   }

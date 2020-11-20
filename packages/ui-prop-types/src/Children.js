@@ -26,54 +26,56 @@ import React from 'react'
 import { makeRequirable } from './makeRequirable'
 
 const Children = {
-/**
- * Validate that the children of a component are one of the specified types.
- *
- * ```js
- *  import { Children } from '@instructure/ui-prop-types'
- *
- *  class Example extends Component {
- *    static propTypes = {
- *      children: Children.oneOf([Foo, Bar, Baz])
- *    }
- *
- *    render () {
- *      return <div>{this.props.children}</div>
- *    }
- *  }
- * ```
- *
- * This will allow children such as:
- *
- * ```jsx
- *  <Example>
- *    <Foo />
- *  </Example>
- * ```
- *
- *  OR
- *
- * ```jsx
- *  <Example>
- *    <Bar />
- *    <Foo />
- *  </Example>
- * ```
- *
- * But will fail on something like:
- *
- * ```jsx
- *  <Example>
- *    <h1>Example</h1>
- *    <Foo />
- *  </Example>
- * ```
- * @returns {Error} if validation failed
- */
-  oneOf (validTypes) {
-    function validator (props, propName, componentName) {
+  /**
+   * Validate that the children of a component are one of the specified types.
+   *
+   * ```js
+   *  import { Children } from '@instructure/ui-prop-types'
+   *
+   *  class Example extends Component {
+   *    static propTypes = {
+   *      children: Children.oneOf([Foo, Bar, Baz])
+   *    }
+   *
+   *    render () {
+   *      return <div>{this.props.children}</div>
+   *    }
+   *  }
+   * ```
+   *
+   * This will allow children such as:
+   *
+   * ```jsx
+   *  <Example>
+   *    <Foo />
+   *  </Example>
+   * ```
+   *
+   *  OR
+   *
+   * ```jsx
+   *  <Example>
+   *    <Bar />
+   *    <Foo />
+   *  </Example>
+   * ```
+   *
+   * But will fail on something like:
+   *
+   * ```jsx
+   *  <Example>
+   *    <h1>Example</h1>
+   *    <Foo />
+   *  </Example>
+   * ```
+   * @returns {Error} if validation failed
+   */
+  oneOf(validTypes) {
+    function validator(props, propName, componentName) {
       const children = React.Children.toArray(props[propName])
-      const validTypeNames = validTypes.map(type => type  ? getDisplayName(type) : type)
+      const validTypeNames = validTypes.map((type) =>
+        type ? getDisplayName(type) : type
+      )
 
       for (let i = 0; i < children.length; i++) {
         const child = children[i]
@@ -83,12 +85,16 @@ const Children = {
 
           if (validTypeNames.indexOf(childName) < 0) {
             return new Error(
-              `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found '${childName}'`
+              `Expected one of ${validTypeNames.join(
+                ', '
+              )} in ${componentName} but found '${childName}'`
             )
           }
         } else if (child) {
           return new Error(
-            `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found an element with unknown type: ${child}`
+            `Expected one of ${validTypeNames.join(
+              ', '
+            )} in ${componentName} but found an element with unknown type: ${child}`
           )
         }
       }
@@ -111,27 +117,27 @@ const Children = {
    *
    *    render () {
    *      return <div>{this.props.children}</div>
-  *    }
-  *  }
-  * ```
-  *
-  * This will enforce the following:
-  *
-  * ```jsx
-  *  <Example>
-  *    <Foo />
-  *    <Bar />
-  *    <Baz />
-  *  </Example>
-  * ```
-  * An error will be thrown
-  *  - If any of the children are not provided (ex. Foo, Bar, but missing Baz)
-  *  - If multiple children of the same type are provided (ex. Foo, Foo, Bar, and Baz)
-  *
-  * @param {Array} validTypes - Array of child types
-  * @returns {Error} if validation failed
-  */
-  oneOfEach (validTypes) {
+   *    }
+   *  }
+   * ```
+   *
+   * This will enforce the following:
+   *
+   * ```jsx
+   *  <Example>
+   *    <Foo />
+   *    <Bar />
+   *    <Baz />
+   *  </Example>
+   * ```
+   * An error will be thrown
+   *  - If any of the children are not provided (ex. Foo, Bar, but missing Baz)
+   *  - If multiple children of the same type are provided (ex. Foo, Foo, Bar, and Baz)
+   *
+   * @param {Array} validTypes - Array of child types
+   * @returns {Error} if validation failed
+   */
+  oneOfEach(validTypes) {
     return function (props, propName, componentName) {
       const children = React.Children.toArray(props[propName])
       const instanceCount = {}
@@ -149,14 +155,18 @@ const Children = {
 
           if (validTypeNames.indexOf(childName) < 0) {
             return new Error(
-              `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found '${childName}'`
+              `Expected one of ${validTypeNames.join(
+                ', '
+              )} in ${componentName} but found '${childName}'`
             )
           }
 
           instanceCount[childName] = (instanceCount[childName] || 0) + 1
         } else if (child) {
           return new Error(
-            `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found an element of unknown type: ${child}`
+            `Expected one of ${validTypeNames.join(
+              ', '
+            )} in ${componentName} but found an element of unknown type: ${child}`
           )
         }
       }
@@ -164,7 +174,9 @@ const Children = {
       const errors = []
       Object.keys(instanceCount).forEach((childName) => {
         if (instanceCount[childName] > 1) {
-          errors.push(`${instanceCount[childName]} children of type ${childName}`)
+          errors.push(
+            `${instanceCount[childName]} children of type ${childName}`
+          )
         }
         if (instanceCount[childName] === 0) {
           errors.push(`0 children of type ${childName}`)
@@ -173,7 +185,9 @@ const Children = {
 
       if (errors.length > 0) {
         return new Error(
-          `Expected exactly one of each ${validTypeNames.join(', ')} in ${componentName} but found:
+          `Expected exactly one of each ${validTypeNames.join(
+            ', '
+          )} in ${componentName} but found:
   ${errors.join('\n')}`
         )
       }
@@ -193,73 +207,73 @@ const Children = {
    *
    *    render () {
    *      return <div>{this.props.children}</div>
-  *    }
-  *  }
-  * ```
-  *
-  * This will enforce the following:
-  *
-  * ```jsx
-  *  <Example>
-  *    <Foo />
-  *    <Bar />
-  *    <Baz />
-  *  </Example>
-  * ```
-  *
-  * This validator will also allow various permutations of the order.
-  *
-  * ```js
-  *  import { Children } from '@instructure/ui-prop-types'
-  *
-  *  class Example extends Component {
-  *    static propTypes = {
-  *      children: Children.enforceOrder(
-  *        [Foo, Bar, Baz],
-  *        [Foo, Bar],
-  *        [Bar, Baz],
-  *      )
-  *    }
-  *
-  *    render () {
-  *      return <div>{this.props.children}</div>
-  *    }
-  *  }
-  * ```
-  *
-  * This will enforce one of the following:
-  *
-  * ```jsx
-  *  <Example>
-  *    <Foo />
-  *    <Bar />
-  *    <Baz />
-  *  </Example>
-  * ```
-  *
-  *  OR
-  *
-  * ```jsx
-  *  <Example>
-  *    <Foo />
-  *    <Bar />
-  *  </Example>
-  * ```
-  *
-  *  OR
-  *
-  * ```jsx
-  *  <Example>
-  *    <Bar />
-  *    <Baz />
-  *  </Example>
-  * ```
-  *
-  * @param {...Array} validTypeGroups One or more Arrays of valid types
-  * @returns {Error} if validation failed
-  */
-  enforceOrder (...validTypeGroups) {
-    function validateTypes (childNames, typeNames) {
+   *    }
+   *  }
+   * ```
+   *
+   * This will enforce the following:
+   *
+   * ```jsx
+   *  <Example>
+   *    <Foo />
+   *    <Bar />
+   *    <Baz />
+   *  </Example>
+   * ```
+   *
+   * This validator will also allow various permutations of the order.
+   *
+   * ```js
+   *  import { Children } from '@instructure/ui-prop-types'
+   *
+   *  class Example extends Component {
+   *    static propTypes = {
+   *      children: Children.enforceOrder(
+   *        [Foo, Bar, Baz],
+   *        [Foo, Bar],
+   *        [Bar, Baz],
+   *      )
+   *    }
+   *
+   *    render () {
+   *      return <div>{this.props.children}</div>
+   *    }
+   *  }
+   * ```
+   *
+   * This will enforce one of the following:
+   *
+   * ```jsx
+   *  <Example>
+   *    <Foo />
+   *    <Bar />
+   *    <Baz />
+   *  </Example>
+   * ```
+   *
+   *  OR
+   *
+   * ```jsx
+   *  <Example>
+   *    <Foo />
+   *    <Bar />
+   *  </Example>
+   * ```
+   *
+   *  OR
+   *
+   * ```jsx
+   *  <Example>
+   *    <Bar />
+   *    <Baz />
+   *  </Example>
+   * ```
+   *
+   * @param {...Array} validTypeGroups One or more Arrays of valid types
+   * @returns {Error} if validation failed
+   */
+  enforceOrder(...validTypeGroups) {
+    function validateTypes(childNames, typeNames) {
       for (let i = 0; i < childNames.length; i++) {
         if (childNames[i] !== typeNames[i]) {
           return false
@@ -269,11 +283,13 @@ const Children = {
       return true
     }
 
-    function formatGroupTypes (componentName, typeGroups) {
-      return typeGroups.map(types => formatTypes(componentName, types)).join('\n\n')
+    function formatGroupTypes(componentName, typeGroups) {
+      return typeGroups
+        .map((types) => formatTypes(componentName, types))
+        .join('\n\n')
     }
 
-    function formatTypes (componentName, types) {
+    function formatTypes(componentName, types) {
       const children = types
         .map((type) => {
           if (type) {
@@ -282,20 +298,22 @@ const Children = {
             return '??'
           }
         })
-        .map(name => `  <${name} />`)
+        .map((name) => `  <${name} />`)
         .join('\n')
 
       return `<${componentName}>\n${children}\n</${componentName}>`
     }
 
-    function validator (props, propName, componentName) {
-      const childNames = React.Children.toArray(props[propName]).map((child) => {
-        if (child && child.type) {
-          return getDisplayName(child.type)
-        } else if (child) {
-          return null
+    function validator(props, propName, componentName) {
+      const childNames = React.Children.toArray(props[propName]).map(
+        (child) => {
+          if (child && child.type) {
+            return getDisplayName(child.type)
+          } else if (child) {
+            return null
+          }
         }
-      })
+      )
 
       // Validate each group, if any of them are valid we're done
       for (let i = 0; i < validTypeGroups.length; i++) {
@@ -326,19 +344,21 @@ const Children = {
   }
 }
 
- // TODO: Remove when we further break up ui-utils and bringing this in no longer creates
+// TODO: Remove when we further break up ui-utils and bringing this in no longer creates
 // a circular dep
 const getDisplayName = (Component) => {
-  return typeof Component === 'string' ? Component : (Component.displayName || Component.name)
+  return typeof Component === 'string'
+    ? Component
+    : Component.displayName || Component.name
 }
 
 export default Children
 export {
-/**
- * ---
- * category: utilities/PropTypes
- * ---
- * @module Children
- */
+  /**
+   * ---
+   * category: utilities/PropTypes
+   * ---
+   * @module Children
+   */
   Children
 }

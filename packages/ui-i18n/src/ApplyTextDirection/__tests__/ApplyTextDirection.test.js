@@ -31,7 +31,7 @@ import { TextDirectionContext } from '../../TextDirectionContext'
 
 @bidirectional()
 class BidirectionalComponent extends React.Component {
-  render () {
+  render() {
     return <div data-dir={this.dir}>Hello world</div>
   }
 }
@@ -39,9 +39,7 @@ class BidirectionalComponent extends React.Component {
 describe('<ApplyTextDirection />', async () => {
   it('should take on the direction of the document element by default', async () => {
     const subject = await mount(
-      <ApplyTextDirection>
-        Hello world
-      </ApplyTextDirection>
+      <ApplyTextDirection>Hello world</ApplyTextDirection>
     )
 
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('ltr')
@@ -50,10 +48,9 @@ describe('<ApplyTextDirection />', async () => {
   it('should take on the context direction if dir prop is not supplied', async () => {
     const context = TextDirectionContext.makeTextDirectionContext('rtl')
     const subject = await mount(
-      <ApplyTextDirection>
-        Hello world
-      </ApplyTextDirection>
-    , { context })
+      <ApplyTextDirection>Hello world</ApplyTextDirection>,
+      { context }
+    )
 
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('rtl')
   })
@@ -61,10 +58,9 @@ describe('<ApplyTextDirection />', async () => {
   it('should give dir prop preference over context and default document element when supplied', async () => {
     const context = TextDirectionContext.makeTextDirectionContext('rtl')
     const subject = await mount(
-      <ApplyTextDirection dir="ltr">
-        Hello world
-      </ApplyTextDirection>
-    , { context })
+      <ApplyTextDirection dir="ltr">Hello world</ApplyTextDirection>,
+      { context }
+    )
 
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('ltr')
   })
@@ -83,7 +79,6 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('when nested, should override parent ApplyTextDirection context', async () => {
-
     const subject = await mount(
       <ApplyTextDirection dir="rtl">
         <ApplyTextDirection dir="ltr">

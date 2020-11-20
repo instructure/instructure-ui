@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-function getEventFiles (event, inputEl) {
+function getEventFiles(event, inputEl) {
   const dt = event.dataTransfer
 
   if (dt) {

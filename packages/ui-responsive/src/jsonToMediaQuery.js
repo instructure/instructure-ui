@@ -47,7 +47,7 @@ import { px } from '@instructure/ui-utils'
  *  passed to the pixel conversion if the unit type is `em`
  * @returns {string} media query string
  */
-function jsonToMediaQuery (query, el) {
+function jsonToMediaQuery(query, el) {
   // Ensure the query is of the correct form
   const keys = Object.keys(query)
   if (keys.length !== 1) {
@@ -61,7 +61,7 @@ function jsonToMediaQuery (query, el) {
   if (validKeys.indexOf(key) === -1) {
     throw new Error(
       `Invalid key \`${key}\` in query object. Valid keys should consist of one of the following: ` +
-      `${validKeys.join(', ')} (case sensitive)`
+        `${validKeys.join(', ')} (case sensitive)`
     )
   }
 
@@ -72,13 +72,13 @@ function jsonToMediaQuery (query, el) {
   }
 
   if (!value) {
-    throw new Error ('No value supplied for query object')
+    throw new Error('No value supplied for query object')
   }
 
   return `(${hyphenateQueryKey(key.toLowerCase())}: ${px(value, el)}px)`
 }
 
-function hyphenateQueryKey (key) {
+function hyphenateQueryKey(key) {
   return key.slice(0, 3) + '-' + key.slice(3)
 }
 

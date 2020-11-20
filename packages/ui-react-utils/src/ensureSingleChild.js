@@ -39,17 +39,16 @@ import { safeCloneElement } from './safeCloneElement'
  * @param {Object} props - props for child
  * @returns {ReactElement} cloned instance for a single child, or children wrapped in a span
  */
-function ensureSingleChild (child, props = {}) {
+function ensureSingleChild(child, props = {}) {
   const childCount = Children.count(child)
 
   if (childCount === 0) {
     return null
-  } else if ((typeof child === 'string' && child.length > 0) || childCount > 1) {
-    return (
-      <span {...props}>
-        {child}
-      </span>
-    )
+  } else if (
+    (typeof child === 'string' && child.length > 0) ||
+    childCount > 1
+  ) {
+    return <span {...props}>{child}</span>
   } else {
     return safeCloneElement(Array.isArray(child) ? child[0] : child, props)
   }

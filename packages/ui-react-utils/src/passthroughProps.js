@@ -30,15 +30,22 @@ const omit = (originalObject, keys) => {
   const newObject = {}
   for (const key in originalObject) {
     // special case because we always want to omit these and === is faster than concat'ing them in
-    if (key === 'theme' || key === 'children' || key === 'className' || key === 'style') continue
+    if (
+      key === 'theme' ||
+      key === 'children' ||
+      key === 'className' ||
+      key === 'style'
+    )
+      continue
 
-    if (keys.includes(key) || !hasOwnProperty.call(originalObject, key)) continue
+    if (keys.includes(key) || !hasOwnProperty.call(originalObject, key))
+      continue
     newObject[key] = originalObject[key]
   }
   return newObject
 }
 
-function omitProps (props, propTypes, exclude) {
+function omitProps(props, propTypes, exclude) {
   const keys = Object.keys(propTypes || {})
   const combined = exclude ? keys.concat(exclude) : keys
   return omit(props, combined)
@@ -60,18 +67,24 @@ function pick(obj, keys) {
   return res
 }
 
-function pickProps (props, propTypes, include) {
+function pickProps(props, propTypes, include) {
   const keys = Object.keys(propTypes || {})
   const combined = include ? keys.concat(include) : keys
   return pick(props, combined)
 }
 
-function passthroughProps (props) {
+function passthroughProps(props) {
   const validProps = {}
 
   Object.keys(props)
     // style and className need to be explicitly passed through
-    .filter(propName => isPropValid(propName) && propName !== 'style' && propName !== 'className' && propName !== 'children')
+    .filter(
+      (propName) =>
+        isPropValid(propName) &&
+        propName !== 'style' &&
+        propName !== 'className' &&
+        propName !== 'children'
+    )
     .forEach((propName) => {
       validProps[propName] = props[propName]
     })
@@ -79,8 +92,4 @@ function passthroughProps (props) {
   return validProps
 }
 
-export {
-  pickProps,
-  omitProps,
-  passthroughProps
-}
+export { pickProps, omitProps, passthroughProps }

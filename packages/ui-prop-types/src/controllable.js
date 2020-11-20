@@ -49,7 +49,11 @@
  * @param {string} defaultPropName - name of the default prop
  * @returns {Error} if designated prop is supplied without a corresponding handler function
  */
-function controllable (propType, handlerName = 'onChange', defaultPropName = 'defaultValue') {
+function controllable(
+  propType,
+  handlerName = 'onChange',
+  defaultPropName = 'defaultValue'
+) {
   return function (props, propName, componentName) {
     const error = propType.apply(null, arguments)
     if (error) {

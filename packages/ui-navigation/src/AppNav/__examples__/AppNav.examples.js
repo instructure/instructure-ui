@@ -32,13 +32,15 @@ import { AppNav } from '../index'
 export default {
   getComponentProps: (props) => {
     return {
-      screenReaderLabel: "Navigation label",
+      screenReaderLabel: 'Navigation label',
       renderAfterItems: <span>renderAfter content!</span>,
       visibleItemsCount: 3,
       children: [
         <AppNav.Item
           key="1"
-          renderIcon={<IconArcSolid size="medium" color="primary" inline={false} />}
+          renderIcon={
+            <IconArcSolid size="medium" color="primary" inline={false} />
+          }
           renderLabel={<ScreenReaderContent>Arc</ScreenReaderContent>}
           href="http://instructure.design"
         />,

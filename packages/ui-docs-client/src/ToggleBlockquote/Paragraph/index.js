@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 
 class Paragraph extends React.Component {
-
   static propTypes = {
     children: PropTypes.node
   }
@@ -38,7 +37,7 @@ class Paragraph extends React.Component {
 
   static Paragraph = Paragraph
 
-  render () {
+  render() {
     return (
       <View as="div" margin="small 0">
         {this.props.children}

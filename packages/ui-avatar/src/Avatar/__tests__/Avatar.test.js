@@ -28,7 +28,6 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { Avatar } from '../index'
 import { AvatarLocator } from '../AvatarLocator'
 
-
 describe('<Avatar />', async () => {
   describe('for a11y', async () => {
     it('should be accessible', async () => {
@@ -66,15 +65,11 @@ describe('<Avatar />', async () => {
 
   describe('when an image src url is provided', async () => {
     // eslint-disable-next-line max-len
-    const src = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+    const src =
+      'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
     it('should display the image url provided', async () => {
-      await mount(
-        <Avatar
-          name="Foo bar"
-          src={src}
-        />
-      )
+      await mount(<Avatar name="Foo bar" src={src} />)
 
       const avatar = await AvatarLocator.find()
       const image = await avatar.find('img')
@@ -88,11 +83,7 @@ describe('<Avatar />', async () => {
       const onImageLoaded = stub()
 
       await mount(
-        <Avatar
-          name="Foo bar"
-          src={src}
-          onImageLoaded={onImageLoaded}
-        />
+        <Avatar name="Foo bar" src={src} onImageLoaded={onImageLoaded} />
       )
 
       const avatar = await AvatarLocator.find()
@@ -111,7 +102,6 @@ describe('<Avatar />', async () => {
       const avatar = await AvatarLocator.find()
 
       expect(avatar.getAttribute('shape')).to.equal('rectangle')
-
     })
   })
 

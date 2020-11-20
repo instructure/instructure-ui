@@ -38,11 +38,7 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: [
-          'Bar',
-          'Baz',
-          'Qux'
-        ],
+        moduleNames: ['Bar', 'Baz', 'Qux'],
         packageName: 'instructure-ui'
       },
       transform: {
@@ -70,10 +66,7 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: [
-          'children',
-          'render'
-        ],
+        moduleNames: ['children', 'render'],
         packageName: 'anotherpackage'
       },
       transform: {

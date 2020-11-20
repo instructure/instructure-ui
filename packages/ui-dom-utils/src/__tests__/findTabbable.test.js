@@ -40,9 +40,9 @@ describe('findTabbable', async () => {
           <input type="text" value="Yep" readOnly />
           <div>
             <button>Yep</button>
-            <button style={{display: 'none'}}>Nope</button>
+            <button style={{ display: 'none' }}>Nope</button>
           </div>
-          <div style={{width: 0, height: 0}}>
+          <div style={{ width: 0, height: 0 }}>
             <button>Nope</button>
           </div>
         </div>
@@ -58,7 +58,9 @@ describe('findTabbable', async () => {
   describe('tabbable root', async () => {
     it('should search the root node when shouldSearchRootNode is set', async () => {
       const subject = await mount(
-        <button><span>hello</span></button>
+        <button>
+          <span>hello</span>
+        </button>
       )
       expect(findTabbable(subject.getDOMNode()).length).to.equal(0)
       expect(findTabbable(subject.getDOMNode(), true).length).to.equal(1)

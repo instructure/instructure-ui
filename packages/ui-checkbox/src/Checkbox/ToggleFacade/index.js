@@ -59,23 +59,16 @@ class ToggleFacade extends Component {
     labelPlacement: 'end'
   }
 
-  renderIcon () {
+  renderIcon() {
     if (this.props.checked) {
-      return (
-        <IconCheckSolid className={styles.iconSVG} />
-      )
+      return <IconCheckSolid className={styles.iconSVG} />
     } else {
-      return (
-        <IconXSolid className={styles.iconSVG} />
-      )
+      return <IconXSolid className={styles.iconSVG} />
     }
   }
 
-  renderLabel () {
-    const {
-      children,
-      labelPlacement
-    } = this.props
+  renderLabel() {
+    const { children, labelPlacement } = this.props
 
     const classes = {
       [styles.label]: true,
@@ -84,21 +77,11 @@ class ToggleFacade extends Component {
       [styles.end]: labelPlacement === 'end'
     }
 
-    return (
-      <span className={classnames(classes)}>
-        {children}
-      </span>
-    )
+    return <span className={classnames(classes)}>{children}</span>
   }
 
-  render () {
-    const {
-      size,
-      checked,
-      disabled,
-      focused,
-      labelPlacement
-    } = this.props
+  render() {
+    const { size, checked, disabled, focused, labelPlacement } = this.props
 
     const classes = {
       [styles.facade]: true,
@@ -120,12 +103,11 @@ class ToggleFacade extends Component {
 
     return (
       <span className={classnames(rootClasses)}>
-        {(labelPlacement === 'top' || labelPlacement === 'start') && this.renderLabel()}
+        {(labelPlacement === 'top' || labelPlacement === 'start') &&
+          this.renderLabel()}
         <span className={classnames(classes)} aria-hidden="true">
           <span className={styles.icon}>
-            <span className={styles.iconToggle}>
-              {this.renderIcon()}
-            </span>
+            <span className={styles.iconToggle}>{this.renderIcon()}</span>
           </span>
         </span>
         {labelPlacement === 'end' && this.renderLabel()}

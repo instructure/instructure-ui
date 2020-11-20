@@ -70,15 +70,14 @@ const promptChooseHowToCreateComponent = async (args) => {
   }
 
   if (choices.length > 1) {
-    const { createPackage } = await yargsInteractive()
-      .interactive({
-        interactive: { default: true },
-        createPackage: {
-          type: 'list',
-          describe: 'How would you like to create this component?',
-          choices
-        }
-      })
+    const { createPackage } = await yargsInteractive().interactive({
+      interactive: { default: true },
+      createPackage: {
+        type: 'list',
+        describe: 'How would you like to create this component?',
+        choices
+      }
+    })
 
     if (createPackage === createInExistingPackage) {
       promptSelectPackage(args)
@@ -93,21 +92,17 @@ const promptChooseHowToCreateComponent = async (args) => {
 }
 
 const promptSelectPackage = async (args) => {
-  const {
-    packageSource,
-    packages
-  } = args
+  const { packageSource, packages } = args
 
   const back = 'Return to main menu'
-  const { selectedPackage } = await yargsInteractive()
-    .interactive({
-      interactive: { default: true },
-      selectedPackage: {
-        type: 'list',
-        describe: 'Choose a package where the component will be created:',
-        choices: [...packages.map(({ name }) => name), back]
-      }
-    })
+  const { selectedPackage } = await yargsInteractive().interactive({
+    interactive: { default: true },
+    selectedPackage: {
+      type: 'list',
+      describe: 'Choose a package where the component will be created:',
+      choices: [...packages.map(({ name }) => name), back]
+    }
+  })
 
   if (selectedPackage === back) {
     promptChooseHowToCreateComponent(args)
@@ -121,18 +116,18 @@ const promptCreateNewPackage = async (args) => {
   const { name } = args
 
   // Convert component name to hyphen case for suggested package name
-  const generatedPackageName = `ui-${
-    name.replace(/[A-Z]/g, (s, i) => `${i > 0 ? '-' : ''}${s.toLowerCase()}`)
-    }`
+  const generatedPackageName = `ui-${name.replace(
+    /[A-Z]/g,
+    (s, i) => `${i > 0 ? '-' : ''}${s.toLowerCase()}`
+  )}`
 
-  const { inputPackageName } = await yargsInteractive()
-    .interactive({
-      interactive: { default: true },
-      inputPackageName: {
-        type: 'input',
-        describe: `Type the name of the package (or press enter to use '${generatedPackageName}'):`
-      }
-    })
+  const { inputPackageName } = await yargsInteractive().interactive({
+    interactive: { default: true },
+    inputPackageName: {
+      type: 'input',
+      describe: `Type the name of the package (or press enter to use '${generatedPackageName}'):`
+    }
+  })
 
   const packageName = inputPackageName || generatedPackageName
 
@@ -158,13 +153,7 @@ const createPackage = (args) => {
 }
 
 const createComponent = (args) => {
-  const {
-    name,
-    componentTemplate,
-    path: sourcePath,
-    values,
-    version
-  } = args
+  const { name, componentTemplate, path: sourcePath, values, version } = args
 
   handleCreateFromTemplate({
     name,
@@ -174,6 +163,5 @@ const createComponent = (args) => {
   })
 }
 
-const generateValues = ({ values, name, packageName, version }) => typeof values === 'function'
-  ? values({ name, packageName, version })
-  : values
+const generateValues = ({ values, name, packageName, version }) =>
+  typeof values === 'function' ? values({ name, packageName, version }) : values

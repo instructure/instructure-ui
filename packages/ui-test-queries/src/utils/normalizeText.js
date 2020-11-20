@@ -30,6 +30,4 @@ function normalizeText(text, { collapseWhitespace = true, trim = true } = {}) {
   return normalizedText
 }
 
-export {
-  normalizeText
-}
+export { normalizeText }

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 @deprecated('1.0.0', {
   foo: 'bar'
 })

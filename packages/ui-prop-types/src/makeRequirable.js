@@ -22,29 +22,29 @@
  * SOFTWARE.
  */
 
- /**
-  * ---
-  * category: utilities/PropTypes
-  * ---
-  * Given a validator function, extends the validator functionality to also
-  * ensure that the prop has been provided if `.isRequired` is specified.
-  *
-  * ```js
-  * function validator (props, propName, componentName) {
-  *   const propValue = props[propName]
-  *   if (propValue === 'purple') {
-  *     return new Error(`Purple is not accepted in ${componentName}!`)
-  *   }
-  * }
-  *
-  * validator.isRequired = makeRequirable(validator)
-  * ```
-  *
-  * @param {function} validator - a validator function
-  * @returns {Error} if designated prop is not provided
-  */
-function makeRequirable (validator) {
-  return function(props, propName, componentName, ...rest) {
+/**
+ * ---
+ * category: utilities/PropTypes
+ * ---
+ * Given a validator function, extends the validator functionality to also
+ * ensure that the prop has been provided if `.isRequired` is specified.
+ *
+ * ```js
+ * function validator (props, propName, componentName) {
+ *   const propValue = props[propName]
+ *   if (propValue === 'purple') {
+ *     return new Error(`Purple is not accepted in ${componentName}!`)
+ *   }
+ * }
+ *
+ * validator.isRequired = makeRequirable(validator)
+ * ```
+ *
+ * @param {function} validator - a validator function
+ * @returns {Error} if designated prop is not provided
+ */
+function makeRequirable(validator) {
+  return function (props, propName, componentName, ...rest) {
     const propValue = props[propName]
 
     if (propValue === null || typeof propValue === 'undefined') {

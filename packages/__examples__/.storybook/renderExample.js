@@ -28,7 +28,12 @@ import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
 
-export function renderExample({ Component, componentProps, exampleProps, key }) {
+export function renderExample({
+  Component,
+  componentProps,
+  exampleProps,
+  key
+}) {
   return (
     <View
       key={key}
@@ -47,7 +52,8 @@ export function renderExample({ Component, componentProps, exampleProps, key }) 
         placement="bottom"
         on={['click']}
       >
-        <IconButton size="small"
+        <IconButton
+          size="small"
           renderIcon={IconInfoLine}
           screenReaderLabel="props"
         />

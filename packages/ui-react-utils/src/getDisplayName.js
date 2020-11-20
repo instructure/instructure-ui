@@ -34,8 +34,10 @@
  * @param {ReactComponent|String} Component
  * @returns {String} the component displayName
  */
-function getDisplayName (Component) {
-  return typeof Component === 'string' ? Component : (Component.displayName || Component.name)
+function getDisplayName(Component) {
+  return typeof Component === 'string'
+    ? Component
+    : Component.displayName || Component.name
 }
 
 export default getDisplayName

@@ -48,15 +48,19 @@ describe('<Responsive />', async () => {
       </div>
     )
 
-    expect(renderSpy).to.have.been.calledWith(null, ['small', 'medium', 'large'])
+    expect(renderSpy).to.have.been.calledWith(null, [
+      'small',
+      'medium',
+      'large'
+    ])
   })
 
   it('should provide correct props for a given breakpoint', async () => {
     const renderSpy = spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },
-      medium: { options: [1, 2, 3], icons: { edit: true, flag: false }},
-      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId'}
+      medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
+      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
     await mount(
       <div style={{ width: 200 }}>
@@ -82,8 +86,8 @@ describe('<Responsive />', async () => {
     const renderSpy = spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },
-      medium: { options: [1, 2, 3], icons: { edit: true, flag: false }},
-      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId'}
+      medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
+      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
     await mount(
       <Responsive
@@ -100,7 +104,12 @@ describe('<Responsive />', async () => {
       />
     )
 
-    expect(deepEqual(renderSpy.lastCall.args[0], Object.assign({...props.medium}, {...props.large}))).to.be.true()
+    expect(
+      deepEqual(
+        renderSpy.lastCall.args[0],
+        Object.assign({ ...props.medium }, { ...props.large })
+      )
+    ).to.be.true()
   })
 
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
@@ -109,7 +118,11 @@ describe('<Responsive />', async () => {
       <div style={{ width: 200 }}>
         <Responsive
           props={{
-            small: { withBorder: false, background: 'transparent', labeledBy: 'fakeId' },
+            small: {
+              withBorder: false,
+              background: 'transparent',
+              labeledBy: 'fakeId'
+            },
             medium: { background: 'solid', border: 'dashed', text: 'hello' }
           }}
           query={{
@@ -129,8 +142,7 @@ describe('<Responsive />', async () => {
       'which are currently applied at the same time. Its current value, `transparent`,',
       'will be overwritten as `solid`.'
     ].join(' ')
-    expect(consoleError)
-      .to.be.calledWith(warning)
+    expect(consoleError).to.be.calledWith(warning)
   })
 
   it('should call render prop only once', async () => {

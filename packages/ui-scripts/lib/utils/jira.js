@@ -36,7 +36,7 @@ const {
 
 let JIRA
 
-function jiraClient (config = {}) {
+function jiraClient(config = {}) {
   if (!JIRA) {
     JIRA = new Jira({
       host: config.jira_host,
@@ -52,7 +52,7 @@ function jiraClient (config = {}) {
   return JIRA
 }
 
-function hasJiraConfig (config = {}) {
+function hasJiraConfig(config = {}) {
   const { jira_project_id, jira_project_key } = config
 
   const hasConfig = jira_project_id && jira_project_key
@@ -60,38 +60,36 @@ function hasJiraConfig (config = {}) {
   info(`jira_project_key: '${jira_project_key}'`)
   info(`jira_project_id: '${jira_project_id}'`)
 
-  const hasEnv = JIRA_PEM_PATH &&
-    JIRA_TOKEN &&
-    JIRA_CONSUMER_KEY &&
-    JIRA_SECRET
+  const hasEnv = JIRA_PEM_PATH && JIRA_TOKEN && JIRA_CONSUMER_KEY && JIRA_SECRET
 
   if (!hasEnv) {
     info(`Skipping Jira update.\
 Set ENV the following environment variables to enable:\
-JIRA_PEM_PATH, JIRA_TOKEN, JIRA_CONSUMER_KEY, JIRA_SECRET`
-    )
+JIRA_PEM_PATH, JIRA_TOKEN, JIRA_CONSUMER_KEY, JIRA_SECRET`)
   }
 
   return hasConfig && hasEnv
 }
 exports.hasJiraConfig = hasJiraConfig
 
-async function findJiraVersion (jiraVersionName, config = {}) {
+async function findJiraVersion(jiraVersionName, config = {}) {
   let result = []
 
   try {
-    info(`Looking for ${jiraVersionName} in Jira project: ${config.jira_project_key}...`)
+    info(
+      `Looking for ${jiraVersionName} in Jira project: ${config.jira_project_key}...`
+    )
     result = await jiraClient(config).getVersions(config.jira_project_key)
   } catch (e) {
     error(`Could not get Jira versions for project: ${config.jira_project_key}`)
     error(e)
   }
 
-  return result[result.findIndex(version => version.name === jiraVersionName)]
+  return result[result.findIndex((version) => version.name === jiraVersionName)]
 }
 exports.findJiraVersion = findJiraVersion
 
-async function getJiraVersion (jiraVersionName, config = {}) {
+async function getJiraVersion(jiraVersionName, config = {}) {
   let version = await findJiraVersion(jiraVersionName, config)
   if (version && version.id) {
     info(`Found ${version.name}:`, JSON.stringify(version))
@@ -103,13 +101,15 @@ async function getJiraVersion (jiraVersionName, config = {}) {
 }
 exports.getJiraVersion = getJiraVersion
 
-async function createJiraVersion (jiraVersionName, config = {}) {
+async function createJiraVersion(jiraVersionName, config = {}) {
   let result = {
     name: jiraVersionName
   }
 
   try {
-    info(`Creating ${jiraVersionName} in Jira project: ${config.jira_project_id}...`)
+    info(
+      `Creating ${jiraVersionName} in Jira project: ${config.jira_project_id}...`
+    )
     result = await jiraClient(config).createVersion({
       name: `${jiraVersionName}`,
       archived: false,
@@ -141,8 +141,9 @@ async function createJiraVersion (jiraVersionName, config = {}) {
 }
 exports.createJiraVersion = createJiraVersion
 
-async function updateJiraIssues (issueKeys, jiraVersionName, config) {
-  await Promise.all(issueKeys.map((issueKey) => {
+async function updateJiraIssues(issueKeys, jiraVersionName, config) {
+  await Promise.all(
+    issueKeys.map((issueKey) => {
       let result
       try {
         result = jiraClient(config).updateIssue(issueKey, {
@@ -157,8 +158,13 @@ async function updateJiraIssues (issueKeys, jiraVersionName, config) {
       }
 
       return result
-  }))
+    })
+  )
 
-  info(`Updated ${issueKeys.join(', ')} to reflect the fix version: ${jiraVersionName}.`)
+  info(
+    `Updated ${issueKeys.join(
+      ', '
+    )} to reflect the fix version: ${jiraVersionName}.`
+  )
 }
 exports.updateJiraIssues = updateJiraIssues

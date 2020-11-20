@@ -22,16 +22,26 @@
  * SOFTWARE.
  */
 
-module.exports = function autoCompleteQuestions (questions) {
-  return questions.map(question => Object.assign(question, question.type === 'autocomplete' ? {
-    source: autoCompleteSource(question.choices),
-  } : {}))
+module.exports = function autoCompleteQuestions(questions) {
+  return questions.map((question) =>
+    Object.assign(
+      question,
+      question.type === 'autocomplete'
+        ? {
+            source: autoCompleteSource(question.choices)
+          }
+        : {}
+    )
+  )
 }
 
-function autoCompleteSource (options) {
+function autoCompleteSource(options) {
   return (answersSoFar, input) => {
     return new Promise((resolve) => {
-      const matches = options.filter(({ name }) => (!input || name.toLowerCase().indexOf(input.toLowerCase()) === 0))
+      const matches = options.filter(
+        ({ name }) =>
+          !input || name.toLowerCase().indexOf(input.toLowerCase()) === 0
+      )
       resolve(matches)
     })
   }

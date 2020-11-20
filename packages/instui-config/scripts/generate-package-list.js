@@ -38,7 +38,9 @@ try {
   // Use that version to determine where the generated package list should live
   const pkgListDir = `v${semver.coerce(semver.inc(version, 'major')).major}`
 
-  generatePackageList({ outputDir: path.join(process.cwd(), 'package-lists', pkgListDir )})
+  generatePackageList({
+    outputDir: path.join(process.cwd(), 'package-lists', pkgListDir)
+  })
 } catch (err) {
   error(err)
   process.exit(1)

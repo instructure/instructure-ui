@@ -25,29 +25,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { EmotionThemeProvider } from "@instructure/emotion"
-import { canvas } from "@instructure/ui-themes"
+import { EmotionThemeProvider } from '@instructure/emotion'
+import { canvas } from '@instructure/ui-themes'
 
 import { App } from './KitchenSink'
 import { Figure } from './Figure'
 import { Guidelines } from './Guidelines'
 import { ToggleBlockquote } from './ToggleBlockquote'
 
-
-
-function renderDocsClient (data, element) {
+function renderDocsClient(data, element) {
   ReactDOM.render(
     <EmotionThemeProvider theme={canvas}>
       <App {...data} />
-    </EmotionThemeProvider>
-  , element)
+    </EmotionThemeProvider>,
+    element
+  )
 }
 
-export {
-  renderDocsClient,
-  Figure,
-  Guidelines,
-  ToggleBlockquote
-}
+export { renderDocsClient, Figure, Guidelines, ToggleBlockquote }
 
 export default renderDocsClient

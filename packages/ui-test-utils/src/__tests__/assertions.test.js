@@ -38,16 +38,17 @@ describe('assertions', async () => {
         </div>
       )
 
-      expect(within(subject.getDOMNode()))
-        .to.have.text('Currently showing: Step 1 of 4')
+      expect(within(subject.getDOMNode())).to.have.text(
+        'Currently showing: Step 1 of 4'
+      )
     })
 
     it('matches elements by matching their text across adjacent text nodes', async () => {
       const div = document.createElement('div')
       const textNodeContent = ['£', '24', '.', '99']
       textNodeContent
-        .map(text => document.createTextNode(text))
-        .forEach(textNode => div.appendChild(textNode))
+        .map((text) => document.createTextNode(text))
+        .forEach((textNode) => div.appendChild(textNode))
 
       const subject = await mount(<div />)
       subject.getDOMNode().appendChild(div)
@@ -85,7 +86,9 @@ describe('assertions', async () => {
     it('matches an element that has a class', async () => {
       await mount(
         <div className="foo bar" id="foo">
-          <div className="bar" id="bar">Hello</div>
+          <div className="bar" id="bar">
+            Hello
+          </div>
         </div>
       )
 
@@ -134,7 +137,9 @@ describe('assertions', async () => {
             <input id="first" />
           </div>
           <div>
-            <label htmlFor="last"><span>Last name</span></label>
+            <label htmlFor="last">
+              <span>Last name</span>
+            </label>
             <input id="last" />
           </div>
         </div>
@@ -155,7 +160,12 @@ describe('assertions', async () => {
     })
 
     it('matches an input nested in a label', async () => {
-      await mount(<label>Name<input /></label>)
+      await mount(
+        <label>
+          Name
+          <input />
+        </label>
+      )
       expect(await find('input')).to.have.label('Name')
     })
 
@@ -173,7 +183,9 @@ describe('assertions', async () => {
       await mount(
         <fieldset>
           <legend>Full name</legend>
-          <label>First name <input type="text"/></label>
+          <label>
+            First name <input type="text" />
+          </label>
         </fieldset>
       )
       expect(await find('fieldset')).to.have.label('Full name')
@@ -221,7 +233,7 @@ describe('assertions', async () => {
       expect(await find('input')).to.have.attribute('type')
     })
     it('can find an element by attribute name and value', async () => {
-      await mount(<input type="text"/>)
+      await mount(<input type="text" />)
       expect(await find('input')).to.have.attribute('type', 'text')
     })
   })
@@ -230,15 +242,17 @@ describe('assertions', async () => {
     it('matches an input with a matching parent element', async () => {
       await mount(
         <form>
-          <input type="text"/>
+          <input type="text" />
         </form>
       )
-      expect(await find('input')).to.have.exactly(1).ancestors('form')
+      expect(await find('input'))
+        .to.have.exactly(1)
+        .ancestors('form')
     })
     it('does not include the element itself', async () => {
       await mount(
         <form>
-          <input type="text"/>
+          <input type="text" />
         </form>
       )
       expect(await find('input')).to.not.have.ancestors('input')
@@ -249,15 +263,17 @@ describe('assertions', async () => {
     it('matches an input with a matching parent element', async () => {
       await mount(
         <form>
-          <input type="text"/>
+          <input type="text" />
         </form>
       )
-      expect(await find('input')).to.have.exactly(1).parents('form')
+      expect(await find('input'))
+        .to.have.exactly(1)
+        .parents('form')
     })
     it('does not include the element itself', async () => {
       await mount(
         <form>
-          <input type="text"/>
+          <input type="text" />
         </form>
       )
       expect(await find('input')).to.not.have.parents('input')
@@ -268,12 +284,14 @@ describe('assertions', async () => {
     it('matches an element with matching children', async () => {
       await mount(
         <form>
-          <input type="text"/>
-          <input type="text"/>
-          <input type="text"/>
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
         </form>
       )
-      expect(await find('form')).to.have.exactly(3).descendants('input')
+      expect(await find('form'))
+        .to.have.exactly(3)
+        .descendants('input')
     })
     it('does not include the element itself', async () => {
       await mount(
@@ -288,9 +306,7 @@ describe('assertions', async () => {
                         <table>
                           <tbody>
                             <tr>
-                              <td>
-                                I am so nested!
-                              </td>
+                              <td>I am so nested!</td>
                             </tr>
                           </tbody>
                         </table>
@@ -303,7 +319,9 @@ describe('assertions', async () => {
           </tbody>
         </table>
       )
-      expect(await find('table')).to.have.exactly(2).descendants('table')
+      expect(await find('table'))
+        .to.have.exactly(2)
+        .descendants('table')
     })
   })
 
@@ -311,12 +329,14 @@ describe('assertions', async () => {
     it('matches an element with matching children', async () => {
       await mount(
         <form>
-          <input type="text"/>
-          <input type="text"/>
-          <input type="text"/>
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
         </form>
       )
-      expect(await find('form')).to.have.exactly(3).children('input')
+      expect(await find('form'))
+        .to.have.exactly(3)
+        .children('input')
     })
     it('does not include the element itself', async () => {
       await mount(
@@ -331,9 +351,7 @@ describe('assertions', async () => {
                         <table>
                           <tbody>
                             <tr>
-                              <td>
-                                I am so nested!
-                              </td>
+                              <td>I am so nested!</td>
                             </tr>
                           </tbody>
                         </table>
@@ -346,7 +364,9 @@ describe('assertions', async () => {
           </tbody>
         </table>
       )
-      expect(await find('table')).to.have.exactly(2).children('table')
+      expect(await find('table'))
+        .to.have.exactly(2)
+        .children('table')
     })
   })
 })

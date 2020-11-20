@@ -37,14 +37,14 @@ import { requestAnimationFrame } from './requestAnimationFrame'
  * @param {function} handler - function to run if the position has changed
  * @returns {function} remove - cancel the listener and no longer execute the handler function
  */
-function addPositionChangeListener (el, handler) {
+function addPositionChangeListener(el, handler) {
   const node = findDOMNode(el)
   const raf = []
 
   let coords = getBoundingClientRect(node) || {}
   let cancelled = false
 
-  function checkPosition () {
+  function checkPosition() {
     if (cancelled === false) {
       const newCoords = getBoundingClientRect(node) || {}
       const positionChanged =
@@ -68,9 +68,9 @@ function addPositionChangeListener (el, handler) {
   checkPosition()
 
   return {
-    remove () {
+    remove() {
       cancelled = true
-      raf.forEach(req => req.cancel())
+      raf.forEach((req) => req.cancel())
     }
   }
 }

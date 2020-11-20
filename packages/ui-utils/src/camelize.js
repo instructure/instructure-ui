@@ -38,8 +38,8 @@
  *
  * @param {String} str
  * @returns {String} Returns camel cased string
-*/
-function camelize (str) {
+ */
+function camelize(str) {
   return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
 }
 

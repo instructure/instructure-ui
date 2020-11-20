@@ -46,7 +46,9 @@ export function parseQueryArguments(...args) {
   })
 
   if (selector && (selector.includes('div') || selector.includes('span'))) {
-    throw new Error(`[ui-test-queries] Selectors should only include semantic elements (not 'div' or 'span'): ${selector}`)
+    throw new Error(
+      `[ui-test-queries] Selectors should only include semantic elements (not 'div' or 'span'): ${selector}`
+    )
   }
 
   return { element, selector, options }

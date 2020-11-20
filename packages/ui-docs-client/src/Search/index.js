@@ -73,15 +73,16 @@ class Search extends Component {
     })
   }
 
-  getOptionById (queryId) {
+  getOptionById(queryId) {
     return this.state.filteredOptions.find(({ id }) => id === queryId)
   }
 
   filterOptions = (value) => {
-    return this._options.filter(option => (
-      option.label.toLowerCase().includes(value.toLowerCase())
-      || option.tags && option.tags.toString().includes(value.toLowerCase())
-    ))
+    return this._options.filter(
+      (option) =>
+        option.label.toLowerCase().includes(value.toLowerCase()) ||
+        (option.tags && option.tags.toString().includes(value.toLowerCase()))
+    )
   }
 
   handleClearInput = (event) => {
@@ -125,16 +126,19 @@ class Search extends Component {
   handleSelectOption = (event, { id }) => {
     const option = this.getOptionById(id)
     if (!option) return // prevent selecting of empty option
-    this.setState({
-      selectedOptionId: id,
-      selectedOptionLabel: option.label,
-      inputValue: option.label,
-      isShowingOptions: false,
-      announcement: `${option.label} selected. List collapsed.`,
-      filteredOptions: [this.getOptionById(id)]
-    }, () => {
-      window.location = option.value
-    })
+    this.setState(
+      {
+        selectedOptionId: id,
+        selectedOptionLabel: option.label,
+        inputValue: option.label,
+        isShowingOptions: false,
+        announcement: `${option.label} selected. List collapsed.`,
+        filteredOptions: [this.getOptionById(id)]
+      },
+      () => {
+        window.location = option.value
+      }
+    )
   }
 
   handleInputChange = (event) => {
@@ -148,7 +152,7 @@ class Search extends Component {
         isShowingOptions: true,
         selectedOptionId: null,
         selectedOptionLabel: null,
-        filteredOptions: [],
+        filteredOptions: []
       })
     } else {
       this.setState({
@@ -171,22 +175,21 @@ class Search extends Component {
     }
   }
 
-  renderEmptyOption () {
+  renderEmptyOption() {
     const withValue = this.state.inputValue !== ''
     return (
       <Select.Option id="empty-option" key="empty-option">
         {this.state.isLoading
           ? 'Searching...'
-          : withValue ? 'Sorry! No matches were found.' : 'Type to search'}
+          : withValue
+          ? 'Sorry! No matches were found.'
+          : 'Type to search'}
       </Select.Option>
     )
   }
 
-  renderGroups (options) {
-    const {
-      highlightedOptionId,
-      selectedOptionId
-    } = this.state
+  renderGroups(options) {
+    const { highlightedOptionId, selectedOptionId } = this.state
 
     // define group order
     const groups = {
@@ -217,26 +220,24 @@ class Search extends Component {
       }
     })
 
-    return (
-      Object.keys(groups).map((group) => (
-        <Select.Group renderLabel={group} key={group}>
-          {groups[group].map(({ id, value, label, disabled }) => (
-            <Select.Option
-              id={id}
-              key={id}
-              isHighlighted={id === highlightedOptionId}
-              isSelected={id === selectedOptionId}
-              isDisabled={disabled}
-            >
-              { label }
-            </Select.Option>
-          ))}
-        </Select.Group>
-      ))
-    )
+    return Object.keys(groups).map((group) => (
+      <Select.Group renderLabel={group} key={group}>
+        {groups[group].map(({ id, value, label, disabled }) => (
+          <Select.Option
+            id={id}
+            key={id}
+            isHighlighted={id === highlightedOptionId}
+            isSelected={id === selectedOptionId}
+            isDisabled={disabled}
+          >
+            {label}
+          </Select.Option>
+        ))}
+      </Select.Group>
+    ))
   }
 
-  render () {
+  render() {
     const {
       inputValue,
       isShowingOptions,
@@ -251,7 +252,9 @@ class Search extends Component {
       <div>
         <Select
           size="large"
-          renderLabel={<ScreenReaderContent>Search Instructure UI</ScreenReaderContent>}
+          renderLabel={
+            <ScreenReaderContent>Search Instructure UI</ScreenReaderContent>
+          }
           placeholder="Search Instructure UI"
           assistiveText="Type to search"
           inputValue={inputValue}
@@ -264,34 +267,34 @@ class Search extends Component {
           onRequestSelectOption={this.handleSelectOption}
           shouldNotWrap
           renderBeforeInput={
-            <SearchStatus
-              status={isLoading ? 'active' : 'inactive'}
-            />
+            <SearchStatus status={isLoading ? 'active' : 'inactive'} />
           }
           renderAfterInput={
-            withValue ?
-            <IconButton
-              size="small"
-              withBackground={false}
-              withBorder={false}
-              screenReaderLabel="Clear search"
-              onClick={this.handleClearInput}
-            >
-              <IconTroubleLine />
-            </IconButton> : <span />
+            withValue ? (
+              <IconButton
+                size="small"
+                withBackground={false}
+                withBorder={false}
+                screenReaderLabel="Clear search"
+                onClick={this.handleClearInput}
+              >
+                <IconTroubleLine />
+              </IconButton>
+            ) : (
+              <span />
+            )
           }
         >
           {filteredOptions.length > 0
             ? this.renderGroups(filteredOptions)
-            : this.renderEmptyOption()
-          }
+            : this.renderEmptyOption()}
         </Select>
         <Alert
           liveRegion={() => document.getElementById('flash-messages')}
           liveRegionPoliteness="assertive"
           screenReaderOnly
         >
-          { announcement }
+          {announcement}
         </Alert>
       </div>
     )

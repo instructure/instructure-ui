@@ -26,23 +26,43 @@ import { alpha, darken } from '@instructure/ui-color-utils'
 
 const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
 
-const generateButtonThemeVars = ({ style, textColor, ghostTextColor, backgroundColor, borderColor, ghostBorderColor = borderColor }) => ({
+const generateButtonThemeVars = ({
+  style,
+  textColor,
+  ghostTextColor,
+  backgroundColor,
+  borderColor,
+  ghostBorderColor = borderColor
+}) => ({
   [`${style}Color`]: textColor,
   [`${style}BorderColor`]: darken(borderColor, 10),
   [`${style}Background`]: backgroundColor,
   [`${style}HoverBackground`]: darken(backgroundColor, 10),
   [`${style}ActiveBackground`]: darken(backgroundColor, 10),
-  [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(borderColor, 20, 0.45)}`,
+  [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(
+    borderColor,
+    20,
+    0.45
+  )}`,
 
   [`${style}GhostColor`]: ghostTextColor,
   [`${style}GhostBorderColor`]: ghostBorderColor,
   [`${style}GhostBackground`]: 'transparent',
   [`${style}GhostHoverBackground`]: alpha(ghostTextColor, 10),
   [`${style}GhostActiveBackground`]: 'transparent',
-  [`${style}GhostActiveBoxShadow`]: `${activeShadow} ${alpha(ghostBorderColor, 28)}`,
+  [`${style}GhostActiveBoxShadow`]: `${activeShadow} ${alpha(
+    ghostBorderColor,
+    28
+  )}`
 })
 
-export default function generator({ borders = {}, colors = {}, forms = {}, spacing = {}, typography = {} } = {}) {
+export default function generator({
+  borders = {},
+  colors = {},
+  forms = {},
+  spacing = {},
+  typography = {}
+} = {}) {
   return {
     transform: 'none',
     hoverTransform: 'none',
@@ -123,10 +143,13 @@ export default function generator({ borders = {}, colors = {}, forms = {}, spaci
     primaryInverseBorderColor: darken(colors.borderLight, 10),
     primaryInverseHoverBackground: darken(colors.backgroundLightest, 5),
     primaryInverseActiveBackground: colors.backgroundLightest,
-    primaryInverseActiveBoxShadow: `${activeShadow} ${darken(colors.borderLightest, 25)}`,
+    primaryInverseActiveBoxShadow: `${activeShadow} ${darken(
+      colors.borderLightest,
+      25
+    )}`,
 
     // Overrides for ghost hover states to ensure correct color contrast for a11y
-    successGhostHoverBackground: alpha(colors.textSuccess, 1),
+    successGhostHoverBackground: alpha(colors.textSuccess, 1)
   }
 }
 
@@ -139,11 +162,16 @@ generator['canvas'] = function ({ colors, ...variables }) {
       textColor: variables['ic-brand-button--primary-text'],
       ghostTextColor: variables['ic-brand-button--primary-bgd']
     }),
-    primaryGhostHoverBackground: alpha(variables['ic-brand-button--primary-bgd'], 10)
+    primaryGhostHoverBackground: alpha(
+      variables['ic-brand-button--primary-bgd'],
+      10
+    )
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
+  colors
+}) {
   return {
     secondaryBorderColor: colors.borderMedium,
     primaryInverseBorderColor: colors.borderMedium

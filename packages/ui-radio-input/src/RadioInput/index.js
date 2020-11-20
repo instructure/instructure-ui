@@ -44,10 +44,7 @@ category: components
 class RadioInput extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     id: PropTypes.string,
     name: PropTypes.string,
     checked: PropTypes.bool,
@@ -82,7 +79,7 @@ class RadioInput extends Component {
     value: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {}
@@ -116,23 +113,25 @@ class RadioInput extends Component {
     this.props.onChange(e)
   }
 
-  focus () {
+  focus() {
     this._input.focus()
   }
 
-  get id () {
+  get id() {
     return this.props.id || this._defaultId
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._input)
   }
 
-  get checked () {
-    return (typeof this.props.checked === 'undefined') ? this.state.checked : this.props.checked
+  get checked() {
+    return typeof this.props.checked === 'undefined'
+      ? this.state.checked
+      : this.props.checked
   }
 
-  render () {
+  render() {
     const {
       disabled,
       readOnly,
@@ -161,7 +160,9 @@ class RadioInput extends Component {
         <input
           {...props}
           id={this.id}
-          ref={(c) => { this._input = c }}
+          ref={(c) => {
+            this._input = c
+          }}
           value={value}
           name={name}
           checked={this.checked}
@@ -174,9 +175,7 @@ class RadioInput extends Component {
         />
         <label className={styles.control} htmlFor={this.id}>
           <span className={styles.facade} aria-hidden="true" />
-          <span className={styles.label}>
-            {label}
-          </span>
+          <span className={styles.label}>{label}</span>
         </label>
       </div>
     )

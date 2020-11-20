@@ -52,25 +52,26 @@ category: components
 class TimeSelect extends Component {
   static propTypes = {
     /**
-    * The form field label.
-    */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * The form field label.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
      * Whether to default to the first option when `defaultValue` hasn't been specified.
      */
     defaultToFirstOption: PropTypes.bool,
     /**
-    * An ISO 8601 formatted date string representing the current selected value. If defined,
-    * the component will act controlled and will not manage its own state.
-    */
+     * An ISO 8601 formatted date string representing the current selected value. If defined,
+     * the component will act controlled and will not manage its own state.
+     */
     value: controllable(I18nPropTypes.iso8601, 'onChange'),
     /**
      * An ISO 8601 formatted date string to use if `value` isn't provided.
      */
     defaultValue: I18nPropTypes.iso8601,
     /**
-    * The id of the text input. One is generated if not supplied.
-    */
+     * The id of the text input. One is generated if not supplied.
+     */
     id: PropTypes.string,
     /**
      * The format to use when displaying the possible and currently selected options.
@@ -83,99 +84,99 @@ class TimeSelect extends Component {
      */
     step: PropTypes.oneOf([5, 10, 15, 20, 30, 60]),
     /**
-    * Specifies if interaction with the input is enabled, disabled, or readonly.
-    * When "disabled", the input changes visibly to indicate that it cannot
-    * receive user interactions. When "readonly" the input still cannot receive
-    * user interactions but it keeps the same styles as if it were enabled.
-    */
+     * Specifies if interaction with the input is enabled, disabled, or readonly.
+     * When "disabled", the input changes visibly to indicate that it cannot
+     * receive user interactions. When "readonly" the input still cannot receive
+     * user interactions but it keeps the same styles as if it were enabled.
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
-    * Html placeholder text to display when the input has no value. This should
-    * be hint text, not a label replacement.
-    */
+     * Html placeholder text to display when the input has no value. This should
+     * be hint text, not a label replacement.
+     */
     placeholder: PropTypes.string,
     /**
-    * Whether or not the text input is required.
-    */
+     * Whether or not the text input is required.
+     */
     isRequired: PropTypes.bool,
     /**
-    * Whether the input is rendered inline with other elements or if it
-    * is rendered as a block level element.
-    */
+     * Whether the input is rendered inline with other elements or if it
+     * is rendered as a block level element.
+     */
     isInline: PropTypes.bool,
     /**
-    * The width of the text input.
-    */
+     * The width of the text input.
+     */
     width: PropTypes.string,
     /**
-    * The max width the options list can be before option text wraps. If not
-    * set, the list will only display as wide as the text input.
-    */
+     * The max width the options list can be before option text wraps. If not
+     * set, the list will only display as wide as the text input.
+     */
     optionsMaxWidth: PropTypes.string,
     /**
-    * The number of options that should be visible before having to scroll.
-    */
+     * The number of options that should be visible before having to scroll.
+     */
     visibleOptionsCount: PropTypes.number,
     /**
-    * Displays messages and validation for the input. It should be an object
-    * with the following shape:
-    * `{
-    *   text: PropTypes.string,
-    *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    * }`
-    */
+     * Displays messages and validation for the input. It should be an object
+     * with the following shape:
+     * `{
+     *   text: PropTypes.string,
+     *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     * }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * The placement of the options list.
-    */
+     * The placement of the options list.
+     */
     placement: PositionPropTypes.placement,
     /**
-    * The parent in which to constrain the placement.
-    */
+     * The parent in which to constrain the placement.
+     */
     constrain: PositionPropTypes.constrain,
     /**
-    * Callback fired when a new option is selected.
-    * @param {Object} event - the event object
-    * @param {Object} data - additional data
-    * @param data.value - the value of selected option
-    */
+     * Callback fired when a new option is selected.
+     * @param {Object} event - the event object
+     * @param {Object} data - additional data
+     * @param data.value - the value of selected option
+     */
     onChange: PropTypes.func,
     /**
-    * Callback fired when text input receives focus.
-    */
+     * Callback fired when text input receives focus.
+     */
     onFocus: PropTypes.func,
     /**
-    * Callback fired when text input loses focus.
-    */
+     * Callback fired when text input loses focus.
+     */
     onBlur: PropTypes.func,
     /**
-    * Callback fired when the options list is shown.
-    */
+     * Callback fired when the options list is shown.
+     */
     onShowOptions: PropTypes.func,
     /**
-    * Callback fired when the options list is hidden.
-    */
+     * Callback fired when the options list is hidden.
+     */
     onHideOptions: PropTypes.func,
     /**
-    * A ref to the html `input` element.
-    */
+     * A ref to the html `input` element.
+     */
     inputRef: PropTypes.func,
     /**
-    * A ref to the html `ul` element.
-    */
+     * A ref to the html `ul` element.
+     */
     listRef: PropTypes.func,
     /**
-    * Content to display in the list when no options are available.
-    */
+     * Content to display in the list when no options are available.
+     */
     renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display before the text input. This will commonly be an icon.
-    */
+     * Content to display before the text input. This will commonly be an icon.
+     */
     renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display after the text input. This content will replace the
-    * default arrow icons.
-    */
+     * Content to display after the text input. This content will replace the
+     * default arrow icons.
+     */
     renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 
     /* eslint-disable react/require-default-props */
@@ -205,9 +206,9 @@ class TimeSelect extends Component {
      */
     timezone: PropTypes.string,
     /**
-    * __Deprecated - use `renderLabel`__
-    */
-    label: PropTypes.node,
+     * __Deprecated - use `renderLabel`__
+     */
+    label: PropTypes.node
     /* eslint-enable react/require-default-props */
   }
 
@@ -245,34 +246,34 @@ class TimeSelect extends Component {
     timezone: PropTypes.string
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = this.getInitialState()
   }
 
   _emptyOptionId = uid('Select-EmptyOption')
 
-  focus () {
+  focus() {
     this._select && this._select.focus()
   }
 
-  get isControlled () {
+  get isControlled() {
     return typeof this.props.value !== 'undefined'
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
-  get focused () {
+  get focused() {
     return this._select && this._select.focused
   }
 
-  get id () {
+  get id() {
     return this._select && this._select.id
   }
 
-  locale () {
+  locale() {
     if (this.props.locale) {
       return this.props.locale
     } else if (this.context && this.context.locale) {
@@ -281,7 +282,7 @@ class TimeSelect extends Component {
     return Locale.browserLocale()
   }
 
-  timezone () {
+  timezone() {
     if (this.props.timezone) {
       return this.props.timezone
     } else if (this.context && this.context.timezone) {
@@ -290,13 +291,15 @@ class TimeSelect extends Component {
     return DateTime.browserTimeZone()
   }
 
-  componentDidUpdate (prevProps) {
-    if (this.props.step !== prevProps.step ||
-      this.props.format !== prevProps.format) {
-        // options change, reset everything
-        // when controlled, selection will be preserved
-        // when uncontrolled, selection will be lost
-        this.setState(this.getInitialState())
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.step !== prevProps.step ||
+      this.props.format !== prevProps.format
+    ) {
+      // options change, reset everything
+      // when controlled, selection will be preserved
+      // when uncontrolled, selection will be lost
+      this.setState(this.getInitialState())
     }
 
     if (this.props.value !== prevProps.value) {
@@ -313,7 +316,7 @@ class TimeSelect extends Component {
     }
   }
 
-  getInitialState () {
+  getInitialState() {
     const initialOptions = this.generateOptions()
     const initialSelection = this.getInitialOption(initialOptions)
 
@@ -327,7 +330,7 @@ class TimeSelect extends Component {
     }
   }
 
-  getInitialOption (options) {
+  getInitialOption(options) {
     const { value, defaultValue, defaultToFirstOption, format } = this.props
     const initialValue = value || defaultValue
 
@@ -350,18 +353,18 @@ class TimeSelect extends Component {
     return null
   }
 
-  getOption (field, value, options = this.state.options) {
+  getOption(field, value, options = this.state.options) {
     return options.find((option) => option[field] === value)
   }
 
-  getFormattedId (date) {
+  getFormattedId(date) {
     // ISO8601 strings may contain a space. Remove any spaces before using the
     // date as the id.
     const dateStr = date.toISOString()
-    return dateStr ? dateStr.replace(/\s/g,'') : null
+    return dateStr ? dateStr.replace(/\s/g, '') : null
   }
 
-  getBaseDate () {
+  getBaseDate() {
     let baseDate
     const baseValue = this.props.value || this.props.defaultValue
     if (baseValue) {
@@ -372,7 +375,7 @@ class TimeSelect extends Component {
     return baseDate.second(0).millisecond(0)
   }
 
-  generateOptions () {
+  generateOptions() {
     const date = this.getBaseDate()
     const options = []
 
@@ -391,13 +394,13 @@ class TimeSelect extends Component {
     return options
   }
 
-  filterOptions (inputValue) {
-    return this.state.options.filter(option => (
+  filterOptions(inputValue) {
+    return this.state.options.filter((option) =>
       option.label.toLowerCase().startsWith(inputValue.toLowerCase())
-    ))
+    )
   }
 
-  matchValue () {
+  matchValue() {
     const {
       inputValue,
       filteredOptions,
@@ -438,7 +441,9 @@ class TimeSelect extends Component {
     }
   }
 
-  handleRef = (node) => { this._select = node }
+  handleRef = (node) => {
+    this._select = node
+  }
 
   handleBlur = (event) => {
     this.setState({ highlightedOptionId: null })
@@ -472,7 +477,11 @@ class TimeSelect extends Component {
     let prevValue = ''
 
     if (this.props.defaultValue) {
-      const date = DateTime.parse(this.props.defaultValue, this.locale(), this.timezone())
+      const date = DateTime.parse(
+        this.props.defaultValue,
+        this.locale(),
+        this.timezone()
+      )
       prevValue = date.format(this.props.format)
     }
 
@@ -526,7 +535,7 @@ class TimeSelect extends Component {
     this.props.onHideOptions(event)
   }
 
-  renderOptions () {
+  renderOptions() {
     const {
       filteredOptions,
       highlightedOptionId,
@@ -552,7 +561,7 @@ class TimeSelect extends Component {
     })
   }
 
-  renderEmptyOption () {
+  renderEmptyOption() {
     return (
       <Select.Option
         id={this._emptyOptionId}
@@ -564,7 +573,7 @@ class TimeSelect extends Component {
     )
   }
 
-  render () {
+  render() {
     const {
       value,
       defaultValue,
@@ -592,10 +601,7 @@ class TimeSelect extends Component {
       ...rest
     } = this.props
 
-    const {
-      inputValue,
-      isShowingOptions
-    } = this.state
+    const { inputValue, isShowingOptions } = this.state
 
     return (
       <Select

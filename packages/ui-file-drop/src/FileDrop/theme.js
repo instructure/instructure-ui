@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ borders, colors }) {
+export default function generator({ borders, colors }) {
   return {
     backgroundColor: colors.backgroundLightest, // needed for testing
     borderRadius: borders.radiusLarge,

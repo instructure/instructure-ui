@@ -15,7 +15,9 @@ module.exports = ({ config, mode }) => {
   console.log(`Building Storybook with React version ${React.version}...`)
 
   if (parseFloat(React.version) < 16) {
-    console.error('Storybook requires React > 16. Run `yarn install:react:16` before running `yarn start:examples`.')
+    console.error(
+      'Storybook requires React > 16. Run `yarn install:react:16` before running `yarn start:examples`.'
+    )
   }
 
   return config

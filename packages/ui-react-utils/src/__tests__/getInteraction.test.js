@@ -27,7 +27,7 @@ import { expect } from '@instructure/ui-test-utils'
 import { getInteraction } from '../getInteraction'
 
 describe('getInteraction', () => {
-  it('should return \'enabled\' when `interaction`, `disabled`, and `readOnly` are not provided', () => {
+  it("should return 'enabled' when `interaction`, `disabled`, and `readOnly` are not provided", () => {
     const props = {
       foo: 'foo',
       bar: 'bar'
@@ -72,7 +72,7 @@ describe('getInteraction', () => {
     expect(getInteraction({ props })).to.equal('readonly')
   })
 
-  it('should return \'disabled\' when `disabled` prop is set and `interaction` is not specified', () => {
+  it("should return 'disabled' when `disabled` prop is set and `interaction` is not specified", () => {
     const props = {
       disabled: true
     }
@@ -80,7 +80,7 @@ describe('getInteraction', () => {
     expect(getInteraction({ props })).to.equal('disabled')
   })
 
-  it('should return \'disabled\' when both `disabled` and `readOnly` props are set and `interaction` is not specified', () => {
+  it("should return 'disabled' when both `disabled` and `readOnly` props are set and `interaction` is not specified", () => {
     const props = {
       disabled: true,
       readOnly: true
@@ -89,7 +89,7 @@ describe('getInteraction', () => {
     expect(getInteraction({ props })).to.equal('disabled')
   })
 
-  it('should return \'readonly\' when `readOnly` prop is set and `interaction` and `disabled` are not specified', () => {
+  it("should return 'readonly' when `readOnly` prop is set and `interaction` and `disabled` are not specified", () => {
     const props = {
       disabled: true
     }
@@ -103,7 +103,9 @@ describe('getInteraction', () => {
       readOnly: true
     }
 
-    expect(getInteraction({ props, interactionTypes: ['readOnly'] })).to.equal('readonly')
+    expect(getInteraction({ props, interactionTypes: ['readOnly'] })).to.equal(
+      'readonly'
+    )
   })
 
   it('should not include `readOnly` if it is not listed in the interactionTypes', () => {
@@ -111,6 +113,8 @@ describe('getInteraction', () => {
       readOnly: true
     }
 
-    expect(getInteraction({ props, interactionTypes: ['disabled'] })).to.equal('enabled')
+    expect(getInteraction({ props, interactionTypes: ['disabled'] })).to.equal(
+      'enabled'
+    )
   })
 })

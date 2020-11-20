@@ -28,9 +28,7 @@ import { isVisible } from '../isVisible'
 
 describe('isVisible', async () => {
   it('should recognize visible elements', async () => {
-    await mount(
-      <div id="test">Hello world!</div>
-    )
+    await mount(<div id="test">Hello world!</div>)
     const visible = isVisible(document.getElementById('test'))
     expect(visible).to.equal(true)
   })
@@ -38,7 +36,9 @@ describe('isVisible', async () => {
   it('should recognize elements with display: none', async () => {
     await mount(
       <div id="test">
-        <span id="test-2" style={{display: 'none'}}>Hello world!</span>
+        <span id="test-2" style={{ display: 'none' }}>
+          Hello world!
+        </span>
       </div>
     )
     const visible = isVisible(document.getElementById('test-2'))
@@ -48,11 +48,14 @@ describe('isVisible', async () => {
   it('should recognize elements hidden with clip', async () => {
     await mount(
       <div id="test">
-        <span id="test-2" style={{
-          position: 'absolute',
-          overflow: 'hidden',
-          clip: 'rect(0,0,0,0)'
-        }}>
+        <span
+          id="test-2"
+          style={{
+            position: 'absolute',
+            overflow: 'hidden',
+            clip: 'rect(0,0,0,0)'
+          }}
+        >
           Hello world!
         </span>
       </div>
@@ -65,11 +68,14 @@ describe('isVisible', async () => {
   it('should recognize clipped elements that are not hidden', async () => {
     await mount(
       <div id="test">
-        <span id="test-2" style={{
-          position: 'absolute',
-          overflow: 'hidden',
-          clip: 'rect(0,0,10px,0)'
-        }}>
+        <span
+          id="test-2"
+          style={{
+            position: 'absolute',
+            overflow: 'hidden',
+            clip: 'rect(0,0,10px,0)'
+          }}
+        >
           Hello world!
         </span>
       </div>
@@ -81,9 +87,11 @@ describe('isVisible', async () => {
 
   it('should recursively check parent visibility', async () => {
     await mount(
-      <div id="test" style={{visibility: 'hidden'}}>
+      <div id="test" style={{ visibility: 'hidden' }}>
         <span>
-          <span id="test-2" style={{visibility: 'visible'}}>Hello world!</span>
+          <span id="test-2" style={{ visibility: 'visible' }}>
+            Hello world!
+          </span>
         </span>
       </div>
     )
@@ -96,9 +104,11 @@ describe('isVisible', async () => {
 
   it('should not recursively check text nodes', async () => {
     await mount(
-      <div id="test" style={{visibility: 'hidden'}}>
+      <div id="test" style={{ visibility: 'hidden' }}>
         <span>
-          <span id="test-2" style={{visibility: 'visible'}}>Hello world!</span>
+          <span id="test-2" style={{ visibility: 'visible' }}>
+            Hello world!
+          </span>
         </span>
       </div>
     )

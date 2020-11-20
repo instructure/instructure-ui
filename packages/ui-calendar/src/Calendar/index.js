@@ -27,7 +27,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { safeCloneElement, callRenderProp, omitProps } from '@instructure/ui-react-utils'
+import {
+  safeCloneElement,
+  callRenderProp,
+  omitProps
+} from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -54,60 +58,68 @@ class Calendar extends Component {
 
   static propTypes = {
     /**
-    * children of type `<Calendar.Day />` There should be exactly 42 provided (6
-    * weeks).
-    */
+     * children of type `<Calendar.Day />` There should be exactly 42 provided (6
+     * weeks).
+     */
     children: ChildrenPropTypes.oneOf([Day]),
     /**
-    * A button to render in the navigation header. The recommendation is to
-    * compose it with the [IconButton](#IconButton) component by setting the `size`
-    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-    * `renderIcon` to [IconArrowOpenEnd](#iconography).
-    */
-    renderNextMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-    * A button to render in the navigation header. The recommendation is to
-    * compose it with the [IconButton](#Button) component by setting the `size`
-    * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
-    * `renderIcon` to [IconArrowOpenStart](#iconography).
-    */
-    renderPrevMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-    * Content to render in the navigation header. The recommendation is to include
-    * the name of the current rendered month along with the year.
-    */
-    renderNavigationLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-    * An array of labels containing the name of each day of the week. The visible
-    * portion of the label should be abbreviated (no longer than three characters).
-    * Note that screen readers will read this content preceding each date as the
-    * `<Calendar />` is navigated. Consider using
-    * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
-    * full day name for assistive technologies and the children containing the
-    * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
-    */
-    renderWeekdayLabels: PropTypes.arrayOf(PropTypes.oneOfType([
+     * A button to render in the navigation header. The recommendation is to
+     * compose it with the [IconButton](#IconButton) component by setting the `size`
+     * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
+     * `renderIcon` to [IconArrowOpenEnd](#iconography).
+     */
+    renderNextMonthButton: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.func
-    ])).isRequired,
+    ]),
     /**
-    * Callback fired when the next month button is clicked in the navigation
-    * header, requesting to render the next month.
-    */
+     * A button to render in the navigation header. The recommendation is to
+     * compose it with the [IconButton](#Button) component by setting the `size`
+     * prop to `small`, `withBorder` and `withBackground` to `false`, and setting
+     * `renderIcon` to [IconArrowOpenStart](#iconography).
+     */
+    renderPrevMonthButton: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.func
+    ]),
+    /**
+     * Content to render in the navigation header. The recommendation is to include
+     * the name of the current rendered month along with the year.
+     */
+    renderNavigationLabel: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.func
+    ]),
+    /**
+     * An array of labels containing the name of each day of the week. The visible
+     * portion of the label should be abbreviated (no longer than three characters).
+     * Note that screen readers will read this content preceding each date as the
+     * `<Calendar />` is navigated. Consider using
+     * [AccessibleContent](#AccessibleContent) with the `alt` prop containing the
+     * full day name for assistive technologies and the children containing the
+     * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
+     */
+    renderWeekdayLabels: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+    ).isRequired,
+    /**
+     * Callback fired when the next month button is clicked in the navigation
+     * header, requesting to render the next month.
+     */
     onRequestRenderNextMonth: PropTypes.func,
     /**
-    * Callback fired when the previous month button is clicked in the navigation
-    * header, requesting to render the previous month.
-    */
+     * Callback fired when the previous month button is clicked in the navigation
+     * header, requesting to render the previous month.
+     */
     onRequestRenderPrevMonth: PropTypes.func,
     /**
-    * The element to render as the `Calendar` root, `span` by default
-    */
+     * The element to render as the `Calendar` root, `span` by default
+     */
     as: PropTypes.elementType,
     /**
-    * The role of the underlying table. This can be set to 'listbox' when
-    * assistive technologies need to read the `<Calendar.Day />` children as a list.
-    */
+     * The role of the underlying table. This can be set to 'listbox' when
+     * assistive technologies need to read the `<Calendar.Day />` children as a list.
+     */
     role: PropTypes.oneOf(['table', 'listbox'])
   }
 
@@ -126,12 +138,12 @@ class Calendar extends Component {
     return { ...ids, [i]: uid(`weekday-header-${i}`) }
   }, {})
 
-  get role () {
+  get role() {
     const { role } = this.props
     return role === 'listbox' ? role : null
   }
 
-  renderHeader () {
+  renderHeader() {
     const {
       renderNextMonthButton,
       renderPrevMonthButton,
@@ -143,9 +155,10 @@ class Calendar extends Component {
     const nextButton = callRenderProp(renderNextMonthButton)
     const prevButton = callRenderProp(renderPrevMonthButton)
 
-    const cloneButton = (button, onClick) => safeCloneElement(button, {
-      onClick: createChainedFunction(button.props.onClick, onClick)
-    })
+    const cloneButton = (button, onClick) =>
+      safeCloneElement(button, {
+        onClick: createChainedFunction(button.props.onClick, onClick)
+      })
 
     const classes = classnames({
       [styles.navigation]: true,
@@ -161,20 +174,16 @@ class Calendar extends Component {
     )
   }
 
-  renderBody () {
+  renderBody() {
     return (
       <table role={this.role}>
-        <thead>
-          {this.renderWeekdayHeaders()}
-        </thead>
-        <tbody>
-          {this.renderDays()}
-        </tbody>
+        <thead>{this.renderWeekdayHeaders()}</thead>
+        <tbody>{this.renderDays()}</tbody>
       </table>
     )
   }
 
-  renderWeekdayHeaders () {
+  renderWeekdayHeaders() {
     const { renderWeekdayLabels } = this.props
     const { length } = renderWeekdayLabels
 
@@ -201,7 +210,7 @@ class Calendar extends Component {
     )
   }
 
-  renderDays () {
+  renderDays() {
     const children = Children.toArray(this.props.children)
     const { length } = children
     const role = this.role === 'listbox' ? 'presentation' : null
@@ -211,35 +220,31 @@ class Calendar extends Component {
       `[Calendar] should have exactly ${Calendar.DAY_COUNT} children. ${length} provided.`
     )
 
-    return children.reduce((days, day, i) => {
-      const index = Math.floor(i / 7)
+    return children
+      .reduce((days, day, i) => {
+        const index = Math.floor(i / 7)
 
-      if (!days[index]) days.push([])
+        if (!days[index]) days.push([])
 
-      days[index].push(day)
-      return days
-    }, []).map((row) => (
-        <tr
-          key={`row${row[0].props.date}`}
-          role={role}
-        >
+        days[index].push(day)
+        return days
+      }, [])
+      .map((row) => (
+        <tr key={`row${row[0].props.date}`} role={role}>
           {row.map((day, i) => (
-            <td
-              key={day.props.date}
-              role={role}
-            >
+            <td key={day.props.date} role={role}>
               {role === 'presentation'
-                ? safeCloneElement(day, { 'aria-describedby': this._weekdayHeaderIds[i] })
-                : day
-              }
+                ? safeCloneElement(day, {
+                    'aria-describedby': this._weekdayHeaderIds[i]
+                  })
+                : day}
             </td>
           ))}
         </tr>
-      )
-    )
+      ))
   }
 
-  render () {
+  render() {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Calendar.propTypes),
       Calendar

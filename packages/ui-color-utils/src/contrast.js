@@ -33,7 +33,7 @@ import Color from 'tinycolor2'
  * @param {String} color2
  * @returns {Number} color contrast ratio
  */
-function contrast (color1, color2) {
+function contrast(color1, color2) {
   return Color.readability(color1, color2)
 }
 

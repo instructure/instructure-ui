@@ -41,7 +41,8 @@ export function bindElementToEvents(element, events) {
     } else if (['click'].includes(key)) {
       // eslint-disable-next-line no-param-reassign
       bound[key] = fireClickEvent.bind(null, element, fn)
-    } else if (['dblClick'].includes(key) ||
+    } else if (
+      ['dblClick'].includes(key) ||
       key.startsWith('mouse') ||
       key.startsWith('drag') ||
       key.startsWith('touch')
@@ -69,7 +70,12 @@ function fireDOMEvent(element, fn, init, options = {}) {
   })
 }
 
-async function firePointerEvent(element, fn, init, options = { clickable: true }) {
+async function firePointerEvent(
+  element,
+  fn,
+  init,
+  options = { clickable: true }
+) {
   let clickable = element
 
   if (options.clickable) {
@@ -88,7 +94,9 @@ async function firePointerEvent(element, fn, init, options = { clickable: true }
           resolve(fireEvent(init))
         } else {
           reject(
-            new Error(`[ui-test-queries] could not fire a pointer event on an element that is not 'clickable': ${element}`)
+            new Error(
+              `[ui-test-queries] could not fire a pointer event on an element that is not 'clickable': ${element}`
+            )
           )
         }
       } catch (e) {
@@ -99,7 +107,12 @@ async function firePointerEvent(element, fn, init, options = { clickable: true }
   })
 }
 
-async function fireClickEvent(element, fn, init, options = { clickable: true, simulate: false }) {
+async function fireClickEvent(
+  element,
+  fn,
+  init,
+  options = { clickable: true, simulate: false }
+) {
   let clickable = element
 
   if (options.clickable) {
@@ -122,7 +135,9 @@ async function fireClickEvent(element, fn, init, options = { clickable: true, si
           }
         } else {
           reject(
-            new Error(`[ui-test-queries] could not fire a click event on an element that is not 'clickable': ${element}`)
+            new Error(
+              `[ui-test-queries] could not fire a click event on an element that is not 'clickable': ${element}`
+            )
           )
         }
       } catch (e) {
@@ -133,7 +148,12 @@ async function fireClickEvent(element, fn, init, options = { clickable: true, si
   })
 }
 
-async function fireBlurEvent(element, fn, init, options = { focusable: true, simulate: false }) {
+async function fireBlurEvent(
+  element,
+  fn,
+  init,
+  options = { focusable: true, simulate: false }
+) {
   let focusable = element
 
   if (options.focusable) {
@@ -162,7 +182,9 @@ async function fireBlurEvent(element, fn, init, options = { focusable: true, sim
           }
         } else {
           reject(
-            new Error(`[ui-test-queries] could not fire a 'blur' event on an element that is not 'focusable': ${element}`)
+            new Error(
+              `[ui-test-queries] could not fire a 'blur' event on an element that is not 'focusable': ${element}`
+            )
           )
         }
       } catch (e) {
@@ -173,7 +195,12 @@ async function fireBlurEvent(element, fn, init, options = { focusable: true, sim
   })
 }
 
-async function fireFocusEvent(element, fn, init, options = { focusable: true, simulate: false }) {
+async function fireFocusEvent(
+  element,
+  fn,
+  init,
+  options = { focusable: true, simulate: false }
+) {
   let focusable = element
 
   if (options.focusable) {
@@ -202,7 +229,9 @@ async function fireFocusEvent(element, fn, init, options = { focusable: true, si
           }
         } else {
           reject(
-            new Error(`[ui-test-queries] could not fire a 'focus' event on an element that is not 'focusable': ${element}`)
+            new Error(
+              `[ui-test-queries] could not fire a 'focus' event on an element that is not 'focusable': ${element}`
+            )
           )
         }
       } catch (e) {
@@ -213,7 +242,13 @@ async function fireFocusEvent(element, fn, init, options = { focusable: true, si
   })
 }
 
-async function fireKeyboardEvent(element, fn, whichKey, init, options = { focusable: true }) {
+async function fireKeyboardEvent(
+  element,
+  fn,
+  whichKey,
+  init,
+  options = { focusable: true }
+) {
   let focusable = element
 
   if (options.focusable) {
@@ -224,23 +259,27 @@ async function fireKeyboardEvent(element, fn, whichKey, init, options = { focusa
     focusable = focusable.getDOMNode()
   }
 
-  const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey
-  const key = (typeof whichKey === 'number') ? keycode(whichKey) : whichKey
+  const keyCode = typeof whichKey === 'string' ? keycode(whichKey) : whichKey
+  const key = typeof whichKey === 'number' ? keycode(whichKey) : whichKey
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         if (isElement(focusable)) {
           const fireEvent = fn.bind(null, focusable)
-          resolve(fireEvent({
-            ...init,
-            key,
-            which: keyCode,
-            keyCode
-          }))
+          resolve(
+            fireEvent({
+              ...init,
+              key,
+              which: keyCode,
+              keyCode
+            })
+          )
         } else {
           reject(
-            new Error(`[ui-test-queries] could not fire a ${key} event on an element that is not 'focusable': ${element}`)
+            new Error(
+              `[ui-test-queries] could not fire a ${key} event on an element that is not 'focusable': ${element}`
+            )
           )
         }
       } catch (e) {

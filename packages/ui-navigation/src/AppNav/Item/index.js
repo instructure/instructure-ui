@@ -54,37 +54,38 @@ id: AppNav.Item
 class Item extends Component {
   static propTypes = {
     /**
-    * The text to display. If the `icon` prop is used, label text must be wrapped
-    * in `ScreenReaderContent`.
-    */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * The text to display. If the `icon` prop is used, label text must be wrapped
+     * in `ScreenReaderContent`.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
-    * Content to display after the renderLabel text, such as a badge
-    */
+     * Content to display after the renderLabel text, such as a badge
+     */
     renderAfter: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * The visual to display (ex. an Image, Logo, Avatar, or Icon)
-    */
+     * The visual to display (ex. an Image, Logo, Avatar, or Icon)
+     */
     renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * If the item goes to a new page, pass an href
-    */
+     * If the item goes to a new page, pass an href
+     */
     href: PropTypes.string,
     /**
-    * If the item does not go to a new page, pass an onClick
-    */
+     * If the item does not go to a new page, pass an onClick
+     */
     onClick: PropTypes.func,
     /**
-    * Denotes which item is currently selected
-    */
+     * Denotes which item is currently selected
+     */
     isSelected: PropTypes.bool,
     /**
-    * provides a reference to the underlying focusable (`button` or `a`) element
-    */
+     * provides a reference to the underlying focusable (`button` or `a`) element
+     */
     elementRef: PropTypes.func,
     /**
-    * The element type to render as (will default to `<a>` if href is provided)
-    */
+     * The element type to render as (will default to `<a>` if href is provided)
+     */
     as: PropTypes.elementType,
     /**
      * Specify the mouse cursor to use on :hover.
@@ -92,8 +93,8 @@ class Item extends Component {
      */
     cursor: PropTypes.string,
     /**
-    * Disables the link or button visually and functionally
-    */
+     * Disables the link or button visually and functionally
+     */
     isDisabled: PropTypes.bool
   }
 
@@ -111,10 +112,7 @@ class Item extends Component {
   }
 
   handleClick = (e) => {
-    const {
-      isDisabled,
-      onClick
-    } = this.props
+    const { isDisabled, onClick } = this.props
 
     if (isDisabled) {
       e.preventDefault()
@@ -124,7 +122,7 @@ class Item extends Component {
     }
   }
 
-  render () {
+  render() {
     const ElementType = getElementType(Item, this.props)
 
     const {
@@ -141,9 +139,9 @@ class Item extends Component {
     const icon = callRenderProp(renderIcon)
     const label = callRenderProp(renderLabel)
 
-    const labelIsForScreenReaders = matchComponentTypes(
-      label, [ScreenReaderContent]
-    )
+    const labelIsForScreenReaders = matchComponentTypes(label, [
+      ScreenReaderContent
+    ])
 
     if (icon) {
       error(
@@ -152,7 +150,7 @@ class Item extends Component {
       )
     }
 
-    const classes = classnames ({
+    const classes = classnames({
       [styles.root]: true,
       [styles.isSelected]: isSelected,
       [styles.disabled]: isDisabled
@@ -175,7 +173,11 @@ class Item extends Component {
         className={classes}
       >
         {icon}
-        {labelIsForScreenReaders ? label : <span className={styles.label}>{label}</span>}
+        {labelIsForScreenReaders ? (
+          label
+        ) : (
+          <span className={styles.label}>{label}</span>
+        )}
         {renderAfter && callRenderProp(renderAfter)}
       </View>
     )

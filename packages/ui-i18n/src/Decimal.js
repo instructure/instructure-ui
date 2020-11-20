@@ -26,14 +26,14 @@ import { Locale } from './Locale'
 import BaseDecimal from 'decimal.js/decimal'
 
 /**
-* ---
-* category: utilities/i18n
-* ---
-* A wrapper for [decimal.js](http://mikemcl.github.io/decimal.js/#decimal)
-* with additional internationalization utilties.
-*
-* @module Decimal
-*/
+ * ---
+ * category: utilities/i18n
+ * ---
+ * A wrapper for [decimal.js](http://mikemcl.github.io/decimal.js/#decimal)
+ * with additional internationalization utilties.
+ *
+ * @module Decimal
+ */
 
 const Decimal = BaseDecimal.clone()
 
@@ -52,11 +52,11 @@ Decimal.getDelimiters = function (locale) {
 }
 
 /**
-* Return a Decimal instance parsed from a string input + locale
-* @param {String|Number|Decimal} input
-* @param {String} locale
-* @returns {Decimal} The number as a Decimal instance
-*/
+ * Return a Decimal instance parsed from a string input + locale
+ * @param {String|Number|Decimal} input
+ * @param {String} locale
+ * @returns {Decimal} The number as a Decimal instance
+ */
 Decimal.parse = function (input, locale) {
   locale = locale || Locale.browserLocale() // eslint-disable-line no-param-reassign
   const d = new Decimal(_parse(input, locale))
@@ -65,21 +65,21 @@ Decimal.parse = function (input, locale) {
 }
 
 /**
-* Return a number as a localized, formatted string
-* @param {String} locale
-* @returns {String} The number as a localized/formatted string
-*/
+ * Return a number as a localized, formatted string
+ * @param {String} locale
+ * @returns {String} The number as a localized/formatted string
+ */
 Decimal.prototype.toLocaleString = function (locale) {
   locale = locale || this.l // eslint-disable-line no-param-reassign
   return _format(_localize(this.toString(), locale), locale)
 }
 
 /**
-* Return a number as a localized, formatted string
-* @param {String|Number|Decimal} input
-* @param {String} locale
-* @returns {String} The number as a localized/formatted string
-*/
+ * Return a number as a localized, formatted string
+ * @param {String|Number|Decimal} input
+ * @param {String} locale
+ * @returns {String} The number as a localized/formatted string
+ */
 Decimal.toLocaleString = function (input, locale) {
   return Decimal.parse(input, locale).toLocaleString(locale)
 }
@@ -88,15 +88,21 @@ Decimal.prototype._toFixed = Decimal.prototype.toFixed
 Decimal.prototype.toFixed = _localizePrecision(Decimal.prototype._toFixed)
 
 Decimal.prototype._toPrecision = Decimal.prototype.toPrecision
-Decimal.prototype.toPrecision = _localizePrecision(Decimal.prototype._toPrecision)
+Decimal.prototype.toPrecision = _localizePrecision(
+  Decimal.prototype._toPrecision
+)
 
 // TODO: simplify this, it supports many formats we don't need. It should be
 // enough to strip thousands separators and change the decimal separator to `.`.
 const patterns = {}
-function _parse (input, locale) {
+function _parse(input, locale) {
   if (input === null) {
     return '0'
-  } else if (Decimal.isDecimal(input) || typeof input === 'number' || input instanceof Number) {
+  } else if (
+    Decimal.isDecimal(input) ||
+    typeof input === 'number' ||
+    input instanceof Number
+  ) {
     return input
   } else if (typeof input !== 'string' && !(input instanceof String)) {
     return NaN
@@ -113,17 +119,17 @@ function _parse (input, locale) {
   if (pattern == null) {
     // eslint-disable-next-line no-useless-escape
     const regExp = `^\\s*([+\-]?(?:(?:\\d{1,3}(?:\\${thousands}\\d{3,3})+)|\\d*))(?:\\${decimal}(\\d*))?\\s*$`
-    pattern = (patterns[patternIndex] = new RegExp(regExp))
+    pattern = patterns[patternIndex] = new RegExp(regExp)
   }
 
   const matches = result.match(pattern)
-  if ((matches == null) || (matches.length !== 3)) {
+  if (matches == null || matches.length !== 3) {
     return Decimal.NaN
   }
 
   const parts = []
   if (matches[1]) {
-    parts.push(matches[1].replace(new RegExp(`\\${thousands}`,'g'),''))
+    parts.push(matches[1].replace(new RegExp(`\\${thousands}`, 'g'), ''))
   }
   if (matches[2]) {
     parts.push(matches[2])
@@ -135,13 +141,13 @@ function _parse (input, locale) {
 // Cleans up the string given and applies the thousands delimiter
 // Doesn't take into account chinese and indian locales with non-standard grouping
 // This will be addressed in INSTUI-996
-function _format (input, locale) {
+function _format(input, locale) {
   locale = locale || Locale.browserLocale() // eslint-disable-line no-param-reassign
 
   let result = input
 
   const { thousands, decimal } = Decimal.getDelimiters(locale)
-  const isNegative = (result[0] === '-')
+  const isNegative = result[0] === '-'
 
   // remove all characters except for digits and decimal delimiters
   result = result.replace(new RegExp(`[^\\d\\${decimal}]`, 'g'), '')
@@ -150,7 +156,10 @@ function _format (input, locale) {
   result = result.replace(new RegExp(`[${decimal}](?=.*[${decimal}])`, 'g'), '')
 
   // remove the leading zeros using positive lookahead
-  result = result.replace(new RegExp(`^[0${thousands}]+(?=\\d|0${decimal})`, ''), '')
+  result = result.replace(
+    new RegExp(`^[0${thousands}]+(?=\\d|0${decimal})`, ''),
+    ''
+  )
 
   // add leading zero to decimal, if not present
   result = result.charAt(0) === decimal ? result.replace(/^/, '0') : result
@@ -177,16 +186,18 @@ function _format (input, locale) {
   return result
 }
 
-function _localize (input, locale) {
+function _localize(input, locale) {
   let result = input
 
   const sourceDelimiters = Decimal.getDelimiters(Locale.defaultLocale)
   const destinationDelimiters = Decimal.getDelimiters(locale)
 
   const check = [sourceDelimiters.thousands, destinationDelimiters.thousands]
-  const placeholder = ['*', '^', '?'].reduce((result, value) => (
-    (!result && check.indexOf(value) === -1) ? value : result
-  ), null)
+  const placeholder = ['*', '^', '?'].reduce(
+    (result, value) =>
+      !result && check.indexOf(value) === -1 ? value : result,
+    null
+  )
   const thousands = destinationDelimiters.thousands
 
   return result
@@ -195,10 +206,13 @@ function _localize (input, locale) {
     .replace(new RegExp(`\\${placeholder}`, 'g'), destinationDelimiters.decimal)
 }
 
-function _localizePrecision (fn) {
+function _localizePrecision(fn) {
   return function (precision, rounding, locale) {
     /* eslint-disable no-param-reassign */
-    if (locale == null && typeof rounding === 'string' || rounding instanceof String) {
+    if (
+      (locale == null && typeof rounding === 'string') ||
+      rounding instanceof String
+    ) {
       locale = rounding
       rounding = void 0
     }

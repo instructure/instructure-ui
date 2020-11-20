@@ -58,7 +58,7 @@ class Cell extends Component {
     children: null
   }
 
-  render () {
+  render() {
     const { children, textAlign, isStacked, header } = this.props
 
     return (
@@ -67,9 +67,9 @@ class Cell extends Component {
         as={isStacked ? 'div' : 'td'}
         className={classnames({
           [styles.root]: true,
-          [styles[`textAlign--${textAlign}`]]: textAlign,
+          [styles[`textAlign--${textAlign}`]]: textAlign
         })}
-        role={isStacked ? "cell" : null}
+        role={isStacked ? 'cell' : null}
       >
         {header && callRenderProp(header)}
         {header && ': '}

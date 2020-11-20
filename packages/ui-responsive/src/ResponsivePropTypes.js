@@ -52,7 +52,7 @@ const ResponsivePropTypes = {
    * @param {string} componentName - name of the component
    * @returns {Error} if prop is an invalid query
    */
-  validQuery (props, propName, componentName) {
+  validQuery(props, propName, componentName) {
     try {
       jsonToMediaQuery(props[propName])
     } catch (e) {
@@ -66,11 +66,11 @@ const ResponsivePropTypes = {
 export default ResponsivePropTypes
 export {
   /**
- * ---
- * category: utilities/layout
- * ---
- * Custom prop types for `ui-responsive` components.
- * @module ResponsivePropTypes
- */
+   * ---
+   * category: utilities/layout
+   * ---
+   * Custom prop types for `ui-responsive` components.
+   * @module ResponsivePropTypes
+   */
   ResponsivePropTypes
 }

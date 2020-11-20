@@ -40,36 +40,49 @@ module.exports = function componentExamplesLoader(source, map, meta) {
     ...loadConfig('examples', {})
   }
 
-  const generateComponentExamples = require.resolve('./generateComponentExamples')
+  const generateComponentExamples = require.resolve(
+    './generateComponentExamples'
+  )
   const configPath = `!!${loaderUtils.getRemainingRequest(loader)}`
 
-  const getComponentPath = (typeof config.getComponentPath === 'function') ?
-    config.getComponentPath :
-    (configFilePath) => {
-      const basePath = path.dirname(configFilePath)
-      // try to determine component source based on where the .examples file is:
-      return path.resolve(basePath, configFilePath.includes('__examples__') ? '../index.js' : './index.js')
-    }
+  const getComponentPath =
+    typeof config.getComponentPath === 'function'
+      ? config.getComponentPath
+      : (configFilePath) => {
+          const basePath = path.dirname(configFilePath)
+          // try to determine component source based on where the .examples file is:
+          return path.resolve(
+            basePath,
+            configFilePath.includes('__examples__')
+              ? '../index.js'
+              : './index.js'
+          )
+        }
 
   const componentPath = getComponentPath(this.resourcePath)
 
-  fs.readFile(`${componentPath}${!componentPath.includes('.') ? '.js' : ''}`, 'utf8', (err, componentSrc) => {
-    // if (err) return callback(err)
-    err && loader.emitWarning(err)
+  fs.readFile(
+    `${componentPath}${!componentPath.includes('.') ? '.js' : ''}`,
+    'utf8',
+    (err, componentSrc) => {
+      // if (err) return callback(err)
+      err && loader.emitWarning(err)
 
-    let generatedPropValues = {}
+      let generatedPropValues = {}
 
-    if (!err) {
-      loader.addDependency(componentPath)
-      try {
-        generatedPropValues = parsePropValues(componentSrc)
-      } catch (error) {
-        loader.emitWarning(error)
+      if (!err) {
+        loader.addDependency(componentPath)
+        try {
+          generatedPropValues = parsePropValues(componentSrc)
+        } catch (error) {
+          loader.emitWarning(error)
+        }
       }
-    }
 
-    const result = `
-const generateComponentExamples = require(${JSON.stringify(generateComponentExamples)})
+      const result = `
+const generateComponentExamples = require(${JSON.stringify(
+        generateComponentExamples
+      )})
 const config = require(${JSON.stringify(configPath)}).default
 
 // merge in generated prop values:
@@ -79,7 +92,9 @@ config.propValues = Object.assign(
 )
 const Component = require(${JSON.stringify(componentPath)}).default
 
-config.maxExamples = Boolean(config.maxExamples) ? config.maxExamples : ${config.maxExamples}
+config.maxExamples = Boolean(config.maxExamples) ? config.maxExamples : ${
+        config.maxExamples
+      }
 
 if (!config.renderPage) {
   console.warn('A default is no longer provided for \`renderPage\`, you should supply it to the config instead')
@@ -96,6 +111,7 @@ module.exports = {
  renderExample: config.renderExample
 }
 `
-    return callback(null, result, map)
-  })
+      return callback(null, result, map)
+    }
+  )
 }

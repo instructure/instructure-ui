@@ -27,7 +27,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { matchComponentTypes, safeCloneElement, omitProps , deprecated } from '@instructure/ui-react-utils'
+import {
+  matchComponentTypes,
+  safeCloneElement,
+  omitProps,
+  deprecated
+} from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -89,7 +94,7 @@ class Table extends Component {
     hover: false,
     layout: 'auto',
     margin: undefined,
-    elementRef: undefined,
+    elementRef: undefined
   }
 
   static Head = Head
@@ -99,12 +104,12 @@ class Table extends Component {
   static RowHeader = RowHeader
   static Cell = Cell
 
-  getHeaders () {
+  getHeaders() {
     const { children } = this.props
-    const [ head ] = Children.toArray(children)
+    const [head] = Children.toArray(children)
 
     if (matchComponentTypes(head, [Head])) {
-      const [ row ] = Children.toArray(head.props.children)
+      const [row] = Children.toArray(head.props.children)
 
       if (matchComponentTypes(row, [Row])) {
         return Children.map(row.props.children, (colHeader) => {
@@ -117,9 +122,17 @@ class Table extends Component {
     return null
   }
 
-  render () {
-    // eslint-disable-next-line react/prop-types
-    const { margin, elementRef, layout, caption, children, hover, mode } = this.props
+  render() {
+    const {
+      margin,
+      elementRef,
+      layout,
+      caption,
+      children,
+      hover,
+      // eslint-disable-next-line react/prop-types
+      mode
+    } = this.props
     const isStacked = layout === 'stacked' || mode === 'stacked'
     const headers = isStacked ? this.getHeaders() : null
 
@@ -131,12 +144,16 @@ class Table extends Component {
         elementRef={elementRef}
         className={classnames({
           [styles.root]: true,
-          [styles.fixedLayout]: layout === 'fixed',
+          [styles.fixedLayout]: layout === 'fixed'
         })}
-        role={isStacked ? "table" : null}
+        role={isStacked ? 'table' : null}
         aria-label={isStacked ? caption : null}
       >
-        {!isStacked && <caption><ScreenReaderContent>{caption}</ScreenReaderContent></caption>}
+        {!isStacked && (
+          <caption>
+            <ScreenReaderContent>{caption}</ScreenReaderContent>
+          </caption>
+        )}
         {Children.map(children, (child) => {
           if (matchComponentTypes(child, [Head])) {
             return safeCloneElement(child, {

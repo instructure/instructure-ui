@@ -42,48 +42,53 @@ category: components
 class Progress extends Component {
   static propTypes = {
     /**
-    * A label is required for accessibility
-    */
+     * A label is required for accessibility
+     */
     label: PropTypes.string.isRequired,
     /**
-    * Different-sized progress bars and circles
-    */
+     * Different-sized progress bars and circles
+     */
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
     /**
-    * Maximum value (defaults to 100)
-    */
+     * Maximum value (defaults to 100)
+     */
     valueMax: PropTypes.number,
     /**
-    * Receives the progress of the event
-    */
+     * Receives the progress of the event
+     */
     valueNow: PropTypes.number,
     /**
-    * A function that returns the current value formatted for screen readers
-    */
+     * A function that returns the current value formatted for screen readers
+     */
     formatValueText: PropTypes.func,
     /**
-    * A function to format the displayed value. If null the value will not display.
-    */
+     * A function to format the displayed value. If null the value will not display.
+     */
     formatDisplayedValue: PropTypes.func,
     /**
-    * Animate the progress meter to the current value when the component
-    * has mounted
-    */
+     * Animate the progress meter to the current value when the component
+     * has mounted
+     */
     animateOnMount: PropTypes.bool,
     /**
-    * The bar changes to your theme's success color when complete
-    */
+     * The bar changes to your theme's success color when complete
+     */
     successColor: PropTypes.bool,
     /**
-    * Choose either a progress bar or circle. The `-inverse` variants are for
-    * when you need the Progress component to appear on inverse backgrounds
-    */
-    variant: PropTypes.oneOf(['bar', 'circle', 'bar-inverse', 'circle-inverse']),
+     * Choose either a progress bar or circle. The `-inverse` variants are for
+     * when you need the Progress component to appear on inverse backgrounds
+     */
+    variant: PropTypes.oneOf([
+      'bar',
+      'circle',
+      'bar-inverse',
+      'circle-inverse'
+    ]),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func
   }
@@ -101,7 +106,7 @@ class Progress extends Component {
     margin: undefined
   }
 
-  render () {
+  render() {
     const {
       label,
       successColor,
@@ -110,14 +115,22 @@ class Progress extends Component {
       ...props
     } = this.props
 
-    const childVariant = (variant === 'bar-inverse' || variant === 'circle-inverse')
-      ? 'primary-inverse' : 'primary'
+    const childVariant =
+      variant === 'bar-inverse' || variant === 'circle-inverse'
+        ? 'primary-inverse'
+        : 'primary'
 
-    const formatValueText = typeof this.props.formatValueText === 'function' ?
-      ({ valueNow, valueMax }) => this.props.formatValueText(valueNow, valueMax) : undefined
+    const formatValueText =
+      typeof this.props.formatValueText === 'function'
+        ? ({ valueNow, valueMax }) =>
+            this.props.formatValueText(valueNow, valueMax)
+        : undefined
 
-    const formatDisplayedValue = typeof this.props.formatDisplayedValue === 'function' ?
-      ({ valueNow, valueMax }) => this.props.formatDisplayedValue(valueNow, valueMax) : undefined
+    const formatDisplayedValue =
+      typeof this.props.formatDisplayedValue === 'function'
+        ? ({ valueNow, valueMax }) =>
+            this.props.formatDisplayedValue(valueNow, valueMax)
+        : undefined
 
     const isCircle = variant === 'circle' || variant === 'circle-inverse'
 
@@ -129,12 +142,14 @@ class Progress extends Component {
       screenReaderLabel: label,
       color: childVariant,
       meterColor: !successColor ? 'brand' : undefined,
-      shouldAnimateOnMount: isCircle && animateOnMount,
+      shouldAnimateOnMount: isCircle && animateOnMount
     }
 
-    return isCircle ?
-      <ProgressCircle {...updatedProps} /> :
+    return isCircle ? (
+      <ProgressCircle {...updatedProps} />
+    ) : (
       <ProgressBar {...updatedProps} />
+    )
   }
 }
 

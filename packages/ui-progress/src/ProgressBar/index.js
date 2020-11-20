@@ -43,60 +43,68 @@ category: components
 class ProgressBar extends Component {
   static propTypes = {
     /**
-    * A label is required for accessibility
-    */
+     * A label is required for accessibility
+     */
     screenReaderLabel: PropTypes.string.isRequired,
     /**
-    * Control the height of the progress bar
-    */
+     * Control the height of the progress bar
+     */
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
     /**
-    * Maximum value (defaults to 100)
-    */
+     * Maximum value (defaults to 100)
+     */
     valueMax: PropTypes.number,
     /**
-    * Receives the progress of the event
-    */
+     * Receives the progress of the event
+     */
     valueNow: PropTypes.number,
     /**
-    * A function for formatting the text provided to screen readers via `aria-valuenow`
-    */
+     * A function for formatting the text provided to screen readers via `aria-valuenow`
+     */
     formatScreenReaderValue: PropTypes.func,
     /**
-    * A function to format the displayed value. If null the value will not display.
-    * Takes `valueNow` and `valueMax` as parameters.
-    */
+     * A function to format the displayed value. If null the value will not display.
+     * Takes `valueNow` and `valueMax` as parameters.
+     */
     renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * Controls the overall color scheme of the component
-    */
+     * Controls the overall color scheme of the component
+     */
     color: PropTypes.oneOf(['primary', 'primary-inverse']),
     /**
-    * Control the color of the progress meter. Defaults to showing theme success
-    * color on completion, based on `valueNow` and `valueMax`.
-    */
+     * Control the color of the progress meter. Defaults to showing theme success
+     * color on completion, based on `valueNow` and `valueMax`.
+     */
     meterColor: PropTypes.oneOfType([
       PropTypes.func,
-      PropTypes.oneOf(['info', 'warning', 'danger', 'alert', 'success', 'brand'])
+      PropTypes.oneOf([
+        'info',
+        'warning',
+        'danger',
+        'alert',
+        'success',
+        'brand'
+      ])
     ]),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Provides a reference to the component's root HTML element
-    */
+     * Provides a reference to the component's root HTML element
+     */
     elementRef: PropTypes.func,
     /**
-    * Set the element type of the component's root
-    */
+     * Set the element type of the component's root
+     */
     as: PropTypes.elementType
   }
 
   static defaultProps = {
-    formatScreenReaderValue: ({ valueNow, valueMax }) => `${valueNow} / ${valueMax}`,
+    formatScreenReaderValue: ({ valueNow, valueMax }) =>
+      `${valueNow} / ${valueMax}`,
     size: 'medium',
     valueMax: 100,
     valueNow: 0,
@@ -107,10 +115,11 @@ class ProgressBar extends Component {
     color: 'primary',
 
     // default to showing `success` color on completion
-    meterColor: ({ valueNow, valueMax }) => valueNow / valueMax >= 1 ? 'success' : 'brand',
+    meterColor: ({ valueNow, valueMax }) =>
+      valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
-  render () {
+  render() {
     const {
       renderValue,
       formatScreenReaderValue,
@@ -123,8 +132,9 @@ class ProgressBar extends Component {
       ...props
     } = this.props
 
-    const valueText = typeof formatScreenReaderValue === 'function'
-      && formatScreenReaderValue({ valueNow, valueMax })
+    const valueText =
+      typeof formatScreenReaderValue === 'function' &&
+      formatScreenReaderValue({ valueNow, valueMax })
     // consolidating the label and aria-valuetext to put in aria-label because
     // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
     // But leaving aria-valuetext because JAWS ignores aria-label
@@ -132,8 +142,10 @@ class ProgressBar extends Component {
 
     const value = callRenderProp(renderValue, { valueNow, valueMax })
 
-    const meterColorClassName = typeof meterColor === 'function'
-      ? meterColor({ valueNow, valueMax }) : meterColor
+    const meterColorClassName =
+      typeof meterColor === 'function'
+        ? meterColor({ valueNow, valueMax })
+        : meterColor
 
     const classes = {
       [styles.root]: true,
@@ -152,8 +164,7 @@ class ProgressBar extends Component {
         elementRef={this.props.elementRef}
       >
         <span className={styles.trackLayout}>
-
-          { /* creates bottom border effect - <progress /> hard to style x-browser */ }
+          {/* creates bottom border effect - <progress /> hard to style x-browser */}
           <span className={styles.trackBorder}></span>
 
           <progress
@@ -168,11 +179,11 @@ class ProgressBar extends Component {
           />
         </span>
 
-        { value &&
+        {value && (
           <span className={styles.value} aria-hidden="true">
             {value}
           </span>
-        }
+        )}
       </View>
     )
     /* eslint-enable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */

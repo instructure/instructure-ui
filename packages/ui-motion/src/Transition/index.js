@@ -139,21 +139,19 @@ class Transition extends Component {
     }
   }
 
-  render () {
-    const {
-      type,
-      children,
-      ...props
-    } = this.props
+  render() {
+    const { type, children, ...props } = this.props
 
     const duration = ms(this.theme.duration)
 
-    const classNames = type ? {
-      'exited': styles[`${type}--exited`],
-      'exiting': styles[`${type}--exiting`],
-      'entering': styles[`${type}--entered`],
-      'entered': styles[`${type}--entering`]
-    } : {}
+    const classNames = type
+      ? {
+          exited: styles[`${type}--exited`],
+          exiting: styles[`${type}--exiting`],
+          entering: styles[`${type}--entered`],
+          entered: styles[`${type}--entering`]
+        }
+      : {}
 
     return (
       <BaseTransition

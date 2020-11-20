@@ -24,11 +24,14 @@
 
 const DOCS = {}
 
-module.exports = function getDocId (docData, options, context, interpolate) {
+module.exports = function getDocId(docData, options, context, interpolate) {
   const id = interpolate(_getDocId(options, docData, context))
 
   if (DOCS[id] && DOCS[id] !== docData.relativePath) {
-    console.warn('\x1b[33m%s\x1b[0m', `[${id}] is a duplicate id: ${docData.relativePath}, ${DOCS[id]}`)
+    console.warn(
+      '\x1b[33m%s\x1b[0m',
+      `[${id}] is a duplicate id: ${docData.relativePath}, ${DOCS[id]}`
+    )
   }
 
   DOCS[id] = docData.relativePath
@@ -39,7 +42,7 @@ module.exports = function getDocId (docData, options, context, interpolate) {
   return id
 }
 
-function _getDocId (options, docData, context) {
+function _getDocId(options, docData, context) {
   const { identifier } = options.document
   const { relativePath, id, describes } = docData
   const lowerPath = relativePath.toLowerCase()

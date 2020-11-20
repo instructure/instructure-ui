@@ -31,11 +31,7 @@ import { RadioInputLocator } from '../RadioInputLocator'
 describe('<RadioInput />', async () => {
   it('renders an input with type "radio"', async () => {
     await mount(
-      <RadioInput
-        label="fake label"
-        value="someValue"
-        name="someName"
-      />
+      <RadioInput label="fake label" value="someValue" name="someName" />
     )
 
     const radioInput = await RadioInputLocator.find()
@@ -61,7 +57,7 @@ describe('<RadioInput />', async () => {
 
       await input.click()
 
-      await wait (() => {
+      await wait(() => {
         expect(onClick).to.have.been.called()
       })
     })
@@ -242,7 +238,7 @@ describe('<RadioInput />', async () => {
           label="fake label"
           value="someValue"
           name="someName"
-          componentRef={(el) => ref = el}
+          componentRef={(el) => (ref = el)}
         />
       )
 
@@ -284,7 +280,9 @@ describe('<RadioInput />', async () => {
       )
 
       await wait(() => {
-        expect(consoleError).to.have.been.calledWithMatch('prop `label` is marked as required')
+        expect(consoleError).to.have.been.calledWithMatch(
+          'prop `label` is marked as required'
+        )
       })
     })
   })

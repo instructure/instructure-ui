@@ -25,7 +25,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, pickProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  pickProps,
+  getElementType
+} from '@instructure/ui-react-utils'
 import { IconButton } from '@instructure/ui-buttons'
 import { Transition } from '@instructure/ui-motion'
 import { Expandable } from '@instructure/ui-expandable'
@@ -33,7 +37,10 @@ import { controllable } from '@instructure/ui-prop-types'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
-import { IconArrowOpenEndSolid, IconArrowOpenDownSolid } from '@instructure/ui-icons'
+import {
+  IconArrowOpenEndSolid,
+  IconArrowOpenDownSolid
+} from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 
 /**
@@ -45,61 +52,55 @@ category: components
 class ToggleGroup extends Component {
   static propTypes = {
     /**
-    * the content to show and hide
-    */
+     * the content to show and hide
+     */
     children: PropTypes.node.isRequired,
     /**
-    * the content area next to the toggle button
-    */
+     * the content area next to the toggle button
+     */
     summary: PropTypes.node.isRequired,
     /**
-    * provides a screenreader label for the toggle button
-    * (takes `expanded` as an argument if a function)
-    */
-    toggleLabel: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]).isRequired,
+     * provides a screenreader label for the toggle button
+     * (takes `expanded` as an argument if a function)
+     */
+    toggleLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType,
     /**
-    * provides a reference to the underlying html root element
-    */
+     * provides a reference to the underlying html root element
+     */
     elementRef: PropTypes.func,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Whether the content is expanded or hidden
-    */
-    expanded: controllable(
-      PropTypes.bool,
-      'onToggle',
-      'defaultExpanded'
-    ),
+     * Whether the content is expanded or hidden
+     */
+    expanded: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded'),
     /**
-    * Whether the content is initially expanded or hidden (uncontrolled)
-    */
+     * Whether the content is initially expanded or hidden (uncontrolled)
+     */
     defaultExpanded: PropTypes.bool,
     /**
-    * Fired when the content display is toggled
-    */
+     * Fired when the content display is toggled
+     */
     onToggle: PropTypes.func,
     /**
-    * The icon displayed in the toggle button when the content is hidden
-    */
+     * The icon displayed in the toggle button when the content is hidden
+     */
     icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * The icon displayed in the toggle button when the content is showing
-    */
+     * The icon displayed in the toggle button when the content is showing
+     */
     iconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Transition content into view
-    */
+     * Transition content into view
+     */
     transition: PropTypes.bool,
     /**
-    * Toggle the border around the component
-    */
+     * Toggle the border around the component
+     */
     border: PropTypes.bool
   }
 
@@ -119,24 +120,24 @@ class ToggleGroup extends Component {
   _button = null
   _shouldTransition = false
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._button)
   }
 
-  focus () {
+  focus() {
     this._button.focus()
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this._shouldTransition = true
   }
 
-  renderIcon (expanded) {
+  renderIcon(expanded) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
     return <Icon />
   }
 
-  renderToggle (toggleProps, expanded) {
+  renderToggle(toggleProps, expanded) {
     const { toggleLabel, size } = this.props
     let label
     if (typeof toggleLabel === 'function') {
@@ -149,7 +150,7 @@ class ToggleGroup extends Component {
         {...toggleProps}
         withBackground={false}
         withBorder={false}
-        size={(size === 'large') ? 'medium' : 'small'}
+        size={size === 'large' ? 'medium' : 'small'}
         elementRef={(el) => {
           this._button = el
         }}
@@ -160,54 +161,62 @@ class ToggleGroup extends Component {
     )
   }
 
-  renderDetails (detailsProps) {
+  renderDetails(detailsProps) {
     return (
       <View
         {...detailsProps}
         display="block"
         borderWidth="small none none none"
       >
-        {(this.props.transition && this._shouldTransition) ?
+        {this.props.transition && this._shouldTransition ? (
           <Transition transitionOnMount in type="fade">
             {this.props.children}
-          </Transition> : this.props.children
-        }
+          </Transition>
+        ) : (
+          this.props.children
+        )}
       </View>
     )
   }
 
-  render () {
+  render() {
     const Element = getElementType(ToggleGroup, this.props)
 
     return (
-      <Expandable
-        {...pickProps(this.props, Expandable.propTypes)}
-      >
-      {({ expanded, getToggleProps, getDetailsProps }) => {
-        return (
-          <View
-            {...omitProps(this.props, ToggleGroup.propTypes)}
-            borderWidth={(this.props.border) ? 'small' : 'none'}
-            as={Element}
-            elementRef={this.props.elementRef}
-            display="block"
-            borderRadius="medium"
-            background="primary"
-          >
-            <Flex
-              padding={(this.props.size === 'small') ? 'x-small' : 'small small small x-small'}
+      <Expandable {...pickProps(this.props, Expandable.propTypes)}>
+        {({ expanded, getToggleProps, getDetailsProps }) => {
+          return (
+            <View
+              {...omitProps(this.props, ToggleGroup.propTypes)}
+              borderWidth={this.props.border ? 'small' : 'none'}
+              as={Element}
+              elementRef={this.props.elementRef}
+              display="block"
+              borderRadius="medium"
+              background="primary"
             >
-              <Flex.Item>
-                {this.renderToggle(getToggleProps(), expanded)}
-              </Flex.Item>
-              <Flex.Item shouldGrow shouldShrink padding="0 0 0 x-small">
-                {this.props.summary}
-              </Flex.Item>
-            </Flex>
-            {expanded ? this.renderDetails(getDetailsProps()) : <span {...getDetailsProps()} />}
-          </View>
-        )
-      }}
+              <Flex
+                padding={
+                  this.props.size === 'small'
+                    ? 'x-small'
+                    : 'small small small x-small'
+                }
+              >
+                <Flex.Item>
+                  {this.renderToggle(getToggleProps(), expanded)}
+                </Flex.Item>
+                <Flex.Item shouldGrow shouldShrink padding="0 0 0 x-small">
+                  {this.props.summary}
+                </Flex.Item>
+              </Flex>
+              {expanded ? (
+                this.renderDetails(getDetailsProps())
+              ) : (
+                <span {...getDetailsProps()} />
+              )}
+            </View>
+          )
+        }}
       </Expandable>
     )
   }

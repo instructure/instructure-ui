@@ -24,11 +24,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  mount,
-  expect,
-  locator
-} from '../index'
+import { mount, expect, locator } from '../index'
 
 const componentLocator = {
   attribute: 'data-test-id',
@@ -52,13 +48,13 @@ class Component extends React.Component {
     hide: false,
     children: (
       <div id="componentRoot" {...props}>
-        <input type="text"/>
+        <input type="text" />
         <input type="password" />
       </div>
     )
   }
 
-  render () {
+  render() {
     const { hide, children } = this.props
     return !hide ? children : null
   }
@@ -84,19 +80,23 @@ describe('locator', async () => {
 
   it('should filter out non-matching components with a selector', async () => {
     await mount(<Component />)
-    expect(await ComponentLocator.findAll('a', { expectEmpty: true }))
-      .to.have.length(0)
+    expect(
+      await ComponentLocator.findAll('a', { expectEmpty: true })
+    ).to.have.length(0)
   })
 
   it('should return no results when expected', async () => {
     await mount(<div />)
-    expect(await ComponentLocator.findAll({ expectEmpty: true }))
-      .to.have.length(0)
+    expect(
+      await ComponentLocator.findAll({ expectEmpty: true })
+    ).to.have.length(0)
   })
 
   it('can find an element by attribute name and value', async () => {
     await mount(<Component />)
-    expect(await ComponentLocator.findAll('input[type="password"]')).to.have.length(1)
+    expect(
+      await ComponentLocator.findAll('input[type="password"]')
+    ).to.have.length(1)
   })
 
   it('should support custom queries', async () => {
@@ -108,6 +108,8 @@ describe('locator', async () => {
   it('should always return the component root node', async () => {
     await mount(<Component />)
     const result = await ComponentLocator.find('input')
-    expect(result.getDOMNode()).to.equal(document.querySelector('#componentRoot'))
+    expect(result.getDOMNode()).to.equal(
+      document.querySelector('#componentRoot')
+    )
   })
 })

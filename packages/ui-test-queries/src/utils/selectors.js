@@ -29,13 +29,7 @@ import { firstOrNull } from './firstOrNull'
 
 import { elementToString } from './elementToString'
 
-import {
-  tabbable,
-  focusable,
-  clickable,
-  visible,
-  exists
-} from './helpers'
+import { tabbable, focusable, clickable, visible, exists } from './helpers'
 
 import {
   matchElementByTitle,
@@ -70,10 +64,7 @@ function querySelectorParents(element, selector, options) {
   }
   let parentNode = element.parentNode
 
-  while (
-    parentNode &&
-    parentNode !== document
-  ) {
+  while (parentNode && parentNode !== document) {
     if (matchesSelector(parentNode, selector, options)) {
       results.push(parentNode)
     }
@@ -85,17 +76,19 @@ function querySelectorParents(element, selector, options) {
 
 function querySelectorFrames(element, selector, options) {
   return querySelectorAll(element, 'iframe')
-    .filter(frame => matchesSelector(frame, selector, options))
+    .filter((frame) => matchesSelector(frame, selector, options))
     .map((frame) => {
       let doc = null
       try {
         doc = frame.contentDocument.documentElement
       } catch (e) {
-        console.warn(`[ui-test-queries] could not find document element for iframe: ${e}`)
+        console.warn(
+          `[ui-test-queries] could not find document element for iframe: ${e}`
+        )
       }
       return doc
     })
-    .filter(doc => doc !== null)
+    .filter((doc) => doc !== null)
 }
 
 function querySelectorAllWithin(containerSelector, element, selector, options) {
@@ -104,12 +97,15 @@ function querySelectorAllWithin(containerSelector, element, selector, options) {
 
   if (selector) {
     // if there is a selector, filter out containers that don't have a match inside...
-    containers = containers
-      .filter((container) => {
-        const results = querySelectorAll(container, selector)
-          .filter(result => firstOrNull(querySelectorParents(result, containerSelector, options)) === container)
-        return results.length > 0
-      })
+    containers = containers.filter((container) => {
+      const results = querySelectorAll(container, selector).filter(
+        (result) =>
+          firstOrNull(
+            querySelectorParents(result, containerSelector, options)
+          ) === container
+      )
+      return results.length > 0
+    })
   }
 
   return containers
@@ -132,7 +128,8 @@ function throwQueryError(element, selector) {
       `element: ${elementToString(element, 7000, { highlight: false })}`,
       `selector: ${JSON.stringify(selector)}`
     ]
-      .filter(Boolean).join('\n')
+      .filter(Boolean)
+      .join('\n')
   )
 }
 
@@ -147,10 +144,12 @@ function findAllMatches(element, selector, options) {
   Sizzle(selector, element, results)
 
   if (options.ignore) {
-    results = results.filter(result => !matchesSelector(result, options.ignore))
+    results = results.filter(
+      (result) => !matchesSelector(result, options.ignore)
+    )
   }
 
-  results = results.filter(result => matchesSelector(result, ':exists'))
+  results = results.filter((result) => matchesSelector(result, ':exists'))
 
   return results
 }

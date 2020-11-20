@@ -33,14 +33,16 @@ function bindElementToUtilities(element, customMethods = {}) {
   if (!element) {
     return element
   } else if (Array.isArray(element)) {
-    return element.map(el => bindElementToUtilities(el, customMethods))
+    return element.map((el) => bindElementToUtilities(el, customMethods))
   } else if (typeof element.getDOMNode === 'function') {
     // eslint-disable-next-line no-param-reassign
     element = element.getDOMNode()
   }
 
   if (!isElement(element)) {
-    throw new Error('[ui-test-queries] could not bind utilities to invalid DOM Element!')
+    throw new Error(
+      '[ui-test-queries] could not bind utilities to invalid DOM Element!'
+    )
   }
 
   return {
@@ -51,6 +53,4 @@ function bindElementToUtilities(element, customMethods = {}) {
   }
 }
 
-export {
-  bindElementToUtilities
-}
+export { bindElementToUtilities }

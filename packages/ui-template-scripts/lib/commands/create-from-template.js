@@ -25,7 +25,8 @@
 const { handleCreateFromTemplate } = require('../handlers')
 
 exports.command = 'create-from-template'
-exports.desc = 'Copy template source file or directory to a specified destination and replace variables with designated values.'
+exports.desc =
+  'Copy template source file or directory to a specified destination and replace variables with designated values.'
 
 exports.builder = (yargs) => {
   yargs.option('template', {
@@ -45,24 +46,21 @@ exports.builder = (yargs) => {
   yargs.option('name', {
     alias: 'n',
     type: 'string',
-    describe: 'The name of the generated source file or directory (Note: if generating a file, the name should include the file extension ex. "myFile.js").',
+    describe:
+      'The name of the generated source file or directory (Note: if generating a file, the name should include the file extension ex. "myFile.js").',
     demandOption: true
   })
 
   yargs.option('values', {
     type: 'string',
-    describe: 'A JSON string mapping variable names to values which will be used to replace variables in the templates. Ex. \'{"NAME":"my-app","DESC":"A cool app"}\'.',
+    describe:
+      'A JSON string mapping variable names to values which will be used to replace variables in the templates. Ex. \'{"NAME":"my-app","DESC":"A cool app"}\'.',
     default: '{}'
   })
 }
 
 exports.handler = (argv) => {
-  const {
-    template,
-    path,
-    name,
-    values
-  } = argv
+  const { template, path, name, values } = argv
 
   handleCreateFromTemplate({ template, path, name, values })
 }

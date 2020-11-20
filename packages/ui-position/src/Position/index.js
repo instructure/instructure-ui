@@ -35,7 +35,10 @@ import {
   ensureSingleChild,
   deprecated
 } from '@instructure/ui-react-utils'
-import { addPositionChangeListener, findDOMNode } from '@instructure/ui-dom-utils'
+import {
+  addPositionChangeListener,
+  findDOMNode
+} from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { shallowEqual, deepEqual } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
@@ -49,14 +52,14 @@ import { PositionPropTypes } from '../PositionPropTypes'
 import styles from './styles.css'
 import theme from './theme'
 
-@deprecated('8.0.0', null, 'Use Position\'s `renderTarget` prop instead.')
+@deprecated('8.0.0', null, "Use Position's `renderTarget` prop instead.")
 @testable()
 class PositionTarget extends ComponentIdentifier {
   static displayName = 'PositionTarget'
   static locatorAttribute = 'data-position-target'
 }
 
-@deprecated('8.0.0', null, 'Use Posiition\'s `children` instead.')
+@deprecated('8.0.0', null, "Use Posiition's `children` instead.")
 @testable()
 class PositionContent extends ComponentIdentifier {
   static displayName = 'PositionContent'
@@ -148,12 +151,12 @@ class Position extends Component {
 
     /* eslint-disable react/require-default-props */
     /**
-    * __Deprecated - use `shouldTrackPosition`__
-    */
+     * __Deprecated - use `shouldTrackPosition`__
+     */
     trackPosition: PropTypes.bool,
     /**
-    * __Deprecated - use `shouldPositionOverTarget`__
-    */
+     * __Deprecated - use `shouldPositionOverTarget`__
+     */
     over: PropTypes.bool
     /* eslint-enable react/require-default-props */
   }
@@ -175,7 +178,7 @@ class Position extends Component {
     children: null
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -183,13 +186,16 @@ class Position extends Component {
       ...this.calculatePosition(props)
     }
 
-    this.position = debounce(this.position, 0, { leading: false, trailing: true })
+    this.position = debounce(this.position, 0, {
+      leading: false,
+      trailing: true
+    })
     this._id = this.props.id || uid('Position')
   }
 
   _timeouts = []
 
-  shouldComponentUpdate (nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
     return (
       !deepEqual(this.state, nextState) ||
       !shallowEqual(this.props, nextProps) ||
@@ -197,24 +203,31 @@ class Position extends Component {
     )
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.toggleLocatorAttributes(true)
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     this.position()
     this.toggleLocatorAttributes(true)
 
     if (this.props.shouldTrackPosition !== prevProps.shouldTrackPosition) {
-      this.props.shouldTrackPosition ? this.startTracking() : this.stopTracking()
+      this.props.shouldTrackPosition
+        ? this.startTracking()
+        : this.stopTracking()
     } else if (this.props.trackPosition !== prevProps.trackPosition) {
       this.props.trackPosition ? this.startTracking() : this.stopTracking()
     }
 
     const { style, placement } = this.state
 
-    if (style && prevState.style && (placement !== prevState.placement || style.top !== prevState.style.top ||
-        style.left !== prevState.style.left)) {
+    if (
+      style &&
+      prevState.style &&
+      (placement !== prevState.placement ||
+        style.top !== prevState.style.top ||
+        style.left !== prevState.style.left)
+    ) {
       this.props.onPositionChanged({
         top: style.top,
         left: style.left,
@@ -223,15 +236,15 @@ class Position extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.position.cancel()
     this.stopTracking()
-    this._timeouts.forEach(timeout => clearTimeout(timeout))
+    this._timeouts.forEach((timeout) => clearTimeout(timeout))
 
     this.toggleLocatorAttributes(false)
   }
 
-  toggleLocatorAttributes (set) {
+  toggleLocatorAttributes(set) {
     // We have to find the actual DOM nodes and append the attributes
     // directly, as we can't be sure when safe cloning the child that
     // it will accept the data attribute as a prop
@@ -269,7 +282,10 @@ class Position extends Component {
 
     this._timeouts.push(
       setTimeout(() => {
-        if (this.state.positioned && typeof this.props.onPositioned === 'function') {
+        if (
+          this.state.positioned &&
+          typeof this.props.onPositioned === 'function'
+        ) {
           this.props.onPositioned({
             top: this.state.style.top,
             left: this.state.style.left,
@@ -280,7 +296,7 @@ class Position extends Component {
     )
   }
 
-  calculatePosition (props) {
+  calculatePosition(props) {
     return calculateElementPosition(this._content, this._target, {
       placement: props.placement,
       offsetX: props.offsetX,
@@ -298,26 +314,32 @@ class Position extends Component {
     })
   }
 
-  startTracking () {
-    this._listener = this._listener || addPositionChangeListener(this._target, this.position)
+  startTracking() {
+    this._listener =
+      this._listener || addPositionChangeListener(this._target, this.position)
   }
 
-  stopTracking () {
+  stopTracking() {
     if (this._listener) {
       this._listener.remove()
       this._listener = null
     }
   }
 
-  renderContent () {
-    let content = ComponentIdentifier.pick(Position.Content, this.props.children)
+  renderContent() {
+    let content = ComponentIdentifier.pick(
+      Position.Content,
+      this.props.children
+    )
     if (!content) {
       content = ensureSingleChild(this.props.children)
     }
 
     if (content) {
       content = safeCloneElement(content, {
-        ref: el => { this._content = el },
+        ref: (el) => {
+          this._content = el
+        },
         style: {
           ...content.props.style,
           ...this.state.style
@@ -344,7 +366,7 @@ class Position extends Component {
     return content
   }
 
-  renderTarget () {
+  renderTarget() {
     let target = ComponentIdentifier.pick(Position.Target, this.props.children)
     if (!target) {
       target = callRenderProp(this.props.renderTarget)
@@ -352,7 +374,9 @@ class Position extends Component {
 
     if (target) {
       return safeCloneElement(target, {
-        ref: el => { this._target = el },
+        ref: (el) => {
+          this._target = el
+        },
         [Position.targetLocatorAttribute]: this._id
       })
     } else if (this.props.target) {
@@ -362,7 +386,7 @@ class Position extends Component {
     }
   }
 
-  render () {
+  render() {
     const props = { [Position.locatorAttribute]: this._id }
     return (
       <span {...props}>

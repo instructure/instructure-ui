@@ -26,7 +26,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { debounce } from '@instructure/debounce'
-import { addResizeListener, getBoundingClientRect } from '@instructure/ui-dom-utils'
+import {
+  addResizeListener,
+  getBoundingClientRect
+} from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
@@ -71,24 +74,29 @@ class DrawerContent extends Component {
   _debounced = null
   _timeouts = []
 
-  componentDidMount () {
+  componentDidMount() {
     const rect = getBoundingClientRect(this._content)
     // set initial size
-    this.props.onSizeChange({width: rect.width, height: rect.height})
+    this.props.onSizeChange({ width: rect.width, height: rect.height })
     // listen for changes to size
-    this._debounced = debounce(this.props.onSizeChange, 100, {leading: false, trailing: true})
+    this._debounced = debounce(this.props.onSizeChange, 100, {
+      leading: false,
+      trailing: true
+    })
     this._resizeListener = addResizeListener(this._content, this._debounced)
   }
 
-  componentDidUpdate () {
-    this._timeouts.push(setTimeout(() => {
-      this.setState({
-        shouldTransition: true
+  componentDidUpdate() {
+    this._timeouts.push(
+      setTimeout(() => {
+        this.setState({
+          shouldTransition: true
+        })
       })
-    }))
+    )
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this._resizeListener) {
       this._resizeListener.remove()
     }
@@ -109,7 +117,7 @@ class DrawerContent extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       style, // eslint-disable-line react/prop-types
       label,
@@ -118,7 +126,9 @@ class DrawerContent extends Component {
 
     return (
       <div
-        {...omitProps(this.props, DrawerContent.propTypes, ['shouldTransition'])}
+        {...omitProps(this.props, DrawerContent.propTypes, [
+          'shouldTransition'
+        ])}
         role={role}
         style={style}
         ref={this.handleContentRef}

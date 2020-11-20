@@ -47,45 +47,41 @@ describe('<DeprecatedButton/>', async () => {
   const iconSelector = 'svg[title="myIcon"]'
 
   it('should render the children as button text', async () => {
-    await mount(
-      <DeprecatedButton>Hello World</DeprecatedButton>
-    )
-    expect(await DeprecatedButtonLocator.find(':contains(Hello World)')).to.exist()
+    await mount(<DeprecatedButton>Hello World</DeprecatedButton>)
+    expect(
+      await DeprecatedButtonLocator.find(':contains(Hello World)')
+    ).to.exist()
   })
 
   it('should render a button', async () => {
-    await mount(
-      <DeprecatedButton>Hello World</DeprecatedButton>
-    )
-    expect(await DeprecatedButtonLocator.find('button[type="button"]')).to.exist()
+    await mount(<DeprecatedButton>Hello World</DeprecatedButton>)
+    expect(
+      await DeprecatedButtonLocator.find('button[type="button"]')
+    ).to.exist()
   })
 
   it('should not error with a null child', async () => {
-    await mount(
-      <DeprecatedButton>Hello World{null}</DeprecatedButton>
-    )
-    expect( await DeprecatedButtonLocator.find('button')).to.exist()
+    await mount(<DeprecatedButton>Hello World{null}</DeprecatedButton>)
+    expect(await DeprecatedButtonLocator.find('button')).to.exist()
   })
 
   it('should render a link styled as a button if href is provided', async () => {
     await mount(
-      <DeprecatedButton href='example.html'>Hello World</DeprecatedButton>
+      <DeprecatedButton href="example.html">Hello World</DeprecatedButton>
     )
-    expect(await DeprecatedButtonLocator.findAll('[href="example.html"]')).to.have.length(1)
+    expect(
+      await DeprecatedButtonLocator.findAll('[href="example.html"]')
+    ).to.have.length(1)
   })
 
   it('should render as a link when `to` prop is provided', async () => {
-    await mount(
-      <DeprecatedButton to="/example">Test</DeprecatedButton>
-    )
+    await mount(<DeprecatedButton to="/example">Test</DeprecatedButton>)
     const link = await DeprecatedButtonLocator.find('a')
     expect(link.getAttribute('to')).to.equal('/example')
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    await mount(
-      <DeprecatedButton as='span'>Hello World</DeprecatedButton>
-    )
+    await mount(<DeprecatedButton as="span">Hello World</DeprecatedButton>)
     const span = await DeprecatedButtonLocator.find()
     expect(span.getTagName()).to.equal('span')
   })
@@ -93,7 +89,9 @@ describe('<DeprecatedButton/>', async () => {
   it('should set role="button"', async () => {
     const onClick = stub()
     await mount(
-      <DeprecatedButton as='span' onClick={onClick}>Hello World</DeprecatedButton>
+      <DeprecatedButton as="span" onClick={onClick}>
+        Hello World
+      </DeprecatedButton>
     )
     expect(await DeprecatedButtonLocator.find('[role="button"]')).to.exist()
   })
@@ -101,7 +99,9 @@ describe('<DeprecatedButton/>', async () => {
   it('should set tabIndex="0"', async () => {
     const onClick = stub()
     await mount(
-      <DeprecatedButton as='span' onClick={onClick}>Hello World</DeprecatedButton>
+      <DeprecatedButton as="span" onClick={onClick}>
+        Hello World
+      </DeprecatedButton>
     )
     expect(await DeprecatedButtonLocator.find('[tabIndex="0"]')).to.exist()
   })
@@ -109,15 +109,15 @@ describe('<DeprecatedButton/>', async () => {
   it('should pass down the type prop to the button element', async () => {
     const onClick = stub()
     await mount(
-      <DeprecatedButton type="submit" onClick={onClick}>Hello World</DeprecatedButton>
+      <DeprecatedButton type="submit" onClick={onClick}>
+        Hello World
+      </DeprecatedButton>
     )
     expect(await DeprecatedButtonLocator.find('[type="submit"]')).to.exist()
   })
 
   it('should pass down an icon via the icon property', async () => {
-    await mount(
-      <DeprecatedButton icon={icon}>Hello World</DeprecatedButton>
-    )
+    await mount(<DeprecatedButton icon={icon}>Hello World</DeprecatedButton>)
     const button = await DeprecatedButtonLocator.find()
     expect(await button.find(iconSelector)).to.exist()
   })
@@ -125,7 +125,9 @@ describe('<DeprecatedButton/>', async () => {
   it('should apply fluid-width styles when set to fluidWidth', async () => {
     await mount(
       <div style={{ width: '70px' }}>
-        <DeprecatedButton fluidWidth>More Than Just Hello World</DeprecatedButton>
+        <DeprecatedButton fluidWidth>
+          More Than Just Hello World
+        </DeprecatedButton>
       </div>
     )
     const button = await DeprecatedButtonLocator.find('button')
@@ -135,9 +137,13 @@ describe('<DeprecatedButton/>', async () => {
   it('should not allow padding as a property', async () => {
     const consoleError = stub(console, 'error')
     await mount(
-      <DeprecatedButton padding='24px 4px 24px 8px'>Hello World</DeprecatedButton>
+      <DeprecatedButton padding="24px 4px 24px 8px">
+        Hello World
+      </DeprecatedButton>
     )
-    expect(consoleError).to.be.calledWith(`Warning: [DeprecatedButton] prop 'padding' is not allowed.`)
+    expect(consoleError).to.be.calledWith(
+      `Warning: [DeprecatedButton] prop 'padding' is not allowed.`
+    )
   })
 
   it('focuses with the focus helper', async () => {
@@ -173,9 +179,9 @@ describe('<DeprecatedButton/>', async () => {
     it('should not call onClick when button is disabled', async () => {
       const onClick = stub()
       await mount(
-        <DeprecatedButton
-          disabled
-          onClick={onClick}>Hello World</DeprecatedButton>
+        <DeprecatedButton disabled onClick={onClick}>
+          Hello World
+        </DeprecatedButton>
       )
       const button = await DeprecatedButtonLocator.find()
       await button.click(null, { clickable: false })
@@ -186,9 +192,9 @@ describe('<DeprecatedButton/>', async () => {
     it('should not call onClick when button is readOnly', async () => {
       const onClick = stub()
       await mount(
-        <DeprecatedButton
-          readOnly
-          onClick={onClick}>Hello World</DeprecatedButton>
+        <DeprecatedButton readOnly onClick={onClick}>
+          Hello World
+        </DeprecatedButton>
       )
       const button = await DeprecatedButtonLocator.find()
       await button.click(null, { clickable: false })
@@ -198,9 +204,7 @@ describe('<DeprecatedButton/>', async () => {
 
     it('should not call onClick when button is disabled and an href prop is provided', async () => {
       const onClick = stub()
-      await mount(
-        <DeprecatedButton href="#">Hello World</DeprecatedButton>
-      )
+      await mount(<DeprecatedButton href="#">Hello World</DeprecatedButton>)
       const button = await DeprecatedButtonLocator.find()
       await button.click()
       expect(onClick).to.have.not.been.called()
@@ -209,10 +213,9 @@ describe('<DeprecatedButton/>', async () => {
     it('should not call onClick when button is readOnly and an href prop is provided', async () => {
       const onClick = stub()
       await mount(
-        <DeprecatedButton
-          readOnly
-          onClick={onClick}
-          href="#">Hello World</DeprecatedButton>
+        <DeprecatedButton readOnly onClick={onClick} href="#">
+          Hello World
+        </DeprecatedButton>
       )
       const button = await DeprecatedButtonLocator.find()
 
@@ -224,9 +227,9 @@ describe('<DeprecatedButton/>', async () => {
     it('should call onClick when space key is pressed if href is provided', async () => {
       const onClick = stub()
       await mount(
-        <DeprecatedButton
-          onClick={onClick}
-          href="#">Hello World</DeprecatedButton>
+        <DeprecatedButton onClick={onClick} href="#">
+          Hello World
+        </DeprecatedButton>
       )
       const button = await DeprecatedButtonLocator.find()
       await button.keyDown('space')
@@ -236,7 +239,9 @@ describe('<DeprecatedButton/>', async () => {
     it('should call onClick when enter key is pressed when not a button or link', async () => {
       const onClick = stub()
       await mount(
-        <DeprecatedButton as="span" onClick={onClick}>Hello World</DeprecatedButton>
+        <DeprecatedButton as="span" onClick={onClick}>
+          Hello World
+        </DeprecatedButton>
       )
       const span = await DeprecatedButtonLocator.find('[type="button"]')
       await span.keyDown('enter')
@@ -246,10 +251,9 @@ describe('<DeprecatedButton/>', async () => {
     it('should not call onClick when button is disabled and space key is pressed', async () => {
       const onClick = stub()
       await mount(
-        <DeprecatedButton
-          disabled
-          onClick={onClick}
-          href="#">Hello World</DeprecatedButton>
+        <DeprecatedButton disabled onClick={onClick} href="#">
+          Hello World
+        </DeprecatedButton>
       )
       const button = await DeprecatedButtonLocator.find()
       await button.keyDown('space')
@@ -259,10 +263,9 @@ describe('<DeprecatedButton/>', async () => {
     it('should not call onClick when button is readOnly and space key is pressed', async () => {
       const onClick = stub()
       await mount(
-        <DeprecatedButton
-          readOnly
-          onClick={onClick}
-          href="#">Hello World</DeprecatedButton>
+        <DeprecatedButton readOnly onClick={onClick} href="#">
+          Hello World
+        </DeprecatedButton>
       )
       const button = await DeprecatedButtonLocator.find()
       await button.keyDown('space')
@@ -277,12 +280,13 @@ describe('<DeprecatedButton/>', async () => {
       cursor: 'move'
     }
 
-    const ignore = [
-      'elementRef'
-    ]
+    const ignore = ['elementRef']
 
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
+      .filter(
+        (prop) =>
+          prop !== 'theme' && prop !== 'children' && !ignore.includes(prop)
+      )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
@@ -304,21 +308,17 @@ describe('<DeprecatedButton/>', async () => {
             expect(consoleError).to.not.be.called()
           })
         }
-    })
+      })
 
     it("passes cursor='pointer' to View by default", async () => {
-      await mount(
-        <DeprecatedButton>Hello World</DeprecatedButton>
-      )
+      await mount(<DeprecatedButton>Hello World</DeprecatedButton>)
       const button = await DeprecatedButtonLocator.find()
       const cursor = button.getComputedStyle().cursor
       expect(cursor).to.equal('pointer')
     })
 
     it("passes cursor='not-allowed' to View when disabled", async () => {
-      await mount(
-        <DeprecatedButton disabled>Hello World</DeprecatedButton>
-      )
+      await mount(<DeprecatedButton disabled>Hello World</DeprecatedButton>)
       const button = await DeprecatedButtonLocator.find()
       const cursor = button.getComputedStyle().cursor
       expect(cursor).to.equal('not-allowed')
@@ -338,9 +338,7 @@ describe('<DeprecatedButton/>', async () => {
 
     describe('when disabled', async () => {
       it('sets the disabled attribute so that the button is not in tab order', async () => {
-        await mount(
-          <DeprecatedButton disabled>Hello World</DeprecatedButton>
-        )
+        await mount(<DeprecatedButton disabled>Hello World</DeprecatedButton>)
         const button = await DeprecatedButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()
       })
@@ -348,9 +346,7 @@ describe('<DeprecatedButton/>', async () => {
 
     describe('when readOnly', () => {
       it('sets the disabled attribute so that the button is not in tab order', async () => {
-        await mount(
-          <DeprecatedButton readOnly>Hello World</DeprecatedButton>
-        )
+        await mount(<DeprecatedButton readOnly>Hello World</DeprecatedButton>)
         const button = await DeprecatedButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()
       })

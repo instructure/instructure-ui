@@ -42,7 +42,7 @@ try {
   process.exit(1)
 }
 
-async function distTag (command, versionToTag, tag, config) {
+async function distTag(command, versionToTag, tag, config) {
   createNPMRCFile(config)
 
   info(`📦  Version to tag as ${tag}: ${versionToTag}`)
@@ -51,18 +51,20 @@ async function distTag (command, versionToTag, tag, config) {
     process.exit(0)
   }
 
-  return Promise.all(getPackages().map(async pkg => {
-    if (pkg.private) {
-      info(`${pkg.name} is private.`)
-    } else {
-      const toTag = `${pkg.name}@${versionToTag}`
-      info(`📦  Running 'dist-tag ${command} ${toTag} ${tag}'...`)
-      try {
-        await runCommandAsync('npm', ['dist-tag', command, toTag, tag])
-      } catch (err) {
-        error(err)
+  return Promise.all(
+    getPackages().map(async (pkg) => {
+      if (pkg.private) {
+        info(`${pkg.name} is private.`)
+      } else {
+        const toTag = `${pkg.name}@${versionToTag}`
+        info(`📦  Running 'dist-tag ${command} ${toTag} ${tag}'...`)
+        try {
+          await runCommandAsync('npm', ['dist-tag', command, toTag, tag])
+        } catch (err) {
+          error(err)
+        }
+        info(`📦  ${toTag} tags were successfully updated!`)
       }
-      info(`📦  ${toTag} tags were successfully updated!`)
-    }
-  }))
+    })
+  )
 }

@@ -26,19 +26,20 @@ import { warn } from '@instructure/console/macro'
 
 let hasRan = false
 /**
-* ---
-* category: utilities/themes
-* ---
-* Sets the document text direction as it's required for themeable component
-* bidirectional styles.
-*/
-function setTextDirection () {
+ * ---
+ * category: utilities/themes
+ * ---
+ * Sets the document text direction as it's required for themeable component
+ * bidirectional styles.
+ */
+function setTextDirection() {
   if (hasRan) return
   hasRan = true
   if (canUseDOM) {
     const dir = document.documentElement.getAttribute('dir')
     if (!dir) {
-      warn(dir,
+      warn(
+        dir,
         `[themeable] component styles require setting a 'dir' attribute on the HTML element.
         To prevent breaking changes, we'll set it to a default value: 'ltr'.`
       )

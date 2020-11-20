@@ -39,7 +39,7 @@ const ThemeablePropValues = {
   },
 
   BORDER_WIDTHS: {
-    '0': '0',
+    0: '0',
     none: 'none',
     small: 'small',
     medium: 'medium',
@@ -47,7 +47,7 @@ const ThemeablePropValues = {
   },
 
   BORDER_RADII: {
-    '0': '0',
+    0: '0',
     none: 'none',
     small: 'small',
     medium: 'medium',
@@ -71,7 +71,7 @@ const ThemeablePropValues = {
   },
 
   SPACING: {
-    '0': '0',
+    0: '0',
     none: 'none',
     auto: 'auto',
     xxxSmall: 'xxx-small',

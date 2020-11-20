@@ -27,7 +27,12 @@ import '@instructure/ui-polyfill-loader!'
 import 'storybook-chromatic'
 
 import { create } from '@storybook/theming'
-import { getStorybook, storiesOf, configure, addParameters } from '@storybook/react'
+import {
+  getStorybook,
+  storiesOf,
+  configure,
+  addParameters
+} from '@storybook/react'
 
 import { theme } from '@instructure/canvas-theme'
 theme.use({ overrides: { transitions: { duration: '0ms' } } })
@@ -44,7 +49,8 @@ addParameters({
       base: 'light',
       name: 'instructure-ui',
       brandUrl: 'https://instructure.design',
-      brandImage: 'https://instructure.design/icons-bea652a7d0546b99c7cba9d3b4a538ee/favicon-32x32.png'
+      brandImage:
+        'https://instructure.design/icons-bea652a7d0546b99c7cba9d3b4a538ee/favicon-32x32.png'
     }),
     showPanel: false,
     isFullscreen: false
@@ -52,11 +58,18 @@ addParameters({
 })
 
 configure(() => {
-  const examplesContext = require.context('../../', true, /^.*\/src\/.*\.examples\.js$/, 'lazy')
+  const examplesContext = require.context(
+    '../../',
+    true,
+    /^.*\/src\/.*\.examples\.js$/,
+    'lazy'
+  )
   let numStories = 0
 
   // eslint-disable-next-line no-console
-  console.log(`Creating stories for ${examplesContext.keys().length} components...`)
+  console.log(
+    `Creating stories for ${examplesContext.keys().length} components...`
+  )
 
   examplesContext.keys().map((requirePath) => {
     examplesContext(requirePath).then(({ componentName, sections }) => {
@@ -67,12 +80,11 @@ configure(() => {
           pages.forEach((page, i) => {
             page.renderExample = renderExample
             numStories++
-            stories
-              .add(
-                `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
-                renderPage.bind(null, page),
-                { chromatic: page.parameters }
-              )
+            stories.add(
+              `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
+              renderPage.bind(null, page),
+              { chromatic: page.parameters }
+            )
           })
         })
       }

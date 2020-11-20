@@ -1,9 +1,11 @@
+/* eslint-disable */
+
 @deprecated('1.0.0', {
   foo: 'bar'
 })
 @deprecated('3.0.0', {
   onReady: 'onOpen',
-  isOpen:'open',
+  isOpen: 'open',
   getDefaultFocusElement: 'defaultFocusElement'
 })
 class Modal extends React.Component {}
