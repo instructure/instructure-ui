@@ -6,19 +6,23 @@ order: 2
 
 ## Contributing
 
+Contributions are welcome! If you want to submit a change you will need to open a pull request on Github. To do so first fork the repository to your own Github account. 
+
 __Installation steps:__
+
+Follow these steps to download and run Instructure-UI on your machine:
 
 1. Install [Git](http://git-scm.com/).
 1. Install [Node 10.x](https://nodejs.org/en/)) (we recommend [nvm](https://github.com/creationix/nvm) to manage multiple Node versions).
 1. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/) (You will need v1.1.0+).
-1. Clone this repository: `git clone https://github.com/instructure/instructure-ui.git`.
+1. Clone the repository with `git clone` (If you want to make changes clone the forked repo in your account.)
 1. Run `cd instructure-ui`
 1. Run `yarn`
 1. Run `yarn bootstrap`
 
 Run `yarn run` to list the available commands.
 
-When you are ready with your changes open a pull request on Github to the `master` branch and we will review and merge it.
+When you are ready with your changes open a pull request on Github to the `master` branch and the maintainers will review and merge it.
 
 ### Running the documentation app
 
@@ -29,8 +33,7 @@ When you are ready with your changes open a pull request on Github to the `maste
 ### Development
 
 1. Run `yarn build:watch` to build all of the packages for a development environment and watch for changes.
-1. Run `yarn dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should
-see the page auto-reload.
+1. Run `yarn dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should see the page auto-reload.
 1. Run `yarn test:watch --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
 1. Run `yarn test` to run all the tests for every package.
 
