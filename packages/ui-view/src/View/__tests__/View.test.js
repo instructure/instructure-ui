@@ -110,9 +110,9 @@ describe('<View />', async () => {
 
     const styles = getComputedStyle(subject.getDOMNode())
 
-    expect(styles['backgroundColor']).to.equal('rgba(0, 0, 0, 0)')
-    expect(styles['borderStyle']).to.equal('none')
-    expect(styles['opacity']).to.equal('1')
+    expect(styles['backgroundColor']).to.not.equal('red')
+    expect(styles['borderStyle']).to.not.equal('dotted')
+    expect(styles['opacity']).to.not.equal('0.5')
   })
 
   it('should pass className', async () => {

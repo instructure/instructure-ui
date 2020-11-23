@@ -43,7 +43,6 @@ const getBorderStyle = ({ borderRadius, borderWidth, dir, theme }) => {
     ),
     borderWidth: getShorthandPropValue(
       'View',
-
       theme,
       isRtlDirection ? mirrorShorthandEdges(borderWidth) : borderWidth,
       'borderWidth'
@@ -116,7 +115,7 @@ const getStyleProps = ({ cursor, style }) => {
     'minHeight',
     // Img:
     'filter',
-    // Flex.Item:
+    // FlexItem
     'flexBasis',
     // Avatar:
     'backgroundImage',
