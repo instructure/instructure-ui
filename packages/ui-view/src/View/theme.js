@@ -95,9 +95,7 @@ export default function generateComponentTheme(theme, themeOverride = {}) {
     ...makeThemeVars('padding', theme?.spacing ?? {}),
     ...makeThemeVars('shadow', theme?.shadows ?? {}),
     ...makeThemeVars('stacking', theme?.stacking ?? {}),
-    ...makeThemeVars('border', theme?.borders ?? {}),
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    ...makeThemeVars('border', theme?.borders ?? {})
   }
 
   return {
