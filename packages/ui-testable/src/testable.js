@@ -86,7 +86,6 @@ const withTestable = !APPEND_DATA_ATTRIBUTE
 
       TestableComponent.selector = selector
       TestableComponent.displayName = displayName
-      TestableComponent.name = name
 
       return TestableComponent
     }

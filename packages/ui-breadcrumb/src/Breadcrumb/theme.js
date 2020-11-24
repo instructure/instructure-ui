@@ -28,7 +28,7 @@
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
  * @return {Object} The final theme object with the overrides and component variables
  */
-export default function generateComponentTheme(theme, themeOverride = {}) {
+const generateComponentTheme = (theme, themeOverride = {}) => {
   const { colors, typography, key: themeName } = theme
 
   const themeSpecificStyle = {}
@@ -55,3 +55,5 @@ export default function generateComponentTheme(theme, themeOverride = {}) {
     ...themeOverride
   }
 }
+
+export default generateComponentTheme
