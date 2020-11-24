@@ -26,7 +26,7 @@
 
 import { makeThemeVars } from '@instructure/ui-themeable'
 
-export default function generateComponentTheme(theme, themeOverride = {}) {
+const generateComponentTheme = (theme, themeOverride = {}) => {
   const { key: themeName } = theme
 
   const themeSpecificStyle = {
@@ -104,3 +104,5 @@ export default function generateComponentTheme(theme, themeOverride = {}) {
     ...themeOverride
   }
 }
+
+export default generateComponentTheme
