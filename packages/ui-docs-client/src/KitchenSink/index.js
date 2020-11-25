@@ -23,6 +23,7 @@
  */
 
 import React, { useState } from 'react'
+import { ApplyTextDirection } from '@instructure/ui-i18n'
 import { Avatar } from '@instructure/ui-avatar'
 import { Pill } from '@instructure/ui-pill'
 import { Flex, FlexItem } from '@instructure/ui-flex'
@@ -131,6 +132,10 @@ const components = {
 }
 const App = () => {
   const [renderedComponent, setRenderedComponent] = useState()
+  const [dir, setDir] = useState('ltr')
+  const toggleDir = () => {
+    setDir((prevDir) => (prevDir === 'ltr' ? 'rtl' : 'ltr'))
+  }
 
   return (
     <div style={{ display: 'flex' }}>
@@ -154,14 +159,25 @@ const App = () => {
         ))}
       </div>
       <div style={{ flex: 10 }}>
-        <h1 style={{ textAlign: 'center' }}>{renderedComponent}</h1>
-        {components[renderedComponent] && components[renderedComponent][0]
-          ? components[renderedComponent].map((component, index) => (
-              <div key={`${renderedComponent}-${index}`}>
-                {component} <hr />
-              </div>
-            ))
-          : components[renderedComponent]}
+        {renderedComponent && (
+          <h1 style={{ textAlign: 'center' }}>
+            <div>{renderedComponent}</div>
+            <button style={{ margin: '16px auto 24px' }} onClick={toggleDir}>
+              toggle direction
+            </button>
+          </h1>
+        )}
+
+        <ApplyTextDirection dir={dir} as="div">
+          {components[renderedComponent] && components[renderedComponent][0]
+            ? components[renderedComponent].map((component, index) => (
+                <div key={`${renderedComponent}-${index}`}>
+                  {component}
+                  <hr />
+                </div>
+              ))
+            : components[renderedComponent]}
+        </ApplyTextDirection>
       </div>
     </div>
   )

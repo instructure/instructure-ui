@@ -26,8 +26,9 @@
     "@babel/runtime": "^7.9.2",
     "@emotion/core": "^10.0.35",
     "@instructure/console": "^7.2.4",
+    "@instructure/ui-i18n": "^7.3.0",
     "emotion-theming": "^10.0.27",
-    "lodash.merge":"*"
+    "lodash.merge": "*"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^7.2.4",

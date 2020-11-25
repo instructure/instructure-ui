@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import { useTheme } from 'emotion-theming'
+import bidirectionalPolyfill from './bidirectionalPolyfill'
 
 /**
  * A hook which wraps emotion’s useTheme hook and applies it to the component specific style configuration
@@ -36,12 +37,14 @@ function useStyle(componentName, generateStyle, props, state) {
 
   const componentOverride = theme?.components && theme.components[componentName]
 
-  return generateStyle(
+  const style = generateStyle(
     theme,
     { ...componentOverride, ...(props?.themeOverride ?? {}) },
     props,
     state
   )
+
+  return bidirectionalPolyfill(style)
 }
 
 export default useStyle
