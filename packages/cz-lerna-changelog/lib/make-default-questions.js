@@ -97,7 +97,13 @@ module.exports = (allPackages, changedPackages) => [
   },
   {
     type: 'input',
-    name: 'footer',
+    name: 'visualChange',
+    message:
+      'List any visual change(s) (If none, leave blank). This will mark this commit as a breaking change:\n'
+  },
+  {
+    type: 'input',
+    name: 'footer', // needs to be called footer, so its inserted after BREAKING CHANGE part, so it appears in the changelog
     message:
       'List any ISSUES CLOSED by this change. E.g.: PROJECT-123, PROJECT-456:\n'
   }
