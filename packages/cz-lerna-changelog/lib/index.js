@@ -30,14 +30,14 @@ const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
 const makeDefaultQuestions = require('./make-default-questions')
 const autocompleteQuestions = require('./autocomplete-questions')
 
-function getCommitTypeMessage (type) {
+function getCommitTypeMessage(type) {
   if (!type) {
     return 'This commit does not indicate any release'
   }
   return {
     patch: '🛠  This commit indicates a patch release (0.0.X)',
     minor: '✨  This commit indicates a minor release (0.X.0)',
-    major: '💥  This commit indicates a major release (X.0.0)',
+    major: '💥  This commit indicates a major release (X.0.0)'
   }[type]
 }
 
@@ -45,41 +45,57 @@ function makePrompter() {
   return function (cz, commit) {
     const scope = '@instructure'
     const allPackages = getPackages()
-    const changedPackages = getChangedPackages('--cached', allPackages).map(pkg => pkg.name.replace(`${scope}/`, ''))
-    const packageNames = allPackages.map(pkg => pkg.name.replace(`${scope}/`, ''))
+    const changedPackages = getChangedPackages(
+      '--cached',
+      allPackages
+    ).map((pkg) => pkg.name.replace(`${scope}/`, ''))
+    const packageNames = allPackages.map((pkg) =>
+      pkg.name.replace(`${scope}/`, '')
+    )
     const questions = makeDefaultQuestions(packageNames, changedPackages)
 
     // eslint-disable-next-line no-console
-    console.info('\n\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n')
+    console.info(
+      '\n\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n'
+    )
 
     cz.registerPrompt('autocomplete', autocomplete)
 
     cz.prompt(autocompleteQuestions(questions))
       .then((answers) => {
-        const {
-          body,
-          footer,
-          ...rest
-        } = answers
+        const { body, testplan, visualChange, footer, ...rest } = answers
 
-        const testplan = (answers.testplan) ? `\nTEST PLAN:\n${answers.testplan}\n\n` : ''
-        const issues = (footer) ? `\n\nCloses: ${footer}\n\n` : ''
+        const testplanTxt = testplan ? `\nTEST PLAN:\n${testplan}\n\n` : ''
+
+        const issues = footer ? `\n\nCloses: ${footer}\n\n` : ''
+
+        const visualChangeTxt = visualChange
+          ? `\n\nVisual change: ${visualChange}\n\n`
+          : ''
 
         let scope = '*'
 
         if (Array.isArray(answers.scope)) {
           scope = answers.scope.join(',')
         }
-
-        const message = buildCommit({
-          ...rest,
-          body: issues + body + testplan,
-          scope
-        }, { breaklineChar: '|' })
-
+        // To have part of a commit body appear in the changelog it needs to be after the "BREAKING CHANGE:" text.
+        // see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular
+        const message = buildCommit(
+          {
+            ...rest,
+            body: issues + body + testplanTxt,
+            breaking: answers.breaking + visualChangeTxt,
+            scope
+          },
+          { breaklineChar: '|' }
+        )
         const cwd = process.cwd()
 
-        commitAnalyzer.analyzeCommits({}, { cwd, commits: [{ hash: '', message }], logger: console })
+        commitAnalyzer
+          .analyzeCommits(
+            {},
+            { cwd, commits: [{ hash: '', message }], logger: console }
+          )
           .then((type) => {
             /* eslint-disable no-console */
             console.info(chalk.green(`\n${getCommitTypeMessage(type)}\n`))
@@ -98,7 +114,7 @@ function makePrompter() {
   }
 }
 
-module.exports =  {
+module.exports = {
   prompter: makePrompter(),
   makePrompter: makePrompter
 }

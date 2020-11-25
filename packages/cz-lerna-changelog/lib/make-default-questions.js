@@ -22,28 +22,49 @@
  * SOFTWARE.
  */
 
-module.exports = (allPackages, changedPackages) => ([
+module.exports = (allPackages, changedPackages) => [
   {
     type: 'autocomplete',
     name: 'type',
-    message: 'Select the type of change that you\'re committing:',
+    message: "Select the type of change that you're committing:",
     choices: [
-      {value: 'WIP',      name: 'WIP:      🚧  Work in progress'},
-      {value: 'feat',     name: 'feat:     🎉  A new feature (note: this will indicate a release)'},
-      {value: 'fix',      name: 'fix:      🐛  A bug fix (note: this will indicate a release)'},
-      {value: 'docs',     name: 'docs:     📖  Documentation only changes'},
-      {value: 'chore',    name: 'chore:    🛠   Changes to the build process or auxiliary tools\n                and libraries such as documentation generation'},
-      {value: 'style',    name: 'style:    💄  Changes that do not affect the meaning of the code\n                (white-space, formatting, missing semi-colons, etc)'},
-      {value: 'refactor', name: 'refactor: ✨  A code change that neither fixes a bug nor adds a feature'},
-      {value: 'test',     name: 'test:     ✅  Adding missing tests'},
-      {value: 'perf',     name: 'perf:     🚀  A code change that improves performance'},
-      {value: 'revert',   name: 'revert:   🙈  Revert to a commit'}
-    ],
+      { value: 'WIP', name: 'WIP:      🚧  Work in progress' },
+      {
+        value: 'feat',
+        name: 'feat:     🎉  A new feature (note: this will indicate a release)'
+      },
+      {
+        value: 'fix',
+        name: 'fix:      🐛  A bug fix (note: this will indicate a release)'
+      },
+      { value: 'docs', name: 'docs:     📖  Documentation only changes' },
+      {
+        value: 'chore',
+        name:
+          'chore:    🛠   Changes to the build process or auxiliary tools\n                and libraries such as documentation generation'
+      },
+      {
+        value: 'style',
+        name:
+          'style:    💄  Changes that do not affect the meaning of the code\n                (white-space, formatting, missing semi-colons, etc)'
+      },
+      {
+        value: 'refactor',
+        name:
+          'refactor: ✨  A code change that neither fixes a bug nor adds a feature'
+      },
+      { value: 'test', name: 'test:     ✅  Adding missing tests' },
+      {
+        value: 'perf',
+        name: 'perf:     🚀  A code change that improves performance'
+      },
+      { value: 'revert', name: 'revert:   🙈  Revert to a commit' }
+    ]
   },
   {
     type: 'checkbox',
     name: 'scope',
-    'default': changedPackages,
+    default: changedPackages,
     choices: allPackages,
     message: `The packages that this commit has affected (${changedPackages.length} detected)\n`
   },
@@ -51,17 +72,18 @@ module.exports = (allPackages, changedPackages) => ([
     type: 'input',
     name: 'subject',
     message: 'Write a short, imperative tense description of the change:\n',
-    filter: function(value) {
+    filter: function (value) {
       return value.charAt(0).toLowerCase() + value.slice(1)
     },
-    validate: function(value) {
+    validate: function (value) {
       return !!value
-    },
+    }
   },
   {
     type: 'input',
     name: 'body',
-    message: 'Provide a longer description of the change (optional). Use "|" to break new line:\n'
+    message:
+      'Provide a longer description of the change (optional). Use "|" to break new line:\n'
   },
   {
     type: 'input',
@@ -71,11 +93,18 @@ module.exports = (allPackages, changedPackages) => ([
   {
     type: 'input',
     name: 'breaking',
-    message: 'List any BREAKING CHANGES (if none, leave blank):\n',
+    message: 'List any BREAKING CHANGES (if none, leave blank):\n'
   },
   {
     type: 'input',
-    name: 'footer',
-    message: 'List any ISSUES CLOSED by this change. E.g.: PROJECT-123, PROJECT-456:\n',
+    name: 'visualChange',
+    message:
+      'List any visual change(s) (If none, leave blank). This will mark this commit as a breaking change:\n'
+  },
+  {
+    type: 'input',
+    name: 'footer', // needs to be called footer, so its inserted after BREAKING CHANGE part, so it appears in the changelog
+    message:
+      'List any ISSUES CLOSED by this change. E.g.: PROJECT-123, PROJECT-456:\n'
   }
-])
+]
