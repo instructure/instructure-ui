@@ -24,31 +24,32 @@
 
 import React, { useState } from 'react'
 import { Avatar } from '@instructure/ui-avatar'
-import { Pill } from '@instructure/ui-pill'
 import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
 import { Spinner } from '@instructure/ui-spinner'
+import { Heading } from '@instructure/ui-heading'
+import { Img } from '@instructure/ui-img'
+import { View } from '@instructure/ui-view'
 
 const components = {
-  Avatar: [
-    <Avatar
-      key={'avatar1'}
-      themeOverride={{ color: 'blue' }}
-      name="Sarah Robinson"
-      margin="0 small 0 0"
-    />,
-    <Avatar key={'avatar2'} name="Rarah Sobinson" margin="0 small 0 0" />,
-    <Avatar key={'avatar3'} name="Rarah Sobinson" shape="rectangle" />,
-    <Avatar
-      key={'avatar4'}
-      name="Rarah Sobinson"
-      size="x-large"
-      src={
-        'https://thumbs.dreamstime.com/b/cute-smiling-teacher-tutor-avatar-internet-learning-line-distant-education-web-study-school-chat-webinar-discussion-forum-185531323.jpg'
-      }
-    />
-  ],
-  Pill: [<Pill key={'pill1'}>Pill teszt 1</Pill>],
+  Avatar: (
+    <div>
+      <Avatar
+        themeOverride={{ color: 'blue' }}
+        name="Sarah Robinson"
+        margin="0 small 0 0"
+      />
+      <Avatar name="Rarah Sobinson" margin="0 small 0 0" />
+      <Avatar name="Rarah Sobinson" shape="rectangle" />
+      <Avatar
+        name="Rarah Sobinson"
+        size="x-large"
+        src={
+          'https://thumbs.dreamstime.com/b/cute-smiling-teacher-tutor-avatar-internet-learning-line-distant-education-web-study-school-chat-webinar-discussion-forum-185531323.jpg'
+        }
+      />
+    </div>
+  ),
   Breadcrumb: [
     <Breadcrumb key={'breadcrumb1'} label={'Teszt'}>
       <BreadcrumbLink key="breadcrumbLink1" onClick={() => {}}>
@@ -115,7 +116,51 @@ const components = {
         <FlexItem>Ugh.</FlexItem>
       </Flex>
     </div>
-  ]
+  ],
+  Heading: (
+    <div>
+      <Heading level="h1" as="h2" margin="0 0 x-small">
+        Heading level One
+      </Heading>
+      <Heading level="h2" as="h1" margin="0 0 x-small">
+        Heading level Two
+      </Heading>
+      <Heading level="h3" margin="0 0 x-small">
+        Heading level Three
+      </Heading>
+      <Heading level="h4" margin="0 0 x-small">
+        Heading level Four
+      </Heading>
+      <Heading level="h5" margin="0 0 x-small">
+        Heading level Five
+      </Heading>
+      <Heading level="reset" as="h2">
+        Heading level reset as a Two
+      </Heading>
+    </div>
+  ),
+  Img: (
+    <View textAlign="center" as="div">
+      <Img
+        src="https://via.placeholder.com/200"
+        overlay={{ color: '#008ee2', opacity: 9, blend: 'overlay' }}
+        alt="A placeholder image"
+        margin="x-small"
+      />
+      <Img
+        src="https://via.placeholder.com/200"
+        overlay={{ color: '#008ee2', opacity: 6, blend: 'multiply' }}
+        alt="A placeholder image"
+        margin="x-small"
+      />
+      <Img
+        src="https://via.placeholder.com/200"
+        overlay={{ color: '#008ee2', opacity: 3 }}
+        alt="A placeholder image"
+        margin="x-small"
+      />
+    </View>
+  )
 }
 const App = () => {
   const [renderedComponent, setRenderedComponent] = useState()

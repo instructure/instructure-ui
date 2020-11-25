@@ -21,213 +21,156 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import { useStyle, jsx } from '@instructure/emotion'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { withTestable } from '@instructure/ui-testable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { supportsObjectFit } from '@instructure/ui-dom-utils'
-import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  grayscale: 'withGrayscale',
-  blur: 'withBlur',
-  inline: 'display'
-})
-@testable()
-@themeable(theme, styles)
-class Img extends Component {
-  static propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    display: PropTypes.oneOf(['inline-block', 'block']),
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Valid values for `opacity` are `0` - `10`. Valid values for `blend` are
-     * `normal` (default), `multiply`, `screen`, `overlay`, and `color-burn`.
-     */
-    overlay: PropTypes.shape({
-      color: PropTypes.string.isRequired,
-      opacity: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).isRequired,
-      blend: PropTypes.oneOf([
-        'normal',
-        'multiply',
-        'screen',
-        'overlay',
-        'color-burn'
-      ])
-    }),
-    withGrayscale: PropTypes.bool,
-    withBlur: PropTypes.bool,
-    constrain: PropTypes.oneOf(['cover', 'contain']),
-    elementRef: PropTypes.func,
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `display`__
-     */
-    inline: PropTypes.bool,
-    /**
-     * __Deprecated - use `withGrayscale`__
-     */
-    grayscale: PropTypes.bool,
-    /**
-     * __Deprecated - use `withBlur`__
-     */
-    blur: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+const Img = (props) => {
+  const {
+    src,
+    alt,
+    margin,
+    display,
+    overlay,
+    withGrayscale,
+    withBlur,
+    constrain,
+    width,
+    height,
+    elementRef,
+    ...restProps
+  } = props
+
+  const a11yProps = {
+    alt: alt || ''
   }
 
-  static defaultProps = {
-    margin: undefined,
-    overlay: undefined,
-    constrain: undefined,
-    elementRef: undefined,
-    height: undefined,
-    width: undefined,
-    alt: '',
-    display: 'inline-block',
-    withGrayscale: false,
-    withBlur: false
+  // if browser does not support ObjectFit CSS, and Img needs "constrain",
+  // serve up a background-image instead
+  const hasBackground = !supportsObjectFit() && props.constrain
+
+  const styles = useStyle(Img.name, generateStyle, props, {
+    supportsObjectFit: supportsObjectFit(),
+    hasBackground
+  })
+
+  const imageProps = {
+    css: styles.img,
+    style: {
+      filter: withBlur || withGrayscale || 'none'
+    },
+    src
   }
 
-  get supportsObjectFit() {
-    return supportsObjectFit()
+  const containerProps = {
+    ...passthroughProps(restProps),
+    width,
+    height,
+    margin,
+    display,
+    elementRef
   }
 
-  renderFilter() {
-    const blur = `blur(${this.theme.imageBlurAmount})`
-    const grayscale = 'grayscale(1)'
+  if (overlay || hasBackground) {
+    // if a background image is rendered we add the a11y props on the container element
+    const rootProps = hasBackground
+      ? {
+          ...a11yProps,
+          ...containerProps
+        }
+      : containerProps
 
-    if (
-      (this.props.withGrayscale || this.props.grayscale) &&
-      (this.props.withBlur || this.props.blur)
-    ) {
-      return `${blur} ${grayscale}`
-    } else if (this.props.withGrayscale || this.props.grayscale) {
-      return grayscale
-    } else if (this.props.withBlur || this.props.blur) {
-      return blur
-    } else {
-      return null
-    }
-  }
-
-  render() {
-    const {
-      src,
-      alt,
-      margin,
-      display,
-      overlay,
-      withGrayscale,
-      withBlur,
-      constrain,
-      width,
-      height,
-      elementRef,
-      inline,
-      blur,
-      grayscale,
-      ...props
-    } = this.props
-
-    const a11yProps = {
-      alt: alt || ''
-    }
-
-    const imageProps = {
-      className: classnames({
-        [styles.image]: true,
-        [styles['has-overlay']]: overlay,
-        [styles['has-filter']]: withBlur || withGrayscale || blur || grayscale,
-        [styles.cover]: this.supportsObjectFit && constrain === 'cover',
-        [styles.contain]: this.supportsObjectFit && constrain === 'contain'
-      }),
-      style: {
-        filter:
-          withBlur || withGrayscale || blur || grayscale
-            ? this.renderFilter()
-            : 'none'
-      },
-      src
-    }
-
-    const containerProps = {
-      ...passthroughProps(props),
-      width,
-      height,
-      margin,
-      display:
-        display === 'block' || inline === false ? 'block' : 'inline-block',
-      elementRef
-    }
-
-    // if browser does not support ObjectFit CSS, and Img needs "constrain",
-    // serve up a background-image instead
-    const hasBackground = !this.supportsObjectFit && this.props.constrain
-
-    if (overlay || hasBackground) {
-      // if a background image is rendered we add the a11y props on the container element
-      const rootProps = hasBackground
-        ? {
-            ...a11yProps,
-            ...containerProps
-          }
-        : containerProps
-
-      return (
-        <View
-          {...rootProps}
-          as="span"
-          className={classnames({
-            [styles['container--has-overlay']]: overlay,
-            [styles['container--has-cover']]: constrain === 'cover',
-            [styles['container--has-contain']]: constrain === 'contain',
-            [styles['container--has-background']]: hasBackground
-          })}
-          style={{
-            backgroundImage: hasBackground ? `url(${src})` : undefined
-          }}
-        >
-          {
-            !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
-          }
-          {overlay && (
-            <span
-              className={styles.overlay}
-              style={{
-                backgroundColor: overlay.color,
-                opacity: overlay.opacity * 0.1,
-                mixBlendMode: overlay.blend ? overlay.blend : null
-              }}
-            />
-          )}
-        </View>
-      )
-    } else {
-      return (
-        <View {...containerProps} {...imageProps} {...a11yProps} as="img" />
-      )
-    }
+    return (
+      <View
+        {...rootProps}
+        as="span"
+        css={styles.view}
+        style={{
+          backgroundImage: hasBackground ? `url(${src})` : undefined
+        }}
+      >
+        {
+          !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
+        }
+        {overlay && (
+          <span
+            css={styles.overlay}
+            style={{
+              backgroundColor: overlay.color,
+              opacity: overlay.opacity * 0.1,
+              mixBlendMode: overlay.blend ? overlay.blend : null
+            }}
+          />
+        )}
+      </View>
+    )
+  } else {
+    return <View {...containerProps} {...imageProps} {...a11yProps} as="img" />
   }
 }
+Img.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+  display: PropTypes.oneOf(['inline-block', 'block']),
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Valid values for `opacity` are `0` - `10`. Valid values for `blend` are
+   * `normal` (default), `multiply`, `screen`, `overlay`, and `color-burn`.
+   */
+  overlay: PropTypes.shape({
+    color: PropTypes.string.isRequired,
+    opacity: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).isRequired,
+    blend: PropTypes.oneOf([
+      'normal',
+      'multiply',
+      'screen',
+      'overlay',
+      'color-burn'
+    ])
+  }),
+  withGrayscale: PropTypes.bool,
+  withBlur: PropTypes.bool,
+  constrain: PropTypes.oneOf(['cover', 'contain']),
+  elementRef: PropTypes.func,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  themeOverride: PropTypes.object
+}
 
-export default Img
-export { Img }
+Img.defaultProps = {
+  margin: undefined,
+  overlay: undefined,
+  constrain: undefined,
+  elementRef: undefined,
+  height: undefined,
+  width: undefined,
+  alt: '',
+  display: 'inline-block',
+  withGrayscale: false,
+  withBlur: false,
+  themeOverride: {}
+}
+
+//TODO: remove this HOC call when we implement a new testing solution
+const Img__Testable = withTestable(Img)
+
+export default Img__Testable
+export { Img__Testable as Img }

@@ -21,131 +21,126 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import { useStyle, jsx } from '@instructure/emotion'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
 import {
-  deprecated,
+  useDeprecated,
   getElementType,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
-
-import styles from './styles.css'
-import theme from './theme'
-
-import { themeAdapter } from './themeAdapter'
+import { withTestable } from '@instructure/ui-testable'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  ellipsis: '<TruncateText />'
-})
-@testable()
-@themeable(theme, styles, themeAdapter)
-class Heading extends Component {
-  static propTypes = {
-    /**
-     * Add a top- or bottom-border to the Heading
-     */
-    border: PropTypes.oneOf(['none', 'top', 'bottom']),
-    /**
-     * The text content of the Heading
-     */
-    children: childrenOrValue,
-    /**
-     * The font color to render
-     */
-    color: PropTypes.oneOf([
-      'primary',
-      'secondary',
-      'primary-inverse',
-      'secondary-inverse',
-      'inherit'
-    ]),
-    /**
-     * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
-     */
-    level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
-    /**
-     * Choose the element Heading should render as. Will default to the `level` prop
-     * if not specified.
-     */
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    /**
-     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-     */
-    margin: ThemeablePropTypes.spacing,
-    /**
-     * Provides a ref to the underlying HTML element
-     */
-    elementRef: PropTypes.func,
 
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `<TruncateText /> instead`__
-     */
-    ellipsis: PropTypes.bool
-    /* eslint-enable react/require-default-props */
-  }
+const Heading = (props) => {
+  useDeprecated({
+    componentName: Heading.name,
+    version: '8.0',
+    oldProps: {
+      ellipsis: '<TruncateText />'
+    },
+    props
+  })
+  const {
+    border,
+    children,
+    color,
+    level,
+    margin,
+    elementRef,
+    ellipsis,
+    ...restProps
+  } = props
 
-  static defaultProps = {
-    children: null,
-    margin: undefined,
-    elementRef: undefined,
-    border: 'none',
-    color: 'inherit',
-    level: 'h2'
-  }
+  const styles = useStyle(Heading.name, generateStyle, props)
 
-  render() {
-    const {
-      border,
-      children,
-      color,
-      level,
-      margin,
-      elementRef,
-      ellipsis,
-      ...props
-    } = this.props
+  const ElementType = getElementType(Heading, props, () =>
+    level === 'reset' ? 'span' : level
+  )
 
-    const ElementType = getElementType(Heading, this.props, () => {
-      if (level === 'reset') {
-        return 'span'
-      } else {
-        return level
-      }
-    })
-
-    return (
-      <View
-        {...passthroughProps(props)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`level--${level}`]]: true,
-          [styles[`color--${color}`]]: color,
-          [styles[`border--${border}`]]: border !== 'none',
-          [styles.ellipsis]: ellipsis
-        })}
-        as={ElementType}
-        margin={margin}
-        elementRef={elementRef}
-      >
-        {children}
-      </View>
-    )
-  }
+  return (
+    <View
+      {...passthroughProps(restProps)}
+      css={styles.root}
+      as={ElementType}
+      margin={margin}
+      elementRef={elementRef}
+    >
+      {children}
+    </View>
+  )
 }
 
-export default Heading
-export { Heading }
+Heading.propTypes = {
+  /**
+   * Add a top- or bottom-border to the Heading
+   */
+  border: PropTypes.oneOf(['none', 'top', 'bottom']),
+  /**
+   * The text content of the Heading
+   */
+  children: childrenOrValue,
+  /**
+   * The font color to render
+   */
+  color: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'primary-inverse',
+    'secondary-inverse',
+    'inherit'
+  ]),
+  /**
+   * The *visual* appearance of the Heading: h1 is largest; h5 is smallest.
+   */
+  level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
+  /**
+   * Choose the element Heading should render as. Will default to the `level` prop
+   * if not specified.
+   */
+  as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+  /**
+   * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+   * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+   * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+   */
+  margin: ThemeablePropTypes.spacing,
+  /**
+   * Provides a ref to the underlying HTML element
+   */
+  elementRef: PropTypes.func,
+
+  /* eslint-disable react/require-default-props */
+  /**
+   * __Deprecated - use `<TruncateText /> instead`__
+   */
+  ellipsis: PropTypes.bool,
+  /* eslint-enable react/require-default-props */
+  themeOverride: PropTypes.object
+}
+
+Heading.defaultProps = {
+  children: null,
+  margin: undefined,
+  elementRef: undefined,
+  border: 'none',
+  color: 'inherit',
+  level: 'h2',
+  themeOverride: {}
+}
+
+//TODO: remove this HOC call when we implement a new testing solution
+const Heading__Testable = withTestable(Heading)
+
+export default Heading__Testable
+export { Heading__Testable as Heading }

@@ -29,11 +29,11 @@ import { decorator } from '@instructure/ui-decorator'
 
 const APPEND_DATA_ATTRIBUTE =
   process.env.NODE_ENV !== 'production' ||
-  // If you would like to the `data-cid` attributes on elements even in your
-  // production builds (like if you are using them in your e2e builds or
-  // something), you need to set the environment variable
+  // If you would like append the `data-cid` attributes to elements even in your
+  // production builds (E.g. if you are using them in your e2e tests)
+  // you need to set the environment variable
   // ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
-  // We do this because adding those `data-cid` locators slows things down.
+  // We are doing this because adding these `data-cid` locators slow things down.
   process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
 
 const withTestable = !APPEND_DATA_ATTRIBUTE

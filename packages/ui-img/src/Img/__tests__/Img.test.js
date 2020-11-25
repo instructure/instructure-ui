@@ -28,8 +28,6 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { Img } from '../index'
 import { ImgLocator } from '../ImgLocator'
 
-import styles from '../styles.css'
-
 describe('<Img />', () => {
   // eslint-disable-next-line max-len
   const image =
@@ -60,106 +58,6 @@ describe('<Img />', () => {
 
   it('should render an overlay color', async () => {
     await mount(<Img src={image} overlay={{ color: '#ff0000', opacity: 7 }} />)
-    expect(await ImgLocator.find(`.${styles.overlay}`)).to.exist()
-  })
-
-  it('should render a blur filter', async () => {
-    await mount(<Img src={image} withBlur={true} />)
-    const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('filter')).to.contain('blur')
-  })
-
-  it('should render a grayscale filter', async () => {
-    await mount(<Img src={image} withGrayscale={true} />)
-    const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('filter')).to.contain(
-      'grayscale'
-    )
-  })
-
-  // If component renders as simple image
-  it('should display block-level when display="block"', async () => {
-    await mount(<Img src={image} display="block" />)
-    const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
-  })
-
-  // If component has an overlay and renders as image inside containing element
-  it('should display block-level with overlay when display="block"', async () => {
-    await mount(
-      <Img
-        src={image}
-        display="block"
-        overlay={{ color: 'tomato', opacity: 7 }}
-      />
-    )
-
-    const container = await ImgLocator.find()
-    expect(container.getComputedStyle().getPropertyValue('display')).to.equal(
-      'block'
-    )
-
-    const img = await container.find('img')
-    expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
-  })
-
-  it('should apply CSS object-fit: cover when constrain="cover"', async () => {
-    await mount(
-      <div style={{ width: 16, height: 16 }}>
-        <Img src={image} constrain="cover" />
-      </div>
-    )
-    const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal(
-      'cover'
-    )
-  })
-
-  it('should apply CSS object-fit: contain when constrain="contain"', async () => {
-    await mount(
-      <div style={{ width: 16, height: 16 }}>
-        <Img src={image} constrain="contain" />
-      </div>
-    )
-    const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal(
-      'contain'
-    )
-  })
-
-  it('applies the container--has-cover class when constrain="cover" is used with overlay', async () => {
-    await mount(
-      <div style={{ width: 16, height: 16 }}>
-        <Img
-          src={image}
-          alt="testing123"
-          constrain="cover"
-          overlay={{ color: '#ff0000', opacity: 7 }}
-        />
-      </div>
-    )
-
-    expect(
-      await ImgLocator.find(`.${styles['container--has-cover']}`)
-    ).to.exist()
-    expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
-  })
-
-  it('applies the container--has-contain class when constrain="contain" is used with overlay', async () => {
-    await mount(
-      <div style={{ width: 16, height: 16 }}>
-        <Img
-          src={image}
-          alt="testing123"
-          constrain="contain"
-          overlay={{ color: '#ff0000', opacity: 7 }}
-        />
-      </div>
-    )
-
-    expect(
-      await ImgLocator.find(`.${styles['container--has-contain']}`)
-    ).to.exist()
-    expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
+    expect(await ImgLocator.find('[class*= "-overlay"]')).to.exist()
   })
 })

@@ -35,7 +35,7 @@ import generateComponentTheme from './theme'
 const generateStyle = (
   theme,
   themeOverride,
-  { size, variant, shape, src },
+  { size, shape, src },
   { loaded }
 ) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
@@ -96,7 +96,7 @@ const generateStyle = (
       textAlign: 'center',
       backgroundImage: loaded ? `url('${src}')` : undefined,
       ...sizeStyles[size],
-      ...variantStyles[variant || shape]
+      ...variantStyles[shape]
     },
     initials: {
       label: 'initials',

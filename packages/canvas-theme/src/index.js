@@ -63,7 +63,7 @@ const brandVariables = {
 const theme = {
   key,
   ...canvas,
-  ...brandVariables
+  brandVariables
 }
 
 export default theme

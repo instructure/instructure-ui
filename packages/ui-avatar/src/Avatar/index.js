@@ -23,13 +23,13 @@
  */
 
 /** @jsx jsx */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useStyle, jsx } from '@instructure/emotion'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { View } from '@instructure/ui-view'
 import { withTestable } from '@instructure/ui-testable'
-import { useDeprecated, passthroughProps } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import generateStyle from './styles'
 
 /**
@@ -39,16 +39,6 @@ category: components
 **/
 
 const Avatar = (props) => {
-  useDeprecated({
-    componentName: Avatar.name,
-    version: '8.0',
-    oldProps: {
-      inline: 'display',
-      variant: 'shape'
-    },
-    props
-  })
-
   const [loaded, setLoaded] = useState(false)
   const { onImageLoaded, ...restProps } = props
 
@@ -108,11 +98,7 @@ const Avatar = (props) => {
       as={props.as}
       elementRef={props.elementRef}
       margin={props.margin}
-      display={
-        props.display === 'block' || props.inline === false
-          ? 'block'
-          : 'inline-block'
-      }
+      display={props.display === 'block' ? 'block' : 'inline-block'}
     >
       {renderLoadImage()}
       {!loaded && renderInitials()}
@@ -158,16 +144,6 @@ Avatar.propTypes = {
    * provides a reference to the underlying html element
    */
   elementRef: PropTypes.func,
-  /* eslint-disable react/require-default-props */
-  /**
-   * __Deprecated - use `display`__
-   */
-  inline: PropTypes.bool,
-  /**
-   * __Deprecated - use `shape`__
-   */
-  variant: PropTypes.oneOf(['circle', 'rectangle']),
-  /* eslint-enable react/require-default-props */
   themeOverride: PropTypes.object
 }
 
