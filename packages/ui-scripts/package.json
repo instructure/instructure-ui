@@ -60,7 +60,7 @@
   "optionalDependencies": {
     "@instructure/mocha-environment-jsdom": "^7.3.0",
     "@storybook/react": "^4 || ^5",
-    "storybook-chromatic": "^2"
+    "storybook-chromatic": "^4"
   },
   "peerDependencies": {
     "react": "^16.8",

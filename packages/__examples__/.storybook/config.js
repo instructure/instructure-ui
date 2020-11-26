@@ -34,8 +34,7 @@ import {
   addParameters
 } from '@storybook/react'
 
-import { theme } from '@instructure/canvas-theme'
-theme.use({ overrides: { transitions: { duration: '0ms' } } })
+// theme.use({ overrides: { transitions: { duration: '0ms' } } })
 
 import { renderExample } from './renderExample'
 import { renderPage } from './renderPage'

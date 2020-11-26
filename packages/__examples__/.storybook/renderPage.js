@@ -24,8 +24,14 @@
 
 import React from 'react'
 import { ApplyLocale } from '@instructure/ui-i18n'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import { canvas } from '@instructure/ui-themes'
 
 // eslint-disable-next-line react/prop-types
 export function renderPage({ examples, renderExample }) {
-  return <ApplyLocale locale="en-US">{examples.map(renderExample)}</ApplyLocale>
+  return (
+    <EmotionThemeProvider theme={canvas}>
+      <ApplyLocale locale="en-US">{examples.map(renderExample)}</ApplyLocale>
+    </EmotionThemeProvider>
+  )
 }

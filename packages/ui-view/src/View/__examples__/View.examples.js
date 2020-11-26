@@ -27,6 +27,7 @@ const { SHADOW_TYPES, BORDER_WIDTHS, BORDER_RADII } = ThemeablePropValues
 
 export default {
   sectionProp: 'background',
+  maxExamplesPerPage: 10,
   propValues: {
     shadow: [undefined, ...Object.values(SHADOW_TYPES)],
     borderWidth: [...Object.values(BORDER_WIDTHS)],
