@@ -28,6 +28,7 @@ import { Pill } from '@instructure/ui-pill'
 import { Flex, FlexItem } from '@instructure/ui-flex'
 import { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb'
 import { Spinner } from '@instructure/ui-spinner'
+import { View } from '@instructure/ui-view'
 
 const components = {
   Avatar: [
@@ -115,6 +116,17 @@ const components = {
         <FlexItem>Ugh.</FlexItem>
       </Flex>
     </div>
+  ],
+  View: [
+    <View as="div" key="V1">
+      Some content for the View -- default text align
+    </View>,
+    <View as="div" key="V2" textAlign="center">
+      Some content for the View -- center left align
+    </View>,
+    <View as="div" key="V3" textAlign="end">
+      Some content for the View -- right left align
+    </View>
   ]
 }
 const App = () => {
