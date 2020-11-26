@@ -530,7 +530,7 @@ const generateStyle = (theme, themeOverride, props) => {
     ...backgroundColorVariants[background],
     ...stackingVariants[stacking],
     ...shadowVariants[shadow],
-    textAlign: textAlignVariants[textAlign],
+    ...textAlignVariants[textAlign],
     overflowX: overflowX && overflowX !== 'visible' ? overflowX : '',
     overflowY: overflowY && overflowY !== 'visible' ? overflowY : '',
     position: position !== 'static' ? position : '',
@@ -548,7 +548,6 @@ const generateStyle = (theme, themeOverride, props) => {
     ...(shouldUseFocusStyles ? focusStyles : {})
   }
 
-  // return with the css you'd like to apply to the component
   return {
     root: {
       ...styles,
