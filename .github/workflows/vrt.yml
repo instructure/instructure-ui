@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run VRT script
+      - name: Run the VRT script
         env:
           CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
         run: ./docker/vrt "$CHROMATIC_APP_CODE"
