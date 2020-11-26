@@ -26,12 +26,7 @@ const {
   getCommand
 } = require('@instructure/command-utils')
 
-const {
-  CHROMATIC_APP_CODE,
-  GERRIT_CHANGE_ID,
-  GERRIT_PROJECT,
-  GERRIT_BRANCH
-} = process.env
+const { CHROMATIC_APP_CODE } = process.env
 
 const args = process.argv.slice(2)
 
@@ -42,7 +37,7 @@ if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
-let chromaticArgs = ['test', '--storybook-port', port]
+let chromaticArgs = ['--debug', '--list']
 
 if (args.includes('--auto-accept-changes')) {
   chromaticArgs.push('--auto-accept-changes')
@@ -54,11 +49,10 @@ process.exit(
       'chromatic',
       chromaticArgs,
       [
-        `CI=true`,
-        `CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}`,
-        GERRIT_CHANGE_ID ? `GERRIT_CHANGE_ID=${GERRIT_CHANGE_ID}` : false,
-        GERRIT_PROJECT ? `GERRIT_PROJECT=${GERRIT_PROJECT}` : false,
-        GERRIT_BRANCH ? `GERRIT_BRANCH=${GERRIT_BRANCH}` : false
+        `CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}`
+        // GERRIT_CHANGE_ID ? `GERRIT_CHANGE_ID=${GERRIT_CHANGE_ID}` : false,
+        // GERRIT_PROJECT ? `GERRIT_PROJECT=${GERRIT_PROJECT}` : false,
+        // GERRIT_BRANCH ? `GERRIT_BRANCH=${GERRIT_BRANCH}` : false
       ].filter(Boolean)
     )
   }).status

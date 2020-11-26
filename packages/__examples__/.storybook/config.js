@@ -24,7 +24,6 @@
 
 // eslint-disable-next-line import/no-unresolved
 import '@instructure/ui-polyfill-loader!'
-import 'storybook-chromatic'
 
 import { create } from '@storybook/theming'
 import {
@@ -74,7 +73,6 @@ configure(() => {
     examplesContext(requirePath).then(({ componentName, sections }) => {
       if (sections && sections.length > 0) {
         const stories = storiesOf(componentName, module)
-
         sections.forEach(({ pages, sectionName }) => {
           pages.forEach((page, i) => {
             page.renderExample = renderExample
