@@ -1,11 +1,8 @@
-name: VRT
+name: 'Chromatic Deployment'
 
 on:
   push:
     branches: [v8]
-  pull_request:
-    branches: [v8]
-
   workflow_dispatch:
 
 jobs:
@@ -13,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Run VRT script
-        run: ./docker/vrt
+        env:
+          CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+        run: ./docker/vrt "$CHROMATIC_APP_CODE"
         shell: bash
