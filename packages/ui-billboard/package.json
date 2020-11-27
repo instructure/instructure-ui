@@ -3,7 +3,7 @@
   "version": "7.3.2",
   "description": "A UI component to display empty states, 404 pages, redirects, etc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
+  "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",

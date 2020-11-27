@@ -3,7 +3,7 @@
   "version": "7.3.2",
   "description": "A component that allows for rendering a component differently based on either the element or the viewport size",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
+  "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "repository": {

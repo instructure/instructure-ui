@@ -3,7 +3,7 @@
   "version": "7.3.2",
   "description": "A UI a11y testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "repository": {
