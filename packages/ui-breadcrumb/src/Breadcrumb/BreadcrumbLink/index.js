@@ -31,11 +31,11 @@ import { omitProps, useDeprecated } from '@instructure/ui-react-utils'
 import { withTestable } from '@instructure/ui-testable'
 
 /**
- ---
- parent: Breadcrumb
- id: Breadcrumb.Link
- ---
- **/
+---
+parent: Breadcrumb
+id: Breadcrumb.Link
+---
+**/
 
 const BreadcrumbLink = (props) => {
   useDeprecated({
