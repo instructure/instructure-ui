@@ -21,24 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const React = require('react')
+import React from 'react'
 
 let loggedInitialDeprecationWarning = false
 
 /* eslint-disable no-console */
 
-function getRenderStack () {
+function getRenderStack() {
   let renderStack = ''
   try {
-    renderStack = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame
-      .getStackAddendum()
+    renderStack = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
   } catch (error) {
     // log happened outside a react render or couldn't figure out where in the render stack we are.
   }
   return renderStack
 }
 
-function logMessage (level, withRenderStack, condition, message, ...args) {
+function logMessage(level, withRenderStack, condition, message, ...args) {
   if (process.env.NODE_ENV !== 'production' && !condition) {
     if (typeof console[level] === 'function') {
       const renderStack = withRenderStack ? getRenderStack() : ''
@@ -49,25 +48,27 @@ function logMessage (level, withRenderStack, condition, message, ...args) {
   }
 }
 
-function logDeprecated (condition, message, ...args) {
+function logDeprecated(condition, message, ...args) {
   if (!process.env.OMIT_INSTUI_DEPRECATION_WARNINGS) {
     logMessage('warn', true, condition, message, ...args)
   } else if (!condition && !loggedInitialDeprecationWarning) {
     loggedInitialDeprecationWarning = true
-    logMessage('warn', false, condition, [
-      'There are Instructure UI deprecation warnings that are being hidden because the `OMIT_INSTUI_DEPRECATION_WARNINGS` environment variable is set. Remove or unset this variable to see the full list of warnings in your console.',
-      'These warnings will give you advance notice of breaking changes and upgrade guidance to keep your code up to date with the latest Instructure UI versions.'
-    ].join('\n\n'))
+    logMessage(
+      'warn',
+      false,
+      condition,
+      [
+        'There are Instructure UI deprecation warnings that are being hidden because the `OMIT_INSTUI_DEPRECATION_WARNINGS` environment variable is set. Remove or unset this variable to see the full list of warnings in your console.',
+        'These warnings will give you advance notice of breaking changes and upgrade guidance to keep your code up to date with the latest Instructure UI versions.'
+      ].join('\n\n')
+    )
   }
 }
-
-exports.error = (...args) => logMessage('error', true, ...args)
-exports.warn = (...args) => logMessage('warn', true, ...args)
-exports.warnDeprecated = (...args) => logDeprecated(...args)
-exports.info = (...args) => console.info(...args)
-exports.assert = (...args) => console.assert(...args)
-exports.debug = (...args) => console.debug(...args)
-exports.log = (...args) => console.log(...args)
-
-
+export let error = (...args) => logMessage('error', true, ...args)
+export let warn = (...args) => logMessage('warn', true, ...args)
+export let warnDeprecated = (...args) => logDeprecated(...args)
+export let info = (...args) => console.info(...args)
+export let assert = (...args) => console.assert(...args)
+export let debug = (...args) => console.debug(...args)
+export let log = (...args) => console.log(...args)
 /* eslint-enable no-console */
