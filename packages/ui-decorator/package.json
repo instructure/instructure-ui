@@ -3,7 +3,7 @@
   "version": "7.3.0",
   "description": "A utility to wrap (decorates) a React component class adding functionality.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
+  "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "repository": {

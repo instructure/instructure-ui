@@ -3,7 +3,7 @@
   "version": "7.3.0",
   "description": "Styled HTML <progress /> elements for showing completion of a task",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
+  "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
