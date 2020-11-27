@@ -45,8 +45,15 @@ module.exports = function (resourcePath, source, errorHandler) {
     doc = getCodeDoc(source, errorHandler)
   }
 
+  let frontMatter
+  try {
+    frontMatter = getFrontMatter(doc.description)
+  } catch (e) {
+    throw `Failed to parse YAML "${doc.description}" \nexception is \n${e}`
+  }
+
   return {
     ...doc,
-    ...getFrontMatter(doc.description)
+    ...frontMatter
   }
 }
