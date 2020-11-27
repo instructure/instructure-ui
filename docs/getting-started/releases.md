@@ -4,7 +4,7 @@ category: Getting Started
 order: 8
 ---
 
-> Note: This information is for maintainters
+> Note: This information is for maintainers
 
 ## Releases
 
@@ -18,7 +18,7 @@ Every commit that has functional changes to the `master` branch constitutes as a
     - *Bugfixes, performance changes and pure refactorings* will result in a patch release.
 - `git push` the new release commit
 - Wait for the review of the release commit
-- Merge the code into the `master` branch. Jenkins will detect that there is a new version and will update the documentation and publish the new `npm` package.
+- Rebase and Merge the code into the `master` branch. Jenkins will detect that there is a new version and will update the documentation and publish the new `npm` package.
 
 ### Post-release checks
 
