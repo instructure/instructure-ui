@@ -1,14 +1,14 @@
 name: 'Chromatic Deployment'
 
 on:
-  push:
+  pull_request_review:
     branches: [v8]
-  pull_request:
-    branches: [v8]
-  workflow_dispatch:
+    types: [submitted, edited]
+    workflow_dispatch:
 
 jobs:
   vrt-check:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
