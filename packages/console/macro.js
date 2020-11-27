@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-const { createMacro } = require('babel-plugin-macros')
-const annotateAsPure = require('@babel/helper-annotate-as-pure').default
-const { addNamed } = require('@babel/helper-module-imports')
+import { createMacro } from 'babel-plugin-macros'
+import annotateAsPure from '@babel/helper-annotate-as-pure'
+import { addNamed } from '@babel/helper-module-imports'
 
 function macro({ babel, references, state }) {
   Object.keys(references).forEach((referenceKey) => {
@@ -52,6 +52,11 @@ function macro({ babel, references, state }) {
     })
   })
 }
-module.exports = exports.error = exports.warn = exports.warnDeprecated = exports.info = exports.assert = exports.debug = exports.log = createMacro(
-  macro
-)
+
+export let error = createMacro(macro)
+export let warn = createMacro(macro)
+export let warnDeprecated = createMacro(macro)
+export let info = createMacro(macro)
+export let assert = createMacro(macro)
+export let debug = createMacro(macro)
+export let log = createMacro(macro)
