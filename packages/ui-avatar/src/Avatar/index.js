@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /*
  * The MIT License (MIT)
  *
@@ -21,12 +22,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import React, {useState} from 'react'
-import { useStyle, EmotionThemeProvider } from "@instructure/emotion"
-import generateStyle from "./styles"
+/** @jsx jsx */
+import { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import { View } from '@instructure/ui-view'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -34,90 +40,148 @@ category: components
 ---
 **/
 
-const Avatar = (props) => {
-  const [loaded, setLoaded] = useState(false)
-  const {
-    themeOverride,
-    src,
-    display,
-    onImageLoaded,
-    name,
-    inline,
-    margin,
-    elementRef,
-    as,
-    alt,
-    } = props
+@withStyle(generateStyles)
+@testable()
+@deprecated('8.0.0', {
+  inline: 'display',
+  variant: 'shape'
+})
+// @themeable(theme, styles)
+class Avatar extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    /*
+     * URL of the image to display as the background image
+     */
+    src: PropTypes.string,
+    /*
+     * Accessible label
+     */
+    alt: PropTypes.string,
+    size: PropTypes.oneOf([
+      'auto',
+      'x-small',
+      'small',
+      'medium',
+      'large',
+      'x-large'
+    ]),
+    shape: PropTypes.oneOf(['circle', 'rectangle']),
+    /**
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
+    margin: ThemeablePropTypes.spacing,
+    display: PropTypes.oneOf(['inline-block', 'block']),
+    /**
+     * Callback fired when the avatar image has loaded
+     */
+    onImageLoaded: PropTypes.func,
+    /**
+     * the element type to render as
+     */
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+    /**
+     * provides a reference to the underlying html element
+     */
+    elementRef: PropTypes.func,
+    /* eslint-disable react/require-default-props */
+    /**
+     * __Deprecated - use `display`__
+     */
+    inline: PropTypes.bool,
+    /**
+     * __Deprecated - use `shape`__
+     */
+    variant: PropTypes.oneOf(['circle', 'rectangle'])
+    /* eslint-enable react/require-default-props */
+  }
 
-  const styles = useStyle(Avatar.name,generateStyle, themeOverride, props, {loaded})
-  const renderLoadImage =  () => {
+  static defaultProps = {
+    src: undefined,
+    alt: undefined,
+    margin: undefined,
+    elementRef: undefined,
+    size: 'medium',
+    shape: 'circle',
+    display: 'inline-block',
+    onImageLoaded: (event) => {}
+  }
+
+  state = { loaded: false }
+
+  makeInitialsFromName() {
+    let name = this.props.name
+
+    if (!name || typeof name !== 'string') {
+      return
+    }
+    name = name.trim()
+    if (name.length === 0) {
+      return
+    }
+
+    if (name.match(/\s+/)) {
+      const names = name.split(/\s+/)
+      return (names[0][0] + names[names.length - 1][0]).toUpperCase()
+    } else {
+      return name[0].toUpperCase()
+    }
+  }
+
+  handleImageLoaded = (event) => {
+    this.setState({ loaded: true })
+    this.props.onImageLoaded(event)
+  }
+
+  renderLoadImage(styles) {
     // This image element is visually hidden and is here for loading purposes only
     return (
       <img
-        src={src}
+        src={this.props.src}
         css={styles.loadImage}
-        alt={alt}
-        onLoad={handleImageLoaded}
+        alt={this.props.alt}
+        onLoad={this.handleImageLoaded}
         aria-hidden="true"
       />
     )
   }
 
-  const handleImageLoaded = (event) => {
-    setLoaded(true)
-    onImageLoaded(event)
-  }
-
-  const renderInitials = () => {
+  renderInitials(styles) {
     return (
       <span css={styles.initials} aria-hidden="true">
-        {makeInitialsFromName()}
+        {this.makeInitialsFromName()}
       </span>
     )
   }
 
- const makeInitialsFromName = () => {
-    let nameForInitials = name
+  render() {
+    const { onImageLoaded, ...props } = this.props
+    const styles = this.props.makeStyles(this.state)
 
-    if (!nameForInitials || typeof nameForInitials !== 'string') {
-      return
-    }
-    nameForInitials = nameForInitials.trim()
-    if (nameForInitials.length === 0) {
-      return
-    }
-
-    if (nameForInitials.match(/\s+/)) {
-      const names = nameForInitials.split(/\s+/)
-      return (names[0][0] + names[names.length - 1][0]).toUpperCase()
-    } else {
-      return nameForInitials[0].toUpperCase()
-    }
-  }
-
- return (
+    return (
       <View
+        {...passthroughProps(props)}
+        aria-label={this.props.alt ? this.props.alt : null}
+        role={this.props.alt ? 'img' : null}
+        as={this.props.as}
+        elementRef={this.props.elementRef}
+        margin={this.props.margin}
         css={styles.root}
-        aria-label={alt ? alt : null}
-        role={alt ? 'img' : null}
-        as={as}
-        elementRef={elementRef}
-        margin={margin}
-        display={(display === 'block' || inline === false) ? 'block' : 'inline-block'}
+        display={
+          this.props.display === 'block' || this.props.inline === false
+            ? 'block'
+            : 'inline-block'
+        }
       >
-        {renderLoadImage()}
-        {!loaded && renderInitials()}
+        {this.renderLoadImage(styles)}
+        {!this.state.loaded && this.renderInitials(styles)}
       </View>
     )
+  }
 }
 
-Avatar.defaultProps = {
-  size:'medium',
-  shape: 'circle',
-  display: 'inline-block',
-  onImageLoaded: (event) => {}
-}
-
-
+// const Avatar__new = withStyle(Avatar)
 export default Avatar
 export { Avatar }

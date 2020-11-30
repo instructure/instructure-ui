@@ -63,6 +63,8 @@
     "@instructure/ui-truncate-text": "^7.3.2",
     "@instructure/ui-utils": "^7.3.2",
     "@instructure/ui-view": "^7.3.2",
+    "@instructure/emotion": "^7.3.2",
+    "@instructure/ui-themes": "^7.3.2",
     "classnames": "^2",
     "gray-matter": "3.1.1",
     "marked": "^0.7.0",

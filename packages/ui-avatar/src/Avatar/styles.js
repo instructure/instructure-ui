@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-const generateStyle = (theme, themeOverride, {size, variant, shape, src}, {loaded}) => {
-
-  const themeSpecificStyles ={
-    canvas:{
-      color:"red"
-    }
-  }
-
+const generateStyle = (
+  theme,
+  themeOverride,
+  { size, variant, shape, src },
+  { loaded }
+) => {
+  const themeSpecificStyles = {}
 
   const fromTheme = {
     color: theme?.colors?.textBrand,
@@ -44,73 +43,72 @@ const generateStyle = (theme, themeOverride, {size, variant, shape, src}, {loade
   }
 
   const sizeStyles = {
-    auto:{
-    fontSize: "inherit",
-    borderWidth: fromTheme.borderWidthSmall,
-    },
-    "x-small":{
-    fontSize: "0.75rem",
-    borderWidth: fromTheme.borderWidthSmall
-    },
-    small:{
-      fontSize: "1rem",
+    auto: {
+      fontSize: 'inherit',
       borderWidth: fromTheme.borderWidthSmall
     },
-    medium:{
-      fontSize: "1.25rem",
-      borderWidth: fromTheme.borderWidthMedium,
+    'x-small': {
+      fontSize: '0.75rem',
+      borderWidth: fromTheme.borderWidthSmall
     },
-    large:{
-      fontSize: "1.5rem",
-      borderWidth: fromTheme.borderWidthMedium,
+    small: {
+      fontSize: '1rem',
+      borderWidth: fromTheme.borderWidthSmall
     },
-    "x-large": {
-      fontSize: "1.75rem",
-      borderWidth: fromTheme.borderWidthMedium,
+    medium: {
+      fontSize: '1.25rem',
+      borderWidth: fromTheme.borderWidthMedium
+    },
+    large: {
+      fontSize: '1.5rem',
+      borderWidth: fromTheme.borderWidthMedium
+    },
+    'x-large': {
+      fontSize: '1.75rem',
+      borderWidth: fromTheme.borderWidthMedium
     }
   }
 
   const variantStyles = {
-    circle:{
-      width: "2.5em",
-      position: "relative",
-      borderRadius: "100%",
-      overflow: "hidden",
+    circle: {
+      width: '2.5em',
+      position: 'relative',
+      borderRadius: '100%',
+      overflow: 'hidden'
     },
-    rectangle:{
-      width: "3em",
+    rectangle: {
+      width: '3em'
     }
   }
-return {
-  root:{
-    height: "2.5em",
-    borderStyle: "solid",
-    borderColor: fromTheme.borderColor,
-    boxSizing: "border-box",
-    backgroundColor: fromTheme.background,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundClip: "content-box",
-    backgroundRepeat: "no-repeat",
-    overflow: "hidden",
-    lineHeight: 0,
-    textAlign: "center",
-    backgroundImage: loaded ? `url('${src}')` : undefined,
-    ...sizeStyles[size],
-    ...variantStyles[variant || shape]
-  },
-  initials:{
-    color: fromTheme.color,
-    lineHeight: "2.375em",
-    fontFamily: fromTheme.fontFamily,
-    fontWeight: fromTheme.fontWeight,
-    letterSpacing: "0.0313em"
-  },
-  loadImage:{
-      display: "none",
+  return {
+    root: {
+      height: '2.5em',
+      borderStyle: 'solid',
+      borderColor: fromTheme.borderColor,
+      boxSizing: 'border-box',
+      backgroundColor: fromTheme.background,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundClip: 'content-box',
+      backgroundRepeat: 'no-repeat',
+      overflow: 'hidden',
+      lineHeight: 0,
+      textAlign: 'center',
+      backgroundImage: loaded ? `url('${src}')` : undefined,
+      ...sizeStyles[size],
+      ...variantStyles[variant || shape]
+    },
+    initials: {
+      color: fromTheme.color,
+      lineHeight: '2.375em',
+      fontFamily: fromTheme.fontFamily,
+      fontWeight: fromTheme.fontWeight,
+      letterSpacing: '0.0313em'
+    },
+    loadImage: {
+      display: 'none'
+    }
   }
 }
-}
-
 
 export default generateStyle

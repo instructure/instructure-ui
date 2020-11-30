@@ -30,12 +30,16 @@ import { Alert } from '@instructure/ui-alerts'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
+// import { Avatar } from '@instructure/ui-avatar'
+// import { EmotionThemeProvider } from '@instructure/emotion'
+
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
+// import { canvas, instructure } from '@instructure/ui-themes'
 
 import {
   IconHamburgerSolid,
@@ -590,6 +594,26 @@ class App extends Component {
               </ApplyTheme>
             </div>
           )}
+          {/* <Avatar name="hello there" />
+          <Avatar
+            name="hello there"
+            themeOverride={{
+              color: 'orange'
+            }}
+          />
+
+          <EmotionThemeProvider theme={instructure}>
+            <Avatar name="inst" />
+            <EmotionThemeProvider theme={canvas}>
+              <Avatar
+                name="c"
+                themeOverride={{
+                  color: 'magenta'
+                }}
+              />
+            </EmotionThemeProvider>
+          </EmotionThemeProvider> */}
+
           {this.renderContent(key)}
           {this.renderFooter()}
         </div>
