@@ -29,9 +29,6 @@
     "@instructure/ui-testable": "^7.3.2",
     "@instructure/ui-themeable": "^7.3.2",
     "@instructure/ui-view": "^7.3.2",
-    "@instructure/ui-pill": "^7.3.2",
-    "@instructure/emotion": "^7.3.2",
-    "@emotion/core": "^10.0.35",
     "classnames": "^2",
     "prop-types": "^15"
   },
