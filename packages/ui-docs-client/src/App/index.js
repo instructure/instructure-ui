@@ -30,12 +30,16 @@ import { Alert } from '@instructure/ui-alerts'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
+// import { Avatar } from '@instructure/ui-avatar'
+// import { EmotionThemeProvider } from '@instructure/emotion'
+
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
+// import { canvas, instructure } from '@instructure/ui-themes'
 
 import {
   IconHamburgerSolid,
@@ -87,13 +91,15 @@ class App extends Component {
     themeKey: PropTypes.string
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
     // determine what page we're loading
     const [page] = this.getPathInfo()
 
     // if there's room for the tray + 700px, load with the tray open (unless it's the homepage)
-    const smallerScreen = window.matchMedia(`(max-width: ${props.trayWidth + 700}px)`).matches
+    const smallerScreen = window.matchMedia(
+      `(max-width: ${props.trayWidth + 700}px)`
+    ).matches
     const isHomepage = page === 'index' || typeof page === 'undefined'
     const showTrayOnPageLoad = !smallerScreen && !isHomepage
 
@@ -108,7 +114,7 @@ class App extends Component {
     this._mediaQueryListener = null
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this._defaultDocumentTitle = document.title
     this.updateKey()
 
@@ -116,14 +122,18 @@ class App extends Component {
 
     // TODO: Replace with the Responsive component later
     // Using this method directly for now instead to avoid a call to findDOMNode
-    this._mediaQueryListener = addMediaQueryMatchListener({
-      medium: { minWidth: 700 },
-      large: { minWidth: 1100 },
-      'x-large': { minWidth: 1300 }
-    }, this._content, this.updateLayout)
+    this._mediaQueryListener = addMediaQueryMatchListener(
+      {
+        medium: { minWidth: 700 },
+        large: { minWidth: 1100 },
+        'x-large': { minWidth: 1300 }
+      },
+      this._content,
+      this.updateLayout
+    )
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('hashchange', this.updateKey, false)
 
     if (this._mediaQueryListener) {
@@ -131,7 +141,7 @@ class App extends Component {
     }
   }
 
-  getChildContext () {
+  getChildContext() {
     return {
       library: this.props.library,
       themeKey: this.state.themeKey,
@@ -139,7 +149,7 @@ class App extends Component {
     }
   }
 
-  trackPage (page) {
+  trackPage(page) {
     let title = this._defaultDocumentTitle
     if (page !== 'index') {
       title = `${page} - ${this._defaultDocumentTitle}`
@@ -160,8 +170,8 @@ class App extends Component {
     const path = hash && hash.split('/')
 
     if (path) {
-      const [ page, id ] = path.map(entry => decodeURI(entry.replace('#', '')))
-      return [ page, id ]
+      const [page, id] = path.map((entry) => decodeURI(entry.replace('#', '')))
+      return [page, id]
     }
     return []
   }
@@ -234,7 +244,8 @@ class App extends Component {
   }
 
   handleShowTrayOnURLChange = (key, showMenu) => {
-    const userIsComingFromHomepage = key === 'index' || typeof key === 'undefined'
+    const userIsComingFromHomepage =
+      key === 'index' || typeof key === 'undefined'
 
     const { layout } = this.state
 
@@ -248,7 +259,7 @@ class App extends Component {
     }
   }
 
-  renderThemeSelect () {
+  renderThemeSelect() {
     const themeKeys = Object.keys(this.props.themes)
     const smallScreen = this.state.layout === 'small'
 
@@ -264,7 +275,7 @@ class App extends Component {
             onChange={this.handleThemeChange}
             value={this.state.themeKey}
           >
-            {themeKeys.map(themeKey => {
+            {themeKeys.map((themeKey) => {
               return (
                 <option key={themeKey} value={themeKey}>
                   {themeKey}
@@ -277,19 +288,20 @@ class App extends Component {
     ) : null
   }
 
-  renderTheme (themeKey) {
+  renderTheme(themeKey) {
     const theme = this.props.themes[themeKey]
 
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
 
     const themeContent = (
-      <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
-        <Heading
-          level="h1"
-          as="h2"
-          margin="0 0 medium 0"
-        >
+      <View
+        as="div"
+        padding={
+          smallerScreens ? 'x-large none none large' : 'x-large none none'
+        }
+      >
+        <Heading level="h1" as="h2" margin="0 0 medium 0">
           Theme: {themeKey}
         </Heading>
         <Theme
@@ -301,24 +313,23 @@ class App extends Component {
       </View>
     )
     return (
-      <Section id={themeKey}>
-        {this.renderWrappedContent(themeContent)}
-      </Section>
+      <Section id={themeKey}>{this.renderWrappedContent(themeContent)}</Section>
     )
   }
 
-  renderIcons (key) {
+  renderIcons(key) {
     const { icons } = this.props
     const { layout } = this.state
     const smallerScreens = layout === 'small' || layout === 'medium'
 
     const iconContent = (
-      <View as="div" padding={smallerScreens ? 'x-large none none large' : 'x-large none none'}>
-        <Heading
-          level="h1"
-          as="h2"
-          margin="0 0 medium"
-        >
+      <View
+        as="div"
+        padding={
+          smallerScreens ? 'x-large none none large' : 'x-large none none'
+        }
+      >
+        <Heading level="h1" as="h2" margin="0 0 medium">
           Iconography
         </Heading>
         <Icons
@@ -329,33 +340,39 @@ class App extends Component {
       </View>
     )
 
-    return (
-      <Section id={key}>
-        {this.renderWrappedContent(iconContent)}
-      </Section>
-    )
+    return <Section id={key}>{this.renderWrappedContent(iconContent)}</Section>
   }
 
-  renderDocument (doc, repository) {
+  renderDocument(doc, repository) {
     const { descriptions, docs, parents } = this.props
     const { layout, themeKey } = this.state
 
     let children = []
 
     if (parents[doc.id]) {
-      children = parents[doc.id].children.map(childId => docs[childId])
+      children = parents[doc.id].children.map((childId) => docs[childId])
     }
 
     const description = descriptions[doc.id]
-    const heading = (doc.extension !== '.md') ? doc.title : ''
+    const heading = doc.extension !== '.md' ? doc.title : ''
 
     const documentContent = (
       <View
         as="div"
-        padding={(layout === 'small' || layout === 'medium') ? 'x-large none none large' : 'x-large none none'}
+        padding={
+          layout === 'small' || layout === 'medium'
+            ? 'x-large none none large'
+            : 'x-large none none'
+        }
       >
-        { this.renderThemeSelect() }
-        { doc.experimental && <div><Pill color="info" margin="small 0">Experimental</Pill></div>}
+        {this.renderThemeSelect()}
+        {doc.experimental && (
+          <div>
+            <Pill color="info" margin="small 0">
+              Experimental
+            </Pill>
+          </div>
+        )}
         <Section id={doc.id} heading={heading}>
           <Document
             doc={{
@@ -374,31 +391,29 @@ class App extends Component {
     return this.renderWrappedContent(documentContent)
   }
 
-  renderWrappedContent (content, padding="large") {
-    return (
-      <ContentWrap padding={padding}>
-        {content}
-      </ContentWrap>
-    )
+  renderWrappedContent(content, padding = 'large') {
+    return <ContentWrap padding={padding}>{content}</ContentWrap>
   }
 
-  renderIndex () {
+  renderIndex() {
     const { docs, library } = this.props
 
     return docs[library.name] ? (
       <Section id={library.name}>
-        { /* only serve Instructure UI homepage to Instructure UI docs */ }
-        {library.name === 'instructure-ui' ?
-          this.renderHero() :
-          this.renderWrappedContent(
-            compileMarkdown(docs[library.name].description, { title: library.name }),
-            'medium large'
-        )}
+        {/* only serve Instructure UI homepage to Instructure UI docs */}
+        {library.name === 'instructure-ui'
+          ? this.renderHero()
+          : this.renderWrappedContent(
+              compileMarkdown(docs[library.name].description, {
+                title: library.name
+              }),
+              'medium large'
+            )}
       </Section>
     ) : null
   }
 
-  renderHero () {
+  renderHero() {
     const { library, docs, themes } = this.props
     const { layout } = this.state
 
@@ -413,7 +428,7 @@ class App extends Component {
       <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
         <Hero
           name={library.name}
-          docs={{...docs, ...themeDocs}}
+          docs={{ ...docs, ...themeDocs }}
           description={library.description}
           repository={library.repository}
           version={library.version}
@@ -423,32 +438,30 @@ class App extends Component {
     )
   }
 
-  renderChangeLog () {
+  renderChangeLog() {
     const { docs } = this.props
     return docs.CHANGELOG ? (
       <Section id="CHANGELOG">
-        {this.renderWrappedContent(compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' }))}
+        {this.renderWrappedContent(
+          compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' })
+        )}
       </Section>
     ) : null
   }
 
-  renderError () {
+  renderError() {
     const errorContent = (
-      <Alert
-        variant="error"
-        margin="small"
-      >
-        <Text weight="bold">Document not found.</Text> Please use the search in the navigation to find any page in this documentation.
+      <Alert variant="error" margin="small">
+        <Text weight="bold">Document not found.</Text> Please use the search in
+        the navigation to find any page in this documentation.
       </Alert>
     )
     return (
-      <Section id="error">
-        {this.renderWrappedContent(errorContent)}
-      </Section>
+      <Section id="error">{this.renderWrappedContent(errorContent)}</Section>
     )
   }
 
-  renderContent (key) {
+  renderContent(key) {
     const doc = this.props.docs[key]
     const theme = this.props.themes[key]
     const icon = this.props.icons.formats[key]
@@ -456,7 +469,8 @@ class App extends Component {
 
     if (!key || key === 'index') {
       return this.renderIndex()
-    } if (key === 'CHANGELOG') {
+    }
+    if (key === 'CHANGELOG') {
       return this.renderChangeLog()
     } else if (key === 'iconography' || icon) {
       return this.renderIcons(key)
@@ -469,34 +483,36 @@ class App extends Component {
     }
   }
 
-  renderFooter () {
-    const {
-      author,
-      repository
-    } = this.props.library
+  renderFooter() {
+    const { author, repository } = this.props.library
 
     return author || repository ? (
-      <View
-        as="footer"
-        textAlign="center"
-        padding="large medium"
-      >
-        { author && (
+      <View as="footer" textAlign="center" padding="large medium">
+        {author && (
           <AccessibleContent alt={`Made with love by ${author}`}>
-            <Text color="secondary" letterSpacing="expanded" transform="uppercase" size="small" lineHeight="fit">
-              Made with <IconHeartLine size="small" className={styles.footerIcon} color="error" /> by {author}.
+            <Text
+              color="secondary"
+              letterSpacing="expanded"
+              transform="uppercase"
+              size="small"
+              lineHeight="fit"
+            >
+              Made with{' '}
+              <IconHeartLine
+                size="small"
+                className={styles.footerIcon}
+                color="error"
+              />{' '}
+              by {author}.
             </Text>
           </AccessibleContent>
-        ) }
+        )}
       </View>
     ) : null
   }
 
-  renderNavigation () {
-    const {
-      name,
-      version
-    } = this.props.library
+  renderNavigation() {
+    const { name, version } = this.props.library
 
     const { key, layout, showMenu } = this.state
 
@@ -526,7 +542,10 @@ class App extends Component {
             />
           </ApplyTheme>
         </View>
-        <Header name={name === 'instructure-ui' ? 'Instructure UI' : name} version={version} />
+        <Header
+          name={name === 'instructure-ui' ? 'Instructure UI' : name}
+          version={version}
+        />
         <Nav
           selected={key}
           sections={this.props.sections}
@@ -538,27 +557,23 @@ class App extends Component {
     )
 
     return layout !== 'small' ? (
-      <nav className={styles.inlineNavigation}>
-        {navContent}
-      </nav>
+      <nav className={styles.inlineNavigation}>{navContent}</nav>
     ) : (
-      <Tray
-        label="Navigation"
-        open={showMenu}
-        onDismiss={this.handleMenuClose}
-      >
+      <Tray label="Navigation" open={showMenu} onDismiss={this.handleMenuClose}>
         {navContent}
       </Tray>
     )
   }
 
-  render () {
+  render() {
     const key = this.state.key
     const { showMenu, layout } = this.state
 
     return (
       <div className={styles.root}>
-        { showMenu && layout === 'small' && <Mask onClick={this.handleMenuClose} /> }
+        {showMenu && layout === 'small' && (
+          <Mask onClick={this.handleMenuClose} />
+        )}
         {this.renderNavigation()}
         <div
           className={styles.content}
@@ -579,6 +594,26 @@ class App extends Component {
               </ApplyTheme>
             </div>
           )}
+          {/* <Avatar name="hello there" />
+          <Avatar
+            name="hello there"
+            themeOverride={{
+              color: 'orange'
+            }}
+          />
+
+          <EmotionThemeProvider theme={instructure}>
+            <Avatar name="inst" />
+            <EmotionThemeProvider theme={canvas}>
+              <Avatar
+                name="c"
+                themeOverride={{
+                  color: 'magenta'
+                }}
+              />
+            </EmotionThemeProvider>
+          </EmotionThemeProvider> */}
+
           {this.renderContent(key)}
           {this.renderFooter()}
         </div>

@@ -21,16 +21,69 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { useTheme } from 'emotion-theming'
+import React from 'react'
+import { useTheme as useEmotionTheme } from 'emotion-theming'
+import { canvas } from '@instructure/ui-themes'
+import { isEmpty } from '@instructure/ui-utils'
+import { decorator } from '@instructure/ui-decorator'
+import { partial } from 'lodash'
 
-function useStyle(componentName, generateStyle, themeOverride={}, props, state){
+const makeStyles = (theme, componentName, generateStyle, props) => {
+  const componentOverride = theme?.components && theme.components[componentName]
 
-  const theme = useTheme()
-
-  const componentOverride=theme?.components && theme.components[componentName]
-
-  return generateStyle(theme, {...componentOverride,...themeOverride}, props, state)
+  return partial(
+    generateStyle,
+    theme,
+    { ...componentOverride, ...(props?.themeOverride ?? {}) },
+    props
+  )
 }
 
-export default useStyle
-export {useStyle,useTheme}
+const useTheme = () => {
+  let theme = useEmotionTheme()
+
+  if (isEmpty(theme)) {
+    console.warn(
+      `No theme provided for [EmotionThemeProvider], using default <canvas> theme.`
+    )
+    theme = canvas
+  }
+
+  return theme
+}
+
+/**
+ * A hook which wraps emotion’s useTheme hook and applies it to the component specific style configuration
+ * @param {string} componentName - Name of the component
+ * @param {func} generateStyle -
+ * @param {Object} props - The component's props object
+ * @param {Object} state - The component's state object
+ * @returns {*} style object
+ */
+const useStyle = (componentName, generateStyle, props, state) => {
+  const theme = useTheme()
+
+  return makeStyles(theme, componentName, generateStyle, props)(state)
+}
+
+// eslint-disable-next-line react/display-name
+const withStyle = decorator((ComposedComponent, generateStyle) => (props) => {
+  const theme = useTheme()
+
+  return (
+    <ComposedComponent
+      makeStyles={makeStyles(
+        theme,
+        ComposedComponent.displayName,
+        generateStyle,
+        {
+          ...ComposedComponent.defaultProps,
+          ...props
+        }
+      )}
+      {...props}
+    />
+  )
+})
+
+export { useStyle, useTheme, withStyle, makeStyles }

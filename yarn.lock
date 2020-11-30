@@ -1491,20 +1491,6 @@
   resolved "https://registry.npmjs.org/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
   integrity sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==
 
-"@instructure/ui-avatar@^7.3.0":
-  version "7.3.0"
-  resolved "https://registry.npmjs.org/@instructure/ui-avatar/-/ui-avatar-7.3.0.tgz#9eac96138e5a960391682230eafe538f297a9c15"
-  integrity sha512-vwXLJcEDw+0Y8yV1vpmZeKTrXHWhUX1Xi2Qf34L11MTZVtQ5zgh8BB6vE4iuXwj9YeoRj6CYu9rnsU7rK31IEg==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
-    "@instructure/console" "^7.3.0"
-    "@instructure/ui-react-utils" "^7.3.0"
-    "@instructure/ui-testable" "^7.3.0"
-    "@instructure/ui-themeable" "^7.3.0"
-    "@instructure/ui-view" "^7.3.0"
-    classnames "^2"
-    prop-types "^15"
-
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@istanbuljs/load-nyc-config/-/load-nyc-config-1.0.0.tgz#10602de5570baea82f8afbfa2630b24e7a8cfe5b"
@@ -12856,7 +12842,7 @@ lodash.memoize@4.1.2, lodash.memoize@^4.1.2:
   resolved "https://registry.npmjs.org/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
-lodash.merge@*, lodash.merge@^4.4.0:
+lodash.merge@^4.4.0:
   version "4.6.2"
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
@@ -12943,6 +12929,11 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
+
+lodash@*:
+  version "4.17.20"
+  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
+  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
 lodash@4.17.10:
   version "4.17.10"
