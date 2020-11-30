@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-flex",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "description": "A component that makes it easy to align content using flexbox CSS",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -24,16 +24,16 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.0",
-    "@instructure/ui-react-utils": "^7.3.0",
-    "@instructure/ui-themeable": "^7.3.0",
-    "@instructure/ui-view": "^7.3.0",
+    "@instructure/console": "^7.3.1",
+    "@instructure/ui-react-utils": "^7.3.1",
+    "@instructure/ui-themeable": "^7.3.1",
+    "@instructure/ui-view": "^7.3.1",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.0",
-    "@instructure/ui-test-utils": "^7.3.0"
+    "@instructure/ui-babel-preset": "^7.3.1",
+    "@instructure/ui-test-utils": "^7.3.1"
   },
   "peerDependencies": {
     "react": "^16.8"

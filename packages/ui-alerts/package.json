@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-alerts",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "description": "An alert component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -23,22 +23,22 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.0",
-    "@instructure/ui-color-utils": "^7.3.0",
-    "@instructure/ui-test-utils": "^7.3.0"
+    "@instructure/ui-babel-preset": "^7.3.1",
+    "@instructure/ui-color-utils": "^7.3.1",
+    "@instructure/ui-test-utils": "^7.3.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.0",
-    "@instructure/ui-a11y-content": "^7.3.0",
-    "@instructure/ui-buttons": "^7.3.0",
-    "@instructure/ui-icons": "^7.3.0",
-    "@instructure/ui-motion": "^7.3.0",
-    "@instructure/ui-react-utils": "^7.3.0",
-    "@instructure/ui-themeable": "^7.3.0",
-    "@instructure/ui-utils": "^7.3.0",
-    "@instructure/ui-view": "^7.3.0",
-    "@instructure/uid": "^7.3.0",
+    "@instructure/console": "^7.3.1",
+    "@instructure/ui-a11y-content": "^7.3.1",
+    "@instructure/ui-buttons": "^7.3.1",
+    "@instructure/ui-icons": "^7.3.1",
+    "@instructure/ui-motion": "^7.3.1",
+    "@instructure/ui-react-utils": "^7.3.1",
+    "@instructure/ui-themeable": "^7.3.1",
+    "@instructure/ui-utils": "^7.3.1",
+    "@instructure/ui-view": "^7.3.1",
+    "@instructure/uid": "^7.3.1",
     "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"
