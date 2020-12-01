@@ -45,7 +45,7 @@ class ComponentTheme extends Component {
     themes: PropTypes.object
   }
 
-  mapColors (colorKey) {
+  mapColors(colorKey) {
     const map = {}
     Object.keys(colorKey).forEach((color) => {
       const hex = colorKey[color]
@@ -56,11 +56,13 @@ class ComponentTheme extends Component {
     return map
   }
 
-  renderRows () {
+  renderRows() {
     const { theme } = this.props
     const { themes, themeKey } = this.context
-    const variables = themes[themeKey].resource.variables
-    const colorKey = variables.colors.values ? variables.colors.values : variables.colors
+    const variables = themes[themeKey].resource
+    const colorKey = variables.colors.values
+      ? variables.colors.values
+      : variables.colors
     const map = this.mapColors(colorKey)
 
     return Object.keys(theme).map((name) => {
@@ -73,18 +75,18 @@ class ComponentTheme extends Component {
             <code>{name}</code>
           </Table.Cell>
           <Table.Cell>
-            {(value.toString().charAt(0) === '#') ? (
+            {value.toString().charAt(0) === '#' ? (
               <span>
                 <View margin="0 xx-small 0 0">
                   <ColorSwatch color={value} />
                 </View>
                 <code>{color}</code>
               </span>
-            ) : (value.toString().substring(0, 3) === 'rgb') ? (
+            ) : value.toString().substring(0, 3) === 'rgb' ? (
               <span>
                 <View margin="0 xx-small 0 0">
                   <ColorSwatch color={value} />
-                  </View>
+                </View>
                 <code>{value}</code>
               </span>
             ) : (
@@ -96,7 +98,7 @@ class ComponentTheme extends Component {
     })
   }
 
-  render () {
+  render() {
     return this.props.theme && Object.keys(this.props.theme).length > 0 ? (
       <div className={styles.root}>
         <Table caption="Component theme">
@@ -106,9 +108,7 @@ class ComponentTheme extends Component {
               <Table.ColHeader id="value">Value</Table.ColHeader>
             </Table.Row>
           </Table.Head>
-          <Table.Body>
-            {this.renderRows()}
-          </Table.Body>
+          <Table.Body>{this.renderRows()}</Table.Body>
         </Table>
       </div>
     ) : null
