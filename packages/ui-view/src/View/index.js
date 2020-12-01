@@ -22,17 +22,13 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+/** @jsx jsx */
 
-import {
-  themeable,
-  getShorthandPropValue,
-  ThemeablePropTypes,
-  mirrorShorthandEdges,
-  mirrorShorthandCorners
-} from '@instructure/ui-themeable'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { jsx, withStyle } from '@instructure/emotion'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
@@ -45,9 +41,7 @@ import {
   deprecated
 } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
-import { themeAdapter } from './themeAdapter'
+import generateStyles from './styles'
 
 /**
 ---
@@ -55,12 +49,13 @@ category: components
 ---
 @module View
 **/
+@withStyle(generateStyles)
 @deprecated('8.0.0', {
   focused: 'withFocusOutline',
   visualDebug: 'withVisualDebug'
 })
 @bidirectional()
-@themeable(theme, styles, themeAdapter)
+// @themeable(theme, styles, themeAdapter)
 class View extends Component {
   static propTypes = {
     /**
@@ -349,159 +344,6 @@ class View extends Component {
       )
     }
   }
-
-  get withFocusOutline() {
-    if (
-      typeof this.props.withFocusOutline === 'undefined' &&
-      typeof this.props.focused === 'undefined'
-    ) {
-      return undefined
-    }
-
-    const { position, display, focusPosition } = this.props
-
-    const withFocusOutline = this.props.focused || this.props.withFocusOutline
-
-    if (withFocusOutline) {
-      error(
-        display === 'inline' || position === 'relative',
-        '[View] the focus outline will only show if the `position` prop is `relative`.'
-      )
-
-      error(
-        display !== 'inline' || focusPosition === 'inset',
-        '[View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
-      )
-    }
-
-    return withFocusOutline
-  }
-
-  get focusRingRadius() {
-    const { borderRadius = '' } = this.props
-    const baseRadiusStyle = 'focusRing--radius'
-
-    const initialValue = borderRadius.trim().split(' ')[0]
-
-    if (this.verifyUniformValues(initialValue, borderRadius)) {
-      const capitalize = (str) =>
-        `${str.charAt(0).toUpperCase()}${str.slice(1)}`
-
-      if (['small', 'medium', 'large'].includes(initialValue))
-        return `${baseRadiusStyle}${capitalize(initialValue)}`
-      if (['circle', 'pill'].includes(initialValue))
-        return `${baseRadiusStyle}Inherit`
-    }
-
-    return `${baseRadiusStyle}None`
-  }
-
-  get withBorder() {
-    const { borderWidth } = this.props
-    return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
-  }
-
-  get borderStyle() {
-    let { borderRadius, borderWidth } = this.props
-
-    if (this.dir === bidirectional.DIRECTION.rtl) {
-      borderRadius = mirrorShorthandCorners(borderRadius)
-      borderWidth = mirrorShorthandEdges(borderWidth)
-    }
-
-    return {
-      borderRadius: getShorthandPropValue(
-        'View',
-        this.theme,
-        borderRadius,
-        'borderRadius'
-      ),
-      borderWidth: getShorthandPropValue(
-        'View',
-        this.theme,
-        borderWidth,
-        'borderWidth'
-      )
-    }
-  }
-
-  get spacingStyle() {
-    let { margin, padding } = this.props
-
-    if (this.dir === 'rtl') {
-      margin = mirrorShorthandEdges(margin)
-      padding = mirrorShorthandEdges(padding)
-    }
-
-    return {
-      margin: getShorthandPropValue('View', this.theme, margin, 'margin'),
-      padding: getShorthandPropValue('View', this.theme, padding, 'padding')
-    }
-  }
-
-  get offsetStyle() {
-    const {
-      insetBlockStart,
-      insetBlockEnd,
-      insetInlineStart,
-      insetInlineEnd
-    } = this.props
-
-    const rtl = this.dir === 'rtl'
-
-    const blockStart = {
-      top: insetBlockStart,
-      insetBlockStart
-    }
-
-    const blockEnd = {
-      bottom: insetBlockEnd,
-      insetBlockEnd
-    }
-
-    const horizontalOffsets = {
-      left: rtl ? insetInlineEnd : insetInlineStart,
-      right: rtl ? insetInlineStart : insetInlineEnd,
-      insetInlineStart,
-      insetInlineEnd
-    }
-
-    return {
-      ...blockStart,
-      ...blockEnd,
-      ...horizontalOffsets
-    }
-  }
-
-  get styleProps() {
-    const { cursor, style } = this.props // eslint-disable-line react/prop-types
-    const whitelisted = pickProps(style || {}, {}, [
-      // Position/calculateElementPosition:
-      'top',
-      'left',
-      'position',
-      'display',
-      'transform',
-      'overflow',
-      'minWidth',
-      'minHeight',
-      // Img:
-      'filter',
-      // Flex.Item:
-      'flexBasis',
-      // Avatar:
-      'backgroundImage',
-      // Popover:
-      'pointerEvents'
-    ])
-
-    if (cursor) {
-      whitelisted.cursor = cursor
-    }
-
-    return whitelisted
-  }
-
   handleElementRef = (el) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
@@ -509,17 +351,6 @@ class View extends Component {
 
     this._element = el
   }
-
-  // verify that each value passed into ThemeablePropType is identical
-  verifyUniformValues = (initialValue, input) => {
-    if (typeof input !== 'string') return false
-
-    return input
-      .trim()
-      .split(' ')
-      .every((value) => initialValue === value)
-  }
-
   render() {
     const {
       children,
@@ -545,59 +376,15 @@ class View extends Component {
       className, // eslint-disable-line react/prop-types
       ...props
     } = this.props
+    const styles = props.makeStyles({ dir: this.dir })
 
     const ElementType = getElementType(View, this.props)
-
-    const { withFocusOutline } = this
-
-    const focusOutlineClasses =
-      position === 'relative' ||
-      (display === 'inline' && focusPosition === 'inset')
-        ? {
-            [styles.focus]: true,
-            [styles.withFocusOutline]: withFocusOutline,
-            [styles.shouldUseBrowserFocus]:
-              typeof withFocusOutline === 'undefined',
-            [styles[this.focusRingRadius]]: true,
-            [styles[`focusPosition--${focusPosition}`]]: true,
-            [styles[`focusColor--${focusColor}`]]: true,
-            [styles.focusAnimation]: shouldAnimateFocus
-          }
-        : {}
-
-    const classes = classnames({
-      [styles.root]: true,
-      [styles.withVisualDebug]: withVisualDebug || this.props.visualDebug,
-      [styles.withBorder]: this.withBorder,
-      [styles[`borderColor--${borderColor}`]]: this.withBorder,
-      [styles[`textAlign--${textAlign}`]]: textAlign,
-      [styles[`background--${background}`]]: background,
-      [styles[`display--${display}`]]: display && display !== 'auto',
-      [styles[`overflowX--${overflowX}`]]: overflowX && overflowX !== 'visible',
-      [styles[`overflowY--${overflowY}`]]: overflowY && overflowY !== 'visible',
-      [styles[`stacking--${stacking}`]]: stacking,
-      [styles[`shadow--${shadow}`]]: shadow && shadow !== 'none',
-      [styles[`position--${position}`]]: position !== 'static',
-      ...focusOutlineClasses,
-      [className]: className
-    })
 
     return (
       <ElementType
         {...passthroughProps(props)}
-        className={classes}
-        style={{
-          ...this.spacingStyle,
-          ...this.borderStyle,
-          ...this.offsetStyle,
-          width,
-          height,
-          minWidth,
-          minHeight,
-          maxWidth,
-          maxHeight,
-          ...this.styleProps // whitelisted style props will override View defaults
-        }}
+        className={className}
+        css={styles.root}
         ref={this.handleElementRef}
       >
         {children}

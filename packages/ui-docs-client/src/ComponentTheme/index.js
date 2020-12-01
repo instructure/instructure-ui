@@ -59,7 +59,7 @@ class ComponentTheme extends Component {
   renderRows() {
     const { theme } = this.props
     const { themes, themeKey } = this.context
-    const variables = themes[themeKey].resource.variables
+    const variables = themes[themeKey].resource
     const colorKey = variables.colors.values
       ? variables.colors.values
       : variables.colors

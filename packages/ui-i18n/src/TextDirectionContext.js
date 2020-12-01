@@ -75,4 +75,4 @@ const TextDirectionContext = {
 }
 
 export default TextDirectionContext
-export { TextDirectionContext }
+export { TextDirectionContext, DIRECTION }

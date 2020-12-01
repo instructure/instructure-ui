@@ -31,7 +31,7 @@
     "@instructure/ui-utils": "^7.3.2",
     "@instructure/ui-decorator": "^7.3.2",
     "emotion-theming": "^10.0.27",
-    "lodash": "*"
+    "lodash": "^4"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^7.3.2",
