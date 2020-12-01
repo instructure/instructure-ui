@@ -36,7 +36,10 @@ import { EmotionThemeProvider } from '@instructure/emotion'
 function renderDocsClient(data, element) {
   //Legacy way of registering themes, we need to do this so the currently not migrated components
   //which are still using the old themeing solution will render correctly
-  ThemeRegistry.registerTheme({ key: 'canvas', variables: { ...canvas } })
+  ThemeRegistry.registerTheme({
+    key: 'canvas',
+    variables: { ...canvas }
+  })
   ThemeRegistry.registerTheme({
     key: 'instructure',
     variables: { ...instructure }
