@@ -37,8 +37,7 @@ import {
   getElementType,
   omitProps,
   pickProps,
-  passthroughProps,
-  deprecated
+  passthroughProps
 } from '@instructure/ui-react-utils'
 
 import generateStyles from './styles'
@@ -50,12 +49,7 @@ category: components
 @module View
 **/
 @withStyle(generateStyles)
-@deprecated('8.0.0', {
-  focused: 'withFocusOutline',
-  visualDebug: 'withVisualDebug'
-})
 @bidirectional()
-// @themeable(theme, styles, themeAdapter)
 class View extends Component {
   static propTypes = {
     /**
@@ -129,55 +123,33 @@ class View extends Component {
     /**
      * Sets the color of the View border
      */
-    borderColor: deprecated.deprecatePropValues(
-      PropTypes.oneOf([
-        'transparent',
-        'primary',
-        'secondary',
-        'brand',
-        'info',
-        'success',
-        'warning',
-        'alert',
-        'danger',
-        'default',
-        'inverse'
-      ]),
-      ['default', 'inverse'],
-      ({ propName, propValue }) =>
-        `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
-          if (propValue === 'default') return `'primary'`
-          if (propValue === 'inverse') return `'transparent'`
-        })()}. Use that value instead.`
-    ),
+    borderColor: PropTypes.oneOf([
+      'transparent',
+      'primary',
+      'secondary',
+      'brand',
+      'info',
+      'success',
+      'warning',
+      'alert',
+      'danger'
+    ]),
 
     /**
      * Designates the background style of the `<View />`
      */
-    background: deprecated.deprecatePropValues(
-      PropTypes.oneOf([
-        'transparent',
-        'primary',
-        'secondary',
-        'primary-inverse',
-        'brand',
-        'info',
-        'alert',
-        'success',
-        'danger',
-        'warning',
-        'default',
-        'light',
-        'inverse'
-      ]),
-      ['default', 'inverse', 'light'],
-      ({ propName, propValue }) =>
-        `In version 8.0.0, the value '${propValue}' for \`${propName}\` will be changed to ${(() => {
-          if (propValue === 'default') return `'primary'`
-          if (propValue === 'light') return `'secondary'`
-          if (propValue === 'inverse') return `'primary-inverse'`
-        })()}. Use that value instead.`
-    ),
+    background: PropTypes.oneOf([
+      'transparent',
+      'primary',
+      'secondary',
+      'primary-inverse',
+      'brand',
+      'info',
+      'alert',
+      'success',
+      'danger',
+      'warning'
+    ]),
 
     /**
      * Controls the shadow depth for the `<View />`
@@ -248,19 +220,7 @@ class View extends Component {
      * Activate a dotted outline around the component to make building your
      * layout easier
      */
-    withVisualDebug: PropTypes.bool,
-    /* eslint-disable react/require-default-props */
-
-    /**
-     * __Deprecated - use 'withFocusOutline'__
-     */
-    focused: PropTypes.bool,
-    /**
-     * __Deprecated - use 'withVisualDebug'__
-     */
-    visualDebug: PropTypes.bool
-
-    /* eslint-enable react/require-default-props */
+    withVisualDebug: PropTypes.bool
   }
 
   static defaultProps = {

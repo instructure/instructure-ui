@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -42,11 +42,6 @@ category: components
 
 @withStyle(generateStyles)
 @testable()
-@deprecated('8.0.0', {
-  inline: 'display',
-  variant: 'shape'
-})
-// @themeable(theme, styles)
 class Avatar extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -85,17 +80,7 @@ class Avatar extends Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func,
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `display`__
-     */
-    inline: PropTypes.bool,
-    /**
-     * __Deprecated - use `shape`__
-     */
-    variant: PropTypes.oneOf(['circle', 'rectangle'])
-    /* eslint-enable react/require-default-props */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {

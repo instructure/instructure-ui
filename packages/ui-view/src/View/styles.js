@@ -410,14 +410,8 @@ const generateStyle = (theme, themeOverride, props, state) => {
     end: { textAlign: 'end' }
   }
   const borderColorVariants = {
-    inverse: {
-      borderColor: componentTheme.borderColorTransparent
-    },
     transparent: {
       borderColor: componentTheme.borderColorTransparent
-    },
-    default: {
-      borderColor: componentTheme.borderColorPrimary
     },
     primary: {
       borderColor: componentTheme.borderColorPrimary
@@ -449,25 +443,13 @@ const generateStyle = (theme, themeOverride, props, state) => {
       color: componentTheme.color,
       background: 'none'
     },
-    default: {
-      color: componentTheme.color,
-      background: componentTheme.backgroundPrimary
-    },
     primary: {
       color: componentTheme.color,
       background: componentTheme.backgroundPrimary
     },
-    light: {
-      color: componentTheme.color,
-      background: componentTheme.backgroundSecondary
-    },
     secondary: {
       color: componentTheme.color,
       background: componentTheme.backgroundSecondary
-    },
-    inverse: {
-      color: componentTheme.colorPrimaryInverse,
-      background: componentTheme.backgroundPrimaryInverse
     },
     ['primary-inverse']: {
       color: componentTheme.colorPrimaryInverse,
@@ -530,7 +512,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
     label: 'root',
     boxSizing: 'border-box',
     fontFamily: componentTheme.fontFamily,
-    maxWidth: '100%',
+    maxWidth: maxWidth || '100%',
     overflow: 'visible',
     ...displayVariants[display],
     ...backgroundColorVariants[background],
@@ -564,7 +546,6 @@ const generateStyle = (theme, themeOverride, props, state) => {
       height,
       minWidth,
       minHeight,
-      maxWidth,
       maxHeight,
       ...getStyleProps(props)
     }
