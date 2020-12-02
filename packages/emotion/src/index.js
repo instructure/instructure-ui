@@ -23,4 +23,4 @@
  */
 export { jsx, css, keyframes } from '@emotion/core'
 export { EmotionThemeProvider } from './EmotionThemeProvider'
-export { makeStyles, useTheme, withStyle, useStyle } from './useStyle'
+export { useTheme, withStyle, useStyle } from './styleUtils'
