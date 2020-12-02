@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-radio-input",
-  "version": "7.3.0",
+  "version": "7.3.1",
   "description": "A styled HTML input type='radio' element",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -23,21 +23,21 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-dom-utils": "^7.3.0",
-    "@instructure/ui-form-field": "^7.3.0",
-    "@instructure/ui-prop-types": "^7.3.0",
-    "@instructure/ui-react-utils": "^7.3.0",
-    "@instructure/ui-testable": "^7.3.0",
-    "@instructure/ui-themeable": "^7.3.0",
-    "@instructure/uid": "^7.3.0",
+    "@instructure/ui-dom-utils": "^7.3.1",
+    "@instructure/ui-form-field": "^7.3.1",
+    "@instructure/ui-prop-types": "^7.3.1",
+    "@instructure/ui-react-utils": "^7.3.1",
+    "@instructure/ui-testable": "^7.3.1",
+    "@instructure/ui-themeable": "^7.3.1",
+    "@instructure/uid": "^7.3.1",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.0",
-    "@instructure/ui-color-utils": "^7.3.0",
-    "@instructure/ui-test-locator": "^7.3.0",
-    "@instructure/ui-test-utils": "^7.3.0"
+    "@instructure/ui-babel-preset": "^7.3.1",
+    "@instructure/ui-color-utils": "^7.3.1",
+    "@instructure/ui-test-locator": "^7.3.1",
+    "@instructure/ui-test-utils": "^7.3.1"
   },
   "peerDependencies": {
     "react": "^16.8"
