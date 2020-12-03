@@ -22,12 +22,14 @@
  * SOFTWARE.
  */
 
-module.exports = function transformCSSRequire (tokens, css, componentId) {
+module.exports = function transformCSSRequire(tokens, css, componentId) {
   return `{
       componentId: '${componentId}',
       template: function (theme) {
         return \`${css}\`
       },
-      ${Object.keys(tokens).map(key => `'${key}': '${tokens[key]}'`).join(',\n')}
+      ${Object.keys(tokens)
+        .map((key) => `'${key}': '${tokens[key]}'`)
+        .join(',\n')}
     }`
 }

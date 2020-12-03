@@ -29,8 +29,16 @@ import { InPlaceEdit } from '../index'
 
 const noop = () => {}
 const renderViewer = () => <div id="viewer">text</div>
-const renderEditor = ({editorRef, onBlur}) => { // eslint-disable-line react/prop-types
-  return <input id="editor" ref={editorRef} onBlur={onBlur} defaultValue="textvalue" />
+const renderEditor = ({ editorRef, onBlur }) => {
+  // eslint-disable-line react/prop-types
+  return (
+    <input
+      id="editor"
+      ref={editorRef}
+      onBlur={onBlur}
+      defaultValue="textvalue"
+    />
+  )
 }
 const renderEditButton = (props) => {
   return InPlaceEdit.renderDefaultEditButton({ label: 'Edit', ...props })
@@ -38,7 +46,7 @@ const renderEditButton = (props) => {
 
 describe('<InPlaceEdit />', async () => {
   it('should render view mode', async () => {
-    const subject =  await mount(
+    const subject = await mount(
       <InPlaceEdit
         id="foos"
         mode="view"

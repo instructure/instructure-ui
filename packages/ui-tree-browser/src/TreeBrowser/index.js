@@ -49,60 +49,67 @@ category: components
 class TreeBrowser extends Component {
   static propTypes = {
     /**
-    * a normalized hash of collections, keyed by id, that contain an
-    * :id, :name, :items (an array of item ids), :collections (an array of
-    * collection ids), and optional :descriptor text.
-    * Each collection must have a unique id.
-    */
+     * a normalized hash of collections, keyed by id, that contain an
+     * :id, :name, :items (an array of item ids), :collections (an array of
+     * collection ids), and optional :descriptor text.
+     * Each collection must have a unique id.
+     */
     collections: PropTypes.object.isRequired,
     /**
-    * a hash of items, keyed by id, that contain an :id, :name,
-    * optional :descriptor text, and optional :thumbnail url
-    */
+     * a hash of items, keyed by id, that contain an :id, :name,
+     * optional :descriptor text, and optional :thumbnail url
+     */
     items: PropTypes.object.isRequired,
     /**
-    * specifies the id of the root level collection, if present.
-    * if no root is specified, all collections will be rendered
-    * at the top level
-    **/
+     * specifies the id of the root level collection, if present.
+     * if no root is specified, all collections will be rendered
+     * at the top level
+     **/
     rootId: PropTypes.number,
     /**
-    * an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop
-    */
+     * an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop
+     */
     expanded: controllable(
-      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+      PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      ),
       'onCollectionToggle'
     ),
     /**
-    * an array of collection ids to expand by default
-    */
-    defaultExpanded: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+     * an array of collection ids to expand by default
+     */
+    defaultExpanded: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ),
     // There are 2 types of tree selection:  single and multi.
     // This is set up to allow for "multi" in the future without having to deprecate the old API.
     selectionType: PropTypes.oneOf(['none', 'single']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
     collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    collectionIconExpanded: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.func
+    ]),
     itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * A function called with each item's props as an argument. The return value of this function is a
-    * props object which will be passed to the item when it is rendered. This is useful for situations where
-    * you need to render the item differently depending on it's props. For example, if you would like to
-    * display a different icon for items with a certain name.
-    */
+     * A function called with each item's props as an argument. The return value of this function is a
+     * props object which will be passed to the item when it is rendered. This is useful for situations where
+     * you need to render the item differently depending on it's props. For example, if you would like to
+     * display a different icon for items with a certain name.
+     */
     getItemProps: PropTypes.func,
     /**
-    * whether or not to show the root collection specified in rootId prop or
-    * to begin with its immediate subcollections and items instead
-    */
+     * whether or not to show the root collection specified in rootId prop or
+     * to begin with its immediate subcollections and items instead
+     */
     showRootCollection: PropTypes.bool,
     onCollectionClick: PropTypes.func,
     onCollectionToggle: PropTypes.func,
     onItemClick: PropTypes.func,
     /**
-    * An optional label to assist visually impaired users
-    */
+     * An optional label to assist visually impaired users
+     */
     treeLabel: PropTypes.string
   }
 
@@ -113,7 +120,7 @@ class TreeBrowser extends Component {
     collectionIcon: IconFolderLine,
     collectionIconExpanded: IconFolderLine,
     itemIcon: IconDocumentLine,
-    getItemProps: props => props,
+    getItemProps: (props) => props,
     defaultExpanded: [],
     selectionType: 'none',
     onItemClick: function (item) {},
@@ -124,17 +131,17 @@ class TreeBrowser extends Component {
     treeLabel: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
-    this.state = {selection: ''}
+    this.state = { selection: '' }
 
     if (typeof this.props.expanded === 'undefined') {
       this.state.expanded = props.defaultExpanded
     }
   }
 
-  handleCollectionClick = (e, collection, expand=true) => {
+  handleCollectionClick = (e, collection, expand = true) => {
     e.stopPropagation()
     const { onCollectionClick } = this.props
 
@@ -179,31 +186,33 @@ class TreeBrowser extends Component {
     event.preventDefault()
   }
 
-  get collections () {
+  get collections() {
     const { collections, rootId, showRootCollection } = this.props
 
     if (typeof rootId !== 'undefined' && showRootCollection) {
       return [collections[rootId]]
     } else if (typeof rootId !== 'undefined') {
       return collections[rootId].collections
-        .map(id => collections[id])
-        .filter(collection => collection != null)
+        .map((id) => collections[id])
+        .filter((collection) => collection != null)
     } else {
       return Object.keys(collections)
-        .map(id => collections[id])
-        .filter(collection => collection != null)
+        .map((id) => collections[id])
+        .filter((collection) => collection != null)
     }
   }
 
-  get expanded () {
+  get expanded() {
     return this.getExpanded(this.state, this.props)
   }
 
-  getExpanded (state, props) {
-    return (typeof props.expanded === 'undefined') ? state.expanded : props.expanded
+  getExpanded(state, props) {
+    return typeof props.expanded === 'undefined'
+      ? state.expanded
+      : props.expanded
   }
 
-  expandOrCollapseNode (collection) {
+  expandOrCollapseNode(collection) {
     this.props.onCollectionToggle(collection)
     if (typeof this.props.expanded === 'undefined') {
       this.setState((state, props) => {
@@ -222,23 +231,24 @@ class TreeBrowser extends Component {
     }
   }
 
-  handleSelection (id, type) {
+  handleSelection(id, type) {
     const { selectionType } = this.props
-    selectionType === 'single' && this.setState((state) => {
-      const selection = `${type}_${id}`
-      if (state.selection !== selection) {
-        return { selection }
-      } else {
-        return state
-      }
-    })
+    selectionType === 'single' &&
+      this.setState((state) => {
+        const selection = `${type}_${id}`
+        if (state.selection !== selection) {
+          return { selection }
+        } else {
+          return state
+        }
+      })
   }
 
-  getNavigableNodes () {
+  getNavigableNodes() {
     return Array.from(this._root.querySelectorAll('[role="treeitem"]'))
   }
 
-  moveFocus (delta) {
+  moveFocus(delta) {
     const nodes = this.getNavigableNodes()
     const active = nodes.indexOf(window.document.activeElement)
     let next = active + delta
@@ -247,12 +257,14 @@ class TreeBrowser extends Component {
     } else if (next >= nodes.length) {
       next = nodes.length - 1
     }
-    nodes.forEach((n) => { n.setAttribute('tabindex', '-1') })
+    nodes.forEach((n) => {
+      n.setAttribute('tabindex', '-1')
+    })
     nodes[next].setAttribute('tabindex', '0')
     nodes[next].focus()
   }
 
-  homeOrEnd (keyCode) {
+  homeOrEnd(keyCode) {
     const length = this.getNavigableNodes().length
     if (keyCode === keycode.codes.home) {
       this.moveFocus(1 - length)
@@ -261,9 +273,14 @@ class TreeBrowser extends Component {
     }
   }
 
-  handleLeftOrRightArrow (keyCode, node) {
-    const ltr = !(this._root.parentElement.dir === 'rtl' || document.dir === 'rtl')
-    if ((ltr && keyCode === keycode.codes.left) || (!ltr && keyCode == keycode.codes.right)) {
+  handleLeftOrRightArrow(keyCode, node) {
+    const ltr = !(
+      this._root.parentElement.dir === 'rtl' || document.dir === 'rtl'
+    )
+    if (
+      (ltr && keyCode === keycode.codes.left) ||
+      (!ltr && keyCode == keycode.codes.right)
+    ) {
       this.handleCloseOrPrevious(node)
     } else {
       this.handleOpenOrNext(node)
@@ -271,7 +288,11 @@ class TreeBrowser extends Component {
   }
 
   handleOpenOrNext(node) {
-    if (node && !this.expanded.includes(node.id) && node.type === 'collection') {
+    if (
+      node &&
+      !this.expanded.includes(node.id) &&
+      node.type === 'collection'
+    ) {
       this.expandOrCollapseNode(node)
     } else {
       this.moveFocus(1)
@@ -286,41 +307,47 @@ class TreeBrowser extends Component {
     }
   }
 
-  handleActivation (event, node) {
+  handleActivation(event, node) {
     if (node == null) return
     if (node.type === 'collection') {
-      this.handleCollectionClick(event, node, this.props.selectionType === 'none')
+      this.handleCollectionClick(
+        event,
+        node,
+        this.props.selectionType === 'none'
+      )
     } else {
       this.handleItemClick(event, node)
     }
   }
 
-  getSubCollections (collection) {
+  getSubCollections(collection) {
     const collections = [].concat(collection.collections || [])
 
-    return collections.map((id) => this.getCollectionProps(this.props.collections[id]))
-      .filter(collection => collection != null)
+    return collections
+      .map((id) => this.getCollectionProps(this.props.collections[id]))
+      .filter((collection) => collection != null)
   }
 
-  getItems (collection) {
+  getItems(collection) {
     if (collection.items) {
       const items = [].concat(collection.items)
 
-      return items.map(id => {
-        return { ...this.props.items[id] }
-      })
-      .filter(item => item != null)
+      return items
+        .map((id) => {
+          return { ...this.props.items[id] }
+        })
+        .filter((item) => item != null)
     } else {
       return []
     }
   }
 
-  getCollectionProps (collection) {
+  getCollectionProps(collection) {
     const props = {
       id: collection.id,
       name: collection.name,
       descriptor: collection.descriptor,
-      expanded: (this.getExpandedIndex(this.expanded, collection.id) >= 0),
+      expanded: this.getExpandedIndex(this.expanded, collection.id) >= 0,
       items: this.getItems(collection),
       collections: this.getSubCollections(collection)
     }
@@ -328,11 +355,11 @@ class TreeBrowser extends Component {
     return props
   }
 
-  getExpandedIndex (expanded, id) {
-    return expanded.findIndex((expanded) => (String(expanded) === String(id)))
+  getExpandedIndex(expanded, id) {
+    return expanded.findIndex((expanded) => String(expanded) === String(id))
   }
 
-  renderRoot () {
+  renderRoot() {
     return this.collections.map((collection, i) => (
       <TreeCollection
         key={i}
@@ -349,13 +376,16 @@ class TreeBrowser extends Component {
     ))
   }
 
-  render () {
+  render() {
     return (
       <ul
         className={styles.list}
-        tabIndex={0} role="tree"
+        tabIndex={0}
+        role="tree"
         onKeyDown={this.handleKeyDown}
-        ref={(el) => { this._root = el }}
+        ref={(el) => {
+          this._root = el
+        }}
         aria-label={this.props.treeLabel}
       >
         {this.renderRoot()}

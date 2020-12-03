@@ -70,7 +70,10 @@ module.exports = ({
   let ignoreArgs = []
 
   allIgnores.forEach((ignore) => {
-    ignoreArgs = ignoreArgs.concat(['--ignore-pattern', path.join(sourcePath, ignore)])
+    ignoreArgs = ignoreArgs.concat([
+      '--ignore-pattern',
+      path.join(sourcePath, ignore)
+    ])
   })
 
   runCommandSync('jscodeshift', [

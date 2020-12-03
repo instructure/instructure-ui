@@ -27,7 +27,6 @@ import { expect } from '@instructure/ui-test-utils'
 
 import generateComponentExamples from '../generateComponentExamples'
 
-
 class TestComponent extends Component {
   render() {
     return React.createElement('span')

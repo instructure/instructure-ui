@@ -34,42 +34,44 @@ class Methods extends Component {
     methods: PropTypes.array.isRequired
   }
 
-  renderRows () {
+  renderRows() {
     const methods = this.props.methods || []
 
     return methods.map((method) => {
       return (
         <Table.Row key={method.name}>
-          <Table.Cell><code>{method.name}</code></Table.Cell>
-          <Table.Cell><code>{this.renderParams(method.params)}</code></Table.Cell>
-          <Table.Cell><code>{this.renderReturns(method.returns)}</code></Table.Cell>
+          <Table.Cell>
+            <code>{method.name}</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code>{this.renderParams(method.params)}</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code>{this.renderReturns(method.returns)}</code>
+          </Table.Cell>
           <Table.Cell>{this.renderDescription(method.docblock)}</Table.Cell>
         </Table.Row>
       )
     })
   }
 
-  renderType (type) {
+  renderType(type) {
     return type ? type.names.join(', ') : null
   }
 
-  renderParams (params) {
-    return params && params.map(param => param.name).join(', ')
+  renderParams(params) {
+    return params && params.map((param) => param.name).join(', ')
   }
 
-  renderReturns (returns) {
-    return returns && returns.map(ret => this.renderType(ret.type)).join(', ')
+  renderReturns(returns) {
+    return returns && returns.map((ret) => this.renderType(ret.type)).join(', ')
   }
 
-  renderDescription (description) {
-    return (
-      <div>
-        {description && compileMarkdown(description) }
-      </div>
-    )
+  renderDescription(description) {
+    return <div>{description && compileMarkdown(description)}</div>
   }
 
-  render () {
+  render() {
     return (
       <Table caption="Parameters">
         <Table.Head>
@@ -80,9 +82,7 @@ class Methods extends Component {
             <Table.ColHeader id="Description">Description</Table.ColHeader>
           </Table.Row>
         </Table.Head>
-        <Table.Body>
-          {this.renderRows()}
-        </Table.Body>
+        <Table.Body>{this.renderRows()}</Table.Body>
       </Table>
     )
   }

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
-import { themeable , ThemeablePropTypes } from '@instructure/ui-themeable'
+import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'
@@ -45,26 +45,26 @@ category: components
 class ContextView extends Component {
   static propTypes = {
     /**
-    * The element to render as the component root
-    */
+     * The element to render as the component root
+     */
     as: PropTypes.elementType,
 
     /**
-    * provides a reference to the underlying html root element
-    */
+     * provides a reference to the underlying html root element
+     */
     elementRef: PropTypes.func,
 
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-    */
+     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+     */
     padding: ThemeablePropTypes.spacing,
 
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -75,46 +75,46 @@ class ContextView extends Component {
     minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
-    * The children to render inside the `<ContextView />`
-    */
+     * The children to render inside the `<ContextView />`
+     */
     children: PropTypes.node,
 
     /**
-    * Designates the text alignment within the `<ContextView />`
-    */
+     * Designates the text alignment within the `<ContextView />`
+     */
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
 
     /**
-    * Controls the shadow depth for the `<ContextView />`
-    */
+     * Controls the shadow depth for the `<ContextView />`
+     */
     shadow: ThemeablePropTypes.shadow,
 
     /**
-    * Controls the z-index depth for the `<ContextView />`
-    */
+     * Controls the z-index depth for the `<ContextView />`
+     */
     stacking: ThemeablePropTypes.stacking,
 
     /**
-    * Designates the background style of the `<ContextView />`
-    */
+     * Designates the background style of the `<ContextView />`
+     */
     background: PropTypes.oneOf(['default', 'inverse']),
 
     /**
-    * Specifies how the arrow for `<ContextView />` will be rendered.
-    * Ex. `placement="top"` will render with an arrow pointing down.
-    */
+     * Specifies how the arrow for `<ContextView />` will be rendered.
+     * Ex. `placement="top"` will render with an arrow pointing down.
+     */
     placement: PositionPropTypes.placement,
 
     /**
-    * Activate an outline around the component to make building your
-    * layout easier
-    */
+     * Activate an outline around the component to make building your
+     * layout easier
+     */
     debug: PropTypes.bool
   }
 
   static defaultProps = {
     as: 'span',
-    elementRef: el => {},
+    elementRef: (el) => {},
     debug: false,
     width: 'auto',
     height: 'auto',
@@ -132,11 +132,11 @@ class ContextView extends Component {
     minHeight: undefined
   }
 
-  get mirroredPlacement () {
+  get mirroredPlacement() {
     return mirrorPlacement(this.props.placement, '-')
   }
 
-  render () {
+  render() {
     const {
       as,
       background,

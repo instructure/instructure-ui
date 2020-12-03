@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, borders, forms, shadows, spacing, typography }) {
+export default function generator({
+  colors,
+  borders,
+  forms,
+  shadows,
+  spacing,
+  typography
+}) {
   return {
     color: colors.textLightest,
     background: colors.backgroundLight,
@@ -51,7 +58,9 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
+  colors
+}) {
   return {
     background: colors.backgroundDarkest,
     borderColor: colors.borderDarkest

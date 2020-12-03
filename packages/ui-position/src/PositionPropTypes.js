@@ -58,10 +58,7 @@ const PositionPropTypes = {
   /**
    * An element or a function returning an element to use as the mount node
    */
-  mountNode: PropTypes.oneOfType([
-    element,
-    PropTypes.func
-  ]),
+  mountNode: PropTypes.oneOfType([element, PropTypes.func]),
   /**
    * The parent in which to constrain a placement
    */
@@ -75,11 +72,11 @@ const PositionPropTypes = {
 export default PositionPropTypes
 export {
   /**
- * ---
- * category: utilities/position
- * ---
- * Custom prop types for `ui-position` components.
- * @module PositionPropTypes
- */
+   * ---
+   * category: utilities/position
+   * ---
+   * Custom prop types for `ui-position` components.
+   * @module PositionPropTypes
+   */
   PositionPropTypes
 }

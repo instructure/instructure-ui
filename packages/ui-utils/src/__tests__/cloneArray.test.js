@@ -29,7 +29,7 @@ import { deepEqual } from '../deepEqual'
 
 describe('cloneArray', () => {
   it('should return an array', () => {
-    const arr = [['one','two']['three']]
+    const arr = [['one', 'two']['three']]
 
     const newArr = cloneArray(arr)
 
@@ -37,7 +37,7 @@ describe('cloneArray', () => {
   })
 
   it('should preserve sub arrays', () => {
-    const arr = [['one','two'],['three'],[4,5,6],[7,[8,9,10],11,12]]
+    const arr = [['one', 'two'], ['three'], [4, 5, 6], [7, [8, 9, 10], 11, 12]]
 
     const newArr = cloneArray(arr)
 
@@ -49,7 +49,7 @@ describe('cloneArray', () => {
   })
 
   it('should return a new array', () => {
-    let arr = [['one','two'],['three']]
+    let arr = [['one', 'two'], ['three']]
     let newArr = cloneArray(arr)
 
     expect(deepEqual(arr, newArr)).to.equal(true)
@@ -61,4 +61,3 @@ describe('cloneArray', () => {
     expect(deepEqual(arr, newArr2)).to.equal(false)
   })
 })
-

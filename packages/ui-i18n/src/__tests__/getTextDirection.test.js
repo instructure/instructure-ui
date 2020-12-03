@@ -28,26 +28,34 @@ import { getTextDirection } from '../getTextDirection'
 
 describe('getTextDirection', async () => {
   it('defaults the dir of <html>', async () => {
-    expect(getTextDirection()).to.equal(document.documentElement.getAttribute('dir'))
+    expect(getTextDirection()).to.equal(
+      document.documentElement.getAttribute('dir')
+    )
   })
 
   it('defaults to the dir of <html> when passed an element', async () => {
     const subject = await mount(
-      <div><h1>Hello</h1></div>
+      <div>
+        <h1>Hello</h1>
+      </div>
     )
     expect(getTextDirection(subject.getDOMNode())).to.equal('ltr')
   })
 
   it('returns "rtl" if the `dir` of the element is "rtl"', async () => {
     const subject = await mount(
-      <div dir="rtl"><h1>Hello</h1></div>
+      <div dir="rtl">
+        <h1>Hello</h1>
+      </div>
     )
     expect(getTextDirection(subject.getDOMNode())).to.equal('rtl')
   })
 
   it('inherits value set by ancestor', async () => {
     const subject = await mount(
-      <div dir="rtl"><h1>Hello</h1></div>
+      <div dir="rtl">
+        <h1>Hello</h1>
+      </div>
     )
     expect(getTextDirection(subject.getDOMNode().firstChild)).to.equal('rtl')
   })

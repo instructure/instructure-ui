@@ -48,10 +48,7 @@ parent: TreeBrowser
 @themeable(theme, styles)
 class TreeCollection extends Component {
   static propTypes = {
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]),
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     descriptor: PropTypes.string,
     items: PropTypes.array,
@@ -61,7 +58,10 @@ class TreeCollection extends Component {
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
     collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    collectionIconExpanded: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.func
+    ]),
     itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     getItemProps: PropTypes.func,
     onItemClick: PropTypes.func,
@@ -88,26 +88,26 @@ class TreeCollection extends Component {
     collectionIconExpanded: undefined,
     collectionIcon: undefined,
     itemIcon: undefined,
-    getItemProps: props => props,
+    getItemProps: (props) => props,
     numChildren: undefined,
     level: undefined,
     position: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
-    this.state = {focused: ''}
+    this.state = { focused: '' }
   }
 
   handleFocus = (e, item) => {
     e.stopPropagation()
-    this.setState({focused: `${item.type}_${item.id}`})
+    this.setState({ focused: `${item.type}_${item.id}` })
   }
 
   handleBlur = (e, item) => {
     e.stopPropagation()
-    this.setState({focused: ''})
+    this.setState({ focused: '' })
   }
 
   handleCollectionClick = (e) => {
@@ -136,35 +136,44 @@ class TreeCollection extends Component {
     }
   }
 
-  get collectionsCount () {
+  get collectionsCount() {
     const collections = this.props.collections
-    return (collections && collections.length > 0) ? collections.length : 0
+    return collections && collections.length > 0 ? collections.length : 0
   }
 
-  get itemsCount () {
+  get itemsCount() {
     const items = this.props.items
-    return (items && items.length > 0) ? items.length : 0
+    return items && items.length > 0 ? items.length : 0
   }
 
-  get childCount () {
+  get childCount() {
     return this.collectionsCount + this.itemsCount
   }
 
-  renderChildren () {
+  renderChildren() {
     const { expanded, collections, items, name } = this.props
 
-    return expanded && (this.childCount > 0) &&
-      <ul aria-label={name} className={styles.list} role="group">
-        {collections.map((collection, i) => {
-          return this.renderCollectionNode(collection, i, this.childCount)
-        })}
-        {items.map((item, i) => {
-          return this.renderItemNode(item, i, this.childCount, this.collectionsCount)
-        })}
-      </ul>
+    return (
+      expanded &&
+      this.childCount > 0 && (
+        <ul aria-label={name} className={styles.list} role="group">
+          {collections.map((collection, i) => {
+            return this.renderCollectionNode(collection, i, this.childCount)
+          })}
+          {items.map((item, i) => {
+            return this.renderItemNode(
+              item,
+              i,
+              this.childCount,
+              this.collectionsCount
+            )
+          })}
+        </ul>
+      )
+    )
   }
 
-  renderCollectionNode (collection, i, childCount) {
+  renderCollectionNode(collection, i, childCount) {
     return (
       <TreeCollection
         {...this.props}
@@ -182,7 +191,7 @@ class TreeCollection extends Component {
     )
   }
 
-  renderItemNode (item, i, numChildren, numCollections) {
+  renderItemNode(item, i, numChildren, numCollections) {
     const {
       selection,
       level,
@@ -194,10 +203,10 @@ class TreeCollection extends Component {
     const ariaSelected = {}
 
     if (selection) {
-      ariaSelected['aria-selected'] = (selection === `item_${item.id}`)
+      ariaSelected['aria-selected'] = selection === `item_${item.id}`
     }
 
-    const itemHash = {id: item.id, type: 'item'}
+    const itemHash = { id: item.id, type: 'item' }
 
     const itemProps = getItemProps({
       ...this.getCommonButtonProps(),
@@ -218,7 +227,7 @@ class TreeCollection extends Component {
         aria-label={item.name}
         className={styles.item}
         aria-level={level + 1}
-        aria-posinset={(i + 1) + numCollections}
+        aria-posinset={i + 1 + numCollections}
         aria-setsize={numChildren}
         onClick={(e, n) => onItemClick(e, itemHash)}
         onKeyDown={(e, n) => onKeyDown(e, itemHash)}
@@ -231,7 +240,7 @@ class TreeCollection extends Component {
     )
   }
 
-  getCommonButtonProps () {
+  getCommonButtonProps() {
     return {
       id: this.props.id,
       name: this.props.name,
@@ -242,7 +251,7 @@ class TreeCollection extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       id,
       size,
@@ -263,7 +272,9 @@ class TreeCollection extends Component {
       [styles.node]: true
     }
     const ariaSelected = {}
-    if (this.props.selection) ariaSelected['aria-selected'] = (this.props.selection === `collection_${id}`)
+    if (this.props.selection)
+      ariaSelected['aria-selected'] =
+        this.props.selection === `collection_${id}`
 
     return (
       <li
@@ -277,8 +288,8 @@ class TreeCollection extends Component {
         aria-expanded={expanded}
         onClick={this.handleCollectionClick}
         onKeyDown={this.handleCollectionKeyDown}
-        onFocus={(e, n) => this.handleFocus(e, {id: id, type: 'collection'})}
-        onBlur={(e, n) => this.handleBlur(e, {id: id, type: 'collection'})}
+        onFocus={(e, n) => this.handleFocus(e, { id: id, type: 'collection' })}
+        onBlur={(e, n) => this.handleBlur(e, { id: id, type: 'collection' })}
         {...ariaSelected}
       >
         <TreeButton

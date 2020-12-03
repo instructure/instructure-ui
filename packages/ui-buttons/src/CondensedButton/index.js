@@ -70,10 +70,7 @@ class CondensedButton extends Component {
     /**
      * Specifies the color for the `CondensedButton`.
      */
-    color: PropTypes.oneOf([
-      'primary',
-      'primary-inverse'
-    ]),
+    color: PropTypes.oneOf(['primary', 'primary-inverse']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
      * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -99,7 +96,7 @@ class CondensedButton extends Component {
     children: null,
     type: 'button',
     size: 'medium',
-    elementRef: (el) => { },
+    elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -155,7 +152,9 @@ class CondensedButton extends Component {
         href={href}
         renderIcon={renderIcon}
         theme={theme}
-        ref={(component) => { this._baseButton = component }}
+        ref={(component) => {
+          this._baseButton = component
+        }}
       >
         {children}
       </BaseButton>

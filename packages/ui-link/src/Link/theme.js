@@ -24,7 +24,7 @@
 
 import { darken } from '@instructure/ui-color-utils'
 
-export default function generator ({ colors, typography, borders, spacing }) {
+export default function generator({ colors, typography, borders, spacing }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -45,7 +45,8 @@ export default function generator ({ colors, typography, borders, spacing }) {
     focusInverseOutlineColor: colors.borderLightest,
     focusInverseIconOutlineColor: colors.borderLightest,
 
-    iconSize: '1.125em', /* make icon slightly larger than inherited font-size */
+    iconSize:
+      '1.125em' /* make icon slightly larger than inherited font-size */,
     iconPlusTextMargin: spacing.xxSmall
   }
 }
@@ -61,6 +62,6 @@ generator['canvas'] = function (variables) {
 generator['canvas-high-contrast'] = function (variables) {
   return {
     textDecorationOutsideText: 'underline',
-    hoverTextDecorationOutsideText: 'none',
+    hoverTextDecorationOutsideText: 'none'
   }
 }

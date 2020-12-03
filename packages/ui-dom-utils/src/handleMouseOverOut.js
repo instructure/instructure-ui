@@ -37,7 +37,7 @@ import { contains } from './contains'
  * @param handler {function} Callback function for handling the event
  * @param event {Event} The DOM Event that was fired
  */
-function handleMouseOverOut (handler, event) {
+function handleMouseOverOut(handler, event) {
   const target = event.currentTarget
   const related = event.relatedTarget || event.nativeEvent.toElement
 

@@ -42,9 +42,7 @@ describe('<IconButton/>', async () => {
   const iconSelector = 'svg[title="myIcon"]'
 
   it('should render an icon when provided as the `children` prop', async () => {
-    await mount(
-      <IconButton screenReaderLabel="some action">{icon}</IconButton>
-    )
+    await mount(<IconButton screenReaderLabel="some action">{icon}</IconButton>)
     const button = await IconButtonLocator.find()
     expect(await button.find(iconSelector)).to.exist()
   })
@@ -61,9 +59,7 @@ describe('<IconButton/>', async () => {
     let error = false
 
     try {
-      await mount(
-        <IconButton renderIcon={icon} />
-      )
+      await mount(<IconButton renderIcon={icon} />)
     } catch (e) {
       error = true
     }
@@ -78,7 +74,9 @@ describe('<IconButton/>', async () => {
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
-        componentRef={(component) => { componentRef = component }}
+        componentRef={(component) => {
+          componentRef = component
+        }}
       />
     )
     const button = await IconButtonLocator.find()
@@ -95,7 +93,9 @@ describe('<IconButton/>', async () => {
       <IconButton
         screenReaderLabel="some action"
         renderIcon={icon}
-        componentRef={(component) => { componentRef = component }}
+        componentRef={(component) => {
+          componentRef = component
+        }}
       />
     )
     const button = await IconButtonLocator.find()
@@ -109,11 +109,7 @@ describe('<IconButton/>', async () => {
 
   it('should pass the `href` prop', async () => {
     await mount(
-      <IconButton
-        screenReaderLabel="some action"
-        renderIcon={icon}
-        href="#"
-      />
+      <IconButton screenReaderLabel="some action" renderIcon={icon} href="#" />
     )
     const button = await IconButtonLocator.find()
     expect(await button.find('a[href="#"]')).to.exist()
@@ -146,11 +142,7 @@ describe('<IconButton/>', async () => {
 
   it('should pass the `as` prop', async () => {
     await mount(
-      <IconButton
-        screenReaderLabel="some action"
-        renderIcon={icon}
-        as="li"
-      />
+      <IconButton screenReaderLabel="some action" renderIcon={icon} as="li" />
     )
     const button = await IconButtonLocator.find()
     expect(await button.find('li')).to.exist()
@@ -170,11 +162,7 @@ describe('<IconButton/>', async () => {
 
   it('should set the disabled attribute when `disabled` is set', async () => {
     await mount(
-      <IconButton
-        screenReaderLabel="some action"
-        renderIcon={icon}
-        disabled
-      />
+      <IconButton screenReaderLabel="some action" renderIcon={icon} disabled />
     )
     const button = await IconButtonLocator.find()
     expect(await button.find('button[disabled]')).to.exist()
@@ -194,11 +182,7 @@ describe('<IconButton/>', async () => {
 
   it('should set the disabled attribute when `readOnly` is set', async () => {
     await mount(
-      <IconButton
-        screenReaderLabel="some action"
-        renderIcon={icon}
-        readOnly
-      />
+      <IconButton screenReaderLabel="some action" renderIcon={icon} readOnly />
     )
     const button = await IconButtonLocator.find()
     expect(await button.find('button[disabled]')).to.exist()

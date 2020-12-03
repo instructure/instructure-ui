@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-const parserConfigImport = '@instructure/instui-config/codemod-configs/parser-config.json'
+const parserConfigImport =
+  '@instructure/instui-config/codemod-configs/parser-config.json'
 
 module.exports = () => {
   return require.resolve(parserConfigImport)

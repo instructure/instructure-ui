@@ -31,7 +31,11 @@ module.exports = function (source, map) {
 
   const callback = this.async()
 
-  const options = Object.assign({}, loadConfig('tests'), loaderUtils.getOptions(this))
+  const options = Object.assign(
+    {},
+    loadConfig('tests'),
+    loaderUtils.getOptions(this)
+  )
 
   const files = options.files || ['**/*.test.js']
   const ignore = (options.ignore || []).concat(['**/node_modules/**'])
@@ -41,18 +45,25 @@ module.exports = function (source, map) {
     .then((matches) => {
       const scopes = process.env.UI_TEST_SCOPE_PATHS
       const testFilePaths = matches
-        .map(filePath => path.normalize(filePath))
+        .map((filePath) => path.normalize(filePath))
         .filter((testFilePath) => {
           if (typeof scopes !== 'string') return true
-          const scopePaths = scopes.split(',').map(p => path.normalize(p.trim()))
-          return scopePaths
-            .findIndex(scopePath => (testFilePath === scopePath || testFilePath.startsWith(scopePath))) >= 0
+          const scopePaths = scopes
+            .split(',')
+            .map((p) => path.normalize(p.trim()))
+          return (
+            scopePaths.findIndex(
+              (scopePath) =>
+                testFilePath === scopePath || testFilePath.startsWith(scopePath)
+            ) >= 0
+          )
         })
 
       let result
 
       if (testFilePaths.length > 0) {
-        const testFileRequires = testFilePaths.map(filePath => `
+        const testFileRequires = testFilePaths.map(
+          (filePath) => `
 try {
   require('./${path.relative(cwd, filePath)}')
 } catch(e) {
@@ -61,7 +72,7 @@ try {
   })
 }
 `
-      )
+        )
         result = `
 describe(':', () => {
 ${testFileRequires.join(';\n')}
@@ -75,12 +86,16 @@ describe('WHEN NO TESTS MATCH...', () => {
 `
       }
 
-      callback(null, `
+      callback(
+        null,
+        `
 ${result}
 console.log('REACT VERSION', '${process.env.REACT_VERSION}');
-`, map)
-
-    }).catch((error) => {
+`,
+        map
+      )
+    })
+    .catch((error) => {
       callback(error)
     })
 }

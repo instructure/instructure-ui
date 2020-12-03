@@ -36,15 +36,21 @@ describe('Day.theme', () => {
     })
 
     it('should have outside month background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.outsideMonthColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.outsideMonthColor)
+      ).to.be.above(3)
     })
 
     it('should have selected background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.selectedBackground, variables.selectedColor)).to.be.above(3)
+      expect(
+        contrast(variables.selectedBackground, variables.selectedColor)
+      ).to.be.above(3)
     })
 
     it('should have today background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.todayBackground, variables.todayColor)).to.be.above(3)
+      expect(
+        contrast(variables.todayBackground, variables.todayColor)
+      ).to.be.above(3)
     })
   })
 
@@ -56,15 +62,21 @@ describe('Day.theme', () => {
     })
 
     it('should have outside month background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.outsideMonthColor)).to.be.above(3)
+      expect(
+        contrast(variables.background, variables.outsideMonthColor)
+      ).to.be.above(3)
     })
 
     it('should have selected background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.selectedBackground, variables.selectedColor)).to.be.above(4.5)
+      expect(
+        contrast(variables.selectedBackground, variables.selectedColor)
+      ).to.be.above(4.5)
     })
 
     it('should have today background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.todayBackground, variables.todayColor)).to.be.above(4.5)
+      expect(
+        contrast(variables.todayBackground, variables.todayColor)
+      ).to.be.above(4.5)
     })
   })
 })

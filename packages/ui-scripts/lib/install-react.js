@@ -34,9 +34,10 @@ try {
   process.exit(1)
 }
 
-async function installReact () {
+async function installReact() {
   const pkgInfo = JSON.parse(
-    runCommandSync('yarn', ['info', 'react', '--json'], [], { stdio: 'pipe' }).stdout
+    runCommandSync('yarn', ['info', 'react', '--json'], [], { stdio: 'pipe' })
+      .stdout
   ).data
 
   const latest = pkgInfo['dist-tags'].latest
@@ -50,11 +51,11 @@ async function installReact () {
 
   if ([15, 16].includes(semver.major(version))) {
     pkg = getPackage()
-    originalResolutions = {...pkg.get('resolutions')}
+    originalResolutions = { ...pkg.get('resolutions') }
 
     pkg.set('resolutions', {
       ...(originalResolutions || {}),
-      'react': `^${version}`,
+      react: `^${version}`,
       'react-dom': `^${version}`
     })
 

@@ -34,7 +34,7 @@ import { findDOMNode } from './findDOMNode'
  * @param {ReactElement|DOMNode} el
  * @returns {DomNode} the owner document
  */
-function ownerDocument (el) {
+function ownerDocument(el) {
   const node = el && findDOMNode(el)
   return (node && node.ownerDocument) || document
 }

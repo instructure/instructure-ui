@@ -24,15 +24,18 @@
 
 const loadConfig = require('@instructure/config-loader')
 
-module.exports = function (context, opts = {
-  themeable: false,
-  esModules: false,
-  coverage: false,
-  node: false,
-  removeConsole: false,
-  transformImports: true,
-  importTransforms: {}
-}) {
+module.exports = function (
+  context,
+  opts = {
+    themeable: false,
+    esModules: false,
+    coverage: false,
+    node: false,
+    removeConsole: false,
+    transformImports: true,
+    importTransforms: {}
+  }
+) {
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
   const presets = [
@@ -44,8 +47,10 @@ module.exports = function (context, opts = {
 
   if (opts.transformImports) {
     plugins.push([
-      require('@instructure/babel-plugin-transform-imports'), {
-        '(@instructure\/ui-[^(\/|\\s)]+)$': { // eslint-disable-line no-useless-escape
+      require('@instructure/babel-plugin-transform-imports'),
+      {
+        '(@instructure/ui-[^(/|\\s)]+)$': {
+          // eslint-disable-line no-useless-escape
           transform: (importName, matches) => {
             const ignore = [
               '@instructure/ui-test-queries',
@@ -58,7 +63,8 @@ module.exports = function (context, opts = {
           }
         },
         // Convert any es imports to lib imports
-        '(@instructure\/ui-[^(\/|\\s)]+\/es\/[^\\s]+)$': { // eslint-disable-line no-useless-escape
+        '(@instructure/ui-[^(/|\\s)]+/es/[^\\s]+)$': {
+          // eslint-disable-line no-useless-escape
           transform: (importName, matches) => {
             if (!matches || !matches[1]) return
             return matches[1].replace(new RegExp('/es/'), '/lib/')
@@ -85,17 +91,26 @@ module.exports = function (context, opts = {
     require('babel-plugin-macros'),
     require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before themeable-styles plugin below
-    [require('@babel/plugin-proposal-class-properties').default, { loose: true }],
+    [
+      require('@babel/plugin-proposal-class-properties').default,
+      { loose: true }
+    ],
     require('@babel/plugin-proposal-export-default-from').default,
-    [require('@babel/plugin-proposal-object-rest-spread').default, { useBuiltIns: true }],
+    [
+      require('@babel/plugin-proposal-object-rest-spread').default,
+      { useBuiltIns: true }
+    ],
     require('@babel/plugin-proposal-optional-chaining').default,
-    [require('@babel/plugin-transform-runtime').default, {
-      ...babelHelperVersion,
-      corejs: false,
-      regenerator: true,
-      helpers: true,
-      useESModules: opts.esModules
-    }],
+    [
+      require('@babel/plugin-transform-runtime').default,
+      {
+        ...babelHelperVersion,
+        corejs: false,
+        regenerator: true,
+        helpers: true,
+        useESModules: opts.esModules
+      }
+    ],
     require('@babel/plugin-syntax-dynamic-import').default,
     require('babel-plugin-transform-undefined-to-void')
   ])
@@ -107,7 +122,10 @@ module.exports = function (context, opts = {
   }
 
   let themeableOptions = {
-    postcssrc: loadConfig('postcss', require('@instructure/ui-postcss-config')()),
+    postcssrc: loadConfig(
+      'postcss',
+      require('@instructure/ui-postcss-config')()
+    ),
     themeablerc: loadConfig('themeable')
   }
 
@@ -121,15 +139,17 @@ module.exports = function (context, opts = {
     }
   }
 
-  plugins.push(
-    [require('@instructure/babel-plugin-themeable-styles'), themeableOptions]
-  )
+  plugins.push([
+    require('@instructure/babel-plugin-themeable-styles'),
+    themeableOptions
+  ])
 
   if (opts.removeConsole) {
     if (typeof opts.removeConsole === 'object') {
-      plugins.push(
-        [require('babel-plugin-transform-remove-console'), opts.removeConsole]
-      )
+      plugins.push([
+        require('babel-plugin-transform-remove-console'),
+        opts.removeConsole
+      ])
     } else {
       plugins.push(require('babel-plugin-transform-remove-console'))
     }
@@ -144,20 +164,23 @@ module.exports = function (context, opts = {
 
   if (opts.coverage) {
     plugins = [
-      [require('babel-plugin-istanbul').default, {
-        include: ['**/src/**/*.js'],
-        exclude: [
-          '**/*.test.js',
-          '**/*.examples.js',
-          '**/*.fixture.js',
-          '**/*.config.js',
-          '**/*.conf.js',
-          '__tests__/**/*.js',
-          '__testfixtures__/**/*.js',
-          '__examples__/**/*.js',
-          '__fixtures__/**/*.js'
-        ]
-      }]
+      [
+        require('babel-plugin-istanbul').default,
+        {
+          include: ['**/src/**/*.js'],
+          exclude: [
+            '**/*.test.js',
+            '**/*.examples.js',
+            '**/*.fixture.js',
+            '**/*.config.js',
+            '**/*.conf.js',
+            '__tests__/**/*.js',
+            '__testfixtures__/**/*.js',
+            '__examples__/**/*.js',
+            '__fixtures__/**/*.js'
+          ]
+        }
+      ]
     ].concat(plugins)
   }
 
@@ -167,7 +190,7 @@ module.exports = function (context, opts = {
   }
 }
 
-function getNodeEnvConfig () {
+function getNodeEnvConfig() {
   return {
     targets: {
       node: 'current'
@@ -177,10 +200,13 @@ function getNodeEnvConfig () {
   }
 }
 
-function getWebEnvConfig (opts) {
+function getWebEnvConfig(opts) {
   return {
     targets: {
-      browsers: loadConfig('browserslist', require('@instructure/browserslist-config-instui'))
+      browsers: loadConfig(
+        'browserslist',
+        require('@instructure/browserslist-config-instui')
+      )
     },
     useBuiltIns: 'entry',
     corejs: 3,

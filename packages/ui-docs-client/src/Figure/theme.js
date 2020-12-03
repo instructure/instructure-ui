@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-export default function ({ borders, colors, spacing, shadows, stacking, typography }) {
+export default function ({
+  borders,
+  colors,
+  spacing,
+  shadows,
+  stacking,
+  typography
+}) {
   return {
     shadow: shadows.depth2,
     captionFontFamily: typography.fontFamily,

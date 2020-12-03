@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-module.exports = function getDocTitle (docData, options, context, interpolate) {
+module.exports = function getDocTitle(docData, options, context, interpolate) {
   return interpolate(_getDocTitle(options, docData, context))
 }
 
-function _getDocTitle (options, docData, context) {
+function _getDocTitle(options, docData, context) {
   const { title } = options.document
 
   if (typeof title === 'function') {

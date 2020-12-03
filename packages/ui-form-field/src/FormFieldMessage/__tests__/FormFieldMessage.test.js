@@ -29,7 +29,9 @@ import { FormFieldMessage } from '../index'
 
 describe('<FormFieldMessage />', async () => {
   it('should render message', async () => {
-    const subject = await mount(<FormFieldMessage>hello world</FormFieldMessage>)
+    const subject = await mount(
+      <FormFieldMessage>hello world</FormFieldMessage>
+    )
 
     const formFieldMessage = within(subject.getDOMNode())
     expect(await formFieldMessage.findWithText('hello world')).to.exist()

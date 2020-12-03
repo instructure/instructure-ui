@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 export { alpha } from './alpha'
 export { darken } from './darken'
 export { lighten } from './lighten'

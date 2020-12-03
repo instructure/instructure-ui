@@ -35,32 +35,32 @@ id: Select.Option
 class Option extends Component {
   static propTypes = {
     /**
-    * The id for the option.
-    */
+     * The id for the option.
+     */
     id: PropTypes.string.isRequired,
     /**
-    * Whether or not this option is highlighted.
-    */
+     * Whether or not this option is highlighted.
+     */
     isHighlighted: PropTypes.bool,
     /**
-    * Whether or not this option is selected.
-    */
+     * Whether or not this option is selected.
+     */
     isSelected: PropTypes.bool,
     /**
-    * Whether or not this option is disabled.
-    */
+     * Whether or not this option is disabled.
+     */
     isDisabled: PropTypes.bool,
     /**
-    * Content to display before the option label, such as an icon.
-    */
+     * Content to display before the option label, such as an icon.
+     */
     renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display after the option label, such as an icon.
-    */
+     * Content to display after the option label, such as an icon.
+     */
     renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display as the option label.
-    */
+     * Content to display as the option label.
+     */
     children: PropTypes.node
   }
 
@@ -74,7 +74,7 @@ class Option extends Component {
   }
 
   /* istanbul ignore next */
-  render () {
+  render() {
     // this component is only used for prop validation. Select.Option children
     // are parsed in Select and rendered as Options.Item components
     return null

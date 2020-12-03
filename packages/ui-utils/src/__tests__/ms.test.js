@@ -42,4 +42,3 @@ describe('ms', () => {
     expect(ms(15)).to.equal(15)
   })
 })
-

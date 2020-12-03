@@ -28,7 +28,10 @@ import PropTypes from 'prop-types'
 import { deepEqual } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 
-import { addElementQueryMatchListener, updateElementMatches } from '../addElementQueryMatchListener'
+import {
+  addElementQueryMatchListener,
+  updateElementMatches
+} from '../addElementQueryMatchListener'
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
 import { findDOMNode } from '@instructure/ui-dom-utils'
@@ -83,9 +86,9 @@ class Responsive extends Component {
     hasRendered: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     error(
-      (this.props.render || this.props.children),
+      this.props.render || this.props.children,
       `[Responsive] must have either a \`render\` prop or \`children\` prop.`
     )
 
@@ -101,31 +104,39 @@ class Responsive extends Component {
     } else {
       this.setState({ hasRendered: true })
     }
-    this._matchListener = this.addMatchListener(this.props.query, this.updateMatches)
+    this._matchListener = this.addMatchListener(
+      this.props.query,
+      this.updateMatches
+    )
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.removeMatchListener()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { match, query } = this.props
 
     if (match !== prevProps.match || !deepEqual(query, prevProps.query)) {
       this.removeMatchListener()
-      this._matchListener = this.addMatchListener(query, this.updateMatches, match)
+      this._matchListener = this.addMatchListener(
+        query,
+        this.updateMatches,
+        match
+      )
     }
   }
 
-  addMatchListener (query, updateMatches, match = this.props.match) {
-    const matchListener = match === 'element'
-      ? addElementQueryMatchListener
-      : addMediaQueryMatchListener
+  addMatchListener(query, updateMatches, match = this.props.match) {
+    const matchListener =
+      match === 'element'
+        ? addElementQueryMatchListener
+        : addMediaQueryMatchListener
     // TODO: refactor to use a ref to root div instead of `this`
     return matchListener(query, () => findDOMNode(this), updateMatches)
   }
 
-  removeMatchListener () {
+  removeMatchListener() {
     if (this._matchListener) {
       this._matchListener.remove()
     }
@@ -139,7 +150,7 @@ class Responsive extends Component {
     })
   }
 
-  mergeProps (matches, props) {
+  mergeProps(matches, props) {
     if (!props) {
       return null
     }
@@ -169,7 +180,7 @@ class Responsive extends Component {
     return mergedProps
   }
 
-  render () {
+  render() {
     const { matches, hasRendered } = this.state
     const { props, render, children } = this.props
     let renderFunc

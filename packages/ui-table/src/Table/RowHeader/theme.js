@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, typography, spacing }) {
+export default function generator({ colors, typography, spacing }) {
   return {
     fontSize: typography.fontSizeMedium,
     fontFamily: typography.fontFamily,
@@ -34,6 +34,6 @@ export default function generator ({ colors, typography, spacing }) {
     borderColor: colors.borderMedium,
 
     lineHeight: typography.lineHeightCondensed,
-    padding: `${spacing.xSmall} ${spacing.small}`,
+    padding: `${spacing.xSmall} ${spacing.small}`
   }
 }

@@ -23,7 +23,12 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import { Options } from '../index'
 import { OptionsLocator } from '../OptionsLocator'
@@ -139,9 +144,7 @@ describe('<Options />', async () => {
   })
 
   it('should allow null children', async () => {
-    await mount(
-      <Options />
-    )
+    await mount(<Options />)
     const options = await OptionsLocator.find()
     expect(options).to.exist()
   })

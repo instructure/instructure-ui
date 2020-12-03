@@ -50,7 +50,7 @@ class Theme extends Component {
 
   _colorMap = {}
 
-  mapColors (colorKey) {
+  mapColors(colorKey) {
     const map = {}
     Object.keys(colorKey).forEach((color) => {
       const hex = colorKey[color]
@@ -61,14 +61,18 @@ class Theme extends Component {
     return map
   }
 
-  renderVariable (name, value) {
+  renderVariable(name, value) {
     let valueText = value
     let valueColor = ''
     if (typeof value === 'object') {
       valueColor = value.color
       valueText = value.text
     }
-    if (typeof valueText === 'string' && valueText.charAt(0) === '#' && this._colorMap) {
+    if (
+      typeof valueText === 'string' &&
+      valueText.charAt(0) === '#' &&
+      this._colorMap
+    ) {
       valueColor = valueText
       valueText = this._colorMap[valueText]
     }
@@ -78,7 +82,7 @@ class Theme extends Component {
           <code>{name}</code>
         </Table.Cell>
         <Table.Cell>
-          {(valueColor.toString().charAt(0) === '#') ? (
+          {valueColor.toString().charAt(0) === '#' ? (
             <span>
               <View margin="0 xx-small 0 0">
                 <ColorSwatch color={valueColor} />
@@ -93,24 +97,20 @@ class Theme extends Component {
     )
   }
 
-  renderRows (section) {
+  renderRows(section) {
     return Object.keys(section).map((name) => {
       return this.renderVariable(name, section[name])
     })
   }
 
-  renderTable (name, content, sub = false) {
+  renderTable(name, content, sub = false) {
     const headingElement = sub ? 'h4' : 'h3'
     const headingLevel = sub ? 'h3' : 'h2'
     const margin = sub ? 'small none small' : 'small none large'
     const padding = 'small'
     const label = name + 'variables'
     return (
-      <View
-        key={label}
-        as="div"
-        padding={sub ? padding : 'none'}
-      >
+      <View key={label} as="div" padding={sub ? padding : 'none'}>
         <Heading as={headingElement} level={headingLevel}>
           {name}
         </Heading>
@@ -124,35 +124,37 @@ class Theme extends Component {
           <Table caption={label} key={name} layout="fixed">
             <Table.Head>
               <Table.Row>
-                <Table.ColHeader id="Name" key="Name">Name</Table.ColHeader>
-                <Table.ColHeader id="Value" key="value">Value</Table.ColHeader>
+                <Table.ColHeader id="Name" key="Name">
+                  Name
+                </Table.ColHeader>
+                <Table.ColHeader id="Value" key="value">
+                  Value
+                </Table.ColHeader>
               </Table.Row>
             </Table.Head>
-            <Table.Body>
-              {content}
-            </Table.Body>
+            <Table.Body>{content}</Table.Body>
           </Table>
         </View>
       </View>
     )
   }
 
-  renderSection (name, data) {
+  renderSection(name, data) {
     const subSections = []
     let baseColors = {}
     let newData = Object.assign({}, data)
 
-    if (name ==='colors' && data.values) {
+    if (name === 'colors' && data.values) {
       baseColors = data.values
       delete newData.values
 
       this._colorMap = this.mapColors(baseColors)
-      subSections.push(<ThemeColors colors={baseColors}/>)
+      subSections.push(<ThemeColors colors={baseColors} />)
     }
 
     Object.keys(newData).forEach((key, index) => {
       const item = data[key]
-      if (typeof item === 'object' ) {
+      if (typeof item === 'object') {
         const subData = {}
         const subKeys = Object.keys(item)
         subKeys.forEach((subKey, i) => {
@@ -170,10 +172,22 @@ class Theme extends Component {
     if (subSections.length > 0) {
       return (
         <View key={name + 'variables'}>
-          <Heading as="h3" level="h2">{name}</Heading>
-          {data.description && <Text size="medium" as="p">{data.description}</Text>}
-          <View background="secondary" as="div" padding="none" margin="small none large" borderRadius="medium">
-            {React.Children.map(subSections, (sub) => (sub))}
+          <Heading as="h3" level="h2">
+            {name}
+          </Heading>
+          {data.description && (
+            <Text size="medium" as="p">
+              {data.description}
+            </Text>
+          )}
+          <View
+            background="secondary"
+            as="div"
+            padding="none"
+            margin="small none large"
+            borderRadius="medium"
+          >
+            {React.Children.map(subSections, (sub) => sub)}
           </View>
         </View>
       )
@@ -182,7 +196,7 @@ class Theme extends Component {
     }
   }
 
-  render () {
+  render() {
     const sections = []
     const vars = []
 
@@ -198,14 +212,17 @@ class Theme extends Component {
       }
     })
 
-    const params = this.props.immutable ?
-      '/* this theme does not allow overrides */' :
-      `{ overrides: { colors: { brand: 'red' } } }`
+    const params = this.props.immutable
+      ? '/* this theme does not allow overrides */'
+      : `{ overrides: { colors: { brand: 'red' } } }`
 
     return (
       <div>
-
-        {description && <Text size="medium" as="p">{description}</Text>}
+        {description && (
+          <Text size="medium" as="p">
+            {description}
+          </Text>
+        )}
 
         {sections}
         {vars.length > 0 && this.renderTable('brand variables', vars)}
@@ -224,7 +241,6 @@ class Theme extends Component {
           `}
           title={`${themeKey} Theme Usage in applications`}
         />
-
 
         <Description
           id={`${themeKey}ComponentThemeUsage`}

@@ -47,7 +47,7 @@ describe('<ApplyTheme />', async () => {
   @testable()
   @themeable(themeVariables, themeStyles)
   class ThemeableComponent extends React.Component {
-    render () {
+    render() {
       return <div className="root">Hello World</div>
     }
   }
@@ -69,7 +69,9 @@ describe('<ApplyTheme />', async () => {
     const component = await ThemeableComponentLocator.find()
 
     expect(component.getComputedStyle().color).to.equal('rgb(0, 128, 0)') // green
-    expect(component.getComputedStyle().backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
+    expect(component.getComputedStyle().backgroundColor).to.equal(
+      'rgb(255, 255, 0)'
+    ) // yellow
   })
 
   it('overrides the theme set via outer components', async () => {
@@ -95,6 +97,8 @@ describe('<ApplyTheme />', async () => {
     const component = await ThemeableComponentLocator.find()
 
     expect(component.getComputedStyle().color).to.equal('rgb(0, 0, 255)') // blue
-    expect(component.getComputedStyle().backgroundColor).to.equal('rgb(128, 128, 128)') // grey
+    expect(component.getComputedStyle().backgroundColor).to.equal(
+      'rgb(128, 128, 128)'
+    ) // grey
   })
 })

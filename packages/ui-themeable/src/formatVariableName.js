@@ -31,7 +31,7 @@
  * @param {String} prefix an optional prefix to add to the variable name
  * @returns {String} formatted variable name
  */
-function formatVariableName (variableName, prefix) {
+function formatVariableName(variableName, prefix) {
   const name = prefix ? `${prefix}-${variableName}` : variableName
   return `--${name}`
 }

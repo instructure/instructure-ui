@@ -63,7 +63,7 @@ export {
   FormFieldMessage,
   FormFieldMessages,
   FormFieldLayout,
-  FormFieldGroup,
+  FormFieldGroup
 } from '@instructure/ui-form-field'
 export { Grid, GridRow, GridCol } from '@instructure/ui-grid'
 export { Heading } from '@instructure/ui-heading'
@@ -96,11 +96,7 @@ export { Pill } from '@instructure/ui-pill'
 export { Popover } from '@instructure/ui-popover'
 export { Portal } from '@instructure/ui-portal'
 export { Position } from '@instructure/ui-position'
-export {
-  Progress,
-  ProgressBar,
-  ProgressCircle
-} from '@instructure/ui-progress'
+export { Progress, ProgressBar, ProgressCircle } from '@instructure/ui-progress'
 export { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input'
 export { RangeInput } from '@instructure/ui-range-input'
 export { Rating } from '@instructure/ui-rating'

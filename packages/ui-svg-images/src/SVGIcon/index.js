@@ -45,13 +45,7 @@ class SVGIcon extends Component {
   static propTypes = {
     ...InlineSVG.propTypes,
     rotate: PropTypes.oneOf(['0', '90', '180', '270']),
-    size: PropTypes.oneOf([
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large'
-    ]),
+    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
     bidirectional: PropTypes.bool
   }
 
@@ -61,14 +55,8 @@ class SVGIcon extends Component {
     size: undefined
   }
 
-  render () {
-    const {
-      rotate,
-      className,
-      size,
-      bidirectional,
-      ...props
-    } = this.props
+  render() {
+    const { rotate, className, size, bidirectional, ...props } = this.props
 
     return (
       <InlineSVG

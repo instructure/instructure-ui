@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-module.exports = function findImportDeclaration (j, root, importPath) {
+module.exports = function findImportDeclaration(j, root, importPath) {
   let importDeclaration
 
   const declarationQueryResult = root.find(j.ImportDeclaration, {

@@ -40,8 +40,12 @@ class TestComponent extends Component {
     qux: 'Hello'
   }
 
-  render () {
-    return <div>{this.props.qux} {this.props.bar}</div>
+  render() {
+    return (
+      <div>
+        {this.props.qux} {this.props.bar}
+      </div>
+    )
   }
 }
 
@@ -52,11 +56,12 @@ describe('@hack', async () => {
     it('should warn when using an hack prop', async () => {
       const consoleWarn = spy(console, 'warn')
       await mount(<HackComponent bar="Jane" />)
-      await expect(consoleWarn)
-        .to.have.been.calledWithMatch([
+      await expect(consoleWarn).to.have.been.calledWithMatch(
+        [
           'Warning: [TestComponent] ',
           'The `bar` prop is a temporary hack and will be removed in a future release.'
-        ].join(''))
+        ].join('')
+      )
     })
 
     it('should not output a warning using a non-hack prop', async () => {

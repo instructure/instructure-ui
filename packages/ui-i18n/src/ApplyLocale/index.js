@@ -43,8 +43,8 @@ class ApplyLocale extends Component {
     **/
     timezone: PropTypes.string,
     /**
-    * accepts only one child (children must be wrapped in a single component/element)
-    */
+     * accepts only one child (children must be wrapped in a single component/element)
+     */
     children: PropTypes.node
   }
 
@@ -59,14 +59,14 @@ class ApplyLocale extends Component {
     timezone: PropTypes.string
   }
 
-  getChildContext () {
+  getChildContext() {
     return {
       locale: this.props.locale,
       timezone: this.props.timezone
     }
   }
 
-  render () {
+  render() {
     return ensureSingleChild(this.props.children)
   }
 }

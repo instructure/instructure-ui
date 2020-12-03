@@ -28,7 +28,7 @@ import { Link } from '../index'
 import { LinkLocator } from '../LinkLocator'
 
 class TruncateText extends React.Component {
-  render () {
+  render() {
     return <span>{this.props.children}</span>
   }
 }
@@ -54,7 +54,12 @@ describe('<Link />', async () => {
   it('should focus with the focus helper', async () => {
     let linkRef
     await mount(
-      <Link href="https://instructure.design" componentRef={(el) => { linkRef = el }}>
+      <Link
+        href="https://instructure.design"
+        componentRef={(el) => {
+          linkRef = el
+        }}
+      >
         Hello World
       </Link>
     )
@@ -117,7 +122,11 @@ describe('<Link />', async () => {
       </svg>
     )
 
-    await mount(<Link href="https://instructure.design" renderIcon={customIcon}>Hello World</Link>)
+    await mount(
+      <Link href="https://instructure.design" renderIcon={customIcon}>
+        Hello World
+      </Link>
+    )
 
     const link = await LinkLocator.find()
     const icon = await link.find('svg')
@@ -127,18 +136,30 @@ describe('<Link />', async () => {
 
   describe('when interaction is disabled', async () => {
     it('should apply aria-disabled when interaction is disabled', async () => {
-      await mount(<Link href="example.html" interaction="disabled">Hello World</Link>)
+      await mount(
+        <Link href="example.html" interaction="disabled">
+          Hello World
+        </Link>
+      )
       expect(await LinkLocator.find('a[aria-disabled]')).to.exist()
     })
 
     it('should apply aria-disabled when `disabled` is set', async () => {
-      await mount(<Link href="example.html" disabled>Hello World</Link>)
+      await mount(
+        <Link href="example.html" disabled>
+          Hello World
+        </Link>
+      )
       expect(await LinkLocator.find('a[aria-disabled]')).to.exist()
     })
 
     it('should not be clickable when interaction is disabled', async () => {
       const onClick = stub()
-      await mount(<Link onClick={onClick} interaction="disabled">Hello World</Link>)
+      await mount(
+        <Link onClick={onClick} interaction="disabled">
+          Hello World
+        </Link>
+      )
 
       const link = await LinkLocator.find()
       await link.click(null, { clickable: false })
@@ -148,7 +169,11 @@ describe('<Link />', async () => {
 
     it('should not be clickable when `disabled` is set', async () => {
       const onClick = stub()
-      await mount(<Link onClick={onClick} disabled>Hello World</Link>)
+      await mount(
+        <Link onClick={onClick} disabled>
+          Hello World
+        </Link>
+      )
 
       const link = await LinkLocator.find()
       await link.click(null, { clickable: false })
@@ -166,33 +191,55 @@ describe('<Link />', async () => {
       })
 
       it('should render designated tag', async () => {
-        await mount(<Link as="a" onClick={onClick}>Hello World</Link>)
+        await mount(
+          <Link as="a" onClick={onClick}>
+            Hello World
+          </Link>
+        )
         const componentRoot = await LinkLocator.find()
         const link = await componentRoot.findWithText('Hello World')
         expect(link.getTagName()).to.equal('a')
       })
 
       it('should set role="button"', async () => {
-        await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
+        await mount(
+          <Link as="span" onClick={onClick}>
+            Hello World
+          </Link>
+        )
         expect(await LinkLocator.find('[role="button"]')).to.exist()
       })
 
       describe('should not set type="button", unless it is actually a button', async () => {
         it('should not set type="button" on other things like <span>s', async () => {
-          await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
-          expect(await LinkLocator.find('[type="button"]', {
-            expectEmpty: true
-          })).to.not.exist()
+          await mount(
+            <Link as="span" onClick={onClick}>
+              Hello World
+            </Link>
+          )
+          expect(
+            await LinkLocator.find('[type="button"]', {
+              expectEmpty: true
+            })
+          ).to.not.exist()
         })
 
         it('should set type="button" on <button>s', async () => {
-          await mount(<Link as="button" onClick={onClick}>Hello World</Link>)
+          await mount(
+            <Link as="button" onClick={onClick}>
+              Hello World
+            </Link>
+          )
           expect(await LinkLocator.find('[type="button"]')).to.exist()
         })
       })
 
       it('should set tabIndex="0"', async () => {
-        await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
+        await mount(
+          <Link as="span" onClick={onClick}>
+            Hello World
+          </Link>
+        )
         expect(await LinkLocator.find('[tabIndex="0"]')).to.exist()
       })
     })
@@ -207,23 +254,29 @@ describe('<Link />', async () => {
 
       it('should not set role="button"', async () => {
         await mount(<Link as="span">Hello World</Link>)
-        expect(await LinkLocator.find('[role="button"]', {
-          expectEmpty: true
-        })).to.not.exist()
+        expect(
+          await LinkLocator.find('[role="button"]', {
+            expectEmpty: true
+          })
+        ).to.not.exist()
       })
 
       it('should not set type="button"', async () => {
         await mount(<Link as="span">Hello World</Link>)
-        expect(await LinkLocator.find('[type="button"]', {
-          expectEmpty: true
-        })).to.not.exist()
+        expect(
+          await LinkLocator.find('[type="button"]', {
+            expectEmpty: true
+          })
+        ).to.not.exist()
       })
 
       it('should not set tabIndex="0"', async () => {
         await mount(<Link as="span">Hello World</Link>)
-        expect(await LinkLocator.find('[tabIndex="0"]', {
-          expectEmpty: true
-        })).to.not.exist()
+        expect(
+          await LinkLocator.find('[tabIndex="0"]', {
+            expectEmpty: true
+          })
+        ).to.not.exist()
       })
     })
   })
@@ -241,16 +294,20 @@ describe('<Link />', async () => {
 
     it('should not set role="button"', async () => {
       await mount(<Link href="example.html">Hello World</Link>)
-      expect(await LinkLocator.find('[role="button"]', {
-        expectEmpty: true
-      })).to.not.exist()
+      expect(
+        await LinkLocator.find('[role="button"]', {
+          expectEmpty: true
+        })
+      ).to.not.exist()
     })
 
     it('should not set type="button"', async () => {
       await mount(<Link href="example.html">Hello World</Link>)
-      expect(await LinkLocator.find('[type="button"]', {
-        expectEmpty: true
-      })).to.not.exist()
+      expect(
+        await LinkLocator.find('[type="button"]', {
+          expectEmpty: true
+        })
+      ).to.not.exist()
     })
   })
 
@@ -267,9 +324,11 @@ describe('<Link />', async () => {
 
     it('should not set role="button"', async () => {
       await mount(<Link to="/example">Hello World</Link>)
-      expect(await LinkLocator.find('[role="button"]', {
-        expectEmpty: true
-      })).to.not.exist()
+      expect(
+        await LinkLocator.find('[role="button"]', {
+          expectEmpty: true
+        })
+      ).to.not.exist()
     })
   })
 })

@@ -44,17 +44,20 @@ class Properties extends Component {
     layout: 'small'
   }
 
-  unquote (string) {
+  unquote(string) {
     return string.replace(/^'|'$/g, '')
   }
 
-  renderRows () {
+  renderRows() {
     const { props } = this.props
 
     return Object.keys(props)
       .filter((name) => {
         const description = props[name].description || ''
-        return (description.indexOf('@private') < 0 && description.indexOf('@deprecated') < 0)
+        return (
+          description.indexOf('@private') < 0 &&
+          description.indexOf('@deprecated') < 0
+        )
       })
       .map((name) => {
         const prop = props[name]
@@ -66,18 +69,14 @@ class Properties extends Component {
             <Table.Cell>
               <code>{this.renderType(prop.type)}</code>
             </Table.Cell>
-            <Table.Cell>
-              {this.renderDefault(prop)}
-            </Table.Cell>
-            <Table.Cell>
-              {this.renderDescription(prop)}
-            </Table.Cell>
+            <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
+            <Table.Cell>{this.renderDescription(prop)}</Table.Cell>
           </Table.Row>
         )
       })
   }
 
-  renderType (type) {
+  renderType(type) {
     const { name } = type || {}
 
     switch (name) {
@@ -90,33 +89,29 @@ class Properties extends Component {
     }
   }
 
-  renderDefault (prop) {
+  renderDefault(prop) {
     if (prop.required) {
       return <span className={styles.required}>Required</span>
     } else if (prop.defaultValue) {
-      return (
-        <code>{this.unquote(prop.defaultValue.value)}</code>
-      )
+      return <code>{this.unquote(prop.defaultValue.value)}</code>
     } else {
       return ''
     }
   }
 
-  renderDescription (prop) {
+  renderDescription(prop) {
     const { description } = prop || {}
     return (
       <div>
-        {description && compileMarkdown(description) }
+        {description && compileMarkdown(description)}
         {this.renderEnum(prop)}
         {this.renderUnion(prop)}
       </div>
     )
   }
 
-  renderEnum (prop) {
-    const {
-      type
-    } = prop
+  renderEnum(prop) {
+    const { type } = prop
 
     if (!type || type.name !== 'enum') {
       return
@@ -133,14 +128,15 @@ class Properties extends Component {
     ))
 
     return (
-      <span><span className={styles.oneOf}>One of:</span> <ul className={styles.list}>{values}</ul></span>
+      <span>
+        <span className={styles.oneOf}>One of:</span>{' '}
+        <ul className={styles.list}>{values}</ul>
+      </span>
     )
   }
 
-  renderUnion (prop) {
-    const {
-      type
-    } = prop
+  renderUnion(prop) {
+    const { type } = prop
 
     if (!type || type.name !== 'union') {
       return
@@ -154,11 +150,14 @@ class Properties extends Component {
       </li>
     ))
     return (
-      <span><span className={styles.oneOf}>One of type:</span> <ul className={styles.list}>{values}</ul></span>
+      <span>
+        <span className={styles.oneOf}>One of type:</span>{' '}
+        <ul className={styles.list}>{values}</ul>
+      </span>
     )
   }
 
-  render () {
+  render() {
     const { layout } = this.props
 
     return (
@@ -175,9 +174,7 @@ class Properties extends Component {
               <Table.ColHeader id="Description">Description</Table.ColHeader>
             </Table.Row>
           </Table.Head>
-          <Table.Body>
-            {this.renderRows()}
-          </Table.Body>
+          <Table.Body>{this.renderRows()}</Table.Body>
         </Table>
       </div>
     )

@@ -41,14 +41,10 @@ class Guidelines extends Component {
     children: null
   }
 
-  render () {
+  render() {
     return (
-      <Flex
-        wrap="wrap"
-        justifyItems="end"
-        alignItems="stretch"
-      >
-        {React.Children.map(this.props.children, child => (
+      <Flex wrap="wrap" justifyItems="end" alignItems="stretch">
+        {React.Children.map(this.props.children, (child) => (
           <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
             {child}
           </Flex.Item>

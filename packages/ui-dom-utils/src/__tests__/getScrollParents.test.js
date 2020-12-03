@@ -29,13 +29,15 @@ import { getOffsetParents } from '../getOffsetParents'
 describe('getOffsetParents', async () => {
   const node = (
     <div>
-      <div id="parent-1" style={{transform: '200px', position: 'relative'}}>
+      <div id="parent-1" style={{ transform: '200px', position: 'relative' }}>
         <div>
-          <div id="child-1" style={{ height: '500px' }}>hello</div>
+          <div id="child-1" style={{ height: '500px' }}>
+            hello
+          </div>
         </div>
       </div>
 
-      <div style={{ transform: '200px', position: 'absolute'}}>
+      <div style={{ transform: '200px', position: 'absolute' }}>
         <div style={{ position: 'absolute' }}>
           <div id="child-2">hello</div>
         </div>

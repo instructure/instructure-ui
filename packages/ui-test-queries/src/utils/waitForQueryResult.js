@@ -33,12 +33,18 @@ export function waitForQueryResult(
     element,
     timeout = 1900,
     expectEmpty = false,
-    mutationObserverOptions = { attributes: true, childList: true, subtree: true }
-  } = {},
+    mutationObserverOptions = {
+      attributes: true,
+      childList: true,
+      subtree: true
+    }
+  } = {}
 ) {
   if (typeof element === 'undefined') {
     if (typeof document === 'undefined') {
-      throw new Error('[ui-test-queries] Could not find a valid HtmlElement for query.')
+      throw new Error(
+        '[ui-test-queries] Could not find a valid HtmlElement for query.'
+      )
     } else {
       // eslint-disable-next-line no-param-reassign
       element = document.body
@@ -46,7 +52,10 @@ export function waitForQueryResult(
   }
 
   return new Promise((resolve, reject) => {
-    const debouncedQuery = debounce(runQuery, 10, { leading: false, trailing: true })
+    const debouncedQuery = debounce(runQuery, 10, {
+      leading: false,
+      trailing: true
+    })
 
     let lastError, observer, timer, lastResult
 
@@ -58,10 +67,15 @@ export function waitForQueryResult(
           results: [],
           selector: JSON.stringify(queryFn)
         }
-        onDone(new Error([
-          '[ui-test-queries] Invalid element query function.',
-          lastResult.selector
-        ].join('\n')), lastResult)
+        onDone(
+          new Error(
+            [
+              '[ui-test-queries] Invalid element query function.',
+              lastResult.selector
+            ].join('\n')
+          ),
+          lastResult
+        )
         return
       }
 
@@ -105,11 +119,14 @@ export function waitForQueryResult(
       const timedoutError = new Error(
         [
           `[ui-test-queries] Timed out waiting for Element query results...`,
-          expectEmpty ? `Expected to find nothing but found ${lastResult.results}` : '',
+          expectEmpty
+            ? `Expected to find nothing but found ${lastResult.results}`
+            : '',
           `with selector: "${lastResult.selector}"`,
           `element: ${elementToString(element, 7000, { highlight: false })}`
         ]
-          .filter(Boolean).join('\n')
+          .filter(Boolean)
+          .join('\n')
       )
       onDone(lastError || timedoutError, lastResult)
     }

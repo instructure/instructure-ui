@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-function getFrameDocumentSafe (el) {
+function getFrameDocumentSafe(el) {
   try {
     return el.contentDocument || el.contentWindow.document
-  } catch(err) {
+  } catch (err) {
     return null
   }
 }

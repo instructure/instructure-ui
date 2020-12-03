@@ -48,17 +48,17 @@ class Component extends React.Component {
     foo: PropTypes.string
   }
 
-  test (cb) {
+  test(cb) {
     cb('test')
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (typeof this.props.onUnmount === 'function') {
       this.props.onUnmount()
     }
   }
 
-  render () {
+  render() {
     const { foo } = this.props
     return foo === 'baz' ? null : <div>Hello World</div>
   }
@@ -66,9 +66,7 @@ class Component extends React.Component {
 
 describe('reactComponentWrapper', async () => {
   it('should handle components that render `null`', async () => {
-    const subject = await ReactComponentWrapper.mount(
-      <Component foo="baz" />
-    )
+    const subject = await ReactComponentWrapper.mount(<Component foo="baz" />)
 
     expect(subject.getDOMNode()).to.equal(null)
   })
@@ -76,7 +74,11 @@ describe('reactComponentWrapper', async () => {
   it('should allow a componentRef to be passed via props', async () => {
     let component
     await ReactComponentWrapper.mount(
-      <Component componentRef={(el) => { component = el }} />
+      <Component
+        componentRef={(el) => {
+          component = el
+        }}
+      />
     )
     const test = stub()
     component.test(test)
@@ -87,7 +89,11 @@ describe('reactComponentWrapper', async () => {
   it('should omit componentRef when passing props to component', async () => {
     let component
     await ReactComponentWrapper.mount(
-      <Component componentRef={(el) => {component = el}} />
+      <Component
+        componentRef={(el) => {
+          component = el
+        }}
+      />
     )
     expect(component.props.componentRef).to.not.exist()
   })
@@ -110,7 +116,11 @@ describe('reactComponentWrapper', async () => {
     it('should support setting props', async () => {
       let component
       await ReactComponentWrapper.mount(
-        <Component componentRef={(el) => {component = el}} />,
+        <Component
+          componentRef={(el) => {
+            component = el
+          }}
+        />,
         {
           props: {
             foo: 'bar'
@@ -123,7 +133,11 @@ describe('reactComponentWrapper', async () => {
     it('should support setting context', async () => {
       let component
       await ReactComponentWrapper.mount(
-        <Component componentRef={(el) => {component = el}} />,
+        <Component
+          componentRef={(el) => {
+            component = el
+          }}
+        />,
         {
           context: {
             foo: 'bar'
@@ -139,7 +153,11 @@ describe('reactComponentWrapper', async () => {
     it('should support setting props', async () => {
       let component
       const subject = await ReactComponentWrapper.mount(
-        <Component componentRef={(el) => {component = el}} />
+        <Component
+          componentRef={(el) => {
+            component = el
+          }}
+        />
       )
 
       await subject.setProps({
@@ -154,7 +172,11 @@ describe('reactComponentWrapper', async () => {
     it('should support setting context', async () => {
       let component
       const subject = await ReactComponentWrapper.mount(
-        <Component componentRef={(el) => {component = el}} />
+        <Component
+          componentRef={(el) => {
+            component = el
+          }}
+        />
       )
 
       await subject.setContext({

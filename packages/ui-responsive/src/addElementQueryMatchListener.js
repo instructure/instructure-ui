@@ -23,7 +23,11 @@
  */
 import { parseQuery } from './parseQuery'
 
-import { addResizeListener, findDOMNode, getBoundingClientRect } from '@instructure/ui-dom-utils'
+import {
+  addResizeListener,
+  findDOMNode,
+  getBoundingClientRect
+} from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 
 /**
@@ -80,7 +84,7 @@ import { debounce } from '@instructure/debounce'
  * matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
-function addElementQueryMatchListener (query, el, cb) {
+function addElementQueryMatchListener(query, el, cb) {
   const node = typeof el === 'function' ? el() : el
   let matches = []
 
@@ -103,7 +107,7 @@ function addElementQueryMatchListener (query, el, cb) {
   }
 
   return {
-    remove () {
+    remove() {
       if (elementResizeListener) {
         elementResizeListener.remove()
       }
@@ -115,19 +119,19 @@ function addElementQueryMatchListener (query, el, cb) {
   }
 }
 
-function updateElementMatches (query, el, matches = [], size) {
+function updateElementMatches(query, el, matches = [], size) {
   const node = findDOMNode(el)
   const { width, height } = size || getBoundingClientRect(node)
-  const matchingQueries = parseQuery(query, node)({width, height})
+  const matchingQueries = parseQuery(query, node)({ width, height })
   const newMatches = Object.keys(matchingQueries)
-    .filter(key => matchingQueries[key])
-    .map(key => key)
+    .filter((key) => matchingQueries[key])
+    .map((key) => key)
 
   // only return matches if they have changed
   if (matches.length !== newMatches.length) {
     return newMatches
   }
-  if (matches.filter(match => newMatches.indexOf(match) === -1).length > 0) {
+  if (matches.filter((match) => newMatches.indexOf(match) === -1).length > 0) {
     return newMatches
   }
 

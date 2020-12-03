@@ -39,7 +39,7 @@ import { getComputedStyle } from './getComputedStyle'
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Array} scroll parents
  */
-function getScrollParents (el) {
+function getScrollParents(el) {
   const parents = []
 
   if (!canUseDOM) {
@@ -74,7 +74,10 @@ function getScrollParents (el) {
       const { overflow, overflowX, overflowY } = style
 
       if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
-        if (position !== 'absolute' || ['relative', 'absolute', 'fixed'].indexOf(style.position) >= 0) {
+        if (
+          position !== 'absolute' ||
+          ['relative', 'absolute', 'fixed'].indexOf(style.position) >= 0
+        ) {
           parents.push(parent)
         }
       }

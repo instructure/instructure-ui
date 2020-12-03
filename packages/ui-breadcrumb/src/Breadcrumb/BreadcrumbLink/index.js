@@ -42,32 +42,32 @@ id: Breadcrumb.Link
 class BreadcrumbLink extends Component {
   static propTypes = {
     /**
-    * Content to render as the crumb, generally should be text.
-    */
+     * Content to render as the crumb, generally should be text.
+     */
     children: PropTypes.node.isRequired,
     /**
-    * Link the crumb should direct to; if an href is provided, the crumb will render as a link
-    */
+     * Link the crumb should direct to; if an href is provided, the crumb will render as a link
+     */
     href: PropTypes.string,
     /**
-    * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
-    */
+     * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
+     */
     onClick: PropTypes.func,
     /**
-    * Sets the font-size of the breadcrumb text
-    */
+     * Sets the font-size of the breadcrumb text
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
      * Add an icon to the Breadcrumb.Link
      */
     renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * __Deprecated - use renderIcon__
-    */
+     * __Deprecated - use renderIcon__
+     */
     icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     /**
-    * Place the icon before or after the text in the Breadcrumb.Link
-    */
+     * Place the icon before or after the text in the Breadcrumb.Link
+     */
     iconPlacement: PropTypes.oneOf(['start', 'end'])
   }
 
@@ -80,7 +80,7 @@ class BreadcrumbLink extends Component {
     iconPlacement: undefined
   }
 
-  render () {
+  render() {
     const {
       children,
       href,

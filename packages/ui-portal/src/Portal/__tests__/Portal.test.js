@@ -29,16 +29,16 @@ import { Portal } from '../index'
 
 describe(`<Portal />`, async () => {
   it('should render', async () => {
-    await mount(
-      <Portal open>Hello World</Portal>
-    )
+    await mount(<Portal open>Hello World</Portal>)
     const portal = await find(':contains(Hello World)')
     expect(portal.getDOMNode()).to.exist()
   })
 
   it('should be accessible', async () => {
     await mount(
-      <Portal open id="portal">Hello World</Portal>
+      <Portal open id="portal">
+        Hello World
+      </Portal>
     )
     const portal = await find('#portal')
     expect(await portal.accessible()).to.be.true()
@@ -89,11 +89,7 @@ describe(`<Portal />`, async () => {
 
   describe('without a mountNode prop', () => {
     it('should render nothing when closed', async () => {
-      await mount(
-        <Portal>
-          Hello World
-        </Portal>
-      )
+      await mount(<Portal>Hello World</Portal>)
       const portal = await find('#portal', { expectEmpty: true })
       expect(portal).to.not.exist()
     })
@@ -102,9 +98,7 @@ describe(`<Portal />`, async () => {
       const onKeyDown = stub()
       await mount(
         <Portal open id="portal">
-          <button onKeyDown={onKeyDown}>
-            Hello World
-          </button>
+          <button onKeyDown={onKeyDown}>Hello World</button>
         </Portal>
       )
 
@@ -115,8 +109,7 @@ describe(`<Portal />`, async () => {
 
       expect(onKeyDown).to.have.been.called()
 
-      expect(portal.getParentNode())
-        .to.equal(button.getOwnerDocument().body)
+      expect(portal.getParentNode()).to.equal(button.getOwnerDocument().body)
     })
   })
 
@@ -144,11 +137,7 @@ describe(`<Portal />`, async () => {
       document.body.appendChild(mountNode)
 
       await mount(
-        <Portal
-          open
-          mountNode={mountNode}
-          id="portal"
-        >
+        <Portal open mountNode={mountNode} id="portal">
           Hello World
         </Portal>
       )

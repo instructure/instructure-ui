@@ -23,7 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, spy, wait, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  spy,
+  wait,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 import { Tooltip } from '../index'
 
 import { TooltipLocator } from '../TooltipLocator'
@@ -101,7 +108,7 @@ describe('<Tooltip />', async () => {
 
   it('should accept a function for renderTip', async () => {
     await mount(
-      <Tooltip renderTip={() => "Hello"}>
+      <Tooltip renderTip={() => 'Hello'}>
         <a href="example.html">Hover or focus me</a>
       </Tooltip>
     )
@@ -128,7 +135,12 @@ describe('<Tooltip />', async () => {
   describe('using as', async () => {
     it('should render children', async () => {
       await mount(
-        <Tooltip renderTip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+        <Tooltip
+          renderTip={<h2>Hello</h2>}
+          placement="end"
+          as="a"
+          href="example.html"
+        >
           Hover or focus me
         </Tooltip>
       )
@@ -146,7 +158,12 @@ describe('<Tooltip />', async () => {
 
     it('should have an aria-describedby attribute', async () => {
       await mount(
-        <Tooltip renderTip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+        <Tooltip
+          renderTip={<h2>Hello</h2>}
+          placement="end"
+          as="a"
+          href="example.html"
+        >
           Hover or focus me
         </Tooltip>
       )
@@ -158,13 +175,20 @@ describe('<Tooltip />', async () => {
       const content = await tip.findContent()
 
       await wait(() => {
-        expect(content).to.contain(`#${trigger.getAttribute('aria-describedby')}`)
+        expect(content).to.contain(
+          `#${trigger.getAttribute('aria-describedby')}`
+        )
       })
     })
 
     it('should pass down the href attribute', async () => {
       await mount(
-        <Tooltip renderTip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+        <Tooltip
+          renderTip={<h2>Hello</h2>}
+          placement="end"
+          as="a"
+          href="example.html"
+        >
           Hover or focus me
         </Tooltip>
       )
@@ -178,10 +202,7 @@ describe('<Tooltip />', async () => {
   describe('when controlled', async () => {
     it('should show tip when isShowingContent is true', async () => {
       await mount(
-        <Tooltip
-          renderTip={<h2>Hello</h2>}
-          isShowingContent
-        >
+        <Tooltip renderTip={<h2>Hello</h2>} isShowingContent>
           <a href="example.html">Hover or focus me</a>
         </Tooltip>
       )
@@ -212,7 +233,7 @@ describe('<Tooltip />', async () => {
         expect(onShowContent).to.have.been.calledOnce()
       })
 
-      await subject.setProps({ isShowingContent: true})
+      await subject.setProps({ isShowingContent: true })
 
       await trigger.mouseOut()
       expect(onHideContent).to.have.been.calledOnce()
@@ -224,9 +245,7 @@ describe('<Tooltip />', async () => {
       const onClick = spy()
       await mount(
         <Tooltip renderTip={<h2>Hello</h2>}>
-          <button onClick={onClick}>
-            Hover or focus me
-          </button>
+          <button onClick={onClick}>Hover or focus me</button>
         </Tooltip>
       )
 

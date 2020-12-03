@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -30,7 +29,11 @@ import classNames from 'classnames'
 import { themeable } from '@instructure/ui-themeable'
 import { debounce } from '@instructure/debounce'
 import { addResizeListener, canUseDOM } from '@instructure/ui-dom-utils'
-import { safeCloneElement, ensureSingleChild, hack } from '@instructure/ui-react-utils'
+import {
+  safeCloneElement,
+  ensureSingleChild,
+  hack
+} from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
@@ -50,36 +53,36 @@ category: components
 class TruncateText extends Component {
   static propTypes = {
     /**
-    * The content to be truncated.
-    */
+     * The content to be truncated.
+     */
     children: PropTypes.node.isRequired,
     /**
-    * Number of lines to allow before truncating. `auto` will fit to parent
-    */
+     * Number of lines to allow before truncating. `auto` will fit to parent
+     */
     maxLines: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * Where to place the ellipsis within the string
-    */
+     * Where to place the ellipsis within the string
+     */
     position: PropTypes.oneOf(['end', 'middle']),
     /**
-    * Add ellipsis after words or after any character
-    */
+     * Add ellipsis after words or after any character
+     */
     truncate: PropTypes.oneOf(['character', 'word']),
     /**
-    * A string to use as the ellipsis
-    */
+     * A string to use as the ellipsis
+     */
     ellipsis: PropTypes.string,
     /**
-    * Characters to ignore at truncated end of string
-    */
+     * Characters to ignore at truncated end of string
+     */
     ignore: PropTypes.arrayOf(PropTypes.string),
     /**
-    * Debounce delay in milliseconds
-    */
+     * Debounce delay in milliseconds
+     */
     debounce: PropTypes.number,
     /**
-    * Callback when truncated text has changed
-    */
+     * Callback when truncated text has changed
+     */
     onUpdate: PropTypes.func,
     /**
      * Force truncation of invisible elements (hack; will be removed in favor
@@ -99,12 +102,12 @@ class TruncateText extends Component {
     onUpdate: (truncated, text) => {}
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = this.initialState
   }
 
-  get initialState () {
+  get initialState() {
     return {
       isTruncated: false,
       needsSecondRender: true,
@@ -113,7 +116,7 @@ class TruncateText extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { children } = this.props
 
     if (children) {
@@ -125,13 +128,16 @@ class TruncateText extends Component {
       if (this.props.debounce === 0) {
         this._resizeListener = addResizeListener(this._ref, this.update)
       } else {
-        this._debounced = debounce(this.update, this.props.debounce, { leading: true, trailing: true })
+        this._debounced = debounce(this.update, this.props.debounce, {
+          leading: true,
+          trailing: true
+        })
         this._resizeListener = addResizeListener(this._ref, this._debounced)
       }
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this._resizeListener) {
       this._resizeListener.remove()
     }
@@ -141,17 +147,10 @@ class TruncateText extends Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    const {
-      children,
-      onUpdate
-    } = this.props
+  componentDidUpdate(prevProps, prevState) {
+    const { children, onUpdate } = this.props
 
-    const {
-      isTruncated,
-      needsSecondRender,
-      truncatedText
-    } = this.state
+    const { isTruncated, needsSecondRender, truncatedText } = this.state
 
     if (children) {
       if (prevProps !== this.props) {
@@ -174,9 +173,9 @@ class TruncateText extends Component {
     }
   }
 
-  checkChildren () {
+  checkChildren() {
     error(
-      !((() => {
+      !(() => {
         let isTooDeep = false
         const text = ensureSingleChild(this.props.children)
         React.Children.forEach(text.props.children, (child) => {
@@ -191,7 +190,7 @@ class TruncateText extends Component {
           }
         })
         return isTooDeep
-      })()),
+      })(),
       `[TruncateText] Some children are too deep in the node tree and will not render.`
     )
   }
@@ -202,7 +201,7 @@ class TruncateText extends Component {
     }
   }
 
-  truncate () {
+  truncate() {
     if (!this.state.needsSecondRender) {
       return
     }
@@ -214,7 +213,11 @@ class TruncateText extends Component {
         lineHeight: this.theme.lineHeight
       })
       if (result) {
-        const element = this.renderChildren(result.isTruncated, result.data, result.constraints.width)
+        const element = this.renderChildren(
+          result.isTruncated,
+          result.data,
+          result.constraints.width
+        )
         this.setState({
           needsSecondRender: false,
           isTruncated: result.isTruncated,
@@ -233,7 +236,7 @@ class TruncateText extends Component {
     }
   }
 
-  renderChildren (truncated, data, width) {
+  renderChildren(truncated, data, width) {
     if (!truncated) {
       return this._text
     }
@@ -254,17 +257,17 @@ class TruncateText extends Component {
     }
     // this spacer element is set to the max width the full text could potentially be
     // without this, text in `width: auto` elements won't expand to accomodate more text, once truncated
-    childElements.push(<span className={styles.spacer} style={{width: width || null}} />)
-
-    const children = React.Children.map(childElements, child => child)
-    return (
-      this._text.props
-        ? safeCloneElement(this._text, this._text.props, children)
-        : children
+    childElements.push(
+      <span className={styles.spacer} style={{ width: width || null }} />
     )
+
+    const children = React.Children.map(childElements, (child) => child)
+    return this._text.props
+      ? safeCloneElement(this._text, this._text.props, children)
+      : children
   }
 
-  render () {
+  render() {
     const { truncatedElement } = this.state
     const { maxLines, children } = this.props
 
@@ -274,17 +277,20 @@ class TruncateText extends Component {
           [styles.truncated]: true,
           [styles.auto]: maxLines === 'auto'
         })}
-        ref={el => {
+        ref={(el) => {
           this._ref = el
         }}
       >
-        {children && (
-          truncatedElement ? null : (
-            <span ref={el => {this._stage = el}}>
+        {children &&
+          (truncatedElement ? null : (
+            <span
+              ref={(el) => {
+                this._stage = el
+              }}
+            >
               {ensureSingleChild(children)}
             </span>
-          )
-        )}
+          ))}
         {truncatedElement}
       </span>
     )

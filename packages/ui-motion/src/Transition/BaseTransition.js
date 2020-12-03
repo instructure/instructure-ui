@@ -26,7 +26,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { getClassList } from '@instructure/ui-dom-utils'
-import { ensureSingleChild, safeCloneElement } from '@instructure/ui-react-utils'
+import {
+  ensureSingleChild,
+  safeCloneElement
+} from '@instructure/ui-react-utils'
 
 const STATES = {
   EXITED: -2,
@@ -182,11 +185,11 @@ class BaseTransition extends React.Component {
     transitioning: false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.startTransition(this.props.in, this.props.transitionOnMount)
   }
 
-  getSnapshotBeforeUpdate (prevProps, prevState) {
+  getSnapshotBeforeUpdate(prevProps, prevState) {
     if (this.props.in !== prevProps.in && prevState.transitioning) {
       // direction changed before previous transition finished
       return true
@@ -194,7 +197,7 @@ class BaseTransition extends React.Component {
     return null
   }
 
-  componentDidUpdate (prevProps, prevState, cancelPrematurely) {
+  componentDidUpdate(prevProps, prevState, cancelPrematurely) {
     if (cancelPrematurely) {
       this.clearTransition(prevProps.transitionClassName)
     }
@@ -208,7 +211,7 @@ class BaseTransition extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._timeouts.forEach((timeout) => {
       clearTimeout(timeout)
     })
@@ -216,18 +219,20 @@ class BaseTransition extends React.Component {
   }
 
   startTransition = (transitionIn, transitionOnStart) => {
-    const {
-      transitionEnter,
-      transitionExit
-    } = this.props
+    const { transitionEnter, transitionExit } = this.props
     if (transitionIn) {
-      this.enter((transitionEnter && transitionOnStart) ? STATES.EXITED : null)
+      this.enter(transitionEnter && transitionOnStart ? STATES.EXITED : null)
     } else {
-      this.exit((transitionExit && transitionOnStart) ? STATES.ENTERED : null)
+      this.exit(transitionExit && transitionOnStart ? STATES.ENTERED : null)
     }
   }
 
-  transition = (toState, fromState, transitionCallback, transitionDuration = 0) => {
+  transition = (
+    toState,
+    fromState,
+    transitionCallback,
+    transitionDuration = 0
+  ) => {
     if (this._unmounted) return
 
     const classList = getClassList(this)
@@ -265,7 +270,7 @@ class BaseTransition extends React.Component {
     )
   }
 
-  clearTransition (transitionClassName) {
+  clearTransition(transitionClassName) {
     if (this._unmounted) return
 
     this.setState({ transitioning: false }, () => {
@@ -299,7 +304,12 @@ class BaseTransition extends React.Component {
         }
         if (initialState) {
           this.transition(initialState, null, () => {
-            this.transition(STATES.ENTERING, initialState, enter, props.enterDelay)
+            this.transition(
+              STATES.ENTERING,
+              initialState,
+              enter,
+              props.enterDelay
+            )
           })
         } else {
           enter()
@@ -345,7 +355,7 @@ class BaseTransition extends React.Component {
     }
   }
 
-  transitionEnabled (toState) {
+  transitionEnabled(toState) {
     const { props } = this
 
     switch (toState) {
@@ -360,7 +370,7 @@ class BaseTransition extends React.Component {
     }
   }
 
-  getTransitionClassName (transitionState) {
+  getTransitionClassName(transitionState) {
     const { props } = this
     switch (transitionState) {
       case STATES.EXITED:
@@ -376,14 +386,18 @@ class BaseTransition extends React.Component {
     }
   }
 
-  renderChildren () {
+  renderChildren() {
     return safeCloneElement(ensureSingleChild(this.props.children), {
       'aria-hidden': !this.props.in ? true : null
     })
   }
 
-  render () {
-    if (!this.props.in && this.props.unmountOnExit && !this.state.transitioning) {
+  render() {
+    if (
+      !this.props.in &&
+      this.props.unmountOnExit &&
+      !this.state.transitioning
+    ) {
       return null
     } else {
       return this.renderChildren()

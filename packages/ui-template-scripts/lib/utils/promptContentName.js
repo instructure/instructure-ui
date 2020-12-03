@@ -25,17 +25,25 @@
 const yargsInteractive = require('yargs-interactive')
 const { error } = require('@instructure/command-utils')
 
-module.exports = async ({ name, contentType, formatInstructions = '', isRequired = true } = {}) => {
+module.exports = async ({
+  name,
+  contentType,
+  formatInstructions = '',
+  isRequired = true
+} = {}) => {
   let contentName = name
   if (!contentName) {
-    contentName = (await yargsInteractive()
-      .interactive({
+    contentName = (
+      await yargsInteractive().interactive({
         interactive: { default: true },
         contentName: {
           type: 'input',
-          describe: `Enter a name${contentType ? ` for the ${contentType}` : ''}${formatInstructions}:`
+          describe: `Enter a name${
+            contentType ? ` for the ${contentType}` : ''
+          }${formatInstructions}:`
         }
-      })).contentName
+      })
+    ).contentName
   }
 
   if (!contentName && isRequired) {

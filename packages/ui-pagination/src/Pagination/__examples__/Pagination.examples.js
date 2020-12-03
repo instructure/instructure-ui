@@ -38,15 +38,8 @@ export default {
   sectionProp: 'variant',
   propValues: {
     variant: ['full', 'compact'],
-    children: [
-      buildPages(5),
-      buildPages(1),
-      buildPages(7, 2)
-    ],
-    label: [
-      null,
-      'Example Pagination'
-    ]
+    children: [buildPages(5), buildPages(1), buildPages(7, 2)],
+    label: [null, 'Example Pagination']
   },
   getComponentProps: (props) => {
     return {

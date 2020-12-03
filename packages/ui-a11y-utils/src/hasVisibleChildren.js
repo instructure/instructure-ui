@@ -27,7 +27,7 @@ import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-function hasVisibleChildren (children) {
+function hasVisibleChildren(children) {
   let visible = false
 
   React.Children.forEach(children, (child) => {

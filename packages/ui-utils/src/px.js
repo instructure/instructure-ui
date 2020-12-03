@@ -41,15 +41,15 @@ import { parseUnit } from './parseUnit'
  * @param {String} val
  * @param {DomNode} el - containing element, for context measure is em (defaults to document.body)
  * @returns {Number} Returns numerical representation of pixels
-*/
-function px (val, el) {
+ */
+function px(val, el) {
   const container = el || document.body
 
   if (!val || typeof val === 'number') {
     return val
   }
 
-  const [ num, unit ] = parseUnit(val)
+  const [num, unit] = parseUnit(val)
 
   if (unit === 'rem') {
     return num * getFontSize()

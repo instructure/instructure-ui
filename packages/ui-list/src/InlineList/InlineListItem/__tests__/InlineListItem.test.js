@@ -43,7 +43,9 @@ describe('<InlineListItem />', async () => {
 
   it('should call elementRef', async () => {
     const elementRef = stub()
-    await mount(<InlineListItem elementRef={elementRef}>List item</InlineListItem>)
+    await mount(
+      <InlineListItem elementRef={elementRef}>List item</InlineListItem>
+    )
     const listItem = await InlineListItemLocator.find()
     expect(elementRef).to.have.been.calledWith(listItem.getDOMNode())
   })

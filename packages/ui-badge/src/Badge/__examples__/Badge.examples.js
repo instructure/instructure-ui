@@ -27,24 +27,21 @@ import { View } from '@instructure/ui-view'
 export default {
   sectionProp: 'variant',
   propValues: {
-    placement: [ 'start top', 'end top', 'start bottom', 'end bottom' ],
-    countUntil: [ null, 100 ]
+    placement: ['start top', 'end top', 'start bottom', 'end bottom'],
+    countUntil: [null, 100]
   },
   getComponentProps: (props) => {
     return {
       count: 100,
       children: (
-        <View
-          display="block"
-          width="2rem"
-          height="2rem"
-          borderWidth="small"
-        />
+        <View display="block" width="2rem" height="2rem" borderWidth="small" />
       )
     }
   },
   filter: (props) => {
-    return props.type === 'notification' && props.countUntil ||
-      props.standalone && props.placement !== 'start top'
+    return (
+      (props.type === 'notification' && props.countUntil) ||
+      (props.standalone && props.placement !== 'start top')
+    )
   }
 }

@@ -26,7 +26,11 @@ const { error, info } = require('@instructure/command-utils')
 
 const { publishGithubPages } = require('./utils/gh-pages')
 const { getConfig } = require('./utils/config')
-const { setupGit, isReleaseCommit, checkWorkingDirectory } = require('./utils/git')
+const {
+  setupGit,
+  isReleaseCommit,
+  checkWorkingDirectory
+} = require('./utils/git')
 
 try {
   const pkgJSON = getPackageJSON()
@@ -36,19 +40,23 @@ try {
   process.exit(1)
 }
 
-function deployDocs (packageName, currentVersion, config = {}) {
+function deployDocs(packageName, currentVersion, config = {}) {
   setupGit()
 
   if (isReleaseCommit(currentVersion)) {
     checkWorkingDirectory()
-    info(`📖   Deploying documentation for ${currentVersion} of ${packageName}...`)
+    info(
+      `📖   Deploying documentation for ${currentVersion} of ${packageName}...`
+    )
     try {
       publishGithubPages(config)
     } catch (err) {
       error(err)
       process.exit(1)
     }
-    info(`📖   Documentation for ${currentVersion} of ${packageName} was successfully deployed!`)
+    info(
+      `📖   Documentation for ${currentVersion} of ${packageName} was successfully deployed!`
+    )
   } else {
     info(`📦  Not on a release commit--skipping documentation publish.`)
   }

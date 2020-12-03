@@ -26,6 +26,8 @@ const createFromTemplate = require('@instructure/ui-template-scripts/lib/utils/c
 const { warn } = require('@instructure/command-utils')
 
 module.exports = function (args = {}) {
-  warn('`createFromTemplate` has been moved from \'@instructure/ui-scripts/lib/utils/createFromTemplate\' to \'@instructure/ui-template-scripts/lib/utils/createFromTemplate\'.')
+  warn(
+    "`createFromTemplate` has been moved from '@instructure/ui-scripts/lib/utils/createFromTemplate' to '@instructure/ui-template-scripts/lib/utils/createFromTemplate'."
+  )
   return createFromTemplate(args)
 }

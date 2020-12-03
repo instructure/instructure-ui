@@ -25,16 +25,18 @@
 import { warn } from '@instructure/console/macro'
 
 class ScreenReaderFocusRegion {
-  constructor (element, options = {
-    shouldContainFocus: true,
-    liveRegion: []
-  }) {
-    const liveRegion = typeof options.liveRegion === 'function'
-      ? options.liveRegion()
-      : options.liveRegion
-    this._liveRegion = Array.isArray(liveRegion)
-      ? liveRegion
-      : [liveRegion]
+  constructor(
+    element,
+    options = {
+      shouldContainFocus: true,
+      liveRegion: []
+    }
+  ) {
+    const liveRegion =
+      typeof options.liveRegion === 'function'
+        ? options.liveRegion()
+        : options.liveRegion
+    this._liveRegion = Array.isArray(liveRegion) ? liveRegion : [liveRegion]
     this._contextElement = element
     this._options = options
   }
@@ -44,11 +46,11 @@ class ScreenReaderFocusRegion {
   _nodes = []
   _parents = []
 
-  updateElement (element) {
+  updateElement(element) {
     this._contextElement = element
   }
 
-  muteNode (node) {
+  muteNode(node) {
     if (node && node.tagName.toLowerCase() !== 'script') {
       // When we are trapping screen reader focus on an element that
       // is deep inside the DOM, we can't apply aria-hidden to the
@@ -56,7 +58,7 @@ class ScreenReaderFocusRegion {
       // and/or aria-label assigned. To optimize SR ux we remove the role,
       // aria-label, and aria-hidden attrs temporarily when the region
       // is focused, and then we restore them when focus is lost.
-      [
+      ;[
         'role',
         'aria-label',
         'aria-hidden' // this should never happen right?
@@ -73,7 +75,7 @@ class ScreenReaderFocusRegion {
     }
   }
 
-  hideNodes (nodes) {
+  hideNodes(nodes) {
     nodes.forEach((node) => {
       if (
         node &&
@@ -97,7 +99,7 @@ class ScreenReaderFocusRegion {
     })
   }
 
-  hideNode (node) {
+  hideNode(node) {
     if (node.getAttribute('aria-hidden') !== 'true') {
       node.setAttribute('aria-hidden', 'true')
       this._nodes.push(node)
@@ -126,7 +128,7 @@ class ScreenReaderFocusRegion {
     })
   }
 
-  restoreNode (removedNode) {
+  restoreNode(removedNode) {
     const index = this._nodes.indexOf(removedNode)
 
     if (index >= 0) {
@@ -135,7 +137,7 @@ class ScreenReaderFocusRegion {
     }
   }
 
-  parseIframeBodies (node) {
+  parseIframeBodies(node) {
     if (!node) return []
 
     let iframes = []
@@ -148,19 +150,24 @@ class ScreenReaderFocusRegion {
       }
     }
 
-    return iframes.map((iframe) => {
+    return iframes
+      .map((iframe) => {
         let body = null
         try {
           body = iframe.contentDocument.body
         } catch (e) {
-          warn(false, `[ui-a11y] could not find a document for iframe: ${e}`, iframe)
+          warn(
+            false,
+            `[ui-a11y] could not find a document for iframe: ${e}`,
+            iframe
+          )
         }
         return body
       })
-      .filter(body => body !== null)
+      .filter((body) => body !== null)
   }
 
-  activate () {
+  activate() {
     if (!this._options.shouldContainFocus) {
       return
     }
@@ -169,7 +176,11 @@ class ScreenReaderFocusRegion {
 
     let node = this._contextElement
 
-    while (node && node.nodeType === 1 && node.tagName.toLowerCase() !== 'body') {
+    while (
+      node &&
+      node.nodeType === 1 &&
+      node.tagName.toLowerCase() !== 'body'
+    ) {
       const parent = node.parentElement // can be null
 
       if (parent) {
@@ -184,7 +195,7 @@ class ScreenReaderFocusRegion {
     }
   }
 
-  deactivate () {
+  deactivate() {
     if (this._observer) {
       this._observer.disconnect()
       this._observer = null

@@ -34,28 +34,28 @@ id: SimpleSelect.Option
 class Option extends Component {
   static propTypes = {
     /**
-    * The id for the option.
-    */
+     * The id for the option.
+     */
     id: PropTypes.string.isRequired,
     /**
-    * The value for the option.
-    */
+     * The value for the option.
+     */
     value: PropTypes.string.isRequired,
     /**
-    * Whether or not this option is disabled.
-    */
+     * Whether or not this option is disabled.
+     */
     isDisabled: PropTypes.bool,
     /**
-    * Content to display before the option label, such as an icon.
-    */
+     * Content to display before the option label, such as an icon.
+     */
     renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display after the option label, such as an icon.
-    */
+     * Content to display after the option label, such as an icon.
+     */
     renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display as the option label.
-    */
+     * Content to display as the option label.
+     */
     children: PropTypes.string
   }
 
@@ -67,7 +67,7 @@ class Option extends Component {
   }
 
   /* istanbul ignore next */
-  render () {
+  render() {
     // this component is only used for prop validation. SimpleSelect.Option children
     // are parsed in Select and rendered as Options.Item components
     return null

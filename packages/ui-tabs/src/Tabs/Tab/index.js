@@ -27,7 +27,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { passthroughProps, callRenderProp, deprecated } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  callRenderProp,
+  deprecated
+} from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import styles from './styles.css'
@@ -56,12 +60,12 @@ class Tab extends Component {
     onKeyDown: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * __Deprecated - use `isDisabled` instead__
-    */
+     * __Deprecated - use `isDisabled` instead__
+     */
     disabled: PropTypes.bool,
     /**
-    * __Deprecated - use `isSelected` instead__
-    */
+     * __Deprecated - use `isSelected` instead__
+     */
     selected: PropTypes.bool
   }
 
@@ -96,7 +100,7 @@ class Tab extends Component {
     onKeyDown(event, { index, id })
   }
 
-  render () {
+  render() {
     const {
       id,
       variant,
@@ -114,7 +118,7 @@ class Tab extends Component {
       <View
         {...passthroughProps(props)}
         as="div"
-        role='tab'
+        role="tab"
         id={id}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}

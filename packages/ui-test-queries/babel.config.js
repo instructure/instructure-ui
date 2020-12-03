@@ -23,13 +23,15 @@
  */
 
 module.exports = {
-  presets: [[
-    require('@instructure/ui-babel-preset'),
-    {
-      coverage: Boolean(process.env.COVERAGE),
-      esModules: Boolean(process.env.ES_MODULES),
-      removeConsole: false,
-      transformImports: false
-    }
-  ]]
+  presets: [
+    [
+      require('@instructure/ui-babel-preset'),
+      {
+        coverage: Boolean(process.env.COVERAGE),
+        esModules: Boolean(process.env.ES_MODULES),
+        removeConsole: false,
+        transformImports: false
+      }
+    ]
+  ]
 }

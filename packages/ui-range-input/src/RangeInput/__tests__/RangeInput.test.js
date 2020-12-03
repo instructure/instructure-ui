@@ -30,14 +30,7 @@ import { RangeInputLocator } from '../RangeInputLocator'
 
 describe('<RangeInput />', async () => {
   it('renders an input with type "range"', async () => {
-    await mount(
-      <RangeInput
-        label="Opacity"
-        name="opacity"
-        max={100}
-        min={0}
-      />
-    )
+    await mount(<RangeInput label="Opacity" name="opacity" max={100} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
 
@@ -95,12 +88,7 @@ describe('<RangeInput />', async () => {
 
   it('sets min value', async () => {
     await mount(
-      <RangeInput
-        label="Opacity"
-        name="opacity"
-        max={100}
-        min={25}
-      />
+      <RangeInput label="Opacity" name="opacity" max={100} min={25} />
     )
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -109,14 +97,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets max value', async () => {
-    await mount(
-      <RangeInput
-        label="Opacity"
-        name="opacity"
-        max={75}
-        min={0}
-      />
-    )
+    await mount(<RangeInput label="Opacity" name="opacity" max={75} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
 
@@ -125,13 +106,7 @@ describe('<RangeInput />', async () => {
 
   it('sets step value', async () => {
     await mount(
-      <RangeInput
-        label="Opacity"
-        name="opacity"
-        max={100}
-        min={0}
-        step={5}
-      />
+      <RangeInput label="Opacity" name="opacity" max={100} min={0} step={5} />
     )
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -142,17 +117,12 @@ describe('<RangeInput />', async () => {
   it('requires an `onChange` prop with a `value` prop', async () => {
     const consoleError = stub(console, 'error')
     await mount(
-      <RangeInput
-        label="Opacity"
-        name="opacity"
-        max={100}
-        min={0}
-        value={50}
-      />
+      <RangeInput label="Opacity" name="opacity" max={100} min={0} value={50} />
     )
 
-    expect(consoleError).to.have.been
-      .calledWithMatch(`provided a 'value' prop without an 'onChange' handler`)
+    expect(consoleError).to.have.been.calledWithMatch(
+      `provided a 'value' prop without an 'onChange' handler`
+    )
   })
 
   it('formats the value displayed', async () => {
@@ -198,10 +168,8 @@ describe('<RangeInput />', async () => {
         name="opacity"
         max={100}
         min={0}
-        messages={[
-          { text: 'Invalid name', type: 'error' }
-        ]}
-        componentRef={(el) => ref = el}
+        messages={[{ text: 'Invalid name', type: 'error' }]}
+        componentRef={(el) => (ref = el)}
       />
     )
 
@@ -257,12 +225,7 @@ describe('<RangeInput />', async () => {
 
     it('sets the aria-valuemin attribute', async () => {
       await mount(
-        <RangeInput
-          label="Opacity"
-          name="opacity"
-          max={100}
-          min={20}
-        />
+        <RangeInput label="Opacity" name="opacity" max={100} min={20} />
       )
       const rangeInput = await RangeInputLocator.find()
       const input = await rangeInput.findInput()
@@ -272,12 +235,7 @@ describe('<RangeInput />', async () => {
 
     it('sets the aria-valuemax attribute', async () => {
       await mount(
-        <RangeInput
-          label="Opacity"
-          name="opacity"
-          max={80}
-          min={0}
-        />
+        <RangeInput label="Opacity" name="opacity" max={80} min={0} />
       )
       const rangeInput = await RangeInputLocator.find()
       const input = await rangeInput.findInput()

@@ -23,7 +23,7 @@
  */
 const CATEGORY_DELIMITER = '/'
 
-module.exports = function getClientProps (docs, themes, library) {
+module.exports = function getClientProps(docs, themes, library) {
   return {
     ...parseDocs(docs, library),
     themes: parseThemes(themes),
@@ -31,7 +31,7 @@ module.exports = function getClientProps (docs, themes, library) {
   }
 }
 
-function parseDocs (docs, library) {
+function parseDocs(docs, library) {
   const parsed = {
     sections: {
       __uncategorized: {
@@ -46,72 +46,86 @@ function parseDocs (docs, library) {
   }
 
   docs
-  .filter(doc => !doc.private)
-  .forEach((doc) => {
-    const { category, id, parent, describes } = doc
+    .filter((doc) => !doc.private)
+    .forEach((doc) => {
+      const { category, id, parent, describes } = doc
 
-    if (doc.undocumented) {
-      return
-    }
-
-    warning((!parsed.docs[id]), `[${id}] is a duplicate document ID.`)
-
-    parsed.docs[id] = {
-      ...doc,
-
-      methods: doc.methods ? doc.methods.filter(method => method.docblock !== null) : undefined,
-      generateTheme: doc.resource && doc.resource.generateTheme
-    }
-
-    if (describes) {
-      parsed.descriptions[describes] = doc.description
-    }
-
-    if (parent) {
-      parsed.parents[parent] = parsed.parents[parent] || { children: [] }
-      parsed.parents[parent].children.push(id)
-    }
-
-    if (category && category !== 'index') {
-      const sections = category.trim().split(CATEGORY_DELIMITER)
-
-      sections.forEach((sectionTitle, index) => {
-        const sectionId = sections.slice(0, index + 1).join(CATEGORY_DELIMITER)
-
-        parsed.sections[sectionId] = parsed.sections[sectionId] || {
-          docs: [],
-          sections: [],
-          level: index,
-          title: sectionTitle
-        }
-
-        if (sections[index + 1]) {
-          const childSection = sections.slice(0, index + 2).join(CATEGORY_DELIMITER)
-          if (parsed.sections[sectionId].sections.indexOf(childSection) < 0) {
-            parsed.sections[sectionId].sections.push(childSection)
-          }
-        } else {
-          parsed.sections[sectionId].docs.push(id)
-        }
-      })
-    } else {
-      if (!parent && !describes && id !== library.name && id !== 'CHANGELOG') {
-        parsed.sections.__uncategorized.docs.push(id)
+      if (doc.undocumented) {
+        return
       }
-    }
-  })
+
+      warning(!parsed.docs[id], `[${id}] is a duplicate document ID.`)
+
+      parsed.docs[id] = {
+        ...doc,
+
+        methods: doc.methods
+          ? doc.methods.filter((method) => method.docblock !== null)
+          : undefined,
+        generateTheme: doc.resource && doc.resource.generateTheme
+      }
+
+      if (describes) {
+        parsed.descriptions[describes] = doc.description
+      }
+
+      if (parent) {
+        parsed.parents[parent] = parsed.parents[parent] || { children: [] }
+        parsed.parents[parent].children.push(id)
+      }
+
+      if (category && category !== 'index') {
+        const sections = category.trim().split(CATEGORY_DELIMITER)
+
+        sections.forEach((sectionTitle, index) => {
+          const sectionId = sections
+            .slice(0, index + 1)
+            .join(CATEGORY_DELIMITER)
+
+          parsed.sections[sectionId] = parsed.sections[sectionId] || {
+            docs: [],
+            sections: [],
+            level: index,
+            title: sectionTitle
+          }
+
+          if (sections[index + 1]) {
+            const childSection = sections
+              .slice(0, index + 2)
+              .join(CATEGORY_DELIMITER)
+            if (parsed.sections[sectionId].sections.indexOf(childSection) < 0) {
+              parsed.sections[sectionId].sections.push(childSection)
+            }
+          } else {
+            parsed.sections[sectionId].docs.push(id)
+          }
+        })
+      } else {
+        if (
+          !parent &&
+          !describes &&
+          id !== library.name &&
+          id !== 'CHANGELOG'
+        ) {
+          parsed.sections.__uncategorized.docs.push(id)
+        }
+      }
+    })
 
   return parsed
 }
 
-function warning (condition, message, ...args) {
-  if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-
+function warning(condition, message, ...args) {
+  if (
+    !condition &&
+    process.env.NODE_ENV !== 'production' &&
+    typeof console !== 'undefined'
+  ) {
     console.warn(`Warning: ${message}`, ...args)
   }
 }
 
-function parseThemes (themes) {
+function parseThemes(themes) {
   const parsed = {}
 
   themes.forEach((theme) => {

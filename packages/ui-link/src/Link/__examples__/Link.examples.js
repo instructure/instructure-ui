@@ -23,16 +23,14 @@
  */
 import { IconTrashSolid } from '@instructure/ui-icons'
 
-const longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
+const longString =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
 const shortString = 'Delete'
 
 export default {
   sectionProp: 'color',
   propValues: {
-    children: [
-      shortString,
-      longString
-    ],
+    children: [shortString, longString],
     iconPlacement: [null, 'start', 'end'],
     renderIcon: [null, IconTrashSolid]
   },
@@ -47,6 +45,11 @@ export default {
     }
   },
   filter: (props) => {
-    return props.ellipsis || (props.iconPlacement && !props.renderIcon || !props.iconPlacement && props.renderIcon) || props.disabled
+    return (
+      props.ellipsis ||
+      (props.iconPlacement && !props.renderIcon) ||
+      (!props.iconPlacement && props.renderIcon) ||
+      props.disabled
+    )
   }
 }

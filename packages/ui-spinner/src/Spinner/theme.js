@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors }) {
+export default function generator({ colors }) {
   return {
     trackColor: colors.backgroundLight,
     color: colors.backgroundBrand,
@@ -43,7 +43,9 @@ export default function generator ({ colors }) {
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
+  colors
+}) {
   return {
     inverseColor: colors.backgroundLightest
   }

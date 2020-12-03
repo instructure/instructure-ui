@@ -31,9 +31,15 @@ describe('<FormFieldGroup />', async () => {
   it('should render', async () => {
     await mount(
       <FormFieldGroup description="Please enter your full name">
-        <label>First: <input /></label>
-        <label>Middle: <input /></label>
-        <label>Last: <input /></label>
+        <label>
+          First: <input />
+        </label>
+        <label>
+          Middle: <input />
+        </label>
+        <label>
+          Last: <input />
+        </label>
       </FormFieldGroup>
     )
 
@@ -43,7 +49,9 @@ describe('<FormFieldGroup />', async () => {
 
   it('can handle null children', async () => {
     const children = [
-      <label key="first">First: <input /></label>,
+      <label key="first">
+        First: <input />
+      </label>,
       null
     ]
 
@@ -61,10 +69,19 @@ describe('<FormFieldGroup />', async () => {
     const messages = [{ text: 'Invalid name', type: 'error' }]
 
     const subject = await mount(
-      <FormFieldGroup description="Please enter your full name" messages={messages}>
-        <label>First: <input /></label>
-        <label>Middle: <input /></label>
-        <label>Last: <input /></label>
+      <FormFieldGroup
+        description="Please enter your full name"
+        messages={messages}
+      >
+        <label>
+          First: <input />
+        </label>
+        <label>
+          Middle: <input />
+        </label>
+        <label>
+          Last: <input />
+        </label>
       </FormFieldGroup>
     )
 
@@ -82,9 +99,15 @@ describe('<FormFieldGroup />', async () => {
 
     const subject = await mount(
       <FormFieldGroup description={description}>
-        <label>First: <input /></label>
-        <label>Middle: <input /></label>
-        <label>Last: <input /></label>
+        <label>
+          First: <input />
+        </label>
+        <label>
+          Middle: <input />
+        </label>
+        <label>
+          Last: <input />
+        </label>
       </FormFieldGroup>
     )
 
@@ -96,9 +119,15 @@ describe('<FormFieldGroup />', async () => {
   it('should meet a11y standards', async () => {
     const subject = await mount(
       <FormFieldGroup description="Please enter your full name">
-        <label>First: <input /></label>
-        <label>Middle: <input /></label>
-        <label>Last: <input /></label>
+        <label>
+          First: <input />
+        </label>
+        <label>
+          Middle: <input />
+        </label>
+        <label>
+          Last: <input />
+        </label>
       </FormFieldGroup>
     )
 

@@ -39,32 +39,34 @@ class Params extends Component {
     layout: 'small'
   }
 
-  renderRows () {
+  renderRows() {
     return this.props.params.map((param) => {
       return (
         <Table.Row key={param.name}>
-          <Table.Cell><code>{param.name}</code></Table.Cell>
-          <Table.Cell><code>{this.renderType(param.type)}</code></Table.Cell>
-          <Table.Cell><code>{param.defaultvalue}</code></Table.Cell>
+          <Table.Cell>
+            <code>{param.name}</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code>{this.renderType(param.type)}</code>
+          </Table.Cell>
+          <Table.Cell>
+            <code>{param.defaultvalue}</code>
+          </Table.Cell>
           <Table.Cell>{this.renderDescription(param.description)}</Table.Cell>
         </Table.Row>
       )
     })
   }
 
-  renderType (type) {
+  renderType(type) {
     return type ? type.names.join(', ') : null
   }
 
-  renderDescription (description) {
-    return (
-      <div>
-        {description && compileMarkdown(description) }
-      </div>
-    )
+  renderDescription(description) {
+    return <div>{description && compileMarkdown(description)}</div>
   }
 
-  render () {
+  render() {
     const { layout } = this.props
 
     return (
@@ -81,9 +83,7 @@ class Params extends Component {
             <Table.ColHeader id="Description">Description</Table.ColHeader>
           </Table.Row>
         </Table.Head>
-        <Table.Body>
-          {this.renderRows()}
-        </Table.Body>
+        <Table.Body>{this.renderRows()}</Table.Body>
       </Table>
     )
   }

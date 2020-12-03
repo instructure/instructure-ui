@@ -37,9 +37,8 @@ describe('Decimal', () => {
     it('is a function', () => {
       expect(Decimal.getDelimiters).to.exist()
       expect(typeof Decimal.getDelimiters).to.equal('function')
-    });
-
-    ['bg', 'chs', 'da', 'hi', 'zh'].forEach((locale) => {
+    })
+    ;['bg', 'chs', 'da', 'hi', 'zh'].forEach((locale) => {
       it(`has locale ${locale} with decimal strings of one character`, () => {
         const { decimal } = Decimal.getDelimiters(locale)
         expect(decimal).to.exist()
@@ -76,7 +75,7 @@ describe('Decimal', () => {
     })
 
     it('correctly parses decimal formats with default locale', () => {
-      expect(Decimal.parse('12,345,679.90').toNumber()).to.equal(12345679.90)
+      expect(Decimal.parse('12,345,679.90').toNumber()).to.equal(12345679.9)
     })
 
     it('correctly parses integer formats with default locale', () => {
@@ -103,7 +102,7 @@ describe('Decimal', () => {
       expect(Decimal.parse('+12345679.09').toNumber()).to.equal(12345679.09)
     })
 
-    it('returns NaN if a value can\'t be parsed', () => {
+    it("returns NaN if a value can't be parsed", () => {
       expect(Decimal.parse('whatever').isNaN()).to.be.true()
     })
 
@@ -156,30 +155,10 @@ describe('Decimal', () => {
           'toNumber',
           789.1
         )
-        expectResult(
-          Decimal.parse,
-          [`89${decimal}1`, locale],
-          'toNumber',
-          89.1
-        )
-        expectResult(
-          Decimal.parse,
-          [`9${decimal}1`, locale],
-          'toNumber',
-          9.1
-        )
-        expectResult(
-          Decimal.parse,
-          [`0${decimal}1`, locale],
-          'toNumber',
-          0.1
-        )
-        expectResult(
-          Decimal.parse,
-          [`${decimal}1`, locale],
-          'toNumber',
-          0.1
-        )
+        expectResult(Decimal.parse, [`89${decimal}1`, locale], 'toNumber', 89.1)
+        expectResult(Decimal.parse, [`9${decimal}1`, locale], 'toNumber', 9.1)
+        expectResult(Decimal.parse, [`0${decimal}1`, locale], 'toNumber', 0.1)
+        expectResult(Decimal.parse, [`${decimal}1`, locale], 'toNumber', 0.1)
       })
     })
 
@@ -204,24 +183,9 @@ describe('Decimal', () => {
           'toNumber',
           3456789
         )
-        expectResult(
-          Decimal.parse,
-          ['789', locale],
-          'toNumber',
-          789
-        )
-        expectResult(
-          Decimal.parse,
-          ['89', locale],
-          'toNumber',
-          89
-        )
-        expectResult(
-          Decimal.parse,
-          ['0', locale],
-          'toNumber',
-          0
-        )
+        expectResult(Decimal.parse, ['789', locale], 'toNumber', 789)
+        expectResult(Decimal.parse, ['89', locale], 'toNumber', 89)
+        expectResult(Decimal.parse, ['0', locale], 'toNumber', 0)
       })
     })
   })
@@ -332,16 +296,19 @@ describe('Decimal', () => {
       })
 
       it('removes non-numeric characters', () => {
-        expect(Decimal.toLocaleString('fghjkisufdhgnhmgnk', 'en'))
-          .to.equal('')
-        expect(Decimal.toLocaleString('qwertyuiopasdfghjklñ123456789', 'en'))
-          .to.equal('123,456,789')
-        expect(Decimal.toLocaleString('123456zxcvbnm7890', 'en'))
-          .to.equal('1,234,567,890')
-        expect(Decimal.toLocaleString('123456789asdasd', 'en'))
-          .to.equal('123,456,789')
-        expect(Decimal.toLocaleString('3;:_¨2„…!"·$%&/()=–{}[]Ç^*1', 'en'))
-          .to.equal('321')
+        expect(Decimal.toLocaleString('fghjkisufdhgnhmgnk', 'en')).to.equal('')
+        expect(
+          Decimal.toLocaleString('qwertyuiopasdfghjklñ123456789', 'en')
+        ).to.equal('123,456,789')
+        expect(Decimal.toLocaleString('123456zxcvbnm7890', 'en')).to.equal(
+          '1,234,567,890'
+        )
+        expect(Decimal.toLocaleString('123456789asdasd', 'en')).to.equal(
+          '123,456,789'
+        )
+        expect(
+          Decimal.toLocaleString('3;:_¨2„…!"·$%&/()=–{}[]Ç^*1', 'en')
+        ).to.equal('321')
       })
 
       Object.keys(uniqueDelimiters).forEach((locale) => {
@@ -366,7 +333,10 @@ describe('Decimal', () => {
         )
         expectResult(
           Decimal.toLocaleString,
-          [`01234${thousands}56789${thousands}12${thousands}345${thousands}6789`, locale],
+          [
+            `01234${thousands}56789${thousands}12${thousands}345${thousands}6789`,
+            locale
+          ],
           null,
           `123${thousands}456${thousands}789${thousands}123${thousands}456${thousands}789`
         )
@@ -408,34 +378,29 @@ describe('Decimal', () => {
         )
         expectResult(
           Decimal.toLocaleString,
-          [`-0${thousands}000${decimal}09`, locale, { removeLeadingZeros: true }],
+          [
+            `-0${thousands}000${decimal}09`,
+            locale,
+            { removeLeadingZeros: true }
+          ],
           null,
           `-0${decimal}09`
         )
         expectResult(
           Decimal.toLocaleString,
-          [
-            `00${decimal}00765${decimal}43${decimal}2${decimal}1`,
-            locale
-          ],
+          [`00${decimal}00765${decimal}43${decimal}2${decimal}1`, locale],
           null,
           `765${thousands}432${decimal}1`
         )
         expectResult(
           Decimal.toLocaleString,
-          [
-            `--0-0${decimal}00765${decimal}43${decimal}2${decimal}1`,
-            locale
-          ],
+          [`--0-0${decimal}00765${decimal}43${decimal}2${decimal}1`, locale],
           null,
           `-765${thousands}432${decimal}1`
         )
         expectResult(
           Decimal.toLocaleString,
-          [
-            `-$%&/()=0${thousands}00[]}„…–0${decimal}09`,
-            locale
-          ],
+          [`-$%&/()=0${thousands}00[]}„…–0${decimal}09`, locale],
           null,
           `-0${decimal}09`
         )
@@ -464,40 +429,25 @@ describe('Decimal', () => {
         )
         expectResult(
           Decimal.toLocaleString,
-          [ 123456789, locale ],
+          [123456789, locale],
           null,
           `123${thousands}456${thousands}789`
         )
         expectResult(
           Decimal.toLocaleString,
-          [ 23456789, locale ],
+          [23456789, locale],
           null,
           `23${thousands}456${thousands}789`
         )
         expectResult(
           Decimal.toLocaleString,
-          [ 3456789, locale ],
+          [3456789, locale],
           null,
           `3${thousands}456${thousands}789`
         )
-        expectResult(
-          Decimal.toLocaleString,
-          [ 789, locale ],
-          null,
-          '789'
-        )
-        expectResult(
-          Decimal.toLocaleString,
-          [ 89, locale ],
-          null,
-          '89'
-        )
-        expectResult(
-          Decimal.toLocaleString,
-          [ 0, locale ],
-          null,
-          '0'
-        )
+        expectResult(Decimal.toLocaleString, [789, locale], null, '789')
+        expectResult(Decimal.toLocaleString, [89, locale], null, '89')
+        expectResult(Decimal.toLocaleString, [0, locale], null, '0')
       })
     })
 
@@ -525,13 +475,19 @@ describe('Decimal', () => {
         )
         expectResult(
           Decimal.toLocaleString,
-          [`0-${thousands}a${thousands}1${thousands}a2a${thousands}3a4${thousands}a`, locale],
+          [
+            `0-${thousands}a${thousands}1${thousands}a2a${thousands}3a4${thousands}a`,
+            locale
+          ],
           null,
           `1${thousands}234`
         )
         expectResult(
           Decimal.toLocaleString,
-          [`-0${thousands}a${thousands}1${thousands}a2a${thousands}3a4${thousands}a`, locale],
+          [
+            `-0${thousands}a${thousands}1${thousands}a2a${thousands}3a4${thousands}a`,
+            locale
+          ],
           null,
           `-1${thousands}234`
         )
@@ -639,7 +595,7 @@ describe('Decimal', () => {
 })
 
 // Call fn with args arguments and test if it is exactly equal to result
-function expectResult (fn, args, method, expectedResult) {
+function expectResult(fn, args, method, expectedResult) {
   const stringify = (s) => {
     if (typeof s === 'string') {
       return `'${s}'`
@@ -651,9 +607,12 @@ function expectResult (fn, args, method, expectedResult) {
   }
   const argsString = args.map(stringify).join(', ')
 
-  it(`returns ${stringify(expectedResult)} when called with (${argsString})`, () => {
+  it(`returns ${stringify(
+    expectedResult
+  )} when called with (${argsString})`, () => {
     const actualResult = fn(...args)
-    expect(method ? actualResult[method]() : actualResult)
-      .to.equal(expectedResult)
+    expect(method ? actualResult[method]() : actualResult).to.equal(
+      expectedResult
+    )
   })
 }

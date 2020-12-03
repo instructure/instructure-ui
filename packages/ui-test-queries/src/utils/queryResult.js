@@ -48,15 +48,16 @@ async function _getQueryResult(
   const queryResult = () => {
     const { results, selector } = queryFn()
     return {
-      results: (typeof wrapFn === 'function') ? wrapFn(results, customMethods) : results,
+      results:
+        typeof wrapFn === 'function' ? wrapFn(results, customMethods) : results,
       selector
     }
   }
 
-  const { results, selector } = (timeout > 0) ? (await waitForQueryResult(
-    queryResult,
-    { timeout, expectEmpty, element }
-  )) : queryResult()
+  const { results, selector } =
+    timeout > 0
+      ? await waitForQueryResult(queryResult, { timeout, expectEmpty, element })
+      : queryResult()
 
   if (results && results.length > 0) {
     return results
@@ -66,8 +67,7 @@ async function _getQueryResult(
         `[ui-test-queries] No matches found for Element query...`,
         `with selector: "${selector}"`,
         `element: ${elementToString(element, 7000, { highlight: false })}`
-      ]
-        .join('\n')
+      ].join('\n')
     )
   } else {
     return []

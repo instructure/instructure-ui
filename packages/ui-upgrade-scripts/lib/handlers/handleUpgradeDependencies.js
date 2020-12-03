@@ -24,7 +24,14 @@
 
 const upgradePackages = require('../utils/upgrade-packages')
 
-module.exports = ({ sourcePath, version, dependencies, useResolutions, ignoreWorkspaceRootCheck, npmClient }) => {
+module.exports = ({
+  sourcePath,
+  version,
+  dependencies,
+  useResolutions,
+  ignoreWorkspaceRootCheck,
+  npmClient
+}) => {
   upgradePackages({
     path: sourcePath,
     packageList: dependencies,

@@ -37,7 +37,11 @@ const handleErrors = require('../../util/handle-errors')
 const GLYPHS = {}
 
 const toComponentName = function (name, variant = '') {
-  return name ? formatName(config.react.componentBaseName) + formatName(name) + formatName(variant) : null
+  return name
+    ? formatName(config.react.componentBaseName) +
+        formatName(name) +
+        formatName(variant)
+    : null
 }
 
 const createFontTask = function (variant) {
@@ -48,86 +52,102 @@ const createFontTask = function (variant) {
   const deprecated = config.deprecated || {}
   const bidirectional = config.bidirectional || []
 
-  return gulp.src(`${config.fonts.source + variant}/*.svg`)
-    // generate font
-    .pipe(iconfont({
-      svg: true,
-      fontName,
-      formats
-    }))
-    .on('glyphs', (glyphs) => {
-      const options = {
-        glyphs: glyphs.map((glyph) => {
-          const codepoint = glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase()
-          const name = toComponentName(glyph.name)
-          const glyphClassName = `${config.fonts.className}-${glyph.name}`
+  return (
+    gulp
+      .src(`${config.fonts.source + variant}/*.svg`)
+      // generate font
+      .pipe(
+        iconfont({
+          svg: true,
+          fontName,
+          formats
+        })
+      )
+      .on('glyphs', (glyphs) => {
+        const options = {
+          glyphs: glyphs.map((glyph) => {
+            const codepoint = glyph.unicode[0]
+              .charCodeAt(0)
+              .toString(16)
+              .toUpperCase()
+            const name = toComponentName(glyph.name)
+            const glyphClassName = `${config.fonts.className}-${glyph.name}`
 
-          const classes = [variantClassName, glyphClassName]
+            const classes = [variantClassName, glyphClassName]
 
-          GLYPHS[name] = GLYPHS[name] || {}
+            GLYPHS[name] = GLYPHS[name] || {}
 
-          GLYPHS[name][variant] = {
-            glyphName: glyph.name,
-            cssFile: `${fontName}.css`,
-            codepoint,
-            className: glyphClassName,
-            classes: classes,
-            bidirectional: bidirectional.includes(glyph.name),
-            deprecated: !!deprecated[glyph.name]
-          }
+            GLYPHS[name][variant] = {
+              glyphName: glyph.name,
+              cssFile: `${fontName}.css`,
+              codepoint,
+              className: glyphClassName,
+              classes: classes,
+              bidirectional: bidirectional.includes(glyph.name),
+              deprecated: !!deprecated[glyph.name]
+            }
 
-          return GLYPHS[name][variant]
-        }),
-        variant: variant.toLowerCase(),
-        fontName,
-        className: variantClassName
-      }
-      // build css
-      gulp.src(require.resolve('./css.ejs'))
-        .pipe(consolidate('lodash', options))
-        .on('error', handleErrors)
-        .pipe(rename({ basename: fontName, extname: '.css' }))
-        .pipe(gulp.dest(destination))
-      // build sass map with icon names and font unicode characters
-      gulp.src(require.resolve('./scss.ejs'))
-        .pipe(consolidate('lodash', options))
-        .on('error', handleErrors)
-        .pipe(rename({ basename: `${fontName}_icon-map`, extname: '.scss' }))
-        .pipe(gulp.dest(destination))
-    })
-    .on('error', handleErrors)
-    .pipe(gulp.dest(destination))
+            return GLYPHS[name][variant]
+          }),
+          variant: variant.toLowerCase(),
+          fontName,
+          className: variantClassName
+        }
+        // build css
+        gulp
+          .src(require.resolve('./css.ejs'))
+          .pipe(consolidate('lodash', options))
+          .on('error', handleErrors)
+          .pipe(rename({ basename: fontName, extname: '.css' }))
+          .pipe(gulp.dest(destination))
+        // build sass map with icon names and font unicode characters
+        gulp
+          .src(require.resolve('./scss.ejs'))
+          .pipe(consolidate('lodash', options))
+          .on('error', handleErrors)
+          .pipe(rename({ basename: `${fontName}_icon-map`, extname: '.scss' }))
+          .pipe(gulp.dest(destination))
+      })
+      .on('error', handleErrors)
+      .pipe(gulp.dest(destination))
+  )
 }
 
 gulp.task('generate-font-index-files', (cb) => {
-  const glyphs = Object.keys(GLYPHS)
-    .map((glyph) => {
-      return {
-        name: glyph,
-        variants: Object.keys(GLYPHS[glyph])
-          .map((variant) => {
-            const data = Object.assign({ variant }, GLYPHS[glyph][variant])
-            return {
-              name: variant,
-              json: JSON.stringify(data, undefined, 2)
-            }
-          })
-      }
-    })
-  return gulp.src(require.resolve('./index.ejs'))
-    .pipe(consolidate('lodash', { glyphs: glyphs, json: JSON.stringify(GLYPHS, undefined, 2) }))
+  const glyphs = Object.keys(GLYPHS).map((glyph) => {
+    return {
+      name: glyph,
+      variants: Object.keys(GLYPHS[glyph]).map((variant) => {
+        const data = Object.assign({ variant }, GLYPHS[glyph][variant])
+        return {
+          name: variant,
+          json: JSON.stringify(data, undefined, 2)
+        }
+      })
+    }
+  })
+  return gulp
+    .src(require.resolve('./index.ejs'))
+    .pipe(
+      consolidate('lodash', {
+        glyphs: glyphs,
+        json: JSON.stringify(GLYPHS, undefined, 2)
+      })
+    )
     .pipe(rename({ basename: 'index', extname: '.js' }))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.fonts.destination))
 })
 
 gulp.task('generate-font-files', () => {
-  const tasks = readDirectories(config.fonts.source)
-    .map((variant) => {
-      return createFontTask(variant)
-    })
+  const tasks = readDirectories(config.fonts.source).map((variant) => {
+    return createFontTask(variant)
+  })
 
   return merge(...tasks)
 })
 
-gulp.task('generate-fonts', gulp.series('generate-font-files', 'generate-font-index-files'))
+gulp.task(
+  'generate-fonts',
+  gulp.series('generate-font-files', 'generate-font-index-files')
+)

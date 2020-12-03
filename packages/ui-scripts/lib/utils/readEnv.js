@@ -24,7 +24,7 @@
 
 const findUp = require('find-up')
 
-function readEnv () {
+function readEnv() {
   require('dotenv').config({ path: findUp.sync('.env') || process.cwd() })
 }
 exports.readEnv = readEnv

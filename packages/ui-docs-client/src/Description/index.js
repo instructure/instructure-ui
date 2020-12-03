@@ -34,14 +34,10 @@ class Description extends Component {
     title: PropTypes.string.isRequired
   }
 
-  render () {
+  render() {
     const { id, title, content } = this.props
 
-    return (
-      <div id={id}>
-        { compileMarkdown(content, { title }) }
-      </div>
-    )
+    return <div id={id}>{compileMarkdown(content, { title })}</div>
   }
 }
 

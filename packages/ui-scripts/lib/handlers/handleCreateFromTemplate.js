@@ -22,10 +22,14 @@
  * SOFTWARE.
  */
 
-const { handleCreateFromTemplate } = require('@instructure/ui-template-scripts/lib/handlers')
+const {
+  handleCreateFromTemplate
+} = require('@instructure/ui-template-scripts/lib/handlers')
 const { warn } = require('@instructure/command-utils')
 
 module.exports = async (args = {}) => {
-  warn('`handleCreateFromTemplate` has been moved from \'@instructure/ui-scripts/lib/handlers/handleCreateFromTemplate\' to \'@instructure/ui-template-scripts/lib/handlers/handleCreateFromTemplate\'.')
+  warn(
+    "`handleCreateFromTemplate` has been moved from '@instructure/ui-scripts/lib/handlers/handleCreateFromTemplate' to '@instructure/ui-template-scripts/lib/handlers/handleCreateFromTemplate'."
+  )
   handleCreateFromTemplate(args)
 }

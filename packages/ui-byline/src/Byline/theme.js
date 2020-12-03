@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, spacing, typography, breakpoints }) {
+export default function generator({
+  colors,
+  spacing,
+  typography,
+  breakpoints
+}) {
   return {
     fontFamily: typography.fontFamily,
     background: colors.backgroundLightest,

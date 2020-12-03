@@ -49,11 +49,7 @@ describe('controllable', () => {
       'defaultSelected'
     ]
 
-    const propTypeArgs = [
-      props,
-      'selected',
-      'TestComponent'
-    ]
+    const propTypeArgs = [props, 'selected', 'TestComponent']
 
     expect(controllable(...controllableArgs)(...propTypeArgs)).to.not.exist()
     expect(errorSpy).to.not.have.been.called()
@@ -76,11 +72,7 @@ describe('controllable', () => {
       'defaultSelected'
     ]
 
-    const propTypeArgs = [
-      props,
-      'selected',
-      'TestComponent'
-    ]
+    const propTypeArgs = [props, 'selected', 'TestComponent']
 
     expect(controllable(...controllableArgs)(...propTypeArgs)).to.not.exist()
     expect(errorSpy).to.have.been.calledOnce()
@@ -101,13 +93,10 @@ describe('controllable', () => {
       'defaultSelected'
     ]
 
-    const propTypeArgs = [
-      props,
-      'selected',
-      'TestComponent'
-    ]
+    const propTypeArgs = [props, 'selected', 'TestComponent']
 
-    expect(controllable(...controllableArgs)(...propTypeArgs)).to.be.an.instanceOf(Error)
+    expect(
+      controllable(...controllableArgs)(...propTypeArgs)
+    ).to.be.an.instanceOf(Error)
   })
 })
-

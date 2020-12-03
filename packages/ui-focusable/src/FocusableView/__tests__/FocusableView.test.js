@@ -34,9 +34,7 @@ describe('<FocusableView />', async () => {
   })
 
   it('should render', async () => {
-    const subject = await mount(
-      <FocusableView>Focus Me!</FocusableView>
-    )
+    const subject = await mount(<FocusableView>Focus Me!</FocusableView>)
 
     expect(subject.getDOMNode()).to.exist()
   })
@@ -52,18 +50,14 @@ describe('<FocusableView />', async () => {
   })
 
   it('it should receive role button by default if onClick is provided and no role is specified', async () => {
-    await mount(
-      <FocusableView onClick={(e) => {}}>Focus Me!</FocusableView>
-    )
+    await mount(<FocusableView onClick={(e) => {}}>Focus Me!</FocusableView>)
 
     const focusableView = await find('[role="button"]')
     expect(focusableView).to.exist()
   })
 
   it('it should set a tabindex if onClick is provided and no role is specified', async () => {
-    await mount(
-      <FocusableView onClick={(e) => {}}>Focus Me!</FocusableView>
-    )
+    await mount(<FocusableView onClick={(e) => {}}>Focus Me!</FocusableView>)
 
     const focusableView = await find('[tabindex="0"]')
     expect(focusableView).to.exist()
@@ -90,7 +84,7 @@ describe('<FocusableView />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .filter((prop) => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
@@ -100,25 +94,21 @@ describe('<FocusableView />', async () => {
               [prop]: 'foo'
             }
             await mount(<FocusableView {...props}>Focus Me!</FocusableView>)
-            expect(consoleError)
-              .to.be.calledWith(warning)
+            expect(consoleError).to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
             await mount(<FocusableView {...props}>Focus Me!</FocusableView>)
-            expect(consoleError)
-              .to.not.be.called()
+            expect(consoleError).to.not.be.called()
           })
         }
-    })
+      })
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(
-      <FocusableView>Focus Me!</FocusableView>
-    )
+    const subject = await mount(<FocusableView>Focus Me!</FocusableView>)
     const focusableView = within(subject.getDOMNode())
 
     expect(await focusableView.accessible()).to.be.true()

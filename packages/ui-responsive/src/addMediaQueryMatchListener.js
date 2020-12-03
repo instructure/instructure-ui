@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { findDOMNode, matchMedia as defaultMatchMedia } from '@instructure/ui-dom-utils'
+import {
+  findDOMNode,
+  matchMedia as defaultMatchMedia
+} from '@instructure/ui-dom-utils'
 
 import { jsonToMediaQuery } from './jsonToMediaQuery'
 
@@ -77,13 +80,18 @@ import { jsonToMediaQuery } from './jsonToMediaQuery'
  * matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
-function addMediaQueryMatchListener (query, el, cb, matchMedia = defaultMatchMedia) {
+function addMediaQueryMatchListener(
+  query,
+  el,
+  cb,
+  matchMedia = defaultMatchMedia
+) {
   const node = typeof el === 'function' ? el() : el
 
   const updateMediaMatches = (mediaQueryLists) => {
     const matches = Object.keys(mediaQueryLists)
-      .filter(key => mediaQueryLists[key].matches)
-      .map(key => key)
+      .filter((key) => mediaQueryLists[key].matches)
+      .map((key) => key)
 
     cb(matches)
   }
@@ -102,7 +110,7 @@ function addMediaQueryMatchListener (query, el, cb, matchMedia = defaultMatchMed
   updateMediaMatches(mediaQueryLists)
 
   return {
-    remove () {
+    remove() {
       if (mediaQueryLists) {
         Object.keys(mediaQueryLists).forEach((key) => {
           mediaQueryLists[key].removeListener(listenerCallback)

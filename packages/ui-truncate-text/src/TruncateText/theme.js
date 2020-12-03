@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ typography }) {
+export default function generator({ typography }) {
   return {
     fontFamily: typography.fontFamily,
     lineHeight: typography.lineHeight

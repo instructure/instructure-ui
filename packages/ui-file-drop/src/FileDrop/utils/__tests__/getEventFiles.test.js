@@ -31,10 +31,12 @@ describe('getEventFiles', () => {
       dropEffect: 'none',
       effectAllowed: 'all',
       files: [],
-      items: [{
-        kind: 'file',
-        type: 'image/jpeg'
-      }],
+      items: [
+        {
+          kind: 'file',
+          type: 'image/jpeg'
+        }
+      ],
       types: ['Files']
     }
   }
@@ -44,10 +46,12 @@ describe('getEventFiles', () => {
       dropEffect: 'move',
       effectAllowed: 'uninitialized',
       files: [],
-      items: [{
-        kind: 'file',
-        type: 'application/x-moz-file'
-      }],
+      items: [
+        {
+          kind: 'file',
+          type: 'application/x-moz-file'
+        }
+      ],
       types: ['application/x-moz-file', 'Files']
     }
   }
@@ -62,15 +66,18 @@ describe('getEventFiles', () => {
   }
 
   it('should return items on chrome dragenter event', () => {
-    expect(getEventFiles(chromeDragEnter)).to.be.equal(chromeDragEnter.dataTransfer.items)
+    expect(getEventFiles(chromeDragEnter)).to.be.equal(
+      chromeDragEnter.dataTransfer.items
+    )
   })
 
   it('should return items on a firefox dragenter event', () => {
-    expect(getEventFiles(firefoxDragEnter)).to.be.equal(firefoxDragEnter.dataTransfer.items)
+    expect(getEventFiles(firefoxDragEnter)).to.be.equal(
+      firefoxDragEnter.dataTransfer.items
+    )
   })
 
   it('should return empty array on a safari dragenter event', () => {
     expect(getEventFiles(safariDragEnter).length).to.be.equal(0)
   })
 })
-

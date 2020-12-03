@@ -21,14 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- module.exports = {
-   presets: [[
-     require('@instructure/ui-babel-preset'),
-     {
-      coverage: Boolean(process.env.COVERAGE),
-      esModules: Boolean(process.env.ES_MODULES),
-      removeConsole: process.env.NODE_ENV === 'production',
-      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
-     }
-   ]]
- }
+module.exports = {
+  presets: [
+    [
+      require('@instructure/ui-babel-preset'),
+      {
+        coverage: Boolean(process.env.COVERAGE),
+        esModules: Boolean(process.env.ES_MODULES),
+        removeConsole: process.env.NODE_ENV === 'production',
+        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
+      }
+    ]
+  ]
+}

@@ -45,37 +45,43 @@ class FocusableView extends Component {
   static propTypes = {
     children: PropTypes.node,
     /**
-    * boolean value indicating focus. When true, the focus ring is visible
-    */
+     * boolean value indicating focus. When true, the focus ring is visible
+     */
     focused: PropTypes.bool,
     /**
-    * Shape of the focus ring
-    */
-    shape: PropTypes.oneOf(["circular", "rectangular"]),
+     * Shape of the focus ring
+     */
+    shape: PropTypes.oneOf(['circular', 'rectangular']),
     /**
-    * Color of the focus ring
-    */
+     * Color of the focus ring
+     */
     color: PropTypes.oneOf(['primary', 'error', 'inverse']),
     /**
-    * provides a reference to the underlying element
-    */
+     * provides a reference to the underlying element
+     */
     elementRef: PropTypes.func,
     /**
-    * the element type to render as (will be `<a>` if href is provided)
-    */
+     * the element type to render as (will be `<a>` if href is provided)
+     */
     as: PropTypes.elementType,
     /**
-    * If `href` is provided, the `<FocusableView />` will render as a link
-    */
+     * If `href` is provided, the `<FocusableView />` will render as a link
+     */
     href: PropTypes.string,
     /**
-    * By default the display prop is 'auto', meaning it takes on the
-    * display rules of the html element it's rendered as (see `as` prop).
-    */
-    display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex']),
+     * By default the display prop is 'auto', meaning it takes on the
+     * display rules of the html element it's rendered as (see `as` prop).
+     */
+    display: PropTypes.oneOf([
+      'auto',
+      'block',
+      'inline-block',
+      'flex',
+      'inline-flex'
+    ]),
     /**
-    * Set the margin using familiar CSS shorthand
-    */
+     * Set the margin using familiar CSS shorthand
+     */
     margin: ThemeablePropTypes.spacing,
     /**
      * Specify a mouse cursor to use when hovering over the `<View />`
@@ -107,7 +113,7 @@ class FocusableView extends Component {
     tabIndex: null
   }
 
-  get focusColor () {
+  get focusColor() {
     const color = this.props.color
 
     if (color === 'error') {
@@ -119,7 +125,7 @@ class FocusableView extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       as,
       children,
@@ -133,7 +139,7 @@ class FocusableView extends Component {
       role,
       shape,
       className, // eslint-disable-line react/prop-types
-      to,  // eslint-disable-line react/prop-types
+      to, // eslint-disable-line react/prop-types
       width,
       tabIndex,
       ...props
@@ -163,7 +169,7 @@ class FocusableView extends Component {
           [className]: className
         })}
         role={role || onClick ? role : null}
-        tabIndex={onClick && !role ? (tabIndex || '0') : tabIndex}
+        tabIndex={onClick && !role ? tabIndex || '0' : tabIndex}
         onClick={onClick}
         borderRadius={shape === 'circular' ? 'circle' : 'medium'}
       >

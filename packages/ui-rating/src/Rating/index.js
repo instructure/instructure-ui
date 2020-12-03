@@ -47,38 +47,38 @@ category: components
 class Rating extends Component {
   static propTypes = {
     /**
-    * A label is required for accessibility
-    */
+     * A label is required for accessibility
+     */
     label: PropTypes.string.isRequired,
     /**
-    * A function that returns the current value formatted for screen readers
-    */
+     * A function that returns the current value formatted for screen readers
+     */
     formatValueText: PropTypes.func,
     /**
-    * Choose from a 0-3 or 0-5 rating system
-    */
+     * Choose from a 0-3 or 0-5 rating system
+     */
     iconCount: PropTypes.oneOf([3, 5]),
     /**
-    * Choose from different rating icon sizes
-    */
+     * Choose from different rating icon sizes
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * The maximum rating (defaults to iconCount)
-    */
+     * The maximum rating (defaults to iconCount)
+     */
     valueMax: PropTypes.number,
     /**
-    * The current rating
-    */
+     * The current rating
+     */
     valueNow: PropTypes.number,
     /**
-    * Set to make the icons animate when they become filled
-    */
+     * Set to make the icons animate when they become filled
+     */
     animateFill: PropTypes.bool,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing
   }
 
@@ -93,14 +93,10 @@ class Rating extends Component {
   }
 
   get filled() {
-    const {
-      valueNow,
-      iconCount,
-      valueMax
-    } = this.props
+    const { valueNow, iconCount, valueMax } = this.props
 
     // prevent divide by zero errors
-    const max = (valueMax > 0) ? valueMax : iconCount
+    const max = valueMax > 0 ? valueMax : iconCount
 
     const filledIcons = Math.round((valueNow * iconCount) / max)
 
@@ -145,25 +141,18 @@ class Rating extends Component {
         display="inline-block"
       >
         <ScreenReaderContent>{valueText}</ScreenReaderContent>
-        {
-          [...Array(this.filled)].map((x, i) => (
-            <RatingIcon
-              key={i + 1}
-              filled
-              animateFill={animateFill}
-              animationDelay={(animateFill) ? (i + 1) * 200 : null}
-              size={size}
-            />
-          ))
-        }
-        {
-          [...Array(this.empty)].map((x, i) => (
-            <RatingIcon
-              key={i + 1}
-              size={size}
-            />
-          ))
-        }
+        {[...Array(this.filled)].map((x, i) => (
+          <RatingIcon
+            key={i + 1}
+            filled
+            animateFill={animateFill}
+            animationDelay={animateFill ? (i + 1) * 200 : null}
+            size={size}
+          />
+        ))}
+        {[...Array(this.empty)].map((x, i) => (
+          <RatingIcon key={i + 1} size={size} />
+        ))}
       </View>
     )
   }

@@ -53,14 +53,12 @@ export default {
   getComponentProps: (props) => {
     const targetSize = '3px'
     const contentSize = '48px'
-    const xStretch = props.placement == 'top stretch' || props.placement === 'bottom stretch'
-    const yStretch = props.placement == 'end stretch' || props.placement === 'start stretch'
+    const xStretch =
+      props.placement == 'top stretch' || props.placement === 'bottom stretch'
+    const yStretch =
+      props.placement == 'end stretch' || props.placement === 'start stretch'
 
-    const text = (
-      <span style={{fontSize: '12px'}}>
-        {props.placement}
-      </span>
-    )
+    const text = <span style={{ fontSize: '12px' }}>{props.placement}</span>
 
     return {
       constrain: 'none',
@@ -69,53 +67,57 @@ export default {
       shouldPositionOverTarget: xStretch || yStretch,
       offsetX: yStretch ? -parseInt(targetSize) : 0,
       offsetY: xStretch ? -parseInt(targetSize) : 0,
-      renderTarget: xStretch || yStretch ? (
-        <div
-          style={{
-            width: xStretch ? '100%' : targetSize,
-            height: xStretch ? targetSize : '100%',
-            background: '#2d3b45'
-          }}
-        />
-      ) : (
-        <div
-          style={{
-            width: targetSize,
-            height: targetSize,
-            background: '#2d3b45'
-          }}
-        />
-      ),
-      children: xStretch || yStretch ? (
-        <div
-          style={{
-            width: xStretch ? null : contentSize,
-            height: xStretch ? contentSize : null,
-            border: '0.0625rem solid #ccc',
-            textAlign: 'center',
-            background: '#eee'
-          }}
-        >
-          {text}
-        </div>
-      ) : (
-        <div
-          style={{
-            width: contentSize,
-            height: contentSize,
-            border: '0.0625rem solid #ccc',
-            textAlign: 'center',
-            background: '#eee'
-          }}
-        >
-          {text}
-        </div>
-      )
+      renderTarget:
+        xStretch || yStretch ? (
+          <div
+            style={{
+              width: xStretch ? '100%' : targetSize,
+              height: xStretch ? targetSize : '100%',
+              background: '#2d3b45'
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              width: targetSize,
+              height: targetSize,
+              background: '#2d3b45'
+            }}
+          />
+        ),
+      children:
+        xStretch || yStretch ? (
+          <div
+            style={{
+              width: xStretch ? null : contentSize,
+              height: xStretch ? contentSize : null,
+              border: '0.0625rem solid #ccc',
+              textAlign: 'center',
+              background: '#eee'
+            }}
+          >
+            {text}
+          </div>
+        ) : (
+          <div
+            style={{
+              width: contentSize,
+              height: contentSize,
+              border: '0.0625rem solid #ccc',
+              textAlign: 'center',
+              background: '#eee'
+            }}
+          >
+            {text}
+          </div>
+        )
     }
   },
   getExampleProps: (props) => {
-    const xStretch = props.placement == 'top stretch' || props.placement === 'bottom stretch'
-    const yStretch = props.placement == 'end stretch' || props.placement === 'start stretch'
+    const xStretch =
+      props.placement == 'top stretch' || props.placement === 'bottom stretch'
+    const yStretch =
+      props.placement == 'end stretch' || props.placement === 'start stretch'
     const paddingRegular = 'x-large'
     const paddingXStretch = 'x-large none'
     const paddingYStretch = 'none x-large'
@@ -125,7 +127,11 @@ export default {
       height: '99px',
       margin: 'small',
       textAlign: 'center',
-      padding: yStretch ? paddingYStretch : xStretch ? paddingXStretch : paddingRegular,
+      padding: yStretch
+        ? paddingYStretch
+        : xStretch
+        ? paddingXStretch
+        : paddingRegular,
       withVisualDebug: true
     }
   }

@@ -39,12 +39,8 @@ import { cloneArray } from '@instructure/ui-utils'
  * @param {string} options.ellipsis The string being used as an ellipsis.
  * @param {boolean} repeat=false Do a thorough clean.
  */
-function cleanData (stringData, options, repeat = false) {
-  const {
-    truncate,
-    ignore,
-    ellipsis
-  } = options
+function cleanData(stringData, options, repeat = false) {
+  const { truncate, ignore, ellipsis } = options
 
   let newData = cloneArray(stringData)
   let ellipsisNode = -1
@@ -165,7 +161,6 @@ function cleanData (stringData, options, repeat = false) {
             newData[prevNodeIndex][lastItem] = prevNode[lastItem].slice(0, -1)
           }
         }
-
       }
     }
   }

@@ -45,30 +45,36 @@ module.exports = async ({ template, path, name, values } = {}) => {
 
     // Verify if there are any workspace paths available. If there aren't, we just go with cwd.
     if (workspacePaths.length > 0) {
-      info('The following paths were detected in the current workspace using the "workspaces" entry in your root package.json.')
+      info(
+        'The following paths were detected in the current workspace using the "workspaces" entry in your root package.json.'
+      )
 
       const alternative = 'Other (manually enter an alternative location)'
 
-      inputPath = (await yargsInteractive()
-        .interactive({
+      inputPath = (
+        await yargsInteractive().interactive({
           interactive: { default: true },
           path: {
             type: 'list',
             describe: 'Choose a location for this package:',
             choices: [...workspacePaths, alternative]
           }
-        })).path
+        })
+      ).path
 
       if (inputPath === alternative) {
-        error('Note: you may need to modify the "workspaces" entry in your package.json to detect this package.')
-        inputPath = (await yargsInteractive()
-          .interactive({
+        error(
+          'Note: you may need to modify the "workspaces" entry in your package.json to detect this package.'
+        )
+        inputPath = (
+          await yargsInteractive().interactive({
             interactive: { default: true },
             path: {
               type: 'input',
               describe: 'Enter a location for this package:'
             }
-          })).path
+          })
+        ).path
       }
     }
   }
@@ -81,6 +87,5 @@ module.exports = async ({ template, path, name, values } = {}) => {
   })
 }
 
-const generateValues = ({ values, name, version }) => typeof values === 'function'
-  ? values({ name, version })
-  : values
+const generateValues = ({ values, name, version }) =>
+  typeof values === 'function' ? values({ name, version }) : values

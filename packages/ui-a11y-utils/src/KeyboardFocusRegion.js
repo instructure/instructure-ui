@@ -41,7 +41,7 @@ import keycode from 'keycode'
 import { scopeTab } from './scopeTab'
 
 class KeyboardFocusRegion {
-  constructor (element, options) {
+  constructor(element, options) {
     this._contextElement = findDOMNode(element)
     this._options = options || {
       shouldContainFocus: true,
@@ -63,53 +63,56 @@ class KeyboardFocusRegion {
   _raf = []
   _active = false
 
-  get focused () {
+  get focused() {
     return containsActiveElement(this._contextElement)
   }
 
-  get shouldContainFocus () {
+  get shouldContainFocus() {
     const { shouldContainFocus } = this._options
-    return (shouldContainFocus === true ||
-      (Array.isArray(shouldContainFocus) && shouldContainFocus.includes['keyboard']))
+    return (
+      shouldContainFocus === true ||
+      (Array.isArray(shouldContainFocus) &&
+        shouldContainFocus.includes['keyboard'])
+    )
   }
 
-  get focusable () {
+  get focusable() {
     return findFocusable(this._contextElement, () => true, true) || []
   }
 
-  get tabbable () {
+  get tabbable() {
     return findTabbable(this._contextElement) || []
   }
 
-  get firstTabbable () {
+  get firstTabbable() {
     return this.tabbable[0]
   }
 
-  get lastTabbable () {
+  get lastTabbable() {
     return this.tabbable.pop()
   }
 
-  get firstFocusable () {
+  get firstFocusable() {
     return this.focusable[0]
   }
 
-  get lastFocusable () {
+  get lastFocusable() {
     return this.focusable.pop()
   }
 
-  get doc () {
+  get doc() {
     return ownerDocument(this._contextElement)
   }
 
-  get win () {
+  get win() {
     return ownerWindow(this._contextElement)
   }
 
-  get activeElement () {
+  get activeElement() {
     return getActiveElement(this.doc)
   }
 
-  get defaultFocusElement () {
+  get defaultFocusElement() {
     const { defaultFocusElement } = this._options
 
     let element = findDOMNode(
@@ -118,7 +121,11 @@ class KeyboardFocusRegion {
         : defaultFocusElement
     )
 
-    if (element && this._contextElement && this._contextElement.contains(element)) {
+    if (
+      element &&
+      this._contextElement &&
+      this._contextElement.contains(element)
+    ) {
       return element
     }
 
@@ -134,11 +141,11 @@ class KeyboardFocusRegion {
     return null
   }
 
-  updateElement (element) {
+  updateElement(element) {
     this._contextElement = findDOMNode(element)
   }
 
-  focusDefaultElement () {
+  focusDefaultElement() {
     const { defaultFocusElement, shouldContainFocus } = this
 
     if (defaultFocusElement) {
@@ -148,7 +155,8 @@ class KeyboardFocusRegion {
         // Blur the active element to place focus on the document body
         this.activeElement.blur()
 
-        error(true,
+        error(
+          true,
           `
           [KeyboardFocusRegion] No \`defaultFocusElement\` was provided and \`shouldContainFocus\`
           was set to \`true\`. Focus has been moved to the document body instead.
@@ -158,7 +166,7 @@ class KeyboardFocusRegion {
     }
   }
 
-  focus () {
+  focus() {
     if (this.focused) {
       return
     }
@@ -170,7 +178,7 @@ class KeyboardFocusRegion {
     )
   }
 
-  blur () {
+  blur() {
     if (this._options.shouldReturnFocus && this._focusLaterElement) {
       try {
         this._focusLaterElement.focus()
@@ -191,17 +199,17 @@ class KeyboardFocusRegion {
     this._options.onDismiss(event)
   }
 
-  handleKeyDown = event => {
+  handleKeyDown = (event) => {
     if (event.keyCode === keycode.codes.tab) {
       scopeTab(this._contextElement, event)
     }
   }
 
-  handleClick = event => {
+  handleClick = (event) => {
     this._wasDocumentClick = true
   }
 
-  handleWindowBlur = event => {
+  handleWindowBlur = (event) => {
     if (this._wasDocumentClick) {
       this._wasDocumentClick = false
       return
@@ -209,7 +217,7 @@ class KeyboardFocusRegion {
     this._needToFocus = true
   }
 
-  handleFocus = event => {
+  handleFocus = (event) => {
     if (this._needToFocus) {
       this._needToFocus = false
 
@@ -233,48 +241,68 @@ class KeyboardFocusRegion {
     }
   }
 
-  handleFirstTabbableKeyDown = event => {
+  handleFirstTabbableKeyDown = (event) => {
     if (event.keyCode === keycode.codes.tab && event.shiftKey) {
       this._options.onBlur(event)
     }
   }
 
-  handleLastTabbableKeyDown = event => {
+  handleLastTabbableKeyDown = (event) => {
     if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
       this._options.onBlur(event)
     }
   }
 
-  activate () {
+  activate() {
     const { defaultFocusElement, shouldContainFocus } = this
 
     if (!this._active) {
       if (defaultFocusElement || shouldContainFocus) {
         if (shouldContainFocus) {
-          this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
+          this._listeners.push(
+            addEventListener(this.doc, 'keydown', this.handleKeyDown)
+          )
         } else {
-          this._listeners.push(addEventListener(this.firstTabbable || defaultFocusElement, 'keydown', this.handleFirstTabbableKeyDown))
-          this._listeners.push(addEventListener(this.lastTabbable || defaultFocusElement, 'keydown', this.handleLastTabbableKeyDown))
+          this._listeners.push(
+            addEventListener(
+              this.firstTabbable || defaultFocusElement,
+              'keydown',
+              this.handleFirstTabbableKeyDown
+            )
+          )
+          this._listeners.push(
+            addEventListener(
+              this.lastTabbable || defaultFocusElement,
+              'keydown',
+              this.handleLastTabbableKeyDown
+            )
+          )
         }
 
-        this._listeners.push(addEventListener(this.doc, 'click', this.handleClick, true))
+        this._listeners.push(
+          addEventListener(this.doc, 'click', this.handleClick, true)
+        )
 
-        this._listeners.push(addEventListener(this.win, 'blur', this.handleWindowBlur, false))
-        this._listeners.push(addEventListener(this.doc, 'focus', this.handleFocus, true))
+        this._listeners.push(
+          addEventListener(this.win, 'blur', this.handleWindowBlur, false)
+        )
+        this._listeners.push(
+          addEventListener(this.doc, 'focus', this.handleFocus, true)
+        )
 
         this._active = true
       }
     }
   }
 
-  deactivate () {
+  deactivate() {
     if (this._active) {
-      this._listeners.forEach(listener => {
+      this._listeners.forEach((listener) => {
         listener.remove()
       })
       this._listeners = []
 
-      this._raf.forEach(request => request.cancel())
+      this._raf.forEach((request) => request.cancel())
       this._raf = []
 
       this._preventCloseOnDocumentClick = false

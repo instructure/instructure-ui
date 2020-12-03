@@ -29,14 +29,22 @@ import { Panel } from '../index'
 
 describe('<Tabs.Panel />', async () => {
   it('should render children', async () => {
-    await mount(<Panel isSelected renderTitle="Panel Title">Panel contents</Panel>)
+    await mount(
+      <Panel isSelected renderTitle="Panel Title">
+        Panel contents
+      </Panel>
+    )
 
     const tabPanel = await find('[role="tabpanel"]')
     expect(tabPanel.getTextContent()).to.equal('Panel contents')
   })
 
   it('should have appropriate role attribute', async () => {
-    await mount(<Panel isSelected renderTitle="Panel Title">Panel contents</Panel>)
+    await mount(
+      <Panel isSelected renderTitle="Panel Title">
+        Panel contents
+      </Panel>
+    )
 
     const tabPanel = await find('[role="tabpanel"]')
     expect(tabPanel.getAttribute('role')).to.equal('tabpanel')

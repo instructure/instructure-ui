@@ -47,7 +47,7 @@ export default {
           </View>
         </DrawerLayout.Tray>,
         <DrawerLayout.Content key="1" label="Drawer content example">
-          <div style={{background: 'white', height: '100%'}}>
+          <div style={{ background: 'white', height: '100%' }}>
             <View as="div" padding="x-large">
               Drawer content
             </View>
@@ -56,7 +56,7 @@ export default {
       ]
     }
   },
-  getExampleProps: (props) =>  {
+  getExampleProps: (props) => {
     return {
       as: 'div',
       borderWidth: 'small'

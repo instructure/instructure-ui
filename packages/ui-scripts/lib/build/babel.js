@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
+const {
+  runCommandsConcurrently,
+  getCommand
+} = require('@instructure/command-utils')
 
 const {
   BABEL_ENV,
@@ -37,7 +40,7 @@ const args = process.argv.slice(2)
 
 // positional: ui-build src --watch
 const firstArg = args[0]
-const src = (firstArg && firstArg.indexOf('--') < 0) ? firstArg : 'src'
+const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : 'src'
 
 let babelArgs = []
 
@@ -45,24 +48,35 @@ if (args.includes('--copy-files')) {
   babelArgs.push('--copy-files')
 }
 
-babelArgs = babelArgs.concat([src, '--ignore "src/**/*.test.js","src/**/__tests__/**"'])
+babelArgs = babelArgs.concat([
+  src,
+  '--ignore "src/**/*.test.js","src/**/__tests__/**"'
+])
 
-let envVars = [(OMIT_INSTUI_DEPRECATION_WARNINGS ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1` : false)]
+let envVars = [
+  OMIT_INSTUI_DEPRECATION_WARNINGS
+    ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
+    : false
+]
 
 if (args.includes('--watch')) {
-  envVars = envVars.concat([
-    'NODE_ENV=development',
-    'UNMANGLED_CLASS_NAMES=1',
-    'DISABLE_SPEEDY_STYLESHEET=1'
-  ]).filter(Boolean)
+  envVars = envVars
+    .concat([
+      'NODE_ENV=development',
+      'UNMANGLED_CLASS_NAMES=1',
+      'DISABLE_SPEEDY_STYLESHEET=1'
+    ])
+    .filter(Boolean)
   babelArgs.push('--watch')
 } else {
-  envVars = envVars.concat([
-    `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
-    (DEBUG ? `DEBUG=1` : false),
-    (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
-    (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false)
-  ]).filter(Boolean)
+  envVars = envVars
+    .concat([
+      `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
+      DEBUG ? `DEBUG=1` : false,
+      UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
+      DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false
+    ])
+    .filter(Boolean)
 }
 
 let modules = ['es']
@@ -77,16 +91,27 @@ if (args.includes('--modules')) {
 
   modules = arg.split(',')
 
-  if (modules.some(mod => !['es', 'cjs'].includes(mod))) {
+  if (modules.some((mod) => !['es', 'cjs'].includes(mod))) {
     throw new Error(`Invalid --modules argument: '${arg}'`)
   }
 }
 
 const commands = {
-  es: getCommand('babel', [...babelArgs, '--out-dir', 'es'], [...envVars, 'ES_MODULES=1']),
-  cjs: getCommand('babel', [...babelArgs, '--out-dir', 'lib'], [...envVars, 'TRANSFORM_IMPORTS=1'])
+  es: getCommand(
+    'babel',
+    [...babelArgs, '--out-dir', 'es'],
+    [...envVars, 'ES_MODULES=1']
+  ),
+  cjs: getCommand(
+    'babel',
+    [...babelArgs, '--out-dir', 'lib'],
+    [...envVars, 'TRANSFORM_IMPORTS=1']
+  )
 }
 
-const commandsToRun = modules.reduce((obj, key) => ({ ...obj, [key]: commands[key] }), {})
+const commandsToRun = modules.reduce(
+  (obj, key) => ({ ...obj, [key]: commands[key] }),
+  {}
+)
 
 process.exit(runCommandsConcurrently(commandsToRun).status)

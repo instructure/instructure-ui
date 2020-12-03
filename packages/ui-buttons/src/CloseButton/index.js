@@ -30,7 +30,11 @@ import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { getInteraction, passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import {
+  getInteraction,
+  passthroughProps,
+  deprecated
+} from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 
 import { BaseButton } from '../BaseButton'
@@ -53,77 +57,77 @@ category: components
 class CloseButton extends Component {
   static propTypes = {
     /**
-    * An accessible label for the `CloseButton` (required)
-    */
+     * An accessible label for the `CloseButton` (required)
+     */
     screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]), // CloseButton could previously accept node children, loosening this type for backwards compatibility
     /**
-    * Specifies the color for the `CloseButton`.
-    */
+     * Specifies the color for the `CloseButton`.
+     */
     color: PropTypes.oneOf(['primary', 'primary-inverse']),
     /**
-    * Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly.
-    */
+     * Specifies if interaction with the `CloseButton` is enabled, disabled, or readonly.
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
-    * Provides a reference to the `CloseButton`'s underlying html element.
-    */
+     * Provides a reference to the `CloseButton`'s underlying html element.
+     */
     elementRef: PropTypes.func,
     /**
-    * The size of the `CloseButton`
-    */
+     * The size of the `CloseButton`
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Callback fired when the `CloseButton` is clicked.
-    */
+     * Callback fired when the `CloseButton` is clicked.
+     */
     onClick: PropTypes.func,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Specifies the placement of the `CloseButton`
-    */
+     * Specifies the placement of the `CloseButton`
+     */
     placement: PropTypes.oneOf(['start', 'end', 'static']),
     /**
-    * Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container.
-    * Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The
-    * offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting
-    * the `position` of the parent container to `relative`.
-    */
+     * Specifies the offset distance for the `CloseButton` with respect to both the top and start/end of the container.
+     * Note that for this property to have an effect, the `placement` prop must be set to either `start` or `end`. The
+     * offset will also be created with respect to a positioned parent. If it does not appear to be working, try setting
+     * the `position` of the parent container to `relative`.
+     */
     offset: PropTypes.oneOf(['none', 'x-small', 'small', 'medium']),
     /**
-    * Specifies the type of the `Button`'s underlying html element.
-    */
+     * Specifies the type of the `Button`'s underlying html element.
+     */
     type: PropTypes.oneOf(['button', 'submit', 'reset']),
     /**
-    * The element to render as the component root, `CloseButton` by default.
-    */
+     * The element to render as the component root, `CloseButton` by default.
+     */
     as: PropTypes.elementType,
     /**
-    * Specifies an href attribute for the `CloseButton`'s underlying html element.
-    */
+     * Specifies an href attribute for the `CloseButton`'s underlying html element.
+     */
     href: PropTypes.string,
     /**
      * Specify a mouse cursor to use when hovering over the `CloseButton`.
      */
     cursor: PropTypes.string,
     /**
-    * Specifies the tabindex of the `CloseButton`.
-    */
+     * Specifies the tabindex of the `CloseButton`.
+     */
     tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     /**
-    * __Deprecated - use `screenReaderLabel` instead__
-    */
+     * __Deprecated - use `screenReaderLabel` instead__
+     */
     children: PropTypes.node,
     /**
-    * __Deprecated - use `elementRef` instead__
-    */
+     * __Deprecated - use `elementRef` instead__
+     */
     buttonRef: PropTypes.func,
     /**
-    * __Deprecated - use `color` instead__
-    */
+     * __Deprecated - use `color` instead__
+     */
     variant: PropTypes.oneOf(['icon', 'icon-inverse'])
   }
 
@@ -150,33 +154,34 @@ class CloseButton extends Component {
     tabIndex: undefined
   }
 
-  componentDidMount () {
+  componentDidMount() {
     error(
       this.props.screenReaderLabel || this.props.children,
       `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
     )
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     error(
       this.props.screenReaderLabel || this.props.children,
       `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
     )
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
-  get color () {
+  get color() {
     const { color, variant } = this.props
 
-    if (variant === 'icon-inverse' || color === 'primary-inverse') return 'primary-inverse'
+    if (variant === 'icon-inverse' || color === 'primary-inverse')
+      return 'primary-inverse'
 
     return 'secondary'
   }
 
-  render () {
+  render() {
     const {
       children,
       screenReaderLabel,

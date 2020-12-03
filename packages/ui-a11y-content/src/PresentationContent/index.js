@@ -36,8 +36,8 @@ category: components/utilities
 class PresentationContent extends Component {
   static propTypes = {
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType,
     children: PropTypes.node
   }
@@ -47,12 +47,12 @@ class PresentationContent extends Component {
     children: null
   }
 
-  render () {
+  render() {
     const { children, ...props } = this.props
     const ElementType = getElementType(PresentationContent, this.props)
 
     return (
-      <ElementType {...passthroughProps(props)} aria-hidden='true'>
+      <ElementType {...passthroughProps(props)} aria-hidden="true">
         {children}
       </ElementType>
     )

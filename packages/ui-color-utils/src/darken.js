@@ -33,7 +33,7 @@ import Color from 'tinycolor2'
  * @param {Number} percent
  * @returns {String} color as rgb string
  */
-function darken (color, percent) {
+function darken(color, percent) {
   return Color(color).darken(percent).toRgbString()
 }
 

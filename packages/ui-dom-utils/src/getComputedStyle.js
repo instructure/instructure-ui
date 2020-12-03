@@ -37,7 +37,7 @@ import { canUseDOM } from './canUseDOM'
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Object} object containing css properties and values for the element
  */
-function getComputedStyle (el) {
+function getComputedStyle(el) {
   let style = {}
 
   if (canUseDOM) {

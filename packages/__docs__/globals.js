@@ -62,23 +62,23 @@ const globals = {
   DateTime,
   iconExample,
   lorem: {
-    sentence () {
-     return lorem({
-       count: 1,
-       units: 'sentences'
-     })
-   },
-   paragraph () {
-     return lorem({
-       count: 1,
-       units: 'paragraphs'
-     })
-   },
-    paragraphs (count) {
-     return lorem({
-       count: count || Math.floor(Math.random() * 10),
-       units: 'paragraphs'
-     })
+    sentence() {
+      return lorem({
+        count: 1,
+        units: 'sentences'
+      })
+    },
+    paragraph() {
+      return lorem({
+        count: 1,
+        units: 'paragraphs'
+      })
+    },
+    paragraphs(count) {
+      return lorem({
+        count: count || Math.floor(Math.random() * 10),
+        units: 'paragraphs'
+      })
     }
   },
   mirrorHorizontalPlacement,

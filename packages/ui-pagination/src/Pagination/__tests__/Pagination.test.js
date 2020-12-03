@@ -43,18 +43,17 @@ const buildPages = (count = 4, current = 0) => {
 
 describe('<Pagination />', async () => {
   it('should render all pages buttons', async () => {
-    await mount(
-      <Pagination variant="compact">
-        { buildPages(5) }
-      </Pagination>
-    )
+    await mount(<Pagination variant="compact">{buildPages(5)}</Pagination>)
 
     const pagination = await PaginationLocator.find()
     const buttons = await pagination.findAllPageButtons()
 
     expect(buttons.length).to.equal(5)
 
-    const buttonsText = buttons.reduce((acc, button) => acc + button.getTextContent(), '')
+    const buttonsText = buttons.reduce(
+      (acc, button) => acc + button.getTextContent(),
+      ''
+    )
 
     expect(buttonsText).to.equal('#0#1#2#3#4')
   })
@@ -67,13 +66,17 @@ describe('<Pagination />', async () => {
         labelNext="Next"
         labelPrev="Prev"
       >
-        { buildPages(5) }
+        {buildPages(5)}
       </Pagination>
     )
 
     const pagination = await PaginationLocator.find(':label(Example)')
-    const nextButton = await pagination.findArrowButton(':label(Next)', { expectEmpty: true })
-    const prevButton = await pagination.findArrowButton(':label(Prev)', { expectEmpty: true })
+    const nextButton = await pagination.findArrowButton(':label(Next)', {
+      expectEmpty: true
+    })
+    const prevButton = await pagination.findArrowButton(':label(Prev)', {
+      expectEmpty: true
+    })
 
     expect(nextButton).to.not.exist()
     expect(prevButton).to.not.exist()
@@ -82,7 +85,7 @@ describe('<Pagination />', async () => {
   it('should meet a11y standards', async () => {
     await mount(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-        { buildPages(5) }
+        {buildPages(5)}
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
@@ -91,12 +94,8 @@ describe('<Pagination />', async () => {
 
   it('should render no additional space when label text is hidden', async () => {
     const pagination = await mount(
-      <Pagination
-        variant="compact"
-        labelNext="Next"
-        labelPrev="Prev"
-      >
-        { buildPages(5) }
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        {buildPages(5)}
       </Pagination>
     )
 
@@ -116,7 +115,7 @@ describe('<Pagination />', async () => {
   it('should render page buttons', async () => {
     await mount(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-        { buildPages(5) }
+        {buildPages(5)}
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
@@ -131,7 +130,7 @@ describe('<Pagination />', async () => {
   it('should render a single page button', async () => {
     await mount(
       <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-        { buildPages(1) }
+        {buildPages(1)}
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
@@ -152,12 +151,8 @@ describe('<Pagination />', async () => {
 
   it('should truncate pages to context', async () => {
     await mount(
-      <Pagination
-        variant="compact"
-        labelNext="Next"
-        labelPrev="Prev"
-      >
-        { buildPages(9, 3) }
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        {buildPages(9, 3)}
       </Pagination>
     )
 
@@ -174,12 +169,8 @@ describe('<Pagination />', async () => {
 
   it('should truncate start', async () => {
     await mount(
-      <Pagination
-        variant="compact"
-        labelNext="Next"
-        labelPrev="Prev"
-      >
-        { buildPages(9, 8) }
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        {buildPages(9, 8)}
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
@@ -196,12 +187,8 @@ describe('<Pagination />', async () => {
 
   it('should truncate end', async () => {
     await mount(
-      <Pagination
-        variant="compact"
-        labelNext="Next"
-        labelPrev="Prev"
-      >
-        { buildPages(6) }
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        {buildPages(6)}
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
@@ -218,21 +205,16 @@ describe('<Pagination />', async () => {
 
   it('should omit ellipses when bounds included in context', async () => {
     await mount(
-      <Pagination
-        variant="compact"
-        labelNext="Next"
-        labelPrev="Prev"
-      >
-        { buildPages(7, 2) }
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        {buildPages(7, 2)}
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
     const allButtons = await pagination.findAll('button')
     const paginationButtons = await pagination.findAllPageButtons()
-    const ellipses = await pagination.findAll(
-      '[aria-hidden]:contains(…)',
-      { expectEmpty: true }
-    )
+    const ellipses = await pagination.findAll('[aria-hidden]:contains(…)', {
+      expectEmpty: true
+    })
 
     expect(allButtons.length).to.equal(9)
     expect(paginationButtons.length).to.equal(7)
@@ -246,17 +228,15 @@ describe('<Pagination />', async () => {
   describe('when updating with the FIRST page becoming current', () => {
     it('should move focus from the Previous Page button to the first page button', async () => {
       const subject = await mount(
-        <Pagination
-          variant="compact"
-          labelNext="Next"
-          labelPrev="Previous"
-        >
-          { buildPages(7, 1) }
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          {buildPages(7, 1)}
         </Pagination>
       )
 
       const pagination = await PaginationLocator.find()
-      const prevButtonWrapper = await pagination.findArrowButton(':label(Previous)')
+      const prevButtonWrapper = await pagination.findArrowButton(
+        ':label(Previous)'
+      )
       const prevButton = await prevButtonWrapper.find('button')
 
       await prevButton.focus()
@@ -277,7 +257,7 @@ describe('<Pagination />', async () => {
     it('should not change focus when the Previous Page button did not have focus', async () => {
       const subject = await mount(
         <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
-          { buildPages(7, 1) }
+          {buildPages(7, 1)}
         </Pagination>
       )
 
@@ -295,12 +275,8 @@ describe('<Pagination />', async () => {
 
     it('should not continue to change focus on subsequent updates', async () => {
       const subject = await mount(
-        <Pagination
-          variant="compact"
-          labelNext="Next"
-          labelPrev="Previous"
-        >
-          { buildPages(7, 1) }
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          {buildPages(7, 1)}
         </Pagination>
       )
 
@@ -326,12 +302,8 @@ describe('<Pagination />', async () => {
   describe('when updating with the LAST page becoming current', async () => {
     it('should move focus from the Next Page button to the last page button', async () => {
       const subject = await mount(
-        <Pagination
-          variant="compact"
-          labelNext="Next"
-          labelPrev="Previous"
-        >
-          { buildPages(7, 5) }
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          {buildPages(7, 5)}
         </Pagination>
       )
 
@@ -356,12 +328,8 @@ describe('<Pagination />', async () => {
 
     it('should not change focus when the Next Page button did not have focus', async () => {
       const subject = await mount(
-        <Pagination
-          variant="compact"
-          labelNext="Next"
-          labelPrev="Previous"
-        >
-          { buildPages(7, 5) }
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          {buildPages(7, 5)}
         </Pagination>
       )
 
@@ -406,18 +374,16 @@ describe('<Pagination />', async () => {
   describe('arrows', async () => {
     it('should not continue to change focus on subsequent updates', async () => {
       const subject = await mount(
-        <Pagination
-          variant="compact"
-          labelNext="Next"
-          labelPrev="Previous"
-        >
-          { buildPages(6) }
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          {buildPages(6)}
         </Pagination>
       )
 
       const pagination = await PaginationLocator.find()
 
-      let prevButton = await pagination.findArrowButton(':label(Previous)', { expectEmpty: true })
+      let prevButton = await pagination.findArrowButton(':label(Previous)', {
+        expectEmpty: true
+      })
 
       expect(prevButton).to.not.exist()
 
@@ -431,7 +397,9 @@ describe('<Pagination />', async () => {
 
       expect(prevButton).to.exist()
 
-      nextButton = await pagination.findArrowButton(':label(Next)', { expectEmpty: true })
+      nextButton = await pagination.findArrowButton(':label(Next)', {
+        expectEmpty: true
+      })
 
       expect(nextButton).to.not.exist()
     })
@@ -443,10 +411,11 @@ describe('<Pagination />', async () => {
       }
 
       Object.keys(View.propTypes)
-        .filter(prop => prop !== 'theme' && prop !== 'children' && prop !== 'elementRef')
+        .filter(
+          (prop) =>
+            prop !== 'theme' && prop !== 'children' && prop !== 'elementRef'
+        )
         .forEach((prop) => {
-
-
           if (Object.keys(allowedProps).indexOf(prop) < 0) {
             it(`should NOT allow the '${prop}' prop`, async () => {
               const consoleError = stub(console, 'error')
@@ -459,7 +428,7 @@ describe('<Pagination />', async () => {
                   labelPrev="Previous"
                   {...props}
                 >
-                  { buildPages(6) }
+                  {buildPages(6)}
                 </Pagination>
               )
               await wait(() => {
@@ -477,7 +446,7 @@ describe('<Pagination />', async () => {
                   labelPrev="Previous"
                   {...props}
                 >
-                  { buildPages(6) }
+                  {buildPages(6)}
                 </Pagination>
               )
               expect(consoleError).to.not.be.called()
@@ -495,7 +464,7 @@ describe('<Pagination />', async () => {
           labelNext="Next"
           labelPrev="Previous"
         >
-          { buildPages(6) }
+          {buildPages(6)}
         </Pagination>
       )
       await wait(() => {
@@ -507,12 +476,13 @@ describe('<Pagination />', async () => {
       const onClick = stub()
 
       await mount(
-        <Pagination
-          variant="compact"
-          labelNext="Next"
-          labelPrev="Previous"
-        >
-          {[...buildPages(6, 5), <PaginationButton key="last" onClick={onClick}>Last</PaginationButton>]}
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          {[
+            ...buildPages(6, 5),
+            <PaginationButton key="last" onClick={onClick}>
+              Last
+            </PaginationButton>
+          ]}
         </Pagination>
       )
 

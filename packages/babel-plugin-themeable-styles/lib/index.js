@@ -38,9 +38,10 @@ const generateScopedName = require('./generateScopedName')
 
 const matchExtensions = /\.css$/i
 
-const USE_WEBPACK_CSS_LOADERS = process.env.USE_WEBPACK_CSS_LOADERS || process.env.DEBUG
+const USE_WEBPACK_CSS_LOADERS =
+  process.env.USE_WEBPACK_CSS_LOADERS || process.env.DEBUG
 
-module.exports = function transformThemeableStyles ({ types: t }) {
+module.exports = function transformThemeableStyles({ types: t }) {
   const STYLES = new Map()
 
   let _componentId
@@ -55,22 +56,26 @@ module.exports = function transformThemeableStyles ({ types: t }) {
   }
 
   const pluginApi = {
-    manipulateOptions (options) {
+    manipulateOptions(options) {
       if (requireHookInitialized) return options
 
       if (Array.isArray(options.plugins)) {
-        const plugins = options.plugins
-          .filter(
-            (plugin) => plugin.manipulateOptions === pluginApi.manipulateOptions
-          )
+        const plugins = options.plugins.filter(
+          (plugin) => plugin.manipulateOptions === pluginApi.manipulateOptions
+        )
 
         if (plugins[0]) {
           thisPluginOptions = plugins[0].options
         }
       }
 
-      if (thisPluginOptions.themeablerc && thisPluginOptions.themeablerc.generateScopedName) {
-        console.warn('[babel-plugin-themeable-styles] Custom scoped CSS class names will be removed in 7.0. Please use the default themeable config.')
+      if (
+        thisPluginOptions.themeablerc &&
+        thisPluginOptions.themeablerc.generateScopedName
+      ) {
+        console.warn(
+          '[babel-plugin-themeable-styles] Custom scoped CSS class names will be removed in 7.0. Please use the default themeable config.'
+        )
       }
 
       if (!USE_WEBPACK_CSS_LOADERS) {
@@ -80,11 +85,18 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             _componentId = generateComponentId(css)
             return css
           },
-          generateScopedName: generateScopedName.bind(null, getComponentId, thisPluginOptions.themeablerc),
+          generateScopedName: generateScopedName.bind(
+            null,
+            getComponentId,
+            thisPluginOptions.themeablerc
+          ),
           prepend: getPostCSSPlugins(thisPluginOptions.postcssrc),
           processCss: (css, filepath) => {
             // remove comments
-            const styles = (css || '').replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim, '')
+            const styles = (css || '').replace(
+              /\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim,
+              ''
+            )
             if (!STYLES.has(filepath)) {
               STYLES.set(filepath, styles)
             }
@@ -102,7 +114,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
 
     visitor: {
       // import styles from './style.css'
-      ImportDefaultSpecifier (path, { file }) {
+      ImportDefaultSpecifier(path, { file }) {
         const requiringFile = file.opts.filename
         const { value } = path.parentPath.node.source
 
@@ -116,18 +128,30 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             if (!css) return
 
             path.parentPath.replaceWith(
-              generateVariableDeclaration(path.node.local.name, tokens, css, getComponentId())
+              generateVariableDeclaration(
+                path.node.local.name,
+                tokens,
+                css,
+                getComponentId()
+              )
             )
           }
         }
       },
 
-      CallExpression (path, { file }) {
+      CallExpression(path, { file }) {
         const { node } = path
-        const { callee: { name: calleeName }, arguments: args } = node
+        const {
+          callee: { name: calleeName },
+          arguments: args
+        } = node
 
         // const styles = require('./styles.css')
-        if (calleeName === 'require' && args.length && t.isStringLiteral(args[0])) {
+        if (
+          calleeName === 'require' &&
+          args.length &&
+          t.isStringLiteral(args[0])
+        ) {
           if (!requireHookInitialized) return
 
           const [{ value }] = args
@@ -142,12 +166,15 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             if (!css) return
 
             if (!t.isExpressionStatement(path.parent)) {
-              path.replaceWithSourceString(transformCSSRequire(tokens, css, getComponentId()))
+              path.replaceWithSourceString(
+                transformCSSRequire(tokens, css, getComponentId())
+              )
             } else {
               path.remove()
             }
           }
-        } else if (args.length &&
+        } else if (
+          args.length &&
           nodeHasRenderMethod(node) &&
           nodeIsMissingDisplayName(node)
         ) {
@@ -176,11 +203,13 @@ module.exports = function transformThemeableStyles ({ types: t }) {
     if (blockLevelStmnt) {
       delete blockLevelStmnt.node.trailingComments
 
-      const setDisplayNameStmnt = t.expressionStatement(t.assignmentExpression(
-        '=',
-        t.memberExpression(id, t.identifier('displayName')),
-        t.stringLiteral(displayName)
-      ))
+      const setDisplayNameStmnt = t.expressionStatement(
+        t.assignmentExpression(
+          '=',
+          t.memberExpression(id, t.identifier('displayName')),
+          t.stringLiteral(displayName)
+        )
+      )
 
       blockLevelStmnt.replaceWithMultiple([
         blockLevelStmnt.node,
@@ -189,48 +218,54 @@ module.exports = function transformThemeableStyles ({ types: t }) {
     }
   }
 
-  function nodeHasRenderMethod (node) {
-    if (
-      node.callee &&
-      node.callee.name === '_createClass'
-    ) {
-      return (node.arguments[1].elements && node.arguments[1].elements.some((el) => isRenderProperty(el)))
+  function nodeHasRenderMethod(node) {
+    if (node.callee && node.callee.name === '_createClass') {
+      return (
+        node.arguments[1].elements &&
+        node.arguments[1].elements.some((el) => isRenderProperty(el))
+      )
     }
 
     return false
   }
 
-  function nodeIsMissingDisplayName (node) {
-    if (
-      node.callee &&
-      node.callee.name === '_createClass'
-    ) {
-      return (node.arguments[1].elements && !(node.arguments[1].elements.some((el) => isDisplayName(el))))
+  function nodeIsMissingDisplayName(node) {
+    if (node.callee && node.callee.name === '_createClass') {
+      return (
+        node.arguments[1].elements &&
+        !node.arguments[1].elements.some((el) => isDisplayName(el))
+      )
     }
     return false
   }
 
-  function isDisplayName (el) {
-    const [ first, second ] = el.properties
-    return first.key.name === 'key' &&
+  function isDisplayName(el) {
+    const [first, second] = el.properties
+    return (
+      first.key.name === 'key' &&
       first.value.value === 'displayName' &&
       second.key.name === 'value' &&
       second.value.value
+    )
   }
 
-  function isRenderProperty (el) {
-    const [ first, second ] = el.properties
-    return first.key.name === 'key' &&
+  function isRenderProperty(el) {
+    const [first, second] = el.properties
+    return (
+      first.key.name === 'key' &&
       first.value.value === 'render' &&
       second.key.name === 'value' &&
       t.isFunctionExpression(second.value)
+    )
   }
 
-  function generateVariableDeclaration (name, tokens, css, componentId) {
-    return template.ast(`const ${name} = ${transformCSSRequire(tokens, css, componentId)}`)
+  function generateVariableDeclaration(name, tokens, css, componentId) {
+    return template.ast(
+      `const ${name} = ${transformCSSRequire(tokens, css, componentId)}`
+    )
   }
 
-  function resolveModulePath (filename) {
+  function resolveModulePath(filename) {
     const dir = dirname(filename)
     if (isAbsolute(dir)) {
       return dir
@@ -241,7 +276,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
     return resolve(dir)
   }
 
-  function resolveStylesheetPath (filepath, stylesheetPath) {
+  function resolveStylesheetPath(filepath, stylesheetPath) {
     let filePathOrModuleName = stylesheetPath
 
     // only resolve path to file when we have a file path
@@ -253,17 +288,19 @@ module.exports = function transformThemeableStyles ({ types: t }) {
     return filePathOrModuleName
   }
 
-  function requireCssFile (stylesheetPath) {
+  function requireCssFile(stylesheetPath) {
     // css-modules-require-hooks throws if file is ignored
     try {
       return require(stylesheetPath)
     } catch (e) {
-      console.warn(`[transform-themeable]: Could not require CSS file: ${stylesheetPath} \n ${e}`)
+      console.warn(
+        `[transform-themeable]: Could not require CSS file: ${stylesheetPath} \n ${e}`
+      )
       return {} // return empty object, this simulates result of ignored stylesheet file
     }
   }
 
-  function getPostCSSPlugins (config) {
+  function getPostCSSPlugins(config) {
     let plugins = []
 
     if (config && config.plugins) {

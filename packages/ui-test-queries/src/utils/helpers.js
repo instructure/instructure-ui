@@ -46,7 +46,7 @@ function typeIn(element, text, options) {
     cancelable: true,
     defaultPrevented: false,
     eventPhase: 2,
-    isTrusted: true,
+    isTrusted: true
   }
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -107,18 +107,23 @@ function getComputedStyle(element) {
   if (isElement(element)) {
     return getOwnerWindow(element).getComputedStyle(element)
   } else {
-    throw new Error(`[ui-test-queries] cannot get computed style for an invalid Element: ${element}`)
+    throw new Error(
+      `[ui-test-queries] cannot get computed style for an invalid Element: ${element}`
+    )
   }
 }
 
 function positioned(element) {
   const style = getComputedStyle(element)
-  const transform = style.getPropertyValue('-webkit-transform') ||
+  const transform =
+    style.getPropertyValue('-webkit-transform') ||
     style.getPropertyValue('-moz-transform') ||
     style.getPropertyValue('-ms-transform') ||
     style.getPropertyValue('-o-transform') ||
-    style.getPropertyValue('transform') || 'none'
-  return (style.position !== 'static' ||
+    style.getPropertyValue('transform') ||
+    'none'
+  return (
+    style.position !== 'static' ||
     // initial value of transform can be 'none' or a matrix equivalent
     (transform !== 'none' && transform !== 'matrix(1, 0, 0, 1, 0, 0)')
   )
@@ -148,15 +153,17 @@ function getViewportRects(element) {
     )
   }
 
-  return [{
-    ...viewport,
-    top: 0,
-    right: viewport.width,
-    bottom: viewport.height,
-    left: 0,
-    overflow: null,
-    positioned: false
-  }]
+  return [
+    {
+      ...viewport,
+      top: 0,
+      right: viewport.width,
+      bottom: viewport.height,
+      left: 0,
+      overflow: null,
+      positioned: false
+    }
+  ]
 }
 
 function getPositionedParents(element) {
@@ -164,7 +171,8 @@ function getPositionedParents(element) {
   let parent = element
 
   // eslint-disable-next-line no-cond-assign
-  while ((parent = parent.parentNode) &&
+  while (
+    (parent = parent.parentNode) &&
     parent &&
     isElement(parent) &&
     parent.tagName.toLowerCase() !== 'body'
@@ -195,27 +203,35 @@ function getClientRects(element) {
     overflow: getComputedStyle(element).overflow,
     positioned: positioned(element)
   }
-  let rects = [{
-    ...rectToObject(element.getBoundingClientRect()),
-    ...props
-  }]
+  let rects = [
+    {
+      ...rectToObject(element.getBoundingClientRect()),
+      ...props
+    }
+  ]
   rects = rects.concat(
-    Array.from(element.getClientRects())
-      .map((rect) => {
-        return { ...rectToObject(rect), ...props }
-      })
+    Array.from(element.getClientRects()).map((rect) => {
+      return { ...rectToObject(rect), ...props }
+    })
   )
   return rects
 }
 
 function visible(element) {
-  if (!isElement(element) || (element && element.tagName.toLowerCase() === 'html')) {
+  if (
+    !isElement(element) ||
+    (element && element.tagName.toLowerCase() === 'html')
+  ) {
     return true
   }
 
   const style = getComputedStyle(element)
 
-  if (style.visibility === 'hidden' || style.display === 'none' || style.opacity === '0') {
+  if (
+    style.visibility === 'hidden' ||
+    style.display === 'none' ||
+    style.opacity === '0'
+  ) {
     return false
   }
 
@@ -226,47 +242,52 @@ function visible(element) {
   const children = Array.from(element.childNodes)
 
   // handle inline elements with block children...
-  if (element.tagName.toLowerCase() !== 'iframe' &&
+  if (
+    element.tagName.toLowerCase() !== 'iframe' &&
     style.display === 'inline' &&
     children.length > 0 &&
-    children.filter(child => visible(child)).length === 0
+    children.filter((child) => visible(child)).length === 0
   ) {
     return false
   } else if (elementWidth <= 0 && elementHeight <= 0) {
     return false
   }
 
-  const rects = [elementRects]
-    .concat(getPositionedParents(element).map(parent => getClientRects(parent)))
+  const rects = [elementRects].concat(
+    getPositionedParents(element).map((parent) => getClientRects(parent))
+  )
 
   rects.push(getViewportRects(element))
 
-  return rects
-    .reduce((previousIsVisible, childRects, index) => {
-      const parentRects = rects[index + 1]
+  return rects.reduce((previousIsVisible, childRects, index) => {
+    const parentRects = rects[index + 1]
 
-      if (!parentRects) {
-        return previousIsVisible
-      }
+    if (!parentRects) {
+      return previousIsVisible
+    }
 
-      return previousIsVisible && (
-        parentRects.reduce((visibleInPreviousParent, parentRect) => {
-          return visibleInPreviousParent ||
-            childRects.reduce((previousChildIsVisible, childRect) => {
-              const childIsPositioned = (childRect.positioned && parentRect.overflow === 'visible')
-              const currentChildIsVisible = childIsPositioned || (
-                (childRect.top <= parentRect.bottom) &&
-                ((childRect.top + parentRect.bottom) >= 0) &&
-                (childRect.bottom > parentRect.top) &&
-                (childRect.left <= parentRect.right) &&
-                ((childRect.left + parentRect.right) >= 0) &&
-                (childRect.right > parentRect.left)
-              )
-              return previousChildIsVisible || currentChildIsVisible
-            }, false)
-        }, false)
-      )
-    }, true)
+    return (
+      previousIsVisible &&
+      parentRects.reduce((visibleInPreviousParent, parentRect) => {
+        return (
+          visibleInPreviousParent ||
+          childRects.reduce((previousChildIsVisible, childRect) => {
+            const childIsPositioned =
+              childRect.positioned && parentRect.overflow === 'visible'
+            const currentChildIsVisible =
+              childIsPositioned ||
+              (childRect.top <= parentRect.bottom &&
+                childRect.top + parentRect.bottom >= 0 &&
+                childRect.bottom > parentRect.top &&
+                childRect.left <= parentRect.right &&
+                childRect.left + parentRect.right >= 0 &&
+                childRect.right > parentRect.left)
+            return previousChildIsVisible || currentChildIsVisible
+          }, false)
+        )
+      }, false)
+    )
+  }, true)
 }
 
 function onscreen(element) {
@@ -274,20 +295,35 @@ function onscreen(element) {
 }
 
 function clickable(element) {
-  const rects = Array.from(element.getClientRects())
-    .concat(element.getBoundingClientRect())
-  return visible(element) && rects.reduce((onscreen, rect) => {
-    if (onscreen) return true
-    const doc = getOwnerDocument(element)
-    for (let x = Math.floor(rect.left), maxX = Math.ceil(rect.right); x <= maxX; x++)
-      for (let y = Math.floor(rect.top), maxY = Math.ceil(rect.bottom); y <= maxY; y++) {
-        const elementFromPoint = doc.elementFromPoint(x, y)
-        if (element.contains(elementFromPoint) || element === elementFromPoint) {
-          return true
+  const rects = Array.from(element.getClientRects()).concat(
+    element.getBoundingClientRect()
+  )
+  return (
+    visible(element) &&
+    rects.reduce((onscreen, rect) => {
+      if (onscreen) return true
+      const doc = getOwnerDocument(element)
+      for (
+        let x = Math.floor(rect.left), maxX = Math.ceil(rect.right);
+        x <= maxX;
+        x++
+      )
+        for (
+          let y = Math.floor(rect.top), maxY = Math.ceil(rect.bottom);
+          y <= maxY;
+          y++
+        ) {
+          const elementFromPoint = doc.elementFromPoint(x, y)
+          if (
+            element.contains(elementFromPoint) ||
+            element === elementFromPoint
+          ) {
+            return true
+          }
         }
-      }
-    return false
-  }, false)
+      return false
+    }, false)
+  )
 }
 
 function focusable(element) {
@@ -303,7 +339,11 @@ function focusable(element) {
     '*[tabindex]'
   ]
 
-  return !element.disabled && visible(element) && matchesSelector(element, selector.join(','))
+  return (
+    !element.disabled &&
+    visible(element) &&
+    matchesSelector(element, selector.join(','))
+  )
 }
 
 function tabbable(element) {
@@ -321,11 +361,13 @@ const parent = getParentNode
 
 function containsFocus(element) {
   const activeElement = getOwnerDocument(element).activeElement
-  return (element && (activeElement === element || element.contains(activeElement)))
+  return (
+    element && (activeElement === element || element.contains(activeElement))
+  )
 }
 
 function focused(element) {
-  return (element === getOwnerDocument(element).activeElement)
+  return element === getOwnerDocument(element).activeElement
 }
 
 function getDOMNode(element) {
@@ -361,13 +403,15 @@ function accessible(element = document.body, options) {
   if (isElement(element)) {
     return runAxeCheck(element, options)
   } else {
-    throw new Error('[ui-test-queries] accessibility check can only run on a single, valid DOM Element!')
+    throw new Error(
+      '[ui-test-queries] accessibility check can only run on a single, valid DOM Element!'
+    )
   }
 }
 
 function exists(element) {
   const doc = getOwnerDocument(element)
-  return (doc && doc.body.contains(element))
+  return doc && doc.body.contains(element)
 }
 
 function empty(element) {
@@ -376,7 +420,11 @@ function empty(element) {
   } else if (element && element.children) {
     return element.children.length === 0
   } else {
-    throw new Error(`[ui-test-queries] cannot determine if a non-element is empty: ${toString(element)}`)
+    throw new Error(
+      `[ui-test-queries] cannot determine if a non-element is empty: ${toString(
+        element
+      )}`
+    )
   }
 }
 
@@ -385,7 +433,10 @@ function contains(element, elementOrSelector) {
     return querySelector(element, elementOrSelector)
   } else if (isElement(elementOrSelector)) {
     return element.contains(elementOrSelector)
-  } else if (elementOrSelector && typeof elementOrSelector.getDOMNode === 'function') {
+  } else if (
+    elementOrSelector &&
+    typeof elementOrSelector.getDOMNode === 'function'
+  ) {
     return element.contains(elementOrSelector.getDOMNode())
   } else {
     return false
@@ -393,8 +444,9 @@ function contains(element, elementOrSelector) {
 }
 
 function descendants(element, selector) {
-  return querySelectorAll(element, selector)
-    .filter(match => match !== element)
+  return querySelectorAll(element, selector).filter(
+    (match) => match !== element
+  )
 }
 // aliases:
 const children = descendants
@@ -403,11 +455,7 @@ function ancestors(element, selector) {
   const ancestors = []
   let parentNode = element.parentNode
 
-  while (
-    parentNode &&
-    parentNode !== document &&
-    isElement(parentNode)
-  ) {
+  while (parentNode && parentNode !== document && isElement(parentNode)) {
     if (matchesSelector(parentNode, selector)) {
       ancestors.push(parentNode)
     }
@@ -445,7 +493,9 @@ function selected(element) {
 }
 
 function disabled(element) {
-  return getAttribute(element, 'disabled') || getAttribute(element, 'aria-disabled')
+  return (
+    getAttribute(element, 'disabled') || getAttribute(element, 'aria-disabled')
+  )
 }
 
 function readonly(element) {
@@ -466,9 +516,11 @@ function label(element) {
     return getAttribute(element, 'aria-label')
   } else if (matchesSelector(element, '[aria-labelledby]')) {
     const ids = getAttribute(element, 'aria-labelledby').split(/\s+/)
-    const labels = ids.map(id => doc.getElementById(id))
-    return labels.map(label => label ? label.textContent : '').join(' ')
-  } else if (matchesSelector(element, 'button, a[href], [role="button"], [role="link"]')) {
+    const labels = ids.map((id) => doc.getElementById(id))
+    return labels.map((label) => (label ? label.textContent : '')).join(' ')
+  } else if (
+    matchesSelector(element, 'button, a[href], [role="button"], [role="link"]')
+  ) {
     return getTextContent(element)
   } else if (matchesSelector(element, 'fieldset')) {
     const legend = querySelector(element, 'legend')
@@ -476,8 +528,10 @@ function label(element) {
       return getTextContent(legend)
     }
   } else if (matchesSelector(element, '[id]')) {
-    const labels = Array.from(querySelectorAll(doc, `[for="${getAttribute(element, 'id')}"]`))
-    return labels.map(label => label ? label.textContent : '').join(' ')
+    const labels = Array.from(
+      querySelectorAll(doc, `[for="${getAttribute(element, 'id')}"]`)
+    )
+    return labels.map((label) => (label ? label.textContent : '')).join(' ')
   } else if (matchesSelector(element, 'input,textarea,select')) {
     const labels = ancestors(element, 'label')
     if (labels.length > 0) {

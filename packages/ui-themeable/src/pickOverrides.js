@@ -23,19 +23,19 @@
  */
 
 /**
-* ---
-* category: utilities/themes
-* ---
-* Return only the theme variables that are different from the default
-* @param {Object} defaultTheme
-* @param {Object} theme
-* @returns {Object} variables that are different from the defaults
-*/
-function pickOverrides (defaultTheme, theme) {
+ * ---
+ * category: utilities/themes
+ * ---
+ * Return only the theme variables that are different from the default
+ * @param {Object} defaultTheme
+ * @param {Object} theme
+ * @returns {Object} variables that are different from the defaults
+ */
+function pickOverrides(defaultTheme, theme) {
   const overrides = {}
 
   // shortcut if possible
-  if ((defaultTheme === theme) || !theme) return overrides
+  if (defaultTheme === theme || !theme) return overrides
 
   // filter out any properties that have values that are the same as in defaults
   Object.keys(theme).forEach((key) => {

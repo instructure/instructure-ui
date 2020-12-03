@@ -22,5 +22,5 @@
  * SOFTWARE.
  */
 export function firstOrNull(result) {
-  return (Array.isArray(result)) ? result[0] || null : null
+  return Array.isArray(result) ? result[0] || null : null
 }

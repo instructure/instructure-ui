@@ -26,18 +26,18 @@ const ghpages = require('gh-pages')
 const { getPackageJSON } = require('@instructure/pkg-utils')
 const { runCommandSync, error, info } = require('@instructure/command-utils')
 
-const {
- GIT_REMOTE_URL,
- GIT_USERNAME,
- GIT_EMAIL
-} = process.env
+const { GIT_REMOTE_URL, GIT_USERNAME, GIT_EMAIL } = process.env
 
-exports.publishGithubPages = function publishGithubPages (config = {
-  gh_pages_dir: '.',
-  gh_pages_branch: 'gh-pages'
-}) {
+exports.publishGithubPages = function publishGithubPages(
+  config = {
+    gh_pages_dir: '.',
+    gh_pages_branch: 'gh-pages'
+  }
+) {
   if (!fs.existsSync(`${config.gh_pages_dir}`)) {
-    error(`GH pages directory doesn't exist! Do you need to build the documentation?`)
+    error(
+      `GH pages directory doesn't exist! Do you need to build the documentation?`
+    )
     process.exit(1)
   }
 
@@ -52,28 +52,34 @@ exports.publishGithubPages = function publishGithubPages (config = {
   }
 
   return new Promise((resolve, reject) => {
-    ghpages.publish(config.gh_pages_dir, {
-      branch: config.gh_pages_branch,
-      repo: GIT_REMOTE_URL,
-      user: {
-        name: GIT_USERNAME,
-        email: GIT_EMAIL
+    ghpages.publish(
+      config.gh_pages_dir,
+      {
+        branch: config.gh_pages_branch,
+        repo: GIT_REMOTE_URL,
+        user: {
+          name: GIT_USERNAME,
+          email: GIT_EMAIL
+        },
+        silent: true,
+        dotfiles: true
       },
-      silent: true,
-      dotfiles: true
-    }, (err) => {
-      if (err) {
-        if (typeof reject === 'function') {
-          reject(err)
-        }
-      } else {
-        const { name, version } = getPackageJSON()
-        info(`📖   Deployed version ${version} of the ${name} documentation...`)
+      (err) => {
+        if (err) {
+          if (typeof reject === 'function') {
+            reject(err)
+          }
+        } else {
+          const { name, version } = getPackageJSON()
+          info(
+            `📖   Deployed version ${version} of the ${name} documentation...`
+          )
 
-        if (typeof resolve === 'function') {
-          resolve()
+          if (typeof resolve === 'function') {
+            resolve()
+          }
         }
       }
-    })
+    )
   })
 }

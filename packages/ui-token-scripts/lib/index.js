@@ -25,9 +25,5 @@
  */
 
 /* eslint-disable no-unused-expressions */
-require('yargs')
-  .commandDir('./commands')
-  .version(false)
-  .help()
-  .argv
+require('yargs').commandDir('./commands').version(false).help().argv
 /* eslint-enable no-unused-expressions */

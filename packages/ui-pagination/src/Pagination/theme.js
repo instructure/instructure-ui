@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 
-export default function generator () {
+export default function generator() {
   return {}
 }

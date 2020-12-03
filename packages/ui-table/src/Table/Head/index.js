@@ -26,7 +26,11 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { omitProps, matchComponentTypes, callRenderProp } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  matchComponentTypes,
+  callRenderProp
+} from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { SimpleSelect } from '@instructure/ui-simple-select'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -62,8 +66,8 @@ class Head extends Component {
     children: null
   }
 
-  get isSortable () {
-    const [ row ] = Children.toArray(this.props.children)
+  get isSortable() {
+    const [row] = Children.toArray(this.props.children)
     let sortable = false
 
     Children.forEach(row.props.children, (colHeader) => {
@@ -75,15 +79,18 @@ class Head extends Component {
     return sortable
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     if (this.isSortable && typeof this.props.renderSortLabel === 'undefined') {
-      warn(false, '[Table.Head] The `renderSortLabel` prop should be provided when Table is sortable.')
+      warn(
+        false,
+        '[Table.Head] The `renderSortLabel` prop should be provided when Table is sortable.'
+      )
     }
   }
 
-  renderSelect () {
+  renderSelect() {
     const { children, renderSortLabel } = this.props
-    const [ row ] = Children.toArray(children)
+    const [row] = Children.toArray(children)
 
     if (!matchComponentTypes(row, [Row])) {
       return null
@@ -96,7 +103,7 @@ class Head extends Component {
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
       if (matchComponentTypes(colHeader, [ColHeader])) {
-        const {id, sortDirection, onRequestSort} = colHeader.props
+        const { id, sortDirection, onRequestSort } = colHeader.props
 
         if (onRequestSort) {
           options.push(id)
@@ -118,9 +125,12 @@ class Head extends Component {
         <div role="row">
           <div role="cell" aria-colspan={count}>
             <SimpleSelect
-              renderLabel={renderSortLabel
-                ? callRenderProp(renderSortLabel)
-                : <ScreenReaderContent></ScreenReaderContent>
+              renderLabel={
+                renderSortLabel ? (
+                  callRenderProp(renderSortLabel)
+                ) : (
+                  <ScreenReaderContent></ScreenReaderContent>
+                )
               }
               renderBeforeInput={selectedOption && IconCheckLine}
               value={selectedOption}
@@ -131,9 +141,10 @@ class Head extends Component {
                   id={option}
                   key={option}
                   value={option}
-                  renderBeforeLabel={option === selectedOption
-                    ? IconCheckLine
-                    : () => <IconCheckLine style={{color: 'transparent'}} />
+                  renderBeforeLabel={
+                    option === selectedOption
+                      ? IconCheckLine
+                      : () => <IconCheckLine style={{ color: 'transparent' }} />
                   }
                 >
                   {option}
@@ -146,21 +157,18 @@ class Head extends Component {
     )
   }
 
-  render () {
+  render() {
     const { children, isStacked } = this.props
 
-    return isStacked
-      ? this.renderSelect()
-      : (
-        <thead
-          {...omitProps(this.props, Head.propTypes)}
-          className={styles.root}
-        >
-          {Children.map(children, (child) => matchComponentTypes(child, [Row])
-            ? child
-            : null)}
-        </thead>
-      )
+    return isStacked ? (
+      this.renderSelect()
+    ) : (
+      <thead {...omitProps(this.props, Head.propTypes)} className={styles.root}>
+        {Children.map(children, (child) =>
+          matchComponentTypes(child, [Row]) ? child : null
+        )}
+      </thead>
+    )
   }
 }
 

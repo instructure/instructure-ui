@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ borders, colors, spacing, typography }) {
+export default function generator({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
     height: '3.75rem', // 60px per product design

@@ -33,15 +33,13 @@ describe('Spinner.theme', () => {
 
     describe('default', () => {
       it('should ensure meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.color, variables.trackColor))
-          .to.be.above(3)
+        expect(contrast(variables.color, variables.trackColor)).to.be.above(3)
       })
     })
 
     describe('inverse', () => {
       it('should ensure meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.color, variables.trackColor))
-          .to.be.above(3)
+        expect(contrast(variables.color, variables.trackColor)).to.be.above(3)
       })
     })
   })
@@ -51,15 +49,13 @@ describe('Spinner.theme', () => {
 
     describe('default', () => {
       it('should ensure meter color and track color meet 4.5:1 contrast', () => {
-        expect(contrast(variables.color, variables.trackColor))
-          .to.be.above(4.5)
+        expect(contrast(variables.color, variables.trackColor)).to.be.above(4.5)
       })
     })
 
     describe('inverse', () => {
       it('should ensure meter color and track color meet 4.5:1 contrast', () => {
-        expect(contrast(variables.color, variables.trackColor))
-          .to.be.above(4.5)
+        expect(contrast(variables.color, variables.trackColor)).to.be.above(4.5)
       })
     })
   })

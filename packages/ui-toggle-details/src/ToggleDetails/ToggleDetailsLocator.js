@@ -28,7 +28,8 @@ import { ToggleDetails } from './index'
 const ToggleLocator = locator('[aria-expanded][aria-controls]')
 
 export const customMethods = {
-  clickToggle: async (element, ...args) => (await ToggleLocator.find(element)).click(...args),
+  clickToggle: async (element, ...args) =>
+    (await ToggleLocator.find(element)).click(...args),
   findToggle: (...args) => ToggleLocator.find(...args),
   findContent: async (element, ...args) => {
     const toggle = await ToggleLocator.find(element)
@@ -40,4 +41,7 @@ export const customMethods = {
   }
 }
 
-export const ToggleDetailsLocator = locator(ToggleDetails.selector, customMethods)
+export const ToggleDetailsLocator = locator(
+  ToggleDetails.selector,
+  customMethods
+)

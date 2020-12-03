@@ -25,17 +25,17 @@ const path = require('path')
 const { readPackage } = require('@instructure/pkg-utils')
 
 const resolve = require('eslint-module-utils/resolve').default
-const resolveImportType = require('eslint-plugin-import/lib/core/importType').default
+const resolveImportType = require('eslint-plugin-import/lib/core/importType')
+  .default
 
 module.exports = {
   meta: {
-    docs: {},
+    docs: {}
   },
 
-  create: function noRelativePackages (context) {
-
-    function findNamedPackage (filePath) {
-      const found = readPackage({cwd: filePath})
+  create: function noRelativePackages(context) {
+    function findNamedPackage(filePath) {
+      const found = readPackage({ cwd: filePath })
       // console.log(found)
       if (found.package && !found.package.name) {
         return findNamedPackage(path.join(found.path, '../..'))
@@ -43,9 +43,13 @@ module.exports = {
       return found
     }
 
-    function checkImportForRelativePackage (importPath, node) {
+    function checkImportForRelativePackage(importPath, node) {
       const potentialViolationTypes = ['parent', 'index', 'sibling']
-      if (potentialViolationTypes.indexOf(resolveImportType(importPath, context)) === -1) {
+      if (
+        potentialViolationTypes.indexOf(
+          resolveImportType(importPath, context)
+        ) === -1
+      ) {
         return
       }
 
@@ -59,7 +63,11 @@ module.exports = {
       const importPkg = findNamedPackage(resolvedImport)
       const contextPkg = findNamedPackage(resolvedContext)
 
-      if (importPkg.package && contextPkg.package && importPkg.package.name !== contextPkg.package.name) {
+      if (
+        importPkg.package &&
+        contextPkg.package &&
+        importPkg.package.name !== contextPkg.package.name
+      ) {
         const importBaseName = path.basename(importPath)
         const importRoot = path.dirname(importPkg.path)
         const properPath = path.relative(importRoot, resolvedImport)
@@ -70,8 +78,9 @@ module.exports = {
         )
         context.report({
           node,
-          message: 'Relative import from another package is not allowed. ' +
-            `Use "${properImport}" instead of "${importPath}"`,
+          message:
+            'Relative import from another package is not allowed. ' +
+            `Use "${properImport}" instead of "${importPath}"`
         })
       }
     }
@@ -82,20 +91,22 @@ module.exports = {
       },
       CallExpression(node) {
         if (isStaticRequire(node)) {
-          const [ firstArgument ] = node.arguments
+          const [firstArgument] = node.arguments
           checkImportForRelativePackage(firstArgument.value, firstArgument)
         }
-      },
+      }
     }
-  },
+  }
 }
 
-function isStaticRequire (node) {
-  return node &&
+function isStaticRequire(node) {
+  return (
+    node &&
     node.callee &&
     node.callee.type === 'Identifier' &&
     node.callee.name === 'require' &&
     node.arguments.length === 1 &&
     node.arguments[0].type === 'Literal' &&
     typeof node.arguments[0].value === 'string'
+  )
 }

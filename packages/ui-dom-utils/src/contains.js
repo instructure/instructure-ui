@@ -36,7 +36,7 @@ import { canUseDOM } from './canUseDOM'
  * @param {ReactComponent|DomNode} el - component or DOM node which we want to determine if contained within the context
  * @returns {boolean} if the element is contained within the context
  */
-function containsWithDOM (context, el) {
+function containsWithDOM(context, el) {
   const container = findDOMNode(context)
   const node = findDOMNode(el)
 
@@ -45,14 +45,16 @@ function containsWithDOM (context, el) {
   } else if (container.contains) {
     return container.contains(node)
   } else if (container.compareDocumentPosition) {
-    return container === node || !!(container.compareDocumentPosition(node) & 16) // eslint-disable-line no-bitwise
+    return (
+      container === node || !!(container.compareDocumentPosition(node) & 16)
+    ) // eslint-disable-line no-bitwise
   } else {
     return containsFallback(container, node)
   }
 }
 
 /* istanbul ignore next  */
-function containsFallback (context, el) {
+function containsFallback(context, el) {
   let node = el
 
   while (node) {

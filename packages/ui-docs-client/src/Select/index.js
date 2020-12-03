@@ -30,7 +30,8 @@ import { Select as UISelect } from '@instructure/ui-select'
 class Select extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     id: PropTypes.string,
     value: PropTypes.string,
@@ -46,7 +47,7 @@ class Select extends Component {
     children: null
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     this._options = this.getOptionData(props.children)
@@ -60,7 +61,7 @@ class Select extends Component {
     }
   }
 
-  getOptionByValue (value) {
+  getOptionByValue(value) {
     for (let i = 0; i < this._options.length; i++) {
       const option = this._options[i]
       if (option.value === value) {
@@ -69,7 +70,7 @@ class Select extends Component {
     }
   }
 
-  getOptionData (options) {
+  getOptionData(options) {
     let data = []
     Children.forEach(options, (child) => {
       const { value, children, ...rest } = child.props
@@ -78,7 +79,7 @@ class Select extends Component {
     return data
   }
 
-  render () {
+  render() {
     const {
       id,
       name,
@@ -118,22 +119,24 @@ class Select extends Component {
           const { type } = event
           this.setState({
             highlightedValue: id,
-            inputValue: type === 'keydown'
-              ? this.getOptionByValue(id).label
-              : inputValue,
+            inputValue:
+              type === 'keydown' ? this.getOptionByValue(id).label : inputValue
           })
         }}
         onRequestSelectOption={(e, { id }) => {
-          this.setState({
-            selectedValue: id,
-            inputValue: this.getOptionByValue(id).label,
-            isShowing: false
-          }, () => {
-            onChange(e, { value: id })
-          })
+          this.setState(
+            {
+              selectedValue: id,
+              inputValue: this.getOptionByValue(id).label,
+              isShowing: false
+            },
+            () => {
+              onChange(e, { value: id })
+            }
+          )
         }}
       >
-        {this._options.map(option => {
+        {this._options.map((option) => {
           const { value, label, icon, ...rest } = option
           return (
             <UISelect.Option
@@ -144,7 +147,7 @@ class Select extends Component {
               isSelected={selectedValue === value}
               renderBeforeLabel={icon}
             >
-              { label }
+              {label}
             </UISelect.Option>
           )
         })}

@@ -26,8 +26,15 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps, safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
+import {
+  controllable,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
+import {
+  omitProps,
+  safeCloneElement,
+  matchComponentTypes
+} from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { testable } from '@instructure/ui-testable'
@@ -51,35 +58,35 @@ class MenuItemGroup extends Component {
     label: PropTypes.node.isRequired,
     allowMultiple: PropTypes.bool,
     /**
-    * children of type `Menu.Item`, `Menu.Separator`
-    */
+     * children of type `Menu.Item`, `Menu.Separator`
+     */
     children: ChildrenPropTypes.oneOf([MenuItem, MenuItemSeparator]),
     /**
-    * an array of the values (or indeces by default) for the selected items
-    */
+     * an array of the values (or indeces by default) for the selected items
+     */
     selected: controllable(PropTypes.array, 'onSelect', 'defaultSelected'),
     /**
-    * an array of the values (or indeces by default) for the selected items on initial render
-    */
+     * an array of the values (or indeces by default) for the selected items on initial render
+     */
     defaultSelected: PropTypes.array,
     /**
-    * call this function when a menu item is selected
-    */
+     * call this function when a menu item is selected
+     */
     onSelect: PropTypes.func,
     onMouseOver: PropTypes.func,
     onKeyDown: PropTypes.func,
     /**
-    * the id of the element that the menu items will act upon
-    */
+     * the id of the element that the menu items will act upon
+     */
     controls: PropTypes.string,
     /**
-    * returns a reference to the `MenuItem`
-    */
+     * returns a reference to the `MenuItem`
+     */
     itemRef: PropTypes.func,
     disabled: PropTypes.bool,
     /**
-    * should the group appear in the tab order (the first item will have a tabIndex of 0)
-    */
+     * should the group appear in the tab order (the first item will have a tabIndex of 0)
+     */
     isTabbable: PropTypes.bool
   }
 
@@ -97,7 +104,7 @@ class MenuItemGroup extends Component {
     onSelect: function (e, value, selected, item) {}
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     if (typeof props.selected === 'undefined') {
@@ -119,7 +126,15 @@ class MenuItemGroup extends Component {
       this.updateSelected(e, value, this.props.selected, selected, item)
     } else {
       this.setState((state) => {
-        return { selected: this.updateSelected(e, value, state.selected, selected, item) }
+        return {
+          selected: this.updateSelected(
+            e,
+            value,
+            state.selected,
+            selected,
+            item
+          )
+        }
       })
     }
   }
@@ -129,9 +144,9 @@ class MenuItemGroup extends Component {
     let updated = allowMultiple ? [...items] : []
     const location = updated.indexOf(value)
 
-    if ((selected === true) && location < 0) {
+    if (selected === true && location < 0) {
       updated.push(value)
-    } else if ((selected === false) && location !== -1) {
+    } else if (selected === false && location !== -1) {
       updated.splice(location, 1)
     } else if (!allowMultiple && updated.length < 1) {
       // don't allow nothing selected if it's not allowMultiple/checkbox
@@ -145,17 +160,19 @@ class MenuItemGroup extends Component {
     return updated
   }
 
-  selectedFromChildren (props) {
+  selectedFromChildren(props) {
     const { children, allowMultiple } = props
     const selected = []
 
     const items = Children.toArray(children).filter((child) => {
-      return (matchComponentTypes(child, [MenuItem]))
+      return matchComponentTypes(child, [MenuItem])
     })
 
     items.forEach((item, index) => {
-      if ((selected.length === 0 || allowMultiple) &&
-        (item.props.selected || item.props.defaultSelected)) {
+      if (
+        (selected.length === 0 || allowMultiple) &&
+        (item.props.selected || item.props.defaultSelected)
+      ) {
         selected.push(item.props.value || index)
       }
     })
@@ -163,23 +180,30 @@ class MenuItemGroup extends Component {
     return selected.length > 0 ? selected : null
   }
 
-  get selected () {
-    if (typeof this.props.selected === 'undefined' && typeof this.state.selected === 'undefined') {
+  get selected() {
+    if (
+      typeof this.props.selected === 'undefined' &&
+      typeof this.state.selected === 'undefined'
+    ) {
       return []
     } else {
-      return (typeof this.props.selected === 'undefined') ? [...this.state.selected] : [...this.props.selected]
+      return typeof this.props.selected === 'undefined'
+        ? [...this.state.selected]
+        : [...this.props.selected]
     }
   }
 
-  renderLabel () {
+  renderLabel() {
     const { label } = this.props
 
     return hasVisibleChildren(label) ? (
       <span className={styles.label}>{label}</span>
-    ) : label
+    ) : (
+      label
+    )
   }
 
-  renderChildren () {
+  renderChildren() {
     const {
       children,
       disabled,
@@ -196,33 +220,32 @@ class MenuItemGroup extends Component {
         ++index
         const value = child.props.value || index
 
-        return (<li role="none"> {
-          safeCloneElement(child, {
-            tabIndex: (isTabbable && index === 0) ? 0 : -1,
-            controls,
-            value,
-            type: allowMultiple ? 'checkbox' : 'radio',
-            ref: this.props.itemRef,
-            disabled: (disabled || child.props.disabled),
-            selected: this.selected.indexOf(value) > -1,
-            onSelect: this.handleSelect,
-            onMouseOver
-          })
-        } </li>)
+        return (
+          <li role="none">
+            {' '}
+            {safeCloneElement(child, {
+              tabIndex: isTabbable && index === 0 ? 0 : -1,
+              controls,
+              value,
+              type: allowMultiple ? 'checkbox' : 'radio',
+              ref: this.props.itemRef,
+              disabled: disabled || child.props.disabled,
+              selected: this.selected.indexOf(value) > -1,
+              onSelect: this.handleSelect,
+              onMouseOver
+            })}{' '}
+          </li>
+        )
       } else {
         return child
       }
     })
   }
 
-  render () {
+  render() {
     const props = omitProps(this.props, MenuItemGroup.propTypes)
     return (
-      <span
-        {...props}
-        className={styles.root}
-        role="presentation"
-      >
+      <span {...props} className={styles.root} role="presentation">
         <span id={this._labelId}>{this.renderLabel()}</span>
         <ul
           role="menu"

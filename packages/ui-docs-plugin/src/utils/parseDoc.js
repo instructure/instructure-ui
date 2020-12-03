@@ -35,7 +35,8 @@ module.exports = function (resourcePath, source, errorHandler) {
 
   if (extension === '.md') {
     doc = { description: source }
-  } else if (extension === '.js') { // TODO: make the extention(s) here configurable
+  } else if (extension === '.js') {
+    // TODO: make the extention(s) here configurable
     doc = getReactDoc(source, errorHandler)
 
     if (!doc.props) {

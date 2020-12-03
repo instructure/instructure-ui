@@ -28,9 +28,15 @@ import keycode from 'keycode'
 
 import { Popover } from '@instructure/ui-popover'
 import { uid } from '@instructure/uid'
-import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import {
+  controllable,
+  Children as ChildrenPropTypes
+} from '@instructure/ui-prop-types'
 import { PositionPropTypes } from '@instructure/ui-position'
-import { safeCloneElement, matchComponentTypes } from '@instructure/ui-react-utils'
+import {
+  safeCloneElement,
+  matchComponentTypes
+} from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { themeable } from '@instructure/ui-themeable'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
@@ -56,7 +62,12 @@ class Menu extends Component {
     /**
      * Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu`
      */
-    children: ChildrenPropTypes.oneOf(['MenuItem', 'MenuItemGroup', 'MenuItemSeparator', 'Menu']),
+    children: ChildrenPropTypes.oneOf([
+      'MenuItem',
+      'MenuItemGroup',
+      'MenuItemSeparator',
+      'Menu'
+    ]),
     /**
      * Description of the `<Menu />`
      */
@@ -137,7 +148,11 @@ class Menu extends Component {
      * If a trigger is supplied, an element, function returning an element, or array of elements that will not
      * be hidden from the screen reader when the `<Menu />` is open
      */
-    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+    liveRegion: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+      PropTypes.func
+    ]),
     /**
      * If a trigger is supplied, should the `<Menu />` hide when an item is selected
      */
@@ -152,8 +167,8 @@ class Menu extends Component {
     type: PropTypes.oneOf(['flyout']),
     id: PropTypes.string,
     /**
-    * Whether or not an arrow pointing to the trigger should be rendered
-    */
+     * Whether or not an arrow pointing to the trigger should be rendered
+     */
     withArrow: PropTypes.bool
   }
 
@@ -167,13 +182,13 @@ class Menu extends Component {
     onToggle: (shown, menu) => {},
     onSelect: (event, value, selected, item) => {},
     onDismiss: (event, documentClick) => {},
-    onBlur: event => {},
-    onFocus: event => {},
-    onMouseOver: event => {},
-    onKeyDown: event => {},
-    onKeyUp: event => {},
-    menuRef: el => {},
-    popoverRef: el => {},
+    onBlur: (event) => {},
+    onFocus: (event) => {},
+    onMouseOver: (event) => {},
+    onKeyDown: (event) => {},
+    onKeyUp: (event) => {},
+    menuRef: (el) => {},
+    popoverRef: (el) => {},
     mountNode: null,
     constrain: 'window',
     liveRegion: null,
@@ -198,7 +213,7 @@ class Menu extends Component {
   _labelId = uid('Menu__label')
   _activeSubMenu = null
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this._id = this.props.id || uid('Menu')
   }
@@ -206,7 +221,7 @@ class Menu extends Component {
   static childContextTypes = MenuContext.types
   static contextTypes = MenuContext.types
 
-  getChildContext () {
+  getChildContext() {
     // if it's a submenu it will have a context defined by its parent Menu
     const context = MenuContext.getMenuContext(this.context)
 
@@ -239,12 +254,12 @@ class Menu extends Component {
     })
   }
 
-  get menuItems () {
+  get menuItems() {
     return this._menuItems
   }
 
   getMenuItemIndex = (item) => {
-    return this._menuItems.findIndex(i => i === item)
+    return this._menuItems.findIndex((i) => i === item)
   }
 
   handleTriggerKeyDown = (event) => {
@@ -268,14 +283,7 @@ class Menu extends Component {
 
   handleMenuKeyDown = (event) => {
     const key = event && event.keyCode
-    const {
-      down,
-      up,
-      pgup,
-      pgdn,
-      tab,
-      left
-    } = keycode.codes
+    const { down, up, pgup, pgdn, tab, left } = keycode.codes
 
     if (key === down || key === pgdn) {
       event.preventDefault()
@@ -352,17 +360,20 @@ class Menu extends Component {
     }
   }
 
-  focus () {
+  focus() {
     if (this.shown) {
       error(this._menu && this._menu.focus, '[Menu] Could not focus the menu.')
       this._menu.focus()
     } else {
-      error(this._trigger && this._trigger.focus, '[Menu] Could not focus the trigger.')
+      error(
+        this._trigger && this._trigger.focus,
+        '[Menu] Could not focus the trigger.'
+      )
       this._trigger.focus()
     }
   }
 
-  focused () {
+  focused() {
     if (this.shown) {
       return containsActiveElement(this._menu) || this.state.hasFocus
     } else {
@@ -370,20 +381,20 @@ class Menu extends Component {
     }
   }
 
-  get focusedIndex () {
+  get focusedIndex() {
     return this.menuItems.findIndex((item) => {
-      return (item && item.focused === true)
+      return item && item.focused === true
     })
   }
 
-  moveFocus (step) {
+  moveFocus(step) {
     const count = this.menuItems ? this.menuItems.length : 0
 
     if (count <= 0) {
       return
     }
 
-    const current = (this.focusedIndex < 0 && step < 0) ? 0 : this.focusedIndex
+    const current = this.focusedIndex < 0 && step < 0 ? 0 : this.focusedIndex
 
     const nextItem = this.menuItems[(current + count + step) % count]
 
@@ -392,20 +403,24 @@ class Menu extends Component {
     nextItem.focus()
   }
 
-  get shown () {
+  get shown() {
     return this._popover ? this._popover.shown : true
   }
 
-  renderChildren () {
-    const {
-      children,
-      disabled
-    } = this.props
+  renderChildren() {
+    const { children, disabled } = this.props
 
     let count = 0
 
     return Children.map(children, (child) => {
-      if (!matchComponentTypes(child, ['MenuItemSeparator', 'MenuItem', 'MenuItemGroup', 'Menu'])) {
+      if (
+        !matchComponentTypes(child, [
+          'MenuItemSeparator',
+          'MenuItem',
+          'MenuItemGroup',
+          'Menu'
+        ])
+      ) {
         return
       }
 
@@ -417,19 +432,18 @@ class Menu extends Component {
         return <li role="none">{child}</li>
       }
 
-      const controls = (
+      const controls =
         child.props['aria-controls'] ||
         child.props.controls ||
         this.props['aria-controls'] || // eslint-disable-line react/prop-types
         this.props.controls // eslint-disable-line react/prop-types
-      )
 
       if (matchComponentTypes(child, ['MenuItem'])) {
         return (
           <li role="none">
             {safeCloneElement(child, {
               controls,
-              disabled: (disabled || child.props.disabled),
+              disabled: disabled || child.props.disabled,
               onFocus: this.handleMenuItemFocus,
               onBlur: this.handleMenuItemBlur,
               onSelect: this.handleMenuItemSelect,
@@ -445,7 +459,7 @@ class Menu extends Component {
           <li role="none">
             {safeCloneElement(child, {
               controls,
-              disabled: (disabled || child.props.disabled),
+              disabled: disabled || child.props.disabled,
               onFocus: this.handleMenuItemFocus,
               onBlur: this.handleMenuItemBlur,
               onSelect: this.handleMenuItemSelect,
@@ -491,7 +505,7 @@ class Menu extends Component {
     })
   }
 
-  renderMenu () {
+  renderMenu() {
     const {
       menuRef,
       disabled,
@@ -530,7 +544,7 @@ class Menu extends Component {
     )
   }
 
-  render () {
+  render() {
     const {
       show,
       defaultShow,
@@ -580,9 +594,11 @@ class Menu extends Component {
           disabled: trigger.props.disabled || disabled
         })}
       >
-          {this.renderMenu()}
+        {this.renderMenu()}
       </Popover>
-    ) : this.renderMenu()
+    ) : (
+      this.renderMenu()
+    )
   }
 }
 
