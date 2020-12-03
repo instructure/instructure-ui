@@ -49,7 +49,7 @@ module.exports = async ({
                 format: 'scss/variables'
               }
             ]
-          },
+          }
           // TODO: Revisit the best way to distribute tokens for vanilla JS
           // js: {
           //   transformGroup: 'js',
@@ -70,5 +70,5 @@ module.exports = async ({
 
       dictionary.buildAllPlatforms()
     })
-    .catch(e => error(e))
+    .catch((e) => error(e))
 }

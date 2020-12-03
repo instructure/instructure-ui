@@ -34,7 +34,11 @@ const generateRemoveComponentsDirTransforms = (packages = []) => {
       },
       transform: {
         importType: undefined,
-        importPath: importPath => importPath.replace(new RegExp(importPattern), `${packageName}/${sourceDir}`)
+        importPath: (importPath) =>
+          importPath.replace(
+            new RegExp(importPattern),
+            `${packageName}/${sourceDir}`
+          )
       }
     }
   }
@@ -59,7 +63,8 @@ module.exports = {
       },
       transform: {
         importType: 'default',
-        importPath: importPath => importPath.replace(new RegExp('/components/'), '/')
+        importPath: (importPath) =>
+          importPath.replace(new RegExp('/components/'), '/')
       }
     },
     {
@@ -90,10 +95,7 @@ module.exports = {
           'TextInput',
           'TimeInput'
         ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-forms'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-forms']
       },
       transform: {
         importPath: '@instructure/ui-forms'
@@ -115,10 +117,7 @@ module.exports = {
     {
       where: {
         moduleName: 'ApplyTheme',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-themeable'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-themeable']
       },
       transform: {
         importPath: '@instructure/ui-themeable'
@@ -127,10 +126,7 @@ module.exports = {
     {
       where: {
         moduleName: 'ApplyLocale',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-i18n'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-i18n']
       },
       transform: {
         importPath: '@instructure/ui-i18n'
@@ -139,10 +135,7 @@ module.exports = {
     {
       where: {
         moduleName: 'Alert',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-alerts'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-alerts']
       },
       transform: {
         importPath: '@instructure/ui-alerts'
@@ -167,10 +160,7 @@ module.exports = {
           'Tag',
           'Text'
         ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-elements'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-elements']
       },
       transform: {
         importPath: '@instructure/ui-elements'
@@ -189,10 +179,7 @@ module.exports = {
     {
       where: {
         moduleName: 'Billboard',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-billboard'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-billboard']
       },
       transform: {
         importPath: '@instructure/ui-billboard'
@@ -200,14 +187,8 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: [
-          'Breadcrumb',
-          'BreadcrumbLink'
-        ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-breadcrumb'
-        ]
+        moduleNames: ['Breadcrumb', 'BreadcrumbLink'],
+        packageNames: ['@instructure/ui-core', '@instructure/ui-breadcrumb']
       },
       transform: {
         importPath: '@instructure/ui-breadcrumb'
@@ -215,14 +196,8 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: [
-          'Button',
-          'CloseButton'
-        ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-buttons'
-        ]
+        moduleNames: ['Button', 'CloseButton'],
+        packageNames: ['@instructure/ui-core', '@instructure/ui-buttons']
       },
       transform: {
         importPath: '@instructure/ui-buttons'
@@ -231,10 +206,7 @@ module.exports = {
     {
       where: {
         moduleName: 'Container',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-container'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-container']
       },
       transform: {
         moduleName: 'View',
@@ -244,10 +216,7 @@ module.exports = {
     {
       where: {
         moduleName: 'ContextBox',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-elements'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-elements']
       },
       transform: {
         moduleName: 'ContextView',
@@ -273,10 +242,7 @@ module.exports = {
           'Responsive',
           'View'
         ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-layout'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-layout']
       },
       transform: {
         importPath: '@instructure/ui-layout'
@@ -298,10 +264,7 @@ module.exports = {
           'scopeTab',
           'hasVisibleChildren'
         ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-a11y'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-a11y']
       },
       transform: {
         importPath: '@instructure/ui-a11y'
@@ -309,14 +272,8 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: [
-          'InlineSVG',
-          'SVGIcon'
-        ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-svg-images'
-        ]
+        moduleNames: ['InlineSVG', 'SVGIcon'],
+        packageNames: ['@instructure/ui-core', '@instructure/ui-svg-images']
       },
       transform: {
         importPath: '@instructure/ui-svg-images'
@@ -337,10 +294,7 @@ module.exports = {
           'Tooltip',
           'Tray'
         ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-overlays'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-overlays']
       },
       transform: {
         importPath: '@instructure/ui-overlays'
@@ -359,10 +313,7 @@ module.exports = {
     {
       where: {
         moduleName: 'Portal',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-portal'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-portal']
       },
       transform: {
         importPath: '@instructure/ui-portal'
@@ -370,14 +321,8 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: [
-          'TabList',
-          'TabPanel'
-        ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-tabs'
-        ]
+        moduleNames: ['TabList', 'TabPanel'],
+        packageNames: ['@instructure/ui-core', '@instructure/ui-tabs']
       },
       transform: {
         importPath: '@instructure/ui-tabs'
@@ -386,10 +331,7 @@ module.exports = {
     {
       where: {
         moduleName: 'ToggleDetails',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-toggle-details'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-toggle-details']
       },
       transform: {
         importPath: '@instructure/ui-toggle-details'
@@ -407,10 +349,7 @@ module.exports = {
     {
       where: {
         moduleName: 'TreeBrowser',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-tree-browser'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-tree-browser']
       },
       transform: {
         importPath: '@instructure/ui-tree-browser'
@@ -427,14 +366,8 @@ module.exports = {
     },
     {
       where: {
-        moduleNames: [
-          'Menu',
-          'MenuItem'
-        ],
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-menu'
-        ]
+        moduleNames: ['Menu', 'MenuItem'],
+        packageNames: ['@instructure/ui-core', '@instructure/ui-menu']
       },
       transform: {
         importPath: '@instructure/ui-menu'
@@ -464,10 +397,7 @@ module.exports = {
     {
       where: {
         moduleName: 'hasVisibleChildren',
-        packageNames: [
-          '@instructure/ui-core',
-          '@instructure/ui-a11y'
-        ]
+        packageNames: ['@instructure/ui-core', '@instructure/ui-a11y']
       },
       transform: {
         importPath: '@instructure/ui-a11y'
@@ -506,7 +436,7 @@ module.exports = {
         importPattern: '^@instructure/ui-icons/(lib|es)/Line/(.*)$'
       },
       transform: {
-        moduleName: moduleName => `${moduleName}Line`,
+        moduleName: (moduleName) => `${moduleName}Line`,
         importPath: '@instructure/ui-icons'
       }
     },
@@ -515,13 +445,13 @@ module.exports = {
         importPattern: '^@instructure/ui-icons/(lib|es)/Solid/(.*)$'
       },
       transform: {
-        moduleName: moduleName => `${moduleName}Solid`,
+        moduleName: (moduleName) => `${moduleName}Solid`,
         importPath: '@instructure/ui-icons'
       }
     },
     {
       where: {
-        importPattern: '^@instructure/ui-themes/(lib|es)/canvas(/base)?$',
+        importPattern: '^@instructure/ui-themes/(lib|es)/canvas(/base)?$'
       },
       transform: {
         importType: undefined, // Leave importType undefined to preserve whatever import style was already being used here
@@ -530,7 +460,8 @@ module.exports = {
     },
     {
       where: {
-        importPattern: '^@instructure/ui-themes/(lib|es)/canvas/(high-contrast|a11y)$',
+        importPattern:
+          '^@instructure/ui-themes/(lib|es)/canvas/(high-contrast|a11y)$'
       },
       transform: {
         importType: undefined,
@@ -561,14 +492,8 @@ module.exports = {
     },
     {
       where: {
-        packageNames: [
-          '@instructure/ui-utils',
-          '@instructure/ui-i18n'
-        ],
-        moduleNames: [
-          'DateTime',
-          'Locale'
-        ]
+        packageNames: ['@instructure/ui-utils', '@instructure/ui-i18n'],
+        moduleNames: ['DateTime', 'Locale']
       },
       transform: {
         importPath: '@instructure/ui-i18n'
@@ -577,10 +502,7 @@ module.exports = {
     {
       where: {
         packageName: '@instructure/ui-utils',
-        moduleNames: [
-          'findTabbable',
-          'scopeTab'
-        ]
+        moduleNames: ['findTabbable', 'scopeTab']
       },
       transform: '@instructure/ui-a11y'
     },
@@ -624,13 +546,7 @@ module.exports = {
     {
       where: {
         packageName: '@instructure/ui-themeable',
-        moduleNames: [
-          'alpha',
-          'darken',
-          'lighten',
-          'contrast',
-          'isValid'
-        ]
+        moduleNames: ['alpha', 'darken', 'lighten', 'contrast', 'isValid']
       },
       transform: {
         importPath: '@instructure/ui-color-utils'
@@ -666,10 +582,7 @@ module.exports = {
     {
       where: {
         packageName: '@instructure/ui-editable',
-        moduleNames: [
-          'Editable',
-          'InPlaceEdit'
-        ]
+        moduleNames: ['Editable', 'InPlaceEdit']
       },
       transform: {
         importPath: '@instructure/ui-editable'
@@ -678,10 +591,7 @@ module.exports = {
     {
       where: {
         packageName: '@instructure/ui-focusable',
-        moduleNames: [
-          'Focusable',
-          'FocusableView'
-        ]
+        moduleNames: ['Focusable', 'FocusableView']
       },
       transform: {
         importPath: '@instructure/ui-focusable'
@@ -788,10 +698,7 @@ module.exports = {
     {
       where: {
         packageName: '@instructure/ui-toggle-details',
-        moduleNames: [
-          'Expandable',
-          'ToggleGroup'
-        ]
+        moduleNames: ['Expandable', 'ToggleGroup']
       },
       transform: {
         importPath: '@instructure/ui-toggle-details'

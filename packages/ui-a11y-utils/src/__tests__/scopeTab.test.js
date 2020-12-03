@@ -64,9 +64,7 @@ describe('scopeTab', async () => {
   it('should not attempt scoping when no tabbable children', async () => {
     const subject = await mount(
       <div>
-        <div id="container">
-          Hello
-        </div>
+        <div id="container">Hello</div>
         <input />
       </div>
     )

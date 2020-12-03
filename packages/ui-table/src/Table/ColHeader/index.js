@@ -28,7 +28,10 @@ import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
-import { IconMiniArrowUpLine, IconMiniArrowDownLine } from '@instructure/ui-icons'
+import {
+  IconMiniArrowUpLine,
+  IconMiniArrowDownLine
+} from '@instructure/ui-icons'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -68,13 +71,7 @@ class ColHeader extends Component {
     /**
      * The column header scope attribute. See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
      */
-    scope: PropTypes.oneOf([
-      'row',
-      'col',
-      'rowgroup',
-      'colgroup',
-      'auto'
-    ])
+    scope: PropTypes.oneOf(['row', 'col', 'rowgroup', 'colgroup', 'auto'])
   }
   /* eslint-enable react/require-default-props */
 
@@ -89,11 +86,11 @@ class ColHeader extends Component {
     const { id, onRequestSort } = this.props
 
     onRequestSort(event, {
-      id,
+      id
     })
   }
 
-  renderSortArrow () {
+  renderSortArrow() {
     const { sortDirection, onRequestSort } = this.props
 
     if (sortDirection === 'ascending') {
@@ -104,12 +101,12 @@ class ColHeader extends Component {
     }
     if (onRequestSort) {
       // Reserve a space for arrow to keep column width consistent
-      return <IconMiniArrowUpLine style={{color: 'transparent'}} />
+      return <IconMiniArrowUpLine style={{ color: 'transparent' }} />
     }
     return null
   }
 
-  render () {
+  render() {
     const {
       onRequestSort,
       width,
@@ -125,13 +122,13 @@ class ColHeader extends Component {
         className={classnames({
           [styles.root]: true,
           [styles.header]: !onRequestSort,
-          [styles[`textAlign--${textAlign}`]]: true,
+          [styles[`textAlign--${textAlign}`]]: true
         })}
         style={{
-          width,
+          width
         }}
         scope={scope}
-        aria-sort={ sortDirection }
+        aria-sort={sortDirection}
       >
         {onRequestSort && (
           <button
@@ -139,7 +136,7 @@ class ColHeader extends Component {
             className={classnames({
               [styles.header]: true,
               [styles.button]: true,
-              [styles[`flexDirection--${textAlign}`]]: true,
+              [styles[`flexDirection--${textAlign}`]]: true
             })}
           >
             <div>

@@ -24,7 +24,7 @@
 
 //  TODO: delete error value once it has been removed in v8.0.0
 
-export default function generator ({ typography, colors, spacing }) {
+export default function generator({ typography, colors, spacing }) {
   return {
     ...typography,
 

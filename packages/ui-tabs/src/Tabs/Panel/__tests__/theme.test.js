@@ -33,8 +33,7 @@ describe('Panel.theme', async () => {
 
     describe('secondary variant', async () => {
       it('should ensure text and tab panel background meet 3:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(3)
+        expect(contrast(variables.color, variables.background)).to.be.above(3)
       })
     })
   })
@@ -44,8 +43,7 @@ describe('Panel.theme', async () => {
 
     describe('secondary variant', async () => {
       it('should ensure text and tab panel background meet 4.5:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(4.5)
+        expect(contrast(variables.color, variables.background)).to.be.above(4.5)
       })
     })
   })

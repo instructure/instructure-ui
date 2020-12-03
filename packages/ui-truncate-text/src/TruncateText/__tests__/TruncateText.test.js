@@ -34,7 +34,7 @@ describe('<TruncateText />', async () => {
 
   it('should truncate text', async () => {
     const subject = await mount(
-      <div style={{width: '200px'}}>
+      <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
       </div>
     )
@@ -49,7 +49,12 @@ describe('<TruncateText />', async () => {
   it('should recalculate when parent width changes', async () => {
     let container
     const subject = await mount(
-      <div style={{width: '200px'}} componentRef={(el) => { container = el }}>
+      <div
+        style={{ width: '200px' }}
+        componentRef={(el) => {
+          container = el
+        }}
+      >
         <TruncateText>{defaultText}</TruncateText>
       </div>
     )
@@ -74,9 +79,12 @@ describe('<TruncateText />', async () => {
 
   it('should preserve node structure', async () => {
     const subject = await mount(
-      <div style={{width: '200px'}}>
+      <div style={{ width: '200px' }}>
         <TruncateText>
-          <p className="testClass">Hello world! <strong>This is a</strong> long string that <em>should truncate</em></p>
+          <p className="testClass">
+            Hello world! <strong>This is a</strong> long string that{' '}
+            <em>should truncate</em>
+          </p>
         </TruncateText>
       </div>
     )
@@ -93,7 +101,7 @@ describe('<TruncateText />', async () => {
 
   it('should recalculate if props change', async () => {
     const subject = await mount(
-      <div style={{width: '200px'}}>
+      <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
       </div>
     )
@@ -125,9 +133,7 @@ describe('<TruncateText />', async () => {
     const text = renderedContent.getTextContent()
 
     await subject.setProps({
-      children: (
-        <span>This is a different string of text</span>
-      )
+      children: <span>This is a different string of text</span>
     })
 
     await wait(() => {
@@ -140,7 +146,12 @@ describe('<TruncateText />', async () => {
 
     let container
     await mount(
-      <div style={{width: '700px'}} componentRef={(el) => { container = el }}>
+      <div
+        style={{ width: '700px' }}
+        componentRef={(el) => {
+          container = el
+        }}
+      >
         <TruncateText onUpdate={onUpdate}>{defaultText}</TruncateText>
       </div>
     )
@@ -160,25 +171,33 @@ describe('<TruncateText />', async () => {
 
   it('should warn if children prop receives too deep of a node tree', async () => {
     const consoleError = stub(console, 'error')
-    const warning = 'Some children are too deep in the node tree and will not render.'
+    const warning =
+      'Some children are too deep in the node tree and will not render.'
     await mount(
-      <div style={{width: '200px'}}>
+      <div style={{ width: '200px' }}>
         <TruncateText>
-          Hello world! <strong><span>This is a</span></strong> long string that should truncate
+          Hello world!{' '}
+          <strong>
+            <span>This is a</span>
+          </strong>{' '}
+          long string that should truncate
         </TruncateText>
       </div>
     )
     await wait(() => {
-      expect(consoleError)
-        .to.have.been.calledWithMatch(warning)
+      expect(consoleError).to.have.been.calledWithMatch(warning)
     })
   })
 
   it('should render text at any size with no lineHeight set', async () => {
     let stage
     await mount(
-      <div style={{width: '200px'}}>
-        <span ref={(el) => { stage = el }}>
+      <div style={{ width: '200px' }}>
+        <span
+          ref={(el) => {
+            stage = el
+          }}
+        >
           <Text size="x-small">
             <TruncateText>xsmall</TruncateText>
           </Text>
@@ -208,9 +227,7 @@ describe('<TruncateText />', async () => {
     let error = false
 
     try {
-      const subject = await mount(
-        <TruncateText>{''}</TruncateText>
-      )
+      const subject = await mount(<TruncateText>{''}</TruncateText>)
 
       await subject.setProps({ children: 'hello world' })
       await subject.setProps({ children: '' })
@@ -223,7 +240,7 @@ describe('<TruncateText />', async () => {
 
   it('should meet a11y standards', async () => {
     const subject = await mount(
-      <div style={{width: '200px'}}>
+      <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
       </div>
     )

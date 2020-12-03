@@ -49,10 +49,14 @@ class ReactComponentWrapper {
       if (wrapper && !rendered) {
         result = {
           setProps(newProps) {
-            return doAsync(() => { wrapper.setChildProps(newProps) })
+            return doAsync(() => {
+              wrapper.setChildProps(newProps)
+            })
           },
           setContext(newContext) {
-            return doAsync(() => { wrapper.setChildContext(newContext) })
+            return doAsync(() => {
+              wrapper.setChildContext(newContext)
+            })
           },
           getDOMNode() {
             return wrapper.getDOMNode()
@@ -146,27 +150,22 @@ function createMountWrapper(element, options = {}) {
     setChildProps(newProps) {
       const { props: oldProps } = this.state
       const props = { ...oldProps, ...newProps }
-      return new Promise(resolve => this.setState({ props }, resolve))
+      return new Promise((resolve) => this.setState({ props }, resolve))
     }
 
     setChildContext(newContext) {
       const { context: oldContext } = this.state
       const context = { ...oldContext, ...newContext }
-      return new Promise(resolve => this.setState({ context }, resolve))
+      return new Promise((resolve) => this.setState({ context }, resolve))
     }
 
     render() {
       const { Component } = this.props
       const { props } = this.state
 
-      const {
-        componentRef,
-        ...componentProps
-      } = props
+      const { componentRef, ...componentProps } = props
 
-      return (
-        <Component ref={componentRef} {...componentProps} />
-      )
+      return <Component ref={componentRef} {...componentProps} />
     }
   }
 

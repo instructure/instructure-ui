@@ -23,7 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import { SimpleSelect } from '../index'
 import { SimpleSelectLocator } from '../SimpleSelectLocator'
@@ -34,10 +40,10 @@ describe('<SimpleSelect />', async () => {
     stub(console, 'warn') // suppress experimental warnings
   })
 
-  const lastCall = spy => spy.lastCall.args
+  const lastCall = (spy) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
-  const getOptions = (highlighted, selected, disabled) => (
-    defaultOptions.map(opt => (
+  const getOptions = (highlighted, selected, disabled) =>
+    defaultOptions.map((opt) => (
       <SimpleSelect.Option
         id={opt}
         key={opt}
@@ -47,17 +53,14 @@ describe('<SimpleSelect />', async () => {
         {opt}
       </SimpleSelect.Option>
     ))
-  )
 
   it('should render an input and a list', async () => {
     await mount(
-      <SimpleSelect renderLabel="Choose an option">
-        {getOptions()}
-      </SimpleSelect>
+      <SimpleSelect renderLabel="Choose an option">{getOptions()}</SimpleSelect>
     )
     const select = await SimpleSelectLocator.find()
     const input = await select.findInput()
-    let list = await select.findOptionsList({expectEmpty: true})
+    let list = await select.findOptionsList({ expectEmpty: true })
 
     expect(input).to.exist()
     expect(list).to.not.exist()
@@ -71,14 +74,22 @@ describe('<SimpleSelect />', async () => {
   it('should render groups', async () => {
     await mount(
       <SimpleSelect renderLabel="Choose an option">
-        <SimpleSelect.Option id="0" value="0">ungrouped option one</SimpleSelect.Option>
+        <SimpleSelect.Option id="0" value="0">
+          ungrouped option one
+        </SimpleSelect.Option>
         <SimpleSelect.Group renderLabel="Group one">
-          <SimpleSelect.Option id="1" value="1">grouped option one</SimpleSelect.Option>
+          <SimpleSelect.Option id="1" value="1">
+            grouped option one
+          </SimpleSelect.Option>
         </SimpleSelect.Group>
         <SimpleSelect.Group renderLabel="Group two">
-          <SimpleSelect.Option id="2" value="2">grouped option two</SimpleSelect.Option>
+          <SimpleSelect.Option id="2" value="2">
+            grouped option two
+          </SimpleSelect.Option>
         </SimpleSelect.Group>
-        <SimpleSelect.Option id="3" value="3">ungrouped option two</SimpleSelect.Option>
+        <SimpleSelect.Option id="3" value="3">
+          ungrouped option two
+        </SimpleSelect.Option>
       </SimpleSelect>
     )
     const select = await SimpleSelectLocator.find()
@@ -92,7 +103,9 @@ describe('<SimpleSelect />', async () => {
     const label = await listbox.find(':textContent("Group one")')
 
     expect(label.getAttribute('role')).to.equal('presentation')
-    expect(groups[0].getAttribute('aria-labelledby')).to.equal(label.getAttribute('id'))
+    expect(groups[0].getAttribute('aria-labelledby')).to.equal(
+      label.getAttribute('id')
+    )
     expect(groups).to.have.length(2)
   })
 
@@ -109,21 +122,22 @@ describe('<SimpleSelect />', async () => {
 
     await input.click()
     const list = await select.findOptionsList()
-    const div = await list.find(':textContent("invalid")', { expectEmpty: true })
+    const div = await list.find(':textContent("invalid")', {
+      expectEmpty: true
+    })
 
     expect(div).to.not.exist()
     await wait(() => {
-      expect(consoleError).to.have.been.calledWithMatch('Expected one of Group, Option')
+      expect(consoleError).to.have.been.calledWithMatch(
+        'Expected one of Group, Option'
+      )
     })
   })
 
-  it('should fire onChange when selected option changes' , async () => {
+  it('should fire onChange when selected option changes', async () => {
     const onChange = stub()
     await mount(
-      <SimpleSelect
-        renderLabel="Choose an option"
-        onChange={onChange}
-      >
+      <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
         {getOptions()}
       </SimpleSelect>
     )
@@ -138,13 +152,10 @@ describe('<SimpleSelect />', async () => {
     expect(lastCall(onChange)[1].id).to.equal(defaultOptions[1])
   })
 
-  it('should behave uncontrolled' , async () => {
+  it('should behave uncontrolled', async () => {
     const onChange = stub()
     await mount(
-      <SimpleSelect
-        renderLabel="Choose an option"
-        onChange={onChange}
-      >
+      <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
         {getOptions()}
       </SimpleSelect>
     )
@@ -162,7 +173,7 @@ describe('<SimpleSelect />', async () => {
     expect(lastCall(onChange)[1].id).to.equal(defaultOptions[1])
   })
 
-  it('should behave controlled' , async () => {
+  it('should behave controlled', async () => {
     const onChange = stub()
     const subject = await mount(
       <SimpleSelect
@@ -186,18 +197,15 @@ describe('<SimpleSelect />', async () => {
     expect(input.getAttribute('value')).to.equal(defaultOptions[1])
     expect(lastCall(onChange)[1].id).to.equal(defaultOptions[2])
 
-    await subject.setProps({value: defaultOptions[2]})
+    await subject.setProps({ value: defaultOptions[2] })
 
     expect(input.getAttribute('value')).to.equal(defaultOptions[2])
   })
 
-  it('should fire onFocus when input gains focus' , async () => {
+  it('should fire onFocus when input gains focus', async () => {
     const onFocus = stub()
     await mount(
-      <SimpleSelect
-        renderLabel="Choose an option"
-        onFocus={onFocus}
-      >
+      <SimpleSelect renderLabel="Choose an option" onFocus={onFocus}>
         {getOptions()}
       </SimpleSelect>
     )
@@ -224,10 +232,7 @@ describe('<SimpleSelect />', async () => {
 
     it('should always render readonly', async () => {
       await mount(
-        <SimpleSelect
-          renderLabel="Choose an option"
-          interaction="enabled"
-        />
+        <SimpleSelect renderLabel="Choose an option" interaction="enabled" />
       )
       const select = await SimpleSelectLocator.find()
       const input = await select.findInput()
@@ -252,9 +257,7 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should render required when isRequired={true}', async () => {
-      await mount(
-        <SimpleSelect renderLabel="Choose an option" isRequired />
-      )
+      await mount(<SimpleSelect renderLabel="Choose an option" isRequired />)
       const select = await SimpleSelectLocator.find()
       const input = await select.findInput()
 
@@ -275,7 +278,10 @@ describe('<SimpleSelect />', async () => {
 
     it('should allow assistive text', async () => {
       await mount(
-        <SimpleSelect renderLabel="Choose an option" assistiveText="hello world">
+        <SimpleSelect
+          renderLabel="Choose an option"
+          assistiveText="hello world"
+        >
           {getOptions()}
         </SimpleSelect>
       )
@@ -283,7 +289,9 @@ describe('<SimpleSelect />', async () => {
       const input = await select.findInput()
       const text = await select.find(':textContent("hello world")')
 
-      expect(input.getAttribute('aria-describedby')).to.equal(text.getAttribute('id'))
+      expect(input.getAttribute('aria-describedby')).to.equal(
+        text.getAttribute('id')
+      )
     })
 
     it('should allow custom props to pass through', async () => {

@@ -27,7 +27,7 @@ import cleanData from '../cleanData'
 
 describe('cleanData', async () => {
   it('should remove spaces from the end of character data', async () => {
-    const data = [['T','e','s','t',' ','...']]
+    const data = [['T', 'e', 's', 't', ' ', '...']]
     const options = {
       truncate: 'character',
       ellipsis: '...',
@@ -39,7 +39,7 @@ describe('cleanData', async () => {
   })
 
   it('should remove spaces from the end of word data', async () => {
-    const data = [['Test ','...']]
+    const data = [['Test ', '...']]
     const options = {
       truncate: 'word',
       ellipsis: '...',
@@ -51,7 +51,9 @@ describe('cleanData', async () => {
   })
 
   it('should remove spaces from the middle of character data', async () => {
-    const data = [['H','e','l','l','o',' ','...',' ','w','o','r','l','d']]
+    const data = [
+      ['H', 'e', 'l', 'l', 'o', ' ', '...', ' ', 'w', 'o', 'r', 'l', 'd']
+    ]
     const options = {
       truncate: 'character',
       ellipsis: '...',
@@ -63,7 +65,7 @@ describe('cleanData', async () => {
   })
 
   it('should remove spaces from the middle of word data', async () => {
-    const data = [['Hello ','...','world']]
+    const data = [['Hello ', '...', 'world']]
     const options = {
       truncate: 'word',
       ellipsis: '...',
@@ -75,11 +77,11 @@ describe('cleanData', async () => {
   })
 
   it('should do a thorough cleaning', async () => {
-    const data = [['T','e','s','t','.',' ','...']]
+    const data = [['T', 'e', 's', 't', '.', ' ', '...']]
     const options = {
       truncate: 'character',
       ellipsis: '...',
-      ignore: [' ','.']
+      ignore: [' ', '.']
     }
 
     const newData = cleanData(data, options, true)
@@ -87,7 +89,7 @@ describe('cleanData', async () => {
   })
 
   it('should remove spaces from the end of complex character data', async () => {
-    let data = [['H','e','l','l','o',' '],['...']]
+    let data = [['H', 'e', 'l', 'l', 'o', ' '], ['...']]
     const options = {
       truncate: 'character',
       ellipsis: '...',
@@ -97,7 +99,10 @@ describe('cleanData', async () => {
     let newData = cleanData(data, options)
     const text = newData[0].join('') + newData[1].join('')
 
-    data = [['H','e','l','l','o',' '],['w','o','r','l','d',' ','...']]
+    data = [
+      ['H', 'e', 'l', 'l', 'o', ' '],
+      ['w', 'o', 'r', 'l', 'd', ' ', '...']
+    ]
     newData = cleanData(data, options)
     const text2 = newData[0].join('') + newData[1].join('')
 
@@ -106,7 +111,7 @@ describe('cleanData', async () => {
   })
 
   it('should remove spaces from the middle of complex word data', async () => {
-    let data = [['Hello ', '...'],['world']]
+    let data = [['Hello ', '...'], ['world']]
     const options = {
       truncate: 'word',
       ellipsis: '...',
@@ -116,7 +121,7 @@ describe('cleanData', async () => {
     let newData = cleanData(data, options)
     const text = newData[0].join('') + newData[1].join('')
 
-    data = [['Hello '],['...', 'world']]
+    data = [['Hello '], ['...', 'world']]
     newData = cleanData(data, options)
     const text2 = newData[0].join('') + newData[1].join('')
 

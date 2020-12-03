@@ -31,7 +31,11 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Grid } from '@instructure/ui-grid'
 import { error } from '@instructure/console/macro'
 import { themeable } from '@instructure/ui-themeable'
-import { omitProps, pickProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  pickProps,
+  getElementType
+} from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 
 import { FormFieldLabel } from '../FormFieldLabel'
@@ -51,23 +55,23 @@ class FormFieldLayout extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     /**
-    * the id of the input (to link it to its label for a11y)
-    */
+     * the id of the input (to link it to its label for a11y)
+     */
     id: PropTypes.string,
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType,
     /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
+     * object with shape: `{
+     * text: PropTypes.string,
+     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     *   }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * id for the form field messages
-    */
+     * id for the form field messages
+     */
     messagesId: PropTypes.string,
     children: PropTypes.node,
     inline: PropTypes.bool,
@@ -90,31 +94,33 @@ class FormFieldLayout extends Component {
     inputContainerRef: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     this._messagesId = props.messagesId || uid('FormFieldLayout-messages')
 
     error(
-      typeof props.width !== 'undefined' || !props.inline || props.layout !== 'inline',
+      typeof props.width !== 'undefined' ||
+        !props.inline ||
+        props.layout !== 'inline',
       `[FormFieldLayout] The 'inline' prop is true, and the 'layout' is set to 'inline'.
       This will cause a layout issue in Internet Explorer 11 unless you also add a value for the 'width' prop.`
     )
   }
 
-  get hasVisibleLabel () {
+  get hasVisibleLabel() {
     return this.props.label && hasVisibleChildren(this.props.label)
   }
 
-  get hasMessages () {
-    return this.props.messages && (this.props.messages.length > 0)
+  get hasMessages() {
+    return this.props.messages && this.props.messages.length > 0
   }
 
-  get elementType () {
+  get elementType() {
     return getElementType(FormFieldLayout, this.props)
   }
 
-  get inlineContainerAndLabel () {
+  get inlineContainerAndLabel() {
     // Return if both the component container and label will display inline
     return this.props.inline && this.props.layout === 'inline'
   }
@@ -125,16 +131,17 @@ class FormFieldLayout extends Component {
     }
   }
 
-  renderLabel () {
+  renderLabel() {
     if (this.hasVisibleLabel) {
       return (
         <Grid.Col
           textAlign={this.props.labelAlign}
-          width={(this.inlineContainerAndLabel) ? 'auto' : 3}
+          width={this.inlineContainerAndLabel ? 'auto' : 3}
         >
           <FormFieldLabel
-            aria-hidden={this.elementType === 'fieldset' ? 'true' : null}>
-            { this.props.label }
+            aria-hidden={this.elementType === 'fieldset' ? 'true' : null}
+          >
+            {this.props.label}
           </FormFieldLabel>
         </Grid.Col>
       )
@@ -146,37 +153,42 @@ class FormFieldLayout extends Component {
     }
   }
 
-  renderLegend () {
+  renderLegend() {
     // note: the legend element must be the first child of a fieldset element for SR
     // so we render it twice in that case (once for SR-only and one that is visible)
     return (
       <ScreenReaderContent as="legend">
-        { this.props.label }
-        { this.hasMessages && <FormFieldMessages messages={this.props.messages} /> }
+        {this.props.label}
+        {this.hasMessages && (
+          <FormFieldMessages messages={this.props.messages} />
+        )}
       </ScreenReaderContent>
     )
   }
 
-  renderMessages () {
+  renderMessages() {
     return (
       <FormFieldMessages id={this._messagesId} messages={this.props.messages} />
     )
   }
 
-  renderVisibleMessages () {
+  renderVisibleMessages() {
     return this.hasMessages ? (
       <Grid.Row>
         <Grid.Col
-          offset={(this.inlineContainerAndLabel) ? null : 3}
-          textAlign={(this.inlineContainerAndLabel) ? 'end' : null}
+          offset={this.inlineContainerAndLabel ? null : 3}
+          textAlign={this.inlineContainerAndLabel ? 'end' : null}
         >
-          <FormFieldMessages id={this._messagesId} messages={this.props.messages} />
+          <FormFieldMessages
+            id={this._messagesId}
+            messages={this.props.messages}
+          />
         </Grid.Col>
       </Grid.Row>
     ) : null
   }
 
-  render () {
+  render() {
     const ElementType = this.elementType
 
     const classes = {
@@ -186,30 +198,37 @@ class FormFieldLayout extends Component {
 
     return (
       <ElementType
-        {...omitProps(this.props, {...FormFieldLayout.propTypes, ...Grid.propTypes})}
+        {...omitProps(this.props, {
+          ...FormFieldLayout.propTypes,
+          ...Grid.propTypes
+        })}
         className={classnames(classes)}
         style={{
           width: this.props.width
         }}
         aria-describedby={this.hasMessages ? this._messagesId : null}
       >
-        { this.elementType === 'fieldset' && this.renderLegend() }
+        {this.elementType === 'fieldset' && this.renderLegend()}
         <Grid
           rowSpacing="small"
           colSpacing="small"
-          startAt={this.props.layout === 'inline' && this.hasVisibleLabel ? 'medium' : null}
+          startAt={
+            this.props.layout === 'inline' && this.hasVisibleLabel
+              ? 'medium'
+              : null
+          }
           {...pickProps(this.props, Grid.propTypes)}
         >
           <Grid.Row>
-            { this.renderLabel() }
+            {this.renderLabel()}
             <Grid.Col
-              width={(this.inlineContainerAndLabel) ? 'auto' : null}
+              width={this.inlineContainerAndLabel ? 'auto' : null}
               elementRef={this.handleInputContainerRef}
             >
-              { this.props.children }
+              {this.props.children}
             </Grid.Col>
           </Grid.Row>
-          { this.renderVisibleMessages() }
+          {this.renderVisibleMessages()}
         </Grid>
       </ElementType>
     )

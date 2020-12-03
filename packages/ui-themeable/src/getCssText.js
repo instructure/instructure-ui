@@ -37,8 +37,10 @@ import { applyCustomMediaToCss } from './applyCustomMediaToCss'
  * @param {string} prefix CSS variable prefix/namespace
  * @returns {String} css text
  */
-function getCssText (template, variables, prefix) {
-  const variableNames = variables ? replaceValuesWithVariableNames(variables, prefix) : {}
+function getCssText(template, variables, prefix) {
+  const variableNames = variables
+    ? replaceValuesWithVariableNames(variables, prefix)
+    : {}
 
   // inject the CSS variable names into the style template
   let cssText = template(variableNames)
@@ -47,21 +49,23 @@ function getCssText (template, variables, prefix) {
   const customMedia = variables ? () => formatVariableNames(variables) : {}
   cssText = applyCustomMediaToCss(cssText, customMedia)
 
-  const cssVariablesString = variables ? formatVariableNames(variables, prefix) : ''
+  const cssVariablesString = variables
+    ? formatVariableNames(variables, prefix)
+    : ''
 
   // append the CSS variables (defaults) to the result
-  cssText = [
-    cssText,
-    variablesToCSSText(cssVariablesString)
-  ].join('\n')
+  cssText = [cssText, variablesToCSSText(cssVariablesString)].join('\n')
 
   return cssText
 }
 
-function variablesToCSSText (variables = {}) {
+function variablesToCSSText(variables = {}) {
   const rules = []
   for (const key in variables) {
-    if (Object.prototype.hasOwnProperty.call(variables, key) && typeof variables[key] !== 'undefined') {
+    if (
+      Object.prototype.hasOwnProperty.call(variables, key) &&
+      typeof variables[key] !== 'undefined'
+    ) {
       rules.push(`${key}: ${variables[key]}`)
     }
   }

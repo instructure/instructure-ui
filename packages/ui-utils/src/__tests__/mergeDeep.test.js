@@ -43,7 +43,9 @@ describe('mergeDeep', () => {
     const obj1 = { a: { b: 1, c: 1, d: { e: 1, f: 1 } } }
     const obj2 = { a: { b: 2, d: { f: 'f' } } }
 
-    expect(mergeDeep(obj1, obj2)).to.deep.equal({a: { b: 2, c: 1, d: {e: 1, f: 'f'} }})
+    expect(mergeDeep(obj1, obj2)).to.deep.equal({
+      a: { b: 2, c: 1, d: { e: 1, f: 'f' } }
+    })
   })
 
   it('should not merge strings', () => {
@@ -123,9 +125,8 @@ describe('mergeDeep', () => {
   })
 
   it('should not clone objects created with custom constructor', () => {
-    function TestType () { }
+    function TestType() {}
     const func = new TestType()
     expect(mergeDeep(func)).to.deep.equal(func)
   })
 })
-

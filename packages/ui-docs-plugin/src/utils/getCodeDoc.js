@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
-module.exports = function getCodeDoc (source, error) {
+module.exports = function getCodeDoc(source, error) {
   const doc = {}
   try {
-    doc.sections = (parseComments(source) || [])
-      .filter(section => section.type === 'doc')
+    doc.sections = (parseComments(source) || []).filter(
+      (section) => section.type === 'doc'
+    )
     doc.description = doc.sections[0].description
     doc.undocumented = doc.sections.length === 0
   } catch (err) {
@@ -35,15 +36,17 @@ module.exports = function getCodeDoc (source, error) {
   return doc
 }
 
-function parseComments (source) {
+function parseComments(source) {
   const commentRegex = {
-    single:        /^\s*\/\/.*$/,
+    single: /^\s*\/\/.*$/,
     docblockStart: /^\s*\/\*\*\s*$/,
-    multiStart:    /^\s*\/\*+\s*$/,
-    multiFinish:   /^\s*\*\/\s*$/
+    multiStart: /^\s*\/\*+\s*$/,
+    multiFinish: /^\s*\*\/\s*$/
   }
 
-  const lines = `${source.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split('\n')
+  const lines = `${source.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split(
+    '\n'
+  )
   const blocks = []
 
   let block = {
@@ -54,9 +57,13 @@ function parseComments (source) {
   }
   let indentAmount = false
 
-  function parseLine (line, i) {
+  function parseLine(line, i) {
     // Single-line parsing.
-    if (block.type !== 'multi' && block.type !== 'doc' && line.match(commentRegex.single)) {
+    if (
+      block.type !== 'multi' &&
+      block.type !== 'doc' &&
+      line.match(commentRegex.single)
+    ) {
       block.raw += `${line}\n`
       // Add the current line (and a newline) minus the comment marker.
       block.description += `${line.replace(/^\s*\/\/\s?/, '')}\n`
@@ -70,7 +77,9 @@ function parseComments (source) {
     // If we have reached the end of the current block, save it.
     if (block.type && line.match(commentRegex.multiFinish)) {
       const doneWithCurrentLine = block.type !== 'single'
-      block.description = block.description.replace(/^\n+/, '').replace(/\n+$/, '')
+      block.description = block.description
+        .replace(/^\n+/, '')
+        .replace(/\n+$/, '')
       blocks.push(block)
       indentAmount = false
       block = {
@@ -120,7 +129,11 @@ function parseComments (source) {
         indentAmount = line.match(/^\s*/)[0]
       }
       // Always strip same indentation amount from each line.
-      block.description += `${line.replace(new RegExp(`^${indentAmount}`), '', 1)}\n`
+      block.description += `${line.replace(
+        new RegExp(`^${indentAmount}`),
+        '',
+        1
+      )}\n`
     }
   }
 

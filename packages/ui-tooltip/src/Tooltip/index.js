@@ -57,26 +57,26 @@ category: components
 class Tooltip extends Component {
   static propTypes = {
     /**
-    * @param {Object} renderProps
-    * @param {Boolean} renderProps.focused - Is the Tooltip trigger focused?
-    * @param {Function} renderProps.getTriggerProps - Props to be spread onto the trigger element
-    */
+     * @param {Object} renderProps
+     * @param {Boolean} renderProps.focused - Is the Tooltip trigger focused?
+     * @param {Function} renderProps.getTriggerProps - Props to be spread onto the trigger element
+     */
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
-    * The content to render in the tooltip
-    */
+     * The content to render in the tooltip
+     */
     renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Whether or not the tooltip content is shown, when controlled
-    */
+     * Whether or not the tooltip content is shown, when controlled
+     */
     isShowingContent: PropTypes.bool,
     /**
      * Whether or not to show the content by default, when uncontrolled
      */
     defaultIsShowingContent: PropTypes.bool,
     /**
-    * the element type to render as (assumes a single child if 'as' is undefined)
-    */
+     * the element type to render as (assumes a single child if 'as' is undefined)
+     */
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     /**
      * The action that causes the Content to display (`click`, `hover`, `focus`)
@@ -132,12 +132,12 @@ class Tooltip extends Component {
 
     /* eslint-disable react/require-default-props */
     /**
-    * __Deprecated - use `renderTip`__
-    */
+     * __Deprecated - use `renderTip`__
+     */
     tip: PropTypes.node,
     /**
-    * __Deprecated - use `color`__
-    */
+     * __Deprecated - use `color`__
+     */
     variant: PropTypes.oneOf(['default', 'inverse'])
     /* eslint-enable react/require-default-props */
   }
@@ -169,7 +169,7 @@ class Tooltip extends Component {
     this.setState({ hasFocus: false })
   }
 
-  renderTrigger () {
+  renderTrigger() {
     const { children, as } = this.props
     const { hasFocus } = this.state
     const triggerProps = {
@@ -185,23 +185,21 @@ class Tooltip extends Component {
         </Trigger>
       )
     } else if (typeof children === 'function') {
-      return children(
-        {
-          focused: hasFocus,
-          getTriggerProps: (props) => {
-            return {
-              ...triggerProps,
-              ...props
-            }
+      return children({
+        focused: hasFocus,
+        getTriggerProps: (props) => {
+          return {
+            ...triggerProps,
+            ...props
           }
         }
-      )
+      })
     } else {
       return ensureSingleChild(this.props.children, triggerProps)
     }
   }
 
-  render () {
+  render() {
     const {
       renderTip,
       isShowingContent,
@@ -249,12 +247,8 @@ class Tooltip extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        <span
-          id={this._id}
-          className={styles.root}
-          role="tooltip"
-        >
-          { renderTip ? callRenderProp(renderTip) : tip }
+        <span id={this._id} className={styles.root} role="tooltip">
+          {renderTip ? callRenderProp(renderTip) : tip}
         </span>
       </Popover>
     )

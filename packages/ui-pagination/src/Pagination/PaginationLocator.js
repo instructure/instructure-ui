@@ -29,7 +29,8 @@ import { Pagination } from './index'
 const PaginationButtonLocator = locator(Pagination.Page.selector)
 
 export const PaginationLocator = locator(Pagination.selector, {
-  findAllPageButtons: async (...args) => PaginationButtonLocator.findAll(...args),
+  findAllPageButtons: async (...args) =>
+    PaginationButtonLocator.findAll(...args),
   findPageButton: async (...args) => PaginationButtonLocator.find(...args),
   findArrowButton: async (...args) => PaginationArrowButtonLocator.find(...args)
 })

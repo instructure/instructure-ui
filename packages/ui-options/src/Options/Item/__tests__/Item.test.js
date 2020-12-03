@@ -23,12 +23,18 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import { IconCheckSolid } from '@instructure/ui-icons'
 import { Options } from '../../index'
 import { Item } from '../index'
-import { OptionsItemLocator as ItemLocator }from '../OptionsItemLocator'
+import { OptionsItemLocator as ItemLocator } from '../OptionsItemLocator'
 import styles from '../styles.css'
 import ItemExamples from '../__examples__/Item.examples'
 
@@ -41,17 +47,13 @@ describe('<Item />', async () => {
   })
 
   it('should render not render as a listitem by default', async () => {
-    await mount(
-      <Item>Hello World</Item>
-    )
+    await mount(<Item>Hello World</Item>)
     const item = await ItemLocator.find()
     expect(item.getTagName()).to.not.equal('li')
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    await mount(
-      <Item as='li'>Hello World</Item>
-    )
+    await mount(<Item as="li">Hello World</Item>)
     const item = await ItemLocator.find()
     expect(item.getTagName()).to.equal('li')
   })
@@ -64,14 +66,11 @@ describe('<Item />', async () => {
     )
     const item = await ItemLocator.find()
 
-    expect(await item.find('#customContent'))
-      .to.have.text('Hello World')
+    expect(await item.find('#customContent')).to.have.text('Hello World')
   })
 
   it('should render role attributes appropriately when given a role', async () => {
-    await mount(
-      <Item role="option">Hello World</Item>
-    )
+    await mount(<Item role="option">Hello World</Item>)
     const item = await ItemLocator.find()
     const child = await item.find('[role="option"]')
 
@@ -81,11 +80,7 @@ describe('<Item />', async () => {
 
   it('should pass props through to label', async () => {
     await mount(
-      <Item
-        role="option"
-        tabIndex="-1"
-        data-custom-attr="true"
-      >
+      <Item role="option" tabIndex="-1" data-custom-attr="true">
         Hello World
       </Item>
     )
@@ -100,11 +95,7 @@ describe('<Item />', async () => {
 
   it('should pass event handlers through to label', async () => {
     const onClick = stub()
-    await mount(
-      <Item onClick={onClick}>
-        Hello World
-      </Item>
-    )
+    await mount(<Item onClick={onClick}>Hello World</Item>)
     const item = await ItemLocator.find()
     const label = await item.findWithText('Hello World')
 
@@ -133,11 +124,7 @@ describe('<Item />', async () => {
   })
 
   it('should render content before label', async () => {
-    await mount(
-      <Item renderBeforeLabel={<IconCheckSolid/>}>
-        Hello World
-      </Item>
-    )
+    await mount(<Item renderBeforeLabel={<IconCheckSolid />}>Hello World</Item>)
     const item = await ItemLocator.find()
     const content = await item.find(`.${styles['content--before']}`)
     const icon = await content.find('svg[name="IconCheck"]')
@@ -148,11 +135,7 @@ describe('<Item />', async () => {
   })
 
   it('should render content after label', async () => {
-    await mount(
-      <Item renderAfterLabel={<IconCheckSolid/>}>
-        Hello World
-      </Item>
-    )
+    await mount(<Item renderAfterLabel={<IconCheckSolid />}>Hello World</Item>)
     const item = await ItemLocator.find()
     const content = await item.find(`.${styles['content--after']}`)
     const icon = await content.find('svg[name="IconCheck"]')

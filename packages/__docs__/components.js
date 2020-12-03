@@ -52,13 +52,13 @@ export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput } from '@instructure/ui-date-input'
 export { Pill } from '@instructure/ui-pill'
 export { TextInput } from '@instructure/ui-text-input'
- export {
+export {
   FormField,
   FormFieldLabel,
   FormFieldMessage,
   FormFieldMessages,
   FormFieldLayout,
-  FormFieldGroup,
+  FormFieldGroup
 } from '@instructure/ui-form-field'
 export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
@@ -74,7 +74,12 @@ export { Tooltip } from '@instructure/ui-tooltip'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
 export { DrawerLayout } from '@instructure/ui-drawer-layout'
 export { Grid } from '@instructure/ui-grid'
-export { Checkbox, CheckboxGroup, CheckboxFacade, ToggleFacade } from '@instructure/ui-checkbox'
+export {
+  Checkbox,
+  CheckboxGroup,
+  CheckboxFacade,
+  ToggleFacade
+} from '@instructure/ui-checkbox'
 export { Navigation, AppNav } from '@instructure/ui-navigation'
 export { List, InlineList } from '@instructure/ui-list'
 export { Menu } from '@instructure/ui-menu'
@@ -108,4 +113,8 @@ export { View, ContextView } from '@instructure/ui-view'
 export { Tray } from '@instructure/ui-tray'
 export { Spinner } from '@instructure/ui-spinner'
 export * from '@instructure/ui-icons'
-export { Guidelines, Figure, ToggleBlockquote } from '@instructure/ui-docs-client'
+export {
+  Guidelines,
+  Figure,
+  ToggleBlockquote
+} from '@instructure/ui-docs-client'

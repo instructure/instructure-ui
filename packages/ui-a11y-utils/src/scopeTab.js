@@ -1,4 +1,3 @@
-
 /*
  * The MIT License (MIT)
  *
@@ -31,7 +30,7 @@ import {
   getActiveElement
 } from '@instructure/ui-dom-utils'
 
-function scopeTab (element, event, onLeavingFinalTabbable) {
+function scopeTab(element, event, onLeavingFinalTabbable) {
   const node = findDOMNode(element)
   const tabbable = findTabbable(node)
 
@@ -50,13 +49,12 @@ function scopeTab (element, event, onLeavingFinalTabbable) {
   }
 
   const finalTabbable = tabbable[event.shiftKey ? 0 : tabbable.length - 1]
-  const leavingFinalTabbable = (
+  const leavingFinalTabbable =
     isActiveElement(finalTabbable) ||
     // handle immediate shift+tab after opening with mouse
     isActiveElement(node) ||
     // already left final tabbable
     !containsActiveElement(element)
-  )
 
   if (!leavingFinalTabbable) return
 

@@ -42,16 +42,12 @@ class NavToggle extends Component {
     children: null
   }
 
-  focus () {
+  focus() {
     this._toggle.focus()
   }
 
-  render () {
-    const {
-      summary,
-      variant,
-      ...props
-    } = this.props
+  render() {
+    const { summary, variant, ...props } = this.props
 
     const isSection = variant === 'section'
 
@@ -76,7 +72,9 @@ class NavToggle extends Component {
       >
         <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
           <ToggleDetails
-            ref={(c) => { this._toggle = c }}
+            ref={(c) => {
+              this._toggle = c
+            }}
             fluidWidth
             {...props}
             summary={summaryContent}

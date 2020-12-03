@@ -29,19 +29,21 @@ module.exports = postcss.plugin('postcss-themeable-styles', () => {
     css.walkRules((rule) => {
       rule.walkDecls((decl) => {
         let { value } = decl
-        getMatches(value, /var\(--([^)]+)\)?/g)
-          .forEach((match) => {
-            const matcher = new RegExp(match[0].replace(/[\\^$*+?.()|[\]{}]/g, '\\$&'), 'gm')
-            // eslint-disable-next-line no-useless-escape
-            value = value.replace(matcher, `\$\{theme.${match[1]} || 'inherit'\}`)
-          })
+        getMatches(value, /var\(--([^)]+)\)?/g).forEach((match) => {
+          const matcher = new RegExp(
+            match[0].replace(/[\\^$*+?.()|[\]{}]/g, '\\$&'),
+            'gm'
+          )
+          // eslint-disable-next-line no-useless-escape
+          value = value.replace(matcher, `\$\{theme.${match[1]} || 'inherit'\}`)
+        })
         decl.value = value // eslint-disable-line no-param-reassign
       })
     })
   }
 })
 
-function getMatches (str, regex) {
+function getMatches(str, regex) {
   const matches = []
   let match
   let matcher = regex

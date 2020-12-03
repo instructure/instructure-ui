@@ -29,11 +29,7 @@ import { TextInput } from '../index'
 
 describe('<TextInput/>', async () => {
   it('should include a label', async () => {
-    await mount(
-      <TextInput
-        renderLabel="Name"
-      />
-    )
+    await mount(<TextInput renderLabel="Name" />)
     const label = await find('label')
     expect(label).to.exist()
   })
@@ -41,10 +37,7 @@ describe('<TextInput/>', async () => {
   it('should focus the input when focus is called', async () => {
     let ref
     const subject = await mount(
-      <TextInput
-        renderLabel="Name"
-        componentRef={el => ref = el}
-      />
+      <TextInput renderLabel="Name" componentRef={(el) => (ref = el)} />
     )
     const textInput = within(subject.getDOMNode())
     const input = await textInput.find('input')
@@ -56,10 +49,7 @@ describe('<TextInput/>', async () => {
   it('should provide an inputRef prop', async () => {
     const inputRef = stub()
     const subject = await mount(
-      <TextInput
-        renderLabel="Name"
-        inputRef={inputRef}
-      />
+      <TextInput renderLabel="Name" inputRef={inputRef} />
     )
     const textInput = within(subject.getDOMNode())
     const input = await textInput.find('input')
@@ -109,7 +99,7 @@ describe('<TextInput/>', async () => {
       <TextInput
         renderLabel="Name"
         defaultValue="bar"
-        componentRef={el => ref = el}
+        componentRef={(el) => (ref = el)}
       />
     )
 
@@ -120,12 +110,12 @@ describe('<TextInput/>', async () => {
     const subject = await mount(
       <TextInput
         renderLabel="Name"
-        messages={
-          [{
+        messages={[
+          {
             text: 'yup',
             type: 'error'
-          }]
-        }
+          }
+        ]}
       />
     )
     const textInput = within(subject.getDOMNode())
@@ -138,12 +128,12 @@ describe('<TextInput/>', async () => {
     const subject = await mount(
       <TextInput
         renderLabel="Name"
-        messages={
-          [{
+        messages={[
+          {
             text: 'yup',
             type: 'error'
-          }]
-        }
+          }
+        ]}
       />
     )
     const textInput = within(subject.getDOMNode())
@@ -160,12 +150,12 @@ describe('<TextInput/>', async () => {
       <TextInput
         renderLabel="Name"
         aria-describedby="assistive-id"
-        messages={
-          [{
+        messages={[
+          {
             text: 'yup',
             type: 'error'
-          }]
-        }
+          }
+        ]}
       />
     )
     const textInput = within(subject.getDOMNode())
@@ -179,10 +169,7 @@ describe('<TextInput/>', async () => {
     it('responds to onChange event', async () => {
       const onChange = stub()
       const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-          onChange={onChange}
-        />
+        <TextInput renderLabel="Name" onChange={onChange} />
       )
       const textInput = within(subject.getDOMNode())
       const input = await textInput.find('input')
@@ -194,10 +181,7 @@ describe('<TextInput/>', async () => {
     it('responds to onBlur event', async () => {
       const onBlur = stub()
       const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-          onBlur={onBlur}
-        />
+        <TextInput renderLabel="Name" onBlur={onBlur} />
       )
       const textInput = within(subject.getDOMNode())
       const input = await textInput.find('input')
@@ -209,10 +193,7 @@ describe('<TextInput/>', async () => {
     it('responds to onFocus event', async () => {
       const onFocus = stub()
       const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-          onFocus={onFocus}
-        />
+        <TextInput renderLabel="Name" onFocus={onFocus} />
       )
       const textInput = within(subject.getDOMNode())
       const input = await textInput.find('input')
@@ -225,44 +206,28 @@ describe('<TextInput/>', async () => {
   describe('interaction', async () => {
     it('should set the disabled attribute when `interaction` is disabled', async () => {
       const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-          interaction="disabled"
-        />
+        <TextInput renderLabel="Name" interaction="disabled" />
       )
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[disabled]')).to.exist()
     })
 
     it('should set the disabled attribute when `disabled` is set', async () => {
-      const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-          disabled
-        />
-      )
+      const subject = await mount(<TextInput renderLabel="Name" disabled />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[disabled]')).to.exist()
     })
 
     it('should set the readonly attribute when `interaction` is readonly', async () => {
       const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-          interaction="readonly"
-        />
+        <TextInput renderLabel="Name" interaction="readonly" />
       )
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[readonly]')).to.exist()
     })
 
     it('should set the readonly attribute when `readOnly` is set', async () => {
-      const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-          readOnly
-        />
-      )
+      const subject = await mount(<TextInput renderLabel="Name" readOnly />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[readonly]')).to.exist()
     })
@@ -270,11 +235,7 @@ describe('<TextInput/>', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      const subject = await mount(
-        <TextInput
-          renderLabel="Name"
-        />
-      )
+      const subject = await mount(<TextInput renderLabel="Name" />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.accessible()).to.be.true()
     })

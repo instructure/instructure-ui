@@ -48,7 +48,7 @@ class Variant extends Component {
     onClick(event, name, variant, glyph)
   }
 
-  render () {
+  render() {
     const { glyph, variant, name } = this.props
     let icon
 
@@ -94,30 +94,32 @@ class Glyph extends Component {
     rtl: false
   }
 
-  renderGlyphInfo (glyph) {
+  renderGlyphInfo(glyph) {
     if (glyph.codepoint) {
       return `\\${glyph.codepoint}`
     }
   }
 
-  render () {
+  render() {
     const { name, variants } = this.props
     const firstVariant = variants[Object.keys(variants)[0]]
     const info = this.renderGlyphInfo(firstVariant)
 
     return (
       <div className={styles.root}>
-        <div className={styles.variants} dir={this.props.rtl ? "rtl" : null}>
-          {
-            Object.keys(variants)
-              .map(variant => (
-                <Variant {...this.props} key={`${name}-${variant}`} variant={variant} glyph={variants[variant]} />
-              ))
-          }
+        <div className={styles.variants} dir={this.props.rtl ? 'rtl' : null}>
+          {Object.keys(variants).map((variant) => (
+            <Variant
+              {...this.props}
+              key={`${name}-${variant}`}
+              variant={variant}
+              glyph={variants[variant]}
+            />
+          ))}
         </div>
-        { info && <div className={styles.info}>{info}</div> }
+        {info && <div className={styles.info}>{info}</div>}
         <Heading level="h4" as="h3">
-          { firstVariant.glyphName.toLowerCase() }
+          {firstVariant.glyphName.toLowerCase()}
         </Heading>
       </div>
     )

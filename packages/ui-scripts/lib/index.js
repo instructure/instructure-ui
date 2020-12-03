@@ -52,20 +52,16 @@ const commands = [
   '--types'
 ]
 
-function listCommands () {
+function listCommands() {
   info(`Commands: \n${commands.join(', \n')}`)
 }
 
 // We will be transitioning existing commands to use yargs. Any new commands should
 // be added to the `commands` directory and should be executed via yargs by calling
 // this function instead of requiring the file directly.
-function executeYargs () {
+function executeYargs() {
   /* eslint-disable no-unused-expressions */
-  require('yargs')
-    .commandDir('./commands')
-    .version(false)
-    .help()
-    .argv
+  require('yargs').commandDir('./commands').version(false).help().argv
   /* eslint-enable no-unused-expressions */
 }
 
@@ -85,7 +81,10 @@ if (process.argv.includes('open-sandbox')) {
   require('./post-publish')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
-} else if (process.argv.includes('--publish') || process.argv.includes('--release')) {
+} else if (
+  process.argv.includes('--publish') ||
+  process.argv.includes('--release')
+) {
   require('./publish')
 } else if (process.argv.includes('--fix-publish')) {
   require('./fix-publish')

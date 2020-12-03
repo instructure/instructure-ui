@@ -56,43 +56,43 @@ class TextArea extends Component {
     label: PropTypes.node.isRequired,
     id: PropTypes.string,
     /**
-    * sets the font-size for the textarea
-    */
+     * sets the font-size for the textarea
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     /**
-    * the textarea will expand vertically to fit the height of the content,
-    * unless its content exceeds `maxHeight`
-    */
+     * the textarea will expand vertically to fit the height of the content,
+     * unless its content exceeds `maxHeight`
+     */
     autoGrow: PropTypes.bool,
     /**
-    * is the textarea resizable (in supported browsers)
-    */
+     * is the textarea resizable (in supported browsers)
+     */
     resize: PropTypes.oneOf(['none', 'both', 'horizontal', 'vertical']),
     /**
-    * a fixed width for the textarea
-    */
+     * a fixed width for the textarea
+     */
     width: PropTypes.string,
     /**
-    * a initial height for the textarea (if autoGrow is true it will grow vertically)
-    */
+     * a initial height for the textarea (if autoGrow is true it will grow vertically)
+     */
     height: PropTypes.string,
     /**
-    * when autoGrow is true, the textarea will never grow beyond this value
-    */
+     * when autoGrow is true, the textarea will never grow beyond this value
+     */
     maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
+     * object with shape: `{
+     * text: PropTypes.string,
+     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     *   }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     inline: PropTypes.bool,
     /**
-    * Html placeholder text to display when the input has no value. This should be hint text, not a label
-    * replacement.
-    */
+     * Html placeholder text to display when the input has no value. This should be hint text, not a label
+     * replacement.
+     */
     placeholder: PropTypes.string,
     /**
      * Whether or not to disable the textarea
@@ -104,20 +104,20 @@ class TextArea extends Component {
     readOnly: PropTypes.bool,
     required: PropTypes.bool,
     /**
-    * a function that provides a reference to the actual textarea element
-    */
+     * a function that provides a reference to the actual textarea element
+     */
     textareaRef: PropTypes.func,
     /**
-    * value to set on initial render
-    */
+     * value to set on initial render
+     */
     defaultValue: PropTypes.string,
     /**
-    * the selected value (must be accompanied by an `onChange` prop)
-    */
+     * the selected value (must be accompanied by an `onChange` prop)
+     */
     value: controllable(PropTypes.string),
     /**
-    * when used with the `value` prop, the component will not control its own state
-    */
+     * when used with the `value` prop, the component will not control its own state
+     */
     onChange: PropTypes.func
   }
 
@@ -142,21 +142,21 @@ class TextArea extends Component {
     maxHeight: undefined
   }
 
-  constructor () {
+  constructor() {
     super()
 
     this._defaultId = uid('TextArea')
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.autoGrow()
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this.autoGrow()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this._listener) {
       this._listener.remove()
     }
@@ -186,10 +186,13 @@ class TextArea extends Component {
     }
   }
 
-  autoGrow () {
+  autoGrow() {
     if (this.props.autoGrow) {
       if (!this._debounced) {
-        this._debounced = debounce(this.grow, 200, { leading: false, trailing: true })
+        this._debounced = debounce(this.grow, 200, {
+          leading: false,
+          trailing: true
+        })
       }
 
       if (!this._listener) {
@@ -197,7 +200,11 @@ class TextArea extends Component {
       }
 
       if (this._textarea && !this._textareaResizeListener) {
-        this._textareaResizeListener = addResizeListener(this._textarea, this._textareaResize, ['height'])
+        this._textareaResizeListener = addResizeListener(
+          this._textarea,
+          this._textareaResize,
+          ['height']
+        )
       }
 
       this._request = requestAnimationFrame(this.grow)
@@ -217,16 +224,18 @@ class TextArea extends Component {
     // 2. `this._textarea.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
     this._textarea.style.height = 'auto'
     this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
-    height = (this._textarea.scrollHeight + offset) + 'px'
+    height = this._textarea.scrollHeight + offset + 'px'
 
     const maxHeight = px(this.props.maxHeight, this._container)
 
-    if (this.props.maxHeight && (this._textarea.scrollHeight > maxHeight)) {
+    if (this.props.maxHeight && this._textarea.scrollHeight > maxHeight) {
       this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
     } else if (this.props.height) {
       if (this._textarea.value === '') {
         height = this.props.height
-      } else if (px(this.props.height, this._container) > this._textarea.scrollHeight) {
+      } else if (
+        px(this.props.height, this._container) > this._textarea.scrollHeight
+      ) {
         this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds height in pixels
         height = this.props.height
       }
@@ -244,7 +253,7 @@ class TextArea extends Component {
     this._textarea.scrollTop = this._textarea.scrollHeight
   }
 
-  focus () {
+  focus() {
     this._textarea.focus()
   }
 
@@ -256,7 +265,8 @@ class TextArea extends Component {
       return
     }
 
-    if (typeof value === 'undefined') { // if uncontrolled
+    if (typeof value === 'undefined') {
+      // if uncontrolled
       this.autoGrow()
     }
 
@@ -269,27 +279,32 @@ class TextArea extends Component {
     this._container = node
   }
 
-  get minHeight () {
+  get minHeight() {
     return this._textarea.style.minHeight
   }
 
-  get invalid () {
-    return this.props.messages && this.props.messages.findIndex((message) => { return message.type === 'error' }) >= 0
+  get invalid() {
+    return (
+      this.props.messages &&
+      this.props.messages.findIndex((message) => {
+        return message.type === 'error'
+      }) >= 0
+    )
   }
 
-  get id () {
+  get id() {
     return this.props.id || this._defaultId
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._textarea)
   }
 
-  get value () {
+  get value() {
     return this._textarea.value
   }
 
-  render () {
+  render() {
     const {
       autoGrow,
       placeholder,
@@ -317,7 +332,7 @@ class TextArea extends Component {
     const style = {
       width: width,
       resize: resize,
-      height: (!autoGrow) ? height : null,
+      height: !autoGrow ? height : null,
       maxHeight: maxHeight
     }
 
@@ -347,7 +362,9 @@ class TextArea extends Component {
         {...pickProps(this.props, FormField.propTypes)}
         vAlign="top"
         id={this.id}
-        ref={(el) => { this._node = el }}
+        ref={(el) => {
+          this._node = el
+        }}
       >
         <div
           className={styles.layout}
@@ -358,7 +375,9 @@ class TextArea extends Component {
           ref={this.handleContainerRef}
         >
           {textarea}
-          {(!disabled && !readOnly) ? <span className={styles.outline} aria-hidden="true"></span> : null}
+          {!disabled && !readOnly ? (
+            <span className={styles.outline} aria-hidden="true"></span>
+          ) : null}
         </div>
       </FormField>
     )

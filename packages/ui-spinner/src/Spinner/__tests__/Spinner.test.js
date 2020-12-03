@@ -48,10 +48,16 @@ describe('<Spinner />', async () => {
   })
 
   it('should render the contents of a component used in renderTitle', async () => {
-    const Translation = ({children}) => <span>I have translated {children}.</span>
-    await mount(<Spinner renderTitle={<Translation>Loading</Translation>} size="small" />)
+    const Translation = ({ children }) => (
+      <span>I have translated {children}.</span>
+    )
+    await mount(
+      <Spinner renderTitle={<Translation>Loading</Translation>} size="small" />
+    )
     const spinner = await SpinnerLocator.find()
-    expect(await SpinnerLocator.find(':contains(I have translated Loading)')).to.exist()
+    expect(
+      await SpinnerLocator.find(':contains(I have translated Loading)')
+    ).to.exist()
     expect(await spinner.accessible()).to.be.true()
   })
 
@@ -63,7 +69,7 @@ describe('<Spinner />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .filter((prop) => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
@@ -73,18 +79,16 @@ describe('<Spinner />', async () => {
             }
             const warning = `Warning: [Spinner] prop '${prop}' is not allowed.`
             await mount(<Spinner renderTitle="Loading" {...props} />)
-            expect(consoleError)
-              .to.be.calledWith(warning)
+            expect(consoleError).to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
             await mount(<Spinner renderTitle="Loading" {...props} />)
-            expect(consoleError)
-              .to.not.be.called()
+            expect(consoleError).to.not.be.called()
           })
         }
-    })
+      })
   })
 })

@@ -27,7 +27,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { deprecated, callRenderProp, getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  deprecated,
+  callRenderProp,
+  getInteraction,
+  passthroughProps
+} from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { Flex } from '@instructure/ui-flex'
@@ -52,121 +57,128 @@ tags: form, field
 class TextInput extends Component {
   static propTypes = {
     /**
-    * The form field label.
-    */
+     * The form field label.
+     */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * The type of input.
-    */
-    type: PropTypes.oneOf(['text', 'email', 'url', 'tel', 'search', 'password']),
+     * The type of input.
+     */
+    type: PropTypes.oneOf([
+      'text',
+      'email',
+      'url',
+      'tel',
+      'search',
+      'password'
+    ]),
     /**
-    * The id of the text input. One is generated if not supplied.
-    */
+     * The id of the text input. One is generated if not supplied.
+     */
     id: PropTypes.string,
     /**
-    * the selected value (must be accompanied by an `onChange` prop)
-    */
+     * the selected value (must be accompanied by an `onChange` prop)
+     */
     value: controllable(PropTypes.string),
     /**
-    * value to set on initial render
-    */
+     * value to set on initial render
+     */
     defaultValue: PropTypes.string,
     /**
-    * Specifies if interaction with the input is enabled, disabled, or readonly.
-    * When "disabled", the input changes visibly to indicate that it cannot
-    * receive user interactions. When "readonly" the input still cannot receive
-    * user interactions but it keeps the same styles as if it were enabled.
-    */
+     * Specifies if interaction with the input is enabled, disabled, or readonly.
+     * When "disabled", the input changes visibly to indicate that it cannot
+     * receive user interactions. When "readonly" the input still cannot receive
+     * user interactions but it keeps the same styles as if it were enabled.
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
+     * object with shape: `{
+     * text: PropTypes.string,
+     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     *   }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * The size of the text input.
-    */
+     * The size of the text input.
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * The text alignment of the input.
-    */
+     * The text alignment of the input.
+     */
     textAlign: PropTypes.oneOf(['start', 'center']),
     /**
-    * The width of the input.
-    */
+     * The width of the input.
+     */
     width: PropTypes.string,
     /**
-    * The width of the input, in characters, if a width is not explicitly
-    * provided via the `width` prop. Only applicable if `isInline={true}`.
-    */
+     * The width of the input, in characters, if a width is not explicitly
+     * provided via the `width` prop. Only applicable if `isInline={true}`.
+     */
     htmlSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * The display of the root element.
-    */
+     * The display of the root element.
+     */
     display: PropTypes.oneOf(['inline-block', 'block']),
     /**
-    * Prevents the default behavior of wrapping the input and rendered content
-    * when available space is exceeded.
-    */
+     * Prevents the default behavior of wrapping the input and rendered content
+     * when available space is exceeded.
+     */
     shouldNotWrap: PropTypes.bool,
     /**
-    * Html placeholder text to display when the input has no value. This should be hint text, not a label
-    * replacement.
-    */
+     * Html placeholder text to display when the input has no value. This should be hint text, not a label
+     * replacement.
+     */
     placeholder: PropTypes.string,
     /**
-    * Whether or not the text input is required.
-    */
+     * Whether or not the text input is required.
+     */
     isRequired: PropTypes.bool,
     /**
-    * a function that provides a reference to the actual input element
-    */
+     * a function that provides a reference to the actual input element
+     */
     inputRef: PropTypes.func,
     /**
-    * a function that provides a reference a parent of the input element
-    */
+     * a function that provides a reference a parent of the input element
+     */
     inputContainerRef: PropTypes.func,
     /**
-    * Content to display before the input text, such as an icon
-    */
+     * Content to display before the input text, such as an icon
+     */
     renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display after the input text, such as an icon
-    */
+     * Content to display after the input text, such as an icon
+     */
     renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Callback executed when the input fires a change event.
-    * @param {Object} event - the event object
-    * @param {Object} value - the string value of the input
-    */
+     * Callback executed when the input fires a change event.
+     * @param {Object} event - the event object
+     * @param {Object} value - the string value of the input
+     */
     onChange: PropTypes.func,
     /**
-    * Callback fired when input loses focus.
-    */
+     * Callback fired when input loses focus.
+     */
     onBlur: PropTypes.func,
     /**
-    * Callback fired when input receives focus.
-    */
+     * Callback fired when input receives focus.
+     */
     onFocus: PropTypes.func,
 
     /* eslint-disable react/require-default-props */
     /**
-    * __Deprecated - use `renderAfterInput`__
-    */
+     * __Deprecated - use `renderAfterInput`__
+     */
     icon: PropTypes.func,
     /**
-    * __Deprecated - use `renderLabel`__
-    */
+     * __Deprecated - use `renderLabel`__
+     */
     label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * __Deprecated - use `isRequired`__
-    */
+     * __Deprecated - use `isRequired`__
+     */
     required: PropTypes.bool,
     /**
-    * __Deprecated - use `display`__
-    */
+     * __Deprecated - use `display`__
+     */
     inline: PropTypes.bool
     /* eslint-enable react/require-default-props */
   }
@@ -194,45 +206,50 @@ class TextInput extends Component {
     onBlur: function (event) {},
     onFocus: function (event) {},
     renderBeforeInput: undefined,
-    renderAfterInput: undefined,
+    renderAfterInput: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
     this.state = { hasFocus: false }
     this._defaultId = uid('TextInput')
     this._messagesId = uid('TextInput-messages')
   }
 
-  focus () {
+  focus() {
     this._input.focus()
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
-  get hasMessages () {
-    return this.props.messages && (this.props.messages.length > 0)
+  get hasMessages() {
+    return this.props.messages && this.props.messages.length > 0
   }
 
-  get invalid () {
-    return this.props.messages && this.props.messages.findIndex((message) => { return message.type === 'error' }) >= 0
+  get invalid() {
+    return (
+      this.props.messages &&
+      this.props.messages.findIndex((message) => {
+        return message.type === 'error'
+      }) >= 0
+    )
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._input)
   }
 
-  get value () {
+  get value() {
     return this._input.value
   }
 
-  get id () {
+  get id() {
     return this.props.id || this._defaultId
   }
 
-  handleInputRef = node => {
+  handleInputRef = (node) => {
     this._input = node
     this.props.inputRef(node)
   }
@@ -255,7 +272,7 @@ class TextInput extends Component {
     })
   }
 
-  renderInput () {
+  renderInput() {
     const {
       type,
       size,
@@ -286,9 +303,10 @@ class TextInput extends Component {
     }
 
     if (this.hasMessages) {
-      descriptionIds = descriptionIds !== ''
-      ? `${descriptionIds} ${this._messagesId}`
-      : this._messagesId
+      descriptionIds =
+        descriptionIds !== ''
+          ? `${descriptionIds} ${this._messagesId}`
+          : this._messagesId
     }
 
     return (
@@ -314,7 +332,7 @@ class TextInput extends Component {
     )
   }
 
-  render () {
+  render() {
     const {
       width,
       inline,
@@ -352,40 +370,36 @@ class TextInput extends Component {
         layout={this.props.layout} // eslint-disable-line react/prop-types
       >
         <span className={classnames(facadeClasses)}>
-          {
-            renderBeforeOrAfter ?
-              <Flex wrap={shouldNotWrap ? 'no-wrap' : 'wrap'}>
-                {renderBeforeInput &&
-                  <Flex.Item padding="0 0 0 small">
-                    {callRenderProp(renderBeforeInput)}
-                  </Flex.Item>
-                }
-                <Flex.Item shouldGrow shouldShrink>
-
-                  {/*
+          {renderBeforeOrAfter ? (
+            <Flex wrap={shouldNotWrap ? 'no-wrap' : 'wrap'}>
+              {renderBeforeInput && (
+                <Flex.Item padding="0 0 0 small">
+                  {callRenderProp(renderBeforeInput)}
+                </Flex.Item>
+              )}
+              <Flex.Item shouldGrow shouldShrink>
+                {/*
                     The input and content after input should not wrap, so they're in their own
                     Flex container
                   */}
-                  <Flex>
-                    <Flex.Item shouldGrow shouldShrink>
-                      {this.renderInput()}
+                <Flex>
+                  <Flex.Item shouldGrow shouldShrink>
+                    {this.renderInput()}
+                  </Flex.Item>
+                  {(renderAfterInput || icon) && (
+                    <Flex.Item padding="0 small 0 0">
+                      {renderAfterInput
+                        ? callRenderProp(renderAfterInput)
+                        : callRenderProp(icon)}
                     </Flex.Item>
-                    {(renderAfterInput || icon) &&
-                      <Flex.Item padding="0 small 0 0">
-                        {renderAfterInput ?
-                          callRenderProp(renderAfterInput) :
-                          callRenderProp(icon)
-                        }
-                      </Flex.Item>
-                    }
-                  </Flex>
-
-                </Flex.Item>
-              </Flex>
-
-              /* If no prepended or appended content, don't render Flex layout */
-              : this.renderInput()
-          }
+                  )}
+                </Flex>
+              </Flex.Item>
+            </Flex>
+          ) : (
+            /* If no prepended or appended content, don't render Flex layout */
+            this.renderInput()
+          )}
         </span>
       </FormField>
     )

@@ -38,7 +38,7 @@ export default {
       label: "I'm the main nav",
       toggleLabel: {
         expandedLabel: 'Minimize Navigation',
-        minimizedLabel: 'Expand Navigation',
+        minimizedLabel: 'Expand Navigation'
       },
       children: [
         <NavigationItem

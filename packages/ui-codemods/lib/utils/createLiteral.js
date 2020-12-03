@@ -22,22 +22,22 @@
  * SOFTWARE.
  */
 
- module.exports = function createLiteral (j, value) {
-   if (typeof value === 'string') {
-     return j.stringLiteral(value)
-   }
+module.exports = function createLiteral(j, value) {
+  if (typeof value === 'string') {
+    return j.stringLiteral(value)
+  }
 
-   if (typeof value === 'number') {
-     return j.jsxExpressionContainer(j.numericLiteral(value))
-   }
+  if (typeof value === 'number') {
+    return j.jsxExpressionContainer(j.numericLiteral(value))
+  }
 
-   if (typeof value === 'boolean') {
-     return j.jsxExpressionContainer(j.booleanLiteral(value))
-   }
+  if (typeof value === 'boolean') {
+    return j.jsxExpressionContainer(j.booleanLiteral(value))
+  }
 
-   if (value === null) {
-     return j.jsxExpressionContainer(j.nullLiteral(value))
-   }
+  if (value === null) {
+    return j.jsxExpressionContainer(j.nullLiteral(value))
+  }
 
-   return null
- }
+  return null
+}

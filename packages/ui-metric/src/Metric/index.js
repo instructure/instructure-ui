@@ -45,8 +45,8 @@ class Metric extends Component {
     renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /** Set to true when a child of MetricGroup so the appropriate
-    * aria labels get set
-    */
+     * aria labels get set
+     */
     isGroupChild: PropTypes.bool
   }
   static defaultProps = {
@@ -73,17 +73,17 @@ class Metric extends Component {
     return (
       <div
         {...passthroughProps(rest)}
-        role={ isGroupChild === true ? "row" : null }
+        role={isGroupChild === true ? 'row' : null}
         className={classnames(classes)}
       >
         <div
-          role={ isGroupChild === true ? "rowheader" : null }
+          role={isGroupChild === true ? 'rowheader' : null}
           className={styles.label}
         >
           {callRenderProp(renderLabel)}
         </div>
         <div
-          role={ isGroupChild === true ? "gridcell" : null }
+          role={isGroupChild === true ? 'gridcell' : null}
           className={styles.value}
         >
           {callRenderProp(renderValue)}

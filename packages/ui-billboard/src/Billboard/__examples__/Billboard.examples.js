@@ -31,7 +31,7 @@ export default {
   maxExamplesPerPage: 50,
   propValues: {
     hero: [
-      function renderHero (size) {
+      function renderHero(size) {
         return <IconAnnouncementLine size={size} />
       },
       <Img key="test" src={require('./testImage.jpg')} />,
@@ -43,7 +43,8 @@ export default {
   getComponentProps: () => {
     return {
       heading: 'I am a billboard',
-      message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      message:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
       margin: 'medium small'
     }
   },

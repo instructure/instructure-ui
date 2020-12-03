@@ -33,8 +33,11 @@ function getNodeText(element) {
       let textContent
 
       // filter out nodes that have the same textContent as the parent
-      if (child.nodeType === 3 ||
-        (child.nodeType === 1 && (normalizeText(element.textContent) !== normalizeText(child.textContent)))
+      if (
+        child.nodeType === 3 ||
+        (child.nodeType === 1 &&
+          normalizeText(element.textContent) !==
+            normalizeText(child.textContent))
       ) {
         textContent = child.textContent
       }
@@ -44,6 +47,4 @@ function getNodeText(element) {
     .join('')
 }
 
-export {
-  getNodeText
-}
+export { getNodeText }

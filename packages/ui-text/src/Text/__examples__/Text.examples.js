@@ -28,11 +28,9 @@ export default {
   maxExamples: 2500,
   getComponentProps: (props) => {
     return {
-      children: ['x-small', 'small', 'medium', 'large'].includes(props.size) ? (
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
-      ) : (
-        'Lorem ipsum dolor sit amet, consectetur'
-      )
+      children: ['x-small', 'small', 'medium', 'large'].includes(props.size)
+        ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
+        : 'Lorem ipsum dolor sit amet, consectetur'
     }
   },
   getExampleProps: (props) => {
@@ -42,13 +40,15 @@ export default {
     }
   },
   filter: (props) => {
-    return (props.size !== 'medium' && (
-      props.weight !== 'normal' ||
-      props.fontStyle !== 'normal' ||
-      props.lineHeight !== 'default' ||
-      props.letterSpacing !== 'normal' ||
-      props.transform !== 'none' ||
-      props.color !== 'primary'
-    )) || props.size === 'x-small'
+    return (
+      (props.size !== 'medium' &&
+        (props.weight !== 'normal' ||
+          props.fontStyle !== 'normal' ||
+          props.lineHeight !== 'default' ||
+          props.letterSpacing !== 'normal' ||
+          props.transform !== 'none' ||
+          props.color !== 'primary')) ||
+      props.size === 'x-small'
+    )
   }
 }

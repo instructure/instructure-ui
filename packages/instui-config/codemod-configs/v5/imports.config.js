@@ -48,7 +48,11 @@ module.exports = {
         importPattern: '^instructure-ui/lib/themes'
       },
       transform: {
-        importPath: importPath => importPath.replace(new RegExp('^instructure-ui/lib/themes'), '@instructure/ui-themes/lib')
+        importPath: (importPath) =>
+          importPath.replace(
+            new RegExp('^instructure-ui/lib/themes'),
+            '@instructure/ui-themes/lib'
+          )
       }
     },
     {
@@ -56,7 +60,11 @@ module.exports = {
         importPattern: '^instructure-ui/lib/themeable'
       },
       transform: {
-        importPath: importPath => importPath.replace(new RegExp('^instructure-ui/lib/themeable'), '@instructure/ui-themeable/lib')
+        importPath: (importPath) =>
+          importPath.replace(
+            new RegExp('^instructure-ui/lib/themeable'),
+            '@instructure/ui-themeable/lib'
+          )
       }
     },
     {
@@ -64,7 +72,11 @@ module.exports = {
         importPattern: '^instructure-ui/lib/util/dom'
       },
       transform: {
-        importPath: importPath => importPath.replace(new RegExp('^instructure-ui/lib/util/dom'), '@instructure/ui-utils/lib/dom')
+        importPath: (importPath) =>
+          importPath.replace(
+            new RegExp('^instructure-ui/lib/util/dom'),
+            '@instructure/ui-utils/lib/dom'
+          )
       }
     },
     {
@@ -116,7 +128,8 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: (importPath, { moduleName }) => `@instructure/ui-utils/lib/${moduleName}`
+        importPath: (importPath, { moduleName }) =>
+          `@instructure/ui-utils/lib/${moduleName}`
       }
     },
     {
@@ -137,7 +150,8 @@ module.exports = {
         ]
       },
       transform: {
-        importPath: (importPath, { moduleName }) => `@instructure/ui-utils/lib/react/${moduleName}`
+        importPath: (importPath, { moduleName }) =>
+          `@instructure/ui-utils/lib/react/${moduleName}`
       }
     },
     {

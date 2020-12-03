@@ -28,13 +28,19 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import measureText from '../measureText'
 
 describe('measureText', async () => {
-  const getNodes = root => Array.from(root.childNodes)
-    .filter(node => node.nodeType === 1 || node.nodeType === 3)
+  const getNodes = (root) =>
+    Array.from(root.childNodes).filter(
+      (node) => node.nodeType === 1 || node.nodeType === 3
+    )
 
   it('should calculate width', async () => {
     let stage
     await mount(
-      <div componentRef={(el) => { stage = el }}>
+      <div
+        componentRef={(el) => {
+          stage = el
+        }}
+      >
         Lorem ipsum <span>DOLOR SIT AMET.</span>
       </div>
     )
@@ -48,7 +54,11 @@ describe('measureText', async () => {
   it('should account for different nodes', async () => {
     let stage
     const subject = await mount(
-      <div componentRef={(el) => { stage = el }}>
+      <div
+        componentRef={(el) => {
+          stage = el
+        }}
+      >
         Lorem ipsum <span>DOLOR SIT AMET.</span>
       </div>
     )
@@ -70,7 +80,11 @@ describe('measureText', async () => {
   it('should account for font size styles', async () => {
     let stage
     const subject = await mount(
-      <div componentRef={(el) => { stage = el }}>
+      <div
+        componentRef={(el) => {
+          stage = el
+        }}
+      >
         Lorem ipsum <span>DOLOR SIT AMET.</span>
       </div>
     )
@@ -89,7 +103,11 @@ describe('measureText', async () => {
   it('should account for letter spacing styles', async () => {
     let stage
     const subject = await mount(
-      <div componentRef={(el) => { stage = el }}>
+      <div
+        componentRef={(el) => {
+          stage = el
+        }}
+      >
         Lorem ipsum <span>DOLOR SIT AMET.</span>
       </div>
     )

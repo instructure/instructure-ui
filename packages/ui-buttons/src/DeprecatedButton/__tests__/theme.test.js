@@ -33,46 +33,56 @@ describe('DeprecatedButton.theme', () => {
 
     describe('default', () => {
       it('should have a background and text colors that meet 3:1 contrast', () => {
-        expect(contrast(variables.defaultBackground, variables.defaultColor))
-          .to.be.above(3)
-        expect(contrast(variables.defaultHoverBackground, variables.defaultColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.defaultBackground, variables.defaultColor)
+        ).to.be.above(3)
+        expect(
+          contrast(variables.defaultHoverBackground, variables.defaultColor)
+        ).to.be.above(3)
       })
     })
 
     describe('primary', () => {
       it('should have a background and text colors that meet 3:1 contrast', () => {
-        expect(contrast(variables.primaryBackground, variables.primaryColor))
-          .to.be.above(3)
-        expect(contrast(variables.primaryHoverBackground, variables.primaryColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.primaryBackground, variables.primaryColor)
+        ).to.be.above(3)
+        expect(
+          contrast(variables.primaryHoverBackground, variables.primaryColor)
+        ).to.be.above(3)
       })
     })
 
     describe('success', () => {
       it('should have a background and text colors that meet 3:1 contrast', () => {
-        expect(contrast(variables.successBackground, variables.successColor))
-          .to.be.above(3)
-        expect(contrast(variables.successHoverBackground, variables.successColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.successBackground, variables.successColor)
+        ).to.be.above(3)
+        expect(
+          contrast(variables.successHoverBackground, variables.successColor)
+        ).to.be.above(3)
       })
     })
 
     describe('danger', () => {
       it('should have a background and text colors that meet 3:1 contrast', () => {
-        expect(contrast(variables.dangerBackground, variables.dangerColor))
-          .to.be.above(3)
-        expect(contrast(variables.dangerHoverBackground, variables.dangerColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.dangerBackground, variables.dangerColor)
+        ).to.be.above(3)
+        expect(
+          contrast(variables.dangerHoverBackground, variables.dangerColor)
+        ).to.be.above(3)
       })
     })
 
     describe('light', () => {
       it('should have a background and text colors that meet 3:1 contrast', () => {
-        expect(contrast(variables.lightBackground, variables.lightColor))
-          .to.be.above(3)
-        expect(contrast(variables.lightHoverBackground, variables.lightColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.lightBackground, variables.lightColor)
+        ).to.be.above(3)
+        expect(
+          contrast(variables.lightHoverBackground, variables.lightColor)
+        ).to.be.above(3)
       })
     })
   })
@@ -82,46 +92,56 @@ describe('DeprecatedButton.theme', () => {
 
     describe('default', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {
-        expect(contrast(variables.defaultBackground, variables.defaultColor))
-          .to.be.above(4.5)
-        expect(contrast(variables.defaultHoverBackground, variables.defaultColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.defaultBackground, variables.defaultColor)
+        ).to.be.above(4.5)
+        expect(
+          contrast(variables.defaultHoverBackground, variables.defaultColor)
+        ).to.be.above(4.5)
       })
     })
 
     describe('primary', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {
-        expect(contrast(variables.primaryBackground, variables.primaryColor))
-          .to.be.above(4.5)
-        expect(contrast(variables.primaryHoverBackground, variables.primaryColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.primaryBackground, variables.primaryColor)
+        ).to.be.above(4.5)
+        expect(
+          contrast(variables.primaryHoverBackground, variables.primaryColor)
+        ).to.be.above(4.5)
       })
     })
 
     describe('success', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {
-        expect(contrast(variables.successBackground, variables.successColor))
-          .to.be.above(4.5)
-        expect(contrast(variables.successHoverBackground, variables.successColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.successBackground, variables.successColor)
+        ).to.be.above(4.5)
+        expect(
+          contrast(variables.successHoverBackground, variables.successColor)
+        ).to.be.above(4.5)
       })
     })
 
     describe('danger', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {
-        expect(contrast(variables.dangerBackground, variables.dangerColor))
-          .to.be.above(4.5)
-        expect(contrast(variables.dangerHoverBackground, variables.dangerColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.dangerBackground, variables.dangerColor)
+        ).to.be.above(4.5)
+        expect(
+          contrast(variables.dangerHoverBackground, variables.dangerColor)
+        ).to.be.above(4.5)
       })
     })
 
     describe('light', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {
-        expect(contrast(variables.lightBackground, variables.lightColor))
-          .to.be.above(4.5)
-        expect(contrast(variables.lightHoverBackground, variables.lightColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.lightBackground, variables.lightColor)
+        ).to.be.above(4.5)
+        expect(
+          contrast(variables.lightHoverBackground, variables.lightColor)
+        ).to.be.above(4.5)
       })
     })
   })

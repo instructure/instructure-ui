@@ -24,7 +24,9 @@
 
 const { getPackageJSON } = require('@instructure/pkg-utils')
 
-exports.getConfig = function getConfig (pkgJSON) {
+exports.getConfig = function getConfig(pkgJSON) {
   pkgJSON = pkgJSON || getPackageJSON() // eslint-disable-line no-param-reassign
-  return (pkgJSON.config && pkgJSON.config['ui-scripts']) ? pkgJSON.config['ui-scripts'] : {}
+  return pkgJSON.config && pkgJSON.config['ui-scripts']
+    ? pkgJSON.config['ui-scripts']
+    : {}
 }

@@ -47,14 +47,19 @@
  * @param {...string} otherPropNames - reject if any of these other props are also given
  * @returns {Error} if any of the other props are also given
  */
-function xor (propType, ...otherPropNames) {
+function xor(propType, ...otherPropNames) {
   return function (props, propName, componentName) {
     if (props[propName] != null) {
-      const otherProps = otherPropNames.map(name => props[name]).filter(prop => prop != null)
+      const otherProps = otherPropNames
+        .map((name) => props[name])
+        .filter((prop) => prop != null)
       if (otherProps.length > 0) {
         return new Error(
           `Invalid prop \`${propName}\` supplied to \`${componentName}\`: expected only one of ` +
-            `${[propName].concat(otherPropNames).map(name => `\`${name}\``).join(', ')} to be set.`
+            `${[propName]
+              .concat(otherPropNames)
+              .map((name) => `\`${name}\``)
+              .join(', ')} to be set.`
         )
       }
     }

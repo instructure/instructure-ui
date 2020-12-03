@@ -36,7 +36,9 @@ export const DrawerLayoutLocator = locator(DrawerLayout.selector, {
   findTray: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(DrawerLayout.locatorAttribute)
-      return locator(`[${DrawerLayout.Tray.locatorAttribute}="${id}"]`).find(...args)
+      return locator(`[${DrawerLayout.Tray.locatorAttribute}="${id}"]`).find(
+        ...args
+      )
     } else {
       return null
     }

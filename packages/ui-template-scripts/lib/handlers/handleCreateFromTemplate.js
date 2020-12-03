@@ -32,14 +32,21 @@ const { info, error } = require('@instructure/command-utils')
 const createFromTemplate = require('../utils/createFromTemplate')
 const promptContentName = require('../utils/promptContentName')
 
-module.exports = async ({ template, name, path: sourcePath = process.cwd(), values: rawValues } = {}) => {
+module.exports = async ({
+  template,
+  name,
+  path: sourcePath = process.cwd(),
+  values: rawValues
+} = {}) => {
   let values = rawValues
 
   if (typeof values === 'string') {
     try {
       values = JSON.parse(values)
     } catch (err) {
-      error(`Unable to parse the JSON provided for the \`values\` argument. Encountered the follwing error:\n${err}`)
+      error(
+        `Unable to parse the JSON provided for the \`values\` argument. Encountered the follwing error:\n${err}`
+      )
       process.exit(1)
     }
   }
@@ -49,15 +56,16 @@ module.exports = async ({ template, name, path: sourcePath = process.cwd(), valu
   const destPath = path.join(sourcePath, contentName)
 
   if (fse.existsSync(destPath)) {
-    info(`\`${destPath}\` already exists. If you choose to continue and overwrite it, it's existing contents may be lost.`)
-    const { overwrite } = await yargsInteractive()
-      .interactive({
-        interactive: { default: true },
-        overwrite: {
-          type: 'confirm',
-          describe: 'Would you like to continue and overwrite it?'
-        }
-      })
+    info(
+      `\`${destPath}\` already exists. If you choose to continue and overwrite it, it's existing contents may be lost.`
+    )
+    const { overwrite } = await yargsInteractive().interactive({
+      interactive: { default: true },
+      overwrite: {
+        type: 'confirm',
+        describe: 'Would you like to continue and overwrite it?'
+      }
+    })
 
     if (!overwrite) {
       process.exit(0)
@@ -87,6 +95,5 @@ module.exports = async ({ template, name, path: sourcePath = process.cwd(), valu
   info('Success!')
 }
 
-const generateValues = ({ values, name }) => typeof values === 'function'
-  ? values({ name })
-  : values
+const generateValues = ({ values, name }) =>
+  typeof values === 'function' ? values({ name }) : values

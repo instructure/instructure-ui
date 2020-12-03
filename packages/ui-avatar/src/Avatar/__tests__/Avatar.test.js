@@ -28,8 +28,6 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { Avatar } from '../index'
 import { AvatarLocator } from '../AvatarLocator'
 
-import styles from '../styles.css'
-
 describe('<Avatar />', async () => {
   describe('for a11y', async () => {
     it('should be accessible', async () => {
@@ -53,8 +51,9 @@ describe('<Avatar />', async () => {
   describe('with the default props', async () => {
     it('should display as a circle', async () => {
       await mount(<Avatar name="Jessica Jones" />)
+      const avatar = await AvatarLocator.find()
 
-      expect(await AvatarLocator.find(`.${styles.circle}`)).to.exist()
+      expect(avatar.getAttribute('shape')).to.equal('circle')
     })
 
     it('should render initials', async () => {
@@ -66,33 +65,25 @@ describe('<Avatar />', async () => {
 
   describe('when an image src url is provided', async () => {
     // eslint-disable-next-line max-len
-    const src = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+    const src =
+      'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
     it('should display the image url provided', async () => {
-      await mount(
-        <Avatar
-          name="Foo bar"
-          src={src}
-        />
-      )
+      await mount(<Avatar name="Foo bar" src={src} />)
 
       const avatar = await AvatarLocator.find()
       const image = await avatar.find('img')
 
       await image.load()
 
-      expect(avatar.getDOMNode().style.backgroundImage).to.contain(src)
+      expect(avatar.getAttribute('src')).to.contain(src)
     })
 
     it('should call onImageLoaded once the image loads', async () => {
       const onImageLoaded = stub()
 
       await mount(
-        <Avatar
-          name="Foo bar"
-          src={src}
-          onImageLoaded={onImageLoaded}
-        />
+        <Avatar name="Foo bar" src={src} onImageLoaded={onImageLoaded} />
       )
 
       const avatar = await AvatarLocator.find()
@@ -109,9 +100,8 @@ describe('<Avatar />', async () => {
       await mount(<Avatar name="Jessica Jones" shape="rectangle" />)
 
       const avatar = await AvatarLocator.find()
-      const rectangle = await avatar.find(`.${styles.rectangle}`)
 
-      expect(rectangle).to.exist()
+      expect(avatar.getAttribute('shape')).to.equal('rectangle')
     })
   })
 
@@ -136,7 +126,7 @@ describe('<Avatar />', async () => {
       await mount(<Avatar name="" />)
 
       const avatar = await AvatarLocator.find()
-      const initials = await avatar.find(`.${styles.initials}`)
+      const initials = await avatar.find('[class*= "-initials"]')
 
       expect(initials).to.exist()
       expect(initials.getTextContent()).to.equal('')

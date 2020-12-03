@@ -36,12 +36,12 @@ import { findDOMNode } from './findDOMNode'
  * @param {Boolean} capture - should the event be executed in the capturing or bubbling phase
  * @returns {Function} a method to remove the event listener
  */
-function addEventListener (el, event, handler, capture) {
-  const node = (el === window || el === document) ? el : findDOMNode(el)
+function addEventListener(el, event, handler, capture) {
+  const node = el === window || el === document ? el : findDOMNode(el)
   node.addEventListener(event, handler, capture)
 
   return {
-    remove () {
+    remove() {
       node.removeEventListener(event, handler, capture)
     }
   }

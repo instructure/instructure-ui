@@ -38,11 +38,7 @@ module.exports = {
   ...baseConfig,
   entry: {
     // Note: these entries have to keep these names so that old codepens still work
-    common: [
-      '@instructure/ui-polyfill-loader!',
-      'react',
-      'react-dom'
-    ],
+    common: ['@instructure/ui-polyfill-loader!', 'react', 'react-dom'],
     globals: './globals.js'
   },
   output: {
@@ -54,9 +50,6 @@ module.exports = {
     contentBase: outputPath,
     host: '0.0.0.0'
   },
-  plugins: [
-    ...baseConfig.plugins,
-    ...require('./plugins')
-  ],
+  plugins: [...baseConfig.plugins, ...require('./plugins')],
   resolve: DEBUG ? require('./resolve') : { mainFields: ['main'] }
 }

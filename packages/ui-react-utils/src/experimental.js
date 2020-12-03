@@ -24,50 +24,72 @@
 import { decorator } from '@instructure/ui-decorator'
 import { warn } from '@instructure/console/macro'
 
-const experimental = process.env.NODE_ENV == 'production'
-  ? () => (Component => Component)
-  : decorator((ComposedComponent, experimentalProps, message) => {
-    return class ExperimentalComponent extends ComposedComponent {
-      componentDidMount() {
-        if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
-          if (experimentalProps) {
-            warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
-          } else {
-            warnExperimentalComponent(ComposedComponent.displayName, message)
+const experimental =
+  process.env.NODE_ENV == 'production'
+    ? () => (Component) => Component
+    : decorator((ComposedComponent, experimentalProps, message) => {
+        return class ExperimentalComponent extends ComposedComponent {
+          componentDidMount() {
+            if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
+              if (experimentalProps) {
+                warnExperimentalProps(
+                  ComposedComponent.displayName,
+                  this.props,
+                  experimentalProps,
+                  message
+                )
+              } else {
+                warnExperimentalComponent(
+                  ComposedComponent.displayName,
+                  message
+                )
+              }
+            }
+
+            if (super.componentDidMount) {
+              super.componentDidMount()
+            }
+          }
+
+          componentDidUpdate(prevProps, prevState, prevContext) {
+            if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
+              if (experimentalProps) {
+                warnExperimentalProps(
+                  ComposedComponent.displayName,
+                  this.props,
+                  experimentalProps,
+                  message
+                )
+              } else {
+                warnExperimentalComponent(
+                  ComposedComponent.displayName,
+                  message
+                )
+              }
+            }
+
+            if (super.componentDidUpdate) {
+              super.componentDidUpdate(prevProps, prevState, prevContext)
+            }
           }
         }
+      })
 
-        if (super.componentDidMount) {
-          super.componentDidMount()
-        }
-      }
-
-      componentDidUpdate(prevProps, prevState, prevContext) {
-        if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
-          if (experimentalProps) {
-            warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
-          } else {
-            warnExperimentalComponent(ComposedComponent.displayName, message)
-          }
-        }
-
-        if (super.componentDidUpdate) {
-          super.componentDidUpdate(prevProps, prevState, prevContext)
-        }
-      }
-    }
-  })
-
-function warnExperimentalProps (displayName, props, experimentalProps, message = '') {
+function warnExperimentalProps(
+  displayName,
+  props,
+  experimentalProps,
+  message = ''
+) {
   experimentalProps.forEach((experimentalProp) => {
     warn(
-      (typeof props[experimentalProp] === 'undefined'),
+      typeof props[experimentalProp] === 'undefined',
       `[${displayName}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
     )
   })
 }
 
-function warnExperimentalComponent (displayName, message = '') {
+function warnExperimentalComponent(displayName, message = '') {
   warn(
     false,
     `[${displayName}] is experimental and its API could change significantly in a future release. ${message}`
@@ -77,26 +99,26 @@ function warnExperimentalComponent (displayName, message = '') {
 export default experimental
 export {
   /**
-  * ---
-  * category: utilities/react
-  * ---
-  * Flag React component and component props as experimental.
-  * Warnings will display in the console when experimental components/props
-  * props are used.
-  *
-  * ```js
-  *  class Example extends Component {
-  *    static propTypes = {
-  *      currentProp: PropTypes.func
-  *    }
-  *  }
-  *  export default experimental(['experimentalProp'])(Example)
-  * ```
-  *
-  * @module experimental
-  * @param {array} experimentalProps (if this argument is null or undefined, the entire component is flagged)
-  * @param {string} message
-  * @return {function} React component flagged as experimental
-  */
+   * ---
+   * category: utilities/react
+   * ---
+   * Flag React component and component props as experimental.
+   * Warnings will display in the console when experimental components/props
+   * props are used.
+   *
+   * ```js
+   *  class Example extends Component {
+   *    static propTypes = {
+   *      currentProp: PropTypes.func
+   *    }
+   *  }
+   *  export default experimental(['experimentalProp'])(Example)
+   * ```
+   *
+   * @module experimental
+   * @param {array} experimentalProps (if this argument is null or undefined, the entire component is flagged)
+   * @param {string} message
+   * @return {function} React component flagged as experimental
+   */
   experimental
 }

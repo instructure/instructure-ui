@@ -47,11 +47,10 @@ describe('cleanSring', async () => {
     expect(newString).to.equal('Hello world')
   })
 
-
   it('should do a thorough cleaning', async () => {
     const string = 'Hello world. '
 
-    const newString = cleanString(string, [' ','.'], false, true, true)
+    const newString = cleanString(string, [' ', '.'], false, true, true)
     expect(newString).to.equal('Hello world')
   })
 })

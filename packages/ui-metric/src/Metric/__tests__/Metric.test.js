@@ -47,15 +47,13 @@ describe('<Metric />', async () => {
 
   it('passes props through to Metric element', async () => {
     await mount(
-      <Metric
-        data-automation="foo"
-        renderLabel="Grade"
-        renderValue="80%"
-      />
+      <Metric data-automation="foo" renderLabel="Grade" renderValue="80%" />
     )
 
-    expect(await MetricLocator.find())
-      .to.have.attribute('data-automation', 'foo')
+    expect(await MetricLocator.find()).to.have.attribute(
+      'data-automation',
+      'foo'
+    )
   })
 
   it('should not have role="gridcell" for the value', async () => {
@@ -64,9 +62,9 @@ describe('<Metric />', async () => {
     const metric = await MetricLocator.find()
     const value = await metric.findWithText('80%')
 
-    expect(await value.find(
-      '[role="gridcell"]', { expectEmpty: true }
-    )).to.not.exist()
+    expect(
+      await value.find('[role="gridcell"]', { expectEmpty: true })
+    ).to.not.exist()
   })
 
   it('should not have role=rowheader for the label', async () => {
@@ -75,8 +73,8 @@ describe('<Metric />', async () => {
     const metric = await MetricLocator.find()
     const label = await metric.findWithText('Grade')
 
-    expect(await label.find(
-      '[role="rowheader"]', { expectEmpty: true }
-    )).to.not.exist()
+    expect(
+      await label.find('[role="rowheader"]', { expectEmpty: true })
+    ).to.not.exist()
   })
 })

@@ -28,7 +28,6 @@ import { deepEqual } from '@instructure/ui-utils'
 import { warn } from '@instructure/console/macro'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 
-
 /**
 ---
 category: components
@@ -49,16 +48,16 @@ class Editable extends Component {
     onChangeMode: PropTypes.func.isRequired,
 
     /**
-    * @param {Object} renderProps
-    * @param {Boolean} mode
-    * @param {Function} renderProps.getContainerProps - Props to be spread onto the container element
-    * @param {Function} renderProps.getEditorProps - Props to be spread onto the editor element
-    * @param {Function} renderProps.getEditButtonProps - Props to be spread onto the edit button element
-    */
+     * @param {Object} renderProps
+     * @param {Boolean} mode
+     * @param {Function} renderProps.getContainerProps - Props to be spread onto the container element
+     * @param {Function} renderProps.getEditorProps - Props to be spread onto the editor element
+     * @param {Function} renderProps.getEditButtonProps - Props to be spread onto the edit button element
+     */
     children: PropTypes.func,
     /**
-    * Identical to children
-    */
+     * Identical to children
+     */
     render: PropTypes.func,
 
     /**
@@ -88,7 +87,7 @@ class Editable extends Component {
 
   state = {
     showModeToggle: false,
-    valueOnEdit: null,      // the value when mode flips from view -> edit
+    valueOnEdit: null // the value when mode flips from view -> edit
   }
 
   _editorRef = null
@@ -97,23 +96,25 @@ class Editable extends Component {
   constructor(props) {
     super(props)
 
-    warn(props.readOnly ? props.mode === 'view' : true, '[Editable] When readOnly is true, mode must be "view"')
+    warn(
+      props.readOnly ? props.mode === 'view' : true,
+      '[Editable] When readOnly is true, mode must be "view"'
+    )
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.mode === 'edit') {
       this.focusEditor()
     }
   }
-  componentWillUnmount () {
-  }
+  componentWillUnmount() {}
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const { mode, value, onChange } = this.props
 
     // on the switch from view -> edit
     if (prevProps.mode !== 'edit' && mode === 'edit') {
-      this.setState({valueOnEdit: value})
+      this.setState({ valueOnEdit: value })
       this.focusEditor()
     }
 
@@ -126,23 +127,26 @@ class Editable extends Component {
     }
   }
 
-  focusEditor () {
-    warn(!!this._editorRef && !this.props.readOnly, '[Editable] Did you forget to connect editorRef to your editor component?')
+  focusEditor() {
+    warn(
+      !!this._editorRef && !this.props.readOnly,
+      '[Editable] Did you forget to connect editorRef to your editor component?'
+    )
     if (this._editorRef) {
       this._editorRef.focus()
     }
   }
 
-  enterView () {
+  enterView() {
     if (this.props.mode !== 'view') {
-      this.setState({showModeToggle: true})
+      this.setState({ showModeToggle: true })
       this.props.onChangeMode('view')
     }
   }
 
-  enterEdit () {
+  enterEdit() {
     if (!this.props.readOnly) {
-      this.setState({showModeToggle: false})
+      this.setState({ showModeToggle: false })
       if (this.props.mode !== 'edit') {
         this.props.onChangeMode('edit')
       }
@@ -156,9 +160,10 @@ class Editable extends Component {
   }
 
   handleViewMouseOver = (event) => {
-    if (this.props.mode === 'view') { // because the mouse event handlers are on the container, not the view
+    if (this.props.mode === 'view') {
+      // because the mouse event handlers are on the container, not the view
       event.stopPropagation()
-      this.setState({showModeToggle: true})
+      this.setState({ showModeToggle: true })
     }
   }
 
@@ -184,11 +189,11 @@ class Editable extends Component {
   }
 
   handleEditButtonFocus = (event) => {
-    this.setState({showModeToggle: true})
+    this.setState({ showModeToggle: true })
   }
 
   handleEditButtonBlur = (event) => {
-    this.setState({showModeToggle: false})
+    this.setState({ showModeToggle: false })
   }
 
   handleEditButtonClick = (event) => {
@@ -220,7 +225,9 @@ class Editable extends Component {
     return {
       mode: this.props.mode,
       onBlur: this.handleEditBlur,
-      editorRef: (el) => { this._editorRef = el },
+      editorRef: (el) => {
+        this._editorRef = el
+      },
       readOnly: this.props.readOnly,
       ...props
     }
@@ -232,13 +239,15 @@ class Editable extends Component {
       onFocus: this.handleEditButtonFocus,
       onBlur: this.handleEditButtonBlur,
       isVisible: this.state.showModeToggle,
-      buttonRef: (el) => { this._editButtonRef = el },
+      buttonRef: (el) => {
+        this._editButtonRef = el
+      },
       readOnly: this.props.readOnly,
       ...props
     }
   }
 
-  render () {
+  render() {
     const { children, render = children, mode } = this.props
 
     if (typeof render === 'function') {
@@ -250,7 +259,7 @@ class Editable extends Component {
         getEditButtonProps: this.getEditButtonProps
       })
     } else {
-     return null
+      return null
     }
   }
 }

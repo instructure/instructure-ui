@@ -46,32 +46,32 @@ id: Navigation.Item
 class NavigationItem extends Component {
   static propTypes = {
     /**
-    * The visual to display (ex. an Image, Logo, Avatar, or Icon)
-    */
+     * The visual to display (ex. an Image, Logo, Avatar, or Icon)
+     */
     icon: PropTypes.node.isRequired,
     /**
-    * The text to display  for the Navigation Link
-    */
+     * The text to display  for the Navigation Link
+     */
     label: PropTypes.node.isRequired,
     /**
-    * The element type to render as (will default to `<a>` if href is provided)
-    */
+     * The element type to render as (will default to `<a>` if href is provided)
+     */
     as: PropTypes.elementType,
     /**
-    * If the NavigationItem goes to a new page, pass an href
-    */
+     * If the NavigationItem goes to a new page, pass an href
+     */
     href: PropTypes.string,
     /**
-    * If the NavigationItem does not go to a new page pass an onClick
-    */
+     * If the NavigationItem does not go to a new page pass an onClick
+     */
     onClick: PropTypes.func,
     /**
-    * Denotes which NavigationItem is currently selected
-    */
+     * Denotes which NavigationItem is currently selected
+     */
     selected: PropTypes.bool,
     /**
-    * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
-    */
+     * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
+     */
     minimized: PropTypes.bool
   }
 
@@ -83,18 +83,12 @@ class NavigationItem extends Component {
     href: undefined
   }
 
-  renderLink () {
+  renderLink() {
     const ElementType = getElementType(NavigationItem, this.props)
 
-    const {
-      href,
-      onClick,
-      selected,
-      icon,
-      label
-    } = this.props
+    const { href, onClick, selected, icon, label } = this.props
 
-    const classes = classnames ({
+    const classes = classnames({
       [styles.root]: true,
       [styles.selected]: selected
     })
@@ -107,36 +101,29 @@ class NavigationItem extends Component {
         href={href}
         onClick={onClick}
         className={classes}
-        aria-label={this.props.minimized ? label: null}
+        aria-label={this.props.minimized ? label : null}
       >
         <div className={styles.icon} aria-hidden="true">
           {icon}
         </div>
-        {
-          !this.props.minimized ? (
-           <div className={styles.label}>
-              {label}
-            </div>
-          ) : null
-        }
+        {!this.props.minimized ? (
+          <div className={styles.label}>{label}</div>
+        ) : null}
       </ElementType>
     )
   }
 
-  render () {
-    const {
-      minimized,
-      label
-    } = this.props
+  render() {
+    const { minimized, label } = this.props
 
     const link = this.renderLink()
 
-    return (
-      minimized && hasVisibleChildren(label) ? (
-        <Tooltip renderTip={label} placement='end'>
-          {link}
-        </Tooltip>
-      ) : link
+    return minimized && hasVisibleChildren(label) ? (
+      <Tooltip renderTip={label} placement="end">
+        {link}
+      </Tooltip>
+    ) : (
+      link
     )
   }
 }

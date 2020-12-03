@@ -25,16 +25,11 @@
 const GerritBot = require('gerritbot')
 const { error } = require('@instructure/command-utils')
 
-const {
-  SSH_USERNAME,
-  GERRIT_HOST,
-  GERRIT_PORT,
-  SSH_KEY_PATH
-} = process.env
+const { SSH_USERNAME, GERRIT_HOST, GERRIT_PORT, SSH_KEY_PATH } = process.env
 
 let gerrit
 
-function gerritClient () {
+function gerritClient() {
   if (!gerrit) {
     gerrit = new GerritBot.Client({
       user: SSH_USERNAME,
@@ -46,7 +41,11 @@ function gerritClient () {
   return gerrit
 }
 
-exports.postGerritReview  = async function postGerritReview (target, message, labels = {}) {
+exports.postGerritReview = async function postGerritReview(
+  target,
+  message,
+  labels = {}
+) {
   return new Promise((resolve, reject) => {
     gerritClient().review(target, { message, labels }, (err) => {
       if (err) {

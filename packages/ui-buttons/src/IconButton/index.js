@@ -93,10 +93,7 @@ class IconButton extends Component {
     /**
      * Specifies if the `IconButton` shape should be a circle or rectangle.
      */
-    shape: PropTypes.oneOf([
-      'rectangle',
-      'circle'
-    ]),
+    shape: PropTypes.oneOf(['rectangle', 'circle']),
     /**
      * Specifies if the `IconButton` should render with a solid background. When false, the background is transparent.
      */
@@ -127,7 +124,7 @@ class IconButton extends Component {
     renderIcon: undefined,
     type: 'button',
     size: 'medium',
-    elementRef: (el) => { },
+    elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -143,11 +140,11 @@ class IconButton extends Component {
 
   _baseButton = null
 
-  get focused () {
+  get focused() {
     return this._baseButton && this._baseButton.focused
   }
 
-  focus () {
+  focus() {
     this._baseButton && this._baseButton.focus()
   }
 
@@ -192,7 +189,9 @@ class IconButton extends Component {
         href={href}
         renderIcon={children || renderIcon}
         theme={theme}
-        ref={(component) => { this._baseButton = component }}
+        ref={(component) => {
+          this._baseButton = component
+        }}
       >
         <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
       </BaseButton>

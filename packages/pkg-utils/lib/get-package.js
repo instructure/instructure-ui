@@ -27,20 +27,20 @@ const path = require('path')
 const readPkgUp = require('read-pkg-up')
 const Package = require('@lerna/package')
 
-exports.getPackage = function getPackage (options) {
+exports.getPackage = function getPackage(options) {
   const result = readPackage(options)
   return new Package(result.package, path.dirname(result.path))
 }
 
-exports.getPackageJSON = function getPackageJSON (options) {
+exports.getPackageJSON = function getPackageJSON(options) {
   return readPackage(options).package
 }
 
-exports.getPackagePath = function getPackagePath (options) {
+exports.getPackagePath = function getPackagePath(options) {
   return readPackage(options).path
 }
 
-function readPackage (options) {
+function readPackage(options) {
   // eslint-disable-next-line no-param-reassign
   options = {
     cwd: process.cwd(),

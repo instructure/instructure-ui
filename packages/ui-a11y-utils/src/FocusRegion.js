@@ -38,14 +38,17 @@ import { ScreenReaderFocusRegion } from './ScreenReaderFocusRegion'
 import { KeyboardFocusRegion } from './KeyboardFocusRegion'
 
 class FocusRegion {
-  constructor (element, options) {
+  constructor(element, options) {
     this._options = options || {
       shouldCloseOnDocumentClick: true,
       shouldCloseOnEscape: true,
       onDismiss: (event) => {}
     }
     this._contextElement = element
-    this._screenReaderFocusRegion = new ScreenReaderFocusRegion(element, options)
+    this._screenReaderFocusRegion = new ScreenReaderFocusRegion(
+      element,
+      options
+    )
     this._keyboardFocusRegion = new KeyboardFocusRegion(element, options)
     this._id = uid()
   }
@@ -55,7 +58,7 @@ class FocusRegion {
   _listeners = []
   _active = false
 
-  updateElement (element) {
+  updateElement(element) {
     this._contextElement = element
     if (this._keyboardFocusRegion) {
       this._keyboardFocusRegion.updateElement(element)
@@ -69,13 +72,17 @@ class FocusRegion {
     this._options.onDismiss(event, documentClick)
   }
 
-  captureDocumentClick = event => {
+  captureDocumentClick = (event) => {
     const { target } = event
-    this._preventCloseOnDocumentClick = event.button !== 0 || contains(this._contextElement, target)
+    this._preventCloseOnDocumentClick =
+      event.button !== 0 || contains(this._contextElement, target)
   }
 
-  handleDocumentClick = event => {
-    if (this._options.shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick) {
+  handleDocumentClick = (event) => {
+    if (
+      this._options.shouldCloseOnDocumentClick &&
+      !this._preventCloseOnDocumentClick
+    ) {
       this.handleDismiss(event, true)
     }
   }
@@ -87,28 +94,31 @@ class FocusRegion {
     }
   }
 
-  handleKeyUp = event => {
-    if (this._options.shouldCloseOnEscape && event.keyCode === keycode.codes.escape &&
-        !event.defaultPrevented) {
+  handleKeyUp = (event) => {
+    if (
+      this._options.shouldCloseOnEscape &&
+      event.keyCode === keycode.codes.escape &&
+      !event.defaultPrevented
+    ) {
       this.handleDismiss(event)
     }
   }
 
-  get id () {
+  get id() {
     return this._id
   }
 
   // Focused returns when the focus region is active. Checking focused with the active element
   // is inconsistent across browsers (Safari/Firefox do not focus elements on click)
-  get focused () {
+  get focused() {
     return this._active
   }
 
-  get keyboardFocusable () {
+  get keyboardFocusable() {
     return (findTabbable(this._contextElement) || []).length > 0
   }
 
-  activate () {
+  activate() {
     if (!this._active) {
       const doc = ownerDocument(this._contextElement)
 
@@ -116,20 +126,25 @@ class FocusRegion {
       this._screenReaderFocusRegion.activate()
 
       if (this._options.shouldCloseOnDocumentClick) {
-        this._listeners.push(addEventListener(doc, 'click', this.captureDocumentClick, true))
-        this._listeners.push(addEventListener(doc, 'click', this.handleDocumentClick))
+        this._listeners.push(
+          addEventListener(doc, 'click', this.captureDocumentClick, true)
+        )
+        this._listeners.push(
+          addEventListener(doc, 'click', this.handleDocumentClick)
+        )
 
-        Array.from(doc.getElementsByTagName('iframe'))
-          .forEach((el) => {
-            // listen for mouseup events on any iframes in the document
-            const frameDoc = getFrameDocumentSafe(el)
+        Array.from(doc.getElementsByTagName('iframe')).forEach((el) => {
+          // listen for mouseup events on any iframes in the document
+          const frameDoc = getFrameDocumentSafe(el)
 
-            if(frameDoc) {
-              this._listeners.push(addEventListener(frameDoc, 'mouseup', (event) => {
+          if (frameDoc) {
+            this._listeners.push(
+              addEventListener(frameDoc, 'mouseup', (event) => {
                 this.handleFrameClick(event, el)
-              }))
-            }
-          })
+              })
+            )
+          }
+        })
       }
 
       if (this._options.shouldCloseOnEscape) {
@@ -140,9 +155,9 @@ class FocusRegion {
     }
   }
 
-  deactivate ({ keyboard = true } = {}) {
+  deactivate({ keyboard = true } = {}) {
     if (this._active) {
-      this._listeners.forEach(listener => {
+      this._listeners.forEach((listener) => {
         listener.remove()
       })
       this._listeners = []
@@ -157,13 +172,19 @@ class FocusRegion {
     }
   }
 
-  focus () {
-    error(this._active, `[FocusRegion] Cannot call '.focus()' on a region that is not currently active.`)
+  focus() {
+    error(
+      this._active,
+      `[FocusRegion] Cannot call '.focus()' on a region that is not currently active.`
+    )
     this._keyboardFocusRegion.focus()
   }
 
-  blur () {
-    error(!this._active, `[FocusRegion] Cannot call '.blur()' on a region that is currently active.`)
+  blur() {
+    error(
+      !this._active,
+      `[FocusRegion] Cannot call '.blur()' on a region that is currently active.`
+    )
     this._keyboardFocusRegion.blur()
   }
 }

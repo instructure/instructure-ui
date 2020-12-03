@@ -22,19 +22,19 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, typography }) {
+export default function generator({ colors, typography }) {
   return {
     fontSize: typography.fontSizeMedium,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
 
     color: colors.textDarkest,
-    background: colors.backgroundLightest,
+    background: colors.backgroundLightest
   }
 }
 
 generator.canvas = function (variables) {
   return {
-    color: variables['ic-brand-font-color-dark'],
+    color: variables['ic-brand-font-color-dark']
   }
 }

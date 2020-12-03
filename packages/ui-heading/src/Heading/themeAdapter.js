@@ -31,10 +31,10 @@ const map = {
     'h3FontFamily',
     'h4FontFamily',
     'h5FontFamily'
-  ],
+  ]
 }
 
 export const themeAdapter = createThemeAdapter({
   map,
-  version: '8.0.0',
+  version: '8.0.0'
 })

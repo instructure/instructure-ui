@@ -24,8 +24,10 @@
 const { runCommandSync } = require('@instructure/command-utils')
 const { getPackage } = require('./get-package')
 
-module.exports = function getPackages () {
-  const result = runCommandSync('lerna', ['list', '--json'], [], { stdio: 'pipe' }).stdout
+module.exports = function getPackages() {
+  const result = runCommandSync('lerna', ['list', '--json'], [], {
+    stdio: 'pipe'
+  }).stdout
   const packageData = JSON.parse(result)
   return packageData.map(({ location }) => getPackage({ cwd: location }))
 }

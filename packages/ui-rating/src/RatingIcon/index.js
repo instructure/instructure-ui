@@ -55,7 +55,7 @@ class RatingIcon extends Component {
     size: 'medium'
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     this.state = {
@@ -65,19 +65,23 @@ class RatingIcon extends Component {
 
   _timeouts = []
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.animateFill) {
       this._timeouts.push(setTimeout(this.fill, this.props.animationDelay))
     }
   }
 
-  componentDidUpdate (prevProps) {
-    if (this.props.animateFill && this.props.filled && (this.props.filled !== prevProps.filled)) {
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.animateFill &&
+      this.props.filled &&
+      this.props.filled !== prevProps.filled
+    ) {
       this.fill()
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._animation && this._animation.cancel()
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
   }
@@ -94,11 +98,8 @@ class RatingIcon extends Component {
     this.applyTheme()
   }
 
-  render () {
-    const {
-      size,
-      animateFill
-    } = this.props
+  render() {
+    const { size, animateFill } = this.props
 
     const classes = {
       [styles.root]: true,
@@ -112,18 +113,18 @@ class RatingIcon extends Component {
     return (
       <span className={classnames(classes)}>
         <span>
-          {
-            (this.state.filled && animateFill) ? (
-              <Transition
-                in
-                transitionOnMount
-                type="scale"
-                onEnter={this.handleTransitionEnter}
-              >
-                <Icon className={styles.icon} />
-              </Transition>
-            ) : <Icon className={styles.icon} />
-          }
+          {this.state.filled && animateFill ? (
+            <Transition
+              in
+              transitionOnMount
+              type="scale"
+              onEnter={this.handleTransitionEnter}
+            >
+              <Icon className={styles.icon} />
+            </Transition>
+          ) : (
+            <Icon className={styles.icon} />
+          )}
         </span>
       </span>
     )

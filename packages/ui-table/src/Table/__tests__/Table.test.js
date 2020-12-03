@@ -23,7 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, find, findAll, within } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  find,
+  findAll,
+  within
+} from '@instructure/ui-test-utils'
 /* eslint-disable no-restricted-imports */
 import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSelect/SimpleSelectLocator'
 /* eslint-enable no-restricted-imports */
@@ -34,25 +41,23 @@ describe('<Table />', async () => {
   beforeEach(async () => {
     stub(console, 'warn') // suppress experimental warnings
   })
-  const render = (props) => mount(
-    <Table
-      caption="Test table"
-      {...props}
-    >
-      <Table.Head>
-        <Table.Row>
-          <Table.ColHeader id="foo">Foo</Table.ColHeader>
-          <Table.ColHeader id="bar">Bar</Table.ColHeader>
-        </Table.Row>
-      </Table.Head>
-      <Table.Body>
-        <Table.Row>
-          <Table.RowHeader>foo</Table.RowHeader>
-          <Table.Cell>bar</Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
-  )
+  const render = (props) =>
+    mount(
+      <Table caption="Test table" {...props}>
+        <Table.Head>
+          <Table.Row>
+            <Table.ColHeader id="foo">Foo</Table.ColHeader>
+            <Table.ColHeader id="bar">Bar</Table.ColHeader>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body>
+          <Table.Row>
+            <Table.RowHeader>foo</Table.RowHeader>
+            <Table.Cell>bar</Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    )
 
   it('should render a caption', async () => {
     await render()
@@ -69,7 +74,7 @@ describe('<Table />', async () => {
 
   it('applies a fixed column layout', async () => {
     await render({
-      layout: 'fixed',
+      layout: 'fixed'
     })
     const table = await find('table')
     const tableNode = within(table.getDOMNode())
@@ -79,7 +84,7 @@ describe('<Table />', async () => {
 
   it('passes hover to table row', async () => {
     await render({
-      hover: true,
+      hover: true
     })
     const tr = await find('tbody tr')
     const trNode = within(tr.getDOMNode())
@@ -105,7 +110,7 @@ describe('<Table />', async () => {
 
   it('can render table in stacked layout', async () => {
     const stackedTable = await render({
-      layout: 'stacked',
+      layout: 'stacked'
     })
 
     expect(stackedTable).to.exist()
@@ -113,23 +118,18 @@ describe('<Table />', async () => {
 
   it('can ignore invalid children', async () => {
     await mount(
-      <Table
-        caption="Test table"
-      >
+      <Table caption="Test table">
         <Table.Head>
           {null}
           <Table.Row>
-            <Table.ColHeader id='foo'>
-              Foo
-            </Table.ColHeader>
+            <Table.ColHeader id="foo">Foo</Table.ColHeader>
             {null}
           </Table.Row>
         </Table.Head>
         {null}
         <Table.Body>
           {null}
-          <Table.Row>
-          </Table.Row>
+          <Table.Row></Table.Row>
         </Table.Body>
       </Table>
     )
@@ -142,12 +142,8 @@ describe('<Table />', async () => {
 
   it('can handle non-existent head in stacked layout', async () => {
     const stackedTable = await mount(
-      <Table
-        caption="Test table"
-        layout="stacked"
-      >
-        <Table.Body>
-        </Table.Body>
+      <Table caption="Test table" layout="stacked">
+        <Table.Body></Table.Body>
       </Table>
     )
 
@@ -156,12 +152,8 @@ describe('<Table />', async () => {
 
   it('can handle empty head in stacked layout', async () => {
     const stackedTable = await mount(
-      <Table
-        caption="Test table"
-        layout="stacked"
-      >
-        <Table.Head>
-        </Table.Head>
+      <Table caption="Test table" layout="stacked">
+        <Table.Head></Table.Head>
       </Table>
     )
 
@@ -170,10 +162,7 @@ describe('<Table />', async () => {
 
   it('can handle invalid header in stacked layout', async () => {
     const stackedTable = await mount(
-      <Table
-        caption="Test table"
-        layout="stacked"
-      >
+      <Table caption="Test table" layout="stacked">
         <Table.Head>
           <Table.Row>
             <Table.Cell>Foo</Table.Cell>
@@ -186,27 +175,29 @@ describe('<Table />', async () => {
   })
 
   describe('when table is sortable', async () => {
-    const renderSortableTable = (props, handlers = {}, layout = 'auto') => mount(
-      <Table
-        caption="Sortable table"
-        layout={layout}
-      >
-        <Table.Head>
-          <Table.Row>
-            <Table.ColHeader id="foo" {...props} {...handlers}>Foo</Table.ColHeader>
-            <Table.ColHeader id="bar" {...handlers}>Bar</Table.ColHeader>
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          <Table.Row></Table.Row>
-          <Table.Row></Table.Row>
-        </Table.Body>
-      </Table>
-    )
+    const renderSortableTable = (props, handlers = {}, layout = 'auto') =>
+      mount(
+        <Table caption="Sortable table" layout={layout}>
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="foo" {...props} {...handlers}>
+                Foo
+              </Table.ColHeader>
+              <Table.ColHeader id="bar" {...handlers}>
+                Bar
+              </Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row></Table.Row>
+            <Table.Row></Table.Row>
+          </Table.Body>
+        </Table>
+      )
 
     it('can render up arrow for ascending order', async () => {
       await renderSortableTable({
-        sortDirection: 'ascending',
+        sortDirection: 'ascending'
       })
       const arrow = await find('svg[name="IconMiniArrowUp"]')
 
@@ -215,7 +206,7 @@ describe('<Table />', async () => {
 
     it('can render down arrow for descending order', async () => {
       await renderSortableTable({
-        sortDirection: 'descending',
+        sortDirection: 'descending'
       })
       const arrow = await find('svg[name="IconMiniArrowDown"]')
 
@@ -225,9 +216,12 @@ describe('<Table />', async () => {
     it('calls onRequestSort when column header is clicked', async () => {
       const onRequestSort = stub()
 
-      await renderSortableTable({},{
-        onRequestSort,
-      })
+      await renderSortableTable(
+        {},
+        {
+          onRequestSort
+        }
+      )
       const button = await find('th button')
 
       await button.click()
@@ -237,9 +231,13 @@ describe('<Table />', async () => {
     it('can render table head as a combobox when in stacked layout', async () => {
       const sortFoo = stub()
 
-      await renderSortableTable({},{
-        onRequestSort: sortFoo,
-      }, 'stacked')
+      await renderSortableTable(
+        {},
+        {
+          onRequestSort: sortFoo
+        },
+        'stacked'
+      )
       const select = await SimpleSelectLocator.find()
       const input = await select.findInput()
 
@@ -253,11 +251,15 @@ describe('<Table />', async () => {
     })
 
     it('can render check mark for sorted column in stacked layout', async () => {
-      await renderSortableTable({
-        sortDirection: 'ascending'
-      },{
-        onRequestSort: stub()
-      }, 'stacked')
+      await renderSortableTable(
+        {
+          sortDirection: 'ascending'
+        },
+        {
+          onRequestSort: stub()
+        },
+        'stacked'
+      )
       const icon = await find('svg[name="IconCheck"]')
 
       expect(icon).to.exist()
@@ -265,7 +267,7 @@ describe('<Table />', async () => {
 
     it('creates proper aria-sort attributes (ascending)', async () => {
       await renderSortableTable({
-        sortDirection: 'ascending',
+        sortDirection: 'ascending'
       })
       const sortedHeader = await find('th[aria-sort="ascending"]')
 
@@ -274,7 +276,7 @@ describe('<Table />', async () => {
 
     it('creates proper aria-sort attributes (descending)', async () => {
       await renderSortableTable({
-        sortDirection: 'descending',
+        sortDirection: 'descending'
       })
       const sortedHeader = await find('th[aria-sort="descending"]')
 

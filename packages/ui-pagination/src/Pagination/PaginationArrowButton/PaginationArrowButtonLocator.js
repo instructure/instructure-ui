@@ -29,9 +29,12 @@ import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocato
 
 import { PaginationArrowButton } from './index'
 
-export const PaginationArrowButtonLocator = locator(PaginationArrowButton.selector, {
-  findTooltipContent: (...args) => TooltipLocator.findContent(...args),
-  click: async (element, ...args) => {
-    return (await find(element, 'a,button,[role="button"]')).click(...args)
+export const PaginationArrowButtonLocator = locator(
+  PaginationArrowButton.selector,
+  {
+    findTooltipContent: (...args) => TooltipLocator.findContent(...args),
+    click: async (element, ...args) => {
+      return (await find(element, 'a,button,[role="button"]')).click(...args)
+    }
   }
-})
+)

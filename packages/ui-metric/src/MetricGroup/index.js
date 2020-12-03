@@ -42,8 +42,8 @@ category: components
 class MetricGroup extends Component {
   static propTypes = {
     /**
-    * children of type `Metric`
-    */
+     * children of type `Metric`
+     */
     children: ChildrenPropTypes.oneOf([Metric])
   }
 
@@ -51,7 +51,7 @@ class MetricGroup extends Component {
     children: null
   }
 
-  renderChildren () {
+  renderChildren() {
     return Children.map(this.props.children, (child) => {
       return safeCloneElement(child, {
         isGroupChild: true

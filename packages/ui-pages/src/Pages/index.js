@@ -46,16 +46,18 @@ category: components
 @themeable(theme, styles)
 class Pages extends Component {
   static propTypes = {
-    children: Children.oneOf([
-      Page
-    ]),
+    children: Children.oneOf([Page]),
 
     defaultPageIndex: PropTypes.number,
 
     /**
      * The currently active page index
      */
-    activePageIndex: controllable(PropTypes.number, 'onPageIndexChange', 'defaultPageIndex'),
+    activePageIndex: controllable(
+      PropTypes.number,
+      'onPageIndexChange',
+      'defaultPageIndex'
+    ),
 
     /**
      * Event handler fired anytime page index has changed due to back button being clicked
@@ -63,11 +65,11 @@ class Pages extends Component {
     onPageIndexChange: PropTypes.func,
 
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
-   margin: ThemeablePropTypes.spacing
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
+    margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {
@@ -87,19 +89,19 @@ class Pages extends Component {
 
   _timeouts = []
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this._history = [
-      typeof props.defaultPageIndex === 'number' ?
-      props.defaultPageIndex :
-      props.activePageIndex
+      typeof props.defaultPageIndex === 'number'
+        ? props.defaultPageIndex
+        : props.activePageIndex
     ]
 
     this._contentId = uid('Pages')
   }
 
-  getChildContext () {
+  getChildContext() {
     return {
       history: this._history,
       navigateToPreviousPage: () => {
@@ -114,18 +116,18 @@ class Pages extends Component {
     this.props.onPageIndexChange(newPageIndex || 0, oldPageIndex)
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps && typeof nextProps.activePageIndex === 'number' &&
-        (
-          this._history.length === 0 ||
-          nextProps.activePageIndex !== this._history[this._history.length - 1]
-        )
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps &&
+      typeof nextProps.activePageIndex === 'number' &&
+      (this._history.length === 0 ||
+        nextProps.activePageIndex !== this._history[this._history.length - 1])
     ) {
       this._history.push(nextProps.activePageIndex)
     }
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this._timeouts.push(
       setTimeout(() => {
         !this.focused && this.focus()
@@ -133,44 +135,51 @@ class Pages extends Component {
     )
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._timeouts.forEach(clearTimeout)
   }
 
-  get focused () {
+  get focused() {
     return containsActiveElement(this._contentElement)
   }
 
-  focus () {
-    this._timeouts.push(setTimeout(() => {
-      const activePage = this._activePage
+  focus() {
+    this._timeouts.push(
+      setTimeout(() => {
+        const activePage = this._activePage
 
-      // Attempt to focus active page
-      if (activePage && activePage.focusable) {
-        activePage.focus()
-      } else {
-        // Use first tabbable as last ditch effort
-        const tabbable = findTabbable(this._contentElement)
-        const element = tabbable && tabbable[0]
+        // Attempt to focus active page
+        if (activePage && activePage.focusable) {
+          activePage.focus()
+        } else {
+          // Use first tabbable as last ditch effort
+          const tabbable = findTabbable(this._contentElement)
+          const element = tabbable && tabbable[0]
 
-        element && element.focus()
-      }
-    }))
+          element && element.focus()
+        }
+      })
+    )
   }
 
-  get activePage () {
+  get activePage() {
     const { activePageIndex, children } = this.props
     const pages = React.Children.toArray(children)
-    const activePage = (activePageIndex < pages.length) ? pages[activePageIndex] : null
+    const activePage =
+      activePageIndex < pages.length ? pages[activePageIndex] : null
 
     error(activePage, '[Pages] Invalid `activePageIndex`.')
 
-    return activePage ? safeCloneElement(activePage, {
-      ref: (el) => { this._activePage = el }
-    }) : null
+    return activePage
+      ? safeCloneElement(activePage, {
+          ref: (el) => {
+            this._activePage = el
+          }
+        })
+      : null
   }
 
-  render () {
+  render() {
     return this.activePage ? (
       <View
         as="div"
@@ -178,7 +187,9 @@ class Pages extends Component {
         className={styles.root}
         margin={this.props.margin}
         role="region"
-        elementRef={(el) => { this._contentElement = el }}
+        elementRef={(el) => {
+          this._contentElement = el
+        }}
       >
         {this.activePage}
       </View>

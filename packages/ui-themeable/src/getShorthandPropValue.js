@@ -39,7 +39,12 @@ import { error } from '@instructure/console/macro'
  * @param {String} propName - a prefix to combine with each propValue
  * @returns {String} a string with each value replaced with a value from the theme object
  */
-function getShorthandPropValue (componentName, componentTheme, propValue, propName) {
+function getShorthandPropValue(
+  componentName,
+  componentTheme,
+  propValue,
+  propName
+) {
   if (typeof propValue !== 'string' || isEmpty(componentTheme)) {
     return
   }
@@ -66,7 +71,10 @@ function getShorthandPropValue (componentName, componentTheme, propValue, propNa
       const themeVariableName = camelize(`${propName}-${shortHandValue}`)
       const themeVariableValue = componentTheme[themeVariableName]
 
-      error(themeVariableValue, `[${componentName}] '${themeVariableName}' is an invalid '${propName}' value.`)
+      error(
+        themeVariableValue,
+        `[${componentName}] '${themeVariableName}' is an invalid '${propName}' value.`
+      )
 
       return themeVariableValue || '0'
     })

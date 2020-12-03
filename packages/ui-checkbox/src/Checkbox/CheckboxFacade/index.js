@@ -47,8 +47,8 @@ class CheckboxFacade extends Component {
     hovered: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Visual state showing that child checkboxes are a combination of checked and unchecked
-    */
+     * Visual state showing that child checkboxes are a combination of checked and unchecked
+     */
     indeterminate: PropTypes.bool
   }
 
@@ -60,7 +60,7 @@ class CheckboxFacade extends Component {
     indeterminate: false
   }
 
-  renderIcon () {
+  renderIcon() {
     if (this.props.indeterminate) {
       return (
         <SVGIcon viewBox="0 0 1920 1920" inline={false}>
@@ -74,14 +74,8 @@ class CheckboxFacade extends Component {
     }
   }
 
-  render () {
-    const {
-      size,
-      checked,
-      focused,
-      hovered,
-      indeterminate
-    } = this.props
+  render() {
+    const { size, checked, focused, hovered, indeterminate } = this.props
 
     const classes = {
       [styles.root]: true,
@@ -96,9 +90,7 @@ class CheckboxFacade extends Component {
         <span className={styles.facade} aria-hidden="true">
           {this.renderIcon()}
         </span>
-        <span className={styles.label}>
-          {this.props.children}
-        </span>
+        <span className={styles.label}>{this.props.children}</span>
       </span>
     )
   }

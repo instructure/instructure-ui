@@ -43,15 +43,39 @@ import { trimIndent } from './trimIndent'
 
 /* eslint-disable react/prop-types, react/display-name */
 const elements = {
-  h1: ({ id, children }) => <Heading id={id} level="h1" margin="0 0 large">{children}</Heading>,
-  h2: ({ id, children }) => <Heading id={id} level="h1" as="h2" margin="x-large 0 large 0">{children}</Heading>,
-  h3: ({ id, children }) => <Heading id={id} level="h2" as="h3" margin="large 0 medium 0">{children}</Heading>,
-  h4: ({ id, children }) => <Heading id={id} level="h3" as="h4" margin="large 0 medium 0">{children}</Heading>,
-  h5: ({ id, children }) => <Heading id={id} level="h4" as="h5" margin="large 0 small 0" size>{children}</Heading>,
+  h1: ({ id, children }) => (
+    <Heading id={id} level="h1" margin="0 0 large">
+      {children}
+    </Heading>
+  ),
+  h2: ({ id, children }) => (
+    <Heading id={id} level="h1" as="h2" margin="x-large 0 large 0">
+      {children}
+    </Heading>
+  ),
+  h3: ({ id, children }) => (
+    <Heading id={id} level="h2" as="h3" margin="large 0 medium 0">
+      {children}
+    </Heading>
+  ),
+  h4: ({ id, children }) => (
+    <Heading id={id} level="h3" as="h4" margin="large 0 medium 0">
+      {children}
+    </Heading>
+  ),
+  h5: ({ id, children }) => (
+    <Heading id={id} level="h4" as="h5" margin="large 0 small 0" size>
+      {children}
+    </Heading>
+  ),
   img: ({ src, alt }) => <Img src={src} alt={alt} />,
   a: ({ href, title, target, name, children }) => {
     if (href) {
-      return <Link href={href} title={title} target={target}>{children}</Link>
+      return (
+        <Link href={href} title={title} target={target}>
+          {children}
+        </Link>
+      )
     } else {
       return <a name={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
     }
@@ -61,7 +85,7 @@ const elements = {
 
 const { renderer, tracker } = createRenderer()
 
-function compileMarkdown (content, context, options = {}) {
+function compileMarkdown(content, context, options = {}) {
   tracker.tree = []
   tracker.elements = {}
   tracker.toc = []
@@ -69,12 +93,15 @@ function compileMarkdown (content, context, options = {}) {
   tracker.context = context
   tracker.currentId = []
 
-  marked(trimIndent(content), Object.assign({renderer: renderer, smartypants: true}, options))
+  marked(
+    trimIndent(content),
+    Object.assign({ renderer: renderer, smartypants: true }, options)
+  )
 
   return tracker.tree
 }
 
-function createRenderer () {
+function createRenderer() {
   const tracker = {
     tree: null,
     elements: null,
@@ -85,42 +112,47 @@ function createRenderer () {
   }
   const renderer = new marked.Renderer()
 
-  function getTocPosition (toc, level) {
+  function getTocPosition(toc, level) {
     let currentLevel = toc.children
-    while (currentLevel.length && currentLevel[currentLevel.length - 1].level !== level) {
+    while (
+      currentLevel.length &&
+      currentLevel[currentLevel.length - 1].level !== level
+    ) {
       currentLevel = currentLevel[currentLevel.length - 1].children
     }
     return currentLevel
   }
 
-  function parseChildren (textContent) {
+  function parseChildren(textContent) {
     const contentArray = textContent.split(/(\{\{.*?\}\})/)
-    return contentArray
-      .map((subStr, index) => {
-        let child = subStr
+    return contentArray.map((subStr, index) => {
+      let child = subStr
 
-        if (typeof child === 'string' && child.trim() === '') {
-          return null
-        }
+      if (typeof child === 'string' && child.trim() === '') {
+        return null
+      }
 
-        const elementIdMatch = subStr.match(/\{\{(.*)\}\}/)
-        if (elementIdMatch) {
-          tracker.tree.splice(tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]), 1)
-          child = tracker.elements[elementIdMatch[1]]
-        } else {
-          child = createElement('span', {
-            key: `${textContent}${index}`,
-            dangerouslySetInnerHTML: {
-              __html: child
-            }
-          })
-        }
+      const elementIdMatch = subStr.match(/\{\{(.*)\}\}/)
+      if (elementIdMatch) {
+        tracker.tree.splice(
+          tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]),
+          1
+        )
+        child = tracker.elements[elementIdMatch[1]]
+      } else {
+        child = createElement('span', {
+          key: `${textContent}${index}`,
+          dangerouslySetInnerHTML: {
+            __html: child
+          }
+        })
+      }
 
-        return child
-      })
+      return child
+    })
   }
 
-  function addElement (tag, props = {}, content) {
+  function addElement(tag, props = {}, content) {
     const elementId = tracker.nextElementId++
     let children = null
 
@@ -149,13 +181,8 @@ function createRenderer () {
     return `{{${elementId}}}`
   }
 
-  function getComponent (type, data) {
-    const {
-      matter,
-      language,
-      title,
-      readOnly
-    } = data
+  function getComponent(type, data) {
+    const { matter, language, title, readOnly } = data
 
     const componentType = type.toLowerCase()
 
@@ -191,12 +218,12 @@ function createRenderer () {
     }
   }
 
-  function formatId (rawId) {
+  function formatId(rawId) {
     let id = rawId
 
     const modifications = [
       { regex: /\s/g, replacement: '-' }, // Convert any whitespace to hyphens
-      { regex: /\//g, replacement: '-'} // We use this to parse the url so replace it with a hyphen
+      { regex: /\//g, replacement: '-' } // We use this to parse the url so replace it with a hyphen
     ]
 
     modifications.forEach(({ regex, replacement }) => {
@@ -209,28 +236,39 @@ function createRenderer () {
   renderer.code = function (code, language) {
     const elementId = tracker.nextElementId++
 
-    function CodeComponent () {
+    function CodeComponent() {
       let el = null
       if (typeof language === 'string') {
         const matter = grayMatter(trimIndent(code))
         const readOnly = matter.data ? matter.data.readOnly : true
-        const title = tracker.context.title || matter.data.title || 'Code example'
+        const title =
+          tracker.context.title || matter.data.title || 'Code example'
         const theme = (matter.data || {}).theme
-        const data = {matter, readOnly, title, language}
+        const data = { matter, readOnly, title, language }
 
         if (language.indexOf('_guidelines') >= 0 || matter.data.guidelines) {
-          el = getComponent('Preview', {...data, background: 'light', frameless: true})
+          el = getComponent('Preview', {
+            ...data,
+            background: 'light',
+            frameless: true
+          })
         } else if (language.indexOf('_example') >= 0 || matter.data.example) {
           el = (
             <View display="block" margin="medium none">
               {getComponent('Playground', data)}
             </View>
           )
-        } else if (language.indexOf('_embed') >=0 || matter.data.embed) {
+        } else if (language.indexOf('_embed') >= 0 || matter.data.embed) {
           compileAndRenderExample({
             code: matter.content,
             render: (_el) => {
-              el = theme ? <ApplyTheme theme={ApplyTheme.generateTheme(theme)}>{_el}</ApplyTheme> : _el
+              el = theme ? (
+                <ApplyTheme theme={ApplyTheme.generateTheme(theme)}>
+                  {_el}
+                </ApplyTheme>
+              ) : (
+                _el
+              )
             },
             shouldCallRender: matter.data.render,
             onError: (err) => {
@@ -248,7 +286,10 @@ function createRenderer () {
     }
 
     const Element = () => CodeComponent().element
-    tracker.elements[elementId] = createElement(Element, { key: elementId, elementType: CodeComponent().type})
+    tracker.elements[elementId] = createElement(Element, {
+      key: elementId,
+      elementType: CodeComponent().type
+    })
 
     tracker.tree.push(tracker.elements[elementId])
 
@@ -258,12 +299,14 @@ function createRenderer () {
   renderer.html = function (html) {
     const elementId = tracker.nextElementId++
 
-    tracker.tree.push(createElement('div', {
-      key: elementId,
-      dangerouslySetInnerHTML: {
-        __html: html
-      }
-    }))
+    tracker.tree.push(
+      createElement('div', {
+        key: elementId,
+        dangerouslySetInnerHTML: {
+          __html: html
+        }
+      })
+    )
   }
 
   renderer.paragraph = function (text) {
@@ -275,11 +318,11 @@ function createRenderer () {
   }
 
   renderer.link = function (href, title, text) {
-    return addElement('a', {href, title}, text)
+    return addElement('a', { href, title }, text)
   }
 
   renderer.a = function (name, text) {
-    return addElement('a', {name}, text)
+    return addElement('a', { name }, text)
   }
 
   renderer.br = function () {
@@ -303,10 +346,10 @@ function createRenderer () {
   }
 
   renderer.heading = function (text, level) {
-    tracker.currentId = tracker.currentId.filter(entry => entry.level < level)
+    tracker.currentId = tracker.currentId.filter((entry) => entry.level < level)
     tracker.currentId.push({ text: formatId(text), level })
 
-    const id = tracker.currentId.map(entry => entry.text).join('-')
+    const id = tracker.currentId.map((entry) => entry.text).join('-')
     const lastToc = tracker.toc[tracker.toc.length - 1]
 
     if (!lastToc || lastToc.level > level) {
@@ -327,9 +370,13 @@ function createRenderer () {
       })
     }
 
-    return addElement(`h${level}`, {
-      id
-    }, text)
+    return addElement(
+      `h${level}`,
+      {
+        id
+      },
+      text
+    )
   }
 
   renderer.list = function (body, ordered) {
@@ -377,7 +424,7 @@ function createRenderer () {
   }
 
   renderer.image = function (href, title, text) {
-    return addElement('img', {src: href, alt: text})
+    return addElement('img', { src: href, alt: text })
   }
 
   return {

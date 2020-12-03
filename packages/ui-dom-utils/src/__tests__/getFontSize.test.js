@@ -28,9 +28,7 @@ import { getFontSize } from '../getFontSize'
 
 describe('getFontSize', async () => {
   it('should return font size as a number', async () => {
-    const subject = await mount(
-      <span style={{ fontSize: '17px'}}>hello</span>
-    )
+    const subject = await mount(<span style={{ fontSize: '17px' }}>hello</span>)
     expect(getFontSize(subject.getDOMNode())).to.equal(17)
   })
 })

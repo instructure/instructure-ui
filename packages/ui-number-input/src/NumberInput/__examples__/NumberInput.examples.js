@@ -38,7 +38,8 @@ export default {
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true
-    if (props.layout === 'inline' && props.display === 'inline-block') return true
+    if (props.layout === 'inline' && props.display === 'inline-block')
+      return true
 
     return false
   }

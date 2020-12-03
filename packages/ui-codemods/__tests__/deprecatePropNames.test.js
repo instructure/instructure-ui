@@ -31,7 +31,7 @@ const tests = ['propTypes', 'defaultProps', 'propMember', 'declaration']
 jest.autoMockOff()
 
 describe('deprecatePropNames', () => {
-  tests.forEach(test => {
+  tests.forEach((test) => {
     defineTest(
       __dirname,
       'lib/deprecatePropNames',

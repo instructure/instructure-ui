@@ -21,12 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- import _waitForExpect from 'wait-for-expect'
+import _waitForExpect from 'wait-for-expect'
 
- function waitForExpect (callback = () => {}, { timeout = 1900, interval = 50 } = {}) {
-   return _waitForExpect(callback, timeout, interval)
- }
+function waitForExpect(
+  callback = () => {},
+  { timeout = 1900, interval = 50 } = {}
+) {
+  return _waitForExpect(callback, timeout, interval)
+}
 
- export {
-   waitForExpect
- }
+export { waitForExpect }

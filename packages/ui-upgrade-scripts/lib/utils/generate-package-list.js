@@ -28,9 +28,11 @@ const { info, error, runCommandSync } = require('@instructure/command-utils')
 
 module.exports = ({ outputDir, name = 'package-list.json' }) => {
   try {
-    const { stdout } = runCommandSync('lerna', ['list', '--json'], [], { stdio: 'pipe' })
+    const { stdout } = runCommandSync('lerna', ['list', '--json'], [], {
+      stdio: 'pipe'
+    })
     const packages = JSON.parse(stdout)
-    const packageList = packages.map(pkg => pkg.name)
+    const packageList = packages.map((pkg) => pkg.name)
 
     const outputPath = path.join(outputDir, name)
 

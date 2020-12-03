@@ -23,14 +23,14 @@
  */
 
 /**
-  * Find the deprecated prop for a component
-  *
-  * @param {object} config Deprecated property configuration
-  * @param {string} comp Component name
-  * @param {string} prop Property name
-  * @return {object} Object if a match is found, otherwise null
-  */
-module.exports = function findDeprecatedProp (config, comp, prop) {
+ * Find the deprecated prop for a component
+ *
+ * @param {object} config Deprecated property configuration
+ * @param {string} comp Component name
+ * @param {string} prop Property name
+ * @return {object} Object if a match is found, otherwise null
+ */
+module.exports = function findDeprecatedProp(config, comp, prop) {
   if (config && comp && prop && config[comp]) {
     const component = config[comp]
 

@@ -31,12 +31,23 @@ const CORE_PLUGINS_PRE = [
 ]
 
 const CORE_PLUGINS_POST = [
-  [require('postcss-bidirection'), {
-    buildSelector: function (selector, direction) {
-      return `[dir="${direction}"] ${selector}`
+  [
+    require('postcss-bidirection'),
+    {
+      buildSelector: function (selector, direction) {
+        return `[dir="${direction}"] ${selector}`
+      }
     }
-  }],
-  [require('autoprefixer'), { overrideBrowserslist: loadConfig('browserslist', require('@instructure/browserslist-config-instui')) }],
+  ],
+  [
+    require('autoprefixer'),
+    {
+      overrideBrowserslist: loadConfig(
+        'browserslist',
+        require('@instructure/browserslist-config-instui')
+      )
+    }
+  ],
   [require('postcss-initial')],
   [require('postcss-reporter'), { clearReportedMessages: true }]
 ]
@@ -47,10 +58,10 @@ if ((process.env.BABEL_ENV || process.env.NODE_ENV) === 'production') {
   // we can't just use all of cssnano because there are some things it does that won't work for us,
   // so we filter them out.
   const minificationPlugins = require('cssnano-preset-default')({
-    svgo: {'doesn\'t work': true}, // only has an async api and the css modules require hook needs everything to have a sync api
-    convertValues: {'doesn\'t work': true}, // needs postcss 7+, when css-modules-require-hook uses 7.x, it should work
-    mergeLonghand: {'doesn\'t work': true} // needs postcss 7+, when css-modules-require-hook uses 7.x, it should work
-  }).plugins.filter(([_, pluginOpts = {}]) => !pluginOpts['doesn\'t work'])
+    svgo: { "doesn't work": true }, // only has an async api and the css modules require hook needs everything to have a sync api
+    convertValues: { "doesn't work": true }, // needs postcss 7+, when css-modules-require-hook uses 7.x, it should work
+    mergeLonghand: { "doesn't work": true } // needs postcss 7+, when css-modules-require-hook uses 7.x, it should work
+  }).plugins.filter(([_, pluginOpts = {}]) => !pluginOpts["doesn't work"])
 
   CORE_PLUGINS_POST.push(...minificationPlugins)
 }
@@ -63,7 +74,7 @@ module.exports = function (opts = { before: {}, after: {}, nesting: false }) {
       ...CORE_PLUGINS_POST
     ]
 
-    const keys = plugins.map(plugin => plugin[0])
+    const keys = plugins.map((plugin) => plugin[0])
 
     if (opts.before && Array.isArray(opts.before.insert)) {
       const index = keys.indexOf(opts.before.plugin)
@@ -78,13 +89,16 @@ module.exports = function (opts = { before: {}, after: {}, nesting: false }) {
     }
 
     return {
-      plugins: plugins
-        .map((plugin) => (typeof plugin[0] === 'string') ? require(plugin[0])(plugin[1]) : plugin[0](plugin[1]))
+      plugins: plugins.map((plugin) =>
+        typeof plugin[0] === 'string'
+          ? require(plugin[0])(plugin[1])
+          : plugin[0](plugin[1])
+      )
     }
   }
 }
 
-function insertPlugins (plugins, index, additions) {
+function insertPlugins(plugins, index, additions) {
   let pre = []
   let post = []
 
@@ -98,7 +112,9 @@ function insertPlugins (plugins, index, additions) {
 
   return [
     ...pre,
-    ...additions.map(addition => (Array.isArray(addition)) ? addition : [addition]),
+    ...additions.map((addition) =>
+      Array.isArray(addition) ? addition : [addition]
+    ),
     ...post
   ]
 }

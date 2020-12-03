@@ -33,11 +33,7 @@ describe('childrenOrValue', () => {
       children: null
     }
 
-    const args = [
-      props,
-      'children',
-      'TestComponent'
-    ]
+    const args = [props, 'children', 'TestComponent']
 
     expect(childrenOrValue(...args)).to.not.exist()
   })
@@ -49,11 +45,7 @@ describe('childrenOrValue', () => {
       children: 'hello world'
     }
 
-    const args = [
-      props,
-      'value',
-      'TestComponent'
-    ]
+    const args = [props, 'value', 'TestComponent']
 
     expect(childrenOrValue(...args)).to.not.exist()
   })
@@ -64,11 +56,7 @@ describe('childrenOrValue', () => {
       children: 'hello world'
     }
 
-    const args = [
-      props,
-      'children',
-      'TestComponent'
-    ]
+    const args = [props, 'children', 'TestComponent']
 
     expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
 
@@ -79,14 +67,10 @@ describe('childrenOrValue', () => {
   it('should reject when as is not input, value is not null or children are undefined', () => {
     const props = {
       as: 'div',
-      value: 'hello world',
+      value: 'hello world'
     }
 
-    const args = [
-      props,
-      'value',
-      'TestComponent'
-    ]
+    const args = [props, 'value', 'TestComponent']
 
     expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
 
@@ -94,4 +78,3 @@ describe('childrenOrValue', () => {
     expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
   })
 })
-

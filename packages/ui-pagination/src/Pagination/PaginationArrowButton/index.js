@@ -28,7 +28,10 @@ import PropTypes from 'prop-types'
 import { IconButton } from '@instructure/ui-buttons'
 import { PresentationContent } from '@instructure/ui-a11y-content'
 import { Tooltip } from '@instructure/ui-tooltip'
-import { IconArrowOpenStartSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
+import {
+  IconArrowOpenStartSolid,
+  IconArrowOpenEndSolid
+} from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 
 /**
@@ -52,7 +55,8 @@ class PaginationArrowButton extends Component {
 
   render() {
     const { label, direction, buttonRef, ...props } = this.props
-    const Icon = direction === 'prev' ? IconArrowOpenStartSolid : IconArrowOpenEndSolid
+    const Icon =
+      direction === 'prev' ? IconArrowOpenStartSolid : IconArrowOpenEndSolid
     return (
       <Tooltip
         on={['hover', 'focus']}
@@ -64,7 +68,7 @@ class PaginationArrowButton extends Component {
           withBackground={false}
           withBorder={false}
           screenReaderLabel={label}
-          rel={(props.href || props.to) ? direction : null}
+          rel={props.href || props.to ? direction : null}
           elementRef={buttonRef}
         >
           {Icon}

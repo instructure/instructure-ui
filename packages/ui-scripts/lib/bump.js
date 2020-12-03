@@ -30,9 +30,7 @@ const {
   setupGit,
   checkWorkingDirectory
 } = require('./utils/git')
-const {
-  bumpPackages
-} = require('./utils/npm')
+const { bumpPackages } = require('./utils/npm')
 
 try {
   const pkgJSON = getPackageJSON()
@@ -44,7 +42,12 @@ try {
   process.exit(1)
 }
 
-async function bump (packageName, currentVersion, requestedVersion, config = {}) {
+async function bump(
+  packageName,
+  currentVersion,
+  requestedVersion,
+  config = {}
+) {
   setupGit()
   checkWorkingDirectory()
 
@@ -57,7 +60,9 @@ async function bump (packageName, currentVersion, requestedVersion, config = {})
     process.exit(1)
   }
 
-  info(`💾  Committing version bump commit for ${packageName} ${releaseVersion}...`)
+  info(
+    `💾  Committing version bump commit for ${packageName} ${releaseVersion}...`
+  )
 
   try {
     commitVersionBump(releaseVersion)

@@ -40,10 +40,8 @@ id: Menu.Separator
 @testable()
 @themeable(theme, styles)
 class MenuItemSeparator extends Component {
-  render () {
-    return (
-      <div {...this.props} role="presentation" className={styles.root} />
-    )
+  render() {
+    return <div {...this.props} role="presentation" className={styles.root} />
   }
 }
 

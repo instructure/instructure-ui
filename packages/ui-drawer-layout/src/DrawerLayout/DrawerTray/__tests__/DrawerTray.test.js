@@ -208,7 +208,8 @@ describe('<DrawerTray />', async () => {
         render={() => {
           return 'Hello from layout tray'
         }}
-      />)
+      />
+    )
 
     const drawerTray = await DrawerTrayLocator.find()
 

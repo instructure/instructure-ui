@@ -37,11 +37,11 @@ class ColorSwatch extends Component {
     color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
   }
 
-  render () {
+  render() {
     const { color } = this.props
-    return (
-      isValid(color) ? <div className={styles.root} style={{ background: color }} /> : null
-    )
+    return isValid(color) ? (
+      <div className={styles.root} style={{ background: color }} />
+    ) : null
   }
 }
 

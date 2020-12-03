@@ -34,7 +34,7 @@ import { ownerDocument } from './ownerDocument'
  * @param {ReactElement|DOMNode} el
  * @returns {Object} the owner window
  */
-function ownerWindow (el) {
+function ownerWindow(el) {
   const node = el && findDOMNode(el)
   const doc = ownerDocument(node)
   return doc && (doc.defaultView || doc.parentWindow)

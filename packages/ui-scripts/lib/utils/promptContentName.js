@@ -26,6 +26,8 @@ const promptContentName = require('@instructure/ui-template-scripts/lib/utils/pr
 const { warn } = require('@instructure/command-utils')
 
 module.exports = function (args = {}) {
-  warn('`promptContentName` has been moved from \'@instructure/ui-scripts/lib/utils/promptContentName\' to \'@instructure/ui-template-scripts/lib/utils/promptContentName\'.')
+  warn(
+    "`promptContentName` has been moved from '@instructure/ui-scripts/lib/utils/promptContentName' to '@instructure/ui-template-scripts/lib/utils/promptContentName'."
+  )
   return promptContentName(args)
 }

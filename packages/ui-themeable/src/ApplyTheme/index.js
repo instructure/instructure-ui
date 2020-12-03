@@ -40,16 +40,16 @@ category: components/utilities
 class ApplyTheme extends Component {
   static propTypes = {
     /**
-    * set theme variables to override the defaults
-    */
+     * set theme variables to override the defaults
+     */
     theme: PropTypes.object,
     /**
-    * accepts only one child (children must be wrapped in a single component/element)
-    */
+     * accepts only one child (children must be wrapped in a single component/element)
+     */
     children: PropTypes.node,
     /**
-    * Prevent overriding this theme via a child ApplyTheme component or theme props
-    */
+     * Prevent overriding this theme via a child ApplyTheme component or theme props
+     */
     immutable: PropTypes.bool
   }
 
@@ -65,7 +65,7 @@ class ApplyTheme extends Component {
 
   static generateTheme = themeable.generateTheme
 
-  getChildContext () {
+  getChildContext() {
     let theme = this.props.theme || {}
 
     const parentThemeContext = ThemeContext.getThemeContext(this.context) || {}
@@ -81,10 +81,13 @@ class ApplyTheme extends Component {
       theme = mergeDeep(parentThemeContext.theme, theme)
     }
 
-    return ThemeContext.makeThemeContext(theme, parentThemeContext.immutable || this.props.immutable)
+    return ThemeContext.makeThemeContext(
+      theme,
+      parentThemeContext.immutable || this.props.immutable
+    )
   }
 
-  render () {
+  render() {
     return ensureSingleChild(this.props.children)
   }
 }

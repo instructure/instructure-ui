@@ -25,22 +25,33 @@ import { label, title } from './helpers'
 import { normalizeText } from './normalizeText'
 import { getNodeText } from './getNodeText'
 
-function matches(textToMatch, matcherString, options = {
-  exact: true,
-  trim: true,
-  collapseWhitespace: true
-}) {
+function matches(
+  textToMatch,
+  matcherString,
+  options = {
+    exact: true,
+    trim: true,
+    collapseWhitespace: true
+  }
+) {
   const { exact, collapseWhitespace, trim } = options
   const matcher = exact ? exactMatches : fuzzyMatches
   return matcher(textToMatch, matcherString, { collapseWhitespace, trim })
 }
 
-function fuzzyMatches(textToMatch, matcher, { collapseWhitespace = true, trim = true } = {}) {
+function fuzzyMatches(
+  textToMatch,
+  matcher,
+  { collapseWhitespace = true, trim = true } = {}
+) {
   if (typeof textToMatch !== 'string') {
     return false
   }
 
-  const normalizedText = normalizeText(textToMatch, { trim, collapseWhitespace })
+  const normalizedText = normalizeText(textToMatch, {
+    trim,
+    collapseWhitespace
+  })
 
   if (typeof matcher === 'string') {
     return normalizedText.toLowerCase().includes(matcher.toLowerCase())
@@ -49,12 +60,19 @@ function fuzzyMatches(textToMatch, matcher, { collapseWhitespace = true, trim = 
   }
 }
 
-function exactMatches(textToMatch, matcher, { collapseWhitespace = true, trim = true } = {}) {
+function exactMatches(
+  textToMatch,
+  matcher,
+  { collapseWhitespace = true, trim = true } = {}
+) {
   if (typeof textToMatch !== 'string') {
     return false
   }
 
-  const normalizedText = normalizeText(textToMatch, { trim, collapseWhitespace })
+  const normalizedText = normalizeText(textToMatch, {
+    trim,
+    collapseWhitespace
+  })
 
   if (typeof matcher === 'string') {
     return normalizedText === matcher

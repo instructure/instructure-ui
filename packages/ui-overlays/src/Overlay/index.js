@@ -75,11 +75,18 @@ class Overlay extends Component {
     /**
      * An element or a function returning an element to focus by default
      */
-    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    defaultFocusElement: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
     /**
      * An element or a function returning an element to apply `aria-hidden` to
      */
-    applicationElement: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+    applicationElement: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+      PropTypes.func
+    ]),
     /**
      * An element or a function returning an element that wraps the content of the `<Overlay />`
      */
@@ -169,7 +176,7 @@ class Overlay extends Component {
     onExited: function () {}
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -180,11 +187,11 @@ class Overlay extends Component {
 
   _timeouts = []
 
-  componentDidMount () {
+  componentDidMount() {
     this._isMounted = true
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.open && !this.props.open) {
       // closing
       this.setState({
@@ -193,16 +200,16 @@ class Overlay extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this._isMounted = false
-    this._timeouts.forEach(timeout => clearTimeout(timeout))
+    this._timeouts.forEach((timeout) => clearTimeout(timeout))
   }
 
-  get DOMNode () {
+  get DOMNode() {
     return this._DOMNode
   }
 
-  set DOMNode (el) {
+  set DOMNode(el) {
     this._DOMNode = el
   }
 
@@ -227,7 +234,7 @@ class Overlay extends Component {
     })
   }
 
-  renderTransition (content) {
+  renderTransition(content) {
     return (
       <Transition
         {...pickProps(this.props, Transition.propTypes)}
@@ -235,14 +242,17 @@ class Overlay extends Component {
         transitionOnMount
         unmountOnExit
         type={this.props.transition}
-        onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
+        onExited={createChainedFunction(
+          this.handleTransitionExited,
+          this.props.onExited
+        )}
       >
         {content}
       </Transition>
     )
   }
 
-  render () {
+  render() {
     let content = (
       <Dialog
         {...omitProps(this.props, Overlay.propTypes)}

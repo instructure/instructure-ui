@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 /**
  * ---
  * category: utilities
@@ -39,9 +38,9 @@
  *
  * @param {string} str
  * @returns {Array} Returns array of shape [ value, unit ]
-*/
+ */
 
-function parseUnit (str) {
+function parseUnit(str) {
   const value = `${str}`
   return [
     parseFloat(value, 10),

@@ -22,24 +22,30 @@
  * SOFTWARE.
  */
 
-
 const coreJSBuilder = require('core-js-builder')
 const loaderUtils = require('loader-utils')
 const loadConfig = require('@instructure/config-loader')
 
-module.exports = function BabelPolyFillLoader () {
+module.exports = function BabelPolyFillLoader() {
   this.cacheable && this.cacheable()
 
   const callback = this.async()
 
-  const options = loaderUtils.getOptions(this) || loadConfig('polyfill', require('@instructure/browserslist-config-instui/polyfills'))
+  const options =
+    loaderUtils.getOptions(this) ||
+    loadConfig(
+      'polyfill',
+      require('@instructure/browserslist-config-instui/polyfills')
+    )
 
-  Promise.resolve().then(() => {
-    return coreJSBuilder({
-      modules: options.modules || options || [],
-      library: false
-    }).then(code => callback(null, code))
-  }).catch((error) => {
-    callback(error)
-  })
+  Promise.resolve()
+    .then(() => {
+      return coreJSBuilder({
+        modules: options.modules || options || [],
+        library: false
+      }).then((code) => callback(null, code))
+    })
+    .catch((error) => {
+      callback(error)
+    })
 }

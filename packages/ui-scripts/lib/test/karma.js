@@ -24,7 +24,10 @@
 const path = require('path')
 const React = require('react')
 const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
-const { getCommand, runCommandsConcurrently } = require('@instructure/command-utils')
+const {
+  getCommand,
+  runCommandsConcurrently
+} = require('@instructure/command-utils')
 
 const {
   UNMANGLED_CLASS_NAMES,
@@ -41,23 +44,31 @@ let envVars = [
   'NODE_ENV=test',
   `REACT_VERSION=${React.version}`,
   'NODE_OPTIONS=--max_old_space_size=120000',
-  (OMIT_INSTUI_DEPRECATION_WARNINGS ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1` : false)
+  OMIT_INSTUI_DEPRECATION_WARNINGS
+    ? `OMIT_INSTUI_DEPRECATION_WARNINGS=1`
+    : false
 ]
 
 if (args.includes('--watch')) {
-  envVars = envVars.concat([
-    `DEBUG=1`,
-    `UNMANGLED_CLASS_NAMES=1`,
-    `USE_WEBPACK_CSS_LOADERS=1`,
-    'DISABLE_SPEEDY_STYLESHEET=1'
-  ]).filter(Boolean)
+  envVars = envVars
+    .concat([
+      `DEBUG=1`,
+      `UNMANGLED_CLASS_NAMES=1`,
+      `USE_WEBPACK_CSS_LOADERS=1`,
+      'DISABLE_SPEEDY_STYLESHEET=1'
+    ])
+    .filter(Boolean)
 } else {
-  envVars = envVars.concat([
-    (`${React.version}`.startsWith('15') || args.includes('--no-coverage') ? false : 'COVERAGE=1'),
-    (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
-    (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false),
-    (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false)
-  ]).filter(Boolean)
+  envVars = envVars
+    .concat([
+      `${React.version}`.startsWith('15') || args.includes('--no-coverage')
+        ? false
+        : 'COVERAGE=1',
+      UNMANGLED_CLASS_NAMES ? `UNMANGLED_CLASS_NAMES=1` : false,
+      DISABLE_SPEEDY_STYLESHEET ? `DISABLE_SPEEDY_STYLESHEET=1` : false,
+      USE_WEBPACK_CSS_LOADERS ? `USE_WEBPACK_CSS_LOADERS=1` : false
+    ])
+    .filter(Boolean)
 }
 
 if (args.includes('--no-launch')) {
@@ -76,7 +87,7 @@ if (args.includes('--no-lint')) {
   karmaArgs.push('--no-lint')
 }
 
-const browsersArgIndex = args.findIndex(arg => arg.startsWith('--browsers='))
+const browsersArgIndex = args.findIndex((arg) => arg.startsWith('--browsers='))
 
 if (browsersArgIndex >= 0) {
   karmaArgs.push(args[browsersArgIndex])
@@ -89,25 +100,31 @@ let paths = []
 
 if (scopeArgIndex >= 0) {
   const allPackages = getPackages()
-  const scopes = args[scopeArgIndex + 1].split(',').map(scope => scope.trim())
-  const pkgs = allPackages.filter(pkg => scopes.includes(pkg.name))
+  const scopes = args[scopeArgIndex + 1].split(',').map((scope) => scope.trim())
+  const pkgs = allPackages.filter((pkg) => scopes.includes(pkg.name))
   if (pkgs.length >= 0) {
-    paths = pkgs.map(pkg => path.relative('.', pkg.location) + path.sep)
+    paths = pkgs.map((pkg) => path.relative('.', pkg.location) + path.sep)
   }
 } else if (pathArgIndex >= 0) {
-  paths = args[pathArgIndex + 1].split(',').map(path => path.trim())
+  paths = args[pathArgIndex + 1].split(',').map((path) => path.trim())
 } else if (args.includes('--changed')) {
   const changedPackages = getChangedPackages('HEAD^1')
-  paths = changedPackages.map(pkg => path.relative('.', pkg.location) + path.sep)
+  paths = changedPackages.map(
+    (pkg) => path.relative('.', pkg.location) + path.sep
+  )
 } else if (args.includes('--staged')) {
   const changedPackages = getChangedPackages('--cached')
-  paths = changedPackages.map(pkg => path.relative('.', pkg.location) + path.sep)
+  paths = changedPackages.map(
+    (pkg) => path.relative('.', pkg.location) + path.sep
+  )
 }
 
 if (paths.length > 0) {
   envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
 }
 
-process.exit(runCommandsConcurrently({
-  karma: getCommand('karma', karmaArgs, envVars)
-}).status)
+process.exit(
+  runCommandsConcurrently({
+    karma: getCommand('karma', karmaArgs, envVars)
+  }).status
+)

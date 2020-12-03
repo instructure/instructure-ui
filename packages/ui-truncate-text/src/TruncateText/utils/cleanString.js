@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 /**
  * ---
  * parent: TruncateText
@@ -36,7 +35,7 @@
  * @param {boolean} end Whether or not to clean end of string.
  * @param {boolean} repeat=false Do a thorough clean.
  */
-function cleanString (string, ignore, start = true, end = true, repeat = false) {
+function cleanString(string, ignore, start = true, end = true, repeat = false) {
   let text = string
   let firstChar = text.charAt(0)
   let lastChar = text.slice(-1)

@@ -68,8 +68,8 @@ class ReactPortal extends React.Component {
      */
     children: PropTypes.node,
     /**
-    * provides a reference to the underlying html element
-    */
+     * provides a reference to the underlying html element
+     */
     elementRef: PropTypes.func
   }
 
@@ -83,7 +83,7 @@ class ReactPortal extends React.Component {
     elementRef: (el) => {}
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -91,14 +91,14 @@ class ReactPortal extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // If Portal is mounting in an open condition fire onOpen handler
     if (this.props.open && typeof this.props.onOpen === 'function') {
       this.props.onOpen(this.DOMNode)
     }
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     const mountNode = this.findMountNode(this.props)
 
     if (mountNode !== this.state.mountNode) {
@@ -107,17 +107,25 @@ class ReactPortal extends React.Component {
     }
 
     // If Portal was closed but is now open fire onOpen handler
-    if (this.props.open && !prevProps.open && typeof this.props.onOpen === 'function') {
+    if (
+      this.props.open &&
+      !prevProps.open &&
+      typeof this.props.onOpen === 'function'
+    ) {
       this.props.onOpen(this.DOMNode)
     }
 
     // If Portal was open but is now closed fire onClose handler
-    if (!this.props.open && prevProps.open && typeof this.props.onClose === 'function') {
+    if (
+      !this.props.open &&
+      prevProps.open &&
+      typeof this.props.onClose === 'function'
+    ) {
       this.props.onClose()
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.removeNode()
 
     // If Portal was open fire onClose handler
@@ -126,28 +134,27 @@ class ReactPortal extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { children } = this.props
 
-    return (this.props.open && React.Children.count(children) > 0) ?
-      ReactDOM.createPortal(
-        children,
-        this.insertNode()
-      ) :
-      null
+    return this.props.open && React.Children.count(children) > 0
+      ? ReactDOM.createPortal(children, this.insertNode())
+      : null
   }
 
-  removeNode () {
-    if (this.DOMNode &&
-        this.DOMNode.parentNode &&
-        typeof this.DOMNode.parentNode.removeChild === 'function') {
+  removeNode() {
+    if (
+      this.DOMNode &&
+      this.DOMNode.parentNode &&
+      typeof this.DOMNode.parentNode.removeChild === 'function'
+    ) {
       this.DOMNode.parentNode.removeChild(this.DOMNode)
       this.DOMNode = null
       this.props.elementRef(this.DOMNode)
     }
   }
 
-  insertNode () {
+  insertNode() {
     const {
       open,
       insertAt,
@@ -181,14 +188,17 @@ class ReactPortal extends React.Component {
       if (insertAt === 'bottom') {
         this.state.mountNode.appendChild(this.DOMNode)
       } else {
-        this.state.mountNode.insertBefore(this.DOMNode, this.state.mountNode.firstChild)
+        this.state.mountNode.insertBefore(
+          this.DOMNode,
+          this.state.mountNode.firstChild
+        )
       }
     }
 
     return this.DOMNode
   }
 
-  findMountNode (props) {
+  findMountNode(props) {
     let mountNode
 
     if (typeof props.mountNode === 'function') {
@@ -204,7 +214,7 @@ class ReactPortal extends React.Component {
     return mountNode
   }
 
-  get node () {
+  get node() {
     return this.DOMNode
   }
 }

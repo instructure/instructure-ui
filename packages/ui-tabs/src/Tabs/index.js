@@ -31,12 +31,20 @@ import keycode from 'keycode'
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
-import { deprecated, matchComponentTypes, safeCloneElement, passthroughProps } from '@instructure/ui-react-utils'
+import {
+  deprecated,
+  matchComponentTypes,
+  safeCloneElement,
+  passthroughProps
+} from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Focusable } from '@instructure/ui-focusable'
-import { addResizeListener, getBoundingClientRect } from '@instructure/ui-dom-utils'
+import {
+  addResizeListener,
+  getBoundingClientRect
+} from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
@@ -65,56 +73,56 @@ category: components
 class Tabs extends Component {
   static propTypes = {
     /**
-    * children of type `Tabs.Panel`
-    */
+     * children of type `Tabs.Panel`
+     */
     children: Children.oneOf([Panel, null]),
     variant: PropTypes.oneOf(['default', 'secondary']),
     /**
-    * A screen ready only label for the list of tabs
-    */
+     * A screen ready only label for the list of tabs
+     */
     screenReaderLabel: PropTypes.string,
     /**
-    * Called when the selected tab should change
-    */
+     * Called when the selected tab should change
+     */
     onRequestTabChange: PropTypes.func,
     maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-    */
+     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+     */
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     elementRef: PropTypes.func,
     /**
-    * Choose whether Tabs should stack or scroll when they exceed the width of their
-    * container.
-    */
+     * Choose whether Tabs should stack or scroll when they exceed the width of their
+     * container.
+     */
     tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
     shouldFocusOnRender: PropTypes.bool,
     /**
-    * __Deprecated - use `onRequestTabChange` instead__
-    */
+     * __Deprecated - use `onRequestTabChange` instead__
+     */
     onChange: PropTypes.func,
     /**
-    * __Deprecated__
-    */
+     * __Deprecated__
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * __Deprecated__
-    */
+     * __Deprecated__
+     */
     selectedIndex: PropTypes.number,
     /**
-    * __Deprecated - use `shouldFocusOnRender` instead__
-    */
+     * __Deprecated - use `shouldFocusOnRender` instead__
+     */
     focus: PropTypes.bool
   }
 
@@ -141,7 +149,7 @@ class Tabs extends Component {
   static Panel = Panel
   static Tab = Tab
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     this._tabList = null
@@ -152,7 +160,7 @@ class Tabs extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.tabOverflow === 'scroll' && this._tabList) {
       this.startScrollOverflow()
 
@@ -166,35 +174,47 @@ class Tabs extends Component {
     }
   }
 
-  componentDidUpdate (prevProps) {
-    if ((this.props.focus && !prevProps.focus) || (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender)) {
+  componentDidUpdate(prevProps) {
+    if (
+      (this.props.focus && !prevProps.focus) ||
+      (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender)
+    ) {
       this.focus()
     }
 
     // start event listeners for scroll overflow
-    if (prevProps.tabOverflow === 'stack' && this.props.tabOverflow === 'scroll') {
+    if (
+      prevProps.tabOverflow === 'stack' &&
+      this.props.tabOverflow === 'scroll'
+    ) {
       this.startScrollOverflow()
     }
 
     // cancel event listeners for scroll overflow
-    if (prevProps.tabOverflow === 'scroll' && this.props.tabOverflow === 'stack') {
+    if (
+      prevProps.tabOverflow === 'scroll' &&
+      this.props.tabOverflow === 'stack'
+    ) {
       this.cancelScrollOverflow()
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.cancelScrollOverflow()
   }
 
-  startScrollOverflow () {
+  startScrollOverflow() {
     this.handleResize()
 
-    this._debounced = debounce(this.handleResize, 300, { leading: true, trailing: true })
+    this._debounced = debounce(this.handleResize, 300, {
+      leading: true,
+      trailing: true
+    })
     this._resizeListener = addResizeListener(this._tabList, this._debounced)
     this._tabListPosition = getBoundingClientRect(this._tabList)
   }
 
-  cancelScrollOverflow () {
+  cancelScrollOverflow() {
     if (this._resizeListener) {
       this._resizeListener.remove()
     }
@@ -204,11 +224,8 @@ class Tabs extends Component {
     }
   }
 
-  getOverlayWidth () {
-    const {
-      variant,
-      tabOverflow
-    } = this.props
+  getOverlayWidth() {
+    const { variant, tabOverflow } = this.props
 
     if (tabOverflow === 'scroll') {
       if (variant === 'default') {
@@ -219,19 +236,23 @@ class Tabs extends Component {
     }
   }
 
-  showActiveTabIfOverlayed (activeTabEl) {
+  showActiveTabIfOverlayed(activeTabEl) {
     if (
-      this._tabList
-      && this._tabListPosition
-      && typeof this._tabList.scrollTo === 'function' // test for scrollTo support
+      this._tabList &&
+      this._tabListPosition &&
+      typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
       const rtl = this.dir === bidirectional.DIRECTION.rtl
 
       const tabPosition = getBoundingClientRect(activeTabEl)
       const tabListPosition = this._tabListPosition
 
-      const tabListBoundStart = rtl ? tabListPosition.left + this.getOverlayWidth() : tabListPosition.left
-      const tabListBoundEnd = rtl ?  tabListPosition.right : tabListPosition.right + this.getOverlayWidth()
+      const tabListBoundStart = rtl
+        ? tabListPosition.left + this.getOverlayWidth()
+        : tabListPosition.left
+      const tabListBoundEnd = rtl
+        ? tabListPosition.right
+        : tabListPosition.right + this.getOverlayWidth()
 
       const tabPositionStart = tabPosition.left
       const tabPositionEnd = tabPosition.right
@@ -262,10 +283,16 @@ class Tabs extends Component {
   handleTabKeyDown = (event, { index }) => {
     let nextTab
 
-    if (event.keyCode === keycode.codes.up || event.keyCode === keycode.codes.left) {
+    if (
+      event.keyCode === keycode.codes.up ||
+      event.keyCode === keycode.codes.left
+    ) {
       // Select next tab to the left
       nextTab = this.getNextTab(index, -1)
-    } else if (event.keyCode === keycode.codes.down || event.keyCode === keycode.codes.right) {
+    } else if (
+      event.keyCode === keycode.codes.down ||
+      event.keyCode === keycode.codes.right
+    ) {
       // Select next tab to the right
       nextTab = this.getNextTab(index, 1)
     }
@@ -277,19 +304,23 @@ class Tabs extends Component {
 
   handleResize = () => {
     this.setState({
-      withTabListOverflow: this._tabList.scrollWidth > this._tabList.offsetWidth,
+      withTabListOverflow: this._tabList.scrollWidth > this._tabList.offsetWidth
     })
 
     this._tabListPosition = getBoundingClientRect(this._tabList)
   }
 
-  getNextTab (startIndex, step) {
-    const tabs = React.Children.toArray(this.props.children)
-      .map(child => matchComponentTypes(child, [Panel]) && child)
+  getNextTab(startIndex, step) {
+    const tabs = React.Children.toArray(this.props.children).map(
+      (child) => matchComponentTypes(child, [Panel]) && child
+    )
     const count = tabs.length
-    const change = (step < 0) ? step + count : step
+    const change = step < 0 ? step + count : step
 
-    error((startIndex >= 0 && startIndex < count), `[Tabs] Invalid tab index: '${startIndex}'.`)
+    error(
+      startIndex >= 0 && startIndex < count,
+      `[Tabs] Invalid tab index: '${startIndex}'.`
+    )
 
     let nextIndex = startIndex
     let nextTab
@@ -297,13 +328,20 @@ class Tabs extends Component {
     do {
       nextIndex = (nextIndex + change) % count
       nextTab = tabs[nextIndex]
-    } while (nextTab && nextTab.props && (nextTab.props.disabled || nextTab.props.isDisabled))
+    } while (
+      nextTab &&
+      nextTab.props &&
+      (nextTab.props.disabled || nextTab.props.isDisabled)
+    )
 
-    error((nextIndex >= 0 && nextIndex < count), `[Tabs] Invalid tab index: '${nextIndex}'.`)
+    error(
+      nextIndex >= 0 && nextIndex < count,
+      `[Tabs] Invalid tab index: '${nextIndex}'.`
+    )
     return { index: nextIndex, id: nextTab.props.id }
   }
 
-  fireOnChange (event, { index, id }) {
+  fireOnChange(event, { index, id }) {
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(event, { index })
     }
@@ -312,10 +350,11 @@ class Tabs extends Component {
       this.props.onRequestTabChange(event, { index, id })
     }
 
-    this.state.withTabListOverflow && this.showActiveTabIfOverlayed(this._tabList.querySelector(`#tab-${id}`))
+    this.state.withTabListOverflow &&
+      this.showActiveTabIfOverlayed(this._tabList.querySelector(`#tab-${id}`))
   }
 
-  createTab (index, generatedId, selected, panel) {
+  createTab(index, generatedId, selected, panel) {
     const id = panel.props.id || generatedId
     const disabled = panel.props.disabled || panel.props.isDisabled
 
@@ -335,7 +374,7 @@ class Tabs extends Component {
     })
   }
 
-  clonePanel (index, generatedId, selected, panel) {
+  clonePanel(index, generatedId, selected, panel) {
     const id = panel.props.id || generatedId
 
     return safeCloneElement(panel, {
@@ -360,11 +399,13 @@ class Tabs extends Component {
     this._tabList = el
   }
 
-  focus () {
-    this._focusable && typeof this._focusable.focus === 'function' && this._focusable.focus()
+  focus() {
+    this._focusable &&
+      typeof this._focusable.focus === 'function' &&
+      this._focusable.focus()
   }
 
-  render () {
+  render() {
     const panels = []
     const tabs = []
     const {
@@ -382,33 +423,43 @@ class Tabs extends Component {
     } = this.props
 
     const selectedChildIndex = React.Children.toArray(children)
-      .filter(child => matchComponentTypes(child, [Panel]))
-      .findIndex(child => (child.props.selected || child.props.isSelected) && !(child.props.disabled || child.props.isDisabled))
+      .filter((child) => matchComponentTypes(child, [Panel]))
+      .findIndex(
+        (child) =>
+          (child.props.selected || child.props.isSelected) &&
+          !(child.props.disabled || child.props.isDisabled)
+      )
 
     let index = 0
-    let selectedIndex = props.selectedIndex || (selectedChildIndex >= 0 ? selectedChildIndex : 0)
+    let selectedIndex =
+      props.selectedIndex || (selectedChildIndex >= 0 ? selectedChildIndex : 0)
 
     React.Children.forEach(children, (child) => {
       if (matchComponentTypes(child, [Panel])) {
-        const selected = !(child.props.disabled || child.props.isDisabled) &&
-          (child.props.selected || child.props.isSelected || selectedIndex === index)
+        const selected =
+          !(child.props.disabled || child.props.isDisabled) &&
+          (child.props.selected ||
+            child.props.isSelected ||
+            selectedIndex === index)
         const id = uid()
 
         tabs.push(this.createTab(index, id, selected, child))
         panels.push(this.clonePanel(index, id, selected, child))
 
-        index ++
+        index++
       } else {
         panels.push(child)
       }
     })
 
-    const withScrollFade = tabOverflow === 'scroll' && this.state.withTabListOverflow
+    const withScrollFade =
+      tabOverflow === 'scroll' && this.state.withTabListOverflow
 
     // suppress overlay whenever final Tab is active, or Firefox will cover it
     const scrollOverlay =
-      selectedIndex !== React.Children.count(children) - 1 ?
-      <span key="overlay" className={styles.scrollOverlay} /> : null
+      selectedIndex !== React.Children.count(children) - 1 ? (
+        <span key="overlay" className={styles.scrollOverlay} />
+      ) : null
 
     const scrollFadeEls = [
       // spacer element prevents final Tab from being obscured by scroll overflow gradient
@@ -424,7 +475,7 @@ class Tabs extends Component {
         margin={margin}
         as="div"
         className={classnames({
-          [styles[variant]]: true,
+          [styles[variant]]: true
         })}
       >
         <Focusable ref={this.handleFocusableRef}>
@@ -448,7 +499,7 @@ class Tabs extends Component {
                 elementRef={this.handleTabListRef}
               >
                 {tabs}
-                { withScrollFade && scrollFadeEls }
+                {withScrollFade && scrollFadeEls}
               </View>
             </View>
           )}

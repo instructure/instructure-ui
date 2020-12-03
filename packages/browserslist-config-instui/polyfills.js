@@ -23,7 +23,8 @@
  */
 
 module.exports = {
-  features: [ // https://github.com/amilajack/eslint-plugin-compat/wiki/Adding-polyfills-(v2)
+  features: [
+    // https://github.com/amilajack/eslint-plugin-compat/wiki/Adding-polyfills-(v2)
     'Array.from',
     'Array.prototype.find',
     'Array.prototype.findIndex',
@@ -45,7 +46,8 @@ module.exports = {
     'String.prototype.includes',
     'String.prototype.repeat'
   ],
-  modules: [ // https://github.com/zloirock/core-js/tree/master/packages/core-js/modules
+  modules: [
+    // https://github.com/zloirock/core-js/tree/master/packages/core-js/modules
     'es.array.find',
     'es.array.find-index',
     'es.array.from',

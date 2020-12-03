@@ -81,4 +81,3 @@ describe('accepts', () => {
     expect(accepts(dropImage, 'jpg, png')).to.be.true()
   })
 })
-

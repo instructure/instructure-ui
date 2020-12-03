@@ -39,7 +39,7 @@ import { Selectable } from '../index'
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 describe('<Selectable />', async () => {
-  const lastCall = spy => spy.lastCall.args
+  const lastCall = (spy) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
   const getSelectable = (selectable) => (
     <span {...selectable.getRootProps()}>
@@ -50,14 +50,16 @@ describe('<Selectable />', async () => {
         {...selectable.getInputProps()}
       />
       <ul {...selectable.getListProps()}>
-        {defaultOptions.map(opt => (
-          <li key={opt} {...selectable.getOptionProps({id: opt})}>{opt}</li>
+        {defaultOptions.map((opt) => (
+          <li key={opt} {...selectable.getOptionProps({ id: opt })}>
+            {opt}
+          </li>
         ))}
       </ul>
     </span>
   )
 
-  it('should focus trigger when root is clicked' , async () => {
+  it('should focus trigger when root is clicked', async () => {
     const subject = await mount(
       <Selectable>
         {(selectable) => (
@@ -69,8 +71,10 @@ describe('<Selectable />', async () => {
               {...selectable.getInputProps()}
             />
             <ul {...selectable.getListProps()}>
-              {defaultOptions.map(opt => (
-                <li key={opt} {...selectable.getOptionProps({id: opt})}>{opt}</li>
+              {defaultOptions.map((opt) => (
+                <li key={opt} {...selectable.getOptionProps({ id: opt })}>
+                  {opt}
+                </li>
               ))}
             </ul>
           </span>
@@ -86,7 +90,7 @@ describe('<Selectable />', async () => {
     expect(input.focused()).to.be.true()
   })
 
-  it('should not blur trigger when root is clicked' , async () => {
+  it('should not blur trigger when root is clicked', async () => {
     const onFocus = stub()
     const onBlur = stub()
     const subject = await mount(
@@ -102,8 +106,10 @@ describe('<Selectable />', async () => {
               onFocus={onFocus}
             />
             <ul {...selectable.getListProps()}>
-              {defaultOptions.map(opt => (
-                <li key={opt} {...selectable.getOptionProps({id: opt})}>{opt}</li>
+              {defaultOptions.map((opt) => (
+                <li key={opt} {...selectable.getOptionProps({ id: opt })}>
+                  {opt}
+                </li>
               ))}
             </ul>
           </span>
@@ -141,7 +147,7 @@ describe('<Selectable />', async () => {
               {...selectable.getInputProps()}
             />
             <ul {...selectable.getListProps({ onClick, onMouseDown })}>
-              {defaultOptions.map(opt => (
+              {defaultOptions.map((opt) => (
                 <li key={opt} {...selectable.getOptionProps({ id: opt })}>
                   {opt}
                 </li>
@@ -182,12 +188,15 @@ describe('<Selectable />', async () => {
               {...selectable.getInputProps()}
             />
             <ul {...selectable.getListProps()}>
-              {defaultOptions.map(opt => (
-                <li key={opt} {...selectable.getOptionProps({
-                  id: opt,
-                  onClick,
-                  onMouseDown
-                })}>
+              {defaultOptions.map((opt) => (
+                <li
+                  key={opt}
+                  {...selectable.getOptionProps({
+                    id: opt,
+                    onClick,
+                    onMouseDown
+                  })}
+                >
                   {opt}
                 </li>
               ))}
@@ -209,7 +218,7 @@ describe('<Selectable />', async () => {
     expect(onRequestHideOptions).to.not.have.been.called()
   })
 
-  it('should not prevent events on other children' , async () => {
+  it('should not prevent events on other children', async () => {
     const onMouseDown = stub()
     const onClick = stub()
     const onKeyDown = stub()
@@ -231,8 +240,10 @@ describe('<Selectable />', async () => {
               {...selectable.getInputProps()}
             />
             <ul {...selectable.getListProps()}>
-              {defaultOptions.map(opt => (
-                <li key={opt} {...selectable.getOptionProps({id: opt})}>{opt}</li>
+              {defaultOptions.map((opt) => (
+                <li key={opt} {...selectable.getOptionProps({ id: opt })}>
+                  {opt}
+                </li>
               ))}
             </ul>
           </span>
@@ -252,7 +263,7 @@ describe('<Selectable />', async () => {
 
   describe('with callbacks', async () => {
     describe('should fire onRequestShowOptions', async () => {
-      it('when root is clicked' , async () => {
+      it('when root is clicked', async () => {
         const onRequestShowOptions = stub()
         const subject = await mount(
           <Selectable
@@ -273,7 +284,7 @@ describe('<Selectable />', async () => {
         expect(onRequestShowOptions).to.have.been.calledOnce()
       })
 
-      it('when input is clicked' , async () => {
+      it('when input is clicked', async () => {
         const onRequestShowOptions = stub()
         const subject = await mount(
           <Selectable
@@ -294,7 +305,7 @@ describe('<Selectable />', async () => {
         expect(onRequestShowOptions).to.have.been.calledOnce()
       })
 
-      it('when up/down arrows are pressed' , async () => {
+      it('when up/down arrows are pressed', async () => {
         const onRequestShowOptions = stub()
         await mount(
           <Selectable
@@ -331,7 +342,7 @@ describe('<Selectable />', async () => {
     })
 
     describe('should fire onRequestHideOptions', async () => {
-      it('when root is clicked' , async () => {
+      it('when root is clicked', async () => {
         const onRequestHideOptions = stub()
         const subject = await mount(
           <Selectable
@@ -352,7 +363,7 @@ describe('<Selectable />', async () => {
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
 
-      it('when input is clicked' , async () => {
+      it('when input is clicked', async () => {
         const onRequestHideOptions = stub()
         const subject = await mount(
           <Selectable
@@ -373,12 +384,16 @@ describe('<Selectable />', async () => {
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
 
-      it('when escape is pressed' , async () => {
+      it('when escape is pressed', async () => {
         const onRequestHideOptions = stub()
         let defaultPrevented = false
         await mount(
           /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
-          <div onKeyUp={(e) => { defaultPrevented = e.defaultPrevented}}>
+          <div
+            onKeyUp={(e) => {
+              defaultPrevented = e.defaultPrevented
+            }}
+          >
             <Selectable
               isShowingOptions={true}
               onRequestHideOptions={onRequestHideOptions}
@@ -396,7 +411,7 @@ describe('<Selectable />', async () => {
     })
 
     describe('should fire onRequestHighlightOption', async () => {
-      it('when options are hovered' , async () => {
+      it('when options are hovered', async () => {
         const onRequestHighlightOption = stub()
         await mount(
           <Selectable onRequestHighlightOption={onRequestHighlightOption}>
@@ -407,14 +422,18 @@ describe('<Selectable />', async () => {
 
         await options[0].mouseOver()
         expect(lastCall(onRequestHighlightOption)[1].direction).to.not.exist()
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[0])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[0]
+        )
 
         await options[1].mouseOver()
         expect(lastCall(onRequestHighlightOption)[1].direction).to.not.exist()
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
 
-      it('when up/down arrows are pressed' , async () => {
+      it('when up/down arrows are pressed', async () => {
         const onRequestShowOptions = stub()
         const onRequestHighlightOption = stub()
         const subject = await mount(
@@ -450,7 +469,7 @@ describe('<Selectable />', async () => {
         expect(lastCall(onRequestHighlightOption)[1].direction).to.equal(-1)
       })
 
-      it('when home/end is pressed' , async () => {
+      it('when home/end is pressed', async () => {
         const onRequestHighlightOption = stub()
         const onRequestHighlightFirstOption = stub()
         const onRequestHighlightLastOption = stub()
@@ -477,7 +496,7 @@ describe('<Selectable />', async () => {
     })
 
     describe('should fire onRequestSelectOption', async () => {
-      it('when enter is pressed' , async () => {
+      it('when enter is pressed', async () => {
         const onRequestSelectOption = stub()
         await mount(
           <Selectable
@@ -491,10 +510,12 @@ describe('<Selectable />', async () => {
         const input = await find('input')
 
         await input.keyDown('enter')
-        expect(lastCall(onRequestSelectOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestSelectOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
 
-      it('when options are clicked' , async () => {
+      it('when options are clicked', async () => {
         const onRequestSelectOption = stub()
         await mount(
           <Selectable
@@ -507,7 +528,9 @@ describe('<Selectable />', async () => {
         const options = await findAll('li')
 
         await options[1].click()
-        expect(lastCall(onRequestSelectOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestSelectOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
     })
   })
@@ -530,11 +553,13 @@ describe('<Selectable />', async () => {
       const subject = await mount(
         <Selectable>
           {(selectable) => (
-            <span {...selectable.getRootProps({
-              'data-custom-attr': true,
-              className: 'customClass',
-              style: {color: 'red'}
-            })}>
+            <span
+              {...selectable.getRootProps({
+                'data-custom-attr': true,
+                className: 'customClass',
+                style: { color: 'red' }
+              })}
+            >
               <label {...selectable.getLabelProps()}>Selectable</label>
               <input
                 type="text"
@@ -559,11 +584,11 @@ describe('<Selectable />', async () => {
         <Selectable onRequestShowOptions={onRequestShowOptions}>
           {(selectable) => (
             <span {...selectable.getRootProps({ onClick })}>
-            <input
-              type="text"
-              {...selectable.getTriggerProps()}
-              {...selectable.getInputProps()}
-            />
+              <input
+                type="text"
+                {...selectable.getTriggerProps()}
+                {...selectable.getInputProps()}
+              />
             </span>
           )}
         </Selectable>
@@ -586,11 +611,11 @@ describe('<Selectable />', async () => {
         >
           {(selectable) => (
             <span {...selectable.getRootProps({ onKeyDown })}>
-            <input
-              type="text"
-              {...selectable.getTriggerProps()}
-              {...selectable.getInputProps()}
-            />
+              <input
+                type="text"
+                {...selectable.getTriggerProps()}
+                {...selectable.getInputProps()}
+              />
             </span>
           )}
         </Selectable>
@@ -668,11 +693,15 @@ describe('<Selectable />', async () => {
         <Selectable>
           {(selectable) => (
             <span>
-              <label {...selectable.getLabelProps({
-                'data-custom-attr': true,
-                className: 'customClass',
-                style: {color: 'red'}
-              })}>Selectable</label>
+              <label
+                {...selectable.getLabelProps({
+                  'data-custom-attr': true,
+                  className: 'customClass',
+                  style: { color: 'red' }
+                })}
+              >
+                Selectable
+              </label>
               <input
                 type="text"
                 {...selectable.getTriggerProps()}
@@ -719,7 +748,9 @@ describe('<Selectable />', async () => {
       const desc = await findWithText('description')
 
       expect(input.getAttribute('aria-haspopup')).to.equal('listbox')
-      expect(input.getAttribute('aria-describedby')).to.equal(desc.getAttribute('id'))
+      expect(input.getAttribute('aria-describedby')).to.equal(
+        desc.getAttribute('id')
+      )
       expect(input.getAttribute('id')).to.exist()
     })
 
@@ -743,7 +774,9 @@ describe('<Selectable />', async () => {
 
       await subject.setProps({ isShowingOptions: true })
       expect(input.getAttribute('aria-expanded')).to.equal('true')
-      expect(input.getAttribute('aria-controls')).to.equal(list.getAttribute('id'))
+      expect(input.getAttribute('aria-controls')).to.equal(
+        list.getAttribute('id')
+      )
       expect(input.getAttribute('aria-owns')).to.equal(list.getAttribute('id'))
     })
 
@@ -754,7 +787,7 @@ describe('<Selectable />', async () => {
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
+                {defaultOptions.map((opt) => (
                   <li key={opt} {...selectable.getOptionProps({ id: opt })} />
                 ))}
               </ul>
@@ -768,10 +801,14 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('aria-activedescendant')).to.not.exist()
 
       await subject.setProps({ highlightedOptionId: defaultOptions[0] })
-      expect(input.getAttribute('aria-activedescendant')).to.equal(options[0].getAttribute('id'))
+      expect(input.getAttribute('aria-activedescendant')).to.equal(
+        options[0].getAttribute('id')
+      )
 
       await subject.setProps({ highlightedOptionId: defaultOptions[1] })
-      expect(input.getAttribute('aria-activedescendant')).to.equal(options[1].getAttribute('id'))
+      expect(input.getAttribute('aria-activedescendant')).to.equal(
+        options[1].getAttribute('id')
+      )
 
       await subject.setProps({ isShowingOptions: false })
       expect(input.getAttribute('aria-activedescendant')).to.not.exist()
@@ -787,7 +824,7 @@ describe('<Selectable />', async () => {
                 {...selectable.getTriggerProps({
                   'data-custom-attr': true,
                   className: 'customClass',
-                  style: {color: 'red'}
+                  style: { color: 'red' }
                 })}
               />
             </span>
@@ -852,7 +889,7 @@ describe('<Selectable />', async () => {
                   'data-custom-attr': true,
                   placeholder: 'Type to enter text',
                   className: 'customClass',
-                  style: {color: 'red'}
+                  style: { color: 'red' }
                 })}
               />
             </span>
@@ -874,7 +911,7 @@ describe('<Selectable />', async () => {
               <input
                 type="text"
                 {...selectable.getTriggerProps({
-                  'role': 'textbox',
+                  role: 'textbox',
                   'aria-autocomplete': 'list'
                 })}
               />
@@ -894,11 +931,11 @@ describe('<Selectable />', async () => {
         <Selectable onRequestShowOptions={onRequestShowOptions}>
           {(selectable) => (
             <span {...selectable.getRootProps()}>
-            <input
-              type="text"
-              {...selectable.getTriggerProps({ onClick })}
-              {...selectable.getInputProps()}
-            />
+              <input
+                type="text"
+                {...selectable.getTriggerProps({ onClick })}
+                {...selectable.getInputProps()}
+              />
             </span>
           )}
         </Selectable>
@@ -921,11 +958,11 @@ describe('<Selectable />', async () => {
         >
           {(selectable) => (
             <span {...selectable.getRootProps()}>
-            <input
-              type="text"
-              {...selectable.getTriggerProps({ onKeyDown })}
-              {...selectable.getInputProps()}
-            />
+              <input
+                type="text"
+                {...selectable.getTriggerProps({ onKeyDown })}
+                {...selectable.getInputProps()}
+              />
             </span>
           )}
         </Selectable>
@@ -977,7 +1014,10 @@ describe('<Selectable />', async () => {
         <Selectable>
           {(selectable) => (
             <span>
-              <input type="text" {...selectable.getInputProps({ readOnly: true })} />
+              <input
+                type="text"
+                {...selectable.getInputProps({ readOnly: true })}
+              />
             </span>
           )}
         </Selectable>
@@ -997,7 +1037,7 @@ describe('<Selectable />', async () => {
               <input
                 type="text"
                 {...selectable.getInputProps({
-                  'role': 'textbox',
+                  role: 'textbox',
                   'aria-autocomplete': 'inline'
                 })}
               />
@@ -1021,7 +1061,7 @@ describe('<Selectable />', async () => {
                   'data-custom-attr': true,
                   placeholder: 'Type to enter text',
                   className: 'customClass',
-                  style: {color: 'red'}
+                  style: { color: 'red' }
                 })}
               />
             </span>
@@ -1073,11 +1113,13 @@ describe('<Selectable />', async () => {
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input type="text" {...selectable.getTriggerProps()} />
-              <ul {...selectable.getListProps({
-                'data-custom-attr': true,
-                className: 'customClass',
-                style: {color: 'red'}
-              })}></ul>
+              <ul
+                {...selectable.getListProps({
+                  'data-custom-attr': true,
+                  className: 'customClass',
+                  style: { color: 'red' }
+                })}
+              ></ul>
             </span>
           )}
         </Selectable>
@@ -1111,7 +1153,7 @@ describe('<Selectable />', async () => {
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
+                {defaultOptions.map((opt) => (
                   <li key={opt} {...selectable.getOptionProps({ id: opt })}>
                     {opt}
                   </li>
@@ -1134,7 +1176,7 @@ describe('<Selectable />', async () => {
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
+                {defaultOptions.map((opt) => (
                   <li key={opt} {...selectable.getOptionProps({ id: opt })}>
                     {opt}
                   </li>
@@ -1166,13 +1208,18 @@ describe('<Selectable />', async () => {
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
-                  <li key={opt} {...selectable.getOptionProps({
-                    id: opt,
-                    'data-custom-attr': true,
-                    className: 'customClass',
-                    style: {color: 'red'}
-                  })}>{opt}</li>
+                {defaultOptions.map((opt) => (
+                  <li
+                    key={opt}
+                    {...selectable.getOptionProps({
+                      id: opt,
+                      'data-custom-attr': true,
+                      className: 'customClass',
+                      style: { color: 'red' }
+                    })}
+                  >
+                    {opt}
+                  </li>
                 ))}
               </ul>
             </span>
@@ -1198,8 +1245,11 @@ describe('<Selectable />', async () => {
             <span>
               <input type="text" {...selectable.getInputProps()} />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
-                  <li key={opt} {...selectable.getOptionProps({ id: opt, onMouseOver })}>
+                {defaultOptions.map((opt) => (
+                  <li
+                    key={opt}
+                    {...selectable.getOptionProps({ id: opt, onMouseOver })}
+                  >
                     {opt}
                   </li>
                 ))}
@@ -1229,8 +1279,11 @@ describe('<Selectable />', async () => {
             <span>
               <input type="text" {...selectable.getInputProps()} />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
-                  <li key={opt} {...selectable.getOptionProps({ id: opt, onClick })}>
+                {defaultOptions.map((opt) => (
+                  <li
+                    key={opt}
+                    {...selectable.getOptionProps({ id: opt, onClick })}
+                  >
                     {opt}
                   </li>
                 ))}
@@ -1274,10 +1327,10 @@ describe('<Selectable />', async () => {
                 {...selectable.getInputProps()}
               />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
+                {defaultOptions.map((opt) => (
                   <li
                     key={opt}
-                    {...selectable.getOptionProps({id: opt})}
+                    {...selectable.getOptionProps({ id: opt })}
                     {...selectable.getDisabledOptionProps()}
                   >
                     {opt}
@@ -1318,10 +1371,10 @@ describe('<Selectable />', async () => {
                 {...selectable.getInputProps()}
               />
               <ul {...selectable.getListProps()}>
-                {defaultOptions.map(opt => (
+                {defaultOptions.map((opt) => (
                   <li
                     key={opt}
-                    {...selectable.getOptionProps({id: opt})}
+                    {...selectable.getOptionProps({ id: opt })}
                     {...selectable.getDisabledOptionProps()}
                   >
                     {opt}

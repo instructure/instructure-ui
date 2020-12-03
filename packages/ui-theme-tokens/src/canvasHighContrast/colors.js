@@ -24,24 +24,24 @@
 
 import { functionalColors } from '../utils/functionalColors'
 
- const baseColors = {
-   brand: '#0770A3',
-   link: '#0770A3',
-   electric: '#0770A3',
-   shamrock: '#127A1B',
-   barney: '#B8309E',
-   crimson: '#D01A19',
-   fire: '#C23C0D',
-   licorice: '#2D3B45',
-   oxford: '#394B58',
-   ash: '#556572',
-   slate: '#556572',
-   tiara: '#556572',
-   porcelain: '#FFFFFF',
-   white: '#FFFFFF'
- }
+const baseColors = {
+  brand: '#0770A3',
+  link: '#0770A3',
+  electric: '#0770A3',
+  shamrock: '#127A1B',
+  barney: '#B8309E',
+  crimson: '#D01A19',
+  fire: '#C23C0D',
+  licorice: '#2D3B45',
+  oxford: '#394B58',
+  ash: '#556572',
+  slate: '#556572',
+  tiara: '#556572',
+  porcelain: '#FFFFFF',
+  white: '#FFFFFF'
+}
 
 const colors = Object.freeze(functionalColors(baseColors))
 
- export default colors
- export { colors }
+export default colors
+export { colors }

@@ -26,40 +26,42 @@ import { StyleSheet as GlamorStyleSheet } from 'glamor/lib/sheet'
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
-const DISABLE_SPEEDY_STYLESHEET = Boolean(process.env.DISABLE_SPEEDY_STYLESHEET || DEBUG)
+const DISABLE_SPEEDY_STYLESHEET = Boolean(
+  process.env.DISABLE_SPEEDY_STYLESHEET || DEBUG
+)
 
 let STYLES = {}
 let THEMEABLE_STYLESHEET
 
 /**
-* ---
-* category: utilities/themes
-* ---
-* A utility for the [themeable](#themeable) component HOC that wraps a
-* [Glamor StyleSheet](https://github.com/threepointone/glamor/blob/master/src/sheet.js)
-* @module StyleSheet
-*/
+ * ---
+ * category: utilities/themes
+ * ---
+ * A utility for the [themeable](#themeable) component HOC that wraps a
+ * [Glamor StyleSheet](https://github.com/threepointone/glamor/blob/master/src/sheet.js)
+ * @module StyleSheet
+ */
 const StyleSheet = {
   /**
-  * Inject the `cssText` into the document
-  * @param {String} id - a unique id for the set of styles
-  * @param {String} rules - some CSS rules to inject into the document
-  */
-  mount (id, rules) {
+   * Inject the `cssText` into the document
+   * @param {String} id - a unique id for the set of styles
+   * @param {String} rules - some CSS rules to inject into the document
+   */
+  mount(id, rules) {
     if (!STYLES[id]) {
       STYLES[id] = insert(rules)
     }
   },
 
   /**
-  * Check if the stylesheet for the given `id` is already mounted
-  * @param {String} id - a unique id for the set of styles
-  */
-  mounted (id) {
+   * Check if the stylesheet for the given `id` is already mounted
+   * @param {String} id - a unique id for the set of styles
+   */
+  mounted(id) {
     return id in STYLES
   },
 
-  flush () {
+  flush() {
     if (THEMEABLE_STYLESHEET) {
       THEMEABLE_STYLESHEET.flush()
     }
@@ -68,7 +70,7 @@ const StyleSheet = {
   }
 }
 
-function insert (rules) {
+function insert(rules) {
   const sheet = inject()
 
   const inserted = []
@@ -79,7 +81,7 @@ function insert (rules) {
   })
 }
 
-function inject () {
+function inject() {
   if (!THEMEABLE_STYLESHEET) {
     THEMEABLE_STYLESHEET = createSheet()
   }
@@ -87,7 +89,7 @@ function inject () {
   return THEMEABLE_STYLESHEET
 }
 
-function createSheet () {
+function createSheet() {
   const sheet = new GlamorStyleSheet({ speedy: !DISABLE_SPEEDY_STYLESHEET })
   sheet.inject()
   return sheet

@@ -22,72 +22,74 @@
  * SOFTWARE.
  */
 
- import React from 'react'
- import { Calendar } from '@instructure/ui-calendar'
+import React from 'react'
+import { Calendar } from '@instructure/ui-calendar'
 
- const generateDays = () => {
-   const days = []
-   const date = new Date('2019-07-28')
+const generateDays = () => {
+  const days = []
+  const date = new Date('2019-07-28')
 
-   while (days.length < Calendar.DAY_COUNT) {
-     days.push(
-       <Calendar.Day
-         date={date.toISOString()}
-         label={date.toISOString()}
-         isOutsideMonth={date.getMonth() !== 7}
-         id={date.toISOString()}
-       >
-         {date.getDate()}
-       </Calendar.Day>
-     )
-     date.setDate(date.getDate() + 1)
-   }
+  while (days.length < Calendar.DAY_COUNT) {
+    days.push(
+      <Calendar.Day
+        date={date.toISOString()}
+        label={date.toISOString()}
+        isOutsideMonth={date.getMonth() !== 7}
+        id={date.toISOString()}
+      >
+        {date.getDate()}
+      </Calendar.Day>
+    )
+    date.setDate(date.getDate() + 1)
+  }
 
-   return days
- }
+  return days
+}
 
- export default {
-   propValues: {
-     placement: [
-       undefined, // eslint-disable-line no-undefined
-       'bottom center',
-       'start center',
-       'end center',
-       'top center'
-     ]
-   },
-   getComponentProps: (props) => {
-     return {
-       children: generateDays(),
-       renderLabel: 'Choose a date',
-       renderNavigationLabel: (
-         <div>
-           <div>August</div>
-           <div>2019</div>
-         </div>
-       ),
-       renderWeekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-     }
-   },
-   getExampleProps: (props) => {
-     return props.isShowingCalendar ? {
-       dir: props.dir,
-       as: 'div',
-       width: '100%',
-       height: '40rem',
-       margin: 'large',
-       padding: 'large',
-       textAlign: 'center'
-     } : {}
-   },
-   filter: (props) => {
-     if (props.interaction === 'readonly') return true
-     if (props.isRequired) return true
-     if (props.isInline && props.layout === 'inline') return true
-     if (props.isShowingCalendar && props.interaction === 'disabled') return true
-     if (props.isShowingCalendar && props.size !== 'medium') return true
-     if (!props.isShowingCalendar && props.placement) return true
+export default {
+  propValues: {
+    placement: [
+      undefined, // eslint-disable-line no-undefined
+      'bottom center',
+      'start center',
+      'end center',
+      'top center'
+    ]
+  },
+  getComponentProps: (props) => {
+    return {
+      children: generateDays(),
+      renderLabel: 'Choose a date',
+      renderNavigationLabel: (
+        <div>
+          <div>August</div>
+          <div>2019</div>
+        </div>
+      ),
+      renderWeekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    }
+  },
+  getExampleProps: (props) => {
+    return props.isShowingCalendar
+      ? {
+          dir: props.dir,
+          as: 'div',
+          width: '100%',
+          height: '40rem',
+          margin: 'large',
+          padding: 'large',
+          textAlign: 'center'
+        }
+      : {}
+  },
+  filter: (props) => {
+    if (props.interaction === 'readonly') return true
+    if (props.isRequired) return true
+    if (props.isInline && props.layout === 'inline') return true
+    if (props.isShowingCalendar && props.interaction === 'disabled') return true
+    if (props.isShowingCalendar && props.size !== 'medium') return true
+    if (!props.isShowingCalendar && props.placement) return true
 
-     return false
-   }
- }
+    return false
+  }
+}

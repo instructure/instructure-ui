@@ -36,14 +36,19 @@ function format(htmlElement, maxLength, options) {
     plugins: [DOMElement, DOMCollection],
     printFunctionName: false,
     highlight: true,
-    ...options,
+    ...options
   })
-  return typeof maxLength !== 'undefined' && htmlElement.outerHTML.length > maxLength
+  return typeof maxLength !== 'undefined' &&
+    htmlElement.outerHTML.length > maxLength
     ? `${debugContent.slice(0, maxLength)}...`
     : debugContent
 }
 
-function elementToString(element, maxLength = 7000, options = { highlight: false }) {
+function elementToString(
+  element,
+  maxLength = 7000,
+  options = { highlight: false }
+) {
   if (isElement(element)) {
     return format(element, maxLength, options)
   } else if (typeof element.toString === 'function') {
@@ -53,6 +58,4 @@ function elementToString(element, maxLength = 7000, options = { highlight: false
   }
 }
 
-export {
-  elementToString
-}
+export { elementToString }

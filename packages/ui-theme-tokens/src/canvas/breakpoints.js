@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-
 const onePixel = 0.0625
 
 // base = 16px

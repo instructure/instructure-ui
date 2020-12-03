@@ -34,7 +34,9 @@ const themeableConfig = loadConfig('themeable')
 const noop = () => {}
 
 if (themeableConfig && themeableConfig.generateScopedName) {
-  console.warn('[themeable-css-loader] Custom scoped CSS class names will be removed in 7.0. Please use the default themeable config.')
+  console.warn(
+    '[themeable-css-loader] Custom scoped CSS class names will be removed in 7.0. Please use the default themeable config.'
+  )
 }
 
 module.exports = function (content, map, meta) {
@@ -77,65 +79,76 @@ module.exports = function (content, map, meta) {
     }
   }
 
-  Promise.resolve().then(() => {
-    const componentId = generateComponentId(content)
+  Promise.resolve()
+    .then(() => {
+      const componentId = generateComponentId(content)
 
-    return postcss([
-      require('@instructure/postcss-themeable-styles'),
-      require('postcss-modules')({
-        generateScopedName: generateScopedName.bind(null, () => componentId, themeableConfig),
-        getJSON: noop
-      }),
-      require('postcss-reporter')({ clearReportedMessages: true })
-    ])
-    .process(source, opts)
-    .then((result) => {
-      result.warnings().forEach((msg) => {
-        loader.emitWarning(msg.toString())
-      })
+      return postcss([
+        require('@instructure/postcss-themeable-styles'),
+        require('postcss-modules')({
+          generateScopedName: generateScopedName.bind(
+            null,
+            () => componentId,
+            themeableConfig
+          ),
+          getJSON: noop
+        }),
+        require('postcss-reporter')({ clearReportedMessages: true })
+      ])
+        .process(source, opts)
+        .then((result) => {
+          result.warnings().forEach((msg) => {
+            loader.emitWarning(msg.toString())
+          })
 
-      const map = result.map ? result.map.toJSON() : null
+          const map = result.map ? result.map.toJSON() : null
 
-      if (map) {
-        map.file = path.resolve(map.file)
-        map.sources = map.sources.map((src) => path.resolve(src))
-      }
+          if (map) {
+            map.file = path.resolve(map.file)
+            map.sources = map.sources.map((src) => path.resolve(src))
+          }
 
-      if (!meta) {
-        // eslint-disable-next-line no-param-reassign
-        meta = {}
-      }
+          if (!meta) {
+            // eslint-disable-next-line no-param-reassign
+            meta = {}
+          }
 
-      const ast = {
-        type: 'postcss',
-        version: result.processor.version,
-        root: result.root
-      }
+          const ast = {
+            type: 'postcss',
+            version: result.processor.version,
+            root: result.root
+          }
 
-      // eslint-disable-next-line no-param-reassign
-      meta.ast = ast
-      // eslint-disable-next-line no-param-reassign
-      meta.messages = result.messages
+          // eslint-disable-next-line no-param-reassign
+          meta.ast = ast
+          // eslint-disable-next-line no-param-reassign
+          meta.messages = result.messages
 
-      const locals = (result.messages || [])
-        .find(message => message.type === 'export' && message.exportTokens)
+          const locals = (result.messages || []).find(
+            (message) => message.type === 'export' && message.exportTokens
+          )
 
-      callback(
-        null,
-        `exports = module.exports = ${transformCSSRequire(locals.exportTokens, result.css, componentId)}`,
-        map,
-        meta
-      )
+          callback(
+            null,
+            `exports = module.exports = ${transformCSSRequire(
+              locals.exportTokens,
+              result.css,
+              componentId
+            )}`,
+            map,
+            meta
+          )
 
-      return null
+          return null
+        })
     })
-  }).catch((err) => {
-    if (err.file) {
-      this.addDependency(err.file)
-    }
+    .catch((err) => {
+      if (err.file) {
+        this.addDependency(err.file)
+      }
 
-    return err.name === 'CssSyntaxError'
-      ? callback(new SyntaxError(err))
-      : callback(err)
-  })
+      return err.name === 'CssSyntaxError'
+        ? callback(new SyntaxError(err))
+        : callback(err)
+    })
 }

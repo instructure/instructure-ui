@@ -26,6 +26,8 @@ const checkDependencies = require('@instructure/ui-upgrade-scripts/lib/utils/che
 const { warn } = require('@instructure/command-utils')
 
 module.exports = (args = {}) => {
-  warn('`check-dependencies` has been moved from \'@instructure/ui-scripts/lib/utils/check-dependencies\' to \'@instructure/ui-upgrade-scripts/lib/utils/check-dependencies\'.')
+  warn(
+    "`check-dependencies` has been moved from '@instructure/ui-scripts/lib/utils/check-dependencies' to '@instructure/ui-upgrade-scripts/lib/utils/check-dependencies'."
+  )
   return checkDependencies(args)
 }

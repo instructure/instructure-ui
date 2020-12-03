@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { makeRequirable } from '../index'
 
-function mockValidator (props, propName, componentName) {
+function mockValidator(props, propName, componentName) {
   const propValue = props[propName]
   if (propValue === 'purple') {
     return new Error(`Purple is not accepted in ${componentName}!`)
@@ -40,11 +40,7 @@ describe('makeRequirable', () => {
       value: 'green'
     }
 
-    const args = [
-      props,
-      'value',
-      'TestComponent'
-    ]
+    const args = [props, 'value', 'TestComponent']
 
     expect(mockValidator(...args)).to.not.exist()
 
@@ -57,11 +53,7 @@ describe('makeRequirable', () => {
       value: 'green'
     }
 
-    const args = [
-      props,
-      'value',
-      'TestComponent'
-    ]
+    const args = [props, 'value', 'TestComponent']
 
     expect(mockValidator.isRequired(...args)).to.not.exist()
 
@@ -74,11 +66,7 @@ describe('makeRequirable', () => {
       value: null
     }
 
-    const args = [
-      props,
-      'value',
-      'TestComponent'
-    ]
+    const args = [props, 'value', 'TestComponent']
 
     // null values are accepted when not required
     expect(mockValidator(...args)).to.not.exist()
@@ -94,4 +82,3 @@ describe('makeRequirable', () => {
     expect(mockValidator.isRequired(...args)).to.be.an.instanceOf(Error)
   })
 })
-

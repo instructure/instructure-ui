@@ -40,22 +40,16 @@ class Section extends Component {
     heading: undefined
   }
 
-  render () {
+  render() {
     const heading = this.props.heading && (
-      <Heading
-        level="h1"
-        as="h2"
-        id={this.props.id}
-      >
+      <Heading level="h1" as="h2" id={this.props.id}>
         {this.props.heading}
       </Heading>
     )
     return (
       <div>
         {heading}
-        <div>
-          {this.props.children}
-        </div>
+        <div>{this.props.children}</div>
       </div>
     )
   }

@@ -32,21 +32,14 @@ const TreeButtonLocator = locator(TreeButton.selector)
 
 describe('<TreeButton />', async () => {
   it('should render', async () => {
-    await mount(
-      <TreeButton id="1" />
-    )
+    await mount(<TreeButton id="1" />)
     const treeButton = await TreeButtonLocator.find()
     expect(treeButton).to.exist()
   })
 
   describe('selected', async () => {
     it('should take the selected class if the button is selected', async () => {
-      await mount(
-        <TreeButton
-          id="1"
-          selected={true}
-        />
-      )
+      await mount(<TreeButton id="1" selected={true} />)
       const treeButton = await TreeButtonLocator.find()
       expect(treeButton.hasClass(styles['selected'])).to.be.true()
     })
@@ -54,17 +47,16 @@ describe('<TreeButton />', async () => {
 
   describe('descriptor', async () => {
     it('should not render a descriptor element if no descriptor passed', async () => {
-      await mount(
-        <TreeButton id="1" />
-      )
-      expect(await TreeButtonLocator.find(`.${styles.textDescriptor}`,
-        { expectEmpty: true })).to.not.exist()
+      await mount(<TreeButton id="1" />)
+      expect(
+        await TreeButtonLocator.find(`.${styles.textDescriptor}`, {
+          expectEmpty: true
+        })
+      ).to.not.exist()
     })
 
     it('should render a descriptor element if descriptor passed', async () => {
-      await mount(
-        <TreeButton id="1" descriptor="Some Descriptor" />
-      )
+      await mount(<TreeButton id="1" descriptor="Some Descriptor" />)
       const descriptor = await TreeButtonLocator.find(
         `.${styles.textDescriptor}:contains(Some Descriptor)`
       )
@@ -82,36 +74,23 @@ describe('<TreeButton />', async () => {
 
     it('should render a collection icon', async () => {
       await mount(
-        <TreeButton
-          id="1"
-          type="collection"
-          collectionIcon={() => Icon}
-        />
+        <TreeButton id="1" type="collection" collectionIcon={() => Icon} />
       )
       const icon = await TreeButtonLocator.find('svg:contains(Test icon)')
       expect(icon).to.exist()
     })
 
     it('should render an item icon', async () => {
-      await mount(
-        <TreeButton
-          id="1"
-          type="item"
-          itemIcon={() => Icon}
-        />
-      )
+      await mount(<TreeButton id="1" type="item" itemIcon={() => Icon} />)
       const icon = await TreeButtonLocator.find('svg:contains(Test icon)')
       expect(icon).to.exist()
     })
 
     it('should render no icon if no icon prop passed', async () => {
-      await mount(
-        <TreeButton id="1" />
-      )
-      expect(await TreeButtonLocator.find(
-        'svg',
-        { expectEmpty: true }
-      )).to.not.exist()
+      await mount(<TreeButton id="1" />)
+      expect(
+        await TreeButtonLocator.find('svg', { expectEmpty: true })
+      ).to.not.exist()
     })
 
     it('should render a thumbnail instead of an icon if a thumbnail URL is passed', async () => {
@@ -128,17 +107,11 @@ describe('<TreeButton />', async () => {
     })
 
     it('should not render a thumbnail if no thumbnail URL is passed', async () => {
-      await mount(
-        <TreeButton
-          id="1"
-          type="item"
-        />
-      )
+      await mount(<TreeButton id="1" type="item" />)
 
-      expect(await TreeButtonLocator.find(
-        'img',
-        { expectEmpty: true }
-      )).to.not.exist()
+      expect(
+        await TreeButtonLocator.find('img', { expectEmpty: true })
+      ).to.not.exist()
     })
 
     it('should render a thumbnail if a thumbnail and an icon are passed', async () => {
@@ -151,10 +124,9 @@ describe('<TreeButton />', async () => {
         />
       )
 
-      expect(await TreeButtonLocator.find(
-        'svg',
-        { expectEmpty: true }
-      )).to.not.exist()
+      expect(
+        await TreeButtonLocator.find('svg', { expectEmpty: true })
+      ).to.not.exist()
       expect(await TreeButtonLocator.find('img')).to.exist()
     })
   })

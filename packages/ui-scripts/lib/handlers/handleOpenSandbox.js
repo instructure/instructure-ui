@@ -36,7 +36,9 @@ module.exports = ({ branch, remote, path: sourcePath, scope }) => {
   if (!scope) {
     openSandbox({ branch, remote, sourcePath })
   } else {
-    const result = runCommandSync('lerna', ['list', '--json'], [], { stdio: 'pipe' }).stdout
+    const result = runCommandSync('lerna', ['list', '--json'], [], {
+      stdio: 'pipe'
+    }).stdout
     const pkg = JSON.parse(result).find(({ name }) => name === scope)
 
     if (!pkg) {
@@ -57,10 +59,17 @@ module.exports = ({ branch, remote, path: sourcePath, scope }) => {
 }
 
 const openSandbox = ({ branch, remote, sourcePath }) => {
-  const repository = runCommandSync('git', ['config', '--get', `remote.${remote}.url`], [], { stdio: 'pipe' }).stdout
+  const repository = runCommandSync(
+    'git',
+    ['config', '--get', `remote.${remote}.url`],
+    [],
+    { stdio: 'pipe' }
+  ).stdout
 
   if (!repository) {
-    error('Could not find a git url corresponding to this project. In order to open with Codesandbox, your project should be hosted in a public GitHub repository.')
+    error(
+      'Could not find a git url corresponding to this project. In order to open with Codesandbox, your project should be hosted in a public GitHub repository.'
+    )
     process.exit(1)
   }
 
@@ -68,7 +77,9 @@ const openSandbox = ({ branch, remote, sourcePath }) => {
   try {
     parsedUrl = parseGitUrl(repository)
   } catch {
-    error(`Could not retrieve the information necessary to open in Codesandbox from the following git repository url: ${repository}.`)
+    error(
+      `Could not retrieve the information necessary to open in Codesandbox from the following git repository url: ${repository}.`
+    )
     process.exit(1)
   }
 
@@ -81,7 +92,9 @@ const openSandbox = ({ branch, remote, sourcePath }) => {
     }
   })}`
 
-  info(`Opening sandbox at the following url:\n${url}\n\nIf you get an error accessing the url or don't see your changes:\n  *  Ensure that your GitHub repo exists and is set to public\n  *  Ensure you have pushed any local changes`)
+  info(
+    `Opening sandbox at the following url:\n${url}\n\nIf you get an error accessing the url or don't see your changes:\n  *  Ensure that your GitHub repo exists and is set to public\n  *  Ensure you have pushed any local changes`
+  )
 
   open(url, { app: ['google chrome'] })
 }

@@ -34,7 +34,7 @@ import { getComputedStyle } from '@instructure/ui-dom-utils'
  * @param {DOMNode[]} nodes Array of DOM nodes.
  * @param {DOMNode} parentNode The node to inherit default styles from.
  */
-function measureText (nodes, parentNode) {
+function measureText(nodes, parentNode) {
   let width = 0
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i]
@@ -43,7 +43,7 @@ function measureText (nodes, parentNode) {
   return width
 }
 
-function measure (string, domNode) {
+function measure(string, domNode) {
   const style = getComputedStyle(domNode)
   // we use a canvas in a doc fragment to prevent having to render the string full width in the DOM
   const canvas = document.createElement('canvas')
@@ -73,7 +73,7 @@ function measure (string, domNode) {
   } else if (style['text-transform'] === 'lowercase') {
     text = string.toLowerCase()
   } else if (style['text-transform'] === 'capitalize') {
-    text = string.replace(/\b\w/g, str => str.toUpperCase())
+    text = string.replace(/\b\w/g, (str) => str.toUpperCase())
   }
 
   if (style['letter-spacing'] !== 'normal') {

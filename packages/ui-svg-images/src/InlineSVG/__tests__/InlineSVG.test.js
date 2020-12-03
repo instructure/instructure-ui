@@ -35,42 +35,28 @@ const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<InlineSVG />', async () => {
   it('should render', async () => {
-    await mount(
-      <InlineSVG src={SVG_SRC} />
-    )
+    await mount(<InlineSVG src={SVG_SRC} />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg).to.exist()
   })
 
   it('should have role "presentation" when no title is provided', async () => {
-    await mount(
-      <InlineSVG src={SVG_SRC} />
-    )
+    await mount(<InlineSVG src={SVG_SRC} />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('role')).to.equal('presentation')
   })
 
   it('should have role "img" when a title is provided', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        title='testIconTitle'
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} title="testIconTitle" />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('role')).to.equal('img')
   })
 
   it('should add a group with a role "presentation', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        title='testIconTitle'
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} title="testIconTitle" />)
     const svg = await InlineSVGLocator.find()
     const group = await svg.find('g')
 
@@ -78,9 +64,7 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should not render title when no title prop is provided', async () => {
-    await mount(
-      <InlineSVG src={SVG_SRC} />
-    )
+    await mount(<InlineSVG src={SVG_SRC} />)
 
     const svg = await InlineSVGLocator.find()
     const title = await svg.find('title', { expectEmpty: true })
@@ -89,12 +73,7 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should render title when title prop is provided', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        title='Test Title'
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} title="Test Title" />)
     const svg = await InlineSVGLocator.find()
     const title = await svg.find(':withTitle(Test Title)')
 
@@ -102,11 +81,7 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should not render description when no description prop is provided', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} />)
 
     const svg = await InlineSVGLocator.find()
     const description = await svg.find('description', {
@@ -117,12 +92,7 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should render description when description prop is provided', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        description='testIconDesc'
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} description="testIconDesc" />)
 
     const svg = await InlineSVGLocator.find()
     const description = await svg.find('desc')
@@ -131,11 +101,7 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should produce null for "labelledBy" when no title or desc are provided', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('aria-labelledby')).to.not.exist()
@@ -145,8 +111,8 @@ describe('<InlineSVG />', async () => {
     await mount(
       <InlineSVG
         src={SVG_SRC}
-        title='testIconTitle'
-        description='testIconDescription'
+        title="testIconTitle"
+        description="testIconDescription"
       />
     )
     const svg = await InlineSVGLocator.find()
@@ -156,13 +122,7 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should set custom width and height properly', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        width='100px'
-        height='200px'
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} width="100px" height="200px" />)
     const svg = await InlineSVGLocator.find()
     const width = svg.getComputedStyle().width
     const height = svg.getComputedStyle().height
@@ -172,13 +132,7 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should not set width/height attributes and styles when value is auto', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        width='auto'
-        height='auto'
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} width="auto" height="auto" />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.getDOMNode()).to.have.style('width', '')
@@ -188,47 +142,28 @@ describe('<InlineSVG />', async () => {
   })
 
   it('should set focusable to false by default', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('focusable')).to.equal('false')
   })
 
   it('should allow focusable to be overridden', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        focusable={true}
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} focusable={true} />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('focusable')).to.equal('true')
   })
 
   it('should display block when inline is false', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        inline={false}
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} inline={false} />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
 
   it('should change the SVG color property', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-        color='success'
-      />
-    )
+    await mount(<InlineSVG src={SVG_SRC} color="success" />)
     const svg = await InlineSVGLocator.find()
 
     expect(svg.hasClass(styles['color--success'])).to.be.true()
@@ -241,8 +176,9 @@ describe('<InlineSVG />', async () => {
     const svg = await InlineSVGLocator.find()
     const group = await svg.find('g')
 
-    expect(group.getDOMNode().innerHTML)
-      .to.equal('<circle cx="50" cy="50" r="40"></circle>')
+    expect(group.getDOMNode().innerHTML).to.equal(
+      '<circle cx="50" cy="50" r="40"></circle>'
+    )
   })
 
   describe('with generated examples', async () => {

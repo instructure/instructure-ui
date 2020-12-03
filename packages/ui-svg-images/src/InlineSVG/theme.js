@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-export default function generator ({ colors }) {
+export default function generator({ colors }) {
   return {
     primaryInverseColor: colors.textLightest,
     primaryColor: colors.textDarkest,
