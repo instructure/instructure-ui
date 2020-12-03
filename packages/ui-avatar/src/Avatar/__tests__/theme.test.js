@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { Avatar } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Avatar.theme', () => {
   describe('with the default theme', () => {
-    const variables = Avatar.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('default', () => {
       it('should ensure background color and text color meet 3:1 contrast', () => {
@@ -39,7 +40,7 @@ describe('Avatar.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = Avatar.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('default', () => {
       it('should ensure background color and text color meet 4.5:1 contrast', () => {
