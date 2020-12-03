@@ -28,8 +28,6 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { Avatar } from '../index'
 import { AvatarLocator } from '../AvatarLocator'
 
-import styles from '../styles.css'
-
 describe('<Avatar />', async () => {
   describe('for a11y', async () => {
     it('should be accessible', async () => {
@@ -53,8 +51,9 @@ describe('<Avatar />', async () => {
   describe('with the default props', async () => {
     it('should display as a circle', async () => {
       await mount(<Avatar name="Jessica Jones" />)
+      const avatar = await AvatarLocator.find()
 
-      expect(await AvatarLocator.find(`.${styles.circle}`)).to.exist()
+      expect(avatar.getAttribute('shape')).to.equal('circle')
     })
 
     it('should render initials', async () => {
@@ -77,7 +76,7 @@ describe('<Avatar />', async () => {
 
       await image.load()
 
-      expect(avatar.getDOMNode().style.backgroundImage).to.contain(src)
+      expect(avatar.getAttribute('src')).to.contain(src)
     })
 
     it('should call onImageLoaded once the image loads', async () => {
@@ -101,9 +100,8 @@ describe('<Avatar />', async () => {
       await mount(<Avatar name="Jessica Jones" shape="rectangle" />)
 
       const avatar = await AvatarLocator.find()
-      const rectangle = await avatar.find(`.${styles.rectangle}`)
 
-      expect(rectangle).to.exist()
+      expect(avatar.getAttribute('shape')).to.equal('rectangle')
     })
   })
 
@@ -128,7 +126,7 @@ describe('<Avatar />', async () => {
       await mount(<Avatar name="" />)
 
       const avatar = await AvatarLocator.find()
-      const initials = await avatar.find(`.${styles.initials}`)
+      const initials = await avatar.find('[class*= "-initials"]')
 
       expect(initials).to.exist()
       expect(initials.getTextContent()).to.equal('')
