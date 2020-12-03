@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -31,23 +32,23 @@ import {
   deprecated,
   omitProps
 } from '@instructure/ui-react-utils'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { isIE11 } from '@instructure/ui-utils'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyles)
 @deprecated('8.0.0', { title: 'renderTitle' })
 @testable()
-@themeable(theme, styles)
 class Spinner extends Component {
   static propTypes = {
     /**
@@ -108,12 +109,8 @@ class Spinner extends Component {
   }
 
   render() {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true,
-      [styles.ie11]: isIE11
-    }
+    // eslint-disable-next-line react/prop-types
+    const styles = this.props.makeStyles(this.state)
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Spinner.propTypes),
@@ -131,11 +128,11 @@ class Spinner extends Component {
         {...passthroughProps}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        className={classNames(classes)}
+        css={styles.root}
         margin={this.props.margin}
       >
         <svg
-          className={styles.circle}
+          css={styles.circle}
           role="img"
           aria-labelledby={this.titleId}
           focusable="false"
@@ -146,14 +143,14 @@ class Spinner extends Component {
           <g role="presentation">
             {this.props.variant !== 'inverse' && (
               <circle
-                className={styles.circleTrack}
+                css={styles.circleTrack}
                 cx="50%"
                 cy="50%"
                 r={this.radius()}
               />
             )}
             <circle
-              className={styles.circleSpin}
+              css={styles.circleSpin}
               cx="50%"
               cy="50%"
               r={this.radius()}
