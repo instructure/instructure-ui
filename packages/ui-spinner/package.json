@@ -25,10 +25,12 @@
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@instructure/console": "^7.3.2",
+    "@instructure/emotion": "^7.3.2",
     "@instructure/ui-color-utils": "^7.3.2",
     "@instructure/ui-react-utils": "^7.3.2",
     "@instructure/ui-testable": "^7.3.2",
     "@instructure/ui-themeable": "^7.3.2",
+    "@instructure/ui-themes": "^7.3.2",
     "@instructure/ui-utils": "^7.3.2",
     "@instructure/ui-view": "^7.3.2",
     "@instructure/uid": "^7.3.2",
