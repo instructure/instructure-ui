@@ -209,9 +209,11 @@ describe('<View />', async () => {
     )
 
     const view = within(subject.getDOMNode())
-    expect(view.getComputedStyle().maxWidth).to.equal('none')
+
+    expect(view.getComputedStyle().maxWidth).to.equal('100%')
 
     await subject.setProps({ maxWidth: '200px' })
+
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
   })
 

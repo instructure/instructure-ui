@@ -28,8 +28,6 @@ const generateStyle = (
   { size, shape, src },
   { loaded }
 ) => {
-  const themeSpecificStyles = {}
-
   const fromTheme = {
     color: theme?.colors?.textBrand,
     background: theme?.colors?.backgroundLightest,
@@ -38,7 +36,6 @@ const generateStyle = (
     borderColor: theme?.colors?.borderMedium,
     fontFamily: theme?.typography?.fontFamily,
     fontWeight: theme?.typography?.fontWeightBold,
-    ...themeSpecificStyles[theme.key],
     ...themeOverride
   }
 
@@ -82,6 +79,7 @@ const generateStyle = (
   }
   return {
     root: {
+      label: 'root',
       height: '2.5em',
       borderStyle: 'solid',
       borderColor: fromTheme.borderColor,
@@ -99,6 +97,7 @@ const generateStyle = (
       ...variantStyles[shape]
     },
     initials: {
+      label: 'initials',
       color: fromTheme.color,
       lineHeight: '2.375em',
       fontFamily: fromTheme.fontFamily,
@@ -106,6 +105,7 @@ const generateStyle = (
       letterSpacing: '0.0313em'
     },
     loadImage: {
+      label: 'loadImage',
       display: 'none'
     }
   }
