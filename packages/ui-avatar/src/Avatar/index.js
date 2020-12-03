@@ -143,7 +143,7 @@ class Avatar extends Component {
 
   render() {
     const { onImageLoaded, ...props } = this.props
-    const styles = this.props.makeStyles(this.state)
+    const styles = props.makeStyles(this.state)
 
     return (
       <View
@@ -166,7 +166,5 @@ class Avatar extends Component {
     )
   }
 }
-
-// const Avatar__new = withStyle(Avatar)
 export default Avatar
 export { Avatar }

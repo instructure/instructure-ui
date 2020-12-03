@@ -27,6 +27,7 @@ import { canvas } from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
 import { decorator } from '@instructure/ui-decorator'
 import { partial } from 'lodash'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 /**
  * This is an utility function which calulates the correct component theme based on every possible override there is.
@@ -105,6 +106,7 @@ const useStyle = (componentName, generateStyle, props, ...rest) => {
 const withStyle = decorator((ComposedComponent, generateStyle) => {
   const WithStyle = forwardRef((props, ref) => {
     const theme = useTheme()
+
     return (
       <ComposedComponent
         ref={ref}
@@ -122,6 +124,7 @@ const withStyle = decorator((ComposedComponent, generateStyle) => {
     )
   })
 
+  hoistNonReactStatics(WithStyle, ComposedComponent)
   WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
 
   return WithStyle
