@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   safeCloneElement,
   passthroughProps,
@@ -38,8 +38,9 @@ import { View } from '@instructure/ui-view'
 
 import { Item } from './Item'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -47,16 +48,30 @@ category: components
 ---
 @module Flex
 **/
+@withStyle(generateStyles)
 @deprecated('8.0.0', {
   inline: 'display',
   wrapItems: 'wrap',
   visualDeug: 'withVisualDebug'
 })
-@themeable(theme, styles)
 class Flex extends Component {
+  constructor(props) {
+    super(props)
+
+    this.styles = props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.styles = this.props.makeStyles()
+  }
+
   static Item = Item
 
   static propTypes = {
+    /**
+     * the style generator provided by withStyle decorator
+     */
+    makeStyles: PropTypes.any,
     /**
      * It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function
      * returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props
@@ -148,6 +163,7 @@ class Flex extends Component {
   }
 
   static defaultProps = {
+    makeStyles: undefined,
     children: null,
     as: 'span',
     elementRef: (el) => {},
@@ -166,76 +182,35 @@ class Flex extends Component {
 
   renderChildren(children) {
     return Children.map(children, (child) => {
-      if (child) {
-        if (matchComponentTypes(child, ['Item'])) {
-          return safeCloneElement(child, {
+      if (!child) {
+        return null
+      }
+
+      return matchComponentTypes(child, ['Item'])
+        ? safeCloneElement(child, {
             withVisualDebug:
               this.props.withVisualDebug || this.props.visualDebug,
             ...child.props /* child visualDebug prop should override parent */,
             direction: this.props.direction.replace(/-reverse/, '')
           })
-        } else {
-          return child
-        }
-      } else {
-        return null
-      }
+        : child
     })
   }
 
   render() {
-    const {
-      as,
-      elementRef,
-      direction,
-      height,
-      display,
-      margin,
-      padding,
-      justifyItems,
-      textAlign,
-      withVisualDebug,
-      width,
-      wrap,
-      visualDebug,
-      wrapItems,
-      inline
-    } = this.props
+    const { as, elementRef, withVisualDebug, visualDebug } = this.props
 
     const children = callRenderProp(this.props.children)
 
-    // When flex direction is row, 'center' is the most useful default because it
-    // vertically aligns Items. For column direction, though, we want 'stretch'.
-    const alignItems =
-      this.props.alignItems ||
-      (direction === 'column' || direction === 'column-reverse'
-        ? 'stretch'
-        : 'center')
-
-    const backwardsDisplay = inline ? 'inline-flex' : null
-
-    const classes = {
-      [styles.root]: true,
-      [styles[`justifyItems--${justifyItems}`]]: true,
-      [styles[`alignItems--${alignItems}`]]: true,
-      [styles[`wrap--${wrap}`]]: wrap !== 'no-wrap',
-      [styles.wrapItems]: wrapItems
-    }
-
-    if (children && React.Children.count(children) > 0) {
+    if (children && Children.count(children) > 0) {
       return (
         <View
           {...passthroughProps(this.props)}
-          className={classnames(classes, styles[direction])}
+          css={this.styles.flex}
           elementRef={elementRef}
           as={as}
-          display={backwardsDisplay || display}
-          width={width}
-          height={height}
-          margin={margin}
-          padding={padding}
-          textAlign={textAlign}
           withVisualDebug={withVisualDebug || visualDebug}
+          {...this.styles.forwardedStyleProps}
         >
           {this.renderChildren(children)}
         </View>
