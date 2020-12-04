@@ -225,14 +225,14 @@ const generateStyle = (theme, themeOverride, props, state) => {
 
   // return with the css you'd like to apply to the component
   return {
-    root: {
+    componentName: {
       label: 'root',
       display: 'block',
       background: componentTheme.background,
       boxSizing: 'border-box',
       ...colorStyles[color]
     },
-    anotherClass: {
+    componentName__child: {
       label: 'anotherClass',
       color: 'green',
       background: componentTheme.infoColor
@@ -246,9 +246,8 @@ export default generateStyle
 
 Import the style generator (`generateStyle`) from `styles.js`, `{ withStyle, jsx, css }` from `@instructure/emotion`, and add the `/** @jsx jsx */` annotation on top.\
 Replace `@themeable` with `@withStyle(generateStyles)`, passing the style generator.\
-In the render method, get the styles from the `makeStyles` prop, passing the state (or any other object needed).\
-On the component, use emotion's `css={styles.root}` syntax to add syles.\
-Move any style logic from the component to `styles.js`.
+In the `constructor` and `componentDidUpdate` methods, get the styles from the `makeStyles` prop, passing the state (or any other object needed).\
+In the `render` method, use emotion's `css={this.styles.componentName}` syntax to add syles.\
 
 ```jsx
 /** @jsx jsx */
@@ -267,13 +266,21 @@ class MyComponent extends Component {
   // component
   // ...
 
-  render() {
-    const styles = this.props.makeStyles(this.state)
+  constructor(props) {
+    super(props)
 
+    this.styles = props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.styles = this.props.makeStyles()
+  }
+
+  render() {
     return (
-      <div css={styles.root}>
+      <div css={this.styles.componentName}>
         // Magnificent content
-        <div css={styles.anotherClass}>
+        <div css={this.styles.componentName__child}>
           // Content that needs additional class to style
         </div>
       </div>
@@ -282,11 +289,107 @@ class MyComponent extends Component {
 }
 ```
 
-#### 4. Delete css file
+#### 4. Move any style logic from the component to `styles.js`.
+
+Since you can use all props and states in `styles.js`, move any style-related logic from the `index.js` there.\
+Also, if you see any styles given to the object as props, move them to `styles.js` into a `forwardedStyleProps` object, and merge it with any default props in the css. These are usually passed down to `View` component, that no longer uses inline styles to override component defaults.
+
+Before:
+
+```jsx
+// [index.js]
+
+return (
+  <View
+    {...passthroughProps(props)}
+    className={classnames({
+      [styles.root]: true,
+      [styles[`color--${color}`]]: color,
+      [styles[`border--${border}`]]: border !== 'none',
+      [styles.ellipsis]: ellipsis
+    })}
+    as={ElementType}
+    margin={margin}
+    minWidth={minWidth ? minWidth : undefined}
+    elementRef={elementRef}
+  >
+    {children}
+  </View>
+)
+```
+
+After:
+
+```jsx
+// [index.js]
+
+return (
+  <View
+    {...passthroughProps(props)}
+    className={this.styles.img}
+    as={ElementType}
+    elementRef={elementRef}
+    {...this.styles.forwardedStyleProps}
+  >
+    {children}
+  </View>
+)
+
+// ---------
+
+// [styles.js]
+
+const { color, border, ellipsis } = props
+
+const colorStyle = {
+  red: {
+    backgroundColor: 'red'
+  },
+  green: {
+    backgroundColor: 'green'
+  }
+}
+
+const borderStlye = {
+  solid: {
+    borderStyle: 'solid'
+  },
+  dashed: {
+    borderStyle: 'dashed'
+  },
+  none: {}
+}
+
+const ellipsisStyle = ellipsis
+  ? {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }
+  : {}
+
+const img = {
+  // ...styles
+  boxSizing: 'border-box',
+  // minWidth: '1em', -- delete this! add it to the forwardedStyleProps
+  ...colorStyle[color],
+  ...borderStlye[border],
+  ...ellipsisStyle
+}
+
+const forwardedStyleProps = {
+  margin: margin,
+  minWidth: minWidth ? minWidth : '1em' // handle minWidth default here!
+}
+
+return { img, forwardedStyleProps }
+```
+
+#### 5. Delete css file
 
 Once you implemented the css in `styles.js`, delete the `styles.css` file.
 
-#### 5. Theme tests
+#### 6. Theme tests
 
 For components with theme tests, you can use the `generateComponentTheme` to get the theme variables.\
 Import the themes needed for your tests.

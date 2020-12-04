@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps, deprecated } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
+import generateStyles from './styles'
 
 /**
 ---
@@ -38,15 +39,29 @@ parent: Flex
 id: Flex.Item
 ---
 **/
+@withStyle(generateStyles)
 @deprecated('8.0.0', {
   grow: 'shouldGrow',
   shrink: 'shouldShrink',
   visualDeug: 'withVisualDebug'
 })
-@themeable(null, styles)
 class Item extends Component {
+  constructor(props) {
+    super(props)
+
+    this.styles = props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.styles = this.props.makeStyles()
+  }
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    /**
+     * the style generator provided by withStyle decorator
+     */
+    makeStyles: PropTypes.any,
     /**
      * The children to render inside the Item`
      */
@@ -125,6 +140,7 @@ class Item extends Component {
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
+    makeStyles: undefined,
     as: 'span',
     elementRef: (el) => {},
     shouldGrow: false,
@@ -135,52 +151,20 @@ class Item extends Component {
     const props = omitProps(this.props, Item.propTypes)
 
     const {
-      align,
       as,
       elementRef,
       children,
-      direction,
-      shouldGrow,
-      margin,
-      overflowX,
-      overflowY,
-      padding,
-      shouldShrink,
-      size,
-      textAlign,
       withVisualDebug,
-      shrink,
-      grow,
       visualDebug
     } = this.props
-
-    const dirColumn = direction === 'column'
-
-    const style = {
-      flexBasis: size
-    }
-
-    const classes = {
-      [styles.root]: true,
-      [styles.shouldGrow]: grow || shouldGrow,
-      [styles.shouldShrink]: shrink || shouldShrink,
-      [styles[`align--${align}`]]: align
-    }
 
     return (
       <View
         {...props}
-        className={classnames(classes)}
-        style={style}
+        css={this.styles.flexItem}
         elementRef={elementRef}
         as={as}
-        minHeight={dirColumn ? size : undefined}
-        minWidth={direction === 'row' ? size : undefined}
-        textAlign={textAlign}
-        margin={margin}
-        padding={padding}
-        overflowX={overflowX}
-        overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
+        {...this.styles.forwardedStyleProps}
         withVisualDebug={withVisualDebug || visualDebug}
       >
         {children}
