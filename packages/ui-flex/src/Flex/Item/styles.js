@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import { View } from '@instructure/ui-view'
-
 /**
  * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -48,47 +46,37 @@ const generateStyle = (theme, themeOverride, props, state) => {
     overflowY
   } = props
 
-  const flexItem = {
-    label: 'flexItem',
-    boxSizing: 'border-box',
-    flexBasis: size,
-    // initial value is 1, but we want 0 as our default,
-    // so users can opt in to shrink like they do grow
-    flexShrink: 0
-  }
-
-  if (grow || shouldGrow) {
-    flexItem['flexGrow'] = 1
-  }
-
-  if (shrink || shouldShrink) {
-    flexItem['flexShrink'] = 1
-  }
-
   const alignSelfValues = {
     start: 'flex-start',
     end: 'flex-end',
     center: 'center',
     stretch: 'stretch'
   }
-  if (align) {
-    flexItem['alignSelf'] = alignSelfValues[align]
-  }
 
   const dirColumn = direction === 'column'
   const dirRow = direction === 'row'
 
-  const forwardedStyleProps = {
-    minHeight: dirColumn ? size : undefined,
-    minWidth: dirRow && size ? size : '0.0625rem',
-    textAlign: textAlign,
-    margin: margin,
-    padding: padding,
-    overflowX: overflowX,
-    overflowY: overflowY || (dirColumn ? 'auto' : 'visible')
+  return {
+    flexItem: {
+      label: 'flexItem',
+      boxSizing: 'border-box',
+      flexBasis: size,
+      // initial value is 1, but we want 0 as our default,
+      // so users can opt in to shrink like they do grow
+      flexShrink: shrink || shouldShrink ? 1 : 0,
+      ...((grow || shouldGrow) && { flexGrow: 1 }),
+      ...(align && { alignSelf: alignSelfValues[align] })
+    },
+    forwardedStyleProps: {
+      minHeight: dirColumn ? size : undefined,
+      minWidth: dirRow && size ? size : '0.0625rem',
+      textAlign: textAlign,
+      margin: margin,
+      padding: padding,
+      overflowX: overflowX,
+      overflowY: overflowY || (dirColumn ? 'auto' : 'visible')
+    }
   }
-
-  return { flexItem, forwardedStyleProps }
 }
 
 export default generateStyle

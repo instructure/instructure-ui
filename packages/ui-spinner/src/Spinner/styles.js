@@ -33,8 +33,10 @@ import { keyframes } from '@instructure/emotion'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, { size, variant }, state) => {
+const generateStyle = (theme, themeOverride, props, state) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
+
+  const { size, variant, margin } = props
 
   const rotate = keyframes`
     to {
@@ -56,7 +58,7 @@ const generateStyle = (theme, themeOverride, { size, variant }, state) => {
       transform: rotate(360deg);
     }`
 
-  const rootSizes = {
+  const spinnerSizes = {
     'x-small': {
       width: componentTheme.xSmallSize,
       height: componentTheme.xSmallSize
@@ -138,17 +140,17 @@ const generateStyle = (theme, themeOverride, { size, variant }, state) => {
   }
 
   return {
-    root: {
-      label: 'root',
+    spinner: {
+      label: 'spinner',
       display: 'inline-block',
       verticalAlign: 'middle',
       position: 'relative',
       boxSizing: 'border-box',
       overflow: 'hidden',
-      ...rootSizes[size]
+      ...spinnerSizes[size]
     },
     circle: {
-      label: 'circle',
+      label: 'spinner__circle',
       display: 'block',
       position: 'absolute',
       top: '0',
@@ -160,13 +162,13 @@ const generateStyle = (theme, themeOverride, { size, variant }, state) => {
       ...circleSizes[size]
     },
     circleTrack: {
-      label: 'circleTrack',
+      label: 'spinner__circleTrack',
       stroke: componentTheme.trackColor,
       fill: 'none',
       ...circleTrackSizes[size]
     },
     circleSpin: {
-      label: 'circleSpin',
+      label: 'spinner__circleSpin',
       fill: 'none',
       strokeLinecap: 'round',
       animationName: morph,
@@ -175,6 +177,9 @@ const generateStyle = (theme, themeOverride, { size, variant }, state) => {
       animationTimingFunction: 'ease',
       ...circleSpinSizes[size],
       ...circleSpinVariant[variant]
+    },
+    forwardedStyleProps: {
+      margin
     }
   }
 }
