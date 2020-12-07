@@ -61,7 +61,7 @@ class Item extends Component {
     /**
      * the style generator provided by withStyle decorator
      */
-    makeStyles: PropTypes.any,
+    makeStyles: PropTypes.func,
     /**
      * The children to render inside the Item`
      */

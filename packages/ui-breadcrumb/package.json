@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
+    "@instructure/emotion": "^7.3.1",
     "@instructure/ui-icons": "^7.3.1",
     "@instructure/ui-link": "^7.3.1",
     "@instructure/ui-prop-types": "^7.3.1",
@@ -38,7 +39,6 @@
     "@instructure/ui-truncate-text": "^7.3.1",
     "@instructure/ui-utils": "^7.3.1",
     "@instructure/ui-view": "^7.3.1",
-    "classnames": "^2",
     "prop-types": "^15"
   },
   "peerDependencies": {

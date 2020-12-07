@@ -24,7 +24,6 @@
 /** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import {
@@ -51,6 +50,10 @@ category: components
 @testable()
 class Spinner extends Component {
   static propTypes = {
+    /**
+     * the style generator provided by withStyle decorator
+     */
+    makeStyles: PropTypes.func,
     /**
      * Give the spinner a title to be read by screenreaders
      */
@@ -81,6 +84,7 @@ class Spinner extends Component {
   }
 
   static defaultProps = {
+    makeStyles: undefined,
     renderTitle: undefined,
     as: 'div',
     size: 'medium',
@@ -90,9 +94,14 @@ class Spinner extends Component {
   }
 
   constructor(props) {
-    super()
+    super(props)
 
     this.titleId = uid('Spinner')
+    this.styles = props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.styles = this.props.makeStyles()
   }
 
   radius() {
@@ -109,9 +118,6 @@ class Spinner extends Component {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
-    const styles = this.props.makeStyles(this.state)
-
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Spinner.propTypes),
       Spinner
@@ -128,11 +134,11 @@ class Spinner extends Component {
         {...passthroughProps}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        css={styles.root}
-        margin={this.props.margin}
+        css={this.styles.spinner}
+        {...this.styles.forwardedStyleProps}
       >
         <svg
-          css={styles.circle}
+          css={this.styles.circle}
           role="img"
           aria-labelledby={this.titleId}
           focusable="false"
@@ -143,14 +149,14 @@ class Spinner extends Component {
           <g role="presentation">
             {this.props.variant !== 'inverse' && (
               <circle
-                css={styles.circleTrack}
+                css={this.styles.circleTrack}
                 cx="50%"
                 cy="50%"
                 r={this.radius()}
               />
             )}
             <circle
-              css={styles.circleSpin}
+              css={this.styles.circleSpin}
               cx="50%"
               cy="50%"
               r={this.radius()}

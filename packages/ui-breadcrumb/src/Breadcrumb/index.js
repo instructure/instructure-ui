@@ -22,20 +22,21 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
 import { BreadcrumbLink } from './BreadcrumbLink'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -43,10 +44,14 @@ category: components
 ---
 **/
 
+@withStyle(generateStyles)
 @testable()
-@themeable(theme, styles)
 class Breadcrumb extends Component {
   static propTypes = {
+    /**
+     * the style generator provided by withStyle decorator
+     */
+    makeStyles: PropTypes.func,
     /**
      * children of type Breadcrumb.Link
      */
@@ -68,9 +73,20 @@ class Breadcrumb extends Component {
   }
 
   static defaultProps = {
+    makeStyles: undefined,
     size: 'medium',
     children: null,
     margin: undefined
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.styles = props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.styles = this.props.makeStyles()
   }
 
   static Link = BreadcrumbLink
@@ -82,10 +98,10 @@ class Breadcrumb extends Component {
     }
     return React.Children.map(this.props.children, (child, index) => {
       return (
-        <li className={styles.crumb} style={style}>
+        <li css={this.styles.crumb} style={style}>
           {child}
           {index < numChildren - 1 && (
-            <IconArrowOpenEndSolid color="auto" className={styles.separator} />
+            <IconArrowOpenEndSolid color="auto" css={this.styles.separator} />
           )}
         </li>
       )
@@ -93,11 +109,6 @@ class Breadcrumb extends Component {
   }
 
   render() {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true
-    }
-
     return (
       <View
         role="navigation"
@@ -105,7 +116,7 @@ class Breadcrumb extends Component {
         margin={this.props.margin}
         aria-label={this.props.label}
       >
-        <ol className={classnames(classes)}>{this.renderChildren()}</ol>
+        <ol css={this.styles.breadcrumb}>{this.renderChildren()}</ol>
       </View>
     )
   }
