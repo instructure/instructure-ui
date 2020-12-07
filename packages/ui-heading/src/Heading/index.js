@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
 import {
   deprecated,
@@ -34,22 +34,21 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+// eslint-disable-next-line import/named
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
-
-import { themeAdapter } from './themeAdapter'
+import generateStyles from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyles)
 @deprecated('8.0.0', {
   ellipsis: '<TruncateText />'
 })
 @testable()
-@themeable(theme, styles, themeAdapter)
 class Heading extends Component {
   static propTypes = {
     /**
@@ -116,8 +115,12 @@ class Heading extends Component {
       margin,
       elementRef,
       ellipsis,
+      // eslint-disable-next-line react/prop-types
+      makeStyles,
       ...props
     } = this.props
+
+    const styles = makeStyles(this.state)
 
     const ElementType = getElementType(Heading, this.props, () => {
       if (level === 'reset') {
@@ -130,13 +133,7 @@ class Heading extends Component {
     return (
       <View
         {...passthroughProps(props)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`level--${level}`]]: true,
-          [styles[`color--${color}`]]: color,
-          [styles[`border--${border}`]]: border !== 'none',
-          [styles.ellipsis]: ellipsis
-        })}
+        css={styles.root}
         as={ElementType}
         margin={margin}
         elementRef={elementRef}

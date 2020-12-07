@@ -22,58 +22,80 @@
  * SOFTWARE.
  */
 
-export default function generator({ borders, colors, spacing, typography }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const {
+    typography,
+    brandVariables,
+    colors,
+    spacing,
+    borders,
+    key: themeName
+  } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      primaryColor: brandVariables
+        ? brandVariables['ic-brand-font-color-dark']
+        : ''
+    },
+    instructure: {
+      h1FontFamily: typography?.fontFamilyHeading,
+      h2FontFamily: typography?.fontFamilyHeading,
+      h3FontWeight: typography?.fontWeightBold,
+      h3FontSize: '2.125rem',
+      h4FontWeight: typography?.fontWeightBold,
+      h4FontSize: typography?.fontSizeLarge,
+      h5FontWeight: typography?.fontWeightBold,
+      h5FontSize: typography?.fontSizeMedium
+    }
+  }
+
+  const componentVariables = {
+    lineHeight: typography?.lineHeightFit,
+
+    h1FontSize: typography?.fontSizeXXLarge,
+    h1FontWeight: typography?.fontWeightLight,
+    h1FontFamily: typography?.fontFamily,
+
+    h2FontSize: typography?.fontSizeXLarge,
+    h2FontWeight: typography?.fontWeightNormal,
+    h2FontFamily: typography?.fontFamily,
+
+    h3FontSize: typography?.fontSizeLarge,
+    h3FontWeight: typography?.fontWeightBold,
+    h3FontFamily: typography?.fontFamily,
+
+    h4FontSize: typography?.fontSizeMedium,
+    h4FontWeight: typography?.fontWeightBold,
+    h4FontFamily: typography?.fontFamily,
+
+    h5FontSize: typography?.fontSizeSmall,
+    h5FontWeight: typography?.fontWeightNormal,
+    h5FontFamily: typography?.fontFamily,
+
+    primaryInverseColor: colors?.textLightest,
+    primaryColor: colors?.textDarkest,
+
+    secondaryColor: colors?.textDark,
+    secondaryInverseColor: colors?.textLight,
+
+    borderPadding: spacing?.xxxSmall,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style
+  }
+
   return {
-    lineHeight: typography.lineHeightFit,
-
-    h1FontSize: typography.fontSizeXXLarge,
-    h1FontWeight: typography.fontWeightLight,
-    h1FontFamily: typography.fontFamily,
-
-    h2FontSize: typography.fontSizeXLarge,
-    h2FontWeight: typography.fontWeightNormal,
-    h2FontFamily: typography.fontFamily,
-
-    h3FontSize: typography.fontSizeLarge,
-    h3FontWeight: typography.fontWeightBold,
-    h3FontFamily: typography.fontFamily,
-
-    h4FontSize: typography.fontSizeMedium,
-    h4FontWeight: typography.fontWeightBold,
-    h4FontFamily: typography.fontFamily,
-
-    h5FontSize: typography.fontSizeSmall,
-    h5FontWeight: typography.fontWeightNormal,
-    h5FontFamily: typography.fontFamily,
-
-    primaryInverseColor: colors.textLightest,
-    primaryColor: colors.textDarkest,
-
-    secondaryColor: colors.textDark,
-    secondaryInverseColor: colors.textLight,
-
-    borderPadding: spacing.xxxSmall,
-    borderColor: colors.borderMedium,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    primaryColor: variables['ic-brand-font-color-dark']
-  }
-}
-
-generator['instructure'] = function ({ typography }) {
-  return {
-    h1FontFamily: typography.fontFamilyHeading,
-    h2FontFamily: typography.fontFamilyHeading,
-    h3FontWeight: typography.fontWeightBold,
-    h3FontSize: '2.125rem',
-    h4FontWeight: typography.fontWeightBold,
-    h4FontSize: typography.fontSizeLarge,
-    h5FontWeight: typography.fontWeightBold,
-    h5FontSize: typography.fontSizeMedium
-  }
-}
+export default generateComponentTheme
