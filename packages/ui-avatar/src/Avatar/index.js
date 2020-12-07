@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /*
  * The MIT License (MIT)
  *
@@ -22,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/* eslint-disable react/prop-types */
 /** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -30,6 +30,7 @@ import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+// eslint-disable-next-line import/named
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
