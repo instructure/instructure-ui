@@ -22,19 +22,27 @@
  * SOFTWARE.
  */
 
-.truncated {
-  display: block;
-  overflow: hidden;
-  word-wrap: break-word;
-  font-family: var(--fontFamily);
-}
+import generateComponentTheme from './theme'
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
-.auto {
-  height: 100%;
+  return {
+    root: {
+      display: 'block',
+      overflow: 'hidden',
+      wordWrap: 'break-word',
+      fontFamily: componentTheme.fontFamily
+    },
+    auto: { height: '100%' },
+    spacer: { visibility: 'hidden', maxHeight: '0', display: 'block' }
+  }
 }
-
-.spacer {
-  visibility: hidden;
-  max-height: 0;
-  display: block;
-}
+export default generateStyle
