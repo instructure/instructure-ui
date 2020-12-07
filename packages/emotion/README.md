@@ -226,14 +226,14 @@ const generateStyle = (theme, themeOverride, props, state) => {
   // return with the css you'd like to apply to the component
   return {
     componentName: {
-      label: 'root',
+      label: 'componentName',
       display: 'block',
       background: componentTheme.background,
       boxSizing: 'border-box',
       ...colorStyles[color]
     },
-    componentName__child: {
-      label: 'anotherClass',
+    child: {
+      label: 'componentName__child',
       color: 'green',
       background: componentTheme.infoColor
     }

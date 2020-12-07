@@ -71,7 +71,7 @@ class Flex extends Component {
     /**
      * the style generator provided by withStyle decorator
      */
-    makeStyles: PropTypes.any,
+    makeStyles: PropTypes.func,
     /**
      * It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function
      * returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props
