@@ -34,7 +34,7 @@ import generateComponentTheme from './theme'
 const generateStyle = (
   theme,
   themeOverride,
-  { level, color, ellipsis, border }
+  { level, color, ellipsis, border, margin }
 ) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
@@ -96,17 +96,39 @@ const generateStyle = (
     bottom: {
       paddingBottom: componentTheme.borderPadding,
       borderBottom: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`
-    }
+    },
+    none: {}
   }
+
   return {
-    root: {
-      label: 'root',
+    heading: {
+      label: 'heading',
       lineHeight: componentTheme.lineHeight,
-      margin: 0,
+      '& input': {
+        outline: '0',
+        appearance: 'none',
+        boxSizing: 'border-box',
+        background: 'none',
+        border: 'none',
+        borderRadius: '0',
+        padding: '0',
+        margin: '-0.375rem 0 0 0',
+        color: 'inherit',
+        height: 'auto',
+        width: '100%',
+        lineHeight: 'inherit',
+        textAlign: 'start',
+        boxShadow: 'none',
+        display: 'block',
+        '&:focus': { outline: 'none' }
+      },
       ...levelStyles[level],
       ...colorStyles[color],
       ...ellipsisStyle,
       ...borderStyles[border]
+    },
+    forwardedStyleProps: {
+      margin: margin ? margin : '0'
     }
   }
 }

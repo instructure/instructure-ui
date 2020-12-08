@@ -21,12 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import keycode from 'keycode'
 
 import { deprecated, callRenderProp } from '@instructure/ui-react-utils'
@@ -40,22 +39,23 @@ import {
   IconNoSolid
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
+// eslint-disable-next-line import/named
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyles from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyles)
 @deprecated('8.0.0', {
   closeButtonLabel: 'renderCloseButtonLabel'
 })
-@themeable(theme, styles)
 class Alert extends Component {
   static propTypes = {
     /**
@@ -140,30 +140,12 @@ class Alert extends Component {
     this.state = {
       open: true
     }
+
+    // eslint-disable-next-line react/prop-types
+    this.styles = props.makeStyles(this.state)
   }
 
   _timeouts = []
-
-  variantUI() {
-    return {
-      error: {
-        Icon: IconNoSolid,
-        classNames: classNames(styles.alert, styles.error)
-      },
-      info: {
-        Icon: IconInfoBorderlessSolid,
-        classNames: classNames(styles.alert, styles.info)
-      },
-      success: {
-        Icon: IconCheckMarkSolid,
-        classNames: classNames(styles.alert, styles.success)
-      },
-      warning: {
-        Icon: IconWarningBorderlessSolid,
-        classNames: classNames(styles.alert, styles.warning)
-      }
-    }[this.props.variant]
-  }
 
   handleTimeout = () => {
     if (this.props.timeout > 0) {
@@ -294,6 +276,9 @@ class Alert extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // eslint-disable-next-line react/prop-types
+    this.styles = this.props.makeStyles(this.state)
+
     if (!!this.props.open === false && !!this.props.open !== !!prevProps.open) {
       // this outside world is asking us to close the alert, which needs to
       // take place internally so the transition runs
@@ -311,10 +296,23 @@ class Alert extends Component {
   }
 
   renderIcon() {
-    const { Icon } = this.variantUI()
+    const Icon = {
+      error: {
+        Icon: IconNoSolid
+      },
+      info: {
+        Icon: IconInfoBorderlessSolid
+      },
+      success: {
+        Icon: IconCheckMarkSolid
+      },
+      warning: {
+        Icon: IconWarningBorderlessSolid
+      }
+    }[this.props.variant]
     return (
-      <div className={styles.icon}>
-        <Icon className={styles.alertIcon} />
+      <div css={this.styles.icon}>
+        <Icon css={this.styles.alertIcon} />
       </div>
     )
   }
@@ -326,7 +324,7 @@ class Alert extends Component {
       this.props.closeButtonLabel
 
     return closeButtonLabel ? (
-      <div className={styles.closeButton} key="closeButton">
+      <div css={this.styles.closeButton} key="closeButton">
         <CloseButton
           onClick={this.close}
           size="small"
@@ -337,16 +335,15 @@ class Alert extends Component {
   }
 
   renderAlert() {
-    const { classNames } = this.variantUI()
     return (
       <View
         as="div"
         margin={this.props.margin}
-        className={classNames}
+        css={this.styles.alert}
         onKeyUp={this.handleKeyUp}
       >
         {this.renderIcon()}
-        <div className={styles.content}>{this.props.children}</div>
+        <div css={this.styles.content}>{this.props.children}</div>
         {this.renderCloseButton()}
       </View>
     )

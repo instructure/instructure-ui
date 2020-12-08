@@ -32,8 +32,8 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
   const { typography } = theme
 
   const componentVariables = {
-    fontFamily: typography.fontFamily,
-    lineHeight: typography.lineHeight
+    fontFamily: typography?.fontFamily,
+    lineHeight: typography?.lineHeight
   }
 
   return {
