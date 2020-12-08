@@ -28,6 +28,7 @@ import { isEmpty } from '@instructure/ui-utils'
 import { decorator } from '@instructure/ui-decorator'
 import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
+import bidirectionalPolyfill from '../polyfills/bidirectional'
 
 /**
  * This is an utility function which calulates the correct component theme based on every possible override there is.
@@ -73,7 +74,9 @@ const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
   const theme = useTheme()
   const themeOverride = getThemeOverride(theme, componentName, props)
 
-  return generateStyle(theme, themeOverride, props, ...extraArgs)
+  const styles = generateStyle(theme, themeOverride, props, ...extraArgs)
+
+  return polyfillStyles(styles)
 }
 
 /**
@@ -84,13 +87,13 @@ const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
  * @example
  * class ExampleComponent extends React.Component {
  *
- *  componentDidUpdate() {
- *    this.props.makeStyles()
- *
- * }
  *  componentDidMount() {
  *    this.props.makeStyles()
- * }
+ *  }
+ *
+ *  componentDidUpdate() {
+ *    this.props.makeStyles()
+ *  }
  *
  *  render() {
  *    const { propVal1, styles, ...props } = this.props
@@ -116,11 +119,8 @@ const withStyle = decorator((ComposedComponent, generateStyle) => {
     )
 
     const makeStyleHandler = (...extraArgs) => {
-      const calculatedStyles = generateStyle(
-        theme,
-        themeOverride,
-        componentProps,
-        ...extraArgs
+      const calculatedStyles = polyfillStyles(
+        generateStyle(theme, themeOverride, componentProps, ...extraArgs)
       )
 
       if (!isEqual(calculatedStyles, styles)) {
@@ -146,4 +146,15 @@ const withStyle = decorator((ComposedComponent, generateStyle) => {
 
   return WithStyle
 })
+
+/**
+ * Applies necessary polyfills on the style object
+ * @param {object} styleObject
+ * @returns {object} the modified style object
+ */
+const polyfillStyles = (styleObject) => {
+  // Todo: add other polyfills, if needed
+  return bidirectionalPolyfill(styleObject)
+}
+
 export { useStyle, useTheme, withStyle }
