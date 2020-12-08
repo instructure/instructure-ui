@@ -30,7 +30,8 @@
  */
 const generateComponentTheme = (theme, themeOverride = {}) => {
   const componentVariables = {
-    effectTransitionDuration: '1s'
+    effectTransitionDuration: '1s',
+    imageBlurAmount: '0.25em'
   }
 
   return {

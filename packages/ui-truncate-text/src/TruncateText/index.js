@@ -51,6 +51,7 @@ category: components
 @hack(['shouldTruncateWhenInvisible'])
 class TruncateText extends Component {
   static propTypes = {
+    makeStyles: PropTypes.func,
     /**
      * The content to be truncated.
      */
@@ -92,6 +93,7 @@ class TruncateText extends Component {
   }
 
   static defaultProps = {
+    makeStyles: undefined,
     maxLines: 1,
     ellipsis: '\u2026',
     truncate: 'character',
@@ -104,7 +106,6 @@ class TruncateText extends Component {
   constructor(props) {
     super(props)
     this.state = this.initialState
-    // eslint-disable-next-line react/prop-types
     this.styles = props.makeStyles(this.state)
   }
 
