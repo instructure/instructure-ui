@@ -50,7 +50,17 @@ category: components
 })
 @testable()
 class Heading extends Component {
+  constructor(props) {
+    super(props)
+    this.styles = props.makeStyles(this.state)
+  }
+
+  componentDidUpdate() {
+    this.styles = this.props.makeStyles(this.state)
+  }
+
   static propTypes = {
+    makeStyles: PropTypes.func,
     /**
      * Add a top- or bottom-border to the Heading
      */
@@ -98,6 +108,7 @@ class Heading extends Component {
   }
 
   static defaultProps = {
+    makeStyles: undefined,
     children: null,
     margin: undefined,
     elementRef: undefined,
@@ -115,7 +126,6 @@ class Heading extends Component {
       margin,
       elementRef,
       ellipsis,
-      // eslint-disable-next-line react/prop-types
       makeStyles,
       ...props
     } = this.props
@@ -133,10 +143,10 @@ class Heading extends Component {
     return (
       <View
         {...passthroughProps(props)}
-        css={styles.root}
+        css={this.styles.heading}
         as={ElementType}
-        margin={margin}
         elementRef={elementRef}
+        margin={this.styles.forwardedStyleProps.margin}
       >
         {children}
       </View>

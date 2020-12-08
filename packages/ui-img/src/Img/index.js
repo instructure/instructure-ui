@@ -56,7 +56,7 @@ class Img extends Component {
   }
 
   static propTypes = {
-    makeStyles: PropTypes.any,
+    makeStyles: PropTypes.func,
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,
     display: PropTypes.oneOf(['inline-block', 'block']),
@@ -108,7 +108,7 @@ class Img extends Component {
   }
 
   renderFilter() {
-    const blur = `blur(${this.theme.imageBlurAmount})`
+    const blur = `blur(${this.styles.imageBlurAmount})`
     const grayscale = 'grayscale(1)'
 
     if (this.props.withGrayscale && this.props.withBlur) {

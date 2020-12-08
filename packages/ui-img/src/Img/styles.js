@@ -41,7 +41,8 @@ const generateStyle = (
     hasBackground,
     src,
     supportsObjectFit,
-    constrain
+    constrain,
+    margin
   }
 ) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
@@ -135,7 +136,7 @@ const generateStyle = (
     },
     img: {
       label: 'img',
-      margin: '0',
+      margin: margin ? margin : '0',
       padding: '0',
       cssFloat: 'none',
       top: 'auto',
@@ -152,7 +153,8 @@ const generateStyle = (
       ...imgOverlayStyle,
       ...filterStyle,
       ...(supportsObjectFit ? constrainStyle : {})
-    }
+    },
+    imageBlurAmount: componentTheme.imageBlurAmount
   }
 }
 export default generateStyle

@@ -44,7 +44,17 @@ category: components
 @withStyle(generateStyles)
 @testable()
 class Avatar extends Component {
+  constructor(props) {
+    super(props)
+    this.styles = props.makeStyles(this.state)
+  }
+
+  componentDidUpdate() {
+    this.styles = this.props.makeStyles(this.state)
+  }
+
   static propTypes = {
+    makeStyles: PropTypes.func,
     name: PropTypes.string.isRequired,
     /*
      * URL of the image to display as the background image
@@ -89,6 +99,7 @@ class Avatar extends Component {
   }
 
   static defaultProps = {
+    makeStyles: undefined,
     src: undefined,
     alt: undefined,
     margin: undefined,
@@ -165,15 +176,15 @@ class Avatar extends Component {
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        css={styles.root}
+        css={this.styles.root}
         display={
           this.props.display === 'block' || this.props.inline === false
             ? 'block'
             : 'inline-block'
         }
       >
-        {this.renderLoadImage(styles)}
-        {!this.state.loaded && this.renderInitials(styles)}
+        {this.renderLoadImage(this.styles)}
+        {!this.state.loaded && this.renderInitials(this.styles)}
       </View>
     )
   }
