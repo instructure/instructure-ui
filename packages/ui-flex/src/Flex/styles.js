@@ -39,25 +39,7 @@ import generateComponentTheme from './theme'
 const generateStyle = (theme, themeOverride, props, state) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  const {
-    justifyItems,
-    wrap,
-    wrapItems,
-    direction,
-    height,
-    display,
-    margin,
-    padding,
-    textAlign,
-    width,
-    inline
-  } = props
-
-  const flex = {
-    label: 'flex',
-    fontFamily: componentTheme.fontFamily,
-    boxSizing: 'border-box'
-  }
+  const { justifyItems, wrap, wrapItems, direction } = props
 
   // align-items css prop
   // When flex direction is row, 'center' is the most useful default because it
@@ -73,7 +55,6 @@ const generateStyle = (theme, themeOverride, props, state) => {
     end: 'flex-end',
     stretch: 'stretch'
   }
-  flex['alignItems'] = alignItemsValues[alignItems]
 
   // justify-content css prop
   const justifyItemsValues = {
@@ -83,19 +64,11 @@ const generateStyle = (theme, themeOverride, props, state) => {
     'space-around': 'space-around',
     'space-between': 'space-between'
   }
-  flex['justifyContent'] = justifyItemsValues[justifyItems]
 
   // wrap css prop
   const wrapValues = {
     wrap: 'wrap',
     'wrap-reverse': 'wrap-reverse'
-  }
-  if (wrap !== 'no-wrap') {
-    flex['flexWrap'] = wrapValues[wrap]
-  }
-  // deprecated in v8.0.0
-  if (wrapItems) {
-    flex['flexWrap'] = 'wrap'
   }
 
   // flex-direction css props
@@ -105,20 +78,20 @@ const generateStyle = (theme, themeOverride, props, state) => {
     row: 'row',
     'row-reverse': 'row-reverse'
   }
-  flex['flexDirection'] = flexDirectionValues[direction]
 
-  const backwardsDisplay = inline ? 'inline-flex' : null
-
-  const forwardedStyleProps = {
-    display: backwardsDisplay || display,
-    width: width,
-    height: height,
-    margin: margin,
-    padding: padding,
-    textAlign: textAlign
+  return {
+    flex: {
+      label: 'flex',
+      fontFamily: componentTheme.fontFamily,
+      boxSizing: 'border-box',
+      alignItems: alignItemsValues[alignItems],
+      justifyContent: justifyItemsValues[justifyItems],
+      flexWrap: wrapValues[wrap],
+      // 'wrapItems' deprecated in v8.0.0
+      ...(wrapItems && { flexWrap: 'wrap' }),
+      flexDirection: flexDirectionValues[direction]
+    }
   }
-
-  return { flex, forwardedStyleProps }
 }
 
 export default generateStyle

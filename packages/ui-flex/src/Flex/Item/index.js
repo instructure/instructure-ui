@@ -155,8 +155,18 @@ class Item extends Component {
       elementRef,
       children,
       withVisualDebug,
+      textAlign,
+      size,
+      direction,
+      margin,
+      padding,
+      overflowX,
+      overflowY,
       visualDebug
     } = this.props
+
+    const dirColumn = direction === 'column'
+    const dirRow = direction === 'row'
 
     return (
       <View
@@ -164,7 +174,13 @@ class Item extends Component {
         css={this.styles.flexItem}
         elementRef={elementRef}
         as={as}
-        {...this.styles.forwardedStyleProps}
+        minHeight={dirColumn ? size : undefined}
+        minWidth={dirRow ? size : undefined}
+        textAlign={textAlign}
+        margin={margin}
+        padding={padding}
+        overflowX={overflowX}
+        overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
         withVisualDebug={withVisualDebug || visualDebug}
       >
         {children}

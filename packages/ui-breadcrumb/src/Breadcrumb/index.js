@@ -31,10 +31,9 @@ import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { BreadcrumbLink } from './BreadcrumbLink'
-
-import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 
