@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
@@ -42,19 +42,20 @@ import { warn } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
 import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './style'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle)
 @deprecated('8.0.0', {
   linkRef: 'elementRef',
   variant: 'color'
 })
 @testable()
-@themeable(theme, styles)
 class Link extends Component {
   static propTypes = {
     /**
@@ -131,7 +132,11 @@ class Link extends Component {
     /**
      * __deprecated: use color__
      */
-    variant: PropTypes.oneOf(['default', 'inverse'])
+    variant: PropTypes.oneOf(['default', 'inverse']),
+    /**
+     * method to generate style
+     */
+    makeStyles: PropTypes.func
   }
 
   static defaultProps = {
@@ -148,10 +153,28 @@ class Link extends Component {
     isWithinText: true,
     onClick: undefined,
     onFocus: undefined,
-    onBlur: undefined
+    onBlur: undefined,
+    makeStyles: undefined
   }
 
   state = { hasFocus: false }
+
+  constructor(props) {
+    super(props)
+    this.styles = props.makeStyles(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.styles = this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    return {
+      containsTruncateText: this.containsTruncateText,
+      hasVisibleChildren: this.hasVisibleChildren,
+      elementName: this.element
+    }
+  }
 
   handleElementRef = (el) => {
     const { elementRef, linkRef } = this.props
@@ -249,9 +272,8 @@ class Link extends Component {
       this.props.display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )
-
     return (
-      <span className={styles.icon}>
+      <span css={this.styles.icon}>
         {callRenderProp(this.props.renderIcon)}
       </span>
     )
@@ -271,6 +293,7 @@ class Link extends Component {
       ...props
     } = this.props
 
+    /*
     const classes = {
       [styles.root]: true,
       [styles['color--link-inverse']]:
@@ -280,6 +303,7 @@ class Link extends Component {
       [styles.truncates]: this.containsTruncateText,
       [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
     }
+   */
 
     const { interaction } = this
 
@@ -304,7 +328,7 @@ class Link extends Component {
         role={role}
         type={type}
         tabIndex={tabIndex}
-        className={classnames(classes)}
+        css={this.styles.link}
       >
         {renderIcon && iconPlacement === 'start' && this.renderIcon()}
         {children}
