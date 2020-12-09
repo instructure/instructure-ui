@@ -31,20 +31,7 @@
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (theme, themeOverride, props, state) => {
-  const {
-    grow,
-    shouldGrow,
-    shrink,
-    shouldShrink,
-    align,
-    size,
-    direction,
-    textAlign,
-    margin,
-    padding,
-    overflowX,
-    overflowY
-  } = props
+  const { grow, shouldGrow, shrink, shouldShrink, align, size } = props
 
   const alignSelfValues = {
     start: 'flex-start',
@@ -53,28 +40,17 @@ const generateStyle = (theme, themeOverride, props, state) => {
     stretch: 'stretch'
   }
 
-  const dirColumn = direction === 'column'
-  const dirRow = direction === 'row'
-
   return {
     flexItem: {
       label: 'flexItem',
       boxSizing: 'border-box',
+      minWidth: '0.0625rem',
       flexBasis: size,
       // initial value is 1, but we want 0 as our default,
       // so users can opt in to shrink like they do grow
       flexShrink: shrink || shouldShrink ? 1 : 0,
       ...((grow || shouldGrow) && { flexGrow: 1 }),
       ...(align && { alignSelf: alignSelfValues[align] })
-    },
-    forwardedStyleProps: {
-      minHeight: dirColumn ? size : undefined,
-      minWidth: dirRow && size ? size : '0.0625rem',
-      textAlign: textAlign,
-      margin: margin,
-      padding: padding,
-      overflowX: overflowX,
-      overflowY: overflowY || (dirColumn ? 'auto' : 'visible')
     }
   }
 }

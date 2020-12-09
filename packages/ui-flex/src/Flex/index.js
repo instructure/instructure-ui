@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Children, Component } from 'react'
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
@@ -35,10 +35,9 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { Item } from './Item'
-
-import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
 
@@ -52,7 +51,7 @@ category: components
 @deprecated('8.0.0', {
   inline: 'display',
   wrapItems: 'wrap',
-  visualDeug: 'withVisualDebug'
+  visualDebug: 'withVisualDebug'
 })
 class Flex extends Component {
   constructor(props) {
@@ -61,7 +60,7 @@ class Flex extends Component {
     this.styles = props.makeStyles()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     this.styles = this.props.makeStyles()
   }
 
@@ -198,9 +197,23 @@ class Flex extends Component {
   }
 
   render() {
-    const { as, elementRef, withVisualDebug, visualDebug } = this.props
+    const {
+      as,
+      elementRef,
+      withVisualDebug,
+      height,
+      display,
+      margin,
+      padding,
+      textAlign,
+      width,
+      inline,
+      visualDebug
+    } = this.props
 
     const children = callRenderProp(this.props.children)
+
+    const backwardsDisplay = inline ? 'inline-flex' : null
 
     if (children && Children.count(children) > 0) {
       return (
@@ -209,8 +222,13 @@ class Flex extends Component {
           css={this.styles.flex}
           elementRef={elementRef}
           as={as}
+          display={backwardsDisplay || display}
+          width={width}
+          height={height}
+          margin={margin}
+          padding={padding}
+          textAlign={textAlign}
           withVisualDebug={withVisualDebug || visualDebug}
-          {...this.styles.forwardedStyleProps}
         >
           {this.renderChildren(children)}
         </View>
