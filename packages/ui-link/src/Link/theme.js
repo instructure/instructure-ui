@@ -24,7 +24,60 @@
 
 import { darken } from '@instructure/ui-color-utils'
 
-export default function generator({ colors, typography, borders, spacing }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, borders, typography, spacing, key: themeName } = theme
+
+  // if any styling should depend on the theme itself,
+  // this object should specify it
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-link-color'],
+      focusOutlineColor: theme['ic-brand-primary'],
+      hoverColor: darken(theme['ic-link-color'], 10)
+    },
+    'canvas-high-contrast': {
+      textDecorationOutsideText: 'underline',
+      hoverTextDecorationOutsideText: 'none'
+    }
+  }
+
+  // maps the theme variables to component specific style variables
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    color: colors?.textLink,
+
+    textDecorationWithinText: 'underline',
+    hoverTextDecorationWithinText: 'none',
+    textDecorationOutsideText: 'none',
+    hoverTextDecorationOutsideText: 'underline',
+
+    focusOutlineWidth: borders?.widthMedium,
+    focusOutlineColor: colors?.borderBrand,
+    focusOutlineStyle: borders?.style,
+
+    hoverColor: darken(colors?.textLink, 10),
+
+    colorInverse: colors?.textLight,
+    focusInverseOutlineColor: colors?.borderLightest,
+    focusInverseIconOutlineColor: colors?.borderLightest,
+
+    iconSize: '1.125em', // make icon slightly larger than inherited font-size,
+    iconPlusTextMargin: spacing?.xxSmall
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
+  }
+  /*
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -46,11 +99,12 @@ export default function generator({ colors, typography, borders, spacing }) {
     focusInverseIconOutlineColor: colors.borderLightest,
 
     iconSize:
-      '1.125em' /* make icon slightly larger than inherited font-size */,
+      '1.125em', // make icon slightly larger than inherited font-size
     iconPlusTextMargin: spacing.xxSmall
   }
+  */
 }
-
+/*
 generator['canvas'] = function (variables) {
   return {
     color: variables['ic-link-color'],
@@ -65,3 +119,5 @@ generator['canvas-high-contrast'] = function (variables) {
     hoverTextDecorationOutsideText: 'none'
   }
 }
+*/
+export default generateComponentTheme

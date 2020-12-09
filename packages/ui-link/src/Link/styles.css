@@ -1,8 +1,10 @@
 /* stylelint-disable selector-max-class, no-descending-specificity, selector-max-type */
 
-.root,
-a.root,
+/* , == OR */
+.root, /* class="root" */
+a.root, /* class="a root" 'a' AND 'root' */
 button.root {
+  /* class="button root" 'button' AND 'root' */
   box-sizing: border-box;
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
