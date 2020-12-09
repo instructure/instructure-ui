@@ -508,37 +508,36 @@ const generateStyle = (theme, themeOverride, props, state) => {
   }
 
   const focusStyles = getFocusStyles(props, componentTheme)
-  const styles = {
-    label: 'root',
-    boxSizing: 'border-box',
-    fontFamily: componentTheme.fontFamily,
-    maxWidth: maxWidth || '100%',
-    overflow: 'visible',
-    ...displayVariants[display],
-    ...backgroundColorVariants[background],
-    ...stackingVariants[stacking],
-    ...shadowVariants[shadow],
-    ...textAlignVariants[textAlign],
-    overflowX: overflowX && overflowX !== 'visible' ? overflowX : '',
-    overflowY: overflowY && overflowY !== 'visible' ? overflowY : '',
-    position: position !== 'static' ? position : '',
-    ...(withVisualDebug
-      ? {
-          outline: `0.0625rem dashed ${componentTheme.debugOutlineColor}`
-        }
-      : {}),
-    ...(withBorder(props)
-      ? {
-          borderStyle: componentTheme.borderStyle,
-          ...borderColorVariants[borderColor]
-        }
-      : {}),
-    ...(shouldUseFocusStyles ? focusStyles : {})
-  }
 
   return {
     root: {
-      ...styles,
+      label: 'view',
+      boxSizing: 'border-box',
+      fontFamily: componentTheme.fontFamily,
+      maxWidth: '100%',
+      overflow: 'visible',
+      ...displayVariants[display],
+      ...backgroundColorVariants[background],
+      ...stackingVariants[stacking],
+      ...shadowVariants[shadow],
+      ...textAlignVariants[textAlign],
+      overflowX: overflowX && overflowX !== 'visible' ? overflowX : '',
+      overflowY: overflowY && overflowY !== 'visible' ? overflowY : '',
+      position: position !== 'static' ? position : '',
+      ...(withVisualDebug
+        ? {
+            outline: `0.0625rem dashed ${componentTheme.debugOutlineColor}`
+          }
+        : {}),
+      ...(withBorder(props)
+        ? {
+            borderStyle: componentTheme.borderStyle,
+            ...borderColorVariants[borderColor]
+          }
+        : {}),
+      ...(shouldUseFocusStyles ? focusStyles : {})
+    },
+    inlineStyles: {
       ...spacingStyle,
       ...borderStyle,
       ...offsetStyle,
@@ -546,6 +545,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
       height,
       minWidth,
       minHeight,
+      maxWidth,
       maxHeight,
       ...getStyleProps(props)
     }
