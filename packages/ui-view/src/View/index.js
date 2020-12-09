@@ -345,6 +345,7 @@ class View extends Component {
         {...passthroughProps(props)}
         className={className}
         css={styles.root}
+        style={styles.inlineStyles}
         ref={this.handleElementRef}
       >
         {children}
