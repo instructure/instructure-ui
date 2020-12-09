@@ -21,36 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { useTheme as useEmotionTheme } from 'emotion-theming'
 import { canvas } from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
 import { decorator } from '@instructure/ui-decorator'
-import { partial } from 'lodash'
+import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 /**
  * This is an utility function which calulates the correct component theme based on every possible override there is.
- *
- * It will return a partially applied version of the `generateStyle` function, meaning the `theme`,
- * `componentOverride` and the component's `props` are already 'baked in' so on the consumer side
- * you don't have to provide them, only an optional 4th `options` parameter which will be passed to the `generateStyle`
- * function as the last parameter.
+
  * @param {object} theme - Theme object
  * @param {*} componentName - Name of the component
- * @param {*} generateStyle - The function that returns the component's style object
  * @param {*} props - The component's props object
- * @returns {function} The partially applied function which will call the `generateStyle` function
+ * @returns {object} The calculated theme override object
  */
-const makeStyles = (theme, componentName, generateStyle, props) => {
+const getThemeOverride = (theme, componentName, props) => {
   const componentOverride = theme?.components && theme.components[componentName]
 
-  return partial(
-    generateStyle,
-    theme,
-    { ...componentOverride, ...(props?.themeOverride ?? {}) },
-    props
-  )
+  return { ...componentOverride, ...(props?.themeOverride ?? {}) }
 }
 
 /**
@@ -76,13 +66,14 @@ const useTheme = () => {
  * @param {string} componentName - Name of the component
  * @param {function} generateStyle - The function that returns the component's style object
  * @param {object} props - The component's props object
- * @param {object} rest - Any other parameter you might want to supply to the generateStyle function
+ * @param {object} extraArgs - Any other parameter you might want to supply to the generateStyle function
  * @returns {*} style object
  */
-const useStyle = (componentName, generateStyle, props, ...rest) => {
+const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
   const theme = useTheme()
+  const themeOverride = getThemeOverride(theme, componentName, props)
 
-  return makeStyles(theme, componentName, generateStyle, props)(...rest)
+  return generateStyle(theme, themeOverride, props, ...extraArgs)
 }
 
 /**
@@ -93,9 +84,16 @@ const useStyle = (componentName, generateStyle, props, ...rest) => {
  * @example
  * class ExampleComponent extends React.Component {
  *
+ *  componentDidUpdate() {
+ *    this.props.makeStyles()
+ *
+ * }
+ *  componentDidMount() {
+ *    this.props.makeStyles()
+ * }
+ *
  *  render() {
- *    const { propVal1,...props } = this.props
- *    const styles = props.makeStyles()
+ *    const { propVal1, styles, ...props } = this.props
  *
  *    return (
  *      <Element css={styles.root} >...</Element>
@@ -105,27 +103,46 @@ const useStyle = (componentName, generateStyle, props, ...rest) => {
  */
 const withStyle = decorator((ComposedComponent, generateStyle) => {
   const WithStyle = forwardRef((props, ref) => {
+    const [styles, setStyles] = useState({})
     const theme = useTheme()
+    const componentProps = {
+      ...ComposedComponent.defaultProps,
+      ...props
+    }
+    const themeOverride = getThemeOverride(
+      theme,
+      ComposedComponent.displayName,
+      componentProps
+    )
+
+    const makeStyleHandler = (...extraArgs) => {
+      const calculatedStyles = generateStyle(
+        theme,
+        themeOverride,
+        componentProps,
+        ...extraArgs
+      )
+
+      if (!isEqual(calculatedStyles, styles)) {
+        setStyles(calculatedStyles)
+      }
+    }
 
     return (
       <ComposedComponent
         ref={ref}
-        makeStyles={makeStyles(
-          theme,
-          ComposedComponent.displayName,
-          generateStyle,
-          {
-            ...ComposedComponent.defaultProps,
-            ...props
-          }
-        )}
+        makeStyles={makeStyleHandler}
+        styles={styles}
         {...props}
       />
     )
   })
 
   hoistNonReactStatics(WithStyle, ComposedComponent)
-  WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
+
+  if (process.env.NODE_ENV !== 'production') {
+    WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
+  }
 
   return WithStyle
 })

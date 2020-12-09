@@ -220,7 +220,11 @@ class View extends Component {
      * Activate a dotted outline around the component to make building your
      * layout easier
      */
-    withVisualDebug: PropTypes.bool
+    withVisualDebug: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -267,7 +271,12 @@ class View extends Component {
     shouldAnimateFocus: true
   }
 
+  componentDidUpdate() {
+    this.props.makeStyles({ dir: this.dir })
+  }
   componentDidMount() {
+    this.props.makeStyles({ dir: this.dir })
+
     // Not calling getComputedStyle can save hundreds of ms in tests and production
     if (process.env.NODE_ENV === 'development') {
       error(
@@ -334,9 +343,9 @@ class View extends Component {
       shouldAnimateFocus,
       borderColor,
       className, // eslint-disable-line react/prop-types
+      styles,
       ...props
     } = this.props
-    const styles = props.makeStyles({ dir: this.dir })
 
     const ElementType = getElementType(View, this.props)
 
