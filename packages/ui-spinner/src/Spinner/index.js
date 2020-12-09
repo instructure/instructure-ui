@@ -135,7 +135,7 @@ class Spinner extends Component {
         as={this.props.as}
         elementRef={this.props.elementRef}
         css={this.styles.spinner}
-        {...this.styles.forwardedStyleProps}
+        margin={this.props.margin}
       >
         <svg
           css={this.styles.circle}

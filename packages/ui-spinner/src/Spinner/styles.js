@@ -177,9 +177,6 @@ const generateStyle = (theme, themeOverride, props, state) => {
       animationTimingFunction: 'ease',
       ...circleSpinSizes[size],
       ...circleSpinVariant[variant]
-    },
-    forwardedStyleProps: {
-      margin
     }
   }
 }
