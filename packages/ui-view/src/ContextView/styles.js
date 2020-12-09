@@ -59,7 +59,7 @@ const getPlacementStyle = (placement, theme) => {
   return { position: 'absolute', left: '-999em' }
 }
 
-const getAsd = (placement, theme) => {
+const getArrowCorrections = (placement, theme) => {
   if (['top', 'bottom', 'top-center', 'bottom-center'].includes(placement)) {
     return {
       insetInlineStart: '50%'
@@ -79,7 +79,7 @@ const getAsd = (placement, theme) => {
   }
   if (['start-top', 'end-top'].includes(placement)) {
     return {
-      top: `calc((${theme?.arrowSize} + ${theme?.arrowBorderWidth})) * 2)`
+      top: `calc((${theme?.arrowSize} + ${theme?.arrowBorderWidth}) * 2)`
     }
   }
   if (['start-bottom', 'end-bottom'].includes(placement)) {
@@ -89,7 +89,142 @@ const getAsd = (placement, theme) => {
   }
 }
 
-const generateStyle = (theme, themeOverride, props, options) => {
+const getArrowPlacementVariant = (placement, background, theme) => {
+  const transformedPlacement = mirrorPlacement(placement, '-')
+  const isInversed = background === 'inverse'
+
+  if (
+    ['end-center', 'end-top', 'end-bottom', 'center-end', 'end'].includes(
+      transformedPlacement
+    )
+  ) {
+    return {
+      main: {
+        top: '50%',
+        insetInlineStart: '100%',
+        insetInlineEnd: 'auto',
+        marginTop: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
+        borderInlineEndWidth: '0',
+        borderInlineEndColor: 'transparent',
+        borderInlineStartColor: isInversed
+          ? theme?.arrowBorderColorInverse
+          : theme?.arrowBorderColor,
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent',
+        borderInlineStartWidth: theme?.arrowSize
+      },
+
+      __after: {
+        insetInlineEnd: theme?.arrowBorderWidth,
+        insetInlineStart: 'auto',
+        marginTop: `calc(-1 * ${theme?.arrowSize})`,
+        borderInlineEndWidth: '0',
+        borderInlineEndColor: 'transparent',
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent',
+        borderInlineStartWidth: theme?.arrowSize,
+        borderInlineStartColor: isInversed
+          ? theme?.arrowBackgroundColorInverse
+          : theme?.arrowBackgroundColor
+      }
+    }
+  }
+  if (
+    [
+      'start-center',
+      'start-top',
+      'start-bottom',
+      'center-start',
+      'start'
+    ].includes(transformedPlacement)
+  ) {
+    return {
+      main: {
+        top: '50%',
+        insetInlineEnd: '100%',
+        insetInlineStart: 'auto',
+        marginTop: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
+        borderInlineStartWidth: '0',
+        borderInlineStartColor: 'transparent',
+        borderInlineEndColor: isInversed
+          ? theme?.arrowBorderColorInverse
+          : theme?.arrowBorderColor,
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent',
+        borderInlineEndWidth: theme?.arrowSize
+      },
+      __after: {
+        insetInlineStart: theme?.arrowBorderWidth,
+        insetInlineEnd: 'auto',
+        marginTop: `calc(-1 * ${theme?.arrowSize})`,
+        borderInlineStartWidth: '0',
+        borderInlineStartColor: 'transparent',
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent',
+        borderInlineEndWidth: theme?.arrowSize,
+        borderInlineEndColor: isInversed
+          ? theme?.arrowBackgroundColorInverse
+          : theme?.arrowBackgroundColor
+      }
+    }
+  }
+
+  if (
+    ['bottom', 'bottom-end', 'bottom-start', 'bottom-center'].includes(
+      transformedPlacement
+    )
+  ) {
+    return {
+      main: {
+        top: '100%',
+        marginInlineStart: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
+        marginInlineEnd: '0',
+        borderBottomWidth: '0',
+        borderBottomColor: 'transparent',
+        borderInlineStartColor: 'transparent',
+        borderInlineEndColor: 'transparent'
+      },
+      __after: {
+        bottom: theme?.arrowBorderWidth,
+        marginInlineStart: `calc(-1 * ${theme?.arrowSize})`,
+        marginInlineEnd: '0',
+        borderBottomWidth: '0',
+        borderBottomColor: 'transparent',
+        borderInlineStartColor: 'transparent',
+        borderInlineEndColor: 'transparent',
+        borderTopColor: isInversed
+          ? theme?.arrowBackgroundColorInverse
+          : theme?.arrowBackgroundColor
+      }
+    }
+  }
+
+  return {
+    main: {
+      bottom: '100%',
+      marginInlineStart: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
+      marginInlineEnd: '0',
+      borderTopWidth: '0',
+      borderTopColor: 'transparent',
+      borderInlineStartColor: 'transparent',
+      borderInlineEndColor: 'transparent'
+    },
+    __after: {
+      top: theme?.arrowBorderWidth,
+      marginInlineStart: `calc(-1 * ${theme?.arrowSize})`,
+      marginInlineEnd: '0',
+      borderTopWidth: '0',
+      borderTopColor: 'transparent',
+      borderInlineStartColor: 'transparent',
+      borderInlineEndColor: 'transparent',
+      borderBottomColor: isInversed
+        ? theme?.arrowBackgroundColorInverse
+        : theme?.arrowBackgroundColor
+    }
+  }
+}
+
+const generateStyle = (theme, themeOverride, props, extraArgs) => {
   const { placement, background } = props
   const transformedPlacement = placement.replace(' ', '-')
 
@@ -110,147 +245,11 @@ const generateStyle = (theme, themeOverride, props, options) => {
     inverse: componentTheme?.arrowBorderColorInverse
   }
 
-  const arrowPlacementVariants = (placement, background, theme) => {
-    const transformedPlacement = mirrorPlacement(placement, '-')
-    const isInversed = background === 'inverse'
-
-    if (
-      ['end-center', 'end-top', 'end-bottom', 'center-end', 'end'].includes(
-        transformedPlacement
-      )
-    ) {
-      return {
-        main: {
-          top: '50%',
-          insetInlineStart: '100%',
-          insetInlineEnd: 'auto',
-          marginTop: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
-          borderInlineEndWidth: '0',
-          borderInlineEndColor: 'transparent',
-          borderInlineStartColor: isInversed
-            ? theme?.arrowBorderColorInverse
-            : theme?.arrowBorderColor,
-          borderTopColor: 'transparent',
-          borderBottomColor: 'transparent',
-          borderInlineStartWidth: theme?.arrowSize
-        },
-
-        __after: {
-          insetInlineEnd: theme?.arrowBorderWidth,
-          insetInlineStart: 'auto',
-          marginTop: `calc(-1 * ${theme?.arrowSize})`,
-          borderInlineEndWidth: '0',
-          borderInlineEndColor: 'transparent',
-          borderTopColor: 'transparent',
-          borderBottomColor: 'transparent',
-          borderInlineStartWidth: theme?.arrowSize,
-          borderInlineStartColor: isInversed
-            ? theme?.arrowBackgroundColorInverse
-            : theme?.arrowBackgroundColor
-        }
-      }
-    }
-    if (
-      [
-        'start-center',
-        'start-top',
-        'start-bottom',
-        'center-start',
-        'start'
-      ].includes(transformedPlacement)
-    ) {
-      return {
-        main: {
-          top: '50%',
-          insetInlineEnd: '100%',
-          insetInlineStart: 'auto',
-          marginTop: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
-          borderInlineStartWidth: '0',
-          borderInlineStartColor: 'transparent',
-          borderInlineEndColor: isInversed
-            ? theme?.arrowBorderColorInverse
-            : theme?.arrowBorderColor,
-          borderTopColor: 'transparent',
-          borderBottomColor: 'transparent',
-          borderInlineEndWidth: theme?.arrowSize
-        },
-        __after: {
-          insetInlineStart: theme?.arrowBorderWidth,
-          insetInlineEnd: 'auto',
-          marginTop: `calc(-1 * ${theme?.arrowSize})`,
-          borderInlineStartWidth: '0',
-          borderInlineStartColor: 'transparent',
-          borderTopColor: 'transparent',
-          borderBottomColor: 'transparent',
-          borderInlineEndWidth: theme?.arrowSize,
-          borderInlineEndColor: isInversed
-            ? theme?.arrowBackgroundColorInverse
-            : theme?.arrowBackgroundColor
-        }
-      }
-    }
-    if (
-      ['top', 'top-start', 'top-end', 'top-center'].includes(
-        transformedPlacement
-      )
-    ) {
-      return {
-        main: {
-          bottom: '100%',
-          marginInlineStart: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
-          marginInlineEnd: '0',
-          borderTopWidth: '0',
-          borderTopColor: 'transparent',
-          borderInlineStartColor: 'transparent',
-          borderInlineEndColor: 'transparent'
-        },
-        __after: {
-          top: theme?.arrowBorderWidth,
-          marginInlineStart: `calc(-1 * ${theme?.arrowSize})`,
-          marginInlineEnd: '0',
-          borderTopWidth: '0',
-          borderTopColor: 'transparent',
-          borderInlineStartColor: 'transparent',
-          borderInlineEndColor: 'transparent',
-          borderBottomColor: isInversed
-            ? theme?.arrowBackgroundColorInverse
-            : theme?.arrowBackgroundColor
-        }
-      }
-    }
-
-    if (
-      ['bottom', 'bottom-end', 'bottom-start', 'bottom-center'].includes(
-        transformedPlacement
-      )
-    ) {
-      return {
-        main: {
-          top: '100%',
-          marginInlineStart: `calc(-1 * (${theme?.arrowSize} + ${theme?.arrowBorderWidth}))`,
-          marginInlineEnd: '0',
-          borderBottomWidth: '0',
-          borderBottomColor: 'transparent',
-          borderInlineStartColor: 'transparent',
-          borderInlineEndColor: 'transparent'
-        },
-        __after: {
-          bottom: theme?.arrowBorderWidth,
-          marginInlineStart: `calc(-1 * ${theme?.arrowSize})`,
-          marginInlineEnd: '0',
-          borderBottomWidth: '0',
-          borderBottomColor: 'transparent',
-          borderInlineStartColor: 'transparent',
-          borderInlineEndColor: 'transparent',
-          borderTopColor: isInversed
-            ? theme?.arrowBackgroundColorInverse
-            : theme?.arrowBackgroundColor
-        }
-      }
-    }
-
-    return { main: {}, __after: {} }
-  }
+  const arrowPlacementVariant = getArrowPlacementVariant(
+    placement,
+    background,
+    componentTheme
+  )
 
   return {
     root: {
@@ -269,13 +268,12 @@ const generateStyle = (theme, themeOverride, props, options) => {
       display: 'block',
       borderWidth: `calc(${componentTheme?.arrowSize} + ${componentTheme?.arrowBorderWidth})`,
       borderColor: arrowBackGroundVariants[background],
-      ...arrowPlacementVariants(placement, background, componentTheme).main,
-      ...getAsd(transformedPlacement, componentTheme),
+      ...arrowPlacementVariant.main,
+      ...getArrowCorrections(transformedPlacement, componentTheme),
       '&::after': {
         borderWidth: componentTheme?.arrowSize,
         borderColor: arrowBackGroundVariants[background],
-        ...arrowPlacementVariants(placement, background, componentTheme)
-          .__after,
+        ...arrowPlacementVariant.__after,
         ...arrowBaseStyles
       }
     }

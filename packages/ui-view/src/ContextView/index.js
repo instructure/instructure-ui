@@ -25,16 +25,12 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-// eslint-disable-next-line import/no-unresolved
 import { jsx, withStyle } from '@instructure/emotion'
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'
-
-import styles from './styles.css'
-
 import generateStyles from './styles'
 
 /**
@@ -115,7 +111,9 @@ class ContextView extends Component {
     debug: PropTypes.bool,
 
     // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -138,13 +136,11 @@ class ContextView extends Component {
     minHeight: undefined
   }
 
-  styles = this.props.makeStyles()
-
-  componentDidUpdate(prevProps) {
-    if (prevProps !== this.props) {
-      this.styles = this.props.makeStyles()
-      this.forceUpdate()
-    }
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
   get mirroredPlacement() {
     return mirrorPlacement(this.props.placement, '-')
@@ -168,14 +164,15 @@ class ContextView extends Component {
       shadow,
       stacking,
       style, // eslint-disable-line react/prop-types
-      textAlign
+      textAlign,
+      styles
     } = this.props
 
     return (
       <View
         {...omitProps(this.props, ContextView.propTypes)}
         style={style}
-        css={this.styles.root}
+        css={styles.root}
         borderWidth="none"
         display="inline-block"
         as={as}
@@ -185,7 +182,7 @@ class ContextView extends Component {
         stacking={stacking}
       >
         <View
-          css={this.styles.content}
+          css={styles.content}
           display="block"
           borderRadius="medium"
           borderWidth="small"
@@ -202,7 +199,7 @@ class ContextView extends Component {
           shadow={shadow}
           textAlign={textAlign}
         >
-          <span css={this.styles.arrow} />
+          <span css={styles.arrow} />
           {children}
         </View>
       </View>
