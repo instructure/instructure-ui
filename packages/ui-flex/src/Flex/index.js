@@ -54,23 +54,19 @@ category: components
   visualDebug: 'withVisualDebug'
 })
 class Flex extends Component {
-  constructor(props) {
-    super(props)
-
-    this.styles = props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.styles = this.props.makeStyles()
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
   static Item = Item
 
   static propTypes = {
     /**
-     * the style generator provided by withStyle decorator
-     */
-    makeStyles: PropTypes.func,
+
     /**
      * It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function
      * returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props
@@ -157,8 +153,10 @@ class Flex extends Component {
     /**
      * __Deprecated - use 'withVisualDebug'__
      */
-    visualDebug: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    visualDebug: PropTypes.bool, // eslint-disable-next-line react/require-default-props
+    /* eslint-enable react/require-default-props */ makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -208,7 +206,8 @@ class Flex extends Component {
       textAlign,
       width,
       inline,
-      visualDebug
+      visualDebug,
+      styles
     } = this.props
 
     const children = callRenderProp(this.props.children)
@@ -219,7 +218,7 @@ class Flex extends Component {
       return (
         <View
           {...passthroughProps(this.props)}
-          css={this.styles.flex}
+          css={styles.flex}
           elementRef={elementRef}
           as={as}
           display={backwardsDisplay || display}

@@ -320,10 +320,10 @@ const getFocusStyles = (props, componentTheme) => {
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
+ * @param  {Object} extraArgs
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props, state) => {
+const generateStyle = (theme, themeOverride, props, extraArgs = {}) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
   const {
     borderRadius,
@@ -353,7 +353,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
     withVisualDebug
   } = props
 
-  const { dir } = state
+  const { dir } = extraArgs
 
   const borderStyle = getBorderStyle({
     theme: componentTheme,

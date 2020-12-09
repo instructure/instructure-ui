@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
@@ -46,22 +46,19 @@ id: Flex.Item
   visualDeug: 'withVisualDebug'
 })
 class Item extends Component {
-  constructor(props) {
-    super(props)
-
-    this.styles = props.makeStyles()
-  }
-
   componentDidUpdate() {
-    this.styles = this.props.makeStyles()
+    this.props.makeStyles()
+  }
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
   /* eslint-disable react/require-default-props */
   static propTypes = {
-    /**
-     * the style generator provided by withStyle decorator
-     */
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The children to render inside the Item`
      */
@@ -140,7 +137,6 @@ class Item extends Component {
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    makeStyles: undefined,
     as: 'span',
     elementRef: (el) => {},
     shouldGrow: false,
@@ -162,7 +158,8 @@ class Item extends Component {
       padding,
       overflowX,
       overflowY,
-      visualDebug
+      visualDebug,
+      styles
     } = this.props
 
     const dirColumn = direction === 'column'
@@ -171,7 +168,7 @@ class Item extends Component {
     return (
       <View
         {...props}
-        css={this.styles.flexItem}
+        css={styles.flexItem}
         elementRef={elementRef}
         as={as}
         minHeight={dirColumn ? size : undefined}
