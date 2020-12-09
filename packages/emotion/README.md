@@ -292,8 +292,7 @@ class MyComponent extends Component {
 #### 4. Move any style logic from the component to `styles.js`.
 
 Since you can use all props and states in `styles.js`, move any style-related logic from the `index.js` there.\
-Also, if you see any styles given to the object as props, move them to `styles.js` into a `forwardedStyleProps` object, and merge it with any default props in the css. These are usually passed down to `View` component, that no longer uses inline styles to override component defaults.
-
+\
 Before:
 
 ```jsx
@@ -318,6 +317,7 @@ return (
 )
 ```
 
+\
 After:
 
 ```jsx
@@ -329,7 +329,8 @@ return (
     className={this.styles.img}
     as={ElementType}
     elementRef={elementRef}
-    {...this.styles.forwardedStyleProps}
+    margin={margin}
+    minWidth={minWidth ? minWidth : undefined}
   >
     {children}
   </View>
@@ -368,26 +369,22 @@ const ellipsisStyle = ellipsis
     }
   : {}
 
-const img = {
-  // ...styles
-  boxSizing: 'border-box',
-  // minWidth: '1em', -- delete this! add it to the forwardedStyleProps
-  ...colorStyle[color],
-  ...borderStlye[border],
-  ...ellipsisStyle
+return {
+  img: {
+    // ...styles
+    boxSizing: 'border-box',
+    minWidth: '1em',
+    ...colorStyle[color],
+    ...borderStlye[border],
+    ...ellipsisStyle
+  }
 }
-
-const forwardedStyleProps = {
-  margin: margin,
-  minWidth: minWidth ? minWidth : '1em' // handle minWidth default here!
-}
-
-return { img, forwardedStyleProps }
 ```
 
 #### 5. Delete css file
 
 Once you implemented the css in `styles.js`, delete the `styles.css` file.
+\
 
 #### 6. Theme tests
 
