@@ -246,8 +246,8 @@ export default generateStyle
 
 Import the style generator (`generateStyle`) from `styles.js`, `{ withStyle, jsx, css }` from `@instructure/emotion`, and add the `/** @jsx jsx */` annotation on top.\
 Replace `@themeable` with `@withStyle(generateStyles)`, passing the style generator.\
-In the `constructor` and `componentDidUpdate` methods, get the styles from the `makeStyles` prop, passing the state (or any other object needed).\
-In the `render` method, use emotion's `css={this.styles.componentName}` syntax to add syles.\
+In the `componentDidMount` and `componentDidUpdate` methods, call the `makeStyles` method (available on this.props) to generate the styles object, passing the state (or any other object needed).\
+In the `render` method, use emotion's `css={this.props.styles.componentName}` syntax to add styles.\
 
 ```jsx
 /** @jsx jsx */
@@ -266,21 +266,21 @@ class MyComponent extends Component {
   // component
   // ...
 
-  constructor(props) {
-    super(props)
-
-    this.styles = props.makeStyles()
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
   componentDidUpdate() {
-    this.styles = this.props.makeStyles()
+    this.props.makeStyles()
   }
 
   render() {
+    const { styles } = this.props
+
     return (
-      <div css={this.styles.componentName}>
+      <div css={styles.componentName}>
         // Magnificent content
-        <div css={this.styles.componentName__child}>
+        <div css={styles.componentName__child}>
           // Content that needs additional class to style
         </div>
       </div>
@@ -326,7 +326,7 @@ After:
 return (
   <View
     {...passthroughProps(props)}
-    className={this.styles.img}
+    css={this.props.styles.img}
     as={ElementType}
     elementRef={elementRef}
     margin={margin}

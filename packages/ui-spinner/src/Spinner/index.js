@@ -50,10 +50,10 @@ category: components
 @testable()
 class Spinner extends Component {
   static propTypes = {
-    /**
-     * the style generator provided by withStyle decorator
-     */
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Give the spinner a title to be read by screenreaders
      */
@@ -84,7 +84,6 @@ class Spinner extends Component {
   }
 
   static defaultProps = {
-    makeStyles: undefined,
     renderTitle: undefined,
     as: 'div',
     size: 'medium',
@@ -97,11 +96,14 @@ class Spinner extends Component {
     super(props)
 
     this.titleId = uid('Spinner')
-    this.styles = props.makeStyles()
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.styles = this.props.makeStyles()
+    this.props.makeStyles()
   }
 
   radius() {
@@ -134,11 +136,11 @@ class Spinner extends Component {
         {...passthroughProps}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        css={this.styles.spinner}
+        css={this.props.styles.spinner}
         margin={this.props.margin}
       >
         <svg
-          css={this.styles.circle}
+          css={this.props.styles.circle}
           role="img"
           aria-labelledby={this.titleId}
           focusable="false"
@@ -149,14 +151,14 @@ class Spinner extends Component {
           <g role="presentation">
             {this.props.variant !== 'inverse' && (
               <circle
-                css={this.styles.circleTrack}
+                css={this.props.styles.circleTrack}
                 cx="50%"
                 cy="50%"
                 r={this.radius()}
               />
             )}
             <circle
-              css={this.styles.circleSpin}
+              css={this.props.styles.circleSpin}
               cx="50%"
               cy="50%"
               r={this.radius()}

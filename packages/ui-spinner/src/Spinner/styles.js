@@ -25,25 +25,14 @@
 import generateComponentTheme from './theme'
 import { keyframes } from '@instructure/emotion'
 
-/**
- * Generates the style object from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (theme, themeOverride, props, state) => {
-  const componentTheme = generateComponentTheme(theme, themeOverride)
-
-  const { size, variant, margin } = props
-
-  const rotate = keyframes`
+// keyframes have to be outside of 'generateStyle',
+// since it is causing problems in style recalculation
+const rotate = keyframes`
     to {
       transform: rotate(360deg)
     }`
 
-  const morph = keyframes`
+const morph = keyframes`
     0% {
       stroke-dashoffset: 190%;
     }
@@ -57,6 +46,19 @@ const generateStyle = (theme, themeOverride, props, state) => {
       stroke-dashoffset: 190%;
       transform: rotate(360deg);
     }`
+
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
+
+  const { size, variant } = props
 
   const spinnerSizes = {
     'x-small': {

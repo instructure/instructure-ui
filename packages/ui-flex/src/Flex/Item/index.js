@@ -46,10 +46,11 @@ id: Flex.Item
   visualDeug: 'withVisualDebug'
 })
 class Item extends Component {
-  componentDidUpdate() {
+  componentDidMount() {
     this.props.makeStyles()
   }
-  componentDidMount() {
+
+  componentDidUpdate() {
     this.props.makeStyles()
   }
 
