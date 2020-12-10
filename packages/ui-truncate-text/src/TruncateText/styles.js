@@ -35,7 +35,8 @@ const generateStyle = (theme, themeOverride) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
   return {
-    root: {
+    truncateText: {
+      label: 'truncateText',
       display: 'block',
       overflow: 'hidden',
       wordWrap: 'break-word',

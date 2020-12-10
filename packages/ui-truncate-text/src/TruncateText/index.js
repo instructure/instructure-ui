@@ -34,7 +34,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
-// eslint-disable-next-line import/named
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
@@ -52,6 +51,7 @@ category: components
 class TruncateText extends Component {
   static propTypes = {
     makeStyles: PropTypes.func,
+    styles: PropTypes.object,
     /**
      * The content to be truncated.
      */
@@ -94,6 +94,7 @@ class TruncateText extends Component {
 
   static defaultProps = {
     makeStyles: undefined,
+    styles: {},
     maxLines: 1,
     ellipsis: '\u2026',
     truncate: 'character',
@@ -106,7 +107,6 @@ class TruncateText extends Component {
   constructor(props) {
     super(props)
     this.state = this.initialState
-    this.styles = props.makeStyles(this.state)
   }
 
   get initialState() {
@@ -119,7 +119,9 @@ class TruncateText extends Component {
   }
 
   componentDidMount() {
-    const { children } = this.props
+    const { children, makeStyles } = this.props
+
+    makeStyles()
 
     if (children) {
       this.checkChildren()
@@ -153,9 +155,9 @@ class TruncateText extends Component {
     // eslint-disable-next-line react/prop-types
     const { children, onUpdate, makeStyles } = this.props
 
-    const { isTruncated, needsSecondRender, truncatedText } = this.state
+    makeStyles()
 
-    this.styles = makeStyles(this.state)
+    const { isTruncated, needsSecondRender, truncatedText } = this.state
 
     if (children) {
       if (prevProps !== this.props) {
@@ -215,7 +217,7 @@ class TruncateText extends Component {
       const result = truncate(this._stage, {
         ...this.props,
         parent: this._ref,
-        lineHeight: this.styles.lineHeight
+        lineHeight: this.props.styles.lineHeight
       })
       if (result) {
         const element = this.renderChildren(
@@ -263,7 +265,7 @@ class TruncateText extends Component {
     // this spacer element is set to the max width the full text could potentially be
     // without this, text in `width: auto` elements won't expand to accomodate more text, once truncated
     childElements.push(
-      <span css={this.styles.spacer} style={{ width: width || null }} />
+      <span css={this.props.styles.spacer} style={{ width: width || null }} />
     )
 
     const children = React.Children.map(childElements, (child) => child)
@@ -278,7 +280,7 @@ class TruncateText extends Component {
 
     return (
       <span
-        css={this.styles.root}
+        css={this.props.styles.truncateText}
         ref={(el) => {
           this._ref = el
         }}
