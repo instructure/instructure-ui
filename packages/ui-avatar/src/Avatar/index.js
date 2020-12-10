@@ -80,7 +80,11 @@ class Avatar extends Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -95,6 +99,14 @@ class Avatar extends Component {
   }
 
   state = { loaded: false }
+
+  componentDidMount() {
+    this.props.makeStyles(this.state)
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles(this.state)
+  }
 
   makeInitialsFromName() {
     let name = this.props.name
@@ -142,8 +154,7 @@ class Avatar extends Component {
   }
 
   render() {
-    const { onImageLoaded, ...props } = this.props
-    const styles = props.makeStyles(this.state)
+    const { onImageLoaded, styles, ...props } = this.props
 
     return (
       <View

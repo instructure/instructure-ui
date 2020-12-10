@@ -47,10 +47,10 @@ category: components
 @testable()
 class Breadcrumb extends Component {
   static propTypes = {
-    /**
-     * the style generator provided by withStyle decorator
-     */
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * children of type Breadcrumb.Link
      */
@@ -72,35 +72,33 @@ class Breadcrumb extends Component {
   }
 
   static defaultProps = {
-    makeStyles: undefined,
     size: 'medium',
     children: null,
     margin: undefined
   }
 
-  constructor(props) {
-    super(props)
-
-    this.styles = props.makeStyles()
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.styles = this.props.makeStyles()
+    this.props.makeStyles()
   }
 
   static Link = BreadcrumbLink
 
   renderChildren() {
-    const numChildren = this.props.children ? this.props.children.length : 0
-    const style = {
+    const { styles, children } = this.props
+    const numChildren = children ? children.length : 0
+    const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
-    return React.Children.map(this.props.children, (child, index) => {
+    return React.Children.map(children, (child, index) => {
       return (
-        <li css={this.styles.crumb} style={style}>
+        <li css={styles.crumb} style={inlineStyle}>
           {child}
           {index < numChildren - 1 && (
-            <IconArrowOpenEndSolid color="auto" css={this.styles.separator} />
+            <IconArrowOpenEndSolid color="auto" css={styles.separator} />
           )}
         </li>
       )
@@ -108,6 +106,8 @@ class Breadcrumb extends Component {
   }
 
   render() {
+    const { styles } = this.props
+
     return (
       <View
         role="navigation"
@@ -115,7 +115,7 @@ class Breadcrumb extends Component {
         margin={this.props.margin}
         aria-label={this.props.label}
       >
-        <ol css={this.styles.breadcrumb}>{this.renderChildren()}</ol>
+        <ol css={styles.breadcrumb}>{this.renderChildren()}</ol>
       </View>
     )
   }

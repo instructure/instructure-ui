@@ -54,11 +54,12 @@ category: components
   visualDebug: 'withVisualDebug'
 })
 class Flex extends Component {
-  componentDidUpdate() {
-    this.props.makeStyles()
+  constructor(props) {
+    super(props)
+    props.makeStyles()
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.props.makeStyles()
   }
 
@@ -153,14 +154,14 @@ class Flex extends Component {
     /**
      * __Deprecated - use 'withVisualDebug'__
      */
-    visualDebug: PropTypes.bool, // eslint-disable-next-line react/require-default-props
-    /* eslint-enable react/require-default-props */ makeStyles: PropTypes.func,
+    visualDebug: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object
   }
 
   static defaultProps = {
-    makeStyles: undefined,
     children: null,
     as: 'span',
     elementRef: (el) => {},

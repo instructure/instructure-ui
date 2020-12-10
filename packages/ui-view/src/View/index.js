@@ -271,22 +271,38 @@ class View extends Component {
     shouldAnimateFocus: true
   }
 
-  componentDidUpdate() {
+  constructor(props) {
+    super(props)
+    this.spanMarginVerified = false
+  }
+
+  componentDidMount() {
     this.props.makeStyles({ dir: this.dir })
   }
-  componentDidMount() {
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
     this.props.makeStyles({ dir: this.dir })
 
     // Not calling getComputedStyle can save hundreds of ms in tests and production
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' && !this.spanMarginVerified) {
+      // We have to verify margins in the first 'componentDidUpdate',
+      // because that is when all styles are calculated,
+      // but we only want to check once, using a flag
+      this.spanMarginVerified = true
+
       error(
         !(function verifySpanMargin(element, margin) {
           if (!element) {
             return
           }
-          const marginValues = margin ? margin.split(' ') : null
+
           const display = getComputedStyle(element).display
 
+          if (display !== 'inline') {
+            return
+          }
+
+          const marginValues = margin ? margin.split(' ') : null
           let verticalMargin = false
 
           // either top or bottom margin are set
@@ -307,12 +323,13 @@ class View extends Component {
             }
           }
 
-          return verticalMargin && display === 'inline'
+          return verticalMargin
         })(this._element, this.props.margin),
         `[View] display style is set to 'inline' and will allow for horizontal margins only.`
       )
     }
   }
+
   handleElementRef = (el) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
