@@ -22,51 +22,68 @@
  * SOFTWARE.
  */
 
-export default function generator({
-  colors,
-  borders,
-  spacing,
-  typography,
-  shadows
-}) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const {
+    colors,
+    spacing,
+    borders,
+    typography,
+    shadows,
+    key: themeName
+  } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    background: colors?.backgroundLightest,
+    color: colors?.textDarkest,
+    marginTop: spacing?.small,
+
+    borderRadius: borders?.radiusMedium,
+    borderWidth: borders?.widthMedium,
+    borderStyle: borders?.style,
+
+    contentPadding: `${spacing?.small} ${spacing?.medium}`,
+    contentFontSize: typography?.fontSizeMedium,
+    contentFontFamily: typography?.fontFamily,
+    contentFontWeight: typography?.fontWeightNormal,
+    contentLineHeight: typography?.lineHeightCondensed,
+
+    closeButtonMarginTop: spacing?.xSmall,
+    closeButtonMarginRight: spacing?.xxSmall,
+
+    iconColor: colors?.textLightest,
+
+    successBorderColor: colors?.borderSuccess,
+    successIconBackground: colors?.backgroundSuccess,
+
+    infoBorderColor: colors?.borderInfo,
+    infoIconBackground: colors?.backgroundInfo,
+
+    warningBorderColor: colors?.borderWarning,
+    warningIconBackground: colors?.backgroundWarning,
+
+    dangerBorderColor: colors?.borderDanger,
+    dangerIconBackground: colors?.backgroundDanger,
+
+    boxShadow: shadows?.depth2
+  }
+
   return {
-    background: colors.backgroundLightest,
-    color: colors.textDarkest,
-    marginTop: spacing.small,
-
-    borderRadius: borders.radiusMedium,
-    borderWidth: borders.widthMedium,
-    borderStyle: borders.style,
-
-    contentPadding: `${spacing.small} ${spacing.medium}`,
-    contentFontSize: typography.fontSizeMedium,
-    contentFontFamily: typography.fontFamily,
-    contentFontWeight: typography.fontWeightNormal,
-    contentLineHeight: typography.lineHeightCondensed,
-
-    closeButtonMarginTop: spacing.xSmall,
-    closeButtonMarginRight: spacing.xxSmall,
-
-    iconColor: colors.textLightest,
-
-    successBorderColor: colors.borderSuccess,
-    successIconBackground: colors.backgroundSuccess,
-
-    infoBorderColor: colors.borderInfo,
-    infoIconBackground: colors.backgroundInfo,
-
-    warningBorderColor: colors.borderWarning,
-    warningIconBackground: colors.backgroundWarning,
-
-    dangerBorderColor: colors.borderDanger,
-    dangerIconBackground: colors.backgroundDanger,
-
-    boxShadow: shadows.depth2
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme
