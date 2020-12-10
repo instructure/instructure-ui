@@ -32,14 +32,13 @@ import styles from '../styles.css'
 describe('<Modal />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
     await mount(
-      <Modal
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
+      <Modal label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
-    const modal = await ModalLocator.find(':label(Modal Dialog)', { expectEmpty: true })
+    const modal = await ModalLocator.find(':label(Modal Dialog)', {
+      expectEmpty: true
+    })
 
     expect(modal).to.not.exist()
   })
@@ -80,9 +79,8 @@ describe('<Modal />', async () => {
     const modal = await ModalLocator.find()
     const body = await modal.findBody()
 
-    await wait(() =>  {
-      expect(body.getComputedStyle().width)
-        .to.equal('158px') // subtract the borders
+    await wait(() => {
+      expect(body.getComputedStyle().width).to.equal('158px') // subtract the borders
     })
   })
 
@@ -104,9 +102,9 @@ describe('<Modal />', async () => {
     expect(constrain).to.exist()
   })
 
-  it('should not inherit its parent\'s font color', async () => {
+  it("should not inherit its parent's font color", async () => {
     await mount(
-      <div style={{color: 'rgb(255, 255, 255)'}}>
+      <div style={{ color: 'rgb(255, 255, 255)' }}>
         <Modal
           open
           label="Modal Dialog"
@@ -129,11 +127,7 @@ describe('<Modal />', async () => {
 
   it('should pass `as` prop to the dialog', async () => {
     const subject = await mount(
-      <Modal
-        open
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
+      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
@@ -150,11 +144,7 @@ describe('<Modal />', async () => {
 
   it('should handle null children', async () => {
     await mount(
-      <Modal
-        open
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
+      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         {null}
         <Modal.Body>Foo Bar Baz</Modal.Body>
         {null}
@@ -167,11 +157,7 @@ describe('<Modal />', async () => {
 
   it('should apply the aria attributes', async () => {
     await mount(
-      <Modal
-        open
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
+      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
@@ -181,7 +167,7 @@ describe('<Modal />', async () => {
     expect(dialog.getAttribute('role')).to.equal('dialog')
   })
 
-  it('should use transition', async  () => {
+  it('should use transition', async () => {
     const onEnter = stub()
     const onEntering = stub()
     const onEntered = stub()
@@ -240,7 +226,7 @@ describe('<Modal />', async () => {
 
     await subject.setProps({ open: false })
 
-    await wait (()  => {
+    await wait(() => {
       expect(onClose).to.have.been.calledOnce()
     })
   })
@@ -254,7 +240,9 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <Modal.Body>Foo Bar Baz <button>click me</button></Modal.Body>
+        <Modal.Body>
+          Foo Bar Baz <button>click me</button>
+        </Modal.Body>
       </Modal>
     )
 
@@ -264,10 +252,9 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await within(modal.getOwnerDocument().documentElement)
-      .click()
+    await within(modal.getOwnerDocument().documentElement).click()
 
-    await wait (() => {
+    await wait(() => {
       expect(onDismiss).to.have.been.calledOnce()
     })
   })
@@ -282,7 +269,9 @@ describe('<Modal />', async () => {
         shouldReturnFocus={false}
         shouldCloseOnDocumentClick={false}
       >
-        <Modal.Body>Foo Bar Baz <button>click me</button></Modal.Body>
+        <Modal.Body>
+          Foo Bar Baz <button>click me</button>
+        </Modal.Body>
       </Modal>
     )
 
@@ -292,10 +281,9 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await within(modal.getOwnerDocument().documentElement)
-      .click()
+    await within(modal.getOwnerDocument().documentElement).click()
 
-    await wait (() => {
+    await wait(() => {
       expect(onDismiss).to.not.have.been.called()
     })
 
@@ -304,11 +292,7 @@ describe('<Modal />', async () => {
 
   it('should render children', async () => {
     await mount(
-      <Modal
-        open
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
+      <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>
           <button>Cancel</button>
         </Modal.Body>
@@ -324,11 +308,7 @@ describe('<Modal />', async () => {
     it('should pass validation when children are valid', async () => {
       await expect(
         mount(
-          <Modal
-            open
-            label="Modal Dialog"
-            shouldReturnFocus={false}
-          >
+          <Modal open label="Modal Dialog" shouldReturnFocus={false}>
             <Modal.Header>Hello World</Modal.Header>
             <Modal.Body>Foo Bar Baz</Modal.Body>
             <Modal.Footer>
@@ -342,11 +322,7 @@ describe('<Modal />', async () => {
     it('should not pass validation when children are invalid', async () => {
       const consoleError = stub(console, 'error')
       await mount(
-        <Modal
-          open
-          label="Modal Dialog"
-          shouldReturnFocus={false}
-        >
+        <Modal open label="Modal Dialog" shouldReturnFocus={false}>
           <Modal.Body>Foo Bar Baz</Modal.Body>
           <Modal.Footer>
             <button>Cancel</button>
@@ -354,8 +330,9 @@ describe('<Modal />', async () => {
           <Modal.Header>Hello World</Modal.Header>
         </Modal>
       )
-      expect(consoleError)
-        .to.have.been.calledWithMatch('Expected children of Modal in one of the following formats:')
+      expect(consoleError).to.have.been.calledWithMatch(
+        'Expected children of Modal in one of the following formats:'
+      )
     })
 
     it('should pass inverse variant to children when set', async () => {
@@ -370,9 +347,11 @@ describe('<Modal />', async () => {
           shouldReturnFocus={false}
           variant="inverse"
         >
-          <Modal.Header ref={el => headerRef = el}>Hello Dark World</Modal.Header>
-          <Modal.Body ref={el => bodyRef = el}>Foo Bar Baz</Modal.Body>
-          <Modal.Footer ref={el => footerRef = el}>
+          <Modal.Header ref={(el) => (headerRef = el)}>
+            Hello Dark World
+          </Modal.Header>
+          <Modal.Body ref={(el) => (bodyRef = el)}>Foo Bar Baz</Modal.Body>
+          <Modal.Footer ref={(el) => (footerRef = el)}>
             <button>Cancel</button>
           </Modal.Footer>
         </Modal>
@@ -387,13 +366,8 @@ describe('<Modal />', async () => {
       let bodyRef
 
       await mount(
-        <Modal
-          open
-          label="Modal"
-          shouldReturnFocus={false}
-          overflow="fit"
-        >
-          <Modal.Body ref={el => bodyRef = el}>Foo Bar Baz</Modal.Body>
+        <Modal open label="Modal" shouldReturnFocus={false} overflow="fit">
+          <Modal.Body ref={(el) => (bodyRef = el)}>Foo Bar Baz</Modal.Body>
         </Modal>
       )
       expect(bodyRef.props.overflow).to.equal('fit')
@@ -406,12 +380,14 @@ describe('<Modal />', async () => {
         ...Modal.propTypes
       }
 
-      render () {
+      render() {
         return (
           <div>
             <input type="text" />
             <Modal {...this.props}>
-              <Modal.Header><button>Close</button></Modal.Header>
+              <Modal.Header>
+                <button>Close</button>
+              </Modal.Header>
               <Modal.Body>
                 <input type="text" id="input-one" />
                 <input type="text" id="input-two" />
@@ -426,12 +402,10 @@ describe('<Modal />', async () => {
     }
 
     it('should focus closeButton by default', async () => {
-      await mount(
-        <ModalExample open label="A Modal" />
-      )
+      await mount(<ModalExample open label="A Modal" />)
 
       const modal = await ModalLocator.find(':label(A Modal)')
-      const closeButton  = await modal.find(':label(Close)')
+      const closeButton = await modal.find(':label(Close)')
 
       await wait(() => {
         expect(closeButton.focused()).to.be.true()
@@ -476,8 +450,11 @@ describe('<Modal />', async () => {
         expect(modal.containsFocus()).to.be.true()
       })
 
-      await within(modal.getOwnerDocument().documentElement)
-        .keyUp('escape', null, { focusable: false })
+      await within(modal.getOwnerDocument().documentElement).keyUp(
+        'escape',
+        null,
+        { focusable: false }
+      )
 
       await wait(() => {
         expect(onDismiss).to.have.been.called()

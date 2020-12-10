@@ -87,11 +87,13 @@ describe('<Pages />', async () => {
     const subject = await mount(
       <Pages activePageIndex={0} onPageIndexChange={onPageIndexChange}>
         <Page key={0}>{() => 'Foo'}</Page>
-        <Page key={1}>{(history, navigate) => <button onClick={navigate}>Back</button>}</Page>
+        <Page key={1}>
+          {(history, navigate) => <button onClick={navigate}>Back</button>}
+        </Page>
       </Pages>
     )
 
-    await subject.setProps({activePageIndex: 1})
+    await subject.setProps({ activePageIndex: 1 })
 
     const pages = within(subject.getDOMNode())
     const button = await pages.find('button')

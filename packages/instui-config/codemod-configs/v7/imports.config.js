@@ -49,10 +49,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-elements',
-        moduleNames: [
-          'MetricsList',
-          'MetricsListItem'
-        ]
+        moduleNames: ['MetricsList', 'MetricsListItem']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-metric')
@@ -61,10 +58,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-elements',
-        moduleNames: [
-          'List',
-          'ListItem'
-        ]
+        moduleNames: ['List', 'ListItem']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-list')
@@ -173,10 +167,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-layout',
-        moduleNames: [
-          'View',
-          'ContextView'
-        ]
+        moduleNames: ['View', 'ContextView']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-view')
@@ -185,11 +176,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-layout',
-        moduleNames: [
-          'Position',
-          'PositionContent',
-          'PositionTarget'
-        ]
+        moduleNames: ['Position', 'PositionContent', 'PositionTarget']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-position')
@@ -213,10 +200,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-layout',
-        moduleNames: [
-          'DrawerLayout',
-          'DrawerContent'
-        ]
+        moduleNames: ['DrawerLayout', 'DrawerContent']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-drawer-layout')
@@ -248,10 +232,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-layout',
-        moduleNames: [
-          'Flex',
-          'FlexItem'
-        ]
+        moduleNames: ['Flex', 'FlexItem']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-flex')
@@ -260,11 +241,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-layout',
-        moduleNames: [
-          'Grid',
-          'GridCol',
-          'GridRow'
-        ]
+        moduleNames: ['Grid', 'GridCol', 'GridRow']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-grid')
@@ -296,10 +273,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-forms',
-        moduleNames: [
-          'RadioInput',
-          'RadioInputGroup'
-        ]
+        moduleNames: ['RadioInput', 'RadioInputGroup']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-radio-input')
@@ -354,11 +328,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-overlays',
-        moduleNames: [
-          'Popover',
-          'PopoverTrigger',
-          'PopoverContent'
-        ]
+        moduleNames: ['Popover', 'PopoverTrigger', 'PopoverContent']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-popover')
@@ -376,12 +346,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
     {
       where: {
         packageName: '@instructure/ui-overlays',
-        moduleNames: [
-          'Modal',
-          'ModalHeader',
-          'ModalBody',
-          'ModalFooter',
-        ]
+        moduleNames: ['Modal', 'ModalHeader', 'ModalBody', 'ModalFooter']
       },
       transform: {
         importPath: getImportPath('@instructure/ui-modal')
@@ -435,7 +400,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       transform: {
         importPath: '@instructure/ui-a11y-utils'
       }
-    },
+    }
   ]
 
   if (isMetaComponentPackageMigration) {
@@ -448,7 +413,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
             'ScreenReaderContent',
             'PresentationContent',
             'AccessibleContent'
-          ],
+          ]
         },
         transform: {
           importPath: '@instructure/ui'
@@ -457,7 +422,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-alerts',
-          moduleName: 'Alert',
+          moduleName: 'Alert'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -466,7 +431,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-avatar',
-          moduleName: 'Avatar',
+          moduleName: 'Avatar'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -475,7 +440,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-badge',
-          moduleName: 'Badge',
+          moduleName: 'Badge'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -484,7 +449,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-billboard',
-          moduleName: 'Billboard',
+          moduleName: 'Billboard'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -493,10 +458,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-breadcrumb',
-          moduleNames: [
-            'Breadcrumb',
-            'BreadcrumbLink'
-          ],
+          moduleNames: ['Breadcrumb', 'BreadcrumbLink']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -521,10 +483,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-byline',
-          moduleNames: [
-            'Byline',
-            'Media'
-          ]
+          moduleNames: ['Byline', 'Media']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -556,7 +515,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-code-editor',
-          moduleName: 'CodeEditor',
+          moduleName: 'CodeEditor'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -565,7 +524,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-date-input',
-          moduleName: 'DateInput',
+          moduleName: 'DateInput'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -574,7 +533,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-dialog',
-          moduleName: 'Dialog',
+          moduleName: 'Dialog'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -583,10 +542,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-drawer-layout',
-          moduleNames: [
-            'DrawerLayout',
-            'DrawerContent'
-          ]
+          moduleNames: ['DrawerLayout', 'DrawerContent']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -595,10 +551,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-editable',
-          moduleNames: [
-            'InPlaceEdit',
-            'Editable'
-          ],
+          moduleNames: ['InPlaceEdit', 'Editable']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -625,10 +578,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-flex',
-          moduleNames: [
-            'Flex',
-            'FlexItem'
-          ]
+          moduleNames: ['Flex', 'FlexItem']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -637,7 +587,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-focusable',
-          moduleName: 'Focusable',
+          moduleName: 'Focusable'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -652,8 +602,8 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
             'FormFieldMessage',
             'FormFieldMessages',
             'FormFieldLayout',
-            'FormFieldGroup',
-          ],
+            'FormFieldGroup'
+          ]
         },
         transform: {
           importPath: '@instructure/ui'
@@ -662,11 +612,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-grid',
-          moduleNames: [
-            'Grid',
-            'GridCol',
-            'GridRow'
-          ]
+          moduleNames: ['Grid', 'GridCol', 'GridRow']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -684,10 +630,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-i18n',
-          moduleNames: [
-            'ApplyLocale',
-            'ApplyTextDirection'
-          ],
+          moduleNames: ['ApplyLocale', 'ApplyTextDirection']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -722,11 +665,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-list',
-          moduleNames: [
-            'List',
-            'ListItem',
-            'InlineList'
-          ],
+          moduleNames: ['List', 'ListItem', 'InlineList']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -740,7 +679,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
             'MenuItemGroup',
             'MenuItemSeparator',
             'MenuItem'
-          ],
+          ]
         },
         transform: {
           importPath: '@instructure/ui'
@@ -749,10 +688,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-metric',
-          moduleNames: [
-            'MetricGroup',
-            'Metric'
-          ],
+          moduleNames: ['MetricGroup', 'Metric']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -770,7 +706,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-motion',
-          moduleName: 'Transition',
+          moduleName: 'Transition'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -779,10 +715,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-navigation',
-          moduleNames: [
-            'Navigation',
-            'AppNav'
-          ]
+          moduleNames: ['Navigation', 'AppNav']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -791,7 +724,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-number-input',
-          moduleName: 'NumberInput',
+          moduleName: 'NumberInput'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -800,7 +733,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-options',
-          moduleName: 'Options',
+          moduleName: 'Options'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -809,10 +742,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-overlays',
-          moduleNames: [
-            'Mask',
-            'Overlay'
-          ]
+          moduleNames: ['Mask', 'Overlay']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -821,7 +751,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-pages',
-          moduleName: 'Pages',
+          moduleName: 'Pages'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -830,7 +760,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-pagination',
-          moduleName: 'Pagination',
+          moduleName: 'Pagination'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -875,10 +805,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-progress',
-          moduleNames: [
-            'ProgressBar',
-            'ProgressCircle'
-          ],
+          moduleNames: ['ProgressBar', 'ProgressCircle']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -887,10 +814,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-radio-input',
-          moduleNames: [
-            'RadioInput',
-            'RadioInputGroup'
-          ]
+          moduleNames: ['RadioInput', 'RadioInputGroup']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -962,10 +886,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-svg-images',
-          moduleNames: [
-            'InlineSVG',
-            'SVGIcon'
-          ]
+          moduleNames: ['InlineSVG', 'SVGIcon']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -1001,7 +922,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-text',
-          moduleName: 'Text',
+          moduleName: 'Text'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -1019,7 +940,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-text-input',
-          moduleName: 'TextInput',
+          moduleName: 'TextInput'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -1028,10 +949,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-themeable',
-          moduleNames: [
-            'themeable',
-            'ApplyTheme'
-          ]
+          moduleNames: ['themeable', 'ApplyTheme']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -1040,10 +958,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-toggle-details',
-          moduleNames: [
-            'ToggleDetails',
-            'ToggleGroup'
-          ]
+          moduleNames: ['ToggleDetails', 'ToggleGroup']
         },
         transform: {
           importPath: '@instructure/ui'
@@ -1052,7 +967,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-tooltip',
-          moduleName: 'Tooltip',
+          moduleName: 'Tooltip'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -1061,7 +976,7 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       {
         where: {
           packageName: '@instructure/ui-tray',
-          moduleName: 'Tray',
+          moduleName: 'Tray'
         },
         transform: {
           importPath: '@instructure/ui'
@@ -1102,7 +1017,8 @@ module.exports = ({ isMetaComponentPackageMigration = false } = {}) => {
       importPattern: '^@instructure/.*/lib/.*'
     },
     transform: {
-      importPath: importPath => importPath.replace(new RegExp('/lib/'), '/es/')
+      importPath: (importPath) =>
+        importPath.replace(new RegExp('/lib/'), '/es/')
     }
   })
 

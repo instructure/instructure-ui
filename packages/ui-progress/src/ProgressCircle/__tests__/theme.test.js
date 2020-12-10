@@ -33,28 +33,34 @@ describe('ProgressCircle.theme', () => {
 
     describe('default', () => {
       it('should ensure brand meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorBrand, variables.trackColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.meterColorBrand, variables.trackColor)
+        ).to.be.above(3)
       })
       it('should ensure info meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorInfo, variables.trackColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.meterColorInfo, variables.trackColor)
+        ).to.be.above(3)
       })
       it('should ensure success meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorSuccess, variables.trackColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.meterColorSuccess, variables.trackColor)
+        ).to.be.above(3)
       })
       it('should ensure danger meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorDanger, variables.trackColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.meterColorDanger, variables.trackColor)
+        ).to.be.above(3)
       })
       it('should ensure warning meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorWarning, variables.trackColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.meterColorWarning, variables.trackColor)
+        ).to.be.above(3)
       })
       it('should ensure alert meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorAlert, variables.trackColor))
-          .to.be.above(3)
+        expect(
+          contrast(variables.meterColorAlert, variables.trackColor)
+        ).to.be.above(3)
       })
     })
   })
@@ -64,28 +70,34 @@ describe('ProgressCircle.theme', () => {
 
     describe('default', () => {
       it('should ensure brand meter color and track color meet 4.5:1 contrast', () => {
-        expect(contrast(variables.meterColorBrand, variables.trackColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.meterColorBrand, variables.trackColor)
+        ).to.be.above(4.5)
       })
       it('should ensure info meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorInfo, variables.trackColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.meterColorInfo, variables.trackColor)
+        ).to.be.above(4.5)
       })
       it('should ensure success meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorSuccess, variables.trackColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.meterColorSuccess, variables.trackColor)
+        ).to.be.above(4.5)
       })
       it('should ensure danger meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorDanger, variables.trackColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.meterColorDanger, variables.trackColor)
+        ).to.be.above(4.5)
       })
       it('should ensure warning meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorWarning, variables.trackColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.meterColorWarning, variables.trackColor)
+        ).to.be.above(4.5)
       })
       it('should ensure alert meter color and track color meet 3:1 contrast', () => {
-        expect(contrast(variables.meterColorAlert, variables.trackColor))
-          .to.be.above(4.5)
+        expect(
+          contrast(variables.meterColorAlert, variables.trackColor)
+        ).to.be.above(4.5)
       })
     })
   })

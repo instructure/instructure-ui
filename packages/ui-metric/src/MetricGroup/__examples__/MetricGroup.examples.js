@@ -53,10 +53,6 @@ const getMetric = (textAlign) => {
 
 export default {
   propValues: {
-    children: [
-      getMetric('start'),
-      getMetric('center'),
-      getMetric('end')
-    ]
+    children: [getMetric('start'), getMetric('center'), getMetric('end')]
   }
 }

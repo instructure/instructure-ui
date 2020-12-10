@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-function accepts (file, acceptProp) {
+function accepts(file, acceptProp) {
   if (file && acceptProp && file.type !== 'application/x-moz-file') {
     const acceptList = getAcceptList(acceptProp)
     const mimeType = file.type || ''
     const baseMimeType = mimeType.replace(/\/.*$/, '')
 
-    return acceptList.some(type => {
+    return acceptList.some((type) => {
       if (type.charAt(0) === '.') {
         // type is an extension like .pdf
         if (!file.name) {
@@ -45,9 +45,9 @@ function accepts (file, acceptProp) {
   return true
 }
 
-function getAcceptList (accept) {
+function getAcceptList(accept) {
   const list = Array.isArray(accept) ? accept : accept.split(',')
-  return list.map(a => a.trim().replace(/^\w+$/, '.$&'))
+  return list.map((a) => a.trim().replace(/^\w+$/, '.$&'))
 }
 
 export default accepts

@@ -49,35 +49,30 @@ class ListItem extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
-    * Inherits delimiter from the parent List component.
-    */
-    delimiter: deprecated.deprecatePropValues(PropTypes.oneOf([
-      'none',
-      'dashed',
-      'solid',
-      'pipe',
-      'slash',
-      'arrow'
-    ]),
-    ['pipe', 'slash', 'arrow'], ({ propValue }) => (
-      `with 'delimiter' set to ${propValue} will only be available when using [InlineList.Item] as of version 8.0.0.`
-    )),
+     * Inherits delimiter from the parent List component.
+     */
+    delimiter: deprecated.deprecatePropValues(
+      PropTypes.oneOf(['none', 'dashed', 'solid', 'pipe', 'slash', 'arrow']),
+      ['pipe', 'slash', 'arrow'],
+      ({ propValue }) =>
+        `with 'delimiter' set to ${propValue} will only be available when using [InlineList.Item] as of version 8.0.0.`
+    ),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-    */
+     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+     */
     padding: ThemeablePropTypes.spacing,
     /**
-    * Inherits itemSpacing from the parent List component
-    */
+     * Inherits itemSpacing from the parent List component
+     */
     spacing: PropTypes.oneOf([
       'none',
       'xxx-small',
@@ -93,7 +88,7 @@ class ListItem extends Component {
     /**
      * __deprecated:__ inline will be InlineList
      */
-    variant: PropTypes.oneOf(['default', 'unstyled', 'inline']),
+    variant: PropTypes.oneOf(['default', 'unstyled', 'inline'])
   }
 
   static defaultProps = {
@@ -106,7 +101,7 @@ class ListItem extends Component {
     variant: undefined
   }
 
-  render () {
+  render() {
     const {
       delimiter,
       spacing,
@@ -146,10 +141,7 @@ class ListItem extends Component {
         {children}
 
         {variant === 'inline' && (
-          <span
-            className={styles.delimiter}
-            aria-hidden="true"
-          />
+          <span className={styles.delimiter} aria-hidden="true" />
         )}
       </View>
     )

@@ -50,7 +50,8 @@ function getElementType(Component, props, getDefault) {
   }
 
   if (props.to) {
-    warn( // if to prop is used without as
+    warn(
+      // if to prop is used without as
       !props.as,
       `[${Component.displayName}] \`as\` prop should be provided when using \`to\``
     )

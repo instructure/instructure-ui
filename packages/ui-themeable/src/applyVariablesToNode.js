@@ -38,7 +38,7 @@ import { pickOverrides } from './pickOverrides'
  * @param {Object} defaults Default JS variables
  * @param {String} prefix A variable prefix/namespace
  */
-function applyVariablesToNode (domNode, variables, defaults, prefix) {
+function applyVariablesToNode(domNode, variables, defaults, prefix) {
   if (!domNode || isEmpty(variables)) {
     return
   }
@@ -52,7 +52,7 @@ function applyVariablesToNode (domNode, variables, defaults, prefix) {
   }
 }
 
-function clearCustomProperties (domNode, prefix) {
+function clearCustomProperties(domNode, prefix) {
   const styles = domNode.style
   for (let i = styles.length - 1; i >= 0; i--) {
     const prop = styles[i]
@@ -62,7 +62,7 @@ function clearCustomProperties (domNode, prefix) {
   }
 }
 
-function setCustomProperties (domNode, properties) {
+function setCustomProperties(domNode, properties) {
   Object.keys(properties).forEach((propertyName) => {
     const value = properties[propertyName]
 

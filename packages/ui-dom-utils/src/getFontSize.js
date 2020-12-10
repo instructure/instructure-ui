@@ -37,7 +37,7 @@ const COMPUTED_CACHE = {}
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Object} font size in px
  */
-function getFontSize (el, ignoreCache) {
+function getFontSize(el, ignoreCache) {
   if (!canUseDOM) {
     return 16
   }
@@ -49,7 +49,9 @@ function getFontSize (el, ignoreCache) {
     return COMPUTED_CACHE[container]
   }
 
-  const fontSize = parseInt(getComputedStyle(container).getPropertyValue('font-size'))
+  const fontSize = parseInt(
+    getComputedStyle(container).getPropertyValue('font-size')
+  )
 
   // cache the computed font size so that we don't have to compute it again
   COMPUTED_CACHE[container] = fontSize

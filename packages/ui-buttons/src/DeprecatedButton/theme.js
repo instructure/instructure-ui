@@ -35,11 +35,21 @@ const buttonVariant = function (style, mainColor, textColor) {
     [`${style}Color`]: textColor,
     [`${style}HoverBackground`]: darken(mainColor, 10),
     [`${style}ActiveBackground`]: darken(mainColor, 10),
-    [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(mainColor, 20, 0.45)}`
+    [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(
+      mainColor,
+      20,
+      0.45
+    )}`
   }
 }
 
-export default function generator ({ colors = {}, borders = {}, forms = {}, spacing = {}, typography = {} } = {}) {
+export default function generator({
+  colors = {},
+  borders = {},
+  forms = {},
+  spacing = {},
+  typography = {}
+} = {}) {
   return {
     borderWidth: borders.widthSmall,
     fontFamily: typography.fontFamily,
@@ -73,7 +83,10 @@ export default function generator ({ colors = {}, borders = {}, forms = {}, spac
     lightColor: colors.textDarkest,
     lightHoverBackground: darken(colors.backgroundLightest, 5),
     lightActiveBackground: colors.backgroundLightest,
-    lightActiveBoxShadow: `${activeShadow} ${darken(colors.borderLightest, 25)}`,
+    lightActiveBoxShadow: `${activeShadow} ${darken(
+      colors.borderLightest,
+      25
+    )}`,
 
     ghostBackground: 'transparent',
     ghostBorderColor: colors.borderBrand,
@@ -89,7 +102,10 @@ export default function generator ({ colors = {}, borders = {}, forms = {}, spac
     ghostInverseColor: colors.textLightest,
     ghostInverseHoverBackground: alpha(colors.backgroundLightest, 10),
     ghostInverseActiveBackground: 'transparent',
-    ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderLightest, 20)}`,
+    ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(
+      colors.borderLightest,
+      20
+    )}`,
 
     linkColor: colors.textLink,
     linkBorderColor: 'transparent',
@@ -119,29 +135,13 @@ export default function generator ({ colors = {}, borders = {}, forms = {}, spac
 
     fluidWidthLineHeight: typography.lineHeightFit,
 
-    ...buttonVariant(
-      'default',
-      colors.backgroundLight,
-      colors.textDarkest
-    ),
+    ...buttonVariant('default', colors.backgroundLight, colors.textDarkest),
 
-    ...buttonVariant(
-      'primary',
-      colors.backgroundBrand,
-      colors.textLightest
-    ),
+    ...buttonVariant('primary', colors.backgroundBrand, colors.textLightest),
 
-    ...buttonVariant(
-      'success',
-      colors.backgroundSuccess,
-      colors.textLightest
-    ),
+    ...buttonVariant('success', colors.backgroundSuccess, colors.textLightest),
 
-    ...buttonVariant(
-      'danger',
-      colors.backgroundDanger,
-      colors.textLightest
-    ),
+    ...buttonVariant('danger', colors.backgroundDanger, colors.textLightest),
 
     ...buttonVariant(
       'circleDefault',
@@ -170,7 +170,10 @@ generator['canvas'] = function (variables = {}) {
     ghostBorderColor: variables['ic-brand-button--primary-bgd'],
     ghostColor: variables['ic-brand-button--primary-bgd'],
     ghostHoverBackground: alpha(variables['ic-brand-button--primary-bgd'], 10),
-    ghostActiveBoxShadow: `inset 0 0 1px 1px ${alpha(variables['ic-brand-button--primary-bgd'], 20)}`,
+    ghostActiveBoxShadow: `inset 0 0 1px 1px ${alpha(
+      variables['ic-brand-button--primary-bgd'],
+      20
+    )}`,
 
     linkColor: variables['ic-link-color'],
     linkHoverColor: darken(variables['ic-link-color'], 10),
@@ -192,7 +195,9 @@ generator['canvas'] = function (variables = {}) {
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors = {} } = {}) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
+  colors = {}
+} = {}) {
   return {
     defaultBorderColor: colors.borderMedium,
     lightBorderColor: colors.borderMedium,

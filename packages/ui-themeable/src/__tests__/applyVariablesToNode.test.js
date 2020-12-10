@@ -36,7 +36,11 @@ describe('applyVariablesToNode', async () => {
 
     applyVariablesToNode(domNode, variables, defaults, prefix)
 
-    expect(domNode.style.getPropertyValue('--ThemeableComponent-color')).to.equal('red')
-    expect(domNode.style.getPropertyValue('--ThemeableComponent-background')).to.equal('')
+    expect(
+      domNode.style.getPropertyValue('--ThemeableComponent-color')
+    ).to.equal('red')
+    expect(
+      domNode.style.getPropertyValue('--ThemeableComponent-background')
+    ).to.equal('')
   })
 })

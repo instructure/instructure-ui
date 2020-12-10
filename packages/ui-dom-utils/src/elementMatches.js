@@ -35,10 +35,12 @@ import { findDOMNode } from './findDOMNode'
  * @param {String} selectorString - a string representing the selector to test
  * @returns {boolean} if the element would be selected by the specified selector string
  */
-function elementMatches (el, selectorString) {
+function elementMatches(el, selectorString) {
   const node = el && findDOMNode(el)
   if (!node) return false
-  return node.matches ? node.matches(selectorString) : node.msMatchesSelector(selectorString)
+  return node.matches
+    ? node.matches(selectorString)
+    : node.msMatchesSelector(selectorString)
 }
 
 export default elementMatches

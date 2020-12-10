@@ -31,9 +31,7 @@ import { BreadcrumbLinkLocator } from '../BreadcrumbLinkLocator'
 
 describe('<BreadcrumbLink />', async () => {
   it('should render a anchor tag when given an href prop', async () => {
-    await mount(
-      <BreadcrumbLink href="#">Test</BreadcrumbLink>
-    )
+    await mount(<BreadcrumbLink href="#">Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const anchor = await link.find('a')
 
@@ -42,9 +40,7 @@ describe('<BreadcrumbLink />', async () => {
 
   it('should render as a button and respond to onClick event', async () => {
     const onClick = stub()
-    await mount(
-      <BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>
-    )
+    await mount(<BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const button = await link.find('button')
 
@@ -54,17 +50,13 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should allow to prop to pass through', async () => {
-    await mount(
-      <BreadcrumbLink to="/example">Test</BreadcrumbLink>
-    )
+    await mount(<BreadcrumbLink to="/example">Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     expect(link.getAttribute('to')).to.equal('/example')
   })
 
   it('should not render a link when not given an href prop', async () => {
-    await mount(
-      <BreadcrumbLink>Test</BreadcrumbLink>
-    )
+    await mount(<BreadcrumbLink>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const tagName = link.getTagName()
 
@@ -74,9 +66,7 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should not render a button when not given an onClick prop', async () => {
-    await mount(
-      <BreadcrumbLink>Test</BreadcrumbLink>
-    )
+    await mount(<BreadcrumbLink>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const tagName = link.getTagName()
 
@@ -86,18 +76,14 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should meet a11y standards as a link', async () => {
-    await mount(
-      <BreadcrumbLink href="#">Test</BreadcrumbLink>
-    )
+    await mount(<BreadcrumbLink href="#">Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
 
     expect(await link.accessible()).to.be.true()
   })
 
   it('should meet a11y standards as a span', async () => {
-    await mount(
-      <BreadcrumbLink>Test</BreadcrumbLink>
-    )
+    await mount(<BreadcrumbLink>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
 
     expect(await link.accessible()).to.be.true()

@@ -49,10 +49,11 @@ id: Tabs.Panel
 class Panel extends Component {
   static propTypes = {
     /**
-    * The content that will be rendered in the corresponding <Tab /> and will label
-    * this `<Tabs.Panel />` for screen readers
-    */
-    renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * The content that will be rendered in the corresponding <Tab /> and will label
+     * this `<Tabs.Panel />` for screen readers
+     */
+    renderTitle: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     children: PropTypes.node,
     variant: PropTypes.oneOf(['default', 'secondary']),
     isSelected: PropTypes.bool,
@@ -64,16 +65,16 @@ class Panel extends Component {
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
-    * __Deprecated - use `renderTitle` instead__
-    */
+     * __Deprecated - use `renderTitle` instead__
+     */
     title: PropTypes.node,
     /**
-    * __Deprecated - use `isSelected` instead__
-    */
+     * __Deprecated - use `isSelected` instead__
+     */
     selected: PropTypes.bool,
     /**
-    * __Deprecated - use `isDisabled` instead__
-    */
+     * __Deprecated - use `isDisabled` instead__
+     */
     disabled: PropTypes.bool,
     elementRef: PropTypes.func
   }
@@ -95,7 +96,7 @@ class Panel extends Component {
     elementRef: (el) => {}
   }
 
-  render () {
+  render() {
     const {
       selected,
       disabled,

@@ -46,25 +46,25 @@ class InlineListItem extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
-    * Inherits delimiter from the parent InlineList component
-    */
+     * Inherits delimiter from the parent InlineList component
+     */
     delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
-    */
+     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+     */
     padding: ThemeablePropTypes.spacing,
     /**
-    * Inherits itemSpacing from the parent InlineList component
-    */
+     * Inherits itemSpacing from the parent InlineList component
+     */
     spacing: PropTypes.oneOf([
       'none',
       'xxx-small',
@@ -88,7 +88,7 @@ class InlineListItem extends Component {
     elementRef: (el) => {}
   }
 
-  render () {
+  render() {
     const {
       delimiter,
       size,
@@ -126,10 +126,7 @@ class InlineListItem extends Component {
         elementRef={elementRef}
       >
         {children}
-        <span
-          className={styles.delimiter}
-          aria-hidden="true"
-        />
+        <span className={styles.delimiter} aria-hidden="true" />
       </View>
     )
   }

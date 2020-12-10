@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
- export default {
-   getComponentProps: (props) => {
-     return {
-       date: '2019-08-07',
-       label: '2019-08-07',
-       children: 8
-     }
-   },
-   filter: (props) => {
-     return props.isSelected && props.isToday
-   }
- }
+export default {
+  getComponentProps: (props) => {
+    return {
+      date: '2019-08-07',
+      label: '2019-08-07',
+      children: 8
+    }
+  },
+  filter: (props) => {
+    return props.isSelected && props.isToday
+  }
+}

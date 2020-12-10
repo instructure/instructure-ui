@@ -33,10 +33,7 @@ import { RadioInputGroupLocator } from '../RadioInputGroupLocator'
 describe('<RadioInputGroup />', async () => {
   it('adds the name props to all RadioInput types', async () => {
     await mount(
-      <RadioInputGroup
-        name="fruit"
-        description="Select a fruit"
-      >
+      <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
         <RadioInput label="Orange" value="orange" />
@@ -50,11 +47,7 @@ describe('<RadioInputGroup />', async () => {
   it('requires an `onChange` prop with a `value` prop', async () => {
     const consoleError = stub(console, 'error')
     await mount(
-      <RadioInputGroup
-        name="fruit"
-        description="Select a fruit"
-        value="banana"
-      >
+      <RadioInputGroup name="fruit" description="Select a fruit" value="banana">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
         <RadioInput label="Orange" value="orange" />
@@ -62,8 +55,9 @@ describe('<RadioInputGroup />', async () => {
     )
 
     await wait(() => {
-      expect(consoleError)
-        .to.have.been.calledWithMatch(`provided a 'value' prop without an 'onChange' handler`)
+      expect(consoleError).to.have.been.calledWithMatch(
+        `provided a 'value' prop without an 'onChange' handler`
+      )
     })
   })
 
@@ -143,7 +137,7 @@ describe('<RadioInputGroup />', async () => {
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
-        value='orange'
+        value="orange"
         onChange={() => {}}
       >
         <RadioInput label="Apple" value="apple" />
@@ -166,10 +160,7 @@ describe('<RadioInputGroup />', async () => {
 
   it('adds the correct tabindex to RadioInputs when none are checked', async () => {
     await mount(
-      <RadioInputGroup
-        name="fruit"
-        description="Select a fruit"
-      >
+      <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
         <RadioInput label="Banana" value="banana" />
         <RadioInput label="Orange" value="orange" />
@@ -210,10 +201,7 @@ describe('<RadioInputGroup />', async () => {
   describe('for a11y', async () => {
     it('should meet standards', async () => {
       await mount(
-        <RadioInputGroup
-          name="fruit"
-          description="Select a fruit"
-        >
+        <RadioInputGroup name="fruit" description="Select a fruit">
           <RadioInput label="Apple" value="apple" />
           <RadioInput label="Banana" value="banana" />
           <RadioInput label="Orange" value="orange" />
@@ -221,9 +209,13 @@ describe('<RadioInputGroup />', async () => {
       )
       const group = await RadioInputGroupLocator.find()
 
-      expect(await group.accessible({
-        ignores: [ 'radiogroup' ] /* https://github.com/dequelabs/axe-core/issues/176 */
-      })).to.be.true()
+      expect(
+        await group.accessible({
+          ignores: [
+            'radiogroup'
+          ] /* https://github.com/dequelabs/axe-core/issues/176 */
+        })
+      ).to.be.true()
     })
   })
 })

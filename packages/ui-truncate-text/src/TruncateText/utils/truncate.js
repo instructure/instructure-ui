@@ -26,7 +26,11 @@ import escapeHtml from 'escape-html'
 
 import { cloneArray } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
-import { getComputedStyle, getBoundingClientRect, isVisible } from '@instructure/ui-dom-utils'
+import {
+  getComputedStyle,
+  getBoundingClientRect,
+  isVisible
+} from '@instructure/ui-dom-utils'
 
 import measureText from './measureText'
 import cleanString from './cleanString'
@@ -51,7 +55,7 @@ import cleanData from './cleanData'
  * 'normal' lineHeight. Adjust this to better match your font if needed.
  */
 
-function truncate (element, options) {
+function truncate(element, options) {
   const truncator = new Truncator(element, options)
   if (truncator) {
     return truncator.truncate()
@@ -59,7 +63,7 @@ function truncate (element, options) {
 }
 
 class Truncator {
-  constructor (element, options = {}) {
+  constructor(element, options = {}) {
     this._options = {
       parent: options.parent || element.parentElement,
       maxLines: options.maxLines || 1,
@@ -81,9 +85,10 @@ class Truncator {
     if (options.parent) {
       this._parent = this._options.parent
     } else {
-      this._parent = this._options.maxLines === 'auto'
-        ? this._stage.parentElement
-        : this._stage
+      this._parent =
+        this._options.maxLines === 'auto'
+          ? this._stage.parentElement
+          : this._stage
     }
 
     this._truncatedText = this._parent.textContent
@@ -92,7 +97,7 @@ class Truncator {
     this.setup()
   }
 
-  setup () {
+  setup() {
     if (!this._stage) {
       return
     }
@@ -100,9 +105,10 @@ class Truncator {
     const { maxLines, truncate, lineHeight } = this._options
     const style = getComputedStyle(this._parent)
     // if no explicit lineHeight is inherited, use lineHeight multiplier for calculations
-    const actualLineHeight = style.lineHeight === 'normal'
-      ? lineHeight * parseFloat(style.fontSize)
-      : parseFloat(style.lineHeight)
+    const actualLineHeight =
+      style.lineHeight === 'normal'
+        ? lineHeight * parseFloat(style.fontSize)
+        : parseFloat(style.lineHeight)
     const node = this._stage.firstChild.children
       ? this._stage.firstChild
       : this._stage
@@ -127,38 +133,49 @@ class Truncator {
 
     this._defaultStringData = cloneArray(stringData)
     this._nodeDataIndexes = cloneArray(nodeDataIndexes)
-    this._maxHeight = maxLines === 'auto'
-      ? getBoundingClientRect(this._parent).height
-      : maxLines * actualLineHeight
-    this._maxWidth = measureText(this._nodeMap.map(item => item.node), this._parent)
-    this._maxLines = maxLines === 'auto'
-      ? Math.round(this._maxHeight / actualLineHeight)
-      : maxLines
+    this._maxHeight =
+      maxLines === 'auto'
+        ? getBoundingClientRect(this._parent).height
+        : maxLines * actualLineHeight
+    this._maxWidth = measureText(
+      this._nodeMap.map((item) => item.node),
+      this._parent
+    )
+    this._maxLines =
+      maxLines === 'auto'
+        ? Math.round(this._maxHeight / actualLineHeight)
+        : maxLines
   }
 
-  getNodeMap (rootNode) {
+  getNodeMap(rootNode) {
     const { shouldTruncateWhenInvisible, truncate } = this._options
     const nodes = Array.from(rootNode.childNodes)
     let map = []
     // parse child nodes and build a data map to associate each node with its data
     nodes.forEach((node) => {
       if (node.nodeType === 1 || node.nodeType === 3) {
-        const shouldTruncate =
-          shouldTruncateWhenInvisible ? true : isVisible(node, false)
+        const shouldTruncate = shouldTruncateWhenInvisible
+          ? true
+          : isVisible(node, false)
         const textContent = node.textContent + ' '
         map.push({
           node,
-          data: truncate === 'word'
-            // eslint-disable-next-line no-useless-escape
-            ? shouldTruncate ? textContent.match(/.*?[\.\s\/]+?/g) : ''
-            : shouldTruncate ? node.textContent.split('') : []
+          data:
+            truncate === 'word'
+              ? shouldTruncate
+                ? // eslint-disable-next-line no-useless-escape
+                  textContent.match(/.*?[\.\s\/]+?/g)
+                : ''
+              : shouldTruncate
+              ? node.textContent.split('')
+              : []
         })
       }
     })
     return map
   }
 
-  getNodeIndexes (data) {
+  getNodeIndexes(data) {
     let nodeDataIndexes = []
     for (let i = 0; i < data.length; i++) {
       for (let j = 0; j < data[i].length; j++) {
@@ -168,7 +185,7 @@ class Truncator {
     return nodeDataIndexes
   }
 
-  domString (data) {
+  domString(data) {
     const keys = Object.keys(data)
     let html = ''
 
@@ -195,11 +212,9 @@ class Truncator {
     return html
   }
 
-  checkFit (data) {
+  checkFit(data) {
     const html = this.domString(data)
-    const node = this._options.maxLines === 'auto'
-      ? this._stage
-      : this._parent
+    const node = this._options.maxLines === 'auto' ? this._stage : this._parent
     let fits = true
     this._stage.innerHTML = html
     // allow a 0.5 px margin of error for browser calculation discrepancies
@@ -210,7 +225,7 @@ class Truncator {
     return fits
   }
 
-  truncate () {
+  truncate() {
     const { ellipsis, ignore, position } = this._options
     const middle = position === 'middle'
 
@@ -278,13 +293,20 @@ class Truncator {
     stringData = cleanData(stringData, this._options, true)
 
     if (truncated && !middle) {
-      truncatedText = cleanString(truncatedText.split(ellipsis)[0], ignore, false, true, true)
+      truncatedText = cleanString(
+        truncatedText.split(ellipsis)[0],
+        ignore,
+        false,
+        true,
+        true
+      )
       truncatedText += ellipsis
     } else if (truncated && middle) {
       const halves = truncatedText.split(ellipsis)
-      truncatedText = cleanString(halves[0], ignore, false, true, true)
-        + ellipsis
-        + cleanString(halves[1], ignore, true, false, true)
+      truncatedText =
+        cleanString(halves[0], ignore, false, true, true) +
+        ellipsis +
+        cleanString(halves[1], ignore, true, false, true)
     }
 
     return {

@@ -32,7 +32,7 @@ import Color from 'tinycolor2'
  * @param {String} color
  * @returns {Boolean} true if the string is a valid color
  */
-function isValid (color) {
+function isValid(color) {
   return Color(color).isValid()
 }
 

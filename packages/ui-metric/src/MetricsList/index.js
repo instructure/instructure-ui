@@ -41,9 +41,9 @@ category: components
 class MetricsList extends Component {
   static propTypes = {
     /**
-    * children of type `MetricsList.Item`
-    */
-   children: ChildrenPropTypes.oneOf([MetricsListItem])
+     * children of type `MetricsList.Item`
+     */
+    children: ChildrenPropTypes.oneOf([MetricsListItem])
   }
 
   static defaultProps = {
@@ -52,7 +52,7 @@ class MetricsList extends Component {
 
   static Item = MetricsListItem
 
-  renderChildren () {
+  renderChildren() {
     return Children.map(this.props.children, (child) => {
       if (!child) return
       const { label, value, ...rest } = child.props
@@ -68,7 +68,6 @@ class MetricsList extends Component {
   }
 
   render() {
-
     return (
       <MetricGroup {...passthroughProps(this.props)}>
         {this.renderChildren()}

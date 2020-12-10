@@ -27,23 +27,21 @@ import generatePropCombinations from '../generatePropCombinations'
 
 describe('generatePropCombinations', () => {
   it('should return [] when passed empty prop values', () => {
-    expect(generatePropCombinations({}))
-      .to.deep.equal([])
+    expect(generatePropCombinations({})).to.deep.equal([])
   })
 
   it('should work for a single prop/value', () => {
-    expect(generatePropCombinations({ foo: ['a'] }))
-      .to.deep.equal([{ foo: 'a' }])
+    expect(generatePropCombinations({ foo: ['a'] })).to.deep.equal([
+      { foo: 'a' }
+    ])
   })
 
   it('should work for multiple values', () => {
-    expect(generatePropCombinations({
-      foo: ['a', 'b']
-    }))
-      .to.deep.equal([
-        { foo: 'a' },
-        { foo: 'b' }
-      ])
+    expect(
+      generatePropCombinations({
+        foo: ['a', 'b']
+      })
+    ).to.deep.equal([{ foo: 'a' }, { foo: 'b' }])
   })
 
   it('should work with multiple props/values', () => {
@@ -51,13 +49,12 @@ describe('generatePropCombinations', () => {
       foo: [1, 2],
       bar: ['a', 'b']
     })
-    expect(result)
-      .to.deep.equal([
-        { foo: 1, bar: 'a' },
-        { foo: 2, bar: 'a' },
-        { foo: 1, bar: 'b' },
-        { foo: 2, bar: 'b' }
-      ])
+    expect(result).to.deep.equal([
+      { foo: 1, bar: 'a' },
+      { foo: 2, bar: 'a' },
+      { foo: 1, bar: 'b' },
+      { foo: 2, bar: 'b' }
+    ])
   })
 
   it('should work with props with values of differing lengths', () => {
@@ -65,15 +62,14 @@ describe('generatePropCombinations', () => {
       foo: [1, 2],
       bar: ['a', 'b', 'c']
     })
-    expect(result)
-      .to.deep.equal([
-        { foo: 1, bar: 'a' },
-        { foo: 2, bar: 'a' },
-        { foo: 1, bar: 'b' },
-        { foo: 2, bar: 'b' },
-        { foo: 1, bar: 'c' },
-        { foo: 2, bar: 'c' }
-      ])
+    expect(result).to.deep.equal([
+      { foo: 1, bar: 'a' },
+      { foo: 2, bar: 'a' },
+      { foo: 1, bar: 'b' },
+      { foo: 2, bar: 'b' },
+      { foo: 1, bar: 'c' },
+      { foo: 2, bar: 'c' }
+    ])
   })
 
   it('should throw when a prop value is null', () => {

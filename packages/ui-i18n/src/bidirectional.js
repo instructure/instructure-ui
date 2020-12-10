@@ -30,33 +30,33 @@ import { getTextDirection } from './getTextDirection'
 const { DIRECTION, getTextDirectionContext } = TextDirectionContext
 
 /**
-* ---
-* category: utilities/i18n
-* ---
-* A decorator or higher order component that makes a component `bidirectional`.
-*
-* As a HOC:
-*
-* ```js
-* import { bidirectional } from '@instructure/ui-i18n'
-*
-* class Example extends React.Component {
-*   render () {
-*     return this.dir === bidirectional.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
-*   }
-* }
-*
-* export default bidirectional()(Example)
-* ```
-*
-* When used as a child of [ApplyTextDirection](#ApplyTextDirection), bidirectional components use
-* the direction provided in the context. When used without [ApplyTextDirection](#ApplyTextDirection),
-* the direction can be supplied explicitly via the `dir` prop. If no `dir` prop is provided,
-* bidirectional components query the documentElement for the `dir` attribute, defaulting to `ltr`
-* if it is not present.
-*
-* @return {function} composes the bidirectional component.
-*/
+ * ---
+ * category: utilities/i18n
+ * ---
+ * A decorator or higher order component that makes a component `bidirectional`.
+ *
+ * As a HOC:
+ *
+ * ```js
+ * import { bidirectional } from '@instructure/ui-i18n'
+ *
+ * class Example extends React.Component {
+ *   render () {
+ *     return this.dir === bidirectional.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
+ *   }
+ * }
+ *
+ * export default bidirectional()(Example)
+ * ```
+ *
+ * When used as a child of [ApplyTextDirection](#ApplyTextDirection), bidirectional components use
+ * the direction provided in the context. When used without [ApplyTextDirection](#ApplyTextDirection),
+ * the direction can be supplied explicitly via the `dir` prop. If no `dir` prop is provided,
+ * bidirectional components query the documentElement for the `dir` attribute, defaulting to `ltr`
+ * if it is not present.
+ *
+ * @return {function} composes the bidirectional component.
+ */
 const bidirectional = decorator((ComposedComponent) => {
   return class BidirectionalComponent extends ComposedComponent {
     static propTypes = {
@@ -69,16 +69,16 @@ const bidirectional = decorator((ComposedComponent) => {
       ...TextDirectionContext.types
     }
 
-    get dir () {
+    get dir() {
       const context = getTextDirectionContext(this.context) || {}
-      return context.dir  || this.props.dir || getTextDirection()
+      return context.dir || this.props.dir || getTextDirection()
     }
 
-    get rtl () {
+    get rtl() {
       return this.dir === DIRECTION.rtl
     }
 
-    get ltr () {
+    get ltr() {
       return this.dir === DIRECTION.ltr
     }
   }

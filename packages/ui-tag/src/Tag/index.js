@@ -58,18 +58,18 @@ class Tag extends Component {
     readOnly: PropTypes.bool,
     dismissible: PropTypes.bool,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * If you add an onClick prop, Tag renders as a clickable button
-    */
+     * If you add an onClick prop, Tag renders as a clickable button
+     */
     onClick: PropTypes.func,
     /**
-    * Provides a reference to the underlying html root element
-    */
+     * Provides a reference to the underlying html root element
+     */
     elementRef: PropTypes.func,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['default', 'inline'])
@@ -88,7 +88,7 @@ class Tag extends Component {
     onClick: undefined
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._container)
   }
 
@@ -111,7 +111,7 @@ class Tag extends Component {
     this._container = node
   }
 
-  render () {
+  render() {
     const {
       className,
       dismissible,
@@ -145,20 +145,16 @@ class Tag extends Component {
         ref={this.handleRef}
         elementRef={this.props.elementRef}
         className={classNames(className, classes)}
-        as={(onClick) ? 'button' : 'span'}
+        as={onClick ? 'button' : 'span'}
         margin={margin}
-        type={(onClick) ? 'button' : null}
-        onClick={(onClick) ? this.handleClick : null}
+        type={onClick ? 'button' : null}
+        onClick={onClick ? this.handleClick : null}
         disabled={disabled || readOnly}
         display={null}
-        title={title || ((typeof text === 'string') ? text : null)}
+        title={title || (typeof text === 'string' ? text : null)}
       >
-        <span className={styles.text}>
-          {text}
-        </span>
-        {(onClick && dismissible)
-          ? <IconXSolid className={styles.icon} /> : null
-        }
+        <span className={styles.text}>{text}</span>
+        {onClick && dismissible ? <IconXSolid className={styles.icon} /> : null}
       </View>
     )
   }

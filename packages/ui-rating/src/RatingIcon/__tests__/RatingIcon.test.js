@@ -35,9 +35,13 @@ import { RatingIcon } from '../index'
 describe('<RatingIcon />', async () => {
   it('transitions when filled on render and animateFill is true', async () => {
     await mount(
-      <ApplyTheme theme={{ [Transition.theme]: {
-        duration: '2s'
-      }}}>
+      <ApplyTheme
+        theme={{
+          [Transition.theme]: {
+            duration: '2s'
+          }
+        }}
+      >
         <RatingIcon filled animateFill />
       </ApplyTheme>
     )
@@ -46,13 +50,14 @@ describe('<RatingIcon />', async () => {
 
   it('transitions when filled after render and animateFill is true', async () => {
     const subject = await mount(
-      <ApplyTheme theme={{ [Transition.theme]: {
-        duration: '2s'
-      }}}>
-        <RatingIcon
-          filled={false}
-          animateFill={true}
-        />
+      <ApplyTheme
+        theme={{
+          [Transition.theme]: {
+            duration: '2s'
+          }
+        }}
+      >
+        <RatingIcon filled={false} animateFill={true} />
       </ApplyTheme>
     )
 

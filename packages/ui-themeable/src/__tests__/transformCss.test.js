@@ -48,12 +48,10 @@ describe('transformCss', () => {
   describe('#transformCss', () => {
     it('should transform', () => {
       const transform = function (node) {
-        return {...node}
+        return { ...node }
       }
 
-      expect(transformCss(cssText, transform))
-        .to.equalIgnoreSpaces(cssText)
+      expect(transformCss(cssText, transform)).to.equalIgnoreSpaces(cssText)
     })
   })
 })
-

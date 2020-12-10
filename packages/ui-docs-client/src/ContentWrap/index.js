@@ -41,12 +41,8 @@ class ContentWrap extends Component {
     padding: 'none medium'
   }
 
-  render () {
-    const {
-      children,
-      maxWidth,
-      padding
-    } = this.props
+  render() {
+    const { children, maxWidth, padding } = this.props
 
     return (
       <View

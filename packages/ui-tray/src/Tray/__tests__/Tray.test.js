@@ -31,11 +31,7 @@ import { TrayLocator } from '../TrayLocator'
 
 describe('<Tray />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
-    await mount(
-      <Tray label="Tray Example">
-        Hello World
-      </Tray>
-    )
+    await mount(<Tray label="Tray Example">Hello World</Tray>)
     const tray = await TrayLocator.find({ expectEmpty: true })
     expect(tray).to.not.exist()
   })
@@ -69,10 +65,8 @@ describe('<Tray />', async () => {
     const dialog = await tray.find('[role="dialog"]')
 
     await wait(() => {
-      expect(dialog.getComputedStyle().width)
-        .to.equal('160px')
+      expect(dialog.getComputedStyle().width).to.equal('160px')
     })
-
   })
 
   it('should apply the a11y attributes', async () => {
@@ -90,11 +84,7 @@ describe('<Tray />', async () => {
   it('should support onOpen prop', async () => {
     const onOpen = stub()
     await mount(
-      <Tray
-        label="Tray Example"
-        open
-        onOpen={onOpen}
-      >
+      <Tray label="Tray Example" open onOpen={onOpen}>
         Hello World
       </Tray>
     )
@@ -107,11 +97,7 @@ describe('<Tray />', async () => {
   it('should support onClose prop', async () => {
     const onClose = stub()
     const subject = await mount(
-      <Tray
-        label="Tray Example"
-        open
-        onClose={onClose}
-      >
+      <Tray label="Tray Example" open onClose={onClose}>
         Hello World
       </Tray>
     )
@@ -132,7 +118,7 @@ describe('<Tray />', async () => {
       >
         Hello World
         <input type="text" />
-        <input type="text" id="my-input"/>
+        <input type="text" id="my-input" />
       </Tray>
     )
 
@@ -155,22 +141,25 @@ describe('<Tray />', async () => {
       >
         Hello World
         <input type="text" />
-        <input type="text" id="my-input"/>
+        <input type="text" id="my-input" />
       </Tray>
     )
 
     const tray = await TrayLocator.find()
 
-    await wait(()  => {
+    await wait(() => {
       expect(tray.containsFocus()).to.be.true()
     })
 
-    await within(tray.getOwnerDocument().documentElement)
-      .keyUp('escape', {
+    await within(tray.getOwnerDocument().documentElement).keyUp(
+      'escape',
+      {
         defaultPrevented: false,
         bubbles: true,
         button: 0
-      }, { focusable: false })
+      },
+      { focusable: false }
+    )
 
     await wait(() => {
       expect(onDismiss).to.have.been.calledOnce()
@@ -178,7 +167,6 @@ describe('<Tray />', async () => {
   })
 
   describe('transition()', () => {
-
     const placements = {
       ltr: {
         enteringPlacements: {

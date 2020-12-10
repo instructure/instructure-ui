@@ -39,8 +39,8 @@ class AccessibleContent extends Component {
   static propTypes = {
     alt: PropTypes.string,
     /**
-    * the element type to render the screen reader content as
-    */
+     * the element type to render the screen reader content as
+     */
     as: PropTypes.elementType,
     children: PropTypes.node
   }
@@ -51,18 +51,14 @@ class AccessibleContent extends Component {
     children: null
   }
 
-  render () {
+  render() {
     const { alt, children, ...props } = this.props
     const ElementType = getElementType(AccessibleContent, this.props)
 
     return (
       <ElementType {...passthroughProps(props)}>
-        <ScreenReaderContent>
-          {alt}
-        </ScreenReaderContent>
-        <PresentationContent>
-          {children}
-        </PresentationContent>
+        <ScreenReaderContent>{alt}</ScreenReaderContent>
+        <PresentationContent>{children}</PresentationContent>
       </ElementType>
     )
   }

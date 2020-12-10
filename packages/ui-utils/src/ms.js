@@ -38,13 +38,13 @@ import { parseUnit } from './parseUnit'
  *
  * @param {String} val
  * @returns {Number} Returns numerical representation of milliseconds
-*/
-function ms (val) {
+ */
+function ms(val) {
   if (!val || typeof val === 'number') {
     return val
   }
 
-  const [ num, unit ] = parseUnit(val)
+  const [num, unit] = parseUnit(val)
 
   if (unit === 'ms') {
     return num

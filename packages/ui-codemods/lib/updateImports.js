@@ -51,9 +51,8 @@ module.exports = function (file, api, options) {
 
   let hasModifications = false
 
-  hasModifications = replaceDeprecatedImports(j, root, config, api) || hasModifications
+  hasModifications =
+    replaceDeprecatedImports(j, root, config, api) || hasModifications
 
-  return hasModifications
-    ? formatSource(root.toSource(), file.path)
-    : null
+  return hasModifications ? formatSource(root.toSource(), file.path) : null
 }

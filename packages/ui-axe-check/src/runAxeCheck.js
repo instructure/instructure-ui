@@ -23,7 +23,7 @@
  */
 import axeCore from 'axe-core'
 
-export default async function runAxe (element, options = {}) {
+export default async function runAxe(element, options = {}) {
   let result = true
   const context = {
     include: [element],
@@ -46,8 +46,9 @@ export default async function runAxe (element, options = {}) {
       'color-contrast' // because we test color contrast in theme tests
     ]
 
-    const violations = (axeResult.violations || [])
-      .filter(violation => !ignores.includes(violation.id))
+    const violations = (axeResult.violations || []).filter(
+      (violation) => !ignores.includes(violation.id)
+    )
 
     violations.forEach((violation) => {
       /* eslint-disable no-console */
@@ -73,13 +74,15 @@ export default async function runAxe (element, options = {}) {
   return result
 }
 
-function formatError (violations) {
+function formatError(violations) {
   return violations.map((violation) => {
     return [
       `[${violation.id}] ${violation.help}`,
-      violation.nodes.map(function (node) {
-        return node.target.toString()
-      }).join('\n'),
+      violation.nodes
+        .map(function (node) {
+          return node.target.toString()
+        })
+        .join('\n'),
       violation.description,
       `${violation.helpUrl}\n`
     ].join('\n')

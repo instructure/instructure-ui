@@ -31,7 +31,10 @@ import { TextInput } from '@instructure/ui-text-input'
 import { SimpleSelect } from '@instructure/ui-simple-select'
 import { Checkbox } from '@instructure/ui-checkbox'
 import { FormFieldGroup } from '@instructure/ui-form-field'
-import { ScreenReaderContent, AccessibleContent } from '@instructure/ui-a11y-content'
+import {
+  ScreenReaderContent,
+  AccessibleContent
+} from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-modal'
 import { CodeEditor } from '@instructure/ui-code-editor'
 import { themeable } from '@instructure/ui-themeable'
@@ -52,7 +55,7 @@ class Icons extends Component {
     packageName: PropTypes.string.isRequired
   }
 
-  constructor (props, context) {
+  constructor(props, context) {
     super(props, context)
 
     this.state = {
@@ -64,7 +67,7 @@ class Icons extends Component {
     }
   }
 
-  get selectedFormatKey () {
+  get selectedFormatKey() {
     const { formats, selectedFormat } = this.props
     const keys = Object.keys(formats)
 
@@ -77,12 +80,12 @@ class Icons extends Component {
     }
   }
 
-  get selectedFormat () {
+  get selectedFormat() {
     const { formats } = this.props
     return formats[this.selectedFormatKey]
   }
 
-  get selectedGlyphs () {
+  get selectedGlyphs() {
     const glyphs = {}
 
     Object.keys(this.selectedFormat.glyphs).forEach((glyphName) => {
@@ -95,7 +98,7 @@ class Icons extends Component {
     return glyphs
   }
 
-  handleSearchChange = (e) => this.setState({query: e.target.value})
+  handleSearchChange = (e) => this.setState({ query: e.target.value })
 
   handleFormatChange = (e, o) => {
     window.location.hash = `#${o.value}`
@@ -115,7 +118,7 @@ class Icons extends Component {
     })
   }
 
-  renderHeader () {
+  renderHeader() {
     const { formats } = this.props
     return (
       <div className={styles.header}>
@@ -139,8 +142,10 @@ class Icons extends Component {
             size="large"
             value={this.selectedFormatKey}
           >
-            {Object.keys(formats).map(key => (
-              <SimpleSelect.Option value={key} id={key} key={`${key}`}>{formats[key].format}</SimpleSelect.Option>
+            {Object.keys(formats).map((key) => (
+              <SimpleSelect.Option value={key} id={key} key={`${key}`}>
+                {formats[key].format}
+              </SimpleSelect.Option>
             ))}
           </SimpleSelect>
           {this.renderBidirectionToggle()}
@@ -149,7 +154,7 @@ class Icons extends Component {
     )
   }
 
-  renderFooter () {
+  renderFooter() {
     return (
       <div>
         <Heading level="h2" as="h3" margin="medium 0">
@@ -165,7 +170,7 @@ class Icons extends Component {
     )
   }
 
-  renderBidirectionToggle () {
+  renderBidirectionToggle() {
     return (
       <Checkbox
         label={
@@ -180,7 +185,7 @@ class Icons extends Component {
     )
   }
 
-  renderUsage (name, variant, glyph) {
+  renderUsage(name, variant, glyph) {
     const { requirePath, packageName } = this.selectedFormat
 
     let example
@@ -223,14 +228,17 @@ class MyIcon extends React.Component {
           language="javascript"
           readOnly
         />
-        { glyph.displayName &&
-          <p>See the <Link href="#SVGIcon">SVGIcon</Link> component for props and examples.</p>
-        }
+        {glyph.displayName && (
+          <p>
+            See the <Link href="#SVGIcon">SVGIcon</Link> component for props and
+            examples.
+          </p>
+        )}
       </div>
     )
   }
 
-  renderGlyph (name, variants) {
+  renderGlyph(name, variants) {
     const firstVariant = variants[Object.keys(variants)[0]]
     return firstVariant.deprecated ? null : (
       <div className={styles.glyph} key={name}>
@@ -244,53 +252,50 @@ class MyIcon extends React.Component {
     )
   }
 
-  render () {
+  render() {
     const { name, variant, glyph } = this.state
 
     return (
       <div className={styles.root}>
         {this.renderHeader()}
         <div className={styles.glyphs}>
-          {
-            Object.keys(this.selectedGlyphs)
-              .filter(name => new RegExp(this.state.query.replace(/([^\w\d-])/gi, '\\$1'), 'i').test(name))
-              .map(name => this.renderGlyph(name, this.selectedGlyphs[name]))
-          }
+          {Object.keys(this.selectedGlyphs)
+            .filter((name) =>
+              new RegExp(
+                this.state.query.replace(/([^\w\d-])/gi, '\\$1'),
+                'i'
+              ).test(name)
+            )
+            .map((name) => this.renderGlyph(name, this.selectedGlyphs[name]))}
         </div>
         {this.renderFooter()}
-        {
-          (name && variant && glyph) ? (
-            <Modal
-              open
-              onDismiss={this.handleModalDismiss}
-              label={`Usage: ${name} ${variant}`}
-              size="medium"
-              shouldCloseOnDocumentClick
-            >
-              <Modal.Header>
-                <Flex justifyItems="space-between">
-                  <Flex.Item>
-                    <Heading>
-                      {`${glyph.glyphName} (${variant})`}
-                    </Heading>
-                  </Flex.Item>
-                  <Flex.Item>
-                    <IconButton
-                      onClick={this.handleModalDismiss}
-                      screenReaderLabel="Close"
-                      renderIcon={IconXSolid}
-                      withBorder={false}
-                      withBackground={false}
-                    />
-                  </Flex.Item>
-                </Flex>
-              </Modal.Header>
-              <Modal.Body>
-                {this.renderUsage(name, variant, glyph)}
-              </Modal.Body>
-            </Modal>
-          ) : null
-        }
+        {name && variant && glyph ? (
+          <Modal
+            open
+            onDismiss={this.handleModalDismiss}
+            label={`Usage: ${name} ${variant}`}
+            size="medium"
+            shouldCloseOnDocumentClick
+          >
+            <Modal.Header>
+              <Flex justifyItems="space-between">
+                <Flex.Item>
+                  <Heading>{`${glyph.glyphName} (${variant})`}</Heading>
+                </Flex.Item>
+                <Flex.Item>
+                  <IconButton
+                    onClick={this.handleModalDismiss}
+                    screenReaderLabel="Close"
+                    renderIcon={IconXSolid}
+                    withBorder={false}
+                    withBackground={false}
+                  />
+                </Flex.Item>
+              </Flex>
+            </Modal.Header>
+            <Modal.Body>{this.renderUsage(name, variant, glyph)}</Modal.Body>
+          </Modal>
+        ) : null}
       </div>
     )
   }

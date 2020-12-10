@@ -27,7 +27,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps, matchComponentTypes, callRenderProp, safeCloneElement } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  matchComponentTypes,
+  callRenderProp,
+  safeCloneElement
+} from '@instructure/ui-react-utils'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { uid } from '@instructure/uid'
@@ -52,20 +57,20 @@ class Options extends Component {
 
   static propTypes = {
     /**
-    * Element type to render as
-    */
+     * Element type to render as
+     */
     as: PropTypes.elementType,
     /**
-    * The aria role of the element
-    */
+     * The aria role of the element
+     */
     role: PropTypes.string,
     /**
-    * The the actual list element
-    */
+     * The the actual list element
+     */
     elementRef: PropTypes.func,
     /**
-    * Content to render as a label. Mostly for when the component is nested
-    */
+     * Content to render as a label. Mostly for when the component is nested
+     */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     children: ChildrenPropTypes.oneOf(['Options', 'Item', 'Separator'])
   }
@@ -80,7 +85,7 @@ class Options extends Component {
 
   _labelId = uid('Options-label')
 
-  get childAs () {
+  get childAs() {
     const { as } = this.props
     if (as === 'ul' || as === 'ol') {
       return 'li'
@@ -88,7 +93,7 @@ class Options extends Component {
     return undefined
   }
 
-  renderLabel () {
+  renderLabel() {
     const { renderLabel } = this.props
     return (
       <span
@@ -103,19 +108,15 @@ class Options extends Component {
     )
   }
 
-  renderSubList (children) {
+  renderSubList(children) {
     return (
-      <Item
-        as={this.childAs}
-        role="presentation"
-        className={styles.label}
-      >
+      <Item as={this.childAs} role="presentation" className={styles.label}>
         {children}
       </Item>
     )
   }
 
-  renderChildren () {
+  renderChildren() {
     const { children } = this.props
 
     return Children.map(children, (child) => {
@@ -129,24 +130,16 @@ class Options extends Component {
     })
   }
 
-  render () {
+  render() {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Options.propTypes),
       Options
     )
 
-    const {
-      as,
-      role,
-      elementRef,
-      renderLabel
-    } = this.props
+    const { as, role, elementRef, renderLabel } = this.props
 
     return (
-      <div
-        className={styles.root}
-        role="presentation"
-      >
+      <div className={styles.root} role="presentation">
         {renderLabel && this.renderLabel()}
         <View
           {...passthroughProps}

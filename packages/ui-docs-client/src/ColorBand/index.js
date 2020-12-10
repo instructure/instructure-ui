@@ -43,7 +43,7 @@ class ColorBand extends Component {
     height: '1.25rem'
   }
 
-  render () {
+  render() {
     return (
       <View
         display="block"
@@ -53,28 +53,28 @@ class ColorBand extends Component {
       >
         <Flex height="100%" alignItems="stretch" justifyItems="end">
           <Flex.Item size="7%">
-            <span className={
-              classnames({
+            <span
+              className={classnames({
                 [styles.tile]: true,
                 [styles.colorAlert]: true
-              })
-            }></span>
+              })}
+            ></span>
           </Flex.Item>
           <Flex.Item size="10%">
-            <span className={
-              classnames({
+            <span
+              className={classnames({
                 [styles.tile]: true,
                 [styles.colorWarning]: true
-              })
-            }></span>
+              })}
+            ></span>
           </Flex.Item>
           <Flex.Item size="15%">
-            <span className={
-              classnames({
+            <span
+              className={classnames({
                 [styles.tile]: true,
                 [styles.colorDanger]: true
-              })
-            }></span>
+              })}
+            ></span>
           </Flex.Item>
         </Flex>
       </View>

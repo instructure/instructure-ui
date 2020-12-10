@@ -38,7 +38,7 @@ import { getComputedStyle } from './getComputedStyle'
  * will determine visibility based only on the styles of the given node.
  * @returns {boolean} if the element is visible
  */
-function isVisible (el, recursive = true) {
+function isVisible(el, recursive = true) {
   const node = el && findDOMNode(el)
   // skip document or window nodes
   if (node === window || node === document || node === document.body) {
@@ -60,7 +60,11 @@ function isVisible (el, recursive = true) {
     return false
   }
   // hidden by clipping
-  if (style.overflow === 'hidden' && style.position === 'absolute' && style.clip !== 'auto') {
+  if (
+    style.overflow === 'hidden' &&
+    style.position === 'absolute' &&
+    style.clip !== 'auto'
+  ) {
     let rect = style.clip.substring(5).slice(0, -1).split(', ')
     let zeros = true
     rect.forEach((a) => {

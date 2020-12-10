@@ -122,13 +122,20 @@ class DrawerTray extends Component {
     /**
      * An element or a function returning an element to focus by default
      */
-    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    defaultFocusElement: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
 
     /**
      * An element, function returning an element, or array of elements that will not be hidden from
      * the screen reader when the `<DrawerLayout.Tray />` is open
      */
-    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+    liveRegion: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+      PropTypes.func
+    ]),
     onDismiss: PropTypes.func,
     shouldContainFocus: PropTypes.bool,
     shouldReturnFocus: PropTypes.bool,
@@ -172,7 +179,7 @@ class DrawerTray extends Component {
     portalOpen: false
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.open !== prevProps.open) {
       this.setState({
         transitioning: true
@@ -180,16 +187,16 @@ class DrawerTray extends Component {
     }
   }
 
-  get placement () {
+  get placement() {
     const { placement } = this.props
     return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
-  get direction () {
-    return (this.placement === 'end') ? 'right' : 'left'
+  get direction() {
+    return this.placement === 'end' ? 'right' : 'left'
   }
 
-  get transition () {
+  get transition() {
     return `slide-${this.direction}`
   }
 
@@ -219,15 +226,15 @@ class DrawerTray extends Component {
     })
   }
 
-  get DOMNode () {
+  get DOMNode() {
     return this._DOMNode
   }
 
-  set DOMNode (el) {
+  set DOMNode(el) {
     this._DOMNode = el
   }
 
-  renderContent () {
+  renderContent() {
     const { children, render } = this.props
 
     if (typeof render === 'function') {
@@ -239,7 +246,7 @@ class DrawerTray extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       label,
       children,
@@ -271,7 +278,7 @@ class DrawerTray extends Component {
 
     const { shouldOverlayTray } = this.context
     const { portalOpen } = this.state
-    const needsPortal = (shouldOverlayTray && mountNode)
+    const needsPortal = shouldOverlayTray && mountNode
 
     let transitionIn = open
 
@@ -286,10 +293,18 @@ class DrawerTray extends Component {
         onTransition={onTransition}
         onEnter={onEnter}
         onEntering={onEntering}
-        onEntered={createChainedFunction(this.handleTransitionEntered, onEntered, onOpen)}
+        onEntered={createChainedFunction(
+          this.handleTransitionEntered,
+          onEntered,
+          onOpen
+        )}
         onExit={onExit}
         onExiting={onExiting}
-        onExited={createChainedFunction(this.handleTransitionExited, onExited, onClose)}
+        onExited={createChainedFunction(
+          this.handleTransitionExited,
+          onExited,
+          onClose
+        )}
         unmountOnExit
       >
         <div
@@ -302,37 +317,35 @@ class DrawerTray extends Component {
             [styles[`placement--${this.placement}`]]: true
           })}
         >
-          {
-            (this.state.transitioning) ? this.renderContent() : (
-              <Dialog
-                open
-                role={shouldOverlayTray ? 'dialog' : 'region'}
-                label={label}
-                shouldReturnFocus={shouldReturnFocus}
-                shouldContainFocus={shouldContainFocus && shouldOverlayTray}
-                shouldCloseOnDocumentClick={shouldCloseOnDocumentClick && shouldOverlayTray}
-                shouldCloseOnEscape={shouldCloseOnEscape && shouldOverlayTray}
-                defaultFocusElement={defaultFocusElement}
-                liveRegion={liveRegion}
-                onDismiss={onDismiss}
-                as="div"
-                className={styles.content}
-              >
-                {this.renderContent()}
-              </Dialog>
-            )
-          }
+          {this.state.transitioning ? (
+            this.renderContent()
+          ) : (
+            <Dialog
+              open
+              role={shouldOverlayTray ? 'dialog' : 'region'}
+              label={label}
+              shouldReturnFocus={shouldReturnFocus}
+              shouldContainFocus={shouldContainFocus && shouldOverlayTray}
+              shouldCloseOnDocumentClick={
+                shouldCloseOnDocumentClick && shouldOverlayTray
+              }
+              shouldCloseOnEscape={shouldCloseOnEscape && shouldOverlayTray}
+              defaultFocusElement={defaultFocusElement}
+              liveRegion={liveRegion}
+              onDismiss={onDismiss}
+              as="div"
+              className={styles.content}
+            >
+              {this.renderContent()}
+            </Dialog>
+          )}
         </div>
       </Transition>
     )
 
     if (needsPortal) {
       return (
-        <Portal
-          mountNode={mountNode}
-          open
-          onOpen={this.handlePortalOpen}
-        >
+        <Portal mountNode={mountNode} open onOpen={this.handlePortalOpen}>
           {content}
         </Portal>
       )

@@ -31,26 +31,20 @@ import styles from '../styles.css'
 
 describe('<ContextView />', async () => {
   it('should render', async () => {
-    const subject = await mount(
-      <ContextView />
-    )
+    const subject = await mount(<ContextView />)
 
     expect(subject.getDOMNode()).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(
-      <ContextView />
-    )
+    const subject = await mount(<ContextView />)
 
     const contextView = within(subject.getDOMNode())
     expect(await contextView.accessible()).to.be.true()
   })
 
   it('should apply default styled arrow by default', async () => {
-    const subject = await mount(
-      <ContextView />
-    )
+    const subject = await mount(<ContextView />)
 
     const contextView = within(subject.getDOMNode())
     const arrow = await contextView.find(`.${styles['arrow']}`)
@@ -59,9 +53,7 @@ describe('<ContextView />', async () => {
   })
 
   it('should apply inverse arrow when inverse is set', async () => {
-    const subject = await mount(
-      <ContextView background="inverse" />
-    )
+    const subject = await mount(<ContextView background="inverse" />)
 
     const contextView = within(subject.getDOMNode())
     const arrow = await contextView.find(`.${styles['arrow']}`)
@@ -69,11 +61,9 @@ describe('<ContextView />', async () => {
     expect(arrow.hasClass(styles['arrow--inverse'])).to.be.true()
   })
 
-  function testPlacement (placement) {
+  function testPlacement(placement) {
     it(`should apply placement classes for ${placement}`, async () => {
-      const subject = await mount(
-        <ContextView placement={placement} />
-      )
+      const subject = await mount(<ContextView placement={placement} />)
       const classname = styles[`placement--${placement.split(' ').join('-')}`]
       const contextView = within(subject.getDOMNode())
 
@@ -95,13 +85,10 @@ describe('<ContextView />', async () => {
   testPlacement('end bottom')
   testPlacement('offscreen')
 
-  function testArrowPlacement (placement, mirror) {
+  function testArrowPlacement(placement, mirror) {
     it(`should mirror the arrow position based on the placement for ${placement}`, async () => {
       const subject = await mount(
-        <ContextView
-          placement={placement}
-          padding="small"
-        >
+        <ContextView placement={placement} padding="small">
           Hello World
         </ContextView>
       )

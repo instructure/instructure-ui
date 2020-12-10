@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
- export default function generator ({ typography }) {
-   return {
-     fontFamily: typography.fontFamily
-   }
- }
+export default function generator({ typography }) {
+  return {
+    fontFamily: typography.fontFamily
+  }
+}

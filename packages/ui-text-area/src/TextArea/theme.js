@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, borders, spacing, typography, forms }) {
+export default function generator({
+  colors,
+  borders,
+  spacing,
+  typography,
+  forms
+}) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,

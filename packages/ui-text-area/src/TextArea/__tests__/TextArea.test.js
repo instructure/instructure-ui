@@ -33,11 +33,7 @@ import styles from '../styles.css'
 describe('TextArea', async () => {
   it('should accept a default value', async () => {
     await mount(
-      <TextArea
-        label="Name"
-        autoGrow={false}
-        defaultValue="Tom Servo"
-      />
+      <TextArea label="Name" autoGrow={false} defaultValue="Tom Servo" />
     )
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
@@ -46,24 +42,13 @@ describe('TextArea', async () => {
   })
 
   it('should include a label', async () => {
-    await mount(
-      <TextArea
-        label="Name"
-        autoGrow={false}
-      />
-    )
+    await mount(<TextArea label="Name" autoGrow={false} />)
     const textArea = await TextAreaLocator.find(':label(Name)')
     expect(textArea).to.exist()
   })
 
   it('should set an initial height', async () => {
-    await mount(
-      <TextArea
-        label="Name"
-        autoGrow={false}
-        height="100px"
-      />
-    )
+    await mount(<TextArea label="Name" autoGrow={false} height="100px" />)
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
 
@@ -72,19 +57,17 @@ describe('TextArea', async () => {
 
   it('should resize if autoGrow is true', async () => {
     const subject = await mount(
-      <TextArea
-        label="Name"
-        autoGrow={true}
-        width="500px"
-        onChange={stub}
-      />
+      <TextArea label="Name" autoGrow={true} width="500px" onChange={stub} />
     )
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
     const initialHeight = parseInt(input.getComputedStyle().height, 10)
 
     /* eslint-disable max-len */
-    await subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
+    await subject.setProps({
+      value:
+        'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'
+    })
     /* eslint-enable max-len */
 
     let resizedHeight
@@ -95,7 +78,10 @@ describe('TextArea', async () => {
 
     /* Ensure minHeight that matches input height is being applied to container */
     const layout = await textArea.find(`.${styles.layout}`)
-    const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
+    const layoutMinHeight = parseInt(
+      layout.getComputedStyle().getPropertyValue('min-height'),
+      10
+    )
     expect(resizedHeight).to.equal(layoutMinHeight)
   })
 
@@ -135,11 +121,19 @@ describe('TextArea', async () => {
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
 
-    expect(input.getComputedStyle().getPropertyValue('max-height')).to.contain('160px')
+    expect(input.getComputedStyle().getPropertyValue('max-height')).to.contain(
+      '160px'
+    )
     /* ensure maxHeight is being applied to input container and not exceeded by minHeight style */
     const layout = await textArea.find(`.${styles.layout}`)
-    const layoutMaxHeight = parseInt(layout.getComputedStyle().getPropertyValue('max-height'), 10)
-    const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
+    const layoutMaxHeight = parseInt(
+      layout.getComputedStyle().getPropertyValue('max-height'),
+      10
+    )
+    const layoutMinHeight = parseInt(
+      layout.getComputedStyle().getPropertyValue('min-height'),
+      10
+    )
     expect(layoutMaxHeight).to.equal(160)
     expect(layoutMaxHeight).to.be.above(layoutMinHeight)
   })
@@ -150,7 +144,7 @@ describe('TextArea', async () => {
       <TextArea
         label="Name"
         autoGrow={false}
-        componentRef={el => ref = el}
+        componentRef={(el) => (ref = el)}
       />
     )
     const textArea = await TextAreaLocator.find()
@@ -166,7 +160,7 @@ describe('TextArea', async () => {
       <TextArea
         label="Name"
         autoGrow={false}
-        componentRef={el => ref = el}
+        componentRef={(el) => (ref = el)}
       />
     )
 
@@ -177,11 +171,7 @@ describe('TextArea', async () => {
   it('should provide an textareaRef prop', async () => {
     const textareaRef = stub()
     await mount(
-      <TextArea
-        label="Name"
-        autoGrow={false}
-        textareaRef={textareaRef}
-      />
+      <TextArea label="Name" autoGrow={false} textareaRef={textareaRef} />
     )
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
@@ -196,7 +186,7 @@ describe('TextArea', async () => {
         label="Name"
         autoGrow={false}
         defaultValue="bar"
-        componentRef={el => ref = el}
+        componentRef={(el) => (ref = el)}
       />
     )
 
@@ -207,11 +197,7 @@ describe('TextArea', async () => {
     it('responds to onChange event', async () => {
       const onChange = stub()
       await mount(
-        <TextArea
-          label="Name"
-          autoGrow={false}
-          onChange={onChange}
-        />
+        <TextArea label="Name" autoGrow={false} onChange={onChange} />
       )
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
@@ -224,12 +210,7 @@ describe('TextArea', async () => {
     it('does not respond to onChange event when disabled', async () => {
       const onChange = stub()
       await mount(
-        <TextArea
-          disabled
-          label="Name"
-          autoGrow={false}
-          onChange={onChange}
-        />
+        <TextArea disabled label="Name" autoGrow={false} onChange={onChange} />
       )
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
@@ -242,12 +223,7 @@ describe('TextArea', async () => {
     it('does not respond to onChange event when readOnly', async () => {
       const onChange = stub()
       await mount(
-        <TextArea
-          readOnly
-          label="Name"
-          autoGrow={false}
-          onChange={onChange}
-        />
+        <TextArea readOnly label="Name" autoGrow={false} onChange={onChange} />
       )
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
@@ -258,13 +234,7 @@ describe('TextArea', async () => {
 
     it('responds to onBlur event', async () => {
       const onBlur = stub()
-      await mount(
-        <TextArea
-          label="Name"
-          autoGrow={false}
-          onBlur={onBlur}
-        />
-      )
+      await mount(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
 
@@ -275,13 +245,7 @@ describe('TextArea', async () => {
 
     it('responds to onFocus event', async () => {
       const onFocus = stub()
-      await mount(
-        <TextArea
-          label="Name"
-          autoGrow={false}
-          onFocus={onFocus}
-        />
-      )
+      await mount(<TextArea label="Name" autoGrow={false} onFocus={onFocus} />)
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
 
@@ -293,12 +257,7 @@ describe('TextArea', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      await mount(
-        <TextArea
-          label="Name"
-          autoGrow={false}
-        />
-      )
+      await mount(<TextArea label="Name" autoGrow={false} />)
       const textArea = await TextAreaLocator.find()
       expect(await textArea.accessible()).to.be.true()
     })

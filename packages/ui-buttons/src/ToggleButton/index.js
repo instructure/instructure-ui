@@ -48,18 +48,20 @@ class ToggleButton extends Component {
     /**
      * Text to render in the tooltip shown on hover/focus
      */
-    renderTooltipContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    renderTooltipContent: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
-    * An icon or function that returns an icon
-    */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * An icon or function that returns an icon
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
      * Toggles the `aria-pressed` attribute on the button (`true` if `pressed`; `false` if `unpressed`)
      */
     status: PropTypes.oneOf(['pressed', 'unpressed']).isRequired,
     /**
-    * The element to render as the component root; `button` by default
-    */
+     * The element to render as the component root; `button` by default
+     */
     as: PropTypes.elementType,
     /**
      * Specifies if interaction with `ToggleButton` is `enabled`, `disabled`, or `readonly`
@@ -116,7 +118,7 @@ class ToggleButton extends Component {
     constrain: 'window'
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -124,12 +126,13 @@ class ToggleButton extends Component {
     }
   }
 
-  get isShowingTooltip () {
+  get isShowingTooltip() {
     return typeof this.props.isShowingTooltip === 'undefined'
-      ? this.state.isShowingTooltip : this.props.isShowingTooltip
+      ? this.state.isShowingTooltip
+      : this.props.isShowingTooltip
   }
 
-  render () {
+  render() {
     const {
       as,
       color,

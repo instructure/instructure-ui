@@ -25,9 +25,7 @@ import React from 'react'
 
 export default {
   maxExamplesPerPage: 50,
-  propValues: {
-
-  },
+  propValues: {},
   getComponentProps: (props) => {
     return {
       renderTip: 'Hello world',

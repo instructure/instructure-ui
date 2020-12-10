@@ -30,31 +30,29 @@ import { TextDirectionContext } from '../TextDirectionContext'
 
 @bidirectional()
 class BidirectionalComponent extends React.Component {
-  render () {
+  render() {
     return <div data-dir={this.dir}>Hello World</div>
   }
 }
 
 describe('@bidirectional', async () => {
   it('should take on the direction of the document by default', async () => {
-    const subject = await mount(
-      <BidirectionalComponent />
-    )
+    const subject = await mount(<BidirectionalComponent />)
 
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
   })
 
   it('should set the text direction via props', async () => {
-    const subject = await mount(
-      <BidirectionalComponent dir="rtl" />
-    )
+    const subject = await mount(<BidirectionalComponent dir="rtl" />)
 
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
 
   it('should give context preference when props and context are present', async () => {
     const context = TextDirectionContext.makeTextDirectionContext('rtl')
-    const subject = await mount(<BidirectionalComponent dir="ltr" />, { context })
+    const subject = await mount(<BidirectionalComponent dir="ltr" />, {
+      context
+    })
 
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })

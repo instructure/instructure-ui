@@ -28,11 +28,20 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
-import { IconArrowOpenDownLine, IconArrowOpenUpLine } from '@instructure/ui-icons'
+import {
+  IconArrowOpenDownLine,
+  IconArrowOpenUpLine
+} from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { omitProps, pickProps, callRenderProp, deprecated, getInteraction } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  pickProps,
+  callRenderProp,
+  deprecated,
+  getInteraction
+} from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -53,19 +62,20 @@ id: NumberInput
 class NumberInput extends Component {
   static propTypes = {
     /**
-    * The form field label.
-    */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * The form field label.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
-    * The id of the input. One is generated if not supplied.
-    */
+     * The id of the input. One is generated if not supplied.
+     */
     id: PropTypes.string,
     /**
-    * Specifies if interaction with the input is enabled, disabled, or readonly.
-    * When "disabled", the input changes visibly to indicate that it cannot
-    * receive user interactions. When "readonly" the input still cannot receive
-    * user interactions but it keeps the same styles as if it were enabled.
-    */
+     * Specifies if interaction with the input is enabled, disabled, or readonly.
+     * When "disabled", the input changes visibly to indicate that it cannot
+     * receive user interactions. When "readonly" the input still cannot receive
+     * user interactions but it keeps the same styles as if it were enabled.
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
      * Object with shape: `{
@@ -80,46 +90,46 @@ class NumberInput extends Component {
      */
     placeholder: PropTypes.string,
     /**
-    * Whether or not the text input is required.
-    */
+     * Whether or not the text input is required.
+     */
     isRequired: PropTypes.bool,
     /**
      * Whether or not to display the up/down arrow buttons.
      */
     showArrows: PropTypes.bool,
     /**
-    * The size of the input.
-    */
+     * The size of the input.
+     */
     size: PropTypes.oneOf(['medium', 'large']),
     /**
      * The value of the input (should be accompanied by an `onChange` prop).
      */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * The width of the input.
-    */
+     * The width of the input.
+     */
     width: PropTypes.string,
     /**
-    * The display of the root element.
-    */
+     * The display of the root element.
+     */
     display: PropTypes.oneOf(['inline-block', 'block']),
     /**
      * A function that provides a reference to the actual input element.
      */
     inputRef: PropTypes.func,
     /**
-    * Callback fired when input receives focus.
-    */
+     * Callback fired when input receives focus.
+     */
     onFocus: PropTypes.func,
     /**
-    * Callback fired when the input loses focus.
-    */
+     * Callback fired when the input loses focus.
+     */
     onBlur: PropTypes.func,
     /**
-    * Callback executed when the input fires a change event.
-    * @param {Object} event - the event object
-    * @param {Object} value - the string value of the input
-    */
+     * Callback executed when the input fires a change event.
+     * @param {Object} event - the event object
+     * @param {Object} value - the string value of the input
+     */
     onChange: PropTypes.func,
     /**
      * Called when the down arrow button is clicked, or the down arrow key is
@@ -132,8 +142,8 @@ class NumberInput extends Component {
      */
     onIncrement: PropTypes.func,
     /**
-    * Callback fired when a key is pressed.
-    */
+     * Callback fired when a key is pressed.
+     */
     onKeyDown: PropTypes.func,
     /**
      * __Deprecated - use `renderLabel` instead__
@@ -178,7 +188,7 @@ class NumberInput extends Component {
   state = { hasFocus: false }
   _input = null
 
-  get id () {
+  get id() {
     if (this.props.id) {
       return this.props.id
     }
@@ -188,14 +198,14 @@ class NumberInput extends Component {
     return this._id
   }
 
-  get invalid () {
+  get invalid() {
     return (
       this.props.messages &&
       this.props.messages.some((message) => message.type === 'error')
     )
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
@@ -238,7 +248,7 @@ class NumberInput extends Component {
     this.arrowClicked(event, this.props.onDecrement)
   }
 
-  arrowClicked (event, callback) {
+  arrowClicked(event, callback) {
     const { interaction } = this
 
     event.preventDefault()
@@ -248,7 +258,7 @@ class NumberInput extends Component {
     }
   }
 
-  renderArrows () {
+  renderArrows() {
     return (
       <span className={styles.arrowContainer}>
         <button
@@ -273,7 +283,7 @@ class NumberInput extends Component {
     )
   }
 
-  render () {
+  render() {
     const {
       label,
       renderLabel,

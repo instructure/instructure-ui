@@ -46,19 +46,19 @@ const apiForEmptyNode = {
  * @param {ReactComponent|DomNode} element - component or DOM node
  * @return {Object} object containing classList functions 'contains', 'add', and 'remove'
  */
-function getClassList (element) {
+function getClassList(element) {
   const node = findDOMNode(element)
 
   if (!node) return apiForEmptyNode
 
   const classListApi = {
-    toArray () {
+    toArray() {
       shimClassListForIE()
       return [...node.classList]
     }
   }
 
-  ;['contains', 'add', 'remove'].forEach(method => {
+  ;['contains', 'add', 'remove'].forEach((method) => {
     classListApi[method] = (className) => {
       shimClassListForIE()
       return node.classList[method](className)
@@ -68,11 +68,20 @@ function getClassList (element) {
   return classListApi
 }
 
-function shimClassListForIE () { // IE 11 doesn't support classList on SVG elements
+function shimClassListForIE() {
+  // IE 11 doesn't support classList on SVG elements
   /* istanbul ignore if */
   if (!classListShimmed) {
-    if (!('classList' in document.createElementNS('http://www.w3.org/2000/svg', 'g'))) {
-      const descr = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'classList')
+    if (
+      !(
+        'classList' in
+        document.createElementNS('http://www.w3.org/2000/svg', 'g')
+      )
+    ) {
+      const descr = Object.getOwnPropertyDescriptor(
+        HTMLElement.prototype,
+        'classList'
+      )
       Object.defineProperty(SVGElement.prototype, 'classList', descr)
     }
     classListShimmed = true

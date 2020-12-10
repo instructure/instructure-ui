@@ -31,8 +31,8 @@ export default {
   },
   filter: (props) => {
     return (
-      props.variant === 'simple' && props.context !== 'off' ||
-      props.variant === 'toggle' && !props.checked && props.context !== 'off'
+      (props.variant === 'simple' && props.context !== 'off') ||
+      (props.variant === 'toggle' && !props.checked && props.context !== 'off')
     )
   }
 }

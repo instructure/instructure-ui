@@ -50,7 +50,13 @@ class GridCol extends Component {
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     textAlign: PropTypes.oneOf(['start', 'end', 'center', 'inherit']),
-    hAlign: PropTypes.oneOf(['start', 'center', 'end', 'space-around', 'space-between']),
+    hAlign: PropTypes.oneOf([
+      'start',
+      'center',
+      'end',
+      'space-around',
+      'space-between'
+    ]),
     vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
     startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
     visualDebug: PropTypes.bool,
@@ -86,25 +92,22 @@ class GridCol extends Component {
     elementRef: undefined
   }
 
-  startAtClass () {
-    return !!this.props.startAt && (
+  startAtClass() {
+    return (
+      !!this.props.startAt &&
       `startAt${capitalizeFirstLetter(this.props.startAt)}`
     )
   }
 
-  colSpacingClass () {
-    return (
-      `colSpacing${capitalizeFirstLetter(this.props.colSpacing)}`
-    )
+  colSpacingClass() {
+    return `colSpacing${capitalizeFirstLetter(this.props.colSpacing)}`
   }
 
-  rowSpacingClass () {
-    return (
-      `rowSpacing${capitalizeFirstLetter(this.props.rowSpacing)}`
-    )
+  rowSpacingClass() {
+    return `rowSpacing${capitalizeFirstLetter(this.props.rowSpacing)}`
   }
 
-  breakpointClass (breakpoint) {
+  breakpointClass(breakpoint) {
     let { width } = this.props
 
     if (width && typeof width === 'object') {
@@ -116,7 +119,7 @@ class GridCol extends Component {
     return `${breakpoint}--${width}`
   }
 
-  breakpointOffsetClass (breakpoint) {
+  breakpointOffsetClass(breakpoint) {
     let { offset } = this.props
 
     if (offset && typeof offset === 'object') {
@@ -128,28 +131,25 @@ class GridCol extends Component {
     return `${breakpoint}-offset--${offset}`
   }
 
-  enabledBreakpoints () {
+  enabledBreakpoints() {
     const breakpoints = ['small', 'medium', 'large', 'x-large', null]
     return breakpoints.slice(breakpoints.indexOf(this.props.startAt))
   }
 
-  breakpointIsEnabled (breakpoint) {
-    return (this.enabledBreakpoints().indexOf(breakpoint) >= 0)
+  breakpointIsEnabled(breakpoint) {
+    return this.enabledBreakpoints().indexOf(breakpoint) >= 0
   }
 
-  breakpointIsEnabledForWidth (breakpoint) {
+  breakpointIsEnabledForWidth(breakpoint) {
     return !!this.props.width && this.breakpointIsEnabled(breakpoint)
   }
 
-  breakpointIsEnabledForOffset (breakpoint) {
+  breakpointIsEnabledForOffset(breakpoint) {
     return !!this.props.offset && this.breakpointIsEnabled(breakpoint)
   }
 
-  render () {
-    const {
-      children,
-      visualDebug
-    } = this.props
+  render() {
+    const { children, visualDebug } = this.props
 
     const classes = {
       [styles.root]: true,
@@ -162,15 +162,31 @@ class GridCol extends Component {
       [styles.lastRow]: this.props.isLastRow,
       [styles.lastCol]: this.props.isLastCol,
 
-      [styles[this.breakpointClass('small')]]: this.breakpointIsEnabledForWidth('small'),
-      [styles[this.breakpointClass('medium')]]: this.breakpointIsEnabledForWidth('medium'),
-      [styles[this.breakpointClass('large')]]: this.breakpointIsEnabledForWidth('large'),
-      [styles[this.breakpointClass('x-large')]]: this.breakpointIsEnabledForWidth('x-large'),
+      [styles[this.breakpointClass('small')]]: this.breakpointIsEnabledForWidth(
+        'small'
+      ),
+      [styles[
+        this.breakpointClass('medium')
+      ]]: this.breakpointIsEnabledForWidth('medium'),
+      [styles[this.breakpointClass('large')]]: this.breakpointIsEnabledForWidth(
+        'large'
+      ),
+      [styles[
+        this.breakpointClass('x-large')
+      ]]: this.breakpointIsEnabledForWidth('x-large'),
 
-      [styles[this.breakpointOffsetClass('small')]]: this.breakpointIsEnabledForOffset('small'),
-      [styles[this.breakpointOffsetClass('medium')]]: this.breakpointIsEnabledForOffset('medium'),
-      [styles[this.breakpointOffsetClass('large')]]: this.breakpointIsEnabledForOffset('large'),
-      [styles[this.breakpointOffsetClass('x-large')]]: this.breakpointIsEnabledForOffset('x-large'),
+      [styles[
+        this.breakpointOffsetClass('small')
+      ]]: this.breakpointIsEnabledForOffset('small'),
+      [styles[
+        this.breakpointOffsetClass('medium')
+      ]]: this.breakpointIsEnabledForOffset('medium'),
+      [styles[
+        this.breakpointOffsetClass('large')
+      ]]: this.breakpointIsEnabledForOffset('large'),
+      [styles[
+        this.breakpointOffsetClass('x-large')
+      ]]: this.breakpointIsEnabledForOffset('x-large'),
 
       [styles.visualDebug]: visualDebug
     }

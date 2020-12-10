@@ -25,7 +25,7 @@
 // TODO: For v8.0.0 we will map primaryColor to textDark and do away with default (color)
 // NOTE: This will make it so no pill is going to inherit the brand color per product design
 
-export default function generator ({ borders, colors, spacing, typography }) {
+export default function generator({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
     padding: `0 ${spacing.xSmall}`,
@@ -51,6 +51,6 @@ export default function generator ({ borders, colors, spacing, typography }) {
 
 generator['instructure'] = function () {
   return {
-    height: '1.5rem',
+    height: '1.5rem'
   }
 }

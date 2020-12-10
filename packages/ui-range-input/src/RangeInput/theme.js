@@ -24,7 +24,7 @@
 
 import { alpha, darken } from '@instructure/ui-color-utils'
 
-export default function generator ({ colors, typography, spacing, forms }) {
+export default function generator({ colors, typography, spacing, forms }) {
   return {
     minWidth: '12.5rem',
 

@@ -35,7 +35,7 @@ export default {
     return {
       caption: 'Top rated movies',
       children: [
-        <Table.Head key={"head"}>
+        <Table.Head key={'head'}>
           <Table.Row>
             <Table.ColHeader id="rank">Rank</Table.ColHeader>
             <Table.ColHeader id="title">Title</Table.ColHeader>
@@ -43,7 +43,7 @@ export default {
             <Table.ColHeader id="rating">Rating</Table.ColHeader>
           </Table.Row>
         </Table.Head>,
-        <Table.Body key={"body"}>
+        <Table.Body key={'body'}>
           <Table.Row>
             <Table.RowHeader>1</Table.RowHeader>
             <Table.Cell>The Shawshank Redemption</Table.Cell>

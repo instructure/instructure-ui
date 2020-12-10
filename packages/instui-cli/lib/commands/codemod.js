@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 
-const {
-  handleExecuteCodemods,
-  handleViewParserConfig
-} = require('../handlers')
+const { handleExecuteCodemods, handleViewParserConfig } = require('../handlers')
 
 exports.command = 'codemod'
 exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
@@ -34,14 +31,16 @@ exports.builder = (yargs) => {
   yargs.option('path', {
     alias: 'p',
     type: 'string',
-    describe: 'The path to the source where the codemod will be applied (defaults to current working directory).',
+    describe:
+      'The path to the source where the codemod will be applied (defaults to current working directory).',
     default: process.cwd()
   })
 
   yargs.option('scopeModifications', {
     alias: 'scope-modifications',
     type: 'array',
-    describe: 'Specify the scope of the code modifications. For example, specifying only `imports` will limit the code changes to imports only.',
+    describe:
+      'Specify the scope of the code modifications. For example, specifying only `imports` will limit the code changes to imports only.',
     choices: ['imports', 'props'],
     default: ['imports', 'props']
   })
@@ -49,14 +48,16 @@ exports.builder = (yargs) => {
   yargs.option('ignore', {
     alias: 'i',
     type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).',
+    describe:
+      'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).',
     default: ['**/node_modules/**']
   })
 
   yargs.option('version', {
     alias: 'v',
     type: 'string',
-    describe: 'A semantic instructure-ui version number. When provided, the source will be modified to be compatible with the specified version. When omitted, the source will be modified to be compatible with the latest stable version.',
+    describe:
+      'A semantic instructure-ui version number. When provided, the source will be modified to be compatible with the specified version. When omitted, the source will be modified to be compatible with the latest stable version.',
     default: null
   })
 
@@ -69,7 +70,8 @@ exports.builder = (yargs) => {
 
   yargs.option('parser-config', {
     type: 'string',
-    describe: 'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
+    describe:
+      'jscodeshift `parser-config` argument. A path to your own JSON file containing a custom parser configuration for flow or babylon. To view the default instructure-ui config use `instui codemod view-parser-config`',
     default: null
   })
 

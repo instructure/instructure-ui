@@ -70,19 +70,11 @@ class Document extends Component {
     })
   }
 
-  renderProps (doc) {
-    const {
-      id,
-      props
-    } = doc
+  renderProps(doc) {
+    const { id, props } = doc
     return props ? (
       <View margin="x-large 0" display="block">
-        <Heading
-          level="h2"
-          as="h3"
-          id={`${id}Properties`}
-          margin="0 0 small 0"
-        >
+        <Heading level="h2" as="h3" id={`${id}Properties`} margin="0 0 small 0">
           Properties
         </Heading>
         <Properties props={props} layout={this.props.layout} />
@@ -90,19 +82,14 @@ class Document extends Component {
     ) : null
   }
 
-  renderTheme (doc) {
+  renderTheme(doc) {
     const { themeKey } = this.props
     const { generateTheme } = doc
-    const theme = (typeof generateTheme === 'function') && generateTheme(themeKey)
+    const theme = typeof generateTheme === 'function' && generateTheme(themeKey)
 
     return theme && Object.keys(theme).length > 0 ? (
       <View margin="x-large 0" display="block">
-        <Heading
-          level="h2"
-          as="h3"
-          id={`${doc.id}Theme`}
-          margin="0 0 small 0"
-        >
+        <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Theme Variables
         </Heading>
         <ComponentTheme theme={theme} />
@@ -110,11 +97,8 @@ class Document extends Component {
     ) : null
   }
 
-  renderDescription (doc, description) {
-    const {
-      id,
-      title
-    } = doc
+  renderDescription(doc, description) {
+    const { id, title } = doc
 
     return this.props.description ? (
       <Description
@@ -125,22 +109,27 @@ class Document extends Component {
     ) : null
   }
 
-  renderSrcLink () {
+  renderSrcLink() {
     const { srcUrl, srcPath } = this.props.doc
 
     if (!srcUrl) return
 
     return (
       <View as="div" margin="0 0 x-large 0">
-        <Link href={srcUrl}>
-          {srcPath}
-        </Link>
+        <Link href={srcUrl}>{srcPath}</Link>
       </View>
     )
   }
 
-  renderUsage () {
-    const { esPath, id, displayName, packageName, title, resource } = this.props.doc
+  renderUsage() {
+    const {
+      esPath,
+      id,
+      displayName,
+      packageName,
+      title,
+      resource
+    } = this.props.doc
     const importName = displayName || resource.displayName || id
 
     let example = []
@@ -163,12 +152,7 @@ import { ${importName} } from '${esPath}'
 
     return (
       <View margin="xx-large 0" display="block">
-        <Heading
-          level="h2"
-          as="h3"
-          id={`${id}Usage`}
-          margin="0 0 small 0"
-        >
+        <Heading level="h2" as="h3" id={`${id}Usage`} margin="0 0 small 0">
           Usage
         </Heading>
         <View margin="0 0 small 0" display="block">
@@ -189,20 +173,12 @@ import { ${importName} } from '${esPath}'
     )
   }
 
-  renderParams (doc) {
-    const {
-      id,
-      params
-    } = doc
+  renderParams(doc) {
+    const { id, params } = doc
 
     return params ? (
       <View margin="small 0" display="block">
-        <Heading
-          level="h2"
-          as="h3"
-          id={`${id}Parameters`}
-          margin="0 0 small 0"
-        >
+        <Heading level="h2" as="h3" id={`${id}Parameters`} margin="0 0 small 0">
           Parameters
         </Heading>
         <Params params={params} layout={this.props.layout} />
@@ -210,20 +186,12 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderReturns (doc) {
-    const {
-      id,
-      returns
-    } = doc
+  renderReturns(doc) {
+    const { id, returns } = doc
 
     return returns ? (
       <View margin="small 0" display="block">
-        <Heading
-          level="h2"
-          as="h3"
-          id={`${id}Returns`}
-          margin="0 0 small 0"
-        >
+        <Heading level="h2" as="h3" id={`${id}Returns`} margin="0 0 small 0">
           Returns
         </Heading>
         <Returns types={returns} />
@@ -231,20 +199,12 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderMethods (doc) {
-    const {
-      id,
-      methods
-    } = doc
+  renderMethods(doc) {
+    const { id, methods } = doc
 
-    return (methods && methods.length > 0) ? (
+    return methods && methods.length > 0 ? (
       <View margin="small 0" display="block">
-        <Heading
-          level="h2"
-          as="h3"
-          id={`${id}Methods`}
-          margin="0 0 small 0"
-        >
+        <Heading level="h2" as="h3" id={`${id}Methods`} margin="0 0 small 0">
           Methods
         </Heading>
         <Methods methods={methods} />
@@ -252,7 +212,7 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  renderDetails (doc) {
+  renderDetails(doc) {
     return this.hasDetails(doc) ? (
       <div>
         {this.renderParams(doc)}
@@ -264,37 +224,54 @@ import { ${importName} } from '${esPath}'
     ) : null
   }
 
-  hasDetails (doc) {
-    return doc.params || doc.returns || doc.methods || doc.props || doc.generateTheme
+  hasDetails(doc) {
+    return (
+      doc.params || doc.returns || doc.methods || doc.props || doc.generateTheme
+    )
   }
 
-  render () {
+  render() {
     const { doc, repository, layout } = this.props
     const children = doc.children || []
 
     let details = null
 
     if (this.hasDetails(doc)) {
-      details = (children.length > 0) ? (
-        <Tabs onRequestTabChange={this.handleDetailsTabChange}>
-          <Tabs.Panel renderTitle={doc.title} key={`${doc.id}TabPanel`} isSelected={this.state.selectedDetailsTabIndex === 0}>
-            {this.renderDetails(doc)}
-          </Tabs.Panel>
-          {children.map((child, index) => (
-            <Tabs.Panel renderTitle={child.title} key={`${child.id}TabPanel`} isSelected={this.state.selectedDetailsTabIndex === index + 1}>
-              {this.renderDescription(child, child.description)}
-              {this.renderDetails(child)}
+      details =
+        children.length > 0 ? (
+          <Tabs onRequestTabChange={this.handleDetailsTabChange}>
+            <Tabs.Panel
+              renderTitle={doc.title}
+              key={`${doc.id}TabPanel`}
+              isSelected={this.state.selectedDetailsTabIndex === 0}
+            >
+              {this.renderDetails(doc)}
             </Tabs.Panel>
-          ))}
-        </Tabs>
-      ) : this.renderDetails(doc)
+            {children.map((child, index) => (
+              <Tabs.Panel
+                renderTitle={child.title}
+                key={`${child.id}TabPanel`}
+                isSelected={this.state.selectedDetailsTabIndex === index + 1}
+              >
+                {this.renderDescription(child, child.description)}
+                {this.renderDetails(child)}
+              </Tabs.Panel>
+            ))}
+          </Tabs>
+        ) : (
+          this.renderDetails(doc)
+        )
     }
 
     let sections
 
     if (doc.sections) {
-      sections = doc.sections.map(section => (
-        <View margin="small 0" display="block" key={`${doc.id}.${section.name}`}>
+      sections = doc.sections.map((section) => (
+        <View
+          margin="small 0"
+          display="block"
+          key={`${doc.id}.${section.name}`}
+        >
           <Heading
             level="h2"
             as="h3"
@@ -302,7 +279,7 @@ import { ${importName} } from '${esPath}'
             id={`${doc.id}.${section.name}`}
             margin="large 0 small 0"
           >
-            { section.kind && <code>{section.kind}</code> }
+            {section.kind && <code>{section.kind}</code>}
             {section.title}
           </Heading>
           {this.renderDescription(section, section.description)}
@@ -313,12 +290,17 @@ import { ${importName} } from '${esPath}'
 
     return (
       <div>
-        { doc.extension !== '.md' && this.renderSrcLink() }
-        { this.renderDescription(doc, this.props.description) }
-        { details }
-        { sections }
-        { doc.resource && this.renderUsage() }
-        { (repository && layout !== 'small') && <GithubCorner href={repository} bannerColor={this.theme.githubCornerColor} /> }
+        {doc.extension !== '.md' && this.renderSrcLink()}
+        {this.renderDescription(doc, this.props.description)}
+        {details}
+        {sections}
+        {doc.resource && this.renderUsage()}
+        {repository && layout !== 'small' && (
+          <GithubCorner
+            href={repository}
+            bannerColor={this.theme.githubCornerColor}
+          />
+        )}
       </div>
     )
   }

@@ -38,7 +38,7 @@ describe('hash', () => {
     expect(error).to.be.true()
   })
 
-  it ('should allow specifying a max length', () => {
+  it('should allow specifying a max length', () => {
     const result = hash('some value', 4)
     expect(result).to.exist()
     expect(result.length).to.equal(4)
@@ -414,33 +414,37 @@ describe('hash', () => {
 
   describe('classes', () => {
     it('hashes two identical classes to the same value', () => {
-      const result1 = hash(class Something {
-        constructor (settings) {
-          this._settings = settings
-        }
+      const result1 = hash(
+        class Something {
+          constructor(settings) {
+            this._settings = settings
+          }
 
-        get settings () {
-          return this._settings
-        }
+          get settings() {
+            return this._settings
+          }
 
-        doSomething = () => {
-          return 'doing something'
+          doSomething = () => {
+            return 'doing something'
+          }
         }
-      })
+      )
 
-      const result2 = hash(class Something {
-        constructor(settings) {
-          this._settings = settings
-        }
+      const result2 = hash(
+        class Something {
+          constructor(settings) {
+            this._settings = settings
+          }
 
-        get settings() {
-          return this._settings
-        }
+          get settings() {
+            return this._settings
+          }
 
-        doSomething = () => {
-          return 'doing something'
+          doSomething = () => {
+            return 'doing something'
+          }
         }
-      })
+      )
 
       expect(result1).to.exist()
       expect(result2).to.exist()
@@ -449,33 +453,37 @@ describe('hash', () => {
     })
 
     it('hashes two classes with different content to different values', () => {
-      const result1 = hash(class Something {
-        constructor(settings) {
-          this.settings = settings
-        }
+      const result1 = hash(
+        class Something {
+          constructor(settings) {
+            this.settings = settings
+          }
 
-        get settings() {
-          return this.settings
-        }
+          get settings() {
+            return this.settings
+          }
 
-        doSomething = () => {
-          return 'doing something'
+          doSomething = () => {
+            return 'doing something'
+          }
         }
-      })
+      )
 
-      const result2 = hash(class Something {
-        constructor(settings) {
-          this._settings = settings
-        }
+      const result2 = hash(
+        class Something {
+          constructor(settings) {
+            this._settings = settings
+          }
 
-        get settings() {
-          return this._settings
-        }
+          get settings() {
+            return this._settings
+          }
 
-        doSomething = () => {
-          return 'doing something'
+          doSomething = () => {
+            return 'doing something'
+          }
         }
-      })
+      )
 
       expect(result1).to.exist()
       expect(result2).to.exist()
@@ -484,33 +492,37 @@ describe('hash', () => {
     })
 
     it('hashes two classes with different names to different values', () => {
-      const result1 = hash(class Something {
-        constructor(settings) {
-          this._settings = settings
-        }
+      const result1 = hash(
+        class Something {
+          constructor(settings) {
+            this._settings = settings
+          }
 
-        get settings() {
-          return this._settings
-        }
+          get settings() {
+            return this._settings
+          }
 
-        doSomething = () => {
-          return 'doing something'
+          doSomething = () => {
+            return 'doing something'
+          }
         }
-      })
+      )
 
-      const result2 = hash(class Somethin {
-        constructor(settings) {
-          this._settings = settings
-        }
+      const result2 = hash(
+        class Somethin {
+          constructor(settings) {
+            this._settings = settings
+          }
 
-        get settings() {
-          return this._settings
-        }
+          get settings() {
+            return this._settings
+          }
 
-        doSomething = () => {
-          return 'doing something'
+          doSomething = () => {
+            return 'doing something'
+          }
         }
-      })
+      )
 
       expect(result1).to.exist()
       expect(result2).to.exist()
@@ -529,4 +541,3 @@ describe('hash', () => {
     })
   })
 })
-

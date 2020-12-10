@@ -39,10 +39,7 @@ describe('safeCloneElement', async () => {
     const cloneRef = stub()
 
     await mount(
-      <SafeClone
-        element={<div ref={origRef} />}
-        props={{ref: cloneRef}}
-      />
+      <SafeClone element={<div ref={origRef} />} props={{ ref: cloneRef }} />
     )
 
     expect(origRef).to.have.been.called()
@@ -75,7 +72,7 @@ describe('safeCloneElement', async () => {
     const subject = await mount(
       <SafeClone
         element={<button onClick={onClickA} />}
-        props={{ onClick: createChainedFunction(onClickB, onClickC)}}
+        props={{ onClick: createChainedFunction(onClickB, onClickC) }}
       />
     )
 

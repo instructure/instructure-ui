@@ -26,7 +26,8 @@ const { warn } = require('@instructure/command-utils')
 const { handleCreateComponent } = require('../handlers')
 
 exports.command = 'create-component'
-exports.desc = 'Generate a component within a new package or within an existing package. (Note: This command has been moved to `@instructure/ui-template-scripts`)'
+exports.desc =
+  'Generate a component within a new package or within an existing package. (Note: This command has been moved to `@instructure/ui-template-scripts`)'
 
 exports.builder = (yargs) => {
   yargs.option('template', {
@@ -39,13 +40,15 @@ exports.builder = (yargs) => {
   yargs.option('path', {
     alias: 'p',
     type: 'string',
-    describe: 'The path where the generated component will be located. If the path is to a monorepo containing packages, optionally suggests packages to choose from where the component will be created.'
+    describe:
+      'The path where the generated component will be located. If the path is to a monorepo containing packages, optionally suggests packages to choose from where the component will be created.'
   })
 
   yargs.option('package-source', {
     alias: 'packageSource',
     type: 'string',
-    describe: 'The directory containing the package source code if the component is going to be created within an existing package.',
+    describe:
+      'The directory containing the package source code if the component is going to be created within an existing package.',
     default: 'src'
   })
 
@@ -58,19 +61,14 @@ exports.builder = (yargs) => {
 
   yargs.option('values', {
     type: 'string',
-    describe: 'A JSON string mapping variable names to values which will be used to replace variables in the template component. Ex. \'{"NAME":"MyComponent","VERSION":"12.0.0"}\'.',
+    describe:
+      'A JSON string mapping variable names to values which will be used to replace variables in the template component. Ex. \'{"NAME":"MyComponent","VERSION":"12.0.0"}\'.',
     default: '{}'
   })
 }
 
 exports.handler = async (argv) => {
-  const {
-    template,
-    path,
-    packageSource,
-    name,
-    values
-  } = argv
+  const { template, path, packageSource, name, values } = argv
 
   warn('This command has now been moved to `@instructure/ui-template-scripts`.')
 

@@ -35,13 +35,13 @@ import { canUseDOM } from './canUseDOM'
  * @module
  * @returns {boolean} true if object-fit is supported
  */
-function supportsObjectFit () {
+function supportsObjectFit() {
   if (!canUseDOM) {
     return false
   } else {
     // Detect browser support for object-fit
     // Don't need to sniff for Edge 16 bc it supports object-fit for <img>
-    return ('objectFit' in document.documentElement.style) !== false
+    return 'objectFit' in document.documentElement.style !== false
   }
 }
 

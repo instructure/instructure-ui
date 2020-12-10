@@ -84,9 +84,7 @@ describe('<Expandable />', async () => {
     }
     const renderSpy = spy(props, 'render')
 
-    await mount(
-      <Expandable {...props} />
-    )
+    await mount(<Expandable {...props} />)
 
     const args = renderSpy.lastCall.args[0]
     const onClick = args.getToggleProps().onClick
@@ -104,9 +102,7 @@ describe('<Expandable />', async () => {
     }
     const renderSpy = spy(props, 'render')
 
-    await mount(
-      <Expandable {...props} />
-    )
+    await mount(<Expandable {...props} />)
 
     const args = renderSpy.lastCall.args[0]
     expect(args.expanded).to.be.true()

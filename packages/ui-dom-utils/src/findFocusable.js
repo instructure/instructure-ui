@@ -36,14 +36,15 @@
 
 import { getComputedStyle, findDOMNode, elementMatches } from './'
 
-function findFocusable (el, filter, shouldSearchRootNode) {
+function findFocusable(el, filter, shouldSearchRootNode) {
   const element = findDOMNode(el)
 
   if (!element || typeof element.querySelectorAll !== 'function') {
     return []
   }
 
-  const focusableSelector = 'a[href],frame,iframe,object,input:not([type=hidden]),select,textarea,button,*[tabindex]'
+  const focusableSelector =
+    'a[href],frame,iframe,object,input:not([type=hidden]),select,textarea,button,*[tabindex]'
 
   let matches = Array.from(element.querySelectorAll(focusableSelector))
 
@@ -60,19 +61,29 @@ function findFocusable (el, filter, shouldSearchRootNode) {
   })
 }
 
-function hidden (element) {
+function hidden(element) {
   const cs = getComputedStyle(element)
-  return (cs.display !== 'inline' && element.offsetWidth <= 0 && element.offsetHeight <= 0) || cs.display === 'none'
+  return (
+    (cs.display !== 'inline' &&
+      element.offsetWidth <= 0 &&
+      element.offsetHeight <= 0) ||
+    cs.display === 'none'
+  )
 }
 
-function positioned (element) {
+function positioned(element) {
   const POS = ['fixed', 'absolute']
   if (POS.includes(element.style.position.toLowerCase())) return true
-  if (POS.includes(getComputedStyle(element).getPropertyValue('position').toLowerCase())) return true
+  if (
+    POS.includes(
+      getComputedStyle(element).getPropertyValue('position').toLowerCase()
+    )
+  )
+    return true
   return false
 }
 
-function visible (element) {
+function visible(element) {
   /* eslint no-param-reassign:0 */
   while (element) {
     if (element === document.body) break
@@ -83,26 +94,26 @@ function visible (element) {
   return true
 }
 
-function focusable (element) {
+function focusable(element) {
   return !element.disabled && visible(element)
 }
 
 export default findFocusable
 export {
   /**
-  * ---
-  * category: utilities/a11y
-  * ---
-  *
-  * Given an element, finds and returns all visible, focusable children.
-  * Focusable elements include input, select, textarea, button, and object.
-  * Anchor tags are also focusable if they include an href or
-  * tabindex attribute (including tabindeces less than zero).
-  *
-  * @param {ReactComponent|DomNode} el - component or DOM node
-  * @param {Function} filter - a function to filter the matching nodes
-  * @param {Boolean} shouldSearchRootNode - should the root node be included in the search
-  * @returns {Array} array of all tabbable children
-  */
+   * ---
+   * category: utilities/a11y
+   * ---
+   *
+   * Given an element, finds and returns all visible, focusable children.
+   * Focusable elements include input, select, textarea, button, and object.
+   * Anchor tags are also focusable if they include an href or
+   * tabindex attribute (including tabindeces less than zero).
+   *
+   * @param {ReactComponent|DomNode} el - component or DOM node
+   * @param {Function} filter - a function to filter the matching nodes
+   * @param {Boolean} shouldSearchRootNode - should the root node be included in the search
+   * @returns {Array} array of all tabbable children
+   */
   findFocusable
 }

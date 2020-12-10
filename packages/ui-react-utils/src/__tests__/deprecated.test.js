@@ -40,8 +40,12 @@ class TestComponent extends Component {
     qux: 'Hello'
   }
 
-  render () {
-    return <div>{this.props.qux} {this.props.bar}</div>
+  render() {
+    return (
+      <div>
+        {this.props.qux} {this.props.bar}
+      </div>
+    )
   }
 }
 
@@ -60,19 +64,18 @@ describe('@deprecated', async () => {
 
       await mount(<DeprecatedComponent foo="Jane" />)
 
-      expect(consoleWarn)
-        .to.have.been.calledWithMatch(warning)
+      expect(consoleWarn).to.have.been.calledWithMatch(warning)
     })
 
     it('should warn when using old prop with no new prop', async () => {
       const consoleWarn = stub(console, 'warn')
 
-      const warning = 'Warning: [TestComponent] `baz` is deprecated and will be removed in version 2.1.0.'
+      const warning =
+        'Warning: [TestComponent] `baz` is deprecated and will be removed in version 2.1.0.'
 
       await mount(<DeprecatedComponent baz="Goodbye" />)
 
-      expect(consoleWarn)
-        .to.have.been.calledWithMatch(warning)
+      expect(consoleWarn).to.have.been.calledWithMatch(warning)
     })
 
     it('should not output a warning using new prop', async () => {
@@ -90,20 +93,21 @@ describe('@deprecated', async () => {
     it('should warn that the entire component is deprecated if no old props are supplied', async () => {
       const consoleWarn = stub(console, 'warn')
 
-      const warning = 'Warning: [TestComponent] is deprecated and will be removed in version 3.4.0.'
+      const warning =
+        'Warning: [TestComponent] is deprecated and will be removed in version 3.4.0.'
 
       await mount(<DeprecatedComponent />)
 
-      expect(consoleWarn)
-        .to.have.been.calledWithMatch(warning)
+      expect(consoleWarn).to.have.been.calledWithMatch(warning)
     })
   })
 
   describe('deprecated component with a changed package message', async () => {
-    const DeprecatedComponent = deprecated('5.0.0', null, deprecated.changedPackageWarning(
-      'ui-forms',
-      'ui-number-input'
-    ))(TestComponent)
+    const DeprecatedComponent = deprecated(
+      '5.0.0',
+      null,
+      deprecated.changedPackageWarning('ui-forms', 'ui-number-input')
+    )(TestComponent)
 
     it('should warn that the component is deprecated and output a warning that the package changed', async () => {
       const consoleWarn = stub(console, 'warn')
@@ -125,20 +129,17 @@ describe('@deprecated', async () => {
 
       class DeprecatedPropValueComponent extends Component {
         static propTypes = {
-          color: deprecated.deprecatePropValues(PropTypes.oneOf([
-            'red',
-            'yellow',
-            'blue',
-            'orange',
-            'gold'
-          ]), ['blue', 'orange', 'gold'])
+          color: deprecated.deprecatePropValues(
+            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
+            ['blue', 'orange', 'gold']
+          )
         }
 
         static defaultProps = {
           color: 'red'
         }
 
-        render () {
+        render() {
           return <div>{this.props.color}</div>
         }
       }
@@ -155,13 +156,10 @@ describe('@deprecated', async () => {
 
       class DeprecatedPropValueComponent extends Component {
         static propTypes = {
-          color: deprecated.deprecatePropValues(PropTypes.oneOf([
-            'red',
-            'yellow',
-            'blue',
-            'orange',
-            'gold'
-          ]), ['blue', 'orange', 'gold'])
+          color: deprecated.deprecatePropValues(
+            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
+            ['blue', 'orange', 'gold']
+          )
         }
 
         static defaultProps = {
@@ -188,13 +186,11 @@ describe('@deprecated', async () => {
 
       class DeprecatedPropValueComponent extends Component {
         static propTypes = {
-          color: deprecated.deprecatePropValues(PropTypes.oneOf([
-            'red',
-            'yellow',
-            'blue',
-            'orange',
-            'gold'
-          ]), ['blue', 'orange', 'gold'], 'It will be removed in v8.0.0.')
+          color: deprecated.deprecatePropValues(
+            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
+            ['blue', 'orange', 'gold'],
+            'It will be removed in v8.0.0.'
+          )
         }
 
         static defaultProps = {
@@ -221,13 +217,11 @@ describe('@deprecated', async () => {
 
       class DeprecatedPropValueComponent extends Component {
         static propTypes = {
-          color: deprecated.deprecatePropValues(PropTypes.oneOf([
-            'red',
-            'yellow',
-            'blue',
-            'orange',
-            'gold'
-          ]), ['blue', 'orange', 'gold'], messageStub)
+          color: deprecated.deprecatePropValues(
+            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
+            ['blue', 'orange', 'gold'],
+            messageStub
+          )
         }
 
         static defaultProps = {
@@ -255,15 +249,12 @@ describe('@deprecated', async () => {
 
       class DeprecatedPropValueComponent extends Component {
         static propTypes = {
-          color: deprecated.deprecatePropValues(PropTypes.oneOf([
-            'red',
-            'yellow',
-            'blue',
-            'orange',
-            'gold'
-          ]), ['blue', 'orange', 'gold'], ({ propValue, propName }) => (
-            `The ${propValue} value for ${propName} has been deprecated. Use the FooBar component with the 'baz' prop set instead.`
-          ))
+          color: deprecated.deprecatePropValues(
+            PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
+            ['blue', 'orange', 'gold'],
+            ({ propValue, propName }) =>
+              `The ${propValue} value for ${propName} has been deprecated. Use the FooBar component with the 'baz' prop set instead.`
+          )
         }
 
         static defaultProps = {

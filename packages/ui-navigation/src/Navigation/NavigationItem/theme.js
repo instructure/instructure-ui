@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, typography, spacing, borders }) {
+export default function generator({ colors, typography, spacing, borders }) {
   return {
     fontSize: typography.fontSizeSmall,
     fontFamily: typography.fontFamily,
@@ -55,12 +55,15 @@ generator['canvas'] = function (variables) {
     iconColor: variables['ic-brand-global-nav-ic-icon-svg-fill'],
     backgroundColor: variables['ic-brand-global-nav-bgd'],
     hoverBackgroundColor: variables['ic-global-nav-link-hover'],
-    selectedFontColor: variables['ic-brand-global-nav-menu-item__text-color--active'],
-    selectedIconColor: variables['ic-brand-global-nav-ic-icon-svg-fill--active'],
+    selectedFontColor:
+      variables['ic-brand-global-nav-menu-item__text-color--active'],
+    selectedIconColor: variables['ic-brand-global-nav-ic-icon-svg-fill--active']
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
+  colors
+}) {
   return {
     linkTextDecoration: 'underline'
   }

@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
-
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import IconSVG from '!!raw-loader!./placeholder-logo.svg'
 
-export default function placeholderLogo (width = 84, height = 84) {
+export default function placeholderLogo(width = 84, height = 84) {
   // We need to base64 encode this because otherwise FF will add extra escape chars
-  const dataUri = btoa(IconSVG.replace(/{{w}}/g, width).replace(/{{h}}/g, height).trim())
+  const dataUri = btoa(
+    IconSVG.replace(/{{w}}/g, width).replace(/{{h}}/g, height).trim()
+  )
   return `data:image/svg+xml;base64,${dataUri}`
 }

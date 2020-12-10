@@ -23,7 +23,12 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import { Calendar } from '../index'
 import { CalendarLocator } from '../CalendarLocator'
@@ -58,9 +63,7 @@ describe('<Calendar />', async () => {
 
   it('should render children', async () => {
     await mount(
-      <Calendar renderWeekdayLabels={weekdayLabels}>
-        {generateDays()}
-      </Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
     )
 
     const calendar = await CalendarLocator.find()
@@ -87,9 +90,7 @@ describe('<Calendar />', async () => {
 
   it('should render weekday labels', async () => {
     const subject = await mount(
-      <Calendar renderWeekdayLabels={weekdayLabels}>
-        {generateDays()}
-      </Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
     )
 
     const calendar = await CalendarLocator.find()
@@ -109,7 +110,7 @@ describe('<Calendar />', async () => {
       () => 'W',
       () => 'T',
       () => 'F',
-      () => 'S',
+      () => 'S'
     ]
 
     await subject.setProps({
@@ -126,11 +127,7 @@ describe('<Calendar />', async () => {
   it('should warn if 7 weekday labels are not provided', async () => {
     const consoleError = stub(console, 'error')
 
-    await mount(
-      <Calendar renderWeekdayLabels={[]}>
-        {generateDays()}
-      </Calendar>
-    )
+    await mount(<Calendar renderWeekdayLabels={[]}>{generateDays()}</Calendar>)
 
     expect(consoleError).to.have.been.calledWithMatch(
       '`renderWeekdayLabels` should be an array with 7 labels (one for each weekday). 0 provided.'
@@ -139,9 +136,7 @@ describe('<Calendar />', async () => {
 
   it('should format the weekday labels and days correctly', async () => {
     await mount(
-      <Calendar renderWeekdayLabels={weekdayLabels}>
-        {generateDays()}
-      </Calendar>
+      <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
     )
 
     const calendar = await CalendarLocator.find()
@@ -250,10 +245,7 @@ describe('<Calendar />', async () => {
   describe('when role="listbox"', async () => {
     it('should set role="listbox" on table root and role="presentation" on the correct elements', async () => {
       await mount(
-        <Calendar
-          renderWeekdayLabels={weekdayLabels}
-          role="listbox"
-        >
+        <Calendar renderWeekdayLabels={weekdayLabels} role="listbox">
           {generateDays()}
         </Calendar>
       )
@@ -273,12 +265,9 @@ describe('<Calendar />', async () => {
       }
     })
 
-    it('should link each day with it\'s weekday header via `aria-describedby`', async () => {
+    it("should link each day with it's weekday header via `aria-describedby`", async () => {
       await mount(
-        <Calendar
-          renderWeekdayLabels={weekdayLabels}
-          role="listbox"
-        >
+        <Calendar renderWeekdayLabels={weekdayLabels} role="listbox">
           {generateDays()}
         </Calendar>
       )
@@ -289,18 +278,16 @@ describe('<Calendar />', async () => {
 
       days.forEach((day, i) => {
         const index = i % 7
-        expect(day.getAttribute('aria-describedby'))
-          .to.equal(headers[index].getAttribute('id'))
+        expect(day.getAttribute('aria-describedby')).to.equal(
+          headers[index].getAttribute('id')
+        )
       })
     })
   })
 
   it('should render root as designated by the `as` prop', async () => {
     await mount(
-      <Calendar
-        renderWeekdayLabels={weekdayLabels}
-        as="ul"
-      >
+      <Calendar renderWeekdayLabels={weekdayLabels} as="ul">
         {generateDays()}
       </Calendar>
     )

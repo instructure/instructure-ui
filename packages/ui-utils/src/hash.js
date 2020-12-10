@@ -24,7 +24,7 @@
 
 import stringify from 'json-stable-stringify'
 
-function toBase64 (input) {
+function toBase64(input) {
   const tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
   let output = ''
   const length = input.length
@@ -33,13 +33,16 @@ function toBase64 (input) {
   const b64pad = '='
 
   for (let i = 0; i < length; i += 3) {
-    triplet = (input.charCodeAt(i) << 16) | (i + 1 < length ? input.charCodeAt(i + 1) << 8 : 0) | (i + 2 < length ? input.charCodeAt(i + 2) : 0)
+    triplet =
+      (input.charCodeAt(i) << 16) |
+      (i + 1 < length ? input.charCodeAt(i + 1) << 8 : 0) |
+      (i + 2 < length ? input.charCodeAt(i + 2) : 0)
 
     for (let j = 0; j < 4; j += 1) {
       if (i * 8 + j * 6 > input.length * 8) {
         output += b64pad
       } else {
-        output += tab.charAt((triplet >>> 6 * (3 - j)) & 0x3F)
+        output += tab.charAt((triplet >>> (6 * (3 - j))) & 0x3f)
       }
     }
   }
@@ -47,21 +50,21 @@ function toBase64 (input) {
   return output
 }
 
-function executeHash (input) {
+function executeHash(input) {
   let hash = 0
 
   if (input.length === 0) return hash
 
   for (let i = 0; i < input.length; i++) {
     const c = input.charCodeAt(i)
-    hash = ((hash << 5) - hash) + c
+    hash = (hash << 5) - hash + c
     hash |= 0 // Convert to 32bit integer
   }
 
   return toBase64(String(hash))
 }
 
-function hash (value, maxLength) {
+function hash(value, maxLength) {
   if (typeof value === 'undefined') {
     throw new Error('Cannot hash a value which is undefined')
   }

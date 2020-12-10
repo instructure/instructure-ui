@@ -23,17 +23,19 @@
  */
 
 import React from 'react'
-import { expect, mount, find, accessible, wait } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  find,
+  accessible,
+  wait
+} from '@instructure/ui-test-utils'
 
 import { PresentationContent } from '../index'
 
 describe('<PresentationContent />', async () => {
   it('should render children with an aria-hidden attribute', async () => {
-    await mount(
-      <PresentationContent>
-        Hello World
-      </PresentationContent>
-    )
+    await mount(<PresentationContent>Hello World</PresentationContent>)
 
     const content = await find('[aria-hidden]')
 
@@ -48,11 +50,7 @@ describe('<PresentationContent />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    await mount(
-      <PresentationContent>
-        Hello World
-      </PresentationContent>
-    )
+    await mount(<PresentationContent>Hello World</PresentationContent>)
 
     expect(await accessible()).to.be.true()
   })

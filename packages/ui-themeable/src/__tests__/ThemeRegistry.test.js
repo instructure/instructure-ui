@@ -78,7 +78,8 @@ describe('ThemeRegistry', () => {
     registerTheme(baz)
 
     defaultTheme = registerTheme({
-      key: 'bar', variables: { red: 'magenta', brand: 'turquoise' },
+      key: 'bar',
+      variables: { red: 'magenta', brand: 'turquoise' },
       a11y: registerTheme(accessible)
     })
 
@@ -141,16 +142,16 @@ describe('ThemeRegistry', () => {
 
       defaultTheme.use({ accessible: true })
 
-
       const theme = generateTheme(undefined, {
         red: 'maroon'
       })
 
-      expect(consoleWarn)
-        .to.have.been.calledWith([
-          'Warning: [themeable] Theme, \'accessible\', is immutable.',
+      expect(consoleWarn).to.have.been.calledWith(
+        [
+          "Warning: [themeable] Theme, 'accessible', is immutable.",
           'Cannot apply overrides: {"red":"maroon"}'
-        ].join(' '))
+        ].join(' ')
+      )
 
       expect(theme[KEY].color).to.equal('salmon')
     })
@@ -201,15 +202,16 @@ describe('ThemeRegistry', () => {
 
       defaultTheme.use({ accessible: true })
 
-
       const theme = generateComponentTheme(KEY, undefined, {
         color: 'maroon'
       })
 
-      expect(consoleWarn).to.have.been.calledWith([
-        'Warning: [themeable] Theme \'accessible\' is immutable.',
-        'Cannot apply overrides for \'Symbol(ThemedComponent)\': {"color":"maroon"}'
-      ].join(' '))
+      expect(consoleWarn).to.have.been.calledWith(
+        [
+          "Warning: [themeable] Theme 'accessible' is immutable.",
+          'Cannot apply overrides for \'Symbol(ThemedComponent)\': {"color":"maroon"}'
+        ].join(' ')
+      )
 
       expect(theme.color).to.equal('salmon')
     })

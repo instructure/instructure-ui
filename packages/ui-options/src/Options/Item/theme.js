@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, typography, spacing }) {
+export default function generator({ colors, typography, spacing }) {
   return {
     fontSize: typography.fontSizeMedium,
     fontFamily: typography.fontFamily,

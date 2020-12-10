@@ -37,13 +37,14 @@ id: SimpleSelect.Group
 class Group extends Component {
   static propTypes = {
     /**
-    * The label associated with the group options.
-    */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * The label associated with the group options.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
-    * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
-    */
-    children: ChildrenPropTypes.oneOf([Option]),
+     * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
+     */
+    children: ChildrenPropTypes.oneOf([Option])
   }
 
   static defaultProps = {
@@ -51,7 +52,7 @@ class Group extends Component {
   }
 
   /* istanbul ignore next */
-  render () {
+  render() {
     // this component is only used for prop validation. Select.Group children
     // are parsed in Select and rendered as Options components
     return null

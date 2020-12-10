@@ -28,7 +28,7 @@ import keycode from 'keycode'
 import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldMessages   } from '@instructure/ui-form-field'
+import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
@@ -55,26 +55,23 @@ class Checkbox extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     id: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
+     * object with shape: `{
+     * text: PropTypes.string,
+     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     *   }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /* whether to set the input to checked or not on initial render */
     defaultChecked: PropTypes.bool,
     /**
-    * whether the input is checked or not (must be accompanied by an `onChange` prop)
-    */
+     * whether the input is checked or not (must be accompanied by an `onChange` prop)
+     */
     checked: controllable(PropTypes.bool, 'onChange', 'defaultChecked'),
     /**
-    * when used with the `checked` prop, the component will not control its own state
-    */
+     * when used with the `checked` prop, the component will not control its own state
+     */
     onChange: PropTypes.func,
     onKeyDown: PropTypes.func,
     onFocus: PropTypes.func,
@@ -90,8 +87,8 @@ class Checkbox extends Component {
      */
     readOnly: PropTypes.bool,
     /**
-    * Visual state showing that child checkboxes are a combination of checked and unchecked
-    */
+     * Visual state showing that child checkboxes are a combination of checked and unchecked
+     */
     indeterminate: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['simple', 'toggle']),
@@ -120,7 +117,7 @@ class Checkbox extends Component {
     labelPlacement: 'end'
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -165,8 +162,10 @@ class Checkbox extends Component {
   }
 
   handleKeyDown = (e) => {
-    if (this.props.variant === 'toggle' &&
-      (e.keyCode === keycode.codes.enter || e.keyCode === keycode.codes.return)) {
+    if (
+      this.props.variant === 'toggle' &&
+      (e.keyCode === keycode.codes.enter || e.keyCode === keycode.codes.return)
+    ) {
       this._input.click()
       e.preventDefault()
     }
@@ -196,23 +195,25 @@ class Checkbox extends Component {
     })
   }
 
-  get id () {
+  get id() {
     return this.props.id || this._defaultId
   }
 
-  get checked () {
-    return (typeof this.props.checked === 'undefined') ? this.state.checked : this.props.checked
+  get checked() {
+    return typeof this.props.checked === 'undefined'
+      ? this.state.checked
+      : this.props.checked
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._input)
   }
 
-  focus () {
+  focus() {
     this._input && this._input.focus()
   }
 
-  renderFacade () {
+  renderFacade() {
     const {
       size,
       disabled,
@@ -223,10 +224,7 @@ class Checkbox extends Component {
       labelPlacement
     } = this.props
 
-    const {
-      hovered,
-      focused
-    } = this.state
+    const { hovered, focused } = this.state
 
     error(
       !(variant === 'simple' && labelPlacement !== 'end'),
@@ -262,7 +260,7 @@ class Checkbox extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       inline,
       disabled,
@@ -304,7 +302,9 @@ class Checkbox extends Component {
           id={this.id}
           value={value}
           type="checkbox"
-          ref={(c) => { this._input = c }}
+          ref={(c) => {
+            this._input = c
+          }}
           disabled={disabled || readOnly}
           aria-checked={indeterminate ? 'mixed' : null}
           className={styles.input}
@@ -315,13 +315,13 @@ class Checkbox extends Component {
           checked={this.checked}
         />
         <label htmlFor={this.id} className={styles.control}>
-          { this.renderFacade() }
+          {this.renderFacade()}
           <FormFieldMessages messages={messages} />
         </label>
       </div>
     )
 
-     /* eslint-enable jsx-a11y/mouse-events-have-key-events */
+    /* eslint-enable jsx-a11y/mouse-events-have-key-events */
   }
 }
 

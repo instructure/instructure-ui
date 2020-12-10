@@ -36,7 +36,7 @@
  * @param {function} functions to chain
  * @returns {function|null}
  */
-function createChainedFunction (...funcs) {
+function createChainedFunction(...funcs) {
   return funcs
     .filter((f, i) => {
       if (f == null) {
@@ -49,14 +49,16 @@ function createChainedFunction (...funcs) {
     })
     .reduce((acc, f) => {
       if (typeof f !== 'function') {
-        throw new Error('Invalid Argument Type, must only provide functions, undefined, or null.')
+        throw new Error(
+          'Invalid Argument Type, must only provide functions, undefined, or null.'
+        )
       }
 
       if (acc === null) {
         return f
       }
 
-      return function chainedFunction (...args) {
+      return function chainedFunction(...args) {
         acc.apply(this, args)
         f.apply(this, args)
       }
@@ -70,7 +72,7 @@ function createChainedFunction (...funcs) {
  * @param {*} val The value to find indexes for
  * @return {array} All the indexes of the Array matching val
  */
-function getAllIndexes (arr, val) {
+function getAllIndexes(arr, val) {
   const indexes = []
 
   arr.forEach((e, i) => {

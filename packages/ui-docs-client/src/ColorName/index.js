@@ -32,7 +32,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 class ColorName extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -49,23 +49,19 @@ class ColorName extends Component {
     }
   }
 
-  renderText () {
+  renderText() {
     const { name, ...passthrough } = this.props
     return (
       <Text {...passthrough}>
         <strong aria-hidden>
-          <TruncateText onUpdate={this.handleUpdate}>
-            {name}
-          </TruncateText>
+          <TruncateText onUpdate={this.handleUpdate}>{name}</TruncateText>
         </strong>
-        <ScreenReaderContent>
-          {name}
-        </ScreenReaderContent>
+        <ScreenReaderContent>{name}</ScreenReaderContent>
       </Text>
     )
   }
 
-  render () {
+  render() {
     return this.state.isTruncated ? (
       <Tooltip
         renderTip={this.props.name}
@@ -73,7 +69,9 @@ class ColorName extends Component {
       >
         {this.renderText()}
       </Tooltip>
-    ) : this.renderText()
+    ) : (
+      this.renderText()
+    )
   }
 }
 

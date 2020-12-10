@@ -56,25 +56,25 @@ class MenuItem extends Component {
     /* whether to set the menu item state to selected or not on initial render */
     defaultSelected: PropTypes.bool,
     /**
-    * whether the menu item is selected or not (must be accompanied by an `onSelect` prop)
-    */
+     * whether the menu item is selected or not (must be accompanied by an `onSelect` prop)
+     */
     selected: controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
     /**
-    * when used with the `selected` prop, the component will not control its own state
-    */
+     * when used with the `selected` prop, the component will not control its own state
+     */
     onSelect: PropTypes.func,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
     onKeyUp: PropTypes.func,
     onMouseOver: PropTypes.func,
     /**
-    * the id of the element that the menu item will act upon
-    */
+     * the id of the element that the menu item will act upon
+     */
     controls: PropTypes.string,
     disabled: PropTypes.bool,
     /**
-    * the element type to render as (will default to `<a>` if href is provided)
-    */
+     * the element type to render as (will default to `<a>` if href is provided)
+     */
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -98,7 +98,7 @@ class MenuItem extends Component {
 
   static contextTypes = MenuContext.types
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     if (typeof props.selected === 'undefined') {
@@ -110,7 +110,7 @@ class MenuItem extends Component {
     this.labelId = uid('MenuItem__label')
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const context = MenuContext.getMenuContext(this.context)
 
     if (context && context.registerMenuItem) {
@@ -118,7 +118,7 @@ class MenuItem extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const context = MenuContext.getMenuContext(this.context)
 
     if (context && context.registerMenuItem) {
@@ -126,7 +126,7 @@ class MenuItem extends Component {
     }
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     const { onSelect, onClick, disabled, value } = this.props
     const selected = !this.selected
 
@@ -149,7 +149,7 @@ class MenuItem extends Component {
     }
   }
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     const spaceKey = e.keyCode === keycode.codes.space
     const enterKey = e.keyCode === keycode.codes.enter
 
@@ -164,7 +164,7 @@ class MenuItem extends Component {
     }
   }
 
-  handleKeyUp = e => {
+  handleKeyUp = (e) => {
     const spaceKey = e.keyCode === keycode.codes.space
     const enterKey = e.keyCode === keycode.codes.enter
 
@@ -186,11 +186,11 @@ class MenuItem extends Component {
     }
   }
 
-  get elementType () {
+  get elementType() {
     return getElementType(MenuItem, this.props)
   }
 
-  get role () {
+  get role() {
     switch (this.props.type) {
       case 'checkbox':
         return 'menuitemcheckbox'
@@ -203,47 +203,44 @@ class MenuItem extends Component {
     }
   }
 
-  get selected () {
-    return (typeof this.props.selected === 'undefined') ? this.state.selected : this.props.selected
+  get selected() {
+    return typeof this.props.selected === 'undefined'
+      ? this.state.selected
+      : this.props.selected
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._node)
   }
 
-  focus () {
+  focus() {
     findDOMNode(this._node).focus() // eslint-disable-line react/no-find-dom-node
   }
 
-  renderContent () {
+  renderContent() {
     const { children, type } = this.props
 
     return (
       <span>
-        {(type === 'checkbox' || type === 'radio') &&
+        {(type === 'checkbox' || type === 'radio') && (
           <span className={styles.icon}>
             {this.selected && <IconCheckSolid />}
-          </span>}
+          </span>
+        )}
         <span className={styles.label} id={this.labelId}>
           {children}
         </span>
-        {type === 'flyout' &&
+        {type === 'flyout' && (
           <span className={styles.icon}>
             <IconArrowOpenEndSolid />
-          </span>}
+          </span>
+        )}
       </span>
     )
   }
 
-  render () {
-    const {
-      disabled,
-      controls,
-      onKeyDown,
-      onKeyUp,
-      type,
-      href
-    } = this.props
+  render() {
+    const { disabled, controls, onKeyDown, onKeyUp, type, href } = this.props
 
     const props = omitProps(this.props, MenuItem.propTypes)
     const ElementType = this.elementType
@@ -262,11 +259,17 @@ class MenuItem extends Component {
         aria-labelledby={this.labelId}
         aria-disabled={disabled ? 'true' : null}
         aria-controls={controls}
-        aria-checked={type === 'checkbox' || type === 'radio' ? (this.selected ? 'true' : 'false') : null}
+        aria-checked={
+          type === 'checkbox' || type === 'radio'
+            ? this.selected
+              ? 'true'
+              : 'false'
+            : null
+        }
         onClick={this.handleClick}
         onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}
         onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
-        ref={c => {
+        ref={(c) => {
           this._node = c
         }}
         className={classnames(classes)}

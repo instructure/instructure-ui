@@ -71,7 +71,7 @@ const cursor = PropTypes.oneOf([
   'nesw-resize',
   'nwse-resize',
   'zoom-in',
-  'zoom-out',
+  'zoom-out'
 ])
 
 export default cursor

@@ -180,8 +180,11 @@ describe('<TreeBrowser />', async () => {
 
       expect((await tree.findAllItems()).length).to.equal(4)
 
-      expect(await tree.findItem(':label(Nested Sub Collection)', { expectEmpty: true }))
-        .to.not.exist()
+      expect(
+        await tree.findItem(':label(Nested Sub Collection)', {
+          expectEmpty: true
+        })
+      ).to.not.exist()
     })
   })
 
@@ -444,7 +447,9 @@ describe('<TreeBrowser />', async () => {
         />
       )
       const tree = await TreeBrowserLocator.find()
-      const icon = await tree.find('[name="IconDocument"]', { expectEmpty: true })
+      const icon = await tree.find('[name="IconDocument"]', {
+        expectEmpty: true
+      })
 
       expect(icon).to.not.exist()
     })
@@ -625,8 +630,7 @@ describe('<TreeBrowser />', async () => {
 
       await items[0].keyDown('right')
 
-      expect((await tree.findAllItems()).length)
-        .to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
     })
 
     it('should move focus down when right arrow is pressed on expanded collection', async () => {
@@ -709,8 +713,7 @@ describe('<TreeBrowser />', async () => {
         expect(firstItem.focused()).to.be.true()
       })
 
-      expect((await tree.findAllItems()).length)
-        .to.equal(4)
+      expect((await tree.findAllItems()).length).to.equal(4)
     })
 
     it('should select the node on enter or space if selectionType is not "none"', async () => {

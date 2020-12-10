@@ -104,7 +104,6 @@ describe('<Checkbox />', async () => {
         expect(onClick).to.have.been.called()
         expect(onChange).to.have.been.called()
       })
-
     })
 
     it('when clicked, does not call onClick or onChange when disabled', async () => {
@@ -238,7 +237,9 @@ describe('<Checkbox />', async () => {
           defaultChecked
           value="someValue"
           name="someName"
-          componentRef={(el) => { checkboxRef = el }}
+          componentRef={(el) => {
+            checkboxRef = el
+          }}
         />
       )
 
@@ -341,13 +342,7 @@ describe('<Checkbox />', async () => {
     it('should require a label', async () => {
       const consoleError = stub(console, 'error')
 
-      await mount(
-        <Checkbox
-          defaultChecked
-          value="someValue"
-          name="someName"
-        />
-      )
+      await mount(<Checkbox defaultChecked value="someValue" name="someName" />)
 
       await wait(() => {
         expect(consoleError).to.have.been.calledWithMatch(

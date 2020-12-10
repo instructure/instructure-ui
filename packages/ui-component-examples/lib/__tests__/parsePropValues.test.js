@@ -50,9 +50,8 @@ export default class TestComponent extends Component {
 `
 
 describe('parsePropValues', () => {
-  expect(parsePropValues(src))
-    .to.deep.equal({
-      variant: ['circle', 'rectangle'],
-      show: [false, true]
-    })
+  expect(parsePropValues(src)).to.deep.equal({
+    variant: ['circle', 'rectangle'],
+    show: [false, true]
+  })
 })

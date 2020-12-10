@@ -39,7 +39,7 @@ import { ownerWindow } from './ownerWindow'
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Object} a media query list object
  */
-function matchMedia (query, el) {
+function matchMedia(query, el) {
   const node = findDOMNode(el) || document
   return canUseDOM && ownerWindow(node).matchMedia(query)
 }

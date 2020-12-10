@@ -41,19 +41,14 @@ describe('<ModalBody />', async () => {
   })
 
   it('should set inverse styles', async () => {
-    await mount(
-      <ModalBody
-        variant="inverse" />
-    )
+    await mount(<ModalBody variant="inverse" />)
 
     const body = await ModalBodyLocator.find()
     expect(body.hasClass(styles['inverse'])).to.be.true()
   })
 
   it('should set 100% width and height when overflow is set to fit', async () => {
-    await mount(
-      <ModalBody overflow="fit" />
-    )
+    await mount(<ModalBody overflow="fit" />)
 
     const body = await ModalBodyLocator.find()
 
@@ -69,7 +64,7 @@ describe('<ModalBody />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .filter((prop) => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
@@ -79,8 +74,7 @@ describe('<ModalBody />', async () => {
               [prop]: 'foo'
             }
             await mount(<ModalBody {...props} />)
-            expect(consoleError)
-              .to.be.calledWith(warning)
+            expect(consoleError).to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
@@ -89,11 +83,9 @@ describe('<ModalBody />', async () => {
               [prop]: allowedProps[prop]
             }
             await mount(<ModalBody {...props} />)
-            expect(consoleError)
-              .to.not.be.called()
+            expect(consoleError).to.not.be.called()
           })
         }
-    })
+      })
   })
-
 })

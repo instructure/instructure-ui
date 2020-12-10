@@ -45,4 +45,3 @@ describe('uid', () => {
     expect(uid('foo', 5)).to.startWith('foo__')
   })
 })
-

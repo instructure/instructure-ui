@@ -36,10 +36,10 @@ import { getActiveElement } from './getActiveElement'
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {boolean} if the element contains the active element
  */
-function containsActiveElement (el) {
+function containsActiveElement(el) {
   const node = el && findDOMNode(el)
   const active = getActiveElement()
-  return (node && (active === node || contains(node,active)))
+  return node && (active === node || contains(node, active))
 }
 
 export default containsActiveElement

@@ -29,7 +29,7 @@ import { Menu, MenuItem, MenuItemSeparator, MenuItemGroup } from '../index'
 export default {
   maxExamplesPerPage: 50,
   propValues: {
-    trigger: [ <button key="open">Open Menu</button>, null ],
+    trigger: [<button key="open">Open Menu</button>, null],
     placement: [
       'bottom end',
       'bottom center',
@@ -71,38 +71,26 @@ export default {
   }
 }
 
-function getMenuChildren (defaultFlyoutOpen = false) {
+function getMenuChildren(defaultFlyoutOpen = false) {
   return [
-    <MenuItem key="1" value="mastery">Learning Mastery</MenuItem>,
-    <Menu
-      key="3"
-      label="More Options"
-      defaultShow={defaultFlyoutOpen}
-    >
-      <MenuItemGroup
-        allowMultiple
-        label="Select Many"
-      >
-        <MenuItem value="optionOne">
-          Option 1
-        </MenuItem>
+    <MenuItem key="1" value="mastery">
+      Learning Mastery
+    </MenuItem>,
+    <Menu key="3" label="More Options" defaultShow={defaultFlyoutOpen}>
+      <MenuItemGroup allowMultiple label="Select Many">
+        <MenuItem value="optionOne">Option 1</MenuItem>
       </MenuItemGroup>
       <MenuItemSeparator />
       <MenuItem value="navigation">Navigation</MenuItem>
     </Menu>,
     <MenuItemSeparator key="4" />,
-    <MenuItemGroup
-      key="5"
-      label="Select One"
-    >
-      <MenuItem value="itemOne">
-        Item 1
-      </MenuItem>
-      <MenuItem value="itemTwo">
-        Item 2
-      </MenuItem>
+    <MenuItemGroup key="5" label="Select One">
+      <MenuItem value="itemOne">Item 1</MenuItem>
+      <MenuItem value="itemTwo">Item 2</MenuItem>
     </MenuItemGroup>,
     <MenuItemSeparator key="6" />,
-    <MenuItem key="7" value="baz" disabled>Open grading history...</MenuItem>
+    <MenuItem key="7" value="baz" disabled>
+      Open grading history...
+    </MenuItem>
   ]
 }

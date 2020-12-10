@@ -34,12 +34,16 @@ import ReactDOM from 'react-dom'
  * @param {ReactComponent|DomNode} el - component, DOM node, or function returning a DOM node
  * @returns {DomNode} The root node of this element
  */
-function findDOMNode (el) {
+function findDOMNode(el) {
   const node = typeof el === 'function' ? el() : el
 
   if (node === document) {
     return document.documentElement
-  } else if (node instanceof Element || node === window || (node && typeof node.nodeType !== 'undefined')) {
+  } else if (
+    node instanceof Element ||
+    node === window ||
+    (node && typeof node.nodeType !== 'undefined')
+  ) {
     return node
   } else if (node) {
     return ReactDOM.findDOMNode(node) // eslint-disable-line react/no-find-dom-node

@@ -40,16 +40,25 @@
  *  ...
  * ```
  */
-function childrenOrValue (props, propName, componentName) {
+function childrenOrValue(props, propName, componentName) {
   if (props.as === 'input') {
-    if ((propName === 'children' && props.children) || props.value == undefined) {
-      return new Error(`Prop \`value\` and not \`children\` must be supplied if \`${componentName} as="input"\``)
+    if (
+      (propName === 'children' && props.children) ||
+      props.value == undefined
+    ) {
+      return new Error(
+        `Prop \`value\` and not \`children\` must be supplied if \`${componentName} as="input"\``
+      )
     }
   } else {
-    if ((propName === 'value' && props.value != undefined)) {
-      return new Error(`Prop \`children\` and not \`value\` must be supplied unless \`${componentName} as="input"\``)
+    if (propName === 'value' && props.value != undefined) {
+      return new Error(
+        `Prop \`children\` and not \`value\` must be supplied unless \`${componentName} as="input"\``
+      )
     } else if (!props.children) {
-      return new Error(`Prop \`children\` should be supplied unless \`${componentName} as="input"\`.`)
+      return new Error(
+        `Prop \`children\` should be supplied unless \`${componentName} as="input"\`.`
+      )
     }
   }
   return

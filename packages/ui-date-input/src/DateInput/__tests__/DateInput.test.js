@@ -23,7 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 import { Calendar } from '@instructure/ui-calendar'
 
 import Examples from '../__examples__/DateInput.examples'
@@ -270,7 +276,7 @@ describe('<DateInput />', async () => {
 
       const dateInput = await DateInputLocator.find()
 
-      await wait (() => {
+      await wait(() => {
         expect(dateInput).to.contain.text(text, { exact: false })
       })
     })
@@ -280,7 +286,8 @@ describe('<DateInput />', async () => {
         <DateInput
           renderLabel="Choose a date"
           renderWeekdayLabels={weekdayLabels}
-          data-custom-attr="true" name="my name"
+          data-custom-attr="true"
+          name="my name"
         >
           {generateDays()}
         </DateInput>
@@ -558,7 +565,11 @@ describe('<DateInput />', async () => {
         const onRequestValidateDate = stub()
 
         const days = generateDays()
-        days[4] = <Calendar.Day key="4" label="4" date="2019-09-28" isSelected>{4}</Calendar.Day>
+        days[4] = (
+          <Calendar.Day key="4" label="4" date="2019-09-28" isSelected>
+            {4}
+          </Calendar.Day>
+        )
 
         await mount(
           <DateInput
@@ -608,7 +619,11 @@ describe('<DateInput />', async () => {
 
     it('should call onRequestHideCalendar and onRequestValidateDate when date is selected and is outside month', async () => {
       const days = generateDays()
-      days[5] = <Calendar.Day key="5" label="5" date="2019-09-28" isOutsideMonth>outside</Calendar.Day>
+      days[5] = (
+        <Calendar.Day key="5" label="5" date="2019-09-28" isOutsideMonth>
+          outside
+        </Calendar.Day>
+      )
 
       const onRequestHideCalendar = stub()
       const onRequestValidateDate = stub()
@@ -777,7 +792,11 @@ describe('<DateInput />', async () => {
 
     it('should render days with the correct role', async () => {
       const days = generateDays()
-      days[5] = <Calendar.Day key="5" label="5" date="2019-09-28" id="5" isOutsideMonth>outside</Calendar.Day>
+      days[5] = (
+        <Calendar.Day key="5" label="5" date="2019-09-28" id="5" isOutsideMonth>
+          outside
+        </Calendar.Day>
+      )
 
       await mount(
         <DateInput
@@ -804,7 +823,11 @@ describe('<DateInput />', async () => {
 
     it('should assign aria-selected to the selected date and link it to the input', async () => {
       const days = generateDays()
-      days[7] = <Calendar.Day key="7" label="7" date="2019-09-28" id="7" isSelected>selected</Calendar.Day>
+      days[7] = (
+        <Calendar.Day key="7" label="7" date="2019-09-28" id="7" isSelected>
+          selected
+        </Calendar.Day>
+      )
 
       await mount(
         <DateInput
@@ -831,13 +854,13 @@ describe('<DateInput />', async () => {
       const input = await dateInput.findInput()
       const selectedDay = await calendar.findDay(':textContent(selected)')
 
-      expect(input.getAttribute('aria-activedescendant'))
-        .to.equal(selectedDay.getAttribute('id'))
+      expect(input.getAttribute('aria-activedescendant')).to.equal(
+        selectedDay.getAttribute('id')
+      )
     })
   })
 
   describe('with generated examples', async () => {
     generateA11yTests(Examples)
   })
-
 })

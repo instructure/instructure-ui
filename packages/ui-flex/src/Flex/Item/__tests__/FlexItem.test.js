@@ -29,9 +29,7 @@ import { Item } from '../index'
 
 describe('<Item />', async () => {
   it('should render children', async () => {
-    const subject = await mount(
-      <Item>Flex item 1</Item>
-    )
+    const subject = await mount(<Item>Flex item 1</Item>)
     const item = within(subject.getDOMNode())
     expect(item.find(':contains(Flex item 1)')).to.exist()
   })
@@ -48,9 +46,7 @@ describe('<Item />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(
-      <Item>Flex item 3</Item>
-    )
+    const subject = await mount(<Item>Flex item 3</Item>)
 
     const item = within(subject.getDOMNode())
 

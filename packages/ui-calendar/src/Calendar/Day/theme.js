@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-export default function generator ({ borders, colors, typography, spacing, forms }) {
+export default function generator({
+  borders,
+  colors,
+  typography,
+  spacing,
+  forms
+}) {
   return {
     color: colors.textDarkest,
     background: colors.backgroundLightest,
@@ -39,7 +45,7 @@ export default function generator ({ borders, colors, typography, spacing, forms
 
     todayBackground: colors.backgroundBrand,
     todayColor: colors.textLightest,
-    todayBorderRadius: forms.inputHeightSmall,
+    todayBorderRadius: forms.inputHeightSmall
   }
 }
 

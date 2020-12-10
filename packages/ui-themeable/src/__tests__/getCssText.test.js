@@ -40,8 +40,7 @@ describe('getCssText', () => {
       }
       const variables = { color: 'purple', background: 'white' }
 
-      expect(getCssText(template, variables, prefix))
-        .to.equalIgnoreSpaces(`
+      expect(getCssText(template, variables, prefix)).to.equalIgnoreSpaces(`
           .ThemeableComponent__root {
             color: var(--ThemeableComponent-color);
             background: var(--ThemeableComponent-background);
@@ -69,8 +68,7 @@ describe('getCssText', () => {
         `
       }
       const variables = { largeMin: 'min-width: 62em' }
-      expect(getCssText(template, variables, prefix))
-        .to.equalIgnoreSpaces(`
+      expect(getCssText(template, variables, prefix)).to.equalIgnoreSpaces(`
           .ThemeableComponent__root {
             @media screen and (min-width: 62em) {
               width: 100%;
@@ -90,4 +88,3 @@ describe('getCssText', () => {
     })
   })
 })
-

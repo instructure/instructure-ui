@@ -32,11 +32,12 @@
  * @param {Function} decorator a function that returns a decorated component
  * @returns {Class} a decorated component class
  */
-function decorator (decorate) {
+function decorator(decorate) {
   return (...args) => {
     return (ComposedComponent) => {
       if (typeof decorate === 'function') {
-        const displayName = ComposedComponent.displayName || ComposedComponent.name
+        const displayName =
+          ComposedComponent.displayName || ComposedComponent.name
         const DecoratedComponent = decorate(ComposedComponent, ...args)
         DecoratedComponent.displayName = displayName
         return DecoratedComponent

@@ -42,26 +42,26 @@ category: components
 class Byline extends Component {
   static propTypes = {
     /**
-    * the Byline visual/object
-    */
+     * the Byline visual/object
+     */
     children: PropTypes.node.isRequired,
     /**
-    * the Byline title
-    */
+     * the Byline title
+     */
     title: PropTypes.node,
     /**
-    * the Byline description
-    */
+     * the Byline description
+     */
     description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     /**
-    * how should the title and description align
-    */
+     * how should the title and description align
+     */
     alignContent: PropTypes.oneOf(['top', 'center']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     elementRef: PropTypes.func
@@ -76,7 +76,7 @@ class Byline extends Component {
     description: undefined
   }
 
-  render () {
+  render() {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Byline.propTypes),
       Byline
@@ -94,24 +94,14 @@ class Byline extends Component {
         margin={this.props.margin}
         maxWidth={this.theme[this.props.size]}
       >
-        <div className={styles.figure}>
-          {this.props.children}
-        </div>
+        <div className={styles.figure}>{this.props.children}</div>
         <figcaption className={styles.caption}>
-          {
-            this.props.title && (
-              <span className={styles.title}>
-                {this.props.title}
-              </span>
-            )
-          }
-          {
-            this.props.description && (
-              <div className={styles.description}>
-                {this.props.description}
-              </div>
-            )
-          }
+          {this.props.title && (
+            <span className={styles.title}>{this.props.title}</span>
+          )}
+          {this.props.description && (
+            <div className={styles.description}>{this.props.description}</div>
+          )}
         </figcaption>
       </View>
     )

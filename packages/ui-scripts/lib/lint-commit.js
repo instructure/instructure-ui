@@ -33,7 +33,7 @@ try {
   process.exit(1)
 }
 
-async function lintCommit () {
+async function lintCommit() {
   const isValid = lintCommitMessage()
 
   if (isValid) {

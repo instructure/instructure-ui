@@ -38,13 +38,19 @@ describe('<ListItem />', async () => {
   it('should not render delimiter by default', async () => {
     await mount(<ListItem delimiter="none">List item</ListItem>)
     const listItem = await ListItemLocator.find()
-    expect(await listItem.find('[aria-hidden="true"]', {
-      expectEmpty: true
-    })).to.not.exist()
+    expect(
+      await listItem.find('[aria-hidden="true"]', {
+        expectEmpty: true
+      })
+    ).to.not.exist()
   })
 
   it('should render delimiter when variant="inline"', async () => {
-    await mount(<ListItem variant="inline" delimiter="solid">List item</ListItem>)
+    await mount(
+      <ListItem variant="inline" delimiter="solid">
+        List item
+      </ListItem>
+    )
     const listItem = await ListItemLocator.find()
     expect(await listItem.find('[aria-hidden="true"]')).to.exist()
   })

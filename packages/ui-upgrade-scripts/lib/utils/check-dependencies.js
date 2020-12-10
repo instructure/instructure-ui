@@ -29,9 +29,13 @@ const depcheck = require('depcheck')
 module.exports = ({ sourcePath, options }) => {
   return new Promise((resolve, reject) => {
     try {
-      depcheck(path.resolve(process.cwd(), sourcePath), (options || {}), (result) => {
-        resolve(result)
-      })
+      depcheck(
+        path.resolve(process.cwd(), sourcePath),
+        options || {},
+        (result) => {
+          resolve(result)
+        }
+      )
     } catch (err) {
       reject(err)
     }

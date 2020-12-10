@@ -44,7 +44,7 @@ class CodePenButton extends Component {
     render: true
   }
 
-  render () {
+  render() {
     const { render } = this.props
     const code = render ? `render(${this.props.code})` : this.props.code
 
@@ -53,7 +53,8 @@ class CodePenButton extends Component {
       js: `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n\n${code}`,
       private: true,
       editors: '001',
-      html: '<div id="app"></div><div id="flash-messages"></div><div id="nav"></div>',
+      html:
+        '<div id="app"></div><div id="flash-messages"></div><div id="nav"></div>',
       layout: 'top',
       css_prefix: 'autoprefixer',
       js_pre_processor: 'babel',
@@ -61,7 +62,11 @@ class CodePenButton extends Component {
     }
 
     return (
-      <form action="https://codepen.io/pen/define" method="POST" target="_blank">
+      <form
+        action="https://codepen.io/pen/define"
+        method="POST"
+        target="_blank"
+      >
         <input type="hidden" name="data" value={JSON.stringify(data)} />
         <Tooltip renderTip="Edit in Codepen" placement="bottom">
           <IconButton

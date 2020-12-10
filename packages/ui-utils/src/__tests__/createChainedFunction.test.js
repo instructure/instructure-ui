@@ -41,12 +41,14 @@ describe('createChainedFunction', () => {
   })
 
   it('should execute all the functions', () => {
-    const spies = Array(5).fill(null).map(() => spy())
+    const spies = Array(5)
+      .fill(null)
+      .map(() => spy())
     const chain = createChainedFunction(...spies)
 
     chain()
 
-    spies.forEach(spy => {
+    spies.forEach((spy) => {
       expect(spy).to.have.been.calledOnce()
     })
   })

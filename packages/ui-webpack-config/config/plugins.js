@@ -29,7 +29,8 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
 const DISABLE_SPEEDY_STYLESHEET = process.env.DISABLE_SPEEDY_STYLESHEET || false
-const OMIT_INSTUI_DEPRECATION_WARNINGS = process.env.OMIT_INSTUI_DEPRECATION_WARNINGS || false
+const OMIT_INSTUI_DEPRECATION_WARNINGS =
+  process.env.OMIT_INSTUI_DEPRECATION_WARNINGS || false
 
 const envVars = {
   NODE_ENV: ENV,

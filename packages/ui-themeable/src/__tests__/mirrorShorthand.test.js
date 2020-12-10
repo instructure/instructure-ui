@@ -23,7 +23,10 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import { mirrorShorthandCorners, mirrorShorthandEdges } from '../mirrorShorthand'
+import {
+  mirrorShorthandCorners,
+  mirrorShorthandEdges
+} from '../mirrorShorthand'
 
 describe('convertRtlShorthandEdges', () => {
   it('should not modify 1 value syntax', () => {
@@ -72,4 +75,3 @@ describe('convertRtlShorthandCorners', () => {
     expect(result).to.equal('x-small auto x-large none')
   })
 })
-

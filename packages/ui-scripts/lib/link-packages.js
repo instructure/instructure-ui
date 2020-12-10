@@ -26,7 +26,7 @@ const { getPackages } = require('@instructure/pkg-utils')
 const { info, error, runCommandAsync } = require('@instructure/command-utils')
 
 info(
-`This script checks for packages used by a consuming app and then sets up (or removes, if you pass the --unlink flag) a yarn link for each package that it does use.
+  `This script checks for packages used by a consuming app and then sets up (or removes, if you pass the --unlink flag) a yarn link for each package that it does use.
 
 Usage: yarn ui-scripts --link-packages ../path/to/app/that/consumes/lib [--unlink]`
 )
@@ -34,39 +34,55 @@ Usage: yarn ui-scripts --link-packages ../path/to/app/that/consumes/lib [--unlin
 const linkCommand = process.argv.includes('--unlink') ? 'unlink' : 'link'
 const appDir = process.argv[3]
 
-if (!appDir) fail("must provide a path to the app you want to set up links in")
+if (!appDir) fail('must provide a path to the app you want to set up links in')
 
 linkPackages().catch(fail)
 
-function fail(reason){
+function fail(reason) {
   error(reason)
   process.exit(1)
 }
 
-async function linkPackages () {
+async function linkPackages() {
   const usedPackages = await getUsedPackages()
-  return Promise.all(usedPackages.map(async pkg => {
-    if (linkCommand === 'link') {
-      await runCommandAsync('lerna', ['exec', '--scope', pkg.name, '--', 'yarn', linkCommand])
-    }
-    await runCommandAsync('yarn', [linkCommand, pkg.name, '--cwd', appDir])
-    info(`${linkCommand}ing ${pkg.name} in ${appDir}`)
-  }))
+  return Promise.all(
+    usedPackages.map(async (pkg) => {
+      if (linkCommand === 'link') {
+        await runCommandAsync('lerna', [
+          'exec',
+          '--scope',
+          pkg.name,
+          '--',
+          'yarn',
+          linkCommand
+        ])
+      }
+      await runCommandAsync('yarn', [linkCommand, pkg.name, '--cwd', appDir])
+      info(`${linkCommand}ing ${pkg.name} in ${appDir}`)
+    })
+  )
 }
 
 async function getUsedPackages() {
-  const usedPackages = (await Promise.all(
-    getPackages().map(async pkg => {
-      let packageIsUsed = false
-      try {
-        const { stdout } = await runCommandAsync('yarn', ['why', pkg.name, '--cwd', appDir], [], { stdio: 'pipe'})
-        info(stdout)
-        packageIsUsed = stdout.includes(' Found')
-      } catch (err) {
-        info(`${pkg.name} is not used. ${err}`)
-      }
-      if (packageIsUsed) return pkg
-    })
-  )).filter(Boolean)
+  const usedPackages = (
+    await Promise.all(
+      getPackages().map(async (pkg) => {
+        let packageIsUsed = false
+        try {
+          const { stdout } = await runCommandAsync(
+            'yarn',
+            ['why', pkg.name, '--cwd', appDir],
+            [],
+            { stdio: 'pipe' }
+          )
+          info(stdout)
+          packageIsUsed = stdout.includes(' Found')
+        } catch (err) {
+          info(`${pkg.name} is not used. ${err}`)
+        }
+        if (packageIsUsed) return pkg
+      })
+    )
+  ).filter(Boolean)
   return usedPackages
 }

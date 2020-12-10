@@ -24,22 +24,24 @@
 const { runCommandSync, error, info } = require('@instructure/command-utils')
 const validateMessage = require('validate-commit-msg')
 
-const runGitCommand = exports.runGitCommand = function runGitCommand (args = []) {
+const runGitCommand = (exports.runGitCommand = function runGitCommand(
+  args = []
+) {
   const { stdout } = runCommandSync('git', args, [], { stdio: 'pipe' })
   return stdout && stdout.trim()
-}
+})
 
 exports.commit = function () {
   try {
     runGitCommand(['commit', '--dry-run'])
-  } catch(err) {
+  } catch (err) {
     error(err.stdout)
     process.exit(1)
   }
 
   try {
     runCommandSync('yarn', ['husky:pre-commit'])
-  } catch(err) {
+  } catch (err) {
     error(err.stdout)
     process.exit(1)
   }
@@ -47,12 +49,12 @@ exports.commit = function () {
   return runCommandSync('git-cz')
 }
 
-exports.setupGit = function setupGit () {
+exports.setupGit = function setupGit() {
   const {
-   GIT_EMAIL,
-   GIT_USERNAME,
-   GIT_REMOTE_URL,
-   GIT_REMOTE_NAME
+    GIT_EMAIL,
+    GIT_USERNAME,
+    GIT_REMOTE_URL,
+    GIT_REMOTE_NAME
   } = process.env
 
   const origin = GIT_REMOTE_NAME || 'origin'
@@ -84,12 +86,12 @@ exports.setupGit = function setupGit () {
   runGitCommand(['fetch', origin, '--tags', '--force'])
 }
 
-exports.lintCommitMessage = function lintCommitMessage () {
+exports.lintCommitMessage = function lintCommitMessage() {
   const commitMessage = runGitCommand(['log', '-1', '--pretty=%B'])
   return validateMessage(commitMessage)
 }
 
-exports.isReleaseCommit = function isReleaseCommit (version) {
+exports.isReleaseCommit = function isReleaseCommit(version) {
   let result
 
   try {
@@ -102,10 +104,10 @@ exports.isReleaseCommit = function isReleaseCommit (version) {
 
   info(result)
 
-  return result && (result.startsWith(`chore(release): ${version}`))
+  return result && result.startsWith(`chore(release): ${version}`)
 }
 
-exports.checkWorkingDirectory = function checkWorkingDirectory () {
+exports.checkWorkingDirectory = function checkWorkingDirectory() {
   let result
 
   try {
@@ -122,7 +124,7 @@ exports.checkWorkingDirectory = function checkWorkingDirectory () {
   }
 }
 
-exports.checkIfGitTagExists = function checkIfGitTagExists (version) {
+exports.checkIfGitTagExists = function checkIfGitTagExists(version) {
   const tag = `v${version}`
   let result
 
@@ -135,12 +137,14 @@ exports.checkIfGitTagExists = function checkIfGitTagExists (version) {
 
   if (result) {
     error(`Git tag ${tag} already exists!`)
-    error('Run the bump "yarn bump" script to update the version prior to running a stable release.')
+    error(
+      'Run the bump "yarn bump" script to update the version prior to running a stable release.'
+    )
     process.exit(1)
   }
 }
 
-exports.createGitTagForRelease = function createGitTagForRelease (version) {
+exports.createGitTagForRelease = function createGitTagForRelease(version) {
   const tag = `v${version}`
   const { GIT_REMOTE_NAME } = process.env
   const origin = GIT_REMOTE_NAME || 'origin'
@@ -154,32 +158,37 @@ exports.createGitTagForRelease = function createGitTagForRelease (version) {
   }
 }
 
-exports.commitVersionBump = function commitVersionBump (releaseVersion) {
+exports.commitVersionBump = function commitVersionBump(releaseVersion) {
   runGitCommand(['commit', '-am', `chore(release): ${releaseVersion}`])
 }
 
-exports.resetToCommit = function resetToCommit (commitish = 'HEAD') {
+exports.resetToCommit = function resetToCommit(commitish = 'HEAD') {
   runGitCommand(['reset', '--hard', commitish])
 }
 
-function getPreviousReleaseCommit () {
+function getPreviousReleaseCommit() {
   return runGitCommand(['rev-list', '--tags', '--skip=1', '--max-count=1'])
 }
 exports.getPreviousReleaseCommit = getPreviousReleaseCommit
 
-function getCurrentReleaseTag () {
+function getCurrentReleaseTag() {
   return runGitCommand(['describe', '--exact-match'])
 }
 exports.getCurrentReleaseTag = getCurrentReleaseTag
 
-function getPreviousReleaseTag () {
-  return runGitCommand(['describe', '--abbrev=0', '--tags', getPreviousReleaseCommit()])
+function getPreviousReleaseTag() {
+  return runGitCommand([
+    'describe',
+    '--abbrev=0',
+    '--tags',
+    getPreviousReleaseCommit()
+  ])
 }
 exports.getPreviousReleaseTag = getPreviousReleaseTag
 
 const jiraMatcher = /((?!([A-Z0-9a-z]{1,10})-?$)[A-Z]{1}[A-Z0-9]+-\d+)/g
 
-exports.getIssuesInRelease = function getIssuesInRelease (jiraProjectKey) {
+exports.getIssuesInRelease = function getIssuesInRelease(jiraProjectKey) {
   info(`Looking up issues for the ${jiraProjectKey} project...`)
   let currentReleaseTag, previousReleaseTag
 
@@ -196,7 +205,10 @@ exports.getIssuesInRelease = function getIssuesInRelease (jiraProjectKey) {
   info(`${previousReleaseTag}..${currentReleaseTag}`)
 
   try {
-    result = runGitCommand(['log', `${previousReleaseTag}..${currentReleaseTag}`])
+    result = runGitCommand([
+      'log',
+      `${previousReleaseTag}..${currentReleaseTag}`
+    ])
   } catch (e) {
     error(e)
     process.exit(1)
@@ -204,8 +216,7 @@ exports.getIssuesInRelease = function getIssuesInRelease (jiraProjectKey) {
 
   let issueKeys = result.match(jiraMatcher) || []
 
-  issueKeys = issueKeys
-    .filter(key => key.indexOf(jiraProjectKey) != -1)
+  issueKeys = issueKeys.filter((key) => key.indexOf(jiraProjectKey) != -1)
 
   if (issueKeys.length > 0) {
     issueKeys = Array.from(new Set(issueKeys))
@@ -215,7 +226,7 @@ exports.getIssuesInRelease = function getIssuesInRelease (jiraProjectKey) {
   return issueKeys
 }
 
-exports.getIssuesInCommit = function getIssuesInCommit (jiraProjectKey) {
+exports.getIssuesInCommit = function getIssuesInCommit(jiraProjectKey) {
   let result
 
   try {
@@ -227,8 +238,7 @@ exports.getIssuesInCommit = function getIssuesInCommit (jiraProjectKey) {
 
   let issueKeys = result.match(jiraMatcher) || []
 
-  issueKeys = issueKeys
-    .filter(key => key.indexOf(jiraProjectKey) != -1)
+  issueKeys = issueKeys.filter((key) => key.indexOf(jiraProjectKey) != -1)
 
   if (issueKeys.length > 0) {
     issueKeys = Array.from(new Set(issueKeys))

@@ -24,18 +24,9 @@
 const { getPackageJSON } = require('@instructure/pkg-utils')
 const { error, info } = require('@instructure/command-utils')
 
-const {
-  publishPackages,
-  createNPMRCFile
-} = require('./utils/npm')
-const {
-  checkIfGitTagExists,
-  isReleaseCommit
-} = require('./utils/git')
-const {
-  setupGit,
-  checkWorkingDirectory
-} = require('./utils/git')
+const { publishPackages, createNPMRCFile } = require('./utils/npm')
+const { checkIfGitTagExists, isReleaseCommit } = require('./utils/git')
+const { setupGit, checkWorkingDirectory } = require('./utils/git')
 const { getConfig } = require('./utils/config')
 
 try {
@@ -48,7 +39,7 @@ try {
   process.exit(1)
 }
 
-async function publish (packageName, currentVersion, preidAndTag, config = {}) {
+async function publish(packageName, currentVersion, preidAndTag, config = {}) {
   setupGit()
   createNPMRCFile(config)
   checkWorkingDirectory()
@@ -57,7 +48,9 @@ async function publish (packageName, currentVersion, preidAndTag, config = {}) {
 
   if (isReleaseCommit(currentVersion)) {
     checkIfGitTagExists(currentVersion)
-    info(`📦  Currently on release commit for ${currentVersion} of ${packageName}.`)
+    info(
+      `📦  Currently on release commit for ${currentVersion} of ${packageName}.`
+    )
     versionToRelease = currentVersion
     tag = preidAndTag || 'latest'
   } else {
@@ -73,5 +66,4 @@ async function publish (packageName, currentVersion, preidAndTag, config = {}) {
     error(e)
     process.exit(1)
   }
-
 }

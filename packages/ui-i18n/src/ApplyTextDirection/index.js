@@ -28,9 +28,7 @@ import PropTypes from 'prop-types'
 import { getElementType } from '@instructure/ui-react-utils'
 
 import { getTextDirection } from '../getTextDirection'
-import {
-  TextDirectionContext
-} from '../TextDirectionContext'
+import { TextDirectionContext } from '../TextDirectionContext'
 
 /**
 ---
@@ -40,19 +38,19 @@ category: components/utilities
 class ApplyTextDirection extends Component {
   static propTypes = {
     /**
-    * string 'ltr' or 'rtl' representing the document direction
-    */
+     * string 'ltr' or 'rtl' representing the document direction
+     */
     dir: PropTypes.oneOf(['ltr', 'rtl']),
     /**
-    * a single child (children must be wrapped in a single component/element) or function
-    * returning a child called with the following arguments:
-    * @param {string} dir - the string value 'rtl' or 'ltr'
-    * @param {Boolean} rtl - boolean value true if the direction is 'rtl'
-    */
+     * a single child (children must be wrapped in a single component/element) or function
+     * returning a child called with the following arguments:
+     * @param {string} dir - the string value 'rtl' or 'ltr'
+     * @param {Boolean} rtl - boolean value true if the direction is 'rtl'
+     */
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * accepts only one child (children must be wrapped in a single component/element)
-    */
+     * accepts only one child (children must be wrapped in a single component/element)
+     */
     as: PropTypes.elementType
   }
 
@@ -70,28 +68,26 @@ class ApplyTextDirection extends Component {
 
   _defaultDirection = getTextDirection()
 
-  getChildContext () {
+  getChildContext() {
     return TextDirectionContext.makeTextDirectionContext(this.dir)
   }
 
-  get dir () {
-    const context = TextDirectionContext.getTextDirectionContext(this.context) || {}
+  get dir() {
+    const context =
+      TextDirectionContext.getTextDirectionContext(this.context) || {}
 
-    return this.props.dir ||
-      context.dir ||
-      this._defaultDirection
+    return this.props.dir || context.dir || this._defaultDirection
   }
 
-  render () {
+  render() {
     const ElementType = getElementType(ApplyTextDirection, this.props)
     const { children } = this.props
 
     return (
       <ElementType dir={this.dir}>
-        { typeof children === 'function'
+        {typeof children === 'function'
           ? children(this.dir, this.dir === TextDirectionContext.DIRECTION.rtl)
-          : children
-        }
+          : children}
       </ElementType>
     )
   }

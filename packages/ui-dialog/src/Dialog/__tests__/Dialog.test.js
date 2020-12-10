@@ -23,7 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, within, find} from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  within,
+  find
+} from '@instructure/ui-test-utils'
 import { Dialog } from '../index'
 
 describe('<Dialog />', async () => {
@@ -50,10 +57,7 @@ describe('<Dialog />', async () => {
 
   it('should apply the a11y attributes', async () => {
     const subject = await mount(
-      <Dialog
-        open
-        label="Dialog Example"
-      >
+      <Dialog open label="Dialog Example">
         <button>Hello World</button>
       </Dialog>
     )
@@ -67,10 +71,7 @@ describe('<Dialog />', async () => {
   it('should call onDismiss prop when Esc key pressed', async () => {
     const onDismiss = stub()
     const subject = await mount(
-      <Dialog
-        open
-        onDismiss={onDismiss}
-      >
+      <Dialog open onDismiss={onDismiss}>
         <button>Hello World</button>
       </Dialog>
     )
@@ -91,11 +92,7 @@ describe('<Dialog />', async () => {
   it('should call onDismiss prop when the document is clicked', async () => {
     const onDismiss = stub()
     const subject = await mount(
-      <Dialog
-        open
-        shouldCloseOnDocumentClick
-        onDismiss={onDismiss}
-      >
+      <Dialog open shouldCloseOnDocumentClick onDismiss={onDismiss}>
         <button>Hello World</button>
       </Dialog>
     )
@@ -106,8 +103,7 @@ describe('<Dialog />', async () => {
       expect(dialog.containsFocus()).to.be.true()
     })
 
-    await within(dialog.getOwnerDocument().documentElement)
-      .click()
+    await within(dialog.getOwnerDocument().documentElement).click()
 
     await wait(() => {
       expect(onDismiss).to.have.been.called()
@@ -120,27 +116,27 @@ describe('<Dialog />', async () => {
         ...Dialog.propTypes
       }
 
-      componentDidMount () {
+      componentDidMount() {
         if (!this.props.open) {
           this._input.focus()
         }
       }
 
-      focusDialog () {
+      focusDialog() {
         this._dialog && this._dialog.focus()
       }
 
-      blurDialog () {
+      blurDialog() {
         this._dialog && this._dialog.blur()
       }
 
-      render () {
+      render() {
         return (
           <div>
             <input
               id="input-trigger"
               type="text"
-              ref={c => {
+              ref={(c) => {
                 this._input = c
               }}
             />
@@ -149,7 +145,7 @@ describe('<Dialog />', async () => {
               shouldReturnFocus
               label="A Modal"
               {...this.props}
-              ref={el => this._dialog = el}
+              ref={(el) => (this._dialog = el)}
             >
               {this.props.children || (
                 <div>
@@ -170,11 +166,13 @@ describe('<Dialog />', async () => {
           <DialogExample
             open
             contentElement={() => document.getElementById('container')}
-            ref={el => ref = el}
+            ref={(el) => (ref = el)}
           >
             some content
           </DialogExample>
-          <div id="container" tabIndex="-1">some more content</div>
+          <div id="container" tabIndex="-1">
+            some more content
+          </div>
         </div>
       )
 
@@ -194,24 +192,30 @@ describe('<Dialog />', async () => {
           <DialogExample
             open={false}
             contentElement={() => document.getElementById('container')}
-            ref={el => ref = el}
+            ref={(el) => (ref = el)}
           >
             some content
           </DialogExample>
-          <div id="container" tabIndex="-1">some more content</div>
+          <div id="container" tabIndex="-1">
+            some more content
+          </div>
         </div>
       )
 
       ref.focusDialog()
 
       await wait(() => {
-        expect(consoleError).to.have.been.calledWithMatch('[Dialog] Can\'t focus a Dialog that isn\'t open.')
+        expect(consoleError).to.have.been.calledWithMatch(
+          "[Dialog] Can't focus a Dialog that isn't open."
+        )
       })
 
       ref.blurDialog()
 
       await wait(() => {
-        expect(consoleError).to.have.been.calledWithMatch('[Dialog] Can\'t blur a Dialog that isn\'t open.')
+        expect(consoleError).to.have.been.calledWithMatch(
+          "[Dialog] Can't blur a Dialog that isn't open."
+        )
       })
     })
 
@@ -224,9 +228,7 @@ describe('<Dialog />', async () => {
     })
 
     it('should focus the first tabbable element when open prop becomes true', async () => {
-      const subject = await mount(
-        <DialogExample open={false} />
-      )
+      const subject = await mount(<DialogExample open={false} />)
 
       await subject.setProps({ open: true })
 
@@ -260,7 +262,9 @@ describe('<Dialog />', async () => {
           open
           defaultFocusElement={() => document.getElementById('non-tabbable')}
         >
-          <div tabIndex="-1" id="non-tabbable">hello world</div>
+          <div tabIndex="-1" id="non-tabbable">
+            hello world
+          </div>
         </DialogExample>
       )
 
@@ -279,7 +283,9 @@ describe('<Dialog />', async () => {
           >
             some content
           </DialogExample>
-          <div id="container" tabIndex="-1">some more content</div>
+          <div id="container" tabIndex="-1">
+            some more content
+          </div>
         </div>
       )
 
@@ -291,9 +297,7 @@ describe('<Dialog />', async () => {
 
     it('should focus the document body if there is no defaultFocusElement, tabbable elements, or focusable contentElement', async () => {
       const subject = await mount(
-        <DialogExample open={false}>
-          hello world
-        </DialogExample>
+        <DialogExample open={false}>hello world</DialogExample>
       )
 
       const input = await find('#input-trigger')
@@ -457,28 +461,28 @@ describe('<Dialog />', async () => {
             open: false
           }
 
-          handleTriggerClick = e => {
+          handleTriggerClick = (e) => {
             this.setState({ open: true })
           }
 
-          render () {
+          render() {
             return (
               <div>
-                <Dialog
-                  open
-                  shouldReturnFocus
-                  label="A dialog"
-                  {...this.props}
-                >
+                <Dialog open shouldReturnFocus label="A dialog" {...this.props}>
                   <div>
                     <div>
-                      <input onClick={this.handleTriggerClick} type="text" id="input-one" />
-                      <input onClick={this.handleTriggerClick} type="text" id="input-two" />
+                      <input
+                        onClick={this.handleTriggerClick}
+                        type="text"
+                        id="input-one"
+                      />
+                      <input
+                        onClick={this.handleTriggerClick}
+                        type="text"
+                        id="input-two"
+                      />
                     </div>
-                    <Dialog
-                      open={this.state.open}
-                      label="Another dialog"
-                    >
+                    <Dialog open={this.state.open} label="Another dialog">
                       Hello world
                     </Dialog>
                   </div>

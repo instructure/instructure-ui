@@ -26,16 +26,17 @@ import { transform } from '@babel/standalone'
 
 const compileCode = (code) => {
   return transform(code, {
-    presets: [
-      'es2015',
-      ['stage-1', { decoratorsLegacy: true }],
-      'react'
-    ],
+    presets: ['es2015', ['stage-1', { decoratorsLegacy: true }], 'react'],
     plugins: ['proposal-object-rest-spread']
   }).code
 }
 
-export const compileAndRenderExample = ({ code, render, shouldCallRender, onError }) => {
+export const compileAndRenderExample = ({
+  code,
+  render,
+  shouldCallRender,
+  onError
+}) => {
   try {
     const compiledCode = compileCode(code)
     const el = eval(compiledCode) // eslint-disable-line no-eval

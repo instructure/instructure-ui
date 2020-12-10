@@ -42,21 +42,9 @@ export default {
       onChange: () => {},
       readOnly: false,
       children: [
-        <RadioInput
-          key="minnie"
-          value="minnie"
-          label="Minnie"
-        />,
-        <RadioInput
-          key="mickey"
-          value="mickey"
-          label="Mickey"
-        />,
-        <RadioInput
-          key="goofy"
-          value="goofy"
-          label="Goofy"
-        />
+        <RadioInput key="minnie" value="minnie" label="Minnie" />,
+        <RadioInput key="mickey" value="mickey" label="Mickey" />,
+        <RadioInput key="goofy" value="goofy" label="Goofy" />
       ]
     }
   }

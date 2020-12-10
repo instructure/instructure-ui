@@ -125,31 +125,32 @@ class InPlaceEdit extends Component {
   constructor(props) {
     super(props)
 
-    warn(props.readOnly ? props.mode === 'view' : true, '[InPlaceEdit] When readOnly is true, mode is forced to "view"')
+    warn(
+      props.readOnly ? props.mode === 'view' : true,
+      '[InPlaceEdit] When readOnly is true, mode is forced to "view"'
+    )
   }
 
   handleEditButtonRef = (el) => {
-    this._editButtonRef  = el
+    this._editButtonRef = el
   }
 
-  renderEditor ({ mode, onBlur, editorRef, readOnly }) {
+  renderEditor({ mode, onBlur, editorRef, readOnly }) {
     const { showFocusRing, renderEditor } = this.props
     const isEditMode = !readOnly && mode === 'edit'
 
     return isEditMode ? (
       <FocusableView as="span" display="block" focused={showFocusRing}>
-        {renderEditor({onBlur, editorRef})}
+        {renderEditor({ onBlur, editorRef })}
       </FocusableView>
     ) : null
   }
 
-  renderViewer ({ readOnly, mode }) {
-    return readOnly || mode === 'view' ? (
-      this.props.renderViewer()
-    ) : null
+  renderViewer({ readOnly, mode }) {
+    return readOnly || mode === 'view' ? this.props.renderViewer() : null
   }
 
-  renderEditButton ({ buttonRef, ...rest }) {
+  renderEditButton({ buttonRef, ...rest }) {
     return this.props.renderEditButton({
       elementRef: createChainedFunction(this.handleEditButtonRef, buttonRef),
       ...rest
@@ -158,7 +159,12 @@ class InPlaceEdit extends Component {
 
   // Render a default edit button, an icon button with the edit icon
   // the margin makes room for the focus ring
-  static renderDefaultEditButton = ({ isVisible, readOnly, label, ...buttonProps }) => {
+  static renderDefaultEditButton = ({
+    isVisible,
+    readOnly,
+    label,
+    ...buttonProps
+  }) => {
     if (readOnly) {
       return null
     }
@@ -170,15 +176,24 @@ class InPlaceEdit extends Component {
         withBorder={false}
         {...buttonProps}
       >
-        { isVisible ? IconEditLine : null }
+        {isVisible ? IconEditLine : null}
       </IconButton>
     )
   }
 
-  renderAll = ({ getContainerProps, getViewerProps, getEditorProps, getEditButtonProps }) => {
-    const flexDir = this.props.editButtonPlacement === 'start' ? 'row-reverse' : 'row'
+  renderAll = ({
+    getContainerProps,
+    getViewerProps,
+    getEditorProps,
+    getEditButtonProps
+  }) => {
+    const flexDir =
+      this.props.editButtonPlacement === 'start' ? 'row-reverse' : 'row'
     const justifyItems = flexDir === 'row-reverse' ? 'end' : 'start'
-    const buttonMargin = this.props.editButtonPlacement === 'start' ? '0 xx-small 0 0' : '0 0 0 xx-small'
+    const buttonMargin =
+      this.props.editButtonPlacement === 'start'
+        ? '0 xx-small 0 0'
+        : '0 0 0 xx-small'
     return (
       <Flex
         display={this.props.inline ? 'inline-flex' : 'flex'}
@@ -187,20 +202,20 @@ class InPlaceEdit extends Component {
         {...getContainerProps()}
       >
         <Flex.Item shouldGrow shouldShrink>
-          { this.renderEditor(getEditorProps()) }
-          { this.renderViewer(getViewerProps()) }
+          {this.renderEditor(getEditorProps())}
+          {this.renderViewer(getViewerProps())}
         </Flex.Item>
         <Flex.Item margin={buttonMargin}>
-          { this.renderEditButton(getEditButtonProps()) }
+          {this.renderEditButton(getEditButtonProps())}
         </Flex.Item>
       </Flex>
     )
   }
 
-  render () {
+  render() {
     const { mode, value, onChange, onChangeMode, readOnly } = this.props
 
-    return  (
+    return (
       <Editable
         mode={mode}
         onChangeMode={onChangeMode}

@@ -55,7 +55,13 @@ class GridRow extends Component {
     children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    hAlign: PropTypes.oneOf(['start', 'center', 'end', 'space-around', 'space-between']),
+    hAlign: PropTypes.oneOf([
+      'start',
+      'center',
+      'end',
+      'space-around',
+      'space-between'
+    ]),
     vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
     startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
     visualDebug: PropTypes.bool,
@@ -68,38 +74,31 @@ class GridRow extends Component {
     isLastRow: false
   }
 
-  startAtClass () {
-    return !!this.props.startAt &&
-      (
-        `startAt${capitalizeFirstLetter(this.props.startAt)}`
-      )
-  }
-
-  rowSpacingClass () {
+  startAtClass() {
     return (
-      `rowSpacing${capitalizeFirstLetter(this.props.rowSpacing)}`
+      !!this.props.startAt &&
+      `startAt${capitalizeFirstLetter(this.props.startAt)}`
     )
   }
 
-  colSpacingClass () {
-    return (
-      `colSpacing${capitalizeFirstLetter(this.props.colSpacing)}`
-    )
+  rowSpacingClass() {
+    return `rowSpacing${capitalizeFirstLetter(this.props.rowSpacing)}`
   }
 
-  renderChildren () {
-    const {
-      children,
-      ...props
-    } = this.props
+  colSpacingClass() {
+    return `colSpacing${capitalizeFirstLetter(this.props.colSpacing)}`
+  }
+
+  renderChildren() {
+    const { children, ...props } = this.props
 
     return Children.map(children, (child, index) => {
       if (matchComponentTypes(child, [GridCol])) {
         return safeCloneElement(child, {
           ...pickProps(this.props, GridRow.propTypes),
-          ...child.props, /* child props should override parent */
+          ...child.props /* child props should override parent */,
           isLastRow: props.isLastRow,
-          isLastCol: ((index + 1) === Children.count(children))
+          isLastCol: index + 1 === Children.count(children)
         })
       } else {
         return child // PropType validation should handle errors
@@ -107,7 +106,7 @@ class GridRow extends Component {
     })
   }
 
-  render () {
+  render() {
     const classes = {
       [styles.root]: true,
       [styles.lastRow]: this.props.isLastRow,
@@ -121,10 +120,7 @@ class GridRow extends Component {
     const props = omitProps(this.props, GridRow.propTypes)
 
     return (
-      <span
-        {...props}
-        className={classnames(classes)}
-      >
+      <span {...props} className={classnames(classes)}>
         {this.renderChildren()}
       </span>
     )

@@ -25,8 +25,9 @@ const path = require('path')
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
 const noLint = process.argv.includes('--no-lint')
-const DISABLE_LINTER_FAILURE_ON_WARNING = (process.env.DISABLE_LINTER_FAILURE_ON_WARNING === '1') || false
-const exclude = [ /node_modules/, /\/lib\//, /\/es\// ]
+const DISABLE_LINTER_FAILURE_ON_WARNING =
+  process.env.DISABLE_LINTER_FAILURE_ON_WARNING === '1' || false
+const exclude = [/node_modules/, /\/lib\//, /\/es\//]
 
 const babelLoader = {
   loader: 'babel-loader',
@@ -58,10 +59,7 @@ const rules = [
     test: /\.js$/,
     include: [/\.examples\.js/],
     exclude,
-    use: [
-      'component-examples-loader',
-      babelLoader
-    ]
+    use: ['component-examples-loader', babelLoader]
   },
   {
     enforce: 'pre',
@@ -79,19 +77,12 @@ const rules = [
   {
     test: /\.css$/,
     exclude: [...exclude, /ui-icons/],
-    use: [
-      babelLoader,
-      'themeable-css-loader',
-      'postcss-loader'
-    ]
+    use: [babelLoader, 'themeable-css-loader', 'postcss-loader']
   },
   {
     test: /\.css$/,
     include: [/ui-icons/],
-    use: [
-      'style-loader',
-      'css-loader'
-    ]
+    use: ['style-loader', 'css-loader']
   },
   {
     // eslint-disable-next-line no-useless-escape

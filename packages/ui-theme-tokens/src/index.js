@@ -27,9 +27,4 @@ import { canvasHighContrast } from './canvasHighContrast'
 import { instructure } from './instructure'
 import { functionalColors } from './utils/functionalColors'
 
-export {
-  canvas,
-  canvasHighContrast,
-  instructure,
-  functionalColors
-}
+export { canvas, canvasHighContrast, instructure, functionalColors }
