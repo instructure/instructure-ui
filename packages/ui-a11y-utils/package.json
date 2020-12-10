@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-a11y-utils",
-  "version": "7.3.1",
+  "version": "7.3.2",
   "description": "A collection of utilities for managing focus and screen reader behavior",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -22,20 +22,20 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.1",
-    "@instructure/ui-a11y-content": "^7.3.1",
-    "@instructure/ui-dom-utils": "^7.3.1",
-    "@instructure/ui-react-utils": "^7.3.1",
-    "@instructure/ui-testable": "^7.3.1",
-    "@instructure/ui-themeable": "^7.3.1",
-    "@instructure/uid": "^7.3.1",
+    "@instructure/console": "^7.3.2",
+    "@instructure/ui-a11y-content": "^7.3.2",
+    "@instructure/ui-dom-utils": "^7.3.2",
+    "@instructure/ui-react-utils": "^7.3.2",
+    "@instructure/ui-testable": "^7.3.2",
+    "@instructure/ui-themeable": "^7.3.2",
+    "@instructure/uid": "^7.3.2",
     "keycode": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.1",
-    "@instructure/ui-color-utils": "^7.3.1",
-    "@instructure/ui-test-utils": "^7.3.1"
+    "@instructure/ui-babel-preset": "^7.3.2",
+    "@instructure/ui-color-utils": "^7.3.2",
+    "@instructure/ui-test-utils": "^7.3.2"
   },
   "peerDependencies": {
     "react": "^16.8"

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-metric",
-  "version": "7.3.1",
+  "version": "7.3.2",
   "description": "A UI component for displaying Metrics",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -24,19 +24,19 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.1",
-    "@instructure/ui-prop-types": "^7.3.1",
-    "@instructure/ui-react-utils": "^7.3.1",
-    "@instructure/ui-testable": "^7.3.1",
-    "@instructure/ui-themeable": "^7.3.1",
+    "@instructure/console": "^7.3.2",
+    "@instructure/ui-prop-types": "^7.3.2",
+    "@instructure/ui-react-utils": "^7.3.2",
+    "@instructure/ui-testable": "^7.3.2",
+    "@instructure/ui-themeable": "^7.3.2",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.1",
-    "@instructure/ui-color-utils": "^7.3.1",
-    "@instructure/ui-test-locator": "^7.3.1",
-    "@instructure/ui-test-utils": "^7.3.1"
+    "@instructure/ui-babel-preset": "^7.3.2",
+    "@instructure/ui-color-utils": "^7.3.2",
+    "@instructure/ui-test-locator": "^7.3.2",
+    "@instructure/ui-test-utils": "^7.3.2"
   },
   "peerDependencies": {
     "react": "^16.8"
