@@ -30,11 +30,7 @@ async function run() {
   const paths = await globby(['**/src/*/index.js'])
   // ui-babel-preset defines its own babel plugins too
   // we should use the list from there if we dont move to typeScript
-  const babelPlugins = [
-    'optionalChaining',
-    'nullishCoalescingOperator',
-    'dfgdfg'
-  ]
+  const babelPlugins = ['optionalChaining', 'nullishCoalescingOperator']
   const tsDefinitions = paths.map((filePath) => {
     try {
       react2dts.generateFromFile(null, filePath, {
