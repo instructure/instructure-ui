@@ -54,10 +54,12 @@ const TextDirectionContext = {
    * create direction context
    * @param {string} dir
    */
-  makeTextDirectionContext (dir) {
-    return {[CONTEXT_KEY]: {
-      dir
-    }}
+  makeTextDirectionContext(dir) {
+    return {
+      [CONTEXT_KEY]: {
+        dir
+      }
+    }
   },
 
   /**
@@ -65,7 +67,7 @@ const TextDirectionContext = {
    * @param {ReactContext} context React context object
    * @returns {Object} a direction context object
    */
-  getTextDirectionContext (context) {
+  getTextDirectionContext(context) {
     if (context) {
       return context[CONTEXT_KEY]
     }

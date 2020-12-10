@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, borders }) {
+export default function generator({ colors, borders }) {
   return {
     arrowSize: '0.5rem',
     arrowBorderWidth: borders.widthSmall,
     arrowBackgroundColor: colors.white,
     arrowBorderColor: colors.tiara,
     arrowBackgroundColorInverse: colors.licorice,
-    arrowBorderColorInverse: 'transparent',
+    arrowBorderColorInverse: 'transparent'
   }
 }

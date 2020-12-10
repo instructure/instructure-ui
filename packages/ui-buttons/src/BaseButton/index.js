@@ -29,7 +29,12 @@ import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { getElementType, getInteraction, passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
+import {
+  getElementType,
+  getInteraction,
+  passthroughProps,
+  callRenderProp
+} from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -99,10 +104,7 @@ class BaseButton extends Component {
     /**
      * Specifies if the `Button` shape should be a circle or rectangle.
      */
-    shape: PropTypes.oneOf([
-      'rectangle',
-      'circle'
-    ]),
+    shape: PropTypes.oneOf(['rectangle', 'circle']),
     /**
      * Specifies if the `Button` should render with a solid background. When false, the background is transparent.
      */
@@ -153,7 +155,7 @@ class BaseButton extends Component {
     children: null,
     type: 'button',
     size: 'medium',
-    elementRef: (el) => { },
+    elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -169,32 +171,28 @@ class BaseButton extends Component {
     cursor: 'pointer',
     href: undefined,
     onClick: undefined,
-    onKeyDown: (event) => { },
+    onKeyDown: (event) => {},
     renderIcon: undefined,
     tabIndex: undefined
   }
 
   _rootElement = null
 
-  get hasOnlyIconVisible () {
+  get hasOnlyIconVisible() {
     const { children, renderIcon } = this.props
     return renderIcon && !hasVisibleChildren(children)
   }
 
-  get elementType () {
+  get elementType() {
     return getElementType(BaseButton, this.props)
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
   get focusColor() {
-    const {
-      color,
-      focusColor,
-      withBackground
-    } = this.props
+    const { color, focusColor, withBackground } = this.props
 
     // Give user specified focusColor preference
     if (focusColor) {
@@ -212,11 +210,11 @@ class BaseButton extends Component {
     return color.includes('inverse') ? 'inverse' : 'info'
   }
 
-  get focused () {
+  get focused() {
     return isActiveElement(this._rootElement)
   }
 
-  focus () {
+  focus() {
     this._rootElement && this._rootElement.focus()
   }
 
@@ -240,7 +238,7 @@ class BaseButton extends Component {
     }
   }
 
-  handleKeyDown = event => {
+  handleKeyDown = (event) => {
     const { onClick, onKeyDown, href } = this.props
     const { interaction } = this
 
@@ -249,7 +247,10 @@ class BaseButton extends Component {
     // behave like a button when space key is pressed
     const { space, enter } = keycode.codes
 
-    if (this.elementType !== 'button' && [space, enter].includes(event.keyCode)) {
+    if (
+      this.elementType !== 'button' &&
+      [space, enter].includes(event.keyCode)
+    ) {
       event.preventDefault()
       event.stopPropagation()
 
@@ -264,12 +265,7 @@ class BaseButton extends Component {
   }
 
   renderChildren() {
-    const {
-      renderIcon,
-      children,
-      textAlign,
-      isCondensed
-    } = this.props
+    const { renderIcon, children, textAlign, isCondensed } = this.props
 
     const wrappedChildren = <span className={styles.children}>{children}</span>
 
@@ -278,18 +274,35 @@ class BaseButton extends Component {
     }
 
     const { hasOnlyIconVisible } = this
-    const wrappedIcon = <span className={styles.iconSVG}>{callRenderProp(renderIcon)}</span>
+    const wrappedIcon = (
+      <span className={styles.iconSVG}>{callRenderProp(renderIcon)}</span>
+    )
 
-    const flexChildren = hasOnlyIconVisible ? <Flex.Item>{wrappedIcon}{children}</Flex.Item> : [
-      <Flex.Item key="icon" padding={`0 ${isCondensed ? 'xx-small' : 'x-small'} 0 0`}>{wrappedIcon}</Flex.Item>,
-      <Flex.Item key="children" shouldShrink>{wrappedChildren}</Flex.Item>
-    ]
+    const flexChildren = hasOnlyIconVisible ? (
+      <Flex.Item>
+        {wrappedIcon}
+        {children}
+      </Flex.Item>
+    ) : (
+      [
+        <Flex.Item
+          key="icon"
+          padding={`0 ${isCondensed ? 'xx-small' : 'x-small'} 0 0`}
+        >
+          {wrappedIcon}
+        </Flex.Item>,
+        <Flex.Item key="children" shouldShrink>
+          {wrappedChildren}
+        </Flex.Item>
+      ]
+    )
 
     const flexProps = {
       shouldShrink: true,
       height: '100%',
       width: '100%',
-      justifyItems: (hasOnlyIconVisible || textAlign === 'center') ? 'center' : 'start'
+      justifyItems:
+        hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'start'
     }
 
     return <Flex {...flexProps}>{flexChildren}</Flex>
@@ -360,15 +373,13 @@ class BaseButton extends Component {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         role={onClick && as !== 'button' ? 'button' : null}
-        tabIndex={onClick && as ? (tabIndex || '0') : tabIndex}
+        tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}
         // TODO: Eventually remove classname. That will involve figuring out where the button reset should live, as well
         // as creating a selector for the active and hover states
         className={isEnabled ? styles.root : null}
       >
-        <span className={classes}>
-          {this.renderChildren()}
-        </span>
+        <span className={classes}>{this.renderChildren()}</span>
       </View>
     )
   }

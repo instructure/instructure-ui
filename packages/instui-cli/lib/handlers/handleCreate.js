@@ -30,13 +30,24 @@ const {
   handleCreatePackage
 } = require('@instructure/ui-template-scripts/lib/handlers')
 
-module.exports = async ({ contentType, path: sourcePath, name, initialVersion }) => {
-  const pkgPath = require.resolve(`@instructure/template-${contentType}/package.json`)
+module.exports = async ({
+  contentType,
+  path: sourcePath,
+  name,
+  initialVersion
+}) => {
+  const pkgPath = require.resolve(
+    `@instructure/template-${contentType}/package.json`
+  )
   const pkg = require(pkgPath)
 
   const dependencies = formatDependencies({ dependencies: pkg.dependencies })
-  const devDependencies = formatDependencies({ dependencies: pkg.devDependencies })
-  const peerDependencies = formatDependencies({ dependencies: pkg.peerDependencies })
+  const devDependencies = formatDependencies({
+    dependencies: pkg.devDependencies
+  })
+  const peerDependencies = formatDependencies({
+    dependencies: pkg.peerDependencies
+  })
 
   const templateDirname = 'template'
 
@@ -48,9 +59,9 @@ module.exports = async ({ contentType, path: sourcePath, name, initialVersion })
       path: sourcePath,
       name,
       values: ({ name }) => ({
-        'NAME': name,
-        'DEPENDENCIES': dependencies,
-        'DEV_DEPENDENCIES': devDependencies
+        NAME: name,
+        DEPENDENCIES: dependencies,
+        DEV_DEPENDENCIES: devDependencies
       })
     })
   } else if (contentType === 'package') {
@@ -59,10 +70,10 @@ module.exports = async ({ contentType, path: sourcePath, name, initialVersion })
       path: sourcePath,
       name,
       values: ({ name, version }) => ({
-        'NAME': name,
-        'VERSION': version,
-        'DEPENDENCIES': dependencies,
-        'DEV_DEPENDENCIES': devDependencies
+        NAME: name,
+        VERSION: version,
+        DEPENDENCIES: dependencies,
+        DEV_DEPENDENCIES: devDependencies
       })
     })
   } else if (contentType === 'component') {
@@ -72,12 +83,12 @@ module.exports = async ({ contentType, path: sourcePath, name, initialVersion })
       path: sourcePath,
       name,
       values: ({ name, packageName, version }) => ({
-        'NAME': name,
-        'PACKAGE': packageName,
-        'VERSION': version,
-        'DEPENDENCIES': dependencies,
-        'DEV_DEPENDENCIES': devDependencies,
-        'PEER_DEPENDENCIES': peerDependencies
+        NAME: name,
+        PACKAGE: packageName,
+        VERSION: version,
+        DEPENDENCIES: dependencies,
+        DEV_DEPENDENCIES: devDependencies,
+        PEER_DEPENDENCIES: peerDependencies
       })
     })
   }
@@ -86,5 +97,7 @@ module.exports = async ({ contentType, path: sourcePath, name, initialVersion })
 const formatDependencies = ({ dependencies }) => {
   if (!dependencies) return ''
 
-  return Object.keys(dependencies).map((dependency) => `    "${dependency}": "${dependencies[dependency]}"`).join(',\n')
+  return Object.keys(dependencies)
+    .map((dependency) => `    "${dependency}": "${dependencies[dependency]}"`)
+    .join(',\n')
 }

@@ -43,8 +43,8 @@ describe('<Position />', async () => {
 
   it('should render', async () => {
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position constrain="window" renderTarget={<button>Target</button>}>
             <div id="content">
               <div>Content</div>
@@ -64,8 +64,8 @@ describe('<Position />', async () => {
 
   it('should absolutely position content', async () => {
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position constrain="window" renderTarget={<button>Target</button>}>
             <div id="content">
               <div>Content</div>
@@ -83,8 +83,8 @@ describe('<Position />', async () => {
   it('should render right of target', async () => {
     const onPositionChanged = stub()
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position
             placement="end"
             onPositionChanged={onPositionChanged}
@@ -109,14 +109,16 @@ describe('<Position />', async () => {
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
 
-    expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right))).to.be.true()
+    expect(
+      within(Math.floor(contentRect.left), Math.floor(targetRect.right))
+    ).to.be.true()
   })
 
   it('should render top stretched inside of target', async () => {
     const onPositionChanged = stub()
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position
             placement="top stretch"
             shouldPositionOverTarget
@@ -142,15 +144,19 @@ describe('<Position />', async () => {
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
 
-    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)).to.be.true()
-    expect(within(Math.floor(contentRect.width), Math.floor(targetRect.width), 1)).to.be.true()
+    expect(
+      within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)
+    ).to.be.true()
+    expect(
+      within(Math.floor(contentRect.width), Math.floor(targetRect.width), 1)
+    ).to.be.true()
   })
 
   it('should render below target', async () => {
     const onPositionChanged = stub()
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position
             placement="bottom"
             onPositionChanged={onPositionChanged}
@@ -175,14 +181,16 @@ describe('<Position />', async () => {
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
 
-    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true()
+    expect(
+      within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)
+    ).to.be.true()
   })
 
   it('should render left of target', async () => {
     const onPositionChanged = stub()
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position
             placement="start"
             onPositionChanged={onPositionChanged}
@@ -207,14 +215,16 @@ describe('<Position />', async () => {
     const targetRect = target.getBoundingClientRect()
     const contentRect = content.getBoundingClientRect()
 
-    expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left))).to.be.true()
+    expect(
+      within(Math.floor(contentRect.right), Math.floor(targetRect.left))
+    ).to.be.true()
   })
 
   it('should render above target', async () => {
     const onPositionChanged = stub()
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position
             placement="top"
             onPositionChanged={onPositionChanged}
@@ -245,8 +255,8 @@ describe('<Position />', async () => {
   it('should center vertically', async () => {
     const onPositionChanged = stub()
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position
             placement="end"
             onPositionChanged={onPositionChanged}
@@ -272,7 +282,9 @@ describe('<Position />', async () => {
     const contentRect = content.getBoundingClientRect()
 
     const top = Math.floor(contentRect.top)
-    const center = Math.floor(targetRect.top + (targetRect.height / 2 - contentRect.height / 2))
+    const center = Math.floor(
+      targetRect.top + (targetRect.height / 2 - contentRect.height / 2)
+    )
 
     expect(within(top, center)).to.be.true()
   })
@@ -280,8 +292,8 @@ describe('<Position />', async () => {
   it('should center horizontally', async () => {
     const onPositionChanged = stub()
     await mount(
-      <div style={{padding: '50px'}}>
-        <div style={{...parentDefaults}}>
+      <div style={{ padding: '50px' }}>
+        <div style={{ ...parentDefaults }}>
           <Position
             placement="bottom"
             onPositionChanged={onPositionChanged}
@@ -315,10 +327,10 @@ describe('<Position />', async () => {
   })
 
   describe('with offset props', () => {
-    function assertOffset (placement, offset, assertion) {
+    function assertOffset(placement, offset, assertion) {
       it(`should render offset for ${placement}`, async () => {
         const onPositionChanged = stub()
-        const subject = await mount (
+        const subject = await mount(
           <Position
             constrain="none"
             placement={placement}
@@ -378,13 +390,20 @@ describe('<Position />', async () => {
     it('should re-position below target', async () => {
       const onPositionChanged = stub()
       await mount(
-        <div style={{padding: '50px'}}>
+        <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
-          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '0 50px 50px 50px'}}>
+          <div
+            style={{
+              width: '50px',
+              height: '50px',
+              overflow: 'scroll',
+              padding: '0 50px 50px 50px'
+            }}
+          >
             <Position
               placement="top"
               constrain="scroll-parent"
-              mountNode={el => document.getElementById('mountNode')}
+              mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -407,19 +426,28 @@ describe('<Position />', async () => {
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
 
-      expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true()
+      expect(
+        within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)
+      ).to.be.true()
     })
 
     it('should re-position above target', async () => {
       const onPositionChanged = stub()
       await mount(
-        <div style={{padding: '50px'}}>
+        <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
-          <div style={{width: '50px', height: '0px', overflow: 'scroll', padding: '50px 50px 0 50px'}}>
+          <div
+            style={{
+              width: '50px',
+              height: '0px',
+              overflow: 'scroll',
+              padding: '50px 50px 0 50px'
+            }}
+          >
             <Position
               placement="bottom"
               constrain="scroll-parent"
-              mountNode={el => document.getElementById('mountNode')}
+              mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -442,19 +470,28 @@ describe('<Position />', async () => {
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
 
-      expect(within(Math.floor(contentRect.bottom), Math.floor(targetRect.top), 1)).to.be.true()
+      expect(
+        within(Math.floor(contentRect.bottom), Math.floor(targetRect.top), 1)
+      ).to.be.true()
     })
 
     it('should re-position after target', async () => {
       const onPositionChanged = stub()
       await mount(
-        <div style={{padding: '50px'}}>
+        <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
-          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '50px 80px 50px 0'}}>
+          <div
+            style={{
+              width: '50px',
+              height: '50px',
+              overflow: 'scroll',
+              padding: '50px 80px 50px 0'
+            }}
+          >
             <Position
               placement="start"
               constrain="scroll-parent"
-              mountNode={el => document.getElementById('mountNode')}
+              mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -477,19 +514,28 @@ describe('<Position />', async () => {
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
 
-      expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right), 1)).to.be.true()
+      expect(
+        within(Math.floor(contentRect.left), Math.floor(targetRect.right), 1)
+      ).to.be.true()
     })
 
     it('should re-position before target', async () => {
       const onPositionChanged = stub()
       await mount(
-        <div style={{padding: '50px'}}>
+        <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
-          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '50px 0px 50px 80px'}}>
+          <div
+            style={{
+              width: '50px',
+              height: '50px',
+              overflow: 'scroll',
+              padding: '50px 0px 50px 80px'
+            }}
+          >
             <Position
               placement="end"
               constrain="scroll-parent"
-              mountNode={el => document.getElementById('mountNode')}
+              mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
             >
@@ -512,7 +558,9 @@ describe('<Position />', async () => {
       const targetRect = target.getBoundingClientRect()
       const contentRect = content.getBoundingClientRect()
 
-      expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left), 1)).to.be.true()
+      expect(
+        within(Math.floor(contentRect.right), Math.floor(targetRect.left), 1)
+      ).to.be.true()
     })
   })
 
@@ -524,7 +572,7 @@ describe('<Position />', async () => {
 
     it('should position correctly', async () => {
       await mount(
-        <div style={{padding: '100px'}}>
+        <div style={{ padding: '100px' }}>
           <Position placement="bottom" renderTarget={<button>Target</button>}>
             <div id="content">
               <div>Content</div>
@@ -538,19 +586,28 @@ describe('<Position />', async () => {
       const content = await position.findContent(':contains(Content)')
 
       await wait(() => {
-        expect(content.getBoundingClientRect().top).to.equal(target.getBoundingClientRect().bottom)
+        expect(content.getBoundingClientRect().top).to.equal(
+          target.getBoundingClientRect().bottom
+        )
       })
     })
 
     it('should position correctly with mountNode', async () => {
       await mount(
-        <div style={{padding: '100px'}}>
+        <div style={{ padding: '100px' }}>
           <div id="mountNode">mount</div>
-          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '50px'}}>
+          <div
+            style={{
+              width: '50px',
+              height: '50px',
+              overflow: 'scroll',
+              padding: '50px'
+            }}
+          >
             <Position
               placement="bottom"
               constrain="scroll-parent"
-              mountNode={el => document.getElementById('mountNode')}
+              mountNode={(el) => document.getElementById('mountNode')}
               renderTarget={<button>Target</button>}
             >
               <div id="content">
@@ -566,7 +623,9 @@ describe('<Position />', async () => {
       const content = await position.findContent(':contains(Content)')
 
       await wait(() => {
-        expect(content.getBoundingClientRect().top).to.equal(target.getBoundingClientRect().bottom)
+        expect(content.getBoundingClientRect().top).to.equal(
+          target.getBoundingClientRect().bottom
+        )
       })
     })
   })

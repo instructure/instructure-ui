@@ -26,6 +26,8 @@ const getWorkspacePaths = require('@instructure/ui-template-scripts/lib/utils/ge
 const { warn } = require('@instructure/command-utils')
 
 module.exports = function (args = {}) {
-  warn('`getWorkspacePaths` has been moved from \'@instructure/ui-scripts/lib/utils/getWorkspacePaths\' to \'@instructure/ui-template-scripts/lib/utils/getWorkspacePaths\'.')
+  warn(
+    "`getWorkspacePaths` has been moved from '@instructure/ui-scripts/lib/utils/getWorkspacePaths' to '@instructure/ui-template-scripts/lib/utils/getWorkspacePaths'."
+  )
   return getWorkspacePaths(args)
 }

@@ -29,7 +29,7 @@ let ENTRIES = []
 class FocusRegionManager {
   static focusRegion = (element, idOrOptions = {}) => {
     let entry
-    if (typeof idOrOptions === 'string' ) {
+    if (typeof idOrOptions === 'string') {
       entry = FocusRegionManager.getEntry(element, idOrOptions)
     } else {
       entry = FocusRegionManager.addEntry(element, idOrOptions)

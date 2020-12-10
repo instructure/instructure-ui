@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-  export default {
-    getComponentProps: (props) => {
-      return {
-        renderLabel: 'Grade',
-        renderValue: '90%'
-      }
+export default {
+  getComponentProps: (props) => {
+    return {
+      renderLabel: 'Grade',
+      renderValue: '90%'
     }
   }
+}

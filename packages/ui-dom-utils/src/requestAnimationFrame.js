@@ -39,7 +39,11 @@ const requestAnimationFrame = (function () {
   let requestAnimationFrame
 
   /* istanbul ignore else  */
-  if (canUseDOM && window.requestAnimationFrame && window.cancelAnimationFrame) {
+  if (
+    canUseDOM &&
+    window.requestAnimationFrame &&
+    window.cancelAnimationFrame
+  ) {
     requestAnimationFrame = (cb) => {
       const id = window.requestAnimationFrame(cb)
       return {
@@ -62,7 +66,7 @@ const requestAnimationFrame = (function () {
   }
 
   return requestAnimationFrame
-}())
+})()
 
 export default requestAnimationFrame
 export { requestAnimationFrame }

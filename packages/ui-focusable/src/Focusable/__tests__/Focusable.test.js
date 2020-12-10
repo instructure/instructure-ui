@@ -24,18 +24,23 @@
 
 import React, { Component } from 'react'
 
-import { expect, find, mount, spy, stub, wait } from '@instructure/ui-test-utils'
+import {
+  expect,
+  find,
+  mount,
+  spy,
+  stub,
+  wait
+} from '@instructure/ui-test-utils'
 
 import { Focusable } from '../index'
 
 describe('<Focusable />', async () => {
-  const lastCall = spy => spy.lastCall.args[0]
+  const lastCall = (spy) => spy.lastCall.args[0]
 
   it('should render', async () => {
     const subject = await mount(
-      <Focusable>
-        {() => <button>hello world</button>}
-      </Focusable>
+      <Focusable>{() => <button>hello world</button>}</Focusable>
     )
 
     expect(subject.getDOMNode()).to.exist()
@@ -99,7 +104,7 @@ describe('<Focusable />', async () => {
     await focusable.mouseDown()
     await focusable.focus()
 
-    await wait(() =>{
+    await wait(() => {
       expect(lastCall(renderSpy).focused).to.equal(true)
       expect(lastCall(renderSpy).focusVisible).to.equal(false)
     })
@@ -112,10 +117,11 @@ describe('<Focusable />', async () => {
       render: ({ focused }) => {
         return (
           <div>
-            {focused
-              ? <input type="text" />
-              : <a href="http://focus.net">Click</a>
-            }
+            {focused ? (
+              <input type="text" />
+            ) : (
+              <a href="http://focus.net">Click</a>
+            )}
           </div>
         )
       }
@@ -125,9 +131,7 @@ describe('<Focusable />', async () => {
 
     const renderSpy = spy(props, 'render')
 
-    await mount(
-      <Focusable {...props} />
-    )
+    await mount(<Focusable {...props} />)
 
     const firstFocusable = await find(':focusable')
 
@@ -136,7 +140,9 @@ describe('<Focusable />', async () => {
 
     await wait(() => {
       expect(lastCall(renderSpy).focused).to.be.false()
-      expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+      expect(lastCall(renderSpy).focusable).to.equal(
+        firstFocusable.getDOMNode()
+      )
     })
 
     await firstFocusable.focus()
@@ -167,15 +173,15 @@ describe('<Focusable />', async () => {
   it('should maintain focus when the focus element changes', async () => {
     const props = {
       /* eslint-disable react/display-name */
-      render: () => { return <a href="http://focus.net">Click</a> }
+      render: () => {
+        return <a href="http://focus.net">Click</a>
+      }
       /* eslint-enable react/display-name */
     }
 
     const renderSpy = spy(props, 'render')
 
-    const subject = await mount(
-      <Focusable {...props} />
-    )
+    const subject = await mount(<Focusable {...props} />)
 
     const firstFocusable = await find(':focusable')
     await firstFocusable.focus()
@@ -183,7 +189,9 @@ describe('<Focusable />', async () => {
     await wait(() => {
       expect(firstFocusable.focused()).to.be.true()
       expect(lastCall(renderSpy).focused).to.be.true()
-      expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+      expect(lastCall(renderSpy).focusable).to.equal(
+        firstFocusable.getDOMNode()
+      )
     })
 
     /* eslint-disable react/display-name */
@@ -199,7 +207,9 @@ describe('<Focusable />', async () => {
 
     await wait(() => {
       expect(lastCall(nextRenderSpy).focused).to.be.true()
-      expect(lastCall(nextRenderSpy).focusable).to.equal(nextFocusable.getDOMNode())
+      expect(lastCall(nextRenderSpy).focusable).to.equal(
+        nextFocusable.getDOMNode()
+      )
     })
   })
 
@@ -230,9 +240,14 @@ describe('<Focusable />', async () => {
     })
 
     await subject.setProps({
-      children: (args) => { // eslint-disable-line react/display-name
+      // eslint-disable-next-line react/display-name
+      children: (args) => {
         renderSpy(args)
-        return <span>some content text<button>bar</button></span>
+        return (
+          <span>
+            some content text<button>bar</button>
+          </span>
+        )
       }
     })
 
@@ -247,7 +262,8 @@ describe('<Focusable />', async () => {
 
   it('should warn when there is more than one focusable descendant', async () => {
     const consoleWarn = stub(console, 'warn')
-    const warning = 'Warning: [Focusable] Exactly one focusable child is required (2 found).'
+    const warning =
+      'Warning: [Focusable] Exactly one focusable child is required (2 found).'
     await mount(
       <Focusable>
         {(args) => {
@@ -262,24 +278,21 @@ describe('<Focusable />', async () => {
         }}
       </Focusable>
     )
-    expect(consoleWarn)
-      .to.be.calledWith(warning)
+    expect(consoleWarn).to.be.calledWith(warning)
   })
 
   it('should warn when there are no focusable descendants', async () => {
     const consoleWarn = stub(console, 'warn')
-    const warning = 'Warning: [Focusable] Exactly one focusable child is required (0 found).'
+    const warning =
+      'Warning: [Focusable] Exactly one focusable child is required (0 found).'
     await mount(
       <Focusable>
         {(args) => {
-          return (
-            <span>hello!</span>
-          )
+          return <span>hello!</span>
         }}
       </Focusable>
     )
-    expect(consoleWarn)
-      .to.be.calledWith(warning)
+    expect(consoleWarn).to.be.calledWith(warning)
   })
 
   it('should attach event listener correctly even when the focusable element is not the root', async () => {
@@ -315,7 +328,11 @@ describe('<Focusable />', async () => {
   it('should provide a focus method', async () => {
     let focusable
     await mount(
-      <Focusable componentRef={(el) => { focusable = el }}>
+      <Focusable
+        componentRef={(el) => {
+          focusable = el
+        }}
+      >
         {() => <button>hello world</button>}
       </Focusable>
     )
@@ -331,7 +348,11 @@ describe('<Focusable />', async () => {
     let focusable
 
     await mount(
-      <Focusable componentRef={(el) => { focusable = el }}>
+      <Focusable
+        componentRef={(el) => {
+          focusable = el
+        }}
+      >
         {() => <button>hello world</button>}
       </Focusable>
     )
@@ -350,16 +371,17 @@ describe('<Focusable />', async () => {
 
         return (
           <Focusable>
-            {
-              ({focusVisible}) => {
-                return (
-                  <input
-                    readOnly
-                    ref={(el) => { inputRef = el }}
-                    value={`${focusVisible}_${changeValue}`} />
-                )
-              }
-            }
+            {({ focusVisible }) => {
+              return (
+                <input
+                  readOnly
+                  ref={(el) => {
+                    inputRef = el
+                  }}
+                  value={`${focusVisible}_${changeValue}`}
+                />
+              )
+            }}
           </Focusable>
         )
       }
@@ -395,25 +417,37 @@ describe('<Focusable />', async () => {
 
         return (
           <div>
-            <Focusable ref={(el) => { focusableRef = el }}>
-              {
-                () => {
-                  return (
-                    <label ref={(el) => { labelRef = el }}>
-                      <input
-                        checked={checked}
-                        disabled={disabled}
-                        onChange={()=> { this.setState({ checked: true }) }}
-                        type="checkbox"
-                      />
-                    </label>
-                  )
-                }
-              }
+            <Focusable
+              ref={(el) => {
+                focusableRef = el
+              }}
+            >
+              {() => {
+                return (
+                  <label
+                    ref={(el) => {
+                      labelRef = el
+                    }}
+                  >
+                    <input
+                      checked={checked}
+                      disabled={disabled}
+                      onChange={() => {
+                        this.setState({ checked: true })
+                      }}
+                      type="checkbox"
+                    />
+                  </label>
+                )
+              }}
             </Focusable>
             <button
-              onClick={() => { this.setState({ disabled: true }) }}
-              ref={(el) => { buttonRef = el }}
+              onClick={() => {
+                this.setState({ disabled: true })
+              }}
+              ref={(el) => {
+                buttonRef = el
+              }}
             >
               hello world
             </button>

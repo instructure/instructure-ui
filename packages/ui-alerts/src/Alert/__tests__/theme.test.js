@@ -32,8 +32,7 @@ describe('Alert.theme', () => {
 
     describe('default', () => {
       it('should ensure text color and background color meet 3:1 contrast', () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(3)
+        expect(contrast(variables.color, variables.background)).to.be.above(3)
       })
     })
   })
@@ -43,8 +42,7 @@ describe('Alert.theme', () => {
 
     describe('default', () => {
       it('should ensure text color and background color meet 3:1 contrast', () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(4.5)
+        expect(contrast(variables.color, variables.background)).to.be.above(4.5)
       })
     })
   })

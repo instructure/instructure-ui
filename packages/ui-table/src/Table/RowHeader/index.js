@@ -48,7 +48,7 @@ class RowHeader extends Component {
     /**
      * Control the text alignment in row header
      */
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    textAlign: PropTypes.oneOf(['start', 'center', 'end'])
   }
   /* eslint-enable react/require-default-props */
 
@@ -57,19 +57,22 @@ class RowHeader extends Component {
     children: null
   }
 
-  render () {
+  render() {
     const { children, textAlign, isStacked } = this.props
 
     return (
       <View
-        {...View.omitViewProps(omitProps(this.props, RowHeader.propTypes), RowHeader)}
+        {...View.omitViewProps(
+          omitProps(this.props, RowHeader.propTypes),
+          RowHeader
+        )}
         as={isStacked ? 'div' : 'th'}
         className={classnames({
           [styles.root]: true,
-          [styles[`textAlign--${textAlign}`]]: textAlign,
+          [styles[`textAlign--${textAlign}`]]: textAlign
         })}
         scope="row"
-        role={isStacked ? "rowheader" : null}
+        role={isStacked ? 'rowheader' : null}
       >
         {callRenderProp(children)}
       </View>

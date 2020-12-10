@@ -53,7 +53,7 @@ const ThemeablePropTypes = {
   spacing: shorthandPropType(Object.values(SPACING))
 }
 
-function shorthandPropType (validValues) {
+function shorthandPropType(validValues) {
   return function (props, propName, componentName, location) {
     const propValue = props[propName]
 
@@ -85,14 +85,13 @@ function shorthandPropType (validValues) {
     } else {
       return new Error(
         `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
-          `between one and four of the following valid values: \`${validValues.join(', ')}\`.`
+          `between one and four of the following valid values: \`${validValues.join(
+            ', '
+          )}\`.`
       )
     }
   }
 }
 
 export default ThemeablePropTypes
-export {
-  ThemeablePropTypes,
-  shorthandPropType
-}
+export { ThemeablePropTypes, shorthandPropType }

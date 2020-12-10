@@ -40,12 +40,12 @@ category: components/utilities
 class ScreenReaderContent extends Component {
   static propTypes = {
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType,
     /**
-    * content meant for screen readers only
-    */
+     * content meant for screen readers only
+     */
     children: PropTypes.node
   }
 
@@ -54,7 +54,7 @@ class ScreenReaderContent extends Component {
     children: null
   }
 
-  render () {
+  render() {
     const { children, ...props } = this.props
     const ElementType = getElementType(ScreenReaderContent, props)
 

@@ -40,44 +40,44 @@ tags: autocomplete, typeahead, combobox, dropdown, search
 class Selectable extends Component {
   static propTypes = {
     /**
-    * The id of the trigger element. Set automatically if not provided
-    */
+     * The id of the trigger element. Set automatically if not provided
+     */
     id: PropTypes.string,
     /**
-    * The id of the option in the list that should be considered highlighted
-    */
+     * The id of the option in the list that should be considered highlighted
+     */
     highlightedOptionId: PropTypes.string,
     /**
-    * The id of the option(s) in the list that should be considered selected
-    */
+     * The id of the option(s) in the list that should be considered selected
+     */
     selectedOptionId: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     /**
-    * Whether or not the options should be visible
-    */
+     * Whether or not the options should be visible
+     */
     isShowingOptions: PropTypes.bool,
     /**
-    * Callback fired when the options want to become visible
-    */
+     * Callback fired when the options want to become visible
+     */
     onRequestShowOptions: PropTypes.func,
     /**
-    * Callback fired when the options no longer want to be visible
-    */
+     * Callback fired when the options no longer want to be visible
+     */
     onRequestHideOptions: PropTypes.func,
     /**
-    * Callback fired when option is hovered or highlighted via keyboard
-    */
+     * Callback fired when option is hovered or highlighted via keyboard
+     */
     onRequestHighlightOption: PropTypes.func,
     /**
-    * Callback fired when first option should be highlighted
-    */
+     * Callback fired when first option should be highlighted
+     */
     onRequestHighlightFirstOption: PropTypes.func,
     /**
-    * Callback fired when last option should be highlighted
-    */
+     * Callback fired when last option should be highlighted
+     */
     onRequestHighlightLastOption: PropTypes.func,
     /**
-    * Callback fired when option clicked or selected via keyboard
-    */
+     * Callback fired when option clicked or selected via keyboard
+     */
     onRequestSelectOption: PropTypes.func,
     /**
      * @param {Object} renderProps
@@ -219,7 +219,7 @@ class Selectable extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       isShowingOptions,
       highlightedOptionId,
@@ -231,11 +231,7 @@ class Selectable extends Component {
 
     if (typeof render === 'function') {
       return render({
-        getRootProps: ({
-          onMouseDown,
-          onClick,
-          ...rest
-        } = {}) => {
+        getRootProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             onClick: createChainedFunction(this.handleOpenClose, onClick),
             onMouseDown: createChainedFunction((event) => {
@@ -254,31 +250,25 @@ class Selectable extends Component {
           }
         },
 
-        getTriggerProps: ({
-          ref,
-          onKeyDown,
-          onKeyUp,
-          ...rest
-        } = {}) => {
+        getTriggerProps: ({ ref, onKeyDown, onKeyUp, ...rest } = {}) => {
           return {
             id: this._id,
-            ref: createChainedFunction(ref, (el) => this._trigger = el),
+            ref: createChainedFunction(ref, (el) => (this._trigger = el)),
             'aria-haspopup': 'listbox',
             'aria-expanded': isShowingOptions,
             'aria-owns': isShowingOptions ? this._listId : null,
             'aria-controls': isShowingOptions ? this._listId : null,
             'aria-describedby': this._descriptionId,
-            'aria-activedescendant': isShowingOptions ? highlightedOptionId : null,
+            'aria-activedescendant': isShowingOptions
+              ? highlightedOptionId
+              : null,
             onKeyDown: createChainedFunction(this.handleKeyDown, onKeyDown),
             onKeyUp: createChainedFunction(this.handleKeyUp, onKeyUp),
             ...rest
           }
         },
 
-        getInputProps: ({
-          readOnly,
-          ...rest
-        } = {}) => {
+        getInputProps: ({ readOnly, ...rest } = {}) => {
           return {
             role: 'combobox',
             'aria-autocomplete': readOnly ? 'none' : 'both',
@@ -288,11 +278,7 @@ class Selectable extends Component {
           }
         },
 
-        getListProps: ({
-          onMouseDown,
-          onClick,
-          ...rest
-        } = {}) => {
+        getListProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             id: this._listId,
             role: 'listbox',
@@ -309,13 +295,11 @@ class Selectable extends Component {
           }
         },
 
-        getOptionProps: ({
-          id,
-          onMouseOver,
-          onClick,
-          ...rest
-        } = {}) => {
-          error(id, `[Selectable] Must provide id for each option via \`getOptionProps\`.`)
+        getOptionProps: ({ id, onMouseOver, onClick, ...rest } = {}) => {
+          error(
+            id,
+            `[Selectable] Must provide id for each option via \`getOptionProps\`.`
+          )
           return {
             id,
             role: 'option',

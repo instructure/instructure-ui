@@ -31,8 +31,12 @@ export default {
   propValues: {
     children: [
       [
-        <BreadcrumbLink key="0" onClick={() => {}}>English 204</BreadcrumbLink>,
-        <BreadcrumbLink key="1" href="#">The Rabbit Novels</BreadcrumbLink>,
+        <BreadcrumbLink key="0" onClick={() => {}}>
+          English 204
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="1" href="#">
+          The Rabbit Novels
+        </BreadcrumbLink>,
         <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
       ],
       [

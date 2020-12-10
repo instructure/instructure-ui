@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
- export default function ({ typography, spacing }) {
-   return {
-     fontFamily: typography.fontFamily,
-     fontWeight: typography.fontWeightNormal,
-     fontSize: typography.fontSizeSmall,
-     padding: spacing.small
-   }
- }
+export default function ({ typography, spacing }) {
+  return {
+    fontFamily: typography.fontFamily,
+    fontWeight: typography.fontWeightNormal,
+    fontSize: typography.fontSizeSmall,
+    padding: spacing.small
+  }
+}

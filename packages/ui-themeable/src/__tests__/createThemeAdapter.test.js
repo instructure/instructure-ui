@@ -48,7 +48,10 @@ describe('createThemeAdapter', () => {
         font: 'comic-sans'
       }
 
-      const updatedTheme = createThemeAdapter({ map, version })({ theme, displayName })
+      const updatedTheme = createThemeAdapter({ map, version })({
+        theme,
+        displayName
+      })
 
       expect(theme).to.deep.equal(updatedTheme)
     })
@@ -60,7 +63,10 @@ describe('createThemeAdapter', () => {
         originalBorder: 'none'
       }
 
-      const updatedTheme = createThemeAdapter({ map, version })({ theme, displayName })
+      const updatedTheme = createThemeAdapter({ map, version })({
+        theme,
+        displayName
+      })
 
       const expectedTheme = {
         updatedColor: 'orange',
@@ -79,7 +85,10 @@ describe('createThemeAdapter', () => {
         updatedMargin: 'small'
       }
 
-      const updatedTheme = createThemeAdapter({ map, version })({ theme, displayName })
+      const updatedTheme = createThemeAdapter({ map, version })({
+        theme,
+        displayName
+      })
 
       const expectedTheme = {
         updatedPadding: 'large',
@@ -98,7 +107,10 @@ describe('createThemeAdapter', () => {
         updatedBorder: 'none'
       }
 
-      const updatedTheme = createThemeAdapter({ map, version })({ theme, displayName })
+      const updatedTheme = createThemeAdapter({ map, version })({
+        theme,
+        displayName
+      })
 
       expect(theme).to.deep.equal(updatedTheme)
     })
@@ -110,7 +122,11 @@ describe('createThemeAdapter', () => {
         originalBorder: 'none'
       }
 
-      const updatedTheme = createThemeAdapter({ map, version, shouldIncludeOldValues: true })({ theme, displayName })
+      const updatedTheme = createThemeAdapter({
+        map,
+        version,
+        shouldIncludeOldValues: true
+      })({ theme, displayName })
 
       const expectedTheme = {
         originalColor: 'orange',
@@ -132,14 +148,13 @@ describe('createThemeAdapter', () => {
       }
 
       const map = {
-        fontFamily: [
-          'fontFamily1',
-          'fontFamily2',
-          'fontFamily3'
-        ]
+        fontFamily: ['fontFamily1', 'fontFamily2', 'fontFamily3']
       }
 
-      const updatedTheme = createThemeAdapter({ map, version })({ theme, displayName })
+      const updatedTheme = createThemeAdapter({ map, version })({
+        theme,
+        displayName
+      })
 
       const expectedTheme = {
         fontFamily1: 'papyrus',
@@ -156,14 +171,14 @@ describe('createThemeAdapter', () => {
       }
 
       const map = {
-        fontFamily: [
-          'fontFamily1',
-          'fontFamily2',
-          'fontFamily3'
-        ]
+        fontFamily: ['fontFamily1', 'fontFamily2', 'fontFamily3']
       }
 
-      const updatedTheme = createThemeAdapter({ map, version, shouldIncludeOldValues: true })({ theme, displayName })
+      const updatedTheme = createThemeAdapter({
+        map,
+        version,
+        shouldIncludeOldValues: true
+      })({ theme, displayName })
 
       const expectedTheme = {
         fontFamily: 'papyrus',
@@ -193,7 +208,7 @@ describe('createThemeAdapter', () => {
 
     it('should warn with the correct display name and version', () => {
       const theme = {
-        originalColor: 'orange',
+        originalColor: 'orange'
       }
 
       const warningStub = stub(console, 'warn')

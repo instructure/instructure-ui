@@ -29,7 +29,7 @@ const getOptions = require('../utils/getOptions')
 const parseDoc = require('../utils/parseDoc')
 const getPathInfo = require('../utils/getPathInfo')
 
-module.exports = function DocgenLoader (source) {
+module.exports = function DocgenLoader(source) {
   this.cacheable && this.cacheable()
 
   const context = this.context || process.cwd()
@@ -38,7 +38,11 @@ module.exports = function DocgenLoader (source) {
   const pathInfo = getPathInfo(this.resourcePath, options, context)
 
   let doc = parseDoc(this.resourcePath, source, (err) => {
-    console.warn('\x1b[33m%s\x1b[0m', '[docgen-loader]: Error when parsing ', this.request)
+    console.warn(
+      '\x1b[33m%s\x1b[0m',
+      '[docgen-loader]: Error when parsing ',
+      this.request
+    )
     console.warn(err.toString())
   })
 

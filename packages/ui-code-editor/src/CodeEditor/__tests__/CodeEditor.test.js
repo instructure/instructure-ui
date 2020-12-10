@@ -30,9 +30,7 @@ import { CodeEditorLocator } from '../CodeEditorLocator'
 
 describe('<CodeEditor />', async () => {
   it('should render', async () => {
-    await mount(
-      <CodeEditor label='foo' />
-    )
+    await mount(<CodeEditor label="foo" />)
     const editor = await CodeEditorLocator.find()
     const input = await editor.findInput()
 
@@ -42,7 +40,7 @@ describe('<CodeEditor />', async () => {
   it('should behave controlled', async () => {
     const onChange = stub()
     const subject = await mount(
-      <CodeEditor label='foo' value="hello worl" onChange={onChange} />
+      <CodeEditor label="foo" value="hello worl" onChange={onChange} />
     )
     const editor = await CodeEditorLocator.find()
     const input = await editor.findInput()
@@ -52,7 +50,7 @@ describe('<CodeEditor />', async () => {
     expect(editor.getTextContent()).to.include('hello worl')
     expect(editor.getTextContent()).to.not.include('world')
 
-    await subject.setProps({ value: 'hello world'})
+    await subject.setProps({ value: 'hello world' })
     expect(editor.getTextContent()).to.include('hello world')
   })
 })

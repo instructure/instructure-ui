@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 const { getPackageJSON, getPackages } = require('@instructure/pkg-utils')
-const { runCommandAsync, error, info, confirm } = require('@instructure/commmand-utils')
+const {
+  runCommandAsync,
+  error,
+  info,
+  confirm
+} = require('@instructure/commmand-utils')
 
 const { createNPMRCFile } = require('./utils/npm')
 const { getConfig } = require('./utils/config')
@@ -40,7 +45,7 @@ try {
   process.exit(1)
 }
 
-async function deprecate (versionToDeprecate, fixVersion, config) {
+async function deprecate(versionToDeprecate, fixVersion, config) {
   const message = fixVersion ? `A critical bug was fixed in ${fixVersion}` : ''
   createNPMRCFile(config)
 
@@ -50,20 +55,22 @@ async function deprecate (versionToDeprecate, fixVersion, config) {
     process.exit(0)
   }
 
-  return Promise.all(getPackages().map(async pkg => {
-    if (pkg.private) {
-      info(`${pkg.name} is private.`)
-    } else {
-      const toDeprecate = `${pkg.name}@${versionToDeprecate}`
+  return Promise.all(
+    getPackages().map(async (pkg) => {
+      if (pkg.private) {
+        info(`${pkg.name} is private.`)
+      } else {
+        const toDeprecate = `${pkg.name}@${versionToDeprecate}`
 
-      info(`📦  Deprecating ${toDeprecate}...`)
+        info(`📦  Deprecating ${toDeprecate}...`)
 
-      try {
-        await runCommandAsync('npm', ['deprecate', toDeprecate, message])
-      } catch (err) {
-        error(err)
+        try {
+          await runCommandAsync('npm', ['deprecate', toDeprecate, message])
+        } catch (err) {
+          error(err)
+        }
+        info(`📦  ${toDeprecate} was successfully deprecated!`)
       }
-      info(`📦  ${toDeprecate} was successfully deprecated!`)
-    }
-  }))
+    })
+  )
 }

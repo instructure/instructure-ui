@@ -48,22 +48,22 @@ category: components
 class Breadcrumb extends Component {
   static propTypes = {
     /**
-    * children of type Breadcrumb.Link
-    */
+     * children of type Breadcrumb.Link
+     */
     children: Children.oneOf([BreadcrumbLink]),
     /**
-    * An accessible label for the navigation
-    */
+     * An accessible label for the navigation
+     */
     label: PropTypes.string.isRequired,
     /**
-    * Sets the font-size of the breadcrumb text
-    */
+     * Sets the font-size of the breadcrumb text
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing
   }
 
@@ -75,30 +75,24 @@ class Breadcrumb extends Component {
 
   static Link = BreadcrumbLink
 
-  renderChildren () {
+  renderChildren() {
     const numChildren = this.props.children ? this.props.children.length : 0
     const style = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
     }
-    return React.Children.map(this.props.children,
-      (child, index) => {
-        return (
-          <li className={styles.crumb} style={style}>
-            {child}
-            {
-              index < (numChildren - 1) &&
-                <IconArrowOpenEndSolid
-                  color="auto"
-                  className={styles.separator}
-                />
-            }
-          </li>
-        )
-      }
-    )
+    return React.Children.map(this.props.children, (child, index) => {
+      return (
+        <li className={styles.crumb} style={style}>
+          {child}
+          {index < numChildren - 1 && (
+            <IconArrowOpenEndSolid color="auto" className={styles.separator} />
+          )}
+        </li>
+      )
+    })
   }
 
-  render () {
+  render() {
     const classes = {
       [styles.root]: true,
       [styles[this.props.size]]: true
@@ -111,9 +105,7 @@ class Breadcrumb extends Component {
         margin={this.props.margin}
         aria-label={this.props.label}
       >
-        <ol className={classnames(classes)}>
-          {this.renderChildren()}
-        </ol>
+        <ol className={classnames(classes)}>{this.renderChildren()}</ol>
       </View>
     )
   }

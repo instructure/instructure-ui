@@ -31,16 +31,18 @@ describe('MenuItem.theme', () => {
     const variables = MenuItem.generateTheme()
 
     it('should ensure label color and icon color meet 3:1 contrast with background', () => {
-      expect(contrast(variables.background, variables.labelColor))
-        .to.be.above(3)
-      expect(contrast(variables.background, variables.iconColor))
-        .to.be.above(3)
+      expect(contrast(variables.background, variables.labelColor)).to.be.above(
+        3
+      )
+      expect(contrast(variables.background, variables.iconColor)).to.be.above(3)
     })
     it('should ensure label and icon active colors meet 3:1 contrast with active background', () => {
-      expect(contrast(variables.activeBackground, variables.activeLabelColor))
-        .to.be.above(3)
-      expect(contrast(variables.activeBackground, variables.activeIconColor))
-        .to.be.above(3)
+      expect(
+        contrast(variables.activeBackground, variables.activeLabelColor)
+      ).to.be.above(3)
+      expect(
+        contrast(variables.activeBackground, variables.activeIconColor)
+      ).to.be.above(3)
     })
   })
 
@@ -48,16 +50,20 @@ describe('MenuItem.theme', () => {
     const variables = MenuItem.generateTheme('canvas-high-contrast')
 
     it('should ensure label color and icon color meet 4.5:1 contrast with background', () => {
-      expect(contrast(variables.background, variables.labelColor))
-        .to.be.above(4.5)
-      expect(contrast(variables.background, variables.iconColor))
-        .to.be.above(4.5)
+      expect(contrast(variables.background, variables.labelColor)).to.be.above(
+        4.5
+      )
+      expect(contrast(variables.background, variables.iconColor)).to.be.above(
+        4.5
+      )
     })
     it('should ensure label and icon active colors meet 4.5:1 contrast with active background', () => {
-      expect(contrast(variables.activeBackground, variables.activeLabelColor))
-        .to.be.above(4.5)
-      expect(contrast(variables.activeBackground, variables.activeIconColor))
-        .to.be.above(4.5)
+      expect(
+        contrast(variables.activeBackground, variables.activeLabelColor)
+      ).to.be.above(4.5)
+      expect(
+        contrast(variables.activeBackground, variables.activeIconColor)
+      ).to.be.above(4.5)
     })
   })
 })

@@ -25,9 +25,12 @@
 const path = require('path')
 const fs = require('fs')
 
-module.exports = function loadConfig (name, defaults, ctx) {
+module.exports = function loadConfig(name, defaults, ctx) {
   // eslint-disable-next-line no-param-reassign
-  ctx = ctx || { env: process.env.NODE_ENV || 'development', cwd: process.cwd() }
+  ctx = ctx || {
+    env: process.env.NODE_ENV || 'development',
+    cwd: process.cwd()
+  }
 
   const config = findConfig(
     name,
@@ -42,10 +45,15 @@ module.exports = function loadConfig (name, defaults, ctx) {
   }
 }
 
-function findConfig (name, parts, defaults) {
+function findConfig(name, parts, defaults) {
   if (!parts) return {}
 
-  const filenames = [`${name}.json`, `${name}rc.js`, `${name}.config.js`, `.${name}rc`]
+  const filenames = [
+    `${name}.json`,
+    `${name}rc.js`,
+    `${name}.config.js`,
+    `.${name}rc`
+  ]
 
   while (filenames.length) {
     const rcFilePath = resolvePath(parts, filenames.shift())
@@ -72,11 +80,11 @@ function findConfig (name, parts, defaults) {
   }
 }
 
-function resolvePath (parts, filename) {
+function resolvePath(parts, filename) {
   return path.resolve(parts.join(path.sep) + path.sep, filename)
 }
 
-function loadConfigFile (filePath) {
+function loadConfigFile(filePath) {
   try {
     return requireNoCache(filePath)
   } catch (e) {
@@ -85,11 +93,11 @@ function loadConfigFile (filePath) {
   }
 }
 
-function invalidateRequireCacheForFile (filepath) {
+function invalidateRequireCacheForFile(filepath) {
   delete require.cache[require.resolve(filepath)]
 }
 
-function requireNoCache (filepath) {
+function requireNoCache(filepath) {
   invalidateRequireCacheForFile(filepath)
   return require(filepath)
 }

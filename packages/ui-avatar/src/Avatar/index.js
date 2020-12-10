@@ -49,38 +49,45 @@ class Avatar extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     /*
-    * URL of the image to display as the background image
-    */
+     * URL of the image to display as the background image
+     */
     src: PropTypes.string,
     /*
-    * Accessible label
-    */
+     * Accessible label
+     */
     alt: PropTypes.string,
-    size: PropTypes.oneOf(['auto', 'x-small', 'small', 'medium', 'large', 'x-large']),
+    size: PropTypes.oneOf([
+      'auto',
+      'x-small',
+      'small',
+      'medium',
+      'large',
+      'x-large'
+    ]),
     shape: PropTypes.oneOf(['circle', 'rectangle']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     display: PropTypes.oneOf(['inline-block', 'block']),
     /**
-    * Callback fired when the avatar image has loaded
-    */
+     * Callback fired when the avatar image has loaded
+     */
     onImageLoaded: PropTypes.func,
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     /**
-    * provides a reference to the underlying html element
-    */
+     * provides a reference to the underlying html element
+     */
     elementRef: PropTypes.func,
     /* eslint-disable react/require-default-props */
     /**
-    * __Deprecated - use `display`__
-    */
+     * __Deprecated - use `display`__
+     */
     inline: PropTypes.bool,
     /**
      * __Deprecated - use `shape`__
@@ -102,7 +109,7 @@ class Avatar extends Component {
 
   state = { loaded: false }
 
-  makeInitialsFromName () {
+  makeInitialsFromName() {
     let name = this.props.name
 
     if (!name || typeof name !== 'string') {
@@ -126,7 +133,7 @@ class Avatar extends Component {
     this.props.onImageLoaded(event)
   }
 
-  renderLoadImage () {
+  renderLoadImage() {
     // This image element is visually hidden and is here for loading purposes only
     return (
       <img
@@ -139,7 +146,7 @@ class Avatar extends Component {
     )
   }
 
-  renderInitials () {
+  renderInitials() {
     return (
       <span className={styles.initials} aria-hidden="true">
         {this.makeInitialsFromName()}
@@ -147,14 +154,16 @@ class Avatar extends Component {
     )
   }
 
-  render () {
+  render() {
     const { onImageLoaded, ...props } = this.props
 
     return (
       <View
         {...passthroughProps(props)}
         style={{
-          backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined
+          backgroundImage: this.state.loaded
+            ? `url('${this.props.src}')`
+            : undefined
         }}
         className={classnames({
           [styles.root]: true,
@@ -166,7 +175,11 @@ class Avatar extends Component {
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        display={(this.props.display === 'block' || this.props.inline === false) ? 'block' : 'inline-block'}
+        display={
+          this.props.display === 'block' || this.props.inline === false
+            ? 'block'
+            : 'inline-block'
+        }
       >
         {this.renderLoadImage()}
         {!this.state.loaded && this.renderInitials()}

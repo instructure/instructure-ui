@@ -33,10 +33,7 @@ import { Checkbox } from '../../Checkbox'
 describe('<CheckboxGroup />', async () => {
   it('adds the name props to all Checkbox types', async () => {
     await mount(
-      <CheckboxGroup
-        name="sports"
-        description="Select your favorite sports"
-      >
+      <CheckboxGroup name="sports" description="Select your favorite sports">
         <Checkbox label="Football" value="football" />
         <Checkbox label="Basketball" value="basketball" />
         <Checkbox label="Volleyball" value="volleyball" />
@@ -54,9 +51,7 @@ describe('<CheckboxGroup />', async () => {
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
-        messages={[
-          { text: 'Invalid name', type: 'error' }
-        ]}
+        messages={[{ text: 'Invalid name', type: 'error' }]}
       >
         <Checkbox label="Football" value="football" />
         <Checkbox label="Basketball" value="basketball" />
@@ -77,10 +72,7 @@ describe('<CheckboxGroup />', async () => {
     const description = 'You should pick something'
 
     await mount(
-      <CheckboxGroup
-        name="sports"
-        description={description}
-      >
+      <CheckboxGroup name="sports" description={description}>
         <Checkbox label="Football" value="football" />
         <Checkbox label="Basketball" value="basketball" />
         <Checkbox label="Volleyball" value="volleyball" />
@@ -261,7 +253,10 @@ describe('<CheckboxGroup />', async () => {
     const input = await checkboxGroup.find('input[value="football"]')
     await input.click()
 
-    expect(onChange.lastCall.args[0]).to.deep.equal(['basketball', 'volleyball'])
+    expect(onChange.lastCall.args[0]).to.deep.equal([
+      'basketball',
+      'volleyball'
+    ])
   })
 
   it('passes the array of selected values to onChange handler', async () => {
@@ -286,19 +281,23 @@ describe('<CheckboxGroup />', async () => {
     const input2 = await checkboxGroup.find('input[value="other"]')
 
     await input1.click()
-    expect(onChange.lastCall.args[0]).to.deep.equal(['basketball', 'volleyball'])
+    expect(onChange.lastCall.args[0]).to.deep.equal([
+      'basketball',
+      'volleyball'
+    ])
 
     await input2.click()
-    expect(onChange.lastCall.args[0]).to.deep.equal(['basketball', 'volleyball', 'other'])
+    expect(onChange.lastCall.args[0]).to.deep.equal([
+      'basketball',
+      'volleyball',
+      'other'
+    ])
   })
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
       await mount(
-        <CheckboxGroup
-          name="sports"
-          description="Select your favorite sports"
-        >
+        <CheckboxGroup name="sports" description="Select your favorite sports">
           <Checkbox label="Football" value="football" />
           <Checkbox label="Basketball" value="basketball" />
           <Checkbox label="Volleyball" value="volleyball" />
@@ -307,9 +306,13 @@ describe('<CheckboxGroup />', async () => {
       )
 
       const checkboxGroup = await CheckboxGroupLocator.find()
-      expect(await checkboxGroup.accessible({
-        ignores: [ 'checkboxgroup' ] /* https://github.com/dequelabs/axe-core/issues/176 */
-      })).to.be.true()
+      expect(
+        await checkboxGroup.accessible({
+          ignores: [
+            'checkboxgroup'
+          ] /* https://github.com/dequelabs/axe-core/issues/176 */
+        })
+      ).to.be.true()
     })
   })
 })

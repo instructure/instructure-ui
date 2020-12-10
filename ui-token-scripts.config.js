@@ -32,7 +32,7 @@ module.exports = [
   {
     themeKey: 'canvas',
     sourceTokens: '@instructure/ui-theme-tokens/lib/canvas',
-    outputPackage: '@instructure/canvas-theme',
+    outputPackage: '@instructure/canvas-theme'
   },
   {
     themeKey: 'canvas-high-contrast',
@@ -43,7 +43,7 @@ module.exports = [
   {
     themeKey: 'canvas-high-contrast',
     sourceTokens: '@instructure/ui-theme-tokens/lib/canvasHighContrast',
-    outputPackage: '@instructure/canvas-high-contrast-theme',
+    outputPackage: '@instructure/canvas-high-contrast-theme'
   },
   {
     themeKey: 'instructure',
@@ -54,6 +54,6 @@ module.exports = [
   {
     themeKey: 'instructure',
     sourceTokens: '@instructure/ui-theme-tokens/lib/instructure',
-    outputPackage: '@instructure/instructure-theme',
-  },
+    outputPackage: '@instructure/instructure-theme'
+  }
 ]

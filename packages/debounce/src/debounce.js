@@ -51,7 +51,7 @@
  *  Specify invoking on the trailing edge of the timeout.
  * @returns {Function} Returns the new debounced function.
  */
-function debounce (func, wait = 0, options = {}) {
+function debounce(func, wait = 0, options = {}) {
   let lastArgs, lastThis, result, lastCallTime
   let lastInvokeTime = 0
 
@@ -69,7 +69,7 @@ function debounce (func, wait = 0, options = {}) {
 
   const maxWait = maxing ? Math.max(+options.maxWait || 0, wait) : 0
 
-  function invokeFunc (time) {
+  function invokeFunc(time) {
     const args = lastArgs
     const thisArg = lastThis
 
@@ -81,7 +81,7 @@ function debounce (func, wait = 0, options = {}) {
     }
   }
 
-  function leadingEdge (time) {
+  function leadingEdge(time) {
     // Reset any `maxWait` timer.
     lastInvokeTime = time
     // Start the timer for the trailing edge.
@@ -90,7 +90,7 @@ function debounce (func, wait = 0, options = {}) {
     return leading ? invokeFunc(time) : result
   }
 
-  function remainingWait (time) {
+  function remainingWait(time) {
     const timeSinceLastCall = time - lastCallTime
     const timeSinceLastInvoke = time - lastInvokeTime
     const result = wait - timeSinceLastCall
@@ -98,18 +98,22 @@ function debounce (func, wait = 0, options = {}) {
     return maxing ? Math.min(result, maxWait - timeSinceLastInvoke) : result
   }
 
-  function shouldInvoke (time) {
+  function shouldInvoke(time) {
     const timeSinceLastCall = time - lastCallTime
     const timeSinceLastInvoke = time - lastInvokeTime
 
     // Either this is the first call, activity has stopped and we're at the
     // trailing edge, the system time has gone backwards and we're treating
     // it as the trailing edge, or we've hit the `maxWait` limit.
-    return (typeof lastCallTime === 'undefined' || (timeSinceLastCall >= wait) ||
-      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait))
+    return (
+      typeof lastCallTime === 'undefined' ||
+      timeSinceLastCall >= wait ||
+      timeSinceLastCall < 0 ||
+      (maxing && timeSinceLastInvoke >= maxWait)
+    )
   }
 
-  function timerExpired () {
+  function timerExpired() {
     const time = Date.now()
     if (shouldInvoke(time)) {
       return trailingEdge(time)
@@ -118,7 +122,7 @@ function debounce (func, wait = 0, options = {}) {
     timers.push(setTimeout(timerExpired, remainingWait(time)))
   }
 
-  function trailingEdge (time) {
+  function trailingEdge(time) {
     clearAllTimers()
 
     // Only invoke if we have `lastArgs` which means `func` has been
@@ -131,23 +135,23 @@ function debounce (func, wait = 0, options = {}) {
     return result
   }
 
-  function cancel () {
+  function cancel() {
     cancelled = true
     clearAllTimers()
     lastInvokeTime = 0
     lastArgs = lastCallTime = lastThis = undefined
   }
 
-  function flush () {
+  function flush() {
     return timers.length === 0 ? result : trailingEdge(Date.now())
   }
 
-  function clearAllTimers () {
-    timers.forEach(timerId => clearTimeout(timerId))
+  function clearAllTimers() {
+    timers.forEach((timerId) => clearTimeout(timerId))
     timers = []
   }
 
-  function debounced (...args) {
+  function debounced(...args) {
     const time = Date.now()
     const isInvoking = shouldInvoke(time)
 

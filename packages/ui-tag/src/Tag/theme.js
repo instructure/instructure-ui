@@ -24,18 +24,27 @@
 
 import { darken } from '@instructure/ui-color-utils'
 
-export default function generator ({ borders, colors, forms, spacing, typography }) {
-  const tagVariant = function (style, {
-    borderColor,
-    borderRadius,
-    borderStyle,
-    borderWidth,
-    hoverColor,
-    iconColor,
-    iconHoverColor,
-    mainColor,
-    textColor
-  }) {
+export default function generator({
+  borders,
+  colors,
+  forms,
+  spacing,
+  typography
+}) {
+  const tagVariant = function (
+    style,
+    {
+      borderColor,
+      borderRadius,
+      borderStyle,
+      borderWidth,
+      hoverColor,
+      iconColor,
+      iconHoverColor,
+      mainColor,
+      textColor
+    }
+  ) {
     return {
       [`${style}BackgroundHover`]: hoverColor || darken(mainColor, 5),
       [`${style}Background`]: mainColor,
@@ -87,7 +96,9 @@ export default function generator ({ borders, colors, forms, spacing, typography
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
+  colors
+}) {
   return {
     defaultBackground: colors.backgroundLightest,
     defaultBorderColor: colors.borderDarkest

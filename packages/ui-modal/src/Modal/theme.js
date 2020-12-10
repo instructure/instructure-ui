@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders, breakpoints, shadows, stacking, typography }) {
+export default function ({
+  colors,
+  borders,
+  breakpoints,
+  shadows,
+  stacking,
+  typography
+}) {
   return {
     fontFamily: typography.fontFamily,
     textColor: colors.textDarkest,

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, spacing, typography, borders }) {
+export default function generator({ colors, spacing, typography, borders }) {
   return {
     hoverBackgroundColor: colors.backgroundBrand,
     hoverTextColor: colors.textLightest,

@@ -28,7 +28,7 @@ const ENV = process.env.NODE_ENV || 'production'
 module.exports = {
   cache: ENV !== 'production',
   bail: !DEBUG,
-  devtool: (ENV === 'production') ? 'none' : 'cheap-module-source-map',
+  devtool: ENV === 'production' ? 'none' : 'cheap-module-source-map',
   node: { fs: 'empty' },
   resolveLoader: {
     alias: require('./resolveLoader/alias')
@@ -39,6 +39,6 @@ module.exports = {
   plugins: require('./plugins'),
   optimization: require('./optimization'),
   performance: {
-    hints: (ENV === 'production') ? 'warning' : false,
+    hints: ENV === 'production' ? 'warning' : false
   }
 }

@@ -36,7 +36,7 @@ const I18nPropTypes = {
    * @param {string} propFullName
    * @returns {Error} if prop is an invalid ISO 8601 string
    */
-  iso8601 (props, propName, componentName, location) {
+  iso8601(props, propName, componentName, location) {
     const propValue = props[propName]
     if (typeof propValue === 'undefined' || propValue === '') return
 
@@ -63,12 +63,12 @@ I18nPropTypes.iso8601.isRequired = makeRequirable(I18nPropTypes.iso8601)
 
 export default I18nPropTypes
 export {
-/**
- * ---
- * category: utilities/i18n
- * ---
- * @module I18nPropTypes
- * Custom I18n prop types for React components.
- */
+  /**
+   * ---
+   * category: utilities/i18n
+   * ---
+   * @module I18nPropTypes
+   * Custom I18n prop types for React components.
+   */
   I18nPropTypes
 }

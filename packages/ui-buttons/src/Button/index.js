@@ -27,7 +27,11 @@ import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { getInteraction, passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import {
+  getInteraction,
+  passthroughProps,
+  deprecated
+} from '@instructure/ui-react-utils'
 
 import { BaseButton } from '../BaseButton'
 import { DeprecatedButton } from '../DeprecatedButton'
@@ -42,12 +46,16 @@ import theme from './theme'
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  buttonRef: 'elementRef',
-  fluidWidth: 'display',
-  icon: 'renderIcon',
-  variant: null
-}, 'See the following upgrade guide for more help updating https://instructure.design/#button-upgrade-guide')
+@deprecated(
+  '8.0.0',
+  {
+    buttonRef: 'elementRef',
+    fluidWidth: 'display',
+    icon: 'renderIcon',
+    variant: null
+  },
+  'See the following upgrade guide for more help updating https://instructure.design/#button-upgrade-guide'
+)
 @testable()
 @themeable(theme, null, themeAdapter)
 class Button extends Component {
@@ -159,7 +167,7 @@ class Button extends Component {
     children: null,
     type: 'button',
     size: 'medium',
-    elementRef: (el) => { },
+    elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -210,7 +218,7 @@ class Button extends Component {
     // button gets injected into the style tag for the deprecated one
     // (that ends up being a _massive_ amount of variables)
     const { theme = {} } = this
-    const deprecatedTheme = (generateDeprecatedTheme() || {})
+    const deprecatedTheme = generateDeprecatedTheme() || {}
     const deprecatedKeys = Object.keys(deprecatedTheme)
 
     return Object.entries(theme).reduce((result, [key, value]) => {
@@ -295,11 +303,7 @@ class Button extends Component {
       buttonProps.display = 'block'
     }
 
-    return (
-      <BaseButton {...buttonProps}>
-        {children}
-      </BaseButton>
-    )
+    return <BaseButton {...buttonProps}>{children}</BaseButton>
   }
 }
 

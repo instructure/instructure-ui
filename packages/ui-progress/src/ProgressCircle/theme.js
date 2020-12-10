@@ -48,10 +48,10 @@ const strokeWidth = {
 // centered along the path of the stroke, unlike CSS
 const borderWidth = 0.0625
 const borderOffsetRadius = {
-  xSmall: (radius.xSmall - (strokeWidth.xSmall / 2)) + borderWidth,
-  small: (radius.small - (strokeWidth.small / 2)) + borderWidth,
-  medium: (radius.medium - (strokeWidth.medium / 2)) + borderWidth,
-  large: (radius.large - (strokeWidth.large / 2)) + borderWidth
+  xSmall: radius.xSmall - strokeWidth.xSmall / 2 + borderWidth,
+  small: radius.small - strokeWidth.small / 2 + borderWidth,
+  medium: radius.medium - strokeWidth.medium / 2 + borderWidth,
+  large: radius.large - strokeWidth.large / 2 + borderWidth
 }
 
 const circumference = function (r) {
@@ -62,7 +62,7 @@ const transform = function (s) {
   return s / 2
 }
 
-export default function generator ({ colors, typography }) {
+export default function generator({ colors, typography }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -134,7 +134,9 @@ generator.canvas = function (variables) {
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
+  colors
+}) {
   return {
     meterColorBrandInverse: colors.backgroundLightest,
     meterColorSuccessInverse: colors.backgroundLightest,

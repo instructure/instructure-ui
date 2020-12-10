@@ -21,7 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default function generator ({ colors, borders, stacking, shadows, transitions }) {
+export default function generator({
+  colors,
+  borders,
+  stacking,
+  shadows,
+  transitions
+}) {
   return {
     background: colors.backgroundLightest,
     borderColor: colors.borderMedium,

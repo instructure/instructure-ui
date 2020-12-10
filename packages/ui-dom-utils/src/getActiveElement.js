@@ -33,10 +33,12 @@
  * @throws Will throw an error in ie if no active element
  * @return {DomNode} the active element
  */
-function getActiveElement (doc) {
+function getActiveElement(doc) {
   try {
     return (doc || document).activeElement
-  } catch (e) { /* ie throws if no active element */ }
+  } catch (e) {
+    /* ie throws if no active element */
+  }
 }
 
 export default getActiveElement

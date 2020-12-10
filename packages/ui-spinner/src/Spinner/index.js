@@ -26,7 +26,11 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { callRenderProp, deprecated, omitProps } from '@instructure/ui-react-utils'
+import {
+  callRenderProp,
+  deprecated,
+  omitProps
+} from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { isIE11 } from '@instructure/ui-utils'
 import { uid } from '@instructure/uid'
@@ -47,22 +51,22 @@ category: components
 class Spinner extends Component {
   static propTypes = {
     /**
-    * Give the spinner a title to be read by screenreaders
-    */
+     * Give the spinner a title to be read by screenreaders
+     */
     renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * Different-sized spinners
-    */
+     * Different-sized spinners
+     */
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
     /**
-    * Different color schemes for use with light or dark backgrounds
-    */
+     * Different color schemes for use with light or dark backgrounds
+     */
     variant: PropTypes.oneOf(['default', 'inverse']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
     as: PropTypes.elementType,
@@ -84,13 +88,13 @@ class Spinner extends Component {
     elementRef: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     this.titleId = uid('Spinner')
   }
 
-  radius () {
+  radius() {
     switch (this.props.size) {
       case 'x-small':
         return '0.5em'
@@ -103,7 +107,7 @@ class Spinner extends Component {
     }
   }
 
-  render () {
+  render() {
     const classes = {
       [styles.root]: true,
       [styles[this.props.size]]: true,
@@ -117,7 +121,10 @@ class Spinner extends Component {
     )
 
     const hasTitle = this.props.renderTitle || this.props.title
-    error(hasTitle, '[Spinner] The renderTitle prop is necessary for screen reader support.')
+    error(
+      hasTitle,
+      '[Spinner] The renderTitle prop is necessary for screen reader support.'
+    )
 
     return (
       <View
@@ -133,20 +140,30 @@ class Spinner extends Component {
           aria-labelledby={this.titleId}
           focusable="false"
         >
-          <title id={this.titleId}>{callRenderProp(this.props.renderTitle)}</title>
+          <title id={this.titleId}>
+            {callRenderProp(this.props.renderTitle)}
+          </title>
           <g role="presentation">
-            {
-              this.props.variant !== 'inverse' &&
-              <circle className={styles.circleTrack} cx="50%" cy="50%" r={this.radius()} />
-            }
-            <circle className={styles.circleSpin} cx="50%" cy="50%" r={this.radius()} />
+            {this.props.variant !== 'inverse' && (
+              <circle
+                className={styles.circleTrack}
+                cx="50%"
+                cy="50%"
+                r={this.radius()}
+              />
+            )}
+            <circle
+              className={styles.circleSpin}
+              cx="50%"
+              cy="50%"
+              r={this.radius()}
+            />
           </g>
         </svg>
       </View>
     )
   }
 }
-
 
 export default Spinner
 export { Spinner }

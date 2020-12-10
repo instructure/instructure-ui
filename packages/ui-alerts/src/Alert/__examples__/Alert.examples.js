@@ -28,8 +28,8 @@ export default {
     children: [
       'An alert with some content',
       'an alert with a ton of content that is going to wrap. It takes a ton of content to ' +
-      'get text to wrap when the screen is high resolution and there is a good amount of space ' +
-      'to fill'
+        'get text to wrap when the screen is high resolution and there is a good amount of space ' +
+        'to fill'
     ]
   },
   getComponentProps: (props) => {

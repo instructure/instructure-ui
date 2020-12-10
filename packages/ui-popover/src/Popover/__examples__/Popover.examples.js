@@ -28,10 +28,7 @@ export default {
   propValues: {
     withArrow: [true, false],
     placement: ['bottom center'],
-    dir: [
-      'rtl',
-      'ltr'
-    ]
+    dir: ['rtl', 'ltr']
   },
   getComponentProps: (props) => {
     return {

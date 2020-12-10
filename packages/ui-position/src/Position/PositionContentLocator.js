@@ -25,4 +25,6 @@
 import { locator } from '@instructure/ui-test-locator'
 import { Position } from './index'
 
-export const PositionContentLocator = locator(`[${Position.contentLocatorAttribute}]`)
+export const PositionContentLocator = locator(
+  `[${Position.contentLocatorAttribute}]`
+)

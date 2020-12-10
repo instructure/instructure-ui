@@ -33,11 +33,7 @@ import { NavigationItemLocator } from '../NavigationItemLocator'
 describe('<NavigationItem />', async () => {
   it('should render', async () => {
     await mount(
-      <NavigationItem
-        icon={<IconAdminLine />}
-        label='Admin'
-        href='#'
-      />
+      <NavigationItem icon={<IconAdminLine />} label="Admin" href="#" />
     )
     const navItem = await NavigationItemLocator.find()
     expect(navItem).to.exist()
@@ -64,11 +60,7 @@ describe('<NavigationItem />', async () => {
 
   it('should meet a11y standards', async () => {
     await mount(
-      <NavigationItem
-        icon={<IconAdminLine />}
-        label="Dashboard"
-        href="#"
-      />
+      <NavigationItem icon={<IconAdminLine />} label="Dashboard" href="#" />
     )
     const navItem = await NavigationItemLocator.find()
     expect(await navItem.accessible()).to.be.true()

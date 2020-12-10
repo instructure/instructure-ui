@@ -25,25 +25,27 @@
 import React from 'react'
 
 /**
-* ---
-* category: utilities/react
-* ---
-* Evaluate a provided value to create a renderable React element.
-*
-* @param {ReactElement|ReactClass|function} value
-* @param {object} props
-* @return {ReactElement} A renderable React element
-*/
-function callRenderProp (value, props = {}) {
+ * ---
+ * category: utilities/react
+ * ---
+ * Evaluate a provided value to create a renderable React element.
+ *
+ * @param {ReactElement|ReactClass|function} value
+ * @param {object} props
+ * @return {ReactElement} A renderable React element
+ */
+function callRenderProp(value, props = {}) {
   if (typeof value === 'function') {
     // TODO: Simplify this when we drop React 15
     // In react 16, `createElement` accepts a function. In react 15 we get an
     // error on rendering the result. Evaluate the function here if it is not a
     // react component.
-    if (!(
-      value.prototype && // fat arrow functions don't have a prototype
-      value.prototype.isReactComponent
-    )) {
+    if (
+      !(
+        value.prototype && // fat arrow functions don't have a prototype
+        value.prototype.isReactComponent
+      )
+    ) {
       return value(props)
     }
 

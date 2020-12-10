@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
- // TODO: remove delimiter comment description once the deprecated values are removed
+// TODO: remove delimiter comment description once the deprecated values are removed
 
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
@@ -30,7 +30,11 @@ import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, safeCloneElement, deprecated } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  safeCloneElement,
+  deprecated
+} from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
@@ -45,44 +49,41 @@ import theme from './theme'
 category: components
 ---
 **/
-@deprecated('8.0.0', {variant: 'List with the isUnstyled boolean or InlineList'} )
+@deprecated('8.0.0', {
+  variant: 'List with the isUnstyled boolean or InlineList'
+})
 @testable()
 @themeable(theme, styles)
 class List extends Component {
   static propTypes = {
     /**
-    * Only accepts `<List.Item>` as a child
-    */
+     * Only accepts `<List.Item>` as a child
+     */
     children: ChildrenPropTypes.oneOf([ListItem]),
     as: PropTypes.oneOf(['ul', 'ol']),
     /**
      * One of: none, dashed, solid
      */
-    delimiter: deprecated.deprecatePropValues(PropTypes.oneOf([
-      'none',
-      'dashed',
-      'solid',
-      'pipe',
-      'slash',
-      'arrow'
-    ]),
-    ['pipe', 'slash', 'arrow'], ({ propValue }) => (
-      `with 'delimiter' set to ${propValue} will only be available when using [InlineList] as of version 8.0.0.`
-    )),
+    delimiter: deprecated.deprecatePropValues(
+      PropTypes.oneOf(['none', 'dashed', 'solid', 'pipe', 'slash', 'arrow']),
+      ['pipe', 'slash', 'arrow'],
+      ({ propValue }) =>
+        `with 'delimiter' set to ${propValue} will only be available when using [InlineList] as of version 8.0.0.`
+    ),
     /**
-    * When set, renders the List Items without a list style type.
-    */
+     * When set, renders the List Items without a list style type.
+     */
     isUnstyled: PropTypes.bool,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Sets the margin separating each ListItem.
-    */
+     * Sets the margin separating each ListItem.
+     */
     itemSpacing: PropTypes.oneOf([
       'none',
       'xxx-small',
@@ -115,7 +116,7 @@ class List extends Component {
 
   static Item = ListItem
 
-  renderChildren () {
+  renderChildren() {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children
 
@@ -128,23 +129,15 @@ class List extends Component {
     })
   }
 
-  renderInlineChild () {
+  renderInlineChild() {
     return Children.map(this.props.children, (child) => {
       if (!child) return
       return <InlineList.Item {...child.props} />
     })
   }
 
-  render () {
-
-    const {
-      as,
-      margin,
-      isUnstyled,
-      elementRef,
-      variant,
-      ...rest
-    } = this.props
+  render() {
+    const { as, margin, isUnstyled, elementRef, variant, ...rest } = this.props
 
     const classes = {
       [styles.root]: true,
@@ -167,11 +160,7 @@ class List extends Component {
         </View>
       )
     } else {
-      return (
-        <InlineList {...this.props}>
-          {this.renderInlineChild()}
-        </InlineList>
-      )
+      return <InlineList {...this.props}>{this.renderInlineChild()}</InlineList>
     }
   }
 }

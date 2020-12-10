@@ -26,13 +26,13 @@ const { error, info } = require('@instructure/command-utils')
 
 const { getConfig } = require('./utils/config')
 const {
- hasSlackConfig,
- postStableReleaseSlackMessage,
+  hasSlackConfig,
+  postStableReleaseSlackMessage
 } = require('./utils/slack')
 const {
- hasJiraConfig,
- getJiraVersion,
- updateJiraIssues
+  hasJiraConfig,
+  getJiraVersion,
+  updateJiraIssues
 } = require('./utils/jira')
 const {
   isReleaseCommit,
@@ -50,12 +50,14 @@ try {
   process.exit(1)
 }
 
-async function postPublish (packageName, releaseVersion, config = {}) {
+async function postPublish(packageName, releaseVersion, config = {}) {
   setupGit()
 
   const jiraProjectKey = `${config.jira_project_key}`
 
-  info(`📦  Running post-publish steps for ${releaseVersion} of ${packageName}...`)
+  info(
+    `📦  Running post-publish steps for ${releaseVersion} of ${packageName}...`
+  )
 
   let jiraVersion = { name: `${packageName} v${releaseVersion}` }
   let issueKeys = []
@@ -77,5 +79,7 @@ async function postPublish (packageName, releaseVersion, config = {}) {
     }
   }
 
-  info(`📦  Post-publish steps for ${releaseVersion} of ${packageName} complete!`)
+  info(
+    `📦  Post-publish steps for ${releaseVersion} of ${packageName} complete!`
+  )
 }

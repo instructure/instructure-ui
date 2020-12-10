@@ -29,7 +29,7 @@ const execa = require('execa')
 const rl = require('readline')
 const chalk = require('chalk')
 
-function info (...args) {
+function info(...args) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
 }
 exports.info = info
@@ -39,13 +39,13 @@ function warn(...args) {
 }
 exports.warn = warn
 
-function error (...args) {
+function error(...args) {
   console.error(chalk.red('⚠️   ', ...args))
 }
 exports.error = error
 
 class Command {
-  constructor (bin, args = [], vars = []) {
+  constructor(bin, args = [], vars = []) {
     Object.defineProperties(this, {
       vars: {
         value: vars
@@ -58,16 +58,16 @@ class Command {
       }
     })
   }
-  toString () {
+  toString() {
     return `${this.vars.length > 0 ? `${this.vars.join(' ')} ` : ''}${this.bin}`
   }
-  get bin () {
+  get bin() {
     return this.bin
   }
-  get args () {
+  get args() {
     return this.args
   }
-  get vars () {
+  get vars() {
     return this.vars
   }
 }
@@ -77,19 +77,27 @@ function getCommand(bin, args = [], vars = []) {
 }
 exports.getCommand = getCommand
 
-function runCommandsConcurrently (commands) {
+function runCommandsConcurrently(commands) {
   const args = [
     '--kill-others-on-fail',
-    '--prefix', '[{name}]',
-    '--names', Object.keys(commands).join(','),
-    '--prefix-colors', 'bgBlue.bold,bgMagenta.bold,bgGreen.bold',
-    '--success', 'all'
+    '--prefix',
+    '[{name}]',
+    '--names',
+    Object.keys(commands).join(','),
+    '--prefix-colors',
+    'bgBlue.bold,bgMagenta.bold,bgGreen.bold',
+    '--success',
+    'all'
   ]
 
   Object.keys(commands).forEach((name) => {
     const command = commands[name]
     if (command) {
-      args.push(`${command.toString()}${command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''}`)
+      args.push(
+        `${command.toString()}${
+          command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
+        }`
+      )
     }
   })
 
@@ -105,23 +113,32 @@ function runCommandsConcurrently (commands) {
 }
 exports.runCommandsConcurrently = runCommandsConcurrently
 
-function runCommandSync (bin, args = [], vars = [], opts = {}) {
+function runCommandSync(bin, args = [], vars = [], opts = {}) {
   const command = getCommand(bin, args, vars)
-  const result = execa.sync(command.toString(), command.args, { stdio: 'inherit', ...opts })
+  const result = execa.sync(command.toString(), command.args, {
+    stdio: 'inherit',
+    ...opts
+  })
   result.status = result.status || result.code
   return result
 }
 exports.runCommandSync = runCommandSync
 
-async function runCommandAsync (bin, args = [], vars = [], opts = {}) {
+async function runCommandAsync(bin, args = [], vars = [], opts = {}) {
   const command = getCommand(bin, args, vars)
-  const result = await execa(command.toString(), command.args, { stdio: 'inherit', ...opts })
+  const result = await execa(command.toString(), command.args, {
+    stdio: 'inherit',
+    ...opts
+  })
   result.status = result.status || result.code
   return result
 }
 exports.runCommandAsync = runCommandAsync
 
-function resolveBin (modName, {executable = modName, cwd = process.cwd()} = {}) {
+function resolveBin(
+  modName,
+  { executable = modName, cwd = process.cwd() } = {}
+) {
   let pathFromWhich
   try {
     pathFromWhich = fs.realpathSync(which.sync(executable))
@@ -147,7 +164,7 @@ function resolveBin (modName, {executable = modName, cwd = process.cwd()} = {}) 
 }
 exports.resolveBin = resolveBin
 
-exports.confirm = async function confirm (question) {
+exports.confirm = async function confirm(question) {
   return new Promise((resolve, reject) => {
     try {
       const dialog = rl.createInterface({

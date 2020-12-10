@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 function isElement(node) {
-  return (node instanceof Element || (node && node.nodeType === 1))
+  return node instanceof Element || (node && node.nodeType === 1)
 }
 
-export {
-  isElement
-}
+export { isElement }

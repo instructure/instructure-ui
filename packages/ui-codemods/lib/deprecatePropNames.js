@@ -32,9 +32,10 @@ const replacePropertyMembers = require('./helpers/replacePropertyMembers')
 
 module.exports = function (file, api, options) {
   const j = api.jscodeshift
-  const c = options.config.indexOf(process.cwd()) > -1
-    ? options.config
-    : path.join(process.cwd(), options.config)
+  const c =
+    options.config.indexOf(process.cwd()) > -1
+      ? options.config
+      : path.join(process.cwd(), options.config)
 
   const config = fs.existsSync(c) ? require(c) : null
 
@@ -48,11 +49,11 @@ module.exports = function (file, api, options) {
   // TODO Modifying decorators needs some love to get it working.
   //      In the mean time this can be done manually easily enough.
   // hasModifications = insertOrUpdateDecorator(j, root, config) || hasModifications
-  hasModifications = replacePropsAndDefaults(j, root, config) || hasModifications
-  hasModifications = replaceVariableDeclarations(j, root, config) || hasModifications
+  hasModifications =
+    replacePropsAndDefaults(j, root, config) || hasModifications
+  hasModifications =
+    replaceVariableDeclarations(j, root, config) || hasModifications
   hasModifications = replacePropertyMembers(j, root, config) || hasModifications
 
-  return hasModifications
-    ? root.toSource({ quote: 'single' })
-    : null
+  return hasModifications ? root.toSource({ quote: 'single' }) : null
 }

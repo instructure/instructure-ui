@@ -42,8 +42,8 @@ id: Options.Separator
 class Separator extends Component {
   static propTypes = {
     /**
-    * Element type to render as
-    */
+     * Element type to render as
+     */
     as: PropTypes.elementType
   }
 
@@ -51,17 +51,13 @@ class Separator extends Component {
     as: 'span'
   }
 
-  render () {
+  render() {
     const { as, ...rest } = this.props
-    const ElementType = getElementType(Separator, this.props, () => (as))
+    const ElementType = getElementType(Separator, this.props, () => as)
 
     return (
       <ElementType role="none">
-        <div
-          {...rest}
-          className={styles.separator}
-          role="presentation"
-        />
+        <div {...rest} className={styles.separator} role="presentation" />
       </ElementType>
     )
   }

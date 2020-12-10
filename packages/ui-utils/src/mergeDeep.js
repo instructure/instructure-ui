@@ -32,7 +32,7 @@
  * @param {Object} arguments objects to merge
  * @returns {Object} a new object with items from all arguments
  */
-function mergeDeep () {
+function mergeDeep() {
   const args = [...arguments]
   let target = {}
 
@@ -43,9 +43,12 @@ function mergeDeep () {
   return target
 }
 
-function mergeSourceIntoTarget (target, source) {
+function mergeSourceIntoTarget(target, source) {
   if (isObject(source)) {
-    const keys = [ ...Object.keys(source), ...Object.getOwnPropertySymbols(source) ]
+    const keys = [
+      ...Object.keys(source),
+      ...Object.getOwnPropertySymbols(source)
+    ]
     const merged = { ...target }
 
     keys.forEach((key) => {
@@ -62,16 +65,20 @@ function mergeSourceIntoTarget (target, source) {
 
     return merged
   } else {
-    return {...target}
+    return { ...target }
   }
 }
 
-function isObject (item) {
-  return (item && (typeof item === 'object' || typeof item === 'function') && !Array.isArray(item))
+function isObject(item) {
+  return (
+    item &&
+    (typeof item === 'object' || typeof item === 'function') &&
+    !Array.isArray(item)
+  )
 }
 
-function isArray (item) {
-  return (item && Array.isArray(item))
+function isArray(item) {
+  return item && Array.isArray(item)
 }
 
 export default mergeDeep

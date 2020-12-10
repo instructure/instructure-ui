@@ -37,8 +37,7 @@ describe('<Mask />', async () => {
   it('should have tabIndex -1 when onClick is provided', async () => {
     const onClick = stub()
     const subject = await mount(<Mask onClick={onClick} />)
-    expect(subject.getDOMNode().getAttribute('tabindex'))
-      .to.equal('-1')
+    expect(subject.getDOMNode().getAttribute('tabindex')).to.equal('-1')
   })
 
   it('should call onClick prop when clicked', async () => {

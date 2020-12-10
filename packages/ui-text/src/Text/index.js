@@ -29,7 +29,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { passthroughProps, getElementType, deprecated } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  getElementType,
+  deprecated
+} from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -44,42 +48,33 @@ category: components
 class Text extends Component {
   static propTypes = {
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: PropTypes.elementType,
     children: PropTypes.node,
     /**
-    * One of: primary, secondary, brand, success, warning, danger, alert, primary-inverse, secondary-inverse
-    */
-    color: deprecated.deprecatePropValues(PropTypes.oneOf([
-      'primary',
-      'secondary',
-      'brand',
-      'success',
-      'warning',
-      'error',
-      'danger',
-      'alert',
-      'primary-inverse',
-      'secondary-inverse'
-    ]),
-    ['error'], 'It will be removed in version 8.0.0. Use `danger` instead.'),
+     * One of: primary, secondary, brand, success, warning, danger, alert, primary-inverse, secondary-inverse
+     */
+    color: deprecated.deprecatePropValues(
+      PropTypes.oneOf([
+        'primary',
+        'secondary',
+        'brand',
+        'success',
+        'warning',
+        'error',
+        'danger',
+        'alert',
+        'primary-inverse',
+        'secondary-inverse'
+      ]),
+      ['error'],
+      'It will be removed in version 8.0.0. Use `danger` instead.'
+    ),
     elementRef: PropTypes.func,
-    fontStyle: PropTypes.oneOf([
-      'italic',
-      'normal'
-    ]),
-    letterSpacing: PropTypes.oneOf([
-      'normal',
-      'condensed',
-      'expanded'
-    ]),
-    lineHeight: PropTypes.oneOf([
-      'default',
-      'fit',
-      'condensed',
-      'double'
-    ]),
+    fontStyle: PropTypes.oneOf(['italic', 'normal']),
+    letterSpacing: PropTypes.oneOf(['normal', 'condensed', 'expanded']),
+    lineHeight: PropTypes.oneOf(['default', 'fit', 'condensed', 'double']),
     size: PropTypes.oneOf([
       'x-small',
       'small',
@@ -94,15 +89,8 @@ class Text extends Component {
       'uppercase',
       'lowercase'
     ]),
-    weight: PropTypes.oneOf([
-      'normal',
-      'light',
-      'bold'
-    ]),
-    wrap: PropTypes.oneOf([
-      'normal',
-      'break-word'
-    ])
+    weight: PropTypes.oneOf(['normal', 'light', 'bold']),
+    wrap: PropTypes.oneOf(['normal', 'break-word'])
   }
 
   static defaultProps = {

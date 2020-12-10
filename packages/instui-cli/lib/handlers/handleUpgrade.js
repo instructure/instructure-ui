@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 
-const { info, error, confirm, runCommandSync } = require('@instructure/command-utils')
+const {
+  info,
+  error,
+  confirm,
+  runCommandSync
+} = require('@instructure/command-utils')
 const verifyPackageJson = require('@instructure/ui-upgrade-scripts/lib/utils/verify-package-json')
 const checkDependencies = require('@instructure/ui-upgrade-scripts/lib/utils/check-dependencies')
 
@@ -34,50 +39,96 @@ const {
   getPackageList
 } = require('../utils/getPackageLists')
 
-module.exports = async ({ sourcePath, scopeModifications, version, ignore, ignoreWorkspaceRootCheck, npmClient, parser, parserConfig }) => {
+module.exports = async ({
+  sourcePath,
+  scopeModifications,
+  version,
+  ignore,
+  ignoreWorkspaceRootCheck,
+  npmClient,
+  parser,
+  parserConfig
+}) => {
   verifyPackageJson({ sourcePath })
 
-  await handleExecuteCodemods({ sourcePath, scopeModifications, version, ignore, parser, parserConfig })
+  await handleExecuteCodemods({
+    sourcePath,
+    scopeModifications,
+    version,
+    ignore,
+    parser,
+    parserConfig
+  })
 
   info('Auditing Instructure UI dependencies...')
-  const { missing, unused } = await checkInstuiDependencies({ sourcePath, version })
+  const { missing, unused } = await checkInstuiDependencies({
+    sourcePath,
+    version
+  })
 
   // Remove any unused instructure ui packages
-  await executeRemoveUnusedPackages({ unusedPackages: unused, sourcePath, ignoreWorkspaceRootCheck, npmClient })
+  await executeRemoveUnusedPackages({
+    unusedPackages: unused,
+    sourcePath,
+    ignoreWorkspaceRootCheck,
+    npmClient
+  })
 
   // Upgrade instructure ui packages that are still in the project to the latest
-  handleUpgradePackages({ sourcePath, version, ignoreWorkspaceRootCheck, npmClient })
+  handleUpgradePackages({
+    sourcePath,
+    version,
+    ignoreWorkspaceRootCheck,
+    npmClient
+  })
 
   // Add any missing packages that were not listed in the project deps
-  await executeAddMissingPackages({ missingPackages: missing, version, sourcePath, ignoreWorkspaceRootCheck, npmClient })
+  await executeAddMissingPackages({
+    missingPackages: missing,
+    version,
+    sourcePath,
+    ignoreWorkspaceRootCheck,
+    npmClient
+  })
 }
 
 const checkInstuiDependencies = async ({ sourcePath, version }) => {
   const packages = getPackageList({ version })
   const removedPackages = getRemovedPackageList({ version })
 
-  const checkedDependencies = await checkDependencies({ sourcePath }).catch((err) => {
-    error(err)
-    process.exit(1)
-  })
+  const checkedDependencies = await checkDependencies({ sourcePath }).catch(
+    (err) => {
+      error(err)
+      process.exit(1)
+    }
+  )
 
-  const { dependencies, devDependencies, missing } = (checkedDependencies || {})
+  const { dependencies, devDependencies, missing } = checkedDependencies || {}
 
   return {
-    missing: Object.keys(missing || {}).filter(dep => packages.includes(dep)),
-    unused: [...(dependencies || []), ...(devDependencies || [])].filter(dep => removedPackages.includes(dep))
+    missing: Object.keys(missing || {}).filter((dep) => packages.includes(dep)),
+    unused: [
+      ...(dependencies || []),
+      ...(devDependencies || [])
+    ].filter((dep) => removedPackages.includes(dep))
   }
 }
 
-const executeRemoveUnusedPackages = async ({ unusedPackages, sourcePath, ignoreWorkspaceRootCheck, npmClient }) => {
+const executeRemoveUnusedPackages = async ({
+  unusedPackages,
+  sourcePath,
+  ignoreWorkspaceRootCheck,
+  npmClient
+}) => {
   if (!unusedPackages || unusedPackages.length === 0) return
 
   const reply = await confirm(
-`After updating your imports, the following Instructure UI dependencies have been detected in your project but are not being used:
-${unusedPackages.map(pkg => `  *  ${pkg}`).join('\n')}
+    `After updating your imports, the following Instructure UI dependencies have been detected in your project but are not being used:
+${unusedPackages.map((pkg) => `  *  ${pkg}`).join('\n')}
 
 Would you like this script to remove them from your project now? [y/n]
-`)
+`
+  )
 
   if (['Y', 'y', 'Yes', 'yes'].includes(reply.trim())) {
     try {
@@ -108,12 +159,18 @@ Would you like this script to remove them from your project now? [y/n]
   }
 }
 
-const executeAddMissingPackages = async ({ missingPackages, version, sourcePath, ignoreWorkspaceRootCheck, npmClient }) => {
+const executeAddMissingPackages = async ({
+  missingPackages,
+  version,
+  sourcePath,
+  ignoreWorkspaceRootCheck,
+  npmClient
+}) => {
   if (!missingPackages || missingPackages.length === 0) return
 
   const reply = await confirm(
-`After updating your imports, the following Instructure UI packages are being used in your project but are not listed in your dependencies:
-${missingPackages.map(pkg => `  *  ${pkg}`).join('\n')}
+    `After updating your imports, the following Instructure UI packages are being used in your project but are not listed in your dependencies:
+${missingPackages.map((pkg) => `  *  ${pkg}`).join('\n')}
 
 Would you like this script to add them to your project now? [y/n]
 `
@@ -121,15 +178,12 @@ Would you like this script to add them to your project now? [y/n]
 
   if (['Y', 'y', 'Yes', 'yes'].includes(reply.trim())) {
     try {
-      const packages = missingPackages.map(pkg => `${pkg}@${version || 'latest'}`)
+      const packages = missingPackages.map(
+        (pkg) => `${pkg}@${version || 'latest'}`
+      )
 
       if (npmClient === 'yarn') {
-        const yarnAddArgs = [
-          'add',
-          ...packages,
-          '--cwd',
-          sourcePath
-        ]
+        const yarnAddArgs = ['add', ...packages, '--cwd', sourcePath]
 
         if (ignoreWorkspaceRootCheck) {
           yarnAddArgs.push('--ignore-workspace-root-check')
@@ -137,12 +191,7 @@ Would you like this script to add them to your project now? [y/n]
 
         runCommandSync('yarn', yarnAddArgs)
       } else if (npmClient === 'npm') {
-        runCommandSync('npm', [
-          'install',
-          '--prefix',
-          sourcePath,
-          ...packages,
-        ])
+        runCommandSync('npm', ['install', '--prefix', sourcePath, ...packages])
       }
     } catch (err) {
       error(err)

@@ -24,7 +24,7 @@
 
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-export default function generator ({ borders, colors, spacing, typography }) {
+export default function generator({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
     paddingSmall: spacing.small,

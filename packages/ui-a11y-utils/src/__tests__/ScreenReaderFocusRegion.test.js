@@ -40,7 +40,12 @@ describe('ScreenReaderFocusRegion', async () => {
       </div>
       <div data-test-parent aria-hidden="true" id="test-parent2">
         <div data-test-child></div>
-        <div role="dialog" aria-label="some content" data-test-parent id="test-parent1">
+        <div
+          role="dialog"
+          aria-label="some content"
+          data-test-parent
+          id="test-parent1"
+        >
           <div data-test-content>
             <div>Hello world</div>
             <button>click me</button>
@@ -67,32 +72,26 @@ describe('ScreenReaderFocusRegion', async () => {
     const main = within(subject.getDOMNode())
     const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
     const content = (await main.find('[data-test-content]')).getDOMNode()
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(
-      content,
-      {
-        liveRegion: () => ignore,
-        shouldContainFocus: true
-      }
-    )
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
+      liveRegion: () => ignore,
+      shouldContainFocus: true
+    })
 
     screenReaderFocusRegion.activate()
 
     expect(ignore.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  it('should apply aria-hidden to all children of content\'s parent nodes unless they are live regions', async () => {
+  it("should apply aria-hidden to all children of content's parent nodes unless they are live regions", async () => {
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const children = await main.findAll('[data-test-child]')
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(
-      content,
-      {
-        liveRegion: ignore,
-        shouldContainFocus: true
-      }
-    )
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
+      liveRegion: ignore,
+      shouldContainFocus: true
+    })
 
     screenReaderFocusRegion.activate()
 
@@ -103,7 +102,7 @@ describe('ScreenReaderFocusRegion', async () => {
     expect(ignore.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  it('should mute designated attributes for content\'s parent nodes', async () => {
+  it("should mute designated attributes for content's parent nodes", async () => {
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
@@ -158,7 +157,9 @@ describe('ScreenReaderFocusRegion', async () => {
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
-    const childNodes = await main.findAll('[data-test-child]:not([aria-hidden="true"])')
+    const childNodes = await main.findAll(
+      '[data-test-child]:not([aria-hidden="true"])'
+    )
     const exception = await main.find('[data-test-child][aria-hidden="true"]')
 
     screenReaderFocusRegion.activate()
@@ -196,7 +197,8 @@ describe('ScreenReaderFocusRegion', async () => {
 
       preNodeAttrs.forEach((preNodeAttribute) => {
         const matchingAttribute = postNodeAttrs.filter(
-          postNodeAttribute => preNodeAttribute.name === postNodeAttribute.name
+          (postNodeAttribute) =>
+            preNodeAttribute.name === postNodeAttribute.name
         )[0]
 
         expect(matchingAttribute.value).to.equal(preNodeAttribute.value)
@@ -239,8 +241,7 @@ describe('ScreenReaderFocusRegion', async () => {
             <div>Hello world</div>
             <button>click me</button>
             <button>or click me</button>
-            <iframe title="unhidden" width="100%" height="100px"
-            />
+            <iframe title="unhidden" width="100%" height="100px" />
           </div>
           <div>
             <span>
@@ -257,18 +258,17 @@ describe('ScreenReaderFocusRegion', async () => {
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
 
-    const getIframeBody = iframe => iframe.getDOMNode().contentDocument.body
+    const getIframeBody = (iframe) => iframe.getDOMNode().contentDocument.body
 
-    const alwaysHidden = getIframeBody(await main.find('iframe[title="always-hidden"]'))
+    const alwaysHidden = getIframeBody(
+      await main.find('iframe[title="always-hidden"]')
+    )
     alwaysHidden.setAttribute('aria-hidden', 'true')
 
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(
-      content,
-      {
-        liveRegion: ignore,
-        shouldContainFocus: true
-      }
-    )
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
+      liveRegion: ignore,
+      shouldContainFocus: true
+    })
 
     // verify no iframe bodies are hidden unless they were hidden initially
     const iframes = await main.findAll('iframe:not([title="always-hidden"])')

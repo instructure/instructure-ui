@@ -25,10 +25,15 @@ const fs = require('fs')
 const path = require('path')
 const semver = require('semver')
 const { getPackage, getChangedPackages } = require('@instructure/pkg-utils')
-const { runCommandAsync, runCommandSync, error, info  } = require('@instructure/command-utils')
+const {
+  runCommandAsync,
+  runCommandSync,
+  error,
+  info
+} = require('@instructure/command-utils')
 const Project = require('@lerna/project')
 
-async function syncRootPackageVersion (useProjectVersion) {
+async function syncRootPackageVersion(useProjectVersion) {
   const project = new Project(process.cwd())
   const rootPkg = getPackage()
 
@@ -51,7 +56,7 @@ async function syncRootPackageVersion (useProjectVersion) {
   return projectVersion
 }
 
-async function bumpPackages (packageName, requestedVersion) {
+async function bumpPackages(packageName, requestedVersion) {
   let args = []
   let bumpVersion = requestedVersion
 
@@ -103,14 +108,20 @@ async function bumpPackages (packageName, requestedVersion) {
 }
 exports.bumpPackages = bumpPackages
 
-async function publishPackages (packageName, releaseVersion = 'prerelease', preidAndTag = 'rc') {
+async function publishPackages(
+  packageName,
+  releaseVersion = 'prerelease',
+  preidAndTag = 'rc'
+) {
   let args
 
   if (releaseVersion === 'prerelease') {
     args = [
       '--canary',
-      '--preid', preidAndTag,
-      '--dist-tag', preidAndTag,
+      '--preid',
+      preidAndTag,
+      '--dist-tag',
+      preidAndTag,
       '--exact',
       '--include-merged-tags',
       '--conventional-commits',
@@ -136,7 +147,9 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
 
     publishedVersion = await syncRootPackageVersion()
 
-    info(`📦  ${publishedVersion} of ${packageName} was successfully published!`)
+    info(
+      `📦  ${publishedVersion} of ${packageName} was successfully published!`
+    )
   } catch (err) {
     error(err)
     process.exit(1)
@@ -146,12 +159,8 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
 }
 exports.publishPackages = publishPackages
 
-function createNPMRCFile (config = {}) {
-  const {
-   NPM_TOKEN,
-   NPM_EMAIL,
-   NPM_USERNAME
-  } = process.env
+function createNPMRCFile(config = {}) {
+  const { NPM_TOKEN, NPM_EMAIL, NPM_USERNAME } = process.env
 
   // Only write an npmrc file if these are defined, otherwise assume the system is properly configured
   if (NPM_TOKEN) {
@@ -161,7 +170,7 @@ function createNPMRCFile (config = {}) {
     )
   }
 
-  try  {
+  try {
     runCommandSync('npm', ['whoami'])
   } catch (e) {
     error(`Could not determine if NPM auth was successful: ${e}`)
@@ -169,13 +178,19 @@ function createNPMRCFile (config = {}) {
 }
 exports.createNPMRCFile = createNPMRCFile
 
-async function updateCrossPackageDependencies (packageName, releaseVersion, dependencyVersion) {
+async function updateCrossPackageDependencies(
+  packageName,
+  releaseVersion,
+  dependencyVersion
+) {
   const changedPackages = getChangedPackages()
-  const changedPackageNames = changedPackages.map(pkg => pkg.name)
+  const changedPackageNames = changedPackages.map((pkg) => pkg.name)
 
-  info(`📦  Updating cross-package dependencies for ${packageName} to ${dependencyVersion}...`)
+  info(
+    `📦  Updating cross-package dependencies for ${packageName} to ${dependencyVersion}...`
+  )
   await Promise.all(
-    changedPackages.map(changedPackage => {
+    changedPackages.map((changedPackage) => {
       const pkg = changedPackage.toJSON()
       let packageChanged = false
 
@@ -186,11 +201,11 @@ async function updateCrossPackageDependencies (packageName, releaseVersion, depe
         'peerDependencies'
       ]
 
-      depCollections.forEach(depCollection => {
+      depCollections.forEach((depCollection) => {
         if (!pkg[depCollection]) return
 
         const newDependencies = Object.keys(pkg[depCollection])
-          .filter(dep => {
+          .filter((dep) => {
             return (
               changedPackageNames.includes(dep) &&
               pkg[depCollection][dep] === `^${releaseVersion}`

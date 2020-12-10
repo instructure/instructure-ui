@@ -26,6 +26,8 @@ const upgradePackages = require('@instructure/ui-upgrade-scripts/lib/utils/upgra
 const { warn } = require('@instructure/command-utils')
 
 module.exports = function (args = {}) {
-  warn('`upgrade-packages` has been moved from \'@instructure/ui-scripts/lib/upgrade-packages\' to \'@instructure/ui-upgrade-scripts/lib/utils/upgrade-packages\'.')
+  warn(
+    "`upgrade-packages` has been moved from '@instructure/ui-scripts/lib/upgrade-packages' to '@instructure/ui-upgrade-scripts/lib/utils/upgrade-packages'."
+  )
   upgradePackages(args)
 }

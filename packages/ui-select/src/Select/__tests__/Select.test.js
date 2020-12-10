@@ -23,7 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, generateA11yTests } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import { Select } from '../index'
 import { SelectLocator } from '../SelectLocator'
@@ -34,10 +40,10 @@ describe('<Select />', async () => {
     stub(console, 'warn') // suppress experimental warnings
   })
 
-  const lastCall = spy => spy.lastCall.args
+  const lastCall = (spy) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
-  const getOptions = (highlighted, selected, disabled) => (
-    defaultOptions.map(opt => (
+  const getOptions = (highlighted, selected, disabled) =>
+    defaultOptions.map((opt) => (
       <Select.Option
         id={opt}
         key={opt}
@@ -48,7 +54,6 @@ describe('<Select />', async () => {
         {opt}
       </Select.Option>
     ))
-  )
 
   it('should render an input and a list', async () => {
     await mount(
@@ -84,7 +89,9 @@ describe('<Select />', async () => {
     const label = await listbox.find(':textContent("Group one")')
 
     expect(label.getAttribute('role')).to.equal('presentation')
-    expect(groups[0].getAttribute('aria-labelledby')).to.equal(label.getAttribute('id'))
+    expect(groups[0].getAttribute('aria-labelledby')).to.equal(
+      label.getAttribute('id')
+    )
     expect(groups).to.have.length(2)
   })
 
@@ -98,18 +105,27 @@ describe('<Select />', async () => {
     )
     const select = await SelectLocator.find()
     const list = await select.findOptionsList()
-    const div = await list.find(':textContent("invalid")', { expectEmpty: true })
+    const div = await list.find(':textContent("invalid")', {
+      expectEmpty: true
+    })
 
     expect(div).to.not.exist()
     await wait(() => {
-      expect(consoleError).to.have.been.calledWithMatch('Expected one of Group, Option')
+      expect(consoleError).to.have.been.calledWithMatch(
+        'Expected one of Group, Option'
+      )
     })
   })
 
   it('should provide a focus method', async () => {
     let selectRef
     await mount(
-      <Select renderLabel="Choose an option" componentRef={(el) => { selectRef = el }}>
+      <Select
+        renderLabel="Choose an option"
+        componentRef={(el) => {
+          selectRef = el
+        }}
+      >
         {getOptions()}
       </Select>
     )
@@ -125,7 +141,12 @@ describe('<Select />', async () => {
   it('should provide a focused getter', async () => {
     let selectRef
     await mount(
-      <Select renderLabel="Choose an option" componentRef={(el) => { selectRef = el }}>
+      <Select
+        renderLabel="Choose an option"
+        componentRef={(el) => {
+          selectRef = el
+        }}
+      >
         {getOptions()}
       </Select>
     )
@@ -140,9 +161,7 @@ describe('<Select />', async () => {
 
   describe('input', async () => {
     it('should render with a generated id by default', async () => {
-      await mount(
-        <Select renderLabel="Choose an option" />
-      )
+      await mount(<Select renderLabel="Choose an option" />)
       const select = await SelectLocator.find()
       const input = await select.findInput()
 
@@ -150,9 +169,7 @@ describe('<Select />', async () => {
     })
 
     it('should render with a custom id if given', async () => {
-      await mount(
-        <Select renderLabel="Choose an option" id="customSelect" />
-      )
+      await mount(<Select renderLabel="Choose an option" id="customSelect" />)
       const select = await SelectLocator.find()
       const input = await select.findInput()
 
@@ -160,9 +177,7 @@ describe('<Select />', async () => {
     })
 
     it('should render readonly when interaction="enabled" with no onInputChange', async () => {
-      await mount(
-        <Select renderLabel="Choose an option" />
-      )
+      await mount(<Select renderLabel="Choose an option" />)
       const select = await SelectLocator.find()
       const input = await select.findInput()
 
@@ -213,10 +228,7 @@ describe('<Select />', async () => {
 
     it('should not render readonly when disabled', async () => {
       await mount(
-        <Select
-          renderLabel="Choose an option"
-          interaction="disabled"
-        />
+        <Select renderLabel="Choose an option" interaction="disabled" />
       )
       const select = await SelectLocator.find()
       const input = await select.findInput()
@@ -226,9 +238,7 @@ describe('<Select />', async () => {
     })
 
     it('should render required when isRequired={true}', async () => {
-      await mount(
-        <Select renderLabel="Choose an option" isRequired />
-      )
+      await mount(<Select renderLabel="Choose an option" isRequired />)
       const select = await SelectLocator.find()
       const input = await select.findInput()
 
@@ -237,9 +247,7 @@ describe('<Select />', async () => {
 
     it('should render with inputValue', async () => {
       const val = 'hello world'
-      await mount(
-        <Select renderLabel="Choose an option" inputValue={val} />
-      )
+      await mount(<Select renderLabel="Choose an option" inputValue={val} />)
       const select = await SelectLocator.find()
       const input = await select.findInput()
 
@@ -248,17 +256,16 @@ describe('<Select />', async () => {
 
     it('should set aria-activedescendant based on the highlighted option', async () => {
       await mount(
-        <Select
-          renderLabel="Choose an option"
-          isShowingOptions
-        >
+        <Select renderLabel="Choose an option" isShowingOptions>
           {getOptions(defaultOptions[1])}
         </Select>
       )
       const select = await SelectLocator.find()
       const input = await select.findInput()
 
-      expect(input.getAttribute('aria-activedescendant')).to.equal(defaultOptions[1])
+      expect(input.getAttribute('aria-activedescendant')).to.equal(
+        defaultOptions[1]
+      )
     })
 
     it('should not set aria-activedescendant when not showing options', async () => {
@@ -307,7 +314,9 @@ describe('<Select />', async () => {
       const input = await select.findInput()
       const text = await select.find(':textContent("hello world")')
 
-      expect(input.getAttribute('aria-describedby')).to.equal(text.getAttribute('id'))
+      expect(input.getAttribute('aria-describedby')).to.equal(
+        text.getAttribute('id')
+      )
     })
 
     it('should allow custom props to pass through', async () => {
@@ -324,16 +333,14 @@ describe('<Select />', async () => {
 
     it('should allow override of autoComplete prop', async () => {
       const subject = await mount(
-        <Select renderLabel="Choose an option">
-          {getOptions()}
-        </Select>
+        <Select renderLabel="Choose an option">{getOptions()}</Select>
       )
       const select = await SelectLocator.find()
       const input = await select.findInput()
 
       expect(input.getAttribute('autocomplete')).to.equal('off')
 
-      await subject.setProps({ autoComplete: 'false'})
+      await subject.setProps({ autoComplete: 'false' })
       expect(input.getAttribute('autocomplete')).to.equal('false')
     })
 
@@ -354,10 +361,7 @@ describe('<Select />', async () => {
   describe('list', async () => {
     it('should set aria-selected on options with isSelected={true}', async () => {
       await mount(
-        <Select
-          renderLabel="Choose an option"
-          isShowingOptions
-        >
+        <Select renderLabel="Choose an option" isShowingOptions>
           {getOptions(null, defaultOptions[1])}
         </Select>
       )
@@ -416,7 +420,7 @@ describe('<Select />', async () => {
 
   describe('with callbacks', async () => {
     describe('should fire onRequestShowOptions', async () => {
-      it('when root is clicked' , async () => {
+      it('when root is clicked', async () => {
         const onRequestShowOptions = stub()
         const subject = await mount(
           <Select
@@ -442,7 +446,7 @@ describe('<Select />', async () => {
         expect(onRequestShowOptions).to.have.been.calledTwice()
       })
 
-      it('when input is clicked' , async () => {
+      it('when input is clicked', async () => {
         const onRequestShowOptions = stub()
         const subject = await mount(
           <Select
@@ -464,7 +468,7 @@ describe('<Select />', async () => {
         expect(onRequestShowOptions).to.have.been.calledOnce()
       })
 
-      it('when up/down arrows are pressed' , async () => {
+      it('when up/down arrows are pressed', async () => {
         const onRequestShowOptions = stub()
         await mount(
           <Select
@@ -506,7 +510,7 @@ describe('<Select />', async () => {
     })
 
     describe('should fire onRequestHideOptions', async () => {
-      it('when root is clicked' , async () => {
+      it('when root is clicked', async () => {
         const onRequestHideOptions = stub()
         const subject = await mount(
           <Select
@@ -533,7 +537,7 @@ describe('<Select />', async () => {
         expect(onRequestHideOptions).to.have.been.calledTwice()
       })
 
-      it('when input is clicked' , async () => {
+      it('when input is clicked', async () => {
         const onRequestHideOptions = stub()
         const subject = await mount(
           <Select
@@ -556,7 +560,7 @@ describe('<Select />', async () => {
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
 
-      it('when escape is pressed' , async () => {
+      it('when escape is pressed', async () => {
         const onRequestHideOptions = stub()
         await mount(
           <Select
@@ -576,7 +580,7 @@ describe('<Select />', async () => {
     })
 
     describe('should fire onRequestHighlightOption', async () => {
-      it('when options are hovered' , async () => {
+      it('when options are hovered', async () => {
         const onRequestHighlightOption = stub()
         await mount(
           <Select
@@ -592,13 +596,17 @@ describe('<Select />', async () => {
         const options = await list.findAll('[role="option"]')
 
         await options[0].mouseOver()
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[0])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[0]
+        )
 
         await options[1].mouseOver()
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
 
-      it('when up/down arrows are pressed' , async () => {
+      it('when up/down arrows are pressed', async () => {
         const onRequestShowOptions = stub()
         const onRequestHighlightOption = stub()
         const subject = await mount(
@@ -620,21 +628,27 @@ describe('<Select />', async () => {
         await subject.setProps({ isShowingOptions: true })
 
         await input.keyDown('down')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[0])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[0]
+        )
 
         await subject.setProps({
           children: getOptions(defaultOptions[0])
         })
 
         await input.keyDown('down')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
 
         await subject.setProps({
           children: getOptions(defaultOptions[1])
         })
 
         await input.keyDown('up')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[0])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[0]
+        )
 
         // should skip disabled option...
         await subject.setProps({
@@ -642,17 +656,21 @@ describe('<Select />', async () => {
         })
 
         await input.keyDown('down')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[2])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[2]
+        )
 
         await subject.setProps({
           children: getOptions(defaultOptions[2], null, defaultOptions[1])
         })
 
         await input.keyDown('up')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[0])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[0]
+        )
       })
 
-      it('when home/end is pressed' , async () => {
+      it('when home/end is pressed', async () => {
         const onRequestHighlightOption = stub()
         const subject = await mount(
           <Select
@@ -667,10 +685,14 @@ describe('<Select />', async () => {
         const input = await select.findInput()
 
         await input.keyDown('home')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[0])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[0]
+        )
 
         await input.keyDown('end')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[2])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[2]
+        )
 
         // with a disabled option...
         await subject.setProps({
@@ -678,10 +700,12 @@ describe('<Select />', async () => {
         })
 
         await input.keyDown('end')
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
 
-      it('when onRequestShowOptions is called with selected options' , async () => {
+      it('when onRequestShowOptions is called with selected options', async () => {
         const onRequestHighlightOption = stub()
         await mount(
           <Select
@@ -695,12 +719,14 @@ describe('<Select />', async () => {
         const input = await select.findInput()
 
         await input.click()
-        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestHighlightOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
     })
 
     describe('should fire onRequestSelectOption', async () => {
-      it('when enter is pressed' , async () => {
+      it('when enter is pressed', async () => {
         const onRequestSelectOption = stub()
         await mount(
           <Select
@@ -715,10 +741,12 @@ describe('<Select />', async () => {
         const input = await select.findInput()
 
         await input.keyDown('enter')
-        expect(lastCall(onRequestSelectOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestSelectOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
 
-      it('when options are clicked' , async () => {
+      it('when options are clicked', async () => {
         const onRequestSelectOption = stub()
         await mount(
           <Select
@@ -734,18 +762,17 @@ describe('<Select />', async () => {
         const options = await list.findAll('[role="option"]')
 
         await options[1].click()
-        expect(lastCall(onRequestSelectOption)[1].id).to.equal(defaultOptions[1])
+        expect(lastCall(onRequestSelectOption)[1].id).to.equal(
+          defaultOptions[1]
+        )
       })
     })
 
     describe('input callbacks', async () => {
-      it('should fire onInputChange when input is typed in' , async () => {
+      it('should fire onInputChange when input is typed in', async () => {
         const onInputChange = stub()
         await mount(
-          <Select
-            renderLabel="Choose an option"
-            onInputChange={onInputChange}
-          >
+          <Select renderLabel="Choose an option" onInputChange={onInputChange}>
             {getOptions()}
           </Select>
         )
@@ -756,13 +783,10 @@ describe('<Select />', async () => {
         expect(onInputChange).to.have.been.called()
       })
 
-      it('should fire onFocus when input gains focus' , async () => {
+      it('should fire onFocus when input gains focus', async () => {
         const onFocus = stub()
         await mount(
-          <Select
-            renderLabel="Choose an option"
-            onFocus={onFocus}
-          >
+          <Select renderLabel="Choose an option" onFocus={onFocus}>
             {getOptions()}
           </Select>
         )
@@ -776,7 +800,7 @@ describe('<Select />', async () => {
         })
       })
 
-      it('should fire onKeyDown while preserving default behavior' , async () => {
+      it('should fire onKeyDown while preserving default behavior', async () => {
         const onRequestHighlightOption = stub()
         const onKeyDown = stub()
         await mount(

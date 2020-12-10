@@ -46,11 +46,14 @@ class Page extends Component {
     /**
      * An element or a function returning an element to focus by default
      */
-    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    defaultFocusElement: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
 
     /**
-    * Set the padding using familiar CSS shorthand
-    */
+     * Set the padding using familiar CSS shorthand
+     */
     padding: ThemeablePropTypes.spacing,
 
     textAlign: PropTypes.oneOf(['start', 'center', 'end'])
@@ -68,7 +71,7 @@ class Page extends Component {
     navigateToPreviousPage: PropTypes.func
   }
 
-  get defaultFocusElement () {
+  get defaultFocusElement() {
     let { defaultFocusElement } = this.props
 
     if (typeof defaultFocusElement === 'function') {
@@ -92,39 +95,35 @@ class Page extends Component {
     return defaultFocusElement
   }
 
-  get focusable () {
+  get focusable() {
     const element = this.defaultFocusElement
 
     return element && typeof element.focus === 'function'
   }
 
-  focus () {
+  focus() {
     if (this.focusable) {
       this.defaultFocusElement.focus()
     }
   }
 
-  render () {
-    const {
-      children,
-      ...props
-    } = this.props
+  render() {
+    const { children, ...props } = this.props
 
-    const {
-      history,
-      navigateToPreviousPage
-    } = this.context
+    const { history, navigateToPreviousPage } = this.context
 
     return (
       <View
         as="div"
         padding={props.padding}
         textAlign={props.textAlign}
-        elementRef={(el) => { this._content = el }}
+        elementRef={(el) => {
+          this._content = el
+        }}
       >
-        {
-          (children && typeof children === 'function') ? children(history, navigateToPreviousPage) : children
-        }
+        {children && typeof children === 'function'
+          ? children(history, navigateToPreviousPage)
+          : children}
       </View>
     )
   }

@@ -31,8 +31,11 @@ export const MODES = {
 }
 
 class InputModeListenerImpl {
-  constructor () {
-    warn(false, `[InputModeListener] is deprecated and will be removed in version 7.0.0. Use addInputModeListener instead.`)
+  constructor() {
+    warn(
+      false,
+      `[InputModeListener] is deprecated and will be removed in version 7.0.0. Use addInputModeListener instead.`
+    )
     this.init()
   }
   _listeners = []
@@ -46,7 +49,7 @@ class InputModeListenerImpl {
       return
     }
     this._mode = MODES.pointer
-    this._listeners.forEach(listener => listener.remove())
+    this._listeners.forEach((listener) => listener.remove())
   }
 
   onKeyDown = () => {
@@ -57,16 +60,34 @@ class InputModeListenerImpl {
     this._mode = MODES.pointer
   }
 
-  addInitialPointerMoveListeners () {
-    this._listeners.push(addEventListener(document, 'mousemove', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'mousedown', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'mouseup', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'pointermove', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'pointerdown', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'pointerup', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'touchmove', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'touchstart', this.onInitialPointerMove, true))
-    this._listeners.push(addEventListener(document, 'touchend', this.onInitialPointerMove, true))
+  addInitialPointerMoveListeners() {
+    this._listeners.push(
+      addEventListener(document, 'mousemove', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'mousedown', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'mouseup', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'pointermove', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'pointerdown', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'pointerup', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'touchmove', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'touchstart', this.onInitialPointerMove, true)
+    )
+    this._listeners.push(
+      addEventListener(document, 'touchend', this.onInitialPointerMove, true)
+    )
   }
 
   init = () => {
@@ -79,14 +100,14 @@ class InputModeListenerImpl {
     this._initialized = true
   }
 
-  get mode () {
+  get mode() {
     this.init()
     return this._mode
   }
 
-  isKeyboardMode () {
+  isKeyboardMode() {
     this.init()
-    return (this._mode === MODES.keyboard)
+    return this._mode === MODES.keyboard
   }
 }
 

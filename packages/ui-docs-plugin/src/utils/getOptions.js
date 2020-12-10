@@ -34,7 +34,7 @@ module.exports = function (pluginOptions = {}) {
   const defaultOptions = {
     context, // for webpack requires
     title: 'Documentation',
-    files: [ path.resolve(projectRoot, '**/*.md') ],
+    files: [path.resolve(projectRoot, '**/*.md')],
     themes: [],
     library: {},
     document: {},

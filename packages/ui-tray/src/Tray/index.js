@@ -59,8 +59,8 @@ class Tray extends Component {
     size: PropTypes.oneOf(['x-small', 'small', 'regular', 'medium', 'large']),
 
     /**
-    * Placement to determine where the `<Tray />` should display in the viewport
-    */
+     * Placement to determine where the `<Tray />` should display in the viewport
+     */
     placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end']),
 
     /**
@@ -71,7 +71,10 @@ class Tray extends Component {
     /**
      * An element or a function returning an element to focus by default
      */
-    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    defaultFocusElement: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
 
     /**
      *
@@ -124,7 +127,11 @@ class Tray extends Component {
      * An element, function returning an element, or array of elements that will not be hidden from
      * the screen reader when the `<Tray />` is open
      */
-    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+    liveRegion: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.element),
+      PropTypes.element,
+      PropTypes.func
+    ]),
 
     /**
      * Callback fired when the <Tray /> transitions in/out
@@ -168,9 +175,9 @@ class Tray extends Component {
 
   static defaultProps = {
     open: false,
-    onOpen: event => {},
-    onClose: event => {},
-    onDismiss: event => {},
+    onOpen: (event) => {},
+    onClose: (event) => {},
+    onDismiss: (event) => {},
     onEnter: () => {},
     onEntering: () => {},
     onEntered: () => {},
@@ -180,7 +187,7 @@ class Tray extends Component {
     mountNode: null,
     insertAt: 'bottom',
     liveRegion: null,
-    contentRef: el => {},
+    contentRef: (el) => {},
     shouldCloseOnDocumentClick: false,
     shouldContainFocus: true,
     shouldReturnFocus: true,
@@ -197,18 +204,18 @@ class Tray extends Component {
     transitioning: false
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.open !== prevProps.open) {
       this.setState({ transitioning: true })
     }
   }
 
-  get placement () {
+  get placement() {
     const { placement } = this.props
     return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
-  get direction () {
+  get direction() {
     switch (this.placement) {
       case 'top':
         return 'up'
@@ -216,16 +223,17 @@ class Tray extends Component {
         return 'down'
       case 'end':
         return 'right'
-      default: // start
+      default:
+        // start
         return 'left'
     }
   }
 
-  get transition () {
+  get transition() {
     return `slide-${this.direction}`
   }
 
-  get defaultFocusElement () {
+  get defaultFocusElement() {
     return this.props.defaultFocusElement || (() => this._closeButton)
   }
 
@@ -233,11 +241,11 @@ class Tray extends Component {
     this.setState({ transitioning: false })
   }
 
-  get DOMNode () {
+  get DOMNode() {
     return this._DOMNode
   }
 
-  set DOMNode (el) {
+  set DOMNode(el) {
     this._DOMNode = el
   }
 
@@ -247,7 +255,7 @@ class Tray extends Component {
     DOMNode && this.applyTheme(DOMNode)
   }
 
-  render () {
+  render() {
     const {
       label,
       children,
@@ -293,10 +301,18 @@ class Tray extends Component {
             onTransition={onTransition}
             onEnter={onEnter}
             onEntering={onEntering}
-            onEntered={createChainedFunction(this.handleTransitionComplete, onEntered, onOpen)}
+            onEntered={createChainedFunction(
+              this.handleTransitionComplete,
+              onEntered,
+              onOpen
+            )}
             onExit={onExit}
             onExiting={onExiting}
-            onExited={createChainedFunction(this.handleTransitionComplete, onExited, onClose)}
+            onExited={createChainedFunction(
+              this.handleTransitionComplete,
+              onExited,
+              onClose
+            )}
             transitionOnMount
             transitionEnter
             transitionExit
@@ -312,26 +328,24 @@ class Tray extends Component {
               })}
               ref={contentRef}
             >
-              {
-                (this.state.transitioning) ? children : (
-                  <Dialog
-                    as="div"
-                    label={label}
-                    defaultFocusElement={this.defaultFocusElement}
-                    open
-                    shouldContainFocus={shouldContainFocus}
-                    shouldReturnFocus={shouldReturnFocus}
-                    shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
-                    shouldCloseOnEscape
-                    liveRegion={liveRegion}
-                    onDismiss={onDismiss}
-                  >
-                    <div className={styles.content}>
-                      {children}
-                    </div>
-                  </Dialog>
-                )
-              }
+              {this.state.transitioning ? (
+                children
+              ) : (
+                <Dialog
+                  as="div"
+                  label={label}
+                  defaultFocusElement={this.defaultFocusElement}
+                  open
+                  shouldContainFocus={shouldContainFocus}
+                  shouldReturnFocus={shouldReturnFocus}
+                  shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+                  shouldCloseOnEscape
+                  liveRegion={liveRegion}
+                  onDismiss={onDismiss}
+                >
+                  <div className={styles.content}>{children}</div>
+                </Dialog>
+              )}
             </span>
           </Transition>
         )}

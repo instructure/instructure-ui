@@ -66,15 +66,11 @@ describe('<Avatar />', async () => {
 
   describe('when an image src url is provided', async () => {
     // eslint-disable-next-line max-len
-    const src = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+    const src =
+      'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
     it('should display the image url provided', async () => {
-      await mount(
-        <Avatar
-          name="Foo bar"
-          src={src}
-        />
-      )
+      await mount(<Avatar name="Foo bar" src={src} />)
 
       const avatar = await AvatarLocator.find()
       const image = await avatar.find('img')
@@ -88,11 +84,7 @@ describe('<Avatar />', async () => {
       const onImageLoaded = stub()
 
       await mount(
-        <Avatar
-          name="Foo bar"
-          src={src}
-          onImageLoaded={onImageLoaded}
-        />
+        <Avatar name="Foo bar" src={src} onImageLoaded={onImageLoaded} />
       )
 
       const avatar = await AvatarLocator.find()

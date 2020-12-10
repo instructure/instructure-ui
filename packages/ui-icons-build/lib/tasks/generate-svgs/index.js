@@ -38,7 +38,11 @@ const formatName = require('../../util/format-name')
 const sketch = require('../../util/sketch')
 
 const toComponentName = function (name, variant = '') {
-  return name ? formatName(config.react.componentBaseName) + formatName(name) + formatName(variant) : null
+  return name
+    ? formatName(config.react.componentBaseName) +
+        formatName(name) +
+        formatName(variant)
+    : null
 }
 
 gulp.task('generate-svgs-index', (cb) => {
@@ -46,36 +50,37 @@ gulp.task('generate-svgs-index', (cb) => {
   const destination = path.join(config.destination, 'svg/')
   const deprecated = config.deprecated || {}
 
-  glob.sync(path.normalize(`${config.svg.destination}/**/*.svg`)).forEach((file) => {
-    const baseName = path.basename(file, '.svg')
-    const name = toComponentName(baseName)
-    const variant = path.basename(path.dirname(file))
+  glob
+    .sync(path.normalize(`${config.svg.destination}/**/*.svg`))
+    .forEach((file) => {
+      const baseName = path.basename(file, '.svg')
+      const name = toComponentName(baseName)
+      const variant = path.basename(path.dirname(file))
 
-    glyphs[name] = glyphs[name] || {}
+      glyphs[name] = glyphs[name] || {}
 
-    glyphs[name][variant] = {
-      glyphName: baseName,
-      src: fs.readFileSync(file, 'utf8'),
-      deprecated: !!deprecated[baseName]
-    }
-  })
-
-  const glyphExports = Object.keys(glyphs)
-    .map((glyph) => {
-      return {
-        name: glyph,
-        variants: Object.keys(glyphs[glyph])
-          .map((variant) => {
-            const data = Object.assign({ variant }, glyphs[glyph][variant])
-            return {
-              name: variant,
-              json: JSON.stringify(data, undefined, 2)
-            }
-          })
+      glyphs[name][variant] = {
+        glyphName: baseName,
+        src: fs.readFileSync(file, 'utf8'),
+        deprecated: !!deprecated[baseName]
       }
     })
 
-  return gulp.src(require.resolve('./index.ejs'))
+  const glyphExports = Object.keys(glyphs).map((glyph) => {
+    return {
+      name: glyph,
+      variants: Object.keys(glyphs[glyph]).map((variant) => {
+        const data = Object.assign({ variant }, glyphs[glyph][variant])
+        return {
+          name: variant,
+          json: JSON.stringify(data, undefined, 2)
+        }
+      })
+    }
+  })
+
+  return gulp
+    .src(require.resolve('./index.ejs'))
     .pipe(
       consolidate('lodash', {
         glyphs: glyphExports,
@@ -88,40 +93,52 @@ gulp.task('generate-svgs-index', (cb) => {
 })
 
 gulp.task('generate-svgs-from-sketch', () => {
-  return gulp.src(config.svg.source)
-    .pipe(changed(config.svg.destination))
-    // export svgs from sketch source
-    .pipe(sketch({
-      export: 'artboards',
-      formats: 'svg'
-    }))
-    // optimize svgs
-    .pipe(svgmin({
-      js2svg: { pretty: true },
-      plugins: [
-        { removeDimensions: true },
-        { removeViewBox: false },
-        { removeDesc: true },
-        { removeTitle: true },
-        { removeRasterImages: true },
-        { cleanupNumericValues: false },
-        { removeUnknownsAndDefaults: false },
-        { removeUselessStrokeAndFill: false },
-        { convertStyleToAttrs: true },
-        { convertPathData: false }
-      ]
-    }))
-    // clean up fills
-    .pipe(cheerio({
-      run: ($) => {
-        $('[fill]').removeAttr('fill')
-      },
-      parserOptions: {
-        xmlMode: true
-      }
-    }))
-    .on('error', handleErrors)
-    .pipe(gulp.dest(config.svg.destination))
+  return (
+    gulp
+      .src(config.svg.source)
+      .pipe(changed(config.svg.destination))
+      // export svgs from sketch source
+      .pipe(
+        sketch({
+          export: 'artboards',
+          formats: 'svg'
+        })
+      )
+      // optimize svgs
+      .pipe(
+        svgmin({
+          js2svg: { pretty: true },
+          plugins: [
+            { removeDimensions: true },
+            { removeViewBox: false },
+            { removeDesc: true },
+            { removeTitle: true },
+            { removeRasterImages: true },
+            { cleanupNumericValues: false },
+            { removeUnknownsAndDefaults: false },
+            { removeUselessStrokeAndFill: false },
+            { convertStyleToAttrs: true },
+            { convertPathData: false }
+          ]
+        })
+      )
+      // clean up fills
+      .pipe(
+        cheerio({
+          run: ($) => {
+            $('[fill]').removeAttr('fill')
+          },
+          parserOptions: {
+            xmlMode: true
+          }
+        })
+      )
+      .on('error', handleErrors)
+      .pipe(gulp.dest(config.svg.destination))
+  )
 })
 
-gulp.task('generate-svgs', gulp.series('generate-svgs-from-sketch', 'generate-svgs-index'))
+gulp.task(
+  'generate-svgs',
+  gulp.series('generate-svgs-from-sketch', 'generate-svgs-index')
+)

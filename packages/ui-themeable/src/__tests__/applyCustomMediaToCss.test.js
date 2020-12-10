@@ -54,4 +54,3 @@ describe('applyCustomMediaToCss', () => {
     expect(transformedCss).to.equalIgnoreSpaces(expectedCss)
   })
 })
-

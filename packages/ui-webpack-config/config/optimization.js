@@ -26,7 +26,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   splitChunks: {
-    chunks: 'all',
+    chunks: 'all'
   },
   runtimeChunk: {
     // so that old codepens still work

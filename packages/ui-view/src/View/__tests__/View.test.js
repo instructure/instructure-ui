@@ -67,7 +67,7 @@ describe('<View />', async () => {
     }
 
     const subject = await mount(
-      <View style={{...styleProps}}>
+      <View style={{ ...styleProps }}>
         <h1>Hello!</h1>
       </View>
     )
@@ -87,7 +87,7 @@ describe('<View />', async () => {
 
   it('should pass flex style', async () => {
     const subject = await mount(
-      <View style={{flexBasis: '30rem'}}>
+      <View style={{ flexBasis: '30rem' }}>
         <h1>Hello!</h1>
       </View>
     )
@@ -104,7 +104,7 @@ describe('<View />', async () => {
     }
 
     const subject = await mount(
-      <View style={{...styleProps}}>
+      <View style={{ ...styleProps }}>
         <h1>Hello!</h1>
       </View>
     )
@@ -211,14 +211,15 @@ describe('<View />', async () => {
     const view = within(subject.getDOMNode())
     expect(view.getComputedStyle().maxWidth).to.equal('100%')
 
-    await subject.setProps({maxWidth: '200px'})
+    await subject.setProps({ maxWidth: '200px' })
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
   })
 
   describe('withFocusOutline', async () => {
     it('should warn when withFocusOutline is true without position=relative', async () => {
       const consoleError = stub(console, 'error')
-      const warning = 'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
+      const warning =
+        'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
       await mount(
         <View withFocusOutline>
           <h1>Hello!</h1>
@@ -230,13 +231,10 @@ describe('<View />', async () => {
 
     it('should warn when withFocusOutline is `true`, display is set to `inline`, and focusPosition is set to `offset`', async () => {
       const consoleError = stub(console, 'error')
-      const warning = 'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
+      const warning =
+        'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
       await mount(
-        <View
-          withFocusOutline
-          display="inline"
-          focusPosition="offset"
-        >
+        <View withFocusOutline display="inline" focusPosition="offset">
           <h1>Hello!</h1>
         </View>
       )
@@ -246,11 +244,7 @@ describe('<View />', async () => {
 
     it('should apply the correct focus ring depending on the border radius', async () => {
       const subject = await mount(
-        <View
-          withFocusOutline
-          position="relative"
-          display="block"
-        >
+        <View withFocusOutline position="relative" display="block">
           Hello
         </View>
       )
@@ -273,28 +267,25 @@ describe('<View />', async () => {
       await subject.setProps({ borderRadius: 'pill' })
       expect(view).to.have.className(styles[`${baseRadiusStyle}Inherit`])
 
-      await subject.setProps({ borderRadius: 'small'})
+      await subject.setProps({ borderRadius: 'small' })
       expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
 
-      await subject.setProps({ borderRadius: 'medium'})
+      await subject.setProps({ borderRadius: 'medium' })
       expect(view).to.have.className(styles[`${baseRadiusStyle}Medium`])
 
-      await subject.setProps({ borderRadius: 'large'})
+      await subject.setProps({ borderRadius: 'large' })
       expect(view).to.have.className(styles[`${baseRadiusStyle}Large`])
 
-      await subject.setProps({ borderRadius: 'small small small'})
+      await subject.setProps({ borderRadius: 'small small small' })
       expect(view).to.have.className(styles[`${baseRadiusStyle}Small`])
 
-      await subject.setProps({ borderRadius: 'small small small medium'})
+      await subject.setProps({ borderRadius: 'small small small medium' })
       expect(view).to.have.className(styles[`${baseRadiusStyle}None`])
     })
 
     it('should use the native browser focus management when withFocusOutline is undefined', async () => {
       const subject = await mount(
-        <View
-          as="button"
-          position="relative"
-        >
+        <View as="button" position="relative">
           Hello
         </View>
       )

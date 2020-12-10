@@ -27,7 +27,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { themeable } from '@instructure/ui-themeable'
-import { omitProps, matchComponentTypes, safeCloneElement } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  matchComponentTypes,
+  safeCloneElement
+} from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 
@@ -54,7 +58,9 @@ class Row extends Component {
     children: ChildrenPropTypes.oneOf([ColHeader, RowHeader, Cell]),
     hover: PropTypes.bool,
     isStacked: PropTypes.bool,
-    headers: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.node, PropTypes.func])),
+    headers: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+    )
   }
   /* eslint-enable react/require-default-props */
 
@@ -62,7 +68,7 @@ class Row extends Component {
     children: null
   }
 
-  render () {
+  render() {
     const { children, hover, isStacked, headers } = this.props
 
     return (
@@ -72,9 +78,9 @@ class Row extends Component {
         className={classnames({
           [styles.root]: true,
           [styles.hover]: hover,
-          [styles.stacked]: isStacked,
+          [styles.stacked]: isStacked
         })}
-        role={isStacked ? "row" : null}
+        role={isStacked ? 'row' : null}
       >
         {Children.toArray(children)
           .filter(Boolean)
@@ -85,14 +91,14 @@ class Row extends Component {
             if (matchComponentTypes(child, [RowHeader])) {
               return safeCloneElement(child, {
                 key: child.props.name,
-                isStacked,
+                isStacked
               })
             }
             if (matchComponentTypes(child, [Cell])) {
               return safeCloneElement(child, {
                 key: child.props.name,
                 isStacked,
-                header: headers && headers[index],
+                header: headers && headers[index]
               })
             }
             return null

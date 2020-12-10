@@ -35,7 +35,7 @@ class LocalizableComponent extends React.Component {
     timezone: PropTypes.string
   }
 
-  render () {
+  render() {
     return (
       <div>
         <span>{this.context.locale}</span>
@@ -48,7 +48,7 @@ class LocalizableComponent extends React.Component {
 describe('<ApplyLocale />', async () => {
   it('applies locale context', async () => {
     const subject = await mount(
-      <ApplyLocale locale="fr" >
+      <ApplyLocale locale="fr">
         <LocalizableComponent />
       </ApplyLocale>
     )

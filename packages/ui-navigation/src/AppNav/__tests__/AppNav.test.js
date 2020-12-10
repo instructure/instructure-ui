@@ -40,10 +40,7 @@ describe('<AppNav />', async () => {
   describe('for a11y', () => {
     it('should render a nav element with an aria-label', async () => {
       await mount(
-        <AppNav
-          screenReaderLabel="Screen reader label"
-          visibleItemsCount={2}
-        >
+        <AppNav screenReaderLabel="Screen reader label" visibleItemsCount={2}>
           <AppNav.Item
             renderLabel="Some label"
             href="http://instructure.design"
@@ -61,10 +58,7 @@ describe('<AppNav />', async () => {
 
     it('should render a semantic list of items', async () => {
       await mount(
-        <AppNav
-          screenReaderLabel="App navigation"
-          visibleItemsCount={2}
-        >
+        <AppNav screenReaderLabel="App navigation" visibleItemsCount={2}>
           <AppNav.Item
             renderLabel="Some first label"
             href="http://instructure.design"
@@ -118,37 +112,30 @@ describe('<AppNav />', async () => {
       const onUpdate = stub()
       const itemWidth = 70
 
-      const Nav = ({
-        width
-      }) => (
-        <div style={{width}}>
-          <AppNav
-            screenReaderLabel="App navigation"
-            onUpdate={onUpdate}
-          >
+      const Nav = ({ width }) => (
+        <div style={{ width }}>
+          <AppNav screenReaderLabel="App navigation" onUpdate={onUpdate}>
             <AppNav.Item
-              renderLabel={<div style={{width: itemWidth}}>coolLabel</div>}
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
               href="http://instructure.design"
             />
             <AppNav.Item
-              renderLabel={<div style={{width: itemWidth}}>coolLabel</div>}
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
               href="http://instructure.design"
             />
             <AppNav.Item
-              renderLabel={<div style={{width: itemWidth}}>coolLabel</div>}
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
               href="http://instructure.design"
             />
             <AppNav.Item
-              renderLabel={<div style={{width: itemWidth}}>coolLabel</div>}
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
               href="http://instructure.design"
             />
           </AppNav>
         </div>
       )
 
-      const subject = await mount(
-        <Nav width={800} />
-      )
+      const subject = await mount(<Nav width={800} />)
 
       await wait(() => {
         expect(onUpdate).to.have.been.calledWith({ visibleItemsCount: 4 })
@@ -171,22 +158,10 @@ describe('<AppNav />', async () => {
             return 'I am sooo custom!'
           }}
         >
-          <AppNav.Item
-            renderLabel="Label"
-            href="http://instructure.design"
-          />
-          <AppNav.Item
-            renderLabel="Label"
-            href="http://instructure.design"
-          />
-          <AppNav.Item
-            renderLabel="Label"
-            href="http://instructure.design"
-          />
-          <AppNav.Item
-            renderLabel="Label"
-            href="http://instructure.design"
-          />
+          <AppNav.Item renderLabel="Label" href="http://instructure.design" />
+          <AppNav.Item renderLabel="Label" href="http://instructure.design" />
+          <AppNav.Item renderLabel="Label" href="http://instructure.design" />
+          <AppNav.Item renderLabel="Label" href="http://instructure.design" />
         </AppNav>
       )
 
@@ -200,5 +175,4 @@ describe('<AppNav />', async () => {
   describe('with generated examples', async () => {
     generateA11yTests(AppNavExamples)
   })
-
 })

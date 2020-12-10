@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within} from '@instructure/ui-test-utils'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import { Page } from '../index'
 
 describe('<Page />', async () => {
@@ -31,15 +31,24 @@ describe('<Page />', async () => {
 
   it('should render with a function as child', async () => {
     const subject = await mount(
-      <Page defaultFocusElement={() => { return _input }}>
-          {() => {
-            return (
-              <div>
-                <input type="text" ref={(el) => { _input = el }} />
-                <span>Hello World</span>
-              </div>
-            )
-          }}
+      <Page
+        defaultFocusElement={() => {
+          return _input
+        }}
+      >
+        {() => {
+          return (
+            <div>
+              <input
+                type="text"
+                ref={(el) => {
+                  _input = el
+                }}
+              />
+              <span>Hello World</span>
+            </div>
+          )
+        }}
       </Page>
     )
 
@@ -48,15 +57,24 @@ describe('<Page />', async () => {
 
   it('should focus default element', async () => {
     const subject = await mount(
-      <Page defaultFocusElement={() => { return _input }}>
-          {() => {
-            return (
-              <div>
-                <input type="text" ref={(el) => { _input = el }} />
-                <span>Hello World</span>
-              </div>
-            )
-          }}
+      <Page
+        defaultFocusElement={() => {
+          return _input
+        }}
+      >
+        {() => {
+          return (
+            <div>
+              <input
+                type="text"
+                ref={(el) => {
+                  _input = el
+                }}
+              />
+              <span>Hello World</span>
+            </div>
+          )
+        }}
       </Page>
     )
 
@@ -67,6 +85,4 @@ describe('<Page />', async () => {
 
     expect(input.focused()).to.be.true()
   })
-
-
 })

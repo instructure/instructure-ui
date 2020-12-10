@@ -64,9 +64,10 @@ const getDefaultDir = () => {
  * @param {Element} element will use the <html> element by default
  * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
  */
-function getTextDirection (element) {
+function getTextDirection(element) {
   if (canUseDOM) {
-    if (typeof element === 'undefined' || (element === document.documentElement)) return getDefaultDir()
+    if (typeof element === 'undefined' || element === document.documentElement)
+      return getDefaultDir()
     return element.getAttribute('dir') || getComputedStyle(element).direction
   }
 }

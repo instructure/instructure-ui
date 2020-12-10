@@ -22,17 +22,17 @@
  * SOFTWARE.
  */
 import { omitProps } from './passthroughProps'
- /**
-  * ---
-  * category: utilities/react
-  * ---
-  * Return a props object with the specified propTypes omitted.
-  * Automatically excludes ('theme', 'children', 'className', 'style')
-  *
-  * @param {Object} props React component props
-  * @param {Object} propTypes React component propTypes
-  * @param {Array} exclude an optional array of prop names to exclude
-  * @returns {Object} props object without the excluded props
-  */
+/**
+ * ---
+ * category: utilities/react
+ * ---
+ * Return a props object with the specified propTypes omitted.
+ * Automatically excludes ('theme', 'children', 'className', 'style')
+ *
+ * @param {Object} props React component props
+ * @param {Object} propTypes React component propTypes
+ * @param {Array} exclude an optional array of prop names to exclude
+ * @returns {Object} props object without the excluded props
+ */
 export default omitProps
 export { omitProps }

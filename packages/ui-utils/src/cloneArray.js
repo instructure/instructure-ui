@@ -30,9 +30,9 @@
  *
  * @param {Array} arr
  * @returns {Array} Returns a copy of the array
-*/
+ */
 
-function cloneArray (arr) {
+function cloneArray(arr) {
   let copy
   if (Array.isArray(arr)) {
     copy = arr.slice(0)

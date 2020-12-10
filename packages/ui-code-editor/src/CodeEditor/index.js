@@ -66,8 +66,8 @@ class CodeEditor extends Component {
     options: PropTypes.object,
     attachment: PropTypes.oneOf(['bottom', 'top']),
     /**
-    * the selected value (when controlled via the `onChange` prop)
-    */
+     * the selected value (when controlled via the `onChange` prop)
+     */
     value: PropTypes.string
   }
 
@@ -82,18 +82,18 @@ class CodeEditor extends Component {
     value: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super()
     this._id = uid('CodeEditor')
   }
 
-  focus () {
+  focus() {
     if (this.codeMirror) {
       this.codeMirror.focus()
     }
   }
 
-  get mode () {
+  get mode() {
     const { language } = this.props
 
     if (language === 'json' || language === 'js') {
@@ -109,7 +109,7 @@ class CodeEditor extends Component {
     }
   }
 
-  get options () {
+  get options() {
     return {
       ...this.props.options,
       readOnly: this.props.readOnly,
@@ -117,15 +117,8 @@ class CodeEditor extends Component {
     }
   }
 
-  render () {
-    const {
-      value,
-      label,
-      attachment,
-      readOnly,
-      onChange,
-      ...rest
-    } = this.props
+  render() {
+    const { value, label, attachment, readOnly, onChange, ...rest } = this.props
 
     const classes = {
       [styles.root]: true,
@@ -144,7 +137,9 @@ class CodeEditor extends Component {
             onBeforeChange={(editor, data, value) => {
               onChange(value)
             }}
-            ref={(el) => { this.codeMirror = el }}
+            ref={(el) => {
+              this.codeMirror = el
+            }}
           />
         </label>
       </div>

@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
+const {
+  runCommandsConcurrently,
+  getCommand
+} = require('@instructure/command-utils')
 
 const {
   CHROMATIC_APP_CODE,
@@ -33,7 +36,7 @@ const {
 const args = process.argv.slice(2)
 
 // ui-build --vrt -p 8080
-const portIndex = args.findIndex(arg => arg === '-p')
+const portIndex = args.findIndex((arg) => arg === '-p')
 let port = '9001'
 if (portIndex > 0) {
   port = args[portIndex + 1]
@@ -45,16 +48,18 @@ if (args.includes('--auto-accept-changes')) {
   chromaticArgs.push('--auto-accept-changes')
 }
 
-process.exit(runCommandsConcurrently({
-  chromatic: getCommand(
-    'chromatic',
-    chromaticArgs,
-    [
-      `CI=true`,
-      `CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}`,
-      (GERRIT_CHANGE_ID ? `GERRIT_CHANGE_ID=${GERRIT_CHANGE_ID}` : false),
-      (GERRIT_PROJECT ? `GERRIT_PROJECT=${GERRIT_PROJECT}` : false),
-      (GERRIT_BRANCH ? `GERRIT_BRANCH=${GERRIT_BRANCH}` : false)
-    ].filter(Boolean)
-  )
-}).status)
+process.exit(
+  runCommandsConcurrently({
+    chromatic: getCommand(
+      'chromatic',
+      chromaticArgs,
+      [
+        `CI=true`,
+        `CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}`,
+        GERRIT_CHANGE_ID ? `GERRIT_CHANGE_ID=${GERRIT_CHANGE_ID}` : false,
+        GERRIT_PROJECT ? `GERRIT_PROJECT=${GERRIT_PROJECT}` : false,
+        GERRIT_BRANCH ? `GERRIT_BRANCH=${GERRIT_BRANCH}` : false
+      ].filter(Boolean)
+    )
+  }).status
+)

@@ -34,8 +34,8 @@
  * @param {number} b
  * @param {number} [diff=1]
  * @returns {Boolean} Returns true if a is within the diff range of b
-*/
-function within (a, b, diff = 1) {
+ */
+function within(a, b, diff = 1) {
   return a + diff >= b && b >= a - diff
 }
 

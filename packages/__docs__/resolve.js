@@ -28,27 +28,60 @@ module.exports = {
   alias: {
     // set up aliases to get webpack to rebuild when we make changes to these packages
     '@instructure/debounce$:': path.resolve(__dirname, '../debounce/src/'),
-    '@instructure/ui-a11y-content$': path.resolve(__dirname, '../ui-a11y-content/src/'),
+    '@instructure/ui-a11y-content$': path.resolve(
+      __dirname,
+      '../ui-a11y-content/src/'
+    ),
     '@instructure/ui-alerts$': path.resolve(__dirname, '../ui-alerts/src/'),
     '@instructure/ui-avatar$': path.resolve(__dirname, '../ui-avatar/src/'),
     '@instructure/ui-badge$': path.resolve(__dirname, '../ui-badge/src/'),
-    '@instructure/ui-billboard$': path.resolve(__dirname, '../ui-billboard/src/'),
-    '@instructure/ui-breadcrumb$': path.resolve(__dirname, '../ui-breadcrumb/src/'),
+    '@instructure/ui-billboard$': path.resolve(
+      __dirname,
+      '../ui-billboard/src/'
+    ),
+    '@instructure/ui-breadcrumb$': path.resolve(
+      __dirname,
+      '../ui-breadcrumb/src/'
+    ),
     '@instructure/ui-buttons$': path.resolve(__dirname, '../ui-buttons/src/'),
     '@instructure/ui-byline$': path.resolve(__dirname, '../ui-byline/src/'),
     '@instructure/ui-calendar$': path.resolve(__dirname, '../ui-calendar/src/'),
     '@instructure/ui-checkbox$': path.resolve(__dirname, '../ui-checkbox/src/'),
-    '@instructure/ui-code-editor$': path.resolve(__dirname, '../ui-code-editor/src/'),
-    '@instructure/ui-date-input$': path.resolve(__dirname, '../ui-date-input/src/'),
+    '@instructure/ui-code-editor$': path.resolve(
+      __dirname,
+      '../ui-code-editor/src/'
+    ),
+    '@instructure/ui-date-input$': path.resolve(
+      __dirname,
+      '../ui-date-input/src/'
+    ),
     '@instructure/ui-dialog$': path.resolve(__dirname, '../ui-dialog/src/'),
-    '@instructure/ui-docs-client$': path.resolve(__dirname, '../ui-docs-client/src/'),
-    '@instructure/ui-drawer-layout$': path.resolve(__dirname, '../ui-drawer-layout/src/'),
+    '@instructure/ui-docs-client$': path.resolve(
+      __dirname,
+      '../ui-docs-client/src/'
+    ),
+    '@instructure/ui-drawer-layout$': path.resolve(
+      __dirname,
+      '../ui-drawer-layout/src/'
+    ),
     '@instructure/ui-editable$': path.resolve(__dirname, '../ui-editable/src/'),
-    '@instructure/ui-expandable$': path.resolve(__dirname, '../ui-expandable/src/'),
+    '@instructure/ui-expandable$': path.resolve(
+      __dirname,
+      '../ui-expandable/src/'
+    ),
     '@instructure/ui-flex$': path.resolve(__dirname, '../ui-flex/src'),
-    '@instructure/ui-focusable$': path.resolve(__dirname, '../ui-focusable/src/'),
-    '@instructure/ui-a11y-utils$': path.resolve(__dirname, '../ui-a11y-utils/src/'),
-    '@instructure/ui-form-field$': path.resolve(__dirname, '../ui-form-field/src/'),
+    '@instructure/ui-focusable$': path.resolve(
+      __dirname,
+      '../ui-focusable/src/'
+    ),
+    '@instructure/ui-a11y-utils$': path.resolve(
+      __dirname,
+      '../ui-a11y-utils/src/'
+    ),
+    '@instructure/ui-form-field$': path.resolve(
+      __dirname,
+      '../ui-form-field/src/'
+    ),
     '@instructure/ui-grid$': path.resolve(__dirname, '../ui-grid/src/'),
     '@instructure/ui-i18n$': path.resolve(__dirname, '../ui-i18n/src/'),
     '@instructure/ui-img$': path.resolve(__dirname, '../ui-img/src/'),
@@ -58,48 +91,117 @@ module.exports = {
     '@instructure/ui-metric$': path.resolve(__dirname, '../ui-metric/src/'),
     '@instructure/ui-modal$': path.resolve(__dirname, '../ui-modal/src/'),
     '@instructure/ui-motion$': path.resolve(__dirname, '../ui-motion/src/'),
-    '@instructure/ui-navigation$': path.resolve(__dirname, '../ui-navigation/src/'),
-    '@instructure/ui-number-input$': path.resolve(__dirname, '../ui-number-input/src/'),
-    '@instructure/ui-text-area$': path.resolve(__dirname, '../ui-text-area/src/'),
-    '@instructure/ui-text-input$': path.resolve(__dirname, '../ui-text-input/src/'),
+    '@instructure/ui-navigation$': path.resolve(
+      __dirname,
+      '../ui-navigation/src/'
+    ),
+    '@instructure/ui-number-input$': path.resolve(
+      __dirname,
+      '../ui-number-input/src/'
+    ),
+    '@instructure/ui-text-area$': path.resolve(
+      __dirname,
+      '../ui-text-area/src/'
+    ),
+    '@instructure/ui-text-input$': path.resolve(
+      __dirname,
+      '../ui-text-input/src/'
+    ),
     '@instructure/ui-options$': path.resolve(__dirname, '../ui-options/src/'),
     '@instructure/ui-overlays$': path.resolve(__dirname, '../ui-overlays/src/'),
-    '@instructure/ui-pagination$': path.resolve(__dirname, '../ui-pagination/src/'),
+    '@instructure/ui-pagination$': path.resolve(
+      __dirname,
+      '../ui-pagination/src/'
+    ),
     '@instructure/ui-pages$': path.resolve(__dirname, '../ui-pages/src/'),
     '@instructure/ui-pill$': path.resolve(__dirname, '../ui-pill/src/'),
     '@instructure/ui-popover$': path.resolve(__dirname, '../ui-popover/src/'),
     '@instructure/ui-position$': path.resolve(__dirname, '../ui-position/src/'),
     '@instructure/ui-portal$': path.resolve(__dirname, '../ui-portal/src/'),
     '@instructure/ui-progress$': path.resolve(__dirname, '../ui-progress/src'),
-    '@instructure/ui-radio-input$': path.resolve(__dirname, '../ui-radio-input/src/'),
-    '@instructure/ui-range-input$': path.resolve(__dirname, '../ui-range-input/src/'),
+    '@instructure/ui-radio-input$': path.resolve(
+      __dirname,
+      '../ui-radio-input/src/'
+    ),
+    '@instructure/ui-range-input$': path.resolve(
+      __dirname,
+      '../ui-range-input/src/'
+    ),
     '@instructure/ui-rating$': path.resolve(__dirname, '../ui-rating/src/'),
-    '@instructure/ui-responsive$': path.resolve(__dirname, '../ui-responsive/src/'),
+    '@instructure/ui-responsive$': path.resolve(
+      __dirname,
+      '../ui-responsive/src/'
+    ),
     '@instructure/ui-select$': path.resolve(__dirname, '../ui-select/src/'),
-    '@instructure/ui-selectable$': path.resolve(__dirname, '../ui-selectable/src/'),
-    '@instructure/ui-simple-select$': path.resolve(__dirname, '../ui-simple-select/src/'),
+    '@instructure/ui-selectable$': path.resolve(
+      __dirname,
+      '../ui-selectable/src/'
+    ),
+    '@instructure/ui-simple-select$': path.resolve(
+      __dirname,
+      '../ui-simple-select/src/'
+    ),
     '@instructure/ui-spinner$': path.resolve(__dirname, '../ui-spinner/src/'),
-    '@instructure/ui-svg-images$': path.resolve(__dirname, '../ui-svg-images/src/'),
+    '@instructure/ui-svg-images$': path.resolve(
+      __dirname,
+      '../ui-svg-images/src/'
+    ),
     '@instructure/ui-table$': path.resolve(__dirname, '../ui-table/src/'),
     '@instructure/ui-tabs$': path.resolve(__dirname, '../ui-tabs/src/'),
     '@instructure/ui-tag$': path.resolve(__dirname, '../ui-tag/src/'),
     '@instructure/ui-text$': path.resolve(__dirname, '../ui-text/src/'),
-    '@instructure/ui-time-select$': path.resolve(__dirname, '../ui-time-select/src/'),
-    '@instructure/ui-toggle-details$': path.resolve(__dirname, '../ui-toggle-details/src/'),
+    '@instructure/ui-time-select$': path.resolve(
+      __dirname,
+      '../ui-time-select/src/'
+    ),
+    '@instructure/ui-toggle-details$': path.resolve(
+      __dirname,
+      '../ui-toggle-details/src/'
+    ),
     '@instructure/ui-tooltip$': path.resolve(__dirname, '../ui-tooltip/src/'),
     '@instructure/ui-tray$': path.resolve(__dirname, '../ui-tray/src/'),
-    '@instructure/ui-tree-browser$': path.resolve(__dirname, '../ui-tree-browser/src/'),
-    '@instructure/ui-truncate-text$': path.resolve(__dirname, '../ui-truncate-text/src/'),
+    '@instructure/ui-tree-browser$': path.resolve(
+      __dirname,
+      '../ui-tree-browser/src/'
+    ),
+    '@instructure/ui-truncate-text$': path.resolve(
+      __dirname,
+      '../ui-truncate-text/src/'
+    ),
     '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
     '@instructure/ui-view$': path.resolve(__dirname, '../ui-view/src/'),
-    '@instructure/canvas-theme$': path.resolve(__dirname, '../canvas-theme/src/'),
-    '@instructure/canvas-high-contrast-theme$': path.resolve(__dirname, '../canvas-high-contrast-theme/src/'),
-    '@instructure/instructure-theme$': path.resolve(__dirname, '../instructure-theme/src/'),
-    '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
-    '@instructure/ui-react-utils$': path.resolve(__dirname, '../ui-react-utils/src/'),
-    '@instructure/ui-dom-utils$': path.resolve(__dirname, '../ui-dom-utils/src/'),
-    '@instructure/ui-color-utils$': path.resolve(__dirname, '../ui-color-utils/src/'),
-    '@instructure/ui-file-drop$': path.resolve(__dirname, '../ui-file-drop/src/'),
+    '@instructure/canvas-theme$': path.resolve(
+      __dirname,
+      '../canvas-theme/src/'
+    ),
+    '@instructure/canvas-high-contrast-theme$': path.resolve(
+      __dirname,
+      '../canvas-high-contrast-theme/src/'
+    ),
+    '@instructure/instructure-theme$': path.resolve(
+      __dirname,
+      '../instructure-theme/src/'
+    ),
+    '@instructure/ui-themeable$': path.resolve(
+      __dirname,
+      '../ui-themeable/src/'
+    ),
+    '@instructure/ui-react-utils$': path.resolve(
+      __dirname,
+      '../ui-react-utils/src/'
+    ),
+    '@instructure/ui-dom-utils$': path.resolve(
+      __dirname,
+      '../ui-dom-utils/src/'
+    ),
+    '@instructure/ui-color-utils$': path.resolve(
+      __dirname,
+      '../ui-color-utils/src/'
+    ),
+    '@instructure/ui-file-drop$': path.resolve(
+      __dirname,
+      '../ui-file-drop/src/'
+    ),
     '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src/')
   }
 }

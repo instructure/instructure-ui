@@ -39,12 +39,12 @@ const tests = [
 jest.autoMockOff()
 
 describe('updateImports', () => {
-  tests.forEach(test => {
+  tests.forEach((test) => {
     defineTest(
       __dirname,
       'lib/updateImports',
       {
-        config: path.join(__dirname, `../__testfixtures__/${test}.config.js`),
+        config: path.join(__dirname, `../__testfixtures__/${test}.config.js`)
       },
       `updateImports/${test}`,
       {
@@ -53,4 +53,3 @@ describe('updateImports', () => {
     )
   })
 })
-

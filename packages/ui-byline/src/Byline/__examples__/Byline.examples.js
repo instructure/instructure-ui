@@ -26,10 +26,7 @@ import { View } from '@instructure/ui-view'
 
 export default {
   propValues: {
-    title: [
-      null,
-      'Graham Taylor'
-    ],
+    title: [null, 'Graham Taylor'],
     description: [
       'Aliquip magna in aliquip aliquip sint culpa ullamco aliquip.',
       'Consectetur qui eiusmod labore eu ad commodo dolor ex consectetur sit id deserunt. Culpa cupidatat nisi pariatur non exercitation amet culpa Lorem sint do et laborum culpa. Eu pariatur eu elit culpa. Nisi minim irure fugiat irure ad deserunt eiusmod ex ipsum culpa proident aliquip aliqua aliquip.'

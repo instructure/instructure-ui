@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-export default function generator ({ spacing }) {
+export default function generator({ spacing }) {
   return {
     topMargin: spacing.xxSmall
- }
+  }
 }

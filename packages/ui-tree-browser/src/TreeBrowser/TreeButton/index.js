@@ -45,17 +45,17 @@ parent: TreeBrowser
 @themeable(theme, styles)
 class TreeButton extends Component {
   static propTypes = {
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]),
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     descriptor: PropTypes.string,
     type: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
     collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    collectionIconExpanded: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    collectionIconExpanded: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.func
+    ]),
     itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     thumbnail: PropTypes.string,
     onClick: PropTypes.func,
@@ -81,7 +81,7 @@ class TreeButton extends Component {
     descriptor: undefined
   }
 
-  renderImage () {
+  renderImage() {
     const { type } = this.props
     switch (type) {
       case 'collection':
@@ -93,23 +93,20 @@ class TreeButton extends Component {
     }
   }
 
-  renderCollectionIcon () {
-    const {
-      expanded,
-      collectionIcon,
-      collectionIconExpanded
-    } = this.props
+  renderCollectionIcon() {
+    const { expanded, collectionIcon, collectionIconExpanded } = this.props
 
     if (collectionIcon || collectionIconExpanded) {
-      return <div className={styles.icon}>{callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}</div>
+      return (
+        <div className={styles.icon}>
+          {callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}
+        </div>
+      )
     }
   }
 
-  renderItemImage () {
-    const {
-      thumbnail,
-      itemIcon
-    } = this.props
+  renderItemImage() {
+    const { thumbnail, itemIcon } = this.props
 
     if (thumbnail) {
       return (
@@ -124,7 +121,7 @@ class TreeButton extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       name,
       descriptor,
@@ -147,25 +144,16 @@ class TreeButton extends Component {
 
     // VoiceOver can't navigate without the buttons, even though they don't do anything
     return (
-      <button
-        tabIndex={-1}
-        type="button"
-        className={classnames(classes)}
-      >
+      <button tabIndex={-1} type="button" className={classnames(classes)}>
         <span className={styles.layout}>
           {this.renderImage()}
           <span className={styles.text}>
-            <span className={styles.textName}>
-              {name}
-            </span>
-            {(descriptor)
-              ? <span
-                className={styles.textDescriptor}
-                title={descriptor}
-              >
+            <span className={styles.textName}>{name}</span>
+            {descriptor ? (
+              <span className={styles.textDescriptor} title={descriptor}>
                 {descriptor}
-              </span> : null
-            }
+              </span>
+            ) : null}
           </span>
         </span>
       </button>

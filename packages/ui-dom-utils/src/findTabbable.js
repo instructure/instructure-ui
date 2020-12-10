@@ -24,14 +24,17 @@
 
 import { findFocusable } from './findFocusable'
 
-
-function findTabbable (el, shouldSearchRootNode) {
-  return findFocusable(el, (element) => {
-    return !isInvalidTabIndex(element.getAttribute('tabindex'))
-  }, shouldSearchRootNode)
+function findTabbable(el, shouldSearchRootNode) {
+  return findFocusable(
+    el,
+    (element) => {
+      return !isInvalidTabIndex(element.getAttribute('tabindex'))
+    },
+    shouldSearchRootNode
+  )
 }
 
-function isInvalidTabIndex (tabIndex) {
+function isInvalidTabIndex(tabIndex) {
   return !isNaN(tabIndex) && tabIndex < 0
 }
 

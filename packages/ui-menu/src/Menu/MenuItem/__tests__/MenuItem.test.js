@@ -36,9 +36,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should render as a link when an href is provided', async () => {
-    await mount(
-      <MenuItem href="example.html">Hello</MenuItem>
-    )
+    await mount(<MenuItem href="example.html">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
     const link = await item.find('a[href="example.html"]')
@@ -47,9 +45,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should render as a link when a to is provided', async () => {
-    await mount(
-      <MenuItem to="/example">Hello</MenuItem>
-    )
+    await mount(<MenuItem to="/example">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
     const link = await item.find('a[to="/example"]')
@@ -60,7 +56,9 @@ describe('<MenuItem />', async () => {
   it('should call onSelect after click', async () => {
     const onSelect = stub()
     await mount(
-      <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
+      <MenuItem onSelect={onSelect} value="foo">
+        Hello
+      </MenuItem>
     )
 
     const item = await MenuItemLocator.find(':contains(Hello)')
@@ -75,7 +73,9 @@ describe('<MenuItem />', async () => {
   it('should call onClick after click', async () => {
     const onClick = stub()
     await mount(
-      <MenuItem onClick={onClick} value="foo">Hello</MenuItem>
+      <MenuItem onClick={onClick} value="foo">
+        Hello
+      </MenuItem>
     )
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -88,7 +88,9 @@ describe('<MenuItem />', async () => {
   it('should call onSelect after SPACE key is pressed', async () => {
     const onSelect = stub()
     await mount(
-      <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
+      <MenuItem onSelect={onSelect} value="foo">
+        Hello
+      </MenuItem>
     )
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -102,7 +104,9 @@ describe('<MenuItem />', async () => {
   it('should call onSelect after ENTER key is pressed', async () => {
     const onSelect = stub()
     await mount(
-      <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
+      <MenuItem onSelect={onSelect} value="foo">
+        Hello
+      </MenuItem>
     )
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -115,7 +119,9 @@ describe('<MenuItem />', async () => {
   it('should not be able to select when the disabled prop is set', async () => {
     const onSelect = stub()
     await mount(
-      <MenuItem onSelect={onSelect} disabled>Hello</MenuItem>
+      <MenuItem onSelect={onSelect} disabled>
+        Hello
+      </MenuItem>
     )
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -128,88 +134,72 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the tabIndex attribute', async () => {
-    await mount(
-      <MenuItem>Hello</MenuItem>
-    )
+    await mount(<MenuItem>Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('tabIndex'))
-      .to.equal('-1')
+    expect(item.getAttribute('tabIndex')).to.equal('-1')
   })
 
   it('should set the aria-controls attribute', async () => {
-    await mount(
-      <MenuItem controls="testId">Hello</MenuItem>
-    )
+    await mount(<MenuItem controls="testId">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('aria-controls'))
-      .to.equal('testId')
+    expect(item.getAttribute('aria-controls')).to.equal('testId')
   })
 
   it('should set the aria-disabled attribute', async () => {
-    await mount(
-      <MenuItem disabled>Hello</MenuItem>
-    )
+    await mount(<MenuItem disabled>Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('aria-disabled'))
-      .to.equal('true')
+    expect(item.getAttribute('aria-disabled')).to.equal('true')
   })
 
   it('should set the aria-checked attribute when defaultSelected prop is true', async () => {
     await mount(
-      <MenuItem type="checkbox" defaultSelected>Hello</MenuItem>
+      <MenuItem type="checkbox" defaultSelected>
+        Hello
+      </MenuItem>
     )
 
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('aria-checked'))
-      .to.equal('true')
+    expect(item.getAttribute('aria-checked')).to.equal('true')
   })
 
   it('should set the aria-checked attribute when selected prop is true', async () => {
     const onSelect = stub()
     await mount(
-      <MenuItem type="checkbox" selected onSelect={onSelect}>Hello</MenuItem>
+      <MenuItem type="checkbox" selected onSelect={onSelect}>
+        Hello
+      </MenuItem>
     )
 
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('aria-checked'))
-      .to.equal('true')
+    expect(item.getAttribute('aria-checked')).to.equal('true')
   })
 
   it('should default to the "menuitem" role', async () => {
-    await mount(
-      <MenuItem>Hello</MenuItem>
-    )
+    await mount(<MenuItem>Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('role'))
-      .to.equal('menuitem')
+    expect(item.getAttribute('role')).to.equal('menuitem')
   })
 
   it('should set the role to "menuitemcheckbox" when the type is "checkbox"', async () => {
-    await mount(
-      <MenuItem type="checkbox">Hello</MenuItem>
-    )
+    await mount(<MenuItem type="checkbox">Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('role'))
-      .to.equal('menuitemcheckbox')
+    expect(item.getAttribute('role')).to.equal('menuitemcheckbox')
   })
 
   it('should set the role to "menuitemradio" when the type is "radio"', async () => {
-    await mount(
-      <MenuItem type="radio">Hello</MenuItem>
-    )
+    await mount(<MenuItem type="radio">Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 
-    expect(item.getAttribute('role'))
-      .to.equal('menuitemradio')
+    expect(item.getAttribute('role')).to.equal('menuitemradio')
   })
 })

@@ -36,7 +36,9 @@ export default {
     }
   },
   filter: (props) => {
-    return ['dashed', 'solid'].includes(props.delimiter) && props.as === 'ol' ||
-    props.delimiter !== 'none' && props.itemSpacing !== 'none'
+    return (
+      (['dashed', 'solid'].includes(props.delimiter) && props.as === 'ol') ||
+      (props.delimiter !== 'none' && props.itemSpacing !== 'none')
+    )
   }
 }

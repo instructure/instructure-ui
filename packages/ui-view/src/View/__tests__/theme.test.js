@@ -32,39 +32,60 @@ describe('View.theme', () => {
     const variables = View.generateTheme()
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundPrimary, variables.color)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundPrimary, variables.color)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundPrimaryInverse, variables.colorPrimaryInverse)).to.be.above(3)
+      expect(
+        contrast(
+          variables.backgroundPrimaryInverse,
+          variables.colorPrimaryInverse
+        )
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundSecondary, variables.color)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundSecondary, variables.color)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundBrand, variables.colorPrimaryInverse)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundBrand, variables.colorPrimaryInverse)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundAlert, variables.colorPrimaryInverse)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundAlert, variables.colorPrimaryInverse)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundInfo, variables.colorPrimaryInverse)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundInfo, variables.colorPrimaryInverse)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundSuccess, variables.colorPrimaryInverse)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundSuccess, variables.colorPrimaryInverse)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundDanger, variables.colorPrimaryInverse)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundDanger, variables.colorPrimaryInverse)
+      ).to.be.above(3)
     })
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.backgroundWarning, variables.colorPrimaryInverse)).to.be.above(3)
+      expect(
+        contrast(variables.backgroundWarning, variables.colorPrimaryInverse)
+      ).to.be.above(3)
     })
   })
 
@@ -72,39 +93,57 @@ describe('View.theme', () => {
     const variables = View.generateTheme('canvas-high-contrast')
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundPrimary, variables.color)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundPrimary, variables.color)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundInverse, variables.colorPrimaryInverse)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundInverse, variables.colorPrimaryInverse)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundSecondary, variables.color)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundSecondary, variables.color)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundBrand, variables.colorPrimaryInverse)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundBrand, variables.colorPrimaryInverse)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundAlert, variables.colorPrimaryInverse)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundAlert, variables.colorPrimaryInverse)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundInfo, variables.colorPrimaryInverse)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundInfo, variables.colorPrimaryInverse)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundSuccess, variables.colorPrimaryInverse)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundSuccess, variables.colorPrimaryInverse)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundDanger, variables.colorPrimaryInverse)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundDanger, variables.colorPrimaryInverse)
+      ).to.be.above(4.5)
     })
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.backgroundWarning, variables.colorPrimaryInverse)).to.be.above(4.5)
+      expect(
+        contrast(variables.backgroundWarning, variables.colorPrimaryInverse)
+      ).to.be.above(4.5)
     })
   })
 })

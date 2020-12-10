@@ -32,7 +32,12 @@ import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { callRenderProp, deprecated, passthroughProps, getInteraction } from '@instructure/ui-react-utils'
+import {
+  callRenderProp,
+  deprecated,
+  passthroughProps,
+  getInteraction
+} from '@instructure/ui-react-utils'
 import { isEdge } from '@instructure/ui-utils'
 
 import { accepts, getAcceptList } from './utils/accepts'
@@ -41,12 +46,12 @@ import { getEventFiles } from './utils/getEventFiles'
 import styles from './styles.css'
 import theme from './theme'
 
-function keyEventIsClickButton (e) {
-  return (e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter)
+function keyEventIsClickButton(e) {
+  return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
 }
 
 // Used try-catch due to missing document/navigator references in Jenkins
-function isBrowserMS () {
+function isBrowserMS() {
   let result = false
   try {
     result = document.documentMode || isEdge
@@ -73,132 +78,133 @@ category: components
 class FileDrop extends Component {
   static propTypes = {
     /**
-    * The id of the input (to link it to its label for a11y)
-    */
+     * The id of the input (to link it to its label for a11y)
+     */
     id: PropTypes.string,
     /**
-    * The content of FileDrop; can be a component or React node.
-    * Components receive `isDragAccepted` and `isDragRejected` as props.
-    */
-    renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
+     * The content of FileDrop; can be a component or React node.
+     * Components receive `isDragAccepted` and `isDragRejected` as props.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
+      .isRequired,
     /**
-    * The mime media type/s or file extension/s allowed to be dropped inside
-    */
+     * The mime media type/s or file extension/s allowed to be dropped inside
+     */
     accept: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string)
     ]),
     /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
+     * object with shape: `{
+     * text: PropTypes.string,
+     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     *   }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * Called when clicking on drop area to select files to upload
-    */
+     * Called when clicking on drop area to select files to upload
+     */
     onClick: PropTypes.func,
     /**
-    * Called when dropping files or when file dialog window exits successfully
-    */
+     * Called when dropping files or when file dialog window exits successfully
+     */
     onDrop: PropTypes.func,
     /**
-    * Called when dropping allowed files
-    */
+     * Called when dropping allowed files
+     */
     onDropAccepted: PropTypes.func,
     /**
-    * Called when dropping rejected files
-    */
+     * Called when dropping rejected files
+     */
     onDropRejected: PropTypes.func,
     /**
-    * Called when dragging files
-    * and passing through FileDrop's content for the first time
-    */
+     * Called when dragging files
+     * and passing through FileDrop's content for the first time
+     */
     onDragEnter: PropTypes.func,
     /**
-    * Called when dragging files and passing through FileDrop's content
-    */
+     * Called when dragging files and passing through FileDrop's content
+     */
     onDragOver: PropTypes.func,
     /**
-    * Called when dragging files and leaving FileDrop's content
-    */
+     * Called when dragging files and leaving FileDrop's content
+     */
     onDragLeave: PropTypes.func,
     /**
-    * Flag to use window.URL.createObjectURL for each dropped file and pass it through file.preview
-    */
+     * Flag to use window.URL.createObjectURL for each dropped file and pass it through file.preview
+     */
     shouldEnablePreview: PropTypes.bool,
     /**
-    * Flag to allow multiple files to drop at once
-    */
+     * Flag to allow multiple files to drop at once
+     */
     shouldAllowMultiple: PropTypes.bool,
     /**
      * Flag to allow upload of the same file more than once
      */
     shouldAllowRepeats: PropTypes.bool,
     /**
-    * the maximum file size allowed
-    */
+     * the maximum file size allowed
+     */
     maxSize: PropTypes.number,
     /**
-    * the minimum file size allowed
-    */
+     * the minimum file size allowed
+     */
     minSize: PropTypes.number,
     /**
-    * Specifies if interaction with the input is enabled, disabled, or readonly.
-    */
+     * Specifies if interaction with the input is enabled, disabled, or readonly.
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
-    * Set the CSS `display` property on FileInput's outermost element
-    */
+     * Set the CSS `display` property on FileInput's outermost element
+     */
     display: PropTypes.oneOf(['block', 'inline-block']),
     /**
-    * Set the CSS `height` property on FileInput's outermost element
-    */
+     * Set the CSS `height` property on FileInput's outermost element
+     */
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * Set the CSS `width` property on FileInput's outermost element
-    */
+     * Set the CSS `width` property on FileInput's outermost element
+     */
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * Set the CSS `maxWidth` property on FileInput's outermost element
-    */
+     * Set the CSS `maxWidth` property on FileInput's outermost element
+     */
     maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * Set the CSS `minWidth` property on FileInput's outermost element
-    */
+     * Set the CSS `minWidth` property on FileInput's outermost element
+     */
     minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * Valid values are 0, none, auto, xxx-small, xx-small, x-small, small,
-    * medium, large, x-large, xx-large. Apply these values via familiar
-    * CSS-like shorthand. For example: margin="small auto large".
-    */
+     * Valid values are 0, none, auto, xxx-small, xx-small, x-small, small,
+     * medium, large, x-large, xx-large. Apply these values via familiar
+     * CSS-like shorthand. For example: margin="small auto large".
+     */
     margin: ThemeablePropTypes.spacing,
 
     /* eslint-disable react/require-default-props */
 
     /**
-    * __deprecated: use `renderLabel`__
-    */
+     * __deprecated: use `renderLabel`__
+     */
     label: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * __deprecated: use `shouldEnablePreview`__
-    */
+     * __deprecated: use `shouldEnablePreview`__
+     */
     enablePreview: PropTypes.bool,
     /**
-    * __deprecated: use `shouldAllowRepeats`__
-    */
+     * __deprecated: use `shouldAllowRepeats`__
+     */
     allowRepeatFileSelection: PropTypes.bool,
     /**
-    * __deprecated: use `shouldAllowMultiple`__
-    */
+     * __deprecated: use `shouldAllowMultiple`__
+     */
     allowMultiple: PropTypes.bool
 
     /* eslint-enable react/require-default-props */
   }
 
   static defaultProps = {
-    onClick: function(e) {},
+    onClick: function (e) {},
     onDrop: function (accepted, rejected, e) {},
     onDropAccepted: function (accepted, e) {},
     onDropRejected: function (rejected, e) {},
@@ -223,7 +229,7 @@ class FileDrop extends Component {
     margin: undefined
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.defaultId = uid('FileDrop')
@@ -241,36 +247,39 @@ class FileDrop extends Component {
   fileInputEl = null
   defaultId = null
 
-  get hasMessages () {
-    return this.props.messages && (this.props.messages.length > 0)
+  get hasMessages() {
+    return this.props.messages && this.props.messages.length > 0
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
-  get shouldEnablePreview () {
+  get shouldEnablePreview() {
     // TODO: no longer nec. when `enablePreview` is removed
     return this.props.enablePreview || this.props.shouldEnablePreview
   }
 
-  get shouldAllowRepeats () {
+  get shouldAllowRepeats() {
     // TODO: no longer nec. when `allowRepeatFileSelection` is removed
     return this.props.allowRepeatFileSelection || this.props.shouldAllowRepeats
   }
 
-  get shouldAllowMultiple () {
+  get shouldAllowMultiple() {
     // TODO: no longer nec. when `allowMultiple` is removed
     return this.props.allowMultiple || this.props.shouldAllowMultiple
   }
 
-  get invalid () {
-    return this.hasMessages && this.props.messages.findIndex((message) => {
-      return message.type === 'error'
-    }) >= 0
+  get invalid() {
+    return (
+      this.hasMessages &&
+      this.props.messages.findIndex((message) => {
+        return message.type === 'error'
+      }) >= 0
+    )
   }
 
-  getDataTransferItems (e, shouldEnablePreview) {
+  getDataTransferItems(e, shouldEnablePreview) {
     let list = Array.from(getEventFiles(e, this.fileInputEl))
 
     if (list.length > 1) {
@@ -278,9 +287,9 @@ class FileDrop extends Component {
     }
 
     if (shouldEnablePreview) {
-      return list.map((file) => (
+      return list.map((file) =>
         Object.assign(file, { preview: window.URL.createObjectURL(file) })
-      ))
+      )
     }
 
     return list
@@ -340,7 +349,7 @@ class FileDrop extends Component {
     this.props.onDragLeave(e)
   }
 
-  parseFiles (fileList) {
+  parseFiles(fileList) {
     const accepted = []
     const rejected = []
 
@@ -384,24 +393,21 @@ class FileDrop extends Component {
     return accepts(file, this.props.accept)
   }
 
-  fileMatchSize (file) {
+  fileMatchSize(file) {
     return file.size <= this.props.maxSize && file.size >= this.props.minSize
   }
 
-  allFilesAccepted (files) {
+  allFilesAccepted(files) {
     return files.every(this.fileAccepted)
   }
 
-  acceptStr () {
+  acceptStr() {
     const { accept } = this.props
     return accept ? getAcceptList(accept).join(',') : null
   }
 
-  renderLabel () {
-    const {
-      label,
-      renderLabel
-    } = this.props
+  renderLabel() {
+    const { label, renderLabel } = this.props
 
     return callRenderProp(label || renderLabel, {
       isDragAccepted: this.state.isDragAccepted,
@@ -410,7 +416,9 @@ class FileDrop extends Component {
     })
   }
 
-  handleRef = (el) => { this.fileInputEl = el }
+  handleRef = (el) => {
+    this.fileInputEl = el
+  }
 
   handleBlur = () => {
     this.setState({
@@ -427,7 +435,9 @@ class FileDrop extends Component {
   }
 
   handleClick = (e) => {
-    if (this.fileInputEl.value && this.shouldAllowRepeats) { this.fileInputEl.value = null }
+    if (this.fileInputEl.value && this.shouldAllowRepeats) {
+      this.fileInputEl.value = null
+    }
 
     // focus the input (because FF won't)
     this.fileInputEl.focus()
@@ -440,8 +450,8 @@ class FileDrop extends Component {
   }
 
   handleKeyDown = (e) => {
-    if (this.state.isFocused && keyEventIsClickButton(e)){
-      if (this.shouldAllowRepeats){
+    if (this.state.isFocused && keyEventIsClickButton(e)) {
+      if (this.shouldAllowRepeats) {
         this.fileInputEl.value = null
       }
       // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
@@ -468,7 +478,7 @@ class FileDrop extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       display,
       height,
@@ -486,7 +496,8 @@ class FileDrop extends Component {
     const functionallyDisabled =
       this.interaction === 'disabled' || this.interaction === 'readonly'
 
-    const focusColor = (this.state.isDragRejected || this.invalid) ? 'danger' : undefined
+    const focusColor =
+      this.state.isDragRejected || this.invalid ? 'danger' : undefined
 
     const classes = {
       [styles.label]: true,
@@ -523,17 +534,19 @@ class FileDrop extends Component {
             focusColor={focusColor}
             height={height}
           >
-            <span className={classnames({
-              [styles.labelContent]: true,
-              [styles.withHeight]: height
-            })}>
-              <span className={classnames({
-                [styles.layout]: true,
+            <span
+              className={classnames({
+                [styles.labelContent]: true,
                 [styles.withHeight]: height
-              })}>
-                <View height={height}>
-                  {this.renderLabel()}
-                </View>
+              })}
+            >
+              <span
+                className={classnames({
+                  [styles.layout]: true,
+                  [styles.withHeight]: height
+                })}
+              >
+                <View height={height}>{this.renderLabel()}</View>
               </span>
             </span>
           </View>
@@ -555,11 +568,14 @@ class FileDrop extends Component {
           aria-describedby={this.hasMessages ? this.messagesId : null}
           disabled={functionallyDisabled}
         />
-        {(this.hasMessages) ?
+        {this.hasMessages ? (
           <View display="block" margin="small 0 0">
-            <FormFieldMessages id={this.messagesId} messages={this.props.messages} />
+            <FormFieldMessages
+              id={this.messagesId}
+              messages={this.props.messages}
+            />
           </View>
-        : null}
+        ) : null}
       </View>
     )
   }

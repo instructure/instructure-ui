@@ -50,38 +50,38 @@ class Badge extends Component {
      * The number at which the count gets truncated by
      * formatOverflowText. For example, a countUntil of 100
      * would stop the count at 99.
-    */
+     */
     countUntil: PropTypes.number,
     children: PropTypes.element,
     /**
      * Render Badge as a counter (`count`) or as a smaller dot (`notification`) with
      * no count number displayed.
-    */
+     */
     type: PropTypes.oneOf(['count', 'notification']),
     /**
      * Render Badge as an inline html element that is not positioned relative
      * to a child.
-    */
+     */
     standalone: PropTypes.bool,
     /**
      * Make the Badge slowly pulse twice to get the user's attention.
-    */
+     */
     pulse: PropTypes.bool,
     variant: PropTypes.oneOf(['primary', 'success', 'danger']),
     /**
-    * Supported values are `top start`, `top end`, `end center`, `bottom end`,
-    * `bottom start`, and `start center`
-    */
+     * Supported values are `top start`, `top end`, `end center`, `bottom end`,
+     * `bottom start`, and `start center`
+     */
     placement: PositionPropTypes.placement,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * provides a reference to the underlying html root element
-    */
+     * provides a reference to the underlying html root element
+     */
     elementRef: PropTypes.func,
     formatOverflowText: PropTypes.func,
     formatOutput: PropTypes.func,
@@ -103,37 +103,45 @@ class Badge extends Component {
     formatOverflowText: (count, countUntil) => `${countUntil - 1} +`
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this._defaultId = uid('Badge')
   }
 
-  countOverflow () {
-    const {count, countUntil} = this.props
+  countOverflow() {
+    const { count, countUntil } = this.props
 
-    if ((countUntil > 1) && (count >= countUntil)) {
+    if (countUntil > 1 && count >= countUntil) {
       return true
     } else {
       return false
     }
   }
 
-  renderOutput () {
-    const {count, countUntil, formatOverflowText, formatOutput, type} = this.props
+  renderOutput() {
+    const {
+      count,
+      countUntil,
+      formatOverflowText,
+      formatOutput,
+      type
+    } = this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop
-    const formattedCount = (type === 'count' && this.countOverflow())
-      ? formatOverflowText(count, countUntil) : count
+    const formattedCount =
+      type === 'count' && this.countOverflow()
+        ? formatOverflowText(count, countUntil)
+        : count
 
     if (typeof formatOutput === 'function') {
       return formatOutput(formattedCount)
     } else {
-      return (type === 'count') ? formattedCount : null
+      return type === 'count' ? formattedCount : null
     }
   }
 
-  renderBadge () {
+  renderBadge() {
     const {
       count,
       margin,
@@ -146,7 +154,7 @@ class Badge extends Component {
 
     return (
       <View
-        margin={(standalone) ? margin : 'none'}
+        margin={standalone ? margin : 'none'}
         className={classnames({
           [styles.root]: true,
           [styles[type]]: type,
@@ -159,8 +167,8 @@ class Badge extends Component {
           [styles.standalone]: standalone,
           [styles.pulse]: pulse
         })}
-        title={(type === 'count' && this.countOverflow()) ? count : null}
-        id={(!standalone) ? this._defaultId : null}
+        title={type === 'count' && this.countOverflow() ? count : null}
+        id={!standalone ? this._defaultId : null}
         display={standalone ? 'inline-block' : 'block'}
       >
         {this.renderOutput()}
@@ -168,7 +176,7 @@ class Badge extends Component {
     )
   }
 
-  renderChildren () {
+  renderChildren() {
     return Children.map(this.props.children, (child) => {
       return safeCloneElement(child, {
         'aria-describedby': this._defaultId
@@ -176,13 +184,8 @@ class Badge extends Component {
     })
   }
 
-  render () {
-    const {
-      margin,
-      elementRef,
-      standalone,
-      as
-    } = this.props
+  render() {
+    const { margin, elementRef, standalone, as } = this.props
 
     if (standalone) {
       return this.renderBadge()

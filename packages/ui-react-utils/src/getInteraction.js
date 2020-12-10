@@ -38,7 +38,10 @@
  * @param {Array} args.interactionTypes - an array specifying the interaction types available to the component, ['disabled', 'readOnly'] by default
  * @returns {String} one of 'enabled', 'disabled', or 'readonly'
  */
-export function getInteraction ({ props = {}, interactionTypes = ['disabled', 'readOnly'] } = {}) {
+export function getInteraction({
+  props = {},
+  interactionTypes = ['disabled', 'readOnly']
+} = {}) {
   const { interaction, disabled, readOnly } = props
 
   // interaction is the source of truth when it is provided

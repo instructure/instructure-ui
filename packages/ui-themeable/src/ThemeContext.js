@@ -48,18 +48,20 @@ const ThemeContext = {
    * @param {Object} theme an object containing [themeable](#themeable) component themes
    * @param {Boolean} immutable prevent theme overrides?
    */
-  makeThemeContext (theme, immutable) {
-    return {[CONTEXT_KEY]: {
-      theme,
-      immutable
-    }}
+  makeThemeContext(theme, immutable) {
+    return {
+      [CONTEXT_KEY]: {
+        theme,
+        immutable
+      }
+    }
   },
 
   /**
    * get a theme context
    * @param {ReactContext} context React context object
    */
-  getThemeContext (context) {
+  getThemeContext(context) {
     if (context) {
       return context[CONTEXT_KEY]
     }

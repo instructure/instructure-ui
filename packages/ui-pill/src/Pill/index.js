@@ -54,23 +54,37 @@ class Pill extends Component {
   static propTypes = {
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     children: PropTypes.node,
-    color: PropTypes.oneOf(['primary', 'success', 'danger', 'info', 'warning', 'alert']),
+    color: PropTypes.oneOf([
+      'primary',
+      'success',
+      'danger',
+      'info',
+      'warning',
+      'alert'
+    ]),
     elementRef: PropTypes.func,
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /* eslint-disable react/require-default-props */
     /**
-    * __Deprecated - use 'children'__
-    */
+     * __Deprecated - use 'children'__
+     */
     text: PropTypes.node,
     /**
-    * __Deprecated - use 'color'__
-    */
-    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
+     * __Deprecated - use 'color'__
+     */
+    variant: PropTypes.oneOf([
+      'default',
+      'success',
+      'danger',
+      'primary',
+      'warning',
+      'message'
+    ])
     /* eslint-enable react/require-default-props */
   }
 
@@ -81,7 +95,7 @@ class Pill extends Component {
     color: 'primary'
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -89,13 +103,13 @@ class Pill extends Component {
     }
   }
 
-  handleTruncation (truncated) {
+  handleTruncation(truncated) {
     this.setState({
       truncated: truncated
     })
   }
 
-  renderPill (focused, getTriggerProps) {
+  renderPill(focused, getTriggerProps) {
     const {
       margin,
       children,
@@ -109,8 +123,10 @@ class Pill extends Component {
 
     const filteredProps = passthroughProps(props)
 
-    const containerProps = typeof getTriggerProps === 'function'
-      ? getTriggerProps(filteredProps) : filteredProps
+    const containerProps =
+      typeof getTriggerProps === 'function'
+        ? getTriggerProps(filteredProps)
+        : filteredProps
 
     let actualColor = variant
     if (!actualColor) {
@@ -160,14 +176,12 @@ class Pill extends Component {
     )
   }
 
-  render () {
+  render() {
     if (this.state.truncated) {
       return (
         <Tooltip renderTip={this.props.children || this.props.text}>
           {({ focused, getTriggerProps }) => {
-            return (
-              this.renderPill(focused, getTriggerProps)
-            )
+            return this.renderPill(focused, getTriggerProps)
           }}
         </Tooltip>
       )

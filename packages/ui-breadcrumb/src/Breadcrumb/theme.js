@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, typography }) {
+export default function generator({ colors, typography }) {
   return {
     fontFamily: typography.fontFamily,
     separatorColor: colors.borderDark,

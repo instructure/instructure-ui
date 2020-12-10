@@ -24,14 +24,17 @@
 import React from 'react'
 import { Tabs } from '../index'
 
-const contentShort = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus mauris, aliquet a massa posuere, lobortis laoreet eros. Ut at lacus aliquet arcu volutpat porttitor ut vel nibh. Aenean iaculis elit eu nulla ultricies blandit vitae quis ex."
-const contentLong = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus mauris, aliquet a massa posuere, lobortis laoreet eros. Ut at lacus aliquet arcu volutpat porttitor ut vel nibh. Aenean iaculis elit eu nulla ultricies blandit vitae quis ex. Maecenas quis justo ex. Donec in ante et justo iaculis dapibus in non leo. Curabitur suscipit ligula neque, ut suscipit nisl auctor ut. Proin lectus justo, vulputate quis sagittis nec, venenatis maximus nisl. Fusce id pretium justo."
+const contentShort =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus mauris, aliquet a massa posuere, lobortis laoreet eros. Ut at lacus aliquet arcu volutpat porttitor ut vel nibh. Aenean iaculis elit eu nulla ultricies blandit vitae quis ex.'
+const contentLong =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus mauris, aliquet a massa posuere, lobortis laoreet eros. Ut at lacus aliquet arcu volutpat porttitor ut vel nibh. Aenean iaculis elit eu nulla ultricies blandit vitae quis ex. Maecenas quis justo ex. Donec in ante et justo iaculis dapibus in non leo. Curabitur suscipit ligula neque, ut suscipit nisl auctor ut. Proin lectus justo, vulputate quis sagittis nec, venenatis maximus nisl. Fusce id pretium justo.'
 
 export default {
   sectionProp: 'variant',
   excludeProps: ['size', 'selectedIndex', 'onChange'],
   filter: (props) => {
-    if (props.tabOverflow === 'scroll' && props.variant === 'secondary') return true
+    if (props.tabOverflow === 'scroll' && props.variant === 'secondary')
+      return true
     return false
   },
   getComponentProps: (props) => {
@@ -39,10 +42,18 @@ export default {
       margin: 'large',
       padding: 'small',
       children: [
-        <Tabs.Panel key="1" title="Tab A">{contentLong}</Tabs.Panel>,
-        <Tabs.Panel key="2" title="Tab B" disabled>{contentShort}</Tabs.Panel>,
-        <Tabs.Panel key="3" title="Tab C" selected>{contentShort}</Tabs.Panel>,
-        <Tabs.Panel key="4" title="Tab D">{contentLong}</Tabs.Panel>
+        <Tabs.Panel key="1" title="Tab A">
+          {contentLong}
+        </Tabs.Panel>,
+        <Tabs.Panel key="2" title="Tab B" disabled>
+          {contentShort}
+        </Tabs.Panel>,
+        <Tabs.Panel key="3" title="Tab C" selected>
+          {contentShort}
+        </Tabs.Panel>,
+        <Tabs.Panel key="4" title="Tab D">
+          {contentLong}
+        </Tabs.Panel>
       ]
     }
   }

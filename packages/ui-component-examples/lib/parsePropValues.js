@@ -62,10 +62,7 @@ const { resolver, parse } = require('react-docgen')
 module.exports = function parsePropValues(fileSource) {
   let parsedSrc = {}
   try {
-    parsedSrc = parse(
-      fileSource,
-      resolver.findAllExportedComponentDefinitions
-    )
+    parsedSrc = parse(fileSource, resolver.findAllExportedComponentDefinitions)
     if (Array.isArray(parsedSrc)) {
       parsedSrc = parsedSrc.pop()
     }
@@ -83,25 +80,26 @@ function getPropValuesFromParsedProps(parsedProps) {
 
   const propValues = {}
 
-  Object.keys(parsedProps)
-    .forEach((propName) => {
-      const prop = parsedProps[propName]
+  Object.keys(parsedProps).forEach((propName) => {
+    const prop = parsedProps[propName]
 
-      if (!(prop && prop.type)) {
-        return
-      }
+    if (!(prop && prop.type)) {
+      return
+    }
 
-      const { name, value } = prop.type
+    const { name, value } = prop.type
 
-      if (name === 'enum') {
-        propValues[propName] = Array.isArray(value) ? value.map((entry) => {
-          const result = entry.value.replace(/['"]+/g, '')
-          return result === 'null' ? null : result
-        }) : []
-      } else if (name === 'bool') {
-        propValues[propName] = [false, true]
-      }
-    })
+    if (name === 'enum') {
+      propValues[propName] = Array.isArray(value)
+        ? value.map((entry) => {
+            const result = entry.value.replace(/['"]+/g, '')
+            return result === 'null' ? null : result
+          })
+        : []
+    } else if (name === 'bool') {
+      propValues[propName] = [false, true]
+    }
+  })
 
   return propValues
 }

@@ -56,81 +56,82 @@ class SimpleSelect extends Component {
   static Group = Group
   static propTypes = {
     /**
-    * The form field label.
-    */
-    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+     * The form field label.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
     /**
-    * The value corresponding to the value of the selected option. If defined,
-    * the component will act controlled and will not manage its own state.
-    */
+     * The value corresponding to the value of the selected option. If defined,
+     * the component will act controlled and will not manage its own state.
+     */
     value: controllable(PropTypes.string, 'onChange'),
     /**
-    * The value of the option to select by default, when uncontrolled.
-    */
+     * The value of the option to select by default, when uncontrolled.
+     */
     defaultValue: PropTypes.string,
     /**
-    * The id of the text input. One is generated if not supplied.
-    */
+     * The id of the text input. One is generated if not supplied.
+     */
     id: PropTypes.string,
     /**
-    * The size of the text input.
-    */
+     * The size of the text input.
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Additional helpful text to provide to screen readers about the operation
-    * of the component. Provided via aria-describedby.
-    */
+     * Additional helpful text to provide to screen readers about the operation
+     * of the component. Provided via aria-describedby.
+     */
     assistiveText: PropTypes.string,
     /**
-    * Html placeholder text to display when the input has no value. This should
-    * be hint text, not a label replacement.
-    */
+     * Html placeholder text to display when the input has no value. This should
+     * be hint text, not a label replacement.
+     */
     placeholder: PropTypes.string,
     /**
-    * Specifies if interaction with the input is enabled, disabled, or readonly.
-    * When "disabled", the input changes visibly to indicate that it cannot
-    * receive user interactions. When "readonly" the input still cannot receive
-    * user interactions but it keeps the same styles as if it were enabled.
-    */
+     * Specifies if interaction with the input is enabled, disabled, or readonly.
+     * When "disabled", the input changes visibly to indicate that it cannot
+     * receive user interactions. When "readonly" the input still cannot receive
+     * user interactions but it keeps the same styles as if it were enabled.
+     */
     interaction: PropTypes.oneOf(['enabled', 'disabled', 'readonly']),
     /**
-    * Whether or not the text input is required.
-    */
+     * Whether or not the text input is required.
+     */
     isRequired: PropTypes.bool,
     /**
-    * Whether the input is rendered inline with other elements or if it
-    * is rendered as a block level element.
-    */
+     * Whether the input is rendered inline with other elements or if it
+     * is rendered as a block level element.
+     */
     isInline: PropTypes.bool,
     /**
-    * The width of the text input.
-    */
+     * The width of the text input.
+     */
     width: PropTypes.string,
     /**
-    * The max width the options list can be before option text wraps. If not
-    * set, the list will only display as wide as the text input.
-    */
+     * The max width the options list can be before option text wraps. If not
+     * set, the list will only display as wide as the text input.
+     */
     optionsMaxWidth: PropTypes.string,
     /**
-    * The number of options that should be visible before having to scroll.
-    */
+     * The number of options that should be visible before having to scroll.
+     */
     visibleOptionsCount: PropTypes.number,
     /**
-    * Displays messages and validation for the input. It should be an object
-    * with the following shape:
-    * `{
-    *   text: PropTypes.string,
-    *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    * }`
-    */
+     * Displays messages and validation for the input. It should be an object
+     * with the following shape:
+     * `{
+     *   text: PropTypes.string,
+     *   type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     * }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
-    * The placement of the options list.
-    */
+     * The placement of the options list.
+     */
     placement: PositionPropTypes.placement,
     /**
-    * The parent in which to constrain the placement.
-    */
+     * The parent in which to constrain the placement.
+     */
     constrain: PositionPropTypes.constrain,
     /**
      * An element or a function returning an element to use mount the options
@@ -138,53 +139,53 @@ class SimpleSelect extends Component {
      */
     mountNode: PositionPropTypes.mountNode,
     /**
-    * Callback fired when a new option is selected.
-    * @param {Object} event - the event object
-    * @param {Object} data - additional data
-    * @param data.value - the value of selected option
-    * @param data.id - the id of the selected option
-    */
+     * Callback fired when a new option is selected.
+     * @param {Object} event - the event object
+     * @param {Object} data - additional data
+     * @param data.value - the value of selected option
+     * @param data.id - the id of the selected option
+     */
     onChange: PropTypes.func,
     /**
-    * Callback fired when text input receives focus.
-    */
+     * Callback fired when text input receives focus.
+     */
     onFocus: PropTypes.func,
     /**
-    * Callback fired when text input loses focus.
-    */
+     * Callback fired when text input loses focus.
+     */
     onBlur: PropTypes.func,
     /**
-    * Callback fired when the options list is shown.
-    */
+     * Callback fired when the options list is shown.
+     */
     onShowOptions: PropTypes.func,
     /**
-    * Callback fired when the options list is hidden.
-    */
+     * Callback fired when the options list is hidden.
+     */
     onHideOptions: PropTypes.func,
     /**
-    * A ref to the html `input` element.
-    */
+     * A ref to the html `input` element.
+     */
     inputRef: PropTypes.func,
     /**
-    * A ref to the html `ul` element.
-    */
+     * A ref to the html `ul` element.
+     */
     listRef: PropTypes.func,
     /**
-    * Content to display in the list when no options are available.
-    */
+     * Content to display in the list when no options are available.
+     */
     renderEmptyOption: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display before the text input. This will commonly be an icon.
-    */
+     * Content to display before the text input. This will commonly be an icon.
+     */
     renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to display after the text input. This content will replace the
-    * default arrow icons.
-    */
+     * Content to display after the text input. This content will replace the
+     * default arrow icons.
+     */
     renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`.
-    */
+     * Children of type `<SimpleSelect.Option />` or `<SimpleSelect.Group />`.
+     */
     children: ChildrenPropTypes.oneOf([Group, Option])
   }
 
@@ -218,7 +219,7 @@ class SimpleSelect extends Component {
     children: null
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     const option = this.getInitialOption(props)
@@ -233,27 +234,27 @@ class SimpleSelect extends Component {
 
   _emptyOptionId = uid('Select-EmptyOption')
 
-  focus () {
+  focus() {
     this._select && this._select.focus()
   }
 
-  get focused () {
+  get focused() {
     return this._select && this._select.focused
   }
 
-  get id () {
+  get id() {
     return this._select && this._select.id
   }
 
-  get isControlled () {
+  get isControlled() {
     return typeof this.props.value !== 'undefined'
   }
 
-  get interaction () {
+  get interaction() {
     return getInteraction({ props: this.props })
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
       let option = this.getOption('value', this.props.value)
       if (typeof this.props.value === 'undefined') {
@@ -267,7 +268,7 @@ class SimpleSelect extends Component {
     }
   }
 
-  getInitialOption (props) {
+  getInitialOption(props) {
     const { value, defaultValue } = props
     const initialValue = value || defaultValue
 
@@ -279,12 +280,12 @@ class SimpleSelect extends Component {
     return this.getOptionByIndex(0)
   }
 
-  getOptionLabelById (id) {
+  getOptionLabelById(id) {
     const option = this.getOption('id', id)
     return option ? option.props.children : ''
   }
 
-  getOptionByIndex (index) {
+  getOptionByIndex(index) {
     const children = Children.toArray(this.props.children)
     let match = null
 
@@ -303,7 +304,7 @@ class SimpleSelect extends Component {
     return match
   }
 
-  getOption (field, value) {
+  getOption(field, value) {
     const children = Children.toArray(this.props.children)
     let match = null
 
@@ -392,7 +393,7 @@ class SimpleSelect extends Component {
     this.props.onHideOptions(event)
   }
 
-  renderChildren () {
+  renderChildren() {
     let children = Children.toArray(this.props.children)
     children = Children.map(children, (child) => {
       if (matchComponentTypes(child, [Option])) {
@@ -401,7 +402,7 @@ class SimpleSelect extends Component {
         return this.renderGroup(child)
       }
       return null
-    }).filter(child => !!child)
+    }).filter((child) => !!child)
 
     if (children.length === 0) {
       // no valid children, render empty option
@@ -411,7 +412,7 @@ class SimpleSelect extends Component {
     return children
   }
 
-  renderEmptyOption () {
+  renderEmptyOption() {
     return (
       <Select.Option
         id={this._emptyOptionId}
@@ -423,7 +424,7 @@ class SimpleSelect extends Component {
     )
   }
 
-  renderOption (option) {
+  renderOption(option) {
     const {
       id,
       value,
@@ -444,13 +445,13 @@ class SimpleSelect extends Component {
         renderAfterLabel={renderAfterLabel}
         {...passthroughProps(rest)}
       >
-        { children }
+        {children}
       </Select.Option>
     )
   }
 
-  renderGroup (group) {
-    const {id, renderLabel, children, ...rest} = group.props
+  renderGroup(group) {
+    const { id, renderLabel, children, ...rest } = group.props
     return (
       <Select.Group
         renderLabel={renderLabel}
@@ -462,7 +463,7 @@ class SimpleSelect extends Component {
     )
   }
 
-  render () {
+  render() {
     const {
       renderLabel,
       value,

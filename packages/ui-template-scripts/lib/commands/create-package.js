@@ -38,7 +38,8 @@ exports.builder = (yargs) => {
   yargs.option('path', {
     alias: 'p',
     type: 'string',
-    describe: 'The path where the generated package will be located. If no path is provided, prompts for selection of workspace defined in the current working directory\'s package.json. If no workspaces are defined, defaults to the current working directory.'
+    describe:
+      "The path where the generated package will be located. If no path is provided, prompts for selection of workspace defined in the current working directory's package.json. If no workspaces are defined, defaults to the current working directory."
   })
 
   yargs.option('name', {
@@ -50,18 +51,14 @@ exports.builder = (yargs) => {
 
   yargs.option('values', {
     type: 'string',
-    describe: 'A JSON string mapping variable names to values which will be used to replace variables in the template package. Ex. \'{"NAME":"my-package","VERSION":"12.0.0"}\'.',
+    describe:
+      'A JSON string mapping variable names to values which will be used to replace variables in the template package. Ex. \'{"NAME":"my-package","VERSION":"12.0.0"}\'.',
     default: '{}'
   })
 }
 
 exports.handler = async (argv) => {
-  const {
-    template,
-    path,
-    name,
-    values
-  } = argv
+  const { template, path, name, values } = argv
 
   handleCreatePackage({ template, path, name, values })
 }

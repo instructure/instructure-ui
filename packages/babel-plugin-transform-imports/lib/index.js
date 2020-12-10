@@ -27,15 +27,15 @@ const globby = require('globby')
 
 const transformName = 'babel-plugin-transform-imports'
 
-function getOptKeyFromSource (source, opts) {
+function getOptKeyFromSource(source, opts) {
   if (opts[source]) {
     return source
   } else {
-    return Object.keys(opts).find(optKey => new RegExp(optKey).test(source))
+    return Object.keys(opts).find((optKey) => new RegExp(optKey).test(source))
   }
 }
 
-function getMatchesFromSource (source, regex) {
+function getMatchesFromSource(source, regex) {
   const matches = []
   let match
   let matcher = regex
@@ -55,18 +55,22 @@ function getMatchesFromSource (source, regex) {
   return matches
 }
 
-function transform (transformOption, importName, matches) {
+function transform(transformOption, importName, matches) {
   const isFunction = typeof transformOption === 'function'
   if (/\.js$/i.test(transformOption) || isFunction) {
     let transformFn
     try {
       transformFn = isFunction ? transformOption : require(transformOption)
     } catch (error) {
-      console.error(`[${transformName}] failed to require transform file ${transformOption}`)
+      console.error(
+        `[${transformName}] failed to require transform file ${transformOption}`
+      )
     }
 
     if (typeof transformFn !== 'function') {
-      console.error(`[${transformName}] expected transform function to be exported from ${transformOption}`)
+      console.error(
+        `[${transformName}] expected transform function to be exported from ${transformOption}`
+      )
     }
 
     let importPath = importName
@@ -81,7 +85,10 @@ function transform (transformOption, importName, matches) {
         const sourceRoot = dirname(sourceIndex)
 
         const importPaths = globby.sync(
-          [`${sourceRoot}/**/${importName}.js`, `${sourceRoot}/**/${importName}/index.js`],
+          [
+            `${sourceRoot}/**/${importName}.js`,
+            `${sourceRoot}/**/${importName}/index.js`
+          ],
           { cwd: sourceRoot }
         )
 
@@ -92,25 +99,34 @@ function transform (transformOption, importName, matches) {
         }
 
         if (importPaths.length > 1) {
-          console.error(`[${transformName}] multiple modules found with the name '${importName}' in '${packageName}'. Continuing using the first match: '${importPaths[0]}'.`)
+          console.error(
+            `[${transformName}] multiple modules found with the name '${importName}' in '${packageName}'. Continuing using the first match: '${importPaths[0]}'.`
+          )
         }
 
-        importPath = relative(sourceRoot, importPaths[0].endsWith('index.js') ? dirname(importPaths[0]) : importPaths[0])
+        importPath = relative(
+          sourceRoot,
+          importPaths[0].endsWith('index.js')
+            ? dirname(importPaths[0])
+            : importPaths[0]
+        )
       } catch (error) {
-        console.error(`[${transformName}] no modules match '${importName}' in '${packageName}'. Continuing with '${importName}' as the import path. If that is unexpected or incorrect, make sure '${importName}' exists in '${packageName}' and you have run 'yarn install' to download the package source.`)
+        console.error(
+          `[${transformName}] no modules match '${importName}' in '${packageName}'. Continuing with '${importName}' as the import path. If that is unexpected or incorrect, make sure '${importName}' exists in '${packageName}' and you have run 'yarn install' to download the package source.`
+        )
       }
     }
 
     return transformFn(importPath, matches)
   }
 
-  return transformOption.replace(/\$\{\s?([\w\d]*)\s?\}/ig, (str, g1) => {
+  return transformOption.replace(/\$\{\s?([\w\d]*)\s?\}/gi, (str, g1) => {
     if (g1 === 'member') return importName
     return matches[g1]
   })
 }
 
-module.exports = function transformImports ({ types: t }) {
+module.exports = function transformImports({ types: t }) {
   return {
     visitor: {
       ImportDeclaration: function (path, state) {
@@ -121,20 +137,29 @@ module.exports = function transformImports ({ types: t }) {
         if (!opts) return
 
         if (!opts.transform) {
-          console.error(`[${transformName}] transform option is required for module ${source.value}`)
+          console.error(
+            `[${transformName}] transform option is required for module ${source.value}`
+          )
           return
         }
 
-        const matches = getMatchesFromSource(source.value, new RegExp(optKey, 'g')) || []
+        const matches =
+          getMatchesFromSource(source.value, new RegExp(optKey, 'g')) || []
 
         let transforms = []
 
-        const defaultImports = specifiers.filter(specifier => (specifier.type !== 'ImportSpecifier'))
-        const memberImports = specifiers.filter(specifier => (specifier.type === 'ImportSpecifier'))
+        const defaultImports = specifiers.filter(
+          (specifier) => specifier.type !== 'ImportSpecifier'
+        )
+        const memberImports = specifiers.filter(
+          (specifier) => specifier.type === 'ImportSpecifier'
+        )
 
         if (defaultImports.length > 0) {
           if (memberImports.length > 0) {
-            transforms.push(t.importDeclaration(defaultImports, t.stringLiteral(source)))
+            transforms.push(
+              t.importDeclaration(defaultImports, t.stringLiteral(source))
+            )
           }
         }
 
@@ -143,10 +168,12 @@ module.exports = function transformImports ({ types: t }) {
           const newImportPath = transform(opts.transform, importName, matches)
 
           if (newImportPath) {
-            transforms.push(t.importDeclaration(
-              [memberImport],
-              t.stringLiteral(newImportPath)
-            ))
+            transforms.push(
+              t.importDeclaration(
+                [memberImport],
+                t.stringLiteral(newImportPath)
+              )
+            )
           }
         })
 

@@ -44,9 +44,7 @@ describe('<CondensedButton/>', async () => {
   it('should render children', async () => {
     const children = 'Hello world'
 
-    await mount(
-      <CondensedButton>{children}</CondensedButton>
-    )
+    await mount(<CondensedButton>{children}</CondensedButton>)
 
     expect(await CondensedButtonLocator.findWithText(children))
   })
@@ -55,7 +53,13 @@ describe('<CondensedButton/>', async () => {
     let componentRef = null
 
     await mount(
-      <CondensedButton componentRef={(component) => { componentRef = component }}>Hello</CondensedButton>
+      <CondensedButton
+        componentRef={(component) => {
+          componentRef = component
+        }}
+      >
+        Hello
+      </CondensedButton>
     )
     const button = await CondensedButtonLocator.find()
 
@@ -68,7 +72,13 @@ describe('<CondensedButton/>', async () => {
     let componentRef = null
 
     await mount(
-      <CondensedButton componentRef={(component) => { componentRef = component }}>Hello</CondensedButton>
+      <CondensedButton
+        componentRef={(component) => {
+          componentRef = component
+        }}
+      >
+        Hello
+      </CondensedButton>
     )
     const button = await CondensedButtonLocator.find()
 
@@ -80,9 +90,7 @@ describe('<CondensedButton/>', async () => {
   })
 
   it('should pass the type attribute', async () => {
-    await mount(
-      <CondensedButton type="submit">Hello</CondensedButton>
-    )
+    await mount(<CondensedButton type="submit">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[type="submit"]')).to.exist()
   })
@@ -99,69 +107,52 @@ describe('<CondensedButton/>', async () => {
   })
 
   it('should pass the `as` prop', async () => {
-    await mount(
-      <CondensedButton as="li">Hello</CondensedButton>
-    )
+    await mount(<CondensedButton as="li">Hello</CondensedButton>)
 
     const button = await CondensedButtonLocator.find()
     expect(await button.find('li')).to.exist()
   })
 
   it('should set the disabled attribute when `interaction` is set to disabled', async () => {
-    await mount(
-      <CondensedButton interaction="disabled">Hello</CondensedButton>
-    )
+    await mount(<CondensedButton interaction="disabled">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should set the disabled attribute when `disabled` is set', async () => {
-    await mount(
-      <CondensedButton disabled>Hello</CondensedButton>
-    )
+    await mount(<CondensedButton disabled>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should set the disabled attribute when `interaction` is set to readonly', async () => {
-    await mount(
-      <CondensedButton interaction="readonly">Hello</CondensedButton>
-    )
+    await mount(<CondensedButton interaction="readonly">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should set the disabled attribute when `readOnly` is set', async () => {
-    await mount(
-      <CondensedButton readOnly>Hello</CondensedButton>
-    )
+    await mount(<CondensedButton readOnly>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should pass the `href` prop', async () => {
-    await mount(
-      <CondensedButton href="#">Hello</CondensedButton>
-    )
+    await mount(<CondensedButton href="#">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[href="#"]')).to.exist()
   })
 
   it('should pass the `renderIcon` prop', async () => {
-    await mount(
-      <CondensedButton renderIcon={icon}>Hello</CondensedButton>
-    )
+    await mount(<CondensedButton renderIcon={icon}>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find(iconSelector)).to.exist()
   })
 
-
   it('should pass the `onClick` prop', async () => {
     const onClick = stub()
 
-    await mount(
-      <CondensedButton onClick={onClick}>Hello</CondensedButton>
-    )
+    await mount(<CondensedButton onClick={onClick}>Hello</CondensedButton>)
     const button = await CondensedButtonLocator.find()
 
     await button.click()

@@ -46,7 +46,12 @@ describe('FocusRegionManager', async () => {
         </div>
         <div data-test-parent aria-hidden="true" id="test-parent2">
           <div data-test-child></div>
-          <div role="dialog" aria-label="some content" data-test-parent id="test-parent1">
+          <div
+            role="dialog"
+            aria-label="some content"
+            data-test-parent
+            id="test-parent1"
+          >
             <div data-test-content>
               <div>Hello world</div>
               <button data-test-first-tabbable>click me</button>
@@ -72,7 +77,9 @@ describe('FocusRegionManager', async () => {
     const main = within(subject.getDOMNode())
     const button = (await main.find('[data-test-button]')).getDOMNode()
     const content = (await main.find('[data-test-content]')).getDOMNode()
-    const firstTabbable = (await main.find('[data-test-first-tabbable]')).getDOMNode()
+    const firstTabbable = (
+      await main.find('[data-test-first-tabbable]')
+    ).getDOMNode()
 
     await button.focus()
 
@@ -101,7 +108,12 @@ describe('FocusRegionManager', async () => {
         </div>
         <div data-test-parent aria-hidden="true" id="test-parent2">
           <div data-test-child></div>
-          <div role="dialog" aria-label="some content" data-test-parent id="test-parent1">
+          <div
+            role="dialog"
+            aria-label="some content"
+            data-test-parent
+            id="test-parent1"
+          >
             <div data-test-content>
               <div>Hello world</div>
               <button data-test-first-tabbable>click me</button>

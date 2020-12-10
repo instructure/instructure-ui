@@ -26,6 +26,8 @@ const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execut
 const { warn } = require('@instructure/command-utils')
 
 module.exports = (args = {}) => {
-  warn('`execute-codemod` has been moved from \'@instructure/ui-scripts/lib/utils/execute-codemod\' to \'@instructure/ui-upgrade-scripts/lib/utils/execute-codemod\'.')
+  warn(
+    "`execute-codemod` has been moved from '@instructure/ui-scripts/lib/utils/execute-codemod' to '@instructure/ui-upgrade-scripts/lib/utils/execute-codemod'."
+  )
   executeCodemod(args)
 }

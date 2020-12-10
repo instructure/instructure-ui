@@ -32,7 +32,8 @@ import styles from '../styles.css'
 
 describe('<Img />', () => {
   // eslint-disable-next-line max-len
-  const image = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+  const image =
+    'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
   beforeEach(async () => {
     stub(console, 'warn') // suppress deprecation warnings
@@ -71,7 +72,9 @@ describe('<Img />', () => {
   it('should render a grayscale filter', async () => {
     await mount(<Img src={image} withGrayscale={true} />)
     const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('filter')).to.contain('grayscale')
+    expect(img.getComputedStyle().getPropertyValue('filter')).to.contain(
+      'grayscale'
+    )
   })
 
   // If component renders as simple image
@@ -92,7 +95,9 @@ describe('<Img />', () => {
     )
 
     const container = await ImgLocator.find()
-    expect(container.getComputedStyle().getPropertyValue('display')).to.equal('block')
+    expect(container.getComputedStyle().getPropertyValue('display')).to.equal(
+      'block'
+    )
 
     const img = await container.find('img')
     expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
@@ -105,7 +110,9 @@ describe('<Img />', () => {
       </div>
     )
     const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('cover')
+    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal(
+      'cover'
+    )
   })
 
   it('should apply CSS object-fit: contain when constrain="contain"', async () => {
@@ -115,7 +122,9 @@ describe('<Img />', () => {
       </div>
     )
     const img = await ImgLocator.find()
-    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('contain')
+    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal(
+      'contain'
+    )
   })
 
   it('applies the container--has-cover class when constrain="cover" is used with overlay', async () => {
@@ -125,12 +134,14 @@ describe('<Img />', () => {
           src={image}
           alt="testing123"
           constrain="cover"
-          overlay={{color: '#ff0000', opacity: 7}}
+          overlay={{ color: '#ff0000', opacity: 7 }}
         />
       </div>
     )
 
-    expect(await ImgLocator.find(`.${styles['container--has-cover']}`)).to.exist()
+    expect(
+      await ImgLocator.find(`.${styles['container--has-cover']}`)
+    ).to.exist()
     expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 
@@ -141,12 +152,14 @@ describe('<Img />', () => {
           src={image}
           alt="testing123"
           constrain="contain"
-          overlay={{color: '#ff0000', opacity: 7}}
+          overlay={{ color: '#ff0000', opacity: 7 }}
         />
       </div>
     )
 
-    expect(await ImgLocator.find(`.${styles['container--has-contain']}`)).to.exist()
+    expect(
+      await ImgLocator.find(`.${styles['container--has-contain']}`)
+    ).to.exist()
     expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 })

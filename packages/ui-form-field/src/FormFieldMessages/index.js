@@ -56,11 +56,11 @@ example: true
 class FormFieldMessages extends Component {
   static propTypes = {
     /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
+     * object with shape: `{
+     * text: PropTypes.string,
+     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+     *   }`
+     */
     messages: PropTypes.arrayOf(FormPropTypes.message)
   }
 
@@ -68,21 +68,20 @@ class FormFieldMessages extends Component {
     messages: undefined
   }
 
-  render () {
-    const {messages} = this.props
+  render() {
+    const { messages } = this.props
     return messages && messages.length > 0 ? (
-      <span className={styles.root} {...omitProps(this.props, FormFieldMessages.propTypes)}>
-        {
-          messages.map((msg, i) => {
-            return (
-              <span key={`error${i}`} className={styles.message}>
-                <FormFieldMessage variant={msg.type}>
-                  {msg.text}
-                </FormFieldMessage>
-              </span>
-            )
-          })
-        }
+      <span
+        className={styles.root}
+        {...omitProps(this.props, FormFieldMessages.propTypes)}
+      >
+        {messages.map((msg, i) => {
+          return (
+            <span key={`error${i}`} className={styles.message}>
+              <FormFieldMessage variant={msg.type}>{msg.text}</FormFieldMessage>
+            </span>
+          )
+        })}
       </span>
     ) : null
   }

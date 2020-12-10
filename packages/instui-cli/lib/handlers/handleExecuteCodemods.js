@@ -31,30 +31,30 @@ const executeCodemod = require('@instructure/ui-upgrade-scripts/lib/utils/execut
 const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
 const getParserConfigPath = require('../utils/getParserConfigPath')
 
-async function promptImportMigration ({ version } = {}) {
+async function promptImportMigration({ version } = {}) {
   // If no version is specified, they are looking to get on the latest, so prompt them in that case as well
   if (!version || semver.satisfies(semver.coerce(version), '^7')) {
     const importMigrationOptions = [
       'Migrate all component imports to `@instructure/ui`',
-      'Migrate each component import to it\'s individual package',
+      "Migrate each component import to it's individual package"
     ]
 
-    const migrationDescription = (
-      `In Instructure UI 7.0, each component now has it's own package (Avatar is now in @instructure/ui-avatar, Modal is now in @instructure/ui-modal etc). As an alternative to having to deal with all these package names in your codebase, we also provide a meta package that exports all components called @instructure/ui.
+    const migrationDescription = `In Instructure UI 7.0, each component now has it's own package (Avatar is now in @instructure/ui-avatar, Modal is now in @instructure/ui-modal etc). As an alternative to having to deal with all these package names in your codebase, we also provide a meta package that exports all components called @instructure/ui.
 
   These codemods can migrate your Instructure UI component imports to either option. Choose which one you prefer:`
-    )
 
-    const importMigrationOption = (await yargsInteractive()
-      .version(false)
-      .interactive({
-        interactive: { default: true },
-        importMigrationOption: {
-          type: 'list',
-          describe: migrationDescription,
-          choices: importMigrationOptions
-        }
-      })).importMigrationOption
+    const importMigrationOption = (
+      await yargsInteractive()
+        .version(false)
+        .interactive({
+          interactive: { default: true },
+          importMigrationOption: {
+            type: 'list',
+            describe: migrationDescription,
+            choices: importMigrationOptions
+          }
+        })
+    ).importMigrationOption
 
     return importMigrationOptions[0] === importMigrationOption
   } else {
@@ -62,9 +62,18 @@ async function promptImportMigration ({ version } = {}) {
   }
 }
 
-module.exports = async ({ sourcePath, scopeModifications, version, ignore, parser, parserConfig }) => {
+module.exports = async ({
+  sourcePath,
+  scopeModifications,
+  version,
+  ignore,
+  parser,
+  parserConfig
+}) => {
   if (scopeModifications.includes('imports')) {
-    const isMetaComponentPackageMigration = await promptImportMigration({ version })
+    const isMetaComponentPackageMigration = await promptImportMigration({
+      version
+    })
 
     executeCodemods({
       sourcePath,
@@ -99,11 +108,21 @@ module.exports = async ({ sourcePath, scopeModifications, version, ignore, parse
   return
 }
 
-const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore, parser, parserConfig, isMetaComponentPackageMigration }) => {
+const executeCodemods = ({
+  sourcePath,
+  configPaths,
+  codemodName,
+  ignore,
+  parser,
+  parserConfig,
+  isMetaComponentPackageMigration
+}) => {
   try {
     info(`Applying codemods to ${sourcePath}\n`)
 
-    const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
+    const codemodPath = require.resolve(
+      `@instructure/ui-codemods/lib/${codemodName}`
+    )
 
     for (const configPath of configPaths) {
       executeCodemod({
@@ -112,7 +131,7 @@ const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore, parser,
         configPath,
         ignore,
         parser,
-        parserConfig: (parserConfig || getParserConfigPath()),
+        parserConfig: parserConfig || getParserConfigPath(),
         isMetaComponentPackageMigration
       })
     }

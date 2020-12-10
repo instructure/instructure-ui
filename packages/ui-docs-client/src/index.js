@@ -30,15 +30,10 @@ import { Figure } from './Figure'
 import { Guidelines } from './Guidelines'
 import { ToggleBlockquote } from './ToggleBlockquote'
 
-function renderDocsClient (data, element) {
+function renderDocsClient(data, element) {
   ReactDOM.render(<App {...data} />, element)
 }
 
-export {
-  renderDocsClient,
-  Figure,
-  Guidelines,
-  ToggleBlockquote
-}
+export { renderDocsClient, Figure, Guidelines, ToggleBlockquote }
 
 export default renderDocsClient

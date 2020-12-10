@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator () {
+export default function generator() {
   return {
     sizeXSmall: '1.125rem',
     sizeSmall: '2rem',

@@ -36,9 +36,7 @@ import BillboardExamples from '../__examples__/Billboard.examples'
 
 describe('<Billboard />', async () => {
   it('should render', async () => {
-    const subject = await mount(
-      <Billboard />
-    )
+    const subject = await mount(<Billboard />)
     const billboard = within(subject.getDOMNode())
     expect(billboard).to.exist()
   })
@@ -49,10 +47,7 @@ describe('<Billboard />', async () => {
 
   it('should render a heading with the correct tag', async () => {
     const subject = await mount(
-      <Billboard
-        heading='Test heading'
-        headingAs='h2'
-      />
+      <Billboard heading="Test heading" headingAs="h2" />
     )
     const billboard = within(subject.getDOMNode())
     const heading = billboard.find('h2:contains(Test heading)')
@@ -60,11 +55,7 @@ describe('<Billboard />', async () => {
   })
 
   it('renders as a link if it has an href prop', async () => {
-    const subject = await mount (
-      <Billboard
-        href='#'
-      />
-    )
+    const subject = await mount(<Billboard href="#" />)
     const billboard = within(subject.getDOMNode())
     const link = await billboard.find('a')
     expect(link.getAttribute('href')).equal('#')
@@ -72,11 +63,7 @@ describe('<Billboard />', async () => {
 
   it('renders as a button and responds to onClick event', async () => {
     const onClick = stub()
-    const subject = await mount (
-      <Billboard
-        onClick={onClick}
-      />
-    )
+    const subject = await mount(<Billboard onClick={onClick} />)
     const billboard = within(subject.getDOMNode())
     const button = await billboard.find('button')
 
@@ -90,10 +77,7 @@ describe('<Billboard />', async () => {
       const message = 'hello some message'
 
       const subject = await mount(
-        <Billboard
-          heading='Test heading'
-          message={<span>{message}</span>}
-        />
+        <Billboard heading="Test heading" message={<span>{message}</span>} />
       )
       const billboard = within(subject.getDOMNode())
       expect(await billboard.find(`:textContent(${message})`)).to.exist()
@@ -104,7 +88,7 @@ describe('<Billboard />', async () => {
 
       const subject = await mount(
         <Billboard
-          heading='Test heading'
+          heading="Test heading"
           message={() => <span>{message}</span>}
         />
       )
@@ -116,11 +100,7 @@ describe('<Billboard />', async () => {
   describe('when disabled', async () => {
     it('should apply aria-disabled to link', async () => {
       const subject = await mount(
-        <Billboard
-          heading='I am disabled'
-          href='#'
-          disabled={true}
-        />
+        <Billboard heading="I am disabled" href="#" disabled={true} />
       )
       const billboard = within(subject.getDOMNode())
       const link = await billboard.find('a')
@@ -130,12 +110,7 @@ describe('<Billboard />', async () => {
 
     it('should not be clickable', async () => {
       const onClick = stub()
-      const subject = await mount (
-        <Billboard
-          onClick={onClick}
-          disabled
-        />
-      )
+      const subject = await mount(<Billboard onClick={onClick} disabled />)
       const billboard = within(subject.getDOMNode())
       await billboard.click(null, { clickable: false })
 
@@ -146,11 +121,7 @@ describe('<Billboard />', async () => {
   describe('when readOnly', async () => {
     it('should apply aria-disabled', async () => {
       const subject = await mount(
-        <Billboard
-          heading='I am disabled'
-          href='#'
-          readOnly
-        />
+        <Billboard heading="I am disabled" href="#" readOnly />
       )
       const billboard = within(subject.getDOMNode())
       const link = await billboard.find('a')
@@ -160,12 +131,7 @@ describe('<Billboard />', async () => {
 
     it('should not be clickable', async () => {
       const onClick = stub()
-      const subject = await mount (
-        <Billboard
-          onClick={onClick}
-          readOnly
-        />
-      )
+      const subject = await mount(<Billboard onClick={onClick} readOnly />)
       const billboard = within(subject.getDOMNode())
       await billboard.click(null, { clickable: false })
 
@@ -179,8 +145,8 @@ describe('<Billboard />', async () => {
       const subject = await mount(
         <Billboard
           elementRef={elementRef}
-          heading='Looking for Element Here'
-          href='#'
+          heading="Looking for Element Here"
+          href="#"
         />
       )
       const billboard = within(subject.getDOMNode())
@@ -189,9 +155,7 @@ describe('<Billboard />', async () => {
     })
 
     it('should support an `as` prop', async () => {
-      const subject = await mount(
-        <Billboard as='div' />
-      )
+      const subject = await mount(<Billboard as="div" />)
       const billboard = within(subject.getDOMNode())
       expect(billboard.getTagName()).to.equal('div')
     })

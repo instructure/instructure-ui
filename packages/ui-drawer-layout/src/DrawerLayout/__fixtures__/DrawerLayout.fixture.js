@@ -43,7 +43,7 @@ export default class DrawerLayoutFixture extends Component {
     onOverlayTrayChange: () => {}
   }
 
-  render () {
+  render() {
     const {
       layoutWidth,
       trayWidth,
@@ -53,7 +53,7 @@ export default class DrawerLayoutFixture extends Component {
     } = this.props
 
     return (
-      <div style={{width: layoutWidth}}>
+      <div style={{ width: layoutWidth }}>
         <DrawerLayout
           minWidth="500px"
           onOverlayTrayChange={onOverlayTrayChange}
@@ -63,7 +63,7 @@ export default class DrawerLayoutFixture extends Component {
             placement={placement}
             label="Test DrawerTray"
           >
-            <div style={{width: trayWidth}}>Hello from tray</div>
+            <div style={{ width: trayWidth }}>Hello from tray</div>
           </DrawerLayout.Tray>
           <DrawerLayout.Content label="Test DrawerContent">
             <div>

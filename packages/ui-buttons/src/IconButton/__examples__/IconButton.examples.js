@@ -25,12 +25,7 @@
 import React from 'react'
 
 const icon = (
-  <svg
-    title="myIcon"
-    height="1em"
-    width="1em"
-    style={{ fill: 'currentcolor' }}
-  >
+  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
     <circle cx="0.5em" cy="0.5em" r="0.5em" />
   </svg>
 )
@@ -43,12 +38,16 @@ export default {
   }),
   getExampleProps: (props) => {
     return {
-      background: props.color.includes('inverse') ? 'primary-inverse' : 'primary'
+      background: props.color.includes('inverse')
+        ? 'primary-inverse'
+        : 'primary'
     }
   },
   filter: (props) => {
     return (
-      (props.withBackground && !props.withBorder) || props.interaction === 'readonly' || props.type !== 'button'
+      (props.withBackground && !props.withBorder) ||
+      props.interaction === 'readonly' ||
+      props.type !== 'button'
     )
   }
 }

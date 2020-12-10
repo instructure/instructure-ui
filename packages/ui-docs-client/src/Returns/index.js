@@ -34,31 +34,29 @@ class Returns extends Component {
     types: PropTypes.array.isRequired
   }
 
-  renderRows () {
+  renderRows() {
     return this.props.types.map((type, index) => {
       const key = `${type.type}-${index}`
       return (
         <Table.Row key={key}>
-          <Table.Cell><code>{this.renderType(type.type)}</code></Table.Cell>
+          <Table.Cell>
+            <code>{this.renderType(type.type)}</code>
+          </Table.Cell>
           <Table.Cell>{this.renderDescription(type.description)}</Table.Cell>
         </Table.Row>
       )
     })
   }
 
-  renderType (type) {
+  renderType(type) {
     return type ? type.names.join(', ') : null
   }
 
-  renderDescription (description) {
-    return (
-      <div>
-        {description && compileMarkdown(description) }
-      </div>
-    )
+  renderDescription(description) {
+    return <div>{description && compileMarkdown(description)}</div>
   }
 
-  render () {
+  render() {
     return (
       <Table caption="Returns" margin="0 0 large">
         <Table.Head>
@@ -67,9 +65,7 @@ class Returns extends Component {
             <Table.ColHeader id="Description">Description</Table.ColHeader>
           </Table.Row>
         </Table.Head>
-        <Table.Body>
-          {this.renderRows()}
-        </Table.Body>
+        <Table.Body>{this.renderRows()}</Table.Body>
       </Table>
     )
   }

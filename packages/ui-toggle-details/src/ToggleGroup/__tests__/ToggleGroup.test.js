@@ -42,8 +42,12 @@ describe('<ToggleGroup />', () => {
 
     const toggleGroup = await ToggleGroupLocator.find()
 
-    expect(toggleGroup.getTextContent()).to.contain('This is the summary section')
-    expect(toggleGroup.getTextContent()).not.to.contain('This is the details section')
+    expect(toggleGroup.getTextContent()).to.contain(
+      'This is the summary section'
+    )
+    expect(toggleGroup.getTextContent()).not.to.contain(
+      'This is the details section'
+    )
   })
 
   it('should render with children showing with the defaultExpanded prop', async () => {
@@ -61,7 +65,9 @@ describe('<ToggleGroup />', () => {
     const toggle = await toggleGroup.findToggle()
 
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
-    expect(toggleGroup.getTextContent()).to.contain('This is the details section')
+    expect(toggleGroup.getTextContent()).to.contain(
+      'This is the details section'
+    )
   })
 
   it('should have an aria-controls attribute', async () => {
@@ -80,7 +86,9 @@ describe('<ToggleGroup />', () => {
     const toggle = await toggleGroup.findToggle()
     const content = await toggleGroup.findContent()
 
-    expect(toggle.getAttribute('aria-controls')).to.equal(content.getAttribute('id'))
+    expect(toggle.getAttribute('aria-controls')).to.equal(
+      content.getAttribute('id')
+    )
   })
 
   it('should have an aria-expanded attribute', async () => {
@@ -149,7 +157,7 @@ describe('<ToggleGroup />', () => {
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
-        toggleLabel={expanded => expanded ? 'Hide content' : 'Show content'}
+        toggleLabel={(expanded) => (expanded ? 'Hide content' : 'Show content')}
       >
         This is the details section
       </ToggleGroup>
@@ -230,7 +238,9 @@ describe('<ToggleGroup />', () => {
         transition={false}
         summary="This is the summary section"
         toggleLabel="This is the toggleLabel"
-        componentRef={(el) => { toggleRef = el }}
+        componentRef={(el) => {
+          toggleRef = el
+        }}
       >
         This is the details section
       </ToggleGroup>

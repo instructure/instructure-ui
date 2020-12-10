@@ -48,9 +48,7 @@ describe('<InlineList />', async () => {
 
   it('should render a delimiter when delimiter="pipe"', async () => {
     await mount(
-      <InlineList
-        delimiter="pipe"
-      >
+      <InlineList delimiter="pipe">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
         <InlineList.Item>List item 3</InlineList.Item>
@@ -67,10 +65,7 @@ describe('<InlineList />', async () => {
     const consoleError = stub(console, 'error')
     const warning = `Warning: [InlineList] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
     await mount(
-      <InlineList
-        delimiter="pipe"
-        itemSpacing="large"
-      >
+      <InlineList delimiter="pipe" itemSpacing="large">
         <InlineList.Item>List item 1</InlineList.Item>
         <InlineList.Item>List item 2</InlineList.Item>
         <InlineList.Item>List item 3</InlineList.Item>
@@ -78,8 +73,7 @@ describe('<InlineList />', async () => {
       </InlineList>
     )
 
-    expect(consoleError)
-    .to.be.calledWith(warning)
+    expect(consoleError).to.be.calledWith(warning)
   })
 
   it('should render an ordered list', async () => {

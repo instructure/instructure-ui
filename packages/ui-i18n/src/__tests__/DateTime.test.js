@@ -27,14 +27,14 @@ import { DateTime } from '../DateTime'
 const { now, isValid, browserTimeZone, parse, toLocaleString } = DateTime
 
 describe('DateTime', () => {
-  const timezone = "America/Halifax"  // -3
-  const locale = "en"
+  const timezone = 'America/Halifax' // -3
+  const locale = 'en'
 
   it('checks params', () => {
     let whoops = false
     try {
       now()
-    } catch(ex) {
+    } catch (ex) {
       whoops = true
     } finally {
       expect(whoops).to.be.true()
@@ -42,7 +42,7 @@ describe('DateTime', () => {
     whoops = false
     try {
       now(locale)
-    } catch(ex) {
+    } catch (ex) {
       whoops = true
     } finally {
       expect(whoops).to.be.true()
@@ -55,7 +55,7 @@ describe('DateTime', () => {
     expect(result)
   })
 
-  it('can figure out the browser\'s timezone', () => {
+  it("can figure out the browser's timezone", () => {
     const result = browserTimeZone()
     expect(result)
   })
@@ -68,17 +68,29 @@ describe('DateTime', () => {
   })
 
   it('parses iso8601', () => {
-    let result = parse('2018-04-15T20:30:00-03:00', locale, timezone).toISOString()
+    let result = parse(
+      '2018-04-15T20:30:00-03:00',
+      locale,
+      timezone
+    ).toISOString()
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
   it('parses llll', () => {
-    let result = parse('Sun, Apr 15, 2018 8:30 PM', locale, timezone).toISOString()
+    let result = parse(
+      'Sun, Apr 15, 2018 8:30 PM',
+      locale,
+      timezone
+    ).toISOString()
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
   it('parses LLLL', () => {
-    let result = parse('Sunday, April 15, 2018 8:30 PM', locale, timezone).toISOString()
+    let result = parse(
+      'Sunday, April 15, 2018 8:30 PM',
+      locale,
+      timezone
+    ).toISOString()
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
@@ -128,8 +140,7 @@ describe('DateTime', () => {
     result = toLocaleString('2018-04-15T13:00Z', 'fr', 'UTC', 'LLL')
     expect(result).to.equal('15 avril 2018 13:00')
     // iso8601 in given timezone
-    result = toLocaleString('2018-04-15T13:00Z', 'fr', "America/Halifax") // -3
+    result = toLocaleString('2018-04-15T13:00Z', 'fr', 'America/Halifax') // -3
     expect(result).to.equal('2018-04-15T10:00:00.000-03:00')
   })
 })
-

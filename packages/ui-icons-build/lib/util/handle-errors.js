@@ -26,6 +26,9 @@ const PluginError = require('plugin-error')
 module.exports = (errorObject) => {
   // Keep gulp from hanging on this task
   if (this && typeof this.emit === 'function') {
-    this.emit('error', new PluginError('[ui-icons-build]', errorObject, { showStack: true }))
+    this.emit(
+      'error',
+      new PluginError('[ui-icons-build]', errorObject, { showStack: true })
+    )
   }
 }

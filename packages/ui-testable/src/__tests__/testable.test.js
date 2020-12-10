@@ -31,20 +31,20 @@ import { testable } from '../index'
 
 class Component extends React.Component {
   static propTypes = {
-   hide: PropTypes.bool,
-   children: PropTypes.node
+    hide: PropTypes.bool,
+    children: PropTypes.node
   }
   static defaultProps = {
-   hide: false,
-   children: (
-     <div id="componentRoot">
-       <input type="text"/>
-       <input type="password" />
-     </div>
-   )
+    hide: false,
+    children: (
+      <div id="componentRoot">
+        <input type="text" />
+        <input type="password" />
+      </div>
+    )
   }
   static displayName = 'Component'
-  render () {
+  render() {
     const { hide, children } = this.props
     return !hide ? children : null
   }
@@ -62,8 +62,9 @@ describe('@testable', async () => {
 
     await mount(<TestableComponent hide />)
 
-    expect(await findAll(TestableComponent.selector, { expectEmpty: true }))
-      .to.have.length(0)
+    expect(
+      await findAll(TestableComponent.selector, { expectEmpty: true })
+    ).to.have.length(0)
   })
 
   it('should still apply the attribute/value when the root element changes', async () => {
@@ -73,7 +74,13 @@ describe('@testable', async () => {
 
     expect(await find(TestableComponent.selector)).to.exist()
 
-    subject.setProps({ children: <ul><li>foo</li></ul> })
+    subject.setProps({
+      children: (
+        <ul>
+          <li>foo</li>
+        </ul>
+      )
+    })
 
     expect(await find(TestableComponent.selector)).to.exist()
   })

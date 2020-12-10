@@ -39,7 +39,7 @@ import { px } from '@instructure/ui-utils'
  *  and returns an object consisting of query names and boolean
  *  true false if it matches
  */
-function parseQuery (query, el) {
+function parseQuery(query, el) {
   const rules = []
 
   Object.keys(query).forEach((selectorName) => {
@@ -55,15 +55,16 @@ function parseQuery (query, el) {
     ])
   })
 
-  return function ({width, height}) {
+  return function ({ width, height }) {
     const selectorMap = {}
 
     rules.forEach((rule) => {
       const [selectorName, { minWidth, maxWidth, minHeight, maxHeight }] = rule
-      selectorMap[selectorName] = (
-        minWidth <= width && width <= maxWidth &&
-        minHeight <= height && height <= maxHeight
-      )
+      selectorMap[selectorName] =
+        minWidth <= width &&
+        width <= maxWidth &&
+        minHeight <= height &&
+        height <= maxHeight
     })
 
     return selectorMap

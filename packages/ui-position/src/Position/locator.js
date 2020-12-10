@@ -24,7 +24,11 @@
 
 import { PositionLocator } from './PositionLocator'
 
-export { PositionContentLocator, PositionTargetLocator, customMethods } from './PositionLocator'
+export {
+  PositionContentLocator,
+  PositionTargetLocator,
+  customMethods
+} from './PositionLocator'
 
 export { PositionLocator }
 export default PositionLocator
