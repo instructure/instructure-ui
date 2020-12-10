@@ -79,8 +79,8 @@ const generateStyle = (
     }
   }
   return {
-    root: {
-      label: 'root',
+    avatar: {
+      label: 'avatar',
       height: '2.5em',
       borderStyle: 'solid',
       borderColor: componentTheme.borderColor,

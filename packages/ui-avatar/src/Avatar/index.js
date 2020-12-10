@@ -44,17 +44,9 @@ category: components
 @withStyle(generateStyles)
 @testable()
 class Avatar extends Component {
-  constructor(props) {
-    super(props)
-    this.styles = props.makeStyles(this.state)
-  }
-
-  componentDidUpdate() {
-    this.styles = this.props.makeStyles(this.state)
-  }
-
   static propTypes = {
     makeStyles: PropTypes.func,
+    styles: PropTypes.object,
     name: PropTypes.string.isRequired,
     /*
      * URL of the image to display as the background image
@@ -91,15 +83,12 @@ class Avatar extends Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
     makeStyles: undefined,
+    styles: {},
     src: undefined,
     alt: undefined,
     margin: undefined,
@@ -144,12 +133,12 @@ class Avatar extends Component {
     this.props.onImageLoaded(event)
   }
 
-  renderLoadImage(styles) {
+  renderLoadImage() {
     // This image element is visually hidden and is here for loading purposes only
     return (
       <img
         src={this.props.src}
-        css={styles.loadImage}
+        css={this.props.styles.loadImage}
         alt={this.props.alt}
         onLoad={this.handleImageLoaded}
         aria-hidden="true"
@@ -157,9 +146,9 @@ class Avatar extends Component {
     )
   }
 
-  renderInitials(styles) {
+  renderInitials() {
     return (
-      <span css={styles.initials} aria-hidden="true">
+      <span css={this.props.styles.initials} aria-hidden="true">
         {this.makeInitialsFromName()}
       </span>
     )
@@ -176,15 +165,15 @@ class Avatar extends Component {
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        css={this.styles.root}
+        css={this.props.styles.avatar}
         display={
           this.props.display === 'block' || this.props.inline === false
             ? 'block'
             : 'inline-block'
         }
       >
-        {this.renderLoadImage(this.styles)}
-        {!this.state.loaded && this.renderInitials(this.styles)}
+        {this.renderLoadImage()}
+        {!this.state.loaded && this.renderInitials()}
       </View>
     )
   }

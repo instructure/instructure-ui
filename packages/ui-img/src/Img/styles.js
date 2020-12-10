@@ -41,8 +41,7 @@ const generateStyle = (
     hasBackground,
     src,
     supportsObjectFit,
-    constrain,
-    margin
+    constrain
   }
 ) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
@@ -119,10 +118,8 @@ const generateStyle = (
     overlay: {
       label: 'overlay',
       position: 'absolute',
-      top:
-        '0px' /* stylelint-disable-line unit-blacklist, length-zero-no-unit */,
-      left:
-        '0px' /* stylelint-disable-line property-blacklist, unit-blacklist, length-zero-no-unit */,
+      top: '0px',
+      left: '0px',
       width: '100%',
       height: '100%',
       ...overlayStyle
@@ -136,7 +133,7 @@ const generateStyle = (
     },
     img: {
       label: 'img',
-      margin: margin ? margin : '0',
+      margin: '0',
       padding: '0',
       cssFloat: 'none',
       top: 'auto',

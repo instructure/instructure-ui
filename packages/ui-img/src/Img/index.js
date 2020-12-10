@@ -27,9 +27,8 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { supportsObjectFit } from '@instructure/ui-dom-utils'
-// eslint-disable-next-line import/named
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
@@ -40,23 +39,18 @@ category: components
 ---
 **/
 @withStyle(generateStyles)
-@deprecated('8.0.0', {
-  grayscale: 'withGrayscale',
-  blur: 'withBlur',
-  inline: 'display'
-})
 class Img extends Component {
-  constructor(props) {
-    super(props)
-    this.styles = props.makeStyles(this.state)
+  componentDidMount() {
+    this.props.makeStyles(this.state)
   }
 
   componentDidUpdate() {
-    this.styles = this.props.makeStyles(this.state)
+    this.props.makeStyles(this.state)
   }
 
   static propTypes = {
     makeStyles: PropTypes.func,
+    styles: PropTypes.object,
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,
     display: PropTypes.oneOf(['inline-block', 'block']),
@@ -91,6 +85,7 @@ class Img extends Component {
 
   static defaultProps = {
     makeStyles: undefined,
+    styles: {},
     margin: undefined,
     overlay: undefined,
     constrain: undefined,
@@ -108,7 +103,7 @@ class Img extends Component {
   }
 
   renderFilter() {
-    const blur = `blur(${this.styles.imageBlurAmount})`
+    const blur = `blur(${this.props.styles.imageBlurAmount})`
     const grayscale = 'grayscale(1)'
 
     if (this.props.withGrayscale && this.props.withBlur) {
@@ -143,7 +138,7 @@ class Img extends Component {
     }
 
     const imageProps = {
-      css: this.styles.img,
+      css: this.props.styles.img,
       src
     }
 
@@ -170,11 +165,11 @@ class Img extends Component {
         : containerProps
 
       return (
-        <View {...rootProps} as="span" css={this.styles.view}>
+        <View {...rootProps} as="span" css={this.props.styles.view}>
           {
             !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
           }
-          {overlay && <span css={this.styles.overlay} />}
+          {overlay && <span css={this.props.styles.overlay} />}
         </View>
       )
     } else {

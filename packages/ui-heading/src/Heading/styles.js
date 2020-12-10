@@ -34,7 +34,7 @@ import generateComponentTheme from './theme'
 const generateStyle = (
   theme,
   themeOverride,
-  { level, color, ellipsis, border, margin }
+  { level, color, border, margin }
 ) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
@@ -79,14 +79,6 @@ const generateStyle = (
     'primary-inverse': { color: componentTheme.primaryInverseColor },
     'secondary-inverse': { color: componentTheme.secondaryInverseColor }
   }
-  const ellipsisStyle = ellipsis
-    ? {
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        display: 'block'
-      }
-    : {}
 
   const borderStyles = {
     top: {
@@ -124,7 +116,6 @@ const generateStyle = (
       },
       ...levelStyles[level],
       ...colorStyles[color],
-      ...ellipsisStyle,
       ...borderStyles[border]
     },
     forwardedStyleProps: {

@@ -28,13 +28,8 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import {
-  deprecated,
-  getElementType,
-  passthroughProps
-} from '@instructure/ui-react-utils'
+import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-// eslint-disable-next-line import/named
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
@@ -45,22 +40,19 @@ category: components
 ---
 **/
 @withStyle(generateStyles)
-@deprecated('8.0.0', {
-  ellipsis: '<TruncateText />'
-})
 @testable()
 class Heading extends Component {
-  constructor(props) {
-    super(props)
-    this.styles = props.makeStyles(this.state)
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
   componentDidUpdate() {
-    this.styles = this.props.makeStyles(this.state)
+    this.props.makeStyles()
   }
 
   static propTypes = {
     makeStyles: PropTypes.func,
+    styles: PropTypes.object,
     /**
      * Add a top- or bottom-border to the Heading
      */
@@ -97,18 +89,12 @@ class Heading extends Component {
     /**
      * Provides a ref to the underlying HTML element
      */
-    elementRef: PropTypes.func,
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `<TruncateText /> instead`__
-     */
-    ellipsis: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
     makeStyles: undefined,
+    styles: {},
     children: null,
     margin: undefined,
     elementRef: undefined,
@@ -125,12 +111,9 @@ class Heading extends Component {
       level,
       margin,
       elementRef,
-      ellipsis,
       makeStyles,
       ...props
     } = this.props
-
-    const styles = makeStyles(this.state)
 
     const ElementType = getElementType(Heading, this.props, () => {
       if (level === 'reset') {
@@ -143,10 +126,10 @@ class Heading extends Component {
     return (
       <View
         {...passthroughProps(props)}
-        css={this.styles.heading}
+        css={this.props.styles.heading}
         as={ElementType}
         elementRef={elementRef}
-        margin={this.styles.forwardedStyleProps.margin}
+        margin={this.props.styles?.forwardedStyleProps?.margin}
       >
         {children}
       </View>
