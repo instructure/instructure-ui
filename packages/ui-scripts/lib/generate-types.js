@@ -28,9 +28,23 @@ const globby = require('globby')
 
 async function run() {
   const paths = await globby(['**/src/*/index.js'])
-  const tsDefinitions = paths.map((filePath) =>
-    react2dts.generateFromFile(null, filePath)
-  )
+  // ui-babel-preset defines its own babel plugins too
+  // we should use the list from there if we dont move to typeScript
+  const babelPlugins = [
+    'optionalChaining',
+    'nullishCoalescingOperator',
+    'dfgdfg'
+  ]
+  const tsDefinitions = paths.map((filePath) => {
+    try {
+      react2dts.generateFromFile(null, filePath, {
+        babylonPlugins: babelPlugins
+      })
+    } catch (e) {
+      console.error(`Error compiling typeScript definitions for "${filePath}"`)
+      throw e
+    }
+  })
 
   try {
     await fs.mkdir('./types')
