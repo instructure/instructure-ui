@@ -24,11 +24,12 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
-import { Alert } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Alert.theme', () => {
   describe('with the default theme', () => {
-    const variables = Alert.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('default', () => {
       it('should ensure text color and background color meet 3:1 contrast', () => {
@@ -38,7 +39,7 @@ describe('Alert.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = Alert.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('default', () => {
       it('should ensure text color and background color meet 3:1 contrast', () => {

@@ -28,7 +28,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import { deprecated, callRenderProp } from '@instructure/ui-react-utils'
+import { callRenderProp } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
