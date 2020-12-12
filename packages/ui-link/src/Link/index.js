@@ -41,7 +41,6 @@ import {
 import { warn } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './style'
 
@@ -133,10 +132,11 @@ class Link extends Component {
      * __deprecated: use color__
      */
     variant: PropTypes.oneOf(['default', 'inverse']),
-    /**
-     * method to generate style
-     */
-    makeStyles: PropTypes.func
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -159,13 +159,12 @@ class Link extends Component {
 
   state = { hasFocus: false }
 
-  constructor(props) {
-    super(props)
-    this.styles = props.makeStyles(this.makeStyleProps())
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.styles = this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles(this.makeStyleProps())
   }
 
   makeStyleProps = () => {
@@ -273,7 +272,7 @@ class Link extends Component {
       '[Link] Using the display property with an icon may cause layout issues.'
     )
     return (
-      <span css={this.styles.icon}>
+      <span css={this.props.styles.icon}>
         {callRenderProp(this.props.renderIcon)}
       </span>
     )
@@ -328,7 +327,7 @@ class Link extends Component {
         role={role}
         type={type}
         tabIndex={tabIndex}
-        css={this.styles.link}
+        css={this.props.styles.link}
       >
         {renderIcon && iconPlacement === 'start' && this.renderIcon()}
         {children}
