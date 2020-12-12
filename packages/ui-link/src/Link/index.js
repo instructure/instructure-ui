@@ -292,18 +292,6 @@ class Link extends Component {
       ...props
     } = this.props
 
-    /*
-    const classes = {
-      [styles.root]: true,
-      [styles['color--link-inverse']]:
-        variant === 'inverse' || color === 'link-inverse',
-      [styles[`iconPlacement--${iconPlacement}`]]:
-        renderIcon && this.hasVisibleChildren,
-      [styles.truncates]: this.containsTruncateText,
-      [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
-    }
-   */
-
     const { interaction } = this
 
     const isDisabled = interaction === 'disabled'
