@@ -79,23 +79,7 @@ describe('<Alert />', async () => {
 
     expect(closeButton).to.not.exist()
   })
-
-  // it('should call `onDismiss` when the close button is clicked with closeButtonLabel', async () => {
-  //   const onDismiss = stub()
-  //   const subject = await mount(
-  //     <Alert variant="success" closeButtonLabel="close" onDismiss={onDismiss}>
-  //       Success: Sample alert text.
-  //     </Alert>
-  //   )
-
-  //   const alert = within(subject.getDOMNode())
-  //   const closeButton = await alert.find(':focusable')
-
-  //   await closeButton.click()
-  //   await wait(() => {
-  //     expect(onDismiss).to.have.been.called()
-  //   })
-  // })
+  //TODO fix test when new testing library is introduced
   // it('should call `onDismiss` when the close button is clicked with renderCloseButtonLabel', async () => {
   //   const onDismiss = stub()
   //   const subject = await mount(
