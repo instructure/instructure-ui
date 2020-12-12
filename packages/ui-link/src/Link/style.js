@@ -34,33 +34,31 @@ import generateComponentTheme from './theme'
 const generateStyle = (theme, themeOverride, props, state) => {
   // get the theme variables object for the component
   const componentTheme = generateComponentTheme(theme, themeOverride)
-  const {
-    isWithinText,
-    renderIcon,
-    iconPlacement,
-    elementName,
-    variant,
-    color
-  } = props
-
+  const { isWithinText, renderIcon, iconPlacement, variant, color } = props
+  const inverseStyle = variant === 'inverse' || color === 'link-inverse'
   const textDecorationStyle = isWithinText
     ? componentTheme.textDecorationWithinText
     : componentTheme.textDecorationOutsideText
-
   // If Link is a button or link, it should look clickable
   const buttonOrLinkStyle =
-    elementName === 'button' || elementName === 'a'
+    state.elementName === 'button' || state.elementName === 'a'
       ? {
           cursor: 'pointer',
-          color: componentTheme.color,
+          color: inverseStyle
+            ? componentTheme.colorInverse
+            : componentTheme.color,
           textDecoration: props.isWithinText
             ? componentTheme.textDecorationWithinText
             : componentTheme.textDecorationOutsideText,
           '&:focus': {
-            color: componentTheme.color
+            color: inverseStyle
+              ? componentTheme.colorInverse
+              : componentTheme.color
           },
           '&:hover, &:active': {
-            color: componentTheme.hoverColor,
+            color: inverseStyle
+              ? componentTheme.colorInverse
+              : componentTheme.hoverColor,
             textDecoration: props.isWithinText
               ? componentTheme.hoverTextDecorationWithinText
               : componentTheme.hoverTextDecorationOutsideText
@@ -68,21 +66,22 @@ const generateStyle = (theme, themeOverride, props, state) => {
         }
       : {}
 
-  const inverseStyle =
-    variant === 'inverse' || color === 'link-inverse'
-      ? {
-          color: componentTheme.colorInverse,
-          '&:focus': {
-            outlineColor: componentTheme.focusInverseOutlineColor
-          },
-          '&:hover, &:focus, &:active': {
-            color: componentTheme.colorInverse
-          }
+  const inverseStyleLinkSelectors = inverseStyle
+    ? {
+        '&:link, &:visited': {
+          color: componentTheme.colorInverse
+        },
+        '&:link:focus, &:visited:focus': {
+          outlineColor: componentTheme.focusInverseIconOutlineColor
+        },
+        '&:link:hover, &:link:focus, &:link:active, &:visited:hover, &:visited:focus, &:visited:active': {
+          color: componentTheme.colorInverse
         }
-      : {}
+      }
+    : {}
 
   const buttonStyle =
-    elementName === 'button'
+    state.elementName === 'button'
       ? {
           appearance: 'none',
           userSelect: 'text',
@@ -102,44 +101,42 @@ const generateStyle = (theme, themeOverride, props, state) => {
       ? { alignItems: 'center' }
       : {}
 
-  const rootStyles = {
+  const linkStyles = {
     label: 'link',
-    link: {
-      textDecoration: textDecorationStyle,
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      transition: 'outline-color 0.2s',
-      verticalAlign: 'baseline',
-      // set up focus styles
-      outlineColor: 'transparent',
-      outlineWidth: componentTheme.focusOutlineWidth,
-      outlineStyle: componentTheme.focusOutlineStyle,
-      outlineOffset: '0.25rem',
-      ...truncateStyle,
-      ...buttonStyle,
-      ...inverseStyle,
-      ...buttonOrLinkStyle,
-      '&:focus': {
-        outlineColor: componentTheme.focusOutlineColor
-      },
-      '&[aria-disabled]': {
-        cursor: 'not-allowed',
-        pointerEvents: 'none',
-        opacity: '0.5'
-      },
-      '&::-moz-focus-inner': {
-        border: 0 // removes default dotted focus outline in Firefox
-      }
+    textDecoration: textDecorationStyle,
+    fontFamily: componentTheme.fontFamily,
+    fontWeight: componentTheme.fontWeight,
+    transition: 'outline-color 0.2s',
+    verticalAlign: 'baseline',
+    // set up focus styles
+    outlineColor: 'transparent',
+    outlineWidth: componentTheme.focusOutlineWidth,
+    outlineStyle: componentTheme.focusOutlineStyle,
+    outlineOffset: '0.25rem',
+    ...truncateStyle,
+    ...buttonStyle,
+    ...buttonOrLinkStyle,
+    ...inverseStyleLinkSelectors,
+    '&:focus': {
+      outlineColor: inverseStyle
+        ? componentTheme.focusInverseIconOutlineColor
+        : componentTheme.focusOutlineColor
+    },
+    '&[aria-disabled]': {
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+      opacity: '0.5'
+    },
+    '&::-moz-focus-inner': {
+      border: 0 // removes default dotted focus outline in Firefox
     }
   }
 
   const iconStyles = renderIcon
     ? {
         label: 'icon',
-        icon: {
-          fontSize: componentTheme.iconSize,
-          boxSizing: 'border-box'
-        },
+        fontSize: componentTheme.iconSize,
+        boxSizing: 'border-box',
         paddingInlineStart:
           iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
         paddingInlineEnd:
@@ -148,8 +145,8 @@ const generateStyle = (theme, themeOverride, props, state) => {
     : {}
 
   return {
-    root: {
-      ...rootStyles
+    link: {
+      ...linkStyles
     },
     icon: {
       ...iconStyles
