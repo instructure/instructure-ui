@@ -77,47 +77,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     ...themeSpecificStyle[themeName],
     ...themeOverride
   }
-  /*
-  return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    color: colors.textLink,
-
-    textDecorationWithinText: 'underline',
-    hoverTextDecorationWithinText: 'none',
-    textDecorationOutsideText: 'none',
-    hoverTextDecorationOutsideText: 'underline',
-
-    focusOutlineWidth: borders.widthMedium,
-    focusOutlineColor: colors.borderBrand,
-    focusOutlineStyle: borders.style,
-
-    hoverColor: darken(colors.textLink, 10),
-
-    colorInverse: colors.textLight,
-    focusInverseOutlineColor: colors.borderLightest,
-    focusInverseIconOutlineColor: colors.borderLightest,
-
-    iconSize:
-      '1.125em', // make icon slightly larger than inherited font-size
-    iconPlusTextMargin: spacing.xxSmall
-  }
-  */
-}
-/*
-generator['canvas'] = function (variables) {
-  return {
-    color: variables['ic-link-color'],
-    focusOutlineColor: variables['ic-brand-primary'],
-    hoverColor: darken(variables['ic-link-color'], 10)
-  }
 }
 
-generator['canvas-high-contrast'] = function (variables) {
-  return {
-    textDecorationOutsideText: 'underline',
-    hoverTextDecorationOutsideText: 'none'
-  }
-}
-*/
 export default generateComponentTheme
