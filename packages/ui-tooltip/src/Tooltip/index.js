@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -35,27 +36,30 @@ import {
 } from '@instructure/ui-react-utils'
 import { PositionPropTypes } from '@instructure/ui-position'
 import { uid } from '@instructure/uid'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
 import { element } from '@instructure/ui-prop-types'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyles from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyles)
 @deprecated('8.0.0', {
   tip: 'renderTip',
   variant: 'color'
 })
 @testable()
-@themeable(theme, styles)
 class Tooltip extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * @param {Object} renderProps
      * @param {Boolean} renderProps.focused - Is the Tooltip trigger focused?
@@ -161,6 +165,14 @@ class Tooltip extends Component {
   _id = uid('Tooltip')
   state = { hasFocus: false }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   handleFocus = (event) => {
     this.setState({ hasFocus: true })
   }
@@ -215,6 +227,7 @@ class Tooltip extends Component {
       onHideContent,
       tip,
       variant,
+      styles,
       ...rest
     } = this.props
 
@@ -247,7 +260,7 @@ class Tooltip extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        <span id={this._id} className={styles.root} role="tooltip">
+        <span id={this._id} css={styles.tooltip} role="tooltip">
           {renderTip ? callRenderProp(renderTip) : tip}
         </span>
       </Popover>
