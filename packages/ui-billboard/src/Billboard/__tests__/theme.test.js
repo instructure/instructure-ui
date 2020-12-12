@@ -25,11 +25,12 @@
 import { contrast } from '@instructure/ui-color-utils'
 import { expect } from '@instructure/ui-test-utils'
 
-import { Billboard } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Billboard.theme', () => {
   describe('with the canvas theme', () => {
-    const variables = Billboard.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should have message text color that meets 3:1 contrast with the background color', () => {
       expect(
@@ -42,7 +43,7 @@ describe('Billboard.theme', () => {
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = Billboard.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should have message text color that meets 4.5:1 contrast with the background color', () => {
       expect(
