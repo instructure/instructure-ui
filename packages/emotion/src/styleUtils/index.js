@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { forwardRef, useEffect, useState } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { useTheme as useEmotionTheme } from 'emotion-theming'
 import { canvas } from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
