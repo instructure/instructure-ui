@@ -33,7 +33,7 @@ async function run() {
   const babelPlugins = ['optionalChaining', 'nullishCoalescingOperator']
   const tsDefinitions = paths.map((filePath) => {
     try {
-      react2dts.generateFromFile(null, filePath, {
+      return react2dts.generateFromFile(null, filePath, {
         babylonPlugins: babelPlugins
       })
     } catch (e) {
