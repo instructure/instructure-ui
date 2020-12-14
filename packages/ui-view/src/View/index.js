@@ -330,6 +330,26 @@ class View extends Component {
     }
   }
 
+  // TODO: Remove this code once all components are using passthroughProps in place
+  // of omitProps and have removed this function
+
+  // omitViewProps needs to be called on the composed View component so that the
+  // View.propTypes in the method matches the View.propTypes that will be called in
+  // the consumers. Otherwise the discrepency could cause unexpected props being
+  // allowed through.
+  static omitViewProps(props, Component) {
+    if (process.env.NODE_ENV !== 'production') {
+      Object.keys(pickProps(props, View.propTypes)).forEach((prop) => {
+        error(
+          false,
+          `[${Component.displayName}] prop '${prop}' is not allowed.`
+        )
+      })
+    }
+
+    return omitProps(props, View.propTypes)
+  }
+
   handleElementRef = (el) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
@@ -378,23 +398,6 @@ class View extends Component {
       </ElementType>
     )
   }
-}
-
-// TODO: Remove this code once all components are using passthroughProps in place
-// of omitProps and have removed this function
-
-// omitViewProps needs to be called on the composed View component so that the
-// View.propTypes in the method matches the View.propTypes that will be called in
-// the consumers. Otherwise the discrepency could cause unexpected props being
-// allowed through.
-View.omitViewProps = (props, Component) => {
-  if (process.env.NODE_ENV !== 'production') {
-    Object.keys(pickProps(props, View.propTypes)).forEach((prop) => {
-      error(false, `[${Component.displayName}] prop '${prop}' is not allowed.`)
-    })
-  }
-
-  return omitProps(props, View.propTypes)
 }
 
 export default View
