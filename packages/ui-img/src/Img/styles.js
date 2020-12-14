@@ -116,7 +116,7 @@ const generateStyle = (
   const viewBackgroundImageStyle = hasBackground ? `url(${src})` : {}
   return {
     overlay: {
-      label: 'overlay',
+      label: 'img_overlay',
       position: 'absolute',
       top: '0px',
       left: '0px',
@@ -125,7 +125,7 @@ const generateStyle = (
       ...overlayStyle
     },
     view: {
-      label: 'view',
+      label: 'img_view',
       ...viewBackgroundImageStyle,
       ...containerOverlayStyle,
       ...containerConstrainStyle,

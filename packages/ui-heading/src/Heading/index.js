@@ -129,7 +129,7 @@ class Heading extends Component {
         css={this.props.styles.heading}
         as={ElementType}
         elementRef={elementRef}
-        margin={this.props.styles?.forwardedStyleProps?.margin}
+        margin={margin}
       >
         {children}
       </View>

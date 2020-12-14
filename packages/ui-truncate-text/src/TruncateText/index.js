@@ -151,8 +151,7 @@ class TruncateText extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // eslint-disable-next-line react/prop-types
+  componentDidUpdate(prevProps) {
     const { children, onUpdate, makeStyles } = this.props
 
     makeStyles()
