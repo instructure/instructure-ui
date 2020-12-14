@@ -22,41 +22,43 @@
  * SOFTWARE.
  */
 
-/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
+import generateComponentTheme from './theme'
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, key: themeName } = theme
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  const themeSpecificStyle = {
-    canvas: {
-      primaryColor: theme['ic-brand-font-color-dark'],
-      brandColor: theme['ic-brand-primary']
-    }
-  }
+  const { inline, color } = props
 
-  const componentVariables = {
-    primaryInverseColor: colors?.textLightest,
-    primaryColor: colors?.textDarkest,
-    secondaryColor: colors?.textDark,
-    secondaryInverseColor: colors?.textLight,
-    warningColor: colors?.textWarning,
-    brandColor: colors?.textBrand,
-    errorColor: colors?.textDanger,
-    alertColor: colors?.textAlert,
-    successColor: colors?.textSuccess
+  const colorVariants = {
+    inherit: { color: 'inherit' },
+    primary: { color: componentTheme.primaryColor },
+    secondary: { color: componentTheme.secondaryColor },
+    'primary-inverse': { color: componentTheme.primaryInverseColor },
+    'secondary-inverse': { color: componentTheme.secondaryInverseColor },
+    success: { color: componentTheme.successColor },
+    brand: { color: componentTheme.brandColor },
+    warning: { color: componentTheme.warningColor },
+    error: { color: componentTheme.errorColor },
+    alert: { color: componentTheme.alertColor },
+    auto: {}
   }
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    inlineSVG: {
+      label: 'inlineSVG',
+      fill: 'currentColor',
+      display: inline ? 'inline-block' : 'block',
+      ...colorVariants[color]
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

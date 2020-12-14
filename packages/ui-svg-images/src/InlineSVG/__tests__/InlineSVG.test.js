@@ -29,8 +29,6 @@ import { InlineSVG } from '../index'
 import { InlineSVGLocator } from '../InlineSVGLocator'
 import InlineSVGExamples from '../__examples__/InlineSVG.examples'
 
-import styles from '../styles.css'
-
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<InlineSVG />', async () => {
@@ -164,9 +162,14 @@ describe('<InlineSVG />', async () => {
 
   it('should change the SVG color property', async () => {
     await mount(<InlineSVG src={SVG_SRC} color="success" />)
-    const svg = await InlineSVGLocator.find()
+    const successSvg = await InlineSVGLocator.find()
+    const colorSuccess = successSvg.getComputedStyle().color
 
-    expect(svg.hasClass(styles['color--success'])).to.be.true()
+    await mount(<InlineSVG src={SVG_SRC} color="error" />)
+    const errorSvg = await InlineSVGLocator.find()
+    const colorError = errorSvg.getComputedStyle().color
+
+    expect(colorError).to.not.equal(colorSuccess)
   })
 
   it('should allow passing in the svg src as a string', async () => {
