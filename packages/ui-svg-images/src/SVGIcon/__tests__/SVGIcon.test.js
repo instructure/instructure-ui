@@ -29,8 +29,6 @@ import { SVGIcon } from '../index'
 import { SVGIconLocator } from '../SVGIconLocator'
 import SVGIconExamples from '../__examples__/SVGIcon.examples'
 
-import styles from '../styles.css'
-
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<SVGIcon />', async () => {
@@ -54,8 +52,14 @@ describe('<SVGIcon />', async () => {
 
   it('should set size', async () => {
     await mount(<SVGIcon size="large" src={SVG_SRC} />)
-    const subject = await SVGIconLocator.find()
-    expect(subject.hasClass(styles['size--large'])).to.be.true()
+    const sizeLarge = await SVGIconLocator.find()
+    const largeFont = sizeLarge.getComputedStyle().fontSize
+
+    await mount(<SVGIcon size="small" src={SVG_SRC} />)
+    const sizeSmall = await SVGIconLocator.find()
+    const smallFont = sizeSmall.getComputedStyle().fontSize
+
+    expect(smallFont).to.not.equal(largeFont)
   })
 
   describe('with generated examples', async () => {
