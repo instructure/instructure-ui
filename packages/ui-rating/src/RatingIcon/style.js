@@ -22,39 +22,48 @@
  * SOFTWARE.
  */
 
+import generateComponentTheme from './theme'
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, typography, spacing, key: themeName } = theme
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
+  const { size } = props
 
-  // if any styling should depend on the theme itself,
-  // this object should specify it
-  const themeSpecificStyle = {
-    canvas: {
-      iconEmptyColor: theme['ic-brand-primary'],
-      iconFilledColor: theme['ic-brand-primary']
-    }
-  }
-
-  const componentVariables = {
-    iconMargin: spacing?.xxxSmall,
-    iconEmptyColor: colors?.textBrand,
-    iconFilledColor: colors?.textBrand,
-
-    smallIconFontSize: typography?.fontSizeMedium,
-    mediumIconFontSize: typography?.fontSizeLarge,
-    largeIconFontSize: typography?.fontSizeXXLarge
-  }
+  let fontSize
+  if (size === 'small') fontSize = componentTheme.smallIconFontSize
+  else if (size === 'medium') fontSize = componentTheme.mediumIconFontSize
+  else if (size === 'large') fontSize = componentTheme.largeIconFontSize
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    ratingIcon: {
+      label: 'ratingIcon',
+      display: 'inline-block',
+      verticalAlign: 'bottom',
+      margin: `0 ${componentTheme.iconMargin}`,
+      lineHeight: 1,
+      '&:first-of-type': {
+        marginLeft: 0
+      },
+      '&:last-of-type': {
+        marginRight: 0
+      }
+    },
+    icon: {
+      label: 'icon',
+      display: 'inline-block',
+      verticalAlign: 'bottom',
+      fontSize: fontSize,
+      color: state.filled
+        ? componentTheme.iconFilledColor
+        : componentTheme.iconEmptyColor
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

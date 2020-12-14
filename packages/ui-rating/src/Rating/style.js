@@ -21,40 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import generateComponentTheme from './theme'
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, typography, spacing, key: themeName } = theme
-
-  // if any styling should depend on the theme itself,
-  // this object should specify it
-  const themeSpecificStyle = {
-    canvas: {
-      iconEmptyColor: theme['ic-brand-primary'],
-      iconFilledColor: theme['ic-brand-primary']
-    }
-  }
-
-  const componentVariables = {
-    iconMargin: spacing?.xxxSmall,
-    iconEmptyColor: colors?.textBrand,
-    iconFilledColor: colors?.textBrand,
-
-    smallIconFontSize: typography?.fontSizeMedium,
-    mediumIconFontSize: typography?.fontSizeLarge,
-    largeIconFontSize: typography?.fontSizeXXLarge
-  }
-
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    rating: {
+      lineHeight: 1
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
