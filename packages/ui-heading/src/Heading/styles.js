@@ -117,9 +117,6 @@ const generateStyle = (
       ...levelStyles[level],
       ...colorStyles[color],
       ...borderStyles[border]
-    },
-    forwardedStyleProps: {
-      margin: margin ? margin : '0'
     }
   }
 }

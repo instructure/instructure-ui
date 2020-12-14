@@ -42,8 +42,13 @@ const generateStyle = (theme, themeOverride) => {
       wordWrap: 'break-word',
       fontFamily: componentTheme.fontFamily
     },
-    auto: { height: '100%' },
-    spacer: { visibility: 'hidden', maxHeight: '0', display: 'block' }
+    auto: { label: 'auto_truncateText', height: '100%' },
+    spacer: {
+      label: 'spacer_truncateText',
+      visibility: 'hidden',
+      maxHeight: '0',
+      display: 'block'
+    }
   }
 }
 export default generateStyle
