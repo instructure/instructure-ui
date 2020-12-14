@@ -40,10 +40,7 @@
     "@instructure/ui-view": "^7.3.1",
     "@instructure/uid": "^7.3.1",
     "@instructure/emotion": "^7.3.1",
-<<<<<<< HEAD
     "@instructure/ui-themes": "^7.3.1",
-=======
->>>>>>> WIP(ui-alerts,ui-avatar,ui-heading,ui-img,ui-truncate-text): fix review notes
     "keycode": "^2",
     "prop-types": "^15"
   },
