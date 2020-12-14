@@ -79,7 +79,7 @@ describe('<Alert />', async () => {
 
     expect(closeButton).to.not.exist()
   })
-  //TODO fix test when new testing library is
+  //TODO fix test when new testing library is introduced
   // it('should call `onDismiss` when the close button is clicked with renderCloseButtonLabel', async () => {
   //   const onDismiss = stub()
   //   const subject = await mount(
