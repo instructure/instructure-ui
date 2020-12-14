@@ -153,8 +153,7 @@ class Link extends Component {
     isWithinText: true,
     onClick: undefined,
     onFocus: undefined,
-    onBlur: undefined,
-    makeStyles: undefined
+    onBlur: undefined
   }
 
   state = { hasFocus: false }
@@ -171,7 +170,7 @@ class Link extends Component {
     return {
       containsTruncateText: this.containsTruncateText,
       hasVisibleChildren: this.hasVisibleChildren,
-      elementName: this.element
+      elementType: this.element
     }
   }
 
