@@ -22,8 +22,16 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, spacing, typography }) {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, spacing, typography } = theme
+
+  const componentVariables = {
     fontFamily: typography.fontFamily,
     fontSize: '1.125rem',
     fontWeight: typography.fontWeightBold,
@@ -33,4 +41,11 @@ export default function generator({ colors, spacing, typography }) {
     padding: spacing.small,
     backgroundColor: colors.backgroundLightest
   }
+
+  return {
+    ...componentVariables,
+    ...themeOverride
+  }
 }
+
+export default generateComponentTheme
