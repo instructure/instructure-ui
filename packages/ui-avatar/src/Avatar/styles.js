@@ -98,7 +98,7 @@ const generateStyle = (
       ...variantStyles[shape]
     },
     initials: {
-      label: 'avatar_initials',
+      label: 'avatar__initials',
       color: componentTheme.color,
       lineHeight: '2.375em',
       fontFamily: componentTheme.fontFamily,
@@ -106,7 +106,7 @@ const generateStyle = (
       letterSpacing: '0.0313em'
     },
     loadImage: {
-      label: 'avatar_loadImage',
+      label: 'avatar__loadImage',
       display: 'none'
     }
   }
