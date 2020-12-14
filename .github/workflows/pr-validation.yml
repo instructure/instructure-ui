@@ -1,11 +1,13 @@
 name: Pull Request validation Action workflow.
-on: [pull_request, push]
+on: [pull_request]
 jobs:
   pr_validation:
     runs-on: ubuntu-latest
     name: A job to run test.
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Run docker test script.
         id: test_script
         run: ./docker/test
