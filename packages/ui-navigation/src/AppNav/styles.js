@@ -32,15 +32,8 @@ import generateComponentTheme from './theme'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props, state) => {
+const generateStyle = (theme, themeOverride) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
-  const { visibleItemsCount } = props
-  const listItemIsMenuTrigger = (isMenuTrigger) =>
-    isMenuTrigger && visibleItemsCount > 0
-      ? {
-          flexBasis: componentTheme.menuTriggerWidth
-        }
-      : {}
 
   return {
     appNav: {
@@ -52,7 +45,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
       alignItems: 'center'
     },
     listItemWithMenuTrigger: {
-      label: 'appNav_listItemWithMenuTrigger',
+      label: 'appNav__listItemWithMenuTrigger',
       minWidth: '0.0625rem',
       marginInlineStart: componentTheme.horizontalMargin,
       marginInlineEnd: '0',
@@ -60,14 +53,14 @@ const generateStyle = (theme, themeOverride, props, state) => {
       flexBasis: componentTheme.menuTriggerWidth
     },
     listItem: {
-      label: 'appNav_listItem',
+      label: 'appNav__listItem',
       minWidth: '0.0625rem',
       marginInlineStart: componentTheme.horizontalMargin,
       marginInlineEnd: '0',
       flexShrink: 0
     },
     list: {
-      label: 'appNav_list',
+      label: 'appNav__list',
       boxSizing: 'border-box',
       listStyleType: 'none',
       height: componentTheme.height,
