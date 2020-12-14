@@ -69,7 +69,7 @@ const generateStyle = (theme, themeOverride, props) => {
       ...disabledStyles
     },
     label: {
-      label: 'item_label',
+      label: 'item__label',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
