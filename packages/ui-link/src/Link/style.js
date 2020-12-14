@@ -35,19 +35,18 @@ const generateStyle = (theme, themeOverride, props, state) => {
   // get the theme variables object for the component
   const componentTheme = generateComponentTheme(theme, themeOverride)
   const { isWithinText, renderIcon, iconPlacement, variant, color } = props
+  const { containsTruncateText, hasVisibleChildren, elementType } = state
   const inverseStyle = variant === 'inverse' || color === 'link-inverse'
-  const textDecorationStyle = isWithinText
-    ? componentTheme.textDecorationWithinText
-    : componentTheme.textDecorationOutsideText
+
   // If Link is a button or link, it should look clickable
   const buttonOrLinkStyle =
-    state.elementName === 'button' || state.elementName === 'a'
+    elementType === 'button' || elementType === 'a'
       ? {
           cursor: 'pointer',
           color: inverseStyle
             ? componentTheme.colorInverse
             : componentTheme.color,
-          textDecoration: props.isWithinText
+          textDecoration: isWithinText
             ? componentTheme.textDecorationWithinText
             : componentTheme.textDecorationOutsideText,
           '&:focus': {
@@ -59,15 +58,17 @@ const generateStyle = (theme, themeOverride, props, state) => {
             color: inverseStyle
               ? componentTheme.colorInverse
               : componentTheme.hoverColor,
-            textDecoration: props.isWithinText
+            textDecoration: isWithinText
               ? componentTheme.hoverTextDecorationWithinText
               : componentTheme.hoverTextDecorationOutsideText
           }
         }
       : {}
 
-  const inverseStyleLinkSelectors = inverseStyle
-    ? {
+  let inverseStyleSelectors = {}
+  if (inverseStyle) {
+    if (elementType === 'a') {
+      inverseStyleSelectors = {
         '&:link, &:visited': {
           color: componentTheme.colorInverse
         },
@@ -78,10 +79,18 @@ const generateStyle = (theme, themeOverride, props, state) => {
           color: componentTheme.colorInverse
         }
       }
-    : {}
+    } else {
+      inverseStyleSelectors = {
+        color: componentTheme.colorInverse,
+        '&:hover, &:focus, &:active': {
+          color: componentTheme.colorInverse
+        }
+      }
+    }
+  }
 
   const buttonStyle =
-    state.elementName === 'button'
+    elementType === 'button'
       ? {
           appearance: 'none',
           userSelect: 'text',
@@ -97,13 +106,12 @@ const generateStyle = (theme, themeOverride, props, state) => {
 
   // If TruncateText is used in Link with icon, align the icon and the text vertically
   const truncateStyle =
-    props.renderIcon && state.containsTruncateText && state.hasVisibleChildren
+    renderIcon && containsTruncateText && hasVisibleChildren
       ? { alignItems: 'center' }
       : {}
 
   const linkStyles = {
     label: 'link',
-    textDecoration: textDecorationStyle,
     fontFamily: componentTheme.fontFamily,
     fontWeight: componentTheme.fontWeight,
     transition: 'outline-color 0.2s',
@@ -116,7 +124,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
     ...truncateStyle,
     ...buttonStyle,
     ...buttonOrLinkStyle,
-    ...inverseStyleLinkSelectors,
+    ...inverseStyleSelectors,
     '&:focus': {
       outlineColor: inverseStyle
         ? componentTheme.focusInverseIconOutlineColor
