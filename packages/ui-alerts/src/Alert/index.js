@@ -135,9 +135,6 @@ class Alert extends Component {
     this.state = {
       open: true
     }
-
-    // eslint-disable-next-line react/prop-types
-    this.styles = props.makeStyles(this.state)
   }
 
   _timeouts = []
