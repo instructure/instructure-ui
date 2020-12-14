@@ -42,9 +42,9 @@ const generateStyle = (theme, themeOverride) => {
       wordWrap: 'break-word',
       fontFamily: componentTheme.fontFamily
     },
-    auto: { label: 'auto_truncateText', height: '100%' },
+    auto: { label: 'truncateText__auto', height: '100%' },
     spacer: {
-      label: 'spacer_truncateText',
+      label: 'truncateText__spacer',
       visibility: 'hidden',
       maxHeight: '0',
       display: 'block'
