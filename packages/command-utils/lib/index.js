@@ -91,13 +91,17 @@ function runCommandsConcurrently(commands) {
   ]
 
   Object.keys(commands).forEach((name) => {
-    const command = commands[name]
-    if (command) {
-      args.push(
-        `${command.toString()}${
-          command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
-        }`
-      )
+    let commandList = commands[name]
+
+    if (commandList) {
+      commandList = Array.isArray(commandList) ? commandList : [commandList]
+      commandList.forEach(command => {
+        args.push(
+          `${command.toString()}${
+            command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
+          }`
+        )
+      })
     }
   })
 
