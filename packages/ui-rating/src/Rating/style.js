@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import generateComponentTheme from './theme'
 
 /**
  * Generates the style object from the theme and provided additional information
@@ -32,9 +31,9 @@ import generateComponentTheme from './theme'
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (theme, themeOverride, props, state) => {
-  const componentTheme = generateComponentTheme(theme, themeOverride)
   return {
     rating: {
+      label: 'rating',
       lineHeight: 1
     }
   }

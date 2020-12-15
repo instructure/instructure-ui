@@ -103,11 +103,6 @@ class RatingIcon extends Component {
     })
   }
 
-  handleTransitionEnter = () => {
-    //this.applyTheme() TODO does this need to be handled with emotion?
-    // Likely not good, I see css="[Object object]" in the debugger
-  }
-
   render() {
     const { animateFill } = this.props
     const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
@@ -116,12 +111,7 @@ class RatingIcon extends Component {
       <span css={this.props.styles.ratingIcon}>
         <span>
           {this.state.filled && animateFill ? (
-            <Transition
-              in
-              transitionOnMount
-              type="scale"
-              onEnter={this.handleTransitionEnter}
-            >
+            <Transition in transitionOnMount type="scale">
               <Icon css={this.props.styles.icon} />
             </Transition>
           ) : (

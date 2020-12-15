@@ -58,8 +58,7 @@ describe('<Rating />', async () => {
     )
 
     const rating = await RatingLocator.find()
-    const filledIcons = await rating.findAllFilledIcons()
-
+    const filledIcons = await rating.findAll('svg[name="IconStar"]')
     expect(filledIcons.length).to.equal(4)
   })
 
