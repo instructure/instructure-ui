@@ -31,8 +31,6 @@
 const generateComponentTheme = (theme, themeOverride = {}) => {
   const { colors, typography, spacing, key: themeName } = theme
 
-  // if any styling should depend on the theme itself,
-  // this object should specify it
   const themeSpecificStyle = {
     canvas: {
       iconEmptyColor: theme['ic-brand-primary'],

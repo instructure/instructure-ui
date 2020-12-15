@@ -35,14 +35,14 @@ const generateStyle = (theme, themeOverride, props, state) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
   const { size } = props
 
-  let fontSize
-  if (size === 'small') fontSize = componentTheme.smallIconFontSize
-  else if (size === 'medium') fontSize = componentTheme.mediumIconFontSize
-  else if (size === 'large') fontSize = componentTheme.largeIconFontSize
-
+  const sizeVariants = {
+    small: { fontSize: componentTheme.smallIconFontSize },
+    medium: { fontSize: componentTheme.mediumIconFontSize },
+    large: { fontSize: componentTheme.largeIconFontSize }
+  }
   return {
     ratingIcon: {
-      label: 'ratingIcon',
+      label: 'rating__icon',
       display: 'inline-block',
       verticalAlign: 'bottom',
       margin: `0 ${componentTheme.iconMargin}`,
@@ -58,7 +58,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
       label: 'icon',
       display: 'inline-block',
       verticalAlign: 'bottom',
-      fontSize: fontSize,
+      ...sizeVariants[size],
       color: state.filled
         ? componentTheme.iconFilledColor
         : componentTheme.iconEmptyColor
