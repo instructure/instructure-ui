@@ -4,6 +4,12 @@
   "description": "Helpers and utilities for queries in UI tests.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    }
+  },
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "types": "./types/index.d.ts",

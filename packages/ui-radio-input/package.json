@@ -4,6 +4,12 @@
   "description": "A styled HTML input type='radio' element",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    }
+  },
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "repository": {

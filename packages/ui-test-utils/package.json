@@ -4,6 +4,12 @@
   "description": "A UI testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    }
+  },
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "repository": {
