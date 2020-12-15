@@ -23,7 +23,7 @@
  */
 
 import { Locale } from './Locale'
-import BaseDecimal from 'decimal.js/decimal'
+import BaseDecimal from 'decimal.js/decimal.mjs'
 
 /**
  * ---
