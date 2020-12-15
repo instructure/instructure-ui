@@ -24,18 +24,18 @@
 
 // TODO: remove delimeter comment description once the deprecated values are removed
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -43,10 +43,14 @@ parent: List
 id: List.Item
 ---
 **/
+@withStyle(generateStyles)
 @testable()
-@themeable(theme, styles)
 class ListItem extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
      * Inherits delimiter from the parent List component.
@@ -101,6 +105,14 @@ class ListItem extends Component {
     variant: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
     const {
       delimiter,
@@ -111,27 +123,14 @@ class ListItem extends Component {
       elementRef,
       children,
       variant,
+      styles,
       ...rest
     } = this.props
 
-    const withDelimiter = delimiter !== 'none'
-    const withSpacing = spacing !== 'none'
-
-    error(
-      !(withDelimiter && withSpacing),
-      `[List] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
-    )
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: size,
-      [styles[`delimiter--${delimiter}`]]: delimiter !== 'none' ? true : null,
-      [styles[`spacing--${spacing}`]]: withSpacing && !withDelimiter
-    }
     return (
       <View
         {...passthroughProps(rest)}
-        className={classnames(classes)}
+        css={styles.listItem}
         as="li"
         margin={margin}
         padding={padding}
@@ -141,7 +140,7 @@ class ListItem extends Component {
         {children}
 
         {variant === 'inline' && (
-          <span className={styles.delimiter} aria-hidden="true" />
+          <span css={styles.delimiter} aria-hidden="true" />
         )}
       </View>
     )
