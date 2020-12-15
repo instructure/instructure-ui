@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const React = require('react')
+import React from 'react'
 
 let loggedInitialDeprecationWarning = false
 
@@ -65,12 +65,12 @@ function logDeprecated(condition, message, ...args) {
   }
 }
 
-exports.error = (...args) => logMessage('error', true, ...args)
-exports.warn = (...args) => logMessage('warn', true, ...args)
-exports.warnDeprecated = (...args) => logDeprecated(...args)
-exports.info = (...args) => console.info(...args)
-exports.assert = (...args) => console.assert(...args)
-exports.debug = (...args) => console.debug(...args)
-exports.log = (...args) => console.log(...args)
+export const error = (...args) => logMessage('error', true, ...args)
+export const warn = (...args) => logMessage('warn', true, ...args)
+export const warnDeprecated = (...args) => logDeprecated(...args)
+export const info = (...args) => console.info(...args)
+export const assert = (...args) => console.assert(...args)
+export const debug = (...args) => console.debug(...args)
+export const log = (...args) => console.log(...args)
 
 /* eslint-enable no-console */
