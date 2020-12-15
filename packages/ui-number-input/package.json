@@ -6,6 +6,12 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "license": "MIT",
   "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    }
+  },
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
