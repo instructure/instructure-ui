@@ -37,6 +37,7 @@
     "@instructure/config-loader": "^7.3.2",
     "@instructure/ui-postcss-config": "^7.3.2",
     "babel-loader": "^8.1.0",
+    "babel-plugin-add-import-extension": "^1.4.3",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-istanbul": "^6.0.0",
     "babel-plugin-macros": "^2.8.0",

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { StyleSheet as GlamorStyleSheet } from 'glamor/lib/sheet'
+import { StyleSheet as GlamorStyleSheet } from 'glamor/lib/sheet.js'
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'

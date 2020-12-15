@@ -112,7 +112,8 @@ module.exports = function (
       }
     ],
     require('@babel/plugin-syntax-dynamic-import').default,
-    require('babel-plugin-transform-undefined-to-void')
+    require('babel-plugin-transform-undefined-to-void'),
+    require('babel-plugin-add-import-extension'),
   ])
 
   if (process.env.NODE_ENV === 'production') {
