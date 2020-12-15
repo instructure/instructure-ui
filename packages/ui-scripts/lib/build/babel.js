@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 
+const path = require('path')
 const {
   runCommandsConcurrently,
   getCommand
 } = require('@instructure/command-utils')
+const specifyCJSFormat = path.resolve(__dirname, 'specify-commonjs-format.sh')
 
 const {
   BABEL_ENV,
@@ -102,11 +104,14 @@ const commands = {
     [...babelArgs, '--out-dir', 'es'],
     [...envVars, 'ES_MODULES=1']
   ),
-  cjs: getCommand(
-    'babel',
-    [...babelArgs, '--out-dir', 'lib'],
-    [...envVars, 'TRANSFORM_IMPORTS=1']
-  )
+  cjs: [
+    getCommand(
+      'babel',
+      [...babelArgs, '--out-dir', 'lib'],
+      [...envVars, 'TRANSFORM_IMPORTS=1']
+    )
+    getCommand(specifyCJSFormat, [], []),
+  ]
 }
 
 const commandsToRun = modules.reduce(
