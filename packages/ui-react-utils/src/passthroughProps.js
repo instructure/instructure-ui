@@ -78,12 +78,15 @@ function passthroughProps(props) {
 
   Object.keys(props)
     // style and className need to be explicitly passed through
+    // styles and makeStyle can not pass through
     .filter(
       (propName) =>
         isPropValid(propName) &&
         propName !== 'style' &&
         propName !== 'className' &&
-        propName !== 'children'
+        propName !== 'children' &&
+        propName !== 'styles' &&
+        propName !== 'makeStyles'
     )
     .forEach((propName) => {
       validProps[propName] = props[propName]
