@@ -109,8 +109,8 @@ const commands = {
       'babel',
       [...babelArgs, '--out-dir', 'lib'],
       [...envVars, 'TRANSFORM_IMPORTS=1']
-    )
-    getCommand(specifyCJSFormat, [], []),
+    ),
+    getCommand(specifyCJSFormat, [], [])
   ]
 }
 

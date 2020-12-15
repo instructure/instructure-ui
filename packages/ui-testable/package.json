@@ -3,7 +3,13 @@
   "version": "7.3.1",
   "description": "A UI component test utility made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "commonjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    }
+  },
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "repository": {
