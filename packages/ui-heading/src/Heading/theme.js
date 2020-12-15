@@ -29,20 +29,11 @@
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme, themeOverride = {}) => {
-  const {
-    typography,
-    brandVariables,
-    colors,
-    spacing,
-    borders,
-    key: themeName
-  } = theme
+  const { typography, colors, spacing, borders, key: themeName } = theme
 
   const themeSpecificStyle = {
     canvas: {
-      primaryColor: brandVariables
-        ? brandVariables['ic-brand-font-color-dark']
-        : ''
+      primaryColor: theme['ic-brand-font-color-dark']
     },
     instructure: {
       h1FontFamily: typography?.fontFamilyHeading,
