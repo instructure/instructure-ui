@@ -22,23 +22,41 @@
  * SOFTWARE.
  */
 
+import generateComponentTheme from './theme'
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { typography } = theme
-
-  const componentVariables = {
-    lineHeight: typography?.lineHeightCondensed
-  }
+const generateStyle = (theme, themeOverride, props) => {
+  const { textAlign } = props
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
   return {
-    ...componentVariables,
-    ...themeOverride
+    metric: {
+      label: 'metric',
+      display: 'flex',
+      flexDirection: 'column-reverse',
+      boxSizing: 'border-box',
+      padding: componentTheme.padding,
+      fontFamily: componentTheme.fontFamily,
+      textAlign
+    },
+    label: {
+      label: 'metric__label',
+      fontSize: componentTheme.labelFontSize,
+      color: componentTheme.labelColor
+    },
+    value: {
+      label: 'metric__value',
+      fontWeight: componentTheme.valueFontWeight,
+      fontSize: componentTheme.valueFontSize,
+      color: componentTheme.valueColor
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
