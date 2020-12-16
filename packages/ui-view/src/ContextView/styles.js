@@ -252,17 +252,17 @@ const generateStyle = (theme, themeOverride, props, extraArgs) => {
   )
 
   return {
-    root: {
+    contextView: {
       label: 'contextView',
       boxSizing: 'border-box',
       minHeight: `calc(${componentTheme?.arrowSize} * 2)`,
       ...getPlacementStyle(transformedPlacement, componentTheme)
     },
-    content: {
+    contextView__content: {
       label: 'contextView__content',
       position: 'relative'
     },
-    arrow: {
+    contextView__arrow: {
       label: 'contextView__arrow',
       ...arrowBaseStyles,
       display: 'block',

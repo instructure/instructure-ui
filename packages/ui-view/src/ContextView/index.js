@@ -40,7 +40,6 @@ category: components
 **/
 
 @withStyle(generateStyles)
-// @themeable(theme, styles)
 class ContextView extends Component {
   static propTypes = {
     /**
@@ -172,7 +171,7 @@ class ContextView extends Component {
       <View
         {...omitProps(this.props, ContextView.propTypes)}
         style={style}
-        css={styles.root}
+        css={styles.contextView}
         borderWidth="none"
         display="inline-block"
         as={as}
@@ -182,7 +181,7 @@ class ContextView extends Component {
         stacking={stacking}
       >
         <View
-          css={styles.content}
+          css={styles.contextView__content}
           display="block"
           borderRadius="medium"
           borderWidth="small"
@@ -199,7 +198,7 @@ class ContextView extends Component {
           shadow={shadow}
           textAlign={textAlign}
         >
-          <span css={styles.arrow} />
+          <span css={styles.contextView__arrow} />
           {children}
         </View>
       </View>
