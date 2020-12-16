@@ -22,34 +22,29 @@
  * SOFTWARE.
  */
 
-.root {
-  display: flex;
-  flex-direction: column-reverse;
-  box-sizing: border-box;
-  padding: var(--padding);
-  text-align: var(--textAlign);
-  font-family: var(--fontFamily);
+import generateComponentTheme from './theme'
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  &.start {
-    text-align: left; /* stylelint-disable-line declaration-property-value-blacklist */
-  }
-
-  &.center {
-    text-align: center;
-  }
-
-  &.end {
-    text-align: right; /* stylelint-disable-line declaration-property-value-blacklist */
+  return {
+    metricGroup: {
+      label: 'metricGroup',
+      boxSizing: 'border-box',
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      justifyContent: 'space-around',
+      lineHeight: componentTheme.lineHeight
+    }
   }
 }
 
-.label {
-  font-size: var(--labelFontSize);
-  color: var(--labelColor);
-}
-
-.value {
-  font-weight: var(--valueFontWeight);
-  font-size: var(--valueFontSize);
-  color: var(--valueColor);
-}
+export default generateStyle
