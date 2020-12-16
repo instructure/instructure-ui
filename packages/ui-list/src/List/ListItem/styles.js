@@ -38,7 +38,7 @@ import { error } from '@instructure/console/macro'
 const generateStyle = (theme, themeOverride, props, state) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  const { size, delimiter, spacing, variant } = props
+  const { size, delimiter, spacing } = props
 
   const withDelimiter = delimiter !== 'none'
   const withSpacing = spacing !== 'none'
@@ -104,24 +104,6 @@ const generateStyle = (theme, themeOverride, props, state) => {
     }
   }
 
-  const inlineDelimiterVariants = {
-    pipe: {
-      marginInlineStart: componentTheme.pipeSpacing,
-      marginInlineEnd: componentTheme.pipeSpacing,
-      '&::after': { content: '\\007C' }
-    },
-    slash: {
-      marginInlineStart: componentTheme.slashSpacing,
-      marginInlineEnd: componentTheme.slashSpacing,
-      '&::after': { content: '\\002F' }
-    },
-    arrow: {
-      marginInlineStart: componentTheme.arrowSpacing,
-      marginInlineEnd: componentTheme.arrowSpacing,
-      '&::after': { content: '\\003E' }
-    }
-  }
-
   return {
     listItem: {
       label: 'listItem',
@@ -132,19 +114,10 @@ const generateStyle = (theme, themeOverride, props, state) => {
       padding: 0,
       ...sizeVariants[size],
       ...(withSpacing && !withDelimiter && spacingVariants[spacing]),
-      ...(withDelimiter &&
-        (variant === 'inline'
-          ? { display: 'inline-block' }
-          : delimiterVariants[delimiter])),
+      ...(withDelimiter && delimiterVariants[delimiter]),
 
       '&:first-of-type': { marginTop: '0' },
       '&:last-of-type': { marginBottom: '0' }
-    },
-    delimiter: {
-      label: 'listItem__delimiter',
-      ...(withDelimiter &&
-        variant === 'inline' &&
-        inlineDelimiterVariants[delimiter])
     }
   }
 }
