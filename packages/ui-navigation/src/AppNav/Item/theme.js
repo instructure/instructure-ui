@@ -32,14 +32,14 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
   const { colors, spacing, typography } = theme
 
   const componentVariables = {
-    fontFamily: typography.fontFamily,
+    fontFamily: typography?.fontFamily,
     fontSize: '1.125rem',
-    fontWeight: typography.fontWeightBold,
-    textColor: colors.textLink,
-    textColorSelected: colors.textDarkest,
+    fontWeight: typography?.fontWeightBold,
+    textColor: colors?.textLink,
+    textColorSelected: colors?.textDarkest,
     height: '2.25rem',
-    padding: spacing.small,
-    backgroundColor: colors.backgroundLightest
+    padding: spacing?.small,
+    backgroundColor: colors?.backgroundLightest
   }
 
   return {
