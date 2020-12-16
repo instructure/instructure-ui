@@ -35,31 +35,12 @@ import generateComponentTheme from './theme'
 const generateStyle = (theme, themeOverride, props, state) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  const { color, variant } = props
-
-  let actualColor = variant
-  if (!actualColor) {
-    // usng new color props
-    actualColor = color
-  } else {
-    // using old variant
-    if (variant === 'primary') {
-      actualColor = 'oldPrimary'
-    }
-  }
+  const { color } = props
 
   const pillColorVariants = {
     primary: {
       color: componentTheme.primaryColor,
       borderColor: componentTheme.primaryColor
-    },
-    oldPrimary: {
-      color: componentTheme.infoColor,
-      borderColor: componentTheme.infoColor
-    },
-    info: {
-      color: componentTheme.infoColor,
-      borderColor: componentTheme.infoColor
     },
     success: {
       color: componentTheme.successColor,
@@ -69,13 +50,13 @@ const generateStyle = (theme, themeOverride, props, state) => {
       color: componentTheme.dangerColor,
       borderColor: componentTheme.dangerColor
     },
+    info: {
+      color: componentTheme.infoColor,
+      borderColor: componentTheme.infoColor
+    },
     warning: {
       color: componentTheme.warningColor,
       borderColor: componentTheme.warningColor
-    },
-    message: {
-      color: componentTheme.messageColor,
-      borderColor: componentTheme.messageColor
     },
     alert: {
       color: componentTheme.alertColor,
@@ -96,7 +77,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
       borderRadius: componentTheme.borderRadius,
       /* line-height does not account for top/bottom border width */
       lineHeight: `calc(${componentTheme.height} - (${componentTheme.borderWidth} * 2))`,
-      ...pillColorVariants[actualColor]
+      ...pillColorVariants[color]
     },
     text: {
       label: 'pill__text',

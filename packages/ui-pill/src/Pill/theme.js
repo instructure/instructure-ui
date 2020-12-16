@@ -56,7 +56,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     successColor: colors?.textSuccess,
     warningColor: colors?.textWarning,
     alertColor: colors?.textAlert,
-    messageColor: colors?.textAlert,
     borderWidth: borders?.widthSmall,
     borderStyle: borders?.style,
     borderRadius: '999rem'
