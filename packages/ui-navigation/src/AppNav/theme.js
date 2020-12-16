@@ -34,12 +34,12 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
   const themeSpecificStyles = {}
 
   const componentVariables = {
-    fontFamily: typography.fontFamily,
+    fontFamily: typography?.fontFamily,
     height: '3.75rem', // 60px per product design
-    borderColor: colors.borderMedium,
-    borderStyle: borders.style,
-    borderWidth: borders.widthSmall,
-    horizontalMargin: spacing.xxSmall,
+    borderColor: colors?.borderMedium,
+    borderStyle: borders?.style,
+    borderWidth: borders?.widthSmall,
+    horizontalMargin: spacing?.xxSmall,
     menuTriggerWidth: '7.5rem'
   }
 
