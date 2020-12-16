@@ -24,12 +24,13 @@
 
 import { contrast } from '@instructure/ui-color-utils'
 import { expect } from '@instructure/ui-test-utils'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
-import { Navigation } from '../index'
+import generateComponentTheme from '../theme'
 
 describe('Navigation.theme', () => {
   describe('with the default theme', () => {
-    const variables = Navigation.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
       expect(
@@ -39,7 +40,7 @@ describe('Navigation.theme', () => {
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = Navigation.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(

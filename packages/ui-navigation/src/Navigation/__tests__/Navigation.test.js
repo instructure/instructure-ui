@@ -31,8 +31,6 @@ import { IconAdminLine, IconDashboardLine } from '@instructure/ui-icons'
 import { Navigation, NavigationItem } from '../index'
 import { NavigationLocator } from '../NavigationLocator'
 
-import styles from '../styles.css'
-
 describe('<Navigation />', async () => {
   it('should render', async () => {
     await mount(
@@ -138,37 +136,6 @@ describe('<Navigation />', async () => {
     expect(toggle).to.have.attribute('aria-expanded', 'true')
     await toggle.click()
     expect(toggle).to.have.attribute('aria-expanded', 'false')
-  })
-
-  it('should add the minimized style to the root when the nav is collapsed', async () => {
-    await mount(
-      <Navigation
-        label="Main navigation"
-        toggleLabel={{
-          expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation'
-        }}
-      >
-        <NavigationItem
-          icon={<IconDashboardLine />}
-          label="Dashboard"
-          href="#"
-        />
-        <NavigationItem
-          icon={
-            <Badge count={99}>
-              <IconAdminLine />
-            </Badge>
-          }
-          label="Inbox"
-          href="#"
-        />
-      </Navigation>
-    )
-    const nav = await NavigationLocator.find()
-    const toggle = await nav.find(':contains(Minimize Navigation):focusable')
-    await toggle.click()
-    expect(nav).to.have.className(styles['minimized'])
   })
 
   it('should meet a11y standards', async () => {
