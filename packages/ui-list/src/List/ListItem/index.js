@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-// TODO: remove delimeter comment description once the deprecated values are removed
-
 /** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -31,7 +29,7 @@ import PropTypes from 'prop-types'
 import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -55,12 +53,7 @@ class ListItem extends Component {
     /**
      * Inherits delimiter from the parent List component.
      */
-    delimiter: deprecated.deprecatePropValues(
-      PropTypes.oneOf(['none', 'dashed', 'solid', 'pipe', 'slash', 'arrow']),
-      ['pipe', 'slash', 'arrow'],
-      ({ propValue }) =>
-        `with 'delimiter' set to ${propValue} will only be available when using [InlineList.Item] as of version 8.0.0.`
-    ),
+    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -88,11 +81,7 @@ class ListItem extends Component {
       'x-large',
       'xx-large'
     ]),
-    elementRef: PropTypes.func,
-    /**
-     * __deprecated:__ inline will be InlineList
-     */
-    variant: PropTypes.oneOf(['default', 'unstyled', 'inline'])
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -101,8 +90,7 @@ class ListItem extends Component {
     spacing: 'none',
     delimiter: 'none',
     size: 'medium',
-    elementRef: (el) => {},
-    variant: undefined
+    elementRef: (el) => {}
   }
 
   componentDidMount() {
@@ -122,7 +110,6 @@ class ListItem extends Component {
       padding,
       elementRef,
       children,
-      variant,
       styles,
       ...rest
     } = this.props
@@ -138,10 +125,6 @@ class ListItem extends Component {
         elementRef={elementRef}
       >
         {children}
-
-        {variant === 'inline' && (
-          <span css={styles.delimiter} aria-hidden="true" />
-        )}
       </View>
     )
   }

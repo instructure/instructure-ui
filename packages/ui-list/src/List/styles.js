@@ -35,9 +35,8 @@ import generateComponentTheme from './theme'
 const generateStyle = (theme, themeOverride, props, state) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  const { isUnstyled, as, variant } = props
+  const { isUnstyled, as } = props
 
-  const unstyled = isUnstyled === true || variant === 'unstyled'
   const ordered = as === 'ol'
 
   return {
@@ -61,7 +60,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
         }
       }),
 
-      ...(unstyled && {
+      ...(isUnstyled && {
         listStyleType: 'none',
         paddingInlineStart: 0
       })

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-//  TODO: remove values for pipe, slash and arrow in version 8.0.0
-
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -56,10 +54,7 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     spacingXLarge: spacing?.xLarge,
     spacingXXLarge: spacing?.xxLarge,
     delimiterDashedBorder: `${borders?.widthSmall} dashed ${colors?.borderMedium}`,
-    delimiterSolidBorder: `${borders?.widthSmall} solid ${colors?.borderMedium}`,
-    pipeSpacing: spacing?.xSmall,
-    slashSpacing: spacing?.xxxSmall,
-    arrowSpacing: spacing?.xSmall
+    delimiterSolidBorder: `${borders?.widthSmall} solid ${colors?.borderMedium}`
   }
 
   return {

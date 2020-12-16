@@ -22,23 +22,16 @@
  * SOFTWARE.
  */
 
-// TODO: remove delimiter comment description once the deprecated values are removed
-
 /** @jsx jsx */
 import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
-import {
-  passthroughProps,
-  safeCloneElement,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import { InlineList } from '../InlineList'
 import { ListItem } from './ListItem'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -51,9 +44,6 @@ category: components
 ---
 **/
 @withStyle(generateStyles)
-@deprecated('8.0.0', {
-  variant: 'List with the isUnstyled boolean or InlineList'
-})
 @testable()
 class List extends Component {
   static propTypes = {
@@ -69,12 +59,7 @@ class List extends Component {
     /**
      * One of: none, dashed, solid
      */
-    delimiter: deprecated.deprecatePropValues(
-      PropTypes.oneOf(['none', 'dashed', 'solid', 'pipe', 'slash', 'arrow']),
-      ['pipe', 'slash', 'arrow'],
-      ({ propValue }) =>
-        `with 'delimiter' set to ${propValue} will only be available when using [InlineList] as of version 8.0.0.`
-    ),
+    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
     /**
      * When set, renders the List Items without a list style type.
      */
@@ -100,11 +85,7 @@ class List extends Component {
       'x-large',
       'xx-large'
     ]),
-    elementRef: PropTypes.func,
-    /**
-     * __deprecated__ Option will be to use the isUnstyled prop or the InlineList component
-     */
-    variant: PropTypes.oneOf(['default', 'unstyled', 'inline'])
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -115,8 +96,7 @@ class List extends Component {
     margin: undefined,
     size: 'medium',
     itemSpacing: 'none',
-    elementRef: (el) => {},
-    variant: undefined
+    elementRef: (el) => {}
   }
 
   static Item = ListItem
@@ -142,40 +122,21 @@ class List extends Component {
     })
   }
 
-  renderInlineChild() {
-    return Children.map(this.props.children, (child) => {
-      if (!child) return
-      return <InlineList.Item {...child.props} />
-    })
-  }
-
   render() {
-    const {
-      as,
-      margin,
-      isUnstyled,
-      elementRef,
-      variant,
-      styles,
-      ...rest
-    } = this.props
+    const { as, margin, isUnstyled, elementRef, styles, ...rest } = this.props
 
-    if (!variant || variant === 'default' || variant === 'unstyled') {
-      return (
-        <View
-          {...passthroughProps(rest)}
-          css={styles.list}
-          as={as}
-          margin={margin}
-          elementRef={elementRef}
-          display="block"
-        >
-          {this.renderChildren()}
-        </View>
-      )
-    } else {
-      return <InlineList {...this.props}>{this.renderInlineChild()}</InlineList>
-    }
+    return (
+      <View
+        {...passthroughProps(rest)}
+        css={styles.list}
+        as={as}
+        margin={margin}
+        elementRef={elementRef}
+        display="block"
+      >
+        {this.renderChildren()}
+      </View>
+    )
   }
 }
 
