@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { containsActiveElement, findTabbable } from '@instructure/ui-dom-utils'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { Children, controllable } from '@instructure/ui-prop-types'
@@ -35,15 +36,15 @@ import { error } from '@instructure/console/macro'
 
 import { Page } from './Page'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle)
 class Pages extends Component {
   static propTypes = {
     children: Children.oneOf([Page]),
@@ -69,7 +70,12 @@ class Pages extends Component {
      * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
      * familiar CSS-like shorthand. For example: `margin="small auto large"`.
      */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -101,6 +107,10 @@ class Pages extends Component {
     this._contentId = uid('Pages')
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
   getChildContext() {
     return {
       history: this._history,
@@ -116,7 +126,7 @@ class Pages extends Component {
     this.props.onPageIndexChange(newPageIndex || 0, oldPageIndex)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextContext) {
     if (
       nextProps &&
       typeof nextProps.activePageIndex === 'number' &&
@@ -127,12 +137,13 @@ class Pages extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     this._timeouts.push(
       setTimeout(() => {
         !this.focused && this.focus()
       }, 0)
     )
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -184,7 +195,7 @@ class Pages extends Component {
       <View
         as="div"
         id={this._contentId}
-        className={styles.root}
+        css={this.props.styles.pages}
         margin={this.props.margin}
         role="region"
         elementRef={(el) => {
