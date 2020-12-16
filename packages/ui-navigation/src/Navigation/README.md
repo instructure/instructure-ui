@@ -20,7 +20,7 @@ example: true
         icon={<Img src={placeholderLogo(85, 85)} constrain="cover" />}
         label={<ScreenReaderContent>Home</ScreenReaderContent>}
         href="#"
-        theme={{
+        themeOverride={{
           backgroundColor: 'red',
           hoverBackgroundColor: 'blue'
         }}
@@ -53,6 +53,7 @@ example: true
     </Navigation>
   </div>
 ```
+
 ### Guidelines
 
 ```js

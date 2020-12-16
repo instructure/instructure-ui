@@ -21,19 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { testable } from '@instructure/ui-testable'
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 /**
 ---
@@ -41,10 +39,14 @@ parent: Navigation
 id: Navigation.Item
 ---
 **/
+@withStyle(generateStyle)
 @testable()
-@themeable(theme, styles)
 class NavigationItem extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The visual to display (ex. an Image, Logo, Avatar, or Icon)
      */
@@ -83,15 +85,18 @@ class NavigationItem extends Component {
     href: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles({ minimized: this.minimized })
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles({ minimized: this.minimized })
+  }
+
   renderLink() {
     const ElementType = getElementType(NavigationItem, this.props)
 
-    const { href, onClick, selected, icon, label } = this.props
-
-    const classes = classnames({
-      [styles.root]: true,
-      [styles.selected]: selected
-    })
+    const { href, onClick, icon, label } = this.props
 
     const props = omitProps(this.props, NavigationItem.propTypes)
 
@@ -100,14 +105,14 @@ class NavigationItem extends Component {
         {...props}
         href={href}
         onClick={onClick}
-        className={classes}
+        css={this.props.styles.navigationItem}
         aria-label={this.props.minimized ? label : null}
       >
-        <div className={styles.icon} aria-hidden="true">
+        <div css={this.props.styles.icon} aria-hidden="true">
           {icon}
         </div>
         {!this.props.minimized ? (
-          <div className={styles.label}>{label}</div>
+          <div css={this.props.styles.label}>{label}</div>
         ) : null}
       </ElementType>
     )

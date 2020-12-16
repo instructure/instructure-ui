@@ -21,13 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { testable } from '@instructure/ui-testable'
-import { themeable } from '@instructure/ui-themeable'
 import {
   controllable,
   Children as ChildrenPropTypes
@@ -35,11 +33,11 @@ import {
 import { omitProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { IconMoveStartLine } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { NavigationItem } from './NavigationItem'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 
@@ -48,10 +46,14 @@ const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 category: components
 ---
 **/
+@withStyle(generateStyle)
 @testable()
-@themeable(theme, styles)
 class Navigation extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * children of type Navigation.Item
      */
@@ -107,6 +109,14 @@ class Navigation extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.makeStyles({ minimized: this.minimized })
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles({ minimized: this.minimized })
+  }
+
   get minimized() {
     if (this.isControlled()) {
       return !!this.props.minimized
@@ -131,7 +141,7 @@ class Navigation extends Component {
       const navItem = safeCloneElement(child, {
         minimized: this.state.minimized
       })
-      return <li className={styles.list}>{navItem}</li>
+      return <li css={this.props.styles.list}>{navItem}</li>
     })
   }
 
@@ -146,20 +156,18 @@ class Navigation extends Component {
 
     const props = omitProps(this.props, Navigation.propTypes, ['minimized'])
 
-    const navClasses = classnames({
-      [styles.root]: true,
-      [styles.minimized]: this.minimized
-    })
-
     return (
-      <nav {...props} className={navClasses} aria-label={label}>
-        <ul className={styles.content}>{this.renderChildren()}</ul>
-        <div className={styles.toggle}>
+      <nav {...props} css={this.props.styles.navigation} aria-label={label}>
+        <ul css={this.props.styles.content}>{this.renderChildren()}</ul>
+        <div css={this.props.styles.toggle}>
           <NavigationItem
             aria-expanded={!this.minimized}
             onClick={this.handleNavToggle}
             icon={
-              <IconMoveStartLine className={styles.toggleIcon} inline={false} />
+              <IconMoveStartLine
+                css={this.props.styles.toggleIcon}
+                inline={false}
+              />
             }
             label={
               <ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>
