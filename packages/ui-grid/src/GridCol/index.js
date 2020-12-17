@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 // TODO: get numcols from theme config
 const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -42,10 +42,14 @@ parent: Grid
 id: Grid.Col
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyles)
 class GridCol extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.node,
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
@@ -92,113 +96,21 @@ class GridCol extends Component {
     elementRef: undefined
   }
 
-  startAtClass() {
-    return (
-      !!this.props.startAt &&
-      `startAt${capitalizeFirstLetter(this.props.startAt)}`
-    )
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
-  colSpacingClass() {
-    return `colSpacing${capitalizeFirstLetter(this.props.colSpacing)}`
-  }
-
-  rowSpacingClass() {
-    return `rowSpacing${capitalizeFirstLetter(this.props.rowSpacing)}`
-  }
-
-  breakpointClass(breakpoint) {
-    let { width } = this.props
-
-    if (width && typeof width === 'object') {
-      width = width[breakpoint]
-    }
-
-    if (!width) return
-
-    return `${breakpoint}--${width}`
-  }
-
-  breakpointOffsetClass(breakpoint) {
-    let { offset } = this.props
-
-    if (offset && typeof offset === 'object') {
-      offset = offset[breakpoint]
-    }
-
-    if (!offset) return
-
-    return `${breakpoint}-offset--${offset}`
-  }
-
-  enabledBreakpoints() {
-    const breakpoints = ['small', 'medium', 'large', 'x-large', null]
-    return breakpoints.slice(breakpoints.indexOf(this.props.startAt))
-  }
-
-  breakpointIsEnabled(breakpoint) {
-    return this.enabledBreakpoints().indexOf(breakpoint) >= 0
-  }
-
-  breakpointIsEnabledForWidth(breakpoint) {
-    return !!this.props.width && this.breakpointIsEnabled(breakpoint)
-  }
-
-  breakpointIsEnabledForOffset(breakpoint) {
-    return !!this.props.offset && this.breakpointIsEnabled(breakpoint)
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   render() {
-    const { children, visualDebug } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[this.startAtClass()]]: !!this.props.startAt,
-      [styles[`vAlign--${this.props.vAlign}`]]: true,
-      [styles[`textAlign--${this.props.textAlign}`]]: true,
-      [styles[this.colSpacingClass()]]: true,
-      [styles[this.rowSpacingClass()]]: true,
-
-      [styles.lastRow]: this.props.isLastRow,
-      [styles.lastCol]: this.props.isLastCol,
-
-      [styles[this.breakpointClass('small')]]: this.breakpointIsEnabledForWidth(
-        'small'
-      ),
-      [styles[
-        this.breakpointClass('medium')
-      ]]: this.breakpointIsEnabledForWidth('medium'),
-      [styles[this.breakpointClass('large')]]: this.breakpointIsEnabledForWidth(
-        'large'
-      ),
-      [styles[
-        this.breakpointClass('x-large')
-      ]]: this.breakpointIsEnabledForWidth('x-large'),
-
-      [styles[
-        this.breakpointOffsetClass('small')
-      ]]: this.breakpointIsEnabledForOffset('small'),
-      [styles[
-        this.breakpointOffsetClass('medium')
-      ]]: this.breakpointIsEnabledForOffset('medium'),
-      [styles[
-        this.breakpointOffsetClass('large')
-      ]]: this.breakpointIsEnabledForOffset('large'),
-      [styles[
-        this.breakpointOffsetClass('x-large')
-      ]]: this.breakpointIsEnabledForOffset('x-large'),
-
-      [styles.visualDebug]: visualDebug
-    }
+    const { children, styles } = this.props
 
     const props = omitProps(this.props, GridCol.propTypes)
 
     return (
-      <span
-        {...props}
-        ref={this.props.elementRef}
-        className={classnames(classes)}
-      >
+      <span {...props} ref={this.props.elementRef} css={styles.gridCol}>
         {children}
       </span>
     )
