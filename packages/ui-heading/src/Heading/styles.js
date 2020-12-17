@@ -31,11 +31,7 @@ import generateComponentTheme from './theme'
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (
-  theme,
-  themeOverride,
-  { level, color, border, margin }
-) => {
+const generateStyle = (theme, themeOverride, { level, color, border, as }) => {
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
   const levelStyles = {
@@ -92,28 +88,34 @@ const generateStyle = (
     none: {}
   }
 
+  const inputStyle = {
+    outline: '0',
+    appearance: 'none',
+    boxSizing: 'border-box',
+    background: 'none',
+    border: 'none',
+    borderRadius: '0',
+    padding: '0',
+    margin: '-0.375rem 0 0 0',
+    color: 'inherit',
+    height: 'auto',
+    width: '100%',
+    lineHeight: 'inherit',
+    textAlign: 'start',
+    boxShadow: 'none',
+    display: 'block',
+    '&:focus': { outline: 'none' }
+  }
+
   return {
     heading: {
       label: 'heading',
       lineHeight: componentTheme.lineHeight,
-      '& input': {
-        outline: '0',
-        appearance: 'none',
-        boxSizing: 'border-box',
-        background: 'none',
-        border: 'none',
-        borderRadius: '0',
-        padding: '0',
-        margin: '-0.375rem 0 0 0',
-        color: 'inherit',
-        height: 'auto',
-        width: '100%',
-        lineHeight: 'inherit',
-        textAlign: 'start',
-        boxShadow: 'none',
-        display: 'block',
-        '&:focus': { outline: 'none' }
-      },
+      margin: 0,
+
+      ...(as === 'input' && inputStyle),
+      '&[type]': inputStyle,
+
       ...levelStyles[level],
       ...colorStyles[color],
       ...borderStyles[border]
