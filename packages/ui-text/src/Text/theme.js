@@ -22,32 +22,45 @@
  * SOFTWARE.
  */
 
-//  TODO: delete error value once it has been removed in v8.0.0
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, spacing, key: themeName } = theme
 
-export default function generator({ typography, colors, spacing }) {
-  return {
+  const themeSpecificStyle = {
+    canvas: {
+      primaryColor: theme['ic-brand-font-color-dark'],
+      brandColor: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
     ...typography,
 
-    primaryInverseColor: colors.textLightest,
-    primaryColor: colors.textDarkest,
+    primaryInverseColor: colors?.textLightest,
+    primaryColor: colors?.textDarkest,
 
-    secondaryColor: colors.textDark,
-    secondaryInverseColor: colors.textLight,
+    secondaryColor: colors?.textDark,
+    secondaryInverseColor: colors?.textLight,
 
-    warningColor: colors.textWarning,
-    brandColor: colors.textBrand,
-    errorColor: colors.textDanger,
-    dangerColor: colors.textDanger,
-    successColor: colors.textSuccess,
-    alertColor: colors.textAlert,
+    warningColor: colors?.textWarning,
+    brandColor: colors?.textBrand,
+    dangerColor: colors?.textDanger,
+    successColor: colors?.textSuccess,
+    alertColor: colors?.textAlert,
 
     paragraphMargin: `${spacing.medium} 0`
   }
-}
 
-generator.canvas = function (variables) {
   return {
-    primaryColor: variables['ic-brand-font-color-dark'],
-    brandColor: variables['ic-brand-primary']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
