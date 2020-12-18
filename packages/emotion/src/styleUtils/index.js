@@ -140,6 +140,8 @@ const withStyle = decorator((ComposedComponent, generateStyle) => {
 
   hoistNonReactStatics(WithStyle, ComposedComponent)
 
+  WithStyle.propTypes = ComposedComponent.propTypes
+
   if (process.env.NODE_ENV !== 'production') {
     WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
   }
