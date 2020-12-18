@@ -42,7 +42,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
   }
   return {
     ratingIcon: {
-      label: 'rating__icon',
+      label: 'ratingIcon',
       display: 'inline-block',
       verticalAlign: 'bottom',
       margin: `0 ${componentTheme.iconMargin}`,
@@ -55,7 +55,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
       }
     },
     icon: {
-      label: 'icon',
+      label: 'ratingIcon__icon',
       display: 'inline-block',
       verticalAlign: 'bottom',
       ...sizeVariants[size],
