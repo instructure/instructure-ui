@@ -22,12 +22,30 @@
  * SOFTWARE.
  */
 
-export default function ({ spacing, media }) {
-  return {
-    spacingSmall: spacing.small,
-    spacingMedium: spacing.medium,
-    spacingLarge: spacing.large,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { spacing, media, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    spacingSmall: spacing?.small,
+    spacingMedium: spacing?.medium,
+    spacingLarge: spacing?.large,
 
     ...media
   }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
+  }
 }
+
+export default generateComponentTheme
