@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { capitalizeFirstLetter } from '@instructure/ui-utils'
 import {
@@ -40,17 +39,22 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { GridRow } from '../GridRow'
 import { GridCol } from '../GridCol'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyles)
 class Grid extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: ChildrenPropTypes.oneOf([GridRow, ScreenReaderContent]),
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
@@ -79,20 +83,22 @@ class Grid extends Component {
   static Row = GridRow
   static Col = GridCol
 
-  startAtClass() {
-    return (
-      !!this.props.startAt &&
-      `startAt${capitalizeFirstLetter(this.props.startAt)}`
-    )
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   renderChildren() {
+    const { styles, makeStyles, ...props } = this.props
     const children = Children.toArray(this.props.children)
 
     return children.map((child, index) => {
       if (matchComponentTypes(child, [GridRow])) {
         return safeCloneElement(child, {
-          ...pickProps(this.props, Grid.propTypes),
+          ...pickProps(props, Grid.propTypes),
           ...child.props /* child props should override parent */,
           isLastRow: index + 1 === children.length
         })
@@ -103,16 +109,12 @@ class Grid extends Component {
   }
 
   render() {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.startAtClass()]]: !!this.props.startAt,
-      [styles.visualDebug]: this.props.visualDebug
-    }
+    const { styles, ...restProps } = this.props
 
-    const props = omitProps(this.props, Grid.propTypes)
+    const props = omitProps(restProps, Grid.propTypes)
 
     return (
-      <span {...props} className={classnames(classes)}>
+      <span {...props} css={styles.grid}>
         {this.renderChildren()}
       </span>
     )
