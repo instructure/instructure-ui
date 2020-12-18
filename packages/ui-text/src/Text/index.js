@@ -22,29 +22,21 @@
  * SOFTWARE.
  */
 
-//  TODO: remove color comment description once the error color is removed
-
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
-import {
-  passthroughProps,
-  getElementType,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-
-@themeable(theme, styles)
+@withStyle(generateStyle)
 class Text extends Component {
   static propTypes = {
     /**
@@ -53,24 +45,19 @@ class Text extends Component {
     as: PropTypes.elementType,
     children: PropTypes.node,
     /**
-     * One of: primary, secondary, brand, success, warning, danger, alert, primary-inverse, secondary-inverse
+     * Color of the text
      */
-    color: deprecated.deprecatePropValues(
-      PropTypes.oneOf([
-        'primary',
-        'secondary',
-        'brand',
-        'success',
-        'warning',
-        'error',
-        'danger',
-        'alert',
-        'primary-inverse',
-        'secondary-inverse'
-      ]),
-      ['error'],
-      'It will be removed in version 8.0.0. Use `danger` instead.'
-    ),
+    color: PropTypes.oneOf([
+      'primary',
+      'secondary',
+      'brand',
+      'success',
+      'warning',
+      'danger',
+      'alert',
+      'primary-inverse',
+      'secondary-inverse'
+    ]),
     elementRef: PropTypes.func,
     fontStyle: PropTypes.oneOf(['italic', 'normal']),
     letterSpacing: PropTypes.oneOf(['normal', 'condensed', 'expanded']),
@@ -90,7 +77,11 @@ class Text extends Component {
       'lowercase'
     ]),
     weight: PropTypes.oneOf(['normal', 'light', 'bold']),
-    wrap: PropTypes.oneOf(['normal', 'break-word'])
+    wrap: PropTypes.oneOf(['normal', 'break-word']),
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -107,35 +98,23 @@ class Text extends Component {
     weight: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const {
-      wrap,
-      weight,
-      fontStyle,
-      size,
-      lineHeight,
-      letterSpacing,
-      transform,
-      color,
-      children
-    } = this.props
+    const { children } = this.props
 
     const ElementType = getElementType(Text, this.props)
 
     return (
       <ElementType
         {...passthroughProps(this.props)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[size]]: size,
-          [styles[`wrap-${wrap}`]]: wrap,
-          [styles[`weight-${weight}`]]: weight,
-          [styles[`style-${fontStyle}`]]: fontStyle,
-          [styles[`transform-${transform}`]]: transform,
-          [styles[`lineHeight-${lineHeight}`]]: lineHeight,
-          [styles[`letterSpacing-${letterSpacing}`]]: letterSpacing,
-          [styles[`color-${color}`]]: color
-        })}
+        css={this.props.styles.text}
         ref={this.props.elementRef}
       >
         {children}
