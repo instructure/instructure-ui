@@ -26,7 +26,6 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { capitalizeFirstLetter } from '@instructure/ui-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
