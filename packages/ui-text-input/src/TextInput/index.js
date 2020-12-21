@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
 import {
@@ -37,10 +37,9 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { Flex } from '@instructure/ui-flex'
 import { uid } from '@instructure/uid'
-import { themeable } from '@instructure/ui-themeable'
-
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
+import { testable } from '@instructure/ui-testable'
 
 /**
 ---
@@ -48,12 +47,13 @@ category: components
 tags: form, field
 ---
 **/
+@withStyle(generateStyle)
 @deprecated('8.0.0', {
   label: 'renderLabel',
   required: 'isRequired',
   inline: 'display'
 })
-@themeable(theme, styles)
+@testable()
 class TextInput extends Component {
   static propTypes = {
     /**
@@ -179,8 +179,13 @@ class TextInput extends Component {
     /**
      * __Deprecated - use `display`__
      */
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
     /* eslint-enable react/require-default-props */
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -210,10 +215,27 @@ class TextInput extends Component {
   }
 
   constructor(props) {
-    super()
+    super(props)
     this.state = { hasFocus: false }
     this._defaultId = uid('TextInput')
     this._messagesId = uid('TextInput-messages')
+  }
+
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    const { interaction } = this
+    return {
+      disabled: interaction === 'disabled',
+      invalid: this.invalid,
+      focused: this.state.hasFocus
+    }
   }
 
   focus() {
@@ -291,12 +313,6 @@ class TextInput extends Component {
 
     const { interaction } = this
 
-    const inputClasses = {
-      [styles.input]: true,
-      [styles[size]]: size,
-      [styles[`textAlign--${textAlign}`]]: textAlign
-    }
-
     let descriptionIds = ''
     if (props['aria-describedby']) {
       descriptionIds = `${props['aria-describedby']}`
@@ -312,7 +328,7 @@ class TextInput extends Component {
     return (
       <input
         {...props}
-        className={classnames(inputClasses)}
+        css={this.props.styles.textInput}
         defaultValue={defaultValue}
         value={value}
         placeholder={placeholder}
@@ -347,16 +363,7 @@ class TextInput extends Component {
       shouldNotWrap
     } = this.props
 
-    const { interaction } = this
-
     const renderBeforeOrAfter = renderBeforeInput || renderAfterInput || icon
-
-    const facadeClasses = {
-      [styles.facade]: true,
-      [styles.disabled]: interaction === 'disabled',
-      [styles.invalid]: this.invalid,
-      [styles.focused]: this.state.hasFocus
-    }
 
     return (
       <FormField
@@ -369,7 +376,7 @@ class TextInput extends Component {
         inputContainerRef={inputContainerRef}
         layout={this.props.layout} // eslint-disable-line react/prop-types
       >
-        <span className={classnames(facadeClasses)}>
+        <span css={this.props.styles.facade}>
           {renderBeforeOrAfter ? (
             <Flex wrap={shouldNotWrap ? 'no-wrap' : 'wrap'}>
               {renderBeforeInput && (
