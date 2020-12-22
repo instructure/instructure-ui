@@ -22,34 +22,51 @@
  * SOFTWARE.
  */
 
-export default function generator({
-  borders,
-  colors,
-  spacing,
-  typography,
-  stacking
-}) {
-  return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    color: colors.textLightest,
-    fontSize: typography.fontSizeXSmall,
-    colorDanger: colors.textDanger,
-    colorSuccess: colors.textSuccess,
-    colorPrimary: colors.textBrand,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const {
+    borders,
+    colors,
+    spacing,
+    typography,
+    stacking,
+    key: themeName
+  } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      colorPrimary: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    color: colors?.textLightest,
+    fontSize: typography?.fontSizeXSmall,
+    colorDanger: colors?.textDanger,
+    colorSuccess: colors?.textSuccess,
+    colorPrimary: colors?.textBrand,
     size: '1.25rem',
     countOffset: '0.5rem',
     notificationOffset: '0.125rem',
-    notificationZIndex: stacking.above,
-    sizeNotification: spacing.small,
+    notificationZIndex: stacking?.above,
+    sizeNotification: spacing?.small,
     borderRadius: '999rem',
-    padding: spacing.xxSmall,
-    pulseBorderThickness: borders.widthMedium
+    padding: spacing?.xxSmall,
+    pulseBorderThickness: borders?.widthMedium
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator['canvas'] = function (variables) {
-  return {
-    colorPrimary: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

@@ -29,8 +29,6 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import { Badge } from '../index'
 import { BadgeLocator } from '../BadgeLocator'
 
-import styles from '../styles.css'
-
 describe('<Badge />', () => {
   it('should be accessible', async () => {
     await mount(
@@ -68,18 +66,19 @@ describe('<Badge />', () => {
     expect(await badge.find(':contains(99 +)')).to.exist()
   })
 
-  it('should change postion based on the placement prop', async () => {
-    await mount(
-      <Badge count={3} placement="bottom start">
-        <button type="button">Inbox</button>
-      </Badge>
-    )
-
-    const badge = await BadgeLocator.find()
-
-    expect(await badge.find(`.${styles['positioned--bottom']}`)).to.exist()
-    expect(await badge.find(`.${styles['positioned--start']}`)).to.exist()
-  })
+  // Todo: test this with VRT
+  // it('should change postion based on the placement prop', async () => {
+  //   await mount(
+  //     <Badge count={3} placement="bottom start">
+  //       <button type="button">Inbox</button>
+  //     </Badge>
+  //   )
+  //
+  //   const badge = await BadgeLocator.find()
+  //
+  //   expect(await badge.find(`.${styles['positioned--bottom']}`)).to.exist()
+  //   expect(await badge.find(`.${styles['positioned--start']}`)).to.exist()
+  // })
 
   it('should not render a wrapper for a standalone Badge', async () => {
     await mount(
