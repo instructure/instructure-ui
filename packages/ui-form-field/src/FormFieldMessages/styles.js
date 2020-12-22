@@ -22,6 +22,31 @@
  * SOFTWARE.
  */
 
-export default function () {
-  return {}
+import generateComponentTheme from './theme'
+
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
+
+  return {
+    formFieldMessages: {
+      label: 'formFieldMessages',
+      padding: 0,
+      display: 'block',
+      margin: `calc(-1 * ${componentTheme.topMargin}) 0 0 0`
+    },
+    message: {
+      label: 'formFieldMessages__message',
+      display: 'block'
+    }
+  }
 }
+
+export default generateStyle

@@ -23,25 +23,37 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { spacing, key: themeName } = theme
-
-  const themeSpecificStyle = {}
-
-  const componentVariables = {
-    topMargin: spacing?.xxSmall
-  }
+const generateStyle = (theme, themeOverride, props, state) => {
+  const { inline } = props
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    formFieldLayout: {
+      label: 'formFieldLayout',
+      all: 'initial',
+      border: '0',
+      padding: '0',
+      margin: '0',
+      minWidth: '0',
+      direction: 'inherit',
+      textAlign: 'start',
+      opacity: 'inherit',
+      display: 'block',
+      width: '100%',
+
+      ...(inline && {
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        width: 'auto'
+      })
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

@@ -22,26 +22,40 @@
  * SOFTWARE.
  */
 
+import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
+import generateComponentTheme from './theme'
+
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { spacing, key: themeName } = theme
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
-  const themeSpecificStyle = {}
+  const { children } = props
 
-  const componentVariables = {
-    topMargin: spacing?.xxSmall
-  }
+  const hasContent = hasVisibleChildren(children)
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    formFieldLabel: {
+      label: 'formFieldLabel',
+      all: 'initial',
+      display: 'block',
+      ...(hasContent && {
+        color: componentTheme.color,
+        fontFamily: componentTheme.fontFamily,
+        fontWeight: componentTheme.fontWeight,
+        fontSize: componentTheme.fontSize,
+        lineHeight: componentTheme.lineHeight,
+        margin: 0,
+        textAlign: 'inherit'
+      })
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

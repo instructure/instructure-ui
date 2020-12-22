@@ -105,6 +105,7 @@ class Select extends Component {
         renderBeforeInput={renderBeforeInput}
         inputValue={inputValue}
         isShowingOptions={isShowing}
+        onInputChange={() => {}}
         onRequestShowOptions={(e) => {
           this.setState({ isShowing: true })
         }}

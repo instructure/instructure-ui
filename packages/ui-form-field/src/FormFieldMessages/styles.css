@@ -1,9 +1,0 @@
-.root {
-  padding: 0;
-  display: block;
-  margin: calc(-1 * var(--topMargin)) 0 0 0;
-}
-
-.message {
-  display: block;
-}
