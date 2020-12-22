@@ -29,6 +29,7 @@
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@instructure/console": "^7.3.1",
+    "@instructure/emotion": "^7.3.1",
     "@instructure/ui-a11y-content": "^7.3.1",
     "@instructure/ui-a11y-utils": "^7.3.1",
     "@instructure/ui-grid": "^7.3.1",
@@ -37,7 +38,6 @@
     "@instructure/ui-themeable": "^7.3.1",
     "@instructure/ui-utils": "^7.3.1",
     "@instructure/uid": "^7.3.1",
-    "classnames": "^2",
     "prop-types": "^15"
   },
   "peerDependencies": {
