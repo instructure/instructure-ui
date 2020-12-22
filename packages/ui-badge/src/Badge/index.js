@@ -21,19 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Children, Component } from 'react'
+
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -41,10 +43,14 @@ category: components
 ---
 **/
 
+@withStyle(generateStyles)
 @testable()
-@themeable(theme, styles)
 class Badge extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     count: PropTypes.number,
     /**
      * The number at which the count gets truncated by
@@ -108,6 +114,14 @@ class Badge extends Component {
     this._defaultId = uid('Badge')
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   countOverflow() {
     const { count, countUntil } = this.props
 
@@ -142,31 +156,12 @@ class Badge extends Component {
   }
 
   renderBadge() {
-    const {
-      count,
-      margin,
-      pulse,
-      placement,
-      standalone,
-      type,
-      variant
-    } = this.props
+    const { count, margin, standalone, type, styles } = this.props
 
     return (
       <View
         margin={standalone ? margin : 'none'}
-        className={classnames({
-          [styles.root]: true,
-          [styles[type]]: type,
-          [styles[variant]]: variant,
-          [styles['positioned--top']]: placement.indexOf('top') > -1,
-          [styles['positioned--bottom']]: placement.indexOf('bottom') > -1,
-          [styles['positioned--start']]: placement.indexOf('start') > -1,
-          [styles['positioned--end']]: placement.indexOf('end') > -1,
-          [styles['positioned--center']]: placement.indexOf('center') > -1,
-          [styles.standalone]: standalone,
-          [styles.pulse]: pulse
-        })}
+        css={styles.badge}
         title={type === 'count' && this.countOverflow() ? count : null}
         id={!standalone ? this._defaultId : null}
         display={standalone ? 'inline-block' : 'block'}
@@ -185,7 +180,7 @@ class Badge extends Component {
   }
 
   render() {
-    const { margin, elementRef, standalone, as } = this.props
+    const { margin, elementRef, standalone, as, styles } = this.props
 
     if (standalone) {
       return this.renderBadge()
@@ -195,7 +190,7 @@ class Badge extends Component {
           as={as}
           margin={margin}
           elementRef={elementRef}
-          className={styles.wrapper}
+          css={styles.wrapper}
           display="inline-block"
         >
           {this.renderChildren()}
