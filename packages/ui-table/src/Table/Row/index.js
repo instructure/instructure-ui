@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import {
   omitProps,
   matchComponentTypes,
@@ -35,12 +34,13 @@ import {
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
+
 import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
 import { Cell } from '../Cell'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
@@ -48,13 +48,17 @@ parent: Table
 id: Table.Row
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyles)
 class Row extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
      * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
      */
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: ChildrenPropTypes.oneOf([ColHeader, RowHeader, Cell]),
     hover: PropTypes.bool,
     isStacked: PropTypes.bool,
@@ -68,18 +72,22 @@ class Row extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { children, hover, isStacked, headers } = this.props
+    const { children, styles, isStacked, headers } = this.props
 
     return (
       <View
         {...View.omitViewProps(omitProps(this.props, Row.propTypes), Row)}
         as={isStacked ? 'div' : 'tr'}
-        className={classnames({
-          [styles.root]: true,
-          [styles.hover]: hover,
-          [styles.stacked]: isStacked
-        })}
+        css={styles.row}
         role={isStacked ? 'row' : null}
       >
         {Children.toArray(children)
