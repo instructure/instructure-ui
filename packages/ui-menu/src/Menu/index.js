@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
@@ -38,7 +38,7 @@ import {
   matchComponentTypes
 } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -47,18 +47,21 @@ import { MenuItem } from './MenuItem'
 import { MenuItemGroup } from './MenuItemGroup'
 import { MenuItemSeparator } from './MenuItemSeparator'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle)
 @testable()
-@themeable(theme, styles)
 class Menu extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu`
      */
@@ -216,6 +219,14 @@ class Menu extends Component {
   constructor(props) {
     super(props)
     this._id = this.props.id || uid('Menu')
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps) {
+    this.props.makeStyles()
   }
 
   static childContextTypes = MenuContext.types
@@ -523,7 +534,7 @@ class Menu extends Component {
         role="menu"
         aria-label={label}
         tabIndex="0"
-        className={styles.menu}
+        css={this.props.styles.menu}
         aria-labelledby={labelledBy || (trigger && this._labelId)}
         aria-controls={controls}
         aria-disabled={disabled ? 'true' : null}

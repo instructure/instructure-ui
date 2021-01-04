@@ -22,48 +22,27 @@
  * SOFTWARE.
  */
 
+import generateComponentTheme from './theme'
 /**
- * Generates the theme object for the component from the theme and provided additional information
+ * Generates the style object from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, typography, spacing, key: themeName } = theme
-
-  const themeSpecificStyle = {
-    canvas: {
-      labelColor: theme['ic-brand-font-color-dark'],
-      iconColor: theme['ic-brand-font-color-dark'],
-      activeBackground: theme['ic-brand-primary']
-    }
-  }
-
-  const componentVariables = {
-    padding: `${spacing?.xSmall} ${spacing?.small}`,
-
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
-    lineHeight: typography?.lineHeightCondensed,
-    fontSize: typography?.fontSizeMedium,
-    labelPadding: spacing?.large,
-
-    labelColor: colors?.textDarkest,
-    background: colors?.backgroundLightest,
-
-    iconColor: colors?.textDarkest,
-    iconPadding: spacing?.small,
-
-    activeBackground: colors?.backgroundBrand,
-    activeLabelColor: colors?.textLightest,
-    activeIconColor: colors?.textLightest
-  }
+const generateStyle = (theme, themeOverride) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    menuItemSeparator: {
+      label: 'menuItemSeparator',
+      height: componentTheme.height,
+      margin: componentTheme.margin,
+      overflow: 'hidden',
+      background: componentTheme.background
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
