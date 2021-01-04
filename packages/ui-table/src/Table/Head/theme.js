@@ -22,13 +22,31 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, typography }) {
-  return {
-    fontSize: typography.fontSizeMedium,
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, key: themeName } = theme
 
-    color: colors.textDarkest,
-    background: colors.backgroundLightest
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme

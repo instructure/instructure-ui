@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import {
   omitProps,
   matchComponentTypes,
@@ -37,8 +37,9 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { IconCheckLine } from '@instructure/ui-icons'
 import { warn } from '@instructure/console'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 import { Row } from '../Row'
 import { ColHeader } from '../ColHeader'
@@ -49,13 +50,17 @@ parent: Table
 id: Table.Head
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyles)
 class Head extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
      * `Table.Row`
      */
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: ChildrenPropTypes.oneOf([Row]),
     isStacked: PropTypes.bool,
     renderSortLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
@@ -79,6 +84,10 @@ class Head extends Component {
     return sortable
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
   componentDidUpdate() {
     if (this.isSortable && typeof this.props.renderSortLabel === 'undefined') {
       warn(
@@ -86,6 +95,7 @@ class Head extends Component {
         '[Table.Head] The `renderSortLabel` prop should be provided when Table is sortable.'
       )
     }
+    this.props.makeStyles()
   }
 
   renderSelect() {
@@ -158,12 +168,12 @@ class Head extends Component {
   }
 
   render() {
-    const { children, isStacked } = this.props
+    const { children, isStacked, styles } = this.props
 
     return isStacked ? (
       this.renderSelect()
     ) : (
-      <thead {...omitProps(this.props, Head.propTypes)} className={styles.root}>
+      <thead {...omitProps(this.props, Head.propTypes)} css={styles.head}>
         {Children.map(children, (child) =>
           matchComponentTypes(child, [Row]) ? child : null
         )}
