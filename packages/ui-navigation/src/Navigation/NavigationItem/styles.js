@@ -56,10 +56,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
             backgroundColor: componentTheme.selectedBackgroundColor,
             fill: componentTheme.selectedIconColor,
             color: componentTheme.selectedFontColor,
-            '&:active ': {
-              backgroundColor: componentTheme.selectedBackgroundColor
-            },
-            '&:hover': {
+            '&:active, &:hover': {
               backgroundColor: componentTheme.selectedBackgroundColor
             },
             '&:focus': {
