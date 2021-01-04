@@ -22,32 +22,29 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { Transition } from '@instructure/ui-motion'
-
-import styles from './styles.css'
-import theme from './theme'
-
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle)
 @testable()
 @bidirectional()
-@themeable(theme, styles)
 class Tray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -61,7 +58,7 @@ class Tray extends Component {
     /**
      * Placement to determine where the `<Tray />` should display in the viewport
      */
-    placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end']),
+    placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end', 'center']),
 
     /**
      * Whether or not the `<Tray />` is open
@@ -170,7 +167,12 @@ class Tray extends Component {
     /**
      * Should the `<Tray />` have a box shadow
      */
-    shadow: PropTypes.bool
+    shadow: PropTypes.bool,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -204,10 +206,15 @@ class Tray extends Component {
     transitioning: false
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.open !== prevProps.open) {
       this.setState({ transitioning: true })
     }
+    this.props.makeStyles()
   }
 
   get placement() {
@@ -251,8 +258,6 @@ class Tray extends Component {
 
   handlePortalOpen = (DOMNode) => {
     this.DOMNode = DOMNode
-    // We apply the theme here because now we have a DOM node (provided by Portal)
-    DOMNode && this.applyTheme(DOMNode)
   }
 
   render() {
@@ -319,13 +324,7 @@ class Tray extends Component {
           >
             <span
               {...omitProps(props, Tray.propTypes)}
-              className={classnames({
-                [styles.root]: true,
-                [styles.border]: border,
-                [styles.shadow]: shadow,
-                [styles[size]]: true,
-                [styles[`placement--${this.props.placement}`]]: true
-              })}
+              css={this.props.styles.tray}
               ref={contentRef}
             >
               {this.state.transitioning ? (
@@ -343,7 +342,7 @@ class Tray extends Component {
                   liveRegion={liveRegion}
                   onDismiss={onDismiss}
                 >
-                  <div className={styles.content}>{children}</div>
+                  <div css={this.props.styles.content}>{children}</div>
                 </Dialog>
               )}
             </span>

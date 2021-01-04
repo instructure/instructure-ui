@@ -22,18 +22,33 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, breakpoints, shadows, stacking, borders }) {
-  return {
-    background: colors.backgroundLightest,
-    borderColor: colors.borderMedium,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    boxShadow: shadows.depth3,
-    xSmallWidth: breakpoints.xSmall,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, borders, shadows, breakpoints, stacking } = theme
+
+  const componentVariables = {
+    background: colors?.backgroundLightest,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style,
+    boxShadow: shadows?.depth3,
+    xSmallWidth: breakpoints?.xSmall,
     smallWidth: '20em', // 368px
-    regularWidth: breakpoints.small,
-    mediumWidth: breakpoints.medium,
-    largeWidth: breakpoints.large,
-    zIndex: stacking.topmost
+    regularWidth: breakpoints?.small,
+    mediumWidth: breakpoints?.medium,
+    largeWidth: breakpoints?.large,
+    zIndex: stacking?.topmost
+  }
+
+  return {
+    ...componentVariables,
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
