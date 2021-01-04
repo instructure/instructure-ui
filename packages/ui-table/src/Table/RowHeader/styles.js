@@ -22,26 +22,36 @@
  * SOFTWARE.
  */
 
-.root {
-  font-size: var(--fontSize);
-  font-family: var(--fontFamily);
-  font-weight: bold;
-  color: var(--color);
-  background: var(--background);
-  box-sizing: border-box;
-  vertical-align: middle;
-  line-height: var(--lineHeight);
-  padding: var(--padding);
+import generateComponentTheme from './theme'
+
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
+
+  const { textAlign } = props
+
+  return {
+    rowHeader: {
+      label: 'rowHeader',
+      fontSize: componentTheme.fontSize,
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: 'bold',
+      color: componentTheme.color,
+      background: componentTheme.background,
+      boxSizing: 'border-box',
+      verticalAlign: 'middle',
+      lineHeight: componentTheme.lineHeight,
+      padding: componentTheme.padding,
+      ...(textAlign && { textAlign })
+    }
+  }
 }
 
-.textAlign--start {
-  text-align: start;
-}
-
-.textAlign--center {
-  text-align: center;
-}
-
-.textAlign--end {
-  text-align: end;
-}
+export default generateStyle
