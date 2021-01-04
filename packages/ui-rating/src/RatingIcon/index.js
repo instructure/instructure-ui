@@ -31,7 +31,7 @@ import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import generateStyle from './style'
+import generateStyle from './styles'
 
 /**
 ---

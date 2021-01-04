@@ -102,11 +102,18 @@ describe('<Rating />', async () => {
 
   describe('when passing down props to View', async () => {
     const allowedProps = {
-      margin: 'small'
+      margin: 'small',
+      dir: 'rtl'
     }
 
     Object.keys(View.propTypes)
-      .filter((prop) => prop !== 'theme' && prop !== 'children')
+      .filter(
+        (prop) =>
+          prop !== 'theme' &&
+          prop !== 'children' &&
+          prop !== 'makeStyles' &&
+          prop !== 'styles'
+      )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
