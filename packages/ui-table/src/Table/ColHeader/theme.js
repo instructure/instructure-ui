@@ -22,22 +22,40 @@
  * SOFTWARE.
  */
 
-export default function generator({ typography, colors, borders, spacing }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { typography, colors, borders, spacing, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+
+    borderColor: colors?.borderMedium,
+
+    lineHeight: typography?.lineHeightCondensed,
+    padding: `${spacing?.xSmall} ${spacing?.small}`,
+
+    focusOutlineColor: colors?.borderBrand,
+    focusOutlineWidth: borders?.widthMedium,
+    focusOutlineStyle: borders?.style
+  }
+
   return {
-    fontSize: typography.fontSizeMedium,
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-
-    color: colors.textDarkest,
-    background: colors.backgroundLightest,
-
-    borderColor: colors.borderMedium,
-
-    lineHeight: typography.lineHeightCondensed,
-    padding: `${spacing.xSmall} ${spacing.small}`,
-
-    focusOutlineColor: colors.borderBrand,
-    focusOutlineWidth: borders.widthMedium,
-    focusOutlineStyle: borders.style
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
