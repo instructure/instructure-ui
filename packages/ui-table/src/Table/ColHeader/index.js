@@ -22,19 +22,19 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import {
   IconMiniArrowUpLine,
   IconMiniArrowDownLine
 } from '@instructure/ui-icons'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -42,10 +42,14 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyles)
 class ColHeader extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * A unique id for this column. When sortable table is in stacked layout,
      * id is also used as option in combobox.
@@ -82,6 +86,14 @@ class ColHeader extends Component {
     scope: 'col'
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   handleClick = (event) => {
     const { id, onRequestSort } = this.props
 
@@ -110,20 +122,16 @@ class ColHeader extends Component {
     const {
       onRequestSort,
       width,
-      textAlign,
       children,
       sortDirection,
-      scope
+      scope,
+      styles
     } = this.props
 
     return (
       <th
         {...omitProps(this.props, ColHeader.propTypes)}
-        className={classnames({
-          [styles.root]: true,
-          [styles.header]: !onRequestSort,
-          [styles[`textAlign--${textAlign}`]]: true
-        })}
+        css={styles.colHeader}
         style={{
           width
         }}
@@ -131,14 +139,7 @@ class ColHeader extends Component {
         aria-sort={sortDirection}
       >
         {onRequestSort && (
-          <button
-            onClick={this.handleClick}
-            className={classnames({
-              [styles.header]: true,
-              [styles.button]: true,
-              [styles[`flexDirection--${textAlign}`]]: true
-            })}
-          >
+          <button onClick={this.handleClick} css={styles.button}>
             <div>
               {callRenderProp(children)}
               {this.renderSortArrow()}
