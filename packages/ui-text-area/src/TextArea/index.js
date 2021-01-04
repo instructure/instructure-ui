@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
@@ -35,22 +35,20 @@ import {
   requestAnimationFrame
 } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
+import { withStyle, jsx } from '@instructure/emotion'
 import { uid } from '@instructure/uid'
 import { px } from '@instructure/ui-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle)
 @testable()
-@themeable(theme, styles)
 class TextArea extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
@@ -118,7 +116,12 @@ class TextArea extends Component {
     /**
      * when used with the `value` prop, the component will not control its own state
      */
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -150,10 +153,12 @@ class TextArea extends Component {
 
   componentDidMount() {
     this.autoGrow()
+    this.props.makeStyles()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     this.autoGrow()
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -176,8 +181,7 @@ class TextArea extends Component {
 
   _textareaResize = (evt) => {
     const textareaHeight = this._textarea.style.height
-
-    if (textareaHeight != this._height) {
+    if (textareaHeight !== '' && textareaHeight !== this._height) {
       this._manuallyResized = true
       this._textarea.style.overflowY = 'auto'
 
@@ -215,7 +219,6 @@ class TextArea extends Component {
     if (!this._textarea || this._manuallyResized) {
       return
     }
-
     const offset = this._textarea.offsetHeight - this._textarea.clientHeight
     let height = ''
 
@@ -248,7 +251,7 @@ class TextArea extends Component {
       this._container.style.minHeight = height
     }
 
-    this._height = height
+    this._height = height // string type, e.g. '55px'
     this._textarea.style.height = height
     this._textarea.scrollTop = this._textarea.scrollHeight
   }
@@ -317,17 +320,10 @@ class TextArea extends Component {
       height,
       maxHeight,
       textareaRef,
-      resize,
-      size
+      resize
     } = this.props
 
     const props = omitProps(this.props, TextArea.propTypes)
-
-    const classes = {
-      [styles.textarea]: true,
-      [styles[size]]: true,
-      [styles.disabled]: disabled
-    }
 
     const style = {
       width: width,
@@ -352,7 +348,7 @@ class TextArea extends Component {
         aria-required={required}
         aria-invalid={this.invalid ? 'true' : null}
         disabled={disabled || readOnly}
-        className={classnames(classes)}
+        css={this.props.styles.textArea}
         onChange={this.handleChange}
       />
     )
@@ -367,7 +363,7 @@ class TextArea extends Component {
         }}
       >
         <div
-          className={styles.layout}
+          css={this.props.styles.textAreaLayout}
           style={{
             width: width,
             maxHeight: maxHeight
@@ -376,7 +372,7 @@ class TextArea extends Component {
         >
           {textarea}
           {!disabled && !readOnly ? (
-            <span className={styles.outline} aria-hidden="true"></span>
+            <span css={this.props.styles.textAreaOutline} aria-hidden="true" />
           ) : null}
         </div>
       </FormField>

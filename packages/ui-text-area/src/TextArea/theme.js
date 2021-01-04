@@ -22,53 +22,63 @@
  * SOFTWARE.
  */
 
-export default function generator({
-  colors,
-  borders,
-  spacing,
-  typography,
-  forms
-}) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, borders, spacing, forms, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark'],
+      focusOutlineColor: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    color: colors?.textDarkest,
+
+    background: colors?.backgroundLightest,
+
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style,
+    borderTopColor: colors?.borderMedium,
+    borderRightColor: colors?.borderMedium,
+    borderBottomColor: colors?.borderMedium,
+    borderLeftColor: colors?.borderMedium,
+    borderRadius: borders?.radiusMedium,
+
+    padding: spacing?.small,
+
+    focusOutlineColor: colors?.borderBrand,
+    focusOutlineWidth: borders?.widthMedium,
+    focusOutlineStyle: borders?.style,
+
+    errorBorderColor: colors?.borderDanger,
+    errorOutlineColor: colors?.borderDanger,
+
+    placeholderColor: colors?.textDark,
+
+    smallFontSize: typography?.fontSizeSmall,
+    smallHeight: forms?.inputHeightSmall,
+
+    mediumFontSize: typography?.fontSizeMedium,
+    mediumHeight: forms?.inputHeightMedium,
+
+    largeFontSize: typography?.fontSizeLarge,
+    largeHeight: forms?.inputHeightLarge
+  }
+
   return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    color: colors.textDarkest,
-
-    background: colors.backgroundLightest,
-
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    borderTopColor: colors.borderMedium,
-    borderRightColor: colors.borderMedium,
-    borderBottomColor: colors.borderMedium,
-    borderLeftColor: colors.borderMedium,
-    borderRadius: borders.radiusMedium,
-
-    padding: spacing.small,
-
-    focusOutlineColor: colors.borderBrand,
-    focusOutlineWidth: borders.widthMedium,
-    focusOutlineStyle: borders.style,
-
-    errorBorderColor: colors.borderDanger,
-    errorOutlineColor: colors.borderDanger,
-
-    placeholderColor: colors.textDark,
-
-    smallFontSize: typography.fontSizeSmall,
-    smallHeight: forms.inputHeightSmall,
-
-    mediumFontSize: typography.fontSizeMedium,
-    mediumHeight: forms.inputHeightMedium,
-
-    largeFontSize: typography.fontSizeLarge,
-    largeHeight: forms.inputHeightLarge
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark'],
-    focusOutlineColor: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme
