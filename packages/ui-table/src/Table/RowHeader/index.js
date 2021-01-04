@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -39,10 +39,14 @@ parent: Table
 id: Table.RowHeader
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyles)
 class RowHeader extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     isStacked: PropTypes.bool,
     /**
@@ -57,8 +61,16 @@ class RowHeader extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { children, textAlign, isStacked } = this.props
+    const { children, isStacked, styles } = this.props
 
     return (
       <View
@@ -67,10 +79,7 @@ class RowHeader extends Component {
           RowHeader
         )}
         as={isStacked ? 'div' : 'th'}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`textAlign--${textAlign}`]]: textAlign
-        })}
+        css={styles.rowHeader}
         scope="row"
         role={isStacked ? 'rowheader' : null}
       >
