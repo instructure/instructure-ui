@@ -22,14 +22,29 @@
  * SOFTWARE.
  */
 
-export default function ({ breakpoints, colors, borders }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, breakpoints, borders } = theme
+
+  const componentVariables = {
+    minWidth: breakpoints?.xxSmall,
+    maxWidth: breakpoints?.xSmall,
+    background: colors?.backgroundLightest,
+    focusBorderStyle: borders?.style,
+    focusBorderWidth: borders?.widthMedium,
+    focusBorderColor: colors?.borderBrand,
+    focusBorderRadius: borders?.radiusMedium
+  }
+
   return {
-    minWidth: breakpoints.xxSmall,
-    maxWidth: breakpoints.xSmall,
-    background: colors.backgroundLightest,
-    focusBorderStyle: borders.style,
-    focusBorderWidth: borders.widthMedium,
-    focusBorderColor: colors.borderBrand,
-    focusBorderRadius: borders.radiusMedium
+    ...componentVariables,
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
