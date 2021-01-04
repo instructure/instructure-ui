@@ -22,10 +22,29 @@
  * SOFTWARE.
  */
 
-.root {
-  font-size: var(--fontSize);
-  font-family: var(--fontFamily);
-  font-weight: var(--fontWeight);
-  color: var(--color);
-  background: var(--background);
+import generateComponentTheme from './theme'
+
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (theme, themeOverride, props, state) => {
+  const componentTheme = generateComponentTheme(theme, themeOverride)
+
+  return {
+    body: {
+      label: 'body',
+      fontSize: componentTheme.fontSize,
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: componentTheme.fontWeight,
+      color: componentTheme.color,
+      background: componentTheme.background
+    }
+  }
 }
+
+export default generateStyle
