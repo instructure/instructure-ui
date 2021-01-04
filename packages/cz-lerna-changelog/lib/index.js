@@ -93,7 +93,7 @@ function makePrompter() {
             ...rest,
             body: issues + body + testplanTxt,
             breaking: breaking + visualChangeTxt,
-            scopeStr
+            scope: scopeStr
           },
           { breaklineChar: '|' }
         )
