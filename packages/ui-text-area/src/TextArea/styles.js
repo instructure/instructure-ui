@@ -77,14 +77,11 @@ const generateStyle = (theme, themeOverride, props, state) => {
       wordWrap: 'break-word',
       textAlign: 'start',
       ...fontSizeVariants[size],
-      '&:focus + span': {
+      '&:focus + [class$=-textArea__outline]': {
         transform: 'scale(1)',
         opacity: 1
       },
-      '&[aria-invalid]': {
-        borderColor: componentTheme.errorBorderColor
-      },
-      '&[aria-invalid]:focus, &[aria-invalid]:focus + span': {
+      '&[aria-invalid], &[aria-invalid]:focus, &[aria-invalid]:focus + [class$=-textArea__outline]': {
         borderColor: componentTheme.errorBorderColor
       },
       '&::placeholder': {
