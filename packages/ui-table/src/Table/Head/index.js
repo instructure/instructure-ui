@@ -75,11 +75,13 @@ class Head extends Component {
     const [row] = Children.toArray(this.props.children)
     let sortable = false
 
-    Children.forEach(row.props.children, (colHeader) => {
-      if (matchComponentTypes(colHeader, [ColHeader])) {
-        if (colHeader.props.onRequestSort) sortable = true
-      }
-    })
+    if (row) {
+      Children.forEach(row.props.children, (colHeader) => {
+        if (matchComponentTypes(colHeader, [ColHeader])) {
+          if (colHeader.props.onRequestSort) sortable = true
+        }
+      })
+    }
 
     return sortable
   }
