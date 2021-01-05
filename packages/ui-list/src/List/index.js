@@ -36,14 +36,14 @@ import { ListItem } from './ListItem'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 class List extends Component {
   static propTypes = {

@@ -102,8 +102,7 @@ describe('<Rating />', async () => {
 
   describe('when passing down props to View', async () => {
     const allowedProps = {
-      margin: 'small',
-      dir: 'rtl'
+      margin: 'small'
     }
 
     Object.keys(View.propTypes)

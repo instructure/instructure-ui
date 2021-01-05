@@ -32,7 +32,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
@@ -40,7 +40,7 @@ parent: InlineList
 id: InlineList.Item
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 class InlineListItem extends Component {
   static propTypes = {

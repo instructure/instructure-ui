@@ -33,7 +33,7 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
@@ -41,7 +41,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 class Tag extends Component {
   static propTypes = {

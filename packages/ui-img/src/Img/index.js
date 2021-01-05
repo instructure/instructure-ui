@@ -31,14 +31,14 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { supportsObjectFit } from '@instructure/ui-dom-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 class Img extends Component {
   componentDidMount() {
     this.props.makeStyles(this.state)
@@ -49,7 +49,9 @@ class Img extends Component {
   }
 
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,
@@ -84,8 +86,6 @@ class Img extends Component {
   }
 
   static defaultProps = {
-    makeStyles: undefined,
-    styles: {},
     margin: undefined,
     overlay: undefined,
     constrain: undefined,

@@ -42,7 +42,7 @@ import { warn } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
-import generateStyle from './style'
+import generateStyle from './styles'
 
 /**
 ---

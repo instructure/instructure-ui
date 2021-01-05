@@ -34,7 +34,9 @@ const omit = (originalObject, keys) => {
       key === 'theme' ||
       key === 'children' ||
       key === 'className' ||
-      key === 'style'
+      key === 'style' ||
+      key === 'styles' ||
+      key === 'makeStyles'
     )
       continue
 

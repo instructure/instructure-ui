@@ -31,7 +31,7 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
@@ -39,7 +39,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 class ContextView extends Component {
   static propTypes = {
     /**

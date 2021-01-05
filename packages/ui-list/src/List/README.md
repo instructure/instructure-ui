@@ -2,18 +2,9 @@
 describes: List
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Notes" recommendation="none">
-    <Figure.Item>
-      For inline lists use the <Link href="#InlineList">InlineList</Link> component.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
+> ### What about 'inline' lists?
+>
+> For inline lists use the [InlineList](#InlineList) component.
 
 `<List>` accepts only `<List.Item>` as a child.
 

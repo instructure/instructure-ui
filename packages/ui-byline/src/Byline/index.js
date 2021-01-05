@@ -32,14 +32,14 @@ import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 class Byline extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

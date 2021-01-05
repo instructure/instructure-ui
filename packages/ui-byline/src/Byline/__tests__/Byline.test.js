@@ -95,13 +95,16 @@ describe('<Byline />', async () => {
       margin: 'small'
     }
 
-    const ignore = ['elementRef']
+    const ignoreProps = [
+      'theme',
+      'children',
+      'styles',
+      'makeStyles',
+      'elementRef'
+    ]
 
     Object.keys(View.propTypes)
-      .filter(
-        (prop) =>
-          prop !== 'theme' && prop !== 'children' && !ignore.includes(prop)
-      )
+      .filter((prop) => !ignoreProps.includes(prop))
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
