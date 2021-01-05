@@ -381,6 +381,7 @@ class View extends Component {
       borderColor,
       className, // eslint-disable-line react/prop-types
       styles,
+      makeStyles,
       ...props
     } = this.props
 

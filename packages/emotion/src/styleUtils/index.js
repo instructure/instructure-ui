@@ -140,7 +140,19 @@ const withStyle = decorator((ComposedComponent, generateStyle) => {
 
   hoistNonReactStatics(WithStyle, ComposedComponent)
 
+  // we have to pass these on, because sometimes we need to
+  // access propTypes of the component in other components
+  // (mainly in the `omitProps` method)
   WithStyle.propTypes = ComposedComponent.propTypes
+  WithStyle.defaultProps = ComposedComponent.defaultProps
+
+  // we have to add defaults to makeStyles and styles added by this decorator
+  // eslint-disable-next-line no-param-reassign
+  ComposedComponent.defaultProps = {
+    ...ComposedComponent.defaultProps,
+    makeStyles: () => {},
+    styles: {}
+  }
 
   if (process.env.NODE_ENV !== 'production') {
     WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
