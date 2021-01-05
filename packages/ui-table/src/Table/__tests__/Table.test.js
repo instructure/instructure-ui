@@ -35,7 +35,6 @@ import {
 import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSelect/SimpleSelectLocator'
 /* eslint-enable no-restricted-imports */
 import { Table } from '../index'
-import styles from '../Row/styles.css'
 
 describe('<Table />', async () => {
   beforeEach(async () => {
@@ -89,7 +88,8 @@ describe('<Table />', async () => {
     const tr = await find('tbody tr')
     const trNode = within(tr.getDOMNode())
 
-    expect(trNode.getAttribute('class')).to.contain(styles.hover)
+    expect(trNode.getComputedStyle().borderLeftStyle).to.not.equal('none')
+    expect(trNode.getComputedStyle().borderRightStyle).to.not.equal('none')
   })
 
   it('sets the scope of column header to col', async () => {
