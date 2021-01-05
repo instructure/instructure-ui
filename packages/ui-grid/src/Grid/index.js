@@ -27,7 +27,6 @@ import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { capitalizeFirstLetter } from '@instructure/ui-utils'
 import {
   safeCloneElement,
   matchComponentTypes,
@@ -41,14 +40,14 @@ import { GridCol } from '../GridCol'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 class Grid extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

@@ -36,7 +36,7 @@ import { error } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 import truncate from './utils/truncate'
 
@@ -45,12 +45,14 @@ import truncate from './utils/truncate'
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 @hack(['shouldTruncateWhenInvisible'])
 class TruncateText extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     /**
      * The content to be truncated.
@@ -93,8 +95,6 @@ class TruncateText extends Component {
   }
 
   static defaultProps = {
-    makeStyles: undefined,
-    styles: {},
     maxLines: 1,
     ellipsis: '\u2026',
     truncate: 'character',

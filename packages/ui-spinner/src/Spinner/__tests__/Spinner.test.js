@@ -69,7 +69,13 @@ describe('<Spinner />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter((prop) => prop !== 'theme' && prop !== 'children')
+      .filter(
+        (prop) =>
+          prop !== 'theme' &&
+          prop !== 'children' &&
+          prop !== 'styles' &&
+          prop !== 'makeStyles'
+      )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {

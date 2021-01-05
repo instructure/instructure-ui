@@ -31,7 +31,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
@@ -39,11 +39,13 @@ category: components
 ---
 **/
 
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 class Avatar extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     name: PropTypes.string.isRequired,
     /*
@@ -85,8 +87,6 @@ class Avatar extends Component {
   }
 
   static defaultProps = {
-    makeStyles: undefined,
-    styles: {},
     src: undefined,
     alt: undefined,
     margin: undefined,
@@ -163,7 +163,7 @@ class Avatar extends Component {
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        css={this.props.styles.avatar}
+        css={styles.avatar}
         display={this.props.display}
       >
         {this.renderLoadImage()}

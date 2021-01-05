@@ -37,14 +37,14 @@ import {
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 class Billboard extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

@@ -35,7 +35,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import { BreadcrumbLink } from './BreadcrumbLink'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
@@ -43,7 +43,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 class Breadcrumb extends Component {
   static propTypes = {

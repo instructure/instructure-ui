@@ -245,7 +245,7 @@ export default generateStyle
 #### 3. Make changes in the component.
 
 Import the style generator (`generateStyle`) from `styles.js`, `{ withStyle, jsx, css }` from `@instructure/emotion`, and add the `/** @jsx jsx */` annotation on top.\
-Replace `@themeable` with `@withStyle(generateStyles)`, passing the style generator.\
+Replace `@themeable` with `@withStyle(generateStyle)`, passing the style generator.\
 In the `componentDidMount` and `componentDidUpdate` methods, call the `makeStyles` method (available on this.props) to generate the styles object, passing the state (or any other object needed).\
 In the `render` method, use emotion's `css={this.props.styles.componentName}` syntax to add styles.\
 
@@ -255,9 +255,9 @@ import { Component } from 'react'
 // other imports
 import { withStyle, jsx, css } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 class MyComponent extends Component {
   // ...
   // rest

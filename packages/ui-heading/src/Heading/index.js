@@ -32,14 +32,14 @@ import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 class Heading extends Component {
   componentDidMount() {
@@ -51,7 +51,9 @@ class Heading extends Component {
   }
 
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     /**
      * Add a top- or bottom-border to the Heading
@@ -93,8 +95,6 @@ class Heading extends Component {
   }
 
   static defaultProps = {
-    makeStyles: undefined,
-    styles: {},
     children: null,
     margin: undefined,
     elementRef: undefined,

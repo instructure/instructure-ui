@@ -31,7 +31,7 @@ import { omitProps, deprecated } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
@@ -39,7 +39,7 @@ parent: Flex
 id: Flex.Item
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @deprecated('8.0.0', {
   grow: 'shouldGrow',
   shrink: 'shouldShrink',

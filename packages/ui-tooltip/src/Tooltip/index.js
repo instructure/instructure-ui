@@ -40,14 +40,14 @@ import { Popover } from '@instructure/ui-popover'
 import { element } from '@instructure/ui-prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 @testable()
 class Tooltip extends Component {
   static propTypes = {
