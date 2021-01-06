@@ -72,7 +72,8 @@ class TextArea extends Component {
      */
     width: PropTypes.string,
     /**
-     * a initial height for the textarea (if autoGrow is true it will grow vertically)
+     * Initial height for the textarea (if autoGrow is true it will grow vertically)
+     * Accepts CSS units, e.g. '55px'
      */
     height: PropTypes.string,
     /**
@@ -251,7 +252,7 @@ class TextArea extends Component {
       this._container.style.minHeight = height
     }
 
-    this._height = height // string type, e.g. '55px'
+    this._height = height
     this._textarea.style.height = height
     this._textarea.scrollTop = this._textarea.scrollHeight
   }
