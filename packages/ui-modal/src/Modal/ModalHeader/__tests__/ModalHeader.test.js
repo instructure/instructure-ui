@@ -24,23 +24,42 @@
 
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
-
 import { ModalHeader } from '../index'
-
-import styles from '../styles.css'
+import generateComponentTheme from '../theme'
+import { canvas } from '@instructure/ui-themes'
 
 describe('<ModalHeader />', async () => {
   it('should render', async () => {
     const subject = await mount(<ModalHeader />)
-
     const header = within(subject.getDOMNode())
     expect(header).to.exist()
   })
 
   it('should set inverse styles', async () => {
+    const variables = generateComponentTheme(canvas)
     const subject = await mount(<ModalHeader variant="inverse" />)
-
     const header = within(subject.getDOMNode())
-    expect(header).to.have.className(styles['inverse'])
+    const cssStyleDeclaration = header.getComputedStyle() // CSSStyleDeclaration type
+    expect(variables.inverseBackground.toUpperCase()).to.equal(
+      rgb2hex(cssStyleDeclaration.getPropertyValue('background-color'))
+    )
+    expect(variables.inverseBorderColor.toUpperCase()).to.equal(
+      rgb2hex(cssStyleDeclaration.getPropertyValue('border-bottom-color'))
+    )
   })
+
+  function rgb2hex(rgb) {
+    const rgbRegex = rgb.match(
+      /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/
+    )
+    function hex(x) {
+      return ('0' + parseInt(x).toString(16)).slice(-2)
+    }
+    return (
+      '#' +
+      hex(rgbRegex[1]) +
+      hex(rgbRegex[2]) +
+      hex(rgbRegex[3])
+    ).toUpperCase()
+  }
 })
