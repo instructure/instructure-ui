@@ -382,24 +382,24 @@ const generateStyle = (theme, themeOverride, props, extraArgs = {}) => {
 
   const displayVariants = {
     inline: {
-      label: 'inline',
+      label: 'view--inline',
       display: 'inline'
     },
     block: {
-      label: 'block',
+      label: 'view--block',
       display: 'block'
     },
     'inline-block': {
-      label: 'inline-block',
+      label: 'view--inlineBlock',
       display: 'inline-block',
       verticalAlign: 'middle'
     },
     flex: {
-      label: 'flex',
+      label: 'view--flex',
       display: 'flex'
     },
     'inline-flex': {
-      label: 'inline-flex',
+      label: 'view--inlineFlex',
       display: 'inline-flex',
       verticalAlign: 'middle'
     }

@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { element } from '@instructure/ui-prop-types'
 import {
   ComponentIdentifier,
@@ -46,11 +45,12 @@ import { testable } from '@instructure/ui-testable'
 
 import { Portal } from '@instructure/ui-portal'
 
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+
 import { calculateElementPosition } from '../calculateElementPosition'
 import { PositionPropTypes } from '../PositionPropTypes'
-
-import styles from './styles.css'
-import theme from './theme'
 
 @deprecated('8.0.0', null, "Use Position's `renderTarget` prop instead.")
 @testable()
@@ -75,12 +75,12 @@ class PositionContent extends ComponentIdentifier {
 category: components/utilities
 ---
 **/
+@withStyle(generateStyle)
 @deprecated('8.0.0', {
   trackPosition: 'shouldTrackPosition',
   over: 'shouldPositionOverTarget'
 })
 @testable()
-@themeable(theme, styles)
 class Position extends Component {
   static Target = PositionTarget
   static Content = PositionContent
@@ -89,6 +89,10 @@ class Position extends Component {
   static contentLocatorAttribute = 'data-position-content'
 
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The node to use as the position target
      */
@@ -205,6 +209,7 @@ class Position extends Component {
 
   componentDidMount() {
     this.toggleLocatorAttributes(true)
+    this.props.makeStyles()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -234,6 +239,8 @@ class Position extends Component {
         placement
       })
     }
+
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -341,13 +348,12 @@ class Position extends Component {
           this._content = el
         },
         style: {
+          boxSizing: 'border-box',
+          zIndex: this.props.styles.zIndex,
           ...content.props.style,
           ...this.state.style
         },
-        className: classnames({
-          [styles.root]: true,
-          [content.props.className]: content.props.className // eslint-disable-line react/prop-types
-        }),
+        ...(content.props.className && { className: content.props.className }),
         [Position.contentLocatorAttribute]: this._id
       })
 
