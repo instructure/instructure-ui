@@ -48,7 +48,8 @@ const generateStyle = (theme, themeOverride) => {
       visibility: 'hidden',
       maxHeight: '0',
       display: 'block'
-    }
+    },
+    lineHeight: componentTheme.lineHeight
   }
 }
 export default generateStyle
