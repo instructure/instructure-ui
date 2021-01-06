@@ -144,7 +144,7 @@ describe('<AppNav />', async () => {
       onUpdate.reset()
       await subject.setProps({ width: 400 })
 
-      await wait(() => {
+      wait(() => {
         expect(onUpdate).to.have.been.calledWith({ visibleItemsCount: 2 })
       })
     })
