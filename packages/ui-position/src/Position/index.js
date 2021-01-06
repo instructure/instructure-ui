@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 
 import { element } from '@instructure/ui-prop-types'
 import {
-  ComponentIdentifier,
   safeCloneElement,
   callRenderProp,
   ensureSingleChild,
@@ -52,24 +51,6 @@ import generateStyle from './styles'
 import { calculateElementPosition } from '../calculateElementPosition'
 import { PositionPropTypes } from '../PositionPropTypes'
 
-@deprecated('8.0.0', null, "Use Position's `renderTarget` prop instead.")
-@testable()
-class PositionTarget extends ComponentIdentifier {
-  static displayName = 'PositionTarget'
-  static locatorAttribute = 'data-position-target'
-}
-
-@deprecated('8.0.0', null, "Use Posiition's `children` instead.")
-@testable()
-class PositionContent extends ComponentIdentifier {
-  static displayName = 'PositionContent'
-  static propTypes = {
-    children: PropTypes.node,
-    placement: PositionPropTypes.placement
-  }
-  static locatorAttribute = 'data-position-content'
-}
-
 /**
 ---
 category: components/utilities
@@ -82,8 +63,6 @@ category: components/utilities
 })
 @testable()
 class Position extends Component {
-  static Target = PositionTarget
-  static Content = PositionContent
   static locatorAttribute = 'data-position'
   static targetLocatorAttribute = 'data-position-target'
   static contentLocatorAttribute = 'data-position-content'
@@ -334,13 +313,7 @@ class Position extends Component {
   }
 
   renderContent() {
-    let content = ComponentIdentifier.pick(
-      Position.Content,
-      this.props.children
-    )
-    if (!content) {
-      content = ensureSingleChild(this.props.children)
-    }
+    let content = ensureSingleChild(this.props.children)
 
     if (content) {
       content = safeCloneElement(content, {
@@ -373,10 +346,7 @@ class Position extends Component {
   }
 
   renderTarget() {
-    let target = ComponentIdentifier.pick(Position.Target, this.props.children)
-    if (!target) {
-      target = callRenderProp(this.props.renderTarget)
-    }
+    const target = callRenderProp(this.props.renderTarget)
 
     if (target) {
       return safeCloneElement(target, {
