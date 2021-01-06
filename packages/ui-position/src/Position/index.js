@@ -30,8 +30,7 @@ import { element } from '@instructure/ui-prop-types'
 import {
   safeCloneElement,
   callRenderProp,
-  ensureSingleChild,
-  deprecated
+  ensureSingleChild
 } from '@instructure/ui-react-utils'
 import {
   addPositionChangeListener,
@@ -57,10 +56,6 @@ category: components/utilities
 ---
 **/
 @withStyle(generateStyle)
-@deprecated('8.0.0', {
-  trackPosition: 'shouldTrackPosition',
-  over: 'shouldPositionOverTarget'
-})
 @testable()
 class Position extends Component {
   static locatorAttribute = 'data-position'
@@ -130,18 +125,7 @@ class Position extends Component {
     /**
      * The content to be positioned
      */
-    children: PropTypes.node,
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `shouldTrackPosition`__
-     */
-    trackPosition: PropTypes.bool,
-    /**
-     * __Deprecated - use `shouldPositionOverTarget`__
-     */
-    over: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    children: PropTypes.node
   }
 
   static defaultProps = {
@@ -199,8 +183,6 @@ class Position extends Component {
       this.props.shouldTrackPosition
         ? this.startTracking()
         : this.stopTracking()
-    } else if (this.props.trackPosition !== prevProps.trackPosition) {
-      this.props.trackPosition ? this.startTracking() : this.stopTracking()
     }
 
     const { style, placement } = this.state
@@ -262,7 +244,7 @@ class Position extends Component {
   handlePortalOpen = () => {
     this.position()
 
-    if (this.props.shouldTrackPosition || this.props.trackPosition) {
+    if (this.props.shouldTrackPosition) {
       this.startTracking()
     }
 
@@ -289,7 +271,7 @@ class Position extends Component {
       offsetY: props.offsetY,
       constrain: props.constrain,
       container: props.mountNode,
-      over: props.shouldPositionOverTarget || props.over
+      over: props.shouldPositionOverTarget
     })
   }
 
