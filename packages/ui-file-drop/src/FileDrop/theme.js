@@ -22,22 +22,38 @@
  * SOFTWARE.
  */
 
-export default function generator({ borders, colors }) {
-  return {
-    backgroundColor: colors.backgroundLightest, // needed for testing
-    borderRadius: borders.radiusLarge,
-    borderWidth: borders.widthMedium,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, borders, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      hoverBorderColor: theme['ic-brand-primary'],
+      acceptedColor: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    backgroundColor: colors?.backgroundLightest, // needed for testing
+    borderRadius: borders?.radiusLarge,
+    borderWidth: borders?.widthMedium,
     borderStyle: 'dashed',
-    borderColor: colors.borderMedium,
-    hoverBorderColor: colors.borderBrand,
-    acceptedColor: colors.textBrand,
-    rejectedColor: colors.textDanger
+    borderColor: colors?.borderMedium,
+    hoverBorderColor: colors?.borderBrand,
+    acceptedColor: colors?.textBrand,
+    rejectedColor: colors?.textDanger
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    hoverBorderColor: variables['ic-brand-primary'],
-    acceptedColor: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

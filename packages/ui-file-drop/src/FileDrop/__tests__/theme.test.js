@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { FileDrop } from '../index'
+import generateComponentTheme from '../theme'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
 describe('FileDrop.theme', () => {
   describe('with the canvas theme', () => {
-    const variables = FileDrop.generateTheme()
+    const variables = generateComponentTheme(canvas)
     it('should have background and hover highlight colors that meet 3:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.hoverBorderColor)
@@ -48,7 +49,7 @@ describe('FileDrop.theme', () => {
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = FileDrop.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
     it('should have background and hover highlight colors that meet 4.5:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.hoverBorderColor)

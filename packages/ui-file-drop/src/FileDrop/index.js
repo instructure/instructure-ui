@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import {
   callRenderProp,
@@ -43,8 +43,8 @@ import { isEdge } from '@instructure/ui-utils'
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 
 function keyEventIsClickButton(e) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
@@ -67,6 +67,7 @@ const IS_MS = isBrowserMS()
 category: components
 ---
 **/
+@withStyle(generateStyle)
 @deprecated('8.0.0', {
   label: 'renderLabel',
   enablePreview: 'shouldEnablePreview',
@@ -74,7 +75,6 @@ category: components
   allowMultiple: 'shouldAllowMultiple'
 })
 @testable()
-@themeable(theme, styles)
 class FileDrop extends Component {
   static propTypes = {
     /**
@@ -198,9 +198,14 @@ class FileDrop extends Component {
     /**
      * __deprecated: use `shouldAllowMultiple`__
      */
-    allowMultiple: PropTypes.bool
+    allowMultiple: PropTypes.bool,
 
     /* eslint-enable react/require-default-props */
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -234,6 +239,24 @@ class FileDrop extends Component {
 
     this.defaultId = uid('FileDrop')
     this.messagesId = uid('FileDrop-messages')
+  }
+
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    return {
+      functionallyDisabled:
+        this.interaction === 'disabled' || this.interaction === 'readonly',
+      visuallyDisabled: this.interaction === 'disabled',
+      dragRejected: this.state.isDragRejected || this.invalid,
+      dragAccepted: this.state.isDragAccepted
+    }
   }
 
   state = {
@@ -499,15 +522,6 @@ class FileDrop extends Component {
     const focusColor =
       this.state.isDragRejected || this.invalid ? 'danger' : undefined
 
-    const classes = {
-      [styles.label]: true,
-      [styles.functionallyDisabled]: functionallyDisabled,
-      [styles.visuallyDisabled]: this.interaction === 'disabled',
-      [styles.dragRejected]: this.state.isDragRejected || this.invalid,
-      [styles.dragAccepted]: this.state.isDragAccepted,
-      [styles.withHeight]: height
-    }
-
     return (
       <View
         display={display}
@@ -519,7 +533,7 @@ class FileDrop extends Component {
         height={height}
       >
         <label
-          className={classnames(classes)}
+          css={this.props.styles.fileDropLabel}
           htmlFor={id}
           onDragEnter={this.handleDragEnter}
           onDragOver={this.handleDragOver}
@@ -534,18 +548,8 @@ class FileDrop extends Component {
             focusColor={focusColor}
             height={height}
           >
-            <span
-              className={classnames({
-                [styles.labelContent]: true,
-                [styles.withHeight]: height
-              })}
-            >
-              <span
-                className={classnames({
-                  [styles.layout]: true,
-                  [styles.withHeight]: height
-                })}
-              >
+            <span css={this.props.styles.fileDropLabelContent}>
+              <span css={this.props.styles.fileDropLayout}>
                 <View height={height}>{this.renderLabel()}</View>
               </span>
             </span>
@@ -555,7 +559,7 @@ class FileDrop extends Component {
           {...passthroughProps(props)}
           onClick={this.handleClick}
           type="file"
-          className={styles.input}
+          css={this.props.styles.fileDropInput}
           id={id}
           ref={this.handleRef}
           onFocus={this.handleFocus}
