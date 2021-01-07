@@ -22,15 +22,30 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders, spacing }) {
-  return {
-    background: colors.backgroundLight,
-    borderColor: colors.borderMedium,
-    borderWidth: borders.widthSmall,
-    borderRadius: borders.radiusMedium,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, spacing, borders } = theme
+
+  const componentVariables = {
+    background: colors?.backgroundLight,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthSmall,
+    borderRadius: borders?.radiusMedium,
     padding: spacing.small,
 
-    inverseBackground: colors.backgroundDarkest,
-    inverseBorderColor: colors.borderDarkest
+    inverseBackground: colors?.backgroundDarkest,
+    inverseBorderColor: colors?.borderDarkest
+  }
+
+  return {
+    ...componentVariables,
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
