@@ -24,10 +24,10 @@
 
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
-
 import { ModalFooter } from '../index'
-
-import styles from '../styles.css'
+import generateComponentTheme from '../theme'
+import { canvas } from '@instructure/ui-themes'
+import { color2hex } from '@instructure/ui-color-utils'
 
 describe('<ModalFooter />', async () => {
   it('should render', async () => {
@@ -38,9 +38,16 @@ describe('<ModalFooter />', async () => {
   })
 
   it('should set inverse styles', async () => {
+    const variables = generateComponentTheme(canvas)
     const subject = await mount(<ModalFooter variant="inverse" />)
-
     const footer = within(subject.getDOMNode())
-    expect(footer.hasClass(styles['inverse'])).to.be.true()
+
+    const cssStyleDeclaration = footer.getComputedStyle() // CSSStyleDeclaration type
+    expect(variables.inverseBackground).to.equal(
+      color2hex(cssStyleDeclaration.getPropertyValue('background-color'))
+    )
+    expect(variables.inverseBorderColor).to.equal(
+      color2hex(cssStyleDeclaration.getPropertyValue('border-top-color'))
+    )
   })
 })

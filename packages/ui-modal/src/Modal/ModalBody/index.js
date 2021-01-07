@@ -22,18 +22,17 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
-import { isIE11 } from '@instructure/ui-utils'
-
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
+import { omitProps } from '@instructure/ui-react-utils'
 
 /**
 ---
@@ -41,8 +40,8 @@ parent: Modal
 id: Modal.Body
 ---
 **/
+@withStyle(generateStyle)
 @testable()
-@themeable(theme, styles)
 class ModalBody extends Component {
   static propTypes = {
     children: PropTypes.node,
@@ -50,7 +49,12 @@ class ModalBody extends Component {
     elementRef: PropTypes.func,
     as: PropTypes.elementType,
     variant: PropTypes.oneOf(['default', 'inverse']),
-    overflow: PropTypes.oneOf(['scroll', 'fit'])
+    overflow: PropTypes.oneOf(['scroll', 'fit']),
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -60,6 +64,14 @@ class ModalBody extends Component {
     children: null,
     elementRef: undefined,
     overflow: undefined
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   render() {
@@ -73,19 +85,11 @@ class ModalBody extends Component {
       ...rest
     } = this.props
 
-    const passthroughProps = View.omitViewProps(rest, ModalBody)
-
-    const classes = classnames({
-      [styles.root]: true,
-      [styles.inverse]: variant === 'inverse'
-    })
-
-    const isFit = overflow === 'fit'
-
-    error(
-      !isIE11 || !isFit,
-      `[Modal] overflow="fit" is only supported with fullscreen modals in Internet Explorer`
+    const passthroughProps = View.omitViewProps(
+      omitProps(rest, ModalBody.propTypes),
+      ModalBody
     )
+    const isFit = overflow === 'fit'
 
     return (
       <View
@@ -95,7 +99,7 @@ class ModalBody extends Component {
         height={isFit ? '100%' : null}
         elementRef={elementRef}
         as={as}
-        className={classes}
+        css={this.props.styles.modalBody}
         padding={padding}
         tabIndex="-1" // prevent FF from focusing view when scrollable
       >
