@@ -27,7 +27,7 @@ const {
   runCommandsConcurrently,
   getCommand
 } = require('@instructure/command-utils')
-const specifyCJSFormat = path.resolve(__dirname, 'specify-commonjs-format.sh')
+const specifyCJSFormat = path.resolve(__dirname, 'specify-commonjs-format.js')
 
 const {
   BABEL_ENV,
