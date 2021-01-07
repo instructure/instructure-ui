@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   getElementType,
   getInteraction,
@@ -41,8 +41,9 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 import { Flex } from '@instructure/ui-flex'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
 
 /**
 ---
@@ -50,10 +51,14 @@ category: components/utilities
 ---
 **/
 
+@withStyle(generateStyles)
 @testable()
-@themeable(theme, styles)
 class BaseButton extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Specifies the `Button` children.
      */
@@ -178,6 +183,21 @@ class BaseButton extends Component {
 
   _rootElement = null
 
+  componentDidMount() {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  get makeStylesVariables() {
+    return {
+      isDisabled: this.isDisabled,
+      hasOnlyIconVisible: this.hasOnlyIconVisible
+    }
+  }
+
   get hasOnlyIconVisible() {
     const { children, renderIcon } = this.props
     return renderIcon && !hasVisibleChildren(children)
@@ -189,6 +209,18 @@ class BaseButton extends Component {
 
   get interaction() {
     return getInteraction({ props: this.props })
+  }
+
+  get isDisabled() {
+    return this.interaction === 'disabled'
+  }
+
+  get isReadOnly() {
+    return this.interaction === 'readonly'
+  }
+
+  get isEnabled() {
+    return this.interaction === 'enabled'
   }
 
   get focusColor() {
@@ -265,9 +297,9 @@ class BaseButton extends Component {
   }
 
   renderChildren() {
-    const { renderIcon, children, textAlign, isCondensed } = this.props
+    const { renderIcon, children, textAlign, isCondensed, styles } = this.props
 
-    const wrappedChildren = <span className={styles.children}>{children}</span>
+    const wrappedChildren = <span css={styles.children}>{children}</span>
 
     if (!renderIcon) {
       return wrappedChildren
@@ -275,7 +307,7 @@ class BaseButton extends Component {
 
     const { hasOnlyIconVisible } = this
     const wrappedIcon = (
-      <span className={styles.iconSVG}>{callRenderProp(renderIcon)}</span>
+      <span css={styles.iconSVG}>{callRenderProp(renderIcon)}</span>
     )
 
     const flexChildren = hasOnlyIconVisible ? (
@@ -328,30 +360,12 @@ class BaseButton extends Component {
       onClick,
       renderIcon,
       tabIndex,
+      styles,
+      makeStyles,
       ...props
     } = this.props
 
-    const { interaction } = this
-    const isDisabled = interaction === 'disabled'
-    const isReadOnly = interaction === 'readonly'
-    const isEnabled = interaction === 'enabled'
-
-    const { hasOnlyIconVisible } = this
-
-    const classes = classnames({
-      [styles.content]: true,
-      [styles[`size--${size}`]]: true,
-      [styles[`color--${color}`]]: true,
-      [styles[`textAlign--${textAlign}`]]: true,
-      [styles[`shape--${shape}`]]: true,
-      [styles.withBackground]: withBackground,
-      [styles.withoutBackground]: !withBackground,
-      [styles.isCondensed]: isCondensed,
-      [styles.withBorder]: withBorder,
-      [styles.withoutBorder]: !withBorder,
-      [styles.hasOnlyIconVisible]: hasOnlyIconVisible,
-      [styles.isDisabled]: isDisabled
-    })
+    const { isDisabled, isEnabled, isReadOnly } = this
 
     return (
       <View
@@ -375,11 +389,9 @@ class BaseButton extends Component {
         role={onClick && as !== 'button' ? 'button' : null}
         tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}
-        // TODO: Eventually remove classname. That will involve figuring out where the button reset should live, as well
-        // as creating a selector for the active and hover states
-        className={isEnabled ? styles.root : null}
+        css={isEnabled ? styles.baseButton : null}
       >
-        <span className={classes}>{this.renderChildren()}</span>
+        <span css={styles.content}>{this.renderChildren()}</span>
       </View>
     )
   }

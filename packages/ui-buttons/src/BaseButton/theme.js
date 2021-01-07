@@ -56,43 +56,76 @@ const generateButtonThemeVars = ({
   )}`
 })
 
-export default function generator({
-  borders = {},
-  colors = {},
-  forms = {},
-  spacing = {},
-  typography = {}
-} = {}) {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { borders, colors, forms, spacing, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      ...generateButtonThemeVars({
+        style: 'primary',
+        backgroundColor: theme['ic-brand-button--primary-bgd'],
+        borderColor: theme['ic-brand-button--primary-bgd'],
+        textColor: theme['ic-brand-button--primary-text'],
+        ghostTextColor: theme['ic-brand-button--primary-bgd']
+      }),
+      primaryGhostHoverBackground: alpha(
+        theme['ic-brand-button--primary-bgd'],
+        10
+      )
+    },
+    'canvas-high-contrast': {
+      secondaryBorderColor: colors?.borderMedium,
+      primaryInverseBorderColor: colors?.borderMedium
+    },
+    instructure: {
+      borderRadius: '999em',
+      smallPaddingTop: '0.5rem',
+      smallPaddingBottom: '0.4375rem',
+      mediumPaddingTop: '0.75rem',
+      mediumPaddingBottom: '0.75rem',
+      largePaddingTop: '1rem',
+      largePaddingBottom: '1rem',
+      largeFontSize: '1.125rem'
+    }
+  }
+  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
+
+  const componentVariables = {
     transform: 'none',
     hoverTransform: 'none',
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
     textTransform: 'none',
     letterSpacing: 'normal',
-    borderRadius: borders.radiusMedium,
-    borderStyle: borders.style,
-    borderWidth: borders.widthSmall,
+    borderRadius: borders?.radiusMedium,
+    borderStyle: borders?.style,
+    borderWidth: borders?.widthSmall,
 
-    smallHeight: forms.inputHeightSmall,
-    smallFontSize: typography.fontSizeSmall,
-    smallPaddingHorizontal: spacing.xSmall,
+    smallHeight: forms?.inputHeightSmall,
+    smallFontSize: typography?.fontSizeSmall,
+    smallPaddingHorizontal: spacing?.xSmall,
     smallPaddingTop: '0.375rem',
     smallPaddingBottom: '0.3125rem',
 
-    mediumHeight: forms.inputHeightMedium,
-    mediumFontSize: typography.fontSizeMedium,
-    mediumPaddingHorizontal: spacing.small,
+    mediumHeight: forms?.inputHeightMedium,
+    mediumFontSize: typography?.fontSizeMedium,
+    mediumPaddingHorizontal: spacing?.small,
     mediumPaddingTop: '0.5625rem',
     mediumPaddingBottom: '0.5625rem',
 
-    largeHeight: forms.inputHeightLarge,
-    largeFontSize: typography.fontSizeLarge,
-    largePaddingHorizontal: spacing.medium,
+    largeHeight: forms?.inputHeightLarge,
+    largeFontSize: typography?.fontSizeLarge,
+    largePaddingHorizontal: spacing?.medium,
     largePaddingTop: '0.6875rem',
     largePaddingBottom: '0.6875rem',
 
-    lineHeight: typography.lineHeightFit,
+    lineHeight: typography?.lineHeightFit,
 
     iconSizeSmall: '1rem',
     iconSizeMedium: '1.25rem',
@@ -100,93 +133,63 @@ export default function generator({
 
     ...generateButtonThemeVars({
       style: 'primary',
-      backgroundColor: colors.backgroundBrand,
-      borderColor: colors.borderBrand,
-      textColor: colors.textLightest,
-      ghostTextColor: colors.textBrand
+      backgroundColor: colors?.backgroundBrand,
+      borderColor: colors?.borderBrand,
+      textColor: colors?.textLightest,
+      ghostTextColor: colors?.textBrand
     }),
 
     ...generateButtonThemeVars({
       style: 'secondary',
-      backgroundColor: colors.backgroundLight,
-      borderColor: colors.borderLight,
-      ghostBorderColor: colors.borderDarkest,
-      textColor: colors.textDarkest,
-      ghostTextColor: colors.textDarkest
+      backgroundColor: colors?.backgroundLight,
+      borderColor: colors?.borderLight,
+      ghostBorderColor: colors?.borderDarkest,
+      textColor: colors?.textDarkest,
+      ghostTextColor: colors?.textDarkest
     }),
 
     ...generateButtonThemeVars({
       style: 'success',
-      backgroundColor: colors.backgroundSuccess,
-      borderColor: colors.borderSuccess,
-      textColor: colors.textLightest,
-      ghostTextColor: colors.textSuccess
+      backgroundColor: colors?.backgroundSuccess,
+      borderColor: colors?.borderSuccess,
+      textColor: colors?.textLightest,
+      ghostTextColor: colors?.textSuccess
     }),
 
     ...generateButtonThemeVars({
       style: 'danger',
-      backgroundColor: colors.backgroundDanger,
-      borderColor: colors.borderDanger,
-      textColor: colors.textLightest,
-      ghostTextColor: colors.textDanger
+      backgroundColor: colors?.backgroundDanger,
+      borderColor: colors?.borderDanger,
+      textColor: colors?.textLightest,
+      ghostTextColor: colors?.textDanger
     }),
 
     ...generateButtonThemeVars({
       style: 'primaryInverse',
-      backgroundColor: colors.backgroundLightest,
-      borderColor: colors.borderLightest,
-      textColor: colors.textDarkest,
-      ghostTextColor: colors.textLightest
+      backgroundColor: colors?.backgroundLightest,
+      borderColor: colors?.borderLightest,
+      textColor: colors?.textDarkest,
+      ghostTextColor: colors?.textLightest
     }),
 
     // Overrides for primary-inverse to match what was previously the `light` button variant
-    primaryInverseBorderColor: darken(colors.borderLight, 10),
-    primaryInverseHoverBackground: darken(colors.backgroundLightest, 5),
-    primaryInverseActiveBackground: colors.backgroundLightest,
+    primaryInverseBorderColor: darken(colors?.borderLight, 10),
+    primaryInverseHoverBackground: darken(colors?.backgroundLightest, 5),
+    primaryInverseActiveBackground: colors?.backgroundLightest,
     primaryInverseActiveBoxShadow: `${activeShadow} ${darken(
-      colors.borderLightest,
+      colors?.borderLightest,
       25
     )}`,
 
     // Overrides for ghost hover states to ensure correct color contrast for a11y
-    successGhostHoverBackground: alpha(colors.textSuccess, 1)
+    successGhostHoverBackground: alpha(colors?.textSuccess, 1)
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator['canvas'] = function ({ colors, ...variables }) {
-  return {
-    ...generateButtonThemeVars({
-      style: 'primary',
-      backgroundColor: variables['ic-brand-button--primary-bgd'],
-      borderColor: variables['ic-brand-button--primary-bgd'],
-      textColor: variables['ic-brand-button--primary-text'],
-      ghostTextColor: variables['ic-brand-button--primary-bgd']
-    }),
-    primaryGhostHoverBackground: alpha(
-      variables['ic-brand-button--primary-bgd'],
-      10
-    )
-  }
-}
-
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
-  colors
-}) {
-  return {
-    secondaryBorderColor: colors.borderMedium,
-    primaryInverseBorderColor: colors.borderMedium
-  }
-}
-
-generator['instructure'] = function () {
-  return {
-    borderRadius: '999em',
-    smallPaddingTop: '0.5rem',
-    smallPaddingBottom: '0.4375rem',
-    mediumPaddingTop: '0.75rem',
-    mediumPaddingBottom: '0.75rem',
-    largePaddingTop: '1rem',
-    largePaddingBottom: '1rem',
-    largeFontSize: '1.125rem'
-  }
-}
+export default generateComponentTheme
