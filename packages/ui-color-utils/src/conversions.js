@@ -22,9 +22,19 @@
  * SOFTWARE.
  */
 
-export { alpha } from './alpha'
-export { darken } from './darken'
-export { lighten } from './lighten'
-export { contrast } from './contrast'
-export { isValid } from './isValid'
-export { color2hex } from './conversions'
+import Color from 'tinycolor2'
+
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Converts an color string to a hex string like `#FF0000` For possible inputs see
+ * https://github.com/bgrins/TinyColor
+ * @param {String} rgb a color string
+ * @returns {String} a hex string like `#FF0000`
+ */
+function color2hex(rgb) {
+  return Color(rgb).toHex()
+}
+
+export { color2hex }
