@@ -83,6 +83,7 @@ const generateStyle = (componentTheme, props, state) => {
       alignItems: 'center'
     },
     crumb: {
+      label: 'breadcrumb__crumb',
       boxSizing: 'border-box',
       position: 'relative',
       ...crumbSizeVariants[size],
@@ -92,6 +93,8 @@ const generateStyle = (componentTheme, props, state) => {
       }
     },
     separator: {
+      label: 'breadcrumb__separator',
+
       boxSizing: 'border-box',
       position: 'absolute',
       top: '50%',
