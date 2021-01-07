@@ -23,12 +23,42 @@
  */
 import React, { forwardRef, useState } from 'react'
 import { useTheme as useEmotionTheme } from 'emotion-theming'
+// import createCache from '@emotion/cache'
 import { canvas } from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
 import { decorator } from '@instructure/ui-decorator'
 import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
+import { bidirectionalPolyfill } from './polyFill'
+import { useTextDirectionContext } from '@instructure/ui-i18n'
+// import {
+//   COMMENT,
+//   compile,
+//   DECLARATION,
+//   IMPORT,
+//   KEYFRAMES,
+//   MEDIA,
+//   RULESET,
+//   serialize,
+//   strlen,
+//   stringify,
+//   hash,
+//   prefixer
+// } from 'stylis'
 
+// const myPlugin = (element, index, children) => {
+//   if (
+//     element.type === KEYFRAMES ||
+//     (element.type === RULESET &&
+//       (!element.parent || element.parent.type === MEDIA))
+//   ) {
+//     const v = serialize(children, stringify)
+//   }
+// }
+// export const emotionCache = createCache({
+//   key: 'my-prefix-key',
+//   stylisPlugins: [myPlugin]
+// })
 /**
  * This is an utility function which calulates the correct component theme based on every possible override there is.
 
@@ -106,28 +136,25 @@ const withStyle = decorator(
     const WithStyle = forwardRef((props, ref) => {
       const [styles, setStyles] = useState({})
       const theme = useTheme()
-
+      const dir = useTextDirectionContext()
       const componentProps = {
         ...ComposedComponent.defaultProps,
         ...props
       }
-
       const themeOverride = getThemeOverride(
         theme,
         ComposedComponent.displayName,
         componentProps
       )
-
       const componentTheme =
         typeof generateComponentTheme === 'function'
           ? generateComponentTheme(theme, themeOverride)
           : {}
 
       const makeStyleHandler = (...extraArgs) => {
-        const calculatedStyles = generateStyle(
-          componentTheme,
-          componentProps,
-          ...extraArgs
+        const calculatedStyles = bidirectionalPolyfill(
+          generateStyle(componentTheme, componentProps, ...extraArgs),
+          dir
         )
 
         if (!isEqual(calculatedStyles, styles)) {
