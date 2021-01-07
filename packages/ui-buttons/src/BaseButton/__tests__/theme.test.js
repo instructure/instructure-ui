@@ -25,11 +25,12 @@
 import { contrast } from '@instructure/ui-color-utils'
 import { expect } from '@instructure/ui-test-utils'
 
-import { BaseButton } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('BaseButton.theme', () => {
   describe('with the default theme', () => {
-    const variables = BaseButton.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('primary', () => {
       it('should have a background and text colors that meet 3:1 contrast', () => {
@@ -136,7 +137,7 @@ describe('BaseButton.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = BaseButton.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('primary', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {
