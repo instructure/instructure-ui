@@ -58,7 +58,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-Setting ToggleDetails to `filled` will make the toggle use the `fluidWidth` Button component.
+Setting ToggleDetails to `filled` will make the toggle use a full-width [Button](#Button) component.
 
 ```js
 ---
@@ -131,6 +131,7 @@ example: true
   </Text>
 </ToggleDetails>
 ```
+
 ### Guidelines
 
 ```js
