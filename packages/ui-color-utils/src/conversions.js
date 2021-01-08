@@ -34,7 +34,7 @@ import Color from 'tinycolor2'
  * @returns {String} a hex string like `#FF0000`
  */
 function color2hex(rgb) {
-  return Color(rgb).toHex()
+  return Color(rgb).toHexString().toUpperCase()
 }
 
 export { color2hex }
