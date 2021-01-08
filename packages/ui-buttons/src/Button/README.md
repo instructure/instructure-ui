@@ -10,7 +10,6 @@ guidelines: true
   <Figure recommendation="none" title="Upgrade Notes for v8.0.0">
     <Figure.Item><Link href="#button-upgrade-guide">A comprehensive upgrade guide can be found here</Link></Figure.Item>
     <Figure.Item>Until version 8.0.0 Button is configured to be completely backwards compatible with the previous props and theming</Figure.Item>
-    <Figure.Item>For the previous documentation and examples see <Link href="#DeprecatedButton">DeprecatedButton</Link></Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -23,6 +22,7 @@ example: true
 ---
 <Button>Hello{null}</Button>
 ```
+
 ### Color
 
 The `color` prop will change the Button's color scheme.
@@ -42,7 +42,7 @@ example: true
 
 ### Size
 
-To specify the Button `size`, set the size prop to  `small`, `medium` (default) or `large`.
+To specify the Button `size`, set the size prop to `small`, `medium` (default) or `large`.
 
 ```js
 ---
@@ -68,7 +68,7 @@ example: true
 
 ### Text wrapping
 
-Just like native HTML buttons, the Button text will wrap to the next line when it does not have enough room. 
+Just like native HTML buttons, the Button text will wrap to the next line when it does not have enough room.
 
 ```js
 ---
@@ -82,7 +82,7 @@ example: true
   withVisualDebug
 >
   <Button color="primary">
-    A Button With a Whole Lot of Text	
+    A Button With a Whole Lot of Text
   </Button>
 </View>
 ```

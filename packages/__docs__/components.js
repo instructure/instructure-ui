@@ -36,7 +36,6 @@ export {
   Button,
   CloseButton,
   CondensedButton,
-  DeprecatedButton,
   IconButton,
   ToggleButton
 } from '@instructure/ui-buttons'
