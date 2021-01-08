@@ -36,7 +36,8 @@ import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { ColHeader } from '../ColHeader'
 import { RowHeader } from '../RowHeader'
@@ -48,7 +49,7 @@ parent: Table
 id: Table.Row
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class Row extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

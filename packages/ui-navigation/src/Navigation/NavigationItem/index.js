@@ -32,6 +32,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -39,7 +40,7 @@ parent: Navigation
 id: Navigation.Item
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class NavigationItem extends Component {
   static propTypes = {

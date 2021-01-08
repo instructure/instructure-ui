@@ -31,6 +31,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 // TODO: get numcols from theme config
 const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -41,7 +42,7 @@ parent: Grid
 id: Grid.Col
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class GridCol extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

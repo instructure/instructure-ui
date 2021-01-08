@@ -39,13 +39,14 @@ import { error } from '@instructure/console/macro'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', { title: 'renderTitle' })
 @testable()
 class Spinner extends Component {

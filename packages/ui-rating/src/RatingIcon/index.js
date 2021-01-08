@@ -32,13 +32,14 @@ import { Transition } from '@instructure/ui-motion'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 parent: Rating
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class RatingIcon extends Component {
   static propTypes = {
     animationDelay: PropTypes.number,

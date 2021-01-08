@@ -46,6 +46,7 @@ import { Portal } from '@instructure/ui-portal'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { calculateElementPosition } from '../calculateElementPosition'
 import { PositionPropTypes } from '../PositionPropTypes'
@@ -55,7 +56,7 @@ import { PositionPropTypes } from '../PositionPropTypes'
 category: components/utilities
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Position extends Component {
   static locatorAttribute = 'data-position'

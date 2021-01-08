@@ -41,6 +41,7 @@ import {
 } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -48,7 +49,7 @@ category: components
 ---
 @module View
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 class View extends Component {
   static propTypes = {

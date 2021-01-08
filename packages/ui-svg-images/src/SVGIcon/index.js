@@ -33,13 +33,14 @@ import { InlineSVG } from '../InlineSVG'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components/utilities
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class SVGIcon extends Component {
   static propTypes = {

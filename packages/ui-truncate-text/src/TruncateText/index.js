@@ -37,6 +37,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import truncate from './utils/truncate'
 
@@ -45,7 +46,7 @@ import truncate from './utils/truncate'
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 @hack(['shouldTruncateWhenInvisible'])
 class TruncateText extends Component {

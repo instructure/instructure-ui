@@ -30,13 +30,14 @@ import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Text extends Component {
   static propTypes = {
     /**

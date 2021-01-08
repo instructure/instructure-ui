@@ -23,7 +23,6 @@
  */
 
 import { keyframes } from '@instructure/emotion'
-import generateComponentTheme from './theme'
 
 // keyframes have to be outside of 'generateStyle',
 // since it is causing problems in style recalculation
@@ -35,15 +34,12 @@ const pulseAnimation = keyframes`
 
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props, state) => {
-  const componentTheme = generateComponentTheme(theme, themeOverride)
-
+const generateStyle = (componentTheme, props, state) => {
   const { type, variant, placement, standalone, pulse } = props
 
   const top = placement.indexOf('top') > -1

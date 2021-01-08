@@ -101,63 +101,74 @@ const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
  *  }
  * }
  */
-const withStyle = decorator((ComposedComponent, generateStyle) => {
-  const WithStyle = forwardRef((props, ref) => {
-    const [styles, setStyles] = useState({})
-    const theme = useTheme()
-    const componentProps = {
-      ...ComposedComponent.defaultProps,
-      ...props
-    }
-    const themeOverride = getThemeOverride(
-      theme,
-      ComposedComponent.displayName,
-      componentProps
-    )
+const withStyle = decorator(
+  (ComposedComponent, generateStyle, generateComponentTheme) => {
+    const WithStyle = forwardRef((props, ref) => {
+      const [styles, setStyles] = useState({})
+      const theme = useTheme()
 
-    const makeStyleHandler = (...extraArgs) => {
-      const calculatedStyles = generateStyle(
+      const componentProps = {
+        ...ComposedComponent.defaultProps,
+        ...props
+      }
+
+      const themeOverride = getThemeOverride(
         theme,
-        themeOverride,
-        componentProps,
-        ...extraArgs
+        ComposedComponent.displayName,
+        componentProps
       )
 
-      if (!isEqual(calculatedStyles, styles)) {
-        setStyles(calculatedStyles)
+      const componentTheme =
+        typeof generateComponentTheme === 'function'
+          ? generateComponentTheme(theme, themeOverride)
+          : {}
+
+      const makeStyleHandler = (...extraArgs) => {
+        const calculatedStyles = generateStyle(
+          componentTheme,
+          componentProps,
+          ...extraArgs
+        )
+
+        if (!isEqual(calculatedStyles, styles)) {
+          setStyles(calculatedStyles)
+        }
       }
+
+      return (
+        <ComposedComponent
+          ref={ref}
+          makeStyles={makeStyleHandler}
+          styles={styles}
+          {...props}
+        />
+      )
+    })
+
+    hoistNonReactStatics(WithStyle, ComposedComponent)
+
+    // we have to pass these on, because sometimes we need to
+    // access propTypes of the component in other components
+    // (mainly in the `omitProps` method)
+    WithStyle.propTypes = ComposedComponent.propTypes
+    WithStyle.defaultProps = ComposedComponent.defaultProps
+
+    // we are exposing the theme generator for the docs generation
+    WithStyle.generateComponentTheme = generateComponentTheme
+
+    // we have to add defaults to makeStyles and styles added by this decorator
+    // eslint-disable-next-line no-param-reassign
+    ComposedComponent.defaultProps = {
+      ...ComposedComponent.defaultProps,
+      makeStyles: () => {},
+      styles: {}
     }
 
-    return (
-      <ComposedComponent
-        ref={ref}
-        makeStyles={makeStyleHandler}
-        styles={styles}
-        {...props}
-      />
-    )
-  })
+    if (process.env.NODE_ENV !== 'production') {
+      WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
+    }
 
-  hoistNonReactStatics(WithStyle, ComposedComponent)
-
-  // we have to pass these on, because sometimes we need to
-  // access propTypes of the component in other components
-  // (mainly in the `omitProps` method)
-  WithStyle.propTypes = ComposedComponent.propTypes
-  WithStyle.defaultProps = ComposedComponent.defaultProps
-
-  // we have to add defaults to makeStyles and styles added by this decorator
-  // eslint-disable-next-line no-param-reassign
-  ComposedComponent.defaultProps = {
-    ...ComposedComponent.defaultProps,
-    makeStyles: () => {},
-    styles: {}
+    return WithStyle
   }
-
-  if (process.env.NODE_ENV !== 'production') {
-    WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
-  }
-
-  return WithStyle
-})
+)
 export { useStyle, useTheme, withStyle }

@@ -29,7 +29,8 @@ import PropTypes from 'prop-types'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,7 +48,7 @@ example: true
 ```
 
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldLabel extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

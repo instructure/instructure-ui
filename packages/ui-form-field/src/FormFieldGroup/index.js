@@ -33,14 +33,15 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { FormFieldLayout } from '../FormFieldLayout'
 import { FormPropTypes } from '../FormPropTypes'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldGroup extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

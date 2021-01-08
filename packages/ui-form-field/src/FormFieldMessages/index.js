@@ -33,7 +33,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldMessage } from '../FormFieldMessage'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -53,7 +54,7 @@ example: true
 ]} />
 ```
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldMessages extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

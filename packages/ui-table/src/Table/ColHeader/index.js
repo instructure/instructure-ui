@@ -34,7 +34,8 @@ import {
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -42,7 +43,7 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class ColHeader extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

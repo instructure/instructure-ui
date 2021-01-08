@@ -29,7 +29,6 @@ import {
 } from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
-import generateComponentTheme from './theme'
 
 const getBorderStyle = ({ borderRadius, borderWidth, dir, theme }) => {
   const isRtlDirection = dir === DIRECTION.rtl
@@ -315,16 +314,15 @@ const getFocusStyles = (props, componentTheme) => {
     }
   }
 }
+
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} extraArgs
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props, extraArgs = {}) => {
-  const componentTheme = generateComponentTheme(theme, themeOverride)
+const generateStyle = (componentTheme, props, extraArgs = {}) => {
   const {
     borderRadius,
     borderWidth,

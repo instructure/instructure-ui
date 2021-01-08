@@ -41,13 +41,14 @@ import { px } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class TextArea extends Component {
   static propTypes = {

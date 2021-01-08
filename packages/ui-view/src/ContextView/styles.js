@@ -24,8 +24,6 @@
 
 import { mirrorPlacement } from '@instructure/ui-position'
 
-import generateComponentTheme from './theme'
-
 const getPlacementStyle = (placement, theme) => {
   if (
     ['end-center', 'end-top', 'end-bottom', 'center-end', 'end'].includes(
@@ -224,11 +222,17 @@ const getArrowPlacementVariant = (placement, background, theme) => {
   }
 }
 
-const generateStyle = (theme, themeOverride, props, extraArgs) => {
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (componentTheme, props, state) => {
   const { placement, background } = props
   const transformedPlacement = placement.replace(' ', '-')
 
-  const componentTheme = generateComponentTheme(theme, themeOverride)
   const arrowBaseStyles = {
     content: '""',
     height: '0',

@@ -32,13 +32,14 @@ import { supportsObjectFit } from '@instructure/ui-dom-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Img extends Component {
   componentDidMount() {
     this.props.makeStyles(this.state)
