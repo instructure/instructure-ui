@@ -34,6 +34,7 @@ import generateComponentTheme from './theme'
 const generateStyle = (theme, themeOverride, props, state) => {
   const { size } = props
   const { interaction, hasFocus, invalid } = state
+
   const componentTheme = generateComponentTheme(theme, themeOverride)
 
   const disabledStyles =
