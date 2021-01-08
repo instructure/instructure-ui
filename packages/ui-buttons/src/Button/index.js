@@ -31,8 +31,6 @@ import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
 import { BaseButton } from '../BaseButton'
 
-import { themeAdapter } from './themeAdapter'
-
 import theme from './theme'
 
 /**
@@ -41,7 +39,7 @@ category: components
 ---
 **/
 @testable()
-@themeable(theme, null, themeAdapter)
+@themeable(theme, null)
 class Button extends Component {
   static propTypes = {
     /**
