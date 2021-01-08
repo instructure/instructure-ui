@@ -22,31 +22,39 @@
  * SOFTWARE.
  */
 
-export default function ({
-  colors,
-  borders,
-  breakpoints,
-  shadows,
-  stacking,
-  typography
-}) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, borders, breakpoints, shadows, stacking } = theme
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    textColor: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+    borderColor: colors?.borderMedium,
+    borderRadius: borders?.radiusMedium,
+
+    inverseBackground: colors?.backgroundBrandSecondary,
+    inverseTextColor: colors?.textLightest,
+
+    autoMinWidth: breakpoints?.xSmall,
+    smallMaxWidth: breakpoints?.small,
+    mediumMaxWidth: breakpoints?.medium,
+    largeMaxWidth: breakpoints?.large,
+
+    boxShadow: shadows?.depth3,
+
+    zIndex: stacking?.topmost
+  }
+
   return {
-    fontFamily: typography.fontFamily,
-    textColor: colors.textDarkest,
-    background: colors.backgroundLightest,
-    borderColor: colors.borderMedium,
-    borderRadius: borders.radiusMedium,
-
-    inverseBackground: colors.backgroundBrandSecondary,
-    inverseTextColor: colors.textLightest,
-
-    autoMinWidth: breakpoints.xSmall,
-    smallMaxWidth: breakpoints.small,
-    mediumMaxWidth: breakpoints.medium,
-    largeMaxWidth: breakpoints.large,
-
-    boxShadow: shadows.depth3,
-
-    zIndex: stacking.topmost
+    ...componentVariables,
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme

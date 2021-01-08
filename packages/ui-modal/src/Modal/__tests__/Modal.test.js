@@ -27,7 +27,9 @@ import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import { Modal } from '../index'
 import { ModalLocator } from '../ModalLocator'
-import styles from '../styles.css'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import generateComponentTheme from '../theme'
+import { canvas } from '@instructure/ui-themes'
 
 describe('<Modal />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
@@ -55,25 +57,33 @@ describe('<Modal />', async () => {
       </Modal>
     )
 
-    const modal = await ModalLocator.find(':label(Modal Dialog)')
-    const layout = await modal.find(`.${styles['fullscreenLayout']}`)
-
+    const layout = await ModalLocator.find(
+      '[class*="-modal__fullscreenLayout"]'
+    )
     expect(layout).to.exist()
   })
 
   it('should apply theme overrides when open', async () => {
-    await mount(
-      <Modal
-        open
-        size="small"
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-        theme={{
+    const themeOverride = {
+      components: {
+        Modal: {
           smallMaxWidth: '10em'
-        }}
-      >
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
+        }
+      }
+    }
+    await mount(
+      <EmotionThemeProvider theme={canvas}>
+        <EmotionThemeProvider theme={themeOverride}>
+          <Modal
+            open
+            size="small"
+            label="Modal Dialog"
+            shouldReturnFocus={false}
+          >
+            <Modal.Body>Foo Bar Baz</Modal.Body>
+          </Modal>
+        </EmotionThemeProvider>
+      </EmotionThemeProvider>
     )
 
     const modal = await ModalLocator.find()
@@ -97,25 +107,31 @@ describe('<Modal />', async () => {
     )
 
     const modal = await ModalLocator.find(':label(Modal Dialog)')
-    const constrain = await modal.find(`.${styles['constrainContext']}`)
+    const constrain = await modal.find('[class*="-modal__constrainContext"]')
 
     expect(constrain).to.exist()
   })
 
   it("should not inherit its parent's font color", async () => {
+    const themeOverride = {
+      components: {
+        Modal: {
+          textColor: 'rgb(0, 0, 0)'
+        }
+      }
+    }
     await mount(
       <div style={{ color: 'rgb(255, 255, 255)' }}>
-        <Modal
-          open
-          label="Modal Dialog"
-          shouldReturnFocus={false}
-          constrain="parent"
-          theme={{
-            textColor: 'rgb(0, 0, 0)'
-          }}
-        >
-          <Modal.Body>Foo Bar Baz</Modal.Body>
-        </Modal>
+        <EmotionThemeProvider theme={themeOverride}>
+          <Modal
+            open
+            label="Modal Dialog"
+            shouldReturnFocus={false}
+            constrain="parent"
+          >
+            <Modal.Body>Foo Bar Baz</Modal.Body>
+          </Modal>
+        </EmotionThemeProvider>
       </div>
     )
 

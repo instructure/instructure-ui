@@ -31,12 +31,8 @@
 const generateComponentTheme = (theme, themeOverride = {}) => {
   const { colors } = theme
 
-  const componentVariables = {
-    inverseBackground: colors?.backgroundBrandSecondary
-  }
-
   return {
-    ...componentVariables,
+    inverseBackground: colors?.backgroundBrandSecondary,
     ...themeOverride
   }
 }
