@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Dialog } from '@instructure/ui-dialog'
 import {
@@ -36,19 +36,17 @@ import {
   safeCloneElement,
   matchComponentTypes
 } from '@instructure/ui-react-utils'
-import { createChainedFunction, isIE11 } from '@instructure/ui-utils'
+import { createChainedFunction } from '@instructure/ui-utils'
 import { Transition } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-
+import { withStyle, jsx } from '@instructure/emotion'
 import { Mask } from '@instructure/ui-overlays'
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
 import { ModalFooter } from './ModalFooter'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 /**
 ---
@@ -56,8 +54,8 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
+@withStyle(generateStyle)
 @testable()
-@themeable(theme, styles)
 class Modal extends Component {
   static propTypes = {
     /**
@@ -80,7 +78,7 @@ class Modal extends Component {
      */
     as: PropTypes.elementType,
 
-    /*
+    /**
      * The size of the `<Modal />` content
      */
     size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
@@ -188,7 +186,12 @@ class Modal extends Component {
      * Should ModalBody handle overflow with scrollbars, or fit its
      * content within its own height?
      */
-    overflow: PropTypes.oneOf(['scroll', 'fit'])
+    overflow: PropTypes.oneOf(['scroll', 'fit']),
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -230,13 +233,18 @@ class Modal extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.open && !this.props.open) {
       // closing
       this.setState({
         transitioning: prevProps.transition !== null
       })
     }
+    this.props.makeStyles()
   }
 
   get defaultFocusElement() {
@@ -248,9 +256,7 @@ class Modal extends Component {
   }
 
   get maskPlacement() {
-    if (isIE11) {
-      return 'top'
-    } else if (this.props.overflow === 'fit') {
+    if (this.props.overflow === 'fit') {
       return 'stretch'
     } else {
       return 'center'
@@ -263,7 +269,6 @@ class Modal extends Component {
 
   handlePortalOpen = (DOMNode) => {
     this.DOMNode = DOMNode
-    DOMNode && this.applyTheme(DOMNode)
   }
 
   handleTransitionExited = () => {
@@ -323,13 +328,7 @@ class Modal extends Component {
         shouldReturnFocus={shouldReturnFocus}
         liveRegion={liveRegion}
         onDismiss={onDismiss}
-        className={classnames({
-          [styles.root]: true,
-          [styles[size]]: true,
-          [styles.inverse]: this.props.variant === 'inverse',
-          [styles['overflow--fit']]: this.props.overflow === 'fit',
-          [styles.ie11]: this.ie11
-        })}
+        css={this.props.styles.modal}
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
@@ -338,16 +337,7 @@ class Modal extends Component {
     )
 
     if (size === 'fullscreen') {
-      return (
-        <span
-          className={classnames({
-            [styles.fullscreenLayout]: true,
-            [styles[`fullscreenLayout--${constrain}`]]: true
-          })}
-        >
-          {dialog}
-        </span>
-      )
+      return <span css={this.props.styles.fullscreenLayout}>{dialog}</span>
     } else {
       return (
         <Mask
@@ -404,10 +394,9 @@ class Modal extends Component {
               this.handleTransitionExited,
               onExited
             )}
-            theme={this.ie11 ? { duration: '0s' } : null} // IE11 doesn't always complete transition
           >
             {constrain === 'parent' ? (
-              <span className={styles.constrainContext}>
+              <span css={this.props.styles.constrainContext}>
                 {this.renderDialog(passthroughProps)}
               </span>
             ) : (
