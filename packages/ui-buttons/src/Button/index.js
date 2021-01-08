@@ -49,7 +49,6 @@ category: components
 @deprecated(
   '8.0.0',
   {
-    icon: 'renderIcon',
     variant: null
   },
   'See the following upgrade guide for more help updating https://instructure.design/#button-upgrade-guide'
@@ -146,11 +145,7 @@ class Button extends Component {
       'circle-danger',
       'icon',
       'icon-inverse'
-    ]),
-    /**
-     * __Deprecated - use `renderIcon` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
-     */
-    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
+    ])
   }
 
   static defaultProps = {
@@ -171,8 +166,7 @@ class Button extends Component {
     cursor: 'pointer',
     href: undefined,
     renderIcon: undefined,
-    variant: undefined,
-    icon: undefined
+    variant: undefined
   }
 
   _buttonComponent = null
@@ -228,7 +222,6 @@ class Button extends Component {
       margin,
       cursor,
       href,
-      icon,
       renderIcon,
       variant,
       ...props
@@ -249,7 +242,7 @@ class Button extends Component {
           margin={margin}
           cursor={cursor}
           href={href}
-          icon={renderIcon || icon}
+          icon={renderIcon}
           variant={variant}
           ref={this.handleButtonRef}
           theme={this.scopeTheme()}
@@ -275,7 +268,7 @@ class Button extends Component {
       margin,
       cursor,
       href,
-      renderIcon: renderIcon || icon,
+      renderIcon,
       theme
     }
 

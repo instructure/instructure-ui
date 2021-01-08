@@ -230,12 +230,6 @@ describe('<Button/>', async () => {
       expect(await ButtonLocator.find('[type="submit"]')).to.exist()
     })
 
-    it('should pass down an icon via the icon property', async () => {
-      await mount(<Button icon={icon}>Hello World</Button>)
-      const button = await ButtonLocator.find()
-      expect(await button.find(iconSelector)).to.exist()
-    })
-
     it('focuses with the focus helper', async () => {
       const onFocus = stub()
       await mount(<Button onFocus={onFocus}>Hello World</Button>)
@@ -456,16 +450,6 @@ describe('<Button/>', async () => {
         </Button>
       )
       expect(await ButtonLocator.find('[type="submit"]')).to.exist()
-    })
-
-    it('should pass down an icon via the icon property', async () => {
-      await mount(
-        <Button variant="primary" icon={icon}>
-          Hello World
-        </Button>
-      )
-      const button = await ButtonLocator.find()
-      expect(await button.find(iconSelector)).to.exist()
     })
 
     it('focuses with the focus helper', async () => {
