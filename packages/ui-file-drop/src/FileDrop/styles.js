@@ -75,11 +75,13 @@ const generateStyle = (theme, themeOverride, props, state) => {
       }
     : {}
 
+  // border color precedence: normal hover < dragRejected OR dragAccepted
+  const hoverBorderColor =
+    !dragAccepted && !dragRejected
+      ? { borderColor: componentTheme.hoverBorderColor }
+      : {}
+
   return {
-    fileDrop: {
-      label: 'fileDrop',
-      position: 'relative'
-    },
     fileDropLabel: {
       label: 'fileDrop__label',
       display: 'block',
@@ -110,10 +112,7 @@ const generateStyle = (theme, themeOverride, props, state) => {
       border: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
       cursor: 'pointer',
       '&:hover': {
-        // dragRejected should take precedence!
-        borderColor: dragRejected
-          ? componentTheme.rejectedColor
-          : componentTheme.hoverBorderColor
+        ...hoverBorderColor
       },
       ...heightStyle,
       ...dragAcceptedStyle,

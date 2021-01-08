@@ -251,8 +251,7 @@ class FileDrop extends Component {
 
   makeStyleProps = () => {
     return {
-      functionallyDisabled:
-        this.interaction === 'disabled' || this.interaction === 'readonly',
+      functionallyDisabled: this.functionallyDisabled,
       visuallyDisabled: this.interaction === 'disabled',
       dragRejected: this.state.isDragRejected || this.invalid,
       dragAccepted: this.state.isDragAccepted
@@ -269,6 +268,10 @@ class FileDrop extends Component {
   enterCounter = 0
   fileInputEl = null
   defaultId = null
+
+  get functionallyDisabled() {
+    return this.interaction === 'disabled' || this.interaction === 'readonly'
+  }
 
   get hasMessages() {
     return this.props.messages && this.props.messages.length > 0
@@ -515,10 +518,6 @@ class FileDrop extends Component {
     } = this.props
     const id = this.props.id || this.defaultId
 
-    // make readonly input functionally disabled
-    const functionallyDisabled =
-      this.interaction === 'disabled' || this.interaction === 'readonly'
-
     const focusColor =
       this.state.isDragRejected || this.invalid ? 'danger' : undefined
 
@@ -570,7 +569,7 @@ class FileDrop extends Component {
           accept={this.acceptStr()}
           onChange={this.handleChange}
           aria-describedby={this.hasMessages ? this.messagesId : null}
-          disabled={functionallyDisabled}
+          disabled={this.functionallyDisabled}
         />
         {this.hasMessages ? (
           <View display="block" margin="small 0 0">
