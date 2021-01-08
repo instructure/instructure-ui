@@ -44,6 +44,7 @@ import { Flex } from '@instructure/ui-flex'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyles from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -51,7 +52,7 @@ category: components/utilities
 ---
 **/
 
-@withStyle(generateStyles)
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
 class BaseButton extends Component {
   static propTypes = {
