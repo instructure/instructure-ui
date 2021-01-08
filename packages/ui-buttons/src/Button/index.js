@@ -49,7 +49,6 @@ category: components
 @deprecated(
   '8.0.0',
   {
-    buttonRef: 'elementRef',
     fluidWidth: 'display',
     icon: 'renderIcon',
     variant: null
@@ -131,10 +130,6 @@ class Button extends Component {
      */
     renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-     * __Deprecated - use `elementRef` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
-     */
-    buttonRef: PropTypes.func,
-    /**
      * __Deprecated - see the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse)__
      */
     variant: PropTypes.oneOf([
@@ -181,7 +176,6 @@ class Button extends Component {
     cursor: 'pointer',
     href: undefined,
     renderIcon: undefined,
-    buttonRef: undefined,
     variant: undefined,
     fluidWidth: undefined,
     icon: undefined
@@ -198,13 +192,9 @@ class Button extends Component {
   }
 
   handleElementRef = (el) => {
-    const { elementRef, buttonRef } = this.props
+    const { elementRef } = this.props
 
     elementRef(el)
-
-    if (typeof buttonRef === 'function') {
-      buttonRef(el)
-    }
   }
 
   handleButtonRef = (component) => {
@@ -269,7 +259,6 @@ class Button extends Component {
           icon={renderIcon || icon}
           fluidWidth={fluidWidth}
           variant={variant}
-          buttonRef={this.handleElementRef}
           ref={this.handleButtonRef}
           theme={this.scopeTheme()}
         >

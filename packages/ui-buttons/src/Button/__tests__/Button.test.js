@@ -244,13 +244,6 @@ describe('<Button/>', async () => {
       expect(button.focused()).to.be.true()
     })
 
-    it('should provide a buttonRef prop', async () => {
-      const buttonRef = stub()
-      await mount(<Button buttonRef={buttonRef}>Hello World</Button>)
-      const button = await ButtonLocator.find(':contains(Hello World)')
-      expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
-    })
-
     describe('onClick', async () => {
       it('should call onClick when clicked', async () => {
         const onClick = stub()
@@ -485,17 +478,6 @@ describe('<Button/>', async () => {
       const button = await ButtonLocator.find()
       await button.focus()
       expect(button.focused()).to.be.true()
-    })
-
-    it('should provide a buttonRef prop', async () => {
-      const buttonRef = stub()
-      await mount(
-        <Button variant="primary" buttonRef={buttonRef}>
-          Hello World
-        </Button>
-      )
-      const button = await ButtonLocator.find(':contains(Hello World)')
-      expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
     })
 
     describe('onClick', async () => {

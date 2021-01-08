@@ -14,9 +14,6 @@ guidelines: true
     <Figure.Item>
       The <code>children</code> prop has been changed to <code>screenReaderLabel</code>
     </Figure.Item>
-    <Figure.Item>
-      <code>buttonRef</code> has been changed to <code>elementRef</code>
-    </Figure.Item>
   </Figure>
 </Guidelines>
 ```

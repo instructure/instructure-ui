@@ -49,7 +49,6 @@ category: components
 **/
 @deprecated('8.0.0', {
   children: 'screenReaderLabel',
-  buttonRef: 'elementRef',
   variant: 'color'
 })
 @testable()
@@ -122,10 +121,6 @@ class CloseButton extends Component {
      */
     children: PropTypes.node,
     /**
-     * __Deprecated - use `elementRef` instead__
-     */
-    buttonRef: PropTypes.func,
-    /**
      * __Deprecated - use `color` instead__
      */
     variant: PropTypes.oneOf(['icon', 'icon-inverse'])
@@ -136,7 +131,6 @@ class CloseButton extends Component {
     children: undefined,
     onClick: (event) => {},
     elementRef: undefined,
-    buttonRef: undefined,
     variant: undefined,
     color: undefined,
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
@@ -186,7 +180,6 @@ class CloseButton extends Component {
       children,
       screenReaderLabel,
       elementRef,
-      buttonRef,
       size,
       onClick,
       margin,
@@ -211,7 +204,7 @@ class CloseButton extends Component {
       >
         <BaseButton
           renderIcon={IconXSolid}
-          elementRef={elementRef || buttonRef}
+          elementRef={elementRef}
           interaction={this.interaction}
           type={type}
           color={this.color}
