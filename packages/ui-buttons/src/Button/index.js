@@ -27,18 +27,12 @@ import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import {
-  getInteraction,
-  passthroughProps,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
 import { BaseButton } from '../BaseButton'
-import { DeprecatedButton } from '../DeprecatedButton'
 
 import { themeAdapter } from './themeAdapter'
 
-import generateDeprecatedTheme from '../DeprecatedButton/theme'
 import theme from './theme'
 
 /**
@@ -46,13 +40,6 @@ import theme from './theme'
 category: components
 ---
 **/
-@deprecated(
-  '8.0.0',
-  {
-    variant: null
-  },
-  'See the following upgrade guide for more help updating https://instructure.design/#button-upgrade-guide'
-)
 @testable()
 @themeable(theme, null, themeAdapter)
 class Button extends Component {
@@ -126,26 +113,7 @@ class Button extends Component {
     /**
      * An icon, or function that returns an icon.
      */
-    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * __Deprecated - see the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-upgrading-variant-default,-primary,-success,-danger,-light,-ghost,-or-ghost-inverse)__
-     */
-    variant: PropTypes.oneOf([
-      'default',
-      'primary',
-      'success',
-      'danger',
-      'light',
-      'ghost',
-      'ghost-inverse',
-      'link',
-      'link-inverse',
-      'circle-default',
-      'circle-primary',
-      'circle-danger',
-      'icon',
-      'icon-inverse'
-    ])
+    renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   }
 
   static defaultProps = {
@@ -156,8 +124,7 @@ class Button extends Component {
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
-    // TODO: Switch to 'secondary' in 8.0 when we drop variant
-    color: undefined,
+    color: 'secondary',
     focusColor: undefined,
     display: 'inline-block',
     textAlign: 'center',
@@ -165,8 +132,7 @@ class Button extends Component {
     margin: '0',
     cursor: 'pointer',
     href: undefined,
-    renderIcon: undefined,
-    variant: undefined
+    renderIcon: undefined
   }
 
   _buttonComponent = null
@@ -189,25 +155,6 @@ class Button extends Component {
     this._buttonComponent = component
   }
 
-  scopeTheme = () => {
-    // TODO: Remove this function in version 8.0.0
-    // We only want to pass the theme vars that exist in the deprecated
-    // button, otherwise every theme var that is unique to the updated
-    // button gets injected into the style tag for the deprecated one
-    // (that ends up being a _massive_ amount of variables)
-    const { theme = {} } = this
-    const deprecatedTheme = generateDeprecatedTheme() || {}
-    const deprecatedKeys = Object.keys(deprecatedTheme)
-
-    return Object.entries(theme).reduce((result, [key, value]) => {
-      if (deprecatedKeys.includes(key)) {
-        return { ...result, [key]: value }
-      }
-
-      return result
-    }, {})
-  }
-
   render() {
     const {
       children,
@@ -223,34 +170,13 @@ class Button extends Component {
       cursor,
       href,
       renderIcon,
-      variant,
       ...props
     } = this.props
 
     const interaction = getInteraction({ props })
-    const { theme = {} } = this
 
-    if (variant) {
-      return (
-        <DeprecatedButton
-          {...passthroughProps(props)}
-          type={type}
-          size={size}
-          as={as}
-          disabled={interaction === 'disabled'}
-          readOnly={interaction === 'readonly'}
-          margin={margin}
-          cursor={cursor}
-          href={href}
-          icon={renderIcon}
-          variant={variant}
-          ref={this.handleButtonRef}
-          theme={this.scopeTheme()}
-        >
-          {children}
-        </DeprecatedButton>
-      )
-    }
+    // eslint-disable-next-line react/prop-types
+    const themeOverride = this.props.themeOverride
 
     const buttonProps = {
       ...passthroughProps(props),
@@ -269,7 +195,7 @@ class Button extends Component {
       cursor,
       href,
       renderIcon,
-      theme
+      themeOverride
     }
 
     return <BaseButton {...buttonProps}>{children}</BaseButton>
