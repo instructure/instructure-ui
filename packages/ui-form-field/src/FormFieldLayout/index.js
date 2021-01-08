@@ -43,14 +43,14 @@ import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'
 import { FormPropTypes } from '../FormPropTypes'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
 
 /**
 ---
 parent: FormField
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle)
 class FormFieldLayout extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

@@ -38,6 +38,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { NavigationItem } from './NavigationItem'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 
@@ -46,7 +47,7 @@ const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Navigation extends Component {
   static propTypes = {

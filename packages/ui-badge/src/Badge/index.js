@@ -35,7 +35,8 @@ import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -43,7 +44,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Badge extends Component {
   static propTypes = {

@@ -38,13 +38,14 @@ import { Page } from './Page'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class Pages extends Component {
   static propTypes = {
     children: Children.oneOf([Page]),

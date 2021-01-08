@@ -38,7 +38,8 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { Head } from './Head'
 import { Body } from './Body'
@@ -52,7 +53,7 @@ import { Cell } from './Cell'
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class Table extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

@@ -35,7 +35,8 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 import { Row } from '../Row'
 
 /**
@@ -44,7 +45,7 @@ parent: Table
 id: Table.Body
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class Body extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

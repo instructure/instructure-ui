@@ -37,9 +37,10 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { Flex } from '@instructure/ui-flex'
 import { uid } from '@instructure/uid'
+import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-import { testable } from '@instructure/ui-testable'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,7 +48,7 @@ category: components
 tags: form, field
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
   label: 'renderLabel',
   required: 'isRequired',

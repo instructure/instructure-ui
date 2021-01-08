@@ -22,22 +22,18 @@
  * SOFTWARE.
  */
 
-import generateComponentTheme from './theme'
 import { error } from '@instructure/console/macro'
 
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {String} props.delimiter
  * @param  {String} props.spacing
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props, state) => {
-  const componentTheme = generateComponentTheme(theme, themeOverride)
-
+const generateStyle = (componentTheme, props, state) => {
   const { size, delimiter, spacing } = props
 
   const withDelimiter = delimiter !== 'none'

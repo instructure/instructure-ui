@@ -31,13 +31,14 @@ import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Metric } from '../Metric'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MetricGroup extends Component {
   static propTypes = {

@@ -29,7 +29,7 @@ import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
-import { themeable } from '@instructure/ui-themeable'
+import { ThemeRegistry, themeable } from '@instructure/ui-themeable'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -84,13 +84,17 @@ class Document extends Component {
 
   renderTheme(doc) {
     const { themeKey } = this.props
-    const { generateTheme } = doc
-    const theme = typeof generateTheme === 'function' && generateTheme(themeKey)
+    const { generateComponentTheme } = doc.resource
+
+    const themeVariables = ThemeRegistry.getRegisteredTheme(themeKey).variables
+    const theme =
+      typeof generateComponentTheme === 'function' &&
+      generateComponentTheme(themeVariables)
 
     return theme && Object.keys(theme).length > 0 ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
-          Theme Variables
+          Default Theme Variables
         </Heading>
         <ComponentTheme theme={theme} />
       </View>

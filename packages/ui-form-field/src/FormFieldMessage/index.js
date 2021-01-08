@@ -30,7 +30,8 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,7 +48,7 @@ example: true
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldMessage extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

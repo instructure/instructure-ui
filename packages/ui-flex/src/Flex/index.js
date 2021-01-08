@@ -40,6 +40,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import { Item } from './Item'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,7 +48,7 @@ category: components
 ---
 @module Flex
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
   inline: 'display',
   wrapItems: 'wrap',

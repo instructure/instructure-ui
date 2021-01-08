@@ -192,24 +192,18 @@ export default generateComponentTheme
 
 You need to create a `styles.js` file next to the `theme.js`. (Don't forget the copyright block!)\
 Write and export a `function` named `generateStyle`.\
-Import the `generateComponentTheme` from `theme.js` and use it in `generateStyle`, passing the theme and themeOverride parameters.\
 You need to use the content of the `styles.css` and convert it to css-in-js. Use the passed component props and state where needed.\
 [Emotion's Object Styles documentation](https://emotion.sh/docs/object-styles)
 
 ```js
-import generateComponentTheme from './theme'
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props, state) => {
-  // get the theme variables object for the component
-  const componentTheme = generateComponentTheme(theme, themeOverride)
-
+const generateStyle = (componentTheme, props, state) => {
   // optional mappings can be provided based on - for example - props
   const colorStyles = {
     primary: {
@@ -244,8 +238,8 @@ export default generateStyle
 
 #### 3. Make changes in the component.
 
-Import the style generator (`generateStyle`) from `styles.js`, `{ withStyle, jsx, css }` from `@instructure/emotion`, and add the `/** @jsx jsx */` annotation on top.\
-Replace `@themeable` with `@withStyle(generateStyle)`, passing the style generator.\
+Import the style generator (`generateStyle`) from `styles.js`, the component theme generator (`generateComponentTheme`) from `theme.js`, `{ withStyle, jsx }` from `@instructure/emotion`, and add the `/** @jsx jsx */` annotation on top.\
+Replace `@themeable` with `@withStyle(generateStyle, generateComponentTheme)`, passing the style and theme generators.\
 In the `componentDidMount` and `componentDidUpdate` methods, call the `makeStyles` method (available on this.props) to generate the styles object, passing the state (or any other object needed).\
 In the `render` method, use emotion's `css={this.props.styles.componentName}` syntax to add styles.\
 
@@ -253,11 +247,12 @@ In the `render` method, use emotion's `css={this.props.styles.componentName}` sy
 /** @jsx jsx */
 import { Component } from 'react'
 // other imports
-import { withStyle, jsx, css } from '@instructure/emotion'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class MyComponent extends Component {
   // ...
   // rest

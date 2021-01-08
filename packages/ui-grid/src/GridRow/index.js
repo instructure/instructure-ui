@@ -40,6 +40,7 @@ import { GridCol } from '../GridCol'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,7 +48,7 @@ parent: Grid
 id: Grid.Row
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 class GridRow extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

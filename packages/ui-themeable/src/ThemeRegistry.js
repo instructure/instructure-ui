@@ -459,7 +459,8 @@ const ThemeRegistry = {
   registerComponentTheme,
   registerTheme,
   mountComponentStyles,
-  flushComponentStyles
+  flushComponentStyles,
+  getRegisteredTheme
 }
 
 export default ThemeRegistry
@@ -474,5 +475,6 @@ export {
   registerComponentTheme,
   registerTheme,
   mountComponentStyles,
-  flushComponentStyles
+  flushComponentStyles,
+  getRegisteredTheme
 }
