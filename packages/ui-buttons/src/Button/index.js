@@ -49,7 +49,6 @@ category: components
 @deprecated(
   '8.0.0',
   {
-    fluidWidth: 'display',
     icon: 'renderIcon',
     variant: null
   },
@@ -149,10 +148,6 @@ class Button extends Component {
       'icon-inverse'
     ]),
     /**
-     * __Deprecated - set `display="block"` and `textAlign="start"` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
-     */
-    fluidWidth: PropTypes.bool,
-    /**
      * __Deprecated - use `renderIcon` instead (See the [upgrade guide](#button-upgrade-guide/#v8-button-upgrade-guide-props-that-need-to-be-upgraded) for more details)__
      */
     icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
@@ -177,7 +172,6 @@ class Button extends Component {
     href: undefined,
     renderIcon: undefined,
     variant: undefined,
-    fluidWidth: undefined,
     icon: undefined
   }
 
@@ -237,7 +231,6 @@ class Button extends Component {
       icon,
       renderIcon,
       variant,
-      fluidWidth,
       ...props
     } = this.props
 
@@ -257,7 +250,6 @@ class Button extends Component {
           cursor={cursor}
           href={href}
           icon={renderIcon || icon}
-          fluidWidth={fluidWidth}
           variant={variant}
           ref={this.handleButtonRef}
           theme={this.scopeTheme()}
@@ -285,11 +277,6 @@ class Button extends Component {
       href,
       renderIcon: renderIcon || icon,
       theme
-    }
-
-    if (fluidWidth) {
-      buttonProps.textAlign = 'start'
-      buttonProps.display = 'block'
     }
 
     return <BaseButton {...buttonProps}>{children}</BaseButton>
