@@ -29,6 +29,7 @@ import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { supportsObjectFit } from '@instructure/ui-dom-utils'
+import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -40,15 +41,8 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
+@testable()
 class Img extends Component {
-  componentDidMount() {
-    this.props.makeStyles(this.state)
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles(this.state)
-  }
-
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -99,23 +93,27 @@ class Img extends Component {
     withBlur: false
   }
 
+  componentDidMount() {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  get makeStylesVariables() {
+    return {
+      supportsObjectFit: this.supportsObjectFit,
+      hasBackground: this.hasBackground
+    }
+  }
+
   get supportsObjectFit() {
     return supportsObjectFit()
   }
 
-  renderFilter() {
-    const blur = `blur(${this.props.styles.imageBlurAmount})`
-    const grayscale = 'grayscale(1)'
-
-    if (this.props.withGrayscale && this.props.withBlur) {
-      return `${blur} ${grayscale}`
-    } else if (this.props.withGrayscale) {
-      return grayscale
-    } else if (this.props.withBlur) {
-      return blur
-    } else {
-      return null
-    }
+  get hasBackground() {
+    return !this.supportsObjectFit && this.props.constrain
   }
 
   render() {
@@ -131,15 +129,18 @@ class Img extends Component {
       width,
       height,
       elementRef,
+      styles,
       ...props
     } = this.props
+
+    const { hasBackground } = this
 
     const a11yProps = {
       alt: alt || ''
     }
 
     const imageProps = {
-      css: this.props.styles.img,
+      css: styles.img,
       src
     }
 
@@ -152,25 +153,19 @@ class Img extends Component {
       elementRef
     }
 
-    // if browser does not support ObjectFit CSS, and Img needs "constrain",
-    // serve up a background-image instead
-    const hasBackground = !this.supportsObjectFit && this.props.constrain
-
     if (overlay || hasBackground) {
       // if a background image is rendered we add the a11y props on the container element
-      const rootProps = hasBackground
-        ? {
-            ...a11yProps,
-            ...containerProps
-          }
-        : containerProps
+      const rootProps = {
+        ...(hasBackground && a11yProps),
+        ...containerProps
+      }
 
       return (
-        <View {...rootProps} as="span" css={this.props.styles.view}>
+        <View {...rootProps} as="span" css={styles.container}>
           {
             !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
           }
-          {overlay && <span css={this.props.styles.overlay} />}
+          {overlay && <span css={styles.overlay} />}
         </View>
       )
     } else {

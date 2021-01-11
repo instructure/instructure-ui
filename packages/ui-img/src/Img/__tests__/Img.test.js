@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-//TODO: fix style based tests and timeout problems
 import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
@@ -56,10 +55,10 @@ describe('<Img />', () => {
     })
   })
 
-  // it('should render an overlay color', async () => {
-  //   await mount(<Img src={image} overlay={{ color: '#ff0000', opacity: 7 }} />)
-  //   expect(await ImgLocator.find(`.${styles.overlay}`)).to.exist()
-  // })
+  it('should render an overlay color', async () => {
+    await mount(<Img src={image} overlay={{ color: '#ff0000', opacity: 7 }} />)
+    expect(await ImgLocator.find('[class*=-img__overlay]')).to.exist()
+  })
 
   it('should render a blur filter', async () => {
     await mount(<Img src={image} withBlur={true} />)
@@ -125,9 +124,12 @@ describe('<Img />', () => {
     )
   })
 
-  it('applies the container--has-cover class when constrain="cover" is used with overlay', async () => {
+  it('has a container with matching height and width when constrain="cover" is used with overlay', async () => {
+    const height = 32
+    const width = 24
+
     await mount(
-      <div style={{ width: 16, height: 16 }}>
+      <div style={{ width, height }}>
         <Img
           src={image}
           alt="testing123"
@@ -137,15 +139,19 @@ describe('<Img />', () => {
       </div>
     )
 
-    // expect(
-    //   await ImgLocator.find(`.${styles['container--has-cover']}`)
-    // ).to.exist()
+    const container = await ImgLocator.find('[class*=-img__container]')
+
+    expect(container.getComputedStyle().height).to.equal(`${height}px`)
+    expect(container.getComputedStyle().width).to.equal(`${width}px`)
     expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 
-  it('applies the container--has-contain class when constrain="contain" is used with overlay', async () => {
+  it('has a container with matching height and not matching width when constrain="contain" is used with overlay', async () => {
+    const height = 32
+    const width = 24
+
     await mount(
-      <div style={{ width: 16, height: 16 }}>
+      <div style={{ width, height }}>
         <Img
           src={image}
           alt="testing123"
@@ -155,9 +161,12 @@ describe('<Img />', () => {
       </div>
     )
 
-    // expect(
-    //   await ImgLocator.find(`.${styles['container--has-contain']}`)
-    // ).to.exist()
+    const container = await ImgLocator.find('[class*=-img__container]')
+
+    // height is set to inherit, it should match
+    expect(container.getComputedStyle().height).to.equal(`${height}px`)
+    // width isn't set, it shouldn't match
+    expect(container.getComputedStyle().width).not.to.equal(`${width}px`)
     expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 })

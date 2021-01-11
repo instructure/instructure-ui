@@ -29,85 +29,57 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props) => {
-  const {
-    overlay,
-    withBlur,
-    withGrayscale,
-    hasBackground,
-    src,
-    supportsObjectFit,
-    constrain
-  } = props
+const generateStyle = (componentTheme, props, state) => {
+  const { overlay, withBlur, withGrayscale, src, constrain } = props
 
-  const overlayStyle = overlay
-    ? {
-        backgroundColor: overlay.color,
-        opacity: overlay.opacity * 0.1,
-        mixBlendMode: overlay.blend ? overlay.blend : null
-      }
-    : {}
+  const { supportsObjectFit, hasBackground } = state
 
-  const imgOverlayStyle = overlay
-    ? {
-        display: 'block'
-      }
-    : {}
+  const isCover = constrain === 'cover'
+  const isContain = constrain === 'contain'
 
-  const containerOverlayStyle = overlay
-    ? {
-        position: 'relative',
-        overflow:
-          'hidden' /* stops blurred images extending past overlay borders */
-      }
-    : {}
+  // if overlay or filters are updated via props,
+  // make the transition look smooth
+  const transitionStyle = {
+    transition: `all ${componentTheme.effectTransitionDuration}`
+  }
 
-  const filterStyle =
-    withBlur || withGrayscale
+  const getFilterStyle = () => {
+    const filters = []
+
+    withBlur && filters.push(`blur(${componentTheme.imageBlurAmount})`)
+    withGrayscale && filters.push('grayscale(1)')
+
+    return filters.length > 0
       ? {
-          transition: `all ${componentTheme.effectTransitionDuration}`,
-          filter: `${withBlur || ''}${withBlur && withGrayscale && ''}${
-            withGrayscale || ''
-          }`
+          ...transitionStyle,
+          filter: filters.join(' ')
         }
       : {
           filter: 'none'
         }
+  }
 
-  const containerCover = {
+  const fillContainer = {
     width: '100%',
     height: '100%'
   }
-  const cover = {
-    objectFit: 'cover'
+
+  const imgCoverStyle = {
+    objectFit: 'cover',
+    ...fillContainer
   }
 
-  const containerContain = {
-    height: 'inherit'
-  }
-  const contain = {
+  const imgContainStyle = {
     objectFit: 'contain',
-    ...(overlay
-      ? {
-          width: 'auto',
-          height: 'auto',
-          maxWidth: '100%',
-          maxHeight: '100%'
-        }
-      : {})
+    ...fillContainer,
+    ...(overlay && {
+      width: 'auto',
+      height: 'auto',
+      maxWidth: '100%',
+      maxHeight: '100%'
+    })
   }
 
-  const constrainStyle = constrain === 'cover' ? cover : contain
-  const containerConstrainStyle =
-    constrain === 'cover' ? containerCover : containerContain
-
-  const containerBackgroundStyle = {
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: constrain
-  }
-
-  const viewBackgroundImageStyle = hasBackground ? `url(${src})` : {}
   return {
     overlay: {
       label: 'img__overlay',
@@ -116,20 +88,42 @@ const generateStyle = (componentTheme, props) => {
       left: '0px',
       width: '100%',
       height: '100%',
-      ...overlayStyle
+      ...transitionStyle,
+      ...(overlay && {
+        backgroundColor: overlay.color,
+        opacity: overlay.opacity * 0.1,
+        mixBlendMode: overlay.blend ? overlay.blend : null
+      })
     },
-    view: {
-      label: 'img__view',
-      ...viewBackgroundImageStyle,
-      ...containerOverlayStyle,
-      ...containerConstrainStyle,
-      ...containerBackgroundStyle
+
+    container: {
+      label: 'img__container',
+      ...(overlay && {
+        position: 'relative',
+        overflow:
+          'hidden' /* stops blurred images extending past overlay borders */
+      }),
+      ...(isCover && fillContainer),
+      ...(isContain && { height: 'inherit' }),
+
+      // if browser does not support ObjectFit CSS, and Img needs "constrain",
+      // serve up a background-image instead
+      ...(hasBackground && {
+        ...fillContainer,
+        backgroundImage: `url(${src})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        ...(constrain && { backgroundSize: constrain })
+      })
     },
+
     img: {
       label: 'img',
+      // reset image styles (initial: all was causing conflicts
+      // View's CSS and overriding height/width attrs)
       margin: '0',
       padding: '0',
-      cssFloat: 'none',
+      float: 'none',
       top: 'auto',
       bottom: 'auto',
       left: 'auto',
@@ -141,11 +135,21 @@ const generateStyle = (componentTheme, props) => {
       minHeight: '0',
       minWidth: '0',
       maxWidth: '100%',
-      ...imgOverlayStyle,
-      ...filterStyle,
-      ...(supportsObjectFit ? constrainStyle : {})
-    },
-    imageBlurAmount: componentTheme.imageBlurAmount
+
+      ...getFilterStyle(),
+
+      ...(overlay && {
+        // when image is contained in overlay,
+        // avoid extra space at bottom from inline/line-height
+        display: 'block'
+      }),
+
+      ...(supportsObjectFit && {
+        ...(isCover && imgCoverStyle),
+        ...(isContain && imgContainStyle)
+      })
+    }
   }
 }
+
 export default generateStyle
