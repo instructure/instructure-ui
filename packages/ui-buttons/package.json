@@ -46,7 +46,6 @@
     "@instructure/ui-tooltip": "^7.3.1",
     "@instructure/ui-utils": "^7.3.1",
     "@instructure/ui-view": "^7.3.1",
-    "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"
   },
