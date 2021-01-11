@@ -24,7 +24,6 @@
 
 // eslint-disable-next-line import/no-unresolved
 import '@instructure/ui-polyfill-loader!'
-import 'storybook-chromatic'
 
 import { create } from '@storybook/theming'
 import {
@@ -33,8 +32,6 @@ import {
   configure,
   addParameters
 } from '@storybook/react'
-
-import { theme } from '@instructure/canvas-theme'
 
 import { renderExample } from './renderExample'
 import { renderPage } from './renderPage'

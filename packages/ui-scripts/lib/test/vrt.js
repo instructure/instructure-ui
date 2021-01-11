@@ -26,23 +26,11 @@ const {
   getCommand
 } = require('@instructure/command-utils')
 
-const {
-  CHROMATIC_APP_CODE,
-  GERRIT_CHANGE_ID,
-  GERRIT_PROJECT,
-  GERRIT_BRANCH
-} = process.env
+const { CHROMATIC_APP_CODE } = process.env
 
 const args = process.argv.slice(2)
 
-// ui-build --vrt -p 8080
-const portIndex = args.findIndex((arg) => arg === '-p')
-let port = '9001'
-if (portIndex > 0) {
-  port = args[portIndex + 1]
-}
-
-let chromaticArgs = ['test', '--storybook-port', port]
+let chromaticArgs = ['--list', '--debug']
 
 if (args.includes('--auto-accept-changes')) {
   chromaticArgs.push('--auto-accept-changes')
@@ -50,16 +38,8 @@ if (args.includes('--auto-accept-changes')) {
 
 process.exit(
   runCommandsConcurrently({
-    chromatic: getCommand(
-      'chromatic',
-      chromaticArgs,
-      [
-        `CI=true`,
-        `CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}`,
-        GERRIT_CHANGE_ID ? `GERRIT_CHANGE_ID=${GERRIT_CHANGE_ID}` : false,
-        GERRIT_PROJECT ? `GERRIT_PROJECT=${GERRIT_PROJECT}` : false,
-        GERRIT_BRANCH ? `GERRIT_BRANCH=${GERRIT_BRANCH}` : false
-      ].filter(Boolean)
-    )
+    chromatic: getCommand('chromatic', chromaticArgs, [
+      `CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}`
+    ])
   }).status
 )

@@ -1,0 +1,17 @@
+name: 'Chromatic Deployment'
+
+on: [pull_request]
+
+jobs:
+  vrt-check:
+    runs-on: ubuntu-latest
+    name: Chromatic Visual Regression check.
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run the VRT script
+        env:
+          CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+        run: ./docker/vrt "$CHROMATIC_APP_CODE"
+        shell: bash
