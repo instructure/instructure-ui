@@ -26,20 +26,23 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { BaseButton } from '../BaseButton'
+import { withStyle } from '@instructure/emotion'
 
-import theme from './theme'
+import generateComponentTheme from './theme'
+
+import { BaseButton } from '../BaseButton'
 
 /**
 ---
 category: components
 ---
 **/
+// needed for theme variable list on docs page
+@withStyle(null, generateComponentTheme)
 @testable()
-@themeable(theme, null)
 class Button extends Component {
   static propTypes = {
     /**
