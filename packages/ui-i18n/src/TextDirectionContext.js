@@ -21,57 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
+import { createContext } from 'react'
+import { getTextDirection } from './getTextDirection'
 
-/**
- * ---
- * category: utilities/i18n
- * ---
- * @module TextDirectionContext
- */
-const CONTEXT_KEY = '@@bidirectional'
-
+const TextDirectionContext = createContext(getTextDirection() || 'ltr')
 const DIRECTION = {
   ltr: 'ltr',
   rtl: 'rtl'
-}
-
-const TextDirectionContext = {
-  CONTEXT_KEY,
-  DIRECTION,
-
-  /**
-   * React context types for [bidirectional](#bidirectional) components and
-   * the [ApplyTextDirection](#ApplyTextDirection) component.
-   */
-  types: {
-    [CONTEXT_KEY]: PropTypes.shape({
-      dir: PropTypes.oneOf(Object.values(DIRECTION))
-    })
-  },
-
-  /**
-   * create direction context
-   * @param {string} dir
-   */
-  makeTextDirectionContext(dir) {
-    return {
-      [CONTEXT_KEY]: {
-        dir
-      }
-    }
-  },
-
-  /**
-   * get a direction context from a context object
-   * @param {ReactContext} context React context object
-   * @returns {Object} a direction context object
-   */
-  getTextDirectionContext(context) {
-    if (context) {
-      return context[CONTEXT_KEY]
-    }
-  }
 }
 
 export default TextDirectionContext

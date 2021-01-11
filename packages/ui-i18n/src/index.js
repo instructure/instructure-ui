@@ -23,12 +23,14 @@
  */
 
 export { ApplyLocale } from './ApplyLocale'
-export { ApplyTextDirection } from './ApplyTextDirection'
 export { bidirectional } from './bidirectional'
 export { DateTime } from './DateTime'
 export { Decimal } from './Decimal'
 export { getTextDirection } from './getTextDirection'
 export { I18nPropTypes } from './I18nPropTypes'
 export { Locale } from './Locale'
-export { TextDirectionContext, DIRECTION } from './TextDirectionContext'
-export { useTextDirectionContext } from './ApplyTextDirection/new'
+export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
+export {
+  useTextDirectionContext,
+  ApplyTextDirection
+} from './ApplyTextDirection'

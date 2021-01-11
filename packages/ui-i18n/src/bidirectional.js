@@ -21,15 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
 import PropTypes from 'prop-types'
 import { decorator } from '@instructure/ui-decorator'
 
-import { TextDirectionContext } from './TextDirectionContext'
 import { getTextDirection } from './getTextDirection'
-import { useTextDirectionContext } from './ApplyTextDirection/new'
-
-const { DIRECTION } = TextDirectionContext
+import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
 
 /**
  * ---
@@ -60,21 +56,18 @@ const { DIRECTION } = TextDirectionContext
  * @return {function} composes the bidirectional component.
  */
 const bidirectional = decorator((ComposedComponent) => {
-  class BidirectionalComponent extends ComposedComponent {
+  return class BidirectionalComponent extends ComposedComponent {
     static propTypes = {
       ...ComposedComponent.propTypes,
-      dir: PropTypes.oneOf(Object.values(TextDirectionContext.DIRECTION))
+      dir: PropTypes.oneOf(Object.values(DIRECTION))
     }
 
-    static contextTypes = {
-      ...ComposedComponent.contextTypes,
-      ...TextDirectionContext.types
-    }
+    static contextType = TextDirectionContext
 
     get dir() {
       const context = this.context || {}
 
-      return this.props.dir || context.dir || getTextDirection()
+      return this.props.dir || context || getTextDirection()
     }
 
     get rtl() {
@@ -85,30 +78,9 @@ const bidirectional = decorator((ComposedComponent) => {
       return this.dir === DIRECTION.ltr
     }
   }
-
-  return withBidirectional(BidirectionalComponent)
 })
 
 bidirectional.DIRECTION = DIRECTION
-
-const useBidirectional = (props = {}) => {
-  const context = useTextDirectionContext()
-  const dir = props.dir || context
-
-  return {
-    dir,
-    rtl: dir === DIRECTION.rtl,
-    ltr: dir === DIRECTION.ltr
-  }
-}
-
-const withBidirectional = (ComposedComponent) => {
-  return function BidirectionalComponent(props) {
-    const dir = useBidirectional(props)
-
-    return <ComposedComponent {...{ ...props, ...dir }} />
-  }
-}
 
 export default bidirectional
 export { bidirectional }

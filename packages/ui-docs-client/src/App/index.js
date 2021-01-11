@@ -37,7 +37,6 @@ import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
-
 import {
   IconHamburgerSolid,
   IconHeartLine,
