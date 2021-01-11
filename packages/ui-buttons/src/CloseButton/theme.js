@@ -22,11 +22,29 @@
  * SOFTWARE.
  */
 
-export default function ({ spacing, stacking }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { spacing, stacking, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    offsetMedium: spacing?.medium,
+    offsetSmall: spacing?.small,
+    offsetXSmall: spacing?.xSmall,
+    zIndex: stacking?.above
+  }
+
   return {
-    offsetMedium: spacing.medium,
-    offsetSmall: spacing.small,
-    offsetXSmall: spacing.xSmall,
-    zIndex: stacking.above
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme

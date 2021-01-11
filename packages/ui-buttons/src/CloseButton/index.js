@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   getInteraction,
   passthroughProps,
@@ -37,24 +37,30 @@ import {
 } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 
-import { BaseButton } from '../BaseButton'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
+import { BaseButton } from '../BaseButton'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
   children: 'screenReaderLabel',
   variant: 'color'
 })
 @testable()
-@themeable(theme, styles)
 class CloseButton extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * An accessible label for the `CloseButton` (required)
      */
@@ -149,6 +155,8 @@ class CloseButton extends Component {
   }
 
   componentDidMount() {
+    this.props.makeStyles()
+
     error(
       this.props.screenReaderLabel || this.props.children,
       `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
@@ -156,6 +164,8 @@ class CloseButton extends Component {
   }
 
   componentDidUpdate() {
+    this.props.makeStyles()
+
     error(
       this.props.screenReaderLabel || this.props.children,
       `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
@@ -190,18 +200,12 @@ class CloseButton extends Component {
       href,
       cursor,
       tabIndex,
+      styles,
       ...props
     } = this.props
 
     return (
-      <span
-        {...passthroughProps(props)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`placement--${placement}`]]: placement,
-          [styles[`offset--${offset}`]]: offset
-        })}
-      >
+      <span {...passthroughProps(props)} css={styles.closeButton}>
         <BaseButton
           renderIcon={IconXSolid}
           elementRef={elementRef}
