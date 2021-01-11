@@ -40,7 +40,7 @@ import { BaseButton } from '../BaseButton'
 category: components
 ---
 **/
-// needed for theme variable list on docs page
+// needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
 @testable()
 class Button extends Component {
