@@ -30,12 +30,7 @@ import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
-import {
-  getInteraction,
-  passthroughProps,
-  deprecated
-} from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
+import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -50,10 +45,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  children: 'screenReaderLabel',
-  variant: 'color'
-})
 @testable()
 class CloseButton extends Component {
   static propTypes = {
@@ -64,7 +55,8 @@ class CloseButton extends Component {
     /**
      * An accessible label for the `CloseButton` (required)
      */
-    screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]), // CloseButton could previously accept node children, loosening this type for backwards compatibility
+    screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+      .isRequired,
     /**
      * Specifies the color for the `CloseButton`.
      */
@@ -121,23 +113,13 @@ class CloseButton extends Component {
     /**
      * Specifies the tabindex of the `CloseButton`.
      */
-    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    /**
-     * __Deprecated - use `screenReaderLabel` instead__
-     */
-    children: PropTypes.node,
-    /**
-     * __Deprecated - use `color` instead__
-     */
-    variant: PropTypes.oneOf(['icon', 'icon-inverse'])
+    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   }
 
   static defaultProps = {
     screenReaderLabel: undefined,
-    children: undefined,
     onClick: (event) => {},
     elementRef: undefined,
-    variant: undefined,
     color: undefined,
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -156,20 +138,10 @@ class CloseButton extends Component {
 
   componentDidMount() {
     this.props.makeStyles()
-
-    error(
-      this.props.screenReaderLabel || this.props.children,
-      `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
-    )
   }
 
   componentDidUpdate() {
     this.props.makeStyles()
-
-    error(
-      this.props.screenReaderLabel || this.props.children,
-      `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
-    )
   }
 
   get interaction() {
@@ -177,17 +149,13 @@ class CloseButton extends Component {
   }
 
   get color() {
-    const { color, variant } = this.props
+    const { color } = this.props
 
-    if (variant === 'icon-inverse' || color === 'primary-inverse')
-      return 'primary-inverse'
-
-    return 'secondary'
+    return color === 'primary' ? 'secondary' : color
   }
 
   render() {
     const {
-      children,
       screenReaderLabel,
       elementRef,
       size,
@@ -222,9 +190,7 @@ class CloseButton extends Component {
           cursor={cursor}
           tabIndex={tabIndex}
         >
-          <ScreenReaderContent>
-            {screenReaderLabel || children}
-          </ScreenReaderContent>
+          <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
         </BaseButton>
       </span>
     )

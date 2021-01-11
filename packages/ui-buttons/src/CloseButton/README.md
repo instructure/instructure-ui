@@ -2,22 +2,6 @@
 describes: CloseButton
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>variant</code> prop has been changed to <code>color: ['primary', 'primary-inverse']</code>
-    </Figure.Item>
-    <Figure.Item>
-      The <code>children</code> prop has been changed to <code>screenReaderLabel</code>
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 Some design patterns require a `CloseButton` to be placed in the start or end position. This is a helper component that gives you the close icon out of the box and facilitates placement.
 
 The `placement` prop designates the `CloseButton` placement within the parent container. Note that in order to apply an `offset`, `placement` should be set to `start` or `end`. Also make sure that the container has a `position` css style applied other than `static`. In the following example we use [View](#View) as the container and set the `position` to `relative`.
