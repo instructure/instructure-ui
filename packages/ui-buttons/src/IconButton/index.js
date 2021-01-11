@@ -26,13 +26,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { BaseButton } from '../BaseButton'
+import { withStyle } from '@instructure/emotion'
 
-import theme from './theme.js'
+import generateComponentTheme from './theme'
+
+import { BaseButton } from '../BaseButton'
 
 /**
 ---
@@ -40,8 +42,9 @@ category: components
 ---
 **/
 
+// needed for listing the available theme variables on docs page
+@withStyle(null, generateComponentTheme)
 @testable()
-@themeable(theme)
 class IconButton extends Component {
   static propTypes = {
     /**
@@ -169,7 +172,8 @@ class IconButton extends Component {
       ...props
     } = this.props
 
-    const { theme } = this
+    // eslint-disable-next-line react/prop-types
+    const themeOverride = this.props.themeOverride
 
     return (
       <BaseButton
@@ -188,7 +192,7 @@ class IconButton extends Component {
         cursor={cursor}
         href={href}
         renderIcon={children || renderIcon}
-        theme={theme}
+        themeOverride={themeOverride}
         ref={(component) => {
           this._baseButton = component
         }}
