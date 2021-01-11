@@ -46,23 +46,23 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('should take on the context direction if dir prop is not supplied', async () => {
-    const context = TextDirectionContext.makeTextDirectionContext('rtl')
     const subject = await mount(
-      <ApplyTextDirection>Hello world</ApplyTextDirection>,
-      { context }
+      <ApplyTextDirection dir="rtl">Hello World</ApplyTextDirection>
     )
 
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('rtl')
   })
 
   it('should give dir prop preference over context and default document element when supplied', async () => {
-    const context = TextDirectionContext.makeTextDirectionContext('rtl')
     const subject = await mount(
-      <ApplyTextDirection dir="ltr">Hello world</ApplyTextDirection>,
-      { context }
+      <ApplyTextDirection dir="rtl">
+        <ApplyTextDirection dir="ltr">Hello world</ApplyTextDirection>
+      </ApplyTextDirection>
     )
 
-    expect(subject.getDOMNode().getAttribute('dir')).to.equal('ltr')
+    expect(subject.getDOMNode().childNodes[0].getAttribute('dir')).to.equal(
+      'ltr'
+    )
   })
 
   it('should pass direction via context to bidirectional children', async () => {
