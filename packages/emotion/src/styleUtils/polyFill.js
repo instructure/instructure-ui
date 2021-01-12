@@ -142,7 +142,7 @@ function processProps({ originalProp, originalValue }, textDirection) {
 const isSupportedProps = (prop) => SUPPORT_PROPS.indexOf(prop) > -1
 
 const processStyleProps = (propsObj, dir) =>
-  Object.entries(propsObj).length
+  isObject(propsObj)
     ? Object.entries(propsObj).reduce(
         (accumulator, [originalProp, originalValue]) => {
           if (isObject(originalValue)) {
