@@ -32,6 +32,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import { omitProps } from '@instructure/ui-react-utils'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -39,7 +40,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ModalBody extends Component {
   static propTypes = {

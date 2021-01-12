@@ -30,6 +30,7 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -37,7 +38,7 @@ parent: Modal
 id: Modal.Footer
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ModalFooter extends Component {
   static propTypes = {

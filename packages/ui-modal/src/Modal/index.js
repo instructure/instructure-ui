@@ -47,6 +47,7 @@ import { ModalBody } from './ModalBody'
 import { ModalFooter } from './ModalFooter'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -54,7 +55,7 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Modal extends Component {
   static propTypes = {
