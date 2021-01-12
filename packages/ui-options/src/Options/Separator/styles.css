@@ -1,6 +1,0 @@
-.separator {
-  height: var(--height);
-  margin: var(--margin);
-  overflow: hidden;
-  background: var(--background);
-}

@@ -22,21 +22,21 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import {
   omitProps,
   getElementType,
-  callRenderProp,
-  matchComponentTypes
+  callRenderProp
 } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -44,10 +44,14 @@ parent: Options
 id: Options.Item
 ---
 **/
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Item extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Element type to render as
      */
@@ -85,29 +89,24 @@ class Item extends Component {
     children: null
   }
 
-  get containsList() {
-    if (matchComponentTypes(this.props.children, ['Options'])) {
-      return true
-    }
-    return false
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
-  renderContent(placement) {
-    const { renderBeforeLabel, renderAfterLabel } = this.props
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
 
-    const classes = {
-      [styles.content]: true,
-      [styles[`content--${placement}`]]: true
-    }
+  renderContent(renderLabel, contentVariant) {
+    const { styles } = this.props
 
     return (
       <span
-        className={classnames(classes)}
+        css={[styles.content, contentVariant]}
         role="presentation"
         aria-hidden="true"
       >
-        {placement === 'before' && callRenderProp(renderBeforeLabel)}
-        {placement === 'after' && callRenderProp(renderAfterLabel)}
+        {callRenderProp(renderLabel)}
       </span>
     )
   }
@@ -116,7 +115,7 @@ class Item extends Component {
     const {
       as,
       role,
-      variant,
+      styles,
       renderBeforeLabel,
       renderAfterLabel,
       children
@@ -124,23 +123,16 @@ class Item extends Component {
 
     const ElementType = getElementType(Item, this.props, () => as)
     const passthroughProps = omitProps(this.props, Item.propTypes)
-    const classes = {
-      [styles.root]: true,
-      [styles.isDisabled]: variant === 'disabled',
-      [styles.isHighlighted]: variant === 'highlighted',
-      [styles.isSelected]: variant === 'selected',
-      [styles.containsList]: this.containsList,
-      [styles.hasContentBeforeLabel]: renderBeforeLabel,
-      [styles.hasContentAfterLabel]: renderAfterLabel
-    }
 
     return (
-      <ElementType role="none" className={classnames(classes)}>
-        <span {...passthroughProps} className={styles.container} role={role}>
+      <ElementType role="none" css={styles.item}>
+        <span {...passthroughProps} css={styles.container} role={role}>
           {children}
         </span>
-        {renderBeforeLabel && this.renderContent('before')}
-        {renderAfterLabel && this.renderContent('after')}
+        {renderBeforeLabel &&
+          this.renderContent(renderBeforeLabel, styles.contentBefore)}
+        {renderAfterLabel &&
+          this.renderContent(renderAfterLabel, styles.contentAfter)}
       </ElementType>
     )
   }
