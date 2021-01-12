@@ -23,13 +23,24 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = () => {
-  return {}
+const generateStyle = () => {
+  return {
+    pagination: {
+      label: 'pagination',
+      textAlign: 'center'
+    },
+    pages: {
+      label: 'pagination_pages',
+      display: 'inline-flex',
+      alignItems: 'center'
+    }
+  }
 }
 
-export default generateComponentTheme
+export default generateStyle
