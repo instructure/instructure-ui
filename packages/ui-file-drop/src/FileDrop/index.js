@@ -45,6 +45,7 @@ import { getEventFiles } from './utils/getEventFiles'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 function keyEventIsClickButton(e) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
@@ -67,7 +68,7 @@ const IS_MS = isBrowserMS()
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
   label: 'renderLabel',
   enablePreview: 'shouldEnablePreview',
