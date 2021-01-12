@@ -28,8 +28,8 @@ import Color from 'tinycolor2'
  * ---
  * category: utilities
  * ---
- * Converts an color string to a hex string like `#FF0000` For possible inputs see
- * https://github.com/bgrins/TinyColor
+ * Converts a color string to a hex string like `#FF0000`
+ * For possible inputs see https://github.com/bgrins/TinyColor
  * @param {String} rgb a color string
  * @returns {String} a hex string like `#FF0000`
  */

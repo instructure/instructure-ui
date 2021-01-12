@@ -28,7 +28,6 @@ import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { Modal } from '../index'
 import { ModalLocator } from '../ModalLocator'
 import { EmotionThemeProvider } from '@instructure/emotion'
-import generateComponentTheme from '../theme'
 import { canvas } from '@instructure/ui-themes'
 
 describe('<Modal />', async () => {
@@ -64,25 +63,17 @@ describe('<Modal />', async () => {
   })
 
   it('should apply theme overrides when open', async () => {
-    const themeOverride = {
-      components: {
-        Modal: {
-          smallMaxWidth: '10em'
-        }
-      }
-    }
     await mount(
       <EmotionThemeProvider theme={canvas}>
-        <EmotionThemeProvider theme={themeOverride}>
-          <Modal
-            open
-            size="small"
-            label="Modal Dialog"
-            shouldReturnFocus={false}
-          >
-            <Modal.Body>Foo Bar Baz</Modal.Body>
-          </Modal>
-        </EmotionThemeProvider>
+        <Modal
+          open
+          size="small"
+          label="Modal Dialog"
+          shouldReturnFocus={false}
+          themeOverride={{ smallMaxWidth: '10em' }}
+        >
+          <Modal.Body>Foo Bar Baz</Modal.Body>
+        </Modal>
       </EmotionThemeProvider>
     )
 
@@ -113,25 +104,17 @@ describe('<Modal />', async () => {
   })
 
   it("should not inherit its parent's font color", async () => {
-    const themeOverride = {
-      components: {
-        Modal: {
-          textColor: 'rgb(0, 0, 0)'
-        }
-      }
-    }
     await mount(
       <div style={{ color: 'rgb(255, 255, 255)' }}>
-        <EmotionThemeProvider theme={themeOverride}>
-          <Modal
-            open
-            label="Modal Dialog"
-            shouldReturnFocus={false}
-            constrain="parent"
-          >
-            <Modal.Body>Foo Bar Baz</Modal.Body>
-          </Modal>
-        </EmotionThemeProvider>
+        <Modal
+          open
+          label="Modal Dialog"
+          shouldReturnFocus={false}
+          constrain="parent"
+          themeOverride={{ textColor: 'rgb(0, 0, 0)' }}
+        >
+          <Modal.Body>Foo Bar Baz</Modal.Body>
+        </Modal>
       </div>
     )
 

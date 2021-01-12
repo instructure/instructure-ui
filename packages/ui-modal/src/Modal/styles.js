@@ -22,24 +22,20 @@
  * SOFTWARE.
  */
 
-import generateComponentTheme from './theme'
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props, state) => {
-  // get the theme variables object for the component
-  const componentTheme = generateComponentTheme(theme, themeOverride)
+const generateStyle = (componentTheme, props, state) => {
   const { size, variant, overflow, constrain } = props
 
   const commonSizeStyleExceptForFullscreen = {
     maxWidth: '95%',
     maxHeight: '95%',
-    ...(overflow && {
+    ...(overflow === 'fit' && {
       transform: 'translateY(2.5%)'
     })
   }
