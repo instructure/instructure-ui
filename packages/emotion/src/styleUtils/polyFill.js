@@ -142,28 +142,30 @@ function processProps({ originalProp, originalValue }, textDirection) {
 const isSupportedProps = (prop) => SUPPORT_PROPS.indexOf(prop) > -1
 
 const processStyleProps = (propsObj, dir) =>
-  Object.entries(propsObj).reduce(
-    (accumulator, [originalProp, originalValue]) => {
-      if (isObject(originalValue)) {
-        return {
-          ...accumulator,
-          [originalProp]: processStyleProps(originalValue, dir)
-        }
-      }
+  Object.entries(propsObj).length
+    ? Object.entries(propsObj).reduce(
+        (accumulator, [originalProp, originalValue]) => {
+          if (isObject(originalValue)) {
+            return {
+              ...accumulator,
+              [originalProp]: processStyleProps(originalValue, dir)
+            }
+          }
 
-      if (isSupportedProps(originalProp) && originalValue) {
-        const { prop, value } = processProps(
-          { originalProp, originalValue },
-          dir
-        )
+          if (isSupportedProps(originalProp) && originalValue) {
+            const { prop, value } = processProps(
+              { originalProp, originalValue },
+              dir
+            )
 
-        return { ...accumulator, [prop]: value }
-      }
+            return { ...accumulator, [prop]: value }
+          }
 
-      return { ...accumulator, [originalProp]: originalValue }
-    },
-    {}
-  )
+          return { ...accumulator, [originalProp]: originalValue }
+        },
+        {}
+      )
+    : propsObj
 
 export const bidirectionalPolyfill = (styles, dir) =>
   Object.entries(styles).reduce(
