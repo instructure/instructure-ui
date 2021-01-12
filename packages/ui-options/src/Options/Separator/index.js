@@ -22,14 +22,16 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { getElementType } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -38,9 +40,13 @@ id: Options.Separator
 ---
 @module Separator
 **/
-@themeable(theme, styles)
+@withStyle(generateStyles, generateComponentTheme)
 class Separator extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Element type to render as
      */
@@ -51,13 +57,21 @@ class Separator extends Component {
     as: 'span'
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { as, ...rest } = this.props
+    const { as, styles, makeStyles, ...rest } = this.props
     const ElementType = getElementType(Separator, this.props, () => as)
 
     return (
       <ElementType role="none">
-        <div {...rest} className={styles.separator} role="presentation" />
+        <div {...rest} css={styles.separator} role="presentation" />
       </ElementType>
     )
   }
