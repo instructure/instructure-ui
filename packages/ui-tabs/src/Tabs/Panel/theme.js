@@ -22,22 +22,38 @@
  * SOFTWARE.
  */
 
-export default function generator({ typography, colors, borders }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { typography, colors, borders, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeight,
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style
+  }
+
   return {
-    fontSize: typography.fontSizeMedium,
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeight,
-    color: colors.textDarkest,
-    background: colors.backgroundLightest,
-    borderColor: colors.borderMedium,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme
