@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import {
   passthroughProps,
   callRenderProp,
@@ -34,8 +33,10 @@ import {
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -43,13 +44,17 @@ parent: Tabs
 id: Tabs.Tab
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
   selected: 'isSelected',
   disabled: 'isDisabled'
 })
-@themeable(theme, styles)
 class Tab extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     variant: PropTypes.oneOf(['default', 'secondary']),
     id: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
@@ -80,6 +85,14 @@ class Tab extends Component {
     onKeyDown: (event, { index, id }) => {}
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   handleClick = (event) => {
     const { onClick, index, id, disabled, isDisabled } = this.props
 
@@ -108,6 +121,7 @@ class Tab extends Component {
       disabled,
       controls,
       children,
+      styles,
       ...props
     } = this.props
 
@@ -122,10 +136,7 @@ class Tab extends Component {
         id={id}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        className={classnames({
-          [styles.root]: true,
-          [styles[variant]]: true
-        })}
+        css={styles.tab}
         aria-selected={isSelected ? 'true' : null}
         aria-disabled={isDisabled ? 'true' : null}
         aria-controls={controls}
