@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { Panel } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Panel.theme', async () => {
   describe('with the default theme', async () => {
-    const variables = Panel.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('secondary variant', async () => {
       it('should ensure text and tab panel background meet 3:1 contrast', async () => {
@@ -39,7 +40,7 @@ describe('Panel.theme', async () => {
   })
 
   describe('with the "canvas-high-contrast" theme', async () => {
-    const variables = Panel.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('secondary variant', async () => {
       it('should ensure text and tab panel background meet 4.5:1 contrast', async () => {
