@@ -22,20 +22,34 @@
  * SOFTWARE.
  */
 
-.root {
-  box-sizing: border-box;
-  word-wrap: break-word;
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    options: {
+      label: 'options',
+      boxSizing: 'border-box',
+      wordWrap: 'break-word'
+    },
+    list: {
+      label: 'options__list',
+      listStyleType: 'none',
+      position: 'relative'
+    },
+    label: {
+      label: 'options__label',
+      color: componentTheme.labelColor,
+      cursor: 'default',
+      display: 'block',
+      fontWeight: componentTheme.labelFontWeight,
+      padding: componentTheme.nestedLabelPadding
+    }
+  }
 }
 
-.list {
-  list-style-type: none;
-  position: relative;
-}
-
-.label {
-  color: var(--labelColor);
-  cursor: default;
-  display: block;
-  font-weight: var(--labelFontWeight);
-  padding: var(--nestedLabelPadding);
-}
+export default generateStyle
