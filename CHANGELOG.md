@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.3](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.3) (2021-01-13)
+
+### Bug Fixes
+
+- **browserslist-config-instui:** remove IE from supported browserslist ([09c0888](https://github.com/instructure/instructure-ui/commit/09c0888))
+- **esm:** don't mark commonjs as esm ([957c7cd](https://github.com/instructure/instructure-ui/commit/957c7cd))
+- **esm:** fix rebasing artifacts ([a791afe](https://github.com/instructure/instructure-ui/commit/a791afe))
+- **esm:** improve esm support ([b9184cc](https://github.com/instructure/instructure-ui/commit/b9184cc))
+- **esm:** remove packaging-test/ ([1bfb15f](https://github.com/instructure/instructure-ui/commit/1bfb15f))
+- **esm:** rewrite specify-commonjs-format in js ([005905e](https://github.com/instructure/instructure-ui/commit/005905e))
+- **esm:** specify "exports" in package manifests ([6007684](https://github.com/instructure/instructure-ui/commit/6007684))
+- **esm:** upgrade babel ([173a310](https://github.com/instructure/instructure-ui/commit/173a310))
+- **esm:** validate esm packaging ([687ea0e](https://github.com/instructure/instructure-ui/commit/687ea0e))
+
 ## [7.3.2](https://github.com/instructure/instructure-ui/compare/v7.3.1...v7.3.2) (2020-12-10)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-range-input",
-  "version": "7.3.2",
+  "version": "7.3.3",
   "description": "A styled HTML range input",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -30,24 +30,24 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.2",
-    "@instructure/ui-color-utils": "^7.3.2",
-    "@instructure/ui-dom-utils": "^7.3.2",
-    "@instructure/ui-form-field": "^7.3.2",
-    "@instructure/ui-prop-types": "^7.3.2",
-    "@instructure/ui-react-utils": "^7.3.2",
-    "@instructure/ui-testable": "^7.3.2",
-    "@instructure/ui-themeable": "^7.3.2",
-    "@instructure/ui-utils": "^7.3.2",
-    "@instructure/ui-view": "^7.3.2",
-    "@instructure/uid": "^7.3.2",
+    "@instructure/console": "^7.3.3",
+    "@instructure/ui-color-utils": "^7.3.3",
+    "@instructure/ui-dom-utils": "^7.3.3",
+    "@instructure/ui-form-field": "^7.3.3",
+    "@instructure/ui-prop-types": "^7.3.3",
+    "@instructure/ui-react-utils": "^7.3.3",
+    "@instructure/ui-testable": "^7.3.3",
+    "@instructure/ui-themeable": "^7.3.3",
+    "@instructure/ui-utils": "^7.3.3",
+    "@instructure/ui-view": "^7.3.3",
+    "@instructure/uid": "^7.3.3",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.2",
-    "@instructure/ui-test-locator": "^7.3.2",
-    "@instructure/ui-test-utils": "^7.3.2"
+    "@instructure/ui-babel-preset": "^7.3.3",
+    "@instructure/ui-test-locator": "^7.3.3",
+    "@instructure/ui-test-utils": "^7.3.3"
   },
   "peerDependencies": {
     "react": "^16.8"

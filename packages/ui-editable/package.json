@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-editable",
-  "version": "7.3.2",
+  "version": "7.3.3",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -29,19 +29,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.2",
-    "@instructure/ui-test-utils": "^7.3.2"
+    "@instructure/ui-babel-preset": "^7.3.3",
+    "@instructure/ui-test-utils": "^7.3.3"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.2",
-    "@instructure/ui-a11y-content": "^7.3.2",
-    "@instructure/ui-buttons": "^7.3.2",
-    "@instructure/ui-dom-utils": "^7.3.2",
-    "@instructure/ui-flex": "^7.3.2",
-    "@instructure/ui-focusable": "^7.3.2",
-    "@instructure/ui-icons": "^7.3.2",
-    "@instructure/ui-utils": "^7.3.2",
+    "@instructure/console": "^7.3.3",
+    "@instructure/ui-a11y-content": "^7.3.3",
+    "@instructure/ui-buttons": "^7.3.3",
+    "@instructure/ui-dom-utils": "^7.3.3",
+    "@instructure/ui-flex": "^7.3.3",
+    "@instructure/ui-focusable": "^7.3.3",
+    "@instructure/ui-icons": "^7.3.3",
+    "@instructure/ui-utils": "^7.3.3",
     "prop-types": "^15"
   },
   "peerDependencies": {
