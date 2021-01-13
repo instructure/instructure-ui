@@ -25,12 +25,13 @@
 import { contrast } from '@instructure/ui-color-utils'
 import { expect } from '@instructure/ui-test-utils'
 
-import { Options } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 /* eslint-disable mocha/no-synchronous-tests */
 describe('Options.theme', () => {
   describe('with the default theme', () => {
-    const variables = Options.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(3)
@@ -38,7 +39,7 @@ describe('Options.theme', () => {
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = Options.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(4.5)

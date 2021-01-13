@@ -32,7 +32,6 @@ import {
 
 import { Options } from '../index'
 import { OptionsLocator } from '../OptionsLocator'
-import styles from '../Item/styles.css'
 import OptionsExamples from '../__examples__/Options.examples'
 
 describe('<Options />', async () => {
@@ -161,13 +160,16 @@ describe('<Options />', async () => {
       </Options>
     )
     const options = await OptionsLocator.find()
-    const items = await options.findAllItems()
+    const items = await options.findAll('[class$=-optionItem]')
     const nestedItem = await options.findItem(':contains(Nested list)')
     const nestedLabel = await nestedItem.findWithText('Nested list')
+    const nestedList = await nestedItem.find('[class$=-options__list]')
+    const nestedListItems = await nestedList.findAll('[class$=-optionItem]')
 
     expect(items.length).to.equal(5)
     expect(nestedLabel).to.exist()
-    expect(nestedItem.hasClass(styles.containsList)).to.be.true()
+    expect(nestedList).to.exist()
+    expect(nestedListItems.length).to.equal(2)
   })
 
   describe('with generated examples', async () => {
