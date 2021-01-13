@@ -24,11 +24,13 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
-import { Tab } from '../index'
+
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Tab.theme', async () => {
   describe('with the default theme', async () => {
-    const variables = Tab.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('secondary variant', async () => {
       it('should ensure text and tab background meet 3:1 contrast', async () => {
@@ -43,7 +45,7 @@ describe('Tab.theme', async () => {
   })
 
   describe('with the "canvas-high-contrast" theme', async () => {
-    const variables = Tab.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('secondary variant', async () => {
       it('should ensure text and tab background meet 4.5:1 contrast', async () => {

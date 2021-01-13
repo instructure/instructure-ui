@@ -32,12 +32,14 @@
     "@instructure/ui-babel-preset": "^7.3.1",
     "@instructure/ui-color-utils": "^7.3.1",
     "@instructure/ui-test-locator": "^7.3.1",
-    "@instructure/ui-test-utils": "^7.3.1"
+    "@instructure/ui-test-utils": "^7.3.1",
+    "@instructure/ui-themes": "^7.3.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@instructure/console": "^7.3.1",
     "@instructure/debounce": "^7.3.1",
+    "@instructure/emotion": "^7.3.1",
     "@instructure/ui-dom-utils": "^7.3.1",
     "@instructure/ui-focusable": "^7.3.1",
     "@instructure/ui-i18n": "^7.3.1",

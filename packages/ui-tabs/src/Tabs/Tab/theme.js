@@ -22,32 +22,48 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, typography, stacking }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, stacking, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      defaultColor: theme['ic-brand-font-color-dark'],
+      defaultSelectedBorderColor: theme['ic-brand-primary'],
+
+      secondaryColor: theme['ic-brand-primary'],
+      secondarySelectedColor: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeightCondensed,
+    fontSize: typography?.fontSizeMedium,
+
+    defaultColor: colors?.textDarkest,
+    defaultHoverBorderColor: colors?.borderMedium,
+    defaultSelectedBorderColor: colors?.borderBrand,
+
+    secondaryColor: colors?.textBrand,
+    secondarySelectedBackground: colors?.backgroundLightest,
+    secondarySelectedBorderColor: colors?.borderMedium,
+    secondarySelectedColor: colors?.textDarkest,
+
+    zIndex: stacking?.above
+  }
+
   return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeightCondensed,
-    fontSize: typography.fontSizeMedium,
-
-    defaultColor: colors.textDarkest,
-    defaultlHoverBorderColor: colors.borderMedium,
-    defaultSelectedBorderColor: colors.borderBrand,
-
-    secondaryColor: colors.textBrand,
-    secondarySelectedBackground: colors.backgroundLightest,
-    secondarySelectedBorderColor: colors.borderMedium,
-    secondarySelectedColor: colors.textDarkest,
-
-    zIndex: stacking.above
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    defaultColor: variables['ic-brand-font-color-dark'],
-    defaultSelectedBorderColor: variables['ic-brand-primary'],
-
-    secondaryColor: variables['ic-brand-primary'],
-    secondarySelectedColor: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme
