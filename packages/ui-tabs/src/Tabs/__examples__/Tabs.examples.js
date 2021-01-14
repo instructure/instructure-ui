@@ -31,7 +31,7 @@ const contentLong =
 
 export default {
   sectionProp: 'variant',
-  excludeProps: ['selectedIndex', 'onChange'],
+  excludeProps: ['onChange'],
   filter: (props) => {
     if (props.tabOverflow === 'scroll' && props.variant === 'secondary')
       return true
