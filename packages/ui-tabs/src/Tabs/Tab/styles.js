@@ -32,9 +32,6 @@ const selectedTab = keyframes`
     transform: translate3d(0, 0, 0) scaleX(1);
   }`
 
-const defaultTabVerticalPadding = '1.25rem'
-const secondaryTabVerticalPadding = '1rem'
-
 /**
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
@@ -49,7 +46,7 @@ const generateStyle = (componentTheme, props, state) => {
 
   const variants = {
     default: {
-      padding: `1rem ${defaultTabVerticalPadding}`,
+      padding: '1rem 1.25rem', // if horizontal padding changes, update `scrollOverlayWidthDefault` in `Tabs/theme.js`
       lineHeight: 1,
       position: 'relative',
       zIndex: componentTheme.zIndex,
@@ -83,7 +80,7 @@ const generateStyle = (componentTheme, props, state) => {
       }
     },
     secondary: {
-      padding: `0.75rem ${secondaryTabVerticalPadding}`,
+      padding: '0.75rem 1rem', // if horizontal padding changes, update `scrollOverlayWidthSecondary` in `Tabs/theme.js`
       color: componentTheme.secondaryColor,
       marginInlineEnd: '0.2em',
       marginBottom: '-0.0625rem',
@@ -138,4 +135,3 @@ const generateStyle = (componentTheme, props, state) => {
 }
 
 export default generateStyle
-export { generateStyle, defaultTabVerticalPadding, secondaryTabVerticalPadding }
