@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.4](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.4) (2021-01-14)
+
+### Bug Fixes
+
+- **browserslist-config-instui:** fix broken tests caused by IE11 support removal ([1ecf80b](https://github.com/instructure/instructure-ui/commit/1ecf80b))
+- **browserslist-config-instui:** remove IE from supported browserslist ([09c0888](https://github.com/instructure/instructure-ui/commit/09c0888))
+
 ## [7.3.3](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.3) (2021-01-13)
 
 ### Bug Fixes

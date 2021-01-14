@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.4](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.4) (2021-01-14)
+
+**Note:** Version bump only for package @instructure/babel-plugin-themeable-styles
+
 ## [7.3.3](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.3) (2021-01-13)
 
 **Note:** Version bump only for package @instructure/babel-plugin-themeable-styles
