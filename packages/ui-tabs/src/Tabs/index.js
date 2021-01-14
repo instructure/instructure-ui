@@ -64,7 +64,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  size: 'maxWidth',
   selectedIndex: true,
   onChange: 'onRequestTabChange',
   focus: 'shouldFocusOnRender'
@@ -120,10 +119,6 @@ class Tabs extends Component {
     /**
      * __Deprecated__
      */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * __Deprecated__
-     */
     selectedIndex: PropTypes.number,
     /**
      * __Deprecated - use `shouldFocusOnRender` instead__
@@ -136,7 +131,6 @@ class Tabs extends Component {
     variant: 'default',
     padding: undefined,
     textAlign: undefined,
-    size: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
     minHeight: undefined,
@@ -428,7 +422,6 @@ class Tabs extends Component {
     const {
       children,
       elementRef,
-      size,
       maxWidth,
       variant,
       margin,
@@ -479,19 +472,11 @@ class Tabs extends Component {
       scrollOverlay
     ]
 
-    const getMaxWidth = () => {
-      if (maxWidth) {
-        return maxWidth
-      }
-
-      return styles.breakpoints && size ? styles.breakpoints[size] : undefined
-    }
-
     return (
       <View
         {...passthroughProps(props)}
         elementRef={elementRef}
-        maxWidth={getMaxWidth()}
+        maxWidth={maxWidth}
         margin={margin}
         as="div"
         css={styles.container}

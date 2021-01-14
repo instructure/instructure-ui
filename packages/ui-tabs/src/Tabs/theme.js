@@ -29,7 +29,7 @@
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { borders, colors, breakpoints, stacking, key: themeName } = theme
+  const { borders, colors, stacking, key: themeName } = theme
 
   const themeSpecificStyle = {}
 
@@ -38,9 +38,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     scrollFadeColor: colors?.backgroundLightest,
     tabVerticalOffset: borders?.widthSmall, // gives effect of selected tab "bar" overlaying bottom border
     zIndex: stacking?.above,
-    small: breakpoints?.small,
-    medium: breakpoints?.medium,
-    large: breakpoints?.large,
     scrollOverlayWidthDefault: '5rem', // has to be 4 times the horizontal padding of the default style tab
     scrollOverlayWidthSecondary: '3rem' // has to be 3 times the horizontal padding of the secondary style tab
   }

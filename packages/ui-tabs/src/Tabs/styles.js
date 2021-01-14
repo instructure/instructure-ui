@@ -108,12 +108,6 @@ const generateStyle = (componentTheme, props, state) => {
       ...variants[variant].scrollSpacer
     },
 
-    breakpoints: {
-      small: componentTheme.small,
-      medium: componentTheme.medium,
-      large: componentTheme.large
-    },
-
     scrollOverlayWidthDefault: componentTheme.scrollOverlayWidthDefault,
     scrollOverlayWidthSecondary: componentTheme.scrollOverlayWidthSecondary
   }
