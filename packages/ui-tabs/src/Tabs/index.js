@@ -64,7 +64,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  title: 'renderTitle',
   size: 'maxWidth',
   selectedIndex: true,
   onChange: 'onRequestTabChange',
@@ -387,7 +386,7 @@ class Tabs extends Component {
       index,
       isSelected: selected,
       isDisabled: panel.props.isDisabled,
-      children: panel.props.renderTitle || panel.props.title,
+      children: panel.props.renderTitle,
       onClick: this.handleTabClick,
       onKeyDown: this.handleTabKeyDown
     })
