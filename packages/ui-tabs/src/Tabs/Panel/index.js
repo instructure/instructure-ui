@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -43,9 +43,6 @@ id: Tabs.Panel
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  title: 'renderTitle'
-})
 class Panel extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
@@ -68,10 +65,6 @@ class Panel extends Component {
     labelledBy: PropTypes.string,
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    /**
-     * __Deprecated - use `renderTitle` instead__
-     */
-    title: PropTypes.node,
     elementRef: PropTypes.func
   }
 
@@ -86,7 +79,6 @@ class Panel extends Component {
     labelledBy: null,
     isSelected: false,
     padding: 'small',
-    title: undefined,
     elementRef: (el) => {}
   }
 
