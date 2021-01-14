@@ -64,7 +64,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  selectedIndex: true,
   onChange: 'onRequestTabChange',
   focus: 'shouldFocusOnRender'
 })
@@ -117,17 +116,12 @@ class Tabs extends Component {
      */
     onChange: PropTypes.func,
     /**
-     * __Deprecated__
-     */
-    selectedIndex: PropTypes.number,
-    /**
      * __Deprecated - use `shouldFocusOnRender` instead__
      */
     focus: PropTypes.bool
   }
 
   static defaultProps = {
-    selectedIndex: undefined,
     variant: 'default',
     padding: undefined,
     textAlign: undefined,
@@ -438,8 +432,7 @@ class Tabs extends Component {
       .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
 
     let index = 0
-    let selectedIndex =
-      props.selectedIndex || (selectedChildIndex >= 0 ? selectedChildIndex : 0)
+    let selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
 
     React.Children.forEach(children, (child) => {
       if (matchComponentTypes(child, [Panel])) {
