@@ -310,6 +310,7 @@ class Modal extends Component {
       as
     } = this.props
 
+    const isFullScreen = size === 'fullscreen'
     const dialog = (
       <Dialog
         {...passthroughProps(props)}
@@ -336,28 +337,21 @@ class Modal extends Component {
         {this.renderChildren()}
       </Dialog>
     )
-
-    if (size === 'fullscreen') {
-      return (
-        <span
-          className={classnames({
-            [styles.fullscreenLayout]: true,
-            [styles[`fullscreenLayout--${constrain}`]]: true
-          })}
-        >
-          {dialog}
-        </span>
-      )
-    } else {
-      return (
-        <Mask
-          placement={this.maskPlacement}
-          fullscreen={constrain === 'window'}
-        >
-          {dialog}
-        </Mask>
-      )
-    }
+    return (
+      <Mask
+        placement={this.maskPlacement}
+        fullscreen={constrain === 'window'}
+        theme={
+          isFullScreen ? { borderRadius: '0em', borderWidth: '0em' } : null
+        }
+        className={classnames({
+          [styles.fullscreenLayout]: isFullScreen,
+          [styles[`fullscreenLayout--${constrain}`]]: isFullScreen
+        })}
+      >
+        {dialog}
+      </Mask>
+    )
   }
 
   render() {
