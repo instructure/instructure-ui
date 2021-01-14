@@ -32,7 +32,6 @@ import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import {
-  deprecated,
   matchComponentTypes,
   safeCloneElement,
   passthroughProps
@@ -63,10 +62,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  onChange: 'onRequestTabChange',
-  focus: 'shouldFocusOnRender'
-})
 @testable()
 @bidirectional()
 class Tabs extends Component {
@@ -110,15 +105,7 @@ class Tabs extends Component {
      * container.
      */
     tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
-    shouldFocusOnRender: PropTypes.bool,
-    /**
-     * __Deprecated - use `onRequestTabChange` instead__
-     */
-    onChange: PropTypes.func,
-    /**
-     * __Deprecated - use `shouldFocusOnRender` instead__
-     */
-    focus: PropTypes.bool
+    shouldFocusOnRender: PropTypes.bool
   }
 
   static defaultProps = {
@@ -128,13 +115,11 @@ class Tabs extends Component {
     maxWidth: undefined,
     maxHeight: undefined,
     minHeight: undefined,
-    onChange: undefined,
     onRequestTabChange: (event, { index, id }) => {},
     margin: undefined,
     children: null,
     elementRef: (el) => {},
     screenReaderLabel: undefined,
-    focus: undefined,
     shouldFocusOnRender: false,
     tabOverflow: 'stack'
   }
@@ -158,7 +143,7 @@ class Tabs extends Component {
       this.startScrollOverflow()
     }
 
-    if (this.props.focus || this.props.shouldFocusOnRender) {
+    if (this.props.shouldFocusOnRender) {
       this.focus()
     }
 
@@ -166,10 +151,7 @@ class Tabs extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (
-      (this.props.focus && !prevProps.focus) ||
-      (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender)
-    ) {
+    if (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender) {
       this.focus()
     }
 
@@ -351,10 +333,6 @@ class Tabs extends Component {
   }
 
   fireOnChange(event, { index, id }) {
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(event, { index })
-    }
-
     if (typeof this.props.onRequestTabChange === 'function') {
       this.props.onRequestTabChange(event, { index, id })
     }
@@ -422,7 +400,6 @@ class Tabs extends Component {
       screenReaderLabel,
       onRequestTabChange,
       tabOverflow,
-      onChange,
       styles,
       ...props
     } = this.props
