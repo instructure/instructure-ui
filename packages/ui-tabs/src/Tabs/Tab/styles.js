@@ -40,9 +40,7 @@ const selectedTab = keyframes`
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (componentTheme, props, state) => {
-  const { variant, selected, disabled } = props
-  const isSelected = selected || props.isSelected
-  const isDisabled = disabled || props.isDisabled
+  const { variant, isSelected, isDisabled } = props
 
   const variants = {
     default: {

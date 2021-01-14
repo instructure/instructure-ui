@@ -354,11 +354,7 @@ class Tabs extends Component {
     do {
       nextIndex = (nextIndex + change) % count
       nextTab = tabs[nextIndex]
-    } while (
-      nextTab &&
-      nextTab.props &&
-      (nextTab.props.disabled || nextTab.props.isDisabled)
-    )
+    } while (nextTab && nextTab.props && nextTab.props.isDisabled)
 
     error(
       nextIndex >= 0 && nextIndex < count,
@@ -382,7 +378,6 @@ class Tabs extends Component {
 
   createTab(index, generatedId, selected, panel) {
     const id = panel.props.id || generatedId
-    const disabled = panel.props.disabled || panel.props.isDisabled
 
     return createElement(Tab, {
       variant: this.props.variant,
@@ -390,10 +385,8 @@ class Tabs extends Component {
       id: `tab-${id}`,
       controls: panel.props.id || `panel-${id}`,
       index,
-      selected: undefined,
       isSelected: selected,
-      disabled: undefined,
-      isDisabled: disabled,
+      isDisabled: panel.props.isDisabled,
       children: panel.props.renderTitle || panel.props.title,
       onClick: this.handleTabClick,
       onKeyDown: this.handleTabKeyDown
@@ -406,7 +399,6 @@ class Tabs extends Component {
     return safeCloneElement(panel, {
       id: panel.props.id || `panel-${id}`,
       labelledBy: `tab-${id}`,
-      selected: undefined,
       isSelected: selected,
       key: panel.props.id || `panel-${id}`,
       variant: this.props.variant,
@@ -451,11 +443,7 @@ class Tabs extends Component {
 
     const selectedChildIndex = React.Children.toArray(children)
       .filter((child) => matchComponentTypes(child, [Panel]))
-      .findIndex(
-        (child) =>
-          (child.props.selected || child.props.isSelected) &&
-          !(child.props.disabled || child.props.isDisabled)
-      )
+      .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
 
     let index = 0
     let selectedIndex =
@@ -464,10 +452,8 @@ class Tabs extends Component {
     React.Children.forEach(children, (child) => {
       if (matchComponentTypes(child, [Panel])) {
         const selected =
-          !(child.props.disabled || child.props.isDisabled) &&
-          (child.props.selected ||
-            child.props.isSelected ||
-            selectedIndex === index)
+          !child.props.isDisabled &&
+          (child.props.isSelected || selectedIndex === index)
         const id = uid()
 
         tabs.push(this.createTab(index, id, selected, child))

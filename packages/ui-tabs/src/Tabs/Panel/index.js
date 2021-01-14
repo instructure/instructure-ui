@@ -44,9 +44,7 @@ id: Tabs.Panel
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  title: 'renderTitle',
-  selected: 'isSelected',
-  disabled: 'isDisabled'
+  title: 'renderTitle'
 })
 class Panel extends Component {
   static propTypes = {
@@ -74,28 +72,18 @@ class Panel extends Component {
      * __Deprecated - use `renderTitle` instead__
      */
     title: PropTypes.node,
-    /**
-     * __Deprecated - use `isSelected` instead__
-     */
-    selected: PropTypes.bool,
-    /**
-     * __Deprecated - use `isDisabled` instead__
-     */
-    disabled: PropTypes.bool,
     elementRef: PropTypes.func
   }
 
   static defaultProps = {
     children: null,
     id: undefined,
-    disabled: undefined,
     isDisabled: false,
     maxHeight: undefined,
     minHeight: undefined,
     textAlign: 'start',
     variant: 'default',
     labelledBy: null,
-    selected: undefined,
     isSelected: false,
     padding: 'small',
     title: undefined,
@@ -112,8 +100,6 @@ class Panel extends Component {
 
   render() {
     const {
-      selected,
-      disabled,
       labelledBy,
       variant,
       id,
@@ -123,12 +109,11 @@ class Panel extends Component {
       textAlign,
       children,
       elementRef,
+      isDisabled,
+      isSelected,
       styles,
       ...props
     } = this.props
-    // TODO: clean this up when selected and disabled props are removed in 7.0:
-    const isSelected = selected || props.isSelected
-    const isDisabled = disabled || props.isDisabled
     const isHidden = !isSelected || !!isDisabled
 
     return (
