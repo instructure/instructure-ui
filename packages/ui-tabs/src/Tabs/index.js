@@ -169,10 +169,6 @@ class Tabs extends Component {
   componentDidMount() {
     if (this.props.tabOverflow === 'scroll' && this._tabList) {
       this.startScrollOverflow()
-
-      // make sure active tab is always visible
-      const activeTabEl = this._tabList.querySelector('[aria-selected="true"]')
-      this.showActiveTabIfOverlayed(activeTabEl)
     }
 
     if (this.props.focus || this.props.shouldFocusOnRender) {
@@ -212,6 +208,18 @@ class Tabs extends Component {
       prevProps.styles !== this.props.styles
     ) {
       this.handleResize()
+    }
+
+    // when tabList is set as overflown,
+    // make sure active tab is always visible
+    if (
+      this.props.tabOverflow === 'scroll' &&
+      this._tabList &&
+      !prevState.withTabListOverflow &&
+      this.state.withTabListOverflow
+    ) {
+      const activeTabEl = this._tabList.querySelector('[aria-selected="true"]')
+      this.showActiveTabIfOverlayed(activeTabEl)
     }
 
     this.props.makeStyles()

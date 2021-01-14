@@ -22,11 +22,6 @@
  * SOFTWARE.
  */
 
-import {
-  defaultTabVerticalPadding,
-  secondaryTabVerticalPadding
-} from './Tab/styles'
-
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -46,8 +41,8 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     small: breakpoints?.small,
     medium: breakpoints?.medium,
     large: breakpoints?.large,
-    scrollOverlayWidthDefault: `calc(4 * ${defaultTabVerticalPadding})`,
-    scrollOverlayWidthSecondary: `calc(3 * ${secondaryTabVerticalPadding})`
+    scrollOverlayWidthDefault: '5rem', // has to be 4 times the horizontal padding of the default style tab
+    scrollOverlayWidthSecondary: '3rem' // has to be 3 times the horizontal padding of the secondary style tab
   }
 
   return {
