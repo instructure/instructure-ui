@@ -234,9 +234,9 @@ describe('<Tabs />', async () => {
     })
   })
 
-  it('should focus the selected tab when focus is set', async () => {
+  it('should focus the selected tab when shouldFocusOnRender is set', async () => {
     await mount(
-      <Tabs focus>
+      <Tabs shouldFocusOnRender>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab" isSelected>
           Tab 2 content
