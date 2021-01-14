@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component, createElement } from 'react'
 import PropTypes from 'prop-types'
 
-import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import {
   deprecated,
@@ -49,17 +49,20 @@ import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import { Tab } from './Tab'
 import { Panel } from './Panel'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
   title: 'renderTitle',
   size: 'maxWidth',
@@ -69,9 +72,12 @@ category: components
 })
 @testable()
 @bidirectional()
-@themeable(theme, styles)
 class Tabs extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * children of type `Tabs.Panel`
      */
@@ -150,7 +156,7 @@ class Tabs extends Component {
   static Tab = Tab
 
   constructor(props) {
-    super()
+    super(props)
 
     this._tabList = null
     this._tabListPosition = null
@@ -172,9 +178,11 @@ class Tabs extends Component {
     if (this.props.focus || this.props.shouldFocusOnRender) {
       this.focus()
     }
+
+    this.props.makeStyles()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       (this.props.focus && !prevProps.focus) ||
       (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender)
@@ -197,6 +205,16 @@ class Tabs extends Component {
     ) {
       this.cancelScrollOverflow()
     }
+
+    // we need to recalculate the scroll overflow if the style changes
+    if (
+      this.props.tabOverflow === 'scroll' &&
+      prevProps.styles !== this.props.styles
+    ) {
+      this.handleResize()
+    }
+
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -225,13 +243,13 @@ class Tabs extends Component {
   }
 
   getOverlayWidth() {
-    const { variant, tabOverflow } = this.props
+    const { variant, tabOverflow, styles } = this.props
 
     if (tabOverflow === 'scroll') {
       if (variant === 'default') {
-        return px(this.theme.scrollOverlayWidthDefault)
+        return px(styles.scrollOverlayWidthDefault)
       } else {
-        return px(this.theme.scrollOverlayWidthSecondary)
+        return px(styles.scrollOverlayWidthSecondary)
       }
     }
   }
@@ -419,6 +437,7 @@ class Tabs extends Component {
       onRequestTabChange,
       tabOverflow,
       onChange,
+      styles,
       ...props
     } = this.props
 
@@ -458,25 +477,31 @@ class Tabs extends Component {
     // suppress overlay whenever final Tab is active, or Firefox will cover it
     const scrollOverlay =
       selectedIndex !== React.Children.count(children) - 1 ? (
-        <span key="overlay" className={styles.scrollOverlay} />
+        <span key="overlay" css={styles.scrollOverlay} />
       ) : null
 
     const scrollFadeEls = [
       // spacer element prevents final Tab from being obscured by scroll overflow gradient
-      <span key="spacer" className={styles.scrollSpacer} />,
+      <span key="spacer" css={styles.scrollSpacer} />,
       scrollOverlay
     ]
+
+    const getMaxWidth = () => {
+      if (maxWidth) {
+        return maxWidth
+      }
+
+      return styles.breakpoints && size ? styles.breakpoints[size] : undefined
+    }
 
     return (
       <View
         {...passthroughProps(props)}
         elementRef={elementRef}
-        maxWidth={maxWidth ? maxWidth : this.theme[size]}
+        maxWidth={getMaxWidth()}
         margin={margin}
         as="div"
-        className={classnames({
-          [styles[variant]]: true
-        })}
+        css={styles.container}
       >
         <Focusable ref={this.handleFocusableRef}>
           {({ focusVisible }) => (
@@ -486,15 +511,12 @@ class Tabs extends Component {
               borderRadius="medium"
               withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
-              className={styles.tabs}
+              css={styles.tabs}
             >
               <View
                 as="div"
                 role="tablist"
-                className={classnames({
-                  [styles.tabList]: true,
-                  [styles[`tabOverflow--${tabOverflow}`]]: true
-                })}
+                css={styles.tabList}
                 aria-label={screenReaderLabel}
                 elementRef={this.handleTabListRef}
               >

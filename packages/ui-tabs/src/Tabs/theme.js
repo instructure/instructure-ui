@@ -22,18 +22,39 @@
  * SOFTWARE.
  */
 
-export default function generator({ borders, colors, breakpoints, stacking }) {
+import {
+  defaultTabVerticalPadding,
+  secondaryTabVerticalPadding
+} from './Tab/styles'
+
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { borders, colors, breakpoints, stacking, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    defaultBackground: colors?.backgroundLightest,
+    scrollFadeColor: colors?.backgroundLightest,
+    tabVerticalOffset: borders?.widthSmall, // gives effect of selected tab "bar" overlaying bottom border
+    zIndex: stacking?.above,
+    small: breakpoints?.small,
+    medium: breakpoints?.medium,
+    large: breakpoints?.large,
+    scrollOverlayWidthDefault: `calc(4 * ${defaultTabVerticalPadding})`,
+    scrollOverlayWidthSecondary: `calc(3 * ${secondaryTabVerticalPadding})`
+  }
+
   return {
-    defaultBackground: colors.backgroundLightest,
-    scrollFadeColor: colors.backgroundLightest,
-    tabVerticalOffset: borders.widthSmall, // gives effect of selected tab "bar" overlaying bottom border
-    zIndex: stacking.above,
-    small: breakpoints.small,
-    medium: breakpoints.medium,
-    large: breakpoints.large,
-    scrollOverlayWidthDefault:
-      '5rem' /* 4 times the padding of a default Tab. If Tab padding changes, update this value. */,
-    scrollOverlayWidthSecondary:
-      '3rem' /* 3 times the padding of a secondary Tab. If Tab padding changes, update this value. */
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
