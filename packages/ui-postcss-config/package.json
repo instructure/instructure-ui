@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-postcss-config",
-  "version": "7.3.3",
+  "version": "7.3.4",
   "description": "A shared postcss config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -17,9 +17,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/browserslist-config-instui": "^7.3.3",
-    "@instructure/config-loader": "^7.3.3",
-    "@instructure/postcss-themeable-styles": "^7.3.3",
+    "@instructure/browserslist-config-instui": "^7.3.4",
+    "@instructure/config-loader": "^7.3.4",
+    "@instructure/postcss-themeable-styles": "^7.3.4",
     "autoprefixer": "^9.6.1",
     "cssnano-preset-default": "^4",
     "postcss": "^7",

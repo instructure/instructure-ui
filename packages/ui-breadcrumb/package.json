@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-breadcrumb",
-  "version": "7.3.3",
+  "version": "7.3.4",
   "description": "A breadcrumb component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -29,21 +29,21 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.3",
-    "@instructure/ui-test-locator": "^7.3.3",
-    "@instructure/ui-test-utils": "^7.3.3"
+    "@instructure/ui-babel-preset": "^7.3.4",
+    "@instructure/ui-test-locator": "^7.3.4",
+    "@instructure/ui-test-utils": "^7.3.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-icons": "^7.3.3",
-    "@instructure/ui-link": "^7.3.3",
-    "@instructure/ui-prop-types": "^7.3.3",
-    "@instructure/ui-react-utils": "^7.3.3",
-    "@instructure/ui-testable": "^7.3.3",
-    "@instructure/ui-themeable": "^7.3.3",
-    "@instructure/ui-truncate-text": "^7.3.3",
-    "@instructure/ui-utils": "^7.3.3",
-    "@instructure/ui-view": "^7.3.3",
+    "@instructure/ui-icons": "^7.3.4",
+    "@instructure/ui-link": "^7.3.4",
+    "@instructure/ui-prop-types": "^7.3.4",
+    "@instructure/ui-react-utils": "^7.3.4",
+    "@instructure/ui-testable": "^7.3.4",
+    "@instructure/ui-themeable": "^7.3.4",
+    "@instructure/ui-truncate-text": "^7.3.4",
+    "@instructure/ui-utils": "^7.3.4",
+    "@instructure/ui-view": "^7.3.4",
     "classnames": "^2",
     "prop-types": "^15"
   },

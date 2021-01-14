@@ -1,6 +1,6 @@
 {
   "name": "@instructure/template-package",
-  "version": "7.3.3",
+  "version": "7.3.4",
   "description": "A package containing template files to generate an instructure-ui package.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.3"
+    "@instructure/console": "^7.3.4"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.3",
-    "@instructure/ui-test-utils": "^7.3.3"
+    "@instructure/ui-babel-preset": "^7.3.4",
+    "@instructure/ui-test-utils": "^7.3.4"
   }
 }

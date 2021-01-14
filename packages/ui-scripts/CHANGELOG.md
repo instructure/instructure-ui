@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.4](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.4) (2021-01-14)
+
+### Bug Fixes
+
+- **esm:** don't mark commonjs as esm ([957c7cd](https://github.com/instructure/instructure-ui/commit/957c7cd))
+- **esm:** fix rebasing artifacts ([a791afe](https://github.com/instructure/instructure-ui/commit/a791afe))
+- **esm:** rewrite specify-commonjs-format in js ([005905e](https://github.com/instructure/instructure-ui/commit/005905e))
+
 ## [7.3.3](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.3) (2021-01-13)
 
 ### Bug Fixes

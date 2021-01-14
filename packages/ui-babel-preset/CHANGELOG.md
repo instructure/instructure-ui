@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.4](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.4) (2021-01-14)
+
+### Bug Fixes
+
+- **esm:** improve esm support ([b9184cc](https://github.com/instructure/instructure-ui/commit/b9184cc))
+- **esm:** upgrade babel ([173a310](https://github.com/instructure/instructure-ui/commit/173a310))
+
 ## [7.3.3](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.3) (2021-01-13)
 
 ### Bug Fixes
