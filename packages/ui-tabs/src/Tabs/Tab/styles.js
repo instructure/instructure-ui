@@ -32,6 +32,9 @@ const selectedTab = keyframes`
     transform: translate3d(0, 0, 0) scaleX(1);
   }`
 
+const defaultTabVerticalPadding = '1.25rem'
+const secondaryTabVerticalPadding = '1rem'
+
 /**
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
@@ -46,7 +49,7 @@ const generateStyle = (componentTheme, props, state) => {
 
   const variants = {
     default: {
-      padding: '1rem 1.25rem',
+      padding: `1rem ${defaultTabVerticalPadding}`,
       lineHeight: 1,
       position: 'relative',
       zIndex: componentTheme.zIndex,
@@ -80,7 +83,7 @@ const generateStyle = (componentTheme, props, state) => {
       }
     },
     secondary: {
-      padding: '0.75rem 1rem',
+      padding: `0.75rem ${secondaryTabVerticalPadding}`,
       color: componentTheme.secondaryColor,
       marginInlineEnd: '0.2em',
       marginBottom: '-0.0625rem',
@@ -135,3 +138,4 @@ const generateStyle = (componentTheme, props, state) => {
 }
 
 export default generateStyle
+export { generateStyle, defaultTabVerticalPadding, secondaryTabVerticalPadding }

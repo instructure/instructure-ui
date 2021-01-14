@@ -28,8 +28,6 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
 
-import styles from '../styles.css'
-
 describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {
     await mount(
@@ -456,19 +454,23 @@ describe('<Tabs />', async () => {
         </div>
       )
 
-      const subject = await mount(<Example width="200px" />)
+      const subject = await mount(<Example width="150px" />)
       const tabs = await TabsLocator.find()
 
-      expect(await tabs.find(`.${styles['scrollOverlay']}`)).to.exist()
-      expect(await tabs.find(`.${styles['scrollSpacer']}`)).to.exist()
+      expect(await tabs.find('[class$="-tabs__scrollOverlay"]')).to.exist()
+      expect(await tabs.find('[class$="-tabs__scrollSpacer"]')).to.exist()
 
       await subject.setProps({ width: '550px' })
 
       expect(
-        await tabs.find(`.${styles['scrollOverlay']}`, { expectEmpty: true })
+        await tabs.find('[class$="-tabs__scrollOverlay"]', {
+          expectEmpty: true
+        })
       ).to.not.exist()
       expect(
-        await tabs.find(`.${styles['scrollSpacer']}`, { expectEmpty: true })
+        await tabs.find('[class$="-tabs__scrollSpacer"]', {
+          expectEmpty: true
+        })
       ).to.not.exist()
     })
   })
