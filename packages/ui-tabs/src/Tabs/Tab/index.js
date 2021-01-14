@@ -26,11 +26,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  passthroughProps,
-  callRenderProp,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -45,10 +41,6 @@ id: Tabs.Tab
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  selected: 'isSelected',
-  disabled: 'isDisabled'
-})
 class Tab extends Component {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
@@ -63,24 +55,14 @@ class Tab extends Component {
     isSelected: PropTypes.bool,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * __Deprecated - use `isDisabled` instead__
-     */
-    disabled: PropTypes.bool,
-    /**
-     * __Deprecated - use `isSelected` instead__
-     */
-    selected: PropTypes.bool
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   }
 
   static defaultProps = {
     children: null,
     variant: 'default',
     isDisabled: false,
-    disabled: undefined,
     isSelected: false,
-    selected: undefined,
     onClick: (event, { index, id }) => {},
     onKeyDown: (event, { index, id }) => {}
   }
@@ -94,9 +76,9 @@ class Tab extends Component {
   }
 
   handleClick = (event) => {
-    const { onClick, index, id, disabled, isDisabled } = this.props
+    const { onClick, index, id, isDisabled } = this.props
 
-    if (disabled || isDisabled) {
+    if (isDisabled) {
       return
     }
 
@@ -104,9 +86,9 @@ class Tab extends Component {
   }
 
   handleKeyDown = (event) => {
-    const { onKeyDown, index, id, disabled, isDisabled } = this.props
+    const { onKeyDown, index, id, isDisabled } = this.props
 
-    if (disabled || isDisabled) {
+    if (isDisabled) {
       return
     }
 
@@ -117,16 +99,13 @@ class Tab extends Component {
     const {
       id,
       variant,
-      selected,
-      disabled,
+      isSelected,
+      isDisabled,
       controls,
       children,
       styles,
       ...props
     } = this.props
-
-    const isSelected = selected || props.isSelected
-    const isDisabled = disabled || props.isDisabled
 
     return (
       <View

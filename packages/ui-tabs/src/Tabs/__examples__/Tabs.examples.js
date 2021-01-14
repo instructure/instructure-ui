@@ -45,10 +45,10 @@ export default {
         <Tabs.Panel key="1" title="Tab A">
           {contentLong}
         </Tabs.Panel>,
-        <Tabs.Panel key="2" title="Tab B" disabled>
+        <Tabs.Panel key="2" title="Tab B" isDisabled>
           {contentShort}
         </Tabs.Panel>,
-        <Tabs.Panel key="3" title="Tab C" selected>
+        <Tabs.Panel key="3" title="Tab C" isSelected>
           {contentShort}
         </Tabs.Panel>,
         <Tabs.Panel key="4" title="Tab D">
