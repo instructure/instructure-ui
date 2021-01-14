@@ -64,27 +64,6 @@
   border-radius: 0;
 }
 
-.fullscreenLayout {
-  box-sizing: border-box;
-  top: 0;
-  left: 0; /* stylelint-disable-line property-blacklist */
-  right: 0; /* stylelint-disable-line property-blacklist */
-  bottom: 0;
-  overflow: auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  z-index: var(--zIndex);
-}
-
-.fullscreenLayout--window {
-  position: fixed;
-}
-
-.fullscreenLayout--parent {
-  position: absolute;
-}
-
 .constrainContext {
   display: block;
   position: relative;

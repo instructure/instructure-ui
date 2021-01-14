@@ -43,24 +43,6 @@ describe('<Modal />', async () => {
     expect(modal).to.not.exist()
   })
 
-  it('should render its own layout wrapper if fullscreen', async () => {
-    await mount(
-      <Modal
-        open
-        size="fullscreen"
-        label="Modal Dialog"
-        shouldReturnFocus={false}
-      >
-        <Modal.Body>Foo Bar Baz</Modal.Body>
-      </Modal>
-    )
-
-    const modal = await ModalLocator.find(':label(Modal Dialog)')
-    const layout = await modal.find(`.${styles['fullscreenLayout']}`)
-
-    expect(layout).to.exist()
-  })
-
   it('should apply theme overrides when open', async () => {
     await mount(
       <Modal

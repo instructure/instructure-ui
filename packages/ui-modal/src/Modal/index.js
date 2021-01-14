@@ -80,7 +80,7 @@ class Modal extends Component {
      */
     as: PropTypes.elementType,
 
-    /*
+    /**
      * The size of the `<Modal />` content
      */
     size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
@@ -344,10 +344,6 @@ class Modal extends Component {
         theme={
           isFullScreen ? { borderRadius: '0em', borderWidth: '0em' } : null
         }
-        className={classnames({
-          [styles.fullscreenLayout]: isFullScreen,
-          [styles[`fullscreenLayout--${constrain}`]]: isFullScreen
-        })}
       >
         {dialog}
       </Mask>
