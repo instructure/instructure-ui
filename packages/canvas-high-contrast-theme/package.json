@@ -8,7 +8,8 @@
     ".": {
       "require": "./lib/index.js",
       "default": "./es/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "module": "./es/index.js",
   "main": "./lib/index.js",
