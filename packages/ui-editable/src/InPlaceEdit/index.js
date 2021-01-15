@@ -21,23 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
-import { FocusableView } from '@instructure/ui-focusable'
 import { IconButton } from '@instructure/ui-buttons'
 import { IconEditLine } from '@instructure/ui-icons'
 import { warn } from '@instructure/console/macro'
 import { createChainedFunction } from '@instructure/ui-utils'
+import { withStyle, jsx } from '@instructure/emotion'
+import { View } from '@instructure/ui-view'
 
 import { Editable } from '../Editable'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 class InPlaceEdit extends Component {
   static propTypes = {
     /**
@@ -110,7 +116,12 @@ class InPlaceEdit extends Component {
     /**
      * Render outermost element inline v. block
      */
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -131,6 +142,14 @@ class InPlaceEdit extends Component {
     )
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   handleEditButtonRef = (el) => {
     this._editButtonRef = el
   }
@@ -140,9 +159,16 @@ class InPlaceEdit extends Component {
     const isEditMode = !readOnly && mode === 'edit'
 
     return isEditMode ? (
-      <FocusableView as="span" display="block" focused={showFocusRing}>
+      <View
+        as="span"
+        display="block"
+        withFocusOutline={showFocusRing}
+        position="relative"
+        css={this.props.styles.inPlaceEdit}
+        borderRadius="medium"
+      >
         {renderEditor({ onBlur, editorRef })}
-      </FocusableView>
+      </View>
     ) : null
   }
 
