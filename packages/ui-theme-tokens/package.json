@@ -8,7 +8,11 @@
     ".": {
       "require": "./lib/index.js",
       "default": "./es/index.js"
-    }
+    },
+    "./lib/canvas": "./lib/canvas/index.js",
+    "./lib/canvasHighContrast": "./lib/canvasHighContrast/index.js",
+    "./lib/instructure": "./lib/instructure/index.js",
+    "./package.json": "./package.json"
   },
   "module": "./es/index.js",
   "main": "./lib/index.js",
