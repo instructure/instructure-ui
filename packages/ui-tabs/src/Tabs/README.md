@@ -132,7 +132,7 @@ class Example extends React.Component {
         <Tabs.Panel id="tabA" renderTitle="Tab A" isSelected={selectedIndex === 0}>
           {lorem.sentence()}
         </Tabs.Panel>
-        <Tabs.Panel id="tabB" renderTitle="Tab B" iSelected={selectedIndex === 1}>
+        <Tabs.Panel id="tabB" renderTitle="Tab B" isSelected={selectedIndex === 1}>
           {lorem.sentence()}
         </Tabs.Panel>
         <Tabs.Panel id="tabC" renderTitle="Tab C" isSelected={selectedIndex === 2}>
