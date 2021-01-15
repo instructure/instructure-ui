@@ -21,17 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default {
-  sections: 'color',
-  getComponentProps: (props) => {
-    return {
-      focused: true,
-      children: 'Focused'
-    }
-  },
-  getExampleProps: (props) => {
-    return {
-      background: props.color === 'inverse' ? 'primary-inverse' : 'primary'
+
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    inPlaceEdit: {
+      label: 'inPlaceEdit',
+      boxSizing: 'border-box',
+      maxWidth: '100%',
+      position: 'relative',
+      overflow: 'visible',
+      direction: 'inherit',
+      margin: 0,
+      textDecoration: 'none' /* for links styled as buttons */,
+      textAlign: 'inherit',
+      userSelect: 'none',
+      touchAction: 'manipulation',
+      background: 'transparent',
+      border: 'none',
+      fontFamily: componentTheme.fontFamily,
+      outline: 'none'
     }
   }
 }
+
+export default generateStyle

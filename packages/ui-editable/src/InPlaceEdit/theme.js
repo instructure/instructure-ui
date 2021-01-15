@@ -22,28 +22,16 @@
  * SOFTWARE.
  */
 
-/* stylelint-disable selector-max-class, selector-max-type, no-descending-specificity */
-
-.root[type="button"],
-.root[type="reset"],
-.root[type="submit"],
-.root {
-  appearance: none;
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  return {
+    ...themeOverride
+  }
 }
 
-.root {
-  box-sizing: border-box;
-  max-width: 100%;
-  position: relative;
-  overflow: visible;
-  direction: inherit;
-  margin: 0;
-  text-decoration: none; /* for links styled as buttons */
-  text-align: inherit;
-  user-select: none;
-  touch-action: manipulation;
-  background: transparent;
-  border: none;
-  font-family: var(--fontFamily);
-  outline: none;
-}
+export default generateComponentTheme

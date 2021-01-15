@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Focusable } from './Focusable'
-export { FocusableView } from './FocusableView'

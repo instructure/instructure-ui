@@ -38,10 +38,12 @@
     "@instructure/ui-a11y-content": "^7.3.1",
     "@instructure/ui-buttons": "^7.3.1",
     "@instructure/ui-dom-utils": "^7.3.1",
+    "@instructure/emotion": "^7.3.1",
     "@instructure/ui-flex": "^7.3.1",
     "@instructure/ui-focusable": "^7.3.1",
     "@instructure/ui-icons": "^7.3.1",
     "@instructure/ui-utils": "^7.3.1",
+    "@instructure/ui-view": "^7.3.1",
     "prop-types": "^15"
   },
   "peerDependencies": {
