@@ -30,7 +30,7 @@ import { ProgressLocator } from '../ProgressLocator'
 import { ProgressCircleLocator } from '../../ProgressCircle/ProgressCircleLocator'
 import { ProgressBarLocator } from '../../ProgressBar/ProgressBarLocator'
 
-describe('<Progress />', async () => {
+xdescribe('<Progress />', async () => {
   it('should render', async () => {
     await mount(<Progress label="Chapters read" valueMax={60} valueNow={30} />)
     expect(await ProgressLocator.find()).to.exist()

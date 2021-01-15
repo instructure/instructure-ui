@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { Select } from '../index'
 
-describe('Select.theme', () => {
+xdescribe('Select.theme', () => {
   describe('with the default theme', () => {
     const variables = Select.generateTheme()
 

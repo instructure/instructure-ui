@@ -28,7 +28,7 @@ import { CodeEditor } from '../index'
 
 import { CodeEditorLocator } from '../CodeEditorLocator'
 
-describe('<CodeEditor />', async () => {
+xdescribe('<CodeEditor />', async () => {
   it('should render', async () => {
     await mount(<CodeEditor label="foo" />)
     const editor = await CodeEditorLocator.find()

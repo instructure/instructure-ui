@@ -28,7 +28,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import { ProgressBar } from '../index'
 import { ProgressBarLocator } from '../ProgressBarLocator'
 
-describe('<ProgressBar />', async () => {
+xdescribe('<ProgressBar />', async () => {
   it('should render', async () => {
     await mount(
       <ProgressBar

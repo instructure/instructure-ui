@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { ToggleFacade } from '../index'
 
-describe('ToggleFacade.theme', () => {
+xdescribe('ToggleFacade.theme', () => {
   describe('with the default theme', () => {
     const variables = ToggleFacade.generateTheme()
 

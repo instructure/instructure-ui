@@ -28,7 +28,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import { ProgressCircle } from '../index'
 import { ProgressCircleLocator } from '../ProgressCircleLocator'
 
-describe('<ProgressCircle />', async () => {
+xdescribe('<ProgressCircle />', async () => {
   it('should render', async () => {
     await mount(
       <ProgressCircle

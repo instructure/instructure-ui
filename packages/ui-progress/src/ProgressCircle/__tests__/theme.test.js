@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { ProgressCircle } from '../index'
 
-describe('ProgressCircle.theme', () => {
+xdescribe('ProgressCircle.theme', () => {
   describe('with the default theme', () => {
     const variables = ProgressCircle.generateTheme()
 

@@ -28,7 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { RangeInput } from '../index'
 import { RangeInputLocator } from '../RangeInputLocator'
 
-describe('<RangeInput />', async () => {
+xdescribe('<RangeInput />', async () => {
   it('renders an input with type "range"', async () => {
     await mount(<RangeInput label="Opacity" name="opacity" max={100} min={0} />)
     const rangeInput = await RangeInputLocator.find()

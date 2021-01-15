@@ -29,7 +29,7 @@ import styles from '../styles.css'
 
 import { DrawerTrayLocator } from '../DrawerTrayLocator'
 
-describe('<DrawerTray />', async () => {
+xdescribe('<DrawerTray />', async () => {
   it(`should place the tray correctly with placement=start`, async () => {
     await mount(
       <DrawerTray
