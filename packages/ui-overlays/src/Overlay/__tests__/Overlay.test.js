@@ -29,7 +29,7 @@ import { Overlay } from '../index'
 
 import { OverlayLocator } from '../OverlayLocator'
 
-describe('<Overlay />', async () => {
+xdescribe('<Overlay />', async () => {
   it('should render nothing when closed', async () => {
     await mount(<Overlay label="Overlay Example" />)
     const overlay = await OverlayLocator.find({ expectEmpty: true })

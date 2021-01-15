@@ -30,7 +30,7 @@ import { RadioInputGroup } from '../index'
 
 import { RadioInputGroupLocator } from '../RadioInputGroupLocator'
 
-describe('<RadioInputGroup />', async () => {
+xdescribe('<RadioInputGroup />', async () => {
   it('adds the name props to all RadioInput types', async () => {
     await mount(
       <RadioInputGroup name="fruit" description="Select a fruit">

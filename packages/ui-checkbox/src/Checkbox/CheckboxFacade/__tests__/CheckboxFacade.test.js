@@ -27,7 +27,7 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { CheckboxFacade } from '../index'
 
-describe('<CheckboxFacade />', async () => {
+xdescribe('<CheckboxFacade />', async () => {
   it('should render', async () => {
     const subject = await mount(<CheckboxFacade>label text</CheckboxFacade>)
     const checkboxFacade = within(subject.getDOMNode())

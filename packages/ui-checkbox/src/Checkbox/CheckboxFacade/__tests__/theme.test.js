@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { CheckboxFacade } from '../index'
 
-describe('CheckboxFacade.theme', () => {
+xdescribe('CheckboxFacade.theme', () => {
   describe('with the default theme', () => {
     const variables = CheckboxFacade.generateTheme()
 

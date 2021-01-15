@@ -29,7 +29,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import DrawerLayoutFixture from '../__fixtures__/DrawerLayout.fixture'
 import { DrawerLayoutLocator } from '../DrawerLayoutLocator'
 
-describe('<DrawerLayout />', async () => {
+xdescribe('<DrawerLayout />', async () => {
   it('should render', async () => {
     await mount(<DrawerLayoutFixture />)
     const layout = await DrawerLayoutLocator.find()

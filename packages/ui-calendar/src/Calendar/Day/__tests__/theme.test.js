@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { Day } from '../index'
 
-describe('Day.theme', () => {
+xdescribe('Day.theme', () => {
   describe('with the default theme', () => {
     const variables = Day.generateTheme()
 

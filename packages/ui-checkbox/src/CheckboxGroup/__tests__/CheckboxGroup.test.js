@@ -30,7 +30,7 @@ import { CheckboxGroupLocator } from '../CheckboxGroupLocator'
 import { CheckboxGroup } from '../index'
 import { Checkbox } from '../../Checkbox'
 
-describe('<CheckboxGroup />', async () => {
+xdescribe('<CheckboxGroup />', async () => {
   it('adds the name props to all Checkbox types', async () => {
     await mount(
       <CheckboxGroup name="sports" description="Select your favorite sports">

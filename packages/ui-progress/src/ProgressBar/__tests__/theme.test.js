@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-color-utils'
 
 import { ProgressBar } from '../index'
 
-describe('ProgressBar.theme', () => {
+xdescribe('ProgressBar.theme', () => {
   describe('with the default theme', () => {
     const variables = ProgressBar.generateTheme()
 

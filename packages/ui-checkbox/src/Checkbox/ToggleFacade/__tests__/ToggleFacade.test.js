@@ -27,7 +27,7 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { ToggleFacade } from '../index'
 
-describe('<ToggleFacade />', async () => {
+xdescribe('<ToggleFacade />', async () => {
   it('should render', async () => {
     const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
     const toggleFacade = within(subject.getDOMNode())

@@ -35,7 +35,7 @@ import {
 import { Transition } from '../index'
 import styles from '../styles.css'
 
-describe('<Transition />', async () => {
+xdescribe('<Transition />', async () => {
   const types = [
     'fade',
     'scale',
