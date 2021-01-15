@@ -106,7 +106,6 @@ const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
 const withStyle = decorator(
   (ComposedComponent, generateStyle, generateComponentTheme) => {
     const WithStyle = forwardRef((props, ref) => {
-      const [styles, setStyles] = useState({})
       const theme = useTheme()
       const dir = useTextDirectionContext()
       const componentProps = {
@@ -118,10 +117,19 @@ const withStyle = decorator(
         ComposedComponent.displayName,
         componentProps
       )
+
       const componentTheme =
         typeof generateComponentTheme === 'function'
           ? generateComponentTheme(theme, themeOverride)
           : {}
+      const [styles, setStyles] = useState(
+        generateStyle
+          ? bidirectionalPolyfill(
+              generateStyle(componentTheme, componentProps, {}),
+              dir
+            )
+          : {}
+      )
 
       const makeStyleHandler = (...extraArgs) => {
         const calculatedStyles = bidirectionalPolyfill(
