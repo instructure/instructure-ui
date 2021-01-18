@@ -29,8 +29,6 @@ readEnv()
 
 if (process.argv.includes('--lint')) {
   require('./lint')
-} else if (process.argv.includes('--mocha')) {
-  require('./mocha')
 } else if (process.argv.includes('--vrt')) {
   require('./vrt')
 } else {

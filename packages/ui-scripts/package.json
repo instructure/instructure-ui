@@ -58,7 +58,6 @@
     "yargs": "^14.0.0"
   },
   "optionalDependencies": {
-    "@instructure/mocha-environment-jsdom": "^7.3.4",
     "@storybook/react": "^4 || ^5",
     "storybook-chromatic": "^2"
   },
