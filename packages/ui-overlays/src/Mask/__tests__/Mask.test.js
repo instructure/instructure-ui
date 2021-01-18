@@ -24,9 +24,7 @@
 
 import React from 'react'
 import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
-
 import { Mask } from '../index'
-import styles from '../styles.css'
 
 describe('<Mask />', async () => {
   it('should render', async () => {
@@ -52,11 +50,12 @@ describe('<Mask />', async () => {
     expect(onClick).to.have.been.called()
   })
 
-  it('should apply fullscreen class when prop is true', async () => {
+  it('should apply fullscreen CSS when prop is true', async () => {
     const subject = await mount(<Mask fullscreen />)
     const mask = within(subject.getDOMNode())
-    const fullscreen = await mask.find(`.${styles['fullscreen']}`)
-    expect(fullscreen).to.exist()
+    const cssStyleDeclaration = mask.getComputedStyle() // CSSStyleDeclaration type
+    const fullscreen = cssStyleDeclaration.getPropertyValue('position')
+    expect(fullscreen).to.equal('fixed')
   })
 
   it('should provide an elementRef', async () => {

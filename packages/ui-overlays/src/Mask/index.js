@@ -22,23 +22,22 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import noScroll from 'no-scroll'
-
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components/utilities
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Mask extends Component {
   static propTypes = {
     onDismiss: PropTypes.func,
@@ -46,7 +45,11 @@ class Mask extends Component {
     fullscreen: PropTypes.bool,
     children: PropTypes.node,
     onClick: PropTypes.func,
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -59,9 +62,14 @@ class Mask extends Component {
   }
 
   componentDidMount() {
+    this.props.makeStyles()
     if (this.props.fullscreen) {
       noScroll.on()
     }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -83,15 +91,9 @@ class Mask extends Component {
       ref: this.contentRef
     })
 
-    const classes = classnames({
-      [styles.root]: true,
-      [styles[this.props.placement]]: true,
-      [styles.fullscreen]: this.props.fullscreen
-    })
-
     const props = {
       ...omitProps(this.props, Mask.propTypes),
-      className: classes,
+      css: this.props.styles.mask,
       ref: this.handleElementRef
     }
 
