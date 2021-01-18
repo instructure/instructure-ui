@@ -216,7 +216,7 @@ describe('<Tray />', async () => {
             )
 
             await wait(() => {
-              expect(onEntered).to.have.been.calledWith(val)
+              expect(onEntered).to.have.been.called()
             })
           })
         }
@@ -242,7 +242,7 @@ describe('<Tray />', async () => {
             await subject.setProps({ open: false })
 
             await wait(() => {
-              expect(onExited).to.have.been.calledWith(val)
+              expect(onExited).to.have.been.called()
             })
           })
         }
