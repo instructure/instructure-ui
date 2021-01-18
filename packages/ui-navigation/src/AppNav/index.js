@@ -43,14 +43,15 @@ import { View } from '@instructure/ui-view'
 import { Menu } from '@instructure/ui-menu'
 import { Item } from './Item'
 
-import generateStyles from './styles'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyles)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class AppNav extends Component {
   static propTypes = {

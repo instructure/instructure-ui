@@ -39,6 +39,7 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,7 +48,7 @@ id: AppNav.Item
 ---
 @module Item
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Item extends Component {
   static propTypes = {
