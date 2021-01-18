@@ -22,19 +22,35 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, borders, stacking }) {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, borders, stacking, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      focusBorderColor: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
     zIndex: stacking.topmost,
     background: 'rgba(255, 255, 255, 0.75)',
     borderColor: 'transparent',
-    focusBorderColor: colors.borderBrand,
-    borderRadius: borders.radiusMedium,
-    borderWidth: borders.widthSmall
+    focusBorderColor: colors?.borderBrand,
+    borderRadius: borders?.radiusMedium,
+    borderWidth: borders?.widthSmall
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    focusBorderColor: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

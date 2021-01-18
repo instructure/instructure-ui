@@ -40,6 +40,7 @@
     "@instructure/ui-buttons": "^7.3.1",
     "@instructure/ui-dialog": "^7.3.1",
     "@instructure/ui-dom-utils": "^7.3.1",
+    "@instructure/emotion": "^7.3.1",
     "@instructure/ui-focusable": "^7.3.1",
     "@instructure/ui-i18n": "^7.3.1",
     "@instructure/ui-motion": "^7.3.1",
@@ -54,8 +55,6 @@
     "@instructure/ui-utils": "^7.3.1",
     "@instructure/ui-view": "^7.3.1",
     "@instructure/uid": "^7.3.1",
-    "classnames": "^2",
-    "keycode": "^2",
     "no-scroll": "^2.1.0",
     "prop-types": "^15"
   },
