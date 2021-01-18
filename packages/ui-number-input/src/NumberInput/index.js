@@ -42,6 +42,7 @@ import {
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -49,7 +50,7 @@ category: components
 id: NumberInput
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class NumberInput extends Component {
   static propTypes = {
