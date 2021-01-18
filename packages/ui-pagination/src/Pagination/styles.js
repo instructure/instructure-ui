@@ -36,7 +36,7 @@ const generateStyle = () => {
       textAlign: 'center'
     },
     pages: {
-      label: 'pagination_pages',
+      label: 'pagination__pages',
       display: 'inline-flex',
       alignItems: 'center'
     }
