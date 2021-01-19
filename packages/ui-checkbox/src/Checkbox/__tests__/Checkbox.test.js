@@ -28,7 +28,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { Checkbox } from '../index'
 import { CheckboxLocator } from '../CheckboxLocator'
 
-xdescribe('<Checkbox />', async () => {
+describe('<Checkbox />', async () => {
   it('renders an input with type "checkbox"', async () => {
     await mount(
       <Checkbox
