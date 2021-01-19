@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
-import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
@@ -33,15 +33,16 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import { CheckboxFacade } from './CheckboxFacade'
 import { ToggleFacade } from './ToggleFacade'
-
-import styles from './styles.css'
-import theme from './theme.js'
 
 /**
 ---
@@ -49,10 +50,14 @@ category: components
 ---
 **/
 
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Checkbox extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     label: PropTypes.node.isRequired,
     id: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -135,6 +140,8 @@ class Checkbox extends Component {
   componentDidMount() {
     // see https://github.com/facebook/react/issues/1798
     this._input.indeterminate = this.props.indeterminate
+
+    this.props.makeStyles()
   }
 
   componentDidUpdate(prevProps) {
@@ -142,6 +149,8 @@ class Checkbox extends Component {
     if (prevProps.indeterminate !== this.props.indeterminate) {
       this._input.indeterminate = this.props.indeterminate
     }
+
+    this.props.makeStyles()
   }
 
   handleChange = (e) => {
@@ -262,7 +271,6 @@ class Checkbox extends Component {
 
   render() {
     const {
-      inline,
       disabled,
       readOnly,
       messages,
@@ -273,16 +281,11 @@ class Checkbox extends Component {
       onMouseOver,
       onMouseOut,
       indeterminate,
-      variant
+      variant,
+      styles
     } = this.props
 
     const props = omitProps(this.props, Checkbox.propTypes)
-
-    const classes = {
-      [styles.root]: true,
-      [styles.disabled]: disabled,
-      [styles.inline]: inline
-    }
 
     error(
       !(variant === 'toggle' && indeterminate),
@@ -293,7 +296,7 @@ class Checkbox extends Component {
 
     return (
       <div
-        className={classnames(classes)}
+        css={styles.checkbox}
         onMouseOver={createChainedFunction(onMouseOver, this.handleMouseOver)}
         onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
       >
@@ -307,14 +310,14 @@ class Checkbox extends Component {
           }}
           disabled={disabled || readOnly}
           aria-checked={indeterminate ? 'mixed' : null}
-          className={styles.input}
+          css={styles.input}
           onChange={this.handleChange}
           onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
           onFocus={createChainedFunction(onFocus, this.handleFocus)}
           onBlur={createChainedFunction(onBlur, this.handleBlur)}
           checked={this.checked}
         />
-        <label htmlFor={this.id} className={styles.control}>
+        <label htmlFor={this.id} css={styles.control}>
           {this.renderFacade()}
           <FormFieldMessages messages={messages} />
         </label>
