@@ -152,7 +152,7 @@ const processStyleProps = (propsObj, dir) =>
             }
           }
 
-          if (isSupportedProps(originalProp) && originalValue) {
+          if (isSupportedProps(originalProp) && originalValue !== 'undefined') {
             const { prop, value } = processProps(
               { originalProp, originalValue },
               dir
