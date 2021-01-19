@@ -22,25 +22,30 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { SVGIcon } from '@instructure/ui-svg-images'
 import { IconCheckMarkSolid } from '@instructure/ui-icons'
-import { themeable } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 parent: Checkbox
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class CheckboxFacade extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.node.isRequired,
     checked: PropTypes.bool,
     focused: PropTypes.bool,
@@ -60,6 +65,14 @@ class CheckboxFacade extends Component {
     indeterminate: false
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   renderIcon() {
     if (this.props.indeterminate) {
       return (
@@ -75,22 +88,14 @@ class CheckboxFacade extends Component {
   }
 
   render() {
-    const { size, checked, focused, hovered, indeterminate } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles.checked]: checked || indeterminate,
-      [styles.focused]: focused,
-      [styles.hovered]: hovered,
-      [styles[size]]: true
-    }
+    const { children, styles } = this.props
 
     return (
-      <span className={classnames(classes)}>
-        <span className={styles.facade} aria-hidden="true">
+      <span css={styles.checkboxFacade}>
+        <span css={styles.facade} aria-hidden="true">
           {this.renderIcon()}
         </span>
-        <span className={styles.label}>{this.props.children}</span>
+        <span css={styles.label}>{children}</span>
       </span>
     )
   }
