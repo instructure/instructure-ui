@@ -64,6 +64,7 @@
     "postrelease": "ui-scripts --deploy-docs && ui-scripts --post-publish",
     "predeploy": "yarn build:docs",
     "deploy": "ui-scripts --deploy-docs",
+    "deploy:docs": "ui-scripts --deploy-docs-via-github",
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
