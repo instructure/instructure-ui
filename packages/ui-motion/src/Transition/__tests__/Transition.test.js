@@ -33,9 +33,9 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { Transition } from '../index'
-import styles from '../styles.css'
+import { locator } from '@instructure/ui-test-locator'
 
-xdescribe('<Transition />', async () => {
+describe('<Transition />', async () => {
   const types = [
     'fade',
     'scale',
@@ -47,15 +47,15 @@ xdescribe('<Transition />', async () => {
 
   const expectTypeClass = function (type) {
     it(`should correctly apply classes for '${type}'`, async () => {
-      const subject = await mount(
+      await mount(
         <Transition type={type} in={true}>
           <div>hello</div>
         </Transition>
       )
 
-      const transition = within(subject.getDOMNode())
+      const element = await locator('[class$="-transition"] + *').find()
 
-      expect(transition.hasClass(styles[`${type}--entered`])).to.be.true()
+      expect(element.hasClass(`${type}--entered`)).to.be.true()
     })
   }
 
@@ -70,12 +70,12 @@ xdescribe('<Transition />', async () => {
       </Transition>
     )
 
-    const transition = within(subject.getDOMNode())
-    expect(transition.hasClass(styles['fade--entered'])).to.be.true()
+    const element = await locator('[class$="-transition"] + *').find()
+    expect(element.hasClass('fade--entered')).to.be.true()
 
     await subject.setProps({ in: false })
     await wait(() => {
-      expect(transition.hasClass(styles['fade--exited'])).to.be.true()
+      expect(element.hasClass('fade--exited')).to.be.true()
     })
   })
 

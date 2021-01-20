@@ -22,17 +22,19 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import { ms } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { BaseTransition } from './BaseTransition'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
+import { BaseTransition } from './BaseTransition'
 
 /**
 ---
@@ -40,10 +42,14 @@ category: components/utilities
 ---
 @module Transition
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Transition extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     type: PropTypes.oneOf([
       'fade',
       'scale',
@@ -127,6 +133,14 @@ class Transition extends Component {
 
   static states = BaseTransition.states
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   handleExited = () => {
     if (typeof this.props.onExited === 'function') {
       this.props.onExited(this.props.type)
@@ -139,35 +153,47 @@ class Transition extends Component {
     }
   }
 
+  /**
+   * Transition helper div:
+   * After emotion migration the only way to keep
+   * the old BaseTransition functionality with adding and removing
+   * classes was to add a sibling component and target the transitioning
+   * component with sibling selectors (eg.: '& + .fade--exiting')
+   *
+   * - it is only for style targeting
+   * - it should be visually hidden and inaccessible
+   * - Todo: refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
+   */
+  renderTransitionHelper = () => {
+    const { styles } = this.props
+
+    return <div aria-hidden="true" css={styles.transition}></div>
+  }
+
   render() {
-    const { type, children, ...props } = this.props
+    const { type, children, styles, ...props } = this.props
 
-    const duration = ms(this.theme.duration)
-
-    const classNames = type
-      ? {
-          exited: styles[`${type}--exited`],
-          exiting: styles[`${type}--exiting`],
-          entering: styles[`${type}--entered`],
-          entered: styles[`${type}--entering`]
-        }
-      : {}
+    const duration = ms(styles?.duration)
 
     return (
-      <BaseTransition
-        {...props}
-        enterDelay={duration}
-        exitDelay={duration}
-        transitionClassName={styles[type]}
-        exitedClassName={classNames.exited}
-        exitingClassName={classNames.exiting}
-        enteredClassName={classNames.entering}
-        enteringClassName={classNames.entered}
-        onEntered={this.handleEntered}
-        onExited={this.handleExited}
-      >
-        {children}
-      </BaseTransition>
+      <>
+        {this.renderTransitionHelper()}
+
+        <BaseTransition
+          {...props}
+          enterDelay={duration}
+          exitDelay={duration}
+          transitionClassName={styles?.classNames?.transitioning}
+          exitedClassName={styles?.classNames?.exited}
+          exitingClassName={styles?.classNames?.exiting}
+          enteredClassName={styles?.classNames?.entering}
+          enteringClassName={styles?.classNames?.entered}
+          onEntered={this.handleEntered}
+          onExited={this.handleExited}
+        >
+          {children}
+        </BaseTransition>
+      </>
     )
   }
 }
