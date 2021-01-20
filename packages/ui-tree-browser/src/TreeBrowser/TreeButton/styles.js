@@ -23,7 +23,7 @@
  */
 import { keyframes } from '@instructure/emotion'
 
-const transform = keyframes` {
+const transform = keyframes`{
   50% {
     opacity: 0.5;
     transform: translate3d(2%, 0, 0);

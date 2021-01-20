@@ -21,22 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/** @jsx jsx */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-
-// remove when Edge sorts out styles-on-pseudo-elements issues:
-// https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/
-import { isEdge } from '@instructure/ui-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { TreeButton } from '../TreeButton'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -44,10 +40,14 @@ parent: TreeBrowser
 ---
 **/
 
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class TreeCollection extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     descriptor: PropTypes.string,
@@ -98,6 +98,13 @@ class TreeCollection extends Component {
     super(props)
 
     this.state = { focused: '' }
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
 
   handleFocus = (e, item) => {
@@ -151,12 +158,12 @@ class TreeCollection extends Component {
   }
 
   renderChildren() {
-    const { expanded, collections, items, name } = this.props
+    const { expanded, collections, items, name, styles } = this.props
 
     return (
       expanded &&
       this.childCount > 0 && (
-        <ul aria-label={name} className={styles.list} role="group">
+        <ul aria-label={name} css={styles.list} role="group">
           {collections.map((collection, i) => {
             return this.renderCollectionNode(collection, i, this.childCount)
           })}
@@ -197,7 +204,8 @@ class TreeCollection extends Component {
       level,
       onItemClick,
       onKeyDown,
-      getItemProps
+      getItemProps,
+      styles
     } = this.props
 
     const ariaSelected = {}
@@ -225,7 +233,7 @@ class TreeCollection extends Component {
         tabIndex="-1"
         role="treeitem"
         aria-label={item.name}
-        className={styles.item}
+        css={styles.item}
         aria-level={level + 1}
         aria-posinset={i + 1 + numCollections}
         aria-setsize={numChildren}
@@ -254,23 +262,16 @@ class TreeCollection extends Component {
   render() {
     const {
       id,
-      size,
-      variant,
+
       expanded,
       collectionIcon,
       collectionIconExpanded,
       level,
-      position
+      position,
+      styles
     } = this.props
 
-    const classes = {
-      [styles.root]: true,
-      [styles.edge]: isEdge,
-      [styles[size]]: true,
-      [styles[variant]]: true,
-      [styles.expanded]: expanded,
-      [styles.node]: true
-    }
+    // console.log({ styles })
     const ariaSelected = {}
     if (this.props.selection)
       ariaSelected['aria-selected'] =
@@ -278,7 +279,7 @@ class TreeCollection extends Component {
 
     return (
       <li
-        className={classnames(classes)}
+        css={styles.treeCollection}
         tabIndex="-1"
         role="treeitem"
         aria-label={this.props.name}
