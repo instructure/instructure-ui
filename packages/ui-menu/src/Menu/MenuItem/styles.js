@@ -22,18 +22,16 @@
  * SOFTWARE.
  */
 
-import generateComponentTheme from './theme'
 /**
  * Generates the style object from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (theme, themeOverride, props) => {
+const generateStyle = (componentTheme, props, state) => {
   const { type, disabled } = props
-  const componentTheme = generateComponentTheme(theme, themeOverride)
+  const { role } = state
 
   const isMenuitemradioOrMenuitemcheckbox =
     type === 'checkbox' || type === 'radio'
@@ -52,10 +50,10 @@ const generateStyle = (theme, themeOverride, props) => {
       }
     : {}
   const roleIconStyles =
-    type === 'flyout'
+    role === 'menuitemradio' || role === 'menuitemcheckbox'
       ? {
-          insetInlineStart: 'auto',
-          insetInlineEnd: componentTheme.iconPadding
+          insetInlineStart: componentTheme.iconPadding,
+          insetInlineEnd: 'auto'
         }
       : {}
   const disabledStyles = disabled
@@ -86,7 +84,6 @@ const generateStyle = (theme, themeOverride, props) => {
       background: componentTheme.background,
       transition: 'background 0.2s',
       display: 'block',
-      ...flyoutIconStyles,
       ...roleStyles,
       '&:focus,  &:active,  &:hover': {
         background: componentTheme.activeBackground,
@@ -114,7 +111,8 @@ const generateStyle = (theme, themeOverride, props) => {
       width: '1em',
       height: '100%',
       color: componentTheme.iconColor,
-      ...roleIconStyles
+      ...roleIconStyles,
+      ...flyoutIconStyles
     },
     label: {
       label: 'menuItem__label',
