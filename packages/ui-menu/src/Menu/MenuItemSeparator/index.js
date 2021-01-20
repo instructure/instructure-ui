@@ -31,6 +31,7 @@ import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -39,7 +40,7 @@ id: Menu.Separator
 ---
 @module MenuItemSeparator
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItemSeparator extends Component {
   static propTypes = {

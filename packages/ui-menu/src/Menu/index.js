@@ -38,7 +38,6 @@ import {
   matchComponentTypes
 } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
-import { withStyle, jsx } from '@instructure/emotion'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -46,15 +45,17 @@ import { MenuContext } from '../MenuContext'
 import { MenuItem } from './MenuItem'
 import { MenuItemGroup } from './MenuItemGroup'
 import { MenuItemSeparator } from './MenuItemSeparator'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Menu extends Component {
   static propTypes = {

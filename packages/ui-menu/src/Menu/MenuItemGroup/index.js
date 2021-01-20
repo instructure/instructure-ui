@@ -44,6 +44,7 @@ import { MenuItem } from '../MenuItem'
 import { MenuItemSeparator } from '../MenuItemSeparator'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -51,7 +52,7 @@ parent: Menu
 id: Menu.Group
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItemGroup extends Component {
   static propTypes = {

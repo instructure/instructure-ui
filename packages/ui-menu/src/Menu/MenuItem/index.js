@@ -21,24 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 /** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { withStyle, jsx } from '@instructure/emotion'
 import { uid } from '@instructure/uid'
 import { controllable } from '@instructure/ui-prop-types'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { MenuContext } from '../../MenuContext'
 
 import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -46,7 +46,7 @@ parent: Menu
 id: Menu.Item
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItem extends Component {
   static propTypes = {
@@ -114,7 +114,7 @@ class MenuItem extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles({ role: this.role })
     const context = MenuContext.getMenuContext(this.context)
 
     if (context && context.registerMenuItem) {
@@ -122,8 +122,8 @@ class MenuItem extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    this.props.makeStyles()
+  componentDidUpdate() {
+    this.props.makeStyles({ role: this.role })
   }
   componentWillUnmount() {
     const context = MenuContext.getMenuContext(this.context)
