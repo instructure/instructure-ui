@@ -81,9 +81,9 @@ function transform(transformOption, importName, matches) {
       const packageName = matches[1]
 
       try {
-        const sourceIndex = require.resolve(join(packageName, 'src'))
+        //https://github.com/aws/aws-cdk/commit/286866aa2a0c01adf90923524fce2fd2c6ff9c25
+        const sourceIndex = require.resolve(packageName)
         const sourceRoot = dirname(sourceIndex)
-
         const importPaths = globby.sync(
           [
             `${sourceRoot}/**/${importName}.js`,
@@ -91,7 +91,6 @@ function transform(transformOption, importName, matches) {
           ],
           { cwd: sourceRoot }
         )
-
         if (!importPaths || importPaths.length === 0) {
           // If there are no import paths found it is the same as if globby or the require.resolve failed, we cannot construct a relative import path
           // so throw an error and just fall back to using the import name as the path.
