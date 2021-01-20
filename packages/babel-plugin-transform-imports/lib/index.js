@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const { dirname, join, relative } = require('path')
+const { dirname, relative } = require('path')
 const globby = require('globby')
 
 const transformName = 'babel-plugin-transform-imports'
@@ -81,7 +81,7 @@ function transform(transformOption, importName, matches) {
       const packageName = matches[1]
 
       try {
-        const sourceIndex = require.resolve(join(packageName, 'src'))
+        const sourceIndex = require.resolve(packageName)
         const sourceRoot = dirname(sourceIndex)
 
         const importPaths = globby.sync(
