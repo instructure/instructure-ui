@@ -22,32 +22,37 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
-import { themeable } from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-react-utils'
 import { controllable } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
-import { TreeButton } from './TreeButton'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyles from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class TreeBrowser extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * a normalized hash of collections, keyed by id, that contain an
      * :id, :name, :items (an array of item ids), :collections (an array of
@@ -139,6 +144,12 @@ class TreeBrowser extends Component {
     if (typeof this.props.expanded === 'undefined') {
       this.state.expanded = props.defaultExpanded
     }
+  }
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
 
   handleCollectionClick = (e, collection, expand = true) => {
@@ -360,10 +371,15 @@ class TreeBrowser extends Component {
   }
 
   renderRoot() {
+    // Have to do this because `pickProps` will pass the `styles` and the `makeStyles`
+    // props to the `TreeCollection` component and they will interfere with the correct
+    // style calcualting behaviour of the `TreeCollection` component
+    // TODO: change pickProps to always filter out the `styles` and `makeStyles` properties
+    const { styles, makeStyles, ...restProps } = this.props
     return this.collections.map((collection, i) => (
       <TreeCollection
         key={i}
-        {...pickProps(this.props, TreeCollection.propTypes)}
+        {...pickProps(restProps, TreeCollection.propTypes)}
         {...this.getCollectionProps(collection)}
         selection={this.state.selection}
         onItemClick={this.handleItemClick}
@@ -377,9 +393,11 @@ class TreeBrowser extends Component {
   }
 
   render() {
+    const { styles } = this.props
+
     return (
       <ul
-        className={styles.list}
+        css={styles.treeBrowser}
         tabIndex={0}
         role="tree"
         onKeyDown={this.handleKeyDown}
