@@ -10285,7 +10285,7 @@ gulp-consolidate@^0.2.0:
     consolidate "~0.14.0"
     map-stream "0.0.4"
 
-gulp-iconfont@^11.0.1:
+gulp-iconfont@^11.0.0:
   version "11.0.0"
   resolved "https://registry.npmjs.org/gulp-iconfont/-/gulp-iconfont-11.0.0.tgz#3829f1bf836bd0883125711e31d9355239484bf6"
   integrity sha512-g191GkN70DeF6Vx/B6frdyFie8m8kZa52pgKfaOyifV3z/038VghivRT/smB3Otp8JDLonwHOOyun21jTiZexQ==
