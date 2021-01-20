@@ -116,11 +116,11 @@ class ToggleDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    this.props.makeStyles({ animate: false })
   }
 
   componentDidUpdate() {
-    this.props.makeStyles()
+    this.props.makeStyles({ animate: true })
   }
 
   getButtonRef = (el) => (this._button = el)
@@ -203,9 +203,18 @@ class ToggleDetails extends Component {
     return <div css={this.props.styles.content}>{this.props.children}</div>
   }
 
+  onToggle = (event, expanded) => {
+    const { onToggle } = pickProps(this.props, Expandable.propTypes)
+    onToggle(event, expanded)
+    this.props.makeStyles({ animate: true })
+  }
+
   render() {
     return (
-      <Expandable {...pickProps(this.props, Expandable.propTypes)}>
+      <Expandable
+        {...pickProps(this.props, Expandable.propTypes)}
+        onToggle={this.onToggle}
+      >
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
             <div css={this.props.styles.toggleDetails}>

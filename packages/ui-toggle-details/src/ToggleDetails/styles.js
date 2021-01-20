@@ -34,15 +34,9 @@ const contentAnimation = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props) => {
-  const {
-    fluidWidth,
-    iconPosition,
-    size,
-    expanded,
-    defaultExpanded,
-    variant
-  } = props
+const generateStyle = (componentTheme, props, state) => {
+  const { fluidWidth, iconPosition, size, variant } = props
+  const { animate } = state
 
   const positionIconAtEnd =
     iconPosition === 'end' && (variant === 'filled' || fluidWidth)
@@ -166,13 +160,15 @@ const generateStyle = (componentTheme, props) => {
       ...fontSizeStyles[size],
       ...indentDetailsStyles[size]
     },
-    content: {
-      label: 'toggleDetails__content',
-      opacity: 0.01,
-      animationName: contentAnimation,
-      animationFillMode: 'forwards',
-      animationDuration: '.3s'
-    }
+    content: animate
+      ? {
+          label: 'toggleDetails__content',
+          opacity: 0.01,
+          animationName: contentAnimation,
+          animationFillMode: 'forwards',
+          animationDuration: '.3s'
+        }
+      : {}
   }
 }
 
