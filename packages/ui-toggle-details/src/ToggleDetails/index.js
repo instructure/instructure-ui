@@ -21,10 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Button } from '@instructure/ui-buttons'
 import {
@@ -32,24 +31,29 @@ import {
   IconArrowOpenDownSolid
 } from '@instructure/ui-icons'
 import { Expandable } from '@instructure/ui-expandable'
-import { themeable } from '@instructure/ui-themeable'
 import { controllable } from '@instructure/ui-prop-types'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class ToggleDetails extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     variant: PropTypes.oneOf(['default', 'filled']),
     /**
      * The summary that displays and can be interacted with
@@ -103,8 +107,6 @@ class ToggleDetails extends Component {
     expanded: undefined
   }
 
-  shouldAnimateContent = false
-
   get focused() {
     return isActiveElement(this._button)
   }
@@ -114,7 +116,11 @@ class ToggleDetails extends Component {
   }
 
   componentDidMount() {
-    this.shouldAnimateContent = true
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
 
   getButtonRef = (el) => (this._button = el)
@@ -123,16 +129,16 @@ class ToggleDetails extends Component {
     const { summary, iconPosition } = this.props
 
     return (
-      <span className={styles.summary}>
+      <span css={this.props.styles.summary}>
         {iconPosition === 'start' && this.renderIcon(expanded)}
-        <span className={styles.summaryText}>{summary}</span>
+        <span css={this.props.styles.summaryText}>{summary}</span>
         {iconPosition === 'end' && this.renderIcon(expanded)}
       </span>
     )
   }
 
   renderToggle(toggleProps, expanded) {
-    const { variant, fluidWidth } = this.props
+    const { variant } = this.props
 
     const props = {
       ...omitProps(this.props, ToggleDetails.propTypes),
@@ -155,13 +161,7 @@ class ToggleDetails extends Component {
       )
     } else if (props.href) {
       return (
-        <a
-          {...props}
-          className={classnames(styles.toggle, styles[variant], {
-            [styles.fluidWidth]: fluidWidth
-          })}
-          ref={this.getButtonRef}
-        >
+        <a {...props} css={this.props.styles.toggle} ref={this.getButtonRef}>
           {summary}
         </a>
       )
@@ -170,9 +170,7 @@ class ToggleDetails extends Component {
         <button
           {...props}
           type="button"
-          className={classnames(styles.toggle, styles[variant], {
-            [styles.fluidWidth]: fluidWidth
-          })}
+          css={this.props.styles.toggle}
           ref={this.getButtonRef}
         >
           {summary}
@@ -182,66 +180,35 @@ class ToggleDetails extends Component {
   }
 
   renderIcon(expanded) {
-    const { iconPosition } = this.props
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
 
     return this.props.children ? (
-      <span
-        className={classnames(styles.icon, {
-          [styles.iconStart]: iconPosition === 'start',
-          [styles.iconEnd]: iconPosition === 'end'
-        })}
-      >
+      <span css={this.props.styles.icon}>
         <Icon />
       </span>
     ) : null
   }
 
   renderDetails(expanded, detailsProps) {
-    const { children, size, iconPosition, fluidWidth } = this.props
-
+    const { children } = this.props
+    const expandedStyles = expanded ? { display: 'block' } : { display: 'none' }
     return (
-      <div
-        {...detailsProps}
-        className={classnames(styles.details, {
-          [styles[size]]: size,
-          [styles.hiddenDetails]: !expanded,
-          [styles.expandedDetails]: expanded,
-          [styles.indentDetails]: iconPosition === 'start' && !fluidWidth
-        })}
-      >
+      <div {...detailsProps} css={[this.props.styles.details, expandedStyles]}>
         {children && expanded && this.renderContent()}
       </div>
     )
   }
 
   renderContent() {
-    return (
-      <div
-        className={classnames({ [styles.content]: this.shouldAnimateContent })}
-      >
-        {this.props.children}
-      </div>
-    )
+    return <div css={this.props.styles.content}>{this.props.children}</div>
   }
 
   render() {
-    const { variant, iconPosition, fluidWidth } = this.props
-
-    const positionIconAtEnd =
-      iconPosition === 'end' && (variant === 'filled' || fluidWidth)
-
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles.positionIconAtEnd]: positionIconAtEnd
-    }
-
     return (
       <Expandable {...pickProps(this.props, Expandable.propTypes)}>
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
-            <div className={classnames(classes)}>
+            <div css={this.props.styles.toggleDetails}>
               {this.renderToggle(getToggleProps(), expanded)}
               {this.renderDetails(expanded, getDetailsProps())}
             </div>
