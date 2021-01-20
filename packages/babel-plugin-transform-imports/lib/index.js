@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const { dirname, join, relative } = require('path')
+const { dirname, relative } = require('path')
 const globby = require('globby')
 
 const transformName = 'babel-plugin-transform-imports'
@@ -81,7 +81,6 @@ function transform(transformOption, importName, matches) {
       const packageName = matches[1]
 
       try {
-        //https://github.com/aws/aws-cdk/commit/286866aa2a0c01adf90923524fce2fd2c6ff9c25
         const sourceIndex = require.resolve(packageName)
         const sourceRoot = dirname(sourceIndex)
         const importPaths = globby.sync(
