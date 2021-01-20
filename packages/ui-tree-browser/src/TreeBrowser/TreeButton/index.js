@@ -21,19 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/** @jsx jsx */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { isIE11 } from '@instructure/ui-utils'
 import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -41,10 +40,14 @@ parent: TreeBrowser
 ---
 **/
 
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class TreeButton extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     descriptor: PropTypes.string,
@@ -80,6 +83,12 @@ class TreeButton extends Component {
     expanded: false,
     descriptor: undefined
   }
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
 
   renderImage() {
     const { type } = this.props
@@ -94,11 +103,16 @@ class TreeButton extends Component {
   }
 
   renderCollectionIcon() {
-    const { expanded, collectionIcon, collectionIconExpanded } = this.props
+    const {
+      expanded,
+      collectionIcon,
+      collectionIconExpanded,
+      styles
+    } = this.props
 
     if (collectionIcon || collectionIconExpanded) {
       return (
-        <div className={styles.icon}>
+        <div css={styles.icon}>
           {callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}
         </div>
       )
@@ -106,51 +120,33 @@ class TreeButton extends Component {
   }
 
   renderItemImage() {
-    const { thumbnail, itemIcon } = this.props
+    const { thumbnail, itemIcon, styles } = this.props
 
     if (thumbnail) {
       return (
-        <div className={styles.thumbnail}>
+        <div css={styles.thumbnail}>
           <Img src={thumbnail} constrain="cover" alt="" />
         </div>
       )
     }
 
     if (itemIcon) {
-      return <div className={styles.icon}>{callRenderProp(itemIcon)}</div>
+      return <div css={styles.icon}>{callRenderProp(itemIcon)}</div>
     }
   }
 
   render() {
-    const {
-      name,
-      descriptor,
-      expanded,
-      selected,
-      focused,
-      variant,
-      size
-    } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: true,
-      [styles[variant]]: true,
-      [styles.expanded]: expanded,
-      [styles.selected]: selected,
-      [styles.focused]: focused,
-      [styles.ie11]: isIE11
-    }
+    const { name, descriptor, styles } = this.props
 
     // VoiceOver can't navigate without the buttons, even though they don't do anything
     return (
-      <button tabIndex={-1} type="button" className={classnames(classes)}>
-        <span className={styles.layout}>
+      <button tabIndex={-1} type="button" css={styles.treeButton}>
+        <span css={styles.layout}>
           {this.renderImage()}
-          <span className={styles.text}>
-            <span className={styles.textName}>{name}</span>
+          <span css={styles.text}>
+            <span css={styles.textName}>{name}</span>
             {descriptor ? (
-              <span className={styles.textDescriptor} title={descriptor}>
+              <span css={styles.textDescriptor} title={descriptor}>
                 {descriptor}
               </span>
             ) : null}
