@@ -59,7 +59,7 @@ const generateStyle = (componentTheme, props, state) => {
       top: 0,
       insetInlineStart: 0,
       insetInlineEnd: 'auto',
-      opacity: 0.0001
+      opacity: 0.0001 /* selenium cannot find fully transparent elements */
     },
     control: {
       label: 'checkbox__control',
