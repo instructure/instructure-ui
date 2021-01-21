@@ -114,7 +114,7 @@ class MenuItem extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles({ role: this.role })
+    this.props.makeStyles()
     const context = MenuContext.getMenuContext(this.context)
 
     if (context && context.registerMenuItem) {
@@ -123,7 +123,7 @@ class MenuItem extends Component {
   }
 
   componentDidUpdate() {
-    this.props.makeStyles({ role: this.role })
+    this.props.makeStyles()
   }
   componentWillUnmount() {
     const context = MenuContext.getMenuContext(this.context)
