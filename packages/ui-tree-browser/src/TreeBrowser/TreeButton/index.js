@@ -31,7 +31,7 @@ import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyle from './styles'
+import generateStyles from './styles'
 import generateComponentTheme from './theme'
 
 /**
@@ -40,7 +40,7 @@ parent: TreeBrowser
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeButton extends Component {
   static propTypes = {

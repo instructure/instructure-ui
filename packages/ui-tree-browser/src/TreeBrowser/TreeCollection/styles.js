@@ -36,7 +36,7 @@ const list = keyframes`{
   }
 }`
 
-const generateStyle = (componentTheme, props) => {
+const generateStyles = (componentTheme, props) => {
   const { size, variant } = props
   const sizeMap = {
     small: {
@@ -123,4 +123,4 @@ const generateStyle = (componentTheme, props) => {
   }
 }
 
-export default generateStyle
+export default generateStyles
