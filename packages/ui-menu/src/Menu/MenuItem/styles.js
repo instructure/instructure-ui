@@ -83,6 +83,10 @@ const generateStyle = (componentTheme, props, state) => {
       fontSize: componentTheme.fontSize,
       background: componentTheme.background,
       transition: 'background 0.2s',
+      // Changing the following to display: flex; causes a VO
+      // bug where items with role menuitem, menuitemcheckbox
+      // and menuitemradio are selected twice with control+
+      // option+space. So we set the display to block.
       display: 'block',
       ...roleStyles,
       '&:focus,  &:active,  &:hover': {
@@ -94,6 +98,7 @@ const generateStyle = (componentTheme, props, state) => {
           color: componentTheme.activeIconColor
         }
       },
+      //removes extra ff button spacing
       '&::-moz-focus-inner': {
         padding: '0',
         margin: '0',
