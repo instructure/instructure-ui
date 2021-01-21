@@ -32,6 +32,9 @@ exports.publishGithubPages = async function publishGithubPages() {
   info(`Create __build__ folder`)
   await exec(`mkdir packages/__docs__/__build__`)
 
+  info(`Switch to gh-pages branch`)
+  await exec(`git checkout gh-pages`)
+
   info(`Switch to master branch`)
   await exec(`git checkout master`)
 
