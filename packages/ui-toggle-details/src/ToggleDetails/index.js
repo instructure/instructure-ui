@@ -203,9 +203,8 @@ class ToggleDetails extends Component {
     return <div css={this.props.styles.content}>{this.props.children}</div>
   }
 
-  onToggle = (event, expanded) => {
-    const { onToggle } = pickProps(this.props, Expandable.propTypes)
-    onToggle(event, expanded)
+  handleToggle = (event, expanded) => {
+    this.props.onToggle(event, expanded)
     this.props.makeStyles({ animate: true })
   }
 
@@ -213,7 +212,7 @@ class ToggleDetails extends Component {
     return (
       <Expandable
         {...pickProps(this.props, Expandable.propTypes)}
-        onToggle={this.onToggle}
+        onToggle={this.handleToggle}
       >
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
