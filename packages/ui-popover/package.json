@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-popover",
-  "version": "7.3.4",
+  "version": "7.3.5",
   "description": "A component for hiding or showing content based on user interaction.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -29,27 +29,27 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.4",
-    "@instructure/ui-a11y-utils": "^7.3.4",
-    "@instructure/ui-dialog": "^7.3.4",
-    "@instructure/ui-dom-utils": "^7.3.4",
-    "@instructure/ui-i18n": "^7.3.4",
-    "@instructure/ui-position": "^7.3.4",
-    "@instructure/ui-prop-types": "^7.3.4",
-    "@instructure/ui-react-utils": "^7.3.4",
-    "@instructure/ui-testable": "^7.3.4",
-    "@instructure/ui-themeable": "^7.3.4",
-    "@instructure/ui-utils": "^7.3.4",
-    "@instructure/ui-view": "^7.3.4",
-    "@instructure/uid": "^7.3.4",
+    "@instructure/console": "^7.3.5",
+    "@instructure/ui-a11y-utils": "^7.3.5",
+    "@instructure/ui-dialog": "^7.3.5",
+    "@instructure/ui-dom-utils": "^7.3.5",
+    "@instructure/ui-i18n": "^7.3.5",
+    "@instructure/ui-position": "^7.3.5",
+    "@instructure/ui-prop-types": "^7.3.5",
+    "@instructure/ui-react-utils": "^7.3.5",
+    "@instructure/ui-testable": "^7.3.5",
+    "@instructure/ui-themeable": "^7.3.5",
+    "@instructure/ui-utils": "^7.3.5",
+    "@instructure/ui-view": "^7.3.5",
+    "@instructure/uid": "^7.3.5",
     "keycode": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.4",
-    "@instructure/ui-color-utils": "^7.3.4",
-    "@instructure/ui-test-locator": "^7.3.4",
-    "@instructure/ui-test-utils": "^7.3.4"
+    "@instructure/ui-babel-preset": "^7.3.5",
+    "@instructure/ui-color-utils": "^7.3.5",
+    "@instructure/ui-test-locator": "^7.3.5",
+    "@instructure/ui-test-utils": "^7.3.5"
   },
   "peerDependencies": {
     "react": "^16.8"

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-form-field",
-  "version": "7.3.4",
+  "version": "7.3.5",
   "description": "Form layout components.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -29,20 +29,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.4",
-    "@instructure/ui-test-utils": "^7.3.4"
+    "@instructure/ui-babel-preset": "^7.3.5",
+    "@instructure/ui-test-utils": "^7.3.5"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.4",
-    "@instructure/ui-a11y-content": "^7.3.4",
-    "@instructure/ui-a11y-utils": "^7.3.4",
-    "@instructure/ui-grid": "^7.3.4",
-    "@instructure/ui-icons": "^7.3.4",
-    "@instructure/ui-react-utils": "^7.3.4",
-    "@instructure/ui-themeable": "^7.3.4",
-    "@instructure/ui-utils": "^7.3.4",
-    "@instructure/uid": "^7.3.4",
+    "@instructure/console": "^7.3.5",
+    "@instructure/ui-a11y-content": "^7.3.5",
+    "@instructure/ui-a11y-utils": "^7.3.5",
+    "@instructure/ui-grid": "^7.3.5",
+    "@instructure/ui-icons": "^7.3.5",
+    "@instructure/ui-react-utils": "^7.3.5",
+    "@instructure/ui-themeable": "^7.3.5",
+    "@instructure/ui-utils": "^7.3.5",
+    "@instructure/uid": "^7.3.5",
     "classnames": "^2",
     "prop-types": "^15"
   },

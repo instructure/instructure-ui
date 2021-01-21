@@ -1,6 +1,6 @@
 {
   "name": "@instructure/template-app",
-  "version": "7.3.4",
+  "version": "7.3.5",
   "description": "A package containing template files to generate a react app configured with Instructure UI presets.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
@@ -14,23 +14,23 @@
     "access": "public"
   },
   "dependencies": {
-    "@instructure/canvas-theme": "^7.3.4",
-    "@instructure/ui-heading": "^7.3.4",
-    "@instructure/ui-icons": "^7.3.4",
-    "@instructure/ui-svg-images": "^7.3.4",
-    "@instructure/ui-text": "^7.3.4",
-    "@instructure/ui-themeable": "^7.3.4",
-    "@instructure/ui-view": "^7.3.4",
+    "@instructure/canvas-theme": "^7.3.5",
+    "@instructure/ui-heading": "^7.3.5",
+    "@instructure/ui-icons": "^7.3.5",
+    "@instructure/ui-svg-images": "^7.3.5",
+    "@instructure/ui-text": "^7.3.5",
+    "@instructure/ui-themeable": "^7.3.5",
+    "@instructure/ui-view": "^7.3.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.4",
-    "@instructure/ui-eslint-config": "^7.3.4",
-    "@instructure/ui-postcss-config": "^7.3.4",
-    "@instructure/ui-scripts": "^7.3.4",
-    "@instructure/ui-stylelint-config": "^7.3.4",
-    "@instructure/ui-webpack-config": "^7.3.4",
+    "@instructure/ui-babel-preset": "^7.3.5",
+    "@instructure/ui-eslint-config": "^7.3.5",
+    "@instructure/ui-postcss-config": "^7.3.5",
+    "@instructure/ui-scripts": "^7.3.5",
+    "@instructure/ui-stylelint-config": "^7.3.5",
+    "@instructure/ui-webpack-config": "^7.3.5",
     "html-webpack-plugin": "^3.2.0"
   }
 }

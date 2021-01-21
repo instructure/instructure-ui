@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.5](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.5) (2021-01-21)
+
+### Bug Fixes
+
+- **esm:** specify "exports" in package manifests ([6007684](https://github.com/instructure/instructure-ui/commit/6007684))
+- **ui-modal:** fix modal resetting contents when size is changed to/from fullscreen ([397c2b8](https://github.com/instructure/instructure-ui/commit/397c2b8))
+
 ## [7.3.4](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.4) (2021-01-14)
 
 ### Bug Fixes
