@@ -31,10 +31,8 @@
  */
 const generateStyle = (componentTheme, props, state) => {
   const { type, disabled } = props
-  const { role } = state
 
-  const isMenuitemradioOrMenuitemcheckbox =
-    type === 'checkbox' || type === 'radio'
+  const isRadioOrCheckbox = type === 'checkbox' || type === 'radio'
 
   const flyoutIconStyles =
     type === 'flyout'
@@ -44,18 +42,17 @@ const generateStyle = (componentTheme, props, state) => {
         }
       : {}
 
-  const roleStyles = isMenuitemradioOrMenuitemcheckbox
+  const roleStyles = isRadioOrCheckbox
     ? {
         paddingInlineStart: componentTheme.labelPadding
       }
     : {}
-  const roleIconStyles =
-    role === 'menuitemradio' || role === 'menuitemcheckbox'
-      ? {
-          insetInlineStart: componentTheme.iconPadding,
-          insetInlineEnd: 'auto'
-        }
-      : {}
+  const roleIconStyles = isRadioOrCheckbox
+    ? {
+        insetInlineStart: componentTheme.iconPadding,
+        insetInlineEnd: 'auto'
+      }
+    : {}
   const disabledStyles = disabled
     ? {
         cursor: 'not-allowed',
