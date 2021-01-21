@@ -30,7 +30,7 @@
  * @return {Object} The final style object, which will be used in the component
  */
 
-const generateStyle = (componentTheme, props) => {
+const generateStyles = (componentTheme, props) => {
   return {
     treeBrowser: {
       label: 'treeBrowser',
@@ -64,4 +64,4 @@ const generateStyle = (componentTheme, props) => {
   }
 }
 
-export default generateStyle
+export default generateStyles

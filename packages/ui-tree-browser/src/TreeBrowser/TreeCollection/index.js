@@ -31,7 +31,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import { TreeButton } from '../TreeButton'
 
-import generateStyle from './styles'
+import generateStyles from './styles'
 import generateComponentTheme from './theme'
 
 /**
@@ -40,7 +40,7 @@ parent: TreeBrowser
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeCollection extends Component {
   static propTypes = {

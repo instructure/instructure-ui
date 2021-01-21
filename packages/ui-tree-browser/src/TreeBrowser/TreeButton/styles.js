@@ -41,7 +41,7 @@ const transform = keyframes`{
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props) => {
+const generateStyles = (componentTheme, props) => {
   const { size, variant, selected, focused } = props
 
   const sizeMap = {
@@ -268,11 +268,10 @@ const generateStyle = (componentTheme, props) => {
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      color: componentTheme.nameTextColor,
-      ...sizeMap[size].textName,
-      ...(selected && {
-        color: componentTheme.selectedTextColor
-      })
+      color: selected
+        ? componentTheme.selectedTextColor
+        : componentTheme.nameTextColor,
+      ...sizeMap[size].textName
     },
     textDescriptor: {
       label: 'treeButton__textDescriptor',
@@ -281,25 +280,23 @@ const generateStyle = (componentTheme, props) => {
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       marginTop: componentTheme.descriptorMarginTop,
-      color: componentTheme.descriptorTextColor,
-      ...sizeMap[size].textDescriptor,
-      ...(selected && {
-        color: componentTheme.selectedTextColor
-      })
+      color: selected
+        ? componentTheme.selectedTextColor
+        : componentTheme.descriptorTextColor,
+      ...sizeMap[size].textDescriptor
     },
     icon: {
       label: 'treeButton__icon',
       minWidth: '0.0625rem',
       position: 'relative',
       zIndex: 1,
-      color: componentTheme.iconColor,
+      color: selected
+        ? componentTheme.selectedTextColor
+        : componentTheme.iconColor,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      ...sizeMap[size][variant].icon,
-      ...(selected && {
-        color: componentTheme.selectedTextColor
-      })
+      ...sizeMap[size][variant].icon
     },
     thumbnail: {
       label: 'treeButton__thumbnail',
@@ -308,4 +305,4 @@ const generateStyle = (componentTheme, props) => {
   }
 }
 
-export default generateStyle
+export default generateStyles
