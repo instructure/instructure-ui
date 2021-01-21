@@ -47,6 +47,9 @@ const morph = keyframes`
     }`
 
 /**
+ * ---
+ * private: true
+ * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to

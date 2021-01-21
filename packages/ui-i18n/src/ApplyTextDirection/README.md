@@ -6,7 +6,7 @@ A utility component used to manage text direction. In addition to appending the 
 its underlying DOM node, `<ApplyTextDirection />` also creates a direction context which can be
 consumed by child components that have implemented [bidirectional](#bidirectional).
 
-If no `dir` prop is supplied, `<ApplyTextDirection />` will fallback to its parent context if it 
+If no `dir` prop is supplied, `<ApplyTextDirection />` will fallback to its parent context if it
 exists. Otherwise it queries for and uses the documentElement `dir` attribute and defaults to `ltr`
 if it is not found.
 
@@ -17,7 +17,7 @@ example: true
 <ApplyTextDirection dir="rtl">
   <View
     display="block"
-    background="default"
+    background="primary"
     padding="large"
     borderWidth="none none none large"
   >
@@ -36,7 +36,7 @@ example: true
 <ApplyTextDirection dir="rtl">
   <View
     display="block"
-    background="default"
+    background="primary"
     padding="large"
     borderWidth="none none none large"
   >
@@ -46,7 +46,7 @@ example: true
   <ApplyTextDirection dir="ltr">
     <View
       display="block"
-      background="default"
+      background="primary"
       padding="large"
       borderWidth="none none none large"
     >

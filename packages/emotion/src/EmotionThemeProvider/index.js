@@ -25,8 +25,13 @@ import React from 'react'
 import { ThemeProvider } from 'emotion-theming'
 import { merge } from 'lodash'
 
+/**
+ * ---
+ * category: utilities/themes
+ * ---
+ */
 function EmotionThemeProvider({ children, theme = {} }) {
-  //if fuction is given to theme prop, Emotion will repleace the theme with the return value
+  // if function is given to theme prop, Emotion will replace the theme with the return value
   const getTheme = (theme) => (ancestorTheme = {}) => {
     const themeName = ancestorTheme.key
     const themeBasedOverride = theme?.themes?.[themeName]

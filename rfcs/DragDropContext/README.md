@@ -5,28 +5,29 @@ title: DragDropContext
 ---
 
 ## DragDropContext Component
+
 It is likely that the terms "draggable" or "drag and drop" will be used to refer
 to the `DragDropContext` components, particularly `DragSource`.
 
-
 ### Summary
+
 This component effectively wraps the HOCs provided by `react-dnd` and provides
 actual components with a simplified API for basic drag and drop functionality.
 
-
 ### Use Cases
+
 This component only aims to provide basic drag and drop functionality. Most use
 cases for it would likely involve further abstraction into some kind of draggable
 layout component. A sortable grid of cards or a list of items that can be
 reordered are two examples.
 
-
 ### Other Implementations
+
 [react-dnd](https://github.com/react-dnd/react-dnd)
 [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd)
 
-
 ### Functional Requirements and API
+
 This component should not be concerned with maintaining the order or position of
 its children. It only serves to communicate what is being dragged where. Any
 sorting or ordering of children should be managed externally.
@@ -48,8 +49,8 @@ the component that can react to a dropped item. Draggable items don't necessaril
 need to live within a `DropTarget`, but it is needed to communicate a successful
 drop.
 
-
 ### Examples
+
 ```javascript
 
 // single drop zone, multiple draggable items
@@ -73,7 +74,7 @@ drop.
         {(provided) => (
           <View
             padding="small"
-            background="default"
+            background="primary"
             shadow={provided.isDragging ? 'above' : null}
           >
             <span>Drag Me!</span>
@@ -192,68 +193,72 @@ drop.
 ```
 
 ### DragDropContext Properties
-| Prop     | Type     | Default  | Notes    |
-|----------|----------|----------|----------|
-| children | oneOf: function, element | | An element or function that returns an element. |
-| onDragStart | function | (start) => {} | A callback that fires when an item starts being dragged. |
-| onDragUpdate | function | (update) => {} | A callback that fires when item's position has changed. |
-| onDragEnd | function | (end) => {} | A callback that fires when dragging has stopped. |
+
+| Prop         | Type                     | Default        | Notes                                                    |
+| ------------ | ------------------------ | -------------- | -------------------------------------------------------- |
+| children     | oneOf: function, element |                | An element or function that returns an element.          |
+| onDragStart  | function                 | (start) => {}  | A callback that fires when an item starts being dragged. |
+| onDragUpdate | function                 | (update) => {} | A callback that fires when item's position has changed.  |
+| onDragEnd    | function                 | (end) => {}    | A callback that fires when dragging has stopped.         |
 
 ### DropTarget Properties
-| Prop     | Type     | Default  | Notes    |
-|----------|----------|----------|----------|
-| accepts | string[] | | A string or array of strings denoting the compatible types of draggable items. Not setting an accepts prop would allow any target in the region to be dropped here. |
-| children | oneOf: function, element | | An element or function that returns an element. |
+
+| Prop     | Type                     | Default | Notes                                                                                                                                                               |
+| -------- | ------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| accepts  | string[]                 |         | A string or array of strings denoting the compatible types of draggable items. Not setting an accepts prop would allow any target in the region to be dropped here. |
+| children | oneOf: function, element |         | An element or function that returns an element.                                                                                                                     |
 
 ### DragSource Properties
-| Prop     | Type     | Default  | Notes    |
-|----------|----------|----------|----------|
-| type | string | 'any' | A string used to associate a `DragSource` with compatible `DropTargets`. Not setting a type would allow a target to be dropped in any group in the region. |
-| children | oneOf: function, element | | An element or function that returns an element. |
+
+| Prop     | Type                     | Default | Notes                                                                                                                                                      |
+| -------- | ------------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type     | string                   | 'any'   | A string used to associate a `DragSource` with compatible `DropTargets`. Not setting a type would allow a target to be dropped in any group in the region. |
+| children | oneOf: function, element |         | An element or function that returns an element.                                                                                                            |
 
 ### DragHandle Properties
-| Prop     | Type     | Default  | Notes    |
-|----------|----------|----------|----------|
-| children | element | | An element to use as the draggable point of a DragSource |
 
+| Prop     | Type    | Default | Notes                                                    |
+| -------- | ------- | ------- | -------------------------------------------------------- |
+| children | element |         | An element to use as the draggable point of a DragSource |
 
 ### Dependencies
+
 - react-dnd
 - react-dnd-html5-backend
 - react-dnd-touch-backend
 - ui-utils
 
-
 ### Theme Variables
+
 n/a
 
-
 ### Accessibility Requirements
+
 n/a. a11y considerations will only be needed for any layers of abstraction on top
 of `DragDropContext`, where elements may be focused or reordered.
 
-
 ### Internationalization Requirements
+
 n/a. i18n considerations will also only be needed for components built off this one,
 not `DragDropContext` itself. Providing internationalized assistive text to describe
 dragging or sorting actions would be the primary consideration.
 
-
 ### Other Things to Consider
+
 - We will certainly want to build other components on top of this one, such as a
-sortable layout.
+  sortable layout.
 - Because this implementation utilizes `react-dnd` we are also reliant on its
-backends. Unless we were to write our own backend, we'd be working around limitations
-of the HTML5 drag and drop API. Most of which should be already managed by
-`react-dnd` or mostly avoidable, but it's worth mentioning.
+  backends. Unless we were to write our own backend, we'd be working around limitations
+  of the HTML5 drag and drop API. Most of which should be already managed by
+  `react-dnd` or mostly avoidable, but it's worth mentioning.
 - One particular limitation of the HTML5 backend is that the drag preview is always
-somewhat transparent. There is a work around for some (not all) use cases so this
-limitation should be communicated to design.
-- `react-dnd` also only allows *either* the HTML5 backend or the touch backend to be
-used. If we need to support touch events, we will need to utilize a third-party
-combined backend or provide our own logic to conditionally use the appropriate
-backend.
+  somewhat transparent. There is a work around for some (not all) use cases so this
+  limitation should be communicated to design.
+- `react-dnd` also only allows _either_ the HTML5 backend or the touch backend to be
+  used. If we need to support touch events, we will need to utilize a third-party
+  combined backend or provide our own logic to conditionally use the appropriate
+  backend.
 - It may be difficult to use some components with `DragDropContext`, particularly
-those that require specific children, such as a `List` that requires only
-`List.Item`s as immediate children. However, we expect new components to be purpose
-built for draggable use cases, so this likely won't be an issue.
+  those that require specific children, such as a `List` that requires only
+  `List.Item`s as immediate children. However, we expect new components to be purpose
+  built for draggable use cases, so this likely won't be an issue.

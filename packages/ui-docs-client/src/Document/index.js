@@ -84,7 +84,7 @@ class Document extends Component {
 
   renderTheme(doc) {
     const { themeKey } = this.props
-    const { generateComponentTheme } = doc.resource
+    const generateComponentTheme = doc?.resource?.generateComponentTheme
 
     const themeVariables = ThemeRegistry.getRegisteredTheme(themeKey).variables
     const theme =
