@@ -258,7 +258,11 @@ class MenuItemGroup extends Component {
   render() {
     const props = omitProps(this.props, MenuItemGroup.propTypes)
     return (
-      <span {...props} css={this.props.styles.root} role="presentation">
+      <span
+        {...props}
+        css={this.props.styles.menuItemGroup}
+        role="presentation"
+      >
         <span id={this._labelId}>{this.renderLabel()}</span>
         <ul
           role="menu"
