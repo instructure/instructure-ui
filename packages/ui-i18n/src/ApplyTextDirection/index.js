@@ -28,6 +28,11 @@ import { getElementType } from '@instructure/ui-react-utils'
 
 import { DIRECTION, TextDirectionContext } from '../TextDirectionContext'
 
+/**
+---
+category: components/utilities
+---
+**/
 const ApplyTextDirection = (props) => {
   const context = useTextDirectionContext()
   const dir = props.dir || context

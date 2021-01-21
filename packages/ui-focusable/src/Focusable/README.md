@@ -21,7 +21,7 @@ example: true
         margin="small 0"
         placement="bottom"
         as="div"
-        background="default"
+        background="primary"
         padding="small"
         borderWidth="small"
         display="block"

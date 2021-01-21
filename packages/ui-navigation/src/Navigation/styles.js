@@ -23,6 +23,9 @@
  */
 
 /**
+ * ---
+ * private: true
+ * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} themeOverride User provided overrides of the default theme mapping.

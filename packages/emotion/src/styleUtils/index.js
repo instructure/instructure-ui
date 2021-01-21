@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { forwardRef, useState } from 'react'
+
+import React from 'react'
 import { useTheme as useEmotionTheme } from 'emotion-theming'
 import { canvas } from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
-import { decorator } from '@instructure/ui-decorator'
-import { isEqual } from 'lodash'
-import hoistNonReactStatics from 'hoist-non-react-statics'
-import { bidirectionalPolyfill } from './polyFill'
-import { useTextDirectionContext } from '@instructure/ui-i18n'
 
 /**
- * This is an utility function which calulates the correct component theme based on every possible override there is.
+ * ---
+ * private: true
+ * ---
+ * This is a utility function which calculates the correct component theme
+ * based on every possible override there is.
 
  * @param {object} theme - Theme object
  * @param {*} componentName - Name of the component
@@ -78,104 +78,4 @@ const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
   return generateStyle(theme, themeOverride, props, ...extraArgs)
 }
 
-/**
- * Decorator which adds a `makeStyles` function to the decorated Component's props.
- * @param {function} generateStyle - The function that returns the component's style object
- * @returns {ReactElement} The decorated WithStyle Component
- *
- * @example
- * class ExampleComponent extends React.Component {
- *
- *  componentDidUpdate() {
- *    this.props.makeStyles()
- *
- * }
- *  componentDidMount() {
- *    this.props.makeStyles()
- * }
- *
- *  render() {
- *    const { propVal1, styles, ...props } = this.props
- *
- *    return (
- *      <Element css={styles.root} >...</Element>
- *    )
- *  }
- * }
- */
-const withStyle = decorator(
-  (ComposedComponent, generateStyle, generateComponentTheme) => {
-    const WithStyle = forwardRef((props, ref) => {
-      const theme = useTheme()
-      const dir = useTextDirectionContext()
-      const componentProps = {
-        ...ComposedComponent.defaultProps,
-        ...props
-      }
-      const themeOverride = getThemeOverride(
-        theme,
-        ComposedComponent.displayName,
-        componentProps
-      )
-
-      const componentTheme =
-        typeof generateComponentTheme === 'function'
-          ? generateComponentTheme(theme, themeOverride)
-          : {}
-      const [styles, setStyles] = useState(
-        generateStyle
-          ? bidirectionalPolyfill(
-              generateStyle(componentTheme, componentProps, {}),
-              dir
-            )
-          : {}
-      )
-
-      const makeStyleHandler = (...extraArgs) => {
-        const calculatedStyles = bidirectionalPolyfill(
-          generateStyle(componentTheme, componentProps, ...extraArgs),
-          dir
-        )
-
-        if (!isEqual(calculatedStyles, styles)) {
-          setStyles(calculatedStyles)
-        }
-      }
-
-      return (
-        <ComposedComponent
-          ref={ref}
-          makeStyles={makeStyleHandler}
-          styles={styles}
-          {...props}
-        />
-      )
-    })
-
-    hoistNonReactStatics(WithStyle, ComposedComponent)
-
-    // we have to pass these on, because sometimes we need to
-    // access propTypes of the component in other components
-    // (mainly in the `omitProps` method)
-    WithStyle.propTypes = ComposedComponent.propTypes
-    WithStyle.defaultProps = ComposedComponent.defaultProps
-
-    // we are exposing the theme generator for the docs generation
-    WithStyle.generateComponentTheme = generateComponentTheme
-
-    // we have to add defaults to makeStyles and styles added by this decorator
-    // eslint-disable-next-line no-param-reassign
-    ComposedComponent.defaultProps = {
-      ...ComposedComponent.defaultProps,
-      makeStyles: () => {},
-      styles: {}
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
-    }
-
-    return WithStyle
-  }
-)
-export { useStyle, useTheme, withStyle }
+export { getThemeOverride, useStyle, useTheme }
