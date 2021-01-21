@@ -90,9 +90,7 @@ const getOffsetStyle = ({
 
   const horizontalOffsets = {
     left: isRtlDirection ? insetInlineEnd : insetInlineStart,
-    right: isRtlDirection ? insetInlineStart : insetInlineEnd,
-    insetInlineStart,
-    insetInlineEnd
+    right: isRtlDirection ? insetInlineStart : insetInlineEnd
   }
 
   return {
@@ -508,7 +506,7 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
   const focusStyles = getFocusStyles(props, componentTheme)
 
   return {
-    root: {
+    view: {
       label: 'view',
       boxSizing: 'border-box',
       fontFamily: componentTheme.fontFamily,

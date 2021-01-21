@@ -372,7 +372,7 @@ class View extends Component {
       <ElementType
         {...passthroughProps(props)}
         className={className}
-        css={styles.root}
+        css={styles.view}
         style={styles.inlineStyles}
         ref={this.handleElementRef}
       >
