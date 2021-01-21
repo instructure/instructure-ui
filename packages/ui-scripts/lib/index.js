@@ -36,6 +36,7 @@ const commands = [
   '--post-publish',
   '--bump',
   '--deploy-docs',
+  '--deploy-docs-via-github',
   '--build',
   '--test',
   '--commit',
@@ -90,6 +91,8 @@ if (process.argv.includes('open-sandbox')) {
   require('./fix-publish')
 } else if (process.argv.includes('--deploy-docs')) {
   require('./deploy-docs')
+} else if (process.argv.includes('--deploy-docs-via-github')) {
+  require('./deploy-docs-via-github')
 } else if (process.argv.includes('--build')) {
   require('./build')
 } else if (process.argv.includes('--test')) {
