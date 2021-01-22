@@ -74,6 +74,7 @@ module.exports = [
       '**/__testfixtures__/**',
       '**/__tests__/**',
       '**/locales/**',
+      '**/styles.js',
       '**/theme.js',
       '**/locator.js',
       '**/*Locator.js',
