@@ -28,7 +28,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { RadioInput } from '../index'
 import { RadioInputLocator } from '../RadioInputLocator'
 
-xdescribe('<RadioInput />', async () => {
+describe('<RadioInput />', async () => {
   it('renders an input with type "radio"', async () => {
     await mount(
       <RadioInput label="fake label" value="someValue" name="someName" />
