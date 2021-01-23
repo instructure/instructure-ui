@@ -24,47 +24,63 @@
 
 import { alpha, darken } from '@instructure/ui-color-utils'
 
-export default function generator({ colors, typography, spacing, forms }) {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, spacing, forms, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      handleBackground: theme['ic-brand-primary'],
+      handleShadowColor: darken(theme['ic-brand-primary'], 15),
+      handleFocusOutlineColor: alpha(theme['ic-brand-primary'], 40),
+      handleHoverBackground: theme['ic-brand-primary'],
+      handleFocusBackground: theme['ic-brand-primary'],
+      valueBackground: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
     minWidth: '12.5rem',
 
     handleSize: '1.5rem',
-    handleBackground: colors.backgroundBrand,
-    handleShadowColor: darken(colors.borderBrand, 15),
+    handleBackground: colors?.backgroundBrand,
+    handleShadowColor: darken(colors?.borderBrand, 15),
 
-    handleHoverBackground: colors.backgroundBrand,
+    handleHoverBackground: colors?.backgroundBrand,
 
-    handleFocusBackground: colors.backgroundBrand,
-    handleFocusOutlineColor: alpha(colors.borderBrand, 40),
+    handleFocusBackground: colors?.backgroundBrand,
+    handleFocusOutlineColor: alpha(colors?.borderBrand, 40),
     handleFocusOutlineWidth: '0.75em',
 
-    trackBackground: colors.backgroundDark,
+    trackBackground: colors?.backgroundDark,
 
-    valueColor: colors.textLightest,
-    valueFontFamily: typography.fontFamily,
-    valueFontWeight: typography.fontWeightNormal,
+    valueColor: colors?.textLightest,
+    valueFontFamily: typography?.fontFamily,
+    valueFontWeight: typography?.fontWeightNormal,
 
-    valueSmallFontSize: typography.fontSizeSmall,
-    valueSmallPadding: `0 ${spacing.xSmall}`,
-    valueSmallLineHeight: forms.inputHeightSmall,
+    valueSmallFontSize: typography?.fontSizeSmall,
+    valueSmallPadding: `0 ${spacing?.xSmall}`,
+    valueSmallLineHeight: forms?.inputHeightSmall,
 
-    valueMediumFontSize: typography.fontSizeMedium,
-    valueMediumPadding: `0 ${spacing.small}`,
-    valueMediumLineHeight: forms.inputHeightMedium,
+    valueMediumFontSize: typography?.fontSizeMedium,
+    valueMediumPadding: `0 ${spacing?.small}`,
+    valueMediumLineHeight: forms?.inputHeightMedium,
 
-    valueLargeFontSize: typography.fontSizeLarge,
-    valueLargePadding: `0 ${spacing.medium}`,
-    valueLargeLineHeight: forms.inputHeightLarge
+    valueLargeFontSize: typography?.fontSizeLarge,
+    valueLargePadding: `0 ${spacing?.medium}`,
+    valueLargeLineHeight: forms?.inputHeightLarge
   }
-}
 
-generator.canvas = function (variables) {
   return {
-    handleBackground: variables['ic-brand-primary'],
-    handleShadowColor: darken(variables['ic-brand-primary'], 15),
-    handleFocusOutlineColor: alpha(variables['ic-brand-primary'], 40),
-    handleHoverBackground: variables['ic-brand-primary'],
-    handleFocusBackground: variables['ic-brand-primary'],
-    valueBackground: variables['ic-brand-font-color-dark']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme

@@ -22,31 +22,29 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { ContextView } from '@instructure/ui-view'
 import { controllable } from '@instructure/ui-prop-types'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
-import { isEdge } from '@instructure/ui-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class RangeInput extends Component {
   static propTypes = {
     min: PropTypes.number.isRequired,
@@ -64,6 +62,9 @@ class RangeInput extends Component {
      */
     onChange: PropTypes.func,
     messages: PropTypes.arrayOf(FormPropTypes.message),
+    /**
+     * The size of the value label
+     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     id: PropTypes.string,
@@ -79,7 +80,12 @@ class RangeInput extends Component {
     formatValue: PropTypes.func,
     inline: PropTypes.bool,
     disabled: PropTypes.bool,
-    readOnly: PropTypes.bool
+    readOnly: PropTypes.bool,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -114,6 +120,7 @@ class RangeInput extends Component {
 
   /* workaround for https://github.com/facebook/react/issues/554 */
   componentDidMount() {
+    this.props.makeStyles({ dir: this.dir })
     if (!this._input) {
       return
     }
@@ -138,6 +145,10 @@ class RangeInput extends Component {
     this.changeListener.remove()
   }
   /* end workaround */
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles({ dir: this.dir })
+  }
 
   handleChange = (event) => {
     const { onChange, value } = this.props
@@ -177,7 +188,10 @@ class RangeInput extends Component {
     if (this.props.displayValue) {
       return (
         <ContextView background="inverse" placement="end center">
-          <output htmlFor={this.id} className={styles.value}>
+          <output
+            htmlFor={this.id}
+            css={this.props.styles.rangeInputInputValue}
+          >
             {this.props.formatValue(this.value)}
           </output>
         </ContextView>
@@ -186,22 +200,16 @@ class RangeInput extends Component {
   }
 
   render() {
-    const { formatValue, size, disabled, readOnly } = this.props
+    const { formatValue, disabled, readOnly } = this.props
 
     const props = omitProps(this.props, RangeInput.propTypes)
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: size,
-      [styles.edge16Up]: isEdge
-    }
 
     /* eslint-disable jsx-a11y/no-redundant-roles */
     return (
       <FormField {...pickProps(this.props, FormField.propTypes)} id={this.id}>
-        <div className={classnames(classes)}>
+        <div css={this.props.styles.rangeInput}>
           <input
-            className={styles.input}
+            css={this.props.styles.rangeInputInput}
             ref={(c) => {
               this._input = c
             }}
