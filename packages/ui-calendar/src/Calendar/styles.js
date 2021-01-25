@@ -23,38 +23,39 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, typography, spacing, key: themeName } = theme
-
-  const themeSpecificStyle = {
-    canvas: {
-      color: theme['ic-brand-font-color-dark']
-    }
-  }
-
-  const componentVariables = {
-    fontSize: typography?.fontSizeMedium,
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
-
-    color: colors?.textDarkest,
-    background: colors?.backgroundLightest,
-
-    navMargin: spacing?.small,
-
-    maxHeaderWidth: spacing?.medium
-  }
-
+const generateStyle = (componentTheme, props, state) => {
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    navigation: {
+      label: 'calendar__navigation',
+      textAlign: 'center',
+      color: componentTheme.color,
+      background: componentTheme.background,
+      fontFamily: componentTheme.fontFamily,
+      fontSize: componentTheme.fontSize,
+      fontWeight: componentTheme.fontWeight,
+      marginBottom: componentTheme.navMargin
+    },
+    navigationWithButtons: {
+      label: 'calendar__navigation--withButtons',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    },
+    weekdayHeader: {
+      label: 'calendar__weekdayHeader',
+      textAlign: 'center',
+      maxWidth: componentTheme.maxHeaderWidth
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

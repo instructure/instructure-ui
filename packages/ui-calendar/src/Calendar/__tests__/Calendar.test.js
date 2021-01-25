@@ -34,7 +34,7 @@ import { Calendar } from '../index'
 import { CalendarLocator } from '../CalendarLocator'
 import CalendarExamples from '../__examples__/Calendar.examples'
 
-xdescribe('<Calendar />', async () => {
+describe('<Calendar />', async () => {
   beforeEach(async () => {
     stub(console, 'warn') // suppress experimental warnings
   })
