@@ -35,7 +35,7 @@ import { Day } from '../index'
 import { DayLocator } from '../DayLocator'
 import DayExamples from '../__examples__/Day.examples'
 
-xdescribe('Day', async () => {
+describe('Day', async () => {
   beforeEach(async () => {
     stub(console, 'warn') // suppress experimental warnings
   })
