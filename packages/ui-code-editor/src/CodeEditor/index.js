@@ -22,18 +22,20 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { uid } from '@instructure/uid'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, Global } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import CodeMirror from './codemirror'
 
 /**
@@ -42,10 +44,14 @@ category: components
 ---
 **/
 
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class CodeEditor extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     label: PropTypes.string.isRequired,
     language: PropTypes.oneOf([
       'sh',
@@ -87,6 +93,14 @@ class CodeEditor extends Component {
     this._id = uid('CodeEditor')
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   focus() {
     if (this.codeMirror) {
       this.codeMirror.focus()
@@ -118,15 +132,19 @@ class CodeEditor extends Component {
   }
 
   render() {
-    const { value, label, attachment, readOnly, onChange, ...rest } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles['attached--' + attachment]]: attachment
-    }
+    const {
+      value,
+      label,
+      attachment,
+      readOnly,
+      onChange,
+      styles,
+      ...rest
+    } = this.props
 
     return (
-      <div className={classnames(classes)}>
+      <div css={styles.codeEditor}>
+        <Global styles={styles.codeEditorGlobalStyles} />
         <label htmlFor={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>
           <CodeMirror
