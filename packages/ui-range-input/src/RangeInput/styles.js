@@ -36,8 +36,6 @@ import { DIRECTION } from '@instructure/ui-i18n'
  */
 const generateStyle = (componentTheme, props, state) => {
   const { size } = props
-  const { dir } = state
-  const rtlInputStyle = dir === DIRECTION.rtl ? { direction: 'rtl' } : {}
   const valueSizeVariants = {
     small: {
       fontSize: componentTheme.valueSmallFontSize,
@@ -114,7 +112,9 @@ const generateStyle = (componentTheme, props, state) => {
       },
       '&::-webkit-slider-runnable-track': trackStyle,
       '&::-moz-range-track': trackStyle,
-      ...rtlInputStyle
+      '[dir="rtl"] &': {
+        direction: 'rtl'
+      }
     },
     rangeInputInputValue: {
       label: 'rangeInput__value',

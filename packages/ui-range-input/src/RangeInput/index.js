@@ -120,7 +120,7 @@ class RangeInput extends Component {
 
   /* workaround for https://github.com/facebook/react/issues/554 */
   componentDidMount() {
-    this.props.makeStyles({ dir: this.dir })
+    this.props.makeStyles()
     if (!this._input) {
       return
     }
@@ -147,7 +147,7 @@ class RangeInput extends Component {
   /* end workaround */
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles({ dir: this.dir })
+    this.props.makeStyles()
   }
 
   handleChange = (event) => {

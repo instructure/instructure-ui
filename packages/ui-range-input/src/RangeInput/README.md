@@ -18,19 +18,17 @@ class Example extends React.Component {
     return (
       <div>
         <RangeInput label="Grading range" defaultValue={30} max={100} min={0} size={this.state.size} />
-        <FormFieldGroup rowSpacing="medium">
-          <RadioInputGroup
-            onChange={this.handleModalSizeChange}
-            name="labelSize"
-            defaultValue="small"
-            description="Label size"
-            variant="toggle"
-          >
-            <RadioInput label="small" value="small" />
-            <RadioInput label="medium" value="medium" />
-            <RadioInput label="large" value="large" />
-          </RadioInputGroup>
-        </FormFieldGroup>
+        <RadioInputGroup
+          onChange={this.handleModalSizeChange}
+          name="labelSize"
+          defaultValue="small"
+          description="Label size"
+          variant="toggle"
+        >
+          <RadioInput label="small" value="small" />
+          <RadioInput label="medium" value="medium" />
+          <RadioInput label="large" value="large" />
+        </RadioInputGroup>
       </div>
     )
   }
