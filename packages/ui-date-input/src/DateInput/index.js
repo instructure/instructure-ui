@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Calendar } from '@instructure/ui-calendar'
@@ -45,24 +46,29 @@ import {
 import { PositionPropTypes } from '@instructure/ui-position'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
-import { themeable } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, null)
 @deprecated('8.0.0', {
   label: 'renderLabel'
 })
 @testable()
-@themeable(null, styles)
 class DateInput extends Component {
   static Day = Calendar.Day
 
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Specifies the input label.
      */
@@ -257,6 +263,14 @@ class DateInput extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   state = {
     hasInputRef: false
   }
@@ -432,7 +446,7 @@ class DateInput extends Component {
   }
 
   render() {
-    const { placement, isShowingCalendar, assistiveText } = this.props
+    const { placement, isShowingCalendar, assistiveText, styles } = this.props
 
     const { selectedDateId } = this
 
@@ -454,9 +468,9 @@ class DateInput extends Component {
           getOptionProps,
           getDescriptionProps
         }) => (
-          <span {...getRootProps({ className: styles.root })}>
+          <span {...getRootProps({ css: styles.dateInput })}>
             {this.renderInput({ getInputProps, getTriggerProps })}
-            <span {...getDescriptionProps()} className={styles.assistiveText}>
+            <span {...getDescriptionProps()} css={styles.assistiveText}>
               {assistiveText}
             </span>
             <Popover
