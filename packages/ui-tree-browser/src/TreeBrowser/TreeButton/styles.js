@@ -35,6 +35,10 @@ const transform = keyframes`{
   }
 }`
 /**
+ *
+ * ---
+ * private: true
+ * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
@@ -207,7 +211,11 @@ const generateStyles = (componentTheme, props) => {
           insetInlineStart: '0',
           insetInlineEnd: 'auto',
           top: '50%',
+          ...(selected && { visibility: 'hidden' }),
           ...sizeMap[size][variant].before
+        },
+        '&:hover::before': {
+          visibility: 'hidden'
         }
       }),
       '&::after': {
@@ -230,11 +238,6 @@ const generateStyles = (componentTheme, props) => {
           transform: 'scale(1)'
         })
       },
-      ...(variant === 'folderTree' && {
-        '&:hover::before': {
-          visibility: 'hidden'
-        }
-      }),
       '&:hover': {
         backgroundColor: selected
           ? componentTheme.selectedBackgroundColor
