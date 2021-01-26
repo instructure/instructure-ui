@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
 import { Mask } from '../index'
 
-xdescribe('<Mask />', async () => {
+describe('<Mask />', async () => {
   it('should render', async () => {
     const subject = await mount(<Mask />)
     expect(subject.getDOMNode()).to.exist()
