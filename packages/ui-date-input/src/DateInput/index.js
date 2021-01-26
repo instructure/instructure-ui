@@ -36,7 +36,6 @@ import {
   getInteraction,
   callRenderProp,
   safeCloneElement,
-  deprecated,
   passthroughProps
 } from '@instructure/ui-react-utils'
 import {
@@ -57,9 +56,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, null)
-@deprecated('8.0.0', {
-  label: 'renderLabel'
-})
 @testable()
 class DateInput extends Component {
   static Day = Calendar.Day
@@ -74,10 +70,6 @@ class DateInput extends Component {
      */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
       .isRequired,
-    /**
-     * __Deprecated - use `renderLabel` instead__
-     */
-    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
      * Specifies the input value.
      */
@@ -233,7 +225,6 @@ class DateInput extends Component {
   }
 
   static defaultProps = {
-    label: undefined,
     value: '',
     size: 'medium',
     placeholder: null,
@@ -393,7 +384,6 @@ class DateInput extends Component {
 
   renderInput({ getInputProps, getTriggerProps }) {
     const {
-      label,
       renderLabel,
       value,
       placeholder,
@@ -426,7 +416,7 @@ class DateInput extends Component {
         {...triggerProps}
         {...passthroughProps(rest)}
         {...getInputProps({
-          renderLabel: callRenderProp(renderLabel || label),
+          renderLabel: callRenderProp(renderLabel),
           value,
           placeholder,
           size,
