@@ -84,6 +84,7 @@ module.exports = async ({
       name,
       values: ({ name, packageName, version }) => ({
         NAME: name,
+        STYLE_NAME: name.charAt(0).toLowerCase() + name.substring(1),
         PACKAGE: packageName,
         VERSION: version,
         DEPENDENCIES: dependencies,

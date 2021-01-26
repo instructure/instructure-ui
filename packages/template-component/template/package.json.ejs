@@ -4,14 +4,14 @@
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
-  "module": "./es/index.js",
-  "main": "./lib/index.js",
   "exports": {
     ".": {
       "require": "./lib/index.js",
       "default": "./es/index.js"
     }
   },
+  "module": "./es/index.js",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -22,7 +22,7 @@
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
-    "build": "ui-build",
+    "build": "ui-build --modules es,cjs",
     "build:watch": "ui-build --watch",
     "build:types": "ui-scripts --types"
   },

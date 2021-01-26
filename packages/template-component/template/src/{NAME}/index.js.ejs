@@ -22,26 +22,32 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class <%= NAME %> extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
-    * FIXME: description of the children prop goes here
-    */
+     * FIXME: description of the children prop goes here
+     */
     children: PropTypes.node,
     elementRef: PropTypes.func
   }
@@ -51,13 +57,21 @@ class <%= NAME %> extends Component {
     elementRef: (el) => {}
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render () {
-    const { children, elementRef, ...props } = this.props
+    const { children, elementRef, styles, ...props } = this.props
     return (
       <div
         {...passthroughProps(props)}
         ref={elementRef}
-        className={styles.root}
+        css={styles.<%= STYLE_NAME %>}
       >
         {children}
       </div>
