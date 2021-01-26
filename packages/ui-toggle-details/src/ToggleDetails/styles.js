@@ -28,6 +28,9 @@ const contentAnimation = keyframes`
       opacity: 1
     }`
 /**
+ * ---
+ * private: true
+ * ---
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
@@ -149,6 +152,9 @@ const generateStyle = (componentTheme, props, state) => {
     icon: {
       label: 'toggleDetails__icon',
       fontSize: componentTheme.largeIconSize,
+      '& > svg': {
+        display: 'block' /* fix vertical alignment of icon */
+      },
       ...iconPositionStyles[iconPosition],
       ...iconSizeStyles[size]
     },
