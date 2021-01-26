@@ -29,12 +29,10 @@
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, spacing, borders } = theme
+  const { colors, borders } = theme
 
   const componentVariables = {
-    controlsTopMargin: spacing?.small,
     borderRadius: borders?.radiusMedium,
-
     focusOutlineWidth: borders?.widthMedium,
     focusOutlineColor: colors?.borderBrand,
     focusOutlineStyle: borders?.style
