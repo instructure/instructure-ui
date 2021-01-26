@@ -37,7 +37,7 @@ import Examples from '../__examples__/DateInput.examples'
 import { DateInput } from '../index'
 import { DateInputLocator } from '../DateInputLocator'
 
-xdescribe('<DateInput />', async () => {
+describe('<DateInput />', async () => {
   beforeEach(async () => {
     stub(console, 'warn') // suppress experimental warnings
   })
