@@ -48,6 +48,43 @@ exports.isReleaseCommit = (version) => {
   }
 }
 
+exports.checkWorkingDirectory = function checkWorkingDirectory() {
+  let result
+
+  try {
+    result = runGitCommand(['status', '--porcelain'])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+
+  if (result) {
+    error(`Refusing to operate on unclean working directory!`)
+    error(result)
+    process.exit(1)
+  }
+}
+
+exports.checkIfGitTagExists = function checkIfGitTagExists(version) {
+  const tag = `v${version}`
+  let result
+
+  try {
+    result = runGitCommand(['tag', '--list', tag])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+
+  if (result) {
+    error(`Git tag ${tag} already exists!`)
+    error(
+      'Run the bump "yarn bump" script to update the version prior to running a stable release.'
+    )
+    process.exit(1)
+  }
+}
+
 exports.commit = function () {
   try {
     runGitCommand(['commit', '--dry-run'])
