@@ -35,7 +35,7 @@ import { Select } from '../index'
 import { SelectLocator } from '../SelectLocator'
 import SelectExamples from '../__examples__/Select.examples'
 
-xdescribe('<Select />', async () => {
+describe('<Select />', async () => {
   beforeEach(async () => {
     stub(console, 'warn') // suppress experimental warnings
   })

@@ -22,31 +22,39 @@
  * SOFTWARE.
  */
 
-.root {
-  font-size: var(--fontSize);
-  font-family: var(--fontFamily);
-  font-weight: var(--fontWeight);
-  color: var(--color);
-}
+/**
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (componentTheme, props, state) => {
+  const { size } = props
 
-.small {
-  .icon {
-    font-size: var(--smallIconSize);
+  const iconSizeVariants = {
+    small: { fontSize: componentTheme.smallIconSize },
+    medium: { fontSize: componentTheme.mediumIconSize },
+    large: { fontSize: componentTheme.largeIconSize }
+  }
+
+  return {
+    select: {
+      label: 'select',
+      fontSize: componentTheme.fontSize,
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: componentTheme.fontWeight,
+      color: componentTheme.color
+    },
+    icon: {
+      label: 'select__icon',
+      ...iconSizeVariants[size]
+    },
+    assistiveText: {
+      label: 'select__assistiveText',
+      display: 'none'
+    }
   }
 }
 
-.medium {
-  .icon {
-    font-size: var(--mediumIconSize);
-  }
-}
-
-.large {
-  .icon {
-    font-size: var(--largeIconSize);
-  }
-}
-
-.assistiveText {
-  display: none;
-}
+export default generateStyle
