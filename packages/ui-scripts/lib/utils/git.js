@@ -24,12 +24,29 @@
 const { runCommandSync, error, info } = require('@instructure/command-utils')
 const validateMessage = require('validate-commit-msg')
 
-const runGitCommand = (exports.runGitCommand = function runGitCommand(
-  args = []
-) {
+const runGitCommand = (exports.runGitCommand = (args = []) => {
   const { stdout } = runCommandSync('git', args, [], { stdio: 'pipe' })
   return stdout && stdout.trim()
 })
+
+exports.setupGit = () => {
+  runGitCommand(['config', 'user.email', 'instructure-ui-ci@instructure.com'])
+  runGitCommand(['config', 'user.name', 'instructure-ui-ci'])
+}
+
+exports.isReleaseCommit = (version) => {
+  try {
+    const result = runGitCommand(['log', '-1', '--pretty=format:%B'])
+    const formattedResult = result.split('\n')[0].trim()
+
+    info(formattedResult)
+
+    return !!formattedResult?.startsWith(`chore(release): ${version}`)
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+}
 
 exports.commit = function () {
   try {
@@ -49,99 +66,9 @@ exports.commit = function () {
   return runCommandSync('git-cz')
 }
 
-exports.setupGit = function setupGit() {
-  const {
-    GIT_EMAIL,
-    GIT_USERNAME,
-    GIT_REMOTE_URL,
-    GIT_REMOTE_NAME
-  } = process.env
-
-  const origin = GIT_REMOTE_NAME || 'origin'
-
-  let remotes = []
-
-  try {
-    remotes = runGitCommand(['remote']).split(/(\s+)/)
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-
-  if (GIT_REMOTE_URL) {
-    if (!remotes.includes(origin)) {
-      runGitCommand(['remote', 'add', origin, GIT_REMOTE_URL])
-    } else {
-      runGitCommand(['remote', 'set-url', origin, GIT_REMOTE_URL])
-    }
-  }
-
-  if (GIT_EMAIL) {
-    runGitCommand(['config', 'user.email', `"${GIT_EMAIL}"`])
-  }
-  if (GIT_USERNAME) {
-    runGitCommand(['config', 'user.name', `"${GIT_USERNAME}"`])
-  }
-
-  runGitCommand(['fetch', origin, '--tags', '--force'])
-}
-
 exports.lintCommitMessage = function lintCommitMessage() {
   const commitMessage = runGitCommand(['log', '-1', '--pretty=%B'])
   return validateMessage(commitMessage)
-}
-
-exports.isReleaseCommit = function isReleaseCommit(version) {
-  let result
-
-  try {
-    result = runGitCommand(['log', '-1', '--pretty=format:%B'])
-    result = result.split('\n')[0].trim()
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
-  info(result)
-
-  return result && result.startsWith(`chore(release): ${version}`)
-}
-
-exports.checkWorkingDirectory = function checkWorkingDirectory() {
-  let result
-
-  try {
-    result = runGitCommand(['status', '--porcelain'])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
-  if (result) {
-    error(`Refusing to operate on unclean working directory!`)
-    error(result)
-    process.exit(1)
-  }
-}
-
-exports.checkIfGitTagExists = function checkIfGitTagExists(version) {
-  const tag = `v${version}`
-  let result
-
-  try {
-    result = runGitCommand(['tag', '--list', tag])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
-  if (result) {
-    error(`Git tag ${tag} already exists!`)
-    error(
-      'Run the bump "yarn bump" script to update the version prior to running a stable release.'
-    )
-    process.exit(1)
-  }
 }
 
 exports.createGitTagForRelease = function createGitTagForRelease(version) {

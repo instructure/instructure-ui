@@ -33,7 +33,51 @@ const {
 } = require('@instructure/command-utils')
 const Project = require('@lerna/project')
 
-async function syncRootPackageVersion(useProjectVersion) {
+const publishPackages = async (packageName, releaseVersion, preidAndTag) => {
+  const args =
+    releaseVersion === 'prerelease'
+      ? [
+          '--canary',
+          '--preid',
+          preidAndTag,
+          '--dist-tag',
+          preidAndTag,
+          '--exact',
+          '--include-merged-tags',
+          '--conventional-commits',
+          '--conventional-prerelease=*',
+          '--no-git-reset'
+        ]
+      : ['from-package', '--dist-tag', preidAndTag]
+
+  info(`📦  Publishing ${releaseVersion} of ${packageName}...`)
+
+  let publishedVersion
+  try {
+    runCommandSync('lerna', [
+      'publish',
+      ...args,
+      '--yes',
+      '--no-push',
+      '--no-git-tag-version',
+      '--force-publish=*'
+    ])
+
+    publishedVersion = await syncRootPackageVersion()
+
+    info(
+      `📦  ${publishedVersion} of ${packageName} was successfully published!`
+    )
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  return publishedVersion
+}
+exports.publishPackages = publishPackages
+
+const syncRootPackageVersion = async (useProjectVersion) => {
   const project = new Project(process.cwd())
   const rootPkg = getPackage()
 
@@ -107,57 +151,6 @@ async function bumpPackages(packageName, requestedVersion) {
   return releaseVersion
 }
 exports.bumpPackages = bumpPackages
-
-async function publishPackages(
-  packageName,
-  releaseVersion = 'prerelease',
-  preidAndTag = 'rc'
-) {
-  let args
-
-  if (releaseVersion === 'prerelease') {
-    args = [
-      '--canary',
-      '--preid',
-      preidAndTag,
-      '--dist-tag',
-      preidAndTag,
-      '--exact',
-      '--include-merged-tags',
-      '--conventional-commits',
-      '--conventional-prerelease=*',
-      '--no-git-reset'
-    ]
-  } else {
-    args = ['from-package', '--dist-tag', preidAndTag]
-  }
-
-  info(`📦  Publishing ${releaseVersion} of ${packageName}...`)
-  let publishedVersion
-
-  try {
-    runCommandSync('lerna', [
-      'publish',
-      ...args,
-      '--yes',
-      '--no-push',
-      '--no-git-tag-version',
-      '--force-publish=*'
-    ])
-
-    publishedVersion = await syncRootPackageVersion()
-
-    info(
-      `📦  ${publishedVersion} of ${packageName} was successfully published!`
-    )
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-
-  return publishedVersion
-}
-exports.publishPackages = publishPackages
 
 function createNPMRCFile(config = {}) {
   const { NPM_TOKEN, NPM_EMAIL, NPM_USERNAME } = process.env
