@@ -22,14 +22,13 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import {
   matchComponentTypes,
@@ -53,11 +52,13 @@ import {
 } from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
 
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import { Group } from './Group'
 import { Option } from './Option'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
@@ -65,12 +66,16 @@ category: components
 tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Select extends Component {
   static Option = Option
   static Group = Group
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The form field label.
      */
@@ -249,6 +254,17 @@ class Select extends Component {
     shouldNotWrap: false
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+
+    // scroll option into view if needed
+    this.scrollToOption(this.highlightedOptionId)
+  }
+
   state = {
     hasInputRef: false
   }
@@ -342,7 +358,8 @@ class Select extends Component {
   handleListRef = (node) => {
     this._list = node
     this.props.listRef(node)
-    // store option height to calulcate list maxHeight
+
+    // store option height to calculate list maxHeight
     if (node) {
       this._optionHeight = node.querySelector('[role="option"]').offsetHeight
     }
@@ -350,11 +367,6 @@ class Select extends Component {
 
   handleInputContainerRef = (node) => {
     this._inputContainer = node
-  }
-
-  componentDidUpdate() {
-    // scroll option into view if needed
-    this.scrollToOption(this.highlightedOptionId)
   }
 
   scrollToOption(id) {
@@ -588,9 +600,10 @@ class Select extends Component {
   }
 
   renderIcon() {
+    const { styles, isShowingOptions } = this.props
     return (
-      <span className={styles.icon}>
-        {this.props.isShowingOptions ? (
+      <span css={styles.icon}>
+        {isShowingOptions ? (
           <IconArrowOpenUpLine inline={false} />
         ) : (
           <IconArrowOpenDownLine inline={false} />
@@ -673,21 +686,18 @@ class Select extends Component {
 
   render() {
     const {
-      size,
       constrain,
       placement,
       mountNode,
       assistiveText,
-      isShowingOptions
+      isShowingOptions,
+      styles
     } = this.props
     // clear temporary option store
     this._optionIds = []
 
     const highlightedOptionId = this.highlightedOptionId
     const selectedOptionId = this.selectedOptionId
-    const classes = classnames(styles.root, {
-      [styles[size]]: size
-    })
 
     return (
       <Selectable
@@ -705,9 +715,9 @@ class Select extends Component {
           getDisabledOptionProps,
           getDescriptionProps
         }) => (
-          <span {...getRootProps({ className: classes })}>
+          <span {...getRootProps({ css: styles.select })}>
             {this.renderInput({ getInputProps, getTriggerProps })}
-            <span {...getDescriptionProps()} className={styles.assistiveText}>
+            <span {...getDescriptionProps()} css={styles.assistiveText}>
               {assistiveText}
             </span>
             <Popover
