@@ -31,9 +31,9 @@
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@instructure/console": "^7.3.1",
+    "@instructure/emotion": "^7.3.1",
     "@instructure/ui-dom-utils": "^7.3.1",
     "@instructure/ui-react-utils": "^7.3.1",
-    "@instructure/ui-themeable": "^7.3.1",
     "@instructure/ui-utils": "^7.3.1",
     "@instructure/uid": "^7.3.1",
     "keycode": "^2",

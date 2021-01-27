@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { ScreenReaderContent } from '../index'
 
-xdescribe('<ScreenReaderContent />', async () => {
+describe('<ScreenReaderContent />', async () => {
   it('should render the specified tag when `as` prop is set', async () => {
     const subject = await mount(<ScreenReaderContent as="div" />)
     expect(subject.getDOMNode()).to.have.tagName('div')

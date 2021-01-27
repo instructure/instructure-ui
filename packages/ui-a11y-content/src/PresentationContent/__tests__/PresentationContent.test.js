@@ -33,7 +33,7 @@ import {
 
 import { PresentationContent } from '../index'
 
-xdescribe('<PresentationContent />', async () => {
+describe('<PresentationContent />', async () => {
   it('should render children with an aria-hidden attribute', async () => {
     await mount(<PresentationContent>Hello World</PresentationContent>)
 

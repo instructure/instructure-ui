@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 import { AccessibleContent } from '../index'
 
-xdescribe('<AccessibleContent />', async () => {
+describe('<AccessibleContent />', async () => {
   it('should render screen reader content', async () => {
     const subject = await mount(
       <AccessibleContent alt="Screen Reader Content">
