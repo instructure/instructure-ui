@@ -48,7 +48,6 @@ async function bump(
   requestedVersion,
   config = {}
 ) {
-  setupGit()
   checkWorkingDirectory()
 
   let releaseVersion
