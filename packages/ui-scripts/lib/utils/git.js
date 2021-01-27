@@ -41,7 +41,10 @@ exports.isReleaseCommit = (version) => {
 
     info(formattedResult)
 
-    return !!formattedResult?.startsWith(`chore(release): ${version}`)
+    return (
+      formattedResult &&
+      formattedResult.startsWith(`chore(release): ${version}`)
+    )
   } catch (e) {
     error(e)
     process.exit(1)
