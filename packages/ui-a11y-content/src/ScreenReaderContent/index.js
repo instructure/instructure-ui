@@ -22,13 +22,15 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
 
 /**
 ---
@@ -36,9 +38,13 @@ category: components/utilities
 ---
 @module ScreenReaderContent
 **/
-@themeable(null, styles)
+@withStyle(generateStyle, null)
 class ScreenReaderContent extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * the element type to render as
      */
@@ -54,12 +60,23 @@ class ScreenReaderContent extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { children, ...props } = this.props
+    const { children, styles, ...props } = this.props
     const ElementType = getElementType(ScreenReaderContent, props)
 
     return (
-      <ElementType {...passthroughProps(props)} className={styles.root}>
+      <ElementType
+        {...passthroughProps(props)}
+        css={styles.screenReaderContent}
+      >
         {children}
       </ElementType>
     )

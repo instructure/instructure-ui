@@ -22,15 +22,32 @@
  * SOFTWARE.
  */
 
-.root {
-  width: 0.0625rem;
-  height: 0.0625rem;
-  margin: -0.0625rem;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  inset-inline-start: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  border: 0;
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    screenReaderContent: {
+      label: 'screenReaderContent',
+      width: '0.0625rem',
+      height: '0.0625rem',
+      margin: '-0.0625rem',
+      padding: 0,
+      position: 'absolute',
+      top: 0,
+      insetInlineStart: 0,
+      overflow: 'hidden',
+      clip: 'rect(0 0 0 0)',
+      border: 0
+    }
+  }
 }
+
+export default generateStyle
