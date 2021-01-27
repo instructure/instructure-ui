@@ -87,12 +87,19 @@ class Mask extends Component {
   }
 
   render() {
+    const {
+      styles,
+      // eslint-disable-next-line react/prop-types
+      themeOverride,
+      ...restProps
+    } = this.props
+
     const content = ensureSingleChild(this.props.children, {
       ref: this.contentRef
     })
 
     const props = {
-      ...omitProps(this.props, Mask.propTypes),
+      ...omitProps(restProps, Mask.propTypes),
       css: this.props.styles.mask,
       ref: this.handleElementRef
     }

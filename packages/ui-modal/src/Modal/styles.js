@@ -33,7 +33,7 @@
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (componentTheme, props, state) => {
-  const { size, variant, overflow, constrain } = props
+  const { size, variant, overflow } = props
 
   const commonSizeStyleExceptForFullscreen = {
     maxWidth: '95%',
@@ -81,9 +81,6 @@ const generateStyle = (componentTheme, props, state) => {
           color: componentTheme.textColor
         }
 
-  const fullscreenConstrainStyles =
-    constrain === 'window' ? { position: 'fixed' } : { position: 'absolute' }
-
   return {
     modal: {
       label: 'modal',
@@ -98,20 +95,6 @@ const generateStyle = (componentTheme, props, state) => {
       borderRadius: componentTheme.borderRadius,
       ...sizeStyles[size],
       ...backgroundStyles
-    },
-    fullscreenLayout: {
-      label: 'modal__fullscreenLayout',
-      boxSizing: 'border-box',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      overflow: 'auto',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-      zIndex: componentTheme.zIndex,
-      ...fullscreenConstrainStyles
     },
     constrainContext: {
       label: 'modal__constrainContext',

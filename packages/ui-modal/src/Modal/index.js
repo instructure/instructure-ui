@@ -313,9 +313,11 @@ class Modal extends Component {
       liveRegion,
       size,
       constrain,
-      as
+      as,
+      styles
     } = this.props
 
+    const isFullScreen = size === 'fullscreen'
     const dialog = (
       <Dialog
         {...passthroughProps(props)}
@@ -329,7 +331,7 @@ class Modal extends Component {
         shouldReturnFocus={shouldReturnFocus}
         liveRegion={liveRegion}
         onDismiss={onDismiss}
-        css={this.props.styles.modal}
+        css={styles.modal}
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
@@ -337,18 +339,17 @@ class Modal extends Component {
       </Dialog>
     )
 
-    if (size === 'fullscreen') {
-      return <span css={this.props.styles.fullscreenLayout}>{dialog}</span>
-    } else {
-      return (
-        <Mask
-          placement={this.maskPlacement}
-          fullscreen={constrain === 'window'}
-        >
-          {dialog}
-        </Mask>
-      )
-    }
+    return (
+      <Mask
+        placement={this.maskPlacement}
+        fullscreen={constrain === 'window'}
+        themeOverride={
+          isFullScreen ? { borderRadius: '0em', borderWidth: '0em' } : {}
+        }
+      >
+        {dialog}
+      </Mask>
+    )
   }
 
   render() {
