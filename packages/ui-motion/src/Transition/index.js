@@ -29,7 +29,7 @@ import PropTypes from 'prop-types'
 import { ms } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, Global } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -154,20 +154,17 @@ class Transition extends Component {
   }
 
   /**
-   * Transition helper div:
+   * Transition helper:
    * After emotion migration the only way to keep
    * the old BaseTransition functionality with adding and removing
-   * classes was to add a sibling component and target the transitioning
-   * component with sibling selectors (eg.: '& + .fade--exiting')
+   * classes was to add the `Global` helper of `emotion`
    *
-   * - it is only for style targeting
-   * - it should be visually hidden and inaccessible
-   * - Todo: refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
+   * Todo: try to refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
    */
   renderTransitionHelper = () => {
     const { styles } = this.props
 
-    return <div aria-hidden="true" css={styles.transition}></div>
+    return <Global styles={styles.transitionGlobalStyles} />
   }
 
   render() {
@@ -176,24 +173,21 @@ class Transition extends Component {
     const duration = ms(styles?.duration)
 
     return (
-      <>
+      <BaseTransition
+        {...props}
+        enterDelay={duration}
+        exitDelay={duration}
+        transitionClassName={styles?.classNames?.transitioning}
+        exitedClassName={styles?.classNames?.exited}
+        exitingClassName={styles?.classNames?.exiting}
+        enteredClassName={styles?.classNames?.entered}
+        enteringClassName={styles?.classNames?.entering}
+        onEntered={this.handleEntered}
+        onExited={this.handleExited}
+      >
+        {children}
         {this.renderTransitionHelper()}
-
-        <BaseTransition
-          {...props}
-          enterDelay={duration}
-          exitDelay={duration}
-          transitionClassName={styles?.classNames?.transitioning}
-          exitedClassName={styles?.classNames?.exited}
-          exitingClassName={styles?.classNames?.exiting}
-          enteredClassName={styles?.classNames?.entering}
-          enteringClassName={styles?.classNames?.entered}
-          onEntered={this.handleEntered}
-          onExited={this.handleExited}
-        >
-          {children}
-        </BaseTransition>
-      </>
+      </BaseTransition>
     )
   }
 }

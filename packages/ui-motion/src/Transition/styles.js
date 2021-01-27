@@ -35,35 +35,43 @@
 const generateStyle = (componentTheme, props, state) => {
   const { type } = props
 
+  /**
+   * After emotion migration the only way to keep
+   * the old BaseTransition functionality with adding and removing
+   * classes was to add the `Global` helper of `emotion`
+   *
+   * Todo: refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
+   */
+
   const baseTransition = `opacity ${componentTheme.duration} ${componentTheme.timing}, transform ${componentTheme.duration} ${componentTheme.timing}`
 
   /* Animation type: fade */
   const fadeAnimation = {
-    [`&.fade--transitioning`]: {
+    [`.transition--fade-transitioning`]: {
       transition: baseTransition
     },
-    [`&.fade--exiting,
-      &.fade--exited`]: {
+    [`.transition--fade-exiting,
+      .transition--fade-exited`]: {
       opacity: 0.01
     },
-    [`&.fade--entering,
-      &.fade--entered`]: {
+    [`.transition--fade-entering,
+      .transition--fade-entered`]: {
       opacity: 1
     }
   }
 
   /* Animation type: scale */
   const scaleAnimation = {
-    [`&.scale--transitioning`]: {
+    [`.transition--scale-transitioning`]: {
       transition: baseTransition
     },
-    [`&.scale--exiting,
-      &.scale--exited`]: {
+    [`.transition--scale-exiting,
+      .transition--scale-exited`]: {
       transform: 'scale(0.01) translate3d(0, 0, 0)',
       opacity: 0.01
     },
-    [`&.scale--entering,
-      &.scale--entered`]: {
+    [`.transition--scale-entering,
+      .transition--scale-entered`]: {
       transform: 'scale(1) translate3d(0, 0, 0)',
       opacity: 1
     }
@@ -83,42 +91,42 @@ const generateStyle = (componentTheme, props, state) => {
     from one state to another, so transitions should be set there.
   */
   const slideAnimation = {
-    [`&.slide-right--transitioning,
-      &.slide-left--transitioning,
-      &.slide-up--transitioning,
-      &.slide-down--transitioning`]: {
+    [`.transition--slide-right-transitioning,
+      .transition--slide-left-transitioning,
+      .transition--slide-up-transitioning,
+      .transition--slide-down-transitioning`]: {
       transition: baseTransition
     },
-    [`&.slide-right--exited,
-      &.slide-left--exited,
-      &.slide-up--exited,
-      &.slide-down--exited`]: {
+    [`.transition--slide-right-exited,
+      .transition--slide-left-exited,
+      .transition--slide-up-exited,
+      .transition--slide-down-exited`]: {
       opacity: 0.01
     },
-    [`&.slide-right--exiting,
-      &.slide-right--exited`]: {
+    [`.transition--slide-right-exiting,
+      .transition--slide-right-exited`]: {
       transform: 'translate3d(100%, 0, 0)'
     },
-    [`&.slide-left--exiting,
-      &.slide-left--exited`]: {
+    [`.transition--slide-left-exiting,
+      .transition--slide-left-exited`]: {
       transform: 'translate3d(-100%, 0, 0)'
     },
-    [`&.slide-up--exiting,
-      &.slide-up--exited`]: {
+    [`.transition--slide-up-exiting,
+      .transition--slide-up-exited`]: {
       transform: 'translate3d(0, -100%, 0)'
     },
-    [`&.slide-down--exiting,
-      &.slide-down--exited`]: {
+    [`.transition--slide-down-exiting,
+      .transition--slide-down-exited`]: {
       transform: 'translate3d(0, 100%, 0)'
     },
-    [`&.slide-left--entering,
-      &.slide-right--entering,
-      &.slide-up--entering,
-      &.slide-down--entering,
-      &.slide-left--entered,
-      &.slide-right--entered,
-      &.slide-up--entered,
-      &.slide-down--entered`]: {
+    [`.transition--slide-left-entering,
+      .transition--slide-right-entering,
+      .transition--slide-up-entering,
+      .transition--slide-down-entering,
+      .transition--slide-left-entered,
+      .transition--slide-right-entered,
+      .transition--slide-up-entered,
+      .transition--slide-down-entered`]: {
       transform: 'translate3d(0, 0, 0)',
       opacity: 1
     }
@@ -128,30 +136,18 @@ const generateStyle = (componentTheme, props, state) => {
     duration: componentTheme.duration,
     classNames: type
       ? {
-          transitioning: `${type}--transitioning`,
-          exited: `${type}--exited`,
-          exiting: `${type}--exiting`,
-          entering: `${type}--entered`,
-          entered: `${type}--entering`
+          transitioning: `transition--${type}-transitioning`,
+          exited: `transition--${type}-exited`,
+          exiting: `transition--${type}-exiting`,
+          entering: `transition--${type}-entered`,
+          entered: `transition--${type}-entering`
         }
       : {},
-    transition: {
-      label: 'transition',
-      display: 'none',
-
-      /**
-       * After emotion migration the only way to keep
-       * the old BaseTransition functionality with adding and removing
-       * classes was to add a sibling component and target the transitioning
-       * component with sibling selectors (eg.: '& + .fade--exiting')
-       *
-       * Todo: refactor or replace Transition/BaseTransition component in v9.0.0. so that it is not class based
-       */
-      '& + *': {
-        ...fadeAnimation,
-        ...scaleAnimation,
-        ...slideAnimation
-      }
+    transitionGlobalStyles: {
+      label: 'transitionGlobalStyles',
+      ...fadeAnimation,
+      ...scaleAnimation,
+      ...slideAnimation
     }
   }
 }
