@@ -173,21 +173,23 @@ class Transition extends Component {
     const duration = ms(styles?.duration)
 
     return (
-      <BaseTransition
-        {...props}
-        enterDelay={duration}
-        exitDelay={duration}
-        transitionClassName={styles?.classNames?.transitioning}
-        exitedClassName={styles?.classNames?.exited}
-        exitingClassName={styles?.classNames?.exiting}
-        enteredClassName={styles?.classNames?.entered}
-        enteringClassName={styles?.classNames?.entering}
-        onEntered={this.handleEntered}
-        onExited={this.handleExited}
-      >
-        {children}
+      <>
         {this.renderTransitionHelper()}
-      </BaseTransition>
+        <BaseTransition
+          {...props}
+          enterDelay={duration}
+          exitDelay={duration}
+          transitionClassName={styles?.classNames?.transitioning}
+          exitedClassName={styles?.classNames?.exited}
+          exitingClassName={styles?.classNames?.exiting}
+          enteredClassName={styles?.classNames?.entered}
+          enteringClassName={styles?.classNames?.entering}
+          onEntered={this.handleEntered}
+          onExited={this.handleExited}
+        >
+          {children}
+        </BaseTransition>
+      </>
     )
   }
 }
