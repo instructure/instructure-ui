@@ -30,7 +30,7 @@ const runGitCommand = (exports.runGitCommand = (args = []) => {
 })
 
 exports.setupGit = () => {
-  runGitCommand(['config', 'user.email', 'instructure-ui-ci@instructure.com'])
+  runGitCommand(['config', 'user.email', 'instui-dev@instructure.com'])
   runGitCommand(['config', 'user.name', 'instructure-ui-ci'])
 }
 

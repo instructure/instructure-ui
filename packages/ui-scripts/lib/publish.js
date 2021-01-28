@@ -51,7 +51,7 @@ async function publish(options) {
   const isRelease = isReleaseCommit(currentVersion)
   const infoMessage = isRelease
     ? `📦  Currently on release commit for ${currentVersion} of ${packageName}.`
-    : `📦  Not on a release commit--publishing a pre-release...`
+    : `📦  Not on a release commit--publishing a nightly-release...`
 
   info(infoMessage)
 
