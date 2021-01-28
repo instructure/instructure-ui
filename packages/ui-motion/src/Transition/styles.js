@@ -139,8 +139,8 @@ const generateStyle = (componentTheme, props, state) => {
           transitioning: `transition--${type}-transitioning`,
           exited: `transition--${type}-exited`,
           exiting: `transition--${type}-exiting`,
-          entering: `transition--${type}-entered`,
-          entered: `transition--${type}-entering`
+          entered: `transition--${type}-entered`,
+          entering: `transition--${type}-entering`
         }
       : {},
     transitionGlobalStyles: {
