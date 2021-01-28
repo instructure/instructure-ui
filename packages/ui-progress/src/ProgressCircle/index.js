@@ -21,28 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
 
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class ProgressCircle extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * A label is required for accessibility
      */
@@ -131,15 +137,19 @@ class ProgressCircle extends Component {
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
+  _timeouts = []
+
   constructor(props) {
-    super()
+    super(props)
 
     this.state = {
       shouldAnimateOnMount: props.shouldAnimateOnMount
     }
   }
 
-  _timeouts = []
+  get makeStylesVariables() {
+    return { shouldAnimateOnMount: this.state.shouldAnimateOnMount }
+  }
 
   componentDidMount() {
     if (this.state.shouldAnimateOnMount) {
@@ -151,38 +161,16 @@ class ProgressCircle extends Component {
         }, this.props.animationDelay || 500)
       )
     }
+
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStylesVariables)
   }
 
   componentWillUnmount() {
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
-  }
-
-  circumference() {
-    const camelSize = this.props.size === 'x-small' ? 'xSmall' : this.props.size
-    // get the circumference of the meter circle
-    return parseFloat(this.theme[`${camelSize}Circumference`])
-  }
-
-  get radii() {
-    const camelSize = this.props.size === 'x-small' ? 'xSmall' : this.props.size
-    return {
-      radius: this.theme[`${camelSize}Radius`],
-      borderOffsetRadius: this.theme[`${camelSize}BorderOffset`]
-    }
-  }
-
-  dashOffset() {
-    const { valueNow, valueMax } = this.props
-
-    // send the stroke-dashoffset to the meter circle, checking
-    // to make sure current value doesn't exceed max value
-    if (valueNow < valueMax) {
-      const circumference = this.circumference()
-      // figure out how much offset to give the stroke to show the % complete
-      return circumference - (valueNow / valueMax) * circumference
-    } else {
-      return 0
-    }
   }
 
   render() {
@@ -195,21 +183,9 @@ class ProgressCircle extends Component {
       valueMax,
       screenReaderLabel,
       size,
+      styles,
       ...props
     } = this.props
-
-    const meterColorClassName =
-      typeof meterColor === 'function'
-        ? meterColor({ valueNow, valueMax })
-        : meterColor
-
-    const classes = {
-      [styles.root]: true,
-      [styles[`size--${size}`]]: true,
-      [styles[`color--${color}`]]: true,
-      [styles[`meterColor--${meterColorClassName}`]]: true,
-      [styles.shouldAnimateOnMount]: this.state.shouldAnimateOnMount
-    }
 
     const valueText =
       typeof formatScreenReaderValue === 'function' &&
@@ -224,7 +200,7 @@ class ProgressCircle extends Component {
     const style = this.state.animateOnMount
       ? null
       : {
-          strokeDashoffset: `${this.dashOffset()}em`
+          strokeDashoffset: `${styles.dashOffset}em`
         }
 
     return (
@@ -232,7 +208,7 @@ class ProgressCircle extends Component {
         {...passthroughProps(props)}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        className={classnames(classes)}
+        css={styles.progressCircle}
         margin={this.props.margin}
       >
         <ScreenReaderContent>
@@ -246,32 +222,32 @@ class ProgressCircle extends Component {
           />
         </ScreenReaderContent>
         {value && (
-          <span className={styles.center} aria-hidden="true">
-            <span className={styles.value}>{value}</span>
+          <span css={styles.center} aria-hidden="true">
+            <span css={styles.value}>{value}</span>
           </span>
         )}
-        <svg className={styles.circle} role="presentation" focusable="false">
+        <svg css={styles.circle} role="presentation" focusable="false">
           <circle
-            className={styles.track}
+            css={styles.track}
             role="presentation"
             cx="50%"
             cy="50%"
-            r={this.radii.radius}
+            r={styles.radii.radius}
           />
           <circle
-            className={styles.border}
+            css={styles.border}
             role="presentation"
             cx="50%"
             cy="50%"
-            r={this.radii.borderOffsetRadius}
+            r={styles.radii.borderOffsetRadius}
           />
           <circle
-            className={styles.meter}
+            css={styles.meter}
             role="presentation"
             style={style}
             cx="50%"
             cy="50%"
-            r={this.radii.radius}
+            r={styles.radii.radius}
           />
         </svg>
       </View>

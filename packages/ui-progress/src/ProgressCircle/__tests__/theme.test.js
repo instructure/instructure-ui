@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { ProgressCircle } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
-xdescribe('ProgressCircle.theme', () => {
+describe('ProgressCircle.theme', () => {
   describe('with the default theme', () => {
-    const variables = ProgressCircle.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('default', () => {
       it('should ensure brand meter color and track color meet 3:1 contrast', () => {
@@ -66,7 +67,7 @@ xdescribe('ProgressCircle.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = ProgressCircle.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('default', () => {
       it('should ensure brand meter color and track color meet 4.5:1 contrast', () => {

@@ -62,11 +62,35 @@ const transform = function (s) {
   return s / 2
 }
 
-export default function generator({ colors, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeightCondensed,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark'],
+      meterColorBrand: theme['ic-brand-primary']
+    },
+    'canvas-high-contrast': {
+      meterColorBrandInverse: colors?.backgroundLightest,
+      meterColorSuccessInverse: colors?.backgroundLightest,
+      meterColorInfoInverse: colors?.backgroundLightest,
+      meterColorAlertInverse: colors?.backgroundLightest,
+      meterColorWarningInverse: colors?.backgroundLightest,
+      meterColorDangerInverse: colors?.backgroundLightest
+    }
+  }
+  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeightCondensed,
 
     xSmallSize: `${size.xSmall}em`,
     xSmallRadius: `${radius.xSmall}em`,
@@ -96,53 +120,41 @@ export default function generator({ colors, typography }) {
     largeStrokeWidth: `${strokeWidth.large}em`,
     largeBorderOffset: `${borderOffsetRadius.large}em`,
 
-    color: colors.textDarkest,
-    colorInverse: colors.textLightest,
+    color: colors?.textDarkest,
+    colorInverse: colors?.textLightest,
 
-    trackColor: colors.backgroundLightest,
+    trackColor: colors?.backgroundLightest,
     trackColorInverse: 'transparent',
 
-    trackBorderColor: colors.borderMedium,
-    trackBorderColorInverse: colors.borderLightest,
+    trackBorderColor: colors?.borderMedium,
+    trackBorderColorInverse: colors?.borderLightest,
 
     // variables are split out for inverse to allow
     // color value changes for inverse-high-constrast
-    meterColorBrand: colors.backgroundBrand,
-    meterColorBrandInverse: colors.backgroundBrand,
+    meterColorBrand: colors?.backgroundBrand,
+    meterColorBrandInverse: colors?.backgroundBrand,
 
-    meterColorInfo: colors.backgroundInfo,
-    meterColorInfoInverse: colors.backgroundInfo,
+    meterColorInfo: colors?.backgroundInfo,
+    meterColorInfoInverse: colors?.backgroundInfo,
 
-    meterColorSuccess: colors.backgroundSuccess,
-    meterColorSuccessInverse: colors.backgroundSuccess,
+    meterColorSuccess: colors?.backgroundSuccess,
+    meterColorSuccessInverse: colors?.backgroundSuccess,
 
-    meterColorDanger: colors.backgroundDanger,
-    meterColorDangerInverse: colors.backgroundDanger,
+    meterColorDanger: colors?.backgroundDanger,
+    meterColorDangerInverse: colors?.backgroundDanger,
 
-    meterColorAlert: colors.backgroundAlert,
-    meterColorAlertInverse: colors.backgroundAlert,
+    meterColorAlert: colors?.backgroundAlert,
+    meterColorAlertInverse: colors?.backgroundAlert,
 
-    meterColorWarning: colors.backgroundWarning,
-    meterColorWarningInverse: colors.backgroundWarning
+    meterColorWarning: colors?.backgroundWarning,
+    meterColorWarningInverse: colors?.backgroundWarning
   }
-}
 
-generator.canvas = function (variables) {
   return {
-    color: variables['ic-brand-font-color-dark'],
-    meterColorBrand: variables['ic-brand-primary']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
-  colors
-}) {
-  return {
-    meterColorBrandInverse: colors.backgroundLightest,
-    meterColorSuccessInverse: colors.backgroundLightest,
-    meterColorInfoInverse: colors.backgroundLightest,
-    meterColorAlertInverse: colors.backgroundLightest,
-    meterColorWarningInverse: colors.backgroundLightest,
-    meterColorDangerInverse: colors.backgroundLightest
-  }
-}
+export default generateComponentTheme
