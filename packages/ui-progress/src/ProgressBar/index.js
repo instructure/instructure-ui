@@ -21,27 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class ProgressBar extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * A label is required for accessibility
      */
@@ -119,6 +125,14 @@ class ProgressBar extends Component {
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
     const {
       renderValue,
@@ -129,6 +143,7 @@ class ProgressBar extends Component {
       size,
       color,
       meterColor,
+      styles,
       ...props
     } = this.props
 
@@ -142,33 +157,21 @@ class ProgressBar extends Component {
 
     const value = callRenderProp(renderValue, { valueNow, valueMax })
 
-    const meterColorClassName =
-      typeof meterColor === 'function'
-        ? meterColor({ valueNow, valueMax })
-        : meterColor
-
-    const classes = {
-      [styles.root]: true,
-      [styles[`size--${size}`]]: true,
-      [styles[`color--${color}`]]: true,
-      [styles[`meterColor--${meterColorClassName}`]]: true
-    }
-
     /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <View
         {...passthroughProps(props)}
         as={this.props.as}
-        className={classnames(classes)}
+        css={styles.progressBar}
         margin={this.props.margin}
         elementRef={this.props.elementRef}
       >
-        <span className={styles.trackLayout}>
+        <span css={styles.trackLayout}>
           {/* creates bottom border effect - <progress /> hard to style x-browser */}
-          <span className={styles.trackBorder}></span>
+          <span css={styles.trackBorder}></span>
 
           <progress
-            className={styles.track}
+            css={styles.track}
             max={valueMax}
             value={valueNow}
             role="progressbar"
@@ -180,7 +183,7 @@ class ProgressBar extends Component {
         </span>
 
         {value && (
-          <span className={styles.value} aria-hidden="true">
+          <span css={styles.value} aria-hidden="true">
             {value}
           </span>
         )}
