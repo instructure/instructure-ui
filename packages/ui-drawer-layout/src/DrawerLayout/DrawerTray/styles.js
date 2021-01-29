@@ -34,7 +34,7 @@
  */
 const generateStyle = (componentTheme, props, state) => {
   const { border } = props
-  const { hasShadow, placement } = state
+  const { placement } = state
 
   const borderPlacementStyle = {
     start: { borderRightWidth: componentTheme.borderWidth },
@@ -53,33 +53,35 @@ const generateStyle = (componentTheme, props, state) => {
         boxSizing: 'content-box'
       }
 
-  const shadowStyles = hasShadow
-    ? {
-        boxShadow: componentTheme.boxShadow
-      }
-    : {}
-
   const placementStyleMap = {
     start: { left: 0 },
     end: { right: 0 }
   }
 
+  const trayStyle = {
+    position: 'absolute',
+    backgroundColor: componentTheme.background,
+    zIndex: componentTheme.zIndex,
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    ...borderStyles,
+    top: 0,
+    bottom: 0,
+    ...placementStyleMap[placement]
+  }
+
   return {
     drawerTray: {
-      label: 'drawerLayout__tray',
-      position: 'absolute',
-      backgroundColor: componentTheme.background,
-      zIndex: componentTheme.zIndex,
-      overflowY: 'auto',
-      overflowX: 'hidden',
-      ...borderStyles,
-      ...shadowStyles,
-      top: 0,
-      bottom: 0,
-      ...placementStyleMap[placement]
+      label: 'drawerTray',
+      ...trayStyle
+    },
+    drawerTrayWithShadow: {
+      label: 'drawerTray--with-shadow',
+      ...trayStyle,
+      boxShadow: componentTheme.boxShadow
     },
     drawerTrayContent: {
-      label: 'drawerLayout__trayContent',
+      label: 'drawerTray__content',
       overflowY: 'auto',
       height: '100%',
       boxSizing: 'content-box'
