@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { DrawerTray } from '../index'
 import { DrawerTrayLocator } from '../DrawerTrayLocator'
-import { EmotionThemeProvider, jsx } from '@instructure/emotion'
+import { EmotionThemeProvider } from '@instructure/emotion'
 import { canvas } from '@instructure/ui-themes'
 import { DrawerLayoutContext } from '../../index'
 
