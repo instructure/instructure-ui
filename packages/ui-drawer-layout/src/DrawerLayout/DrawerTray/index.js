@@ -294,7 +294,6 @@ class DrawerTray extends Component {
     return (
       <DrawerLayoutContext.Consumer>
         {(shouldOverlayTray) => {
-          this.shouldOverlayTray = shouldOverlayTray
           const { portalOpen } = this.state
           const needsPortal = shouldOverlayTray && mountNode
 
@@ -302,7 +301,7 @@ class DrawerTray extends Component {
           // because passing and handling it in styles.js makes it
           // rerender the component during the transition, breaking it
           const trayStyles =
-            shadow && this.shouldOverlayTray
+            shadow && shouldOverlayTray
               ? styles.drawerTrayWithShadow
               : styles.drawerTray
 
@@ -379,6 +378,5 @@ class DrawerTray extends Component {
     )
   }
 }
-DrawerTray.contextType = DrawerLayoutContext
 export default DrawerTray
 export { DrawerTray }

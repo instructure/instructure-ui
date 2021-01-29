@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Children, Component, createContext, useContext } from 'react'
+import { Children, Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { bidirectional } from '@instructure/ui-i18n'
