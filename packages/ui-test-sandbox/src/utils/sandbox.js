@@ -225,7 +225,7 @@ function overrideWindowOnError(windowOnError) {
     const error = typeof err === 'string' ? err : err.toString()
 
     // Prevent default window errors for uncaught errors in React 16+ here.
-    // The promise returned by the mount, setProps, and setContext utils will be rejected when they are thrown.
+    // The promise returned by the mount and setProps utils will be rejected when they are thrown.
     // Ignore them here so that they don't fail the test when they have been handled.
     if (
       error.startsWith('Error: Warning:') ||

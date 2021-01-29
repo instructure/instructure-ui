@@ -32,6 +32,7 @@
     "@babel/runtime": "^7.9.2",
     "@instructure/console": "^7.3.1",
     "@instructure/debounce": "^7.3.1",
+    "@instructure/emotion": "^7.3.1",
     "@instructure/ui-dialog": "^7.3.1",
     "@instructure/ui-dom-utils": "^7.3.1",
     "@instructure/ui-i18n": "^7.3.1",
@@ -42,17 +43,16 @@
     "@instructure/ui-react-utils": "^7.3.1",
     "@instructure/ui-test-utils": "^7.3.1",
     "@instructure/ui-testable": "^7.3.1",
-    "@instructure/ui-themeable": "^7.3.1",
     "@instructure/ui-utils": "^7.3.1",
     "@instructure/ui-view": "^7.3.1",
     "@instructure/uid": "^7.3.1",
-    "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^7.3.1",
     "@instructure/ui-test-locator": "^7.3.1",
-    "@instructure/ui-test-utils": "^6.16.0"
+    "@instructure/ui-test-utils": "^7.3.1",
+    "@instructure/ui-themes": "^7.3.1"
   },
   "peerDependencies": {
     "react": "^16.8"

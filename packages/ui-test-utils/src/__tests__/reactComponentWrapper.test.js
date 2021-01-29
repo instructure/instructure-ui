@@ -44,10 +44,6 @@ class Component extends React.Component {
     foo: 'foo'
   }
 
-  static contextTypes = {
-    foo: PropTypes.string
-  }
-
   test(cb) {
     cb('test')
   }
@@ -130,23 +126,6 @@ describe('reactComponentWrapper', async () => {
 
       expect(component.props.foo).to.equal('bar')
     })
-    it('should support setting context', async () => {
-      let component
-      await ReactComponentWrapper.mount(
-        <Component
-          componentRef={(el) => {
-            component = el
-          }}
-        />,
-        {
-          context: {
-            foo: 'bar'
-          }
-        }
-      )
-
-      expect(component.context.foo).to.equal('bar')
-    })
   })
 
   describe('#setProps', async () => {
@@ -165,25 +144,6 @@ describe('reactComponentWrapper', async () => {
       })
 
       expect(component.props.foo).to.equal('bar')
-    })
-  })
-
-  describe('#setContext', async () => {
-    it('should support setting context', async () => {
-      let component
-      const subject = await ReactComponentWrapper.mount(
-        <Component
-          componentRef={(el) => {
-            component = el
-          }}
-        />
-      )
-
-      await subject.setContext({
-        foo: 'bar'
-      })
-
-      expect(component.context.foo).to.equal('bar')
     })
   })
 })

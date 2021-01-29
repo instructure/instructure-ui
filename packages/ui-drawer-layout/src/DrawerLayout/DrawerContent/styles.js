@@ -23,25 +23,33 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, borders, stacking, shadows } = theme
-  const componentVariables = {
-    background: colors?.backgroundLightest,
-    borderColor: colors?.borderMedium,
-    borderWidth: borders?.widthSmall,
-    borderStyle: borders?.style,
-    zIndex: stacking?.topmost,
-    boxShadow: shadows?.depth3
-  }
+const generateStyle = (componentTheme, props, state) => {
+  const { shouldTransition } = state
+
+  const transitionState = shouldTransition
+    ? {
+        transition: `margin ${componentTheme.duration}`
+      }
+    : {}
+
   return {
-    ...componentVariables,
-    ...themeOverride
+    drawerContent: {
+      label: 'drawerLayout__content',
+      overflowY: 'auto',
+      height: '100%',
+      boxSizing: 'content-box',
+      ...transitionState
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
