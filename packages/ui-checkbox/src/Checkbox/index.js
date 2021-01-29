@@ -230,7 +230,9 @@ class Checkbox extends Component {
       label,
       readOnly,
       indeterminate,
-      labelPlacement
+      labelPlacement,
+      // eslint-disable-next-line react/prop-types
+      themeOverride
     } = this.props
 
     const { hovered, focused } = this.state
@@ -250,6 +252,7 @@ class Checkbox extends Component {
           checked={this.checked}
           readOnly={readOnly}
           labelPlacement={labelPlacement}
+          themeOverride={themeOverride}
         >
           {label}
         </ToggleFacade>
@@ -262,6 +265,7 @@ class Checkbox extends Component {
           focused={focused}
           checked={this.checked}
           indeterminate={indeterminate}
+          themeOverride={themeOverride}
         >
           {label}
         </CheckboxFacade>
