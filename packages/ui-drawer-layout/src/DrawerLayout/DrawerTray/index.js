@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component, useContext } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -199,7 +199,6 @@ class DrawerTray extends Component {
 
   makeStyleProps = () => {
     return {
-      hasShadow: this.props.shadow && this.shouldOverlayTray,
       placement: this.placement
     }
   }
@@ -288,6 +287,7 @@ class DrawerTray extends Component {
       shouldCloseOnEscape,
       shouldCloseOnDocumentClick,
       shouldContainFocus,
+      styles,
       ...props
     } = this.props
 
@@ -297,6 +297,14 @@ class DrawerTray extends Component {
           this.shouldOverlayTray = shouldOverlayTray
           const { portalOpen } = this.state
           const needsPortal = shouldOverlayTray && mountNode
+
+          // we have to handle the shadow version here,
+          // because passing and handling it in styles.js makes it
+          // rerender the component during the transition, breaking it
+          const trayStyles =
+            shadow && this.shouldOverlayTray
+              ? styles.drawerTrayWithShadow
+              : styles.drawerTray
 
           let transitionIn = open
 
@@ -328,7 +336,7 @@ class DrawerTray extends Component {
               <div
                 {...omitProps(props, DrawerTray.propTypes)}
                 ref={this.handleContentRef}
-                css={this.props.styles.drawerTray}
+                css={trayStyles}
               >
                 {this.state.transitioning ? (
                   this.renderContent()
