@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { ProgressBar } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
-xdescribe('ProgressBar.theme', () => {
+describe('ProgressBar.theme', () => {
   describe('with the default theme', () => {
-    const variables = ProgressBar.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should ensure brand meter color and track color meet 3:1 contrast', () => {
       expect(
@@ -64,7 +65,7 @@ xdescribe('ProgressBar.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = ProgressBar.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
     it('should ensure brand meter color and track color meet 4.5:1 contrast', () => {
       expect(
         contrast(variables.meterColorBrand, variables.trackColor)

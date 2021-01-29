@@ -22,77 +22,89 @@
  * SOFTWARE.
  */
 
-export default function generator({ borders, colors, spacing, typography }) {
-  return {
-    color: colors.textDarkest,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { borders, colors, spacing, typography, key: themeName } = theme
 
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeightCondensed,
-    fontSize: typography.fontSizeMedium,
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark'],
+      meterColorBrand: theme['ic-brand-primary']
+    },
+    'canvas-high-contrast': {
+      meterBorderColorInverse: colors?.borderLightest,
+      meterColorBrandInverse: colors?.backgroundLightest,
+      meterColorSuccessInverse: colors?.backgroundLightest,
+      meterColorInfoInverse: colors?.backgroundLightest,
+      meterColorAlertInverse: colors?.backgroundLightest,
+      meterColorWarningInverse: colors?.backgroundLightest,
+      meterColorDangerInverse: colors?.backgroundLightest
+    }
+  }
+  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
 
-    xSmallHeight: spacing.xSmall,
-    xSmallValueFontSize: typography.fontSizeXSmall,
+  const componentVariables = {
+    color: colors?.textDarkest,
 
-    smallHeight: spacing.small,
-    smallValueFontSize: typography.fontSizeXSmall,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeightCondensed,
+    fontSize: typography?.fontSizeMedium,
 
-    mediumHeight: spacing.medium,
-    mediumValueFontSize: typography.fontSizeSmall,
+    xSmallHeight: spacing?.xSmall,
+    xSmallValueFontSize: typography?.fontSizeXSmall,
 
-    largeHeight: spacing.large,
-    largeValueFontSize: typography.fontSizeMedium,
+    smallHeight: spacing?.small,
+    smallValueFontSize: typography?.fontSizeXSmall,
 
-    valuePadding: `${spacing.xxSmall}`,
+    mediumHeight: spacing?.medium,
+    mediumValueFontSize: typography?.fontSizeSmall,
+
+    largeHeight: spacing?.large,
+    largeValueFontSize: typography?.fontSizeMedium,
+
+    valuePadding: `${spacing?.xxSmall}`,
 
     // variables are split out for inverse to allow
     // color value changes for inverse-high-constrast
-    meterColorBrand: colors.backgroundBrand,
-    meterColorBrandInverse: colors.backgroundBrand,
+    meterColorBrand: colors?.backgroundBrand,
+    meterColorBrandInverse: colors?.backgroundBrand,
 
-    meterColorInfo: colors.backgroundInfo,
-    meterColorInfoInverse: colors.backgroundInfo,
+    meterColorInfo: colors?.backgroundInfo,
+    meterColorInfoInverse: colors?.backgroundInfo,
 
-    meterColorSuccess: colors.backgroundSuccess,
-    meterColorSuccessInverse: colors.backgroundSuccess,
+    meterColorSuccess: colors?.backgroundSuccess,
+    meterColorSuccessInverse: colors?.backgroundSuccess,
 
-    meterColorDanger: colors.backgroundDanger,
-    meterColorDangerInverse: colors.backgroundDanger,
+    meterColorDanger: colors?.backgroundDanger,
+    meterColorDangerInverse: colors?.backgroundDanger,
 
-    meterColorAlert: colors.backgroundAlert,
-    meterColorAlertInverse: colors.backgroundAlert,
+    meterColorAlert: colors?.backgroundAlert,
+    meterColorAlertInverse: colors?.backgroundAlert,
 
-    meterColorWarning: colors.backgroundWarning,
-    meterColorWarningInverse: colors.backgroundWarning,
+    meterColorWarning: colors?.backgroundWarning,
+    meterColorWarningInverse: colors?.backgroundWarning,
 
-    meterBorderWidthInverse: borders.widthSmall,
+    meterBorderWidthInverse: borders?.widthSmall,
     meterBorderColorInverse: 'transparent',
 
-    trackColor: colors.backgroundLightest,
+    trackColor: colors?.backgroundLightest,
     trackColorInverse: 'transparent',
-    trackBottomBorderWidth: borders.widthSmall,
-    trackBottomBorderColor: colors.borderMedium,
-    trackBottomBorderColorInverse: colors.borderLightest
+    trackBottomBorderWidth: borders?.widthSmall,
+    trackBottomBorderColor: colors?.borderMedium,
+    trackBottomBorderColorInverse: colors?.borderLightest
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName],
+    ...themeOverride
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark'],
-    meterColorBrand: variables['ic-brand-primary']
-  }
-}
-
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
-  colors
-}) {
-  return {
-    meterBorderColorInverse: colors.borderLightest,
-    meterColorBrandInverse: colors.backgroundLightest,
-    meterColorSuccessInverse: colors.backgroundLightest,
-    meterColorInfoInverse: colors.backgroundLightest,
-    meterColorAlertInverse: colors.backgroundLightest,
-    meterColorWarningInverse: colors.backgroundLightest,
-    meterColorDangerInverse: colors.backgroundLightest
-  }
-}
+export default generateComponentTheme
