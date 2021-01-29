@@ -22,6 +22,5 @@
  * SOFTWARE.
  */
 
-export { Progress } from './Progress'
 export { ProgressBar } from './ProgressBar'
 export { ProgressCircle } from './ProgressCircle'
