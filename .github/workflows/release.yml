@@ -8,7 +8,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    name: Release top npm
+    name: Release to npm
     steps:
       - uses: actions/checkout@v2
         with:
