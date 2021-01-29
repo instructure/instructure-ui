@@ -53,11 +53,6 @@ class ReactComponentWrapper {
               wrapper.setChildProps(newProps)
             })
           },
-          setContext(newContext) {
-            return doAsync(() => {
-              wrapper.setChildContext(newContext)
-            })
-          },
           getDOMNode() {
             return wrapper.getDOMNode()
           }

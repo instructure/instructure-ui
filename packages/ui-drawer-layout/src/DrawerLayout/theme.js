@@ -29,19 +29,7 @@
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors, borders, stacking, shadows } = theme
-  const componentVariables = {
-    background: colors?.backgroundLightest,
-    borderColor: colors?.borderMedium,
-    borderWidth: borders?.widthSmall,
-    borderStyle: borders?.style,
-    zIndex: stacking?.topmost,
-    boxShadow: shadows?.depth3
-  }
-  return {
-    ...componentVariables,
-    ...themeOverride
-  }
+  return {}
 }
 
 export default generateComponentTheme

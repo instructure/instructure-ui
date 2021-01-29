@@ -21,9 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { debounce } from '@instructure/debounce'
 import {
@@ -31,11 +32,11 @@ import {
   getBoundingClientRect
 } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -43,8 +44,8 @@ parent: DrawerLayout
 id: DrawerLayout.Content
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class DrawerContent extends Component {
   static locatorAttribute = 'data-drawer-content'
   static propTypes = {
@@ -55,7 +56,12 @@ class DrawerContent extends Component {
      * Callback fired whenever the `<DrawerLayout.Content />` changes size
      */
     onSizeChange: PropTypes.func,
-    role: PropTypes.string
+    role: PropTypes.string,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -84,16 +90,19 @@ class DrawerContent extends Component {
       trailing: true
     })
     this._resizeListener = addResizeListener(this._content, this._debounced)
+    this.props.makeStyles({ shouldTransition: false })
   }
 
   componentDidUpdate() {
+    /*
     this._timeouts.push(
       setTimeout(() => {
         this.setState({
           shouldTransition: true
         })
       })
-    )
+    )*/
+    this.props.makeStyles({ shouldTransition: true })
   }
 
   componentWillUnmount() {
@@ -133,10 +142,7 @@ class DrawerContent extends Component {
         style={style}
         ref={this.handleContentRef}
         aria-label={label}
-        className={classnames({
-          [styles.root]: true,
-          [styles.transition]: this.state.shouldTransition
-        })}
+        css={this.props.styles.drawerContent}
       >
         {this.props.children}
       </div>

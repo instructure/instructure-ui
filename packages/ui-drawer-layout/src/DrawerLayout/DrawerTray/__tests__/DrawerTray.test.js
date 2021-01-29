@@ -23,13 +23,14 @@
  */
 import React from 'react'
 
-import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { DrawerTray } from '../index'
-import styles from '../styles.css'
-
 import { DrawerTrayLocator } from '../DrawerTrayLocator'
+import { EmotionThemeProvider, jsx } from '@instructure/emotion'
+import { canvas } from '@instructure/ui-themes'
+import { DrawerLayoutContext } from '../../index'
 
-xdescribe('<DrawerTray />', async () => {
+describe('<DrawerTray />', async () => {
   it(`should place the tray correctly with placement=start`, async () => {
     await mount(
       <DrawerTray
@@ -42,9 +43,10 @@ xdescribe('<DrawerTray />', async () => {
       />
     )
     const drawerTray = await DrawerTrayLocator.find()
-
     expect(drawerTray).to.exist()
-    expect(drawerTray.hasClass(styles['placement--start'])).to.be.true()
+    await wait(() => {
+      expect(drawerTray.getComputedStyle().left).to.equal('0px')
+    })
   })
 
   it(`should place the tray correctly with placement=end`, async () => {
@@ -59,9 +61,10 @@ xdescribe('<DrawerTray />', async () => {
       />
     )
     const drawerTray = await DrawerTrayLocator.find()
-
     expect(drawerTray).to.exist()
-    expect(drawerTray.hasClass(styles['placement--end'])).to.be.true()
+    await wait(() => {
+      expect(drawerTray.getComputedStyle().right).to.equal('0px')
+    })
   })
 
   it('should render tray content when open', async () => {
@@ -96,17 +99,26 @@ xdescribe('<DrawerTray />', async () => {
   })
 
   it('should apply theme overrides when open', async () => {
-    await mount(
-      <DrawerTray
-        label="DrawerTray Example"
-        open={true}
-        theme={{
+    const themeOverride = {
+      components: {
+        DrawerTray: {
           zIndex: '333'
-        }}
-        render={() => {
-          return 'Hello from layout tray'
-        }}
-      />
+        }
+      }
+    }
+    await mount(
+      <EmotionThemeProvider theme={themeOverride}>
+        <DrawerTray
+          label="DrawerTray Example"
+          open={true}
+          theme={{
+            zIndex: '333'
+          }}
+          render={() => {
+            return 'Hello from layout tray'
+          }}
+        />
+      </EmotionThemeProvider>
     )
     const drawerTray = await DrawerTrayLocator.find()
 
@@ -199,27 +211,26 @@ xdescribe('<DrawerTray />', async () => {
 
   it('drops a shadow if the prop is set, and it is overlaying content', async () => {
     const onEntered = stub()
-    const subject = await mount(
-      <DrawerTray
-        label="DrawerTray Example"
-        open={true}
-        shadow={true}
-        onEntered={onEntered}
-        render={() => {
-          return 'Hello from layout tray'
-        }}
-      />
+    await mount(
+      <DrawerLayoutContext.Provider value={true}>
+        <EmotionThemeProvider theme={canvas}>
+          <DrawerTray
+            label="DrawerTray Example"
+            open={true}
+            shadow={true}
+            onEntered={onEntered}
+            render={() => {
+              return 'Hello from layout tray'
+            }}
+          />
+        </EmotionThemeProvider>
+      </DrawerLayoutContext.Provider>
     )
-
     const drawerTray = await DrawerTrayLocator.find()
 
-    subject.setContext({
-      shouldOverlayTray: true
-    })
-
-    await wait(() => {
-      expect(drawerTray.hasClass(styles['shadow'])).to.be.true()
-    })
+    expect(drawerTray.getComputedStyle().boxShadow.toString()).to.not.equal(
+      'none'
+    )
   })
 
   it('should apply the a11y attributes', async () => {
