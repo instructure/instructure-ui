@@ -68,7 +68,8 @@
     "start:examples": "lerna run start --stream --scope docs-examples",
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
     "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged",
-    "husky:pre-push": "yarn lint:commit"
+    "husky:pre-push": "yarn lint:commit",
+    "build-storybook": "lerna run build-storybook --stream --scope docs-examples"
   },
   "license": "MIT",
   "resolutions": {
