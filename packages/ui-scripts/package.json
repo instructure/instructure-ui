@@ -58,8 +58,7 @@
     "yargs": "^14.0.0"
   },
   "optionalDependencies": {
-    "@storybook/react": "^4 || ^5",
-    "chromatic": "^5"
+    "@storybook/react": "^4 || ^5"
   },
   "peerDependencies": {
     "react": "^16.8",

@@ -32,8 +32,6 @@
     "test:changes": "ui-test --changed",
     "test": "ui-test",
     "test:jest": "lerna run test:jest --stream",
-    "test:vrt": "lerna run test:vrt --stream",
-    "accept:vrt": "lerna run accept:vrt --stream",
     "lint": "lerna run lint --stream",
     "lint:changes": "yarn lint --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",

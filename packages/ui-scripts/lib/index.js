@@ -104,8 +104,6 @@ if (process.argv.includes('open-sandbox')) {
   require('./lint-commit')
 } else if (process.argv.includes('--lint')) {
   require('./test/lint')
-} else if (process.argv.includes('--vrt')) {
-  require('./test/vrt')
 } else if (process.argv.includes('--clean')) {
   require('./build/clean')
 } else if (process.argv.includes('--install-react')) {
