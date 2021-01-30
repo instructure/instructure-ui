@@ -26,6 +26,7 @@ import { ThemeablePropValues } from '@instructure/ui-themeable'
 const { SHADOW_TYPES, BORDER_WIDTHS, BORDER_RADII } = ThemeablePropValues
 
 export default {
+  maxExamplesPerPage: 50,
   sectionProp: 'background',
   propValues: {
     shadow: [undefined, ...Object.values(SHADOW_TYPES)],
