@@ -1,13 +1,19 @@
-name: Pull Request validation Action workflow.
+name: Pull Request validation
 on: [pull_request]
 jobs:
   pr_validation:
     runs-on: ubuntu-latest
-    name: A job to run test.
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Run docker test script.
-        id: test_script
-        run: ./docker/test
+      - uses: actions/setup-node@v2
+        name: Install Node 15
+        with:
+          node-version: '15'
+      - name: Install dependencies
+        run: yarn install --check-files
+      - name: Bootstrap project
+        run: yarn bootstrap
+      - name: Run test for the patchset
+        run: yarn test:patchset
