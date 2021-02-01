@@ -317,7 +317,7 @@ class App extends Component {
         </Heading>
         <Theme
           themeKey={themeKey}
-          variables={theme.resource.variables}
+          variables={theme.resource}
           requirePath={theme.requirePath}
           immutable={theme.resource.immutable}
         />
