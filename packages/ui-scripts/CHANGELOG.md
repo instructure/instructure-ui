@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.4.0](https://github.com/instructure/instructure-ui/compare/v7.3.5...v7.4.0) (2021-02-01)
+
+### Bug Fixes
+
+- **ui-scripts:** fix ui-scripts config for deploy-docs-via-github ([14bae47](https://github.com/instructure/instructure-ui/commit/14bae47))
+
 ## [7.3.5](https://github.com/instructure/instructure-ui/compare/v7.3.2...v7.3.5) (2021-01-21)
 
 ### Bug Fixes

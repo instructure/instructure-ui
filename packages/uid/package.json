@@ -1,6 +1,6 @@
 {
   "name": "@instructure/uid",
-  "version": "7.3.5",
+  "version": "7.4.0",
   "description": "A unique (CSS-safe) id generator made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -27,8 +27,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.5",
-    "@instructure/ui-test-utils": "^7.3.5"
+    "@instructure/ui-babel-preset": "^7.4.0",
+    "@instructure/ui-test-utils": "^7.4.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2"
