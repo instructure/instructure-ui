@@ -44,14 +44,13 @@ import { DrawerTray } from './DrawerTray'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, null)
 @testable()
 @bidirectional()
 class DrawerLayout extends Component {
