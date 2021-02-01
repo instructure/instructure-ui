@@ -355,7 +355,7 @@ class App extends Component {
   }
 
   renderDocument(doc, repository) {
-    const { descriptions, docs, parents } = this.props
+    const { descriptions, docs, parents, themes } = this.props
     const { layout, themeKey } = this.state
 
     let children = []
@@ -391,7 +391,7 @@ class App extends Component {
               children
             }}
             description={description || doc.description}
-            themeKey={themeKey}
+            themeObject={themes[themeKey]}
             repository={repository}
             layout={layout}
           />

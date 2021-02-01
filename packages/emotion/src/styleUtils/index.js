@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import { warn } from '@instructure/console/macro'
 import { useTheme as useEmotionTheme } from 'emotion-theming'
 import { canvas } from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
@@ -54,7 +55,8 @@ const useTheme = () => {
   let theme = useEmotionTheme()
 
   if (isEmpty(theme)) {
-    console.warn(
+    warn(
+      false,
       `No theme provided for [EmotionThemeProvider], using default <canvas> theme.`
     )
     theme = canvas

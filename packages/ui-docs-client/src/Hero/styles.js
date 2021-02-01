@@ -22,16 +22,45 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { Link as UILink } from '@instructure/ui-link'
-import { EmotionThemeProvider } from '@instructure/emotion'
-import { instructure } from '@instructure/ui-themes'
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+const generateStyle = (componentTheme, props, state) => {
+  const commonStyles = {
+    position: 'absolute',
+    top: '0',
+    insetInlineStart: '0',
+    width: '100%',
+    height: '100%'
+  }
 
-const Link = (props) => (
-  <EmotionThemeProvider theme={instructure}>
-    <UILink {...props} />
-  </EmotionThemeProvider>
-)
+  return {
+    backgroundColor: componentTheme.backgroundColor,
 
-export default Link
-export { Link }
+    overlayLayout: {
+      label: 'hero__overlayLayout',
+      ...commonStyles
+    },
+
+    contentLayout: {
+      label: 'hero__contentLayout',
+      ...commonStyles,
+      display: 'grid',
+      gridTemplateRows: 'auto 1fr auto'
+    },
+
+    content: {
+      label: 'hero__content',
+      alignSelf: 'center'
+    }
+  }
+}
+
+export default generateStyle
