@@ -85,7 +85,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
       meterColorDangerInverse: colors?.backgroundLightest
     }
   }
-  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
 
   const componentVariables = {
     fontFamily: typography?.fontFamily,
