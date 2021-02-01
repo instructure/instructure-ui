@@ -23,13 +23,14 @@
  */
 
 import React from 'react'
-import { ApplyTheme } from '@instructure/ui-themeable'
 import { Heading as UIHeading } from '@instructure/ui-heading'
+import { instructure } from '@instructure/ui-themes'
+import { EmotionThemeProvider } from '@instructure/emotion'
 
 const Heading = (props) => (
-  <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+  <EmotionThemeProvider theme={instructure}>
     <UIHeading {...props} />
-  </ApplyTheme>
+  </EmotionThemeProvider>
 )
 
 export default Heading

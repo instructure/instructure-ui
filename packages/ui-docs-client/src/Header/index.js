@@ -29,13 +29,15 @@ import { Link } from '@instructure/ui-link'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-import { themeable } from '@instructure/ui-themeable'
 
 import { Heading } from '../Heading'
 
-import theme from './theme'
+import { withStyle } from '@instructure/emotion'
 
-@themeable(theme)
+@withStyle(
+  (componentTheme, props, state) => ({}),
+  (theme, themeOverride = {}) => ({})
+)
 class Header extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,

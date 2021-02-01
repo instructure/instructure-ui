@@ -29,6 +29,8 @@ import { ApplyTheme } from '@instructure/ui-themeable'
 import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import { instructure } from '@instructure/ui-themes'
 
 class NavToggle extends Component {
   static propTypes = {
@@ -70,7 +72,7 @@ class NavToggle extends Component {
         padding="x-small none"
         margin={isSection ? 'none' : 'none none none x-small'}
       >
-        <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+        <EmotionThemeProvider theme={instructure}>
           <ToggleDetails
             ref={(c) => {
               this._toggle = c
@@ -79,7 +81,7 @@ class NavToggle extends Component {
             {...props}
             summary={summaryContent}
           />
-        </ApplyTheme>
+        </EmotionThemeProvider>
       </View>
     )
   }
