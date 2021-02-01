@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-tray",
-  "version": "7.3.5",
+  "version": "7.4.0",
   "description": "Tray component for secondary/menu content",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -30,24 +30,24 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.5",
-    "@instructure/ui-dialog": "^7.3.5",
-    "@instructure/ui-i18n": "^7.3.5",
-    "@instructure/ui-motion": "^7.3.5",
-    "@instructure/ui-portal": "^7.3.5",
-    "@instructure/ui-position": "^7.3.5",
-    "@instructure/ui-prop-types": "^7.3.5",
-    "@instructure/ui-react-utils": "^7.3.5",
-    "@instructure/ui-testable": "^7.3.5",
-    "@instructure/ui-themeable": "^7.3.5",
-    "@instructure/ui-utils": "^7.3.5",
+    "@instructure/console": "^7.4.0",
+    "@instructure/ui-dialog": "^7.4.0",
+    "@instructure/ui-i18n": "^7.4.0",
+    "@instructure/ui-motion": "^7.4.0",
+    "@instructure/ui-portal": "^7.4.0",
+    "@instructure/ui-position": "^7.4.0",
+    "@instructure/ui-prop-types": "^7.4.0",
+    "@instructure/ui-react-utils": "^7.4.0",
+    "@instructure/ui-testable": "^7.4.0",
+    "@instructure/ui-themeable": "^7.4.0",
+    "@instructure/ui-utils": "^7.4.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.5",
-    "@instructure/ui-test-locator": "^7.3.5",
-    "@instructure/ui-test-utils": "^7.3.5"
+    "@instructure/ui-babel-preset": "^7.4.0",
+    "@instructure/ui-test-locator": "^7.4.0",
+    "@instructure/ui-test-utils": "^7.4.0"
   },
   "peerDependencies": {
     "react": "^16.8"

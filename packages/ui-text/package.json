@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-text",
-  "version": "7.3.5",
+  "version": "7.4.0",
   "description": "A component for styling textual content",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -30,15 +30,15 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.5",
-    "@instructure/ui-react-utils": "^7.3.5",
-    "@instructure/ui-themeable": "^7.3.5",
+    "@instructure/console": "^7.4.0",
+    "@instructure/ui-react-utils": "^7.4.0",
+    "@instructure/ui-themeable": "^7.4.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.5",
-    "@instructure/ui-test-utils": "^7.3.5"
+    "@instructure/ui-babel-preset": "^7.4.0",
+    "@instructure/ui-test-utils": "^7.4.0"
   },
   "peerDependencies": {
     "react": "^16.8"
