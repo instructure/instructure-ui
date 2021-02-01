@@ -23,7 +23,6 @@
  */
 
 import React from 'react'
-import { EmotionThemeProvider } from '@instructure/emotion'
 
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
@@ -49,19 +48,16 @@ describe('<Tray />', async () => {
   })
 
   it('should apply theme overrides when open', async () => {
-    const themeOverride = {
-      components: {
-        Tray: {
-          smallWidth: '10em'
-        }
-      }
-    }
     await mount(
-      <EmotionThemeProvider theme={themeOverride}>
-        <Tray label="Tray Example" open size="small" placement="start">
-          <div>Hello</div>
-        </Tray>
-      </EmotionThemeProvider>
+      <Tray
+        label="Tray Example"
+        open
+        size="small"
+        placement="start"
+        themeOverride={{ smallWidth: '10em' }}
+      >
+        <div>Hello</div>
+      </Tray>
     )
     const tray = await TrayLocator.find()
     const dialog = await tray.find('[role="dialog"]')

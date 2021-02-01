@@ -27,8 +27,6 @@ import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import { Modal } from '../index'
 import { ModalLocator } from '../ModalLocator'
-import { EmotionThemeProvider } from '@instructure/emotion'
-import { canvas } from '@instructure/ui-themes'
 
 describe('<Modal />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
@@ -64,17 +62,15 @@ describe('<Modal />', async () => {
 
   it('should apply theme overrides when open', async () => {
     await mount(
-      <EmotionThemeProvider theme={canvas}>
-        <Modal
-          open
-          size="small"
-          label="Modal Dialog"
-          shouldReturnFocus={false}
-          themeOverride={{ smallMaxWidth: '10em' }}
-        >
-          <Modal.Body>Foo Bar Baz</Modal.Body>
-        </Modal>
-      </EmotionThemeProvider>
+      <Modal
+        open
+        size="small"
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+        themeOverride={{ smallMaxWidth: '10em' }}
+      >
+        <Modal.Body>Foo Bar Baz</Modal.Body>
+      </Modal>
     )
 
     const modal = await ModalLocator.find()
