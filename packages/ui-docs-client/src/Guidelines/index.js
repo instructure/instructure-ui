@@ -22,47 +22,23 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
 
-import { withStyle, jsx } from '@instructure/emotion'
-
-import generateStyle from './styles'
-
-@withStyle(generateStyle, (theme, themeOverride = {}) => ({}))
 class Guidelines extends Component {
   static propTypes = {
-    children: PropTypes.node,
-
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
+    children: PropTypes.node
   }
 
   static defaultProps = {
     children: null
   }
 
-  componentDidMount() {
-    this.props.makeStyles()
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
-  }
-
   render() {
     return (
-      <Flex
-        wrap="wrap"
-        justifyItems="end"
-        alignItems="stretch"
-        css={this.props.styles.guidelines}
-      >
+      <Flex wrap="wrap" justifyItems="end" alignItems="stretch">
         {React.Children.map(this.props.children, (child) => (
           <Flex.Item shouldGrow shouldShrink size="14rem" margin="xx-small">
             {child}

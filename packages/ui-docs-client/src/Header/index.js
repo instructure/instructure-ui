@@ -32,12 +32,6 @@ import { View } from '@instructure/ui-view'
 
 import { Heading } from '../Heading'
 
-import { withStyle } from '@instructure/emotion'
-
-@withStyle(
-  (componentTheme, props, state) => ({}),
-  (theme, themeOverride = {}) => ({})
-)
 class Header extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
