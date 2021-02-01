@@ -22,22 +22,26 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import { Table } from '@instructure/ui-table'
 import { View } from '@instructure/ui-view'
 
 import { ColorSwatch } from '../ColorSwatch'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 
-@themeable(theme, styles)
+@withStyle(generateStyle, null)
 class ComponentTheme extends Component {
   static propTypes = {
-    theme: PropTypes.array.isRequired
+    theme: PropTypes.array.isRequired,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static contextTypes = {
@@ -100,7 +104,7 @@ class ComponentTheme extends Component {
 
   render() {
     return this.props.theme && Object.keys(this.props.theme).length > 0 ? (
-      <div className={styles.root}>
+      <div css={this.props.styles.componentTheme}>
         <Table caption="Component theme">
           <Table.Head>
             <Table.Row>
