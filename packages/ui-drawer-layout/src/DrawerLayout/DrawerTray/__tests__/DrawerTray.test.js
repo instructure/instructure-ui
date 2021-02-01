@@ -99,26 +99,15 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should apply theme overrides when open', async () => {
-    const themeOverride = {
-      components: {
-        DrawerTray: {
-          zIndex: '333'
-        }
-      }
-    }
     await mount(
-      <EmotionThemeProvider theme={themeOverride}>
-        <DrawerTray
-          label="DrawerTray Example"
-          open={true}
-          theme={{
-            zIndex: '333'
-          }}
-          render={() => {
-            return 'Hello from layout tray'
-          }}
-        />
-      </EmotionThemeProvider>
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        themeOverride={{ zIndex: '333' }}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
     )
     const drawerTray = await DrawerTrayLocator.find()
 

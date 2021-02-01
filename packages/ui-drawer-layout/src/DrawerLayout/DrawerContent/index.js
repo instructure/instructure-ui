@@ -93,15 +93,7 @@ class DrawerContent extends Component {
     this.props.makeStyles({ shouldTransition: false })
   }
 
-  componentDidUpdate() {
-    /*
-    this._timeouts.push(
-      setTimeout(() => {
-        this.setState({
-          shouldTransition: true
-        })
-      })
-    )*/
+  componentDidUpdate(prevProps, prevState, snapshot) {
     this.props.makeStyles({ shouldTransition: true })
   }
 
