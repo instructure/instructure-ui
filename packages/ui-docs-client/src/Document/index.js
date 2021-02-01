@@ -22,14 +22,19 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import GithubCorner from 'react-github-corner'
 import { Link } from '@instructure/ui-link'
 import { View } from '@instructure/ui-view'
 import { Tabs } from '@instructure/ui-tabs'
 import { CodeEditor } from '@instructure/ui-code-editor'
-import { ThemeRegistry, themeable } from '@instructure/ui-themeable'
+
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { Description } from '../Description'
 import { Properties } from '../Properties'
@@ -41,27 +46,37 @@ import { Heading } from '../Heading'
 
 import { DocPropType } from '../propTypes'
 
-import theme from './theme'
-
-@themeable(theme, null)
+@withStyle(generateStyle, generateComponentTheme)
 class Document extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     doc: DocPropType.isRequired,
     description: PropTypes.string,
-    themeKey: PropTypes.string,
+    themeObject: PropTypes.object,
     repository: PropTypes.string,
     layout: PropTypes.string
   }
 
   static defaultProps = {
     description: undefined,
-    themeKey: undefined,
+    themeObject: {},
     repository: undefined,
     layout: 'small'
   }
 
   state = {
     selectedDetailsTabIndex: 0
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   handleDetailsTabChange = (event, { index }) => {
@@ -83,11 +98,12 @@ class Document extends Component {
   }
 
   renderTheme(doc) {
-    const { themeKey } = this.props
+    const { themeObject } = this.props
     const generateComponentTheme = doc?.resource?.generateComponentTheme
 
-    const themeVariables = ThemeRegistry.getRegisteredTheme(themeKey).variables
+    const themeVariables = themeObject.resource
     const theme =
+      themeVariables &&
       typeof generateComponentTheme === 'function' &&
       generateComponentTheme(themeVariables)
 
@@ -302,7 +318,7 @@ import { ${importName} } from '${esPath}'
         {repository && layout !== 'small' && (
           <GithubCorner
             href={repository}
-            bannerColor={this.theme.githubCornerColor}
+            bannerColor={this.props.styles.githubCornerColor}
           />
         )}
       </div>

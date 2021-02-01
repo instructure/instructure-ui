@@ -29,7 +29,7 @@ import { App } from './App'
 import { Figure } from './Figure'
 import { Guidelines } from './Guidelines'
 import { ToggleBlockquote } from './ToggleBlockquote'
-import { canvas, instructure } from '@instructure/ui-themes'
+import { canvas } from '@instructure/ui-themes'
 import { ThemeRegistry } from '@instructure/ui-themeable'
 import { EmotionThemeProvider } from '@instructure/emotion'
 
@@ -39,10 +39,6 @@ function renderDocsClient(data, element) {
   ThemeRegistry.registerTheme({
     key: 'canvas',
     variables: { ...canvas }
-  })
-  ThemeRegistry.registerTheme({
-    key: 'instructure',
-    variables: { ...instructure }
   })
 
   ReactDOM.render(
