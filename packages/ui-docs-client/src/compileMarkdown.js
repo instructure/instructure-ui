@@ -26,12 +26,15 @@ import React, { createElement } from 'react'
 import marked from 'marked'
 import grayMatter from 'gray-matter'
 
+import { warn } from '@instructure/console/macro'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'
+
 import { View } from '@instructure/ui-view'
 import { Table } from '@instructure/ui-table'
 import { Img } from '@instructure/ui-img'
 import { Text } from '@instructure/ui-text'
 import { CodeEditor } from '@instructure/ui-code-editor'
-import { ApplyTheme } from '@instructure/ui-themeable'
 
 import { Playground } from './Playground'
 import { Preview } from './Preview'
@@ -40,8 +43,8 @@ import { Heading } from './Heading'
 import { Link } from './Link'
 
 import { trimIndent } from './trimIndent'
-import { EmotionThemeProvider } from '@instructure/emotion'
-import { instructure } from '@instructure/ui-themes'
+
+const themes = { canvas, canvasHighContrast, instructure }
 
 /* eslint-disable react/prop-types, react/display-name */
 const elements = {
@@ -245,8 +248,20 @@ function createRenderer() {
         const readOnly = matter.data ? matter.data.readOnly : true
         const title =
           tracker.context.title || matter.data.title || 'Code example'
-        const theme = (matter.data || {}).theme
+        const themeKey = (matter.data || {}).theme
         const data = { matter, readOnly, title, language }
+        let theme
+
+        if (themeKey) {
+          theme = themes[themeKey]
+
+          if (!theme) {
+            warn(
+              false,
+              `[compileMarkdown] Cannot find registered theme by key: "${themeKey}". Using default theme instead.`
+            )
+          }
+        }
 
         if (language.indexOf('_guidelines') >= 0 || matter.data.guidelines) {
           el = getComponent('Preview', {
