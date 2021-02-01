@@ -22,25 +22,30 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { IconButton } from '@instructure/ui-buttons'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { Heading } from '../Heading'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-import styles from './styles.css'
-import theme from './theme'
-
+@withStyle(generateStyle, generateComponentTheme)
 class Variant extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     variant: PropTypes.string.isRequired,
     glyph: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   handleClick = (event) => {
@@ -49,7 +54,7 @@ class Variant extends Component {
   }
 
   render() {
-    const { glyph, variant, name } = this.props
+    const { glyph, variant, name, styles } = this.props
     let icon
 
     if (glyph.src) {
@@ -67,7 +72,7 @@ class Variant extends Component {
     }
 
     return (
-      <div className={styles.variant}>
+      <div css={styles.variant}>
         <IconButton
           size="large"
           onClick={this.handleClick}
@@ -81,13 +86,17 @@ class Variant extends Component {
   }
 }
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Glyph extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     variants: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
-    rtl: PropTypes.bool
+    rtl: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -101,13 +110,13 @@ class Glyph extends Component {
   }
 
   render() {
-    const { name, variants } = this.props
+    const { name, variants, styles } = this.props
     const firstVariant = variants[Object.keys(variants)[0]]
     const info = this.renderGlyphInfo(firstVariant)
 
     return (
-      <div className={styles.root}>
-        <div className={styles.variants} dir={this.props.rtl ? 'rtl' : null}>
+      <div css={styles.glyph}>
+        <div css={styles.variants} dir={this.props.rtl ? 'rtl' : null}>
           {Object.keys(variants).map((variant) => (
             <Variant
               {...this.props}
@@ -117,7 +126,7 @@ class Glyph extends Component {
             />
           ))}
         </div>
-        {info && <div className={styles.info}>{info}</div>}
+        {info && <div css={styles.info}>{info}</div>}
         <Heading level="h4" as="h3">
           {firstVariant.glyphName.toLowerCase()}
         </Heading>

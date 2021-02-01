@@ -22,15 +22,23 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, spacing, borders }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { borders, colors, spacing } = theme
+
   const colorCheckerboard = '#eee'
   const colorCheckerboardInverse = '#444'
 
-  return {
-    padding: spacing.small,
-    borderRadius: borders.radiusMedium,
-    backgroundColor: colors.backgroundLightest,
-    border: `${borders.widthSmall} solid #eee`,
+  const componentVariables = {
+    padding: spacing?.small,
+    borderRadius: borders?.radiusMedium,
+    backgroundColor: colors?.backgroundLightest,
+    border: `${borders?.widthSmall} solid #eee`,
     backgroundColorInverse: '#333',
     gradientCheckerboardSize: '1rem',
     gradientCheckerboard: `
@@ -48,4 +56,11 @@ export default function ({ colors, spacing, borders }) {
       ${colorCheckerboardInverse} 75%,
       ${colorCheckerboardInverse}`
   }
+
+  return {
+    ...componentVariables,
+    ...themeOverride
+  }
 }
+
+export default generateComponentTheme

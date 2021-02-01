@@ -22,25 +22,38 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { isValid } from '@instructure/ui-color-utils'
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class ColorSwatch extends Component {
   static propTypes = {
-    color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   render() {
     const { color } = this.props
     return isValid(color) ? (
-      <div className={styles.root} style={{ background: color }} />
+      <div css={this.props.styles.colorSwatch} style={{ background: color }} />
     ) : null
   }
 }

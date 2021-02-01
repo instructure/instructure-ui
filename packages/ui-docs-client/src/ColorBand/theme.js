@@ -22,10 +22,25 @@
  * SOFTWARE.
  */
 
-export default function ({ colors }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors } = theme
+
+  const componentVariables = {
+    colorAlert: colors?.inaccessibleAlert || colors?.backgroundAlert,
+    colorWarning: colors?.inaccessibleWarning || colors?.backgroundWarning,
+    colorDanger: colors?.backgroundDanger
+  }
+
   return {
-    colorAlert: colors.inaccessibleAlert || colors.backgroundAlert,
-    colorWarning: colors.inaccessibleWarning || colors.backgroundWarning,
-    colorDanger: colors.backgroundDanger
+    ...componentVariables,
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
