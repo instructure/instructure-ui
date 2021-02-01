@@ -46,7 +46,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
       defaultColor: theme['ic-brand-font-color-dark']
     }
   }
-  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
 
   const tagVariant = function (
     style,

@@ -39,7 +39,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
       color: theme['ic-brand-primary']
     }
   }
-  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
 
   const componentVariables = {
     trackColor: colors?.backgroundLight,

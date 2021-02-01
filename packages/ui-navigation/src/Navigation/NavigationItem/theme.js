@@ -41,9 +41,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
         theme['ic-brand-global-nav-menu-item__text-color--active'],
       selectedIconColor: theme['ic-brand-global-nav-ic-icon-svg-fill--active']
     },
-    'canvas-a11y': {
-      linkTextDecoration: 'underline'
-    },
     'canvas-high-contrast': {
       linkTextDecoration: 'underline'
     }

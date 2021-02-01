@@ -50,7 +50,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
       toggleBackgroundOff: colors?.backgroundDarkest
     }
   }
-  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
 
   const componentVariables = {
     labelColor: colors?.textDarkest,

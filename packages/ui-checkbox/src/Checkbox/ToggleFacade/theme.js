@@ -49,7 +49,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
       borderColor: colors?.borderDarkest
     }
   }
-  themeSpecificStyle['canvas-a11y'] = themeSpecificStyle['canvas-high-contrast']
 
   const componentVariables = {
     color: colors?.textLightest,
