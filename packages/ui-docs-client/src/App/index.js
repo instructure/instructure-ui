@@ -22,15 +22,21 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable, ApplyTheme } from '@instructure/ui-themeable'
 import { Alert } from '@instructure/ui-alerts'
+import {
+  EmotionThemeProvider,
+  withStyle,
+  jsx,
+  Global
+} from '@instructure/emotion'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-
+import { instructure } from '@instructure/ui-themes'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
@@ -56,10 +62,10 @@ import { Icons } from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 import { LibraryPropType } from '../propTypes'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class App extends Component {
   static propTypes = {
     library: LibraryPropType.isRequired,
@@ -69,7 +75,11 @@ class App extends Component {
     themes: PropTypes.object,
     icons: PropTypes.object,
     descriptions: PropTypes.object,
-    trayWidth: PropTypes.number
+    trayWidth: PropTypes.number,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -88,7 +98,7 @@ class App extends Component {
   }
 
   constructor(props) {
-    super()
+    super(props)
     // determine what page we're loading
     const [page] = this.getPathInfo()
 
@@ -127,6 +137,11 @@ class App extends Component {
       this._content,
       this.updateLayout
     )
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -421,7 +436,7 @@ class App extends Component {
       }
     })
     return (
-      <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+      <EmotionThemeProvider theme={instructure}>
         <Hero
           name={library.name}
           docs={{ ...docs, ...themeDocs }}
@@ -430,7 +445,7 @@ class App extends Component {
           version={library.version}
           layout={layout}
         />
-      </ApplyTheme>
+      </EmotionThemeProvider>
     )
   }
 
@@ -493,13 +508,8 @@ class App extends Component {
               size="small"
               lineHeight="fit"
             >
-              Made with{' '}
-              <IconHeartLine
-                size="small"
-                className={styles.footerIcon}
-                color="error"
-              />{' '}
-              by {author}.
+              Made with <IconHeartLine size="small" color="error" /> by {author}
+              .
             </Text>
           </AccessibleContent>
         )}
@@ -525,7 +535,7 @@ class App extends Component {
         width="18.75rem"
       >
         <View display="block" textAlign="end" margin="xx-small x-small none">
-          <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+          <EmotionThemeProvider theme={instructure}>
             <IconButton
               renderIcon={IconXSolid}
               screenReaderLabel="Close Navigation"
@@ -536,7 +546,7 @@ class App extends Component {
               color="secondary"
               size="medium"
             />
-          </ApplyTheme>
+          </EmotionThemeProvider>
         </View>
         <Header
           name={name === 'instructure-ui' ? 'Instructure UI' : name}
@@ -553,7 +563,7 @@ class App extends Component {
     )
 
     return layout !== 'small' ? (
-      <nav className={styles.inlineNavigation}>{navContent}</nav>
+      <nav css={this.props.styles.inlineNavigation}>{navContent}</nav>
     ) : (
       <Tray label="Navigation" open={showMenu} onDismiss={this.handleMenuClose}>
         {navContent}
@@ -566,20 +576,21 @@ class App extends Component {
     const { showMenu, layout } = this.state
 
     return (
-      <div className={styles.root}>
+      <div css={this.props.styles.app}>
+        <Global styles={this.props.styles.appGlobalStyles} />
         {showMenu && layout === 'small' && (
           <Mask onClick={this.handleMenuClose} />
         )}
         {this.renderNavigation()}
         <div
-          className={styles.content}
+          css={this.props.styles.content}
           label={key || this.props.library.name}
           role="main"
           ref={this.handleContentRef}
         >
           {!showMenu && (
-            <div className={styles.hamburger}>
-              <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+            <div css={this.props.styles.hamburger}>
+              <EmotionThemeProvider theme={instructure}>
                 <IconButton
                   onClick={this.handleMenuOpen}
                   elementRef={this.handleMenuTriggerRef}
@@ -587,7 +598,7 @@ class App extends Component {
                   screenReaderLabel="Open Navigation"
                   shape="circle"
                 />
-              </ApplyTheme>
+              </EmotionThemeProvider>
             </div>
           )}
 

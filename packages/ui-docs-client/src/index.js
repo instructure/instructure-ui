@@ -47,7 +47,7 @@ function renderDocsClient(data, element) {
 
   ReactDOM.render(
     <EmotionThemeProvider theme={canvas}>
-      <App {...data} />,
+      <App {...data} />
     </EmotionThemeProvider>,
     element
   )

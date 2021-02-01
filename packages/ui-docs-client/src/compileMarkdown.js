@@ -40,6 +40,8 @@ import { Heading } from './Heading'
 import { Link } from './Link'
 
 import { trimIndent } from './trimIndent'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import { instructure } from '@instructure/ui-themes'
 
 /* eslint-disable react/prop-types, react/display-name */
 const elements = {
@@ -263,9 +265,7 @@ function createRenderer() {
             code: matter.content,
             render: (_el) => {
               el = theme ? (
-                <ApplyTheme theme={ApplyTheme.generateTheme(theme)}>
-                  {_el}
-                </ApplyTheme>
+                <EmotionThemeProvider theme={theme}>{_el}</EmotionThemeProvider>
               ) : (
                 _el
               )

@@ -23,13 +23,14 @@
  */
 
 import React from 'react'
-import { ApplyTheme } from '@instructure/ui-themeable'
 import { Link as UILink } from '@instructure/ui-link'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import { instructure } from '@instructure/ui-themes'
 
 const Link = (props) => (
-  <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+  <EmotionThemeProvider theme={instructure}>
     <UILink {...props} />
-  </ApplyTheme>
+  </EmotionThemeProvider>
 )
 
 export default Link

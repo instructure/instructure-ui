@@ -142,7 +142,7 @@ class Preview extends Component {
 
       if (themeKey && themes[themeKey]) {
         elToRender = (
-          <ApplyTheme
+          <ApplyTheme // TODO convert this to Emotion
             theme={theme}
             immutable={themes[themeKey].resource.immutable}
           >

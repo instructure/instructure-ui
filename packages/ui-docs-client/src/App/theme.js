@@ -22,32 +22,39 @@
  * SOFTWARE.
  */
 
-export default function ({
-  colors,
-  typography,
-  stacking,
-  transitions,
-  borders,
-  shadows,
-  spacing
-}) {
-  return {
-    background: colors.backgroundLightest,
-    color: colors.textDarkest,
-    fontFamily: typography.fontFamily,
-    fontFamilyMonospace: typography.fontFamilyMonospace,
-    lineHeight: typography.lineHeight,
-    fontWeight: typography.fontWeightNormal,
-    codeBorderRadius: borders.radiusSmall,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { spacing, borders, colors, stacking, shadows, typography } = theme
+
+  const componentVariables = {
+    background: colors?.backgroundLightest,
+    color: colors?.textDarkest,
+    fontFamily: typography?.fontFamily,
+    fontFamilyMonospace: typography?.fontFamilyMonospace,
+    lineHeight: typography?.lineHeight,
+    fontWeight: typography?.fontWeightNormal,
+    codeBorderRadius: borders?.radiusSmall,
     codeBackground: '#eee',
-    shadow: shadows.resting,
-    quotePadding: `${spacing.xSmall} ${spacing.medium}`,
-    quoteMargin: `${spacing.large} ${spacing.medium}`,
-    borderWidth: borders.widthLarge,
-    borderStyle: borders.style,
-    borderColor: colors.tiara,
-    menuToggleZIndex: stacking.above,
-    navBorderColor: colors.borderMedium,
-    navBorderWidth: borders.widthSmall
+    shadow: shadows?.resting,
+    quotePadding: `${spacing?.xSmall} ${spacing?.medium}`,
+    quoteMargin: `${spacing?.large} ${spacing?.medium}`,
+    borderWidth: borders?.widthLarge,
+    borderStyle: borders?.style,
+    borderColor: colors?.tiara,
+    menuToggleZIndex: stacking?.above,
+    navBorderColor: colors?.borderMedium,
+    navBorderWidth: borders?.widthSmall
+  }
+
+  return {
+    ...componentVariables,
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
