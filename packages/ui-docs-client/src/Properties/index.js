@@ -67,9 +67,14 @@ class Properties extends Component {
     return Object.keys(props)
       .filter((name) => {
         const description = props[name].description || ''
+
+        // `styles` and `makeStyles` are added by withStyle decorator,
+        // shouldn't be listed
         return (
           description.indexOf('@private') < 0 &&
-          description.indexOf('@deprecated') < 0
+          description.indexOf('@deprecated') < 0 &&
+          name !== 'styles' &&
+          name !== 'makeStyles'
         )
       })
       .map((name) => {
