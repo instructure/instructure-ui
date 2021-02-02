@@ -22,32 +22,51 @@
  * SOFTWARE.
  */
 
-export default function ({
-  borders,
-  colors,
-  spacing,
-  shadows,
-  stacking,
-  typography
-}) {
-  return {
-    shadow: shadows.depth2,
-    captionFontFamily: typography.fontFamily,
-    captionFontSize: typography.fontSizeSmall,
-    captionBackground: colors.porcelain,
-    captionPadding: spacing.small,
-    captionColor: colors.oxford,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const {
+    borders,
+    colors,
+    spacing,
+    shadows,
+    stacking,
+    typography,
+    key: themeName
+  } = theme
+
+  const themeSpecificStyles = {}
+
+  const componentVariables = {
+    shadow: shadows?.depth2,
+    captionFontFamily: typography?.fontFamily,
+    captionFontSize: typography?.fontSizeSmall,
+    captionBackground: colors?.porcelain,
+    captionPadding: spacing?.small,
+    captionColor: colors?.oxford,
     borderWidth: borders.widthMedium,
-    borderColor: colors.oxford,
-    contentPadding: spacing.medium,
-    contentBackground: colors.white,
-    yesColor: colors.shamrock,
-    noColor: colors.crimson,
-    a11yColor: colors.electric,
-    iconColor: colors.white,
-    iconContainerStacking: stacking.above,
-    iconContainerSize: spacing.large,
-    floatMargin: spacing.large,
-    floatMarginSmall: spacing.xxSmall
+    borderColor: colors?.oxford,
+    contentPadding: spacing?.medium,
+    contentBackground: colors?.white,
+    yesColor: colors?.shamrock,
+    noColor: colors?.crimson,
+    a11yColor: colors?.electric,
+    iconColor: colors?.white,
+    iconContainerStacking: stacking?.above,
+    iconContainerSize: spacing?.large,
+    floatMargin: spacing?.large,
+    floatMarginSmall: spacing?.xxSmall
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyles[themeName],
+    ...themeOverride
   }
 }
+
+export default generateComponentTheme
