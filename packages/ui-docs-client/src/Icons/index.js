@@ -55,8 +55,8 @@ class Icons extends Component {
     packageName: PropTypes.string.isRequired
   }
 
-  constructor(props, context) {
-    super(props, context)
+  constructor(props) {
+    super(props)
 
     this.state = {
       query: '',

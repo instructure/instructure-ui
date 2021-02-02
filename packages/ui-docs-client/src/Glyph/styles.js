@@ -35,10 +35,6 @@ const generateStyle = (componentTheme, props, state) => {
       label: 'glyph',
       textAlign: 'center'
     },
-    variant: {
-      label: 'glyph__variant',
-      display: 'inline-block'
-    },
     info: {
       label: 'glyph__info',
       color: '#999',
