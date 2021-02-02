@@ -54,9 +54,8 @@ class Variant extends Component {
   }
 
   render() {
-    const { glyph, variant, name, styles } = this.props
+    const { glyph, variant, name } = this.props
     let icon
-
     if (glyph.src) {
       icon = <InlineSVG src={glyph.src} title={`${name} (${variant})`} />
     } else if (typeof glyph === 'function') {
@@ -72,16 +71,14 @@ class Variant extends Component {
     }
 
     return (
-      <div css={styles.variant}>
-        <IconButton
-          size="large"
-          onClick={this.handleClick}
-          renderIcon={icon}
-          withBorder={false}
-          withBackground={false}
-          screenReaderLabel="View Usage"
-        />
-      </div>
+      <IconButton
+        size="large"
+        onClick={this.handleClick}
+        renderIcon={icon}
+        withBorder={false}
+        withBackground={false}
+        screenReaderLabel="View Usage"
+      />
     )
   }
 }
