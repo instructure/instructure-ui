@@ -31,20 +31,10 @@
  */
 const generateStyle = (componentTheme, props, state) => {
   return {
-    icons: {
-      label: 'icons'
-    },
     header: {
       label: 'icons__header',
       maxWidth: '35rem',
       position: 'relative'
-    },
-    glyph: {
-      label: 'icons__glyph',
-      minWidth: componentTheme.glyphMinWidth,
-      flexBasis: componentTheme.glyphMinWidth,
-      flexGrow: 1,
-      margin: '0.5rem'
     },
     glyphs: {
       label: 'icons__glyphs',

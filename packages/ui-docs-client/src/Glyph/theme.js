@@ -29,13 +29,14 @@
  * @return {Object} The final theme object with the overrides and component variables
  */
 const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { borders, colors, spacing } = theme
+  const { borders, colors, spacing, breakpoints } = theme
 
   const colorCheckerboard = '#eee'
   const colorCheckerboardInverse = '#444'
 
   const componentVariables = {
     padding: spacing?.small,
+    glyphMinWidth: breakpoints?.xSmall,
     borderRadius: borders?.radiusMedium,
     backgroundColor: colors?.backgroundLightest,
     border: `${borders?.widthSmall} solid #eee`,
