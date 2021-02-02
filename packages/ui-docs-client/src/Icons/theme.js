@@ -27,7 +27,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
 
   return {
     gridMaxWidth: breakpoints?.xLarge,
-    glyphMinWidth: breakpoints?.xSmall,
     gridBreakpoint: breakpoints?.small
   }
 }

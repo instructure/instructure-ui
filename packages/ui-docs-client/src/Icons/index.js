@@ -254,14 +254,13 @@ class MyIcon extends React.Component {
   renderGlyph(name, variants) {
     const firstVariant = variants[Object.keys(variants)[0]]
     return firstVariant.deprecated ? null : (
-      <div css={this.props.styles.glyph} key={name}>
-        <Glyph
-          name={name}
-          variants={variants}
-          onClick={this.handleVariantClick}
-          rtl={this.state.rtl}
-        />
-      </div>
+      <Glyph
+        key={name}
+        name={name}
+        variants={variants}
+        onClick={this.handleVariantClick}
+        rtl={this.state.rtl}
+      />
     )
   }
 

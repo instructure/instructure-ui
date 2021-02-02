@@ -33,7 +33,11 @@ const generateStyle = (componentTheme, props, state) => {
   return {
     glyph: {
       label: 'glyph',
-      textAlign: 'center'
+      textAlign: 'center',
+      minWidth: componentTheme.glyphMinWidth,
+      flexBasis: componentTheme.glyphMinWidth,
+      flexGrow: 1,
+      margin: '0.5rem'
     },
     info: {
       label: 'glyph__info',
