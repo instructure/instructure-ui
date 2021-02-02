@@ -126,34 +126,3 @@ const generateStyle = (componentTheme, props, state) => {
 }
 
 export default generateStyle
-
-/*
-
-const converted = {
-  ".background--checkerboard, .background--checkerboard-inverse, .background--light": {
-    padding: "var(--padding)",
-    borderWidth: "var(--borderWidth)",
-    borderStyle: "solid",
-    borderColor: "var(--borderColor)",
-    borderRadius: "var(--borderRadius)",
-    backgroundColor: "var(--backgroundColorLight)"
-  },
-  ".background--checkerboard, .background--checkerboard-inverse": {
-    backgroundPosition:
-      "0 0, calc(var(--gradientCheckerboardSize) / 2) calc(var(--gradientCheckerboardSize) / 2)",
-    backgroundSize:
-      "var(--gradientCheckerboardSize) var(--gradientCheckerboardSize)"
-  },
-  ".background--checkerboard": {
-    backgroundImage:
-      "linear-gradient(var(--gradientCheckerboard)),     linear-gradient(var(--gradientCheckerboard))"
-  },
-  ".background--checkerboard-inverse": {
-    backgroundColor: "var(--backgroundColorInverse)",
-    backgroundImage:
-      "linear-gradient(var(--gradientCheckerboardInverse)),     linear-gradient(var(--gradientCheckerboardInverse))"
-  },
-  ".background--inverse": { backgroundColor: "var(--backgroundColorInverse)" },
-  ".background--none": { display: "flex", justifyContent: "center" },
-}
-*/
