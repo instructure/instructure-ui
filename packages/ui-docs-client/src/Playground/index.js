@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { themeable } from '@instructure/ui-themeable'
 import { Modal } from '@instructure/ui-modal'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -37,22 +37,16 @@ import { Flex } from '@instructure/ui-flex'
 import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconXLine } from '@instructure/ui-icons'
 
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import { Preview } from '../Preview'
 import { CodePenButton } from '../CodePenButton'
 import { LibraryPropType } from '../propTypes'
 
-import styles from './styles.css'
-import theme from './theme'
-
 /* eslint-disable max-len */
-const closeIconPath = (
-  <path
-    d="M1743.858.012L959.869 783.877 176.005.012 0 176.142l783.74 783.989L0 1743.87 176.005 1920l783.864-783.74L1743.858 1920l176.13-176.13-783.865-783.74 783.865-783.988z"
-    stroke="none"
-    strokeWidth="1"
-    fillRule="evenodd"
-  />
-)
 const codeIconPath = (
   <path d="M14,6c0-0.984-0.813-2-2-2c-0.531,0-0.994,0.193-1.38,0.58l-9.958,9.958C0.334,14.866,0,15.271,0,16s0.279,1.08,0.646,1.447  l9.974,9.973C11.006,27.807,11.469,28,12,28c1.188,0,2-1.016,2-2c0-0.516-0.186-0.986-0.58-1.38L4.8,16l8.62-8.62  C13.814,6.986,14,6.516,14,6z M31.338,14.538L21.38,4.58C20.994,4.193,20.531,4,20,4c-1.188,0-2,1.016-2,2  c0,0.516,0.186,0.986,0.58,1.38L27.2,16l-8.62,8.62C18.186,25.014,18,25.484,18,26c0,0.984,0.813,2,2,2  c0.531,0,0.994-0.193,1.38-0.58l9.974-9.973C31.721,17.08,32,16.729,32,16S31.666,14.866,31.338,14.538z" />
 )
@@ -61,9 +55,13 @@ const fullScreenIconPath = (
 )
 /* eslint-enable max-len */
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Playground extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     title: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
@@ -99,6 +97,18 @@ class Playground extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.fullscreen === true && this.state.fullscreen === false) {
+      ReactDOM.findDOMNode(this._fullScreenButton).focus() // eslint-disable-line react/no-find-dom-node
+    }
+
+    this.props.makeStyles()
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.code !== prevState.defaultCode) {
       // code prop was updated, reset defaultCode and actual code state
@@ -108,12 +118,6 @@ class Playground extends Component {
       }
     } else {
       return null
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.fullscreen === true && this.state.fullscreen === false) {
-      ReactDOM.findDOMNode(this._fullScreenButton).focus() // eslint-disable-line react/no-find-dom-node
     }
   }
 
@@ -148,11 +152,12 @@ class Playground extends Component {
   }
 
   renderEditor() {
+    const { styles } = this.props
     const { code } = this.state
 
     return (
-      <div className={styles.editor}>
-        <div className={styles.close}>
+      <div>
+        <div css={styles.close}>
           <IconButton
             size="small"
             onClick={this.handleCodeToggle}
@@ -190,6 +195,7 @@ class Playground extends Component {
   }
 
   render() {
+    const { styles } = this.props
     const { code, fullscreen, rtl } = this.state
 
     const preview = (
@@ -204,7 +210,7 @@ class Playground extends Component {
     )
 
     return (
-      <div className={styles.root}>
+      <div css={styles.playground}>
         {fullscreen ? (
           <Modal
             open
