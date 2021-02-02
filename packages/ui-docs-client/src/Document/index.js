@@ -55,14 +55,14 @@ class Document extends Component {
     styles: PropTypes.object,
     doc: DocPropType.isRequired,
     description: PropTypes.string,
-    themeObject: PropTypes.object,
+    themeVariables: PropTypes.object,
     repository: PropTypes.string,
     layout: PropTypes.string
   }
 
   static defaultProps = {
     description: undefined,
-    themeObject: {},
+    themeVariables: {},
     repository: undefined,
     layout: 'small'
   }
@@ -98,21 +98,23 @@ class Document extends Component {
   }
 
   renderTheme(doc) {
-    const { themeObject } = this.props
+    const { themeVariables } = this.props
     const generateComponentTheme = doc?.resource?.generateComponentTheme
 
-    const themeVariables = themeObject.resource
-    const theme =
+    const componentTheme =
       themeVariables &&
       typeof generateComponentTheme === 'function' &&
       generateComponentTheme(themeVariables)
 
-    return theme && Object.keys(theme).length > 0 ? (
+    return componentTheme && Object.keys(componentTheme).length > 0 ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Default Theme Variables
         </Heading>
-        <ComponentTheme theme={theme} />
+        <ComponentTheme
+          componentTheme={componentTheme}
+          themeVariables={themeVariables}
+        />
       </View>
     ) : null
   }

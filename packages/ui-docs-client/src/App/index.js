@@ -364,6 +364,8 @@ class App extends Component {
       children = parents[doc.id].children.map((childId) => docs[childId])
     }
 
+    const themeVariables = themes[themeKey].resource
+
     const description = descriptions[doc.id]
     const heading = doc.extension !== '.md' ? doc.title : ''
 
@@ -391,7 +393,7 @@ class App extends Component {
               children
             }}
             description={description || doc.description}
-            themeObject={themes[themeKey]}
+            themeVariables={themeVariables}
             repository={repository}
             layout={layout}
           />
