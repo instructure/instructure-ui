@@ -22,16 +22,26 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography, spacing, borders, stacking }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @param  {Object} themeOverride User provided overrides of the default theme mapping.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { colors, typography, spacing, borders, key: themeName } = theme
+
   const colorCheckerboard = '#eee'
   const colorCheckerboardInverse = '#444'
 
-  return {
-    padding: spacing.small,
-    borderRadius: borders.radiusMedium,
-    backgroundColorLight: colors.backgroundLightest,
-    backgroundColorInverse: colors.backgroundDarkest,
-    borderWidth: borders.widthSmall,
+  const themeSpecificStyles = {}
+
+  const componentVariables = {
+    padding: spacing?.small,
+    borderRadius: borders?.radiusMedium,
+    backgroundColorLight: colors?.backgroundLightest,
+    backgroundColorInverse: colors?.backgroundDarkest,
+    borderWidth: borders?.widthSmall,
     borderColor: '#eee',
     gradientCheckerboardSize: '1rem',
     gradientCheckerboard: `
@@ -49,10 +59,18 @@ export default function ({ colors, typography, spacing, borders, stacking }) {
       ${colorCheckerboardInverse} 75%,
       ${colorCheckerboardInverse}`,
     fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
-    fontSizeError: typography.fontSizeSmall,
-    backgroundError: colors.backgroundDanger,
-    colorError: colors.textLightest,
-    toolbarColor: colors.textLightest,
+    fontSizeError: typography?.fontSizeSmall,
+    backgroundError: colors?.backgroundDanger,
+    colorError: colors?.textLightest,
+    toolbarColor: colors?.textLightest,
     toolbarBackground: '#0084D1'
   }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyles[themeName],
+    ...themeOverride
+  }
 }
+
+export default generateComponentTheme
