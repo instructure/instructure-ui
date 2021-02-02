@@ -23,24 +23,38 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
- * @return {Object} The final theme object with the overrides and component variables
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
-  const { colors } = theme
-
+const generateStyle = (componentTheme, props, state) => {
   return {
-    colorBrand: colors?.backgroundBrand,
-    colorDanger: colors?.backgroundDanger,
-    colorAlert: colors?.inaccessibleAlert || colors?.backgroundAlert,
-    colorWarning: colors?.inaccessibleWarning || colors?.backgroundWarning,
-    colorFaceSuccess: colors?.inaccessibleAlert || colors?.backgroundAlert,
-    colorFaceFailure: colors?.inaccessibleWarning || colors?.backgroundWarning,
-    colorFeatures: colors?.backgroundDarkest,
-    ...themeOverride
+    icons: {
+      label: 'icons'
+    },
+    header: {
+      label: 'icons__header',
+      maxWidth: '35rem',
+      position: 'relative'
+    },
+    glyph: {
+      label: 'icons__glyph',
+      minWidth: componentTheme.glyphMinWidth,
+      flexBasis: componentTheme.glyphMinWidth,
+      flexGrow: 1,
+      margin: '0.5rem'
+    },
+    glyphs: {
+      label: 'icons__glyphs',
+      display: 'flex',
+      maxWidth: componentTheme.gridMaxWidth,
+      flexWrap: 'wrap',
+      margin: '0 auto',
+      paddingTop: '1rem'
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

@@ -22,10 +22,14 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, spacing, breakpoints }) {
+const generateComponentTheme = (theme, themeOverride = {}) => {
+  const { breakpoints } = theme
+
   return {
-    gridMaxWidth: breakpoints.xLarge,
-    glyphMinWidth: breakpoints.xSmall,
-    gridBreakpoint: breakpoints.small
+    gridMaxWidth: breakpoints?.xLarge,
+    glyphMinWidth: breakpoints?.xSmall,
+    gridBreakpoint: breakpoints?.small
   }
 }
+
+export default generateComponentTheme
