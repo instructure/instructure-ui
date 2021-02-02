@@ -35,8 +35,8 @@
 const generateStyle = (componentTheme, props, state) => {
   const commonStyles = {
     position: 'absolute',
-    top: '0',
-    insetInlineStart: '0',
+    top: 0,
+    insetInlineStart: 0,
     width: '100%',
     height: '100%'
   }
