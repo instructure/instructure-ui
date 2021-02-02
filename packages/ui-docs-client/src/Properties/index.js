@@ -22,26 +22,39 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import { Table } from '@instructure/ui-table'
+
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
 
 import { compileMarkdown } from '../compileMarkdown'
 
-import styles from './styles.css'
-import theme from './theme'
-
-@themeable(theme, styles)
+@withStyle(generateStyle, null)
 class Properties extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     props: PropTypes.object.isRequired,
     layout: PropTypes.string
   }
 
   static defaultProps = {
     layout: 'small'
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   unquote(string) {
@@ -90,8 +103,10 @@ class Properties extends Component {
   }
 
   renderDefault(prop) {
+    const { styles } = this.props
+
     if (prop.required) {
-      return <span className={styles.required}>Required</span>
+      return <span css={styles.required}>Required</span>
     } else if (prop.defaultValue) {
       return <code>{this.unquote(prop.defaultValue.value)}</code>
     } else {
@@ -111,6 +126,7 @@ class Properties extends Component {
   }
 
   renderEnum(prop) {
+    const { styles } = this.props
     const { type } = prop
 
     if (!type || type.name !== 'enum') {
@@ -122,20 +138,21 @@ class Properties extends Component {
     }
 
     const values = type.value.map(({ value }) => (
-      <li className={styles.listItem} key={value}>
+      <li css={styles.listItem} key={value}>
         <code>{this.unquote(value)}</code>
       </li>
     ))
 
     return (
       <span>
-        <span className={styles.oneOf}>One of:</span>{' '}
-        <ul className={styles.list}>{values}</ul>
+        <span css={styles.oneOf}>One of:</span>{' '}
+        <ul css={styles.list}>{values}</ul>
       </span>
     )
   }
 
   renderUnion(prop) {
+    const { styles } = this.props
     const { type } = prop
 
     if (!type || type.name !== 'union') {
@@ -145,23 +162,24 @@ class Properties extends Component {
       return <span>{type.value}</span>
     }
     const values = type.value.map((value) => (
-      <li className={styles.listItem} key={value.name}>
+      <li css={styles.listItem} key={value.name}>
         <code>{this.renderType(value)}</code>
       </li>
     ))
     return (
       <span>
-        <span className={styles.oneOf}>One of type:</span>{' '}
-        <ul className={styles.list}>{values}</ul>
+        <span css={styles.oneOf}>One of type:</span>{' '}
+        <ul css={styles.list}>{values}</ul>
       </span>
     )
   }
 
   render() {
+    const { styles } = this.props
     const { layout } = this.props
 
     return (
-      <div className={styles.root}>
+      <div css={styles.properties}>
         <Table
           caption="Component Properties"
           layout={layout === 'small' ? 'stacked' : 'auto'}
