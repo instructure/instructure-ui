@@ -23,10 +23,8 @@
  */
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const SingleEntryPlugin = require('webpack/lib/SingleEntryPlugin')
-const path = require('path')
 
 const getOptions = require('./utils/getOptions')
 
@@ -64,15 +62,6 @@ DocsPlugin.prototype.apply = function (compiler) {
       defer: ['ui-docs'] // to ensure that globals loads first
     })
   )
-
-  if (options.favicon) {
-    compiler.apply(
-      new FaviconsWebpackPlugin({
-        logo: path.resolve(options.context, options.favicon),
-        title: options.title
-      })
-    )
-  }
 }
 
 module.exports = DocsPlugin
