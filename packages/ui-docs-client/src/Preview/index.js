@@ -22,26 +22,30 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-import classnames from 'classnames'
 
 import { transform } from '@babel/standalone'
 
 import { ApplyTextDirection } from '@instructure/ui-i18n'
-import { themeable, ApplyTheme } from '@instructure/ui-themeable'
+import { EmotionThemeProvider, withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { compileAndRenderExample } from '../compileAndRenderExample'
 
-import styles from './styles.css'
-import theme from './theme'
-
 let _createElement
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Preview extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     code: PropTypes.string.isRequired,
     render: PropTypes.bool,
     language: PropTypes.string.isRequired,
@@ -84,15 +88,17 @@ class Preview extends Component {
     if (this.props.code) {
       this.executeCode(this.props.code)
     }
+    this.props.makeStyles()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       this.props.code !== prevProps.code ||
       this.props.rtl !== prevProps.rtl
     ) {
       this.executeCode(this.props.code)
     }
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -125,7 +131,6 @@ class Preview extends Component {
 
     const render = (el) => {
       const { themeKey, themes } = this.context
-      const theme = ApplyTheme.generateTheme(themeKey)
 
       let elToRender = (
         <ApplyTextDirection
@@ -141,13 +146,12 @@ class Preview extends Component {
       )
 
       if (themeKey && themes[themeKey]) {
+        const theme = themes[themeKey].resource
+
         elToRender = (
-          <ApplyTheme // TODO convert this to Emotion
-            theme={theme}
-            immutable={themes[themeKey].resource.immutable}
-          >
+          <EmotionThemeProvider theme={theme}>
             {elToRender}
-          </ApplyTheme>
+          </EmotionThemeProvider>
         )
       }
 
@@ -187,20 +191,13 @@ class Preview extends Component {
   }
 
   render() {
-    const classes = {
-      [styles.root]: true,
-      [styles.error]: this.state.error,
-      [styles.fullscreen]: this.props.fullscreen,
-      [styles.frameless]: this.props.frameless,
-      [styles[`background--${this.props.background}`]]: true
-    }
+    const { styles } = this.props
+    const { error } = this.state
 
     return (
-      <div className={classnames(classes)}>
+      <div css={error ? [styles.previewError] : [styles.preview]}>
         {this.renderContent()}
-        {this.state.error && (
-          <pre className={styles.error}>{this.state.error}</pre>
-        )}
+        {error && <pre css={styles.error}>{error}</pre>}
       </div>
     )
   }

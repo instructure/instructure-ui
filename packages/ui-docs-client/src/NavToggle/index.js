@@ -25,7 +25,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ApplyTheme } from '@instructure/ui-themeable'
 import { ToggleDetails } from '@instructure/ui-toggle-details'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
