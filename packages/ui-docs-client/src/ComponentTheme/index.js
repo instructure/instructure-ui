@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Table } from '@instructure/ui-table'
@@ -37,16 +37,12 @@ import generateStyle from './styles'
 @withStyle(generateStyle, null)
 class ComponentTheme extends Component {
   static propTypes = {
-    theme: PropTypes.array.isRequired,
+    componentTheme: PropTypes.object.isRequired,
+    themeVariables: PropTypes.object.isRequired,
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object
-  }
-
-  static contextTypes = {
-    themeKey: PropTypes.string,
-    themes: PropTypes.object
   }
 
   mapColors(colorKey) {
@@ -61,16 +57,14 @@ class ComponentTheme extends Component {
   }
 
   renderRows() {
-    const { theme } = this.props
-    const { themes, themeKey } = this.context
-    const variables = themes[themeKey].resource
-    const colorKey = variables.colors.values
-      ? variables.colors.values
-      : variables.colors
+    const { componentTheme, themeVariables } = this.props
+    const colorKey = themeVariables.colors.values
+      ? themeVariables.colors.values
+      : themeVariables.colors
     const map = this.mapColors(colorKey)
 
-    return Object.keys(theme).map((name) => {
-      const value = theme[name] || 'undefined'
+    return Object.keys(componentTheme).map((name) => {
+      const value = componentTheme[name] || 'undefined'
       const color = value.toString().charAt(0) === '#' ? map[value] : null
 
       return (
@@ -103,8 +97,10 @@ class ComponentTheme extends Component {
   }
 
   render() {
-    return this.props.theme && Object.keys(this.props.theme).length > 0 ? (
-      <div css={this.props.styles.componentTheme}>
+    const { componentTheme, styles } = this.props
+
+    return componentTheme && Object.keys(componentTheme).length > 0 ? (
+      <div css={styles.componentTheme}>
         <Table caption="Component theme">
           <Table.Head>
             <Table.Row>
