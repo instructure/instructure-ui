@@ -50,7 +50,6 @@ tags: form, field
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  label: 'renderLabel',
   required: 'isRequired',
   inline: 'display'
 })
@@ -169,10 +168,6 @@ class TextInput extends Component {
      * __Deprecated - use `renderAfterInput`__
      */
     icon: PropTypes.func,
-    /**
-     * __Deprecated - use `renderLabel`__
-     */
-    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
      * __Deprecated - use `isRequired`__
      */
@@ -354,7 +349,6 @@ class TextInput extends Component {
       width,
       inline,
       display,
-      label,
       renderLabel,
       renderBeforeInput,
       renderAfterInput,
@@ -369,7 +363,7 @@ class TextInput extends Component {
     return (
       <FormField
         id={this.id}
-        label={callRenderProp(renderLabel || label)}
+        label={callRenderProp(renderLabel)}
         messagesId={this._messagesId}
         messages={messages}
         inline={display === 'inline-block' || inline}
