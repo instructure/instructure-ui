@@ -70,7 +70,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  allowRepeatFileSelection: 'shouldAllowRepeats',
   allowMultiple: 'shouldAllowMultiple'
 })
 @testable()
@@ -183,10 +182,6 @@ class FileDrop extends Component {
     /* eslint-disable react/require-default-props */
 
     /**
-     * __deprecated: use `shouldAllowRepeats`__
-     */
-    allowRepeatFileSelection: PropTypes.bool,
-    /**
      * __deprecated: use `shouldAllowMultiple`__
      */
     allowMultiple: PropTypes.bool,
@@ -270,11 +265,6 @@ class FileDrop extends Component {
 
   get interaction() {
     return getInteraction({ props: this.props })
-  }
-
-  get shouldAllowRepeats() {
-    // TODO: no longer nec. when `allowRepeatFileSelection` is removed
-    return this.props.allowRepeatFileSelection || this.props.shouldAllowRepeats
   }
 
   get shouldAllowMultiple() {
@@ -452,7 +442,7 @@ class FileDrop extends Component {
   }
 
   handleClick = (e) => {
-    if (this.fileInputEl.value && this.shouldAllowRepeats) {
+    if (this.fileInputEl.value && this.props.shouldAllowRepeats) {
       this.fileInputEl.value = null
     }
 
@@ -468,7 +458,7 @@ class FileDrop extends Component {
 
   handleKeyDown = (e) => {
     if (this.state.isFocused && keyEventIsClickButton(e)) {
-      if (this.shouldAllowRepeats) {
+      if (this.props.shouldAllowRepeats) {
         this.fileInputEl.value = null
       }
       // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
