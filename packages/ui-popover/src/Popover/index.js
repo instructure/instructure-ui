@@ -43,7 +43,6 @@ import {
   handleMouseOverOut
 } from '@instructure/ui-dom-utils'
 import {
-  ComponentIdentifier,
   safeCloneElement,
   callRenderProp,
   deprecated
@@ -68,7 +67,6 @@ tags: overlay, portal, dialog
   label: 'screenReaderLabel',
   trackPosition: 'shouldTrackPosition',
   alignArrow: 'shouldAlignArrow',
-  onShow: 'onShowContent',
   onDismiss: 'onHideContent',
   onToggle: 'onShowContent/onHideContent'
 })
@@ -281,10 +279,6 @@ class Popover extends Component {
      * __Deprecated - use `shouldTrackPosition`__
      */
     trackPosition: PropTypes.bool,
-    /**
-     * __Deprecated - use `onShowContent`__
-     */
-    onShow: PropTypes.func,
     /**
      * __Deprecated - use `onHideContent`__
      */
@@ -624,9 +618,6 @@ class Popover extends Component {
       ...this.computeOffsets(placement)
     })
     this.props.onPositioned(position)
-    if (typeof this.props.onShow === 'function') {
-      this.props.onShow(position)
-    }
   }
 
   handlePositionChanged = (position) => {
