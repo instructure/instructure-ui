@@ -67,8 +67,7 @@ tags: overlay, portal, dialog
   label: 'screenReaderLabel',
   trackPosition: 'shouldTrackPosition',
   alignArrow: 'shouldAlignArrow',
-  onDismiss: 'onHideContent',
-  onToggle: 'onShowContent/onHideContent'
+  onDismiss: 'onHideContent'
 })
 @testable()
 @bidirectional()
@@ -282,11 +281,7 @@ class Popover extends Component {
     /**
      * __Deprecated - use `onHideContent`__
      */
-    onDismiss: PropTypes.func,
-    /**
-     * __Deprecated - use `onShowContent` and `onHideContent`__
-     */
-    onToggle: PropTypes.func
+    onDismiss: PropTypes.func
     /* eslint-enable react/require-default-props */
   }
 
@@ -502,19 +497,10 @@ class Popover extends Component {
       this.setState({ isShowingContent: true })
     }
     this.props.onShowContent(event)
-    if (typeof this.props.onToggle === 'function') {
-      this.props.onToggle(true)
-    }
   }
 
   hide = (event, documentClick = false) => {
-    const {
-      onHideContent,
-      isShowingContent,
-      show,
-      onToggle,
-      onDismiss
-    } = this.props
+    const { onHideContent, isShowingContent, show, onDismiss } = this.props
 
     if (
       typeof isShowingContent === 'undefined' &&
@@ -536,9 +522,6 @@ class Popover extends Component {
       if (typeof onDismiss === 'function') {
         onDismiss(event, documentClick)
       }
-    }
-    if (typeof onToggle === 'function') {
-      onToggle(false)
     }
   }
 

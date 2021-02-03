@@ -2,20 +2,6 @@
 describes: Popover
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>onToggle</code> callback has been replaced by <code>onShowContent</code> and <code>onHideContent</code> When controlled, these will also be called as prompts for updating the <code>isShowingContent</code> prop.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-
-```
-
 Popovers hide or show content as a result of user interaction, such as clicking, hovering, or focusing. When opened, the content remains connected to the element that triggered it. If you only need to display a small amount of text-only content, you might consider using a [Tooltip](#Tooltip). If you need to display a larger amount of content, a [Tray](#Tray) could be a better choice.
 
 #### Uncontrolled Popover
