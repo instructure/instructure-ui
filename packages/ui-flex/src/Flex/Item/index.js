@@ -27,7 +27,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -40,9 +40,6 @@ id: Flex.Item
 ---
 **/
 @withStyle(generateStyle)
-@deprecated('8.0.0', {
-  shrink: 'shouldShrink'
-})
 class Item extends Component {
   componentDidMount() {
     this.props.makeStyles()
@@ -117,13 +114,7 @@ class Item extends Component {
     /**
      * Places dashed lines around the component's borders to help debug your layout
      */
-    withVisualDebug: PropTypes.bool,
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use 'shouldShrink'__
-     */
-    shrink: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    withVisualDebug: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 
