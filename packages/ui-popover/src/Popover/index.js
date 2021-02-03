@@ -61,7 +61,6 @@ tags: overlay, portal, dialog
 ---
 **/
 @deprecated('8.0.0', {
-  variant: 'color',
   label: 'screenReaderLabel',
   trackPosition: 'shouldTrackPosition',
   alignArrow: 'shouldAlignArrow',
@@ -252,10 +251,6 @@ class Popover extends Component {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 
     /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `color`__
-     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
     /**
      * __Deprecated - use `shouldAlignArrow`__
      */
@@ -688,12 +683,7 @@ class Popover extends Component {
 
     if (this.shown || this.props.shouldRenderOffscreen) {
       let ViewElement
-      let color = this.props.variant
-      if (color) {
-        color = color === 'inverse' ? 'primary-inverse' : 'primary'
-      } else {
-        color = this.props.color
-      }
+      let color = this.props.color
 
       let viewProps = {
         ref: (c) => (this._view = c),
