@@ -11,9 +11,6 @@ guidelines: true
     <Figure.Item>
       The <code>onToggle</code> callback has been replaced by <code>onShowContent</code> and <code>onHideContent</code> When controlled, these will also be called as prompts for updating the <code>isShowingContent</code> prop.
     </Figure.Item>
-    <Figure.Item>
-      The <code>onShow</code> callback has been renamed to <code>onPositioned</code>.
-    </Figure.Item>
   </Figure>
 </Guidelines>
 
