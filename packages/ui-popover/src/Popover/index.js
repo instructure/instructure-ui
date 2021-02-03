@@ -55,12 +55,6 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
-@deprecated('8.0.0', null, "Use Popover's `renderTrigger` prop instead.")
-@testable()
-class PopoverTrigger extends ComponentIdentifier {
-  static displayName = 'PopoverTrigger'
-}
-
 @deprecated('8.0.0', null, "Use Popover's `children` instead.")
 @testable()
 class PopoverContent extends ComponentIdentifier {
@@ -87,7 +81,6 @@ tags: overlay, portal, dialog
 @testable()
 @bidirectional()
 class Popover extends Component {
-  static Trigger = PopoverTrigger
   static Content = PopoverContent
 
   static propTypes = {
@@ -654,10 +647,7 @@ class Popover extends Component {
   }
 
   renderTrigger() {
-    let trigger = ComponentIdentifier.pick(Popover.Trigger, this.props.children)
-    if (!trigger) {
-      trigger = callRenderProp(this.props.renderTrigger)
-    }
+    let trigger = callRenderProp(this.props.renderTrigger)
 
     if (trigger) {
       const { on, shouldContainFocus } = this.props
@@ -831,4 +821,4 @@ class Popover extends Component {
 }
 
 export default Popover
-export { Popover, PopoverTrigger, PopoverContent }
+export { Popover, PopoverContent }
