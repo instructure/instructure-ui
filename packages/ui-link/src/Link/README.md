@@ -2,19 +2,6 @@
 describes: Link
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>variant</code> prop will be removed. Use <code>color: ['link', 'link-inverse']</code> instead.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 ### Where to use Link
 
 `Link` is intended for presenting actions **inline with other content**, such as within headings or sentences. Typically those actions navigate the user to a different view.
