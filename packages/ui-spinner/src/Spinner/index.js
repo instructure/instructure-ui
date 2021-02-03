@@ -26,11 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import {
-  callRenderProp,
-  deprecated,
-  omitProps
-} from '@instructure/ui-react-utils'
+import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
@@ -47,7 +43,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', { title: 'renderTitle' })
 @testable()
 class Spinner extends Component {
   static propTypes = {
@@ -74,14 +69,7 @@ class Spinner extends Component {
      */
     margin: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
-    as: PropTypes.elementType,
-
-    /**
-     * __Deprecated - use `renderTitle` instead__
-     */
-    /* eslint-disable react/require-default-props */
-    title: PropTypes.string
-    /* eslint-enable react/require-default-props */
+    as: PropTypes.elementType
   }
 
   static defaultProps = {
@@ -126,7 +114,7 @@ class Spinner extends Component {
       Spinner
     )
 
-    const hasTitle = this.props.renderTitle || this.props.title
+    const hasTitle = this.props.renderTitle
     error(
       hasTitle,
       '[Spinner] The renderTitle prop is necessary for screen reader support.'
