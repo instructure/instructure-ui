@@ -30,6 +30,7 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
 import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
