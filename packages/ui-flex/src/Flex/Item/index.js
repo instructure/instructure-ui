@@ -42,8 +42,7 @@ id: Flex.Item
 @withStyle(generateStyle)
 @deprecated('8.0.0', {
   grow: 'shouldGrow',
-  shrink: 'shouldShrink',
-  visualDeug: 'withVisualDebug'
+  shrink: 'shouldShrink'
 })
 class Item extends Component {
   componentDidMount() {
@@ -128,11 +127,7 @@ class Item extends Component {
     /**
      * __Deprecated - use 'shouldShrink'__
      */
-    shrink: PropTypes.bool,
-    /**
-     * __Deprecated - use 'withVisualDebug'__
-     */
-    visualDebug: PropTypes.bool
+    shrink: PropTypes.bool
     /* eslint-enable react/require-default-props */
   }
   /* eslint-enable react/require-default-props */
@@ -159,7 +154,6 @@ class Item extends Component {
       padding,
       overflowX,
       overflowY,
-      visualDebug,
       styles
     } = this.props
 
@@ -179,7 +173,7 @@ class Item extends Component {
         padding={padding}
         overflowX={overflowX}
         overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
-        withVisualDebug={withVisualDebug || visualDebug}
+        withVisualDebug={withVisualDebug}
       >
         {children}
       </View>
