@@ -14,9 +14,6 @@ guidelines: true
     <Figure.Item>
       MetricGroup accepts <code>Metric</code> as children <strong>but</strong> does not require dot notation.
     </Figure.Item>
-    <Figure.Item>
-      <code>MetricsList.Item</code> will be removed from <code>ui-metric</code> in version 8.0.0. Use <Link href="#Metric">Metric</Link> instead.
-    </Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -28,9 +25,9 @@ The MetricsList component displays MetricsListItems (value + label) in rows.
 example: true
 ---
 <MetricsList>
-  <MetricsList.Item label="Grade" value="80%" />
-  <MetricsList.Item label="Late" value="4" />
-  <MetricsList.Item label="Missing" value="2" />
+  <Metric label="Grade" value="80%" />
+  <Metric label="Late" value="4" />
+  <Metric label="Missing" value="2" />
 </MetricsList>
 ```
 
@@ -40,19 +37,19 @@ example: true
 ---
 <ContextView padding="small" placement="center start">
   <MetricsList>
-    <MetricsList.Item
+    <Metric
       label={<div>Average Grade<div>High 33%, Low 10%</div></div>}
       value="25%"
     />
-    <MetricsList.Item
+    <Metric
       label={<div>Average Page Views</div>}
       value="12"
     />
-    <MetricsList.Item
+    <Metric
       label={<div>Missing Submissions</div>}
       value="5"
     />
-    <MetricsList.Item
+    <Metric
       label={<div>Late Submissions</div>}
       value="11"
     />

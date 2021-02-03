@@ -24,8 +24,9 @@
 import { locator } from '@instructure/ui-test-locator'
 
 import { MetricsList } from './index'
+import { Metric } from '../Metric'
 
-const MetricsListItemLocator = locator(MetricsList.Item.selector)
+const MetricsListItemLocator = locator(Metric.selector)
 
 export const MetricsListLocator = locator(MetricsList.selector, {
   findAllItems: (...args) => {
