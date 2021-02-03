@@ -31,7 +31,6 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
-  deprecated,
   getElementType,
   getInteraction,
   matchComponentTypes,
@@ -51,9 +50,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  variant: 'color'
-})
 @testable()
 class Link extends Component {
   static propTypes = {
@@ -122,12 +118,6 @@ class Link extends Component {
      * Fires when the Link loses focus
      */
     onBlur: PropTypes.func,
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * __deprecated: use color__
-     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
 
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -282,7 +272,6 @@ class Link extends Component {
       renderIcon,
       iconPlacement,
       isWithinText,
-      variant,
       ...props
     } = this.props
 

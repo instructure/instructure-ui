@@ -33,9 +33,9 @@
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (componentTheme, props, state) => {
-  const { isWithinText, renderIcon, iconPlacement, variant, color } = props
+  const { isWithinText, renderIcon, iconPlacement, color } = props
   const { containsTruncateText, hasVisibleChildren, elementType } = state
-  const inverseStyle = variant === 'inverse' || color === 'link-inverse'
+  const inverseStyle = color === 'link-inverse'
 
   // If Link is a button or link, it should look clickable
   const buttonOrLinkStyle =
