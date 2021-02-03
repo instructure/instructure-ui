@@ -41,7 +41,6 @@ id: Flex.Item
 **/
 @withStyle(generateStyle)
 @deprecated('8.0.0', {
-  grow: 'shouldGrow',
   shrink: 'shouldShrink'
 })
 class Item extends Component {
@@ -120,10 +119,6 @@ class Item extends Component {
      */
     withVisualDebug: PropTypes.bool,
     /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use 'shouldGrow'__
-     */
-    grow: PropTypes.bool,
     /**
      * __Deprecated - use 'shouldShrink'__
      */
