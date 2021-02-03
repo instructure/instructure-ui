@@ -39,6 +39,7 @@ import {
   callRenderProp,
   getInteraction
 } from '@instructure/ui-react-utils'
+
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
