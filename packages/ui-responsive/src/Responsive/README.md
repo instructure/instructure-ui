@@ -67,9 +67,9 @@ example: true
       )
     } else if (matches.includes('medium') && !matches.includes('large')) {
       return (
-        <Media description="Medium breakpoint">
+        <Byline description="Medium breakpoint">
           <Avatar name="Alexander Hamilton" />
-        </Media>
+        </Byline>
       )
     } else {
       return (

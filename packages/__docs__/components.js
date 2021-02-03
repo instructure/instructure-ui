@@ -39,7 +39,7 @@ export {
   IconButton,
   ToggleButton
 } from '@instructure/ui-buttons'
-export { Byline, Media } from '@instructure/ui-byline'
+export { Byline } from '@instructure/ui-byline'
 export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
 export { Dialog } from '@instructure/ui-dialog'
