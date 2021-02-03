@@ -43,7 +43,6 @@ import {
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
-
 import generateComponentTheme from './theme'
 
 /**
@@ -194,19 +193,19 @@ class NumberInput extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles({
-      interaction: this.interaction,
-      hasFocus: this.state.hasFocus,
-      invalid: this.invalid
-    })
+    this.props.makeStyles(this.makeStyleVariables)
   }
 
   componentDidUpdate() {
-    this.props.makeStyles({
+    this.props.makeStyles(this.makeStyleVariables)
+  }
+
+  get makeStyleVariables() {
+    return {
       interaction: this.interaction,
       hasFocus: this.state.hasFocus,
       invalid: this.invalid
-    })
+    }
   }
 
   handleRef = (element) => {
