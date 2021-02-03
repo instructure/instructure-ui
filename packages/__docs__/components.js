@@ -62,7 +62,7 @@ export {
 export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
-export { MetricGroup, Metric, MetricsList } from '@instructure/ui-metric'
+export { MetricGroup, Metric } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
 export { Mask, Overlay } from '@instructure/ui-overlays'
