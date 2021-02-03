@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { TruncateText } from '@instructure/ui-truncate-text'
 import { Link } from '@instructure/ui-link'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
 /**
@@ -38,7 +38,6 @@ id: Breadcrumb.Link
 **/
 
 @testable()
-@deprecated('8.0.0', { icon: 'renderIcon' })
 class BreadcrumbLink extends Component {
   static propTypes = {
     /**
@@ -62,10 +61,6 @@ class BreadcrumbLink extends Component {
      */
     renderIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-     * __Deprecated - use renderIcon__
-     */
-    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    /**
      * Place the icon before or after the text in the Breadcrumb.Link
      */
     iconPlacement: PropTypes.oneOf(['start', 'end'])
@@ -76,19 +71,11 @@ class BreadcrumbLink extends Component {
     onClick: undefined,
     size: undefined,
     renderIcon: undefined,
-    icon: undefined,
     iconPlacement: undefined
   }
 
   render() {
-    const {
-      children,
-      href,
-      renderIcon,
-      iconPlacement,
-      onClick,
-      icon
-    } = this.props
+    const { children, href, renderIcon, iconPlacement, onClick } = this.props
 
     const props = omitProps(this.props, BreadcrumbLink.propTypes)
 
@@ -97,7 +84,7 @@ class BreadcrumbLink extends Component {
         as={this.element}
         {...props}
         href={href}
-        renderIcon={renderIcon || icon}
+        renderIcon={renderIcon}
         iconPlacement={iconPlacement}
         onClick={onClick}
         isWithinText={false}
