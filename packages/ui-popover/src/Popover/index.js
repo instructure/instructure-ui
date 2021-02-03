@@ -61,7 +61,6 @@ tags: overlay, portal, dialog
 ---
 **/
 @deprecated('8.0.0', {
-  label: 'screenReaderLabel',
   trackPosition: 'shouldTrackPosition',
   alignArrow: 'shouldAlignArrow',
   onDismiss: 'onHideContent'
@@ -255,10 +254,6 @@ class Popover extends Component {
      * __Deprecated - use `shouldAlignArrow`__
      */
     alignArrow: PropTypes.bool,
-    /**
-     * __Deprecated - use `screenReaderLabel`__
-     */
-    label: PropTypes.string,
     /**
      * __Deprecated - use `shouldTrackPosition`__
      */
@@ -663,7 +658,7 @@ class Popover extends Component {
       content = (
         <Dialog
           open={this.shown}
-          label={this.props.screenReaderLabel || this.props.label}
+          label={this.props.screenReaderLabel}
           ref={(el) => (this._dialog = el)}
           display="block"
           onBlur={this.handleDialogBlur}
