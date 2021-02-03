@@ -50,7 +50,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  wrapItems: 'wrap',
   visualDebug: 'withVisualDebug'
 })
 class Flex extends Component {
@@ -141,10 +140,6 @@ class Flex extends Component {
      */
     withVisualDebug: PropTypes.bool,
     /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use 'wrap'__
-     */
-    wrapItems: PropTypes.bool,
     /**
      * __Deprecated - use 'withVisualDebug'__
      */
