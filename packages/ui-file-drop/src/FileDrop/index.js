@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
@@ -34,7 +34,6 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import {
   callRenderProp,
-  deprecated,
   passthroughProps,
   getInteraction
 } from '@instructure/ui-react-utils'
@@ -69,9 +68,6 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  allowMultiple: 'shouldAllowMultiple'
-})
 @testable()
 class FileDrop extends Component {
   static propTypes = {
@@ -179,15 +175,6 @@ class FileDrop extends Component {
      */
     margin: ThemeablePropTypes.spacing,
 
-    /* eslint-disable react/require-default-props */
-
-    /**
-     * __deprecated: use `shouldAllowMultiple`__
-     */
-    allowMultiple: PropTypes.bool,
-
-    /* eslint-enable react/require-default-props */
-
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
@@ -267,11 +254,6 @@ class FileDrop extends Component {
     return getInteraction({ props: this.props })
   }
 
-  get shouldAllowMultiple() {
-    // TODO: no longer nec. when `allowMultiple` is removed
-    return this.props.allowMultiple || this.props.shouldAllowMultiple
-  }
-
   get invalid() {
     return (
       this.hasMessages &&
@@ -285,7 +267,7 @@ class FileDrop extends Component {
     let list = Array.from(getEventFiles(e, this.fileInputEl))
 
     if (list.length > 1) {
-      list = this.shouldAllowMultiple ? list : [list[0]]
+      list = this.props.shouldAllowMultiple ? list : [list[0]]
     }
 
     if (shouldEnablePreview) {
@@ -546,7 +528,7 @@ class FileDrop extends Component {
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
           onKeyUp={this.handleKeyUp}
-          multiple={this.shouldAllowMultiple}
+          multiple={this.props.shouldAllowMultiple}
           accept={this.acceptStr()}
           onChange={this.handleChange}
           aria-describedby={this.hasMessages ? this.messagesId : null}

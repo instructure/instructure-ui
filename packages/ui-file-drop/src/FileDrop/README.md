@@ -2,22 +2,6 @@
 describes: FileDrop
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>label</code> prop is deprecated. Use <code>renderLabel</code> instead.
-    </Figure.Item>
-    <Figure.Item>
-      The <code>enablePreview</code>, <code>allowRepeatFileSelection</code>, and <code>allowMultiple</code> boolean props are deprecated. Use <code>shouldEnablePreview</code>, <code>shouldAllowRepeats</code>, and <code>shouldAllowMultiple</code>, respectively, instead.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 `FileDrop` is a consistent way to drag and drop, as well as browse your computer to upload a media file.
 
 The `isDragAccepted` and `isDragRejected` props can be used to signal to the user if
@@ -61,7 +45,6 @@ example: true
   interaction="disabled"
 />
 ```
-
 
 ### Accept
 
