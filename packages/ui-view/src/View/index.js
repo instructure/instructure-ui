@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -50,8 +51,8 @@ category: components
 ---
 @module View
 **/
-@withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
+@withStyle(generateStyle, generateComponentTheme)
 class View extends Component {
   static propTypes = {
     /**
@@ -223,10 +224,11 @@ class View extends Component {
      * layout easier
      */
     withVisualDebug: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    rtl: PropTypes.bool,
+    ltr: PropTypes.bool
   }
 
   static defaultProps = {
@@ -279,11 +281,11 @@ class View extends Component {
   }
 
   componentDidMount() {
-    this.props.makeStyles({ dir: this.dir })
+    this.props.makeStyles()
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles({ dir: this.dir })
+  componentDidUpdate() {
+    this.props.makeStyles()
 
     // Not calling getComputedStyle can save hundreds of ms in tests and production
     if (process.env.NODE_ENV === 'development' && !this.spanMarginVerified) {

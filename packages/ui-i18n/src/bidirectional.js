@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
 import PropTypes from 'prop-types'
 import { decorator } from '@instructure/ui-decorator'
 
-import { getTextDirection } from './getTextDirection'
 import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 /**
  * ---
@@ -40,7 +41,7 @@ import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
  *
  * class Example extends React.Component {
  *   render () {
- *     return this.dir === bidirectional.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
+ *     return this.props.dir === bidirectional.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
  *   }
  * }
  *
@@ -56,28 +57,38 @@ import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
  * @return {function} composes the bidirectional component.
  */
 const bidirectional = decorator((ComposedComponent) => {
-  return class BidirectionalComponent extends ComposedComponent {
+  class BidirectionalComponent extends React.Component {
     static propTypes = {
       ...ComposedComponent.propTypes,
       dir: PropTypes.oneOf(Object.values(DIRECTION))
     }
 
-    static contextType = TextDirectionContext
-
-    get dir() {
-      const context = this.context || {}
-
-      return this.props.dir || context || getTextDirection()
+    static defaultProps = {
+      ...ComposedComponent.defaultProps
     }
-
-    get rtl() {
-      return this.dir === DIRECTION.rtl
-    }
-
-    get ltr() {
-      return this.dir === DIRECTION.ltr
+    render() {
+      return (
+        <TextDirectionContext.Consumer>
+          {(dir) => (
+            <ComposedComponent
+              dir={dir}
+              rtl={dir === DIRECTION.rtl}
+              ltr={dir === DIRECTION.ltr}
+              {...this.props}
+            />
+          )}
+        </TextDirectionContext.Consumer>
+      )
     }
   }
+
+  hoistNonReactStatics(BidirectionalComponent, ComposedComponent)
+
+  if (process.env.NODE_ENV !== 'production') {
+    BidirectionalComponent.displayName = `BidirectionalComponent(${ComposedComponent.displayName})`
+  }
+
+  return BidirectionalComponent
 })
 
 bidirectional.DIRECTION = DIRECTION

@@ -349,10 +349,9 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
     minHeight,
     maxWidth,
     maxHeight,
-    withVisualDebug
+    withVisualDebug,
+    dir
   } = props
-
-  const { dir } = extraArgs
 
   const borderStyle = getBorderStyle({
     theme: componentTheme,

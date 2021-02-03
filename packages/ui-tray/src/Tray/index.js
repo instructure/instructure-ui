@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -170,10 +171,11 @@ class Tray extends Component {
      */
     shadow: PropTypes.bool,
 
-    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    rtl: PropTypes.bool,
+    ltr: PropTypes.bool
   }
 
   static defaultProps = {
@@ -219,8 +221,8 @@ class Tray extends Component {
   }
 
   get placement() {
-    const { placement } = this.props
-    return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+    const { placement, rtl } = this.props
+    return rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
   get direction() {

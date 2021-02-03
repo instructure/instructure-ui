@@ -31,7 +31,7 @@ import { ApplyTextDirection } from '../ApplyTextDirection'
 @bidirectional()
 class BidirectionalComponent extends React.Component {
   render() {
-    return <div data-dir={this.dir}>Hello World</div>
+    return <div data-dir={this.props.dir}>Hello World</div>
   }
 }
 

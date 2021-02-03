@@ -27,12 +27,11 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { ApplyTextDirection } from '../index'
 import { bidirectional } from '../../bidirectional'
-import { TextDirectionContext } from '../../TextDirectionContext'
 
 @bidirectional()
 class BidirectionalComponent extends React.Component {
   render() {
-    return <div data-dir={this.dir}>Hello world</div>
+    return <div data-dir={this.props.dir}>Hello world</div>
   }
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -70,7 +71,10 @@ class ReactPortal extends React.Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    rtl: PropTypes.bool,
+    ltr: PropTypes.bool
   }
 
   static defaultProps = {
@@ -163,6 +167,7 @@ class ReactPortal extends React.Component {
       mountNode,
       children,
       elementRef,
+      dir,
       ...props
     } = this.props
 
@@ -171,7 +176,7 @@ class ReactPortal extends React.Component {
       const node = document.createElement('span')
       const attributes = {
         ...passthroughProps(props),
-        dir: this.dir
+        dir
       }
 
       Object.keys(attributes).forEach((name) => {
