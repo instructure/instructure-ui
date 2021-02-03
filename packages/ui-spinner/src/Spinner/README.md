@@ -2,19 +2,6 @@
 describes: Spinner
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>title</code> prop will be removed. Use <code>renderTitle</code> instead.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 ### Choose from four sizes and add margin as needed
 
 The `size` prop allows you to select from `x-small`, `small`, `medium` and `large`
