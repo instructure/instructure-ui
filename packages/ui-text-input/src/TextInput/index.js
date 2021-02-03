@@ -158,13 +158,6 @@ class TextInput extends Component {
      */
     onFocus: PropTypes.func,
 
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `renderAfterInput`__
-     */
-    icon: PropTypes.func,
-    /* eslint-enable react/require-default-props */
-
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
@@ -339,11 +332,10 @@ class TextInput extends Component {
       renderAfterInput,
       messages,
       inputContainerRef,
-      icon,
       shouldNotWrap
     } = this.props
 
-    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput || icon
+    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput
 
     return (
       <FormField
@@ -373,11 +365,9 @@ class TextInput extends Component {
                   <Flex.Item shouldGrow shouldShrink>
                     {this.renderInput()}
                   </Flex.Item>
-                  {(renderAfterInput || icon) && (
+                  {renderAfterInput && (
                     <Flex.Item padding="0 small 0 0">
-                      {renderAfterInput
-                        ? callRenderProp(renderAfterInput)
-                        : callRenderProp(icon)}
+                      {callRenderProp(renderAfterInput)}
                     </Flex.Item>
                   )}
                 </Flex>
