@@ -52,7 +52,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  linkRef: 'elementRef',
   variant: 'color'
 })
 @testable()
@@ -126,10 +125,6 @@ class Link extends Component {
 
     /* eslint-disable react/require-default-props */
     /**
-     * __deprecated: use elementRef__
-     */
-    linkRef: PropTypes.func,
-    /**
      * __deprecated: use color__
      */
     variant: PropTypes.oneOf(['default', 'inverse']),
@@ -176,10 +171,9 @@ class Link extends Component {
   }
 
   handleElementRef = (el) => {
-    const { elementRef, linkRef } = this.props
+    const { elementRef } = this.props
 
     this._link = el
-    if (typeof linkRef === 'function') linkRef(el)
     if (typeof elementRef === 'function') elementRef(el)
   }
 
