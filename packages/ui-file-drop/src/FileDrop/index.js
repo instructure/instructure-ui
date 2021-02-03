@@ -70,7 +70,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  label: 'renderLabel',
   enablePreview: 'shouldEnablePreview',
   allowRepeatFileSelection: 'shouldAllowRepeats',
   allowMultiple: 'shouldAllowMultiple'
@@ -184,10 +183,6 @@ class FileDrop extends Component {
 
     /* eslint-disable react/require-default-props */
 
-    /**
-     * __deprecated: use `renderLabel`__
-     */
-    label: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
      * __deprecated: use `shouldEnablePreview`__
      */
@@ -434,9 +429,9 @@ class FileDrop extends Component {
   }
 
   renderLabel() {
-    const { label, renderLabel } = this.props
+    const { renderLabel } = this.props
 
-    return callRenderProp(label || renderLabel, {
+    return callRenderProp(renderLabel, {
       isDragAccepted: this.state.isDragAccepted,
       isDragRejected: this.state.isDragRejected,
       interaction: this.interaction
