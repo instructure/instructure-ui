@@ -29,6 +29,7 @@ import { View } from '@instructure/ui-view'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
