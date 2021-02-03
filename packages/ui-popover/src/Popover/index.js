@@ -55,12 +55,6 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 
-@deprecated('8.0.0', null, "Use Popover's `children` instead.")
-@testable()
-class PopoverContent extends ComponentIdentifier {
-  static displayName = 'PopoverContent'
-}
-
 /**
 ---
 category: components
@@ -81,8 +75,6 @@ tags: overlay, portal, dialog
 @testable()
 @bidirectional()
 class Popover extends Component {
-  static Content = PopoverContent
-
   static propTypes = {
     /**
      * Whether or not the `<Popover />` content is shown
@@ -715,10 +707,7 @@ class Popover extends Component {
   }
 
   renderContent() {
-    let content = ComponentIdentifier.pick(Popover.Content, this.props.children)
-    if (!content) {
-      content = callRenderProp(this.props.children)
-    }
+    let content = callRenderProp(this.props.children)
 
     if (this.shown && !this.isTooltip) {
       // if popover is NOT being used as a tooltip, create a Dialog
@@ -821,4 +810,4 @@ class Popover extends Component {
 }
 
 export default Popover
-export { Popover, PopoverContent }
+export { Popover }
