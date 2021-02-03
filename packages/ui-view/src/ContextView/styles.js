@@ -283,7 +283,9 @@ const generateStyle = (componentTheme, props, state) => {
         ...arrowPlacementVariant.__after,
         ...arrowBaseStyles
       }
-    }
+    },
+    arrowSize: componentTheme.arrowSize,
+    arrowBorderWidth: componentTheme.arrowBorderWidth
   }
 }
 

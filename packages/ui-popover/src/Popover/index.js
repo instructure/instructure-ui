@@ -453,8 +453,13 @@ class Popover extends Component {
 
     if ((this.props.shouldAlignArrow || this.props.alignArrow) && this._view) {
       const secondaryPlacement = parsePlacement(placement)[1]
-      const { arrowSize, arrowBorderWidth } = this._view.theme
+
+      // arrowSize and arrowBorderWidth are component theme variables
+      // declared in ContextView's styles.js
+      const { arrowSize, arrowBorderWidth } = this._view.props.styles
+
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
+
       if (secondaryPlacement === 'start') {
         offsetX = offsetAmount
       } else if (secondaryPlacement === 'end') {
