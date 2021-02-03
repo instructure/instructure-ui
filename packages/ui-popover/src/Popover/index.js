@@ -61,7 +61,6 @@ tags: overlay, portal, dialog
 ---
 **/
 @deprecated('8.0.0', {
-  defaultShow: 'defaultIsShowingContent',
   variant: 'color',
   label: 'screenReaderLabel',
   trackPosition: 'shouldTrackPosition',
@@ -254,10 +253,6 @@ class Popover extends Component {
 
     /* eslint-disable react/require-default-props */
     /**
-     * __Deprecated - use `defaultIsShowingContent` instead__
-     */
-    defaultShow: PropTypes.bool,
-    /**
      * __Deprecated - use `color`__
      */
     variant: PropTypes.oneOf(['default', 'inverse']),
@@ -333,8 +328,7 @@ class Popover extends Component {
     }
 
     if (typeof props.isShowingContent === 'undefined') {
-      this.state.isShowingContent =
-        props.defaultIsShowingContent || props.defaultShow
+      this.state.isShowingContent = props.defaultIsShowingContent
     }
 
     this._id = this.props.id || uid('Popover')
