@@ -61,7 +61,6 @@ tags: overlay, portal, dialog
 ---
 **/
 @deprecated('8.0.0', {
-  alignArrow: 'shouldAlignArrow',
   onDismiss: 'onHideContent'
 })
 @testable()
@@ -250,10 +249,6 @@ class Popover extends Component {
 
     /* eslint-disable react/require-default-props */
     /**
-     * __Deprecated - use `shouldAlignArrow`__
-     */
-    alignArrow: PropTypes.bool,
-    /**
      * __Deprecated - use `onHideContent`__
      */
     onDismiss: PropTypes.func
@@ -396,7 +391,7 @@ class Popover extends Component {
   computeOffsets(placement) {
     let { offsetX, offsetY } = this.props
 
-    if ((this.props.shouldAlignArrow || this.props.alignArrow) && this._view) {
+    if (this.props.shouldAlignArrow && this._view) {
       const secondaryPlacement = parsePlacement(placement)[1]
 
       // arrowSize and arrowBorderWidth are component theme variables
