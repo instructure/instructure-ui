@@ -70,7 +70,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  enablePreview: 'shouldEnablePreview',
   allowRepeatFileSelection: 'shouldAllowRepeats',
   allowMultiple: 'shouldAllowMultiple'
 })
@@ -184,10 +183,6 @@ class FileDrop extends Component {
     /* eslint-disable react/require-default-props */
 
     /**
-     * __deprecated: use `shouldEnablePreview`__
-     */
-    enablePreview: PropTypes.bool,
-    /**
      * __deprecated: use `shouldAllowRepeats`__
      */
     allowRepeatFileSelection: PropTypes.bool,
@@ -275,11 +270,6 @@ class FileDrop extends Component {
 
   get interaction() {
     return getInteraction({ props: this.props })
-  }
-
-  get shouldEnablePreview() {
-    // TODO: no longer nec. when `enablePreview` is removed
-    return this.props.enablePreview || this.props.shouldEnablePreview
   }
 
   get shouldAllowRepeats() {
@@ -387,8 +377,13 @@ class FileDrop extends Component {
   }
 
   handleChange = (e) => {
-    const { onDrop, onDropAccepted, onDropRejected } = this.props
-    const fileList = this.getDataTransferItems(e, this.shouldEnablePreview)
+    const {
+      onDrop,
+      onDropAccepted,
+      onDropRejected,
+      shouldEnablePreview
+    } = this.props
+    const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
 
     e.preventDefault()
