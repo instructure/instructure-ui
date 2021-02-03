@@ -61,7 +61,6 @@ tags: overlay, portal, dialog
 ---
 **/
 @deprecated('8.0.0', {
-  show: 'isShowingContent',
   defaultShow: 'defaultIsShowingContent',
   variant: 'color',
   label: 'screenReaderLabel',
@@ -255,10 +254,6 @@ class Popover extends Component {
 
     /* eslint-disable react/require-default-props */
     /**
-     * __Deprecated - use `isShowingContent` instead__
-     */
-    show: PropTypes.bool,
-    /**
      * __Deprecated - use `defaultIsShowingContent` instead__
      */
     defaultShow: PropTypes.bool,
@@ -337,10 +332,7 @@ class Popover extends Component {
       offsetY: props.offsetY
     }
 
-    if (
-      typeof props.isShowingContent === 'undefined' &&
-      typeof props.show === 'undefined'
-    ) {
+    if (typeof props.isShowingContent === 'undefined') {
       this.state.isShowingContent =
         props.defaultIsShowingContent || props.defaultShow
     }
@@ -479,10 +471,9 @@ class Popover extends Component {
   }
 
   get shown() {
-    return typeof this.props.isShowingContent === 'undefined' &&
-      typeof this.props.show === 'undefined'
+    return typeof this.props.isShowingContent === 'undefined'
       ? this.state.isShowingContent
-      : this.props.isShowingContent || this.props.show
+      : this.props.isShowingContent
   }
 
   get defaultFocusElement() {
@@ -490,22 +481,16 @@ class Popover extends Component {
   }
 
   show = (event) => {
-    if (
-      typeof this.props.isShowingContent === 'undefined' &&
-      typeof this.props.show === 'undefined'
-    ) {
+    if (typeof this.props.isShowingContent === 'undefined') {
       this.setState({ isShowingContent: true })
     }
     this.props.onShowContent(event)
   }
 
   hide = (event, documentClick = false) => {
-    const { onHideContent, isShowingContent, show, onDismiss } = this.props
+    const { onHideContent, isShowingContent, onDismiss } = this.props
 
-    if (
-      typeof isShowingContent === 'undefined' &&
-      typeof show === 'undefined'
-    ) {
+    if (typeof isShowingContent === 'undefined') {
       // uncontrolled, set state, fire callbacks
       this.setState(({ isShowingContent }) => {
         if (isShowingContent) {
@@ -516,7 +501,7 @@ class Popover extends Component {
         }
         return { isShowingContent: false }
       })
-    } else if (isShowingContent || show) {
+    } else if (isShowingContent) {
       // controlled, fire callback
       onHideContent(event, { documentClick })
       if (typeof onDismiss === 'function') {
