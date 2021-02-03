@@ -78,12 +78,7 @@ export {
   MenuItemGroup,
   MenuItemSeparator
 } from '@instructure/ui-menu'
-export {
-  MetricGroup,
-  Metric,
-  MetricsList,
-  MetricsListItem
-} from '@instructure/ui-metric'
+export { MetricGroup, Metric, MetricsList } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
 export { Navigation, AppNav } from '@instructure/ui-navigation'

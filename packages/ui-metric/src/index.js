@@ -24,4 +24,4 @@
 
 export { Metric } from './Metric'
 export { MetricGroup } from './MetricGroup'
-export { MetricsList, MetricsListItem } from './MetricsList'
+export { MetricsList } from './MetricsList'

@@ -27,7 +27,6 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { MetricsListItem } from './MetricsListItem'
 import { MetricGroup } from '../MetricGroup'
 import { Metric } from '../Metric'
 
@@ -41,16 +40,16 @@ category: components
 class MetricsList extends Component {
   static propTypes = {
     /**
-     * children of type `MetricsList.Item`
+     * children of type `Metric`
      */
-    children: ChildrenPropTypes.oneOf([MetricsListItem])
+    children: ChildrenPropTypes.oneOf([Metric])
   }
 
   static defaultProps = {
     children: null
   }
 
-  static Item = MetricsListItem
+  static Item = Metric
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
@@ -77,4 +76,4 @@ class MetricsList extends Component {
 }
 
 export default MetricsList
-export { MetricsList, MetricsListItem }
+export { MetricsList }

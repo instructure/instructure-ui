@@ -26,16 +26,16 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import { MetricsList } from '../index'
-import { MetricsListItem } from '../MetricsListItem'
+import { Metric } from '../../Metric'
 import { MetricsListLocator } from '../MetricsListLocator'
 
 describe('<MetricsList />', async () => {
   it('should render children', async () => {
     await mount(
       <MetricsList>
-        <MetricsListItem label="Grade" value="80%" />
-        <MetricsListItem label="Late" value="4" />
-        <MetricsListItem label="Missing" value="2" />
+        <Metric label="Grade" value="80%" />
+        <Metric label="Late" value="4" />
+        <Metric label="Missing" value="2" />
       </MetricsList>
     )
     const list = await MetricsListLocator.find()
@@ -46,9 +46,9 @@ describe('<MetricsList />', async () => {
   it('passes props through to MetricsList element', async () => {
     await mount(
       <MetricsList data-automation="foo">
-        <MetricsListItem label="Grade" value="80%" />
-        <MetricsListItem label="Late" value="4" />
-        <MetricsListItem label="Missing" value="2" />
+        <Metric label="Grade" value="80%" />
+        <Metric label="Late" value="4" />
+        <Metric label="Missing" value="2" />
       </MetricsList>
     )
 
@@ -62,9 +62,9 @@ describe('<MetricsList />', async () => {
     it('should meet standards', async () => {
       await mount(
         <MetricsList>
-          <MetricsListItem label="Grade" value="80%" />
-          <MetricsListItem label="Late" value="4" />
-          <MetricsListItem label="Missing" value="2" />
+          <Metric label="Grade" value="80%" />
+          <Metric label="Late" value="4" />
+          <Metric label="Missing" value="2" />
         </MetricsList>
       )
 
@@ -75,9 +75,9 @@ describe('<MetricsList />', async () => {
     it('should have role=grid with aria-readonly=true', async () => {
       await mount(
         <MetricsList>
-          <MetricsListItem label="Grade" value="80%" />
-          <MetricsListItem label="Late" value="4" />
-          <MetricsListItem label="Missing" value="2" />
+          <Metric label="Grade" value="80%" />
+          <Metric label="Late" value="4" />
+          <Metric label="Missing" value="2" />
         </MetricsList>
       )
 
@@ -91,9 +91,9 @@ describe('<MetricsList />', async () => {
     it('should have role=row', async () => {
       await mount(
         <MetricsList>
-          <MetricsListItem label="Grade" value="80%" />
-          <MetricsListItem label="Late" value="4" />
-          <MetricsListItem label="Missing" value="2" />
+          <Metric label="Grade" value="80%" />
+          <Metric label="Late" value="4" />
+          <Metric label="Missing" value="2" />
         </MetricsList>
       )
 
@@ -106,9 +106,9 @@ describe('<MetricsList />', async () => {
     it('should have role=gridcell', async () => {
       await mount(
         <MetricsList>
-          <MetricsListItem label="Grade" value="80%" />
-          <MetricsListItem label="Late" value="4" />
-          <MetricsListItem label="Missing" value="2" />
+          <Metric label="Grade" value="80%" />
+          <Metric label="Late" value="4" />
+          <Metric label="Missing" value="2" />
         </MetricsList>
       )
 
