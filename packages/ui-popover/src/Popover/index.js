@@ -61,7 +61,6 @@ tags: overlay, portal, dialog
 ---
 **/
 @deprecated('8.0.0', {
-  trackPosition: 'shouldTrackPosition',
   alignArrow: 'shouldAlignArrow',
   onDismiss: 'onHideContent'
 })
@@ -255,10 +254,6 @@ class Popover extends Component {
      */
     alignArrow: PropTypes.bool,
     /**
-     * __Deprecated - use `shouldTrackPosition`__
-     */
-    trackPosition: PropTypes.bool,
-    /**
      * __Deprecated - use `onHideContent`__
      */
     onDismiss: PropTypes.func
@@ -440,9 +435,7 @@ class Popover extends Component {
     return {
       offsetX: this.state.offsetX,
       offsetY: this.state.offsetY,
-      shouldTrackPosition:
-        (this.props.shouldTrackPosition || this.props.trackPosition) &&
-        this.shown,
+      shouldTrackPosition: this.props.shouldTrackPosition && this.shown,
       insertAt: this.props.insertAt,
       placement: this.placement,
       constrain: this.props.constrain,
