@@ -37,7 +37,7 @@
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (componentTheme, props, state) => {
-  const { justifyItems, wrap, wrapItems, direction } = props
+  const { justifyItems, wrap, direction } = props
 
   // align-items css prop
   // When flex direction is row, 'center' is the most useful default because it
@@ -85,8 +85,6 @@ const generateStyle = (componentTheme, props, state) => {
       alignItems: alignItemsValues[alignItems],
       justifyContent: justifyItemsValues[justifyItems],
       flexWrap: wrapValues[wrap],
-      // 'wrapItems' deprecated in v8.0.0
-      ...(wrapItems && { flexWrap: 'wrap' }),
       flexDirection: flexDirectionValues[direction]
     }
   }

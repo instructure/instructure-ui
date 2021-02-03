@@ -9,9 +9,6 @@ guidelines: true
 <Guidelines>
   <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
     <Figure.Item>
-      The <code>wrapItems</code> boolean prop has been changed to <code>wrap: ['wrap', 'no-wrap', 'wrap-reverse']</code>
-    </Figure.Item>
-    <Figure.Item>
       <code>visualDebug</code> has been changed to <code>withVisualDebug</code>
     </Figure.Item>
   </Figure>
