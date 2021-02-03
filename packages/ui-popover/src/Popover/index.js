@@ -42,11 +42,7 @@ import {
   requestAnimationFrame,
   handleMouseOverOut
 } from '@instructure/ui-dom-utils'
-import {
-  safeCloneElement,
-  callRenderProp,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
@@ -60,9 +56,6 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@deprecated('8.0.0', {
-  onDismiss: 'onHideContent'
-})
 @testable()
 @bidirectional()
 class Popover extends Component {
@@ -245,14 +238,7 @@ class Popover extends Component {
     /**
      * The content to be shown by the popover
      */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `onHideContent`__
-     */
-    onDismiss: PropTypes.func
-    /* eslint-enable react/require-default-props */
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   }
 
   static defaultProps = {
@@ -460,25 +446,19 @@ class Popover extends Component {
   }
 
   hide = (event, documentClick = false) => {
-    const { onHideContent, isShowingContent, onDismiss } = this.props
+    const { onHideContent, isShowingContent } = this.props
 
     if (typeof isShowingContent === 'undefined') {
       // uncontrolled, set state, fire callbacks
       this.setState(({ isShowingContent }) => {
         if (isShowingContent) {
           onHideContent(event, { documentClick })
-          if (typeof onDismiss === 'function') {
-            onDismiss(event, documentClick)
-          }
         }
         return { isShowingContent: false }
       })
     } else if (isShowingContent) {
       // controlled, fire callback
       onHideContent(event, { documentClick })
-      if (typeof onDismiss === 'function') {
-        onDismiss(event, documentClick)
-      }
     }
   }
 
