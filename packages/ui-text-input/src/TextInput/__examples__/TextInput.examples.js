@@ -68,7 +68,7 @@ export default {
       layout: 'stacked'
     }
   },
-  excludeProps: ['required', 'readOnly', 'disabled', 'inline'],
+  excludeProps: ['readOnly', 'disabled', 'inline'],
   filter: (props) => {
     return (
       (props.layout === 'inline' && props.inline === true && !props.width) ||

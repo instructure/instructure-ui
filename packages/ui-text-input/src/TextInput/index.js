@@ -50,7 +50,6 @@ tags: form, field
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  required: 'isRequired',
   inline: 'display'
 })
 @testable()
@@ -168,10 +167,6 @@ class TextInput extends Component {
      * __Deprecated - use `renderAfterInput`__
      */
     icon: PropTypes.func,
-    /**
-     * __Deprecated - use `isRequired`__
-     */
-    required: PropTypes.bool,
     /**
      * __Deprecated - use `display`__
      */
@@ -300,7 +295,6 @@ class TextInput extends Component {
       placeholder,
       value,
       defaultValue,
-      required,
       isRequired,
       ...rest
     } = this.props
@@ -331,7 +325,7 @@ class TextInput extends Component {
         ref={this.handleInputRef}
         type={type}
         id={this.id}
-        required={isRequired || required}
+        required={isRequired}
         aria-invalid={this.invalid ? 'true' : null}
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
