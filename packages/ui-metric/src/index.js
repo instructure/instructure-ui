@@ -24,4 +24,3 @@
 
 export { Metric } from './Metric'
 export { MetricGroup } from './MetricGroup'
-export { MetricsList } from './MetricsList'
