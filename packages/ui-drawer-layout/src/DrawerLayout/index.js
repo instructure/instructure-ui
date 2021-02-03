@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -71,10 +72,11 @@ class DrawerLayout extends Component {
      */
     onOverlayTrayChange: PropTypes.func,
 
-    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
+    styles: PropTypes.object,
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    rtl: PropTypes.bool,
+    ltr: PropTypes.bool
   }
 
   static defaultProps = {
@@ -116,8 +118,8 @@ class DrawerLayout extends Component {
   }
 
   get trayPlacement() {
-    const { placement } = this.trayProps
-    return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+    const { placement, rtl } = this.trayProps
+    return rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
   get contentMargin() {

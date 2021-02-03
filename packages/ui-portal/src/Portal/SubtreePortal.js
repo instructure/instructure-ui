@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -74,7 +75,10 @@ class SubtreePortal extends Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    rtl: PropTypes.bool,
+    ltr: PropTypes.bool
   }
 
   static defaultProps = {
