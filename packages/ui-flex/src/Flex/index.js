@@ -30,7 +30,6 @@ import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   safeCloneElement,
   passthroughProps,
-  deprecated,
   matchComponentTypes,
   callRenderProp
 } from '@instructure/ui-react-utils'
@@ -49,9 +48,6 @@ category: components
 @module Flex
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  visualDebug: 'withVisualDebug'
-})
 class Flex extends Component {
   constructor(props) {
     super(props)
@@ -139,11 +135,7 @@ class Flex extends Component {
      * layout easier
      */
     withVisualDebug: PropTypes.bool,
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use 'withVisualDebug'__
-     */
-    visualDebug: PropTypes.bool,
+
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
@@ -175,9 +167,8 @@ class Flex extends Component {
 
       return matchComponentTypes(child, ['Item'])
         ? safeCloneElement(child, {
-            withVisualDebug:
-              this.props.withVisualDebug || this.props.visualDebug,
-            ...child.props /* child visualDebug prop should override parent */,
+            withVisualDebug: this.props.withVisualDebug,
+            ...child.props /* child withVisualDebug prop should override parent */,
             direction: this.props.direction.replace(/-reverse/, '')
           })
         : child
@@ -195,7 +186,6 @@ class Flex extends Component {
       padding,
       textAlign,
       width,
-      visualDebug,
       styles
     } = this.props
 
@@ -214,7 +204,7 @@ class Flex extends Component {
           margin={margin}
           padding={padding}
           textAlign={textAlign}
-          withVisualDebug={withVisualDebug || visualDebug}
+          withVisualDebug={withVisualDebug}
         >
           {this.renderChildren(children)}
         </View>
