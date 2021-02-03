@@ -23,12 +23,11 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
 import {
-  deprecated,
   callRenderProp,
   getInteraction,
   passthroughProps
@@ -49,9 +48,6 @@ tags: form, field
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@deprecated('8.0.0', {
-  inline: 'display'
-})
 @testable()
 class TextInput extends Component {
   static propTypes = {
@@ -167,10 +163,6 @@ class TextInput extends Component {
      * __Deprecated - use `renderAfterInput`__
      */
     icon: PropTypes.func,
-    /**
-     * __Deprecated - use `display`__
-     */
-    inline: PropTypes.bool,
     /* eslint-enable react/require-default-props */
 
     // eslint-disable-next-line react/require-default-props
@@ -341,7 +333,6 @@ class TextInput extends Component {
   render() {
     const {
       width,
-      inline,
       display,
       renderLabel,
       renderBeforeInput,
@@ -360,7 +351,7 @@ class TextInput extends Component {
         label={callRenderProp(renderLabel)}
         messagesId={this._messagesId}
         messages={messages}
-        inline={display === 'inline-block' || inline}
+        inline={display === 'inline-block'}
         width={width}
         inputContainerRef={inputContainerRef}
         layout={this.props.layout} // eslint-disable-line react/prop-types

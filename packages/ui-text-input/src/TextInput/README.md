@@ -101,12 +101,13 @@ render(<ControlledTextInputExample />)
 ```
 
 ### Prepending and appending content
+
 TextInput accepts focusable and non-focusable content before and/or after
 the input text. A common use case is adding an icon or avatar to the input.
 Focusable content will be focused separately from the input itself.
 
 > Note: For any content larger than an icon or small avatar (multiple [Tags](#Tag), for example),
-use the `renderBeforeInput` property.
+> use the `renderBeforeInput` property.
 
 ```javascript
 ---
@@ -185,10 +186,8 @@ render(<ExtraContentExample />)
 
 ### Setting width and display
 
-To make the component display inline, set the `inline` boolean property. To constrain the
+To make the component display inline, set the `display` property to `inline-block`. To constrain the
 size of the component, use `width`.
-
-> Note: IE11 needs a `width` prop if the TextInput is `inline`.
 
 ```js
 ---
