@@ -49,7 +49,6 @@ class Img extends Component {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,
     display: PropTypes.oneOf(['inline-block', 'block']),
