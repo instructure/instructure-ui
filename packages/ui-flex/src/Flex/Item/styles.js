@@ -33,7 +33,7 @@
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (componentTheme, props, state) => {
-  const { grow, shouldGrow, shrink, shouldShrink, align, size } = props
+  const { shouldGrow, shrink, shouldShrink, align, size } = props
 
   const alignSelfValues = {
     start: 'flex-start',
@@ -51,7 +51,7 @@ const generateStyle = (componentTheme, props, state) => {
       // initial value is 1, but we want 0 as our default,
       // so users can opt in to shrink like they do grow
       flexShrink: shrink || shouldShrink ? 1 : 0,
-      ...((grow || shouldGrow) && { flexGrow: 1 }),
+      ...(shouldGrow && { flexGrow: 1 }),
       ...(align && { alignSelf: alignSelfValues[align] })
     }
   }
