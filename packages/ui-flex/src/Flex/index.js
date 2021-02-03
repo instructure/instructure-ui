@@ -50,7 +50,6 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @deprecated('8.0.0', {
-  inline: 'display',
   wrapItems: 'wrap',
   visualDebug: 'withVisualDebug'
 })
@@ -67,8 +66,6 @@ class Flex extends Component {
   static Item = Item
 
   static propTypes = {
-    /**
-
     /**
      * It's recommended that you use `Flex.Item` for children, but you can also pass any markup or a function
      * returning markup. Note that if you do not use `Flex.Item`, the `withVisualDebug` and `direction` props
@@ -145,10 +142,6 @@ class Flex extends Component {
     withVisualDebug: PropTypes.bool,
     /* eslint-disable react/require-default-props */
     /**
-     * __Deprecated - use 'display'__
-     */
-    inline: PropTypes.bool,
-    /**
      * __Deprecated - use 'wrap'__
      */
     wrapItems: PropTypes.bool,
@@ -207,14 +200,11 @@ class Flex extends Component {
       padding,
       textAlign,
       width,
-      inline,
       visualDebug,
       styles
     } = this.props
 
     const children = callRenderProp(this.props.children)
-
-    const backwardsDisplay = inline ? 'inline-flex' : null
 
     if (children && Children.count(children) > 0) {
       return (
@@ -223,7 +213,7 @@ class Flex extends Component {
           css={styles.flex}
           elementRef={elementRef}
           as={as}
-          display={backwardsDisplay || display}
+          display={display}
           width={width}
           height={height}
           margin={margin}
