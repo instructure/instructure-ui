@@ -36,32 +36,26 @@ DocsPlugin.prototype.apply = function (compiler) {
   const pluginOptions = this.options || {}
   const options = getOptions(pluginOptions)
 
-  compiler.apply(
-    new SingleEntryPlugin(
-      this.context,
-      `!!${require.resolve('./loaders/docs-loader')}?${JSON.stringify(
-        pluginOptions
-      )}!`,
-      'ui-docs'
-    )
-  )
+  new SingleEntryPlugin(
+    this.context,
+    `!!${require.resolve('./loaders/docs-loader')}?${JSON.stringify(
+      pluginOptions
+    )}!`,
+    'ui-docs'
+  ).apply(compiler)
 
-  compiler.apply(
-    new HtmlWebpackPlugin({
-      title: options.title,
-      filename: 'index.html',
-      template: options.template,
-      inject: 'body',
-      chunksSortMode: 'dependency'
-    })
-  )
+  new HtmlWebpackPlugin({
+    title: options.title,
+    filename: 'index.html',
+    template: options.template,
+    inject: 'body',
+    chunksSortMode: 'dependency'
+  }).apply(compiler)
 
-  compiler.apply(
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'sync',
-      defer: ['ui-docs'] // to ensure that globals loads first
-    })
-  )
+  new ScriptExtHtmlWebpackPlugin({
+    defaultAttribute: 'sync',
+    defer: ['ui-docs'] // to ensure that globals loads first
+  }).apply(compiler)
 }
 
 module.exports = DocsPlugin

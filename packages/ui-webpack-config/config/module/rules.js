@@ -38,7 +38,7 @@ const babelLoader = {
 
 const rules = [
   {
-    test: /\.js$/,
+    test: /\.m?js$/,
     exclude: [...exclude, /\.examples\.js$/],
     use: [
       {
@@ -56,7 +56,7 @@ const rules = [
     ]
   },
   {
-    test: /\.js$/,
+    test: /\.m?js$/,
     include: [/\.examples\.js/],
     exclude,
     use: ['component-examples-loader', babelLoader]
@@ -104,7 +104,7 @@ const rules = [
 if (!noLint) {
   rules.unshift({
     enforce: 'pre',
-    test: /\.js?$/,
+    test: /\.m?js?$/,
     exclude,
     loader: 'eslint-loader',
     options: {
