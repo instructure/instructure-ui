@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title><%= htmlWebpackPlugin.options.title %></title>
-
+    <link
+      rel="icon"
+      type="image/png"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFS0lEQVR4Xu2aS2hjVRjH/ydp2knrOKnTVkZnIFOEtqnjA6tuVHCjK12pG4WmyDCiC62LQZpBozQp4qKiqIwiieJspgtBV7rxMaKoKcxouWkQ04BBh1ZnAk2TtvdxJMXobR73nnPvuScVerfnO9////3O6+bkEnTwqc6HaU0+OF0gnbLREeHqfFgH4Gso2ghOF/yyQUgFsDkffo4C81ZFEuDUgenCu7JASANQn+6shclaFp4D4C28EZDXIDwD4LZwWSCEA6jMhz8hwEOsU50njgILvdOFx3j62MUKA7D+xk2DXbq2aicoov0A1Q6T54tXROQSAkDPhCg0gu3vDonwZJuj/E4PoAGD+Zxr/64S7BTe8Gi/9MK43G1bhJOAra+7oF5qflVwA8IRAGMxtEIpwlZFbF8IOamxZR9aIdh43xoqpSgMreSO84pyAaCL/Y8blH7EI+IWRPnNHh65WuwTg/ncOdZOTADot0eDRne5wpq0VRwvCAeF75Ld3N7oPVYsVu082wJotc7tkrZrN/4MQMv2WXbfSHWDlm1tMVuw2x/aKumZ0DaAALMSR+DOaaHtltaLPlQ/9kSu5kwdzOdabiJNAIxM/3kK+ihHPY5D68vC7XRnNUAIFgZ+ze16kWoCoC/2vwpKT7MmdRPnnyjt6K8NjzQdp27ytutLQeaG8ssz5narJfAXgOu8MOLzo5/cXiqZc18Nh0Oar+eqF3oEuDKQzx1uldt2txG5CRLgG99E6V6rIteGRy4AuEcUCMeboNkA/QJdxsGQ6sZUfbqz5nC7LJbyRwL340vNTs92BpgTqJlDD/hAPrNLam7nLbwxNy8Ig5IHr19Z/pzVIxeAelI9E7oI4FYrEV8wcJCMr5VZjVjFrUYi15BNfd0qhgKXhvK523j1HAEwgWi63PQBL5GJ0iu8Rlji14ZHXwToyw2xxmA+5/gy1RUAE4jaMbbunyhdy1KI25jV4yNlQtBnt8Gx6AgBwCK0V2P2AezVkZHla38GyCK9V3X2Z8BeHRlZvvZngCzSrXQisfTOPYCSiHZsIDoiHImlDQCN2lRJRBu/GfB8fKQCGJtJvUUIedryRw2lb2eTU894Xvk/AlIA3BE/21tVezZ4igoGtvoW46dcXcWz6HkOoL7OWcy0ivF6f/AMgNvCG2F4BUI4gEgsvQRg3OmIW1960Fw2MTUqMrcwACfiqVFdJVmR5trl8hE1sjR7UoiWEACipzsrRBHLwhWAThUucn9wBGBsJl0hBEHWkZIRRymq2WS0l1eLC8DYTDpGCGZ5RaTGU8wpyeiuv7+s9JkAnHjhXL/uV4V8lCQLhmGQgeW5ydrfe5aPLYC9ss7tCmnXbrdRtgUwHktrFHB83+7UsFf92oFoAhCJpb8CcJ9XRjqal+JHJRm9y+yhCcDYmdSzhJLXO2rUI3FK6elscuo1SwD1xkgsXQRwo0de5KYluKzMRo+0Et3fBFmH4v92GiiBgh/xeO3myd0xaO49Fv/wZqIaP9sl7WS7D/qdS4knM6webJdAq0SRM+kFUDzCKiIp7lMlEX2YV8sRgH83ypnUJgjh/paV16RlPIWqJKOOv852BcB0Ykj5zK0RhN1bHgtoIQBqQpH4+W6olS0WUbcxlQANFuJTm27z1PoLA2BaFlEQkhJhrikHIU8ps5NnReYWDuC/ZfHB7wBt+fLBXwD5Q0lM3sDfz76HZwBE7Q8i1rkVBs8BOAXhdeF1X9IA1ARvib93VFMDv1mNSFdAPfZT/GTtd4iURyoA02z4HsCun6UAflAS0bulVG0S6QiAxmUha7q3gvs3FOidUHSrsQwAAAAASUVORK5CYII="
+    />
     <!-- font for canvas theme -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i"
+      rel="stylesheet"
+    />
 
     <!-- homepage hero image -->
-    <link rel="preload" href="https://instui-docs.s3.us-east-2.amazonaws.com/hero2.jpg" as="image">
+    <link
+      rel="preload"
+      href="https://instui-docs.s3.us-east-2.amazonaws.com/hero2.jpg"
+      as="image"
+    />
 
     <!-- custom headline font -->
-    <link rel="preload" href="https://instui-docs.s3.us-east-2.amazonaws.com/tiempos-headline-web-bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link
+      rel="preload"
+      href="https://instui-docs.s3.us-east-2.amazonaws.com/tiempos-headline-web-bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <style type="text/css">
       @font-face {
-        font-family: "TiemposHeadlineWebBold";
-        src: url("https://instui-docs.s3.us-east-2.amazonaws.com/tiempos-headline-web-bold.woff2") format("woff2");
+        font-family: 'TiemposHeadlineWebBold';
+        src: url('https://instui-docs.s3.us-east-2.amazonaws.com/tiempos-headline-web-bold.woff2')
+          format('woff2');
       }
       body {
-        font-family: "Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont,
+          'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+          'Droid Sans', 'Helvetica Neue', sans-serif;
       }
       #app {
         height: 100%;
@@ -49,8 +68,9 @@
         width: 2rem;
         height: 2rem;
       }
-      .docsLoading__Spinner::before, .docsLoading__Spinner::after {
-        content: "";
+      .docsLoading__Spinner::before,
+      .docsLoading__Spinner::after {
+        content: '';
         display: block;
         position: absolute;
         box-sizing: border-box;
@@ -58,7 +78,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: #EA2127;
+        background: #ea2127;
         transform: scale(0) rotate(1turn);
         animation-name: docsLoading;
         animation-duration: 1s;
@@ -67,7 +87,7 @@
       }
       .docsLoading__Spinner::after {
         animation-direction: alternate-reverse;
-        background: #F68E1F;
+        background: #f68e1f;
       }
       .docsLoading__Text {
         padding-top: 1rem;
@@ -77,19 +97,33 @@
       }
     </style>
 
-    <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
+    <meta name="description" content="<%= htmlWebpackPlugin.options.title %>" />
 
     <!-- Google Analytics -->
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ;(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r
+        ;(i[r] =
+          i[r] ||
+          function () {
+            ;(i[r].q = i[r].q || []).push(arguments)
+          }),
+          (i[r].l = 1 * new Date())
+        ;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
+        a.async = 1
+        a.src = g
+        m.parentNode.insertBefore(a, m)
+      })(
+        window,
+        document,
+        'script',
+        'https://www.google-analytics.com/analytics.js',
+        'ga'
+      )
 
-      ga('create', 'UA-154136827-1', 'auto');
+      ga('create', 'UA-154136827-1', 'auto')
     </script>
     <!-- End Google Analytics -->
-
   </head>
 
   <body>

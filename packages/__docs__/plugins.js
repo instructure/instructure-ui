@@ -32,7 +32,6 @@ module.exports = [
   new DocsPlugin({
     projectRoot,
     title: `${pkg.name} - ${pkg.description} (${pkg.version})`,
-    favicon: '../../logo.png',
     library: {
       name: pkg.name,
       version: pkg.version,
