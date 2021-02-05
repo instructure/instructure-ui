@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-locator'
-// eslint-disable-next-line no-restricted-imports
-import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
+import { TooltipLocator } from '@instructure/ui-tooltip'
 
 import { NavigationItem } from './index'
 

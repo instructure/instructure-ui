@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { Calendar } from './Calendar'
+export { CalendarLocator } from './Calendar/CalendarLocator'
