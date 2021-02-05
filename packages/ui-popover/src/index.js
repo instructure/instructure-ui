@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export { Popover } from './Popover'
+export { PopoverLocator } from './Popover/PopoverLocator'

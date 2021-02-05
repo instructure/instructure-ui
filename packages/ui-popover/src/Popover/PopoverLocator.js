@@ -23,8 +23,7 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
-// eslint-disable-next-line no-restricted-imports
-import { PositionLocator } from '@instructure/ui-position/es/Position/PositionLocator'
+import { PositionLocator } from '@instructure/ui-position'
 
 import { Popover } from './index'
 import { PopoverTriggerLocator } from './PopoverTriggerLocator'

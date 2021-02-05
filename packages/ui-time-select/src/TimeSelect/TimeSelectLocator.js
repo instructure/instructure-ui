@@ -23,9 +23,7 @@
  */
 import { locator } from '@instructure/ui-test-locator'
 
-/* eslint-disable no-restricted-imports */
-import { SelectLocator } from '@instructure/ui-select/es/Select/SelectLocator'
-/* eslint-enable no-restricted-imports */
+import { SelectLocator } from '@instructure/ui-select'
 
 import { TimeSelect } from './index'
 
