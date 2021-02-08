@@ -64,8 +64,8 @@ const generateStyle = (componentTheme, props, state) => {
 
   const iconSizeStyles = {
     small: { fontSize: componentTheme.smallIconSize },
-    medium: { fontSize: componentTheme.smallIconMedium },
-    large: { fontSize: componentTheme.smallIconLarge }
+    medium: { fontSize: componentTheme.mediumIconSize },
+    large: { fontSize: componentTheme.largeIconSize }
   }
 
   const indentDetailsStyles =
@@ -151,7 +151,6 @@ const generateStyle = (componentTheme, props, state) => {
     },
     icon: {
       label: 'toggleDetails__icon',
-      fontSize: componentTheme.largeIconSize,
       '& > svg': {
         display: 'block' /* fix vertical alignment of icon */
       },
