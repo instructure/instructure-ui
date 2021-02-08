@@ -1,5 +1,5 @@
 name: Visual Regression Test
-on: [workflow_dispatch]
+on: [pull_request]
 jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
