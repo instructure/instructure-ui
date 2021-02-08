@@ -36,6 +36,7 @@ example: true
 ```
 
 ### Managing State
+
 `<TreeBrowser />` can be fully controlled. The following example uses the `onCollectionToggle` callback function to set the state. It then uses the `expanded` prop to configure which collections are open or closed.
 
 ```js
@@ -105,6 +106,7 @@ render(<Example/>)
 ```
 
 ### Customizing Icons
+
 All of the `<TreeBrowser>` icons are customizable. The following example sets custom icons for the expanded and collapsed state of the collections along with each of the items.
 
 ```js
@@ -177,8 +179,8 @@ example: true
 />
 ```
 
-
 ### Thumbnails
+
 An example of a `<TreeBrowser />` with thumbnail images.
 
 ```js
@@ -205,6 +207,97 @@ example: true
   size="large"
 />
 ```
+
+### Collection Props
+
+An example of a `<TreeBrowser />` with different collection props.
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      expanded: false
+    }
+  }
+
+  renderInput = () => {
+    const { expanded } = this.state
+    if (expanded) {
+      return (
+        <View as="div" padding="xx-small" onFocus={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
+          <TextInput placeholder="Enter new group name" display="inline-block" width="12rem"/>
+          <IconButton onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconXSolid/></IconButton>
+          <IconButton onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconCheckSolid/></IconButton>
+        </View>
+      )
+    }
+
+    return (
+      <View as="div">
+        Create New Group
+      </View>
+    )
+  }
+
+  setExpand = (e, expanded) => {
+    e.stopPropagation()
+    this.setState({expanded})
+    this._node.focus()
+  }
+
+  renderNode = () => {
+    const { expanded } = this.state
+    return (
+      <TreeBrowser.Node
+        containerRef={(el) => this._node = el}
+        onClick={(e) => this.setExpand(e, !expanded)}
+        itemIcon={this.state.expanded ? '' : <IconPlusLine /> }
+        size="large"
+      >
+        {this.renderInput()}
+      </TreeBrowser.Node>
+    )
+  }
+
+  render () {
+    return (
+      <TreeBrowser
+        selectionType="single"
+        size="large"
+        collections={{
+          1: {
+            id: 1,
+            name: "Grade 1",
+            collections: [2],
+          },
+          2: {
+            id: 2,
+            name: "Math Outcomes",
+            collections: [],
+            items: [1, 2],
+            descriptor: "1 Group | 2 Outcomes",
+            renderAfterItems: this.renderNode()
+          }
+        }}
+        items={{
+          1: { id: 1, name: "Can add" },
+          2: { id: 2, name: "Can subtract" },
+        }}
+        showRootCollection={true}
+        rootId={1}
+      />
+    )
+  }
+}
+
+render(<Example/>)
+```
+
 ### Guidelines
 
 ```js

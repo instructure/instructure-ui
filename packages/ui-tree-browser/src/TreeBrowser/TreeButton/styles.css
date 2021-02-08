@@ -66,6 +66,10 @@
       visibility: hidden;
     }
 
+    &.node {
+      color: var(--hoverTextColor);
+    }
+
     .textName,
     .textDescriptor,
     .icon {
