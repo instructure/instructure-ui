@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, locator } from '@instructure/ui-test-utils'
+import { expect, mount, locator, stub } from '@instructure/ui-test-utils'
 
 import { TreeButton } from '../index'
 import styles from '../styles.css'
@@ -42,6 +42,19 @@ describe('<TreeButton />', async () => {
       await mount(<TreeButton id="1" selected={true} />)
       const treeButton = await TreeButtonLocator.find()
       expect(treeButton.hasClass(styles['selected'])).to.be.true()
+    })
+  })
+
+  describe('containerRef', async () => {
+    it('should call with parent element', async () => {
+      const containerRef = stub()
+      await mount(
+        <div id="1">
+          <TreeButton id="2" containerRef={containerRef} />
+        </div>
+      )
+      const div = document.getElementById('1')
+      expect(containerRef).to.have.been.calledWith(div)
     })
   })
 

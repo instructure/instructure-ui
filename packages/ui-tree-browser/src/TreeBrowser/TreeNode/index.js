@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 - present Instructure, Inc.
+ * Copyright (c) 2021 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,85 +26,62 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import { Img } from '@instructure/ui-img'
+import { callRenderProp } from '@instructure/ui-react-utils'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { isIE11 } from '@instructure/ui-utils'
-import { Img } from '@instructure/ui-img'
-import { callRenderProp } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import styles from '../TreeButton/styles.css'
+import theme from '../TreeButton/theme'
 
 /**
 ---
 parent: TreeBrowser
+id: TreeNode
 ---
 **/
 
 @testable()
 @themeable(theme, styles)
-class TreeButton extends Component {
+class TreeNode extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    name: PropTypes.string,
-    descriptor: PropTypes.string,
-    type: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
-    collectionIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    collectionIconExpanded: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.func
-    ]),
-    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    thumbnail: PropTypes.string,
-    onClick: PropTypes.func,
-    expanded: PropTypes.bool,
     selected: PropTypes.bool,
     focused: PropTypes.bool,
-    containerRef: function () {}
+    itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    thumbnail: PropTypes.string,
+    /**
+     * The children to be rendered within the `<TreeNode />`
+     */
+    children: PropTypes.node,
+    /**
+     * A function that returns a reference to the parent li element
+     */
+    containerRef: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    onClick: PropTypes.func
   }
 
   static defaultProps = {
-    type: 'treeButton',
+    id: undefined,
     size: 'medium',
     variant: 'folderTree',
     selected: false,
     focused: false,
-    onClick: function () {},
-    id: undefined,
-    name: undefined,
-    collectionIcon: undefined,
-    collectionIconExpanded: undefined,
+    children: undefined,
     itemIcon: undefined,
     thumbnail: undefined,
-    expanded: false,
-    descriptor: undefined,
-    containerRef: function () {}
+    containerRef: function () {},
+    parentRef: undefined,
+    onKeyDown: undefined,
+    onClick: undefined
   }
 
-  renderImage() {
-    const { type } = this.props
-    switch (type) {
-      case 'collection':
-        return this.renderCollectionIcon()
-      case 'item':
-        return this.renderItemImage()
-      default:
-        break
-    }
-  }
-
-  renderCollectionIcon() {
-    const { expanded, collectionIcon, collectionIconExpanded } = this.props
-
-    if (collectionIcon || collectionIconExpanded) {
-      return (
-        <div className={styles.icon}>
-          {callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}
-        </div>
-      )
-    }
+  handleRef = (el) => {
+    el && this.props.containerRef(el.parentElement)
   }
 
   renderItemImage() {
@@ -123,54 +100,35 @@ class TreeButton extends Component {
     }
   }
 
-  handleRef = (el) => {
-    el && this.props.containerRef(el.parentElement)
-  }
-
   render() {
-    const {
-      name,
-      descriptor,
-      expanded,
-      selected,
-      focused,
-      variant,
-      size
-    } = this.props
+    const { selected, focused, variant, size, children } = this.props
 
     const classes = {
       [styles.root]: true,
       [styles[size]]: true,
       [styles[variant]]: true,
-      [styles.expanded]: expanded,
+      [styles.expanded]: false,
       [styles.selected]: selected,
       [styles.focused]: focused,
       [styles.ie11]: isIE11
     }
 
-    // VoiceOver can't navigate without the buttons, even though they don't do anything
+    const classesText = {
+      [styles.text]: true,
+      [styles.textName]: true,
+      [styles.node]: true
+    }
+
     return (
-      <button
-        ref={this.handleRef}
-        tabIndex={-1}
-        type="button"
-        className={classnames(classes)}
-      >
+      <div ref={this.handleRef} tabIndex={-1} className={classnames(classes)}>
         <span className={styles.layout}>
-          {this.renderImage()}
-          <span className={styles.text}>
-            <span className={styles.textName}>{name}</span>
-            {descriptor ? (
-              <span className={styles.textDescriptor} title={descriptor}>
-                {descriptor}
-              </span>
-            ) : null}
-          </span>
+          {this.renderItemImage()}
+          <span className={classnames(classesText)}>{children}</span>
         </span>
-      </button>
+      </div>
     )
   }
 }
 
-export default TreeButton
-export { TreeButton }
+export default TreeNode
+export { TreeNode }
