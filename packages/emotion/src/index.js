@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export { jsx, css, keyframes, Global } from '@emotion/core'
-export { EmotionThemeProvider } from './EmotionThemeProvider'
+export { ThemeProvider as EmotionThemeProvider } from 'emotion-theming'
+
 export { useTheme, useStyle } from './styleUtils'
 export { withStyle } from './withStyle'

@@ -42,7 +42,8 @@ import { Transition } from '@instructure/ui-motion'
 import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
-import { withStyle, jsx } from '@instructure/emotion'
+import { EmotionThemeProvider, withStyle, jsx } from '@instructure/emotion'
+import { canvas } from '@instructure/ui-themes'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -217,8 +218,7 @@ class Alert extends Component {
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)
 
-      const content = this.createScreenreaderContentNode()
-      ReactDOM.render(content, div)
+      this.renderScreenreeaderAlert(div)
       liveRegion.appendChild(div)
     }
   }
@@ -228,11 +228,18 @@ class Alert extends Component {
       const div = document.getElementById(this.srid)
       if (div) {
         ReactDOM.render(null, div, () => {
-          const content = this.createScreenreaderContentNode()
-          ReactDOM.render(content, div)
+          this.renderScreenreeaderAlert(div)
         })
       }
     }
+  }
+
+  renderScreenreeaderAlert(div) {
+    const content = this.createScreenreaderContentNode()
+    ReactDOM.render(
+      <EmotionThemeProvider theme={canvas}>{content}</EmotionThemeProvider>,
+      div
+    )
   }
 
   removeScreenreaderAlert() {
