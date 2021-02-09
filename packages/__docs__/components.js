@@ -116,3 +116,4 @@ export {
   Figure,
   ToggleBlockquote
 } from '@instructure/ui-docs-client'
+export { EmotionThemeProvider } from '@instructure/emotion'
