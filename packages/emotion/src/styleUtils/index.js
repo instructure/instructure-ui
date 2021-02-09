@@ -39,8 +39,9 @@ import { isEmpty } from '@instructure/ui-utils'
  * @param {*} props - The component's props object
  * @returns {object} The calculated theme override object
  */
-const getThemeOverride = (theme, componentName, props) => {
-  const componentOverride = theme?.components && theme.components[componentName]
+const getComponentThemeOverride = (theme, componentName, props) => {
+  const componentOverride =
+    theme?.componentOverrides && theme.componentOverrides[componentName]
 
   return { ...componentOverride, ...(props?.themeOverride ?? {}) }
 }
@@ -76,9 +77,9 @@ const useTheme = () => {
  */
 const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
   const theme = useTheme()
-  const themeOverride = getThemeOverride(theme, componentName, props)
+  const themeOverride = getComponentThemeOverride(theme, componentName, props)
 
   return generateStyle(theme, themeOverride, props, ...extraArgs)
 }
 
-export { getThemeOverride, useStyle, useTheme }
+export { getComponentThemeOverride, useStyle, useTheme }

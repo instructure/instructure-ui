@@ -27,7 +27,7 @@ import { merge, cloneDeep } from 'lodash'
 
 /**
  * ---
- * category: utilities/themes
+ * category: components/utilities
  * ---
  * Wrapper for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype) of emotion js.
  *
@@ -37,12 +37,13 @@ import { merge, cloneDeep } from 'lodash'
  * import { canvas, instructure } from '@instructure/ui-themes'
  * import { EmotionThemeProvider } from '@instructure/emotion'
  *
+ * @example
  * <EmotionThemeProvider theme={canvas}>
  *   <div>Canvas themed part</div>
  *
  *   <EmotionThemeProvider
  *     theme={{
- *       themes: {
+ *       themeOverrides: {
  *         canvas: {
  *           colors: {
  *             backgroundLightest: '#fefefe'
@@ -50,9 +51,6 @@ import { merge, cloneDeep } from 'lodash'
  *           borders: {
  *             style: 'dashed'
  *           }
- *         },
- *         'canvas-high-contrast': {
- *           borderAlert: 'pink'
  *         }
  *       }
  *     }}
@@ -98,7 +96,7 @@ const getTheme = (theme) => (ancestorTheme = {}) => {
   const themeName = currentTheme.key
 
   // we pick the overrides for the current theme from the override object
-  const currentThemeOverrides = overrides?.themes?.[themeName] || {}
+  const currentThemeOverrides = overrides?.themeOverrides?.[themeName] || {}
 
   // saving any other overrides
   const { themes, ...otherOverrides } = overrides

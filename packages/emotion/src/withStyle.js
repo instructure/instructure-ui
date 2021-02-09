@@ -28,7 +28,7 @@ import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/polyFill'
-import { getThemeOverride, useTheme } from './styleUtils'
+import { getComponentThemeOverride, useTheme } from './styleUtils'
 
 /**
  * ---
@@ -70,7 +70,7 @@ const withStyle = decorator(
         ...ComposedComponent.defaultProps,
         ...props
       }
-      const themeOverride = getThemeOverride(
+      const themeOverride = getComponentThemeOverride(
         theme,
         ComposedComponent.displayName,
         componentProps
