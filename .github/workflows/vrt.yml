@@ -1,7 +1,11 @@
 name: Visual Regression Test
-on: [push, workflow_dispatch]
+on:
+  pull_request:
+    branches:
+      - master
+      - next
 jobs:
-  chromatic-deployment:
+  chromatic_deployment:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
