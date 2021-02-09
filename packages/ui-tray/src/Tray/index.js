@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -24,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Dialog } from '@instructure/ui-dialog'
@@ -45,8 +44,8 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 @bidirectional()
+@testable()
 class Tray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -170,11 +169,15 @@ class Tray extends Component {
      * Should the `<Tray />` have a box shadow
      */
     shadow: PropTypes.bool,
-
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
+    // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    // eslint-disable-next-line react/require-default-props
     rtl: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
     ltr: PropTypes.bool
   }
 

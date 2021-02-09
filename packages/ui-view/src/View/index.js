@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -224,10 +223,15 @@ class View extends Component {
      * layout easier
      */
     withVisualDebug: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
+    // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    // eslint-disable-next-line react/require-default-props
     rtl: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
     ltr: PropTypes.bool
   }
 

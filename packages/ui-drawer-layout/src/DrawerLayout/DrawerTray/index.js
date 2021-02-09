@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -51,8 +50,8 @@ id: DrawerLayout.Tray
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-@testable()
 @bidirectional()
+@testable()
 class DrawerTray extends Component {
   static locatorAttribute = 'data-drawer-tray'
   static propTypes = {
@@ -144,11 +143,15 @@ class DrawerTray extends Component {
     shouldReturnFocus: PropTypes.bool,
     shouldCloseOnDocumentClick: PropTypes.bool,
     shouldCloseOnEscape: PropTypes.bool,
-
+    // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
+    // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    // eslint-disable-next-line react/require-default-props
     rtl: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
     ltr: PropTypes.bool
   }
 
@@ -178,8 +181,6 @@ class DrawerTray extends Component {
     liveRegion: undefined,
     onTransition: undefined
   }
-
-  static contextType = DrawerLayoutContext
 
   state = {
     transitioning: false,

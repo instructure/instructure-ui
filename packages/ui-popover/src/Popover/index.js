@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 /*
  * The MIT License (MIT)
  *
@@ -57,8 +56,8 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@testable()
 @bidirectional()
+@testable()
 class Popover extends Component {
   static propTypes = {
     /**
@@ -240,46 +239,11 @@ class Popover extends Component {
      * The content to be shown by the popover
      */
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `isShowingContent` instead__
-     */
-    show: PropTypes.bool,
-    /**
-     * __Deprecated - use `defaultIsShowingContent` instead__
-     */
-    defaultShow: PropTypes.bool,
-    /**
-     * __Deprecated - use `color`__
-     */
-    variant: PropTypes.oneOf(['default', 'inverse']),
-    /**
-     * __Deprecated - use `shouldAlignArrow`__
-     */
-    alignArrow: PropTypes.bool,
-    /**
-     * __Deprecated - use `screenReaderLabel`__
-     */
-    label: PropTypes.string,
-    /**
-     * __Deprecated - use `shouldTrackPosition`__
-     */
-    trackPosition: PropTypes.bool,
-    /**
-     * __Deprecated - use `onShowContent`__
-     */
-    onShow: PropTypes.func,
-    /**
-     * __Deprecated - use `onHideContent`__
-     */
-    onDismiss: PropTypes.func,
-    /**
-     * __Deprecated - use `onShowContent` and `onHideContent`__
-     */
-    onToggle: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+    // eslint-disable-next-line react/require-default-props
     rtl: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
     ltr: PropTypes.bool
   }
 
