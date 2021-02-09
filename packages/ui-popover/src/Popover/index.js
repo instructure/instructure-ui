@@ -302,10 +302,15 @@ class Popover extends Component {
 
     this._handleMouseOver = handleMouseOverOut.bind(null, (event) => {
       this.show(event)
+      clearTimeout(this.mouseOutTimeout)
     })
     this._handleMouseOut = handleMouseOverOut.bind(null, (event) => {
-      this.hide(event)
+      // this is needed bc the trigger mouseOut fires before tooltip mouseOver
+      this.mouseOutTimeout = setTimeout(() => {
+        this.hide(event)
+      }, 1)
     })
+    this.mouseOutTimeout = undefined
   }
 
   get isTooltip() {
@@ -344,14 +349,14 @@ class Popover extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
     return (
       !shallowEqual(this.props, nextProps) ||
       !shallowEqual(this.state, nextState)
     )
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState, snapShot) {
     if (this._focusRegion && this.isTooltip) {
       // if focus region exists, popover is acting as a tooltip
       // so we manually activate and deactivate the region when showing/hiding
@@ -569,11 +574,10 @@ class Popover extends Component {
       if (on.indexOf('hover') > -1) {
         error(
           !(on === 'hover'),
-          '[Popover] Specifying only the `"hover"` trigger limits the visibilty of the Popover to just mouse users. ' +
-            'Consider also including the `"focus"` trigger ' +
+          '[Popover] Specifying only the `"hover"` trigger limits the visibility' +
+            ' of the Popover to just mouse users. Consider also including the `"focus"` trigger ' +
             'so that touch and keyboard only users can see the Popover content as well.'
         )
-
         onMouseOver = this._handleMouseOver
         onMouseOut = this._handleMouseOut
       }
@@ -682,13 +686,13 @@ class Popover extends Component {
       }
 
       if (this.isTooltip) {
-        // preventing pointerEvents reduces tooltip flicker
         viewProps = {
           ...viewProps,
-          style: { pointerEvents: 'none' }
+          // Because of a11y reasons popovers should not be hidden when hovered over
+          onMouseOver: this._handleMouseOver,
+          onMouseOut: this._handleMouseOut
         }
       }
-
       return <ViewElement {...viewProps}>{content}</ViewElement>
     } else {
       return null
