@@ -236,7 +236,9 @@ describe('<Tooltip />', async () => {
       await subject.setProps({ isShowingContent: true })
 
       await trigger.mouseOut()
-      expect(onHideContent).to.have.been.calledOnce()
+      await wait(() => {
+        expect(onHideContent).to.have.been.calledOnce()
+      })
     })
   })
 
