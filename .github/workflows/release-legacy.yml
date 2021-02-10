@@ -20,7 +20,7 @@ jobs:
       - name: Create __build__ folder
         run: mkdir packages/__docs__/__build__
       - name: Clone gh-pages branch to __build__ folder
-        run: git clone https://github.com/instructure/instructure-ui-legacy-docs.git --branch gh-pages packages/__docs__/__build__
+        run: git clone git@github.com:instructure/instructure-ui-legacy-docs.git --branch gh-pages packages/__docs__/__build__
       - name: Add random file
         run: cd ./packages/__docs__/__build__ && echo This is some text > test.txt
       - name: Commit and push changes to the legacy repo
