@@ -1,7 +1,7 @@
 name: Visual Regression Test
 on: [pull_request]
 jobs:
-  chromatic-deployment:
+  chromatic_deployment:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
