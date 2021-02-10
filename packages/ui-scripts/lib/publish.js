@@ -25,43 +25,40 @@ const { getPackageJSON } = require('@instructure/pkg-utils')
 const { error, info } = require('@instructure/command-utils')
 
 const { publishPackages, createNPMRCFile } = require('./utils/npm')
-const { checkIfGitTagExists, isReleaseCommit } = require('./utils/git')
-const { setupGit, checkWorkingDirectory } = require('./utils/git')
+const { isReleaseCommit, setupGit } = require('./utils/git')
 const { getConfig } = require('./utils/config')
 
 try {
   const pkgJSON = getPackageJSON()
-  // optional version argument:
-  // e.g. ui-scripts --publish alpha
-  publish(pkgJSON.name, pkgJSON.version, process.argv[3], getConfig(pkgJSON))
+
+  publish({
+    packageName: pkgJSON.name,
+    currentVersion: pkgJSON.version,
+    packageConfig: getConfig(pkgJSON)
+  })
 } catch (err) {
   error(err)
   process.exit(1)
 }
 
-async function publish(packageName, currentVersion, preidAndTag, config = {}) {
+async function publish(options) {
+  const { packageName, currentVersion, packageConfig } = options
+  //Set up git user.name and user.email
   setupGit()
-  createNPMRCFile(config)
-  checkWorkingDirectory()
+  //create NPM RC and try to auth in to npm
+  createNPMRCFile(packageConfig)
 
-  let versionToRelease, tag
+  const isRelease = isReleaseCommit(currentVersion)
+  const infoMessage = isRelease
+    ? `📦  Currently on release commit for ${currentVersion} of ${packageName}.`
+    : `📦  Not on a release commit--publishing a nightly-release...`
 
-  if (isReleaseCommit(currentVersion)) {
-    checkIfGitTagExists(currentVersion)
-    info(
-      `📦  Currently on release commit for ${currentVersion} of ${packageName}.`
-    )
-    versionToRelease = currentVersion
-    tag = preidAndTag || 'latest'
-  } else {
-    info(`📦  Not on a release commit--publishing a pre-release...`)
-    versionToRelease = 'prerelease'
-    tag = preidAndTag || 'rc'
-  }
+  info(infoMessage)
 
-  let releasedVersion
+  const versionToRelease = isRelease ? currentVersion : 'prerelease'
+  const tag = isRelease ? 'latest' : 'nightly'
   try {
-    releasedVersion = await publishPackages(packageName, versionToRelease, tag)
+    await publishPackages(packageName, versionToRelease, tag)
   } catch (e) {
     error(e)
     process.exit(1)

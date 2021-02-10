@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-focusable",
-  "version": "7.3.1",
+  "version": "7.4.0",
   "description": "A utility used to identify when an element receives focus.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "module",
@@ -29,17 +29,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.3.1",
-    "@instructure/ui-test-utils": "^7.3.1"
+    "@instructure/ui-babel-preset": "^7.4.0",
+    "@instructure/ui-test-utils": "^7.4.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.3.1",
-    "@instructure/ui-dom-utils": "^7.3.1",
-    "@instructure/ui-react-utils": "^7.3.1",
-    "@instructure/ui-themeable": "^7.3.1",
-    "@instructure/ui-utils": "^7.3.1",
-    "@instructure/ui-view": "^7.3.1",
+    "@instructure/console": "^7.4.0",
+    "@instructure/ui-dom-utils": "^7.4.0",
+    "@instructure/ui-react-utils": "^7.4.0",
+    "@instructure/ui-themeable": "^7.4.0",
+    "@instructure/ui-utils": "^7.4.0",
+    "@instructure/ui-view": "^7.4.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

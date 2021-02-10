@@ -24,87 +24,31 @@
 const { runCommandSync, error, info } = require('@instructure/command-utils')
 const validateMessage = require('validate-commit-msg')
 
-const runGitCommand = (exports.runGitCommand = function runGitCommand(
-  args = []
-) {
+const runGitCommand = (exports.runGitCommand = (args = []) => {
   const { stdout } = runCommandSync('git', args, [], { stdio: 'pipe' })
   return stdout && stdout.trim()
 })
 
-exports.commit = function () {
-  try {
-    runGitCommand(['commit', '--dry-run'])
-  } catch (err) {
-    error(err.stdout)
-    process.exit(1)
-  }
-
-  try {
-    runCommandSync('yarn', ['husky:pre-commit'])
-  } catch (err) {
-    error(err.stdout)
-    process.exit(1)
-  }
-
-  return runCommandSync('git-cz')
+exports.setupGit = () => {
+  runGitCommand(['config', 'user.email', 'instui-dev@instructure.com'])
+  runGitCommand(['config', 'user.name', 'instructure-ui-ci'])
 }
 
-exports.setupGit = function setupGit() {
-  const {
-    GIT_EMAIL,
-    GIT_USERNAME,
-    GIT_REMOTE_URL,
-    GIT_REMOTE_NAME
-  } = process.env
-
-  const origin = GIT_REMOTE_NAME || 'origin'
-
-  let remotes = []
-
+exports.isReleaseCommit = (version) => {
   try {
-    remotes = runGitCommand(['remote']).split(/(\s+)/)
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
+    const result = runGitCommand(['log', '-1', '--pretty=format:%B'])
+    const formattedResult = result.split('\n')[0].trim()
 
-  if (GIT_REMOTE_URL) {
-    if (!remotes.includes(origin)) {
-      runGitCommand(['remote', 'add', origin, GIT_REMOTE_URL])
-    } else {
-      runGitCommand(['remote', 'set-url', origin, GIT_REMOTE_URL])
-    }
-  }
+    info(formattedResult)
 
-  if (GIT_EMAIL) {
-    runGitCommand(['config', 'user.email', `"${GIT_EMAIL}"`])
-  }
-  if (GIT_USERNAME) {
-    runGitCommand(['config', 'user.name', `"${GIT_USERNAME}"`])
-  }
-
-  runGitCommand(['fetch', origin, '--tags', '--force'])
-}
-
-exports.lintCommitMessage = function lintCommitMessage() {
-  const commitMessage = runGitCommand(['log', '-1', '--pretty=%B'])
-  return validateMessage(commitMessage)
-}
-
-exports.isReleaseCommit = function isReleaseCommit(version) {
-  let result
-
-  try {
-    result = runGitCommand(['log', '-1', '--pretty=format:%B'])
-    result = result.split('\n')[0].trim()
+    return (
+      formattedResult &&
+      formattedResult.startsWith(`chore(release): ${version}`)
+    )
   } catch (e) {
     error(e)
     process.exit(1)
   }
-
-  info(result)
-
-  return result && result.startsWith(`chore(release): ${version}`)
 }
 
 exports.checkWorkingDirectory = function checkWorkingDirectory() {
@@ -142,6 +86,29 @@ exports.checkIfGitTagExists = function checkIfGitTagExists(version) {
     )
     process.exit(1)
   }
+}
+
+exports.commit = function () {
+  try {
+    runGitCommand(['commit', '--dry-run'])
+  } catch (err) {
+    error(err.stdout)
+    process.exit(1)
+  }
+
+  try {
+    runCommandSync('yarn', ['husky:pre-commit'])
+  } catch (err) {
+    error(err.stdout)
+    process.exit(1)
+  }
+
+  return runCommandSync('git-cz')
+}
+
+exports.lintCommitMessage = function lintCommitMessage() {
+  const commitMessage = runGitCommand(['log', '-1', '--pretty=%B'])
+  return validateMessage(commitMessage)
 }
 
 exports.createGitTagForRelease = function createGitTagForRelease(version) {

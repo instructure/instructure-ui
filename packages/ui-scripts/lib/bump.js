@@ -25,11 +25,7 @@ const { getPackageJSON } = require('@instructure/pkg-utils')
 const { error, info } = require('@instructure/command-utils')
 
 const { getConfig } = require('./utils/config')
-const {
-  commitVersionBump,
-  setupGit,
-  checkWorkingDirectory
-} = require('./utils/git')
+const { commitVersionBump, checkWorkingDirectory } = require('./utils/git')
 const { bumpPackages } = require('./utils/npm')
 
 try {
@@ -48,7 +44,6 @@ async function bump(
   requestedVersion,
   config = {}
 ) {
-  setupGit()
   checkWorkingDirectory()
 
   let releaseVersion

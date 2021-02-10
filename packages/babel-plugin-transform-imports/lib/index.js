@@ -66,11 +66,13 @@ function transform(transformOption, importName, matches) {
         err: `[${transformName}] failed to require transform file ${transformOption} ${error}`
       }
     }
+
     if (typeof transformFn !== 'function') {
       throw {
         err: `[${transformName}] expected transform function to be exported from ${transformOption}`
       }
     }
+
     let importPath = importName
 
     // Sometimes the import is not located at root level of the src. Examine the source of the specified package and if the designated
@@ -96,11 +98,13 @@ function transform(transformOption, importName, matches) {
         )
         return null
       }
+
       if (importPaths.length > 1) {
         console.error(
           `[${transformName}] multiple modules found with the name '${importName}' in '${packageName}'. Continuing using the first match: '${importPaths[0]}'.`
         )
       }
+
       importPath = relative(
         sourceRoot,
         importPaths[0].endsWith('index.js')
