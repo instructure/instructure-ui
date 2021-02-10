@@ -4,7 +4,7 @@ on:
   # but only for the next branch
   push:
     branches:
-      - next
+      - release-legacy
 jobs:
   deploy:
     runs-on: ubuntu-latest
