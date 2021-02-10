@@ -5,12 +5,13 @@ describes: Tooltip
 Tooltips are small text-only contextual overlays that are triggered by hover/focus. Use anywhere additional explanation might be needed but space is limited on the triggering element.
 
 > ### What about 'focusable' elements?
-> Content provided to the `renderTip` prop __should not contain any focusable elements__. If you'd like to do
-that you should use the [Popover](#Popover) component and handle focus management yourself or
-consider using a [Modal](#Modal) or a [Tray](#Tray) as those will work better on smaller screens.
-
+>
+> Content provided to the `renderTip` prop **should not contain any focusable elements**. If you'd like to do
+> that you should use the [Popover](#Popover) component and handle focus management yourself or
+> consider using a [Modal](#Modal) or a [Tray](#Tray) as those will work better on smaller screens.
 
 #### Uncontrolled Tooltips
+
 ```js
 ---
 example: true
@@ -74,19 +75,29 @@ class Example extends React.Component {
 
   render () {
     return (
-      <Tooltip
-        renderTip="Hello. I'm a tool tip"
-        isShowingContent={this.state.isShowingContent}
-        onShowContent={(e) => {
-          this.setState({ isShowingContent: true })
-        }}
-        onHideContent={(e) => {
-          this.setState({ isShowingContent: false })
-        }}
-      >
-        <Link href="#">Hover or focus me</Link>
-      </Tooltip>
-    )
+      <>
+        <p>
+        <Tooltip
+          renderTip="Hello. I'm a tool tip"
+          isShowingContent={this.state.isShowingContent}
+          onShowContent={(e) => {
+            console.log("expecting to show tooltip")
+          }}
+          onHideContent={(e) => {
+            console.log("expecting to hide tooltip")
+          }}
+        >
+          <Link href="#">This link has a tooltip</Link>
+        </Tooltip>
+        </p>
+        <Checkbox label="show tooltip?" variant="toggle"
+                  value="toggled"
+                  onChange={(event) => {
+                    this.setState({isShowingContent: event.target.checked})
+                  }}
+        />
+    </>
+  )
   }
 }
 
