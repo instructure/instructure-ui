@@ -6,20 +6,20 @@ category: packages
 
 The [Emotion design library's](https://emotion.sh/) implementation in Instructure UI.
 
-### Elements
+### EmotionThemeProvider
 
 `EmotionThemeProvider` is a React component, which wraps Emotion's own `ThemeProvider`.
 
-#### Usage
-
-It can be used in two ways.
-Once on the top level, providing the theme for the whole application.
 It accepts a `theme` prop, which should be an Instructure UI theme.
+
+It can be used in two ways. On the top level, you can provide the theme for the whole application or nested anywhere inside it. You can also provide an object with theme or component theme overrides.
+
+**For detailed usage info and examples, see the [EmotionThemeProvider](#EmotionThemeProvider) documentation page.**
 
 ```jsx
 import App from './App'
 import { EmotionThemeProvider } from '@instructure/emotion'
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import { canvasHighContrast } from '@instructure/ui-themes'
 
 const RenderApp = () => {
   return (
@@ -28,108 +28,6 @@ const RenderApp = () => {
     </EmotionThemeProvider>
   )
 }
-```
-
-Secondly it can be used in any place in the component tree in order to override the above defined themes. In this case, you should provide the same structure as the original theme, but you may include only the parts, you intend to override.
-You can override things in three major way.
-You can override the theme variables for every theme
-
-```jsx
-import SomeOtherComponent from './SomeOtherComponent'
-import { EmotionThemeProvider } from '@instructure/emotion'
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
-
-const SomeComponentUnderApp = () => {
-  const themeOverride = {
-    colors: {
-      textAlert: 'pink'
-    }
-  }
-
-  return (
-    <EmotionThemeProvider theme={themeOverride}>
-      <SomeOtherComponent />
-    </EmotionThemeProvider>
-  )
-}
-```
-
-You also can override a specific theme only. The example below will override textInfo color to pink but only for canvas theme.
-
-```jsx
-import SomeOtherComponent from './SomeOtherComponent'
-import { EmotionThemeProvider } from '@instructure/emotion'
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
-
-const SomeComponentUnderApp = () => {
-  const themeOverride = {
-    themes: {
-      canvas: {
-        colors: {
-          textAlert: 'pink'
-        }
-      }
-    }
-  }
-
-  return (
-    <EmotionThemeProvider theme={themeOverride}>
-      <SomeOtherComponent />
-    </EmotionThemeProvider>
-  )
-}
-```
-
-Lastly, you can override specific component style variables (found in styles.js for every component)
-
-```jsx
-import SomeOtherComponent from  './SomeOtherComponent'
-import { EmotionThemeProvider } from  "@instructure/emotion"
-import { canvas, canvasHighContrast } from  "@instructure/ui-themes"
-
-const  SomeComponentUnderApp = () => {
-const themeOverride = {
-components:{
-	Avatar:{
-		color:"yellow"
-	}
-}
-
-return (
-<EmotionThemeProvider theme={themeOverride}>
-	<SomeOtherComponent/>
-</EmotionThemeProvider>
-)}
-```
-
-You can combine class specific overrides with component specific ones
-
-```jsx
-import SomeOtherComponent from  './SomeOtherComponent'
-import { EmotionThemeProvider } from  "@instructure/emotion"
-import { canvas, canvasHighContrast } from  "@instructure/ui-themes"
-
-const  SomeComponentUnderApp = () => {
-const themeOverride = {
-themes:{
-canvas:{
-	components:{
-		Avatar:{
-			color:"yellow"
-			}
-		}
-		colors:{
-			textAlert:"pink"
-		}
-	}
-}
-}
-
-return (
-<EmotionThemeProvider theme={themeOverride}>
-<SomeOtherComponent/>
-</EmotionThemeProvider>
-)}
 ```
 
 ## Temporary component migration guide
