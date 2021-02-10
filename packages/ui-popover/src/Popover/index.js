@@ -240,11 +240,7 @@ class Popover extends Component {
      */
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
-    // eslint-disable-next-line react/require-default-props
-    rtl: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
-    ltr: PropTypes.bool
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {
@@ -407,9 +403,10 @@ class Popover extends Component {
   }
 
   get placement() {
-    let { placement, rtl } = this.props
+    let { placement, dir } = this.props
+    const isRtl = dir === bidirectional.DIRECTION.rtl
 
-    if (rtl) {
+    if (isRtl) {
       placement = mirrorHorizontalPlacement(placement, ' ')
     }
 
@@ -674,9 +671,10 @@ class Popover extends Component {
           ...viewProps,
           // TODO: remove background override after contextview is updated
           background: color === 'primary' ? 'default' : 'inverse',
-          placement: this.props.rtl
-            ? mirrorHorizontalPlacement(placement, ' ')
-            : placement
+          placement:
+            this.props.dir === bidirectional.DIRECTION.rtl
+              ? mirrorHorizontalPlacement(placement, ' ')
+              : placement
         }
       } else {
         ViewElement = View

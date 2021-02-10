@@ -174,11 +174,7 @@ class Tray extends Component {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
-    // eslint-disable-next-line react/require-default-props
-    rtl: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
-    ltr: PropTypes.bool
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {
@@ -224,8 +220,10 @@ class Tray extends Component {
   }
 
   get placement() {
-    const { placement, rtl } = this.props
-    return rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+    const { placement, dir } = this.props
+    const isRtl = dir === bidirectional.DIRECTION.rtl
+
+    return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
   get direction() {
