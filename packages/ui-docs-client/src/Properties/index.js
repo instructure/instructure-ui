@@ -63,18 +63,16 @@ class Properties extends Component {
 
   renderRows() {
     const { props } = this.props
+    const propsToIgnore = ['styles', 'makeStyles', 'dir']
 
     return Object.keys(props)
       .filter((name) => {
         const description = props[name].description || ''
 
-        // `styles` and `makeStyles` are added by withStyle decorator,
-        // shouldn't be listed
         return (
           description.indexOf('@private') < 0 &&
           description.indexOf('@deprecated') < 0 &&
-          name !== 'styles' &&
-          name !== 'makeStyles'
+          !propsToIgnore.includes(name)
         )
       })
       .map((name) => {

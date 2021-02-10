@@ -60,16 +60,11 @@ const bidirectional = decorator((ComposedComponent) => {
   class BidirectionalComponent extends React.Component {
     render() {
       const { forwardedRef, ...rest } = this.props
+
       return (
         <TextDirectionContext.Consumer>
           {(dir) => (
-            <ComposedComponent
-              ref={forwardedRef}
-              dir={dir}
-              rtl={dir === DIRECTION.rtl}
-              ltr={dir === DIRECTION.ltr}
-              {...rest}
-            />
+            <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
           )}
         </TextDirectionContext.Consumer>
       )

@@ -107,11 +107,7 @@ class Tabs extends Component {
     tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
     shouldFocusOnRender: PropTypes.bool,
     // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
-    // eslint-disable-next-line react/require-default-props
-    rtl: PropTypes.bool,
-    // eslint-disable-next-line react/require-default-props
-    ltr: PropTypes.bool
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {
@@ -243,15 +239,16 @@ class Tabs extends Component {
       this._tabListPosition &&
       typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
-      const { rtl } = this.props
+      const { dir } = this.props
+      const isRtl = dir === bidirectional.DIRECTION.rtl
 
       const tabPosition = getBoundingClientRect(activeTabEl)
       const tabListPosition = this._tabListPosition
 
-      const tabListBoundStart = rtl
+      const tabListBoundStart = isRtl
         ? tabListPosition.left + this.getOverlayWidth()
         : tabListPosition.left
-      const tabListBoundEnd = rtl
+      const tabListBoundEnd = isRtl
         ? tabListPosition.right
         : tabListPosition.right + this.getOverlayWidth()
 
