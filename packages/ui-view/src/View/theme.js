@@ -24,7 +24,7 @@
 
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-import { makeThemeVars } from '@instructure/ui-themeable'
+import { makeThemeVars } from '@instructure/emotion'
 
 /**
  * Generates the theme object for the component from the theme and provided additional information
