@@ -86,6 +86,7 @@ module.exports = [
       '**/canvas-high-contrast-theme/**',
       '**/instructure-theme/**',
       '**/ui-theme-tokens/**',
+      '**/ui-themeable/**',
       '**/template-app/**',
       '**/template-component/**',
       '**/template-package/**',
@@ -95,7 +96,6 @@ module.exports = [
       '**/ui-docs-plugin/src/**',
 
       // deprecated packages and modules:
-      '**/ui-themeable/src/StyleSheet.js',
       '**/InputModeListener.js'
     ],
     themes: [

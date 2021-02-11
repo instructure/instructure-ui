@@ -182,10 +182,6 @@ module.exports = {
       __dirname,
       '../instructure-theme/src/'
     ),
-    '@instructure/ui-themeable$': path.resolve(
-      __dirname,
-      '../ui-themeable/src/'
-    ),
     '@instructure/ui-react-utils$': path.resolve(
       __dirname,
       '../ui-react-utils/src/'

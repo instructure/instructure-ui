@@ -6,7 +6,7 @@ category: packages
 
 [![npm][npm]][npm-url]&nbsp;
 [![build-status][build-status]][build-status-url]&nbsp;
-[![MIT License][license-badge]][LICENSE]&nbsp;
+[![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A webpack plugin to generate documentation made by Instructure Inc.
@@ -29,8 +29,8 @@ const DocsPlugin = require('@instructure/ui-docs-plugin')
 
 module.exports = {
   entry: {
-    common: [ 'react', 'react-dom' ],
-    'my-library': [ 'src'],
+    common: ['react', 'react-dom'],
+    'my-library': ['src'],
     globals: './globals'
   },
   plugins: [
@@ -50,11 +50,9 @@ module.exports = {
         author: pkg.author // optional
       },
       // paths should be absolute or relative to projectRoot
-      files: [
-        'src/components/*/index.js',
-        'docs/*.md'
-      ],
-      ignore: [ // optional
+      files: ['src/components/*/index.js', 'docs/*.md'],
+      ignore: [
+        // optional
         '**/node_modules/**',
         '**/__tests__/**'
       ],
@@ -85,7 +83,7 @@ Object.keys(MyLibrary).forEach((key) => {
 
 ### Themes
 
-The plugin will generate documentation for themes that are compatible with [@instructure/ui-themeable].
+The plugin will generate documentation for themes that are compatible with [@instructure/emotion](#emotion).
 You can make your own theme or import one from [@instructure/ui-themes](ui-themes) and then add them
 to the plugin options:
 
@@ -93,9 +91,7 @@ to the plugin options:
 // webpack.docs.config.js
 
 new DocsPlugin({
-  themes: [
-    'src/themes/*/index.js'
-  ],
+  themes: ['src/themes/*/index.js']
 })
 ```
 
@@ -110,7 +106,8 @@ new DocsPlugin({
   library: {
     codepen: {
       // codepen button form data (https://blog.codepen.io/documentation/api/prefill/)
-      js_external: [ // usually whatever webpack entries you've defined for the documentation
+      js_external: [
+        // usually whatever webpack entries you've defined for the documentation
         `${pkg.homepage}common.js`,
         `${pkg.homepage}instructure-ui.js`,
         `${pkg.homepage}globals.js`
@@ -177,7 +174,7 @@ You can write documentation in markdown files or in code comment blocks in your 
 
 You can configure optional meta data about a document with [YAML](http://yaml.org/) front matter inside your markdown content.
 
-````js
+```js
 ---
 example: false
 ---
@@ -187,7 +184,7 @@ id: code_of_conduct
 order: 3
 title: Code of Conduct
 ---
-````
+```
 
 The front matter must be the first content in the markdown file or comment block.
 
@@ -197,7 +194,7 @@ Note: categories can be nested via the `/` delimiter.
 
 In README files you can add the meta data:
 
-````js
+```js
 ---
 example: false
 ---
@@ -205,7 +202,7 @@ example: false
 describes: MyComponent
 ---
 
-````
+```
 
 To have the README file content serve as the description for the resource with the id 'MyComponent'. Usually this will
 be the `index.js` file in that directory.
@@ -217,7 +214,7 @@ Documents with the `describes` meta data won't show up in the documentation navi
 If you would like to display an example of a rendered component along with the code example, you can include a
 markdown code block like:
 
-````md
+````markdown
 ```js
 ---
 example: true
@@ -229,7 +226,7 @@ example: true
 If you would like to display the component on a dark background or dark checkerboard, you can add some extra data as
 yaml front matter to your code block:
 
-````md
+````markdown
 ```js
 ---
 example: true
@@ -242,7 +239,7 @@ background: 'checkerboard-inverse'
 If you would like to show a more complex code example, you can control what's rendered yourself with the following
 configuration:
 
-````md
+````markdown
 ```js
 ---
 render: false
@@ -255,7 +252,7 @@ render(MyButton)
 
 To make the code editor read-only you can configure the code block as:
 
-````md
+````markdown
 ```js
 ---
 readOnly: true
@@ -274,12 +271,9 @@ From the root of the `instructure-ui` repo:
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-docs-plugin.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-docs-plugin
-
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
-[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
-
+[build-status-url]: https://travis-ci.org/instructure/instructure-ui 'Travis CI'
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
 [license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
-
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md
