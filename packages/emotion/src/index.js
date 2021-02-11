@@ -30,6 +30,8 @@ export {
   ThemeablePropValues,
   ThemeablePropTypes,
   makeThemeVars,
-  getShorthandPropValue
+  getShorthandPropValue,
+  mirrorShorthandCorners,
+  mirrorShorthandEdges
 } from './styleUtils'
 export { withStyle } from './withStyle'

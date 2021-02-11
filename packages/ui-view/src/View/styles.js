@@ -23,10 +23,10 @@
  */
 import { DIRECTION } from '@instructure/ui-i18n'
 import {
+  getShorthandPropValue,
   mirrorShorthandEdges,
   mirrorShorthandCorners
-} from '@instructure/ui-themeable'
-import { getShorthandPropValue } from '@instructure/emotion'
+} from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
 
