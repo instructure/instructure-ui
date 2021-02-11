@@ -26,10 +26,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 

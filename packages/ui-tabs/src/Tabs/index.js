@@ -29,7 +29,6 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import {
   matchComponentTypes,
@@ -48,7 +47,7 @@ import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

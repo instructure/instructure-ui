@@ -27,7 +27,6 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
@@ -39,7 +38,7 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { jsx, withStyle } from '@instructure/emotion'
+import { jsx, withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

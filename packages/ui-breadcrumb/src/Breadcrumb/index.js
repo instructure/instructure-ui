@@ -28,10 +28,9 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import { BreadcrumbLink } from './BreadcrumbLink'
 

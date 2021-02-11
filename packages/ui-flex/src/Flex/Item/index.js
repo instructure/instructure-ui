@@ -26,10 +26,9 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 

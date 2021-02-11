@@ -28,12 +28,11 @@ import PropTypes from 'prop-types'
 
 import { PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

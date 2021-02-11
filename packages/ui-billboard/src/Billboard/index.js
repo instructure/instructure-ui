@@ -28,14 +28,13 @@ import PropTypes from 'prop-types'
 
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   omitProps,
   callRenderProp,
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

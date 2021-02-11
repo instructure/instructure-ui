@@ -39,11 +39,15 @@ import {
   IconNoSolid
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
-import { EmotionThemeProvider, withStyle, jsx } from '@instructure/emotion'
 import { canvas } from '@instructure/ui-themes'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  EmotionThemeProvider
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

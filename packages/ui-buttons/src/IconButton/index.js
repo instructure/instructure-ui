@@ -26,11 +26,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { withStyle } from '@instructure/emotion'
+import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 

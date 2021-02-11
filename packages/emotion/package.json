@@ -33,7 +33,8 @@
     "@instructure/ui-i18n": "^7.4.0",
     "emotion-theming": "^10.0.27",
     "hoist-non-react-statics": "^3.3.2",
-    "lodash": "^4"
+    "lodash": "^4",
+    "prop-types": "^15"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^7.4.0",
