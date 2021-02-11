@@ -35,7 +35,7 @@ export default {
   },
   getExampleProps: (props) => {
     return {
-      background: props.color.includes('inverse') ? 'inverse' : 'default',
+      background: props?.color?.includes('inverse') ? 'inverse' : 'default',
       maxWidth: '25rem'
     }
   },

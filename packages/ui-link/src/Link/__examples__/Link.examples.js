@@ -28,6 +28,7 @@ const longString =
 const shortString = 'Delete'
 
 export default {
+  excludeProps: ['linkRef', 'variant'],
   sectionProp: 'color',
   propValues: {
     children: [shortString, longString],

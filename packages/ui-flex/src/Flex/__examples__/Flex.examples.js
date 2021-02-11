@@ -60,6 +60,7 @@ const grow = [
 ]
 
 export default {
+  excludeProps: ['inline', 'wrapItems', 'visualDeug'],
   maxExamplesPerPage: 50,
   propValues: {
     children: [regular, shrink, grow]

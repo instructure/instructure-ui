@@ -23,6 +23,7 @@
  */
 
 export default {
+  excludeProps: ['grayscale', 'blur', 'inline'],
   sectionProp: 'constrain',
   getComponentProps: (props) => {
     return {
