@@ -28,6 +28,7 @@ export {
   useTheme,
   useStyle,
   ThemeablePropValues,
-  ThemeablePropTypes
+  ThemeablePropTypes,
+  makeThemeVars
 } from './styleUtils'
 export { withStyle } from './withStyle'
