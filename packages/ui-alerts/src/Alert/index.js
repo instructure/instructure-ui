@@ -237,6 +237,9 @@ class Alert extends Component {
   renderScreenreeaderAlert(div) {
     const content = this.createScreenreaderContentNode()
     ReactDOM.render(
+      // since ScreenReaderContent gets rendered outside the app,
+      // and uses the withStyle decorator, we need to provide a theme for it,
+      // otherwise throws warning (any theme, doesn't use any theme variables)
       <EmotionThemeProvider theme={canvas}>{content}</EmotionThemeProvider>,
       div
     )
