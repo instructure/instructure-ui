@@ -71,7 +71,6 @@
     "@instructure/ui-truncate-text": "^7.4.0",
     "@instructure/ui-utils": "^7.4.0",
     "@instructure/ui-view": "^7.4.0",
-    "classnames": "^2",
     "gray-matter": "3.1.1",
     "marked": "^0.7.0",
     "prop-types": "^15",

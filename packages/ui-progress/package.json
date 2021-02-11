@@ -37,7 +37,6 @@
     "@instructure/ui-react-utils": "^7.4.0",
     "@instructure/ui-testable": "^7.4.0",
     "@instructure/ui-view": "^7.4.0",
-    "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
