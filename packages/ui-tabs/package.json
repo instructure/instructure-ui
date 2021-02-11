@@ -50,7 +50,6 @@
     "@instructure/ui-utils": "^7.4.0",
     "@instructure/ui-view": "^7.4.0",
     "@instructure/uid": "^7.4.0",
-    "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"
   },
