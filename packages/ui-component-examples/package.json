@@ -3,6 +3,7 @@
   "version": "7.4.0",
   "description": "A utility for automatically generating component examples",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",

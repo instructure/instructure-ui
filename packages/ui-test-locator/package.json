@@ -3,13 +3,7 @@
   "version": "7.4.0",
   "description": "A locator component for finding components by their defined selector in tests.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
-  "exports": {
-    ".": {
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
-    }
-  },
+  "type": "commonjs",
   "main": "./lib/index.js",
   "module": "./es/index.js",
   "types": "./types/index.d.ts",

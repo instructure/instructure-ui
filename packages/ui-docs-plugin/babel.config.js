@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-export default {
+module.exports = {
   presets: [
     [
-      '@instructure/ui-babel-preset',
+      require('@instructure/ui-babel-preset'),
       {
         coverage: Boolean(process.env.COVERAGE),
         esModules: Boolean(process.env.ES_MODULES),
