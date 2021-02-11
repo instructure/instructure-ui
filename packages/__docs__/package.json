@@ -78,7 +78,6 @@
     "@instructure/ui-tag": "^7.4.0",
     "@instructure/ui-text": "^7.4.0",
     "@instructure/ui-text-input": "^7.4.0",
-    "@instructure/ui-themeable": "^7.4.0",
     "@instructure/ui-time-select": "^7.4.0",
     "@instructure/ui-toggle-details": "^7.4.0",
     "@instructure/ui-tooltip": "^7.4.0",
