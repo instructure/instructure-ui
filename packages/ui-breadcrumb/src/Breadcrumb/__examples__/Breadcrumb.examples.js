@@ -28,6 +28,7 @@ import { IconBankLine } from '@instructure/ui-icons'
 import { BreadcrumbLink } from '../index'
 
 export default {
+  excludeProps: ['icon'],
   propValues: {
     children: [
       [
@@ -40,13 +41,13 @@ export default {
         <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
       ],
       [
-        <BreadcrumbLink key="0" onClick={() => {}} icon={IconBankLine}>
+        <BreadcrumbLink key="0" onClick={() => {}} renderIcon={IconBankLine}>
           Item Bank
         </BreadcrumbLink>,
-        <BreadcrumbLink key="1" href="#" icon={IconBankLine}>
+        <BreadcrumbLink key="1" href="#" renderIcon={IconBankLine}>
           History
         </BreadcrumbLink>,
-        <BreadcrumbLink key="2" icon={IconBankLine}>
+        <BreadcrumbLink key="2" renderIcon={IconBankLine}>
           Question
         </BreadcrumbLink>
       ]

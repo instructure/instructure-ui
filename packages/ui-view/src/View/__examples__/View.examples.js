@@ -39,7 +39,6 @@ export default {
       padding: 'medium',
       display: 'block',
       children: 'Some content for the View',
-      withVisualDebug: false,
       focusColor: 'info',
       focusPosition: 'offset',
       borderColor: 'info',
@@ -57,9 +56,13 @@ export default {
     'focusPosition',
     'borderColor',
     'overflowX',
-    'overflowY'
+    'overflowY',
+    'visualDebug',
+    'focused'
   ],
   filter: (props) => {
+    const backgroundsToIgnore = ['default', 'light', 'inverse']
+
     return (
       // Border radius and border width list 0 in addition to none in their object values
       // so we filter those here as they are redundant
@@ -67,7 +70,8 @@ export default {
       props.borderWidth === 'none' ||
       props.background === 'transparent' ||
       (props.focusPosition === 'inset' && !props.withFocusOutline) ||
-      (props.withFocusOutline && props.position !== 'relative')
+      (props.withFocusOutline && props.position !== 'relative') ||
+      backgroundsToIgnore.includes(props.background)
     )
   }
 }

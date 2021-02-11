@@ -25,6 +25,7 @@ import React from 'react'
 import { List } from '../index'
 
 export default {
+  excludeProps: ['variant'],
   sectionProp: 'size',
   getComponentProps: (props) => {
     return {

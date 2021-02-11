@@ -50,7 +50,9 @@ category: components
 ---
 **/
 @deprecated('8.0.0', {
-  variant: 'List with the isUnstyled boolean or InlineList'
+  variant: 'List with the isUnstyled boolean or InlineList',
+  delimeter:
+    'with delimiter set to [pipe, slash, arrow] will only be available when using [InlineList] as of version 8.0.0.'
 })
 @testable()
 @themeable(theme, styles)
@@ -64,12 +66,14 @@ class List extends Component {
     /**
      * One of: none, dashed, solid
      */
-    delimiter: deprecated.deprecatePropValues(
-      PropTypes.oneOf(['none', 'dashed', 'solid', 'pipe', 'slash', 'arrow']),
-      ['pipe', 'slash', 'arrow'],
-      ({ propValue }) =>
-        `with 'delimiter' set to ${propValue} will only be available when using [InlineList] as of version 8.0.0.`
-    ),
+    delimiter: PropTypes.oneOf([
+      'none',
+      'dashed',
+      'solid',
+      'pipe',
+      'slash',
+      'arrow'
+    ]),
     /**
      * When set, renders the List Items without a list style type.
      */
