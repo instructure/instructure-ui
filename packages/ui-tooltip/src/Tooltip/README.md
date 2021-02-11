@@ -90,11 +90,13 @@ class Example extends React.Component {
           <Link href="#">This link has a tooltip</Link>
         </Tooltip>
         </p>
-        <Checkbox label="show tooltip?" variant="toggle"
-                  value="toggled"
-                  onChange={(event) => {
-                    this.setState({isShowingContent: event.target.checked})
-                  }}
+        <Checkbox
+          label="show tooltip?"
+          variant="toggle"
+          value="toggled"
+          onChange={(event) => {
+            this.setState({isShowingContent: event.target.checked})
+          }}
         />
     </>
   )
