@@ -4,12 +4,6 @@
   "description": "Icon set for Instructure, Inc. products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
-  "exports": {
-    ".": {
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
-    }
-  },
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "repository": {

@@ -3,7 +3,7 @@
   "version": "7.4.0",
   "description": "A webpack plugin to generate documentation made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
