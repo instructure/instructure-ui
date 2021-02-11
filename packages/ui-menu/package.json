@@ -48,7 +48,6 @@
     "@instructure/ui-prop-types": "^7.4.0",
     "@instructure/ui-react-utils": "^7.4.0",
     "@instructure/ui-testable": "^7.4.0",
-    "@instructure/ui-themeable": "^7.4.0",
     "@instructure/ui-utils": "^7.4.0",
     "@instructure/uid": "^7.4.0",
     "keycode": "^2",

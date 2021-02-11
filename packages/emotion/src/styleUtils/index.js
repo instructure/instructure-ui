@@ -82,4 +82,6 @@ const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
   return generateStyle(theme, themeOverride, props, ...extraArgs)
 }
 
+export { ThemeablePropValues } from './ThemeablePropValues'
+export { ThemeablePropTypes } from './ThemeablePropTypes'
 export { getComponentThemeOverride, useStyle, useTheme }

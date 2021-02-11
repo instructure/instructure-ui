@@ -36,8 +36,7 @@
     "@instructure/ui-test-utils": "^7.4.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
-    "@instructure/ui-themeable": "^7.4.0"
+    "@babel/runtime": "^7.9.2"
   },
   "publishConfig": {
     "access": "public"

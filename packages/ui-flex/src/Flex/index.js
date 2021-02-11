@@ -26,7 +26,6 @@
 import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   safeCloneElement,
   passthroughProps,
@@ -34,7 +33,7 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import { Item } from './Item'
 

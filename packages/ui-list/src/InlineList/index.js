@@ -25,7 +25,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'

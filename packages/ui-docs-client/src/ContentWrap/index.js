@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/emotion'
 
 class ContentWrap extends Component {
   static propTypes = {

@@ -30,7 +30,6 @@ import keycode from 'keycode'
 import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import {
   callRenderProp,
@@ -42,7 +41,7 @@ import { isEdge } from '@instructure/ui-utils'
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 

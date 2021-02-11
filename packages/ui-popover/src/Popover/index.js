@@ -46,7 +46,7 @@ import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 import { FocusRegion } from '@instructure/ui-a11y-utils'
 

@@ -27,12 +27,11 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

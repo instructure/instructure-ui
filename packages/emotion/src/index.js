@@ -24,5 +24,10 @@
 export { jsx, css, keyframes, Global } from '@emotion/core'
 
 export { EmotionThemeProvider } from './EmotionThemeProvider'
-export { useTheme, useStyle } from './styleUtils'
+export {
+  useTheme,
+  useStyle,
+  ThemeablePropValues,
+  ThemeablePropTypes
+} from './styleUtils'
 export { withStyle } from './withStyle'

@@ -23,7 +23,6 @@
  */
 
 export { ApplyTheme } from './ApplyTheme'
-export { ThemeablePropValues } from './ThemeablePropValues'
 export { applyCustomMediaToCss } from './applyCustomMediaToCss'
 export { applyVariablesToNode } from './applyVariablesToNode'
 export { formatVariableName } from './formatVariableName'
@@ -36,7 +35,6 @@ export { mirrorShorthandCorners } from './mirrorShorthandCorners'
 export { pickOverrides } from './pickOverrides'
 export { replaceValuesWithVariableNames } from './replaceValuesWithVariableNames'
 export { setTextDirection } from './setTextDirection'
-export { ThemeablePropTypes } from './ThemeablePropTypes'
 export { ThemeContext } from './ThemeContext'
 export { transformCss } from './transformCss'
 export { cleanCss } from './cleanCss'

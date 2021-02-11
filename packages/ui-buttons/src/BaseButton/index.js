@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { testable } from '@instructure/ui-testable'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   getElementType,
   getInteraction,
@@ -41,7 +40,7 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 import { Flex } from '@instructure/ui-flex'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'

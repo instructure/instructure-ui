@@ -25,9 +25,8 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import { jsx, withStyle } from '@instructure/emotion'
+import { jsx, withStyle, ThemeablePropTypes } from '@instructure/emotion'
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'

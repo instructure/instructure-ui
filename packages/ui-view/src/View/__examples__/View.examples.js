@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { ThemeablePropValues } from '@instructure/ui-themeable'
+import { ThemeablePropValues } from '@instructure/emotion'
 
 const { SHADOW_TYPES, BORDER_WIDTHS, BORDER_RADII } = ThemeablePropValues
 

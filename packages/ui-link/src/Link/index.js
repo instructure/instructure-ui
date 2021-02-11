@@ -27,7 +27,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
@@ -40,7 +39,7 @@ import {
 import { warn } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 

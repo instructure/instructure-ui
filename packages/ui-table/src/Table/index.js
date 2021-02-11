@@ -26,7 +26,6 @@
 import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -36,7 +35,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

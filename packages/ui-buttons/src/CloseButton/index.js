@@ -29,10 +29,9 @@ import PropTypes from 'prop-types'
 import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx } from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'

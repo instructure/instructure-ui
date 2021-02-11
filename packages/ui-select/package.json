@@ -49,7 +49,6 @@
     "@instructure/ui-selectable": "^7.4.0",
     "@instructure/ui-testable": "^7.4.0",
     "@instructure/ui-text-input": "^7.4.0",
-    "@instructure/ui-themeable": "^7.4.0",
     "@instructure/ui-utils": "^7.4.0",
     "@instructure/ui-view": "^7.4.0",
     "@instructure/uid": "^7.4.0",
