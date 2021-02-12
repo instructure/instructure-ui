@@ -66,19 +66,20 @@ describe('<Badge />', () => {
     expect(await badge.find(':contains(99 +)')).to.exist()
   })
 
-  // Todo: test this with VRT
-  // it('should change postion based on the placement prop', async () => {
-  //   await mount(
-  //     <Badge count={3} placement="bottom start">
-  //       <button type="button">Inbox</button>
-  //     </Badge>
-  //   )
-  //
-  //   const badge = await BadgeLocator.find()
-  //
-  //   expect(await badge.find(`.${styles['positioned--bottom']}`)).to.exist()
-  //   expect(await badge.find(`.${styles['positioned--start']}`)).to.exist()
-  // })
+  it('should change postion based on the placement prop', async () => {
+    const countOffset = '5px'
+    await mount(
+      <Badge count={3} placement="bottom start" themeOverride={{ countOffset }}>
+        <button type="button">Inbox</button>
+      </Badge>
+    )
+
+    const badgeWrapper = await BadgeLocator.find()
+    const badge = await badgeWrapper.find('[class$=-badge]')
+
+    expect(badge.getComputedStyle().bottom).to.equal(`-${countOffset}`)
+    expect(badge.getComputedStyle().left).to.equal(`-${countOffset}`)
+  })
 
   it('should not render a wrapper for a standalone Badge', async () => {
     await mount(
