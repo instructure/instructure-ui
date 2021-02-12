@@ -26,7 +26,7 @@ export default {
   sectionProp: 'variant',
   getComponentProps: (props) => {
     return {
-      title: 'Loading'
+      renderTitle: 'Loading'
     }
   },
   getExampleProps: (props) => {

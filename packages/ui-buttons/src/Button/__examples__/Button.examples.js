@@ -32,6 +32,7 @@ const icon = (
 
 export default {
   sectionProp: 'color',
+  maxExamplesPerPage: 50,
   propValues: {
     renderIcon: [null, icon]
   },

@@ -40,7 +40,7 @@ export default {
   }),
   getExampleProps: (props) => {
     return {
-      background: props.color.includes('inverse')
+      background: props?.color?.includes('inverse')
         ? 'primary-inverse'
         : 'primary'
     }
