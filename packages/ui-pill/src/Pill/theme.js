@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-// TODO: For v8.0.0 we will map primaryColor to textDark and do away with default (color)
-// NOTE: This will make it so no pill is going to inherit the brand color per product design
-
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -49,7 +46,6 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     textFontSize: typography?.fontSizeXSmall,
     textFontWeight: typography?.fontWeightBold,
     maxWidth: '15rem',
-    color: colors?.textDark,
     primaryColor: colors?.textDark,
     infoColor: colors?.textInfo,
     dangerColor: colors?.textDanger,
