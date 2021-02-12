@@ -21,14 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-//TODO fix timeouting tests
 import React from 'react'
 import {
   expect,
   mount,
   generateA11yTests,
-  // stub,
-  // wait,
+  stub,
+  wait,
   within
 } from '@instructure/ui-test-utils'
 
@@ -108,46 +107,46 @@ describe('<AppNav />', async () => {
   })
 
   describe('with item truncation', () => {
-    // it('should hide and show items based on the containing element width', async () => {
-    //   const onUpdate = stub()
-    //   const itemWidth = 70
+    it('should hide and show items based on the containing element width', async () => {
+      const onUpdate = stub()
+      const itemWidth = 70
 
-    //   const Nav = ({ width }) => (
-    //     <div style={{ width }}>
-    //       <AppNav screenReaderLabel="App navigation" onUpdate={onUpdate}>
-    //         <AppNav.Item
-    //           renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
-    //           href="http://instructure.design"
-    //         />
-    //         <AppNav.Item
-    //           renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
-    //           href="http://instructure.design"
-    //         />
-    //         <AppNav.Item
-    //           renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
-    //           href="http://instructure.design"
-    //         />
-    //         <AppNav.Item
-    //           renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
-    //           href="http://instructure.design"
-    //         />
-    //       </AppNav>
-    //     </div>
-    //   )
+      const Nav = ({ width }) => (
+        <div style={{ width }}>
+          <AppNav screenReaderLabel="App navigation" onUpdate={onUpdate}>
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+            <AppNav.Item
+              renderLabel={<div style={{ width: itemWidth }}>coolLabel</div>}
+              href="http://instructure.design"
+            />
+          </AppNav>
+        </div>
+      )
 
-    //   const subject = await mount(<Nav width={800} />)
+      const subject = await mount(<Nav width={800} />)
 
-    //   await wait(() => {
-    //     expect(onUpdate).to.have.been.calledWith({ visibleItemsCount: 4 })
-    //   })
+      await wait(() => {
+        expect(onUpdate).to.have.been.calledWith({ visibleItemsCount: 4 })
+      })
 
-    //   onUpdate.reset()
-    //   await subject.setProps({ width: 400 })
+      onUpdate.reset()
+      await subject.setProps({ width: 400 })
 
-    //   await wait(() => {
-    //     expect(onUpdate).to.have.been.calledWith({ visibleItemsCount: 2 })
-    //   })
-    // })
+      await wait(() => {
+        expect(onUpdate).to.have.been.calledWith({ visibleItemsCount: 2 })
+      })
+    })
 
     it('should pass a custom label to the menu trigger', async () => {
       const subject = await mount(
