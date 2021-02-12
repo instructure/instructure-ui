@@ -24,7 +24,7 @@
 export default {
   sectionProp: 'variant',
   propValues: {
-    closeButtonLabel: [null, 'close'],
+    renderCloseButtonLabel: [null, 'close'],
     children: [
       'An alert with some content',
       'an alert with a ton of content that is going to wrap. It takes a ton of content to ' +
