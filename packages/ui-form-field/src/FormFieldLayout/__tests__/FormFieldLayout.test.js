@@ -41,30 +41,29 @@ describe('<FormFieldLayout />', async () => {
     expect(await formFieldLayout.accessible()).to.be.true()
   })
 
-  // Todo: uncomment these tests after bidirectional support is fixed
-  // it('should align label to right by default', async () => {
-  //   const subject = await mount(
-  //     <FormFieldLayout label="Username" layout="inline">
-  //       <input type="text" />
-  //     </FormFieldLayout>
-  //   )
-  //
-  //   const formFieldLayout = within(subject.getDOMNode())
-  //   const label = await formFieldLayout.findWithText('Username')
-  //   expect(label.getComputedStyle().textAlign).to.equal('right')
-  // })
-  //
-  // it('should align label to left', async () => {
-  //   const subject = await mount(
-  //     <FormFieldLayout label="Username" layout="inline" labelAlign="start">
-  //       <input type="text" />
-  //     </FormFieldLayout>
-  //   )
-  //
-  //   const formFieldLayout = within(subject.getDOMNode())
-  //   const label = await formFieldLayout.findWithText('Username')
-  //   expect(label.getComputedStyle().textAlign).to.equal('left')
-  // })
+  it('should align label to right by default', async () => {
+    const subject = await mount(
+      <FormFieldLayout label="Username" layout="inline">
+        <input type="text" />
+      </FormFieldLayout>
+    )
+
+    const formFieldLayout = within(subject.getDOMNode())
+    const label = await formFieldLayout.findWithText('Username')
+    expect(label.getComputedStyle().textAlign).to.equal('right')
+  })
+
+  it('should align label to left', async () => {
+    const subject = await mount(
+      <FormFieldLayout label="Username" layout="inline" labelAlign="start">
+        <input type="text" />
+      </FormFieldLayout>
+    )
+
+    const formFieldLayout = within(subject.getDOMNode())
+    const label = await formFieldLayout.findWithText('Username')
+    expect(label.getComputedStyle().textAlign).to.equal('left')
+  })
 
   it('should provide a ref to the input container', async () => {
     const inputContainerRef = stub()
