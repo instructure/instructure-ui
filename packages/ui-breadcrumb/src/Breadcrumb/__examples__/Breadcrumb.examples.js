@@ -28,6 +28,7 @@ import { IconBankLine } from '@instructure/ui-icons'
 import { BreadcrumbLink } from '../index'
 
 export default {
+  excludeProps: ['icon'],
   propValues: {
     children: [
       [

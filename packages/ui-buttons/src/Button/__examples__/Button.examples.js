@@ -31,6 +31,7 @@ const icon = (
 )
 
 export default {
+  excludeProps: ['buttonRef', 'fluidWidth', 'icon', 'variant'],
   sectionProp: 'color',
   maxExamplesPerPage: 50,
   propValues: {

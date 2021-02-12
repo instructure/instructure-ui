@@ -43,6 +43,7 @@ import generateComponentTheme from './theme'
 category: components
 ---
 **/
+
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class List extends Component {
@@ -60,6 +61,7 @@ class List extends Component {
      * One of: none, dashed, solid
      */
     delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
+
     /**
      * When set, renders the List Items without a list style type.
      */

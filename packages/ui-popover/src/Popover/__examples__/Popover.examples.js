@@ -25,6 +25,17 @@ import React from 'react'
 
 export default {
   maxExamplesPerPage: 50,
+  excludeProps: [
+    'show',
+    'defaultShow',
+    'variant',
+    'label',
+    'trackPosition',
+    'alignArrow',
+    'onShow',
+    'onDismiss',
+    'onToggle'
+  ],
   propValues: {
     withArrow: [true, false],
     placement: ['bottom center'],

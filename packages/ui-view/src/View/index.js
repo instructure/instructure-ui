@@ -49,6 +49,7 @@ category: components
 ---
 @module View
 **/
+
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
 class View extends Component {
