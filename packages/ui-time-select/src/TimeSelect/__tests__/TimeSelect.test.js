@@ -37,10 +37,6 @@ import { TimeSelectLocator } from '../TimeSelectLocator'
 import TimeSelectExamples from '../__examples__/TimeSelect.examples'
 
 describe('<TimeSelect />', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
-
   const lastCall = (spy) => spy.lastCall.args
 
   it('should render an input and list', async () => {
