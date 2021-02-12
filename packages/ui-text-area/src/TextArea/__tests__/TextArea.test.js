@@ -53,7 +53,7 @@ describe('TextArea', async () => {
 
     expect(input.getComputedStyle().height).to.contain('100px')
   })
-  /* TODO fix this test
+
   it('should resize if autoGrow is true', async () => {
     const subject = await mount(
       <TextArea label="Name" autoGrow={true} width="500px" onChange={stub} />
@@ -76,7 +76,7 @@ describe('TextArea', async () => {
     })
 
     // Ensure minHeight that matches input height is being applied to container
-    const layout = await textArea.find(`.${styles.layout}`)
+    const layout = await textArea.find('[class$=-textArea__layout]')
     const layoutMinHeight = parseInt(
       layout.getComputedStyle().getPropertyValue('min-height'),
       10
@@ -124,7 +124,7 @@ describe('TextArea', async () => {
       '160px'
     )
     // ensure maxHeight is being applied to input container and not exceeded by minHeight style
-    const layout = await textArea.find(`.${styles.layout}`)
+    const layout = await textArea.find('[class$=-textArea__layout]')
     const layoutMaxHeight = parseInt(
       layout.getComputedStyle().getPropertyValue('max-height'),
       10
@@ -136,7 +136,7 @@ describe('TextArea', async () => {
     expect(layoutMaxHeight).to.equal(160)
     expect(layoutMaxHeight).to.be.above(layoutMinHeight)
   })
-*/
+
   it('should focus the textarea when focus is called', async () => {
     let ref
     await mount(
