@@ -23,4 +23,3 @@
  */
 
 export { Select } from './Select'
-export { SelectLocator } from './Select/SelectLocator'

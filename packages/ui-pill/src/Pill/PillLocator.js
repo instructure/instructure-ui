@@ -24,7 +24,8 @@
 
 import { locator } from '@instructure/ui-test-locator'
 import { parseQueryArguments } from '@instructure/ui-test-queries'
-import { TooltipLocator } from '@instructure/ui-tooltip'
+// eslint-disable-next-line no-restricted-imports
+import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
 
 import { Pill } from './index'
 

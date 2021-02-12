@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Tooltip } from './Tooltip'
-export { TooltipLocator } from './Tooltip/TooltipLocator'

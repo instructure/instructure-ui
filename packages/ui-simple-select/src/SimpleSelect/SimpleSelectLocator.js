@@ -23,7 +23,9 @@
  */
 import { locator } from '@instructure/ui-test-locator'
 
-import { SelectLocator } from '@instructure/ui-select'
+/* eslint-disable no-restricted-imports */
+import { SelectLocator } from '@instructure/ui-select/es/Select/SelectLocator'
+/* eslint-enable no-restricted-imports */
 
 import { SimpleSelect } from './index'
 
