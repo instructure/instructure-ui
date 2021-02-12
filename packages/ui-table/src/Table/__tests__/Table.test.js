@@ -37,9 +37,6 @@ import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSele
 import { Table } from '../index'
 
 describe('<Table />', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
   const render = (props) =>
     mount(
       <Table caption="Test table" {...props}>
