@@ -36,9 +36,6 @@ import { DayLocator } from '../DayLocator'
 import DayExamples from '../__examples__/Day.examples'
 
 describe('Day', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
   it('should render children', async () => {
     const subject = await mount(
       <Day date="2019-08-02" label="1 August 2019 Friday">
