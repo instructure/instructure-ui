@@ -37,10 +37,6 @@ import { Popover } from '../index'
 import { PopoverLocator } from '../PopoverLocator'
 
 describe('<Popover />', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
-
   it('should not render content by default', async () => {
     await mount(
       <Popover on="click" renderTrigger={<button>Click Me</button>}>
