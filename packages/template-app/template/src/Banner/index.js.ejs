@@ -22,21 +22,30 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
-
-import { themeable } from '@instructure/ui-themeable'
 
 import { Heading } from '@instructure/ui-heading'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { IconCheckMarkSolid } from '@instructure/ui-icons'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import Panda from './Panda'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-import styles from './styles.css'
-import theme from './theme.js'
-
+@withStyle(generateStyle, generateComponentTheme)
 class Banner extends Component {
+
+  componentDidMount() {
+     this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+     this.props.makeStyles()
+  }
+
   render () {
     return (
       <View
@@ -55,13 +64,13 @@ class Banner extends Component {
         >
           <IconCheckMarkSolid size="medium" inline={false} />
         </View>
-        <div className={styles.banner}>
+        <div css={this.props.styles.banner}>
           <View
             maxWidth="40rem"
             margin="0 auto"
             padding="x-large medium medium"
             display="block"
-            background="light"
+            background="secondary"
             borderRadius="large"
             shadow="above"
           >
@@ -75,4 +84,4 @@ class Banner extends Component {
   }
 }
 
-export default themeable(theme, styles)(Banner)
+export default Banner
