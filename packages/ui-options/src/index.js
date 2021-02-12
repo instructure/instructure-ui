@@ -23,4 +23,3 @@
  */
 
 export { Options } from './Options'
-export { OptionsLocator } from './Options/OptionsLocator'

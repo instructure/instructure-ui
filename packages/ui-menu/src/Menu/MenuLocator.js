@@ -24,7 +24,8 @@
 import { locator } from '@instructure/ui-test-locator'
 import { parseQueryArguments } from '@instructure/ui-test-queries'
 
-import { PopoverLocator } from '@instructure/ui-popover'
+// eslint-disable-next-line no-restricted-imports
+import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 
 import { Menu } from './index'
 
