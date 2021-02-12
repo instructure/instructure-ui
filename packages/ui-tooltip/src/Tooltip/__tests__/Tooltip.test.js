@@ -37,10 +37,6 @@ import { TooltipLocator } from '../TooltipLocator'
 import TooltipExamples from '../__examples__/Tooltip.examples'
 
 describe('<Tooltip />', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
-
   it('should render', async () => {
     await mount(
       <Tooltip renderTip="Hello">
