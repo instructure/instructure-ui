@@ -43,7 +43,6 @@ describe('<ModalBody />', async () => {
 
     await mount(<ModalBody variant="inverse" />)
     const body = await ModalBodyLocator.find()
-    //expect(body.hasClass(styles['inverse'])).to.be.true()
 
     const cssStyleDeclaration = body.getComputedStyle() // CSSStyleDeclaration type
     expect(variables.inverseBackground).to.equal(
