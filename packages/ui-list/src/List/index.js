@@ -51,7 +51,7 @@ category: components
 **/
 @deprecated('8.0.0', {
   variant: 'List with the isUnstyled boolean or InlineList',
-  delimeter:
+  delimiter:
     'with delimiter set to [pipe, slash, arrow] will only be available when using [InlineList] as of version 8.0.0.'
 })
 @testable()
