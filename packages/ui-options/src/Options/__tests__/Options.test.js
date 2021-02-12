@@ -35,10 +35,6 @@ import { OptionsLocator } from '../OptionsLocator'
 import OptionsExamples from '../__examples__/Options.examples'
 
 describe('<Options />', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
-
   it('should render', async () => {
     await mount(<Options />)
     const options = OptionsLocator.find()
