@@ -79,7 +79,8 @@ describe('<Alert />', async () => {
 
     expect(closeButton).to.not.exist()
   })
-  //TODO fix test when new testing library is introduced
+
+  // TODO fix test when new testing library is introduced
   // it('should call `onDismiss` when the close button is clicked with renderCloseButtonLabel', async () => {
   //   const onDismiss = stub()
   //   const subject = await mount(
@@ -91,74 +92,36 @@ describe('<Alert />', async () => {
   //       Success: Sample alert text.
   //     </Alert>
   //   )
-
+  //
   //   const alert = within(subject.getDOMNode())
   //   const closeButton = await alert.find(':focusable')
-
+  //
   //   await closeButton.click()
   //   await wait(() => {
   //     expect(onDismiss).to.have.been.called()
   //   })
   // })
 
-  // const variantChanges = function (variant, variantModifications) {
-  //   it('should add a class to main div based on `variant`', async () => {
-  //     const subject = await mount(
-  //       <Alert variant={variant} transition="none">
-  //         Success: Sample alert text.
-  //       </Alert>
-  //     )
-  //     const alert = within(subject.getDOMNode())
-  //     const icon = await alert.find(`.${variantModifications.className}`)
-  //     expect(icon).to.exist()
-  //   })
+  const iconComponentsVariants = {
+    error: 'IconNo',
+    info: 'IconInfoBorderless',
+    success: 'IconCheckMark',
+    warning: 'IconWarningBorderless'
+  }
 
-  //   it('should change the icon based on `variant`', async () => {
-  //     const subject = await mount(
-  //       <Alert variant={variant} transition="none">
-  //         Success: Sample alert text.
-  //       </Alert>
-  //     )
+  Object.entries(iconComponentsVariants).forEach(([variant, iconComponent]) => {
+    it(`"${variant}" variant should have icon "${iconComponent}".`, async () => {
+      const subject = await mount(
+        <Alert variant={variant} transition="none">
+          Success: Sample alert text.
+        </Alert>
+      )
 
-  //     const alert = within(subject.getDOMNode())
-  //     const icon = await alert.find(
-  //       `[name=${variantModifications.iconComponent}]`
-  //     )
-  //     expect(icon).to.exist()
-  //   })
-  // }
-
-  // describe('`variant` is success', async () => {
-  //   const variantModifications = {
-  //     className: styles.success,
-  //     iconComponent: 'IconCheckMark'
-  //   }
-  //   variantChanges('success', variantModifications)
-  // })
-
-  // describe('`variant` is error', async () => {
-  //   const variantModifications = {
-  //     className: styles.error,
-  //     iconComponent: 'IconNo'
-  //   }
-  //   variantChanges('error', variantModifications)
-  // })
-
-  // describe('`variant` is warning', async () => {
-  //   const variantModifications = {
-  //     className: styles.warning,
-  //     iconComponent: 'IconWarningBorderless'
-  //   }
-  //   variantChanges('warning', variantModifications)
-  // })
-
-  // describe('`variant` is info', async () => {
-  //   const variantModifications = {
-  //     className: styles.info,
-  //     iconComponent: 'IconInfoBorderless'
-  //   }
-  //   variantChanges('info', variantModifications)
-  // })
+      const alert = within(subject.getDOMNode())
+      const icon = await alert.find(`[name=${iconComponent}]`)
+      expect(icon).to.exist()
+    })
+  })
 
   it('should meet a11y standards', async () => {
     const subject = await mount(
