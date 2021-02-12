@@ -30,10 +30,6 @@ import { BaseButton } from '../index'
 import { BaseButtonLocator } from '../BaseButtonLocator'
 
 describe('<BaseButton/>', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress deprecated warnings unti v8 release
-  })
-
   it('should render the children as button text', async () => {
     await mount(<BaseButton>Hello World</BaseButton>)
     expect(await BaseButtonLocator.find(':contains(Hello World)')).to.exist()
