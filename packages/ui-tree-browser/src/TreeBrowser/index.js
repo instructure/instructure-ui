@@ -30,7 +30,7 @@ import keycode from 'keycode'
 
 import { IconFolderLine, IconDocumentLine } from '@instructure/ui-icons'
 
-import { pickProps } from '@instructure/ui-react-utils'
+import { pickProps, omitProps } from '@instructure/ui-react-utils'
 import { controllable } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -371,15 +371,10 @@ class TreeBrowser extends Component {
   }
 
   renderRoot() {
-    // Have to do this because `pickProps` will pass the `styles` and the `makeStyles`
-    // props to the `TreeCollection` component and they will interfere with the correct
-    // style calcualting behaviour of the `TreeCollection` component
-    // TODO: change pickProps to always filter out the `styles` and `makeStyles` properties
-    const { styles, makeStyles, ...restProps } = this.props
     return this.collections.map((collection, i) => (
       <TreeCollection
         key={i}
-        {...pickProps(restProps, TreeCollection.propTypes)}
+        {...pickProps(omitProps(this.props), TreeCollection.propTypes)}
         {...this.getCollectionProps(collection)}
         selection={this.state.selection}
         onItemClick={this.handleItemClick}
