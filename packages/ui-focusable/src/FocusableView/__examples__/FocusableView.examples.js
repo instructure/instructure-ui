@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  presets: [
-    [
-      require('@instructure/ui-babel-preset'),
-      {
-        coverage: Boolean(process.env.COVERAGE),
-        esModules: Boolean(process.env.ES_MODULES),
-        removeConsole: process.env.NODE_ENV === 'production',
-        transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
-      }
-    ]
-  ]
+export default {
+  sections: 'color',
+  getComponentProps: (props) => {
+    return {
+      focused: true,
+      children: 'Focused'
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.color === 'inverse' ? 'primary-inverse' : 'primary'
+    }
+  }
 }
