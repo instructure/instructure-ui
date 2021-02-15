@@ -27,7 +27,7 @@
     "test:patchset": "npm-run-all lint:commit lint:changes test:jest test",
     "pretest:merge": "yarn bootstrap && yarn check",
     "test:merge": "npm-run-all lint:commit lint test",
-    "test:all": "npm-run-all test:jest test:karma",
+    "test:all": "npm-run-all test:jest test",
     "test:watch": "ui-test --watch --no-headless",
     "test:changes": "ui-test --changed",
     "test": "ui-test",

@@ -3,13 +3,7 @@
   "version": "7.4.0",
   "description": "A utility component for show/hide functionality",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
-  "exports": {
-    ".": {
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
-    }
-  },
+  "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "repository": {
