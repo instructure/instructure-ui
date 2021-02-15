@@ -42,6 +42,8 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+import { AppContext } from '../App'
+
 import { Preview } from '../Preview'
 import { CodePenButton } from '../CodePenButton'
 import { LibraryPropType } from '../propTypes'
@@ -198,7 +200,7 @@ class Playground extends Component {
     const { styles } = this.props
     const { code, fullscreen, rtl } = this.state
 
-    const preview = (
+    const PreviewComponent = ({ themeKey, themes }) => (
       <Preview
         code={code}
         render={this.props.render}
@@ -206,93 +208,101 @@ class Playground extends Component {
         background={this.props.background}
         fullscreen={fullscreen}
         rtl={rtl}
+        themeKey={themeKey}
+        themes={themes}
       />
     )
 
     return (
-      <div css={styles.playground}>
-        {fullscreen ? (
-          <Modal
-            open
-            label={`Full screen view`}
-            size="fullscreen"
-            onDismiss={this.handleMinimize}
-          >
-            <Modal.Body padding="0">
-              <CloseButton
-                placement="end"
-                offset="medium"
-                onClick={this.handleMinimize}
-                screenReaderLabel="Close"
-              />
-              {preview}
-            </Modal.Body>
-          </Modal>
-        ) : (
-          preview
-        )}
+      <AppContext.Consumer>
+        {({ library, themeKey, themes }) => (
+          <div css={styles.playground}>
+            {fullscreen ? (
+              <Modal
+                open
+                label={`Full screen view`}
+                size="fullscreen"
+                onDismiss={this.handleMinimize}
+              >
+                <Modal.Body padding="0">
+                  <CloseButton
+                    placement="end"
+                    offset="medium"
+                    onClick={this.handleMinimize}
+                    screenReaderLabel="Close"
+                  />
+                  <PreviewComponent themeKey={themeKey} themes={themes} />
+                </Modal.Body>
+              </Modal>
+            ) : (
+              <PreviewComponent themeKey={themeKey} themes={themes} />
+            )}
 
-        {this.state.showCode && this.renderEditor()}
+            {this.state.showCode && this.renderEditor()}
 
-        <Flex alignItems="center" padding="xx-small 0 0">
-          <Flex.Item shouldShrink shouldGrow>
-            <Flex>
-              <Flex.Item>
-                <Tooltip renderTip="Fullscreen" placement="bottom">
-                  <IconButton
-                    onClick={this.handleMaximize}
-                    ref={(c) => {
-                      this._fullScreenButton = c
-                    }}
-                    size="small"
-                    withBorder={false}
-                    withBackground={false}
-                    screenReaderLabel="Full screen view"
-                    renderIcon={
-                      <SVGIcon viewBox="0 0 24 24">
-                        {fullScreenIconPath}
-                      </SVGIcon>
-                    }
-                  />
-                </Tooltip>
+            <Flex alignItems="center" padding="xx-small 0 0">
+              <Flex.Item shouldShrink shouldGrow>
+                <Flex>
+                  <Flex.Item>
+                    <Tooltip renderTip="Fullscreen" placement="bottom">
+                      <IconButton
+                        onClick={this.handleMaximize}
+                        ref={(c) => {
+                          this._fullScreenButton = c
+                        }}
+                        size="small"
+                        withBorder={false}
+                        withBackground={false}
+                        screenReaderLabel="Full screen view"
+                        renderIcon={
+                          <SVGIcon viewBox="0 0 24 24">
+                            {fullScreenIconPath}
+                          </SVGIcon>
+                        }
+                      />
+                    </Tooltip>
+                  </Flex.Item>
+                  <Flex.Item>
+                    <Tooltip
+                      renderTip={
+                        this.state.showCode ? 'Hide Code' : 'Show Code'
+                      }
+                      placement="bottom"
+                    >
+                      <IconButton
+                        margin="0 x-small"
+                        onClick={this.handleCodeToggle}
+                        size="small"
+                        withBorder={false}
+                        withBackground={false}
+                        screenReaderLabel={
+                          this.state.showCode ? 'Hide Code' : 'Show Code'
+                        }
+                        renderIcon={
+                          <SVGIcon viewBox="0 0 32 32">{codeIconPath}</SVGIcon>
+                        }
+                      />
+                    </Tooltip>
+                  </Flex.Item>
+                  {library.codepen && (
+                    <Flex.Item>
+                      <CodePenButton
+                        code={code}
+                        title={`${this.props.title} Example`}
+                        language={this.props.language}
+                        render={this.props.render}
+                        options={library.codepen}
+                      />
+                    </Flex.Item>
+                  )}
+                </Flex>
               </Flex.Item>
-              <Flex.Item>
-                <Tooltip
-                  renderTip={this.state.showCode ? 'Hide Code' : 'Show Code'}
-                  placement="bottom"
-                >
-                  <IconButton
-                    margin="0 x-small"
-                    onClick={this.handleCodeToggle}
-                    size="small"
-                    withBorder={false}
-                    withBackground={false}
-                    screenReaderLabel={
-                      this.state.showCode ? 'Hide Code' : 'Show Code'
-                    }
-                    renderIcon={
-                      <SVGIcon viewBox="0 0 32 32">{codeIconPath}</SVGIcon>
-                    }
-                  />
-                </Tooltip>
-              </Flex.Item>
-              {this.context.library.codepen && (
-                <Flex.Item>
-                  <CodePenButton
-                    code={code}
-                    title={`${this.props.title} Example`}
-                    language={this.props.language}
-                    render={this.props.render}
-                    options={this.context.library.codepen}
-                  />
-                </Flex.Item>
-              )}
+
+              <Flex.Item>{this.renderBidirectionToggle()}</Flex.Item>
             </Flex>
-          </Flex.Item>
-
-          <Flex.Item>{this.renderBidirectionToggle()}</Flex.Item>
-        </Flex>
-      </div>
+          </div>
+        )}
+      </AppContext.Consumer>
     )
   }
 }

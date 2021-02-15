@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { ApplyLocale } from './ApplyLocale'
+export { ApplyLocale, ApplyLocaleContext } from './ApplyLocale'
 export { bidirectional } from './bidirectional'
 export { DateTime } from './DateTime'
 export { Decimal } from './Decimal'

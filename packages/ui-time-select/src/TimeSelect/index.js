@@ -25,7 +25,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { I18nPropTypes, DateTime, Locale } from '@instructure/ui-i18n'
+import {
+  I18nPropTypes,
+  DateTime,
+  Locale,
+  ApplyLocaleContext
+} from '@instructure/ui-i18n'
 import { controllable } from '@instructure/ui-prop-types'
 import {
   getInteraction,
@@ -233,10 +238,7 @@ class TimeSelect extends Component {
     renderAfterInput: null
   }
 
-  static contextTypes = {
-    locale: PropTypes.string,
-    timezone: PropTypes.string
-  }
+  static contextType = ApplyLocaleContext
 
   constructor(props) {
     super(props)
