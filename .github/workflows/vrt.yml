@@ -1,5 +1,9 @@
 name: Visual Regression Test
-on: [pull_request]
+on:
+  push:
+    branches:
+      - master
+      - next
 jobs:
   chromatic_deployment:
     runs-on: ubuntu-latest
