@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { Alert } from '@instructure/ui-alerts'
@@ -65,6 +65,11 @@ import { LibraryPropType } from '../propTypes'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+export const AppContext = createContext({
+  library: {},
+  themes: {},
+  themeKey: ''
+})
 @withStyle(generateStyle, generateComponentTheme)
 class App extends Component {
   static propTypes = {
@@ -89,12 +94,6 @@ class App extends Component {
     sections: {},
     descriptions: {},
     trayWidth: 300
-  }
-
-  static childContextTypes = {
-    library: LibraryPropType,
-    themes: PropTypes.object,
-    themeKey: PropTypes.string
   }
 
   constructor(props) {
@@ -149,14 +148,6 @@ class App extends Component {
 
     if (this._mediaQueryListener) {
       this._mediaQueryListener.remove()
-    }
-  }
-
-  getChildContext() {
-    return {
-      library: this.props.library,
-      themeKey: this.state.themeKey,
-      themes: this.props.themes
     }
   }
 
@@ -578,36 +569,44 @@ class App extends Component {
     const { showMenu, layout } = this.state
 
     return (
-      <div css={this.props.styles.app}>
-        <Global styles={this.props.styles.appGlobalStyles} />
-        {showMenu && layout === 'small' && (
-          <Mask onClick={this.handleMenuClose} />
-        )}
-        {this.renderNavigation()}
-        <div
-          css={this.props.styles.content}
-          label={key || this.props.library.name}
-          role="main"
-          ref={this.handleContentRef}
-        >
-          {!showMenu && (
-            <div css={this.props.styles.hamburger}>
-              <EmotionThemeProvider theme={instructure}>
-                <IconButton
-                  onClick={this.handleMenuOpen}
-                  elementRef={this.handleMenuTriggerRef}
-                  renderIcon={IconHamburgerSolid}
-                  screenReaderLabel="Open Navigation"
-                  shape="circle"
-                />
-              </EmotionThemeProvider>
-            </div>
+      <AppContext.Provider
+        value={{
+          library: this.props.library,
+          themeKey: this.state.themeKey,
+          themes: this.props.themes
+        }}
+      >
+        <div css={this.props.styles.app}>
+          <Global styles={this.props.styles.appGlobalStyles} />
+          {showMenu && layout === 'small' && (
+            <Mask onClick={this.handleMenuClose} />
           )}
+          {this.renderNavigation()}
+          <div
+            css={this.props.styles.content}
+            label={key || this.props.library.name}
+            role="main"
+            ref={this.handleContentRef}
+          >
+            {!showMenu && (
+              <div css={this.props.styles.hamburger}>
+                <EmotionThemeProvider theme={instructure}>
+                  <IconButton
+                    onClick={this.handleMenuOpen}
+                    elementRef={this.handleMenuTriggerRef}
+                    renderIcon={IconHamburgerSolid}
+                    screenReaderLabel="Open Navigation"
+                    shape="circle"
+                  />
+                </EmotionThemeProvider>
+              </div>
+            )}
 
-          {this.renderContent(key)}
-          {this.renderFooter()}
+            {this.renderContent(key)}
+            {this.renderFooter()}
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     )
   }
 }

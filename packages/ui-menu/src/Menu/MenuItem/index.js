@@ -99,7 +99,7 @@ class MenuItem extends Component {
     href: undefined
   }
 
-  static contextTypes = MenuContext.types
+  static contextType = MenuContext
 
   constructor(props) {
     super()
@@ -115,7 +115,7 @@ class MenuItem extends Component {
 
   componentDidMount() {
     this.props.makeStyles()
-    const context = MenuContext.getMenuContext(this.context)
+    const context = this.context
 
     if (context && context.registerMenuItem) {
       context.registerMenuItem(this)
@@ -126,7 +126,7 @@ class MenuItem extends Component {
     this.props.makeStyles()
   }
   componentWillUnmount() {
-    const context = MenuContext.getMenuContext(this.context)
+    const context = this.context
 
     if (context && context.registerMenuItem) {
       context.removeMenuItem(this)

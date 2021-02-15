@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import React, { Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
@@ -39,6 +39,10 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+export const PagesContext = createContext({
+  history: [],
+  navigateToPreviousPage: () => {}
+})
 /**
 ---
 category: components
@@ -86,11 +90,6 @@ class Pages extends Component {
     margin: undefined
   }
 
-  static childContextTypes = {
-    history: PropTypes.array,
-    navigateToPreviousPage: PropTypes.func
-  }
-
   static Page = Page
 
   _timeouts = []
@@ -109,15 +108,6 @@ class Pages extends Component {
 
   componentDidMount() {
     this.props.makeStyles()
-  }
-
-  getChildContext() {
-    return {
-      history: this._history,
-      navigateToPreviousPage: () => {
-        this.handleBackButtonClick()
-      }
-    }
   }
 
   handleBackButtonClick = () => {
@@ -192,18 +182,27 @@ class Pages extends Component {
 
   render() {
     return this.activePage ? (
-      <View
-        as="div"
-        id={this._contentId}
-        css={this.props.styles.pages}
-        margin={this.props.margin}
-        role="region"
-        elementRef={(el) => {
-          this._contentElement = el
+      <PagesContext.Provider
+        value={{
+          history: this._history,
+          navigateToPreviousPage: () => {
+            this.handleBackButtonClick()
+          }
         }}
       >
-        {this.activePage}
-      </View>
+        <View
+          as="div"
+          id={this._contentId}
+          css={this.props.styles.pages}
+          margin={this.props.margin}
+          role="region"
+          elementRef={(el) => {
+            this._contentElement = el
+          }}
+        >
+          {this.activePage}
+        </View>
+      </PagesContext.Provider>
     ) : null
   }
 }

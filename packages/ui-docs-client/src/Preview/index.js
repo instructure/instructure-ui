@@ -31,6 +31,7 @@ import { transform } from '@babel/standalone'
 
 import { ApplyTextDirection } from '@instructure/ui-i18n'
 import { EmotionThemeProvider, withStyle, jsx } from '@instructure/emotion'
+import { canvas } from '@instructure/ui-themes'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -59,7 +60,11 @@ class Preview extends Component {
       'inverse',
       'light',
       'none'
-    ])
+    ]),
+    // eslint-disable-next-line react/require-default-props
+    themes: PropTypes.object,
+    // eslint-disable-next-line react/require-default-props
+    themeKey: PropTypes.string
   }
 
   static defaultProps = {
@@ -69,11 +74,6 @@ class Preview extends Component {
     inverse: false,
     rtl: false,
     background: 'checkerboard'
-  }
-
-  static contextTypes = {
-    themes: PropTypes.object,
-    themeKey: PropTypes.string
   }
 
   constructor(props) {
@@ -130,30 +130,23 @@ class Preview extends Component {
     }
 
     const render = (el) => {
-      const { themeKey, themes } = this.context
+      const { themeKey, themes } = this.props
+      const theme = themes?.[themeKey]?.resource || canvas
 
       let elToRender = (
-        <ApplyTextDirection
-          dir={
-            this.props.rtl
-              ? ApplyTextDirection.DIRECTION.rtl
-              : ApplyTextDirection.DIRECTION.ltr
-          }
-          as="div"
-        >
-          {el}
-        </ApplyTextDirection>
+        <EmotionThemeProvider theme={theme}>
+          <ApplyTextDirection
+            dir={
+              this.props.rtl
+                ? ApplyTextDirection.DIRECTION.rtl
+                : ApplyTextDirection.DIRECTION.ltr
+            }
+            as="div"
+          >
+            {el}
+          </ApplyTextDirection>
+        </EmotionThemeProvider>
       )
-
-      if (themeKey && themes[themeKey]) {
-        const theme = themes[themeKey].resource
-
-        elToRender = (
-          <EmotionThemeProvider theme={theme}>
-            {elToRender}
-          </EmotionThemeProvider>
-        )
-      }
 
       ReactDOM.render(elToRender, mountNode)
     }

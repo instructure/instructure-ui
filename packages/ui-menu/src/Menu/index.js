@@ -230,40 +230,33 @@ class Menu extends Component {
     this.props.makeStyles()
   }
 
-  static childContextTypes = MenuContext.types
-  static contextTypes = MenuContext.types
+  static contextType = MenuContext
 
-  getChildContext() {
-    // if it's a submenu it will have a context defined by its parent Menu
-    const context = MenuContext.getMenuContext(this.context)
+  registerMenuItem = (item) => {
+    const { type } = item.props
 
-    return MenuContext.makeMenuContext({
-      registerMenuItem: (item) => {
-        const { type } = item.props
+    // if the item is a flyout trigger
+    // we only want to add it to the parent Menu items list
+    if (this.context && this.context.registerMenuItem && type === 'flyout') {
+      this.context.registerMenuItem(item)
+    } else if (this.getMenuItemIndex(item) < 0) {
+      this._menuItems.push(item)
+    }
+  }
 
-        // if the item is a flyout trigger
-        // we only want to add it to the parent Menu items list
-        if (context && context.registerMenuItem && type === 'flyout') {
-          context.registerMenuItem(item)
-        } else if (this.getMenuItemIndex(item) < 0) {
-          this._menuItems.push(item)
-        }
-      },
-      removeMenuItem: (item) => {
-        const { type } = item.props
-        // if the item is a flyout trigger
-        // we only want to remove it from the parent Menu items list
-        if (context && context.removeMenuItem && type === 'flyout') {
-          context.removeMenuItem(item)
-        } else {
-          const index = this.getMenuItemIndex(item)
-          error(index >= 0, '[Menu] Could not find registered menu item.')
-          if (index >= 0) {
-            this._menuItems.splice(index, 1)
-          }
-        }
+  removeMenuItem = (item) => {
+    const { type } = item.props
+    // if the item is a flyout trigger
+    // we only want to remove it from the parent Menu items list
+    if (this.context && this.context.removeMenuItem && type === 'flyout') {
+      this.context.removeMenuItem(item)
+    } else {
+      const index = this.getMenuItemIndex(item)
+      error(index >= 0, '[Menu] Could not find registered menu item.')
+      if (index >= 0) {
+        this._menuItems.splice(index, 1)
       }
-    })
+    }
   }
 
   get menuItems() {
@@ -531,28 +524,35 @@ class Menu extends Component {
     const controls = this.props['aria-controls'] // eslint-disable-line react/prop-types
 
     return (
-      <ul
-        role="menu"
-        aria-label={label}
-        tabIndex="0"
-        css={this.props.styles.menu}
-        aria-labelledby={labelledBy || (trigger && this._labelId)}
-        aria-controls={controls}
-        aria-disabled={disabled ? 'true' : null}
-        onKeyDown={this.handleMenuKeyDown}
-        onKeyUp={onKeyUp}
-        ref={(el) => {
-          this._menu = el
-          if (typeof menuRef === 'function') {
-            menuRef(el)
-          }
-          if (typeof contentRef === 'function') {
-            contentRef(el)
-          }
+      <MenuContext.Provider
+        value={{
+          removeMenuItem: this.removeMenuItem,
+          registerMenuItem: this.registerMenuItem
         }}
       >
-        {this.renderChildren()}
-      </ul>
+        <ul
+          role="menu"
+          aria-label={label}
+          tabIndex="0"
+          css={this.props.styles.menu}
+          aria-labelledby={labelledBy || (trigger && this._labelId)}
+          aria-controls={controls}
+          aria-disabled={disabled ? 'true' : null}
+          onKeyDown={this.handleMenuKeyDown}
+          onKeyUp={onKeyUp}
+          ref={(el) => {
+            this._menu = el
+            if (typeof menuRef === 'function') {
+              menuRef(el)
+            }
+            if (typeof contentRef === 'function') {
+              contentRef(el)
+            }
+          }}
+        >
+          {this.renderChildren()}
+        </ul>
+      </MenuContext.Provider>
     )
   }
 
