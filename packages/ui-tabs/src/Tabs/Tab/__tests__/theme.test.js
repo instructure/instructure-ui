@@ -36,7 +36,7 @@ describe('Tab.theme', async () => {
       it('should ensure text and tab background meet 3:1 contrast', async () => {
         expect(
           contrast(
-            variables.secondarySelectedColor,
+            variables.secondaryColor,
             variables.secondarySelectedBackground
           )
         ).to.be.above(3)
@@ -51,7 +51,7 @@ describe('Tab.theme', async () => {
       it('should ensure text and tab background meet 4.5:1 contrast', async () => {
         expect(
           contrast(
-            variables.secondarySelectedColor,
+            variables.secondaryColor,
             variables.secondarySelectedBackground
           )
         ).to.be.above(4.5)
