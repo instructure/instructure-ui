@@ -81,7 +81,11 @@ configure(() => {
             stories.add(
               `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
               renderPage.bind(null, page),
-              { chromatic: { ...page.parameters }, viewports: [1200] }
+              {
+                chromatic: { ...page.parameters },
+                viewports: [1200],
+                delay: 500
+              }
             )
           })
         })
