@@ -3,17 +3,7 @@
   "version": "7.4.0",
   "description": "Cross-platform theme tokens for Instructure products",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "type": "module",
-  "exports": {
-    ".": {
-      "require": "./lib/index.js",
-      "default": "./es/index.js"
-    },
-    "./lib/canvas": "./lib/canvas/index.js",
-    "./lib/canvasHighContrast": "./lib/canvasHighContrast/index.js",
-    "./lib/instructure": "./lib/instructure/index.js",
-    "./package.json": "./package.json"
-  },
+  "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
   "repository": {

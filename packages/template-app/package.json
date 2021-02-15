@@ -3,6 +3,7 @@
   "version": "7.4.0",
   "description": "A package containing template files to generate a react app configured with Instructure UI presets.",
   "author": "Instructure, Inc. Engineering and Product Design",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
