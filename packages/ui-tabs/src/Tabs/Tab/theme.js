@@ -36,8 +36,7 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
       defaultColor: theme['ic-brand-font-color-dark'],
       defaultSelectedBorderColor: theme['ic-brand-primary'],
 
-      secondaryColor: theme['ic-brand-primary'],
-      secondarySelectedColor: theme['ic-brand-font-color-dark']
+      secondaryColor: theme['ic-brand-font-color-dark']
     }
   }
 
@@ -51,10 +50,9 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     defaultHoverBorderColor: colors?.borderMedium,
     defaultSelectedBorderColor: colors?.borderBrand,
 
-    secondaryColor: colors?.textBrand,
+    secondaryColor: colors?.textDarkest,
     secondarySelectedBackground: colors?.backgroundLightest,
     secondarySelectedBorderColor: colors?.borderMedium,
-    secondarySelectedColor: colors?.textDarkest,
 
     zIndex: stacking?.above
   }

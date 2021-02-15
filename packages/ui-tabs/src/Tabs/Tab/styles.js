@@ -97,14 +97,9 @@ const generateStyle = (componentTheme, props, state) => {
         borderBottomColor: componentTheme.secondarySelectedBackground
       }),
 
-      ...((isSelected || isDisabled) && {
-        color: componentTheme.secondarySelectedColor
-      }),
-
       '&:first-of-type': { marginInlineStart: '0' },
 
       '&:hover': {
-        color: componentTheme.secondarySelectedColor,
         ...(!isDisabled &&
           !isSelected && {
             background: componentTheme.secondarySelectedBackground,
