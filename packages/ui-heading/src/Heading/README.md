@@ -2,19 +2,6 @@
 describes: Heading
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>ellipsis</code> prop will be removed. Please update your Headings to use <Link href="#TruncateText">TruncateText</Link> for ellipsis instead.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 Heading is a component for creating typographic headings.
 
 ```js
@@ -25,7 +12,9 @@ example: true
 ```
 
 ### Heading level
+
 Generate content headings, from h1 to h5. Use the `margin` prop to add margin.
+
 - The `as` prop controls what html element is output. _(if not defined it will default to level)._
 - The `level` prop sets its appearance.
 
@@ -44,7 +33,9 @@ example: true
 ```
 
 ### Heading colors
+
 The default is for the color to inherit, but it can be set to `primary` or `secondary` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_).
+
 ```js
 ---
 example: true
