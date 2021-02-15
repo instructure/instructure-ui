@@ -2,18 +2,6 @@
 describes: Button
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure recommendation="none" title="Upgrade Notes for v8.0.0">
-    <Figure.Item><Link href="#button-upgrade-guide">A comprehensive upgrade guide can be found here</Link></Figure.Item>
-    <Figure.Item>Until version 8.0.0 Button is configured to be completely backwards compatible with the previous props and theming</Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 Button allows users to perform actions or trigger changes. If selecting the Button causes the user to navigate to a different location, consider using the [Link](#Link) component instead.
 
 ```js

@@ -2,25 +2,6 @@
 describes: Img
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>blur</code> prop has been changed to <code>withBlur</code>
-    </Figure.Item>
-    <Figure.Item>
-      The <code>grayscale</code> prop has been changed to <code>withGrayscale</code>
-    </Figure.Item>
-    <Figure.Item>
-      The <code>inline</code> boolean prop has been changed to <code>display</code> with the options ('inline-block' or 'block')
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 An accessible image component
 
 ```js
@@ -79,7 +60,7 @@ example: true
 
 ### Cover
 
-When the `constrain` prop is set to `cover` the image fills the *full* width and height of its
+When the `constrain` prop is set to `cover` the image fills the _full_ width and height of its
 containing element, while maintaining the aspect ratio of the source image.
 
 ```js
