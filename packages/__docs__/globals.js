@@ -49,9 +49,6 @@ import avatarPortrait from './avatarPortrait.jpg'
 import placeholderImage from './placeholder-image'
 import placeholderLogo from './placeholder-logo'
 
-import { theme } from '@instructure/canvas-theme'
-//theme.use()
-
 const globals = {
   ...Components,
   debounce,

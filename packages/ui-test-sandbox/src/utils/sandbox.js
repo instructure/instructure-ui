@@ -134,12 +134,6 @@ class Sandbox {
   async teardown() {
     await ReactComponentWrapper.unmount()
 
-    // avoiding circular deps by not importing @instructure/ui-themeable here:
-    if (global.GLOBAL_THEME_REGISTRY) {
-      const { styleSheet } = global.GLOBAL_THEME_REGISTRY
-      styleSheet && styleSheet.flush()
-    }
-
     this._sandbox.restore()
 
     this._timeouts.forEach((timeoutId) => {
