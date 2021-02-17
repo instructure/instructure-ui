@@ -33,11 +33,11 @@
     "@instructure/ui-tooltip": "^7.4.0",
     "@instructure/ui-view": "^7.4.0",
     "@instructure/ui-webpack-config": "^7.4.0",
-    "@storybook/react": "^5.2.1",
-    "@storybook/theming": "^5.2.1",
+    "@storybook/react": "^6.1.18",
+    "@storybook/theming": "^6.1.18",
     "react": "^16.8",
     "react-dom": "^16.8",
-    "story2sketch": "^1.7.0",
+    "story2sketch": "^1.7.1",
     "chromatic": "^5",
     "webpack-merge": "^4.2.1"
   }
