@@ -119,8 +119,5 @@ export default {
     if (!props.isShowingOptions && props.placement) return true
 
     return false
-  },
-  getParameters: (page) => {
-    return { disabled: true }
   }
 }
