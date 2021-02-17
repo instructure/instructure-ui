@@ -39,8 +39,10 @@ export default {
       readOnly: false,
       onChange: () => {},
       required: false,
-      resize: 'none',
-      autoGrow: false
+      resize: 'none'
     }
+  },
+  getParameters: (page) => {
+    return { disable: true }
   }
 }
