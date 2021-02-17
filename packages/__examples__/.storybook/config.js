@@ -85,7 +85,7 @@ configure(() => {
                 chromatic: { ...page.parameters },
                 viewports: [1200],
                 pauseAnimationAtEnd: true,
-                delay: 500
+                delay: 4000
               }
             )
           })
