@@ -38,7 +38,6 @@ import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
 
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 const fastFindIndex = (arr, fn) =>
@@ -64,7 +63,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, null)
 @testable()
 class Pagination extends Component {
   static propTypes = {

@@ -25,10 +25,9 @@
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
+const generateComponentTheme = (theme) => {
   const { colors } = theme
 
   return {
@@ -38,8 +37,7 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
     colorWarning: colors?.inaccessibleWarning || colors?.backgroundWarning,
     colorFaceSuccess: colors?.inaccessibleAlert || colors?.backgroundAlert,
     colorFaceFailure: colors?.inaccessibleWarning || colors?.backgroundWarning,
-    colorFeatures: colors?.backgroundDarkest,
-    ...themeOverride
+    colorFeatures: colors?.backgroundDarkest
   }
 }
 

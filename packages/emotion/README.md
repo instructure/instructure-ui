@@ -40,16 +40,15 @@ Migrate components from themeable-based to emotion-based styling
 
 #### 1. Refactor the `theme.js`.
 
-It will receive the theme and themeOverride objects, contains the variables mapped for the component, and the theme-specific styles.
+It will receive the theme object, and returns the variables mapped for the component, and the theme-specific styles.
 
 ```js
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
+const generateComponentTheme = (theme) => {
   // the props of theme you want to use
   const { colors, borders, typography, key: themeName } = theme
 
@@ -76,11 +75,10 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
   }
 
   // return with the final theme object of the component
-  // with the added overrides
+  // with the added theme specific overrides
   return {
     ...componentVariables,
-    ...themeSpecificStyle[themeName],
-    ...themeOverride
+    ...themeSpecificStyle[themeName]
   }
 }
 export default generateComponentTheme

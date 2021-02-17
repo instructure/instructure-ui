@@ -25,10 +25,9 @@
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
- * @param  {Object} themeOverride User provided overrides of the default theme mapping.
  * @return {Object} The final theme object with the overrides and component variables
  */
-const generateComponentTheme = (theme, themeOverride = {}) => {
+const generateComponentTheme = (theme) => {
   const { borders, typography, key: themeName } = theme
 
   const themeSpecificStyles = {}
@@ -40,8 +39,7 @@ const generateComponentTheme = (theme, themeOverride = {}) => {
 
   return {
     ...componentVariables,
-    ...themeSpecificStyles[themeName],
-    ...themeOverride
+    ...themeSpecificStyles[themeName]
   }
 }
 
