@@ -36,14 +36,13 @@ import { View } from '@instructure/ui-view'
 
 import { Editable } from '../Editable'
 import generateStyle from './styles'
-import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, null)
 class InPlaceEdit extends Component {
   static propTypes = {
     /**

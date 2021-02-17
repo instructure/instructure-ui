@@ -48,7 +48,6 @@ const generateStyle = (componentTheme, props, state) => {
       touchAction: 'manipulation',
       background: 'transparent',
       border: 'none',
-      fontFamily: componentTheme.fontFamily,
       outline: 'none'
     }
   }

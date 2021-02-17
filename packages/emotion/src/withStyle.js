@@ -66,10 +66,12 @@ const withStyle = decorator(
     const WithStyle = forwardRef((props, ref) => {
       const theme = useTheme()
       const dir = useTextDirectionContext()
+
       const componentProps = {
         ...ComposedComponent.defaultProps,
         ...props
       }
+
       const themeOverride = getComponentThemeOverride(
         theme,
         ComposedComponent.displayName,
@@ -78,8 +80,9 @@ const withStyle = decorator(
 
       const componentTheme =
         typeof generateComponentTheme === 'function'
-          ? generateComponentTheme(theme, themeOverride)
+          ? { ...generateComponentTheme(theme), ...themeOverride }
           : {}
+
       const [styles, setStyles] = useState(
         generateStyle
           ? bidirectionalPolyfill(
