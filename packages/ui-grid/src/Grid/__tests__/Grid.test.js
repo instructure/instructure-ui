@@ -47,9 +47,7 @@ describe('<Grid />', async () => {
     await mount(
       <Grid role="grid" aria-hidden="true">
         <Grid.Row aria-live="polite" role="presentation">
-          <Grid.Col aria-disabled="true" role="presentation">
-            Foo
-          </Grid.Col>
+          <Grid.Col role="presentation">Foo</Grid.Col>
         </Grid.Row>
       </Grid>
     )
