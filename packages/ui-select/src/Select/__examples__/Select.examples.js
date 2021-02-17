@@ -28,7 +28,8 @@ import { Select } from '../../Select'
 
 export default {
   sectionProp: 'size',
-  maxExamplesPerPage: 50,
+  maxExamplesPerPage: 5,
+  maxExamples: 100,
   propValues: {
     children: [
       [
@@ -118,5 +119,8 @@ export default {
     if (!props.isShowingOptions && props.placement) return true
 
     return false
+  },
+  getParameters: (page) => {
+    return { disabled: true }
   }
 }

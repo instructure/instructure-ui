@@ -24,7 +24,7 @@
 
 export default {
   maxExamplesPerPage: 50,
-  maxExamples: 800,
+  maxExamples: 500,
   propValues: {
     placeholder: [undefined, 'Hello text area placeholder'],
     value: [undefined, 'Some content for the text area'],
@@ -39,7 +39,8 @@ export default {
       readOnly: false,
       onChange: () => {},
       required: false,
-      resize: 'none'
+      resize: 'none',
+      autoGrow: false
     }
   }
 }
