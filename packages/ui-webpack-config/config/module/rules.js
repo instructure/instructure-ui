@@ -62,24 +62,6 @@ const rules = [
     use: ['component-examples-loader', babelLoader]
   },
   {
-    enforce: 'pre',
-    test: /\.css?$/,
-    exclude,
-    loader: 'postcss-loader',
-    options: {
-      ident: 'postcss',
-      plugins: (loader) => [
-        require('stylelint')(),
-        require('postcss-reporter')({ clearReportedMessages: true })
-      ]
-    }
-  },
-  {
-    test: /\.css$/,
-    exclude: [...exclude, /ui-icons/],
-    use: [babelLoader, 'themeable-css-loader', 'postcss-loader']
-  },
-  {
     test: /\.css$/,
     include: [/ui-icons/],
     use: ['style-loader', 'css-loader']

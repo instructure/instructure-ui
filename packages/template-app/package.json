@@ -29,7 +29,6 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "^7.4.0",
     "@instructure/ui-eslint-config": "^7.4.0",
-    "@instructure/ui-postcss-config": "^7.4.0",
     "@instructure/ui-scripts": "^7.4.0",
     "@instructure/ui-stylelint-config": "^7.4.0",
     "@instructure/ui-webpack-config": "^7.4.0",

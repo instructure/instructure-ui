@@ -27,7 +27,6 @@ const loadConfig = require('@instructure/config-loader')
 module.exports = function (
   context,
   opts = {
-    themeable: false,
     esModules: false,
     coverage: false,
     node: false,
@@ -113,7 +112,7 @@ module.exports = function (
     ],
     require('@babel/plugin-syntax-dynamic-import').default,
     require('babel-plugin-transform-undefined-to-void'),
-    require('babel-plugin-add-import-extension'),
+    require('babel-plugin-add-import-extension')
   ])
 
   if (process.env.NODE_ENV === 'production') {
@@ -121,29 +120,6 @@ module.exports = function (
       require('@babel/plugin-transform-react-constant-elements').default
     )
   }
-
-  let themeableOptions = {
-    postcssrc: loadConfig(
-      'postcss',
-      require('@instructure/ui-postcss-config')()
-    ),
-    themeablerc: loadConfig('themeable')
-  }
-
-  if (opts.themeable && typeof opts.themeable === 'object') {
-    const { themeablerc, postcssrc } = opts.themeable
-    if (themeablerc) {
-      themeableOptions.themeablerc = themeablerc
-    }
-    if (postcssrc) {
-      themeableOptions.postcssrc = postcssrc
-    }
-  }
-
-  plugins.push([
-    require('@instructure/babel-plugin-themeable-styles'),
-    themeableOptions
-  ])
 
   if (opts.removeConsole) {
     if (typeof opts.removeConsole === 'object') {
