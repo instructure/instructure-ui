@@ -24,7 +24,8 @@
 import React from 'react'
 
 export default {
-  maxExamplesPerPage: 50,
+  maxExamplesPerPage: 10,
+  maxExamples: 400,
   excludeProps: [
     'show',
     'defaultShow',

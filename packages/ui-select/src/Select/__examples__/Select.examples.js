@@ -28,7 +28,8 @@ import { Select } from '../../Select'
 
 export default {
   sectionProp: 'size',
-  maxExamplesPerPage: 50,
+  maxExamplesPerPage: 5,
+  maxExamples: 100,
   propValues: {
     children: [
       [

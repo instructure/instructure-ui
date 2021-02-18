@@ -27,5 +27,8 @@ export default {
   sectionProp: 'color',
   propValues: {
     children: ['Some really long text that will truncate', 'Missing']
+  },
+  getParameters: (page) => {
+    return { disable: true }
   }
 }
