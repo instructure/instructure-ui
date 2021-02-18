@@ -36,5 +36,8 @@ export default {
     return {
       maxWidth: '25rem'
     }
+  },
+  getParameters: (page) => {
+    return { disable: true }
   }
 }

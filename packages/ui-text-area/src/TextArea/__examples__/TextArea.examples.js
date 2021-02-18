@@ -41,5 +41,8 @@ export default {
       required: false,
       resize: 'none'
     }
+  },
+  getParameters: (page) => {
+    return { disable: true }
   }
 }

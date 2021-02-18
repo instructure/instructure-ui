@@ -20,9 +20,12 @@ jobs:
         run: yarn install --check-files
       - name: Bootstrap project
         run: yarn bootstrap
+      - name: Build Storybook examples
+        run: yarn build-storybook
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
           exitZeroOnChanges: true
+          storybookBuildDir: ./packages/__examples__/__build__
