@@ -23,9 +23,6 @@
  */
 
 module.exports = {
-  'themeable-css-loader': require.resolve(
-    '@instructure/babel-plugin-themeable-styles/lib/themeable-css-loader'
-  ),
   'component-examples-loader': require.resolve(
     '@instructure/ui-component-examples/lib/component-examples-loader'
   )

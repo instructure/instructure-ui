@@ -1,5 +1,4 @@
 [
-  "@instructure/babel-plugin-themeable-styles",
   "@instructure/babel-plugin-transform-imports",
   "@instructure/browserslist-config-instui",
   "@instructure/canvas-high-contrast-theme",
@@ -15,7 +14,6 @@
   "@instructure/instui-cli",
   "@instructure/instui-config",
   "@instructure/pkg-utils",
-  "@instructure/postcss-themeable-styles",
   "@instructure/template-app",
   "@instructure/template-component",
   "@instructure/template-package",
@@ -74,7 +72,6 @@
   "@instructure/ui-popover",
   "@instructure/ui-portal",
   "@instructure/ui-position",
-  "@instructure/ui-postcss-config",
   "@instructure/ui-progress",
   "@instructure/ui-prop-types",
   "@instructure/ui-radio-input",
