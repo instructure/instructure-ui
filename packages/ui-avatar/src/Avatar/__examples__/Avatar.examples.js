@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export default {
+  excludeProps: ['inline', 'variant'],
   sectionProp: 'shape',
   propValues: {
     src: [null, require('./testImage.jpg')]

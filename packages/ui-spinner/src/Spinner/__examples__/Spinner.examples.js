@@ -23,6 +23,7 @@
  */
 
 export default {
+  excludeProps: ['title'],
   sectionProp: 'variant',
   getComponentProps: (props) => {
     return {

@@ -23,6 +23,7 @@
  */
 
 export default {
+  excludeProps: ['text', 'variant'],
   sectionProp: 'color',
   propValues: {
     children: ['Some really long text that will truncate', 'Missing']

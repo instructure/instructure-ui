@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 export default {
+  excludeProps: ['closeButtonLabel'],
   sectionProp: 'variant',
   propValues: {
     renderCloseButtonLabel: [null, 'close'],
