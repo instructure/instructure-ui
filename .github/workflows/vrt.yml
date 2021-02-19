@@ -29,6 +29,6 @@ jobs:
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
+          projectToken: d8b52d7c3367 # We have to set this as a string so VRT can be run from forked branches as well.
           exitZeroOnChanges: true
           storybookBuildDir: ./packages/__examples__/__build__
