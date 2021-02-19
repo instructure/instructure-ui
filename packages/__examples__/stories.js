@@ -29,7 +29,7 @@ import { renderPage } from './renderPage.js'
 import React from 'react'
 
 const examplesContext = require.context(
-  '../../',
+  '../',
   true,
   /^.*\/src\/.*\.examples\.js$/,
   'sync'
@@ -43,6 +43,7 @@ console.log(
 
 examplesContext.keys().map((requirePath) => {
   const ctx = examplesContext(requirePath)
+
   if (ctx.sections && ctx.sections.length > 0) {
     const stories = storiesOf(ctx.componentName, module)
     ctx.sections.forEach(({ pages, sectionName }) => {
