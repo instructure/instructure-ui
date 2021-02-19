@@ -30,6 +30,9 @@ const contentLong =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus mauris, aliquet a massa posuere, lobortis laoreet eros. Ut at lacus aliquet arcu volutpat porttitor ut vel nibh. Aenean iaculis elit eu nulla ultricies blandit vitae quis ex. Maecenas quis justo ex. Donec in ante et justo iaculis dapibus in non leo. Curabitur suscipit ligula neque, ut suscipit nisl auctor ut. Proin lectus justo, vulputate quis sagittis nec, venenatis maximus nisl. Fusce id pretium justo.'
 
 export default {
+  propValues: {
+    dir: ['ltr']
+  },
   sectionProp: 'variant',
   excludeProps: ['focus'],
   filter: (props) => {

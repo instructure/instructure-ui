@@ -32,7 +32,8 @@ export default {
     shadow: [undefined, ...Object.values(SHADOW_TYPES)],
     borderWidth: [...Object.values(BORDER_WIDTHS)],
     borderRadius: [...Object.values(BORDER_RADII)],
-    position: ['relative', 'static']
+    position: ['relative', 'static'],
+    dir: ['ltr']
   },
   getComponentProps: (props) => {
     return {
