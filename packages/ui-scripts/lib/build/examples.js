@@ -55,7 +55,7 @@ let envVars = [
 
 if (args.includes('--watch')) {
   command = 'start-storybook'
-  commandArgs = ['-c', '.storybook', '-p', port]
+  commandArgs = ['-c', '.storybook', '-p', port, '--no-manager-cache']
   envVars = envVars
     .concat([
       'NODE_ENV=development',
@@ -67,7 +67,7 @@ if (args.includes('--watch')) {
     .filter(Boolean)
 } else {
   command = 'build-storybook'
-  commandArgs = ['-c', '.storybook', '-o', '__build__']
+  commandArgs = ['-c', '.storybook', '-o', '__build__', '--no-manager-cache']
   envVars = envVars
     .concat([
       `NODE_ENV=production`,

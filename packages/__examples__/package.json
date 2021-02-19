@@ -35,6 +35,7 @@
     "@instructure/ui-webpack-config": "^7.4.0",
     "@storybook/react": "^6.1.18",
     "@storybook/theming": "^6.1.18",
+    "@storybook/addons": "^6.1.18",
     "react": "^16.8",
     "react-dom": "^16.8",
     "story2sketch": "^1.7.1",
