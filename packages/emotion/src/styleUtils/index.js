@@ -67,25 +67,10 @@ const useTheme = () => {
   return theme
 }
 
-/**
- * A hook which wraps emotion’s useTheme hook and applies it to the component specific style configuration
- * @param {string} componentName - Name of the component
- * @param {function} generateStyle - The function that returns the component's style object
- * @param {object} props - The component's props object
- * @param {object} extraArgs - Any other parameter you might want to supply to the generateStyle function
- * @returns {*} style object
- */
-const useStyle = (componentName, generateStyle, props, ...extraArgs) => {
-  const theme = useTheme()
-  const themeOverride = getComponentThemeOverride(theme, componentName, props)
-
-  return generateStyle(theme, themeOverride, props, ...extraArgs)
-}
-
 export { ThemeablePropValues } from './ThemeablePropValues'
 export { ThemeablePropTypes } from './ThemeablePropTypes'
 export { makeThemeVars } from './makeThemeVars'
 export { getShorthandPropValue } from './getShorthandPropValue'
 export { mirrorShorthandCorners } from './mirrorShorthandCorners'
 export { mirrorShorthandEdges } from './mirrorShorthandEdges'
-export { getComponentThemeOverride, useStyle, useTheme }
+export { getComponentThemeOverride, useTheme }
