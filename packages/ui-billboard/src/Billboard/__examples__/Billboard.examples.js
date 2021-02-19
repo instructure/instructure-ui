@@ -34,7 +34,10 @@ export default {
       function renderHero(size) {
         return <IconAnnouncementLine size={size} />
       },
-      <Img key="test" src={require('./testImage.jpg')} />,
+      <Img
+        key="test"
+        src="data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=="
+      />,
       null
     ],
     href: [null, 'instructure.design']
