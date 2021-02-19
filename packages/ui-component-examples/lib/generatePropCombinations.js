@@ -43,7 +43,8 @@ module.exports = function generatePropCombinations(propValues = {}) {
 
     if (!Array.isArray(valuesForProp) || !valuesForProp.length) {
       throw new Error(
-        `[ui-examples-loader] Please provide a non-empty array of possible values for prop ${propName}`
+        `[ui-examples-loader] Please provide a non-empty array of possible values for
+        prop ${propName}. in "propValues"`
       )
     }
 

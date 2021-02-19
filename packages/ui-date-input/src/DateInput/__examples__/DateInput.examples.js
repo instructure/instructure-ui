@@ -72,7 +72,6 @@ export default {
   getExampleProps: (props) => {
     return props.isShowingCalendar
       ? {
-          dir: 'ltr',
           as: 'div',
           width: '100%',
           height: '40rem',

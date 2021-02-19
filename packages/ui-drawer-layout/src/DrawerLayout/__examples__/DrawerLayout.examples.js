@@ -26,6 +26,9 @@ import { View } from '@instructure/ui-view'
 import { DrawerLayout } from '../index'
 
 export default {
+  propValues: {
+    dir: ['ltr']
+  },
   getComponentProps: (props) => {
     return {
       children: [
