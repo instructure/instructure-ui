@@ -63,6 +63,8 @@ import { getComponentThemeOverride, useTheme } from './styleUtils'
  */
 const withStyle = decorator(
   (ComposedComponent, generateStyle, generateComponentTheme) => {
+    const displayName = ComposedComponent.displayName || ComposedComponent.name
+
     const WithStyle = forwardRef((props, ref) => {
       const theme = useTheme()
       const dir = useTextDirectionContext()
@@ -74,7 +76,7 @@ const withStyle = decorator(
 
       const themeOverride = getComponentThemeOverride(
         theme,
-        ComposedComponent.displayName,
+        displayName,
         componentProps
       )
 
@@ -133,7 +135,7 @@ const withStyle = decorator(
     }
 
     if (process.env.NODE_ENV !== 'production') {
-      WithStyle.displayName = `WithStyle(${ComposedComponent.displayName})`
+      WithStyle.displayName = `WithStyle(${displayName})`
     }
 
     return WithStyle
