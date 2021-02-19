@@ -76,7 +76,8 @@ const bidirectional = decorator((ComposedComponent) => {
   ))
 
   if (process.env.NODE_ENV !== 'production') {
-    BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${ComposedComponent.displayName})`
+    const displayName = ComposedComponent.displayName || ComposedComponent.name
+    BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${displayName})`
   }
 
   hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
