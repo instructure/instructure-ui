@@ -33,16 +33,13 @@ const experimental =
             if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
               if (experimentalProps) {
                 warnExperimentalProps(
-                  ComposedComponent.displayName,
+                  ComposedComponent.name,
                   this.props,
                   experimentalProps,
                   message
                 )
               } else {
-                warnExperimentalComponent(
-                  ComposedComponent.displayName,
-                  message
-                )
+                warnExperimentalComponent(ComposedComponent.name, message)
               }
             }
 
@@ -55,16 +52,13 @@ const experimental =
             if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
               if (experimentalProps) {
                 warnExperimentalProps(
-                  ComposedComponent.displayName,
+                  ComposedComponent.name,
                   this.props,
                   experimentalProps,
                   message
                 )
               } else {
-                warnExperimentalComponent(
-                  ComposedComponent.displayName,
-                  message
-                )
+                warnExperimentalComponent(ComposedComponent.name, message)
               }
             }
 
@@ -75,24 +69,19 @@ const experimental =
         }
       })
 
-function warnExperimentalProps(
-  displayName,
-  props,
-  experimentalProps,
-  message = ''
-) {
+function warnExperimentalProps(name, props, experimentalProps, message = '') {
   experimentalProps.forEach((experimentalProp) => {
     warn(
       typeof props[experimentalProp] === 'undefined',
-      `[${displayName}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
+      `[${name}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
     )
   })
 }
 
-function warnExperimentalComponent(displayName, message = '') {
+function warnExperimentalComponent(name, message = '') {
   warn(
     false,
-    `[${displayName}] is experimental and its API could change significantly in a future release. ${message}`
+    `[${name}] is experimental and its API could change significantly in a future release. ${message}`
   )
 }
 

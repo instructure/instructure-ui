@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 
 import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
@@ -94,18 +94,17 @@ describe('<Tabs />', async () => {
   })
 
   it('should not allow invalid children', async () => {
-    let error = false
-    try {
-      await mount(
-        <Tabs>
-          <div>foo</div>
-        </Tabs>
-      )
-    } catch (e) {
-      error = true
-    }
+    const cs = spy(console, 'error')
+    const warning =
+      "Failed prop type: Expected one of Panel,  in Tabs but found 'div'"
 
-    expect(error).to.be.true()
+    await mount(
+      <Tabs>
+        <div>foo</div>
+      </Tabs>
+    )
+
+    expect(cs).to.have.been.calledWithMatch(warning)
   })
 
   it('should preserve Tab.Panel keys', async () => {

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 
 import { ToggleButton } from '../index'
 import { ToggleButtonLocator } from '../ToggleButtonLocator'
@@ -50,39 +50,34 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should fail if `screenReaderLabel` is not provided', async () => {
-    let error = false
+    const cs = spy(console, 'error')
+    const warning =
+      'Warning: Failed prop type: The prop `screenReaderLabel` is marked as required in `ToggleButton`'
 
-    try {
-      await mount(
-        <ToggleButton
-          renderIcon={icon}
-          renderTooltipContent="This is tooltip content"
-          status="pressed"
-        />
-      )
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true()
+    await mount(
+      <ToggleButton
+        renderIcon={icon}
+        renderTooltipContent="This is tooltip content"
+        status="pressed"
+      />
+    )
+    expect(cs).to.have.been.calledWithMatch(warning)
   })
 
   it('should fail if `status` is not provided', async () => {
-    let error = false
+    const cs = spy(console, 'error')
+    const warning =
+      'Warning: Failed prop type: The prop `status` is marked as required in `ToggleButton`'
 
-    try {
-      await mount(
-        <ToggleButton
-          screenReaderLabel="This is a screen reader label"
-          renderIcon={icon}
-          renderTooltipContent="This is tooltip content"
-        />
-      )
-    } catch (e) {
-      error = true
-    }
+    await mount(
+      <ToggleButton
+        screenReaderLabel="This is a screen reader label"
+        renderIcon={icon}
+        renderTooltipContent="This is tooltip content"
+      />
+    )
 
-    expect(error).to.be.true()
+    expect(cs).to.have.been.calledWithMatch(warning)
   })
 
   it('should set `aria-pressed` to `true` if `status` is `pressed`', async () => {
