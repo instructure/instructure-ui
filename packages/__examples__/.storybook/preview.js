@@ -25,18 +25,10 @@
 // eslint-disable-next-line import/no-unresolved
 import '@instructure/ui-polyfill-loader!'
 
-import { create } from '@storybook/theming'
 import { addParameters } from '@storybook/react'
 
 addParameters({
   options: {
-    theme: create({
-      base: 'light',
-      name: 'instructure-ui',
-      brandUrl: 'https://instructure.design',
-      brandImage:
-        'https://instructure.design/icons-bea652a7d0546b99c7cba9d3b4a538ee/favicon-32x32.png' // TODO this URL is broken
-    }),
     showPanel: false,
     isFullscreen: false
   }

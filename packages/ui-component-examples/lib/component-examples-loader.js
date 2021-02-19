@@ -65,11 +65,8 @@ module.exports = function componentExamplesLoader(source, map, meta) {
     `${componentPath}${!componentPath.includes('.') ? '.js' : ''}`,
     'utf8',
     (err, componentSrc) => {
-      // if (err) return callback(err)
       err && loader.emitWarning(err)
-
       let generatedPropValues = {}
-
       if (!err) {
         loader.addDependency(componentPath)
         try {
@@ -78,7 +75,6 @@ module.exports = function componentExamplesLoader(source, map, meta) {
           loader.emitWarning(error)
         }
       }
-
       const result = `
 const generateComponentExamples = require(${JSON.stringify(
         generateComponentExamples
@@ -96,21 +92,10 @@ config.maxExamples = Boolean(config.maxExamples) ? config.maxExamples : ${
         config.maxExamples
       }
 
-if (!config.renderPage) {
-  console.warn('A default is no longer provided for \`renderPage\`, you should supply it to the config instead')
-}
-
-if (!config.renderExample) {
-  console.warn('A default is no longer provided for \`renderExample\`, you should supply it to the config instead')
-}
-
 module.exports = {
  componentName: Component.displayName || Component.name,
- sections: generateComponentExamples(Component, config),
- renderPage: config.renderPage,
- renderExample: config.renderExample
-}
-`
+ sections: generateComponentExamples(Component, config)
+}`
       return callback(null, result, map)
     }
   )
