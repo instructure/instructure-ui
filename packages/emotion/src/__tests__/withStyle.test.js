@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import { ApplyTextDirection } from '@instructure/ui-i18n'
 
 import { withStyle, jsx, EmotionThemeProvider } from '../index'
@@ -52,8 +52,9 @@ describe('@withStyle', async () => {
     }
   }
 
-  const generateStyle = function (componentTheme, props) {
+  const generateStyle = function (componentTheme, props, state) {
     const { inverse } = props
+    const { clearBackground } = state
 
     return {
       exampleComponent: {
@@ -61,7 +62,8 @@ describe('@withStyle', async () => {
         color: componentTheme.textColor,
         background: componentTheme.backgroundColor,
         insetInlineStart: '8px',
-        ...(inverse && { color: componentTheme.textColorInverse })
+        ...(inverse && { color: componentTheme.textColorInverse }),
+        ...(clearBackground && { background: 'transparent' })
       }
     }
   }
@@ -80,17 +82,32 @@ describe('@withStyle', async () => {
       inverse: false
     }
 
+    state = {
+      clearBackground: false
+    }
+
     componentDidMount() {
-      this.props.makeStyles()
+      this.props.makeStyles({ clearBackground: this.state.clearBackground })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-      this.props.makeStyles()
+      this.props.makeStyles({ clearBackground: this.state.clearBackground })
+    }
+
+    handleClick = () => {
+      this.setState({
+        clearBackground: true
+      })
     }
 
     render() {
       const { styles } = this.props
-      return <div css={styles.exampleComponent}>Hello World</div>
+      return (
+        <div css={styles.exampleComponent}>
+          <p>Hello World</p>
+          <button onClick={this.handleClick}>Button</button>
+        </div>
+      )
     }
   }
 
@@ -148,47 +165,6 @@ describe('@withStyle', async () => {
       expect(computedStyle.color).to.equal(textBrand)
       expect(computedStyle.backgroundColor).to.equal(backgroundLight)
     })
-
-    it('should allow configuration through theme provider', async () => {
-      const theme = {
-        ...exampleTheme,
-        componentOverrides: {
-          ThemeableComponent: {
-            textColor: 'rgb(128, 0, 0)'
-          }
-        }
-      }
-      const subject = await mount(
-        <EmotionThemeProvider theme={theme}>
-          <ThemeableComponent />
-        </EmotionThemeProvider>
-      )
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
-
-      expect(computedStyle.color).to.equal('rgb(128, 0, 0)')
-      expect(computedStyle.backgroundColor).to.equal(backgroundLight)
-    })
-  })
-
-  describe('without theme provided by EmotionThemeProvider', async () => {
-    it('should throw warning', async () => {
-      const consoleWarning = spy(console, 'warn')
-      const warning =
-        'No theme provided for [EmotionThemeProvider], using default <canvas> theme.'
-      await mount(<ThemeableComponent />)
-
-      await expect(consoleWarning).to.have.been.calledWith(warning)
-    })
-
-    it('should fall back to the default "canvas" theme', async () => {
-      const subject = await mount(<ThemeableComponent />)
-      const component = subject.getDOMNode()
-      const computedStyle = getComputedStyle(component)
-
-      expect(computedStyle.color).to.equal('rgb(0, 142, 226)') // canvas textBrand color
-      expect(computedStyle.backgroundColor).to.equal('rgb(245, 245, 245)') // canvas backgroundLight color
-    })
   })
 
   describe('should update css props', async () => {
@@ -216,33 +192,25 @@ describe('@withStyle', async () => {
       expect(getComputedStyle(component).color).to.equal(textDark)
     })
 
-    it('when theme is updated', async () => {
-      const newTheme = {
-        key: 'exampleTheme2',
-        colors: {
-          textBrand: 'rgb(32, 139, 167)',
-          backgroundLight: 'rgb(236, 249, 252)'
-        }
-      }
-
+    it('when state is updated', async () => {
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
         </EmotionThemeProvider>
       )
-      const component = subject.getDOMNode()
+      const main = within(subject.getDOMNode())
+      const clearBackgroundButton = await main.find('button')
+      const component = await main.getDOMNode()
 
-      expect(getComputedStyle(component).color).to.equal(textBrand)
       expect(getComputedStyle(component).backgroundColor).to.equal(
         backgroundLight
       )
 
-      await subject.setProps({ theme: newTheme })
+      await clearBackgroundButton.click()
 
-      expect(getComputedStyle(component).color).to.equal('rgb(32, 139, 167)')
       expect(getComputedStyle(component).backgroundColor).to.equal(
-        'rgb(236, 249, 252)'
-      )
+        'rgba(0, 0, 0, 0)'
+      ) // transparent
     })
   })
 
