@@ -54,7 +54,7 @@ const hack =
           componentDidMount() {
             if (hackProps) {
               warnHackProps(
-                ComposedComponent.displayName,
+                ComposedComponent.name,
                 this.props,
                 hackProps,
                 message
@@ -69,7 +69,7 @@ const hack =
           componentDidUpdate(prevProps, prevState, prevContext) {
             if (hackProps) {
               warnHackProps(
-                ComposedComponent.displayName,
+                ComposedComponent.name,
                 this.props,
                 hackProps,
                 message
@@ -83,11 +83,11 @@ const hack =
         }
       })
 
-function warnHackProps(displayName, props, hackProps, message = '') {
+function warnHackProps(name, props, hackProps, message = '') {
   hackProps.forEach((hackProp) => {
     warn(
       typeof props[hackProp] === 'undefined',
-      `[${displayName}] The \`${hackProp}\` prop is a temporary hack and will be removed in a future release. ${message}`
+      `[${name}] The \`${hackProp}\` prop is a temporary hack and will be removed in a future release. ${message}`
     )
   })
 }

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, spy } from '@instructure/ui-test-utils'
 
 import { View } from '@instructure/ui-view'
 
@@ -85,9 +85,9 @@ describe('<Tag />', async () => {
             const props = {
               [prop]: 'foo'
             }
-            const consoleError = stub(console, 'error')
+            const consoleError = spy(console, 'error')
             await mount(<Tag text="Summer" {...props} />)
-            expect(consoleError).to.be.calledWith(warning)
+            expect(consoleError.firstCall.args[0]).to.be.equal(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

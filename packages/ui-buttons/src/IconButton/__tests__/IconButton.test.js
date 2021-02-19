@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
+import { mount, expect, stub, wait, spy } from '@instructure/ui-test-utils'
 
 import { IconButton } from '../index'
 import { IconButtonLocator } from '../IconButtonLocator'
@@ -56,15 +56,12 @@ describe('<IconButton/>', async () => {
   })
 
   it('should fail if `screenReaderLabel` is not provided', async () => {
-    let error = false
+    const cs = spy(console, 'error')
+    const warning =
+      'Warning: Failed prop type: The prop `screenReaderLabel` is marked as required in `IconButton`'
+    await mount(<IconButton renderIcon={icon} />)
 
-    try {
-      await mount(<IconButton renderIcon={icon} />)
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true()
+    expect(cs).to.have.been.calledWithMatch(warning)
   })
 
   it('should provide a focused getter', async () => {
