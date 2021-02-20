@@ -2,6 +2,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 lerna-debug.log
+./build-storybook.log
 coverage/
 package-lock.json
 .yarnclean
@@ -15,3 +16,4 @@ __build__
 .env
 .env.test
 .tmp/
+

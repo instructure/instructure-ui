@@ -28,7 +28,10 @@ const loaderUtils = require('loader-utils')
 const loadConfig = require('@instructure/config-loader')
 
 const parsePropValues = require('./parsePropValues')
-
+/**
+ * A webpack loader that processes component example files for e.g. Storybook
+ * for more see https://webpack.js.org/api/loaders/
+ */
 module.exports = function componentExamplesLoader(source, map, meta) {
   this.cacheable && this.cacheable()
 
@@ -43,6 +46,9 @@ module.exports = function componentExamplesLoader(source, map, meta) {
   const generateComponentExamples = require.resolve(
     './generateComponentExamples'
   )
+
+  // TODO do not use this method, its an internal webpack feature. See
+  // https://github.com/webpack/loader-utils/issues/42
   const configPath = `!!${loaderUtils.getRemainingRequest(loader)}`
 
   const getComponentPath =
