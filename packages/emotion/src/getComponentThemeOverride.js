@@ -22,9 +22,21 @@
  * SOFTWARE.
  */
 
-export { ThemeablePropValues } from './ThemeablePropValues'
-export { ThemeablePropTypes } from './ThemeablePropTypes'
-export { makeThemeVars } from './makeThemeVars'
-export { getShorthandPropValue } from './getShorthandPropValue'
-export { mirrorShorthandCorners } from './mirrorShorthandCorners'
-export { mirrorShorthandEdges } from './mirrorShorthandEdges'
+/**
+ * ---
+ * private: true
+ * ---
+ * This is a utility function which calculates the correct component theme
+ * based on every possible override there is.
+
+ * @param {object} theme - Theme object
+ * @param {*} componentName - Name of the component
+ * @param {*} props - The component's props object
+ * @returns {object} The calculated theme override object
+ */
+export const getComponentThemeOverride = (theme, componentName, props) => {
+  const componentOverride =
+    theme?.componentOverrides && theme.componentOverrides[componentName]
+
+  return { ...componentOverride, ...(props?.themeOverride ?? {}) }
+}

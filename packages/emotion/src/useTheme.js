@@ -22,9 +22,30 @@
  * SOFTWARE.
  */
 
-export { ThemeablePropValues } from './ThemeablePropValues'
-export { ThemeablePropTypes } from './ThemeablePropTypes'
-export { makeThemeVars } from './makeThemeVars'
-export { getShorthandPropValue } from './getShorthandPropValue'
-export { mirrorShorthandCorners } from './mirrorShorthandCorners'
-export { mirrorShorthandEdges } from './mirrorShorthandEdges'
+import { useTheme as useEmotionTheme } from 'emotion-theming'
+import { canvas } from '@instructure/ui-themes'
+import { isEmpty } from '@instructure/ui-utils'
+
+/**
+ * ---
+ * private: true
+ * ---
+ * A hook that will return the currently applied theme object from the nearest Context.
+ * If there is no theme provided to the Context it will return the default `canvas` theme.
+ * @returns {object} the theme object
+ */
+export const useTheme = () => {
+  let theme = useEmotionTheme()
+
+  if (isEmpty(theme)) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        `No theme provided for [EmotionThemeProvider], using default <canvas> theme.`
+      )
+    }
+
+    theme = canvas
+  }
+
+  return theme
+}
