@@ -28,7 +28,8 @@ import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
-import { getComponentThemeOverride, useTheme } from './styleUtils'
+import { getComponentThemeOverride } from './getComponentThemeOverride'
+import { useTheme } from './useTheme'
 
 /**
  * ---
