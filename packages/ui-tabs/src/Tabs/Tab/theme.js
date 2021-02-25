@@ -33,9 +33,11 @@ export default function generator({ colors, typography, stacking }) {
     defaultlHoverBorderColor: colors.borderMedium,
     defaultSelectedBorderColor: colors.borderBrand,
 
-    secondaryColor: colors.textBrand,
+    secondaryColor: colors.textDarkest,
     secondarySelectedBackground: colors.backgroundLightest,
     secondarySelectedBorderColor: colors.borderMedium,
+
+    // TODO: remove secondarySelectedColor in v8, it is now the same as secondaryColor
     secondarySelectedColor: colors.textDarkest,
 
     zIndex: stacking.above
@@ -47,7 +49,9 @@ generator.canvas = function (variables) {
     defaultColor: variables['ic-brand-font-color-dark'],
     defaultSelectedBorderColor: variables['ic-brand-primary'],
 
-    secondaryColor: variables['ic-brand-primary'],
+    secondaryColor: variables['ic-brand-font-color-dark'],
+
+    // TODO: remove secondarySelectedColor in v8, it is now the same as secondaryColor
     secondarySelectedColor: variables['ic-brand-font-color-dark']
   }
 }
