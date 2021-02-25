@@ -23,7 +23,7 @@
  */
 
 const requireDir = require('require-dir')
-const gulp = require('gulp')
+const { series, parallel } = require('gulp')
 
 requireDir('./tasks', { recurse: true })
 
@@ -39,9 +39,9 @@ if (config.fonts) {
   tasks.push('generate-fonts')
 }
 
-exports.buildAll = gulp.parallel(...tasks)
-exports.exportFromSketch = gulp.series('generate-svgs-from-sketch')
-exports.buildSVGs = gulp.series('generate-svgs')
-exports.buildFonts = gulp.series('generate-fonts')
-exports.buildReact = gulp.series('generate-react')
-exports.clean = gulp.series('clean')
+exports.optimizeSVGs = series('optimize-svgs')
+exports.buildSVGs = series('optimize-svgs', 'generate-svgs-index')
+exports.buildFonts = series('optimize-svgs', 'generate-fonts')
+exports.buildReact = series('optimize-svgs', 'generate-react')
+exports.buildAll = series('optimize-svgs', parallel(...tasks))
+exports.clean = series('clean')
