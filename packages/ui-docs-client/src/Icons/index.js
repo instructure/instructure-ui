@@ -213,17 +213,17 @@ class MyIcon extends React.Component {
     return <i className="${glyph.classes.join(' ')}" aria-hidden="true" />
   }
 }`
-    } else if (glyph.displayName) {
+    } else if (glyph.name) {
       example = `\
 /*** ES Modules (with tree shaking) ***/
-import { ${glyph.displayName} } from '${packageName}'
+import { ${glyph.name} } from '${packageName}'
 
 /*** ES Modules (without tree shaking) ***/
-import { ${glyph.displayName} } from '${requirePath}/${glyph.displayName}'
+import { ${glyph.name} } from '${requirePath}/${glyph.name}'
 
 class MyIcon extends React.Component {
   render() {
-    return <${glyph.displayName} />
+    return <${glyph.name} />
   }
 }`
     } else {
@@ -241,7 +241,7 @@ class MyIcon extends React.Component {
           language="javascript"
           readOnly
         />
-        {glyph.displayName && (
+        {glyph.name && (
           <p>
             See the <Link href="#SVGIcon">SVGIcon</Link> component for props and
             examples.
