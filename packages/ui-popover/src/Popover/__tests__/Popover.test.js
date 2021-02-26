@@ -23,14 +23,7 @@
  */
 
 import React from 'react'
-import {
-  expect,
-  mount,
-  spy,
-  within,
-  wait,
-  stub
-} from '@instructure/ui-test-utils'
+import { expect, mount, spy, within, wait } from '@instructure/ui-test-utils'
 
 import { Popover } from '../index'
 

@@ -21,10 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  findDOMNode,
-  matchMedia as defaultMatchMedia
-} from '@instructure/ui-dom-utils'
+import { matchMedia as defaultMatchMedia } from '@instructure/ui-dom-utils'
 
 import { jsonToMediaQuery } from './jsonToMediaQuery'
 

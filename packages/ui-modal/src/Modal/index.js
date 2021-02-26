@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Children, Component } from 'react'
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Dialog } from '@instructure/ui-dialog'

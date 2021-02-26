@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import { DIRECTION } from '@instructure/ui-i18n'
-
 /**
  * ---
  * private: true

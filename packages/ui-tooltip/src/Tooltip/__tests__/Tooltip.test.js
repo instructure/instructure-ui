@@ -26,7 +26,6 @@ import React from 'react'
 import {
   expect,
   mount,
-  stub,
   spy,
   wait,
   generateA11yTests

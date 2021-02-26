@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
 import { decorator } from '@instructure/ui-decorator'
 
 import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
