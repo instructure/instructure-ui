@@ -23,7 +23,9 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+// test is breaking without importing React here
+// eslint-disable-next-line no-unused-vars
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { ms } from '@instructure/ui-utils'
