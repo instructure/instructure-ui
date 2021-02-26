@@ -33,6 +33,7 @@ const generateDays = () => {
     days.push(
       <Calendar.Day
         date={date.toISOString()}
+        label={date.toISOString()}
         renderLabel={date.toISOString()}
         isOutsideMonth={date.getMonth() !== 7}
         id={date.toISOString()}
