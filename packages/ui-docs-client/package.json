@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@babel/standalone": "^7.9.5",
+    "@babel/standalone": "7.12.18",
     "@instructure/console": "^7.4.0",
     "@instructure/emotion": "^7.4.0",
     "@instructure/ui-a11y-content": "^7.4.0",
