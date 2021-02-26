@@ -1018,10 +1018,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/standalone@^7.9.5":
-  version "7.13.7"
-  resolved "https://registry.npmjs.org/@babel/standalone/-/standalone-7.13.7.tgz#4c1a9b889d59c332cbc965014aad0d13fb0b9fec"
-  integrity sha512-K1vgq2R7bJe2HOKcoQ2cYjR+9tmzvEDIOH/G5AhlJ9+3hOxL/R/7600LHkO1us3m2tNY5Gm9erj37Fik07jj7w==
+"@babel/standalone@7.12.18":
+  version "7.12.18"
+  resolved "https://registry.npmjs.org/@babel/standalone/-/standalone-7.12.18.tgz#82f28bf3570f73865626103b265cf04cab4dfb41"
+  integrity sha512-W0obE/93ZPhDfJRUUotmks4lDsZBUWdjir2Z944FnvjK7rl9MDsFa8NW7jvsPjOzImp6uBIpf/dItCgjbVOr1Q==
 
 "@babel/template@^7.12.13", "@babel/template@^7.4.0":
   version "7.12.13"
@@ -2575,7 +2575,7 @@
     global "^4.3.2"
     util-deprecate "^1.0.2"
 
-"@storybook/addons@6.1.20":
+"@storybook/addons@6.1.20", "@storybook/addons@^6.1.18":
   version "6.1.20"
   resolved "https://registry.npmjs.org/@storybook/addons/-/addons-6.1.20.tgz#da01dabd6692919b719fcb30519d53ea80887097"
   integrity sha512-kIhXYgF+ARNpYxO3qhz8yThDvKpaq+HDst8odPU9sCNEI66PSH6hrILhTmnffNnqdtY3LnKkU9rGVfZn+3TOTA==
@@ -10767,7 +10767,7 @@ humanize-url@^1.0.0:
     normalize-url "^1.0.0"
     strip-url-auth "^1.0.0"
 
-"humps@github:CompuIves/humps":
+humps@CompuIves/humps:
   version "2.0.0"
   resolved "https://codeload.github.com/CompuIves/humps/tar.gz/7ee34e874c808cf60e7119ee71ac71b8bf2189b7"
 
