@@ -25,7 +25,7 @@
 /** @jsx jsx */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import { withStyle, jsx, EmotionThemeProvider } from '../../index'
 
