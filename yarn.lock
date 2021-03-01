@@ -1018,10 +1018,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/standalone@7.12.18":
-  version "7.12.18"
-  resolved "https://registry.npmjs.org/@babel/standalone/-/standalone-7.12.18.tgz#82f28bf3570f73865626103b265cf04cab4dfb41"
-  integrity sha512-W0obE/93ZPhDfJRUUotmks4lDsZBUWdjir2Z944FnvjK7rl9MDsFa8NW7jvsPjOzImp6uBIpf/dItCgjbVOr1Q==
+"@babel/standalone@^7 >=7.13.8":
+  version "7.13.8"
+  resolved "https://registry.npmjs.org/@babel/standalone/-/standalone-7.13.8.tgz#0bec5b3d61e7753b89ef84c8f306610e033d74ff"
+  integrity sha512-1pOy6rJIe6p+svKq/OggZvi4gVwvPA2RGkup6T9pMO+XmSncnRZhEu1VNHJXEvB7H88o0JdWjDcUG2P7nz4mxA==
 
 "@babel/template@^7.12.13", "@babel/template@^7.4.0":
   version "7.12.13"
