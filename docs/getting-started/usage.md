@@ -7,7 +7,7 @@ order: 1
 ## Quick Start
 
 The following steps will create a starter app configured with Instructure-UI
-presets that is immediately ready for development.
+presets that is immediately ready for development. Recommended if you are starting from scratch.
 
 ### Creating a Starter App
 
@@ -86,31 +86,27 @@ Then, before mounting your application element import the canvas theme:
 ```javascript
 import React, { Component } from 'react'
 
-import '@instructure/canvas-theme'
+import { canvas } from '@instructure/ui-themes'
+import { EmotionThemeProvider } from '@instructure/emotion'
 
-import { Heading } from '@instructure/ui-elements'
+import { Heading } from '@instructure/ui-heading'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Heading>
-          Now using Instructure-UI components with default Canvas theme!
-        </Heading>
-      </div>
-    )
-  }
-}
-
-export default App
+ReactDOM.render(
+  <EmotionThemeProvider theme={canvas}>
+    <Heading>
+      Now using Instructure-UI components with default Canvas theme!
+    </Heading>
+  </EmotionThemeProvider>,
+  document.getElementById('app')
+)
 ```
 
 If you want to use the [canvas theme](#canvas) theme as your default with some
-customization, you can use [ApplyTheme](#ApplyTheme) to override theme variables
+customization, you can use [EmotionThemeProvider](#EmotionThemeProvider) to override theme variables
 for individual components.
 
 For more advanced customization you can also create your own theme from scratch.
-See [ui-themeable](#ui-themeable) for more complete documentation on this approach.
+See [EmotionThemeProvider](#EmotionThemeProvider) for more complete documentation on this approach.
 
 > Note: Do not use tools with Instructure UI that remove `PropTypes` (for example
 > [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types)).
