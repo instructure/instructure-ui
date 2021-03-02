@@ -59,6 +59,17 @@ module.exports = function DocgenLoader(source) {
     return loaderUtils.interpolateName(this, template, {})
   })
 
+  // eslint-disable-next-line no-console
+  console.log('CTX: ', this.context) // /Users/matyas.szabo/CODE/instructure-ui
+  // eslint-disable-next-line no-console
+  console.log('RESPATH: ', this.resourcePath) // /Users/matyas.szabo/CODE/instructure-ui/CHANGELOG.md
+  // eslint-disable-next-line no-console
+  console.log('REQ: ', this.request) // /Users/matyas.szabo/CODE/instructure-ui/packages/ui-docs-plugin/lib/loaders/docgen-loader.js?{"projectRoot":"/Users/matyas.s
+  // eslint-disable-next-line no-console
+  console.log('DOCID: ', doc.id) // debounce_README
+  // eslint-disable-next-line no-console
+  console.log('DOCTITLE: ', doc.title) // debounce
+
   return `
 module.hot && module.hot.accept([])
 const doc = ${JSON.stringify(doc)}
