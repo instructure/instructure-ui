@@ -129,6 +129,10 @@ exports.commitVersionBump = function commitVersionBump(releaseVersion) {
   runGitCommand(['commit', '-am', `chore(release): ${releaseVersion}`])
 }
 
+exports.tagCommit = function tagCommit(releaseVersion) {
+  runGitCommand(['tag', `v${releaseVersion}`])
+}
+
 exports.resetToCommit = function resetToCommit(commitish = 'HEAD') {
   runGitCommand(['reset', '--hard', commitish])
 }
