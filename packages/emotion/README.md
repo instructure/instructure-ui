@@ -6,159 +6,56 @@ category: packages
 
 The [Emotion design library's](https://emotion.sh/) implementation in Instructure UI.
 
-### EmotionThemeProvider
+With this framework, each UI component can be used in isolation and support multiple themes, including dynamic themes provided at runtime, while still working within a system of components that use a shared global theme.
 
-`EmotionThemeProvider` is a React component, which wraps Emotion's own `ThemeProvider`.
+### Motivation
 
-It accepts a `theme` prop, which should be an Instructure UI theme.
+1. Two-tiered theme variable system: system-wide variables + component level variables. With this variable system, components can be themed, tested, and rendered in isolation from the rest of the system, and we can mitigate issues that may arise with system-wide theme updates.
 
-It can be used in two ways. On the top level, you can provide the theme for the whole application or nested anywhere inside it. You can also provide an object with theme or component theme overrides.
+2. Runtime theme application and definition: to apply user/account level themes without using the CSS cascade.
 
-**For detailed usage info and examples, see the [EmotionThemeProvider](#EmotionThemeProvider) documentation page.**
+3. Prevent CSS Cascade bugs: All components should specify variants via props or component level theme variables only (no className or style overrides) with a clear API and should not rely on any external styles.
+
+4. Theme variables should be accessible in JS.
+
+5. All component styles should be scoped to the component.
+
+6. Pre-render/server-side render support (inline critical CSS).
+
+7. Use a popular, well maintained and broadly adopted JS design and theming library that supports runtime theme switching ([Emotion](https://emotion.sh/)).
+
+### Installation
+
+```sh
+yarn add @instructure/emotion
+```
+
+### Usage
+
+Make a component themeable with the [withStyle](#withStyle) decorator. It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props.
+
+Import the style generator (`generateStyle`) from `styles.js` and the component theme generator (`generateComponentTheme`) from `theme.js`, and pass them to the decorator.
+
+Call the `makeStyles` method (available on `this.props`) in the `componentDidMount` and `componentDidUpdate` lifecycle methods to generate the styles object and to keep it properly recalculated on every change.
+
+In the `render` method, use emotion's `css={this.props.styles.componentName}` syntax to add styles.
 
 ```jsx
-import App from './App'
-import { EmotionThemeProvider } from '@instructure/emotion'
-import { canvasHighContrast } from '@instructure/ui-themes'
+// Button/index.js
 
-const RenderApp = () => {
-  return (
-    <EmotionThemeProvider theme={canvasHighContrast}>
-      <App />
-    </EmotionThemeProvider>
-  )
-}
-```
-
-## Temporary component migration guide
-
-### Goal
-
-Migrate components from themeable-based to emotion-based styling
-
-### Migration steps
-
-#### 1. Refactor the `theme.js`.
-
-It will receive the theme object, and returns the variables mapped for the component, and the theme-specific styles.
-
-```js
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  // the props of theme you want to use
-  const { colors, borders, typography, key: themeName } = theme
-
-  // if any styling should depend on the theme itself,
-  // this object should specify it
-  const themeSpecificStyle = {
-    'canvas-high-contrast': {
-      primaryColor: 'red'
-    },
-    canvas: {
-      primaryColor: 'blue'
-    }
-  }
-
-  // maps the theme variables to component specific style variables
-  const componentVariables = {
-    color: colors?.textBrand,
-    background: colors?.backgroundLightest,
-    borderWidthSmall: borders?.widthSmall,
-    borderWidthMedium: borders?.widthMedium,
-    borderColor: colors?.borderMedium,
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightBold
-  }
-
-  // return with the final theme object of the component
-  // with the added theme specific overrides
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
-  }
-}
-export default generateComponentTheme
-```
-
-#### 2. Create `styles.js` file
-
-You need to create a `styles.js` file next to the `theme.js`. (Don't forget the copyright block!)\
-Write and export a `function` named `generateStyle`.\
-You need to use the content of the `styles.css` and convert it to css-in-js. Use the passed component props and state where needed.\
-[Emotion's Object Styles documentation](https://emotion.sh/docs/object-styles)
-
-```js
-/**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (componentTheme, props, state) => {
-  // optional mappings can be provided based on - for example - props
-  const colorStyles = {
-    primary: {
-      color: componentTheme.primaryColor,
-      fontSize: '20px'
-    },
-    info: {
-      color: componentTheme.infoColor
-    }
-  }
-
-  const { color } = props
-
-  // return with the css you'd like to apply to the component
-  return {
-    componentName: {
-      label: 'componentName',
-      display: 'block',
-      background: componentTheme.background,
-      boxSizing: 'border-box',
-      ...colorStyles[color]
-    },
-    child: {
-      label: 'componentName__child',
-      color: 'green',
-      background: componentTheme.infoColor
-    }
-  }
-}
-export default generateStyle
-```
-
-#### 3. Make changes in the component.
-
-Import the style generator (`generateStyle`) from `styles.js`, the component theme generator (`generateComponentTheme`) from `theme.js`, `{ withStyle, jsx }` from `@instructure/emotion`, and add the `/** @jsx jsx */` annotation on top.\
-Replace `@themeable` with `@withStyle(generateStyle, generateComponentTheme)`, passing the style and theme generators.\
-In the `componentDidMount` and `componentDidUpdate` methods, call the `makeStyles` method (available on this.props) to generate the styles object, passing the state (or any other object needed).\
-In the `render` method, use emotion's `css={this.props.styles.componentName}` syntax to add styles.\
-
-```jsx
 /** @jsx jsx */
-import { Component } from 'react'
-// other imports
 import { withStyle, jsx } from '@instructure/emotion'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 @withStyle(generateStyle, generateComponentTheme)
-class MyComponent extends Component {
-  // ...
-  // rest
-  // of
-  // the
-  // component
-  // ...
+class Button extends React.Component {
+  static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
+  }
 
   componentDidMount() {
     this.props.makeStyles()
@@ -169,125 +66,283 @@ class MyComponent extends Component {
   }
 
   render() {
-    const { styles } = this.props
+    const { propVal1, styles, ...props } = this.props
 
     return (
-      <div css={styles.componentName}>
-        // Magnificent content
-        <div css={styles.componentName__child}>
-          // Content that needs additional class to style
-        </div>
-      </div>
+      <button css={styles.button}>
+        <svg css={styles.icon}>...</svg>
+        ...
+      </button>
     )
   }
 }
+
+export { Button }
+export default Button
 ```
 
-#### 4. Move any style logic from the component to `styles.js`.
+Themeable components inject their themed styles into the document when they are mounted.
 
-Since you can use all props and states in `styles.js`, move any style-related logic from the `index.js` there.\
-\
-Before:
+A themeable component’s theme can be configured by wrapping it in an [EmotionThemeProvider](#EmotionThemeProvider) component, and/or set explicitly via its `themeOverride` prop (see [withStyle](#withStyle) documentation).
+
+#### EmotionThemeProvider
+
+`EmotionThemeProvider` is a React component, which wraps Emotion's own `ThemeProvider`.
+
+It accepts a `theme` prop, which should be an Instructure UI theme.
+
+It can be used in two ways. On the top level, you can provide the theme for the whole application or nested anywhere inside it. You can also provide an object with theme or component theme overrides.
+
+**For detailed usage info and examples, see the [EmotionThemeProvider](#EmotionThemeProvider) documentation page.**
 
 ```jsx
-// [index.js]
+import Button from './Button'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import { canvasHighContrast } from '@instructure/ui-themes'
 
-return (
-  <View
-    {...passthroughProps(props)}
-    className={classnames({
-      [styles.root]: true,
-      [styles[`color--${color}`]]: color,
-      [styles[`border--${border}`]]: border !== 'none',
-      [styles.ellipsis]: ellipsis
-    })}
-    as={ElementType}
-    margin={margin}
-    minWidth={minWidth ? minWidth : undefined}
-    elementRef={elementRef}
-  >
-    {children}
-  </View>
-)
+const RenderApp = () => {
+  return (
+    <EmotionThemeProvider theme={canvasHighContrast}>
+      <Button />
+    </EmotionThemeProvider>
+  )
+}
 ```
 
-\
-After:
+### Defining variables
 
-```jsx
-// [index.js]
+The themeable component uses the JS variables defined in the `theme.js` file.
 
-return (
-  <View
-    {...passthroughProps(props)}
-    css={this.props.styles.img}
-    as={ElementType}
-    elementRef={elementRef}
-    margin={margin}
-    minWidth={minWidth ? minWidth : undefined}
-  >
-    {children}
-  </View>
-)
+For example, to add a variable for the hover state of a Button component, the theme.js file might contain the following:
 
-// ---------
+```js
+// Button/theme.js
+const generateComponentTheme = (theme) => {
+  const { colors } = theme
 
-// [styles.js]
+  const componentVariables = {
+    background: colors?.backgroundMedium,
+    color: colors?.textDarkest,
 
-const { color, border, ellipsis } = props
-
-const colorStyle = {
-  red: {
-    backgroundColor: 'red'
-  },
-  green: {
-    backgroundColor: 'green'
+    hoverColor: colors?.textLightest,
+    hoverBackground: colors?.backgroundDarkest
   }
-}
 
-const borderStlye = {
-  solid: {
-    borderStyle: 'solid'
-  },
-  dashed: {
-    borderStyle: 'dashed'
-  },
-  none: {}
+  return componentVariables
 }
+export default generateComponentTheme
+```
 
-const ellipsisStyle = ellipsis
-  ? {
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis'
+The arguments to the generator function are the [global theme variables](#canvas). In the above example, we've defined the default theme for the Button component.
+
+The purpose of the generator function is to take the global variables and apply them as values to the functional component level variables.
+When coming up with names for the component level variables, try to make them describe how they are used in the component (vs describing the variable value).
+
+### Supporting multiple themes
+
+If we want to make the Button transform the global theme variables differently with another theme, (e.g. [canvas-high-contrast](#canvas-high-contrast)) we can make specific styling for that theme:
+
+```js
+// Button/theme.js
+const generateComponentTheme = (theme) => {
+  const { colors, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    'canvas-high-contrast': {
+      background: colors.backgroundLightest
     }
-  : {}
-
-return {
-  img: {
-    // ...styles
-    boxSizing: 'border-box',
-    minWidth: '1em',
-    ...colorStyle[color],
-    ...borderStlye[border],
-    ...ellipsisStyle
   }
+
+  const componentVariables = {
+    background: colors?.backgroundMedium,
+    color: colors?.textDarkest,
+
+    hoverColor: colors?.textLightest,
+    hoverBackground: colors?.backgroundDarkest
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
+}
+export default generateComponentTheme
+```
+
+This will override the default Button theme and use the global theme variable `colors.textLightest` for the value of its `background` theme variable instead of `colors.tiara`.
+
+The rest of the variables will pick up from the default Button theme generator (applying the global theme variables from the `canvas-high-contrast` theme).
+
+### Using theme variables in styles.js
+
+In the `styles.js` file, the `generateStyle` method receives the theme variable object (`componentTheme`) generated by `theme.js`.
+
+Add your styling for each element in the component, and give them [labels](#https://emotion.sh/docs/labels#gatsby-focus-wrapper) for easy readability and targetability. _Naming convention_: similar to [BEM naming convention](#http://getbem.com/naming/), use the name of the component in camelCase for the root element ('button'), and the double underscore suffix for children ('button\_\_icon').
+
+Use [Emotion's Object Styles documentation](https://emotion.sh/docs/object-styles) as a guide to add styles.
+
+Note: Don't worry about scoping your CSS variables (the [emotion](#emotion) library will take care of that for you):
+
+```js
+// Button/styles.js
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    button: {
+      label: 'button',
+      background: componentTheme.background,
+      color: componentTheme.color,
+
+      '&:hover': {
+        background: componentTheme.hoverBackground,
+        color: componentTheme.hoverColor
+      }
+    },
+    icon: {
+      label: 'button__icon',
+      display: 'inline-block',
+      fill: 'currentColor'
+    }
+  }
+}
+export default generateStyle
+```
+
+The `generateStyle` method also automatically receives all the props of the component, so you can add styling based on them:
+
+```js
+// Button/styles.js
+const generateStyle = (componentTheme, props, state) => {
+  const { display, isDisabled } = props
+
+  const displayVariants = {
+    inline: {
+      display: 'inline-block'
+    },
+    block: {
+      display: 'block',
+      margin: 0
+    },
+    none: {
+      display: 'none'
+    }
+  }
+
+  return {
+    button: {
+      label: 'button',
+      // ...
+      ...(isDisabled && { opacity: 0.5 }),
+      ...displayVariants[display]
+    }
+    // ...
+  }
+}
+export default generateStyle
+```
+
+You can also pass additional variables from the component via the `makeStyles` prop. These can be values from the state or from getters, etc.
+
+Note: don't forget to pass them both in `componentDidMount` and `componentDidUpdate` methods!
+
+```js
+// Button/index.js
+class Button extends React.Component {
+  static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      focused: false
+    }
+  }
+
+  componentDidMount() {
+    this.props.makeStyles({
+      focused: this.state.focused,
+      someValue: this.someValue
+    })
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles({
+      focused: this.state.focused,
+      someValue: this.someValue
+    })
+  }
+
+  get someValue() {
+    return 'some value here'
+  }
+
+  render() {
+    // ...
+  }
+}
+
+// Button/styles.js
+const generateStyle = (componentTheme, props, state) => {
+  const { focused, someValue } = state
+
+  return {
+    button: {
+      label: 'button',
+      // ...
+      ...(someValue === 'not that value' && { display: 'none' }),
+      ...(focused && {
+        borderWidth: '2px',
+        ...(someValue === 'not that value' && { display: 'block' })
+      })
+    }
+    // ...
+  }
+}
+export default generateStyle
+```
+
+### Using theme variables in JavaScript
+
+Since the variables are defined in JS you can easily pass them through `styles.js` to access in your component JS.
+
+```js
+// Button/styles.js
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    button: {
+      label: 'button'
+      // ...
+    },
+    maxWidth: componentTheme.maxWidth
+  }
+}
+
+// Button/index.js
+render() {
+  const { propVal1, styles, ...props } = this.props
+
+  return (
+    <div maxWidth={styles.maxWidth}>
+      ...
+    </div>
+  )
 }
 ```
 
-#### 5. Delete css file
+#### Writing theme tests
 
-Once you implemented the css in `styles.js`, delete the `styles.css` file.
-\
+For components with theme tests, you can use `generateComponentTheme` from `theme.js` to get the theme variables.
 
-#### 6. Theme tests
-
-For components with theme tests, you can use the `generateComponentTheme` to get the theme variables.\
-Import the themes needed for your tests.
+Import the themes needed for your test, and pass them to the generator.
 
 ```js
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
+
 describe('YourComponent.theme', () => {
   describe('with canvas theme', () => {
     const variables = generateComponentTheme(canvas)
