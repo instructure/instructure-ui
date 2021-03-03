@@ -309,7 +309,7 @@ class Hero extends Component {
           </View>
           <List isUnstyled margin="small none none">
             <List.Item>
-              <Link href="#v7-upgrade-guide">Version 7.0 Upgrade Guide</Link>
+              <Link href="#v8-upgrade-guide">Version 8.0 Upgrade Guide</Link>
             </List.Item>
             <List.Item>
               <Link href="#CHANGELOG">Change Log ({version})</Link>
@@ -485,7 +485,7 @@ class Hero extends Component {
                       withBorder={false}
                       focusColor="inverse"
                       color="success"
-                      href="#v7-upgrade-guide"
+                      href="#v8-upgrade-guide"
                       size={bigScreen ? 'large' : 'medium'}
                       margin="0 x-small x-small 0"
                     >

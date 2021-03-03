@@ -36,7 +36,6 @@ module.exports = function DocsLoader() {
   const loaderOptions = loaderUtils.getOptions(this) || {}
   const options = getOptions(loaderOptions)
 
-  // TODO rewrite this as a simple require!
   const processFile = (filepath) => {
     return `require('!!${require.resolve('./docgen-loader')}?${JSON.stringify(
       loaderOptions
