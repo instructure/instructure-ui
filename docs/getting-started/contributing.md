@@ -8,12 +8,25 @@ order: 2
 
 Contributions are welcome! If you want to submit a change you will need to open a pull request on Github. To do so first fork the repository to your own Github account.
 
-**Installation steps:**
+### What can you contribute?
 
-Follow these steps to download and run Instructure-UI on your machine:
+If you found a bug or want to add a minor feature, go ahead! If it's a larger thing (like a new component), read on.
+
+We try to keep the InstUI easy to use, easy to learn and free from bloat.
+For this reason we will only add new components if it fits into the current design patterns, and the new component cannot be
+constructed from the existing ones. For these reasons adding a new component is the following process:
+
+- You should write a document what do you want to add and what use case does it solve.
+- You should make some kind of design sketch that documents the design of the pattern (e.g. with [Figma](https://www.figma.com/)).
+- Our design team will review and approve this design sketch.
+- If the sketch is OK, you will need to make a pull request (read on for our code guidelines), the InstUI dev team and our a11y team will review the code and merge it.
+
+### Building InstUI from the source
+
+Follow these steps to download and compile Instructure-UI on your machine:
 
 1. Install [Git](http://git-scm.com/).
-1. Install [Node >= 12](https://nodejs.org/en/)) (we recommend [nvm](https://github.com/creationix/nvm) to manage multiple Node versions).
+1. Install [Node >= 12.20](https://nodejs.org/en/)) (we recommend [nvm](https://github.com/creationix/nvm) to manage multiple Node versions).
 1. Install [Yarn >=1.6](https://yarnpkg.com/lang/en/docs/install/)
 1. Clone the repository with `git clone` (If you want to make changes clone the forked repo in your account.)
 1. Run `cd instructure-ui`
@@ -21,8 +34,6 @@ Follow these steps to download and run Instructure-UI on your machine:
 1. Run `yarn bootstrap`
 
 Run `yarn run` to list the available commands.
-
-When you are ready with your changes open a pull request on Github to the `master` branch and the maintainers will review and merge it.
 
 ### Running the documentation app
 
@@ -35,6 +46,8 @@ When you are ready with your changes open a pull request on Github to the `maste
 1. Run `yarn dev` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should see the page auto-reload.
 1. Run `yarn test:watch --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
 1. Run `yarn test` to run all the tests for every package.
+
+## Code guidelines
 
 ### Testing
 
@@ -65,16 +78,6 @@ Please update the documentation and examples with any changes.
 1. Run `yarn commit` to commit your changes and follow our commit message format.
 1. Please do not include the output of `yarn build` in your commits.
 
-### Updating build (repository) dependencies
-
-1. `yarn add <package-name>` or `yarn upgrade <package-name>`.
-1. Commit the result.
-
-### Updating individual package dependencies
-
-1. Update the relevant `package.json` file. Make sure to retain the `^` semver range.
-1. Run `yarn bootstrap` and commit the result.
-
 ### Adding a package
 
 1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
@@ -95,22 +98,10 @@ Please update the documentation and examples with any changes.
 1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
 1. Start making changes to your component, and watch it update in the browser automatically.
 
-### Proposing API changes
-
-If you'd like to propose changes to a component API or a new component, you'll need to fill out an RFC ("request for change") document and have it reviewed before implementing your change. Be sure to note any breaking changes or deprecations in the RFC document.
-
-1. Run `yarn generate:rfc`. This script creates an RFC document for you in `/rfcs`.
-1. Fill out this document and submit it for review.
-1. Once the RFC is approved and merged you can go ahead and make your change.
-
 ### Accessibility and Internationalization Requirements
 
 All components should:
 
-1. be accessible (See the [accessibility requirements](#accessibility) for more information).
-1. support RTL languages.
-1. localize all dates, times, numbers and strings (or require localized content passed in via props).
-
-### Releases
-
-See the [releases documentation](#releases) for information on the release process.
+1. Be accessible (See the [accessibility requirements](#accessibility) for more information).
+1. Support RTL languages.
+1. Localize all dates, times, numbers and strings (or require localized content passed in via props).
