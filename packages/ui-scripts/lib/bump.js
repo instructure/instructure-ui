@@ -25,7 +25,11 @@ const { getPackageJSON } = require('@instructure/pkg-utils')
 const { error, info } = require('@instructure/command-utils')
 
 const { getConfig } = require('./utils/config')
-const { commitVersionBump, checkWorkingDirectory } = require('./utils/git')
+const {
+  tagCommit,
+  commitVersionBump,
+  checkWorkingDirectory
+} = require('./utils/git')
 const { bumpPackages } = require('./utils/npm')
 
 try {
@@ -61,6 +65,14 @@ async function bump(
 
   try {
     commitVersionBump(releaseVersion)
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  info(`💾  Tagging release commit...`)
+  try {
+    tagCommit(releaseVersion)
   } catch (err) {
     error(err)
     process.exit(1)
