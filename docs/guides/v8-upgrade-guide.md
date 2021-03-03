@@ -45,7 +45,6 @@ We have removed the following packages:
 | [@instructure/babel-plugin-themeable-styles](https://www.npmjs.com/package/@instructure/babel-plugin-themeable-styles) | Babel plugin used by themeable    |
 | [@instructure/postcss-themeable-styles](https://www.npmjs.com/package/@instructure/postcss-themeable-styles)           | CSS transformer used by themeable |
 | [@instructure/ui-postcss-config](https://www.npmjs.com/package/@instructure/ui-postcss-config)                         | PostCSS config used by themeable  |
-| [@instructure/ui-svg-images](https://www.npmjs.com/package/@instructure/ui-svg-images)                                 | TODO add explanation              |
 
 The 7.x versions are still on npm, but they will not receive further feature updates.
 You can still file bugs, and we will likely fix them or submit pull requests if you want to see a new feature in them.
