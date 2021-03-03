@@ -35,32 +35,91 @@ import { useTheme } from './useTheme'
  * ---
  * category: utilities/themes
  * ---
- * Decorator which adds a `makeStyles` function and
- * the generated `styles` object to the decorated Component's props.
+ * A decorator or higher order component that makes a component themeable.
  *
- * @param {function} generateStyle - The function that returns the component's style object
- * @param {function} generateComponentTheme - The function that returns the component's theme variables object
- * @returns {ReactElement} The decorated WithStyle Component
+ * It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props.
  *
- * @example
+ * As a HOC:
+ *
+ * ```js
+ * import { withStyle, jsx } from '@instructure/emotion'
+ * import generateStyle from './styles'
+ * import generateComponentTheme from './theme'
+ *
  * class ExampleComponent extends React.Component {
+ *  static propTypes = {
+ *    // eslint-disable-next-line react/require-default-props
+ *    makeStyles: PropTypes.func,
+ *    // eslint-disable-next-line react/require-default-props
+ *    styles: PropTypes.object
+ *  }
+ *
+ *  componentDidMount() {
+ *    this.props.makeStyles()
+ *  }
  *
  *  componentDidUpdate() {
  *    this.props.makeStyles()
- *
- * }
- *  componentDidMount() {
- *    this.props.makeStyles()
- * }
+ *  }
  *
  *  render() {
  *    const { propVal1, styles, ...props } = this.props
  *
  *    return (
- *      <Element css={styles.root} >...</Element>
+ *      <Element css={styles.exampleComponent} >...</Element>
  *    )
  *  }
  * }
+ *
+ * export default withStyle(generateStyle, generateComponentTheme)(ExampleComponent)
+ * ```
+ *
+ * Themeable components inject their themed styles into the document
+ * when they are mounted.
+ *
+ * ### Applying themes
+ *
+ * A themeable component’s theme can be configured via wrapping it in an
+ * [EmotionThemeProvider](#EmotionThemeProvider) component, and/or set
+ * explicitly via its `themeOverride` prop.
+ *
+ * EmotionThemeProvider provides a theme object with [global theme variables](#canvas).
+ * These variables are mapped to the component's own variables in `theme.js` (see [@instructure/emotion](#emotion) package documentation for more info).
+ *
+ * With the `themeOverride` prop you can directly set/override the component theme variables declared in theme.js.
+ *
+ * ```js
+ * // ExampleComponent/theme.js
+ * const generateComponentTheme = (theme) => {
+ *   const { colors } = theme
+ *
+ *   const componentVariables = {
+ *     background: colors?.backgroundMedium,
+ *     color: colors?.textDarkest,
+ *
+ *     hoverColor: colors?.textLightest,
+ *     hoverBackground: colors?.backgroundDarkest
+ *   }
+ *
+ *   return componentVariables
+ * }
+ * export default generateComponentTheme
+ * ```
+ *
+ * ```jsx
+ * {// global theme override}
+ * <EmotionThemeProvider theme={{
+ *   colors: { backgroundMedium: '#888' }
+ * }}>
+ *  {// component theme override}
+ *   <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
+ * </EmotionThemeProvider>
+ * ```
+ *
+ *
+ * @param {function} generateStyle - The function that returns the component's style object
+ * @param {function} generateComponentTheme - The function that returns the component's theme variables object
+ * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
   (ComposedComponent, generateStyle, generateComponentTheme) => {
