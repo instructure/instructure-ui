@@ -29,7 +29,7 @@ We have moved the development of the library fully to Github. Please file here b
 
 ### Migrating theming from Themeable to Emotion
 
-We prepared a detailed guide on how to migrate the theming of your app to emotion [here.](TODO add link)
+We prepared a detailed guide on how to migrate the theming of your app to emotion [TODO add link here.](TODO add link)
 
 ### Removal of deprecated properties
 
@@ -50,8 +50,9 @@ We have removed the following packages:
 The 7.x versions are still on npm, but they will not receive further feature updates.
 You can still file bugs, and we will likely fix them or submit pull requests if you want to see a new feature in them.
 
-### Other minor changes
+### Other smaller changes
 
 - InstUI now needs node.js version >12.20 to build
 - Upgraded Storybook from 5.2 to 6.1
-- development builds are called now `snapshot`
+- Development builds are called now `snapshot`
+- Updated React legacy context to the new context API in the components that use it (e.g. `DrawerLayout`)
