@@ -10,20 +10,20 @@ Contributions are welcome! If you want to submit a change you will need to open 
 
 ### What can you contribute?
 
-If you found a bug or want to add a minor feature, go ahead! If it's a larger thing (like a new component), read on.
+If you found a bug or want to add a minor feature, go ahead! If you'd like to add a new component, or change/add new visuals, please read on.
 
-We try to keep the InstUI easy to use, easy to learn and free from bloat.
+We try to keep InstUI easy to use, easy to learn and free from bloat.
 For this reason we will only add new components if it fits into the current design patterns, and the new component cannot be
-constructed from the existing ones. For these reasons adding a new component is the following process:
+constructed from the existing ones. For these reasons adding a new component has the following process:
 
-- You should write a document what do you want to add and what use case does it solve.
-- You should make some kind of design sketch that documents the design of the pattern (e.g. with [Figma](https://www.figma.com/)).
+- You should write a document which includes the component description, and the use cases it's meant to be used in.
+- You should make some kind of design sketch that documents the design of the component (e.g. with [Figma](https://www.figma.com/)).
 - Our design team will review and approve this design sketch.
-- If the sketch is OK, you will need to make a pull request (read on for our code guidelines), the InstUI dev team and our a11y team will review the code and merge it.
+- If the sketch is OK, you will need to make a pull request (read on for our code guidelines), the InstUI dev team, the design team, and our a11y team will review and merge your contribution.
 
 ### Building InstUI from the source
 
-Follow these steps to download and compile Instructure-UI on your machine:
+Follow these steps to download and compile Instructure UI on your machine:
 
 1. Install [Git](http://git-scm.com/).
 1. Install [Node >= 12.20](https://nodejs.org/en/)) (we recommend [nvm](https://github.com/creationix/nvm) to manage multiple Node versions).
