@@ -15,9 +15,10 @@ We recommend upgrading your application for each major version gradually, e.g. i
 
 ## Why we switched from emotion to themeable
 
-We feel that it is very important that InstUI is easy to use and learn, to accomplish this we try to use well-known open source solutions whenever possible.
+We feel that it is very important that InstUI is easy to use and learn. To accomplish this, we try to use well-known open source solutions whenever possible.
 The previous, custom made theming solution did not fit into this vision (for its defense it was added when there weren't widely used alternatives)
-so we decided to switch to a broadly adopted one. The two main candidates were [emotion.sh](https://emotion.sh) and [styled components](https://styled-components.com), we decided to use emotion. If you are interested in our detailed reasoning you can read it [here](https://gist.github.com/serikjensen/4ba00b653efac1dbf80543c529adabbc).
+so we decided to switch to a broadly adopted one. The two main candidates were [emotion.sh](https://emotion.sh) and [styled components](https://styled-components.com), we decided to use emotion.
+If you are interested in our detailed reasoning you can read it [here](https://gist.github.com/serikjensen/4ba00b653efac1dbf80543c529adabbc).
 
 ### Codemods
 
@@ -25,7 +26,7 @@ We provide codemods to ease the upgrade process, you can read the details [TODO 
 
 ### Github as the main source code repository
 
-We have moved the development of the library fully to Github. Please file here bugs or pull requests.
+We have moved the development of the library fully to Github. Please file your bug reports or pull requests [here](#https://github.com/instructure/instructure-ui).
 
 ### Migrating theming from Themeable to Emotion
 
@@ -33,7 +34,8 @@ We prepared a detailed guide on how to migrate the theming of your app to emotio
 
 ### Removal of deprecated properties
 
-Properties that were marked as deprecated in 7.x got removed in 8.0. On what to use as substitutes please read the 7.x docs at https://legacy.instructure.design
+Properties that were marked as deprecated in 7.x got removed in 8.0.
+Please read the 7.x docs at [legacy.instructure.design](#https://legacy.instructure.design) and the [CHANGELOG](#CHANGELOG) on what props got removed, changed, and what new props you can substitute them with.
 
 ### Removal of deprecated packages
 
@@ -45,6 +47,7 @@ We have removed the following packages:
 | [@instructure/babel-plugin-themeable-styles](https://www.npmjs.com/package/@instructure/babel-plugin-themeable-styles) | Babel plugin used by themeable    |
 | [@instructure/postcss-themeable-styles](https://www.npmjs.com/package/@instructure/postcss-themeable-styles)           | CSS transformer used by themeable |
 | [@instructure/ui-postcss-config](https://www.npmjs.com/package/@instructure/ui-postcss-config)                         | PostCSS config used by themeable  |
+| [@instructure/ui-stylesheet](https://www.npmjs.com/package/@instructure/ui-stylesheet)                                 | Used by themeable                 |
 
 The 7.x versions are still on npm, but they will not receive further feature updates.
 You can still file bugs, and we will likely fix them or submit pull requests if you want to see a new feature in them.
