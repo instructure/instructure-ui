@@ -69,7 +69,7 @@ const elements = {
     </Heading>
   ),
   h5: ({ id, children }) => (
-    <Heading id={id} level="h4" as="h5" margin="large 0 small 0" size>
+    <Heading id={id} level="h4" as="h5" margin="large 0 small 0">
       {children}
     </Heading>
   ),
