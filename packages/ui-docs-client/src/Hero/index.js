@@ -489,7 +489,7 @@ class Hero extends Component {
                       size={bigScreen ? 'large' : 'medium'}
                       margin="0 x-small x-small 0"
                     >
-                      7.0 Upgrade Guide
+                      8.0 Upgrade Guide
                     </Button>
                   </View>
                 </View>

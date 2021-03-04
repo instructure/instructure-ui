@@ -39,7 +39,7 @@ async function promptImportMigration({ version } = {}) {
       "Migrate each component import to it's individual package"
     ]
 
-    const migrationDescription = `In Instructure UI 7.0, each component now has it's own package (Avatar is now in @instructure/ui-avatar, Modal is now in @instructure/ui-modal etc). As an alternative to having to deal with all these package names in your codebase, we also provide a meta package that exports all components called @instructure/ui.
+    const migrationDescription = `From Instructure UI 7.0, each component now has it's own package (Avatar is now in @instructure/ui-avatar, Modal is now in @instructure/ui-modal etc). As an alternative to having to deal with all these package names in your codebase, we also provide a meta package that exports all components called @instructure/ui.
 
   These codemods can migrate your Instructure UI component imports to either option. Choose which one you prefer:`
 
