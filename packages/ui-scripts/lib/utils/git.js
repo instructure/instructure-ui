@@ -130,7 +130,7 @@ exports.commitVersionBump = function commitVersionBump(releaseVersion) {
 }
 
 exports.tagCommit = function tagCommit(releaseVersion) {
-  //we must add 'annotated' tags for lerna work properly (-a -m options)
+  // We must add 'annotated' tags for lerna to work properly (-a -m options)
   runGitCommand(['tag', '-a', `v${releaseVersion}`, '-m', `v${releaseVersion}`])
 }
 
