@@ -51,12 +51,12 @@ async function publish(options) {
   const isRelease = isReleaseCommit(currentVersion)
   const infoMessage = isRelease
     ? `📦  Currently on release commit for ${currentVersion} of ${packageName}.`
-    : `📦  Not on a release commit--publishing a nightly-release...`
+    : `📦  Not on a release commit--publishing a snapshot-release...`
 
   info(infoMessage)
 
   const versionToRelease = isRelease ? currentVersion : 'prerelease'
-  const tag = isRelease ? 'latest' : 'nightly'
+  const tag = isRelease ? 'latest' : 'snapshot'
   try {
     await publishPackages(packageName, versionToRelease, tag)
   } catch (e) {
