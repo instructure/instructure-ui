@@ -2,6 +2,9 @@
   publish = "packages/__docs__/__build__"
   command = "yarn bootstrap:docs && yarn build:docs"
 
+[build.environment]
+  NODE_VERSION = "15.5.0"
+
 [context.production]
   # ignore the build & deploy from the master branch
-  ignore = "git diff HEAD master --quiet --exit-code"
+  ignore = "git diff HEAD refs/heads/master --quiet --exit-code"
