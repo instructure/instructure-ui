@@ -1,6 +1,6 @@
 {
   "name": "@instructure/template-component",
-  "version": "7.4.0",
+  "version": "7.4.1",
   "description": "A package containing template files to generate an instructure-ui component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -16,16 +16,16 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-react-utils": "^7.4.0",
-    "@instructure/ui-testable": "^7.4.0",
-    "@instructure/ui-themeable": "^7.4.0",
+    "@instructure/ui-react-utils": "^7.4.1",
+    "@instructure/ui-testable": "^7.4.1",
+    "@instructure/ui-themeable": "^7.4.1",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.0",
-    "@instructure/ui-color-utils": "^7.4.0",
-    "@instructure/ui-test-locator": "^7.4.0",
-    "@instructure/ui-test-utils": "^7.4.0"
+    "@instructure/ui-babel-preset": "^7.4.1",
+    "@instructure/ui-color-utils": "^7.4.1",
+    "@instructure/ui-test-locator": "^7.4.1",
+    "@instructure/ui-test-utils": "^7.4.1"
   },
   "peerDependencies": {
     "react": "^16.8"
