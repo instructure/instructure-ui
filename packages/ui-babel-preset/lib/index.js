@@ -189,6 +189,8 @@ function getWebEnvConfig(opts) {
     corejs: 3,
     modules: opts.esModules ? false : 'commonjs',
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
-    exclude: ['transform-typeof-symbol']
+    exclude: ['transform-typeof-symbol'],
+    // have to include this plugin because babel-loader can't handle the `??` operator
+    include: ['proposal-nullish-coalescing-operator']
   }
 }
