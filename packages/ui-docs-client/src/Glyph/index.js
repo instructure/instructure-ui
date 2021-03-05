@@ -23,10 +23,9 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { IconButton } from '@instructure/ui-buttons'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -54,7 +53,7 @@ class Variant extends Component {
   }
 
   render() {
-    const { glyph, variant, name } = this.props
+    const { glyph, variant, name, styles } = this.props
     let icon
     if (glyph.src) {
       icon = <InlineSVG src={glyph.src} title={`${name} (${variant})`} />
@@ -63,7 +62,7 @@ class Variant extends Component {
       icon = <Icon title={`${name} (${variant})`} />
     } else if (glyph.classes) {
       icon = (
-        <span>
+        <span css={styles.iconFontWrapper}>
           <i className={`${glyph.classes.join(' ')}`} aria-hidden="true" />
           <ScreenReaderContent>{`${name} (${variant})`}</ScreenReaderContent>
         </span>
@@ -71,14 +70,10 @@ class Variant extends Component {
     }
 
     return (
-      <IconButton
-        size="large"
-        onClick={this.handleClick}
-        renderIcon={icon}
-        withBorder={false}
-        withBackground={false}
-        screenReaderLabel="View Usage"
-      />
+      <button css={styles.button} onClick={this.handleClick}>
+        {icon}
+        <ScreenReaderContent>View Usage</ScreenReaderContent>
+      </button>
     )
   }
 }

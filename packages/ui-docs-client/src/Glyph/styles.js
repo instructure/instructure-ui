@@ -59,6 +59,71 @@ const generateStyle = (componentTheme, props, state) => {
       position: 'relative',
       overflow: 'hidden',
       marginBottom: '0.5rem'
+    },
+    iconFontWrapper: {
+      label: 'glyph__iconFontWrapper',
+      height: '1em'
+    },
+    button: {
+      label: 'glyph__button',
+      appearance: 'none',
+      textDecoration: 'none',
+      touchAction: 'manipulation',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
+      padding: 0,
+      margin: 0,
+      border: 0,
+      borderRadius: '0.25rem',
+      background: 'none',
+      color: componentTheme.glyphColor,
+      width: '3rem',
+      height: '3rem',
+      fontSize: '1.625rem',
+      lineHeight: 1,
+      transition: 'background 0.2s',
+      cursor: 'pointer',
+      position: 'relative',
+      transform: 'none',
+
+      '&::-moz-focus-inner': {
+        border: '0' /* removes default dotted focus outline in Firefox */
+      },
+      '*': {
+        pointerEvents:
+          'none' /* Ensures that button or link is always the event target */
+      },
+      '&:focus': {
+        outline: 'none',
+        transform: 'none',
+
+        '&::before': {
+          opacity: 1,
+          transform: 'scale(1)'
+        }
+      },
+      '&:hover': {
+        backgroundColor: componentTheme.glyphHoverBackgroundColor
+      },
+
+      '&::before': {
+        pointerEvents: 'none',
+        content: '""',
+        position: 'absolute',
+        borderStyle: 'solid',
+        borderWidth: '0.125rem',
+        borderColor: componentTheme.glyphFocusBorderColor,
+        opacity: 0,
+        borderRadius: '0.4327rem',
+        top: '-0.3125rem',
+        left: '-0.3125rem',
+        right: '-0.3125rem',
+        bottom: '-0.3125rem',
+        transition: 'all 0.2s',
+        transform: 'scale(0.95)'
+      }
     }
   }
 }
