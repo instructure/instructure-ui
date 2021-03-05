@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { alpha } from '@instructure/ui-color-utils'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -54,7 +56,10 @@ const generateComponentTheme = (theme) => {
       transparent 25%,
       transparent 75%,
       ${colorCheckerboardInverse} 75%,
-      ${colorCheckerboardInverse}`
+      ${colorCheckerboardInverse}`,
+    glyphColor: colors?.textDarkest,
+    glyphHoverBackgroundColor: alpha(colors?.textDarkest, 10),
+    glyphFocusBorderColor: colors?.borderBrand
   }
 
   return {
