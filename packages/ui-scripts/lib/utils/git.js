@@ -129,11 +129,6 @@ exports.commitVersionBump = function commitVersionBump(releaseVersion) {
   runGitCommand(['commit', '-am', `chore(release): ${releaseVersion}`])
 }
 
-exports.tagCommit = function tagCommit(releaseVersion) {
-  // We must add 'annotated' tags for lerna to work properly (-a -m options)
-  runGitCommand(['tag', '-a', `v${releaseVersion}`, '-m', `v${releaseVersion}`])
-}
-
 exports.resetToCommit = function resetToCommit(commitish = 'HEAD') {
   runGitCommand(['reset', '--hard', commitish])
 }

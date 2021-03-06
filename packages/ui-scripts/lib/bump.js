@@ -70,15 +70,5 @@ async function bump(
     process.exit(1)
   }
 
-  info(
-    `💾  Tagging release commit... (you must push the tag after the process finished with \`git push origin v${releaseVersion}\`)`
-  )
-  try {
-    tagCommit(releaseVersion)
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-
   info(`💾  Version bump for ${packageName} to ${releaseVersion} complete!`)
 }
