@@ -83,7 +83,7 @@ export default Button
 
 Themeable components inject their themed styles into the document when they are mounted.
 
-A themeable component’s theme can be configured by wrapping it in an [EmotionThemeProvider](#EmotionThemeProvider) component, and/or set explicitly via its `themeOverride` prop (see [withStyle](#withStyle) documentation).
+A themeable component’s theme can be configured by wrapping it in an [EmotionThemeProvider](#EmotionThemeProvider) component, and/or set explicitly via its `themeOverride` prop (see [withStyle](#withStyle/#applying-themes) documentation).
 
 #### EmotionThemeProvider
 
