@@ -59,7 +59,7 @@ examplesContext.keys().map((requirePath) => {
               ...page.parameters,
               viewports: [1200],
               pauseAnimationAtEnd: true,
-              delay: 500
+              delay: 700
             }
           }
         )
