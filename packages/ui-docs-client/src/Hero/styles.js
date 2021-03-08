@@ -33,26 +33,20 @@
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyle = (componentTheme, props, state) => {
-  const commonStyles = {
-    position: 'absolute',
-    top: 0,
-    insetInlineStart: 0,
-    width: '100%',
-    height: '100%'
-  }
-
   return {
     backgroundColor: componentTheme.backgroundColor,
 
     overlayLayout: {
       label: 'hero__overlayLayout',
-      ...commonStyles
+      position: 'absolute',
+      top: 0,
+      insetInlineStart: 0,
+      width: '100%',
+      height: '100%'
     },
 
     contentLayout: {
       label: 'hero__contentLayout',
-      ...commonStyles,
-      position: 'relative',
       display: 'grid',
       gridTemplateRows: 'auto 1fr auto'
     },
