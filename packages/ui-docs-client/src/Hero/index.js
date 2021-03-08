@@ -285,6 +285,17 @@ class Hero extends Component {
             </Link>
           </List.Item>
         </List>
+        <Heading as="h3" level="h2" margin="none none medium">
+          Acknowledgements
+        </Heading>
+        <View as="p" margin="none none small">
+          <a href="https://www.netlify.com">
+            <img
+              src="https://www.netlify.com/img/global/badges/netlify-dark.svg"
+              alt="Deploys by Netlify"
+            />
+          </a>
+        </View>
       </View>
     )
 
@@ -301,21 +312,12 @@ class Hero extends Component {
               </Heading>
             </Flex.Item>
           </Flex>
-          <View as="p" margin="medium none small">
-            <Text weight="bold">
-              See what&apos;s in the latest release, or read our latest
-              newsletter.
-            </Text>
-          </View>
           <List isUnstyled margin="small none none">
             <List.Item>
               <Link href="#v8-upgrade-guide">Version 8.0 Upgrade Guide</Link>
             </List.Item>
             <List.Item>
               <Link href="#CHANGELOG">Change Log ({version})</Link>
-            </List.Item>
-            <List.Item>
-              <Link href="#Newsletter">Instructure UI Newsletter</Link>
             </List.Item>
           </List>
         </View>
