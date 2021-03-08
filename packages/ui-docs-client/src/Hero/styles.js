@@ -52,6 +52,7 @@ const generateStyle = (componentTheme, props, state) => {
     contentLayout: {
       label: 'hero__contentLayout',
       ...commonStyles,
+      position: 'relative',
       display: 'grid',
       gridTemplateRows: 'auto 1fr auto'
     },
