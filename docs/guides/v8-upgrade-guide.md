@@ -30,7 +30,7 @@ We have moved the development of the library fully to Github. Please file your b
 
 ### Migrating theming from Themeable to Emotion
 
-We prepared a detailed guide on how to migrate the theming of your app to emotion [TODO add link here.](TODO add link)
+We prepared a detailed guide on how to migrate the theming of your app to emotion: [Themeable to Emotion Migration Guide for Version 8.0](#themeable-to-emotion-migration-guide)
 
 ### Removal of deprecated properties
 
