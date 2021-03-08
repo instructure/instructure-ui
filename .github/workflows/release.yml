@@ -28,6 +28,7 @@ jobs:
       - name: Set up git identity
         run: git config --global user.name "instructure-ui-ci" && git config --global user.email "instructure-ui-ci@instructure.com"
       - name: Add tag
+        # -a -m is needed to make the tag "annotated". Lerna needs annotated tags to work correctly with verisons
         run: git tag -a v$(./.github/scripts/calculateVersion.sh) -m v$(./.github/scripts/calculateVersion.sh)
       - name: Push tags
         run: git push origin v$(./.github/scripts/calculateVersion.sh)
