@@ -20,7 +20,12 @@ In the v8.0. release we removed `ui-themeable` and its supporting packages from 
 ##### Table of Contents
 
 - [The emotion package](#themeable-to-emotion-migration-guide/#the-emotion-package)
-- [ApplyTheme to EmotionThemeProvider](#themeable-to-emotion-migration-guide/#applytheme-to-emotionthemeprovider)
+- [Theme handling](#themeable-to-emotion-migration-guide/#theme-handling)
+  - [ApplyTheme to EmotionThemeProvider](#themeable-to-emotion-migration-guide/#theme-handling-applytheme-to-emotionthemeprovider)
+  - [Using the built-in themes](#themeable-to-emotion-migration-guide/#theme-handling-using-the-built-in-themes)
+  - [Using component overrides](#themeable-to-emotion-migration-guide/#theme-handling-using-component-overrides)
+  - [Theme-based overrides](#themeable-to-emotion-migration-guide/#theme-handling-theme-based-overrides)
+  - [Local theme variable overrides of components](#themeable-to-emotion-migration-guide/#theme-handling-local-theme-variable-overrides-of-components)
 - [Migrating your @themeable components](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components)
   - [Refactor theme.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-refactor-theme.js)
   - [Create the styles.js file](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-create-the-styles.js-file)
@@ -55,13 +60,17 @@ embed: true
 </ToggleBlockquote>
 ```
 
-## ApplyTheme to EmotionThemeProvider
+## Theme handling
 
 We made changes in how we apply themes too. You no longer need to register themes and use `ApplyTheme.generateTheme`. Instead, you can directly import them from `@instructure/ui-themes` (or your own themes) and pass them to the theme provider.
 
+#### ApplyTheme to EmotionThemeProvider
+
 The new theme provider is called `EmotionThemeProvider`, which is our own wrapper component for Emotion's [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype).
 
-You can find detailed information about how it works and how to add theme overrides on the [EmotionThemeProvider](#EmotionThemeProvider) page.
+**You can find detailed information about how it works and how to add theme overrides on the [EmotionThemeProvider](#EmotionThemeProvider) page.**
+
+#### Using the built-in themes
 
 ```js
 // before
@@ -81,6 +90,76 @@ ReactDOM.render(
   </EmotionThemeProvider>,
   element
 )
+```
+
+#### Using component overrides
+
+If you are using global theme overrides for some components, change the structure of the overrides object: wrap them in a "componentOverrides" object, and the keys are simply the names of the components:
+
+```jsx
+// before
+<ApplyTheme theme={{
+   [Button.theme]: {
+     smallHeight: '23px'
+   },
+   [TextInput.theme]: {
+     smallHeight: '27px'
+   }
+ }
+}>
+  ...
+</ApplyTheme>
+
+
+// after
+<EmotionThemeProvider theme={{
+  componentOverrides: {
+    Button: {
+      smallHeight: '23px'
+    },
+    TextInput: {
+      smallHeight: '27px'
+    }
+  }
+}}>
+  ...
+</EmotionThemeProvider>
+
+```
+
+#### Theme-based overrides
+
+If you need to, and your app is using multiply themes, you can specify overrides for just one specific theme.
+
+```jsx
+<EmotionThemeProvider
+  theme={{
+    themeOverrides: {
+      canvas: {
+        colors: { backgroundLightest: '#f5f5f5' }
+      },
+      'canvas-high-contrast': {
+        colors: { backgroundLightest: '#ffffff' }
+      }
+    }
+  }}
+>
+  ...
+</EmotionThemeProvider>
+```
+
+#### Local theme variable overrides of components
+
+If you need to tweak just one component locally, you can do so with a component [property](#withStyle/#applying-themes).
+
+**The `theme` prop was renamed to `themeOverride`.**
+
+```jsx
+// before
+<ExampleComponent theme={{ hoverColor: '#eee' }} />
+
+// after
+<ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
 ```
 
 ## Migrating your @themeable components
