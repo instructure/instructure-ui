@@ -22,17 +22,10 @@
  * SOFTWARE.
  */
 
-export { ApplyLocale } from './ApplyLocale'
-export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
+import { createContext } from 'react'
 
-export { bidirectional } from './bidirectional'
-export { DateTime } from './DateTime'
-export { Decimal } from './Decimal'
-export { getTextDirection } from './getTextDirection'
-export { I18nPropTypes } from './I18nPropTypes'
-export { Locale } from './Locale'
-export { DIRECTION, TextDirectionContext } from './TextDirectionContext'
-export {
-  useTextDirectionContext,
-  ApplyTextDirection
-} from './ApplyTextDirection'
+export const ApplyLocaleContext = createContext({
+  locale: undefined,
+  timezone: undefined
+})
+export default ApplyLocaleContext

@@ -27,9 +27,9 @@ import PropTypes from 'prop-types'
 
 import {
   I18nPropTypes,
+  ApplyLocaleContext,
   DateTime,
-  Locale,
-  ApplyLocaleContext
+  Locale
 } from '@instructure/ui-i18n'
 import { controllable } from '@instructure/ui-prop-types'
 import {

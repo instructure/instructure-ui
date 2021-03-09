@@ -22,22 +22,18 @@
  * SOFTWARE.
  */
 
-import React, { createContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { ensureSingleChild } from '@instructure/ui-react-utils'
-
-const ApplyLocaleContext = createContext({
-  locale: undefined,
-  timezone: undefined
-})
+import { ApplyLocaleContext } from './ApplyLocaleContext'
 
 /**
 ---
 category: components/utilities
 ---
 **/
-const ApplyLocale = ({ children, locale, timezone }) => {
+export const ApplyLocale = ({ children, locale, timezone }) => {
   return (
     <ApplyLocaleContext.Provider value={{ locale, timezone }}>
       {ensureSingleChild(children)}
@@ -66,4 +62,3 @@ ApplyLocale.defaultProps = {
 }
 
 export default ApplyLocale
-export { ApplyLocale, ApplyLocaleContext }
