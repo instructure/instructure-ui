@@ -443,14 +443,39 @@ class App extends Component {
   }
 
   renderChangeLog() {
-    const { docs } = this.props
-    return docs.CHANGELOG ? (
+    const { docs, library } = this.props
+    const { CHANGELOG } = docs
+    let content
+
+    if (!CHANGELOG) {
+      return null
+    }
+
+    const { description } = CHANGELOG
+    const currentMajorVersion = library.version.slice(0, 1)
+
+    // we want to cut the docs below the last 2 major versions,
+    // so find the next title after it
+    const versionCutoffPoint = parseInt(currentMajorVersion, 10) - 2
+    let breakpointIndex = description.indexOf(`# [${versionCutoffPoint}`) - 1
+
+    if (breakpointIndex < 0) {
+      content = description
+    } else {
+      content =
+        description.slice(0, breakpointIndex) +
+        '\n...\n' +
+        `# Version ${versionCutoffPoint} and below\n` +
+        `For older releases (v${versionCutoffPoint} and below), check the [GitHub CHANGELOG](https://github.com/instructure/instructure-ui/blob/master/CHANGELOG.md).`
+    }
+
+    return (
       <Section id="CHANGELOG">
         {this.renderWrappedContent(
-          compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' })
+          compileMarkdown(content, { title: 'CHANGELOG' })
         )}
       </Section>
-    ) : null
+    )
   }
 
   renderError() {
