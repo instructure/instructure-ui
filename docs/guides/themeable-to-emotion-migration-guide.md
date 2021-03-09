@@ -26,6 +26,7 @@ In the v8.0. release we removed `ui-themeable` and its supporting packages from 
   - [Using component overrides](#themeable-to-emotion-migration-guide/#theme-handling-using-component-overrides)
   - [Theme-based overrides](#themeable-to-emotion-migration-guide/#theme-handling-theme-based-overrides)
   - [Local theme variable overrides of components](#themeable-to-emotion-migration-guide/#theme-handling-local-theme-variable-overrides-of-components)
+  - [theme.use() is deprecated](<#themeable-to-emotion-migration-guide/#theme-handling-theme.use()-is-deprecated>)
 - [Migrating your @themeable components](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components)
   - [Refactor theme.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-refactor-theme.js)
   - [Create the styles.js file](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-create-the-styles.js-file)
@@ -160,6 +161,51 @@ If you need to tweak just one component locally, you can do so with a component 
 
 // after
 <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
+```
+
+#### theme.use() is deprecated
+
+Applying themes with the former `.use()` method of themes (added by ui-themeable) is now deprecated. Wrap your app in `EmotionThemeProvider` instead.
+
+```js
+// before
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+if (localStorage.getItem('mode') === 'highContrast') {
+  canvasHighContrast.use()
+} else {
+  canvas.use()
+}
+
+// after
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+
+ReactDOM.render(
+  <EmotionThemeProvider
+    theme={localStorage.getItem('mode') ? canvasHighContrast : canvas}
+  >
+    <App />
+  </EmotionThemeProvider>,
+  element
+)
+```
+
+Instead of passing the theme overrides to the `.use()` method, just merge the theme with the global overrides when passing it to the theme provider.
+
+```js
+// before
+import { theme } from '@instructure/canvas-theme'
+theme.use({ overrides: { transitions: { duration: '0ms' } } })
+
+// after
+import { theme } from '@instructure/canvas-theme'
+const themeOverrides = { transitions: { duration: '0ms' } }
+
+ReactDOM.render(
+  <EmotionThemeProvider theme={{ ...theme, ...themeOverrides }}>
+    <App />
+  </EmotionThemeProvider>,
+  element
+)
 ```
 
 ## Migrating your @themeable components
