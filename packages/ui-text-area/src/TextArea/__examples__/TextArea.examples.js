@@ -32,6 +32,7 @@ export default {
     width: [undefined, '3rem'],
     height: [undefined, '5rem']
   },
+  excludeProps: ['required', 'inline'],
   getComponentProps: (props) => {
     return {
       label: 'A text area',

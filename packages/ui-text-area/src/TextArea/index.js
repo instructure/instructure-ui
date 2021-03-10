@@ -102,6 +102,9 @@ class TextArea extends Component {
      * Works just like disabled but keeps the same styles as if it were active
      */
     readOnly: PropTypes.bool,
+    /**
+     * Sets the required property on the underlying native textArea
+     */
     required: PropTypes.bool,
     /**
      * a function that provides a reference to the actual textarea element

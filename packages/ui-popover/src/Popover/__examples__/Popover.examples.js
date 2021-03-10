@@ -21,16 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 
 export default {
-  maxExamplesPerPage: 10,
+  sectionProp: 'color',
+  maxExamplesPerPage: 15,
   maxExamples: 400,
   propValues: {
     withArrow: [true, false],
     placement: ['bottom center'],
     dir: ['rtl', 'ltr']
   },
+  excludeProps: [
+    'shouldCloseOnDocumentClick',
+    'shouldCloseOnEscape',
+    'shouldReturnFocus',
+    'shouldFocusContentOnTriggerBlur',
+    'defaultIsShowingContent',
+    'shouldContainFocus'
+  ],
   getComponentProps: (props) => {
     return {
       defaultIsShowingContent: true,
@@ -44,10 +54,24 @@ export default {
       dir: props.dir,
       as: 'div',
       width: '100%',
-      height: '10rem',
+      height: '11rem',
       margin: 'small',
       padding: 'small',
       textAlign: 'center'
     }
+  },
+  filter: (props) => {
+    // only generate 1 example if its not showing content
+    return (
+      !props.isShowingContent &&
+      (props.color !== 'primary' ||
+        props.dir !== 'ltr' ||
+        props.insertAt !== 'bottom' ||
+        props.placement !== 'bottom center' ||
+        props.shouldAlignArrow !== false ||
+        props.shouldRenderOffscreen !== false ||
+        props.shouldTrackPosition !== false ||
+        props.withArrow !== false)
+    )
   }
 }

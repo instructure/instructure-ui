@@ -6,7 +6,7 @@ category: packages
 
 [![npm][npm]][npm-url]&nbsp;
 [![build-status][build-status]][build-status-url]&nbsp;
-[![MIT License][license-badge]][LICENSE]&nbsp;
+[![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A utility for automatically generating component examples.
@@ -34,10 +34,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: [/\.examples\.js/],
-        use: [
-          'component-examples-loader',
-          'babel-loader'
-        ]
+        use: ['component-examples-loader', 'babel-loader']
       }
     ]
   }
@@ -59,102 +56,100 @@ const result = generateComponentExamples(config)
 Given a configuration object, `generateComponentExamples` returns an array of generated examples:
 
 ##### Parameters
-| Param     | Type     | Default    | Description    |
-|----------|-------------|----------|----------|
+
+| Param  | Type     | Default     | Description                                                              |
+| ------ | -------- | ----------- | ------------------------------------------------------------------------ |
 | config | `Object` | `undefined` | the generator config object. See `config` section below for more details |
 
 ##### Returns
-| Type     | Description |
-|----------|-------------|
+
+| Type    | Description                                                                                                      |
+| ------- | ---------------------------------------------------------------------------------------------------------------- |
 | `Array` | array of examples broken into sections and pages if configured to do so. See `examples` section for more details |
 
 ##### Example config
+
 ```js
 export default {
- sectionProp: 'variant',
- maxExamplesPerPage: 50,
- maxExamples: 200,
- propValues: {
-   variant: ['circular', 'rectangular'],
-   placement: ['top', 'bottom', 'start', 'end'],
-   children: [null, <button>hello</button>, <a href="#">world</a>]
- },
- getComponentProps: (props) => ({
-   size: props.variant === 'circular' ? 'large' : 'small'
- }),
- getExampleProps: (props) => ({
-   height: props.placement === 'top' ? '50rem' : '10rem'
- }),
- renderExample: ({ Component, componentProps, exampleProps, key }) => {
-   return <View key={key} {...exampleProps}><Component {...componentProps} /></View>
- },
- renderPage: ({ examples, key, renderExample }) => {
-   return <View key={key}>{examples.map(renderExample)}</View>
- },
- getParameters: ({ examples, index}) {
-   return { delay: 200, viewports: [320, 1200] }
- }
+  sectionProp: 'variant',
+  maxExamplesPerPage: 50,
+  maxExamples: 200,
+  excludeProps: [],
+  propValues: {
+    variant: ['circular', 'rectangular'],
+    placement: ['top', 'bottom', 'start', 'end'],
+    children: [null, <button>hello</button>, <a href="#">world</a>]
+  },
+  getComponentProps: (props) => ({
+    size: props.variant === 'circular' ? 'large' : 'small'
+  }),
+  getExampleProps: (props) => ({
+    height: props.placement === 'top' ? '50rem' : '10rem'
+  }),
+  getParameters: ({ examples, index }) => {
+    return { delay: 200, viewports: [320, 1200] }
+  }
 }
 ```
 
-The `config` is an object that sets the configuration for the example generation. It has the
-following properties:
+**The `config` is an object that sets the configuration for the example generation. It has the following properties:**
 
-#### sectionProp
+### sectionProp
+
 A string value used to divide the resulting examples into sections. It should correspond to an enumerated prop in the `Component`
 
 | Type     | Default     |
-|----------|-------------|
+| -------- | ----------- |
 | `string` | `undefined` |
 
+### maxExamplesPerPage
 
-#### maxExamplesPerPage
 Specifies the max number of examples that can exist in a single page within a section
 
-| Type     | Default     |
-|----------|-------------|
-| `number` or `function` | `null` |
+| Type                   | Default |
+| ---------------------- | ------- |
+| `number` or `function` | `null`  |
 
+example:
 
 ```js
 // providing a number
 maxExamplesPerPage: 50
 
 // providing a function
-maxExamplesPerPage: (sectionName) => sectionName === 'inverse' ? 20 : 50
+maxExamplesPerPage: (sectionName) => (sectionName === 'inverse' ? 20 : 50)
 ```
 
 ##### Parameters
-| Param     | Type     | Default    | Description    |
-|----------|-------------|----------|----------|
+
+| Param       | Type     | Default     | Description                             |
+| ----------- | -------- | ----------- | --------------------------------------- |
 | sectionName | `string` | `undefined` | the name of the current example section |
 
 ##### Returns
-| Type     | Description |
-|----------|-------------|
+
+| Type     | Description                                       |
+| -------- | ------------------------------------------------- |
 | `number` | a number specifying the maximum examples per page |
 
+### maxExamples
 
-#### maxExamples
 Specifies the total max number of examples
 
-| Type     | Default     |
-|----------|-------------|
-| `number` | `500` |
+| Type     | Default |
+| -------- | ------- |
+| `number` | `500`   |
 
-#### propValues
+### propValues
 
 An object with keys that correspond to the component props. Each key has a corresponding
 value array. This array contains possible values for that prop.
 
-To avoid having to manually write out every possible value for all props in each example
-config, we have tools available to facilitate parsing boolean and enumerated prop values.
-See the README for [@instructure/ui-component-examples](#ui-component-examples) for documentation and example usage.
+| Type                                                        | Default     |
+| ----------------------------------------------------------- | ----------- |
+| `object` of keys corresponding to arrays of possible values | `undefined` |
 
-| Type     | Default     |
-|----------|-------------|
-| `object` of keys corresponding to arrays of possible values  | `undefined` |
-
+example:
 
 ```js
 propValues: {
@@ -164,148 +159,137 @@ propValues: {
 }
 ```
 
-#### getComponentProps
+### excludeProps
+
+Prop keys to exclude from `propValues`. Useful when generating `propValues` with code.
+
+| Type               | Default |
+| ------------------ | ------- |
+| `array of Strings` | `[]`    |
+
+example:
+
+```js
+excludeProps: ['readOnly', 'disabled']
+```
+
+### getComponentProps
 
 A function called with the prop combination for the current example. It returns an object
 of props that will be passed into the `renderExample` function as `componentProps`.
 
-| Type     | Default     |
-|----------|-------------|
+| Type       | Default     |
+| ---------- | ----------- |
 | `function` | `undefined` |
 
+example:
 
 ```js
 getComponentProps: (props) => ({
- // Change the size prop passed to the component based on the value of
- // `variant` in the current prop combination
- size: props.variant === 'circular' ? 'large' : 'small'
+  // Change the size prop passed to the component based on the value of
+  // `variant` in the current prop combination
+  size: props.variant === 'circular' ? 'large' : 'small'
 })
 ```
 
 ##### Parameters
-| Param     | Type     | Default    | Description    |
-|----------|-------------|----------|----------|
+
+| Param | Type     | Default     | Description                                  |
+| ----- | -------- | ----------- | -------------------------------------------- |
 | props | `Object` | `undefined` | the prop combination for the current example |
 
 ##### Returns
-| Type     | Description |
-|----------|-------------|
+
+| Type     | Description                                                                            |
+| -------- | -------------------------------------------------------------------------------------- |
 | `Object` | a props object that will be passed to the `renderExample` function as `componentProps` |
 
-
-#### getExampleProps
+### getExampleProps
 
 A function called with the prop combination for the current example. It returns an object
 of props that will be passed into the `renderExample` function as `exampleProps`.
 
-| Type     | Default     |
-|----------|-------------|
+| Type       | Default     |
+| ---------- | ----------- |
 | `function` | `undefined` |
 
+example:
 
 ```js
 getExampleProps: (props) => ({
- // Change the height prop passed to the example based on the value of
- // `placement` in the current prop combination
- height: props.placement === 'top' ? '50rem' : '10rem'
+  // Change the height prop passed to the example based on the value of
+  // `placement` in the current prop combination
+  height: props.placement === 'top' ? '50rem' : '10rem'
 })
 ```
 
 ##### Parameters
-| Param     | Type     | Default    | Description    |
-|----------|-------------|----------|----------|
+
+| Param | Type     | Default     | Description                                  |
+| ----- | -------- | ----------- | -------------------------------------------- |
 | props | `Object` | `undefined` | the prop combination for the current example |
 
 ##### Returns
-| Type     | Description |
-|----------|-------------|
+
+| Type     | Description                                                                          |
+| -------- | ------------------------------------------------------------------------------------ |
 | `Object` | a props object that will be passed to the `renderExample` function as `exampleProps` |
 
-
-#### renderExample
-A optional function which receives the component and example props and returns an example.
-
-```js
-renderExample: ({ Component, componentProps, exampleProps, key }) => {
- return <View key={key} {...exampleProps}><Component {...componentProps} /></View>
-}
-```
-
-##### Parameters
-The parameters consist of an object with the following properties
-
-| Param     | Type     | Default    | Description    |
-|----------|-------------|----------|----------|
-| Component | `ReactComponent` | `undefined` | the component to render |
-| componentProps | `Object` | `undefined` | props corresponding to the component. The result of the `getComponentProps` method |
-| exampleProps | `Object` | `undefined` | props corresponding to the example. The result of the `getExampleProps` method |
-| key | `string` | `undefined` | a unique key generated for each example |
-
-##### Returns
-| Type     | Description |
-|----------|-------------|
-| `ReactComponent` | the rendered example |
-
-#### renderPage
-An optional function which receives an array of examples and a function to render them.
-
-```js
-renderPage: ({ examples, renderExample }) => {
- return <View margin="small">{ examples.map(renderExample) }</View>
-}
-```
-
-##### Parameters
-The parameters consist of an object with the following properties
-
-| Param     | Type     | Default    | Description    |
-|----------|-------------|----------|----------|
-| examples | `Array` | `undefined` | array of example objects with properties identical to those outlined in the `renderExample` params |
-| renderExample | `function` | Identical to the default in the `renderExample` section | The render method for each component example |
-
-##### Returns
-| Type     | Description |
-|----------|-------------|
-| `ReactComponent` | the rendered page of examples |
-
-
-#### getParameters
+### getParameters
 
 A function called with the examples and index for the current page of examples. It returns an object
 of parameters/meta data for that page of examples (e.g. to be passed in to a visual regression tool like chromatic).
 
-| Type     | Default     |
-|----------|-------------|
+| Type       | Default     |
+| ---------- | ----------- |
 | `function` | `undefined` |
 
+example:
 
 ```js
 getParameters: ({ examples, index }) => ({
   // add a delay for the first page of examples only:
-  index === 1 ? { delay: 200 } : {}
+  return index === 1 ? { delay: 200 } : {}
 })
 ```
 
 ##### Parameters
-| Param     | Type     | Default    | Description    |
-|----------|-------------|----------|----------|
+
+| Param | Type     | Default     | Description                                |
+| ----- | -------- | ----------- | ------------------------------------------ |
 | props | `Object` | `undefined` | the examples and index of the current page |
 
 ##### Returns
-| Type     | Description |
-|----------|-------------|
+
+| Type     | Description                                                                  |
+| -------- | ---------------------------------------------------------------------------- |
 | `Object` | a parameters object with delay and viewport sizes configuration for the page |
 
+### filter
 
+A function to filter `propValues`, returns `boolean`. If it returns `true` the combination
+is not generated.
+
+| Type       | Default     |
+| ---------- | ----------- |
+| `function` | `undefined` |
+
+example:
+
+```js
+filter: (props) => {
+  return (
+    props.type !== 'button' ||
+    (props.textAlign === 'center' && props.display !== 'block')
+  )
+}
+```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-component-examples.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-component-examples
-
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
-[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
-
+[build-status-url]: https://travis-ci.org/instructure/instructure-ui 'Travis CI'
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
 [license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
-
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md

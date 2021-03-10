@@ -29,7 +29,11 @@ import { Menu, MenuItem, MenuItemSeparator, MenuItemGroup } from '../index'
 export default {
   maxExamplesPerPage: 20,
   maxExamples: 200,
-  excludeProps: ['defaultShow'],
+  excludeProps: [
+    'defaultShow',
+    'shouldFocusTriggerOnClose',
+    'shouldHideOnSelect'
+  ],
   propValues: {
     trigger: [<button key="open">Open Menu</button>, null],
     placement: [
