@@ -37,7 +37,7 @@ Every commit that has functional changes to the `master` branch constitutes as a
 
 ### Patching Older Releases
 
-0. You need to branch off from the **last release commit** of the old version and name it v< major-version> -maintenance, if it is non existent. E.g. if you'd like to start v6 maintenance branch:
+0. You need to branch off from the **last release commit** of the old version and name it `v<major-version> -maintenance`, if it is non existent. E.g. if you'd like to start v6 maintenance branch:
 
 ```
 //checkout the v6.26.0 commit
@@ -47,10 +47,10 @@ git checkout 35258f25cad1e17e5dbe5dcb4389b5185d709f72
 git checkout -b v6-maintenance
 ```
 
-1.  Check out the v< major-version >-maintenance branch. E.g. for v7:
+1.  Check out the `v<major-version>-maintenance` branch. E.g. for v6:
 
 ```
-git checkout v7-maintenance
+git checkout v6-maintenance
 ```
 
 2. Open a branch from the maintenance branch
@@ -58,7 +58,7 @@ git checkout v7-maintenance
 4. Open a pull request to the maintenance branch
 5. If the reviews and checks succeed, update the version: `yarn bump` and push it to the remote
 6. Wait for the version bump's review
-7. Rebase and Merge the code into the `v< major-version >-maintenance` branch.
+7. Rebase and Merge the code into the `v<major-version>-maintenance` branch.
 8. If you are working on the one before the latest version (E.g. if the latest version is v8, the following applies to v7 only), you have to release your work to `npm` and deploy the docs to `gh-pages` as well. You have to trigger a github action manually on your branch.
    - Go to the [project repo](https://github.com/instructure/instructure-ui)
    - Navigate to actions
