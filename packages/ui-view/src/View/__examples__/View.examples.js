@@ -27,7 +27,8 @@ const { SHADOW_TYPES, BORDER_WIDTHS, BORDER_RADII } = ThemeablePropValues
 
 export default {
   maxExamplesPerPage: 50,
-  sectionProp: 'background',
+  maxExamples: 500,
+  sectionProp: 'textAlign',
   propValues: {
     shadow: [undefined, ...Object.values(SHADOW_TYPES)],
     borderWidth: [...Object.values(BORDER_WIDTHS)],
@@ -62,11 +63,27 @@ export default {
     return (
       // Border radius and border width list 0 in addition to none in their object values
       // so we filter those here as they are redundant
-      props.borderRadius === 'none' ||
-      props.borderWidth === 'none' ||
-      props.background === 'transparent' ||
-      (props.focusPosition === 'inset' && !props.withFocusOutline) ||
-      (props.withFocusOutline && props.position !== 'relative')
+      (props.withFocusOutline && props.position !== 'relative') ||
+      // Only generate a 1 variation for withVisualDebug
+      (props.withVisualDebug &&
+        (props.background !== 'transparent' ||
+          props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
+          props.textAlign !== 'center')) ||
+      // Only generate a 1 variation for non-'transparent' background
+      (props.background !== 'transparent' &&
+        (props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
+          props.textAlign !== 'center')) ||
+      // Only generate a 1 variation for non-'0' borderWidth
+      (props.borderWidth !== '0' &&
+        (props.background !== 'transparent' ||
+          props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
+          props.textAlign !== 'center'))
     )
   }
 }
