@@ -296,9 +296,14 @@ class PositionData {
   }
 
   get style() {
+    // when rendered offscreen first, element has no dimension on first calculation,
+    // so we hide it offscreen until measurements are completed
+    const { width, height } = this.element.size
+    const elementNotFullyRendered = width === 0 && height === 0
+
     return {
       top: 0,
-      left: 0,
+      left: elementNotFullyRendered ? '-9999em' : 0,
       minWidth: this.minWidth,
       minHeight: this.minHeight,
       position: 'absolute',
