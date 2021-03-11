@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-heading",
-  "version": "7.4.2",
+  "version": "7.4.3",
   "description": "A component for creating typographic headings",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -24,19 +24,19 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.4.2",
-    "@instructure/ui-prop-types": "^7.4.2",
-    "@instructure/ui-react-utils": "^7.4.2",
-    "@instructure/ui-testable": "^7.4.2",
-    "@instructure/ui-themeable": "^7.4.2",
-    "@instructure/ui-view": "^7.4.2",
+    "@instructure/console": "^7.4.3",
+    "@instructure/ui-prop-types": "^7.4.3",
+    "@instructure/ui-react-utils": "^7.4.3",
+    "@instructure/ui-testable": "^7.4.3",
+    "@instructure/ui-themeable": "^7.4.3",
+    "@instructure/ui-view": "^7.4.3",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.2",
-    "@instructure/ui-test-locator": "^7.4.2",
-    "@instructure/ui-test-utils": "^7.4.2"
+    "@instructure/ui-babel-preset": "^7.4.3",
+    "@instructure/ui-test-locator": "^7.4.3",
+    "@instructure/ui-test-utils": "^7.4.3"
   },
   "peerDependencies": {
     "react": "^16.8"
