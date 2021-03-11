@@ -25,13 +25,6 @@ jobs:
           NPM_EMAIL: ${{secrets.NPM_EMAIL}}
           NPM_USERNAME: ${{secrets.NPM_USERNAME}}
         run: yarn release
-      - name: Set up git identity
-        run: git config --global user.name "instructure-ui-ci" && git config --global user.email "instructure-ui-ci@instructure.com"
-      - name: Add tag
-        # -a -m is needed to make the tag "annotated". Lerna needs annotated tags to work correctly with verisons
-        run: git tag -a v$(./.github/workflows/calculateVersion) -m v$(./.github/workflows/calculateVersion)
-      - name: Push tags
-        run: git push origin v$(./.github/workflows/calculateVersion)
   tag:
     needs: release
     if: "startsWith(github.event.head_commit.message, 'chore(release)')"
