@@ -5,7 +5,7 @@
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
   "module": "./es/index.js",
-  "main": "./es/index.js",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -16,7 +16,7 @@
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
-    "build": "ui-build",
+    "build": "ui-build --modules es,cjs",
     "build:watch": "ui-build --watch"
   },
   "license": "MIT",
