@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-responsive",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "description": "A component that allows for rendering a component differently based on either the element or the viewport size",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,19 +23,19 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.4.1",
-    "@instructure/debounce": "^7.4.1",
-    "@instructure/ui-dom-utils": "^7.4.1",
-    "@instructure/ui-react-utils": "^7.4.1",
-    "@instructure/ui-testable": "^7.4.1",
-    "@instructure/ui-themeable": "^7.4.1",
-    "@instructure/ui-utils": "^7.4.1",
+    "@instructure/console": "^7.4.2",
+    "@instructure/debounce": "^7.4.2",
+    "@instructure/ui-dom-utils": "^7.4.2",
+    "@instructure/ui-react-utils": "^7.4.2",
+    "@instructure/ui-testable": "^7.4.2",
+    "@instructure/ui-themeable": "^7.4.2",
+    "@instructure/ui-utils": "^7.4.2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.1",
-    "@instructure/ui-color-utils": "^7.4.1",
-    "@instructure/ui-test-utils": "^7.4.1"
+    "@instructure/ui-babel-preset": "^7.4.2",
+    "@instructure/ui-color-utils": "^7.4.2",
+    "@instructure/ui-test-utils": "^7.4.2"
   },
   "peerDependencies": {
     "react": "^16.8"

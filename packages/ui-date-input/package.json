@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-date-input",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -22,24 +22,24 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.1",
-    "@instructure/ui-test-locator": "^7.4.1",
-    "@instructure/ui-test-utils": "^7.4.1"
+    "@instructure/ui-babel-preset": "^7.4.2",
+    "@instructure/ui-test-locator": "^7.4.2",
+    "@instructure/ui-test-utils": "^7.4.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-calendar": "^7.4.1",
-    "@instructure/ui-form-field": "^7.4.1",
-    "@instructure/ui-icons": "^7.4.1",
-    "@instructure/ui-popover": "^7.4.1",
-    "@instructure/ui-position": "^7.4.1",
-    "@instructure/ui-prop-types": "^7.4.1",
-    "@instructure/ui-react-utils": "^7.4.1",
-    "@instructure/ui-selectable": "^7.4.1",
-    "@instructure/ui-testable": "^7.4.1",
-    "@instructure/ui-text-input": "^7.4.1",
-    "@instructure/ui-themeable": "^7.4.1",
-    "@instructure/ui-utils": "^7.4.1",
+    "@instructure/ui-calendar": "^7.4.2",
+    "@instructure/ui-form-field": "^7.4.2",
+    "@instructure/ui-icons": "^7.4.2",
+    "@instructure/ui-popover": "^7.4.2",
+    "@instructure/ui-position": "^7.4.2",
+    "@instructure/ui-prop-types": "^7.4.2",
+    "@instructure/ui-react-utils": "^7.4.2",
+    "@instructure/ui-selectable": "^7.4.2",
+    "@instructure/ui-testable": "^7.4.2",
+    "@instructure/ui-text-input": "^7.4.2",
+    "@instructure/ui-themeable": "^7.4.2",
+    "@instructure/ui-utils": "^7.4.2",
     "prop-types": "^15"
   },
   "peerDependencies": {

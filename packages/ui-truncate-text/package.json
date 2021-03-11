@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-truncate-text",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "description": "A TruncateText component made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,21 +23,21 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.4.1",
-    "@instructure/debounce": "^7.4.1",
-    "@instructure/ui-dom-utils": "^7.4.1",
-    "@instructure/ui-react-utils": "^7.4.1",
-    "@instructure/ui-testable": "^7.4.1",
-    "@instructure/ui-themeable": "^7.4.1",
-    "@instructure/ui-utils": "^7.4.1",
+    "@instructure/console": "^7.4.2",
+    "@instructure/debounce": "^7.4.2",
+    "@instructure/ui-dom-utils": "^7.4.2",
+    "@instructure/ui-react-utils": "^7.4.2",
+    "@instructure/ui-testable": "^7.4.2",
+    "@instructure/ui-themeable": "^7.4.2",
+    "@instructure/ui-utils": "^7.4.2",
     "classnames": "^2",
     "escape-html": "^1",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.1",
-    "@instructure/ui-color-utils": "^7.4.1",
-    "@instructure/ui-test-utils": "^7.4.1"
+    "@instructure/ui-babel-preset": "^7.4.2",
+    "@instructure/ui-color-utils": "^7.4.2",
+    "@instructure/ui-test-utils": "^7.4.2"
   },
   "peerDependencies": {
     "react": "^16.8"

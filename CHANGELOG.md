@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.4.2](https://github.com/instructure/instructure-ui/compare/v7.4.1...v7.4.2) (2021-03-11)
+
+### Bug Fixes
+
+- fix release script path issue ([ea56688](https://github.com/instructure/instructure-ui/commit/ea56688))
+- fix tagging ([a3e4fbc](https://github.com/instructure/instructure-ui/commit/a3e4fbc))
+- **ui-scripts:** add comment on annotated tags ([ac8d075](https://github.com/instructure/instructure-ui/commit/ac8d075))
+- **ui-scripts:** fix bump tagging and rename prerelease builds from nightly to snapshot ([3473ed5](https://github.com/instructure/instructure-ui/commit/3473ed5))
+- **ui-scripts:** fix typo ([96d704a](https://github.com/instructure/instructure-ui/commit/96d704a))
+
 ## [7.4.1](https://github.com/instructure/instructure-ui/compare/v7.4.0...v7.4.1) (2021-03-04)
 
 ### Bug Fixes

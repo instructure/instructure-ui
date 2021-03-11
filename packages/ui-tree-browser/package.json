@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-tree-browser",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "description": "A component for displaying a hierarchical view of information",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,19 +23,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.1",
-    "@instructure/ui-test-locator": "^7.4.1",
-    "@instructure/ui-test-utils": "^7.4.1"
+    "@instructure/ui-babel-preset": "^7.4.2",
+    "@instructure/ui-test-locator": "^7.4.2",
+    "@instructure/ui-test-utils": "^7.4.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-icons": "^7.4.1",
-    "@instructure/ui-img": "^7.4.1",
-    "@instructure/ui-prop-types": "^7.4.1",
-    "@instructure/ui-react-utils": "^7.4.1",
-    "@instructure/ui-testable": "^7.4.1",
-    "@instructure/ui-themeable": "^7.4.1",
-    "@instructure/ui-utils": "^7.4.1",
+    "@instructure/ui-icons": "^7.4.2",
+    "@instructure/ui-img": "^7.4.2",
+    "@instructure/ui-prop-types": "^7.4.2",
+    "@instructure/ui-react-utils": "^7.4.2",
+    "@instructure/ui-testable": "^7.4.2",
+    "@instructure/ui-themeable": "^7.4.2",
+    "@instructure/ui-utils": "^7.4.2",
     "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"

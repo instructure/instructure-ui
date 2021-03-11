@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-icons-build",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "description": "Build scripts to export icons from Sketch files",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "^7.4.1",
+    "@instructure/config-loader": "^7.4.2",
     "clean-sketch": "^1.0.1",
     "del": "^5.1.0",
     "glob": "^7.1.4",
