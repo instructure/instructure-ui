@@ -35,6 +35,7 @@ import { uid } from '@instructure/uid'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -273,11 +274,20 @@ class Checkbox extends Component {
     }
   }
 
+  renderMessages() {
+    const { messages } = this.props
+
+    return messages && messages.length > 0 ? (
+      <View display="block" margin="small 0 0">
+        <FormFieldMessages messages={messages} />
+      </View>
+    ) : null
+  }
+
   render() {
     const {
       disabled,
       readOnly,
-      messages,
       value,
       onKeyDown,
       onFocus,
@@ -323,7 +333,7 @@ class Checkbox extends Component {
         />
         <label htmlFor={this.id} css={styles.control}>
           {this.renderFacade()}
-          <FormFieldMessages messages={messages} />
+          {this.renderMessages()}
         </label>
       </div>
     )
