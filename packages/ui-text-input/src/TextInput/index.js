@@ -56,7 +56,8 @@ class TextInput extends Component {
      */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-     * The type of input.
+     * Determines the underlying native HTML `<input>` element's `type`.
+     * For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url
      */
     type: PropTypes.oneOf([
       'text',
