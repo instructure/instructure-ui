@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-dialog",
-  "version": "7.4.3",
+  "version": "7.4.4",
   "description": "A utility component for managing keyboard accessibility and screen reader behavior",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,17 +23,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-a11y-utils": "^7.4.3",
-    "@instructure/ui-dom-utils": "^7.4.3",
-    "@instructure/ui-react-utils": "^7.4.3",
-    "@instructure/ui-testable": "^7.4.3",
-    "@instructure/ui-themeable": "^7.4.3",
+    "@instructure/ui-a11y-utils": "^7.4.4",
+    "@instructure/ui-dom-utils": "^7.4.4",
+    "@instructure/ui-react-utils": "^7.4.4",
+    "@instructure/ui-testable": "^7.4.4",
+    "@instructure/ui-themeable": "^7.4.4",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/console": "^7.4.3",
-    "@instructure/ui-babel-preset": "^7.4.3",
-    "@instructure/ui-test-utils": "^7.4.3"
+    "@instructure/console": "^7.4.4",
+    "@instructure/ui-babel-preset": "^7.4.4",
+    "@instructure/ui-test-utils": "^7.4.4"
   },
   "peerDependencies": {
     "react": "^16.8"

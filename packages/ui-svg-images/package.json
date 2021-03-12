@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-svg-images",
-  "version": "7.4.3",
+  "version": "7.4.4",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,17 +23,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.3",
-    "@instructure/ui-test-locator": "^7.4.3",
-    "@instructure/ui-test-utils": "^7.4.3"
+    "@instructure/ui-babel-preset": "^7.4.4",
+    "@instructure/ui-test-locator": "^7.4.4",
+    "@instructure/ui-test-utils": "^7.4.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/ui-react-utils": "^7.4.3",
-    "@instructure/ui-testable": "^7.4.3",
-    "@instructure/ui-themeable": "^7.4.3",
-    "@instructure/ui-utils": "^7.4.3",
-    "@instructure/uid": "^7.4.3",
+    "@instructure/ui-react-utils": "^7.4.4",
+    "@instructure/ui-testable": "^7.4.4",
+    "@instructure/ui-themeable": "^7.4.4",
+    "@instructure/ui-utils": "^7.4.4",
+    "@instructure/uid": "^7.4.4",
     "classnames": "^2",
     "prop-types": "^15"
   },

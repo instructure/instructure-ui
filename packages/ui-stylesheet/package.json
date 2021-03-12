@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-stylesheet",
-  "version": "7.4.3",
+  "version": "7.4.4",
   "description": "A wrapper around a Glamor StyleSheet.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.3"
+    "@instructure/ui-babel-preset": "^7.4.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",

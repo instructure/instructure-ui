@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-utils",
-  "version": "7.4.3",
+  "version": "7.4.4",
   "description": "A collection of utilities for UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -21,13 +21,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.3",
-    "@instructure/ui-test-utils": "^7.4.3"
+    "@instructure/ui-babel-preset": "^7.4.4",
+    "@instructure/ui-test-utils": "^7.4.4"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.4.3",
-    "@instructure/ui-dom-utils": "^7.4.3",
+    "@instructure/console": "^7.4.4",
+    "@instructure/ui-dom-utils": "^7.4.4",
     "bowser": "^1.9.4",
     "fast-deep-equal": "^2",
     "json-stable-stringify": "^1.0.1",

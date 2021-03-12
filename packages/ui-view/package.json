@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-view",
-  "version": "7.4.3",
+  "version": "7.4.4",
   "description": "A component for basic styles including spacing, sizing, borders, display, positioning, and focus states.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -24,20 +24,20 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.4.3",
-    "@instructure/ui-color-utils": "^7.4.3",
-    "@instructure/ui-dom-utils": "^7.4.3",
-    "@instructure/ui-i18n": "^7.4.3",
-    "@instructure/ui-position": "^7.4.3",
-    "@instructure/ui-prop-types": "^7.4.3",
-    "@instructure/ui-react-utils": "^7.4.3",
-    "@instructure/ui-themeable": "^7.4.3",
+    "@instructure/console": "^7.4.4",
+    "@instructure/ui-color-utils": "^7.4.4",
+    "@instructure/ui-dom-utils": "^7.4.4",
+    "@instructure/ui-i18n": "^7.4.4",
+    "@instructure/ui-position": "^7.4.4",
+    "@instructure/ui-prop-types": "^7.4.4",
+    "@instructure/ui-react-utils": "^7.4.4",
+    "@instructure/ui-themeable": "^7.4.4",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.4.3",
-    "@instructure/ui-test-utils": "^7.4.3"
+    "@instructure/ui-babel-preset": "^7.4.4",
+    "@instructure/ui-test-utils": "^7.4.4"
   },
   "peerDependencies": {
     "react": "^16.8"
