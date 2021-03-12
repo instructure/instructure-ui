@@ -26,7 +26,7 @@ We provide codemods to ease the upgrade process, you can read the details [TODO 
 
 ### Github as the main source code repository
 
-We have moved the development of the library fully to Github. Please file your bug reports or pull requests [here](#https://github.com/instructure/instructure-ui).
+We have moved the development of the library fully to Github. Please file your bug reports or pull requests [here](https://github.com/instructure/instructure-ui).
 
 ### Migrating theming from Themeable to Emotion
 
@@ -35,7 +35,7 @@ We prepared a detailed guide on how to migrate the theming of your app to emotio
 ### Removal of deprecated properties
 
 Properties that were marked as deprecated in 7.x got removed in 8.0.
-Please read the 7.x docs at [legacy.instructure.design](#https://legacy.instructure.design) and the [CHANGELOG](#CHANGELOG) on what props got removed, changed, and what new props you can substitute them with.
+Please read the 7.x docs at [legacy.instructure.design](https://legacy.instructure.design) and the [CHANGELOG](#CHANGELOG) on what props got removed, changed, and what new props you can substitute them with.
 
 ### Removal of deprecated packages
 
