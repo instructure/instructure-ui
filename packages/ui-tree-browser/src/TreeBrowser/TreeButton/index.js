@@ -41,6 +41,8 @@ parent: TreeBrowser
 ---
 **/
 
+// Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
+
 @testable()
 @themeable(theme, styles)
 class TreeButton extends Component {
