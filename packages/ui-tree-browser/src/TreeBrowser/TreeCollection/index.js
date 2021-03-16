@@ -76,7 +76,7 @@ class TreeCollection extends Component {
     /**
      * children of type TreeNode
      */
-    renderBeforeCollections: Children.oneOf([TreeNode]),
+    renderBeforeItems: Children.oneOf([TreeNode]),
     /**
      * children of type TreeNode
      */
@@ -104,7 +104,7 @@ class TreeCollection extends Component {
     numChildren: undefined,
     level: undefined,
     position: undefined,
-    renderBeforeCollections: null,
+    renderBeforeItems: null,
     renderAfterItems: null,
     containerRef: function () {}
   }
@@ -165,7 +165,7 @@ class TreeCollection extends Component {
     return (
       this.collectionsCount +
       this.itemsCount +
-      (this.props.renderBeforeCollections ? 1 : 0) +
+      (this.props.renderBeforeItems ? 1 : 0) +
       (this.props.renderAfterItems ? 1 : 0)
     )
   }
@@ -177,7 +177,7 @@ class TreeCollection extends Component {
       items,
       name,
       id,
-      renderBeforeCollections,
+      renderBeforeItems,
       renderAfterItems
     } = this.props
 
@@ -186,10 +186,10 @@ class TreeCollection extends Component {
       expanded &&
       this.childCount > 0 && (
         <ul aria-label={name} className={styles.list} role="group">
-          {renderBeforeCollections &&
+          {renderBeforeItems &&
             this.renderCollectionChildren(
               id,
-              renderBeforeCollections,
+              renderBeforeItems,
               position++,
               'before'
             )}
@@ -275,7 +275,7 @@ class TreeCollection extends Component {
         level={this.props.level + 1}
         containerRef={collection.containerRef}
         position={position}
-        renderBeforeCollections={collection.renderBeforeCollections}
+        renderBeforeItems={collection.renderBeforeItems}
         renderAfterItems={collection.renderAfterItems}
       />
     )

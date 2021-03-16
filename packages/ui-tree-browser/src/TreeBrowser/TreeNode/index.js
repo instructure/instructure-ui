@@ -40,6 +40,8 @@ import theme from '../TreeButton/theme'
 parent: TreeBrowser
 id: TreeNode
 ---
+A helper class used to render the :renderBeforeItems and :renderAfterItems
+in the TreeBrowser.
 **/
 
 @testable()

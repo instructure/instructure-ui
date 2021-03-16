@@ -208,7 +208,7 @@ example: true
 />
 ```
 
-### Collection Props
+### Collection Props, rendering items before and after nodes
 
 An example of a `<TreeBrowser />` with different collection props.
 
@@ -221,7 +221,7 @@ class Example extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      expanded: false
+      expanded: true
     }
   }
 
@@ -269,6 +269,7 @@ class Example extends React.Component {
       <TreeBrowser
         selectionType="single"
         size="large"
+        defaultExpanded={[1, 2]}
         collections={{
           1: {
             id: 1,
