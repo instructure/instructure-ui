@@ -44,6 +44,8 @@ A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.
 **/
 
+// Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
+
 @testable()
 @themeable(theme, styles)
 class TreeNode extends Component {
