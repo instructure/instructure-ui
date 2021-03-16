@@ -231,8 +231,8 @@ class Example extends React.Component {
       return (
         <View as="div" padding="xx-small" onFocus={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
           <TextInput placeholder="Enter new group name" display="inline-block" width="12rem"/>
-          <IconButton onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconXSolid/></IconButton>
-          <IconButton onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconCheckSolid/></IconButton>
+          <IconButton screenReaderLabel="Cancel" onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconXSolid/></IconButton>
+          <IconButton screenReaderLabel="Add new group" onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconCheckSolid/></IconButton>
         </View>
       )
     }
