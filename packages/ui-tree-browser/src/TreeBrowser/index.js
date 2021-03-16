@@ -52,7 +52,7 @@ class TreeBrowser extends Component {
      * a normalized hash of collections, keyed by id, that contain an
      * :id, :name, :items (an array of item ids), :collections (an array of
      * collection ids), optional :descriptor text, optional :containerRef function,
-     * an optional :renderBeforeCollections TreeNode, and an optional :renderAfterItems TreeNode.
+     * an optional :renderBeforeItems TreeNode, and an optional :renderAfterItems TreeNode.
      * Each collection must have a unique id.
      */
     collections: PropTypes.object.isRequired,
@@ -347,19 +347,17 @@ class TreeBrowser extends Component {
   }
 
   getCollectionProps(collection) {
-    const props = {
+    return {
       id: collection.id,
       name: collection.name,
       descriptor: collection.descriptor,
       expanded: this.getExpandedIndex(this.expanded, collection.id) >= 0,
       items: this.getItems(collection),
       collections: this.getSubCollections(collection),
-      renderBeforeCollections: collection.renderBeforeCollections,
+      renderBeforeItems: collection.renderBeforeItems,
       renderAfterItems: collection.renderAfterItems,
       containerRef: collection.containerRef
     }
-
-    return props
   }
 
   getExpandedIndex(expanded, id) {

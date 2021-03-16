@@ -405,7 +405,7 @@ describe('<TreeBrowser />', async () => {
               name: 'Root Directory',
               collections: [],
               items: [],
-              renderBeforeCollections: (
+              renderBeforeItems: (
                 <TreeNode>
                   <input id="input-before" />
                 </TreeNode>
