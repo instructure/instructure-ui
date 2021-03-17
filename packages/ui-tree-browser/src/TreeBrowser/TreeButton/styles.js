@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { keyframes } from '@instructure/emotion'
 
 const transform = keyframes`{
@@ -42,7 +43,6 @@ const transform = keyframes`{
  * Generates the style object from the theme and provided additional information
  * @param  {Object} componentTheme The theme variable object.
  * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyles = (componentTheme, props) => {
@@ -177,6 +177,21 @@ const generateStyles = (componentTheme, props) => {
       }
     }
   }
+
+  const textStyle = {
+    minWidth: '0.0625rem',
+    lineHeight: componentTheme.textLineHeight,
+    flex: 1
+  }
+
+  const textNameStyle = {
+    display: 'block',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    ...sizeMap[size].textName
+  }
+
   return {
     treeButton: {
       label: 'treeButton',
@@ -261,20 +276,14 @@ const generateStyles = (componentTheme, props) => {
     },
     text: {
       label: 'treeButton__text',
-      minWidth: '0.0625rem',
-      lineHeight: componentTheme.textLineHeight,
-      flex: 1
+      ...textStyle
     },
     textName: {
       label: 'treeButton__textName',
-      display: 'block',
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
+      ...textNameStyle,
       color: selected
         ? componentTheme.selectedTextColor
-        : componentTheme.nameTextColor,
-      ...sizeMap[size].textName
+        : componentTheme.nameTextColor
     },
     textDescriptor: {
       label: 'treeButton__textDescriptor',
@@ -304,6 +313,12 @@ const generateStyles = (componentTheme, props) => {
     thumbnail: {
       label: 'treeButton__thumbnail',
       ...sizeMap[size][variant].thumbnail
+    },
+    node: {
+      label: 'treeButton_node',
+      color: componentTheme.hoverTextColor,
+      ...textStyle,
+      ...textNameStyle
     }
   }
 }
