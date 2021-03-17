@@ -38,7 +38,11 @@ import theme from './theme'
 ---
 parent: Focusable
 ---
-**/
+
+__DEPRECATED:__ The `FocusableView` component will be removed in v8.0. Use `View` component from `@instructure/ui-view` instead.
+
+---
+ **/
 @deprecated('8.0.0', null, 'Use @instructure/ui-view/View instead')
 @themeable(theme, styles)
 class FocusableView extends Component {
