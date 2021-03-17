@@ -101,6 +101,24 @@ describe('<TreeCollection />', async () => {
       expect(documentIcons.length).to.equal(1)
     })
 
+    it('should support the containerRef prop', async () => {
+      const containerRef = stub()
+      await mount(
+        <TreeCollection
+          id={1}
+          containerRef={containerRef}
+          name="Coll 1"
+          collections={[
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
+          ]}
+          items={[{ id: 1, name: 'Item 1' }]}
+        />
+      )
+      const collection = await TreeCollectionLocator.find()
+      const item = await collection.findItem()
+      expect(containerRef).to.have.been.calledWith(item.getDOMNode())
+    })
+
     it('should pass an aria-expanded attribute to its list item', async () => {
       await mount(
         <TreeCollection

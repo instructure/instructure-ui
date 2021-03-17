@@ -36,6 +36,7 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
+import { TreeNode } from './TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -56,7 +57,8 @@ class TreeBrowser extends Component {
     /**
      * a normalized hash of collections, keyed by id, that contain an
      * :id, :name, :items (an array of item ids), :collections (an array of
-     * collection ids), and optional :descriptor text.
+     * collection ids), optional :descriptor text, optional :containerRef function,
+     * an optional :renderBeforeItems TreeNode, and an optional :renderAfterItems TreeNode.
      * Each collection must have a unique id.
      */
     collections: PropTypes.object.isRequired,
@@ -70,7 +72,7 @@ class TreeBrowser extends Component {
      * if no root is specified, all collections will be rendered
      * at the top level
      **/
-    rootId: PropTypes.number,
+    rootId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
      * an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop
      */
@@ -135,6 +137,8 @@ class TreeBrowser extends Component {
     expanded: undefined,
     treeLabel: undefined
   }
+
+  static Node = TreeNode
 
   constructor(props) {
     super(props)
@@ -261,7 +265,8 @@ class TreeBrowser extends Component {
 
   moveFocus(delta) {
     const nodes = this.getNavigableNodes()
-    const active = nodes.indexOf(window.document.activeElement)
+    const closest = window.document.activeElement.closest('[role="treeitem"]')
+    const active = nodes.indexOf(closest)
     let next = active + delta
     if (next < 0) {
       next = 0
@@ -354,16 +359,17 @@ class TreeBrowser extends Component {
   }
 
   getCollectionProps(collection) {
-    const props = {
+    return {
       id: collection.id,
       name: collection.name,
       descriptor: collection.descriptor,
       expanded: this.getExpandedIndex(this.expanded, collection.id) >= 0,
       items: this.getItems(collection),
-      collections: this.getSubCollections(collection)
+      collections: this.getSubCollections(collection),
+      renderBeforeItems: collection.renderBeforeItems,
+      renderAfterItems: collection.renderAfterItems,
+      containerRef: collection.containerRef
     }
-
-    return props
   }
 
   getExpandedIndex(expanded, id) {
