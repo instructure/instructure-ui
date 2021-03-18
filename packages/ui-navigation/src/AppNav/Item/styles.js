@@ -34,40 +34,36 @@
  */
 const generateStyle = (componentTheme, props) => {
   const { isSelected, isDisabled } = props
-  const disabledStyles = isDisabled
-    ? {
-        pointerEvents: 'none',
-        opacity: 0.5
-      }
-    : {}
-  const selectedStyles = isSelected
-    ? {
-        color: componentTheme.textColorSelected,
-        textDecoration: 'underline'
-      }
-    : {}
+
   return {
     item: {
       label: 'item',
-      appearance: 'none',
-      overflow: 'visible',
-      direction: 'inherit',
-      margin: '0',
-      textDecoration: 'none',
-      userSelect: 'none',
-      touchAction: 'manipulation',
-      background: 'transparent',
-      border: 'none',
-      outline: 'none',
-      lineHeight: componentTheme.height,
-      padding: `0 ${componentTheme.padding}`,
-      alignItems: 'flex-start',
-      '&:hover': {
-        textDecoration: 'underline',
-        textDecorationColor: componentTheme.textColor
-      },
-      ...disabledStyles
+      '&, &:is(a), &:is(button)': {
+        appearance: 'none',
+        overflow: 'visible',
+        direction: 'inherit',
+        margin: '0',
+        textDecoration: 'none',
+        userSelect: 'none',
+        touchAction: 'manipulation',
+        background: 'transparent',
+        border: 'none',
+        outline: 'none',
+        lineHeight: componentTheme.height,
+        padding: `0 ${componentTheme.padding}`,
+        alignItems: 'flex-start',
+
+        '&:hover': {
+          textDecoration: 'underline',
+          textDecorationColor: componentTheme.textColor
+        },
+        ...(isDisabled && {
+          pointerEvents: 'none',
+          opacity: 0.5
+        })
+      }
     },
+
     label: {
       label: 'item__label',
       whiteSpace: 'nowrap',
@@ -77,7 +73,11 @@ const generateStyle = (componentTheme, props) => {
       fontSize: componentTheme.fontSize,
       fontWeight: componentTheme.fontWeight,
       color: componentTheme.textColor,
-      ...selectedStyles
+
+      ...(isSelected && {
+        color: componentTheme.textColorSelected,
+        textDecoration: 'underline'
+      })
     }
   }
 }
