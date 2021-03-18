@@ -32,7 +32,8 @@ module.exports = function (
     node: false,
     removeConsole: false,
     transformImports: true,
-    importTransforms: {}
+    importTransforms: {},
+    browserslistConfig: undefined
   }
 ) {
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
@@ -178,12 +179,16 @@ function getNodeEnvConfig() {
 }
 
 function getWebEnvConfig(opts) {
+  const browserslistConfig =
+    opts.browserslistConfig ||
+    loadConfig(
+      'browserslist',
+      require('@instructure/browserslist-config-instui')
+    )
+
   return {
     targets: {
-      browsers: loadConfig(
-        'browserslist',
-        require('@instructure/browserslist-config-instui')
-      )
+      browsers: browserslistConfig
     },
     useBuiltIns: 'entry',
     corejs: 3,
