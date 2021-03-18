@@ -154,8 +154,7 @@ class Link extends Component {
   makeStyleProps = () => {
     return {
       containsTruncateText: this.containsTruncateText,
-      hasVisibleChildren: this.hasVisibleChildren,
-      elementType: this.element
+      hasVisibleChildren: this.hasVisibleChildren
     }
   }
 

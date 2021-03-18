@@ -34,74 +34,38 @@
  */
 const generateStyle = (componentTheme, props, state) => {
   const { isWithinText, renderIcon, iconPlacement, color } = props
-  const { containsTruncateText, hasVisibleChildren, elementType } = state
+  const { containsTruncateText, hasVisibleChildren } = state
   const inverseStyle = color === 'link-inverse'
 
   // If Link is a button or link, it should look clickable
-  const buttonOrLinkStyle =
-    elementType === 'button' || elementType === 'a'
-      ? {
-          cursor: 'pointer',
-          color: inverseStyle
-            ? componentTheme.colorInverse
-            : componentTheme.color,
-          textDecoration: isWithinText
-            ? componentTheme.textDecorationWithinText
-            : componentTheme.textDecorationOutsideText,
-          '&:focus': {
-            color: inverseStyle
-              ? componentTheme.colorInverse
-              : componentTheme.color
-          },
-          '&:hover, &:active': {
-            color: inverseStyle
-              ? componentTheme.colorInverse
-              : componentTheme.hoverColor,
-            textDecoration: isWithinText
-              ? componentTheme.hoverTextDecorationWithinText
-              : componentTheme.hoverTextDecorationOutsideText
-          }
-        }
-      : {}
-
-  let inverseStyleSelectors = {}
-  if (inverseStyle) {
-    if (elementType === 'a') {
-      inverseStyleSelectors = {
-        '&:link, &:visited': {
-          color: componentTheme.colorInverse
-        },
-        '&:link:focus, &:visited:focus': {
-          outlineColor: componentTheme.focusInverseIconOutlineColor
-        },
-        '&:link:hover, &:link:focus, &:link:active, &:visited:hover, &:visited:focus, &:visited:active': {
-          color: componentTheme.colorInverse
-        }
-      }
-    } else {
-      inverseStyleSelectors = {
-        color: componentTheme.colorInverse,
-        '&:hover, &:focus, &:active': {
-          color: componentTheme.colorInverse
-        }
-      }
+  const isClickableStyle = {
+    cursor: 'pointer',
+    color: componentTheme.color,
+    textDecoration: isWithinText
+      ? componentTheme.textDecorationWithinText
+      : componentTheme.textDecorationOutsideText,
+    '&:focus': {
+      color: componentTheme.color
+    },
+    '&:hover, &:active': {
+      color: componentTheme.hoverColor,
+      textDecoration: isWithinText
+        ? componentTheme.hoverTextDecorationWithinText
+        : componentTheme.hoverTextDecorationOutsideText
     }
   }
 
-  const buttonStyle =
-    elementType === 'button'
-      ? {
-          appearance: 'none',
-          userSelect: 'text',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          fontSize: '1em',
-          margin: 0,
-          padding: 0,
-          textAlign: 'inherit'
-        }
-      : {}
+  const buttonStyle = {
+    appearance: 'none',
+    userSelect: 'text',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '1em',
+    margin: 0,
+    padding: 0,
+    textAlign: 'inherit'
+  }
 
   // If TruncateText is used in Link with icon, align the icon and the text vertically
   const truncateStyle =
@@ -109,25 +73,24 @@ const generateStyle = (componentTheme, props, state) => {
       ? { alignItems: 'center' }
       : {}
 
-  const linkStyles = {
+  const baseStyle = {
     label: 'link',
+    boxSizing: 'border-box',
     fontFamily: componentTheme.fontFamily,
     fontWeight: componentTheme.fontWeight,
     transition: 'outline-color 0.2s',
     verticalAlign: 'baseline',
+
     // set up focus styles
     outlineColor: 'transparent',
     outlineWidth: componentTheme.focusOutlineWidth,
     outlineStyle: componentTheme.focusOutlineStyle,
     outlineOffset: '0.25rem',
+
     ...truncateStyle,
-    ...buttonStyle,
-    ...buttonOrLinkStyle,
-    ...inverseStyleSelectors,
+
     '&:focus': {
-      outlineColor: inverseStyle
-        ? componentTheme.focusInverseIconOutlineColor
-        : componentTheme.focusOutlineColor
+      outlineColor: componentTheme.focusOutlineColor
     },
     '&[aria-disabled]': {
       cursor: 'not-allowed',
@@ -139,24 +102,39 @@ const generateStyle = (componentTheme, props, state) => {
     }
   }
 
-  const iconStyles = renderIcon
-    ? {
-        label: 'icon',
+  return {
+    link: {
+      '&, &:is(a), &:is(button)': {
+        ...baseStyle
+      },
+      '&:is(a), &:is(button)': {
+        ...isClickableStyle
+      },
+      '&:is(button)': {
+        ...buttonStyle
+      },
+      ...(inverseStyle && {
+        '&, &:is(a):link, &:is(a):visited, &:is(button)': {
+          color: componentTheme.colorInverse,
+          '&:focus': {
+            outlineColor: componentTheme.focusInverseIconOutlineColor
+          },
+          '&:hover, &:focus, &:active': {
+            color: componentTheme.colorInverse
+          }
+        }
+      })
+    },
+    icon: {
+      label: 'icon',
+      ...(renderIcon && {
         fontSize: componentTheme.iconSize,
         boxSizing: 'border-box',
         paddingInlineStart:
           iconPlacement === 'start' ? 0 : componentTheme.iconPlusTextMargin,
         paddingInlineEnd:
           iconPlacement === 'start' ? componentTheme.iconPlusTextMargin : 0
-      }
-    : {}
-
-  return {
-    link: {
-      ...linkStyles
-    },
-    icon: {
-      ...iconStyles
+      })
     }
   }
 }
