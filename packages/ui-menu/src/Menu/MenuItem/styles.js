@@ -88,6 +88,7 @@ const generateStyle = (componentTheme, props, state) => {
       // and menuitemradio are selected twice with control+
       // option+space. So we set the display to block.
       display: 'block',
+      textDecoration: 'none',
       ...roleStyles,
       '&:focus,  &:active,  &:hover': {
         background: componentTheme.activeBackground,
@@ -104,8 +105,12 @@ const generateStyle = (componentTheme, props, state) => {
         margin: '0',
         border: '0'
       },
-      textDecoration: 'none',
-      ...disabledStyles
+      ...disabledStyles,
+      '&:is(a)': {
+        '&, &:link, &:visited, &:active, &:hover, &:focus': {
+          textDecoration: 'none'
+        }
+      }
     },
     icon: {
       label: 'menuItem__icon',
