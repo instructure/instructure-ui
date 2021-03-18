@@ -33,7 +33,6 @@
     "@instructure/ui-prop-types": "^7.4.1",
     "@instructure/ui-react-utils": "^7.4.1",
     "@instructure/ui-utils": "^7.4.1",
-    "decimal.js": "^10",
     "hoist-non-react-statics": "^3.3.2",
     "moment-timezone": "^0.5",
     "prop-types": "^15"
