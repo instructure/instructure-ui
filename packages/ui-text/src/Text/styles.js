@@ -91,7 +91,7 @@ const generateStyle = (componentTheme, props, state) => {
     expanded: componentTheme.letterSpacingNormal
   }
 
-  const inputAndTextStyle = {
+  const baseStyle = {
     '&:focus': {
       outline: 'none'
     },
@@ -105,7 +105,6 @@ const generateStyle = (componentTheme, props, state) => {
     ...(transform ? { textTransform: transform } : {})
   }
 
-  // NOTE: the input styles exist to accommodate the InPlaceEdit component
   const inputStyle = {
     outline: 0,
     appearance: 'none',
@@ -121,8 +120,7 @@ const generateStyle = (componentTheme, props, state) => {
     lineHeight: 'inherit',
     textAlign: 'start',
     boxShadow: 'none',
-    display: 'block',
-    ...inputAndTextStyle
+    display: 'block'
   }
 
   return {
@@ -156,9 +154,14 @@ const generateStyle = (componentTheme, props, state) => {
         padding: 0,
         margin: componentTheme.paragraphMargin
       },
-      ...inputAndTextStyle,
-      ...(as === 'input' && inputStyle),
-      '&[type]': inputStyle
+
+      // NOTE: the input styles exist to accommodate the InPlaceEdit component
+      '&:is(input)[type]': {
+        ...inputStyle
+      },
+      '&, &:is(input)[type]': {
+        ...baseStyle
+      }
     }
   }
 }
