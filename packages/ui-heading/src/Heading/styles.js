@@ -32,7 +32,9 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, { level, color, border, as }) => {
+const generateStyle = (componentTheme, props) => {
+  const { level, color, border } = props
+
   const levelStyles = {
     h1: {
       fontFamily: componentTheme.h1FontFamily,
@@ -60,7 +62,7 @@ const generateStyle = (componentTheme, { level, color, border, as }) => {
       fontWeight: componentTheme.h5FontWeight
     },
     reset: {
-      margin: '0',
+      margin: 0,
       fontSize: 'inherit',
       fontWeight: 'inherit',
       lineHeight: 'inherit'
@@ -88,13 +90,13 @@ const generateStyle = (componentTheme, { level, color, border, as }) => {
   }
 
   const inputStyle = {
-    outline: '0',
+    outline: 0,
     appearance: 'none',
     boxSizing: 'border-box',
     background: 'none',
     border: 'none',
-    borderRadius: '0',
-    padding: '0',
+    borderRadius: 0,
+    padding: 0,
     margin: '-0.375rem 0 0 0',
     color: 'inherit',
     height: 'auto',
@@ -112,8 +114,10 @@ const generateStyle = (componentTheme, { level, color, border, as }) => {
       lineHeight: componentTheme.lineHeight,
       margin: 0,
 
-      ...(as === 'input' && inputStyle),
-      '&[type]': inputStyle,
+      // NOTE: the input styles exist to accommodate the InPlaceEdit component
+      '&:is(input)[type]': {
+        ...inputStyle
+      },
 
       ...levelStyles[level],
       ...colorStyles[color],
