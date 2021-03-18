@@ -41,8 +41,7 @@ const generateStyle = (componentTheme, props, state) => {
     transform,
     lineHeight,
     letterSpacing,
-    color,
-    as
+    color
   } = props
 
   const colorVariants = {
@@ -87,8 +86,8 @@ const generateStyle = (componentTheme, props, state) => {
 
   const letterSpacingVariants = {
     normal: componentTheme.letterSpacingNormal,
-    condensed: componentTheme.letterSpacingNormal,
-    expanded: componentTheme.letterSpacingNormal
+    condensed: componentTheme.letterSpacingCondensed,
+    expanded: componentTheme.letterSpacingExpanded
   }
 
   const baseStyle = {
