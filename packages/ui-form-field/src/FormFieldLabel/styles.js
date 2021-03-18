@@ -42,17 +42,19 @@ const generateStyle = (componentTheme, props, state) => {
   return {
     formFieldLabel: {
       label: 'formFieldLabel',
-      all: 'initial',
-      display: 'block',
-      ...(hasContent && {
-        color: componentTheme.color,
-        fontFamily: componentTheme.fontFamily,
-        fontWeight: componentTheme.fontWeight,
-        fontSize: componentTheme.fontSize,
-        lineHeight: componentTheme.lineHeight,
-        margin: 0,
-        textAlign: 'inherit'
-      })
+      '&, &:is(label)': {
+        all: 'initial',
+        display: 'block',
+        ...(hasContent && {
+          color: componentTheme.color,
+          fontFamily: componentTheme.fontFamily,
+          fontWeight: componentTheme.fontWeight,
+          fontSize: componentTheme.fontSize,
+          lineHeight: componentTheme.lineHeight,
+          margin: 0,
+          textAlign: 'inherit'
+        })
+      }
     }
   }
 }
