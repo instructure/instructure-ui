@@ -43,12 +43,14 @@ const generateStyle = (componentTheme, props, state) => {
   return {
     byline: {
       label: 'byline',
-      display: 'flex',
-      background: componentTheme.background,
-      margin: 0,
-      padding: 0,
-      fontFamily: componentTheme.fontFamily,
-      ...alignContentVariants[alignContent]
+      '&, &:is(figure)': {
+        display: 'flex',
+        background: componentTheme.background,
+        margin: 0,
+        padding: 0,
+        fontFamily: componentTheme.fontFamily,
+        ...alignContentVariants[alignContent]
+      }
     },
     figure: {
       label: 'byline__figure',
@@ -57,9 +59,11 @@ const generateStyle = (componentTheme, props, state) => {
     },
     caption: {
       label: 'byline__caption',
-      color: componentTheme.color,
-      margin: 0,
-      padding: 0
+      '&, &:is(figcaption)': {
+        color: componentTheme.color,
+        margin: 0,
+        padding: 0
+      }
     },
     title: {
       label: 'byline__title',
