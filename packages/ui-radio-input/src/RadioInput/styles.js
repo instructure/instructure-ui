@@ -257,15 +257,17 @@ const generateStyle = (componentTheme, props, state) => {
     },
     input: {
       label: 'radioInput__input',
-      padding: '0',
-      margin: '0',
-      fontSize: 'inherit',
-      lineHeight: 'inherit',
-      width: 'auto',
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      opacity: 0.0001 /* selenium cannot find fully transparent elements */
+      '&, &:is(input)[type="radio"]': {
+        padding: '0',
+        margin: '0',
+        fontSize: 'inherit',
+        lineHeight: 'inherit',
+        width: 'auto',
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        opacity: 0.0001 /* selenium cannot find fully transparent elements */
+      }
     },
     control: {
       label: 'radioInput__control',
