@@ -35,13 +35,13 @@ embed: true
 
 ## Before you upgrade to v8.0
 
-There are a few steps you need to do before you start the migration process. **First, upgrade to the latest v7.x release to have access to all the new components and features.**
+There are a few steps you need to do before you start the migration process. **First, upgrade to the latest v7.x release to be able to follow this guide.**
 
 You can find the legacy v7 documentation on [legacy.instructure.design](https://legacy.instructure.design).
 
 ### Removal of deprecated components and properties
 
-One of the features of v8.0. is that we deleted all components and properties marked as `deprecated` in v7. Since these are not backwards compatible anymore, please make sure to update everything.
+One of the changes of v8.0. is that we deleted all components and properties marked as `deprecated` in v7. Since these are not backwards compatible anymore, please make sure to update everything.
 
 **We made a list of all the affected components and props on [Deprecated Properties and Components in Version 7.0](https://legacy.instructure.design/#v7-deprecated-props-and-components) page to have a clear overview of the changes, removals, substitutes.** You can also find these changes in our [CHANGELOG](#CHANGELOG).
 
