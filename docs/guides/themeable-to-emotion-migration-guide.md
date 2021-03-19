@@ -25,6 +25,7 @@ In the v8.0. release we removed `ui-themeable` and its supporting packages from 
   - [Using the built-in themes](#themeable-to-emotion-migration-guide/#theme-handling-using-the-built-in-themes)
   - [Using component overrides](#themeable-to-emotion-migration-guide/#theme-handling-using-component-overrides)
   - [Theme-based overrides](#themeable-to-emotion-migration-guide/#theme-handling-theme-based-overrides)
+  - [Mixed and nested overrides](#themeable-to-emotion-migration-guide/#theme-handling-mixed-and-nested-overrides)
   - [Local theme variable overrides of components](#themeable-to-emotion-migration-guide/#theme-handling-local-theme-variable-overrides-of-components)
   - [theme.use() is deprecated](<#themeable-to-emotion-migration-guide/#theme-handling-theme.use()-is-deprecated>)
 - [Migrating your @themeable components](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components)
@@ -146,6 +147,31 @@ If you need to, and your app is using multiply themes, you can specify overrides
   }}
 >
   ...
+</EmotionThemeProvider>
+```
+
+#### Mixed and nested overrides
+
+The `componentOverrides` can also be nested inside `themeOverrides`. This method is helpful if you want to override e.g. the `Alert` component "**only** in canvas theme".
+
+```jsx
+<EmotionThemeProvider
+  theme={{
+    themeOverrides: {
+      canvas: {
+        componentOverrides: {
+          Alert: {
+            warningIconBackground: 'deeppink',
+            warningBorderColor: 'deeppink'
+          }
+        }
+      }
+    }
+  }}
+>
+  <Alert variant="warning">
+    My border and icon background should be "deeppink" in "canvas" theme.
+  </Alert>
 </EmotionThemeProvider>
 ```
 
