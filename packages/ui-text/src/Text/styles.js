@@ -155,10 +155,10 @@ const generateStyle = (componentTheme, props, state) => {
       },
 
       // NOTE: the input styles exist to accommodate the InPlaceEdit component
-      '&:is(input)[type]': {
+      '&:is(input)[type], &:-webkit-any(input)[type]': {
         ...inputStyle
       },
-      '&, &:is(input)[type]': {
+      '&, &:is(input)[type], &:-webkit-any(input)[type]': {
         ...baseStyle
       }
     }

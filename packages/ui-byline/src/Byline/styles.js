@@ -43,7 +43,7 @@ const generateStyle = (componentTheme, props, state) => {
   return {
     byline: {
       label: 'byline',
-      '&, &:is(figure)': {
+      '&, &:is(figure), &:-webkit-any(figure)': {
         display: 'flex',
         background: componentTheme.background,
         margin: 0,
@@ -59,7 +59,7 @@ const generateStyle = (componentTheme, props, state) => {
     },
     caption: {
       label: 'byline__caption',
-      '&, &:is(figcaption)': {
+      '&, &:is(figcaption), &:-webkit-any(figcaption)': {
         color: componentTheme.color,
         margin: 0,
         padding: 0

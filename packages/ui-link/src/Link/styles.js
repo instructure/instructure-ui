@@ -104,17 +104,17 @@ const generateStyle = (componentTheme, props, state) => {
 
   return {
     link: {
-      '&, &:is(a), &:is(button)': {
+      '&, &:is(a), &:-webkit-any(a), &:is(button), &:-webkit-any(button)': {
         ...baseStyle
       },
-      '&:is(a), &:is(button)': {
+      '&:is(a), &:-webkit-any(a), &:is(button), &:-webkit-any(button)': {
         ...isClickableStyle
       },
-      '&:is(button)': {
+      '&:is(button), &:-webkit-any(button)': {
         ...buttonStyle
       },
       ...(inverseStyle && {
-        '&, &:is(a):link, &:is(a):visited, &:is(button)': {
+        '&, &:is(a):link, &:-webkit-any(a):link, &:is(a):visited, &:-webkit-any(a):visited, &:is(button), &:-webkit-any(button)': {
           color: componentTheme.colorInverse,
           '&:focus': {
             outlineColor: componentTheme.focusInverseIconOutlineColor

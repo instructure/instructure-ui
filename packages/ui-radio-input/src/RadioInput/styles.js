@@ -257,7 +257,7 @@ const generateStyle = (componentTheme, props, state) => {
     },
     input: {
       label: 'radioInput__input',
-      '&, &:is(input)[type="radio"]': {
+      '&, &:is(input)[type="radio"], &:-webkit-any(input)[type="radio"]': {
         padding: '0',
         margin: '0',
         fontSize: 'inherit',

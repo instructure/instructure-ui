@@ -106,7 +106,7 @@ const generateStyle = (componentTheme, props, state) => {
         border: '0'
       },
       ...disabledStyles,
-      '&:is(a)': {
+      '&:is(a), &:-webkit-any(a)': {
         '&, &:link, &:visited, &:active, &:hover, &:focus': {
           textDecoration: 'none'
         }
