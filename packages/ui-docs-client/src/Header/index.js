@@ -42,6 +42,31 @@ class Header extends Component {
     version: undefined
   }
 
+  renderOtherVersionsBlock() {
+    const { version } = this.props
+
+    if (!version) return null
+
+    const isLegacyPage = window.location.host === 'legacy.instructure.design'
+    const currentMainVersion = parseInt(version.charAt(0), 10)
+
+    return (
+      <View display="block" textAlign="center" margin="small none large">
+        <div>{isLegacyPage ? 'Latest' : 'Previous'} release:</div>
+        <Heading level="h5">
+          <Link
+            href={`https://${!isLegacyPage && 'legacy.'}instructure.design/`}
+            isWithinText={false}
+          >
+            <Text size="medium">
+              Instructure UI {!isLegacyPage && `v.${currentMainVersion - 1}`}
+            </Text>
+          </Link>
+        </Heading>
+      </View>
+    )
+  }
+
   render() {
     const corpLogo = (
       <InlineSVG viewBox="0 0 500 500" width="6rem" height="6rem">
@@ -87,6 +112,8 @@ class Header extends Component {
             </View>
           </Link>
         </Heading>
+
+        {this.renderOtherVersionsBlock()}
       </View>
     )
   }
