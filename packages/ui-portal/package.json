@@ -27,7 +27,7 @@
     "@instructure/ui-test-utils": "^7.4.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/ui-i18n": "^7.4.1",
     "@instructure/ui-prop-types": "^7.4.1",
     "@instructure/ui-react-utils": "^7.4.1",

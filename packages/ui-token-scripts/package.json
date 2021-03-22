@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/command-utils": "^7.4.1",
     "@instructure/config-loader": "^7.4.1",
     "@instructure/console": "^7.4.1",

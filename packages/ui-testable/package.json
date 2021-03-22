@@ -26,7 +26,7 @@
     "prop-types": "^15.6.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/ui-decorator": "^7.4.1"
   },
   "peerDependencies": {

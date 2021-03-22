@@ -29,7 +29,7 @@
     "@instructure/ui-color-utils": "^7.4.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/emotion": "^7.4.1",
     "@instructure/ui-icons": "^7.4.1",
     "@instructure/ui-img": "^7.4.1",

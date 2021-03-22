@@ -24,7 +24,7 @@
     "@instructure/ui-babel-preset": "^7.4.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/ui-theme-tokens": "^7.4.1"
   },
   "publishConfig": {
