@@ -67,8 +67,6 @@
   },
   "license": "MIT",
   "resolutions": {
-    "@babel/core": "^7.12.10",
-    "@babel/runtime": "^7.13.10",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
