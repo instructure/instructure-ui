@@ -115,7 +115,7 @@ const generateStyle = (componentTheme, props) => {
       margin: 0,
 
       // NOTE: the input styles exist to accommodate the InPlaceEdit component
-      '&:is(input)[type]': {
+      '&:is(input)[type], &:-webkit-any(input)[type]': {
         ...inputStyle
       },
 

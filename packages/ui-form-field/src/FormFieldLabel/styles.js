@@ -42,7 +42,7 @@ const generateStyle = (componentTheme, props, state) => {
   return {
     formFieldLabel: {
       label: 'formFieldLabel',
-      '&, &:is(label)': {
+      '&, &:is(label), &:-webkit-any(label)': {
         all: 'initial',
         display: 'block',
         ...(hasContent && {

@@ -38,7 +38,7 @@ const generateStyle = (componentTheme, props) => {
   return {
     item: {
       label: 'item',
-      '&, &:is(a), &:is(button)': {
+      '&, &:is(a), &:-webkit-any(a), &:is(button), &:-webkit-any(button)': {
         appearance: 'none',
         overflow: 'visible',
         direction: 'inherit',
