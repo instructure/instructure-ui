@@ -30,11 +30,12 @@ import BaseDecimal from 'decimal.js/decimal.mjs'
  * category: utilities/i18n
  * ---
  * A wrapper for [decimal.js](http://mikemcl.github.io/decimal.js/#decimal)
- * with additional internationalization utilties.
+ * with additional internationalization utilities.
+ * Deprecated. This package will be removed in 8.0.0 because decimal.js is can cause
+ * compatibility issues with Jest.
  *
  * @module Decimal
  */
-
 const Decimal = BaseDecimal.clone()
 
 Decimal.set({
