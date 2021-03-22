@@ -48,15 +48,7 @@ export function renderExample({
     >
       <Component {...componentProps} />
       <Tooltip
-        renderTip={
-          <pre>
-            {JSON.stringify(
-              { ...componentProps, browser: navigator.userAgent },
-              null,
-              2
-            )}
-          </pre>
-        }
+        renderTip={<pre>{JSON.stringify(componentProps, null, 2)}</pre>}
         placement="bottom"
         on={['click']}
       >
@@ -66,7 +58,6 @@ export function renderExample({
           screenReaderLabel="props"
         />
       </Tooltip>
-      <p>{navigator.userAgent}</p>
     </View>
   )
 }
