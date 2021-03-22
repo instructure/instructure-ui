@@ -44,6 +44,7 @@ For more information, click the name of the component to see its full documentat
 | [Position.Content](#Position) (PositionContent) | Use `children` of `Position` instead.                                                                                                                           |
 | [Position.Target](#Position) (PositionTarget)   | Use `renderTarget` prop of `Position` instead.                                                                                                                  |
 | [Progress](#Progress)                           | Use `ProgressBar` or `ProgressCircle` instead.                                                                                                                  |
+| [Decimal](#Decimal)                             | A wrapper for [decimal.js](http://mikemcl.github.io/decimal.js/), removed because of `Jest` compatibility issues. Use the original instead.                     |
 
 ### Deprecated Properties
 
