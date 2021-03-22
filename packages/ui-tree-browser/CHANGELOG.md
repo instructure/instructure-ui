@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
+
+### Features
+
+- **ui-tree-browser:** allow tree browser to render before, after nodes ([ca1dfaa](https://github.com/instructure/instructure-ui/commit/ca1dfaa))
+
 ## [7.4.4](https://github.com/instructure/instructure-ui/compare/v7.4.3...v7.4.4) (2021-03-12)
 
 **Note:** Version bump only for package @instructure/ui-tree-browser
