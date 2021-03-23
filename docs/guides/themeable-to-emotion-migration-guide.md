@@ -29,9 +29,11 @@ In the v8.0. release we removed `ui-themeable` and its supporting packages from 
   - [Local theme variable overrides of components](#themeable-to-emotion-migration-guide/#theme-handling-local-theme-variable-overrides-of-components)
   - [theme.use() is deprecated](<#themeable-to-emotion-migration-guide/#theme-handling-theme.use()-is-deprecated>)
 - [Migrating your @themeable components](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components)
-  - [Refactor theme.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-refactor-theme.js)
-  - [Create the styles.js file](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-create-the-styles.js-file)
-  - [Make changes in the component](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-make-changes-in-the-component)
+  - [1. Refactor theme.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-1.-refactor-theme.js)
+  - [2. Create the styles.js file](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-2.-create-the-styles.js-file)
+  - [3. Make changes in the component](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-3.-make-changes-in-the-component)
+  - [Global styles](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-global-styles)
+  - [Keyframes](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-keyframes)
   - [An example component using emotion theming](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-an-example-component-using-emotion-theming)
   - [Theme tests](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-theme-tests)
 
@@ -463,7 +465,7 @@ componentDidUpdate() {
 
 In the `render` method, use emotion's `css={this.props.styles.componentName}` syntax to add styles. Refactor your code to move all style-related logic to the `styles.js`.
 
-Before:
+**Before:**
 
 ```jsx
 // before in index.js
@@ -500,7 +502,7 @@ render() {
 }
 ```
 
-After:
+**After:**
 
 ```jsx
 // after in index.js
@@ -526,6 +528,116 @@ return {
     fontFamily: componentTheme.fontFamily,
     ...sizeVariants[props.size],
     ...(props.disabled && { pointerEvent: 'none' })
+  }
+}
+```
+
+#### Global styles
+
+Global styles need to be transformed to the "emotion way" too.
+
+**Before:**
+
+```css
+// styles.css
+
+:global {
+  .CodeMirror {
+    height: auto;
+    background: var(--background);
+    // ...
+  }
+}
+```
+
+**After:**
+
+Write your global styles in the `styles.js` file on a "globalStyles" key. You don't have to add labels to global styles.
+
+```js
+// styles.js
+
+return {
+  globalStyles: {
+    '.CodeMirror': {
+      height: 'auto',
+      background: componentTheme.background
+      // ...
+    }
+  }
+}
+```
+
+In the `index.js`, import `Global` from `@instructure/emotion`, which is equivalent to the [Global](https://emotion.sh/docs/globals) component of Emotion.js.
+
+In the render method, use the `<Global>` component and pass the the "globalStyles" as its `styles={}` property.
+
+```jsx
+// index.js
+
+import { withStyle, jsx, Global } from '@instructure/emotion'
+
+// ...
+
+render() {
+  const { styles } = this.props
+
+  return (
+    <div css={styles.codeEditor}>
+      <Global styles={styles.globalStyles} />
+      // ...
+    </div>
+  )
+}
+```
+
+#### Keyframes
+
+Animations are handled with Emotion's [keyframes](https://emotion.sh/docs/keyframes) helper.
+
+**Before:**
+
+```css
+// styles.css
+
+@keyframes pulse {
+  to {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+.componentClass {
+  // ...
+  animation-name: pulse;
+}
+```
+
+**After:**
+
+Import `keyframes` from `@instructure/emotion` in the `styles.js` file.
+
+Define the animation on the top of the page as a `const` and use it in your style object where needed. **Make sure that it is defined outside of the `generateStyle` method, otherwise it is causing problems with style recalculation.**
+
+```js
+// styles.js
+
+import { keyframes } from '@instructure/emotion'
+
+const pulseAnimation = keyframes`
+  to {
+    transform: scale(1);
+    opacity: 0.9;
+  }`
+
+const generateStyle = (componentTheme, props, state) => {
+  // ...
+
+  return {
+    componentClass: {
+      // ...
+      animationName: pulseAnimation
+    }
   }
 }
 ```

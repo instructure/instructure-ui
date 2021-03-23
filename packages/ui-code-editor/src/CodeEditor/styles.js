@@ -61,9 +61,7 @@ const generateStyle = (componentTheme, props, state) => {
     codeEditor: {
       label: 'codeEditor'
     },
-    codeEditorGlobalStyles: {
-      label: 'codeEditor--globalStyles',
-
+    globalStyles: {
       '.CodeMirror': {
         direction: 'ltr',
         position: 'relative',

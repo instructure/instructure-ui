@@ -333,6 +333,78 @@ render() {
 }
 ```
 
+#### Global styles
+
+Write your global styles in the `styles.js` file on a "globalStyles" key. You don't have to add labels to global styles.
+
+```js
+// styles.js
+
+return {
+  globalStyles: {
+    '.CodeMirror': {
+      height: 'auto',
+      background: componentTheme.background
+      // ...
+    }
+  }
+}
+```
+
+In the `index.js`, import `Global` from `@instructure/emotion`, which is equivalent to the [Global](https://emotion.sh/docs/globals) component of Emotion.js.
+
+In the render method, use the `<Global>` component and pass the the "globalStyles" as its `styles={}` property.
+
+```jsx
+// index.js
+
+import { withStyle, jsx, Global } from '@instructure/emotion'
+
+// ...
+
+render() {
+  const { styles } = this.props
+
+  return (
+    <div css={styles.codeEditor}>
+      <Global styles={styles.globalStyles} />
+      // ...
+    </div>
+  )
+}
+```
+
+#### Keyframes
+
+Animations are handled with Emotion's [keyframes](https://emotion.sh/docs/keyframes) helper.
+
+Import `keyframes` from `@instructure/emotion` in the `styles.js` file.
+
+Define the animation on the top of the page as a `const` and use it in your style object where needed. **Make sure that it is defined outside of the `generateStyle` method, otherwise it is causing problems with style recalculation.**
+
+```js
+// styles.js
+
+import { keyframes } from '@instructure/emotion'
+
+const pulseAnimation = keyframes`
+  to {
+    transform: scale(1);
+    opacity: 0.9;
+  }`
+
+const generateStyle = (componentTheme, props, state) => {
+  // ...
+
+  return {
+    componentClass: {
+      // ...
+      animationName: pulseAnimation
+    }
+  }
+}
+```
+
 #### Writing theme tests
 
 For components with theme tests, you can use `generateComponentTheme` from `theme.js` to get the theme variables.
