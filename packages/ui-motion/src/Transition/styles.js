@@ -143,8 +143,7 @@ const generateStyle = (componentTheme, props, state) => {
           entering: `transition--${type}-entering`
         }
       : {},
-    transitionGlobalStyles: {
-      label: 'transitionGlobalStyles',
+    globalStyles: {
       ...fadeAnimation,
       ...scaleAnimation,
       ...slideAnimation

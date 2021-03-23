@@ -66,8 +66,7 @@ const generateStyle = (componentTheme, props, state) => {
       borderInlineEndWidth: componentTheme.navBorderWidth,
       borderInlineEndStyle: 'solid'
     },
-    appGlobalStyles: {
-      label: 'app__globalStyles',
+    globalStyles: {
       html: {
         height: '100%',
         fontSize: '85%'

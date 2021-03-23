@@ -144,7 +144,7 @@ class CodeEditor extends Component {
 
     return (
       <div css={styles.codeEditor}>
-        <Global styles={styles.codeEditorGlobalStyles} />
+        <Global styles={styles.globalStyles} />
         <label htmlFor={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>
           <CodeMirror

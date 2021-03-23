@@ -602,7 +602,7 @@ class App extends Component {
         }}
       >
         <div css={this.props.styles.app}>
-          <Global styles={this.props.styles.appGlobalStyles} />
+          <Global styles={this.props.styles.globalStyles} />
           {showMenu && layout === 'small' && (
             <Mask onClick={this.handleMenuClose} />
           )}

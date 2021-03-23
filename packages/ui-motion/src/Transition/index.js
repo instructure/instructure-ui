@@ -166,7 +166,7 @@ class Transition extends Component {
   renderTransitionHelper = () => {
     const { styles } = this.props
 
-    return <Global styles={styles.transitionGlobalStyles} />
+    return <Global styles={styles.globalStyles} />
   }
 
   render() {
