@@ -39,7 +39,9 @@ import generateComponentTheme from './theme'
 parent: TreeBrowser
 ---
 **/
+
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
+
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeButton extends Component {

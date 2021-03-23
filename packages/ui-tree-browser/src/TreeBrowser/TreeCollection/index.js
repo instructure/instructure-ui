@@ -362,7 +362,6 @@ class TreeCollection extends Component {
       styles
     } = this.props
 
-    // console.log({ styles })
     const ariaSelected = {}
     if (this.props.selection)
       ariaSelected['aria-selected'] =

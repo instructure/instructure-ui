@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
+
+### Features
+
+- **ui-tree-browser:** allow tree browser to render before, after nodes ([ca1dfaa](https://github.com/instructure/instructure-ui/commit/ca1dfaa))
+
+## [7.4.4](https://github.com/instructure/instructure-ui/compare/v7.4.3...v7.4.4) (2021-03-12)
+
+### Bug Fixes
+
+- Add CommonJS build to @instructure/ui-themes ([7e99643](https://github.com/instructure/instructure-ui/commit/7e99643))
+
+## [7.4.3](https://github.com/instructure/instructure-ui/compare/v7.4.1...v7.4.3) (2021-03-11)
+
+### Bug Fixes
+
+- fix release script path issue ([ea56688](https://github.com/instructure/instructure-ui/commit/ea5668850fcfb1e82486d8072fef2120222a3d70))
+- fix tagging ([a3e4fbc](https://github.com/instructure/instructure-ui/commit/a3e4fbcd6ed6db7372c2dafd61053f7ac88c1446))
+- **ui-scripts:** add comment on annotated tags ([ac8d075](https://github.com/instructure/instructure-ui/commit/ac8d075206567368290ba8b05d9f5676ac48c647))
+- **ui-scripts:** fix bump tagging and rename prerelease builds from nightly to snapshot ([3473ed5](https://github.com/instructure/instructure-ui/commit/3473ed5a2aa659c92b7a5243e79e619eaab021c7))
+- **ui-scripts:** fix typo ([96d704a](https://github.com/instructure/instructure-ui/commit/96d704aa5aab1ee4dddf279b4a01b0e6c3d9e424))
+
+## [7.4.2](https://github.com/instructure/instructure-ui/compare/v7.4.1...v7.4.2) (2021-03-11)
+
+### Bug Fixes
+
+- fix release script path issue ([ea56688](https://github.com/instructure/instructure-ui/commit/ea56688))
+- fix tagging ([a3e4fbc](https://github.com/instructure/instructure-ui/commit/a3e4fbc))
+- **ui-scripts:** add comment on annotated tags ([ac8d075](https://github.com/instructure/instructure-ui/commit/ac8d075))
+- **ui-scripts:** fix bump tagging and rename prerelease builds from nightly to snapshot ([3473ed5](https://github.com/instructure/instructure-ui/commit/3473ed5))
+- **ui-scripts:** fix typo ([96d704a](https://github.com/instructure/instructure-ui/commit/96d704a))
+
 ## [7.4.1](https://github.com/instructure/instructure-ui/compare/v7.4.0...v7.4.1) (2021-03-04)
 
 ### Bug Fixes
