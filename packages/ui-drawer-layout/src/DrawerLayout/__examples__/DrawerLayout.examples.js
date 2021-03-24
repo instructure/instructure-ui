@@ -53,7 +53,7 @@ export default {
         <DrawerLayout.Content
           key="1"
           label="Drawer content example"
-          themeOverride={{ duration: '1ms' }}
+          themeOverride={{ duration: 0 }}
         >
           <div style={{ background: 'white', height: '100%' }}>
             <View as="div" padding="x-large">
