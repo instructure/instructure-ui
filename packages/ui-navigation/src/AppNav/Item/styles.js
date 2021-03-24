@@ -35,33 +35,39 @@
 const generateStyle = (componentTheme, props) => {
   const { isSelected, isDisabled } = props
 
+  const itemStyles = {
+    appearance: 'none',
+    overflow: 'visible',
+    direction: 'inherit',
+    margin: '0',
+    textDecoration: 'none',
+    userSelect: 'none',
+    touchAction: 'manipulation',
+    background: 'transparent',
+    border: 'none',
+    outline: 'none',
+    lineHeight: componentTheme.height,
+    padding: `0 ${componentTheme.padding}`,
+    alignItems: 'flex-start',
+
+    '&:hover': {
+      textDecoration: 'underline',
+      textDecorationColor: componentTheme.textColor
+    },
+    ...(isDisabled && {
+      pointerEvents: 'none',
+      opacity: 0.5
+    })
+  }
+
   return {
     item: {
       label: 'item',
-      '&, &:is(a), &:-webkit-any(a), &:is(button), &:-webkit-any(button)': {
-        appearance: 'none',
-        overflow: 'visible',
-        direction: 'inherit',
-        margin: '0',
-        textDecoration: 'none',
-        userSelect: 'none',
-        touchAction: 'manipulation',
-        background: 'transparent',
-        border: 'none',
-        outline: 'none',
-        lineHeight: componentTheme.height,
-        padding: `0 ${componentTheme.padding}`,
-        alignItems: 'flex-start',
+      ...itemStyles,
 
-        '&:hover': {
-          textDecoration: 'underline',
-          textDecorationColor: componentTheme.textColor
-        },
-        ...(isDisabled && {
-          pointerEvents: 'none',
-          opacity: 0.5
-        })
-      }
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(a), &:is(button)': itemStyles,
+      '&:-webkit-any(a), &:-webkit-any(button)': itemStyles
     },
 
     label: {

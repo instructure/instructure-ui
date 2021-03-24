@@ -37,8 +37,42 @@ const generateStyle = (componentTheme, props, state) => {
   const { containsTruncateText, hasVisibleChildren } = state
   const inverseStyle = color === 'link-inverse'
 
+  const baseStyles = {
+    boxSizing: 'border-box',
+    fontFamily: componentTheme.fontFamily,
+    fontWeight: componentTheme.fontWeight,
+    transition: 'outline-color 0.2s',
+    verticalAlign: 'baseline',
+
+    // set up focus styles
+    outlineColor: 'transparent',
+    outlineWidth: componentTheme.focusOutlineWidth,
+    outlineStyle: componentTheme.focusOutlineStyle,
+    outlineOffset: '0.25rem',
+
+    // If TruncateText is used in Link with icon, align the icon and the text vertically
+    ...(renderIcon &&
+      containsTruncateText &&
+      hasVisibleChildren && {
+        alignItems: 'center'
+      }),
+
+    '&:focus': {
+      outlineColor: componentTheme.focusOutlineColor
+    },
+    '&[aria-disabled]': {
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+      opacity: '0.5'
+    },
+    '&::-moz-focus-inner': {
+      border: 0 // removes default dotted focus outline in Firefox
+    }
+  }
+
   // If Link is a button or link, it should look clickable
-  const isClickableStyle = {
+  const isClickableStyles = {
+    ...baseStyles,
     cursor: 'pointer',
     color: componentTheme.color,
     textDecoration: isWithinText
@@ -67,62 +101,32 @@ const generateStyle = (componentTheme, props, state) => {
     textAlign: 'inherit'
   }
 
-  // If TruncateText is used in Link with icon, align the icon and the text vertically
-  const truncateStyle =
-    renderIcon && containsTruncateText && hasVisibleChildren
-      ? { alignItems: 'center' }
-      : {}
-
-  const baseStyle = {
-    label: 'link',
-    boxSizing: 'border-box',
-    fontFamily: componentTheme.fontFamily,
-    fontWeight: componentTheme.fontWeight,
-    transition: 'outline-color 0.2s',
-    verticalAlign: 'baseline',
-
-    // set up focus styles
-    outlineColor: 'transparent',
-    outlineWidth: componentTheme.focusOutlineWidth,
-    outlineStyle: componentTheme.focusOutlineStyle,
-    outlineOffset: '0.25rem',
-
-    ...truncateStyle,
-
+  const inverseStyles = {
+    color: componentTheme.colorInverse,
     '&:focus': {
-      outlineColor: componentTheme.focusOutlineColor
+      outlineColor: componentTheme.focusInverseIconOutlineColor
     },
-    '&[aria-disabled]': {
-      cursor: 'not-allowed',
-      pointerEvents: 'none',
-      opacity: '0.5'
-    },
-    '&::-moz-focus-inner': {
-      border: 0 // removes default dotted focus outline in Firefox
+    '&:hover, &:focus, &:active': {
+      color: componentTheme.colorInverse
     }
   }
 
   return {
     link: {
-      '&, &:is(a), &:-webkit-any(a), &:is(button), &:-webkit-any(button)': {
-        ...baseStyle
-      },
-      '&:is(a), &:-webkit-any(a), &:is(button), &:-webkit-any(button)': {
-        ...isClickableStyle
-      },
-      '&:is(button), &:-webkit-any(button)': {
-        ...buttonStyle
-      },
+      label: 'link',
+      ...baseStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(a), &:is(button)': isClickableStyles,
+      '&:-webkit-any(a), &:-webkit-any(button)': isClickableStyles,
+
+      '&:is(button)': buttonStyle,
+      '&:-webkit-any(button)': buttonStyle,
+
       ...(inverseStyle && {
-        '&, &:is(a):link, &:-webkit-any(a):link, &:is(a):visited, &:-webkit-any(a):visited, &:is(button), &:-webkit-any(button)': {
-          color: componentTheme.colorInverse,
-          '&:focus': {
-            outlineColor: componentTheme.focusInverseIconOutlineColor
-          },
-          '&:hover, &:focus, &:active': {
-            color: componentTheme.colorInverse
-          }
-        }
+        ...inverseStyles,
+        '&:is(a):link, &:is(a):visited, &:is(button)': inverseStyles,
+        '&:-webkit-any(a):link, &:-webkit-any(a):visited, &:-webkit-any(button)': inverseStyles
       })
     },
     icon: {

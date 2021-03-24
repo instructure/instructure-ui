@@ -238,6 +238,18 @@ const generateStyle = (componentTheme, props, state) => {
     }
   }
 
+  const inputStyles = {
+    padding: '0',
+    margin: '0',
+    fontSize: 'inherit',
+    lineHeight: 'inherit',
+    width: 'auto',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    opacity: 0.0001 /* selenium cannot find fully transparent elements */
+  }
+
   return {
     radioInput: {
       label: 'radioInput',
@@ -257,17 +269,11 @@ const generateStyle = (componentTheme, props, state) => {
     },
     input: {
       label: 'radioInput__input',
-      '&, &:is(input)[type="radio"], &:-webkit-any(input)[type="radio"]': {
-        padding: '0',
-        margin: '0',
-        fontSize: 'inherit',
-        lineHeight: 'inherit',
-        width: 'auto',
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        opacity: 0.0001 /* selenium cannot find fully transparent elements */
-      }
+      ...inputStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(input)[type="radio"]': inputStyles,
+      '&:-webkit-any(input)[type="radio"]': inputStyles
     },
     control: {
       label: 'radioInput__control',

@@ -89,7 +89,7 @@ const generateStyle = (componentTheme, props) => {
     none: {}
   }
 
-  const inputStyle = {
+  const inputStyles = {
     outline: 0,
     appearance: 'none',
     boxSizing: 'border-box',
@@ -115,9 +115,9 @@ const generateStyle = (componentTheme, props) => {
       margin: 0,
 
       // NOTE: the input styles exist to accommodate the InPlaceEdit component
-      '&:is(input)[type], &:-webkit-any(input)[type]': {
-        ...inputStyle
-      },
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(input)[type]': inputStyles,
+      '&:-webkit-any(input)[type]': inputStyles,
 
       ...levelStyles[level],
       ...colorStyles[color],

@@ -50,12 +50,14 @@ const generateStyle = (componentTheme, props, state) => {
         paddingInlineStart: componentTheme.labelPadding
       }
     : {}
+
   const roleIconStyles = isRadioOrCheckbox
     ? {
         insetInlineStart: componentTheme.iconPadding,
         insetInlineEnd: 'auto'
       }
     : {}
+
   const disabledStyles = disabled
     ? {
         cursor: 'not-allowed',
@@ -63,6 +65,9 @@ const generateStyle = (componentTheme, props, state) => {
         opacity: 0.5
       }
     : {}
+
+  const linkStyles = { textDecoration: 'none' }
+
   return {
     menuItem: {
       label: 'menuItem',
@@ -106,10 +111,13 @@ const generateStyle = (componentTheme, props, state) => {
         border: '0'
       },
       ...disabledStyles,
-      '&:is(a), &:-webkit-any(a)': {
-        '&, &:link, &:visited, &:active, &:hover, &:focus': {
-          textDecoration: 'none'
-        }
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(a)': {
+        '&, &:link, &:visited, &:active, &:hover, &:focus': linkStyles
+      },
+      '&:-webkit-any(a)': {
+        '&, &:link, &:visited, &:active, &:hover, &:focus': linkStyles
       }
     },
     icon: {

@@ -90,7 +90,7 @@ const generateStyle = (componentTheme, props, state) => {
     expanded: componentTheme.letterSpacingExpanded
   }
 
-  const baseStyle = {
+  const baseStyles = {
     '&:focus': {
       outline: 'none'
     },
@@ -104,7 +104,8 @@ const generateStyle = (componentTheme, props, state) => {
     ...(transform ? { textTransform: transform } : {})
   }
 
-  const inputStyle = {
+  const inputStyles = {
+    ...baseStyles,
     outline: 0,
     appearance: 'none',
     boxSizing: 'border-box',
@@ -126,6 +127,12 @@ const generateStyle = (componentTheme, props, state) => {
     text: {
       label: 'text',
       fontFamily: componentTheme.fontFamily,
+      ...baseStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(input)[type]': inputStyles,
+      '&:-webkit-any(input)[type]': inputStyles,
+
       'sub, sup': {
         fontSize: '75%',
         lineHeight: 0,
@@ -152,14 +159,6 @@ const generateStyle = (componentTheme, props, state) => {
         display: 'block',
         padding: 0,
         margin: componentTheme.paragraphMargin
-      },
-
-      // NOTE: the input styles exist to accommodate the InPlaceEdit component
-      '&:is(input)[type], &:-webkit-any(input)[type]': {
-        ...inputStyle
-      },
-      '&, &:is(input)[type], &:-webkit-any(input)[type]': {
-        ...baseStyle
       }
     }
   }

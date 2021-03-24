@@ -39,22 +39,28 @@ const generateStyle = (componentTheme, props, state) => {
 
   const hasContent = hasVisibleChildren(children)
 
+  const labelStyles = {
+    all: 'initial',
+    display: 'block',
+    ...(hasContent && {
+      color: componentTheme.color,
+      fontFamily: componentTheme.fontFamily,
+      fontWeight: componentTheme.fontWeight,
+      fontSize: componentTheme.fontSize,
+      lineHeight: componentTheme.lineHeight,
+      margin: 0,
+      textAlign: 'inherit'
+    })
+  }
+
   return {
     formFieldLabel: {
       label: 'formFieldLabel',
-      '&, &:is(label), &:-webkit-any(label)': {
-        all: 'initial',
-        display: 'block',
-        ...(hasContent && {
-          color: componentTheme.color,
-          fontFamily: componentTheme.fontFamily,
-          fontWeight: componentTheme.fontWeight,
-          fontSize: componentTheme.fontSize,
-          lineHeight: componentTheme.lineHeight,
-          margin: 0,
-          textAlign: 'inherit'
-        })
-      }
+      ...labelStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(label)': labelStyles,
+      '&:-webkit-any(label)': labelStyles
     }
   }
 }
