@@ -32,6 +32,7 @@ In the v8.0. release we removed `ui-themeable` and its supporting packages from 
   - [1. Refactor theme.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-1.-refactor-theme.js)
   - [2. Create the styles.js file](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-2.-create-the-styles.js-file)
   - [3. Make changes in the component](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-3.-make-changes-in-the-component)
+  - [Accessing theme variables in index.js](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-accessing-theme-variables-in-index.js)
   - [Global styles](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-global-styles)
   - [Keyframes](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-keyframes)
   - [An example component using emotion theming](#themeable-to-emotion-migration-guide/#migrating-your-@themeable-components-an-example-component-using-emotion-theming)
@@ -529,6 +530,46 @@ return {
     ...sizeVariants[props.size],
     ...(props.disabled && { pointerEvent: 'none' })
   }
+}
+```
+
+#### Accessing theme variables in index.js
+
+If you access theme variables in the `index.js`, you need to pass them through `styles.js`, they are not accessible on the component (on `this.theme`) anymore.
+
+Before:
+
+```jsx
+render() {
+  return (
+    <div maxWidth={this.theme.maxWidth}>
+      ...
+    </div>
+  )
+}
+```
+
+After:
+
+```js
+// after in styles.js
+return {
+  componentName: {
+    label: 'componentName'
+    // ...
+  },
+  maxWidth: componentTheme.maxWidth
+}
+```
+
+```jsx
+// after in index.js
+render() {
+  return (
+    <div maxWidth={this.props.styles.maxWidth}>
+      ...
+    </div>
+  )
 }
 ```
 
