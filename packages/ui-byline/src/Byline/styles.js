@@ -40,17 +40,29 @@ const generateStyle = (componentTheme, props, state) => {
     center: { alignItems: 'center' }
   }
 
+  const bylineStyles = {
+    display: 'flex',
+    background: componentTheme.background,
+    margin: 0,
+    padding: 0,
+    fontFamily: componentTheme.fontFamily,
+    ...alignContentVariants[alignContent]
+  }
+
+  const captionStyles = {
+    color: componentTheme.color,
+    margin: 0,
+    padding: 0
+  }
+
   return {
     byline: {
       label: 'byline',
-      '&, &:is(figure), &:-webkit-any(figure)': {
-        display: 'flex',
-        background: componentTheme.background,
-        margin: 0,
-        padding: 0,
-        fontFamily: componentTheme.fontFamily,
-        ...alignContentVariants[alignContent]
-      }
+      ...bylineStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(figure)': bylineStyles,
+      '&:-webkit-any(figure)': bylineStyles
     },
     figure: {
       label: 'byline__figure',
@@ -59,11 +71,11 @@ const generateStyle = (componentTheme, props, state) => {
     },
     caption: {
       label: 'byline__caption',
-      '&, &:is(figcaption), &:-webkit-any(figcaption)': {
-        color: componentTheme.color,
-        margin: 0,
-        padding: 0
-      }
+      ...captionStyles,
+
+      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
+      '&:is(figcaption)': captionStyles,
+      '&:-webkit-any(figcaption)': captionStyles
     },
     title: {
       label: 'byline__title',
