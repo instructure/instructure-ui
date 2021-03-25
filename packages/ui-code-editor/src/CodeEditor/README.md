@@ -1,7 +1,11 @@
 ---
 describes: CodeEditor
 ---
+
+A wrapper around the popular [CodeMirror](https://codemirror.net/) text editor.
+
 ### Code layout
+
 The CodeEditor component can be used to display code via the `defaultValue` prop.
 
 ```js
@@ -44,5 +48,4 @@ class Example extends React.Component {
 }
 
 render(<Example />)
-```
 ```

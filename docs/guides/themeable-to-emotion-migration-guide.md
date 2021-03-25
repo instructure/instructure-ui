@@ -40,7 +40,7 @@ In the v8.0. release we removed `ui-themeable` and its supporting packages from 
 
 ## The emotion package
 
-The `@instructure/emotion` package contains our implementation of the emotion theming library. You can find the full documentation [here](#emotion).
+The `@instructure/emotion` package contains our wrapper and helpers for the emotion theming library. You can find the full documentation [here](#emotion).
 
 Just like [**ui-themeable**](https://legacy.instructure.design/#ui-themeable), **emotion** is used by:
 
