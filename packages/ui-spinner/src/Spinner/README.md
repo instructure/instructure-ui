@@ -42,8 +42,3 @@ example: true
 ---
 <Spinner renderTitle={() => "Hello world"} />
 ```
-
-### Internet Explorer
-
-Internet Explorer doesn't support animations inside inline SVGs.
-IE users will simply see a rotating circle, minus the "morphing" of the spinner.

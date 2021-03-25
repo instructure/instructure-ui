@@ -29,8 +29,7 @@ example: true
 
 ### Color overlay
 
-The `overlay` prop accepts parameters for `color`, `opacity`, and `blend`. (Keep
-in mind that Internet Explorer currently ignores CSS blend mode rules.)
+The `overlay` prop accepts parameters for `color`, `opacity`, and `blend`.
 
 ```js
 ---
@@ -88,8 +87,7 @@ example: true
 
 ### Grayscale and blur filters
 
-Please note: these should only be used for presentational effects: Filters
-are not supported in Internet Explorer.
+Please note: these should only be used for presentational effects.
 
 ```js
 ---
