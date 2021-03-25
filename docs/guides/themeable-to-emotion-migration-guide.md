@@ -410,8 +410,6 @@ import { Children, Component } from 'react'
 - Replace the `styles.css` import with the style generator (`generateStyle`) import from `styles.js`.
 - Don't forget to update the dependencies in `package.json`.
 
-Note: these utils were moved from `ui-themeable` to the `emotion` package: ThemeablePropValues, ThemeablePropTypes, makeThemeVars, getShorthandPropValue, mirrorShorthandCorners, mirrorShorthandEdges. Update the import where needed.
-
 ```js
 // before
 import { themeable } from '@instructure/ui-themeable'
@@ -422,6 +420,12 @@ import styles from './styles.css'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateComponentTheme from './theme'
 import generateStyle from './styles'
+```
+
+**Note:** these utils were moved from `ui-themeable` to the `emotion` package: ThemeablePropValues, ThemeablePropTypes, makeThemeVars, getShorthandPropValue, mirrorShorthandCorners, mirrorShorthandEdges. Update the import where needed. We provided a codemod for these import transformations:
+
+```bash
+npx @instructure/instui-cli codemod --scope-modifications imports -v 8
 ```
 
 ##### 3. decorator
