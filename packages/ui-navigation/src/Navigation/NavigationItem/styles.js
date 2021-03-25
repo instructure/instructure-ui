@@ -76,7 +76,7 @@ const generateStyle = (componentTheme, props, state) => {
             },
             '&:focus': {
               backgroundColor: componentTheme.hoverBackgroundColor,
-              boxShadow: `${componentTheme.outerFocusOutline}, ${componentTheme.nnerFocusOutline}`,
+              boxShadow: `${componentTheme.outerFocusOutline}, ${componentTheme.innerFocusOutline}`,
               outline: 'none'
             }
           })
