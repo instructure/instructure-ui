@@ -35,7 +35,7 @@
     "@instructure/ui-test-locator": "^7.5.0",
     "@instructure/ui-testable": "^7.5.0",
     "@instructure/uid": "^7.5.0",
-    "codemirror": "^5.48.4",
+    "codemirror": "5.48.4",
     "prop-types": "^15",
     "react-codemirror2": "^7.1.0"
   },
