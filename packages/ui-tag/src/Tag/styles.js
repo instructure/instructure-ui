@@ -72,18 +72,31 @@ const generateStyle = (componentTheme, props, state) => {
 
   const buttonVariant = isButton
     ? {
-        touchAction: 'manipulation',
-        outline: 'none',
-        position: 'relative',
-        overflow: 'visible',
-        transition: `background-color ${componentTheme.transitionTiming}`,
-        ...(!dismissible && { cursor: 'pointer' }),
+        tag: {
+          touchAction: 'manipulation',
+          outline: 'none',
+          position: 'relative',
+          overflow: 'visible',
+          transition: `background-color ${componentTheme.transitionTiming}`,
+          ...(!dismissible && { cursor: 'pointer' }),
 
-        '&::before': {
+          '&:focus': {
+            '&::before': {
+              opacity: 1,
+              transform: 'scale(1)'
+            }
+          },
+
+          ...(disabled && {
+            cursor: 'not-allowed',
+            pointerEvents: 'none',
+            opacity: 0.5
+          })
+        },
+        tagBefore: {
           content: '""',
           boxSizing: 'border-box',
           border: `${componentTheme.focusOutlineWidth} ${componentTheme.focusOutlineStyle} ${componentTheme.focusOutlineColor}`,
-          borderRadius: componentTheme.borderRadius,
           position: 'absolute',
           top: '-0.3125rem',
           bottom: '-0.3125rem',
@@ -93,49 +106,44 @@ const generateStyle = (componentTheme, props, state) => {
           transform: 'scale(0.9)',
           transition: `all ${componentTheme.transitionTiming}`,
           pointerEvents: 'none'
-        },
-
-        '&:focus': {
-          '&::before': {
-            opacity: 1,
-            transform: 'scale(1)'
-          }
-        },
-
-        ...(disabled && {
-          cursor: 'not-allowed',
-          pointerEvents: 'none',
-          opacity: 0.5
-        })
+        }
       }
     : {}
 
   const tagVariantVariants = {
     default: {
-      backgroundColor: componentTheme.defaultBackground,
-      border: `${componentTheme.defaultBorderWidth} ${componentTheme.defaultBorderStyle} ${componentTheme.defaultBorderColor}`,
-      borderRadius: componentTheme.defaultBorderRadius,
-      color: componentTheme.defaultColor,
-
-      ...(isButton && {
-        '&::before': { borderRadius: componentTheme.defaultBorderRadius },
-        '&:hover': { backgroundColor: componentTheme.defaultBackgroundHover }
-      })
+      tag: {
+        backgroundColor: componentTheme.defaultBackground,
+        border: `${componentTheme.defaultBorderWidth} ${componentTheme.defaultBorderStyle} ${componentTheme.defaultBorderColor}`,
+        borderRadius: componentTheme.defaultBorderRadius,
+        color: componentTheme.defaultColor,
+        ...(isButton && {
+          '&:hover': { backgroundColor: componentTheme.defaultBackgroundHover }
+        })
+      },
+      tagBefore: {
+        ...(isButton && {
+          borderRadius: componentTheme.defaultBorderRadius
+        })
+      }
     },
     inline: {
-      backgroundColor: componentTheme.inlineBackground,
-      border: `${componentTheme.inlineBorderWidth} ${componentTheme.inlineBorderStyle} ${componentTheme.inlineBorderColor}`,
-      borderRadius: componentTheme.inlineBorderRadius,
-      color: componentTheme.inlineColor,
-      cursor: 'text',
-      margin: '0 0.1875rem 0.1875rem',
-
-      ...(isButton && {
-        '&::before': {
+      tag: {
+        backgroundColor: componentTheme.inlineBackground,
+        border: `${componentTheme.inlineBorderWidth} ${componentTheme.inlineBorderStyle} ${componentTheme.inlineBorderColor}`,
+        borderRadius: componentTheme.inlineBorderRadius,
+        color: componentTheme.inlineColor,
+        cursor: 'text',
+        margin: '0 0.1875rem 0.1875rem',
+        ...(isButton && {
+          '&:hover': { backgroundColor: componentTheme.inlineBackgroundHover }
+        })
+      },
+      tagBefore: {
+        ...(isButton && {
           borderRadius: `calc(${componentTheme.inlineBorderRadius} * 1.5)`
-        },
-        '&:hover': { backgroundColor: componentTheme.inlineBackgroundHover }
-      })
+        })
+      }
     }
   }
 
@@ -182,8 +190,13 @@ const generateStyle = (componentTheme, props, state) => {
       verticalAlign: 'middle',
       userSelect: 'none',
       ...sizeVariants[size].tag,
-      ...buttonVariant,
-      ...tagVariantVariants[variant]
+      ...buttonVariant.tag,
+      ...tagVariantVariants[variant].tag,
+
+      '&::before': {
+        ...buttonVariant.tagBefore,
+        ...tagVariantVariants[variant].tagBefore
+      }
     },
     text: {
       label: 'tag__text',
