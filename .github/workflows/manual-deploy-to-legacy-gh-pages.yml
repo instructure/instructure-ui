@@ -1,0 +1,27 @@
+name: Deploy docs to legacy gh-pages.
+on: workflow_dispatch
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy docs
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          repo-token: ${{ secrets.BENCE_TOPPANTO_ACCESS_TOKEN_FOR_LEGACY_DEPLOY }}
+      - name: Install packages
+        run: yarn install
+      - name: Set up project
+        run: yarn bootstrap
+      - name: Set up git identity
+        run: git config --global user.name "instructure-ui-ci" && git config --global user.email "instructure-ui-ci@instructure.com"
+      - name: Remove __build__ folder
+        run: rm -rf packages/__docs__/__build__
+      - name: Create __build__ folder
+        run: mkdir packages/__docs__/__build__
+      - name: Clone gh-pages branch to __build__ folder
+        run: git clone https://${{secrets.BENCE_TOPPANTO_ACCESS_TOKEN_FOR_LEGACY_DEPLOY}}@github.com/instructure/instructure-ui-legacy-docs.git --branch gh-pages packages/__docs__/__build__
+      - name: Build docs
+        run: yarn build:docs
+      - name: Commit and push changes to the legacy repo
+        run: cd ./packages/__docs__/__build__  && git add --all && git commit -m "Publishing to gh-pages" && git push origin gh-pages
