@@ -192,6 +192,27 @@ If you need to tweak just one component locally, you can do so with a component 
 <ExampleComponent themeOverride={{ hoverColor: '#eee' }} />
 ```
 
+**To ease the upgrade process we provide a codemod for this specific case.**
+
+In order to use the codemod run:
+
+```sh
+npx @instructure/instui-cli codemod-v8 -t themeOverride
+```
+
+Example usage:
+
+```sh
+#in the root of the project
+npx @instructure/instui-cli codemod-v8 -t themeOverride -p ./src
+```
+
+To learn more about the available options and defaults simply run:
+
+```sh
+ npx @instructure/instui-cli codemod-v8 --help
+```
+
 #### theme.use() is deprecated
 
 Applying themes with the former `.use()` method of themes (added by ui-themeable) is now deprecated. Wrap your app in `EmotionThemeProvider` instead.
