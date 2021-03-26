@@ -49,7 +49,7 @@ exports.builder = (yargs) => {
     type: 'string',
     describe: 'jscodeshift `parser` argument for parsing source files.',
     choices: ['babel', 'babylon', 'flow', 'ts', 'tsx'],
-    default: 'babylon'
+    default: 'flow'
   })
 
   yargs.option('isDryRun', {
@@ -64,8 +64,7 @@ exports.builder = (yargs) => {
     type: 'string',
     describe:
       'The codemod to apply. "themeOverride" renames components theme={} prop to themeOverride={}',
-    choices: ['themeOverride'],
-    default: 'themeOverride'
+    choices: ['themeOverride']
   })
 }
 
