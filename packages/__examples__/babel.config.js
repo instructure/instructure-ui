@@ -21,18 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const browserslistConfig = require('@instructure/browserslist-config-instui')
-
 module.exports = {
-  presets: [
-    [
-      require('@instructure/ui-babel-preset'),
-      {
-        // we have to do this ugly hack because the `component-examples-loader` does not seem
-        // to like the code processed by babel-loader with a preset that does not include the ie
-        // releated transform plugins
-        browserslistConfig: [...browserslistConfig, 'ie >= 11']
-      }
-    ]
-  ]
+  presets: ['@instructure/ui-babel-preset']
 }
