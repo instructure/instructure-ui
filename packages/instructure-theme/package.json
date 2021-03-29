@@ -1,6 +1,6 @@
 {
   "name": "@instructure/instructure-theme",
-  "version": "7.5.0",
+  "version": "8.0.0",
   "description": "A theme for Instructure made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -21,11 +21,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.5.0"
+    "@instructure/ui-babel-preset": "^8.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-theme-tokens": "^7.5.0"
+    "@instructure/ui-theme-tokens": "^8.0.0"
   },
   "publishConfig": {
     "access": "public"

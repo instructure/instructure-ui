@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-focusable:** removed deprecated `FocusableView` component ([cb1eff4](https://github.com/instructure/instructure-ui/commit/cb1eff4d3f6b582df76a20de39d7dbc6d068b73e))
+
+### Features
+
+- **ui-editable,ui-focusable:** convert Focusable to use Emotion; delete depracated FocusableView ([fac2670](https://github.com/instructure/instructure-ui/commit/fac2670fdd165d8342209bac128fb6e02f1fd061))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-focusable:** Removed deprecated `FocusableView` component, use `View` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-focusable

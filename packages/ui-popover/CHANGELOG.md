@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Bug Fixes
+
+- **ui-popover:** tooltips dont dismiss when hovered over (a11y) ([7b166c1](https://github.com/instructure/instructure-ui/commit/7b166c1a0c6701bf95a2f85059bdfecf514271f2))
+
+### Code Refactoring
+
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-popover:** removed deprecated `alignArrow` prop ([3799228](https://github.com/instructure/instructure-ui/commit/3799228e2a80284422e96bc5053b217055a6b324))
+- **ui-popover:** removed deprecated `defaultShow` prop ([ecfb67f](https://github.com/instructure/instructure-ui/commit/ecfb67f1ff45893295d0fc4a916fecc0751b6b30))
+- **ui-popover:** removed deprecated `label` prop ([efb32a7](https://github.com/instructure/instructure-ui/commit/efb32a7e97f3b0a3ada4528ed408d405d5c89f39))
+- **ui-popover:** removed deprecated `onDismiss` prop ([5a39dd6](https://github.com/instructure/instructure-ui/commit/5a39dd6c54d3e26d9a06e1d875f12a29a8d08e7f))
+- **ui-popover:** removed deprecated `onShow` prop ([43007c0](https://github.com/instructure/instructure-ui/commit/43007c028f4d790297d78dd95b151177c0d28e73))
+- **ui-popover:** removed deprecated `onToggle` prop ([bdfcda8](https://github.com/instructure/instructure-ui/commit/bdfcda8963a720335ee51bdf14a7a2f8ceb86de2))
+- **ui-popover:** removed deprecated `PopoverContent` component ([5e5cf71](https://github.com/instructure/instructure-ui/commit/5e5cf7153eea46664df346089d39de10621caa9f))
+- **ui-popover:** removed deprecated `PopoverTrigger` component ([9768ade](https://github.com/instructure/instructure-ui/commit/9768adef486c2dfcbe1bbded0ac17ec6698adfaa))
+- **ui-popover:** removed deprecated `show` prop ([6000c93](https://github.com/instructure/instructure-ui/commit/6000c9366fd2d6820aa366f3caaea59edd032f3f))
+- **ui-popover:** removed deprecated `trackPosition` prop ([e60e89b](https://github.com/instructure/instructure-ui/commit/e60e89b60d6f6bb37612cfc7935df1a3b8e00e4c))
+- **ui-popover:** removed deprecated `variant` prop ([1d16dff](https://github.com/instructure/instructure-ui/commit/1d16dff819b1f15b8f684be8fb317da70c31812b))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-popover:** Removed deprecated `onDismiss` prop, use `onHideContent` instead.
+- **ui-popover:** Removed deprecated `alignArrow` prop, use `shouldAlignArrow` instead.
+- **ui-popover:** Removed deprecated `trackPosition` prop, use `shouldTrackPosition` instead.
+- **ui-popover:** Removed deprecated `label` prop, use `screenReaderLabel` instead.
+- **ui-popover:** Removed deprecated `variant` prop, use `color` ('primary' or 'primary-inverse') instead.
+- **ui-popover:** Removed deprecated `defaultShow` prop, use `defaultIsShowingContent` instead.
+- **ui-popover:** Removed deprecated `show` prop, use `isShowingContent` instead.
+- **ui-popover:** Removed deprecated `onToggle` prop, use `onShowContent` and `onHideContent` instead.
+- **ui-popover:** Removed deprecated `onShow` prop, use `onPositioned` instead.
+- **ui-popover:** Removed deprecated `PopoverContent` component, use Popover's `children` instead.
+- **ui-popover:** Removed deprecated `PopoverTrigger` component, use Popover's `renderTrigger` prop instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-popover

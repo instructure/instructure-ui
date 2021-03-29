@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Features
+
+- **ui-docs-plugin:** display the faulty YAML that caused a parsing exception ([fe0dbf2](https://github.com/instructure/instructure-ui/commit/fe0dbf245bfb323be51b73f74b1f57ad4f52b060))
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-docs-plugin

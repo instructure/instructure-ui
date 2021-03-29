@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-buttons:** remove deprecated `DeprecatedButton` component ([c0e2d03](https://github.com/instructure/instructure-ui/commit/c0e2d031301fddf68e816bf5587d6357b15b7035))
+- **ui-buttons:** remove deprecated `icon` prop ([e024d59](https://github.com/instructure/instructure-ui/commit/e024d59d0caac7414cea2f8b957c8f2521887d37))
+- **ui-buttons:** remove deprecated `variant` prop ([755608a](https://github.com/instructure/instructure-ui/commit/755608a0cae2c01dc4028a4f36a03c605a17c8f4))
+- **ui-buttons:** remove deprecated CloseButton props ([cf8657d](https://github.com/instructure/instructure-ui/commit/cf8657d42f4c46f31f1292d468221eaff36327ca))
+- **ui-buttons:** removed deprecated `buttonRef` prop ([92330fd](https://github.com/instructure/instructure-ui/commit/92330fdef044d0f401ff8145aed4d5964db69619))
+- **ui-buttons,ui-toggle-details:** remove deprecated `fluidWidth` prop ([0ced14e](https://github.com/instructure/instructure-ui/commit/0ced14e08e15d6922dc6b3aac755ed2686ad7a70))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-buttons:** Removed deprecated CloseButton prop `children`, use `screenReaderLabel` instead. Removed deprecated
+  CloseButton prop `variant`, use `color` instead.
+- **ui-buttons:** Remove deprecated `DeprecatedButton` component.
+- **ui-buttons:** Removed deprecated `variant` prop. The default value for `color` prop is now `secondary`.
+- **ui-buttons:** Removed deprecated `icon` prop, use `renderIcon` instead.
+- **ui-buttons,ui-toggle-details:** Removed deprecated `fluidWidth` prop, set `display="block"` and `textAlign="start"` instead.
+- **ui-buttons:** removed deprecared `buttonRef` prop from `Button` and `CloseButton`, use `elementRef` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-buttons

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Features
+
+- **instui-cli,ui-upgrade-scripts:** add codemod to rename theme prop to themeOverride ([e0607dd](https://github.com/instructure/instructure-ui/commit/e0607dd0a30c086a538817bde19e725ccc5dd085))
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/instui-cli

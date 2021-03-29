@@ -3,6 +3,199 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+The main feature for version 8 is the switch of the theming engine, we replaced the in-house `themeable` theming with the popular [emotion.js](https://emotion.sh/).
+
+### Bug Fixes
+
+- **ui-checkbox:** add spacing between single checkbox and messages ([e67bd98](https://github.com/instructure/instructure-ui/commit/e67bd9873f082656cef038295647c21b9fa8f46e))
+- **ui-popover:** tooltips dont dismiss when hovered over (a11y) ([7b166c1](https://github.com/instructure/instructure-ui/commit/7b166c1a0c6701bf95a2f85059bdfecf514271f2))
+- add all components to **docs** dependencies ([7fb5f51](https://github.com/instructure/instructure-ui/commit/7fb5f5177d8e35373335e0024fa790286e18c1d7))
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **emotion,ui-themeable,ui-view:** move `getShorthandPropValue` from `ui-themeable` to `emotion` ([91fd876](https://github.com/instructure/instructure-ui/commit/91fd876068b535e159367d46115782156e6a159a))
+- **emotion,ui-themeable,ui-view:** move `makeThemeVars` util from `ui-themeable` to `emotion` ([f2291ba](https://github.com/instructure/instructure-ui/commit/f2291ba19ae680fe5202e2ea9508157950f14a38))
+- **emotion,ui-themeable,ui-view:** move `mirrorShorthand` utils to `emotion` ([c779407](https://github.com/instructure/instructure-ui/commit/c77940764c1ee2b99d6fe7a55a8fd6aaf2b07197))
+- **ui-avatar:** removed deprecated `inline` prop ([410d6ed](https://github.com/instructure/instructure-ui/commit/410d6ed0962b91b99883d5b2ed6ada5d190513c5))
+- **ui-avatar:** removed deprecated `variant` prop ([ec75e0f](https://github.com/instructure/instructure-ui/commit/ec75e0f5bcdbf505d87550a746fe4619fda0c5cf))
+- **ui-babel-preset,ui-webpack-config:** remove unnecessary babel and postcss plugins ([457bd82](https://github.com/instructure/instructure-ui/commit/457bd828fba65f9d60bc07afd4803b3499bf31b4))
+- **ui-breadcrumb:** remove deprecated `icon` prop ([ebde230](https://github.com/instructure/instructure-ui/commit/ebde2302f01501a4d44f8f166ec44713e7aa8d8d))
+- **ui-buttons:** remove deprecated `DeprecatedButton` component ([c0e2d03](https://github.com/instructure/instructure-ui/commit/c0e2d031301fddf68e816bf5587d6357b15b7035))
+- **ui-buttons:** remove deprecated `icon` prop ([e024d59](https://github.com/instructure/instructure-ui/commit/e024d59d0caac7414cea2f8b957c8f2521887d37))
+- **ui-buttons:** remove deprecated `variant` prop ([755608a](https://github.com/instructure/instructure-ui/commit/755608a0cae2c01dc4028a4f36a03c605a17c8f4))
+- **ui-buttons:** remove deprecated CloseButton props ([cf8657d](https://github.com/instructure/instructure-ui/commit/cf8657d42f4c46f31f1292d468221eaff36327ca))
+- **ui-buttons:** removed deprecated `buttonRef` prop ([92330fd](https://github.com/instructure/instructure-ui/commit/92330fdef044d0f401ff8145aed4d5964db69619))
+- **ui-buttons,ui-toggle-details:** remove deprecated `fluidWidth` prop ([0ced14e](https://github.com/instructure/instructure-ui/commit/0ced14e08e15d6922dc6b3aac755ed2686ad7a70))
+- **ui-byline:** remove deprecated `Media` component ([8ba146c](https://github.com/instructure/instructure-ui/commit/8ba146cc6f0169a56d2c12a37e1900153cdfcc55))
+- **ui-date-input:** remove deprecated `label` prop ([55a0066](https://github.com/instructure/instructure-ui/commit/55a00661560be1a8d5d606bc2e5fc2e14165b7ff))
+- **ui-file-drop:** removed deprecated `allowMultiple` prop ([e67dee7](https://github.com/instructure/instructure-ui/commit/e67dee7f064a5494cd601596baded0e9bc61c3d7))
+- **ui-file-drop:** removed deprecated `allowRepeatFileSelection` prop ([90b5f19](https://github.com/instructure/instructure-ui/commit/90b5f1912f67ae1d23d2ad0a7e76b99481c64910))
+- **ui-file-drop:** removed deprecated `enablePreview` prop ([8a18fcd](https://github.com/instructure/instructure-ui/commit/8a18fcd91adf55291b8928180ee5efbb3bf8dd70))
+- **ui-file-drop:** removed deprecated `label` prop ([5a0d088](https://github.com/instructure/instructure-ui/commit/5a0d088c7e33256c9ac27dc276d68f7927ecbbd4))
+- **ui-flex:** removed deprecated `grow` prop ([01cf295](https://github.com/instructure/instructure-ui/commit/01cf2952b294bf247e45eb2f328473e416921751))
+- **ui-flex:** removed deprecated `inline` prop ([92834f0](https://github.com/instructure/instructure-ui/commit/92834f0d9ffc3ba60f4e14a4f3427b10754d1e61))
+- **ui-flex:** removed deprecated `shrink` prop ([50aab33](https://github.com/instructure/instructure-ui/commit/50aab33245bc0a0340e6dbdd7c263a179e9e92ab))
+- **ui-flex:** removed deprecated `visualDebug` prop ([40a0c92](https://github.com/instructure/instructure-ui/commit/40a0c9223b929c7a9c2a35fffbb2da8901dd5ecf))
+- **ui-flex:** removed deprecated `wrapItems` prop ([57ef6ab](https://github.com/instructure/instructure-ui/commit/57ef6abb881454f8096bb6d8cdf98078c01fbe0d))
+- **ui-focusable:** removed deprecated `FocusableView` component ([cb1eff4](https://github.com/instructure/instructure-ui/commit/cb1eff4d3f6b582df76a20de39d7dbc6d068b73e))
+- **ui-heading:** remove deprecated themeAdapter from Heading ([bb1f68c](https://github.com/instructure/instructure-ui/commit/bb1f68c2c8d7d795e6398e9eb93b7063a3b59e69))
+- **ui-heading:** removed deprecated `ellipsis` prop ([4eacdef](https://github.com/instructure/instructure-ui/commit/4eacdefe876bb482a2be7cbd7436017ac7b20e12))
+- **ui-img:** removed deprecated `blur` prop, use `withBlur` instead. ([3db9952](https://github.com/instructure/instructure-ui/commit/3db99525baff0bdfd6470191aa2937613cc874c0))
+- **ui-img:** removed deprecated `grayscale` prop ([5087021](https://github.com/instructure/instructure-ui/commit/50870218749c55ec5c85592d9fe3203d4fe324e5))
+- **ui-img:** removed deprecated `inline` prop ([43868ed](https://github.com/instructure/instructure-ui/commit/43868ed4748e26ff0017c003bfaeb615b09a4b21))
+- **ui-link:** removed deprecated `linkRef` prop ([f09d9e1](https://github.com/instructure/instructure-ui/commit/f09d9e1b6dd1fa0297aaed255250b1cc9d943ebf))
+- **ui-link:** removed deprecated `variant` prop ([624d396](https://github.com/instructure/instructure-ui/commit/624d396923afcad4e2eab86cb7e8484c3c7d80c9))
+- **ui-list:** deprecate `variant` inline styles ([376abd7](https://github.com/instructure/instructure-ui/commit/376abd7d05d61ed075414f9aab7880f495c6c1ad))
+- **ui-metric,ui:** removed deprecated `MetricList` component ([d795851](https://github.com/instructure/instructure-ui/commit/d795851c05a87ae916649dc18c11bd042e31405c))
+- **ui-metric,ui:** removed deprecated `MetricListItem` component ([b8e52b8](https://github.com/instructure/instructure-ui/commit/b8e52b897368733e354a02b1da097070fda3faba))
+- **ui-number-input:** removed deprecated `inline` prop ([a985528](https://github.com/instructure/instructure-ui/commit/a9855282e851be8c6d4581610987230a11153386))
+- **ui-number-input:** removed deprecated `label` prop ([15060d7](https://github.com/instructure/instructure-ui/commit/15060d7781bc10862d3950e6af55a4bbafdc1d0e))
+- **ui-number-input:** removed deprecated `required` prop ([987b36f](https://github.com/instructure/instructure-ui/commit/987b36ff67097cfae6491efa02cf7dea0bdeff30))
+- **ui-pill,ui-responsive:** remove deprecated props from Pill ([125f14c](https://github.com/instructure/instructure-ui/commit/125f14c45f9035a86a3ed2a459ad692c5ecaa7b4))
+- **ui-popover:** removed deprecated `alignArrow` prop ([3799228](https://github.com/instructure/instructure-ui/commit/3799228e2a80284422e96bc5053b217055a6b324))
+- **ui-popover:** removed deprecated `defaultShow` prop ([ecfb67f](https://github.com/instructure/instructure-ui/commit/ecfb67f1ff45893295d0fc4a916fecc0751b6b30))
+- **ui-popover:** removed deprecated `label` prop ([efb32a7](https://github.com/instructure/instructure-ui/commit/efb32a7e97f3b0a3ada4528ed408d405d5c89f39))
+- **ui-popover:** removed deprecated `onDismiss` prop ([5a39dd6](https://github.com/instructure/instructure-ui/commit/5a39dd6c54d3e26d9a06e1d875f12a29a8d08e7f))
+- **ui-popover:** removed deprecated `onShow` prop ([43007c0](https://github.com/instructure/instructure-ui/commit/43007c028f4d790297d78dd95b151177c0d28e73))
+- **ui-popover:** removed deprecated `onToggle` prop ([bdfcda8](https://github.com/instructure/instructure-ui/commit/bdfcda8963a720335ee51bdf14a7a2f8ceb86de2))
+- **ui-popover:** removed deprecated `PopoverContent` component ([5e5cf71](https://github.com/instructure/instructure-ui/commit/5e5cf7153eea46664df346089d39de10621caa9f))
+- **ui-popover:** removed deprecated `PopoverTrigger` component ([9768ade](https://github.com/instructure/instructure-ui/commit/9768adef486c2dfcbe1bbded0ac17ec6698adfaa))
+- **ui-popover:** removed deprecated `show` prop ([6000c93](https://github.com/instructure/instructure-ui/commit/6000c9366fd2d6820aa366f3caaea59edd032f3f))
+- **ui-popover:** removed deprecated `trackPosition` prop ([e60e89b](https://github.com/instructure/instructure-ui/commit/e60e89b60d6f6bb37612cfc7935df1a3b8e00e4c))
+- **ui-popover:** removed deprecated `variant` prop ([1d16dff](https://github.com/instructure/instructure-ui/commit/1d16dff819b1f15b8f684be8fb317da70c31812b))
+- **ui-position:** deprecate `trackPosition` and `over` properties ([b636040](https://github.com/instructure/instructure-ui/commit/b6360407c5d7ae648e74c380c6e90714b80fb69e))
+- **ui-position:** deprecate `Position.Target` and `Position.Content` components ([9c731c8](https://github.com/instructure/instructure-ui/commit/9c731c8a625085edb9f9d94ac04ddb371499c960))
+- **ui-progress,ui:** delete deprecated `Progress` component ([69a84d0](https://github.com/instructure/instructure-ui/commit/69a84d08f6d1347c3bd5fb4259879af3ed2e5d27))
+- **ui-spinner:** removed deprecated `title` prop ([44dc5b1](https://github.com/instructure/instructure-ui/commit/44dc5b177bf31cea42817802c61500a3e0aed74e))
+- **ui-tabs:** remove deprecated `selected` and `disabled` props ([3472cf2](https://github.com/instructure/instructure-ui/commit/3472cf28173fb58724ccf4ec2ca2fa82d9839989))
+- **ui-tabs:** remove deprecated `selectedIndex` prop ([1557b96](https://github.com/instructure/instructure-ui/commit/1557b967144af197110795548b17a7a749495eaa))
+- **ui-tabs:** remove deprecated `size` prop ([fecbf13](https://github.com/instructure/instructure-ui/commit/fecbf13668ca1b4c261b9f719727207732480c45))
+- **ui-tabs:** remove deprecated `title` prop ([3e44810](https://github.com/instructure/instructure-ui/commit/3e448101e432b72eddcc766ba29c1bb9f6cf54b7))
+- **ui-tabs:** remove deprecated props `onChange` and `focus` ([a3c640f](https://github.com/instructure/instructure-ui/commit/a3c640f5a952a21a0035471e9a7b03cae24fd44b))
+- **ui-text:** remove color type `error` ([6d44017](https://github.com/instructure/instructure-ui/commit/6d44017dc3e0daa2d3c7e5135326aa06bc079f2e))
+- **ui-text-input:** removed deprecated `icon` prop ([694962c](https://github.com/instructure/instructure-ui/commit/694962c08d1d77a81a0f270116a38c2200ed07e9))
+- **ui-text-input:** removed deprecated `inline` prop ([7a51241](https://github.com/instructure/instructure-ui/commit/7a5124143f28e9470f52fb60b4bd660952e64cdd))
+- **ui-text-input:** removed deprecated `label` prop ([dc01d90](https://github.com/instructure/instructure-ui/commit/dc01d90d1857d9e61270c7996959420531bc99fe))
+- **ui-text-input:** removed deprecated `required` prop ([20cd5dd](https://github.com/instructure/instructure-ui/commit/20cd5dd8eb28243b2c8151420af3086eb7b1a35d))
+- **ui-time-select:** removed deprecated `label` prop ([fce697f](https://github.com/instructure/instructure-ui/commit/fce697f583e0bf7c8d1d3eaaf4e2b01f22d5301e))
+- **ui-tooltip:** `tip` and `variant` properties deprecated ([cd17b6b](https://github.com/instructure/instructure-ui/commit/cd17b6b5873a96040a9630c09177f47c4601b56e))
+- **ui-view:** remove deprecated themeAdapter ([bbfb295](https://github.com/instructure/instructure-ui/commit/bbfb2950223a718a31eac4eb78bd95680e0981a5))
+- **ui-view:** removed deprecated `focused` prop ([3980814](https://github.com/instructure/instructure-ui/commit/3980814a1c2780249dd41a373721c22298895a30))
+- **ui-view:** removed deprecated `visualDebug` prop ([6d8e0bb](https://github.com/instructure/instructure-ui/commit/6d8e0bb55ef5a6ffa1d30b65879bcdc2ead99569))
+
+### Features
+
+- **instui-cli,ui-upgrade-scripts:** add codemod to rename `theme` prop to `themeOverride` ([e0607dd](https://github.com/instructure/instructure-ui/commit/e0607dd0a30c086a538817bde19e725ccc5dd085))
+- **instui-config:** add codemod for themeable util imports ([89a95f8](https://github.com/instructure/instructure-ui/commit/89a95f86c129b266a0090b983587933c285a0960))
+- **ui-color-utils:** add utility mehtod to convert a color string to a hexadecimal color string in the #AABBCC format([20a3a69](https://github.com/instructure/instructure-ui/commit/20a3a6990469a427b4115090faccad67f9216830))
+- **ui-editable,ui-focusable:** delete depracated FocusableView ([fac2670](https://github.com/instructure/instructure-ui/commit/fac2670fdd165d8342209bac128fb6e02f1fd061))
+- **ui-i18n:** remove decimal.js, its .mjs export is causing issues with Jest ([2e00b30](https://github.com/instructure/instructure-ui/commit/2e00b308cea08585b1afdc5861a5f9142a12f2af))
+- **ui-icons:** add new icons and update old ones ([03e6027](https://github.com/instructure/instructure-ui/commit/03e60278022d1420feda12586f8260cf8f322b07))
+- **ui-icons-build,ui-icons:** generate icons from svg files ([7bf065a](https://github.com/instructure/instructure-ui/commit/7bf065a036227956c9008c1992834c48fafa25e3))
+- **ui-test-sandbox,ui:** delete ui-themeable package and usages ([60e4080](https://github.com/instructure/instructure-ui/commit/60e4080a68dd76b0d6462fa1b63e6a4f59c38f7d))
+
+### Performance Improvements
+
+- **ui-docs-client:** speed up iconography page ([d16a046](https://github.com/instructure/instructure-ui/commit/d16a046b24540fcd9dd9f642af31145671c9dda7))
+
+### BREAKING CHANGES
+
+- **ui-checkbox:** VISUAL CHANGE: Since there is more space between the checkbox and the messages, it can potentially break layouts (vertically more pixels).
+- It is no longer a valid strategy to surround `jsx` code with `try..catch` because writing something in the console does not cause errors to be thrown. Use `spy(console, 'error')` instead. Also, when accessing `Component.displayName`, use `Component.displayName || Component.name` with the name as a fallback instead.
+- **ui-babel-preset,ui-webpack-config:** Removed the following packages because they were supporting `ui-themable`, and are no longer needed when using `emotion` theming: `babel-plugin-themeable-styles`, `postcss-themeable-styles`, `ui-postcss-config`.
+- **ui-test-sandbox,ui:** The whole `ui-themeable` package was deleted. It is superseeded by the `emotion` package.
+- **ui-tabs:** `SecondarySelectedColor` style was removed, now just `secondaryColor` determines the color of the secondary tab. VISUAL CHANGE: `secondaryColor` changed to `textDarkest`, in the Canvas theme to `ic-brand-font-color-dark`
+- **emotion,ui-themeable,ui-view:** Moved `mirrorShorthand`, `mirrorShorthandEdges`, `mirrorShorthandCorners` utils to from
+  `ui-themeable` to `emotion` package.
+- **emotion,ui-themeable,ui-view:** Moved `getShorthandPropValue` from `ui-themeable` to `emotion` package.
+- **emotion,ui-themeable,ui-view:** Moved `makeThemeVars` util from `ui-themeable` to `emotion` package.
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-heading:** The theme variable 'fontFamily' has been split into the following values, override them
+  individually: `h1FontFamily`, `h2FontFamily`, `h3FontFamily`, `h4FontFamily`, `h5FontFamily`.
+- **ui-view:** Removed themeAdapter for deprecated theme variables: 'borderColorDefault' is now
+  `borderColorPrimary`, 'borderColorInverse' is now `borderColorTransparent`, 'colorInverse' is now
+  `colorPrimaryInverse`, 'background' is now `backgroundPrimary`, 'backgroundLight' is now
+  `backgroundSecondary`, 'backgroundInverse' is now `backgroundPrimaryInverse`.
+- **ui-view:** Removed deprecated `visualDebug` prop, use `withVisualDebug` instead.
+- **ui-view:** Removed deprecated `focused` prop, use `withFocusOutline` instead.
+- **ui-img:** Removed deprecated `blur` prop, use `withBlur` instead.
+- **ui-img:** Removed deprecated `grayscale` prop, use `withGrayscale` instead.
+- **ui-img:** Removed deprecated `inline` prop, use `display` ('inline-block' or ‘block') instead.
+- **ui-heading:** Removed deprecated `ellipsis` prop, use `TruncateText` component child instead.
+- **ui-focusable:** Removed deprecated `FocusableView` component, use `View` instead.
+- **ui-avatar:** Removed deprecated `variant` prop, use `shape` instead.
+- **ui-avatar:** Removed deprecated `inline` prop, use `display` ('inline-block' or 'block') instead.
+- **ui-number-input:** Removed deprecated `inline` prop, use `display` ('inline-block' or 'block') instead.
+- **ui-number-input:** Removed deprecated `required` prop, use `isRequired` instead.
+- **ui-number-input:** Removed deprecated `label` prop, use `renderLabel` instead.
+- **ui-time-select:** Removed deprecated `label` prop, use `renderLabel` instead.
+- **ui-text-input:** Removed deprecated `icon` prop, use `renderAfterInput` instead.
+- **ui-text-input:** Removed deprecated `inline` prop, use `display` ('inline-block' or ‘block') instead.
+- **ui-text-input:** Removed deprecated `required` prop, use `isRequired` instead.
+- **ui-text-input:** Removed deprecated `label` prop, use `renderLabel` instead.
+- **ui-spinner:** Removed deprecated `title` prop, use `renderTitle` instead.
+- **ui-popover:** Removed deprecated `onDismiss` prop, use `onHideContent` instead.
+- **ui-popover:** Removed deprecated `alignArrow` prop, use `shouldAlignArrow` instead.
+- **ui-popover:** Removed deprecated `trackPosition` prop, use `shouldTrackPosition` instead.
+- **ui-popover:** Removed deprecated `label` prop, use `screenReaderLabel` instead.
+- **ui-popover:** Removed deprecated `variant` prop, use `color` ('primary' or 'primary-inverse') instead.
+- **ui-popover:** Removed deprecated `defaultShow` prop, use `defaultIsShowingContent` instead.
+- **ui-popover:** Removed deprecated `show` prop, use `isShowingContent` instead.
+- **ui-popover:** Removed deprecated `onToggle` prop, use `onShowContent` and `onHideContent` instead.
+- **ui-popover:** Removed deprecated `onShow` prop, use `onPositioned` instead.
+- **ui-popover:** Removed deprecated `PopoverContent` component, use Popover's `children` instead.
+- **ui-popover:** Removed deprecated `PopoverTrigger` component, use Popover's `renderTrigger` prop instead.
+- **ui-metric,ui:** Removed deprecated `MetricList` component, use `MetricGroup` instead.
+- **ui-metric,ui:** Removed deprecated `MetricListItem` component, use `Metric` instead.
+- **ui-link:** Removed deprecated `variant` prop, use `color` ('link' or ’link-inverse') instead.
+- **ui-link:** Removed deprecated `linkRef` prop, use `elementRef` instead.
+- **ui-flex:** Removed deprecated `shrink` prop, use `shouldShrink` instead.
+- **ui-flex:** Removed deprecated `grow` prop, use `shouldGrow` instead.
+- **ui-flex:** Removed deprecated `visualDebug` prop, use `withVisualDebug` instead.
+- **ui-flex:** Removed deprecated `wrapItems` prop, use `wrap` ('wrap', 'no-wrap' or 'wrap-reverse') instead.
+- **ui-flex:** Removed deprecated `inline` prop, use `display` (‘flex’ or ‘inline-flex’) instead.
+- **ui-file-drop:** Removed deprecated `allowMultiple` prop, use `shouldAllowMultiple` instead.
+- **ui-file-drop:** Removed deprecated `allowRepeatFileSelection` prop, use `shouldAllowRepeats` instead.
+- **ui-file-drop:** Removed deprecated `enablePreview` prop, use `shouldEnablePreview` instead.
+- **ui-file-drop:** Removed deprecated `label` prop, use `renderLabel` instead.
+- **ui-byline:** Removed deprecated `Media` component, use `Byline` instead.
+- **ui-breadcrumb:** Removed deprecated `icon` prop, use `renderIcon` instead.
+- **ui-progress,ui:** Deleted deprecated Progress component, use ProgressBar or ProgressCircle instead.
+- **ui-date-input:** Removed deprecated `label` prop: use `renderLabel` prop instead.
+- **ui-checkbox:** Removed deprecated theme variables: `baseSizeSmall`, `baseSizeMedium`, `baseSizeLarge`. Use
+  `toggleSize` instead.
+- **ui-number-input:** Removed deprecated props: label, required, inline
+- **ui-tabs:** Removed deprecated `onChange` prop: use `onRequestTabChange` instead. Removed deprecated `focus`
+  prop: use `shouldFocusOnRender` instead.
+- **ui-tabs:** Removed deprecated `selectedIndex` prop.
+- **ui-tabs:** Removed deprecated `size` prop, use `maxWidth` instead.
+- **ui-tabs:** Removed deprecated `title` prop: use `renderTitle` instead.
+- **ui-tabs:** [Tabs.Tab and Tabs.Panel] Removed deprecated `selected` prop: use `isSelected` instead. Removed
+  deprecated `disabled` prop: use `isDisabled` instead.
+- **ui-buttons:** Removed deprecated CloseButton prop `children`, use `screenReaderLabel` instead. Removed deprecated
+  CloseButton prop `variant`, use `color` instead.
+- **ui-buttons:** Remove deprecated `DeprecatedButton` component.
+- **ui-buttons:** Removed deprecated `variant` prop. The default value for `color` prop is now `secondary`.
+- **ui-buttons:** Removed deprecated `icon` prop, use `renderIcon` instead.
+- **ui-buttons,ui-toggle-details:** Removed deprecated `fluidWidth` prop, set `display="block"` and `textAlign="start"` instead.
+- **ui-buttons:** removed deprecared `buttonRef` prop from `Button` and `CloseButton`, use `elementRef` instead.
+- **ui-position:** `trackPosition` prop is deprecated, use `shouldTrackPosition` prop instead. `over` prop is
+  depreacted, use `shouldPositionOverTarget` prop instead.
+- **ui-position:** `Position.Target` is deprecated, use Position's `renderTarget` prop instead. `Position.Content` is deprecated, use Position's `children` instead.
+- **ui-position,ui-view:** The "box-sizing" and "z-index" css properties are now added as inline css on the Content element,
+  might break other rules added in class.
+- **ui-table:** Removed support for deprecated "mode" property, since it was deprecated in v7.
+- **ui-list:** Removed `variant` property: use InlineList component for inline lists and isUnstyled boolean prop for unstyled lists. Removed inline delimiter values (pipe, slash and arrow) from `delimiter` property.
+- **ui-pill,ui-responsive:** Removed `text` property: use `children` instead. `Children` is now required. Removed `variant` property: use color instead. Within the new color prop `default` is now `primary` (gray), `primary` has updated to `info` (blue) and `message` is now `alert`.
+- **ui-text:** Removed `error` type for color, use `danger` instead
+- **ui-tooltip:** `tip` property is deprecated (use `renderTip` instead). | `renderTip` property is now required. | `variant` property is deprecated (use `color` instead)
+- **ui-alerts:** Remove deprecated `closeButtonLabel` prop
+- Removed `Decimal` wrapper for decimal.js because it was causing compilation errors with projects using Jest. If you need its functionality we recommend to copy-paste the needed methods from the source code.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 ### Features

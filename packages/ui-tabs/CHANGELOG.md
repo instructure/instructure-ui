@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-tabs:** remove deprecated `selected` and `disabled` props ([3472cf2](https://github.com/instructure/instructure-ui/commit/3472cf28173fb58724ccf4ec2ca2fa82d9839989))
+- **ui-tabs:** remove deprecated `selectedIndex` prop ([1557b96](https://github.com/instructure/instructure-ui/commit/1557b967144af197110795548b17a7a749495eaa))
+- **ui-tabs:** remove deprecated `size` prop ([fecbf13](https://github.com/instructure/instructure-ui/commit/fecbf13668ca1b4c261b9f719727207732480c45))
+- **ui-tabs:** remove deprecated `title` prop ([3e44810](https://github.com/instructure/instructure-ui/commit/3e448101e432b72eddcc766ba29c1bb9f6cf54b7))
+- **ui-tabs:** remove deprecated props `onChange` and `focus` ([a3c640f](https://github.com/instructure/instructure-ui/commit/a3c640f5a952a21a0035471e9a7b03cae24fd44b))
+
+### Features
+
+- **ui-tabs:** change the color of unselected tabs to the same as selected ones ([d081a50](https://github.com/instructure/instructure-ui/commit/d081a509571f293908134e15c8fa652b441d906c))
+
+### BREAKING CHANGES
+
+- **ui-tabs:** VISUAL CHANGE: `secondaryColor` changed to `textDarkest`, in the Canvas theme to `ic-brand-font-color-dark`. `SecondarySelectedColor` style was removed, now just `secondaryColor` determines the color of the secondary tab.
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-tabs:** Removed deprecated `onChange` prop: use `onRequestTabChange` instead. Removed deprecated `focus`
+  prop: use `shouldFocusOnRender` instead.
+- **ui-tabs:** Removed deprecated `selectedIndex` prop.
+- **ui-tabs:** Removed deprecated `size` prop, use `maxWidth` instead.
+- **ui-tabs:** Removed deprecated `title` prop: use `renderTitle` instead.
+- **ui-tabs:** [Tabs.Tab and Tabs.Panel] Removed deprecated `selected` prop: use `isSelected` instead. Removed deprecated `disabled` prop: use `isDisabled` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-tabs

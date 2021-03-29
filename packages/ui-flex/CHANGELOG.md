@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-flex:** removed deprecated `grow` prop ([01cf295](https://github.com/instructure/instructure-ui/commit/01cf2952b294bf247e45eb2f328473e416921751))
+- **ui-flex:** removed deprecated `inline` prop ([92834f0](https://github.com/instructure/instructure-ui/commit/92834f0d9ffc3ba60f4e14a4f3427b10754d1e61))
+- **ui-flex:** removed deprecated `shrink` prop ([50aab33](https://github.com/instructure/instructure-ui/commit/50aab33245bc0a0340e6dbdd7c263a179e9e92ab))
+- **ui-flex:** removed deprecated `visualDebug` prop ([40a0c92](https://github.com/instructure/instructure-ui/commit/40a0c9223b929c7a9c2a35fffbb2da8901dd5ecf))
+- **ui-flex:** removed deprecated `wrapItems` prop ([57ef6ab](https://github.com/instructure/instructure-ui/commit/57ef6abb881454f8096bb6d8cdf98078c01fbe0d))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-flex:** Removed deprecated `shrink` prop, use `shouldShrink` instead.
+- **ui-flex:** Removed deprecated `grow` prop, use `shouldGrow` instead.
+- **ui-flex:** Removed deprecated `visualDebug` prop, use `withVisualDebug` instead.
+- **ui-flex:** Removed deprecated `wrapItems` prop, use `wrap` ('wrap', 'no-wrap' or 'wrap-reverse') instead.
+- **ui-flex:** Removed deprecated `inline` prop, use `display` (‘flex’ or ‘inline-flex’) instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-flex

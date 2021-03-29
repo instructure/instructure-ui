@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Bug Fixes
+
+- **babel-plugin-transform-imports:** throw errors not just log a message if something goes wrong ([b39565f](https://github.com/instructure/instructure-ui/commit/b39565f46c141c9a431b86a95880cbc470bcc880))
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/babel-plugin-transform-imports

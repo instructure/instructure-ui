@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-link:** removed deprecated `linkRef` prop ([f09d9e1](https://github.com/instructure/instructure-ui/commit/f09d9e1b6dd1fa0297aaed255250b1cc9d943ebf))
+- **ui-link:** removed deprecated `variant` prop ([624d396](https://github.com/instructure/instructure-ui/commit/624d396923afcad4e2eab86cb7e8484c3c7d80c9))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-link:** Removed deprecated `variant` prop, use `color` ('link' or ’link-inverse') instead.
+- **ui-link:** Removed deprecated `linkRef` prop, use `elementRef` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-link

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-metric,ui:** removed deprecated `MetricList` component ([d795851](https://github.com/instructure/instructure-ui/commit/d795851c05a87ae916649dc18c11bd042e31405c))
+- **ui-metric,ui:** removed deprecated `MetricListItem` component ([b8e52b8](https://github.com/instructure/instructure-ui/commit/b8e52b897368733e354a02b1da097070fda3faba))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-metric,ui:** Removed deprecated `MetricList` component, use `MetricGroup` instead.
+- **ui-metric,ui:** Removed deprecated `MetricListItem` component, use `Metric` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-metric

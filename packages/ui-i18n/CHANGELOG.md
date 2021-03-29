@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Features
+
+- **ui-i18n:** remove decimal.js, its .mjs export is causing issues with Jest ([2e00b30](https://github.com/instructure/instructure-ui/commit/2e00b308cea08585b1afdc5861a5f9142a12f2af))
+
+### BREAKING CHANGES
+
+- Removed `Decimal` wrapper for decimal.js because it was causing compilation errors with projects using Jest. If you need its functionality we recommend to copy-paste the needed methods from the source
+  code.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-i18n
