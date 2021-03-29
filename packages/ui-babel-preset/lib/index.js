@@ -86,11 +86,11 @@ module.exports = function (
   } catch (e) {
     // if something goes wrong, continue and don't try to explicitly set a helper version
   }
-
   plugins = plugins.concat([
     require('babel-plugin-macros'),
     require('@babel/plugin-transform-destructuring').default,
-    [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before themeable-styles plugin below
+    [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before plugins that set displayName!
+    require('./babel-plugin-add-displayname-for-react'),
     [
       require('@babel/plugin-proposal-class-properties').default,
       { loose: true }
