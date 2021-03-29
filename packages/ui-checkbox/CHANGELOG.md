@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Bug Fixes
+
+- **ui-checkbox:** add spacing between single checkbox and messages ([e67bd98](https://github.com/instructure/instructure-ui/commit/e67bd9873f082656cef038295647c21b9fa8f46e))
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **ui-checkbox:** migrate ToggleFacade from themeable to emotion ([2a629c0](https://github.com/instructure/instructure-ui/commit/2a629c06238b45a7804d9968484713a218750e45))
+
+### BREAKING CHANGES
+
+- **ui-checkbox:** VISUAL CHANGE: Since there is more space between the checkbox and the messages, it can potentially break layouts (vertically more pixels).
+- **ui-checkbox:** Removed deprecated theme variables: `baseSizeSmall`, `baseSizeMedium`, `baseSizeLarge`. Use
+  `toggleSize` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-checkbox

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Features
+
+- **ui-test-sandbox,ui:** delete ui-themeable package and usages ([60e4080](https://github.com/instructure/instructure-ui/commit/60e4080a68dd76b0d6462fa1b63e6a4f59c38f7d))
+
+### BREAKING CHANGES
+
+- **ui-test-sandbox,ui:** The whole `ui-themeable` package was deleted. It is superseeded by the `emotion` package.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-themes

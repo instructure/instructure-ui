@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Features
+
+- **ui-component-examples,ui-scripts:** storybook: fix theme, remove not needed warning ([42e518c](https://github.com/instructure/instructure-ui/commit/42e518c02cd87d95451175b203b6d4f7a9a3b0d0))
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package docs-examples

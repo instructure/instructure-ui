@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-file-drop:** removed deprecated `allowMultiple` prop ([e67dee7](https://github.com/instructure/instructure-ui/commit/e67dee7f064a5494cd601596baded0e9bc61c3d7))
+- **ui-file-drop:** removed deprecated `allowRepeatFileSelection` prop ([90b5f19](https://github.com/instructure/instructure-ui/commit/90b5f1912f67ae1d23d2ad0a7e76b99481c64910))
+- **ui-file-drop:** removed deprecated `enablePreview` prop ([8a18fcd](https://github.com/instructure/instructure-ui/commit/8a18fcd91adf55291b8928180ee5efbb3bf8dd70))
+- **ui-file-drop:** removed deprecated `label` prop ([5a0d088](https://github.com/instructure/instructure-ui/commit/5a0d088c7e33256c9ac27dc276d68f7927ecbbd4))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-file-drop:** Removed deprecated `allowMultiple` prop, use `shouldAllowMultiple` instead.
+- **ui-file-drop:** Removed deprecated `allowRepeatFileSelection` prop, use `shouldAllowRepeats` instead.
+- **ui-file-drop:** Removed deprecated `enablePreview` prop, use `shouldEnablePreview` instead.
+- **ui-file-drop:** Removed deprecated `label` prop, use `renderLabel` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-file-drop

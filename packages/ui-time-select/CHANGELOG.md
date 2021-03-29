@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **ui-time-select:** removed deprecated `label` prop ([fce697f](https://github.com/instructure/instructure-ui/commit/fce697f583e0bf7c8d1d3eaaf4e2b01f22d5301e))
+
+### BREAKING CHANGES
+
+- **ui-time-select:** Removed deprecated `label` prop, use `renderLabel` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-time-select

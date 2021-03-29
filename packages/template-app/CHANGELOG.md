@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **ui-babel-preset,ui-webpack-config:** remove unnecessary babel and postcss plugins ([457bd82](https://github.com/instructure/instructure-ui/commit/457bd828fba65f9d60bc07afd4803b3499bf31b4))
+
+### BREAKING CHANGES
+
+- **ui-babel-preset,ui-webpack-config:** Removed the following packages because they were supporting `ui-themable`, and are no longer needed when using `emotion` theming: `babel-plugin-themeable-styles`, `postcss-themeable-styles`, `ui-postcss-config`.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/template-app

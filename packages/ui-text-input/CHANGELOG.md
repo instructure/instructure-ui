@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **ui-text-input:** removed deprecated `icon` prop ([694962c](https://github.com/instructure/instructure-ui/commit/694962c08d1d77a81a0f270116a38c2200ed07e9))
+- **ui-text-input:** removed deprecated `inline` prop ([7a51241](https://github.com/instructure/instructure-ui/commit/7a5124143f28e9470f52fb60b4bd660952e64cdd))
+- **ui-text-input:** removed deprecated `label` prop ([dc01d90](https://github.com/instructure/instructure-ui/commit/dc01d90d1857d9e61270c7996959420531bc99fe))
+- **ui-text-input:** removed deprecated `required` prop ([20cd5dd](https://github.com/instructure/instructure-ui/commit/20cd5dd8eb28243b2c8151420af3086eb7b1a35d))
+
+### BREAKING CHANGES
+
+- **ui-text-input:** Removed deprecated `icon` prop, use `renderAfterInput` instead.
+- **ui-text-input:** Removed deprecated `inline` prop, use `display` ('inline-block' or ‘block') instead.
+- **ui-text-input:** Removed deprecated `required` prop, use `isRequired` instead.
+- **ui-text-input:** Removed deprecated `label` prop, use `renderLabel` instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-text-input

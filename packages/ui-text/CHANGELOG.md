@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **ui-text:** remove color type `error` ([6d44017](https://github.com/instructure/instructure-ui/commit/6d44017dc3e0daa2d3c7e5135326aa06bc079f2e))
+
+### BREAKING CHANGES
+
+- **ui-text:** Removed `error` type for color, use `danger` instead
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-text

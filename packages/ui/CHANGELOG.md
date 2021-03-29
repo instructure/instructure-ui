@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **ui-metric,ui:** removed deprecated `MetricList` component ([d795851](https://github.com/instructure/instructure-ui/commit/d795851c05a87ae916649dc18c11bd042e31405c))
+- **ui-metric,ui:** removed deprecated `MetricListItem` component ([b8e52b8](https://github.com/instructure/instructure-ui/commit/b8e52b897368733e354a02b1da097070fda3faba))
+- **ui-progress,ui:** delete deprecated Progress component ([69a84d0](https://github.com/instructure/instructure-ui/commit/69a84d08f6d1347c3bd5fb4259879af3ed2e5d27))
+
+### Features
+
+- **ui-test-sandbox,ui:** delete ui-themeable package and usages ([60e4080](https://github.com/instructure/instructure-ui/commit/60e4080a68dd76b0d6462fa1b63e6a4f59c38f7d))
+
+### BREAKING CHANGES
+
+- **ui-test-sandbox,ui:** The whole `ui-themeable` package was deleted. It is superseeded by the `emotion` package.
+- **ui-metric,ui:** Removed deprecated `MetricList` component, use `MetricGroup` instead.
+- **ui-metric,ui:** Removed deprecated `MetricListItem` component, use `Metric` instead.
+- **ui-progress,ui:** Deleted deprecated Progress component, use ProgressBar or ProgressCircle instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui

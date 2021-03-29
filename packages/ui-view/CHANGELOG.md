@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **emotion,ui-themeable,ui-view:** move `getShorthandPropValue` from `ui-themeable` to emotion ([91fd876](https://github.com/instructure/instructure-ui/commit/91fd876068b535e159367d46115782156e6a159a))
+- **emotion,`ui-themeable`,ui-view:** move `makeThemeVars` util from `ui-themeable` to emotion ([f2291ba](https://github.com/instructure/instructure-ui/commit/f2291ba19ae680fe5202e2ea9508157950f14a38))
+- **emotion,`ui-themeable`,ui-view:** move `mirrorShorthand` utils to emotion ([c779407](https://github.com/instructure/instructure-ui/commit/c77940764c1ee2b99d6fe7a55a8fd6aaf2b07197))
+- **ui-view:** remove deprecated themeAdapter ([bbfb295](https://github.com/instructure/instructure-ui/commit/bbfb2950223a718a31eac4eb78bd95680e0981a5))
+- **ui-view:** removed deprecated `focused` prop ([3980814](https://github.com/instructure/instructure-ui/commit/3980814a1c2780249dd41a373721c22298895a30))
+- **ui-view:** removed deprecated `visualDebug` prop ([6d8e0bb](https://github.com/instructure/instructure-ui/commit/6d8e0bb55ef5a6ffa1d30b65879bcdc2ead99569))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable,ui-view:** Moved `mirrorShorthand`, `mirrorShorthandEdges`, `mirrorShorthandCorners` utils to from
+  `ui-themeable` to `emotion` package.
+- **emotion,ui-themeable,ui-view:** Moved `getShorthandPropValue` from `ui-themeable` to `emotion` package.
+- **emotion,ui-themeable,ui-view:** Moved `makeThemeVars` util from `ui-themeable` to `emotion` package.
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-view:** Removed themeAdapter for deprecated theme variables: 'borderColorDefault' is now
+  `borderColorPrimary`, 'borderColorInverse' is now `borderColorTransparent`, 'colorInverse' is now
+  `colorPrimaryInverse`, 'background' is now `backgroundPrimary`, 'backgroundLight' is now
+  `backgroundSecondary`, 'backgroundInverse' is now `backgroundPrimaryInverse`.
+- **ui-view:** Removed deprecated `visualDebug` prop, use `withVisualDebug` instead.
+- **ui-view:** Removed deprecated `focused` prop, use `withFocusOutline` instead.
+- **ui-position,ui-view:** The "box-sizing" and "z-index" css properties are now added as inline css on the Content element,
+  might break other rules added in class.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-view

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Features
+
+- **ui-color-utils:** add utility mehtod to convert a color string to a hexadecimal color string in the #AABBCC format ([20a3a69](https://github.com/instructure/instructure-ui/commit/20a3a6990469a427b4115090faccad67f9216830))
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-color-utils

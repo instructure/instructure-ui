@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
+
+### Code Refactoring
+
+- **Migrated the package and it's component(s) from using `ui-themeable` to using the new theming solution based on [emotion.js](https://emotion.sh/).**
+- **emotion,ui-themeable:** move ThemeablePropValues and ThemeablePropTypes util to emotion pack ([2d0ac1d](https://github.com/instructure/instructure-ui/commit/2d0ac1d3d4ae60802f639bee2545f9a8a32446b6))
+- **ui-img:** removed deprecated `blur` prop, use `withBlur` instead. ([3db9952](https://github.com/instructure/instructure-ui/commit/3db99525baff0bdfd6470191aa2937613cc874c0))
+- **ui-img:** removed deprecated `grayscale` prop ([5087021](https://github.com/instructure/instructure-ui/commit/50870218749c55ec5c85592d9fe3203d4fe324e5))
+- **ui-img:** removed deprecated `inline` prop ([43868ed](https://github.com/instructure/instructure-ui/commit/43868ed4748e26ff0017c003bfaeb615b09a4b21))
+
+### BREAKING CHANGES
+
+- **emotion,ui-themeable:** Moved `ThemeablePropValues` and `ThemeablePropTypes` utils from `ui-themeable`to `emotion` package.
+- **ui-img:** Removed deprecated `blur` prop, use `withBlur` instead.
+- **ui-img:** Removed deprecated `grayscale` prop, use `withGrayscale` instead.
+- **ui-img:** Removed deprecated `inline` prop, use `display` ('inline-block' or ‘block') instead.
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-img
