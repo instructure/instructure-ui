@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Button, IconButton } from '@instructure/ui-buttons'
@@ -39,19 +40,24 @@ import {
 } from '@instructure/ui-icons'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
-import { themeable } from '@instructure/ui-themeable'
+
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { ColorBand } from '../ColorBand'
 import { ContentWrap } from '../ContentWrap'
 import { Search } from '../Search'
 import { Heading } from '../Heading'
 
-import styles from './styles.css'
-import theme from './theme'
-
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Hero extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     name: PropTypes.string.isRequired,
     repository: PropTypes.string.isRequired,
     version: PropTypes.string.isRequired,
@@ -65,8 +71,16 @@ class Hero extends Component {
     docs: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { version, layout } = this.props
+    const { version, layout, styles } = this.props
 
     const corpLogo = (
       <SVGIcon viewBox="0 0 500 500">
@@ -271,6 +285,17 @@ class Hero extends Component {
             </Link>
           </List.Item>
         </List>
+        <Heading as="h3" level="h2" margin="none none medium">
+          Acknowledgements
+        </Heading>
+        <View as="p" margin="none none small">
+          <a href="https://www.netlify.com">
+            <img
+              src="https://www.netlify.com/img/global/badges/netlify-dark.svg"
+              alt="Deploys by Netlify"
+            />
+          </a>
+        </View>
       </View>
     )
 
@@ -287,21 +312,12 @@ class Hero extends Component {
               </Heading>
             </Flex.Item>
           </Flex>
-          <View as="p" margin="medium none small">
-            <Text weight="bold">
-              See what&apos;s in the latest release, or read our latest
-              newsletter.
-            </Text>
-          </View>
           <List isUnstyled margin="small none none">
             <List.Item>
-              <Link href="#v7-upgrade-guide">Version 7.0 Upgrade Guide</Link>
+              <Link href="#v8-upgrade-guide">Version 8.0 Upgrade Guide</Link>
             </List.Item>
             <List.Item>
               <Link href="#CHANGELOG">Change Log ({version})</Link>
-            </List.Item>
-            <List.Item>
-              <Link href="#Newsletter">Instructure UI Newsletter</Link>
             </List.Item>
           </List>
         </View>
@@ -309,7 +325,7 @@ class Hero extends Component {
           display="block"
           href="https://www.instructure.com/canvas/"
           isWithinText={false}
-          theme={{
+          themeOverride={{
             hoverTextDecorationOutsideText: 'none'
           }}
         >
@@ -338,13 +354,13 @@ class Hero extends Component {
           minHeight={layout === 'small' ? null : '100vh'}
           position="relative"
         >
-          <div className={styles.overlayLayout}>
+          <div css={styles.overlayLayout}>
             <Img
               src="https://instui-docs.s3.us-east-2.amazonaws.com/hero2.jpg"
               display="block"
               constrain="cover"
               overlay={{
-                color: this.theme.backgroundColor,
+                color: styles.backgroundColor,
                 opacity: 10,
                 blend: 'multiply'
               }}
@@ -353,7 +369,7 @@ class Hero extends Component {
           <View
             as="div"
             position="relative"
-            className={styles.contentLayout}
+            css={styles.contentLayout}
             minHeight={layout === 'small' ? null : '100vh'}
           >
             <View
@@ -395,7 +411,7 @@ class Hero extends Component {
                 </Flex.Item>
               </Flex>
             </View>
-            <View display="block" className={styles.content}>
+            <View display="block" css={styles.content}>
               <ContentWrap
                 padding={
                   layout === 'small' ? 'xx-large large' : 'x-large xx-large'
@@ -428,7 +444,7 @@ class Hero extends Component {
                   <Heading
                     as="h2"
                     level="h1"
-                    theme={{
+                    themeOverride={{
                       h1FontSize: bigScreen ? '4rem' : '3.25rem'
                     }}
                     color="primary-inverse"
@@ -471,11 +487,11 @@ class Hero extends Component {
                       withBorder={false}
                       focusColor="inverse"
                       color="success"
-                      href="#v7-upgrade-guide"
+                      href="#v8-upgrade-guide"
                       size={bigScreen ? 'large' : 'medium'}
                       margin="0 x-small x-small 0"
                     >
-                      7.0 Upgrade Guide
+                      8.0 Upgrade Guide
                     </Button>
                   </View>
                 </View>

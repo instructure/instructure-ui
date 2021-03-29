@@ -29,8 +29,6 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import { Badge } from '../index'
 import { BadgeLocator } from '../BadgeLocator'
 
-import styles from '../styles.css'
-
 describe('<Badge />', () => {
   it('should be accessible', async () => {
     await mount(
@@ -69,16 +67,18 @@ describe('<Badge />', () => {
   })
 
   it('should change postion based on the placement prop', async () => {
+    const countOffset = '5px'
     await mount(
-      <Badge count={3} placement="bottom start">
+      <Badge count={3} placement="bottom start" themeOverride={{ countOffset }}>
         <button type="button">Inbox</button>
       </Badge>
     )
 
-    const badge = await BadgeLocator.find()
+    const badgeWrapper = await BadgeLocator.find()
+    const badge = await badgeWrapper.find('[class$=-badge]')
 
-    expect(await badge.find(`.${styles['positioned--bottom']}`)).to.exist()
-    expect(await badge.find(`.${styles['positioned--start']}`)).to.exist()
+    expect(badge.getComputedStyle().bottom).to.equal(`-${countOffset}`)
+    expect(badge.getComputedStyle().left).to.equal(`-${countOffset}`)
   })
 
   it('should not render a wrapper for a standalone Badge', async () => {

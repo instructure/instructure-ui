@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
@@ -33,29 +33,35 @@ import {
   callRenderProp,
   safeCloneElement
 } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { uid } from '@instructure/uid'
 
 import { View } from '@instructure/ui-view'
+
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyles from './styles'
+import generateComponentTheme from './theme'
+
 import { Item } from './Item'
 import { Separator } from './Separator'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Options extends Component {
   static Item = Item
   static Separator = Separator
 
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Element type to render as
      */
@@ -83,6 +89,14 @@ class Options extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   _labelId = uid('Options-label')
 
   get childAs() {
@@ -94,23 +108,18 @@ class Options extends Component {
   }
 
   renderLabel() {
-    const { renderLabel } = this.props
+    const { renderLabel, styles } = this.props
     return (
-      <span
-        id={this._labelId}
-        role="presentation"
-        className={classnames({
-          [styles.label]: true
-        })}
-      >
+      <span id={this._labelId} role="presentation" css={styles.label}>
         {callRenderProp(renderLabel)}
       </span>
     )
   }
 
   renderSubList(children) {
+    const { styles } = this.props
     return (
-      <Item as={this.childAs} role="presentation" className={styles.label}>
+      <Item as={this.childAs} role="presentation" css={styles.label}>
         {children}
       </Item>
     )
@@ -136,15 +145,15 @@ class Options extends Component {
       Options
     )
 
-    const { as, role, elementRef, renderLabel } = this.props
+    const { as, role, elementRef, renderLabel, styles } = this.props
 
     return (
-      <div className={styles.root} role="presentation">
+      <div css={styles.options} role="presentation">
         {renderLabel && this.renderLabel()}
         <View
           {...passthroughProps}
           elementRef={elementRef}
-          className={styles.list}
+          css={styles.list}
           as={as}
           role={role}
           display="block"

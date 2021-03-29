@@ -22,44 +22,40 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { IconXSolid } from '@instructure/ui-icons'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import {
-  getInteraction,
-  passthroughProps,
-  deprecated
-} from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
+import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
+
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { BaseButton } from '../BaseButton'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  children: 'screenReaderLabel',
-  buttonRef: 'elementRef',
-  variant: 'color'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class CloseButton extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * An accessible label for the `CloseButton` (required)
      */
-    screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]), // CloseButton could previously accept node children, loosening this type for backwards compatibility
+    screenReaderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+      .isRequired,
     /**
      * Specifies the color for the `CloseButton`.
      */
@@ -116,28 +112,13 @@ class CloseButton extends Component {
     /**
      * Specifies the tabindex of the `CloseButton`.
      */
-    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    /**
-     * __Deprecated - use `screenReaderLabel` instead__
-     */
-    children: PropTypes.node,
-    /**
-     * __Deprecated - use `elementRef` instead__
-     */
-    buttonRef: PropTypes.func,
-    /**
-     * __Deprecated - use `color` instead__
-     */
-    variant: PropTypes.oneOf(['icon', 'icon-inverse'])
+    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   }
 
   static defaultProps = {
     screenReaderLabel: undefined,
-    children: undefined,
     onClick: (event) => {},
     elementRef: undefined,
-    buttonRef: undefined,
-    variant: undefined,
     color: undefined,
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -155,17 +136,11 @@ class CloseButton extends Component {
   }
 
   componentDidMount() {
-    error(
-      this.props.screenReaderLabel || this.props.children,
-      `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
-    )
+    this.props.makeStyles()
   }
 
   componentDidUpdate() {
-    error(
-      this.props.screenReaderLabel || this.props.children,
-      `[CloseButton] The \`screenReaderLabel\` prop is required but was not provided.`
-    )
+    this.props.makeStyles()
   }
 
   get interaction() {
@@ -173,20 +148,15 @@ class CloseButton extends Component {
   }
 
   get color() {
-    const { color, variant } = this.props
+    const { color } = this.props
 
-    if (variant === 'icon-inverse' || color === 'primary-inverse')
-      return 'primary-inverse'
-
-    return 'secondary'
+    return color === 'primary' ? 'secondary' : color
   }
 
   render() {
     const {
-      children,
       screenReaderLabel,
       elementRef,
-      buttonRef,
       size,
       onClick,
       margin,
@@ -197,21 +167,15 @@ class CloseButton extends Component {
       href,
       cursor,
       tabIndex,
+      styles,
       ...props
     } = this.props
 
     return (
-      <span
-        {...passthroughProps(props)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`placement--${placement}`]]: placement,
-          [styles[`offset--${offset}`]]: offset
-        })}
-      >
+      <span {...passthroughProps(props)} css={styles.closeButton}>
         <BaseButton
           renderIcon={IconXSolid}
-          elementRef={elementRef || buttonRef}
+          elementRef={elementRef}
           interaction={this.interaction}
           type={type}
           color={this.color}
@@ -225,9 +189,7 @@ class CloseButton extends Component {
           cursor={cursor}
           tabIndex={tabIndex}
         >
-          <ScreenReaderContent>
-            {screenReaderLabel || children}
-          </ScreenReaderContent>
+          <ScreenReaderContent>{screenReaderLabel}</ScreenReaderContent>
         </BaseButton>
       </span>
     )

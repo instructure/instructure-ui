@@ -22,8 +22,19 @@
  * SOFTWARE.
  */
 
-export default function ({ colors }) {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const componentVariables = {
     githubCornerColor: '#333'
   }
+
+  return {
+    ...componentVariables
+  }
 }
+
+export default generateComponentTheme

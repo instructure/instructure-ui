@@ -32,20 +32,20 @@ module.exports = ({
   ignore = [],
   parser = 'babylon',
   parserConfig,
-  isMetaComponentPackageMigration = false
+  isMetaComponentPackageMigration = false,
+  printToStdOut = false,
+  dryRun = false
 } = {}) => {
   info(`Running ${codemodPath}...`)
   info(`Source path: ${sourcePath}`)
-  info(`Config path: ${configPath}`)
+  if (configPath) info(`Config path: ${configPath}`)
 
-  const codemodCommand = [
-    '-t',
-    codemodPath,
-    sourcePath,
-    `--config=${configPath}`,
-    `--extensions=js,jsx`,
-    `--parser=${parser}`
-  ]
+  const codemodCommand = ['-t', codemodPath, sourcePath]
+  if (configPath) {
+    codemodCommand.push(`--config=${configPath}`)
+  }
+  codemodCommand.push(`--extensions=js,jsx`)
+  codemodCommand.push(`--parser=${parser}`)
 
   if (isMetaComponentPackageMigration) {
     codemodCommand.push('--isMetaComponentPackageMigration')
@@ -53,6 +53,12 @@ module.exports = ({
 
   if (parserConfig) {
     codemodCommand.push(`--parser-config=${parserConfig}`)
+  }
+  if (printToStdOut) {
+    codemodCommand.push(`-p`)
+  }
+  if (dryRun) {
+    codemodCommand.push(`-d`)
   }
 
   const defaultIgnores = [

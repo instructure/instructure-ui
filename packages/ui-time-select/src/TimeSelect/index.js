@@ -25,10 +25,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { I18nPropTypes, DateTime, Locale } from '@instructure/ui-i18n'
+import {
+  I18nPropTypes,
+  ApplyLocaleContext,
+  DateTime,
+  Locale
+} from '@instructure/ui-i18n'
 import { controllable } from '@instructure/ui-prop-types'
 import {
-  deprecated,
   getInteraction,
   passthroughProps,
   callRenderProp
@@ -45,9 +49,6 @@ category: components
 ---
 **/
 
-@deprecated('8.0.0', {
-  label: 'renderLabel'
-})
 @testable()
 class TimeSelect extends Component {
   static propTypes = {
@@ -204,11 +205,7 @@ class TimeSelect extends Component {
      * The web browser's timezone will be used if no value is set via a component property or a context
      * property.
      */
-    timezone: PropTypes.string,
-    /**
-     * __Deprecated - use `renderLabel`__
-     */
-    label: PropTypes.node
+    timezone: PropTypes.string
     /* eslint-enable react/require-default-props */
   }
 
@@ -241,10 +238,7 @@ class TimeSelect extends Component {
     renderAfterInput: null
   }
 
-  static contextTypes = {
-    locale: PropTypes.string,
-    timezone: PropTypes.string
-  }
+  static contextType = ApplyLocaleContext
 
   constructor(props) {
     super(props)
@@ -579,7 +573,6 @@ class TimeSelect extends Component {
       defaultValue,
       placeholder,
       renderLabel,
-      label,
       inputRef,
       id,
       listRef,
@@ -605,7 +598,7 @@ class TimeSelect extends Component {
 
     return (
       <Select
-        renderLabel={renderLabel || label}
+        renderLabel={renderLabel}
         inputValue={inputValue}
         interaction={this.interaction}
         placeholder={placeholder}

@@ -58,8 +58,7 @@ describe('<Rating />', async () => {
     )
 
     const rating = await RatingLocator.find()
-    const filledIcons = await rating.findAllFilledIcons()
-
+    const filledIcons = await rating.findAll('svg[name="IconStar"]')
     expect(filledIcons.length).to.equal(4)
   })
 
@@ -107,7 +106,13 @@ describe('<Rating />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter((prop) => prop !== 'theme' && prop !== 'children')
+      .filter(
+        (prop) =>
+          prop !== 'theme' &&
+          prop !== 'children' &&
+          prop !== 'makeStyles' &&
+          prop !== 'styles'
+      )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {

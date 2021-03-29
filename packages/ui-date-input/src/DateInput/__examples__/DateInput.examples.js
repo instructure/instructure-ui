@@ -33,6 +33,7 @@ const generateDays = () => {
     days.push(
       <Calendar.Day
         date={date.toISOString()}
+        label={date.toISOString()}
         renderLabel={date.toISOString()}
         isOutsideMonth={date.getMonth() !== 7}
         id={date.toISOString()}
@@ -47,7 +48,6 @@ const generateDays = () => {
 }
 
 export default {
-  excludeProps: ['label'],
   propValues: {
     placement: [
       undefined, // eslint-disable-line no-undefined
@@ -73,7 +73,6 @@ export default {
   getExampleProps: (props) => {
     return props.isShowingCalendar
       ? {
-          dir: props.dir,
           as: 'div',
           width: '100%',
           height: '40rem',

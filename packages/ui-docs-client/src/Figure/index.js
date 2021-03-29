@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps, ComponentIdentifier } from '@instructure/ui-react-utils'
 import { Children } from '@instructure/ui-prop-types'
 import {
@@ -38,18 +37,24 @@ import { List } from '@instructure/ui-list'
 import { Responsive } from '@instructure/ui-responsive'
 import { View } from '@instructure/ui-view'
 
-import { Heading } from '../Heading'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
+import { Heading } from '../Heading'
 
 class FigureItem extends ComponentIdentifier {
   static displayName = 'FigureItem'
 }
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Figure extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     title: PropTypes.node,
     caption: PropTypes.node,
     recommendation: PropTypes.oneOf(['yes', 'no', 'a11y', 'none']),
@@ -67,6 +72,14 @@ class Figure extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   static Item = FigureItem
 
   get recommendationIcon() {
@@ -82,34 +95,22 @@ class Figure extends Component {
   }
 
   renderFigure(props) {
+    const { styles } = this.props
     const mergedProps = { ...this.props, ...props }
-    const {
-      title,
-      caption,
-      recommendation,
-      iconTitle,
-      float,
-      children
-    } = mergedProps
-
-    const classes = {
-      [styles.root]: true,
-      [styles[`float--${float}`]]: float !== 'none',
-      [styles[`recommendation--${recommendation}`]]: recommendation !== 'none'
-    }
+    const { title, caption, recommendation, iconTitle, children } = mergedProps
 
     return (
       <View
         {...omitProps(mergedProps, Figure.propTypes, ['padding'])}
         as="figure"
-        className={classnames(classes)}
+        css={styles.figure}
       >
         {caption != null ? (
-          <figcaption className={styles.caption}>{caption}</figcaption>
+          <figcaption css={styles.caption}>{caption}</figcaption>
         ) : null}
-        <span className={styles.content}>
+        <span css={styles.content}>
           {recommendation !== 'none' ? (
-            <span className={styles.iconContainer}>
+            <span css={styles.iconContainer}>
               <this.recommendationIcon
                 title={iconTitle}
                 size="x-small"

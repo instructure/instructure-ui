@@ -78,12 +78,7 @@ export {
   MenuItemGroup,
   MenuItemSeparator
 } from '@instructure/ui-menu'
-export {
-  MetricGroup,
-  Metric,
-  MetricsList,
-  MetricsListItem
-} from '@instructure/ui-metric'
+export { MetricGroup, Metric } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
 export { Navigation, AppNav } from '@instructure/ui-navigation'
@@ -96,7 +91,7 @@ export { Pill } from '@instructure/ui-pill'
 export { Popover } from '@instructure/ui-popover'
 export { Portal } from '@instructure/ui-portal'
 export { Position } from '@instructure/ui-position'
-export { Progress, ProgressBar, ProgressCircle } from '@instructure/ui-progress'
+export { ProgressBar, ProgressCircle } from '@instructure/ui-progress'
 export { RadioInput, RadioInputGroup } from '@instructure/ui-radio-input'
 export { RangeInput } from '@instructure/ui-range-input'
 export { Rating } from '@instructure/ui-rating'
@@ -111,7 +106,6 @@ export { Tag } from '@instructure/ui-tag'
 export { Text } from '@instructure/ui-text'
 export { TextArea } from '@instructure/ui-text-area'
 export { TextInput } from '@instructure/ui-text-input'
-export { ApplyTheme, themeable } from '@instructure/ui-themeable'
 export { TimeSelect } from '@instructure/ui-time-select'
 export { ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { Tooltip } from '@instructure/ui-tooltip'

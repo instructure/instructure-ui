@@ -3,6 +3,20 @@ const merge = require('webpack-merge')
 
 module.exports = ({ config, mode }) => {
   const baseConfig = require('@instructure/ui-webpack-config')
+
+  // Storybook does not like thread-loader, see
+  // https://github.com/storybookjs/storybook/issues/12864
+  const rules = baseConfig.module.rules
+  for (const rule of rules) {
+    if (rule.use) {
+      for (let i = 0; i < rule.use.length; i++) {
+        if (rule.use[i].loader === 'thread-loader') {
+          rule.use.splice(i, 1)
+        }
+      }
+    }
+  }
+
   config = merge(config, baseConfig)
 
   // need to override this instead of merge for these...

@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Flex } from '@instructure/ui-flex'
@@ -37,26 +38,30 @@ import {
 } from '@instructure/ui-a11y-content'
 import { Modal } from '@instructure/ui-modal'
 import { CodeEditor } from '@instructure/ui-code-editor'
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 import { IconXSolid } from '@instructure/ui-icons'
 import { IconButton } from '@instructure/ui-buttons'
 
 import { Glyph } from '../Glyph'
 import { Heading } from '../Heading'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Icons extends Component {
   static propTypes = {
     selectedFormat: PropTypes.string.isRequired,
     formats: PropTypes.object.isRequired,
-    packageName: PropTypes.string.isRequired
+    packageName: PropTypes.string.isRequired,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
-  constructor(props, context) {
-    super(props, context)
+  constructor(props) {
+    super(props)
 
     this.state = {
       query: '',
@@ -65,6 +70,14 @@ class Icons extends Component {
       glyph: null,
       rtl: false
     }
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   get selectedFormatKey() {
@@ -119,9 +132,9 @@ class Icons extends Component {
   }
 
   renderHeader() {
-    const { formats } = this.props
+    const { formats, styles } = this.props
     return (
-      <div className={styles.header}>
+      <div css={styles.header}>
         <FormFieldGroup
           layout="columns"
           colSpacing="small"
@@ -200,17 +213,17 @@ class MyIcon extends React.Component {
     return <i className="${glyph.classes.join(' ')}" aria-hidden="true" />
   }
 }`
-    } else if (glyph.displayName) {
+    } else if (glyph.name) {
       example = `\
 /*** ES Modules (with tree shaking) ***/
-import { ${glyph.displayName} } from '${packageName}'
+import { ${glyph.name} } from '${packageName}'
 
 /*** ES Modules (without tree shaking) ***/
-import { ${glyph.displayName} } from '${requirePath}/${glyph.displayName}'
+import { ${glyph.name} } from '${requirePath}/${glyph.name}'
 
 class MyIcon extends React.Component {
   render() {
-    return <${glyph.displayName} />
+    return <${glyph.name} />
   }
 }`
     } else {
@@ -228,7 +241,7 @@ class MyIcon extends React.Component {
           language="javascript"
           readOnly
         />
-        {glyph.displayName && (
+        {glyph.name && (
           <p>
             See the <Link href="#SVGIcon">SVGIcon</Link> component for props and
             examples.
@@ -241,14 +254,13 @@ class MyIcon extends React.Component {
   renderGlyph(name, variants) {
     const firstVariant = variants[Object.keys(variants)[0]]
     return firstVariant.deprecated ? null : (
-      <div className={styles.glyph} key={name}>
-        <Glyph
-          name={name}
-          variants={variants}
-          onClick={this.handleVariantClick}
-          rtl={this.state.rtl}
-        />
-      </div>
+      <Glyph
+        key={name}
+        name={name}
+        variants={variants}
+        onClick={this.handleVariantClick}
+        rtl={this.state.rtl}
+      />
     )
   }
 
@@ -256,9 +268,9 @@ class MyIcon extends React.Component {
     const { name, variant, glyph } = this.state
 
     return (
-      <div className={styles.root}>
+      <div>
         {this.renderHeader()}
-        <div className={styles.glyphs}>
+        <div css={this.props.styles.glyphs}>
           {Object.keys(this.selectedGlyphs)
             .filter((name) =>
               new RegExp(

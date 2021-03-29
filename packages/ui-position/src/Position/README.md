@@ -5,12 +5,13 @@ describes: Position
 A component that positions content with respect to a designated target.
 
 ### Important Upgrade Notes
+
 Codemods are available to automatically update any props that have changed. However, there are some breaking changes that will need to be addressed manually. These changes and are described below.
 
 - `Position.Target` and `Position.Content` are no longer in use. The target is now defined via the `renderTarget` prop and the children of a Position will be rendered as the positioned content.
 
-
 ### Internationalization
+
 `Position` placement can be internationalized for right to left languages. The
 following examples are configured utilizing the [ApplyTextDirection](#ApplyTextDirection)
 component in conjunction with the [mirrorHorizontalPlacement](#mirrorPlacement)
@@ -230,7 +231,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-`over` prop with `stretch` placement.
+`shouldPositionOverTarget` prop with `stretch` placement.
 
 ```js
 ---

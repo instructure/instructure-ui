@@ -22,25 +22,29 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { IconCheckSolid, IconXSolid } from '@instructure/ui-icons'
-import { themeable } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
-import { themeAdapter } from './themeAdapter'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 parent: Checkbox
 ---
 **/
-@themeable(theme, styles, themeAdapter)
+@withStyle(generateStyle, generateComponentTheme)
 class ToggleFacade extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.node.isRequired,
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -59,55 +63,40 @@ class ToggleFacade extends Component {
     labelPlacement: 'end'
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   renderIcon() {
-    if (this.props.checked) {
-      return <IconCheckSolid className={styles.iconSVG} />
+    const { styles, checked } = this.props
+
+    if (checked) {
+      return <IconCheckSolid css={styles.iconSVG} />
     } else {
-      return <IconXSolid className={styles.iconSVG} />
+      return <IconXSolid css={styles.iconSVG} />
     }
   }
 
   renderLabel() {
-    const { children, labelPlacement } = this.props
+    const { children, styles } = this.props
 
-    const classes = {
-      [styles.label]: true,
-      [styles.top]: labelPlacement === 'top',
-      [styles.start]: labelPlacement === 'start',
-      [styles.end]: labelPlacement === 'end'
-    }
-
-    return <span className={classnames(classes)}>{children}</span>
+    return <span css={styles.label}>{children}</span>
   }
 
   render() {
-    const { size, checked, disabled, focused, labelPlacement } = this.props
-
-    const classes = {
-      [styles.facade]: true,
-      [styles.checked]: checked,
-      [styles.disabled]: disabled,
-      [styles.focused]: focused,
-      [styles.top]: labelPlacement === 'top',
-      [styles.start]: labelPlacement === 'start',
-      [styles.end]: labelPlacement === 'end',
-      [styles[size]]: true
-    }
-
-    let rootClasses = {
-      [styles.root]: true
-    }
-    if (labelPlacement === 'top') {
-      rootClasses[styles.top] = true
-    }
+    const { labelPlacement, styles } = this.props
 
     return (
-      <span className={classnames(rootClasses)}>
+      <span css={styles.toggleFacade}>
         {(labelPlacement === 'top' || labelPlacement === 'start') &&
           this.renderLabel()}
-        <span className={classnames(classes)} aria-hidden="true">
-          <span className={styles.icon}>
-            <span className={styles.iconToggle}>{this.renderIcon()}</span>
+        <span css={styles.facade} aria-hidden="true">
+          <span css={styles.icon}>
+            <span css={styles.iconToggle}>{this.renderIcon()}</span>
           </span>
         </span>
         {labelPlacement === 'end' && this.renderLabel()}

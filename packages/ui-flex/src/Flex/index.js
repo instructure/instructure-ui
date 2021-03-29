@@ -22,24 +22,23 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   safeCloneElement,
   passthroughProps,
-  deprecated,
   matchComponentTypes,
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import { Item } from './Item'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,13 +46,17 @@ category: components
 ---
 @module Flex
 **/
-@deprecated('8.0.0', {
-  inline: 'display',
-  wrapItems: 'wrap',
-  visualDeug: 'withVisualDebug'
-})
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Flex extends Component {
+  constructor(props) {
+    super(props)
+    props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
+
   static Item = Item
 
   static propTypes = {
@@ -131,20 +134,11 @@ class Flex extends Component {
      * layout easier
      */
     withVisualDebug: PropTypes.bool,
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use 'display'__
-     */
-    inline: PropTypes.bool,
-    /**
-     * __Deprecated - use 'wrap'__
-     */
-    wrapItems: PropTypes.bool,
-    /**
-     * __Deprecated - use 'withVisualDebug'__
-     */
-    visualDebug: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -166,20 +160,17 @@ class Flex extends Component {
 
   renderChildren(children) {
     return Children.map(children, (child) => {
-      if (child) {
-        if (matchComponentTypes(child, ['Item'])) {
-          return safeCloneElement(child, {
-            withVisualDebug:
-              this.props.withVisualDebug || this.props.visualDebug,
-            ...child.props /* child visualDebug prop should override parent */,
-            direction: this.props.direction.replace(/-reverse/, '')
-          })
-        } else {
-          return child
-        }
-      } else {
+      if (!child) {
         return null
       }
+
+      return matchComponentTypes(child, ['Item'])
+        ? safeCloneElement(child, {
+            withVisualDebug: this.props.withVisualDebug,
+            ...child.props /* child withVisualDebug prop should override parent */,
+            direction: this.props.direction.replace(/-reverse/, '')
+          })
+        : child
     })
   }
 
@@ -187,55 +178,32 @@ class Flex extends Component {
     const {
       as,
       elementRef,
-      direction,
+      withVisualDebug,
       height,
       display,
       margin,
       padding,
-      justifyItems,
       textAlign,
-      withVisualDebug,
       width,
-      wrap,
-      visualDebug,
-      wrapItems,
-      inline
+      styles
     } = this.props
 
     const children = callRenderProp(this.props.children)
 
-    // When flex direction is row, 'center' is the most useful default because it
-    // vertically aligns Items. For column direction, though, we want 'stretch'.
-    const alignItems =
-      this.props.alignItems ||
-      (direction === 'column' || direction === 'column-reverse'
-        ? 'stretch'
-        : 'center')
-
-    const backwardsDisplay = inline ? 'inline-flex' : null
-
-    const classes = {
-      [styles.root]: true,
-      [styles[`justifyItems--${justifyItems}`]]: true,
-      [styles[`alignItems--${alignItems}`]]: true,
-      [styles[`wrap--${wrap}`]]: wrap !== 'no-wrap',
-      [styles.wrapItems]: wrapItems
-    }
-
-    if (children && React.Children.count(children) > 0) {
+    if (children && Children.count(children) > 0) {
       return (
         <View
           {...passthroughProps(this.props)}
-          className={classnames(classes, styles[direction])}
+          css={styles.flex}
           elementRef={elementRef}
           as={as}
-          display={backwardsDisplay || display}
+          display={display}
           width={width}
           height={height}
           margin={margin}
           padding={padding}
           textAlign={textAlign}
-          withVisualDebug={withVisualDebug || visualDebug}
+          withVisualDebug={withVisualDebug}
         >
           {this.renderChildren(children)}
         </View>

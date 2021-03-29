@@ -22,4 +22,3 @@
  * SOFTWARE.
  */
 export { Byline } from './Byline'
-export { Media } from './Media'

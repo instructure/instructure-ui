@@ -29,7 +29,8 @@
     "@instructure/ui-test-utils": "^7.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
+    "@instructure/emotion": "^7.5.0",
     "@instructure/ui-a11y-content": "^7.5.0",
     "@instructure/ui-a11y-utils": "^7.5.0",
     "@instructure/ui-buttons": "^7.5.0",
@@ -39,7 +40,6 @@
     "@instructure/ui-prop-types": "^7.5.0",
     "@instructure/ui-react-utils": "^7.5.0",
     "@instructure/ui-testable": "^7.5.0",
-    "@instructure/ui-themeable": "^7.5.0",
     "@instructure/ui-tooltip": "^7.5.0",
     "@instructure/ui-utils": "^7.5.0",
     "@instructure/ui-view": "^7.5.0",

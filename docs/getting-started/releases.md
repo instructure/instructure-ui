@@ -15,6 +15,10 @@ Every commit that has functional changes to the `master` branch constitutes as a
 - Wait for the pull request to be reviewed and watch any Github notifications about issues/comments.
 - Run `yarn bump` to increase the version automatically based on the commits.
 
+  - If the code to be merged contains a _breaking change_, it will result in a major version increase.
+  - If the change is _new functionality_, it will result in a minor version increase.
+  - _Bugfixes, performance changes and pure refactorings_ will result in a patch release.
+
 - If the code to be merged contains a _breaking change_, it will result in a major version increase.
 
 - If the change is _new functionality_, it will result in a minor version increase.

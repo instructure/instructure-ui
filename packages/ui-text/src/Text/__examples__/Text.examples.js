@@ -23,9 +23,9 @@
  */
 
 export default {
-  sectionProp: 'size',
+  sectionProp: 'weight',
   maxExamplesPerPage: 50,
-  maxExamples: 2500,
+  maxExamples: 1000,
   getComponentProps: (props) => {
     return {
       children: ['x-small', 'small', 'medium', 'large'].includes(props.size)
@@ -35,20 +35,31 @@ export default {
   },
   getExampleProps: (props) => {
     return {
-      background: props?.color?.includes('inverse') ? 'inverse' : 'default',
+      background: props?.color?.includes('inverse')
+        ? 'primary-inverse'
+        : 'primary',
       maxWidth: '25rem'
     }
   },
   filter: (props) => {
     return (
-      (props.size !== 'medium' &&
-        (props.weight !== 'normal' ||
-          props.fontStyle !== 'normal' ||
-          props.lineHeight !== 'default' ||
+      // Only generate a 1 variation for non-'primary' color
+      (props.color !== 'primary' &&
+        (props.fontStyle !== 'normal' ||
           props.letterSpacing !== 'normal' ||
+          props.lineHeight !== 'default' ||
+          props.size !== 'medium' ||
           props.transform !== 'none' ||
-          props.color !== 'primary')) ||
-      props.size === 'x-small'
+          props.weight !== 'normal' ||
+          props.wrap !== 'normal')) ||
+      // Only generate a 1 variation for non-'medium' size
+      (props.size !== 'medium' &&
+        (props.fontStyle !== 'normal' ||
+          props.letterSpacing !== 'normal' ||
+          props.lineHeight !== 'default' ||
+          props.transform !== 'none' ||
+          props.weight !== 'normal' ||
+          props.wrap !== 'normal'))
     )
   }
 }

@@ -21,18 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { ThemeablePropValues } from '@instructure/ui-themeable'
+import { ThemeablePropValues } from '@instructure/emotion'
 
 const { SHADOW_TYPES, BORDER_WIDTHS, BORDER_RADII } = ThemeablePropValues
 
 export default {
   maxExamplesPerPage: 50,
-  sectionProp: 'background',
+  maxExamples: 500,
+  sectionProp: 'textAlign',
   propValues: {
     shadow: [undefined, ...Object.values(SHADOW_TYPES)],
     borderWidth: [...Object.values(BORDER_WIDTHS)],
     borderRadius: [...Object.values(BORDER_RADII)],
-    position: ['relative', 'static']
+    position: ['relative', 'static'],
+    dir: ['ltr']
   },
   getComponentProps: (props) => {
     return {
@@ -51,27 +53,37 @@ export default {
     'padding',
     'shouldAnimateFocus',
     'display',
-    'withVisualDebug',
     'focusColor',
     'focusPosition',
     'borderColor',
     'overflowX',
-    'overflowY',
-    'visualDebug',
-    'focused'
+    'overflowY'
   ],
   filter: (props) => {
-    const backgroundsToIgnore = ['default', 'light', 'inverse']
-
     return (
       // Border radius and border width list 0 in addition to none in their object values
       // so we filter those here as they are redundant
-      props.borderRadius === 'none' ||
-      props.borderWidth === 'none' ||
-      props.background === 'transparent' ||
-      (props.focusPosition === 'inset' && !props.withFocusOutline) ||
       (props.withFocusOutline && props.position !== 'relative') ||
-      backgroundsToIgnore.includes(props.background)
+      // Only generate a 1 variation for withVisualDebug
+      (props.withVisualDebug &&
+        (props.background !== 'transparent' ||
+          props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
+          props.textAlign !== 'center')) ||
+      // Only generate a 1 variation for non-'transparent' background
+      (props.background !== 'transparent' &&
+        (props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
+          props.textAlign !== 'center')) ||
+      // Only generate a 1 variation for non-'0' borderWidth
+      (props.borderWidth !== '0' &&
+        (props.background !== 'transparent' ||
+          props.borderRadius !== '0' ||
+          props.position !== 'static' ||
+          props.shadow !== 'none' ||
+          props.textAlign !== 'center'))
     )
   }
 }

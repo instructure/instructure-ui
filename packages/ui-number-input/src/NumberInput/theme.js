@@ -22,56 +22,64 @@
  * SOFTWARE.
  */
 
-export default function generator({
-  colors,
-  typography,
-  borders,
-  spacing,
-  forms
-}) {
-  return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, borders, typography, forms, key: themeName } = theme
 
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    borderColor: colors.borderMedium,
-    borderRadius: borders.radiusMedium,
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark'],
+      arrowsColor: theme['ic-brand-font-color-dark'],
+      focusBorderColor: theme['ic-brand-primary'],
+      focusOutlineColor: theme['ic-brand-primary']
+    }
+  }
 
-    color: colors.textDarkest,
-    background: colors.backgroundLightest,
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
 
-    padding: `0 ${spacing.small}`,
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style,
+    borderColor: colors?.borderMedium,
+    borderRadius: borders?.radiusMedium,
+
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+
+    padding: `0 ${spacing?.small}`,
 
     arrowsContainerWidth: '2rem',
-    arrowsColor: colors.textDarkest,
-    arrowsBackgroundColor: colors.backgroundLight,
-    arrowsHoverBackgroundColor: colors.backgroundMedium,
-    arrowsBorderColor: colors.borderMedium,
-    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors.borderMedium}`,
+    arrowsColor: colors?.textDarkest,
+    arrowsBackgroundColor: colors?.backgroundLight,
+    arrowsHoverBackgroundColor: colors?.backgroundMedium,
+    arrowsBorderColor: colors?.borderMedium,
+    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors?.borderMedium}`,
 
-    focusOutlineWidth: borders.widthMedium,
-    focusOutlineStyle: borders.style,
-    focusOutlineColor: colors.borderBrand,
+    focusOutlineWidth: borders?.widthMedium,
+    focusOutlineStyle: borders?.style,
+    focusOutlineColor: colors?.borderBrand,
 
-    errorBorderColor: colors.borderDanger,
-    errorOutlineColor: colors.borderDanger,
+    errorBorderColor: colors?.borderDanger,
+    errorOutlineColor: colors?.borderDanger,
 
-    placeholderColor: colors.textDark,
+    placeholderColor: colors?.textDark,
 
-    mediumFontSize: typography.fontSizeMedium,
-    mediumHeight: forms.inputHeightMedium,
+    mediumFontSize: typography?.fontSizeMedium,
+    mediumHeight: forms?.inputHeightMedium,
 
-    largeFontSize: typography.fontSizeLarge,
-    largeHeight: forms.inputHeightLarge
+    largeFontSize: typography?.fontSizeLarge,
+    largeHeight: forms?.inputHeightLarge
   }
-}
 
-generator.canvas = function (variables) {
   return {
-    color: variables['ic-brand-font-color-dark'],
-    arrowsColor: variables['ic-brand-font-color-dark'],
-    focusBorderColor: variables['ic-brand-primary'],
-    focusOutlineColor: variables['ic-brand-primary']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

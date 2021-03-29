@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -30,32 +31,31 @@ import {
   omitProps,
   ensureSingleChild,
   passthroughProps,
-  callRenderProp,
-  deprecated
+  callRenderProp
 } from '@instructure/ui-react-utils'
 import { PositionPropTypes } from '@instructure/ui-position'
 import { uid } from '@instructure/uid'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
 import { element } from '@instructure/ui-prop-types'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  tip: 'renderTip',
-  variant: 'color'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Tooltip extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * @param {Object} renderProps
      * @param {Boolean} renderProps.focused - Is the Tooltip trigger focused?
@@ -65,7 +65,7 @@ class Tooltip extends Component {
     /**
      * The content to render in the tooltip
      */
-    renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    renderTip: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
      * Whether or not the tooltip content is shown, when controlled
      */
@@ -128,22 +128,10 @@ class Tooltip extends Component {
      * Callback fired when content is hidden. When controlled, this callback is
      * fired when the tooltip expects to be hidden
      */
-    onHideContent: PropTypes.func,
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `renderTip`__
-     */
-    tip: PropTypes.node,
-    /**
-     * __Deprecated - use `color`__
-     */
-    variant: PropTypes.oneOf(['default', 'inverse'])
-    /* eslint-enable react/require-default-props */
+    onHideContent: PropTypes.func
   }
 
   static defaultProps = {
-    renderTip: undefined,
     isShowingContent: undefined,
     defaultIsShowingContent: false,
     on: undefined,
@@ -160,6 +148,14 @@ class Tooltip extends Component {
 
   _id = uid('Tooltip')
   state = { hasFocus: false }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
 
   handleFocus = (event) => {
     this.setState({ hasFocus: true })
@@ -205,6 +201,7 @@ class Tooltip extends Component {
       isShowingContent,
       defaultIsShowingContent,
       on,
+      color,
       placement,
       mountNode,
       constrain,
@@ -213,17 +210,9 @@ class Tooltip extends Component {
       positionTarget,
       onShowContent,
       onHideContent,
-      tip,
-      variant,
+      styles,
       ...rest
     } = this.props
-
-    let color = this.props.variant
-    if (color) {
-      color = color === 'default' ? 'primary-inverse' : 'primary'
-    } else {
-      color = this.props.color
-    }
 
     return (
       <Popover
@@ -247,8 +236,8 @@ class Tooltip extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        <span id={this._id} className={styles.root} role="tooltip">
-          {renderTip ? callRenderProp(renderTip) : tip}
+        <span id={this._id} css={styles.tooltip} role="tooltip">
+          {callRenderProp(renderTip)}
         </span>
       </Popover>
     )

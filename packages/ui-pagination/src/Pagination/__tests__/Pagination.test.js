@@ -413,7 +413,11 @@ describe('<Pagination />', async () => {
       Object.keys(View.propTypes)
         .filter(
           (prop) =>
-            prop !== 'theme' && prop !== 'children' && prop !== 'elementRef'
+            prop !== 'theme' &&
+            prop !== 'children' &&
+            prop !== 'elementRef' &&
+            prop !== 'makeStyles' &&
+            prop !== 'styles'
         )
         .forEach((prop) => {
           if (Object.keys(allowedProps).indexOf(prop) < 0) {

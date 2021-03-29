@@ -22,24 +22,20 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-
+import { withStyle, jsx } from '@instructure/emotion'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { Children } from '@instructure/ui-prop-types'
-// remove when Edge sorts out styles-on-pseudo-elements issues:
-// https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/
-import { isEdge } from '@instructure/ui-utils'
 
 import { TreeButton } from '../TreeButton'
 import { TreeNode } from '../TreeNode'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyles from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,10 +43,14 @@ parent: TreeBrowser
 ---
 **/
 
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class TreeCollection extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     descriptor: PropTypes.string,
@@ -113,6 +113,13 @@ class TreeCollection extends Component {
     super(props)
 
     this.state = { focused: '' }
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
 
   handleFocus = (e, item) => {
@@ -178,14 +185,15 @@ class TreeCollection extends Component {
       name,
       id,
       renderBeforeItems,
-      renderAfterItems
+      renderAfterItems,
+      styles
     } = this.props
 
     let position = 1
     return (
       expanded &&
       this.childCount > 0 && (
-        <ul aria-label={name} className={styles.list} role="group">
+        <ul aria-label={name} css={styles.list} role="group">
           {renderBeforeItems &&
             this.renderCollectionChildren(
               id,
@@ -212,7 +220,7 @@ class TreeCollection extends Component {
   }
 
   renderCollectionChildren(collectionId, child, position, keyword) {
-    const { selection, onKeyDown, getItemProps, level } = this.props
+    const { selection, onKeyDown, getItemProps, level, styles } = this.props
     const key = `${collectionId}_${keyword}`
     const ariaSelected = {}
     if (selection) {
@@ -231,7 +239,7 @@ class TreeCollection extends Component {
       <li
         id={key}
         role="treeitem"
-        className={styles.item}
+        css={styles.item}
         tabIndex="-1"
         key={key}
         aria-posinset={position}
@@ -287,7 +295,8 @@ class TreeCollection extends Component {
       level,
       onItemClick,
       onKeyDown,
-      getItemProps
+      getItemProps,
+      styles
     } = this.props
 
     const ariaSelected = {}
@@ -315,7 +324,7 @@ class TreeCollection extends Component {
         tabIndex="-1"
         role="treeitem"
         aria-label={item.name}
-        className={styles.item}
+        css={styles.item}
         aria-level={level + 1}
         aria-posinset={position}
         aria-setsize={this.childCount}
@@ -344,23 +353,15 @@ class TreeCollection extends Component {
   render() {
     const {
       id,
-      size,
-      variant,
+
       expanded,
       collectionIcon,
       collectionIconExpanded,
       level,
-      position
+      position,
+      styles
     } = this.props
 
-    const classes = {
-      [styles.root]: true,
-      [styles.edge]: isEdge,
-      [styles[size]]: true,
-      [styles[variant]]: true,
-      [styles.expanded]: expanded,
-      [styles.node]: true
-    }
     const ariaSelected = {}
     if (this.props.selection)
       ariaSelected['aria-selected'] =
@@ -368,7 +369,7 @@ class TreeCollection extends Component {
 
     return (
       <li
-        className={classnames(classes)}
+        css={styles.treeCollection}
         tabIndex="-1"
         role="treeitem"
         aria-label={this.props.name}

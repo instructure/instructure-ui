@@ -22,28 +22,42 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, borders, spacing, transitions }) {
-  return {
-    fontColor: colors.textLightest,
-    backgroundColor: colors.backgroundBrandSecondary,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, borders, transitions, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      backgroundColor: theme['ic-brand-global-nav-bgd'],
+      fontColor: theme['ic-brand-global-nav-menu-item__text-color'],
+      fill: theme['ic-brand-global-nav-ic-icon-svg-fill']
+    }
+  }
+
+  const componentVariables = {
+    fontColor: colors?.textLightest,
+    backgroundColor: colors?.backgroundBrandSecondary,
     width: '5.25rem',
     minimizedWidth: '3.375rem',
-    fill: colors.textLightest,
+    fill: colors?.textLightest,
 
-    focusOutlineInnerWidth: borders.widthMedium,
-    focusOutlineOuterWidth: borders.widthSmall,
-    focusOutlineInnerColor: colors.borderBrand,
-    focusOutlineOuterColor: colors.borderLightest,
+    focusOutlineInnerWidth: borders?.widthMedium,
+    focusOutlineOuterWidth: borders?.widthSmall,
+    focusOutlineInnerColor: colors?.borderBrand,
+    focusOutlineOuterColor: colors?.borderLightest,
 
-    marginBottom: spacing.small,
-    toggleTransition: transitions.duration
+    marginBottom: spacing?.small,
+    toggleTransition: transitions?.duration
   }
-}
 
-generator['canvas'] = function (variables) {
   return {
-    backgroundColor: variables['ic-brand-global-nav-bgd'],
-    fontColor: variables['ic-brand-global-nav-menu-item__text-color'],
-    fill: variables['ic-brand-global-nav-ic-icon-svg-fill']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

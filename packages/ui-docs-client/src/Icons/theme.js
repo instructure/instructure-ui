@@ -22,10 +22,18 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, spacing, breakpoints }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { breakpoints } = theme
+
   return {
-    gridMaxWidth: breakpoints.xLarge,
-    glyphMinWidth: breakpoints.xSmall,
-    gridBreakpoint: breakpoints.small
+    gridMaxWidth: breakpoints?.xLarge,
+    gridBreakpoint: breakpoints?.small
   }
 }
+
+export default generateComponentTheme

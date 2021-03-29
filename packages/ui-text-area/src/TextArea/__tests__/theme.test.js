@@ -24,12 +24,12 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
-
-import { TextArea } from '../index'
+import generateComponentTheme from '../theme'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
 describe('TextArea.theme', () => {
   describe('with the default theme', () => {
-    const variables = TextArea.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('default', () => {
       it('should ensure focus color and background color meet 3:1 contrast', () => {
@@ -43,7 +43,7 @@ describe('TextArea.theme', () => {
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = TextArea.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('default', () => {
       it('should ensure focus color and background color meet 4.5:1 contrast', () => {

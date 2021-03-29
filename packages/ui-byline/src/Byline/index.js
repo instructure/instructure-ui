@@ -22,25 +22,30 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Byline extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * the Byline visual/object
      */
@@ -76,6 +81,14 @@ class Byline extends Component {
     description: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Byline.propTypes),
@@ -86,21 +99,20 @@ class Byline extends Component {
       <View
         {...passthroughProps}
         elementRef={this.props.elementRef}
-        className={classnames({
-          [styles.root]: true,
-          [styles[this.props.alignContent]]: true
-        })}
+        css={this.props.styles.byline}
         as="figure"
         margin={this.props.margin}
-        maxWidth={this.theme[this.props.size]}
+        maxWidth={this.props.styles.maxWidth}
       >
-        <div className={styles.figure}>{this.props.children}</div>
-        <figcaption className={styles.caption}>
+        <div css={this.props.styles.figure}>{this.props.children}</div>
+        <figcaption css={this.props.styles.caption}>
           {this.props.title && (
-            <span className={styles.title}>{this.props.title}</span>
+            <span css={this.props.styles.title}>{this.props.title}</span>
           )}
           {this.props.description && (
-            <div className={styles.description}>{this.props.description}</div>
+            <div css={this.props.styles.description}>
+              {this.props.description}
+            </div>
           )}
         </figcaption>
       </View>

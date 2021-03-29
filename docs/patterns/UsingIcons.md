@@ -7,18 +7,20 @@ id: UsingIcons
 ## Using Icons
 
 ### Accessibility
+
 By default, the icon's `role` is set to `presentation`. However, when the `title` prop is set, the role attribute is set to `img`. Include the `description` prop to further describe the icon.
 
 ```js
 ---
 example: true
 ---
-<View as="div" margin="small" padding="medium" background="default">
+<View as="div" margin="small" padding="medium" background="primary">
   <Text as="div" size="large">I <IconHeartLine color="error" title="Love" /> New York</Text>
 </View>
 ```
 
 ### Line vs Solid
+
 The default choice for iconography is the `Line` version. However, when an icon appears on a dark or colored background, the `Solid` version should be used.
 
 ```js
@@ -35,12 +37,14 @@ example: true
 ```
 
 ### Changing the Icon Size
+
 By default, icons are set to a size of 1em, so they will scale to match the font-size of their parent element. To change the size of the icon, use one of the predefined options for the `size` prop. If you need a size that is not offered via the size prop, adjust the font-size on the icon's parent element.
+
 ```js
 ---
 example: true
 ---
-<View as="div" margin="small" padding="medium" background="default">
+<View as="div" margin="small" padding="medium" background="primary">
   <Flex wrap="wrap">
     <Flex.Item padding="small" shouldGrow>
       <Heading>I <IconHeartLine /> the size of my parent heading </Heading>
@@ -65,12 +69,14 @@ example: true
 ```
 
 ### Changing the Icon Color
+
 To change the color of the icon, use one of the predefined options for the `color` prop. By default the icon inherits the color of its parent element. However, it can be changed by setting the icon to one of the theme colors via the color property.
+
 ```js
 ---
 example: true
 ---
-<View as="div" margin="small" padding="medium" background="default">
+<View as="div" margin="small" padding="medium" background="primary">
   <Flex wrap="wrap">
     <Flex.Item padding="small" shouldGrow>
       <Text color="brand">I am inheriting my parent's color <IconHeartLine /></Text>

@@ -22,23 +22,23 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   matchComponentTypes,
   safeCloneElement,
-  omitProps,
-  deprecated
+  omitProps
 } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 import { Head } from './Head'
 import { Body } from './Body'
@@ -52,12 +52,13 @@ import { Cell } from './Cell'
 category: components
 ---
 **/
-@deprecated('7.0', {
-  mode: true
-})
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Table extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Provide a screen reader friendly description. Anything passed to this
      * prop will be wrapped by `<ScreenReaderContent>` when it is rendered.
@@ -104,6 +105,14 @@ class Table extends Component {
   static RowHeader = RowHeader
   static Cell = Cell
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   getHeaders() {
     const { children } = this.props
     const [head] = Children.toArray(children)
@@ -130,10 +139,9 @@ class Table extends Component {
       caption,
       children,
       hover,
-      // eslint-disable-next-line react/prop-types
-      mode
+      styles
     } = this.props
-    const isStacked = layout === 'stacked' || mode === 'stacked'
+    const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : null
 
     return (
@@ -142,10 +150,7 @@ class Table extends Component {
         as={isStacked ? 'div' : 'table'}
         margin={margin}
         elementRef={elementRef}
-        className={classnames({
-          [styles.root]: true,
-          [styles.fixedLayout]: layout === 'fixed'
-        })}
+        css={styles.table}
         role={isStacked ? 'table' : null}
         aria-label={isStacked ? caption : null}
       >

@@ -22,42 +22,35 @@
  * SOFTWARE.
  */
 
-// TODO: remove delimiter comment description once the deprecated values are removed
-
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import {
-  passthroughProps,
-  safeCloneElement,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import { InlineList } from '../InlineList'
 import { ListItem } from './ListItem'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  variant: 'List with the isUnstyled boolean or InlineList',
-  delimiter:
-    'with delimiter set to [pipe, slash, arrow] will only be available when using [InlineList] as of version 8.0.0.'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class List extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Only accepts `<List.Item>` as a child
      */
@@ -66,14 +59,7 @@ class List extends Component {
     /**
      * One of: none, dashed, solid
      */
-    delimiter: PropTypes.oneOf([
-      'none',
-      'dashed',
-      'solid',
-      'pipe',
-      'slash',
-      'arrow'
-    ]),
+    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
     /**
      * When set, renders the List Items without a list style type.
      */
@@ -99,11 +85,7 @@ class List extends Component {
       'x-large',
       'xx-large'
     ]),
-    elementRef: PropTypes.func,
-    /**
-     * __deprecated__ Option will be to use the isUnstyled prop or the InlineList component
-     */
-    variant: PropTypes.oneOf(['default', 'unstyled', 'inline'])
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -114,11 +96,18 @@ class List extends Component {
     margin: undefined,
     size: 'medium',
     itemSpacing: 'none',
-    elementRef: (el) => {},
-    variant: undefined
+    elementRef: (el) => {}
   }
 
   static Item = ListItem
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
@@ -133,39 +122,21 @@ class List extends Component {
     })
   }
 
-  renderInlineChild() {
-    return Children.map(this.props.children, (child) => {
-      if (!child) return
-      return <InlineList.Item {...child.props} />
-    })
-  }
-
   render() {
-    const { as, margin, isUnstyled, elementRef, variant, ...rest } = this.props
+    const { as, margin, isUnstyled, elementRef, styles, ...rest } = this.props
 
-    const classes = {
-      [styles.root]: true,
-      [styles.unstyled]: isUnstyled === true || variant === 'unstyled',
-      [styles.ordered]: as === 'ol',
-      [styles.inline]: variant === 'inline'
-    }
-
-    if (!variant || variant === 'default' || variant === 'unstyled') {
-      return (
-        <View
-          {...passthroughProps(rest)}
-          className={classnames(classes)}
-          as={as}
-          margin={margin}
-          elementRef={elementRef}
-          display="block"
-        >
-          {this.renderChildren()}
-        </View>
-      )
-    } else {
-      return <InlineList {...this.props}>{this.renderInlineChild()}</InlineList>
-    }
+    return (
+      <View
+        {...passthroughProps(rest)}
+        css={styles.list}
+        as={as}
+        margin={margin}
+        elementRef={elementRef}
+        display="block"
+      >
+        {this.renderChildren()}
+      </View>
+    )
   }
 }
 

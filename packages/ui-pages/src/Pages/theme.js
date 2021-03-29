@@ -22,15 +22,22 @@
  * SOFTWARE.
  */
 
-/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, typography } = theme
 
-export default function generator({ colors, typography }) {
   return {
-    fontSize: typography.fontSizeMedium,
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
 
-    color: colors.textDarkest,
-    background: colors.backgroundLightest
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest
   }
 }
+
+export default generateComponentTheme

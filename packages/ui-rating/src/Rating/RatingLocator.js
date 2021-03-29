@@ -23,14 +23,6 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
-
 import { Rating } from './index'
-import styles from '../RatingIcon/styles.css'
 
-const FilledIconLocator = locator(`.${styles.filled}`)
-
-export const RatingLocator = locator(Rating.selector, {
-  findAllFilledIcons: (...args) => {
-    return FilledIconLocator.findAll(...args)
-  }
-})
+export const RatingLocator = locator(Rating.selector)

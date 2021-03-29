@@ -22,8 +22,24 @@
  * SOFTWARE.
  */
 
-export default function generator({ typography }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { typography, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily
+  }
+
   return {
-    fontFamily: typography.fontFamily
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

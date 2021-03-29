@@ -22,13 +22,12 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
 import {
-  deprecated,
   callRenderProp,
   getInteraction,
   passthroughProps
@@ -37,10 +36,10 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import { Flex } from '@instructure/ui-flex'
 import { uid } from '@instructure/uid'
-import { themeable } from '@instructure/ui-themeable'
-
-import styles from './styles.css'
-import theme from './theme'
+import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -48,12 +47,8 @@ category: components
 tags: form, field
 ---
 **/
-@deprecated('8.0.0', {
-  label: 'renderLabel',
-  required: 'isRequired',
-  inline: 'display'
-})
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
+@testable()
 class TextInput extends Component {
   static propTypes = {
     /**
@@ -61,7 +56,8 @@ class TextInput extends Component {
      */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-     * The type of input.
+     * Determines the underlying native HTML `<input>` element's `type`.
+     * For more see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url
      */
     type: PropTypes.oneOf([
       'text',
@@ -163,24 +159,10 @@ class TextInput extends Component {
      */
     onFocus: PropTypes.func,
 
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `renderAfterInput`__
-     */
-    icon: PropTypes.func,
-    /**
-     * __Deprecated - use `renderLabel`__
-     */
-    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * __Deprecated - use `isRequired`__
-     */
-    required: PropTypes.bool,
-    /**
-     * __Deprecated - use `display`__
-     */
-    inline: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -210,10 +192,27 @@ class TextInput extends Component {
   }
 
   constructor(props) {
-    super()
+    super(props)
     this.state = { hasFocus: false }
     this._defaultId = uid('TextInput')
     this._messagesId = uid('TextInput-messages')
+  }
+
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    const { interaction } = this
+    return {
+      disabled: interaction === 'disabled',
+      invalid: this.invalid,
+      focused: this.state.hasFocus
+    }
   }
 
   focus() {
@@ -282,7 +281,6 @@ class TextInput extends Component {
       placeholder,
       value,
       defaultValue,
-      required,
       isRequired,
       ...rest
     } = this.props
@@ -290,12 +288,6 @@ class TextInput extends Component {
     const props = passthroughProps(rest)
 
     const { interaction } = this
-
-    const inputClasses = {
-      [styles.input]: true,
-      [styles[size]]: size,
-      [styles[`textAlign--${textAlign}`]]: textAlign
-    }
 
     let descriptionIds = ''
     if (props['aria-describedby']) {
@@ -312,14 +304,14 @@ class TextInput extends Component {
     return (
       <input
         {...props}
-        className={classnames(inputClasses)}
+        css={this.props.styles.textInput}
         defaultValue={defaultValue}
         value={value}
         placeholder={placeholder}
         ref={this.handleInputRef}
         type={type}
         id={this.id}
-        required={isRequired || required}
+        required={isRequired}
         aria-invalid={this.invalid ? 'true' : null}
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
@@ -335,41 +327,29 @@ class TextInput extends Component {
   render() {
     const {
       width,
-      inline,
       display,
-      label,
       renderLabel,
       renderBeforeInput,
       renderAfterInput,
       messages,
       inputContainerRef,
-      icon,
       shouldNotWrap
     } = this.props
 
-    const { interaction } = this
-
-    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput || icon
-
-    const facadeClasses = {
-      [styles.facade]: true,
-      [styles.disabled]: interaction === 'disabled',
-      [styles.invalid]: this.invalid,
-      [styles.focused]: this.state.hasFocus
-    }
+    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput
 
     return (
       <FormField
         id={this.id}
-        label={callRenderProp(renderLabel || label)}
+        label={callRenderProp(renderLabel)}
         messagesId={this._messagesId}
         messages={messages}
-        inline={display === 'inline-block' || inline}
+        inline={display === 'inline-block'}
         width={width}
         inputContainerRef={inputContainerRef}
         layout={this.props.layout} // eslint-disable-line react/prop-types
       >
-        <span className={classnames(facadeClasses)}>
+        <span css={this.props.styles.facade}>
           {renderBeforeOrAfter ? (
             <Flex wrap={shouldNotWrap ? 'no-wrap' : 'wrap'}>
               {renderBeforeInput && (
@@ -386,11 +366,9 @@ class TextInput extends Component {
                   <Flex.Item shouldGrow shouldShrink>
                     {this.renderInput()}
                   </Flex.Item>
-                  {(renderAfterInput || icon) && (
+                  {renderAfterInput && (
                     <Flex.Item padding="0 small 0 0">
-                      {renderAfterInput
-                        ? callRenderProp(renderAfterInput)
-                        : callRenderProp(icon)}
+                      {callRenderProp(renderAfterInput)}
                     </Flex.Item>
                   )}
                 </Flex>

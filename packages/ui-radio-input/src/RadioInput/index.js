@@ -22,27 +22,32 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { uid } from '@instructure/uid'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class RadioInput extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     label: PropTypes.node.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     id: PropTypes.string,
@@ -91,6 +96,14 @@ class RadioInput extends Component {
     this._defaultId = uid('RadioInput')
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   handleClick = (e) => {
     if (this.props.disabled || this.props.readOnly) {
       e.preventDefault()
@@ -132,31 +145,12 @@ class RadioInput extends Component {
   }
 
   render() {
-    const {
-      disabled,
-      readOnly,
-      label,
-      variant,
-      size,
-      inline,
-      context,
-      value,
-      name
-    } = this.props
+    const { disabled, readOnly, label, value, name, styles } = this.props
 
     const props = omitProps(this.props, RadioInput.propTypes)
 
-    const classes = {
-      [styles.root]: true,
-      [styles.disabled]: disabled,
-      [styles[variant]]: true,
-      [styles[context]]: variant === 'toggle',
-      [styles[size]]: true,
-      [styles['inline']]: inline
-    }
-
     return (
-      <div className={classnames(classes)}>
+      <div css={styles.radioInput}>
         <input
           {...props}
           id={this.id}
@@ -167,15 +161,15 @@ class RadioInput extends Component {
           name={name}
           checked={this.checked}
           type="radio"
-          className={styles.input}
+          css={styles.input}
           disabled={disabled || readOnly}
           aria-disabled={disabled || readOnly ? 'true' : null}
           onChange={this.handleChange}
           onClick={this.handleClick}
         />
-        <label className={styles.control} htmlFor={this.id}>
-          <span className={styles.facade} aria-hidden="true" />
-          <span className={styles.label}>{label}</span>
+        <label css={styles.control} htmlFor={this.id}>
+          <span css={styles.facade} aria-hidden="true" />
+          <span css={styles.label}>{label}</span>
         </label>
       </div>
     )

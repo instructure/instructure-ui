@@ -6,8 +6,7 @@ This is a helper component that is used by most of the custom form
 components. Perfect if you need to wrap a complex group of form fields
 (Play with the different properties inside the code editor
 to see how they affect the overall look and feel). The first example
-sets the `layout to inline` and sets the `vAlign to middle` and `small
-rowSpacing`
+sets the `layout to inline` and sets the `vAlign to middle` and `small rowSpacing`
 
 ```js
 ---
@@ -19,12 +18,12 @@ example: true
     layout="inline"
     vAlign="middle"
   >
-    <TextInput label="Favorite Breakfast Eatery"
+    <TextInput renderLabel="Favorite Breakfast Eatery"
       messages={[
       { text: 'Invalid name', type: 'error' }
       ]}
     />
-    <TextInput label="Favorite Side Dish" />
+    <TextInput renderLabel="Favorite Side Dish" />
     <RadioInputGroup
       name="beverage"
       description="Beverage of Choice"
@@ -54,8 +53,8 @@ example: true
     layout="columns"
     vAlign="top"
   >
-    <TextInput label="Dining Style" />
-    <TextInput label="Favorite Lunch Outing"/>
+    <TextInput renderLabel="Dining Style" />
+    <TextInput renderLabel="Favorite Lunch Outing"/>
     <CheckboxGroup name="times"
       layout="stacked"
       onChange={function (value) { console.log(value) }}
@@ -95,7 +94,7 @@ example: true
       <RadioInput label="Bring it on... Ready for the full course" value="full-course" />
       <RadioInput label="Breakfast for dinner" value="breakfast" />
     </RadioInputGroup>
-    <TextInput label="If Not At Home - I'd Like To Eat Dinner At"
+    <TextInput renderLabel="If Not At Home - I'd Like To Eat Dinner At"
       />
     <Checkbox label="Love to Eat Dessert After Dinner" value="medium" variant="toggle" />
   </FormFieldGroup>

@@ -28,26 +28,26 @@ module.exports = function generateComponentExamples(
   Component,
   config = {
     sectionProp: null,
-    propValues: {},
     maxExamplesPerPage: null,
+    propValues: {},
     excludeProps: [],
-    getExampleProps: (props, index) => {
+    getComponentProps: (props, index) => {
       return {}
     },
-    getComponentProps: (props, index) => {
+    getExampleProps: (props, index) => {
       return {}
     },
     getParameters: (examples, pageIndex) => {
       return {}
     },
-    filter: (props, index) => false
+    filter: (props) => false
   }
 ) {
   const { sectionProp, excludeProps, filter } = config
 
   const PROPS_CACHE = []
   const sections = []
-  const maxExamples = config.maxExamples || 500
+  const maxExamples = config.maxExamples | 500
   let exampleCount = 0
   let propValues = {}
 
@@ -139,10 +139,8 @@ module.exports = function generateComponentExamples(
 
     if (!ignore && !PROPS_CACHE.includes(propsString)) {
       exampleCount++
-
       if (exampleCount < maxExamples) {
         PROPS_CACHE.push(propsString)
-
         addExample(componentProps[sectionProp], {
           Component,
           componentProps,
@@ -170,7 +168,8 @@ module.exports = function generateComponentExamples(
     console.info(
       `Generating examples for ${Component.displayName} (${
         Object.keys(propValues).length
-      } props)...`
+      } props):`,
+      propValues
     )
 
     const combos = generatePropCombinations(propValues).filter(Boolean)

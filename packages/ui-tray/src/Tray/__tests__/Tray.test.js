@@ -53,17 +53,14 @@ describe('<Tray />', async () => {
         label="Tray Example"
         open
         size="small"
-        theme={{
-          smallWidth: '10em'
-        }}
         placement="start"
+        themeOverride={{ smallWidth: '10em' }}
       >
         <div>Hello</div>
       </Tray>
     )
     const tray = await TrayLocator.find()
     const dialog = await tray.find('[role="dialog"]')
-
     await wait(() => {
       expect(dialog.getComputedStyle().width).to.equal('160px')
     })
@@ -215,7 +212,7 @@ describe('<Tray />', async () => {
             )
 
             await wait(() => {
-              expect(onEntered).to.have.been.calledWith(val)
+              expect(onEntered).to.have.been.called()
             })
           })
         }
@@ -241,7 +238,7 @@ describe('<Tray />', async () => {
             await subject.setProps({ open: false })
 
             await wait(() => {
-              expect(onExited).to.have.been.calledWith(val)
+              expect(onExited).to.have.been.called()
             })
           })
         }

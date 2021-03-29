@@ -21,11 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import { View } from '@instructure/ui-view'
 import { DrawerLayout } from '../index'
 
 export default {
+  propValues: {
+    dir: ['ltr']
+  },
   getComponentProps: (props) => {
     return {
       children: [
@@ -46,7 +50,11 @@ export default {
             Drawer tray
           </View>
         </DrawerLayout.Tray>,
-        <DrawerLayout.Content key="1" label="Drawer content example">
+        <DrawerLayout.Content
+          key="1"
+          label="Drawer content example"
+          themeOverride={{ duration: 0 }}
+        >
           <div style={{ background: 'white', height: '100%' }}>
             <View as="div" padding="x-large">
               Drawer content

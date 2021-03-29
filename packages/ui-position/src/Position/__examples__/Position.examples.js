@@ -24,7 +24,6 @@
 import React from 'react'
 
 export default {
-  excludeProps: ['trackPosition', 'over'],
   propValues: {
     placement: [
       'top',

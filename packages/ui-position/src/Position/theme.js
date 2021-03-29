@@ -22,8 +22,24 @@
  * SOFTWARE.
  */
 
-export default function ({ stacking }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { stacking, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    zIndex: stacking?.topmost
+  }
+
   return {
-    zIndex: stacking.topmost
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

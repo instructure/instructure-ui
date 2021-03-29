@@ -22,16 +22,15 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -49,9 +48,13 @@ example: true
 ```
 
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldLabel extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     as: PropTypes.elementType,
     children: PropTypes.node.isRequired
   }
@@ -60,20 +63,25 @@ class FormFieldLabel extends Component {
     as: 'span'
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
     const ElementType = getElementType(FormFieldLabel, this.props)
 
-    const classes = {
-      [styles.root]: true,
-      [styles['has-content']]: hasVisibleChildren(this.props.children)
-    }
+    const { styles, children } = this.props
 
     return (
       <ElementType
         {...omitProps(this.props, FormFieldLabel.propTypes)}
-        className={classnames(classes)}
+        css={styles.formFieldLabel}
       >
-        {this.props.children}
+        {children}
       </ElementType>
     )
   }

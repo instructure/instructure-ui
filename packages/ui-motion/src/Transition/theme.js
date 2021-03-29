@@ -21,9 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default function ({ transitions }) {
+
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { transitions, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    duration: transitions?.duration,
+    timing: transitions?.timing
+  }
+
   return {
-    duration: transitions.duration,
-    timing: transitions.timing
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

@@ -22,33 +22,47 @@
  * SOFTWARE.
  */
 
-export default function generator({ borders, colors, spacing, typography }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    fontSizeSmall: typography?.fontSizeSmall,
+    fontSizeMedium: typography?.fontSizeMedium,
+    fontSizeLarge: typography?.fontSizeLarge,
+    color: colors?.textDark,
+    lineHeight: typography?.lineHeightCondensed,
+    noneSpacing: spacing?.xSmall,
+    pipeSpacing: spacing?.xSmall,
+    slashSpacing: spacing?.xSmall,
+    arrowSpacing: spacing?.xSmall,
+    marginBottomDefault: spacing?.xxxSmall,
+    spacingXXXSmall: spacing?.xxxSmall,
+    spacingXXSmall: spacing?.xxSmall,
+    spacingXSmall: spacing?.xSmall,
+    spacingSmall: spacing?.small,
+    spacingMedium: spacing?.medium,
+    spacingLarge: spacing?.large,
+    spacingXLarge: spacing?.xLarge,
+    spacingXXLarge: spacing?.xxLarge
+  }
+
   return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    fontSizeSmall: typography.fontSizeSmall,
-    fontSizeMedium: typography.fontSizeMedium,
-    fontSizeLarge: typography.fontSizeLarge,
-    color: colors.textDark,
-    lineHeight: typography.lineHeightCondensed,
-    noneSpacing: spacing.xSmall,
-    pipeSpacing: spacing.xSmall,
-    slashSpacing: spacing.xSmall,
-    arrowSpacing: spacing.xSmall,
-    marginBottomDefault: spacing.xxxSmall,
-    spacingXXXSmall: spacing.xxxSmall,
-    spacingXXSmall: spacing.xxSmall,
-    spacingXSmall: spacing.xSmall,
-    spacingSmall: spacing.small,
-    spacingMedium: spacing.medium,
-    spacingLarge: spacing.large,
-    spacingXLarge: spacing.xLarge,
-    spacingXXLarge: spacing.xxLarge
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme

@@ -22,18 +22,17 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { isIE11 } from '@instructure/ui-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from '../TreeButton/styles.css'
-import theme from '../TreeButton/theme'
+import generateStyles from '../TreeButton/styles.js'
+import generateComponentTheme from '../TreeButton/theme'
 
 /**
 ---
@@ -46,10 +45,14 @@ in the TreeBrowser.
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class TreeNode extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
@@ -84,50 +87,41 @@ class TreeNode extends Component {
     onClick: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
+
   handleRef = (el) => {
     el && this.props.containerRef(el.parentElement)
   }
 
   renderItemImage() {
-    const { thumbnail, itemIcon } = this.props
+    const { thumbnail, itemIcon, styles } = this.props
 
     if (thumbnail) {
       return (
-        <div className={styles.thumbnail}>
+        <div css={styles.thumbnail}>
           <Img src={thumbnail} constrain="cover" alt="" />
         </div>
       )
     }
 
     if (itemIcon) {
-      return <div className={styles.icon}>{callRenderProp(itemIcon)}</div>
+      return <div css={styles.icon}>{callRenderProp(itemIcon)}</div>
     }
   }
 
   render() {
-    const { selected, focused, variant, size, children } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: true,
-      [styles[variant]]: true,
-      [styles.expanded]: false,
-      [styles.selected]: selected,
-      [styles.focused]: focused,
-      [styles.ie11]: isIE11
-    }
-
-    const classesText = {
-      [styles.text]: true,
-      [styles.textName]: true,
-      [styles.node]: true
-    }
+    const { children, styles } = this.props
 
     return (
-      <div ref={this.handleRef} tabIndex={-1} className={classnames(classes)}>
-        <span className={styles.layout}>
+      <div ref={this.handleRef} tabIndex={-1} css={styles.treeButton}>
+        <span css={styles.layout}>
           {this.renderItemImage()}
-          <span className={classnames(classesText)}>{children}</span>
+          <span css={styles.node}>{children}</span>
         </span>
       </div>
     )

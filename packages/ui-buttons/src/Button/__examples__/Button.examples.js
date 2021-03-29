@@ -25,18 +25,18 @@
 import React from 'react'
 
 const icon = (
-  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
+  <svg height="1em" width="1em" style={{ fill: 'currentcolor' }}>
     <circle cx="0.5em" cy="0.5em" r="0.5em" />
   </svg>
 )
 
 export default {
-  excludeProps: ['buttonRef', 'fluidWidth', 'icon', 'variant'],
   sectionProp: 'color',
   maxExamplesPerPage: 50,
   propValues: {
     renderIcon: [null, icon]
   },
+  excludeProps: ['focusColor'],
   getComponentProps: (props) => {
     return {
       children: 'Hello'
@@ -50,8 +50,16 @@ export default {
   },
   filter: (props) => {
     return (
+      // Only generate examples for type==="button"
       props.type !== 'button' ||
-      (props.textAlign === 'center' && props.display !== 'block')
+      // Only generate a 1 variation for non-'primary' color
+      (props.color !== 'primary' &&
+        (props.display !== 'block' ||
+          props.interaction !== 'enabled' ||
+          props.size !== 'small' ||
+          props.renderIcon != null ||
+          props.textAlign !== 'center' ||
+          props.withBackground !== false))
     )
   }
 }

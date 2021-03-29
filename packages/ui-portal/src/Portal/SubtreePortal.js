@@ -74,7 +74,9 @@ class SubtreePortal extends Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {

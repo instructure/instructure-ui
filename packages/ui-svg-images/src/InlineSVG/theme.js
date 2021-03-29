@@ -24,23 +24,37 @@
 
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-export default function generator({ colors }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      primaryColor: theme['ic-brand-font-color-dark'],
+      brandColor: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    primaryInverseColor: colors?.textLightest,
+    primaryColor: colors?.textDarkest,
+    secondaryColor: colors?.textDark,
+    secondaryInverseColor: colors?.textLight,
+    warningColor: colors?.textWarning,
+    brandColor: colors?.textBrand,
+    errorColor: colors?.textDanger,
+    alertColor: colors?.textAlert,
+    successColor: colors?.textSuccess
+  }
+
   return {
-    primaryInverseColor: colors.textLightest,
-    primaryColor: colors.textDarkest,
-    secondaryColor: colors.textDark,
-    secondaryInverseColor: colors.textLight,
-    warningColor: colors.textWarning,
-    brandColor: colors.textBrand,
-    errorColor: colors.textDanger,
-    alertColor: colors.textAlert,
-    successColor: colors.textSuccess
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    primaryColor: variables['ic-brand-font-color-dark'],
-    brandColor: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

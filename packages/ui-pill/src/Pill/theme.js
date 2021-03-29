@@ -22,35 +22,44 @@
  * SOFTWARE.
  */
 
-// TODO: For v8.0.0 we will map primaryColor to textDark and do away with default (color)
-// NOTE: This will make it so no pill is going to inherit the brand color per product design
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, colors, spacing, typography, key: themeName } = theme
 
-export default function generator({ borders, colors, spacing, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    padding: `0 ${spacing.xSmall}`,
+  const themeSpecificStyle = {
+    instructure: {
+      height: '1.5rem'
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    padding: `0 ${spacing?.xSmall}`,
     height: '1.3125rem',
-    background: colors.backgroundLightest,
+    background: colors?.backgroundLightest,
     textTransformStyle: 'uppercase',
-    textFontSize: typography.fontSizeXSmall,
-    textFontWeight: typography.fontWeightBold,
+    textFontSize: typography?.fontSizeXSmall,
+    textFontWeight: typography?.fontWeightBold,
     maxWidth: '15rem',
-    color: colors.textDark,
-    primaryColor: colors.textDark,
-    infoColor: colors.textInfo,
-    dangerColor: colors.textDanger,
-    successColor: colors.textSuccess,
-    warningColor: colors.textWarning,
-    alertColor: colors.textAlert,
-    messageColor: colors.textAlert,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
+    primaryColor: colors?.textDark,
+    infoColor: colors?.textInfo,
+    dangerColor: colors?.textDanger,
+    successColor: colors?.textSuccess,
+    warningColor: colors?.textWarning,
+    alertColor: colors?.textAlert,
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style,
     borderRadius: '999rem'
   }
-}
 
-generator['instructure'] = function () {
   return {
-    height: '1.5rem'
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

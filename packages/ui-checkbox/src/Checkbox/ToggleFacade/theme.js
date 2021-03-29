@@ -22,54 +22,64 @@
  * SOFTWARE.
  */
 
-export default function generator({
-  colors,
-  borders,
-  forms,
-  shadows,
-  spacing,
-  typography
-}) {
-  return {
-    color: colors.textLightest,
-    background: colors.backgroundLight,
-    borderColor: colors.borderMedium,
-    borderWidth: borders.widthMedium,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const {
+    colors,
+    borders,
+    forms,
+    shadows,
+    spacing,
+    typography,
+    key: themeName
+  } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      focusOutlineColor: theme['ic-brand-primary'],
+      labelColor: theme['ic-brand-font-color-dark']
+    },
+    'canvas-high-contrast': {
+      background: colors?.backgroundDarkest,
+      borderColor: colors?.borderDarkest
+    }
+  }
+
+  const componentVariables = {
+    color: colors?.textLightest,
+    background: colors?.backgroundLight,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthMedium,
     borderRadius: '4rem',
-    marginEnd: spacing.small,
-    marginStart: spacing.small,
-    marginVertical: spacing.xSmall,
-    checkedBackground: colors.backgroundSuccess,
-    uncheckedIconColor: colors.textDarkest,
-    checkedIconColor: colors.textSuccess,
-    focusOutlineColor: colors.borderBrand,
-    focusBorderWidth: borders.widthMedium,
-    focusBorderStyle: borders.style,
-    toggleBackground: colors.backgroundLightest,
-    toggleShadow: shadows.depth1,
-    toggleSize: forms.inputHeightSmall,
-    labelColor: colors.textDarkest,
-    labelFontFamily: typography.fontFamily,
-    labelFontWeight: typography.fontWeightNormal,
-    labelLineHeight: typography.lineHeightCondensed,
-    labelFontSizeSmall: typography.fontSizeSmall,
-    labelFontSizeMedium: typography.fontSizeMedium,
-    labelFontSizeLarge: typography.fontSizeLarge
+    marginEnd: spacing?.small,
+    marginStart: spacing?.small,
+    marginVertical: spacing?.xSmall,
+    checkedBackground: colors?.backgroundSuccess,
+    uncheckedIconColor: colors?.textDarkest,
+    checkedIconColor: colors?.textSuccess,
+    focusOutlineColor: colors?.borderBrand,
+    focusBorderWidth: borders?.widthMedium,
+    focusBorderStyle: borders?.style,
+    toggleBackground: colors?.backgroundLightest,
+    toggleShadow: shadows?.depth1,
+    toggleSize: forms?.inputHeightSmall,
+    labelColor: colors?.textDarkest,
+    labelFontFamily: typography?.fontFamily,
+    labelFontWeight: typography?.fontWeightNormal,
+    labelLineHeight: typography?.lineHeightCondensed,
+    labelFontSizeSmall: typography?.fontSizeSmall,
+    labelFontSizeMedium: typography?.fontSizeMedium,
+    labelFontSizeLarge: typography?.fontSizeLarge
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
-  colors
-}) {
-  return {
-    background: colors.backgroundDarkest,
-    borderColor: colors.borderDarkest
-  }
-}
-
-generator.canvas = function (variables) {
-  return {
-    focusOutlineColor: variables['ic-brand-primary'],
-    labelColor: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme

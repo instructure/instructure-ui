@@ -22,32 +22,46 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, spacing, typography }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, typography, spacing, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      labelColor: theme['ic-brand-font-color-dark'],
+      iconColor: theme['ic-brand-font-color-dark'],
+      activeBackground: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    padding: `${spacing?.xSmall} ${spacing?.small}`,
+
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeightCondensed,
+    fontSize: typography?.fontSizeMedium,
+    labelPadding: spacing?.large,
+
+    labelColor: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+
+    iconColor: colors?.textDarkest,
+    iconPadding: spacing?.small,
+
+    activeBackground: colors?.backgroundBrand,
+    activeLabelColor: colors?.textLightest,
+    activeIconColor: colors?.textLightest
+  }
+
   return {
-    padding: `${spacing.xSmall} ${spacing.small}`,
-
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeightCondensed,
-    fontSize: typography.fontSizeMedium,
-    labelPadding: spacing.large,
-
-    labelColor: colors.textDarkest,
-    background: colors.backgroundLightest,
-
-    iconColor: colors.textDarkest,
-    iconPadding: spacing.small,
-
-    activeBackground: colors.backgroundBrand,
-    activeLabelColor: colors.textLightest,
-    activeIconColor: colors.textLightest
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    labelColor: variables['ic-brand-font-color-dark'],
-    iconColor: variables['ic-brand-font-color-dark'],
-    activeBackground: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

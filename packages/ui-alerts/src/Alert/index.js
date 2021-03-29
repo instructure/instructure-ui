@@ -21,15 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import keycode from 'keycode'
 
-import { deprecated, callRenderProp } from '@instructure/ui-react-utils'
+import { callRenderProp } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
@@ -40,24 +39,31 @@ import {
   IconNoSolid
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
+import { canvas } from '@instructure/ui-themes'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  EmotionThemeProvider
+} from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  closeButtonLabel: 'renderCloseButtonLabel'
-})
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Alert extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * content to be rendered within Alert
      */
@@ -100,10 +106,6 @@ class Alert extends Component {
       PropTypes.node
     ]),
     /**
-     * __Deprecated - use `renderCloseButtonLabel` instead__
-     */
-    closeButtonLabel: PropTypes.string,
-    /**
      * Callback after the alert is closed
      */
     onDismiss: PropTypes.func,
@@ -130,7 +132,6 @@ class Alert extends Component {
     onDismiss: undefined,
     liveRegion: undefined,
     renderCloseButtonLabel: undefined,
-    closeButtonLabel: undefined,
     children: null
   }
 
@@ -144,25 +145,11 @@ class Alert extends Component {
 
   _timeouts = []
 
-  variantUI() {
-    return {
-      error: {
-        Icon: IconNoSolid,
-        classNames: classNames(styles.alert, styles.error)
-      },
-      info: {
-        Icon: IconInfoBorderlessSolid,
-        classNames: classNames(styles.alert, styles.info)
-      },
-      success: {
-        Icon: IconCheckMarkSolid,
-        classNames: classNames(styles.alert, styles.success)
-      },
-      warning: {
-        Icon: IconWarningBorderlessSolid,
-        classNames: classNames(styles.alert, styles.warning)
-      }
-    }[this.props.variant]
+  variantUI = {
+    error: IconNoSolid,
+    info: IconInfoBorderlessSolid,
+    success: IconCheckMarkSolid,
+    warning: IconWarningBorderlessSolid
   }
 
   handleTimeout = () => {
@@ -235,8 +222,7 @@ class Alert extends Component {
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)
 
-      const content = this.createScreenreaderContentNode()
-      ReactDOM.render(content, div)
+      this.renderScreenreeaderAlert(div)
       liveRegion.appendChild(div)
     }
   }
@@ -246,11 +232,21 @@ class Alert extends Component {
       const div = document.getElementById(this.srid)
       if (div) {
         ReactDOM.render(null, div, () => {
-          const content = this.createScreenreaderContentNode()
-          ReactDOM.render(content, div)
+          this.renderScreenreeaderAlert(div)
         })
       }
     }
+  }
+
+  renderScreenreeaderAlert(div) {
+    const content = this.createScreenreaderContentNode()
+    ReactDOM.render(
+      // since ScreenReaderContent gets rendered outside the app,
+      // and uses the withStyle decorator, we need to provide a theme for it,
+      // otherwise throws warning (any theme, doesn't use any theme variables)
+      <EmotionThemeProvider theme={canvas}>{content}</EmotionThemeProvider>,
+      div
+    )
   }
 
   removeScreenreaderAlert() {
@@ -276,7 +272,7 @@ class Alert extends Component {
 
   handleKeyUp = (event) => {
     if (
-      (this.props.renderCloseButtonLabel || this.props.closeButtonLabel) &&
+      this.props.renderCloseButtonLabel &&
       event.keyCode === keycode.codes.esc
     ) {
       this.close()
@@ -284,6 +280,7 @@ class Alert extends Component {
   }
 
   componentDidMount() {
+    this.props.makeStyles()
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
       this.initLiveRegion(liveRegion)
@@ -294,6 +291,7 @@ class Alert extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    this.props.makeStyles()
     if (!!this.props.open === false && !!this.props.open !== !!prevProps.open) {
       // this outside world is asking us to close the alert, which needs to
       // take place internally so the transition runs
@@ -311,22 +309,21 @@ class Alert extends Component {
   }
 
   renderIcon() {
-    const { Icon } = this.variantUI()
+    const Icon = this.variantUI[this.props.variant]
     return (
-      <div className={styles.icon}>
-        <Icon className={styles.alertIcon} />
+      <div css={this.props.styles.icon}>
+        <Icon />
       </div>
     )
   }
 
   renderCloseButton() {
     const closeButtonLabel =
-      (this.props.renderCloseButtonLabel &&
-        callRenderProp(this.props.renderCloseButtonLabel)) ||
-      this.props.closeButtonLabel
+      this.props.renderCloseButtonLabel &&
+      callRenderProp(this.props.renderCloseButtonLabel)
 
     return closeButtonLabel ? (
-      <div className={styles.closeButton} key="closeButton">
+      <div css={this.props.styles.closeButton} key="closeButton">
         <CloseButton
           onClick={this.close}
           size="small"
@@ -337,16 +334,15 @@ class Alert extends Component {
   }
 
   renderAlert() {
-    const { classNames } = this.variantUI()
     return (
       <View
         as="div"
         margin={this.props.margin}
-        className={classNames}
+        css={this.props.styles.alert}
         onKeyUp={this.handleKeyUp}
       >
         {this.renderIcon()}
-        <div className={styles.content}>{this.props.children}</div>
+        <div css={this.props.styles.content}>{this.props.children}</div>
         {this.renderCloseButton()}
       </View>
     )

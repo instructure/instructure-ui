@@ -21,17 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -39,14 +41,14 @@ category: components
 ---
 **/
 
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated('8.0.0', {
-  inline: 'display',
-  variant: 'shape'
-})
-@themeable(theme, styles)
 class Avatar extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     name: PropTypes.string.isRequired,
     /*
      * URL of the image to display as the background image
@@ -83,17 +85,7 @@ class Avatar extends Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func,
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `display`__
-     */
-    inline: PropTypes.bool,
-    /**
-     * __Deprecated - use `shape`__
-     */
-    variant: PropTypes.oneOf(['circle', 'rectangle'])
-    /* eslint-enable react/require-default-props */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -108,6 +100,14 @@ class Avatar extends Component {
   }
 
   state = { loaded: false }
+
+  componentDidMount() {
+    this.props.makeStyles(this.state)
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles(this.state)
+  }
 
   makeInitialsFromName() {
     let name = this.props.name
@@ -138,7 +138,7 @@ class Avatar extends Component {
     return (
       <img
         src={this.props.src}
-        className={styles.loadImage}
+        css={this.props.styles.loadImage}
         alt={this.props.alt}
         onLoad={this.handleImageLoaded}
         aria-hidden="true"
@@ -148,38 +148,25 @@ class Avatar extends Component {
 
   renderInitials() {
     return (
-      <span className={styles.initials} aria-hidden="true">
+      <span css={this.props.styles.initials} aria-hidden="true">
         {this.makeInitialsFromName()}
       </span>
     )
   }
 
   render() {
-    const { onImageLoaded, ...props } = this.props
+    const { onImageLoaded, styles, ...props } = this.props
 
     return (
       <View
         {...passthroughProps(props)}
-        style={{
-          backgroundImage: this.state.loaded
-            ? `url('${this.props.src}')`
-            : undefined
-        }}
-        className={classnames({
-          [styles.root]: true,
-          [styles[this.props.size]]: true,
-          [styles[this.props.variant || this.props.shape]]: true
-        })}
         aria-label={this.props.alt ? this.props.alt : null}
         role={this.props.alt ? 'img' : null}
         as={this.props.as}
         elementRef={this.props.elementRef}
         margin={this.props.margin}
-        display={
-          this.props.display === 'block' || this.props.inline === false
-            ? 'block'
-            : 'inline-block'
-        }
+        css={styles.avatar}
+        display={this.props.display}
       >
         {this.renderLoadImage()}
         {!this.state.loaded && this.renderInitials()}
@@ -187,6 +174,5 @@ class Avatar extends Component {
     )
   }
 }
-
 export default Avatar
 export { Avatar }

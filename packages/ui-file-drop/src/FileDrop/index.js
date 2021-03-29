@@ -22,19 +22,17 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import {
   callRenderProp,
-  deprecated,
   passthroughProps,
   getInteraction
 } from '@instructure/ui-react-utils'
@@ -43,8 +41,9 @@ import { isEdge } from '@instructure/ui-utils'
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 function keyEventIsClickButton(e) {
   return e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter
@@ -67,14 +66,8 @@ const IS_MS = isBrowserMS()
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  label: 'renderLabel',
-  enablePreview: 'shouldEnablePreview',
-  allowRepeatFileSelection: 'shouldAllowRepeats',
-  allowMultiple: 'shouldAllowMultiple'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class FileDrop extends Component {
   static propTypes = {
     /**
@@ -181,26 +174,10 @@ class FileDrop extends Component {
      */
     margin: ThemeablePropTypes.spacing,
 
-    /* eslint-disable react/require-default-props */
-
-    /**
-     * __deprecated: use `renderLabel`__
-     */
-    label: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    /**
-     * __deprecated: use `shouldEnablePreview`__
-     */
-    enablePreview: PropTypes.bool,
-    /**
-     * __deprecated: use `shouldAllowRepeats`__
-     */
-    allowRepeatFileSelection: PropTypes.bool,
-    /**
-     * __deprecated: use `shouldAllowMultiple`__
-     */
-    allowMultiple: PropTypes.bool
-
-    /* eslint-enable react/require-default-props */
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -236,6 +213,23 @@ class FileDrop extends Component {
     this.messagesId = uid('FileDrop-messages')
   }
 
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    return {
+      functionallyDisabled: this.functionallyDisabled,
+      visuallyDisabled: this.interaction === 'disabled',
+      dragRejected: this.state.isDragRejected || this.invalid,
+      dragAccepted: this.state.isDragAccepted
+    }
+  }
+
   state = {
     isDragAccepted: false,
     isDragRejected: false,
@@ -247,27 +241,16 @@ class FileDrop extends Component {
   fileInputEl = null
   defaultId = null
 
+  get functionallyDisabled() {
+    return this.interaction === 'disabled' || this.interaction === 'readonly'
+  }
+
   get hasMessages() {
     return this.props.messages && this.props.messages.length > 0
   }
 
   get interaction() {
     return getInteraction({ props: this.props })
-  }
-
-  get shouldEnablePreview() {
-    // TODO: no longer nec. when `enablePreview` is removed
-    return this.props.enablePreview || this.props.shouldEnablePreview
-  }
-
-  get shouldAllowRepeats() {
-    // TODO: no longer nec. when `allowRepeatFileSelection` is removed
-    return this.props.allowRepeatFileSelection || this.props.shouldAllowRepeats
-  }
-
-  get shouldAllowMultiple() {
-    // TODO: no longer nec. when `allowMultiple` is removed
-    return this.props.allowMultiple || this.props.shouldAllowMultiple
   }
 
   get invalid() {
@@ -283,7 +266,7 @@ class FileDrop extends Component {
     let list = Array.from(getEventFiles(e, this.fileInputEl))
 
     if (list.length > 1) {
-      list = this.shouldAllowMultiple ? list : [list[0]]
+      list = this.props.shouldAllowMultiple ? list : [list[0]]
     }
 
     if (shouldEnablePreview) {
@@ -365,8 +348,13 @@ class FileDrop extends Component {
   }
 
   handleChange = (e) => {
-    const { onDrop, onDropAccepted, onDropRejected } = this.props
-    const fileList = this.getDataTransferItems(e, this.shouldEnablePreview)
+    const {
+      onDrop,
+      onDropAccepted,
+      onDropRejected,
+      shouldEnablePreview
+    } = this.props
+    const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
 
     e.preventDefault()
@@ -407,9 +395,9 @@ class FileDrop extends Component {
   }
 
   renderLabel() {
-    const { label, renderLabel } = this.props
+    const { renderLabel } = this.props
 
-    return callRenderProp(label || renderLabel, {
+    return callRenderProp(renderLabel, {
       isDragAccepted: this.state.isDragAccepted,
       isDragRejected: this.state.isDragRejected,
       interaction: this.interaction
@@ -435,7 +423,7 @@ class FileDrop extends Component {
   }
 
   handleClick = (e) => {
-    if (this.fileInputEl.value && this.shouldAllowRepeats) {
+    if (this.fileInputEl.value && this.props.shouldAllowRepeats) {
       this.fileInputEl.value = null
     }
 
@@ -451,7 +439,7 @@ class FileDrop extends Component {
 
   handleKeyDown = (e) => {
     if (this.state.isFocused && keyEventIsClickButton(e)) {
-      if (this.shouldAllowRepeats) {
+      if (this.props.shouldAllowRepeats) {
         this.fileInputEl.value = null
       }
       // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
@@ -492,21 +480,8 @@ class FileDrop extends Component {
     } = this.props
     const id = this.props.id || this.defaultId
 
-    // make readonly input functionally disabled
-    const functionallyDisabled =
-      this.interaction === 'disabled' || this.interaction === 'readonly'
-
     const focusColor =
       this.state.isDragRejected || this.invalid ? 'danger' : undefined
-
-    const classes = {
-      [styles.label]: true,
-      [styles.functionallyDisabled]: functionallyDisabled,
-      [styles.visuallyDisabled]: this.interaction === 'disabled',
-      [styles.dragRejected]: this.state.isDragRejected || this.invalid,
-      [styles.dragAccepted]: this.state.isDragAccepted,
-      [styles.withHeight]: height
-    }
 
     return (
       <View
@@ -519,7 +494,7 @@ class FileDrop extends Component {
         height={height}
       >
         <label
-          className={classnames(classes)}
+          css={this.props.styles.fileDropLabel}
           htmlFor={id}
           onDragEnter={this.handleDragEnter}
           onDragOver={this.handleDragOver}
@@ -534,18 +509,8 @@ class FileDrop extends Component {
             focusColor={focusColor}
             height={height}
           >
-            <span
-              className={classnames({
-                [styles.labelContent]: true,
-                [styles.withHeight]: height
-              })}
-            >
-              <span
-                className={classnames({
-                  [styles.layout]: true,
-                  [styles.withHeight]: height
-                })}
-              >
+            <span css={this.props.styles.fileDropLabelContent}>
+              <span css={this.props.styles.fileDropLayout}>
                 <View height={height}>{this.renderLabel()}</View>
               </span>
             </span>
@@ -555,18 +520,18 @@ class FileDrop extends Component {
           {...passthroughProps(props)}
           onClick={this.handleClick}
           type="file"
-          className={styles.input}
+          css={this.props.styles.fileDropInput}
           id={id}
           ref={this.handleRef}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onKeyDown={this.handleKeyDown}
           onKeyUp={this.handleKeyUp}
-          multiple={this.shouldAllowMultiple}
+          multiple={this.props.shouldAllowMultiple}
           accept={this.acceptStr()}
           onChange={this.handleChange}
           aria-describedby={this.hasMessages ? this.messagesId : null}
-          disabled={functionallyDisabled}
+          disabled={this.functionallyDisabled}
         />
         {this.hasMessages ? (
           <View display="block" margin="small 0 0">

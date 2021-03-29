@@ -53,7 +53,9 @@ function getElementType(Component, props, getDefault) {
     warn(
       // if to prop is used without as
       !props.as,
-      `[${Component.displayName}] \`as\` prop should be provided when using \`to\``
+      `[${
+        Component.displayName || Component.name
+      }] \`as\` prop should be provided when using \`to\``
     )
     return 'a'
   }

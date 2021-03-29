@@ -28,7 +28,8 @@ import {
   mount,
   stub,
   wait,
-  accessible
+  accessible,
+  spy
 } from '@instructure/ui-test-utils'
 
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
@@ -62,18 +63,14 @@ describe('<Menu />', async () => {
     })
 
     it('should not allow invalid children', async () => {
-      let error = false
-      try {
-        await mount(
-          <Menu>
-            <div />
-          </Menu>
-        )
-      } catch (e) {
-        error = true
-      }
-
-      expect(error).to.be.true()
+      const cs = spy(console, 'error')
+      const warning = 'Warning: Failed prop type: Expected one of '
+      await mount(
+        <Menu>
+          <div />
+        </Menu>
+      )
+      expect(cs).to.have.been.calledWithMatch(warning)
     })
 
     it('should call onSelect when menu item is selected', async () => {

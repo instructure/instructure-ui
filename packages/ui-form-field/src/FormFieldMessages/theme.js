@@ -22,8 +22,24 @@
  * SOFTWARE.
  */
 
-export default function generator({ spacing }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { spacing, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    topMargin: spacing?.xxSmall
+  }
+
   return {
-    topMargin: spacing.xxSmall
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

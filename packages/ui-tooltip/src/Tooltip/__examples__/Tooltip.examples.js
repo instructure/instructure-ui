@@ -26,7 +26,6 @@ import React from 'react'
 export default {
   maxExamplesPerPage: 50,
   propValues: {},
-  excludeProps: ['tip', 'variant'],
   getComponentProps: (props) => {
     return {
       renderTip: 'Hello world',

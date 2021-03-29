@@ -22,51 +22,63 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, spacing, typography, borders }) {
-  return {
-    hoverBackgroundColor: colors.backgroundBrand,
-    hoverTextColor: colors.textLightest,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, borders, typography, key: themeName, spacing } = theme
+  const themeSpecificStyles = {
+    canvas: {
+      iconColor: theme['ic-brand-font-color-dark'],
+      hoverBackgroundColor: theme['ic-brand-primary'],
+      focusOutlineColor: theme['ic-brand-primary'],
+      nameTextColor: theme['ic-brand-primary'],
+      descriptorTextColor: theme['ic-brand-font-color-dark']
+    }
+  }
+  const componentVariables = {
+    hoverBackgroundColor: colors?.backgroundBrand,
+    hoverTextColor: colors?.textLightest,
 
-    focusOutlineWidth: borders.widthMedium,
-    focusOutlineColor: colors.borderBrand,
-    focusOutlineStyle: borders.style,
+    focusOutlineWidth: borders?.widthMedium,
+    focusOutlineColor: colors?.borderBrand,
+    focusOutlineStyle: borders?.style,
 
-    iconColor: colors.textDarkest,
-    iconsMarginRight: spacing.xSmall,
+    iconColor: colors?.textDarkest,
+    iconsMarginRight: spacing?.xSmall,
 
-    descriptorMarginTop: spacing.xxxSmall,
-    descriptorTextColor: colors.textDarkest,
-    descriptorFontSizeSmall: typography.fontSizeXSmall,
-    descriptorFontSizeMedium: typography.fontSizeXSmall,
-    descriptorFontSizeLarge: typography.fontSizeSmall,
+    descriptorMarginTop: spacing?.xxxSmall,
+    descriptorTextColor: colors?.textDarkest,
+    descriptorFontSizeSmall: typography?.fontSizeXSmall,
+    descriptorFontSizeMedium: typography?.fontSizeXSmall,
+    descriptorFontSizeLarge: typography?.fontSizeSmall,
 
-    nameTextColor: colors.textBrand,
-    nameFontSizeSmall: typography.fontSizeXSmall,
-    nameFontSizeMedium: typography.fontSizeSmall,
-    nameFontSizeLarge: typography.fontSizeMedium,
+    nameTextColor: colors?.textBrand,
+    nameFontSizeSmall: typography?.fontSizeXSmall,
+    nameFontSizeMedium: typography?.fontSizeSmall,
+    nameFontSizeLarge: typography?.fontSizeMedium,
 
-    baseSpacingSmall: spacing.xSmall,
-    baseSpacingMedium: spacing.small,
+    baseSpacingSmall: spacing?.xSmall,
+    baseSpacingMedium: spacing?.small,
     baseSpacingLarge: '1rem',
 
-    borderWidth: borders.widthSmall,
-    borderRadius: borders.radiusMedium,
-    borderColor: colors.borderDark,
+    borderWidth: borders?.widthSmall,
+    borderRadius: borders?.radiusMedium,
+    borderColor: colors?.borderDark,
 
-    textLineHeight: typography.lineHeightCondensed,
+    textLineHeight: typography?.lineHeightCondensed,
 
-    selectedTextColor: colors.textLightest,
-    selectedBackgroundColor: colors.backgroundDark,
-    selectedOutlineWidth: borders.widthLarge
+    selectedTextColor: colors?.textLightest,
+    selectedBackgroundColor: colors?.backgroundDark,
+    selectedOutlineWidth: borders?.widthLarge
   }
-}
 
-generator['canvas'] = function (variables) {
   return {
-    iconColor: variables['ic-brand-font-color-dark'],
-    hoverBackgroundColor: variables['ic-brand-primary'],
-    focusOutlineColor: variables['ic-brand-primary'],
-    nameTextColor: variables['ic-brand-primary'],
-    descriptorTextColor: variables['ic-brand-font-color-dark']
+    ...componentVariables,
+    ...themeSpecificStyles[themeName]
   }
 }
+
+export default generateComponentTheme

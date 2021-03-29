@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { RadioInput } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('RadioInput.theme', () => {
   describe('with the default theme', () => {
-    const variables = RadioInput.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should ensure toggle text meets 3:1 contrast with success-state background', () => {
       expect(
@@ -54,7 +55,7 @@ describe('RadioInput.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = RadioInput.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should ensure toggle text meets 4.5:1 contrast with success-state background', () => {
       expect(

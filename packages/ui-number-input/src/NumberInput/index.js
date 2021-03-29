@@ -21,10 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
@@ -33,18 +32,18 @@ import {
   IconArrowOpenUpLine
 } from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import {
   omitProps,
   pickProps,
   callRenderProp,
-  deprecated,
   getInteraction
 } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -52,15 +51,14 @@ category: components
 id: NumberInput
 ---
 **/
-@deprecated('8.0.0', {
-  label: 'renderLabel',
-  required: 'isRequired',
-  inline: 'display'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class NumberInput extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The form field label.
      */
@@ -144,19 +142,7 @@ class NumberInput extends Component {
     /**
      * Callback fired when a key is pressed.
      */
-    onKeyDown: PropTypes.func,
-    /**
-     * __Deprecated - use `renderLabel` instead__
-     */
-    label: PropTypes.node,
-    /**
-     * __Deprecated - use `isRequired` instead__
-     */
-    required: PropTypes.bool,
-    /**
-     * __Deprecated - use `display` instead__
-     */
-    inline: PropTypes.bool
+    onKeyDown: PropTypes.func
   }
 
   static defaultProps = {
@@ -178,11 +164,8 @@ class NumberInput extends Component {
     onDecrement: (event) => {},
     onIncrement: (event) => {},
     onKeyDown: (event) => {},
-    label: undefined,
     disabled: undefined,
-    readOnly: undefined,
-    required: undefined,
-    inline: undefined
+    readOnly: undefined
   }
 
   state = { hasFocus: false }
@@ -207,6 +190,22 @@ class NumberInput extends Component {
 
   get interaction() {
     return getInteraction({ props: this.props })
+  }
+
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleVariables)
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles(this.makeStyleVariables)
+  }
+
+  get makeStyleVariables() {
+    return {
+      interaction: this.interaction,
+      hasFocus: this.state.hasFocus,
+      invalid: this.invalid
+    }
   }
 
   handleRef = (element) => {
@@ -260,10 +259,10 @@ class NumberInput extends Component {
 
   renderArrows() {
     return (
-      <span className={styles.arrowContainer}>
+      <span css={this.props.styles.arrowContainer}>
         <button
           aria-hidden
-          className={styles.arrow}
+          css={this.props.styles.arrow}
           onMouseDown={this.handleClickUpArrow}
           tabIndex="-1"
           type="button"
@@ -272,7 +271,7 @@ class NumberInput extends Component {
         </button>
         <button
           aria-hidden
-          className={styles.arrow}
+          css={this.props.styles.arrow}
           onMouseDown={this.handleClickDownArrow}
           tabIndex="-1"
           type="button"
@@ -285,15 +284,11 @@ class NumberInput extends Component {
 
   render() {
     const {
-      label,
       renderLabel,
-      inline,
       display,
       placeholder,
-      required,
       isRequired,
       showArrows,
-      size,
       value,
       width
     } = this.props
@@ -303,38 +298,28 @@ class NumberInput extends Component {
     return (
       <FormField
         {...pickProps(this.props, FormField.propTypes)}
-        label={callRenderProp(renderLabel || label)}
-        inline={display === 'inline-block' || inline}
+        label={callRenderProp(renderLabel)}
+        inline={display === 'inline-block'}
         id={this.id}
       >
         <span
-          className={classnames(styles.inputWidth, {
-            [styles.focus]: this.state.hasFocus,
-            [styles.invalid]: this.invalid
-          })}
+          css={this.props.styles.inputWidth}
           style={width ? { width } : null}
         >
-          <span
-            className={classnames(styles.inputContainer, {
-              [styles.disabled]: interaction === 'disabled',
-              [styles.focus]: this.state.hasFocus,
-              [styles.invalid]: this.invalid,
-              [styles[size]]: size
-            })}
-          >
+          <span css={this.props.styles.inputContainer}>
             <input
               {...omitProps(this.props, {
                 ...FormField.propTypes,
                 ...NumberInput.propTypes
               })}
-              className={styles.input}
+              css={this.props.styles.input}
               aria-invalid={this.invalid ? 'true' : null}
               id={this.id}
               type="text"
               inputMode="numeric"
               placeholder={placeholder}
               ref={this.handleRef}
-              required={isRequired || required}
+              required={isRequired}
               value={value}
               disabled={interaction === 'disabled'}
               readOnly={interaction === 'readonly'}

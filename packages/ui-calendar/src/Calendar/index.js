@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import {
@@ -37,26 +37,31 @@ import { error } from '@instructure/console/macro'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 
-import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 
-import { Day } from './Day'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
+import { Day } from './Day'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Calendar extends Component {
   static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible
 
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * children of type `<Calendar.Day />` There should be exactly 42 provided (6
      * weeks).
@@ -134,6 +139,14 @@ class Calendar extends Component {
     role: 'table'
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   _weekdayHeaderIds = this.props.renderWeekdayLabels.reduce((ids, label, i) => {
     return { ...ids, [i]: uid(`weekday-header-${i}`) }
   }, {})
@@ -149,7 +162,8 @@ class Calendar extends Component {
       renderPrevMonthButton,
       renderNavigationLabel,
       onRequestRenderNextMonth,
-      onRequestRenderPrevMonth
+      onRequestRenderPrevMonth,
+      styles
     } = this.props
 
     const nextButton = callRenderProp(renderNextMonthButton)
@@ -160,13 +174,13 @@ class Calendar extends Component {
         onClick: createChainedFunction(button.props.onClick, onClick)
       })
 
-    const classes = classnames({
-      [styles.navigation]: true,
-      [styles.withNavigationButtons]: prevButton || nextButton
-    })
+    const style = [
+      styles.navigation,
+      ...(prevButton || nextButton ? [styles.navigationWithButtons] : [])
+    ]
 
     return (
-      <div className={classes}>
+      <div css={style}>
         {prevButton && cloneButton(prevButton, onRequestRenderPrevMonth)}
         {callRenderProp(renderNavigationLabel)}
         {nextButton && cloneButton(nextButton, onRequestRenderNextMonth)}
@@ -184,7 +198,7 @@ class Calendar extends Component {
   }
 
   renderWeekdayHeaders() {
-    const { renderWeekdayLabels } = this.props
+    const { renderWeekdayLabels, styles } = this.props
     const { length } = renderWeekdayLabels
 
     error(
@@ -199,7 +213,7 @@ class Calendar extends Component {
             <th
               key={i}
               scope="col"
-              className={styles.weekdayHeader}
+              css={styles.weekdayHeader}
               id={this._weekdayHeaderIds[i]}
             >
               {callRenderProp(label)}

@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 import {
   controllable,
   Children as ChildrenPropTypes
@@ -42,8 +43,8 @@ import { testable } from '@instructure/ui-testable'
 import { MenuItem } from '../MenuItem'
 import { MenuItemSeparator } from '../MenuItemSeparator'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -51,10 +52,14 @@ parent: Menu
 id: Menu.Group
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class MenuItemGroup extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     label: PropTypes.node.isRequired,
     allowMultiple: PropTypes.bool,
     /**
@@ -114,6 +119,14 @@ class MenuItemGroup extends Component {
     }
 
     this._labelId = uid('MenuItemGroup')
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
 
   handleSelect = (e, value, selected, item) => {
@@ -197,7 +210,7 @@ class MenuItemGroup extends Component {
     const { label } = this.props
 
     return hasVisibleChildren(label) ? (
-      <span className={styles.label}>{label}</span>
+      <span css={this.props.styles.label}>{label}</span>
     ) : (
       label
     )
@@ -245,11 +258,15 @@ class MenuItemGroup extends Component {
   render() {
     const props = omitProps(this.props, MenuItemGroup.propTypes)
     return (
-      <span {...props} className={styles.root} role="presentation">
+      <span
+        {...props}
+        css={this.props.styles.menuItemGroup}
+        role="presentation"
+      >
         <span id={this._labelId}>{this.renderLabel()}</span>
         <ul
           role="menu"
-          className={styles.items}
+          css={this.props.styles.items}
           aria-disabled={this.props.disabled ? 'true' : null}
           aria-labelledby={this._labelId}
         >

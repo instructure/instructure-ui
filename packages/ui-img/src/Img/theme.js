@@ -22,9 +22,20 @@
  * SOFTWARE.
  */
 
-export default function generator() {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const componentVariables = {
     effectTransitionDuration: '1s',
     imageBlurAmount: '0.25em'
   }
+
+  return {
+    ...componentVariables
+  }
 }
+
+export default generateComponentTheme

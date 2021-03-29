@@ -22,20 +22,17 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
-import {
-  passthroughProps,
-  callRenderProp,
-  deprecated
-} from '@instructure/ui-react-utils'
+import { passthroughProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -43,13 +40,13 @@ parent: Tabs
 id: Tabs.Tab
 ---
 **/
-@deprecated('8.0.0', {
-  selected: 'isSelected',
-  disabled: 'isDisabled'
-})
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Tab extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     variant: PropTypes.oneOf(['default', 'secondary']),
     id: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
@@ -58,32 +55,30 @@ class Tab extends Component {
     isSelected: PropTypes.bool,
     onClick: PropTypes.func,
     onKeyDown: PropTypes.func,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * __Deprecated - use `isDisabled` instead__
-     */
-    disabled: PropTypes.bool,
-    /**
-     * __Deprecated - use `isSelected` instead__
-     */
-    selected: PropTypes.bool
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
   }
 
   static defaultProps = {
     children: null,
     variant: 'default',
     isDisabled: false,
-    disabled: undefined,
     isSelected: false,
-    selected: undefined,
     onClick: (event, { index, id }) => {},
     onKeyDown: (event, { index, id }) => {}
   }
 
-  handleClick = (event) => {
-    const { onClick, index, id, disabled, isDisabled } = this.props
+  componentDidMount() {
+    this.props.makeStyles()
+  }
 
-    if (disabled || isDisabled) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
+  handleClick = (event) => {
+    const { onClick, index, id, isDisabled } = this.props
+
+    if (isDisabled) {
       return
     }
 
@@ -91,9 +86,9 @@ class Tab extends Component {
   }
 
   handleKeyDown = (event) => {
-    const { onKeyDown, index, id, disabled, isDisabled } = this.props
+    const { onKeyDown, index, id, isDisabled } = this.props
 
-    if (disabled || isDisabled) {
+    if (isDisabled) {
       return
     }
 
@@ -104,15 +99,13 @@ class Tab extends Component {
     const {
       id,
       variant,
-      selected,
-      disabled,
+      isSelected,
+      isDisabled,
       controls,
       children,
+      styles,
       ...props
     } = this.props
-
-    const isSelected = selected || props.isSelected
-    const isDisabled = disabled || props.isDisabled
 
     return (
       <View
@@ -122,10 +115,7 @@ class Tab extends Component {
         id={id}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        className={classnames({
-          [styles.root]: true,
-          [styles[variant]]: true
-        })}
+        css={styles.tab}
         aria-selected={isSelected ? 'true' : null}
         aria-disabled={isDisabled ? 'true' : null}
         aria-controls={controls}

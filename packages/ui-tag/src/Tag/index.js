@@ -21,19 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import { IconXSolid } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -41,10 +41,14 @@ category: components
 ---
 **/
 
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Tag extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     className: PropTypes.string,
     text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
     title: PropTypes.string,
@@ -88,6 +92,14 @@ class Tag extends Component {
     onClick: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   get focused() {
     return isActiveElement(this._container)
   }
@@ -117,22 +129,12 @@ class Tag extends Component {
       dismissible,
       disabled,
       readOnly,
-      size,
       text,
       title,
       onClick,
       margin,
-      variant
+      styles
     } = this.props
-
-    const classes = {
-      [styles.tagRoot]: true,
-      [styles[variant]]: true,
-      [styles[size]]: size,
-      [styles.dismissible]: dismissible,
-      [styles.button]: onClick,
-      [styles.disabled]: disabled
-    }
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Tag.propTypes),
@@ -144,7 +146,8 @@ class Tag extends Component {
         {...passthroughProps}
         ref={this.handleRef}
         elementRef={this.props.elementRef}
-        className={classNames(className, classes)}
+        css={styles.tag}
+        className={className}
         as={onClick ? 'button' : 'span'}
         margin={margin}
         type={onClick ? 'button' : null}
@@ -153,8 +156,8 @@ class Tag extends Component {
         display={null}
         title={title || (typeof text === 'string' ? text : null)}
       >
-        <span className={styles.text}>{text}</span>
-        {onClick && dismissible ? <IconXSolid className={styles.icon} /> : null}
+        <span css={styles.text}>{text}</span>
+        {onClick && dismissible ? <IconXSolid css={styles.icon} /> : null}
       </View>
     )
   }

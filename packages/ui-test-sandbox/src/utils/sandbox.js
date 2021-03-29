@@ -68,16 +68,6 @@ class Sandbox {
       }
     }
 
-    // override mocha's onerror handler
-    if (typeof window.onerror === 'function') {
-      window.onerror = overrideWindowOnError(window.onerror)
-    }
-
-    // for prop-type warnings:
-    if (typeof console.error === 'function') {
-      console.error = overrideConsoleError(console.error)
-    }
-
     this._sandbox = sinon.createSandbox()
 
     this._attributes = {
@@ -133,12 +123,6 @@ class Sandbox {
 
   async teardown() {
     await ReactComponentWrapper.unmount()
-
-    // avoiding circular deps by not importing @instructure/ui-themeable here:
-    if (global.GLOBAL_THEME_REGISTRY) {
-      const { styleSheet } = global.GLOBAL_THEME_REGISTRY
-      styleSheet && styleSheet.flush()
-    }
 
     this._sandbox.restore()
 
@@ -216,50 +200,6 @@ class Sandbox {
 function resetViewport() {
   if (global.viewport && typeof global.viewport.reset === 'function') {
     global.viewport.reset()
-  }
-}
-
-/* istanbul ignore next */
-function overrideWindowOnError(windowOnError) {
-  return (err, url, line) => {
-    const error = typeof err === 'string' ? err : err.toString()
-
-    // Prevent default window errors for uncaught errors in React 16+ here.
-    // The promise returned by the mount, setProps, and setContext utils will be rejected when they are thrown.
-    // Ignore them here so that they don't fail the test when they have been handled.
-    if (
-      error.startsWith('Error: Warning:') ||
-      error.startsWith('Uncaught Error: Warning:') ||
-      error.startsWith('The above error occurred')
-    ) {
-      return true
-    }
-
-    return windowOnError(err, url, line)
-  }
-}
-
-/* istanbul ignore next */
-function overrideConsoleError(consoleError) {
-  return (first, ...rest) => {
-    const error = typeof first === 'string' ? first : first.toString()
-
-    if (error.startsWith('Warning:')) {
-      // throw an error so that prop type validation errors are caught in our tests:
-      throw new Error(first)
-    }
-
-    // ignore the noisy/extra uncaught error messages fired by React 16+
-    if (
-      error.startsWith('Uncaught Error: Warning:') ||
-      error.startsWith('The above error occurred')
-    ) {
-      return
-    }
-
-    if (process.env.DEBUG) {
-      return consoleError(first, ...rest)
-    }
   }
 }
 

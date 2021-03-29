@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
@@ -33,14 +33,14 @@ import {
   omitProps,
   pickProps
 } from '@instructure/ui-react-utils'
-import { capitalizeFirstLetter } from '@instructure/ui-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { GridCol } from '../GridCol'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -48,10 +48,14 @@ parent: Grid
 id: Grid.Row
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class GridRow extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
@@ -74,31 +78,24 @@ class GridRow extends Component {
     isLastRow: false
   }
 
-  startAtClass() {
-    return (
-      !!this.props.startAt &&
-      `startAt${capitalizeFirstLetter(this.props.startAt)}`
-    )
+  componentDidMount() {
+    this.props.makeStyles()
   }
 
-  rowSpacingClass() {
-    return `rowSpacing${capitalizeFirstLetter(this.props.rowSpacing)}`
-  }
-
-  colSpacingClass() {
-    return `colSpacing${capitalizeFirstLetter(this.props.colSpacing)}`
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   renderChildren() {
-    const { children, ...props } = this.props
+    const { styles, makeStyles, ...props } = this.props
 
-    return Children.map(children, (child, index) => {
+    return Children.map(this.props.children, (child, index) => {
       if (matchComponentTypes(child, [GridCol])) {
         return safeCloneElement(child, {
-          ...pickProps(this.props, GridRow.propTypes),
+          ...pickProps(props, GridRow.propTypes),
           ...child.props /* child props should override parent */,
           isLastRow: props.isLastRow,
-          isLastCol: index + 1 === Children.count(children)
+          isLastCol: index + 1 === Children.count(this.props.children)
         })
       } else {
         return child // PropType validation should handle errors
@@ -107,20 +104,12 @@ class GridRow extends Component {
   }
 
   render() {
-    const classes = {
-      [styles.root]: true,
-      [styles.lastRow]: this.props.isLastRow,
-      [styles[`hAlign--${this.props.hAlign}`]]: true,
-      [styles[`vAlign--${this.props.vAlign}`]]: true,
-      [styles[this.rowSpacingClass()]]: true,
-      [styles[this.colSpacingClass()]]: this.props.colSpacing !== 'none',
-      [styles[this.startAtClass()]]: !!this.props.startAt
-    }
+    const { styles, ...restProps } = this.props
 
-    const props = omitProps(this.props, GridRow.propTypes)
+    const props = omitProps(restProps, GridRow.propTypes)
 
     return (
-      <span {...props} className={classnames(classes)}>
+      <span {...props} css={styles.gridRow}>
         {this.renderChildren()}
       </span>
     )

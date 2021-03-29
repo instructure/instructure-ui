@@ -27,10 +27,7 @@
  * category: utilities/react
  * ---
  * Get the displayName of a React component.
- *
- * For [themeable](#themeable) components defined as ES6 classes, the displayName can
- * be added via [babel plugin](#babel-plugin-themeable-styles) for [themeable](#themeable) components.
- *
+ * needs a babel plugin to work https://github.com/facebook/react/issues/4915 !!
  * @param {ReactComponent|String} Component
  * @returns {String} the component displayName
  */

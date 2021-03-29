@@ -26,8 +26,9 @@ import { omitProps } from './passthroughProps'
  * ---
  * category: utilities/react
  * ---
- * Return a props object with the specified propTypes omitted.
- * Automatically excludes ('theme', 'children', 'className', 'style')
+ * Return an object with the remaining props after propTypes (and additionally specified props) omitted.
+ *
+ * Automatically excludes the following props: 'theme', 'children', 'className', 'style', 'styles', 'makeStyles', 'themeOverride'
  *
  * @param {Object} props React component props
  * @param {Object} propTypes React component propTypes

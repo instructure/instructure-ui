@@ -21,10 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { error } from '@instructure/console/macro'
 import {
@@ -34,13 +33,13 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
-import { themeable } from '@instructure/ui-themeable'
 
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -49,10 +48,14 @@ id: AppNav.Item
 ---
 @module Item
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Item extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The text to display. If the `icon` prop is used, label text must be wrapped
      * in `ScreenReaderContent`.
@@ -111,6 +114,14 @@ class Item extends Component {
     isDisabled: false
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
+
   handleClick = (e) => {
     const { isDisabled, onClick } = this.props
 
@@ -129,7 +140,6 @@ class Item extends Component {
       renderIcon,
       renderLabel,
       href,
-      isSelected,
       elementRef,
       renderAfter,
       cursor,
@@ -150,12 +160,6 @@ class Item extends Component {
       )
     }
 
-    const classes = classnames({
-      [styles.root]: true,
-      [styles.isSelected]: isSelected,
-      [styles.disabled]: isDisabled
-    })
-
     return (
       <View
         {...passthroughProps(this.props)}
@@ -170,13 +174,13 @@ class Item extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         cursor={isDisabled ? 'not-allowed' : cursor}
-        className={classes}
+        css={this.props.styles.item}
       >
         {icon}
         {labelIsForScreenReaders ? (
           label
         ) : (
-          <span className={styles.label}>{label}</span>
+          <span css={this.props.styles.label}>{label}</span>
         )}
         {renderAfter && callRenderProp(renderAfter)}
       </View>

@@ -70,18 +70,14 @@ const deprecated = (() => {
       DeprecatedComponent.prototype.componentDidMount = function () {
         if (oldProps) {
           warnDeprecatedProps(
-            ComposedComponent.displayName,
+            ComposedComponent.name,
             version,
             this.props,
             oldProps,
             message
           )
         } else {
-          warnDeprecatedComponent(
-            version,
-            ComposedComponent.displayName,
-            message
-          )
+          warnDeprecatedComponent(version, ComposedComponent.name, message)
         }
 
         if (ComposedComponent.prototype.componentDidMount) {
@@ -96,18 +92,14 @@ const deprecated = (() => {
       ) {
         if (oldProps) {
           warnDeprecatedProps(
-            ComposedComponent.displayName,
+            ComposedComponent.name,
             version,
             this.props,
             oldProps,
             message
           )
         } else {
-          warnDeprecatedComponent(
-            version,
-            ComposedComponent.displayName,
-            message
-          )
+          warnDeprecatedComponent(version, ComposedComponent.name, message)
         }
 
         if (ComposedComponent.prototype.componentDidUpdate) {
@@ -190,7 +182,7 @@ const deprecated = (() => {
    * category: utilities
    * ---
    * @param {String} version the version of the package in which the component or function was deprecated
-   * @param {String} componentName the displayName of the component or Function.name of the utility function
+   * @param {String} componentName the name of the component or Function.name of the utility function
    * @param {String} message a message to display as a console error in DEV env when condition is false
    */
   deprecated.warnDeprecatedComponent = warnDeprecatedComponent

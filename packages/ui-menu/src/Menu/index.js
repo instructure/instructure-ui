@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
@@ -38,7 +38,6 @@ import {
   matchComponentTypes
 } from '@instructure/ui-react-utils'
 import { error } from '@instructure/console/macro'
-import { themeable } from '@instructure/ui-themeable'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -46,19 +45,24 @@ import { MenuContext } from '../MenuContext'
 import { MenuItem } from './MenuItem'
 import { MenuItemGroup } from './MenuItemGroup'
 import { MenuItemSeparator } from './MenuItemSeparator'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Menu extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu`
      */
@@ -218,40 +222,41 @@ class Menu extends Component {
     this._id = this.props.id || uid('Menu')
   }
 
-  static childContextTypes = MenuContext.types
-  static contextTypes = MenuContext.types
+  componentDidMount() {
+    this.props.makeStyles()
+  }
 
-  getChildContext() {
-    // if it's a submenu it will have a context defined by its parent Menu
-    const context = MenuContext.getMenuContext(this.context)
+  componentDidUpdate(prevProps) {
+    this.props.makeStyles()
+  }
 
-    return MenuContext.makeMenuContext({
-      registerMenuItem: (item) => {
-        const { type } = item.props
+  static contextType = MenuContext
 
-        // if the item is a flyout trigger
-        // we only want to add it to the parent Menu items list
-        if (context && context.registerMenuItem && type === 'flyout') {
-          context.registerMenuItem(item)
-        } else if (this.getMenuItemIndex(item) < 0) {
-          this._menuItems.push(item)
-        }
-      },
-      removeMenuItem: (item) => {
-        const { type } = item.props
-        // if the item is a flyout trigger
-        // we only want to remove it from the parent Menu items list
-        if (context && context.removeMenuItem && type === 'flyout') {
-          context.removeMenuItem(item)
-        } else {
-          const index = this.getMenuItemIndex(item)
-          error(index >= 0, '[Menu] Could not find registered menu item.')
-          if (index >= 0) {
-            this._menuItems.splice(index, 1)
-          }
-        }
+  registerMenuItem = (item) => {
+    const { type } = item.props
+
+    // if the item is a flyout trigger
+    // we only want to add it to the parent Menu items list
+    if (this.context && this.context.registerMenuItem && type === 'flyout') {
+      this.context.registerMenuItem(item)
+    } else if (this.getMenuItemIndex(item) < 0) {
+      this._menuItems.push(item)
+    }
+  }
+
+  removeMenuItem = (item) => {
+    const { type } = item.props
+    // if the item is a flyout trigger
+    // we only want to remove it from the parent Menu items list
+    if (this.context && this.context.removeMenuItem && type === 'flyout') {
+      this.context.removeMenuItem(item)
+    } else {
+      const index = this.getMenuItemIndex(item)
+      error(index >= 0, '[Menu] Could not find registered menu item.')
+      if (index >= 0) {
+        this._menuItems.splice(index, 1)
       }
-    })
+    }
   }
 
   get menuItems() {
@@ -519,28 +524,35 @@ class Menu extends Component {
     const controls = this.props['aria-controls'] // eslint-disable-line react/prop-types
 
     return (
-      <ul
-        role="menu"
-        aria-label={label}
-        tabIndex="0"
-        className={styles.menu}
-        aria-labelledby={labelledBy || (trigger && this._labelId)}
-        aria-controls={controls}
-        aria-disabled={disabled ? 'true' : null}
-        onKeyDown={this.handleMenuKeyDown}
-        onKeyUp={onKeyUp}
-        ref={(el) => {
-          this._menu = el
-          if (typeof menuRef === 'function') {
-            menuRef(el)
-          }
-          if (typeof contentRef === 'function') {
-            contentRef(el)
-          }
+      <MenuContext.Provider
+        value={{
+          removeMenuItem: this.removeMenuItem,
+          registerMenuItem: this.registerMenuItem
         }}
       >
-        {this.renderChildren()}
-      </ul>
+        <ul
+          role="menu"
+          aria-label={label}
+          tabIndex="0"
+          css={this.props.styles.menu}
+          aria-labelledby={labelledBy || (trigger && this._labelId)}
+          aria-controls={controls}
+          aria-disabled={disabled ? 'true' : null}
+          onKeyDown={this.handleMenuKeyDown}
+          onKeyUp={onKeyUp}
+          ref={(el) => {
+            this._menu = el
+            if (typeof menuRef === 'function') {
+              menuRef(el)
+            }
+            if (typeof contentRef === 'function') {
+              contentRef(el)
+            }
+          }}
+        >
+          {this.renderChildren()}
+        </ul>
+      </MenuContext.Provider>
     )
   }
 

@@ -22,9 +22,25 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders, typography }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, typography, key: themeName } = theme
+
+  const themeSpecificStyles = {}
+
+  const componentVariables = {
+    editorBorderRadius: borders?.radiusMedium,
+    fontSize: typography?.fontSizeMedium
+  }
+
   return {
-    editorBorderRadius: borders.radiusMedium,
-    fontSize: typography.fontSizeMedium
+    ...componentVariables,
+    ...themeSpecificStyles[themeName]
   }
 }
+
+export default generateComponentTheme

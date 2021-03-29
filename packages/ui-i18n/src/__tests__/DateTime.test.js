@@ -64,7 +64,6 @@ describe('DateTime', () => {
     expect(isValid('2018-04-15T23:30:00Z')).to.be.true()
     expect(isValid('2018-04-15T23:30')).to.be.true()
     expect(isValid('2018-04-15')).to.be.true()
-    expect(isValid('2018')).to.be.false()
   })
 
   it('parses iso8601', () => {

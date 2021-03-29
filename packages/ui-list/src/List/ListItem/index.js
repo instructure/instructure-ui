@@ -22,20 +22,18 @@
  * SOFTWARE.
  */
 
-// TODO: remove delimeter comment description once the deprecated values are removed
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -43,20 +41,19 @@ parent: List
 id: List.Item
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class ListItem extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
      * Inherits delimiter from the parent List component.
      */
-    delimiter: deprecated.deprecatePropValues(
-      PropTypes.oneOf(['none', 'dashed', 'solid', 'pipe', 'slash', 'arrow']),
-      ['pipe', 'slash', 'arrow'],
-      ({ propValue }) =>
-        `with 'delimiter' set to ${propValue} will only be available when using [InlineList.Item] as of version 8.0.0.`
-    ),
+    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -84,11 +81,7 @@ class ListItem extends Component {
       'x-large',
       'xx-large'
     ]),
-    elementRef: PropTypes.func,
-    /**
-     * __deprecated:__ inline will be InlineList
-     */
-    variant: PropTypes.oneOf(['default', 'unstyled', 'inline'])
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -97,8 +90,15 @@ class ListItem extends Component {
     spacing: 'none',
     delimiter: 'none',
     size: 'medium',
-    elementRef: (el) => {},
-    variant: undefined
+    elementRef: (el) => {}
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   render() {
@@ -110,28 +110,14 @@ class ListItem extends Component {
       padding,
       elementRef,
       children,
-      variant,
+      styles,
       ...rest
     } = this.props
 
-    const withDelimiter = delimiter !== 'none'
-    const withSpacing = spacing !== 'none'
-
-    error(
-      !(withDelimiter && withSpacing),
-      `[List] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
-    )
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: size,
-      [styles[`delimiter--${delimiter}`]]: delimiter !== 'none' ? true : null,
-      [styles[`spacing--${spacing}`]]: withSpacing && !withDelimiter
-    }
     return (
       <View
         {...passthroughProps(rest)}
-        className={classnames(classes)}
+        css={styles.listItem}
         as="li"
         margin={margin}
         padding={padding}
@@ -139,10 +125,6 @@ class ListItem extends Component {
         elementRef={elementRef}
       >
         {children}
-
-        {variant === 'inline' && (
-          <span className={styles.delimiter} aria-hidden="true" />
-        )}
       </View>
     )
   }

@@ -22,30 +22,35 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import {
   omitProps,
   callRenderProp,
   getElementType
 } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Billboard extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Provide an <Img> component or Instructure Icon for the hero image
      */
@@ -122,11 +127,19 @@ class Billboard extends Component {
     elementRef: (el) => {}
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   renderHeading() {
-    const { headingLevel, headingAs, heading } = this.props
+    const { headingLevel, headingAs, heading, styles } = this.props
 
     return (
-      <span className={styles.heading}>
+      <span css={styles.heading}>
         <Heading level={headingLevel} as={headingAs} color="primary">
           {heading}
         </Heading>
@@ -160,15 +173,13 @@ class Billboard extends Component {
   }
 
   renderContent() {
-    const { heading, message, hero } = this.props
+    const { heading, message, hero, styles } = this.props
 
     return (
-      <span className={styles.content}>
-        {hero && <span className={styles.hero}>{this.renderHero()}</span>}
+      <span css={styles.content}>
+        {hero && <span css={styles.hero}>{this.renderHero()}</span>}
         {heading && this.renderHeading()}
-        {message && (
-          <span className={styles.message}>{callRenderProp(message)}</span>
-        )}
+        {message && <span css={styles.message}>{callRenderProp(message)}</span>}
       </span>
     )
   }
@@ -185,22 +196,8 @@ class Billboard extends Component {
   }
 
   render() {
-    const {
-      href,
-      disabled,
-      readOnly,
-      onClick,
-      size,
-      margin,
-      elementRef
-    } = this.props
+    const { href, disabled, readOnly, margin, styles, elementRef } = this.props
 
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: true,
-      [styles.clickable]: href || onClick,
-      [styles.disabled]: disabled
-    }
     const Element = getElementType(Billboard, this.props)
 
     return (
@@ -213,7 +210,7 @@ class Billboard extends Component {
           type={Element === 'button' ? 'button' : null}
           as={Element}
           elementRef={elementRef}
-          className={classnames(classes)}
+          css={styles.billboard}
           href={href}
           onClick={this.handleClick}
           disabled={disabled}

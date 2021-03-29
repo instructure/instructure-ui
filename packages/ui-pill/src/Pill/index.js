@@ -22,38 +22,36 @@
  * SOFTWARE.
  */
 
-// TODO: once the text prop is removed in v8.0.0 update children prop to isRequired
-// NOTE: when the variant prop is removed in v8.0.0 change 'default' color to 'primary'
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { Tooltip } from '@instructure/ui-tooltip'
 import { TruncateText } from '@instructure/ui-truncate-text'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@deprecated('8.0.0', {
-  text: 'children',
-  variant: 'color'
-})
-@themeable(theme, styles)
 class Pill extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
     color: PropTypes.oneOf([
       'primary',
       'success',
@@ -68,24 +66,7 @@ class Pill extends Component {
      * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
      * familiar CSS-like shorthand. For example: `margin="small auto large"`.
      */
-    margin: ThemeablePropTypes.spacing,
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use 'children'__
-     */
-    text: PropTypes.node,
-    /**
-     * __Deprecated - use 'color'__
-     */
-    variant: PropTypes.oneOf([
-      'default',
-      'success',
-      'danger',
-      'primary',
-      'warning',
-      'message'
-    ])
-    /* eslint-enable react/require-default-props */
+    margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {
@@ -103,21 +84,31 @@ class Pill extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   handleTruncation(truncated) {
-    this.setState({
-      truncated: truncated
-    })
+    if (truncated !== this.state.truncated) {
+      this.setState({
+        truncated: truncated
+      })
+    }
   }
 
   renderPill(focused, getTriggerProps) {
     const {
       margin,
       children,
-      variant,
       color,
       as,
       elementRef,
-      text,
+      styles,
+      makeStyles,
       ...props
     } = this.props
 
@@ -128,23 +119,6 @@ class Pill extends Component {
         ? getTriggerProps(filteredProps)
         : filteredProps
 
-    let actualColor = variant
-    if (!actualColor) {
-      // usng new color props
-      actualColor = color
-    } else {
-      // using old variant
-      if (variant === 'primary') {
-        actualColor = 'oldPrimary'
-      }
-    }
-
-    const classes = classnames({
-      [styles.root]: true,
-      [styles.truncated]: this.state.truncated,
-      [styles[actualColor]]: true
-    })
-
     return (
       <View
         {...containerProps}
@@ -152,7 +126,7 @@ class Pill extends Component {
         elementRef={elementRef}
         margin={margin}
         padding="0"
-        maxWidth={this.theme.maxWidth}
+        maxWidth={styles.maxWidth}
         background="transparent"
         borderRadius="pill"
         borderWidth="0"
@@ -161,14 +135,14 @@ class Pill extends Component {
         withFocusOutline={focused}
         focusColor="info"
       >
-        <span className={classes}>
-          <span className={styles.text}>
+        <span css={styles.pill}>
+          <span css={styles.text}>
             <TruncateText
               onUpdate={(truncated) => {
                 this.handleTruncation(truncated)
               }}
             >
-              {children || text}
+              {children}
             </TruncateText>
           </span>
         </span>
@@ -179,7 +153,7 @@ class Pill extends Component {
   render() {
     if (this.state.truncated) {
       return (
-        <Tooltip renderTip={this.props.children || this.props.text}>
+        <Tooltip renderTip={this.props.children}>
           {({ focused, getTriggerProps }) => {
             return this.renderPill(focused, getTriggerProps)
           }}

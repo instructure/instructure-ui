@@ -38,7 +38,7 @@ const babelLoader = {
 
 const rules = [
   {
-    test: /\.js$/,
+    test: /\.m?js$/,
     exclude: [...exclude, /\.examples\.js$/],
     use: [
       {
@@ -56,28 +56,10 @@ const rules = [
     ]
   },
   {
-    test: /\.js$/,
+    test: /\.m?js$/,
     include: [/\.examples\.js/],
     exclude,
     use: ['component-examples-loader', babelLoader]
-  },
-  {
-    enforce: 'pre',
-    test: /\.css?$/,
-    exclude,
-    loader: 'postcss-loader',
-    options: {
-      ident: 'postcss',
-      plugins: (loader) => [
-        require('stylelint')(),
-        require('postcss-reporter')({ clearReportedMessages: true })
-      ]
-    }
-  },
-  {
-    test: /\.css$/,
-    exclude: [...exclude, /ui-icons/],
-    use: [babelLoader, 'themeable-css-loader', 'postcss-loader']
   },
   {
     test: /\.css$/,
@@ -104,7 +86,7 @@ const rules = [
 if (!noLint) {
   rules.unshift({
     enforce: 'pre',
-    test: /\.js?$/,
+    test: /\.m?js?$/,
     exclude,
     loader: 'eslint-loader',
     options: {

@@ -23,12 +23,10 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 
 import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
-
-import styles from '../styles.css'
 
 describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {
@@ -96,18 +94,17 @@ describe('<Tabs />', async () => {
   })
 
   it('should not allow invalid children', async () => {
-    let error = false
-    try {
-      await mount(
-        <Tabs>
-          <div>foo</div>
-        </Tabs>
-      )
-    } catch (e) {
-      error = true
-    }
+    const cs = spy(console, 'error')
+    const warning =
+      "Failed prop type: Expected one of Panel,  in Tabs but found 'div'"
 
-    expect(error).to.be.true()
+    await mount(
+      <Tabs>
+        <div>foo</div>
+      </Tabs>
+    )
+
+    expect(cs).to.have.been.calledWithMatch(warning)
   })
 
   it('should preserve Tab.Panel keys', async () => {
@@ -236,9 +233,9 @@ describe('<Tabs />', async () => {
     })
   })
 
-  it('should focus the selected tab when focus is set', async () => {
+  it('should focus the selected tab when shouldFocusOnRender is set', async () => {
     await mount(
-      <Tabs focus>
+      <Tabs shouldFocusOnRender>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
         <Tabs.Panel renderTitle="Second Tab" isSelected>
           Tab 2 content
@@ -456,19 +453,23 @@ describe('<Tabs />', async () => {
         </div>
       )
 
-      const subject = await mount(<Example width="200px" />)
+      const subject = await mount(<Example width="150px" />)
       const tabs = await TabsLocator.find()
 
-      expect(await tabs.find(`.${styles['scrollOverlay']}`)).to.exist()
-      expect(await tabs.find(`.${styles['scrollSpacer']}`)).to.exist()
+      expect(await tabs.find('[class$="-tabs__scrollOverlay"]')).to.exist()
+      expect(await tabs.find('[class$="-tabs__scrollSpacer"]')).to.exist()
 
       await subject.setProps({ width: '550px' })
 
       expect(
-        await tabs.find(`.${styles['scrollOverlay']}`, { expectEmpty: true })
+        await tabs.find('[class$="-tabs__scrollOverlay"]', {
+          expectEmpty: true
+        })
       ).to.not.exist()
       expect(
-        await tabs.find(`.${styles['scrollSpacer']}`, { expectEmpty: true })
+        await tabs.find('[class$="-tabs__scrollSpacer"]', {
+          expectEmpty: true
+        })
       ).to.not.exist()
     })
   })

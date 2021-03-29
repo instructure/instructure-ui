@@ -28,18 +28,18 @@
     "@instructure/ui-test-utils": "^7.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/console": "^7.5.0",
+    "@instructure/emotion": "^7.5.0",
     "@instructure/ui-a11y-content": "^7.5.0",
     "@instructure/ui-buttons": "^7.5.0",
     "@instructure/ui-icons": "^7.5.0",
     "@instructure/ui-motion": "^7.5.0",
     "@instructure/ui-react-utils": "^7.5.0",
-    "@instructure/ui-themeable": "^7.5.0",
+    "@instructure/ui-themes": "^7.5.0",
     "@instructure/ui-utils": "^7.5.0",
     "@instructure/ui-view": "^7.5.0",
     "@instructure/uid": "^7.5.0",
-    "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"
   },

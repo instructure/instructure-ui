@@ -29,9 +29,16 @@ import { App } from './App'
 import { Figure } from './Figure'
 import { Guidelines } from './Guidelines'
 import { ToggleBlockquote } from './ToggleBlockquote'
+import { canvas } from '@instructure/ui-themes'
+import { EmotionThemeProvider } from '@instructure/emotion'
 
 function renderDocsClient(data, element) {
-  ReactDOM.render(<App {...data} />, element)
+  ReactDOM.render(
+    <EmotionThemeProvider theme={canvas}>
+      <App {...data} />
+    </EmotionThemeProvider>,
+    element
+  )
 }
 
 export { renderDocsClient, Figure, Guidelines, ToggleBlockquote }

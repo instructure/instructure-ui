@@ -33,7 +33,12 @@ import {
 } from '@instructure/ui-test-utils'
 
 import { Transition } from '../index'
-import styles from '../styles.css'
+import generateStyle from '../styles'
+
+const getClass = (type, phase) => {
+  const styles = generateStyle({}, { type })
+  return styles.classNames[phase]
+}
 
 describe('<Transition />', async () => {
   const types = [
@@ -55,7 +60,7 @@ describe('<Transition />', async () => {
 
       const transition = within(subject.getDOMNode())
 
-      expect(transition.hasClass(styles[`${type}--entered`])).to.be.true()
+      expect(transition.hasClass(getClass(type, 'entered'))).to.be.true()
     })
   }
 
@@ -64,18 +69,19 @@ describe('<Transition />', async () => {
   })
 
   it('should correctly apply enter and exit classes', async () => {
+    const type = 'fade'
     const subject = await mount(
-      <Transition type="fade" in={true}>
+      <Transition type={type} in={true}>
         <div>hello</div>
       </Transition>
     )
 
     const transition = within(subject.getDOMNode())
-    expect(transition.hasClass(styles['fade--entered'])).to.be.true()
+    expect(transition.hasClass(getClass(type, 'entered'))).to.be.true()
 
     await subject.setProps({ in: false })
     await wait(() => {
-      expect(transition.hasClass(styles['fade--exited'])).to.be.true()
+      expect(transition.hasClass(getClass(type, 'exited'))).to.be.true()
     })
   })
 

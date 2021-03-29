@@ -25,13 +25,14 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { Tag } from '../index'
+import generateComponentTheme from '../theme'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
 describe('Tag.theme', () => {
   const variants = ['default', 'inline']
 
   context('with the default theme', () => {
-    const variables = Tag.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     variants.forEach((variant) => {
       context(`with the ${variant} variant`, () => {
@@ -48,7 +49,7 @@ describe('Tag.theme', () => {
   })
 
   describe('with the accessible canvas theme', () => {
-    const variables = Tag.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     variants.forEach((variant) => {
       context(`with the ${variant} variant`, () => {

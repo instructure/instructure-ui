@@ -28,7 +28,6 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { TextArea } from '../index'
 
 import { TextAreaLocator } from '../TextAreaLocator'
-import styles from '../styles.css'
 
 describe('TextArea', async () => {
   it('should accept a default value', async () => {
@@ -63,12 +62,12 @@ describe('TextArea', async () => {
     const input = await textArea.findInput()
     const initialHeight = parseInt(input.getComputedStyle().height, 10)
 
-    /* eslint-disable max-len */
+    // eslint-disable max-len
     await subject.setProps({
       value:
         'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'
     })
-    /* eslint-enable max-len */
+    // eslint-enable max-len
 
     let resizedHeight
     await wait(() => {
@@ -76,8 +75,8 @@ describe('TextArea', async () => {
       expect(resizedHeight).to.be.above(initialHeight)
     })
 
-    /* Ensure minHeight that matches input height is being applied to container */
-    const layout = await textArea.find(`.${styles.layout}`)
+    // Ensure minHeight that matches input height is being applied to container
+    const layout = await textArea.find('[class$=-textArea__layout]')
     const layoutMinHeight = parseInt(
       layout.getComputedStyle().getPropertyValue('min-height'),
       10
@@ -124,8 +123,8 @@ describe('TextArea', async () => {
     expect(input.getComputedStyle().getPropertyValue('max-height')).to.contain(
       '160px'
     )
-    /* ensure maxHeight is being applied to input container and not exceeded by minHeight style */
-    const layout = await textArea.find(`.${styles.layout}`)
+    // ensure maxHeight is being applied to input container and not exceeded by minHeight style
+    const layout = await textArea.find('[class$=-textArea__layout]')
     const layoutMaxHeight = parseInt(
       layout.getComputedStyle().getPropertyValue('max-height'),
       10

@@ -23,7 +23,4 @@
  */
 require('@instructure/ui-polyfill-loader!')
 
-const { canvas } = require('@instructure/ui-themes')
-canvas.use({ overrides: { transitions: { duration: '1ms' } } })
-
 require('ui-tests-loader!')

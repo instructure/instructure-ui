@@ -27,7 +27,6 @@ import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import { Modal } from '../index'
 import { ModalLocator } from '../ModalLocator'
-import styles from '../styles.css'
 
 describe('<Modal />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
@@ -50,9 +49,7 @@ describe('<Modal />', async () => {
         size="small"
         label="Modal Dialog"
         shouldReturnFocus={false}
-        theme={{
-          smallMaxWidth: '10em'
-        }}
+        themeOverride={{ smallMaxWidth: '10em' }}
       >
         <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
@@ -79,7 +76,7 @@ describe('<Modal />', async () => {
     )
 
     const modal = await ModalLocator.find(':label(Modal Dialog)')
-    const constrain = await modal.find(`.${styles['constrainContext']}`)
+    const constrain = await modal.find('[class*="-modal__constrainContext"]')
 
     expect(constrain).to.exist()
   })
@@ -92,9 +89,7 @@ describe('<Modal />', async () => {
           label="Modal Dialog"
           shouldReturnFocus={false}
           constrain="parent"
-          theme={{
-            textColor: 'rgb(0, 0, 0)'
-          }}
+          themeOverride={{ textColor: 'rgb(0, 0, 0)' }}
         >
           <Modal.Body>Foo Bar Baz</Modal.Body>
         </Modal>

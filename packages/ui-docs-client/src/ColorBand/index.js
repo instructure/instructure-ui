@@ -22,21 +22,33 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Flex } from '@instructure/ui-flex'
 import { View } from '@instructure/ui-view'
-import { themeable } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class ColorBand extends Component {
   static propTypes = {
-    height: PropTypes.string
+    height: PropTypes.string,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   static defaultProps = {
@@ -53,28 +65,13 @@ class ColorBand extends Component {
       >
         <Flex height="100%" alignItems="stretch" justifyItems="end">
           <Flex.Item size="7%">
-            <span
-              className={classnames({
-                [styles.tile]: true,
-                [styles.colorAlert]: true
-              })}
-            ></span>
+            <span css={this.props.styles.band1} />
           </Flex.Item>
           <Flex.Item size="10%">
-            <span
-              className={classnames({
-                [styles.tile]: true,
-                [styles.colorWarning]: true
-              })}
-            ></span>
+            <span css={this.props.styles.band2} />
           </Flex.Item>
           <Flex.Item size="15%">
-            <span
-              className={classnames({
-                [styles.tile]: true,
-                [styles.colorDanger]: true
-              })}
-            ></span>
+            <span css={this.props.styles.band3} />
           </Flex.Item>
         </Flex>
       </View>

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
 
 import { deprecated } from '../deprecated'
 
@@ -57,14 +57,14 @@ describe('@deprecated', async () => {
     })(TestComponent)
 
     it('should warn when suggesting new prop when using old prop', async () => {
-      const consoleWarn = stub(console, 'warn')
+      const consoleWarn = spy(console, 'warn')
 
       const warning =
-        'Warning: [TestComponent] `foo` is deprecated and will be removed in version 2.1.0. Use `bar` instead.'
+        'Warning: [TestComponent] `foo` is deprecated and will be removed in version 2.1.0. Use `bar` instead. '
 
       await mount(<DeprecatedComponent foo="Jane" />)
 
-      expect(consoleWarn).to.have.been.calledWithMatch(warning)
+      expect(consoleWarn.firstCall.args[0]).to.be.equal(warning)
     })
 
     it('should warn when using old prop with no new prop', async () => {

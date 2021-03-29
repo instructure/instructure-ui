@@ -22,28 +22,32 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { Grid } from '@instructure/ui-grid'
-import { themeable } from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLayout } from '../FormFieldLayout'
 import { FormPropTypes } from '../FormPropTypes'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldGroup extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     description: PropTypes.node.isRequired,
     /**
      * the element type to render as
@@ -80,6 +84,18 @@ class FormFieldGroup extends Component {
     rowSpacing: 'medium',
     colSpacing: 'small',
     vAlign: 'middle'
+  }
+
+  componentDidMount() {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  get makeStylesVariables() {
+    return { invalid: this.invalid }
   }
 
   get invalid() {
@@ -121,29 +137,26 @@ class FormFieldGroup extends Component {
   }
 
   renderFields() {
+    const { styles } = this.props
+
     return (
-      <span
-        key="fields"
-        className={classnames({
-          [styles.fields]: true,
-          [styles.invalid]: this.invalid,
-          [styles.disabled]: this.props.disabled
-        })}
-      >
+      <span key="fields" css={styles.formFieldGroup}>
         {this.renderChildren()}
       </span>
     )
   }
 
   render() {
+    const { styles, makeStyles, ...props } = this.props
+
     return (
       <FormFieldLayout
-        {...omitProps(this.props, FormFieldGroup.propTypes)}
-        {...pickProps(this.props, FormFieldLayout.propTypes)}
-        vAlign={this.props.vAlign}
-        layout={this.props.layout === 'inline' ? 'inline' : 'stacked'}
-        label={this.props.description}
-        aria-disabled={this.props.disabled ? 'true' : null}
+        {...omitProps(props, FormFieldGroup.propTypes)}
+        {...pickProps(props, FormFieldLayout.propTypes)}
+        vAlign={props.vAlign}
+        layout={props.layout === 'inline' ? 'inline' : 'stacked'}
+        label={props.description}
+        aria-disabled={props.disabled ? 'true' : null}
         aria-invalid={this.invalid ? 'true' : null}
       >
         {this.renderFields()}

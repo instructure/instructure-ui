@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Calendar } from '@instructure/ui-calendar'
@@ -35,7 +36,6 @@ import {
   getInteraction,
   callRenderProp,
   safeCloneElement,
-  deprecated,
   passthroughProps
 } from '@instructure/ui-react-utils'
 import {
@@ -45,33 +45,31 @@ import {
 import { PositionPropTypes } from '@instructure/ui-position'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
-import { themeable } from '@instructure/ui-themeable'
 
-import styles from './styles.css'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  label: 'renderLabel'
-})
+@withStyle(generateStyle, null)
 @testable()
-@themeable(null, styles)
 class DateInput extends Component {
   static Day = Calendar.Day
 
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Specifies the input label.
      */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
       .isRequired,
-    /**
-     * __Deprecated - use `renderLabel` instead__
-     */
-    label: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
      * Specifies the input value.
      */
@@ -227,7 +225,6 @@ class DateInput extends Component {
   }
 
   static defaultProps = {
-    label: undefined,
     value: '',
     size: 'medium',
     placeholder: null,
@@ -255,6 +252,14 @@ class DateInput extends Component {
     renderNextMonthButton: null,
     renderPrevMonthButton: null,
     children: null
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   state = {
@@ -379,7 +384,6 @@ class DateInput extends Component {
 
   renderInput({ getInputProps, getTriggerProps }) {
     const {
-      label,
       renderLabel,
       value,
       placeholder,
@@ -412,7 +416,7 @@ class DateInput extends Component {
         {...triggerProps}
         {...passthroughProps(rest)}
         {...getInputProps({
-          renderLabel: callRenderProp(renderLabel || label),
+          renderLabel: callRenderProp(renderLabel),
           value,
           placeholder,
           size,
@@ -432,7 +436,7 @@ class DateInput extends Component {
   }
 
   render() {
-    const { placement, isShowingCalendar, assistiveText } = this.props
+    const { placement, isShowingCalendar, assistiveText, styles } = this.props
 
     const { selectedDateId } = this
 
@@ -454,9 +458,9 @@ class DateInput extends Component {
           getOptionProps,
           getDescriptionProps
         }) => (
-          <span {...getRootProps({ className: styles.root })}>
+          <span {...getRootProps({ css: styles.dateInput })}>
             {this.renderInput({ getInputProps, getTriggerProps })}
-            <span {...getDescriptionProps()} className={styles.assistiveText}>
+            <span {...getDescriptionProps()} css={styles.assistiveText}>
               {assistiveText}
             </span>
             <Popover

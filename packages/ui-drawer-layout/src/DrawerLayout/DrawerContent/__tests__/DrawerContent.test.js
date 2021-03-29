@@ -25,7 +25,6 @@ import React from 'react'
 
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { DrawerContent } from '../index'
-import styles from '../styles.css'
 
 import { DrawerContentLocator } from '../DrawerContentLocator'
 
@@ -39,28 +38,27 @@ describe('<DrawerContent />', async () => {
     expect(drawerContent).to.exist()
   })
 
-  it('should should not have a transition class if `shouldTransition` is set to false', async () => {
+  it('should not have a transition class if `shouldTransition` is set to false', async () => {
     const subject = await mount(
       <DrawerContent label="DrawerContentTest" shouldTransition={false}>
         Hello World
       </DrawerContent>
     )
-
-    const drawerContent = await DrawerContentLocator.find()
-
-    expect(drawerContent.hasClass(styles['transition'])).to.be.false()
-
+    const tr = await DrawerContentLocator.find('[class*=-transition]', {
+      expectEmpty: true
+    })
+    expect(tr).to.not.exist()
     subject.setProps({
       shouldTransition: true,
       label: 'test'
     })
-
     await wait(() => {
-      expect(drawerContent.hasClass(styles['transition'])).to.be.true()
+      const drawerContent = DrawerContentLocator.find('[class*=-transition]')
+      expect(drawerContent).to.exist()
     })
   })
 
-  it('should should call the content ref', async () => {
+  it('should call the content ref', async () => {
     const contentRef = stub()
     await mount(
       <DrawerContent label="DrawerContentTest" contentRef={contentRef}>

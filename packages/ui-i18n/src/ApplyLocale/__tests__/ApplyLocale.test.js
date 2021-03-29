@@ -23,17 +23,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { ApplyLocale } from '../index'
+import { ApplyLocaleContext } from '../ApplyLocaleContext'
 
 class LocalizableComponent extends React.Component {
-  static contextTypes = {
-    locale: PropTypes.string,
-    timezone: PropTypes.string
-  }
+  static contextType = ApplyLocaleContext
 
   render() {
     return (

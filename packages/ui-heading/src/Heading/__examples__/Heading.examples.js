@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 export default {
-  excludeProps: ['ellipsis'],
   sectionProp: 'level',
   propValues: {
     color: [

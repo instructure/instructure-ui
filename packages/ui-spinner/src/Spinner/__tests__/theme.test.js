@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { Spinner } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Spinner.theme', () => {
   describe('with the default theme', () => {
-    const variables = Spinner.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     describe('default', () => {
       it('should ensure meter color and track color meet 3:1 contrast', () => {
@@ -45,7 +46,7 @@ describe('Spinner.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = Spinner.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     describe('default', () => {
       it('should ensure meter color and track color meet 4.5:1 contrast', () => {

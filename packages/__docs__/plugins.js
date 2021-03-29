@@ -73,6 +73,7 @@ module.exports = [
       '**/__testfixtures__/**',
       '**/__tests__/**',
       '**/locales/**',
+      '**/styles.js',
       '**/theme.js',
       '**/locator.js',
       '**/*Locator.js',
@@ -94,7 +95,6 @@ module.exports = [
       '**/ui-docs-plugin/src/**',
 
       // deprecated packages and modules:
-      '**/ui-themeable/src/StyleSheet.js',
       '**/InputModeListener.js'
     ],
     themes: [

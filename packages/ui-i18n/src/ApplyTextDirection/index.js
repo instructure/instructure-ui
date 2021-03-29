@@ -22,76 +22,65 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-
 import { getElementType } from '@instructure/ui-react-utils'
 
-import { getTextDirection } from '../getTextDirection'
-import { TextDirectionContext } from '../TextDirectionContext'
+import { DIRECTION, TextDirectionContext } from '../TextDirectionContext'
 
 /**
 ---
 category: components/utilities
 ---
 **/
-class ApplyTextDirection extends Component {
-  static propTypes = {
-    /**
-     * string 'ltr' or 'rtl' representing the document direction
-     */
-    dir: PropTypes.oneOf(['ltr', 'rtl']),
-    /**
-     * a single child (children must be wrapped in a single component/element) or function
-     * returning a child called with the following arguments:
-     * @param {string} dir - the string value 'rtl' or 'ltr'
-     * @param {Boolean} rtl - boolean value true if the direction is 'rtl'
-     */
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * accepts only one child (children must be wrapped in a single component/element)
-     */
-    as: PropTypes.elementType
-  }
+const ApplyTextDirection = (props) => {
+  const context = useTextDirectionContext()
+  const dir = props.dir || context
+  const ElementType = getElementType(ApplyTextDirection, props)
 
-  static defaultProps = {
-    dir: undefined,
-    as: 'span',
-    children: null
-  }
-
-  static DIRECTION = TextDirectionContext.DIRECTION
-
-  static childContextTypes = TextDirectionContext.types
-
-  static contextTypes = TextDirectionContext.types
-
-  _defaultDirection = getTextDirection()
-
-  getChildContext() {
-    return TextDirectionContext.makeTextDirectionContext(this.dir)
-  }
-
-  get dir() {
-    const context =
-      TextDirectionContext.getTextDirectionContext(this.context) || {}
-
-    return this.props.dir || context.dir || this._defaultDirection
-  }
-
-  render() {
-    const ElementType = getElementType(ApplyTextDirection, this.props)
-    const { children } = this.props
-
-    return (
-      <ElementType dir={this.dir}>
-        {typeof children === 'function'
-          ? children(this.dir, this.dir === TextDirectionContext.DIRECTION.rtl)
-          : children}
-      </ElementType>
-    )
-  }
+  return (
+    <TextDirectionContext.Provider value={dir}>
+      {
+        <ElementType dir={dir}>
+          {typeof props.children === 'function'
+            ? props.children(dir, dir === DIRECTION.rtl)
+            : props.children}
+        </ElementType>
+      }
+    </TextDirectionContext.Provider>
+  )
 }
 
-export default ApplyTextDirection
-export { ApplyTextDirection }
+ApplyTextDirection.propTypes = {
+  /**
+   * string 'ltr' or 'rtl' representing the document direction
+   */
+  dir: PropTypes.oneOf(['ltr', 'rtl']),
+  /**
+   * a single child (children must be wrapped in a single component/element) or function
+   * returning a child called with the following arguments:
+   * @param {string} dir - the string value 'rtl' or 'ltr'
+   * @param {Boolean} rtl - boolean value true if the direction is 'rtl'
+   */
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  /**
+   * accepts only one child (children must be wrapped in a single component/element)
+   */
+  as: PropTypes.elementType
+}
+
+ApplyTextDirection.defaultProps = {
+  dir: undefined,
+  as: 'span',
+  children: null
+}
+
+ApplyTextDirection.DIRECTION = DIRECTION
+
+const useTextDirectionContext = () => {
+  const context = useContext(TextDirectionContext)
+
+  return context
+}
+
+export { ApplyTextDirection, useTextDirectionContext }

@@ -22,13 +22,24 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, borders }) {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const componentVariables = {
     arrowSize: '0.5rem',
-    arrowBorderWidth: borders.widthSmall,
-    arrowBackgroundColor: colors.white,
-    arrowBorderColor: colors.tiara,
-    arrowBackgroundColorInverse: colors.licorice,
+    arrowBorderWidth: theme?.borders?.widthSmall,
+    arrowBackgroundColor: theme?.colors?.white,
+    arrowBorderColor: theme?.colors?.tiara,
+    arrowBackgroundColorInverse: theme?.colors?.licorice,
     arrowBorderColorInverse: 'transparent'
   }
+
+  return {
+    ...componentVariables
+  }
 }
+
+export default generateComponentTheme

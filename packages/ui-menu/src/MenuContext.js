@@ -22,39 +22,18 @@
  * SOFTWARE.
  */
 
-import PropTypes from 'prop-types'
-
-const CONTEXT_KEY = '@@menu'
+import { createContext } from 'react'
 
 /**
 ---
 private: true
 ---
-@module MenuContextTypes
+@module MenuContext
 **/
-const MenuContext = {
-  types: {
-    [CONTEXT_KEY]: PropTypes.shape({
-      registerMenuItem: PropTypes.func,
-      removeMenuItem: PropTypes.func
-    })
-  },
-
-  makeMenuContext({ registerMenuItem, removeMenuItem }) {
-    return {
-      [CONTEXT_KEY]: {
-        registerMenuItem,
-        removeMenuItem
-      }
-    }
-  },
-
-  getMenuContext(context) {
-    if (context) {
-      return context[CONTEXT_KEY]
-    }
-  }
-}
+const MenuContext = createContext({
+  registerMenuItem: () => {},
+  removeMenuItem: () => {}
+})
 
 export default MenuContext
 export { MenuContext }

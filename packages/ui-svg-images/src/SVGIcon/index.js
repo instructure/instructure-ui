@@ -22,27 +22,32 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 
 import { InlineSVG } from '../InlineSVG'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components/utilities
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class SVGIcon extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     ...InlineSVG.propTypes,
     rotate: PropTypes.oneOf(['0', '90', '180', '270']),
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
@@ -55,20 +60,33 @@ class SVGIcon extends Component {
     size: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { rotate, className, size, bidirectional, ...props } = this.props
+    const {
+      rotate,
+      className,
+      size,
+      bidirectional,
+      // 'makeStyles' and 'styles' need to be added here,
+      // so it won't be passed to InlineSVG via '...props'
+      makeStyles,
+      styles,
+      ...props
+    } = this.props
 
     return (
       <InlineSVG
         {...props}
         rotate={rotate}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`rotate--${rotate}`]]: rotate && rotate !== '0',
-          [styles[`size--${size}`]]: size,
-          [styles.bidirectional]: bidirectional,
-          [className]: className
-        })}
+        css={styles.svgIcon}
+        className={className}
       />
     )
   }

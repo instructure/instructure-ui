@@ -2,30 +2,10 @@
 describes: Popover
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      <code>Popover.Trigger</code> and <code>Popover.Content</code> are no longer in use. The trigger is now defined via the <code>renderTrigger</code> prop and the <code>children</code> of a Popover will be rendered as the content.
-    </Figure.Item>
-    <Figure.Item>
-      The <code>onToggle</code> callback has been replaced by <code>onShowContent</code> and <code>onHideContent</code> When controlled, these will also be called as prompts for updating the <code>isShowingContent</code> prop.
-    </Figure.Item>
-    <Figure.Item>
-      The <code>onShow</code> callback has been renamed to <code>onPositioned</code>.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-
-```
-
 Popovers hide or show content as a result of user interaction, such as clicking, hovering, or focusing. When opened, the content remains connected to the element that triggered it. If you only need to display a small amount of text-only content, you might consider using a [Tooltip](#Tooltip). If you need to display a larger amount of content, a [Tray](#Tray) could be a better choice.
 
-
 #### Uncontrolled Popover
+
 ```js
 ---
 example: true
@@ -52,6 +32,7 @@ example: true
 ```
 
 #### Controlled Popover
+
 ```js
 ---
 render: false
@@ -114,7 +95,7 @@ render(<Example />)
 
 ```
 
->Note: Popover can act as a dialog with a close button. With the `shouldContainFocus` property set, it will trap focus inside the Popover.
+> Note: Popover can act as a dialog with a close button. With the `shouldContainFocus` property set, it will trap focus inside the Popover.
 
 The `shouldAlignArrow` prop will offset the popover content to adjust for the offset of the arrow. This will override offsetX for start/end placements, and will override offsetY for top/bottom placements.
 
@@ -189,7 +170,6 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-
 ### Guidelines
 
 ```js
@@ -208,7 +188,6 @@ guidelines: true
   </Figure>
 </Guidelines>
 ```
-
 
 ```js
 ---

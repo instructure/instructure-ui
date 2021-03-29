@@ -23,14 +23,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/console": "^7.5.0",
+    "@instructure/emotion": "^7.5.0",
     "@instructure/ui-dom-utils": "^7.5.0",
     "@instructure/ui-react-utils": "^7.5.0",
     "@instructure/ui-testable": "^7.5.0",
-    "@instructure/ui-themeable": "^7.5.0",
     "@instructure/ui-view": "^7.5.0",
-    "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {

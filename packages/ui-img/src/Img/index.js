@@ -21,33 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { supportsObjectFit } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  grayscale: 'withGrayscale',
-  blur: 'withBlur',
-  inline: 'display'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Img extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,
     display: PropTypes.oneOf(['inline-block', 'block']),
@@ -77,21 +77,7 @@ class Img extends Component {
     constrain: PropTypes.oneOf(['cover', 'contain']),
     elementRef: PropTypes.func,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `display`__
-     */
-    inline: PropTypes.bool,
-    /**
-     * __Deprecated - use `withGrayscale`__
-     */
-    grayscale: PropTypes.bool,
-    /**
-     * __Deprecated - use `withBlur`__
-     */
-    blur: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
@@ -107,26 +93,27 @@ class Img extends Component {
     withBlur: false
   }
 
+  componentDidMount() {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  get makeStylesVariables() {
+    return {
+      supportsObjectFit: this.supportsObjectFit,
+      hasBackground: this.hasBackground
+    }
+  }
+
   get supportsObjectFit() {
     return supportsObjectFit()
   }
 
-  renderFilter() {
-    const blur = `blur(${this.theme.imageBlurAmount})`
-    const grayscale = 'grayscale(1)'
-
-    if (
-      (this.props.withGrayscale || this.props.grayscale) &&
-      (this.props.withBlur || this.props.blur)
-    ) {
-      return `${blur} ${grayscale}`
-    } else if (this.props.withGrayscale || this.props.grayscale) {
-      return grayscale
-    } else if (this.props.withBlur || this.props.blur) {
-      return blur
-    } else {
-      return null
-    }
+  get hasBackground() {
+    return !this.supportsObjectFit && this.props.constrain
   }
 
   render() {
@@ -142,30 +129,18 @@ class Img extends Component {
       width,
       height,
       elementRef,
-      inline,
-      blur,
-      grayscale,
+      styles,
       ...props
     } = this.props
+
+    const { hasBackground } = this
 
     const a11yProps = {
       alt: alt || ''
     }
 
     const imageProps = {
-      className: classnames({
-        [styles.image]: true,
-        [styles['has-overlay']]: overlay,
-        [styles['has-filter']]: withBlur || withGrayscale || blur || grayscale,
-        [styles.cover]: this.supportsObjectFit && constrain === 'cover',
-        [styles.contain]: this.supportsObjectFit && constrain === 'contain'
-      }),
-      style: {
-        filter:
-          withBlur || withGrayscale || blur || grayscale
-            ? this.renderFilter()
-            : 'none'
-      },
+      css: styles.img,
       src
     }
 
@@ -174,51 +149,23 @@ class Img extends Component {
       width,
       height,
       margin,
-      display:
-        display === 'block' || inline === false ? 'block' : 'inline-block',
+      display,
       elementRef
     }
 
-    // if browser does not support ObjectFit CSS, and Img needs "constrain",
-    // serve up a background-image instead
-    const hasBackground = !this.supportsObjectFit && this.props.constrain
-
     if (overlay || hasBackground) {
       // if a background image is rendered we add the a11y props on the container element
-      const rootProps = hasBackground
-        ? {
-            ...a11yProps,
-            ...containerProps
-          }
-        : containerProps
+      const rootProps = {
+        ...(hasBackground && a11yProps),
+        ...containerProps
+      }
 
       return (
-        <View
-          {...rootProps}
-          as="span"
-          className={classnames({
-            [styles['container--has-overlay']]: overlay,
-            [styles['container--has-cover']]: constrain === 'cover',
-            [styles['container--has-contain']]: constrain === 'contain',
-            [styles['container--has-background']]: hasBackground
-          })}
-          style={{
-            backgroundImage: hasBackground ? `url(${src})` : undefined
-          }}
-        >
+        <View {...rootProps} as="span" css={styles.container}>
           {
             !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
           }
-          {overlay && (
-            <span
-              className={styles.overlay}
-              style={{
-                backgroundColor: overlay.color,
-                opacity: overlay.opacity * 0.1,
-                mixBlendMode: overlay.blend ? overlay.blend : null
-              }}
-            />
-          )}
+          {overlay && <span css={styles.overlay} />}
         </View>
       )
     } else {

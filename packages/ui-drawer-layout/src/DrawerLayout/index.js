@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Children, Component } from 'react'
+
+/** @jsx jsx */
+import { Children, Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { bidirectional } from '@instructure/ui-i18n'
-import { themeable } from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
   matchComponentTypes,
@@ -41,16 +42,17 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { DrawerContent } from './DrawerContent'
 import { DrawerTray } from './DrawerTray'
 
-import styles from './styles.css'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
-@testable()
+@withStyle(generateStyle, null)
 @bidirectional()
-@themeable(null, styles)
+@testable()
 class DrawerLayout extends Component {
   static locatorAttribute = 'data-drawer-layout'
   static propTypes = {
@@ -67,17 +69,19 @@ class DrawerLayout extends Component {
      * Called with a boolean value, `true` if the tray is now overlaying the content or `false` if
      * it is side by side
      */
-    onOverlayTrayChange: PropTypes.func
+    onOverlayTrayChange: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
+    // eslint-disable-next-line react/require-default-props
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {
     children: null,
     minWidth: '30rem',
     onOverlayTrayChange: (shouldOverlayTray) => {}
-  }
-
-  static childContextTypes = {
-    shouldOverlayTray: PropTypes.bool
   }
 
   static Content = DrawerContent
@@ -97,10 +101,12 @@ class DrawerLayout extends Component {
 
   _content = null
 
-  getChildContext() {
-    return {
-      shouldOverlayTray: this.state.shouldOverlayTray
-    }
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   get trayProps() {
@@ -111,8 +117,10 @@ class DrawerLayout extends Component {
   }
 
   get trayPlacement() {
-    const { placement } = this.trayProps
-    return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+    const { placement, dir } = this.trayProps
+    const isRtl = dir === bidirectional.DIRECTION.rtl
+
+    return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
   get contentMargin() {
@@ -192,7 +200,6 @@ class DrawerLayout extends Component {
         width,
         state.shouldOverlayTray
       )
-
       if (state.shouldOverlayTray !== nextState.shouldOverlayTray) {
         this.notifyOverlayTrayChange(nextState.shouldOverlayTray)
       }
@@ -290,19 +297,20 @@ class DrawerLayout extends Component {
       contentCount <= 1,
       `[DrawerLayout] Only one 'DrawerContent' per 'DrawerLayout' is supported.`
     )
-
     return children
   }
 
   render() {
     const props = { [DrawerLayout.locatorAttribute]: this._id }
     return (
-      <div {...props} className={styles.root}>
-        {this.renderChildren()}
-      </div>
+      <DrawerLayoutContext.Provider value={this.state.shouldOverlayTray}>
+        <div {...props} css={this.props.styles.drawerLayout}>
+          {this.renderChildren()}
+        </div>
+      </DrawerLayoutContext.Provider>
     )
   }
 }
-
 export default DrawerLayout
 export { DrawerLayout, DrawerContent, DrawerTray }
+export const DrawerLayoutContext = createContext(false)

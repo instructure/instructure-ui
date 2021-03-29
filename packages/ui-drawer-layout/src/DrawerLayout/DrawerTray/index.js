@@ -21,14 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
+/** @jsx jsx */
+import { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { withStyle, jsx } from '@instructure/emotion'
 import { bidirectional } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
 import { omitProps } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
@@ -38,8 +39,9 @@ import { Portal } from '@instructure/ui-portal'
 
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+import { DrawerLayoutContext } from '../index'
 
 /**
 ---
@@ -47,9 +49,9 @@ parent: DrawerLayout
 id: DrawerLayout.Tray
 ---
 **/
-@testable()
+@withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
-@themeable(theme, styles)
+@testable()
 class DrawerTray extends Component {
   static locatorAttribute = 'data-drawer-tray'
   static propTypes = {
@@ -140,7 +142,13 @@ class DrawerTray extends Component {
     shouldContainFocus: PropTypes.bool,
     shouldReturnFocus: PropTypes.bool,
     shouldCloseOnDocumentClick: PropTypes.bool,
-    shouldCloseOnEscape: PropTypes.bool
+    shouldCloseOnEscape: PropTypes.bool,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
+    // eslint-disable-next-line react/require-default-props
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {
@@ -170,26 +178,35 @@ class DrawerTray extends Component {
     onTransition: undefined
   }
 
-  static contextTypes = {
-    shouldOverlayTray: PropTypes.bool
-  }
-
   state = {
     transitioning: false,
     portalOpen: false
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.open !== prevProps.open) {
       this.setState({
         transitioning: true
       })
     }
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    return {
+      placement: this.placement
+    }
   }
 
   get placement() {
-    const { placement } = this.props
-    return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+    const { placement, dir } = this.props
+    const isRtl = dir === bidirectional.DIRECTION.rtl
+
+    return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
   get direction() {
@@ -219,8 +236,6 @@ class DrawerTray extends Component {
 
   handlePortalOpen = (DOMNode) => {
     this.DOMNode = DOMNode
-    // We apply the theme here because now we have a DOM node (provided by Portal)
-    DOMNode && this.applyTheme(DOMNode)
     this.setState({
       portalOpen: true
     })
@@ -273,87 +288,96 @@ class DrawerTray extends Component {
       shouldCloseOnEscape,
       shouldCloseOnDocumentClick,
       shouldContainFocus,
+      styles,
       ...props
     } = this.props
 
-    const { shouldOverlayTray } = this.context
-    const { portalOpen } = this.state
-    const needsPortal = shouldOverlayTray && mountNode
+    return (
+      <DrawerLayoutContext.Consumer>
+        {(shouldOverlayTray) => {
+          const { portalOpen } = this.state
+          const needsPortal = shouldOverlayTray && mountNode
 
-    let transitionIn = open
+          // we have to handle the shadow version here,
+          // because passing and handling it in styles.js makes it
+          // rerender the component during the transition, breaking it
+          const trayStyles =
+            shadow && shouldOverlayTray
+              ? styles.drawerTrayWithShadow
+              : styles.drawerTray
 
-    if (needsPortal && !portalOpen) {
-      transitionIn = false
-    }
+          let transitionIn = open
 
-    const content = (
-      <Transition
-        in={transitionIn}
-        type={this.transition}
-        onTransition={onTransition}
-        onEnter={onEnter}
-        onEntering={onEntering}
-        onEntered={createChainedFunction(
-          this.handleTransitionEntered,
-          onEntered,
-          onOpen
-        )}
-        onExit={onExit}
-        onExiting={onExiting}
-        onExited={createChainedFunction(
-          this.handleTransitionExited,
-          onExited,
-          onClose
-        )}
-        unmountOnExit
-      >
-        <div
-          {...omitProps(props, DrawerTray.propTypes)}
-          ref={this.handleContentRef}
-          className={classnames({
-            [styles.root]: true,
-            [styles.border]: border,
-            [styles.shadow]: shadow && shouldOverlayTray,
-            [styles[`placement--${this.placement}`]]: true
-          })}
-        >
-          {this.state.transitioning ? (
-            this.renderContent()
-          ) : (
-            <Dialog
-              open
-              role={shouldOverlayTray ? 'dialog' : 'region'}
-              label={label}
-              shouldReturnFocus={shouldReturnFocus}
-              shouldContainFocus={shouldContainFocus && shouldOverlayTray}
-              shouldCloseOnDocumentClick={
-                shouldCloseOnDocumentClick && shouldOverlayTray
-              }
-              shouldCloseOnEscape={shouldCloseOnEscape && shouldOverlayTray}
-              defaultFocusElement={defaultFocusElement}
-              liveRegion={liveRegion}
-              onDismiss={onDismiss}
-              as="div"
-              className={styles.content}
+          if (needsPortal && !portalOpen) {
+            transitionIn = false
+          }
+
+          const content = (
+            <Transition
+              in={transitionIn}
+              type={this.transition}
+              onTransition={onTransition}
+              onEnter={onEnter}
+              onEntering={onEntering}
+              onEntered={createChainedFunction(
+                this.handleTransitionEntered,
+                onEntered,
+                onOpen
+              )}
+              onExit={onExit}
+              onExiting={onExiting}
+              onExited={createChainedFunction(
+                this.handleTransitionExited,
+                onExited,
+                onClose
+              )}
+              unmountOnExit
             >
-              {this.renderContent()}
-            </Dialog>
-          )}
-        </div>
-      </Transition>
+              <div
+                {...omitProps(props, DrawerTray.propTypes)}
+                ref={this.handleContentRef}
+                css={trayStyles}
+              >
+                {this.state.transitioning ? (
+                  this.renderContent()
+                ) : (
+                  <Dialog
+                    open
+                    role={shouldOverlayTray ? 'dialog' : 'region'}
+                    label={label}
+                    shouldReturnFocus={shouldReturnFocus}
+                    shouldContainFocus={shouldContainFocus && shouldOverlayTray}
+                    shouldCloseOnDocumentClick={
+                      shouldCloseOnDocumentClick && shouldOverlayTray
+                    }
+                    shouldCloseOnEscape={
+                      shouldCloseOnEscape && shouldOverlayTray
+                    }
+                    defaultFocusElement={defaultFocusElement}
+                    liveRegion={liveRegion}
+                    onDismiss={onDismiss}
+                    as="div"
+                    css={this.props.styles.drawerTrayContent}
+                  >
+                    {this.renderContent()}
+                  </Dialog>
+                )}
+              </div>
+            </Transition>
+          )
+          if (needsPortal) {
+            return (
+              <Portal mountNode={mountNode} open onOpen={this.handlePortalOpen}>
+                {content}
+              </Portal>
+            )
+          } else {
+            return content
+          }
+        }}
+      </DrawerLayoutContext.Consumer>
     )
-
-    if (needsPortal) {
-      return (
-        <Portal mountNode={mountNode} open onOpen={this.handlePortalOpen}>
-          {content}
-        </Portal>
-      )
-    } else {
-      return content
-    }
   }
 }
-
 export default DrawerTray
 export { DrawerTray }

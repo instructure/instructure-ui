@@ -22,21 +22,35 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, spacing, typography }) {
-  return {
-    iconMargin: spacing.xxxSmall,
-    iconEmptyColor: colors.textBrand,
-    iconFilledColor: colors.textBrand,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, typography, spacing, key: themeName } = theme
 
-    smallIconFontSize: typography.fontSizeMedium,
-    mediumIconFontSize: typography.fontSizeLarge,
-    largeIconFontSize: typography.fontSizeXXLarge
+  const themeSpecificStyle = {
+    canvas: {
+      iconEmptyColor: theme['ic-brand-primary'],
+      iconFilledColor: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    iconMargin: spacing?.xxxSmall,
+    iconEmptyColor: colors?.textBrand,
+    iconFilledColor: colors?.textBrand,
+
+    smallIconFontSize: typography?.fontSizeMedium,
+    mediumIconFontSize: typography?.fontSizeLarge,
+    largeIconFontSize: typography?.fontSizeXXLarge
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    iconEmptyColor: variables['ic-brand-primary'],
-    iconFilledColor: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

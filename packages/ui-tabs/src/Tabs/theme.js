@@ -22,18 +22,29 @@
  * SOFTWARE.
  */
 
-export default function generator({ borders, colors, breakpoints, stacking }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, colors, stacking, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    defaultBackground: colors?.backgroundLightest,
+    scrollFadeColor: colors?.backgroundLightest,
+    tabVerticalOffset: borders?.widthSmall, // gives effect of selected tab "bar" overlaying bottom border
+    zIndex: stacking?.above,
+    scrollOverlayWidthDefault: '5rem', // has to be 4 times the horizontal padding of the default style tab
+    scrollOverlayWidthSecondary: '3rem' // has to be 3 times the horizontal padding of the secondary style tab
+  }
+
   return {
-    defaultBackground: colors.backgroundLightest,
-    scrollFadeColor: colors.backgroundLightest,
-    tabVerticalOffset: borders.widthSmall, // gives effect of selected tab "bar" overlaying bottom border
-    zIndex: stacking.above,
-    small: breakpoints.small,
-    medium: breakpoints.medium,
-    large: breakpoints.large,
-    scrollOverlayWidthDefault:
-      '5rem' /* 4 times the padding of a default Tab. If Tab padding changes, update this value. */,
-    scrollOverlayWidthSecondary:
-      '3rem' /* 3 times the padding of a secondary Tab. If Tab padding changes, update this value. */
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

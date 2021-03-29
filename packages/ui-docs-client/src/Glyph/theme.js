@@ -22,15 +22,25 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, spacing, borders }) {
+import { alpha } from '@instructure/ui-color-utils'
+
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, colors, spacing, breakpoints } = theme
+
   const colorCheckerboard = '#eee'
   const colorCheckerboardInverse = '#444'
 
-  return {
-    padding: spacing.small,
-    borderRadius: borders.radiusMedium,
-    backgroundColor: colors.backgroundLightest,
-    border: `${borders.widthSmall} solid #eee`,
+  const componentVariables = {
+    padding: spacing?.small,
+    glyphMinWidth: breakpoints?.xSmall,
+    borderRadius: borders?.radiusMedium,
+    backgroundColor: colors?.backgroundLightest,
+    border: `${borders?.widthSmall} solid #eee`,
     backgroundColorInverse: '#333',
     gradientCheckerboardSize: '1rem',
     gradientCheckerboard: `
@@ -46,6 +56,15 @@ export default function ({ colors, spacing, borders }) {
       transparent 25%,
       transparent 75%,
       ${colorCheckerboardInverse} 75%,
-      ${colorCheckerboardInverse}`
+      ${colorCheckerboardInverse}`,
+    glyphColor: colors?.textDarkest,
+    glyphHoverBackgroundColor: alpha(colors?.textDarkest, 10),
+    glyphFocusBorderColor: colors?.borderBrand
+  }
+
+  return {
+    ...componentVariables
   }
 }
+
+export default generateComponentTheme

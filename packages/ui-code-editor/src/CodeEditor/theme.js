@@ -24,61 +24,84 @@
 
 import { darken } from '@instructure/ui-color-utils'
 
-export default function ({ colors, borders, spacing, typography, stacking }) {
-  return {
-    fontFamily: typography.fontFamilyMonospace,
-    fontSize: typography.fontSizeSmall,
-    background: colors.backgroundLight,
-    border: `${borders.widthSmall} solid ${colors.borderLight}`,
-    borderRadius: borders.radiusMedium,
-    focusBorderColor: colors.borderBrand,
-    focusBoxShadow: `inset 0 0 0 1px ${colors.borderLightest}`,
-    horizontalPadding: spacing.xSmall,
-    verticalPadding: spacing.xxSmall,
-    color: colors.textDarkest,
-    lineNumberColor: colors.textDark,
-    gutterBorder: colors.borderLight,
-    gutterBackground: darken(colors.backgroundLight, 5),
-    gutterMarkerColor: colors.textBrand,
-    gutterMarkerSubtleColor: colors.textDark,
-    cursorColor: colors.textDarkest,
-    secondaryCursorColor: colors.textDark,
-    rulerColor: colors.borderDark,
-    matchingBracketOutline: colors.textDark,
-    nonMatchingBracketColor: colors.textDanger,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const {
+    colors,
+    borders,
+    spacing,
+    typography,
+    stacking,
+    key: themeName
+  } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamilyMonospace,
+    fontSize: typography?.fontSizeSmall,
+    background: colors?.backgroundLight,
+    border: `${borders?.widthSmall} solid ${colors?.borderLight}`,
+    borderRadius: borders?.radiusMedium,
+    focusBorderColor: colors?.borderBrand,
+    focusBoxShadow: `inset 0 0 0 1px ${colors?.borderLightest}`,
+    horizontalPadding: spacing?.xSmall,
+    verticalPadding: spacing?.xxSmall,
+    color: colors?.textDarkest,
+    lineNumberColor: colors?.textDark,
+    gutterBorder: colors?.borderLight,
+    gutterBackground: darken(colors?.backgroundLight, 5),
+    gutterMarkerColor: colors?.textBrand,
+    gutterMarkerSubtleColor: colors?.textDark,
+    cursorColor: colors?.textDarkest,
+    secondaryCursorColor: colors?.textDark,
+    rulerColor: colors?.borderDark,
+    matchingBracketOutline: colors?.textDark,
+    nonMatchingBracketColor: colors?.textDanger,
     matchingTagBackground: 'rgba(255, 150, 0, 0.3)',
-    activeLineBackground: darken(colors.backgroundLight, 5),
-    selectedBackground: darken(colors.backgroundLight, 15),
-    fatCursorBackground: colors.backgroundSuccess,
+    activeLineBackground: darken(colors?.backgroundLight, 5),
+    selectedBackground: darken(colors?.backgroundLight, 15),
+    fatCursorBackground: colors?.backgroundSuccess,
     fatCursorMarkBackground: 'rgba(20, 255, 20, 0.5)',
     searchingBackground: 'rgba(255, 255, 0, 0.4)',
-    zIndex: stacking.above,
+    zIndex: stacking?.above,
 
-    quoteColor: colors.textSuccess,
-    headerColor: colors.textWarning,
-    negativeColor: colors.textDanger,
-    positiveColor: colors.textSuccess,
-    keywordColor: colors.textBrand,
-    atomColor: colors.textWarning,
-    numberColor: colors.textWarning,
-    defColor: colors.textDarkest,
-    variableColor: colors.textBrand,
-    secondaryVariableColor: colors.textWarning,
-    typeColor: colors.textBrand,
-    commentColor: colors.textDark,
-    stringColor: colors.textBrand,
-    secondaryStringColor: colors.textDanger,
-    metaColor: colors.textDarkest,
-    qualifierColor: colors.textSuccess,
-    builtInColor: colors.textWarning,
-    bracketColor: colors.borderDark,
-    tagColor: colors.textSuccess,
-    attributeColor: colors.textBrand,
-    hrColor: colors.borderDark,
-    linkColor: colors.textBrand,
-    errorColor: colors.textDanger,
-    propertyColor: colors.textAlert,
-    nodeColor: colors.textWarning,
-    operatorColor: colors.textDarkest
+    quoteColor: colors?.textSuccess,
+    headerColor: colors?.textWarning,
+    negativeColor: colors?.textDanger,
+    positiveColor: colors?.textSuccess,
+    keywordColor: colors?.textBrand,
+    atomColor: colors?.textWarning,
+    numberColor: colors?.textWarning,
+    defColor: colors?.textDarkest,
+    variableColor: colors?.textBrand,
+    secondaryVariableColor: colors?.textWarning,
+    typeColor: colors?.textBrand,
+    commentColor: colors?.textDark,
+    stringColor: colors?.textBrand,
+    secondaryStringColor: colors?.textDanger,
+    metaColor: colors?.textDarkest,
+    qualifierColor: colors?.textSuccess,
+    builtInColor: colors?.textWarning,
+    bracketColor: colors?.borderDark,
+    tagColor: colors?.textSuccess,
+    attributeColor: colors?.textBrand,
+    hrColor: colors?.borderDark,
+    linkColor: colors?.textBrand,
+    errorColor: colors?.textDanger,
+    propertyColor: colors?.textAlert,
+    nodeColor: colors?.textWarning,
+    operatorColor: colors?.textDarkest
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

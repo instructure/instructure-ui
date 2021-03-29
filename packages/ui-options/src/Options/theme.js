@@ -22,14 +22,30 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, typography, spacing }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, typography, spacing, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    labelFontWeight: typography?.fontWeightBold,
+
+    background: colors?.backgroundLightest,
+    labelColor: colors?.textDarkest,
+
+    labelPadding: `${spacing?.xSmall} 0`,
+    nestedLabelPadding: `${spacing?.xSmall} ${spacing?.small}`
+  }
+
   return {
-    labelFontWeight: typography.fontWeightBold,
-
-    background: colors.backgroundLightest,
-    labelColor: colors.textDarkest,
-
-    labelPadding: `${spacing.xSmall} 0`,
-    nestedLabelPadding: `${spacing.xSmall} ${spacing.small}`
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

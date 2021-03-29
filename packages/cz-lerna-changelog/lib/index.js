@@ -63,28 +63,40 @@ function makePrompter() {
 
     cz.prompt(autocompleteQuestions(questions))
       .then((answers) => {
-        const { body, footer, ...rest } = answers
+        const {
+          body,
+          testplan,
+          visualChange,
+          footer,
+          breaking,
+          scope,
+          ...rest
+        } = answers
 
-        const testplan = answers.testplan
-          ? `\nTEST PLAN:\n${answers.testplan}\n\n`
-          : ''
+        const testplanTxt = testplan ? `\nTEST PLAN:\n${testplan}\n\n` : ''
+
         const issues = footer ? `\n\nCloses: ${footer}\n\n` : ''
 
-        let scope = '*'
+        const visualChangeTxt = visualChange
+          ? `\n\nVISUAL CHANGE: ${visualChange}\n\n`
+          : ''
 
-        if (Array.isArray(answers.scope)) {
-          scope = answers.scope.join(',')
+        let scopeStr = '*'
+
+        if (Array.isArray(scope)) {
+          scopeStr = scope.join(',')
         }
-
+        // To have part of a commit body appear in the changelog it needs to be after the "BREAKING CHANGE:" text.
+        // see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular
         const message = buildCommit(
           {
             ...rest,
-            body: issues + body + testplan,
-            scope
+            body: issues + body + testplanTxt,
+            breaking: breaking + visualChangeTxt,
+            scope: scopeStr
           },
           { breaklineChar: '|' }
         )
-
         const cwd = process.cwd()
 
         commitAnalyzer

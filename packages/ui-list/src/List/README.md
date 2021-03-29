@@ -2,27 +2,9 @@
 describes: List
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      <code>variant</code> has been deprecated and <strong>will be removed in v8.0.0.</strong>
-    </Figure.Item>
-    <Figure.Item>
-      List will now support an <code>isUnstyled</code> prop set to false allowing the equivelant of what <code>variant="default"</code> delivered.
-    </Figure.Item>
-    <Figure.Item>
-      Setting the <code>isUnstyled</code> prop to true will output what <code>variant="unstyled"</code> delivered.
-    </Figure.Item>
-    <Figure.Item>
-      <Link href="#InlineList">InlineList</Link> will be the preferred path forward to render what <code>variant="inline"</code> delivered.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
+> ### What about 'inline' lists?
+>
+> For inline lists use the [InlineList](#InlineList) component.
 
 `<List>` accepts only `<List.Item>` as a child.
 
@@ -105,8 +87,9 @@ example: true
 
 ### Adding predefined space between each List.Item
 
-Use the `itemSpacing` prop to add space around your list’s items. To avoid unwanted excess space at the start/end of a List, the first and last List.Item will not receive margin via the `itemSpacing` prop. 
-> NOTE: itemSpacing has no affect on an List.Item that has the  `delimiter` prop set to anything other than **none**.
+Use the `itemSpacing` prop to add space around your list’s items. To avoid unwanted excess space at the start/end of a List, the first and last List.Item will not receive margin via the `itemSpacing` prop.
+
+> NOTE: itemSpacing has no affect on an List.Item that has the `delimiter` prop set to anything other than **none**.
 
 ```js
 ---
@@ -119,7 +102,7 @@ example: true
   </List>
 ```
 
-__itemSpacing__ set to `medium`
+**itemSpacing** set to `medium`
 
 ```js
 ---
@@ -132,7 +115,7 @@ example: true
   </List>
 ```
 
-__itemSpacing__ set to `x-large`
+**itemSpacing** set to `x-large`
 
 ```js
 ---
@@ -143,7 +126,7 @@ example: true
     <List.Item><b>Due:</b> Oct 1, 2019</List.Item>
     <List.Item><Link href="#">itemSpacing has been set to x-large</Link></List.Item>
   </List>
-  ```
+```
 
 List.Items also accept the same `margin` prop as List, in the event you need different spacing around certain List.Items in the List.
 

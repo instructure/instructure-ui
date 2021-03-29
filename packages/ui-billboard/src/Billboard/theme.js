@@ -24,37 +24,51 @@
 
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-export default function generator({ borders, colors, spacing, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    paddingSmall: spacing.small,
-    paddingMedium: spacing.medium,
-    paddingLarge: spacing.medium,
-    iconColor: colors.textDark,
-    mediumMargin: spacing.small,
-    largeMargin: spacing.medium,
-    iconHoverColor: colors.textLink,
-    backgroundColor: colors.backgroundLightest,
-    iconHoverColorInverse: colors.textLightest,
-    buttonBorderWidth: borders.widthMedium,
-    buttonBorderRadius: borders.radiusLarge,
-    messageColor: colors.textDark,
-    messageColorClickable: colors.textLink,
-    messageColorInverse: colors.textLight,
-    messageFontSizeSmall: typography.fontSizeSmall,
-    messageFontSizeMedium: typography.fontSizeMedium,
-    messageFontSizeLarge: typography.fontSizeLarge,
-    clickableActiveBg: colors.backgroundBrand,
-    clickableActiveText: colors.textLightest,
-    buttonBorderStyle: borders.style,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, colors, spacing, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      iconHoverColor: theme['ic-link-color'],
+      messageColorClickable: theme['ic-link-color'],
+      clickableActiveBg: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    paddingSmall: spacing?.small,
+    paddingMedium: spacing?.medium,
+    paddingLarge: spacing?.medium,
+    iconColor: colors?.textDark,
+    mediumMargin: spacing?.small,
+    largeMargin: spacing?.medium,
+    iconHoverColor: colors?.textLink,
+    backgroundColor: colors?.backgroundLightest,
+    iconHoverColorInverse: colors?.textLightest,
+    buttonBorderWidth: borders?.widthMedium,
+    buttonBorderRadius: borders?.radiusLarge,
+    messageColor: colors?.textDark,
+    messageColorClickable: colors?.textLink,
+    messageColorInverse: colors?.textLight,
+    messageFontSizeSmall: typography?.fontSizeSmall,
+    messageFontSizeMedium: typography?.fontSizeMedium,
+    messageFontSizeLarge: typography?.fontSizeLarge,
+    clickableActiveBg: colors?.backgroundBrand,
+    clickableActiveText: colors?.textLightest,
+    buttonBorderStyle: borders?.style,
     buttonHoverBorderStyle: 'dashed'
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    iconHoverColor: variables['ic-link-color'],
-    messageColorClickable: variables['ic-link-color'],
-    clickableActiveBg: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

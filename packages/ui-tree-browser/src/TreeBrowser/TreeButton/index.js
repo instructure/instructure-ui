@@ -22,18 +22,17 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { isIE11 } from '@instructure/ui-utils'
 import { Img } from '@instructure/ui-img'
 import { callRenderProp } from '@instructure/ui-react-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyles from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -43,10 +42,14 @@ parent: TreeBrowser
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
+@withStyle(generateStyles, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class TreeButton extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
     descriptor: PropTypes.string,
@@ -84,6 +87,12 @@ class TreeButton extends Component {
     descriptor: undefined,
     containerRef: function () {}
   }
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
 
   renderImage() {
     const { type } = this.props
@@ -98,11 +107,16 @@ class TreeButton extends Component {
   }
 
   renderCollectionIcon() {
-    const { expanded, collectionIcon, collectionIconExpanded } = this.props
+    const {
+      expanded,
+      collectionIcon,
+      collectionIconExpanded,
+      styles
+    } = this.props
 
     if (collectionIcon || collectionIconExpanded) {
       return (
-        <div className={styles.icon}>
+        <div css={styles.icon}>
           {callRenderProp(expanded ? collectionIconExpanded : collectionIcon)}
         </div>
       )
@@ -110,18 +124,18 @@ class TreeButton extends Component {
   }
 
   renderItemImage() {
-    const { thumbnail, itemIcon } = this.props
+    const { thumbnail, itemIcon, styles } = this.props
 
     if (thumbnail) {
       return (
-        <div className={styles.thumbnail}>
+        <div css={styles.thumbnail}>
           <Img src={thumbnail} constrain="cover" alt="" />
         </div>
       )
     }
 
     if (itemIcon) {
-      return <div className={styles.icon}>{callRenderProp(itemIcon)}</div>
+      return <div css={styles.icon}>{callRenderProp(itemIcon)}</div>
     }
   }
 
@@ -130,25 +144,7 @@ class TreeButton extends Component {
   }
 
   render() {
-    const {
-      name,
-      descriptor,
-      expanded,
-      selected,
-      focused,
-      variant,
-      size
-    } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: true,
-      [styles[variant]]: true,
-      [styles.expanded]: expanded,
-      [styles.selected]: selected,
-      [styles.focused]: focused,
-      [styles.ie11]: isIE11
-    }
+    const { name, descriptor, styles } = this.props
 
     // VoiceOver can't navigate without the buttons, even though they don't do anything
     return (
@@ -156,14 +152,14 @@ class TreeButton extends Component {
         ref={this.handleRef}
         tabIndex={-1}
         type="button"
-        className={classnames(classes)}
+        css={styles.treeButton}
       >
-        <span className={styles.layout}>
+        <span css={styles.layout}>
           {this.renderImage()}
-          <span className={styles.text}>
-            <span className={styles.textName}>{name}</span>
+          <span css={styles.text}>
+            <span css={styles.textName}>{name}</span>
             {descriptor ? (
-              <span className={styles.textDescriptor} title={descriptor}>
+              <span css={styles.textDescriptor} title={descriptor}>
                 {descriptor}
               </span>
             ) : null}

@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps, deprecated } from '@instructure/ui-react-utils'
+import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
-import styles from './styles.css'
+import generateStyle from './styles'
 
 /**
 ---
@@ -38,15 +38,22 @@ parent: Flex
 id: Flex.Item
 ---
 **/
-@deprecated('8.0.0', {
-  grow: 'shouldGrow',
-  shrink: 'shouldShrink',
-  visualDeug: 'withVisualDebug'
-})
-@themeable(null, styles)
+@withStyle(generateStyle)
 class Item extends Component {
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The children to render inside the Item`
      */
@@ -106,21 +113,7 @@ class Item extends Component {
     /**
      * Places dashed lines around the component's borders to help debug your layout
      */
-    withVisualDebug: PropTypes.bool,
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use 'shouldGrow'__
-     */
-    grow: PropTypes.bool,
-    /**
-     * __Deprecated - use 'shouldShrink'__
-     */
-    shrink: PropTypes.bool,
-    /**
-     * __Deprecated - use 'withVisualDebug'__
-     */
-    visualDebug: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    withVisualDebug: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 
@@ -135,53 +128,37 @@ class Item extends Component {
     const props = omitProps(this.props, Item.propTypes)
 
     const {
-      align,
       as,
       elementRef,
       children,
+      withVisualDebug,
+      textAlign,
+      size,
       direction,
-      shouldGrow,
       margin,
+      padding,
       overflowX,
       overflowY,
-      padding,
-      shouldShrink,
-      size,
-      textAlign,
-      withVisualDebug,
-      shrink,
-      grow,
-      visualDebug
+      styles
     } = this.props
 
     const dirColumn = direction === 'column'
-
-    const style = {
-      flexBasis: size
-    }
-
-    const classes = {
-      [styles.root]: true,
-      [styles.shouldGrow]: grow || shouldGrow,
-      [styles.shouldShrink]: shrink || shouldShrink,
-      [styles[`align--${align}`]]: align
-    }
+    const dirRow = direction === 'row'
 
     return (
       <View
         {...props}
-        className={classnames(classes)}
-        style={style}
+        css={styles.flexItem}
         elementRef={elementRef}
         as={as}
         minHeight={dirColumn ? size : undefined}
-        minWidth={direction === 'row' ? size : undefined}
+        minWidth={dirRow ? size : undefined}
         textAlign={textAlign}
         margin={margin}
         padding={padding}
         overflowX={overflowX}
         overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
-        withVisualDebug={withVisualDebug || visualDebug}
+        withVisualDebug={withVisualDebug}
       >
         {children}
       </View>

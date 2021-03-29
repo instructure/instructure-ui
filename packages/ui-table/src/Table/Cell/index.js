@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -39,10 +40,14 @@ parent: Table
 id: Table.Cell
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Cell extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     isStacked: PropTypes.bool,
     header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -58,17 +63,22 @@ class Cell extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { children, textAlign, isStacked, header } = this.props
+    const { children, styles, isStacked, header } = this.props
 
     return (
       <View
         {...View.omitViewProps(omitProps(this.props, Cell.propTypes), Cell)}
         as={isStacked ? 'div' : 'td'}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`textAlign--${textAlign}`]]: textAlign
-        })}
+        css={styles.cell}
         role={isStacked ? 'cell' : null}
       >
         {header && callRenderProp(header)}

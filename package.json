@@ -41,7 +41,6 @@
     "commit:package:list": "git add **/package-list.json",
     "generate:component": "instui create component",
     "generate:package": "instui create package",
-    "generate:rfc": "./scripts/generate-rfc",
     "commit": "ui-scripts --commit",
     "install:react": "ui-scripts --install-react",
     "install:packages": "lerna bootstrap --reject-cycles",
@@ -68,8 +67,6 @@
   },
   "license": "MIT",
   "resolutions": {
-    "@babel/core": "^7.12.10",
-    "@babel/runtime": "^7.12.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },

@@ -28,11 +28,11 @@ import {
   mount,
   locator,
   within,
-  stub
+  stub,
+  wait
 } from '@instructure/ui-test-utils'
-
+import { color2hex } from '@instructure/ui-color-utils'
 import { TreeNode } from '../index'
-import styles from '../../TreeButton/styles.css'
 
 const TreeNodeLocator = locator(TreeNode.selector)
 
@@ -62,14 +62,20 @@ describe('<TreeNode />', async () => {
   })
 
   describe('selected', async () => {
-    it('should take the selected class if it is selected', async () => {
+    it('should take the selected CSS props if it is selected', async () => {
+      const pink = '#FF00FF'
       await mount(
-        <TreeNode id="1" selected={true}>
+        <TreeNode
+          id="1"
+          selected={true}
+          themeOverride={{ selectedBackgroundColor: pink }}
+        >
           <div> Hello!</div>
         </TreeNode>
       )
       const item = await TreeNodeLocator.find()
-      expect(item.hasClass(styles['selected'])).to.be.true()
+      expect(item).to.exist()
+      expect(color2hex(item.getComputedStyle().backgroundColor)).to.equal(pink)
     })
 
     it('should take the focused class if it is focused', async () => {
@@ -79,7 +85,10 @@ describe('<TreeNode />', async () => {
         </TreeNode>
       )
       const item = await TreeNodeLocator.find()
-      expect(item.hasClass(styles['focused'])).to.be.true()
+      expect(item).to.exist()
+      await wait(() => {
+        expect(item.getComputedStyle(item, ':after').opacity).to.equal('1')
+      })
     })
   })
 })

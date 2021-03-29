@@ -25,8 +25,7 @@
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
-import { ApplyTheme } from '@instructure/ui-themeable'
-import { Transition } from '@instructure/ui-motion'
+import { EmotionThemeProvider } from '@instructure/emotion'
 // eslint-disable-next-line no-restricted-imports
 import { TransitionLocator } from '@instructure/ui-motion/es/Transition/TransitionLocator'
 
@@ -35,30 +34,34 @@ import { RatingIcon } from '../index'
 describe('<RatingIcon />', async () => {
   it('transitions when filled on render and animateFill is true', async () => {
     await mount(
-      <ApplyTheme
+      <EmotionThemeProvider
         theme={{
-          [Transition.theme]: {
-            duration: '2s'
+          componentOverrides: {
+            Transition: {
+              duration: '2s'
+            }
           }
         }}
       >
         <RatingIcon filled animateFill />
-      </ApplyTheme>
+      </EmotionThemeProvider>
     )
     expect(await TransitionLocator.find()).to.exist()
   })
 
   it('transitions when filled after render and animateFill is true', async () => {
     const subject = await mount(
-      <ApplyTheme
+      <EmotionThemeProvider
         theme={{
-          [Transition.theme]: {
-            duration: '2s'
+          componentOverrides: {
+            Transition: {
+              duration: '2s'
+            }
           }
         }}
       >
         <RatingIcon filled={false} animateFill={true} />
-      </ApplyTheme>
+      </EmotionThemeProvider>
     )
 
     expect(await TransitionLocator.find({ expectEmpty: true })).to.not.exist()

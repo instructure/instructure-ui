@@ -26,17 +26,16 @@
     "@instructure/ui-test-utils": "^7.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
+    "@instructure/emotion": "^7.5.0",
     "@instructure/ui-a11y-content": "^7.5.0",
     "@instructure/ui-color-utils": "^7.5.0",
     "@instructure/ui-dom-utils": "^7.5.0",
     "@instructure/ui-react-utils": "^7.5.0",
     "@instructure/ui-test-locator": "^7.5.0",
     "@instructure/ui-testable": "^7.5.0",
-    "@instructure/ui-themeable": "^7.5.0",
     "@instructure/uid": "^7.5.0",
-    "classnames": "^2",
-    "codemirror": "^5.48.4",
+    "codemirror": "5.48.4",
     "prop-types": "^15",
     "react-codemirror2": "^7.1.0"
   },

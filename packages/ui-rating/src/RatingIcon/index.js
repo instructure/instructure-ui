@@ -22,30 +22,34 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { IconStarSolid, IconStarLightSolid } from '@instructure/ui-icons'
-import { themeable } from '@instructure/ui-themeable'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 parent: Rating
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class RatingIcon extends Component {
   static propTypes = {
     animationDelay: PropTypes.number,
     animateFill: PropTypes.bool,
     filled: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -66,12 +70,13 @@ class RatingIcon extends Component {
   _timeouts = []
 
   componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
     if (this.props.animateFill) {
       this._timeouts.push(setTimeout(this.fill, this.props.animationDelay))
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       this.props.animateFill &&
       this.props.filled &&
@@ -79,11 +84,16 @@ class RatingIcon extends Component {
     ) {
       this.fill()
     }
+    this.props.makeStyles(this.makeStyleProps())
   }
 
   componentWillUnmount() {
     this._animation && this._animation.cancel()
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
+  }
+
+  makeStyleProps = () => {
+    return { filled: this.state.filled }
   }
 
   fill = () => {
@@ -94,36 +104,19 @@ class RatingIcon extends Component {
     })
   }
 
-  handleTransitionEnter = () => {
-    this.applyTheme()
-  }
-
   render() {
-    const { size, animateFill } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: true,
-      [styles.filled]: this.state.filled,
-      [styles.empty]: !this.state.filled
-    }
-
+    const { animateFill } = this.props
     const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
 
     return (
-      <span className={classnames(classes)}>
+      <span css={this.props.styles.ratingIcon}>
         <span>
           {this.state.filled && animateFill ? (
-            <Transition
-              in
-              transitionOnMount
-              type="scale"
-              onEnter={this.handleTransitionEnter}
-            >
-              <Icon className={styles.icon} />
+            <Transition in transitionOnMount type="scale">
+              <Icon css={this.props.styles.icon} />
             </Transition>
           ) : (
-            <Icon className={styles.icon} />
+            <Icon css={this.props.styles.icon} />
           )}
         </span>
       </span>

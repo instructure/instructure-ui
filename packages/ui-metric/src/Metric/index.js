@@ -21,26 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { testable } from '@instructure/ui-testable'
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Metric extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     renderLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     renderValue: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
@@ -56,6 +60,14 @@ class Metric extends Component {
     isGroupChild: false
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
+
   render() {
     const {
       textAlign,
@@ -65,26 +77,21 @@ class Metric extends Component {
       ...rest
     } = this.props
 
-    const classes = {
-      [styles.root]: true,
-      [styles[textAlign]]: true
-    }
-
     return (
       <div
         {...passthroughProps(rest)}
         role={isGroupChild === true ? 'row' : null}
-        className={classnames(classes)}
+        css={this.props.styles.metric}
       >
         <div
           role={isGroupChild === true ? 'rowheader' : null}
-          className={styles.label}
+          css={this.props.styles.label}
         >
           {callRenderProp(renderLabel)}
         </div>
         <div
           role={isGroupChild === true ? 'gridcell' : null}
-          className={styles.value}
+          css={this.props.styles.value}
         >
           {callRenderProp(renderValue)}
         </div>

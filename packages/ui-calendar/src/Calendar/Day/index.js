@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
@@ -36,10 +36,11 @@ import {
 import { I18nPropTypes } from '@instructure/ui-i18n'
 
 import testable from '@instructure/ui-testable'
-import themeable from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,10 +48,14 @@ parent: Calendar
 id: Calendar.Day
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Day extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The rendered representation of the corresponding date.
      */
@@ -118,6 +123,18 @@ class Day extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStylesVariables)
+  }
+
+  get makeStylesVariables() {
+    return { isDisabled: this.isDisabled }
+  }
+
   get isDisabled() {
     const { interaction } = this.props
     return interaction === 'disabled'
@@ -163,18 +180,11 @@ class Day extends Component {
       onClick,
       onKeyDown,
       as,
+      styles,
       ...props
     } = this.props
 
     const { elementType, isDisabled } = this
-
-    const classes = classnames({
-      [styles.day]: true,
-      [styles.outsideMonth]: isOutsideMonth,
-      [styles.selected]: isSelected,
-      [styles.today]: isToday && !isSelected,
-      [styles.disabled]: isDisabled
-    })
 
     const passthroughProps = View.omitViewProps(
       omitProps(props, Day.propTypes),
@@ -185,7 +195,7 @@ class Day extends Component {
       <View
         {...passthroughProps}
         as={elementType}
-        className={styles.root}
+        css={styles.calendarDay}
         display="inline-block"
         margin="xxx-small"
         borderWidth="none"
@@ -211,7 +221,7 @@ class Day extends Component {
         onKeyDown={onKeyDown && this.handleKeyDown}
         elementRef={this.handleElementRef}
       >
-        <span className={classes}>
+        <span css={styles.day}>
           <AccessibleContent alt={label}>
             {callRenderProp(children)}
           </AccessibleContent>

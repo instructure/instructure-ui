@@ -182,10 +182,6 @@ module.exports = {
       __dirname,
       '../instructure-theme/src/'
     ),
-    '@instructure/ui-themeable$': path.resolve(
-      __dirname,
-      '../ui-themeable/src/'
-    ),
     '@instructure/ui-react-utils$': path.resolve(
       __dirname,
       '../ui-react-utils/src/'
@@ -202,6 +198,7 @@ module.exports = {
       __dirname,
       '../ui-file-drop/src/'
     ),
-    '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src/')
+    '@instructure/ui-heading$': path.resolve(__dirname, '../ui-heading/src/'),
+    '@instructure/emotion$': path.resolve(__dirname, '../emotion/src/')
   }
 }

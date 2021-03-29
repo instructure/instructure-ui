@@ -22,8 +22,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/console": "^7.5.0",
+    "@instructure/emotion": "^7.5.0",
     "@instructure/ui-buttons": "^7.5.0",
     "@instructure/ui-dialog": "^7.5.0",
     "@instructure/ui-motion": "^7.5.0",
@@ -32,10 +33,8 @@
     "@instructure/ui-prop-types": "^7.5.0",
     "@instructure/ui-react-utils": "^7.5.0",
     "@instructure/ui-testable": "^7.5.0",
-    "@instructure/ui-themeable": "^7.5.0",
     "@instructure/ui-utils": "^7.5.0",
     "@instructure/ui-view": "^7.5.0",
-    "classnames": "^2",
     "prop-types": "^15"
   },
   "peerDependencies": {
@@ -45,7 +44,8 @@
     "@instructure/ui-babel-preset": "^7.5.0",
     "@instructure/ui-color-utils": "^7.5.0",
     "@instructure/ui-test-locator": "^7.5.0",
-    "@instructure/ui-test-utils": "^7.5.0"
+    "@instructure/ui-test-utils": "^7.5.0",
+    "@instructure/ui-themes": "^7.5.0"
   },
   "publishConfig": {
     "access": "public"

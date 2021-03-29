@@ -25,13 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import { Flex } from '@instructure/ui-flex'
 
-import styles from './styles.css'
-import theme from './theme'
-
-@themeable(theme, styles)
 class Guidelines extends Component {
   static propTypes = {
     children: PropTypes.node

@@ -22,13 +22,16 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
+import { withStyle, jsx } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
+import { omitProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -37,11 +40,32 @@ id: Menu.Separator
 ---
 @module MenuItemSeparator
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class MenuItemSeparator extends Component {
+  static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
+  }
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
+
   render() {
-    return <div {...this.props} role="presentation" className={styles.root} />
+    const props = omitProps(this.props, MenuItemSeparator.propTypes)
+    return (
+      <div
+        {...props}
+        role="presentation"
+        css={this.props.styles.menuItemSeparator}
+      />
+    )
   }
 }
 

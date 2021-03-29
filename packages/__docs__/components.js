@@ -36,17 +36,16 @@ export {
   Button,
   CloseButton,
   CondensedButton,
-  DeprecatedButton,
   IconButton,
   ToggleButton
 } from '@instructure/ui-buttons'
-export { Byline, Media } from '@instructure/ui-byline'
+export { Byline } from '@instructure/ui-byline'
 export { Calendar } from '@instructure/ui-calendar'
 export { CodeEditor } from '@instructure/ui-code-editor'
 export { Dialog } from '@instructure/ui-dialog'
 export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export { Expandable } from '@instructure/ui-expandable'
-export { Focusable, FocusableView } from '@instructure/ui-focusable'
+export { Focusable } from '@instructure/ui-focusable'
 export { Img } from '@instructure/ui-img'
 export { NumberInput } from '@instructure/ui-number-input'
 export { DateInput } from '@instructure/ui-date-input'
@@ -63,7 +62,7 @@ export {
 export { Table } from '@instructure/ui-table'
 export { TruncateText } from '@instructure/ui-truncate-text'
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
-export { MetricGroup, Metric, MetricsList } from '@instructure/ui-metric'
+export { MetricGroup, Metric } from '@instructure/ui-metric'
 export { Modal } from '@instructure/ui-modal'
 export { Transition } from '@instructure/ui-motion'
 export { Mask, Overlay } from '@instructure/ui-overlays'
@@ -93,7 +92,6 @@ export { Responsive } from '@instructure/ui-responsive'
 export { Select } from '@instructure/ui-select'
 export { SimpleSelect } from '@instructure/ui-simple-select'
 export { Selectable } from '@instructure/ui-selectable'
-export { ApplyTheme } from '@instructure/ui-themeable'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
 export { Tabs } from '@instructure/ui-tabs'
 export { Text } from '@instructure/ui-text'
@@ -105,7 +103,6 @@ export { Flex } from '@instructure/ui-flex'
 export { FileDrop } from '@instructure/ui-file-drop'
 export { Link } from '@instructure/ui-link'
 export { Heading } from '@instructure/ui-heading'
-export { Progress } from '@instructure/ui-progress'
 export { ProgressBar } from '@instructure/ui-progress'
 export { ProgressCircle } from '@instructure/ui-progress'
 export { Tag } from '@instructure/ui-tag'
@@ -118,3 +115,4 @@ export {
   Figure,
   ToggleBlockquote
 } from '@instructure/ui-docs-client'
+export { EmotionThemeProvider } from '@instructure/emotion'

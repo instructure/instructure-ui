@@ -21,37 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import {
-  deprecated,
-  getElementType,
-  passthroughProps
-} from '@instructure/ui-react-utils'
+import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
-import { themeAdapter } from './themeAdapter'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  ellipsis: '<TruncateText />'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles, themeAdapter)
 class Heading extends Component {
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
+
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Add a top- or bottom-border to the Heading
      */
@@ -88,14 +92,7 @@ class Heading extends Component {
     /**
      * Provides a ref to the underlying HTML element
      */
-    elementRef: PropTypes.func,
-
-    /* eslint-disable react/require-default-props */
-    /**
-     * __Deprecated - use `<TruncateText /> instead`__
-     */
-    ellipsis: PropTypes.bool
-    /* eslint-enable react/require-default-props */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -115,7 +112,7 @@ class Heading extends Component {
       level,
       margin,
       elementRef,
-      ellipsis,
+      makeStyles,
       ...props
     } = this.props
 
@@ -130,16 +127,10 @@ class Heading extends Component {
     return (
       <View
         {...passthroughProps(props)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`level--${level}`]]: true,
-          [styles[`color--${color}`]]: color,
-          [styles[`border--${border}`]]: border !== 'none',
-          [styles.ellipsis]: ellipsis
-        })}
+        css={this.props.styles.heading}
         as={ElementType}
-        margin={margin}
         elementRef={elementRef}
+        margin={margin}
       >
         {children}
       </View>

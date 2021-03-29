@@ -22,52 +22,66 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, borders, spacing, typography }) {
-  return {
-    color: colors.textLightest,
-    borderWidth: borders.widthSmall,
-    borderColor: colors.borderDark,
-    borderRadius: borders.radiusMedium,
-    background: colors.backgroundLightest,
-    marginRight: spacing.xSmall,
-    padding: spacing.xxxSmall,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, borders, spacing, typography, key: themeName } = theme
 
-    checkedBackground: colors.backgroundDarkest,
-    checkedBorderColor: colors.borderDarkest,
+  const themeSpecificStyle = {
+    canvas: {
+      focusBorderColor: theme['ic-brand-primary'],
+      labelColor: theme['ic-brand-font-color-dark'],
+      checkedLabelColor: theme['ic-brand-font-color-dark'],
+      checkedBackground: theme['ic-brand-font-color-dark'],
+      checkedBorderColor: theme['ic-brand-font-color-dark'],
+      hoverBorderColor: theme['ic-brand-font-color-dark']
+    }
+  }
 
-    hoverBorderColor: colors.borderDarkest,
+  const componentVariables = {
+    color: colors?.textLightest,
+    borderWidth: borders?.widthSmall,
+    borderColor: colors?.borderDark,
+    borderRadius: borders?.radiusMedium,
+    background: colors?.backgroundLightest,
+    marginRight: spacing?.xSmall,
+    padding: spacing?.xxxSmall,
 
-    focusBorderColor: colors.borderBrand,
-    focusBorderWidth: borders.widthMedium,
-    focusBorderStyle: borders.style,
+    checkedBackground: colors?.backgroundDarkest,
+    checkedBorderColor: colors?.borderDarkest,
 
-    labelColor: colors.textDarkest,
-    checkedLabelColor: colors.textDarkest,
-    labelFontFamily: typography.fontFamily,
-    labelFontWeight: typography.fontWeightNormal,
-    labelLineHeight: typography.lineHeightCondensed,
+    hoverBorderColor: colors?.borderDarkest,
+
+    focusBorderColor: colors?.borderBrand,
+    focusBorderWidth: borders?.widthMedium,
+    focusBorderStyle: borders?.style,
+
+    labelColor: colors?.textDarkest,
+    checkedLabelColor: colors?.textDarkest,
+    labelFontFamily: typography?.fontFamily,
+    labelFontWeight: typography?.fontWeightNormal,
+    labelLineHeight: typography?.lineHeightCondensed,
 
     facadeSizeSmall: '1rem',
     facadeSizeMedium: '1.25rem',
     facadeSizeLarge: '1.75rem',
 
-    labelFontSizeSmall: typography.fontSizeSmall,
-    labelFontSizeMedium: typography.fontSizeMedium,
-    labelFontSizeLarge: typography.fontSizeLarge,
+    labelFontSizeSmall: typography?.fontSizeSmall,
+    labelFontSizeMedium: typography?.fontSizeMedium,
+    labelFontSizeLarge: typography?.fontSizeLarge,
 
     iconSizeSmall: '0.625rem',
     iconSizeMedium: '0.75rem',
     iconSizeLarge: '1rem'
   }
-}
 
-generator.canvas = function (variables) {
   return {
-    focusBorderColor: variables['ic-brand-primary'],
-    labelColor: variables['ic-brand-font-color-dark'],
-    checkedLabelColor: variables['ic-brand-font-color-dark'],
-    checkedBackground: variables['ic-brand-font-color-dark'],
-    checkedBorderColor: variables['ic-brand-font-color-dark'],
-    hoverBorderColor: variables['ic-brand-font-color-dark']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

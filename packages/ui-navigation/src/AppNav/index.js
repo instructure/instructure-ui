@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import {
@@ -42,16 +42,16 @@ import { View } from '@instructure/ui-view'
 import { Menu } from '@instructure/ui-menu'
 import { Item } from './Item'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class AppNav extends Component {
   static propTypes = {
     /**
@@ -100,7 +100,11 @@ class AppNav extends Component {
     /**
      * Sets the number of navigation items that are visible.
      */
-    visibleItemsCount: PropTypes.number
+    visibleItemsCount: PropTypes.number,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -124,6 +128,7 @@ class AppNav extends Component {
   _list = null
 
   componentDidMount() {
+    this.props.makeStyles()
     this._debounced = debounce(this.handleResize, this.props.debounce, {
       leading: true,
       trailing: true
@@ -131,6 +136,10 @@ class AppNav extends Component {
     this._resizeListener = addResizeListener(this._list, this._debounced)
 
     this.handleResize()
+  }
+
+  componentDidUpdate() {
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -144,7 +153,7 @@ class AppNav extends Component {
   }
 
   measureItems = () => {
-    const menuTriggerWidth = px(this.theme.menuTriggerWidth)
+    const menuTriggerWidth = px(this.props.styles.menuTriggerWidth)
     let visibleItemsCount = 0
 
     if (this._list) {
@@ -186,11 +195,11 @@ class AppNav extends Component {
     return (
       <li
         key={key}
-        className={classnames({
-          [styles.listItem]: true,
-          [styles['listItem--isMenuTrigger']]:
-            isMenuTrigger && this.props.visibleItemsCount > 0
-        })}
+        css={
+          isMenuTrigger
+            ? this.props.styles.listItemWithMenuTrigger
+            : this.props.styles.listItem
+        }
       >
         {item}
       </li>
@@ -251,25 +260,22 @@ class AppNav extends Component {
     const renderBeforeItems = callRenderProp(this.props.renderBeforeItems)
     const renderAfterItems = callRenderProp(this.props.renderAfterItems)
     const hasRenderedContent = renderBeforeItems || renderAfterItems
-
     return (
       <View
         {...passthroughProps}
         as="nav"
-        className={classnames({
-          [styles.root]: true,
-          [styles['root--hasRenderedContent']]: hasRenderedContent
-        })}
+        css={[
+          this.props.styles.appNav,
+          hasRenderedContent ? this.props.styles.alignCenter : ''
+        ]}
         margin={margin}
         display={hasRenderedContent ? 'flex' : 'block'}
         elementRef={elementRef}
       >
-        {renderBeforeItems && (
-          <span className={styles.renderBefore}>{renderBeforeItems}</span>
-        )}
+        {renderBeforeItems && <span>{renderBeforeItems}</span>}
         <ul
           ref={(el) => (this._list = el)}
-          className={styles.list}
+          css={this.props.styles.list}
           aria-label={callRenderProp(screenReaderLabel)}
         >
           {visibleChildren.map((child, index) => {
@@ -277,9 +283,7 @@ class AppNav extends Component {
           })}
           {hiddenChildren.length > 0 && this.renderMenu(hiddenChildren)}
         </ul>
-        {renderAfterItems && (
-          <span className={styles.renderAfter}>{renderAfterItems}</span>
-        )}
+        {renderAfterItems && <span>{renderAfterItems}</span>}
       </View>
     )
   }

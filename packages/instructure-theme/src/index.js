@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-import { ThemeRegistry } from '@instructure/ui-themeable'
 import { instructure } from '@instructure/ui-theme-tokens'
 
 const {
@@ -40,10 +39,10 @@ const {
 
 const key = 'instructure'
 
-const theme = ThemeRegistry.registerTheme({
+const theme = {
   key,
-  variables: { ...instructure }
-})
+  ...instructure
+}
 
 export default theme
 export {

@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
+/** @jsx jsx */
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import {
   matchComponentTypes,
   safeCloneElement,
@@ -33,11 +33,11 @@ import {
 } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
+import { withStyle, jsx } from '@instructure/emotion'
 
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 import { Row } from '../Row'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
@@ -45,13 +45,17 @@ parent: Table
 id: Table.Body
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Body extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
      * `Table.Row`
      */
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: ChildrenPropTypes.oneOf([Row]),
     hover: PropTypes.bool,
     isStacked: PropTypes.bool,
@@ -65,14 +69,22 @@ class Body extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { children, hover, isStacked, headers } = this.props
+    const { children, hover, isStacked, headers, styles } = this.props
 
     return (
       <View
         {...View.omitViewProps(omitProps(this.props, Body.propTypes), Body)}
         as={isStacked ? 'div' : 'tbody'}
-        className={styles.root}
+        css={styles.body}
         role={isStacked ? 'rowgroup' : null}
       >
         {Children.map(children, (child) =>

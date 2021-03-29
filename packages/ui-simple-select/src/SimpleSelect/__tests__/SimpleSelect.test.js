@@ -36,10 +36,6 @@ import { SimpleSelectLocator } from '../SimpleSelectLocator'
 import SimpleSelectExamples from '../__examples__/SimpleSelect.examples'
 
 describe('<SimpleSelect />', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
-
   const lastCall = (spy) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
   const getOptions = (highlighted, selected, disabled) =>

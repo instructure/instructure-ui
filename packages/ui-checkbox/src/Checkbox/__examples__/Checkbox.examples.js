@@ -34,6 +34,9 @@ export default {
     }
   },
   filter: (props) => {
-    return props.variant === 'toggle' && props.indeterminate
+    return (
+      (props.variant === 'simple' && props.labelPlacement !== 'end') ||
+      (props.variant === 'toggle' && props.indeterminate)
+    )
   }
 }

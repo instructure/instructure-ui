@@ -22,36 +22,44 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, typography, stacking }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, typography, stacking, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      defaultColor: theme['ic-brand-font-color-dark'],
+      defaultSelectedBorderColor: theme['ic-brand-primary'],
+
+      secondaryColor: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeightCondensed,
+    fontSize: typography?.fontSizeMedium,
+
+    defaultColor: colors?.textDarkest,
+    defaultHoverBorderColor: colors?.borderMedium,
+    defaultSelectedBorderColor: colors?.borderBrand,
+
+    secondaryColor: colors?.textDarkest,
+    secondarySelectedBackground: colors?.backgroundLightest,
+    secondarySelectedBorderColor: colors?.borderMedium,
+
+    zIndex: stacking?.above
+  }
+
   return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeightCondensed,
-    fontSize: typography.fontSizeMedium,
-
-    defaultColor: colors.textDarkest,
-    defaultlHoverBorderColor: colors.borderMedium,
-    defaultSelectedBorderColor: colors.borderBrand,
-
-    secondaryColor: colors.textDarkest,
-    secondarySelectedBackground: colors.backgroundLightest,
-    secondarySelectedBorderColor: colors.borderMedium,
-
-    // TODO: remove secondarySelectedColor in v8, it is now the same as secondaryColor
-    secondarySelectedColor: colors.textDarkest,
-
-    zIndex: stacking.above
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    defaultColor: variables['ic-brand-font-color-dark'],
-    defaultSelectedBorderColor: variables['ic-brand-primary'],
-
-    secondaryColor: variables['ic-brand-font-color-dark'],
-
-    // TODO: remove secondarySelectedColor in v8, it is now the same as secondaryColor
-    secondarySelectedColor: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme

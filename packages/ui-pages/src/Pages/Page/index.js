@@ -25,10 +25,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/ui-themeable'
+import { ThemeablePropTypes } from '@instructure/emotion'
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { error } from '@instructure/console/macro'
 import { View } from '@instructure/ui-view'
+import { PagesContext } from '..'
 
 /**
 ---
@@ -110,21 +111,23 @@ class Page extends Component {
   render() {
     const { children, ...props } = this.props
 
-    const { history, navigateToPreviousPage } = this.context
-
     return (
-      <View
-        as="div"
-        padding={props.padding}
-        textAlign={props.textAlign}
-        elementRef={(el) => {
-          this._content = el
-        }}
-      >
-        {children && typeof children === 'function'
-          ? children(history, navigateToPreviousPage)
-          : children}
-      </View>
+      <PagesContext.Consumer>
+        {({ history, navigateToPreviousPage }) => (
+          <View
+            as="div"
+            padding={props.padding}
+            textAlign={props.textAlign}
+            elementRef={(el) => {
+              this._content = el
+            }}
+          >
+            {children && typeof children === 'function'
+              ? children(history, navigateToPreviousPage)
+              : children}
+          </View>
+        )}
+      </PagesContext.Consumer>
     )
   }
 }

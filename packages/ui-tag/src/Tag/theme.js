@@ -24,13 +24,28 @@
 
 import { darken } from '@instructure/ui-color-utils'
 
-export default function generator({
-  borders,
-  colors,
-  forms,
-  spacing,
-  typography
-}) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, colors, forms, spacing, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    'canvas-high-contrast': {
+      defaultBackground: colors.backgroundLightest,
+      defaultBorderColor: colors.borderDarkest
+    },
+    canvas: {
+      focusOutlineColor: theme['ic-brand-primary'],
+      textColor: theme['ic-brand-font-color-dark'],
+      defaultIconColor: theme['ic-brand-font-color-dark'],
+      defaultIconHoverColor: theme['ic-brand-primary'],
+      defaultColor: theme['ic-brand-font-color-dark']
+    }
+  }
+
   const tagVariant = function (
     style,
     {
@@ -60,7 +75,7 @@ export default function generator({
     }
   }
 
-  return {
+  const componentVariables = {
     fontFamily: typography.fontFamily,
     heightSmall: '1.3125rem', // matches Pill component height
     heightMedium: forms.inputHeightSmall,
@@ -94,23 +109,11 @@ export default function generator({
       textColor: colors.textDarkest
     })
   }
-}
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
-  colors
-}) {
   return {
-    defaultBackground: colors.backgroundLightest,
-    defaultBorderColor: colors.borderDarkest
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    focusOutlineColor: variables['ic-brand-primary'],
-    textColor: variables['ic-brand-font-color-dark'],
-    defaultIconColor: variables['ic-brand-font-color-dark'],
-    defaultIconHoverColor: variables['ic-brand-primary'],
-    defaultColor: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme

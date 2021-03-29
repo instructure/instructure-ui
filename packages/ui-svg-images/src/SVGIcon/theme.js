@@ -22,12 +22,28 @@
  * SOFTWARE.
  */
 
-export default function generator() {
-  return {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
     sizeXSmall: '1.125rem',
     sizeSmall: '2rem',
     sizeMedium: '3rem',
     sizeLarge: '5rem',
     sizeXLarge: '10rem'
   }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
 }
+
+export default generateComponentTheme

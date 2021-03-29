@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,9 +48,13 @@ example: true
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldMessage extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     variant: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']),
     children: PropTypes.node
   }
@@ -59,15 +64,21 @@ class FormFieldMessage extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.variant]]: true
-    }
+    const { children, styles } = this.props
+
     return this.props.variant !== 'screenreader-only' ? (
-      <span className={classnames(classes)}>{this.props.children}</span>
+      <span css={styles.formFieldMessage}>{children}</span>
     ) : (
-      <ScreenReaderContent>{this.props.children}</ScreenReaderContent>
+      <ScreenReaderContent>{children}</ScreenReaderContent>
     )
   }
 }

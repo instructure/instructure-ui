@@ -2,13 +2,13 @@
 id: instructure-ui
 ---
 
-## instructure-ui
+## Instructure UI
 
-[![build-status][build-status]][build-status-url]&nbsp;&nbsp;&nbsp;[![MIT License][license-badge]][license]&nbsp;&nbsp;&nbsp;[![Code of Conduct][coc-badge]][coc]
+[![MIT License][license-badge]][license]&nbsp;&nbsp;&nbsp;[![Code of Conduct][coc-badge]][coc]
 
-## Usage
+Instructure UI is an open source UI framework and design system for React. Its components are used by millions of learners every day when they use Instructure products like Canvas LMS.
 
-To build an accessible application using the React components, themes, and utilities provided by instructure-ui, see our [quick start](https://instructure.design/#usage) documentation.
+### See our [website](https://instructure.design) for usage, examples and documentation.
 
 ## Contributing
 
@@ -26,8 +26,6 @@ The last two versions of all modern browsers (Firefox, Safari, Chrome, Edge).
 
 [MIT](#LICENSE)
 
-[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
-[build-status-url]: https://travis-ci.org/instructure/instructure-ui 'Travis CI'
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
 [license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square

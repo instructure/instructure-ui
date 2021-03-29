@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { CheckboxFacade } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('CheckboxFacade.theme', () => {
   describe('with the default theme', () => {
-    const variables = CheckboxFacade.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should ensure checkbox meets 3:1 contrast', () => {
       expect(
@@ -39,7 +40,7 @@ describe('CheckboxFacade.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = CheckboxFacade.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should ensure checkbox meets 4.5:1 contrast', () => {
       expect(

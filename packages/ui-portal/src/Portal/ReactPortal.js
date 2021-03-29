@@ -70,7 +70,9 @@ class ReactPortal extends React.Component {
     /**
      * provides a reference to the underlying html element
      */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {
@@ -163,6 +165,7 @@ class ReactPortal extends React.Component {
       mountNode,
       children,
       elementRef,
+      dir,
       ...props
     } = this.props
 
@@ -171,7 +174,7 @@ class ReactPortal extends React.Component {
       const node = document.createElement('span')
       const attributes = {
         ...passthroughProps(props),
-        dir: this.dir
+        dir
       }
 
       Object.keys(attributes).forEach((name) => {

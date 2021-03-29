@@ -230,7 +230,7 @@ class Example extends React.Component {
     if (expanded) {
       return (
         <View as="div" padding="xx-small" onFocus={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
-          <TextInput placeholder="Enter new group name" display="inline-block" width="12rem"/>
+          <TextInput placeholder="Enter new group name" display="inline-block" width="12rem" renderLabel=''/>
           <IconButton screenReaderLabel="Cancel" onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconXSolid/></IconButton>
           <IconButton screenReaderLabel="Add new group" onClick={(e) => this.setExpand(e, !expanded)} margin="0 0 0 small" ><IconCheckSolid/></IconButton>
         </View>

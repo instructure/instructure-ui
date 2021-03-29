@@ -22,10 +22,26 @@
  * SOFTWARE.
  */
 
-export default function generator({ spacing, typography }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { spacing, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    listPadding: spacing?.large,
+    orderedNumberFontWeight: typography?.fontWeightBold,
+    orderedNumberMargin: spacing?.xSmall
+  }
+
   return {
-    listPadding: spacing.large,
-    orderedNumberFontWeight: typography.fontWeightBold,
-    orderedNumberMargin: spacing.xSmall
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

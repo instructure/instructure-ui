@@ -26,7 +26,6 @@ import React from 'react'
 import {
   expect,
   mount,
-  stub,
   spy,
   wait,
   generateA11yTests
@@ -37,10 +36,6 @@ import { TooltipLocator } from '../TooltipLocator'
 import TooltipExamples from '../__examples__/Tooltip.examples'
 
 describe('<Tooltip />', async () => {
-  beforeEach(async () => {
-    stub(console, 'warn') // suppress experimental warnings
-  })
-
   it('should render', async () => {
     await mount(
       <Tooltip renderTip="Hello">
@@ -236,7 +231,9 @@ describe('<Tooltip />', async () => {
       await subject.setProps({ isShowingContent: true })
 
       await trigger.mouseOut()
-      expect(onHideContent).to.have.been.calledOnce()
+      await wait(() => {
+        expect(onHideContent).to.have.been.calledOnce()
+      })
     })
   })
 

@@ -45,16 +45,6 @@ describe('<ListItem />', async () => {
     ).to.not.exist()
   })
 
-  it('should render delimiter when variant="inline"', async () => {
-    await mount(
-      <ListItem variant="inline" delimiter="solid">
-        List item
-      </ListItem>
-    )
-    const listItem = await ListItemLocator.find()
-    expect(await listItem.find('[aria-hidden="true"]')).to.exist()
-  })
-
   it('should call elementRef', async () => {
     const elementRef = stub()
     await mount(<ListItem elementRef={elementRef}>List item</ListItem>)

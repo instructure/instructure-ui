@@ -21,9 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 const gulp = require('gulp')
+
 const {
-  exportFromSketch,
+  optimizeSVGs,
   buildSVGs,
   buildFonts,
   buildReact,
@@ -32,14 +34,10 @@ const {
 } = require('@instructure/ui-icons-build')
 
 gulp.task('clean', clean)
-gulp.task('export', exportFromSketch)
+gulp.task('optimize', optimizeSVGs)
 gulp.task('build:svgs', buildSVGs)
 gulp.task('build:fonts', buildFonts)
 gulp.task('build:react', buildReact)
 gulp.task('build', buildAll)
-
-gulp.task('watch', () => {
-  gulp.watch('./src/**/*.sketch', gulp.parallel('build'))
-})
 
 gulp.task('default', buildAll)

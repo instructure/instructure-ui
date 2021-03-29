@@ -22,17 +22,15 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component, createElement } from 'react'
 import PropTypes from 'prop-types'
 
-import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Children } from '@instructure/ui-prop-types'
 import {
-  deprecated,
   matchComponentTypes,
   safeCloneElement,
   passthroughProps
@@ -49,29 +47,28 @@ import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
 import { Tab } from './Tab'
 import { Panel } from './Panel'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  title: 'renderTitle',
-  size: 'maxWidth',
-  selectedIndex: true,
-  onChange: 'onRequestTabChange',
-  focus: 'shouldFocusOnRender'
-})
-@testable()
+@withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
-@themeable(theme, styles)
+@testable()
 class Tabs extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * children of type `Tabs.Panel`
      */
@@ -108,40 +105,22 @@ class Tabs extends Component {
      */
     tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
     shouldFocusOnRender: PropTypes.bool,
-    /**
-     * __Deprecated - use `onRequestTabChange` instead__
-     */
-    onChange: PropTypes.func,
-    /**
-     * __Deprecated__
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * __Deprecated__
-     */
-    selectedIndex: PropTypes.number,
-    /**
-     * __Deprecated - use `shouldFocusOnRender` instead__
-     */
-    focus: PropTypes.bool
+    // eslint-disable-next-line react/require-default-props
+    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
 
   static defaultProps = {
-    selectedIndex: undefined,
     variant: 'default',
     padding: undefined,
     textAlign: undefined,
-    size: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
     minHeight: undefined,
-    onChange: undefined,
     onRequestTabChange: (event, { index, id }) => {},
     margin: undefined,
     children: null,
     elementRef: (el) => {},
     screenReaderLabel: undefined,
-    focus: undefined,
     shouldFocusOnRender: false,
     tabOverflow: 'stack'
   }
@@ -150,7 +129,7 @@ class Tabs extends Component {
   static Tab = Tab
 
   constructor(props) {
-    super()
+    super(props)
 
     this._tabList = null
     this._tabListPosition = null
@@ -163,22 +142,17 @@ class Tabs extends Component {
   componentDidMount() {
     if (this.props.tabOverflow === 'scroll' && this._tabList) {
       this.startScrollOverflow()
-
-      // make sure active tab is always visible
-      const activeTabEl = this._tabList.querySelector('[aria-selected="true"]')
-      this.showActiveTabIfOverlayed(activeTabEl)
     }
 
-    if (this.props.focus || this.props.shouldFocusOnRender) {
+    if (this.props.shouldFocusOnRender) {
       this.focus()
     }
+
+    this.props.makeStyles()
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      (this.props.focus && !prevProps.focus) ||
-      (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender)
-    ) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.shouldFocusOnRender && !prevProps.shouldFocusOnRender) {
       this.focus()
     }
 
@@ -197,6 +171,28 @@ class Tabs extends Component {
     ) {
       this.cancelScrollOverflow()
     }
+
+    // we need to recalculate the scroll overflow if the style changes
+    if (
+      this.props.tabOverflow === 'scroll' &&
+      prevProps.styles !== this.props.styles
+    ) {
+      this.handleResize()
+    }
+
+    // when tabList is set as overflown,
+    // make sure active tab is always visible
+    if (
+      this.props.tabOverflow === 'scroll' &&
+      this._tabList &&
+      !prevState.withTabListOverflow &&
+      this.state.withTabListOverflow
+    ) {
+      const activeTabEl = this._tabList.querySelector('[aria-selected="true"]')
+      this.showActiveTabIfOverlayed(activeTabEl)
+    }
+
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -225,13 +221,13 @@ class Tabs extends Component {
   }
 
   getOverlayWidth() {
-    const { variant, tabOverflow } = this.props
+    const { variant, tabOverflow, styles } = this.props
 
     if (tabOverflow === 'scroll') {
       if (variant === 'default') {
-        return px(this.theme.scrollOverlayWidthDefault)
+        return px(styles.scrollOverlayWidthDefault)
       } else {
-        return px(this.theme.scrollOverlayWidthSecondary)
+        return px(styles.scrollOverlayWidthSecondary)
       }
     }
   }
@@ -242,15 +238,16 @@ class Tabs extends Component {
       this._tabListPosition &&
       typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
-      const rtl = this.dir === bidirectional.DIRECTION.rtl
+      const { dir } = this.props
+      const isRtl = dir === bidirectional.DIRECTION.rtl
 
       const tabPosition = getBoundingClientRect(activeTabEl)
       const tabListPosition = this._tabListPosition
 
-      const tabListBoundStart = rtl
+      const tabListBoundStart = isRtl
         ? tabListPosition.left + this.getOverlayWidth()
         : tabListPosition.left
-      const tabListBoundEnd = rtl
+      const tabListBoundEnd = isRtl
         ? tabListPosition.right
         : tabListPosition.right + this.getOverlayWidth()
 
@@ -328,11 +325,7 @@ class Tabs extends Component {
     do {
       nextIndex = (nextIndex + change) % count
       nextTab = tabs[nextIndex]
-    } while (
-      nextTab &&
-      nextTab.props &&
-      (nextTab.props.disabled || nextTab.props.isDisabled)
-    )
+    } while (nextTab && nextTab.props && nextTab.props.isDisabled)
 
     error(
       nextIndex >= 0 && nextIndex < count,
@@ -342,10 +335,6 @@ class Tabs extends Component {
   }
 
   fireOnChange(event, { index, id }) {
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(event, { index })
-    }
-
     if (typeof this.props.onRequestTabChange === 'function') {
       this.props.onRequestTabChange(event, { index, id })
     }
@@ -356,7 +345,6 @@ class Tabs extends Component {
 
   createTab(index, generatedId, selected, panel) {
     const id = panel.props.id || generatedId
-    const disabled = panel.props.disabled || panel.props.isDisabled
 
     return createElement(Tab, {
       variant: this.props.variant,
@@ -364,11 +352,9 @@ class Tabs extends Component {
       id: `tab-${id}`,
       controls: panel.props.id || `panel-${id}`,
       index,
-      selected: undefined,
       isSelected: selected,
-      disabled: undefined,
-      isDisabled: disabled,
-      children: panel.props.renderTitle || panel.props.title,
+      isDisabled: panel.props.isDisabled,
+      children: panel.props.renderTitle,
       onClick: this.handleTabClick,
       onKeyDown: this.handleTabKeyDown
     })
@@ -380,7 +366,6 @@ class Tabs extends Component {
     return safeCloneElement(panel, {
       id: panel.props.id || `panel-${id}`,
       labelledBy: `tab-${id}`,
-      selected: undefined,
       isSelected: selected,
       key: panel.props.id || `panel-${id}`,
       variant: this.props.variant,
@@ -411,36 +396,28 @@ class Tabs extends Component {
     const {
       children,
       elementRef,
-      size,
       maxWidth,
       variant,
       margin,
       screenReaderLabel,
       onRequestTabChange,
       tabOverflow,
-      onChange,
+      styles,
       ...props
     } = this.props
 
     const selectedChildIndex = React.Children.toArray(children)
       .filter((child) => matchComponentTypes(child, [Panel]))
-      .findIndex(
-        (child) =>
-          (child.props.selected || child.props.isSelected) &&
-          !(child.props.disabled || child.props.isDisabled)
-      )
+      .findIndex((child) => child.props.isSelected && !child.props.isDisabled)
 
     let index = 0
-    let selectedIndex =
-      props.selectedIndex || (selectedChildIndex >= 0 ? selectedChildIndex : 0)
+    let selectedIndex = selectedChildIndex >= 0 ? selectedChildIndex : 0
 
     React.Children.forEach(children, (child) => {
       if (matchComponentTypes(child, [Panel])) {
         const selected =
-          !(child.props.disabled || child.props.isDisabled) &&
-          (child.props.selected ||
-            child.props.isSelected ||
-            selectedIndex === index)
+          !child.props.isDisabled &&
+          (child.props.isSelected || selectedIndex === index)
         const id = uid()
 
         tabs.push(this.createTab(index, id, selected, child))
@@ -458,12 +435,12 @@ class Tabs extends Component {
     // suppress overlay whenever final Tab is active, or Firefox will cover it
     const scrollOverlay =
       selectedIndex !== React.Children.count(children) - 1 ? (
-        <span key="overlay" className={styles.scrollOverlay} />
+        <span key="overlay" css={styles.scrollOverlay} />
       ) : null
 
     const scrollFadeEls = [
       // spacer element prevents final Tab from being obscured by scroll overflow gradient
-      <span key="spacer" className={styles.scrollSpacer} />,
+      <span key="spacer" css={styles.scrollSpacer} />,
       scrollOverlay
     ]
 
@@ -471,12 +448,10 @@ class Tabs extends Component {
       <View
         {...passthroughProps(props)}
         elementRef={elementRef}
-        maxWidth={maxWidth ? maxWidth : this.theme[size]}
+        maxWidth={maxWidth}
         margin={margin}
         as="div"
-        className={classnames({
-          [styles[variant]]: true
-        })}
+        css={styles.container}
       >
         <Focusable ref={this.handleFocusableRef}>
           {({ focusVisible }) => (
@@ -486,15 +461,12 @@ class Tabs extends Component {
               borderRadius="medium"
               withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
-              className={styles.tabs}
+              css={styles.tabs}
             >
               <View
                 as="div"
                 role="tablist"
-                className={classnames({
-                  [styles.tabList]: true,
-                  [styles[`tabOverflow--${tabOverflow}`]]: true
-                })}
+                css={styles.tabList}
                 aria-label={screenReaderLabel}
                 elementRef={this.handleTabListRef}
               >

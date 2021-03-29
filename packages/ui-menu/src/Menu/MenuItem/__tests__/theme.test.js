@@ -24,11 +24,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { MenuItem } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('MenuItem.theme', () => {
   describe('with the default theme', () => {
-    const variables = MenuItem.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should ensure label color and icon color meet 3:1 contrast with background', () => {
       expect(contrast(variables.background, variables.labelColor)).to.be.above(
@@ -47,7 +48,7 @@ describe('MenuItem.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = MenuItem.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should ensure label color and icon color meet 4.5:1 contrast with background', () => {
       expect(contrast(variables.background, variables.labelColor)).to.be.above(

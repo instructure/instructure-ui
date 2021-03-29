@@ -46,7 +46,7 @@ export default {
           icon={<IconAdminLine />}
           label="Admin"
           href="#"
-          theme={{
+          themeOverride={{
             backgroundColor: 'red',
             hoverBackgroundColor: 'blue'
           }}

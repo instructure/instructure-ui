@@ -22,20 +22,20 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import {
   matchComponentTypes,
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -43,12 +43,17 @@ parent: Modal
 id: Modal.Header
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class ModalHeader extends Component {
   static propTypes = {
     children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse'])
+    variant: PropTypes.oneOf(['default', 'inverse']),
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -56,24 +61,34 @@ class ModalHeader extends Component {
     variant: 'default'
   }
 
-  render() {
-    const { children, variant, ...rest } = this.props
-    let usesCloseButton = false
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
+  }
 
-    React.Children.forEach(children, (child) => {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    return {
+      withCloseButton: this.usesCloseButton
+    }
+  }
+
+  get usesCloseButton() {
+    React.Children.forEach(this.props.children, (child) => {
       if (child && matchComponentTypes(child, [CloseButton])) {
-        usesCloseButton = true
+        return true
       }
     })
+    return false
+  }
 
-    const classes = {
-      [styles.root]: true,
-      [styles.inverse]: variant === 'inverse',
-      [styles.withCloseButton]: usesCloseButton === true
-    }
+  render() {
+    const { children, ...rest } = this.props
 
     return (
-      <div className={classnames(classes)} {...passthroughProps(rest)}>
+      <div css={this.props.styles.modalHeader} {...passthroughProps(rest)}>
         {children}
       </div>
     )

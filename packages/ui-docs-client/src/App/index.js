@@ -22,21 +22,27 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable, ApplyTheme } from '@instructure/ui-themeable'
 import { Alert } from '@instructure/ui-alerts'
+import {
+  EmotionThemeProvider,
+  withStyle,
+  jsx,
+  Global
+} from '@instructure/emotion'
 import { Flex } from '@instructure/ui-flex'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
+import { instructure } from '@instructure/ui-themes'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
-
 import {
   IconHamburgerSolid,
   IconHeartLine,
@@ -56,10 +62,15 @@ import { Icons } from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 import { LibraryPropType } from '../propTypes'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
-@themeable(theme, styles)
+export const AppContext = createContext({
+  library: {},
+  themes: {},
+  themeKey: ''
+})
+@withStyle(generateStyle, generateComponentTheme)
 class App extends Component {
   static propTypes = {
     library: LibraryPropType.isRequired,
@@ -69,7 +80,11 @@ class App extends Component {
     themes: PropTypes.object,
     icons: PropTypes.object,
     descriptions: PropTypes.object,
-    trayWidth: PropTypes.number
+    trayWidth: PropTypes.number,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -81,14 +96,8 @@ class App extends Component {
     trayWidth: 300
   }
 
-  static childContextTypes = {
-    library: LibraryPropType,
-    themes: PropTypes.object,
-    themeKey: PropTypes.string
-  }
-
   constructor(props) {
-    super()
+    super(props)
     // determine what page we're loading
     const [page] = this.getPathInfo()
 
@@ -127,6 +136,11 @@ class App extends Component {
       this._content,
       this.updateLayout
     )
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   componentWillUnmount() {
@@ -134,14 +148,6 @@ class App extends Component {
 
     if (this._mediaQueryListener) {
       this._mediaQueryListener.remove()
-    }
-  }
-
-  getChildContext() {
-    return {
-      library: this.props.library,
-      themeKey: this.state.themeKey,
-      themes: this.props.themes
     }
   }
 
@@ -302,7 +308,7 @@ class App extends Component {
         </Heading>
         <Theme
           themeKey={themeKey}
-          variables={theme.resource.variables}
+          variables={theme.resource}
           requirePath={theme.requirePath}
           immutable={theme.resource.immutable}
         />
@@ -340,7 +346,7 @@ class App extends Component {
   }
 
   renderDocument(doc, repository) {
-    const { descriptions, docs, parents } = this.props
+    const { descriptions, docs, parents, themes } = this.props
     const { layout, themeKey } = this.state
 
     let children = []
@@ -348,6 +354,8 @@ class App extends Component {
     if (parents[doc.id]) {
       children = parents[doc.id].children.map((childId) => docs[childId])
     }
+
+    const themeVariables = themes[themeKey].resource
 
     const description = descriptions[doc.id]
     const heading = doc.extension !== '.md' ? doc.title : ''
@@ -376,7 +384,7 @@ class App extends Component {
               children
             }}
             description={description || doc.description}
-            themeKey={themeKey}
+            themeVariables={themeVariables}
             repository={repository}
             layout={layout}
           />
@@ -421,7 +429,7 @@ class App extends Component {
       }
     })
     return (
-      <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+      <EmotionThemeProvider theme={instructure}>
         <Hero
           name={library.name}
           docs={{ ...docs, ...themeDocs }}
@@ -430,19 +438,44 @@ class App extends Component {
           version={library.version}
           layout={layout}
         />
-      </ApplyTheme>
+      </EmotionThemeProvider>
     )
   }
 
   renderChangeLog() {
-    const { docs } = this.props
-    return docs.CHANGELOG ? (
+    const { docs, library } = this.props
+    const { CHANGELOG } = docs
+    let content
+
+    if (!CHANGELOG) {
+      return null
+    }
+
+    const { description } = CHANGELOG
+    const currentMajorVersion = library.version.slice(0, 1)
+
+    // we want to cut the docs below the last 2 major versions,
+    // so find the next title after it
+    const versionCutoffPoint = parseInt(currentMajorVersion, 10) - 2
+    let breakpointIndex = description.indexOf(`# [${versionCutoffPoint}`) - 1
+
+    if (breakpointIndex < 0) {
+      content = description
+    } else {
+      content =
+        description.slice(0, breakpointIndex) +
+        '\n...\n' +
+        `# Version ${versionCutoffPoint} and below\n` +
+        `For older releases (v${versionCutoffPoint} and below), check the [GitHub CHANGELOG](https://github.com/instructure/instructure-ui/blob/master/CHANGELOG.md).`
+    }
+
+    return (
       <Section id="CHANGELOG">
         {this.renderWrappedContent(
-          compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' })
+          compileMarkdown(content, { title: 'CHANGELOG' })
         )}
       </Section>
-    ) : null
+    )
   }
 
   renderError() {
@@ -493,13 +526,8 @@ class App extends Component {
               size="small"
               lineHeight="fit"
             >
-              Made with{' '}
-              <IconHeartLine
-                size="small"
-                className={styles.footerIcon}
-                color="error"
-              />{' '}
-              by {author}.
+              Made with <IconHeartLine size="small" color="error" /> by {author}
+              .
             </Text>
           </AccessibleContent>
         )}
@@ -525,7 +553,7 @@ class App extends Component {
         width="18.75rem"
       >
         <View display="block" textAlign="end" margin="xx-small x-small none">
-          <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+          <EmotionThemeProvider theme={instructure}>
             <IconButton
               renderIcon={IconXSolid}
               screenReaderLabel="Close Navigation"
@@ -536,7 +564,7 @@ class App extends Component {
               color="secondary"
               size="medium"
             />
-          </ApplyTheme>
+          </EmotionThemeProvider>
         </View>
         <Header
           name={name === 'instructure-ui' ? 'Instructure UI' : name}
@@ -553,7 +581,7 @@ class App extends Component {
     )
 
     return layout !== 'small' ? (
-      <nav className={styles.inlineNavigation}>{navContent}</nav>
+      <nav css={this.props.styles.inlineNavigation}>{navContent}</nav>
     ) : (
       <Tray label="Navigation" open={showMenu} onDismiss={this.handleMenuClose}>
         {navContent}
@@ -566,34 +594,44 @@ class App extends Component {
     const { showMenu, layout } = this.state
 
     return (
-      <div className={styles.root}>
-        {showMenu && layout === 'small' && (
-          <Mask onClick={this.handleMenuClose} />
-        )}
-        {this.renderNavigation()}
-        <div
-          className={styles.content}
-          label={key || this.props.library.name}
-          role="main"
-          ref={this.handleContentRef}
-        >
-          {!showMenu && (
-            <div className={styles.hamburger}>
-              <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
-                <IconButton
-                  onClick={this.handleMenuOpen}
-                  elementRef={this.handleMenuTriggerRef}
-                  renderIcon={IconHamburgerSolid}
-                  screenReaderLabel="Open Navigation"
-                  shape="circle"
-                />
-              </ApplyTheme>
-            </div>
+      <AppContext.Provider
+        value={{
+          library: this.props.library,
+          themeKey: this.state.themeKey,
+          themes: this.props.themes
+        }}
+      >
+        <div css={this.props.styles.app}>
+          <Global styles={this.props.styles.globalStyles} />
+          {showMenu && layout === 'small' && (
+            <Mask onClick={this.handleMenuClose} />
           )}
-          {this.renderContent(key)}
-          {this.renderFooter()}
+          {this.renderNavigation()}
+          <div
+            css={this.props.styles.content}
+            label={key || this.props.library.name}
+            role="main"
+            ref={this.handleContentRef}
+          >
+            {!showMenu && (
+              <div css={this.props.styles.hamburger}>
+                <EmotionThemeProvider theme={instructure}>
+                  <IconButton
+                    onClick={this.handleMenuOpen}
+                    elementRef={this.handleMenuTriggerRef}
+                    renderIcon={IconHamburgerSolid}
+                    screenReaderLabel="Open Navigation"
+                    shape="circle"
+                  />
+                </EmotionThemeProvider>
+              </div>
+            )}
+
+            {this.renderContent(key)}
+            {this.renderFooter()}
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     )
   }
 }

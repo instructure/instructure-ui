@@ -24,11 +24,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { Pill } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('Pill.theme', () => {
   describe('with the canvas theme', () => {
-    const variables = Pill.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
       expect(
@@ -66,7 +67,7 @@ describe('Pill.theme', () => {
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = Pill.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(

@@ -22,17 +22,19 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { themeable } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldMessage } from '../FormFieldMessage'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -52,9 +54,13 @@ example: true
 ]} />
 ```
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class FormFieldMessages extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * object with shape: `{
      * text: PropTypes.string,
@@ -68,16 +74,24 @@ class FormFieldMessages extends Component {
     messages: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { messages } = this.props
+    const { messages, styles } = this.props
     return messages && messages.length > 0 ? (
       <span
-        className={styles.root}
+        css={styles.formFieldMessages}
         {...omitProps(this.props, FormFieldMessages.propTypes)}
       >
         {messages.map((msg, i) => {
           return (
-            <span key={`error${i}`} className={styles.message}>
+            <span key={`error${i}`} css={styles.message}>
               <FormFieldMessage variant={msg.type}>{msg.text}</FormFieldMessage>
             </span>
           )

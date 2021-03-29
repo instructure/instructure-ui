@@ -24,12 +24,13 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
-import { View } from '../../index'
+import generateComponentTheme from '../theme'
 
 describe('View.theme', () => {
   describe('with the default theme', () => {
-    const variables = View.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should have a background and text colors that meet 3:1 contrast', () => {
       expect(
@@ -90,7 +91,7 @@ describe('View.theme', () => {
   })
 
   describe('with the high contrast canvas theme', async () => {
-    const variables = View.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(

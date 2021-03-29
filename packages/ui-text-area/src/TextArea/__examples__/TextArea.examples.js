@@ -24,7 +24,7 @@
 
 export default {
   maxExamplesPerPage: 50,
-  maxExamples: 800,
+  maxExamples: 500,
   propValues: {
     placeholder: [undefined, 'Hello text area placeholder'],
     value: [undefined, 'Some content for the text area'],
@@ -32,6 +32,7 @@ export default {
     width: [undefined, '3rem'],
     height: [undefined, '5rem']
   },
+  excludeProps: ['required', 'inline'],
   getComponentProps: (props) => {
     return {
       label: 'A text area',

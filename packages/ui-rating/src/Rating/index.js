@@ -22,28 +22,25 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-
 import { RatingIcon } from '../RatingIcon'
-
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import generateStyle from './styles'
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle)
 @testable()
-@themeable(theme, styles)
 class Rating extends Component {
   static propTypes = {
     /**
@@ -79,7 +76,12 @@ class Rating extends Component {
      * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
      * familiar CSS-like shorthand. For example: `margin="small auto large"`.
      */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -90,6 +92,14 @@ class Rating extends Component {
     valueNow: 0,
     margin: undefined,
     valueMax: undefined
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   get filled() {
@@ -122,10 +132,6 @@ class Rating extends Component {
       formatValueText
     } = this.props
 
-    const classes = {
-      [styles.root]: true
-    }
-
     const valueText = label + ' ' + formatValueText(this.filled, iconCount)
 
     const passthroughProps = View.omitViewProps(
@@ -136,7 +142,7 @@ class Rating extends Component {
     return (
       <View
         {...passthroughProps}
-        className={classnames(classes)}
+        css={this.props.styles.rating}
         margin={margin}
         display="inline-block"
       >

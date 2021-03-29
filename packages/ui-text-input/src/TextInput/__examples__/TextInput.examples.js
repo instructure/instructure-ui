@@ -68,10 +68,12 @@ export default {
       layout: 'stacked'
     }
   },
-  excludeProps: ['required', 'readOnly', 'disabled', 'label', 'inline'],
+  excludeProps: ['readOnly', 'disabled'],
   filter: (props) => {
     return (
-      (props.layout === 'inline' && props.inline === true && !props.width) ||
+      (props.layout === 'inline' &&
+        props.display === 'inline-block' &&
+        !props.width) ||
       (props.renderBeforeInput && props.width) ||
       (props.renderAfterInput && props.width) ||
       props.interaction === 'readonly' ||

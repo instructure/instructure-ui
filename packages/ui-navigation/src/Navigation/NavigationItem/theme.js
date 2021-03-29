@@ -22,49 +22,58 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, typography, spacing, borders }) {
-  return {
-    fontSize: typography.fontSizeSmall,
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightLight,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, typography, key: themeName } = theme
 
-    fontColor: colors.textLightest,
+  const themeSpecificStyle = {
+    canvas: {
+      fontColor: theme['ic-brand-global-nav-menu-item__text-color'],
+      iconColor: theme['ic-brand-global-nav-ic-icon-svg-fill'],
+      backgroundColor: theme['ic-brand-global-nav-bgd'],
+      hoverBackgroundColor: theme['ic-global-nav-link-hover'],
+      selectedFontColor:
+        theme['ic-brand-global-nav-menu-item__text-color--active'],
+      selectedIconColor: theme['ic-brand-global-nav-ic-icon-svg-fill--active']
+    },
+    'canvas-high-contrast': {
+      linkTextDecoration: 'underline'
+    }
+  }
+
+  const componentVariables = {
+    fontSize: typography?.fontSizeSmall,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightLight,
+
+    fontColor: colors?.textLightest,
     iconSize: '1.625rem',
-    iconColor: colors.textLightest,
-    lineHeight: typography.lineHeight,
+    iconColor: colors?.textLightest,
+    lineHeight: typography?.lineHeight,
     backgroundColor: 'transparent',
     linkTextDecoration: 'none',
 
-    hoverBackgroundColor: colors.backgroundDarkest,
-    outerFocusOutline: `inset 0 0 0 0.125rem ${colors.borderDarkest}`,
-    innerFocusOutline: `inset 0 0 0 0.25rem ${colors.borderLightest}`,
+    hoverBackgroundColor: colors?.backgroundDarkest,
+    outerFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderDarkest}`,
+    innerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderLightest}`,
 
-    selectedFontColor: colors.textBrand,
-    selectedIconColor: colors.textBrand,
-    selectedBackgroundColor: colors.backgroundLightest,
-    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors.borderLightest}`,
-    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors.borderBrand}`,
+    selectedFontColor: colors?.textBrand,
+    selectedIconColor: colors?.textBrand,
+    selectedBackgroundColor: colors?.backgroundLightest,
+    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderLightest}`,
+    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderBrand}`,
 
-    contentPadding: spacing.xxSmall
+    contentPadding: spacing?.xxSmall
   }
-}
 
-generator['canvas'] = function (variables) {
   return {
-    fontColor: variables['ic-brand-global-nav-menu-item__text-color'],
-    iconColor: variables['ic-brand-global-nav-ic-icon-svg-fill'],
-    backgroundColor: variables['ic-brand-global-nav-bgd'],
-    hoverBackgroundColor: variables['ic-global-nav-link-hover'],
-    selectedFontColor:
-      variables['ic-brand-global-nav-menu-item__text-color--active'],
-    selectedIconColor: variables['ic-brand-global-nav-ic-icon-svg-fill--active']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({
-  colors
-}) {
-  return {
-    linkTextDecoration: 'underline'
-  }
-}
+export default generateComponentTheme

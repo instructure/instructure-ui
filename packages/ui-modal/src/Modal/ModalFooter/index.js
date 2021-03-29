@@ -22,16 +22,15 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -39,12 +38,17 @@ parent: Modal
 id: Modal.Footer
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class ModalFooter extends Component {
   static propTypes = {
     children: PropTypes.node,
-    variant: PropTypes.oneOf(['default', 'inverse'])
+    variant: PropTypes.oneOf(['default', 'inverse']),
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -52,15 +56,19 @@ class ModalFooter extends Component {
     children: null
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
   render() {
-    const { children, variant, ...rest } = this.props
-    const classes = {
-      [styles.root]: true,
-      [styles.inverse]: variant === 'inverse'
-    }
+    const { children, ...rest } = this.props
 
     return (
-      <div className={classnames(classes)} {...passthroughProps(rest)}>
+      <div css={this.props.styles.modalFooter} {...passthroughProps(rest)}>
         {children}
       </div>
     )

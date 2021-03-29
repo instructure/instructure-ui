@@ -22,17 +22,18 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { passthroughProps, deprecated } from '@instructure/ui-react-utils'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -40,14 +41,13 @@ parent: Tabs
 id: Tabs.Panel
 ---
 **/
-@deprecated('8.0.0', {
-  title: 'renderTitle',
-  selected: 'isSelected',
-  disabled: 'isDisabled'
-})
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class Panel extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * The content that will be rendered in the corresponding <Tab /> and will label
      * this `<Tabs.Panel />` for screen readers
@@ -64,42 +64,33 @@ class Panel extends Component {
     labelledBy: PropTypes.string,
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    /**
-     * __Deprecated - use `renderTitle` instead__
-     */
-    title: PropTypes.node,
-    /**
-     * __Deprecated - use `isSelected` instead__
-     */
-    selected: PropTypes.bool,
-    /**
-     * __Deprecated - use `isDisabled` instead__
-     */
-    disabled: PropTypes.bool,
     elementRef: PropTypes.func
   }
 
   static defaultProps = {
     children: null,
     id: undefined,
-    disabled: undefined,
     isDisabled: false,
     maxHeight: undefined,
     minHeight: undefined,
     textAlign: 'start',
     variant: 'default',
     labelledBy: null,
-    selected: undefined,
     isSelected: false,
     padding: 'small',
-    title: undefined,
     elementRef: (el) => {}
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   render() {
     const {
-      selected,
-      disabled,
       labelledBy,
       variant,
       id,
@@ -109,20 +100,17 @@ class Panel extends Component {
       textAlign,
       children,
       elementRef,
+      isDisabled,
+      isSelected,
+      styles,
       ...props
     } = this.props
-    // TODO: clean this up when selected and disabled props are removed in 7.0:
-    const isSelected = selected || props.isSelected
-    const isDisabled = disabled || props.isDisabled
     const isHidden = !isSelected || !!isDisabled
 
     return (
       <div
         {...passthroughProps(props)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[variant]]: true
-        })}
+        css={styles.panel}
         role="tabpanel"
         id={id}
         aria-labelledby={labelledBy}
@@ -136,10 +124,7 @@ class Panel extends Component {
           transitionExit={false}
         >
           <View
-            className={classnames({
-              [styles.content]: true,
-              [styles.overflow]: maxHeight
-            })}
+            css={styles.content}
             maxHeight={maxHeight}
             minHeight={minHeight}
             as="div"

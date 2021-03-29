@@ -22,18 +22,34 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    separatorColor: colors.borderDark,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    separatorColor: colors?.borderDark,
 
     smallSeparatorFontSize: '0.5rem',
-    smallFontSize: typography.fontSizeSmall,
+    smallFontSize: typography?.fontSizeSmall,
 
     mediumSeparatorFontSize: '0.75rem',
-    mediumFontSize: typography.fontSizeMedium,
+    mediumFontSize: typography?.fontSizeMedium,
 
     largeSeparatorFontSize: '1rem',
-    largeFontSize: typography.fontSizeLarge
+    largeFontSize: typography?.fontSizeLarge
+  }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

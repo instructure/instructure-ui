@@ -21,31 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { Children } from '@instructure/ui-prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
 
-import theme from './theme'
-import styles from './styles.css'
+import generateStyle from './styles'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
 const fastFindIndex = (arr, fn) =>
   Number(Object.keys(arr).find((k) => fn(arr[Number(k)])))
 
 function propsHaveCompactView(props) {
-  return props.variant === 'compact' && props.children.length > 5
+  return props.variant === 'compact' && props?.children?.length > 5
 }
 
 function shouldShowPrevButton(props, currentPageIndex) {
@@ -64,10 +63,14 @@ category: components
 ---
 **/
 
+@withStyle(generateStyle, null)
 @testable()
-@themeable(theme, styles)
 class Pagination extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * children of type Pagination.Page
      */
@@ -150,7 +153,12 @@ class Pagination extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
     if (
       !this.props.shouldHandleFocus ||
       (!propsHaveCompactView(prevProps) && !propsHaveCompactView(this.props))
@@ -291,11 +299,11 @@ class Pagination extends Component {
         as={this.props.as}
         elementRef={this.handleElementRef}
         margin={this.props.margin}
-        className={styles.root}
+        css={this.props.styles.pagination}
         aria-labelledby={this.props.label && this._labelId}
       >
         {this.props.label && this.renderLabel()}
-        <View display="inline-block" className={styles.pages}>
+        <View display="inline-block" css={this.props.styles.pages}>
           {shouldShowPrevButton(this.props, currentPageIndex) &&
             this.renderArrowButton(this.props.labelPrev, -1, currentPageIndex)}
           {this.renderPages(currentPageIndex)}

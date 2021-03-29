@@ -28,11 +28,10 @@
     "@instructure/ui-test-utils": "^7.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/console": "^7.5.0",
     "@instructure/ui-dom-utils": "^7.5.0",
     "@instructure/ui-testable": "^7.5.0",
-    "@instructure/ui-themeable": "^7.5.0",
     "@instructure/ui-utils": "^7.5.0",
     "@instructure/uid": "^7.5.0",
     "keycode": "^2",

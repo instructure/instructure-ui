@@ -24,14 +24,12 @@
 
 import React from 'react'
 import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
-
 import { View } from '@instructure/ui-view'
-
 import { ModalBody } from '../index'
-
+import generateComponentTheme from '../theme'
+import { canvas } from '@instructure/ui-themes'
+import { color2hex } from '@instructure/ui-color-utils'
 const ModalBodyLocator = locator(ModalBody.selector)
-
-import styles from '../styles.css'
 
 describe('<ModalBody />', async () => {
   it('should render', async () => {
@@ -41,10 +39,15 @@ describe('<ModalBody />', async () => {
   })
 
   it('should set inverse styles', async () => {
-    await mount(<ModalBody variant="inverse" />)
+    const variables = generateComponentTheme(canvas)
 
+    await mount(<ModalBody variant="inverse" />)
     const body = await ModalBodyLocator.find()
-    expect(body.hasClass(styles['inverse'])).to.be.true()
+
+    const cssStyleDeclaration = body.getComputedStyle() // CSSStyleDeclaration type
+    expect(variables.inverseBackground).to.equal(
+      color2hex(cssStyleDeclaration.getPropertyValue('background-color'))
+    )
   })
 
   it('should set 100% width and height when overflow is set to fit', async () => {
@@ -64,7 +67,10 @@ describe('<ModalBody />', async () => {
     }
 
     Object.keys(View.propTypes)
-      .filter((prop) => prop !== 'theme' && prop !== 'children')
+      .filter(
+        (prop) =>
+          prop !== 'styles' && prop !== 'makeStyles' && prop !== 'children'
+      )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {

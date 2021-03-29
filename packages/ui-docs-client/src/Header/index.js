@@ -29,13 +29,9 @@ import { Link } from '@instructure/ui-link'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-import { themeable } from '@instructure/ui-themeable'
 
 import { Heading } from '../Heading'
 
-import theme from './theme'
-
-@themeable(theme)
 class Header extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -44,6 +40,31 @@ class Header extends Component {
 
   static defaultProps = {
     version: undefined
+  }
+
+  renderOtherVersionsBlock() {
+    const { version } = this.props
+
+    if (!version) return null
+
+    const isLegacyPage = window.location.host === 'legacy.instructure.design'
+    const currentMainVersion = parseInt(version.charAt(0), 10)
+
+    return (
+      <View display="block" textAlign="center" margin="small none large">
+        <div>{isLegacyPage ? 'Latest' : 'Previous'} release:</div>
+        <Heading level="h5">
+          <Link
+            href={`https://${!isLegacyPage && 'legacy.'}instructure.design/`}
+            isWithinText={false}
+          >
+            <Text size="medium">
+              Instructure UI {!isLegacyPage && `v.${currentMainVersion - 1}`}
+            </Text>
+          </Link>
+        </Heading>
+      </View>
+    )
   }
 
   render() {
@@ -91,6 +112,8 @@ class Header extends Component {
             </View>
           </Link>
         </Heading>
+
+        {this.renderOtherVersionsBlock()}
       </View>
     )
   }

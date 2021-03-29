@@ -24,7 +24,6 @@
 
 export default {
   maxExamplesPerPage: 50,
-  excludeProps: ['label'],
   sectionProp: 'size',
   propValues: {
     defaultValue: [undefined, '1986-05-17T18:00:00.000Z']

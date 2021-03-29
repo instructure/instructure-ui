@@ -17,7 +17,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/babel-plugin-themeable-styles": "^7.5.0",
     "@instructure/config-loader": "^7.5.0",
     "@instructure/ui-babel-preset": "^7.5.0",
     "@instructure/ui-component-examples": "^7.5.0",
@@ -25,7 +24,6 @@
     "dotenv": "^8.1.0",
     "eslint-loader": "^3.0.0",
     "file-loader": "^4.2.0",
-    "postcss-loader": "^3",
     "postcss-reporter": "^6.0.1",
     "react-dev-utils": "^11.0.3",
     "style-loader": "^1.0.0",

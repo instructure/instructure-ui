@@ -22,16 +22,14 @@
  * SOFTWARE.
  */
 
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { isActiveElement, findFocusable } from '@instructure/ui-dom-utils'
 import {
-  deprecated,
   getElementType,
   getInteraction,
   matchComponentTypes,
@@ -41,20 +39,17 @@ import {
 import { warn } from '@instructure/console/macro'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', {
-  linkRef: 'elementRef',
-  variant: 'color'
-})
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Link extends Component {
   static propTypes = {
     /**
@@ -123,15 +118,10 @@ class Link extends Component {
      */
     onBlur: PropTypes.func,
 
-    /* eslint-disable react/require-default-props */
-    /**
-     * __deprecated: use elementRef__
-     */
-    linkRef: PropTypes.func,
-    /**
-     * __deprecated: use color__
-     */
-    variant: PropTypes.oneOf(['default', 'inverse'])
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -153,11 +143,25 @@ class Link extends Component {
 
   state = { hasFocus: false }
 
+  componentDidMount() {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    return {
+      containsTruncateText: this.containsTruncateText,
+      hasVisibleChildren: this.hasVisibleChildren
+    }
+  }
+
   handleElementRef = (el) => {
-    const { elementRef, linkRef } = this.props
+    const { elementRef } = this.props
 
     this._link = el
-    if (typeof linkRef === 'function') linkRef(el)
     if (typeof elementRef === 'function') elementRef(el)
   }
 
@@ -249,9 +253,8 @@ class Link extends Component {
       this.props.display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )
-
     return (
-      <span className={styles.icon}>
+      <span css={this.props.styles.icon}>
         {callRenderProp(this.props.renderIcon)}
       </span>
     )
@@ -267,19 +270,8 @@ class Link extends Component {
       renderIcon,
       iconPlacement,
       isWithinText,
-      variant,
       ...props
     } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles['color--link-inverse']]:
-        variant === 'inverse' || color === 'link-inverse',
-      [styles[`iconPlacement--${iconPlacement}`]]:
-        renderIcon && this.hasVisibleChildren,
-      [styles.truncates]: this.containsTruncateText,
-      [styles[`is${isWithinText ? 'Within' : 'Outside'}Text`]]: true
-    }
 
     const { interaction } = this
 
@@ -304,7 +296,7 @@ class Link extends Component {
         role={role}
         type={type}
         tabIndex={tabIndex}
-        className={classnames(classes)}
+        css={this.props.styles.link}
       >
         {renderIcon && iconPlacement === 'start' && this.renderIcon()}
         {children}

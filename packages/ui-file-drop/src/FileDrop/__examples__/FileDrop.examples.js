@@ -23,12 +23,6 @@
  */
 
 export default {
-  excludeProps: [
-    'label',
-    'enablePreview',
-    'allowRepeatFileSelection',
-    'allowMultiple'
-  ],
   propValues: {
     // eslint-disable-next-line no-undefined
     messages: [undefined, [{ type: 'hint', text: 'hint text' }]]

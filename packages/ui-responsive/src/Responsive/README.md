@@ -5,9 +5,10 @@ describes: Responsive
 The `Responsive` component allows for rendering a component differently based on either
 the element or the viewport size.
 
-> __A note on performance__: Try to limit children to only content or components that need explicit updates at different breakpoints. Content that can scale on its own does not need to be rendered via Responsive. Similarly, don't overuse Responsive. Using many Responsive instances on a single page can also negatively affect rendering performance.
+> **A note on performance**: Try to limit children to only content or components that need explicit updates at different breakpoints. Content that can scale on its own does not need to be rendered via Responsive. Similarly, don't overuse Responsive. Using many Responsive instances on a single page can also negatively affect rendering performance.
 
 ### Passing props at breakpoints
+
 Breakpoints are defined by the `query` prop. Different props can be
 specified for each breakpoint using the `props` prop. These props are passed to the
 underlying component via the `Responsive` `render` or `children` props as functions.
@@ -39,6 +40,7 @@ example: true
 ```
 
 ### Rendering conditionally based on breakpoint matches
+
 The `render` and `children` props also receive an array of names corresponding to the
 currently matching queries. These can be used to determine what should be rendered at a
 given breakpoint.
@@ -65,13 +67,15 @@ example: true
       )
     } else if (matches.includes('medium') && !matches.includes('large')) {
       return (
-        <Media description="Medium breakpoint">
+        <Byline description="Medium breakpoint">
           <Avatar name="Alexander Hamilton" />
-        </Media>
+        </Byline>
       )
     } else {
       return (
-        <Pill variant="primary" text="Small breakpoint" />
+        <Pill color="primary">
+          Small breakpoint
+        </Pill>
       )
     }
   }}

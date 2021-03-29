@@ -25,11 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-color-utils'
 
-import { ToggleFacade } from '../index'
+import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import generateComponentTheme from '../theme'
 
 describe('ToggleFacade.theme', () => {
   describe('with the default theme', () => {
-    const variables = ToggleFacade.generateTheme()
+    const variables = generateComponentTheme(canvas)
 
     it('should ensure icon meets 3:1 contrast', () => {
       expect(
@@ -45,7 +46,7 @@ describe('ToggleFacade.theme', () => {
   })
 
   describe('with the "canvas-high-contrast" theme', () => {
-    const variables = ToggleFacade.generateTheme('canvas-high-contrast')
+    const variables = generateComponentTheme(canvasHighContrast)
 
     it('should ensure icon meets 4.5:1 contrast', () => {
       expect(

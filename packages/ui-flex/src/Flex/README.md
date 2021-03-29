@@ -2,24 +2,6 @@
 describes: Flex
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>inline</code> boolean prop has been changed to <code>display: ['flex', 'inline-flex']</code>
-    </Figure.Item>
-    <Figure.Item>
-      The <code>wrapItems</code> boolean prop has been changed to <code>wrap: ['wrap', 'no-wrap', 'wrap-reverse']</code>
-    </Figure.Item>
-    <Figure.Item>
-      <code>visualDebug</code> has been changed to <code>withVisualDebug</code>
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
 The Flex component makes it simple for developers to create multi-column
 layouts with flexbox.
 
@@ -30,8 +12,7 @@ layouts with flexbox.
 Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `direction` to
 `column` to stack your Flex.Items.
 
-> **Unless your layout has a specific/finite height, you probably don't need `direction="column"`.** To create a
-layout of stacked elements, it is simpler to use multiple [View](#View) components with `display="block"`.
+> **Unless your layout has a specific/finite height, you probably don't need `direction="column"`.** To create a layout of stacked elements, it is simpler to use multiple [View](#View) components with `display="block"`.
 
 ```js
 ---
@@ -152,6 +133,7 @@ example: true
 ```
 
 ### Aligning Flex.Items
+
 By default, Flex aligns its Flex.Items along the `center` of the axis. Use the `alignItems`
 property to change this behavior.
 
@@ -178,6 +160,7 @@ example: true
 ```
 
 ### Justifying Flex.Items
+
 Use the `justifyItems` property to change the justification of Flex.Items.
 
 ```js
@@ -224,6 +207,7 @@ example: true
 ```
 
 ### Handling overflow
+
 When `direction` is set to `column`, Flex.Items' `overflowY` property is automagically set
 to `auto` to account for content overflow with a vertical scrollbar.
 

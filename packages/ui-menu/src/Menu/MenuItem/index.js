@@ -21,25 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
-import { themeable } from '@instructure/ui-themeable'
 import { uid } from '@instructure/uid'
 import { controllable } from '@instructure/ui-prop-types'
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
+import { withStyle, jsx } from '@instructure/emotion'
 
 import { MenuContext } from '../../MenuContext'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -47,10 +46,14 @@ parent: Menu
 id: Menu.Item
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class MenuItem extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /* the menu item label */
     children: PropTypes.node.isRequired,
     /* whether to set the menu item state to selected or not on initial render */
@@ -96,7 +99,7 @@ class MenuItem extends Component {
     href: undefined
   }
 
-  static contextTypes = MenuContext.types
+  static contextType = MenuContext
 
   constructor(props) {
     super()
@@ -111,15 +114,19 @@ class MenuItem extends Component {
   }
 
   componentDidMount() {
-    const context = MenuContext.getMenuContext(this.context)
+    this.props.makeStyles()
+    const context = this.context
 
     if (context && context.registerMenuItem) {
       context.registerMenuItem(this)
     }
   }
 
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
   componentWillUnmount() {
-    const context = MenuContext.getMenuContext(this.context)
+    const context = this.context
 
     if (context && context.registerMenuItem) {
       context.removeMenuItem(this)
@@ -223,15 +230,15 @@ class MenuItem extends Component {
     return (
       <span>
         {(type === 'checkbox' || type === 'radio') && (
-          <span className={styles.icon}>
+          <span css={this.props.styles.icon}>
             {this.selected && <IconCheckSolid />}
           </span>
         )}
-        <span className={styles.label} id={this.labelId}>
+        <span css={this.props.styles.label} id={this.labelId}>
           {children}
         </span>
         {type === 'flyout' && (
-          <span className={styles.icon}>
+          <span css={this.props.styles.icon}>
             <IconArrowOpenEndSolid />
           </span>
         )}
@@ -244,11 +251,6 @@ class MenuItem extends Component {
 
     const props = omitProps(this.props, MenuItem.propTypes)
     const ElementType = this.elementType
-
-    const classes = {
-      [styles.root]: true,
-      [styles.flyout]: type === 'flyout'
-    }
 
     return (
       <ElementType // eslint-disable-line jsx-a11y/mouse-events-have-key-events
@@ -272,7 +274,7 @@ class MenuItem extends Component {
         ref={(c) => {
           this._node = c
         }}
-        className={classnames(classes)}
+        css={this.props.styles.menuItem}
         onMouseOver={this.handleMouseOver}
       >
         {this.renderContent()}

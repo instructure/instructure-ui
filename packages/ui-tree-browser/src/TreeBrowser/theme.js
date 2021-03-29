@@ -22,13 +22,24 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, spacing, typography, borders }) {
-  return {
-    controlsTopMargin: spacing.small,
-    borderRadius: borders.radiusMedium,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, borders } = theme
 
-    focusOutlineWidth: borders.widthMedium,
-    focusOutlineColor: colors.borderBrand,
-    focusOutlineStyle: borders.style
+  const componentVariables = {
+    borderRadius: borders?.radiusMedium,
+    focusOutlineWidth: borders?.widthMedium,
+    focusOutlineColor: colors?.borderBrand,
+    focusOutlineStyle: borders?.style
+  }
+
+  return {
+    ...componentVariables
   }
 }
+
+export default generateComponentTheme

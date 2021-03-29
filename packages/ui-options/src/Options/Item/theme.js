@@ -22,29 +22,43 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, typography, spacing }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, typography, spacing, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark'],
+      highlightedBackground: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeightCondensed,
+
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+    highlightedLabelColor: colors?.textLightest,
+    highlightedBackground: colors?.backgroundBrand,
+    selectedLabelColor: colors?.textLightest,
+    selectedBackground: colors?.backgroundDark,
+
+    padding: `${spacing?.xSmall} ${spacing?.small}`,
+    iconPadding: spacing?.small,
+    nestedPadding: spacing?.medium
+  }
+
   return {
-    fontSize: typography.fontSizeMedium,
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeightCondensed,
-
-    color: colors.textDarkest,
-    background: colors.backgroundLightest,
-    highlightedLabelColor: colors.textLightest,
-    highlightedBackground: colors.backgroundBrand,
-    selectedLabelColor: colors.textLightest,
-    selectedBackground: colors.backgroundDark,
-
-    padding: `${spacing.xSmall} ${spacing.small}`,
-    iconPadding: spacing.small,
-    nestedPadding: spacing.medium
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark'],
-    highlightedBackground: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

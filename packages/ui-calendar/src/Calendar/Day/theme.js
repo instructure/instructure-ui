@@ -22,36 +22,44 @@
  * SOFTWARE.
  */
 
-export default function generator({
-  borders,
-  colors,
-  typography,
-  spacing,
-  forms
-}) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, colors, typography, spacing, forms, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark'],
+      todayBackground: theme['ic-brand-primary']
+    }
+  }
+
+  const componentVariables = {
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+    fontSize: typography?.fontSizeMedium,
+    padding: spacing?.xxSmall,
+    height: forms?.inputHeightSmall,
+    minWidth: forms?.inputHeightSmall,
+
+    outsideMonthColor: colors?.textDark,
+
+    selectedBackground: colors?.backgroundSuccess,
+    selectedColor: colors?.textLightest,
+    selectedBorderRadius: borders?.radiusMedium,
+
+    todayBackground: colors?.backgroundBrand,
+    todayColor: colors?.textLightest,
+    todayBorderRadius: forms?.inputHeightSmall
+  }
+
   return {
-    color: colors.textDarkest,
-    background: colors.backgroundLightest,
-    fontSize: typography.fontSizeMedium,
-    padding: spacing.xxSmall,
-    height: forms.inputHeightSmall,
-    minWidth: forms.inputHeightSmall,
-
-    outsideMonthColor: colors.textDark,
-
-    selectedBackground: colors.backgroundSuccess,
-    selectedColor: colors.textLightest,
-    selectedBorderRadius: borders.radiusMedium,
-
-    todayBackground: colors.backgroundBrand,
-    todayColor: colors.textLightest,
-    todayBorderRadius: forms.inputHeightSmall
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark'],
-    todayBackground: variables['ic-brand-primary']
-  }
-}
+export default generateComponentTheme

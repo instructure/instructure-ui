@@ -35,7 +35,6 @@ import { IconCheckSolid } from '@instructure/ui-icons'
 import { Options } from '../../index'
 import { Item } from '../index'
 import { OptionsItemLocator as ItemLocator } from '../OptionsItemLocator'
-import styles from '../styles.css'
 import ItemExamples from '../__examples__/Item.examples'
 
 describe('<Item />', async () => {
@@ -126,23 +125,21 @@ describe('<Item />', async () => {
   it('should render content before label', async () => {
     await mount(<Item renderBeforeLabel={<IconCheckSolid />}>Hello World</Item>)
     const item = await ItemLocator.find()
-    const content = await item.find(`.${styles['content--before']}`)
+    const content = await item.find('[class$=-optionItem__content--before]')
     const icon = await content.find('svg[name="IconCheck"]')
 
     expect(content).to.exist()
     expect(icon).to.exist()
-    expect(item.hasClass(`.${styles.hasContentBeforeLabel}`))
   })
 
   it('should render content after label', async () => {
     await mount(<Item renderAfterLabel={<IconCheckSolid />}>Hello World</Item>)
     const item = await ItemLocator.find()
-    const content = await item.find(`.${styles['content--after']}`)
+    const content = await item.find('[class$=-optionItem__content--after]')
     const icon = await content.find('svg[name="IconCheck"]')
 
     expect(content).to.exist()
     expect(icon).to.exist()
-    expect(item.hasClass(`.${styles.hasContentAfterLabel}`))
   })
 
   it('should render nested lists', async () => {

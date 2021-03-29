@@ -21,13 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import PropTypes from 'prop-types'
+import React, { forwardRef } from 'react'
 import { decorator } from '@instructure/ui-decorator'
 
-import { TextDirectionContext } from './TextDirectionContext'
-import { getTextDirection } from './getTextDirection'
-
-const { DIRECTION, getTextDirectionContext } = TextDirectionContext
+import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 /**
  * ---
@@ -42,7 +40,7 @@ const { DIRECTION, getTextDirectionContext } = TextDirectionContext
  *
  * class Example extends React.Component {
  *   render () {
- *     return this.dir === bidirectional.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
+ *     return this.props.dir === bidirectional.DIRECTION.rtl ? <div>rtl</div> : <div>ltr</div>
  *   }
  * }
  *
@@ -58,30 +56,35 @@ const { DIRECTION, getTextDirectionContext } = TextDirectionContext
  * @return {function} composes the bidirectional component.
  */
 const bidirectional = decorator((ComposedComponent) => {
-  return class BidirectionalComponent extends ComposedComponent {
-    static propTypes = {
-      ...ComposedComponent.propTypes,
-      dir: PropTypes.oneOf(Object.values(TextDirectionContext.DIRECTION))
-    }
+  class BidirectionalComponent extends React.Component {
+    render() {
+      const { forwardedRef, ...rest } = this.props
 
-    static contextTypes = {
-      ...ComposedComponent.contextTypes,
-      ...TextDirectionContext.types
-    }
-
-    get dir() {
-      const context = getTextDirectionContext(this.context) || {}
-      return context.dir || this.props.dir || getTextDirection()
-    }
-
-    get rtl() {
-      return this.dir === DIRECTION.rtl
-    }
-
-    get ltr() {
-      return this.dir === DIRECTION.ltr
+      return (
+        <TextDirectionContext.Consumer>
+          {(dir) => (
+            <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
+          )}
+        </TextDirectionContext.Consumer>
+      )
     }
   }
+
+  const BidirectionalForwardingRef = forwardRef((props, ref) => (
+    <BidirectionalComponent {...props} forwardedRef={ref} />
+  ))
+
+  if (process.env.NODE_ENV !== 'production') {
+    const displayName = ComposedComponent.displayName || ComposedComponent.name
+    BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${displayName})`
+  }
+
+  hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
+
+  BidirectionalForwardingRef.defaultProps = ComposedComponent.defaultProps
+  BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
+
+  return BidirectionalForwardingRef
 })
 
 bidirectional.DIRECTION = DIRECTION

@@ -27,7 +27,6 @@ const loadConfig = require('@instructure/config-loader')
 module.exports = function (
   context,
   opts = {
-    themeable: false,
     esModules: false,
     coverage: false,
     node: false,
@@ -86,11 +85,11 @@ module.exports = function (
   } catch (e) {
     // if something goes wrong, continue and don't try to explicitly set a helper version
   }
-
   plugins = plugins.concat([
     require('babel-plugin-macros'),
     require('@babel/plugin-transform-destructuring').default,
-    [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before themeable-styles plugin below
+    [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before plugins that set displayName!
+    require('./babel-plugin-add-displayname-for-react'),
     [
       require('@babel/plugin-proposal-class-properties').default,
       { loose: true }
@@ -113,7 +112,7 @@ module.exports = function (
     ],
     require('@babel/plugin-syntax-dynamic-import').default,
     require('babel-plugin-transform-undefined-to-void'),
-    require('babel-plugin-add-import-extension'),
+    require('babel-plugin-add-import-extension')
   ])
 
   if (process.env.NODE_ENV === 'production') {
@@ -121,29 +120,6 @@ module.exports = function (
       require('@babel/plugin-transform-react-constant-elements').default
     )
   }
-
-  let themeableOptions = {
-    postcssrc: loadConfig(
-      'postcss',
-      require('@instructure/ui-postcss-config')()
-    ),
-    themeablerc: loadConfig('themeable')
-  }
-
-  if (opts.themeable && typeof opts.themeable === 'object') {
-    const { themeablerc, postcssrc } = opts.themeable
-    if (themeablerc) {
-      themeableOptions.themeablerc = themeablerc
-    }
-    if (postcssrc) {
-      themeableOptions.postcssrc = postcssrc
-    }
-  }
-
-  plugins.push([
-    require('@instructure/babel-plugin-themeable-styles'),
-    themeableOptions
-  ])
 
   if (opts.removeConsole) {
     if (typeof opts.removeConsole === 'object') {
@@ -213,6 +189,8 @@ function getWebEnvConfig(opts) {
     corejs: 3,
     modules: opts.esModules ? false : 'commonjs',
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
-    exclude: ['transform-typeof-symbol']
+    exclude: ['transform-typeof-symbol'],
+    // have to include this plugin because babel-loader can't handle the `??` operator
+    include: ['proposal-nullish-coalescing-operator']
   }
 }

@@ -22,42 +22,56 @@
  * SOFTWARE.
  */
 
-export default function generator({ colors, spacing, borders, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeight,
-    textColor: colors.textDarkest,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, borders, typography, key: themeName } = theme
 
-    fontSizeSmall: typography.fontSizeSmall,
-    fontSizeMedium: typography.fontSizeMedium,
-    fontSizeLarge: typography.fontSizeLarge,
+  const themeSpecificStyle = {
+    canvas: {
+      toggleFocusBorderColor: theme['ic-brand-primary'],
+      iconColor: theme['ic-brand-font-color-dark'],
+      textColor: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeight,
+    textColor: colors?.textDarkest,
+
+    fontSizeSmall: typography?.fontSizeSmall,
+    fontSizeMedium: typography?.fontSizeMedium,
+    fontSizeLarge: typography?.fontSizeLarge,
 
     smallIconSize: '0.5rem',
     mediumIconSize: '0.75rem',
     largeIconSize: '1rem',
-    iconMargin: spacing.xxSmall,
-    iconColor: colors.textDarkest,
+    iconMargin: spacing?.xxSmall,
+    iconColor: colors?.textDarkest,
 
-    togglePadding: spacing.xxSmall,
-    toggleBorderRadius: borders.radiusMedium,
-    toggleBorderWidth: borders.widthMedium,
-    toggleBorderStyle: borders.style,
-    toggleFocusBorderColor: colors.borderBrand,
+    togglePadding: spacing?.xxSmall,
+    toggleBorderRadius: borders?.radiusMedium,
+    toggleBorderWidth: borders?.widthMedium,
+    toggleBorderStyle: borders?.style,
+    toggleFocusBorderColor: colors?.borderBrand,
 
-    filledBackgroundColor: colors.backgroundLight,
-    filledBorderWidth: borders.widthSmall,
-    filledBorderStyle: borders.style,
-    filledBorderColor: colors.borderMedium,
-    filledBorderRadius: borders.radiusMedium,
-    filledPadding: spacing.small
+    filledBackgroundColor: colors?.backgroundLight,
+    filledBorderWidth: borders?.widthSmall,
+    filledBorderStyle: borders?.style,
+    filledBorderColor: colors?.borderMedium,
+    filledBorderRadius: borders?.radiusMedium,
+    filledPadding: spacing?.small
   }
-}
 
-generator['canvas'] = function (variables) {
   return {
-    toggleFocusBorderColor: variables['ic-brand-primary'],
-    iconColor: variables['ic-brand-font-color-dark'],
-    textColor: variables['ic-brand-font-color-dark']
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

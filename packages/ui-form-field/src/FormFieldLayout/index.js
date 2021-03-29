@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Grid } from '@instructure/ui-grid'
 import { error } from '@instructure/console/macro'
-import { themeable } from '@instructure/ui-themeable'
 import {
   omitProps,
   pickProps,
@@ -38,21 +37,26 @@ import {
 } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 
+import { withStyle, jsx } from '@instructure/emotion'
+
 import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'
 import { FormPropTypes } from '../FormPropTypes'
 
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
 
 /**
 ---
 parent: FormField
 ---
 **/
-@themeable(theme, styles)
+@withStyle(generateStyle)
 class FormFieldLayout extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     label: PropTypes.node.isRequired,
     /**
      * the id of the input (to link it to its label for a11y)
@@ -95,7 +99,7 @@ class FormFieldLayout extends Component {
   }
 
   constructor(props) {
-    super()
+    super(props)
 
     this._messagesId = props.messagesId || uid('FormFieldLayout-messages')
 
@@ -106,6 +110,14 @@ class FormFieldLayout extends Component {
       `[FormFieldLayout] The 'inline' prop is true, and the 'layout' is set to 'inline'.
       This will cause a layout issue in Internet Explorer 11 unless you also add a value for the 'width' prop.`
     )
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   get hasVisibleLabel() {
@@ -166,12 +178,6 @@ class FormFieldLayout extends Component {
     )
   }
 
-  renderMessages() {
-    return (
-      <FormFieldMessages id={this._messagesId} messages={this.props.messages} />
-    )
-  }
-
   renderVisibleMessages() {
     return this.hasMessages ? (
       <Grid.Row>
@@ -191,21 +197,18 @@ class FormFieldLayout extends Component {
   render() {
     const ElementType = this.elementType
 
-    const classes = {
-      [styles.root]: true,
-      [styles.inline]: this.props.inline
-    }
+    const { makeStyles, styles, ...props } = this.props
+
+    const { width, layout, children } = props
 
     return (
       <ElementType
-        {...omitProps(this.props, {
+        {...omitProps(props, {
           ...FormFieldLayout.propTypes,
           ...Grid.propTypes
         })}
-        className={classnames(classes)}
-        style={{
-          width: this.props.width
-        }}
+        css={styles.formFieldLayout}
+        style={{ width }}
         aria-describedby={this.hasMessages ? this._messagesId : null}
       >
         {this.elementType === 'fieldset' && this.renderLegend()}
@@ -213,11 +216,9 @@ class FormFieldLayout extends Component {
           rowSpacing="small"
           colSpacing="small"
           startAt={
-            this.props.layout === 'inline' && this.hasVisibleLabel
-              ? 'medium'
-              : null
+            layout === 'inline' && this.hasVisibleLabel ? 'medium' : null
           }
-          {...pickProps(this.props, Grid.propTypes)}
+          {...pickProps(props, Grid.propTypes)}
         >
           <Grid.Row>
             {this.renderLabel()}
@@ -225,7 +226,7 @@ class FormFieldLayout extends Component {
               width={this.inlineContainerAndLabel ? 'auto' : null}
               elementRef={this.handleInputContainerRef}
             >
-              {this.props.children}
+              {children}
             </Grid.Col>
           </Grid.Row>
           {this.renderVisibleMessages()}

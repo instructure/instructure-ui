@@ -4,6 +4,7 @@ import { SVGIcon } from '@instructure/ui-svg-images'
 class <%= name %><%= variant %> extends Component {
   static glyphName = '<%= glyphName %>';
   static variant = '<%= variant %>';
+  static displayName = '<%= name %><%= variant %>';
   <% if (deprecated) { %>
   static deprecated = true;
   <% } %>

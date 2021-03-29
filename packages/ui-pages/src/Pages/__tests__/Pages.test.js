@@ -76,8 +76,8 @@ describe('<Pages />', async () => {
         <Page>{pageSpy}</Page>
       </Pages>
     )
-
-    expect(pageSpy).to.have.been.calledOnce()
+    // Called twice because props.makeStyles() is called in Pages.componentDidMount()
+    expect(pageSpy).to.have.been.called()
     expect(Array.isArray(pageSpy.args[0][0])).to.equal(true)
     expect(typeof pageSpy.args[0][1]).to.equal('function')
   })

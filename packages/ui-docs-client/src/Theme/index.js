@@ -250,19 +250,33 @@ class Theme extends Component {
             ${'```js'}
             // my-component/theme.js
 
-            // define the default theme:
-            export default function generator ({ colors }) {
-              return {
+            /**
+             * Generates the theme object for the component from the theme and provided additional information
+             * @param  {Object} theme The actual theme object.
+             * @return {Object} The final theme object with the overrides and component variables
+             */
+            const generateComponentTheme = (theme) => {
+              const { colors, key: themeName } = theme
+
+              // define the theme for ${themeKey}:
+              const themeSpecificStyle = {
+                '${themeKey}': {
+                  color: colors.textLightest
+                }
+              }
+
+              // define the default theme:
+              const componentVariables = {
                 color: colors.textBrand
+              }
+
+              return {
+                ...componentVariables,
+                ...themeSpecificStyle[themeName]
               }
             }
 
-            // define the theme for ${themeKey}:
-            generator['${themeKey}'] = function ({ colors }) {
-              return {
-                color: colors.textLightest
-              }
-            }
+            export default generateComponentTheme
             ${'```'}
           `}
           title={`${themeKey} Theme Usage in applications`}

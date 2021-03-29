@@ -22,36 +22,45 @@
  * SOFTWARE.
  */
 
-export default function generator({
-  colors,
-  spacing,
-  typography,
-  breakpoints
-}) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, typography, breakpoints, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    background: colors?.backgroundLightest,
+    color: colors?.textDarkest,
+
+    figureMargin: spacing?.small,
+    titleMargin: `0 0 ${spacing?.xSmall} 0`,
+
+    titleFontSize: typography?.fontSizeLarge,
+    titleFontWeight: typography?.fontWeightNormal,
+    titleLineHeight: typography?.lineHeightFit,
+
+    descriptionFontSize: typography?.fontSizeMedium,
+    descriptionFontWeight: typography?.fontWeightNormal,
+    descriptionLineHeight: typography?.lineHeightCondensed,
+
+    small: breakpoints?.small,
+    medium: breakpoints?.medium,
+    large: breakpoints?.large
+  }
+
   return {
-    fontFamily: typography.fontFamily,
-    background: colors.backgroundLightest,
-    color: colors.textDarkest,
-
-    figureMargin: spacing.small,
-    titleMargin: `0 0 ${spacing.xSmall} 0`,
-
-    titleFontSize: typography.fontSizeLarge,
-    titleFontWeight: typography.fontWeightNormal,
-    titleLineHeight: typography.lineHeightFit,
-
-    descriptionFontSize: typography.fontSizeMedium,
-    descriptionFontWeight: typography.fontWeightNormal,
-    descriptionLineHeight: typography.lineHeightCondensed,
-
-    small: breakpoints.small,
-    medium: breakpoints.medium,
-    large: breakpoints.large
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme

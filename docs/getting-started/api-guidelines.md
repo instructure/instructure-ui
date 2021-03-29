@@ -8,7 +8,7 @@ order: 4
 
 ### Component Properties
 
-- All components should pass through additional props down to the root DOM element using the `passthroughProps` utility. (e.g. `<div {...passthroughProps(this.props)}>`). Note that in addition to allowing only valid DOM node attributes, `passthroughProps` will remove the `className` and `style` props to prevent unexpected style issues. These need to be set explicitly and used with caution.
+- All components should pass through additional props down to the root DOM element using the `passthroughProps` utility. (e.g. `<div {...passthroughProps(this.props)}>`). Note that in addition to allowing only valid DOM node attributes, `passthroughProps` will remove the `className` and `style` props to prevent unexpected style issues. These need to be set explicitly and used with caution. It also removes the `styles` and `makesStyles` properties added by the [withStyle](#withStyle) decorator.
 - Avoid props that could be computed from other props. (e.g. prefer `<Select filter={handleFilter} />` over `<Select shouldFilter filter={handleFilter} />`. Prefer determining whether filtering should happen based on the presence of the `filter` function prop.)
 - Avoid situations where certain prop combinations are not supported. Prefer splitting the component into separate components with fewer props or using `PropTypes.oneOf`.
 - Set default prop values for non-required props when possible.
@@ -44,16 +44,21 @@ order: 4
 - Child components that can't be used on their own should be exported as static properties on the parent component (e.g. `Table.Row`, `Menu.Item`), so that only one import is required to render the component (e.g. `import Table from '@instructure/ui-tables'`).
 - If the parent component can only be used with specific children that can also be used on their own, it should have the `Group` suffix (e.g. `<RadioGroup><Radio /><Radio /></RadioGroup>`, `<ButtonGroup><Button /><Button /></ButtonGroup>`).
 
-### CSS Class Names
+### styles.js Class Names
 
-- CSS class names that correspond to a boolean prop should match the prop name (e.g. `isOpen`).
-- CSS class names that correspond to a prop name and value should match the kebab-case prop value (e.g. `x-large`) and should be prefixed with the prop name and separated by `--` (e.g. `.size--x-large`, `.width--fluid`).
-- All other CSS class names should be camelCase, semantic (describe the content, not what it looks like), and avoid any component prefix (the component scope will be added by the build).
+- In the `styles.js`, use the name of the component in camelCase (e.g. `appNav`) as the key of the root element's style object. Use camelCase for the keys of child elements as well (e.g. `list` and `listItem`).
+- All style object names should be semantic (describe the content, not what it looks like).
+- We make use of the `label` property of [Emotion.js](https://emotion.sh/) so that it gets displayed in the generated class name for easy readability and targetability. We use a naming convention based on [BEM naming convention](#http://getbem.com/naming/):
+  - For the root element, add a label with the name of the component in camelCase \
+    (e.g. `appNav: { label: 'appNav' }`).
+  - For the child elements, use the double underscore separator to indicate the parent-child relation with the `[rootElementName]__[childName}` format \
+  - In case you want to indicate variants or modifiers of an element, use the double hyphen separator with the `[elementName]--[modifier]` format \
+    (e.g. `view--inline-block` or `calendar__navigation--withButtons`).
 
 ### Component Theme Variables
 
 - Theme variables should be camelCase, reflecting the corresponding CSS property when possible and prefixed with a semantic descriptor, using the following format: `[variation][state][CSS property]` e.g. (for `<Button color="primary" />`, `primaryHoverBackground`).
-- Theme variables shouldn't include the component name because the component scope is added via the build. (`primaryHoverBackground` will be transformed into `--Button`)
+- Theme variables shouldn't include the component name.
 
 ### Component Lifecycle methods
 

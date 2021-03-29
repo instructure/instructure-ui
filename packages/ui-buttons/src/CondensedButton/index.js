@@ -26,21 +26,22 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { BaseButton } from '../BaseButton'
+import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
 
-import theme from './theme.js'
+import generateComponentTheme from './theme'
+
+import { BaseButton } from '../BaseButton'
 
 /**
 ---
 category: components
 ---
 **/
-
+// needed for listing the available theme variables on docs page
+@withStyle(null, generateComponentTheme)
 @testable()
-@themeable(theme)
 class CondensedButton extends Component {
   static propTypes = {
     /**
@@ -133,7 +134,8 @@ class CondensedButton extends Component {
       ...props
     } = this.props
 
-    const { theme } = this
+    // eslint-disable-next-line react/prop-types
+    const themeOverride = this.props.themeOverride
 
     return (
       <BaseButton
@@ -151,7 +153,7 @@ class CondensedButton extends Component {
         cursor={cursor}
         href={href}
         renderIcon={renderIcon}
-        theme={theme}
+        themeOverride={themeOverride}
         ref={(component) => {
           this._baseButton = component
         }}

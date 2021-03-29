@@ -26,7 +26,6 @@ import React from 'react'
 import { expect, mount, locator, stub } from '@instructure/ui-test-utils'
 
 import { TreeButton } from '../index'
-import styles from '../styles.css'
 
 const TreeButtonLocator = locator(TreeButton.selector)
 
@@ -35,14 +34,6 @@ describe('<TreeButton />', async () => {
     await mount(<TreeButton id="1" />)
     const treeButton = await TreeButtonLocator.find()
     expect(treeButton).to.exist()
-  })
-
-  describe('selected', async () => {
-    it('should take the selected class if the button is selected', async () => {
-      await mount(<TreeButton id="1" selected={true} />)
-      const treeButton = await TreeButtonLocator.find()
-      expect(treeButton.hasClass(styles['selected'])).to.be.true()
-    })
   })
 
   describe('containerRef', async () => {
@@ -61,8 +52,9 @@ describe('<TreeButton />', async () => {
   describe('descriptor', async () => {
     it('should not render a descriptor element if no descriptor passed', async () => {
       await mount(<TreeButton id="1" />)
+      const treeButton = await TreeButtonLocator.find()
       expect(
-        await TreeButtonLocator.find(`.${styles.textDescriptor}`, {
+        await treeButton.find('[class$="-treeButton__textDescriptor"]', {
           expectEmpty: true
         })
       ).to.not.exist()
@@ -71,7 +63,7 @@ describe('<TreeButton />', async () => {
     it('should render a descriptor element if descriptor passed', async () => {
       await mount(<TreeButton id="1" descriptor="Some Descriptor" />)
       const descriptor = await TreeButtonLocator.find(
-        `.${styles.textDescriptor}:contains(Some Descriptor)`
+        '[class$="-treeButton__textDescriptor"]:contains(Some Descriptor)'
       )
       expect(descriptor).to.exist()
     })

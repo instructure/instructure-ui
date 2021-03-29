@@ -21,35 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import { View } from '@instructure/ui-view'
-import {
-  callRenderProp,
-  deprecated,
-  omitProps
-} from '@instructure/ui-react-utils'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { isIE11 } from '@instructure/ui-utils'
+import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
-@deprecated('8.0.0', { title: 'renderTitle' })
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class Spinner extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
      * Give the spinner a title to be read by screenreaders
      */
@@ -69,14 +68,7 @@ class Spinner extends Component {
      */
     margin: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
-    as: PropTypes.elementType,
-
-    /**
-     * __Deprecated - use `renderTitle` instead__
-     */
-    /* eslint-disable react/require-default-props */
-    title: PropTypes.string
-    /* eslint-enable react/require-default-props */
+    as: PropTypes.elementType
   }
 
   static defaultProps = {
@@ -89,9 +81,17 @@ class Spinner extends Component {
   }
 
   constructor(props) {
-    super()
+    super(props)
 
     this.titleId = uid('Spinner')
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   radius() {
@@ -108,19 +108,12 @@ class Spinner extends Component {
   }
 
   render() {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true,
-      [styles.ie11]: isIE11
-    }
-
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Spinner.propTypes),
       Spinner
     )
 
-    const hasTitle = this.props.renderTitle || this.props.title
+    const hasTitle = this.props.renderTitle
     error(
       hasTitle,
       '[Spinner] The renderTitle prop is necessary for screen reader support.'
@@ -131,11 +124,11 @@ class Spinner extends Component {
         {...passthroughProps}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        className={classNames(classes)}
+        css={this.props.styles.spinner}
         margin={this.props.margin}
       >
         <svg
-          className={styles.circle}
+          css={this.props.styles.circle}
           role="img"
           aria-labelledby={this.titleId}
           focusable="false"
@@ -146,14 +139,14 @@ class Spinner extends Component {
           <g role="presentation">
             {this.props.variant !== 'inverse' && (
               <circle
-                className={styles.circleTrack}
+                css={this.props.styles.circleTrack}
                 cx="50%"
                 cy="50%"
                 r={this.radius()}
               />
             )}
             <circle
-              className={styles.circleSpin}
+              css={this.props.styles.circleSpin}
               cx="50%"
               cy="50%"
               r={this.radius()}

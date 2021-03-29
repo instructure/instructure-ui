@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.5.0",
+    "@babel/runtime": "^7.13.10",
     "@instructure/ui-a11y-content": "^7.5.0",
     "@instructure/ui-alerts": "^7.5.0",
     "@instructure/ui-avatar": "^7.5.0",
@@ -80,7 +80,6 @@
     "@instructure/ui-text": "^7.5.0",
     "@instructure/ui-text-area": "^7.5.0",
     "@instructure/ui-text-input": "^7.5.0",
-    "@instructure/ui-themeable": "^7.5.0",
     "@instructure/ui-time-select": "^7.5.0",
     "@instructure/ui-toggle-details": "^7.5.0",
     "@instructure/ui-tooltip": "^7.5.0",

@@ -47,29 +47,20 @@ you can open it with [codesandbox](https://codesandbox.io). To try it out:
 A chrome window should open up codesandbox with your project source.
 
 ## Theming
-See [ui-themeable](https://instructure.design/#ui-themeable) for a more
+See [emotion](https://instructure.design/#emotion) for a more
 comprehensive theming guide.
 
-All components in our library are [themeable](https://instructure.design/#ui-themeable)
+All components in our library are themeable,
 which allows you to create a custom look and feel for your application. This app
 is pre-configured with our [canvas](https://instructure.design/#canvas) theme
-which is also the default for our documentation. If you want to create your own
-theme from scratch, you can do so using the
-[ThemeRegistry](https://instructure.design/#ThemeRegistry) `registerTheme` method.
-You can then replace this import in `src/App.js`
-
-```js
-import '@instructure/canvas-theme'
-```
-
-with your custom theme.
+which is also the default for our documentation.
 
 > **_NOTE:_**  You should have a theme imported if you are using Instructure UI components. You can replace this import with a different theme, but deleting it entirely may cause some components to have errors and possibly not render.
 
 Alternatively, if you want to continue using the `canvas` theme as your default
 with some overrides instead of creating an entirely new one, you can use the
-[ApplyTheme](https://instructure.design/#ApplyTheme) component.
+[EmotionThemeProvider](https://instructure.design/#EmotionThemeProvider) component.
 
 You can also make your custom built components in this app themeable. The `Banner`
 component located in the source directory, for example, is already using
-[themeable](https://instructure.design/#themeable) for styling.
+[emotion](https://instructure.design/#emotion) for styling.

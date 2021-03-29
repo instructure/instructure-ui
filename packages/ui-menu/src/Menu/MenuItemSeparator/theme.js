@@ -22,10 +22,23 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders, spacing }) {
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, borders } = theme
+
+  const componentVariables = {
+    background: colors?.backgroundMedium,
+    height: borders?.widthSmall,
+    margin: `0 ${spacing?.small}`
+  }
+
   return {
-    background: colors.backgroundMedium,
-    height: borders.widthSmall,
-    margin: `0 ${spacing.small}`
+    ...componentVariables
   }
 }
+
+export default generateComponentTheme

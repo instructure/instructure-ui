@@ -22,27 +22,32 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+/** @jsx jsx */
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import { themeable } from '@instructure/ui-themeable'
 import { uid } from '@instructure/uid'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import styles from './styles.css'
-import theme from './theme'
+import { withStyle, jsx } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
 category: components/utilities
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-@themeable(theme, styles)
 class InlineSVG extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     children: PropTypes.node,
     src: PropTypes.string,
     title: PropTypes.string,
@@ -84,18 +89,26 @@ class InlineSVG extends Component {
     color: 'inherit'
   }
 
-  static prepareSrc = (src) => {
-    const pattern = /<svg[^>]*>((.|[\n\r])*)<\/svg>/
-    const matches = pattern.exec(src)
-
-    return matches ? matches[1] : src
-  }
-
   constructor() {
     super()
 
     this.titleId = uid('InlineSVG-title')
     this.descId = uid('InlineSVG-desc')
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
+  }
+
+  static prepareSrc = (src) => {
+    const pattern = /<svg[^>]*>((.|[\n\r])*)<\/svg>/
+    const matches = pattern.exec(src)
+
+    return matches ? matches[1] : src
   }
 
   get role() {
@@ -151,7 +164,7 @@ class InlineSVG extends Component {
       focusable,
       children,
       src,
-      color,
+      styles,
       ...props
     } = this.props
 
@@ -174,13 +187,8 @@ class InlineSVG extends Component {
         aria-labelledby={this.labelledBy}
         role={this.role}
         focusable={focusable ? 'true' : 'false'}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`color--${color}`]]: color !== 'auto',
-          [styles.inline]: this.props.inline,
-          [styles.block]: !this.props.inline,
-          [props.className]: props.className
-        })}
+        css={styles.inlineSVG}
+        className={props.className}
       >
         {this.renderTitle()}
         {this.renderDesc(description)}

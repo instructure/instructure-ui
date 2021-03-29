@@ -21,19 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/** @jsx jsx */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-
+import { jsx, withStyle, ThemeablePropTypes } from '@instructure/emotion'
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
-import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'
-
-import styles from './styles.css'
-import theme from './theme'
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
 
 /**
 ---
@@ -41,7 +39,7 @@ category: components
 ---
 **/
 
-@themeable(theme, styles)
+@withStyle(generateStyle, generateComponentTheme)
 class ContextView extends Component {
   static propTypes = {
     /**
@@ -109,7 +107,12 @@ class ContextView extends Component {
      * Activate an outline around the component to make building your
      * layout easier
      */
-    debug: PropTypes.bool
+    debug: PropTypes.bool,
+
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
@@ -132,6 +135,12 @@ class ContextView extends Component {
     minHeight: undefined
   }
 
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+  componentDidUpdate() {
+    this.props.makeStyles()
+  }
   get mirroredPlacement() {
     return mirrorPlacement(this.props.placement, '-')
   }
@@ -151,23 +160,18 @@ class ContextView extends Component {
       minWidth,
       margin,
       padding,
-      placement,
       shadow,
       stacking,
       style, // eslint-disable-line react/prop-types
-      textAlign
+      textAlign,
+      styles
     } = this.props
-
-    const classes = {
-      [styles.contextViewRoot]: true,
-      [styles[`placement--${placement.replace(' ', '-')}`]]: true
-    }
 
     return (
       <View
         {...omitProps(this.props, ContextView.propTypes)}
         style={style}
-        className={classnames(classes)}
+        css={styles.contextView}
         borderWidth="none"
         display="inline-block"
         as={as}
@@ -177,7 +181,7 @@ class ContextView extends Component {
         stacking={stacking}
       >
         <View
-          className={styles.content}
+          css={styles.contextView__content}
           display="block"
           borderRadius="medium"
           borderWidth="small"
@@ -194,13 +198,7 @@ class ContextView extends Component {
           shadow={shadow}
           textAlign={textAlign}
         >
-          <span
-            className={classnames({
-              [styles.arrow]: true,
-              [styles[`arrow--${background}`]]: background,
-              [styles[`arrow--${this.mirroredPlacement}`]]: true
-            })}
-          />
+          <span css={styles.contextView__arrow} />
           {children}
         </View>
       </View>

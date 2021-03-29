@@ -27,13 +27,13 @@
     "@instructure/ui-test-utils": "^7.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/ui-decorator": "^7.5.0",
     "@instructure/ui-dom-utils": "^7.5.0",
     "@instructure/ui-prop-types": "^7.5.0",
     "@instructure/ui-react-utils": "^7.5.0",
     "@instructure/ui-utils": "^7.5.0",
-    "decimal.js": "^10",
+    "hoist-non-react-statics": "^3.3.2",
     "moment-timezone": "^0.5",
     "prop-types": "^15"
   },

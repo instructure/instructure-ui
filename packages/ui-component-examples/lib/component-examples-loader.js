@@ -28,7 +28,10 @@ const loaderUtils = require('loader-utils')
 const loadConfig = require('@instructure/config-loader')
 
 const parsePropValues = require('./parsePropValues')
-
+/**
+ * A webpack loader that processes component example files for e.g. Storybook
+ * for more see https://webpack.js.org/api/loaders/
+ */
 module.exports = function componentExamplesLoader(source, map, meta) {
   this.cacheable && this.cacheable()
 
@@ -43,6 +46,9 @@ module.exports = function componentExamplesLoader(source, map, meta) {
   const generateComponentExamples = require.resolve(
     './generateComponentExamples'
   )
+
+  // TODO do not use this method, its an internal webpack feature. See
+  // https://github.com/webpack/loader-utils/issues/42
   const configPath = `!!${loaderUtils.getRemainingRequest(loader)}`
 
   const getComponentPath =
@@ -65,11 +71,8 @@ module.exports = function componentExamplesLoader(source, map, meta) {
     `${componentPath}${!componentPath.includes('.') ? '.js' : ''}`,
     'utf8',
     (err, componentSrc) => {
-      // if (err) return callback(err)
       err && loader.emitWarning(err)
-
       let generatedPropValues = {}
-
       if (!err) {
         loader.addDependency(componentPath)
         try {
@@ -78,7 +81,6 @@ module.exports = function componentExamplesLoader(source, map, meta) {
           loader.emitWarning(error)
         }
       }
-
       const result = `
 const generateComponentExamples = require(${JSON.stringify(
         generateComponentExamples
@@ -96,21 +98,10 @@ config.maxExamples = Boolean(config.maxExamples) ? config.maxExamples : ${
         config.maxExamples
       }
 
-if (!config.renderPage) {
-  console.warn('A default is no longer provided for \`renderPage\`, you should supply it to the config instead')
-}
-
-if (!config.renderExample) {
-  console.warn('A default is no longer provided for \`renderExample\`, you should supply it to the config instead')
-}
-
 module.exports = {
  componentName: Component.displayName || Component.name,
- sections: generateComponentExamples(Component, config),
- renderPage: config.renderPage,
- renderExample: config.renderExample
-}
-`
+ sections: generateComponentExamples(Component, config)
+}`
       return callback(null, result, map)
     }
   )

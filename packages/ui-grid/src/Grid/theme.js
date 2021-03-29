@@ -22,14 +22,28 @@
  * SOFTWARE.
  */
 
-export default function ({ spacing, media, breakpoints }) {
-  return {
-    spacingSmall: spacing.small,
-    spacingMedium: spacing.medium,
-    spacingLarge: spacing.large,
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { spacing, media, key: themeName } = theme
 
-    maxWidth: breakpoints.maxWidth,
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    spacingSmall: spacing?.small,
+    spacingMedium: spacing?.medium,
+    spacingLarge: spacing?.large,
 
     ...media
   }
+
+  return {
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
+  }
 }
+
+export default generateComponentTheme

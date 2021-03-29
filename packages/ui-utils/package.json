@@ -25,7 +25,7 @@
     "@instructure/ui-test-utils": "^7.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.13.10",
     "@instructure/console": "^7.5.0",
     "@instructure/ui-dom-utils": "^7.5.0",
     "bowser": "^1.9.4",

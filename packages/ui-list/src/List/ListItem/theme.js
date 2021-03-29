@@ -22,35 +22,44 @@
  * SOFTWARE.
  */
 
-//  TODO: remove values for pipe, slash and arrow in version 8.0.0
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme) => {
+  const { borders, colors, spacing, typography, key: themeName } = theme
 
-export default function generator({ borders, colors, spacing, typography }) {
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeight,
+    fontSizeSmall: typography?.fontSizeSmall,
+    fontSizeMedium: typography?.fontSizeMedium,
+    fontSizeLarge: typography?.fontSizeLarge,
+    color: colors?.textDarkest,
+    spacingXXXSmall: spacing?.xxxSmall,
+    spacingXXSmall: spacing?.xxSmall,
+    spacingXSmall: spacing?.xSmall,
+    spacingSmall: spacing?.small,
+    spacingMedium: spacing?.medium,
+    spacingLarge: spacing?.large,
+    spacingXLarge: spacing?.xLarge,
+    spacingXXLarge: spacing?.xxLarge,
+    delimiterDashedBorder: `${borders?.widthSmall} dashed ${colors?.borderMedium}`,
+    delimiterSolidBorder: `${borders?.widthSmall} solid ${colors?.borderMedium}`
+  }
+
   return {
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-    lineHeight: typography.lineHeight,
-    fontSizeSmall: typography.fontSizeSmall,
-    fontSizeMedium: typography.fontSizeMedium,
-    fontSizeLarge: typography.fontSizeLarge,
-    color: colors.textDarkest,
-    spacingXXXSmall: spacing.xxxSmall,
-    spacingXXSmall: spacing.xxSmall,
-    spacingXSmall: spacing.xSmall,
-    spacingSmall: spacing.small,
-    spacingMedium: spacing.medium,
-    spacingLarge: spacing.large,
-    spacingXLarge: spacing.xLarge,
-    spacingXXLarge: spacing.xxLarge,
-    delimiterDashedBorder: `${borders.widthSmall} dashed ${colors.borderMedium}`,
-    delimiterSolidBorder: `${borders.widthSmall} solid ${colors.borderMedium}`,
-    pipeSpacing: spacing.xSmall,
-    slashSpacing: spacing.xxxSmall,
-    arrowSpacing: spacing.xSmall
+    ...componentVariables,
+    ...themeSpecificStyle[themeName]
   }
 }
 
-generator.canvas = function (variables) {
-  return {
-    color: variables['ic-brand-font-color-dark']
-  }
-}
+export default generateComponentTheme

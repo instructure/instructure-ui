@@ -2,25 +2,9 @@
 describes: Link
 ---
 
-```js
----
-guidelines: true
----
-<Guidelines>
-  <Figure title="Upgrade Notes for v8.0.0" recommendation="none">
-    <Figure.Item>
-      The <code>linkRef</code> prop will be removed. Use <code>elementRef</code> instead.
-    </Figure.Item>
-    <Figure.Item>
-      The <code>variant</code> prop will be removed. Use <code>color: ['link', 'link-inverse']</code> instead.
-    </Figure.Item>
-  </Figure>
-</Guidelines>
-```
-
 ### Where to use Link
 
-`Link` is intended for presenting actions __inline with other content__, such as within headings or sentences. Typically those actions navigate the user to a different view.
+`Link` is intended for presenting actions **inline with other content**, such as within headings or sentences. Typically those actions navigate the user to a different view.
 
 ```js
 ---
@@ -40,7 +24,7 @@ background: 'checkerboard-inverse'
 ### Adding margin
 
 Use the `margin` prop to add space to the left or right of the Link. Because
-Link displays `inline`, __top and bottom margin will not work__. If you need
+Link displays `inline`, **top and bottom margin will not work**. If you need
 to add margin to the top or bottom of Link, wrap it inside a `<View />`.
 
 ```js
@@ -53,7 +37,7 @@ example: true
 ### Underlines
 
 Link's primary use is inline with other content, which is why it is underlined by default. For rare situations where Link needs
-to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`. __Note: this only applies when outside high contrast mode. When inside high contrast mode, the link will always have an underline.__
+to appear without surrounding text, the default underline can be configured to only show on hover by making `isWithinText={false}`. **Note: this only applies when outside high contrast mode. When inside high contrast mode, the link will always have an underline.**
 
 ```js
 ---
