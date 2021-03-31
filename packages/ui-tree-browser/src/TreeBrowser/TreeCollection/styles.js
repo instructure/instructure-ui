@@ -51,8 +51,8 @@ const generateStyles = (componentTheme, props) => {
       folderTree: {
         marginInlineStart: `calc(${componentTheme.baseSpacingSmall} * 2)`,
         marginInlineEnd: 0,
-        paddingTop: componentTheme.baseSpacingSmall,
-        marginTop: `calc(-1 * ${componentTheme.baseSpacingSmall})`
+        paddingTop: `calc(1.75 * ${componentTheme.baseSpacingSmall})`,
+        marginTop: `calc(-1.75 * ${componentTheme.baseSpacingSmall})`
       }
     },
     medium: {
@@ -75,8 +75,8 @@ const generateStyles = (componentTheme, props) => {
       folderTree: {
         marginInlineStart: `calc(${componentTheme.baseSpacingLarge} * 2)`,
         marginInlineEnd: 0,
-        paddingTop: componentTheme.baseSpacingLarge,
-        marginTop: `calc(-1 * ${componentTheme.baseSpacingLarge})`
+        paddingTop: `calc(0.875 * ${componentTheme.baseSpacingMedium})`,
+        marginTop: `calc(-0.875 * ${componentTheme.baseSpacingMedium})`
       }
     }
   }
