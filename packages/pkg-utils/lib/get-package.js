@@ -25,7 +25,7 @@
 const fs = require('fs')
 const path = require('path')
 const readPkgUp = require('read-pkg-up')
-const Package = require('@lerna/package')
+const Package = require('@lerna/package').Package
 
 exports.getPackage = function getPackage(options) {
   const result = readPackage(options)

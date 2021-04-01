@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const Project = require('@lerna/project')
+const Project = require('@lerna/project').Project
 
 module.exports = ({ path }) => {
   try {

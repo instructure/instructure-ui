@@ -25,7 +25,7 @@
 const path = require('path')
 const yargsInteractive = require('yargs-interactive')
 
-const Project = require('@lerna/project')
+const Project = require('@lerna/project').Project
 
 const handleCreatePackage = require('./handleCreatePackage')
 const handleCreateFromTemplate = require('./handleCreateFromTemplate')
