@@ -29,7 +29,7 @@
     "@instructure/pkg-utils": "^8.0.0",
     "@instructure/ui-template-scripts": "^8.0.0",
     "@instructure/ui-upgrade-scripts": "^8.0.0",
-    "@lerna/project": "^3",
+    "@lerna/project": "^4",
     "commitizen": "^4.0.3",
     "dotenv": "^8.1.0",
     "eslint": "^6.4.0",

@@ -31,7 +31,7 @@ const {
   error,
   info
 } = require('@instructure/command-utils')
-const Project = require('@lerna/project')
+const Project = require('@lerna/project').Project
 
 const publishPackages = async (packageName, releaseVersion, preidAndTag) => {
   const args =

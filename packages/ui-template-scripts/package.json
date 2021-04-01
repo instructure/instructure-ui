@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/command-utils": "^8.0.0",
-    "@lerna/project": "^3",
+    "@lerna/project": "^4",
     "fs-extra": "^8.1.0",
     "lodash.template": "^4.5.0",
     "yargs": "^14.0.0",

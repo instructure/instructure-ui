@@ -24,7 +24,7 @@
 
 const yargsInteractive = require('yargs-interactive')
 const { info, error } = require('@instructure/command-utils')
-const Project = require('@lerna/project')
+const Project = require('@lerna/project').Project
 
 const handleCreateFromTemplate = require('./handleCreateFromTemplate')
 const promptContentName = require('../utils/promptContentName')
