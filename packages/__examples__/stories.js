@@ -56,10 +56,10 @@ examplesContext.keys().map((requirePath) => {
           renderPage.bind(null, page),
           {
             chromatic: {
-              ...page.parameters,
               viewports: [1200],
               pauseAnimationAtEnd: true,
-              delay: 700
+              delay: 700,
+              ...page.parameters
             }
           }
         )

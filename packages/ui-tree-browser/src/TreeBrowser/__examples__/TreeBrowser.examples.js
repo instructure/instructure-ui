@@ -97,5 +97,10 @@ export default {
       (props.collectionIcon === IconCollapseSolid &&
         props.collectionIconExpanded === undefined)
     )
+  },
+  getParameters: ({ examples, index }) => {
+    return {
+      delay: 2000
+    }
   }
 }
