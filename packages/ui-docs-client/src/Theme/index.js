@@ -39,12 +39,10 @@ class Theme extends Component {
     themeKey: PropTypes.string.isRequired,
     variables: PropTypes.object.isRequired,
     requirePath: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    immutable: PropTypes.bool
+    description: PropTypes.string
   }
 
   static defaultProps = {
-    immutable: false,
     description: undefined
   }
 
@@ -212,10 +210,6 @@ class Theme extends Component {
       }
     })
 
-    const params = this.props.immutable
-      ? '/* this theme does not allow overrides */'
-      : `{ overrides: { colors: { brand: 'red' } } }`
-
     return (
       <div>
         {description && (
@@ -234,9 +228,15 @@ class Theme extends Component {
 
             ${'```js'}
             // before mounting your React application:
-            import theme from '${this.props.requirePath}'
+            import { theme } from '${this.props.requirePath}'
+            const themeOverrides = { colors: { brand: 'red' } }
 
-            theme.use(${params})
+            ReactDOM.render(
+              <EmotionThemeProvider theme={{ ...theme, ...themeOverrides }}>
+                <App />
+              </EmotionThemeProvider>,
+              element
+            )
             ${'```'}
           `}
           title={`${themeKey} Theme Usage in applications`}
