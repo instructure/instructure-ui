@@ -39,7 +39,7 @@
     "babel-plugin-add-import-extension": "^1.4.3",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-istanbul": "^6.0.0",
-    "babel-plugin-macros": "^2.8.0",
+    "babel-plugin-macros": "^3",
     "babel-plugin-transform-ensure-ignore": "^0.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-plugin-transform-undefined-to-void": "^6.9.4",

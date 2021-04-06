@@ -35,7 +35,15 @@ module.exports = {
     'plugin:compat/recommended',
     'prettier'
   ],
-  plugins: ['react', 'jsx-a11y', 'mocha', 'notice', 'instructure-ui', 'ejs'],
+  plugins: [
+    'react',
+    'jsx-a11y',
+    'mocha',
+    'notice',
+    'instructure-ui',
+    'ejs',
+    '@emotion'
+  ],
   env: {
     node: true,
     browser: true,
@@ -49,6 +57,10 @@ module.exports = {
     }
   },
   rules: {
+    '@emotion/pkg-renaming': 'error',
+    '@emotion/no-vanilla': 'error',
+    '@emotion/import-from-emotion': 'error',
+    '@emotion/styled-import': 'error',
     'react/no-deprecated': 0,
     'react/no-find-dom-node': 0,
     'react/prop-types': ['error', { skipUndeclared: true }],

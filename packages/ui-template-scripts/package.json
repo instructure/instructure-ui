@@ -22,9 +22,9 @@
   "dependencies": {
     "@instructure/command-utils": "^8.0.0",
     "@lerna/project": "^4",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9",
     "lodash.template": "^4.5.0",
-    "yargs": "^14.0.0",
+    "yargs": "^16",
     "yargs-interactive": "^3.0.0"
   },
   "publishConfig": {

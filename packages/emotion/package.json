@@ -24,13 +24,12 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@emotion/core": "^10.0.35",
+    "@emotion/react": "^11",
     "@instructure/console": "^8.0.0",
     "@instructure/ui-decorator": "^8.0.0",
     "@instructure/ui-i18n": "^8.0.0",
     "@instructure/ui-themes": "^8.0.0",
     "@instructure/ui-utils": "^8.0.0",
-    "emotion-theming": "^10.0.27",
     "hoist-non-react-statics": "^3.3.2",
     "lodash": "^4",
     "prop-types": "^15"

@@ -22,10 +22,10 @@
   "dependencies": {
     "@instructure/command-utils": "^8.0.0",
     "@instructure/pkg-utils": "^8.0.0",
-    "depcheck": "^0.9.2",
-    "fs-extra": "^8.1.0",
+    "depcheck": "^1",
+    "fs-extra": "^9",
     "jscodeshift": "^0.7.0",
-    "yargs": "^14.0.0"
+    "yargs": "^16"
   },
   "publishConfig": {
     "access": "public"

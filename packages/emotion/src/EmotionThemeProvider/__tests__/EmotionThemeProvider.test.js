@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 
@@ -59,7 +59,7 @@ describe('EmotionThemeProvider', async () => {
   }
 
   @withStyle(generateStyle, generateComponentTheme)
-  class ThemeableComponent extends React.Component {
+  class ThemeableComponent extends Component {
     static propTypes = {
       // eslint-disable-next-line react/require-default-props
       makeStyles: PropTypes.func,
@@ -68,7 +68,7 @@ describe('EmotionThemeProvider', async () => {
       inverse: PropTypes.bool
     }
 
-    static defaultTypes = {
+    static defaultProps = {
       inverse: false
     }
 

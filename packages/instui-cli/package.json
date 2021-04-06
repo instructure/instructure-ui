@@ -28,8 +28,8 @@
     "@instructure/ui-codemods": "^8.0.0",
     "@instructure/ui-template-scripts": "^8.0.0",
     "@instructure/ui-upgrade-scripts": "^8.0.0",
-    "semver": "^6.3.0",
-    "yargs": "^14.0.0",
+    "semver": "^7",
+    "yargs": "^16",
     "yargs-interactive": "^3.0.0"
   },
   "publishConfig": {
