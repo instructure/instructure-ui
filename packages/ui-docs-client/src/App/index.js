@@ -310,7 +310,6 @@ class App extends Component {
           themeKey={themeKey}
           variables={theme.resource}
           requirePath={theme.requirePath}
-          immutable={theme.resource.immutable}
         />
       </View>
     )
