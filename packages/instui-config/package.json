@@ -21,6 +21,6 @@
     "@instructure/command-utils": "^8.0.0",
     "@instructure/pkg-utils": "^8.0.0",
     "@instructure/ui-upgrade-scripts": "^8.0.0",
-    "semver": "^6.3.0"
+    "semver": "^7"
   }
 }

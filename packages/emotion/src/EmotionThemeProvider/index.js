@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { ThemeProvider } from 'emotion-theming'
+import { ThemeProvider } from '@emotion/react'
 import { merge, cloneDeep } from 'lodash'
 
 /**

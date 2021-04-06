@@ -27,7 +27,7 @@
     "fs-extra": "^9.0.0",
     "lodash.isplainobject": "^4.0.6",
     "style-dictionary": "^2.8.3",
-    "yargs": "^14.0.0"
+    "yargs": "^16"
   },
   "devDependencies": {
     "@instructure/ui-test-utils": "^8.0.0"

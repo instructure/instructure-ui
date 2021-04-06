@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@emotion/is-prop-valid": "^0.8.3",
+    "@emotion/is-prop-valid": "^1",
     "@instructure/console": "^8.0.0",
     "@instructure/ui-decorator": "^8.0.0",
     "@instructure/ui-dom-utils": "^8.0.0",
