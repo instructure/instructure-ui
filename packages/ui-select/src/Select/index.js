@@ -360,7 +360,7 @@ class Select extends Component {
     this.props.listRef(node)
 
     // store option height to calculate list maxHeight
-    if (node) {
+    if (node && node.querySelector('[role="option"]')) {
       this._optionHeight = node.querySelector('[role="option"]').offsetHeight
     }
   }
