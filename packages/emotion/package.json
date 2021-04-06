@@ -26,7 +26,6 @@
     "@babel/runtime": "^7.13.10",
     "@emotion/core": "^10.0.35",
     "@instructure/console": "^8.0.0",
-    "@instructure/ui-babel-preset": "^8.0.0",
     "@instructure/ui-decorator": "^8.0.0",
     "@instructure/ui-i18n": "^8.0.0",
     "@instructure/ui-themes": "^8.0.0",
@@ -37,7 +36,7 @@
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.5.0",
+    "@instructure/ui-babel-preset": "^8.0.0",
     "@instructure/ui-test-utils": "^8.0.0"
   },
   "peerDependencies": {
