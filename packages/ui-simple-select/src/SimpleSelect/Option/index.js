@@ -40,7 +40,7 @@ class Option extends Component {
     /**
      * The value for the option.
      */
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     /**
      * Whether or not this option is disabled.
      */
