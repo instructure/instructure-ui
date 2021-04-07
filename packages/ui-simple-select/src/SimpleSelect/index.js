@@ -25,10 +25,7 @@
 import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Children as ChildrenPropTypes,
-  controllable
-} from '@instructure/ui-prop-types'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { PositionPropTypes } from '@instructure/ui-position'
 import { testable } from '@instructure/ui-testable'
@@ -64,6 +61,7 @@ class SimpleSelect extends Component {
      * The value corresponding to the value of the selected option. If defined,
      * the component will act controlled and will not manage its own state.
      */
+    //TODO: it was using the "controllable" util, in the TS migration mimic that behaviour
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
      * The value of the option to select by default, when uncontrolled.
