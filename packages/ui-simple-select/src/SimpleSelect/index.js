@@ -64,7 +64,7 @@ class SimpleSelect extends Component {
      * The value corresponding to the value of the selected option. If defined,
      * the component will act controlled and will not manage its own state.
      */
-    value: controllable(PropTypes.string, 'onChange'),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
      * The value of the option to select by default, when uncontrolled.
      */
@@ -272,7 +272,7 @@ class SimpleSelect extends Component {
     const { value, defaultValue } = props
     const initialValue = value || defaultValue
 
-    if (typeof initialValue === 'string') {
+    if (typeof initialValue === 'string' || typeof initialValue === 'number') {
       // get option based on value or defaultValue, if provided
       return this.getOption('value', initialValue)
     }
