@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { useTheme as useEmotionTheme } from '@emotion/react'
+import { useTheme as useEmotionTheme } from 'emotion-theming'
 import { canvas } from '@instructure/ui-themes'
 import { isEmpty } from '@instructure/ui-utils'
 

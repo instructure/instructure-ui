@@ -105,8 +105,7 @@
       "prettier --write"
     ],
     "*.css": [
-      "stylelint",
-      "prettier --write"
+      "stylelint"
     ],
     "*.{json,jsx,md,mdx,html}": [
       "prettier --write"
