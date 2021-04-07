@@ -5,34 +5,73 @@ describes: TreeBrowser
 The `<TreeBrowser/>` component provides a keyboard accessible tree structure. The component expects
 to receive a normalized data structure, examples can be seen at https://github.com/paularmstrong/normalizr.
 
+### Size
+
 ```js
 ---
 example: true
+render: false
 ---
-<TreeBrowser
-  collections={{
-    1: {
-      id: 1,
-      name: "Assignments",
-      collections: [2,3],
-      items: [3],
-      descriptor: "Class Assignments"
-    },
-    2: { id: 2, name: "English Assignments", collections: [4], items: [] },
-    3: { id: 3, name: "Math Assignments", collections: [5], items: [1,2] },
-    4: { id: 4, name: "Reading Assignments", collections: [], items: [4] },
-    5: { id: 5, name: "Advanced Math Assignments", items: [5]}
-  }}
-  items={{
-    1: { id: 1, name: "Addition Worksheet" },
-    2: { id: 2, name: "Subtraction Worksheet" },
-    3: { id: 3, name: "General Questions" },
-    4: { id: 4, name: "Vogon Poetry" },
-    5: { id: 5, name: "Bistromath", descriptor: "Explain the Bistromathic Drive" }
-  }}
-  defaultExpanded={[1, 3]}
-  rootId={1}
-/>
+  class Example extends React.Component {
+    constructor (props) {
+      super(props)
+      this.state = {
+        size: 'medium'
+      }
+
+      this.sizes = ['small', 'medium', 'large']
+    }
+
+    handleSizeSelect = (e, size) => {
+      this.setState({ size })
+    };
+
+    render () {
+      return (
+        <>
+          <View display="block" margin="none none medium">
+            <RadioInputGroup
+              name="treeBrowserSize"
+              defaultValue="medium"
+              description={<ScreenReaderContent>TreeBrowser size selector</ScreenReaderContent>}
+              variant="toggle"
+              onChange={this.handleSizeSelect}
+            >
+              {this.sizes.map((size) => <RadioInput key={size} label={size} value={size} />)}
+            </RadioInputGroup>
+          </View>
+
+          <TreeBrowser
+            size={this.state.size}
+            collections={{
+              1: {
+                id: 1,
+                name: "Assignments",
+                collections: [2,3],
+                items: [3],
+                descriptor: "Class Assignments"
+              },
+              2: { id: 2, name: "English Assignments", collections: [4], items: [] },
+              3: { id: 3, name: "Math Assignments", collections: [5], items: [1,2] },
+              4: { id: 4, name: "Reading Assignments", collections: [], items: [4] },
+              5: { id: 5, name: "Advanced Math Assignments", items: [5]}
+            }}
+            items={{
+              1: { id: 1, name: "Addition Worksheet" },
+              2: { id: 2, name: "Subtraction Worksheet" },
+              3: { id: 3, name: "General Questions" },
+              4: { id: 4, name: "Vogon Poetry" },
+              5: { id: 5, name: "Bistromath", descriptor: "Explain the Bistromathic Drive" }
+            }}
+            defaultExpanded={[1, 3]}
+            rootId={1}
+          />
+        </>
+      )
+    }
+  }
+
+render(<Example/>)
 ```
 
 ### Managing State

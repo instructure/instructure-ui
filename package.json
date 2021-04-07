@@ -109,7 +109,6 @@
     ],
     "*.css": [
       "stylelint",
-      "prettier --write",
       "git add"
     ],
     "*.{json,jsx,md,mdx,html}": [

@@ -73,8 +73,8 @@ here, so hardcoding until this problem is hopefully resolved in Edge 16
     .list {
       margin-inline-start: calc(var(--baseSpacingSmall) * 2);
       margin-inline-end: 0;
-      padding-top: var(--baseSpacingSmall);
-      margin-top: calc(-1 * var(--baseSpacingSmall));
+      padding-top: calc(1.75 * var(--baseSpacingSmall));
+      margin-top: calc(-1.75 * var(--baseSpacingSmall));
     }
   }
 }
@@ -109,8 +109,8 @@ here, so hardcoding until this problem is hopefully resolved in Edge 16
     .list {
       margin-inline-start: calc(var(--baseSpacingLarge) * 2);
       margin-inline-end: 0;
-      padding-top: var(--baseSpacingLarge);
-      margin-top: calc(-1 * var(--baseSpacingLarge));
+      padding-top: calc(0.75 * var(--baseSpacingLarge));
+      margin-top: calc(-0.75 * var(--baseSpacingLarge));
     }
   }
 }
