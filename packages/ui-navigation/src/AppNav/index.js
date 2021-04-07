@@ -254,12 +254,13 @@ class AppNav extends Component {
     const { isMeasuring } = this.state
     const childrenArray = Children.toArray(children)
     const visibleChildren = isMeasuring
-      ? children
+      ? childrenArray
       : childrenArray.splice(0, visibleItemsCount)
     const hiddenChildren = isMeasuring ? [] : childrenArray
     const renderBeforeItems = callRenderProp(this.props.renderBeforeItems)
     const renderAfterItems = callRenderProp(this.props.renderAfterItems)
     const hasRenderedContent = renderBeforeItems || renderAfterItems
+
     return (
       <View
         {...passthroughProps}

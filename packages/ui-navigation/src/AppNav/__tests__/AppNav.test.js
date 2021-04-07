@@ -81,6 +81,27 @@ describe('<AppNav />', async () => {
       expect(link).to.have.length(1)
       expect(button).to.have.length(1)
     })
+
+    it('should render with a single item', async () => {
+      await mount(
+        <AppNav screenReaderLabel="App navigation" visibleItemsCount={1}>
+          <AppNav.Item
+            renderLabel="Some label"
+            href="http://instructure.design"
+          />
+        </AppNav>
+      )
+
+      const nav = await AppNavLocator.find()
+
+      const list = await nav.findAll('ul')
+      const items = await nav.findAll('li')
+      const link = await nav.findAll('a')
+
+      expect(list).to.have.length(1)
+      expect(items).to.have.length(1)
+      expect(link).to.have.length(1)
+    })
   })
 
   describe('with rendered content', () => {
