@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { debounce } from '@instructure/debounce'
-import { addResizeListener, canUseDOM } from '@instructure/ui-dom-utils'
+import { canUseDOM, getBoundingClientRect } from '@instructure/ui-dom-utils'
 import {
   safeCloneElement,
   ensureSingleChild,
@@ -130,21 +130,34 @@ class TruncateText extends Component {
 
       this.truncate()
 
-      if (this.props.debounce === 0) {
-        this._resizeListener = addResizeListener(this._ref, this.update)
-      } else {
-        this._debounced = debounce(this.update, this.props.debounce, {
-          leading: true,
-          trailing: true
+      this._debounced = debounce(this.update, this.props.debounce, {
+        leading: true,
+        trailing: true
+      })
+
+      const { width: origWidth } = getBoundingClientRect(this._ref)
+      this._resizeListener = new ResizeObserver((entries) => {
+        // requestAnimationFrame call is needed becuase some truncatetext test cases
+        // failed due to ResizeObserver was not able to deliver all observations within a single animation frame
+        // see: https://stackoverflow.com/questions/49384120/resizeobserver-loop-limit-exceeded
+        requestAnimationFrame(() => {
+          for (let entry of entries) {
+            const { width } = entry.contentRect
+
+            if (origWidth !== width) {
+              this.props.debounce === 0 ? this.update() : this._debounced()
+            }
+          }
         })
-        this._resizeListener = addResizeListener(this._ref, this._debounced)
-      }
+      })
+
+      this._resizeListener.observe(this._ref)
     }
   }
 
   componentWillUnmount() {
     if (this._resizeListener) {
-      this._resizeListener.remove()
+      this._resizeListener.disconnect()
     }
 
     if (this._debounced) {

@@ -30,9 +30,9 @@ import { controllable } from '@instructure/ui-prop-types'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
 import {
   addEventListener,
-  addResizeListener,
   isActiveElement,
-  requestAnimationFrame
+  requestAnimationFrame,
+  getBoundingClientRect
 } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -172,7 +172,7 @@ class TextArea extends Component {
     }
 
     if (this._textareaResizeListener) {
-      this._textareaResizeListener.remove()
+      this._textareaResizeListener.disconnect()
     }
 
     if (this._request) {
@@ -209,11 +209,18 @@ class TextArea extends Component {
       }
 
       if (this._textarea && !this._textareaResizeListener) {
-        this._textareaResizeListener = addResizeListener(
-          this._textarea,
-          this._textareaResize,
-          ['height']
-        )
+        const { height: origHeight } = getBoundingClientRect(this._textarea)
+        this._textareaResizeListener = new ResizeObserver((entries) => {
+          for (let entry of entries) {
+            const { height } = entry.contentRect
+
+            if (origHeight !== height) {
+              this._textareaResize()
+            }
+          }
+        })
+
+        this._textareaResizeListener.observe(this._textarea)
       }
 
       this._request = requestAnimationFrame(this.grow)

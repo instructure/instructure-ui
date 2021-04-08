@@ -26,15 +26,17 @@ import { findDOMNode } from './findDOMNode'
 import { getBoundingClientRect } from './getBoundingClientRect'
 import { requestAnimationFrame } from './requestAnimationFrame'
 
-// TODO: replace with https://wicg.github.io/ResizeObserver/ when it's supported
-
 /**
  * ---
  * category: utilities/DOM
  * ---
+ * ### This utility is deprecated since version __8.0__ and will be permanently deleted in version 9.0.
+ * *Please use the native [DOM ResizeObserver API](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) instead of this.*
+ *
+ * Adds a listener to an element and calls a specified handler function whenever the size changes.
+ * @deprecated since version 8.0
  * @module
- * Adds a listener to an element and calls a specified handler
- * function whenever the size changes
+ *
  *
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @param {function} handler - function to run when resize occurs

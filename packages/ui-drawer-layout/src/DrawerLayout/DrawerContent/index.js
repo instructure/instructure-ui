@@ -27,10 +27,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { debounce } from '@instructure/debounce'
-import {
-  addResizeListener,
-  getBoundingClientRect
-} from '@instructure/ui-dom-utils'
+import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -77,11 +74,15 @@ class DrawerContent extends Component {
 
   _content = null
   _resizeListener = null
+
   _debounced = null
   _timeouts = []
 
   componentDidMount() {
     const rect = getBoundingClientRect(this._content)
+    const origSize = {
+      width: rect.width
+    }
     // set initial size
     this.props.onSizeChange({ width: rect.width, height: rect.height })
     // listen for changes to size
@@ -89,7 +90,18 @@ class DrawerContent extends Component {
       leading: false,
       trailing: true
     })
-    this._resizeListener = addResizeListener(this._content, this._debounced)
+    this._resizeListener = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const size = {
+          width: entry.contentRect.width
+        }
+        if (size.width !== origSize.width) {
+          this._debounced(size)
+        }
+      }
+    })
+
+    this._resizeListener.observe(this._content)
     this.props.makeStyles({ shouldTransition: false })
   }
 
@@ -99,7 +111,7 @@ class DrawerContent extends Component {
 
   componentWillUnmount() {
     if (this._resizeListener) {
-      this._resizeListener.remove()
+      this._resizeListener.disconnect()
     }
 
     if (this._debounced) {
