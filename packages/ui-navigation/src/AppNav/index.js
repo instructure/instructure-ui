@@ -29,10 +29,7 @@ import PropTypes from 'prop-types'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
-import {
-  addResizeListener,
-  getBoundingClientRect
-} from '@instructure/ui-dom-utils'
+import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 import { px } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
@@ -129,11 +126,23 @@ class AppNav extends Component {
 
   componentDidMount() {
     this.props.makeStyles()
+    const { width: origWidth } = getBoundingClientRect(this._list)
+
     this._debounced = debounce(this.handleResize, this.props.debounce, {
       leading: true,
       trailing: true
     })
-    this._resizeListener = addResizeListener(this._list, this._debounced)
+    this._resizeListener = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width } = entry.contentRect
+
+        if (origWidth !== width) {
+          this._debounced()
+        }
+      }
+    })
+
+    this._resizeListener.observe(this._list)
 
     this.handleResize()
   }
@@ -144,7 +153,7 @@ class AppNav extends Component {
 
   componentWillUnmount() {
     if (this._resizeListener) {
-      this._resizeListener.remove()
+      this._resizeListener.disconnect()
     }
 
     if (this._debounced) {

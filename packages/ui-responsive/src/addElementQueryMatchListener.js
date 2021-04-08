@@ -23,11 +23,7 @@
  */
 import { parseQuery } from './parseQuery'
 
-import {
-  addResizeListener,
-  findDOMNode,
-  getBoundingClientRect
-} from '@instructure/ui-dom-utils'
+import { findDOMNode, getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 
 /**
@@ -37,9 +33,7 @@ import { debounce } from '@instructure/debounce'
  * Given an object of named queries, listens for changes in the
  * element size and notifies which queries match via a function
  * callback. The callback method is only called when the query
- * matches change, not on all element resizes. (If you are looking
- * to call a method on all element resizes see
- * [addResizeListener](#addResizeListener) instead)
+ * matches change, not on all element resizes.
  *
  * This function shares an interface with
  * [addMediaQueryMatchListener](#addMediaQueryMatchListener)
@@ -86,6 +80,8 @@ import { debounce } from '@instructure/debounce'
  */
 function addElementQueryMatchListener(query, el, cb) {
   const node = typeof el === 'function' ? el() : el
+  const { width, height } = getBoundingClientRect(node)
+
   let matches = []
 
   const update = (size) => {
@@ -97,8 +93,18 @@ function addElementQueryMatchListener(query, el, cb) {
   }
 
   const debounced = debounce(update, 100, { leading: false, trailing: true })
-  const elementResizeListener = addResizeListener(node, debounced)
-  const { width, height } = getBoundingClientRect(node)
+  const elementResizeListener = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+      const { width: newWidth, height: newHeight } = entry.contentRect
+
+      if (width !== newWidth) {
+        debounced({ width: newWidth, height: newHeight })
+      }
+    }
+  })
+
+  elementResizeListener.observe(node)
+
   const newMatches = update({ width, height }, query, node, matches)
 
   if (newMatches) {
@@ -109,7 +115,7 @@ function addElementQueryMatchListener(query, el, cb) {
   return {
     remove() {
       if (elementResizeListener) {
-        elementResizeListener.remove()
+        elementResizeListener.disconnect()
       }
 
       if (debounced) {

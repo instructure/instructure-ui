@@ -39,10 +39,7 @@ import { error } from '@instructure/console/macro'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Focusable } from '@instructure/ui-focusable'
-import {
-  addResizeListener,
-  getBoundingClientRect
-} from '@instructure/ui-dom-utils'
+import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
@@ -206,13 +203,23 @@ class Tabs extends Component {
       leading: true,
       trailing: true
     })
-    this._resizeListener = addResizeListener(this._tabList, this._debounced)
     this._tabListPosition = getBoundingClientRect(this._tabList)
+    this._resizeListener = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width: newWidth } = entry.contentRect
+
+        if (this._tabListPosition.width !== newWidth) {
+          this._debounced()
+        }
+      }
+    })
+
+    this._resizeListener.observe(this._tabList)
   }
 
   cancelScrollOverflow() {
     if (this._resizeListener) {
-      this._resizeListener.remove()
+      this._resizeListener.disconnect()
     }
 
     if (this._debounced) {
