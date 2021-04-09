@@ -69,6 +69,7 @@ class TreeCollection extends Component {
     ]),
     itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     getItemProps: PropTypes.func,
+    getCollectionProps: PropTypes.func,
     onItemClick: PropTypes.func,
     onCollectionClick: PropTypes.func,
     onKeyDown: PropTypes.func,
@@ -104,6 +105,7 @@ class TreeCollection extends Component {
     collectionIcon: undefined,
     itemIcon: undefined,
     getItemProps: (props) => props,
+    getCollectionProps: (props) => props,
     numChildren: undefined,
     level: undefined,
     position: undefined,
@@ -363,10 +365,23 @@ class TreeCollection extends Component {
       collectionIcon,
       collectionIconExpanded,
       isCollectionFlattened,
+      getCollectionProps,
       level,
       position,
       styles
     } = this.props
+
+    const collectionProps = getCollectionProps({
+      ...this.getCommonButtonProps(),
+      expanded: expanded,
+      collectionIcon: collectionIcon,
+      collectionIconExpanded: collectionIconExpanded,
+      type: 'collection',
+      containerRef: this.props.containerRef,
+      selected: this.props.selection === `collection_${id}`,
+      focused: this.state.focused === `collection_${id}`,
+      level
+    })
 
     const ariaSelected = {}
     if (this.props.selection)
@@ -391,17 +406,7 @@ class TreeCollection extends Component {
         onBlur={(e, n) => this.handleBlur(e, { id: id, type: 'collection' })}
         {...ariaSelected}
       >
-        <TreeButton
-          {...this.getCommonButtonProps()}
-          expanded={expanded}
-          collectionIcon={collectionIcon}
-          collectionIconExpanded={collectionIconExpanded}
-          type="collection"
-          containerRef={this.props.containerRef}
-          selected={this.props.selection === `collection_${id}`}
-          focused={this.state.focused === `collection_${id}`}
-          level={level}
-        />
+        <TreeButton {...collectionProps} />
         {expanded && this.childCount > 0 && (
           <ul aria-label={name} css={styles.list} role="group">
             {this.renderChildren()}
