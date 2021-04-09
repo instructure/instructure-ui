@@ -156,6 +156,42 @@ describe('<TreeCollection />', async () => {
       expect(item.getAttribute('aria-selected')).to.exist()
     })
 
+    it('should correctly evaluate `getCollectionProps` for each item', async () => {
+      await mount(
+        <TreeCollection
+          id={1}
+          name="Coll 1"
+          collections={[
+            { id: 2, name: 'Coll 2', descriptor: 'Another Descriptor' }
+          ]}
+          items={[
+            { id: 1, name: 'Item 1', icon: () => IconFolder },
+            { id: 2, name: 'Item 2', icon: () => IconUser },
+            { id: 2, name: 'Item 3' }
+          ]}
+          collectionIcon={IconFolder}
+          getCollectionProps={({ ...props }) => {
+            let icon = props.collectionIcon
+
+            if (props.name === 'Coll 2') {
+              icon = IconUser
+            }
+
+            return {
+              ...props,
+              collectionIcon: icon
+            }
+          }}
+          expanded={true}
+        />
+      )
+      const collection = await TreeCollectionLocator.find()
+
+      const item1 = await collection.find('button:contains(Coll 2)')
+      expect(item1).to.exist()
+      expect(await item1.find('svg:title(User icon)')).to.exist()
+    })
+
     describe('onCollectionClick', async () => {
       it('should return the correct collection params on click', async () => {
         const onCollectionClick = stub()
