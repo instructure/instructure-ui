@@ -107,6 +107,13 @@ class TreeBrowser extends Component {
      */
     getItemProps: PropTypes.func,
     /**
+     * A function called with each collection's props as an argument. The return value of this function is a
+     * props object which will be passed to the collection when it is rendered. This is useful for situations where
+     * you need to render the collection differently depending on it's props. For example, if you would like to
+     * display a different icon for collections with a certain name.
+     */
+    getCollectionProps: PropTypes.func,
+    /**
      * whether or not to show the root collection specified in rootId prop or
      * to begin with its immediate subcollections and items instead
      */
@@ -128,6 +135,7 @@ class TreeBrowser extends Component {
     collectionIconExpanded: IconFolderLine,
     itemIcon: IconDocumentLine,
     getItemProps: (props) => props,
+    getCollectionProps: (props) => props,
     defaultExpanded: [],
     selectionType: 'none',
     onItemClick: function (item) {},
