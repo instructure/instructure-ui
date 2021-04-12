@@ -4,10 +4,10 @@ category: Patterns
 id: Drilldown
 ---
 
-### Drilldown Menu
+## Drilldown Menu
 
 This example shows an accessible implementation of a multi level menu using InstUI components. ([Popover](#Popover), [Menu](#Menu))
-This component is useful when you want to dislpay large amount of data in a compact manner and using [Menu.SubMenu](#Menu) would be too cumbersome to use.
+This component is useful when you want to display large amounts of data in a compact manner and using [Menu.SubMenu](#Menu) would be too cumbersome to use.
 
 ```js
 ---
@@ -18,12 +18,15 @@ example: true
 const dataMap = {
   1: {
     id: 1,
-    accountName: 'Root Account 1',
     subAccounts: {
       accounts: [
         {
           id: 2,
           accountName: 'Sub Account 1'
+        },
+        {
+          id: 7,
+          accountName: 'Sub Account 7'
         }
       ]
     }
@@ -85,6 +88,14 @@ const dataMap = {
     subAccounts: {
       accounts: []
     }
+  },
+  7: {
+    id: 7,
+    accountName: 'Sub Account 7',
+    parentAccount: 1,
+    subAccounts: {
+      accounts: []
+    }
   }
 }
 
@@ -115,15 +126,70 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
     menuRef.current.focus()
   }
 
+  const titleAccounts = topLevelAccounts.filter((a) => a.id && a.accountName)
+
+  const renderBackNavigation = () => {
+    if (hasParentAccount) {
+      const parentName = data[accountObj.parentAccount].accountName
+
+      return (
+        <Menu.Item
+          as="div"
+          onClick={() => {
+            setAccountId(accountObj.parentAccount)
+          }}
+        >
+          <Flex as="div" justifyItems="start">
+            <View margin="0 small 0 0">
+              <IconArrowOpenStartLine />
+            </View>
+            <TruncateText>
+              {parentName || 'Back'}
+            </TruncateText>
+          </Flex>
+        </Menu.Item>
+      )
+    }
+  }
+
+  const renderChildList = () => {
+    return childAccounts
+      ?.concat()
+      .sort((a, b) => {
+        if (a?.accountName > b?.accountName) return 1
+        if (a?.accountName < b?.accountName) return -1
+        return 0
+      })
+      .map((a) => {
+        if (data[a.id] && data[a.id]?.subAccounts?.accounts?.length) {
+          return (
+            <Menu.Item key={a.id} as="div" onClick={() => setAccountId(a.id)}>
+              <Flex as="div" justifyItems="space-between">
+                <TruncateText>{a.accountName}</TruncateText>
+                <View margin="0 0 0 small">
+                  <IconArrowOpenEndLine />
+                </View>
+              </Flex>
+            </Menu.Item>
+          )
+        } else {
+          return (
+            <Menu.Item key={a.id} as="div" onClick={() => {console.log(`Selected account: ${a.accountName}`)}}>
+              <TruncateText>{a.accountName}</TruncateText>
+            </Menu.Item>
+          )
+        }
+      }) || null
+  }
+
   return (
     <View as="div">
       <Popover
-        withArrow={false}
         renderTrigger={
           <Tooltip
           renderTip="Select user account"
           on={['hover', 'focus']}
-          placement="bottom"
+          placement="top"
             >
             <IconButton screenReaderLabel="Select user account">
               <IconUserLine />
@@ -132,53 +198,32 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
         }
         shouldRenderOffscreen={false}
         on="click"
-        placement="bottom center"
+        placement="bottom start"
         constrain="parent"
+        offsetY={16}
       >
         <Menu
           menuRef={(ref) => {
             menuRef.current = ref
           }}
+          themeOverride={{ minWidth: '24rem' }}
         >
-          {accountObj && accountObj.parentAccount && (
-            <Menu.Item
-              as="div"
-              onClick={() => {
-                setAccountId(accountObj.parentAccount)
-              }}
-            >
-              <Flex as="div" margin="0 small 0 0" justifyItems="space-between">
-                <IconArrowOpenStartLine />
-                <TruncateText>
-                  {data[accountObj.parentAccount].accountName}
-                </TruncateText>
-              </Flex>
-            </Menu.Item>
-          )}
-          {topLevelAccounts.map((a) => (
-            <Menu.Item key={a.id} as="div" onClick={() => setAccountId(a.id)}>
-              <div>
+          {renderBackNavigation()}
+          {titleAccounts.map((a) => {
+            return (
+              <Menu.Item
+                key={a.id}
+                as="div"
+                onClick={() => setAccountId(a.id)}
+                themeOverride={{labelColor: '#008ee2'}}
+              >
                 <TruncateText>{a.accountName}</TruncateText>
-              </div>
-            </Menu.Item>
-          ))}
-          {(hasParentAccount || topLevelAccounts.length > 0) &&
-            hasChildAccounts && <Menu.Separator />}
-          {childAccounts
-            ?.concat()
-            .sort((a, b) => {
-              if (a?.accountName > b?.accountName) return 1
-              if (a?.accountName < b?.accountName) return -1
-              return 0
-            })
-            .map((a) => (
-              <Menu.Item key={a.id} as="div" onClick={() => setAccountId(a.id)}>
-                <Flex as="div" justifyItems="space-between">
-                  <TruncateText>{a.accountName}</TruncateText>
-                  <IconArrowOpenEndLine />
-                </Flex>
               </Menu.Item>
-            )) || null}
+            )
+          })}
+          {(hasParentAccount || titleAccounts.length) &&
+            hasChildAccounts && <Menu.Separator />}
+          {renderChildList()}
         </Menu>
       </Popover>
     </View>
