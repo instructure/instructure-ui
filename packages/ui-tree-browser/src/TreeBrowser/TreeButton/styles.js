@@ -258,7 +258,7 @@ const generateStyles = (componentTheme, props) => {
           ? componentTheme.selectedBackgroundColor
           : componentTheme.hoverBackgroundColor,
 
-        '[class$=-treeButton__textName],[class$=-treeButton__textDescriptor],[class$=-treeButton__icon]': {
+        '[class$=-treeButton__textName], [class$=-treeButton__textDescriptor], [class$=-treeButton__icon], [class$=-treeButton__node]': {
           color: componentTheme.hoverTextColor
         }
       },
@@ -315,8 +315,7 @@ const generateStyles = (componentTheme, props) => {
       ...sizeMap[size][variant].thumbnail
     },
     node: {
-      label: 'treeButton_node',
-      color: componentTheme.hoverTextColor,
+      label: 'treeButton__node',
       ...textStyle,
       ...textNameStyle
     }

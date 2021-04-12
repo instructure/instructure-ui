@@ -23,7 +23,8 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+// eslint-disable-next-line no-unused-vars
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
@@ -81,7 +82,8 @@ class TreeCollection extends Component {
      * children of type TreeNode
      */
     renderAfterItems: Children.oneOf([TreeNode]),
-    containerRef: PropTypes.func
+    containerRef: PropTypes.func,
+    isCollectionFlattened: PropTypes.bool
   }
 
   static defaultProps = {
@@ -106,7 +108,8 @@ class TreeCollection extends Component {
     position: undefined,
     renderBeforeItems: null,
     renderAfterItems: null,
-    containerRef: function () {}
+    containerRef: function () {},
+    isCollectionFlattened: false
   }
 
   constructor(props) {
@@ -120,6 +123,11 @@ class TreeCollection extends Component {
   }
   componentDidUpdate() {
     this.props.makeStyles()
+  }
+
+  get itemsLevel() {
+    const { level, isCollectionFlattened } = this.props
+    return isCollectionFlattened ? level : level + 1
   }
 
   handleFocus = (e, item) => {
@@ -179,48 +187,42 @@ class TreeCollection extends Component {
 
   renderChildren() {
     const {
-      expanded,
       collections,
       items,
-      name,
       id,
       renderBeforeItems,
-      renderAfterItems,
-      styles
+      renderAfterItems
     } = this.props
 
     let position = 1
     return (
-      expanded &&
-      this.childCount > 0 && (
-        <ul aria-label={name} css={styles.list} role="group">
-          {renderBeforeItems &&
-            this.renderCollectionChildren(
-              id,
-              renderBeforeItems,
-              position++,
-              'before'
-            )}
-          {collections.map((collection) => {
-            return this.renderCollectionNode(collection, position++)
-          })}
-          {items.map((item) => {
-            return this.renderItemNode(item, position++)
-          })}
-          {renderAfterItems &&
-            this.renderCollectionChildren(
-              id,
-              renderAfterItems,
-              position++,
-              'after'
-            )}
-        </ul>
-      )
+      <>
+        {renderBeforeItems &&
+          this.renderCollectionChildren(
+            id,
+            renderBeforeItems,
+            position++,
+            'before'
+          )}
+        {collections.map((collection) => {
+          return this.renderCollectionNode(collection, position++)
+        })}
+        {items.map((item) => {
+          return this.renderItemNode(item, position++)
+        })}
+        {renderAfterItems &&
+          this.renderCollectionChildren(
+            id,
+            renderAfterItems,
+            position++,
+            'after'
+          )}
+      </>
     )
   }
 
   renderCollectionChildren(collectionId, child, position, keyword) {
-    const { selection, onKeyDown, getItemProps, level, styles } = this.props
+    const { selection, onKeyDown, getItemProps, styles } = this.props
     const key = `${collectionId}_${keyword}`
     const ariaSelected = {}
     if (selection) {
@@ -244,7 +246,7 @@ class TreeCollection extends Component {
         key={key}
         aria-posinset={position}
         aria-setsize={this.childCount}
-        aria-level={level + 1}
+        aria-level={this.itemsLevel}
         {...ariaSelected}
         onClick={(e, n) => {
           if (typeof child.props.onClick === 'function') {
@@ -280,11 +282,12 @@ class TreeCollection extends Component {
         items={collection.items}
         collections={collection.collections}
         numChildren={this.childCount}
-        level={this.props.level + 1}
+        level={this.itemsLevel}
         containerRef={collection.containerRef}
         position={position}
         renderBeforeItems={collection.renderBeforeItems}
         renderAfterItems={collection.renderAfterItems}
+        isCollectionFlattened={false} // only the root needs to be flattened
       />
     )
   }
@@ -292,7 +295,6 @@ class TreeCollection extends Component {
   renderItemNode(item, position) {
     const {
       selection,
-      level,
       onItemClick,
       onKeyDown,
       getItemProps,
@@ -325,7 +327,7 @@ class TreeCollection extends Component {
         role="treeitem"
         aria-label={item.name}
         css={styles.item}
-        aria-level={level + 1}
+        aria-level={this.itemsLevel}
         aria-posinset={position}
         aria-setsize={this.childCount}
         onClick={(e, n) => onItemClick(e, itemHash)}
@@ -353,10 +355,11 @@ class TreeCollection extends Component {
   render() {
     const {
       id,
-
+      name,
       expanded,
       collectionIcon,
       collectionIconExpanded,
+      isCollectionFlattened,
       level,
       position,
       styles
@@ -367,7 +370,9 @@ class TreeCollection extends Component {
       ariaSelected['aria-selected'] =
         this.props.selection === `collection_${id}`
 
-    return (
+    return isCollectionFlattened ? (
+      this.renderChildren()
+    ) : (
       <li
         css={styles.treeCollection}
         tabIndex="-1"
@@ -393,7 +398,11 @@ class TreeCollection extends Component {
           selected={this.props.selection === `collection_${id}`}
           focused={this.state.focused === `collection_${id}`}
         />
-        {this.renderChildren()}
+        {expanded && this.childCount > 0 && (
+          <ul aria-label={name} css={styles.list} role="group">
+            {this.renderChildren()}
+          </ul>
+        )}
       </li>
     )
   }

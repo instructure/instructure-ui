@@ -23,6 +23,7 @@
  */
 
 /** @jsx jsx */
+// eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 

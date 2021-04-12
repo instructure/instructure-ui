@@ -254,7 +254,7 @@ describe('<TreeBrowser />', async () => {
 
       const items = await tree.findAllItems()
 
-      expect(items.length).to.equal(2)
+      expect(items.length).to.equal(3)
     })
 
     it('should render first keyed collection if showRootCollection is true and rootId specified', async () => {

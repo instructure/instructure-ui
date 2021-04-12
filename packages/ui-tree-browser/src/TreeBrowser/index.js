@@ -202,14 +202,10 @@ class TreeBrowser extends Component {
   }
 
   get collections() {
-    const { collections, rootId, showRootCollection } = this.props
+    const { collections, rootId } = this.props
 
-    if (typeof rootId !== 'undefined' && showRootCollection) {
+    if (typeof rootId !== 'undefined') {
       return [collections[rootId]]
-    } else if (typeof rootId !== 'undefined') {
-      return collections[rootId].collections
-        .map((id) => collections[id])
-        .filter((collection) => collection != null)
     } else {
       return Object.keys(collections)
         .map((id) => collections[id])
@@ -358,6 +354,11 @@ class TreeBrowser extends Component {
     }
   }
 
+  getIsFlattened = (collection) => {
+    const { rootId, showRootCollection } = this.props
+    return !showRootCollection && rootId && collection.id === rootId
+  }
+
   getCollectionProps(collection) {
     return {
       id: collection.id,
@@ -368,7 +369,8 @@ class TreeBrowser extends Component {
       collections: this.getSubCollections(collection),
       renderBeforeItems: collection.renderBeforeItems,
       renderAfterItems: collection.renderAfterItems,
-      containerRef: collection.containerRef
+      containerRef: collection.containerRef,
+      isCollectionFlattened: this.getIsFlattened(collection)
     }
   }
 
