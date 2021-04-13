@@ -44,7 +44,8 @@ const args = process.argv.slice(2)
 const firstArg = args[0]
 const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : 'src'
 
-let babelArgs = []
+// uncomment the extensions arg after renaming the files from js -> ts happens
+let babelArgs = ['--extensions', '.ts,.js']
 
 if (args.includes('--copy-files')) {
   babelArgs.push('--copy-files')

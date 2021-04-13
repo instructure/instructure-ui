@@ -19,7 +19,7 @@
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
     "build:watch": "ui-build --watch",
-    "build:types": "ui-scripts --types"
+    "build:types": "rimraf ./types && tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "devDependencies": {

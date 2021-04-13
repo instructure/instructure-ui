@@ -1,7 +1,9 @@
 {
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "allowJs": true,
-    "jsx": "react"
+    "baseUrl": "./packages",
+    "paths": {
+      "@instructure/*": ["*/src"]
+    }
   }
 }

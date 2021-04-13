@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "isolatedModules": true,
+    "jsx": "react"
+  },
+  "exclude": ["node_modules"]
+}

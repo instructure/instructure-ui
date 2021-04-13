@@ -38,6 +38,7 @@ module.exports = function (
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
   const presets = [
+    require('@babel/preset-typescript').default,
     [require('@babel/preset-env').default, envPresetConfig],
     [require('@babel/preset-react').default, { useBuiltIns: true }]
   ]

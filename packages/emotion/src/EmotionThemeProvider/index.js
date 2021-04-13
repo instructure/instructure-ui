@@ -64,9 +64,10 @@ import { merge, cloneDeep } from 'lodash'
  * </EmotionThemeProvider>
  * ```
  *
- * @param {object} theme - A full theme or an override object
+ * @param {object} props - A full theme or an override object
  */
-function EmotionThemeProvider({ children, theme = {} }) {
+function EmotionThemeProvider(props) {
+  const { children, theme = {} } = props
   return <ThemeProvider theme={getTheme(theme)}>{children}</ThemeProvider>
 }
 
