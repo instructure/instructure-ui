@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
+
+### Bug Fixes
+
+- **emotion:** fix ui-babel-preset dependency ([fb1443e](https://github.com/instructure/instructure-ui/commit/fb1443ebb581663160df868f2d44c6927d8aa1ab))
+
 # [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
 
 ### Code Refactoring

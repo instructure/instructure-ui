@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-decorator",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "A utility to wrap (decorates) a React component class adding functionality.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.0.0"
+    "@instructure/ui-babel-preset": "^8.1.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10"
