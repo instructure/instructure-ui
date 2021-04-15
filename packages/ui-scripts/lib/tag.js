@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 const { getPackageJSON, getPackages } = require('@instructure/pkg-utils')
-const { runCommandAsync, error, info } = require('@instructure/command-utils')
+const {
+  runCommandAsync,
+  error,
+  info,
+  confirm
+} = require('@instructure/command-utils')
 
 const { createNPMRCFile } = require('./utils/npm')
 const { getConfig } = require('./utils/config')
