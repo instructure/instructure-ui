@@ -32,6 +32,6 @@
     "@instructure/ui-scripts": "^8.0.0",
     "@instructure/ui-stylelint-config": "^8.0.0",
     "@instructure/ui-webpack-config": "^8.0.0",
-    "html-webpack-plugin": "^3.2.0"
+    "html-webpack-plugin": "^4"
   }
 }
