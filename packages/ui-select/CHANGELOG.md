@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.5.1](https://github.com/instructure/instructure-ui/compare/v7.5.0...v7.5.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* **ui-select:** fix exception when selecting all items and clicking outside ([71421cf](https://github.com/instructure/instructure-ui/commit/71421cf))
+
+
+
+
+
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
 **Note:** Version bump only for package @instructure/ui-select
