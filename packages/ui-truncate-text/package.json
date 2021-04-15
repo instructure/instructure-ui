@@ -17,8 +17,9 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json"
+    "build:watch": "yarn ts:check --watch & ui-build --watch",
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "dependencies": {
