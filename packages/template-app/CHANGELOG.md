@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
+
+### Bug Fixes
+
+- **template-app,ui-template-scripts:** fix template app generation error ([f3a5a7c](https://github.com/instructure/instructure-ui/commit/f3a5a7c07ab32225e9ed3e6f596b093e74563620))
+
 # [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
 
 ### Code Refactoring

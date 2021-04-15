@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
+
+### Bug Fixes
+
+- **emotion:** fix ui-babel-preset dependency ([fb1443e](https://github.com/instructure/instructure-ui/commit/fb1443ebb581663160df868f2d44c6927d8aa1ab))
+- **template-app,ui-template-scripts:** fix template app generation error ([f3a5a7c](https://github.com/instructure/instructure-ui/commit/f3a5a7c07ab32225e9ed3e6f596b093e74563620))
+- **ui:** add SimpleSelect export to @instructure/ui ([e6efc4d](https://github.com/instructure/instructure-ui/commit/e6efc4d5fa3297ef8d54abb27d078cbf8d2bce72))
+- **ui-navigation:** fix AppNav crashing with a single Item ([3023464](https://github.com/instructure/instructure-ui/commit/3023464c1f272c9bbf44a3a8f5d03b595e1d3643))
+- **ui-select:** fix null pointer exception in Select ([04ae3a4](https://github.com/instructure/instructure-ui/commit/04ae3a42f6e35968303ea4ba23137443838dc611))
+- **ui-tree-browser:** fix vertical line extending into collection icon ([eb7eec7](https://github.com/instructure/instructure-ui/commit/eb7eec7e5fa3f2c80001e2f56e7b3ec3e94c9154))
+- **ui-tree-browser:** list root items too when `showRootCollection` is `false` ([d6b5b44](https://github.com/instructure/instructure-ui/commit/d6b5b445dbdf0c806a13225d4f53585748712dda))
+
+### Features
+
+- **ui-simple-select:** add number value option to simple-select ([3c422d8](https://github.com/instructure/instructure-ui/commit/3c422d86754f582d08ed344e7f3f5a32a19710e7))
+
 # [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
 
 The main feature for version 8 is the switch of the theming engine, we replaced the in-house `themeable` theming with the popular [emotion.js](https://emotion.sh/).

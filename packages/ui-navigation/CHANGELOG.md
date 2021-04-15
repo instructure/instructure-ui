@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
+
+### Bug Fixes
+
+- **ui-navigation:** fix AppNav crashing with a single Item ([3023464](https://github.com/instructure/instructure-ui/commit/3023464c1f272c9bbf44a3a8f5d03b595e1d3643))
+
 # [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
 
 ### Code Refactoring

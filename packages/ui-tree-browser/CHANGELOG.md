@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
+
+### Bug Fixes
+
+- **ui-tree-browser:** fix vertical line extending into collection icon ([eb7eec7](https://github.com/instructure/instructure-ui/commit/eb7eec7e5fa3f2c80001e2f56e7b3ec3e94c9154))
+- **ui-tree-browser:** list root items too when `showRootCollection` is `false` ([d6b5b44](https://github.com/instructure/instructure-ui/commit/d6b5b445dbdf0c806a13225d4f53585748712dda))
+
 # [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
 
 ### Code Refactoring

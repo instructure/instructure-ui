@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
+
+### Features
+
+- **ui-simple-select:** add number value option to simple-select ([3c422d8](https://github.com/instructure/instructure-ui/commit/3c422d86754f582d08ed344e7f3f5a32a19710e7))
+
 # [8.0.0](https://github.com/instructure/instructure-ui/compare/v7.5.0...v8.0.0) (2021-03-29)
 
 ### Code Refactoring
