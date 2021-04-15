@@ -99,9 +99,16 @@ module.exports = (argv = {}) => {
       })
     } else if (fse.statSync(currentPath).isFile()) {
       const data = fse.readFileSync(currentPath, 'utf-8')
-
-      const result = template(data)(values)
-
+      let result
+      try {
+        // by default lodash tries to interpret ES6 string literals as its own
+        // literals, disable this behaviour. For details see
+        // https://github.com/lodash/lodash/issues/399
+        result = template(data, { interpolate: /<%=([\s\S]+?)%>/g })(values)
+      } catch (err) {
+        console.error(`Error generating ${destPath}`)
+        throw err
+      }
       const extension = path.extname(currentPath)
       const basename =
         extension === '.ejs'
