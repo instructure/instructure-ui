@@ -234,7 +234,8 @@ class TreeCollection extends Component {
     const itemProps = getItemProps({
       key: key,
       selected: selection === `child_${key}`,
-      focused: this.state.focused === `child_${key}`
+      focused: this.state.focused === `child_${key}`,
+      level: this.itemsLevel
     })
 
     return (
@@ -348,7 +349,8 @@ class TreeCollection extends Component {
       descriptor: this.props.descriptor,
       size: this.props.size,
       variant: this.props.variant,
-      itemIcon: this.props.itemIcon
+      itemIcon: this.props.itemIcon,
+      level: this.itemsLevel
     }
   }
 
@@ -397,6 +399,7 @@ class TreeCollection extends Component {
           containerRef={this.props.containerRef}
           selected={this.props.selection === `collection_${id}`}
           focused={this.state.focused === `collection_${id}`}
+          level={level}
         />
         {expanded && this.childCount > 0 && (
           <ul aria-label={name} css={styles.list} role="group">
