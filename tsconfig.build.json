@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
+    "module": "ES6",
+    "target": "ES6",
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "experimentalDecorators": true,
     "allowJs": true,
     "isolatedModules": true,
-    "jsx": "react"
+    "jsx": "react",
+    "moduleResolution": "node",
+    // turn these settings on when we start to migrate the codebase
+    "checkJs": false,
+    "noImplicitAny": false,
+    "strict": false
   },
   "exclude": ["node_modules"]
 }
