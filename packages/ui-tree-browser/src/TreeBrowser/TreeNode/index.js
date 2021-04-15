@@ -61,6 +61,7 @@ class TreeNode extends Component {
     focused: PropTypes.bool,
     itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     thumbnail: PropTypes.string,
+    level: PropTypes.number,
     /**
      * The children to be rendered within the `<TreeNode />`
      */
@@ -82,6 +83,7 @@ class TreeNode extends Component {
     children: undefined,
     itemIcon: undefined,
     thumbnail: undefined,
+    level: undefined,
     containerRef: function () {},
     parentRef: undefined,
     onKeyDown: undefined,

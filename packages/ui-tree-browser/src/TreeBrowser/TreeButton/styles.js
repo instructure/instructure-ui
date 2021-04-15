@@ -46,7 +46,9 @@ const transform = keyframes`{
  * @return {Object} The final style object, which will be used in the component
  */
 const generateStyles = (componentTheme, props) => {
-  const { size, variant, selected, focused } = props
+  const { size, variant, selected, focused, level } = props
+
+  const isRootButton = level && level === 1
 
   const sizeMap = {
     small: {
@@ -217,22 +219,23 @@ const generateStyles = (componentTheme, props) => {
       animationTimingFunction: 'ease-out',
       animationDelay: '0.2s',
       outline: '0',
-      ...(variant === 'folderTree' && {
-        '&::before': {
-          content: '""',
-          height: componentTheme.borderWidth,
-          background: componentTheme.borderColor,
-          position: 'absolute',
-          insetInlineStart: '0',
-          insetInlineEnd: 'auto',
-          top: '50%',
-          ...(selected && { visibility: 'hidden' }),
-          ...sizeMap[size][variant].before
-        },
-        '&:hover::before': {
-          visibility: 'hidden'
-        }
-      }),
+      ...(variant === 'folderTree' &&
+        !isRootButton && {
+          '&::before': {
+            content: '""',
+            height: componentTheme.borderWidth,
+            background: componentTheme.borderColor,
+            position: 'absolute',
+            insetInlineStart: '0',
+            insetInlineEnd: 'auto',
+            top: '50%',
+            ...(selected && { visibility: 'hidden' }),
+            ...sizeMap[size][variant].before
+          },
+          '&:hover::before': {
+            visibility: 'hidden'
+          }
+        }),
       '&::after': {
         content: '""',
         pointerEvents: 'none',

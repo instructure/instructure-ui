@@ -68,6 +68,7 @@ class TreeButton extends Component {
     expanded: PropTypes.bool,
     selected: PropTypes.bool,
     focused: PropTypes.bool,
+    level: PropTypes.number,
     containerRef: function () {}
   }
 
@@ -86,6 +87,7 @@ class TreeButton extends Component {
     thumbnail: undefined,
     expanded: false,
     descriptor: undefined,
+    level: undefined,
     containerRef: function () {}
   }
   componentDidMount() {
