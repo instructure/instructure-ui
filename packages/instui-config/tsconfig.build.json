@@ -3,6 +3,5 @@
   "compilerOptions": {
     "outDir": "./types"
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/__examples__/**/*", "src/**/__tests__/**/*"]
+  "include": ["codemod-configs/**/*", "scripts/**/*"]
 }
