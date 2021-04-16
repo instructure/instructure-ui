@@ -79,7 +79,8 @@ const generateStyle = (componentTheme, props, state) => {
       ? componentTheme.textDecorationWithinText
       : componentTheme.textDecorationOutsideText,
     '&:focus': {
-      color: componentTheme.color
+      color: componentTheme.color,
+      outlineColor: componentTheme.focusOutlineColor
     },
     '&:hover, &:active': {
       color: componentTheme.hoverColor,
