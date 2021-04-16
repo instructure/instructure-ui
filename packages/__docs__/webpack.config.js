@@ -22,34 +22,41 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const React = require('react')
-const baseConfig = require('@instructure/ui-webpack-config')
-
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = process.env.DEBUG || ENV === 'development'
+const path = require('path')
+const baseConfig = require('@instructure/ui-webpack-config')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const outputPath = path.resolve(__dirname, '__build__')
-
-// eslint-disable-next-line no-console
-console.info(`Building documentation with React version ${React.version}...`)
+const resolveAliases = DEBUG ? { resolve: require('./resolve') } : {}
 
 module.exports = {
   ...baseConfig,
   entry: {
+    // main entry point
+    main: './src/index.js',
     // Note: these entries have to keep these names so that old codepens still work
     common: ['@instructure/ui-polyfill-loader!', 'react', 'react-dom'],
     globals: './globals.js'
   },
   output: {
     path: outputPath,
-    filename: '[name].js'
+    filename: '[name].[contenthash].js'
   },
   devServer: {
-    disableHostCheck: true,
     contentBase: outputPath,
     host: '0.0.0.0'
   },
-  plugins: [...baseConfig.plugins, ...require('./plugins')],
-  resolve: DEBUG ? require('./resolve') : { mainFields: ['main'] }
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      chunks: ['main']
+    })
+  ],
+  optimization: {
+    usedExports: true
+  },
+  ...resolveAliases,
+  mode: 'production'
 }

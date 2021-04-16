@@ -94,6 +94,8 @@ class Rating extends Component {
     valueMax: undefined
   }
 
+  static Icon = RatingIcon
+
   componentDidMount() {
     this.props.makeStyles()
   }

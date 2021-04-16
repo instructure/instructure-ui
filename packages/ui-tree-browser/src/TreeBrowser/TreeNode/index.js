@@ -38,7 +38,7 @@ import generateComponentTheme from '../TreeButton/theme'
 /**
 ---
 parent: TreeBrowser
-id: TreeNode
+id: TreeBrowser.Node
 ---
 A helper class used to render the :renderBeforeItems and :renderAfterItems
 in the TreeBrowser.

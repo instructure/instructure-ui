@@ -1,4 +1,4 @@
-## __docs__
+## Instructure-UI showcase and documentation app
 
 Generates documentation for the packages in this repo.
 
@@ -7,5 +7,5 @@ Generates documentation for the packages in this repo.
 From the root of the `instructure-ui` repo:
 
 1. Run `yarn`
-1. Run `yarn start`
-1. Open [http://localhost:8001](http://localhost:8001) in your browser
+1. Run `yarn dev`
+1. Open [http://localhost:8080](http://localhost:8080) in your browser

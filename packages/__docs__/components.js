@@ -110,9 +110,10 @@ export { View, ContextView } from '@instructure/ui-view'
 export { Tray } from '@instructure/ui-tray'
 export { Spinner } from '@instructure/ui-spinner'
 export * from '@instructure/ui-icons'
-export {
-  Guidelines,
-  Figure,
-  ToggleBlockquote
-} from '@instructure/ui-docs-client'
+// eslint-disable-next-line no-restricted-imports
+export { Guidelines } from './src/Guidelines'
+// eslint-disable-next-line no-restricted-imports
+export { Figure } from './src/Figure'
+// eslint-disable-next-line no-restricted-imports
+export { ToggleBlockquote } from './src/ToggleBlockquote'
 export { EmotionThemeProvider } from '@instructure/emotion'

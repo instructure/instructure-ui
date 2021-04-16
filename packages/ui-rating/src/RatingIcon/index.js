@@ -37,6 +37,7 @@ import generateComponentTheme from './theme'
 /**
 ---
 parent: Rating
+id: Rating.Icon
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
