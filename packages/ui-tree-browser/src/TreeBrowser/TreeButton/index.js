@@ -64,6 +64,7 @@ class TreeButton extends Component {
     expanded: PropTypes.bool,
     selected: PropTypes.bool,
     focused: PropTypes.bool,
+    level: PropTypes.number,
     containerRef: function () {}
   }
 
@@ -82,6 +83,7 @@ class TreeButton extends Component {
     thumbnail: undefined,
     expanded: false,
     descriptor: undefined,
+    level: undefined,
     containerRef: function () {}
   }
 
@@ -137,7 +139,8 @@ class TreeButton extends Component {
       selected,
       focused,
       variant,
-      size
+      size,
+      level
     } = this.props
 
     const classes = {
@@ -147,6 +150,7 @@ class TreeButton extends Component {
       [styles.expanded]: expanded,
       [styles.selected]: selected,
       [styles.focused]: focused,
+      [styles.isRootButton]: level && level === 1,
       [styles.ie11]: isIE11
     }
 

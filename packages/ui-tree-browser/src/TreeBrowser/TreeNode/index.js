@@ -57,6 +57,7 @@ class TreeNode extends Component {
     focused: PropTypes.bool,
     itemIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     thumbnail: PropTypes.string,
+    level: PropTypes.number,
     /**
      * The children to be rendered within the `<TreeNode />`
      */
@@ -78,6 +79,7 @@ class TreeNode extends Component {
     children: undefined,
     itemIcon: undefined,
     thumbnail: undefined,
+    level: undefined,
     containerRef: function () {},
     parentRef: undefined,
     onKeyDown: undefined,
@@ -105,7 +107,7 @@ class TreeNode extends Component {
   }
 
   render() {
-    const { selected, focused, variant, size, children } = this.props
+    const { selected, focused, variant, size, children, level } = this.props
 
     const classes = {
       [styles.root]: true,
@@ -114,6 +116,7 @@ class TreeNode extends Component {
       [styles.expanded]: false,
       [styles.selected]: selected,
       [styles.focused]: focused,
+      [styles.isRootButton]: level && level === 1,
       [styles.ie11]: isIE11
     }
 
