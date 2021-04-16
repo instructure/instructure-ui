@@ -33,6 +33,25 @@ import { requestAnimationFrame } from './requestAnimationFrame'
  * ### This utility is deprecated since version __8.0__ and will be permanently deleted in version 9.0.
  * *Please use the native [DOM ResizeObserver API](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) instead of this.*
  *
+ *
+ * Example usage of the `ResizeObserver`:
+ *  ```js
+ *    const observer = new ResizeObserver((entries) => {
+ *    for (let entry of entries) {
+ *       const size = {
+ *        width: entry.contentRect.width
+ *       }
+ *
+ *       if (size.width !== origSize.width) {
+ *         // call your handler function here
+ *         this._debounced(size)
+ *      }
+ *     }
+ *   })
+ *
+ *   observer.observe(content)
+ *   ```
+ *
  * Adds a listener to an element and calls a specified handler function whenever the size changes.
  * @deprecated since version 8.0
  * @module
