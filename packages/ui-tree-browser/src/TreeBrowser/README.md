@@ -354,9 +354,19 @@ class Example extends React.Component {
       showRootCollection: true
     }
   }
+
   handleSwitch = () => {
     this.setState({ showRootCollection: !this.state.showRootCollection })
   }
+
+  renderNode = () => {
+    return (
+      <TreeBrowser.Node itemIcon={<IconPlusLine />}>
+        More
+      </TreeBrowser.Node>
+    )
+  }
+
   render () {
     return (
       <>
@@ -376,7 +386,8 @@ class Example extends React.Component {
               name: "Assignments",
               collections: [2,3],
               items: [3, 5],
-              descriptor: "Class Assignments"
+              descriptor: "Class Assignments",
+              renderAfterItems: this.renderNode()
             },
             2: { id: 2, name: "English Assignments", collections: [4], items: [] },
             3: { id: 3, name: "Math Assignments", collections: [5], items: [1,2] },

@@ -133,7 +133,7 @@
 }
 
 .folderTree {
-  &::before {
+  &:not(.isRootButton)::before {
     content: "";
     height: var(--borderWidth);
     background: var(--borderColor);
@@ -316,5 +316,7 @@
     color: var(--selectedTextColor);
   }
 }
+
+.isRootButton {}
 
 /* stylelint-enable no-descending-specificity, selector-max-class */
