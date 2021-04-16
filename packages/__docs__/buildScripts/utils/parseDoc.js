@@ -36,7 +36,7 @@ module.exports = function (resourcePath, source, errorHandler) {
   if (extension === '.md') {
     doc = { description: source }
   } else if (extension === '.js') {
-    doc = getReactDoc(source, errorHandler)
+    doc = getReactDoc(source, resourcePath, errorHandler)
     if (!doc.props) {
       doc = getJSDoc(source, errorHandler)
     }

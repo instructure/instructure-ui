@@ -40,5 +40,8 @@ module.exports = {
   optimization: require('./optimization'),
   performance: {
     hints: ENV === 'production' ? 'warning' : false
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
   }
 }
