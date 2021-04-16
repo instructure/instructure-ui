@@ -38,7 +38,7 @@ const babelLoader = {
 
 const rules = [
   {
-    test: /\.m?js$/,
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
     exclude: [...exclude, /\.examples\.js$/],
     use: [
       {
