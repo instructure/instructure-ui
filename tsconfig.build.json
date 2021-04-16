@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "module": "ES6",
-    "target": "ES6",
+    // use Node's module resolution algorithm, instead of the legacy TS one
+    "moduleResolution": "node",
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
@@ -9,11 +10,23 @@
     "allowJs": true,
     "isolatedModules": true,
     "jsx": "react",
-    "moduleResolution": "node",
+    // interop between ESM and CJS. Recommended by TS
+    "esModuleInterop": true,
+    // significant perf increase by skipping checking .d.ts files, particularly those in node_modules. Recommended by TS
+    "skipLibCheck": true,
+    // error out if import and file system have a casing mismatch. Recommended by TS
+    "forceConsistentCasingInFileNames": true,
+
     // turn these settings on when we start to migrate the codebase
     "checkJs": false,
-    "noImplicitAny": false,
-    "strict": false
+    "noImplicitAny": true,
+    "strict": true,
+    // linter checks for common issues
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    // noUnused* overlap with @typescript-eslint/no-unused-vars, can disable if duplicative
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": ["node_modules"]
 }
