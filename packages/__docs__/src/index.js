@@ -22,7 +22,17 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  // esModules:true is one thing that needed to enable tree shaking
-  presets: [require('@instructure/ui-babel-preset')({ esModules: true })]
-}
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { App } from './App'
+import { canvas } from '@instructure/ui-themes'
+import { EmotionThemeProvider } from '@instructure/emotion'
+import '../globals'
+
+ReactDOM.render(
+  <EmotionThemeProvider theme={canvas}>
+    <App />
+  </EmotionThemeProvider>,
+  document.getElementById('app')
+)

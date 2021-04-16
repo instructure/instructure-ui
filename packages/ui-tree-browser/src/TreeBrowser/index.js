@@ -40,6 +40,7 @@ import { TreeNode } from './TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
+import TreeButton from './TreeButton'
 
 /**
 ---
@@ -139,6 +140,8 @@ class TreeBrowser extends Component {
   }
 
   static Node = TreeNode
+  static Collection = TreeCollection
+  static Button = TreeButton
 
   constructor(props) {
     super(props)

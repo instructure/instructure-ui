@@ -22,7 +22,38 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  // esModules:true is one thing that needed to enable tree shaking
-  presets: [require('@instructure/ui-babel-preset')({ esModules: true })]
+const path = require('path')
+const getJSDoc = require('./getJSDoc')
+const getCodeDoc = require('./getCodeDoc')
+const getReactDoc = require('./getReactDoc')
+const getFrontMatter = require('./getFrontMatter')
+
+module.exports = function (resourcePath, source, errorHandler) {
+  const extension = path.extname(resourcePath)
+
+  let doc
+
+  if (extension === '.md') {
+    doc = { description: source }
+  } else if (extension === '.js') {
+    doc = getReactDoc(source, errorHandler)
+    if (!doc.props) {
+      doc = getJSDoc(source, errorHandler)
+    }
+  } else {
+    doc = getCodeDoc(source, errorHandler)
+  }
+
+  // the YAML description in a JSDoc comment at the top of some files
+  let frontMatter
+  try {
+    frontMatter = getFrontMatter(doc.description)
+  } catch (e) {
+    throw `Failed to parse YAML "${doc.description}" \nexception is \n${e}`
+  }
+
+  return {
+    ...doc,
+    ...frontMatter
+  }
 }
