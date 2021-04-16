@@ -1,8 +1,8 @@
 {
   "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "./types"
+    "outDir": "./types",
+    "module": "CommonJS"
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/__examples__/**/*", "src/**/__tests__/**/*"]
+  "include": ["./**/*"]
 }
