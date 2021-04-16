@@ -59,10 +59,15 @@ const { resolver, parse } = require('react-docgen')
  * }
  * ```
  */
-module.exports = function parsePropValues(fileSource) {
+module.exports = function parsePropValues(fileSource, fileName) {
   let parsedSrc = {}
   try {
-    parsedSrc = parse(fileSource, resolver.findAllExportedComponentDefinitions)
+    parsedSrc = parse(
+      fileSource,
+      resolver.findAllExportedComponentDefinitions,
+      null,
+      { filename: fileName }
+    )
     if (Array.isArray(parsedSrc)) {
       parsedSrc = parsedSrc.pop()
     }

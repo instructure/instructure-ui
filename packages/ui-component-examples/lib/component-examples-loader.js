@@ -76,7 +76,7 @@ module.exports = function componentExamplesLoader(source, map, meta) {
       if (!err) {
         loader.addDependency(componentPath)
         try {
-          generatedPropValues = parsePropValues(componentSrc)
+          generatedPropValues = parsePropValues(componentSrc, componentPath)
         } catch (error) {
           loader.emitWarning(error)
         }
