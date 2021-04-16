@@ -25,6 +25,6 @@ The tables below show what will be removed and what are they replaced with. We a
 
 ### Deprecated Utilities
 
-| Utility                                 | Substitute                                                                                                |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| [addResizeListener](#addResizeListener) | Use tha native [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) utility. |
+| Utility                                 | Substitute                                                                                                                                          |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [addResizeListener](#addResizeListener) | Use the native [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) utility. Example usage: [here](#addResizeListener) |

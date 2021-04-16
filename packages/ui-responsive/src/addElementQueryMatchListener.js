@@ -33,7 +33,10 @@ import { debounce } from '@instructure/debounce'
  * Given an object of named queries, listens for changes in the
  * element size and notifies which queries match via a function
  * callback. The callback method is only called when the query
- * matches change, not on all element resizes.
+ * matches change, not on all element resizes. (If you are looking
+ * to call a method on all element resizes use
+ * [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) instead)
+ *
  *
  * This function shares an interface with
  * [addMediaQueryMatchListener](#addMediaQueryMatchListener)
@@ -105,12 +108,7 @@ function addElementQueryMatchListener(query, el, cb) {
 
   elementResizeListener.observe(node)
 
-  const newMatches = update({ width, height }, query, node, matches)
-
-  if (newMatches) {
-    matches = newMatches
-    cb(matches)
-  }
+  update({ width, height })
 
   return {
     remove() {
