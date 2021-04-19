@@ -40,7 +40,7 @@ import { TreeNode } from './TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import TreeButton from './TreeButton'
+import { TreeButton } from './TreeButton'
 
 /**
 ---
@@ -125,7 +125,11 @@ class TreeBrowser extends Component {
     /**
      * An optional label to assist visually impaired users
      */
-    treeLabel: PropTypes.string
+    treeLabel: PropTypes.string,
+    /**
+     * TODO add desc
+     */
+    contentRenderer: PropTypes.func
   }
 
   static defaultProps = {
@@ -144,7 +148,8 @@ class TreeBrowser extends Component {
     onCollectionToggle: function (collection) {},
     rootId: undefined,
     expanded: undefined,
-    treeLabel: undefined
+    treeLabel: undefined,
+    contentRenderer: undefined
   }
 
   static Node = TreeNode
@@ -402,6 +407,7 @@ class TreeBrowser extends Component {
         numChildren={this.collections.length}
         level={1}
         position={1}
+        contentRenderer={this.props.contentRenderer}
       />
     ))
   }
