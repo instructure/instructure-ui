@@ -69,7 +69,8 @@ class TreeButton extends Component {
     selected: PropTypes.bool,
     focused: PropTypes.bool,
     level: PropTypes.number,
-    containerRef: function () {}
+    containerRef: function () {},
+    contentRenderer: function () {}
   }
 
   static defaultProps = {
@@ -88,13 +89,29 @@ class TreeButton extends Component {
     expanded: false,
     descriptor: undefined,
     level: undefined,
-    containerRef: function () {}
+    containerRef: function () {},
+    contentRenderer: undefined
   }
+
   componentDidMount() {
     this.props.makeStyles()
   }
   componentDidUpdate() {
     this.props.makeStyles()
+  }
+
+  defaultContentRenderer(props) {
+    const { name, descriptor, styles } = props
+    return (
+      <span css={styles.text}>
+        <span css={styles.textName}>{name}</span>
+        {descriptor ? (
+          <span css={styles.textDescriptor} title={descriptor}>
+            {descriptor}
+          </span>
+        ) : null}
+      </span>
+    )
   }
 
   renderImage() {
@@ -147,8 +164,10 @@ class TreeButton extends Component {
   }
 
   render() {
-    const { name, descriptor, styles } = this.props
-
+    const { styles, contentRenderer } = this.props
+    const cRenderer = contentRenderer
+      ? contentRenderer
+      : this.defaultContentRenderer
     // VoiceOver can't navigate without the buttons, even though they don't do anything
     return (
       <button
@@ -159,14 +178,7 @@ class TreeButton extends Component {
       >
         <span css={styles.layout}>
           {this.renderImage()}
-          <span css={styles.text}>
-            <span css={styles.textName}>{name}</span>
-            {descriptor ? (
-              <span css={styles.textDescriptor} title={descriptor}>
-                {descriptor}
-              </span>
-            ) : null}
-          </span>
+          {cRenderer(this.props)}
         </span>
       </button>
     )

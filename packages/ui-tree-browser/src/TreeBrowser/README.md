@@ -147,7 +147,8 @@ render(<Example/>)
 
 ### Customizing Icons
 
-All of the `<TreeBrowser>` icons are customizable. The following example sets custom icons for the expanded and collapsed state of the collections along with each of the items.
+All of the `<TreeBrowser>` icons are customizable.
+The following example sets custom icons for the expanded and collapsed state of the collections via `collectionIcon` and `collectionIconExpanded` and custom item icons via `itemIcon`.
 
 ```js
 ---
@@ -176,7 +177,9 @@ example: true
 />
 ```
 
-You can also specify a different icon for each item if needed. To do this, use `getItemProps`. This function is called with the props for each item and returns new props you specify. These props are then passed to the item when it is rendered. In the following example, we override the `itemIcon` prop depending on the item name.
+#### Different icons for each item
+
+One way do this is to use `getItemProps`. This function is called with the props for each item and returns new props you specify. These props are then passed to the item when it is rendered. In the following example, we override the `itemIcon` prop depending on the item name.
 
 ```js
 ---
@@ -219,9 +222,7 @@ example: true
 />
 ```
 
-### Thumbnails
-
-An example of a `<TreeBrowser />` with thumbnail images.
+Another way to do it is to specify the `thumbnail` property in the `items` collection. This also overrides `itemIcon`.
 
 ```js
 ---
@@ -248,9 +249,47 @@ example: true
 />
 ```
 
-### Collection Props, rendering items before and after nodes
+### Rendering custom content in nodes
 
-An example of a `<TreeBrowser />` with different collection props.
+This allows you to render custom content in the area where the text and descriptor are.
+
+```js
+---
+example: true
+---
+<TreeBrowser
+  collections={{
+    1: {
+      id: 1,
+      name: "Pandas",
+      collections: [],
+      items: [1,2,3]
+    },
+  }}
+  items={{
+    1: { id: 1, name: "Bao Bao"},
+    2: { id: 2, name: "Bei Bei" },
+    3: { id: 3, name: "Mei Xiang"}
+  }}
+  defaultExpanded={[1]}
+  itemIcon={IconUserSolid}
+  rootId={1}
+  size="large"
+  contentRenderer={(props) => {
+    if (props.level > 1) {
+      return <div style={{display: 'flex', alignItems: 'flex-end'}}>
+        <span css={props.styles.textName}>{props.name}</span>
+        <Tag text="done" size="small" margin="0 xx-small 0 xx-small" />
+        <Tag text="class A" size="small" />
+      </div>
+    }
+    return  <span css={props.styles.textName}>{props.name}</span>}}
+/>
+```
+
+### Rendering custom items before and after nodes
+
+An example of a `<TreeBrowser />` with a custom item after each collection.
 
 ```js
 ---
