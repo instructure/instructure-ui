@@ -64,7 +64,8 @@
     "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged",
     "husky:pre-push": "yarn lint:commit",
     "build-storybook": "lerna run build-storybook --stream --scope docs-examples",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "ts:check": "lerna run ts:check --stream"
   },
   "license": "MIT",
   "resolutions": {
