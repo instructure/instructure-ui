@@ -34,7 +34,8 @@ try {
   publish({
     packageName: pkgJSON.name,
     currentVersion: pkgJSON.version,
-    packageConfig: getConfig(pkgJSON)
+    packageConfig: getConfig(pkgJSON),
+    releaseType: process.argv[3]
   })
 } catch (err) {
   error(err)
@@ -42,7 +43,14 @@ try {
 }
 
 async function publish(options) {
-  const { packageName, currentVersion, packageConfig } = options
+  const { packageName, currentVersion, packageConfig, releaseType } = options
+
+  //If on legacy branch, and it is a release, its tag should say vx_maintenance
+  const releaseTag =
+    releaseType === 'maintenance'
+      ? `v${currentVersion.split('.')[0]}_maintenance`
+      : 'latest'
+
   //Set up git user.name and user.email
   setupGit()
   //create NPM RC and try to auth in to npm
@@ -56,7 +64,7 @@ async function publish(options) {
   info(infoMessage)
 
   const versionToRelease = isRelease ? currentVersion : 'prerelease'
-  const tag = isRelease ? 'latest' : 'snapshot'
+  const tag = isRelease ? releaseTag : 'snapshot'
   try {
     await publishPackages(packageName, versionToRelease, tag)
   } catch (e) {
