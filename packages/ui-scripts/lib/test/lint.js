@@ -21,26 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 const {
   runCommandsConcurrently,
   getCommand
 } = require('@instructure/command-utils')
 
-const paths =
-  process.argv.slice(2).filter((arg) => arg.indexOf('--') == -1) || []
+const paths = process.argv.slice(2).filter((arg) => !arg.includes('--'))
 let jspaths = ['.']
-let csspaths = ['**/*.css']
+let csspaths = []
 
 if (paths.length) {
-  jspaths = paths.filter((p) => p.indexOf('.js') > -1)
-  csspaths = paths.filter((p) => p.indexOf('.css') > -1) || ['**/*.css']
+  jspaths = paths.filter((path) => path.includes('.js'))
+  csspaths = paths.filter((path) => path.includes('.css'))
 }
 
 let commands = {}
 
 if (jspaths.length) {
-  commands['eslint'] = getCommand('eslint', jspaths)
+  commands['eslint'] = getCommand('eslint', [
+    ...jspaths,
+    '--ext .js,.jsx,.ts,.tsx'
+  ])
 }
 
 if (csspaths.length) {

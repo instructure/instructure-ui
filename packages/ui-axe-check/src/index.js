@@ -21,5 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export runAxeCheck from './runAxeCheck'
-export default from './runAxeCheck'
+import runAxeCheck from './runAxeCheck'
+
+export { runAxeCheck }
+export default runAxeCheck

@@ -35,9 +35,7 @@ const parsePropValues = require('./parsePropValues')
 module.exports = function componentExamplesLoader(source, map, meta) {
   this.cacheable && this.cacheable()
 
-  const loader = this
-  const callback = loader.async()
-
+  const callback = this.async()
   const config = {
     maxExamples: 500,
     ...loadConfig('examples', {})
@@ -49,7 +47,7 @@ module.exports = function componentExamplesLoader(source, map, meta) {
 
   // TODO do not use this method, its an internal webpack feature. See
   // https://github.com/webpack/loader-utils/issues/42
-  const configPath = `!!${loaderUtils.getRemainingRequest(loader)}`
+  const configPath = `!!${loaderUtils.getRemainingRequest(this)}`
 
   const getComponentPath =
     typeof config.getComponentPath === 'function'
@@ -71,14 +69,14 @@ module.exports = function componentExamplesLoader(source, map, meta) {
     `${componentPath}${!componentPath.includes('.') ? '.js' : ''}`,
     'utf8',
     (err, componentSrc) => {
-      err && loader.emitWarning(err)
+      err && this.emitWarning(err)
       let generatedPropValues = {}
       if (!err) {
-        loader.addDependency(componentPath)
+        this.addDependency(componentPath)
         try {
           generatedPropValues = parsePropValues(componentSrc, componentPath)
         } catch (error) {
-          loader.emitWarning(error)
+          this.emitWarning(error)
         }
       }
       const result = `

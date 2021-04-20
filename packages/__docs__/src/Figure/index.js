@@ -98,6 +98,7 @@ class Figure extends Component {
     const { styles } = this.props
     const mergedProps = { ...this.props, ...props }
     const { title, caption, recommendation, iconTitle, children } = mergedProps
+    const RecommendationIcon = this.recommendationIcon
 
     return (
       <View
@@ -111,7 +112,7 @@ class Figure extends Component {
         <span css={styles.content}>
           {recommendation !== 'none' ? (
             <span css={styles.iconContainer}>
-              <this.recommendationIcon
+              <RecommendationIcon
                 title={iconTitle}
                 size="x-small"
                 inline={false}
