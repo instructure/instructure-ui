@@ -41,11 +41,13 @@ const { createNPMRCFile } = require('./utils/npm')
 try {
   const pkgJSON = getPackageJSON()
   // Arguments
-  // 1: version to publish. If current version, use 'latest' otherwise e.g.: 8.1.3
-  // 2: publish type. defaults to latest. If set to 'maintenance', it will publish with vx_maintenance tag
+  // 1: version to publish. If current version, use 'current' otherwise e.g.: 8.1.3
+  // 2: publish type. defaults to current. If set to 'maintenance', it will publish with vx_maintenance tag
   // e.g.: ui-scripts --fix-publish 5.12.2 maintenance
   const releaseVersion =
-    process.argv[3] === 'latest' ? pkgJSON.version : process.argv[3]
+    process.argv[3] === 'current' || !process.argv[3]
+      ? pkgJSON.version
+      : process.argv[3]
   fixPublish(
     pkgJSON.name,
     pkgJSON.version,
