@@ -43,7 +43,12 @@ try {
 }
 
 async function publish(options) {
-  const { packageName, currentVersion, packageConfig, releaseType } = options
+  const {
+    packageName,
+    currentVersion,
+    packageConfig,
+    releaseType = 'latest'
+  } = options
 
   //If on legacy branch, and it is a release, its tag should say vx_maintenance
   const releaseTag =
