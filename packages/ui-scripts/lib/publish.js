@@ -30,7 +30,9 @@ const { getConfig } = require('./utils/config')
 
 try {
   const pkgJSON = getPackageJSON()
-
+  // Arguments
+  // 1: publish type. defaults to latest. If set to 'maintenance', it will publish with vx_maintenance tag
+  // e.g.: ui-scripts --publish maintenance
   publish({
     packageName: pkgJSON.name,
     currentVersion: pkgJSON.version,
