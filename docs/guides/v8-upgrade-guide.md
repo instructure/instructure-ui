@@ -16,7 +16,7 @@ We recommend upgrading your application for each major version gradually, e.g. i
 embed: true
 ---
 <ToggleBlockquote
-  summary="Why we switched from emotion to themeable"
+  summary="Why we switched from Themeable to Emotion"
 >
   <ToggleBlockquote.Paragraph>
     We feel that it is very important that InstUI is easy to use and learn. To accomplish this, we try to use well-known open source solutions whenever possible.
