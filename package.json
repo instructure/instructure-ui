@@ -73,12 +73,14 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
     "husky": "^6.0.0",
     "lerna": "^4",
     "lint-staged": "^10",
     "npm-run-all": "^4.1.5",
-    "yarn": "^1.17.3",
-    "typescript": "^4"
+    "typescript": "^4",
+    "yarn": "^1.17.3"
   },
   "engines": {
     "node": ">=12.20",
@@ -102,7 +104,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.js,*.ts,*.tsx": [
       "eslint",
       "prettier --write"
     ],
