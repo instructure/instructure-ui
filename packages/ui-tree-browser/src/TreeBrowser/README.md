@@ -251,7 +251,9 @@ example: true
 
 ### Rendering custom content in nodes
 
-This allows you to render custom content in the area where the text and descriptor are.
+This allows you to render custom content in the area where the text and descriptor are. To meet a11y standards make sure to
+have the right contrast ration on hovered and selected states, you can use the `selected` and `focused` attributes in the
+given `props` and `TreeButton`s built-in CSS classes.
 
 ```js
 ---
@@ -263,27 +265,29 @@ example: true
       id: 1,
       name: "Pandas",
       collections: [],
-      items: [1,2,3]
+      items: [1, 2, 3]
     },
   }}
   items={{
-    1: { id: 1, name: "Bao Bao"},
+    1: { id: 1, name: "Bao Bao" },
     2: { id: 2, name: "Bei Bei" },
-    3: { id: 3, name: "Mei Xiang"}
+    3: { id: 3, name: "Mei Xiang" }
   }}
   defaultExpanded={[1]}
   itemIcon={IconUserSolid}
   rootId={1}
   size="large"
-  contentRenderer={(props) => {
+  renderContent={(props)=> {
+    // XYZ-treeButton__textName is the CSS class used by TreeButton
     if (props.level > 1) {
-      return <div style={{display: 'flex', alignItems: 'flex-end'}}>
-        <span css={props.styles.textName}>{props.name}</span>
-        <Tag text="done" size="small" margin="0 xx-small 0 xx-small" />
-        <Tag text="class A" size="small" />
+      return <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <span class="custom-treeButton__textName">{props.name}</span>
+        <Tag text="done" size="small" margin="0 xx-small 0 xx-small"/>
+        <Tag text="class A" size="small"/>
       </div>
     }
-    return  <span css={props.styles.textName}>{props.name}</span>}}
+    return <span class="custom-treeButton__textName">{props.name}</span>
+  }}
 />
 ```
 

@@ -127,9 +127,11 @@ class TreeBrowser extends Component {
      */
     treeLabel: PropTypes.string,
     /**
-     * TODO add desc
+     * A function that can be used to customize content in TreeNodes. It gets called for every node
+     * on every render if not null. It should accept 1 parameter that contains the props passed to this node
+     * and return the JSX that should be rendered.
      */
-    contentRenderer: PropTypes.func
+    renderContent: PropTypes.func
   }
 
   static defaultProps = {
@@ -149,7 +151,7 @@ class TreeBrowser extends Component {
     rootId: undefined,
     expanded: undefined,
     treeLabel: undefined,
-    contentRenderer: undefined
+    renderContent: undefined
   }
 
   static Node = TreeNode
@@ -407,7 +409,7 @@ class TreeBrowser extends Component {
         numChildren={this.collections.length}
         level={1}
         position={1}
-        contentRenderer={this.props.contentRenderer}
+        renderContent={this.props.renderContent}
       />
     ))
   }

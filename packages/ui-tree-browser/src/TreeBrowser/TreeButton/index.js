@@ -70,7 +70,7 @@ class TreeButton extends Component {
     focused: PropTypes.bool,
     level: PropTypes.number,
     containerRef: function () {},
-    contentRenderer: function () {}
+    renderContent: function () {}
   }
 
   static defaultProps = {
@@ -90,7 +90,7 @@ class TreeButton extends Component {
     descriptor: undefined,
     level: undefined,
     containerRef: function () {},
-    contentRenderer: undefined
+    renderContent: undefined
   }
 
   componentDidMount() {
@@ -164,9 +164,9 @@ class TreeButton extends Component {
   }
 
   render() {
-    const { styles, contentRenderer } = this.props
-    const cRenderer = contentRenderer
-      ? contentRenderer
+    const { styles, renderContent } = this.props
+    const cRenderer = renderContent
+      ? renderContent
       : this.defaultContentRenderer
     // VoiceOver can't navigate without the buttons, even though they don't do anything
     return (
