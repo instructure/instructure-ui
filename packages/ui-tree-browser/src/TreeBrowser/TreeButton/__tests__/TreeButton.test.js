@@ -135,4 +135,18 @@ describe('<TreeButton />', async () => {
       expect(await TreeButtonLocator.find('img')).to.exist()
     })
   })
+
+  describe('renderContent', async () => {
+    it('should render the content passed to renderContent', async () => {
+      await mount(
+        <TreeButton
+          id="1"
+          renderContent={(props) => <div className="test1">abcd</div>}
+        />
+      )
+
+      const customElement = await TreeButtonLocator.find('[class$="test1"]')
+      expect(customElement).to.exist()
+    })
+  })
 })
