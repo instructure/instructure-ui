@@ -164,7 +164,7 @@ const generateStyles = (componentTheme, props) => {
           marginInlineEnd: `calc(${componentTheme.baseSpacingLarge} / 2)`,
           marginInlineStart: '0'
         },
-        thumbnai: {
+        thumbnail: {
           height: `calc(${componentTheme.baseSpacingLarge} * 2)`,
           width: `calc(${componentTheme.baseSpacingLarge}* 2)`,
           marginInlineEnd: `calc(${componentTheme.baseSpacingLarge} / 2)`,

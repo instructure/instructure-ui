@@ -86,7 +86,7 @@ class TreeCollection extends Component {
     renderAfterItems: Children.oneOf([TreeNode]),
     containerRef: PropTypes.func,
     isCollectionFlattened: PropTypes.bool,
-    contentRenderer: PropTypes.func
+    renderContent: PropTypes.func
   }
 
   static defaultProps = {
@@ -114,7 +114,7 @@ class TreeCollection extends Component {
     renderAfterItems: null,
     containerRef: function () {},
     isCollectionFlattened: false,
-    contentRenderer: undefined
+    renderContent: undefined
   }
 
   constructor(props) {
@@ -356,7 +356,7 @@ class TreeCollection extends Component {
       variant: this.props.variant,
       itemIcon: this.props.itemIcon,
       level: this.itemsLevel,
-      contentRenderer: this.props.contentRenderer
+      renderContent: this.props.renderContent
     }
   }
 
