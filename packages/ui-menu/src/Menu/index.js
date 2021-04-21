@@ -233,29 +233,14 @@ class Menu extends Component {
   static contextType = MenuContext
 
   registerMenuItem = (item) => {
-    const { type } = item.props
-
-    // if the item is a flyout trigger
-    // we only want to add it to the parent Menu items list
-    if (this.context && this.context.registerMenuItem && type === 'flyout') {
-      this.context.registerMenuItem(item)
-    } else if (this.getMenuItemIndex(item) < 0) {
-      this._menuItems.push(item)
-    }
+    this._menuItems.push(item)
   }
 
   removeMenuItem = (item) => {
-    const { type } = item.props
-    // if the item is a flyout trigger
-    // we only want to remove it from the parent Menu items list
-    if (this.context && this.context.removeMenuItem && type === 'flyout') {
-      this.context.removeMenuItem(item)
-    } else {
-      const index = this.getMenuItemIndex(item)
-      error(index >= 0, '[Menu] Could not find registered menu item.')
-      if (index >= 0) {
-        this._menuItems.splice(index, 1)
-      }
+    const index = this.getMenuItemIndex(item)
+    error(index >= 0, '[Menu] Could not find registered menu item.')
+    if (index >= 0) {
+      this._menuItems.splice(index, 1)
     }
   }
 

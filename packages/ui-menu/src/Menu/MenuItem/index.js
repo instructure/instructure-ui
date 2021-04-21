@@ -125,10 +125,11 @@ class MenuItem extends Component {
   componentDidUpdate() {
     this.props.makeStyles()
   }
+
   componentWillUnmount() {
     const context = this.context
 
-    if (context && context.registerMenuItem) {
+    if (context && context.removeMenuItem) {
       context.removeMenuItem(this)
     }
   }
