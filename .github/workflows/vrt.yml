@@ -4,9 +4,11 @@ on:
     branches:
       - master
       - next
+      - v7_maintenance
   pull_request:
     branches:
       - master
+      - v7_maintenance
 jobs:
   chromatic_deployment:
     runs-on: ubuntu-latest
