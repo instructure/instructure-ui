@@ -48,25 +48,25 @@ try {
     process.argv[3] === 'current' || !process.argv[3]
       ? pkgJSON.version
       : process.argv[3]
-  fixPublish(
-    pkgJSON.name,
-    pkgJSON.version,
-    releaseVersion,
-    getConfig(pkgJSON),
-    process.argv[4]
-  )
+  fixPublish({
+    packageName: pkgJSON.name,
+    currentVersion: pkgJSON.version,
+    releaseVersion: releaseVersion,
+    config: getConfig(pkgJSON),
+    releaseType: process.argv[4]
+  })
 } catch (err) {
   error(err)
   process.exit(1)
 }
 
-async function fixPublish(
+async function fixPublish({
   packageName,
   currentVersion,
   releaseVersion,
   config = {},
   releaseType = 'latest'
-) {
+}) {
   //If on legacy branch, and it is a release, its tag should say vx_maintenance
   const releaseTag =
     releaseType === 'maintenance'
