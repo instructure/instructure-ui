@@ -53,9 +53,6 @@ const generateStyles = (componentTheme, props) => {
   const sizeMap = {
     small: {
       folderTree: {
-        root: {
-          padding: `calc(${componentTheme.baseSpacingSmall} / 3) ${componentTheme.baseSpacingSmall}`
-        },
         before: {
           width: `calc(${componentTheme.baseSpacingSmall} - 0.0625rem)`
         },
@@ -72,9 +69,6 @@ const generateStyles = (componentTheme, props) => {
         }
       },
       indent: {
-        root: {
-          padding: `calc(${componentTheme.baseSpacingSmall} / 3) calc(${componentTheme.baseSpacingSmall} / 2)`
-        },
         icon: {
           fontSize: `calc(${componentTheme.baseSpacingSmall} * 2)`,
           marginInlineEnd: `calc(${componentTheme.baseSpacingSmall} / 2)`,
@@ -96,9 +90,6 @@ const generateStyles = (componentTheme, props) => {
     },
     medium: {
       folderTree: {
-        root: {
-          padding: `calc(${componentTheme.baseSpacingMedium} / 3) ${componentTheme.baseSpacingMedium}`
-        },
         before: {
           width: `calc(${componentTheme.baseSpacingMedium} - 0.0625rem)`
         },
@@ -115,9 +106,6 @@ const generateStyles = (componentTheme, props) => {
         }
       },
       indent: {
-        root: {
-          padding: `calc(${componentTheme.baseSpacingMedium} / 3) calc(${componentTheme.baseSpacingMedium} / 2)`
-        },
         icon: {
           fontSize: `calc(${componentTheme.baseSpacingMedium} * 2)`,
           marginInlineEnd: `calc(${componentTheme.baseSpacingMedium} / 2)`,
@@ -139,9 +127,6 @@ const generateStyles = (componentTheme, props) => {
     },
     large: {
       folderTree: {
-        root: {
-          padding: `calc(${componentTheme.baseSpacingLarge} / 3) ${componentTheme.baseSpacingLarge}`
-        },
         before: {
           width: `calc(${componentTheme.baseSpacingLarge} - 0.0625rem)`
         },
@@ -158,7 +143,6 @@ const generateStyles = (componentTheme, props) => {
         }
       },
       indent: {
-        padding: `calc(${componentTheme.baseSpacingLarge} / 3) calc(${componentTheme.baseSpacingLarge} / 2)`,
         icon: {
           fontSize: `calc(${componentTheme.baseSpacingLarge} * 2)`,
           marginInlineEnd: `calc(${componentTheme.baseSpacingLarge} / 2)`,
@@ -194,6 +178,33 @@ const generateStyles = (componentTheme, props) => {
     ...sizeMap[size].textName
   }
 
+  const layoutPadding = {
+    small: {
+      folderTree: {
+        padding: `calc(${componentTheme.baseSpacingSmall} / 3) ${componentTheme.baseSpacingSmall}`
+      },
+      indent: {
+        padding: `calc(${componentTheme.baseSpacingSmall} / 3) calc(${componentTheme.baseSpacingSmall} / 2)`
+      }
+    },
+    medium: {
+      folderTree: {
+        padding: `calc(${componentTheme.baseSpacingMedium} / 3) ${componentTheme.baseSpacingMedium}`
+      },
+      indent: {
+        padding: `calc(${componentTheme.baseSpacingMedium} / 3) calc(${componentTheme.baseSpacingMedium} / 2)`
+      }
+    },
+    large: {
+      folderTree: {
+        padding: `calc(${componentTheme.baseSpacingLarge} / 3) ${componentTheme.baseSpacingLarge}`
+      },
+      indent: {
+        padding: `calc(${componentTheme.baseSpacingLarge} / 3) calc(${componentTheme.baseSpacingLarge} / 2)`
+      }
+    }
+  }
+
   return {
     treeButton: {
       label: 'treeButton',
@@ -219,6 +230,7 @@ const generateStyles = (componentTheme, props) => {
       animationTimingFunction: 'ease-out',
       animationDelay: '0.2s',
       outline: '0',
+      padding: '0',
       ...(variant === 'folderTree' &&
         !isRootButton && {
           '&::before': {
@@ -267,15 +279,15 @@ const generateStyles = (componentTheme, props) => {
       },
       ...(selected && {
         backgroundColor: componentTheme.selectedBackgroundColor
-      }),
-      ...sizeMap[size][variant].root
+      })
     },
     layout: {
       label: 'treeButton__layout',
       display: 'flex',
       alignItems: 'center',
       lineHeight: 1,
-      minHeight: '2rem'
+      minHeight: '2rem',
+      ...layoutPadding[size][variant]
     },
     text: {
       label: 'treeButton__text',
