@@ -30,10 +30,30 @@ import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  name: string
+  src?: string
+  alt?: string
+  size?: 'auto' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+  shape?: 'circle' | 'rectangle'
+  display?: 'inline-block' | 'block'
+  margin?: typeof ThemeablePropValues.SPACING
+  onImageLoaded?: (...args: any[]) => any
+  as?: React.ReactElement
+  elementRef?: (...args: any[]) => any
+}
 
 /**
 ---
@@ -43,7 +63,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Avatar extends Component {
+class Avatar extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -96,16 +116,18 @@ class Avatar extends Component {
     size: 'medium',
     shape: 'circle',
     display: 'inline-block',
-    onImageLoaded: (event) => {}
+    onImageLoaded: () => {}
   }
 
   state = { loaded: false }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.state)
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.state)
   }
 
@@ -128,8 +150,10 @@ class Avatar extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleImageLoaded = (event) => {
     this.setState({ loaded: true })
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onImageLoaded(event)
   }
 

@@ -25,7 +25,7 @@
 import escapeHtml from 'escape-html'
 
 import { cloneArray } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import {
   getComputedStyle,
   getBoundingClientRect,

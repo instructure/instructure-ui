@@ -23,6 +23,7 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import ReactDOM from 'react-dom'
 
 import PropTypes from 'prop-types'
@@ -39,18 +40,36 @@ import {
   IconNoSolid
 } from '@instructure/ui-icons'
 import { Transition } from '@instructure/ui-motion'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { canvas } from '@instructure/ui-themes'
 import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  EmotionThemeProvider
+  EmotionThemeProvider,
+  ThemeablePropValues
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  variant?: 'info' | 'success' | 'warning' | 'error'
+  liveRegion?: (...args: any[]) => any
+  liveRegionPoliteness?: 'polite' | 'assertive'
+  isLiveRegionAtomic?: boolean
+  screenReaderOnly?: boolean
+  timeout?: number
+  margin?: typeof ThemeablePropValues.SPACING
+
+  renderCloseButtonLabel?: ((...args: any[]) => any) | React.ReactNode
+  onDismiss?: (...args: any[]) => any
+  transition?: 'none' | 'fade'
+  open?: boolean
+}
 
 /**
 ---
@@ -58,7 +77,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Alert extends Component {
+class Alert extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -135,6 +154,7 @@ class Alert extends Component {
     children: null
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -153,8 +173,10 @@ class Alert extends Component {
   }
 
   handleTimeout = () => {
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     if (this.props.timeout > 0) {
       this._timeouts.push(
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
         setTimeout(() => {
           this.close()
         }, this.props.timeout)
@@ -184,6 +206,7 @@ class Alert extends Component {
   }
 
   // duck type for a dom node
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'n' implicitly has an 'any' type.
   isDOMNode(n) {
     return n && typeof n === 'object' && n.nodeType === 1
   }
@@ -197,7 +220,9 @@ class Alert extends Component {
     return this.isDOMNode(lr) ? lr : null
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'liveRegion' implicitly has an 'any' typ... Remove this comment to see the full error message
   initLiveRegion(liveRegion) {
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 6 arguments, but got 2.
     error(
       liveRegion.getAttribute('role') === 'alert',
       `[Alert] live region must have role='alert' set on page load in order to announce content`
@@ -217,9 +242,11 @@ class Alert extends Component {
   createScreenreaderAlert() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
       this.srid = uid('Alert')
 
       const div = document.createElement('div')
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
       div.setAttribute('id', this.srid)
 
       this.renderScreenreeaderAlert(div)
@@ -229,6 +256,7 @@ class Alert extends Component {
 
   updateScreenreaderAlert() {
     if (this.getLiveRegion()) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
       const div = document.getElementById(this.srid)
       if (div) {
         ReactDOM.render(null, div, () => {
@@ -238,12 +266,14 @@ class Alert extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'div' implicitly has an 'any' type.
   renderScreenreeaderAlert(div) {
     const content = this.createScreenreaderContentNode()
     ReactDOM.render(
       // since ScreenReaderContent gets rendered outside the app,
       // and uses the withStyle decorator, we need to provide a theme for it,
       // otherwise throws warning (any theme, doesn't use any theme variables)
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; theme: { 'ic-brand-prim... Remove this comment to see the full error message
       <EmotionThemeProvider theme={canvas}>{content}</EmotionThemeProvider>,
       div
     )
@@ -252,6 +282,7 @@ class Alert extends Component {
   removeScreenreaderAlert() {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
       const div = document.getElementById(this.srid)
       if (div) {
         // Accessibility attributes must be removed for the deletion of the node
@@ -263,6 +294,7 @@ class Alert extends Component {
         liveRegion.removeAttribute('aria-atomic')
 
         ReactDOM.unmountComponentAtNode(div)
+        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
         div.parentNode.removeChild(div)
 
         this.initLiveRegion(liveRegion)
@@ -270,6 +302,7 @@ class Alert extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyUp = (event) => {
     if (
       this.props.renderCloseButtonLabel &&
@@ -280,6 +313,7 @@ class Alert extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
@@ -290,7 +324,9 @@ class Alert extends Component {
     this.createScreenreaderAlert()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
     if (!!this.props.open === false && !!this.props.open !== !!prevProps.open) {
       // this outside world is asking us to close the alert, which needs to
@@ -309,6 +345,7 @@ class Alert extends Component {
   }
 
   renderIcon() {
+    // @ts-expect-error ts-migrate(2538) FIXME: Type 'undefined' cannot be used as an index type.
     const Icon = this.variantUI[this.props.variant]
     return (
       <div css={this.props.styles.icon}>
@@ -351,6 +388,7 @@ class Alert extends Component {
   render() {
     // Don't render anything if screen reader only
     if (this.props.screenReaderOnly) {
+      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 6 arguments, but got 2.
       error(
         this.getLiveRegion(),
         `[Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'.`
@@ -360,12 +398,14 @@ class Alert extends Component {
     }
 
     if (this.props.transition === 'none') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       return this.state.open ? this.renderAlert() : null
     }
     return (
       <Transition
         type={this.props.transition}
         transitionOnMount
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
         in={this.state.open}
         unmountOnExit
         onExited={this.onExitTransition}

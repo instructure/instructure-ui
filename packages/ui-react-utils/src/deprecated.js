@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { decorator } from '@instructure/ui-decorator'
-import { warnDeprecated } from '@instructure/console/macro'
+import { logWarnDeprecated as warnDeprecated } from '@instructure/console'
 
 const deprecated = (() => {
   if (process.env.NODE_ENV === 'production') {

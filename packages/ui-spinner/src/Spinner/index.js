@@ -29,7 +29,7 @@ import { View } from '@instructure/ui-view'
 import { callRenderProp, omitProps } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 

@@ -36,10 +36,14 @@ import {
 import { Alert } from '../index'
 import AlertExamples from '../__examples__/Alert.examples'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Alert />', async () => {
+  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'srdiv' implicitly has type 'any' in some... Remove this comment to see the full error message
   let srdiv
 
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
   beforeEach(async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     stub(console, 'warn') // suppress deprecation warnings
     srdiv = document.createElement('div')
     srdiv.id = '_alertLiveRegion'
@@ -50,12 +54,16 @@ describe('<Alert />', async () => {
     document.body.appendChild(srdiv)
   })
 
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
   afterEach(async () => {
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'srdiv' implicitly has an 'any' type.
     srdiv && srdiv.parentNode && srdiv.parentNode.removeChild(srdiv)
     srdiv = null
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success">Success: Sample alert text.</Alert>
     )
@@ -63,11 +71,15 @@ describe('<Alert />', async () => {
     expect(subject.getDOMNode()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; propValue... Remove this comment to see the full error message
     generateA11yTests(AlertExamples)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not render the Close button when `renderCloseButtonLabel` is not provided', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success">Success: Sample alert text.</Alert>
     )
@@ -110,8 +122,11 @@ describe('<Alert />', async () => {
   }
 
   Object.entries(iconComponentsVariants).forEach(([variant, iconComponent]) => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it(`"${variant}" variant should have icon "${iconComponent}".`, async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '"info" | ... Remove this comment to see the full error message
         <Alert variant={variant} transition="none">
           Success: Sample alert text.
         </Alert>
@@ -123,7 +138,9 @@ describe('<Alert />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success" transition="none">
         Success: Sample alert text.
@@ -134,8 +151,10 @@ describe('<Alert />', async () => {
     expect(await alert.accessible()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should add alert text to aria live region, when present', async () => {
     const liver = document.getElementById('_alertLiveRegion')
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Alert
         variant="success"
@@ -147,13 +166,18 @@ describe('<Alert />', async () => {
       </Alert>
     )
 
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.innerText).to.include('Success: Sample alert text.')
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.getAttribute('aria-live')).to.equal('polite')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with `screenReaderOnly', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not render anything when using `liveRegion`', async () => {
       const liver = document.getElementById('_alertLiveRegion')
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Alert
           variant="success"
@@ -167,10 +191,13 @@ describe('<Alert />', async () => {
       expect(subject.getDOMNode()).to.not.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should warn if `liveRegion` is not defined', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       const warning =
         "Warning: [Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'."
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Alert variant="success" screenReaderOnly={true}>
           Success: Sample alert text.
@@ -180,8 +207,10 @@ describe('<Alert />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set aria-atomic to the aria live region when isLiveRegionAtomic is present', async () => {
     const liver = document.getElementById('_alertLiveRegion')
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Alert
         variant="success"
@@ -194,18 +223,23 @@ describe('<Alert />', async () => {
       </Alert>
     )
 
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.innerText).to.include('Success: Sample alert text.')
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.getAttribute('aria-atomic')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should close when told to, with transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success" liveRegion={() => liver}>
         Success: Sample alert text.
       </Alert>
     )
 
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.children.length).to.equal(1)
 
     await subject.setProps({
@@ -213,18 +247,22 @@ describe('<Alert />', async () => {
     })
 
     await wait(() => {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       expect(liver.children.length).to.equal(0)
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should close when told to, without transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success" transition="none" liveRegion={() => liver}>
         Success: Sample alert text.
       </Alert>
     )
 
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.children.length).to.equal(1)
 
     await subject.setProps({
@@ -232,6 +270,7 @@ describe('<Alert />', async () => {
     })
 
     expect(subject.getDOMNode()).to.not.exist()
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(liver.children.length).to.equal(0)
   })
 })

@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import {
   callRenderProp,
   getElementType,

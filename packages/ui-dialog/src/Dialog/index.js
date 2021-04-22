@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
 

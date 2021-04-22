@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { warn } from '@instructure/console/macro'
+import { logWarn as warn } from '@instructure/console'
 import { addEventListener } from './addEventListener'
 import { canUseDOM } from './canUseDOM'
 

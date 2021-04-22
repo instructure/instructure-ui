@@ -29,7 +29,7 @@ import PropTypes from 'prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Grid } from '@instructure/ui-grid'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import {
   omitProps,
   pickProps,

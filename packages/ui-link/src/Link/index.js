@@ -36,7 +36,7 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { warn } from '@instructure/console/macro'
+import { logWarn as warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'

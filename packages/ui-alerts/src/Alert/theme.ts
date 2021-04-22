@@ -27,24 +27,62 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, borders, typography, key: themeName } = theme
+  const {
+    colors,
+    spacing,
+    borders,
+    typography,
+    shadows,
+    key: themeName
+  } = theme
 
-  const themeSpecificStyles = {}
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
+  }
 
   const componentVariables = {
-    color: colors?.textBrand,
     background: colors?.backgroundLightest,
-    borderWidthSmall: borders?.widthSmall,
-    borderWidthMedium: borders?.widthMedium,
-    borderColor: colors?.borderMedium,
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightBold
+    color: colors?.textDarkest,
+    marginTop: spacing?.small,
+
+    borderRadius: borders?.radiusMedium,
+    borderWidth: borders?.widthMedium,
+    borderStyle: borders?.style,
+
+    contentPadding: `${spacing?.small} ${spacing?.medium}`,
+    contentFontSize: typography?.fontSizeMedium,
+    contentFontFamily: typography?.fontFamily,
+    contentFontWeight: typography?.fontWeightNormal,
+    contentLineHeight: typography?.lineHeightCondensed,
+
+    closeButtonMarginTop: spacing?.xSmall,
+    closeButtonMarginRight: spacing?.xxSmall,
+
+    iconColor: colors?.textLightest,
+
+    successBorderColor: colors?.borderSuccess,
+    successIconBackground: colors?.backgroundSuccess,
+
+    infoBorderColor: colors?.borderInfo,
+    infoIconBackground: colors?.backgroundInfo,
+
+    warningBorderColor: colors?.borderWarning,
+    warningIconBackground: colors?.backgroundWarning,
+
+    dangerBorderColor: colors?.borderDanger,
+    dangerIconBackground: colors?.backgroundDanger,
+
+    boxShadow: shadows?.depth2
   }
 
   return {
     ...componentVariables,
-    ...themeSpecificStyles[themeName]
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
   }
 }
 

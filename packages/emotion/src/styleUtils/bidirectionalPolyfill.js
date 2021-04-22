@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { log } from '@instructure/console/macro'
+import { consoleLog as log } from '@instructure/console'
 import { isObject } from 'lodash'
 
 /**

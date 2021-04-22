@@ -34,7 +34,7 @@ import {
   requestAnimationFrame
 } from '@instructure/ui-dom-utils'
 
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 
 import keycode from 'keycode'
 

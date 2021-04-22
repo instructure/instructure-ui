@@ -31,7 +31,7 @@ import {
   containsActiveElement,
   findFocusable
 } from '@instructure/ui-dom-utils'
-import { warn } from '@instructure/console/macro'
+import { logWarn as warn } from '@instructure/console'
 
 /**
 ---

@@ -31,7 +31,7 @@ import { containsActiveElement, findTabbable } from '@instructure/ui-dom-utils'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { Children, controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
 

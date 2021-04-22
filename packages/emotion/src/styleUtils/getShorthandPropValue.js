@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { isEmpty, camelize } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 
 /**
  * ---

@@ -34,7 +34,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { createChainedFunction, px } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 

@@ -44,7 +44,7 @@ import {
 } from '@instructure/ui-dom-utils'
 import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'

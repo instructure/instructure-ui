@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { FocusRegion } from './FocusRegion'
 
 let ENTRIES = []

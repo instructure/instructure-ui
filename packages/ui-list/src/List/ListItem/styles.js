@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 
 /**
  * ---

@@ -35,7 +35,7 @@ import {
   safeCloneElement,
   passthroughProps
 } from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Focusable } from '@instructure/ui-focusable'

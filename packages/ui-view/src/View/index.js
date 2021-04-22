@@ -30,7 +30,7 @@ import PropTypes from 'prop-types'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import {
   getElementType,
   omitProps,

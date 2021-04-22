@@ -28,7 +28,7 @@ import keycode from 'keycode'
 
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 
 /**

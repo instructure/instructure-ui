@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { ThemeablePropTypes } from '@instructure/emotion'
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view'
 import { PagesContext } from '..'
 

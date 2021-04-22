@@ -28,7 +28,7 @@ import {
   mirrorShorthandCorners
 } from '@instructure/emotion'
 import { pickProps } from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 
 const getBorderStyle = ({ borderRadius, borderWidth, dir, theme }) => {
   const isRtlDirection = dir === DIRECTION.rtl

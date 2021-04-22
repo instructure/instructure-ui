@@ -21,31 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-color-utils'
-
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
-import generateComponentTheme from '../theme'
-
-describe('Avatar.theme', () => {
-  describe('with the default theme', () => {
-    const variables = generateComponentTheme(canvas)
-
-    describe('default', () => {
-      it('should ensure background color and text color meet 3:1 contrast', () => {
-        expect(contrast(variables.background, variables.color)).to.be.above(3)
-      })
-    })
-  })
-
-  describe('with the "canvas-high-contrast" theme', () => {
-    const variables = generateComponentTheme(canvasHighContrast)
-
-    describe('default', () => {
-      it('should ensure background color and text color meet 4.5:1 contrast', () => {
-        expect(contrast(variables.background, variables.color)).to.be.above(4.5)
-      })
-    })
-  })
-})
+import { locator } from '@instructure/ui-test-locator'
+import { Avatar } from './index'
+export const AvatarLocator = locator((Avatar as any).selector)

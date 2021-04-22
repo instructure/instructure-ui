@@ -21,9 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { locator } from '@instructure/ui-test-locator'
-
-import { Avatar } from './index'
-
-export const AvatarLocator = locator(Avatar.selector)
+export default {
+  sectionProp: 'variant',
+  propValues: {
+    renderCloseButtonLabel: [null, 'close'],
+    children: [
+      'An alert with some content',
+      'an alert with a ton of content that is going to wrap. It takes a ton of content to ' +
+        'get text to wrap when the screen is high resolution and there is a good amount of space ' +
+        'to fill'
+    ]
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      margin: 'medium',
+      screenReaderOnly: false,
+      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+      liveRegionPoliteness: 'polite',
+      transition: 'none',
+      open: true
+    }
+  },
+  filter: (props) => {
+    return props.screenReaderOnly || props.open === false
+  }
+}

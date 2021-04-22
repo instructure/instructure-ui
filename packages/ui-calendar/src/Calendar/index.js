@@ -33,7 +33,7 @@ import {
   omitProps
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 

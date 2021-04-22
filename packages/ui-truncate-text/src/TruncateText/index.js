@@ -32,7 +32,7 @@ import {
   ensureSingleChild,
   hack
 } from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 

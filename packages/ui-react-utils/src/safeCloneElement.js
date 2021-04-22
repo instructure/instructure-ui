@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { warn } from '@instructure/console/macro'
+import { logWarn as warn } from '@instructure/console'
 import { createChainedFunction } from '@instructure/ui-utils'
 
 /**

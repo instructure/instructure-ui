@@ -25,7 +25,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { deepEqual } from '@instructure/ui-utils'
-import { warn } from '@instructure/console/macro'
+import { logWarn as warn } from '@instructure/console'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
 
 /**

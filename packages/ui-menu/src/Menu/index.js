@@ -37,7 +37,7 @@ import {
   safeCloneElement,
   matchComponentTypes
 } from '@instructure/ui-react-utils'
-import { error } from '@instructure/console/macro'
+import { logError as error } from '@instructure/console'
 import { containsActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
