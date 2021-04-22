@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.2.0](https://github.com/instructure/instructure-ui/compare/v8.1.0...v8.2.0) (2021-04-22)
+
+### Bug Fixes
+
+- **ui-menu:** fix Menu keyboard navigation on submenus ([cbdabb3](https://github.com/instructure/instructure-ui/commit/cbdabb39fc58513f8312137273207fe1f7edffcb))
+
 # [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
 
 **Note:** Version bump only for package @instructure/ui-menu
