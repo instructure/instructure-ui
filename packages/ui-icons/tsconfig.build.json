@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "./types"
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/__examples__/**/*", "src/**/__tests__/**/*"]
+  "include": ["__build__/**/*"],
+  "exclude": ["/font/Line/**/*", "/font/Solid/**/*"]
 }
