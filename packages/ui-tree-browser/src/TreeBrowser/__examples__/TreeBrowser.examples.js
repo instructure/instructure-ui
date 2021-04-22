@@ -90,8 +90,7 @@ export default {
   },
   filter: (props) => {
     return (
-      // prevent unecessary icon permutations
-
+      // prevent unnecessary icon permutations
       (props.collectionIcon === undefined &&
         props.collectionIconExpanded === IconExpandSolid) ||
       (props.collectionIcon === IconCollapseSolid &&
@@ -100,7 +99,7 @@ export default {
   },
   getParameters: ({ examples, index }) => {
     return {
-      delay: 2000
+      chromatic: { delay: 1000 }
     }
   }
 }
