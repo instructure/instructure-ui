@@ -1,6 +1,6 @@
 {
   "name": "@instructure/template-app",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "description": "A package containing template files to generate a react app configured with Instructure UI presets.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -15,23 +15,23 @@
     "access": "public"
   },
   "dependencies": {
-    "@instructure/canvas-theme": "^8.2.0",
-    "@instructure/emotion": "^8.2.0",
-    "@instructure/ui-heading": "^8.2.0",
-    "@instructure/ui-icons": "^8.2.0",
-    "@instructure/ui-svg-images": "^8.2.0",
-    "@instructure/ui-text": "^8.2.0",
-    "@instructure/ui-themes": "^8.2.0",
-    "@instructure/ui-view": "^8.2.0",
+    "@instructure/canvas-theme": "^8.2.1",
+    "@instructure/emotion": "^8.2.1",
+    "@instructure/ui-heading": "^8.2.1",
+    "@instructure/ui-icons": "^8.2.1",
+    "@instructure/ui-svg-images": "^8.2.1",
+    "@instructure/ui-text": "^8.2.1",
+    "@instructure/ui-themes": "^8.2.1",
+    "@instructure/ui-view": "^8.2.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.2.0",
-    "@instructure/ui-eslint-config": "^8.2.0",
-    "@instructure/ui-scripts": "^8.2.0",
-    "@instructure/ui-stylelint-config": "^8.2.0",
-    "@instructure/ui-webpack-config": "^8.2.0",
+    "@instructure/ui-babel-preset": "^8.2.1",
+    "@instructure/ui-eslint-config": "^8.2.1",
+    "@instructure/ui-scripts": "^8.2.1",
+    "@instructure/ui-stylelint-config": "^8.2.1",
+    "@instructure/ui-webpack-config": "^8.2.1",
     "html-webpack-plugin": "^4"
   }
 }
