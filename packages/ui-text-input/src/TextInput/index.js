@@ -336,7 +336,11 @@ class TextInput extends Component {
       shouldNotWrap
     } = this.props
 
-    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput
+    const hasBeforeElement =
+      renderBeforeInput && callRenderProp(renderBeforeInput)
+    const hasAfterElement = renderAfterInput && callRenderProp(renderAfterInput)
+
+    const renderBeforeOrAfter = hasBeforeElement || hasAfterElement
 
     return (
       <FormField
@@ -352,7 +356,7 @@ class TextInput extends Component {
         <span css={this.props.styles.facade}>
           {renderBeforeOrAfter ? (
             <Flex wrap={shouldNotWrap ? 'no-wrap' : 'wrap'}>
-              {renderBeforeInput && (
+              {hasBeforeElement && (
                 <Flex.Item padding="0 0 0 small">
                   {callRenderProp(renderBeforeInput)}
                 </Flex.Item>
@@ -366,7 +370,7 @@ class TextInput extends Component {
                   <Flex.Item shouldGrow shouldShrink>
                     {this.renderInput()}
                   </Flex.Item>
-                  {renderAfterInput && (
+                  {hasAfterElement && (
                     <Flex.Item padding="0 small 0 0">
                       {callRenderProp(renderAfterInput)}
                     </Flex.Item>
