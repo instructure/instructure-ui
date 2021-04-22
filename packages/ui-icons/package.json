@@ -6,6 +6,7 @@
   "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -14,8 +15,9 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "clean": "gulp clean && ui-build --clean",
-    "build": "gulp && ui-build __build__ --copy-files --modules es,cjs",
-    "export": "gulp clean && gulp"
+    "build": "gulp && ui-build __build__ --copy-files --modules es,cjs && yarn buildTypes",
+    "export": "gulp clean && gulp && yarn buildTypes",
+    "buildTypes": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "devDependencies": {
