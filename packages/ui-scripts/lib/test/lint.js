@@ -26,9 +26,9 @@ const {
   getCommand
 } = require('@instructure/command-utils')
 
-const paths = process.argv.slice(2).filter((arg) => !arg.includes('--'))
+const paths = process.argv.slice(2).filter((arg) => !arg.includes('--')) || []
 let jspaths = ['.']
-let csspaths = []
+let csspaths = ['**/*.css']
 
 if (paths.length) {
   jspaths = paths.filter((path) => path.includes('.js'))
