@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.2.0](https://github.com/instructure/instructure-ui/compare/v8.1.0...v8.2.0) (2021-04-22)
+## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
 
 ### Bug Fixes
 
@@ -14,6 +14,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **ui-tree-browser:** Add new getCollectionProps ([7926b3d](https://github.com/instructure/instructure-ui/commit/7926b3db42781540959bb6cbb07002b8c8cdd615))
 - **ui-tree-browser:** allow to render custom content in TreeBrowser nodes ([af9eb19](https://github.com/instructure/instructure-ui/commit/af9eb19e57f9f62244d5f8ab7bd9955d4b32120d))
 - **ui-tree-browser:** remove dash at root icon ([e671214](https://github.com/instructure/instructure-ui/commit/e67121436f44c64f61fa95f222a2aefc41568f34))
+
+# [8.2.0](https://github.com/instructure/instructure-ui/compare/v8.1.0...v8.2.0) (2021-04-22)
+
+### DEPRECATED
+
+This release is deprecated, because we encountered problems during the release.
 
 # [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
 

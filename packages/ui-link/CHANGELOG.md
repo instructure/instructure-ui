@@ -3,11 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [8.2.0](https://github.com/instructure/instructure-ui/compare/v8.1.0...v8.2.0) (2021-04-22)
+## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
 
 ### Bug Fixes
 
 - **ui-link:** fix link not displaying outline on focus ([8f36891](https://github.com/instructure/instructure-ui/commit/8f36891996d1fc623cb284e7b3c6f787197fd7f9))
+
+# [8.2.0](https://github.com/instructure/instructure-ui/compare/v8.1.0...v8.2.0) (2021-04-22)
+
+### DEPRECATED
+
+This release is deprecated, because we encountered problems during the release.
 
 # [8.1.0](https://github.com/instructure/instructure-ui/compare/v8.0.0...v8.1.0) (2021-04-15)
 
