@@ -221,7 +221,7 @@ example: true
 <View as="div" maxWidth="250px">
   <TextInput
     renderLabel="I will not wrap"
-    renderBeforeInput={<IconSearchLine inline={false} />}
+    renderBeforeInput={() => (<IconSearchLine inline={false} />)}
     renderAfterInput={<Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
     shouldNotWrap
   />
