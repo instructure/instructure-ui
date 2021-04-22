@@ -3,18 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [7.5.1](https://github.com/instructure/instructure-ui/compare/v7.5.0...v7.5.1) (2021-04-15)
+# [7.6.0](https://github.com/instructure/instructure-ui/compare/v7.5.1...v7.6.0) (2021-04-22)
 
+### Features
+
+- **ui-tree-browser:** remove dash at root icon ([dfe51d7](https://github.com/instructure/instructure-ui/commit/dfe51d7))
+
+## [7.5.1](https://github.com/instructure/instructure-ui/compare/v7.5.0...v7.5.1) (2021-04-15)
 
 ### Bug Fixes
 
-* **ui-select:** fix exception when selecting all items and clicking outside ([71421cf](https://github.com/instructure/instructure-ui/commit/71421cf))
-* **ui-tree-browser:** backport fix to remove line extending into root icon ([07e5e71](https://github.com/instructure/instructure-ui/commit/07e5e71)), closes [#460](https://github.com/instructure/instructure-ui/issues/460)
-* **ui-tree-browser:** list root items too when `showRootCollection` is `false` ([f36c002](https://github.com/instructure/instructure-ui/commit/f36c002)), closes [#476](https://github.com/instructure/instructure-ui/issues/476)
-
-
-
-
+- **ui-select:** fix exception when selecting all items and clicking outside ([71421cf](https://github.com/instructure/instructure-ui/commit/71421cf))
+- **ui-tree-browser:** backport fix to remove line extending into root icon ([07e5e71](https://github.com/instructure/instructure-ui/commit/07e5e71)), closes [#460](https://github.com/instructure/instructure-ui/issues/460)
+- **ui-tree-browser:** list root items too when `showRootCollection` is `false` ([f36c002](https://github.com/instructure/instructure-ui/commit/f36c002)), closes [#476](https://github.com/instructure/instructure-ui/issues/476)
 
 # [7.5.0](https://github.com/instructure/instructure-ui/compare/v7.4.4...v7.5.0) (2021-03-22)
 
