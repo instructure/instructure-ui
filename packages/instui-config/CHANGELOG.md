@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
+
+### Bug Fixes
+
+- **ui-select,ui-simple-select,ui-text-input:** fix empty space before or after input ([b2b18cb](https://github.com/instructure/instructure-ui/commit/b2b18cb8e278e075b7127a6b9070d93ff72e5e41))
+
 # [8.2.0](https://github.com/instructure/instructure-ui/compare/v8.1.0...v8.2.0) (2021-04-22)
 
 **Note:** Version bump only for package @instructure/instui-config
