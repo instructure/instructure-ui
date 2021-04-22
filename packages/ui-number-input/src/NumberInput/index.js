@@ -316,7 +316,7 @@ class NumberInput extends Component {
               aria-invalid={this.invalid ? 'true' : null}
               id={this.id}
               type="text"
-              inputMode="numeric"
+              inputMode="decimal"
               placeholder={placeholder}
               ref={this.handleRef}
               required={isRequired}
