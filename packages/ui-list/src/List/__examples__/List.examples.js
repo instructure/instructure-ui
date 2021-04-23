@@ -27,6 +27,9 @@ import { List } from '../index'
 export default {
   excludeProps: ['variant'],
   sectionProp: 'size',
+  propValues: {
+    delimiter: ['none', 'dashed', 'solid']
+  },
   getComponentProps: (props) => {
     return {
       children: [

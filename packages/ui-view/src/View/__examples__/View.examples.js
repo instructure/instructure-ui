@@ -32,46 +32,87 @@ export default {
     shadow: [undefined, ...Object.values(SHADOW_TYPES)],
     borderWidth: [...Object.values(BORDER_WIDTHS)],
     borderRadius: [...Object.values(BORDER_RADII)],
-    position: ['relative', 'static']
+    borderColor: [
+      'transparent',
+      'primary',
+      'secondary',
+      'brand',
+      'info',
+      'success',
+      'warning',
+      'alert',
+      'danger'
+    ],
+    background: [
+      'transparent',
+      'primary',
+      'secondary',
+      'primary-inverse',
+      'brand',
+      'info',
+      'alert',
+      'success',
+      'danger',
+      'warning'
+    ]
   },
   getComponentProps: (props) => {
     return {
+      position: 'relative',
       padding: 'medium',
       display: 'block',
       children: 'Some content for the View',
       focusColor: 'info',
       focusPosition: 'offset',
-      borderColor: 'info',
       overflowX: 'visible',
       overflowY: 'visible',
-      shouldAnimateFocus: false
+      shouldAnimateFocus: false,
+      ...(props.background !== 'primary' && {
+        borderColor: 'info',
+        borderRadius: undefined,
+        borderWidth: undefined,
+        shadow: undefined
+      }),
+      ...((props.borderRadius !== '0' ||
+        props.borderWidth !== '0' ||
+        props.borderColor !== 'info' ||
+        props.shadow !== undefined) && {
+        textAlign: 'start'
+      }),
+      ...((props.borderRadius !== '0' ||
+        props.borderWidth !== 'small' ||
+        props.textAlign !== 'start' ||
+        props.shadow !== undefined) && {
+        borderColor: 'info'
+      })
     }
   },
   excludeProps: [
+    'as',
+    'position',
+    'elementRef',
     'padding',
+    'margin',
     'shouldAnimateFocus',
     'display',
     'withVisualDebug',
     'focusColor',
     'focusPosition',
-    'borderColor',
     'overflowX',
     'overflowY',
     'visualDebug',
     'focused'
   ],
   filter: (props) => {
-    const backgroundsToIgnore = ['default', 'light', 'inverse']
-
     return (
       // Border radius and border width list 0 in addition to none in their object values
       // so we filter those here as they are redundant
       props.borderRadius === 'none' ||
       props.borderWidth === 'none' ||
+      props.borderColor === 'transparent' ||
       props.background === 'transparent' ||
       (props.focusPosition === 'inset' && !props.withFocusOutline) ||
-      (props.withFocusOutline && props.position !== 'relative') ||
-      backgroundsToIgnore.includes(props.background)
+      (props.withFocusOutline && props.position !== 'relative')
     )
   }
 }
