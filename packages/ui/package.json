@@ -25,6 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
+    "@instructure/emotion": "^8.2.1",
     "@instructure/ui-a11y-content": "^8.2.1",
     "@instructure/ui-alerts": "^8.2.1",
     "@instructure/ui-avatar": "^8.2.1",
