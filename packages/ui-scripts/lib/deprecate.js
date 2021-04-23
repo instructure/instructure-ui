@@ -27,7 +27,7 @@ const {
   error,
   info,
   confirm
-} = require('@instructure/commmand-utils')
+} = require('@instructure/command-utils')
 
 const { createNPMRCFile } = require('./utils/npm')
 const { getConfig } = require('./utils/config')
@@ -66,10 +66,10 @@ async function deprecate(versionToDeprecate, fixVersion, config) {
 
         try {
           await runCommandAsync('npm', ['deprecate', toDeprecate, message])
+          info(`📦  ${toDeprecate} was successfully deprecated!`)
         } catch (err) {
           error(err)
         }
-        info(`📦  ${toDeprecate} was successfully deprecated!`)
       }
     })
   )
