@@ -83,6 +83,7 @@ const generateStyles = (componentTheme, props) => {
   return {
     treeCollection: {
       label: 'treeCollection',
+      fontFamily: componentTheme.fontFamily,
       margin: 0,
       padding: 0,
       '&:focus': {
@@ -91,7 +92,7 @@ const generateStyles = (componentTheme, props) => {
     },
     list: {
       label: 'treeCollection__list',
-      fontFamily: componentTheme.fontFamily,
+      fontFamily: 'inherit',
       boxSizing: 'border-box',
       margin: 0,
       padding: 0,
