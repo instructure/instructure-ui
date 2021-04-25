@@ -30,8 +30,10 @@ import {
   getActiveElement
 } from '@instructure/ui-dom-utils'
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
 function scopeTab(element, event, onLeavingFinalTabbable) {
   const node = findDOMNode(element)
+  // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
   const tabbable = findTabbable(node)
 
   if (!tabbable.length) {
@@ -42,6 +44,7 @@ function scopeTab(element, event, onLeavingFinalTabbable) {
   // Account for a changing tabindex of the active element
   // (a case that happens with Menu for KO a11y)
   if (containsActiveElement(element)) {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     const activeElement = getActiveElement()
     if (tabbable.indexOf(activeElement) === -1) {
       tabbable.push(activeElement)

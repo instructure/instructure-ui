@@ -24,9 +24,11 @@
 import { logError as error } from '@instructure/console'
 import { FocusRegion } from './FocusRegion'
 
+// @ts-expect-error ts-migrate(7034) FIXME: Variable 'ENTRIES' implicitly has type 'any[]' in ... Remove this comment to see the full error message
 let ENTRIES = []
 
 class FocusRegionManager {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static focusRegion = (element, idOrOptions = {}) => {
     let entry
     if (typeof idOrOptions === 'string') {
@@ -38,6 +40,7 @@ class FocusRegionManager {
       entry.region.focus()
       return entry.region
     } else {
+      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(
         false,
         `[FocusRegionManager] Could not focus region with element: ${element}`
@@ -45,35 +48,44 @@ class FocusRegionManager {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static activateRegion = (element, options) => {
     const { region } = FocusRegionManager.addEntry(element, options)
     return region
   }
 
   static getActiveEntry = () => {
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'ENTRIES' implicitly has an 'any[]' type.
     return ENTRIES.find(({ region }) => region.focused)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static findEntry = (element, id) => {
     let index
     if (id) {
+      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'ENTRIES' implicitly has an 'any[]' type.
       index = ENTRIES.findIndex((entry) => entry.id === id)
     } else {
+      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'ENTRIES' implicitly has an 'any[]' type.
       index = ENTRIES.findIndex((entry) => entry.element === element)
     }
     return index
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static getEntry = (element, id) => {
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'ENTRIES' implicitly has an 'any[]' type.
     return ENTRIES[FocusRegionManager.findEntry(element, id)]
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static addEntry = (element, options = {}) => {
     const region = new FocusRegion(element, options)
     const activeEntry = FocusRegionManager.getActiveEntry()
 
     const { keyboardFocusable } = region
 
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'ENTRIES' implicitly has an 'any[]' type.
     ENTRIES.forEach(({ region }) => {
       if (region) {
         // If the active region is triggering a new focus region that does not have
@@ -87,6 +99,7 @@ class FocusRegionManager {
 
     region.activate()
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldFocusOnOpen' does not exist on typ... Remove this comment to see the full error message
     if (options.shouldFocusOnOpen) {
       region.focus()
     }
@@ -105,17 +118,21 @@ class FocusRegionManager {
     return entry
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static removeEntry = (element, id) => {
     const index = FocusRegionManager.findEntry(element, id)
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'ENTRIES' implicitly has an 'any[]' type.
     const entry = ENTRIES[index]
 
     if (index > -1) {
+      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'ENTRIES' implicitly has an 'any[]' type.
       ENTRIES.splice(index, 1)
     }
 
     return entry
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static isFocused = (element, id) => {
     const entry = FocusRegionManager.getActiveEntry()
     if (id) {
@@ -129,6 +146,7 @@ class FocusRegionManager {
     ENTRIES = []
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   static blurRegion = (element, id) => {
     const entry = FocusRegionManager.removeEntry(element, id)
 
@@ -140,6 +158,7 @@ class FocusRegionManager {
 
       // and any regions created from it
       if (children) {
+        // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'id' implicitly has an 'any' type.
         children.forEach(({ id, element }) => {
           const entry = FocusRegionManager.removeEntry(element, id)
           entry && entry.region && entry.region.deactivate()

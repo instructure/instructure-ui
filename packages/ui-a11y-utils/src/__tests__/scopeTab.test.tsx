@@ -31,8 +31,11 @@ const MOCK_EVENT = {
   preventDefault: () => {}
 }
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('scopeTab', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should scope tab within container', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div>
         <div id="container">
@@ -54,6 +57,7 @@ describe('scopeTab', async () => {
       expect(second.focused()).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     scopeTab(container.getDOMNode(), MOCK_EVENT)
 
     await wait(() => {
@@ -61,7 +65,9 @@ describe('scopeTab', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not attempt scoping when no tabbable children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div>
         <div id="container">Hello</div>
@@ -76,6 +82,7 @@ describe('scopeTab', async () => {
 
     await input.focus()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     scopeTab(container.getDOMNode(), MOCK_EVENT)
 
     await wait(() => {
@@ -83,8 +90,11 @@ describe('scopeTab', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should execute callback when provided instead of default behavior', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const cb = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div>
         <div id="container">

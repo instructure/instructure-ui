@@ -26,6 +26,7 @@ import { logWarn as warn } from '@instructure/console'
 
 class ScreenReaderFocusRegion {
   constructor(
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
     element,
     options = {
       shouldContainFocus: true,
@@ -34,10 +35,14 @@ class ScreenReaderFocusRegion {
   ) {
     const liveRegion =
       typeof options.liveRegion === 'function'
-        ? options.liveRegion()
+        ? // @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable.
+          options.liveRegion()
         : options.liveRegion
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_liveRegion' does not exist on type 'Scr... Remove this comment to see the full error message
     this._liveRegion = Array.isArray(liveRegion) ? liveRegion : [liveRegion]
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contextElement' does not exist on type ... Remove this comment to see the full error message
     this._contextElement = element
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Screen... Remove this comment to see the full error message
     this._options = options
   }
 
@@ -46,10 +51,13 @@ class ScreenReaderFocusRegion {
   _nodes = []
   _parents = []
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   updateElement(element) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contextElement' does not exist on type ... Remove this comment to see the full error message
     this._contextElement = element
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   muteNode(node) {
     if (node && node.tagName.toLowerCase() !== 'script') {
       // When we are trapping screen reader focus on an element that
@@ -66,16 +74,20 @@ class ScreenReaderFocusRegion {
         const value = node.getAttribute(attribute)
 
         if (value !== null) {
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
           this._attributes.push([node, attribute, value])
           node.removeAttribute(attribute)
         }
       })
 
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._observer.observe(node, { childList: true })
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nodes' implicitly has an 'any' type.
   hideNodes(nodes) {
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
     nodes.forEach((node) => {
       const ariaLive =
         typeof node.getAttribute === 'function' &&
@@ -86,9 +98,13 @@ class ScreenReaderFocusRegion {
         node.tagName.toLowerCase() !== 'script' &&
         ariaLive !== 'assertive' &&
         ariaLive !== 'polite' &&
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
         this._parents.indexOf(node) === -1 &&
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
         this._nodes.indexOf(node) === -1 &&
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_liveRegion' does not exist on type 'Scr... Remove this comment to see the full error message
         this._liveRegion.indexOf(node) === -1 &&
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_contextElement' does not exist on type ... Remove this comment to see the full error message
         !this._contextElement.contains(node)
       ) {
         if (node.tagName.toLowerCase() !== 'iframe') {
@@ -104,14 +120,18 @@ class ScreenReaderFocusRegion {
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   hideNode(node) {
     if (node.getAttribute('aria-hidden') !== 'true') {
       node.setAttribute('aria-hidden', 'true')
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
       this._nodes.push(node)
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'records' implicitly has an 'any' type.
   handleDOMMutation = (records) => {
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'record' implicitly has an 'any' type.
     records.forEach((record) => {
       const addedNodes = Array.from(record.addedNodes)
       const removedNodes = Array.from(record.removedNodes)
@@ -121,6 +141,7 @@ class ScreenReaderFocusRegion {
       removedNodes.forEach((removedNode) => {
         // Node has been removed from the DOM, make sure it is
         // removed from our list of hidden nodes as well
+        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         if (removedNode.tagName.toLowerCase() !== 'iframe') {
           this.restoreNode(removedNode)
         }
@@ -133,7 +154,9 @@ class ScreenReaderFocusRegion {
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'removedNode' implicitly has an 'any' ty... Remove this comment to see the full error message
   restoreNode(removedNode) {
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
     const index = this._nodes.indexOf(removedNode)
 
     if (index >= 0) {
@@ -142,6 +165,7 @@ class ScreenReaderFocusRegion {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   parseIframeBodies(node) {
     if (!node) return []
 
@@ -161,6 +185,7 @@ class ScreenReaderFocusRegion {
         try {
           body = iframe.contentDocument.body
         } catch (e) {
+          // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 3.
           warn(
             false,
             `[ui-a11y] could not find a document for iframe: ${e}`,
@@ -173,12 +198,15 @@ class ScreenReaderFocusRegion {
   }
 
   activate() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Screen... Remove this comment to see the full error message
     if (!this._options.shouldContainFocus) {
       return
     }
 
+    // @ts-expect-error ts-migrate(2322) FIXME: Type 'MutationObserver' is not assignable to type ... Remove this comment to see the full error message
     this._observer = new MutationObserver(this.handleDOMMutation)
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contextElement' does not exist on type ... Remove this comment to see the full error message
     let node = this._contextElement
 
     while (
@@ -189,6 +217,7 @@ class ScreenReaderFocusRegion {
       const parent = node.parentElement // can be null
 
       if (parent) {
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
         this._parents.push(parent)
 
         this.muteNode(parent)
@@ -202,16 +231,19 @@ class ScreenReaderFocusRegion {
 
   deactivate() {
     if (this._observer) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._observer.disconnect()
       this._observer = null
     }
 
     this._nodes.forEach((node) => {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'removeAttribute' does not exist on type ... Remove this comment to see the full error message
       node.removeAttribute('aria-hidden')
     })
     this._nodes = []
 
     this._attributes.forEach((attribute) => {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'setAttribute' does not exist on type 'ne... Remove this comment to see the full error message
       attribute[0].setAttribute(attribute[1], attribute[2] || '')
     })
     this._attributes = []

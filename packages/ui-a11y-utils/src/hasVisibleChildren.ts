@@ -27,6 +27,7 @@ import { matchComponentTypes } from '@instructure/ui-react-utils'
 
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'children' implicitly has an 'any' type.
 function hasVisibleChildren(children) {
   let visible = false
 

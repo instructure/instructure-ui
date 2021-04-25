@@ -27,12 +27,15 @@ import { expect } from '@instructure/ui-test-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { hasVisibleChildren } from '../hasVisibleChildren'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('hasVisibleChildren', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not count ScreenReaderContent as visible content', async () => {
     expect(
       hasVisibleChildren(<ScreenReaderContent>Foo</ScreenReaderContent>)
     ).to.be.false()
   })
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should count everything else as visible', async () => {
     expect(hasVisibleChildren(<div>Foo</div>)).to.be.true()
   })
