@@ -22,32 +22,49 @@
  * SOFTWARE.
  */
 
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
+
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (componentTheme, props, state) => {
-  return {
-    screenReaderContent: {
-      label: 'screenReaderContent',
-      width: '0.0625rem',
-      height: '0.0625rem',
-      margin: '-0.0625rem',
-      padding: 0,
-      position: 'absolute',
-      top: 0,
-      insetInlineStart: 0,
-      overflow: 'hidden',
-      clip: 'rect(0 0 0 0)',
-      border: 0
-    }
+---
+category: components/utilities
+---
+@module PresentationContent
+**/
+
+type Props = {
+  as?: React.ReactElement
+}
+
+class PresentationContent extends Component<Props> {
+  static propTypes = {
+    /**
+     * the element type to render as
+     */
+    as: PropTypes.elementType,
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    as: 'span',
+    children: null
+  }
+
+  render() {
+    const { children, ...props } = this.props
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+    const ElementType = getElementType(PresentationContent, this.props)
+
+    return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; "aria-hidden": string... Remove this comment to see the full error message
+      <ElementType {...passthroughProps(props)} aria-hidden="true">
+        {children}
+      </ElementType>
+    )
   }
 }
 
-export default generateStyle
+export default PresentationContent
+export { PresentationContent }

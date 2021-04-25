@@ -33,8 +33,11 @@ import {
 
 import { PresentationContent } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<PresentationContent />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children with an aria-hidden attribute', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     await mount(<PresentationContent>Hello World</PresentationContent>)
 
     const content = await find('[aria-hidden]')
@@ -44,14 +47,19 @@ describe('<PresentationContent />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the specified tag when `as` prop is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<PresentationContent as="div" />)
     expect(subject.getDOMNode()).to.have.tagName('div')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PresentationContent>Hello World</PresentationContent>)
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     expect(await accessible()).to.be.true()
   })
 })

@@ -26,18 +26,25 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { ScreenReaderContent } from '../index'
 
+// @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
 describe('<ScreenReaderContent />', async () => {
+  // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
   it('should render the specified tag when `as` prop is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ScreenReaderContent as="div" />)
     expect(subject.getDOMNode()).to.have.tagName('div')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('accepts "passthrough" props', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     const subject = await mount(<ScreenReaderContent hidden />)
     expect(subject.getDOMNode()).to.have.attribute('hidden')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders children components', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ScreenReaderContent>
         <span>Screenreader text</span>
@@ -47,7 +54,9 @@ describe('<ScreenReaderContent />', async () => {
     expect(subject.getDOMNode()).to.have.text('Screenreader text')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders children offscreen', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ScreenReaderContent>
         <span>Screenreader text</span>
@@ -57,7 +66,9 @@ describe('<ScreenReaderContent />', async () => {
     expect(subject.getDOMNode()).to.not.be.visible()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('is accessible by screen readers', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ScreenReaderContent />)
 
     expect(subject.getDOMNode()).to.have.style('height', 0)

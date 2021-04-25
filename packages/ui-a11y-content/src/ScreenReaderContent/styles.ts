@@ -22,47 +22,33 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
-
-import { PresentationContent } from '../PresentationContent'
-import { ScreenReaderContent } from '../ScreenReaderContent'
 /**
----
-category: components/utilities
----
-@module AccessibleContent
-*/
-class AccessibleContent extends Component {
-  static propTypes = {
-    alt: PropTypes.string,
-    /**
-     * the element type to render the screen reader content as
-     */
-    as: PropTypes.elementType,
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    alt: undefined,
-    as: 'span',
-    children: null
-  }
-
-  render() {
-    const { alt, children, ...props } = this.props
-    const ElementType = getElementType(AccessibleContent, this.props)
-
-    return (
-      <ElementType {...passthroughProps(props)}>
-        <ScreenReaderContent>{alt}</ScreenReaderContent>
-        <PresentationContent>{children}</PresentationContent>
-      </ElementType>
-    )
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+// @ts-expect-error ts-migrate(6133) FIXME: 'componentTheme' is declared but its value is neve... Remove this comment to see the full error message
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    screenReaderContent: {
+      label: 'screenReaderContent',
+      width: '0.0625rem',
+      height: '0.0625rem',
+      margin: '-0.0625rem',
+      padding: 0,
+      position: 'absolute',
+      top: 0,
+      insetInlineStart: 0,
+      overflow: 'hidden',
+      clip: 'rect(0 0 0 0)',
+      border: 0
+    }
   }
 }
 
-export default AccessibleContent
-export { AccessibleContent }
+export default generateStyle

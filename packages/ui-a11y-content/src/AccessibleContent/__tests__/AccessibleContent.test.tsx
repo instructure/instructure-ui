@@ -26,8 +26,11 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 import { AccessibleContent } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<AccessibleContent />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render screen reader content', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
@@ -39,7 +42,9 @@ describe('<AccessibleContent />', async () => {
     expect(alt).to.not.be.visible()
   })
 
+  // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
   it('should render a presentational content', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
@@ -52,14 +57,18 @@ describe('<AccessibleContent />', async () => {
     expect(presentational).to.have.attribute('aria-hidden')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render with the specified tag when `as` prop is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<AccessibleContent as="div" />)
     const accessibleContent = within(subject.getDOMNode())
 
     expect(accessibleContent).to.have.tagName('div')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <AccessibleContent alt="Screenreader test">
         Not screenreader text

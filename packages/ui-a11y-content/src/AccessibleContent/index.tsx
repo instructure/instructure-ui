@@ -27,37 +27,48 @@ import PropTypes from 'prop-types'
 
 import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
+import { PresentationContent } from '../PresentationContent'
+import { ScreenReaderContent } from '../ScreenReaderContent'
 /**
----
-category: components/utilities
----
-@module PresentationContent
-**/
-class PresentationContent extends Component {
+ ---
+ category: components/utilities
+ ---
+ @module AccessibleContent
+ */
+type Props = {
+  alt?: string
+  as?: React.ReactElement
+}
+class AccessibleContent extends Component<Props> {
   static propTypes = {
+    alt: PropTypes.string,
     /**
-     * the element type to render as
+     * the element type to render the screen reader content as
      */
     as: PropTypes.elementType,
     children: PropTypes.node
   }
 
   static defaultProps = {
+    alt: undefined,
     as: 'span',
     children: null
   }
 
   render() {
-    const { children, ...props } = this.props
-    const ElementType = getElementType(PresentationContent, this.props)
+    const { alt, children, ...props } = this.props
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+    const ElementType = getElementType(AccessibleContent, this.props)
 
     return (
-      <ElementType {...passthroughProps(props)} aria-hidden="true">
-        {children}
+      // @ts-expect-error ts-migrate(2559) FIXME: Type '{ children: Element[]; }' has no properties ... Remove this comment to see the full error message
+      <ElementType {...passthroughProps(props)}>
+        <ScreenReaderContent>{alt}</ScreenReaderContent>
+        <PresentationContent>{children}</PresentationContent>
       </ElementType>
     )
   }
 }
 
-export default PresentationContent
-export { PresentationContent }
+export default AccessibleContent
+export { AccessibleContent }

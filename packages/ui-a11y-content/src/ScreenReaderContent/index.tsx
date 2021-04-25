@@ -38,8 +38,15 @@ category: components/utilities
 ---
 @module ScreenReaderContent
 **/
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: React.ReactElement
+}
+
 @withStyle(generateStyle, null)
-class ScreenReaderContent extends Component {
+class ScreenReaderContent extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -61,18 +68,23 @@ class ScreenReaderContent extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
     const { children, styles, ...props } = this.props
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(ScreenReaderContent, props)
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; css: any; }' is not a... Remove this comment to see the full error message
       <ElementType
         {...passthroughProps(props)}
         css={styles.screenReaderContent}
