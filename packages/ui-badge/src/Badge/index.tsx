@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import { PositionPropTypes } from '@instructure/ui-position'
@@ -32,10 +32,32 @@ import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  count?: number
+  countUntil?: number
+  type?: 'count' | 'notification'
+  standalone?: boolean
+  pulse?: boolean
+  variant?: 'primary' | 'success' | 'danger'
+  elementRef?: (...args: any[]) => any
+  formatOverflowText?: (...args: any[]) => any
+  formatOutput?: (...args: any[]) => any
+  as?: React.ReactElement
+  margin: typeof ThemeablePropValues.SPACING
+  placement: typeof PositionPropTypes.placement
+}
 
 /**
 ---
@@ -45,7 +67,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Badge extends Component {
+class Badge extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -105,26 +127,33 @@ class Badge extends Component {
     variant: 'primary',
     pulse: false,
     placement: 'top end',
-    elementRef: (el) => {},
-    formatOverflowText: (count, countUntil) => `${countUntil - 1} +`
+    elementRef: () => {},
+    formatOverflowText: (_count: number, countUntil: number) =>
+      `${countUntil - 1} +`
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
     this._defaultId = uid('Badge')
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   countOverflow() {
     const { count, countUntil } = this.props
 
+    //@ts-expect-error FIXME: possibly undefined
     if (countUntil > 1 && count >= countUntil) {
       return true
     } else {
@@ -145,7 +174,8 @@ class Badge extends Component {
     // via the formatOverflowText function prop
     const formattedCount =
       type === 'count' && this.countOverflow()
-        ? formatOverflowText(count, countUntil)
+        ? //@ts-expect-error FIXME: possibly undefined call
+          formatOverflowText(count, countUntil)
         : count
 
     if (typeof formatOutput === 'function') {
@@ -160,9 +190,11 @@ class Badge extends Component {
 
     return (
       <View
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
         margin={standalone ? margin : 'none'}
         css={styles.badge}
         title={type === 'count' && this.countOverflow() ? count : null}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         id={!standalone ? this._defaultId : null}
         display={standalone ? 'inline-block' : 'block'}
       >
@@ -174,6 +206,7 @@ class Badge extends Component {
   renderChildren() {
     return Children.map(this.props.children, (child) => {
       return safeCloneElement(child, {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         'aria-describedby': this._defaultId
       })
     })

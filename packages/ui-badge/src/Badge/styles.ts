@@ -42,6 +42,7 @@ const pulseAnimation = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const { type, variant, placement, standalone, pulse } = props
 
@@ -146,6 +147,7 @@ const generateStyle = (componentTheme, props, state) => {
       whiteSpace: 'nowrap',
       borderRadius: componentTheme.borderRadius,
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...variantVariants[variant],
 
       ...(pulse && {
@@ -168,15 +170,18 @@ const generateStyle = (componentTheme, props, state) => {
           animationDuration: '1s',
           animationIterationCount: '4',
           animationDirection: 'alternate',
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           ...pulseBorderVariants[variant]
         }
       }),
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...typeVariant[type],
 
       ...(!standalone && {
         position: 'absolute',
         zIndex: componentTheme.notificationZIndex,
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         ...notStandaloneTypeVariant[type]
       })
     },
