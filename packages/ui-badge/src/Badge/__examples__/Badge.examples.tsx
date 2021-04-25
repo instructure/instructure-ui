@@ -30,14 +30,17 @@ export default {
     placement: ['start top', 'end top', 'start bottom', 'end bottom'],
     countUntil: [null, 100]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       count: 100,
       children: (
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         <View display="block" width="2rem" height="2rem" borderWidth="small" />
       )
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       (props.type === 'notification' && props.countUntil) ||
