@@ -21,23 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
 
-import { expect, mount, within } from '@instructure/ui-test-utils'
-import { ContextView } from '../index'
-
-describe('<ContextView />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<ContextView />)
-
-    expect(subject.getDOMNode()).to.exist()
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<ContextView />)
-
-    const contextView = within(subject.getDOMNode())
-    expect(await contextView.accessible()).to.be.true()
-  })
-})
+export default {
+  sectionProp: 'background',
+  propValues: {
+    placement: ['top', 'end', 'bottom', 'start']
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      children: <span key="0">Hello World</span>,
+      padding: 'small',
+      debug: false
+    }
+  }
+}

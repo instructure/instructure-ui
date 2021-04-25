@@ -22,24 +22,27 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const componentVariables = {
-    arrowSize: '0.5rem',
-    arrowBorderWidth: theme?.borders?.widthSmall,
-    arrowBackgroundColor: theme?.colors?.white,
-    arrowBorderColor: theme?.colors?.tiara,
-    arrowBackgroundColorInverse: theme?.colors?.licorice,
-    arrowBorderColorInverse: 'transparent'
-  }
+import React from 'react'
 
-  return {
-    ...componentVariables
-  }
-}
+import { expect, mount, within } from '@instructure/ui-test-utils'
+import { ContextView } from '../index'
 
-export default generateComponentTheme
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('<ContextView />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    const subject = await mount(<ContextView />)
+
+    expect(subject.getDOMNode()).to.exist()
+  })
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    const subject = await mount(<ContextView />)
+
+    const contextView = within(subject.getDOMNode())
+    expect(await contextView.accessible()).to.be.true()
+  })
+})

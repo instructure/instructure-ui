@@ -30,6 +30,7 @@ import {
 import { pickProps } from '@instructure/ui-react-utils'
 import { logError as error } from '@instructure/console'
 
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderRadius' implicitly has an '... Remove this comment to see the full error message
 const getBorderStyle = ({ borderRadius, borderWidth, dir, theme }) => {
   const isRtlDirection = dir === DIRECTION.rtl
 
@@ -50,6 +51,7 @@ const getBorderStyle = ({ borderRadius, borderWidth, dir, theme }) => {
   }
 }
 
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'margin' implicitly has an 'any' t... Remove this comment to see the full error message
 const getSpacingStyle = ({ margin, padding, dir, theme }) => {
   const isRtlDirection = dir === DIRECTION.rtl
 
@@ -70,10 +72,15 @@ const getSpacingStyle = ({ margin, padding, dir, theme }) => {
 }
 
 const getOffsetStyle = ({
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetBlockStart' implicitly has a... Remove this comment to see the full error message
   insetBlockStart,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetBlockEnd' implicitly has an ... Remove this comment to see the full error message
   insetBlockEnd,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetInlineStart' implicitly has ... Remove this comment to see the full error message
   insetInlineStart,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'insetInlineEnd' implicitly has an... Remove this comment to see the full error message
   insetInlineEnd,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'dir' implicitly has an 'any' type... Remove this comment to see the full error message
   dir
 }) => {
   const isRtlDirection = dir === DIRECTION.rtl
@@ -100,6 +107,7 @@ const getOffsetStyle = ({
   }
 }
 
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'cursor' implicitly has an 'any' t... Remove this comment to see the full error message
 const getStyleProps = ({ cursor, style }) => {
   const whitelisted = pickProps(style || {}, {}, [
     // Position/calculateElementPosition:
@@ -122,12 +130,14 @@ const getStyleProps = ({ cursor, style }) => {
   ])
 
   if (cursor) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'cursor' does not exist on type '{}'.
     whitelisted.cursor = cursor
   }
 
   return whitelisted
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'initialValue' implicitly has an 'any' t... Remove this comment to see the full error message
 const verifyUniformValues = (initialValue, input) => {
   if (typeof input !== 'string') return false
 
@@ -142,6 +152,7 @@ const getFocusRingRadius = (borderRadius = '') => {
   const initialValue = borderRadius.trim().split(' ')[0]
 
   if (verifyUniformValues(initialValue, borderRadius)) {
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
     const capitalize = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 
     if (['small', 'medium', 'large'].includes(initialValue))
@@ -153,6 +164,7 @@ const getFocusRingRadius = (borderRadius = '') => {
   return `${baseRadiusStyle}None`
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 const getFocusOutline = (props) => {
   const {
     position,
@@ -166,11 +178,13 @@ const getFocusOutline = (props) => {
   }
 
   if (shouldDisplayFocusOutline) {
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       display === 'inline' || position === 'relative',
       '[View] the focus outline will only show if the `position` prop is `relative`.'
     )
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       display !== 'inline' || focusPosition === 'inset',
       '[View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
@@ -180,12 +194,14 @@ const getFocusOutline = (props) => {
   return shouldDisplayFocusOutline
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 const withBorder = (props) => {
   const { borderWidth } = props
 
   return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 const getFocusStyles = (props, componentTheme) => {
   const {
     focusColor,
@@ -257,11 +273,15 @@ const getFocusStyles = (props, componentTheme) => {
         borderStyle: componentTheme.focusOutlineStyle,
         borderWidth: componentTheme.focusOutlineWidth,
         borderColor:
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           focusColorVariants[focusColor] ||
           componentTheme.focusOutlineColorDefault,
         opacity: 0,
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         borderRadius: focusRingVariants[focusRingRadius],
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         ...borderRadiusByOffset[focusPosition][focusRingRadius],
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         ...focusPositionVariants[focusPosition],
         ...(shouldAnimateFocus
           ? {
@@ -294,7 +314,9 @@ const getFocusStyles = (props, componentTheme) => {
     '&::before': {
       borderStyle: 'none'
     },
+    // @ts-expect-error ts-migrate(2783) FIXME: 'outlineStyle' is specified more than once, so thi... Remove this comment to see the full error message
     outlineStyle: 'none',
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     outlineColor: focusColorVariants[focusColor],
     ...(focusOutline
       ? {
@@ -323,6 +345,7 @@ const getFocusStyles = (props, componentTheme) => {
  * @param  {Object} extraArgs
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, extraArgs = {}) => {
   const {
     borderRadius,
@@ -514,10 +537,15 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
       fontFamily: componentTheme.fontFamily,
       maxWidth: '100%',
       overflow: 'visible',
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...displayVariants[display],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...backgroundColorVariants[background],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...stackingVariants[stacking],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...shadowVariants[shadow],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...textAlignVariants[textAlign],
       overflowX: overflowX && overflowX !== 'visible' ? overflowX : '',
       overflowY: overflowY && overflowY !== 'visible' ? overflowY : '',
@@ -530,6 +558,7 @@ const generateStyle = (componentTheme, props, extraArgs = {}) => {
       ...(withBorder(props)
         ? {
             borderStyle: componentTheme.borderStyle,
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             ...borderColorVariants[borderColor]
           }
         : {}),

@@ -21,18 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
 
-export default {
-  sectionProp: 'background',
-  propValues: {
-    placement: ['top', 'end', 'bottom', 'start']
-  },
-  getComponentProps: (props) => {
-    return {
-      children: <span key="0">Hello World</span>,
-      padding: 'small',
-      debug: false
-    }
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const componentVariables = {
+    arrowSize: '0.5rem',
+    arrowBorderWidth: theme?.borders?.widthSmall,
+    arrowBackgroundColor: theme?.colors?.white,
+    arrowBorderColor: theme?.colors?.tiara,
+    arrowBackgroundColorInverse: theme?.colors?.licorice,
+    arrowBorderColorInverse: 'transparent'
+  }
+
+  return {
+    ...componentVariables
   }
 }
+
+export default generateComponentTheme

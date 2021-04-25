@@ -51,6 +51,7 @@
     "build:docs": "lerna run bundle --stream --scope docs-app",
     "build:types": "lerna run build:types --stream",
     "build:tokens": "ui-token-scripts generate-all-tokens",
+    "build:ts": "yarn build && yarn build:types",
     "clean": "lerna run clean --stream",
     "clean:modules": "lerna clean --yes",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",

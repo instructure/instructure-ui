@@ -38,10 +38,76 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 
-import { jsx, withStyle, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  jsx,
+  withStyle,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  as?: React.ReactElement | string
+  elementRef?: (...args: any[]) => any
+  display?:
+    | 'auto'
+    | 'inline'
+    | 'block'
+    | 'inline-block'
+    | 'flex'
+    | 'inline-flex'
+  overflowX?: 'auto' | 'hidden' | 'visible'
+  overflowY?: 'auto' | 'hidden' | 'visible'
+  height?: string | number
+  width?: string | number
+  maxHeight?: string | number
+  maxWidth?: string | number
+  minHeight?: string | number
+  minWidth?: string | number
+  textAlign?: 'start' | 'center' | 'end'
+  borderColor?:
+    | 'transparent'
+    | 'primary'
+    | 'secondary'
+    | 'brand'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | 'alert'
+    | 'danger'
+  background?:
+    | 'transparent'
+    | 'primary'
+    | 'secondary'
+    | 'primary-inverse'
+    | 'brand'
+    | 'info'
+    | 'alert'
+    | 'success'
+    | 'danger'
+    | 'warning'
+  position?: 'static' | 'absolute' | 'relative' | 'sticky' | 'fixed'
+  insetInlineStart?: string
+  insetInlineEnd?: string
+  insetBlockStart?: string
+  insetBlockEnd?: string
+  withFocusOutline?: boolean
+  focusPosition?: 'offset' | 'inset'
+  focusColor?: 'info' | 'inverse' | 'success' | 'danger'
+  shouldAnimateFocus?: boolean
+  withVisualDebug?: boolean
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+  margin: typeof ThemeablePropValues.SPACING
+  padding: typeof ThemeablePropValues.SPACING
+  borderWidth: typeof ThemeablePropValues.BORDER_WIDTHS
+  borderRadius: typeof ThemeablePropValues.BORDER_RADII
+  shadow: typeof ThemeablePropValues.SHADOW_TYPES
+  stacking: typeof ThemeablePropValues.STACKING_TYPES
+}
 
 /**
 ---
@@ -51,7 +117,7 @@ category: components
 **/
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
-class View extends Component {
+class View extends Component<Props> {
   static propTypes = {
     /**
      * The element to render as the component root, `span` by default
@@ -229,7 +295,6 @@ class View extends Component {
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
-
   static defaultProps = {
     display: 'auto',
     // Note:
@@ -274,37 +339,46 @@ class View extends Component {
     shouldAnimateFocus: true
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
     this.spanMarginVerified = false
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
 
     // Not calling getComputedStyle can save hundreds of ms in tests and production
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
     if (process.env.NODE_ENV === 'development' && !this.spanMarginVerified) {
       // We have to verify margins in the first 'componentDidUpdate',
       // because that is when all styles are calculated,
       // but we only want to check once, using a flag
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
       this.spanMarginVerified = true
 
+      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(
         !(function verifySpanMargin(element, margin) {
           if (!element) {
             return
           }
 
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'display' does not exist on type 'Object'... Remove this comment to see the full error message
           const display = getComputedStyle(element).display
 
           if (display !== 'inline') {
             return
           }
 
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'split' does not exist on type '{ 0: stri... Remove this comment to see the full error message
           const marginValues = margin ? margin.split(' ') : null
           let verticalMargin = false
 
@@ -327,17 +401,20 @@ class View extends Component {
           }
 
           return verticalMargin
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_element' does not exist on type 'View'.
         })(this._element, this.props.margin),
         `[View] display style is set to 'inline' and will allow for horizontal margins only.`
       )
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     if (typeof this.props.elementRef === 'function') {
       this.props.elementRef(el)
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_element' does not exist on type 'View'.
     this._element = el
   }
   render() {
@@ -362,15 +439,18 @@ class View extends Component {
       focusColor,
       shouldAnimateFocus,
       borderColor,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
       className, // eslint-disable-line react/prop-types
       styles,
       makeStyles,
       ...props
     } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(View, this.props)
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; className: any; css: ... Remove this comment to see the full error message
       <ElementType
         {...passthroughProps(props)}
         className={className}
@@ -391,13 +471,17 @@ class View extends Component {
 // View.propTypes in the method matches the View.propTypes that will be called in
 // the consumers. Otherwise the discrepency could cause unexpected props being
 // allowed through.
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
 View.omitViewProps = (props, Component) => {
   if (process.env.NODE_ENV !== 'production') {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     Object.keys(pickProps(props, View.propTypes)).forEach((prop) => {
+      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
     })
   }
 
+  // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
   return omitProps(props, View.propTypes)
 }
 

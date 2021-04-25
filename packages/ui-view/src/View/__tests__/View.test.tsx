@@ -27,8 +27,11 @@ import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { View } from '../../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<View />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View>
         <h1>Hello!</h1>
@@ -38,7 +41,9 @@ describe('<View />', async () => {
     expect(subject.getDOMNode()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View>
         <h1>Hello!</h1>
@@ -51,6 +56,7 @@ describe('<View />', async () => {
     expect(h1).to.have.length(1)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass whitelisted style attributes', async () => {
     const styleProps = {
       top: '160px',
@@ -64,7 +70,9 @@ describe('<View />', async () => {
       pointerEvents: 'none'
     }
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { top: string; l... Remove this comment to see the full error message
       <View style={{ ...styleProps }}>
         <h1>Hello!</h1>
       </View>
@@ -83,8 +91,11 @@ describe('<View />', async () => {
     expect(styles['pointerEvents']).to.equal('none')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass flex style', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { flexBasis: str... Remove this comment to see the full error message
       <View style={{ flexBasis: '200px' }}>
         <h1>Hello!</h1>
       </View>
@@ -96,6 +107,7 @@ describe('<View />', async () => {
     expect(styles['flexBasis']).to.equal('200px')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not pass all styles', async () => {
     const styleProps = {
       backgroundColor: 'red',
@@ -103,7 +115,9 @@ describe('<View />', async () => {
       opacity: '0.5'
     }
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { backgroundColo... Remove this comment to see the full error message
       <View style={{ ...styleProps }}>
         <h1>Hello!</h1>
       </View>
@@ -116,9 +130,12 @@ describe('<View />', async () => {
     expect(styles['opacity']).to.equal('1')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass className', async () => {
     const className = 'fooBarBaz'
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
       <View className={className}>
         <h1>Hello!</h1>
       </View>
@@ -127,8 +144,11 @@ describe('<View />', async () => {
     expect(subject.getDOMNode().classList.contains(className))
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide an elementRef', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View elementRef={elementRef}>
         <h1>Hello!</h1>
@@ -138,8 +158,10 @@ describe('<View />', async () => {
     expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass cursor', async () => {
     const cursor = 'cell'
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View cursor={cursor}>
         <h1>Hello!</h1>
@@ -150,7 +172,9 @@ describe('<View />', async () => {
     expect(styles['cursor']).to.equal(cursor)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set overflow', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View overflowX="hidden" overflowY="auto">
         <h1>Hello!</h1>
@@ -165,7 +189,9 @@ describe('<View />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set CSS position', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View position="fixed">
         <h1>Hello!</h1>
@@ -179,7 +205,9 @@ describe('<View />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set inline offset (top, bottom, left, right)', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View
         insetBlockStart="0"
@@ -201,7 +229,9 @@ describe('<View />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should override default max-width', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View>
         <h1>Hello!</h1>
@@ -217,11 +247,15 @@ describe('<View />', async () => {
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('withFocusOutline', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should warn when withFocusOutline is true without position=relative', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       const warning =
         'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <View withFocusOutline>
           <h1>Hello!</h1>
@@ -231,10 +265,13 @@ describe('<View />', async () => {
       expect(consoleError).to.be.calledWith(warning)
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should warn when withFocusOutline is `true`, display is set to `inline`, and focusPosition is set to `offset`', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       const warning =
         'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <View withFocusOutline display="inline" focusPosition="offset">
           <h1>Hello!</h1>
@@ -245,7 +282,9 @@ describe('<View />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<View>Hello!</View>)
 
     const view = within(subject.getDOMNode())

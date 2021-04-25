@@ -41,9 +41,9 @@ describe('<Alert />', async () => {
   // @ts-expect-error ts-migrate(7034) FIXME: Variable 'srdiv' implicitly has type 'any' in some... Remove this comment to see the full error message
   let srdiv
 
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
   beforeEach(async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'srdiv' implicitly has an 'any' type.
     stub(console, 'warn') // suppress deprecation warnings
     srdiv = document.createElement('div')
     srdiv.id = '_alertLiveRegion'
@@ -54,7 +54,7 @@ describe('<Alert />', async () => {
     document.body.appendChild(srdiv)
   })
 
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
+  // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
   afterEach(async () => {
     // @ts-expect-error ts-migrate(7005) FIXME: Variable 'srdiv' implicitly has an 'any' type.
     srdiv && srdiv.parentNode && srdiv.parentNode.removeChild(srdiv)
@@ -124,9 +124,9 @@ describe('<Alert />', async () => {
   Object.entries(iconComponentsVariants).forEach(([variant, iconComponent]) => {
     // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it(`"${variant}" variant should have icon "${iconComponent}".`, async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const subject = await mount(
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '"info" | ... Remove this comment to see the full error message
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         <Alert variant={variant} transition="none">
           Success: Sample alert text.
         </Alert>

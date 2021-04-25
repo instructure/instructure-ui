@@ -324,7 +324,7 @@ class Alert extends Component<Props> {
     this.createScreenreaderAlert()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
+  // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -376,6 +376,7 @@ class Alert extends Component<Props> {
         as="div"
         margin={this.props.margin}
         css={this.props.styles.alert}
+        //@ts-expect-error FIXME: no onKeyUp on View
         onKeyUp={this.handleKeyUp}
       >
         {this.renderIcon()}

@@ -25,13 +25,39 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import { jsx, withStyle, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  jsx,
+  withStyle,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
 import { omitProps } from '@instructure/ui-react-utils'
 
 import { View } from '../View'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  as?: React.ReactElement
+  elementRef?: (...args: any[]) => any
+  height?: string | number
+  width?: string | number
+  maxHeight?: string | number
+  maxWidth?: string | number
+  minHeight?: string | number
+  minWidth?: string | number
+  textAlign?: 'start' | 'center' | 'end'
+  background?: 'default' | 'inverse'
+  debug?: boolean
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  margin: typeof ThemeablePropValues.SPACING
+  padding: typeof ThemeablePropValues.SPACING
+  shadow: typeof ThemeablePropValues.SHADOW_TYPES
+  stacking: typeof ThemeablePropValues.STACKING_TYPES
+  placement: unknown //TODO: fix this
+}
 
 /**
 ---
@@ -40,7 +66,7 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-class ContextView extends Component {
+class ContextView extends Component<Props> {
   static propTypes = {
     /**
      * The element to render as the component root
@@ -117,7 +143,7 @@ class ContextView extends Component {
 
   static defaultProps = {
     as: 'span',
-    elementRef: (el) => {},
+    elementRef: () => {},
     debug: false,
     width: 'auto',
     height: 'auto',
@@ -136,11 +162,14 @@ class ContextView extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get mirroredPlacement() {
     return mirrorPlacement(this.props.placement, '-')
   }
@@ -162,6 +191,7 @@ class ContextView extends Component {
       padding,
       shadow,
       stacking,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Readonly<... Remove this comment to see the full error message
       style, // eslint-disable-line react/prop-types
       textAlign,
       styles
@@ -169,9 +199,11 @@ class ContextView extends Component {
 
     return (
       <View
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, ContextView.propTypes)}
         style={style}
         css={styles.contextView}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         borderWidth="none"
         display="inline-block"
         as={as}
@@ -183,7 +215,9 @@ class ContextView extends Component {
         <View
           css={styles.contextView__content}
           display="block"
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
           borderRadius="medium"
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
           borderWidth="small"
           borderColor={background === 'default' ? 'primary' : 'transparent'}
           background={background === 'default' ? 'primary' : 'primary-inverse'}

@@ -185,6 +185,7 @@ class Avatar extends Component<Props> {
       <View
         {...passthroughProps(props)}
         aria-label={this.props.alt ? this.props.alt : null}
+        //@ts-expect-error FIXME: no role prop on View
         role={this.props.alt ? 'img' : null}
         as={this.props.as}
         elementRef={this.props.elementRef}
