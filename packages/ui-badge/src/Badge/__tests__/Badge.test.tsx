@@ -35,9 +35,7 @@ describe('<Badge />', () => {
   it('should be accessible', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={100}>
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message */}
         <button type="button">Inbox</button>
       </Badge>
     )
@@ -51,9 +49,7 @@ describe('<Badge />', () => {
   it('should show the count', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={100}>
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message */}
         <button type="button">Inbox</button>
       </Badge>
     )
@@ -67,9 +63,7 @@ describe('<Badge />', () => {
   it('should truncate the count via countUntil', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={100} countUntil={100}>
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message */}
         <button type="button">Inbox</button>
       </Badge>
     )
@@ -86,7 +80,6 @@ describe('<Badge />', () => {
     await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={3} placement="bottom start" themeOverride={{ countOffset }}>
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message */}
         <button type="button">Inbox</button>
       </Badge>
     )
@@ -104,7 +97,6 @@ describe('<Badge />', () => {
     await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={100} as="li" standalone={true}>
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message */}
         <button type="button">Inbox</button>
       </Badge>
     )
@@ -123,9 +115,7 @@ describe('<Badge />', () => {
 
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'undefined... Remove this comment to see the full error message
       <Badge count={15} formatOutput={formatOutput}>
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message */}
         <button type="button">Inbox</button>
       </Badge>
     )
