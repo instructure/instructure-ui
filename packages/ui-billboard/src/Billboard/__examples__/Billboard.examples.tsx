@@ -31,6 +31,7 @@ export default {
   maxExamplesPerPage: 50,
   propValues: {
     hero: [
+      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'size' implicitly has an 'any' type.
       function renderHero(size) {
         return <IconAnnouncementLine size={size} />
       },
@@ -51,6 +52,7 @@ export default {
       margin: 'medium small'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       props.size !== 'medium' &&

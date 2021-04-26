@@ -28,10 +28,13 @@ import { expect } from '@instructure/ui-test-utils'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('Billboard.theme', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the canvas theme', () => {
     const variables = generateComponentTheme(canvas)
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have message text color that meets 3:1 contrast with the background color', () => {
       expect(
         contrast(variables.messageColor, variables.backgroundColor)
@@ -42,9 +45,11 @@ describe('Billboard.theme', () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the high contrast canvas theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have message text color that meets 4.5:1 contrast with the background color', () => {
       expect(
         contrast(variables.messageColor, variables.backgroundColor)

@@ -34,10 +34,33 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  hero?: React.ReactElement | ((...args: any[]) => any)
+  size?: 'small' | 'medium' | 'large'
+  as?: React.ReactElement
+  elementRef?: (...args: any[]) => any
+  heading?: string
+  headingAs?: 'h1' | 'h2' | 'h3' | 'span'
+  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4'
+  message?: React.ReactNode | ((...args: any[]) => any)
+  onClick?: (...args: any[]) => any
+  href?: string
+  disabled?: boolean
+  readOnly?: boolean
+  margin?: typeof ThemeablePropValues.SPACING
+}
 
 /**
 ---
@@ -45,7 +68,7 @@ category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Billboard extends Component {
+class Billboard extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -124,14 +147,17 @@ class Billboard extends Component {
     headingAs: 'span',
     headingLevel: 'h1',
     as: 'span',
-    elementRef: (el) => {}
+    elementRef: () => {}
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -147,10 +173,12 @@ class Billboard extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get heroIsFunction() {
     return typeof this.props.hero === 'function'
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get SVGIconSize() {
     const size = this.props.size
 
@@ -166,6 +194,7 @@ class Billboard extends Component {
 
   renderHero() {
     if (this.heroIsFunction) {
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       return this.props.hero(this.SVGIconSize)
     } else {
       return this.props.hero
@@ -184,6 +213,7 @@ class Billboard extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleClick = (e) => {
     const { readOnly, onClick } = this.props
 
@@ -198,15 +228,18 @@ class Billboard extends Component {
   render() {
     const { href, disabled, readOnly, margin, styles, elementRef } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const Element = getElementType(Billboard, this.props)
 
     return (
       <View as="div" margin={margin}>
         <View
+          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
           {...omitProps(this.props, {
             ...Billboard.propTypes,
             ...View.propTypes
           })}
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; type: string | null; as... Remove this comment to see the full error message
           type={Element === 'button' ? 'button' : null}
           as={Element}
           elementRef={elementRef}
