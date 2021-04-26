@@ -28,14 +28,18 @@ import { contrast } from '@instructure/ui-color-utils'
 import generateComponentTheme from '../theme'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('Tag.theme', () => {
   const variants = ['default', 'inline']
 
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'context'.
   context('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
 
     variants.forEach((variant) => {
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'context'.
       context(`with the ${variant} variant`, () => {
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         it('should have a background and text colors that meet 3:1 contrast', () => {
           expect(
             contrast(
@@ -48,11 +52,14 @@ describe('Tag.theme', () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the accessible canvas theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
 
     variants.forEach((variant) => {
+      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'context'.
       context(`with the ${variant} variant`, () => {
+        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         it('should have a background and text colors that meet 4.5:1 contrast', () => {
           expect(
             contrast(

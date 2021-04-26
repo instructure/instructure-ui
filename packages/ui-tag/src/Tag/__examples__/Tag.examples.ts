@@ -26,6 +26,7 @@ export default {
   propValues: {
     text: ['Some tag', 'A lot of content which will truncate']
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       onClick: () => {}

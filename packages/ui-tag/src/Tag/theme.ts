@@ -29,6 +29,7 @@ import { darken } from '@instructure/ui-color-utils'
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
   const { borders, colors, forms, spacing, typography, key: themeName } = theme
 
@@ -47,16 +48,26 @@ const generateComponentTheme = (theme) => {
   }
 
   const tagVariant = function (
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'style' implicitly has an 'any' type.
     style,
     {
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderColor' implicitly has an 'a... Remove this comment to see the full error message
       borderColor,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderRadius' implicitly has an '... Remove this comment to see the full error message
       borderRadius,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderStyle' implicitly has an 'a... Remove this comment to see the full error message
       borderStyle,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'borderWidth' implicitly has an 'a... Remove this comment to see the full error message
       borderWidth,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'hoverColor' implicitly has an 'an... Remove this comment to see the full error message
       hoverColor,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'iconColor' implicitly has an 'any... Remove this comment to see the full error message
       iconColor,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'iconHoverColor' implicitly has an... Remove this comment to see the full error message
       iconHoverColor,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'mainColor' implicitly has an 'any... Remove this comment to see the full error message
       mainColor,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'textColor' implicitly has an 'any... Remove this comment to see the full error message
       textColor
     }
   ) {
@@ -92,6 +103,7 @@ const generateComponentTheme = (theme) => {
     iconMargin: spacing.small,
     transitionTiming: '0.2s',
 
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ borderColor: any; iconColor: a... Remove this comment to see the full error message
     ...tagVariant('default', {
       borderColor: colors.borderMedium,
       iconColor: colors.textDarkest,
@@ -100,6 +112,7 @@ const generateComponentTheme = (theme) => {
       textColor: colors.textDarkest
     }),
 
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ borderColor: any; borderRadius... Remove this comment to see the full error message
     ...tagVariant('inline', {
       borderColor: colors.borderDark,
       borderRadius: borders.radiusMedium,
@@ -112,6 +125,7 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

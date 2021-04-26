@@ -30,10 +30,31 @@ import { View } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  className?: string
+  text: string | React.ReactNode
+  title?: string
+  disabled?: boolean
+  readOnly?: boolean
+  dismissible?: boolean
+  margin?: typeof ThemeablePropValues.SPACING
+  onClick?: (...args: any[]) => any
+  elementRef?: (...args: any[]) => any
+  size?: 'small' | 'medium' | 'large'
+  variant?: 'default' | 'inline'
+}
 
 /**
 ---
@@ -43,7 +64,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Tag extends Component {
+class Tag extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -93,21 +114,28 @@ class Tag extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get focused() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Tag'... Remove this comment to see the full error message
     return isActiveElement(this._container)
   }
 
   focus = () => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Tag'... Remove this comment to see the full error message
     this._container && this._container.focus()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleClick = (e) => {
     const { disabled, readOnly, onClick } = this.props
 
@@ -119,7 +147,9 @@ class Tag extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleRef = (node) => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Tag'... Remove this comment to see the full error message
     this._container = node
   }
 
@@ -136,7 +166,9 @@ class Tag extends Component {
       styles
     } = this.props
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Tag.propTypes),
       Tag
     )

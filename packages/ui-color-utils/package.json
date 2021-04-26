@@ -6,6 +6,7 @@
   "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -17,7 +18,8 @@
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
-    "build:watch": "ui-build --watch"
+    "build:watch": "ui-build --watch",
+    "build:types": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "devDependencies": {
