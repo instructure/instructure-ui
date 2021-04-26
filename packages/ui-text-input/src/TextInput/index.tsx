@@ -41,6 +41,33 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  renderLabel?: React.ReactNode | ((...args: any[]) => any)
+  type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password'
+  id?: string
+  value?: any // TODO: controllable(PropTypes.string)
+  defaultValue?: string
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  messages?: any[] // TODO: FormPropTypes.message
+  size?: 'small' | 'medium' | 'large'
+  textAlign?: 'start' | 'center'
+  width?: string
+  htmlSize?: string | number
+  display?: 'inline-block' | 'block'
+  shouldNotWrap?: boolean
+  placeholder?: string
+  isRequired?: boolean
+  inputRef?: (...args: any[]) => any
+  inputContainerRef?: (...args: any[]) => any
+  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
+  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
+  onChange?: (...args: any[]) => any
+  onBlur?: (...args: any[]) => any
+  onFocus?: (...args: any[]) => any
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components
@@ -49,7 +76,7 @@ tags: form, field
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class TextInput extends Component {
+class TextInput extends Component<Props> {
   static propTypes = {
     /**
      * The form field label.
@@ -182,27 +209,38 @@ class TextInput extends Component {
     htmlSize: undefined,
     textAlign: 'start',
     messages: [],
+    // @ts-expect-error ts-migrate(6133) FIXME: 'input' is declared but its value is never read.
     inputRef: function (input) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'container' is declared but its value is never rea... Remove this comment to see the full error message
     inputContainerRef: function (container) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onChange: function (event, value) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: function (event) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onFocus: function (event) {},
     renderBeforeInput: undefined,
     renderAfterInput: undefined
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
     this.state = { hasFocus: false }
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Text... Remove this comment to see the full error message
     this._defaultId = uid('TextInput')
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
     this._messagesId = uid('TextInput-messages')
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleProps())
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleProps())
   }
 
@@ -211,22 +249,28 @@ class TextInput extends Component {
     return {
       disabled: interaction === 'disabled',
       invalid: this.invalid,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'hasFocus' does not exist on type 'Readon... Remove this comment to see the full error message
       focused: this.state.hasFocus
     }
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     this._input.focus()
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get interaction() {
+    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get hasMessages() {
     return this.props.messages && this.props.messages.length > 0
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get invalid() {
     return (
       this.props.messages &&
@@ -236,35 +280,50 @@ class TextInput extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get focused() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     return isActiveElement(this._input)
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get value() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     return this._input.value
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get id() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Text... Remove this comment to see the full error message
     return this.props.id || this._defaultId
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleInputRef = (node) => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     this._input = node
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.inputRef(node)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleChange = (event) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onChange(event, event.target.value)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleBlur = (event) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onBlur(event)
     this.setState({
       hasFocus: false
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleFocus = (event) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onFocus(event)
     this.setState({
       hasFocus: true
@@ -290,15 +349,19 @@ class TextInput extends Component {
     const { interaction } = this
 
     let descriptionIds = ''
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (props['aria-describedby']) {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       descriptionIds = `${props['aria-describedby']}`
     }
 
     if (this.hasMessages) {
       descriptionIds =
         descriptionIds !== ''
-          ? `${descriptionIds} ${this._messagesId}`
-          : this._messagesId
+          ? // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
+            `${descriptionIds} ${this._messagesId}`
+          : // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
+            this._messagesId
     }
 
     return (
@@ -312,10 +375,13 @@ class TextInput extends Component {
         type={type}
         id={this.id}
         required={isRequired}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
         aria-invalid={this.invalid ? 'true' : null}
         disabled={interaction === 'disabled'}
         readOnly={interaction === 'readonly'}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
         aria-describedby={descriptionIds !== '' ? descriptionIds : null}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number | undefined' is not assignab... Remove this comment to see the full error message
         size={htmlSize}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
@@ -346,11 +412,13 @@ class TextInput extends Component {
       <FormField
         id={this.id}
         label={callRenderProp(renderLabel)}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Tex... Remove this comment to see the full error message
         messagesId={this._messagesId}
         messages={messages}
         inline={display === 'inline-block'}
         width={width}
         inputContainerRef={inputContainerRef}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'layout' does not exist on type 'Readonly... Remove this comment to see the full error message
         layout={this.props.layout} // eslint-disable-line react/prop-types
       >
         <span css={this.props.styles.facade}>

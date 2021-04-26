@@ -36,12 +36,14 @@ const renderBeforeInput = () => {
             type="notification"
             variant="primary"
             standalone
+            // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
             margin="0 xx-small xxx-small 0"
           />
           Dismissible tag
         </span>
       }
       dismissible
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       margin="0 xx-small 0 0"
     />
   )
@@ -58,6 +60,7 @@ export default {
     width: [undefined, '4em'],
     messages: [undefined, [{ type: 'hint', text: 'hint text' }]]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       renderLabel: 'A text input',
@@ -69,6 +72,7 @@ export default {
     }
   },
   excludeProps: ['readOnly', 'disabled'],
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       (props.layout === 'inline' &&
