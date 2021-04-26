@@ -32,13 +32,37 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  as?: React.ReactElement
+  color?:
+    | 'primary'
+    | 'secondary'
+    | 'brand'
+    | 'success'
+    | 'warning'
+    | 'danger'
+    | 'alert'
+    | 'primary-inverse'
+    | 'secondary-inverse'
+  elementRef?: (...args: any[]) => any
+  fontStyle?: 'italic' | 'normal'
+  letterSpacing?: 'normal' | 'condensed' | 'expanded'
+  lineHeight?: 'default' | 'fit' | 'condensed' | 'double'
+  size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large'
+  transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase'
+  weight?: 'normal' | 'light' | 'bold'
+  wrap?: 'normal' | 'break-word'
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Text extends Component {
+class Text extends Component<Props> {
   static propTypes = {
     /**
      * the element type to render as
@@ -100,19 +124,24 @@ class Text extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
     const { children } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(Text, this.props)
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; css: any; ref: ((...a... Remove this comment to see the full error message
       <ElementType
         {...passthroughProps(this.props)}
         css={this.props.styles.text}

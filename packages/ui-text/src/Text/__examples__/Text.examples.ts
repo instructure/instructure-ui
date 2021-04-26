@@ -26,6 +26,7 @@ export default {
   sectionProp: 'weight',
   maxExamplesPerPage: 50,
   maxExamples: 1000,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getComponentProps: (props) => {
     return {
       children: ['x-small', 'small', 'medium', 'large'].includes(props.size)
@@ -33,6 +34,7 @@ export default {
         : 'Lorem ipsum dolor sit amet, consectetur'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
       background: props?.color?.includes('inverse')
@@ -41,6 +43,7 @@ export default {
       maxWidth: '25rem'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       // Only generate a 1 variation for non-'primary' color
