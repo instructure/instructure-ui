@@ -22,8 +22,32 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, borders, shadows, breakpoints, stacking } = theme
 
-import { Tray } from './index'
+  const componentVariables = {
+    background: colors?.backgroundLightest,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style,
+    boxShadow: shadows?.depth3,
+    xSmallWidth: breakpoints?.xSmall,
+    smallWidth: '20em', // 368px
+    regularWidth: breakpoints?.small,
+    mediumWidth: breakpoints?.medium,
+    largeWidth: breakpoints?.large,
+    zIndex: stacking?.topmost
+  }
 
-export const TrayLocator = locator(Tray.selector)
+  return {
+    ...componentVariables
+  }
+}
+
+export default generateComponentTheme

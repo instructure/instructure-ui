@@ -38,6 +38,39 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  label: string
+  size?: 'x-small' | 'small' | 'regular' | 'medium' | 'large'
+  placement?: 'top' | 'bottom' | 'start' | 'end' | 'center'
+  open?: boolean
+  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  contentRef?: (...args: any[]) => any
+  shouldContainFocus?: boolean
+  shouldReturnFocus?: boolean
+  shouldCloseOnDocumentClick?: boolean
+  onOpen?: (...args: any[]) => any
+  onClose?: (...args: any[]) => any
+  onDismiss?: (...args: any[]) => any
+  mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func])
+  insertAt?: 'bottom' | 'top'
+  liveRegion?:
+    | React.ReactElement[]
+    | React.ReactElement
+    | ((...args: any[]) => any)
+  onTransition?: (...args: any[]) => any
+  onEnter?: (...args: any[]) => any
+  onEntering?: (...args: any[]) => any
+  onEntered?: (...args: any[]) => any
+  onExit?: (...args: any[]) => any
+  onExiting?: (...args: any[]) => any
+  onExited?: (...args: any[]) => any
+  border?: boolean
+  shadow?: boolean
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
 /**
 ---
 category: components
@@ -46,7 +79,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class Tray extends Component {
+class Tray extends Component<Props> {
   static propTypes = {
     label: PropTypes.string.isRequired,
     children: PropTypes.node,
@@ -179,8 +212,11 @@ class Tray extends Component {
 
   static defaultProps = {
     open: false,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onOpen: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClose: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onDismiss: (event) => {},
     onEnter: () => {},
     onEntering: () => {},
@@ -191,6 +227,7 @@ class Tray extends Component {
     mountNode: null,
     insertAt: 'bottom',
     liveRegion: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     contentRef: (el) => {},
     shouldCloseOnDocumentClick: false,
     shouldContainFocus: true,
@@ -209,23 +246,29 @@ class Tray extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.open !== prevProps.open) {
       this.setState({ transitioning: true })
     }
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get placement() {
     const { placement, dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
 
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get direction() {
     switch (this.placement) {
       case 'top':
@@ -240,11 +283,14 @@ class Tray extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get transition() {
     return `slide-${this.direction}`
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get defaultFocusElement() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_closeButton' does not exist on type 'Tr... Remove this comment to see the full error message
     return this.props.defaultFocusElement || (() => this._closeButton)
   }
 
@@ -252,14 +298,19 @@ class Tray extends Component {
     this.setState({ transitioning: false })
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get DOMNode() {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Tray'.... Remove this comment to see the full error message
     return this._DOMNode
   }
 
+  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   set DOMNode(el) {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Tray'.... Remove this comment to see the full error message
     this._DOMNode = el
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'DOMNode' implicitly has an 'any' type.
   handlePortalOpen = (DOMNode) => {
     this.DOMNode = DOMNode
   }
@@ -327,6 +378,7 @@ class Tray extends Component {
             transitionExit
           >
             <span
+              // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
               {...omitProps(props, Tray.propTypes)}
               css={this.props.styles.tray}
               ref={contentRef}

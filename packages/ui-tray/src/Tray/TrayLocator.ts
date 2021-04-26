@@ -22,31 +22,9 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, borders, shadows, breakpoints, stacking } = theme
+import { locator } from '@instructure/ui-test-locator'
 
-  const componentVariables = {
-    background: colors?.backgroundLightest,
-    borderColor: colors?.borderMedium,
-    borderWidth: borders?.widthSmall,
-    borderStyle: borders?.style,
-    boxShadow: shadows?.depth3,
-    xSmallWidth: breakpoints?.xSmall,
-    smallWidth: '20em', // 368px
-    regularWidth: breakpoints?.small,
-    mediumWidth: breakpoints?.medium,
-    largeWidth: breakpoints?.large,
-    zIndex: stacking?.topmost
-  }
+import { Tray } from './index'
 
-  return {
-    ...componentVariables
-  }
-}
-
-export default generateComponentTheme
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const TrayLocator = locator(Tray.selector)
