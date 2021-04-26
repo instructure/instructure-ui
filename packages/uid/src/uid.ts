@@ -48,6 +48,7 @@ function uid(prefix = '', length = 12) {
   }
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'size' implicitly has an 'any' type.
 function _random(size) {
   const result = []
   /* eslint-disable-next-line no-param-reassign */
@@ -57,9 +58,10 @@ function _random(size) {
   return result
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter '_ignored' implicitly has an 'any' type.
 function _uid(_ignored, idLength = 12) {
-  var id = ''
-  var bytes = _random(idLength)
+  let id = ''
+  const bytes = _random(idLength)
   /* eslint-disable-next-line no-param-reassign */
   while (0 < idLength--) {
     id += dictionary[bytes[idLength] & dictionaryLengthMinus1]
