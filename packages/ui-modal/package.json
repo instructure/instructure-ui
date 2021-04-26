@@ -6,6 +6,7 @@
   "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
