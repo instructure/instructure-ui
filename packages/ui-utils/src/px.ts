@@ -42,6 +42,7 @@ import { parseUnit } from './parseUnit'
  * @param {DomNode} el - containing element, for context measure is em (defaults to document.body)
  * @returns {Number} Returns numerical representation of pixels
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'val' implicitly has an 'any' type.
 function px(val, el) {
   const container = el || document.body
 
@@ -52,8 +53,10 @@ function px(val, el) {
   const [num, unit] = parseUnit(val)
 
   if (unit === 'rem') {
+    // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     return num * getFontSize()
   } else if (unit === 'em') {
+    // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     return num * getFontSize(container)
   } else {
     return num

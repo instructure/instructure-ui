@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import stringify from 'json-stable-stringify'
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
 function toBase64(input) {
   const tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
   let output = ''
@@ -50,6 +52,7 @@ function toBase64(input) {
   return output
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
 function executeHash(input) {
   let hash = 0
 
@@ -64,6 +67,7 @@ function executeHash(input) {
   return toBase64(String(hash))
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
 function hash(value, maxLength) {
   if (typeof value === 'undefined') {
     throw new Error('Cannot hash a value which is undefined')
@@ -81,6 +85,7 @@ function hash(value, maxLength) {
     }
   }
 
+  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number' is not assignable to type '... Remove this comment to see the full error message
   hashedValue = executeHash(valueToHash)
 
   if (maxLength) {

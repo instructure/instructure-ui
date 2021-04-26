@@ -22,34 +22,29 @@
  * SOFTWARE.
  */
 
-import { expect, spy } from '@instructure/ui-test-utils'
-import { createChainedFunction } from '../createChainedFunction'
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Deep clones an array with sub arrays
+ *
+ * @param {Array} arr
+ * @returns {Array} Returns a copy of the array
+ */
 
-describe('createChainedFunction', () => {
-  it('should return null if no function provided', () => {
-    expect(createChainedFunction(null, undefined)).to.equal(null)
-  })
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
+function cloneArray(arr) {
+  let copy
+  if (Array.isArray(arr)) {
+    copy = arr.slice(0)
+    for (let i = 0; i < copy.length; i++) {
+      copy[i] = cloneArray(copy[i])
+    }
+    return copy
+  } else {
+    return arr
+  }
+}
 
-  it('should return a function', () => {
-    expect(typeof createChainedFunction(() => {})).to.equal('function')
-  })
-
-  it('should throw an error if something other than function, null, undefined provided', () => {
-    expect(() => {
-      createChainedFunction(12345)
-    }).to.throw(Error)
-  })
-
-  it('should execute all the functions', () => {
-    const spies = Array(5)
-      .fill(null)
-      .map(() => spy())
-    const chain = createChainedFunction(...spies)
-
-    chain()
-
-    spies.forEach((spy) => {
-      expect(spy).to.have.been.calledOnce()
-    })
-  })
-})
+export default cloneArray
+export { cloneArray }

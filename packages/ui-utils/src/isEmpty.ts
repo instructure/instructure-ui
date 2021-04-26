@@ -21,17 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const hasOwnProperty = Object.prototype.hasOwnProperty
 
-/**
- * ---
- * category: utilities
- * ---
- * Capitalize the first letter in a string
- * @param {String} str
- */
-function capitalizeFirstLetter(str) {
-  return str ? str.charAt(0).toUpperCase() + str.slice(1) : str
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'obj' implicitly has an 'any' type.
+function isEmpty(obj) {
+  if (typeof obj !== 'object') return true
+  for (const key in obj) {
+    if (hasOwnProperty.call(obj, key)) return false
+  }
+  return true
 }
 
-export default capitalizeFirstLetter
-export { capitalizeFirstLetter }
+export default isEmpty
+export { isEmpty }

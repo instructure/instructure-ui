@@ -22,42 +22,17 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Capitalize the first letter in a string
+ * @param {String} str
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
+function capitalizeFirstLetter(str) {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : str
+}
 
-import { cloneArray } from '../cloneArray'
-import { deepEqual } from '../deepEqual'
-
-describe('cloneArray', () => {
-  it('should return an array', () => {
-    const arr = [['one', 'two']['three']]
-
-    const newArr = cloneArray(arr)
-
-    expect(Array.isArray(newArr)).to.equal(true)
-  })
-
-  it('should preserve sub arrays', () => {
-    const arr = [['one', 'two'], ['three'], [4, 5, 6], [7, [8, 9, 10], 11, 12]]
-
-    const newArr = cloneArray(arr)
-
-    expect(newArr.length).to.equal(4)
-    expect(newArr[0].length).to.equal(2)
-    expect(newArr[2][1]).to.equal(5)
-    expect(Array.isArray(newArr[3][1])).to.equal(true)
-    expect(newArr[3][1][2]).to.equal(10)
-  })
-
-  it('should return a new array', () => {
-    let arr = [['one', 'two'], ['three']]
-    let newArr = cloneArray(arr)
-
-    expect(deepEqual(arr, newArr)).to.equal(true)
-    newArr[0][1] = 2
-    expect(deepEqual(arr, newArr)).to.equal(false)
-
-    let newArr2 = cloneArray(arr)
-    arr[0][0] = 1
-    expect(deepEqual(arr, newArr2)).to.equal(false)
-  })
-})
+export default capitalizeFirstLetter
+export { capitalizeFirstLetter }

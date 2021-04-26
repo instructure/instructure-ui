@@ -22,38 +22,35 @@
  * SOFTWARE.
  */
 
-import { parseUnit } from './parseUnit'
-
 /**
  * ---
  * category: utilities
  * ---
- * Converts a unit value time combination (s, ms) to a number representing ms
+ * Converts a CSS unit value combination into an array of type [ value, unit ]
  *
- * @module ms
+ * @module parseUnit
  *
  * Example inputs:
- *  - '100s'
- *  - '20ms'
+ *  - '100px'
+ *  - '20rem'
+ *  - '10vh'
+ *  - '400vmin'
  *
- * @param {String} val
- * @returns {Number} Returns numerical representation of milliseconds
+ * @param {string} str
+ * @returns {Array} Returns array of shape [ value, unit ]
  */
-function ms(val) {
-  if (!val || typeof val === 'number') {
-    return val
-  }
 
-  const [num, unit] = parseUnit(val)
-
-  if (unit === 'ms') {
-    return num
-  } else if (unit === 's') {
-    return num * 1000
-  } else {
-    return num
-  }
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
+function parseUnit(str) {
+  const value = `${str}`
+  return [
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 2.
+    parseFloat(value, 10),
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+    // eslint-disable-next-line no-useless-escape
+    value.match(/[\d.\-\+]*\s*(.*)/)[1] || ''
+  ]
 }
 
-export default ms
-export { ms }
+export default parseUnit
+export { parseUnit }

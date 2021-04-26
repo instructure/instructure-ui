@@ -36,6 +36,7 @@
  * @param {function} functions to chain
  * @returns {function|null}
  */
+// @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'funcs' implicitly has an 'any[]' t... Remove this comment to see the full error message
 function createChainedFunction(...funcs) {
   return funcs
     .filter((f, i) => {
@@ -58,8 +59,11 @@ function createChainedFunction(...funcs) {
         return f
       }
 
+      // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
       return function chainedFunction(...args) {
+        // @ts-expect-error ts-migrate(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         acc.apply(this, args)
+        // @ts-expect-error ts-migrate(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         f.apply(this, args)
       }
     }, null)
@@ -72,15 +76,19 @@ function createChainedFunction(...funcs) {
  * @param {*} val The value to find indexes for
  * @return {array} All the indexes of the Array matching val
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
 function getAllIndexes(arr, val) {
+  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'indexes' implicitly has type 'any[]' in ... Remove this comment to see the full error message
   const indexes = []
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   arr.forEach((e, i) => {
     if (e === val) {
       indexes.push(i)
     }
   })
 
+  // @ts-expect-error ts-migrate(7005) FIXME: Variable 'indexes' implicitly has an 'any[]' type.
   return indexes
 }
 

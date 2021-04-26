@@ -22,26 +22,40 @@
  * SOFTWARE.
  */
 
+import { parseUnit } from './parseUnit'
+
 /**
  * ---
  * category: utilities
  * ---
- * Converts a hyphenated string to camel case
+ * Converts a unit value time combination (s, ms) to a number representing ms
+ *
+ * @module ms
  *
  * Example inputs:
- *  - 'foo-bar'
- *  - 'baz-qux'
+ *  - '100s'
+ *  - '20ms'
  *
- * Example outputs:
- *  - 'fooBar'
- *  - 'bazQux'
- *
- * @param {String} str
- * @returns {String} Returns camel cased string
+ * @param {String} val
+ * @returns {Number} Returns numerical representation of milliseconds
  */
-function camelize(str) {
-  return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'val' implicitly has an 'any' type.
+function ms(val) {
+  if (!val || typeof val === 'number') {
+    return val
+  }
+
+  const [num, unit] = parseUnit(val)
+
+  if (unit === 'ms') {
+    return num
+  } else if (unit === 's') {
+    // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
+    return num * 1000
+  } else {
+    return num
+  }
 }
 
-export default camelize
-export { camelize }
+export default ms
+export { ms }

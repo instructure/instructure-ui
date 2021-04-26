@@ -21,39 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { capitalizeFirstLetter } from './capitalizeFirstLetter'
+import { camelize } from './camelize'
 
-import { expect } from '@instructure/ui-test-utils'
-import { getFontSize } from '@instructure/ui-dom-utils'
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Converts a hyphenated or camel cased string to pascal case
+ *
+ * Example inputs:
+ *  - 'foo-bar'
+ *  - 'baz-qux'
+ *
+ * Example outputs:
+ *  - 'FooBar'
+ *  - 'BazQux'
+ *
+ * @param {String} str
+ * @returns {String} Returns pascal cased string
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
+function pascalize(str) {
+  return capitalizeFirstLetter(camelize(str))
+}
 
-import { px } from '../px'
-
-describe('px', () => {
-  let node
-
-  beforeEach(() => {
-    node = document.createElement('div')
-    document.body.appendChild(node)
-  })
-
-  afterEach(() => {
-    node && node.parentNode && node.parentNode.removeChild(node)
-    node = null
-  })
-
-  it('handles px units', () => {
-    expect(px('30px')).to.equal(30)
-  })
-
-  it('converts rem to px', () => {
-    expect(px('50rem')).to.equal(50 * getFontSize())
-  })
-
-  it('converts em to px', () => {
-    node.style.fontSize = '24px'
-    expect(px('10em', node)).to.equal(10 * getFontSize(node))
-  })
-
-  it('handles unitless input', () => {
-    expect(px('4')).to.equal(4)
-  })
-})
+export default pascalize
+export { pascalize }

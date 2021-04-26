@@ -23,22 +23,27 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
+import { ms } from '../ms'
 
-import { within } from '../within'
-
-describe('within', () => {
-  it('returns true when values are within range', () => {
-    expect(within(10, 8, 2)).to.be.true()
-    expect(within(10, 11, 1)).to.be.true()
-    expect(within(10, 10, 0)).to.be.true()
-    expect(within(10, 9.999, 0.001)).to.be.true()
-    expect(within(-10, -15, 5)).to.be.true()
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('ms', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('handles ms unit', () => {
+    expect(ms('4ms')).to.equal(4)
   })
 
-  it('returns false when values are out of range', () => {
-    expect(within(10, 8, 1)).to.be.false()
-    expect(within(12, 10, 1.9999)).to.be.false()
-    expect(within(8.705, 8.7, 0.004)).to.be.false()
-    expect(within(-2, -1.5, 0.4)).to.be.false()
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('converts s to ms', () => {
+    expect(ms('0.3s')).to.equal(0.3 * 1000)
+  })
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('handles unitless input', () => {
+    expect(ms('15')).to.equal(15)
+  })
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('handles numeric input', () => {
+    expect(ms(15)).to.equal(15)
   })
 })

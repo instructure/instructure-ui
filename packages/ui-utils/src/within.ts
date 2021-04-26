@@ -22,22 +22,23 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { camelize } from '../camelize'
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Determines if one numerical value (a) is within a designated range (diff) of another (b)
+ *
+ * @module within
+ *
+ * @param {number} a
+ * @param {number} b
+ * @param {number} [diff=1]
+ * @returns {Boolean} Returns true if a is within the diff range of b
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'a' implicitly has an 'any' type.
+function within(a, b, diff = 1) {
+  return a + diff >= b && b >= a - diff
+}
 
-describe('convertCase', () => {
-  describe('camelize', () => {
-    it('handles hyphenated strings', () => {
-      expect(camelize('foo-bar')).to.equal('fooBar')
-      expect(camelize('baz-qux-foo')).to.equal('bazQuxFoo')
-      expect(camelize('xx-small')).to.equal('xxSmall')
-      expect(camelize('border-radius-x-large')).to.equal('borderRadiusXLarge')
-      expect(camelize('margin-xxLarge')).to.equal('marginXxLarge')
-    })
-
-    it('does not modify already camel cased strings', () => {
-      expect(camelize('fooBar')).to.equal('fooBar')
-      expect(camelize('bazQuxFoo')).to.equal('bazQuxFoo')
-    })
-  })
-})
+export default within
+export { within }

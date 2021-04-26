@@ -22,23 +22,28 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { ms } from '../ms'
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Converts a hyphenated string to camel case
+ *
+ * Example inputs:
+ *  - 'foo-bar'
+ *  - 'baz-qux'
+ *
+ * Example outputs:
+ *  - 'fooBar'
+ *  - 'bazQux'
+ *
+ * @param {String} str
+ * @returns {String} Returns camel cased string
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
+function camelize(str) {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'g' implicitly has an 'any' type.
+  return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+}
 
-describe('ms', () => {
-  it('handles ms unit', () => {
-    expect(ms('4ms')).to.equal(4)
-  })
-
-  it('converts s to ms', () => {
-    expect(ms('0.3s')).to.equal(0.3 * 1000)
-  })
-
-  it('handles unitless input', () => {
-    expect(ms('15')).to.equal(15)
-  })
-
-  it('handles numeric input', () => {
-    expect(ms(15)).to.equal(15)
-  })
-})
+export default camelize
+export { camelize }
