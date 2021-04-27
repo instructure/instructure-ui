@@ -59,10 +59,12 @@ const options = {
   files: [
     // these can be commented out for faster debugging
     '**/*.md', // package READMEs
-    '**/src/**/*.{js,ts,tsx}'
+    '**/src/*.{js,ts,tsx}', // util src files
+    '**/src/*/*.{js,ts,tsx}', // component src files
+    '**/src/*/*/*.{js,ts,tsx}' // child component src files
   ],
   ignore: [
-    '*macro.{js,ts}',
+    '**/macro.{js,ts}',
     '**/*-loader.{js,ts}',
     '**/svg/**',
     '**/packages/**/CHANGELOG.md',
@@ -79,7 +81,7 @@ const options = {
     '**/styles.{js,ts}',
     '**/theme.{js,ts}',
     '**/locator.{js,ts}',
-    '**/*Locator.js',
+    '**/*Locator.{js,ts}',
 
     // ignore index files that just re-export
     '**/src/index.{js,ts}',

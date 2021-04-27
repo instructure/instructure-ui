@@ -21,6 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { locator } from '@instructure/ui-test-locator'
+
 import { Avatar } from './index'
-export const AvatarLocator = locator((Avatar as any).selector)
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const AvatarLocator = locator(Avatar.selector)

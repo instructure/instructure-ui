@@ -29,16 +29,18 @@ import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
-/**
- ---
- category: components/utilities
- ---
- @module AccessibleContent
- */
+
 type Props = {
   alt?: string
   as?: React.ReactElement
 }
+
+/**
+---
+category: components/utilities
+---
+@module AccessibleContent
+**/
 class AccessibleContent extends Component<Props> {
   static propTypes = {
     alt: PropTypes.string,

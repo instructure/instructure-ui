@@ -32,19 +32,18 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
-/**
----
-category: components/utilities
----
-@module ScreenReaderContent
-**/
-
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   as?: React.ReactElement
 }
 
+/**
+---
+category: components/utilities
+---
+@module ScreenReaderContent
+**/
 @withStyle(generateStyle, null)
 class ScreenReaderContent extends Component<Props> {
   static propTypes = {
