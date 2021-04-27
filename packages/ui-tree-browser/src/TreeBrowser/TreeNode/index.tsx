@@ -32,8 +32,24 @@ import { callRenderProp } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
-import generateStyles from '../TreeButton/styles.js'
+import generateStyles from '../TreeButton/styles'
 import generateComponentTheme from '../TreeButton/theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  id?: string | number
+  size?: 'small' | 'medium' | 'large'
+  variant?: 'folderTree' | 'indent'
+  selected?: boolean
+  focused?: boolean
+  itemIcon?: React.ReactNode | ((...args: any[]) => any)
+  thumbnail?: string
+  level?: number
+  containerRef?: (...args: any[]) => any
+  onKeyDown?: (...args: any[]) => any
+  onClick?: (...args: any[]) => any
+}
 
 /**
 ---
@@ -48,7 +64,7 @@ in the TreeBrowser.
 
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class TreeNode extends Component {
+class TreeNode extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -91,16 +107,21 @@ class TreeNode extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleRef = (el) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     el && this.props.containerRef(el.parentElement)
   }
 
+  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderItemImage() {
     const { thumbnail, itemIcon, styles } = this.props
 

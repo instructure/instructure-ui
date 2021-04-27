@@ -34,10 +34,14 @@ import {
 import { color2hex } from '@instructure/ui-color-utils'
 import { TreeNode } from '../index'
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 const TreeNodeLocator = locator(TreeNode.selector)
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<TreeNode />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TreeNode>
         <button>Hello World</button>
@@ -47,7 +51,9 @@ describe('<TreeNode />', async () => {
     expect(item.find('Hello World')).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('supports containerRef prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const containerRef = stub()
     const node = (
       <div id="1">
@@ -56,18 +62,23 @@ describe('<TreeNode />', async () => {
         </TreeNode>
       </div>
     )
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
     const div = document.getElementById('1')
     expect(containerRef).to.have.been.calledWith(div)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('selected', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should take the selected CSS props if it is selected', async () => {
       const pink = '#FF00FF'
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeNode
           id="1"
           selected={true}
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           themeOverride={{ selectedBackgroundColor: pink }}
         >
           <div> Hello!</div>
@@ -78,7 +89,9 @@ describe('<TreeNode />', async () => {
       expect(color2hex(item.getComputedStyle().backgroundColor)).to.equal(pink)
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should take the focused class if it is focused', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeNode id="1" focused={true}>
           <input />

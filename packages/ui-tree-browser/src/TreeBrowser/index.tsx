@@ -36,11 +36,35 @@ import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { TreeCollection } from './TreeCollection'
+import { TreeButton } from './TreeButton'
 import { TreeNode } from './TreeNode'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
-import { TreeButton } from './TreeButton'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  collections: any
+  items: any
+  rootId?: string | number
+  expanded?: any // TODO: controllable( PropTypes.arrayOf( PropTypes.oneOfType([PropTypes.string, PropTypes.number]) ), 'onCollectionToggle' )
+  defaultExpanded?: (string | number)[]
+  selectionType?: 'none' | 'single'
+  size?: 'small' | 'medium' | 'large'
+  variant?: 'folderTree' | 'indent'
+  collectionIcon?: React.ReactNode | ((...args: any[]) => any)
+  collectionIconExpanded?: React.ReactNode | ((...args: any[]) => any)
+  itemIcon?: React.ReactNode | ((...args: any[]) => any)
+  getItemProps?: (...args: any[]) => any
+  getCollectionProps?: (...args: any[]) => any
+  showRootCollection?: boolean
+  onCollectionClick?: (...args: any[]) => any
+  onCollectionToggle?: (...args: any[]) => any
+  onItemClick?: (...args: any[]) => any
+  treeLabel?: string
+  renderContent?: (...args: any[]) => any
+}
 
 /**
 ---
@@ -49,7 +73,7 @@ category: components
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class TreeBrowser extends Component {
+class TreeBrowser extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -141,12 +165,17 @@ class TreeBrowser extends Component {
     collectionIcon: IconFolderLine,
     collectionIconExpanded: IconFolderLine,
     itemIcon: IconDocumentLine,
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
     getItemProps: (props) => props,
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
     getCollectionProps: (props) => props,
     defaultExpanded: [],
     selectionType: 'none',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'item' is declared but its value is never read.
     onItemClick: function (item) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'id' is declared but its value is never read.
     onCollectionClick: function (id, collection) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'collection' is declared but its value is never re... Remove this comment to see the full error message
     onCollectionToggle: function (collection) {},
     rootId: undefined,
     expanded: undefined,
@@ -158,38 +187,47 @@ class TreeBrowser extends Component {
   static Collection = TreeCollection
   static Button = TreeButton
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
     this.state = { selection: '' }
 
     if (typeof this.props.expanded === 'undefined') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'expanded' does not exist on type 'Readon... Remove this comment to see the full error message
       this.state.expanded = props.defaultExpanded
     }
   }
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleCollectionClick = (e, collection, expand = true) => {
     e.stopPropagation()
     const { onCollectionClick } = this.props
 
     if (expand) this.expandOrCollapseNode(collection)
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onCollectionClick(collection.id, collection) // TODO: this should pass the event as the first arg
     this.handleSelection(collection.id, 'collection')
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleItemClick = (e, item) => {
     e.stopPropagation()
     const { onItemClick } = this.props
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onItemClick(item)
     this.handleSelection(item.id, 'item') // TODO: this should pass the event as the first arg
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event, node) => {
     event.stopPropagation()
     switch (event.keyCode) {
@@ -235,13 +273,16 @@ class TreeBrowser extends Component {
     return this.getExpanded(this.state, this.props)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
   getExpanded(state, props) {
     return typeof props.expanded === 'undefined'
       ? state.expanded
       : props.expanded
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collection' implicitly has an 'any' typ... Remove this comment to see the full error message
   expandOrCollapseNode(collection) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onCollectionToggle(collection)
     if (typeof this.props.expanded === 'undefined') {
       this.setState((state, props) => {
@@ -250,6 +291,7 @@ class TreeBrowser extends Component {
         const expandedIndex = this.getExpandedIndex(expanded, collection.id)
 
         if (collection.expanded && expandedIndex < 0) {
+          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
           expanded.push(collection.id)
         } else if (expandedIndex >= 0) {
           expanded.splice(expandedIndex, 1)
@@ -260,11 +302,13 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'id' implicitly has an 'any' type.
   handleSelection(id, type) {
     const { selectionType } = this.props
     selectionType === 'single' &&
       this.setState((state) => {
         const selection = `${type}_${id}`
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         if (state.selection !== selection) {
           return { selection }
         } else {
@@ -274,11 +318,14 @@ class TreeBrowser extends Component {
   }
 
   getNavigableNodes() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'TreeBrows... Remove this comment to see the full error message
     return Array.from(this._root.querySelectorAll('[role="treeitem"]'))
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'delta' implicitly has an 'any' type.
   moveFocus(delta) {
     const nodes = this.getNavigableNodes()
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     const closest = window.document.activeElement.closest('[role="treeitem"]')
     const active = nodes.indexOf(closest)
     let next = active + delta
@@ -288,12 +335,16 @@ class TreeBrowser extends Component {
       next = nodes.length - 1
     }
     nodes.forEach((n) => {
+      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
       n.setAttribute('tabindex', '-1')
     })
+    // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
     nodes[next].setAttribute('tabindex', '0')
+    // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
     nodes[next].focus()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'keyCode' implicitly has an 'any' type.
   homeOrEnd(keyCode) {
     const length = this.getNavigableNodes().length
     if (keyCode === keycode.codes.home) {
@@ -303,9 +354,11 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'keyCode' implicitly has an 'any' type.
   handleLeftOrRightArrow(keyCode, node) {
     const ltr = !(
-      this._root.parentElement.dir === 'rtl' || document.dir === 'rtl'
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'TreeBrows... Remove this comment to see the full error message
+      (this._root.parentElement.dir === 'rtl' || document.dir === 'rtl')
     )
     if (
       (ltr && keyCode === keycode.codes.left) ||
@@ -317,6 +370,7 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleOpenOrNext(node) {
     if (
       node &&
@@ -329,6 +383,7 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleCloseOrPrevious(node) {
     if (node && this.expanded.includes(node.id) && node.type === 'collection') {
       this.expandOrCollapseNode(node)
@@ -337,6 +392,7 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleActivation(event, node) {
     if (node == null) return
     if (node.type === 'collection') {
@@ -350,6 +406,7 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7023) FIXME: 'getSubCollections' implicitly has return type 'an... Remove this comment to see the full error message
   getSubCollections(collection) {
     const collections = [].concat(collection.collections || [])
 
@@ -358,6 +415,7 @@ class TreeBrowser extends Component {
       .filter((collection) => collection != null)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collection' implicitly has an 'any' typ... Remove this comment to see the full error message
   getItems(collection) {
     if (collection.items) {
       const items = [].concat(collection.items)
@@ -372,11 +430,13 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collection' implicitly has an 'any' typ... Remove this comment to see the full error message
   getIsFlattened = (collection) => {
     const { rootId, showRootCollection } = this.props
     return !showRootCollection && rootId && collection.id === rootId
   }
 
+  // @ts-expect-error ts-migrate(7023) FIXME: 'getCollectionProps' implicitly has return type 'a... Remove this comment to see the full error message
   getCollectionProps(collection) {
     return {
       id: collection.id,
@@ -392,7 +452,9 @@ class TreeBrowser extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'expanded' implicitly has an 'any' type.
   getExpandedIndex(expanded, id) {
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'expanded' implicitly has an 'any' type.
     return expanded.findIndex((expanded) => String(expanded) === String(id))
   }
 
@@ -400,8 +462,10 @@ class TreeBrowser extends Component {
     return this.collections.map((collection, i) => (
       <TreeCollection
         key={i}
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(omitProps(this.props), TreeCollection.propTypes)}
         {...this.getCollectionProps(collection)}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         selection={this.state.selection}
         onItemClick={this.handleItemClick}
         onCollectionClick={this.handleCollectionClick}
@@ -422,8 +486,10 @@ class TreeBrowser extends Component {
         css={styles.treeBrowser}
         tabIndex={0}
         role="tree"
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '(event: any, node: any) => void' is not assi... Remove this comment to see the full error message
         onKeyDown={this.handleKeyDown}
         ref={(el) => {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'TreeBrows... Remove this comment to see the full error message
           this._root = el
         }}
         aria-label={this.props.treeLabel}

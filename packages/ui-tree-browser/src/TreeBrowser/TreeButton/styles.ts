@@ -45,6 +45,7 @@ const transform = keyframes`{
  * @param  {Object} props the props of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyles = (componentTheme, props) => {
   const { size, variant, selected, focused, level } = props
 
@@ -175,6 +176,7 @@ const generateStyles = (componentTheme, props) => {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...sizeMap[size].textName
   }
 
@@ -242,6 +244,7 @@ const generateStyles = (componentTheme, props) => {
             insetInlineEnd: 'auto',
             top: '50%',
             ...(selected && { visibility: 'hidden' }),
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             ...sizeMap[size][variant].before
           },
           '&:hover::before': {
@@ -287,6 +290,7 @@ const generateStyles = (componentTheme, props) => {
       alignItems: 'center',
       lineHeight: 1,
       minHeight: '2rem',
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...layoutPadding[size][variant]
     },
     text: {
@@ -310,6 +314,7 @@ const generateStyles = (componentTheme, props) => {
       color: selected
         ? componentTheme.selectedTextColor
         : componentTheme.descriptorTextColor,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeMap[size].textDescriptor
     },
     icon: {
@@ -323,10 +328,12 @@ const generateStyles = (componentTheme, props) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeMap[size][variant].icon
     },
     thumbnail: {
       label: 'treeButton__thumbnail',
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeMap[size][variant].thumbnail
     },
     node: {

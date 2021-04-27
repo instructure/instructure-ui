@@ -27,18 +27,26 @@ import { expect, mount, locator, stub } from '@instructure/ui-test-utils'
 
 import { TreeButton } from '../index'
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 const TreeButtonLocator = locator(TreeButton.selector)
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<TreeButton />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TreeButton id="1" />)
     const treeButton = await TreeButtonLocator.find()
     expect(treeButton).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('containerRef', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call with parent element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const containerRef = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div id="1">
           <TreeButton id="2" containerRef={containerRef} />
@@ -49,8 +57,11 @@ describe('<TreeButton />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('descriptor', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not render a descriptor element if no descriptor passed', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" />)
       const treeButton = await TreeButtonLocator.find()
       expect(
@@ -60,7 +71,9 @@ describe('<TreeButton />', async () => {
       ).to.not.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render a descriptor element if descriptor passed', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" descriptor="Some Descriptor" />)
       const descriptor = await TreeButtonLocator.find(
         '[class$="-treeButton__textDescriptor"]:contains(Some Descriptor)'
@@ -69,6 +82,7 @@ describe('<TreeButton />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('icons', async () => {
     const Icon = (
       <svg height="100" width="100">
@@ -77,7 +91,9 @@ describe('<TreeButton />', async () => {
       </svg>
     )
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render a collection icon', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton id="1" type="collection" collectionIcon={() => Icon} />
       )
@@ -85,20 +101,26 @@ describe('<TreeButton />', async () => {
       expect(icon).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render an item icon', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" type="item" itemIcon={() => Icon} />)
       const icon = await TreeButtonLocator.find('svg:contains(Test icon)')
       expect(icon).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render no icon if no icon prop passed', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" />)
       expect(
         await TreeButtonLocator.find('svg', { expectEmpty: true })
       ).to.not.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render a thumbnail instead of an icon if a thumbnail URL is passed', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton
           id="1"
@@ -111,7 +133,9 @@ describe('<TreeButton />', async () => {
       expect(thumbnail).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not render a thumbnail if no thumbnail URL is passed', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" type="item" />)
 
       expect(
@@ -119,7 +143,9 @@ describe('<TreeButton />', async () => {
       ).to.not.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render a thumbnail if a thumbnail and an icon are passed', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton
           id="1"
@@ -136,11 +162,15 @@ describe('<TreeButton />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('renderContent', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render the content passed to renderContent', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton
           id="1"
+          // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
           renderContent={(props) => <div className="test1">abcd</div>}
         />
       )

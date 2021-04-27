@@ -21,18 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { TreeBrowser } from './index'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, typography, borders } = theme
 
-// TODO: if we make a TreeBrowserItem component + locator we could use it here.
-const TreeBrowserItemLocator = locator('[role="treeitem"]')
-
-export const TreeBrowserLocator = locator(TreeBrowser.selector, {
-  findAllItems: (...args) => {
-    return TreeBrowserItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return TreeBrowserItemLocator.find(...args)
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    baseSpacingSmall: spacing?.xSmall,
+    baseSpacingMedium: spacing?.small,
+    baseSpacingLarge: '1rem',
+    borderWidth: borders?.widthSmall,
+    borderColor: colors?.borderDark
   }
-})
+
+  return {
+    ...componentVariables
+  }
+}
+
+export default generateComponentTheme

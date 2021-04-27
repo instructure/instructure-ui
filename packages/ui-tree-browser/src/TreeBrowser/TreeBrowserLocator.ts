@@ -21,27 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, spacing, typography, borders } = theme
+import { TreeBrowser } from './index'
 
-  const componentVariables = {
-    fontFamily: typography?.fontFamily,
-    baseSpacingSmall: spacing?.xSmall,
-    baseSpacingMedium: spacing?.small,
-    baseSpacingLarge: '1rem',
-    borderWidth: borders?.widthSmall,
-    borderColor: colors?.borderDark
+// TODO: if we make a TreeBrowserItem component + locator we could use it here.
+const TreeBrowserItemLocator = locator('[role="treeitem"]')
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const TreeBrowserLocator = locator(TreeBrowser.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findAllItems: (...args) => {
+    return TreeBrowserItemLocator.findAll(...args)
+  },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findItem: (...args) => {
+    return TreeBrowserItemLocator.find(...args)
   }
-
-  return {
-    ...componentVariables
-  }
-}
-
-export default generateComponentTheme
+})

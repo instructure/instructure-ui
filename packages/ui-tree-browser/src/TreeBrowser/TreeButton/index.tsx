@@ -34,6 +34,28 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  id?: string | number
+  name?: string
+  descriptor?: string
+  type?: string
+  size?: 'small' | 'medium' | 'large'
+  variant?: 'folderTree' | 'indent'
+  collectionIcon?: React.ReactNode | ((...args: any[]) => any)
+  collectionIconExpanded?: React.ReactNode | ((...args: any[]) => any)
+  itemIcon?: React.ReactNode | ((...args: any[]) => any)
+  thumbnail?: string
+  onClick?: (...args: any[]) => any
+  expanded?: boolean
+  selected?: boolean
+  focused?: boolean
+  level?: number
+  containerRef?: any // TODO: function () {}
+  renderContent?: any // TODO: function () {}
+}
+
 /**
 ---
 parent: TreeBrowser
@@ -45,7 +67,7 @@ id: TreeBrowser.Button
 
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class TreeButton extends Component {
+class TreeButton extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -94,12 +116,15 @@ class TreeButton extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   defaultContentRenderer(props) {
     const { name, descriptor, styles } = props
     return (
@@ -117,6 +142,7 @@ class TreeButton extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderImage() {
     const { type } = this.props
     switch (type) {
@@ -129,6 +155,7 @@ class TreeButton extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderCollectionIcon() {
     const {
       expanded,
@@ -146,6 +173,7 @@ class TreeButton extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderItemImage() {
     const { thumbnail, itemIcon, styles } = this.props
 
@@ -162,6 +190,7 @@ class TreeButton extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleRef = (el) => {
     el && this.props.containerRef(el.parentElement)
   }
