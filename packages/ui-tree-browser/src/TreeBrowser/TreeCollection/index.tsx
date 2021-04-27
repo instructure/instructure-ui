@@ -23,6 +23,7 @@
  */
 
 /** @jsx jsx */
+/** @jsxFrag React.Fragment */
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -241,7 +242,6 @@ class TreeCollection extends Component<Props> {
 
     let position = 1
     return (
-      // @ts-expect-error ts-migrate(17017) FIXME: An @jsxFrag pragma is required when using an @jsx ... Remove this comment to see the full error message
       <>
         {renderBeforeItems &&
           this.renderCollectionChildren(
