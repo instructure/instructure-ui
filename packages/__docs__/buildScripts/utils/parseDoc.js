@@ -30,12 +30,12 @@ const getFrontMatter = require('./getFrontMatter')
 
 module.exports = function (resourcePath, source, errorHandler) {
   const extension = path.extname(resourcePath)
-
+  const allowedExtensions = ['.js', '.ts', '.tsx']
   let doc
 
   if (extension === '.md') {
     doc = { description: source }
-  } else if (extension === '.js') {
+  } else if (allowedExtensions.includes(extension)) {
     doc = getReactDoc(source, resourcePath, errorHandler)
     if (!doc.props) {
       doc = getJSDoc(source, errorHandler)

@@ -70,7 +70,10 @@ function getDocId(docData, context, fullPath) {
   if (id) {
     // exist if it was in the description at the top
     docId = id
-  } else if (lowerPath.includes('/index.js')) {
+  } else if (
+    lowerPath.includes('/index.js') ||
+    lowerPath.includes('/index.tsx')
+  ) {
     docId = path.basename(context) // return its folder name
   } else if (lowerPath.includes('readme.md')) {
     const folder = path.basename(context)

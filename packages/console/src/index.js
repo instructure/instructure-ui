@@ -21,9 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export * from './console'
+import {
+  error,
+  warn,
+  warnDeprecated,
+  log,
+  info,
+  assert,
+  debug
+} from './console'
 
-export {
+import {
   error as logError,
   warn as logWarn,
   warnDeprecated as logWarnDeprecated,
@@ -32,3 +40,20 @@ export {
   debug as logDebug,
   log as consoleLog
 } from './macro'
+
+export {
+  error,
+  warn,
+  warnDeprecated,
+  log,
+  info,
+  assert,
+  debug,
+  logError,
+  logWarn,
+  logWarnDeprecated,
+  logInfo,
+  logDebug,
+  logAssert,
+  consoleLog
+}
