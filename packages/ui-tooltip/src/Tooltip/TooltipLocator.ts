@@ -24,19 +24,23 @@
 
 import { locator } from '@instructure/ui-test-locator'
 import { parseQueryArguments } from '@instructure/ui-test-queries'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 import { Tooltip } from './index'
 
 export const customMethods = {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findTrigger: (...args) => {
     const { element, options } = parseQueryArguments(...args)
     return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findContent: (...args) => {
     const { element, options } = parseQueryArguments(...args)
     return PopoverLocator.findContent(element, '[role="tooltip"]', options)
   }
 }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TooltipLocator = locator(Tooltip.selector, customMethods)

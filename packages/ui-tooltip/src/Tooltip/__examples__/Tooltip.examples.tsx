@@ -26,6 +26,7 @@ import React from 'react'
 export default {
   maxExamplesPerPage: 50,
   propValues: {},
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       renderTip: 'Hello world',
@@ -33,6 +34,7 @@ export default {
       children: <a href="/">Tooltip</a>
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
       dir: props.dir,
@@ -44,6 +46,7 @@ export default {
       textAlign: 'center'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (!props.defaultIsShowingContent) return true
 

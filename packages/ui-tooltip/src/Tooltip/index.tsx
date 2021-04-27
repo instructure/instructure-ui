@@ -43,6 +43,25 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderTip: React.ReactNode | ((...args: any[]) => any)
+  isShowingContent?: boolean
+  defaultIsShowingContent?: boolean
+  as?: React.ReactElement
+  on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
+  color?: 'primary' | 'primary-inverse'
+  placement?: any // TODO: PositionPropTypes.placement
+  mountNode?: any // TODO: PositionPropTypes.mountNode
+  constrain?: any // TODO: PositionPropTypes.constrain
+  offsetX?: string | number
+  offsetY?: string | number
+  positionTarget?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
+  onShowContent?: (...args: any[]) => any
+  onHideContent?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components
@@ -50,7 +69,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Tooltip extends Component {
+class Tooltip extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -142,7 +161,9 @@ class Tooltip extends Component {
     offsetX: 0,
     offsetY: 0,
     positionTarget: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onShowContent: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onHideContent: (event, { documentClick }) => {}
   }
 
@@ -150,17 +171,22 @@ class Tooltip extends Component {
   state = { hasFocus: false }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleFocus = (event) => {
     this.setState({ hasFocus: true })
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleBlur = (event) => {
     this.setState({ hasFocus: false })
   }
@@ -173,7 +199,9 @@ class Tooltip extends Component {
     }
 
     if (as) {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const Trigger = getElementType(Tooltip, this.props)
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const props = omitProps(this.props, Tooltip.propTypes)
       return (
         <Trigger {...props} {...triggerProps}>
@@ -183,6 +211,7 @@ class Tooltip extends Component {
     } else if (typeof children === 'function') {
       return children({
         focused: hasFocus,
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getTriggerProps: (props) => {
           return {
             ...triggerProps,
