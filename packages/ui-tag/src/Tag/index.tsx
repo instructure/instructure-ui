@@ -124,7 +124,6 @@ class Tag extends Component<Props> {
     this.props.makeStyles()
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get focused() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Tag'... Remove this comment to see the full error message
     return isActiveElement(this._container)

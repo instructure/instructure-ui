@@ -173,12 +173,10 @@ class Billboard extends Component<Props> {
     )
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get heroIsFunction() {
     return typeof this.props.hero === 'function'
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get SVGIconSize() {
     const size = this.props.size
 

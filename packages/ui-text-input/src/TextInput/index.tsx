@@ -259,18 +259,15 @@ class TextInput extends Component<Props> {
     this._input.focus()
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get interaction() {
     // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get hasMessages() {
     return this.props.messages && this.props.messages.length > 0
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get invalid() {
     return (
       this.props.messages &&
@@ -280,19 +277,16 @@ class TextInput extends Component<Props> {
     )
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get focused() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     return isActiveElement(this._input)
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get value() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'TextInpu... Remove this comment to see the full error message
     return this._input.value
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get id() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Text... Remove this comment to see the full error message
     return this.props.id || this._defaultId

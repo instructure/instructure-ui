@@ -10,6 +10,7 @@
     "allowJs": true,
     "isolatedModules": true,
     "jsx": "react",
+    "target": "ES6",
     // interop between ESM and CJS. Recommended by TS
     "esModuleInterop": true,
     // significant perf increase by skipping checking .d.ts files, particularly those in node_modules. Recommended by TS

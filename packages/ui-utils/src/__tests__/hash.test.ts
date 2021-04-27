@@ -491,7 +491,6 @@ describe('hash', () => {
             this._settings = settings
           }
 
-          // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
           get settings() {
             // @ts-expect-error ts-migrate(2551) FIXME: Property '_settings' does not exist on type 'Somet... Remove this comment to see the full error message
             return this._settings
@@ -512,7 +511,6 @@ describe('hash', () => {
             this._settings = settings
           }
 
-          // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
           get settings() {
             // @ts-expect-error ts-migrate(2551) FIXME: Property '_settings' does not exist on type 'Somet... Remove this comment to see the full error message
             return this._settings
@@ -541,7 +539,6 @@ describe('hash', () => {
             this.settings = settings
           }
 
-          // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
           get settings() {
             return this.settings
           }
@@ -561,7 +558,6 @@ describe('hash', () => {
             this._settings = settings
           }
 
-          // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
           get settings() {
             // @ts-expect-error ts-migrate(2551) FIXME: Property '_settings' does not exist on type 'Somet... Remove this comment to see the full error message
             return this._settings
@@ -590,7 +586,6 @@ describe('hash', () => {
             this._settings = settings
           }
 
-          // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
           get settings() {
             // @ts-expect-error ts-migrate(2551) FIXME: Property '_settings' does not exist on type 'Somet... Remove this comment to see the full error message
             return this._settings
@@ -611,7 +606,6 @@ describe('hash', () => {
             this._settings = settings
           }
 
-          // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
           get settings() {
             // @ts-expect-error ts-migrate(2551) FIXME: Property '_settings' does not exist on type 'Somet... Remove this comment to see the full error message
             return this._settings

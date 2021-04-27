@@ -33,7 +33,6 @@
  * @returns {Object} a new object with items from all arguments
  */
 function mergeDeep() {
-  // @ts-expect-error ts-migrate(2569) FIXME: Type 'IArguments' is not an array type or a string... Remove this comment to see the full error message
   // eslint-disable-next-line prefer-rest-params
   const args = [...arguments]
   let target = {}
@@ -58,10 +57,8 @@ function mergeSourceIntoTarget(target, source) {
       if (isObject(target[key]) && isObject(source[key])) {
         merged[key] = mergeSourceIntoTarget(target[key], source[key])
       } else if (isArray(source[key]) && isArray(target[key])) {
-        // @ts-expect-error ts-migrate(2569) FIXME: Type 'Set<any>' is not an array type or a string t... Remove this comment to see the full error message
         merged[key] = [...new Set([...target[key], ...source[key]])]
       } else if (isArray(target[key])) {
-        // @ts-expect-error ts-migrate(2569) FIXME: Type 'Set<any>' is not an array type or a string t... Remove this comment to see the full error message
         merged[key] = [...new Set([...target[key], ...[source[key]]])]
       } else {
         merged[key] = source[key]

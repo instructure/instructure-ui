@@ -125,7 +125,6 @@ class FocusRegion {
     }
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get id() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'FocusRegion... Remove this comment to see the full error message
     return this._id
@@ -133,12 +132,10 @@ class FocusRegion {
 
   // Focused returns when the focus region is active. Checking focused with the active element
   // is inconsistent across browsers (Safari/Firefox do not focus elements on click)
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get focused() {
     return this._active
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get keyboardFocusable() {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     return (findTabbable(this._contextElement) || []).length > 0

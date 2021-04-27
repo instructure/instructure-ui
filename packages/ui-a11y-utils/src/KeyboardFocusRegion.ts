@@ -68,12 +68,10 @@ class KeyboardFocusRegion {
   _raf = []
   _active = false
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get focused() {
     return containsActiveElement(this._contextElement)
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get shouldContainFocus() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
     const { shouldContainFocus } = this._options
@@ -85,58 +83,48 @@ class KeyboardFocusRegion {
     )
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get focusable() {
     return findFocusable(this._contextElement, () => true, true) || []
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get tabbable() {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     return findTabbable(this._contextElement) || []
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get firstTabbable() {
     return this.tabbable[0]
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get lastTabbable() {
     return this.tabbable.pop()
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get firstFocusable() {
     return this.focusable[0]
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get lastFocusable() {
     return this.focusable.pop()
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get doc() {
     return ownerDocument(this._contextElement)
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get win() {
     return ownerWindow(this._contextElement)
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get activeElement() {
     return getActiveElement(this.doc)
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get defaultFocusElement() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
     const { defaultFocusElement } = this._options
 
-    let element = findDOMNode(
+    const element = findDOMNode(
       typeof defaultFocusElement === 'function'
         ? defaultFocusElement()
         : defaultFocusElement

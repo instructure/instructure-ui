@@ -259,7 +259,6 @@ class Tray extends Component<Props> {
     this.props.makeStyles()
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get placement() {
     const { placement, dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
@@ -268,7 +267,6 @@ class Tray extends Component<Props> {
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get direction() {
     switch (this.placement) {
       case 'top':
@@ -283,12 +281,10 @@ class Tray extends Component<Props> {
     }
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get transition() {
     return `slide-${this.direction}`
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get defaultFocusElement() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_closeButton' does not exist on type 'Tr... Remove this comment to see the full error message
     return this.props.defaultFocusElement || (() => this._closeButton)
@@ -298,13 +294,11 @@ class Tray extends Component<Props> {
     this.setState({ transitioning: false })
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   get DOMNode() {
     // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Tray'.... Remove this comment to see the full error message
     return this._DOMNode
   }
 
-  // @ts-expect-error ts-migrate(1056) FIXME: Accessors are only available when targeting ECMASc... Remove this comment to see the full error message
   set DOMNode(el) {
     // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Tray'.... Remove this comment to see the full error message
     this._DOMNode = el
