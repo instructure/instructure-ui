@@ -23,32 +23,22 @@
  */
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { typography } = theme
+
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    lineHeight: typography?.lineHeight
+  }
+
   return {
-    truncateText: {
-      label: 'truncateText',
-      display: 'block',
-      overflow: 'hidden',
-      wordWrap: 'break-word',
-      fontFamily: componentTheme.fontFamily
-    },
-    auto: { label: 'truncateText__auto', height: '100%' },
-    spacer: {
-      label: 'truncateText__spacer',
-      visibility: 'hidden',
-      maxHeight: '0',
-      display: 'block'
-    },
-    lineHeight: componentTheme.lineHeight
+    ...componentVariables
   }
 }
-export default generateStyle
+
+export default generateComponentTheme

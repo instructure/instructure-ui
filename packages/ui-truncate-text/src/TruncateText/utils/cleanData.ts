@@ -39,6 +39,7 @@ import { cloneArray } from '@instructure/ui-utils'
  * @param {string} options.ellipsis The string being used as an ellipsis.
  * @param {boolean} repeat=false Do a thorough clean.
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'stringData' implicitly has an 'any' typ... Remove this comment to see the full error message
 function cleanData(stringData, options, repeat = false) {
   const { truncate, ignore, ellipsis } = options
 
@@ -126,7 +127,7 @@ function cleanData(stringData, options, repeat = false) {
   } else {
     findEllipsis()
 
-    let node = newData[ellipsisNode]
+    const node = newData[ellipsisNode]
 
     if (node) {
       const before = node[ellipsisIndex - 1]
@@ -157,7 +158,7 @@ function cleanData(stringData, options, repeat = false) {
         if (prevNode) {
           const lastChar = String(prevNode.slice(-1)).slice(-1)
           if (ignore.indexOf(lastChar) !== -1) {
-            let lastItem = prevNode.length - 1
+            const lastItem = prevNode.length - 1
             newData[prevNodeIndex][lastItem] = prevNode[lastItem].slice(0, -1)
           }
         }

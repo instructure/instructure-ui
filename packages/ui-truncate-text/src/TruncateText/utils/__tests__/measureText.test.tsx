@@ -27,16 +27,22 @@ import { expect, mount } from '@instructure/ui-test-utils'
 
 import measureText from '../measureText'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('measureText', async () => {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'root' implicitly has an 'any' type.
   const getNodes = (root) =>
     Array.from(root.childNodes).filter(
+      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
       (node) => node.nodeType === 1 || node.nodeType === 3
     )
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should calculate width', async () => {
     let stage
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
         componentRef={(el) => {
           stage = el
         }}
@@ -51,10 +57,13 @@ describe('measureText', async () => {
     expect(width).to.not.equal(0)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should account for different nodes', async () => {
     let stage
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
         componentRef={(el) => {
           stage = el
         }}
@@ -77,10 +86,13 @@ describe('measureText', async () => {
     expect(Math.floor(width)).to.equal(Math.floor(width2))
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should account for font size styles', async () => {
     let stage
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
         componentRef={(el) => {
           stage = el
         }}
@@ -100,10 +112,13 @@ describe('measureText', async () => {
     expect(width).to.not.equal(width2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should account for letter spacing styles', async () => {
     let stage
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
         componentRef={(el) => {
           stage = el
         }}

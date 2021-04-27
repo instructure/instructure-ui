@@ -34,6 +34,7 @@ import { getComputedStyle } from '@instructure/ui-dom-utils'
  * @param {DOMNode[]} nodes Array of DOM nodes.
  * @param {DOMNode} parentNode The node to inherit default styles from.
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nodes' implicitly has an 'any' type.
 function measureText(nodes, parentNode) {
   let width = 0
   for (let i = 0; i < nodes.length; i++) {
@@ -43,6 +44,7 @@ function measureText(nodes, parentNode) {
   return width
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'string' implicitly has an 'any' type.
 function measure(string, domNode) {
   const style = getComputedStyle(domNode)
   // we use a canvas in a doc fragment to prevent having to render the string full width in the DOM
@@ -60,23 +62,33 @@ function measure(string, domNode) {
   // grab individual font styles
   // some browsers don't report a value for style['font']
   const font = [
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     style['font-weight'],
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     style['font-style'],
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     style['font-size'],
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     style['font-family']
   ].join(' ')
 
   context.font = font
 
+  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   if (style['text-transform'] === 'uppercase') {
     text = string.toUpperCase()
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   } else if (style['text-transform'] === 'lowercase') {
     text = string.toLowerCase()
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   } else if (style['text-transform'] === 'capitalize') {
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
     text = string.replace(/\b\w/g, (str) => str.toUpperCase())
   }
 
+  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   if (style['letter-spacing'] !== 'normal') {
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     letterOffset = text.length * parseInt(style['letter-spacing'])
   }
 
