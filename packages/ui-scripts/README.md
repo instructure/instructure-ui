@@ -85,14 +85,6 @@ To publish all packages (defaults to current version):
 
 `yarn ui-scripts --publish [version]`
 
-#### `fix-publish`
-
-If the publish command fails, you can run the `fix-publish` script to publish
-a version if it hasn't been published already. This script will try to determine
-(using `npm info`) if the version is already published before publishing.
-
-`yarn ui-scripts --fix-publish [version]`
-
 #### `post-publish`
 
 To run post-publish steps

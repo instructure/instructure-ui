@@ -21,61 +21,113 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackageJSON } = require('@instructure/pkg-utils')
-const { error, info } = require('@instructure/command-utils')
+const { getPackageJSON, getPackages } = require('@instructure/pkg-utils')
+const {
+  error,
+  info,
+  runCommandSync,
+  runCommandAsync,
+  confirm
+} = require('@instructure/command-utils')
 
-const { publishPackages, createNPMRCFile } = require('./utils/npm')
-const { isReleaseCommit, setupGit } = require('./utils/git')
 const { getConfig } = require('./utils/config')
+const {
+  checkWorkingDirectory,
+  isReleaseCommit,
+  setupGit
+} = require('./utils/git')
+const { createNPMRCFile } = require('./utils/npm')
 
 try {
   const pkgJSON = getPackageJSON()
   // Arguments
-  // 1: publish type. defaults to latest. If set to 'maintenance', it will publish with vx_maintenance tag
-  // e.g.: ui-scripts --publish maintenance
-  publish({
+  // 1: version to publish. If current version, use 'current' or do not pass any arguments otherwise e.g.: 8.1.3
+  // 2: publish type. defaults to current. If set to 'maintenance', it will publish with vx_maintenance tag
+  // e.g.: ui-scripts --publish 5.12.2 maintenance
+  const releaseVersion =
+    process.argv[3] === 'current' || !process.argv[3]
+      ? pkgJSON.version
+      : process.argv[3]
+  fixPublish({
     packageName: pkgJSON.name,
     currentVersion: pkgJSON.version,
-    packageConfig: getConfig(pkgJSON),
-    releaseType: process.argv[3]
+    releaseVersion: releaseVersion,
+    config: getConfig(pkgJSON),
+    releaseType: process.argv[4]
   })
 } catch (err) {
   error(err)
   process.exit(1)
 }
 
-async function publish(options) {
-  const {
-    packageName,
-    currentVersion,
-    packageConfig,
-    releaseType = 'latest'
-  } = options
-
+async function fixPublish({
+  packageName,
+  currentVersion,
+  releaseVersion,
+  config = {},
+  releaseType = 'latest'
+}) {
   //If on legacy branch, and it is a release, its tag should say vx_maintenance
   const releaseTag =
     releaseType === 'maintenance'
       ? `v${currentVersion.split('.')[0]}_maintenance`
       : 'latest'
 
-  //Set up git user.name and user.email
+  const npmTag = currentVersion === releaseVersion ? releaseTag : 'snapshot'
+
   setupGit()
-  //create NPM RC and try to auth in to npm
-  createNPMRCFile(packageConfig)
+  createNPMRCFile(config)
 
-  const isRelease = isReleaseCommit(currentVersion)
-  const infoMessage = isRelease
-    ? `📦  Currently on release commit for ${currentVersion} of ${packageName}.`
-    : `📦  Not on a release commit--publishing a snapshot-release...`
+  checkWorkingDirectory()
 
-  info(infoMessage)
-
-  const versionToRelease = isRelease ? currentVersion : 'prerelease'
-  const tag = isRelease ? releaseTag : 'snapshot'
-  try {
-    await publishPackages(packageName, versionToRelease, tag)
-  } catch (e) {
-    error(e)
+  if (currentVersion === releaseVersion && !isReleaseCommit(releaseVersion)) {
+    error('Latest release should be run from a merged version bump commit!')
     process.exit(1)
   }
+
+  info(`📦  Version: ${releaseVersion}, Tag: ${npmTag}`)
+  const reply = await confirm('Continue? [y/n]\n')
+  if (!['Y', 'y'].includes(reply.trim())) {
+    process.exit(0)
+  }
+
+  return Promise.all(
+    getPackages().map(async (pkg) => {
+      if (pkg.private) {
+        info(`${pkg.name} is private.`)
+      } else {
+        let packageInfo = { versions: [] }
+
+        try {
+          const { stdout } = runCommandSync(
+            'npm',
+            ['info', pkg.name, '--json'],
+            [],
+            { stdio: 'pipe' }
+          )
+          packageInfo = JSON.parse(stdout)
+        } catch (e) {
+          error(e)
+        }
+
+        if (packageInfo.versions.includes(currentVersion)) {
+          info(`📦  v${currentVersion} of ${pkg.name} is already published!`)
+        } else {
+          try {
+            await runCommandAsync('npm', [
+              'publish',
+              pkg.location,
+              '--tag',
+              npmTag
+            ])
+            info(
+              `📦  Version ${releaseVersion} of ${packageName} was successfully published!`
+            )
+          } catch (err) {
+            error(err)
+          }
+        }
+      }
+    })
+  )
 }
