@@ -28,8 +28,11 @@ import { expect, mount, spy, wait } from '@instructure/ui-test-utils'
 import { ToggleGroup } from '../index'
 import { ToggleGroupLocator } from '../ToggleGroupLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<ToggleGroup />', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should show its summary and hide its children by default', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -50,7 +53,9 @@ describe('<ToggleGroup />', () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render with children showing with the defaultExpanded prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -70,7 +75,9 @@ describe('<ToggleGroup />', () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have an aria-controls attribute', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -91,7 +98,9 @@ describe('<ToggleGroup />', () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have an aria-expanded attribute', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -108,7 +117,9 @@ describe('<ToggleGroup />', () => {
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should toggle on click events', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -127,11 +138,14 @@ describe('<ToggleGroup />', () => {
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onToggle on click events', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onToggle = spy((e) => {
       e.persist()
     })
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -152,7 +166,9 @@ describe('<ToggleGroup />', () => {
     expect(args[1]).to.equal(true)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should update the toggle screenreader label based on the expanded state', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -172,6 +188,7 @@ describe('<ToggleGroup />', () => {
     expect(toggle.getTextContent()).to.equal('Hide content')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should accept custom icons', async () => {
     const Icon = (
       <svg height="50" width="50">
@@ -187,6 +204,7 @@ describe('<ToggleGroup />', () => {
       </svg>
     )
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -216,7 +234,9 @@ describe('<ToggleGroup />', () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -231,13 +251,16 @@ describe('<ToggleGroup />', () => {
     expect(await toggleGroup.accessible()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('focuses with the focus helper', async () => {
     let toggleRef = null
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
         summary="This is the summary section"
         toggleLabel="This is the toggleLabel"
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         componentRef={(el) => {
           toggleRef = el
         }}
@@ -249,9 +272,12 @@ describe('<ToggleGroup />', () => {
     const toggleGroup = await ToggleGroupLocator.find()
     const toggle = await toggleGroup.findToggle()
 
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(toggleRef.focused).to.be.false()
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     toggleRef.focus()
 
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     expect(toggleRef.focused).to.be.true()
     expect(toggle.getDOMNode()).to.equal(document.activeElement)
   })

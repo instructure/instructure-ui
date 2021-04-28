@@ -37,6 +37,7 @@ const contentAnimation = keyframes`
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const { fluidWidth, iconPosition, size, variant } = props
   const { animate } = state
@@ -147,6 +148,7 @@ const generateStyle = (componentTheme, props, state) => {
       },
       textDecoration: 'none',
       ...fluidWidthStyles,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...fontSizeStyles[size]
     },
     icon: {
@@ -154,7 +156,9 @@ const generateStyle = (componentTheme, props, state) => {
       '& > svg': {
         display: 'block' /* fix vertical alignment of icon */
       },
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...iconPositionStyles[iconPosition],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...iconSizeStyles[size]
     },
     details: {
@@ -162,7 +166,9 @@ const generateStyle = (componentTheme, props, state) => {
       boxSizing: 'border-box',
       paddingTop: componentTheme.togglePadding,
       color: componentTheme.textColor,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...fontSizeStyles[size],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...indentDetailsStyles[size]
     },
     content: animate

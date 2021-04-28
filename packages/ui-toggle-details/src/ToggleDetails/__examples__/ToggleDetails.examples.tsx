@@ -26,6 +26,7 @@ import React from 'react'
 
 export default {
   sectionProp: 'variant',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       summary: 'This is the summary',

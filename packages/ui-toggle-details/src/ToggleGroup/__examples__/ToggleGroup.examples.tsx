@@ -21,27 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { ToggleGroup } from './index'
+import React from 'react'
 
-const ToggleLocator = locator('[aria-expanded][aria-controls]')
-
-export const customMethods = {
-  clickToggle: async (element, ...args) => {
-    return (await ToggleLocator.find(element)).click(...args)
-  },
-  findToggle: async (...args) => {
-    return ToggleLocator.find(...args)
-  },
-  findContent: async (element, ...args) => {
-    const toggle = await ToggleLocator.find(element)
-    if (toggle) {
-      return locator(`#${toggle.getAttribute('aria-controls')}`).find(...args)
-    } else {
-      return null
+export default {
+  sectionProp: 'size',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      toggleLabel: 'Toggle the details',
+      summary: 'This is the summary',
+      children: <span>hello content</span>
     }
   }
 }
-
-export const ToggleGroupLocator = locator(ToggleGroup.selector, customMethods)

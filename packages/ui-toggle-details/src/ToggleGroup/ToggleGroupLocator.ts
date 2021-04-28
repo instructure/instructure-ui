@@ -23,14 +23,20 @@
  */
 import { locator } from '@instructure/ui-test-locator'
 
-import { ToggleDetails } from './index'
+import { ToggleGroup } from './index'
 
 const ToggleLocator = locator('[aria-expanded][aria-controls]')
 
 export const customMethods = {
-  clickToggle: async (element, ...args) =>
-    (await ToggleLocator.find(element)).click(...args),
-  findToggle: (...args) => ToggleLocator.find(...args),
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+  clickToggle: async (element, ...args) => {
+    return (await ToggleLocator.find(element)).click(...args)
+  },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findToggle: async (...args) => {
+    return ToggleLocator.find(...args)
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   findContent: async (element, ...args) => {
     const toggle = await ToggleLocator.find(element)
     if (toggle) {
@@ -41,7 +47,5 @@ export const customMethods = {
   }
 }
 
-export const ToggleDetailsLocator = locator(
-  ToggleDetails.selector,
-  customMethods
-)
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const ToggleGroupLocator = locator(ToggleGroup.selector, customMethods)

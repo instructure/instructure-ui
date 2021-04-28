@@ -43,13 +43,28 @@ import {
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 
+type Props = {
+  summary: React.ReactNode
+  toggleLabel: React.ReactNode | ((...args: any[]) => any)
+  as?: React.ReactElement
+  elementRef?: (...args: any[]) => any
+  size?: 'small' | 'medium' | 'large'
+  expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
+  defaultExpanded?: boolean
+  onToggle?: (...args: any[]) => any
+  icon?: React.ReactNode | ((...args: any[]) => any)
+  iconExpanded?: React.ReactNode | ((...args: any[]) => any)
+  transition?: boolean
+  border?: boolean
+}
+
 /**
 ---
 category: components
 ---
 **/
 @testable()
-class ToggleGroup extends Component {
+class ToggleGroup extends Component<Props> {
   static propTypes = {
     /**
      * the content to show and hide
@@ -110,9 +125,11 @@ class ToggleGroup extends Component {
     icon: IconArrowOpenEndSolid,
     iconExpanded: IconArrowOpenDownSolid,
     defaultExpanded: false,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onToggle: function (event, expanded) {},
     transition: true,
     as: 'span',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     border: true
   }
@@ -125,6 +142,7 @@ class ToggleGroup extends Component {
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._button.focus()
   }
 
@@ -132,11 +150,14 @@ class ToggleGroup extends Component {
     this._shouldTransition = true
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'expanded' implicitly has an 'any' type.
   renderIcon(expanded) {
     const Icon = expanded ? this.props.iconExpanded : this.props.icon
+    // @ts-expect-error ts-migrate(2604) FIXME: JSX element type 'Icon' does not have any construc... Remove this comment to see the full error message
     return <Icon />
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'toggleProps' implicitly has an 'any' ty... Remove this comment to see the full error message
   renderToggle(toggleProps, expanded) {
     const { toggleLabel, size } = this.props
     let label
@@ -151,6 +172,7 @@ class ToggleGroup extends Component {
         withBackground={false}
         withBorder={false}
         size={size === 'large' ? 'medium' : 'small'}
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
         elementRef={(el) => {
           this._button = el
         }}
@@ -161,6 +183,7 @@ class ToggleGroup extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'detailsProps' implicitly has an 'any' t... Remove this comment to see the full error message
   renderDetails(detailsProps) {
     return (
       <View
@@ -180,18 +203,24 @@ class ToggleGroup extends Component {
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const Element = getElementType(ToggleGroup, this.props)
 
     return (
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       <Expandable {...pickProps(this.props, Expandable.propTypes)}>
+        {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'expanded' implicitly has an 'any'... Remove this comment to see the full error message */}
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
             <View
+              // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
               {...omitProps(this.props, ToggleGroup.propTypes)}
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
               borderWidth={this.props.border ? 'small' : 'none'}
               as={Element}
               elementRef={this.props.elementRef}
               display="block"
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
               borderRadius="medium"
               background="primary"
             >

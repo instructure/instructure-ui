@@ -21,16 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-import React from 'react'
+import { ToggleDetails } from './index'
 
-export default {
-  sectionProp: 'size',
-  getComponentProps: (props) => {
-    return {
-      toggleLabel: 'Toggle the details',
-      summary: 'This is the summary',
-      children: <span>hello content</span>
+const ToggleLocator = locator('[aria-expanded][aria-controls]')
+
+export const customMethods = {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+  clickToggle: async (element, ...args) =>
+    (await ToggleLocator.find(element)).click(...args),
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findToggle: (...args) => ToggleLocator.find(...args),
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+  findContent: async (element, ...args) => {
+    const toggle = await ToggleLocator.find(element)
+    if (toggle) {
+      return locator(`#${toggle.getAttribute('aria-controls')}`).find(...args)
+    } else {
+      return null
     }
   }
 }
+
+export const ToggleDetailsLocator = locator(
+  // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+  ToggleDetails.selector,
+  customMethods
+)
