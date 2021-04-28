@@ -31,7 +31,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { merge } = require('webpack-merge')
 
 const outputPath = path.resolve(__dirname, '__build__')
-//TODO: fix resolve aliases for TS packages
 const resolveAliases = DEBUG ? { resolve: require('./resolve') } : {}
 
 const config = merge(baseConfig, {
@@ -60,7 +59,7 @@ const config = merge(baseConfig, {
   optimization: {
     usedExports: true
   },
-  // ...resolveAliases,
+  ...resolveAliases,
   mode: 'production'
 })
 
