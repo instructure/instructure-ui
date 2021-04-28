@@ -35,7 +35,6 @@
     "@instructure/browserslist-config-instui": "^8.2.1",
     "@instructure/config-loader": "^8.2.1",
     "babel-loader": "^8.1.0",
-    "babel-plugin-add-import-extension": "^1.4.3",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-istanbul": "^6.0.0",
     "babel-plugin-macros": "^3",
