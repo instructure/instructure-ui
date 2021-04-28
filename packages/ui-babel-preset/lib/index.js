@@ -74,7 +74,6 @@ module.exports = function (
       }
     ])
   }
-
   // Work around https://github.com/babel/babel/issues/10261, which causes
   // Babel to not use the runtime helpers for things like _objectSpread.
   // Remove this once that babel issue is fixed
@@ -107,8 +106,7 @@ module.exports = function (
       }
     ],
     require('@babel/plugin-syntax-dynamic-import').default,
-    require('babel-plugin-transform-undefined-to-void'),
-    require('babel-plugin-add-import-extension')
+    require('babel-plugin-transform-undefined-to-void')
   ])
 
   if (process.env.NODE_ENV === 'production') {
