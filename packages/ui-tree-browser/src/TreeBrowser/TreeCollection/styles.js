@@ -23,11 +23,10 @@
  */
 import { keyframes } from '@instructure/emotion'
 
-const list = keyframes`{
+const list = keyframes`
   to {
     transform: scaleY(1);
-  }
-}`
+  }`
 
 /**
  *  ---
