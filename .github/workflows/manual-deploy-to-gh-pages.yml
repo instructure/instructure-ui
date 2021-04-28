@@ -1,4 +1,4 @@
-name: Deploy manually to ghpages
+name: Deploy manually to gh-pages
 on: workflow_dispatch
 jobs:
   deploy:
