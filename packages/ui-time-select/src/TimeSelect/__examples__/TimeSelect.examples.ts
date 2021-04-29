@@ -21,15 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-/* eslint-disable no-restricted-imports */
-import { SelectLocator } from '@instructure/ui-select/es/Select/SelectLocator'
-/* eslint-enable no-restricted-imports */
-
-import { TimeSelect } from './index'
-
-export const TimeSelectLocator = locator(TimeSelect.selector, {
-  findInput: SelectLocator.findInput,
-  findOptionsList: SelectLocator.findOptionsList
-})
+export default {
+  maxExamplesPerPage: 50,
+  sectionProp: 'size',
+  propValues: {
+    defaultValue: [undefined, '1986-05-17T18:00:00.000Z']
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      step: 30,
+      renderLabel: 'Choose a time'
+    }
+  }
+}

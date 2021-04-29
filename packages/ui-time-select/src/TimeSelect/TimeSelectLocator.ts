@@ -21,17 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-export default {
-  maxExamplesPerPage: 50,
-  sectionProp: 'size',
-  propValues: {
-    defaultValue: [undefined, '1986-05-17T18:00:00.000Z']
-  },
-  getComponentProps: (props) => {
-    return {
-      step: 30,
-      renderLabel: 'Choose a time'
-    }
-  }
-}
+/* eslint-disable no-restricted-imports */
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+import { SelectLocator } from '@instructure/ui-select/es/Select/SelectLocator'
+/* eslint-enable no-restricted-imports */
+
+import { TimeSelect } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const TimeSelectLocator = locator(TimeSelect.selector, {
+  findInput: SelectLocator.findInput,
+  findOptionsList: SelectLocator.findOptionsList
+})
