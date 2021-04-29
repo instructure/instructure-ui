@@ -142,7 +142,11 @@ class NumberInput extends Component {
     /**
      * Callback fired when a key is pressed.
      */
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
+    /**
+     * The inputMode attribute of the underlying `input` element can be one of ['numeric', 'decimal', 'tel']
+     */
+    inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel'])
   }
 
   static defaultProps = {
@@ -165,7 +169,8 @@ class NumberInput extends Component {
     onIncrement: (event) => {},
     onKeyDown: (event) => {},
     disabled: undefined,
-    readOnly: undefined
+    readOnly: undefined,
+    inputMode: 'numeric'
   }
 
   state = { hasFocus: false }
@@ -316,7 +321,7 @@ class NumberInput extends Component {
               aria-invalid={this.invalid ? 'true' : null}
               id={this.id}
               type="text"
-              inputMode="numeric"
+              inputMode={this.props.inputMode}
               placeholder={placeholder}
               ref={this.handleRef}
               required={isRequired}
