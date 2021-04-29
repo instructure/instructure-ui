@@ -95,7 +95,7 @@ module.exports = function makeConfig({
       // seems to pull in all karma plugins across disparate node_modules/ dirs
       plugins: ['karma-*'],
 
-      frameworks: ['mocha', 'viewport'],
+      frameworks: ['mocha', 'viewport', 'webpack'],
 
       files: randomizeTestOrder ? [choma, bundle] : [bundle],
 
@@ -105,8 +105,8 @@ module.exports = function makeConfig({
       },
 
       reporters,
-
       coverageReporter,
+      browsers,
 
       client: {
         chai: {
@@ -122,7 +122,7 @@ module.exports = function makeConfig({
 
       autoWatch: true,
 
-      browsers: browsers,
+      singleRun: !DEBUG,
 
       reportSlowerThan: 500,
 
@@ -146,19 +146,29 @@ module.exports = function makeConfig({
 
       // If browser does not capture in given timeout [ms], kill it
       captureTimeout: 30000,
-
       // to avoid DISCONNECTED messages:
       browserDisconnectTimeout: 10000, // default 2000
       browserDisconnectTolerance: 2, // default 0
       browserNoActivityTimeout: 30000, // default 10000
 
-      singleRun: !DEBUG,
-
       webpack: {
-        ...baseWebpackConfig,
+        module: baseWebpackConfig.module,
         cache: !DEBUG,
         mode: 'development',
         devtool: DEBUG ? 'inline-source-map' : 'none',
+
+        //TODO: this is probably a hack and webpack 5 will remove these features
+        //investigate how to do this properly
+        node: { fs: 'empty', module: 'empty' },
+        resolve: {
+          extensions: baseWebpackConfig.resolve.extensions
+        },
+        resolveLoader: {
+          alias: {
+            ...baseWebpackConfig.resolveLoader.alias,
+            'ui-tests-loader': path.join(__dirname, './loaders/ui-tests-loader')
+          }
+        },
         externals: {
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,
@@ -168,12 +178,6 @@ module.exports = function makeConfig({
           // The choma script needs access to the mocha constructor so it can
           // monkey-patch it for random test ordering.
           mocha: 'mocha.constructor'
-        },
-        resolveLoader: {
-          alias: {
-            ...baseWebpackConfig.resolveLoader.alias,
-            'ui-tests-loader': path.join(__dirname, './loaders/ui-tests-loader')
-          }
         }
       },
 

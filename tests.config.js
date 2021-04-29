@@ -23,6 +23,6 @@
  */
 
 module.exports = {
-  files: ['packages/**/*.test.js'],
+  files: ['packages/**/*.test.{js,ts,tsx}'],
   ignore: ['packages/ui-codemods/**']
 }
