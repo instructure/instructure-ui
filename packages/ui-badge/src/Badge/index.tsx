@@ -55,8 +55,8 @@ type Props = {
   formatOverflowText?: (...args: any[]) => any
   formatOutput?: (...args: any[]) => any
   as?: React.ReactElement
-  margin: typeof ThemeablePropValues.SPACING
-  placement: typeof PositionPropTypes.placement
+  margin: keyof typeof ThemeablePropValues.SPACING
+  placement: any //TODO: typeof PositionPropTypes.placement
 }
 
 /**
@@ -190,9 +190,9 @@ class Badge extends Component<Props> {
 
     return (
       <View
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | undefined' is not assignable to typ... Remove this comment to see the full error message
         margin={standalone ? margin : 'none'}
         css={styles.badge}
+        //@ts-expect-error FIXME:
         title={type === 'count' && this.countOverflow() ? count : null}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         id={!standalone ? this._defaultId : null}

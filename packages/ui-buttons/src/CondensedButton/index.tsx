@@ -44,7 +44,7 @@ type Props = {
   as?: React.ReactElement
   interaction?: 'enabled' | 'disabled' | 'readonly'
   color?: 'primary' | 'primary-inverse'
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
   cursor?: string
   href?: string
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
@@ -158,7 +158,6 @@ class CondensedButton extends Component<Props> {
     const themeOverride = this.props.themeOverride
 
     return (
-      // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'BaseButton'.
       <BaseButton
         {...passthroughProps(props)}
         isCondensed
@@ -174,14 +173,14 @@ class CondensedButton extends Component<Props> {
         cursor={cursor}
         href={href}
         renderIcon={renderIcon}
+        // @ts-expect-error ts-migrate(2339) FIXME:
         themeOverride={themeOverride}
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'component' implicitly has an 'any' type... Remove this comment to see the full error message
         ref={(component) => {
+          // @ts-expect-error ts-migrate(2339) FIXME:
           this._baseButton = component
         }}
       >
         {children}
-        {/* @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'BaseButton'. */}
       </BaseButton>
     )
   }

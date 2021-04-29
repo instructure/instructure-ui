@@ -101,12 +101,12 @@ type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
-  margin: typeof ThemeablePropValues.SPACING
-  padding: typeof ThemeablePropValues.SPACING
-  borderWidth: typeof ThemeablePropValues.BORDER_WIDTHS
-  borderRadius: typeof ThemeablePropValues.BORDER_RADII
-  shadow: typeof ThemeablePropValues.SHADOW_TYPES
-  stacking: typeof ThemeablePropValues.STACKING_TYPES
+  margin: keyof typeof ThemeablePropValues.SPACING
+  padding: keyof typeof ThemeablePropValues.SPACING
+  borderWidth: keyof typeof ThemeablePropValues.BORDER_WIDTHS
+  borderRadius: keyof typeof ThemeablePropValues.BORDER_RADII
+  shadow: keyof typeof ThemeablePropValues.SHADOW_TYPES
+  stacking: keyof typeof ThemeablePropValues.STACKING_TYPES
 }
 
 /**
@@ -378,13 +378,13 @@ class View extends Component<Props> {
             return
           }
 
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'split' does not exist on type '{ 0: stri... Remove this comment to see the full error message
           const marginValues = margin ? margin.split(' ') : null
           let verticalMargin = false
 
           // either top or bottom margin are set
           if (margin) {
             if (
+              marginValues &&
               marginValues[0] &&
               marginValues[0] !== 'none' &&
               marginValues[0] !== '0'
@@ -392,6 +392,7 @@ class View extends Component<Props> {
               verticalMargin = true
             }
             if (
+              marginValues &&
               marginValues[2] &&
               marginValues[2] !== 'none' &&
               marginValues[2] !== '0'

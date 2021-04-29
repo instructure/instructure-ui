@@ -51,7 +51,7 @@ type Props = {
   elementRef?: (...args: any[]) => any
   size?: 'small' | 'medium' | 'large'
   onClick?: (...args: any[]) => any
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
   placement?: 'start' | 'end' | 'static'
   offset?: 'none' | 'x-small' | 'small' | 'medium'
   type?: 'button' | 'submit' | 'reset'

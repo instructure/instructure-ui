@@ -66,7 +66,7 @@ type Props = {
   withBackground?: boolean
   withBorder?: boolean
   isCondensed?: boolean
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
   cursor?: string
   href?: string
   onClick?: (...args: any[]) => any
@@ -420,15 +420,13 @@ class BaseButton extends Component<Props> {
         position="relative"
         display={display}
         width={display === 'block' ? '100%' : 'auto'}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         borderRadius={shape === 'circle' ? 'circle' : 'medium'}
         background="transparent"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         padding="none"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         borderWidth="none"
         margin={margin}
         cursor={isDisabled ? 'not-allowed' : cursor}
+        //@ts-expect-error FIXME:
         href={href}
         type={href ? null : type}
         elementRef={this.handleElementRef}

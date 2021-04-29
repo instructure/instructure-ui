@@ -47,7 +47,7 @@ type Props = {
   styles?: any
   label: string
   size?: 'small' | 'medium' | 'large'
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
 }
 
 /**

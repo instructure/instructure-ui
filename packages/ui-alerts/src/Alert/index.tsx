@@ -63,7 +63,7 @@ type Props = {
   isLiveRegionAtomic?: boolean
   screenReaderOnly?: boolean
   timeout?: number
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
 
   renderCloseButtonLabel?: ((...args: any[]) => any) | React.ReactNode
   onDismiss?: (...args: any[]) => any

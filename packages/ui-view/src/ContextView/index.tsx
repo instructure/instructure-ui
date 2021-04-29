@@ -52,10 +52,10 @@ type Props = {
   debug?: boolean
   makeStyles?: (...args: any[]) => any
   styles?: any
-  margin: typeof ThemeablePropValues.SPACING
-  padding: typeof ThemeablePropValues.SPACING
-  shadow: typeof ThemeablePropValues.SHADOW_TYPES
-  stacking: typeof ThemeablePropValues.STACKING_TYPES
+  margin: keyof typeof ThemeablePropValues.SPACING
+  padding: keyof typeof ThemeablePropValues.SPACING
+  shadow: keyof typeof ThemeablePropValues.SHADOW_TYPES
+  stacking: keyof typeof ThemeablePropValues.STACKING_TYPES
   placement: unknown //TODO: fix this
 }
 
@@ -200,9 +200,9 @@ class ContextView extends Component<Props> {
       <View
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, ContextView.propTypes)}
+        // @ts-expect-error FIXME:
         style={style}
         css={styles.contextView}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         borderWidth="none"
         display="inline-block"
         as={as}
@@ -214,9 +214,7 @@ class ContextView extends Component<Props> {
         <View
           css={styles.contextView__content}
           display="block"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
           borderRadius="medium"
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
           borderWidth="small"
           borderColor={background === 'default' ? 'primary' : 'transparent'}
           background={background === 'default' ? 'primary' : 'primary-inverse'}

@@ -172,7 +172,6 @@ class ToggleGroup extends Component<Props> {
         withBackground={false}
         withBorder={false}
         size={size === 'large' ? 'medium' : 'small'}
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
         elementRef={(el) => {
           this._button = el
         }}
@@ -215,12 +214,10 @@ class ToggleGroup extends Component<Props> {
             <View
               // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
               {...omitProps(this.props, ToggleGroup.propTypes)}
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
               borderWidth={this.props.border ? 'small' : 'none'}
               as={Element}
               elementRef={this.props.elementRef}
               display="block"
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
               borderRadius="medium"
               background="primary"
             >

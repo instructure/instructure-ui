@@ -49,7 +49,7 @@ type Props = {
   size?: 'auto' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
   shape?: 'circle' | 'rectangle'
   display?: 'inline-block' | 'block'
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
   onImageLoaded?: (...args: any[]) => any
   as?: React.ReactElement
   elementRef?: (...args: any[]) => any

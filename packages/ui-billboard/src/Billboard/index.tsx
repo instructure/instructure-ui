@@ -59,7 +59,7 @@ type Props = {
   href?: string
   disabled?: boolean
   readOnly?: boolean
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
 }
 
 /**

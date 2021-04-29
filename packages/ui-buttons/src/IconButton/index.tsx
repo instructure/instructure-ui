@@ -51,7 +51,7 @@ type Props = {
   shape?: 'rectangle' | 'circle'
   withBackground?: boolean
   withBorder?: boolean
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
   cursor?: string
   href?: string
 }

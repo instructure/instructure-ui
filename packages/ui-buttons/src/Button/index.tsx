@@ -48,7 +48,7 @@ type Props = {
   display?: 'inline-block' | 'block'
   textAlign?: 'start' | 'center'
   withBackground?: boolean
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
   cursor?: string
   href?: string
   renderIcon?: React.ReactNode | ((...args: any[]) => any)

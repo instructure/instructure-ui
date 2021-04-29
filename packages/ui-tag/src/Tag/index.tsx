@@ -49,7 +49,7 @@ type Props = {
   disabled?: boolean
   readOnly?: boolean
   dismissible?: boolean
-  margin?: typeof ThemeablePropValues.SPACING
+  margin?: keyof typeof ThemeablePropValues.SPACING
   onClick?: (...args: any[]) => any
   elementRef?: (...args: any[]) => any
   size?: 'small' | 'medium' | 'large'
@@ -161,7 +161,6 @@ class Tag extends Component<Props> {
       text,
       title,
       onClick,
-      margin,
       styles
     } = this.props
 
@@ -180,7 +179,7 @@ class Tag extends Component<Props> {
         css={styles.tag}
         className={className}
         as={onClick ? 'button' : 'span'}
-        margin={margin}
+        margin="auto large none "
         type={onClick ? 'button' : null}
         onClick={onClick ? this.handleClick : null}
         disabled={disabled || readOnly}
