@@ -21,40 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
 
-import { IconBankLine } from '@instructure/ui-icons'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, typography, key: themeName } = theme
 
-import { BreadcrumbLink } from '../index'
+  const themeSpecificStyle = {}
 
-export default {
-  propValues: {
-    children: [
-      [
-        <BreadcrumbLink key="0" onClick={() => {}}>
-          English 204
-        </BreadcrumbLink>,
-        <BreadcrumbLink key="1" href="#">
-          The Rabbit Novels
-        </BreadcrumbLink>,
-        <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
-      ],
-      [
-        <BreadcrumbLink key="0" onClick={() => {}} renderIcon={IconBankLine}>
-          Item Bank
-        </BreadcrumbLink>,
-        <BreadcrumbLink key="1" href="#" renderIcon={IconBankLine}>
-          History
-        </BreadcrumbLink>,
-        <BreadcrumbLink key="2" renderIcon={IconBankLine}>
-          Question
-        </BreadcrumbLink>
-      ]
-    ]
-  },
-  getComponentProps: (props) => {
-    return {
-      label: 'You are here:'
-    }
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    separatorColor: colors?.borderDark,
+
+    smallSeparatorFontSize: '0.5rem',
+    smallFontSize: typography?.fontSizeSmall,
+
+    mediumSeparatorFontSize: '0.75rem',
+    mediumFontSize: typography?.fontSizeMedium,
+
+    largeSeparatorFontSize: '1rem',
+    largeFontSize: typography?.fontSizeLarge
+  }
+
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

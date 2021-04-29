@@ -30,12 +30,25 @@ import { View } from '@instructure/ui-view'
 import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { Children } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  label: string
+  size?: 'small' | 'medium' | 'large'
+  margin?: typeof ThemeablePropValues.SPACING
+}
 
 /**
 ---
@@ -45,7 +58,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Breadcrumb extends Component {
+class Breadcrumb extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -78,10 +91,13 @@ class Breadcrumb extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -89,6 +105,7 @@ class Breadcrumb extends Component {
 
   renderChildren() {
     const { styles, children } = this.props
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'length' does not exist on type 'string |... Remove this comment to see the full error message
     const numChildren = children ? children.length : 0
     const inlineStyle = {
       maxWidth: `${Math.floor(100 / numChildren)}%`
@@ -110,6 +127,7 @@ class Breadcrumb extends Component {
 
     return (
       <View
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; role: string; as: strin... Remove this comment to see the full error message
         role="navigation"
         as="div"
         margin={this.props.margin}

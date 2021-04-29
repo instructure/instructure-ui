@@ -21,18 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
+import React from 'react'
 
-import { Breadcrumb } from './index'
-import { BreadcrumbLinkLocator } from './BreadcrumbLink/BreadcrumbLinkLocator'
+import { IconBankLine } from '@instructure/ui-icons'
 
-export { BreadcrumbLinkLocator }
+import { BreadcrumbLink } from '../index'
 
-export const BreadcrumbLocator = locator(Breadcrumb.selector, {
-  findAllLinks: (...args) => {
-    return BreadcrumbLinkLocator.findAll(...args)
+export default {
+  propValues: {
+    children: [
+      [
+        <BreadcrumbLink key="0" onClick={() => {}}>
+          English 204
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="1" href="#">
+          The Rabbit Novels
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
+      ],
+      [
+        <BreadcrumbLink key="0" onClick={() => {}} renderIcon={IconBankLine}>
+          Item Bank
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="1" href="#" renderIcon={IconBankLine}>
+          History
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="2" renderIcon={IconBankLine}>
+          Question
+        </BreadcrumbLink>
+      ]
+    ]
   },
-  findLink: (...args) => {
-    return BreadcrumbLinkLocator.find(...args)
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      label: 'You are here:'
+    }
   }
-})
+}

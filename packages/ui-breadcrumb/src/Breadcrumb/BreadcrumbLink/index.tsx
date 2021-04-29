@@ -30,6 +30,14 @@ import { Link } from '@instructure/ui-link'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
+type Props = {
+  href?: string
+  onClick?: (...args: any[]) => any
+  size?: 'small' | 'medium' | 'large'
+  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  iconPlacement?: 'start' | 'end'
+}
+
 /**
 ---
 parent: Breadcrumb
@@ -38,7 +46,7 @@ id: Breadcrumb.Link
 **/
 
 @testable()
-class BreadcrumbLink extends Component {
+class BreadcrumbLink extends Component<Props> {
   static propTypes = {
     /**
      * Content to render as the crumb, generally should be text.
@@ -77,10 +85,12 @@ class BreadcrumbLink extends Component {
   render() {
     const { children, href, renderIcon, iconPlacement, onClick } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, BreadcrumbLink.propTypes)
 
     return (
       <Link
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'element' does not exist on type 'Breadcr... Remove this comment to see the full error message
         as={this.element}
         {...props}
         href={href}

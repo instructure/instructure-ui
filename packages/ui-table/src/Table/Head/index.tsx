@@ -162,6 +162,7 @@ class Head extends Component<Props> {
                 )
               }
               renderBeforeInput={selectedOption && IconCheckLine}
+              //@ts-expect-error FIXME: Type 'null' is not assignable to type 'string | number | undefined'.ts(2322)
               value={selectedOption}
               onChange={handleSelect}
             >

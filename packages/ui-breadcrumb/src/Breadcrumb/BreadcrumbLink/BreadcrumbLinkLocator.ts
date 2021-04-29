@@ -21,35 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, typography, key: themeName } = theme
+import { BreadcrumbLink } from './index'
 
-  const themeSpecificStyle = {}
-
-  const componentVariables = {
-    fontFamily: typography?.fontFamily,
-    separatorColor: colors?.borderDark,
-
-    smallSeparatorFontSize: '0.5rem',
-    smallFontSize: typography?.fontSizeSmall,
-
-    mediumSeparatorFontSize: '0.75rem',
-    mediumFontSize: typography?.fontSizeMedium,
-
-    largeSeparatorFontSize: '1rem',
-    largeFontSize: typography?.fontSizeLarge
-  }
-
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
-  }
-}
-
-export default generateComponentTheme
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const BreadcrumbLinkLocator = locator(BreadcrumbLink.selector)
