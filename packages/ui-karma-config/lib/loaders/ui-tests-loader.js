@@ -37,7 +37,7 @@ module.exports = function (source, map) {
     loaderUtils.getOptions(this)
   )
 
-  const files = options.files || ['**/*.test.js']
+  const files = options.files || ['**/*.test.{ts,tsx}']
   const ignore = (options.ignore || []).concat(['**/node_modules/**'])
   const cwd = options.cwd || process.cwd()
 
