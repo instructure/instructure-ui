@@ -21,13 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
-import { find } from '@instructure/ui-test-queries'
 
-import { Button } from './index'
+import React from 'react'
 
-export const ButtonLocator = locator(Button.selector, {
-  click: async (element, ...args) => {
-    return (await find(element, 'a,button,[role="button"]')).click(...args)
+const icon = (
+  // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; title: string; height: ... Remove this comment to see the full error message
+  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
+    <circle cx="0.5em" cy="0.5em" r="0.5em" />
+  </svg>
+)
+
+export default {
+  sectionProp: 'color',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => ({
+    screenReaderLabel: 'Example label',
+    renderIcon: icon,
+    renderTooltipContent: 'Example tooltip content',
+    status: 'pressed'
+  }),
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  getExampleProps: (props) => {
+    return {
+      background: props?.color?.includes('inverse')
+        ? 'primary-inverse'
+        : 'primary'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  filter: (props) => {
+    return props.interaction === 'readonly' || props.type !== 'button'
   }
-})
+}

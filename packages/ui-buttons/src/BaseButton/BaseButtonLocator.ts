@@ -22,32 +22,15 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-queries'
 
-const icon = (
-  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
-    <circle cx="0.5em" cy="0.5em" r="0.5em" />
-  </svg>
-)
+import { BaseButton } from './index'
 
-export default {
-  sectionProp: 'color',
-  getComponentProps: (props) => ({
-    screenReaderLabel: 'Example',
-    renderIcon: icon
-  }),
-  getExampleProps: (props) => {
-    return {
-      background: props.color.includes('inverse')
-        ? 'primary-inverse'
-        : 'primary'
-    }
-  },
-  filter: (props) => {
-    return (
-      (props.withBackground && !props.withBorder) ||
-      props.interaction === 'readonly' ||
-      props.type !== 'button'
-    )
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const BaseButtonLocator = locator(BaseButton.selector, {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
   }
-}
+})

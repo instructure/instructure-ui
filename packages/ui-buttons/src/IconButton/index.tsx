@@ -29,11 +29,32 @@ import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
-
 import { BaseButton } from '../BaseButton'
+
+type Props = {
+  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  screenReaderLabel: string
+  type?: 'button' | 'submit' | 'reset'
+  size?: 'small' | 'medium' | 'large'
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
+  focusColor?: 'info' | 'inverse'
+  shape?: 'rectangle' | 'circle'
+  withBackground?: boolean
+  withBorder?: boolean
+  margin?: typeof ThemeablePropValues.SPACING
+  cursor?: string
+  href?: string
+}
 
 /**
 ---
@@ -44,7 +65,7 @@ category: components
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
 @testable()
-class IconButton extends Component {
+class IconButton extends Component<Props> {
   static propTypes = {
     /**
      * An icon, or function returning an icon (identical to the `renderIcon` prop).
@@ -126,6 +147,7 @@ class IconButton extends Component {
     renderIcon: undefined,
     type: 'button',
     size: 'medium',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
@@ -143,10 +165,12 @@ class IconButton extends Component {
   _baseButton = null
 
   get focused() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._baseButton && this._baseButton.focused
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._baseButton && this._baseButton.focus()
   }
 
@@ -171,6 +195,7 @@ class IconButton extends Component {
       ...props
     } = this.props
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'themeOverride' does not exist on type 'R... Remove this comment to see the full error message
     // eslint-disable-next-line react/prop-types
     const themeOverride = this.props.themeOverride
 
@@ -191,8 +216,10 @@ class IconButton extends Component {
         cursor={cursor}
         href={href}
         renderIcon={children || renderIcon}
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         themeOverride={themeOverride}
         ref={(component) => {
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'BaseButton | null' is not assignable to type... Remove this comment to see the full error message
           this._baseButton = component
         }}
       >

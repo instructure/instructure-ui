@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { locator } from '@instructure/ui-test-locator'
 import { find } from '@instructure/ui-test-queries'
 
-import { BaseButton } from './index'
+import { Button } from './index'
 
-export const BaseButtonLocator = locator(BaseButton.selector, {
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const ButtonLocator = locator(Button.selector, {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   click: async (element, ...args) => {
     return (await find(element, 'a,button,[role="button"]')).click(...args)
   }

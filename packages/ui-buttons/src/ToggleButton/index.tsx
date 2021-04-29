@@ -27,10 +27,27 @@ import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
 import { PositionPropTypes } from '@instructure/ui-position'
+
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
 import { Tooltip } from '@instructure/ui-tooltip'
 import { IconButton } from '../IconButton'
+type Props = {
+  screenReaderLabel: string
+  renderTooltipContent: React.ReactNode | ((...args: any[]) => any)
+  renderIcon: React.ReactNode | ((...args: any[]) => any)
+  status: 'pressed' | 'unpressed'
+  as?: React.ReactElement
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  size?: 'small' | 'medium' | 'large'
+  elementRef?: (...args: any[]) => any
+  onClick?: (...args: any[]) => any
+  color?: string
+  isShowingTooltip?: boolean
+  mountNode?: any // TODO: PositionPropTypes.mountNode
+  placement?: any // TODO: PositionPropTypes.placement
+  constrain?: any // TODO: PositionPropTypes.constrain
+}
 
 /**
 ---
@@ -39,12 +56,12 @@ category: components
 **/
 
 @testable()
-class ToggleButton extends Component {
+class ToggleButton extends Component<Props> {
   static propTypes = {
     /**
      * Text to output only to screen readers
      */
-    screenReaderLabel: PropTypes.PropTypes.string.isRequired,
+    screenReaderLabel: PropTypes.string.isRequired,
     /**
      * Text to render in the tooltip shown on hover/focus
      */
@@ -108,6 +125,7 @@ class ToggleButton extends Component {
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     renderIcon: () => {},
     onClick: () => {},
@@ -118,6 +136,7 @@ class ToggleButton extends Component {
     constrain: 'window'
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -128,7 +147,8 @@ class ToggleButton extends Component {
 
   get isShowingTooltip() {
     return typeof this.props.isShowingTooltip === 'undefined'
-      ? this.state.isShowingTooltip
+      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingTooltip' does not exist on type... Remove this comment to see the full error message
+        this.state.isShowingTooltip
       : this.props.isShowingTooltip
   }
 
@@ -156,9 +176,11 @@ class ToggleButton extends Component {
         placement={placement}
         color={color === 'primary-inverse' ? 'primary-inverse' : 'primary'}
         isShowingContent={this.isShowingTooltip}
+        // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
         onShowContent={(event) => {
           this.setState({ isShowingTooltip: true })
         }}
+        // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
         onHideContent={(event) => {
           this.setState({ isShowingTooltip: false })
         }}
@@ -169,6 +191,7 @@ class ToggleButton extends Component {
           screenReaderLabel={screenReaderLabel}
           withBackground={false}
           withBorder={false}
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           color={color}
           size={size}
           elementRef={elementRef}

@@ -21,33 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
+import { find } from '@instructure/ui-test-queries'
 
-import React from 'react'
+import { IconButton } from './index'
 
-const icon = (
-  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
-    <circle cx="0.5em" cy="0.5em" r="0.5em" />
-  </svg>
-)
-
-export default {
-  sectionProp: 'color',
-  propValues: {
-    renderIcon: [null, icon]
-  },
-  getComponentProps: (props) => {
-    return {
-      children: 'Example Button'
-    }
-  },
-  getExampleProps: (props) => {
-    return {
-      background: props.color.includes('inverse')
-        ? 'primary-inverse'
-        : 'primary'
-    }
-  },
-  filter: (props) => {
-    return props.interaction === 'readonly' || props.type !== 'button'
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const IconButtonLocator = locator(IconButton.selector, {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
   }
-}
+})

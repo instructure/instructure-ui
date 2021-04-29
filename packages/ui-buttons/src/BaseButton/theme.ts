@@ -27,10 +27,15 @@ import { alpha, darken } from '@instructure/ui-color-utils'
 const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
 
 const generateButtonThemeVars = ({
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'style' implicitly has an 'any' ty... Remove this comment to see the full error message
   style,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'textColor' implicitly has an 'any... Remove this comment to see the full error message
   textColor,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'ghostTextColor' implicitly has an... Remove this comment to see the full error message
   ghostTextColor,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'backgroundColor' implicitly has a... Remove this comment to see the full error message
   backgroundColor,
+  // @ts-expect-error ts-migrate(7022) FIXME: 'borderColor' implicitly has type 'any' because it... Remove this comment to see the full error message
   borderColor,
   ghostBorderColor = borderColor
 }) => ({
@@ -42,6 +47,7 @@ const generateButtonThemeVars = ({
   [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(
     borderColor,
     20,
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 3.
     0.45
   )}`,
 
@@ -61,6 +67,7 @@ const generateButtonThemeVars = ({
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
   const { borders, colors, forms, spacing, typography, key: themeName } = theme
 
@@ -185,6 +192,7 @@ const generateComponentTheme = (theme) => {
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

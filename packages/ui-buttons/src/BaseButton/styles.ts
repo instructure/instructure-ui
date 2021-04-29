@@ -32,6 +32,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const {
     size,
@@ -285,7 +286,9 @@ const generateStyle = (componentTheme, props, state) => {
           'none' /* Ensures that button or link is always the event target */
       },
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       '&:active > [class$=-baseButton__content]': colorVariants[color].active,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       '&:hover > [class$=-baseButton__content]': colorVariants[color].hover
     },
 
@@ -311,8 +314,11 @@ const generateStyle = (componentTheme, props, state) => {
 
       '&:hover': { transform: componentTheme.hoverTransform },
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].content,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...colorVariants[color].default,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...shapeVariants[shape],
 
       ...(isCondensed && {
@@ -334,6 +340,7 @@ const generateStyle = (componentTheme, props, state) => {
       label: 'baseButton__children',
       display: 'block',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].children,
 
       ...(isCondensed && {
@@ -347,6 +354,7 @@ const generateStyle = (componentTheme, props, state) => {
       display: 'flex',
       alignItems: 'center',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].iconSVG
     }
   }

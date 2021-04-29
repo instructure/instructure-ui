@@ -21,21 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { locator } from '@instructure/ui-test-locator'
-import { find, parseQueryArguments } from '@instructure/ui-test-queries'
+import { find } from '@instructure/ui-test-queries'
 
-// eslint-disable-next-line no-restricted-imports
-import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
+import { CondensedButton } from './index'
 
-import { ToggleButton } from './index'
-
-export const ToggleButtonLocator = locator(ToggleButton.selector, {
-  findTooltipContent: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    const tooltip = await TooltipLocator.find(element, options)
-    return tooltip ? tooltip.findContent(selector, options) : null
-  },
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const CondensedButtonLocator = locator(CondensedButton.selector, {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   click: async (element, ...args) => {
     return (await find(element, 'a,button,[role="button"]')).click(...args)
   }

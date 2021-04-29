@@ -28,11 +28,31 @@ import PropTypes from 'prop-types'
 import { testable } from '@instructure/ui-testable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
-
 import { BaseButton } from '../BaseButton'
+
+type Props = {
+  type?: 'button' | 'submit' | 'reset'
+  size?: 'small' | 'medium' | 'large'
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
+  focusColor?: 'info' | 'inverse'
+  display?: 'inline-block' | 'block'
+  textAlign?: 'start' | 'center'
+  withBackground?: boolean
+  margin?: typeof ThemeablePropValues.SPACING
+  cursor?: string
+  href?: string
+  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+}
 
 /**
 ---
@@ -42,7 +62,7 @@ category: components
 // needed for listing the available theme variables on docs page
 @withStyle(null, generateComponentTheme)
 @testable()
-class Button extends Component {
+class Button extends Component<Props> {
   static propTypes = {
     /**
      * Specifies the `Button` children.
@@ -120,6 +140,7 @@ class Button extends Component {
     children: null,
     type: 'button',
     size: 'medium',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
@@ -138,19 +159,24 @@ class Button extends Component {
   _buttonComponent = null
 
   get focused() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._buttonComponent && this._buttonComponent.focused
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._buttonComponent && this._buttonComponent.focus()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     const { elementRef } = this.props
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     elementRef(el)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'component' implicitly has an 'any' type... Remove this comment to see the full error message
   handleButtonRef = (component) => {
     this._buttonComponent = component
   }
@@ -173,8 +199,10 @@ class Button extends Component {
       ...props
     } = this.props
 
+    // @ts-expect-error ts-migrate(2739) FIXME: Type '{ elementRef?: ((...args: any[]) => any) | u... Remove this comment to see the full error message
     const interaction = getInteraction({ props })
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'themeOverride' does not exist on type 'R... Remove this comment to see the full error message
     // eslint-disable-next-line react/prop-types
     const themeOverride = this.props.themeOverride
 
@@ -198,6 +226,7 @@ class Button extends Component {
       themeOverride
     }
 
+    // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
     return <BaseButton {...buttonProps}>{children}</BaseButton>
   }
 }

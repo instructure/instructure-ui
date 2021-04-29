@@ -28,21 +28,29 @@ import { mount, expect, stub } from '@instructure/ui-test-utils'
 import { CloseButton } from '../index'
 import { CloseButtonLocator } from '../CloseButtonLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<CloseButton />', async () => {
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
   beforeEach(() => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     stub(console, 'warn')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render with x icon', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CloseButton screenReaderLabel="Close" />)
     const button = await CloseButtonLocator.find()
     const icon = await button.find('svg[name]')
     expect(icon.getAttribute('name')).to.equal('IconX')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `onClick` prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CloseButton onClick={onClick} screenReaderLabel="Hello" />)
     const closeButtonRoot = await CloseButtonLocator.find()
     const button = await closeButtonRoot.find(':focusable')

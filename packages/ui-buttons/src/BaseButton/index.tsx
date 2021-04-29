@@ -40,10 +40,40 @@ import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 import { Flex } from '@instructure/ui-flex'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  type?: 'button' | 'submit' | 'reset'
+  size?: 'small' | 'medium' | 'large'
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
+  focusColor?: 'info' | 'inverse'
+  display?: 'inline-block' | 'block'
+  textAlign?: 'start' | 'center'
+  shape?: 'rectangle' | 'circle'
+  withBackground?: boolean
+  withBorder?: boolean
+  isCondensed?: boolean
+  margin?: typeof ThemeablePropValues.SPACING
+  cursor?: string
+  href?: string
+  onClick?: (...args: any[]) => any
+  onKeyDown?: (...args: any[]) => any
+  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  tabIndex?: number | string
+}
 
 /**
 ---
@@ -53,7 +83,7 @@ category: components/utilities
 
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class BaseButton extends Component {
+class BaseButton extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -160,6 +190,7 @@ class BaseButton extends Component {
     children: null,
     type: 'button',
     size: 'medium',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     as: 'button',
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
@@ -176,6 +207,7 @@ class BaseButton extends Component {
     cursor: 'pointer',
     href: undefined,
     onClick: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onKeyDown: (event) => {},
     renderIcon: undefined,
     tabIndex: undefined
@@ -184,10 +216,13 @@ class BaseButton extends Component {
   _rootElement = null
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
@@ -204,10 +239,12 @@ class BaseButton extends Component {
   }
 
   get elementType() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return getElementType(BaseButton, this.props)
   }
 
   get interaction() {
+    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -239,6 +276,7 @@ class BaseButton extends Component {
       return 'info'
     }
 
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     return color.includes('inverse') ? 'inverse' : 'info'
   }
 
@@ -247,14 +285,18 @@ class BaseButton extends Component {
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._rootElement && this._rootElement.focus()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     this._rootElement = el
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.elementRef(el)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClick = (event) => {
     const { onClick } = this.props
     const { interaction } = this
@@ -270,10 +312,12 @@ class BaseButton extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event) => {
     const { onClick, onKeyDown, href } = this.props
     const { interaction } = this
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onKeyDown(event)
 
     // behave like a button when space key is pressed
@@ -291,6 +335,7 @@ class BaseButton extends Component {
       }
 
       if (href) {
+        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
         this._rootElement && this._rootElement.click()
       }
     }
@@ -375,9 +420,12 @@ class BaseButton extends Component {
         position="relative"
         display={display}
         width={display === 'block' ? '100%' : 'auto'}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         borderRadius={shape === 'circle' ? 'circle' : 'medium'}
         background="transparent"
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         padding="none"
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         borderWidth="none"
         margin={margin}
         cursor={isDisabled ? 'not-allowed' : cursor}
@@ -386,6 +434,7 @@ class BaseButton extends Component {
         elementRef={this.handleElementRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
+        // @ts-expect-error ts-migrate(2367) FIXME: This condition will always return 'true' since the... Remove this comment to see the full error message
         role={onClick && as !== 'button' ? 'button' : null}
         tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}

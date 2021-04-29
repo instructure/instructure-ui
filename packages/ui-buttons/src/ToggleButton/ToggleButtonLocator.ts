@@ -21,12 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { locator } from '@instructure/ui-test-locator'
-import { find } from '@instructure/ui-test-queries'
+import { find, parseQueryArguments } from '@instructure/ui-test-queries'
 
-import { CondensedButton } from './index'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// eslint-disable-next-line no-restricted-imports
+import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
 
-export const CondensedButtonLocator = locator(CondensedButton.selector, {
+import { ToggleButton } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const ToggleButtonLocator = locator(ToggleButton.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findTooltipContent: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    const tooltip = await TooltipLocator.find(element, options)
+    return tooltip ? tooltip.findContent(selector, options) : null
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   click: async (element, ...args) => {
     return (await find(element, 'a,button,[role="button"]')).click(...args)
   }

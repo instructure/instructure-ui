@@ -25,27 +25,44 @@
 import React from 'react'
 
 const icon = (
-  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
+  <svg height="1em" width="1em" style={{ fill: 'currentcolor' }}>
     <circle cx="0.5em" cy="0.5em" r="0.5em" />
   </svg>
 )
 
 export default {
   sectionProp: 'color',
-  getComponentProps: (props) => ({
-    screenReaderLabel: 'Example label',
-    renderIcon: icon,
-    renderTooltipContent: 'Example tooltip content',
-    status: 'pressed'
-  }),
-  getExampleProps: (props) => {
+  maxExamplesPerPage: 50,
+  propValues: {
+    renderIcon: [null, icon]
+  },
+  excludeProps: ['focusColor'],
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
     return {
-      background: props?.color?.includes('inverse')
-        ? 'primary-inverse'
-        : 'primary'
+      children: 'Hello'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  getExampleProps: (props) => {
+    return {
+      background:
+        props.color === 'primary-inverse' ? 'primary-inverse' : 'primary'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
-    return props.interaction === 'readonly' || props.type !== 'button'
+    return (
+      // Only generate examples for type==="button"
+      props.type !== 'button' ||
+      // Only generate a 1 variation for non-'primary' color
+      (props.color !== 'primary' &&
+        (props.display !== 'block' ||
+          props.interaction !== 'enabled' ||
+          props.size !== 'small' ||
+          props.renderIcon != null ||
+          props.textAlign !== 'center' ||
+          props.withBackground !== false))
+    )
   }
 }

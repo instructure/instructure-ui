@@ -22,7 +22,36 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
-import { CloseButton } from './index'
+import React from 'react'
 
-export const CloseButtonLocator = locator(CloseButton.selector)
+const icon = (
+  // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; title: string; height: ... Remove this comment to see the full error message
+  <svg title="myIcon" height="1em" width="1em" style={{ fill: 'currentcolor' }}>
+    <circle cx="0.5em" cy="0.5em" r="0.5em" />
+  </svg>
+)
+
+export default {
+  sectionProp: 'color',
+  propValues: {
+    renderIcon: [null, icon]
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      children: 'Example Button'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  getExampleProps: (props) => {
+    return {
+      background: props.color.includes('inverse')
+        ? 'primary-inverse'
+        : 'primary'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  filter: (props) => {
+    return props.interaction === 'readonly' || props.type !== 'button'
+  }
+}

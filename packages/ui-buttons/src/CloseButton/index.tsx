@@ -31,12 +31,35 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
 import { BaseButton } from '../BaseButton'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  screenReaderLabel: string | React.ReactNode
+  color?: 'primary' | 'primary-inverse'
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  elementRef?: (...args: any[]) => any
+  size?: 'small' | 'medium' | 'large'
+  onClick?: (...args: any[]) => any
+  margin?: typeof ThemeablePropValues.SPACING
+  placement?: 'start' | 'end' | 'static'
+  offset?: 'none' | 'x-small' | 'small' | 'medium'
+  type?: 'button' | 'submit' | 'reset'
+  as?: React.ReactElement
+  href?: string
+  cursor?: string
+  tabIndex?: number | string
+}
 
 /**
 ---
@@ -45,7 +68,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class CloseButton extends Component {
+class CloseButton extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -117,6 +140,7 @@ class CloseButton extends Component {
 
   static defaultProps = {
     screenReaderLabel: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClick: (event) => {},
     elementRef: undefined,
     color: undefined,
@@ -136,14 +160,17 @@ class CloseButton extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   get interaction() {
+    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -176,6 +203,7 @@ class CloseButton extends Component {
         <BaseButton
           renderIcon={IconXSolid}
           elementRef={elementRef}
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           interaction={this.interaction}
           type={type}
           color={this.color}
