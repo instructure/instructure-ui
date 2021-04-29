@@ -38,9 +38,12 @@ import {
 import { Selectable } from '../index'
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Selectable />', async () => {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
   const lastCall = (spy) => spy.lastCall.args
   const defaultOptions = ['foo', 'bar', 'baz']
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getSelectable = (selectable) => (
     <span {...selectable.getRootProps()}>
       <label {...selectable.getLabelProps()}>Selectable</label>
@@ -59,9 +62,12 @@ describe('<Selectable />', async () => {
     </span>
   )
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should focus trigger when root is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Selectable>
+        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -90,11 +96,16 @@ describe('<Selectable />', async () => {
     expect(input.focused()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not blur trigger when root is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onBlur = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Selectable>
+        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -129,15 +140,21 @@ describe('<Selectable />', async () => {
     expect(onBlur).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not hide options when list is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onMouseDown = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onRequestHideOptions = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Selectable
         isShowingOptions={true}
         onRequestHideOptions={onRequestHideOptions}
       >
+        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -170,15 +187,21 @@ describe('<Selectable />', async () => {
     expect(onRequestHideOptions).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not hide options when an option is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onMouseDown = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onRequestHideOptions = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Selectable
         isShowingOptions={true}
         onRequestHideOptions={onRequestHideOptions}
       >
+        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -218,12 +241,18 @@ describe('<Selectable />', async () => {
     expect(onRequestHideOptions).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not prevent events on other children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onMouseDown = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Selectable>
+        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
         {(selectable) => (
           <span {...selectable.getRootProps()}>
             <label {...selectable.getLabelProps()}>Selectable</label>
@@ -261,15 +290,21 @@ describe('<Selectable />', async () => {
     expect(onKeyDown).to.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with callbacks', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestShowOptions', async () => {
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when root is clicked', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         const subject = await mount(
           <Selectable
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -284,13 +319,17 @@ describe('<Selectable />', async () => {
         expect(onRequestShowOptions).to.have.been.calledOnce()
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when input is clicked', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         const subject = await mount(
           <Selectable
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -305,13 +344,17 @@ describe('<Selectable />', async () => {
         expect(onRequestShowOptions).to.have.been.calledOnce()
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when up/down arrows are pressed', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <Selectable
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -324,10 +367,14 @@ describe('<Selectable />', async () => {
         expect(onRequestShowOptions).to.have.been.calledTwice()
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when space is pressed', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         const subject = await mount(
           <Selectable onRequestShowOptions={onRequestShowOptions}>
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -341,14 +388,19 @@ describe('<Selectable />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestHideOptions', async () => {
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when root is clicked', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         const subject = await mount(
           <Selectable
             isShowingOptions={true}
             onRequestHideOptions={onRequestHideOptions}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -363,13 +415,17 @@ describe('<Selectable />', async () => {
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when input is clicked', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         const subject = await mount(
           <Selectable
             isShowingOptions={true}
             onRequestHideOptions={onRequestHideOptions}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -384,9 +440,12 @@ describe('<Selectable />', async () => {
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when escape is pressed', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
         let defaultPrevented = false
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
           <div
@@ -398,6 +457,7 @@ describe('<Selectable />', async () => {
               isShowingOptions={true}
               onRequestHideOptions={onRequestHideOptions}
             >
+              {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
               {(selectable) => getSelectable(selectable)}
             </Selectable>
           </div>
@@ -410,11 +470,16 @@ describe('<Selectable />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestHighlightOption', async () => {
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when options are hovered', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <Selectable onRequestHighlightOption={onRequestHighlightOption}>
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -433,15 +498,20 @@ describe('<Selectable />', async () => {
         )
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when up/down arrows are pressed', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         const subject = await mount(
           <Selectable
             isShowingOptions={false}
             onRequestShowOptions={onRequestShowOptions}
             onRequestHighlightOption={onRequestHighlightOption}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -469,10 +539,15 @@ describe('<Selectable />', async () => {
         expect(lastCall(onRequestHighlightOption)[1].direction).to.equal(-1)
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when home/end is pressed', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightFirstOption = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightLastOption = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <Selectable
             isShowingOptions={true}
@@ -481,6 +556,7 @@ describe('<Selectable />', async () => {
             onRequestHighlightFirstOption={onRequestHighlightFirstOption}
             onRequestHighlightLastOption={onRequestHighlightLastOption}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -495,15 +571,20 @@ describe('<Selectable />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestSelectOption', async () => {
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when enter is pressed', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestSelectOption = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <Selectable
             isShowingOptions={true}
             highlightedOptionId={defaultOptions[1]}
             onRequestSelectOption={onRequestSelectOption}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -515,13 +596,17 @@ describe('<Selectable />', async () => {
         )
       })
 
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when options are clicked', async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestSelectOption = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <Selectable
             isShowingOptions={true}
             onRequestSelectOption={onRequestSelectOption}
           >
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
             {(selectable) => getSelectable(selectable)}
           </Selectable>
         )
@@ -535,11 +620,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getRootProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for root element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -549,9 +639,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getRootProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span
               {...selectable.getRootProps({
@@ -577,11 +670,16 @@ describe('<Selectable />', async () => {
       expect(root.getComputedStyle().color).to.equal('rgb(255, 0, 0)')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow supplemental onClick behavior', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestShowOptions = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps({ onClick })}>
               <input
@@ -600,15 +698,20 @@ describe('<Selectable />', async () => {
       expect(onRequestShowOptions).to.have.been.calledOnce()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow supplemental onKeyDown behavior', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onKeyDown = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestHighlightOption = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable
           isShowingOptions={true}
           highlightedOptionId={defaultOptions[1]}
           onRequestHighlightOption={onRequestHighlightOption}
         >
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps({ onKeyDown })}>
               <input
@@ -630,11 +733,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getLabelProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for label element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -644,9 +752,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getLabelProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set htmlFor prop', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <label {...selectable.getLabelProps()}>Selectable</label>
@@ -665,10 +776,13 @@ describe('<Selectable />', async () => {
       expect(label.getAttribute('for')).to.equal(input.getAttribute('id'))
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set htmlFor prop with custom defined id', async () => {
       const id = 'CustomSelect'
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable id={id}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <label {...selectable.getLabelProps()}>Selectable</label>
@@ -688,9 +802,12 @@ describe('<Selectable />', async () => {
       expect(label.getAttribute('for')).to.equal(id)
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <label
@@ -719,11 +836,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getTriggerProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for trigger element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -733,9 +855,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getTriggerProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set appropriate prop defaults', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -754,9 +879,12 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('id')).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set appropriate props based on isShowingOptions', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable isShowingOptions={false}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -780,9 +908,12 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('aria-owns')).to.equal(list.getAttribute('id'))
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set appropriate props based on highlightedOptionId', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable isShowingOptions={true}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -814,9 +945,12 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('aria-activedescendant')).to.not.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -837,9 +971,12 @@ describe('<Selectable />', async () => {
       expect(input.getComputedStyle().color).to.equal('rgb(255, 0, 0)')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow props to be overridden', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -858,10 +995,14 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('aria-controls')).to.equal('customId')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide a ref to the text input', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const inputRef = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -878,9 +1019,12 @@ describe('<Selectable />', async () => {
       expect(inputRef).to.have.been.calledWith(input.getDOMNode())
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -903,9 +1047,12 @@ describe('<Selectable />', async () => {
       expect(input.getComputedStyle().color).to.equal('rgb(255, 0, 0)')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow props to be overridden', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -924,11 +1071,16 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('aria-autocomplete')).to.equal('list')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow supplemental onClick behavior', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestShowOptions = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input
@@ -947,15 +1099,20 @@ describe('<Selectable />', async () => {
       expect(onRequestShowOptions).to.have.been.calledOnce()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow supplemental onKeyDown behavior', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onKeyDown = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestHighlightOption = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable
           isShowingOptions={true}
           highlightedOptionId={defaultOptions[1]}
           onRequestHighlightOption={onRequestHighlightOption}
         >
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input
@@ -978,11 +1135,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getInputProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for trigger element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -992,9 +1154,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getInputProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set appropriate prop defaults', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getInputProps()} />
@@ -1009,9 +1174,12 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('autocomplete')).to.equal('off')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set appropriate props when readOnly', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1029,9 +1197,12 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('disabled')).to.not.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow props to be overridden', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1050,9 +1221,12 @@ describe('<Selectable />', async () => {
       expect(input.getAttribute('aria-autocomplete')).to.equal('inline')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1076,11 +1250,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getListProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for list element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1090,9 +1269,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getListProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set appropriate prop defaults', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable isShowingOptions={true}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1107,9 +1289,12 @@ describe('<Selectable />', async () => {
       expect(list.getAttribute('role')).to.equal('listbox')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable isShowingOptions={true}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span {...selectable.getRootProps()}>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1132,11 +1317,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getOptionProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for option element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1146,9 +1336,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getOptionProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set appropriate prop defaults', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1169,9 +1362,12 @@ describe('<Selectable />', async () => {
       expect(option.getAttribute('aria-selected')).to.equal('false')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-selected based on selectedOptionId', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable selectedOptionId={defaultOptions[1]}>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1201,9 +1397,12 @@ describe('<Selectable />', async () => {
       expect(options[2].getAttribute('aria-selected')).to.equal('false')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getTriggerProps()} />
@@ -1233,14 +1432,19 @@ describe('<Selectable />', async () => {
       expect(option.getComputedStyle().color).to.equal('rgb(255, 0, 0)')
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow supplemental onMouseOver behavior', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onMouseOver = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestHighlightOption = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable
           isShowingOptions={true}
           onRequestHighlightOption={onRequestHighlightOption}
         >
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getInputProps()} />
@@ -1267,14 +1471,19 @@ describe('<Selectable />', async () => {
       expect(onRequestHighlightOption).to.have.been.calledTwice()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow supplemental onClick behavior', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestSelectOption = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable
           isShowingOptions={true}
           onRequestSelectOption={onRequestSelectOption}
         >
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input type="text" {...selectable.getInputProps()} />
@@ -1302,11 +1511,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getDisabledOptionProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for disabled option element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1316,9 +1530,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getDisabledOptionProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-disabled prop', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1346,11 +1563,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getDisabledOptionProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for disabled option element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null
@@ -1360,9 +1582,12 @@ describe('<Selectable />', async () => {
       expect(lastCall(renderSpy)[0].getDisabledOptionProps).to.exist()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-disabled prop', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => (
             <span>
               <input
@@ -1390,11 +1615,16 @@ describe('<Selectable />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('getDescriptionProps()', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide prop getter for description element', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
+          {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           {(selectable) => {
             renderSpy(selectable)
             return null

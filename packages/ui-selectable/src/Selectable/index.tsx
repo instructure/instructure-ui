@@ -24,6 +24,7 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import keycode from 'keycode'
 
 import { isActiveElement } from '@instructure/ui-dom-utils'
@@ -31,13 +32,27 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 
+type Props = {
+  id?: string
+  highlightedOptionId?: string
+  selectedOptionId?: string | any[]
+  isShowingOptions?: boolean
+  onRequestShowOptions?: (...args: any[]) => any
+  onRequestHideOptions?: (...args: any[]) => any
+  onRequestHighlightOption?: (...args: any[]) => any
+  onRequestHighlightFirstOption?: (...args: any[]) => any
+  onRequestHighlightLastOption?: (...args: any[]) => any
+  onRequestSelectOption?: (...args: any[]) => any
+  render?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components
 tags: autocomplete, typeahead, combobox, dropdown, search
 ---
 **/
-class Selectable extends Component {
+class Selectable extends Component<Props> {
   static propTypes = {
     /**
      * The id of the trigger element. Set automatically if not provided
@@ -102,11 +117,17 @@ class Selectable extends Component {
     highlightedOptionId: null,
     selectedOptionId: null,
     isShowingOptions: false,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestShowOptions: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestHideOptions: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestHighlightOption: (event, data) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestHighlightFirstOption: (event, data) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestHighlightLastOption: (event, data) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestSelectOption: (event, data) => {},
     children: null,
     render: undefined
@@ -116,6 +137,7 @@ class Selectable extends Component {
   _listId = `${this._id}-list`
   _descriptionId = `${this._id}-description`
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'id' implicitly has an 'any' type.
   isSelectedOption = (id) => {
     const { selectedOptionId } = this.props
 
@@ -125,6 +147,7 @@ class Selectable extends Component {
     return selectedOptionId === id
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleOpenClose = (event) => {
     const {
       isShowingOptions,
@@ -135,15 +158,20 @@ class Selectable extends Component {
     event.preventDefault()
 
     if (isShowingOptions) {
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       onRequestHideOptions(event)
     } else {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Select... Remove this comment to see the full error message
       if (!isActiveElement(this._trigger)) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Select... Remove this comment to see the full error message
         this._trigger.focus()
       }
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       onRequestShowOptions(event)
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event) => {
     const {
       isShowingOptions,
@@ -167,6 +195,7 @@ class Selectable extends Component {
         if (highlightedOptionId) {
           // select highlighted option
           event.preventDefault()
+          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
           onRequestSelectOption(event, { id: highlightedOptionId })
         }
         break
@@ -174,6 +203,7 @@ class Selectable extends Component {
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
+          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
           onRequestHighlightOption(event, { direction: 1 })
         } else {
           // otherwise, show options
@@ -184,6 +214,7 @@ class Selectable extends Component {
         event.preventDefault()
         if (isShowingOptions) {
           // if options showing, change highlight
+          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
           onRequestHighlightOption(event, { direction: -1 })
         } else {
           // otherwise, show options
@@ -194,6 +225,7 @@ class Selectable extends Component {
         if (isShowingOptions) {
           // if options showing, highlight first option
           event.preventDefault()
+          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
           onRequestHighlightFirstOption(event)
         }
         break
@@ -201,12 +233,14 @@ class Selectable extends Component {
         if (isShowingOptions) {
           // if options showing, highlight last option
           event.preventDefault()
+          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
           onRequestHighlightLastOption(event)
         }
         break
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyUp = (event) => {
     const { isShowingOptions } = this.props
     const key = keycode.names[event.keyCode]
@@ -231,10 +265,13 @@ class Selectable extends Component {
 
     if (typeof render === 'function') {
       return render({
+        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getRootProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             onClick: createChainedFunction(this.handleOpenClose, onClick),
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onMouseDown: createChainedFunction((event) => {
+              // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Select... Remove this comment to see the full error message
               if (event.target !== this._trigger) {
                 event.preventDefault() // prevent trigger from losing focus
               }
@@ -243,6 +280,7 @@ class Selectable extends Component {
           }
         },
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getLabelProps: (props) => {
           return {
             htmlFor: this._id,
@@ -250,9 +288,11 @@ class Selectable extends Component {
           }
         },
 
+        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getTriggerProps: ({ ref, onKeyDown, onKeyUp, ...rest } = {}) => {
           return {
             id: this._id,
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
             ref: createChainedFunction(ref, (el) => (this._trigger = el)),
             'aria-haspopup': 'listbox',
             'aria-expanded': isShowingOptions,
@@ -268,6 +308,7 @@ class Selectable extends Component {
           }
         },
 
+        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getInputProps: ({ readOnly, ...rest } = {}) => {
           return {
             role: 'combobox',
@@ -278,13 +319,16 @@ class Selectable extends Component {
           }
         },
 
+        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getListProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             id: this._listId,
             role: 'listbox',
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onMouseDown: createChainedFunction((event) => {
               event.preventDefault() // prevent trigger from losing focus
             }, onMouseDown),
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onClick: createChainedFunction((event) => {
               // prevent synthetic event from firing on the document
               // this event could inadvertently close a parent dialog
@@ -295,7 +339,9 @@ class Selectable extends Component {
           }
         },
 
+        // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getOptionProps: ({ id, onMouseOver, onClick, ...rest } = {}) => {
+          // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
           error(
             id,
             `[Selectable] Must provide id for each option via \`getOptionProps\`.`
@@ -304,16 +350,21 @@ class Selectable extends Component {
             id,
             role: 'option',
             'aria-selected': this.isSelectedOption(id) ? 'true' : 'false',
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onClick: createChainedFunction((event) => {
+              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
               onRequestSelectOption(event, { id })
             }, onClick),
+            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onMouseOver: createChainedFunction((event) => {
+              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
               onRequestHighlightOption(event, { id })
             }, onMouseOver),
             ...rest
           }
         },
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getDisabledOptionProps: (props) => {
           return {
             'aria-disabled': 'true',
@@ -321,6 +372,7 @@ class Selectable extends Component {
           }
         },
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
         getDescriptionProps: (props) => {
           return {
             id: this._descriptionId,
