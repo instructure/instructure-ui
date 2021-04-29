@@ -48,7 +48,7 @@ try {
     process.argv[3] === 'current' || !process.argv[3]
       ? pkgJSON.version
       : process.argv[3]
-  fixPublish({
+  publish({
     packageName: pkgJSON.name,
     currentVersion: pkgJSON.version,
     releaseVersion: releaseVersion,
@@ -60,7 +60,7 @@ try {
   process.exit(1)
 }
 
-async function fixPublish({
+async function publish({
   packageName,
   currentVersion,
   releaseVersion,
