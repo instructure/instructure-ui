@@ -21,15 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-/* eslint-disable no-restricted-imports */
-import { SelectLocator } from '@instructure/ui-select/es/Select/SelectLocator'
-/* eslint-enable no-restricted-imports */
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { SimpleSelect } from './index'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { Option } from '../Option'
 
-export const SimpleSelectLocator = locator(SimpleSelect.selector, {
-  findInput: SelectLocator.findInput,
-  findOptionsList: SelectLocator.findOptionsList
-})
+type Props = {
+  renderLabel: React.ReactNode | ((...args: any[]) => any)
+}
+
+/**
+---
+parent: SimpleSelect
+id: SimpleSelect.Group
+---
+**/
+class Group extends Component<Props> {
+  static propTypes = {
+    /**
+     * The label associated with the group options.
+     */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+      .isRequired,
+    /**
+     * Children of type `<SimpleSelect.Option />` that will be considered part of the group.
+     */
+    children: ChildrenPropTypes.oneOf([Option])
+  }
+
+  static defaultProps = {
+    children: null
+  }
+
+  /* istanbul ignore next */
+  render() {
+    // this component is only used for prop validation. Select.Group children
+    // are parsed in Select and rendered as Options components
+    return null
+  }
+}
+
+export default Group
+export { Group }
