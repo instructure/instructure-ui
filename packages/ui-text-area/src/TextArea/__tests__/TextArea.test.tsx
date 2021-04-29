@@ -29,8 +29,11 @@ import { TextArea } from '../index'
 
 import { TextAreaLocator } from '../TextAreaLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('TextArea', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should accept a default value', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea label="Name" autoGrow={false} defaultValue="Tom Servo" />
     )
@@ -40,13 +43,17 @@ describe('TextArea', async () => {
     expect(input).to.have.value('Tom Servo')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should include a label', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TextArea label="Name" autoGrow={false} />)
     const textArea = await TextAreaLocator.find(':label(Name)')
     expect(textArea).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set an initial height', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TextArea label="Name" autoGrow={false} height="100px" />)
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
@@ -54,7 +61,9 @@ describe('TextArea', async () => {
     expect(input.getComputedStyle().height).to.contain('100px')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should resize if autoGrow is true', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TextArea label="Name" autoGrow={true} width="500px" onChange={stub} />
     )
@@ -84,12 +93,15 @@ describe('TextArea', async () => {
     expect(resizedHeight).to.equal(layoutMinHeight)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set a maxHeight', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
         autoGrow={true}
         maxHeight="10rem"
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         onChange={stub()}
         value={`Chartreuse celiac thundercats, distillery snackwave glossier
         pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
@@ -137,38 +149,50 @@ describe('TextArea', async () => {
     expect(layoutMaxHeight).to.be.above(layoutMinHeight)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should focus the textarea when focus is called', async () => {
     let ref
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
         autoGrow={false}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; autoGrow: false; componentR... Remove this comment to see the full error message
         componentRef={(el) => (ref = el)}
       />
     )
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
 
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     ref.focus()
     expect(input.focused()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('provides a focused getter', async () => {
     let ref
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
         autoGrow={false}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; autoGrow: false; componentR... Remove this comment to see the full error message
         componentRef={(el) => (ref = el)}
       />
     )
 
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     ref.focus()
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     expect(ref.focused).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide an textareaRef prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const textareaRef = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea label="Name" autoGrow={false} textareaRef={textareaRef} />
     )
@@ -178,23 +202,31 @@ describe('TextArea', async () => {
     expect(textareaRef).to.have.been.calledWith(input.getDOMNode())
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a value getter', async () => {
     let ref
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         defaultValue="bar"
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; autoGrow: false; defaultVal... Remove this comment to see the full error message
         componentRef={(el) => (ref = el)}
       />
     )
 
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     expect(ref.value).to.equal('bar')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('events', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onChange event', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TextArea label="Name" autoGrow={false} onChange={onChange} />
       )
@@ -206,8 +238,11 @@ describe('TextArea', async () => {
       expect(onChange).to.have.been.called()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not respond to onChange event when disabled', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TextArea disabled label="Name" autoGrow={false} onChange={onChange} />
       )
@@ -219,8 +254,11 @@ describe('TextArea', async () => {
       expect(onChange).to.not.have.been.called()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not respond to onChange event when readOnly', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TextArea readOnly label="Name" autoGrow={false} onChange={onChange} />
       )
@@ -231,8 +269,11 @@ describe('TextArea', async () => {
       expect(onChange).to.not.have.been.called()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onBlur event', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
@@ -242,8 +283,11 @@ describe('TextArea', async () => {
       expect(onBlur).to.have.been.called()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onFocus event', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TextArea label="Name" autoGrow={false} onFocus={onFocus} />)
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
@@ -254,14 +298,19 @@ describe('TextArea', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('for a11y', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should meet standards', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TextArea label="Name" autoGrow={false} />)
       const textArea = await TextAreaLocator.find()
       expect(await textArea.accessible()).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-invalid when errors prop is set', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TextArea
           label="Name"

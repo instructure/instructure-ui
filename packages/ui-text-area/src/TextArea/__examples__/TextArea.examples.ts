@@ -22,10 +22,30 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
-
-import { TextArea } from './index'
-
-export const TextAreaLocator = locator(TextArea.selector, {
-  findInput: (...args) => locator('textarea').find(...args)
-})
+export default {
+  maxExamplesPerPage: 50,
+  maxExamples: 500,
+  propValues: {
+    placeholder: [undefined, 'Hello text area placeholder'],
+    value: [undefined, 'Some content for the text area'],
+    messages: [undefined, [{ type: 'hint', text: 'hint text' }]],
+    width: [undefined, '3rem'],
+    height: [undefined, '5rem']
+  },
+  excludeProps: ['required', 'inline'],
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      label: 'A text area',
+      layout: 'stacked',
+      readOnly: false,
+      onChange: () => {},
+      required: false,
+      resize: 'none'
+    }
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'page' is declared but its value is never read.
+  getParameters: (page) => {
+    return { disable: true }
+  }
+}
