@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'colors' implicitly has an 'any' type.
 function functionalColors(colors) {
   const text = {
     textDarkest: colors.licorice,
