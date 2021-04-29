@@ -23,26 +23,30 @@
  */
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme, props, state) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest
+  }
+
   return {
-    body: {
-      label: 'body',
-      fontSize: componentTheme.fontSize,
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      color: componentTheme.color,
-      background: componentTheme.background
-    }
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
   }
 }
 
-export default generateStyle
+export default generateComponentTheme

@@ -23,71 +23,97 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
+import {
+  matchComponentTypes,
+  safeCloneElement,
+  omitProps
+} from '@instructure/ui-react-utils'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
-
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { Row } from '../Row'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  hover?: boolean
+  isStacked?: boolean
+  headers?: (React.ReactNode | ((...args: any[]) => any))[]
+}
 
 /**
 ---
 parent: Table
-id: Table.Cell
+id: Table.Body
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Cell extends Component {
+class Body extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {
+    /**
+     * `Table.Row`
+     */
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    children: ChildrenPropTypes.oneOf([Row]),
+    hover: PropTypes.bool,
     isStacked: PropTypes.bool,
-    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    /**
-     * Control the text alignment in cell
-     */
-    textAlign: PropTypes.oneOf(['start', 'center', 'end'])
+    headers: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+    )
   }
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    textAlign: 'start',
     children: null
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
-    const { children, styles, isStacked, header } = this.props
+    const { children, hover, isStacked, headers, styles } = this.props
 
     return (
       <View
-        {...View.omitViewProps(omitProps(this.props, Cell.propTypes), Cell)}
-        as={isStacked ? 'div' : 'td'}
-        css={styles.cell}
-        role={isStacked ? 'cell' : null}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
+        {...View.omitViewProps(omitProps(this.props, Body.propTypes), Body)}
+        as={isStacked ? 'div' : 'tbody'}
+        css={styles.body}
+        role={isStacked ? 'rowgroup' : null}
       >
-        {header && callRenderProp(header)}
-        {header && ': '}
-        {callRenderProp(children)}
+        {Children.map(children, (child) =>
+          matchComponentTypes(child, [Row])
+            ? safeCloneElement(child, {
+                // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
+                key: child.props.name,
+                hover,
+                isStacked,
+                headers
+              })
+            : null
+        )}
       </View>
     )
   }
 }
 
-export default Cell
-export { Cell }
+export default Body
+export { Body }

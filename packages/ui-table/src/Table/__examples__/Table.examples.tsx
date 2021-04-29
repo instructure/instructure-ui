@@ -31,6 +31,7 @@ export default {
   propValues: {
     layout: ['auto', 'fixed', 'stacked']
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       caption: 'Top rated movies',

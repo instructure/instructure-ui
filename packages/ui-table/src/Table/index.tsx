@@ -47,13 +47,23 @@ import { ColHeader } from './ColHeader'
 import { RowHeader } from './RowHeader'
 import { Cell } from './Cell'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  caption: React.ReactNode
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  elementRef?: (...args: any[]) => any
+  hover?: boolean
+  layout?: 'auto' | 'fixed' | 'stacked'
+}
+
 /**
 ---
 category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Table extends Component {
+class Table extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -106,10 +116,13 @@ class Table extends Component {
   static Cell = Cell
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -118,9 +131,11 @@ class Table extends Component {
     const [head] = Children.toArray(children)
 
     if (matchComponentTypes(head, [Head])) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
       const [row] = Children.toArray(head.props.children)
 
       if (matchComponentTypes(row, [Row])) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         return Children.map(row.props.children, (colHeader) => {
           return matchComponentTypes(colHeader, [ColHeader])
             ? colHeader.props.children
@@ -146,6 +161,7 @@ class Table extends Component {
 
     return (
       <View
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
         {...View.omitViewProps(omitProps(this.props, Table.propTypes), Table)}
         as={isStacked ? 'div' : 'table'}
         margin={margin}
@@ -162,12 +178,14 @@ class Table extends Component {
         {Children.map(children, (child) => {
           if (matchComponentTypes(child, [Head])) {
             return safeCloneElement(child, {
+              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               key: child.props.name,
               isStacked
             })
           }
           if (matchComponentTypes(child, [Body])) {
             return safeCloneElement(child, {
+              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               key: child.props.name,
               isStacked,
               hover,

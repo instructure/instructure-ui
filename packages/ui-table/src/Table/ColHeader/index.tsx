@@ -37,6 +37,17 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  id: string
+  width?: string | number
+  textAlign?: 'start' | 'center' | 'end'
+  sortDirection?: 'none' | 'ascending' | 'descending'
+  onRequestSort?: (...args: any[]) => any
+  scope?: 'row' | 'col' | 'rowgroup' | 'colgroup' | 'auto'
+}
+
 /**
 ---
 parent: Table
@@ -44,7 +55,7 @@ id: Table.ColHeader
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class ColHeader extends Component {
+class ColHeader extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
@@ -88,16 +99,21 @@ class ColHeader extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClick = (event) => {
     const { id, onRequestSort } = this.props
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onRequestSort(event, {
       id
     })
@@ -131,6 +147,7 @@ class ColHeader extends Component {
 
     return (
       <th
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, ColHeader.propTypes)}
         css={styles.colHeader}
         style={{

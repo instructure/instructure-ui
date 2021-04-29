@@ -23,15 +23,10 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  omitProps,
-  matchComponentTypes,
-  safeCloneElement
-} from '@instructure/ui-react-utils'
-import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { omitProps, callRenderProp } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -39,83 +34,73 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { ColHeader } from '../ColHeader'
-import { RowHeader } from '../RowHeader'
-import { Cell } from '../Cell'
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  isStacked?: boolean
+  textAlign?: 'start' | 'center' | 'end'
+}
 
 /**
 ---
 parent: Table
-id: Table.Row
+id: Table.RowHeader
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Row extends Component {
+class RowHeader extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {
-    /**
-     * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
-     */
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    children: ChildrenPropTypes.oneOf([ColHeader, RowHeader, Cell]),
-    hover: PropTypes.bool,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     isStacked: PropTypes.bool,
-    headers: PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-    )
+    /**
+     * Control the text alignment in row header
+     */
+    textAlign: PropTypes.oneOf(['start', 'center', 'end'])
   }
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
+    textAlign: 'start',
     children: null
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
-    const { children, styles, isStacked, headers } = this.props
+    const { children, isStacked, styles } = this.props
 
     return (
       <View
-        {...View.omitViewProps(omitProps(this.props, Row.propTypes), Row)}
-        as={isStacked ? 'div' : 'tr'}
-        css={styles.row}
-        role={isStacked ? 'row' : null}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
+        {...View.omitViewProps(
+          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+          omitProps(this.props, RowHeader.propTypes),
+          RowHeader
+        )}
+        as={isStacked ? 'div' : 'th'}
+        css={styles.rowHeader}
+        scope="row"
+        role={isStacked ? 'rowheader' : null}
       >
-        {Children.toArray(children)
-          .filter(Boolean)
-          .map((child, index) => {
-            if (matchComponentTypes(child, [ColHeader])) {
-              return child
-            }
-            if (matchComponentTypes(child, [RowHeader])) {
-              return safeCloneElement(child, {
-                key: child.props.name,
-                isStacked
-              })
-            }
-            if (matchComponentTypes(child, [Cell])) {
-              return safeCloneElement(child, {
-                key: child.props.name,
-                isStacked,
-                header: headers && headers[index]
-              })
-            }
-            return null
-          })}
+        {callRenderProp(children)}
       </View>
     )
   }
 }
 
-export default Row
-export { Row }
+export default RowHeader
+export { RowHeader }

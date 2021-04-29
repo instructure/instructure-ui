@@ -45,6 +45,13 @@ import generateComponentTheme from './theme'
 import { Row } from '../Row'
 import { ColHeader } from '../ColHeader'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  isStacked?: boolean
+  renderSortLabel?: React.ReactNode | ((...args: any[]) => any)
+}
+
 /**
 ---
 parent: Table
@@ -52,7 +59,7 @@ id: Table.Head
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Head extends Component {
+class Head extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
@@ -77,6 +84,7 @@ class Head extends Component {
     let sortable = false
 
     if (row) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
       Children.forEach(row.props.children, (colHeader) => {
         if (matchComponentTypes(colHeader, [ColHeader])) {
           if (colHeader.props.onRequestSort) sortable = true
@@ -88,6 +96,7 @@ class Head extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -98,6 +107,7 @@ class Head extends Component {
         '[Table.Head] The `renderSortLabel` prop should be provided when Table is sortable.'
       )
     }
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -108,11 +118,14 @@ class Head extends Component {
     if (!matchComponentTypes(row, [Row])) {
       return null
     }
+    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'options' implicitly has type 'any[]' in ... Remove this comment to see the full error message
     const options = []
     const clickHandlers = {}
+    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'selectedOption' implicitly has type 'any... Remove this comment to see the full error message
     let selectedOption = null
     let count = 0
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
       if (matchComponentTypes(colHeader, [ColHeader])) {
@@ -120,6 +133,7 @@ class Head extends Component {
 
         if (onRequestSort) {
           options.push(id)
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           clickHandlers[id] = onRequestSort
           if (sortDirection !== 'none') {
             selectedOption = id
@@ -130,7 +144,9 @@ class Head extends Component {
     if (!options.length) {
       return null
     }
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
     const handleSelect = (event, { value }) => {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       clickHandlers[value](event, { id: value })
     }
     return (
@@ -149,12 +165,14 @@ class Head extends Component {
               value={selectedOption}
               onChange={handleSelect}
             >
+              {/* @ts-expect-error ts-migrate(7005) FIXME: Variable 'options' implicitly has an 'any[]' type. */}
               {options.map((option) => (
                 <SimpleSelect.Option
                   id={option}
                   key={option}
                   value={option}
                   renderBeforeLabel={
+                    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'selectedOption' implicitly has an 'any' ... Remove this comment to see the full error message
                     option === selectedOption
                       ? IconCheckLine
                       : () => <IconCheckLine style={{ color: 'transparent' }} />
@@ -176,6 +194,7 @@ class Head extends Component {
     return isStacked ? (
       this.renderSelect()
     ) : (
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       <thead {...omitProps(this.props, Head.propTypes)} css={styles.head}>
         {Children.map(children, (child) =>
           matchComponentTypes(child, [Row]) ? child : null
