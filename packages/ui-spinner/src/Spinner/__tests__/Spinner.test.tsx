@@ -30,27 +30,37 @@ import { View } from '@instructure/ui-view'
 import { Spinner } from '../index'
 import { SpinnerLocator } from '../SpinnerLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Spinner />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Spinner renderTitle="Loading" size="small" />)
     expect(await SpinnerLocator.find()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the title prop text in the SVG element title', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Spinner renderTitle="Loading" size="large" />)
     expect(await SpinnerLocator.find(':contains(Loading)')).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Spinner renderTitle="Loading" size="small" />)
     const spinner = await SpinnerLocator.find()
     expect(await spinner.accessible()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the contents of a component used in renderTitle', async () => {
+    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'children' implicitly has an 'any'... Remove this comment to see the full error message
     const Translation = ({ children }) => (
       <span>I have translated {children}.</span>
     )
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Spinner renderTitle={<Translation>Loading</Translation>} size="small" />
     )
@@ -61,6 +71,7 @@ describe('<Spinner />', async () => {
     expect(await spinner.accessible()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
@@ -78,19 +89,26 @@ describe('<Spinner />', async () => {
       )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should NOT allow the '${prop}' prop`, async () => {
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
             const props = {
               [prop]: 'foo'
             }
             const warning = `Warning: [Spinner] prop '${prop}' is not allowed.`
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(<Spinner renderTitle="Loading" {...props} />)
             expect(consoleError).to.be.calledWith(warning)
           })
         } else {
+          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should allow the '${prop}' prop`, async () => {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(<Spinner renderTitle="Loading" {...props} />)
             expect(consoleError).to.not.be.called()
           })

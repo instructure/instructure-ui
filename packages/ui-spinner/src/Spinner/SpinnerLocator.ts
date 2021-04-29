@@ -21,17 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-export default {
-  sectionProp: 'variant',
-  getComponentProps: (props) => {
-    return {
-      renderTitle: 'Loading'
-    }
-  },
-  getExampleProps: (props) => {
-    return {
-      background: props.variant === 'inverse' ? 'primary-inverse' : 'primary'
-    }
-  }
-}
+import { Spinner } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const SpinnerLocator = locator(Spinner.selector)

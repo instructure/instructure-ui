@@ -21,8 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { Spinner } from './index'
-
-export const SpinnerLocator = locator(Spinner.selector)
+export default {
+  sectionProp: 'variant',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      renderTitle: 'Loading'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  getExampleProps: (props) => {
+    return {
+      background: props.variant === 'inverse' ? 'primary-inverse' : 'primary'
+    }
+  }
+}

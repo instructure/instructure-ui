@@ -36,6 +36,17 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderTitle?: ((...args: any[]) => any) | React.ReactNode
+  size?: 'x-small' | 'small' | 'medium' | 'large'
+  variant?: 'default' | 'inverse'
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+}
+
 /**
 ---
 category: components
@@ -43,7 +54,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Spinner extends Component {
+class Spinner extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -80,17 +91,22 @@ class Spinner extends Component {
     elementRef: undefined
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
     this.titleId = uid('Spinner')
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -108,12 +124,15 @@ class Spinner extends Component {
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Spinner.propTypes),
       Spinner
     )
 
     const hasTitle = this.props.renderTitle
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       hasTitle,
       '[Spinner] The renderTitle prop is necessary for screen reader support.'
@@ -130,9 +149,11 @@ class Spinner extends Component {
         <svg
           css={this.props.styles.circle}
           role="img"
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message
           aria-labelledby={this.titleId}
           focusable="false"
         >
+          {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'Spinner... Remove this comment to see the full error message */}
           <title id={this.titleId}>
             {callRenderProp(this.props.renderTitle)}
           </title>
