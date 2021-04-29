@@ -34,6 +34,19 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  variant?: 'default' | 'secondary'
+  id: string
+  index: number
+  controls: string
+  isDisabled?: boolean
+  isSelected?: boolean
+  onClick?: (...args: any[]) => any
+  onKeyDown?: (...args: any[]) => any
+}
+
 /**
 ---
 parent: Tabs
@@ -41,7 +54,7 @@ id: Tabs.Tab
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Tab extends Component {
+class Tab extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -63,18 +76,24 @@ class Tab extends Component {
     variant: 'default',
     isDisabled: false,
     isSelected: false,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClick: (event, { index, id }) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onKeyDown: (event, { index, id }) => {}
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClick = (event) => {
     const { onClick, index, id, isDisabled } = this.props
 
@@ -82,9 +101,11 @@ class Tab extends Component {
       return
     }
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onClick(event, { index, id })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event) => {
     const { onKeyDown, index, id, isDisabled } = this.props
 
@@ -92,6 +113,7 @@ class Tab extends Component {
       return
     }
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onKeyDown(event, { index, id })
   }
 
@@ -111,6 +133,7 @@ class Tab extends Component {
       <View
         {...passthroughProps(props)}
         as="div"
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; as: string; role: string; i... Remove this comment to see the full error message
         role="tab"
         id={id}
         onClick={this.handleClick}

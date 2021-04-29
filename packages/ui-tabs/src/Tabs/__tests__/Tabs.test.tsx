@@ -28,8 +28,11 @@ import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 import { Tabs } from '../index'
 import { TabsLocator } from '../TabsLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Tabs />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the correct number of panels', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -46,7 +49,9 @@ describe('<Tabs />', async () => {
     expect(panels).to.have.length(3)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render with null children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -64,7 +69,9 @@ describe('<Tabs />', async () => {
     expect(panels).to.have.length(3)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render correct number of tabs', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -81,10 +88,13 @@ describe('<Tabs />', async () => {
     expect(tabButtons.length).to.equal(3)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should be okay with rendering without any children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     stub(console, 'warn') // suppress Focusable warnings
     let error = false
     try {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Tabs></Tabs>)
     } catch (e) {
       error = true
@@ -93,11 +103,13 @@ describe('<Tabs />', async () => {
     expect(error).to.be.false()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not allow invalid children', async () => {
     const cs = spy(console, 'error')
     const warning =
       "Failed prop type: Expected one of Panel,  in Tabs but found 'div'"
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <div>foo</div>
@@ -107,11 +119,14 @@ describe('<Tabs />', async () => {
     expect(cs).to.have.been.calledWithMatch(warning)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should preserve Tab.Panel keys', async () => {
     let tabs
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Tabs
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; componentRef: (el: any)... Remove this comment to see the full error message
         componentRef={(el) => {
           tabs = el
         }}
@@ -120,6 +135,7 @@ describe('<Tabs />', async () => {
       </Tabs>
     )
 
+    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'children' implicitly has an 'any'... Remove this comment to see the full error message
     const verifyChildKeys = ({ children }) => {
       const childrenArray = Array.isArray(children) ? children : [children]
       childrenArray.forEach((child) => {
@@ -127,6 +143,7 @@ describe('<Tabs />', async () => {
       })
     }
 
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     verifyChildKeys(tabs.props)
 
     await subject.setProps({
@@ -136,10 +153,13 @@ describe('<Tabs />', async () => {
       ]
     })
 
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     verifyChildKeys(tabs.props)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should default to selecting the first tab', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -159,7 +179,9 @@ describe('<Tabs />', async () => {
     expect(selectedTabsPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should honor the isSelected prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -179,7 +201,9 @@ describe('<Tabs />', async () => {
     expect(secondPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not allow selecting a disabled tab', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -204,9 +228,12 @@ describe('<Tabs />', async () => {
     expect(panels[2].getAttribute('aria-hidden')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onRequestTabChange when selection changes via click', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab" isSelected id="one">
@@ -233,7 +260,9 @@ describe('<Tabs />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should focus the selected tab when shouldFocusOnRender is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs shouldFocusOnRender>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -254,9 +283,12 @@ describe('<Tabs />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onRequestTabChange with keyboard arrow keys', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -268,7 +300,7 @@ describe('<Tabs />', async () => {
     )
 
     const tabs = await TabsLocator.find()
-    let selectedTab = await tabs.findSelectedTab()
+    const selectedTab = await tabs.findSelectedTab()
 
     await selectedTab.keyDown('left')
 
@@ -305,8 +337,11 @@ describe('<Tabs />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should update the selected tab when clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -328,8 +363,11 @@ describe('<Tabs />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not call onRequestTabChange when clicking a disabled tab', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -348,7 +386,9 @@ describe('<Tabs />', async () => {
     expect(onChange).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards when set to the secondary variant', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs variant="secondary">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -363,7 +403,9 @@ describe('<Tabs />', async () => {
     expect(await tabs.accessible()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards when set to the default variant', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs variant="default">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -378,7 +420,9 @@ describe('<Tabs />', async () => {
     expect(await tabs.accessible()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should link tabs with the corresponding panels via ids', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -403,8 +447,11 @@ describe('<Tabs />', async () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with duplicate-named tabs', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should still render the correct number of panels', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tabs>
           <Tabs.Panel renderTitle="A Tab">Contents of first tab.</Tabs.Panel>
@@ -420,8 +467,11 @@ describe('<Tabs />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with nodes as tab titles', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should still render the correct number of panels', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tabs>
           <Tabs.Panel renderTitle={<div />}>Contents of first tab.</Tabs.Panel>
@@ -439,8 +489,11 @@ describe('<Tabs />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with tabOverflow set to scroll', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render a fade-out gradient when Tabs overflow', async () => {
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'width' implicitly has an 'any' ty... Remove this comment to see the full error message
       const Example = ({ width }) => (
         <div style={{ width }}>
           <Tabs tabOverflow="scroll">
@@ -453,6 +506,7 @@ describe('<Tabs />', async () => {
         </div>
       )
 
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<Example width="150px" />)
       const tabs = await TabsLocator.find()
 

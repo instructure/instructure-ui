@@ -29,19 +29,25 @@ const TabLocator = locator('[role="tab"]')
 const PanelLocator = locator('[role="tabpanel"]')
 const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TabsLocator = locator(Tabs.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findTab: (...args) => {
     return TabLocator.find(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllTabs: (...args) => {
     return TabLocator.findAll(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findSelectedTab: (...args) => {
     return SelectedTabLocator.find(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findTabPanel: (...args) => {
     return PanelLocator.find(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllTabPanels: (...args) => {
     return PanelLocator.findAll(...args)
   }

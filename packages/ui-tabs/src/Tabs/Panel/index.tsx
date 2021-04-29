@@ -35,6 +35,22 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderTitle: React.ReactNode | ((...args: any[]) => any)
+  variant?: 'default' | 'secondary'
+  isSelected?: boolean
+  isDisabled?: boolean
+  maxHeight?: string | number
+  minHeight?: string | number
+  id?: string
+  labelledBy?: string
+  padding?: any // TODO: ThemeablePropTypes.spacing
+  textAlign?: 'start' | 'center' | 'end'
+  elementRef?: (...args: any[]) => any
+}
+
 /**
 ---
 parent: Tabs
@@ -42,7 +58,7 @@ id: Tabs.Panel
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Panel extends Component {
+class Panel extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -78,14 +94,18 @@ class Panel extends Component {
     labelledBy: null,
     isSelected: false,
     padding: 'small',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {}
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -114,6 +134,7 @@ class Panel extends Component {
         role="tabpanel"
         id={id}
         aria-labelledby={labelledBy}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
         aria-hidden={isHidden ? 'true' : null}
         ref={elementRef}
       >
