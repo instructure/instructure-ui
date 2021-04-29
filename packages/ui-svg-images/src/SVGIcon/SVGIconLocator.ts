@@ -21,40 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
+import { SVGIcon } from './index'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, key: themeName } = theme
-
-  const themeSpecificStyle = {
-    canvas: {
-      primaryColor: theme['ic-brand-font-color-dark'],
-      brandColor: theme['ic-brand-primary']
-    }
-  }
-
-  const componentVariables = {
-    primaryInverseColor: colors?.textLightest,
-    primaryColor: colors?.textDarkest,
-    secondaryColor: colors?.textDark,
-    secondaryInverseColor: colors?.textLight,
-    warningColor: colors?.textWarning,
-    brandColor: colors?.textBrand,
-    errorColor: colors?.textDanger,
-    alertColor: colors?.textAlert,
-    successColor: colors?.textSuccess
-  }
-
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
-  }
-}
-
-export default generateComponentTheme
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const SVGIconLocator = locator(SVGIcon.selector)

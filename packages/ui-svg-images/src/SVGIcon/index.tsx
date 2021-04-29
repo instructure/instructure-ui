@@ -35,6 +35,15 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  // TODO: ...InlineSVG.propTypes,
+  rotate?: '0' | '90' | '180' | '270'
+  size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+  bidirectional?: boolean
+}
+
 /**
 ---
 category: components/utilities
@@ -42,10 +51,12 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class SVGIcon extends Component {
+class SVGIcon extends Component<Props> {
   static propTypes = {
+    // @ts-expect-error ts-migrate(2783) FIXME: 'makeStyles' is specified more than once, so this ... Remove this comment to see the full error message
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
+    // @ts-expect-error ts-migrate(2783) FIXME: 'styles' is specified more than once, so this usag... Remove this comment to see the full error message
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     ...InlineSVG.propTypes,
@@ -61,16 +72,20 @@ class SVGIcon extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
     const {
       rotate,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
       className,
       size,
       bidirectional,
@@ -84,6 +99,7 @@ class SVGIcon extends Component {
     return (
       <InlineSVG
         {...props}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ rotate: "0" | "90" | "180" | "270" | undef... Remove this comment to see the full error message
         rotate={rotate}
         css={styles.svgIcon}
         className={className}

@@ -32,6 +32,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const { rotate, size, bidirectional } = props
 
@@ -64,10 +65,13 @@ const generateStyle = (componentTheme, props, state) => {
       lineHeight: 1,
       width: '1em',
       height: '1em',
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...rotateVariants[rotate],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size],
 
       ...(bidirectional && {
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         '[dir="rtl"] &': bidirectionalRotateVariants[rotate]
       })
     }

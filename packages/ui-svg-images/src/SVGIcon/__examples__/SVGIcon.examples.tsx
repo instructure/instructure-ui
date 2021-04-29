@@ -25,6 +25,7 @@ import React from 'react'
 
 export default {
   sectionProp: 'size',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       viewBox: '0 0 2000 2000',

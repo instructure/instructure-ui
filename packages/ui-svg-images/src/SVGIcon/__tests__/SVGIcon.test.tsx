@@ -31,30 +31,40 @@ import SVGIconExamples from '../__examples__/SVGIcon.examples'
 
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<SVGIcon />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set rotate to 0 by default', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('0')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should allow rotate prop to be overridden', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon rotate="90" src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('90')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set size', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon size="large" src={SVG_SRC} />)
     const sizeLarge = await SVGIconLocator.find()
     const largeFont = sizeLarge.getComputedStyle().fontSize
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon size="small" src={SVG_SRC} />)
     const sizeSmall = await SVGIconLocator.find()
     const smallFont = sizeSmall.getComputedStyle().fontSize
@@ -62,7 +72,9 @@ describe('<SVGIcon />', async () => {
     expect(smallFont).to.not.equal(largeFont)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; getCompon... Remove this comment to see the full error message
     generateA11yTests(SVGIconExamples)
   })
 })

@@ -35,6 +35,30 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  src?: string
+  title?: string
+  description?: string
+  focusable?: boolean
+  width?: string | number
+  height?: string | number
+  inline?: boolean
+  color?:
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+    | 'primary-inverse'
+    | 'secondary-inverse'
+    | 'success'
+    | 'error'
+    | 'alert'
+    | 'warning'
+    | 'brand'
+    | 'auto'
+}
+
 /**
 ---
 category: components/utilities
@@ -42,7 +66,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class InlineSVG extends Component {
+class InlineSVG extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -90,20 +114,27 @@ class InlineSVG extends Component {
   }
 
   constructor() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     super()
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'InlineS... Remove this comment to see the full error message
     this.titleId = uid('InlineSVG-title')
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'descId' does not exist on type 'InlineSV... Remove this comment to see the full error message
     this.descId = uid('InlineSVG-desc')
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'src' implicitly has an 'any' type.
   static prepareSrc = (src) => {
     const pattern = /<svg[^>]*>((.|[\n\r])*)<\/svg>/
     const matches = pattern.exec(src)
@@ -121,10 +152,13 @@ class InlineSVG extends Component {
 
   renderTitle() {
     const { title } = this.props
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'InlineS... Remove this comment to see the full error message
     return title ? <title id={this.titleId}>{title}</title> : null
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'desc' implicitly has an 'any' type.
   renderDesc(desc) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'descId' does not exist on type 'InlineSV... Remove this comment to see the full error message
     return desc ? <desc id={this.descId}>{desc}</desc> : null
   }
 
@@ -132,10 +166,12 @@ class InlineSVG extends Component {
     const ids = []
 
     if (this.props.title) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'titleId' does not exist on type 'InlineS... Remove this comment to see the full error message
       ids.push(this.titleId)
     }
 
     if (this.props.description) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'descId' does not exist on type 'InlineSV... Remove this comment to see the full error message
       ids.push(this.descId)
     }
 
@@ -158,6 +194,7 @@ class InlineSVG extends Component {
 
   render() {
     const {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Readonly<... Remove this comment to see the full error message
       style, // eslint-disable-line react/prop-types
       title,
       description,
@@ -181,13 +218,18 @@ class InlineSVG extends Component {
           width,
           height
         }}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number | null | undefined' is not a... Remove this comment to see the full error message
         width={width}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number | null | undefined' is not a... Remove this comment to see the full error message
         height={height}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
         aria-hidden={title ? null : 'true'}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
         aria-labelledby={this.labelledBy}
         role={this.role}
         focusable={focusable ? 'true' : 'false'}
         css={styles.inlineSVG}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type '{ mak... Remove this comment to see the full error message
         className={props.className}
       >
         {this.renderTitle()}
@@ -198,6 +240,7 @@ class InlineSVG extends Component {
   }
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'src' implicitly has an 'any' type.
 function parseAttributes(src) {
   const attributes = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
@@ -212,6 +255,7 @@ function parseAttributes(src) {
 
     while (match != null) {
       if (excludes.indexOf(match[1]) === -1) {
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         attributes[match[1]] =
           match[2] ||
           (match[3] ? match[3] : match[4] ? match[4] : match[5]) ||

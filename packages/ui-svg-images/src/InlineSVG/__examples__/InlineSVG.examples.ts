@@ -24,6 +24,7 @@
 
 export default {
   sectionProp: 'color',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       width: '100px',

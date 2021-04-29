@@ -22,26 +22,39 @@
  * SOFTWARE.
  */
 
+/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { key: themeName } = theme
+  const { colors, key: themeName } = theme
 
-  const themeSpecificStyle = {}
+  const themeSpecificStyle = {
+    canvas: {
+      primaryColor: theme['ic-brand-font-color-dark'],
+      brandColor: theme['ic-brand-primary']
+    }
+  }
 
   const componentVariables = {
-    sizeXSmall: '1.125rem',
-    sizeSmall: '2rem',
-    sizeMedium: '3rem',
-    sizeLarge: '5rem',
-    sizeXLarge: '10rem'
+    primaryInverseColor: colors?.textLightest,
+    primaryColor: colors?.textDarkest,
+    secondaryColor: colors?.textDark,
+    secondaryInverseColor: colors?.textLight,
+    warningColor: colors?.textWarning,
+    brandColor: colors?.textBrand,
+    errorColor: colors?.textDanger,
+    alertColor: colors?.textAlert,
+    successColor: colors?.textSuccess
   }
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }
