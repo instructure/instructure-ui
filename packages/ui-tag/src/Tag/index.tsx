@@ -161,6 +161,7 @@ class Tag extends Component<Props> {
       text,
       title,
       onClick,
+      margin,
       styles
     } = this.props
 
@@ -179,7 +180,7 @@ class Tag extends Component<Props> {
         css={styles.tag}
         className={className}
         as={onClick ? 'button' : 'span'}
-        margin="auto large none "
+        margin={margin}
         type={onClick ? 'button' : null}
         onClick={onClick ? this.handleClick : null}
         disabled={disabled || readOnly}
