@@ -167,17 +167,22 @@ class CheckboxGroup extends Component<Props> {
   renderChildren() {
     const { children, name, size, disabled, readOnly } = this.props
 
-    // @ts-expect-error ts-migrate(2552) FIXME: Cannot find name 'Children'. Did you mean 'childre... Remove this comment to see the full error message
+    // @ts-expect-error ts-migrate(6133) FIXME: 'index' is declared but its value is never read.
     return Children.map(children, (child, index) => {
       if (matchComponentTypes(child, [Checkbox])) {
         return safeCloneElement(child, {
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           key: `${child.props.name}`,
           name,
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           disabled: disabled || child.props.disabled,
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           readOnly: readOnly || child.props.readOnly,
           size,
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           checked: this.value.indexOf(child.props.value) > -1,
           onChange: this.handleChange,
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           width: child.props.width || 'auto',
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
           'aria-describedby': this.hasMessages && this._messagesId
