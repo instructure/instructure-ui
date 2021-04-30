@@ -32,6 +32,7 @@ export default {
       'Consectetur qui eiusmod labore eu ad commodo dolor ex consectetur sit id deserunt. Culpa cupidatat nisi pariatur non exercitation amet culpa Lorem sint do et laborum culpa. Eu pariatur eu elit culpa. Nisi minim irure fugiat irure ad deserunt eiusmod ex ipsum culpa proident aliquip aliqua aliquip.'
     ]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       margin: 'x-large auto',

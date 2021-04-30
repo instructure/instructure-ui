@@ -29,18 +29,34 @@ import PropTypes from 'prop-types'
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  ThemeablePropValues
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  title?: React.ReactNode
+  description?: string | React.ReactNode
+  alignContent?: 'top' | 'center'
+  margin?: keyof typeof ThemeablePropValues.SPACING
+  size?: 'small' | 'medium' | 'large'
+  elementRef?: (...args: any[]) => any
+}
 /**
 ---
 category: components
 ---
 **/
+
 @withStyle(generateStyle, generateComponentTheme)
-class Byline extends Component {
+class Byline extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -82,15 +98,20 @@ class Byline extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Byline.propTypes),
       Byline
     )
