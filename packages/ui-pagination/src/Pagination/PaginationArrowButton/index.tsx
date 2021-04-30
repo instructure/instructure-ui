@@ -34,6 +34,12 @@ import {
 } from '@instructure/ui-icons'
 import { testable } from '@instructure/ui-testable'
 
+type Props = {
+  direction?: 'next' | 'prev'
+  label: string | React.ReactNode
+  buttonRef?: (...args: any[]) => any
+}
+
 /**
 ---
 parent: Pagination
@@ -41,7 +47,7 @@ id: Pagination.Navigation
 ---
 **/
 @testable()
-class PaginationArrowButton extends Component {
+class PaginationArrowButton extends Component<Props> {
   static propTypes = {
     direction: PropTypes.oneOf(['next', 'prev']),
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
@@ -50,6 +56,7 @@ class PaginationArrowButton extends Component {
 
   static defaultProps = {
     direction: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     buttonRef: (el) => {}
   }
 
@@ -67,7 +74,9 @@ class PaginationArrowButton extends Component {
           size="small"
           withBackground={false}
           withBorder={false}
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           screenReaderLabel={label}
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'href' does not exist on type '{ children... Remove this comment to see the full error message
           rel={props.href || props.to ? direction : null}
           elementRef={buttonRef}
         >

@@ -28,6 +28,10 @@ import PropTypes from 'prop-types'
 import { BaseButton } from '@instructure/ui-buttons'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
+
+type Props = {
+  current?: boolean
+}
 /**
 ---
 parent: Pagination
@@ -36,7 +40,7 @@ id: Pagination.Page
 **/
 
 @testable()
-class PaginationButton extends Component {
+class PaginationButton extends Component<Props> {
   static propTypes = {
     /**
      * Content to render as page selection

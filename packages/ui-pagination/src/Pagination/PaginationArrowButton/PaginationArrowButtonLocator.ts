@@ -24,15 +24,19 @@
 
 import { locator } from '@instructure/ui-test-locator'
 import { find } from '@instructure/ui-test-queries'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
 
 import { PaginationArrowButton } from './index'
 
 export const PaginationArrowButtonLocator = locator(
+  // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
   PaginationArrowButton.selector,
   {
+    // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
     findTooltipContent: (...args) => TooltipLocator.findContent(...args),
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
     click: async (element, ...args) => {
       return (await find(element, 'a,button,[role="button"]')).click(...args)
     }

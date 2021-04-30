@@ -40,21 +40,39 @@ import { PaginationArrowButton } from './PaginationArrowButton'
 import generateStyle from './styles'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
 const fastFindIndex = (arr, fn) =>
   Number(Object.keys(arr).find((k) => fn(arr[Number(k)])))
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 function propsHaveCompactView(props) {
   return props.variant === 'compact' && props?.children?.length > 5
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 function shouldShowPrevButton(props, currentPageIndex) {
   return propsHaveCompactView(props) && currentPageIndex > 0
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 function shouldShowNextButton(props, currentPageIndex) {
   return (
     propsHaveCompactView(props) && currentPageIndex < props.children.length - 1
   )
+}
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  disabled?: boolean
+  label?: React.ReactNode
+  labelNext?: string
+  labelPrev?: string
+  variant?: 'full' | 'compact'
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  as?: React.ReactElement
+  elementRef?: (...args: any[]) => any
+  shouldHandleFocus?: boolean
 }
 
 /**
@@ -65,7 +83,7 @@ category: components
 
 @withStyle(generateStyle, null)
 @testable()
-class Pagination extends Component {
+class Pagination extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -128,6 +146,7 @@ class Pagination extends Component {
     disabled: false,
     variant: 'full',
     as: 'div',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     shouldHandleFocus: true
   }
@@ -135,29 +154,40 @@ class Pagination extends Component {
   static Page = PaginationButton
   static Navigation = PaginationArrowButton
 
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   constructor(...args) {
+    // @ts-expect-error ts-migrate(2556) FIXME: Expected 1-2 arguments, but got 0 or more.
     super(...args)
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
     this._labelId = uid('Pagination')
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_prevButton' does not exist on type 'Pag... Remove this comment to see the full error message
     this._prevButton = null
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_nextButton' does not exist on type 'Pag... Remove this comment to see the full error message
     this._nextButton = null
   }
 
   getSnapshotBeforeUpdate() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     const activeElement = getActiveElement()
 
     return {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_prevButton' does not exist on type 'Pag... Remove this comment to see the full error message
       prevButtonFocused: this._prevButton === activeElement,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_nextButton' does not exist on type 'Pag... Remove this comment to see the full error message
       nextButtonFocused: this._nextButton === activeElement
     }
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
     if (
       !this.props.shouldHandleFocus ||
@@ -169,6 +199,7 @@ class Pagination extends Component {
     const { prevButtonFocused, nextButtonFocused } = snapshot || {}
 
     if (prevButtonFocused || nextButtonFocused) {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const focusable = findTabbable(this._root)
       const focusIndex = prevButtonFocused ? 0 : focusable.length - 1
       focusable[focusIndex].focus()
@@ -179,6 +210,7 @@ class Pagination extends Component {
     return propsHaveCompactView(this.props)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'children' implicitly has an 'any' type.
   transferDisabledPropToChildren(children) {
     return this.props.disabled
       ? React.Children.map(children, (page) =>
@@ -187,8 +219,10 @@ class Pagination extends Component {
       : children
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     if (el) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'Paginatio... Remove this comment to see the full error message
       this._root = el
       if (typeof this.props.elementRef === 'function') {
         this.props.elementRef(el)
@@ -203,8 +237,10 @@ class Pagination extends Component {
     return (
       <View
         as="span"
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '"small" | "0"' is not assignable to type '0 ... Remove this comment to see the full error message
         padding={visibleLabel ? 'small' : '0'}
         display={visibleLabel ? display : 'auto'}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
         id={this._labelId}
       >
         {this.props.label}
@@ -212,12 +248,14 @@ class Pagination extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'currentPageIndex' implicitly has an 'an... Remove this comment to see the full error message
   renderPages(currentPageIndex) {
     const allPages = this.props.children
     let visiblePages = allPages
 
     if (this.compactView) {
       const firstIndex = 0
+      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const lastIndex = allPages.length - 1
 
       const sliceStart = Math.min(
@@ -226,24 +264,31 @@ class Pagination extends Component {
       )
       const sliceEnd = Math.min(currentPageIndex + 4, lastIndex)
 
+      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       visiblePages = allPages.slice(sliceStart, sliceEnd)
 
+      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const firstPage = allPages[firstIndex]
+      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const lastPage = allPages[lastIndex]
 
       if (sliceStart - firstIndex > 1)
+        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
         visiblePages.unshift(
           <span key="first" aria-hidden="true">
             &hellip;
           </span>
         )
+      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       if (sliceStart - firstIndex > 0) visiblePages.unshift(firstPage)
       if (lastIndex - sliceEnd + 1 > 1)
+        // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
         visiblePages.push(
           <span key="last" aria-hidden="true">
             &hellip;
           </span>
         )
+      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       if (lastIndex - sliceEnd + 1 > 0) visiblePages.push(lastPage)
     }
 
@@ -254,16 +299,21 @@ class Pagination extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'label' implicitly has an 'any' type.
   renderArrowButton(label, direction, currentPageIndex) {
+    // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
     // eslint-disable-next-line react/prop-types
     const { onClick, disabled } = this.props.children[
       currentPageIndex + direction
     ].props
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
     const handleButtonRef = (el) => {
       if (direction < 0) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_prevButton' does not exist on type 'Pag... Remove this comment to see the full error message
         this._prevButton = el
       } else {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_nextButton' does not exist on type 'Pag... Remove this comment to see the full error message
         this._nextButton = el
       }
     }
@@ -272,6 +322,7 @@ class Pagination extends Component {
       <PaginationArrowButton
         direction={direction === -1 ? 'prev' : 'next'}
         label={label}
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         onClick={onClick}
         disabled={disabled}
         buttonRef={handleButtonRef}
@@ -284,10 +335,13 @@ class Pagination extends Component {
 
     const currentPageIndex = fastFindIndex(
       this.props.children,
+      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'p' implicitly has an 'any' type.
       (p) => p && p.props && p.props.current
     )
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Pagination.propTypes),
       Pagination
     )
@@ -300,6 +354,7 @@ class Pagination extends Component {
         elementRef={this.handleElementRef}
         margin={this.props.margin}
         css={this.props.styles.pagination}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
         aria-labelledby={this.props.label && this._labelId}
       >
         {this.props.label && this.renderLabel()}

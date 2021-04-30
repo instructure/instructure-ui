@@ -21,16 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
+import React from 'react'
+import { Pagination } from '../index'
 
-import { PaginationArrowButtonLocator } from './PaginationArrowButton/PaginationArrowButtonLocator'
-import { Pagination } from './index'
+const buildPages = (count = 4, current = 0) => {
+  // @ts-expect-error ts-migrate(6133) FIXME: 'v' is declared but its value is never read.
+  return Array.from(Array(count)).map((v, i) => {
+    return (
+      <Pagination.Page key={i} current={i === current}>
+        {i}
+      </Pagination.Page>
+    )
+  })
+}
 
-const PaginationButtonLocator = locator(Pagination.Page.selector)
-
-export const PaginationLocator = locator(Pagination.selector, {
-  findAllPageButtons: async (...args) =>
-    PaginationButtonLocator.findAll(...args),
-  findPageButton: async (...args) => PaginationButtonLocator.find(...args),
-  findArrowButton: async (...args) => PaginationArrowButtonLocator.find(...args)
-})
+export default {
+  sectionProp: 'variant',
+  propValues: {
+    variant: ['full', 'compact'],
+    children: [buildPages(5), buildPages(1), buildPages(7, 2)],
+    label: [null, 'Example Pagination']
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      labelNext: 'Next',
+      labelPrev: 'Previous'
+    }
+  }
+}

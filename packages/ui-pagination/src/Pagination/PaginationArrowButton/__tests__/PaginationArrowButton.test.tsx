@@ -30,15 +30,20 @@ import { PaginationArrowButton } from '../index'
 
 import { PaginationArrowButtonLocator } from '../PaginationArrowButtonLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<PaginationArrowButton />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PaginationArrowButton direction="prev" label="Label" />)
 
     const button = await PaginationArrowButtonLocator.find()
     expect(button).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display tooltips', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PaginationArrowButton direction="prev" label="Label" />)
 
     const button = await PaginationArrowButtonLocator.find()
@@ -50,9 +55,12 @@ describe('<PaginationArrowButton />', async () => {
     expect(tooltip).to.have.text('Label')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a ref to the button element', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const buttonRef = spy()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <PaginationArrowButton
         direction="prev"
