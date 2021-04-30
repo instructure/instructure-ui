@@ -35,6 +35,7 @@ import {
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+// @ts-expect-error ts-migrate(6133) FIXME: 'uid' is declared but its value is never read.
 import { uid } from '@instructure/uid'
 
 import testable from '@instructure/ui-testable'
@@ -43,8 +44,20 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-
 import { Day } from './Day'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderNextMonthButton?: React.ReactNode | ((...args: any[]) => any)
+  renderPrevMonthButton?: React.ReactNode | ((...args: any[]) => any)
+  renderNavigationLabel?: React.ReactNode | ((...args: any[]) => any)
+  renderWeekdayLabels: (React.ReactNode | ((...args: any[]) => any))[]
+  onRequestRenderNextMonth?: (...args: any[]) => any
+  onRequestRenderPrevMonth?: (...args: any[]) => any
+  as?: React.ReactElement
+  role?: 'table' | 'listbox'
+}
 
 /**
 ---
@@ -53,7 +66,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Calendar extends Component {
+class Calendar extends Component<Props> {
   static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible
 
@@ -133,21 +146,26 @@ class Calendar extends Component {
     renderNextMonthButton: undefined,
     renderPrevMonthButton: undefined,
     renderNavigationLabel: undefined,
-    onRequestRenderNextMonth: (event) => {},
-    onRequestRenderPrevMonth: (event) => {},
+    onRequestRenderNextMonth: () => {},
+    onRequestRenderPrevMonth: () => {},
     as: 'span',
     role: 'table'
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'label' is declared but its value is never read.
   _weekdayHeaderIds = this.props.renderWeekdayLabels.reduce((ids, label, i) => {
+    // @ts-expect-error ts-migrate(2698) FIXME: Spread types may only be created from object types... Remove this comment to see the full error message
     return { ...ids, [i]: uid(`weekday-header-${i}`) }
   }, {})
 
@@ -169,6 +187,7 @@ class Calendar extends Component {
     const nextButton = callRenderProp(renderNextMonthButton)
     const prevButton = callRenderProp(renderPrevMonthButton)
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'button' implicitly has an 'any' type.
     const cloneButton = (button, onClick) =>
       safeCloneElement(button, {
         onClick: createChainedFunction(button.props.onClick, onClick)
@@ -190,6 +209,7 @@ class Calendar extends Component {
 
   renderBody() {
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '"listbox" | null' is not assignable to type ... Remove this comment to see the full error message
       <table role={this.role}>
         <thead>{this.renderWeekdayHeaders()}</thead>
         <tbody>{this.renderDays()}</tbody>
@@ -201,6 +221,7 @@ class Calendar extends Component {
     const { renderWeekdayLabels, styles } = this.props
     const { length } = renderWeekdayLabels
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       length === 7,
       `[Calendar] \`renderWeekdayLabels\` should be an array with 7 labels (one for each weekday). ${length} provided.`
@@ -214,6 +235,7 @@ class Calendar extends Component {
               key={i}
               scope="col"
               css={styles.weekdayHeader}
+              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               id={this._weekdayHeaderIds[i]}
             >
               {callRenderProp(label)}
@@ -229,37 +251,49 @@ class Calendar extends Component {
     const { length } = children
     const role = this.role === 'listbox' ? 'presentation' : null
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       length === Calendar.DAY_COUNT,
       `[Calendar] should have exactly ${Calendar.DAY_COUNT} children. ${length} provided.`
     )
 
-    return children
-      .reduce((days, day, i) => {
-        const index = Math.floor(i / 7)
+    return (
+      children
+        .reduce((days, day, i) => {
+          const index = Math.floor(i / 7)
 
-        if (!days[index]) days.push([])
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+          if (!days[index]) days.push([])
 
-        days[index].push(day)
-        return days
-      }, [])
-      .map((row) => (
-        <tr key={`row${row[0].props.date}`} role={role}>
-          {row.map((day, i) => (
-            <td key={day.props.date} role={role}>
-              {role === 'presentation'
-                ? safeCloneElement(day, {
-                    'aria-describedby': this._weekdayHeaderIds[i]
-                  })
-                : day}
-            </td>
-          ))}
-        </tr>
-      ))
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+          days[index].push(day)
+          return days
+        }, [])
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'map' does not exist on type 'string | nu... Remove this comment to see the full error message
+        .map((row) => (
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
+          <tr key={`row${row[0].props.date}`} role={role}>
+            {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'day' implicitly has an 'any' type. */}
+            {row.map((day, i) => (
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
+              <td key={day.props.date} role={role}>
+                {role === 'presentation'
+                  ? safeCloneElement(day, {
+                      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
+                      'aria-describedby': this._weekdayHeaderIds[i]
+                    })
+                  : day}
+              </td>
+            ))}
+          </tr>
+        ))
+    )
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Calendar.propTypes),
       Calendar
     )

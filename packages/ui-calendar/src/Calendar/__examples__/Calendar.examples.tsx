@@ -33,6 +33,7 @@ const generateDays = (getDateProps = () => ({})) => {
   while (days.length < Calendar.DAY_COUNT) {
     days.push(
       <Calendar.Day
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 0 arguments, but got 1.
         {...getDateProps(date)}
         date={date.toISOString()}
         label={date.toISOString()}
@@ -47,12 +48,14 @@ const generateDays = (getDateProps = () => ({})) => {
   return days
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'dateStr' implicitly has an 'any' type.
 const isSameDay = (dateStr, date) => {
   return new Date(dateStr).toISOString() === date.toISOString()
 }
 
 const defaultDays = generateDays()
 
+// @ts-expect-error ts-migrate(2345) FIXME: Argument of type '(date: any) => { interaction: st... Remove this comment to see the full error message
 const outsideMonthStates = generateDays((date) => {
   if (isSameDay('2019-07-28', date)) {
     return {
@@ -75,6 +78,7 @@ const outsideMonthStates = generateDays((date) => {
   return {}
 })
 
+// @ts-expect-error ts-migrate(2345) FIXME: Argument of type '(date: any) => { interaction: st... Remove this comment to see the full error message
 const insideMonthStates = generateDays((date) => {
   if (isSameDay('2019-08-05', date)) {
     return {
@@ -103,6 +107,7 @@ export default {
     renderPrevMonthButton: [null, <button key="prev">{'<'}</button>],
     renderNextMonthButton: [null, <button key="next">{'>'}</button>]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       renderNavigationLabel: (
@@ -114,6 +119,7 @@ export default {
       renderWeekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     const { renderPrevMonthButton, renderNextMonthButton } = props
 

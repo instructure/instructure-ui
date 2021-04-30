@@ -23,6 +23,7 @@
  */
 
 export default {
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       date: '2019-08-07',
@@ -30,6 +31,7 @@ export default {
       children: 8
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return props.isSelected && props.isToday
   }

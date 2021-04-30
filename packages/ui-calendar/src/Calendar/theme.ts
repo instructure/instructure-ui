@@ -21,18 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { Calendar } from './index'
-import { DayLocator } from './Day/DayLocator'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, typography, spacing, key: themeName } = theme
 
-export { DayLocator }
-
-export const CalendarLocator = locator(Calendar.selector, {
-  findAllDays: (...args) => {
-    return DayLocator.findAll(...args)
-  },
-  findDay: (...args) => {
-    return DayLocator.find(...args)
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
   }
-})
+
+  const componentVariables = {
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+
+    navMargin: spacing?.small,
+
+    maxHeaderWidth: spacing?.medium
+  }
+
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
+  }
+}
+
+export default generateComponentTheme

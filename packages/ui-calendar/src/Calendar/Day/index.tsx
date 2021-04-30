@@ -42,6 +42,21 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  date: any // TODO: I18nPropTypes.iso8601
+  label: string
+  interaction?: 'enabled' | 'disabled'
+  isSelected?: boolean
+  isToday?: boolean
+  isOutsideMonth?: boolean
+  onClick?: (...args: any[]) => any
+  onKeyDown?: (...args: any[]) => any
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+}
+
 /**
 ---
 parent: Calendar
@@ -50,7 +65,7 @@ id: Calendar.Day
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Day extends Component {
+class Day extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -117,6 +132,7 @@ class Day extends Component {
     isSelected: false,
     isToday: false,
     isOutsideMonth: false,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     onClick: undefined,
     onKeyDown: undefined,
@@ -124,10 +140,13 @@ class Day extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
@@ -142,14 +161,17 @@ class Day extends Component {
 
   get elementType() {
     const { as } = this.props
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return as || getElementType(Day, this.props)
   }
 
   shouldApplyAriaSelected() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'role' does not exist on type 'Readonly<P... Remove this comment to see the full error message
     const { role } = this.props // eslint-disable-line react/prop-types
     return ['option', 'gridcell'].indexOf(role) > -1
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClick = (event) => {
     const { onClick, date } = this.props
     if (typeof onClick === 'function') {
@@ -157,6 +179,7 @@ class Day extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event) => {
     const { onKeyDown, date } = this.props
     if (typeof onKeyDown === 'function') {
@@ -164,8 +187,10 @@ class Day extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     const { elementRef } = this.props
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     elementRef(el)
   }
 
@@ -186,7 +211,9 @@ class Day extends Component {
 
     const { elementType, isDisabled } = this
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(props, Day.propTypes),
       Day
     )
