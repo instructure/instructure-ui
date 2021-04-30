@@ -22,21 +22,21 @@
  * SOFTWARE.
  */
 
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'tiny... Remove this comment to see the full error message
 import Color from 'tinycolor2'
 
 /**
  * ---
  * category: utilities
  * ---
- * Adjust the alpha transparency of a color
+ * lighten a color
  * @param {String} color
  * @param {Number} percent
  * @returns {String} color as rgb string
  */
-function alpha(color, percent) {
-  return Color(color)
-    .setAlpha(percent / 100)
-    .toRgbString()
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'color' implicitly has an 'any' type.
+function lighten(color, percent) {
+  return Color(color).lighten(percent).toRgbString()
 }
 
-export { alpha }
+export { lighten }

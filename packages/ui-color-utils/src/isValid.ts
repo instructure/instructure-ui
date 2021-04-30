@@ -22,19 +22,20 @@
  * SOFTWARE.
  */
 
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'tiny... Remove this comment to see the full error message
 import Color from 'tinycolor2'
 
 /**
  * ---
  * category: utilities
  * ---
- * darken a color
+ * check if a string is a valid color
  * @param {String} color
- * @param {Number} percent
- * @returns {String} color as rgb string
+ * @returns {Boolean} true if the string is a valid color
  */
-function darken(color, percent) {
-  return Color(color).darken(percent).toRgbString()
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'color' implicitly has an 'any' type.
+function isValid(color) {
+  return Color(color).isValid()
 }
 
-export { darken }
+export { isValid }
