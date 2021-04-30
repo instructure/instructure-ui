@@ -43,13 +43,23 @@ export const PagesContext = createContext({
   history: [],
   navigateToPreviousPage: () => {}
 })
+
+type Props = {
+  defaultPageIndex?: number
+  activePageIndex?: any // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
+  onPageIndexChange?: (...args: any[]) => any
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Pages extends Component {
+class Pages extends Component<Props> {
   static propTypes = {
     children: Children.oneOf([Page]),
 
@@ -94,45 +104,59 @@ class Pages extends Component {
 
   _timeouts = []
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
     this._history = [
       typeof props.defaultPageIndex === 'number'
         ? props.defaultPageIndex
         : props.activePageIndex
     ]
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentId' does not exist on type 'Page... Remove this comment to see the full error message
     this._contentId = uid('Pages')
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   handleBackButtonClick = () => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
     const oldPageIndex = this._history.pop()
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
     const newPageIndex = this._history[this._history.length - 1]
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onPageIndexChange(newPageIndex || 0, oldPageIndex)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentWillReceiveProps(nextProps, nextContext) {
     if (
       nextProps &&
       typeof nextProps.activePageIndex === 'number' &&
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
       (this._history.length === 0 ||
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
         nextProps.activePageIndex !== this._history[this._history.length - 1])
     ) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
       this._history.push(nextProps.activePageIndex)
     }
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
     this._timeouts.push(
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
         !this.focused && this.focus()
       }, 0)
     )
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -141,12 +165,15 @@ class Pages extends Component {
   }
 
   get focused() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentElement' does not exist on type ... Remove this comment to see the full error message
     return containsActiveElement(this._contentElement)
   }
 
   focus() {
     this._timeouts.push(
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
+        // @ts-expect-error ts-migrate(2551) FIXME: Property '_activePage' does not exist on type 'Pag... Remove this comment to see the full error message
         const activePage = this._activePage
 
         // Attempt to focus active page
@@ -154,6 +181,7 @@ class Pages extends Component {
           activePage.focus()
         } else {
           // Use first tabbable as last ditch effort
+          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           const tabbable = findTabbable(this._contentElement)
           const element = tabbable && tabbable[0]
 
@@ -169,11 +197,14 @@ class Pages extends Component {
     const activePage =
       activePageIndex < pages.length ? pages[activePageIndex] : null
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(activePage, '[Pages] Invalid `activePageIndex`.')
 
     return activePage
       ? safeCloneElement(activePage, {
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
           ref: (el) => {
+            // @ts-expect-error ts-migrate(2551) FIXME: Property '_activePage' does not exist on type 'Pag... Remove this comment to see the full error message
             this._activePage = el
           }
         })
@@ -184,6 +215,7 @@ class Pages extends Component {
     return this.activePage ? (
       <PagesContext.Provider
         value={{
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_history' does not exist on type 'Pages'... Remove this comment to see the full error message
           history: this._history,
           navigateToPreviousPage: () => {
             this.handleBackButtonClick()
@@ -192,11 +224,13 @@ class Pages extends Component {
       >
         <View
           as="div"
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; as: string; id: any; css: a... Remove this comment to see the full error message
           id={this._contentId}
           css={this.props.styles.pages}
           margin={this.props.margin}
           role="region"
           elementRef={(el) => {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentElement' does not exist on type ... Remove this comment to see the full error message
             this._contentElement = el
           }}
         >

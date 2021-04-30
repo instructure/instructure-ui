@@ -31,13 +31,19 @@ import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view'
 import { PagesContext } from '..'
 
+type Props = {
+  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  padding?: any // TODO: ThemeablePropTypes.spacing
+  textAlign?: 'start' | 'center' | 'end'
+}
+
 /**
 ---
 parent: Pages
 id: Pages.Page
 ---
 **/
-class Page extends Component {
+class Page extends Component<Props> {
   static propTypes = {
     /**
      * The children to be rendered
@@ -84,11 +90,14 @@ class Page extends Component {
     }
 
     if (!defaultFocusElement) {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const tabbable = findTabbable(this._content)
       defaultFocusElement = tabbable && tabbable[0]
     }
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'ReactElem... Remove this comment to see the full error message
       defaultFocusElement && defaultFocusElement.focus,
       '[Page] A default focusable element is required or focus will be lost.'
     )
@@ -99,11 +108,13 @@ class Page extends Component {
   get focusable() {
     const element = this.defaultFocusElement
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'ReactElem... Remove this comment to see the full error message
     return element && typeof element.focus === 'function'
   }
 
   focus() {
     if (this.focusable) {
+      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
       this.defaultFocusElement.focus()
     }
   }
@@ -119,6 +130,7 @@ class Page extends Component {
             padding={props.padding}
             textAlign={props.textAlign}
             elementRef={(el) => {
+              // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Page'.... Remove this comment to see the full error message
               this._content = el
             }}
           >

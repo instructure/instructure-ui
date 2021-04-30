@@ -26,8 +26,11 @@ import React from 'react'
 import { expect, mount, spy, within } from '@instructure/ui-test-utils'
 import { Pages, Page } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Pages />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages>
         <Page>{() => 'Foo'}</Page>
@@ -38,7 +41,9 @@ describe('<Pages />', async () => {
     expect(subject.getDOMNode()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a Page', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages>
         <Page>{() => 'Hello World'}</Page>
@@ -48,7 +53,9 @@ describe('<Pages />', async () => {
     expect(subject.getDOMNode().textContent).to.equal('Hello World')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the 0th Page by default', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages>
         <Page>{() => 'Foo'}</Page>
@@ -58,7 +65,9 @@ describe('<Pages />', async () => {
     expect(subject.getDOMNode().textContent).to.equal('Foo')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the active Page', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages activePageIndex={1}>
         <Page>{() => 'Foo'}</Page>
@@ -69,8 +78,11 @@ describe('<Pages />', async () => {
     expect(subject.getDOMNode().textContent).to.equal('Bar')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass history and navigateToPreviousPage to Page', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const pageSpy = spy()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Pages>
         <Page>{pageSpy}</Page>
@@ -82,12 +94,16 @@ describe('<Pages />', async () => {
     expect(typeof pageSpy.args[0][1]).to.equal('function')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should fire onPageIndexChange event', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onPageIndexChange = spy()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages activePageIndex={0} onPageIndexChange={onPageIndexChange}>
         <Page key={0}>{() => 'Foo'}</Page>
         <Page key={1}>
+          {/* @ts-expect-error ts-migrate(6133) FIXME: 'history' is declared but its value is never read. */}
           {(history, navigate) => <button onClick={navigate}>Back</button>}
         </Page>
       </Pages>
