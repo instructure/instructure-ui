@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-export default {
-  sectionProp: 'layout',
-  maxExamplesPerPage: 50,
-  getComponentProps: (props) => {
-    return {
-      label: 'Opacity',
-      onChange: () => {}
-    }
-  }
-}
+import { locator } from '@instructure/ui-test-locator'
+
+import { RangeInput } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const RangeInputLocator = locator(RangeInput.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findInput: (...args) => locator('input[type=range]').find(...args),
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findOutput: (...args) => locator('output').find(...args)
+})

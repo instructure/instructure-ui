@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
-
-import { RangeInput } from './index'
-
-export const RangeInputLocator = locator(RangeInput.selector, {
-  findInput: (...args) => locator('input[type=range]').find(...args),
-  findOutput: (...args) => locator('output').find(...args)
-})
+export default {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      label: 'Opacity',
+      onChange: () => {}
+    }
+  }
+}
