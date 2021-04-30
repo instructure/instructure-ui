@@ -37,6 +37,15 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: React.ReactElement
+  color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
+  elementRef?: (...args: any[]) => any
+  margin?: any // TODO: ThemeablePropTypes.spacing
+}
+
 /**
 ---
 category: components
@@ -44,7 +53,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Pill extends Component {
+class Pill extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -76,6 +85,7 @@ class Pill extends Component {
     color: 'primary'
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -85,14 +95,19 @@ class Pill extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'truncated' implicitly has an 'any' type... Remove this comment to see the full error message
   handleTruncation(truncated) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'truncated' does not exist on type 'Reado... Remove this comment to see the full error message
     if (truncated !== this.state.truncated) {
       this.setState({
         truncated: truncated
@@ -100,6 +115,7 @@ class Pill extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focused' implicitly has an 'any' type.
   renderPill(focused, getTriggerProps) {
     const {
       margin,
@@ -151,15 +167,18 @@ class Pill extends Component {
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'truncated' does not exist on type 'Reado... Remove this comment to see the full error message
     if (this.state.truncated) {
       return (
         <Tooltip renderTip={this.props.children}>
+          {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'focused' implicitly has an 'any' ... Remove this comment to see the full error message */}
           {({ focused, getTriggerProps }) => {
             return this.renderPill(focused, getTriggerProps)
           }}
         </Tooltip>
       )
     } else {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       return this.renderPill()
     }
   }

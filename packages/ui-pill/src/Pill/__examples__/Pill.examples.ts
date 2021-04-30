@@ -27,6 +27,7 @@ export default {
   propValues: {
     children: ['Some really long text that will truncate', 'Missing']
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'page' is declared but its value is never read.
   getParameters: (page) => {
     return { disable: true }
   }

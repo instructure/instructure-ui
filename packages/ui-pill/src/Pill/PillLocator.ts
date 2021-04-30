@@ -24,12 +24,15 @@
 
 import { locator } from '@instructure/ui-test-locator'
 import { parseQueryArguments } from '@instructure/ui-test-queries'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
 
 import { Pill } from './index'
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const PillLocator = locator(Pill.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findTooltipContent: async (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     const tooltip = await TooltipLocator.find(element, options)

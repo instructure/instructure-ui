@@ -28,27 +28,36 @@ import { expect, mount, wait } from '@instructure/ui-test-utils'
 import { Pill } from '../index'
 import { PillLocator } from '../PillLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Pill />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Pill>Overdue</Pill>)
     expect(await PillLocator.find()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display text', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Pill>Overdue</Pill>)
     const pill = await PillLocator.find()
     expect(await pill.find(':contains(Overdue)')).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render without a Tooltip when text does not overflow max-width', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Pill>hello</Pill>)
     const pill = await PillLocator.find()
     expect(await pill.findTooltipContent({ expectEmpty: true })).to.not.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a Tooltip when text overflows max-width', async () => {
     const text =
       'some really super incredibly long text that will force overflow'
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Pill>{text}</Pill>)
 
     const pill = await PillLocator.find()
@@ -62,7 +71,9 @@ describe('<Pill />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Pill>Overdue</Pill>)
     const pill = await PillLocator.find()
     expect(await pill.accessible()).to.be.true()
