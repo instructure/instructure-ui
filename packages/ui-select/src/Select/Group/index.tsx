@@ -29,6 +29,10 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { Option } from '../Option'
 
+type Props = {
+  renderLabel: React.ReactNode | ((...args: any[]) => any)
+}
+
 /**
 ---
 parent: Select
@@ -36,7 +40,7 @@ id: Select.Group
 ---
 @module Group
 **/
-class Group extends Component {
+class Group extends Component<Props> {
   static propTypes = {
     /**
      * The label associated with the group options.

@@ -60,6 +60,41 @@ import generateComponentTheme from './theme'
 import { Group } from './Group'
 import { Option } from './Option'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderLabel: React.ReactNode | ((...args: any[]) => any)
+  inputValue?: string
+  isShowingOptions?: boolean
+  id?: string
+  size?: 'small' | 'medium' | 'large'
+  assistiveText?: string
+  placeholder?: string
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  isRequired?: boolean
+  isInline?: boolean
+  width?: string
+  htmlSize?: string | number
+  optionsMaxWidth?: string
+  visibleOptionsCount?: number
+  messages?: any[] // TODO: FormPropTypes.message
+  placement?: any // TODO: PositionPropTypes.placement
+  constrain?: any // TODO: PositionPropTypes.constrain
+  mountNode?: any // TODO: PositionPropTypes.mountNode
+  onFocus?: (...args: any[]) => any
+  onBlur?: (...args: any[]) => any
+  onInputChange?: (...args: any[]) => any
+  onRequestShowOptions?: (...args: any[]) => any
+  onRequestHideOptions?: (...args: any[]) => any
+  onRequestHighlightOption?: (...args: any[]) => any
+  onRequestSelectOption?: (...args: any[]) => any
+  inputRef?: (...args: any[]) => any
+  listRef?: (...args: any[]) => any
+  renderBeforeInput?: React.ReactNode | ((...args: any[]) => any)
+  renderAfterInput?: React.ReactNode | ((...args: any[]) => any)
+  shouldNotWrap?: boolean
+}
+
 /**
 ---
 category: components
@@ -68,9 +103,7 @@ tags: autocomplete, typeahead, combobox, dropdown, search, form
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Select extends Component {
-  static Option = Option
-  static Group = Group
+class Select extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -239,14 +272,22 @@ class Select extends Component {
     placement: 'bottom stretch',
     constrain: 'window',
     mountNode: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onFocus: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: (event) => {},
     onInputChange: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestShowOptions: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestHideOptions: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestHighlightOption: (event, data) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestSelectOption: (event, data) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
     inputRef: (node) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
     listRef: (node) => {},
     renderBeforeInput: null,
     renderAfterInput: null,
@@ -254,11 +295,17 @@ class Select extends Component {
     shouldNotWrap: false
   }
 
+  static Option = Option
+  static Group = Group
+
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
 
     // scroll option into view if needed
@@ -280,6 +327,7 @@ class Select extends Component {
   _optionHeight = 36
 
   focus() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     this._input && this._input.focus()
   }
 
@@ -292,10 +340,12 @@ class Select extends Component {
   }
 
   get width() {
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     return this._inputContainer && this._inputContainer.offsetWidth
   }
 
   get interaction() {
+    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -304,15 +354,20 @@ class Select extends Component {
     Children.toArray(this.props.children).forEach((child) => {
       if (matchComponentTypes(child, [Group])) {
         // group found
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         Children.toArray(child.props.children).forEach((option) => {
           // check options in group
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           if (option.props.isHighlighted) {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
             highlightedOptionId = option.props.id
           }
         })
       } else {
         // ungrouped option found
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         if (child.props.isHighlighted) {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           highlightedOptionId = child.props.id
         }
       }
@@ -322,29 +377,38 @@ class Select extends Component {
   }
 
   get selectedOptionId() {
-    let selectedOptionId = []
+    // @ts-expect-error ts-migrate(7034) FIXME: Variable 'selectedOptionId' implicitly has type 'a... Remove this comment to see the full error message
+    const selectedOptionId = []
     Children.toArray(this.props.children).forEach((child) => {
       if (matchComponentTypes(child, [Group])) {
         // group found
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         Children.toArray(child.props.children).forEach((option) => {
           // check options in group
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           if (option.props.isSelected) {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
             selectedOptionId.push(option.props.id)
           }
         })
       } else {
         // ungrouped option found
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
         if (child.props.isSelected) {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           selectedOptionId.push(child.props.id)
         }
       }
     })
 
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'selectedOptionId' implicitly has an 'any... Remove this comment to see the full error message
     if (selectedOptionId.length === 1) return selectedOptionId[0]
     if (selectedOptionId.length === 0) return null
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'selectedOptionId' implicitly has an 'any... Remove this comment to see the full error message
     return selectedOptionId
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleInputRef = (node) => {
     // ensures list is positioned with respect to input if list is open on mount
     if (!this.state.hasInputRef) {
@@ -352,11 +416,14 @@ class Select extends Component {
     }
 
     this._input = node
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.inputRef(node)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleListRef = (node) => {
     this._list = node
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.listRef(node)
 
     // store option height to calculate list maxHeight
@@ -365,32 +432,43 @@ class Select extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleInputContainerRef = (node) => {
     this._inputContainer = node
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'id' implicitly has an 'any' type.
   scrollToOption(id) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
     if (this._listView) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
       const option = this._listView.querySelector(`[id="${id}"]`)
       if (!option) return
 
       const listItem = option.parentNode
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
       const parentTop = getBoundingClientRect(this._listView).top
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
       const elemTop = getBoundingClientRect(listItem).top
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
       const parentBottom = parentTop + this._listView.clientHeight
       const elemBottom = elemTop + listItem.clientHeight
 
       if (elemBottom > parentBottom) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
         this._listView.scrollTop += elemBottom - parentBottom
       } else if (elemTop < parentTop) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
         this._listView.scrollTop -= parentTop - elemTop
       }
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   highlightOption(event, id) {
     const { onRequestHighlightOption } = this.props
     if (id) {
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       onRequestHighlightOption(event, { id })
     }
   }
@@ -408,19 +486,25 @@ class Select extends Component {
 
     return this.interaction === 'enabled'
       ? {
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestShowOptions: (event) => {
+            // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
             onRequestShowOptions(event)
             if (selectedOptionId && !Array.isArray(selectedOptionId)) {
               // highlight selected option on show
               this.highlightOption(event, selectedOptionId)
             }
           },
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestHideOptions: (event) => {
+            // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
             onRequestHideOptions(event)
           },
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestHighlightOption: (event, { id, direction }) => {
             if (!isShowingOptions) return
             // if id exists, use that
+            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
             let highlightId = this._optionIds.indexOf(id) > -1 ? id : null
             if (!highlightId) {
               if (!highlightedOptionId) {
@@ -428,6 +512,7 @@ class Select extends Component {
                 highlightId = this._optionIds[0]
               } else {
                 // find next id based on direction
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'null' is not assignable to param... Remove this comment to see the full error message
                 const index = this._optionIds.indexOf(highlightedOptionId)
                 highlightId =
                   index > -1 ? this._optionIds[index + direction] : null
@@ -438,18 +523,23 @@ class Select extends Component {
               this.highlightOption(event, highlightId)
             }
           },
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestHighlightFirstOption: (event) => {
             this.highlightOption(event, this._optionIds[0])
           },
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestHighlightLastOption: (event) => {
             this.highlightOption(
               event,
               this._optionIds[this._optionIds.length - 1]
             )
           },
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
           onRequestSelectOption: (event, { id }) => {
+            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
             if (id && this._optionIds.indexOf(id) !== -1) {
               // only select if id exists as a valid option
+              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
               onRequestSelectOption(event, { id })
             }
           }
@@ -457,6 +547,7 @@ class Select extends Component {
       : {}
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'option' implicitly has an 'any' type.
   renderOption(option, data) {
     const { getOptionProps, getDisabledOptionProps } = data
     const {
@@ -471,6 +562,7 @@ class Select extends Component {
 
     let optionProps = {
       // passthrough props
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       ...omitProps(option.props, {
         ...Option.propTypes,
         ...Options.Item.propTypes
@@ -493,12 +585,14 @@ class Select extends Component {
       optionProps = { ...optionProps, ...getDisabledOptionProps() }
     } else {
       // track as valid option if not disabled
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
       this._optionIds.push(id)
     }
 
     return <Options.Item {...optionProps}>{children}</Options.Item>
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'group' implicitly has an 'any' type.
   renderGroup(group, data) {
     const {
       getOptionProps,
@@ -521,6 +615,7 @@ class Select extends Component {
         as="ul"
         role="group"
         renderLabel={renderLabel}
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(rest, {
           ...Options.propTypes,
           ...Group.propTypes
@@ -542,6 +637,7 @@ class Select extends Component {
     return groupChildren
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
   renderList(data) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
     const {
@@ -552,24 +648,28 @@ class Select extends Component {
     } = this.props
 
     let lastWasGroup = false
-    let viewProps = isShowingOptions
+    const viewProps = isShowingOptions
       ? {
           display: 'block',
           overflowY: 'auto',
+          // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
           maxHeight: this._optionHeight * visibleOptionsCount,
           maxWidth: optionsMaxWidth || this.width,
           background: 'primary',
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
           elementRef: (node) => (this._listView = node)
         }
       : { maxHeight: 0 }
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; display: string; overfl... Remove this comment to see the full error message
       <View {...viewProps}>
         <Options
           {...getListProps({ as: 'ul', elementRef: this.handleListRef })}
         >
           {isShowingOptions
-            ? Children.map(children, (child, index) => {
+            ? // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
+              Children.map(children, (child, index) => {
                 if (!child || !matchComponentTypes(child, [Group, Option])) {
                   return // ignore invalid children
                 }
@@ -612,6 +712,7 @@ class Select extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
   renderInput(data) {
     const { getInputProps, getTriggerProps } = data
     const {
@@ -635,6 +736,7 @@ class Select extends Component {
     } = this.props
 
     const { interaction } = this
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const passthroughProps = omitProps(rest, Select.propTypes)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
     const isEditable = typeof onInputChange !== 'undefined'
@@ -648,7 +750,9 @@ class Select extends Component {
         }
       : {}
     // backdoor to autocomplete attr to work around chrome autofill issues
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (passthroughProps['autoComplete']) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'autoComplete' does not exist on type '{ ... Remove this comment to see the full error message
       overrideProps.autoComplete = passthroughProps['autoComplete']
     }
 
@@ -701,18 +805,26 @@ class Select extends Component {
 
     return (
       <Selectable
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         highlightedOptionId={highlightedOptionId}
         isShowingOptions={isShowingOptions}
         selectedOptionId={selectedOptionId ? selectedOptionId : null}
         {...this.getEventHandlers()}
       >
         {({
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getRootProps' implicitly has an '... Remove this comment to see the full error message
           getRootProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getInputProps' implicitly has an ... Remove this comment to see the full error message
           getInputProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getTriggerProps' implicitly has a... Remove this comment to see the full error message
           getTriggerProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getListProps' implicitly has an '... Remove this comment to see the full error message
           getListProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getOptionProps' implicitly has an... Remove this comment to see the full error message
           getOptionProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getDisabledOptionProps' implicitl... Remove this comment to see the full error message
           getDisabledOptionProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getDescriptionProps' implicitly h... Remove this comment to see the full error message
           getDescriptionProps
         }) => (
           <span {...getRootProps({ css: styles.select })}>

@@ -79,11 +79,13 @@ export default {
         <Select.Option id="0" key="0">
           Item not in a group
         </Select.Option>,
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Select.Group id="1" renderLabel="Group one" key="1">
           <Select.Option id="2" key="2">
             Grouped item one
           </Select.Option>
         </Select.Group>,
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Select.Group id="3" renderLabel="Group two" key="3">
           <Select.Option id="4" key="4">
             Grouped item two
@@ -96,6 +98,7 @@ export default {
     ],
     renderBeforeInput: [null, <IconUserLine key="0" inline={false} />]
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getComponentProps: (props) => {
     return {
       inputValue: !props.isEditable ? 'Option one' : '',
@@ -103,6 +106,7 @@ export default {
       constrain: 'scroll-parent'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return props.isShowingOptions
       ? {
@@ -112,6 +116,7 @@ export default {
         }
       : {}
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true

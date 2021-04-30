@@ -689,6 +689,7 @@ class TimeSelect extends Component<Props> {
       <Select
         renderLabel={renderLabel}
         inputValue={inputValue}
+        // @ts-expect-error FIXME:
         interaction={this.interaction}
         placeholder={placeholder}
         id={id}

@@ -25,6 +25,15 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
+type Props = {
+  id: string
+  isHighlighted?: boolean
+  isSelected?: boolean
+  isDisabled?: boolean
+  renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
+  renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
+}
+
 /**
 ---
 parent: Select
@@ -32,7 +41,7 @@ id: Select.Option
 ---
 @module Option
 **/
-class Option extends Component {
+class Option extends Component<Props> {
   static propTypes = {
     /**
      * The id for the option.
