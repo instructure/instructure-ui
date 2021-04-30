@@ -35,6 +35,26 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  screenReaderLabel: string
+  size?: 'x-small' | 'small' | 'medium' | 'large'
+  valueMax?: number
+  valueNow?: number
+  formatScreenReaderValue?: ((...args: any[]) => any) | React.ReactNode
+  renderValue?: ((...args: any[]) => any) | React.ReactNode
+  color?: 'primary' | 'primary-inverse'
+  meterColor?:
+    | ((...args: any[]) => any)
+    | ('info' | 'warning' | 'danger' | 'alert' | 'success' | 'brand')
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+  shouldAnimateOnMount?: boolean
+  animationDelay?: number
+}
 /**
 ---
 category: components
@@ -42,7 +62,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ProgressCircle extends Component {
+class ProgressCircle extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -118,6 +138,7 @@ class ProgressCircle extends Component {
   }
 
   static defaultProps = {
+    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
     formatScreenReaderValue: ({ valueNow, valueMax }) =>
       `${valueNow} / ${valueMax}`,
     size: 'medium',
@@ -132,12 +153,14 @@ class ProgressCircle extends Component {
     animationDelay: undefined,
 
     // default to showing `success` color on completion
+    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
     meterColor: ({ valueNow, valueMax }) =>
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
   _timeouts = []
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -147,12 +170,15 @@ class ProgressCircle extends Component {
   }
 
   get makeStylesVariables() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldAnimateOnMount' does not exist on ... Remove this comment to see the full error message
     return { shouldAnimateOnMount: this.state.shouldAnimateOnMount }
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldAnimateOnMount' does not exist on ... Remove this comment to see the full error message
     if (this.state.shouldAnimateOnMount) {
       this._timeouts.push(
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
         setTimeout(() => {
           this.setState({
             shouldAnimateOnMount: false
@@ -161,10 +187,13 @@ class ProgressCircle extends Component {
       )
     }
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
@@ -196,6 +225,7 @@ class ProgressCircle extends Component {
 
     const value = callRenderProp(renderValue, { valueNow, valueMax })
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'animateOnMount' does not exist on type '... Remove this comment to see the full error message
     const style = this.state.animateOnMount
       ? null
       : {
@@ -243,6 +273,7 @@ class ProgressCircle extends Component {
           <circle
             css={styles.meter}
             role="presentation"
+            // @ts-expect-error ts-migrate(2322) FIXME: Type '{ strokeDashoffset: string; } | null' is not... Remove this comment to see the full error message
             style={style}
             cx="50%"
             cy="50%"

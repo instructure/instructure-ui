@@ -32,6 +32,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const { size, color, meterColor, valueNow, valueMax } = props
   const { shouldAnimateOnMount } = state
@@ -225,6 +226,7 @@ const generateStyle = (componentTheme, props, state) => {
       fontWeight: componentTheme.fontWeight,
       lineHeight: componentTheme.lineHeight,
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].progressCircle
     },
 
@@ -241,6 +243,7 @@ const generateStyle = (componentTheme, props, state) => {
       width: '100%',
       borderRadius: '50%',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].center,
       ...(shouldAnimateOnMount && {
         opacity: 0,
@@ -262,7 +265,9 @@ const generateStyle = (componentTheme, props, state) => {
       height: '100%',
       lineHeight: 1,
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].value,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...colorVariants[color].value
     },
 
@@ -274,6 +279,7 @@ const generateStyle = (componentTheme, props, state) => {
       top: 0,
       left: 0,
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].circle
     },
 
@@ -285,7 +291,9 @@ const generateStyle = (componentTheme, props, state) => {
       transitionDelay: '0.2s',
       transform: 'translate3d(0, 0, 0)',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].track,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...colorVariants[color].track,
       ...(shouldAnimateOnMount && {
         opacity: 0,
@@ -300,7 +308,9 @@ const generateStyle = (componentTheme, props, state) => {
       transition: 'all 0.5s',
       transform: 'translate3d(0, 0, 0) scale(1)',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].border,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...colorVariants[color].border,
       ...(shouldAnimateOnMount && {
         opacity: 0,
@@ -314,7 +324,9 @@ const generateStyle = (componentTheme, props, state) => {
       transition: 'stroke-dashoffset 1s',
       transform: 'translate3d(0, 0, 0)',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].meter,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...meterColorVariants[color][getMeterColorClassName],
       ...(shouldAnimateOnMount && {
         opacity: 0

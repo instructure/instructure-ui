@@ -25,31 +25,36 @@
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
-import { ProgressCircle } from '../index'
-import { ProgressCircleLocator } from '../ProgressCircleLocator'
+import { ProgressBar } from '../index'
+import { ProgressBarLocator } from '../ProgressBarLocator'
 
-describe('<ProgressCircle />', async () => {
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('<ProgressBar />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      <ProgressCircle
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
       />
     )
-    expect(await ProgressCircleLocator.find()).to.exist()
+    expect(await ProgressBarLocator.find()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a progress element with correct aria attributes', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      <ProgressCircle
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
       />
     )
 
-    const componentRoot = await ProgressCircleLocator.find()
+    const componentRoot = await ProgressBarLocator.find()
     const progress = await componentRoot.find('progress')
 
     expect(progress).to.exist()
@@ -58,9 +63,11 @@ describe('<ProgressCircle />', async () => {
     expect(progress.getAttribute('aria-valuetext')).to.equal('30 / 60')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should format aria-valuetext', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      <ProgressCircle
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
@@ -69,7 +76,7 @@ describe('<ProgressCircle />', async () => {
         }
       />
     )
-    const componentRoot = await ProgressCircleLocator.find()
+    const componentRoot = await ProgressBarLocator.find()
     const progress = await componentRoot.find('progress')
 
     expect(progress.getAttribute('aria-valuetext')).to.equal(
@@ -77,27 +84,31 @@ describe('<ProgressCircle />', async () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should format the displayed text', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      <ProgressCircle
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
         renderValue={({ valueNow, valueMax }) => `${valueNow} of ${valueMax}`}
       />
     )
-    expect(await ProgressCircleLocator.find(':contains(30 of 60)')).to.exist()
+    expect(await ProgressBarLocator.find(':contains(30 of 60)')).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
-      <ProgressCircle
+      <ProgressBar
         screenReaderLabel="Chapters read"
         valueMax={60}
         valueNow={30}
       />
     )
-    const progress = await ProgressCircleLocator.find()
+    const progress = await ProgressBarLocator.find()
     expect(await progress.accessible()).to.be.true()
   })
 })

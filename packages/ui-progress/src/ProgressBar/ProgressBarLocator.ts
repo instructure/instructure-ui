@@ -21,34 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import { locator } from '@instructure/ui-test-locator'
 
-const valueMax = 100
+import { ProgressBar } from './index'
 
-export default {
-  sectionProp: 'color',
-  propValues: {
-    valueNow: [0, 40, 80, 100],
-    renderValue: [
-      null,
-      // eslint-disable-next-line react/display-name
-      ({ valueNow, valueMax }) => (
-        <span>{Math.round((valueNow / valueMax) * 100)}</span>
-      )
-    ]
-  },
-  getComponentProps: (props) => {
-    return {
-      screenReaderLabel: 'Passing students',
-      valueMax
-    }
-  },
-  getExampleProps: (props) => {
-    return {
-      background: props.color.includes('inverse')
-        ? 'primary-inverse'
-        : 'primary'
-    }
-  },
-  filter: (props) => {}
-}
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const ProgressBarLocator = locator(ProgressBar.selector)

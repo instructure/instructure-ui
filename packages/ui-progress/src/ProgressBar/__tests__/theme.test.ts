@@ -28,35 +28,43 @@ import { contrast } from '@instructure/ui-color-utils'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('ProgressBar.theme', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure brand meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorBrand, variables.trackColor)
       ).to.be.above(3)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure info meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorInfo, variables.trackColor)
       ).to.be.above(3)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure success meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorSuccess, variables.trackColor)
       ).to.be.above(3)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure danger meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorDanger, variables.trackColor)
       ).to.be.above(3)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure warning meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorWarning, variables.trackColor)
       ).to.be.above(3)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure alert meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorAlert, variables.trackColor)
@@ -64,33 +72,40 @@ describe('ProgressBar.theme', () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the "canvas-high-contrast" theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure brand meter color and track color meet 4.5:1 contrast', () => {
       expect(
         contrast(variables.meterColorBrand, variables.trackColor)
       ).to.be.above(4.5)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure info meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorInfo, variables.trackColor)
       ).to.be.above(4.5)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure success meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorSuccess, variables.trackColor)
       ).to.be.above(4.5)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure danger meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorDanger, variables.trackColor)
       ).to.be.above(4.5)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure warning meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorWarning, variables.trackColor)
       ).to.be.above(4.5)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure alert meter color and track color meet 3:1 contrast', () => {
       expect(
         contrast(variables.meterColorAlert, variables.trackColor)

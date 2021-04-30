@@ -32,6 +32,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const { valueNow, valueMax, size, color, meterColor } = props
 
@@ -108,6 +109,7 @@ const generateStyle = (componentTheme, props, state) => {
       position: 'relative',
       flex: 1,
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...colorVariants[color].trackLayout
     },
 
@@ -123,6 +125,7 @@ const generateStyle = (componentTheme, props, state) => {
       borderBottomWidth: componentTheme.trackBottomBorderWidth,
       borderBottomStyle: 'solid',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...colorVariants[color].trackBorder
     },
 
@@ -137,19 +140,24 @@ const generateStyle = (componentTheme, props, state) => {
         width: '100%',
         border: 'none',
 
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         ...sizeVariants[size].track,
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         ...colorVariants[color].track,
 
         '&::-webkit-progress-bar': { background: 'transparent' },
 
         '&::-webkit-progress-value': {
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           ...trackBackgroundVariants[color][meterColorClassName]
         },
         '&::-moz-progress-bar': {
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           ...trackBackgroundVariants[color][meterColorClassName]
         },
         '&::-ms-fill': {
           border: 'none',
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           ...trackBackgroundVariants[color][meterColorClassName]
         }
       }
@@ -162,6 +170,7 @@ const generateStyle = (componentTheme, props, state) => {
       paddingInlineStart: componentTheme.valuePadding,
       flex: '0 0 5.625rem',
 
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].value
     }
   }

@@ -22,53 +22,14 @@
  * SOFTWARE.
  */
 
-const radius = {
-  xSmall: 1,
-  small: 1.8,
-  medium: 2.75,
-  large: 3.5
-}
-
-const size = {
-  xSmall: 3,
-  small: 5,
-  medium: 7,
-  large: 9
-}
-
-const strokeWidth = {
-  xSmall: 0.185,
-  small: 0.5,
-  medium: 0.625,
-  large: 0.875
-}
-
-// Necessary to get the 1px border line to go "under" the meter
-// strokeWidth is divided in half because SVG strokeWidth is
-// centered along the path of the stroke, unlike CSS
-const borderWidth = 0.0625
-const borderOffsetRadius = {
-  xSmall: radius.xSmall - strokeWidth.xSmall / 2 + borderWidth,
-  small: radius.small - strokeWidth.small / 2 + borderWidth,
-  medium: radius.medium - strokeWidth.medium / 2 + borderWidth,
-  large: radius.large - strokeWidth.large / 2 + borderWidth
-}
-
-const circumference = function (r) {
-  return (2 * Math.PI * r).toFixed(3)
-}
-
-const transform = function (s) {
-  return s / 2
-}
-
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, typography, key: themeName } = theme
+  const { borders, colors, spacing, typography, key: themeName } = theme
 
   const themeSpecificStyle = {
     canvas: {
@@ -76,6 +37,7 @@ const generateComponentTheme = (theme) => {
       meterColorBrand: theme['ic-brand-primary']
     },
     'canvas-high-contrast': {
+      meterBorderColorInverse: colors?.borderLightest,
       meterColorBrandInverse: colors?.backgroundLightest,
       meterColorSuccessInverse: colors?.backgroundLightest,
       meterColorInfoInverse: colors?.backgroundLightest,
@@ -86,46 +48,26 @@ const generateComponentTheme = (theme) => {
   }
 
   const componentVariables = {
+    color: colors?.textDarkest,
+
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
     lineHeight: typography?.lineHeightCondensed,
+    fontSize: typography?.fontSizeMedium,
 
-    xSmallSize: `${size.xSmall}em`,
-    xSmallRadius: `${radius.xSmall}em`,
-    xSmallCircumference: `${circumference(radius.xSmall)}em`,
-    xSmallTransform: `${transform(size.xSmall)}em`,
-    xSmallStrokeWidth: `${strokeWidth.xSmall}em`,
-    xSmallBorderOffset: `${borderOffsetRadius.xSmall}em`,
+    xSmallHeight: spacing?.xSmall,
+    xSmallValueFontSize: typography?.fontSizeXSmall,
 
-    smallSize: `${size.small}em`,
-    smallRadius: `${radius.small}em`,
-    smallCircumference: `${circumference(radius.small)}em`,
-    smallTransform: `${transform(size.small)}em`,
-    smallStrokeWidth: `${strokeWidth.small}em`,
-    smallBorderOffset: `${borderOffsetRadius.small}em`,
+    smallHeight: spacing?.small,
+    smallValueFontSize: typography?.fontSizeXSmall,
 
-    mediumSize: `${size.medium}em`,
-    mediumRadius: `${radius.medium}em`,
-    mediumCircumference: `${circumference(radius.medium)}em`,
-    mediumTransform: `${transform(size.medium)}em`,
-    mediumStrokeWidth: `${strokeWidth.medium}em`,
-    mediumBorderOffset: `${borderOffsetRadius.medium}em`,
+    mediumHeight: spacing?.medium,
+    mediumValueFontSize: typography?.fontSizeSmall,
 
-    largeSize: `${size.large}em`,
-    largeRadius: `${radius.large}em`,
-    largeCircumference: `${circumference(radius.large)}em`,
-    largeTransform: `${transform(size.large)}em`,
-    largeStrokeWidth: `${strokeWidth.large}em`,
-    largeBorderOffset: `${borderOffsetRadius.large}em`,
+    largeHeight: spacing?.large,
+    largeValueFontSize: typography?.fontSizeMedium,
 
-    color: colors?.textDarkest,
-    colorInverse: colors?.textLightest,
-
-    trackColor: colors?.backgroundLightest,
-    trackColorInverse: 'transparent',
-
-    trackBorderColor: colors?.borderMedium,
-    trackBorderColorInverse: colors?.borderLightest,
+    valuePadding: `${spacing?.xxSmall}`,
 
     // variables are split out for inverse to allow
     // color value changes for inverse-high-constrast
@@ -145,11 +87,21 @@ const generateComponentTheme = (theme) => {
     meterColorAlertInverse: colors?.backgroundAlert,
 
     meterColorWarning: colors?.backgroundWarning,
-    meterColorWarningInverse: colors?.backgroundWarning
+    meterColorWarningInverse: colors?.backgroundWarning,
+
+    meterBorderWidthInverse: borders?.widthSmall,
+    meterBorderColorInverse: 'transparent',
+
+    trackColor: colors?.backgroundLightest,
+    trackColorInverse: 'transparent',
+    trackBottomBorderWidth: borders?.widthSmall,
+    trackBottomBorderColor: colors?.borderMedium,
+    trackBottomBorderColorInverse: colors?.borderLightest
   }
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

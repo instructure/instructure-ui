@@ -34,6 +34,24 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  screenReaderLabel: string
+  size?: 'x-small' | 'small' | 'medium' | 'large'
+  valueMax?: number
+  valueNow?: number
+  formatScreenReaderValue?: (...args: any[]) => any
+  renderValue?: ((...args: any[]) => any) | React.ReactNode
+  color?: 'primary' | 'primary-inverse'
+  meterColor?:
+    | ((...args: any[]) => any)
+    | ('info' | 'warning' | 'danger' | 'alert' | 'success' | 'brand')
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+}
+
 /**
 ---
 category: components
@@ -41,7 +59,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ProgressBar extends Component {
+class ProgressBar extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -108,6 +126,7 @@ class ProgressBar extends Component {
   }
 
   static defaultProps = {
+    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
     formatScreenReaderValue: ({ valueNow, valueMax }) =>
       `${valueNow} / ${valueMax}`,
     size: 'medium',
@@ -120,15 +139,19 @@ class ProgressBar extends Component {
     color: 'primary',
 
     // default to showing `success` color on completion
+    // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
     meterColor: ({ valueNow, valueMax }) =>
       valueNow / valueMax >= 1 ? 'success' : 'brand'
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 

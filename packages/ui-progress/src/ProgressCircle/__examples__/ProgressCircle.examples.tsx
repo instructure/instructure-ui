@@ -31,18 +31,21 @@ export default {
     valueNow: [0, 40, 80, 100],
     renderValue: [
       null,
+      // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'valueNow' implicitly has an 'any'... Remove this comment to see the full error message
       // eslint-disable-next-line react/display-name
       ({ valueNow, valueMax }) => (
         <span>{Math.round((valueNow / valueMax) * 100)}</span>
       )
     ]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       screenReaderLabel: 'Passing students',
       valueMax
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
       background: props.color.includes('inverse')
@@ -50,5 +53,6 @@ export default {
         : 'primary'
     }
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   filter: (props) => {}
 }
