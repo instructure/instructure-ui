@@ -26,13 +26,23 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { SVGIcon } from '@instructure/ui-svg-images'
-import { IconCheckMarkSolid } from '@instructure/ui-icons'
+import { IconCheckSolid, IconXSolid } from '@instructure/ui-icons'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  checked?: boolean
+  disabled?: boolean
+  readOnly?: boolean
+  focused?: boolean
+  size?: 'small' | 'medium' | 'large'
+  labelPlacement?: 'top' | 'start' | 'end'
+}
 
 /**
 ---
@@ -40,7 +50,7 @@ parent: Checkbox
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class CheckboxFacade extends Component {
+class ToggleFacade extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -48,58 +58,66 @@ class CheckboxFacade extends Component {
     styles: PropTypes.object,
     children: PropTypes.node.isRequired,
     checked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     focused: PropTypes.bool,
-    hovered: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-     * Visual state showing that child checkboxes are a combination of checked and unchecked
-     */
-    indeterminate: PropTypes.bool
+    labelPlacement: PropTypes.oneOf(['top', 'start', 'end'])
   }
 
   static defaultProps = {
     checked: false,
     focused: false,
-    hovered: false,
     size: 'medium',
-    indeterminate: false
+    disabled: false,
+    readOnly: false,
+    labelPlacement: 'end'
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   renderIcon() {
-    if (this.props.indeterminate) {
-      return (
-        <SVGIcon viewBox="0 0 1920 1920" inline={false}>
-          <rect x="140" y="820" width="1640" height="280" />
-        </SVGIcon>
-      )
-    } else if (this.props.checked) {
-      return <IconCheckMarkSolid inline={false} />
+    const { styles, checked } = this.props
+
+    if (checked) {
+      return <IconCheckSolid css={styles.iconSVG} />
     } else {
-      return null
+      return <IconXSolid css={styles.iconSVG} />
     }
   }
 
-  render() {
+  renderLabel() {
     const { children, styles } = this.props
 
+    return <span css={styles.label}>{children}</span>
+  }
+
+  render() {
+    const { labelPlacement, styles } = this.props
+
     return (
-      <span css={styles.checkboxFacade}>
+      <span css={styles.toggleFacade}>
+        {(labelPlacement === 'top' || labelPlacement === 'start') &&
+          this.renderLabel()}
         <span css={styles.facade} aria-hidden="true">
-          {this.renderIcon()}
+          <span css={styles.icon}>
+            <span css={styles.iconToggle}>{this.renderIcon()}</span>
+          </span>
         </span>
-        <span css={styles.label}>{children}</span>
+        {labelPlacement === 'end' && this.renderLabel()}
       </span>
     )
   }
 }
 
-export default CheckboxFacade
-export { CheckboxFacade }
+export default ToggleFacade
+export { ToggleFacade }

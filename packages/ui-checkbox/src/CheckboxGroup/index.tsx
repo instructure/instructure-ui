@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -41,6 +41,19 @@ import { testable } from '@instructure/ui-testable'
 
 import { Checkbox } from '../Checkbox'
 
+type Props = {
+  name: string
+  description: React.ReactNode
+  defaultValue?: any[]
+  value?: any // TODO: controllable(PropTypes.array)
+  onChange?: (...args: any[]) => any
+  disabled?: boolean
+  readOnly?: boolean
+  messages?: any[] // TODO: FormPropTypes.message
+  size?: 'small' | 'medium' | 'large'
+  layout?: 'stacked' | 'columns' | 'inline'
+}
+
 /**
 ---
 category: components
@@ -48,7 +61,7 @@ category: components
 **/
 
 @testable()
-class CheckboxGroup extends Component {
+class CheckboxGroup extends Component<Props> {
   static propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.node.isRequired,
@@ -93,7 +106,9 @@ class CheckboxGroup extends Component {
     children: null
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     super()
 
     if (typeof props.value === 'undefined') {
@@ -102,6 +117,7 @@ class CheckboxGroup extends Component {
       }
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
     this._messagesId = uid('CheckboxGroup-messages')
   }
 
@@ -109,6 +125,7 @@ class CheckboxGroup extends Component {
     return this.props.messages && this.props.messages.length > 0
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleChange = (e) => {
     const newValue = this.value || []
 
@@ -135,12 +152,14 @@ class CheckboxGroup extends Component {
   get value() {
     if (
       typeof this.props.value === 'undefined' &&
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type 'Readonly<... Remove this comment to see the full error message
       typeof this.state.value === 'undefined'
     ) {
       return []
     } else {
       return typeof this.props.value === 'undefined'
-        ? [...this.state.value]
+        ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type 'Readonly<... Remove this comment to see the full error message
+          [...this.state.value]
         : [...this.props.value]
     }
   }
@@ -148,6 +167,7 @@ class CheckboxGroup extends Component {
   renderChildren() {
     const { children, name, size, disabled, readOnly } = this.props
 
+    // @ts-expect-error ts-migrate(2552) FIXME: Cannot find name 'Children'. Did you mean 'childre... Remove this comment to see the full error message
     return Children.map(children, (child, index) => {
       if (matchComponentTypes(child, [Checkbox])) {
         return safeCloneElement(child, {
@@ -159,6 +179,7 @@ class CheckboxGroup extends Component {
           checked: this.value.indexOf(child.props.value) > -1,
           onChange: this.handleChange,
           width: child.props.width || 'auto',
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
           'aria-describedby': this.hasMessages && this._messagesId
         })
       } else {
@@ -170,10 +191,13 @@ class CheckboxGroup extends Component {
   render() {
     return (
       <FormFieldGroup
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, CheckboxGroup.propTypes)}
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormFieldGroup.propTypes)}
         rowSpacing="small"
         vAlign="top"
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'Che... Remove this comment to see the full error message
         messagesId={this._messagesId}
       >
         {this.renderChildren()}

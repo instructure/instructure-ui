@@ -30,8 +30,11 @@ import { CheckboxGroupLocator } from '../CheckboxGroupLocator'
 import { CheckboxGroup } from '../index'
 import { Checkbox } from '../../Checkbox'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<CheckboxGroup />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('adds the name props to all Checkbox types', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup name="sports" description="Select your favorite sports">
         <Checkbox label="Football" value="football" />
@@ -46,7 +49,9 @@ describe('<CheckboxGroup />', async () => {
     expect(checkboxes.length).to.equal(4)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('links the messages to the fieldset via aria-describedby', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -68,9 +73,11 @@ describe('<CheckboxGroup />', async () => {
     expect(messages.getTextContent()).to.equal('Invalid name')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('displays description message inside the legend', async () => {
     const description = 'You should pick something'
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup name="sports" description={description}>
         <Checkbox label="Football" value="football" />
@@ -85,9 +92,12 @@ describe('<CheckboxGroup />', async () => {
     expect(legend.getTextContent()).to.equal(description)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('requires an `onChange` prop with a `value` prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -106,9 +116,12 @@ describe('<CheckboxGroup />', async () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not call the onChange prop when disabled', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -130,9 +143,12 @@ describe('<CheckboxGroup />', async () => {
     expect(onChange).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not call the onChange prop when readOnly', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -154,12 +170,15 @@ describe('<CheckboxGroup />', async () => {
     expect(onChange).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not update the value when the value prop is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
         value={['tester']}
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         onChange={stub()}
       >
         <Checkbox label="Football" value="football" />
@@ -171,6 +190,7 @@ describe('<CheckboxGroup />', async () => {
 
     const checkboxGroup = await CheckboxGroupLocator.find()
     const inputs = await checkboxGroup.findAll('input')
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
     inputs.forEach((input) => {
       expect(input.getDOMNode().checked).to.be.false()
     })
@@ -178,13 +198,17 @@ describe('<CheckboxGroup />', async () => {
     const input = await checkboxGroup.find('input[value="football"]')
     await input.click()
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
     inputs.forEach((input) => {
       expect(input.getDOMNode().checked).to.be.false()
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should add the checkbox value to the value list when it is checked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -205,8 +229,10 @@ describe('<CheckboxGroup />', async () => {
     expect(onChange.lastCall.args[0]).to.deep.equal(['football'])
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should check the checkboxes based on the defaultValue prop', async () => {
     const defaultValue = ['football', 'volleyball']
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -223,6 +249,7 @@ describe('<CheckboxGroup />', async () => {
     const checkboxGroup = await CheckboxGroupLocator.find()
     const inputs = await checkboxGroup.findAll('input')
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
     inputs.forEach((input) => {
       if (defaultValue.includes(input.getAttribute('value'))) {
         expect(input.getDOMNode().checked).to.be.true()
@@ -232,9 +259,12 @@ describe('<CheckboxGroup />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove the checkbox value from the value list when it is unchecked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -259,9 +289,12 @@ describe('<CheckboxGroup />', async () => {
     ])
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes the array of selected values to onChange handler', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CheckboxGroup
         name="sports"
@@ -294,8 +327,11 @@ describe('<CheckboxGroup />', async () => {
     ])
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('for a11y', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should meet standards', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <CheckboxGroup name="sports" description="Select your favorite sports">
           <Checkbox label="Football" value="football" />

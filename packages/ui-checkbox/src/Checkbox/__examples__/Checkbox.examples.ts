@@ -26,6 +26,7 @@ export default {
   maxExamplesPerPage: 50,
   sectionProp: 'variant',
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       value: 'example',
@@ -33,6 +34,7 @@ export default {
       readOnly: false
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       (props.variant === 'simple' && props.labelPlacement !== 'end') ||

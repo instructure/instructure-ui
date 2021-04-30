@@ -34,16 +34,40 @@ import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { omitProps } from '@instructure/ui-react-utils'
-import { testable } from '@instructure/ui-testable'
 import { View } from '@instructure/ui-view'
+import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
+
+import { CheckboxFacade } from './CheckboxFacade'
+import { ToggleFacade } from './ToggleFacade'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-import { CheckboxFacade } from './CheckboxFacade'
-import { ToggleFacade } from './ToggleFacade'
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  label: React.ReactNode
+  id?: string
+  value?: string | number
+  messages?: any[] // TODO: FormPropTypes.message
+  defaultChecked?: boolean
+  checked?: any // TODO: controllable(PropTypes.bool, 'onChange', 'defaultChecked')
+  onChange?: (...args: any[]) => any
+  onKeyDown?: (...args: any[]) => any
+  onFocus?: (...args: any[]) => any
+  onBlur?: (...args: any[]) => any
+  onMouseOver?: (...args: any[]) => any
+  onMouseOut?: (...args: any[]) => any
+  disabled?: boolean
+  readOnly?: boolean
+  indeterminate?: boolean
+  size?: 'small' | 'medium' | 'large'
+  variant?: 'simple' | 'toggle'
+  inline?: boolean
+  labelPlacement?: 'top' | 'start' | 'end'
+}
 
 /**
 ---
@@ -53,7 +77,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Checkbox extends Component {
+class Checkbox extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -123,6 +147,7 @@ class Checkbox extends Component {
     labelPlacement: 'end'
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -132,28 +157,36 @@ class Checkbox extends Component {
     }
 
     if (typeof props.checked === 'undefined') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
       this.state.checked = !!props.defaultChecked
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Chec... Remove this comment to see the full error message
     this._defaultId = uid('Checkbox')
   }
 
   componentDidMount() {
     // see https://github.com/facebook/react/issues/1798
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
     this._input.indeterminate = this.props.indeterminate
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
     // see https://github.com/facebook/react/issues/1798
     if (prevProps.indeterminate !== this.props.indeterminate) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
       this._input.indeterminate = this.props.indeterminate
     }
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleChange = (e) => {
     const { onChange, disabled, checked, readOnly } = this.props
 
@@ -163,6 +196,7 @@ class Checkbox extends Component {
     }
 
     if (typeof checked === 'undefined') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
       this.setState({ checked: !this.state.checked })
     }
 
@@ -171,34 +205,41 @@ class Checkbox extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleKeyDown = (e) => {
     if (
       this.props.variant === 'toggle' &&
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'return' does not exist on type 'CodesMap... Remove this comment to see the full error message
       (e.keyCode === keycode.codes.enter || e.keyCode === keycode.codes.return)
     ) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
       this._input.click()
       e.preventDefault()
     }
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
   handleFocus = (e) => {
     this.setState({
       focused: true
     })
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
   handleBlur = (e) => {
     this.setState({
       focused: false
     })
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
   handleMouseOver = (e) => {
     this.setState({
       hovered: true
     })
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
   handleMouseOut = (e) => {
     this.setState({
       hovered: false
@@ -206,20 +247,24 @@ class Checkbox extends Component {
   }
 
   get id() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Chec... Remove this comment to see the full error message
     return this.props.id || this._defaultId
   }
 
   get checked() {
     return typeof this.props.checked === 'undefined'
-      ? this.state.checked
+      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
+        this.state.checked
       : this.props.checked
   }
 
   get focused() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
     return isActiveElement(this._input)
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
     this._input && this._input.focus()
   }
 
@@ -232,12 +277,15 @@ class Checkbox extends Component {
       readOnly,
       indeterminate,
       labelPlacement,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'themeOverride' does not exist on type 'R... Remove this comment to see the full error message
       // eslint-disable-next-line react/prop-types
       themeOverride
     } = this.props
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'hovered' does not exist on type 'Readonl... Remove this comment to see the full error message
     const { hovered, focused } = this.state
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       !(variant === 'simple' && labelPlacement !== 'end'),
       `[Checkbox] The \`simple\` variant does not support the \`labelPlacement\` property.  Use the \`toggle\` variant instead.`
@@ -248,6 +296,7 @@ class Checkbox extends Component {
         <ToggleFacade
           disabled={disabled}
           size={size}
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           hovered={hovered}
           focused={focused}
           checked={this.checked}
@@ -266,6 +315,7 @@ class Checkbox extends Component {
           focused={focused}
           checked={this.checked}
           indeterminate={indeterminate}
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           themeOverride={themeOverride}
         >
           {label}
@@ -278,6 +328,7 @@ class Checkbox extends Component {
     const { messages } = this.props
 
     return messages && messages.length > 0 ? (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '"small 0 0"' is not assignable to type '0 | ... Remove this comment to see the full error message
       <View display="block" margin="small 0 0">
         <FormFieldMessages messages={messages} />
       </View>
@@ -299,8 +350,10 @@ class Checkbox extends Component {
       styles
     } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, Checkbox.propTypes)
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       !(variant === 'toggle' && indeterminate),
       `[Checkbox] The \`toggle\` variant does not support the \`indeterminate\` property. Use the \`simple\` variant instead.`
@@ -320,9 +373,11 @@ class Checkbox extends Component {
           value={value}
           type="checkbox"
           ref={(c) => {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'Checkbox... Remove this comment to see the full error message
             this._input = c
           }}
           disabled={disabled || readOnly}
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '"mixed" | null' is not assignable to type 'b... Remove this comment to see the full error message
           aria-checked={indeterminate ? 'mixed' : null}
           css={styles.input}
           onChange={this.handleChange}

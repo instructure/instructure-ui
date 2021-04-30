@@ -22,8 +22,41 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+import React from 'react'
 
-import { CheckboxGroup } from './index'
+import { Checkbox } from '../../Checkbox'
 
-export const CheckboxGroupLocator = locator(CheckboxGroup.selector)
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'variant' implicitly has an 'any' type.
+const getChildren = (variant) => {
+  return [
+    <Checkbox variant={variant} key="tennis" label="Tennis" value="tennis" />,
+    <Checkbox
+      variant={variant}
+      key="lacrosse"
+      label="Lacrosse"
+      value="lacrosse"
+    />,
+    <Checkbox
+      variant={variant}
+      key="water-polo"
+      label="Water Polo"
+      value="water-polo"
+    />,
+    <Checkbox variant={variant} key="golf" label="Golf" value="golf" />
+  ]
+}
+
+export default {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    children: [getChildren('simple'), getChildren('toggle')]
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      name: 'sports',
+      description: 'Select your favorite sports'
+    }
+  }
+}

@@ -27,57 +27,17 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const {
-    colors,
-    borders,
-    forms,
-    shadows,
-    spacing,
-    typography,
-    key: themeName
-  } = theme
+  const { key: themeName } = theme
 
-  const themeSpecificStyle = {
-    canvas: {
-      focusOutlineColor: theme['ic-brand-primary'],
-      labelColor: theme['ic-brand-font-color-dark']
-    },
-    'canvas-high-contrast': {
-      background: colors?.backgroundDarkest,
-      borderColor: colors?.borderDarkest
-    }
-  }
+  const themeSpecificStyle = {}
 
-  const componentVariables = {
-    color: colors?.textLightest,
-    background: colors?.backgroundLight,
-    borderColor: colors?.borderMedium,
-    borderWidth: borders?.widthMedium,
-    borderRadius: '4rem',
-    marginEnd: spacing?.small,
-    marginStart: spacing?.small,
-    marginVertical: spacing?.xSmall,
-    checkedBackground: colors?.backgroundSuccess,
-    uncheckedIconColor: colors?.textDarkest,
-    checkedIconColor: colors?.textSuccess,
-    focusOutlineColor: colors?.borderBrand,
-    focusBorderWidth: borders?.widthMedium,
-    focusBorderStyle: borders?.style,
-    toggleBackground: colors?.backgroundLightest,
-    toggleShadow: shadows?.depth1,
-    toggleSize: forms?.inputHeightSmall,
-    labelColor: colors?.textDarkest,
-    labelFontFamily: typography?.fontFamily,
-    labelFontWeight: typography?.fontWeightNormal,
-    labelLineHeight: typography?.lineHeightCondensed,
-    labelFontSizeSmall: typography?.fontSizeSmall,
-    labelFontSizeMedium: typography?.fontSizeMedium,
-    labelFontSizeLarge: typography?.fontSizeLarge
-  }
+  const componentVariables = {}
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

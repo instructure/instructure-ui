@@ -25,17 +25,23 @@
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
-import { CheckboxFacade } from '../index'
+import { ToggleFacade } from '../index'
 
-describe('<CheckboxFacade />', async () => {
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('<ToggleFacade />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
-    const subject = await mount(<CheckboxFacade>label text</CheckboxFacade>)
-    const checkboxFacade = within(subject.getDOMNode())
-    expect(checkboxFacade).to.exist()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
+    const toggleFacade = within(subject.getDOMNode())
+    expect(toggleFacade).to.exist()
   })
+
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
-    const subject = await mount(<CheckboxFacade>label text</CheckboxFacade>)
-    const checkboxFacade = within(subject.getDOMNode())
-    expect(await checkboxFacade.accessible()).to.be.true()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
+    const toggleFacade = within(subject.getDOMNode())
+    expect(await toggleFacade.accessible()).to.be.true()
   })
 })
