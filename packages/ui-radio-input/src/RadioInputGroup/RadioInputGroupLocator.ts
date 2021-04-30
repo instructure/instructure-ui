@@ -24,6 +24,7 @@
 
 import { locator } from '@instructure/ui-test-locator'
 
-import { RadioInput } from './index'
+import { RadioInputGroup } from './index'
 
-export const RadioInputLocator = locator(RadioInput.selector)
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const RadioInputGroupLocator = locator(RadioInputGroup.selector)

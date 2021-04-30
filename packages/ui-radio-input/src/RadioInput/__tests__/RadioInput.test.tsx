@@ -28,8 +28,11 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { RadioInput } from '../index'
 import { RadioInputLocator } from '../RadioInputLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<RadioInput />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('renders an input with type "radio"', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInput label="fake label" value="someValue" name="someName" />
     )
@@ -40,9 +43,13 @@ describe('<RadioInput />', async () => {
     expect(input).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('events', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onClick event', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           label="fake label"
@@ -62,8 +69,11 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not respond to onClick event when disabled', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           disabled
@@ -84,8 +94,11 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not respond to onClick event when readOnly', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           readOnly
@@ -106,8 +119,11 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onChange event', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           label="fake label"
@@ -127,8 +143,11 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not respond to onChange event when disabled', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           disabled
@@ -149,8 +168,11 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not respond to onChange event when readOnly', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           readOnly
@@ -171,13 +193,17 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onBlur event', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           label="fake label"
           value="someValue"
           name="someName"
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; value: string; name: string... Remove this comment to see the full error message
           onBlur={onBlur}
         />
       )
@@ -192,13 +218,17 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onFocus event', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           label="fake label"
           value="someValue"
           name="someName"
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; value: string; name: string... Remove this comment to see the full error message
           onFocus={onFocus}
         />
       )
@@ -213,7 +243,9 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('sets input to checked when selected', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           checked
@@ -231,19 +263,23 @@ describe('<RadioInput />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('focuses with the focus helper', async () => {
       let ref
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           label="fake label"
           value="someValue"
           name="someName"
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; value: string; name: string... Remove this comment to see the full error message
           componentRef={(el) => (ref = el)}
         />
       )
 
       const radioInput = await RadioInputLocator.find()
 
+      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
       ref.focus()
 
       await wait(() => {
@@ -252,8 +288,11 @@ describe('<RadioInput />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('for a11y', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('simple variant should meet standards', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           variant="simple"
@@ -268,8 +307,11 @@ describe('<RadioInput />', async () => {
       expect(await radioInput.accessible())
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should require a label', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           variant="simple"

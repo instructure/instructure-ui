@@ -22,8 +22,19 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
-
-import { RadioInputGroup } from './index'
-
-export const RadioInputGroupLocator = locator(RadioInputGroup.selector)
+export default {
+  sectionProp: 'variant',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      label: 'A radio input'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  filter: (props) => {
+    return (
+      (props.variant === 'simple' && props.context !== 'off') ||
+      (props.variant === 'toggle' && !props.checked && props.context !== 'off')
+    )
+  }
+}

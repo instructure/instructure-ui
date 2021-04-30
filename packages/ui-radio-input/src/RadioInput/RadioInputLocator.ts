@@ -22,17 +22,9 @@
  * SOFTWARE.
  */
 
-export default {
-  sectionProp: 'variant',
-  getComponentProps: (props) => {
-    return {
-      label: 'A radio input'
-    }
-  },
-  filter: (props) => {
-    return (
-      (props.variant === 'simple' && props.context !== 'off') ||
-      (props.variant === 'toggle' && !props.checked && props.context !== 'off')
-    )
-  }
-}
+import { locator } from '@instructure/ui-test-locator'
+
+import { RadioInput } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const RadioInputLocator = locator(RadioInput.selector)

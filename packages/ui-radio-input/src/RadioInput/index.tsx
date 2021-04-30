@@ -35,6 +35,24 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  label: React.ReactNode
+  value?: string | number
+  id?: string
+  name?: string
+  checked?: boolean
+  disabled?: boolean
+  readOnly?: boolean
+  variant?: 'simple' | 'toggle'
+  size?: 'small' | 'medium' | 'large'
+  context?: 'success' | 'warning' | 'danger' | 'off'
+  inline?: boolean
+  onClick?: (...args: any[]) => any
+  onChange?: (...args: any[]) => any
+}
 /**
 ---
 category: components
@@ -42,7 +60,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class RadioInput extends Component {
+class RadioInput extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -70,7 +88,9 @@ class RadioInput extends Component {
   }
 
   static defaultProps = {
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClick: function (event) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onChange: function (event) {},
     variant: 'simple',
     size: 'medium',
@@ -84,35 +104,44 @@ class RadioInput extends Component {
     value: undefined
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
     this.state = {}
 
     if (typeof props.checked === 'undefined') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
       this.state.checked = false
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Radi... Remove this comment to see the full error message
     this._defaultId = uid('RadioInput')
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleClick = (e) => {
     if (this.props.disabled || this.props.readOnly) {
       e.preventDefault()
       return
     }
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onClick(e)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleChange = (e) => {
     if (this.props.disabled || this.props.readOnly) {
       e.preventDefault()
@@ -120,33 +149,40 @@ class RadioInput extends Component {
     }
 
     if (typeof this.props.checked === 'undefined') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
       this.setState({ checked: !this.state.checked })
     }
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onChange(e)
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RadioInp... Remove this comment to see the full error message
     this._input.focus()
   }
 
   get id() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Radi... Remove this comment to see the full error message
     return this.props.id || this._defaultId
   }
 
   get focused() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RadioInp... Remove this comment to see the full error message
     return isActiveElement(this._input)
   }
 
   get checked() {
     return typeof this.props.checked === 'undefined'
-      ? this.state.checked
+      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'checked' does not exist on type 'Readonl... Remove this comment to see the full error message
+        this.state.checked
       : this.props.checked
   }
 
   render() {
     const { disabled, readOnly, label, value, name, styles } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, RadioInput.propTypes)
 
     return (
@@ -155,6 +191,7 @@ class RadioInput extends Component {
           {...props}
           id={this.id}
           ref={(c) => {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RadioInp... Remove this comment to see the full error message
             this._input = c
           }}
           value={value}
@@ -163,6 +200,7 @@ class RadioInput extends Component {
           type="radio"
           css={styles.input}
           disabled={disabled || readOnly}
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
           aria-disabled={disabled || readOnly ? 'true' : null}
           onChange={this.handleChange}
           onClick={this.handleClick}
