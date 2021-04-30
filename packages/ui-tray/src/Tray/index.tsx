@@ -263,7 +263,6 @@ class Tray extends Component<Props> {
     const { placement, dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
 
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 

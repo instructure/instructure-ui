@@ -32,10 +32,13 @@ const mirror = {
   offscreen: 'offscreen'
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
 function mirrorPlacement(placement, delimiter) {
   return executeMirrorFunction(
     placement,
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'first' implicitly has an 'any' type.
     (first, second) => {
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       return [mirror[first], second]
     },
     delimiter
@@ -60,11 +63,14 @@ function mirrorPlacement(placement, delimiter) {
  * @returns {string|Array} - an array of values or, if the delimiter was supplied, a string of
  *  delimiter separated values
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
 function mirrorHorizontalPlacement(placement, delimiter) {
   return executeMirrorFunction(
     placement,
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'first' implicitly has an 'any' type.
     (first, second) => {
       return [first, second].map((value) => {
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         return value === 'start' || value === 'end' ? mirror[value] : value
       })
     },
@@ -72,10 +78,12 @@ function mirrorHorizontalPlacement(placement, delimiter) {
   )
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
 function executeMirrorFunction(placement, mirrorFunction, delimiter) {
   const [first, second] = Array.isArray(placement)
     ? placement
     : placement.split(' ')
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
   const result = mirrorFunction(first, second).filter((value) => value)
   return delimiter ? result.join(delimiter) : result
 }

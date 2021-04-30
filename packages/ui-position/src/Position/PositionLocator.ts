@@ -28,6 +28,7 @@ import { PositionContentLocator } from './PositionContentLocator'
 import { PositionTargetLocator } from './PositionTargetLocator'
 
 export const customMethods = {
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   findTarget: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
@@ -38,6 +39,7 @@ export const customMethods = {
       return null
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   findContent: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
@@ -53,4 +55,5 @@ export const customMethods = {
 export { PositionContentLocator }
 export { PositionTargetLocator }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const PositionLocator = locator(Position.selector, customMethods)

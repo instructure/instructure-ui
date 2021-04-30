@@ -29,6 +29,7 @@ import { within } from '@instructure/ui-utils'
 import { Position } from '../index'
 import { PositionLocator } from '../PositionLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Position />', async () => {
   const parentDefaults = {
     parentWidth: 500,
@@ -37,13 +38,18 @@ describe('<Position />', async () => {
     paddingOverflow: 'auto'
   }
 
+  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
   beforeEach(async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     stub(console, 'warn') // suppress experimental warnings
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position constrain="window" renderTarget={<button>Target</button>}>
             <div id="content">
@@ -62,9 +68,12 @@ describe('<Position />', async () => {
     expect(content).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should absolutely position content', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position constrain="window" renderTarget={<button>Target</button>}>
             <div id="content">
@@ -80,10 +89,14 @@ describe('<Position />', async () => {
     expect(content.getDOMNode().style.position).to.equal('absolute')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render right of target', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="end"
@@ -114,10 +127,14 @@ describe('<Position />', async () => {
     ).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render top stretched inside of target', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="top stretch"
@@ -152,10 +169,14 @@ describe('<Position />', async () => {
     ).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render below target', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="bottom"
@@ -186,10 +207,14 @@ describe('<Position />', async () => {
     ).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render left of target', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="start"
@@ -220,10 +245,14 @@ describe('<Position />', async () => {
     ).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render above target', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="top"
@@ -252,10 +281,14 @@ describe('<Position />', async () => {
     expect(Math.floor(contentRect.bottom)).to.equal(Math.floor(targetRect.top))
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should center vertically', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="end"
@@ -289,10 +322,14 @@ describe('<Position />', async () => {
     expect(within(top, center)).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should center horizontally', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
+        {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
         <div style={{ ...parentDefaults }}>
           <Position
             placement="bottom"
@@ -326,10 +363,15 @@ describe('<Position />', async () => {
     expect(within(left, center)).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with offset props', () => {
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
     function assertOffset(placement, offset, assertion) {
+      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it(`should render offset for ${placement}`, async () => {
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onPositionChanged = stub()
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         const subject = await mount(
           <Position
             constrain="none"
@@ -365,30 +407,38 @@ describe('<Position />', async () => {
       })
     }
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('top', 10, (contentRect, top, left) => {
       expect(within(contentRect.top, top - 10, 1)).to.be.true()
       expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('start', '10px', (contentRect, top, left) => {
       expect(within(contentRect.top, top - 10, 1)).to.be.true()
       expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('end', 10, (contentRect, top, left) => {
       expect(within(contentRect.top, top - 10, 1)).to.be.true()
       expect(within(contentRect.left, left + 10, 1)).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'contentRect' implicitly has an 'any' ty... Remove this comment to see the full error message
     assertOffset('bottom', 10, (contentRect, top, left) => {
       expect(within(contentRect.top, top + 10, 1)).to.be.true()
       expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when constrained to scroll-parent', async () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should re-position below target', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -403,6 +453,7 @@ describe('<Position />', async () => {
             <Position
               placement="top"
               constrain="scroll-parent"
+              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
               mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
@@ -431,8 +482,11 @@ describe('<Position />', async () => {
       ).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should re-position above target', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -447,6 +501,7 @@ describe('<Position />', async () => {
             <Position
               placement="bottom"
               constrain="scroll-parent"
+              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
               mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
@@ -475,8 +530,11 @@ describe('<Position />', async () => {
       ).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should re-position after target', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -491,6 +549,7 @@ describe('<Position />', async () => {
             <Position
               placement="start"
               constrain="scroll-parent"
+              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
               mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
@@ -519,8 +578,11 @@ describe('<Position />', async () => {
       ).to.be.true()
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should re-position before target', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -535,6 +597,7 @@ describe('<Position />', async () => {
             <Position
               placement="end"
               constrain="scroll-parent"
+              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
               mountNode={(el) => document.getElementById('mountNode')}
               onPositionChanged={onPositionChanged}
               renderTarget={<button>Target</button>}
@@ -564,13 +627,17 @@ describe('<Position />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when the documentElement is offset', async () => {
+    // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
     beforeEach(async () => {
       document.documentElement.style.position = 'fixed'
       document.documentElement.style.top = '-100px'
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should position correctly', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '100px' }}>
           <Position placement="bottom" renderTarget={<button>Target</button>}>
@@ -592,7 +659,9 @@ describe('<Position />', async () => {
       })
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should position correctly with mountNode', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '100px' }}>
           <div id="mountNode">mount</div>
@@ -607,6 +676,7 @@ describe('<Position />', async () => {
             <Position
               placement="bottom"
               constrain="scroll-parent"
+              // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
               mountNode={(el) => document.getElementById('mountNode')}
               renderTarget={<button>Target</button>}
             >
