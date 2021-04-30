@@ -34,6 +34,15 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  animationDelay?: number
+  animateFill?: boolean
+  filled?: boolean
+  size?: 'small' | 'medium' | 'large'
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 parent: Rating
@@ -41,7 +50,7 @@ id: Rating.Icon
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class RatingIcon extends Component {
+class RatingIcon extends Component<Props> {
   static propTypes = {
     animationDelay: PropTypes.number,
     animateFill: PropTypes.bool,
@@ -60,7 +69,9 @@ class RatingIcon extends Component {
     size: 'medium'
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     super()
 
     this.state = {
@@ -71,12 +82,15 @@ class RatingIcon extends Component {
   _timeouts = []
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleProps())
     if (this.props.animateFill) {
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       this._timeouts.push(setTimeout(this.fill, this.props.animationDelay))
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       this.props.animateFill &&
@@ -85,19 +99,23 @@ class RatingIcon extends Component {
     ) {
       this.fill()
     }
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleProps())
   }
 
   componentWillUnmount() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_animation' does not exist on type 'Rati... Remove this comment to see the full error message
     this._animation && this._animation.cancel()
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
   }
 
   makeStyleProps = () => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'filled' does not exist on type 'Readonly... Remove this comment to see the full error message
     return { filled: this.state.filled }
   }
 
   fill = () => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_animation' does not exist on type 'Rati... Remove this comment to see the full error message
     this._animation = requestAnimationFrame(() => {
       this.setState({
         filled: true
@@ -107,11 +125,13 @@ class RatingIcon extends Component {
 
   render() {
     const { animateFill } = this.props
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'filled' does not exist on type 'Readonly... Remove this comment to see the full error message
     const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
 
     return (
       <span css={this.props.styles.ratingIcon}>
         <span>
+          {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'filled' does not exist on type 'Readonly... Remove this comment to see the full error message */}
           {this.state.filled && animateFill ? (
             <Transition in transitionOnMount type="scale">
               <Icon css={this.props.styles.icon} />

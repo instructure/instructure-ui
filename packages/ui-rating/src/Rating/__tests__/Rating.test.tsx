@@ -30,8 +30,11 @@ import { View } from '@instructure/ui-view'
 import { Rating } from '../index'
 import { RatingLocator } from '../RatingLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Rating />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the correct number of icons', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Rating label="Course rating" iconCount={5} />)
     const rating = await RatingLocator.find()
     const icons = await rating.findAll('svg')
@@ -39,7 +42,9 @@ describe('<Rating />', async () => {
     expect(icons.length).to.equal(5)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle a valueMax of zero', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Rating label="Course rating" valueMax={0} />)
     const rating = await RatingLocator.find()
     const icons = await rating.findAll('svg')
@@ -47,7 +52,9 @@ describe('<Rating />', async () => {
     expect(icons.length).to.equal(3)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should fill the correct number of icons', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Rating
         label="Course rating"
@@ -62,7 +69,9 @@ describe('<Rating />', async () => {
     expect(filledIcons.length).to.equal(4)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('never renders more than `iconCount` icons', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Rating
         label="Course rating"
@@ -78,7 +87,9 @@ describe('<Rating />', async () => {
     expect(icons.length).to.equal(5)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render screen reader text to give context', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Rating
         label="Course rating"
@@ -94,12 +105,15 @@ describe('<Rating />', async () => {
     expect(rating.getTextContent()).to.contain('Course rating 4 out of 5')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Rating label="Course rating" iconCount={5} />)
     const rating = await RatingLocator.find()
     expect(await rating.accessible()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small'
@@ -115,21 +129,28 @@ describe('<Rating />', async () => {
       )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should NOT allow the '${prop}' prop`, async () => {
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
             const warning = `Warning: [Rating] prop '${prop}' is not allowed.`
             const props = {
               [prop]: 'foo'
             }
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(
               <Rating label="Course rating" iconCount={5} {...props} />
             )
             expect(consoleError).to.be.calledWith(warning)
           })
         } else {
+          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should allow the '${prop}' prop`, async () => {
+            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(
               <Rating label="Course rating" iconCount={5} {...props} />
             )

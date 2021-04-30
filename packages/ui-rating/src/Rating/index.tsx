@@ -34,6 +34,19 @@ import { RatingIcon } from '../RatingIcon'
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 
+type Props = {
+  label: string
+  formatValueText?: (...args: any[]) => any
+  iconCount?: 3 | 5
+  size?: 'small' | 'medium' | 'large'
+  valueMax?: number
+  valueNow?: number
+  animateFill?: boolean
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components
@@ -41,7 +54,7 @@ category: components
 **/
 @withStyle(generateStyle)
 @testable()
-class Rating extends Component {
+class Rating extends Component<Props> {
   static propTypes = {
     /**
      * A label is required for accessibility
@@ -86,6 +99,7 @@ class Rating extends Component {
 
   static defaultProps = {
     animateFill: false,
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'filled' implicitly has an 'any' type.
     formatValueText: (filled, iconCount) => `${filled} / ${iconCount}`,
     iconCount: 3,
     size: 'medium',
@@ -97,10 +111,13 @@ class Rating extends Component {
   static Icon = RatingIcon
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -108,11 +125,14 @@ class Rating extends Component {
     const { valueNow, iconCount, valueMax } = this.props
 
     // prevent divide by zero errors
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     const max = valueMax > 0 ? valueMax : iconCount
 
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     const filledIcons = Math.round((valueNow * iconCount) / max)
 
     // Handle edge case where valueNow is greater than valueMax
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     if (filledIcons > iconCount) {
       return iconCount
     } else {
@@ -121,6 +141,7 @@ class Rating extends Component {
   }
 
   get empty() {
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     return this.props.iconCount - this.filled
   }
 
@@ -134,9 +155,12 @@ class Rating extends Component {
       formatValueText
     } = this.props
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     const valueText = label + ' ' + formatValueText(this.filled, iconCount)
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Rating.propTypes),
       Rating
     )
@@ -149,15 +173,18 @@ class Rating extends Component {
         display="inline-block"
       >
         <ScreenReaderContent>{valueText}</ScreenReaderContent>
+        {/* @ts-expect-error ts-migrate(6133) FIXME: 'x' is declared but its value is never read. */}
         {[...Array(this.filled)].map((x, i) => (
           <RatingIcon
             key={i + 1}
             filled
             animateFill={animateFill}
+            // @ts-expect-error ts-migrate(2322) FIXME: Type 'number | null' is not assignable to type 'nu... Remove this comment to see the full error message
             animationDelay={animateFill ? (i + 1) * 200 : null}
             size={size}
           />
         ))}
+        {/* @ts-expect-error ts-migrate(6133) FIXME: 'x' is declared but its value is never read. */}
         {[...Array(this.empty)].map((x, i) => (
           <RatingIcon key={i + 1} size={size} />
         ))}

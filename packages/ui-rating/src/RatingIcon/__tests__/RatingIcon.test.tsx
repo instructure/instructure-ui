@@ -26,14 +26,19 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { EmotionThemeProvider } from '@instructure/emotion'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { TransitionLocator } from '@instructure/ui-motion/es/Transition/TransitionLocator'
 
 import { RatingIcon } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<RatingIcon />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('transitions when filled on render and animateFill is true', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; theme: { componentOverr... Remove this comment to see the full error message
       <EmotionThemeProvider
         theme={{
           componentOverrides: {
@@ -49,8 +54,11 @@ describe('<RatingIcon />', async () => {
     expect(await TransitionLocator.find()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('transitions when filled after render and animateFill is true', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; theme: { componentOverr... Remove this comment to see the full error message
       <EmotionThemeProvider
         theme={{
           componentOverrides: {
@@ -70,7 +78,9 @@ describe('<RatingIcon />', async () => {
     expect(await TransitionLocator.find()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<RatingIcon filled animateFill />)
 
     const ratingIcon = within(subject.getDOMNode())
