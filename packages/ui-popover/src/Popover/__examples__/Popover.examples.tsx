@@ -41,6 +41,7 @@ export default {
     'defaultIsShowingContent',
     'shouldContainFocus'
   ],
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       defaultIsShowingContent: true,
@@ -49,6 +50,7 @@ export default {
       children: <h2>Hello World</h2>
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
       dir: props.dir,
@@ -60,6 +62,7 @@ export default {
       textAlign: 'center'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     // only generate 1 example if its not showing content
     return (

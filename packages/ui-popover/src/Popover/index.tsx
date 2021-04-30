@@ -48,7 +48,54 @@ import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
 import { ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
+
 import { FocusRegion } from '@instructure/ui-a11y-utils'
+
+type Props = {
+  isShowingContent?: boolean
+  defaultIsShowingContent?: boolean
+  on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
+  withArrow?: boolean
+  color?: 'primary' | 'primary-inverse'
+  placement?: any // TODO: PositionPropTypes.placement
+  shadow?: any // TODO: ThemeablePropTypes.shadow
+  stacking?: any // TODO: ThemeablePropTypes.stacking
+  contentRef?: (...args: any[]) => any
+  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  screenReaderLabel?: string
+  offsetX?: string | number
+  offsetY?: string | number
+  constrain?: any // TODO: PositionPropTypes.constrain
+  positionTarget?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
+  mountNode?: any // TODO: PositionPropTypes.mountNode
+  insertAt?: 'bottom' | 'top'
+  liveRegion?:
+    | React.ReactElement[]
+    | React.ReactElement
+    | ((...args: any[]) => any)
+  id?: string
+  shouldAlignArrow?: boolean
+  shouldTrackPosition?: boolean
+  shouldRenderOffscreen?: boolean
+  shouldContainFocus?: boolean
+  shouldReturnFocus?: boolean
+  shouldCloseOnDocumentClick?: boolean
+  shouldCloseOnEscape?: boolean
+  shouldFocusContentOnTriggerBlur?: boolean
+  onShowContent?: (...args: any[]) => any
+  onHideContent?: (...args: any[]) => any
+  onPositioned?: (...args: any[]) => any
+  onPositionChanged?: (...args: any[]) => any
+  onClick?: (...args: any[]) => any
+  onFocus?: (...args: any[]) => any
+  onBlur?: (...args: any[]) => any
+  onKeyDown?: (...args: any[]) => any
+  onKeyUp?: (...args: any[]) => any
+  onMouseOver?: (...args: any[]) => any
+  onMouseOut?: (...args: any[]) => any
+  renderTrigger?: React.ReactNode | ((...args: any[]) => any)
+  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
 
 /**
 ---
@@ -58,7 +105,7 @@ tags: overlay, portal, dialog
 **/
 @bidirectional()
 @testable()
-class Popover extends Component {
+class Popover extends Component<Props> {
   static propTypes = {
     /**
      * Whether or not the `<Popover />` content is shown
@@ -253,6 +300,7 @@ class Popover extends Component {
     offsetY: 0,
     color: 'primary',
     on: ['hover', 'focus'],
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     contentRef: (el) => {},
     withArrow: true,
     constrain: 'window',
@@ -271,21 +319,33 @@ class Popover extends Component {
     shouldCloseOnDocumentClick: true,
     shouldFocusContentOnTriggerBlur: false,
     shouldCloseOnEscape: true,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onShowContent: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onHideContent: (event, { documentClick }) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClick: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onFocus: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onMouseOver: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onMouseOut: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onKeyDown: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onKeyUp: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'position' is declared but its value is never read... Remove this comment to see the full error message
     onPositioned: (position) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'position' is declared but its value is never read... Remove this comment to see the full error message
     onPositionChanged: (position) => {},
     renderTrigger: null,
     children: null
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -296,22 +356,30 @@ class Popover extends Component {
     }
 
     if (typeof props.isShowingContent === 'undefined') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingContent' does not exist on type... Remove this comment to see the full error message
       this.state.isShowingContent = props.defaultIsShowingContent
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'Popover'.
     this._id = this.props.id || uid('Popover')
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
     this._raf = []
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOver' does not exist on type... Remove this comment to see the full error message
     this._handleMouseOver = handleMouseOverOut.bind(null, (event) => {
       this.show(event)
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseOutTimeout' does not exist on type ... Remove this comment to see the full error message
       clearTimeout(this.mouseOutTimeout)
     })
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOut' does not exist on type ... Remove this comment to see the full error message
     this._handleMouseOut = handleMouseOverOut.bind(null, (event) => {
       // this is needed bc the trigger mouseOut fires before tooltip mouseOver
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseOutTimeout' does not exist on type ... Remove this comment to see the full error message
       this.mouseOutTimeout = setTimeout(() => {
         this.hide(event)
       }, 1)
     })
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseOutTimeout' does not exist on type ... Remove this comment to see the full error message
     this.mouseOutTimeout = undefined
   }
 
@@ -329,6 +397,7 @@ class Popover extends Component {
       // if popover is being used as a tooltip with no focusable content
       // manage its FocusRegion internally rather than registering it with
       // the FocusRegionManager via Dialog
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
       this._focusRegion = new FocusRegion(this._contentElement, {
         shouldCloseOnEscape: false,
         shouldCloseOnDocumentClick: true,
@@ -336,21 +405,28 @@ class Popover extends Component {
       })
 
       if (this.shown) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
         this._focusRegion.activate()
       }
     }
   }
 
   componentWillUnmount() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
     this._raf.forEach((request) => request.cancel())
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
     this._raf = []
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
     if (this._focusRegion) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
       this._focusRegion.deactivate()
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
       this._focusRegion.blur()
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return (
       !shallowEqual(this.props, nextProps) ||
@@ -358,39 +434,50 @@ class Popover extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapShot) {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
     if (this._focusRegion && this.isTooltip) {
       // if focus region exists, popover is acting as a tooltip
       // so we manually activate and deactivate the region when showing/hiding
       if (
         (!prevProps.isShowingContent && this.props.isShowingContent) ||
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingContent' does not exist on type... Remove this comment to see the full error message
         (!prevState.isShowingContent && this.state.isShowingContent)
       ) {
         // changed from hiding to showing
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
         this._focusRegion.activate()
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
         this._focusRegion.focus()
       }
 
       if (
         (prevProps.isShowingContent && !this.props.isShowingContent) ||
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingContent' does not exist on type... Remove this comment to see the full error message
         (prevState.isShowingContent && !this.state.isShowingContent)
       ) {
         // changed from showing to hiding
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
         this._focusRegion.deactivate()
       }
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
   computeOffsets(placement) {
     let { offsetX, offsetY } = this.props
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_view' does not exist on type 'Popover'.
     if (this.props.shouldAlignArrow && this._view) {
       const secondaryPlacement = parsePlacement(placement)[1]
 
       // arrowSize and arrowBorderWidth are component theme variables
       // declared in ContextView's styles.js
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_view' does not exist on type 'Popover'.
       const { arrowSize, arrowBorderWidth } = this._view.props.styles
 
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
 
       if (secondaryPlacement === 'start') {
@@ -408,7 +495,8 @@ class Popover extends Component {
   }
 
   get placement() {
-    let { placement, dir } = this.props
+    let { placement } = this.props
+    const { dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
 
     if (isRtl) {
@@ -422,7 +510,9 @@ class Popover extends Component {
 
   get positionProps() {
     return {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'offsetX' does not exist on type 'Readonl... Remove this comment to see the full error message
       offsetX: this.state.offsetX,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'offsetY' does not exist on type 'Readonl... Remove this comment to see the full error message
       offsetY: this.state.offsetY,
       shouldTrackPosition: this.props.shouldTrackPosition && this.shown,
       insertAt: this.props.insertAt,
@@ -432,13 +522,15 @@ class Popover extends Component {
       onPositionChanged: this.handlePositionChanged,
       target: this.props.positionTarget,
       mountNode: this.props.mountNode,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'Popover'.
       id: this._id
     }
   }
 
   get shown() {
     return typeof this.props.isShowingContent === 'undefined'
-      ? this.state.isShowingContent
+      ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingContent' does not exist on type... Remove this comment to see the full error message
+        this.state.isShowingContent
       : this.props.isShowingContent
   }
 
@@ -446,30 +538,37 @@ class Popover extends Component {
     return this.props.defaultFocusElement
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   show = (event) => {
     if (typeof this.props.isShowingContent === 'undefined') {
       this.setState({ isShowingContent: true })
     }
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onShowContent(event)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   hide = (event, documentClick = false) => {
     const { onHideContent, isShowingContent } = this.props
 
     if (typeof isShowingContent === 'undefined') {
       // uncontrolled, set state, fire callbacks
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'isShowingContent' does not exist on type... Remove this comment to see the full error message
       this.setState(({ isShowingContent }) => {
         if (isShowingContent) {
+          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
           onHideContent(event, { documentClick })
         }
         return { isShowingContent: false }
       })
     } else if (isShowingContent) {
       // controlled, fire callback
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       onHideContent(event, { documentClick })
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   toggle = (event) => {
     if (this.shown) {
       this.hide(event)
@@ -478,20 +577,24 @@ class Popover extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   handleDialogDismiss = (...args) => {
     if (
       !this.props.shouldReturnFocus &&
       this.props.shouldFocusContentOnTriggerBlur
     ) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Popove... Remove this comment to see the full error message
       const trigger = findDOMNode(this._trigger)
 
       if (trigger && typeof trigger.focus === 'function') {
         trigger.focus()
       }
     }
+    // @ts-expect-error ts-migrate(2556) FIXME: Expected 1-2 arguments, but got 0 or more.
     this.hide(...args)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleDialogBlur = (event) => {
     if (
       event.keyCode === keycode.codes.tab &&
@@ -503,6 +606,7 @@ class Popover extends Component {
     this.hide(event)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleTriggerKeyDown = (event) => {
     if (!this.props.shouldFocusContentOnTriggerBlur) {
       return
@@ -510,14 +614,17 @@ class Popover extends Component {
 
     if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
       event.preventDefault()
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
       this._raf.push(
         requestAnimationFrame(() => {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_dialog' does not exist on type 'Popover... Remove this comment to see the full error message
           this._dialog && this._dialog.focus()
         })
       )
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleTriggerKeyUp = (event) => {
     if (event.keyCode === keycode.codes.esc && this.shown && this.isTooltip) {
       // if popover is tooltip, it is managing its own focus region so we need
@@ -527,10 +634,14 @@ class Popover extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleTriggerBlur = (event) => {
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     if (this.props.on.indexOf('focus') > -1) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
       this._raf.push(
         requestAnimationFrame(() => {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_view' does not exist on type 'Popover'.
           if (!containsActiveElement(this._view)) {
             this.hide(event)
           }
@@ -539,21 +650,25 @@ class Popover extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'position' implicitly has an 'any' type.
   handlePositioned = (position) => {
     const placement = position.placement
     this.setState({
       placement,
       ...this.computeOffsets(placement)
     })
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onPositioned(position)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'position' implicitly has an 'any' type.
   handlePositionChanged = (position) => {
     const placement = position.placement
     this.setState({
       placement,
       ...this.computeOffsets(placement)
     })
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onPositionChanged(position)
   }
 
@@ -568,24 +683,32 @@ class Popover extends Component {
       let onMouseOver
       let expanded
 
+      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
       if (on.indexOf('click') > -1) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
         onClick = (event) => {
           this.toggle(event)
         }
       }
 
+      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
       if (on.indexOf('hover') > -1) {
+        // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
         error(
           !(on === 'hover'),
           '[Popover] Specifying only the `"hover"` trigger limits the visibility' +
             ' of the Popover to just mouse users. Consider also including the `"focus"` trigger ' +
             'so that touch and keyboard only users can see the Popover content as well.'
         )
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOver' does not exist on type... Remove this comment to see the full error message
         onMouseOver = this._handleMouseOver
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOut' does not exist on type ... Remove this comment to see the full error message
         onMouseOut = this._handleMouseOut
       }
 
+      // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
       if (on.indexOf('focus') > -1) {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
         onFocus = (event) => {
           this.show(event)
         }
@@ -599,6 +722,7 @@ class Popover extends Component {
       }
 
       trigger = safeCloneElement(trigger, {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
         ref: (el) => (this._trigger = el),
         'aria-expanded': expanded,
         'data-popover-trigger': true,
@@ -634,6 +758,7 @@ class Popover extends Component {
         <Dialog
           open={this.shown}
           label={this.props.screenReaderLabel}
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_dialog' does not exist on type 'Popover... Remove this comment to see the full error message
           ref={(el) => (this._dialog = el)}
           display="block"
           onBlur={this.handleDialogBlur}
@@ -653,12 +778,16 @@ class Popover extends Component {
 
     if (this.shown || this.props.shouldRenderOffscreen) {
       let ViewElement
-      let color = this.props.color
+      const color = this.props.color
 
       let viewProps = {
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'c' implicitly has an 'any' type.
         ref: (c) => (this._view = c),
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
         elementRef: (el) => {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_contentElement' does not exist on type ... Remove this comment to see the full error message
           this._contentElement = el
+          // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
           this.props.contentRef(el)
         },
         background: color,
@@ -667,6 +796,7 @@ class Popover extends Component {
         display: 'block'
       }
 
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'placement' does not exist on type 'Reado... Remove this comment to see the full error message
       const { placement } = this.state
 
       if (this.props.withArrow) {
@@ -674,6 +804,7 @@ class Popover extends Component {
         viewProps = {
           ...viewProps,
           // TODO: remove background override after contextview is updated
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '"default" | "inverse"' is not assignable to ... Remove this comment to see the full error message
           background: color === 'primary' ? 'default' : 'inverse',
           placement:
             this.props.dir === bidirectional.DIRECTION.rtl
@@ -684,6 +815,7 @@ class Popover extends Component {
         ViewElement = View
         viewProps = {
           ...viewProps,
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ borderWidth: string; borderRadius: string;... Remove this comment to see the full error message
           borderWidth: 'small',
           borderRadius: 'medium'
         }
@@ -693,10 +825,13 @@ class Popover extends Component {
         viewProps = {
           ...viewProps,
           // Because of a11y reasons popovers should not be hidden when hovered over
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ onMouseOver: any; onMouseOut: any; ref: (c... Remove this comment to see the full error message
           onMouseOver: this._handleMouseOver,
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOut' does not exist on type ... Remove this comment to see the full error message
           onMouseOut: this._handleMouseOut
         }
       }
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       return <ViewElement {...viewProps}>{content}</ViewElement>
     } else {
       return null

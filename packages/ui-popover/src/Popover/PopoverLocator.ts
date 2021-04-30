@@ -23,6 +23,7 @@
  */
 
 import { locator } from '@instructure/ui-test-locator'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { PositionLocator } from '@instructure/ui-position/es/Position/PositionLocator'
 
@@ -30,10 +31,14 @@ import { Popover } from './index'
 import { PopoverTriggerLocator } from './PopoverTriggerLocator'
 
 export const customMethods = {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findContent: (...args) => PositionLocator.findContent(...args),
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findPositionTarget: (...args) => PositionLocator.findTarget(...args),
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findTrigger: (...args) => PopoverTriggerLocator.find(...args)
 }
 
 export { PopoverTriggerLocator }
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const PopoverLocator = locator(Popover.selector, customMethods)
