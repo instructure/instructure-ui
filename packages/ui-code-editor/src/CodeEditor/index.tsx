@@ -37,6 +37,29 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import CodeMirror from './codemirror'
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  label: string
+  language?:
+    | 'sh'
+    | 'js'
+    | 'json'
+    | 'javascript'
+    | 'jsx'
+    | 'shell'
+    | 'css'
+    | 'html'
+    | 'markdown'
+    | 'yaml'
+    | 'yml'
+    | 'bash'
+  readOnly?: boolean
+  onChange?: (...args: any[]) => any
+  options?: any
+  attachment?: 'bottom' | 'top'
+  value?: string
+}
 
 /**
 ---
@@ -46,7 +69,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class CodeEditor extends Component {
+class CodeEditor extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -83,26 +106,34 @@ class CodeEditor extends Component {
     options: {
       styleActiveLine: true
     },
-    onChange: (value) => {},
+    onChange: () => {},
     attachment: undefined,
     value: undefined
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   constructor(props) {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     super()
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'CodeEditor'... Remove this comment to see the full error message
     this._id = uid('CodeEditor')
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'codeMirror' does not exist on type 'Code... Remove this comment to see the full error message
     if (this.codeMirror) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'codeMirror' does not exist on type 'Code... Remove this comment to see the full error message
       this.codeMirror.focus()
     }
   }
@@ -145,17 +176,23 @@ class CodeEditor extends Component {
     return (
       <div css={styles.codeEditor}>
         <Global styles={styles.globalStyles} />
+        {/* @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'CodeEditor'... Remove this comment to see the full error message */}
         <label htmlFor={this._id}>
           <ScreenReaderContent>{label}</ScreenReaderContent>
           <CodeMirror
             {...passthroughProps(rest)}
+            // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'CodeEditor'... Remove this comment to see the full error message
             id={this._id}
             options={this.options}
+            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             value={value}
+            // @ts-expect-error ts-migrate(6133) FIXME: 'editor' is declared but its value is never read.
             onBeforeChange={(editor, data, value) => {
+              // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
               onChange(value)
             }}
             ref={(el) => {
+              // @ts-expect-error ts-migrate(2339) FIXME: Property 'codeMirror' does not exist on type 'Code... Remove this comment to see the full error message
               this.codeMirror = el
             }}
           />
