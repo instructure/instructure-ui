@@ -78,13 +78,17 @@ import { jsonToMediaQuery } from './jsonToMediaQuery'
  * @returns {function} remove() function to call to remove the listener
  */
 function addMediaQueryMatchListener(
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
   query,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   el,
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'cb' implicitly has an 'any' type.
   cb,
   matchMedia = defaultMatchMedia
 ) {
   const node = typeof el === 'function' ? el() : el
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'mediaQueryLists' implicitly has an 'any... Remove this comment to see the full error message
   const updateMediaMatches = (mediaQueryLists) => {
     const matches = Object.keys(mediaQueryLists)
       .filter((key) => mediaQueryLists[key].matches)
@@ -101,7 +105,9 @@ function addMediaQueryMatchListener(
 
   Object.keys(query).forEach((key) => {
     const mediaQueryList = matchMedia(jsonToMediaQuery(query[key], node), node)
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'addListener' does not exist on type 'Obj... Remove this comment to see the full error message
     mediaQueryList.addListener(listenerCallback)
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     mediaQueryLists[key] = mediaQueryList
   })
   updateMediaMatches(mediaQueryLists)
@@ -110,6 +116,7 @@ function addMediaQueryMatchListener(
     remove() {
       if (mediaQueryLists) {
         Object.keys(mediaQueryLists).forEach((key) => {
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           mediaQueryLists[key].removeListener(listenerCallback)
         })
       }

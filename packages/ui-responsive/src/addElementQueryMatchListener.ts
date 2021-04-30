@@ -81,13 +81,18 @@ import { debounce } from '@instructure/debounce'
  * matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
 function addElementQueryMatchListener(query, el, cb) {
   const node = typeof el === 'function' ? el() : el
+  // @ts-expect-error ts-migrate(2339) FIXME: Property 'width' does not exist on type '{}'.
   const { width, height } = getBoundingClientRect(node)
 
+  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'matches' implicitly has type 'any[]' in ... Remove this comment to see the full error message
   let matches = []
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'size' implicitly has an 'any' type.
   const update = (size) => {
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
     const newMatches = updateElementMatches(query, node, matches, size)
     if (newMatches) {
       matches = newMatches
@@ -97,7 +102,7 @@ function addElementQueryMatchListener(query, el, cb) {
 
   const debounced = debounce(update, 100, { leading: false, trailing: true })
   const elementResizeListener = new ResizeObserver((entries) => {
-    for (let entry of entries) {
+    for (const entry of entries) {
       const { width: newWidth, height: newHeight } = entry.contentRect
 
       if (width !== newWidth) {
@@ -117,17 +122,20 @@ function addElementQueryMatchListener(query, el, cb) {
       }
 
       if (debounced) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'cancel' does not exist on type 'Function... Remove this comment to see the full error message
         debounced.cancel()
       }
     }
   }
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
 function updateElementMatches(query, el, matches = [], size) {
   const node = findDOMNode(el)
   const { width, height } = size || getBoundingClientRect(node)
   const matchingQueries = parseQuery(query, node)({ width, height })
   const newMatches = Object.keys(matchingQueries)
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     .filter((key) => matchingQueries[key])
     .map((key) => key)
 

@@ -39,7 +39,9 @@ import { px } from '@instructure/ui-utils'
  *  and returns an object consisting of query names and boolean
  *  true false if it matches
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
 function parseQuery(query, el) {
+  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'rules' implicitly has type 'any[]' in so... Remove this comment to see the full error message
   const rules = []
 
   Object.keys(query).forEach((selectorName) => {
@@ -55,11 +57,14 @@ function parseQuery(query, el) {
     ])
   })
 
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'width' implicitly has an 'any' ty... Remove this comment to see the full error message
   return function ({ width, height }) {
     const selectorMap = {}
 
+    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'rules' implicitly has an 'any[]' type.
     rules.forEach((rule) => {
       const [selectorName, { minWidth, maxWidth, minHeight, maxHeight }] = rule
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       selectorMap[selectorName] =
         minWidth <= width &&
         width <= maxWidth &&

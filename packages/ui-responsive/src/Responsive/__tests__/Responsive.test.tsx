@@ -29,9 +29,13 @@ import { deepEqual } from '@instructure/ui-utils'
 
 import { Responsive } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Responsive />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call render with the correct matches', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive
@@ -55,13 +59,16 @@ describe('<Responsive />', async () => {
     ])
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide correct props for a given breakpoint', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },
       medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
       large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive
@@ -82,13 +89,16 @@ describe('<Responsive />', async () => {
     expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should merge props correctly when more than one breakpoint is applied', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },
       medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
       large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Responsive
         props={props}
@@ -112,8 +122,11 @@ describe('<Responsive />', async () => {
     ).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive
@@ -130,6 +143,7 @@ describe('<Responsive />', async () => {
             medium: { maxWidth: 300 },
             large: { minWidth: 800 }
           }}
+          // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
           render={(props, matches) => {
             return <div>hello</div>
           }}
@@ -145,8 +159,11 @@ describe('<Responsive />', async () => {
     expect(consoleError).to.be.calledWith(warning)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call render prop only once', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive

@@ -36,12 +36,21 @@ import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
 import { findDOMNode } from '@instructure/ui-dom-utils'
 
+type Props = {
+  query: any // TODO: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
+  match?: 'element' | 'media'
+  props?: {
+    [key: string]: any
+  }
+  render?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components
 ---
 **/
-class Responsive extends Component {
+class Responsive extends Component<Props> {
   static propTypes = {
     /**
      * Specifies if the `<Responsive />` component should use element or media queries
@@ -52,6 +61,7 @@ class Responsive extends Component {
      * with keys representing the breakpoint condition and values representing a breakpoint value as a
      * string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}`
      */
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '(props: any, propName: any, comp... Remove this comment to see the full error message
     query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
     /**
      * Consists of an object where the keys match the breakpoint names used in the query. The values
@@ -87,6 +97,7 @@ class Responsive extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       this.props.render || this.props.children,
       `[Responsive] must have either a \`render\` prop or \`children\` prop.`
@@ -96,6 +107,7 @@ class Responsive extends Component {
       // Because Responsive renders an empty div initially, it always needs to
       // re-render with the children provided. If there are no matches the match
       // listener won't trigger an update, so we handle this update explicitly.
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 4 arguments, but got 2.
       const initialMatches = updateElementMatches(this.props.query, this) || []
       this.setState({
         matches: initialMatches,
@@ -104,6 +116,7 @@ class Responsive extends Component {
     } else {
       this.setState({ hasRendered: true })
     }
+    // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
     this._matchListener = this.addMatchListener(
       this.props.query,
       this.updateMatches
@@ -114,11 +127,13 @@ class Responsive extends Component {
     this.removeMatchListener()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
     const { match, query } = this.props
 
     if (match !== prevProps.match || !deepEqual(query, prevProps.query)) {
       this.removeMatchListener()
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
       this._matchListener = this.addMatchListener(
         query,
         this.updateMatches,
@@ -127,6 +142,7 @@ class Responsive extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
   addMatchListener(query, updateMatches, match = this.props.match) {
     const matchListener =
       match === 'element'
@@ -138,10 +154,12 @@ class Responsive extends Component {
 
   removeMatchListener() {
     if (this._matchListener) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._matchListener.remove()
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'matches' implicitly has an 'any' type.
   updateMatches = (matches, cb) => {
     this.setState({ matches }, () => {
       if (typeof cb === 'function') {
@@ -150,13 +168,15 @@ class Responsive extends Component {
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'matches' implicitly has an 'any' type.
   mergeProps(matches, props) {
     if (!props) {
       return null
     }
 
-    let mergedProps = {}
+    const mergedProps = {}
 
+    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'match' implicitly has an 'any' type.
     matches.forEach((match) => {
       const matchProps = props[match]
 
@@ -165,14 +185,19 @@ class Responsive extends Component {
       // multiple breakpoints, and more than one of those breakpoints is being
       // currently applied so we log an error.
       Object.keys(matchProps).forEach((prop) => {
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+        const currentValue = mergedProps[prop]
+
+        // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
         error(
           !(prop in mergedProps),
           [
             `[Responsive] The prop \`${prop}\` is defined at 2 or more breakpoints`,
-            `which are currently applied at the same time. Its current value, \`${mergedProps[prop]}\`,`,
+            `which are currently applied at the same time. Its current value, \`${currentValue}\`,`,
             `will be overwritten as \`${matchProps[prop]}\`.`
           ].join(' ')
         )
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         mergedProps[prop] = matchProps[prop]
       })
     })
@@ -194,6 +219,7 @@ class Responsive extends Component {
     }
     return (
       <div>
+        {/* @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable. */}
         {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
       </div>
     )

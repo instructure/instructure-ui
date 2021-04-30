@@ -47,6 +47,7 @@ import { px } from '@instructure/ui-utils'
  *  passed to the pixel conversion if the unit type is `em`
  * @returns {string} media query string
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
 function jsonToMediaQuery(query, el) {
   // Ensure the query is of the correct form
   const keys = Object.keys(query)
@@ -78,6 +79,7 @@ function jsonToMediaQuery(query, el) {
   return `(${hyphenateQueryKey(key.toLowerCase())}: ${px(value, el)}px)`
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'key' implicitly has an 'any' type.
 function hyphenateQueryKey(key) {
   return key.slice(0, 3) + '-' + key.slice(3)
 }

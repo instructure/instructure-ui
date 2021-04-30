@@ -52,8 +52,10 @@ const ResponsivePropTypes = {
    * @param {string} componentName - name of the component
    * @returns {Error} if prop is an invalid query
    */
+  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   validQuery(props, propName, componentName) {
     try {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       jsonToMediaQuery(props[propName])
     } catch (e) {
       return new Error(
