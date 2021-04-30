@@ -24,6 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import ReactDOM from 'react-dom'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
@@ -33,6 +34,16 @@ import { shallowEqual } from '@instructure/ui-utils'
 
 /* istanbul ignore file */
 
+type Props = {
+  open?: boolean
+  onOpen?: (...args: any[]) => any
+  onClose?: (...args: any[]) => any
+  mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
+  insertAt?: 'bottom' | 'top'
+  elementRef?: (...args: any[]) => any
+  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
+
 /**
 ---
 private: true
@@ -40,7 +51,7 @@ private: true
 @module SubtreePortal
 **/
 @bidirectional()
-class SubtreePortal extends Component {
+class SubtreePortal extends Component<Props> {
   static propTypes = {
     /**
      * Wheter or not the `<Portal />` is open
@@ -82,10 +93,12 @@ class SubtreePortal extends Component {
   static defaultProps = {
     open: false,
     insertAt: 'bottom',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'DOMNode' is declared but its value is never read.
     onOpen: (DOMNode) => {},
     onClose: () => {},
     mountNode: null,
     children: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {}
   }
 
@@ -93,12 +106,14 @@ class SubtreePortal extends Component {
     this.renderPortal(this.props)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
   shouldComponentUpdate(nextProps, nextState) {
     return !(
       shallowEqual(this.props, nextProps) && shallowEqual(this.state, nextState)
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentWillReceiveProps(nextProps) {
     this.renderPortal(nextProps)
   }
@@ -111,6 +126,7 @@ class SubtreePortal extends Component {
     return null
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   renderPortal(props) {
     const {
       open,
@@ -139,9 +155,11 @@ class SubtreePortal extends Component {
         const node = document.createElement('span')
         const attributes = {
           ...passthroughProps(passThroughProps),
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'dir' does not exist on type 'SubtreePort... Remove this comment to see the full error message
           dir: this.dir
         }
         Object.keys(attributes).forEach((name) => {
+          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           node.setAttribute(name, attributes[name])
         })
         elementRef(node)
@@ -179,6 +197,7 @@ class SubtreePortal extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   removePortal(props) {
     let unmounted
 
@@ -187,6 +206,7 @@ class SubtreePortal extends Component {
       this.DOMNode.parentNode &&
         this.DOMNode.parentNode.removeChild(this.DOMNode)
       this.DOMNode = null
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       this.props.elementRef(this.DOMNode)
     }
 
@@ -212,10 +232,12 @@ class SubtreePortal extends Component {
   }
 
   get DOMNode() {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_node' does not exist on type 'SubtreePo... Remove this comment to see the full error message
     return this._node
   }
 
   set DOMNode(el) {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_node' does not exist on type 'SubtreePo... Remove this comment to see the full error message
     this._node = el
   }
 

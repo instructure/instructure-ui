@@ -24,6 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import ReactDOM from 'react-dom'
 
 import { element } from '@instructure/ui-prop-types'
@@ -33,13 +34,22 @@ import { SubtreePortal } from './SubtreePortal'
 
 const IS_CREATE_PORTAL_SUPPORTED = typeof ReactDOM.createPortal === 'function'
 
+type Props = {
+  open?: boolean
+  onOpen?: (...args: any[]) => any
+  onClose?: (...args: any[]) => any
+  mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
+  insertAt?: 'bottom' | 'top'
+  elementRef?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components/utilities
 ---
 @module Portal
 **/
-class Portal extends Component {
+class Portal extends Component<Props> {
   static propTypes = {
     /**
      * Wheter or not the `<Portal />` is open
@@ -79,15 +89,19 @@ class Portal extends Component {
   static defaultProps = {
     open: false,
     insertAt: 'bottom',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'DOMNode' is declared but its value is never read.
     onOpen: (DOMNode) => {},
     onClose: () => {},
     mountNode: null,
     children: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {}
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     if (el) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'Portal'... Remove this comment to see the full error message
       this.DOMNode = el
       if (typeof this.props.elementRef === 'function') {
         this.props.elementRef(el)
