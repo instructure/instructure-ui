@@ -21,19 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-/* eslint-disable no-restricted-imports */
-import { CalendarLocator } from '@instructure/ui-calendar/es/Calendar/CalendarLocator'
-import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
-/* eslint-enable no-restricted-imports */
-
-import { DateInput } from './index'
-
-export const DateInputLocator = locator(DateInput.selector, {
-  findInput: (...args) => locator('input').find(...args),
-  findCalendar: async (element, ...args) => {
-    const content = await PopoverLocator.findContent(element, ...args)
-    return content ? CalendarLocator.find(content.getDOMNode()) : null
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+// @ts-expect-error ts-migrate(6133) FIXME: 'componentTheme' is declared but its value is neve... Remove this comment to see the full error message
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    dateInput: {
+      label: 'dateInput',
+      display: 'inline-block'
+    },
+    assistiveText: {
+      label: 'dateInput__assistiveText',
+      display: 'none'
+    }
   }
-})
+}
+
+export default generateStyle

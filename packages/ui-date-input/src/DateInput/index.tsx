@@ -50,6 +50,38 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderLabel: React.ReactNode | ((...args: any[]) => any)
+  value?: any // TODO: controllable(PropTypes.string)
+  size?: 'small' | 'medium' | 'large'
+  placeholder?: string
+  onChange?: (...args: any[]) => any
+  onBlur?: (...args: any[]) => any
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  isRequired?: boolean
+  isInline?: boolean
+  assistiveText?: string
+  layout?: 'stacked' | 'inline'
+  width?: string
+  inputRef?: (...args: any[]) => any
+  messages?: any[] // TODO: FormPropTypes.message
+  placement?: any // TODO: PositionPropTypes.placement
+  isShowingCalendar?: boolean
+  onRequestValidateDate?: (...args: any[]) => any
+  onRequestShowCalendar?: (...args: any[]) => any
+  onRequestHideCalendar?: (...args: any[]) => any
+  onRequestSelectNextDay?: (...args: any[]) => any
+  onRequestSelectPrevDay?: (...args: any[]) => any
+  onRequestRenderNextMonth?: (...args: any[]) => any
+  onRequestRenderPrevMonth?: (...args: any[]) => any
+  renderNavigationLabel?: ((...args: any[]) => any) | React.ReactNode
+  renderWeekdayLabels: (((...args: any[]) => any) | React.ReactNode)[]
+  renderNextMonthButton?: ((...args: any[]) => any) | React.ReactNode
+  renderPrevMonthButton?: ((...args: any[]) => any) | React.ReactNode
+}
+
 /**
 ---
 category: components
@@ -57,7 +89,7 @@ category: components
 **/
 @withStyle(generateStyle, null)
 @testable()
-class DateInput extends Component {
+class DateInput extends Component<Props> {
   static Day = Calendar.Day
 
   static propTypes = {
@@ -228,7 +260,9 @@ class DateInput extends Component {
     value: '',
     size: 'medium',
     placeholder: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onChange: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: (event) => {},
     // Leave interaction default undefined so that `disabled` and `readOnly` can also be supplied
     interaction: undefined,
@@ -237,16 +271,24 @@ class DateInput extends Component {
     assistiveText: undefined,
     layout: 'stacked',
     width: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     inputRef: (el) => {},
     messages: undefined,
     placement: 'bottom center',
     isShowingCalendar: false,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestValidateDate: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestShowCalendar: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestHideCalendar: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestSelectNextDay: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestSelectPrevDay: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestRenderNextMonth: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onRequestRenderPrevMonth: (event) => {},
     renderNavigationLabel: null,
     renderNextMonthButton: null,
@@ -255,10 +297,13 @@ class DateInput extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -272,6 +317,7 @@ class DateInput extends Component {
     let selectedDateId
 
     Children.toArray(this.props.children).forEach((day) => {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
       const { date, isSelected } = day.props
       if (isSelected) selectedDateId = this.formatDateId(date)
     })
@@ -280,15 +326,18 @@ class DateInput extends Component {
   }
 
   get interaction() {
+    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'date' implicitly has an 'any' type.
   formatDateId = (date) => {
     // ISO8601 strings may contain a space. Remove any spaces before using the
     // date as the id.
     return date.replace(/\s/g, '')
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleInputRef = (el) => {
     const { inputRef } = this.props
     const { hasInputRef } = this.state
@@ -300,33 +349,44 @@ class DateInput extends Component {
     }
 
     this._input = el
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     inputRef(el)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleInputChange = (event, value) => {
     const { onChange } = this.props
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onChange(event, { value })
     this.handleShowCalendar(event)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleShowCalendar = (event) => {
     const { onRequestShowCalendar } = this.props
     const { interaction } = this
 
     if (interaction === 'enabled') {
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       onRequestShowCalendar(event)
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleHideCalendar = (event) => {
     const { onRequestHideCalendar, onRequestValidateDate } = this.props
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onRequestValidateDate(event)
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     onRequestHideCalendar(event)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleHighlightOption = (event, { direction }) => {
     const { onRequestSelectNextDay, onRequestSelectPrevDay } = this.props
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     if (direction === -1) onRequestSelectPrevDay(event)
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     if (direction === 1) onRequestSelectNextDay(event)
   }
 
@@ -337,10 +397,12 @@ class DateInput extends Component {
     return button && safeCloneElement(callRenderProp(button), { tabIndex: -1 })
   }
 
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getOptionProps' implicitly has an... Remove this comment to see the full error message
   renderDays({ getOptionProps }) {
     const { children } = this.props
 
     return Children.map(children, (day) => {
+      // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
       const { date, isOutsideMonth } = day.props
 
       let props = { tabIndex: -1, id: this.formatDateId(date) }
@@ -358,6 +420,7 @@ class DateInput extends Component {
     })
   }
 
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getListProps' implicitly has an '... Remove this comment to see the full error message
   renderCalendar({ getListProps, getOptionProps }) {
     const {
       onRequestRenderNextMonth,
@@ -382,6 +445,7 @@ class DateInput extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getInputProps' implicitly has an ... Remove this comment to see the full error message
   renderInput({ getInputProps, getTriggerProps }) {
     const {
       renderLabel,
@@ -451,11 +515,17 @@ class DateInput extends Component {
         highlightedOptionId={selectedDateId}
       >
         {({
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getRootProps' implicitly has an '... Remove this comment to see the full error message
           getRootProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getInputProps' implicitly has an ... Remove this comment to see the full error message
           getInputProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getTriggerProps' implicitly has a... Remove this comment to see the full error message
           getTriggerProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getListProps' implicitly has an '... Remove this comment to see the full error message
           getListProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getOptionProps' implicitly has an... Remove this comment to see the full error message
           getOptionProps,
+          // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getDescriptionProps' implicitly h... Remove this comment to see the full error message
           getDescriptionProps
         }) => (
           <span {...getRootProps({ css: styles.dateInput })}>

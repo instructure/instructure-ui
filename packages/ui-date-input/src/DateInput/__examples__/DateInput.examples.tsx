@@ -34,6 +34,7 @@ const generateDays = () => {
       <Calendar.Day
         date={date.toISOString()}
         label={date.toISOString()}
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         renderLabel={date.toISOString()}
         isOutsideMonth={date.getMonth() !== 7}
         id={date.toISOString()}
@@ -57,6 +58,7 @@ export default {
       'top center'
     ]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       children: generateDays(),
@@ -70,6 +72,7 @@ export default {
       renderWeekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return props.isShowingCalendar
       ? {
@@ -82,6 +85,7 @@ export default {
         }
       : {}
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true
