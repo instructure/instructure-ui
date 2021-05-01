@@ -84,7 +84,6 @@ import { debounce } from '@instructure/debounce'
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
 function addElementQueryMatchListener(query, el, cb) {
   const node = typeof el === 'function' ? el() : el
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'width' does not exist on type '{}'.
   const { width, height } = getBoundingClientRect(node)
 
   // @ts-expect-error ts-migrate(7034) FIXME: Variable 'matches' implicitly has type 'any[]' in ... Remove this comment to see the full error message

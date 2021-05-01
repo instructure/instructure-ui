@@ -68,6 +68,7 @@ function scopeTab(element, event, onLeavingFinalTabbable) {
 
   event.preventDefault()
   const target = tabbable[event.shiftKey ? tabbable.length - 1 : 0]
+  //@ts-expect-error FIXME:
   target.focus()
 }
 

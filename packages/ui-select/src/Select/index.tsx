@@ -448,7 +448,6 @@ class Select extends Component<Props> {
       const listItem = option.parentNode
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
       const parentTop = getBoundingClientRect(this._listView).top
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
       const elemTop = getBoundingClientRect(listItem).top
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_listView' does not exist on type 'Selec... Remove this comment to see the full error message
       const parentBottom = parentTop + this._listView.clientHeight

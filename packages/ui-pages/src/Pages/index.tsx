@@ -185,6 +185,7 @@ class Pages extends Component<Props> {
           const tabbable = findTabbable(this._contentElement)
           const element = tabbable && tabbable[0]
 
+          // @ts-expect-error ts-migrate(2554) FIXME:
           element && element.focus()
         }
       })

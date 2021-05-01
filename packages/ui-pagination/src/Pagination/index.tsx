@@ -202,6 +202,7 @@ class Pagination extends Component<Props> {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const focusable = findTabbable(this._root)
       const focusIndex = prevButtonFocused ? 0 : focusable.length - 1
+      // @ts-expect-error ts-migrate(2554) FIXME:
       focusable[focusIndex].focus()
     }
   }

@@ -105,7 +105,6 @@ function addMediaQueryMatchListener(
 
   Object.keys(query).forEach((key) => {
     const mediaQueryList = matchMedia(jsonToMediaQuery(query[key], node), node)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'addListener' does not exist on type 'Obj... Remove this comment to see the full error message
     mediaQueryList.addListener(listenerCallback)
     // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     mediaQueryLists[key] = mediaQueryList

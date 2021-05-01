@@ -208,7 +208,6 @@ class PositionedElement {
     // documentElement should be calculated appropriately.
     // Otherwise we need to explictly account for that offset
     let offsetY =
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
       parents.length > 1 ? 0 : getBoundingClientRect(doc.documentElement).top
     let offsetX = 0
     let scrollY = 0
@@ -217,16 +216,12 @@ class PositionedElement {
       const parent = getBoundingClientRect(parents[i])
       const child = getBoundingClientRect(parents[i - 1])
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
       offsetY = offsetY + (child.top - parent.top)
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'left' does not exist on type 'object'.
       offsetX = offsetX + (child.left - parent.left)
 
       if (parents[i] === doc.body) {
         // accounts for any margin on body
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
         offsetY = offsetY + parent.top
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'left' does not exist on type 'object'.
         offsetX = offsetX + parent.left
       }
 
@@ -335,12 +330,9 @@ class PositionData {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'target' does not exist on type 'Position... Remove this comment to see the full error message
     let { left, top } = addOffsets([this.target.position, this.offset])
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'matchMedia' does not exist on type 'Obje... Remove this comment to see the full error message
     if (canUseDOM && win.matchMedia) {
       const retina =
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'matchMedia' does not exist on type 'Obje... Remove this comment to see the full error message
         win.matchMedia('only screen and (min-resolution: 1.3dppx)').matches ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'matchMedia' does not exist on type 'Obje... Remove this comment to see the full error message
         win.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)')
           .matches
       if (!retina) {
@@ -443,22 +435,16 @@ class PositionData {
       element === parentWindow
         ? elementBounds
         : {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
             top: windowBounds.top + elementBounds.top,
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
             bottom: elementBounds.top + elementBounds.height,
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'left' does not exist on type 'object'.
             left: windowBounds.left + elementBounds.left,
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'left' does not exist on type 'object'.
             right: elementBounds.left + elementBounds.width
           }
 
     return {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'top' does not exist on type 'object'.
       top: top < bounds.top ? bounds.top - top : 0,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'bottom' does not exist on type 'object'.
       bottom: bottom > bounds.bottom ? bottom - bounds.bottom : 0,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'left' does not exist on type 'object'.
       left: left < bounds.left ? bounds.left - left : 0,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'right' does not exist on type 'object'.
       right: right > bounds.right ? right - bounds.right : 0
