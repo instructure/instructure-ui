@@ -30,6 +30,25 @@ import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
+type Props = {
+  as?: React.ReactElement | keyof HTMLElementTagNameMap
+  display?: 'auto' | 'block' | 'inline-block'
+  label?: string
+  open?: boolean
+  onBlur?: (...args: any[]) => any
+  onDismiss?: (...args: any[]) => any
+  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  contentElement?: React.ReactElement | ((...args: any[]) => any)
+  liveRegion?:
+    | React.ReactElement[]
+    | React.ReactElement
+    | ((...args: any[]) => any)
+  shouldContainFocus?: boolean | ('keyboard' | 'screenreader')
+  shouldReturnFocus?: boolean
+  shouldCloseOnDocumentClick?: boolean
+  shouldCloseOnEscape?: boolean
+  shouldFocusOnOpen?: boolean
+}
 
 /**
 ---
@@ -38,7 +57,7 @@ category: components/utilities
 @module Dialog
 **/
 
-class Dialog extends Component {
+class Dialog extends Component<Props> {
   static propTypes = {
     /**
      * The children to be rendered within the `<Dialog />`
@@ -112,7 +131,9 @@ class Dialog extends Component {
     defaultFocusElement: null,
     contentElement: null,
     liveRegion: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onDismiss: (event) => {}
   }
 
@@ -125,6 +146,7 @@ class Dialog extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
     const { open } = this.props
 
@@ -135,6 +157,7 @@ class Dialog extends Component {
     }
 
     if (this._focusRegion) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._focusRegion.updateElement(this.contentElement)
     }
   }
@@ -144,6 +167,7 @@ class Dialog extends Component {
       this.close()
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'cancel' does not exist on type 'never'.
     this._raf.forEach((request) => request.cancel())
     this._raf = []
   }
@@ -152,7 +176,9 @@ class Dialog extends Component {
     const { open, contentElement, ...options } = this.props
 
     this._raf.push(
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ cancel: () => void; }' is not ... Remove this comment to see the full error message
       requestAnimationFrame(() => {
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'FocusRegion' is not assignable to type 'null... Remove this comment to see the full error message
         this._focusRegion = FocusRegionManager.activateRegion(
           this.contentElement,
           {
@@ -165,23 +191,27 @@ class Dialog extends Component {
 
   close() {
     if (this._focusRegion) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       FocusRegionManager.blurRegion(this.contentElement, this._focusRegion.id)
     }
   }
 
   focus() {
     if (!this.props.open || !this.contentElement) {
+      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(false, "[Dialog] Can't focus a Dialog that isn't open.")
       return
     }
 
     if (this._focusRegion) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       FocusRegionManager.focusRegion(this.contentElement, this._focusRegion.id)
     }
   }
 
   blur() {
     if (!this.props.open || !this.contentElement) {
+      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(false, "[Dialog] Can't blur a Dialog that isn't open.")
       return
     }
@@ -189,7 +219,9 @@ class Dialog extends Component {
     this.close()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   getRef = (el) => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'Dialog'.
     this._root = el
   }
 
@@ -197,6 +229,7 @@ class Dialog extends Component {
     let contentElement = findDOMNode(this.props.contentElement)
 
     if (!contentElement) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_root' does not exist on type 'Dialog'.
       contentElement = findDOMNode(this._root)
     }
 
@@ -207,18 +240,23 @@ class Dialog extends Component {
     return (
       this.contentElement &&
       this._focusRegion &&
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       FocusRegionManager.isFocused(this.contentElement, this._focusRegion.id)
     )
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(Dialog, this.props)
     return this.props.open ? (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; ref: (el: any) => voi... Remove this comment to see the full error message
       <ElementType
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, Dialog.propTypes)}
         ref={this.getRef}
         role={this.props.label ? 'dialog' : null}
         aria-label={this.props.label}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
         className={this.props.className} // eslint-disable-line react/prop-types
       >
         {this.props.children}
