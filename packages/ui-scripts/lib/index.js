@@ -32,7 +32,6 @@ readEnv()
 const commands = [
   '--publish',
   '--release',
-  '--fix-publish',
   '--post-publish',
   '--bump',
   '--deploy-docs',
@@ -87,8 +86,6 @@ if (process.argv.includes('open-sandbox')) {
   process.argv.includes('--release')
 ) {
   require('./publish')
-} else if (process.argv.includes('--fix-publish')) {
-  require('./fix-publish')
 } else if (process.argv.includes('--deploy-docs')) {
   require('./deploy-docs')
 } else if (process.argv.includes('--deploy-docs-via-github')) {

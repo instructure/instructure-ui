@@ -34,7 +34,14 @@ export default {
       renderLabel: 'A number input'
     }
   },
-  excludeProps: ['required', 'readOnly', 'disabled', 'label', 'inline'],
+  excludeProps: [
+    'required',
+    'readOnly',
+    'disabled',
+    'label',
+    'inline',
+    'inputMode'
+  ],
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true

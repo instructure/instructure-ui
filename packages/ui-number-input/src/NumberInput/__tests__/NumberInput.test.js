@@ -329,6 +329,15 @@ describe('<NumberInput />', () => {
     expect(event.preventDefault).not.to.have.been.called()
   })
 
+  it('puts inputMode prop to input', async () => {
+    await mount(<NumberInput inputMode="decimal" />)
+
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
+    expect(input.getAttribute('inputMode')).to.equal('decimal')
+  })
+
   describe('with generated examples', async () => {
     generateA11yTests(NumberInputExamples)
   })
