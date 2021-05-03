@@ -22,32 +22,24 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, typography, key: themeName } = theme
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'type' implicitly has an 'any' type.
+const generateText = (type) => `${type} message`
 
-  const themeSpecificStyle = {
-    canvas: {
-      color: theme['ic-brand-font-color-dark']
-    }
-  }
+export default function generateMessages(
+  types = ['hint', 'success', 'error'],
+  withEmptyMessage = true,
+  text = generateText
+) {
+  const messages = [
+    ...types.map((type) => {
+      return [
+        {
+          text: typeof text === 'function' ? text(type) : text,
+          type
+        }
+      ]
+    })
+  ]
 
-  const componentVariables = {
-    color: colors?.textDarkest,
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightBold,
-    fontSize: typography?.fontSizeMedium,
-    lineHeight: typography?.lineHeightFit
-  }
-
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
-  }
+  return withEmptyMessage ? [[], ...messages] : messages
 }
-
-export default generateComponentTheme

@@ -22,35 +22,35 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, typography, key: themeName } = theme
+import React from 'react'
 
-  const themeSpecificStyle = {
-    canvas: {
-      colorHint: theme['ic-brand-font-color-dark']
+import generateMessages from './generateMessages'
+
+export default {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    messages: generateMessages()
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      description: 'A form field group',
+      children: [
+        <input key="foo" type="text" />,
+        <input key="bar" type="text" />,
+        <input key="bar" type="text" />
+      ]
     }
-  }
-
-  const componentVariables = {
-    colorHint: colors?.textDarkest,
-    colorError: colors?.textDanger,
-    colorSuccess: colors?.textSuccess,
-
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
-    fontSize: typography?.fontSizeSmall,
-    lineHeight: typography?.lineHeight
-  }
-
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  filter: (props) => {
+    return (
+      props.vAlign ||
+      props.startAt ||
+      (props.layout === 'columns' && props.rowSpacing !== 'none') ||
+      (props.layout === 'rows' && props.colSpacing !== 'none') ||
+      (props.layout !== 'inline' && props.vAlign !== 'middle')
+    )
   }
 }
-
-export default generateComponentTheme

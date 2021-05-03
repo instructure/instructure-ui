@@ -26,80 +26,78 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps } from '@instructure/ui-react-utils'
-
+import { omitProps, getElementType } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
-
-import { FormPropTypes } from '../FormPropTypes'
-import { FormFieldMessage } from '../FormFieldMessage'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: React.ReactElement
+}
 
 /**
 ---
 parent: FormField
 ---
 
-A FormFieldMessages component
+This is a helper component that is used by most of the custom form
+components. In most cases it shouldn't be used directly.
 
 ```js
 ---
 example: true
 ---
-<FormFieldMessages messages={[
-  { text: 'Invalid name', type: 'error' },
-  { text: 'Good job!', type: 'success' },
-  { text: 'Full name, first and last', type: 'hint' },
-]} />
+<FormFieldLabel>Hello</FormFieldLabel>
 ```
+
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class FormFieldMessages extends Component {
+class FormFieldLabel extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    /**
-     * object with shape: `{
-     * text: PropTypes.string,
-     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-     *   }`
-     */
-    messages: PropTypes.arrayOf(FormPropTypes.message)
+    as: PropTypes.elementType,
+    children: PropTypes.node.isRequired
   }
 
   static defaultProps = {
-    messages: undefined
+    as: 'span'
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
-    const { messages, styles } = this.props
-    return messages && messages.length > 0 ? (
-      <span
-        css={styles.formFieldMessages}
-        {...omitProps(this.props, FormFieldMessages.propTypes)}
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+    const ElementType = getElementType(FormFieldLabel, this.props)
+
+    const { styles, children } = this.props
+
+    return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; css: any; }' is not a... Remove this comment to see the full error message
+      <ElementType
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+        {...omitProps(this.props, FormFieldLabel.propTypes)}
+        css={styles.formFieldLabel}
       >
-        {messages.map((msg, i) => {
-          return (
-            <span key={`error${i}`} css={styles.message}>
-              <FormFieldMessage variant={msg.type}>{msg.text}</FormFieldMessage>
-            </span>
-          )
-        })}
-      </span>
-    ) : null
+        {children}
+      </ElementType>
+    )
   }
 }
 
-export default FormFieldMessages
-export { FormFieldMessages }
+export default FormFieldLabel
+export { FormFieldLabel }

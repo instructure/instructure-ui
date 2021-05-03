@@ -22,40 +22,24 @@
  * SOFTWARE.
  */
 
-/**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (componentTheme, props, state) => {
-  const { inline } = props
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'type' implicitly has an 'any' type.
+const generateText = (type) => `${type} message`
 
-  return {
-    formFieldLayout: {
-      label: 'formFieldLayout',
-      all: 'initial',
-      border: '0',
-      padding: '0',
-      margin: '0',
-      minWidth: '0',
-      direction: 'inherit',
-      textAlign: 'start',
-      opacity: 'inherit',
-      display: 'block',
-      width: '100%',
+export default function generateMessages(
+  types = ['hint', 'success', 'error'],
+  withEmptyMessage = true,
+  text = generateText
+) {
+  const messages = [
+    ...types.map((type) => {
+      return [
+        {
+          text: typeof text === 'function' ? text(type) : text,
+          type
+        }
+      ]
+    })
+  ]
 
-      ...(inline && {
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        width: 'auto'
-      })
-    }
-  }
+  return withEmptyMessage ? [[], ...messages] : messages
 }
-
-export default generateStyle

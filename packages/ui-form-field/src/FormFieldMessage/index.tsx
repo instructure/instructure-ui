@@ -26,11 +26,18 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+
 import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  variant?: 'error' | 'hint' | 'success' | 'screenreader-only'
+}
 
 /**
 ---
@@ -44,48 +51,46 @@ components. In most cases it shouldn't be used directly.
 ---
 example: true
 ---
-<FormFieldLabel>Hello</FormFieldLabel>
+<FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
-
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class FormFieldLabel extends Component {
+class FormFieldMessage extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    as: PropTypes.elementType,
-    children: PropTypes.node.isRequired
+    variant: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only']),
+    children: PropTypes.node
   }
 
   static defaultProps = {
-    as: 'span'
+    variant: 'hint',
+    children: null
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
-    const ElementType = getElementType(FormFieldLabel, this.props)
+    const { children, styles } = this.props
 
-    const { styles, children } = this.props
-
-    return (
-      <ElementType
-        {...omitProps(this.props, FormFieldLabel.propTypes)}
-        css={styles.formFieldLabel}
-      >
-        {children}
-      </ElementType>
+    return this.props.variant !== 'screenreader-only' ? (
+      <span css={styles.formFieldMessage}>{children}</span>
+    ) : (
+      <ScreenReaderContent>{children}</ScreenReaderContent>
     )
   }
 }
 
-export default FormFieldLabel
-export { FormFieldLabel }
+export default FormFieldMessage
+export { FormFieldMessage }

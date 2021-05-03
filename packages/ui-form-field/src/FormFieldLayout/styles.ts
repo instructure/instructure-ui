@@ -23,29 +23,40 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme) => {
-  const { borders, colors, spacing, key: themeName } = theme
-
-  const themeSpecificStyle = {}
-
-  const componentVariables = {
-    borderWidth: borders?.widthSmall,
-    borderStyle: borders?.style,
-    borderColor: 'transparent',
-    borderRadius: borders?.radiusMedium,
-
-    errorBorderColor: colors?.borderDanger,
-    errorFieldsPadding: spacing?.xSmall
-  }
+// @ts-expect-error ts-migrate(6133) FIXME: 'componentTheme' is declared but its value is neve... Remove this comment to see the full error message
+const generateStyle = (componentTheme, props, state) => {
+  const { inline } = props
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    formFieldLayout: {
+      label: 'formFieldLayout',
+      all: 'initial',
+      border: '0',
+      padding: '0',
+      margin: '0',
+      minWidth: '0',
+      direction: 'inherit',
+      textAlign: 'start',
+      opacity: 'inherit',
+      display: 'block',
+      width: '100%',
+
+      ...(inline && {
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        width: 'auto'
+      })
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

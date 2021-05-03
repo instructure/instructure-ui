@@ -22,33 +22,26 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { spacing, key: themeName } = theme
 
-import generateMessages from './generateMessages'
+  const themeSpecificStyle = {}
 
-export default {
-  sectionProp: 'layout',
-  maxExamplesPerPage: 50,
-  propValues: {
-    messages: generateMessages()
-  },
-  getComponentProps: (props) => {
-    return {
-      description: 'A form field group',
-      children: [
-        <input key="foo" type="text" />,
-        <input key="bar" type="text" />,
-        <input key="bar" type="text" />
-      ]
-    }
-  },
-  filter: (props) => {
-    return (
-      props.vAlign ||
-      props.startAt ||
-      (props.layout === 'columns' && props.rowSpacing !== 'none') ||
-      (props.layout === 'rows' && props.colSpacing !== 'none') ||
-      (props.layout !== 'inline' && props.vAlign !== 'middle')
-    )
+  const componentVariables = {
+    topMargin: spacing?.xxSmall
+  }
+
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
   }
 }
+
+export default generateComponentTheme

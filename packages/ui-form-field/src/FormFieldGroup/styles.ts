@@ -32,17 +32,28 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
+  const { disabled } = props
+  const { invalid } = state
+
   return {
-    formFieldMessages: {
-      label: 'formFieldMessages',
-      padding: 0,
+    formFieldGroup: {
+      label: 'formFieldGroup',
+      border: `${componentTheme.borderWidth} ${componentTheme.borderStyle} ${componentTheme.borderColor}`,
+      borderRadius: componentTheme.borderRadius,
       display: 'block',
-      margin: `calc(-1 * ${componentTheme.topMargin}) 0 0 0`
-    },
-    message: {
-      label: 'formFieldMessages__message',
-      display: 'block'
+
+      ...(invalid && {
+        borderColor: componentTheme.errorBorderColor,
+        padding: componentTheme.errorFieldsPadding
+      }),
+
+      ...(disabled && {
+        opacity: 0.6,
+        cursor: 'not-allowed',
+        pointerEvents: 'none'
+      })
     }
   }
 }

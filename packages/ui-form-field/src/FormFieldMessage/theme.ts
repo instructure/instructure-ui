@@ -22,23 +22,37 @@
  * SOFTWARE.
  */
 
-const generateText = (type) => `${type} message`
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, typography, key: themeName } = theme
 
-export default function generateMessages(
-  types = ['hint', 'success', 'error'],
-  withEmptyMessage = true,
-  text = generateText
-) {
-  const messages = [
-    ...types.map((type) => {
-      return [
-        {
-          text: typeof text === 'function' ? text(type) : text,
-          type
-        }
-      ]
-    })
-  ]
+  const themeSpecificStyle = {
+    canvas: {
+      colorHint: theme['ic-brand-font-color-dark']
+    }
+  }
 
-  return withEmptyMessage ? [[], ...messages] : messages
+  const componentVariables = {
+    colorHint: colors?.textDarkest,
+    colorError: colors?.textDanger,
+    colorSuccess: colors?.textSuccess,
+
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightNormal,
+    fontSize: typography?.fontSizeSmall,
+    lineHeight: typography?.lineHeight
+  }
+
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
+  }
 }
+
+export default generateComponentTheme

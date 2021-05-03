@@ -36,13 +36,28 @@ import { FormPropTypes } from '../FormPropTypes'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  description: React.ReactNode
+  as?: React.ReactElement
+  messages?: any[] // TODO: FormPropTypes.message
+  messagesId?: string
+  disabled?: boolean
+  layout?: 'stacked' | 'columns' | 'inline'
+  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
+  colSpacing?: 'none' | 'small' | 'medium' | 'large'
+  vAlign?: 'top' | 'middle' | 'bottom'
+  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
+}
+
 /**
 ---
 category: components
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class FormFieldGroup extends Component {
+class FormFieldGroup extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -87,10 +102,13 @@ class FormFieldGroup extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
@@ -111,6 +129,7 @@ class FormFieldGroup extends Component {
     return Children.map(this.props.children, (child, index) => {
       return child ? (
         <Grid.Col
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           width={child.props && child.props.width ? 'auto' : null}
           key={index}
         >
@@ -151,8 +170,11 @@ class FormFieldGroup extends Component {
 
     return (
       <FormFieldLayout
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(props, FormFieldGroup.propTypes)}
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(props, FormFieldLayout.propTypes)}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; vAlign: "top" | "middle... Remove this comment to see the full error message
         vAlign={props.vAlign}
         layout={props.layout === 'inline' ? 'inline' : 'stacked'}
         label={props.description}

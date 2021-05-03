@@ -30,12 +30,25 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { FormPropTypes } from '../FormPropTypes'
 import { FormFieldLayout } from '../FormFieldLayout'
 
+type Props = {
+  label: React.ReactNode
+  id: string
+  messages?: any[] // TODO: FormPropTypes.message
+  messagesId?: string
+  inline?: boolean
+  layout?: 'stacked' | 'inline'
+  labelAlign?: 'start' | 'end'
+  vAlign?: 'top' | 'middle' | 'bottom'
+  width?: string
+  inputContainerRef?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components
 ---
 **/
-class FormField extends Component {
+class FormField extends Component<Props> {
   static propTypes = {
     label: PropTypes.node.isRequired,
     /**
@@ -74,9 +87,12 @@ class FormField extends Component {
   render() {
     return (
       <FormFieldLayout
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, FormField.propTypes)}
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormFieldLayout.propTypes)}
         vAlign={this.props.vAlign}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'ReactElem... Remove this comment to see the full error message
         as="label"
         htmlFor={this.props.id}
       />

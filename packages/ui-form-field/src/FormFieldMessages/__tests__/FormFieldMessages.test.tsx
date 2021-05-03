@@ -27,7 +27,9 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { FormFieldMessages } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<FormFieldMessages />', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     const messages = [
       { text: 'Invalid name', type: 'error' },
@@ -35,6 +37,7 @@ describe('<FormFieldMessages />', () => {
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldMessages messages={messages} />)
 
     const formFieldMessages = within(subject.getDOMNode())
@@ -44,6 +47,7 @@ describe('<FormFieldMessages />', () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     const messages = [
       { text: 'Invalid name', type: 'error' },
@@ -51,6 +55,7 @@ describe('<FormFieldMessages />', () => {
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldMessages messages={messages} />)
 
     const formFieldMessages = within(subject.getDOMNode())

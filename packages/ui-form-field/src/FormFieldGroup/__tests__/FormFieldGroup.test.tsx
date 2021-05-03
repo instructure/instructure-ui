@@ -27,8 +27,11 @@ import { expect, mount, within, find } from '@instructure/ui-test-utils'
 
 import { FormFieldGroup } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<FormFieldGroup />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <FormFieldGroup description="Please enter your full name">
         <label>
@@ -47,6 +50,7 @@ describe('<FormFieldGroup />', async () => {
     expect(formFieldGroup).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('can handle null children', async () => {
     const children = [
       <label key="first">
@@ -55,6 +59,7 @@ describe('<FormFieldGroup />', async () => {
       null
     ]
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup description="Please enter your full name">
         {children}
@@ -65,9 +70,11 @@ describe('<FormFieldGroup />', async () => {
     expect(formFieldGroup).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('links the messages to the fieldset via aria-describedby', async () => {
     const messages = [{ text: 'Invalid name', type: 'error' }]
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup
         description="Please enter your full name"
@@ -94,9 +101,11 @@ describe('<FormFieldGroup />', async () => {
     expect(message.getTextContent()).to.equal('Invalid name')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('displays description message inside the legend', async () => {
     const description = 'Please enter your full name'
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup description={description}>
         <label>
@@ -116,7 +125,9 @@ describe('<FormFieldGroup />', async () => {
     expect(legend).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup description="Please enter your full name">
         <label>

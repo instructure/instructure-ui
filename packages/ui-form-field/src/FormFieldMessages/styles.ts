@@ -22,25 +22,30 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    formFieldMessages: {
+      label: 'formFieldMessages',
+      padding: 0,
+      display: 'block',
+      margin: `calc(-1 * ${componentTheme.topMargin}) 0 0 0`
+    },
+    message: {
+      label: 'formFieldMessages__message',
+      display: 'block'
+    }
+  }
+}
 
-import { FormFieldMessage } from '../index'
-
-describe('<FormFieldMessage />', async () => {
-  it('should render message', async () => {
-    const subject = await mount(
-      <FormFieldMessage>hello world</FormFieldMessage>
-    )
-
-    const formFieldMessage = within(subject.getDOMNode())
-    expect(await formFieldMessage.findWithText('hello world')).to.exist()
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<FormFieldMessage />)
-
-    const formFieldMessage = within(subject.getDOMNode())
-    expect(await formFieldMessage.accessible()).to.be.true()
-  })
-})
+export default generateStyle

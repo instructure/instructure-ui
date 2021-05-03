@@ -45,13 +45,28 @@ import { FormPropTypes } from '../FormPropTypes'
 
 import generateStyle from './styles'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  label: React.ReactNode
+  id?: string
+  as?: React.ReactElement
+  messages?: any[] // TODO: FormPropTypes.message
+  messagesId?: string
+  inline?: boolean
+  layout?: 'stacked' | 'inline'
+  labelAlign?: 'start' | 'end'
+  width?: string
+  inputContainerRef?: (...args: any[]) => any
+}
+
 /**
 ---
 parent: FormField
 ---
 **/
 @withStyle(generateStyle)
-class FormFieldLayout extends Component {
+class FormFieldLayout extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -98,11 +113,14 @@ class FormFieldLayout extends Component {
     inputContainerRef: undefined
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'For... Remove this comment to see the full error message
     this._messagesId = props.messagesId || uid('FormFieldLayout-messages')
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       typeof props.width !== 'undefined' ||
         !props.inline ||
@@ -113,10 +131,13 @@ class FormFieldLayout extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -129,6 +150,7 @@ class FormFieldLayout extends Component {
   }
 
   get elementType() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return getElementType(FormFieldLayout, this.props)
   }
 
@@ -137,6 +159,7 @@ class FormFieldLayout extends Component {
     return this.props.inline && this.props.layout === 'inline'
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
   handleInputContainerRef = (node) => {
     if (this.props.inputContainerRef) {
       this.props.inputContainerRef(node)
@@ -169,6 +192,7 @@ class FormFieldLayout extends Component {
     // note: the legend element must be the first child of a fieldset element for SR
     // so we render it twice in that case (once for SR-only and one that is visible)
     return (
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <ScreenReaderContent as="legend">
         {this.props.label}
         {this.hasMessages && (
@@ -183,9 +207,11 @@ class FormFieldLayout extends Component {
       <Grid.Row>
         <Grid.Col
           offset={this.inlineContainerAndLabel ? null : 3}
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           textAlign={this.inlineContainerAndLabel ? 'end' : null}
         >
           <FormFieldMessages
+            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             id={this._messagesId}
             messages={this.props.messages}
           />
@@ -202,13 +228,16 @@ class FormFieldLayout extends Component {
     const { width, layout, children } = props
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (false | Element)[]; css: any; s... Remove this comment to see the full error message
       <ElementType
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(props, {
           ...FormFieldLayout.propTypes,
           ...Grid.propTypes
         })}
         css={styles.formFieldLayout}
         style={{ width }}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'For... Remove this comment to see the full error message
         aria-describedby={this.hasMessages ? this._messagesId : null}
       >
         {this.elementType === 'fieldset' && this.renderLegend()}
@@ -218,6 +247,7 @@ class FormFieldLayout extends Component {
           startAt={
             layout === 'inline' && this.hasVisibleLabel ? 'medium' : null
           }
+          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
           {...pickProps(props, Grid.propTypes)}
         >
           <Grid.Row>
