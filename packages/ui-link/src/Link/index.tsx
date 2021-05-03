@@ -43,6 +43,24 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  href?: string
+  color?: 'link' | 'link-inverse'
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+  interaction?: 'enabled' | 'disabled'
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  renderIcon?: ((...args: any[]) => any) | React.ReactNode
+  iconPlacement?: 'start' | 'end'
+  display?: 'auto' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
+  isWithinText?: boolean
+  onClick?: (...args: any[]) => any
+  onFocus?: (...args: any[]) => any
+  onBlur?: (...args: any[]) => any
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components
@@ -50,7 +68,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Link extends Component {
+class Link extends Component<Props> {
   static propTypes = {
     /**
      * The text and/or icon displayed by the link
@@ -144,10 +162,13 @@ class Link extends Component {
   state = { hasFocus: false }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleProps())
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleProps())
   }
 
@@ -158,13 +179,16 @@ class Link extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
     const { elementRef } = this.props
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_link' does not exist on type 'Link'.
     this._link = el
     if (typeof elementRef === 'function') elementRef(el)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClick = (event) => {
     const { onClick } = this.props
     const { interaction } = this
@@ -177,6 +201,7 @@ class Link extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleFocus = (event) => {
     this.setState({ hasFocus: true })
     if (typeof this.props.onFocus === 'function') {
@@ -184,6 +209,7 @@ class Link extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleBlur = (event) => {
     this.setState({ hasFocus: false })
     if (typeof this.props.onBlur === 'function') {
@@ -200,6 +226,7 @@ class Link extends Component {
       }
     })
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       // if display prop is used, warn about icon or TruncateText
       !truncateText || this.props.display === undefined,
@@ -224,18 +251,22 @@ class Link extends Component {
   }
 
   get interaction() {
+    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props, interactionTypes: ['disabled'] })
   }
 
   get element() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return getElementType(Link, this.props)
   }
 
   get focused() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_link' does not exist on type 'Link'.
     return isActiveElement(this._link)
   }
 
   get focusable() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1.
     return findFocusable(this._link)
   }
 
@@ -244,10 +275,12 @@ class Link extends Component {
   }
 
   focus() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_link' does not exist on type 'Link'.
     this._link && this._link.focus()
   }
 
   renderIcon() {
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       // if display prop is used, warn about icon or TruncateText
       this.props.display === undefined,
@@ -288,6 +321,7 @@ class Link extends Component {
         as={this.element}
         display={this.display}
         margin={margin}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | number | boolean | {} ... Remove this comment to see the full error message
         href={href}
         onClick={this.handleClick}
         onFocus={this.handleFocus}

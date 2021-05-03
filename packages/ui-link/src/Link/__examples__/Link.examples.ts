@@ -34,16 +34,19 @@ export default {
     iconPlacement: [null, 'start', 'end'],
     renderIcon: [null, IconTrashSolid]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       href: 'http://instructure.design'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
       background: props.color === 'link' ? 'primary' : 'primary-inverse'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       props.ellipsis ||
