@@ -38,6 +38,16 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: React.ReactElement
+  variant?: 'default' | 'highlighted' | 'selected' | 'disabled'
+  role?: string
+  renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
+  renderAfterLabel?: React.ReactNode | ((...args: any[]) => any)
+}
+
 /**
 ---
 parent: Options
@@ -46,7 +56,7 @@ id: Options.Item
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class Item extends Component {
+class Item extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -90,13 +100,17 @@ class Item extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'renderLabel' implicitly has an 'any' ty... Remove this comment to see the full error message
   renderContent(renderLabel, contentVariant) {
     const { styles } = this.props
 
@@ -122,9 +136,11 @@ class Item extends Component {
     } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const passthroughProps = omitProps(this.props, Item.propTypes)
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (false | "" | 0 | Element | null... Remove this comment to see the full error message
       <ElementType role="none" css={styles.item}>
         <span {...passthroughProps} css={styles.container} role={role}>
           {children}

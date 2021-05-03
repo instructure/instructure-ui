@@ -21,18 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
+import { locator } from '@instructure/ui-test-locator'
 
-export default {
-  maxExamplesPerPage: 50,
-  propValues: {
-    renderAfterLabel: [null, IconArrowOpenEndSolid],
-    renderBeforeLabel: [null, IconCheckSolid]
-  },
-  getComponentProps: (props) => {
-    return {
-      children: 'Lorem ipsum dolor sit amet',
-      role: 'none'
-    }
+import { OptionsLocator } from '../OptionsLocator'
+import { Item } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const OptionsItemLocator = locator(Item.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findNestedOptions: (...args) => {
+    return OptionsLocator.find(...args)
   }
-}
+})

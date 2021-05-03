@@ -33,6 +33,12 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: React.ReactElement
+}
+
 /**
 ---
 parent: Options
@@ -41,7 +47,7 @@ id: Options.Separator
 @module Separator
 **/
 @withStyle(generateStyles, generateComponentTheme)
-class Separator extends Component {
+class Separator extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -58,10 +64,13 @@ class Separator extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -70,6 +79,7 @@ class Separator extends Component {
     const ElementType = getElementType(Separator, this.props, () => as)
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; role: string; }' is not... Remove this comment to see the full error message
       <ElementType role="none">
         <div {...rest} css={styles.separator} role="presentation" />
       </ElementType>

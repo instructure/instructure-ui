@@ -21,38 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-/**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (componentTheme, props, state) => {
-  return {
-    options: {
-      label: 'options',
-      boxSizing: 'border-box',
-      wordWrap: 'break-word'
-    },
-    list: {
-      label: 'options__list',
-      listStyleType: 'none',
-      position: 'relative'
-    },
-    label: {
-      label: 'options__label',
-      color: componentTheme.labelColor,
-      cursor: 'default',
-      display: 'block',
-      fontWeight: componentTheme.labelFontWeight,
-      padding: componentTheme.nestedLabelPadding
-    }
+import { Options } from './index'
+import { OptionsItemLocator } from './Item/OptionsItemLocator'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const OptionsLocator = locator(Options.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findAllItems: (...args) => {
+    return OptionsItemLocator.findAll(...args)
+  },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findItem: (...args) => {
+    return OptionsItemLocator.find(...args)
   }
-}
-
-export default generateStyle
+})

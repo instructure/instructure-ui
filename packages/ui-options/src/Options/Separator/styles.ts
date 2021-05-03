@@ -21,13 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { OptionsLocator } from '../OptionsLocator'
-import { Item } from './index'
-
-export const OptionsItemLocator = locator(Item.selector, {
-  findNestedOptions: (...args) => {
-    return OptionsLocator.find(...args)
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    separator: {
+      label: 'separator',
+      height: componentTheme.height,
+      margin: componentTheme.margin,
+      overflow: 'hidden',
+      background: componentTheme.background
+    }
   }
-})
+}
+
+export default generateStyle

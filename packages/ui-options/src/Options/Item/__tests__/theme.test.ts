@@ -29,14 +29,18 @@ import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 
 /* eslint-disable mocha/no-synchronous-tests */
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('Item.theme', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have default background and text colors that meet 3:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(3)
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have highlighted background and text colors that meet 3:1 contrast', () => {
       expect(
         contrast(
@@ -46,6 +50,7 @@ describe('Item.theme', () => {
       ).to.be.above(3)
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have selected background and text colors that meet 3:1 contrast', () => {
       expect(
         contrast(variables.selectedBackground, variables.selectedLabelColor)
@@ -53,13 +58,16 @@ describe('Item.theme', () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the high contrast canvas theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have default background and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(4.5)
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have highlighted background and text colors that meet 4.5:1 contrast', () => {
       expect(
         contrast(
@@ -69,6 +77,7 @@ describe('Item.theme', () => {
       ).to.be.above(4.5)
     })
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have selected background and text colors that meet 4.5:1 contrast', () => {
       expect(
         contrast(variables.selectedBackground, variables.selectedLabelColor)

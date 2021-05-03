@@ -22,28 +22,38 @@
  * SOFTWARE.
  */
 
-import { contrast } from '@instructure/ui-color-utils'
-import { expect } from '@instructure/ui-test-utils'
+/**
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme, props, state) => {
+  return {
+    options: {
+      label: 'options',
+      boxSizing: 'border-box',
+      wordWrap: 'break-word'
+    },
+    list: {
+      label: 'options__list',
+      listStyleType: 'none',
+      position: 'relative'
+    },
+    label: {
+      label: 'options__label',
+      color: componentTheme.labelColor,
+      cursor: 'default',
+      display: 'block',
+      fontWeight: componentTheme.labelFontWeight,
+      padding: componentTheme.nestedLabelPadding
+    }
+  }
+}
 
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
-import generateComponentTheme from '../theme'
-
-/* eslint-disable mocha/no-synchronous-tests */
-describe('Options.theme', () => {
-  describe('with the default theme', () => {
-    const variables = generateComponentTheme(canvas)
-
-    it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.color)).to.be.above(3)
-    })
-  })
-
-  describe('with the high contrast canvas theme', () => {
-    const variables = generateComponentTheme(canvasHighContrast)
-
-    it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
-    })
-  })
-})
-/* eslint-enable mocha/no-synchronous-tests */
+export default generateStyle

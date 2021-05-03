@@ -35,15 +35,20 @@ import { Options } from '../index'
 import { OptionsLocator } from '../OptionsLocator'
 import OptionsExamples from '../__examples__/Options.examples'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Options />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Options />)
     const options = OptionsLocator.find()
 
     expect(options).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render items', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options>
         <Options.Item>Option one</Options.Item>
@@ -56,9 +61,13 @@ describe('<Options />', async () => {
     expect(items.length).to.equal(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide elementRef', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options elementRef={elementRef} as="ul">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -70,8 +79,11 @@ describe('<Options />', async () => {
     expect(elementRef).to.have.been.calledWith(list.getDOMNode())
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render designated tag if `as` prop is specified', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ol">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -83,8 +95,11 @@ describe('<Options />', async () => {
     expect(list).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children as listitems when appropriate', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ul">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -98,8 +113,11 @@ describe('<Options />', async () => {
     expect(items.length).to.equal(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass props through to list', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ul" role="listbox" data-custom-attr="true">
         <Options.Item>Option one</Options.Item>
         <Options.Item>Option two</Options.Item>
@@ -112,7 +130,9 @@ describe('<Options />', async () => {
     expect(list.getAttribute('data-custom-attr')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render root with appropriate role', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options role="listbox">
         <Options.Item>Option one</Options.Item>
@@ -124,11 +144,13 @@ describe('<Options />', async () => {
     expect(options.getAttribute('role')).to.equal('presentation')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not allow invalid children', async () => {
     const cs = spy(console, 'error')
     const warning =
       "Warning: Failed prop type: Expected one of Options, Item, Separator in Options but found 'span'"
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options>
         <span />
@@ -137,13 +159,17 @@ describe('<Options />', async () => {
     expect(cs).to.have.been.calledWithMatch(warning)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should allow null children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Options />)
     const options = await OptionsLocator.find()
     expect(options).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render nested options properly', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options>
         <Options.Item>Option one</Options.Item>
@@ -167,7 +193,9 @@ describe('<Options />', async () => {
     expect(nestedListItems.length).to.equal(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ maxExamplesPerPage: number; pr... Remove this comment to see the full error message
     generateA11yTests(OptionsExamples)
   })
 })

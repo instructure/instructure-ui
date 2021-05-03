@@ -21,16 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { Options } from './index'
-import { OptionsItemLocator } from './Item/OptionsItemLocator'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, typography, spacing, key: themeName } = theme
 
-export const OptionsLocator = locator(Options.selector, {
-  findAllItems: (...args) => {
-    return OptionsItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return OptionsItemLocator.find(...args)
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    labelFontWeight: typography?.fontWeightBold,
+
+    background: colors?.backgroundLightest,
+    labelColor: colors?.textDarkest,
+
+    labelPadding: `${spacing?.xSmall} 0`,
+    nestedLabelPadding: `${spacing?.xSmall} ${spacing?.small}`
   }
-})
+
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
+  }
+}
+
+export default generateComponentTheme

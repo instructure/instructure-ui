@@ -46,6 +46,15 @@ import generateComponentTheme from './theme'
 import { Item } from './Item'
 import { Separator } from './Separator'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: React.ReactElement
+  role?: string
+  elementRef?: (...args: any[]) => any
+  renderLabel?: React.ReactNode | ((...args: any[]) => any)
+}
+
 /**
 ---
 category: components
@@ -53,10 +62,7 @@ category: components
 **/
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
-class Options extends Component {
-  static Item = Item
-  static Separator = Separator
-
+class Options extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -84,16 +90,23 @@ class Options extends Component {
   static defaultProps = {
     as: 'span',
     role: 'list',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
     elementRef: (node) => {},
     renderLabel: null,
     children: null
   }
 
+  static Item = Item
+  static Separator = Separator
+
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -101,6 +114,7 @@ class Options extends Component {
 
   get childAs() {
     const { as } = this.props
+    // @ts-expect-error ts-migrate(2367) FIXME: This condition will always return 'false' since th... Remove this comment to see the full error message
     if (as === 'ul' || as === 'ol') {
       return 'li'
     }
@@ -116,9 +130,11 @@ class Options extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'children' implicitly has an 'any' type.
   renderSubList(children) {
     const { styles } = this.props
     return (
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Item as={this.childAs} role="presentation" css={styles.label}>
         {children}
       </Item>
@@ -140,7 +156,9 @@ class Options extends Component {
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Options.propTypes),
       Options
     )
