@@ -141,6 +141,7 @@ class ListItem extends Component<Props> {
     return (
       <View
         {...passthroughProps(rest)}
+        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.listItem}
         as="li"
         margin={margin}

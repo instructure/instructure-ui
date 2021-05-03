@@ -212,6 +212,7 @@ class ContextView extends Component<Props> {
         stacking={stacking}
       >
         <View
+          // @ts-expect-error ts-migrate(2322) FIXME:
           css={styles.contextView__content}
           display="block"
           borderRadius="medium"

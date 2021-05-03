@@ -374,9 +374,9 @@ class Alert extends Component<Props> {
     return (
       <View
         as="div"
+        // @ts-expect-error ts-migrate(2322) FIXME:
         margin={this.props.margin}
         css={this.props.styles.alert}
-        //@ts-expect-error FIXME: no onKeyUp on View
         onKeyUp={this.handleKeyUp}
       >
         {this.renderIcon()}

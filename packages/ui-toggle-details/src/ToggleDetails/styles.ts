@@ -24,9 +24,10 @@
 
 import { keyframes } from '@instructure/emotion'
 const contentAnimation = keyframes`
-    to {
-      opacity: 1
-    }`
+  to {
+    opacity: 1
+  }`
+
 /**
  * ---
  * private: true

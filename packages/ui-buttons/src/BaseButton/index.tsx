@@ -424,9 +424,9 @@ class BaseButton extends Component<Props> {
         background="transparent"
         padding="none"
         borderWidth="none"
+        // @ts-expect-error ts-migrate(2322) FIXME:
         margin={margin}
         cursor={isDisabled ? 'not-allowed' : cursor}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; as: string; focusColor:... Remove this comment to see the full error message
         href={href}
         type={href ? null : type}
         elementRef={this.handleElementRef}

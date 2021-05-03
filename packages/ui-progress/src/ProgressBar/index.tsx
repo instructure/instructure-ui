@@ -184,6 +184,7 @@ class ProgressBar extends Component<Props> {
       <View
         {...passthroughProps(props)}
         as={this.props.as}
+        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.progressBar}
         margin={this.props.margin}
         elementRef={this.props.elementRef}

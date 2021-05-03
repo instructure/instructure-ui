@@ -189,6 +189,7 @@ class InPlaceEdit extends Component<Props> {
         display="block"
         withFocusOutline={showFocusRing}
         position="relative"
+        // @ts-expect-error ts-migrate(2322) FIXME:
         css={this.props.styles.inPlaceEdit}
         borderRadius="medium"
       >

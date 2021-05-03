@@ -537,6 +537,7 @@ class Tabs extends Component<Props> {
         maxWidth={maxWidth}
         margin={margin}
         as="div"
+        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.container}
       >
         <Focusable ref={this.handleFocusableRef}>
@@ -548,6 +549,7 @@ class Tabs extends Component<Props> {
               borderRadius="medium"
               withFocusOutline={focusVisible}
               shouldAnimateFocus={false}
+              // @ts-expect-error ts-migrate(2322) FIXME:
               css={styles.tabs}
             >
               <View

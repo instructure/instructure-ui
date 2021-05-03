@@ -191,8 +191,8 @@ class Badge extends Component<Props> {
     return (
       <View
         margin={standalone ? margin : 'none'}
+        // @ts-expect-error FIXME:
         css={styles.badge}
-        //@ts-expect-error FIXME:
         title={type === 'count' && this.countOverflow() ? count : null}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         id={!standalone ? this._defaultId : null}
@@ -223,6 +223,7 @@ class Badge extends Component<Props> {
           as={as}
           margin={margin}
           elementRef={elementRef}
+          // @ts-expect-error ts-migrate(2322) FIXME:
           css={styles.wrapper}
           display="inline-block"
         >

@@ -140,6 +140,7 @@ class InlineListItem extends Component<Props> {
     return (
       <View
         {...passthroughProps(rest)}
+        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.inlineListItem}
         as="li"
         margin={margin}

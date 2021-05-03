@@ -470,6 +470,7 @@ class FileDrop extends Component<Props, State> {
     const focusColor =
       this.state.isDragRejected || this.invalid ? 'danger' : undefined
     return (
+      // @ts-expect-error ts-migrate(2739) FIXME:
       <View
         display={display}
         position="relative" // contain visually hidden file input element
@@ -487,6 +488,7 @@ class FileDrop extends Component<Props, State> {
           onDragLeave={this.handleDragLeave}
           onDrop={this.handleChange}
         >
+          {/* @ts-expect-error ts-migrate(2739) FIXME: */}
           <View
             display="block"
             position="relative"
@@ -497,6 +499,7 @@ class FileDrop extends Component<Props, State> {
           >
             <span css={(this.props as any).styles.fileDropLabelContent}>
               <span css={(this.props as any).styles.fileDropLayout}>
+                {/* @ts-expect-error ts-migrate(2740) FIXME: */}
                 <View height={height}>{this.renderLabel()}</View>
               </span>
             </span>

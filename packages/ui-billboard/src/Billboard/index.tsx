@@ -230,7 +230,11 @@ class Billboard extends Component<Props> {
     const Element = getElementType(Billboard, this.props)
 
     return (
-      <View as="div" margin={margin}>
+      <View
+        as="div"
+        // @ts-expect-error ts-migrate(2322) FIXME:
+        margin={margin}
+      >
         <View
           // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
           {...omitProps(this.props, {

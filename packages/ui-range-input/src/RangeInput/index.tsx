@@ -227,6 +227,7 @@ class RangeInput extends Component<Props> {
   renderValue() {
     if (this.props.displayValue) {
       return (
+        // @ts-expect-error ts-migrate(2769) FIXME:
         <ContextView background="inverse" placement="end center">
           <output
             htmlFor={this.id}

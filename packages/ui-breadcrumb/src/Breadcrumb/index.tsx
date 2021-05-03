@@ -127,9 +127,9 @@ class Breadcrumb extends Component<Props> {
 
     return (
       <View
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; role: string; as: strin... Remove this comment to see the full error message
         role="navigation"
         as="div"
+        // @ts-expect-error ts-migrate(2322) FIXME:
         margin={this.props.margin}
         aria-label={this.props.label}
       >

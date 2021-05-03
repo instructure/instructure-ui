@@ -294,6 +294,7 @@ class Pagination extends Component<Props> {
     }
 
     return (
+      // @ts-expect-error ts-migrate(2740) FIXME:
       <View display="inline-block">
         {this.transferDisabledPropToChildren(visiblePages)}
       </View>
@@ -359,7 +360,11 @@ class Pagination extends Component<Props> {
         aria-labelledby={this.props.label && this._labelId}
       >
         {this.props.label && this.renderLabel()}
-        <View display="inline-block" css={this.props.styles.pages}>
+        <View
+          display="inline-block"
+          // @ts-expect-error ts-migrate(2322) FIXME:
+          css={this.props.styles.pages}
+        >
           {shouldShowPrevButton(this.props, currentPageIndex) &&
             this.renderArrowButton(this.props.labelPrev, -1, currentPageIndex)}
           {this.renderPages(currentPageIndex)}

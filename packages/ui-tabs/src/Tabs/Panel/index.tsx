@@ -145,6 +145,7 @@ class Panel extends Component<Props> {
           transitionExit={false}
         >
           <View
+            // @ts-expect-error ts-migrate(2322) FIXME:
             css={styles.content}
             maxHeight={maxHeight}
             minHeight={minHeight}

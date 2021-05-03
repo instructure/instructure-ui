@@ -237,6 +237,7 @@ class ProgressCircle extends Component<Props> {
         {...passthroughProps(props)}
         as={this.props.as}
         elementRef={this.props.elementRef}
+        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.progressCircle}
         margin={this.props.margin}
       >

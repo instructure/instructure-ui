@@ -153,6 +153,7 @@ class List extends Component<Props> {
     return (
       <View
         {...passthroughProps(rest)}
+        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.list}
         as={as}
         margin={margin}
