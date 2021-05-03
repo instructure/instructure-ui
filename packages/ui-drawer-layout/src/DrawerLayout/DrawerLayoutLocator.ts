@@ -22,34 +22,28 @@
  * SOFTWARE.
  */
 
-/**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
- */
-const generateStyle = (componentTheme, props, state) => {
-  const { shouldTransition } = state
+import { locator } from '@instructure/ui-test-locator'
 
-  const transitionState = shouldTransition
-    ? {
-        transition: `margin ${componentTheme.duration}`
-      }
-    : {}
+import { DrawerLayout } from './index'
 
-  return {
-    drawerContent: {
-      label: 'drawerLayout__content',
-      overflowY: 'auto',
-      height: '100%',
-      boxSizing: 'content-box',
-      ...transitionState
+import { DrawerContentLocator } from './DrawerContent/DrawerContentLocator'
+import { DrawerTrayLocator } from './DrawerTray/DrawerTrayLocator'
+
+export { DrawerContentLocator, DrawerTrayLocator }
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const DrawerLayoutLocator = locator(DrawerLayout.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findContent: (...args) => DrawerContentLocator.find(...args),
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+  findTray: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(DrawerLayout.locatorAttribute)
+      return locator(`[${DrawerLayout.Tray.locatorAttribute}="${id}"]`).find(
+        ...args
+      )
+    } else {
+      return null
     }
   }
-}
-
-export default generateStyle
+})

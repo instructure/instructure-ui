@@ -30,9 +30,11 @@ export default {
   propValues: {
     dir: ['ltr']
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       children: [
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <DrawerLayout.Tray
           key="0"
           id="DrawerLayoutTrayExample1"
@@ -44,6 +46,7 @@ export default {
             as="div"
             maxWidth="16rem"
             textAlign="center"
+            // @ts-expect-error ts-migrate(2322) FIXME: Type '"large auto"' is not assignable to type '0 |... Remove this comment to see the full error message
             margin="large auto"
             padding="small"
           >
@@ -55,7 +58,9 @@ export default {
           label="Drawer content example"
           themeOverride={{ duration: 0 }}
         >
+          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
           <div style={{ background: 'white', height: '100%' }}>
+            {/* @ts-expect-error ts-migrate(2322) FIXME: Type '"x-large"' is not assignable to type '0 | "s... Remove this comment to see the full error message */}
             <View as="div" padding="x-large">
               Drawer content
             </View>
@@ -64,6 +69,7 @@ export default {
       ]
     }
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getExampleProps: (props) => {
     return {
       as: 'div',

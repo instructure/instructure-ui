@@ -371,7 +371,7 @@ class View extends Component<Props> {
             return
           }
 
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'display' does not exist on type 'Object'... Remove this comment to see the full error message
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'display' does not exist on type '{}'.
           const display = getComputedStyle(element).display
 
           if (display !== 'inline') {

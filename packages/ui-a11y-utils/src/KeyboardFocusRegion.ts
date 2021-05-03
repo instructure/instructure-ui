@@ -291,12 +291,12 @@ class KeyboardFocusRegion {
       if (defaultFocusElement || shouldContainFocus) {
         if (shouldContainFocus) {
           this._listeners.push(
-            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
             addEventListener(this.doc, 'keydown', this.handleKeyDown)
           )
         } else {
           this._listeners.push(
-            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
             addEventListener(
               this.firstTabbable || defaultFocusElement,
               'keydown',
@@ -304,7 +304,7 @@ class KeyboardFocusRegion {
             )
           )
           this._listeners.push(
-            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+            // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
             addEventListener(
               this.lastTabbable || defaultFocusElement,
               'keydown',
@@ -314,16 +314,16 @@ class KeyboardFocusRegion {
         }
 
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
           addEventListener(this.doc, 'click', this.handleClick, true)
         )
 
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
           addEventListener(this.win, 'blur', this.handleWindowBlur, false)
         )
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
           addEventListener(this.doc, 'focus', this.handleFocus, true)
         )
 

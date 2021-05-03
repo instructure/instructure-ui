@@ -22,8 +22,24 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: any) => {
+  const { colors, borders, stacking, shadows } = theme
+  const componentVariables = {
+    background: colors?.backgroundLightest,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthSmall,
+    borderStyle: borders?.style,
+    zIndex: stacking?.topmost,
+    boxShadow: shadows?.depth3
+  }
+  return {
+    ...componentVariables
+  }
+}
 
-import { DrawerContent } from './index'
-
-export const DrawerContentLocator = locator(DrawerContent.selector)
+export default generateComponentTheme

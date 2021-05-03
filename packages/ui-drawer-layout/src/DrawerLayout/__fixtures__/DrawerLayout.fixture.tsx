@@ -45,10 +45,15 @@ export default class DrawerLayoutFixture extends Component {
 
   render() {
     const {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'layoutWidth' does not exist on type 'Rea... Remove this comment to see the full error message
       layoutWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       trayWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       open,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'placement' does not exist on type 'Reado... Remove this comment to see the full error message
       placement,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onOverlayTrayChange' does not exist on t... Remove this comment to see the full error message
       onOverlayTrayChange
     } = this.props
 
@@ -58,6 +63,7 @@ export default class DrawerLayoutFixture extends Component {
           minWidth="500px"
           onOverlayTrayChange={onOverlayTrayChange}
         >
+          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
           <DrawerLayout.Tray
             open={open}
             placement={placement}
@@ -66,6 +72,7 @@ export default class DrawerLayoutFixture extends Component {
             <div style={{ width: trayWidth }}>Hello from tray</div>
           </DrawerLayout.Tray>
           <DrawerLayout.Content label="Test DrawerContent">
+            {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
             <div>
               Hello from content
               <button>Expand</button>

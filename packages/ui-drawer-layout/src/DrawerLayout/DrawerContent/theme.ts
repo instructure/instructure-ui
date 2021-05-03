@@ -22,25 +22,17 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: any) => {
+  const { transitions } = theme
 
-import { DrawerLayout } from './index'
-
-import { DrawerContentLocator } from './DrawerContent/DrawerContentLocator'
-import { DrawerTrayLocator } from './DrawerTray/DrawerTrayLocator'
-
-export { DrawerContentLocator, DrawerTrayLocator }
-
-export const DrawerLayoutLocator = locator(DrawerLayout.selector, {
-  findContent: (...args) => DrawerContentLocator.find(...args),
-  findTray: (element, ...args) => {
-    if (element && element.getAttribute) {
-      const id = element.getAttribute(DrawerLayout.locatorAttribute)
-      return locator(`[${DrawerLayout.Tray.locatorAttribute}="${id}"]`).find(
-        ...args
-      )
-    } else {
-      return null
-    }
+  return {
+    duration: transitions?.duration
   }
-})
+}
+
+export default generateComponentTheme

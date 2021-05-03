@@ -22,17 +22,9 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { transitions } = theme
+import { locator } from '@instructure/ui-test-locator'
 
-  return {
-    duration: transitions?.duration
-  }
-}
+import { DrawerTray } from './index'
 
-export default generateComponentTheme
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const DrawerTrayLocator = locator(DrawerTray.selector)

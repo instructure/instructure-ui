@@ -32,12 +32,61 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (componentTheme: any, props: any, state: any) => {
+  const { border } = props
+  const { placement } = state
+
+  const borderPlacementStyle = {
+    start: { borderRightWidth: componentTheme.borderWidth },
+    end: { borderLeftWidth: componentTheme.borderWidth }
+  }
+
+  const borderStyles = border
+    ? {
+        borderWidth: 0,
+        borderColor: componentTheme.borderColor,
+        borderStyle: componentTheme.borderStyle,
+        boxSizing: 'border-box',
+        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+        ...borderPlacementStyle[placement]
+      }
+    : {
+        boxSizing: 'content-box'
+      }
+
+  const placementStyleMap = {
+    start: { left: 0 },
+    end: { right: 0 }
+  }
+
+  const trayStyle = {
+    position: 'absolute',
+    backgroundColor: componentTheme.background,
+    zIndex: componentTheme.zIndex,
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    ...borderStyles,
+    top: 0,
+    bottom: 0,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...placementStyleMap[placement]
+  }
+
   return {
-    drawerLayout: {
-      label: 'drawerLayout',
-      position: 'relative',
-      height: '100%'
+    drawerTray: {
+      label: 'drawerTray',
+      ...trayStyle
+    },
+    drawerTrayWithShadow: {
+      label: 'drawerTray--with-shadow',
+      ...trayStyle,
+      boxShadow: componentTheme.boxShadow
+    },
+    drawerTrayContent: {
+      label: 'drawerTray__content',
+      overflowY: 'auto',
+      height: '100%',
+      boxSizing: 'content-box'
     }
   }
 }

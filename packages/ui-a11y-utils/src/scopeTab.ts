@@ -68,7 +68,7 @@ function scopeTab(element, event, onLeavingFinalTabbable) {
 
   event.preventDefault()
   const target = tabbable[event.shiftKey ? tabbable.length - 1 : 0]
-  //@ts-expect-error FIXME:
+  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
   target.focus()
 }
 

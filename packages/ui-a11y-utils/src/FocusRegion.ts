@@ -153,11 +153,11 @@ class FocusRegion {
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
       if (this._options.shouldCloseOnDocumentClick) {
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
           addEventListener(doc, 'click', this.captureDocumentClick, true)
         )
         this._listeners.push(
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
           addEventListener(doc, 'click', this.handleDocumentClick)
         )
 
@@ -167,7 +167,7 @@ class FocusRegion {
 
           if (frameDoc) {
             this._listeners.push(
-              // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+              // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
               addEventListener(frameDoc, 'mouseup', (event) => {
                 this.handleFrameClick(event, el)
               })
@@ -178,7 +178,7 @@ class FocusRegion {
 
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'FocusR... Remove this comment to see the full error message
       if (this._options.shouldCloseOnEscape) {
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Function' is not assignable to p... Remove this comment to see the full error message
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
         this._listeners.push(addEventListener(doc, 'keyup', this.handleKeyUp))
       }
 

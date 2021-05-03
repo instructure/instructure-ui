@@ -21,11 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 /** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import { withStyle, jsx } from '@instructure/emotion'
 import { bidirectional } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
@@ -33,16 +31,46 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
-
 import { Dialog } from '@instructure/ui-dialog'
 import { Portal } from '@instructure/ui-portal'
-
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { DrawerLayoutContext } from '../index'
 
+type OwnProps = {
+  label: string
+  render?: (...args: any[]) => any
+  placement?: 'start' | 'end'
+  open?: boolean
+  onOpen?: (...args: any[]) => any
+  onClose?: (...args: any[]) => any
+  border?: boolean
+  shadow?: boolean
+  onTransition?: (...args: any[]) => any
+  onEnter?: (...args: any[]) => any
+  onEntering?: (...args: any[]) => any
+  onEntered?: (...args: any[]) => any
+  onExit?: (...args: any[]) => any
+  onExiting?: (...args: any[]) => any
+  onExited?: (...args: any[]) => any
+  contentRef?: (...args: any[]) => any
+  mountNode?: typeof element | ((...args: any[]) => any)
+  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  liveRegion?:
+    | React.ReactElement[]
+    | React.ReactElement
+    | ((...args: any[]) => any)
+  onDismiss?: (...args: any[]) => any
+  shouldContainFocus?: boolean
+  shouldReturnFocus?: boolean
+  shouldCloseOnDocumentClick?: boolean
+  shouldCloseOnEscape?: boolean
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
+type Props = OwnProps & typeof DrawerTray.defaultProps
 /**
 ---
 parent: DrawerLayout
@@ -52,7 +80,7 @@ id: DrawerLayout.Tray
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class DrawerTray extends Component {
+class DrawerTray extends Component<Props> {
   static locatorAttribute = 'data-drawer-tray'
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -62,12 +90,10 @@ class DrawerTray extends Component {
      * Placement of the `<DrawerLayout.Tray />`
      */
     placement: PropTypes.oneOf(['start', 'end']),
-
     /**
      * If the tray is open or closed.
      */
     open: PropTypes.bool,
-
     /**
      * Called when the `<DrawerLayout.Tray />` is opened
      */
@@ -128,7 +154,6 @@ class DrawerTray extends Component {
       PropTypes.element,
       PropTypes.func
     ]),
-
     /**
      * An element, function returning an element, or array of elements that will not be hidden from
      * the screen reader when the `<DrawerLayout.Tray />` is open
@@ -150,7 +175,6 @@ class DrawerTray extends Component {
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
-
   static defaultProps = {
     children: null,
     render: undefined,
@@ -170,97 +194,87 @@ class DrawerTray extends Component {
     onExit: () => {},
     onExiting: () => {},
     onExited: () => {},
-    contentRef: (node) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'node' is declared but its value is never read.
+    contentRef: (node: any) => {},
     onClose: undefined,
     onDismiss: undefined,
     defaultFocusElement: undefined,
     liveRegion: undefined,
     onTransition: undefined
   }
-
   state = {
     transitioning: false,
     portalOpen: false
   }
-
   componentDidMount() {
-    this.props.makeStyles(this.makeStyleProps())
+    ;(this.props as any).makeStyles(this.makeStyleProps())
   }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.open !== prevProps.open) {
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevState' is declared but its value is never rea... Remove this comment to see the full error message
+  componentDidUpdate(prevProps: any, prevState: any, snapshot: any) {
+    if ((this.props as any).open !== prevProps.open) {
       this.setState({
         transitioning: true
       })
     }
-    this.props.makeStyles(this.makeStyleProps())
+    ;(this.props as any).makeStyles(this.makeStyleProps())
   }
-
   makeStyleProps = () => {
     return {
       placement: this.placement
     }
   }
-
   get placement() {
     const { placement, dir } = this.props
     const isRtl = dir === bidirectional.DIRECTION.rtl
-
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
-
   get direction() {
     return this.placement === 'end' ? 'right' : 'left'
   }
-
   get transition() {
     return `slide-${this.direction}`
   }
-
-  handleContentRef = (node) => {
+  handleContentRef = (node: any) => {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Drawer... Remove this comment to see the full error message
     this._content = node
-    if (typeof this.props.contentRef === 'function') {
-      this.props.contentRef(node)
+    if (typeof (this.props as any).contentRef === 'function') {
+      ;(this.props as any).contentRef(node)
     }
   }
-
   handleTransitionEntered = () => {
     this.setState({ transitioning: false })
   }
-
   handleTransitionExited = () => {
     this.setState({
       transitioning: false
     })
   }
-
-  handlePortalOpen = (DOMNode) => {
+  handlePortalOpen = (DOMNode: any) => {
     this.DOMNode = DOMNode
     this.setState({
       portalOpen: true
     })
   }
-
   get DOMNode() {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Drawer... Remove this comment to see the full error message
     return this._DOMNode
   }
-
   set DOMNode(el) {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Drawer... Remove this comment to see the full error message
     this._DOMNode = el
   }
-
   renderContent() {
     const { children, render } = this.props
-
     if (typeof render === 'function') {
+      // @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable.
       return render()
     } else if (typeof children === 'function') {
+      // @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable.
       return children()
     } else {
       return children
     }
   }
-
   render() {
     const {
       label,
@@ -289,29 +303,26 @@ class DrawerTray extends Component {
       shouldCloseOnDocumentClick,
       shouldContainFocus,
       styles,
+      //@ts-expect-error FIXME:
       ...props
     } = this.props
-
     return (
       <DrawerLayoutContext.Consumer>
-        {(shouldOverlayTray) => {
+        {(shouldOverlayTray: any) => {
           const { portalOpen } = this.state
           const needsPortal = shouldOverlayTray && mountNode
-
           // we have to handle the shadow version here,
           // because passing and handling it in styles.js makes it
           // rerender the component during the transition, breaking it
           const trayStyles =
             shadow && shouldOverlayTray
-              ? styles.drawerTrayWithShadow
-              : styles.drawerTray
-
+              ? (styles as any).drawerTrayWithShadow
+              : (styles as any).drawerTray
           let transitionIn = open
-
           if (needsPortal && !portalOpen) {
+            // @ts-expect-error ts-migrate(2322) FIXME: Type 'boolean' is not assignable to type 'never'.
             transitionIn = false
           }
-
           const content = (
             <Transition
               in={transitionIn}
@@ -334,6 +345,7 @@ class DrawerTray extends Component {
               unmountOnExit
             >
               <div
+                //@ts-expect-error FIXME:
                 {...omitProps(props, DrawerTray.propTypes)}
                 ref={this.handleContentRef}
                 css={trayStyles}
@@ -343,6 +355,7 @@ class DrawerTray extends Component {
                 ) : (
                   <Dialog
                     open
+                    //@ts-expect-error FIXME:
                     role={shouldOverlayTray ? 'dialog' : 'region'}
                     label={label}
                     shouldReturnFocus={shouldReturnFocus}
@@ -357,7 +370,7 @@ class DrawerTray extends Component {
                     liveRegion={liveRegion}
                     onDismiss={onDismiss}
                     as="div"
-                    css={this.props.styles.drawerTrayContent}
+                    css={(this.props as any).styles.drawerTrayContent}
                   >
                     {this.renderContent()}
                   </Dialog>

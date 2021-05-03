@@ -45,6 +45,14 @@ import { DrawerTray } from './DrawerTray'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 
+type Props = {
+  minWidth?: string
+  onOverlayTrayChange?: (...args: any[]) => any
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
+
 /**
 ---
 category: components
@@ -53,7 +61,7 @@ category: components
 @withStyle(generateStyle, null)
 @bidirectional()
 @testable()
-class DrawerLayout extends Component {
+class DrawerLayout extends Component<Props> {
   static locatorAttribute = 'data-drawer-layout'
   static propTypes = {
     /**
@@ -81,12 +89,14 @@ class DrawerLayout extends Component {
   static defaultProps = {
     children: null,
     minWidth: '30rem',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'shouldOverlayTray' is declared but its value is n... Remove this comment to see the full error message
     onOverlayTrayChange: (shouldOverlayTray) => {}
   }
 
   static Content = DrawerContent
   static Tray = DrawerTray
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -96,16 +106,20 @@ class DrawerLayout extends Component {
       contentWidth: 0
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
     this._id = uid('DrawerLayout')
   }
 
   _content = null
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -113,6 +127,7 @@ class DrawerLayout extends Component {
     const tray = Children.toArray(this.props.children).filter((child) =>
       matchComponentTypes(child, [DrawerTray])
     )[0]
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'ReactChil... Remove this comment to see the full error message
     return tray.props
   }
 
@@ -124,15 +139,20 @@ class DrawerLayout extends Component {
   }
 
   get contentMargin() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
     const trayWidth = this.state.trayWidth || 0
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
     return this.state.shouldOverlayTray ? 0 : trayWidth
   }
 
   get contentStyle() {
     const shouldOverlayTray = this.shouldOverlayTray(
       this.props.minWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       this.state.trayWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'contentWidth' does not exist on type 'Re... Remove this comment to see the full error message
       this.state.contentWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
       this.state.shouldOverlayTray
     )
     let marginLeft = 0
@@ -154,10 +174,13 @@ class DrawerLayout extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleTrayContentRef = (el) => {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tray' does not exist on type 'DrawerLay... Remove this comment to see the full error message
     this._tray = el
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'minWidth' implicitly has an 'any' type.
   shouldOverlayTray(minWidth, trayWidth, contentWidth, trayIsOverlayed) {
     if (!this._content) return false
 
@@ -170,6 +193,7 @@ class DrawerLayout extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'minWidth' implicitly has an 'any' type.
   getNextState(minWidth, trayWidth, contentWidth, trayIsOverlayed) {
     const shouldOverlayTray = this.shouldOverlayTray(
       minWidth,
@@ -185,6 +209,7 @@ class DrawerLayout extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'shouldOverlayTray' implicitly has an 'a... Remove this comment to see the full error message
   notifyOverlayTrayChange(shouldOverlayTray) {
     const { onOverlayTrayChange } = this.props
     if (typeof onOverlayTrayChange === 'function') {
@@ -192,14 +217,18 @@ class DrawerLayout extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'width' implicitly has an 'any' ty... Remove this comment to see the full error message
   handleContentSizeChange = ({ width }) => {
     this.setState((state, props) => {
       const nextState = this.getNextState(
         props.minWidth,
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
         state.trayWidth,
         width,
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
         state.shouldOverlayTray
       )
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
       if (state.shouldOverlayTray !== nextState.shouldOverlayTray) {
         this.notifyOverlayTrayChange(nextState.shouldOverlayTray)
       }
@@ -208,15 +237,18 @@ class DrawerLayout extends Component {
     })
   }
 
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'width' implicitly has an 'any' ty... Remove this comment to see the full error message
   handleTraySizeChange = ({ width }) => {
     this.setState((state, props) => {
       const nextState = this.getNextState(
         props.minWidth,
         width,
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'contentWidth' does not exist on type 'Re... Remove this comment to see the full error message
         state.contentWidth,
         true
       )
 
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
       if (state.shouldOverlayTray !== nextState.shouldOverlayTray) {
         this.notifyOverlayTrayChange(nextState.shouldOverlayTray)
       }
@@ -228,7 +260,9 @@ class DrawerLayout extends Component {
   handleTrayTransitionEnter = () => {
     let width = 0
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_tray' does not exist on type 'DrawerLay... Remove this comment to see the full error message
     if (this._tray) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_tray' does not exist on type 'DrawerLay... Remove this comment to see the full error message
       width = getBoundingClientRect(this._tray).width
     }
 
@@ -245,16 +279,22 @@ class DrawerLayout extends Component {
 
     const shouldOverlayTray = this.shouldOverlayTray(
       this.props.minWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       this.state.trayWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'contentWidth' does not exist on type 'Re... Remove this comment to see the full error message
       this.state.contentWidth,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
       this.state.shouldOverlayTray
     )
 
+    // @ts-expect-error ts-migrate(6133) FIXME: 'index' is declared but its value is never read.
     const children = Children.map(this.props.children, (child, index) => {
       if (matchComponentTypes(child, [DrawerTray])) {
         trayCount++
         return safeCloneElement(child, {
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           key: child.props.label,
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
           [DrawerTray.locatorAttribute]: this._id,
           contentRef: this.handleTrayContentRef,
           onEnter: this.handleTrayTransitionEnter,
@@ -263,21 +303,28 @@ class DrawerLayout extends Component {
       } else if (matchComponentTypes(child, [DrawerContent])) {
         contentCount++
 
+        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
         const handleContentRef = (el) => {
           this._content = el
 
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           if (typeof child.props.contentRef === 'function') {
+            // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
             child.props.contentRef(el)
           }
         }
 
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
         return this.state.trayWidth !== null
           ? safeCloneElement(child, {
+              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               key: child.props.label,
+              // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
               [DrawerContent.locatorAttribute]: this._id,
               style: this.contentStyle,
               onSizeChange: createChainedFunction(
                 this.handleContentSizeChange,
+                // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
                 child.props.onSizeChange
               ),
               contentRef: handleContentRef,
@@ -289,10 +336,12 @@ class DrawerLayout extends Component {
       }
     })
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       trayCount <= 1,
       `[DrawerLayout] Only one 'DrawerTray' per 'DrawerLayout' is supported.`
     )
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       contentCount <= 1,
       `[DrawerLayout] Only one 'DrawerContent' per 'DrawerLayout' is supported.`
@@ -301,8 +350,10 @@ class DrawerLayout extends Component {
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
     const props = { [DrawerLayout.locatorAttribute]: this._id }
     return (
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'shouldOverlayTray' does not exist on typ... Remove this comment to see the full error message
       <DrawerLayoutContext.Provider value={this.state.shouldOverlayTray}>
         <div {...props} css={this.props.styles.drawerLayout}>
           {this.renderChildren()}
