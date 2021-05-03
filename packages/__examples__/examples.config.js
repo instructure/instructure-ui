@@ -25,6 +25,6 @@ const path = require('path')
 
 module.exports = {
   getComponentPath: (configFilePath) => {
-    return path.resolve(path.dirname(configFilePath), '../index.js')
+    return path.resolve(path.dirname(configFilePath), '../index.tsx')
   }
 }
