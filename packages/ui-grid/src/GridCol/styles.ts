@@ -32,6 +32,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const {
     vAlign,
@@ -86,8 +87,11 @@ const generateStyle = (componentTheme, props, state) => {
       flexBasis: '0%',
       marginBottom: 0,
       boxSizing: 'border-box',
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...colSpacingVariants[colSpacing],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...vAlignVariants[vAlign],
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...textAlignVariants[textAlign]
     }
   }
@@ -97,10 +101,12 @@ const generateStyle = (componentTheme, props, state) => {
     return breakpoints.slice(breakpoints.indexOf(startAt))
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const breakpointIsEnabled = (breakpoint) => {
     return enabledBreakpoints().includes(breakpoint)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getColSize = (breakpoint) => {
     let { width } = props
 
@@ -113,6 +119,7 @@ const generateStyle = (componentTheme, props, state) => {
     return width
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getColOffset = (breakpoint) => {
     let { offset } = props
 
@@ -125,7 +132,7 @@ const generateStyle = (componentTheme, props, state) => {
     return offset
   }
 
-  const getFlexColumnBySize = (size = '1') => {
+  const getFlexColumnBySize = (size: string | number = '1') => {
     switch (size) {
       case 'auto':
         return { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' }
@@ -141,7 +148,7 @@ const generateStyle = (componentTheme, props, state) => {
     }
   }
 
-  const getColumnOffsetBySize = (size = '1') => {
+  const getColumnOffsetBySize = (size: string | number = '1') => {
     switch (size) {
       case 'auto':
       case 12:
@@ -154,9 +161,11 @@ const generateStyle = (componentTheme, props, state) => {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getStartAtVariants = (breakpoint) =>
     !!startAt && startAt === breakpoint ? { ...getStartGridColumnStyle() } : {}
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getGridColumnsForBreakpoint = (breakpoint) => {
     const size = getColSize(breakpoint)
     const offset = getColOffset(breakpoint)
@@ -169,6 +178,7 @@ const generateStyle = (componentTheme, props, state) => {
       : {}
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getBreakpointStyles = (breakpoint) => ({
     ...getStartAtVariants(breakpoint),
     ...getGridColumnsForBreakpoint(breakpoint)
@@ -181,6 +191,7 @@ const generateStyle = (componentTheme, props, state) => {
       boxSizing: 'border-box',
       textAlign: 'inherit',
       minWidth: '0.0625rem',
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...rowSpacingVariants[rowSpacing],
       ...(isLastRow && isLastCol && { marginBottom: 0 }),
 

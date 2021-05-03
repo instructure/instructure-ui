@@ -23,41 +23,29 @@
  */
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme, props, state) => {
-  const { startAt, visualDebug } = props
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { spacing, media, key: themeName } = theme
 
-  const getStartAtVariants = (breakpoint) =>
-    !!startAt && startAt === breakpoint ? { boxSizing: 'border-box' } : {}
+  const themeSpecificStyle = {}
+
+  const componentVariables = {
+    spacingSmall: spacing?.small,
+    spacingMedium: spacing?.medium,
+    spacingLarge: spacing?.large,
+
+    ...media
+  }
 
   return {
-    grid: {
-      label: 'grid',
-      display: 'block',
-
-      ...getStartAtVariants('small'),
-
-      [`@media screen and (${componentTheme.mediumMin})`]: {
-        ...getStartAtVariants('medium')
-      },
-      [`@media screen and (${componentTheme.largeMin})`]: {
-        ...getStartAtVariants('large')
-      },
-      [`@media screen and (${componentTheme.xLargeMin})`]: {
-        ...getStartAtVariants('x-large')
-      },
-
-      ...(visualDebug && { outline: '0.0625rem dashed red' })
-    }
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
   }
 }
 
-export default generateStyle
+export default generateComponentTheme

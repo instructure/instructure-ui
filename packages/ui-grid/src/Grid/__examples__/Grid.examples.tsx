@@ -51,6 +51,7 @@ export default {
     hAlign: ['start', 'center', 'end', 'space-around', 'space-between'],
     vAlign: ['top', 'middle', 'bottom']
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       props.startAt ||

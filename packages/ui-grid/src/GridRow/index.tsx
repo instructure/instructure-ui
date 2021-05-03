@@ -35,7 +35,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import { GridRow } from '../GridRow'
 import { GridCol } from '../GridCol'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -43,21 +42,35 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
+  colSpacing?: 'none' | 'small' | 'medium' | 'large'
+  hAlign?: 'start' | 'center' | 'end' | 'space-around' | 'space-between'
+  vAlign?: 'top' | 'middle' | 'bottom'
+  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
+  visualDebug?: boolean
+  isLastRow?: boolean
+}
+
 /**
 ---
-category: components
+parent: Grid
+id: Grid.Row
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Grid extends Component {
+class GridRow extends Component<Props> {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    children: ChildrenPropTypes.oneOf([GridRow, ScreenReaderContent]),
-    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+    children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
+    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     hAlign: PropTypes.oneOf([
       'start',
       'center',
@@ -67,40 +80,39 @@ class Grid extends Component {
     ]),
     vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
     startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-    visualDebug: PropTypes.bool
+    visualDebug: PropTypes.bool,
+    isLastRow: PropTypes.bool
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    colSpacing: 'medium',
-    rowSpacing: 'medium',
-    hAlign: 'start',
-    startAt: 'small',
-    vAlign: 'top',
-    visualDebug: false,
-    children: null
+    children: null,
+    isLastRow: false
   }
 
-  static Row = GridRow
-  static Col = GridCol
-
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   renderChildren() {
     const { styles, makeStyles, ...props } = this.props
-    const children = Children.toArray(this.props.children)
 
-    return children.map((child, index) => {
-      if (matchComponentTypes(child, [GridRow])) {
+    return Children.map(this.props.children, (child, index) => {
+      if (matchComponentTypes(child, [GridCol])) {
         return safeCloneElement(child, {
-          ...pickProps(props, Grid.propTypes),
+          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+          ...pickProps(props, GridRow.propTypes),
+          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           ...child.props /* child props should override parent */,
-          isLastRow: index + 1 === children.length
+          isLastRow: props.isLastRow,
+          isLastCol: index + 1 === Children.count(this.props.children)
         })
       } else {
         return child // PropType validation should handle errors
@@ -111,15 +123,16 @@ class Grid extends Component {
   render() {
     const { styles, ...restProps } = this.props
 
-    const props = omitProps(restProps, Grid.propTypes)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+    const props = omitProps(restProps, GridRow.propTypes)
 
     return (
-      <span {...props} css={styles.grid}>
+      <span {...props} css={styles.gridRow}>
         {this.renderChildren()}
       </span>
     )
   }
 }
 
-export default Grid
-export { Grid, GridRow, GridCol }
+export default GridRow
+export { GridRow }

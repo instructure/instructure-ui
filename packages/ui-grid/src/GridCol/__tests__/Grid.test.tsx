@@ -22,28 +22,21 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { spacing, media, key: themeName } = theme
+import React from 'react'
 
-  const themeSpecificStyle = {}
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
-  const componentVariables = {
-    spacingSmall: spacing?.small,
-    spacingMedium: spacing?.medium,
-    spacingLarge: spacing?.large,
+import { GridCol } from '../index'
 
-    ...media
-  }
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('<GridCol />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+  it('should render content in each column', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+    const elementRef = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    const subject = await mount(<GridCol elementRef={elementRef}>Foo</GridCol>)
 
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
-  }
-}
-
-export default generateComponentTheme
+    expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+  })
+})

@@ -22,17 +22,30 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { spacing, media, key: themeName } = theme
 
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+  const themeSpecificStyle = {}
 
-import { GridCol } from '../index'
+  const componentVariables = {
+    spacingSmall: spacing?.small,
+    spacingMedium: spacing?.medium,
+    spacingLarge: spacing?.large,
 
-describe('<GridCol />', async () => {
-  it('should render content in each column', async () => {
-    const elementRef = stub()
-    const subject = await mount(<GridCol elementRef={elementRef}>Foo</GridCol>)
+    ...media
+  }
 
-    expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
-  })
-})
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
+  }
+}
+
+export default generateComponentTheme

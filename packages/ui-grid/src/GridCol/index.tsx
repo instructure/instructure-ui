@@ -36,6 +36,37 @@ import generateComponentTheme from './theme'
 // TODO: get numcols from theme config
 const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  colSpacing?: 'none' | 'small' | 'medium' | 'large'
+  rowSpacing?: 'none' | 'small' | 'medium' | 'large'
+  textAlign?: 'start' | 'end' | 'center' | 'inherit'
+  hAlign?: 'start' | 'center' | 'end' | 'space-around' | 'space-between'
+  vAlign?: 'top' | 'middle' | 'bottom'
+  startAt?: any // TODO: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null])
+  visualDebug?: boolean
+  width?:
+    | any
+    | {
+        small?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        medium?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        large?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        xLarge?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+      }
+  offset?:
+    | any
+    | {
+        small?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        medium?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        large?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+        xLarge?: any // TODO: PropTypes.oneOf(COL_WIDTHS)
+      }
+  isLastRow?: boolean
+  isLastCol?: boolean
+  elementRef?: (...args: any[]) => any
+}
+
 /**
 ---
 parent: Grid
@@ -43,7 +74,7 @@ id: Grid.Col
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class GridCol extends Component {
+class GridCol extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
@@ -97,16 +128,20 @@ class GridCol extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
     const { children, styles } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, GridCol.propTypes)
 
     return (
