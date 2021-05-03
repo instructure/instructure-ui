@@ -26,13 +26,16 @@ import { DateTime } from '../DateTime'
 
 const { now, isValid, browserTimeZone, parse, toLocaleString } = DateTime
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('DateTime', () => {
   const timezone = 'America/Halifax' // -3
   const locale = 'en'
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('checks params', () => {
     let whoops = false
     try {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       now()
     } catch (ex) {
       whoops = true
@@ -41,6 +44,7 @@ describe('DateTime', () => {
     }
     whoops = false
     try {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       now(locale)
     } catch (ex) {
       whoops = true
@@ -49,25 +53,29 @@ describe('DateTime', () => {
     }
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('knows when now is', () => {
     // not much of a test, but I need it for coverage stats
     const result = now(locale, timezone)
     expect(result)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it("can figure out the browser's timezone", () => {
     const result = browserTimeZone()
     expect(result)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('validates', () => {
     expect(isValid('2018-04-15T23:30:00Z')).to.be.true()
     expect(isValid('2018-04-15T23:30')).to.be.true()
     expect(isValid('2018-04-15')).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses iso8601', () => {
-    let result = parse(
+    const result = parse(
       '2018-04-15T20:30:00-03:00',
       locale,
       timezone
@@ -75,8 +83,9 @@ describe('DateTime', () => {
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses llll', () => {
-    let result = parse(
+    const result = parse(
       'Sun, Apr 15, 2018 8:30 PM',
       locale,
       timezone
@@ -84,8 +93,9 @@ describe('DateTime', () => {
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses LLLL', () => {
-    let result = parse(
+    const result = parse(
       'Sunday, April 15, 2018 8:30 PM',
       locale,
       timezone
@@ -93,52 +103,66 @@ describe('DateTime', () => {
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses lll', () => {
-    let result = parse('Apr 15, 2018 8:30 PM', locale, timezone).toISOString()
+    const result = parse('Apr 15, 2018 8:30 PM', locale, timezone).toISOString()
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses LLL', () => {
-    let result = parse('April 15, 2018 8:30 PM', locale, timezone).toISOString()
+    const result = parse(
+      'April 15, 2018 8:30 PM',
+      locale,
+      timezone
+    ).toISOString()
     expect(result).to.equal('2018-04-15T23:30:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses ll', () => {
-    let result = parse('Apr 15, 2018', locale, timezone).toISOString()
+    const result = parse('Apr 15, 2018', locale, timezone).toISOString()
     expect(result).to.equal('2018-04-15T03:00:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses LL', () => {
-    let result = parse('April 15, 2018', locale, timezone).toISOString()
+    const result = parse('April 15, 2018', locale, timezone).toISOString()
     expect(result).to.equal('2018-04-15T03:00:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses l', () => {
-    let result = parse('4/15/2018', locale, timezone).toISOString()
+    const result = parse('4/15/2018', locale, timezone).toISOString()
     expect(result).to.equal('2018-04-15T03:00:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses L', () => {
-    let result = parse('04/15/2018', locale, timezone).toISOString()
+    const result = parse('04/15/2018', locale, timezone).toISOString()
     expect(result).to.equal('2018-04-15T03:00:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses French L', () => {
-    let result = parse('15/04/2018', 'fr', timezone).toISOString()
+    const result = parse('15/04/2018', 'fr', timezone).toISOString()
     expect(result).to.equal('2018-04-15T03:00:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('parses French LL', () => {
-    let result = parse('15 Avril, 2018', 'fr', timezone).toISOString()
+    const result = parse('15 Avril, 2018', 'fr', timezone).toISOString()
     expect(result).to.equal('2018-04-15T03:00:00.000Z')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('returns localized string', () => {
     let result = toLocaleString('2018-04-15T13:00Z', 'en', 'UTC', 'LLL')
     expect(result).to.equal('April 15, 2018 1:00 PM')
     result = toLocaleString('2018-04-15T13:00Z', 'fr', 'UTC', 'LLL')
     expect(result).to.equal('15 avril 2018 13:00')
     // iso8601 in given timezone
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 4 arguments, but got 3.
     result = toLocaleString('2018-04-15T13:00Z', 'fr', 'America/Halifax') // -3
     expect(result).to.equal('2018-04-15T10:00:00.000-03:00')
   })

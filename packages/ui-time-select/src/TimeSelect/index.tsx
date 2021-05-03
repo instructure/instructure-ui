@@ -97,7 +97,6 @@ class TimeSelect extends Component<Props> {
      * An ISO 8601 formatted date string representing the current selected value. If defined,
      * the component will act controlled and will not manage its own state.
      */
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'typeof iso8601' is not assignabl... Remove this comment to see the full error message
     value: controllable(I18nPropTypes.iso8601, 'onChange'),
     /**
      * An ISO 8601 formatted date string to use if `value` isn't provided.
@@ -385,7 +384,6 @@ class TimeSelect extends Component<Props> {
       }
       // value does not match an existing option
       const date = DateTime.parse(initialValue, this.locale(), this.timezone())
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'format' does not exist on type 'string'.
       return { label: date.format(format) }
     }
     // otherwise return first option, if desired
@@ -418,7 +416,6 @@ class TimeSelect extends Component<Props> {
     } else {
       baseDate = DateTime.now(this.locale(), this.timezone())
     }
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'second' does not exist on type 'Object'.
     return baseDate.second(0).millisecond(0)
   }
 
@@ -550,7 +547,6 @@ class TimeSelect extends Component<Props> {
         this.locale(),
         this.timezone()
       )
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'format' does not exist on type 'string'.
       prevValue = date.format(this.props.format)
     }
 

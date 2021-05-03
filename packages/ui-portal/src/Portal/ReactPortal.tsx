@@ -82,6 +82,7 @@ class ReactPortal extends React.Component<Props> {
      * provides a reference to the underlying html element
      */
     elementRef: PropTypes.func,
+    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }

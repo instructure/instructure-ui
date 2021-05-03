@@ -22,28 +22,38 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { Locale } from '../Locale'
+import React from 'react'
 
-describe('browserLocale', () => {
-  it('returns the navigator language if a navigator is explicity passed', () => {
-    const navigator = { language: 'de' }
-    expect(Locale.browserLocale(navigator)).to.equal('de')
-  })
+import { ensureSingleChild } from '@instructure/ui-react-utils'
+import { ApplyLocaleContext } from './ApplyLocaleContext'
 
-  describe('with document lang attribute', () => {
-    it('returns the document locale if no navigator is passed', () => {
-      document.documentElement.lang = 'fr'
-      expect(Locale.browserLocale()).to.equal('fr')
-    })
-  })
+type OwnProps = {
+  locale?: string
+  timezone?: string
+  children?: React.ReactNode
+}
 
-  it('returns the browser locale if no navigator is passed, or "en-US" if no browser locale is set', () => {
-    const expectedLanguage = navigator ? navigator.language : 'en-US'
-    expect(Locale.browserLocale()).to.equal(expectedLanguage)
-  })
+// @ts-expect-error ts-migrate(2456) FIXME: Type alias 'Props' circularly references itself.
+type Props = OwnProps & typeof ApplyLocale.defaultProps
 
-  it('returns the default "en-US" if navigator is undefined and the DOM is unavailable', () => {
-    expect(Locale.browserLocale(null, false)).to.equal('en-US')
-  })
-})
+/**
+---
+category: components/utilities
+---
+**/
+// @ts-expect-error ts-migrate(7022) FIXME: 'ApplyLocale' implicitly has type 'any' because it... Remove this comment to see the full error message
+export const ApplyLocale = ({ children, locale, timezone }: Props) => {
+  return (
+    <ApplyLocaleContext.Provider value={{ locale, timezone }}>
+      {ensureSingleChild(children)}
+    </ApplyLocaleContext.Provider>
+  )
+}
+
+ApplyLocale.defaultProps = {
+  locale: undefined,
+  timezone: undefined,
+  children: undefined
+}
+
+export default ApplyLocale

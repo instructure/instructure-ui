@@ -38,6 +38,7 @@ import moment from 'moment-timezone'
  * @param {String} timezone
  * @returns {Object} an instance of a moment.
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'locale' implicitly has an 'any' type.
 function now(locale, timezone) {
   _checkParams(locale, timezone)
   return moment().locale(locale).tz(timezone)
@@ -50,6 +51,7 @@ function now(locale, timezone) {
  * @param {String} timezone
  * @returns {String} ISO 8601 string
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'dateString' implicitly has an 'any' typ... Remove this comment to see the full error message
 function parse(dateString, locale, timezone) {
   _checkParams(locale, timezone)
   // list all available localized formats, from most specific to least
@@ -66,6 +68,7 @@ function parse(dateString, locale, timezone) {
  * @param {String} dateString
  * @returns {Boolean} true if dateString is a valid ISO 8601 string
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'dateString' implicitly has an 'any' typ... Remove this comment to see the full error message
 function isValid(dateString) {
   return moment(dateString, [moment.ISO_8601]).isValid()
 }
@@ -87,12 +90,14 @@ function browserTimeZone() {
  * @param {String} format
  * @returns {String} Localized ISO 8601 string
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'dateString' implicitly has an 'any' typ... Remove this comment to see the full error message
 function toLocaleString(dateString, locale, timezone, format) {
   const d = parse(dateString, locale, timezone)
   const iso8601format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
   return format ? d.format(format) : d.format(iso8601format)
 }
 
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'locale' implicitly has an 'any' type.
 function _checkParams(locale, timezone) {
   if (locale == null) throw Error('locale must be specified')
   if (timezone == null) throw Error('timezone must be specified')

@@ -36,6 +36,7 @@ const I18nPropTypes = {
    * @param {string} propFullName
    * @returns {Error} if prop is an invalid ISO 8601 string
    */
+  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   iso8601(props, propName, componentName, location) {
     const propValue = props[propName]
     if (typeof propValue === 'undefined' || propValue === '') return
@@ -59,6 +60,7 @@ const I18nPropTypes = {
   }
 }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'isRequired' does not exist on type '(pro... Remove this comment to see the full error message
 I18nPropTypes.iso8601.isRequired = makeRequirable(I18nPropTypes.iso8601)
 
 export default I18nPropTypes

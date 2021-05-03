@@ -120,6 +120,7 @@ class Tabs extends Component<Props> {
      */
     tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
     shouldFocusOnRender: PropTypes.bool,
+    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
@@ -291,6 +292,7 @@ class Tabs extends Component<Props> {
       typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
       const { dir } = this.props
+      //@ts-expect-error FIXME:
       const isRtl = dir === bidirectional.DIRECTION.rtl
 
       const tabPosition = getBoundingClientRect(activeTabEl)

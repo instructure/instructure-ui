@@ -21,11 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { canUseDOM, getComputedStyle } from '@instructure/ui-dom-utils'
-
-let defaultDir, dirAttribute, observer
-
+let defaultDir: any, dirAttribute: any, observer: any
 const getDefaultDir = () => {
   /**
    * use a cached value for the default of <html> element's "dir" so we don't
@@ -34,13 +31,10 @@ const getDefaultDir = () => {
   if (defaultDir) {
     return defaultDir
   }
-
   if (canUseDOM) {
     const htmlEl = document.documentElement
-
     dirAttribute = htmlEl.getAttribute('dir')
-    defaultDir = dirAttribute || getComputedStyle(htmlEl).direction
-
+    defaultDir = dirAttribute || (getComputedStyle(htmlEl) as any).direction
     if (!observer) {
       observer = new MutationObserver(() => {
         const attr = htmlEl.getAttribute('dir')
@@ -50,11 +44,9 @@ const getDefaultDir = () => {
       })
       observer.observe(htmlEl, { attributes: true })
     }
-
     return defaultDir
   }
 }
-
 /**
  * ---
  * category: utilities/i18n
@@ -64,13 +56,15 @@ const getDefaultDir = () => {
  * @param {Element} element will use the <html> element by default
  * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
  */
-function getTextDirection(element) {
+function getTextDirection(element: any) {
   if (canUseDOM) {
     if (typeof element === 'undefined' || element === document.documentElement)
       return getDefaultDir()
-    return element.getAttribute('dir') || getComputedStyle(element).direction
+    return (
+      element.getAttribute('dir') ||
+      (getComputedStyle(element) as any).direction
+    )
   }
 }
-
 export default getTextDirection
 export { getTextDirection }

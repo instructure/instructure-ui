@@ -40,6 +40,7 @@ const Locale = {
    * Return the locale from the browser
    * @returns {String} locale (defaults to 'en-US')
    */
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nav' implicitly has an 'any' type.
   browserLocale(nav, hasDOM = canUseDOM) {
     if (nav) return nav.language
     if (!hasDOM) return defaultLocale
@@ -54,6 +55,7 @@ const Locale = {
     const hasNavigatorLanguage = window.navigator && window.navigator.language
     if (hasNavigatorLanguages) return window.navigator.languages[0]
     if (hasNavigatorLanguage)
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'browserLanguage' does not exist on type ... Remove this comment to see the full error message
       return window.navigator.language || window.navigator.browserLanguage
 
     return defaultLocale

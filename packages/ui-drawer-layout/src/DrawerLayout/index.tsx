@@ -82,6 +82,7 @@ class DrawerLayout extends Component<Props> {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
+    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
@@ -133,6 +134,8 @@ class DrawerLayout extends Component<Props> {
 
   get trayPlacement() {
     const { placement, dir } = this.trayProps
+    //@ts-expect-error FIXME:
+
     const isRtl = dir === bidirectional.DIRECTION.rtl
 
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement

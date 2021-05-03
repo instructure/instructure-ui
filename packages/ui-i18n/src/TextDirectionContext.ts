@@ -21,44 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { createContext } from 'react'
+import { getTextDirection } from './getTextDirection'
 
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import { ensureSingleChild } from '@instructure/ui-react-utils'
-import { ApplyLocaleContext } from './ApplyLocaleContext'
-
-/**
----
-category: components/utilities
----
-**/
-export const ApplyLocale = ({ children, locale, timezone }) => {
-  return (
-    <ApplyLocaleContext.Provider value={{ locale, timezone }}>
-      {ensureSingleChild(children)}
-    </ApplyLocaleContext.Provider>
-  )
-}
-ApplyLocale.propTypes = {
-  /**
-      A standard language id
-    **/
-  locale: PropTypes.string,
-  /**
-     A timezone identifier in the format: Area/Location
-   **/
-  timezone: PropTypes.string,
-  /**
-   * accepts only one child (children must be wrapped in a single component/element)
-   */
-  children: PropTypes.node
+// @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
+const TextDirectionContext = createContext(getTextDirection() || 'ltr')
+const DIRECTION = {
+  ltr: 'ltr',
+  rtl: 'rtl'
 }
 
-ApplyLocale.defaultProps = {
-  locale: undefined,
-  timezone: undefined,
-  children: undefined
-}
-
-export default ApplyLocale
+export default TextDirectionContext
+export { TextDirectionContext, DIRECTION }

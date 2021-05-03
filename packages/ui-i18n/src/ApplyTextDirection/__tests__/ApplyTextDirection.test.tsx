@@ -31,12 +31,16 @@ import { bidirectional } from '../../bidirectional'
 @bidirectional()
 class BidirectionalComponent extends React.Component {
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dir' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
     return <div data-dir={this.props.dir}>Hello world</div>
   }
 }
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<ApplyTextDirection />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should take on the direction of the document element by default', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection>Hello world</ApplyTextDirection>
     )
@@ -44,7 +48,9 @@ describe('<ApplyTextDirection />', async () => {
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('ltr')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should take on the context direction if dir prop is not supplied', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">Hello World</ApplyTextDirection>
     )
@@ -52,7 +58,9 @@ describe('<ApplyTextDirection />', async () => {
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('rtl')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should give dir prop preference over context and default document element when supplied', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">
         <ApplyTextDirection dir="ltr">Hello world</ApplyTextDirection>
@@ -64,7 +72,9 @@ describe('<ApplyTextDirection />', async () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass direction via context to bidirectional children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">
         <BidirectionalComponent />
@@ -77,7 +87,9 @@ describe('<ApplyTextDirection />', async () => {
     expect(text.getAttribute('data-dir')).to.equal('rtl')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('when nested, should override parent ApplyTextDirection context', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">
         <ApplyTextDirection dir="ltr">

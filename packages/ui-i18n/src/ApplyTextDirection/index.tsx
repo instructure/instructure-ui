@@ -23,24 +23,36 @@
  */
 
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { getElementType } from '@instructure/ui-react-utils'
 
 import { DIRECTION, TextDirectionContext } from '../TextDirectionContext'
+
+type OwnApplyTextDirectionProps = {
+  dir?: 'ltr' | 'rtl'
+  children?: React.ReactNode | ((...args: any[]) => any)
+  as?: React.ReactElement
+}
+
+// @ts-expect-error ts-migrate(2456) FIXME: Type alias 'ApplyTextDirectionProps' circularly re... Remove this comment to see the full error message
+type ApplyTextDirectionProps = OwnApplyTextDirectionProps &
+  typeof ApplyTextDirection.defaultProps
 
 /**
 ---
 category: components/utilities
 ---
 **/
-const ApplyTextDirection = (props) => {
+// @ts-expect-error ts-migrate(7022) FIXME: 'ApplyTextDirection' implicitly has type 'any' bec... Remove this comment to see the full error message
+const ApplyTextDirection = (props: ApplyTextDirectionProps) => {
   const context = useTextDirectionContext()
   const dir = props.dir || context
+  // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
   const ElementType = getElementType(ApplyTextDirection, props)
 
   return (
     <TextDirectionContext.Provider value={dir}>
       {
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; dir: any; }' is not assigna... Remove this comment to see the full error message
         <ElementType dir={dir}>
           {typeof props.children === 'function'
             ? props.children(dir, dir === DIRECTION.rtl)
@@ -49,24 +61,6 @@ const ApplyTextDirection = (props) => {
       }
     </TextDirectionContext.Provider>
   )
-}
-
-ApplyTextDirection.propTypes = {
-  /**
-   * string 'ltr' or 'rtl' representing the document direction
-   */
-  dir: PropTypes.oneOf(['ltr', 'rtl']),
-  /**
-   * a single child (children must be wrapped in a single component/element) or function
-   * returning a child called with the following arguments:
-   * @param {string} dir - the string value 'rtl' or 'ltr'
-   * @param {Boolean} rtl - boolean value true if the direction is 'rtl'
-   */
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  /**
-   * accepts only one child (children must be wrapped in a single component/element)
-   */
-  as: PropTypes.elementType
 }
 
 ApplyTextDirection.defaultProps = {
