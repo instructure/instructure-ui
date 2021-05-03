@@ -526,6 +526,7 @@ class FileDrop extends Component<Props, State> {
           // @ts-expect-error ts-migrate(2322) FIXME: Type '"small 0 0"' is not assignable to type '0 | ... Remove this comment to see the full error message
           <View display="block" margin="small 0 0">
             <FormFieldMessages
+              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               id={(this as any).messagesId}
               messages={(this.props as any).messages}
             />

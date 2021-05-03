@@ -450,6 +450,7 @@ class TextArea extends Component<Props> {
     )
 
     return (
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormField
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormField.propTypes)}

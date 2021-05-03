@@ -191,6 +191,7 @@ class RadioInputGroup extends Component<Props> {
     const { variant, layout } = this.props
 
     return (
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, RadioInputGroup.propTypes)}
