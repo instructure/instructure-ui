@@ -21,8 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
 
-import { Img } from './index'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(6133) FIXME: 'theme' is declared but its value is never read.
+const generateComponentTheme = (theme) => {
+  const componentVariables = {
+    effectTransitionDuration: '1s',
+    imageBlurAmount: '0.25em'
+  }
 
-export const ImgLocator = locator(Img.selector)
+  return {
+    ...componentVariables
+  }
+}
+
+export default generateComponentTheme

@@ -35,6 +35,26 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  src: string
+  alt?: string
+  display?: 'inline-block' | 'block'
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  overlay?: {
+    color: string
+    opacity: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+    blend?: 'normal' | 'multiply' | 'screen' | 'overlay' | 'color-burn'
+  }
+  withGrayscale?: boolean
+  withBlur?: boolean
+  constrain?: 'cover' | 'contain'
+  elementRef?: (...args: any[]) => any
+  height?: string | number
+  width?: string | number
+}
+
 /**
 ---
 category: components
@@ -42,7 +62,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Img extends Component {
+class Img extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -94,10 +114,12 @@ class Img extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStylesVariables)
   }
 
@@ -161,6 +183,7 @@ class Img extends Component {
       }
 
       return (
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (false | Element | undefined)[];... Remove this comment to see the full error message
         <View {...rootProps} as="span" css={styles.container}>
           {
             !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
@@ -170,6 +193,7 @@ class Img extends Component {
       )
     } else {
       return (
+        // @ts-expect-error ts-migrate(2739) FIXME: Type '{ as: string; alt: string; css: any; src: st... Remove this comment to see the full error message
         <View {...containerProps} {...imageProps} {...a11yProps} as="img" />
       )
     }

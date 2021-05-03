@@ -24,6 +24,7 @@
 
 export default {
   sectionProp: 'constrain',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       src:
@@ -31,6 +32,7 @@ export default {
       alt: 'Panda in the foliage'
     }
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getExampleProps: (props) => {
     return {
       height: '15rem',
