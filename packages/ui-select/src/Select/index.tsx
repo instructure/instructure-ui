@@ -611,7 +611,7 @@ class Select extends Component<Props> {
     groupChildren.push(
       <Options
         id={id}
-        // @ts-expect-error ts-migrate(2554) FIXME:
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         as="ul"
         role="group"
         renderLabel={renderLabel}

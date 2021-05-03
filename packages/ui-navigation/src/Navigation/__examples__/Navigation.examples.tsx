@@ -33,6 +33,7 @@ import {
 import { NavigationItem } from '../index'
 
 export default {
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       label: "I'm the main nav",
@@ -46,6 +47,7 @@ export default {
           icon={<IconAdminLine />}
           label="Admin"
           href="#"
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           themeOverride={{
             backgroundColor: 'red',
             hoverBackgroundColor: 'blue'
@@ -73,6 +75,7 @@ export default {
       ]
     }
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getExampleProps: (props) => {
     return {
       style: {

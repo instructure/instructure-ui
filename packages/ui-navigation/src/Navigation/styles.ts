@@ -32,58 +32,44 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props) => {
-  const { isSelected, isDisabled } = props
-
-  const itemStyles = {
-    appearance: 'none',
-    overflow: 'visible',
-    direction: 'inherit',
-    margin: '0',
-    textDecoration: 'none',
-    userSelect: 'none',
-    touchAction: 'manipulation',
-    background: 'transparent',
-    border: 'none',
-    outline: 'none',
-    lineHeight: componentTheme.height,
-    padding: `0 ${componentTheme.padding}`,
-    alignItems: 'flex-start',
-
-    '&:hover': {
-      textDecoration: 'underline',
-      textDecorationColor: componentTheme.textColor
-    },
-    ...(isDisabled && {
-      pointerEvents: 'none',
-      opacity: 0.5
-    })
-  }
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme, props, state) => {
+  const { minimized } = state
 
   return {
-    item: {
-      label: 'item',
-      ...itemStyles,
-
-      // NOTE: needs separate groups for `:is()` and `:-webkit-any()` because of css selector group validation (see https://www.w3.org/TR/selectors-3/#grouping)
-      '&:is(a), &:is(button)': itemStyles,
-      '&:-webkit-any(a), &:-webkit-any(button)': itemStyles
+    navigation: {
+      label: 'navigation',
+      color: componentTheme.fontColor,
+      backgroundColor: componentTheme.backgroundColor,
+      boxSizing: 'border-box',
+      display: 'flex',
+      flexDirection: 'column',
+      // @ts-expect-error ts-migrate(2783) FIXME: 'width' is specified more than once, so this usage... Remove this comment to see the full error message
+      width: componentTheme.width,
+      height: '100%',
+      overflowY: 'auto',
+      ...(minimized ? { width: componentTheme.minimizedWidth } : {})
     },
-
-    label: {
-      label: 'item__label',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      fontFamily: componentTheme.fontFamily,
-      fontSize: componentTheme.fontSize,
-      fontWeight: componentTheme.fontWeight,
-      color: componentTheme.textColor,
-
-      ...(isSelected && {
-        color: componentTheme.textColorSelected,
-        textDecoration: 'underline'
-      })
+    list: {
+      label: 'navigation__list',
+      padding: 0,
+      margin: 0
+    },
+    content: {
+      label: 'navigation__content',
+      listStyleType: 'none',
+      margin: '0',
+      padding: '0',
+      flex: '1 0 auto'
+    },
+    toggle: {
+      transform: 'translate3d(0, 0, 0)',
+      transition: `all ${componentTheme.toggleTransition}`,
+      ...(minimized ? { transform: 'rotate3d(0, 1, 0, -180deg)' } : {})
+    },
+    toggleIcon: {
+      fill: componentTheme.fill,
+      margin: '0 auto'
     }
   }
 }

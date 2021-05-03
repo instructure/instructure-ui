@@ -21,31 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-import { contrast } from '@instructure/ui-color-utils'
-import { expect } from '@instructure/ui-test-utils'
-import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+import { Navigation } from './index'
+import { NavigationItemLocator } from './NavigationItem/NavigationItemLocator'
 
-import generateComponentTheme from '../theme'
+export { NavigationItemLocator }
 
-describe('Navigation.theme', () => {
-  describe('with the default theme', () => {
-    const variables = generateComponentTheme(canvas)
-
-    it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(
-        contrast(variables.backgroundColor, variables.fontColor)
-      ).to.be.above(3)
-    })
-  })
-
-  describe('with the high contrast canvas theme', () => {
-    const variables = generateComponentTheme(canvasHighContrast)
-
-    it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(
-        contrast(variables.backgroundColor, variables.fontColor)
-      ).to.be.above(4.5)
-    })
-  })
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const NavigationLocator = locator(Navigation.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findAllItems: (...args) => {
+    return NavigationItemLocator.findAll(...args)
+  },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findItem: (...args) => {
+    return NavigationItemLocator.find(...args)
+  }
 })

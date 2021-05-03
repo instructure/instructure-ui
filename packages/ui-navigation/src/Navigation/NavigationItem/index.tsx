@@ -34,6 +34,18 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  icon: React.ReactNode
+  label: React.ReactNode
+  as?: React.ReactElement
+  href?: string
+  onClick?: (...args: any[]) => any
+  selected?: boolean
+  minimized?: boolean
+}
+
 /**
 ---
 parent: Navigation
@@ -42,7 +54,7 @@ id: Navigation.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class NavigationItem extends Component {
+class NavigationItem extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -80,6 +92,7 @@ class NavigationItem extends Component {
 
   static defaultProps = {
     as: 'a',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
     onClick: function (e, selected) {},
     selected: false,
     minimized: false,
@@ -87,21 +100,26 @@ class NavigationItem extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles({ minimized: this.minimized })
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles({ minimized: this.minimized })
   }
 
   renderLink() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(NavigationItem, this.props)
 
     const { href, onClick, icon, label } = this.props
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, NavigationItem.propTypes)
 
     return (
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (Element | null)[]; href: string... Remove this comment to see the full error message
       <ElementType
         {...props}
         href={href}

@@ -42,6 +42,20 @@ import { Item } from './Item'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  screenReaderLabel: string
+  debounce?: number
+  renderBeforeItems?: React.ReactNode | ((...args: any[]) => any)
+  renderAfterItems?: React.ReactNode | ((...args: any[]) => any)
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  elementRef?: (...args: any[]) => any
+  renderTruncateLabel?: React.ReactNode | ((...args: any[]) => any)
+  onUpdate?: (...args: any[]) => any
+  visibleItemsCount?: number
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components
@@ -49,7 +63,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class AppNav extends Component {
+class AppNav extends Component<Props> {
   static propTypes = {
     /**
      * Screenreader label for the overall navigation
@@ -110,6 +124,7 @@ class AppNav extends Component {
     margin: '0',
     renderBeforeItems: undefined,
     renderAfterItems: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {},
     renderTruncateLabel: () => 'More',
     onUpdate: () => {},
@@ -125,49 +140,61 @@ class AppNav extends Component {
   _list = null
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
     const { width: origWidth } = getBoundingClientRect(this._list)
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'AppN... Remove this comment to see the full error message
     this._debounced = debounce(this.handleResize, this.props.debounce, {
       leading: true,
       trailing: true
     })
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
     this._resizeListener = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {
         const { width } = entry.contentRect
 
         if (origWidth !== width) {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'AppN... Remove this comment to see the full error message
           this._debounced()
         }
       }
     })
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
     this._resizeListener.observe(this._list)
 
     this.handleResize()
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   componentWillUnmount() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
     if (this._resizeListener) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_resizeListener' does not exist on type ... Remove this comment to see the full error message
       this._resizeListener.disconnect()
     }
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'AppN... Remove this comment to see the full error message
     if (this._debounced) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'AppN... Remove this comment to see the full error message
       this._debounced.cancel()
     }
   }
 
   measureItems = () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const menuTriggerWidth = px(this.props.styles.menuTriggerWidth)
     let visibleItemsCount = 0
 
     if (this._list) {
-      let { width: navWidth } = getBoundingClientRect(this._list)
+      const { width: navWidth } = getBoundingClientRect(this._list)
 
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       const itemWidths = Array.from(this._list.getElementsByTagName('li')).map(
         (item) => {
           const { width } = getBoundingClientRect(item)
@@ -195,11 +222,13 @@ class AppNav extends Component {
     this.setState({ isMeasuring: true }, () => {
       const { visibleItemsCount } = this.measureItems()
 
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       this.props.onUpdate({ visibleItemsCount })
       this.setState({ isMeasuring: false })
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
   renderListItem(item, isMenuTrigger, key) {
     return (
       <li
@@ -215,9 +244,11 @@ class AppNav extends Component {
     )
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'items' implicitly has an 'any' type.
   renderMenu(items) {
     const menu = (
       <Menu
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'handleMenuDismiss' does not exist on typ... Remove this comment to see the full error message
         onDismiss={this.handleMenuDismiss} // TODO: remove when INSTUI-2262 is resolved
         trigger={
           <AppNav.Item
@@ -225,6 +256,7 @@ class AppNav extends Component {
           />
         }
       >
+        {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type. */}
         {items.map((item, index) => {
           return (
             <Menu.Item
@@ -255,7 +287,9 @@ class AppNav extends Component {
       elementRef
     } = this.props
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, AppNav.propTypes),
       AppNav
     )
@@ -284,6 +318,7 @@ class AppNav extends Component {
       >
         {renderBeforeItems && <span>{renderBeforeItems}</span>}
         <ul
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'HTMLUListElement | null' is not assignable t... Remove this comment to see the full error message
           ref={(el) => (this._list = el)}
           css={this.props.styles.list}
           aria-label={callRenderProp(screenReaderLabel)}

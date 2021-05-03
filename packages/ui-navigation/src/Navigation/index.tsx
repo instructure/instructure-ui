@@ -40,6 +40,22 @@ import { NavigationItem } from './NavigationItem'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  minimized?: any // TODO: controllable(PropTypes.bool, 'onMinimized', 'defaultMinimized')
+  defaultMinimized?: boolean
+  onMinimized?: (...args: any[]) => any
+  label: string
+  toggleLabel: {
+    expandedLabel?: string
+    minimizedLabel?: string
+  }
+  href?: string
+  onClick?: (...args: any[]) => any
+}
+
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'minimized' implicitly has an 'any... Remove this comment to see the full error message
 const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 
 /**
@@ -49,7 +65,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Navigation extends Component {
+class Navigation extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -92,7 +108,9 @@ class Navigation extends Component {
   static defaultProps = {
     children: null,
     defaultMinimized: false,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onMinimized: function (event, minimized) {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'e' is declared but its value is never read.
     onClick: function (e) {},
     href: undefined,
     minimized: undefined
@@ -100,7 +118,9 @@ class Navigation extends Component {
 
   static Item = NavigationItem
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     super()
 
     this.state = {
@@ -111,10 +131,12 @@ class Navigation extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles({ minimized: this.minimized })
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles({ minimized: this.minimized })
   }
 
@@ -122,6 +144,7 @@ class Navigation extends Component {
     if (this.isControlled()) {
       return !!this.props.minimized
     }
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'minimized' does not exist on type 'Reado... Remove this comment to see the full error message
     return !!this.state.minimized
   }
 
@@ -129,17 +152,20 @@ class Navigation extends Component {
     return typeof props.minimized === 'boolean'
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleNavToggle = (event) => {
     if (!this.isControlled()) {
       this.setState(navMinimized)
     }
 
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onMinimized(event, !this.minimized)
   }
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
       const navItem = safeCloneElement(child, {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'minimized' does not exist on type 'Reado... Remove this comment to see the full error message
         minimized: this.state.minimized
       })
       return <li css={this.props.styles.list}>{navItem}</li>
@@ -147,6 +173,7 @@ class Navigation extends Component {
   }
 
   toggleMessage() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'minimized' does not exist on type 'Reado... Remove this comment to see the full error message
     return this.state.minimized
       ? this.props.toggleLabel.minimizedLabel
       : this.props.toggleLabel.expandedLabel

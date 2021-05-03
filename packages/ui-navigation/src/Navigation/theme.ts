@@ -27,24 +27,38 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, borders, spacing, typography, key: themeName } = theme
+  const { colors, spacing, borders, transitions, key: themeName } = theme
 
-  const themeSpecificStyles = {}
+  const themeSpecificStyle = {
+    canvas: {
+      backgroundColor: theme['ic-brand-global-nav-bgd'],
+      fontColor: theme['ic-brand-global-nav-menu-item__text-color'],
+      fill: theme['ic-brand-global-nav-ic-icon-svg-fill']
+    }
+  }
 
   const componentVariables = {
-    fontFamily: typography?.fontFamily,
-    height: '3.75rem', // 60px per product design
-    borderColor: colors?.borderMedium,
-    borderStyle: borders?.style,
-    borderWidth: borders?.widthSmall,
-    horizontalMargin: spacing?.xxSmall,
-    menuTriggerWidth: '7.5rem'
+    fontColor: colors?.textLightest,
+    backgroundColor: colors?.backgroundBrandSecondary,
+    width: '5.25rem',
+    minimizedWidth: '3.375rem',
+    fill: colors?.textLightest,
+
+    focusOutlineInnerWidth: borders?.widthMedium,
+    focusOutlineOuterWidth: borders?.widthSmall,
+    focusOutlineInnerColor: colors?.borderBrand,
+    focusOutlineOuterColor: colors?.borderLightest,
+
+    marginBottom: spacing?.small,
+    toggleTransition: transitions?.duration
   }
 
   return {
     ...componentVariables,
-    ...themeSpecificStyles[themeName]
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
   }
 }
 

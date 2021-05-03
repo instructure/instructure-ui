@@ -21,29 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, spacing, typography } = theme
+import { Item } from './index'
 
-  const componentVariables = {
-    fontFamily: typography?.fontFamily,
-    fontSize: '1.125rem',
-    fontWeight: typography?.fontWeightBold,
-    textColor: colors?.textLink,
-    textColorSelected: colors?.textDarkest,
-    height: '2.25rem',
-    padding: spacing?.small,
-    backgroundColor: colors?.backgroundLightest
-  }
-
-  return {
-    ...componentVariables
-  }
-}
-
-export default generateComponentTheme
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const AppNavItemLocator = locator(Item.selector)

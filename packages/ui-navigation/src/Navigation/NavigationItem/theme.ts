@@ -27,35 +27,53 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, spacing, borders, transitions, key: themeName } = theme
+  const { colors, spacing, typography, key: themeName } = theme
 
   const themeSpecificStyle = {
     canvas: {
-      backgroundColor: theme['ic-brand-global-nav-bgd'],
       fontColor: theme['ic-brand-global-nav-menu-item__text-color'],
-      fill: theme['ic-brand-global-nav-ic-icon-svg-fill']
+      iconColor: theme['ic-brand-global-nav-ic-icon-svg-fill'],
+      backgroundColor: theme['ic-brand-global-nav-bgd'],
+      hoverBackgroundColor: theme['ic-global-nav-link-hover'],
+      selectedFontColor:
+        theme['ic-brand-global-nav-menu-item__text-color--active'],
+      selectedIconColor: theme['ic-brand-global-nav-ic-icon-svg-fill--active']
+    },
+    'canvas-high-contrast': {
+      linkTextDecoration: 'underline'
     }
   }
 
   const componentVariables = {
+    fontSize: typography?.fontSizeSmall,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightLight,
+
     fontColor: colors?.textLightest,
-    backgroundColor: colors?.backgroundBrandSecondary,
-    width: '5.25rem',
-    minimizedWidth: '3.375rem',
-    fill: colors?.textLightest,
+    iconSize: '1.625rem',
+    iconColor: colors?.textLightest,
+    lineHeight: typography?.lineHeight,
+    backgroundColor: 'transparent',
+    linkTextDecoration: 'none',
 
-    focusOutlineInnerWidth: borders?.widthMedium,
-    focusOutlineOuterWidth: borders?.widthSmall,
-    focusOutlineInnerColor: colors?.borderBrand,
-    focusOutlineOuterColor: colors?.borderLightest,
+    hoverBackgroundColor: colors?.backgroundDarkest,
+    outerFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderDarkest}`,
+    innerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderLightest}`,
 
-    marginBottom: spacing?.small,
-    toggleTransition: transitions?.duration
+    selectedFontColor: colors?.textBrand,
+    selectedIconColor: colors?.textBrand,
+    selectedBackgroundColor: colors?.backgroundLightest,
+    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderLightest}`,
+    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderBrand}`,
+
+    contentPadding: spacing?.xxSmall
   }
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

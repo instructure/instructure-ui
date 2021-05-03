@@ -21,18 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { locator } from '@instructure/ui-test-locator'
 
-import { Navigation } from './index'
-import { NavigationItemLocator } from './NavigationItem/NavigationItemLocator'
+import { AppNav } from './index'
 
-export { NavigationItemLocator }
+import { AppNavItemLocator } from './Item/AppNavItemLocator'
 
-export const NavigationLocator = locator(Navigation.selector, {
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const AppNavLocator = locator(AppNav.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllItems: (...args) => {
-    return NavigationItemLocator.findAll(...args)
+    return AppNavItemLocator.findAll(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findItem: (...args) => {
-    return NavigationItemLocator.find(...args)
+    return AppNavItemLocator.find(...args)
   }
 })

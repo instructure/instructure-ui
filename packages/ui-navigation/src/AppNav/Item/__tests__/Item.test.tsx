@@ -36,14 +36,19 @@ const icon = (
   </svg>
 )
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<AppNav.Item />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render label text', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderLabel="Some label" href="#" />)
     const item = await ItemLocator.find()
     expect(await item.find(':contains(Some label)')).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an icon/image/etc.', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderIcon={icon}
@@ -57,7 +62,9 @@ describe('<AppNav.Item />', async () => {
     expect(renderedIcon).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render content after the label text to accommodate badges, etc.', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderLabel="Some label"
@@ -69,8 +76,11 @@ describe('<AppNav.Item />', async () => {
     expect(await item.find('strong:contains(I am rendered after!)')).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should respond to an onClick event', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderLabel="Some label" onClick={onClick} />)
     const item = await ItemLocator.find()
 
@@ -80,10 +90,13 @@ describe('<AppNav.Item />', async () => {
     expect(onClick).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should output a console error if icon is used with non-screenreader label text', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
     const warning =
       'Warning: [AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderIcon={icon}
@@ -94,7 +107,9 @@ describe('<AppNav.Item />', async () => {
     expect(consoleError).to.be.calledWith(warning)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderIcon={icon}

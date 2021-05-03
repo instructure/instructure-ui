@@ -27,52 +27,23 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, spacing, typography, key: themeName } = theme
-
-  const themeSpecificStyle = {
-    canvas: {
-      fontColor: theme['ic-brand-global-nav-menu-item__text-color'],
-      iconColor: theme['ic-brand-global-nav-ic-icon-svg-fill'],
-      backgroundColor: theme['ic-brand-global-nav-bgd'],
-      hoverBackgroundColor: theme['ic-global-nav-link-hover'],
-      selectedFontColor:
-        theme['ic-brand-global-nav-menu-item__text-color--active'],
-      selectedIconColor: theme['ic-brand-global-nav-ic-icon-svg-fill--active']
-    },
-    'canvas-high-contrast': {
-      linkTextDecoration: 'underline'
-    }
-  }
+  const { colors, spacing, typography } = theme
 
   const componentVariables = {
-    fontSize: typography?.fontSizeSmall,
     fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightLight,
-
-    fontColor: colors?.textLightest,
-    iconSize: '1.625rem',
-    iconColor: colors?.textLightest,
-    lineHeight: typography?.lineHeight,
-    backgroundColor: 'transparent',
-    linkTextDecoration: 'none',
-
-    hoverBackgroundColor: colors?.backgroundDarkest,
-    outerFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderDarkest}`,
-    innerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderLightest}`,
-
-    selectedFontColor: colors?.textBrand,
-    selectedIconColor: colors?.textBrand,
-    selectedBackgroundColor: colors?.backgroundLightest,
-    selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors?.borderLightest}`,
-    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors?.borderBrand}`,
-
-    contentPadding: spacing?.xxSmall
+    fontSize: '1.125rem',
+    fontWeight: typography?.fontWeightBold,
+    textColor: colors?.textLink,
+    textColorSelected: colors?.textDarkest,
+    height: '2.25rem',
+    padding: spacing?.small,
+    backgroundColor: colors?.backgroundLightest
   }
 
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    ...componentVariables
   }
 }
 

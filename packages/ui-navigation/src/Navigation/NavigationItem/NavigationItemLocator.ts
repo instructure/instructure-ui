@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-locator'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
+// eslint-disable-next-line no-restricted-imports
+import { TooltipLocator } from '@instructure/ui-tooltip/es/Tooltip/TooltipLocator'
 
-import { Item } from './index'
+import { NavigationItem } from './index'
 
-export const AppNavItemLocator = locator(Item.selector)
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const NavigationItemLocator = locator(NavigationItem.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findTooltipContent: (...args) => TooltipLocator.findContent(...args)
+})

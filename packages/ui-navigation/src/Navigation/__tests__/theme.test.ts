@@ -24,39 +24,32 @@
 
 import { contrast } from '@instructure/ui-color-utils'
 import { expect } from '@instructure/ui-test-utils'
-
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
+
 import generateComponentTheme from '../theme'
 
-describe('AppNav.Item.theme', () => {
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('Navigation.theme', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
 
-    it('should have a background and text color that meets 3:1 contrast', () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+    it('should have a background and text colors that meet 3:1 contrast', () => {
       expect(
-        contrast(variables.backgroundColor, variables.textColor)
-      ).to.be.above(3)
-    })
-
-    it('should have a background and selected item text color that meets 3:1 contrast', () => {
-      expect(
-        contrast(variables.backgroundColor, variables.textColorSelected)
+        contrast(variables.backgroundColor, variables.fontColor)
       ).to.be.above(3)
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the high contrast canvas theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
 
-    it('should have a background and text color that meets 4.5:1 contrast', () => {
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(
-        contrast(variables.backgroundColor, variables.textColor)
-      ).to.be.above(4.5)
-    })
-
-    it('should have a background and selected item text color that meets 4.5:1 contrast', () => {
-      expect(
-        contrast(variables.backgroundColor, variables.textColorSelected)
+        contrast(variables.backgroundColor, variables.fontColor)
       ).to.be.above(4.5)
     })
   })

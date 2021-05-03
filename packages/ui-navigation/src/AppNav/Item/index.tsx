@@ -41,6 +41,21 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderLabel: React.ReactNode | ((...args: any[]) => any)
+  renderAfter?: React.ReactNode | ((...args: any[]) => any)
+  renderIcon?: React.ReactNode | ((...args: any[]) => any)
+  href?: string
+  onClick?: (...args: any[]) => any
+  isSelected?: boolean
+  elementRef?: (...args: any[]) => any
+  as?: React.ReactElement
+  cursor?: string
+  isDisabled?: boolean
+}
+
 /**
 ---
 parent: AppNav
@@ -50,7 +65,7 @@ id: AppNav.Item
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Item extends Component {
+class Item extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -103,6 +118,7 @@ class Item extends Component {
 
   static defaultProps = {
     children: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClick: function (event) {},
     isSelected: false,
     href: undefined,
@@ -115,13 +131,16 @@ class Item extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
   handleClick = (e) => {
     const { isDisabled, onClick } = this.props
 
@@ -134,6 +153,7 @@ class Item extends Component {
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(Item, this.props)
 
     const {
@@ -154,6 +174,7 @@ class Item extends Component {
     ])
 
     if (icon) {
+      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(
         labelIsForScreenReaders,
         '[AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'
@@ -164,6 +185,7 @@ class Item extends Component {
       <View
         {...passthroughProps(this.props)}
         as={ElementType}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any[]; as: string; href: string ... Remove this comment to see the full error message
         href={href}
         onClick={this.handleClick}
         disabled={isDisabled}
@@ -171,7 +193,9 @@ class Item extends Component {
         display="flex"
         position="relative"
         borderRadius="medium"
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'handleFocus' does not exist on type 'Ite... Remove this comment to see the full error message
         onFocus={this.handleFocus}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'handleBlur' does not exist on type 'Item... Remove this comment to see the full error message
         onBlur={this.handleBlur}
         cursor={isDisabled ? 'not-allowed' : cursor}
         css={this.props.styles.item}
