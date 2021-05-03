@@ -23,37 +23,37 @@
  */
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme, props, state) => {
-  const { variant } = props
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, typography, borders, breakpoints, shadows, stacking } = theme
 
-  const backgroundStyle =
-    variant === 'inverse'
-      ? {
-          background: componentTheme.inverseBackground
-        }
-      : {}
+  const componentVariables = {
+    fontFamily: typography?.fontFamily,
+    textColor: colors?.textDarkest,
+    background: colors?.backgroundLightest,
+    borderColor: colors?.borderMedium,
+    borderRadius: borders?.radiusMedium,
+
+    inverseBackground: colors?.backgroundBrandSecondary,
+    inverseTextColor: colors?.textLightest,
+
+    autoMinWidth: breakpoints?.xSmall,
+    smallMaxWidth: breakpoints?.small,
+    mediumMaxWidth: breakpoints?.medium,
+    largeMaxWidth: breakpoints?.large,
+
+    boxShadow: shadows?.depth3,
+
+    zIndex: stacking?.topmost
+  }
 
   return {
-    modalBody: {
-      label: 'modalBody',
-      boxSizing: 'border-box',
-      flex: '1 1 auto',
-      overflowY: 'auto',
-      '&:focus': {
-        outline: 'none'
-      },
-      ...backgroundStyle
-    }
+    ...componentVariables
   }
 }
 
-export default generateStyle
+export default generateComponentTheme

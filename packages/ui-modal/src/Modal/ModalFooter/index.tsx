@@ -23,29 +23,30 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  matchComponentTypes,
-  passthroughProps
-} from '@instructure/ui-react-utils'
-import { CloseButton } from '@instructure/ui-buttons'
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
-
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  variant?: 'default' | 'inverse'
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
 
 /**
 ---
 parent: Modal
-id: Modal.Header
+id: Modal.Footer
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalHeader extends Component {
+class ModalFooter extends Component<Props> {
   static propTypes = {
     children: PropTypes.node,
     variant: PropTypes.oneOf(['default', 'inverse']),
@@ -57,43 +58,31 @@ class ModalHeader extends Component {
   }
 
   static defaultProps = {
-    children: null,
-    variant: 'default'
+    variant: 'default',
+    children: null
   }
 
   componentDidMount() {
-    this.props.makeStyles(this.makeStyleProps())
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles(this.makeStyleProps())
-  }
-
-  makeStyleProps = () => {
-    return {
-      withCloseButton: this.usesCloseButton
-    }
-  }
-
-  get usesCloseButton() {
-    React.Children.forEach(this.props.children, (child) => {
-      if (child && matchComponentTypes(child, [CloseButton])) {
-        return true
-      }
-    })
-    return false
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles()
   }
 
   render() {
     const { children, ...rest } = this.props
 
     return (
-      <div css={this.props.styles.modalHeader} {...passthroughProps(rest)}>
+      <div css={this.props.styles.modalFooter} {...passthroughProps(rest)}>
         {children}
       </div>
     )
   }
 }
 
-export default ModalHeader
-export { ModalHeader }
+export default ModalFooter
+export { ModalFooter }

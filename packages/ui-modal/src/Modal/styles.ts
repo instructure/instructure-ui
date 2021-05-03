@@ -32,31 +32,78 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
-  const { variant } = props
+  const { size, variant, overflow } = props
 
-  const backgroundStyle =
+  const commonSizeStyleExceptForFullscreen = {
+    maxWidth: '95%',
+    maxHeight: '95%',
+    ...(overflow === 'fit' && {
+      transform: 'translateY(2.5%)'
+    })
+  }
+
+  const sizeStyles = {
+    auto: {
+      flex: '0 1 auto',
+      minWidth: componentTheme.autoMinWidth,
+      ...commonSizeStyleExceptForFullscreen
+    },
+    small: {
+      flex: `0 1 ${componentTheme.smallMaxWidth}`,
+      ...commonSizeStyleExceptForFullscreen
+    },
+    medium: {
+      flex: `0 1 ${componentTheme.mediumMaxWidth}`,
+      ...commonSizeStyleExceptForFullscreen
+    },
+    large: {
+      flex: `0 1 ${componentTheme.largeMaxWidth}`,
+      ...commonSizeStyleExceptForFullscreen
+    },
+    fullscreen: {
+      flex: 1,
+      width: '100%',
+      height: '100%',
+      boxShadow: 'none',
+      border: 'none',
+      borderRadius: 0
+    }
+  }
+  const backgroundStyles =
     variant === 'inverse'
       ? {
           background: componentTheme.inverseBackground,
-          borderTop: `${componentTheme.borderWidth} solid ${componentTheme.inverseBorderColor}`
+          color: componentTheme.inverseTextColor
         }
       : {
           background: componentTheme.background,
-          borderTop: `${componentTheme.borderWidth} solid ${componentTheme.borderColor}`
+          color: componentTheme.textColor
         }
 
   return {
-    modalFooter: {
-      label: 'modalFooter',
-      flex: '0 0 auto',
-      boxSizing: 'border-box',
-      padding: componentTheme.padding,
-      borderBottomRightRadius: componentTheme.borderRadius,
-      borderBottomLeftRadius: componentTheme.borderRadius,
+    modal: {
+      label: 'modal',
+      fontFamily: componentTheme.fontFamily,
       display: 'flex',
-      justifyContent: 'flex-end',
-      ...backgroundStyle
+      minWidth: '1px',
+      flexDirection: 'column',
+      position: 'relative',
+      boxSizing: 'border-box',
+      boxShadow: componentTheme.boxShadow,
+      border: `0.0625rem solid ${componentTheme.borderColor}`,
+      borderRadius: componentTheme.borderRadius,
+      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+      ...sizeStyles[size],
+      ...backgroundStyles
+    },
+    constrainContext: {
+      label: 'modal__constrainContext',
+      display: 'block',
+      position: 'relative',
+      width: '100%',
+      height: '100%'
     }
   }
 }

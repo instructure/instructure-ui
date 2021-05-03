@@ -27,18 +27,17 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, spacing, borders } = theme
+  const { colors, spacing } = theme
 
   const componentVariables = {
-    background: colors?.backgroundLight,
+    background: colors?.backgroundLightest,
     borderColor: colors?.borderMedium,
-    borderWidth: borders?.widthSmall,
-    borderRadius: borders?.radiusMedium,
-    padding: spacing?.small,
+    padding: spacing?.medium,
 
     inverseBackground: colors?.backgroundDarkest,
-    inverseBorderColor: colors?.borderDarkest
+    inverseBorderColor: colors?.backgroundDarkest
   }
 
   return {

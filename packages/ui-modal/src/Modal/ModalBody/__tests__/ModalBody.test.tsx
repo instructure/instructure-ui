@@ -29,18 +29,24 @@ import { ModalBody } from '../index'
 import generateComponentTheme from '../theme'
 import { canvas } from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 const ModalBodyLocator = locator(ModalBody.selector)
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<ModalBody />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ModalBody />)
     const body = await ModalBodyLocator.find()
     expect(body).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set inverse styles', async () => {
     const variables = generateComponentTheme(canvas)
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ModalBody variant="inverse" />)
     const body = await ModalBodyLocator.find()
 
@@ -50,7 +56,9 @@ describe('<ModalBody />', async () => {
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set 100% width and height when overflow is set to fit', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ModalBody overflow="fit" />)
 
     const body = await ModalBodyLocator.find()
@@ -59,6 +67,7 @@ describe('<ModalBody />', async () => {
     expect(body.getDOMNode().style.height).to.equal('100%')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when passing down props to View', async () => {
     const allowedProps = {
       padding: 'small',
@@ -73,21 +82,28 @@ describe('<ModalBody />', async () => {
       )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should NOT allow the '${prop}' prop`, async () => {
             const warning = `Warning: [ModalBody] prop '${prop}' is not allowed.`
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
             const props = {
               [prop]: 'foo'
             }
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(<ModalBody {...props} />)
             expect(consoleError).to.be.calledWith(warning)
           })
         } else {
+          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should allow the '${prop}' prop`, async () => {
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
             const props = {
+              // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
               [prop]: allowedProps[prop]
             }
+            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(<ModalBody {...props} />)
             expect(consoleError).to.not.be.called()
           })

@@ -22,32 +22,29 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
-import { ModalFooter } from '../index'
-import generateComponentTheme from '../theme'
-import { canvas } from '@instructure/ui-themes'
-import { color2hex } from '@instructure/ui-color-utils'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, borders } = theme
 
-describe('<ModalFooter />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<ModalFooter />)
+  const componentVariables = {
+    background: colors?.backgroundLight,
+    borderColor: colors?.borderMedium,
+    borderWidth: borders?.widthSmall,
+    borderRadius: borders?.radiusMedium,
+    padding: spacing?.small,
 
-    const footer = within(subject.getDOMNode())
-    expect(footer).to.exist()
-  })
+    inverseBackground: colors?.backgroundDarkest,
+    inverseBorderColor: colors?.borderDarkest
+  }
 
-  it('should set inverse styles', async () => {
-    const variables = generateComponentTheme(canvas)
-    const subject = await mount(<ModalFooter variant="inverse" />)
-    const footer = within(subject.getDOMNode())
+  return {
+    ...componentVariables
+  }
+}
 
-    const cssStyleDeclaration = footer.getComputedStyle() // CSSStyleDeclaration type
-    expect(variables.inverseBackground).to.equal(
-      color2hex(cssStyleDeclaration.getPropertyValue('background-color'))
-    )
-    expect(variables.inverseBorderColor).to.equal(
-      color2hex(cssStyleDeclaration.getPropertyValue('border-top-color'))
-    )
-  })
-})
+export default generateComponentTheme

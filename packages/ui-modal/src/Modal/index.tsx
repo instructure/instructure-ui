@@ -49,6 +49,38 @@ import { ModalFooter } from './ModalFooter'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  label: string
+  as?: React.ReactElement
+  size?: 'auto' | 'small' | 'medium' | 'large' | 'fullscreen'
+  variant?: 'default' | 'inverse'
+  open?: boolean
+  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  shouldReturnFocus?: boolean
+  shouldCloseOnDocumentClick?: boolean
+  onOpen?: (...args: any[]) => any
+  onClose?: (...args: any[]) => any
+  onDismiss?: (...args: any[]) => any
+  contentRef?: (...args: any[]) => any
+  mountNode?: any // PropTypes.oneOfType([element, PropTypes.func]),
+  insertAt?: 'bottom' | 'top'
+  liveRegion?:
+    | React.ReactElement[]
+    | React.ReactElement
+    | ((...args: any[]) => any)
+  transition?: any // TODO: Transition.propTypes.type
+  onEnter?: (...args: any[]) => any
+  onEntering?: (...args: any[]) => any
+  onEntered?: (...args: any[]) => any
+  onExit?: (...args: any[]) => any
+  onExiting?: (...args: any[]) => any
+  onExited?: (...args: any[]) => any
+  constrain?: 'window' | 'parent'
+  overflow?: 'scroll' | 'fit'
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components
@@ -57,7 +89,7 @@ tags: overlay, portal, dialog
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Modal extends Component {
+class Modal extends Component<Props> {
   static propTypes = {
     /**
      * An accessible label for the `<Modal />` content
@@ -200,8 +232,11 @@ class Modal extends Component {
     size: 'auto',
     variant: 'default',
     transition: 'fade',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onOpen: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onClose: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onDismiss: (event) => {},
     onEnter: () => {},
     onEntering: () => {},
@@ -213,6 +248,7 @@ class Modal extends Component {
     mountNode: null,
     insertAt: 'bottom',
     liveRegion: null,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     contentRef: (el) => {},
     shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
@@ -226,6 +262,7 @@ class Modal extends Component {
   static Body = ModalBody
   static Footer = ModalFooter
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -235,9 +272,11 @@ class Modal extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.open && !this.props.open) {
       // closing
@@ -245,6 +284,7 @@ class Modal extends Component {
         transitioning: prevProps.transition !== null
       })
     }
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -253,6 +293,7 @@ class Modal extends Component {
   }
 
   get DOMNode() {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Modal'... Remove this comment to see the full error message
     return this._DOMNode
   }
 
@@ -265,9 +306,11 @@ class Modal extends Component {
   }
 
   set DOMNode(el) {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Modal'... Remove this comment to see the full error message
     this._DOMNode = el
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'DOMNode' implicitly has an 'any' type.
   handlePortalOpen = (DOMNode) => {
     this.DOMNode = DOMNode
   }
@@ -278,7 +321,9 @@ class Modal extends Component {
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   contentRef = (el) => {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Modal'... Remove this comment to see the full error message
     this._content = el
     if (typeof this.props.contentRef === 'function') {
       this.props.contentRef(el)
@@ -294,6 +339,7 @@ class Modal extends Component {
       if (matchComponentTypes(child, [ModalBody])) {
         return safeCloneElement(child, {
           variant: variant,
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           overflow: child.props.overflow || overflow
         })
       } else {
@@ -304,6 +350,7 @@ class Modal extends Component {
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   renderDialog(props) {
     const {
       onDismiss,
@@ -343,6 +390,7 @@ class Modal extends Component {
       <Mask
         placement={this.maskPlacement}
         fullscreen={constrain === 'window'}
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         themeOverride={
           isFullScreen ? { borderRadius: '0em', borderWidth: '0em' } : {}
         }
@@ -371,6 +419,7 @@ class Modal extends Component {
       ...passthroughProps
     } = this.props
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitioning' does not exist on type 'R... Remove this comment to see the full error message
     const portalIsOpen = open || this.state.transitioning
 
     return (

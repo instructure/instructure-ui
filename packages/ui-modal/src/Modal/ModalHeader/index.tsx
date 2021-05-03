@@ -23,33 +23,38 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { View } from '@instructure/ui-view'
+import {
+  matchComponentTypes,
+  passthroughProps
+} from '@instructure/ui-react-utils'
+import { CloseButton } from '@instructure/ui-buttons'
 import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { withStyle, jsx } from '@instructure/emotion'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+
+type Props = {
+  variant?: 'default' | 'inverse'
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
 
 /**
 ---
 parent: Modal
-id: Modal.Body
+id: Modal.Header
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class ModalBody extends Component {
+class ModalHeader extends Component<Props> {
   static propTypes = {
     children: PropTypes.node,
-    padding: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    as: PropTypes.elementType,
     variant: PropTypes.oneOf(['default', 'inverse']),
-    overflow: PropTypes.oneOf(['scroll', 'fit']),
 
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -58,56 +63,47 @@ class ModalBody extends Component {
   }
 
   static defaultProps = {
-    padding: 'medium',
-    as: 'div',
-    variant: 'default',
     children: null,
-    elementRef: undefined,
-    overflow: undefined
+    variant: 'default'
   }
 
   componentDidMount() {
-    this.props.makeStyles()
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles(this.makeStyleProps())
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.props.makeStyles()
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles(this.makeStyleProps())
+  }
+
+  makeStyleProps = () => {
+    return {
+      withCloseButton: this.usesCloseButton
+    }
+  }
+
+  get usesCloseButton() {
+    // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
+    React.Children.forEach(this.props.children, (child) => {
+      if (child && matchComponentTypes(child, [CloseButton])) {
+        return true
+      }
+    })
+    return false
   }
 
   render() {
-    const {
-      as,
-      elementRef,
-      overflow,
-      variant,
-      padding,
-      children,
-      ...rest
-    } = this.props
-
-    const passthroughProps = View.omitViewProps(
-      omitProps(rest, ModalBody.propTypes),
-      ModalBody
-    )
-    const isFit = overflow === 'fit'
+    const { children, ...rest } = this.props
 
     return (
-      <View
-        {...passthroughProps}
-        display="block"
-        width={isFit ? '100%' : null}
-        height={isFit ? '100%' : null}
-        elementRef={elementRef}
-        as={as}
-        css={this.props.styles.modalBody}
-        padding={padding}
-        tabIndex="-1" // prevent FF from focusing view when scrollable
-      >
+      <div css={this.props.styles.modalHeader} {...passthroughProps(rest)}>
         {children}
-      </View>
+      </div>
     )
   }
 }
 
-export default ModalBody
-export { ModalBody }
+export default ModalHeader
+export { ModalHeader }

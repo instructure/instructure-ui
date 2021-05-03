@@ -24,29 +24,35 @@
 
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
-import { ModalHeader } from '../index'
+import { ModalFooter } from '../index'
 import generateComponentTheme from '../theme'
 import { canvas } from '@instructure/ui-themes'
 import { color2hex } from '@instructure/ui-color-utils'
 
-describe('<ModalHeader />', async () => {
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
+describe('<ModalFooter />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
-    const subject = await mount(<ModalHeader />)
-    const header = within(subject.getDOMNode())
-    expect(header).to.exist()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    const subject = await mount(<ModalFooter />)
+
+    const footer = within(subject.getDOMNode())
+    expect(footer).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set inverse styles', async () => {
     const variables = generateComponentTheme(canvas)
-    const subject = await mount(<ModalHeader variant="inverse" />)
-    const header = within(subject.getDOMNode())
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    const subject = await mount(<ModalFooter variant="inverse" />)
+    const footer = within(subject.getDOMNode())
 
-    const cssStyleDeclaration = header.getComputedStyle() // CSSStyleDeclaration type
+    const cssStyleDeclaration = footer.getComputedStyle() // CSSStyleDeclaration type
     expect(variables.inverseBackground).to.equal(
       color2hex(cssStyleDeclaration.getPropertyValue('background-color'))
     )
     expect(variables.inverseBorderColor).to.equal(
-      color2hex(cssStyleDeclaration.getPropertyValue('border-bottom-color'))
+      color2hex(cssStyleDeclaration.getPropertyValue('border-top-color'))
     )
   })
 })
