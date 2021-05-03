@@ -28,14 +28,19 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { MenuItem } from '../index'
 import { MenuItemLocator } from '../MenuItemLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<MenuItem />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem>Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
     expect(item).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render as a link when an href is provided', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem href="example.html">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -44,7 +49,9 @@ describe('<MenuItem />', async () => {
     expect(link).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render as a link when a to is provided', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem to="/example">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -53,8 +60,11 @@ describe('<MenuItem />', async () => {
     expect(link).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onSelect after click', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
@@ -70,8 +80,11 @@ describe('<MenuItem />', async () => {
     expect(onSelect.args[0][2]).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onClick after click', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onClick={onClick} value="foo">
         Hello
@@ -85,8 +98,11 @@ describe('<MenuItem />', async () => {
     expect(onClick).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onSelect after SPACE key is pressed', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
@@ -101,8 +117,11 @@ describe('<MenuItem />', async () => {
     expect(onSelect.getCall(0).args[2]).to.equal(true)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onSelect after ENTER key is pressed', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
@@ -116,8 +135,11 @@ describe('<MenuItem />', async () => {
     expect(onSelect).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not be able to select when the disabled prop is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} disabled>
         Hello
@@ -133,7 +155,9 @@ describe('<MenuItem />', async () => {
     expect(onSelect).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the tabIndex attribute', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem>Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -141,7 +165,9 @@ describe('<MenuItem />', async () => {
     expect(item.getAttribute('tabIndex')).to.equal('-1')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the aria-controls attribute', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem controls="testId">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -149,7 +175,9 @@ describe('<MenuItem />', async () => {
     expect(item.getAttribute('aria-controls')).to.equal('testId')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the aria-disabled attribute', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem disabled>Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -157,7 +185,9 @@ describe('<MenuItem />', async () => {
     expect(item.getAttribute('aria-disabled')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the aria-checked attribute when defaultSelected prop is true', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem type="checkbox" defaultSelected>
         Hello
@@ -169,8 +199,11 @@ describe('<MenuItem />', async () => {
     expect(item.getAttribute('aria-checked')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the aria-checked attribute when selected prop is true', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem type="checkbox" selected onSelect={onSelect}>
         Hello
@@ -182,21 +215,27 @@ describe('<MenuItem />', async () => {
     expect(item.getAttribute('aria-checked')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should default to the "menuitem" role', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem>Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('role')).to.equal('menuitem')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the role to "menuitemcheckbox" when the type is "checkbox"', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem type="checkbox">Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 
     expect(item.getAttribute('role')).to.equal('menuitemcheckbox')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the role to "menuitemradio" when the type is "radio"', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem type="radio">Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 

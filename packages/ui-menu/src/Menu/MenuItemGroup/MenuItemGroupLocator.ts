@@ -23,6 +23,18 @@
  */
 import { locator } from '@instructure/ui-test-locator'
 
-import { MenuItem } from './index'
+import { MenuItemGroup } from './index'
 
-export const MenuItemLocator = locator(MenuItem.selector)
+import { MenuItemLocator } from '../MenuItem/MenuItemLocator'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const MenuItemGroupLocator = locator(MenuItemGroup.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findAllItems: (...args) => {
+    return MenuItemLocator.findAll(...args)
+  },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+  findItem: (...args) => {
+    return MenuItemLocator.find(...args)
+  }
+})

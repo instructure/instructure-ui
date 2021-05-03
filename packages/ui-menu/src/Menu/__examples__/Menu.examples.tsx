@@ -54,6 +54,7 @@ export default {
     ],
     children: [getMenuChildren()]
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       label: `Menu example`,
@@ -61,6 +62,7 @@ export default {
       constrain: 'none'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getExampleProps: (props) => {
     return {
       dir: props.dir,
@@ -72,6 +74,7 @@ export default {
       textAlign: 'center'
     }
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return !props.trigger && props.placement !== 'top start'
   }

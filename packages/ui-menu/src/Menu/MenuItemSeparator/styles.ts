@@ -23,22 +23,26 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme) => {
-  const { colors, spacing, borders } = theme
-
-  const componentVariables = {
-    background: colors?.backgroundMedium,
-    height: borders?.widthSmall,
-    margin: `0 ${spacing?.small}`
-  }
-
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme) => {
   return {
-    ...componentVariables
+    menuItemSeparator: {
+      label: 'menuItemSeparator',
+      height: componentTheme.height,
+      margin: componentTheme.margin,
+      overflow: 'hidden',
+      background: componentTheme.background
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle

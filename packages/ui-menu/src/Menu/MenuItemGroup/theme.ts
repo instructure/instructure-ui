@@ -22,52 +22,34 @@
  * SOFTWARE.
  */
 
-/** @jsx jsx */
-import { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import { withStyle, jsx } from '@instructure/emotion'
-import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
-
-import generateStyle from './styles'
-import generateComponentTheme from './theme'
-
 /**
----
-parent: Menu
-id: Menu.Separator
----
-@module MenuItemSeparator
-**/
-@withStyle(generateStyle, generateComponentTheme)
-@testable()
-class MenuItemSeparator extends Component {
-  static propTypes = {
-    // eslint-disable-next-line react/require-default-props
-    makeStyles: PropTypes.func,
-    // eslint-disable-next-line react/require-default-props
-    styles: PropTypes.object
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, typography, key: themeName } = theme
+
+  const themeSpecificStyle = {
+    canvas: {
+      color: theme['ic-brand-font-color-dark']
+    }
   }
-  componentDidMount() {
-    this.props.makeStyles()
+  const componentVariables = {
+    fontSize: typography?.fontSizeMedium,
+    fontFamily: typography?.fontFamily,
+    fontWeight: typography?.fontWeightBold,
+    padding: `${spacing?.xSmall} ${spacing?.small}`,
+    color: colors?.textDarkest,
+    background: colors?.backgroundLightest
   }
 
-  componentDidUpdate() {
-    this.props.makeStyles()
-  }
-
-  render() {
-    const props = omitProps(this.props, MenuItemSeparator.propTypes)
-    return (
-      <div
-        {...props}
-        role="presentation"
-        css={this.props.styles.menuItemSeparator}
-      />
-    )
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
   }
 }
 
-export default MenuItemSeparator
-export { MenuItemSeparator }
+export default generateComponentTheme

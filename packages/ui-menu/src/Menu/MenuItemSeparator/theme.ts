@@ -23,39 +23,23 @@
  */
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme) => {
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, spacing, borders } = theme
+
+  const componentVariables = {
+    background: colors?.backgroundMedium,
+    height: borders?.widthSmall,
+    margin: `0 ${spacing?.small}`
+  }
+
   return {
-    menuItemGroup: {
-      label: 'menuItemGroup',
-      display: 'block'
-    },
-    label: {
-      label: 'menuItemGroup__label',
-      background: componentTheme.background,
-      padding: componentTheme.padding,
-      display: 'block',
-      fontSize: componentTheme.fontSize,
-      fontFamily: componentTheme.fontFamily,
-      fontWeight: componentTheme.fontWeight,
-      color: componentTheme.color,
-      textAlign: 'start'
-    },
-    items: {
-      label: 'menuItemGroup__items',
-      padding: '0',
-      margin: '0 0 0 0',
-      listStyleType: 'none'
-    }
+    ...componentVariables
   }
 }
 
-export default generateStyle
+export default generateComponentTheme

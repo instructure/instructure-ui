@@ -31,8 +31,11 @@ import { MenuItemGroup } from '../index'
 
 import { MenuItemGroupLocator } from '../MenuItemGroupLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<MenuItemGroup />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
@@ -46,7 +49,9 @@ describe('<MenuItemGroup />', async () => {
     expect(group).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the role to "menu"', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
@@ -61,7 +66,9 @@ describe('<MenuItemGroup />', async () => {
     expect(group.getAttribute('role')).to.equal('menu')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the list item role to "none"', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Food</MenuItem>
@@ -75,7 +82,9 @@ describe('<MenuItemGroup />', async () => {
     expect(menuItem.getAttribute('role')).to.equal('none')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should default to children with type "radio"', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
@@ -90,7 +99,9 @@ describe('<MenuItemGroup />', async () => {
     expect(items.length).to.equal(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children with type "checkbox" if allowMultiple is true', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select a few" allowMultiple>
         <MenuItem>Foo</MenuItem>
@@ -105,7 +116,9 @@ describe('<MenuItemGroup />', async () => {
     expect(items.length).to.equal(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set aria-disabled', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" disabled>
         <MenuItem>Foo</MenuItem>
@@ -119,7 +132,9 @@ describe('<MenuItemGroup />', async () => {
     expect(items.length).to.equal(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set selected from defaultSelected prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" defaultSelected={[1]}>
         <MenuItem>Foo</MenuItem>
@@ -134,8 +149,11 @@ describe('<MenuItemGroup />', async () => {
     expect(item.getAttribute('aria-checked')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set selected from selected prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect} selected={[1]}>
         <MenuItem>Foo</MenuItem>
@@ -150,7 +168,9 @@ describe('<MenuItemGroup />', async () => {
     expect(item.getAttribute('aria-checked')).to.equal('true')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set selected from children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select a few" allowMultiple>
         <MenuItem key="foo" defaultSelected>
@@ -167,7 +187,9 @@ describe('<MenuItemGroup />', async () => {
     expect(items.length).to.equal(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should honor the allowMultiple prop (defaults to false)', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem defaultSelected>Foo</MenuItem>
@@ -180,8 +202,11 @@ describe('<MenuItemGroup />', async () => {
     expect(items.length).to.equal(1)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('calls onSelect when items are selected', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect} selected={[1]}>
         <MenuItem>Foo</MenuItem>
@@ -199,8 +224,11 @@ describe('<MenuItemGroup />', async () => {
     expect(onSelect.args[0][1]).to.deep.equal([0])
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not call onSelect when disabled', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect} disabled>
         <MenuItem>Foo</MenuItem>
@@ -217,8 +245,11 @@ describe('<MenuItemGroup />', async () => {
     expect(onSelect).to.not.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('updates the selected items when allowMultiple is true', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select some" allowMultiple onSelect={onSelect}>
         <MenuItem>Foo</MenuItem>
@@ -255,8 +286,11 @@ describe('<MenuItemGroup />', async () => {
     expect(onSelect.getCall(2).args[2]).to.be.false()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('updates the selected items when allowMultiple is false', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect}>
         <MenuItem>Foo</MenuItem>

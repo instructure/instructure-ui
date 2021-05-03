@@ -24,6 +24,7 @@
 import { locator } from '@instructure/ui-test-locator'
 import { parseQueryArguments } from '@instructure/ui-test-queries'
 
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module '@ins... Remove this comment to see the full error message
 // eslint-disable-next-line no-restricted-imports
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 
@@ -33,26 +34,33 @@ import { MenuItemLocator } from './MenuItem/MenuItemLocator'
 import { MenuItemGroupLocator } from './MenuItemGroup/MenuItemGroupLocator'
 
 const customMethods = {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllItems: (...args) => {
     return MenuItemLocator.findAll(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findItem: (...args) => {
     return MenuItemLocator.find(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllGroups: (...args) => {
     return MenuItemGroupLocator.findAll(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findGroup: (...args) => {
     return MenuItemGroupLocator.find(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findPopoverTrigger: (...args) => {
     return PopoverLocator.findTrigger(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findPopoverContent: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return PopoverLocator.findContent(element, selector, {
       ...options,
       customMethods: {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'customMethods' does not exist on type '{... Remove this comment to see the full error message
         ...options.customMethods,
         ...customMethods
       }
@@ -60,6 +68,7 @@ const customMethods = {
   }
 }
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 const MenuLocator = locator(Menu.selector, customMethods)
 
 export { MenuLocator, MenuItemLocator, MenuItemGroupLocator }

@@ -27,16 +27,20 @@ import { contrast } from '@instructure/ui-color-utils'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('MenuItem.theme', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the default theme', () => {
     const variables = generateComponentTheme(canvas)
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure label color and icon color meet 3:1 contrast with background', () => {
       expect(contrast(variables.background, variables.labelColor)).to.be.above(
         3
       )
       expect(contrast(variables.background, variables.iconColor)).to.be.above(3)
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure label and icon active colors meet 3:1 contrast with active background', () => {
       expect(
         contrast(variables.activeBackground, variables.activeLabelColor)
@@ -47,9 +51,11 @@ describe('MenuItem.theme', () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the "canvas-high-contrast" theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
 
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure label color and icon color meet 4.5:1 contrast with background', () => {
       expect(contrast(variables.background, variables.labelColor)).to.be.above(
         4.5
@@ -58,6 +64,7 @@ describe('MenuItem.theme', () => {
         4.5
       )
     })
+    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should ensure label and icon active colors meet 4.5:1 contrast with active background', () => {
       expect(
         contrast(variables.activeBackground, variables.activeLabelColor)

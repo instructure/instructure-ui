@@ -23,15 +23,7 @@
  */
 import { locator } from '@instructure/ui-test-locator'
 
-import { MenuItemGroup } from './index'
+import { MenuItem } from './index'
 
-import { MenuItemLocator } from '../MenuItem/MenuItemLocator'
-
-export const MenuItemGroupLocator = locator(MenuItemGroup.selector, {
-  findAllItems: (...args) => {
-    return MenuItemLocator.findAll(...args)
-  },
-  findItem: (...args) => {
-    return MenuItemLocator.find(...args)
-  }
-})
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const MenuItemLocator = locator(MenuItem.selector)
