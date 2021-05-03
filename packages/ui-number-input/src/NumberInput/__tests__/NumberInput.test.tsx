@@ -35,11 +35,15 @@ import { NumberInput } from '../index'
 import { NumberInputLocator } from '../NumberInputLocator'
 import NumberInputExamples from '../__examples__/NumberInput.examples'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<NumberInput />', () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('sets value on the input', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         onChange={Function.prototype}
         value="42"
       />
@@ -50,10 +54,13 @@ describe('<NumberInput />', () => {
     expect(input).to.have.value('42')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should accept a number for the value', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
+        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         onChange={Function.prototype}
         value={42}
       />
@@ -64,7 +71,9 @@ describe('<NumberInput />', () => {
     expect(input).to.have.value('42')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('displays the label', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -72,8 +81,11 @@ describe('<NumberInput />', () => {
     expect(input).to.have.label('Label')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes the input element to inputRef', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const inputRef = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" inputRef={inputRef} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -83,11 +95,14 @@ describe('<NumberInput />', () => {
     expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes change events to onChange handler', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub().callsFake((event) => {
       event.persist() // so we can make assertions about the event
     })
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onChange={onChange} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -101,8 +116,11 @@ describe('<NumberInput />', () => {
     expect(onChange.lastCall.args[1]).to.equal('foo')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes keyboard events to the onKeyDown handler', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onKeyDown={onKeyDown} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -113,8 +131,11 @@ describe('<NumberInput />', () => {
     expect(onKeyDown).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes blur events to onBlur handler', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onBlur = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onBlur={onBlur} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -125,8 +146,11 @@ describe('<NumberInput />', () => {
     expect(onBlur).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes focus events to onFocus handler', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onFocus={onFocus} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -137,7 +161,9 @@ describe('<NumberInput />', () => {
     expect(onFocus).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('shows arrow buttons by default', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -146,7 +172,9 @@ describe('<NumberInput />', () => {
     expect(buttons).to.have.length(2)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('hides arrow buttons when showArrows is false', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" showArrows={false} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -155,8 +183,11 @@ describe('<NumberInput />', () => {
     expect(buttons).to.have.length(0)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('calls onIncrement when up arrow is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onIncrement={onIncrement} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -167,8 +198,11 @@ describe('<NumberInput />', () => {
     expect(onIncrement).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not call onIncrement when `interaction` is set to readonly', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
@@ -185,9 +219,13 @@ describe('<NumberInput />', () => {
     expect(onIncrement).not.to.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not call onIncrement when `readOnly` is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <NumberInput renderLabel="Label" readOnly onIncrement={onIncrement} />
     )
 
@@ -199,8 +237,11 @@ describe('<NumberInput />', () => {
     expect(onIncrement).not.to.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('calls onDecrement when down arrow is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onDecrement={onDecrement} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -211,8 +252,11 @@ describe('<NumberInput />', () => {
     expect(onDecrement).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not call onDecrement when `interaction` is set to readonly', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
@@ -229,9 +273,13 @@ describe('<NumberInput />', () => {
     expect(onDecrement).not.to.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not call onDecrement when `readOnly` is set', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
+      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <NumberInput renderLabel="Label" readOnly onDecrement={onDecrement} />
     )
 
@@ -243,7 +291,9 @@ describe('<NumberInput />', () => {
     expect(onDecrement).not.to.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('focuses the input when up arrow is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -258,7 +308,9 @@ describe('<NumberInput />', () => {
     expect(input.focused()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('focuses the input when down arrow is clicked', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -273,8 +325,11 @@ describe('<NumberInput />', () => {
     expect(input.focused()).to.be.true()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('calls onIncrement when up arrow key is pressed', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onIncrement={onIncrement} />)
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -284,8 +339,11 @@ describe('<NumberInput />', () => {
     expect(onIncrement).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('calls onDecrement when down arrow key is pressed', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onDecrement={onDecrement} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -296,7 +354,9 @@ describe('<NumberInput />', () => {
     expect(onDecrement).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not move caret when up arrow key is pressed', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -307,7 +367,9 @@ describe('<NumberInput />', () => {
     expect(event.preventDefault).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('does not move caret when down arrow key is pressed', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -318,7 +380,9 @@ describe('<NumberInput />', () => {
     expect(event.preventDefault).to.have.been.calledOnce()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('handles other keyDown events normally', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -329,7 +393,9 @@ describe('<NumberInput />', () => {
     expect(event.preventDefault).not.to.have.been.called()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('puts inputMode prop to input', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput inputMode="decimal" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -338,7 +404,9 @@ describe('<NumberInput />', () => {
     expect(input.getAttribute('inputMode')).to.equal('decimal')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; maxExampl... Remove this comment to see the full error message
     generateA11yTests(NumberInputExamples)
   })
 })

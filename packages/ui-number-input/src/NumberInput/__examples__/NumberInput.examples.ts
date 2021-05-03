@@ -29,6 +29,7 @@ export default {
     placeholder: [null, 'type something'],
     layout: [null, 'inline']
   },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
   getComponentProps: (props) => {
     return {
       renderLabel: 'A number input'
@@ -42,6 +43,7 @@ export default {
     'inline',
     'inputMode'
   ],
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     if (props.interaction === 'readonly') return true
     if (props.isRequired) return true

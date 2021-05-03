@@ -45,6 +45,30 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  renderLabel: React.ReactNode | ((...args: any[]) => any)
+  id?: string
+  interaction?: 'enabled' | 'disabled' | 'readonly'
+  messages?: any[] // TODO: FormPropTypes.message
+  placeholder?: string
+  isRequired?: boolean
+  showArrows?: boolean
+  size?: 'medium' | 'large'
+  value?: string | number
+  width?: string
+  display?: 'inline-block' | 'block'
+  inputRef?: (...args: any[]) => any
+  onFocus?: (...args: any[]) => any
+  onBlur?: (...args: any[]) => any
+  onChange?: (...args: any[]) => any
+  onDecrement?: (...args: any[]) => any
+  onIncrement?: (...args: any[]) => any
+  onKeyDown?: (...args: any[]) => any
+  inputMode?: 'numeric' | 'decimal' | 'tel'
+}
+
 /**
 ---
 category: components
@@ -53,7 +77,7 @@ id: NumberInput
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class NumberInput extends Component {
+class NumberInput extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -161,12 +185,19 @@ class NumberInput extends Component {
     value: undefined,
     width: undefined,
     display: 'block',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     inputRef: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onFocus: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onBlur: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onChange: (event, value) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onDecrement: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onIncrement: (event) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
     onKeyDown: (event) => {},
     disabled: undefined,
     readOnly: undefined,
@@ -180,9 +211,12 @@ class NumberInput extends Component {
     if (this.props.id) {
       return this.props.id
     }
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'NumberInput... Remove this comment to see the full error message
     if (!this._id) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'NumberInput... Remove this comment to see the full error message
       this._id = uid('NumberInput')
     }
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'NumberInput... Remove this comment to see the full error message
     return this._id
   }
 
@@ -194,14 +228,17 @@ class NumberInput extends Component {
   }
 
   get interaction() {
+    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleVariables)
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.makeStyleVariables)
   }
 
@@ -213,50 +250,66 @@ class NumberInput extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   handleRef = (element) => {
     this._input = element
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.inputRef(element)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleFocus = (event) => {
     this.setState({ hasFocus: true })
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onFocus(event)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleBlur = (event) => {
     this.setState({ hasFocus: false })
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onBlur(event)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleChange = (event) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onChange(event, event.target.value)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleKeyDown = (event) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.onKeyDown(event)
 
     if (event.keyCode === keycode.codes.down) {
       event.preventDefault()
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       this.props.onDecrement(event)
     } else if (event.keyCode === keycode.codes.up) {
       event.preventDefault()
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       this.props.onIncrement(event)
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClickUpArrow = (event) => {
     this.arrowClicked(event, this.props.onIncrement)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleClickDownArrow = (event) => {
     this.arrowClicked(event, this.props.onDecrement)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   arrowClicked(event, callback) {
     const { interaction } = this
 
     event.preventDefault()
     if (interaction === 'enabled') {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._input.focus()
       callback(event)
     }
@@ -269,6 +322,7 @@ class NumberInput extends Component {
           aria-hidden
           css={this.props.styles.arrow}
           onMouseDown={this.handleClickUpArrow}
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
           tabIndex="-1"
           type="button"
         >
@@ -278,6 +332,7 @@ class NumberInput extends Component {
           aria-hidden
           css={this.props.styles.arrow}
           onMouseDown={this.handleClickDownArrow}
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'number | ... Remove this comment to see the full error message
           tabIndex="-1"
           type="button"
         >
@@ -302,6 +357,7 @@ class NumberInput extends Component {
 
     return (
       <FormField
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormField.propTypes)}
         label={callRenderProp(renderLabel)}
         inline={display === 'inline-block'}
@@ -309,15 +365,18 @@ class NumberInput extends Component {
       >
         <span
           css={this.props.styles.inputWidth}
+          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ width: string; } | null' is not assignable... Remove this comment to see the full error message
           style={width ? { width } : null}
         >
           <span css={this.props.styles.inputContainer}>
             <input
+              // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
               {...omitProps(this.props, {
                 ...FormField.propTypes,
                 ...NumberInput.propTypes
               })}
               css={this.props.styles.input}
+              // @ts-expect-error ts-migrate(2322) FIXME: Type '"true" | null' is not assignable to type 'bo... Remove this comment to see the full error message
               aria-invalid={this.invalid ? 'true' : null}
               id={this.id}
               type="text"
