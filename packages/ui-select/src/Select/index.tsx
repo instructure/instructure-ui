@@ -611,6 +611,7 @@ class Select extends Component<Props> {
     groupChildren.push(
       <Options
         id={id}
+        // @ts-expect-error ts-migrate(2554) FIXME:
         as="ul"
         role="group"
         renderLabel={renderLabel}
