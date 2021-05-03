@@ -24,6 +24,17 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
+type OwnProps = {
+  mode: 'view' | 'edit'
+  onChangeMode: (...args: any[]) => any
+  render?: (...args: any[]) => any
+  value?: any
+  onChange?: (...args: any[]) => any
+  readOnly?: boolean
+}
+
+type Props = OwnProps & typeof Editable.defaultProps
+
 import { deepEqual } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
 import { requestAnimationFrame } from '@instructure/ui-dom-utils'
@@ -34,7 +45,7 @@ category: components
 experimental: true
 ---
 **/
-class Editable extends Component {
+class Editable extends Component<Props> {
   static propTypes = {
     /**
      * If `'view'`: the view component is rendered,
@@ -93,9 +104,11 @@ class Editable extends Component {
   _editorRef = null
   _editButtonRef = null
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       props.readOnly ? props.mode === 'view' : true,
       '[Editable] When readOnly is true, mode must be "view"'
@@ -109,6 +122,7 @@ class Editable extends Component {
   }
   componentWillUnmount() {}
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
     const { mode, value, onChange } = this.props
 
@@ -120,19 +134,23 @@ class Editable extends Component {
 
     // on the switch from edit to view
     if (prevProps.mode === 'edit' && mode !== 'edit') {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._editButtonRef && this._editButtonRef.focus()
       if (onChange && !deepEqual(this.state.valueOnEdit, value)) {
+        // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
         onChange(value)
       }
     }
   }
 
   focusEditor() {
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       !!this._editorRef && !this.props.readOnly,
       '[Editable] Did you forget to connect editorRef to your editor component?'
     )
     if (this._editorRef) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._editorRef.focus()
     }
   }
@@ -153,12 +171,14 @@ class Editable extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleEditESC = (event) => {
     if (event.key === 'Escape') {
       this.enterView()
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleViewMouseOver = (event) => {
     if (this.props.mode === 'view') {
       // because the mouse event handlers are on the container, not the view
@@ -167,6 +187,7 @@ class Editable extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleViewMouseOut = (event) => {
     if (this.props.mode === 'view') {
       event.stopPropagation()
@@ -176,6 +197,7 @@ class Editable extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleViewClick = (event) => {
     if (event.buttons === 1) {
       requestAnimationFrame(() => {
@@ -184,18 +206,22 @@ class Editable extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleEditBlur = (event) => {
     this.enterView()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleEditButtonFocus = (event) => {
     this.setState({ showModeToggle: true })
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleEditButtonBlur = (event) => {
     this.setState({ showModeToggle: false })
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleEditButtonClick = (event) => {
     this.enterEdit()
   }
@@ -221,10 +247,12 @@ class Editable extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   getEditorProps = (props) => {
     return {
       mode: this.props.mode,
       onBlur: this.handleEditBlur,
+      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
       editorRef: (el) => {
         this._editorRef = el
       },
@@ -239,6 +267,7 @@ class Editable extends Component {
       onFocus: this.handleEditButtonFocus,
       onBlur: this.handleEditButtonBlur,
       isVisible: this.state.showModeToggle,
+      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
       buttonRef: (el) => {
         this._editButtonRef = el
       },
@@ -251,6 +280,7 @@ class Editable extends Component {
     const { children, render = children, mode } = this.props
 
     if (typeof render === 'function') {
+      // @ts-expect-error ts-migrate(2721) FIXME: Cannot invoke an object which is possibly 'null'.
       return render({
         mode,
         getContainerProps: this.getContainerProps,

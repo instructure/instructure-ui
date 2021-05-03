@@ -59,7 +59,7 @@ class AccessibleContent extends Component<Props> {
 
   render() {
     const { alt, children, ...props } = this.props
-    // @ts-expect-error ts-migrate(2559) FIXME: Type '{ children: Element[]; }' has no properties ... Remove this comment to see the full error message
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(AccessibleContent, this.props)
 
     return (

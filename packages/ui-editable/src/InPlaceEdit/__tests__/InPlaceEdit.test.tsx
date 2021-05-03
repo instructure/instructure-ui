@@ -29,6 +29,7 @@ import { InPlaceEdit } from '../index'
 
 const noop = () => {}
 const renderViewer = () => <div id="viewer">text</div>
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'editorRef' implicitly has an 'any... Remove this comment to see the full error message
 const renderEditor = ({ editorRef, onBlur }) => {
   // eslint-disable-line react/prop-types
   return (
@@ -40,14 +41,19 @@ const renderEditor = ({ editorRef, onBlur }) => {
     />
   )
 }
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 const renderEditButton = (props) => {
   return InPlaceEdit.renderDefaultEditButton({ label: 'Edit', ...props })
 }
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<InPlaceEdit />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render view mode', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ id: string; mode: "view"; onChangeMode: ()... Remove this comment to see the full error message
         id="foos"
         mode="view"
         onChangeMode={noop}
@@ -65,7 +71,9 @@ describe('<InPlaceEdit />', async () => {
     expect(editButton.getDOMNode()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render view mode with string button label', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"
@@ -84,7 +92,9 @@ describe('<InPlaceEdit />', async () => {
     expect(editButton.getDOMNode()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render edit mode', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="edit"
@@ -102,7 +112,9 @@ describe('<InPlaceEdit />', async () => {
     await wait(() => expect(ipeditor.containsFocus()).to.be.true())
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a custom edit button', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"
@@ -123,7 +135,9 @@ describe('<InPlaceEdit />', async () => {
     expect(editButton.getDOMNode()).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should switch mode to edit via props, and focus the editor', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"
@@ -141,7 +155,9 @@ describe('<InPlaceEdit />', async () => {
     await wait(() => expect(ipeditor.containsFocus()).to.be.true())
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should switch mode to view via props, and focus the edit button', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="edit"
@@ -161,7 +177,9 @@ describe('<InPlaceEdit />', async () => {
     await wait(() => expect(editButton.containsFocus()).to.be.true())
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"

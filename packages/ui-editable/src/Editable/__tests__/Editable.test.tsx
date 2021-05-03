@@ -29,10 +29,15 @@ import { Editable } from '../index'
 
 const noop = () => {}
 const render = ({
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'mode' implicitly has an 'any' typ... Remove this comment to see the full error message
   mode,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getContainerProps' implicitly has... Remove this comment to see the full error message
   getContainerProps,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getViewerProps' implicitly has an... Remove this comment to see the full error message
   getViewerProps,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getEditorProps' implicitly has an... Remove this comment to see the full error message
   getEditorProps,
+  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'getEditButtonProps' implicitly ha... Remove this comment to see the full error message
   getEditButtonProps
 }) => {
   const { isVisible, buttonRef, ...buttonProps } = getEditButtonProps()
@@ -48,24 +53,35 @@ const render = ({
   )
 }
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Editable />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render view mode', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Editable mode="view" onChangeMode={noop} render={renderSpy} />)
     const args = renderSpy.lastCall.args[0]
     expect(args.mode).to.equal('view')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render edit mode', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Editable mode="edit" onChangeMode={noop} render={renderSpy} />)
     const args = renderSpy.lastCall.args[0]
     expect(args.mode).to.equal('edit')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should change to edit mode on button click', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onChangeModeSpy = spy((newMode) => {})
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
@@ -82,9 +98,13 @@ describe('<Editable />', async () => {
     expect(args).to.equal('edit')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should change to edit mode on component click', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onChangeModeSpy = spy((newMode) => {})
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
@@ -98,9 +118,13 @@ describe('<Editable />', async () => {
     await wait(() => expect(onChangeModeSpy.lastCall.args[0]).to.equal('edit'))
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the button to visible on mouse over', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onChangeModeSpy = spy((newMode) => {})
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
@@ -122,9 +146,13 @@ describe('<Editable />', async () => {
     expect(props.isVisible).to.be.false()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should change to view mode on editor blur', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onChangeModeSpy = spy((newMode) => {})
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Editable mode="edit" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
@@ -142,9 +170,13 @@ describe('<Editable />', async () => {
     expect(args).to.equal('view')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should change to view mode on escape', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onChangeModeSpy = spy((newMode) => {})
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '({ mode, getContainerProps, getViewerProps, ... Remove this comment to see the full error message
       <Editable mode="edit" onChangeMode={onChangeModeSpy} render={render} />
     )
     const editable = within(subject.getDOMNode())
@@ -159,9 +191,13 @@ describe('<Editable />', async () => {
     expect(args).to.equal('view')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onChange when the user is finished editing', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onChangeSpy = spy((newValue) => {})
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Editable
         mode="edit"
@@ -182,13 +218,16 @@ describe('<Editable />', async () => {
     expect(arg).to.equal('bar')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn if readOnly + mode="edit"', async () => {
     const warning = spy(console, 'warn')
 
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Editable
         mode="edit"
         onChangeMode={noop}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '({ mode, getContainerProps, getViewerProps, ... Remove this comment to see the full error message
         render={render}
         value="foo"
         readOnly
