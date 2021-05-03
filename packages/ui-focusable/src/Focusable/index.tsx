@@ -33,12 +33,16 @@ import {
 } from '@instructure/ui-dom-utils'
 import { logWarn as warn } from '@instructure/console'
 
+type Props = {
+  render?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components/utilities
 ---
 **/
-class Focusable extends Component {
+class Focusable extends Component<Props> {
   static propTypes = {
     /**
      * @param {Object} renderProps
@@ -86,6 +90,7 @@ class Focusable extends Component {
   componentDidMount() {
     const { focusable, focused } = this
     this.addFocusableListeners(focusable, focused)
+    // @ts-expect-error ts-migrate(2322) FIXME: Type '{ isKeyboardMode: () => boolean; remove: () ... Remove this comment to see the full error message
     this._inputModeListener = addInputModeListener({
       onInputModeChange: this.handleInputModeChange
     })
@@ -95,6 +100,7 @@ class Focusable extends Component {
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   getSnapshotBeforeUpdate(prevProps, prevState) {
     const { render, children } = this.props
     // prevent blur from firing when focusable element is replaced
@@ -104,6 +110,7 @@ class Focusable extends Component {
     return null
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState) {
     const { focusable } = this
 
@@ -118,6 +125,7 @@ class Focusable extends Component {
       this.removeFocusableListeners()
 
       if (this.state.focused) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'false | u... Remove this comment to see the full error message
         focusable.focus()
       }
 
@@ -131,16 +139,19 @@ class Focusable extends Component {
 
   componentWillUnmount() {
     if (this._inputModeListener) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._inputModeListener.remove()
       this._inputModeListener = null
     }
     this.removeFocusableListeners()
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focusable' implicitly has an 'any' type... Remove this comment to see the full error message
   addFocusableListeners(focusable, focused) {
     if (!focusable) return
 
     if (focused && !this._blurListener) {
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
       this._blurListener = addEventListener(
         focusable,
         'blur',
@@ -148,6 +159,7 @@ class Focusable extends Component {
         true
       )
     } else if (!this._focusListener) {
+      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
       this._focusListener = addEventListener(
         focusable,
         'focus',
@@ -164,6 +176,7 @@ class Focusable extends Component {
 
   removeFocusListener() {
     if (this._focusListener) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._focusListener.remove()
       this._focusListener = null
     }
@@ -171,6 +184,7 @@ class Focusable extends Component {
 
   removeBlurListener() {
     if (this._blurListener) {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._blurListener.remove()
       this._blurListener = null
     }
@@ -180,11 +194,13 @@ class Focusable extends Component {
     this.forceUpdate()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleFocus = (event) => {
     this.removeFocusListener()
     this.setState({ focused: true })
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'event' is declared but its value is never read.
   handleBlur = (event) => {
     this.removeBlurListener()
     this.setState({ focused: false })
@@ -198,13 +214,16 @@ class Focusable extends Component {
     let focusable = findFocusable(this, () => true, true) || []
     const focusableCount = (focusable && focusable.length) || 0
 
+    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       focusableCount === 1,
       `[Focusable] Exactly one focusable child is required (${focusableCount} found).`
     )
 
+    // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown' is not assignable to type 'unknown[... Remove this comment to see the full error message
     focusable = focusable ? focusable[0] : false
 
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'unknown[]... Remove this comment to see the full error message
     if (focusable && typeof focusable.focus === 'function') {
       return focusable
     } else {
@@ -220,19 +239,23 @@ class Focusable extends Component {
   focus() {
     const { focusable } = this
     if (focusable) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'unknown[]... Remove this comment to see the full error message
       focusable.focus()
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'focusable' implicitly has an 'any' type... Remove this comment to see the full error message
   isFocusVisible(focusable, focused) {
     if (!focusable || !focused) return false
 
     // always show focus for keyboard input mode
+    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     if (this._inputModeListener && this._inputModeListener.isKeyboardMode())
       return true
 
     const { tagName, type, isContentEditable } = focusable
 
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (tagName == 'INPUT' && Focusable.inputTypes[type]) {
       return true
     }
