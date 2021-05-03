@@ -25,6 +25,7 @@
 /** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'no-s... Remove this comment to see the full error message
 import noScroll from 'no-scroll'
 import { withStyle, jsx } from '@instructure/emotion'
 import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
@@ -32,13 +33,23 @@ import { ensureSingleChild, omitProps } from '@instructure/ui-react-utils'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  onDismiss?: (...args: any[]) => any
+  placement?: 'top' | 'center' | 'bottom' | 'stretch'
+  fullscreen?: boolean
+  onClick?: (...args: any[]) => any
+  elementRef?: (...args: any[]) => any
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+}
+
 /**
 ---
 category: components/utilities
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Mask extends Component {
+class Mask extends Component<Props> {
   static propTypes = {
     onDismiss: PropTypes.func,
     placement: PropTypes.oneOf(['top', 'center', 'bottom', 'stretch']),
@@ -58,17 +69,21 @@ class Mask extends Component {
     onDismiss: undefined,
     children: null,
     onClick: undefined,
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {}
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
     if (this.props.fullscreen) {
       noScroll.on()
     }
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -78,11 +93,15 @@ class Mask extends Component {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleElementRef = (el) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.elementRef(el)
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   contentRef = (el) => {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_content' does not exist on type 'Mask'.... Remove this comment to see the full error message
     this._content = el
   }
 
@@ -92,13 +111,16 @@ class Mask extends Component {
     })
 
     const props = {
+      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       ...omitProps(this.props, Mask.propTypes),
       css: this.props.styles.mask,
       ref: this.handleElementRef
     }
 
     if (typeof this.props.onClick === 'function') {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onClick' does not exist on type '{ css: ... Remove this comment to see the full error message
       props.onClick = this.props.onClick
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'tabIndex' does not exist on type '{ css:... Remove this comment to see the full error message
       props.tabIndex = -1
     }
 

@@ -34,13 +34,45 @@ import { element } from '@instructure/ui-prop-types'
 import { Portal } from '@instructure/ui-portal'
 import { Transition } from '@instructure/ui-motion'
 
+type Props = {
+  open?: boolean
+  onOpen?: (...args: any[]) => any
+  onClose?: (...args: any[]) => any
+  mountNode?: any // PropTypes.oneOfType([element, PropTypes.func]),
+  insertAt?: 'bottom' | 'top'
+  label: string
+  onDismiss?: (...args: any[]) => any
+  defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
+  applicationElement?:
+    | React.ReactElement[]
+    | React.ReactElement
+    | ((...args: any[]) => any)
+  contentElement?: React.ReactElement | ((...args: any[]) => any)
+  shouldContainFocus?: boolean
+  shouldReturnFocus?: boolean
+  shouldCloseOnDocumentClick?: boolean
+  shouldCloseOnEscape?: boolean
+  transition?: any // TODO: Transition.propTypes.type
+  in?: boolean
+  unmountOnExit?: boolean
+  transitionOnMount?: boolean
+  transitionEnter?: boolean
+  transitionExit?: boolean
+  onEnter?: (...args: any[]) => any
+  onEntering?: (...args: any[]) => any
+  onEntered?: (...args: any[]) => any
+  onExit?: (...args: any[]) => any
+  onExiting?: (...args: any[]) => any
+  onExited?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components
 ---
 **/
 @testable()
-class Overlay extends Component {
+class Overlay extends Component<Props> {
   static propTypes = {
     children: PropTypes.node,
     /**
@@ -176,6 +208,7 @@ class Overlay extends Component {
     onExited: function () {}
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
 
@@ -188,9 +221,11 @@ class Overlay extends Component {
   _timeouts = []
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
     this._isMounted = true
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
     if (prevProps.open && !this.props.open) {
       // closing
@@ -201,23 +236,29 @@ class Overlay extends Component {
   }
 
   componentWillUnmount() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
     this._isMounted = false
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
   }
 
   get DOMNode() {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Overla... Remove this comment to see the full error message
     return this._DOMNode
   }
 
   set DOMNode(el) {
+    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Overla... Remove this comment to see the full error message
     this._DOMNode = el
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'DOMNode' implicitly has an 'any' type.
   handlePortalOpen = (DOMNode) => {
     this.DOMNode = DOMNode
 
     this._timeouts.push(
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Timeout' is not assignable to pa... Remove this comment to see the full error message
       setTimeout(() => {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
         if (this._isMounted) {
           this.setState({
             open: true
@@ -234,9 +275,11 @@ class Overlay extends Component {
     })
   }
 
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'content' implicitly has an 'any' type.
   renderTransition(content) {
     return (
       <Transition
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, Transition.propTypes)}
         in={this.props.open}
         transitionOnMount
@@ -255,9 +298,12 @@ class Overlay extends Component {
   render() {
     let content = (
       <Dialog
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, Overlay.propTypes)}
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, Dialog.propTypes)}
         defaultFocusElement={this.props.defaultFocusElement}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
         open={this.state.open}
       >
         {this.props.children}
@@ -270,7 +316,9 @@ class Overlay extends Component {
 
     return (
       <Portal
+        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, Portal.propTypes)}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitioning' does not exist on type 'R... Remove this comment to see the full error message
         open={this.props.open || this.state.transitioning}
         onOpen={createChainedFunction(this.handlePortalOpen, this.props.onOpen)}
       >

@@ -22,8 +22,35 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { colors, borders, stacking, key: themeName } = theme
 
-import { Overlay } from './index'
+  const themeSpecificStyle = {
+    canvas: {
+      focusBorderColor: theme['ic-brand-primary']
+    }
+  }
 
-export const OverlayLocator = locator(Overlay.selector)
+  const componentVariables = {
+    zIndex: stacking.topmost,
+    background: 'rgba(255, 255, 255, 0.75)',
+    borderColor: 'transparent',
+    focusBorderColor: colors?.borderBrand,
+    borderRadius: borders?.radiusMedium,
+    borderWidth: borders?.widthSmall
+  }
+
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
+  }
+}
+
+export default generateComponentTheme

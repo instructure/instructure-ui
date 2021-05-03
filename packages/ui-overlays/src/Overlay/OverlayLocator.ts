@@ -22,33 +22,9 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, borders, stacking, key: themeName } = theme
+import { locator } from '@instructure/ui-test-locator'
 
-  const themeSpecificStyle = {
-    canvas: {
-      focusBorderColor: theme['ic-brand-primary']
-    }
-  }
+import { Overlay } from './index'
 
-  const componentVariables = {
-    zIndex: stacking.topmost,
-    background: 'rgba(255, 255, 255, 0.75)',
-    borderColor: 'transparent',
-    focusBorderColor: colors?.borderBrand,
-    borderRadius: borders?.radiusMedium,
-    borderWidth: borders?.widthSmall
-  }
-
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
-  }
-}
-
-export default generateComponentTheme
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const OverlayLocator = locator(Overlay.selector)
