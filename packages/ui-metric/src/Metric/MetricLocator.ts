@@ -21,38 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-locator'
 
-import React from 'react'
-import { Metric } from '../../Metric'
+import { Metric } from './index'
 
-const getMetric = (textAlign) => {
-  return [
-    <Metric
-      key="grade"
-      renderLabel="Final Assignment Grade"
-      renderValue="80%"
-      textAlign={textAlign}
-      isGroupChild
-    />,
-    <Metric
-      key="late"
-      renderLabel="Late Work"
-      renderValue="4"
-      textAlign={textAlign}
-      isGroupChild
-    />,
-    <Metric
-      key="missing"
-      renderLabel="Missing Assignment"
-      renderValue="2"
-      textAlign={textAlign}
-      isGroupChild
-    />
-  ]
-}
-
-export default {
-  propValues: {
-    children: [getMetric('start'), getMetric('center'), getMetric('end')]
-  }
-}
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const MetricLocator = locator(Metric.selector)

@@ -23,40 +23,21 @@
  */
 
 /**
- * ---
- * private: true
- * ---
- * Generates the style object from the theme and provided additional information
- * @param  {Object} componentTheme The theme variable object.
- * @param  {Object} props the props of the component, the style is applied to
- * @param  {Object} state the state of the component, the style is applied to
- * @return {Object} The final style object, which will be used in the component
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
  */
-const generateStyle = (componentTheme, props) => {
-  const { textAlign } = props
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
+const generateComponentTheme = (theme) => {
+  const { typography } = theme
+
+  const componentVariables = {
+    lineHeight: typography?.lineHeightCondensed
+  }
 
   return {
-    metric: {
-      label: 'metric',
-      display: 'flex',
-      flexDirection: 'column-reverse',
-      boxSizing: 'border-box',
-      padding: componentTheme.padding,
-      fontFamily: componentTheme.fontFamily,
-      textAlign
-    },
-    label: {
-      label: 'metric__label',
-      fontSize: componentTheme.labelFontSize,
-      color: componentTheme.labelColor
-    },
-    value: {
-      label: 'metric__value',
-      fontWeight: componentTheme.valueFontWeight,
-      fontSize: componentTheme.valueFontSize,
-      color: componentTheme.valueColor
-    }
+    ...componentVariables
   }
 }
 
-export default generateStyle
+export default generateComponentTheme

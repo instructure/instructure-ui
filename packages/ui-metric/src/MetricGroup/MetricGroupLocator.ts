@@ -26,12 +26,16 @@ import { locator } from '@instructure/ui-test-locator'
 import { Metric } from '../Metric'
 import { MetricGroup } from './index'
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 const MetricGroupItemLocator = locator(Metric.selector)
 
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const MetricGroupLocator = locator(MetricGroup.selector, {
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllItems: (...args) => {
     return MetricGroupItemLocator.findAll(...args)
   },
+  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findItem: (...args) => {
     return MetricGroupItemLocator.find(...args)
   }

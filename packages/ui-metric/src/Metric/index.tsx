@@ -32,6 +32,15 @@ import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  textAlign?: 'start' | 'center' | 'end'
+  renderLabel?: ((...args: any[]) => any) | React.ReactNode
+  renderValue?: ((...args: any[]) => any) | React.ReactNode
+  isGroupChild?: boolean
+}
+
 /**
 ---
 category: components
@@ -39,7 +48,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Metric extends Component {
+class Metric extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -53,6 +62,7 @@ class Metric extends Component {
      */
     isGroupChild: PropTypes.bool
   }
+
   static defaultProps = {
     textAlign: 'center',
     renderLabel: undefined,
@@ -61,10 +71,12 @@ class Metric extends Component {
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -80,16 +92,19 @@ class Metric extends Component {
     return (
       <div
         {...passthroughProps(rest)}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
         role={isGroupChild === true ? 'row' : null}
         css={this.props.styles.metric}
       >
         <div
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
           role={isGroupChild === true ? 'rowheader' : null}
           css={this.props.styles.label}
         >
           {callRenderProp(renderLabel)}
         </div>
         <div
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
           role={isGroupChild === true ? 'gridcell' : null}
           css={this.props.styles.value}
         >

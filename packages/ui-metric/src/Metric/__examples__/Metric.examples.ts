@@ -22,21 +22,12 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { typography } = theme
-
-  const componentVariables = {
-    lineHeight: typography?.lineHeightCondensed
-  }
-
-  return {
-    ...componentVariables
+export default {
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      renderLabel: 'Grade',
+      renderValue: '90%'
+    }
   }
 }
-
-export default generateComponentTheme

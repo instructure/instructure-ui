@@ -22,11 +22,38 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+import { Metric } from '../../Metric'
+
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'textAlign' implicitly has an 'any' type... Remove this comment to see the full error message
+const getMetric = (textAlign) => {
+  return [
+    <Metric
+      key="grade"
+      renderLabel="Final Assignment Grade"
+      renderValue="80%"
+      textAlign={textAlign}
+      isGroupChild
+    />,
+    <Metric
+      key="late"
+      renderLabel="Late Work"
+      renderValue="4"
+      textAlign={textAlign}
+      isGroupChild
+    />,
+    <Metric
+      key="missing"
+      renderLabel="Missing Assignment"
+      renderValue="2"
+      textAlign={textAlign}
+      isGroupChild
+    />
+  ]
+}
+
 export default {
-  getComponentProps: (props) => {
-    return {
-      renderLabel: 'Grade',
-      renderValue: '90%'
-    }
+  propValues: {
+    children: [getMetric('start'), getMetric('center'), getMetric('end')]
   }
 }

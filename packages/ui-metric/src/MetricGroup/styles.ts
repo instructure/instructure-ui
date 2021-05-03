@@ -23,36 +23,28 @@
  */
 
 /**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
+ * ---
+ * private: true
+ * ---
+ * Generates the style object from the theme and provided additional information
+ * @param  {Object} componentTheme The theme variable object.
+ * @param  {Object} props the props of the component, the style is applied to
+ * @param  {Object} state the state of the component, the style is applied to
+ * @return {Object} The final style object, which will be used in the component
  */
-const generateComponentTheme = (theme) => {
-  const { colors, spacing, typography, key: themeName } = theme
-
-  const themeSpecificStyle = {
-    canvas: {
-      valueColor: theme['ic-brand-font-color-dark'],
-      labelColor: theme['ic-brand-font-color-dark']
-    }
-  }
-
-  const componentVariables = {
-    padding: `0 ${spacing?.xSmall}`,
-    fontFamily: typography?.fontFamily,
-
-    valueColor: colors?.textDarkest,
-    valueFontSize: typography?.fontSizeXLarge,
-    valueFontWeight: typography?.fontWeightBold,
-
-    labelColor: colors?.textDarkest,
-    labelFontSize: typography?.fontSizeXSmall
-  }
-
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
+const generateStyle = (componentTheme) => {
   return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
+    metricGroup: {
+      label: 'metricGroup',
+      boxSizing: 'border-box',
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      justifyContent: 'space-around',
+      lineHeight: componentTheme.lineHeight
+    }
   }
 }
 
-export default generateComponentTheme
+export default generateStyle
