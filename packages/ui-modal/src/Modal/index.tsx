@@ -378,6 +378,7 @@ class Modal extends Component<Props> {
         shouldReturnFocus={shouldReturnFocus}
         liveRegion={liveRegion}
         onDismiss={onDismiss}
+        // @ts-expect-error ts-migrate(2769) FIXME:
         css={styles.modal}
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667

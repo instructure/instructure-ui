@@ -166,7 +166,12 @@ class Billboard extends Component<Props> {
 
     return (
       <span css={styles.heading}>
-        <Heading level={headingLevel} as={headingAs} color="primary">
+        <Heading
+          level={headingLevel}
+          // @ts-expect-error ts-migrate(2769) FIXME:
+          as={headingAs}
+          color="primary"
+        >
           {heading}
         </Heading>
       </span>
