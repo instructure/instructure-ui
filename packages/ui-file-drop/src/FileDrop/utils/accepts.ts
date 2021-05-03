@@ -22,36 +22,33 @@
  * SOFTWARE.
  */
 
-/**
- * Generates the theme object for the component from the theme and provided additional information
- * @param  {Object} theme The actual theme object.
- * @return {Object} The final theme object with the overrides and component variables
- */
-const generateComponentTheme = (theme) => {
-  const { colors, borders, key: themeName } = theme
+function accepts(file: any, acceptProp: any) {
+  if (file && acceptProp && file.type !== 'application/x-moz-file') {
+    const acceptList = getAcceptList(acceptProp)
+    const mimeType = file.type || ''
+    const baseMimeType = mimeType.replace(/\/.*$/, '')
 
-  const themeSpecificStyle = {
-    canvas: {
-      hoverBorderColor: theme['ic-brand-primary'],
-      acceptedColor: theme['ic-brand-primary']
-    }
+    return acceptList.some((type: any) => {
+      if (type.charAt(0) === '.') {
+        // type is an extension like .pdf
+        if (!file.name) {
+          return mimeType.endsWith(type.slice(1))
+        }
+        return file.name.toLowerCase().endsWith(type.toLowerCase())
+      } else if (/\/\*$/.test(type)) {
+        // type is something like a image/* mime type
+        return baseMimeType === type.replace(/\/.*$/, '')
+      }
+      return mimeType === type
+    })
   }
-
-  const componentVariables = {
-    backgroundColor: colors?.backgroundLightest, // needed for testing
-    borderRadius: borders?.radiusLarge,
-    borderWidth: borders?.widthMedium,
-    borderStyle: 'dashed',
-    borderColor: colors?.borderMedium,
-    hoverBorderColor: colors?.borderBrand,
-    acceptedColor: colors?.textBrand,
-    rejectedColor: colors?.textDanger
-  }
-
-  return {
-    ...componentVariables,
-    ...themeSpecificStyle[themeName]
-  }
+  return true
 }
 
-export default generateComponentTheme
+function getAcceptList(accept: any) {
+  const list = Array.isArray(accept) ? accept : accept.split(',')
+  return list.map((a: any) => a.trim().replace(/^\w+$/, '.$&'))
+}
+
+export default accepts
+export { accepts, getAcceptList }

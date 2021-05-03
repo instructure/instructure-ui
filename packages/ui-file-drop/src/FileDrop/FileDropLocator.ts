@@ -21,18 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-export default {
-  propValues: {
-    // eslint-disable-next-line no-undefined
-    messages: [undefined, [{ type: 'hint', text: 'hint text' }]]
+import { locator } from '@instructure/ui-test-locator'
+import { FileDrop } from './index'
+const fileInputLocator = locator('input[type="file"]')
+export const FileDropLocator = locator((FileDrop as any).selector, {
+  // the file input isn't visible in this component,
+  // so we need special locator methods to interact w/ it
+  click: async (element: any, init: any, options: any) => {
+    const input = await fileInputLocator.find(element, { visible: false })
+    return input.click(init, { ...options, clickable: false })
   },
-  getComponentProps: (props) => {
-    return {
-      accept: 'image/*',
-      renderLabel: 'Upload a file',
-      shouldEnablePreview: false,
-      shouldAllowMultiple: false
-    }
+  keyUp: async (element: any, whichKey: any, init: any, options: any) => {
+    const input = await fileInputLocator.find(element, { visible: false })
+    return input.keyUp(whichKey, init, { ...options, clickable: false })
+  },
+  keyDown: async (element: any, whichKey: any, init: any, options: any) => {
+    const input = await fileInputLocator.find(element, { visible: false })
+    return input.keyDown(whichKey, init, { ...options, clickable: false })
   }
-}
+})

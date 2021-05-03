@@ -32,7 +32,7 @@
  * @param  {Object} state the state of the component, the style is applied to
  * @return {Object} The final style object, which will be used in the component
  */
-const generateStyle = (componentTheme, props, state) => {
+const generateStyle = (componentTheme: any, props: any, state: any) => {
   const { height } = props
   const {
     functionallyDisabled,

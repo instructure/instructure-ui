@@ -25,6 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { getEventFiles } from '../getEventFiles'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('getEventFiles', () => {
   const chromeDragEnter = {
     dataTransfer: {
@@ -65,19 +66,25 @@ describe('getEventFiles', () => {
     }
   }
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return items on chrome dragenter event', () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(getEventFiles(chromeDragEnter)).to.be.equal(
       chromeDragEnter.dataTransfer.items
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return items on a firefox dragenter event', () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(getEventFiles(firefoxDragEnter)).to.be.equal(
       firefoxDragEnter.dataTransfer.items
     )
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return empty array on a safari dragenter event', () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(getEventFiles(safariDragEnter).length).to.be.equal(0)
   })
 })

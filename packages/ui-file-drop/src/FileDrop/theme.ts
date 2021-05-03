@@ -22,33 +22,37 @@
  * SOFTWARE.
  */
 
-function accepts(file, acceptProp) {
-  if (file && acceptProp && file.type !== 'application/x-moz-file') {
-    const acceptList = getAcceptList(acceptProp)
-    const mimeType = file.type || ''
-    const baseMimeType = mimeType.replace(/\/.*$/, '')
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: any) => {
+  const { colors, borders, key: themeName } = theme
 
-    return acceptList.some((type) => {
-      if (type.charAt(0) === '.') {
-        // type is an extension like .pdf
-        if (!file.name) {
-          return mimeType.endsWith(type.slice(1))
-        }
-        return file.name.toLowerCase().endsWith(type.toLowerCase())
-      } else if (/\/\*$/.test(type)) {
-        // type is something like a image/* mime type
-        return baseMimeType === type.replace(/\/.*$/, '')
-      }
-      return mimeType === type
-    })
+  const themeSpecificStyle = {
+    canvas: {
+      hoverBorderColor: theme['ic-brand-primary'],
+      acceptedColor: theme['ic-brand-primary']
+    }
   }
-  return true
+
+  const componentVariables = {
+    backgroundColor: colors?.backgroundLightest, // needed for testing
+    borderRadius: borders?.radiusLarge,
+    borderWidth: borders?.widthMedium,
+    borderStyle: 'dashed',
+    borderColor: colors?.borderMedium,
+    hoverBorderColor: colors?.borderBrand,
+    acceptedColor: colors?.textBrand,
+    rejectedColor: colors?.textDanger
+  }
+
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
+  }
 }
 
-function getAcceptList(accept) {
-  const list = Array.isArray(accept) ? accept : accept.split(',')
-  return list.map((a) => a.trim().replace(/^\w+$/, '.$&'))
-}
-
-export default accepts
-export { accepts, getAcceptList }
+export default generateComponentTheme

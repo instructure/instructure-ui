@@ -22,25 +22,21 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-locator'
+function getEventFiles(event: any, inputEl: any) {
+  const dt = event.dataTransfer
 
-import { FileDrop } from './index'
-
-const fileInputLocator = locator('input[type="file"]')
-
-export const FileDropLocator = locator(FileDrop.selector, {
-  // the file input isn't visible in this component,
-  // so we need special locator methods to interact w/ it
-  click: async (element, init, options) => {
-    const input = await fileInputLocator.find(element, { visible: false })
-    return input.click(init, { ...options, clickable: false })
-  },
-  keyUp: async (element, whichKey, init, options) => {
-    const input = await fileInputLocator.find(element, { visible: false })
-    return input.keyUp(whichKey, init, { ...options, clickable: false })
-  },
-  keyDown: async (element, whichKey, init, options) => {
-    const input = await fileInputLocator.find(element, { visible: false })
-    return input.keyDown(whichKey, init, { ...options, clickable: false })
+  if (dt) {
+    if (dt.files && dt.files.length) {
+      return dt.files
+    } else if (dt.items && dt.items.length) {
+      return dt.items
+    }
+  } else if (inputEl && inputEl.files) {
+    return inputEl.files
   }
-})
+
+  return []
+}
+
+export default getEventFiles
+export { getEventFiles }

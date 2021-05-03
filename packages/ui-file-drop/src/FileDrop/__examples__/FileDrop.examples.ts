@@ -22,21 +22,18 @@
  * SOFTWARE.
  */
 
-function getEventFiles(event, inputEl) {
-  const dt = event.dataTransfer
-
-  if (dt) {
-    if (dt.files && dt.files.length) {
-      return dt.files
-    } else if (dt.items && dt.items.length) {
-      return dt.items
+export default {
+  propValues: {
+    // eslint-disable-next-line no-undefined
+    messages: [undefined, [{ type: 'hint', text: 'hint text' }]]
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      accept: 'image/*',
+      renderLabel: 'Upload a file',
+      shouldEnablePreview: false,
+      shouldAllowMultiple: false
     }
-  } else if (inputEl && inputEl.files) {
-    return inputEl.files
   }
-
-  return []
 }
-
-export default getEventFiles
-export { getEventFiles }
