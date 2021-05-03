@@ -350,6 +350,7 @@ class Tray extends Component<Props> {
         {portalIsOpen && (
           <Transition
             in={open}
+            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             type={this.transition}
             onTransition={onTransition}
             onEnter={onEnter}

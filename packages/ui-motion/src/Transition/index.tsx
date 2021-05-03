@@ -23,6 +23,7 @@
  */
 
 /** @jsx jsx */
+/** @jsxFrag React.Fragment */
 // test is breaking without importing React here
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react'
@@ -38,6 +39,30 @@ import generateComponentTheme from './theme'
 
 import { BaseTransition } from './BaseTransition'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  type?:
+    | 'fade'
+    | 'scale'
+    | 'slide-down'
+    | 'slide-up'
+    | 'slide-left'
+    | 'slide-right'
+  in?: boolean
+  unmountOnExit?: boolean
+  transitionOnMount?: boolean
+  transitionEnter?: boolean
+  transitionExit?: boolean
+  onTransition?: (...args: any[]) => any
+  onEnter?: (...args: any[]) => any
+  onEntering?: (...args: any[]) => any
+  onEntered?: (...args: any[]) => any
+  onExit?: (...args: any[]) => any
+  onExiting?: (...args: any[]) => any
+  onExited?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components/utilities
@@ -46,7 +71,7 @@ category: components/utilities
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Transition extends Component {
+class Transition extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -129,6 +154,7 @@ class Transition extends Component {
     onExit: function () {},
     onExiting: function () {},
     onExited: function () {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'toState' is declared but its value is never read.
     onTransition: function (toState, fromState) {},
     children: null
   }
@@ -136,10 +162,13 @@ class Transition extends Component {
   static states = BaseTransition.states
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 

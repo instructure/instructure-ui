@@ -326,6 +326,7 @@ class DrawerTray extends Component<Props> {
           const content = (
             <Transition
               in={transitionIn}
+              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               type={this.transition}
               onTransition={onTransition}
               onEnter={onEnter}
