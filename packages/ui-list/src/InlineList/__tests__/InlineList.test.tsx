@@ -28,8 +28,11 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { InlineList } from '../index'
 import { InlineListLocator } from '../InlineListLocator'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<InlineList />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render list items and filter out null/falsy children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>
@@ -46,7 +49,9 @@ describe('<InlineList />', async () => {
     expect(listItems.length).to.equal(4)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a delimiter when delimiter="pipe"', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList delimiter="pipe">
         <InlineList.Item>List item 1</InlineList.Item>
@@ -61,9 +66,12 @@ describe('<InlineList />', async () => {
     expect(delimiters.length).to.equal(4)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
     const warning = `Warning: [InlineList] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList delimiter="pipe" itemSpacing="large">
         <InlineList.Item>List item 1</InlineList.Item>
@@ -76,7 +84,9 @@ describe('<InlineList />', async () => {
     expect(consoleError).to.be.calledWith(warning)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an ordered list', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList as="ol">
         <InlineList.Item>List item 1</InlineList.Item>
@@ -89,7 +99,9 @@ describe('<InlineList />', async () => {
     expect(list.getTagName()).to.equal('ol')
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>

@@ -27,8 +27,9 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, spacing, typography, key: themeName } = theme
+  const { borders, colors, spacing, typography, key: themeName } = theme
 
   const themeSpecificStyle = {
     canvas: {
@@ -39,16 +40,11 @@ const generateComponentTheme = (theme) => {
   const componentVariables = {
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightNormal,
+    lineHeight: typography?.lineHeight,
     fontSizeSmall: typography?.fontSizeSmall,
     fontSizeMedium: typography?.fontSizeMedium,
     fontSizeLarge: typography?.fontSizeLarge,
-    color: colors?.textDark,
-    lineHeight: typography?.lineHeightCondensed,
-    noneSpacing: spacing?.xSmall,
-    pipeSpacing: spacing?.xSmall,
-    slashSpacing: spacing?.xSmall,
-    arrowSpacing: spacing?.xSmall,
-    marginBottomDefault: spacing?.xxxSmall,
+    color: colors?.textDarkest,
     spacingXXXSmall: spacing?.xxxSmall,
     spacingXXSmall: spacing?.xxSmall,
     spacingXSmall: spacing?.xSmall,
@@ -56,11 +52,14 @@ const generateComponentTheme = (theme) => {
     spacingMedium: spacing?.medium,
     spacingLarge: spacing?.large,
     spacingXLarge: spacing?.xLarge,
-    spacingXXLarge: spacing?.xxLarge
+    spacingXXLarge: spacing?.xxLarge,
+    delimiterDashedBorder: `${borders?.widthSmall} dashed ${colors?.borderMedium}`,
+    delimiterSolidBorder: `${borders?.widthSmall} solid ${colors?.borderMedium}`
   }
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

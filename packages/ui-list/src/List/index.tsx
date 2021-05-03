@@ -21,30 +21,70 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Children, Component } from 'react'
+
+/** @jsx jsx */
+import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import { InlineListItem } from './InlineListItem'
+import { ListItem } from './ListItem'
+
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: 'ul' | 'ol'
+  delimiter?: 'none' | 'dashed' | 'solid'
+  isUnstyled?: boolean
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  size?: 'small' | 'medium' | 'large'
+  itemSpacing?:
+    | 'none'
+    | 'xxx-small'
+    | 'xx-small'
+    | 'x-small'
+    | 'small'
+    | 'medium'
+    | 'large'
+    | 'x-large'
+    | 'xx-large'
+  elementRef?: (...args: any[]) => any
+}
 
 /**
 ---
 category: components
 ---
 **/
+@withStyle(generateStyle, generateComponentTheme)
 @testable()
-class InlineList extends Component {
+class List extends Component<Props> {
   static propTypes = {
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object,
     /**
-     * Only accepts `<InlineList.Item>` as a child
+     * Only accepts `<List.Item>` as a child
      */
-    children: ChildrenPropTypes.oneOf([InlineListItem]),
+    children: ChildrenPropTypes.oneOf([ListItem]),
     as: PropTypes.oneOf(['ul', 'ol']),
+    /**
+     * One of: none, dashed, solid
+     */
+    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
+    /**
+     * When set, renders the List Items without a list style type.
+     */
+    isUnstyled: PropTypes.bool,
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
      * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -52,7 +92,6 @@ class InlineList extends Component {
      */
     margin: ThemeablePropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
     /**
      * Sets the margin separating each ListItem.
      */
@@ -72,21 +111,35 @@ class InlineList extends Component {
 
   static defaultProps = {
     children: null,
-    itemSpacing: 'none',
-    elementRef: (el) => {},
     as: 'ul',
-    margin: 'none',
     delimiter: 'none',
-    size: 'medium'
+    isUnstyled: false,
+    margin: undefined,
+    size: 'medium',
+    itemSpacing: 'none',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
+    elementRef: (el) => {}
   }
 
-  static Item = InlineListItem
+  static Item = ListItem
+
+  componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles()
+  }
+
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles()
+  }
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children
 
       return safeCloneElement(child, {
+        isUnstyled: this.props.isUnstyled,
         delimiter: this.props.delimiter,
         size: this.props.size,
         spacing: this.props.itemSpacing
@@ -95,14 +148,14 @@ class InlineList extends Component {
   }
 
   render() {
-    const { as, margin, elementRef, ...rest } = this.props
+    const { as, margin, isUnstyled, elementRef, styles, ...rest } = this.props
 
     return (
       <View
         {...passthroughProps(rest)}
+        css={styles.list}
         as={as}
         margin={margin}
-        padding="0"
         elementRef={elementRef}
         display="block"
       >
@@ -112,5 +165,5 @@ class InlineList extends Component {
   }
 }
 
-export default InlineList
-export { InlineList }
+export default List
+export { List, ListItem }

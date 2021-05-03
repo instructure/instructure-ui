@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /** @jsx jsx */
 import { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -34,15 +35,35 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  delimiter?: 'none' | 'dashed' | 'solid'
+  size?: 'small' | 'medium' | 'large'
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  padding?: any // TODO: ThemeablePropTypes.spacing
+  spacing?:
+    | 'none'
+    | 'xxx-small'
+    | 'xx-small'
+    | 'x-small'
+    | 'small'
+    | 'medium'
+    | 'large'
+    | 'x-large'
+    | 'xx-large'
+  elementRef?: (...args: any[]) => any
+}
+
 /**
 ---
-parent: InlineList
-id: InlineList.Item
+parent: List
+id: List.Item
 ---
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class InlineListItem extends Component {
+class ListItem extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -50,9 +71,9 @@ class InlineListItem extends Component {
     styles: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     /**
-     * Inherits delimiter from the parent InlineList component
+     * Inherits delimiter from the parent List component.
      */
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
+    delimiter: PropTypes.oneOf(['none', 'dashed', 'solid']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -67,7 +88,7 @@ class InlineListItem extends Component {
      */
     padding: ThemeablePropTypes.spacing,
     /**
-     * Inherits itemSpacing from the parent InlineList component
+     * Inherits itemSpacing from the parent List component
      */
     spacing: PropTypes.oneOf([
       'none',
@@ -89,26 +110,30 @@ class InlineListItem extends Component {
     spacing: 'none',
     delimiter: 'none',
     size: 'medium',
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {}
   }
 
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
+  // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   render() {
     const {
       delimiter,
+      spacing,
       size,
       margin,
       padding,
       elementRef,
       children,
-      spacing,
       styles,
       ...rest
     } = this.props
@@ -116,20 +141,18 @@ class InlineListItem extends Component {
     return (
       <View
         {...passthroughProps(rest)}
-        css={styles.inlineListItem}
+        css={styles.listItem}
         as="li"
         margin={margin}
         padding={padding}
-        display="inline-block"
         maxWidth="100%"
         elementRef={elementRef}
       >
         {children}
-        <span css={styles.delimiter} aria-hidden="true" />
       </View>
     )
   }
 }
 
-export default InlineListItem
-export { InlineListItem }
+export default ListItem
+export { ListItem }

@@ -27,37 +27,21 @@
  * @param  {Object} theme The actual theme object.
  * @return {Object} The final theme object with the overrides and component variables
  */
+// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { borders, colors, spacing, typography, key: themeName } = theme
+  const { spacing, typography, key: themeName } = theme
 
-  const themeSpecificStyle = {
-    canvas: {
-      color: theme['ic-brand-font-color-dark']
-    }
-  }
+  const themeSpecificStyle = {}
 
   const componentVariables = {
-    fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightNormal,
-    lineHeight: typography?.lineHeight,
-    fontSizeSmall: typography?.fontSizeSmall,
-    fontSizeMedium: typography?.fontSizeMedium,
-    fontSizeLarge: typography?.fontSizeLarge,
-    color: colors?.textDarkest,
-    spacingXXXSmall: spacing?.xxxSmall,
-    spacingXXSmall: spacing?.xxSmall,
-    spacingXSmall: spacing?.xSmall,
-    spacingSmall: spacing?.small,
-    spacingMedium: spacing?.medium,
-    spacingLarge: spacing?.large,
-    spacingXLarge: spacing?.xLarge,
-    spacingXXLarge: spacing?.xxLarge,
-    delimiterDashedBorder: `${borders?.widthSmall} dashed ${colors?.borderMedium}`,
-    delimiterSolidBorder: `${borders?.widthSmall} solid ${colors?.borderMedium}`
+    listPadding: spacing?.large,
+    orderedNumberFontWeight: typography?.fontWeightBold,
+    orderedNumberMargin: spacing?.xSmall
   }
 
   return {
     ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     ...themeSpecificStyle[themeName]
   }
 }

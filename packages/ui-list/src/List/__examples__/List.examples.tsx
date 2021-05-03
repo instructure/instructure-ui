@@ -21,18 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { List } from '../index'
 
-import { locator } from '@instructure/ui-test-locator'
-
-import { List } from './index'
-
-const ListItemLocator = locator(List.Item.selector)
-
-export const ListLocator = locator(List.selector, {
-  findAllItems: (...args) => {
-    return ListItemLocator.findAll(...args)
+export default {
+  sectionProp: 'size',
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      children: [
+        <List.Item key="1">Oranges</List.Item>,
+        <List.Item key="2">Pineapples</List.Item>,
+        <List.Item key="3">Bananas</List.Item>
+      ]
+    }
   },
-  findItem: (...args) => {
-    return ListItemLocator.find(...args)
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  filter: (props) => {
+    return (
+      (['dashed', 'solid'].includes(props.delimiter) && props.as === 'ol') ||
+      (props.delimiter !== 'none' && props.itemSpacing !== 'none')
+    )
   }
-})
+}
