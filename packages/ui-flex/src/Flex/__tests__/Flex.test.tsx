@@ -27,9 +27,13 @@ import React from 'react'
 import { expect, mount, within, wait, stub } from '@instructure/ui-test-utils'
 import { Flex } from '../index'
 
+// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Flex />', async () => {
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render Flex.Items as children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -41,8 +45,11 @@ describe('<Flex />', async () => {
     expect(subject.getDOMNode().children.length).to.equal(4)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render other markup as children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex>
         <div>foo</div>
         <div>bar</div>
@@ -53,21 +60,28 @@ describe('<Flex />', async () => {
     expect(subject.getDOMNode().children.length).to.equal(3)
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children when children is a function', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Flex>{() => <div>hello world</div>}</Flex>)
 
     const flex = within(subject.getDOMNode())
     expect(await flex.findWithText('hello world')).to.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render no markup if there are no children', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Flex></Flex>)
 
     expect(subject.getDOMNode()).to.not.exist()
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should accept width and height as props', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex width="400px" height="200px">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -84,8 +98,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set flex-direction with the direction property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex direction="column">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -99,8 +116,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an inline-flex container with the display property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex display="inline-flex">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -114,8 +134,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set align-items with the alignItems property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex alignItems="start">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -128,8 +151,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set justify-content with the justifyItems property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex justifyItems="space-between">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -145,8 +171,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set flex-wrap with the wrap property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex wrap="wrap">
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -160,8 +189,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should let Flex.Items align themselves with the align property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex alignItems="end">
         <Flex.Item align="stretch">Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -177,8 +209,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should let Flex.Items flex-grow with the shouldGrow property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item shouldGrow>Flex item 2</Flex.Item>
@@ -195,8 +230,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should let Flex.Items flex-shrink with the shouldShrink property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item shouldShrink>Flex item 2</Flex.Item>
@@ -213,8 +251,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set flex-basis and min-width on Flex.Items with the size property', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>
@@ -233,10 +274,14 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should support an elementRef prop', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex elementRef={elementRef}>
+        {/* @ts-expect-error ts-migrate(2322) FIXME: Type 'Element' is not assignable to type 'null | u... Remove this comment to see the full error message */}
         <Flex.Item>Flex item</Flex.Item>
       </Flex>
     )
@@ -246,8 +291,11 @@ describe('<Flex />', async () => {
     })
   })
 
+  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
+      // @ts-expect-error ts-migrate(2746) FIXME: This JSX tag's 'children' prop expects a single ch... Remove this comment to see the full error message
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
         <Flex.Item>Flex item 2</Flex.Item>

@@ -64,6 +64,7 @@ export default {
   propValues: {
     children: [regular, shrink, grow]
   },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   filter: (props) => {
     return (
       props.withVisualDebug ||

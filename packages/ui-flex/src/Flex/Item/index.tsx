@@ -32,6 +32,24 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  as?: React.ReactElement
+  elementRef?: (...args: any[]) => any
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  padding?: any // TODO: ThemeablePropTypes.spacing
+  align?: 'center' | 'start' | 'end' | 'stretch'
+  direction?: 'row' | 'column'
+  textAlign?: 'start' | 'center' | 'end'
+  overflowX?: 'auto' | 'hidden' | 'visible'
+  overflowY?: 'auto' | 'hidden' | 'visible'
+  shouldGrow?: boolean
+  shouldShrink?: boolean
+  size?: string
+  withVisualDebug?: boolean
+}
+
 /**
 ---
 parent: Flex
@@ -39,12 +57,14 @@ id: Flex.Item
 ---
 **/
 @withStyle(generateStyle)
-class Item extends Component {
+class Item extends Component<Props> {
   componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -119,12 +139,14 @@ class Item extends Component {
 
   static defaultProps = {
     as: 'span',
-    elementRef: (el) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
+    elementRef: (el: any) => {},
     shouldGrow: false,
     shouldShrink: false
   }
 
   render() {
+    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, Item.propTypes)
 
     const {
@@ -148,6 +170,7 @@ class Item extends Component {
     return (
       <View
         {...props}
+        //@ts-expect-error FIXME:
         css={styles.flexItem}
         elementRef={elementRef}
         as={as}

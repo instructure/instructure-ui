@@ -380,6 +380,11 @@ class BaseButton extends Component<Props> {
       width: '100%',
       justifyItems:
         hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'start'
+    } as {
+      shouldShrink: boolean
+      height: string
+      width: string
+      justifyItems: 'center' | 'start'
     }
 
     return <Flex {...flexProps}>{flexChildren}</Flex>

@@ -40,6 +40,25 @@ import { Item } from './Item'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  as?: React.ReactElement
+  elementRef?: (...args: any[]) => any
+  height?: string | number
+  width?: string | number
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  padding?: any // TODO: ThemeablePropTypes.spacing
+  display?: 'flex' | 'inline-flex'
+  textAlign?: 'start' | 'center' | 'end'
+  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
+  alignItems?: 'center' | 'start' | 'end' | 'stretch'
+  justifyItems?: 'center' | 'start' | 'end' | 'space-around' | 'space-between'
+  wrap?: 'wrap' | 'no-wrap' | 'wrap-reverse'
+  withVisualDebug?: boolean
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  children: any
+}
+
 /**
 ---
 category: components
@@ -47,13 +66,15 @@ category: components
 @module Flex
 **/
 @withStyle(generateStyle, generateComponentTheme)
-class Flex extends Component {
-  constructor(props) {
+class Flex extends Component<Props> {
+  constructor(props: Props) {
     super(props)
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     props.makeStyles()
   }
 
   componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
   }
 
@@ -144,7 +165,8 @@ class Flex extends Component {
   static defaultProps = {
     children: null,
     as: 'span',
-    elementRef: (el) => {},
+    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
+    elementRef: (el: any) => {},
     direction: 'row',
     justifyItems: 'start',
     display: 'flex',
@@ -158,7 +180,7 @@ class Flex extends Component {
     textAlign: undefined
   }
 
-  renderChildren(children) {
+  renderChildren(children: any) {
     return Children.map(children, (child) => {
       if (!child) {
         return null
@@ -168,6 +190,7 @@ class Flex extends Component {
         ? safeCloneElement(child, {
             withVisualDebug: this.props.withVisualDebug,
             ...child.props /* child withVisualDebug prop should override parent */,
+            //@ts-expect-error FIXME:
             direction: this.props.direction.replace(/-reverse/, '')
           })
         : child
@@ -194,6 +217,7 @@ class Flex extends Component {
       return (
         <View
           {...passthroughProps(this.props)}
+          //@ts-expect-error FIXME:
           css={styles.flex}
           elementRef={elementRef}
           as={as}

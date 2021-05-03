@@ -22,34 +22,25 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+/**
+ * Generates the theme object for the component from the theme and provided additional information
+ * @param  {Object} theme The actual theme object.
+ * @return {Object} The final theme object with the overrides and component variables
+ */
+const generateComponentTheme = (theme: any) => {
+  const { typography, key: themeName } = theme
 
-import { expect, mount, within, wait, stub } from '@instructure/ui-test-utils'
-import { Item } from '../index'
+  const themeSpecificStyle = {}
 
-describe('<Item />', async () => {
-  it('should render children', async () => {
-    const subject = await mount(<Item>Flex item 1</Item>)
-    const item = within(subject.getDOMNode())
-    expect(item.find(':contains(Flex item 1)')).to.exist()
-  })
+  const componentVariables = {
+    fontFamily: typography?.fontFamily
+  }
 
-  it('should support an elementRef prop', async () => {
-    const elementRef = stub()
-    const subject = await mount(
-      <Item elementRef={elementRef}>Flex item 2</Item>
-    )
+  return {
+    ...componentVariables,
+    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    ...themeSpecificStyle[themeName]
+  }
+}
 
-    await wait(() => {
-      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
-    })
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<Item>Flex item 3</Item>)
-
-    const item = within(subject.getDOMNode())
-
-    expect(await item.accessible()).to.be.true()
-  })
-})
+export default generateComponentTheme
