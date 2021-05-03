@@ -35,6 +35,22 @@ import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
+type Props = {
+  makeStyles?: (...args: any[]) => any
+  styles?: any
+  border?: 'none' | 'top' | 'bottom'
+  color?:
+    | 'primary'
+    | 'secondary'
+    | 'primary-inverse'
+    | 'secondary-inverse'
+    | 'inherit'
+  level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'reset'
+  as?: React.ReactElement
+  margin?: any // TODO: ThemeablePropTypes.spacing
+  elementRef?: (...args: any[]) => any
+}
+
 /**
 ---
 category: components
@@ -42,15 +58,7 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Heading extends Component {
-  componentDidMount() {
-    this.props.makeStyles()
-  }
-
-  componentDidUpdate() {
-    this.props.makeStyles()
-  }
-
+class Heading extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -104,6 +112,16 @@ class Heading extends Component {
     level: 'h2'
   }
 
+  componentDidMount() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate() {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
+    this.props.makeStyles()
+  }
+
   render() {
     const {
       border,
@@ -127,6 +145,7 @@ class Heading extends Component {
     return (
       <View
         {...passthroughProps(props)}
+        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; css: any; as: string;... Remove this comment to see the full error message
         css={this.props.styles.heading}
         as={ElementType}
         elementRef={elementRef}

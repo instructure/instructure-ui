@@ -21,34 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default {
-  sectionProp: 'level',
-  propValues: {
-    color: [
-      'primary',
-      'secondary',
-      'primary-inverse',
-      'secondary-inverse',
-      'inherit'
-    ]
-  },
-  getComponentProps: (props) => {
-    return {
-      children: 'Hello this is a test heading',
-      margin: 'medium none'
-    }
-  },
-  getExampleProps: (props) => {
-    return {
-      background: ['primary-inverse', 'secondary-inverse'].includes(props.color)
-        ? 'primary-inverse'
-        : 'primary'
-    }
-  },
-  filter: (props) => {
-    return (
-      (props.type === 'notification' && props.countUntil) ||
-      (props.standalone && props.placement !== 'start top')
-    )
-  }
-}
+import { locator } from '@instructure/ui-test-locator'
+
+import { Heading } from './index'
+
+// @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
+export const HeadingLocator = locator(Heading.selector)

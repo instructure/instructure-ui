@@ -21,8 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-locator'
-
-import { Heading } from './index'
-
-export const HeadingLocator = locator(Heading.selector)
+export default {
+  sectionProp: 'level',
+  propValues: {
+    color: [
+      'primary',
+      'secondary',
+      'primary-inverse',
+      'secondary-inverse',
+      'inherit'
+    ]
+  },
+  // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
+  getComponentProps: (props) => {
+    return {
+      children: 'Hello this is a test heading',
+      margin: 'medium none'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  getExampleProps: (props) => {
+    return {
+      background: ['primary-inverse', 'secondary-inverse'].includes(props.color)
+        ? 'primary-inverse'
+        : 'primary'
+    }
+  },
+  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
+  filter: (props) => {
+    return (
+      (props.type === 'notification' && props.countUntil) ||
+      (props.standalone && props.placement !== 'start top')
+    )
+  }
+}
