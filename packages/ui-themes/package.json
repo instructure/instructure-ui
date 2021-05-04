@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "8.2.1",
+  "version": "8.3.0",
   "description": "A library of instructure themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,12 +23,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.2.1"
+    "@instructure/ui-babel-preset": "^8.3.0"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "^8.2.1",
-    "@instructure/canvas-theme": "^8.2.1",
-    "@instructure/instructure-theme": "^8.2.1"
+    "@instructure/canvas-high-contrast-theme": "^8.3.0",
+    "@instructure/canvas-theme": "^8.3.0",
+    "@instructure/instructure-theme": "^8.3.0"
   },
   "publishConfig": {
     "access": "public"

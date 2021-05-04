@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-position",
-  "version": "8.2.1",
+  "version": "8.3.0",
   "description": "A component for positioning content with respect to a designated target.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -25,22 +25,22 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/debounce": "^8.2.1",
-    "@instructure/emotion": "^8.2.1",
-    "@instructure/ui-dom-utils": "^8.2.1",
-    "@instructure/ui-portal": "^8.2.1",
-    "@instructure/ui-prop-types": "^8.2.1",
-    "@instructure/ui-react-utils": "^8.2.1",
-    "@instructure/ui-testable": "^8.2.1",
-    "@instructure/ui-utils": "^8.2.1",
-    "@instructure/uid": "^8.2.1",
+    "@instructure/debounce": "^8.3.0",
+    "@instructure/emotion": "^8.3.0",
+    "@instructure/ui-dom-utils": "^8.3.0",
+    "@instructure/ui-portal": "^8.3.0",
+    "@instructure/ui-prop-types": "^8.3.0",
+    "@instructure/ui-react-utils": "^8.3.0",
+    "@instructure/ui-testable": "^8.3.0",
+    "@instructure/ui-utils": "^8.3.0",
+    "@instructure/uid": "^8.3.0",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.2.1",
-    "@instructure/ui-color-utils": "^8.2.1",
-    "@instructure/ui-test-locator": "^8.2.1",
-    "@instructure/ui-test-utils": "^8.2.1"
+    "@instructure/ui-babel-preset": "^8.3.0",
+    "@instructure/ui-color-utils": "^8.3.0",
+    "@instructure/ui-test-locator": "^8.3.0",
+    "@instructure/ui-test-utils": "^8.3.0"
   },
   "peerDependencies": {
     "react": "^16.8"

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.3.0](https://github.com/instructure/instructure-ui/compare/v8.2.1...v8.3.0) (2021-05-04)
+
+### Bug Fixes
+
+- **ui:** export `EmotionThemeProvider` and `withStyle` from ui package ([61e153c](https://github.com/instructure/instructure-ui/commit/61e153c8a27c27ad850e59959a599b10b2c36b67))
+- **ui-tree-browser:** fix root item rendering with wrong fontFamily ([12d061b](https://github.com/instructure/instructure-ui/commit/12d061bb833d39f4d7b82c741bbccb51ac2d28e6))
+
+### Features
+
+- **ui-babel-preset:** remove not needed Babel plugins ([e23eea6](https://github.com/instructure/instructure-ui/commit/e23eea66baf5d9d79e3dba7136eb7534bb220021))
+- **ui-number-input:** add inputMode prop to NumberInput ([8bf3091](https://github.com/instructure/instructure-ui/commit/8bf309169d2103047bccc820519d12db35d69f26))
+
+### Performance improvements
+
+- **emotion:** upgrade to Emotion 11 whose parser was updated to a more performant one ([bcafe99](https://github.com/instructure/instructure-ui/commit/bcafe99382ea329af78931ab07adfb09c7fec415))
+- **ui-babel-preset:** removing unneeded babel plugins are leading to performance improvements ([e23eea6](https://github.com/instructure/instructure-ui/commit/e23eea66baf5d9d79e3dba7136eb7534bb220021))
+
 ## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
 
 ### Bug Fixes
