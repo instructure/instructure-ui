@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-component-examples",
-  "version": "8.2.1",
+  "version": "8.3.0",
   "description": "A utility for automatically generating component examples",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -17,13 +17,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "^8.2.1",
-    "@instructure/uid": "^8.2.1",
+    "@instructure/config-loader": "^8.3.0",
+    "@instructure/uid": "^8.3.0",
     "loader-utils": "^2",
     "react-docgen": "^5"
   },
   "devDependencies": {
-    "@instructure/ui-test-utils": "^8.2.1",
+    "@instructure/ui-test-utils": "^8.3.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

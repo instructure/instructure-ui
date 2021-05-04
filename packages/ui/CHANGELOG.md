@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.3.0](https://github.com/instructure/instructure-ui/compare/v8.2.1...v8.3.0) (2021-05-04)
+
+### Bug Fixes
+
+- **ui:** export `EmotionThemeProvider` and `withStyle` from ui package ([61e153c](https://github.com/instructure/instructure-ui/commit/61e153c8a27c27ad850e59959a599b10b2c36b67))
+
 ## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
 
 **Note:** Version bump only for package @instructure/ui
