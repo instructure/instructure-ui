@@ -1,5 +1,6 @@
 {
   "source": {
     "exludePattern": ""
-  }
+  },
+  "plugins": ["plugins/commentsOnly"]
 }

@@ -61,7 +61,7 @@ const options = {
     '**/*.md', // package READMEs
     '**/src/*.{js,ts,tsx}', // util src files
     '**/src/*/*.{js,ts,tsx}', // component src files
-    '**/src/*/*/*.{js,ts,tsx}' // child component src files
+    '**/src/*/*/*.{js,ts,tsx}' // child component src files,
   ],
   ignore: [
     '**/macro.{js,ts}',
@@ -82,6 +82,8 @@ const options = {
     '**/theme.{js,ts}',
     '**/locator.{js,ts}',
     '**/*Locator.{js,ts}',
+
+    '**/types/**',
 
     // ignore index files that just re-export
     '**/src/index.{js,ts}',
