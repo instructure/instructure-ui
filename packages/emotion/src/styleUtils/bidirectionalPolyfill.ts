@@ -33,7 +33,7 @@ import { isObject } from 'lodash'
  * Polyfills Bi-directional [CSS proposal from W3C](https://drafts.csswg.org/css-logical-props/) to support direction-sensitive rules, a.k.a Left-To-Right (LTR) and Right-To-Left (RTL) in all browsers.
  *
  * Based on formerly used [postcss-bidirection](https://github.com/gasolin/postcss-bidirection) plugin.
- *
+ * @module bidirectionalPolyfill
  * @param {object} styles - styles object of a component
  * @param {string} dir - "ltr" of "rtl" direction
  * @returns {{}} styles object with Bi-directional properties polyfilled

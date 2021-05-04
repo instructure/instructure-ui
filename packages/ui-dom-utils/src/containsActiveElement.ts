@@ -32,7 +32,7 @@ import { getActiveElement } from './getActiveElement'
  * ---
  *
  * Determine if an element contains the active element
- *
+ * @module containsActiveElement
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {boolean} if the element contains the active element
  */

@@ -39,7 +39,7 @@
  *
  * validator.isRequired = makeRequirable(validator)
  * ```
- *
+ * @module makeRequirable
  * @param {function} validator - a validator function
  * @returns {Error} if designated prop is not provided
  */

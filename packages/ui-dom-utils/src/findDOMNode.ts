@@ -31,6 +31,7 @@ import ReactDOM from 'react-dom'
  * ---
  *
  * Wrapper function for React.findDOMNode
+ * @module findDOMNode
  *
  * @param {ReactComponent|DomNode} el - component, DOM node, or function returning a DOM node
  * @returns {DomNode} The root node of this element

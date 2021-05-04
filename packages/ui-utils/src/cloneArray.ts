@@ -27,7 +27,7 @@
  * category: utilities
  * ---
  * Deep clones an array with sub arrays
- *
+ * @module cloneArray
  * @param {Array} arr
  * @returns {Array} Returns a copy of the array
  */

@@ -31,5 +31,6 @@ const userAgent =
  * ---
  * A minimal check for IE11, since that's mostly all the browser detecting we do.
  * Use when you don't need all of [bowser](https://www.npmjs.com/package/bowser).
+ * @module isIE11
  */
 export const isIE11 = /msie|trident/i.test(userAgent)

@@ -34,6 +34,7 @@ import { contains } from './contains'
  * for cases when the trigger is disabled and mouseOut/Over can cause flicker moving
  * from one child element to another.
  *
+ * @module handleMouseOverOut
  * @param handler {function} Callback function for handling the event
  * @param event {Event} The DOM Event that was fired
  */

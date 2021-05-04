@@ -31,6 +31,7 @@ import { getDisplayName } from './getDisplayName'
  * Check if a React component instance (React element) matches one of the
  * specified types.
  *
+ * @module matchComponentTypes
  * @param {ReactComponent} componentInstance
  * @param {Array} types an array of React components
  * @returns {Boolean} true if the component matches at least one of the types

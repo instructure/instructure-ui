@@ -30,6 +30,7 @@ import Color from 'tinycolor2'
  * category: utilities
  * ---
  * check the contrast ratio of 2 colors
+ * @module contrast
  * @param {String} color1
  * @param {String} color2
  * @returns {Number} color contrast ratio

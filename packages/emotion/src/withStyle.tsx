@@ -35,6 +35,7 @@ import { useTheme } from './useTheme'
  * ---
  * category: utilities/themes
  * ---
+ *
  * A decorator or higher order component that makes a component themeable.
  *
  * It adds a `makeStyles` function and the generated `styles` object to the decorated Component's props.
@@ -46,30 +47,6 @@ import { useTheme } from './useTheme'
  * import generateStyle from './styles'
  * import generateComponentTheme from './theme'
  *
- * class ExampleComponent extends React.Component {
- *  static propTypes = {
- *    // eslint-disable-next-line react/require-default-props
- *    makeStyles: PropTypes.func,
- *    // eslint-disable-next-line react/require-default-props
- *    styles: PropTypes.object
- *  }
- *
- *  componentDidMount() {
- *    this.props.makeStyles()
- *  }
- *
- *  componentDidUpdate() {
- *    this.props.makeStyles()
- *  }
- *
- *  render() {
- *    const { propVal1, styles, ...props } = this.props
- *
- *    return (
- *      <Element css={styles.exampleComponent} >...</Element>
- *    )
- *  }
- * }
  *
  * export default withStyle(generateStyle, generateComponentTheme)(ExampleComponent)
  * ```
@@ -116,6 +93,7 @@ import { useTheme } from './useTheme'
  * </EmotionThemeProvider>
  * ```
  *
+ * @module withStyle
  *
  * @param {function} generateStyle - The function that returns the component's style object
  * @param {function} generateComponentTheme - The function that returns the component's theme variables object

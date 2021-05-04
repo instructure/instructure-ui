@@ -33,6 +33,7 @@ import { ownerDocument } from './ownerDocument'
  * ---
  *
  * Gets the bounding rectangle of an element
+ * @module getBoundingClientRect
  *
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @return {object} rect - object with top, left coords and height and width

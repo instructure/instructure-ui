@@ -33,6 +33,7 @@ import { canUseDOM } from './canUseDOM'
  *
  * Get the associated CSS properties and values for a
  * specified element
+ * @module getComputedStyle
  *
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Object} object containing css properties and values for the element

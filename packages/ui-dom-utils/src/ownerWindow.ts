@@ -31,6 +31,7 @@ import { ownerDocument } from './ownerDocument'
  * ---
  * Retrieve the owner window object associated with
  * the owner document of the specified element
+ * @module ownerWindow
  * @param {ReactElement|DOMNode} el
  * @returns {Object} the owner window
  */

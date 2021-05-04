@@ -31,7 +31,7 @@ import { px } from '@instructure/ui-utils'
  * Given a query and an element, return a function that takes
  * size as an argument and returns an object consisting of
  * query names and a boolean true false if it matches.
- *
+ * @module parseQuery
  * @param {Object} query - an object consisting of query names
  *  mapped to individual queries
  * @param {ReactComponent|DomNode} el - component or DOM node

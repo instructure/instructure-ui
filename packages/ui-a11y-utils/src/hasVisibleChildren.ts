@@ -47,6 +47,7 @@ export {
    * category: utilities/a11y
    * ---
    * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](#ScreenReaderContent).
+   * @module hasVisibleChildren
    * @param {ReactChildren} children - A react component's children prop
    * @return {boolean} whether any of the children are visible
    */

@@ -29,6 +29,7 @@ import deepEqual from 'fast-deep-equal'
  * category: utilities
  * ---
  * A wrapper for [fast-deep-equal](https://www.npmjs.com/package/fast-deep-equal)
+ * @module deepEqual
  */
 export default deepEqual
 export { deepEqual }

@@ -42,6 +42,7 @@ const apiForEmptyNode = {
  * for both adding and removing classes from an element.
  * Also provides a contains function to query if the
  * element contains a specified class name.
+ * @module getClassList
  *
  * @param {ReactComponent|DomNode} element - component or DOM node
  * @return {Object} object containing classList functions 'contains', 'add', and 'remove'

@@ -117,7 +117,7 @@ export {
    * Focusable elements include input, select, textarea, button, and object.
    * Anchor tags are also focusable if they include an href or
    * tabindex attribute (including tabindeces less than zero).
-   *
+   * @module findFocusable
    * @param {ReactComponent|DomNode} el - component or DOM node
    * @param {Function} filter - a function to filter the matching nodes
    * @param {Boolean} shouldSearchRootNode - should the root node be included in the search

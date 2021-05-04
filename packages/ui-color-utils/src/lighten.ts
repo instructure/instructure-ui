@@ -30,6 +30,7 @@ import Color from 'tinycolor2'
  * category: utilities
  * ---
  * lighten a color
+ * @module lighten
  * @param {String} color
  * @param {Number} percent
  * @returns {String} color as rgb string

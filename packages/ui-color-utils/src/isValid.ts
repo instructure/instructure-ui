@@ -30,6 +30,7 @@ import Color from 'tinycolor2'
  * category: utilities
  * ---
  * check if a string is a valid color
+ * @module isValid
  * @param {String} color
  * @returns {Boolean} true if the string is a valid color
  */

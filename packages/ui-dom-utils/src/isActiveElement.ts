@@ -31,7 +31,7 @@ import { getActiveElement } from './getActiveElement'
  * ---
  *
  * Determine if an element is the active element
- *
+ * @module isActiveElement
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {boolean} if the element is the active element
  */

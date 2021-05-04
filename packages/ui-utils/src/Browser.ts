@@ -29,6 +29,7 @@ import Browser from 'bowser'
  * ---
  * A wrapper for [bowser](https://www.npmjs.com/package/bowser) browser
  * detection library.
+ * @module Browser
  */
 export default Browser
 export { Browser }

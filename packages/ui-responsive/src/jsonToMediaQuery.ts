@@ -41,7 +41,7 @@ import { px } from '@instructure/ui-utils'
  * ```js
  * '(min-width: 350px)'
  * ```
- *
+ * @module jsonToMediaQuery
  * @param {Object} query - an object consisting of the query type and value
  * @param {ReactComponent|DomNode} el - component or DOM node which will be
  *  passed to the pixel conversion if the unit type is `em`

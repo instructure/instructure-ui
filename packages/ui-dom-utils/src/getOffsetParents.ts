@@ -36,7 +36,7 @@ import { ownerDocument } from './ownerDocument'
  * Includes parents of nodeType 1 (Element nodes such
  * as <p> or <div>) that have either been transformed
  * or that do not have static position.
- *
+ * @module getOffsetParents
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Array} offset parents
  */

@@ -31,7 +31,7 @@ import { canUseDOM } from './canUseDOM'
  * ---
  *
  * Determine if an element contains another DOM node
- *
+ * @module containsWithDOM
  * @param {ReactComponent|DomNode} context - component or DOM node
  * @param {ReactComponent|DomNode} el - component or DOM node which we want to determine if contained within the context
  * @returns {boolean} if the element is contained within the context

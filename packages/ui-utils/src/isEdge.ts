@@ -31,5 +31,6 @@ const userAgent =
  * ---
  * A minimal check to see if the browser is Edge. Use when you don't need all
  * of [bowser](https://www.npmjs.com/package/bowser).
+ * @module isEdge
  */
 export const isEdge = /Edge/.test(userAgent)

@@ -30,7 +30,7 @@ import { findDOMNode } from './findDOMNode'
  * ---
  *
  * Polyfill for Element.matches (https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
- *
+ * @module elementMatches
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @param {String} selectorString - a string representing the selector to test
  * @returns {boolean} if the element would be selected by the specified selector string

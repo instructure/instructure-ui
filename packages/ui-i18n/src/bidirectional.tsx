@@ -53,6 +53,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
  * bidirectional components query the documentElement for the `dir` attribute, defaulting to `ltr`
  * if it is not present.
  *
+ * @module bidirectional
  * @return {function} composes the bidirectional component.
  */
 const bidirectional = decorator((ComposedComponent: any) => {

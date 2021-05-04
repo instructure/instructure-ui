@@ -30,7 +30,7 @@ import { camelize } from '@instructure/ui-utils'
  * ---
  * Given a prefix and a theme object, prepends the object keys with
  * the designated prefix and camel cases the concatenation.
- *
+ * @module makeThemeVars
  * @param {String} prefix - a string to prepend to object keys
  * @param {Object} vars - an object
  * @returns {Object} a modified object with prefixed keys

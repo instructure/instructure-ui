@@ -34,6 +34,7 @@ import PropTypes from 'prop-types'
  * https://developer.mozilla.org/en-US/docs/Web/CSS/cursor.
  *
  * Note that this does not currently support `url(...)` values.
+ * @module cursor
  */
 const cursor = PropTypes.oneOf([
   'auto',

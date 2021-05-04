@@ -54,6 +54,7 @@ export {
    * tabindex attribute (to include elements with negative tabindex attributes,
    * use findFocusable).
    *
+   * @module findTabbable
    * @param {ReactComponent|DomNode} el - component or DOM node
    * @param {Boolean} shouldSearchRootNode - should the root node be included in the search
    * @returns {Array} array of all tabbable children

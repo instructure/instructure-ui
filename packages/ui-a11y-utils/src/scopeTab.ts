@@ -81,7 +81,7 @@ export {
    *
    * Scope tab in order to trap focus within a specified
    * element.
-   *
+   * @module scopeTab
    * @param {ReactElement|DOMNode} element
    * @param {Event} event the DOM Event that was fired
    * @param {function} function executed when leaving final tabbable instead of the default behavior

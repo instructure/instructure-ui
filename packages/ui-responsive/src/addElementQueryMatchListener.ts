@@ -74,7 +74,7 @@ import { debounce } from '@instructure/debounce'
  *   ...
  * }
  * ```
- *
+ * @module addElementQueryMatchListener
  * @param {Object} query - object consisting of names and query objects
  * @param {ReactComponent|DomNode} el - a DOM node or a function returning a DOM node
  * @param {function} cb - called with an array of the names of the currently

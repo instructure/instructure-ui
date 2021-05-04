@@ -34,6 +34,7 @@ const COMPUTED_CACHE = {}
  *
  * Gets font size in px
  *
+ * @module getFontSize
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Object} font size in px
  */

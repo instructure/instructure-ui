@@ -28,7 +28,7 @@
  * ---
  *
  * Get the active element of the specified document
- *
+ * @module getActiveElement
  * @param {DomNode} doc - document by default or user specified doc
  * @throws Will throw an error in ie if no active element
  * @return {DomNode} the active element

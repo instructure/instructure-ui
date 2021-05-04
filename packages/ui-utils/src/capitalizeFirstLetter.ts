@@ -27,6 +27,7 @@
  * category: utilities
  * ---
  * Capitalize the first letter in a string
+ * @module capitalizeFirstLetter
  * @param {String} str
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.

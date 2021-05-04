@@ -31,6 +31,7 @@ import Color from 'tinycolor2'
  * ---
  * Converts a color string to a hex string like `#FF0000`
  * For possible inputs see https://github.com/bgrins/TinyColor
+ * @module color2hex
  * @param {String} rgb a color string
  * @returns {String} a hex string like `#FF0000`
  */

@@ -53,6 +53,7 @@ const getDefaultDir = () => {
  * ---
  *
  * Return the direction ('ltr' or 'rtl') of an element
+ * @module getTextDirection
  * @param {Element} element will use the <html> element by default
  * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
  */

@@ -36,6 +36,7 @@
  *  - 'fooBar'
  *  - 'bazQux'
  *
+ * @module camelize
  * @param {String} str
  * @returns {String} Returns camel cased string
  */

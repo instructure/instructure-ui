@@ -35,6 +35,7 @@ import { getComputedStyle } from './getComputedStyle'
  * Includes parents of nodeType 1 (Element nodes such
  * as <p> or <div>) that have overflow css properties
  * set to auto, scroll, or overlay
+ * @module getScrollParents
  *
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Array} scroll parents

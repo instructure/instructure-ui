@@ -28,7 +28,7 @@ import { pickProps } from './passthroughProps'
  * category: utilities/react
  * ---
  * Return a props object with only specified propTypes.
- *
+ * @module pickProps
  * @param {Object} props React component props
  * @param {Object} propTypes React component propTypes
  * @param {Array} include an optional array of prop names to include

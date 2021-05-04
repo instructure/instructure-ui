@@ -38,6 +38,7 @@ import { camelize } from './camelize'
  *  - 'FooBar'
  *  - 'BazQux'
  *
+ * @module pascalize
  * @param {String} str
  * @returns {String} Returns pascal cased string
  */

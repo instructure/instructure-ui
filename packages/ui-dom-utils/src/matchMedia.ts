@@ -34,7 +34,7 @@ import { ownerWindow } from './ownerWindow'
  * Wrapper function for window.matchMedia
  *
  * see https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
- *
+ * @module matchMedia
  * @param {string} query - media query string
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Object} a media query list object

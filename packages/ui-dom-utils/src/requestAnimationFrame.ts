@@ -32,6 +32,7 @@ import { canUseDOM } from './canUseDOM'
  * If DOM is usable, returns a function wrapper for
  * window.requestAnimationFrame. Otherwise sets
  * a manual timeout.
+ * @module requestAnimationFrame
  *
  * @returns {function} requestAnimationFrame takes a callback function as an argument and returns a cancel method
  */

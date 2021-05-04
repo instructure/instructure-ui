@@ -30,7 +30,7 @@ import { findDOMNode } from './findDOMNode'
  * ---
  *
  * Retrieve the owner document of a specified element
- *
+ * @module ownerDocument
  * @param {ReactElement|DOMNode} el
  * @returns {DomNode} the owner document
  */

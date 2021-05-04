@@ -32,6 +32,7 @@ import { getComputedStyle } from './getComputedStyle'
  *
  * Determine if an element is visible.
  *
+ * @module isVisible
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @param {boolean} recursive - by default all parent elements are checked
  * recursively to accurately determine visibility. setting this to `false`

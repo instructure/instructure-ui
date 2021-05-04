@@ -32,6 +32,7 @@ import { logError as error } from '@instructure/console'
  * and a propName prefix, combines each prop value with the
  * propName prefix and replaces it with a corresponding value
  * from the theme object.
+ * @module getShorthandPropValue
  *
  * @param {String} componentName - the name of the component (for error messages)
  * @param {Object} componentTheme - a theme object of keys and values
