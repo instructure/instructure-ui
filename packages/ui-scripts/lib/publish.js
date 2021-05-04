@@ -26,8 +26,7 @@ const {
   error,
   info,
   runCommandSync,
-  runCommandAsync,
-  confirm
+  runCommandAsync
 } = require('@instructure/command-utils')
 
 const { getConfig } = require('./utils/config')
@@ -86,10 +85,6 @@ async function publish({
   }
 
   info(`📦  Version: ${releaseVersion}, Tag: ${npmTag}`)
-  const reply = await confirm('Continue? [y/n]\n')
-  if (!['Y', 'y'].includes(reply.trim())) {
-    process.exit(0)
-  }
 
   return Promise.all(
     getPackages().map(async (pkg) => {
