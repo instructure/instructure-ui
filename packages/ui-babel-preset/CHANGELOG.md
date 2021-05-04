@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.3.0](https://github.com/instructure/instructure-ui/compare/v8.2.1...v8.3.0) (2021-05-04)
+
+### Features
+
+- **ui-babel-preset:** remove not needed Babel plugins ([e23eea6](https://github.com/instructure/instructure-ui/commit/e23eea66baf5d9d79e3dba7136eb7534bb220021))
+
+### Performance improvements
+
+- **ui-babel-preset:** removing unneeded babel plugins are leading to performance improvements ([e23eea6](https://github.com/instructure/instructure-ui/commit/e23eea66baf5d9d79e3dba7136eb7534bb220021))
+
 ## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
 
 **Note:** Version bump only for package @instructure/ui-babel-preset

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.3.0](https://github.com/instructure/instructure-ui/compare/v8.2.1...v8.3.0) (2021-05-04)
+
+### Bug Fixes
+
+- **ui-tree-browser:** fix root item rendering with wrong fontFamily ([12d061b](https://github.com/instructure/instructure-ui/commit/12d061bb833d39f4d7b82c741bbccb51ac2d28e6))
+
 ## [8.2.1](https://github.com/instructure/instructure-ui/compare/v8.2.0...v8.2.1) (2021-04-22)
 
 ### Bug Fixes
