@@ -34,7 +34,11 @@
  * @param {*} props - The component's props object
  * @returns {object} The calculated theme override object
  */
-export const getComponentThemeOverride = (theme, componentName, props) => {
+export const getComponentThemeOverride = (
+  theme: any,
+  componentName: any,
+  props: any
+) => {
   const componentOverride =
     theme?.componentOverrides && theme.componentOverrides[componentName]
 

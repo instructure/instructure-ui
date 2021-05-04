@@ -35,8 +35,8 @@ import { camelize } from '@instructure/ui-utils'
  * @param {Object} vars - an object
  * @returns {Object} a modified object with prefixed keys
  */
-function makeThemeVars(prefix, vars) {
-  const themeVars = {}
+function makeThemeVars(prefix: string, vars: Record<string, unknown>) {
+  const themeVars: Record<string, unknown> = {}
   Object.keys(vars).forEach((variable) => {
     themeVars[camelize(`${prefix}-${variable}`)] = vars[variable]
   })

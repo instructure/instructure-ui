@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import { ThemeProvider } from '@emotion/react'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { merge, cloneDeep } from 'lodash'
 
 /**
@@ -66,7 +67,7 @@ import { merge, cloneDeep } from 'lodash'
  *
  * @param {object} theme - A full theme or an override object
  */
-function EmotionThemeProvider({ children, theme = {} }) {
+function EmotionThemeProvider({ children, theme = {} }: any) {
   return <ThemeProvider theme={getTheme(theme)}>{children}</ThemeProvider>
 }
 
@@ -81,7 +82,7 @@ function EmotionThemeProvider({ children, theme = {} }) {
  * @param {object} theme - A full theme or an override object
  * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
  */
-const getTheme = (theme) => (ancestorTheme = {}) => {
+const getTheme = (theme: any) => (ancestorTheme = {}) => {
   // themeable themes have a 'key' property (= name of the theme),
   // so without it it's just an overrides objects
   const overrides = !theme.key ? theme : null

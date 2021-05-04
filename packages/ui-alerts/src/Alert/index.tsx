@@ -273,7 +273,6 @@ class Alert extends Component<Props> {
       // since ScreenReaderContent gets rendered outside the app,
       // and uses the withStyle decorator, we need to provide a theme for it,
       // otherwise throws warning (any theme, doesn't use any theme variables)
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; theme: { 'ic-brand-prim... Remove this comment to see the full error message
       <EmotionThemeProvider theme={canvas}>{content}</EmotionThemeProvider>,
       div
     )

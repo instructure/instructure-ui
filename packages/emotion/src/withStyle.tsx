@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React, { forwardRef, useState } from 'react'
 import { decorator } from '@instructure/ui-decorator'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { isEqual } from 'lodash'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'hois... Remove this comment to see the full error message
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
-
 /**
  * ---
  * category: utilities/themes
@@ -122,29 +122,24 @@ import { useTheme } from './useTheme'
  * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
-  (ComposedComponent, generateStyle, generateComponentTheme) => {
+  (ComposedComponent: any, generateStyle: any, generateComponentTheme: any) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
-
     const WithStyle = forwardRef((props, ref) => {
       const theme = useTheme()
       const dir = useTextDirectionContext()
-
       const componentProps = {
         ...ComposedComponent.defaultProps,
         ...props
       }
-
       const themeOverride = getComponentThemeOverride(
         theme,
         displayName,
         componentProps
       )
-
       const componentTheme =
         typeof generateComponentTheme === 'function'
           ? { ...generateComponentTheme(theme), ...themeOverride }
           : {}
-
       const [styles, setStyles] = useState(
         generateStyle
           ? bidirectionalPolyfill(
@@ -153,18 +148,15 @@ const withStyle = decorator(
             )
           : {}
       )
-
-      const makeStyleHandler = (...extraArgs) => {
+      const makeStyleHandler = (...extraArgs: any[]) => {
         const calculatedStyles = bidirectionalPolyfill(
           generateStyle(componentTheme, componentProps, ...extraArgs),
           dir
         )
-
         if (!isEqual(calculatedStyles, styles)) {
           setStyles(calculatedStyles)
         }
       }
-
       return (
         <ComposedComponent
           ref={ref}
@@ -174,18 +166,14 @@ const withStyle = decorator(
         />
       )
     })
-
     hoistNonReactStatics(WithStyle, ComposedComponent)
-
     // we have to pass these on, because sometimes we need to
     // access propTypes of the component in other components
     // (mainly in the `omitProps` method)
     WithStyle.propTypes = ComposedComponent.propTypes
     WithStyle.defaultProps = ComposedComponent.defaultProps
-
     // we are exposing the theme generator for the docs generation
-    WithStyle.generateComponentTheme = generateComponentTheme
-
+    ;(WithStyle as any).generateComponentTheme = generateComponentTheme
     // we have to add defaults to makeStyles and styles added by this decorator
     // eslint-disable-next-line no-param-reassign
     ComposedComponent.defaultProps = {
@@ -193,14 +181,11 @@ const withStyle = decorator(
       makeStyles: () => {},
       styles: {}
     }
-
     if (process.env.NODE_ENV !== 'production') {
       WithStyle.displayName = `WithStyle(${displayName})`
     }
-
     return WithStyle
   }
 )
-
 export default withStyle
 export { withStyle }

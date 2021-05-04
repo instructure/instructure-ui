@@ -53,8 +53,13 @@ const ThemeablePropTypes = {
   spacing: shorthandPropType(Object.values(SPACING))
 }
 
-function shorthandPropType(validValues) {
-  return function (props, propName, componentName, location) {
+function shorthandPropType(validValues: any) {
+  return function (
+    props: any,
+    propName: any,
+    componentName: any,
+    location: any
+  ): any {
     const propValue = props[propName]
 
     if (typeof propValue === 'undefined') {

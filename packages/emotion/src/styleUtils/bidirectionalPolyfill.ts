@@ -23,6 +23,7 @@
  */
 
 import { consoleLog as log } from '@instructure/console'
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { isObject } from 'lodash'
 
 /**
@@ -67,13 +68,16 @@ const SUPPORT_PROPS = [
   'insetInlineEnd'
 ]
 
-function processProps({ originalProp, originalValue }, textDirection) {
+function processProps(
+  { originalProp, originalValue }: any,
+  textDirection: any
+) {
   const isLtr = textDirection === 'ltr'
 
   let prop = originalProp
   let value = originalValue
-  let start = isLtr ? 'Left' : 'Right'
-  let end = isLtr ? 'Right' : 'Left'
+  const start = isLtr ? 'Left' : 'Right'
+  const end = isLtr ? 'Right' : 'Left'
 
   switch (prop) {
     case 'float':
@@ -152,12 +156,12 @@ function processProps({ originalProp, originalValue }, textDirection) {
   return { prop, value }
 }
 
-const isSupportedProps = (prop) => SUPPORT_PROPS.indexOf(prop) > -1
+const isSupportedProps = (prop: any) => SUPPORT_PROPS.indexOf(prop) > -1
 
-const processStyleProps = (propsObj, dir) =>
+const processStyleProps = (propsObj: any, dir: any): any =>
   isObject(propsObj)
     ? Object.entries(propsObj).reduce(
-        (accumulator, [originalProp, originalValue]) => {
+        (accumulator: any, [originalProp, originalValue]) => {
           if (isObject(originalValue)) {
             return {
               ...accumulator,
@@ -168,6 +172,7 @@ const processStyleProps = (propsObj, dir) =>
           if (isSupportedProps(originalProp) && originalValue !== 'undefined') {
             const { prop, value } = processProps(
               { originalProp, originalValue },
+
               dir
             )
 
@@ -180,7 +185,7 @@ const processStyleProps = (propsObj, dir) =>
       )
     : propsObj
 
-export const bidirectionalPolyfill = (styles, dir) =>
+export const bidirectionalPolyfill = (styles: any, dir: any) =>
   Object.entries(styles).reduce(
     (accumulator, [style, props]) => ({
       ...accumulator,

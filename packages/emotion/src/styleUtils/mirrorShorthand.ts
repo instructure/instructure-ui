@@ -42,7 +42,7 @@
  * @param {String} values - space delimited string values representing a CSS shorthand
  * @returns {String} a space delimited CSS shorthand string converted to RTL
  */
-function mirrorShorthandEdges(values) {
+function mirrorShorthandEdges(values: string) {
   if (typeof values !== 'string') {
     return
   }
@@ -69,7 +69,7 @@ function mirrorShorthandEdges(values) {
  * @param {String} values - space delimited string values representing a CSS shorthand
  * @returns {String} a space delimited CSS shorthand string converted to RTL
  */
-function mirrorShorthandCorners(values) {
+function mirrorShorthandCorners(values: string) {
   if (typeof values !== 'string') {
     return
   }

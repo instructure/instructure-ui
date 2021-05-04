@@ -26,6 +26,7 @@ import { decorator } from '@instructure/ui-decorator'
 import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'hois... Remove this comment to see the full error message
 import hoistNonReactStatics from 'hoist-non-react-statics'
+
 /**
  * ---
  * category: utilities/i18n

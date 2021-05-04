@@ -40,10 +40,10 @@ import { logError as error } from '@instructure/console'
  * @returns {String} a string with each value replaced with a value from the theme object
  */
 function getShorthandPropValue(
-  componentName,
-  componentTheme,
-  propValue,
-  propName
+  componentName: string,
+  componentTheme: any,
+  propValue: string,
+  propName: string
 ) {
   if (typeof propValue !== 'string' || isEmpty(componentTheme)) {
     return
@@ -71,6 +71,7 @@ function getShorthandPropValue(
       const themeVariableName = camelize(`${propName}-${shortHandValue}`)
       const themeVariableValue = componentTheme[themeVariableName]
 
+      //@ts-expect-error FIXME:
       error(
         themeVariableValue,
         `[${componentName}] '${themeVariableName}' is an invalid '${propName}' value.`
