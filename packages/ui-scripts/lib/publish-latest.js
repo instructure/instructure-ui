@@ -26,7 +26,8 @@ const {
   error,
   info,
   runCommandSync,
-  runCommandAsync
+  runCommandAsync,
+  confirm
 } = require('@instructure/command-utils')
 
 const { getConfig } = require('./utils/config')
@@ -40,14 +41,14 @@ const { createNPMRCFile } = require('./utils/npm')
 try {
   const pkgJSON = getPackageJSON()
   // Arguments
-  // 1: version to publish. If current version, use 'current' or do not pass any arguments otherwise e.g.: 8.1.3
+  // 1: version to publish. If current version, use 'current' otherwise e.g.: 8.1.3
   // 2: publish type. defaults to current. If set to 'maintenance', it will publish with vx_maintenance tag
-  // e.g.: ui-scripts --publish 5.12.2 maintenance
+  // e.g.: ui-scripts --publish-latest 5.12.2 maintenance
   const releaseVersion =
     process.argv[3] === 'current' || !process.argv[3]
       ? pkgJSON.version
       : process.argv[3]
-  publish({
+  publishLatest({
     packageName: pkgJSON.name,
     currentVersion: pkgJSON.version,
     releaseVersion: releaseVersion,
@@ -59,7 +60,7 @@ try {
   process.exit(1)
 }
 
-async function publish({
+async function publishLatest({
   packageName,
   currentVersion,
   releaseVersion,

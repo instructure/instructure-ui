@@ -1,4 +1,4 @@
-name: Deploy docs to legacy gh-pages.
+name: Docs deploy legacy
 on: workflow_dispatch
 jobs:
   deploy:

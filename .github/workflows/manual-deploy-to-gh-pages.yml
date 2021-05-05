@@ -1,4 +1,4 @@
-name: Deploy manually to gh-pages
+name: Docs deploy latest
 on: workflow_dispatch
 jobs:
   deploy:

@@ -1,4 +1,4 @@
-name: Visual Regression Test
+name: AUTO Visual Regression Test
 on:
   push:
     branches:

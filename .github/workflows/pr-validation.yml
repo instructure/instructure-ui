@@ -1,4 +1,4 @@
-name: Pull Request validation
+name: AUTO Pull Request validation
 on: [pull_request]
 jobs:
   pr_validation:
