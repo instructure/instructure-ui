@@ -81,11 +81,11 @@ To update all package versions
 
 `yarn ui-scripts --bump [version|major|minor|patch]`
 
-#### `publish`
+#### `publish-latest`
 
 To publish all packages (defaults to current version):
 
-`yarn ui-scripts --publish [version]`
+`yarn ui-scripts --publish-latest [version]`
 
 #### `post-publish`
 
