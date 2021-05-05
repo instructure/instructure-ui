@@ -34,7 +34,7 @@ import { safeCloneElement } from './safeCloneElement'
  * cloned instance of the child. If it is a child of length > 1,
  * wrap in a span and return the child. Return null if child has
  * no length.
- *
+ * @module ensureSingleChild
  * @param {ReactElement} child
  * @param {Object} props - props for child
  * @returns {ReactElement} cloned instance for a single child, or children wrapped in a span

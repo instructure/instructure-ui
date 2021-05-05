@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { decorator } from '@instructure/ui-decorator'
-import { warn } from '@instructure/console/macro'
+import { logWarn as warn } from '@instructure/console'
 
 const experimental =
   process.env.NODE_ENV == 'production'

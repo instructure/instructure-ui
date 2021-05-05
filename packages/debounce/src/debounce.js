@@ -39,6 +39,7 @@
  *
  * Note: Modified from the original to check for cancelled boolean before invoking func to prevent React setState
  * on unmounted components.
+ * @module debounce
  *
  * @param {Function} func The function to debounce.
  * @param {number} [wait=0] The number of milliseconds to delay.

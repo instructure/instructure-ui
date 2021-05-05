@@ -28,11 +28,12 @@ const path = require('path')
 const baseConfig = require('@instructure/ui-webpack-config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const { merge } = require('webpack-merge')
+
 const outputPath = path.resolve(__dirname, '__build__')
 const resolveAliases = DEBUG ? { resolve: require('./resolve') } : {}
 
-module.exports = {
-  ...baseConfig,
+const config = merge(baseConfig, {
   entry: {
     // main entry point
     main: './src/index.js',
@@ -44,6 +45,7 @@ module.exports = {
     path: outputPath,
     filename: '[name].[contenthash].js'
   },
+
   devServer: {
     contentBase: outputPath,
     host: '0.0.0.0'
@@ -59,4 +61,6 @@ module.exports = {
   },
   ...resolveAliases,
   mode: 'production'
-}
+})
+
+module.exports = config

@@ -31,7 +31,7 @@ import React from 'react'
 const examplesContext = require.context(
   '../',
   true,
-  /^.*\/src\/.*\.examples\.js$/,
+  /^.*\/src\/.*\.examples\.tsx?$/,
   'sync'
 )
 

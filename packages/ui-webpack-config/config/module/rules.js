@@ -39,7 +39,7 @@ const babelLoader = {
 const rules = [
   {
     test: /\.(js|mjs|jsx|ts|tsx)$/,
-    exclude: [...exclude, /\.examples\.js$/],
+    exclude: [...exclude, /\.examples\.(js|mjs|jsx|ts|tsx)$/],
     use: [
       {
         loader: 'thread-loader',
@@ -56,8 +56,8 @@ const rules = [
     ]
   },
   {
-    test: /\.m?js$/,
-    include: [/\.examples\.js/],
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
+    include: [/\.examples\.(js|mjs|jsx|ts|tsx)$/],
     exclude,
     use: ['component-examples-loader', babelLoader]
   },

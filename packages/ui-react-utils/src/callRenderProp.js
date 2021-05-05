@@ -29,7 +29,7 @@ import React from 'react'
  * category: utilities/react
  * ---
  * Evaluate a provided value to create a renderable React element.
- *
+ * @module callRenderProp
  * @param {ReactElement|ReactClass|function} value
  * @param {object} props
  * @return {ReactElement} A renderable React element

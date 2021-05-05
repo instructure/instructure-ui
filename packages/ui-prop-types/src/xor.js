@@ -42,7 +42,7 @@
  *
  * This will throw an error if both the `decimalPrecision` and
  * `significantDigits` props are provided.
- *
+ * @module xor
  * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
  * @param {...string} otherPropNames - reject if any of these other props are also given
  * @returns {Error} if any of the other props are also given

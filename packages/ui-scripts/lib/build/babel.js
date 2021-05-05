@@ -45,7 +45,7 @@ const firstArg = args[0]
 const src = firstArg && firstArg.indexOf('--') < 0 ? firstArg : 'src'
 
 // uncomment the extensions arg after renaming the files from js -> ts happens
-let babelArgs = ['--extensions', '.ts,.js']
+let babelArgs = ['--extensions', '.ts,.tsx,.js,.jsx']
 
 if (args.includes('--copy-files')) {
   babelArgs.push('--copy-files')

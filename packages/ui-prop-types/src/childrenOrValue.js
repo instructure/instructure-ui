@@ -39,6 +39,7 @@
  *    }
  *  ...
  * ```
+ * @module childrenOrValue
  */
 function childrenOrValue(props, propName, componentName) {
   if (props.as === 'input') {

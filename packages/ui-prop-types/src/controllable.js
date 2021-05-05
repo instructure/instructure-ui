@@ -43,7 +43,7 @@
  *
  * This will throw an error if the 'selected' prop is supplied without a corresponding
  * 'onSelect' handler and will recommend using 'defaultSelected' instead.
- *
+ * @module controllable
  * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
  * @param {string} handlerName - name of the handler function
  * @param {string} defaultPropName - name of the default prop

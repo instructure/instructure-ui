@@ -28,6 +28,7 @@
  * ---
  * Get the displayName of a React component.
  * needs a babel plugin to work https://github.com/facebook/react/issues/4915 !!
+ * @module getDisplayName
  * @param {ReactComponent|String} Component
  * @returns {String} the component displayName
  */

@@ -108,7 +108,8 @@
     "prop-types": "^15",
     "react": "^16.8",
     "react-dom": "^16.8",
-    "react-github-corner": "^2.1.0"
+    "react-github-corner": "^2.1.0",
+    "webpack-merge": "^5.7.3"
   },
   "devDependencies": {
     "@instructure/config-loader": "^8.3.0",

@@ -29,7 +29,7 @@
  * Parse the component props for the interaction type. It will return one of 'enabled', 'disabled', or 'readonly'.
  * This is useful for form elements where consumers are able to either use the interaction prop as specified or the
  * native html disabled or readonly attributes
- *
+ * @module getInteraction
  * @param {Object} args
  * @param {Object} args.props - the component props
  * @param {string} args.props.interaction - specifies the interaction mode, one of 'enabled', 'disabled', or 'readonly'

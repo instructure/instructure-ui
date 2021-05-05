@@ -12,7 +12,6 @@
       ],
       "@instructure/command-utils": ["command-utils/lib"],
       "@instructure/config-loader": ["config-loader/lib"],
-      "@instructure/console/macro": ["console/macro.js"],
       "@instructure/cz-lerna-changelog": ["cz-lerna-changelog/lib"],
       "@instructure/instui-cli": ["instui-cli/lib"],
       "@instructure/pkg-utils": ["pkg-utils/lib"],

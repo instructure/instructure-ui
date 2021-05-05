@@ -26,7 +26,8 @@ import React, { createElement } from 'react'
 import marked from 'marked'
 import grayMatter from 'gray-matter'
 
-import { warn } from '@instructure/console/macro'
+import { logWarn as warn } from '@instructure/console'
+
 import { EmotionThemeProvider } from '@instructure/emotion'
 import { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'
 

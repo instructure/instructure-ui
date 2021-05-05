@@ -21,56 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import {
+  error,
+  warn,
+  warnDeprecated,
+  log,
+  info,
+  assert,
+  debug
+} from './console'
 
-let loggedInitialDeprecationWarning = false
+import {
+  error as logError,
+  warn as logWarn,
+  warnDeprecated as logWarnDeprecated,
+  info as logInfo,
+  assert as logAssert,
+  debug as logDebug,
+  log as consoleLog
+} from './macro'
 
-/* eslint-disable no-console */
-
-function getRenderStack() {
-  let renderStack = ''
-  try {
-    renderStack = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
-  } catch (error) {
-    // log happened outside a react render or couldn't figure out where in the render stack we are.
-  }
-  return renderStack
+export {
+  error,
+  warn,
+  warnDeprecated,
+  log,
+  info,
+  assert,
+  debug,
+  logError,
+  logWarn,
+  logWarnDeprecated,
+  logInfo,
+  logDebug,
+  logAssert,
+  consoleLog
 }
-
-function logMessage(level, withRenderStack, condition, message, ...args) {
-  if (process.env.NODE_ENV !== 'production' && !condition) {
-    if (typeof console[level] === 'function') {
-      const renderStack = withRenderStack ? getRenderStack() : ''
-      console[level](`Warning: ${message}`, ...args, renderStack)
-    } else {
-      throw new Error(`'${level}' is not a valid console method!`)
-    }
-  }
-}
-
-function logDeprecated(condition, message, ...args) {
-  if (!process.env.OMIT_INSTUI_DEPRECATION_WARNINGS) {
-    logMessage('warn', true, condition, message, ...args)
-  } else if (!condition && !loggedInitialDeprecationWarning) {
-    loggedInitialDeprecationWarning = true
-    logMessage(
-      'warn',
-      false,
-      condition,
-      [
-        'There are Instructure UI deprecation warnings that are being hidden because the `OMIT_INSTUI_DEPRECATION_WARNINGS` environment variable is set. Remove or unset this variable to see the full list of warnings in your console.',
-        'These warnings will give you advance notice of breaking changes and upgrade guidance to keep your code up to date with the latest Instructure UI versions.'
-      ].join('\n\n')
-    )
-  }
-}
-
-export const error = (...args) => logMessage('error', true, ...args)
-export const warn = (...args) => logMessage('warn', true, ...args)
-export const warnDeprecated = (...args) => logDeprecated(...args)
-export const info = (...args) => console.info(...args)
-export const assert = (...args) => console.assert(...args)
-export const debug = (...args) => console.debug(...args)
-export const log = (...args) => console.log(...args)
-
-/* eslint-enable no-console */

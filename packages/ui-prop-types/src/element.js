@@ -38,6 +38,7 @@ const canUseDOM = !!(
  * ---
  * Verify that the given prop is a valid React element. If the DOM is accessible,
  * also verify if the prop is an instance of `Element`.
+ * @module element
  */
 const element = canUseDOM
   ? PropTypes.oneOfType([PropTypes.element, PropTypes.instanceOf(Element)])

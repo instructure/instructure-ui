@@ -58,15 +58,15 @@ module.exports = function componentExamplesLoader(source, map, meta) {
           return path.resolve(
             basePath,
             configFilePath.includes('__examples__')
-              ? '../index.js'
-              : './index.js'
+              ? '../index.tsx'
+              : './index.tsx'
           )
         }
 
   const componentPath = getComponentPath(this.resourcePath)
 
   fs.readFile(
-    `${componentPath}${!componentPath.includes('.') ? '.js' : ''}`,
+    `${componentPath}${!componentPath.includes('.') ? '.tsx' : ''}`,
     'utf8',
     (err, componentSrc) => {
       err && this.emitWarning(err)

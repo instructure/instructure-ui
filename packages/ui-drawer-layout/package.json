@@ -46,7 +46,6 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "^8.3.0",
     "@instructure/ui-test-locator": "^8.3.0",
-    "@instructure/ui-test-utils": "^7.5.0",
     "@instructure/ui-themes": "^8.3.0"
   },
   "peerDependencies": {

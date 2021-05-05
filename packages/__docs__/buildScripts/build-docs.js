@@ -59,13 +59,13 @@ const options = {
   files: [
     // these can be commented out for faster debugging
     '**/*.md', // package READMEs
-    '**/src/*.js', // util src files
-    '**/src/*/*.js', // component src files
-    '**/src/*/*/*.js' // child component src files
+    '**/src/*.{js,ts,tsx}', // util src files
+    '**/src/*/*.{js,ts,tsx}', // component src files
+    '**/src/*/*/*.{js,ts,tsx}' // child component src files,
   ],
   ignore: [
-    '*macro.js',
-    '**/*-loader.js',
+    '**/macro.{js,ts}',
+    '**/*-loader.{js,ts}',
     '**/svg/**',
     '**/packages/**/CHANGELOG.md',
     '**/config/**',
@@ -78,13 +78,15 @@ const options = {
     '**/__testfixtures__/**',
     '**/__tests__/**',
     '**/locales/**',
-    '**/styles.js',
-    '**/theme.js',
-    '**/locator.js',
-    '**/*Locator.js',
+    '**/styles.{js,ts}',
+    '**/theme.{js,ts}',
+    '**/locator.{js,ts}',
+    '**/*Locator.{js,ts}',
+
+    '**/types/**',
 
     // ignore index files that just re-export
-    '**/src/index.js',
+    '**/src/index.{js,ts}',
 
     // packages to ignore:
     '**/canvas-theme/**',
@@ -98,7 +100,7 @@ const options = {
     '**/ui-test-*/src/**',
 
     // deprecated packages and modules:
-    '**/InputModeListener.js'
+    '**/InputModeListener.{js,ts}'
   ],
   themes: [
     '@instructure/canvas-theme',
