@@ -178,13 +178,20 @@ class Dialog extends Component<Props> {
     this._raf.push(
       // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ cancel: () => void; }' is not ... Remove this comment to see the full error message
       requestAnimationFrame(() => {
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'FocusRegion' is not assignable to type 'null... Remove this comment to see the full error message
-        this._focusRegion = FocusRegionManager.activateRegion(
-          this.contentElement,
-          {
-            ...options
-          }
-        )
+        // It needs to wait a heartbeat until the content is fully loaded
+        // inside the dialog. If it contains a focusable element, it will
+        // get focused on open, and browsers scroll to the focused element.
+        // If the css is not fully applied, the element may not be in their
+        // final position, making the page jump.
+        setTimeout(() => {
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'FocusRegion' is not assignable to type 'null... Remove this comment to see the full error message
+          this._focusRegion = FocusRegionManager.activateRegion(
+            this.contentElement,
+            {
+              ...options
+            }
+          )
+        }, 0)
       })
     )
   }
