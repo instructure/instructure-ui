@@ -1,4 +1,4 @@
-name: Docs deploy legacy
+name: Legacy docs deploy
 on: workflow_dispatch
 jobs:
   deploy:

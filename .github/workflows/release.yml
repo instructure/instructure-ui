@@ -1,4 +1,4 @@
-name: AUTO release and deploy latest
+name: AUTO npm release and docs deploy
 on:
   # Trigger the workflow on push or pull request,
   # but only for the master branch
@@ -19,17 +19,7 @@ jobs:
         run: yarn bootstrap
       - name: Run tests.
         run: yarn test:patchset
-      - name: Release snapshot to NPM
-        # lerna ususally fails in releasing, but releasing snapshots is too complicated
-        # without it, so we use lerna for snapshot and native npm-cli commands for releases
-        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') }}
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-          NPM_EMAIL: ${{secrets.NPM_EMAIL}}
-          NPM_USERNAME: ${{secrets.NPM_USERNAME}}
-        run: yarn release:snapshot
-      - name: Release latest to NPM
-        if: "startsWith(github.event.head_commit.message, 'chore(release)')"
+      - name: Release to NPM
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_EMAIL: ${{secrets.NPM_EMAIL}}

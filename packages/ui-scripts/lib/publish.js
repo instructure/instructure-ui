@@ -36,14 +36,14 @@ const {
   isReleaseCommit,
   setupGit
 } = require('./utils/git')
-const { createNPMRCFile } = require('./utils/npm')
+const { publishPackages, createNPMRCFile } = require('./utils/npm')
 
 try {
   const pkgJSON = getPackageJSON()
   // Arguments
-  // 1: version to publish. If current version, use 'current' or don't bass anything. Otherwise e.g.: 8.1.3
+  // 1: version to publish. If current version, use 'current' or don't pass anything. Otherwise e.g.: 8.1.3
   // 2: publish type. defaults to current. If set to 'maintenance', it will publish with vx_maintenance tag
-  // e.g.: ui-scripts --publish-latest 5.12.2 maintenance
+  // e.g.: ui-scripts --publish 5.12.2 maintenance
   const releaseVersion =
     process.argv[3] === 'current' || !process.argv[3]
       ? pkgJSON.version
@@ -80,50 +80,60 @@ async function publishLatest({
 
   checkWorkingDirectory()
 
-  if (currentVersion === releaseVersion && !isReleaseCommit(releaseVersion)) {
-    error('Latest release should be run from a merged version bump commit!')
-    process.exit(1)
-  }
-
   info(`📦  Version: ${releaseVersion}, Tag: ${npmTag}`)
 
-  return Promise.all(
-    getPackages().map(async (pkg) => {
-      if (pkg.private) {
-        info(`${pkg.name} is private.`)
-      } else {
-        let packageInfo = { versions: [] }
+  // lerna ususally fails in releasing, but releasing snapshots is too complicated
+  // without it. Npm-cli figures out versions from the package.json so if we'd like to
+  // release a snapshot version, like: 8.3.5-snapshot.19, we'd need to set this exact version
+  // to package.json and set it back to the current released version after the release.
+  // We use lerna for snapshot and native npm-cli commands for releases
 
-        try {
-          const { stdout } = runCommandSync(
-            'npm',
-            ['info', pkg.name, '--json'],
-            [],
-            { stdio: 'pipe' }
-          )
-          packageInfo = JSON.parse(stdout)
-        } catch (e) {
-          error(e)
-        }
-
-        if (packageInfo.versions.includes(currentVersion)) {
-          info(`📦  v${currentVersion} of ${pkg.name} is already published!`)
+  if (currentVersion === releaseVersion && !isReleaseCommit(releaseVersion)) {
+    return Promise.all(
+      getPackages().map(async (pkg) => {
+        if (pkg.private) {
+          info(`${pkg.name} is private.`)
         } else {
+          let packageInfo = { versions: [] }
+
           try {
-            await runCommandAsync('npm', [
-              'publish',
-              pkg.location,
-              '--tag',
-              npmTag
-            ])
-            info(
-              `📦  Version ${releaseVersion} of ${packageName} was successfully published!`
+            const { stdout } = runCommandSync(
+              'npm',
+              ['info', pkg.name, '--json'],
+              [],
+              { stdio: 'pipe' }
             )
-          } catch (err) {
-            error(err)
+            packageInfo = JSON.parse(stdout)
+          } catch (e) {
+            error(e)
+          }
+
+          if (packageInfo.versions.includes(currentVersion)) {
+            info(`📦  v${currentVersion} of ${pkg.name} is already published!`)
+          } else {
+            try {
+              await runCommandAsync('npm', [
+                'publish',
+                pkg.location,
+                '--tag',
+                npmTag
+              ])
+              info(
+                `📦  Version ${releaseVersion} of ${packageName} was successfully published!`
+              )
+            } catch (err) {
+              error(err)
+            }
           }
         }
-      }
-    })
-  )
+      })
+    )
+  } else {
+    try {
+      await publishPackages(packageName, releaseVersion, npmTag)
+    } catch (e) {
+      error(e)
+      process.exit(1)
+    }
+  }
 }

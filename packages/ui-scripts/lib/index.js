@@ -30,8 +30,7 @@ const { readEnv } = require('./utils/readEnv')
 readEnv()
 
 const commands = [
-  '--publish-snapshot',
-  '--publish-latest',
+  '--publish',
   '--release',
   '--post-publish',
   '--bump',
@@ -82,10 +81,8 @@ if (process.argv.includes('open-sandbox')) {
   require('./post-publish')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
-} else if (process.argv.includes('--publish-snapshot')) {
-  require('./publish-snapshot')
-} else if (process.argv.includes('--publish-latest')) {
-  require('./publish-latest')
+} else if (process.argv.includes('--publish')) {
+  require('./publish')
 } else if (process.argv.includes('--deploy-docs')) {
   require('./deploy-docs')
 } else if (process.argv.includes('--deploy-docs-via-github')) {
