@@ -68,22 +68,18 @@ module.exports = function makeConfig({
   const reporters = ['mocha']
 
   if (withCoverage) {
-    reporters.push('coverage')
+    reporters.push('coverage-istanbul')
   }
 
-  let coverageReporter
+  let coverageIstanbulReporter
 
   if (withCoverage) {
-    coverageReporter = {
-      reporters: [
-        { type: 'text-summary' },
-        {
-          type: 'lcov',
-          dir: coverageDirectory,
-          subdir: '.'
-        }
-      ],
-      check: IS_SCOPED ? undefined : coverageThreshold
+    coverageIstanbulReporter = {
+      dir: coverageDirectory,
+      reports: ['text-summary', 'lcov'],
+      // enforce percentage thresholds
+      // anything under these percentages will cause karma to fail with an exit code of 1 if not running in watch mode
+      thresholds: IS_SCOPED ? undefined : coverageThreshold
     }
   }
 
@@ -105,7 +101,7 @@ module.exports = function makeConfig({
       },
 
       reporters,
-      coverageReporter,
+      coverageIstanbulReporter,
       browsers,
 
       client: {
@@ -152,7 +148,22 @@ module.exports = function makeConfig({
       browserNoActivityTimeout: 30000, // default 10000
 
       webpack: {
-        module: baseWebpackConfig.module,
+        module: {
+          ...baseWebpackConfig.module,
+          rules: [
+            ...baseWebpackConfig.module.rules,
+            {
+              test: /.*.tsx?$/,
+              exclude: [/node_modules/, /\/lib\//, /\/es\//, /\/__tests__\//],
+              loader: '@jsdevtools/coverage-istanbul-loader',
+              enforce: 'post',
+              options: {
+                esModules: true,
+                compact: false
+              }
+            }
+          ]
+        },
         cache: !DEBUG,
         mode: 'development',
         devtool: DEBUG ? 'inline-source-map' : 'none',
