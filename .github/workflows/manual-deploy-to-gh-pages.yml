@@ -1,4 +1,4 @@
-name: Docs deploy latest
+name: Docs deploy
 on: workflow_dispatch
 jobs:
   deploy:

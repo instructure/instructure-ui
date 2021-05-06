@@ -1,4 +1,4 @@
-name: Release latest
+name: Npm release
 on: workflow_dispatch
 jobs:
   release:

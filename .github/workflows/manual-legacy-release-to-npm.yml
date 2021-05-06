@@ -1,4 +1,4 @@
-name: Release legacy
+name: Legacy npm release
 on: workflow_dispatch
 jobs:
   release:
