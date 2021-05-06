@@ -151,7 +151,8 @@ module.exports = function makeConfig({
         module: {
           ...baseWebpackConfig.module,
           rules: [
-            ...baseWebpackConfig.module.rules,
+            // This is only needed for TypeScript files, see
+            // https://github.com/mattlewis92/karma-coverage-istanbul-reporter
             {
               test: /.*.tsx?$/,
               exclude: [/node_modules/, /\/lib\//, /\/es\//, /\/__tests__\//],
@@ -161,7 +162,8 @@ module.exports = function makeConfig({
                 esModules: true,
                 compact: false
               }
-            }
+            },
+            ...baseWebpackConfig.module.rules
           ]
         },
         cache: !DEBUG,
