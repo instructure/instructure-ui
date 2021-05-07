@@ -23,12 +23,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.3.0"
+    "@instructure/ui-babel-preset": "8.3.0"
   },
   "dependencies": {
-    "@instructure/canvas-high-contrast-theme": "^8.3.0",
-    "@instructure/canvas-theme": "^8.3.0",
-    "@instructure/instructure-theme": "^8.3.0"
+    "@instructure/canvas-high-contrast-theme": "8.3.0",
+    "@instructure/canvas-theme": "8.3.0",
+    "@instructure/instructure-theme": "8.3.0"
   },
   "publishConfig": {
     "access": "public"

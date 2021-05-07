@@ -23,13 +23,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.3.0",
-    "@instructure/ui-test-utils": "^8.3.0",
+    "@instructure/ui-babel-preset": "8.3.0",
+    "@instructure/ui-test-utils": "8.3.0",
     "prop-types": "^15.6.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-decorator": "^8.3.0"
+    "@instructure/ui-decorator": "8.3.0"
   },
   "peerDependencies": {
     "react": "^16.8",

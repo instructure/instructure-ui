@@ -23,11 +23,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.3.0"
+    "@instructure/ui-babel-preset": "8.3.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-theme-tokens": "^8.3.0"
+    "@instructure/ui-theme-tokens": "8.3.0"
   },
   "publishConfig": {
     "access": "public"
