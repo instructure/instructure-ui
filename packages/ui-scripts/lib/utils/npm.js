@@ -115,10 +115,6 @@ async function bumpPackages(packageName, requestedVersion) {
     }
 
     args.push(bumpVersion)
-
-    if (semver.prerelease(bumpVersion)) {
-      args.push('--exact')
-    }
   }
 
   if (process.env.CI) {
@@ -133,6 +129,7 @@ async function bumpPackages(packageName, requestedVersion) {
     await runCommandAsync('lerna', [
       'version',
       ...args,
+      '--exact',
       '--include-merged-tags',
       '--no-push',
       '--no-git-tag-version',
