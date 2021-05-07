@@ -23,6 +23,13 @@
  */
 
 module.exports = {
-  // esModules:true is one thing that needed to enable tree shaking
-  presets: [require('@instructure/ui-babel-preset')({ esModules: true })]
+  presets: [
+    [
+      require('@instructure/ui-babel-preset'),
+      {
+        esModules: true, // needed to enable tree shaking
+        transformImports: false // needed for webpack reload on change to work
+      }
+    ]
+  ]
 }
