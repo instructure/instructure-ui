@@ -19,7 +19,7 @@ jobs:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
           NPM_EMAIL: ${{secrets.NPM_EMAIL}}
           NPM_USERNAME: ${{secrets.NPM_USERNAME}}
-        run: yarn release current maintenance
+        run: yarn release maintenance
   tag:
     needs: release
     if: "startsWith(github.event.head_commit.message, 'chore(release)')"

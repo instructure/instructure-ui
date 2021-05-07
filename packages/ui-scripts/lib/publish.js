@@ -40,47 +40,29 @@ const { publishPackages, createNPMRCFile } = require('./utils/npm')
 
 try {
   const pkgJSON = getPackageJSON()
-  // Arguments
-  // 1: version to publish. If current version, use 'current' or don't pass anything. Otherwise e.g.: 8.1.3
-  // 2: publish type. defaults to current. If set to 'maintenance', it will publish with vx_maintenance tag
-  // e.g.: ui-scripts --publish 5.12.2 maintenance
-  const releaseVersion =
-    process.argv[3] === 'current' || !process.argv[3]
-      ? pkgJSON.version
-      : process.argv[3]
-  publishLatest({
+  // ui-scripts --publish               - to publish from the master branch
+  // ui-scripts --publish maintenance   - to publish from any legacy branch
+  const isMaintenance = process.argv[3] === 'maintenance'
+
+  publish({
     packageName: pkgJSON.name,
-    currentVersion: pkgJSON.version,
-    releaseVersion: releaseVersion,
-    config: getConfig(pkgJSON),
-    releaseType: process.argv[4]
+    version: pkgJSON.version,
+    isMaintenance,
+    //TODO investigate if config is needed
+    config: getConfig(pkgJSON)
   })
 } catch (err) {
   error(err)
   process.exit(1)
 }
 
-async function publishLatest({
-  packageName,
-  currentVersion,
-  releaseVersion,
-  config = {},
-  releaseType = 'latest'
-}) {
-  //If on legacy branch, and it is a release, its tag should say vx_maintenance
-  const releaseTag =
-    releaseType === 'maintenance'
-      ? `v${currentVersion.split('.')[0]}_maintenance`
-      : 'latest'
-
-  const npmTag = currentVersion === releaseVersion ? releaseTag : 'snapshot'
+async function publish({ packageName, version, isMaintenance, config = {} }) {
+  const isRelease = isReleaseCommit(version)
 
   setupGit()
   createNPMRCFile(config)
 
   checkWorkingDirectory()
-
-  info(`📦  Version: ${releaseVersion}, Tag: ${npmTag}`)
 
   // lerna ususally fails in releasing, but releasing snapshots is too complicated
   // without it. Npm-cli figures out versions from the package.json so if we'd like to
@@ -88,7 +70,14 @@ async function publishLatest({
   // to package.json and set it back to the current released version after the release.
   // We use lerna for snapshot and native npm-cli commands for releases
 
-  if (currentVersion === releaseVersion && !isReleaseCommit(releaseVersion)) {
+  if (isRelease) {
+    //If on legacy branch, and it is a release, its tag should say vx_maintenance
+    const tag = isMaintenance
+      ? `v${version.split('.')[0]}_maintenance`
+      : 'latest'
+
+    info(`📦  Version: ${version}, Tag: ${tag}`)
+
     return Promise.all(
       getPackages().map(async (pkg) => {
         if (pkg.private) {
@@ -108,18 +97,18 @@ async function publishLatest({
             error(e)
           }
 
-          if (packageInfo.versions.includes(currentVersion)) {
-            info(`📦  v${currentVersion} of ${pkg.name} is already published!`)
+          if (packageInfo.versions.includes(version)) {
+            info(`📦  v${version} of ${pkg.name} is already published!`)
           } else {
             try {
               await runCommandAsync('npm', [
                 'publish',
                 pkg.location,
                 '--tag',
-                npmTag
+                tag
               ])
               info(
-                `📦  Version ${releaseVersion} of ${packageName} was successfully published!`
+                `📦  Version ${version} of ${packageName} was successfully published!`
               )
             } catch (err) {
               error(err)
@@ -130,7 +119,8 @@ async function publishLatest({
     )
   } else {
     try {
-      await publishPackages(packageName, releaseVersion, npmTag)
+      info(`📦  Version: ${version}, Tag: snapshot`)
+      await publishPackages(packageName, 'prerelease', 'snapshot')
     } catch (e) {
       error(e)
       process.exit(1)
