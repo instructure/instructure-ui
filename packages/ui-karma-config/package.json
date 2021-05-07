@@ -17,8 +17,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "^8.3.0",
-    "@instructure/ui-webpack-config": "^8.3.0",
+    "@instructure/config-loader": "8.3.0",
+    "@instructure/ui-webpack-config": "8.3.0",
     "choma": "^1",
     "globby": "^10.0.1",
     "karma": "^6",

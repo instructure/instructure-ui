@@ -21,13 +21,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.3.0",
-    "@instructure/ui-icons-build": "^8.3.0",
+    "@instructure/ui-babel-preset": "8.3.0",
+    "@instructure/ui-icons-build": "8.3.0",
     "gulp": "^4.0.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-svg-images": "^8.3.0",
+    "@instructure/ui-svg-images": "8.3.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

@@ -25,10 +25,10 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-test-queries": "^8.3.0"
+    "@instructure/ui-test-queries": "8.3.0"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.3.0"
+    "@instructure/ui-babel-preset": "8.3.0"
   },
   "publishConfig": {
     "access": "public"

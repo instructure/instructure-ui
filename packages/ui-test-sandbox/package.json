@@ -28,7 +28,7 @@
     "sinon": "^7.4.2"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.3.0",
+    "@instructure/ui-babel-preset": "8.3.0",
     "prop-types": "^15.6.2"
   },
   "peerDependencies": {

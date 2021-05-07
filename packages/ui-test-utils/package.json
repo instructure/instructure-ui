@@ -23,13 +23,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^8.3.0",
+    "@instructure/ui-babel-preset": "8.3.0",
     "prop-types": "^15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-test-locator": "^8.3.0",
-    "@instructure/ui-test-queries": "^8.3.0",
-    "@instructure/ui-test-sandbox": "^8.3.0",
+    "@instructure/ui-test-locator": "8.3.0",
+    "@instructure/ui-test-queries": "8.3.0",
+    "@instructure/ui-test-sandbox": "8.3.0",
     "@sheerun/mutationobserver-shim": "^0.3.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",

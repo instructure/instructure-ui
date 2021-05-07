@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/pkg-utils": "^8.3.0",
+    "@instructure/pkg-utils": "8.3.0",
     "@semantic-release/commit-analyzer": "^8",
     "chalk": "^4",
     "cz-customizable": "^6.2.0",
