@@ -6,13 +6,15 @@ category: packages
 
 [![npm][npm]][npm-url]&nbsp;
 [![build-status][build-status]][build-status-url]&nbsp;
-[![MIT License][license-badge]][LICENSE]&nbsp;
+[![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 A collection of custom prop type validators.
 
 ### Functions
+
 The `ui-prop-types` package contains the following:
+
 - [children](#children)
 - [childrenOrValue](#childrenOrValue)
 - [controllable](#controllable)
@@ -20,7 +22,6 @@ The `ui-prop-types` package contains the following:
 - [element](#element)
 - [makeRequirable](#makeRequirable)
 - [xor](#xor)
-
 
 ### Installation
 
@@ -46,16 +47,9 @@ class MyComponent extends React.Component {
 }
 ```
 
-
-
 [npm]: https://img.shields.io/npm/v/@instructure/ui-prop-types.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-prop-types
-
-[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
-[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
-
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
 [license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
-
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md

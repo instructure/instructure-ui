@@ -8,18 +8,20 @@ The ui-codemods should make it easier to deal with API changes when upgrading In
 
 [![npm][npm]][npm-url]&nbsp;
 [![build-status][build-status]][build-status-url]&nbsp;
-[![MIT License][license-badge]][LICENSE]&nbsp;
+[![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
 ### Installation
 
 The codemod scripts can be installed via the following command:
+
 ```sh
 yarn add @instructure/ui-codemods
 ```
 
 The configuration files are located in the [instui-config](#instui-config) package.
 This can be installed via the following command:
+
 ```sh
 yarn add @instructure/instui-config
 ```
@@ -46,12 +48,7 @@ jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path>
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods
-
-[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
-[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
-
 [license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
 [license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
-
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md
