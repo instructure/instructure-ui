@@ -153,12 +153,19 @@ class Dialog extends Component {
 
     this._raf.push(
       requestAnimationFrame(() => {
-        this._focusRegion = FocusRegionManager.activateRegion(
-          this.contentElement,
-          {
-            ...options
-          }
-        )
+        // It needs to wait a heartbeat until the content is fully loaded
+        // inside the dialog. If it contains a focusable element, it will
+        // get focused on open, and browsers scroll to the focused element.
+        // If the css is not fully applied, the element may not be in their
+        // final position, making the page jump.
+        setTimeout(() => {
+          this._focusRegion = FocusRegionManager.activateRegion(
+            this.contentElement,
+            {
+              ...options
+            }
+          )
+        }, 0)
       })
     )
   }
