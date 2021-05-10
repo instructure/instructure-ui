@@ -27,6 +27,7 @@ import React from 'react'
 import { Menu, MenuItem, MenuItemSeparator, MenuItemGroup } from '../index'
 
 export default {
+  sectionProp: 'placement',
   maxExamplesPerPage: 20,
   maxExamples: 200,
   excludeProps: [
