@@ -68,7 +68,7 @@ export default {
       dir: props.dir,
       as: 'div',
       width: '100%',
-      height: '20rem',
+      height: '30rem',
       margin: 'large',
       padding: 'large',
       textAlign: 'center'

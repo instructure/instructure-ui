@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from '@instructure/ui-view'
-import { Tooltip } from '@instructure/ui-tooltip'
-import { IconButton } from '@instructure/ui-buttons'
+import { Modal } from '@instructure/ui-modal'
+import { IconButton, CloseButton } from '@instructure/ui-buttons'
 import { IconInfoLine } from '@instructure/ui-icons'
 
 export function renderExample({
@@ -34,6 +34,12 @@ export function renderExample({
   exampleProps,
   key
 }) {
+  const [isInfoOpen, setIsInfoOpen] = useState(false)
+
+  const toggleInfoModal = () => {
+    setIsInfoOpen(!isInfoOpen)
+  }
+
   return (
     <View
       key={key}
@@ -47,17 +53,33 @@ export function renderExample({
       {...exampleProps}
     >
       <Component {...componentProps} />
-      <Tooltip
-        renderTip={<pre>{JSON.stringify(componentProps, null, 2)}</pre>}
-        placement="bottom"
-        on={['click']}
+      <IconButton
+        size="small"
+        renderIcon={IconInfoLine}
+        screenReaderLabel="props"
+        onClick={toggleInfoModal}
+      />
+      <Modal
+        open={isInfoOpen}
+        onDismiss={toggleInfoModal}
+        size="auto"
+        label={`${Component.displayName} example`}
+        shouldCloseOnDocumentClick
+        variant="inverse"
       >
-        <IconButton
-          size="small"
-          renderIcon={IconInfoLine}
-          screenReaderLabel="props"
-        />
-      </Tooltip>
+        <Modal.Header>
+          <CloseButton
+            placement="end"
+            offset="small"
+            onClick={toggleInfoModal}
+            screenReaderLabel="Close"
+            color="primary-inverse"
+          />
+        </Modal.Header>
+        <Modal.Body>
+          <pre>{JSON.stringify(componentProps, null, 2)}</pre>
+        </Modal.Body>
+      </Modal>
     </View>
   )
 }
