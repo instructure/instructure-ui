@@ -30,7 +30,7 @@
     "@instructure/ui-component-examples": "8.3.0",
     "@instructure/ui-i18n": "8.3.0",
     "@instructure/ui-icons": "8.3.0",
-    "@instructure/ui-tooltip": "8.3.0",
+    "@instructure/ui-modal": "8.3.0",
     "@instructure/ui-view": "8.3.0",
     "@instructure/ui-webpack-config": "8.3.0",
     "@storybook/addons": "^6.1.18",
