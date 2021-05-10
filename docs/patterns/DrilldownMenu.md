@@ -22,52 +22,52 @@ const dataMap = {
       accounts: [
         {
           id: 2,
-          accountName: 'Sub Account 1'
+          accountName: 'Submenu Item 1'
         },
         {
           id: 7,
-          accountName: 'Sub Account 7'
+          accountName: 'Item 7'
         }
       ]
     }
   },
   2: {
     id: 2,
-    accountName: 'Sub Account 1',
+    accountName: 'Submenu Item 1',
     parentAccount: 1,
     subAccounts: {
       accounts: [
         {
           id: 3,
-          accountName: 'Sub Account 2'
+          accountName: 'Submenu Item 2'
         },
         {
           id: 4,
-          accountName: 'Sub Account 3'
+          accountName: 'Item 3'
         },
         {
           id: 5,
-          accountName: 'Sub Account 4'
+          accountName: 'Item 4'
         }
       ]
     }
   },
   3: {
     id: 3,
-    accountName: 'Sub Account 2',
+    accountName: 'Submenu Item 2',
     parentAccount: 2,
     subAccounts: {
       accounts: [
         {
           id: 6,
-          accountName: 'Sub Account 5'
+          accountName: 'Item 5'
         }
       ]
     }
   },
   4: {
     id: 4,
-    accountName: 'Sub Account 3',
+    accountName: 'Item 3',
     parentAccount: 2,
     subAccounts: {
       accounts: []
@@ -75,7 +75,7 @@ const dataMap = {
   },
   5: {
     id: 5,
-    accountName: 'Sub Account 4',
+    accountName: 'Item 4',
     parentAccount: 2,
     subAccounts: {
       accounts: []
@@ -83,7 +83,7 @@ const dataMap = {
   },
   6: {
     id: 6,
-    accountName: 'Sub Account 5',
+    accountName: 'Item 5',
     parentAccount: 3,
     subAccounts: {
       accounts: []
@@ -91,7 +91,7 @@ const dataMap = {
   },
   7: {
     id: 7,
-    accountName: 'Sub Account 7',
+    accountName: 'Item 7',
     parentAccount: 1,
     subAccounts: {
       accounts: []
@@ -114,7 +114,6 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
   const accountObj = {
     ...data[tempAccountId]
   }
-  const topLevelAccounts = [accountObj]
   const hasParentAccount = accountObj?.parentAccount
   const hasChildAccounts = accountObj?.subAccounts?.accounts.length > 0
   const childAccounts = accountObj?.subAccounts?.accounts
@@ -126,12 +125,8 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
     menuRef.current.focus()
   }
 
-  const titleAccounts = topLevelAccounts.filter((a) => a.id && a.accountName)
-
   const renderBackNavigation = () => {
     if (hasParentAccount) {
-      const parentName = data[accountObj.parentAccount].accountName
-
       return (
         <Menu.Item
           as="div"
@@ -143,9 +138,7 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
             <View margin="0 small 0 0">
               <IconArrowOpenStartLine />
             </View>
-            <TruncateText>
-              {parentName || 'Back'}
-            </TruncateText>
+            <TruncateText>Back</TruncateText>
           </Flex>
         </Menu.Item>
       )
@@ -155,11 +148,7 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
   const renderChildList = () => {
     return childAccounts
       ?.concat()
-      .sort((a, b) => {
-        if (a?.accountName > b?.accountName) return 1
-        if (a?.accountName < b?.accountName) return -1
-        return 0
-      })
+      .sort((a, b) => a.id - b.id)
       .map((a) => {
         if (data[a.id] && data[a.id]?.subAccounts?.accounts?.length) {
           return (
@@ -209,20 +198,6 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
           themeOverride={{ minWidth: '24rem' }}
         >
           {renderBackNavigation()}
-          {titleAccounts.map((a) => {
-            return (
-              <Menu.Item
-                key={a.id}
-                as="div"
-                onClick={() => setAccountId(a.id)}
-                themeOverride={{labelColor: '#008ee2'}}
-              >
-                <TruncateText>{a.accountName}</TruncateText>
-              </Menu.Item>
-            )
-          })}
-          {(hasParentAccount || titleAccounts.length) &&
-            hasChildAccounts && <Menu.Separator />}
           {renderChildList()}
         </Menu>
       </Popover>
