@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.4.0](https://github.com/instructure/instructure-ui/compare/v8.3.0...v8.4.0) (2021-05-11)
+
+### Bug Fixes
+
+- fix all inter-package dependencies using fix version ([75cd898](https://github.com/instructure/instructure-ui/commit/75cd8983b7e206e4e14dc67c490c103cb4a3d915))
+
 # [8.3.0](https://github.com/instructure/instructure-ui/compare/v8.2.1...v8.3.0) (2021-05-04)
 
 **Note:** Version bump only for package @instructure/ui-expandable
