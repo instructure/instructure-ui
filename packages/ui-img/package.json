@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-img",
-  "version": "8.3.0",
+  "version": "8.4.0",
   "description": "An accessible image component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -25,18 +25,18 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.3.0",
-    "@instructure/emotion": "8.3.0",
-    "@instructure/ui-dom-utils": "8.3.0",
-    "@instructure/ui-react-utils": "8.3.0",
-    "@instructure/ui-testable": "8.3.0",
-    "@instructure/ui-view": "8.3.0",
+    "@instructure/console": "8.4.0",
+    "@instructure/emotion": "8.4.0",
+    "@instructure/ui-dom-utils": "8.4.0",
+    "@instructure/ui-react-utils": "8.4.0",
+    "@instructure/ui-testable": "8.4.0",
+    "@instructure/ui-view": "8.4.0",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.3.0",
-    "@instructure/ui-test-locator": "8.3.0",
-    "@instructure/ui-test-utils": "8.3.0"
+    "@instructure/ui-babel-preset": "8.4.0",
+    "@instructure/ui-test-locator": "8.4.0",
+    "@instructure/ui-test-utils": "8.4.0"
   },
   "peerDependencies": {
     "react": "^16.8"

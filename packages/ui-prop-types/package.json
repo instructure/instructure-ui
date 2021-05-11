@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-prop-types",
-  "version": "8.3.0",
+  "version": "8.4.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,8 +23,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.3.0",
-    "@instructure/ui-test-utils": "8.3.0"
+    "@instructure/ui-babel-preset": "8.4.0",
+    "@instructure/ui-test-utils": "8.4.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
