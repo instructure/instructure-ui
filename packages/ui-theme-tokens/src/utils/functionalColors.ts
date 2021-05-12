@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import baseColorsType from './baseColorsType'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'colors' implicitly has an 'any' type.
-function functionalColors(colors) {
+function functionalColors(colors: baseColorsType) {
   const text = {
     textDarkest: colors.licorice,
     textDark: colors.ash,
