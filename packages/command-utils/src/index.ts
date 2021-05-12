@@ -22,30 +22,27 @@
  * SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-const which = require('which')
-const execa = require('execa')
-const rl = require('readline')
-const chalk = require('chalk')
+import fs from 'fs'
+import path from 'path'
+import which from 'which'
+import execa from 'execa'
+import rl from 'readline'
+import chalk from 'chalk'
 
-function info(...args) {
+function info(...args: string[]) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
 }
-exports.info = info
 
-function warn(...args) {
+function warn(...args: string[]) {
   console.warn(chalk.yellow('⚠️   ', ...args))
 }
-exports.warn = warn
 
-function error(...args) {
+function error(...args: string[]) {
   console.error(chalk.red('⚠️   ', ...args))
 }
-exports.error = error
 
 class Command {
-  constructor(bin, args = [], vars = []) {
+  constructor(bin: any, args: any[] = [], vars: any[] = []) {
     Object.defineProperties(this, {
       vars: {
         value: vars
@@ -61,23 +58,22 @@ class Command {
   toString() {
     return `${this.vars.length > 0 ? `${this.vars.join(' ')} ` : ''}${this.bin}`
   }
-  get bin() {
+  get bin(): any {
     return this.bin
   }
-  get args() {
+  get args(): any {
     return this.args
   }
-  get vars() {
+  get vars(): any {
     return this.vars
   }
 }
 
-function getCommand(bin, args = [], vars = []) {
+function getCommand(bin: any, args: any[] = [], vars: any[] = []) {
   return new Command(bin, args, vars)
 }
-exports.getCommand = getCommand
 
-function runCommandsConcurrently(commands) {
+function runCommandsConcurrently(commands: Record<string, any>) {
   const args = [
     '--kill-others-on-fail',
     '--prefix',
@@ -95,7 +91,7 @@ function runCommandsConcurrently(commands) {
 
     if (commandList) {
       commandList = Array.isArray(commandList) ? commandList : [commandList]
-      commandList.forEach(command => {
+      commandList.forEach((command: any) => {
         args.push(
           `${command.toString()}${
             command.args.length > 0 ? ` ${command.args.join(' ')} ` : ''
@@ -115,32 +111,33 @@ function runCommandsConcurrently(commands) {
 
   return result
 }
-exports.runCommandsConcurrently = runCommandsConcurrently
 
-function runCommandSync(bin, args = [], vars = [], opts = {}) {
+function runCommandSync(
+  bin: any,
+  args: any[] = [],
+  vars: any[] = [],
+  opts = {}
+) {
   const command = getCommand(bin, args, vars)
   const result = execa.sync(command.toString(), command.args, {
     stdio: 'inherit',
     ...opts
   })
-  result.status = result.status || result.code
-  return result
-}
-exports.runCommandSync = runCommandSync
 
-async function runCommandAsync(bin, args = [], vars = [], opts = {}) {
+  return { ...result, status: result.exitCode }
+}
+
+async function runCommandAsync(bin: any, args = [], vars = [], opts = {}) {
   const command = getCommand(bin, args, vars)
   const result = await execa(command.toString(), command.args, {
     stdio: 'inherit',
     ...opts
   })
-  result.status = result.status || result.code
-  return result
+  return { ...result, status: result.exitCode }
 }
-exports.runCommandAsync = runCommandAsync
 
 function resolveBin(
-  modName,
+  modName: any,
   { executable = modName, cwd = process.cwd() } = {}
 ) {
   let pathFromWhich
@@ -166,9 +163,7 @@ function resolveBin(
     throw error
   }
 }
-exports.resolveBin = resolveBin
-
-exports.confirm = async function confirm(question) {
+async function confirm(question: string) {
   return new Promise((resolve, reject) => {
     try {
       const dialog = rl.createInterface({
@@ -183,4 +178,16 @@ exports.confirm = async function confirm(question) {
       reject(e)
     }
   })
+}
+
+export {
+  confirm,
+  resolveBin,
+  runCommandAsync,
+  runCommandSync,
+  runCommandsConcurrently,
+  getCommand,
+  error,
+  warn,
+  info
 }
