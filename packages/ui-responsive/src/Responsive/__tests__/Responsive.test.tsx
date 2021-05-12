@@ -29,9 +29,7 @@ import { deepEqual } from '@instructure/ui-utils'
 
 import { Responsive } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Responsive />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call render with the correct matches', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
@@ -59,7 +57,6 @@ describe('<Responsive />', async () => {
     ])
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide correct props for a given breakpoint', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
@@ -89,7 +86,6 @@ describe('<Responsive />', async () => {
     expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should merge props correctly when more than one breakpoint is applied', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
@@ -122,7 +118,6 @@ describe('<Responsive />', async () => {
     ).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -159,7 +154,6 @@ describe('<Responsive />', async () => {
     expect(consoleError).to.be.calledWith(warning)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call render prop only once', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()

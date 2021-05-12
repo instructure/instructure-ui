@@ -35,9 +35,7 @@ import { Day } from '../index'
 import { DayLocator } from '../DayLocator'
 import DayExamples from '../__examples__/Day.examples'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('Day', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -55,7 +53,6 @@ describe('Day', async () => {
     expect(await DayLocator.findWithText('31')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have an accessible label', async () => {
     const label = '1 August 2019 Friday'
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -68,7 +65,6 @@ describe('Day', async () => {
     expect(await DayLocator.findWithText(label)).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set aria-current="date" when `isToday`', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -86,7 +82,6 @@ describe('Day', async () => {
     ).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not set aria-selected without a role', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -106,7 +101,6 @@ describe('Day', async () => {
     ).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set aria-selected="true/false" when `isSelected` and `role` is `option` or `gridcell`', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -128,7 +122,6 @@ describe('Day', async () => {
     expect(await DayLocator.find('[aria-selected="true"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onClick with date', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
@@ -149,7 +142,6 @@ describe('Day', async () => {
     expect(onClick.lastCall.args[1].date).to.equal(date)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onKeyDown with date', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
@@ -175,7 +167,6 @@ describe('Day', async () => {
     expect(onKeyDown.lastCall.args[1].date).to.equal(date)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply disabled when interaction is `disabled`', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
@@ -201,7 +192,6 @@ describe('Day', async () => {
     expect(onClick).to.not.have.been.called()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide an elementRef', async () => {
     let element
 
@@ -224,9 +214,7 @@ describe('Day', async () => {
     expect(subject.getDOMNode()).to.equal(element)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('element type', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render as a span by default', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -239,7 +227,6 @@ describe('Day', async () => {
       expect(day.getTagName()).to.equal('span')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render as a button when onClick is provided', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -252,7 +239,6 @@ describe('Day', async () => {
       expect(day.getTagName()).to.equal('button')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('default elementTypes should be overwritten when `as` prop is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -272,7 +258,6 @@ describe('Day', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ getComponentProps: (props: any... Remove this comment to see the full error message
     generateA11yTests(DayExamples)

@@ -36,12 +36,10 @@ import {
 import { Alert } from '../index'
 import AlertExamples from '../__examples__/Alert.examples'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Alert />', async () => {
   // @ts-expect-error ts-migrate(7034) FIXME: Variable 'srdiv' implicitly has type 'any' in some... Remove this comment to see the full error message
   let srdiv
 
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
   beforeEach(async () => {
     // @ts-expect-error ts-migrate(7005) FIXME: Variable 'srdiv' implicitly has an 'any' type.
     stub(console, 'warn') // suppress deprecation warnings
@@ -54,14 +52,12 @@ describe('<Alert />', async () => {
     document.body.appendChild(srdiv)
   })
 
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
   afterEach(async () => {
     // @ts-expect-error ts-migrate(7005) FIXME: Variable 'srdiv' implicitly has an 'any' type.
     srdiv && srdiv.parentNode && srdiv.parentNode.removeChild(srdiv)
     srdiv = null
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -71,13 +67,11 @@ describe('<Alert />', async () => {
     expect(subject.getDOMNode()).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; propValue... Remove this comment to see the full error message
     generateA11yTests(AlertExamples)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not render the Close button when `renderCloseButtonLabel` is not provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -122,7 +116,6 @@ describe('<Alert />', async () => {
   }
 
   Object.entries(iconComponentsVariants).forEach(([variant, iconComponent]) => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it(`"${variant}" variant should have icon "${iconComponent}".`, async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const subject = await mount(
@@ -138,7 +131,6 @@ describe('<Alert />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -151,7 +143,6 @@ describe('<Alert />', async () => {
     expect(await alert.accessible()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should add alert text to aria live region, when present', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -172,9 +163,7 @@ describe('<Alert />', async () => {
     expect(liver.getAttribute('aria-live')).to.equal('polite')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with `screenReaderOnly', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not render anything when using `liveRegion`', async () => {
       const liver = document.getElementById('_alertLiveRegion')
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -191,7 +180,6 @@ describe('<Alert />', async () => {
       expect(subject.getDOMNode()).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should warn if `liveRegion` is not defined', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
@@ -207,7 +195,6 @@ describe('<Alert />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set aria-atomic to the aria live region when isLiveRegionAtomic is present', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -229,7 +216,6 @@ describe('<Alert />', async () => {
     expect(liver.getAttribute('aria-atomic')).to.equal('true')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should close when told to, with transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -252,7 +238,6 @@ describe('<Alert />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should close when told to, without transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.

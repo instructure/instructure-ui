@@ -25,24 +25,19 @@
 import { expect } from '@instructure/ui-test-utils'
 import { ms } from '../ms'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('ms', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('handles ms unit', () => {
     expect(ms('4ms')).to.equal(4)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('converts s to ms', () => {
     expect(ms('0.3s')).to.equal(0.3 * 1000)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('handles unitless input', () => {
     expect(ms('15')).to.equal(15)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('handles numeric input', () => {
     expect(ms(15)).to.equal(15)
   })

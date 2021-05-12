@@ -29,9 +29,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import { Badge } from '../index'
 import { BadgeLocator } from '../BadgeLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Badge />', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should be accessible', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -45,7 +43,6 @@ describe('<Badge />', () => {
     expect(await badge.accessible()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should show the count', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -59,7 +56,6 @@ describe('<Badge />', () => {
     expect(await badge.find(':contains(100)')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should truncate the count via countUntil', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -73,7 +69,6 @@ describe('<Badge />', () => {
     expect(await badge.find(':contains(99 +)')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should change postion based on the placement prop', async () => {
     const countOffset = '5px'
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -91,7 +86,6 @@ describe('<Badge />', () => {
     expect(badge.getComputedStyle().left).to.equal(`-${countOffset}`)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not render a wrapper for a standalone Badge', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -106,7 +100,6 @@ describe('<Badge />', () => {
     expect(await badge.find('li', { expectEmpty: true })).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should change its output via the formatOutput prop', async () => {
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'formattedCount' implicitly has an 'any'... Remove this comment to see the full error message
     const formatOutput = (formattedCount) => {

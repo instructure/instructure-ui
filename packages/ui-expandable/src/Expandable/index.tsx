@@ -27,14 +27,14 @@ import { controllable } from '@instructure/ui-prop-types'
 import { uid } from '@instructure/uid'
 import { createChainedFunction } from '@instructure/ui-utils'
 const toggleExpanded = ({ expanded }: any) => ({ expanded: !expanded })
-type OwnExpandableProps = {
+type ExpandableProps = {
   expanded?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultExpanded')
   defaultExpanded?: boolean
   onToggle?: (...args: any[]) => any
   render?: (...args: any[]) => any
 }
 type ExpandableState = any
-type ExpandableProps = OwnExpandableProps & typeof Expandable.defaultProps
+
 /**
 ---
 category: components/utilities
@@ -106,12 +106,12 @@ class Expandable extends Component<ExpandableProps, ExpandableState> {
     if (!this.isControlled()) {
       this.setState(toggleExpanded)
     }
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
     this.props.onToggle(event, !this.expanded)
   }
   render() {
     const { children, render = children } = this.props
     if (typeof render === 'function') {
-      // @ts-expect-error ts-migrate(2721) FIXME: Cannot invoke an object which is possibly 'null'.
       return render({
         expanded: this.expanded,
         getToggleProps: (props = {}) => {

@@ -34,7 +34,6 @@ import { Calendar } from '../index'
 import { CalendarLocator } from '../CalendarLocator'
 import CalendarExamples from '../__examples__/Calendar.examples'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Calendar />', async () => {
   const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -59,7 +58,6 @@ describe('<Calendar />', async () => {
     return days
   }
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -73,7 +71,6 @@ describe('<Calendar />', async () => {
     expect(days.length).to.equal(Calendar.DAY_COUNT)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should warn if the correct number of children are not provided`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -91,7 +88,6 @@ describe('<Calendar />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render weekday labels', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -129,7 +125,6 @@ describe('<Calendar />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn if 7 weekday labels are not provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -142,7 +137,6 @@ describe('<Calendar />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should format the weekday labels and days correctly', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -167,7 +161,6 @@ describe('<Calendar />', async () => {
     }
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render navigation label', async () => {
     const navLabel = (
       <span>
@@ -198,7 +191,6 @@ describe('<Calendar />', async () => {
     expect(await calendar.findWithText('2019')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render next and prev buttons', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -226,7 +218,6 @@ describe('<Calendar />', async () => {
     expect(await calendar.findWithLabel('next month')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onRequestRenderNextMonth and onRequestRenderPrevMonth', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onRequestRenderPrevMonth = stub()
@@ -260,9 +251,7 @@ describe('<Calendar />', async () => {
     expect(onRequestRenderNextMonth).to.have.been.calledOnce()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when role="listbox"', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set role="listbox" on table root and role="presentation" on the correct elements', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -287,7 +276,6 @@ describe('<Calendar />', async () => {
       }
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it("should link each day with it's weekday header via `aria-describedby`", async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -310,7 +298,6 @@ describe('<Calendar />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render root as designated by the `as` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -324,7 +311,6 @@ describe('<Calendar />', async () => {
     expect(calendar.getTagName()).to.equal('ul')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ propValues: { children: Elemen... Remove this comment to see the full error message
     generateA11yTests(CalendarExamples)

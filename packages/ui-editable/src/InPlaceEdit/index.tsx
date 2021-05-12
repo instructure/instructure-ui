@@ -37,7 +37,7 @@ import { View } from '@instructure/ui-view'
 import { Editable } from '../Editable'
 import generateStyle from './styles'
 
-type OwnProps = {
+type Props = {
   renderViewer: (...args: any[]) => any
   renderEditor: (...args: any[]) => any
   renderEditButton: (...args: any[]) => any
@@ -52,8 +52,6 @@ type OwnProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
-
-type Props = OwnProps & typeof InPlaceEdit.defaultProps
 
 /**
 ---
@@ -280,7 +278,6 @@ class InPlaceEdit extends Component<Props> {
       <Editable
         mode={mode}
         onChangeMode={onChangeMode}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '({ getContainerProps, getViewerProps, getEdi... Remove this comment to see the full error message
         render={this.renderAll}
         value={value}
         onChange={onChange}

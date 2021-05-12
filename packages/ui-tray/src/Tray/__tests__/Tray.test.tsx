@@ -29,9 +29,7 @@ import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { Tray } from '../index'
 import { TrayLocator } from '../TrayLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Tray />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render nothing and have a node with no parent when closed', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Tray label="Tray Example">Hello World</Tray>)
@@ -39,7 +37,6 @@ describe('<Tray />', async () => {
     expect(tray).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children and have a node with a parent when open', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -52,7 +49,6 @@ describe('<Tray />', async () => {
     expect(tray.getTextContent()).to.equal('Hello World')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply theme overrides when open', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -74,7 +70,6 @@ describe('<Tray />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply the a11y attributes', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -88,7 +83,6 @@ describe('<Tray />', async () => {
     expect(dialog.getAttribute('aria-label')).to.equal('Tray Example')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should support onOpen prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
@@ -104,7 +98,6 @@ describe('<Tray />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should support onClose prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClose = stub()
@@ -122,7 +115,6 @@ describe('<Tray />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should take a prop for finding default focus', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -145,7 +137,6 @@ describe('<Tray />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onDismiss prop when Esc key pressed', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
@@ -184,7 +175,6 @@ describe('<Tray />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('transition()', () => {
     const placements = {
       ltr: {
@@ -214,14 +204,12 @@ describe('<Tray />', async () => {
     }
 
     for (const dir in placements) {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
       describe(`when text direction is '${dir}'`, () => {
         // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].enteringPlacements) {
           // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           const val = placements[dir].enteringPlacements[placement]
-          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`returns ${val} for ${placement} when entering`, async () => {
             // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
             const onEntered = stub()
@@ -251,7 +239,6 @@ describe('<Tray />', async () => {
         for (const placement in placements[dir].exitingPlacements) {
           // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           const val = placements[dir].exitingPlacements[placement]
-          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`returns ${val} for ${placement} when exiting`, async () => {
             // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
             const onExited = stub()

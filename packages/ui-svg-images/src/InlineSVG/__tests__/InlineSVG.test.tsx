@@ -31,9 +31,7 @@ import InlineSVGExamples from '../__examples__/InlineSVG.examples'
 
 const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<InlineSVG />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} />)
@@ -42,7 +40,6 @@ describe('<InlineSVG />', async () => {
     expect(svg).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have role "presentation" when no title is provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} />)
@@ -51,7 +48,6 @@ describe('<InlineSVG />', async () => {
     expect(svg.getAttribute('role')).to.equal('presentation')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have role "img" when a title is provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} title="testIconTitle" />)
@@ -60,7 +56,6 @@ describe('<InlineSVG />', async () => {
     expect(svg.getAttribute('role')).to.equal('img')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should add a group with a role "presentation', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} title="testIconTitle" />)
@@ -70,7 +65,6 @@ describe('<InlineSVG />', async () => {
     expect(group.getAttribute('role')).to.equal('presentation')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not render title when no title prop is provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} />)
@@ -81,7 +75,6 @@ describe('<InlineSVG />', async () => {
     expect(title).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render title when title prop is provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} title="Test Title" />)
@@ -91,7 +84,6 @@ describe('<InlineSVG />', async () => {
     expect(title).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not render description when no description prop is provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} />)
@@ -104,7 +96,6 @@ describe('<InlineSVG />', async () => {
     expect(description).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render description when description prop is provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} description="testIconDesc" />)
@@ -115,7 +106,6 @@ describe('<InlineSVG />', async () => {
     expect(description).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should produce null for "labelledBy" when no title or desc are provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} />)
@@ -124,7 +114,6 @@ describe('<InlineSVG />', async () => {
     expect(svg.getAttribute('aria-labelledby')).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should properly join ids when both title and desc attributes are provided', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -140,7 +129,6 @@ describe('<InlineSVG />', async () => {
     expect(ids).to.have.length(2)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set custom width and height properly', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} width="100px" height="200px" />)
@@ -152,7 +140,6 @@ describe('<InlineSVG />', async () => {
     expect(height).to.equal('200px')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not set width/height attributes and styles when value is auto', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} width="auto" height="auto" />)
@@ -164,7 +151,6 @@ describe('<InlineSVG />', async () => {
     expect(svg.getAttribute('height')).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set focusable to false by default', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} />)
@@ -173,7 +159,6 @@ describe('<InlineSVG />', async () => {
     expect(svg.getAttribute('focusable')).to.equal('false')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should allow focusable to be overridden', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} focusable={true} />)
@@ -182,7 +167,6 @@ describe('<InlineSVG />', async () => {
     expect(svg.getAttribute('focusable')).to.equal('true')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display block when inline is false', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} inline={false} />)
@@ -191,7 +175,6 @@ describe('<InlineSVG />', async () => {
     expect(svg.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should change the SVG color property', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineSVG src={SVG_SRC} color="success" />)
@@ -206,7 +189,6 @@ describe('<InlineSVG />', async () => {
     expect(colorError).to.not.equal(colorSuccess)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should allow passing in the svg src as a string', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -220,7 +202,6 @@ describe('<InlineSVG />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; getCompon... Remove this comment to see the full error message
     generateA11yTests(InlineSVGExamples)

@@ -25,9 +25,7 @@ import { expect } from '@instructure/ui-test-utils'
 
 import { uid } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('uid', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('generates a specified length', () => {
     expect(uid('', 5).length).to.equal(5)
     expect(uid('', 8).length).to.equal(8)
@@ -35,7 +33,6 @@ describe('uid', () => {
     expect(uid('', 16).length).to.equal(16)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should run a bunch and never get duplicates', () => {
     const results = new Set()
     for (let x = 0; x < 5000; x++) {
@@ -44,7 +41,6 @@ describe('uid', () => {
     expect(results.size).to.be.eql(5000)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('adds a prefix', () => {
     expect(uid('foo', 5)).to.startWith('foo__')
   })

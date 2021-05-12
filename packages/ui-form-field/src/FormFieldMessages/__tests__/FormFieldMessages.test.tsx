@@ -27,9 +27,7 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { FormFieldMessages } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<FormFieldMessages />', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     const messages = [
       { text: 'Invalid name', type: 'error' },
@@ -47,7 +45,6 @@ describe('<FormFieldMessages />', () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     const messages = [
       { text: 'Invalid name', type: 'error' },

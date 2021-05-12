@@ -35,7 +35,6 @@ import { Select } from '../index'
 import { SelectLocator } from '../SelectLocator'
 import SelectExamples from '../__examples__/Select.examples'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Select />', async () => {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
   const lastCall = (spy) => spy.lastCall.args
@@ -54,7 +53,6 @@ describe('<Select />', async () => {
       </Select.Option>
     ))
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an input and a list', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -71,7 +69,6 @@ describe('<Select />', async () => {
     expect(list).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render groups', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -99,7 +96,6 @@ describe('<Select />', async () => {
     expect(groups).to.have.length(2)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should ignore invalid children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -124,7 +120,6 @@ describe('<Select />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a focus method', async () => {
     let selectRef
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -150,7 +145,6 @@ describe('<Select />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a focused getter', async () => {
     // @ts-expect-error ts-migrate(7034) FIXME: Variable 'selectRef' implicitly has type 'any' in ... Remove this comment to see the full error message
     let selectRef
@@ -179,9 +173,7 @@ describe('<Select />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('input', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render with a generated id by default', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Select renderLabel="Choose an option" />)
@@ -191,7 +183,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('id')).to.startWith('Select')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render with a custom id if given', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Select renderLabel="Choose an option" id="customSelect" />)
@@ -201,7 +192,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('id')).to.equal('customSelect')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render readonly when interaction="enabled" with no onInputChange', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Select renderLabel="Choose an option" />)
@@ -212,7 +202,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('disabled')).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not render readonly when interaction="enabled" with onInputChange', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -225,7 +214,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('disabled')).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render readonly when interaction="readonly"', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -242,7 +230,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('disabled')).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render disabled when interaction="disabled"', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -259,7 +246,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('readonly')).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not render readonly when disabled', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -272,7 +258,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('readonly')).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render required when isRequired={true}', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Select renderLabel="Choose an option" isRequired />)
@@ -282,7 +267,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('required')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render with inputValue', async () => {
       const val = 'hello world'
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -293,7 +277,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('value')).to.equal(val)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-activedescendant based on the highlighted option', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -310,7 +293,6 @@ describe('<Select />', async () => {
       )
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not set aria-activedescendant when not showing options', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -325,7 +307,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('aria-activedescendant')).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set input role to "button" without onInputChange', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -340,7 +321,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('role')).to.equal('button')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set input role to "combobox" with onInputChange', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -355,7 +335,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('role')).to.equal('combobox')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow assistive text', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -373,7 +352,6 @@ describe('<Select />', async () => {
       )
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -388,7 +366,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('data-custom-attr')).to.equal('true')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow override of autoComplete prop', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -404,7 +381,6 @@ describe('<Select />', async () => {
       expect(input.getAttribute('autocomplete')).to.equal('false')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide a ref to the input element', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const inputRef = stub()
@@ -422,9 +398,7 @@ describe('<Select />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('list', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-selected on options with isSelected={true}', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -440,7 +414,6 @@ describe('<Select />', async () => {
       expect(options[1].getAttribute('aria-selected')).to.equal('true')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-disabled on options when isDisabled={true}', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -456,7 +429,6 @@ describe('<Select />', async () => {
       expect(options[2].getAttribute('aria-disabled')).to.equal('true')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set list element role to "listbox"', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -472,7 +444,6 @@ describe('<Select />', async () => {
       expect(listbox).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide a ref to the list element', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const listRef = stub()
@@ -495,11 +466,8 @@ describe('<Select />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with callbacks', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestShowOptions', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when root is clicked', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
@@ -529,7 +497,6 @@ describe('<Select />', async () => {
         expect(onRequestShowOptions).to.have.been.calledTwice()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when input is clicked', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
@@ -555,7 +522,6 @@ describe('<Select />', async () => {
         expect(onRequestShowOptions).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when up/down arrows are pressed', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
@@ -579,7 +545,6 @@ describe('<Select />', async () => {
         expect(onRequestShowOptions).to.have.been.calledTwice()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when space is pressed', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
@@ -604,9 +569,7 @@ describe('<Select />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestHideOptions', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when root is clicked', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
@@ -637,7 +600,6 @@ describe('<Select />', async () => {
         expect(onRequestHideOptions).to.have.been.calledTwice()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when input is clicked', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
@@ -664,7 +626,6 @@ describe('<Select />', async () => {
         expect(onRequestHideOptions).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when escape is pressed', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
@@ -687,9 +648,7 @@ describe('<Select />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestHighlightOption', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when options are hovered', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
@@ -719,7 +678,6 @@ describe('<Select />', async () => {
         )
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when up/down arrows are pressed', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
@@ -790,7 +748,6 @@ describe('<Select />', async () => {
         )
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when home/end is pressed', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
@@ -829,7 +786,6 @@ describe('<Select />', async () => {
         )
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when onRequestShowOptions is called with selected options', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
@@ -853,9 +809,7 @@ describe('<Select />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('should fire onRequestSelectOption', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when enter is pressed', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestSelectOption = stub()
@@ -879,7 +833,6 @@ describe('<Select />', async () => {
         )
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('when options are clicked', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestSelectOption = stub()
@@ -905,9 +858,7 @@ describe('<Select />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('input callbacks', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should fire onInputChange when input is typed in', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onInputChange = stub()
@@ -925,7 +876,6 @@ describe('<Select />', async () => {
         expect(onInputChange).to.have.been.called()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should fire onFocus when input gains focus', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onFocus = stub()
@@ -946,7 +896,6 @@ describe('<Select />', async () => {
         })
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should fire onKeyDown while preserving default behavior', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
@@ -977,7 +926,6 @@ describe('<Select />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ sectionProp: string; maxExampl... Remove this comment to see the full error message
     generateA11yTests(SelectExamples)

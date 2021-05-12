@@ -28,11 +28,9 @@ import { within } from '@instructure/ui-utils'
 
 import truncate from '../truncate'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('truncate', () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should truncate text when no options are given', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -57,7 +55,6 @@ describe('truncate', () => {
     expect(text.indexOf('\u2026')).to.not.equal(-1)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should truncate in the middle of a string', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -83,7 +80,6 @@ describe('truncate', () => {
     expect(text.indexOf('\u2026')).to.not.equal(-1)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should truncate at words', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -109,7 +105,6 @@ describe('truncate', () => {
     expect(text.indexOf('long')).to.not.equal(-1)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should allow custom ellipsis', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -132,7 +127,6 @@ describe('truncate', () => {
     expect(text.slice(-5)).to.equal('(...)')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should preserve node structure', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -165,7 +159,6 @@ describe('truncate', () => {
     expect(stage.className).to.equal('testClass')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should preserve attributes on nodes', async () => {
     let stage
     let link
@@ -203,7 +196,6 @@ describe('truncate', () => {
     expect(link.attributes.class).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should calculate max width properly', async () => {
     let textContainer, stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -241,7 +233,6 @@ describe('truncate', () => {
     expect(within(maxWidth, actualMax, 1)).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should calculate `maxLines: auto` correctly', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -267,7 +258,6 @@ describe('truncate', () => {
     expect(result.constraints.lines).to.equal(4)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should calculate height correctly when `maxLines` is not `auto`', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -293,7 +283,6 @@ describe('truncate', () => {
     expect(result.constraints.height).to.equal(22.4)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should escape node content', async () => {
     const log = spy(console, 'log')
     const content = '"><img src=a onerror=console.log("hello world") />'
@@ -320,7 +309,6 @@ describe('truncate', () => {
     expect(log).to.not.have.been.calledWith('hello world')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should truncate when visually hidden', async () => {
     let stage
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.

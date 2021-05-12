@@ -26,12 +26,10 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 import { Page } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Page />', async () => {
   // @ts-expect-error ts-migrate(7034) FIXME: Variable '_input' implicitly has type 'any' in som... Remove this comment to see the full error message
   let _input
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render with a function as child', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -60,7 +58,6 @@ describe('<Page />', async () => {
     expect(subject.getDOMNode().textContent).to.equal('Hello World')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should focus default element', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(

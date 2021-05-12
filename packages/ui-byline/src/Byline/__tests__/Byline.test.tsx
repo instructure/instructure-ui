@@ -28,7 +28,6 @@ import { expect, mount, within, stub } from '@instructure/ui-test-utils'
 import { View } from '@instructure/ui-view'
 import { Byline } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Byline />', async () => {
   // eslint-disable-next-line max-len
   const image = (
@@ -38,7 +37,6 @@ describe('<Byline />', async () => {
     />
   )
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -50,7 +48,6 @@ describe('<Byline />', async () => {
     expect(subject.getDOMNode()).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass down div and its contents via the description property', async () => {
     const description = (
       <div>
@@ -70,7 +67,6 @@ describe('<Byline />', async () => {
     expect(await media.find(':contains(Clickable Heading)')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -83,7 +79,6 @@ describe('<Byline />', async () => {
     expect(await media.accessible()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should render a figure by default`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(await mount(<Byline>{image}</Byline>))
@@ -92,7 +87,6 @@ describe('<Byline />', async () => {
     expect(await find('figure')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should not allow the 'as' prop`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -103,7 +97,6 @@ describe('<Byline />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small'
@@ -121,7 +114,6 @@ describe('<Byline />', async () => {
       .filter((prop) => !ignoreProps.includes(prop))
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should NOT allow the '${prop}' prop`, async () => {
             // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
@@ -134,7 +126,6 @@ describe('<Byline />', async () => {
             expect(consoleError).to.be.calledWith(warning)
           })
         } else {
-          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should allow the '${prop}' prop`, async () => {
             // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }

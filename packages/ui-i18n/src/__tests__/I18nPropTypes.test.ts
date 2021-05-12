@@ -25,15 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { I18nPropTypes } from '../I18nPropTypes'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('I18nPropTypes', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('iso8601', () => {
     const { iso8601 } = I18nPropTypes
 
     // Test cases taken from https://www.myintervals.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not return error when provided with a valid ISO8601 string', () => {
       const props = { date: null }
       const args = [props, 'date', 'TestComponent']
@@ -88,7 +85,6 @@ describe('I18nPropTypes', () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should return error when provided with an invalid ISO8601 string', () => {
       const props = { date: null }
       const args = [props, 'date', 'TestComponent']

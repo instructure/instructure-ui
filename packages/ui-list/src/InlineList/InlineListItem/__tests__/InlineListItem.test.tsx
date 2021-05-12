@@ -28,9 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { InlineListItem } from '../index'
 import { InlineListItemLocator } from '../InlineListItemLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<InlineListItem />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineListItem>hello</InlineListItem>)
@@ -38,7 +36,6 @@ describe('<InlineListItem />', async () => {
     expect(await listItem.find(':contains(hello)')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render delimiter', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineListItem delimiter="slash">List item</InlineListItem>)
@@ -46,7 +43,6 @@ describe('<InlineListItem />', async () => {
     expect(await listItem.find('[aria-hidden="true"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call elementRef', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()

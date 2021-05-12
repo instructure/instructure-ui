@@ -37,9 +37,7 @@ import { Item } from '../index'
 import { OptionsItemLocator as ItemLocator } from '../OptionsItemLocator'
 import ItemExamples from '../__examples__/Item.examples'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Item />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item />)
@@ -48,7 +46,6 @@ describe('<Item />', async () => {
     expect(item).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render not render as a listitem by default', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item>Hello World</Item>)
@@ -56,7 +53,6 @@ describe('<Item />', async () => {
     expect(item.getTagName()).to.not.equal('li')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render designated tag if `as` prop is specified', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item as="li">Hello World</Item>)
@@ -64,7 +60,6 @@ describe('<Item />', async () => {
     expect(item.getTagName()).to.equal('li')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children properly', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -77,7 +72,6 @@ describe('<Item />', async () => {
     expect(await item.find('#customContent')).to.have.text('Hello World')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render role attributes appropriately when given a role', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item role="option">Hello World</Item>)
@@ -88,7 +82,6 @@ describe('<Item />', async () => {
     expect(child).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass props through to label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -106,7 +99,6 @@ describe('<Item />', async () => {
     expect(label.getAttribute('data-custom-attr')).to.equal('true')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass event handlers through to label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
@@ -122,7 +114,6 @@ describe('<Item />', async () => {
     expect(onClick).to.have.been.calledOnce()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should allow label to recieve focus', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
@@ -143,7 +134,6 @@ describe('<Item />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render content before label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderBeforeLabel={<IconCheckSolid />}>Hello World</Item>)
@@ -155,7 +145,6 @@ describe('<Item />', async () => {
     expect(icon).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render content after label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderAfterLabel={<IconCheckSolid />}>Hello World</Item>)
@@ -167,7 +156,6 @@ describe('<Item />', async () => {
     expect(icon).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render nested lists', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -187,7 +175,6 @@ describe('<Item />', async () => {
     expect(nestedItem).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ maxExamplesPerPage: number; pr... Remove this comment to see the full error message
     generateA11yTests(ItemExamples)

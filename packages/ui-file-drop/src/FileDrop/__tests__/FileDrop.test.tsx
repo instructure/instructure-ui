@@ -25,25 +25,20 @@ import React from 'react'
 import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 import { FileDrop } from '../index'
 import { FileDropLocator } from '../FileDropLocator'
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<FileDrop />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<FileDrop renderLabel="fake label" />)
     const fileDrop = await FileDropLocator.find()
     expect(fileDrop).to.exist()
   })
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<FileDrop renderLabel="fake label" />)
     const fileDrop = await FileDropLocator.find()
     expect(await fileDrop.accessible()).to.be.true()
   })
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('interactions', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should functionally disable the input if `interaction` is set to disabled', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" interaction="disabled" />)
@@ -51,7 +46,6 @@ describe('<FileDrop />', async () => {
       const input = await fileDrop.find('input')
       expect(input.getDOMNode().disabled).to.be.true()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should functionally disable the input if `disabled` is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" disabled />)
@@ -59,7 +53,6 @@ describe('<FileDrop />', async () => {
       const input = await fileDrop.find('input')
       expect(input.getDOMNode().disabled).to.be.true()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should functionally disable the input if `interaction` is set to readonly', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" interaction="readonly" />)
@@ -67,7 +60,6 @@ describe('<FileDrop />', async () => {
       const input = await fileDrop.find('input')
       expect(input.getDOMNode().disabled).to.be.true()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should functionally disable the input if `readOnly` is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" readOnly />)
@@ -76,9 +68,7 @@ describe('<FileDrop />', async () => {
       expect(input.getDOMNode().disabled).to.be.true()
     })
   })
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('file-type checking when onDrop', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to drop event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDrop = stub()
@@ -89,7 +79,6 @@ describe('<FileDrop />', async () => {
       await label.drop()
       expect(onDrop).to.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to change event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDrop = stub()
@@ -100,7 +89,6 @@ describe('<FileDrop />', async () => {
       await input.change()
       expect(onDrop).to.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('accepts correct files using mymetypes', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
@@ -132,7 +120,6 @@ describe('<FileDrop />', async () => {
       expect(onDropAccepted).to.have.been.called()
       expect(onDropRejected).to.not.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('rejects incorrect files using mymetypes and shouldEnablePreview', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
@@ -165,7 +152,6 @@ describe('<FileDrop />', async () => {
       expect(onDropAccepted).to.not.have.been.called()
       expect(onDropRejected).to.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('accepts correct files using mymetypes and enablePreview', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
@@ -198,7 +184,6 @@ describe('<FileDrop />', async () => {
       expect(onDropAccepted).to.have.been.called()
       expect(onDropRejected).to.not.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('accepts correct files using extensions', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
@@ -230,7 +215,6 @@ describe('<FileDrop />', async () => {
       expect(onDropAccepted).to.have.been.called()
       expect(onDropRejected).to.not.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('rejects incorrect files using mymetypes', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
@@ -262,7 +246,6 @@ describe('<FileDrop />', async () => {
       expect(onDropAccepted).to.not.have.been.called()
       expect(onDropRejected).to.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('rejects incorrect files using extensions', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
@@ -295,9 +278,7 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.have.been.called()
     })
   })
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('label handling', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('renders element label directly', async () => {
       const label = <section id="test-id">This is an element label</section>
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -305,7 +286,6 @@ describe('<FileDrop />', async () => {
       const fileDrop = await FileDropLocator.find()
       expect(await fileDrop.find('section#test-id')).to.exist()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('passes isDragAccepted and isDragRejected boolean props to component label', async () => {
       let result = {}
       const label = (props: any) => {
@@ -317,7 +297,6 @@ describe('<FileDrop />', async () => {
       expect(typeof (result as any).isDragAccepted === 'boolean').to.be.true()
       expect(typeof (result as any).isDragRejected === 'boolean').to.be.true()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it(`label component's props are false by default`, async () => {
       let result = {}
       const label = (props: any) => {
@@ -330,9 +309,7 @@ describe('<FileDrop />', async () => {
       expect((result as any).isDragRejected).to.be.false()
     })
   })
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('onDrag events', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onDragEnter event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDragEnter = stub()
@@ -345,7 +322,6 @@ describe('<FileDrop />', async () => {
       await label.dragEnter()
       expect(onDragEnter).to.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onDragOver event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDragOver = stub()
@@ -356,7 +332,6 @@ describe('<FileDrop />', async () => {
       await label.dragOver()
       expect(onDragOver).to.have.been.called()
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onDragLeave event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDragLeave = stub()
@@ -370,7 +345,6 @@ describe('<FileDrop />', async () => {
       expect(onDragLeave).to.have.been.called()
     })
   })
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('stops propagation when the ESC key is released and file browser is open', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<FileDrop renderLabel="fake label" />)

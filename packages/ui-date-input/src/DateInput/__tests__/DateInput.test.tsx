@@ -37,7 +37,6 @@ import Examples from '../__examples__/DateInput.examples'
 import { DateInput } from '../index'
 import { DateInputLocator } from '../DateInputLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<DateInput />', async () => {
   const weekdayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -61,7 +60,6 @@ describe('<DateInput />', async () => {
     return days
   }
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an input and a calendar', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -80,9 +78,7 @@ describe('<DateInput />', async () => {
     expect(await dateInput.findCalendar()).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('input', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render a label', async () => {
       const renderLabel = 'Choose date'
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -100,7 +96,6 @@ describe('<DateInput />', async () => {
       expect(input).to.have.label(renderLabel)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set value', async () => {
       const value = 'January 5'
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -120,7 +115,6 @@ describe('<DateInput />', async () => {
       expect(input).to.have.value(value)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onChange with the updated value', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
@@ -144,7 +138,6 @@ describe('<DateInput />', async () => {
       expect(onChange.lastCall.args[1].value).to.equal(value)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onBlur', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
@@ -166,7 +159,6 @@ describe('<DateInput />', async () => {
       expect(onBlur).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should correctly set interaction type', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -188,7 +180,6 @@ describe('<DateInput />', async () => {
       expect(await dateInput.findInput('[readonly]')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should correctly set disabled', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -207,7 +198,6 @@ describe('<DateInput />', async () => {
       expect(await dateInput.findInput('[disabled]')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should correctly set readOnly', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -226,7 +216,6 @@ describe('<DateInput />', async () => {
       expect(await dateInput.findInput('[readonly]')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set placeholder', async () => {
       const placeholder = 'Start typing to choose a date'
 
@@ -247,7 +236,6 @@ describe('<DateInput />', async () => {
       expect(input.getAttribute('placeholder')).to.equal(placeholder)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should be requireable', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -266,7 +254,6 @@ describe('<DateInput />', async () => {
       expect(input.getDOMNode().required).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide inputRef', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const inputRef = stub()
@@ -288,7 +275,6 @@ describe('<DateInput />', async () => {
       expect(inputRef).to.have.been.calledWith(input.getDOMNode())
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render messages', async () => {
       const text = 'The selected date is invalid'
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -309,7 +295,6 @@ describe('<DateInput />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should allow custom props to pass through', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -331,9 +316,7 @@ describe('<DateInput />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('Calendar', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should show calendar when `isShowingCalendar` is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -355,9 +338,7 @@ describe('<DateInput />', async () => {
       expect(await dateInput.findCalendar()).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('onRequestShowCalendar', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestShowCalendar when root is clicked', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -377,7 +358,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestShowCalendar when input is clicked', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -398,7 +378,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestShowCalendar when input receives space event', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -419,7 +398,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should not call onRequestShowCalendar when input receives space event if calendar is already showing', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -441,7 +419,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.not.have.been.called()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestShowCalendar when input receives down arrow event', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -462,7 +439,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should not call onRequestShowCalendar when input receives down arrow event if calendar is already showing', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -484,7 +460,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.not.have.been.called()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestShowCalendar when input receives up arrow event', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -505,7 +480,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should not call onRequestShowCalendar when input receives up arrow event if calendar is already showing', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -527,7 +501,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.not.have.been.called()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestShowCalendar when input receives onChange event', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -548,7 +521,6 @@ describe('<DateInput />', async () => {
         expect(onRequestShowCalendar).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should not call onRequestShowCalendar when disabled', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
@@ -578,9 +550,7 @@ describe('<DateInput />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('onRequestHideCalendar and onRequestValidateDate', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestHideCalendar and onRequestValidateDate input receives onBlur event', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
@@ -607,7 +577,6 @@ describe('<DateInput />', async () => {
         expect(onRequestValidateDate).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives esc event', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
@@ -634,7 +603,6 @@ describe('<DateInput />', async () => {
         expect(onRequestValidateDate).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives enter event', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
@@ -668,7 +636,6 @@ describe('<DateInput />', async () => {
         expect(onRequestValidateDate).to.have.been.calledOnce()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should call onRequestHideCalendar and onRequestValidateDate when date is selected', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
@@ -699,7 +666,6 @@ describe('<DateInput />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onRequestHideCalendar and onRequestValidateDate when date is selected and is outside month', async () => {
       const days = generateDays()
       days[5] = (
@@ -736,7 +702,6 @@ describe('<DateInput />', async () => {
       expect(onRequestValidateDate).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onRequestSelectNextDay on down arrow if calendar is showing', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestSelectNextDay = stub()
@@ -762,7 +727,6 @@ describe('<DateInput />', async () => {
       expect(onRequestSelectNextDay).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onRequestSelectNextDay on up arrow if calendar is showing', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestSelectPrevDay = stub()
@@ -788,7 +752,6 @@ describe('<DateInput />', async () => {
       expect(onRequestSelectPrevDay).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onRequestRenderNextMonth and onRequestRenderPrevMonth when calendar arrow buttons are clicked', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestRenderNextMonth = stub()
@@ -823,7 +786,6 @@ describe('<DateInput />', async () => {
       expect(onRequestRenderPrevMonth).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render calendar navigation label', async () => {
       const label = 'January 2019'
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -843,7 +805,6 @@ describe('<DateInput />', async () => {
       expect(await calendar.findWithText(label)).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render calendar weekday labels', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -867,7 +828,6 @@ describe('<DateInput />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render all focusable elements in calendar with tabIndex="-1"', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -893,7 +853,6 @@ describe('<DateInput />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render days with the correct role', async () => {
       const days = generateDays()
       days[5] = (
@@ -928,7 +887,6 @@ describe('<DateInput />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should assign aria-selected to the selected date and link it to the input', async () => {
       const days = generateDays()
       days[7] = (
@@ -971,7 +929,6 @@ describe('<DateInput />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ propValues: { placement: (stri... Remove this comment to see the full error message
     generateA11yTests(Examples)

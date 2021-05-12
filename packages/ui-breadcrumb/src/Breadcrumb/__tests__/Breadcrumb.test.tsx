@@ -30,9 +30,7 @@ import { Breadcrumb } from '../index'
 import { BreadcrumbLocator } from '../BreadcrumbLocator'
 import BreadcrumbExamples from '../__examples__/Breadcrumb.examples'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Breadcrumb />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the label as an aria-label attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -46,13 +44,11 @@ describe('<Breadcrumb />', async () => {
     expect(label.getAttribute('aria-label')).to.equal('Settings')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ propValues: { children: Elemen... Remove this comment to see the full error message
     generateA11yTests(BreadcrumbExamples)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an icon as a separator', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(

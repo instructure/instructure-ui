@@ -25,7 +25,8 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.4.0",
-    "@instructure/ui-test-utils": "8.4.0"
+    "@instructure/ui-test-utils": "8.4.0",
+    "@types/mocha": "^8.2.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",

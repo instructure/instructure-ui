@@ -27,21 +27,17 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { Img } from '../index'
 import { ImgLocator } from '../ImgLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Img />', () => {
   // eslint-disable-next-line max-len
   const image =
     'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
   beforeEach(async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     stub(console, 'warn') // suppress deprecation warnings
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('for a11y', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should meet standards', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Img src={image} />)
@@ -49,14 +45,12 @@ describe('<Img />', () => {
       expect(await img.accessible()).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render an empty alt attribute by default', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Img src={image} />)
       expect(await ImgLocator.find('[alt=""]')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render the provided alt attribute', async () => {
       const alt = 'Foo'
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -65,14 +59,12 @@ describe('<Img />', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an overlay color', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} overlay={{ color: '#ff0000', opacity: 7 }} />)
     expect(await ImgLocator.find('[class*=-img__overlay]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a blur filter', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} withBlur={true} />)
@@ -80,7 +72,6 @@ describe('<Img />', () => {
     expect(img.getComputedStyle().getPropertyValue('filter')).to.contain('blur')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a grayscale filter', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} withGrayscale={true} />)
@@ -91,7 +82,6 @@ describe('<Img />', () => {
   })
 
   // If component renders as simple image
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display block-level when display="block"', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} display="block" />)
@@ -100,7 +90,6 @@ describe('<Img />', () => {
   })
 
   // If component has an overlay and renders as image inside containing element
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display block-level with overlay when display="block"', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -120,7 +109,6 @@ describe('<Img />', () => {
     expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply CSS object-fit: cover when constrain="cover"', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -134,7 +122,6 @@ describe('<Img />', () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply CSS object-fit: contain when constrain="contain"', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -148,7 +135,6 @@ describe('<Img />', () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('has a container with matching height and width when constrain="cover" is used with overlay', async () => {
     const height = 32
     const width = 24
@@ -172,7 +158,6 @@ describe('<Img />', () => {
     expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('has a container with matching height and not matching width when constrain="contain" is used with overlay', async () => {
     const height = 32
     const width = 24
