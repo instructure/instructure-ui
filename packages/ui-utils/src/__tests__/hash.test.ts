@@ -25,9 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { hash } from '../hash'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('hash', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should error if supplied value is undefined', () => {
     let error = false
 
@@ -41,16 +39,13 @@ describe('hash', () => {
     expect(error).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should allow specifying a max length', () => {
     const result = hash('some value', 4)
     expect(result).to.exist()
     expect(result.length).to.equal(4)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('strings', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical strings to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash('Some string with3_ distinct$() !_)(* va1ues')
@@ -63,7 +58,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes different strings to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash('Some string with3_ distinct$() !_)(* va1ues')
@@ -77,9 +71,7 @@ describe('hash', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('numbers', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical numbers to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(532)
@@ -92,7 +84,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two different numbers to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(532)
@@ -106,9 +97,7 @@ describe('hash', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('booleans', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes true to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(true)
@@ -121,7 +110,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes false to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(false)
@@ -134,7 +122,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes true and false to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(true)
@@ -148,9 +135,7 @@ describe('hash', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('functions', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical arrow function expressions to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(() => 'foo')
@@ -163,7 +148,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two different arrow function expressions to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(() => 'foo')
@@ -176,7 +160,6 @@ describe('hash', () => {
       expect(result1).to.not.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical functions to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(function myFunc() {
@@ -198,7 +181,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical functions with different names to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(function myFunc() {
@@ -220,7 +202,6 @@ describe('hash', () => {
       expect(result1).to.not.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical functions with different bodies to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(function myFunc() {
@@ -243,9 +224,7 @@ describe('hash', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('objects', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical simple objects to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash({
@@ -267,7 +246,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical simple objects with rearranged keys to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash({
@@ -289,7 +267,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two different simple objects to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash({
@@ -311,7 +288,6 @@ describe('hash', () => {
       expect(result1).to.not.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical complex objects to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash({
@@ -359,7 +335,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical complex objects with rearranged keys to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash({
@@ -407,7 +382,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two different simple objects to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash({
@@ -429,7 +403,6 @@ describe('hash', () => {
       expect(result1).to.not.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two different complex objects to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash({
@@ -478,9 +451,7 @@ describe('hash', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('classes', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two identical classes to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(
@@ -528,7 +499,6 @@ describe('hash', () => {
       expect(result1).to.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two classes with different content to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(
@@ -539,6 +509,7 @@ describe('hash', () => {
             this.settings = settings
           }
 
+          // @ts-expect-error ts-migrate(7023) FIXME: 'settings' implicitly has return type 'an... Remove this comment to see the full error message
           get settings() {
             return this.settings
           }
@@ -575,7 +546,6 @@ describe('hash', () => {
       expect(result1).to.not.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes two classes with different names to different values', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(
@@ -623,7 +593,6 @@ describe('hash', () => {
       expect(result1).to.not.equal(result2)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('hashes null to the same value', () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const result1 = hash(null)

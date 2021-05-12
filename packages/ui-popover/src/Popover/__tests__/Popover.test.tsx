@@ -29,9 +29,7 @@ import { Popover } from '../index'
 
 import { PopoverLocator } from '../PopoverLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Popover />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not render content by default', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -60,7 +58,6 @@ describe('<Popover />', async () => {
   testEventHandler('onFocus', 'focus')
   testEventHandler('onBlur', 'focus', 'blur')
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should hide content when clicked outside content by default', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onHideContent = spy()
@@ -97,7 +94,6 @@ describe('<Popover />', async () => {
     expect(onHideContent.lastCall.args[1].documentClick).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should hide content when trigger is clicked', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onHideContent = spy()
@@ -125,7 +121,6 @@ describe('<Popover />', async () => {
     expect(onHideContent.lastCall.args[1].documentClick).to.be.false()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should show content if defaultIsShowingContent is true', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -143,9 +138,7 @@ describe('<Popover />', async () => {
     expect(content.getTextContent()).to.equal('Foo Bar Baz')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('controlled', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should show content by default if isShowingContent is true', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -163,7 +156,6 @@ describe('<Popover />', async () => {
       expect(content.getTextContent()).to.equal('Foo Bar Baz')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not show content is isShowingContent prop is false', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -187,7 +179,6 @@ describe('<Popover />', async () => {
       expect(content.getTextContent()).to.equal('Foo Bar Baz')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onShowContent and onHideContent', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onShowContent = spy()
@@ -218,7 +209,6 @@ describe('<Popover />', async () => {
       expect(onHideContent.lastCall.args[1].documentClick).to.be.false()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not show content on click', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -241,9 +231,7 @@ describe('<Popover />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when shouldFocusContentOnTriggerBlur=true and shouldContainFocus=false', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should move focus into the content when the trigger is blurred', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onHideContent = spy()
@@ -293,7 +281,6 @@ describe('<Popover />', async () => {
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'on' implicitly has an 'any' type.
 function testShowContent(on, eventType, eventInit) {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should show content on ${on}`, async () => {
     const onValue = [on, on === 'hover' ? 'focus' : null]
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -316,7 +303,6 @@ function testShowContent(on, eventType, eventInit) {
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'handler' implicitly has an 'any' type.
 function testEventHandler(handler, ...eventType) {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should fire ${handler} handler`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const handlerSpy = spy()

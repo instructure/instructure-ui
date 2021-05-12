@@ -27,9 +27,7 @@ import { expect, find, mount, stub } from '@instructure/ui-test-utils'
 
 import { Tab } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Tabs.Tab />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -43,7 +41,6 @@ describe('<Tabs.Tab />', async () => {
     expect(tab.getTextContent()).to.equal('Tab Label')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have appropriate role attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -54,7 +51,6 @@ describe('<Tabs.Tab />', async () => {
     expect(await find('[role="tab"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have appropriate aria attributes', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -69,7 +65,6 @@ describe('<Tabs.Tab />', async () => {
     expect(tab.getAttribute('aria-disabled')).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the aria-selected attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -80,7 +75,6 @@ describe('<Tabs.Tab />', async () => {
     expect(await find('[role="tab"][aria-selected="true"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the aria-disabled attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -91,7 +85,6 @@ describe('<Tabs.Tab />', async () => {
     expect(await find('[role="tab"][aria-disabled="true"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the tabindex to 0 when selected', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -102,7 +95,6 @@ describe('<Tabs.Tab />', async () => {
     expect(await find('[role="tab"][tabindex="0"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not set the tabindex when not selected', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -114,7 +106,6 @@ describe('<Tabs.Tab />', async () => {
     expect(tab).to.not.have.attribute('tabindex')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove the tabindex attribute when disabled', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -128,7 +119,6 @@ describe('<Tabs.Tab />', async () => {
     expect(tab.getAttribute('tabindex')).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onClick when clicked', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
@@ -148,7 +138,6 @@ describe('<Tabs.Tab />', async () => {
     expect(onClick.args[0][1].index).to.equal(index)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should NOT call onClick when clicked and tab is disabled', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
@@ -165,7 +154,6 @@ describe('<Tabs.Tab />', async () => {
     expect(onClick).to.not.have.been.called()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onKeyDown when keys are pressed and tab is selected', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
@@ -191,7 +179,6 @@ describe('<Tabs.Tab />', async () => {
     expect(onKeyDown.args[0][1].index).to.equal(index)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should NOT call onKeyDown when keys are pressed and tab is disabled', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()

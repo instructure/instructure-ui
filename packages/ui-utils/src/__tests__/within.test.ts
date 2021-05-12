@@ -26,9 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 
 import { within } from '../within'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('within', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('returns true when values are within range', () => {
     expect(within(10, 8, 2)).to.be.true()
     expect(within(10, 11, 1)).to.be.true()
@@ -37,7 +35,6 @@ describe('within', () => {
     expect(within(-10, -15, 5)).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('returns false when values are out of range', () => {
     expect(within(10, 8, 1)).to.be.false()
     expect(within(12, 10, 1.9999)).to.be.false()

@@ -24,7 +24,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-type OwnProps = {
+type Props = {
   mode: 'view' | 'edit'
   onChangeMode: (...args: any[]) => any
   render?: (...args: any[]) => any
@@ -32,8 +32,6 @@ type OwnProps = {
   onChange?: (...args: any[]) => any
   readOnly?: boolean
 }
-
-type Props = OwnProps & typeof Editable.defaultProps
 
 import { deepEqual } from '@instructure/ui-utils'
 import { logWarn as warn } from '@instructure/console'
@@ -137,7 +135,6 @@ class Editable extends Component<Props> {
       // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._editButtonRef && this._editButtonRef.focus()
       if (onChange && !deepEqual(this.state.valueOnEdit, value)) {
-        // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
         onChange(value)
       }
     }
@@ -280,7 +277,6 @@ class Editable extends Component<Props> {
     const { children, render = children, mode } = this.props
 
     if (typeof render === 'function') {
-      // @ts-expect-error ts-migrate(2721) FIXME: Cannot invoke an object which is possibly 'null'.
       return render({
         mode,
         getContainerProps: this.getContainerProps,

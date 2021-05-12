@@ -25,26 +25,21 @@
 import { expect, spy } from '@instructure/ui-test-utils'
 import { createChainedFunction } from '../createChainedFunction'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('createChainedFunction', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return null if no function provided', () => {
     expect(createChainedFunction(null, undefined)).to.equal(null)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return a function', () => {
     expect(typeof createChainedFunction(() => {})).to.equal('function')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should throw an error if something other than function, null, undefined provided', () => {
     expect(() => {
       createChainedFunction(12345)
     }).to.throw(Error)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should execute all the functions', () => {
     const spies = Array(5)
       .fill(null)

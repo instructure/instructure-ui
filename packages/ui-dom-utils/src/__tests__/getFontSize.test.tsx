@@ -26,9 +26,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { getFontSize } from '../getFontSize'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('getFontSize', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return font size as a number', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<span style={{ fontSize: '17px' }}>hello</span>)

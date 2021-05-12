@@ -35,7 +35,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-type OwnProps = {
+type Props = {
   label: string
   contentRef?: (...args: any[]) => any
   onSizeChange?: (...args: any[]) => any
@@ -43,8 +43,6 @@ type OwnProps = {
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
-
-type Props = OwnProps & typeof DrawerContent.defaultProps
 
 /**
 ---
@@ -97,6 +95,7 @@ class DrawerContent extends Component<Props> {
       width: rect.width
     }
     // set initial size
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
     this.props.onSizeChange({ width: rect.width, height: rect.height })
     // listen for changes to size
     // @ts-expect-error ts-migrate(2322) FIXME: Type 'Function' is not assignable to type 'null'.

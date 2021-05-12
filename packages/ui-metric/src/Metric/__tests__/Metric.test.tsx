@@ -28,9 +28,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import { Metric } from '../index'
 import { MetricLocator } from '../MetricLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Metric />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)
@@ -40,7 +38,6 @@ describe('<Metric />', async () => {
     expect(await metric.findWithText('Grade')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the value', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)
@@ -50,7 +47,6 @@ describe('<Metric />', async () => {
     expect(await metric.findWithText('80%')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes props through to Metric element', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -63,7 +59,6 @@ describe('<Metric />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not have role="gridcell" for the value', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)
@@ -76,7 +71,6 @@ describe('<Metric />', async () => {
     ).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not have role=rowheader for the label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)

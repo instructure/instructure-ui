@@ -29,9 +29,7 @@ import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import DrawerLayoutFixture from '../__fixtures__/DrawerLayout.fixture'
 import { DrawerLayoutLocator } from '../DrawerLayoutLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<DrawerLayout />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<DrawerLayoutFixture />)
@@ -40,7 +38,6 @@ describe('<DrawerLayout />', async () => {
     expect(layout).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a DrawerTray and DrawerContent', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -55,7 +52,6 @@ describe('<DrawerLayout />', async () => {
     expect(content).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with no overlay, layout content should have margin equal to tray width with placement=start`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -72,7 +68,6 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with no overlay, layout content should have margin equal to tray width with placement=end`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -94,7 +89,6 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with overlay, layout content should have a margin of zero with placement=start`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -111,7 +105,6 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`with overlay, layout content should have a margin of zero with placement=end`, async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -133,7 +126,6 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('the tray should overlay the content when the content is less than the minWidth', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()
@@ -155,7 +147,6 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('the tray should stop overlaying the content when there is enough space for the content', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()
@@ -177,7 +168,6 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('the tray should be set to overlay when it is opened and there is not enough space', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()
@@ -197,7 +187,6 @@ describe('<DrawerLayout />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('the tray should not overlay on open when there is enough space', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()

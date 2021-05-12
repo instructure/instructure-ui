@@ -27,9 +27,7 @@ import { expect, mount, within, stub } from '@instructure/ui-test-utils'
 
 import { FormFieldLabel } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<FormFieldLabel />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)
@@ -38,7 +36,6 @@ describe('<FormFieldLabel />', async () => {
     expect(formFieldLabel).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render as specified via the `as` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLabel as="li">Foo</FormFieldLabel>)
@@ -47,7 +44,6 @@ describe('<FormFieldLabel />', async () => {
     expect(await formFieldLabel.find('li:contains(Foo)')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should require children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -60,7 +56,6 @@ describe('<FormFieldLabel />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)

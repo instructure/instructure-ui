@@ -63,7 +63,6 @@ export default class DrawerLayoutFixture extends Component {
           minWidth="500px"
           onOverlayTrayChange={onOverlayTrayChange}
         >
-          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
           <DrawerLayout.Tray
             open={open}
             placement={placement}
@@ -72,7 +71,6 @@ export default class DrawerLayoutFixture extends Component {
             <div style={{ width: trayWidth }}>Hello from tray</div>
           </DrawerLayout.Tray>
           <DrawerLayout.Content label="Test DrawerContent">
-            {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
             <div>
               Hello from content
               <button>Expand</button>

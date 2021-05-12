@@ -25,9 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { transformSelection, transformCursor } from '../transformSelection'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('transformSelection', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should work with transformCursor', () => {
     const selectionStart = 2
     const selectionEnd = 3
@@ -52,9 +50,7 @@ describe('transformSelection', () => {
   })
 })
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('transformCursor', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should retain cursor at the end', () => {
     const dirtyValue = '12asdfghjk'
     const cleanedValue = '12'
@@ -65,7 +61,6 @@ describe('transformCursor', () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should retain cursor at the start', () => {
     const dirtyValue = '12dfghjkl67'
     const cleanedValue = '1267'
@@ -74,7 +69,6 @@ describe('transformCursor', () => {
     expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).to.equal(0)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should retain cursor between cleaned values', () => {
     const dirtyValue = '12dfghjkl67'
     const cleanedValue = '1267'
@@ -83,7 +77,6 @@ describe('transformCursor', () => {
     expect(transformCursor(cursorIndex, dirtyValue, cleanedValue)).to.equal(2)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should retain cursor after cleaned values', () => {
     const dirtyValue = '12dfghjkl67'
     const cleanedValue = '1267'

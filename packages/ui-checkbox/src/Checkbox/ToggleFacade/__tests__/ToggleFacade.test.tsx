@@ -27,9 +27,7 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { ToggleFacade } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<ToggleFacade />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
@@ -37,7 +35,6 @@ describe('<ToggleFacade />', async () => {
     expect(toggleFacade).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ToggleFacade>label text</ToggleFacade>)

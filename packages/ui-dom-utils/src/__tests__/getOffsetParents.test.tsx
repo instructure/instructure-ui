@@ -26,7 +26,6 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { getScrollParents } from '../getScrollParents'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('getScrollParents', async () => {
   const node = (
     <div>
@@ -72,7 +71,6 @@ describe('getScrollParents', async () => {
     </div>
   )
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should find scroll parent for inline elements', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
@@ -83,7 +81,6 @@ describe('getScrollParents', async () => {
     expect(getScrollParents(child)[0]).to.be.equal(parent)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should ignore static parents when absolute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
@@ -94,7 +91,6 @@ describe('getScrollParents', async () => {
     expect(getScrollParents(child)[0]).to.be.equal(parent)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle fixed', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)

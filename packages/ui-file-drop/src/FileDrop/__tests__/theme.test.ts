@@ -28,24 +28,19 @@ import { contrast } from '@instructure/ui-color-utils'
 import generateComponentTheme from '../theme'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('FileDrop.theme', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the canvas theme', () => {
     const variables = generateComponentTheme(canvas)
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have background and hover highlight colors that meet 3:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.hoverBorderColor)
       ).to.be.above(3)
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have background and accepted highlight colors that meet 3:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.acceptedColor)
       ).to.be.above(3)
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have background and rejected highlight colors that meet 3:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.rejectedColor)
@@ -53,22 +48,18 @@ describe('FileDrop.theme', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the high contrast canvas theme', () => {
     const variables = generateComponentTheme(canvasHighContrast)
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have background and hover highlight colors that meet 4.5:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.hoverBorderColor)
       ).to.be.above(4.5)
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have background and accepted highlight colors that meet 4.5:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.acceptedColor)
       ).to.be.above(4.5)
     })
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have background and rejected highlight colors that meet 4.5:1 contrast', () => {
       expect(
         contrast(variables.backgroundColor, variables.rejectedColor)

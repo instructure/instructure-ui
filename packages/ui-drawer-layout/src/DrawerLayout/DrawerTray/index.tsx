@@ -38,7 +38,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { DrawerLayoutContext } from '../index'
 
-type OwnProps = {
+type Props = {
   label: string
   render?: (...args: any[]) => any
   placement?: 'start' | 'end'
@@ -70,7 +70,7 @@ type OwnProps = {
   styles?: any
   dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
-type Props = OwnProps & typeof DrawerTray.defaultProps
+
 /**
 ---
 parent: DrawerLayout
@@ -268,10 +268,8 @@ class DrawerTray extends Component<Props> {
   renderContent() {
     const { children, render } = this.props
     if (typeof render === 'function') {
-      // @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable.
       return render()
     } else if (typeof children === 'function') {
-      // @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable.
       return children()
     } else {
       return children
@@ -305,7 +303,6 @@ class DrawerTray extends Component<Props> {
       shouldCloseOnDocumentClick,
       shouldContainFocus,
       styles,
-      //@ts-expect-error FIXME:
       ...props
     } = this.props
     return (
@@ -322,7 +319,6 @@ class DrawerTray extends Component<Props> {
               : (styles as any).drawerTray
           let transitionIn = open
           if (needsPortal && !portalOpen) {
-            // @ts-expect-error ts-migrate(2322) FIXME: Type 'boolean' is not assignable to type 'never'.
             transitionIn = false
           }
           const content = (

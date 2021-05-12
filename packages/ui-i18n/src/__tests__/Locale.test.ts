@@ -25,17 +25,13 @@
 import { expect } from '@instructure/ui-test-utils'
 import { Locale } from '../Locale'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('browserLocale', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('returns the navigator language if a navigator is explicity passed', () => {
     const navigator = { language: 'de' }
     expect(Locale.browserLocale(navigator)).to.equal('de')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with document lang attribute', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('returns the document locale if no navigator is passed', () => {
       document.documentElement.lang = 'fr'
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -43,14 +39,12 @@ describe('browserLocale', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('returns the browser locale if no navigator is passed, or "en-US" if no browser locale is set', () => {
     const expectedLanguage = navigator ? navigator.language : 'en-US'
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     expect(Locale.browserLocale()).to.equal(expectedLanguage)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('returns the default "en-US" if navigator is undefined and the DOM is unavailable', () => {
     expect(Locale.browserLocale(null, false)).to.equal('en-US')
   })

@@ -36,11 +36,8 @@ import { Menu, MenuItem, MenuItemSeparator } from '../index'
 
 import { MenuLocator } from '../MenuLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Menu />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('without a trigger', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -54,7 +51,6 @@ describe('<Menu />', async () => {
       expect(menu).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should meet a11y standards', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -68,7 +64,6 @@ describe('<Menu />', async () => {
       expect(await menu.accessible()).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not allow invalid children', async () => {
       const cs = spy(console, 'error')
       const warning = 'Warning: Failed prop type: Expected one of '
@@ -81,7 +76,6 @@ describe('<Menu />', async () => {
       expect(cs).to.have.been.calledWithMatch(warning)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onSelect when menu item is selected', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onSelect = stub()
@@ -101,7 +95,6 @@ describe('<Menu />', async () => {
       expect(onSelect.getCall(0).args[1]).to.equal('Account')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not call onSelect when disabled', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onSelect = stub()
@@ -120,7 +113,6 @@ describe('<Menu />', async () => {
       expect(onSelect).to.not.have.been.called()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should move focus properly', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -141,7 +133,6 @@ describe('<Menu />', async () => {
       expect(items[0].containsFocus()).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide a menu ref', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const menuRef = stub()
@@ -155,7 +146,6 @@ describe('<Menu />', async () => {
       expect(menuRef).to.have.been.calledWith(menu.getDOMNode())
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria attributes properly', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -169,9 +159,7 @@ describe('<Menu />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with a trigger', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render into a mountNode', async () => {
       const mountNode = document.createElement('div')
 
@@ -194,7 +182,6 @@ describe('<Menu />', async () => {
       document.body.removeChild(mountNode)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria attributes properly', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -227,7 +214,6 @@ describe('<Menu />', async () => {
       )
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onFocus on focus', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
@@ -247,7 +233,6 @@ describe('<Menu />', async () => {
       expect(onFocus).to.have.been.called()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render when show and onToggle props are set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -265,7 +250,6 @@ describe('<Menu />', async () => {
       expect(popover).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not show by default', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -283,7 +267,6 @@ describe('<Menu />', async () => {
       expect(popover).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should accept a default show', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -299,7 +282,6 @@ describe('<Menu />', async () => {
       expect(popover).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide a menu ref', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const menuRef = stub()
@@ -318,7 +300,6 @@ describe('<Menu />', async () => {
       expect(menuRef).to.have.been.calledWith(menu.getDOMNode())
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide a popoverRef ref', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const popoverRef = stub()
@@ -337,7 +318,6 @@ describe('<Menu />', async () => {
       expect(popoverRef).to.have.been.called()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should focus the menu first', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -364,7 +344,6 @@ describe('<Menu />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onToggle on click', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onToggle = stub()
@@ -384,7 +363,6 @@ describe('<Menu />', async () => {
       expect(onToggle).to.have.been.called()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have an aria-haspopup attribute', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -400,9 +378,7 @@ describe('<Menu />', async () => {
       expect(trigger.getAttribute('aria-haspopup')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('for a11y', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should meet standards when menu is closed', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
@@ -416,7 +392,6 @@ describe('<Menu />', async () => {
         expect(await accessible()).to.be.true()
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should meet standards when menu is open', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
@@ -432,9 +407,7 @@ describe('<Menu />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with a sub-menu', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('...and keyboard and mouse interaction', async () => {
       testShowFlyoutOnEvent({ type: 'click' })
       testShowFlyoutOnEvent({ type: 'mouseOver' })
@@ -448,7 +421,6 @@ describe('<Menu />', async () => {
       testFocusFlyoutOnEvent({ type: 'keyDown', which: 'enter' })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('it should not open the sub-menu popover when disabled', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -472,7 +444,6 @@ describe('<Menu />', async () => {
       expect(popover).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('it should close the sub-menu popover on escape press', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -510,7 +481,6 @@ describe('<Menu />', async () => {
       ).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('it should close the sub-menu popover on left press', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -542,7 +512,6 @@ describe('<Menu />', async () => {
       ).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('it should call onDismiss on tab press', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDismiss = stub()
@@ -574,7 +543,6 @@ describe('<Menu />', async () => {
       expect(onDismiss).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('it should call onSelect when sub-menu popover option is selected', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onSelect = stub()
@@ -608,7 +576,6 @@ describe('<Menu />', async () => {
       expect(onSelect).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('it should call onToggle on document click and on dismiss', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onToggle = stub()
@@ -644,7 +611,6 @@ describe('<Menu />', async () => {
       expect(onToggle.getCall(1).args[0]).to.equal(false)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('it should call onMouseOver on hover', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onMouseOver = stub()
@@ -674,7 +640,6 @@ describe('<Menu />', async () => {
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
 function testShowFlyoutOnEvent(event) {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should show flyout menu on ${event.type} ${
     event.which || ''
   }`, async () => {
@@ -703,7 +668,6 @@ function testShowFlyoutOnEvent(event) {
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
 function testFocusFlyoutOnEvent(event) {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`expect flyout menu to be focused on ${event.type} ${
     event.which || ''
   }`, async () => {

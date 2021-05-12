@@ -25,7 +25,6 @@
 import { expect } from '@instructure/ui-test-utils'
 import { accepts } from '../accepts'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('accepts', () => {
   const dropImage = {
     lastModified: 1489419040000,
@@ -48,17 +47,14 @@ describe('accepts', () => {
     type: 'application/x-moz-file'
   }
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should take image/* to mean any image type', () => {
     expect(accepts(dropImage, 'image/*')).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should reject anything that is not an image, given image/*', () => {
     expect(accepts(dropFile, 'image/*')).to.be.false()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should match the exact file extensions given', () => {
     expect(accepts(dropImage, '.jpg')).to.be.true()
     expect(accepts(dropImage, '.jpg, .png')).to.be.true()
@@ -67,7 +63,6 @@ describe('accepts', () => {
     expect(accepts(dropFile, '.jpg, .pdf')).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle chrome dragenter file data', () => {
     expect(accepts(chromeDragEnterFile, 'image/*')).to.be.true()
     expect(accepts(chromeDragEnterFile, '.jpeg')).to.be.true()
@@ -75,7 +70,6 @@ describe('accepts', () => {
     expect(accepts(chromeDragEnterFile, '.pdf')).to.not.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it(`should always be true for firefox's dragenter file data`, () => {
     expect(accepts(firefoxDragEnterFile, 'image/*')).to.be.true()
     expect(accepts(firefoxDragEnterFile, '.jpeg')).to.be.true()
@@ -83,7 +77,6 @@ describe('accepts', () => {
     expect(accepts(firefoxDragEnterFile, '.pdf')).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('allows extensions without leading dot', () => {
     expect(accepts(dropImage, 'jpg, png')).to.be.true()
   })

@@ -37,7 +37,6 @@ import { SimpleSelectLocator } from '@instructure/ui-simple-select/es/SimpleSele
 /* eslint-enable no-restricted-imports */
 import { Table } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Table />', async () => {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   const render = (props) =>
@@ -59,7 +58,6 @@ describe('<Table />', async () => {
       </Table>
     )
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a caption', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
@@ -68,7 +66,6 @@ describe('<Table />', async () => {
     expect(await table.find('caption:contains(Test table)')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
@@ -76,7 +73,6 @@ describe('<Table />', async () => {
     expect(await table.accessible()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('applies a fixed column layout', async () => {
     await render({
       layout: 'fixed'
@@ -87,7 +83,6 @@ describe('<Table />', async () => {
     expect(tableNode.getComputedStyle().tableLayout).to.equal('fixed')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes hover to table row', async () => {
     await render({
       hover: true
@@ -99,7 +94,6 @@ describe('<Table />', async () => {
     expect(trNode.getComputedStyle().borderRightStyle).to.not.equal('none')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('sets the scope of column header to col', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
@@ -109,7 +103,6 @@ describe('<Table />', async () => {
     expect(thNode.getAttribute('scope')).to.equal('col')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('sets the scope of row header to row', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     await render()
@@ -119,7 +112,6 @@ describe('<Table />', async () => {
     expect(thNode.getAttribute('scope')).to.equal('row')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('can render table in stacked layout', async () => {
     const stackedTable = await render({
       layout: 'stacked'
@@ -128,7 +120,6 @@ describe('<Table />', async () => {
     expect(stackedTable).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('can ignore invalid children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -154,7 +145,6 @@ describe('<Table />', async () => {
     expect(tr).to.have.length(2)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('can handle non-existent head in stacked layout', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const stackedTable = await mount(
@@ -166,7 +156,6 @@ describe('<Table />', async () => {
     expect(stackedTable).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('can handle empty head in stacked layout', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const stackedTable = await mount(
@@ -178,7 +167,6 @@ describe('<Table />', async () => {
     expect(stackedTable).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('can handle invalid header in stacked layout', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const stackedTable = await mount(
@@ -194,7 +182,6 @@ describe('<Table />', async () => {
     expect(stackedTable).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when table is sortable', async () => {
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
     const renderSortableTable = (props, handlers = {}, layout = 'auto') =>
@@ -219,7 +206,6 @@ describe('<Table />', async () => {
         </Table>
       )
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('can render up arrow for ascending order', async () => {
       await renderSortableTable({
         sortDirection: 'ascending'
@@ -229,7 +215,6 @@ describe('<Table />', async () => {
       expect(arrow).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('can render down arrow for descending order', async () => {
       await renderSortableTable({
         sortDirection: 'descending'
@@ -239,7 +224,6 @@ describe('<Table />', async () => {
       expect(arrow).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('calls onRequestSort when column header is clicked', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestSort = stub()
@@ -256,7 +240,6 @@ describe('<Table />', async () => {
       expect(onRequestSort).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('can render table head as a combobox when in stacked layout', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const sortFoo = stub()
@@ -280,7 +263,6 @@ describe('<Table />', async () => {
       expect(sortFoo).to.have.been.calledOnce()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('can render check mark for sorted column in stacked layout', async () => {
       await renderSortableTable(
         {
@@ -297,7 +279,6 @@ describe('<Table />', async () => {
       expect(icon).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('creates proper aria-sort attributes (ascending)', async () => {
       await renderSortableTable({
         sortDirection: 'ascending'
@@ -307,7 +288,6 @@ describe('<Table />', async () => {
       expect(sortedHeader).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('creates proper aria-sort attributes (descending)', async () => {
       await renderSortableTable({
         sortDirection: 'descending'

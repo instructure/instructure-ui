@@ -26,7 +26,6 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { getOffsetParents } from '../getOffsetParents'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('getOffsetParents', async () => {
   const node = (
     <div>
@@ -50,7 +49,6 @@ describe('getOffsetParents', async () => {
     </div>
   )
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should find offset parent for inline elements', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
@@ -61,7 +59,6 @@ describe('getOffsetParents', async () => {
     expect(getOffsetParents(child)[0]).to.be.equal(parent)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should ignore static parents when absolute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
@@ -71,7 +68,6 @@ describe('getOffsetParents', async () => {
     expect(getOffsetParents(child).length).to.be.equal(3)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle fixed', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)

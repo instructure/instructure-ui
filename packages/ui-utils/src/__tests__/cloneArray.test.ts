@@ -27,9 +27,7 @@ import { expect } from '@instructure/ui-test-utils'
 import { cloneArray } from '../cloneArray'
 import { deepEqual } from '../deepEqual'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('cloneArray', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return an array', () => {
     // @ts-expect-error ts-migrate(7015) FIXME: Element implicitly has an 'any' type because index... Remove this comment to see the full error message
     const arr = [['one', 'two']['three']]
@@ -39,7 +37,6 @@ describe('cloneArray', () => {
     expect(Array.isArray(newArr)).to.equal(true)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should preserve sub arrays', () => {
     const arr = [['one', 'two'], ['three'], [4, 5, 6], [7, [8, 9, 10], 11, 12]]
 
@@ -52,7 +49,6 @@ describe('cloneArray', () => {
     expect(newArr[3][1][2]).to.equal(10)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should return a new array', () => {
     const arr = [['one', 'two'], ['three']]
     const newArr = cloneArray(arr)

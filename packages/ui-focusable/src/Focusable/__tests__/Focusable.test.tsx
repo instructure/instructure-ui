@@ -35,12 +35,10 @@ import {
 
 import { Focusable } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Focusable />', async () => {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'spy' implicitly has an 'any' type.
   const lastCall = (spy) => spy.lastCall.args[0]
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -50,7 +48,6 @@ describe('<Focusable />', async () => {
     expect(subject.getDOMNode()).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call children function with focused when element receives focus', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
@@ -95,7 +92,6 @@ describe('<Focusable />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should populate the focusVisible argument', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
@@ -122,7 +118,6 @@ describe('<Focusable />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle conditionally rendered focus elements', async () => {
     const props = {
       /* eslint-disable react/display-name */
@@ -185,7 +180,6 @@ describe('<Focusable />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should maintain focus when the focus element changes', async () => {
     const props = {
       /* eslint-disable react/display-name */
@@ -230,7 +224,6 @@ describe('<Focusable />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should update the focus element correctly', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
@@ -282,7 +275,6 @@ describe('<Focusable />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn when there is more than one focusable descendant', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleWarn = stub(console, 'warn')
@@ -307,7 +299,6 @@ describe('<Focusable />', async () => {
     expect(consoleWarn).to.be.calledWith(warning)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn when there are no focusable descendants', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleWarn = stub(console, 'warn')
@@ -325,7 +316,6 @@ describe('<Focusable />', async () => {
     expect(consoleWarn).to.be.calledWith(warning)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should attach event listener correctly even when the focusable element is not the root', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
@@ -359,7 +349,6 @@ describe('<Focusable />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a focus method', async () => {
     let focusable
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -382,7 +371,6 @@ describe('<Focusable />', async () => {
     expect(button.getDOMNode()).to.equal(document.activeElement)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a focused getter', async () => {
     let focusable
 
@@ -405,7 +393,6 @@ describe('<Focusable />', async () => {
     expect(focusable.focused).to.equal(true)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should properly restore the event handlers', async () => {
     // @ts-expect-error ts-migrate(7034) FIXME: Variable 'inputRef' implicitly has type 'any' in s... Remove this comment to see the full error message
     let inputRef
@@ -454,7 +441,6 @@ describe('<Focusable />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should properly clear the focusable / focused state when focus is unexpectedly lost', async () => {
     // @ts-expect-error ts-migrate(7034) FIXME: Variable 'focusableRef' implicitly has type 'any' ... Remove this comment to see the full error message
     let buttonRef, focusableRef, labelRef
