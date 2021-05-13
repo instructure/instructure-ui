@@ -21,8 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackageJSON } = require('@instructure/pkg-utils')
-const { error, info } = require('@instructure/command-utils')
+const { getPackageJSON, getPackages } = require('@instructure/pkg-utils')
+const {
+  error,
+  info,
+  runCommandSync,
+  runCommandAsync
+} = require('@instructure/command-utils')
 
 const { publishPackages, createNPMRCFile } = require('./utils/npm')
 const { isReleaseCommit, setupGit } = require('./utils/git')
@@ -70,12 +75,45 @@ async function publish(options) {
 
   info(infoMessage)
 
-  const versionToRelease = isRelease ? currentVersion : 'prerelease'
-  const tag = isRelease ? releaseTag : 'snapshot'
-  try {
-    await publishPackages(packageName, versionToRelease, tag)
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
+  info(`📦  Version: ${releaseVersion}, Tag: ${npmTag}`)
+
+  return Promise.all(
+    getPackages().map(async (pkg) => {
+      if (pkg.private) {
+        info(`${pkg.name} is private.`)
+      } else {
+        let packageInfo = { versions: [] }
+
+        try {
+          const { stdout } = runCommandSync(
+            'npm',
+            ['info', pkg.name, '--json'],
+            [],
+            { stdio: 'pipe' }
+          )
+          packageInfo = JSON.parse(stdout)
+        } catch (e) {
+          error(e)
+        }
+
+        if (packageInfo.versions.includes(currentVersion)) {
+          info(`📦  v${currentVersion} of ${pkg.name} is already published!`)
+        } else {
+          try {
+            await runCommandAsync('npm', [
+              'publish',
+              pkg.location,
+              '--tag',
+              npmTag
+            ])
+            info(
+              `📦  Version ${releaseVersion} of ${packageName} was successfully published!`
+            )
+          } catch (err) {
+            error(err)
+          }
+        }
+      }
+    })
+  )
 }
