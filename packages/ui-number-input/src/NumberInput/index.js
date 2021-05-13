@@ -146,6 +146,11 @@ class NumberInput extends Component {
      */
     onKeyDown: PropTypes.func,
     /**
+     * The inputMode attribute of the underlying `input` element,
+     * can be one of ['numeric', 'decimal', 'tel']
+     */
+    inputMode: PropTypes.oneOf(['numeric', 'decimal', 'tel']),
+    /**
      * __Deprecated - use `renderLabel` instead__
      */
     label: PropTypes.node,
@@ -181,6 +186,7 @@ class NumberInput extends Component {
     label: undefined,
     disabled: undefined,
     readOnly: undefined,
+    inputMode: 'numeric',
     required: undefined,
     inline: undefined
   }
@@ -331,7 +337,7 @@ class NumberInput extends Component {
               aria-invalid={this.invalid ? 'true' : null}
               id={this.id}
               type="text"
-              inputMode="numeric"
+              inputMode={this.props.inputMode}
               placeholder={placeholder}
               ref={this.handleRef}
               required={isRequired || required}
