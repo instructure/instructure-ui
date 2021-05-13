@@ -39,8 +39,7 @@
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.4.0",
-    "@instructure/ui-test-utils": "8.4.0",
-    "@types/mocha": "^8.2.2"
+    "@instructure/ui-test-utils": "8.4.0"
   },
   "peerDependencies": {
     "react": "^16.8"
