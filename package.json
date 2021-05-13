@@ -44,7 +44,7 @@
     "commit": "ui-scripts --commit",
     "install:react": "ui-scripts --install-react",
     "install:packages": "lerna bootstrap --reject-cycles",
-    "bootstrap": "npm-run-all clean:modules install:packages build:node-scripts clean build build:tokens build:types",
+    "bootstrap": "npm-run-all clean:modules install:packages clean build build:tokens build:types",
     "bootstrap:docs": "npm-run-all clean:modules install:packages clean build",
     "build": "lerna run build --stream",
     "build:watch": "lerna run build:watch --stream",
@@ -67,7 +67,8 @@
     "husky:pre-push": "yarn lint:commit",
     "build-storybook": "lerna run build-storybook --stream --scope docs-examples",
     "prepare": "husky install",
-    "ts:check": "lerna run ts:check --stream"
+    "ts:check": "lerna run ts:check --stream",
+    "postinstall": "yarn build:node-scripts"
   },
   "license": "MIT",
   "resolutions": {
@@ -75,7 +76,6 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "@instructure/ui-scripts": "^8.4.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "husky": "^6.0.0",
