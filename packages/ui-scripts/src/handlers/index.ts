@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,14 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import handleCreateComponent from './handleCreateComponent'
+import handleCreateFromTemplate from './handleCreateFromTemplate'
+import handleCreatePackage from './handleCreatePackage'
+import handleOpenSandbox from './handleOpenSandbox'
 
-module.exports = handlers
+export {
+  handleCreateComponent,
+  handleCreateFromTemplate,
+  handleCreatePackage,
+  handleOpenSandbox
+}

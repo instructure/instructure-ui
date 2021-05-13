@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,11 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import { getPackageJSON } from '@instructure/pkg-utils'
 
-module.exports = handlers
+export function getConfig(pkgJSON: any) {
+  pkgJSON = pkgJSON || getPackageJSON(undefined) // eslint-disable-line no-param-reassign
+  return pkgJSON.config && pkgJSON.config['ui-scripts']
+    ? pkgJSON.config['ui-scripts']
+    : {}
+}

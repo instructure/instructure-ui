@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -23,10 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+//@ts-expect-error FIXME:
+// eslint-disable-next-line no-restricted-imports
+import verifyPackageJson from '@instructure/ui-upgrade-scripts/lib/utils/verify-package-json'
+import { warn } from '@instructure/command-utils'
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
-
-module.exports = handlers
+export default function (args = {}) {
+  warn(
+    "`verify-package-json` has been moved from '@instructure/ui-scripts/lib/utils/verify-package-json' to '@instructure/ui-upgrade-scripts/lib/utils/verify-package-json'."
+  )
+  verifyPackageJson(args)
+}

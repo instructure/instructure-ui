@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,10 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+//@ts-expect-error FIXME:
+// eslint-disable-next-line no-restricted-imports
+import generatePackageList from '@instructure/ui-upgrade-scripts/lib/utils/generate-package-list'
 
-module.exports = handlers
+const outputDir = process.argv[3] || process.cwd()
+
+generatePackageList({ outputDir })

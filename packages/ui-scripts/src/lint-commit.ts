@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,24 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import { error } from '@instructure/command-utils'
 
-module.exports = handlers
+import { lintCommitMessage } from './utils/git'
+
+try {
+  lintCommit()
+} catch (err) {
+  error(err)
+  process.exit(1)
+}
+
+async function lintCommit() {
+  const isValid = lintCommitMessage()
+
+  if (isValid) {
+    process.exit(0)
+  } else {
+    error('(See https://www.npmjs.com/package/conventional-changelog-angular)')
+    process.exit(1)
+  }
+}

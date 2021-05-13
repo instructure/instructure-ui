@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,44 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import { handleOpenSandbox } from '../handlers'
 
-module.exports = handlers
+export default {
+  command: 'open-sandbox',
+  desc: 'Open a GitHub project in codesandbox.',
+  builder: (yargs: any) => {
+    yargs.option('branch', {
+      alias: 'b',
+      type: 'string',
+      describe: 'The branch within the GitHub repository.',
+      default: 'master'
+    })
+
+    yargs.option('remote', {
+      alias: 'r',
+      type: 'string',
+      describe:
+        'The specified remote that will be used to find the GitHub repository.',
+      default: 'origin'
+    })
+
+    yargs.option('path', {
+      alias: 'p',
+      type: 'string',
+      describe:
+        'A relative path from the root of the GitHub repository to the project that will be opened.',
+      default: ''
+    })
+
+    yargs.option('scope', {
+      type: 'string',
+      describe:
+        'The name of the child app. When this argument is present, it is assumed you are using a monorepo managed by lerna and the child app is opened in codesandbox.'
+    })
+  },
+  handler: (argv: any) => {
+    const { branch, remote, path, scope } = argv
+
+    handleOpenSandbox({ branch, remote, path, scope })
+  }
+}

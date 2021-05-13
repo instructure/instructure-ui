@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -23,10 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+export const lint = () => {
+  const paths = process.argv.slice(2).filter((arg) => !arg.includes('--')) || []
+  let jspaths = ['.']
+  let csspaths = ['**/*.css']
 
-module.exports = handlers
+  if (paths.length) {
+    jspaths = paths.filter((path) => path.includes('.js'))
+    csspaths = paths.filter((path) => path.includes('.css'))
+  }
+
+  const commands: Partial<
+    Record<'eslint' | 'stylelint', ReturnType<typeof getCommand>>
+  > = {}
+
+  if (jspaths.length) {
+    commands['eslint'] = getCommand('eslint', [
+      ...jspaths,
+      '--ext .js,.jsx,.ts,.tsx'
+    ])
+  }
+
+  if (csspaths.length) {
+    commands['stylelint'] = getCommand('stylelint', [
+      ...csspaths,
+      '--allow-empty-input'
+    ])
+  }
+
+  process.exit(runCommandsConcurrently(commands).status)
+}

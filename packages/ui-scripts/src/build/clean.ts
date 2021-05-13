@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,21 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
-module.exports = handlers
+export const clean = () => {
+  process.exit(
+    runCommandsConcurrently({
+      clean: getCommand('rimraf', [
+        '__build__',
+        'es',
+        'dist',
+        'lib',
+        'tokens',
+        '.babel-cache',
+        '.cache',
+        'types'
+      ])
+    }).status
+  )
+}

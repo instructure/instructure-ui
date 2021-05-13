@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -23,10 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { getPackageJSON } from '@instructure/pkg-utils'
+import { error, info } from '@instructure/command-utils'
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import { commitVersionBump, checkWorkingDirectory } from './utils/git'
+import { bumpPackages } from './utils/npm'
 
-module.exports = handlers
+try {
+  const pkgJSON = getPackageJSON(undefined)
+  // optional release type/version argument: major, minor, patch, [version]
+  // e.g. ui-scripts --bump major
+  bump(pkgJSON.name, process.argv[3])
+} catch (err) {
+  error(err)
+  process.exit(1)
+}
+
+async function bump(packageName: any, requestedVersion: any) {
+  checkWorkingDirectory()
+
+  let releaseVersion
+
+  try {
+    releaseVersion = await bumpPackages(packageName, requestedVersion)
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  info(
+    `💾  Committing version bump commit for ${packageName} ${releaseVersion}...`
+  )
+
+  try {
+    commitVersionBump(releaseVersion)
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  info(`💾  Version bump for ${packageName} to ${releaseVersion} complete!`)
+}

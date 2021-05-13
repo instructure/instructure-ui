@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,14 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+//@ts-expect-error FIXME:
+// eslint-disable-next-line no-restricted-imports
+import checkDependencies from '@instructure/ui-upgrade-scripts/lib/utils/check-dependencies'
+import { warn } from '@instructure/command-utils'
 
-module.exports = handlers
+export default (args = {}) => {
+  warn(
+    "`check-dependencies` has been moved from '@instructure/ui-scripts/lib/utils/check-dependencies' to '@instructure/ui-upgrade-scripts/lib/utils/check-dependencies'."
+  )
+  return checkDependencies(args)
+}

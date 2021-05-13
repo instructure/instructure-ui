@@ -116,7 +116,7 @@ function runCommandSync(
   bin: any,
   args: any[] = [],
   vars: any[] = [],
-  opts = {}
+  opts: any = {}
 ) {
   const command = getCommand(bin, args, vars)
   const result = execa.sync(command.toString(), command.args, {
@@ -127,7 +127,12 @@ function runCommandSync(
   return { ...result, status: result.exitCode }
 }
 
-async function runCommandAsync(bin: any, args = [], vars = [], opts = {}) {
+async function runCommandAsync(
+  bin: any,
+  args: any[] = [],
+  vars: any[] = [],
+  opts: any = {}
+) {
   const command = getCommand(bin, args, vars)
   const result = await execa(command.toString(), command.args, {
     stdio: 'inherit',
@@ -163,7 +168,7 @@ function resolveBin(
     throw error
   }
 }
-async function confirm(question: string) {
+async function confirm(question: string): Promise<string> {
   return new Promise((resolve, reject) => {
     try {
       const dialog = rl.createInterface({

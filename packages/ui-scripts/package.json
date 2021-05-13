@@ -12,13 +12,15 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "bin": {
-    "ui-scripts": "./lib/index.js",
-    "ui-test": "./lib/test/index.js",
-    "ui-build": "./lib/build/index.js"
+    "ui-scripts": "./dist/index.js",
+    "ui-test": "./dist/test/index.js",
+    "ui-build": "./dist/build/index.js"
   },
   "scripts": {
     "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix"
+    "lint:fix": "ui-test --lint --fix",
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "tsc -w -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -64,5 +66,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@types/git-url-parse": "^9.0.0",
+    "@types/semver": "^7.3.5"
   }
 }
