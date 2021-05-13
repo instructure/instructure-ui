@@ -55,6 +55,9 @@
     "webpack-dev-server": "^3.8.1",
     "yargs": "^16"
   },
+  "devDependencies": {
+    "@types/mocha": "^8.2.2"
+  },
   "optionalDependencies": {
     "@storybook/react": "^6"
   },
