@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-//@ts-expect-error FIXME:
 import { handleCreateComponent } from '@instructure/ui-template-scripts'
 import { warn } from '@instructure/command-utils'
 
-export default async (args = {}) => {
+export default async (args: any = {}) => {
   warn(
     "`handleCreateComponent` has been moved from '@instructure/ui-scripts/lib/handlers/handleCreateComponent' to '@instructure/ui-template-scripts/lib/handlers/handleCreateComponent'."
   )
