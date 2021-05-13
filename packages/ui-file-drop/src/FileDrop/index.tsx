@@ -92,6 +92,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class FileDrop extends Component<Props, State> {
+  static componentId = 'FileDrop'
+
   static propTypes = {
     /**
      * The id of the input (to link it to its label for a11y)

@@ -59,6 +59,8 @@ category: components
 **/
 @testable()
 class RadioInputGroup extends Component<Props> {
+  static componentId = 'RadioInputGroup'
+
   static propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.node.isRequired,

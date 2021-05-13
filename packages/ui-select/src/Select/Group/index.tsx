@@ -41,6 +41,8 @@ id: Select.Group
 @module Group
 **/
 class Group extends Component<Props> {
+  static componentId = 'Select.Group'
+
   static propTypes = {
     /**
      * The label associated with the group options.

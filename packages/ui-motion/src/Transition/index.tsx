@@ -72,6 +72,8 @@ category: components/utilities
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Transition extends Component<Props> {
+  static componentId = 'Transition'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

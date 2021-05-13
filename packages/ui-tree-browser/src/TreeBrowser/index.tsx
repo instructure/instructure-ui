@@ -74,6 +74,8 @@ category: components
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeBrowser extends Component<Props> {
+  static componentId = 'TreeBrowser'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

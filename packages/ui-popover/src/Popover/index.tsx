@@ -106,6 +106,8 @@ tags: overlay, portal, dialog
 @bidirectional()
 @testable()
 class Popover extends Component<Props> {
+  static componentId = 'Popover'
+
   static propTypes = {
     /**
      * Whether or not the `<Popover />` content is shown

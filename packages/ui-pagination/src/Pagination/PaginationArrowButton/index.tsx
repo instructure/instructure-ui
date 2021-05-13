@@ -48,6 +48,8 @@ id: Pagination.Navigation
 **/
 @testable()
 class PaginationArrowButton extends Component<Props> {
+  static componentId = 'Pagination.Navigation'
+
   static propTypes = {
     direction: PropTypes.oneOf(['next', 'prev']),
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,

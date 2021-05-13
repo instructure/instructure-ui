@@ -67,6 +67,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class RangeInput extends Component<Props> {
+  static componentId = 'RangeInput'
+
   static propTypes = {
     min: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired,

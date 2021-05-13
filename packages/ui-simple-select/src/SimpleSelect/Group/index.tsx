@@ -39,6 +39,8 @@ id: SimpleSelect.Group
 ---
 **/
 class Group extends Component<Props> {
+  static componentId = 'SimpleSelect.Group'
+
   static propTypes = {
     /**
      * The label associated with the group options.

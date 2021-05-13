@@ -118,6 +118,8 @@ category: components
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
 class View extends Component<Props> {
+  static componentId = 'View'
+
   static propTypes = {
     /**
      * The element to render as the component root, `span` by default

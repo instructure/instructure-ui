@@ -67,6 +67,8 @@ id: Menu.Item
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItem extends Component<Props> {
+  static componentId = 'Menu.Item'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

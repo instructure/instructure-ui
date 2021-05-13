@@ -48,6 +48,8 @@ id: Menu.Separator
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class MenuItemSeparator extends Component<Props> {
+  static componentId = 'Menu.Separator'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

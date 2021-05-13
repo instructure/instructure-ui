@@ -66,6 +66,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Navigation extends Component<Props> {
+  static componentId = 'Navigation'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

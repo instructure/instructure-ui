@@ -60,6 +60,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ProgressBar extends Component<Props> {
+  static componentId = 'ProgressBar'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

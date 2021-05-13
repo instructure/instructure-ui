@@ -66,6 +66,8 @@ category: components
 @withStyle(null, generateComponentTheme)
 @testable()
 class IconButton extends Component<Props> {
+  static componentId = 'IconButton'
+
   static propTypes = {
     /**
      * An icon, or function returning an icon (identical to the `renderIcon` prop).

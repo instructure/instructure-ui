@@ -40,6 +40,8 @@ id: SimpleSelect.Option
 ---
 **/
 class Option extends Component<Props> {
+  static componentId = 'SimpleSelect.Option'
+
   static propTypes = {
     /**
      * The id for the option.

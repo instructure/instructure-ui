@@ -49,6 +49,8 @@ category: components
 ---
 **/
 class FormField extends Component<Props> {
+  static componentId = 'FormField'
+
   static propTypes = {
     label: PropTypes.node.isRequired,
     /**

@@ -67,6 +67,8 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 class ContextView extends Component<Props> {
+  static componentId = 'ContextView'
+
   static propTypes = {
     /**
      * The element to render as the component root

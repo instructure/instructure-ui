@@ -77,6 +77,8 @@ tags: form, field
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class TextInput extends Component<Props> {
+  static componentId = 'TextInput'
+
   static propTypes = {
     /**
      * The form field label.

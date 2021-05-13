@@ -66,6 +66,8 @@ id: AppNav.Item
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Item extends Component<Props> {
+  static componentId = 'AppNav.Item'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

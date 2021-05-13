@@ -84,6 +84,8 @@ category: components/utilities
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class BaseButton extends Component<Props> {
+  static componentId = 'BaseButton'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

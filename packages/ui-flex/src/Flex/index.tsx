@@ -67,6 +67,8 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Flex extends Component<Props> {
+  static componentId = 'Flex'
+
   constructor(props: Props) {
     super(props)
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message

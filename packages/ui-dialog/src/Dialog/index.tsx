@@ -58,6 +58,8 @@ category: components/utilities
 **/
 
 class Dialog extends Component<Props> {
+  static componentId = 'Dialog'
+
   static propTypes = {
     /**
      * The children to be rendered within the `<Dialog />`

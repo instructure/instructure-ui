@@ -79,6 +79,8 @@ category: components
 @bidirectional()
 @testable()
 class Tabs extends Component<Props> {
+  static componentId = 'Tabs'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

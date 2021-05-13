@@ -63,6 +63,8 @@ category: components
 @testable()
 @hack(['shouldTruncateWhenInvisible'])
 class TruncateText extends Component<Props> {
+  static componentId = 'TruncateText'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

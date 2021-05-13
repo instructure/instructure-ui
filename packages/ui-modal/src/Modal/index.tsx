@@ -90,6 +90,8 @@ tags: overlay, portal, dialog
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Modal extends Component<Props> {
+  static componentId = 'Modal'
+
   static propTypes = {
     /**
      * An accessible label for the `<Modal />` content

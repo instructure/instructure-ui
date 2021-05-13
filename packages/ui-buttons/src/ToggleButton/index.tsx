@@ -57,6 +57,8 @@ category: components
 
 @testable()
 class ToggleButton extends Component<Props> {
+  static componentId = 'ToggleButton'
+
   static propTypes = {
     /**
      * Text to output only to screen readers

@@ -75,6 +75,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class TextArea extends Component<Props> {
+  static componentId = 'TextArea'
+
   static propTypes = {
     label: PropTypes.node.isRequired,
     id: PropTypes.string,

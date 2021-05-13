@@ -83,6 +83,8 @@ category: components
 
 @testable()
 class TimeSelect extends Component<Props> {
+  static componentId = 'TimeSelect'
+
   static propTypes = {
     /**
      * The form field label.

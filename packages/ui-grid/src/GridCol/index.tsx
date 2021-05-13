@@ -75,6 +75,8 @@ id: Grid.Col
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class GridCol extends Component<Props> {
+  static componentId = 'Grid.Col'
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

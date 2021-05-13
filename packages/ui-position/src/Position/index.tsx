@@ -77,6 +77,8 @@ category: components/utilities
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Position extends Component<Props> {
+  static componentId = 'Position'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

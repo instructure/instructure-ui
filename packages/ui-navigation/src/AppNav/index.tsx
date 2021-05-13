@@ -64,6 +64,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class AppNav extends Component<Props> {
+  static componentId = 'AppNav'
+
   static propTypes = {
     /**
      * Screenreader label for the overall navigation

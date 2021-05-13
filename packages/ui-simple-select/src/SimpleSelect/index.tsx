@@ -79,6 +79,8 @@ tags: form, field, dropdown
 **/
 @testable()
 class SimpleSelect extends Component<Props> {
+  static componentId = 'SimpleSelect'
+
   static Option = Option
   static Group = Group
   static propTypes = {

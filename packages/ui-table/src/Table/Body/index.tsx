@@ -55,6 +55,8 @@ id: Table.Body
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Body extends Component<Props> {
+  static componentId = 'Table.Body'
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
