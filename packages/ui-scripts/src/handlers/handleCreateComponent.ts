@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+//@ts-expect-error FIXME:
 import { handleCreateComponent } from '@instructure/ui-template-scripts'
 import { warn } from '@instructure/command-utils'
 

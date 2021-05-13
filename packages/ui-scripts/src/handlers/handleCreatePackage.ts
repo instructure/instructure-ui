@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+//@ts-expect-error FIXME:
 import { handleCreatePackage } from '@instructure/ui-template-scripts'
 import { warn } from '@instructure/command-utils'
 
@@ -29,6 +29,5 @@ export default async (args = {}) => {
   warn(
     "`handleCreatePackage` has been moved from '@instructure/ui-scripts/lib/handlers/handleCreatePackage' to '@instructure/ui-template-scripts/lib/handlers/handleCreatePackage'."
   )
-  //@ts-expect-error FIXME:
   handleCreatePackage(args)
 }

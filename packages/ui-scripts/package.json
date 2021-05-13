@@ -12,9 +12,9 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "bin": {
-    "ui-scripts": "./dist/index.js",
-    "ui-test": "./dist/test/index.js",
-    "ui-build": "./dist/build/index.js"
+    "ui-scripts": "./lib/index.js",
+    "ui-test": "./lib/test/index.js",
+    "ui-build": "./lib/build/index.js"
   },
   "scripts": {
     "lint": "ui-test --lint",

@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
-    "build:types": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
