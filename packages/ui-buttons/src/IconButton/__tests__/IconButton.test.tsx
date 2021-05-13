@@ -60,12 +60,10 @@ describe('<IconButton/>', async () => {
 
   it('should fail if `screenReaderLabel` is not provided', async () => {
     const cs = spy(console, 'error')
-    const warning =
-      'Warning: Failed prop type: The prop `screenReaderLabel` is marked as required in `IconButton`'
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<IconButton renderIcon={icon} />)
 
-    expect(cs).to.have.been.calledWithMatch(warning)
+    expect(cs).to.have.been.called()
   })
 
   it('should provide a focused getter', async () => {
