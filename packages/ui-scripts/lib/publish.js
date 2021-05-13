@@ -64,14 +64,14 @@ async function publish({ packageName, version, isMaintenance, config = {} }) {
 
   checkWorkingDirectory()
 
-  // lerna ususally fails in releasing, but releasing snapshots is too complicated
+  // lerna usually fails in releasing, but releasing snapshots is too complicated
   // without it. Npm-cli figures out versions from the package.json so if we'd like to
   // release a snapshot version, like: 8.3.5-snapshot.19, we'd need to set this exact version
   // to package.json and set it back to the current released version after the release.
   // We use lerna for snapshot and native npm-cli commands for releases
 
   if (isRelease) {
-    //If on legacy branch, and it is a release, its tag should say vx_maintenance
+    // If on legacy branch, and it is a release, its tag should say vx_maintenance
     const tag = isMaintenance
       ? `v${version.split('.')[0]}_maintenance`
       : 'latest'

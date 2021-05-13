@@ -31,8 +31,6 @@ readEnv()
 
 const commands = [
   '--publish',
-  '--release',
-  '--fix-publish',
   '--post-publish',
   '--bump',
   '--deploy-docs',
