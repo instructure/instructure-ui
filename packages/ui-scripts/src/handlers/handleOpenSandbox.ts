@@ -109,7 +109,7 @@ const openSandbox = ({
     info(
       `Opening sandbox at the following url:\n${url}\n\nIf you get an error accessing the url or don't see your changes:\n  *  Ensure that your GitHub repo exists and is set to public\n  *  Ensure you have pushed any local changes`
     )
-    open(url, { app: ['google chrome'] })
+    open(url, { app: { name: 'google chrome' } })
   } catch {
     error(
       `Could not retrieve the information necessary to open in Codesandbox from the following git repository url: ${repository}.`
