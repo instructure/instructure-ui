@@ -42,6 +42,8 @@ id: Select.Option
 @module Option
 **/
 class Option extends Component<Props> {
+  static componentId = 'Select.Option'
+
   static propTypes = {
     /**
      * The id for the option.

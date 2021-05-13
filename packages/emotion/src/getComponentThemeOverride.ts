@@ -40,7 +40,9 @@ export const getComponentThemeOverride = (
   props: any
 ) => {
   const componentOverride =
-    theme?.componentOverrides && theme.componentOverrides[componentName]
+    theme?.componentOverrides &&
+    (theme.componentOverrides[componentName[0]] ||
+      theme.componentOverrides[componentName[1]])
 
   return { ...componentOverride, ...(props?.themeOverride ?? {}) }
 }

@@ -53,6 +53,8 @@ id: DrawerLayout.Content
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class DrawerContent extends Component<Props> {
+  static componentId = 'DrawerLayout.Content'
+
   static locatorAttribute = 'data-drawer-content'
   static propTypes = {
     label: PropTypes.string.isRequired,

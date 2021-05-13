@@ -53,6 +53,8 @@ id: Modal.Body
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ModalBody extends Component<Props> {
+  static componentId = 'Modal.Body'
+
   static propTypes = {
     children: PropTypes.node,
     padding: ThemeablePropTypes.spacing,

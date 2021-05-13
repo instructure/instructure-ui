@@ -59,6 +59,8 @@ category: components
 @withStyle(null, generateComponentTheme)
 @testable()
 class CondensedButton extends Component<Props> {
+  static componentId = 'CondensedButton'
+
   static propTypes = {
     /**
      * Specifies the `CondensedButton` children.

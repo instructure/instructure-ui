@@ -51,6 +51,8 @@ parent: Checkbox
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ToggleFacade extends Component<Props> {
+  static componentId = 'ToggleFacade'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

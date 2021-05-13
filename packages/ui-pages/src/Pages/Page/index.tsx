@@ -44,6 +44,8 @@ id: Pages.Page
 ---
 **/
 class Page extends Component<Props> {
+  static componentId = 'Pages.Page'
+
   static propTypes = {
     /**
      * The children to be rendered

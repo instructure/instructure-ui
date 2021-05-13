@@ -65,6 +65,8 @@ category: components
 **/
 @testable()
 class ToggleGroup extends Component<Props> {
+  static componentId = 'ToggleGroup'
+
   static propTypes = {
     /**
      * the content to show and hide

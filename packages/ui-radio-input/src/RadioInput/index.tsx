@@ -61,6 +61,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class RadioInput extends Component<Props> {
+  static componentId = 'RadioInput'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

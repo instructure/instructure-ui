@@ -60,6 +60,8 @@ id: Table.Head
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Head extends Component<Props> {
+  static componentId = 'Table.Head'
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**

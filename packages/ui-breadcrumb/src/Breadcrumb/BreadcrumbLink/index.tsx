@@ -47,6 +47,8 @@ id: Breadcrumb.Link
 
 @testable()
 class BreadcrumbLink extends Component<Props> {
+  static componentId = 'Breadcrumb.Link'
+
   static propTypes = {
     /**
      * Content to render as the crumb, generally should be text.

@@ -51,6 +51,8 @@ parent: Checkbox
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class CheckboxFacade extends Component<Props> {
+  static componentId = 'CheckboxFacade'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

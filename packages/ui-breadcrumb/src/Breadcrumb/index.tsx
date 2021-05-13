@@ -59,6 +59,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Breadcrumb extends Component<Props> {
+  static componentId = 'Breadcrumb'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

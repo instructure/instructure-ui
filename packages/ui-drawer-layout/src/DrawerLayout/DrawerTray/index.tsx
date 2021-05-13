@@ -81,6 +81,8 @@ id: DrawerLayout.Tray
 @bidirectional()
 @testable()
 class DrawerTray extends Component<Props> {
+  static componentId = 'DrawerLayout.Tray'
+
   static locatorAttribute = 'data-drawer-tray'
   static propTypes = {
     label: PropTypes.string.isRequired,

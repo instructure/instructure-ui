@@ -63,6 +63,8 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Text extends Component<Props> {
+  static componentId = 'Text'
+
   static propTypes = {
     /**
      * the element type to render as

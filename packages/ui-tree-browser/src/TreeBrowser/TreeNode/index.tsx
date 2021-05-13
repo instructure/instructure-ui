@@ -65,6 +65,8 @@ in the TreeBrowser.
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class TreeNode extends Component<Props> {
+  static componentId = 'TreeBrowser.Node'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

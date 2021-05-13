@@ -80,6 +80,8 @@ category: components
 @bidirectional()
 @testable()
 class Tray extends Component<Props> {
+  static componentId = 'Tray'
+
   static propTypes = {
     label: PropTypes.string.isRequired,
     children: PropTypes.node,

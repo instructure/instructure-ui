@@ -55,6 +55,8 @@ category: components
 @withStyle(generateStyle)
 @testable()
 class Rating extends Component<Props> {
+  static componentId = 'Rating'
+
   static propTypes = {
     /**
      * A label is required for accessibility

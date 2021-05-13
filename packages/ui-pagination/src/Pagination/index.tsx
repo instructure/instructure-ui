@@ -84,6 +84,8 @@ category: components
 @withStyle(generateStyle, null)
 @testable()
 class Pagination extends Component<Props> {
+  static componentId = 'Pagination'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

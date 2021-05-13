@@ -60,6 +60,8 @@ category: components
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Pages extends Component<Props> {
+  static componentId = 'Pages'
+
   static propTypes = {
     children: Children.oneOf([Page]),
 

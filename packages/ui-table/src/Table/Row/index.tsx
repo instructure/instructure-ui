@@ -59,6 +59,8 @@ id: Table.Row
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class Row extends Component<Props> {
+  static componentId = 'Table.Row'
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**

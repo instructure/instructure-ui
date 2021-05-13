@@ -57,6 +57,8 @@ id: Table.ColHeader
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class ColHeader extends Component<Props> {
+  static componentId = 'Table.ColHeader'
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

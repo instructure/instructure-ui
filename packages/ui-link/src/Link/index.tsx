@@ -69,6 +69,8 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Link extends Component<Props> {
+  static componentId = 'Link'
+
   static propTypes = {
     /**
      * The text and/or icon displayed by the link

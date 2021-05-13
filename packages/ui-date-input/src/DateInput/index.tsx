@@ -90,6 +90,8 @@ category: components
 @withStyle(generateStyle, null)
 @testable()
 class DateInput extends Component<Props> {
+  static componentId = 'DateInput'
+
   static Day = Calendar.Day
 
   static propTypes = {

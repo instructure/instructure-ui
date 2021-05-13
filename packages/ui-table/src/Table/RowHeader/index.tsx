@@ -49,6 +49,8 @@ id: Table.RowHeader
 **/
 @withStyle(generateStyle, generateComponentTheme)
 class RowHeader extends Component<Props> {
+  static componentId = 'Table.RowHeader'
+
   /* eslint-disable react/require-default-props */
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

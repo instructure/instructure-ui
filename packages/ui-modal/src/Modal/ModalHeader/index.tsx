@@ -52,6 +52,8 @@ id: Modal.Header
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class ModalHeader extends Component<Props> {
+  static componentId = 'Modal.Header'
+
   static propTypes = {
     children: PropTypes.node,
     variant: PropTypes.oneOf(['default', 'inverse']),

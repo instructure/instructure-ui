@@ -57,6 +57,8 @@ id: Options.Item
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class Item extends Component<Props> {
+  static componentId = 'Options.Item'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
