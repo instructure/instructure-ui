@@ -1,11 +1,8 @@
 {
-  "extends": "../../tsconfig.build.json",
+  "extends": "../../tsconfig.node.json",
   "compilerOptions": {
     "outDir": "./lib",
-    "emitDeclarationOnly": false,
-    "declarationDir": "./types",
-    "module": "CommonJS",
-    "sourceMap": true
+    "declarationDir": "./types"
   },
   "include": ["src/**/*"]
 }

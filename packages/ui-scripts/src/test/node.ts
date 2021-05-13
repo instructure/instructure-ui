@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -23,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { getPackageJSON } from '@instructure/pkg-utils'
+import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+const { main } = getPackageJSON(undefined)
+const commands = {
+  node: getCommand('node', [main || 'lib/index.js'], [])
+}
 
-module.exports = handlers
+process.exit(runCommandsConcurrently(commands).status)

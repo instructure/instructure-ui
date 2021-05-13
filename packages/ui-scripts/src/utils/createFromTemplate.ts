@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,14 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+//@ts-expect-error FIXME:
+// eslint-disable-next-line no-restricted-imports
+import createFromTemplate from '@instructure/ui-template-scripts/lib/utils/createFromTemplate'
+import { warn } from '@instructure/command-utils'
 
-module.exports = handlers
+export default function (args = {}) {
+  warn(
+    "`createFromTemplate` has been moved from '@instructure/ui-scripts/lib/utils/createFromTemplate' to '@instructure/ui-template-scripts/lib/utils/createFromTemplate'."
+  )
+  return createFromTemplate(args)
+}

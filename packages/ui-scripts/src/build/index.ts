@@ -23,10 +23,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { readEnv } from '../utils/readEnv'
+import { babel } from './babel'
+import { examples } from './examples'
+import { webpack } from './webpack'
+import { clean } from './clean'
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+readEnv()
 
-module.exports = handlers
+if (process.argv.includes('--examples')) {
+  examples()
+} else if (process.argv.includes('--bundle')) {
+  webpack()
+} else if (process.argv.includes('--clean')) {
+  clean()
+} else {
+  babel()
+}

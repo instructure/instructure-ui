@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,39 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+//@ts-expect-error FIXME:
+import GerritBot from 'gerritbot'
+import { error } from '@instructure/command-utils'
 
-module.exports = handlers
+const { SSH_USERNAME, GERRIT_HOST, GERRIT_PORT, SSH_KEY_PATH } = process.env
+
+let gerrit: any
+
+function gerritClient() {
+  if (!gerrit) {
+    gerrit = new GerritBot.Client({
+      user: SSH_USERNAME,
+      host: GERRIT_HOST,
+      keyFile: SSH_KEY_PATH,
+      sshPort: parseInt(GERRIT_PORT as string)
+    })
+  }
+  return gerrit
+}
+
+export async function postGerritReview(
+  target: string,
+  message: string,
+  labels = {}
+) {
+  return new Promise<void>((resolve, reject) => {
+    gerritClient().review(target, { message, labels }, (err: any) => {
+      if (err) {
+        error(`An error occured posting a gerrit review for ${target}.`)
+        error(err)
+        reject(err)
+      }
+      resolve()
+    })
+  })
+}

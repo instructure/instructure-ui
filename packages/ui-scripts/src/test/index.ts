@@ -23,10 +23,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { readEnv } from '../utils/readEnv'
+import { karma } from './karma'
+import { lint } from './lint'
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+readEnv()
 
-module.exports = handlers
+if (process.argv.includes('--lint')) {
+  lint()
+} else {
+  karma()
+}

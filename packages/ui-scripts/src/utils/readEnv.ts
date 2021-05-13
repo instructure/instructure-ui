@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,8 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import findUp from 'find-up'
 
-module.exports = handlers
+export function readEnv() {
+  require('dotenv').config({ path: findUp.sync('.env') || process.cwd() })
+}

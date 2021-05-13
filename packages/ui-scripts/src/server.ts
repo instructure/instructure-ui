@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -23,10 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { runCommandsConcurrently, getCommand } from '@instructure/command-utils'
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+// ui-scripts --server -p 8080
+const args = process.argv.slice(2)
+const portIndex = args.findIndex((arg) => arg === '-p')
+let port = '8080'
+if (portIndex > 0) {
+  port = args[portIndex + 1]
+}
 
-module.exports = handlers
+process.exit(
+  runCommandsConcurrently({
+    // http-server __build__ -p 8001
+    server: getCommand('http-server', ['__build__', '-p', port], [])
+  }).status
+)

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,9 +22,13 @@
  * SOFTWARE.
  */
 
-const handlers = require('./handlers')
-/* eslint-disable no-unused-expressions */
-require('yargs').commandDir('./commands').version(false).help().argv
-/* eslint-enable no-unused-expressions */
+import { handleCreatePackage } from '@instructure/ui-template-scripts'
+import { warn } from '@instructure/command-utils'
 
-module.exports = handlers
+export default async (args = {}) => {
+  warn(
+    "`handleCreatePackage` has been moved from '@instructure/ui-scripts/lib/handlers/handleCreatePackage' to '@instructure/ui-template-scripts/lib/handlers/handleCreatePackage'."
+  )
+  //@ts-expect-error FIXME:
+  handleCreatePackage(args)
+}
