@@ -63,9 +63,7 @@ const IconUser = (
   </svg>
 )
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<TreeCollection />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -82,9 +80,7 @@ describe('<TreeCollection />', async () => {
     expect(collection).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('collections', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render icons on children', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -110,7 +106,6 @@ describe('<TreeCollection />', async () => {
       expect(documentIcons.length).to.equal(1)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should support the containerRef prop', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const containerRef = stub()
@@ -131,7 +126,6 @@ describe('<TreeCollection />', async () => {
       expect(containerRef).to.have.been.calledWith(item.getDOMNode())
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should pass an aria-expanded attribute to its list item', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -151,7 +145,6 @@ describe('<TreeCollection />', async () => {
       expect(item.getAttribute('aria-expanded')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should pass an aria-selected attribute to its list item', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -172,7 +165,6 @@ describe('<TreeCollection />', async () => {
       expect(item.getAttribute('aria-selected')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should correctly evaluate `getCollectionProps` for each item', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -210,9 +202,7 @@ describe('<TreeCollection />', async () => {
       expect(await item1.find('svg:title(User icon)')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('onCollectionClick', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should return the correct collection params on click', async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onCollectionClick = stub()
@@ -244,9 +234,7 @@ describe('<TreeCollection />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('items', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not pass an aria-expanded attribute to its button', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -268,7 +256,6 @@ describe('<TreeCollection />', async () => {
       expect(button.getAttribute('aria-expanded')).to.not.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call custom functions passed by onItemClick', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onItemClick = stub()
@@ -298,7 +285,6 @@ describe('<TreeCollection />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should correctly evaluate `getItemProps` for each item', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(

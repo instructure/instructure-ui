@@ -25,9 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import cleanString from '../cleanString'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('cleanSring', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from start and end of string', async () => {
     const string = ' Hello world '
 
@@ -35,7 +33,6 @@ describe('cleanSring', async () => {
     expect(newString).to.equal('Hello world')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from only the end of string', async () => {
     const string = ' Hello world '
 
@@ -43,7 +40,6 @@ describe('cleanSring', async () => {
     expect(newString).to.equal(' Hello world')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces and commas', async () => {
     const string = ' Hello world,'
 
@@ -51,7 +47,6 @@ describe('cleanSring', async () => {
     expect(newString).to.equal('Hello world')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should do a thorough cleaning', async () => {
     const string = 'Hello world. '
 

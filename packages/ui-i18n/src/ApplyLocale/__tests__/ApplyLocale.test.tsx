@@ -42,9 +42,7 @@ class LocalizableComponent extends React.Component {
   }
 }
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<ApplyLocale />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('applies locale context', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -57,7 +55,6 @@ describe('<ApplyLocale />', async () => {
     expect(await component.findWithText('fr')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('applies timezone context', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(

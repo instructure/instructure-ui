@@ -25,11 +25,8 @@
 import { expect } from '@instructure/ui-test-utils'
 import { camelize } from '../camelize'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('convertCase', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('camelize', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('handles hyphenated strings', () => {
       expect(camelize('foo-bar')).to.equal('fooBar')
       expect(camelize('baz-qux-foo')).to.equal('bazQuxFoo')
@@ -38,7 +35,6 @@ describe('convertCase', () => {
       expect(camelize('margin-xxLarge')).to.equal('marginXxLarge')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not modify already camel cased strings', () => {
       expect(camelize('fooBar')).to.equal('fooBar')
       expect(camelize('bazQuxFoo')).to.equal('bazQuxFoo')

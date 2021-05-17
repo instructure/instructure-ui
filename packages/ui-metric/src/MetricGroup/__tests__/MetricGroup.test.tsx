@@ -29,9 +29,7 @@ import { MetricGroup } from '../index'
 import { Metric } from '../../Metric'
 import { MetricGroupLocator } from '../MetricGroupLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<MetricGroup />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -46,7 +44,6 @@ describe('<MetricGroup />', async () => {
     expect(list.getTextContent()).to.equal('Grade80%Late4Missing2')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not allow invalid children', async () => {
     const cs = spy(console, 'error')
     const warning =
@@ -62,7 +59,6 @@ describe('<MetricGroup />', async () => {
     expect(cs).to.have.been.calledWithMatch(warning)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes props through to MetricGroup element', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -79,9 +75,7 @@ describe('<MetricGroup />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('for a11y', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should meet standards', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -96,7 +90,6 @@ describe('<MetricGroup />', async () => {
       expect(await metricGroup.accessible()).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have role=grid with aria-readonly=true', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -114,7 +107,6 @@ describe('<MetricGroup />', async () => {
       expect(grids[0].getAttribute('aria-readonly')).to.equal('true')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have role=row', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -131,7 +123,6 @@ describe('<MetricGroup />', async () => {
       expect(rows.length).to.equal(3)
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have role=gridcell', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(

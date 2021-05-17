@@ -25,9 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { mergeDeep } from '../mergeDeep'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('mergeDeep', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should merge object properties without affecting any object', () => {
     const obj1 = { a: 0, b: 1 }
     const obj2 = { c: 2, d: 3 }
@@ -42,7 +40,6 @@ describe('mergeDeep', () => {
     expect(expected).to.not.deep.equal(obj3)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should do a deep merge', () => {
     const obj1 = { a: { b: 1, c: 1, d: { e: 1, f: 1 } } }
     const obj2 = { a: { b: 2, d: { f: 'f' } } }
@@ -53,7 +50,6 @@ describe('mergeDeep', () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not merge strings', () => {
     const obj1 = { a: 'foo' }
     const obj2 = { a: { b: 2, d: { f: 'f' } } }
@@ -66,7 +62,6 @@ describe('mergeDeep', () => {
     expect(result.a).to.equal('bar')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should clone objects during merge', () => {
     const obj1 = { a: { b: 1 } }
     const obj2 = { a: { c: 2 } }
@@ -81,7 +76,6 @@ describe('mergeDeep', () => {
     expect(result.a).to.not.deep.equal(obj2.a)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not merge an object into an array', () => {
     const obj1 = { a: { b: 1 } }
     const obj2 = { a: ['foo', 'bar'] }
@@ -92,7 +86,6 @@ describe('mergeDeep', () => {
     expect(result).to.deep.equal({ a: ['foo', 'bar'] })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should deep clone arrays during merge', () => {
     const obj1 = { a: [1, 2, [3, 4]] }
     const obj2 = { b: [5, 6] }
@@ -108,7 +101,6 @@ describe('mergeDeep', () => {
     expect(result.b).to.deep.equal(obj2.b)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should union when both values are array', () => {
     const obj1 = { a: [1, 2, [3, 4]] }
     const obj2 = { a: [5, 6] }
@@ -122,7 +114,6 @@ describe('mergeDeep', () => {
     expect(result.a[2]).to.deep.equal([3, 4])
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should union when the first value is an array', () => {
     const obj1 = { a: [1, 2, [3, 4]] }
     const obj2 = { a: 5 }
@@ -137,7 +128,6 @@ describe('mergeDeep', () => {
     expect(result.a[2]).to.deep.equal([3, 4])
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should uniquify array values', () => {
     const obj1 = { a: ['foo'] }
     const obj2 = { a: ['bar'] }
@@ -150,13 +140,11 @@ describe('mergeDeep', () => {
     expect(result.a).to.deep.equal(['foo', 'bar'])
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should copy source properties', () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 0 arguments, but got 1.
     expect(mergeDeep({ test: true }).test).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not clone objects created with custom constructor', () => {
     function TestType() {}
     // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message

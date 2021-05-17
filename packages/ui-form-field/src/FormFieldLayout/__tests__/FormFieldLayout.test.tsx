@@ -26,9 +26,7 @@ import React from 'react'
 import { expect, mount, within, stub } from '@instructure/ui-test-utils'
 import { FormFieldLayout } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<FormFieldLayout />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLayout label="Username" />)
@@ -37,7 +35,6 @@ describe('<FormFieldLayout />', async () => {
     expect(formFieldLayout).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLayout label="Username" />)
@@ -46,7 +43,6 @@ describe('<FormFieldLayout />', async () => {
     expect(await formFieldLayout.accessible()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should align label to right by default', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -60,7 +56,6 @@ describe('<FormFieldLayout />', async () => {
     expect(label.getComputedStyle().textAlign).to.equal('right')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should align label to left', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -74,7 +69,6 @@ describe('<FormFieldLayout />', async () => {
     expect(label.getComputedStyle().textAlign).to.equal('left')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a ref to the input container', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const inputContainerRef = stub()

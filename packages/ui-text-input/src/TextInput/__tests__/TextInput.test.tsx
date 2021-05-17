@@ -27,9 +27,7 @@ import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 
 import { TextInput } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<TextInput/>', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should include a label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TextInput renderLabel="Name" />)
@@ -38,7 +36,6 @@ describe('<TextInput/>', async () => {
     expect(label).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should focus the input when focus is called', async () => {
     let ref
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -54,7 +51,6 @@ describe('<TextInput/>', async () => {
     expect(input.focused()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide an inputRef prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const inputRef = stub()
@@ -68,7 +64,6 @@ describe('<TextInput/>', async () => {
     expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should prepend and append content', async () => {
     const contentBeforeSVG = (
       <svg height="24" width="24">
@@ -106,7 +101,6 @@ describe('<TextInput/>', async () => {
     expect(allContent.length).to.equal(2)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a value getter', async () => {
     let ref
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -123,7 +117,6 @@ describe('<TextInput/>', async () => {
     expect(ref.value).to.equal('bar')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide messageId to FormField', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -143,7 +136,6 @@ describe('<TextInput/>', async () => {
     expect(input.getAttribute('aria-describedby')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have equal messagesId and aria-describedby values', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -166,7 +158,6 @@ describe('<TextInput/>', async () => {
     expect(messages).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle multiple aria-describedby ids', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -188,9 +179,7 @@ describe('<TextInput/>', async () => {
     expect(ids).to.startWith('assistive-id TextInput-messages')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('events', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onChange event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
@@ -205,7 +194,6 @@ describe('<TextInput/>', async () => {
       expect(onChange).to.have.been.called()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onBlur event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
@@ -220,7 +208,6 @@ describe('<TextInput/>', async () => {
       expect(onBlur).to.have.been.called()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('responds to onFocus event', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
@@ -236,9 +223,7 @@ describe('<TextInput/>', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('interaction', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set the disabled attribute when `interaction` is disabled', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -248,7 +233,6 @@ describe('<TextInput/>', async () => {
       expect(await textInput.find('input[disabled]')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set the disabled attribute when `disabled` is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<TextInput renderLabel="Name" disabled />)
@@ -256,7 +240,6 @@ describe('<TextInput/>', async () => {
       expect(await textInput.find('input[disabled]')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set the readonly attribute when `interaction` is readonly', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -266,7 +249,6 @@ describe('<TextInput/>', async () => {
       expect(await textInput.find('input[readonly]')).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set the readonly attribute when `readOnly` is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<TextInput renderLabel="Name" readOnly />)
@@ -275,9 +257,7 @@ describe('<TextInput/>', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('for a11y', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should meet standards', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<TextInput renderLabel="Name" />)
@@ -285,7 +265,6 @@ describe('<TextInput/>', async () => {
       expect(await textInput.accessible()).to.be.true()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should set aria-invalid when errors prop is set', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(

@@ -27,37 +27,31 @@ import { getFontSize } from '@instructure/ui-dom-utils'
 
 import { px } from '../px'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('px', () => {
   // @ts-expect-error ts-migrate(7034) FIXME: Variable 'node' implicitly has type 'any' in some ... Remove this comment to see the full error message
   let node
 
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'beforeEach'.
   beforeEach(() => {
     node = document.createElement('div')
     document.body.appendChild(node)
   })
 
-  // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'afterEach'.
   afterEach(() => {
     // @ts-expect-error ts-migrate(7005) FIXME: Variable 'node' implicitly has an 'any' type.
     node && node.parentNode && node.parentNode.removeChild(node)
     node = null
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('handles px units', () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(px('30px')).to.equal(30)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('converts rem to px', () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(px('50rem')).to.equal(50 * getFontSize())
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('converts em to px', () => {
     // @ts-expect-error ts-migrate(7005) FIXME: Variable 'node' implicitly has an 'any' type.
     node.style.fontSize = '24px'
@@ -65,7 +59,6 @@ describe('px', () => {
     expect(px('10em', node)).to.equal(10 * getFontSize(node))
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('handles unitless input', () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(px('4')).to.equal(4)

@@ -28,7 +28,6 @@ import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
 import { CondensedButton } from '../index'
 import { CondensedButtonLocator } from '../CondensedButtonLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<CondensedButton/>', async () => {
   const icon = (
     <svg
@@ -43,7 +42,6 @@ describe('<CondensedButton/>', async () => {
   )
   const iconSelector = 'svg[title="myIcon"]'
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     const children = 'Hello world'
 
@@ -53,7 +51,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.findWithText(children))
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a focused getter', async () => {
     let componentRef = null
 
@@ -76,7 +73,6 @@ describe('<CondensedButton/>', async () => {
     expect(componentRef.focused).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide a focus function', async () => {
     let componentRef = null
 
@@ -101,7 +97,6 @@ describe('<CondensedButton/>', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the type attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton type="submit">Hello</CondensedButton>)
@@ -109,7 +104,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find('[type="submit"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `elementRef` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
@@ -123,7 +117,6 @@ describe('<CondensedButton/>', async () => {
     expect(elementRef).to.have.been.calledWith(button.getDOMNode())
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `as` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton as="li">Hello</CondensedButton>)
@@ -132,7 +125,6 @@ describe('<CondensedButton/>', async () => {
     expect(await button.find('li')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `interaction` is set to disabled', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton interaction="disabled">Hello</CondensedButton>)
@@ -140,7 +132,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `disabled` is set', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton disabled>Hello</CondensedButton>)
@@ -148,7 +139,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `interaction` is set to readonly', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton interaction="readonly">Hello</CondensedButton>)
@@ -156,7 +146,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `readOnly` is set', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton readOnly>Hello</CondensedButton>)
@@ -164,7 +153,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `href` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton href="#">Hello</CondensedButton>)
@@ -172,7 +160,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find('[href="#"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `renderIcon` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton renderIcon={icon}>Hello</CondensedButton>)
@@ -180,7 +167,6 @@ describe('<CondensedButton/>', async () => {
     expect(await CondensedButtonLocator.find(iconSelector)).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `onClick` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()

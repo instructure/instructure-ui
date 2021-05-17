@@ -43,7 +43,6 @@ const getClass = (type, phase) => {
   return styles.classNames[phase]
 }
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Transition />', async () => {
   const types = [
     'fade',
@@ -56,7 +55,6 @@ describe('<Transition />', async () => {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'type' implicitly has an 'any' type.
   const expectTypeClass = function (type) {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it(`should correctly apply classes for '${type}'`, async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -75,7 +73,6 @@ describe('<Transition />', async () => {
     expectTypeClass(type)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should correctly apply enter and exit classes', async () => {
     const type = 'fade'
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -94,7 +91,6 @@ describe('<Transition />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove component from DOM when `unmountOnExit` is set', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -110,7 +106,6 @@ describe('<Transition />', async () => {
     expect(await find(':contains(hello)', { expectEmpty: true })).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not execute enter transition with `transitionEnter` set to false', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEntering = stub()
@@ -130,7 +125,6 @@ describe('<Transition />', async () => {
     expect(onEntering).to.not.have.been.called()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not execute exit transition with `transitionExit` set to false', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onExiting = stub()
@@ -150,7 +144,6 @@ describe('<Transition />', async () => {
     expect(onExiting).to.not.have.been.called()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should correctly call enter methods', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEnter = stub()
@@ -179,7 +172,6 @@ describe('<Transition />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should correctly call exit methods', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onExit = stub()

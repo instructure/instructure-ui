@@ -36,9 +36,7 @@ class BidirectionalComponent extends React.Component {
   }
 }
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('@bidirectional', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should take on the direction of the document by default', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<BidirectionalComponent />)
@@ -46,7 +44,6 @@ describe('@bidirectional', async () => {
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the text direction via props', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<BidirectionalComponent dir="rtl" />)
@@ -54,7 +51,6 @@ describe('@bidirectional', async () => {
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should give props preference when context and context are present', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(

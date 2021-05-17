@@ -28,15 +28,11 @@ import { contrast } from '@instructure/ui-color-utils'
 import { canvas, canvasHighContrast } from '@instructure/ui-themes'
 import generateComponentTheme from '../theme'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('Tab.theme', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the default theme', async () => {
     const variables = generateComponentTheme(canvas)
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('secondary variant', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should ensure text and tab background meet 3:1 contrast', async () => {
         expect(
           contrast(
@@ -48,13 +44,10 @@ describe('Tab.theme', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with the "canvas-high-contrast" theme', async () => {
     const variables = generateComponentTheme(canvasHighContrast)
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('secondary variant', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it('should ensure text and tab background meet 4.5:1 contrast', async () => {
         expect(
           contrast(

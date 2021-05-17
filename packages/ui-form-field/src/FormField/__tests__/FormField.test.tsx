@@ -27,9 +27,7 @@ import { expect, mount, within, stub } from '@instructure/ui-test-utils'
 
 import { FormField } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<FormField />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormField label="foo" id="bar" />)
@@ -38,7 +36,6 @@ describe('<FormField />', async () => {
     expect(formField).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should require a label', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -51,7 +48,6 @@ describe('<FormField />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should require an id', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -64,7 +60,6 @@ describe('<FormField />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('passes props through to FormField', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -74,7 +69,6 @@ describe('<FormField />', async () => {
     expect(subject.getDOMNode()).to.have.attribute('data-automation', 'baz')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormField label="foo" id="bar" />)

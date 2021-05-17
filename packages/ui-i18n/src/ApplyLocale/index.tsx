@@ -27,23 +27,20 @@ import React from 'react'
 import { ensureSingleChild } from '@instructure/ui-react-utils'
 import { ApplyLocaleContext } from './ApplyLocaleContext'
 
-type OwnProps = {
+type Props = {
   locale?: string
   timezone?: string
   children?: React.ReactNode
 }
-
-// @ts-expect-error ts-migrate(2456) FIXME: Type alias 'Props' circularly references itself.
-type Props = OwnProps & typeof ApplyLocale.defaultProps
 
 /**
 ---
 category: components/utilities
 ---
 **/
-// @ts-expect-error ts-migrate(7022) FIXME: 'ApplyLocale' implicitly has type 'any' because it... Remove this comment to see the full error message
 export const ApplyLocale = ({ children, locale, timezone }: Props) => {
   return (
+    // @ts-expect-error ts-migrate(2322) FIXME: Remove this comment to see the full error message
     <ApplyLocaleContext.Provider value={{ locale, timezone }}>
       {ensureSingleChild(children)}
     </ApplyLocaleContext.Provider>

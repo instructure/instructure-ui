@@ -28,9 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import { List } from '../index'
 import { ListLocator } from '../ListLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<List />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render list items and filter out null/falsy children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -49,7 +47,6 @@ describe('<List />', async () => {
     expect(listitems.length).to.equal(4)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
@@ -67,7 +64,6 @@ describe('<List />', async () => {
     expect(consoleError).to.be.calledWith(warning)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an ordered list', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -82,7 +78,6 @@ describe('<List />', async () => {
     expect(list.getTagName()).to.equal('ol')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(

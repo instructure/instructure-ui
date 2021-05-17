@@ -35,9 +35,7 @@ import { Tooltip } from '../index'
 import { TooltipLocator } from '../TooltipLocator'
 import TooltipExamples from '../__examples__/Tooltip.examples'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Tooltip />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -51,7 +49,6 @@ describe('<Tooltip />', async () => {
     expect(tip).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -68,7 +65,6 @@ describe('<Tooltip />', async () => {
     expect(content).to.have.text('Hello')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render the tip offscreen', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -90,7 +86,6 @@ describe('<Tooltip />', async () => {
     expect(content).to.have.text('Hello')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have an aria-describedby attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -110,7 +105,6 @@ describe('<Tooltip />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should accept a function for renderTip', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -125,7 +119,6 @@ describe('<Tooltip />', async () => {
     expect(content).to.have.text('Hello')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should show tip by default when defaultIsShowingContent is true', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -140,9 +133,7 @@ describe('<Tooltip />', async () => {
     expect(content).to.have.text('Hello')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('using as', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should render children', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -168,7 +159,6 @@ describe('<Tooltip />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should have an aria-describedby attribute', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -196,7 +186,6 @@ describe('<Tooltip />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should pass down the href attribute', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -217,9 +206,7 @@ describe('<Tooltip />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when controlled', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should show tip when isShowingContent is true', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -233,7 +220,6 @@ describe('<Tooltip />', async () => {
       expect(content).to.exist()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onShowContent and on onHideContent', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onShowContent = spy()
@@ -267,9 +253,7 @@ describe('<Tooltip />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('using children', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onClick of child', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onClick = spy()
@@ -289,7 +273,6 @@ describe('<Tooltip />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('with generated examples', async () => {
     // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ maxExamplesPerPage: number; pr... Remove this comment to see the full error message
     generateA11yTests(TooltipExamples)

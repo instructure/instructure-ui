@@ -28,9 +28,7 @@ import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { Modal } from '../index'
 import { ModalLocator } from '../ModalLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Modal />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render nothing and have a node with no parent when closed', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -45,7 +43,6 @@ describe('<Modal />', async () => {
     expect(modal).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply theme overrides when open', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -69,7 +66,6 @@ describe('<Modal />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render its own positioning context if constrained to parent', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -89,7 +85,6 @@ describe('<Modal />', async () => {
     expect(constrain).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it("should not inherit its parent's font color", async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -113,7 +108,6 @@ describe('<Modal />', async () => {
     expect(body.getComputedStyle().color).to.equal('rgb(0, 0, 0)')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass `as` prop to the dialog', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -132,7 +126,6 @@ describe('<Modal />', async () => {
     expect(dialog.getTagName()).to.equal('form')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle null children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -147,7 +140,6 @@ describe('<Modal />', async () => {
     expect(modal).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply the aria attributes', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -161,7 +153,6 @@ describe('<Modal />', async () => {
     expect(dialog.getAttribute('role')).to.equal('dialog')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should use transition', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEnter = stub()
@@ -192,7 +183,6 @@ describe('<Modal />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should support onOpen prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
@@ -213,7 +203,6 @@ describe('<Modal />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should support onClose prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClose = stub()
@@ -236,7 +225,6 @@ describe('<Modal />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should dismiss when overlay clicked by default', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
@@ -267,7 +255,6 @@ describe('<Modal />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should NOT dismiss when overlay clicked with shouldCloseOnDocumentClick=false', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
@@ -301,7 +288,6 @@ describe('<Modal />', async () => {
     expect(modal).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -317,9 +303,7 @@ describe('<Modal />', async () => {
     expect(cancelButton).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('children validation', async () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should pass validation when children are valid', async () => {
       await expect(
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -335,7 +319,6 @@ describe('<Modal />', async () => {
       ).to.not.be.rejected()
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should not pass validation when children are invalid', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
@@ -354,7 +337,6 @@ describe('<Modal />', async () => {
       )
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should pass inverse variant to children when set', async () => {
       let headerRef
       let bodyRef
@@ -386,7 +368,6 @@ describe('<Modal />', async () => {
       expect(footerRef.props.variant).to.equal('inverse')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should pass overflow to Modal.Body', async () => {
       let bodyRef
 
@@ -401,7 +382,6 @@ describe('<Modal />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('managed focus', async () => {
     class ModalExample extends React.Component {
       static propTypes = {
@@ -430,7 +410,6 @@ describe('<Modal />', async () => {
       }
     }
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should focus closeButton by default', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<ModalExample open label="A Modal" />)
@@ -443,7 +422,6 @@ describe('<Modal />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should take a prop for finding default focus', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -464,7 +442,6 @@ describe('<Modal />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should call onDismiss prop when Esc key pressed by default', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDismiss = stub()

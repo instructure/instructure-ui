@@ -30,9 +30,7 @@ import { View } from '@instructure/ui-view'
 import { Tag } from '../index'
 import { TagLocator } from '../TagLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Tag />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display text', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Tag text="Summer" />)
@@ -42,7 +40,6 @@ describe('<Tag />', async () => {
     expect(await tag.find(':contains(Summer)')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render as a button and respond to onClick event', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
@@ -57,7 +54,6 @@ describe('<Tag />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render a close icon when it is dismissible and clickable', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
@@ -67,7 +63,6 @@ describe('<Tag />', async () => {
     expect(await tag.find('svg[name="IconX"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Tag text="Summer" />)
@@ -75,7 +70,6 @@ describe('<Tag />', async () => {
     expect(await tag.accessible()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
@@ -92,7 +86,6 @@ describe('<Tag />', async () => {
       )
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should NOT allow the '${prop}' prop`, async () => {
             const warning = `Warning: [Tag] prop '${prop}' is not allowed.`
             const props = {
@@ -104,7 +97,6 @@ describe('<Tag />', async () => {
             expect(consoleError.firstCall.args[0]).to.be.equal(warning)
           })
         } else {
-          // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
           it(`should allow the '${prop}' prop`, async () => {
             // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }

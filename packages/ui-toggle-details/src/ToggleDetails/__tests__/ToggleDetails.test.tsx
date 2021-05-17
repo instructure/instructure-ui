@@ -28,9 +28,7 @@ import { expect, mount, spy } from '@instructure/ui-test-utils'
 import { ToggleDetails } from '../index'
 import { ToggleDetailsLocator } from '../ToggleDetailsLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<ToggleDetails />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should hide its content', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
@@ -42,7 +40,6 @@ describe('<ToggleDetails />', async () => {
     ).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should place the icon after the summary when prop is set', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -58,7 +55,6 @@ describe('<ToggleDetails />', async () => {
     expect(summary.getDOMNode().previousSibling).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have an aria-controls attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
@@ -72,7 +68,6 @@ describe('<ToggleDetails />', async () => {
     )
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should have an aria-expanded attribute', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
@@ -83,7 +78,6 @@ describe('<ToggleDetails />', async () => {
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should toggle on click events', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
@@ -95,7 +89,6 @@ describe('<ToggleDetails />', async () => {
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onToggle on click events', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onToggle = spy((e) => {
@@ -118,7 +111,6 @@ describe('<ToggleDetails />', async () => {
     expect(args[1]).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should be initialized by defaultExpanded prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -136,7 +128,6 @@ describe('<ToggleDetails />', async () => {
     expect(content.getTextContent()).to.equal('Content')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should meet a11y standards', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
@@ -144,7 +135,6 @@ describe('<ToggleDetails />', async () => {
     expect(await toggleDetails.accessible()).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('focuses with the focus helper', async () => {
     let toggleRef = null
 

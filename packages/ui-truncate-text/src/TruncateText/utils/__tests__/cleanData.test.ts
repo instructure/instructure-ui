@@ -25,9 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import cleanData from '../cleanData'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('cleanData', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from the end of character data', async () => {
     const data = [['T', 'e', 's', 't', ' ', '...']]
     const options = {
@@ -40,7 +38,6 @@ describe('cleanData', async () => {
     expect(newData[0].join('')).to.equal('Test...')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from the end of word data', async () => {
     const data = [['Test ', '...']]
     const options = {
@@ -53,7 +50,6 @@ describe('cleanData', async () => {
     expect(newData[0].join('')).to.equal('Test...')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from the middle of character data', async () => {
     const data = [
       ['H', 'e', 'l', 'l', 'o', ' ', '...', ' ', 'w', 'o', 'r', 'l', 'd']
@@ -68,7 +64,6 @@ describe('cleanData', async () => {
     expect(newData[0].join('')).to.equal('Hello...world')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from the middle of word data', async () => {
     const data = [['Hello ', '...', 'world']]
     const options = {
@@ -81,7 +76,6 @@ describe('cleanData', async () => {
     expect(newData[0].join('')).to.equal('Hello...world')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should do a thorough cleaning', async () => {
     const data = [['T', 'e', 's', 't', '.', ' ', '...']]
     const options = {
@@ -94,7 +88,6 @@ describe('cleanData', async () => {
     expect(newData[0].join('')).to.equal('Test...')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from the end of complex character data', async () => {
     let data = [['H', 'e', 'l', 'l', 'o', ' '], ['...']]
     const options = {
@@ -117,7 +110,6 @@ describe('cleanData', async () => {
     expect(text2).to.equal('Hello world...')
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove spaces from the middle of complex word data', async () => {
     let data = [['Hello ', '...'], ['world']]
     const options = {

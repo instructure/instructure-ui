@@ -26,7 +26,6 @@ import React from 'react'
 import { expect, mount, within, wait } from '@instructure/ui-test-utils'
 import { ScreenReaderFocusRegion } from '../ScreenReaderFocusRegion'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('ScreenReaderFocusRegion', async () => {
   const element = (
     <div data-test-parent role="main" aria-label="test app" id="test-parent3">
@@ -68,7 +67,6 @@ describe('ScreenReaderFocusRegion', async () => {
     </div>
   )
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should accept a function for liveRegion', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
@@ -86,7 +84,6 @@ describe('ScreenReaderFocusRegion', async () => {
     expect(ignore.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it("should apply aria-hidden to all children of content's parent nodes unless they are live regions", async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
@@ -109,7 +106,6 @@ describe('ScreenReaderFocusRegion', async () => {
     expect(ignore.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it("should mute designated attributes for content's parent nodes", async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
@@ -128,7 +124,6 @@ describe('ScreenReaderFocusRegion', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not apply aria-hidden to descendants', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
@@ -145,7 +140,6 @@ describe('ScreenReaderFocusRegion', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not apply aria-hidden to dynamically added descendants of content', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
@@ -168,7 +162,6 @@ describe('ScreenReaderFocusRegion', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should remove aria-hidden from children unless they had aria-hidden before', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
@@ -193,7 +186,6 @@ describe('ScreenReaderFocusRegion', async () => {
     expect(exception.getAttribute('aria-hidden')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should properly restore and unmute parent attributes', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
@@ -232,7 +224,6 @@ describe('ScreenReaderFocusRegion', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should not apply aria-hidden to elements that have aria-live attributes', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -253,7 +244,6 @@ describe('ScreenReaderFocusRegion', async () => {
     expect(regularRegion.getAttribute('aria-hidden')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should hide the body element of any iframes present on the page', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(

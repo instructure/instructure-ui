@@ -21,16 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+type baseColorsType = {
+  brand: string
+  link: string
+  electric: string
+  shamrock: string
+  barney: string
+  crimson: string
+  fire: string
+  licorice: string
+  oxford: string
+  ash: string
+  slate: string
+  tiara: string
+  porcelain: string
+  white: string
+}
 
-import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
-import { getFontSize } from '../getFontSize'
-
-describe('getFontSize', async () => {
-  it('should return font size as a number', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    const subject = await mount(<span style={{ fontSize: '17px' }}>hello</span>)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    expect(getFontSize(subject.getDOMNode())).to.equal(17)
-  })
-})
+export default baseColorsType

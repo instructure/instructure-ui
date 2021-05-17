@@ -25,11 +25,8 @@
 import { expect } from '@instructure/ui-test-utils'
 import { pascalize } from '../pascalize'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('convertCase', () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('pascalize', () => {
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('handles hyphenated strings', () => {
       expect(pascalize('foo-bar')).to.equal('FooBar')
       expect(pascalize('baz-qux-foo')).to.equal('BazQuxFoo')
@@ -37,7 +34,6 @@ describe('convertCase', () => {
       expect(pascalize('x-x-small')).to.equal('XXSmall')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('handles camel cased strings', () => {
       expect(pascalize('fooBar')).to.equal('FooBar')
       expect(pascalize('bazQuxFoo')).to.equal('BazQuxFoo')
@@ -45,7 +41,6 @@ describe('convertCase', () => {
       expect(pascalize('borderRadiusLarge')).to.equal('BorderRadiusLarge')
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('does not modify already pascal cased strings', () => {
       expect(pascalize('FooBar')).to.equal('FooBar')
       expect(pascalize('BazQuxFoo')).to.equal('BazQuxFoo')

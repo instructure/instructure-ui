@@ -27,9 +27,7 @@ import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import { Expandable } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Expandable />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set expanded to false by default', async () => {
     const props = {
       // eslint-disable-next-line react/display-name
@@ -43,7 +41,6 @@ describe('<Expandable />', async () => {
     expect(args.expanded).to.be.false()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should correctly provide the aria-expanded attribute', async () => {
     const props = {
       // eslint-disable-next-line react/display-name
@@ -59,7 +56,6 @@ describe('<Expandable />', async () => {
     expect(ariaExpanded).to.be.false()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should provide the toggle and details with a shared, unique id', async () => {
     const props = {
       // eslint-disable-next-line react/display-name
@@ -80,7 +76,6 @@ describe('<Expandable />', async () => {
     expect(toggleId).to.equal(detailsId)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onToggle when onClick is called', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onToggleSpy = spy()
@@ -104,7 +99,6 @@ describe('<Expandable />', async () => {
     expect(onToggleSpy.firstCall.args[1]).to.be.true()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set expanded to true when defaultExpanded is true', async () => {
     const props = {
       // eslint-disable-next-line react/display-name

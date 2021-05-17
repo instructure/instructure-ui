@@ -26,9 +26,7 @@ import React from 'react'
 import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import { addInputModeListener } from '../addInputModeListener'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('addInputModeListener', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should handle input mode changes', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const handleInputModeChange = stub()

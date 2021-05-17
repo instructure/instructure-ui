@@ -54,7 +54,7 @@ function isBrowserMS() {
 }
 const IS_MS = isBrowserMS()
 
-type OwnProps = {
+type Props = {
   id?: string
   renderLabel: ((...args: any[]) => any) | React.ReactNode
   accept?: string | string[]
@@ -84,7 +84,6 @@ type OwnProps = {
 
 type State = any
 
-type Props = OwnProps & typeof FileDrop.defaultProps
 /**
 ---
 category: components
@@ -360,11 +359,14 @@ class FileDrop extends Component<Props, State> {
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()
     this.enterCounter = 0
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
     onDrop(accepted, rejected, e)
     if (rejected.length > 0) {
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
       onDropRejected(rejected, e)
     }
     if (accepted.length > 0) {
+      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefined'.
       onDropAccepted(accepted, e)
     }
     this.setState({

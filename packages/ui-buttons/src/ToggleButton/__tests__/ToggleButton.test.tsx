@@ -28,7 +28,6 @@ import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 import { ToggleButton } from '../index'
 import { ToggleButtonLocator } from '../ToggleButtonLocator'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<ToggleButton />', async () => {
   const icon = (
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; title: string; height: ... Remove this comment to see the full error message
@@ -37,7 +36,6 @@ describe('<ToggleButton />', async () => {
     </svg>
   )
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -53,7 +51,6 @@ describe('<ToggleButton />', async () => {
     expect(component).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should fail if `screenReaderLabel` is not provided', async () => {
     const cs = spy(console, 'error')
     const warning =
@@ -71,7 +68,6 @@ describe('<ToggleButton />', async () => {
     expect(cs).to.have.been.calledWithMatch(warning)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should fail if `status` is not provided', async () => {
     const cs = spy(console, 'error')
     const warning =
@@ -90,7 +86,6 @@ describe('<ToggleButton />', async () => {
     expect(cs).to.have.been.calledWithMatch(warning)
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set `aria-pressed` to `true` if `status` is `pressed`', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -108,7 +103,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('button[aria-pressed="true"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set `aria-pressed` to `false` if `status` is `unpressed`', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -126,7 +120,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('button[aria-pressed="false"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display a tooltip', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -148,7 +141,6 @@ describe('<ToggleButton />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should display a tooltip without hover/focus when isShowingTooltip is true', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -170,7 +162,6 @@ describe('<ToggleButton />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render an icon', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -185,7 +176,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('svg[title="myIcon"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `as` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -202,7 +192,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('li')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `interaction` prop is set to disabled', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -218,7 +207,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('button[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `disabled` prop is set', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -235,7 +223,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('button[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `interaction` prop is set to readonly', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -251,7 +238,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('button[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should set the disabled attribute when `readOnly` prop is set', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
@@ -268,7 +254,6 @@ describe('<ToggleButton />', async () => {
     expect(await button.find('button[disabled]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should pass the `onClick` prop', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()

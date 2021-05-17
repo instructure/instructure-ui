@@ -33,9 +33,7 @@ import {
 } from '@instructure/ui-test-utils'
 import { Dialog } from '../index'
 
-// @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
 describe('<Dialog />', async () => {
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render nothing when closed', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -47,7 +45,6 @@ describe('<Dialog />', async () => {
     expect(subject.getDOMNode()).to.not.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should render children when open', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -60,7 +57,6 @@ describe('<Dialog />', async () => {
     expect(await dialog.find(':focusable')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should apply the a11y attributes', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
@@ -75,7 +71,6 @@ describe('<Dialog />', async () => {
     expect(await dialog.find('[aria-label="Dialog Example"]')).to.exist()
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onDismiss prop when Esc key pressed', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
@@ -99,7 +94,6 @@ describe('<Dialog />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   it('should call onDismiss prop when the document is clicked', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
@@ -123,7 +117,6 @@ describe('<Dialog />', async () => {
     })
   })
 
-  // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
   describe('managed focus', async () => {
     class DialogExample extends React.Component {
       static propTypes = {
@@ -179,7 +172,6 @@ describe('<Dialog />', async () => {
       }
     }
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should provide focus method', async () => {
       let ref
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
@@ -208,7 +200,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should warn when trying to focus or blur a closed dialog', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
@@ -249,7 +240,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should focus the first tabbable element by default', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<DialogExample open />)
@@ -259,7 +249,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should focus the first tabbable element when open prop becomes true', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<DialogExample open={false} />)
@@ -273,7 +262,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should take a prop for finding default focus', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -292,7 +280,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should still focus the defaultFocusElement when it is focusable but not tabbable', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -313,7 +300,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should focus the contentElement by default if focusable and no defaultFocusElement is provided', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -337,7 +323,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should focus the document body if there is no defaultFocusElement, tabbable elements, or focusable contentElement', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
@@ -356,7 +341,6 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
     it('should return focus', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<DialogExample open={false} />)
@@ -380,9 +364,7 @@ describe('<Dialog />', async () => {
       })
     })
 
-    // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
     describe('when focus leaves the first and last tabbable', async () => {
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it(`should NOT call onBlur when shouldContainFocus=true and tab pressing last tabbable`, async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
@@ -413,7 +395,6 @@ describe('<Dialog />', async () => {
         })
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it(`should NOT call onBlur when shouldContainFocus=true and tab pressing first tabbable`, async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
@@ -446,7 +427,6 @@ describe('<Dialog />', async () => {
         })
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it(`should call onBlur when shouldContainFocus=false and tab pressing last tabbable`, async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
@@ -477,7 +457,6 @@ describe('<Dialog />', async () => {
         })
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
       it(`should call onBlur when shouldContainFocus=false and tab pressing first tabbable`, async () => {
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
@@ -510,7 +489,6 @@ describe('<Dialog />', async () => {
         })
       })
 
-      // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'describe'. Do you need to instal... Remove this comment to see the full error message
       describe('when launching a dialog w/out focusable content from another dialog', () => {
         class NestedDialogExample extends React.Component {
           static propTypes = {
@@ -553,7 +531,6 @@ describe('<Dialog />', async () => {
           }
         }
 
-        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         it(`should contain focus when last tabbable element triggers dialog w/out focusable content`, async () => {
           // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
@@ -586,7 +563,6 @@ describe('<Dialog />', async () => {
           })
         })
 
-        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         it(`should contain focus when first tabbable element triggers dialog w/out focusable content`, async () => {
           // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
@@ -621,7 +597,6 @@ describe('<Dialog />', async () => {
           })
         })
 
-        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         it(`should call onBlur when shouldContainFocus=false and last tabbable element triggers dialog w/out focusable content`, async () => {
           // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
@@ -652,7 +627,6 @@ describe('<Dialog />', async () => {
           })
         })
 
-        // @ts-expect-error ts-migrate(2582) FIXME: Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
         it(`should call onBlur when shouldContainFocus=false and first tabbable element triggers dialog w/out focusable content`, async () => {
           // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
