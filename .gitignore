@@ -17,3 +17,6 @@ __build__
 .env.test
 .tmp/
 
+
+# Local Netlify folder
+.netlify
