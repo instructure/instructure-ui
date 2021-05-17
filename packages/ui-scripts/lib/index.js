@@ -89,6 +89,9 @@ if (process.argv.includes('open-sandbox')) {
   require('./publish')
 } else if (process.argv.includes('--fix-publish')) {
   require('./fix-publish')
+} else if (process.argv.includes('--manual-publish-github-internal')) {
+  // DON'T USE, for internal use only
+  require('./manual-publish-github-internal')
 } else if (process.argv.includes('--deploy-docs')) {
   require('./deploy-docs')
 } else if (process.argv.includes('--build')) {
