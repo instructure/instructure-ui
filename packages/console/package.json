@@ -1,6 +1,6 @@
 {
   "name": "@instructure/console",
-  "version": "6.27.0",
+  "version": "6.27.1",
   "description": "A babel macro made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6.27.0"
+    "@instructure/ui-babel-preset": "^6.27.1"
   },
   "dependencies": {
     "@babel/helper-annotate-as-pure": "^7.8.3",

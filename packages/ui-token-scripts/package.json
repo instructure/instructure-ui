@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-token-scripts",
-  "version": "6.27.0",
+  "version": "6.27.1",
   "description": "Utility scripts for generating cross-platform tokens from InstUI themes.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,16 +20,16 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/command-utils": "^6.27.0",
-    "@instructure/config-loader": "^6.27.0",
-    "@instructure/console": "^6.27.0",
+    "@instructure/command-utils": "^6.27.1",
+    "@instructure/config-loader": "^6.27.1",
+    "@instructure/console": "^6.27.1",
     "fs-extra": "^9.0.0",
     "lodash.isplainobject": "^4.0.6",
     "style-dictionary": "^2.8.3",
     "yargs": "^14.0.0"
   },
   "devDependencies": {
-    "@instructure/ui-test-utils": "^6.27.0"
+    "@instructure/ui-test-utils": "^6.27.1"
   },
   "publishConfig": {
     "access": "public"

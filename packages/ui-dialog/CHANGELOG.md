@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.27.1](https://github.com/instructure/instructure-ui/compare/v6.27.0...v6.27.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* **ui-dialog:** fix page scrolling up when Menu opens ([12b7463](https://github.com/instructure/instructure-ui/commit/12b7463))
+
+
+
+
+
 # [6.27.0](https://github.com/instructure/instructure-ui/compare/v6.26.0...v6.27.0) (2020-06-24)
 
 **Note:** Version bump only for package @instructure/ui-dialog
