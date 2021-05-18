@@ -32,8 +32,7 @@ module.exports = {
     [
       require('@instructure/ui-babel-preset'),
       {
-        esModules: true, // needed to enable tree shaking
-        transformImports: false // needed for webpack reload on change to work
+        transformImports: false // needed for webpack reload on change to work,
       }
     ]
   ]
