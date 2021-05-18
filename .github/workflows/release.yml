@@ -61,6 +61,6 @@ jobs:
         run: cp ./packages/__docs__/_redirects ./packages/__docs__/__build__
       - name: Deploy docs-app to netlify
         env:
-          NETLIFY_AUTH_TOKEN: { { secrets.NETLIFY_AUTH_TOKEN } }
-          NETLIFY_SITE_ID: { { secrets.NETLIFY_SITE_ID } }
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: npx netlify deploy --prod --dir ./packages/__docs__/__build__
