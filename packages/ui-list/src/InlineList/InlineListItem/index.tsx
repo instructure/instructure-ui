@@ -63,6 +63,8 @@ id: InlineList.Item
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class InlineListItem extends Component<Props> {
+  static componentId = 'InlineList.Item'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,

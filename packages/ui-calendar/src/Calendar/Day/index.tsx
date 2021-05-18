@@ -66,6 +66,8 @@ id: Calendar.Day
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class Day extends Component<Props> {
+  static componentId = 'Calendar.Day'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
