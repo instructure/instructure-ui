@@ -67,6 +67,8 @@ category: components/utilities
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
 class InlineSVG extends Component<Props> {
+  static componentId = 'InlineSVG'
+
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
     makeStyles: PropTypes.func,
@@ -244,7 +246,8 @@ class InlineSVG extends Component<Props> {
 function parseAttributes(src) {
   const attributes = {}
   const SVGAttributesRegExp = /<svg\s+([^>]*)\s*>/
-  const namesAndValuesRegExp = /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
+  const namesAndValuesRegExp =
+    /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g
 
   if (typeof src === 'string') {
     const attributesMatches = SVGAttributesRegExp.exec(src)
