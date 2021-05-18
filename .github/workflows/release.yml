@@ -44,7 +44,6 @@ jobs:
         run: git push origin v$(./.github/workflows/calculateVersion.sh)
   deploy-docs:
     needs: release
-    if: "startsWith(github.event.head_commit.message, 'chore(release)')"
     runs-on: ubuntu-latest
     name: Deploy docs to Netlify
     steps:
