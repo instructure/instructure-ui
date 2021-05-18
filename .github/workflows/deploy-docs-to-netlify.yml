@@ -7,7 +7,6 @@ on:
       - master
 jobs:
   deploy:
-    needs: release
     runs-on: ubuntu-latest
     name: Deploy docs to Netlify.
     steps:
@@ -22,8 +21,8 @@ jobs:
         run: yarn build:docs
       - name: Copy redirects config file to the __build__ directory.
         run: cp ./packages/__docs__/_redirects ./packages/__docs__/__build__
-      - name: Deploy docs-app to netlify
+      - name: Deploy built docs-app to Netlify.
         env:
-          NETLIFY_AUTH_TOKEN: { { secrets.NETLIFY_AUTH_TOKEN } }
-          NETLIFY_SITE_ID: { { secrets.NETLIFY_SITE_ID } }
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: npx netlify deploy --prod --dir ./packages/__docs__/__build__
