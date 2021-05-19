@@ -30,6 +30,9 @@ const path = require('path')
 const getClientProps = require('./utils/getClientProps')
 const processFile = require('./processFile')
 const fs = require('fs')
+//TODO: Rename this env var
+const { DO_THE_VERSION_COPY = '1' } = process.env
+const shouldDoTheVersionCopy = Boolean(parseInt(DO_THE_VERSION_COPY))
 
 const { COPY_VERSIONS_JSON = '1' } = process.env
 const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))

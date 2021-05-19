@@ -108,6 +108,11 @@ class App extends Component {
     this._content = null
     this._menuTrigger = null
     this._mediaQueryListener = null
+    const promises = Promise.all(
+      ['docs-data.json', 'versions.json'].map((resource) =>
+        fetch(resource).then((response) => response.json())
+      )
+    )
 
     this.fetchVersionData()
 
