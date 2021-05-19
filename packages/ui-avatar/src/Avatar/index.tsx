@@ -39,9 +39,10 @@ import {
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { MakeStyleConfig, MakeStyles } from '@instructure/emotion/src/withStyle'
 
 type Props = {
-  makeStyles?: (...args: any[]) => any
+  makeStyles: MakeStyles
   styles?: any
   name: string
   src?: string
@@ -55,6 +56,10 @@ type Props = {
   elementRef?: (...args: any[]) => any
 }
 
+interface State {
+  loaded: boolean
+}
+
 /**
 ---
 category: components
@@ -63,7 +68,7 @@ category: components
 
 @withStyle(generateStyle, generateComponentTheme)
 @testable()
-class Avatar extends Component<Props> {
+class Avatar extends Component<Props, State> {
   static componentId = 'Avatar'
 
   static propTypes = {
@@ -124,13 +129,18 @@ class Avatar extends Component<Props> {
   state = { loaded: false }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles(this.state)
   }
 
-  componentDidUpdate() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.state)
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    let updateConfig: MakeStyleConfig | undefined
+    if (prevState.loaded == this.state.loaded) {
+      updateConfig = {
+        prevProps: prevProps,
+        styledProps: ['size', 'shape', 'src']
+      }
+    }
+    this.props.makeStyles(this.state, updateConfig)
   }
 
   makeInitialsFromName() {

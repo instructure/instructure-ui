@@ -52,9 +52,10 @@ import {
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { MakeStyles } from '@instructure/emotion/src/withStyle'
 
 type Props = {
-  makeStyles?: (...args: any[]) => any
+  makeStyles: MakeStyles
   styles?: any
   variant?: 'info' | 'success' | 'warning' | 'error'
   liveRegion?: (...args: any[]) => any
@@ -68,6 +69,7 @@ type Props = {
   onDismiss?: (...args: any[]) => any
   transition?: 'none' | 'fade'
   open?: boolean
+  children?: any
 }
 
 /**
@@ -313,7 +315,6 @@ class Alert extends Component<Props> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
@@ -324,10 +325,11 @@ class Alert extends Component<Props> {
     this.createScreenreaderAlert()
   }
 
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles()
+  componentDidUpdate(prevProps: Props) {
+    this.props.makeStyles(undefined, {
+      prevProps: prevProps,
+      styledProps: ['variant']
+    })
     if (!!this.props.open === false && !!this.props.open !== !!prevProps.open) {
       // this outside world is asking us to close the alert, which needs to
       // take place internally so the transition runs

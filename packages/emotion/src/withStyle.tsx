@@ -31,6 +31,20 @@ import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
+
+export interface MakeStyleConfig {
+  // The previous prop object that will be compared to the current props
+  prevProps: Record<string, unknown>
+  // An array of property names used in styles.js. The style object will
+  // recalculate if any of these properties change In cannot be used to compare
+  // nested properties.
+  styledProps: string[]
+}
+export type MakeStyles = (
+  generateStyleArgs?: Record<string, unknown>,
+  updateConfig?: MakeStyleConfig
+) => void
+
 /**
  * ---
  * category: utilities/themes
@@ -127,9 +141,35 @@ const withStyle = decorator(
             )
           : {}
       )
-      const makeStyleHandler = (...extraArgs: any[]) => {
+      /**
+       * This method generates and sets the styles for the component (it calls
+       * the `generateStyle` method in the decorator's parameter).
+       * @param generateStyleArgs An object that will be passed to the
+       *     `generateStyle` method.
+       * @param updateConfig An object that you can use to prevent unnecessary
+       *     style recalculations for performance reasons. If not supplied
+       *     everything will be recalculated.
+       */
+      const makeStyleHandler: MakeStyles = (
+        generateStyleArgs,
+        updateConfig
+      ) => {
+        if (updateConfig) {
+          let changed = false
+          for (const propToCheck in updateConfig.styledProps) {
+            if (
+              updateConfig.prevProps[propToCheck] != componentProps[propToCheck]
+            ) {
+              changed = true
+              break
+            }
+          }
+          if (!changed) {
+            return
+          }
+        }
         const calculatedStyles = bidirectionalPolyfill(
-          generateStyle(componentTheme, componentProps, ...extraArgs),
+          generateStyle(componentTheme, componentProps, generateStyleArgs),
           dir
         )
         if (!isEqual(calculatedStyles, styles)) {
