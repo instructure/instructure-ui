@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-pill",
-  "version": "7.6.0",
+  "version": "7.7.0",
   "description": "A UI component to communicate concise status.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -24,23 +24,23 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.6.0",
-    "@instructure/ui-react-utils": "^7.6.0",
-    "@instructure/ui-testable": "^7.6.0",
-    "@instructure/ui-themeable": "^7.6.0",
-    "@instructure/ui-tooltip": "^7.6.0",
-    "@instructure/ui-truncate-text": "^7.6.0",
-    "@instructure/ui-utils": "^7.6.0",
-    "@instructure/ui-view": "^7.6.0",
+    "@instructure/console": "^7.7.0",
+    "@instructure/ui-react-utils": "^7.7.0",
+    "@instructure/ui-testable": "^7.7.0",
+    "@instructure/ui-themeable": "^7.7.0",
+    "@instructure/ui-tooltip": "^7.7.0",
+    "@instructure/ui-truncate-text": "^7.7.0",
+    "@instructure/ui-utils": "^7.7.0",
+    "@instructure/ui-view": "^7.7.0",
     "classnames": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.6.0",
-    "@instructure/ui-color-utils": "^7.6.0",
-    "@instructure/ui-test-locator": "^7.6.0",
-    "@instructure/ui-test-queries": "^7.6.0",
-    "@instructure/ui-test-utils": "^7.6.0"
+    "@instructure/ui-babel-preset": "^7.7.0",
+    "@instructure/ui-color-utils": "^7.7.0",
+    "@instructure/ui-test-locator": "^7.7.0",
+    "@instructure/ui-test-queries": "^7.7.0",
+    "@instructure/ui-test-utils": "^7.7.0"
   },
   "peerDependencies": {
     "react": "^16.8"
