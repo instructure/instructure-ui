@@ -157,7 +157,11 @@ module.exports = function (
     plugins,
     // see https://babeljs.io/docs/en/assumptions
     assumptions: {
-      setPublicClassFields: true
+      constantReexports: true, //assume that re-exported modules dont change
+      ignoreFunctionLength: true, // assume that we never call function.length
+      noDocumentAll: true, // assume we never use document.all
+      noNewArrows: true, // assume we never instantiate arrow functions with new
+      setPublicClassFields: true // assume public class fields never shadow getters
     }
   }
 }
