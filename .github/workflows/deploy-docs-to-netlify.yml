@@ -1,10 +1,9 @@
 name: AUTO docs deploy to netlify - on master
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
   push:
     branches:
       - master
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
