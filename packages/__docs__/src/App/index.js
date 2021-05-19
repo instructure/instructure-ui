@@ -101,35 +101,45 @@ class App extends Component {
       showMenu: showTrayOnPageLoad,
       themeKey: null,
       layout: 'large',
-      docsData: null
+      docsData: null,
+      versionsData: null
     }
 
     this._content = null
     this._menuTrigger = null
     this._mediaQueryListener = null
+    const promises = Promise.all(
+      ['docs-data.json', 'versions.json'].map((resource) =>
+        fetch(resource).then((response) => response.json())
+      )
+    )
 
-    fetch('docs-data.json')
-      .then((response) => response.json())
-      .then((data) => {
+    promises
+      .then(([docsData, versionsData]) => {
         // Assign the component instance to the parsed JSON.
         // This is used to dynamically calculate theme variable values
         for (const key of Object.keys(EveryComponent)) {
           // eslint-disable-next-line import/namespace
           const Component = EveryComponent[key]
-          if (data.docs[key]) {
+          if (docsData.docs[key]) {
             // eslint-disable-next-line no-param-reassign
-            data.docs[key].componentInstance = Component
+            docsData.docs[key].componentInstance = Component
           }
           // Enumerate over the sub-components of a component, e.g. "List.Item"
           for (const subKey of this.getAllPropNames(Component)) {
             const subComponentId = `${key}.${subKey}`
-            if (data.docs[subComponentId]) {
+            if (docsData.docs[subComponentId]) {
               // eslint-disable-next-line no-param-reassign
-              data.docs[subComponentId].componentInstance = Component[subKey]
+              docsData.docs[subComponentId].componentInstance =
+                Component[subKey]
             }
           }
         }
-        this.setState({ docsData: data, themeKey: Object.keys(data.themes)[0] })
+        this.setState({
+          docsData,
+          themeKey: Object.keys(docsData.themes)[0],
+          versionsData
+        })
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -568,7 +578,7 @@ class App extends Component {
   renderNavigation() {
     const { name, version } = this.state.docsData.library
 
-    const { key, layout, showMenu } = this.state
+    const { key, layout, showMenu, versionsData } = this.state
 
     // Render nothing when the menu is not shown and the layout isn't small
     // When the layout is small, we still render the tray so that it can properly
@@ -596,10 +606,13 @@ class App extends Component {
             />
           </EmotionThemeProvider>
         </View>
+
         <Header
           name={name === 'instructure-ui' ? 'Instructure UI' : name}
           version={version}
+          versionsData={versionsData}
         />
+
         <Nav
           selected={key}
           sections={this.state.docsData.sections}
