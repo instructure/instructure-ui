@@ -30,6 +30,9 @@ const path = require('path')
 const getClientProps = require('./utils/getClientProps')
 const processFile = require('./processFile')
 const fs = require('fs')
+//TODO: Rename this env var
+const { DO_THE_VERSION_COPY = '1' } = process.env
+const shouldDoTheVersionCopy = Boolean(parseInt(DO_THE_VERSION_COPY))
 
 const projectRoot = path.resolve(__dirname, '../../../')
 const rootPackage = require(projectRoot + '/package.json') // root package.json
@@ -146,6 +149,19 @@ globby(files, { ignore })
     fs.writeFileSync(buildDir + DOCS_DATA_JSON, everything)
     // eslint-disable-next-line no-console
     console.log('Finished building documentation data')
+  })
+  .then(() => {
+    if (shouldDoTheVersionCopy) {
+      // eslint-disable-next-line no-console
+      console.log('Copying versions.json into __build__ folder')
+      const versionFilePath = path.resolve(__dirname, '..', 'versions.json')
+      const buildDirPath = path.resolve(__dirname, '..', '__build__')
+
+      return fs.promises.copyFile(
+        versionFilePath,
+        `${buildDirPath}/versions.json`
+      )
+    }
   })
   .catch((error) => {
     throw Error('Error when generating documentation data: ' + error)
