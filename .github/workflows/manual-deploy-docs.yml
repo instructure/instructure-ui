@@ -1,0 +1,27 @@
+name: Docs deploy to Netlify
+on:
+  workflow_dispatch:
+    inputs:
+      docsVersion:
+        description: 'Version of the Docs to release. Must be in format: vX eg.: v6 v7 ...'
+        required: true
+        default: 'v7'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy docs
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install packages.
+        run: yarn install
+      - name: Set up project.
+        run: yarn bootstrap
+      - name: Build docs-app.
+        run: yarn build:docs
+      - name: Deploy docs-app to netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx netlify deploy --alias ${{ github.event.inputs.docsVersion }} --dir ./packages/__docs__/__build__

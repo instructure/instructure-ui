@@ -108,7 +108,7 @@ class App extends Component {
     this._menuTrigger = null
     this._mediaQueryListener = null
 
-    fetch('./docs-data.json')
+    fetch('docs-data.json')
       .then((response) => response.json())
       .then((data) => {
         // Assign the component instance to the parsed JSON.
@@ -659,7 +659,6 @@ class App extends Component {
                 </EmotionThemeProvider>
               </div>
             )}
-
             {this.renderContent(key)}
             {this.renderFooter()}
           </div>

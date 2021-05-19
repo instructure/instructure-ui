@@ -1,0 +1,27 @@
+name: AUTO docs deploy to netlify - on master
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy docs to Netlify.
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install packages.
+        run: yarn install
+      - name: Set up project.
+        run: yarn bootstrap
+      - name: Build docs-app.
+        run: yarn build:docs
+      - name: Copy redirects config file to the __build__ directory.
+        run: cp ./packages/__docs__/_redirects ./packages/__docs__/__build__
+      - name: Deploy built docs-app to Netlify.
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: npx netlify deploy --prod --dir ./packages/__docs__/__build__
