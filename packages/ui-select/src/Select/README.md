@@ -3,6 +3,7 @@ describes: Select
 ---
 
 `Select` is an accessible, custom styled combobox component for inputting a variety of data types.
+
 - It behaves similar to [Popover](#Popover) but provides additional semantic markup and focus behavior as a form input.
 - It should not be used for navigation or as a list of actions/functions. (see [Menu](#Menu)).
 - It can behave like a `<select>` element or implement autocomplete behavior.
@@ -10,6 +11,7 @@ describes: Select
 > Note: Before implementing Select, see if a [SimpleSelect](#SimpleSelect) will suffice.
 
 #### Managing state for a Select
+
 `Select` is a controlled-only component. The consuming app or component must manage any state needed. A variety of request callbacks are provided as prompts for state updates. `onRequestShowOptions`, for example, is fired when `Select` thinks the `isShowingOptions` prop should be updated to `true`. Of course, the consumer can always choose how to react to these callbacks.
 
 ```javascript
@@ -150,6 +152,7 @@ render(
 ```
 
 #### Providing autocomplete behavior
+
 It's best practice to always provide autocomplete functionality to help users make a selection. The example below demonstrates one method of filtering options based on user input, but this logic should be customized to what works best for the application.
 
 > Note: Select makes some conditional assumptions about keyboard behavior. For example, if the list is NOT showing, up/down arrow keys and the space key, will show the list. Otherwise, the arrows will navigate options and the space key will type a space character.
@@ -383,6 +386,7 @@ render(
 ```
 
 #### Highlighting and selecting options
+
 To mark an option as "highlighted", use the option's `isHighlighted` prop. Note that only one highlighted option is permitted. Similarly, use `isSelected` to mark an option or multiple options as "selected". When allowing multiple selections, it's best to render a [Tag](#Tag) for each selected option via the `renderBeforeInput` prop.
 
 ```javascript
@@ -422,9 +426,7 @@ class MultipleSelectExample extends React.Component {
 
   filterOptions = (value) => {
     const { selectedOptionId } = this.state
-    return this.props.options.filter(option => (
-      selectedOptionId.indexOf(option.id) === -1 // ignore selected options removed from list
-      && option.label.toLowerCase().startsWith(value.toLowerCase())
+    return this.props.options.filter(option => (option.label.toLowerCase().startsWith(value.toLowerCase())
     ))
   }
 
@@ -642,6 +644,7 @@ render(
 ```
 
 #### Composing option groups
+
 In addition to `<Select.Option />` Select also accepts `<Select.Group />` as children. This is meant to serve the same purpose as `<optgroup>` elements. Group only requires you provide a label via its `renderLabel` prop. Groups and their associated options also accept icons or other stylistic additions if needed.
 
 ```javascript
@@ -833,6 +836,7 @@ render(
 ```
 
 #### Asynchronous option loading
+
 If no results match the user's search, it's recommended to leave `isShowingOptions` as `true` and to display an "empty option" as a way of communicating that there are no matches. Similarly, it's helpful to display a [Spinner](#Spinner) in an empty option while options load.
 
 ```javascript
@@ -1056,4 +1060,5 @@ render(
 ```
 
 #### Providing assistive text for screen readers
+
 It's important to ensure screen reader users receive instruction and feedback while interacting with a `Select`, but screen reader support for the `combobox` role varies. The `assistiveText` prop should always be used to explain how a keyboard user can make a selection. Additionally, a live region should be updated with feedback as the component is interacted with, such as when options are filtered or highlighted. Using an [Alert](#Alert) with the `screenReaderOnly` prop is the easiest way to do this.
