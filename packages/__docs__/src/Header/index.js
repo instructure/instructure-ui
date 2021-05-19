@@ -29,10 +29,7 @@ import { Link } from '@instructure/ui-link'
 import { InlineSVG } from '@instructure/ui-svg-images'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
-import { CondensedButton } from '@instructure/ui-buttons'
-import { IconMiniArrowDownLine } from '@instructure/ui-icons'
-import { Menu } from '@instructure/ui-menu'
-import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { SimpleSelect } from '@instructure/ui-simple-select'
 
 import { Heading } from '../Heading'
 
@@ -48,80 +45,53 @@ class Header extends Component {
 
   static defaultProps = {
     version: undefined,
-    versionsData: undefined
+    versionsData: {
+      latestVersion: '',
+      previousVersions: []
+    }
   }
 
-  handleSelect = (e, [selectedVersion]) => {
+  handleSelect = (e, { id, value: selectedVersion }) => {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
-    const isSelectedLatestVersion = selectedVersion === latestVersion
-    const pathNameParts = window.location.pathname.split('/').filter(Boolean)
-    const [versionInPath] = pathNameParts
-    const isOnLatestVersion = pathNameParts.length === 0
-
-    // Example scenarios:
-    // 1: instructure.design, latest: v8, selected: v8 -> navigate to instructure.design/#index
-    // 2: instructure.design/v6/, latest: v8, selected: v6 -> navigate to instructure.design/v6/#index
-    if (
-      (isOnLatestVersion && isSelectedLatestVersion) ||
-      selectedVersion === versionInPath
-    ) {
-      return window.location.replace('#index')
-    }
-    // If we select the latest version from the dropdown,
-    // then navigate to the index (instructure.design/#currentHash).
-    // In every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
-    const versionToNavigate = isSelectedLatestVersion
+    // eslint-disable-next-line compat/compat
+    // const isLocalHost = window.location.hostname === 'localhost'
+    // since we don't have multiple versions running locally
+    // don't do anything when another version is selected
+    const isCurrentVersion = selectedVersion === latestVersion
+    // if we select the latest version from the dropdown, then navigate to the base url --> instructure.design/#currentHash
+    // because that is always the latest version of the docs
+    // in every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
+    const versionToNavigate = isCurrentVersion
       ? `/${window.location.hash}`
       : `/${selectedVersion}/${window.location.hash}`
 
-    return window.location.replace(versionToNavigate)
+    window.location.replace(versionToNavigate)
   }
 
-  renderVersionsBlock = () => {
+  renderOtherVersionsBlock() {
     const { versionsData } = this.props
     const { latestVersion, previousVersions } = versionsData
     const allVersions = [latestVersion, ...previousVersions]
 
     const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
 
-    const currentVersion = versionInPath || latestVersion
-
     return (
       <View display="block" textAlign="center" margin="small none large">
-        <Menu
-          placement="bottom"
-          label="Select InstUI version"
-          onSelect={this.handleSelect}
-          themeOverride={{ minWidth: '12rem' }}
-          trigger={
-            <CondensedButton padding="0.25rem">
-              <Text size="large">
-                {(
-                  <span>
-                    {this.props.name} {this.props.version}
-                  </span>
-                ) || 'Documentation'}
-              </Text>
-              <IconMiniArrowDownLine size="x-small" />
-            </CondensedButton>
-          }
-        >
-          <Menu.Group
-            selected={[currentVersion]}
-            label={
-              <ScreenReaderContent>Select InstUI version</ScreenReaderContent>
-            }
+        <Heading level="h5">
+          <SimpleSelect
+            renderLabel={''}
+            assistiveText="Use arrow keys to navigate options."
+            defaultValue={versionInPath || latestVersion}
+            onChange={this.handleSelect}
           >
             {allVersions.map((opt, index) => (
-              <Menu.Item key={index} id={`opt-${index}`} value={opt}>
-                <View textAlign="center" as="div">
-                  {this.props.name} {opt}
-                </View>
-              </Menu.Item>
+              <SimpleSelect.Option key={index} id={`opt-${index}`} value={opt}>
+                {opt}
+              </SimpleSelect.Option>
             ))}
-          </Menu.Group>
-        </Menu>
+          </SimpleSelect>
+        </Heading>
       </View>
     )
   }
