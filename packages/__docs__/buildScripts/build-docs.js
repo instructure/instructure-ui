@@ -98,6 +98,7 @@ const options = {
     '**/template-package/**',
     '**/ui-component-examples/src/**',
     '**/ui-test-*/src/**',
+    '**/ui-scripts/src/**',
 
     // deprecated packages and modules:
     '**/InputModeListener.{js,ts}'
