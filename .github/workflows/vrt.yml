@@ -1,10 +1,9 @@
 name: AUTO Visual Regression Test
 on:
-  push:
-    branches:
-      - master
-      - next
-      - v7_maintenance
+#   push:
+#     branches:
+#       - master
+#       - v7_maintenance
   pull_request:
     branches:
       - master
