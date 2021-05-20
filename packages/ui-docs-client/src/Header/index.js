@@ -30,6 +30,7 @@ import { InlineSVG } from '@instructure/ui-svg-images'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
+import { SimpleSelect } from '@instructure/ui-simple-select'
 
 import { Heading } from '../Heading'
 
@@ -39,14 +40,38 @@ import theme from './theme'
 class Header extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    version: PropTypes.string
+    version: PropTypes.string,
+    versionsData: PropTypes.shape({
+      latestVersion: PropTypes.string.isRequired,
+      previousVersions: PropTypes.arrayOf(PropTypes.string).isRequired
+    })
   }
 
   static defaultProps = {
-    version: undefined
+    version: undefined,
+    versionsData: undefined
   }
 
+  handleSelect = (e, { value: selectedVersion }) => {
+    const { versionsData } = this.props
+    const { latestVersion } = versionsData
+
+    const isCurrentVersion = selectedVersion === latestVersion
+    // if we select the latest version from the dropdown, then navigate to the base url --> instructure.design/#currentHash
+    // because that is always the latest version of the docs
+    // in every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
+    const versionToNavigate = isCurrentVersion
+      ? `/${window.location.hash}`
+      : `/${selectedVersion}/${window.location.hash}`
+
+    window.location.replace(versionToNavigate)
+  }
   render() {
+    const { versionsData } = this.props
+    const { latestVersion, previousVersions } = versionsData
+    const allVersions = [latestVersion, ...previousVersions]
+
+    const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
     const corpLogo = (
       <InlineSVG viewBox="0 0 500 500" width="6rem" height="6rem">
         <polygon
@@ -91,6 +116,27 @@ class Header extends Component {
             </View>
           </Link>
         </Heading>
+
+        <View display="block" textAlign="center" margin="small none large">
+          <Heading level="h5">
+            <SimpleSelect
+              renderLabel={'Select Version'}
+              assistiveText="Use arrow keys to navigate options."
+              defaultValue={versionInPath || latestVersion}
+              onChange={this.handleSelect}
+            >
+              {allVersions.map((opt, index) => (
+                <SimpleSelect.Option
+                  key={index}
+                  id={`opt-${index}`}
+                  value={opt}
+                >
+                  {opt}
+                </SimpleSelect.Option>
+              ))}
+            </SimpleSelect>
+          </Heading>
+        </View>
       </View>
     )
   }

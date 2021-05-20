@@ -102,7 +102,11 @@ class App extends Component {
     this.state = {
       showMenu: showTrayOnPageLoad,
       themeKey: Object.keys(props.themes)[0],
-      layout: 'large'
+      layout: 'large',
+      versionsData: {
+        latestVersion: 'v8',
+        previousVersions: []
+      }
     }
 
     this._content = null
@@ -110,9 +114,21 @@ class App extends Component {
     this._mediaQueryListener = null
   }
 
+  fetchVersionData = () => {
+    const isLocalHost = window.location.hostname === 'localhost'
+
+    if (!isLocalHost) {
+      // eslint-disable-next-line compat/compat
+      return fetch(`${window.location.origin}/versions.json`)
+        .then((response) => response.json())
+        .then((versionsData) => this.setState({ versionsData }))
+        .catch(console.error)
+    }
+  }
   componentDidMount() {
     this._defaultDocumentTitle = document.title
     this.updateKey()
+    this.fetchVersionData()
 
     window.addEventListener('hashchange', this.updateKey, false)
 
@@ -510,7 +526,7 @@ class App extends Component {
   renderNavigation() {
     const { name, version } = this.props.library
 
-    const { key, layout, showMenu } = this.state
+    const { key, layout, showMenu, versionsData } = this.state
 
     // Render nothing when the menu is not shown and the layout isn't small
     // When the layout is small, we still render the tray so that it can properly
@@ -541,6 +557,7 @@ class App extends Component {
         <Header
           name={name === 'instructure-ui' ? 'Instructure UI' : name}
           version={version}
+          versionsData={versionsData}
         />
         <Nav
           selected={key}
