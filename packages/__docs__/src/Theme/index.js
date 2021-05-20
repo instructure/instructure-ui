@@ -21,9 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+/** @jsx jsx */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+import { withStyle, jsx } from '@instructure/emotion'
+
+import { px } from '@instructure/ui-utils'
 
 import { Table } from '@instructure/ui-table'
 import { Text } from '@instructure/ui-text'
@@ -34,16 +38,32 @@ import { Description } from '../Description'
 import { ColorSwatch } from '../ColorSwatch'
 import { ThemeColors } from '../ThemeColors'
 
+import generateStyle from './styles'
+import generateComponentTheme from './theme'
+
+@withStyle(generateStyle, generateComponentTheme)
 class Theme extends Component {
   static propTypes = {
     themeKey: PropTypes.string.isRequired,
     variables: PropTypes.object.isRequired,
     requirePath: PropTypes.string.isRequired,
-    description: PropTypes.string
+    description: PropTypes.string,
+    // eslint-disable-next-line react/require-default-props
+    makeStyles: PropTypes.func,
+    // eslint-disable-next-line react/require-default-props
+    styles: PropTypes.object
   }
 
   static defaultProps = {
     description: undefined
+  }
+
+  componentDidMount() {
+    this.props.makeStyles()
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.props.makeStyles()
   }
 
   _colorMap = {}
@@ -62,18 +82,37 @@ class Theme extends Component {
   renderVariable(name, value) {
     let valueText = value
     let valueColor = ''
+    let convertedValue
     if (typeof value === 'object') {
+      convertedValue = value.color
       valueColor = value.color
       valueText = value.text
     }
-    if (
-      typeof valueText === 'string' &&
-      valueText.charAt(0) === '#' &&
-      this._colorMap
-    ) {
-      valueColor = valueText
-      valueText = this._colorMap[valueText]
+    if (typeof valueText === 'string') {
+      if (valueText.charAt(0) === '#' && this._colorMap) {
+        convertedValue = valueText
+        valueColor = valueText
+        valueText = this._colorMap[valueText]
+      } else {
+        const values = valueText.split(' ')
+        const convertedValues = values.map((value) => {
+          return value.slice(-2) === 'em' ? `${px(value)}px` : value
+        })
+        if (valueText !== convertedValues.join(' ')) {
+          convertedValue = convertedValues.join(' ')
+        }
+      }
     }
+
+    const display = (
+      <code>
+        {valueText}{' '}
+        {convertedValue ? (
+          <span css={this.props.styles.convertedValue}>({convertedValue})</span>
+        ) : null}
+      </code>
+    )
+
     return (
       <Table.Row key={name}>
         <Table.Cell>
@@ -85,10 +124,10 @@ class Theme extends Component {
               <View margin="0 xx-small 0 0">
                 <ColorSwatch color={valueColor} />
               </View>
-              <code>{valueText}</code>
+              {display}
             </span>
           ) : (
-            <code>{valueText}</code>
+            display
           )}
         </Table.Cell>
       </Table.Row>
