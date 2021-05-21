@@ -40,9 +40,7 @@
  * @param {String} str
  * @returns {String} Returns camel cased string
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
-function camelize(str) {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'g' implicitly has an 'any' type.
+function camelize(str: string): string {
   return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
 }
 

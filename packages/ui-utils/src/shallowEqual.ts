@@ -38,8 +38,10 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
  * @param {Object} objB
  * @returns {Boolean} Returns true when the values of all keys are strictly equal
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'objA' implicitly has an 'any' type.
-function shallowEqual(objA, objB) {
+function shallowEqual(
+  objA: Record<string, unknown>,
+  objB: Record<string, unknown>
+) {
   if (is(objA, objB)) {
     return true
   }
@@ -77,8 +79,7 @@ function shallowEqual(objA, objB) {
  * inlined Object.is polyfill to avoid requiring consumers ship their own
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'x' implicitly has an 'any' type.
-function is(x, y) {
+function is(x: unknown, y: unknown) {
   // SameValue algorithm
   if (x === y) {
     // Steps 1-5, 7-10

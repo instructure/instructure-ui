@@ -30,8 +30,7 @@
  * @module capitalizeFirstLetter
  * @param {String} str
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
-function capitalizeFirstLetter(str) {
+function capitalizeFirstLetter(str: string | undefined) {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : str
 }
 

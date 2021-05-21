@@ -31,18 +31,15 @@
  * @param {Array} arr
  * @returns {Array} Returns a copy of the array
  */
-
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
-function cloneArray(arr) {
-  let copy
+function cloneArray<T>(arr: T): T extends [] ? T[] : T {
   if (Array.isArray(arr)) {
-    copy = arr.slice(0)
+    const copy = arr.slice(0)
     for (let i = 0; i < copy.length; i++) {
       copy[i] = cloneArray(copy[i])
     }
-    return copy
+    return copy as T extends [] ? T[] : T
   } else {
-    return arr
+    return arr as T extends [] ? T[] : T
   }
 }
 

@@ -42,8 +42,7 @@ import { camelize } from './camelize'
  * @param {String} str
  * @returns {String} Returns pascal cased string
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
-function pascalize(str) {
+function pascalize(str: string) {
   return capitalizeFirstLetter(camelize(str))
 }
 

@@ -149,11 +149,8 @@ class Selectable extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleOpenClose = (event) => {
-    const {
-      isShowingOptions,
-      onRequestShowOptions,
-      onRequestHideOptions
-    } = this.props
+    const { isShowingOptions, onRequestShowOptions, onRequestHideOptions } =
+      this.props
 
     event.preventDefault()
 
@@ -269,7 +266,6 @@ class Selectable extends Component<Props> {
         getRootProps: ({ onMouseDown, onClick, ...rest } = {}) => {
           return {
             onClick: createChainedFunction(this.handleOpenClose, onClick),
-            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onMouseDown: createChainedFunction((event) => {
               // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Select... Remove this comment to see the full error message
               if (event.target !== this._trigger) {
@@ -324,11 +320,9 @@ class Selectable extends Component<Props> {
           return {
             id: this._listId,
             role: 'listbox',
-            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onMouseDown: createChainedFunction((event) => {
               event.preventDefault() // prevent trigger from losing focus
             }, onMouseDown),
-            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onClick: createChainedFunction((event) => {
               // prevent synthetic event from firing on the document
               // this event could inadvertently close a parent dialog
@@ -350,12 +344,10 @@ class Selectable extends Component<Props> {
             id,
             role: 'option',
             'aria-selected': this.isSelectedOption(id) ? 'true' : 'false',
-            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onClick: createChainedFunction((event) => {
               // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
               onRequestSelectOption(event, { id })
             }, onClick),
-            // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
             onMouseOver: createChainedFunction((event) => {
               // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
               onRequestHighlightOption(event, { id })

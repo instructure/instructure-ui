@@ -35,8 +35,7 @@
  * @param {number} [diff=1]
  * @returns {Boolean} Returns true if a is within the diff range of b
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'a' implicitly has an 'any' type.
-function within(a, b, diff = 1) {
+function within(a: number, b: number, diff = 1) {
   return a + diff >= b && b >= a - diff
 }
 

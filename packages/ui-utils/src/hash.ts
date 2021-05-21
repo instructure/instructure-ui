@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'json... Remove this comment to see the full error message
 import stringify from 'json-stable-stringify'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
-function toBase64(input) {
+function toBase64(input: string) {
   const tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
   let output = ''
   const length = input.length
@@ -52,11 +50,10 @@ function toBase64(input) {
   return output
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'input' implicitly has an 'any' type.
-function executeHash(input) {
+function executeHash(input: string): string {
   let hash = 0
 
-  if (input.length === 0) return hash
+  if (input.length === 0) return '0'
 
   for (let i = 0; i < input.length; i++) {
     const c = input.charCodeAt(i)
@@ -67,8 +64,7 @@ function executeHash(input) {
   return toBase64(String(hash))
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
-function hash(value, maxLength) {
+function hash(value: unknown, maxLength = 0) {
   if (typeof value === 'undefined') {
     throw new Error('Cannot hash a value which is undefined')
   }
@@ -81,13 +77,10 @@ function hash(value, maxLength) {
       // Ensure we are robust to things like objects that are identical, but with keys in diff orders
       valueToHash = stringify(valueToHash)
     } else {
-      valueToHash = valueToHash.toString()
+      valueToHash = (valueToHash as any).toString()
     }
   }
-
-  // @ts-expect-error ts-migrate(2322) FIXME: Type 'string | number' is not assignable to type '... Remove this comment to see the full error message
-  hashedValue = executeHash(valueToHash)
-
+  hashedValue = executeHash(valueToHash as string)
   if (maxLength) {
     hashedValue = hashedValue.slice(0, maxLength)
   }

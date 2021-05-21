@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+// TODO these are implemented in ui-utils, get them from there
 const capitalizeFirstLetter = (exports.capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 })

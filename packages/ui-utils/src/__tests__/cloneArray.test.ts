@@ -29,8 +29,7 @@ import { deepEqual } from '../deepEqual'
 
 describe('cloneArray', () => {
   it('should return an array', () => {
-    // @ts-expect-error ts-migrate(7015) FIXME: Element implicitly has an 'any' type because index... Remove this comment to see the full error message
-    const arr = [['one', 'two']['three']]
+    const arr = [['one', 'two'], ['three']]
 
     const newArr = cloneArray(arr)
 
@@ -46,7 +45,7 @@ describe('cloneArray', () => {
     expect(newArr[0].length).to.equal(2)
     expect(newArr[2][1]).to.equal(5)
     expect(Array.isArray(newArr[3][1])).to.equal(true)
-    expect(newArr[3][1][2]).to.equal(10)
+    expect((newArr[3][1] as number[])[2]).to.equal(10)
   })
 
   it('should return a new array', () => {
@@ -54,12 +53,11 @@ describe('cloneArray', () => {
     const newArr = cloneArray(arr)
 
     expect(deepEqual(arr, newArr)).to.equal(true)
-    newArr[0][1] = 2
+    newArr[0][1] = '2'
     expect(deepEqual(arr, newArr)).to.equal(false)
 
     const newArr2 = cloneArray(arr)
-    // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'string'.
-    arr[0][0] = 1
+    arr[0][0] = '1'
     expect(deepEqual(arr, newArr2)).to.equal(false)
   })
 })

@@ -31,23 +31,23 @@
  *
  * @module mergeDeep
  *
- * @param {Object} arguments objects to merge
+ * @param {Object} args objects to merge
  * @returns {Object} a new object with items from all arguments
  */
-function mergeDeep() {
-  // eslint-disable-next-line prefer-rest-params
-  const args = [...arguments]
+function mergeDeep(...args: Record<string, unknown>[]) {
+  // note: This could be typed as the union of its args, but since
+  // its barely used its not worth the effort currently
   let target = {}
-
   args.forEach((arg) => {
     target = mergeSourceIntoTarget(target, arg)
   })
-
   return target
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'target' implicitly has an 'any' type.
-function mergeSourceIntoTarget(target, source) {
+function mergeSourceIntoTarget(
+  target: Record<string, any>,
+  source: Record<string, any>
+) {
   if (isObject(source)) {
     const keys = [
       ...Object.keys(source),
@@ -55,7 +55,7 @@ function mergeSourceIntoTarget(target, source) {
     ]
     const merged = { ...target }
 
-    keys.forEach((key) => {
+    keys.forEach((key: any) => {
       if (isObject(target[key]) && isObject(source[key])) {
         merged[key] = mergeSourceIntoTarget(target[key], source[key])
       } else if (isArray(source[key]) && isArray(target[key])) {
@@ -66,15 +66,13 @@ function mergeSourceIntoTarget(target, source) {
         merged[key] = source[key]
       }
     })
-
     return merged
   } else {
     return { ...target }
   }
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
-function isObject(item) {
+function isObject(item: unknown) {
   return (
     item &&
     (typeof item === 'object' || typeof item === 'function') &&
@@ -82,9 +80,8 @@ function isObject(item) {
   )
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
-function isArray(item) {
-  return item && Array.isArray(item)
+function isArray(item: unknown): boolean {
+  return Array.isArray(item)
 }
 
 export default mergeDeep

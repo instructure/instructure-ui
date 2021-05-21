@@ -36,10 +36,10 @@ const COMPUTED_CACHE = {}
  *
  * @module getFontSize
  * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param ignoreCache
  * @returns {Object} font size in px
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function getFontSize(el, ignoreCache) {
+function getFontSize(el?: any, ignoreCache?: boolean) {
   if (!canUseDOM) {
     return 16
   }

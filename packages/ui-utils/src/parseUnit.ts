@@ -36,20 +36,16 @@
  *  - '10vh'
  *  - '400vmin'
  *
- * @param {string} str
- * @returns {Array} Returns array of shape [ value, unit ]
+ * @param {string|number} str
+ * @returns {Array} Returns array of shape [ value, unit ] Unit is '' if it could
+ * not be parsed
  */
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
-function parseUnit(str) {
+function parseUnit(str: string | number): [number, string] {
   const value = `${str}`
-  return [
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 2.
-    parseFloat(value, 10),
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
-    // eslint-disable-next-line no-useless-escape
-    value.match(/[\d.\-\+]*\s*(.*)/)[1] || ''
-  ]
+  // eslint-disable-next-line no-useless-escape
+  const match = value.match(/[\d.\-\+]*\s*(.*)/)
+  return [parseFloat(value), match && match.length > 0 ? match[1] : '']
 }
 
 export default parseUnit

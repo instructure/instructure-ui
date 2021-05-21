@@ -269,15 +269,14 @@ class Tabs extends Component<Props> {
     }
   }
 
+  // @ts-expect-error TODO not all codepaths return a value!
   getOverlayWidth() {
     const { variant, tabOverflow, styles } = this.props
 
     if (tabOverflow === 'scroll') {
       if (variant === 'default') {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         return px(styles.scrollOverlayWidthDefault)
       } else {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         return px(styles.scrollOverlayWidthSecondary)
       }
     }

@@ -37,7 +37,7 @@ import { isEmpty } from '@instructure/ui-utils'
 export const useTheme = () => {
   let theme = useEmotionTheme()
 
-  if (isEmpty(theme)) {
+  if (isEmpty(theme as Record<string, unknown>)) {
     if (process.env.NODE_ENV !== 'production') {
       console.warn(
         `No theme provided for [EmotionThemeProvider], using default <canvas> theme.`
