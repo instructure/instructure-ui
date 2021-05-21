@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'tiny... Remove this comment to see the full error message
 import Color from 'tinycolor2'
 
 /**
@@ -35,8 +34,7 @@ import Color from 'tinycolor2'
  * @param {String} rgb a color string
  * @returns {String} a hex string like `#FF0000`
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'rgb' implicitly has an 'any' type.
-function color2hex(rgb) {
+function color2hex(rgb: string): string {
   return Color(rgb).toHexString().toUpperCase()
 }
 
