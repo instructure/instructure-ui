@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'tiny... Remove this comment to see the full error message
 import Color from 'tinycolor2'
 
 /**
@@ -35,8 +34,7 @@ import Color from 'tinycolor2'
  * @param {String} color2
  * @returns {Number} color contrast ratio
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'color1' implicitly has an 'any' type.
-function contrast(color1, color2) {
+function contrast(color1: string, color2: string): number {
   return Color.readability(color1, color2)
 }
 

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'tiny... Remove this comment to see the full error message
 import Color from 'tinycolor2'
 
 /**
@@ -34,8 +33,7 @@ import Color from 'tinycolor2'
  * @param {String} color
  * @returns {Boolean} true if the string is a valid color
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'color' implicitly has an 'any' type.
-function isValid(color) {
+function isValid(color: string): boolean {
   return Color(color).isValid()
 }
 
