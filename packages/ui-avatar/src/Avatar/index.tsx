@@ -34,12 +34,13 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  ThemeablePropValues
+  ThemeablePropValues,
+  MakeStyleConfig,
+  MakeStyles
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MakeStyleConfig, MakeStyles } from '@instructure/emotion/src/withStyle'
 
 type Props = {
   makeStyles: MakeStyles
@@ -140,7 +141,7 @@ class Avatar extends Component<Props, State> {
         styledProps: ['size', 'shape', 'src']
       }
     }
-    this.props.makeStyles(this.state, updateConfig)
+    this.props.makeStyles({ ...updateConfig, ...this.state })
   }
 
   makeInitialsFromName() {

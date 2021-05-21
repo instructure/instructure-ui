@@ -47,12 +47,12 @@ import {
   jsx,
   ThemeablePropTypes,
   EmotionThemeProvider,
-  ThemeablePropValues
+  ThemeablePropValues,
+  MakeStyles
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { MakeStyles } from '@instructure/emotion/src/withStyle'
 
 type Props = {
   makeStyles: MakeStyles
@@ -326,9 +326,11 @@ class Alert extends Component<Props> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    this.props.makeStyles(undefined, {
-      prevProps: prevProps,
-      styledProps: ['variant']
+    this.props.makeStyles({
+      updateConfig: {
+        prevProps: prevProps,
+        styledProps: ['variant']
+      }
     })
     if (!!this.props.open === false && !!this.props.open !== !!prevProps.open) {
       // this outside world is asking us to close the alert, which needs to

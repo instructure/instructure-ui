@@ -32,18 +32,19 @@ import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
 
-export interface MakeStyleConfig {
-  // The previous prop object that will be compared to the current props
-  prevProps: Record<string, unknown>
-  // An array of property names used in styles.js. The style object will
-  // recalculate if any of these properties change In cannot be used to compare
-  // nested properties.
-  styledProps: string[]
+export type MakeStyleConfig = {
+  updateConfig?: {
+    // The previous prop object that will be compared to the current props
+    prevProps: Record<string, unknown>
+    // An array of property names used in styles.js. The style object will
+    // recalculate if any of these properties change. It cannot be used to compare
+    // nested properties.
+    styledProps: string[]
+  }
+  // Extra properties that will be passed to the `generateStyle` method
+  [K: string]: unknown
 }
-export type MakeStyles = (
-  generateStyleArgs?: Record<string, unknown>,
-  updateConfig?: MakeStyleConfig
-) => void
+export type MakeStyles = (config?: MakeStyleConfig) => void
 
 /**
  * ---
@@ -144,21 +145,17 @@ const withStyle = decorator(
       /**
        * This method generates and sets the styles for the component (it calls
        * the `generateStyle` method in the decorator's parameter).
-       * @param generateStyleArgs An object that will be passed to the
-       *     `generateStyle` method.
-       * @param updateConfig An object that you can use to prevent unnecessary
-       *     style recalculations for performance reasons. If not supplied
-       *     everything will be recalculated.
+       * @param config You can use this object to to pass your own data to the
+       * `generateStyle` method and to prevent unnecessary style recalculations
+       * for performance reasons.
        */
-      const makeStyleHandler: MakeStyles = (
-        generateStyleArgs,
-        updateConfig
-      ) => {
-        if (updateConfig) {
+      const makeStyleHandler: MakeStyles = (config) => {
+        if (config && config.updateConfig) {
           let changed = false
-          for (const propToCheck in updateConfig.styledProps) {
+          for (const propToCheck in config.updateConfig.styledProps) {
             if (
-              updateConfig.prevProps[propToCheck] != componentProps[propToCheck]
+              config.updateConfig.prevProps[propToCheck] !=
+              componentProps[propToCheck]
             ) {
               changed = true
               break
@@ -169,7 +166,7 @@ const withStyle = decorator(
           }
         }
         const calculatedStyles = bidirectionalPolyfill(
-          generateStyle(componentTheme, componentProps, generateStyleArgs),
+          generateStyle(componentTheme, componentProps, config),
           dir
         )
         if (!isEqual(calculatedStyles, styles)) {
