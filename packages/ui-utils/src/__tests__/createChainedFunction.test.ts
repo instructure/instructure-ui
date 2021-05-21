@@ -36,6 +36,7 @@ describe('createChainedFunction', () => {
 
   it('should throw an error if something other than function, null, undefined provided', () => {
     expect(() => {
+      // @ts-expect-error intentionally bad code
       createChainedFunction(12345)
     }).to.throw(Error)
   })
@@ -46,7 +47,7 @@ describe('createChainedFunction', () => {
       .map(() => spy())
     const chain = createChainedFunction(...spies)
 
-    chain()
+    chain!()
 
     spies.forEach((spy) => {
       expect(spy).to.have.been.calledOnce()

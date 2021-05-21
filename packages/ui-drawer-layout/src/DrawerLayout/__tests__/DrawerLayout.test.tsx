@@ -59,7 +59,6 @@ describe('<DrawerLayout />', async () => {
     const content = await layout.findContent()
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const margin = px(content.getComputedStyle().marginLeft)
       expect(within(margin, 250, 2)).to.be.true()
     })
@@ -79,7 +78,6 @@ describe('<DrawerLayout />', async () => {
     const content = await layout.findContent()
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const margin = px(content.getComputedStyle().marginRight)
       expect(within(margin, 250, 2)).to.be.true()
     })
@@ -94,7 +92,6 @@ describe('<DrawerLayout />', async () => {
     const content = await layout.findContent()
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const margin = px(content.getComputedStyle().marginLeft)
       expect(margin).to.equal(0)
     })
@@ -114,7 +111,6 @@ describe('<DrawerLayout />', async () => {
     const content = await layout.findContent(':label(Test DrawerContent)')
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const margin = px(content.getComputedStyle().marginRight)
       expect(margin).to.equal(0)
     })

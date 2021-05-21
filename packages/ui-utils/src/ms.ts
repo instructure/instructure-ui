@@ -36,13 +36,13 @@ import { parseUnit } from './parseUnit'
  *  - '100s'
  *  - '20ms'
  *
- * @param {String} val
+ * @param {String|Number} val
  * @returns {Number} Returns numerical representation of milliseconds
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'val' implicitly has an 'any' type.
-function ms(val) {
+function ms(val: number | string): number {
+  // TODO: throw an error if val is not number or string
   if (!val || typeof val === 'number') {
-    return val
+    return val as number
   }
 
   const [num, unit] = parseUnit(val)
@@ -50,7 +50,6 @@ function ms(val) {
   if (unit === 'ms') {
     return num
   } else if (unit === 's') {
-    // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     return num * 1000
   } else {
     return num

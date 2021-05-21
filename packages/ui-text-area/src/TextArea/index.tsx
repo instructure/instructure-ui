@@ -326,7 +326,6 @@ class TextArea extends Component<Props> {
 
     // preserve container height to prevent scroll jumping on long textareas,
     // but make sure container doesn't exceed maxHeight prop
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const heightExceedsMax = px(height) > maxHeight
     if (!heightExceedsMax) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_container' does not exist on type 'Text... Remove this comment to see the full error message

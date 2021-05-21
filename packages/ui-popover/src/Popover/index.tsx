@@ -480,7 +480,6 @@ class Popover extends Component<Props> {
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_view' does not exist on type 'Popover'.
       const { arrowSize, arrowBorderWidth } = this._view.props.styles
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
 
       if (secondaryPlacement === 'start') {

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+type GenericFunction = (...args: any[]) => any
 /**
  * ---
  * category: utilities/react
@@ -33,40 +34,37 @@
  *
  * Forked from: https://github.com/react-bootstrap/react-overlays/blob/master/src/utils/createChainedFunction.js
  * @module createChainedFunction
- * @param {function} functions to chain
+ * @param {function} funcs to chain
  * @returns {function|null}
  */
-// @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'funcs' implicitly has an 'any[]' t... Remove this comment to see the full error message
-function createChainedFunction(...funcs) {
+
+function createChainedFunction(
+  ...funcs: (null | undefined | GenericFunction)[]
+) {
   return funcs
     .filter((f, i) => {
       if (f == null) {
         return false
       }
-
       // Only allow the first of identical functions
       const indexes = getAllIndexes(funcs, f)
       return indexes.length === 1 || i === indexes[0]
     })
-    .reduce((acc, f) => {
+    .reduce((acc, f): GenericFunction => {
       if (typeof f !== 'function') {
         throw new Error(
           'Invalid Argument Type, must only provide functions, undefined, or null.'
         )
       }
-
       if (acc === null) {
         return f
       }
-
-      // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-      return function chainedFunction(...args) {
-        // @ts-expect-error ts-migrate(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-        acc.apply(this, args)
-        // @ts-expect-error ts-migrate(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
+      return function chainedFunction(this: any, ...args) {
+        acc!.apply(this, args)
         f.apply(this, args)
       }
-    }, null)
+      // TODO I think it can return null too
+    }, null) as undefined | GenericFunction
 }
 
 /**
@@ -76,19 +74,13 @@ function createChainedFunction(...funcs) {
  * @param {*} val The value to find indexes for
  * @return {array} All the indexes of the Array matching val
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'arr' implicitly has an 'any' type.
-function getAllIndexes(arr, val) {
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'indexes' implicitly has type 'any[]' in ... Remove this comment to see the full error message
-  const indexes = []
-
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'e' implicitly has an 'any' type.
+function getAllIndexes(arr: unknown[], val: unknown): number[] {
+  const indexes: number[] = []
   arr.forEach((e, i) => {
     if (e === val) {
       indexes.push(i)
     }
   })
-
-  // @ts-expect-error ts-migrate(7005) FIXME: Variable 'indexes' implicitly has an 'any[]' type.
   return indexes
 }
 

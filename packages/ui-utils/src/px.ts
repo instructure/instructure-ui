@@ -39,24 +39,22 @@ import { parseUnit } from './parseUnit'
  * @module px
  *
  * @param {String} val
- * @param {DomNode} el - containing element, for context measure is em (defaults to document.body)
+ * @param {Document|Element} el - containing element, for context measure is em (defaults to document.body)
  * @returns {Number} Returns numerical representation of pixels
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'val' implicitly has an 'any' type.
-function px(val, el) {
+function px(val: string | number, el?: Document | Element | null): number {
   const container = el || document.body
 
+  // TODO !val should not be needed
   if (!val || typeof val === 'number') {
-    return val
+    return val as number
   }
 
   const [num, unit] = parseUnit(val)
 
   if (unit === 'rem') {
-    // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     return num * getFontSize()
   } else if (unit === 'em') {
-    // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     return num * getFontSize(container)
   } else {
     return num

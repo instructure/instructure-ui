@@ -24,7 +24,8 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.4.0",
-    "@instructure/ui-test-utils": "8.4.0"
+    "@instructure/ui-test-utils": "8.4.0",
+    "@types/json-stable-stringify": "^1.0.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",

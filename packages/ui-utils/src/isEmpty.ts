@@ -23,8 +23,7 @@
  */
 const hasOwnProperty = Object.prototype.hasOwnProperty
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'obj' implicitly has an 'any' type.
-function isEmpty(obj) {
+function isEmpty(obj: Record<string, unknown>) {
   if (typeof obj !== 'object') return true
   for (const key in obj) {
     if (hasOwnProperty.call(obj, key)) return false

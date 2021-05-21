@@ -28,8 +28,7 @@ import { getFontSize } from '@instructure/ui-dom-utils'
 import { px } from '../px'
 
 describe('px', () => {
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'node' implicitly has type 'any' in some ... Remove this comment to see the full error message
-  let node
+  let node: HTMLDivElement | null
 
   beforeEach(() => {
     node = document.createElement('div')
@@ -37,30 +36,24 @@ describe('px', () => {
   })
 
   afterEach(() => {
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'node' implicitly has an 'any' type.
     node && node.parentNode && node.parentNode.removeChild(node)
     node = null
   })
 
   it('handles px units', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(px('30px')).to.equal(30)
   })
 
   it('converts rem to px', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(px('50rem')).to.equal(50 * getFontSize())
   })
 
   it('converts em to px', () => {
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'node' implicitly has an 'any' type.
-    node.style.fontSize = '24px'
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'node' implicitly has an 'any' type.
+    node!.style.fontSize = '24px'
     expect(px('10em', node)).to.equal(10 * getFontSize(node))
   })
 
   it('handles unitless input', () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(px('4')).to.equal(4)
   })
 })
