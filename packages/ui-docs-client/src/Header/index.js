@@ -52,7 +52,10 @@ class Header extends Component {
 
   static defaultProps = {
     version: undefined,
-    versionsData: undefined
+    versionsData: {
+      latestVersion: '',
+      previousVersions: []
+    }
   }
 
   handleSelect = (_e, [ selectedVersion ]) => {
