@@ -26,9 +26,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Link } from '@instructure/ui-link'
-import { Heading } from '@instructure/ui-heading'
 import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
+import { CondensedButton } from '@instructure/ui-buttons'
+import { IconMiniArrowDownLine } from '@instructure/ui-icons'
+import { Menu } from '@instructure/ui-menu'
+import { Text } from '@instructure/ui-text'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+
 
 import PandaLogo from './instui-panda.js'
 import styles from './styles.css'
@@ -38,11 +43,81 @@ import theme from './theme'
 class Header extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    version: PropTypes.string
+    version: PropTypes.string,
+    versionsData: PropTypes.shape({
+      latestVersion: PropTypes.string.isRequired,
+      previousVersions: PropTypes.arrayOf(PropTypes.string).isRequired
+    })
   }
 
   static defaultProps = {
-    version: undefined
+    version: undefined,
+    versionsData: undefined
+  }
+
+  handleSelect = (_e, selectedItems) => {
+    const { versionsData } = this.props
+    const { latestVersion } = versionsData
+    const [ selectedVersion ] = selectedItems
+    const isCurrentVersion = selectedVersion === latestVersion
+
+    // If we select the latest version from the dropdown,
+    // then navigate to the index (instructure.design/#ndex)
+    // because that was the previous action on clicking the version link.
+    // In every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
+    const versionToNavigate = isCurrentVersion
+      ? `/#index`
+      : `/${selectedVersion}/${window.location.hash}`
+
+    window.location.replace(versionToNavigate)
+  }
+
+  renderVersionsBlock = () => {
+    const { versionsData } = this.props
+    const { latestVersion, previousVersions } = versionsData
+    const allVersions = [latestVersion, ...previousVersions]
+
+    const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
+
+    const currentVersion = versionInPath || latestVersion
+
+    return (
+      <View display="block" textAlign="center" margin="small none">
+        <Menu
+          placement="bottom"
+          label="Select InstUI version"
+          onSelect={this.handleSelect}
+          theme={{ minWidth: '12rem' }}
+          trigger={
+            <CondensedButton padding="0.25rem">
+              <Text size="medium">
+                {(
+                  <span>
+                    {this.props.name} {this.props.version}
+                  </span>
+                ) || 'Documentation'}
+              </Text>
+              <IconMiniArrowDownLine size="x-small" />
+            </CondensedButton>
+          }
+        >
+          <Menu.Group
+            selected={[currentVersion]}
+            label={
+              <ScreenReaderContent>Select InstUI version</ScreenReaderContent>
+            }
+          >
+            {allVersions.map((opt, index) => (
+              <Menu.Item key={index} id={`opt-${index}`} value={opt}>
+                <View textAlign="center" as="div">
+                  {this.props.name} {opt}
+                </View>
+              </Menu.Item>
+            ))}
+          </Menu.Group>
+        </Menu>
+      </View>
+    )
   }
 
   render () {
@@ -52,23 +127,9 @@ class Header extends Component {
           <PandaLogo />
         </div>
         <div className={styles.banner} role="banner">
-          <Heading level="h2" as="h1">
-            <Link
-              isWithinText={false}
-              href="#index"
-            >
-              {this.props.name || 'Documentation'}
-            </Link>
-          </Heading>
+          {this.renderVersionsBlock()}
           { this.props.version && (
             <View display="block" margin="xx-small none none">
-              <Link
-                href="#CHANGELOG"
-                isWithinText={false}
-              >
-                v{this.props.version}
-              </Link>
-              &nbsp;|&nbsp;
               <Link
                 href="#Newsletter"
                 isWithinText={false}
