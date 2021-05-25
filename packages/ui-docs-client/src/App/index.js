@@ -4,7 +4,7 @@
  * Copyright (c) 2015 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * of this software and associated documentation files (the 'Software'), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -22,39 +22,39 @@
  * SOFTWARE.
  */
 
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import GithubCorner from "react-github-corner"
+import GithubCorner from 'react-github-corner'
 
-import { themeable } from "@instructure/ui-themeable"
-import { DrawerLayout } from "@instructure/ui-drawer-layout"
-import { View } from "@instructure/ui-view"
-import { ScreenReaderContent } from "@instructure/ui-a11y-content"
-import { Mask } from "@instructure/ui-overlays"
-import { Heading } from "@instructure/ui-heading"
-import { Pill } from "@instructure/ui-pill"
-import { IconButton } from "@instructure/ui-buttons"
+import { themeable } from '@instructure/ui-themeable'
+import { DrawerLayout } from '@instructure/ui-drawer-layout'
+import { View } from '@instructure/ui-view'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
+import { Mask } from '@instructure/ui-overlays'
+import { Heading } from '@instructure/ui-heading'
+import { Pill } from '@instructure/ui-pill'
+import { IconButton } from '@instructure/ui-buttons'
 
 import {
   IconGithubSolid,
   IconHamburgerSolid,
   IconHeartSolid,
   IconXSolid,
-} from "@instructure/ui-icons"
+} from '@instructure/ui-icons'
 
-import { Document } from "../Document"
-import { Header } from "../Header"
-import { Nav } from "../Nav"
-import { Theme } from "../Theme"
-import { Select } from "../Select"
-import { Section } from "../Section"
-import { Icons } from "../Icons"
-import { compileMarkdown } from "../compileMarkdown"
-import { LibraryPropType } from "../propTypes"
+import { Document } from '../Document'
+import { Header } from '../Header'
+import { Nav } from '../Nav'
+import { Theme } from '../Theme'
+import { Select } from '../Select'
+import { Section } from '../Section'
+import { Icons } from '../Icons'
+import { compileMarkdown } from '../compileMarkdown'
+import { LibraryPropType } from '../propTypes'
 
-import styles from "./styles.css"
-import theme from "./theme"
+import styles from './styles.css'
+import theme from './theme'
 
 @themeable(theme, styles)
 class App extends Component {
@@ -65,7 +65,7 @@ class App extends Component {
     themes: PropTypes.object,
     icons: PropTypes.object,
     descriptions: PropTypes.object,
-    library: LibraryPropType.isRequired,
+    library: LibraryPropType.isRequired
   }
 
   static defaultProps = {
@@ -73,13 +73,13 @@ class App extends Component {
     themes: {},
     parents: {},
     sections: {},
-    descriptions: {},
+    descriptions: {}
   }
 
   static childContextTypes = {
     library: LibraryPropType,
     themes: PropTypes.object,
-    themeKey: PropTypes.string,
+    themeKey: PropTypes.string
   }
 
   constructor(props) {
@@ -102,6 +102,7 @@ class App extends Component {
   }
 
   fetchVersionData = async () => {
+    // eslint-disable-next-line compat/compat
     const isLocalHost = window.location.hostname === 'localhost'
 
     if (!isLocalHost) {
@@ -116,39 +117,39 @@ class App extends Component {
     return {
       library: this.props.library,
       themeKey: this.state.themeKey,
-      themes: this.props.themes,
+      themes: this.props.themes
     }
   }
 
   trackPage(page) {
     let title = this._defaultDocumentTitle
-    if (page !== "index") {
+    if (page !== 'index') {
       title = `${page} - ${this._defaultDocumentTitle}`
     }
 
     document.title = title
 
     if (window.ga) {
-      window.ga("set", "page", page)
-      window.ga("set", "title", title)
-      window.ga("send", "pageview")
+      window.ga('set', 'page', page)
+      window.ga('set', 'title', title)
+      window.ga('send', 'pageview')
     }
   }
 
   updateKey = () => {
     const { hash } = window.location
 
-    const path = hash && hash.split("/")
+    const path = hash && hash.split('/')
 
     if (path) {
-      const [page, id] = path.map((entry) => decodeURI(entry.replace("#", "")))
+      const [page, id] = path.map((entry) => decodeURI(entry.replace('#', '')))
 
       this.setState(
         {
-          key: page || "index",
+          key: page || 'index',
         },
         () => {
-          this.trackPage(page || "index")
+          this.trackPage(page || 'index')
           if (id) {
             // After setting state, if we have an id and it corresponds to an element
             // that exists, scroll it into view
@@ -161,7 +162,7 @@ class App extends Component {
         }
       )
     } else {
-      this.trackPage("index")
+      this.trackPage('index')
     }
   }
 
@@ -205,11 +206,11 @@ class App extends Component {
     this._defaultDocumentTitle = document.title
     this.updateKey()
 
-    window.addEventListener("hashchange", this.updateKey, false)
+    window.addEventListener('hashchange', this.updateKey, false)
   }
 
   componentWillUnmount() {
-    window.removeEventListener("hashchange", this.updateKey, false)
+    window.removeEventListener('hashchange', this.updateKey, false)
   }
 
   renderThemeSelect() {
@@ -321,7 +322,7 @@ class App extends Component {
     const { docs } = this.props
     return docs.CHANGELOG ? (
       <Section id="CHANGELOG">
-        {compileMarkdown(docs.CHANGELOG.description, { title: "CHANGELOG" })}
+        {compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' })}
       </Section>
     ) : null
   }
@@ -341,12 +342,12 @@ class App extends Component {
     const theme = this.props.themes[key]
     const icon = this.props.icons.formats[key]
 
-    if (!key || key === "index") {
+    if (!key || key === 'index') {
       return this.renderIndex()
     }
-    if (key === "CHANGELOG") {
+    if (key === 'CHANGELOG') {
       return this.renderChangeLog()
-    } else if (key === "iconography" || icon) {
+    } else if (key === 'iconography' || icon) {
       return this.renderIcons(key)
     } else if (theme) {
       return this.renderTheme(key)
