@@ -28,14 +28,13 @@ import { parseQueryArguments } from '@instructure/ui-test-queries'
 // eslint-disable-next-line no-restricted-imports
 import { PopoverLocator } from '@instructure/ui-popover/es/Popover/PopoverLocator'
 import { Tooltip } from './index'
+import { GenericFunction } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
 
-export const customMethods = {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+export const customMethods: Record<string, GenericFunction> = {
   findTrigger: (...args) => {
     const { element, options } = parseQueryArguments(...args)
     return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findContent: (...args) => {
     const { element, options } = parseQueryArguments(...args)
     return PopoverLocator.findContent(element, '[role="tooltip"]', options)

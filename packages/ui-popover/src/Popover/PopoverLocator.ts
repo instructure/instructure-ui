@@ -29,13 +29,11 @@ import { PositionLocator } from '@instructure/ui-position/es/Position/PositionLo
 
 import { Popover } from './index'
 import { PopoverTriggerLocator } from './PopoverTriggerLocator'
+import { GenericFunction } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
 
-export const customMethods = {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+export const customMethods: Record<string, GenericFunction> = {
   findContent: (...args) => PositionLocator.findContent(...args),
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findPositionTarget: (...args) => PositionLocator.findTarget(...args),
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findTrigger: (...args) => PopoverTriggerLocator.find(...args)
 }
 

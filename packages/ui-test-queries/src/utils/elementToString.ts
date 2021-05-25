@@ -21,35 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import prettyFormat from 'pretty-format'
 import { isElement } from './isElement'
 
-export function parseQueryArguments(...args) {
-  let element = document.body
-  let selector
-  let options = {
-    expectEmpty: false,
-    exact: true,
-    trim: true,
-    collapseWhitespace: true,
-    ignore: 'script,style',
-    timeout: 1900
+const { DOMElement, DOMCollection } = prettyFormat.plugins
+
+function format(
+  element: Element | Document | DocumentFragment,
+  maxLength: number,
+  options: Partial<prettyFormat.Options>
+): string {
+  let htmlElement: HTMLElement = element as HTMLElement
+  if ((element as Document).documentElement) {
+    // eslint-disable-next-line no-param-reassign
+    htmlElement = (element as Document).documentElement
   }
 
-  args.forEach((arg) => {
-    if (typeof arg === 'string' || arg instanceof String) {
-      selector = arg
-    } else if (isElement(arg)) {
-      element = arg
-    } else if (typeof arg === 'object' || arg instanceof Object) {
-      options = arg ? { ...options, ...arg } : options
-    }
+  const debugContent = prettyFormat(htmlElement, {
+    plugins: [DOMElement, DOMCollection],
+    printFunctionName: false,
+    highlight: true,
+    ...options
   })
-
-  if (selector && (selector.includes('div') || selector.includes('span'))) {
-    throw new Error(
-      `[ui-test-queries] Selectors should only include semantic elements (not 'div' or 'span'): ${selector}`
-    )
-  }
-
-  return { element, selector, options }
+  return typeof maxLength !== 'undefined' &&
+    htmlElement.outerHTML.length > maxLength
+    ? `${debugContent.slice(0, maxLength)}...`
+    : debugContent
 }
+
+function elementToString(
+  element: Element | Document | DocumentFragment,
+  maxLength = 7000,
+  options = { highlight: false }
+): string {
+  if (isElement(element)) {
+    return format(element, maxLength, options)
+  } else if (typeof element.toString === 'function') {
+    return element.toString()
+  } else {
+    return JSON.stringify(element)
+  }
+}
+
+export { elementToString }

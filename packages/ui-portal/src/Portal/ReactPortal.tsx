@@ -23,7 +23,6 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import ReactDOM from 'react-dom'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
@@ -155,7 +154,7 @@ class ReactPortal extends React.Component<Props> {
     }
   }
 
-  render() {
+  render(): React.ReactPortal | null {
     const { children } = this.props
 
     return this.props.open && React.Children.count(children) > 0

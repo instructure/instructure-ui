@@ -21,41 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import prettyFormat from 'pretty-format'
-import { isElement } from './isElement'
 
-const { DOMElement, DOMCollection } = prettyFormat.plugins
-
-function format(htmlElement, maxLength, options) {
-  if (htmlElement.documentElement) {
-    // eslint-disable-next-line no-param-reassign
-    htmlElement = htmlElement.documentElement
+function normalizeText(
+  text: string | null,
+  { collapseWhitespace = true, trim = true } = {}
+): string {
+  if (!text) {
+    return ''
   }
-
-  const debugContent = prettyFormat(htmlElement, {
-    plugins: [DOMElement, DOMCollection],
-    printFunctionName: false,
-    highlight: true,
-    ...options
-  })
-  return typeof maxLength !== 'undefined' &&
-    htmlElement.outerHTML.length > maxLength
-    ? `${debugContent.slice(0, maxLength)}...`
-    : debugContent
+  let normalizedText = text
+  normalizedText = trim ? normalizedText.trim() : normalizedText
+  normalizedText = collapseWhitespace
+    ? normalizedText.replace(/\s+/g, ' ')
+    : normalizedText
+  return normalizedText
 }
 
-function elementToString(
-  element,
-  maxLength = 7000,
-  options = { highlight: false }
-) {
-  if (isElement(element)) {
-    return format(element, maxLength, options)
-  } else if (typeof element.toString === 'function') {
-    return element.toString()
-  } else {
-    return JSON.stringify(element)
-  }
-}
-
-export { elementToString }
+export { normalizeText }

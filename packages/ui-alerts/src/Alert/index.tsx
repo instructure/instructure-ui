@@ -23,7 +23,6 @@
  */
 /** @jsx jsx */
 import { Component } from 'react'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import ReactDOM from 'react-dom'
 
 import PropTypes from 'prop-types'
@@ -259,6 +258,7 @@ class Alert extends Component<Props> {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'srid' does not exist on type 'Alert'.
       const div = document.getElementById(this.srid)
       if (div) {
+        // @ts-expect-error FIXME should not pass null?
         ReactDOM.render(null, div, () => {
           this.renderScreenreeaderAlert(div)
         })

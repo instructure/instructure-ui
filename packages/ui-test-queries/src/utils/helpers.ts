@@ -29,17 +29,34 @@ import { fireEvent } from './events'
 import { isElement } from './isElement'
 import { querySelector, querySelectorAll, matchesSelector } from './selectors'
 
-function getOwnerDocument(element) {
+interface Rectangle {
+  bottom: number
+  readonly height: number
+  left: number
+  right: number
+  top: number
+  readonly width: number
+  x?: number
+  y?: number
+}
+
+interface ClientRectangle extends Rectangle {
+  overflow: string | null
+  positioned: boolean
+}
+
+function getOwnerDocument(element: Node) {
   return element.ownerDocument || document
 }
 
-function getOwnerWindow(element) {
+function getOwnerWindow(element: Node) {
   const doc = getOwnerDocument(element)
-  return doc.defaultView || doc.parentWindow
+  return doc.defaultView
 }
 
-function typeIn(element, text, options) {
-  const initialValue = element.value
+function typeIn(element: Element, text: string) {
+  // We could use here generics to make it better?
+  const initialValue = (element as any).value
   const characterCount = text.length
   const eventInit = {
     bubbles: true,
@@ -48,7 +65,7 @@ function typeIn(element, text, options) {
     eventPhase: 2,
     isTrusted: true
   }
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     setTimeout(() => {
       try {
         for (let i = 0; i < characterCount; ++i) {
@@ -71,12 +88,24 @@ function typeIn(element, text, options) {
             },
             ...eventInit
           }
-
+          // not nice, but this is a very weird code :/
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           fireEvent.keyDown(element, keyEventData)
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           fireEvent.keyPress(element, keyEventData)
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           fireEvent.beforeInput(element, inputEventData)
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           fireEvent.input(element, inputEventData)
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           fireEvent.change(element, inputEventData)
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           fireEvent.keyUp(element, keyEventData)
         }
         resolve()
@@ -87,25 +116,24 @@ function typeIn(element, text, options) {
   })
 }
 
-function getTextContent(element) {
+function getTextContent(element: Element): string | null {
   if (matchesSelector(element, 'input[type=submit], input[type=button]')) {
-    return element.value
+    return (element as any).value
   }
-
   return element.textContent
 }
 // aliases:
 const text = getTextContent
 
-function getTagName(element) {
+function getTagName(element: Element) {
   return element.tagName.toLowerCase()
 }
 // aliases
 const tagName = getTagName
 
-function getComputedStyle(element) {
-  if (isElement(element)) {
-    return getOwnerWindow(element).getComputedStyle(element)
+function getComputedStyle(element: Element) {
+  if (isElement(element) && getOwnerWindow(element)) {
+    return getOwnerWindow(element)!.getComputedStyle(element)
   } else {
     throw new Error(
       `[ui-test-queries] cannot get computed style for an invalid Element: ${element}`
@@ -113,7 +141,7 @@ function getComputedStyle(element) {
   }
 }
 
-function positioned(element) {
+function positioned(element: Element) {
   const style = getComputedStyle(element)
   const transform =
     style.getPropertyValue('-webkit-transform') ||
@@ -129,7 +157,7 @@ function positioned(element) {
   )
 }
 
-function getViewportRects(element) {
+function getViewportRects(element: Element): ClientRectangle[] {
   const doc = getOwnerDocument(element)
   const win = getOwnerWindow(element)
   const viewport = {
@@ -140,7 +168,7 @@ function getViewportRects(element) {
       doc.documentElement.offsetWidth,
       doc.body.clientWidth,
       doc.documentElement.clientWidth,
-      win.innerWidth || 0
+      win?.innerWidth || 0
     ),
     height: Math.max(
       doc.body.scrollHeight,
@@ -149,7 +177,7 @@ function getViewportRects(element) {
       doc.documentElement.offsetHeight,
       doc.body.clientHeight,
       doc.documentElement.clientHeight,
-      win.innerHeight || 0
+      win?.innerHeight || 0
     )
   }
 
@@ -166,26 +194,24 @@ function getViewportRects(element) {
   ]
 }
 
-function getPositionedParents(element) {
+function getPositionedParents(element: Element) {
   const parents = []
-  let parent = element
-
+  let parent: (Node & ParentNode) | null = element
   // eslint-disable-next-line no-cond-assign
   while (
     (parent = parent.parentNode) &&
     parent &&
     isElement(parent) &&
-    parent.tagName.toLowerCase() !== 'body'
+    (parent as Element).tagName.toLowerCase() !== 'body'
   ) {
-    if (positioned(parent)) {
+    if (positioned(parent as Element)) {
       parents.push(parent)
     }
   }
-
   return parents
 }
 
-function rectToObject(rect) {
+function rectToObject(rect: DOMRect): Rectangle {
   return {
     top: rect.top,
     right: rect.right,
@@ -198,12 +224,12 @@ function rectToObject(rect) {
   }
 }
 
-function getClientRects(element) {
+function getClientRects(element: Element): ClientRectangle[] {
   const props = {
     overflow: getComputedStyle(element).overflow,
     positioned: positioned(element)
   }
-  let rects = [
+  let rects: ClientRectangle[] = [
     {
       ...rectToObject(element.getBoundingClientRect()),
       ...props
@@ -217,7 +243,7 @@ function getClientRects(element) {
   return rects
 }
 
-function visible(element) {
+function visible(element: Element) {
   if (
     !isElement(element) ||
     (element && element.tagName.toLowerCase() === 'html')
@@ -226,7 +252,6 @@ function visible(element) {
   }
 
   const style = getComputedStyle(element)
-
   if (
     style.visibility === 'hidden' ||
     style.display === 'none' ||
@@ -237,8 +262,10 @@ function visible(element) {
 
   const elementRects = getClientRects(element)
 
-  const elementWidth = element.offsetWidth || elementRects[0].width || 0
-  const elementHeight = element.offsetHeight || elementRects[0].height || 0
+  const elementWidth =
+    (element as HTMLElement).offsetWidth || elementRects[0].width || 0
+  const elementHeight =
+    (element as HTMLElement).offsetHeight || elementRects[0].height || 0
   const children = Array.from(element.childNodes)
 
   // handle inline elements with block children...
@@ -246,7 +273,7 @@ function visible(element) {
     element.tagName.toLowerCase() !== 'iframe' &&
     style.display === 'inline' &&
     children.length > 0 &&
-    children.filter((child) => visible(child)).length === 0
+    children.filter((child) => visible(child as Element)).length === 0
   ) {
     return false
   } else if (elementWidth <= 0 && elementHeight <= 0) {
@@ -254,7 +281,9 @@ function visible(element) {
   }
 
   const rects = [elementRects].concat(
-    getPositionedParents(element).map((parent) => getClientRects(parent))
+    getPositionedParents(element).map((parent) =>
+      getClientRects(parent as Element)
+    )
   )
 
   rects.push(getViewportRects(element))
@@ -290,11 +319,11 @@ function visible(element) {
   }, true)
 }
 
-function onscreen(element) {
+function onscreen(element: Element) {
   return visible(element)
 }
 
-function clickable(element) {
+function clickable(element: Element) {
   const rects = Array.from(element.getClientRects()).concat(
     element.getBoundingClientRect()
   )
@@ -326,7 +355,7 @@ function clickable(element) {
   )
 }
 
-function focusable(element) {
+function focusable(element: Element) {
   const selector = [
     'a[href]:not([disabled])',
     'frame',
@@ -340,66 +369,77 @@ function focusable(element) {
   ]
 
   return (
-    !element.disabled &&
+    !(element as any).disabled &&
     visible(element) &&
     matchesSelector(element, selector.join(','))
   )
 }
 
-function tabbable(element) {
-  return focusable(element) && parseInt(getAttribute(element, 'tabindex')) > 0
+function tabbable(element: Element) {
+  return focusable(element) && parseInt(getAttribute(element, 'tabindex')!) > 0
 }
 
-function getAttribute(element, ...args) {
-  return element.getAttribute(...args)
+function getAttribute(element: Element, qualifiedName: string) {
+  return element.getAttribute(qualifiedName)
 }
 
-function getParentNode(element) {
+function getParentNode(element: Element) {
   return element.parentNode
 }
 const parent = getParentNode
 
-function containsFocus(element) {
+function containsFocus(element: Element) {
   const activeElement = getOwnerDocument(element).activeElement
   return (
     element && (activeElement === element || element.contains(activeElement))
   )
 }
 
-function focused(element) {
+function focused(element: Element) {
   return element === getOwnerDocument(element).activeElement
 }
 
-function getDOMNode(element) {
+function getDOMNode(element: Element) {
   return element
 }
 const node = getDOMNode
 
-function getBoundingClientRect(element) {
+function getBoundingClientRect(element: Element) {
   return element.getBoundingClientRect()
 }
 const rect = getBoundingClientRect
 
-function hasClass(element, classname) {
+function hasClass(element: Element, classname: string) {
   return element.classList.contains(classname)
 }
 
-function getId(element) {
+function getId(element: Element) {
   return element.id
 }
 // aliases:
 const id = getId
 
-function debug(...args) {
+function debug(
+  element: Element | Document | DocumentFragment,
+  maxLength = 7000,
+  options = { highlight: false }
+) {
   // eslint-disable-next-line no-console
-  console.log(toString(...args))
+  console.log(toString(element, maxLength, options))
 }
 
-function toString(...args) {
-  return elementToString(...args)
+function toString(
+  element: Element | Document | DocumentFragment,
+  maxLength = 7000,
+  options = { highlight: false }
+) {
+  return elementToString(element, maxLength, options)
 }
 
-function accessible(element = document.body, options) {
+function accessible(
+  element = document.body,
+  options?: Record<string, unknown>
+) {
   if (isElement(element)) {
     return runAxeCheck(element, options)
   } else {
@@ -409,14 +449,14 @@ function accessible(element = document.body, options) {
   }
 }
 
-function exists(element) {
+function exists(element: Element) {
   const doc = getOwnerDocument(element)
   return doc && doc.body.contains(element)
 }
 
-function empty(element) {
-  if (element && element.value) {
-    return element.value.length === 0 || !element.value.trim()
+function empty(element: Element) {
+  if (element && (element as any).value) {
+    return (element as any).value.length === 0 || !(element as any).value.trim()
   } else if (element && element.children) {
     return element.children.length === 0
   } else {
@@ -428,22 +468,22 @@ function empty(element) {
   }
 }
 
-function contains(element, elementOrSelector) {
+function contains(element: Element, elementOrSelector?: string | Element) {
   if (typeof elementOrSelector === 'string') {
     return querySelector(element, elementOrSelector)
   } else if (isElement(elementOrSelector)) {
-    return element.contains(elementOrSelector)
+    return element.contains(elementOrSelector!)
   } else if (
     elementOrSelector &&
-    typeof elementOrSelector.getDOMNode === 'function'
+    typeof (elementOrSelector as any).getDOMNode === 'function'
   ) {
-    return element.contains(elementOrSelector.getDOMNode())
+    return element.contains((elementOrSelector as any).getDOMNode())
   } else {
     return false
   }
 }
 
-function descendants(element, selector) {
+function descendants(element: Element, selector: string) {
   return querySelectorAll(element, selector).filter(
     (match) => match !== element
   )
@@ -451,12 +491,12 @@ function descendants(element, selector) {
 // aliases:
 const children = descendants
 
-function ancestors(element, selector) {
+function ancestors(element: Element, selector: string) {
   const ancestors = []
   let parentNode = element.parentNode
 
   while (parentNode && parentNode !== document && isElement(parentNode)) {
-    if (matchesSelector(parentNode, selector)) {
+    if (matchesSelector(parentNode as Element, selector)) {
       ancestors.push(parentNode)
     }
     parentNode = parentNode.parentNode
@@ -468,54 +508,54 @@ function ancestors(element, selector) {
 const parents = ancestors
 const attribute = getAttribute
 
-function style(element, property) {
+function style(element: Element, property: string) {
   return getComputedStyle(element).getPropertyValue(property)
 }
 
-function classNames(element) {
+function classNames(element: Element) {
   return Array.from(element.classList)
 }
 
-function matches(element, selector) {
+function matches(element: Element, selector: string | undefined) {
   return matchesSelector(element, selector)
 }
 
-function bounds(element, property) {
-  return getBoundingClientRect(element).property
+//function bounds(element: Element) {
+//  return getBoundingClientRect(element).property
+//}
+
+function checked(element: Element) {
+  return (element as any).checked || getAttribute(element, 'aria-checked')
 }
 
-function checked(element) {
-  return element.checked || getAttribute(element, 'aria-checked')
+function selected(element: Element) {
+  return (element as any).selected || getAttribute(element, 'aria-selected')
 }
 
-function selected(element) {
-  return element.selected || getAttribute(element, 'aria-selected')
-}
-
-function disabled(element) {
+function disabled(element: Element) {
   return (
     getAttribute(element, 'disabled') || getAttribute(element, 'aria-disabled')
   )
 }
 
-function readonly(element) {
-  return element.readonly || getAttribute(element, 'aria-readonly')
+function readonly(element: Element) {
+  return (element as any).readonly || getAttribute(element, 'aria-readonly')
 }
 
-function role(element) {
+function role(element: Element) {
   return getAttribute(element, 'role')
 }
 
-function value(element) {
-  return element.value
+function value(element: Element): string | null {
+  return (element as any).value
 }
 
-function label(element) {
+function label(element: Element) {
   const doc = getOwnerDocument(element)
   if (matchesSelector(element, '[aria-label]')) {
     return getAttribute(element, 'aria-label')
   } else if (matchesSelector(element, '[aria-labelledby]')) {
-    const ids = getAttribute(element, 'aria-labelledby').split(/\s+/)
+    const ids = getAttribute(element, 'aria-labelledby')!.split(/\s+/)
     const labels = ids.map((id) => doc.getElementById(id))
     return labels.map((label) => (label ? label.textContent : '')).join(' ')
   } else if (
@@ -535,12 +575,13 @@ function label(element) {
   } else if (matchesSelector(element, 'input,textarea,select')) {
     const labels = ancestors(element, 'label')
     if (labels.length > 0) {
-      return getTextContent(labels[0])
+      return getTextContent(labels[0] as Element)
     }
   }
+  return undefined
 }
 
-function title(element) {
+function title(element: Element) {
   if (matchesSelector(element, '[title]')) {
     return getAttribute(element, 'title')
   } else if (matchesSelector(element, 'svg')) {
@@ -549,6 +590,7 @@ function title(element) {
       return getTextContent(title)
     }
   }
+  return undefined
 }
 
 export {
@@ -589,7 +631,6 @@ export {
   classNames,
   id,
   matches,
-  bounds,
   checked,
   selected,
   disabled,

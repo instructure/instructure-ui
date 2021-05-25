@@ -78,6 +78,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "@types/react-dom": "^16.9",
     "husky": "^6.0.0",
     "lerna": "^4",
     "lint-staged": "^10",

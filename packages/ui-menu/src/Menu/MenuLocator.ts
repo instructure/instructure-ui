@@ -60,7 +60,6 @@ const customMethods = {
     return PopoverLocator.findContent(element, selector, {
       ...options,
       customMethods: {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'customMethods' does not exist on type '{... Remove this comment to see the full error message
         ...options.customMethods,
         ...customMethods
       }

@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default function initConsole() {
-  /* eslint-disable no-console */
-  // clear the console before rebundling:
-  if (typeof console.clear === 'function') {
-    console.clear()
-  }
-  /* eslint-enable no-console */
+// TODO add that it can return null but this will cause lots of TSC errors
+// the main reason is that the function params are bound in bindElementToMethods
+export function firstOrNull<T>(result: T[] | null): T {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return Array.isArray(result) ? result[0] || null : null
 }

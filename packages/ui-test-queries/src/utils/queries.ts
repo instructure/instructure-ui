@@ -24,58 +24,76 @@
 
 import { firstOrNull } from './firstOrNull'
 import { getQueryResult } from './queryResult'
-import { parseQueryArguments } from './parseQueryArguments'
+import { parseQueryArguments, QueryArguments } from './parseQueryArguments'
 import {
   querySelectorAll,
   querySelectorFrames,
-  querySelectorParents
+  querySelectorParents,
+  SelectorOptions
 } from './selectors'
+import { QueryOrHelperType } from './bindElementToUtilities'
 
-async function findWithLabel(...args) {
+export type QueryFunction = (
+  element: Element,
+  selector: string | undefined,
+  options: SelectorOptions
+) => Element[]
+
+async function findWithLabel(...args: QueryArguments) {
   const { element, selector, options } = parseQueryArguments(...args)
   return find(element, `:withLabel("${selector}")`, options)
 }
 
-async function findWithText(...args) {
+async function findWithText(...args: QueryArguments) {
   const { element, selector, options } = parseQueryArguments(...args)
   return find(element, `:withText("${selector}")`, options)
 }
 
-async function findWithTitle(...args) {
+async function findWithTitle(...args: QueryArguments) {
   const { element, selector, options } = parseQueryArguments(...args)
   return find(element, `:withTitle("${selector}")`, options)
 }
 
-async function find(...args) {
+async function find(...args: QueryArguments) {
   return firstOrNull(await findAll(...args))
 }
 
-function findAll(...args) {
+function findAll(...args: QueryArguments) {
   return findAllByQuery(querySelectorAll, ...args)
 }
 
-async function findParent(...args) {
+async function findParent(...args: QueryArguments) {
   return firstOrNull(await findParents(...args))
 }
 
-function findParents(...args) {
+function findParents(...args: QueryArguments) {
   return findAllByQuery(querySelectorParents, ...args)
 }
 
-async function findFrame(...args) {
+async function findFrame(...args: QueryArguments) {
   return firstOrNull(await findAllFrames(...args))
 }
 
-function findAllFrames(...args) {
+function findAllFrames(...args: QueryArguments) {
   return findAllByQuery(querySelectorFrames, ...args)
 }
 
-function findAllByQuery(queryFn, ...args) {
+function findAllByQuery(
+  queryFn: QueryFunction,
+  ...args: QueryArguments
+): Promise<QueryOrHelperType[]> {
   return getQueryResult(queryFn, ...args)
 }
 
-async function findByQuery(...args) {
-  return firstOrNull(await findAllByQuery(...args))
+async function findByQuery(
+  queryFn: (
+    element: Element,
+    selector: string | undefined,
+    options: SelectorOptions
+  ) => Element[],
+  ...args: QueryArguments
+) {
+  return firstOrNull(await findAllByQuery(queryFn, ...args))
 }
 
 export {

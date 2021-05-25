@@ -22,39 +22,86 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-function getOwnerDocument(element) {
-  return element.ownerDocument || document
+interface WrapperProp extends React.ComponentProps<React.ElementType> {
+  Component: React.ElementType
+  props: Record<string, unknown>
+}
+
+export interface WrappedRef {
+  setProps: (newProps: Record<string, unknown>) => Promise<unknown>
+  getDOMNode: () => Element
+}
+
+class WrapperComponent extends React.Component<WrapperProp, WrapperProp> {
+  static propTypes = {
+    Component: PropTypes.elementType.isRequired,
+    props: PropTypes.object.isRequired
+  }
+
+  constructor(props: WrapperProp) {
+    super(props)
+    this.state = this.props
+  }
+
+  getDOMNode() {
+    try {
+      return ReactDOM.findDOMNode(this)
+    } catch (e) {
+      console.warn(`[ui-test-utils] ${e}`)
+      return null
+    }
+  }
+
+  setChildProps(newProps: Record<string, unknown>) {
+    const { props: oldProps } = this.state
+    const props = { ...oldProps, ...newProps }
+    return new Promise((resolve) =>
+      this.setState({ props }, resolve as (value?: unknown) => void)
+    )
+  }
+
+  render() {
+    const { Component } = this.props
+    const { props } = this.state
+    const { componentRef, ...componentProps } = props
+    return <Component ref={componentRef} {...componentProps} />
+  }
 }
 
 class ReactComponentWrapper {
-  mount(element, options = {}) {
+  private _mountNode: HTMLDivElement | null = null
+
+  mount(
+    element: React.ComponentElement<Record<string, unknown>, React.Component>,
+    options: { props?: Record<string, unknown> } = {}
+  ) {
     const { type, ref, props } = element
-    const Wrapper = createMountWrapper(element, options)
-    const doc = getOwnerDocument(element)
 
     this.unmount()
 
-    this._mountNode = doc.createElement('div')
+    this._mountNode = document.createElement('div')
     this._mountNode.setAttribute('data-ui-test-utils', 'true')
 
-    doc.body.appendChild(this._mountNode)
+    document.body.appendChild(this._mountNode)
 
-    let result, rendered
+    let result: WrappedRef
+    let rendered: boolean
 
-    const wrapperRef = (wrapper) => {
+    const wrapperRef = (wrapper: WrapperComponent) => {
       if (wrapper && !rendered) {
         result = {
-          setProps(newProps) {
+          setProps(newProps: Record<string, unknown>) {
             return doAsync(() => {
               wrapper.setChildProps(newProps)
             })
           },
-          getDOMNode() {
-            return wrapper.getDOMNode()
+          getDOMNode(): Element {
+            // TODO make this work properly. It can return null!
+            return wrapper.getDOMNode() as Element
           }
         }
         rendered = true
@@ -64,24 +111,24 @@ class ReactComponentWrapper {
       }
     }
 
-    const Element = React.createElement(Wrapper, {
-      Component: type,
-      props: { ...props, ...options.props },
-      context: options.context,
-      ref: wrapperRef
-    })
+    const WrappedElement = (
+      <WrapperComponent
+        Component={type}
+        props={{ ...props, ...options.props }}
+        ref={wrapperRef}
+      />
+    )
 
-    const doAsync = (actionFn) => {
+    const doAsync = (actionFn: () => void): Promise<WrappedRef> => {
       return new Promise((resolve, reject) => {
-        let error
+        let error: unknown
         setTimeout(() => {
           try {
             actionFn()
           } catch (e) {
-            // catch unhandeled errors
+            // catch unhandled errors
             error = e
           }
-
           if (error) {
             return reject(error)
           } else {
@@ -92,7 +139,7 @@ class ReactComponentWrapper {
     }
 
     return doAsync(() => {
-      ReactDOM.render(Element, this._mountNode)
+      ReactDOM.render(WrappedElement, this._mountNode)
     })
   }
 
@@ -110,73 +157,6 @@ class ReactComponentWrapper {
       }
     })
   }
-}
-
-function createMountWrapper(element, options = {}) {
-  class WrapperComponent extends Component {
-    static propTypes = {
-      Component: PropTypes.elementType.isRequired,
-      props: PropTypes.object.isRequired,
-      context: PropTypes.object
-    }
-
-    static defaultProps = {
-      context: {}
-    }
-
-    constructor(...args) {
-      super(...args)
-      const { props, context } = this.props
-      this.state = {
-        props,
-        context
-      }
-    }
-
-    getDOMNode() {
-      try {
-        return ReactDOM.findDOMNode(this)
-      } catch (e) {
-        console.warn(`[ui-test-utils] ${e}`)
-        return null
-      }
-    }
-
-    setChildProps(newProps) {
-      const { props: oldProps } = this.state
-      const props = { ...oldProps, ...newProps }
-      return new Promise((resolve) => this.setState({ props }, resolve))
-    }
-
-    setChildContext(newContext) {
-      const { context: oldContext } = this.state
-      const context = { ...oldContext, ...newContext }
-      return new Promise((resolve) => this.setState({ context }, resolve))
-    }
-
-    render() {
-      const { Component } = this.props
-      const { props } = this.state
-
-      const { componentRef, ...componentProps } = props
-
-      return <Component ref={componentRef} {...componentProps} />
-    }
-  }
-
-  if (element.type.contextTypes) {
-    const childContextTypes = {
-      ...element.type.contextTypes
-    }
-
-    WrapperComponent.prototype.getChildContext = function getChildContext() {
-      return this.state.context
-    }
-
-    WrapperComponent.childContextTypes = childContextTypes
-  }
-
-  return WrapperComponent
 }
 
 const reactComponentWrapper = new ReactComponentWrapper()

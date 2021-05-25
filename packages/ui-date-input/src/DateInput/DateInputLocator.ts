@@ -34,9 +34,8 @@ import { DateInput } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const DateInputLocator = locator(DateInput.selector, {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findInput: (...args) => locator('input').find(...args),
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+
   findCalendar: async (element, ...args) => {
     const content = await PopoverLocator.findContent(element, ...args)
     return content ? CalendarLocator.find(content.getDOMNode()) : null

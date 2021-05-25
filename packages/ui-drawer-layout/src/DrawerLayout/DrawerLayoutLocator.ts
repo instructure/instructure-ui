@@ -33,9 +33,8 @@ export { DrawerContentLocator, DrawerTrayLocator }
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const DrawerLayoutLocator = locator(DrawerLayout.selector, {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findContent: (...args) => DrawerContentLocator.find(...args),
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+
   findTray: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(DrawerLayout.locatorAttribute)

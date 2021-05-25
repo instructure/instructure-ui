@@ -25,10 +25,16 @@ import { label, title } from './helpers'
 import { normalizeText } from './normalizeText'
 import { getNodeText } from './getNodeText'
 
+interface MatchOptions {
+  exact?: boolean
+  trim?: boolean
+  collapseWhitespace?: boolean
+}
+
 function matches(
-  textToMatch,
-  matcherString,
-  options = {
+  textToMatch: string | unknown,
+  matcherString: string | RegExp,
+  options: MatchOptions = {
     exact: true,
     trim: true,
     collapseWhitespace: true
@@ -40,8 +46,8 @@ function matches(
 }
 
 function fuzzyMatches(
-  textToMatch,
-  matcher,
+  textToMatch: string | unknown,
+  matcher: string | RegExp,
   { collapseWhitespace = true, trim = true } = {}
 ) {
   if (typeof textToMatch !== 'string') {
@@ -61,19 +67,17 @@ function fuzzyMatches(
 }
 
 function exactMatches(
-  textToMatch,
-  matcher,
+  textToMatch: string | unknown,
+  matcher: string | RegExp,
   { collapseWhitespace = true, trim = true } = {}
 ) {
   if (typeof textToMatch !== 'string') {
     return false
   }
-
   const normalizedText = normalizeText(textToMatch, {
     trim,
     collapseWhitespace
   })
-
   if (typeof matcher === 'string') {
     return normalizedText === matcher
   } else {
@@ -81,19 +85,36 @@ function exactMatches(
   }
 }
 
-function matchElementByTitle(element, titleText, options) {
+function matchElementByTitle(
+  element: Element,
+  titleText: string | RegExp,
+  options: MatchOptions
+) {
   return matches(title(element), titleText, options)
 }
 
-function matchElementByLabel(element, labelText, options) {
+function matchElementByLabel(
+  element: Element,
+  labelText: string | RegExp,
+  options: MatchOptions
+) {
   return matches(label(element), labelText, options)
 }
 
-function matchElementByText(element, text, options) {
+function matchElementByText(
+  element: Element,
+  text: string | RegExp,
+  options: MatchOptions
+) {
   return matches(getNodeText(element), text, options)
 }
 
-function matchElementByAttributeValue(element, name, value, options) {
+function matchElementByAttributeValue(
+  element: Element,
+  name: string,
+  value: string | RegExp,
+  options: MatchOptions
+) {
   return matches(element.getAttribute(name), value, options)
 }
 

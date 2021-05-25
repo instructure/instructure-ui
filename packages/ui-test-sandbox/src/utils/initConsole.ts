@@ -21,8 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-function isElement(node) {
-  return node instanceof Element || (node && node.nodeType === 1)
-}
 
-export { isElement }
+export default function initConsole(): void {
+  /* eslint-disable no-console */
+  // clear the console before rebundling:
+  if (typeof console.clear === 'function') {
+    console.clear()
+  }
+  /* eslint-enable no-console */
+}
