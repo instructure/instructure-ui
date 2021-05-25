@@ -41,6 +41,7 @@ type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   id: string
+  stackedSortByLabel: string
   width?: string | number
   textAlign?: 'start' | 'center' | 'end'
   sortDirection?: 'none' | 'ascending' | 'descending'
@@ -63,10 +64,16 @@ class ColHeader extends Component<Props> {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     /**
-     * A unique id for this column. When sortable table is in stacked layout,
-     * id is also used as option in combobox.
+     * A unique id for this column. The `id` is also used as option in combobox,
+     * when sortable table is in stacked layout,
+     * and no `stackedSortByLabel` is provided.
      */
     id: PropTypes.string.isRequired,
+    /**
+     * A custom string to display as option text in the combobox (instead of
+     * using the `id` prop), when sortable table is in stacked layout.
+     */
+    stackedSortByLabel: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
      * Control the width of column.
@@ -94,6 +101,7 @@ class ColHeader extends Component<Props> {
   static defaultProps = {
     textAlign: 'start',
     sortDirection: 'none',
+    stackedSortByLabel: undefined,
     children: null,
     scope: 'col'
   }
@@ -136,14 +144,8 @@ class ColHeader extends Component<Props> {
   }
 
   render() {
-    const {
-      onRequestSort,
-      width,
-      children,
-      sortDirection,
-      scope,
-      styles
-    } = this.props
+    const { onRequestSort, width, children, sortDirection, scope, styles } =
+      this.props
 
     return (
       <th

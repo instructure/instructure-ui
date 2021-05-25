@@ -129,10 +129,13 @@ class Head extends Component<Props> {
     Children.forEach(row.props.children, (colHeader) => {
       count += 1
       if (matchComponentTypes(colHeader, [ColHeader])) {
-        const { id, sortDirection, onRequestSort } = colHeader.props
+        const { id, stackedSortByLabel, sortDirection, onRequestSort } =
+          colHeader.props
+
+        const label = stackedSortByLabel || id
 
         if (onRequestSort) {
-          options.push(id)
+          options.push({ id, label })
           // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           clickHandlers[id] = onRequestSort
           if (sortDirection !== 'none') {
@@ -167,19 +170,19 @@ class Head extends Component<Props> {
               onChange={handleSelect}
             >
               {/* @ts-expect-error ts-migrate(7005) FIXME: Variable 'options' implicitly has an 'any[]' type. */}
-              {options.map((option) => (
+              {options.map(({ id, label }) => (
                 <SimpleSelect.Option
-                  id={option}
-                  key={option}
-                  value={option}
+                  id={id}
+                  key={id}
+                  value={id}
                   renderBeforeLabel={
                     // @ts-expect-error ts-migrate(7005) FIXME: Variable 'selectedOption' implicitly has an 'any' ... Remove this comment to see the full error message
-                    option === selectedOption
+                    id === selectedOption
                       ? IconCheckLine
                       : () => <IconCheckLine style={{ color: 'transparent' }} />
                   }
                 >
-                  {option}
+                  {label}
                 </SimpleSelect.Option>
               ))}
             </SimpleSelect>
