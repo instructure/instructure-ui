@@ -105,24 +105,26 @@ class App extends Component {
       layout: 'large',
       versionsData: {
         latestVersion: 'v8',
-        previousVersions: []
+        previousVersions: ['v7', 'v6']
       }
     }
 
     this._content = null
     this._menuTrigger = null
     this._mediaQueryListener = null
+    this.fetchVersionData()
   }
 
-  fetchVersionData = () => {
+  fetchVersionData = async () => {
+    // eslint-disable-next-line compat/compat
     const isLocalHost = window.location.hostname === 'localhost'
 
     if (!isLocalHost) {
       // eslint-disable-next-line compat/compat
-      return fetch(`${window.location.origin}/versions.json`)
-        .then((response) => response.json())
-        .then((versionsData) => this.setState({ versionsData }))
-        .catch(console.error)
+      const result = await fetch(`${window.location.origin}/versions.json`)
+      const versionsData = await result.json()
+
+      return this.setState({ versionsData })
     }
   }
   componentDidMount() {

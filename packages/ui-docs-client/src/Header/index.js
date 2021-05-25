@@ -31,6 +31,10 @@ import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
 import { SimpleSelect } from '@instructure/ui-simple-select'
+import { CondensedButton } from '@instructure/ui-buttons'
+import { IconMiniArrowDownLine } from '@instructure/ui-icons'
+import { Menu } from '@instructure/ui-menu'
+import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { Heading } from '../Heading'
 
@@ -52,19 +56,77 @@ class Header extends Component {
     versionsData: undefined
   }
 
-  handleSelect = (e, { value: selectedVersion }) => {
+  handleSelect = (e, [selectedVersion]) => {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
+    const isSelectedLatestVersion = selectedVersion === latestVersion
+    const splittedUrl = window.location.pathname.split('/').filter(Boolean)
+    const [versionInPath] = splittedUrl
+    const isOnLatestVersion = splittedUrl.length === 0
 
-    const isCurrentVersion = selectedVersion === latestVersion
-    // if we select the latest version from the dropdown, then navigate to the base url --> instructure.design/#currentHash
-    // because that is always the latest version of the docs
-    // in every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
-    const versionToNavigate = isCurrentVersion
+    // 1: instructure.design, latest: v8, selected: v8 -> navigate to instructure.design/#index
+    // 2: instructure.design/v6/, latest: v8, selected: v6 -> navigate to instructure.design/v6/#index
+    if (
+      (isOnLatestVersion && isSelectedLatestVersion) ||
+      selectedVersion === versionInPath
+    ) {
+      return window.location.replace('#index')
+    }
+    // If we select the latest version from the dropdown,
+    // then navigate to the index (instructure.design/#currentHash).
+    // In every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
+    const versionToNavigate = isSelectedLatestVersion
       ? `/${window.location.hash}`
       : `/${selectedVersion}/${window.location.hash}`
 
-    window.location.replace(versionToNavigate)
+    return window.location.replace(versionToNavigate)
+  }
+  renderVersionsBlock = () => {
+    const { versionsData } = this.props
+    const { latestVersion, previousVersions } = versionsData
+    const allVersions = [latestVersion, ...previousVersions]
+
+    const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
+
+    const currentVersion = versionInPath || latestVersion
+
+    return (
+      <View display="block" textAlign="center" margin="small none large">
+        <Menu
+          placement="bottom"
+          label="Select InstUI version"
+          onSelect={this.handleSelect}
+          themeOverride={{ minWidth: '12rem' }}
+          trigger={
+            <CondensedButton padding="0.25rem">
+              <Text size="large">
+                {(
+                  <span>
+                    {this.props.name} {this.props.version}
+                  </span>
+                ) || 'Documentation'}
+              </Text>
+              <IconMiniArrowDownLine size="x-small" />
+            </CondensedButton>
+          }
+        >
+          <Menu.Group
+            selected={[currentVersion]}
+            label={
+              <ScreenReaderContent>Select InstUI version</ScreenReaderContent>
+            }
+          >
+            {allVersions.map((opt, index) => (
+              <Menu.Item key={index} id={`opt-${index}`} value={opt}>
+                <View textAlign="center" as="div">
+                  {this.props.name} {opt}
+                </View>
+              </Menu.Item>
+            ))}
+          </Menu.Group>
+        </Menu>
+      </View>
+    )
   }
   render() {
     const { versionsData } = this.props
@@ -104,39 +166,12 @@ class Header extends Component {
           <Link href="#index" isWithinText={false} display="block">
             <View display="block" textAlign="center">
               {corpLogo}
-              <View display="block" margin="small none none">
-                <Text size="large">
-                  {(
-                    <span>
-                      {this.props.name} {this.props.version}
-                    </span>
-                  ) || 'Documentation'}
-                </Text>
-              </View>
             </View>
           </Link>
+          <View display="block" textAlign="center">
+            {this.renderVersionsBlock()}
+          </View>
         </Heading>
-
-        <View display="block" textAlign="center" margin="small none large">
-          <Heading level="h5">
-            <SimpleSelect
-              renderLabel={'Select Version'}
-              assistiveText="Use arrow keys to navigate options."
-              defaultValue={versionInPath || latestVersion}
-              onChange={this.handleSelect}
-            >
-              {allVersions.map((opt, index) => (
-                <SimpleSelect.Option
-                  key={index}
-                  id={`opt-${index}`}
-                  value={opt}
-                >
-                  {opt}
-                </SimpleSelect.Option>
-              ))}
-            </SimpleSelect>
-          </Heading>
-        </View>
       </View>
     )
   }

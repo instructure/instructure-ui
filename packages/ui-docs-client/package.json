@@ -43,6 +43,7 @@
     "@instructure/ui-link": "^7.7.0",
     "@instructure/ui-list": "^7.7.0",
     "@instructure/ui-metric": "^7.7.0",
+    "@instructure/ui-menu": "^7.7.0",
     "@instructure/ui-modal": "^7.7.0",
     "@instructure/ui-overlays": "^7.7.0",
     "@instructure/ui-pill": "^7.7.0",
