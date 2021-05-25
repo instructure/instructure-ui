@@ -240,7 +240,9 @@ render(
 
 ### A sortable table using our Responsive component
 
-Resize the window to see how column headers transition into a Select for sorting table content when the traditional Table Header is no longer clickable. The Table layout itself switches from the horizontal view to the stacked view allowing content to be viewed without horizontal scrolling. See [Responsive](#Responsive) for more examples.
+Resize the window to see how column headers transition into a `Select` for sorting table content when the traditional Table Header is no longer clickable. The Table layout itself switches from the horizontal view to the stacked view allowing content to be viewed without horizontal scrolling. See [Responsive](#Responsive) for more examples.
+
+By default, the options in the `Select` for sorting in stacked layout are generated from the `id` property of the `Table.ColHeader` components. If you want to display custom strings, use the `stackedSortByLabel` property.
 
 ```javascript
 ---
@@ -313,6 +315,7 @@ class SortableTable extends React.Component {
                     <Table.ColHeader
                       key={id}
                       id={id}
+                      stackedSortByLabel={text}
                       onRequestSort={this.handleSort}
                       sortDirection={id === sortBy ? direction : 'none'}
                     >
@@ -352,19 +355,19 @@ render(
     caption="Top rated movies"
     headers={[
       {
-        id: 'Rank',
+        id: 'rank',
         text: 'Rank',
       },
       {
-        id: 'Title',
+        id: 'title',
         text: 'Title',
       },
       {
-        id: 'Year',
+        id: 'year',
         text: 'Year',
       },
       {
-        id: 'Rating',
+        id: 'rating',
         text: 'Rating',
         renderCell: (rating) => rating.toFixed(1),
       },
@@ -372,38 +375,38 @@ render(
     rows={[
       {
         id: '1',
-        Rank: 1,
-        Title: 'The Shawshank Redemption',
-        Year: 1994,
-        Rating: 9.3,
+        rank: 1,
+        title: 'The Shawshank Redemption',
+        year: 1994,
+        rating: 9.3,
       },
       {
         id: '2',
-        Rank: 2,
-        Title: 'The Godfather',
-        Year: 1972,
-        Rating: 9.2,
+        rank: 2,
+        title: 'The Godfather',
+        year: 1972,
+        rating: 9.2,
       },
       {
         id: '3',
-        Rank: 3,
-        Title: 'The Godfather: Part II',
-        Year: 1974,
-        Rating: 9.0,
+        rank: 3,
+        title: 'The Godfather: Part II',
+        year: 1974,
+        rating: 9.0,
       },
       {
         id: '4',
-        Rank: 4,
-        Title: 'The Dark Knight',
-        Year: 2008,
-        Rating: 9.0,
+        rank: 4,
+        title: 'The Dark Knight',
+        year: 2008,
+        rating: 9.0,
       },
       {
         id: '5',
-        Rank: 5,
-        Title: '12 Angry Men',
-        Year: 1957,
-        Rating: 8.9,
+        rank: 5,
+        title: '12 Angry Men',
+        year: 1957,
+        rating: 8.9,
       },
     ]}
   />

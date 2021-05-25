@@ -263,6 +263,31 @@ describe('<Table />', async () => {
       expect(sortFoo).to.have.been.calledOnce()
     })
 
+    it('can display custom label in the select in stacked layout', async () => {
+      await renderSortableTable(
+        {
+          stackedSortByLabel: 'Custom Text'
+        },
+        {
+          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+          onRequestSort: stub()
+        },
+        'stacked'
+      )
+      const select = await SimpleSelectLocator.find()
+      const input = await select.findInput()
+
+      await input.click()
+
+      const list = await select.findOptionsList()
+      const options = await list.findAll('[role="option"]')
+
+      // with stackedSortByLabel provided
+      expect(options[0].text()).to.equal('Custom Text')
+      // the id by default
+      expect(options[1].text()).to.equal('bar')
+    })
+
     it('can render check mark for sorted column in stacked layout', async () => {
       await renderSortableTable(
         {
