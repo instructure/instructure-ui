@@ -24,14 +24,13 @@
 
 import { normalizeText } from './normalizeText'
 
-function getNodeText(element) {
+function getNodeText(element: Element): string {
   if (element.matches('input[type=submit], input[type=button]')) {
-    return element.value
+    return (element as HTMLInputElement).value
   }
   return Array.from(element.childNodes)
     .map((child) => {
       let textContent
-
       // filter out nodes that have the same textContent as the parent
       if (
         child.nodeType === 3 ||
@@ -41,7 +40,6 @@ function getNodeText(element) {
       ) {
         textContent = child.textContent
       }
-
       return textContent || ''
     })
     .join('')

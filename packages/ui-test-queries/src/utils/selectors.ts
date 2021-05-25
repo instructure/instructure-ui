@@ -24,7 +24,7 @@
 
 import Sizzle from 'sizzle'
 
-import { parseQueryArguments } from './parseQueryArguments'
+import { parseQueryArguments, QueryArguments } from './parseQueryArguments'
 import { firstOrNull } from './firstOrNull'
 
 import { elementToString } from './elementToString'
@@ -36,62 +36,88 @@ import {
   matchElementByLabel,
   matchElementByText
 } from './matchers'
+import { GenericFunction } from './bindElementToMethods'
+
+export interface SelectorOptions {
+  expectEmpty?: boolean
+  exact?: boolean
+  trim?: boolean
+  collapseWhitespace?: boolean
+  ignore?: string
+  timeout?: number
+  visible?: boolean
+  customMethods?: Record<string, GenericFunction>
+}
 
 Sizzle.selectors.cacheLength = 1
 
-function querySelectorAll(...args) {
+function querySelectorAll(...args: QueryArguments) {
   const { element, selector, options } = parseQueryArguments(...args)
-
-  let results = []
-
   if (selector) {
-    results = findAllMatches(element, selector, options)
-  } else {
-    throwQueryError(element, selector)
+    return findAllMatches(element, selector, options)
   }
-
-  return results
+  throw buildQueryError(element, selector)
 }
 
-function querySelector(...args) {
+function querySelector(...args: QueryArguments) {
   return firstOrNull(querySelectorAll(...args))
 }
 
-function querySelectorParents(element, selector, options) {
-  let results = []
+function querySelectorParents(
+  element: Element,
+  selector: string | undefined,
+  options: SelectorOptions
+) {
+  const results = []
   if (matchesSelector(element, selector)) {
     results.push(element)
   }
-  let parentNode = element.parentNode
+  let parentNode = element.parentNode as
+    | Element
+    | Document
+    | DocumentFragment
+    | null
 
   while (parentNode && parentNode !== document) {
     if (matchesSelector(parentNode, selector, options)) {
-      results.push(parentNode)
+      results.push(parentNode as Element)
     }
-    parentNode = parentNode.parentNode
+    parentNode = parentNode.parentNode as
+      | Element
+      | Document
+      | DocumentFragment
+      | null
   }
-
   return results
 }
 
-function querySelectorFrames(element, selector, options) {
+function querySelectorFrames(
+  element: Element,
+  selector: string | undefined,
+  options: SelectorOptions
+) {
   return querySelectorAll(element, 'iframe')
     .filter((frame) => matchesSelector(frame, selector, options))
     .map((frame) => {
       let doc = null
       try {
-        doc = frame.contentDocument.documentElement
+        doc = (frame as HTMLIFrameElement).contentDocument!.documentElement
       } catch (e) {
         console.warn(
           `[ui-test-queries] could not find document element for iframe: ${e}`
         )
       }
-      return doc
+      return doc as Element
     })
     .filter((doc) => doc !== null)
 }
 
-function querySelectorAllWithin(containerSelector, element, selector, options) {
+function querySelectorAllWithin(
+  containerSelector: string,
+  element: Element,
+  selector: string | undefined,
+  options: SelectorOptions
+) {
   // find all of the container root nodes...
   let containers = querySelectorAll(element, containerSelector, options)
 
@@ -111,18 +137,17 @@ function querySelectorAllWithin(containerSelector, element, selector, options) {
   return containers
 }
 
-function matchesSelector(...args) {
+function matchesSelector(...args: QueryArguments) {
   const { element, selector, options } = parseQueryArguments(...args)
 
   if (element && selector) {
     return matches(element, selector, options)
-  } else {
-    throwQueryError(element, selector)
   }
+  throw buildQueryError(element, selector)
 }
 
-function throwQueryError(element, selector) {
-  throw new Error(
+function buildQueryError(element: Element, selector?: string) {
+  return new Error(
     [
       `[ui-test-queries] Invalid query arguments:`,
       `element: ${elementToString(element, 7000, { highlight: false })}`,
@@ -133,34 +158,37 @@ function throwQueryError(element, selector) {
   )
 }
 
-function findAllMatches(element, selector, options) {
-  let results = []
+function findAllMatches(
+  element: Element,
+  selector: string,
+  options: SelectorOptions
+) {
+  // Sizzle needs Element type
+  let results: Element[] = []
 
   if (matchesSelector(element, selector, options)) {
     results.push(element)
   }
-
   addPseudos(options)
   Sizzle(selector, element, results)
 
   if (options.ignore) {
     results = results.filter(
-      (result) => !matchesSelector(result, options.ignore)
+      (result) => !matchesSelector(result, options.ignore!)
     )
   }
 
   results = results.filter((result) => matchesSelector(result, ':exists'))
-
   return results
 }
 
-function matches(element, selector, options) {
+function matches(element: Element, selector: string, options: SelectorOptions) {
   addPseudos(options)
   return element && Sizzle.matchesSelector(element, selector)
 }
 
 function addPseudos(
-  options = {
+  options: SelectorOptions = {
     exact: true,
     trim: true,
     collapseWhitespace: true

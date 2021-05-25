@@ -21,13 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { elementToString } from './elementToString'
 import debounce from '@instructure/debounce'
+import { QueryOrHelperType } from './bindElementToUtilities'
 
+export interface QueryResult {
+  results: QueryOrHelperType[]
+  selector: string
+}
+
+interface WaitForQueryResultParams {
+  sync?: boolean
+  element: Element
+  timeout?: number
+  expectEmpty?: boolean
+  mutationObserverOptions?: {
+    attributes: boolean
+    childList: boolean
+    subtree: boolean
+  }
+}
 // original source: https://github.com/kentcdodds/dom-testing-library/blob/master/src/wait-for-element.js
 // this doesn't require the mutation observer shim because we don't run the tests with JSDOM
 export function waitForQueryResult(
-  queryFn,
+  queryFn: () => QueryResult,
   {
     sync = false,
     element,
@@ -38,7 +56,7 @@ export function waitForQueryResult(
       childList: true,
       subtree: true
     }
-  } = {}
+  }: WaitForQueryResultParams
 ) {
   if (typeof element === 'undefined') {
     if (typeof document === 'undefined') {
@@ -51,15 +69,16 @@ export function waitForQueryResult(
     }
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<QueryResult>((resolve, reject) => {
     const debouncedQuery = debounce(runQuery, 10, {
       leading: false,
       trailing: true
     })
 
-    let lastError, observer, timer, lastResult
-
-    lastResult = {}
+    let lastError: Error
+    let observer: MutationObserver
+    let timer: ReturnType<typeof setTimeout>
+    let lastResult: QueryResult = { results: [], selector: '' }
 
     function runQuery() {
       if (typeof queryFn !== 'function') {
@@ -99,7 +118,7 @@ export function waitForQueryResult(
       }
     }
 
-    function onDone(e, result) {
+    function onDone(e: Error | null, result: QueryResult) {
       clearTimeout(timer)
       setImmediate(() => observer.disconnect())
       debouncedQuery.cancel()
@@ -111,7 +130,10 @@ export function waitForQueryResult(
       }
     }
 
-    function onMutation(mutationTarget) {
+    function onMutation(
+      _mutationList: MutationRecord[],
+      _observer: MutationObserver
+    ) {
       debouncedQuery()
     }
 

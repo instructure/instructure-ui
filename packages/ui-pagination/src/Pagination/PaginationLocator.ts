@@ -31,11 +31,10 @@ const PaginationButtonLocator = locator(Pagination.Page.selector)
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const PaginationLocator = locator(Pagination.selector, {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllPageButtons: async (...args) =>
     PaginationButtonLocator.findAll(...args),
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+
   findPageButton: async (...args) => PaginationButtonLocator.find(...args),
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+
   findArrowButton: async (...args) => PaginationArrowButtonLocator.find(...args)
 })

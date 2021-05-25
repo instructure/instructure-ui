@@ -335,7 +335,7 @@ const eventAliasMap = {
   doubleClick: 'dblClick'
 }
 
-function fireEvent(element, event) {
+function fireEvent(element: EventTarget, event: Event) {
   // eslint-disable-next-line no-param-reassign
   event.preventDefault = spy(event, 'preventDefault')
   // eslint-disable-next-line no-param-reassign
@@ -347,8 +347,14 @@ function fireEvent(element, event) {
 Object.entries(eventMap).forEach(([key, { EventType, defaultInit }]) => {
   const eventName = key.toLowerCase()
 
-  fireEvent[key] = (node, init = {}) => {
+  // not nice, but this is a very weird code :/
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  fireEvent[key] = (node: Element, init: Record<string, unknown> = {}) => {
     const eventInit = { ...defaultInit, ...init }
+    // not nice, but this is a very weird code :/
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const { target: { value, files, ...targetProperties } = {} } = eventInit
     Object.assign(node, targetProperties)
     if (typeof value !== 'undefined') {
@@ -362,7 +368,9 @@ Object.entries(eventMap).forEach(([key, { EventType, defaultInit }]) => {
         value: files
       })
     }
-    const window = node.ownerDocument.defaultView
+    const window = node.ownerDocument.defaultView!
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const EventConstructor = window[EventType] || window.Event
     const event = new EventConstructor(eventName, eventInit)
     return fireEvent(node, event)
@@ -371,7 +379,7 @@ Object.entries(eventMap).forEach(([key, { EventType, defaultInit }]) => {
 
 // function written after some investigation here:
 // https://github.com/facebook/react/issues/10135#issuecomment-401496776
-function setNativeValue(element, value) {
+function setNativeValue(element: Element, value: unknown) {
   const { set: valueSetter } =
     Object.getOwnPropertyDescriptor(element, 'value') || {}
   const prototype = Object.getPrototypeOf(element)
@@ -389,10 +397,14 @@ function setNativeValue(element, value) {
 // React event system tracks native mouseOver/mouseOut events for
 // running onMouseEnter/onMouseLeave handlers
 // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/EnterLeaveEventPlugin.js#L24-L31
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 fireEvent.mouseEnter = fireEvent.mouseOver
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 fireEvent.mouseLeave = fireEvent.mouseOut
 
-fireEvent.select = (node, init) => {
+fireEvent.select = (node: HTMLOrSVGElement, init: Record<string, unknown>) => {
   // React tracks this event only on focused inputs
   node.focus()
 
@@ -404,10 +416,14 @@ fireEvent.select = (node, init) => {
   // - keyDown
   // so we can use any here
   // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/SelectEventPlugin.js#L203-L224
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   fireEvent.keyUp(node, init)
 }
 
 Object.entries(eventAliasMap).forEach(([aliasKey, key]) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   fireEvent[aliasKey] = (...args) => fireEvent[key](...args)
 })
 

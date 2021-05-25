@@ -26,38 +26,45 @@ import keycode from 'keycode'
 
 import { isElement } from './isElement'
 import { find } from './queries'
+import { GenericFunction } from './bindElementToMethods'
 
-export function bindElementToEvents(element, events) {
-  return Object.entries(events).reduce((bound, [key, fn]) => {
-    if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
-      // eslint-disable-next-line no-param-reassign
-      bound[key] = fireKeyboardEvent.bind(null, element, fn)
-    } else if (['focus'].includes(key)) {
-      // eslint-disable-next-line no-param-reassign
-      bound[key] = fireFocusEvent.bind(null, element, fn)
-    } else if (['blur'].includes(key)) {
-      // eslint-disable-next-line no-param-reassign
-      bound[key] = fireBlurEvent.bind(null, element, fn)
-    } else if (['click'].includes(key)) {
-      // eslint-disable-next-line no-param-reassign
-      bound[key] = fireClickEvent.bind(null, element, fn)
-    } else if (
-      ['dblClick'].includes(key) ||
-      key.startsWith('mouse') ||
-      key.startsWith('drag') ||
-      key.startsWith('touch')
-    ) {
-      // eslint-disable-next-line no-param-reassign
-      bound[key] = firePointerEvent.bind(null, element, fn)
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      bound[key] = fireDOMEvent.bind(null, element, fn)
-    }
-    return bound
-  }, {})
+export function bindElementToEvents(
+  element: Element,
+  events: (element: EventTarget, event: Event) => Event
+) {
+  return Object.entries(events).reduce(
+    (bound: Record<string, GenericFunction>, [key, fn]) => {
+      if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireKeyboardEvent.bind(null, element, fn)
+      } else if (['focus'].includes(key)) {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireFocusEvent.bind(null, element, fn)
+      } else if (['blur'].includes(key)) {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireBlurEvent.bind(null, element, fn)
+      } else if (['click'].includes(key)) {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireClickEvent.bind(null, element, fn)
+      } else if (
+        ['dblClick'].includes(key) ||
+        key.startsWith('mouse') ||
+        key.startsWith('drag') ||
+        key.startsWith('touch')
+      ) {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = firePointerEvent.bind(null, element, fn)
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireDOMEvent.bind(null, element, fn)
+      }
+      return bound
+    },
+    {}
+  )
 }
 
-function fireDOMEvent(element, fn, init, options = {}) {
+function fireDOMEvent(element: Element, fn: GenericFunction, init: unknown) {
   const fireEvent = fn.bind(null, element)
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -71,12 +78,12 @@ function fireDOMEvent(element, fn, init, options = {}) {
 }
 
 async function firePointerEvent(
-  element,
-  fn,
-  init,
+  element: Element,
+  fn: GenericFunction,
+  init: unknown,
   options = { clickable: true }
 ) {
-  let clickable = element
+  let clickable = element as any // TODO remove these casts
 
   if (options.clickable) {
     clickable = await find(element, ':clickable')
@@ -107,13 +114,13 @@ async function firePointerEvent(
   })
 }
 
-async function fireClickEvent(
-  element,
-  fn,
-  init,
+async function fireClickEvent<T>(
+  element: T,
+  fn: GenericFunction,
+  init: unknown,
   options = { clickable: true, simulate: false }
 ) {
-  let clickable = element
+  let clickable = element as any
 
   if (options.clickable) {
     clickable = await find(element, ':clickable')
@@ -149,12 +156,12 @@ async function fireClickEvent(
 }
 
 async function fireBlurEvent(
-  element,
-  fn,
-  init,
+  element: Element,
+  fn: GenericFunction,
+  init: unknown,
   options = { focusable: true, simulate: false }
 ) {
-  let focusable = element
+  let focusable = element as any
 
   if (options.focusable) {
     focusable = await find(element, ':focusable')
@@ -178,7 +185,7 @@ async function fireBlurEvent(
             resolve(fireEvent(init))
           } else {
             // We need to call Element.blur here because firing the FocusEvent doesn't actually move focus.
-            resolve(focusable.blur())
+            resolve((focusable as any).blur())
           }
         } else {
           reject(
@@ -195,13 +202,13 @@ async function fireBlurEvent(
   })
 }
 
-async function fireFocusEvent(
-  element,
-  fn,
-  init,
+async function fireFocusEvent<T>(
+  element: T,
+  fn: GenericFunction,
+  init: unknown,
   options = { focusable: true, simulate: false }
 ) {
-  let focusable = element
+  let focusable = element as any
 
   if (options.focusable) {
     focusable = await find(element, ':focusable')
@@ -243,20 +250,20 @@ async function fireFocusEvent(
 }
 
 async function fireKeyboardEvent(
-  element,
-  fn,
-  whichKey,
-  init,
+  element: Element,
+  fn: GenericFunction,
+  whichKey: any,
+  init: any,
   options = { focusable: true }
 ) {
-  let focusable = element
+  let focusable = element as any
 
   if (options.focusable) {
     focusable = await find(element, ':focusable')
   }
 
-  if (focusable && typeof focusable.getDOMNode === 'function') {
-    focusable = focusable.getDOMNode()
+  if (focusable && typeof (focusable as any).getDOMNode === 'function') {
+    focusable = (focusable as any).getDOMNode()
   }
 
   const keyCode = typeof whichKey === 'string' ? keycode(whichKey) : whichKey

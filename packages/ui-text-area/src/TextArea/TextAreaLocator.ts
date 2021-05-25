@@ -28,6 +28,5 @@ import { TextArea } from './index'
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TextAreaLocator = locator(TextArea.selector, {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findInput: (...args) => locator('textarea').find(...args)
 })

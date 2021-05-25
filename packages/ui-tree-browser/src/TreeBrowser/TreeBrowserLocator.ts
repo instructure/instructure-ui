@@ -30,11 +30,9 @@ const TreeBrowserItemLocator = locator('[role="treeitem"]')
 
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'selector' does not exist on type 'typeof... Remove this comment to see the full error message
 export const TreeBrowserLocator = locator(TreeBrowser.selector, {
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findAllItems: (...args) => {
     return TreeBrowserItemLocator.findAll(...args)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findItem: (...args) => {
     return TreeBrowserItemLocator.find(...args)
   }

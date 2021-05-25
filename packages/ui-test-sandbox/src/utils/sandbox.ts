@@ -21,14 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import sinon from 'sinon'
-
 import { ReactComponentWrapper } from './reactComponentWrapper'
-
 import initConsole from './initConsole'
+import React from 'react'
+
+// Likely this could be done with /// <reference types
+declare const before: any
+declare const beforeEach: any
+declare const afterEach: any
+
+// Add "sandbox" to the global interface, so TS does not complain about
+// global.sandbox
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace NodeJS {
+    interface Global {
+      sandbox: Sandbox
+      // this should not be needed, but the solutions in
+      // https://github.com/squidfunk/karma-viewport/issues/35 dont seem to work
+      viewport: any
+    }
+  }
+}
 
 /* istanbul ignore next */
 class Sandbox {
+  private _timeouts!: NodeJS.Timeout[]
+  private _sandbox!: sinon.SinonSandbox
+  private _raf!: number[]
+  private _attributes!: { document: Attr[]; body: Attr[] }
+  private _addedNodes!: Node[]
+  private _observer!: MutationObserver
+  private teardownComplete!: boolean
+
   constructor() {
     // eslint-disable-next-line no-console
     console.info('[ui-test-sandbox] Initializing test sandbox...')
@@ -48,10 +75,15 @@ class Sandbox {
     this._timeouts = []
     const originalSetTimeout = global.setTimeout
     if (typeof originalSetTimeout === 'function') {
+      // I could not figure out how to type these properly :(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       global.setTimeout = (...args) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         const timeoutId = originalSetTimeout(...args)
         this._timeouts.push(timeoutId)
-        return timeoutId
+        return timeoutId as any
       }
     }
 
@@ -77,12 +109,13 @@ class Sandbox {
 
     this._addedNodes = []
     this._observer = new MutationObserver((mutations) => {
-      const addedNodes = Array.from(mutations).map((mutation) =>
-        Array.from(mutation.addedNodes)
+      mutations.map(
+        (mutation) =>
+          (this._addedNodes = this._addedNodes.concat(
+            Array.from(mutation.addedNodes)
+          ))
       )
-      this._addedNodes = this._addedNodes.concat(addedNodes)
     })
-
     resetViewport()
 
     this.teardownComplete = true
@@ -98,7 +131,7 @@ class Sandbox {
 
     this._sandbox.restore()
 
-    if (window.fetch) {
+    if (window.fetch != undefined) {
       this._sandbox.stub(window, 'fetch').callsFake(() => {
         return Promise.resolve(
           new window.Response(
@@ -145,9 +178,13 @@ class Sandbox {
     this._observer.disconnect()
     this._observer.takeRecords()
 
-    this._addedNodes.forEach(
-      (node) => node && typeof node.remove === 'function' && node.remove()
-    )
+    this._addedNodes.forEach((node) => {
+      if (node && typeof (node as ChildNode).remove === 'function') {
+        // TODO this code is buggy. It was originally doing nothing, but when
+        // its executed properly it causes an exception
+        //(node as ChildNode).remove()
+      }
+    })
     this._addedNodes = []
 
     resetViewport()
@@ -155,7 +192,11 @@ class Sandbox {
     this.teardownComplete = true
   }
 
-  stub(obj, method, fn) {
+  stub<T, K extends keyof T>(
+    obj: T,
+    method: K,
+    fn: (...args: unknown[]) => unknown
+  ) {
     if (!this._sandbox) {
       throw new Error(
         '[ui-test-sandbox] a stub cannot be created outside an `it`, `before`, or `beforeEach` block.'
@@ -169,17 +210,19 @@ class Sandbox {
     }
   }
 
-  spy(obj, method) {
+  spy<T, K extends keyof T>(obj: T, method: K) {
     if (!this._sandbox) {
       throw new Error(
         '[ui-test-sandbox] a spy cannot be created outside an `it`, `before`, or `beforeEach` block.'
       )
     }
-
-    return this._sandbox.spy(obj, method)
+    return this._sandbox.spy<T, K>(obj, method)
   }
 
-  mount(element, options) {
+  mount(
+    element: React.ComponentElement<Record<string, unknown>, React.Component>,
+    options?: { props?: Record<string, unknown> | undefined }
+  ) {
     return ReactComponentWrapper.mount(element, options)
   }
 
@@ -204,7 +247,7 @@ function resetViewport() {
 }
 
 /* istanbul ignore next */
-function setAttributes(element, attributes = []) {
+function setAttributes(element: HTMLElement, attributes: Attr[] = []) {
   if (element && element.attributes) {
     ;[...element.attributes].forEach((attribute) => {
       element.removeAttribute(attribute.name)
@@ -216,11 +259,26 @@ function setAttributes(element, attributes = []) {
 }
 
 // only allow one Sandbox instance
-const sandbox = (global.sandbox = global.sandbox || new Sandbox())
+const sandbox: Sandbox = (global.sandbox = global.sandbox || new Sandbox())
+
 const viewport = sandbox.viewport
-const mount = (element, context) => sandbox.mount(element, context)
+
+const mount = (
+  element: React.ComponentElement<Record<string, unknown>, React.Component>,
+  // TODO make this optional. It will generate a zillions of errors about
+  // FIXME comments that can be removed
+  options: { props?: Record<string, unknown> | undefined }
+) => sandbox.mount(element, options)
+
 const unmount = sandbox.unmount
-const stub = (obj, method, fn) => sandbox.stub(obj, method, fn)
-const spy = (obj, method) => sandbox.spy(obj, method)
+
+const stub = <T, K extends keyof T>(
+  obj: T,
+  method: K,
+  fn: (...args: unknown[]) => unknown
+) => sandbox.stub(obj, method, fn)
+
+const spy = <T, K extends keyof T>(obj: T, method: K) =>
+  sandbox.spy(obj, method)
 
 export { viewport, mount, unmount, stub, spy }

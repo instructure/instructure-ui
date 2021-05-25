@@ -24,19 +24,17 @@
 import { locator } from '@instructure/ui-test-locator'
 
 import { ToggleGroup } from './index'
+import { GenericFunction } from '@instructure/ui-test-queries/src/utils/bindElementToMethods'
 
 const ToggleLocator = locator('[aria-expanded][aria-controls]')
 
-export const customMethods = {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
+export const customMethods: Record<string, GenericFunction> = {
   clickToggle: async (element, ...args) => {
     return (await ToggleLocator.find(element)).click(...args)
   },
-  // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   findToggle: async (...args) => {
     return ToggleLocator.find(...args)
   },
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
   findContent: async (element, ...args) => {
     const toggle = await ToggleLocator.find(element)
     if (toggle) {

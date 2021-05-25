@@ -21,6 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export function firstOrNull(result) {
-  return Array.isArray(result) ? result[0] || null : null
+
+export type GenericFunction = (...args: any) => unknown | any
+
+export function bindElementToMethods<K>(element: Element, methods: K) {
+  return Object.entries(methods).reduce(
+    (bound: Record<string, K>, [key, fn]: [string, K]) => {
+      if (typeof fn === 'function') {
+        bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
+        return bound
+      } else {
+        throw new Error(
+          `[ui-test-queries] cannot bind to a non-function of type ${typeof fn} ${key}`
+        )
+      }
+    },
+    {}
+  )
 }

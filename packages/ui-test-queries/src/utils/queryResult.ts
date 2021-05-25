@@ -22,40 +22,44 @@
  * SOFTWARE.
  */
 
-import { parseQueryArguments } from './parseQueryArguments'
-import { waitForQueryResult } from './waitForQueryResult'
+import { parseQueryArguments, QueryArguments } from './parseQueryArguments'
+import { QueryResult, waitForQueryResult } from './waitForQueryResult'
 import { elementToString } from './elementToString'
-import { bindElementToUtilities } from './bindElementToUtilities'
+import {
+  bindElementToUtilities,
+  QueryOrHelperType
+} from './bindElementToUtilities'
+import { SelectorOptions } from './selectors'
+import { GenericFunction } from './bindElementToMethods'
+import { QueryFunction } from './queries'
 
 async function _getQueryResult(
-  element = document,
-  queryFn,
-  options = {
+  element: Element,
+  queryFn: () => { results: Element[]; selector: string },
+  options: SelectorOptions = {
     expectEmpty: false,
     timeout: 1900
-  },
-  wrapFn
+  }
 ) {
   const { expectEmpty, timeout, customMethods } = options
 
   if (typeof queryFn !== 'function') {
     throw new Error(
-      '[ui-test-queries] Invalid element query function.',
-      JSON.stringify(queryFn)
+      '[ui-test-queries] Invalid element query function.' +
+        JSON.stringify(queryFn)
     )
   }
 
-  const queryResult = () => {
+  const queryResult = (): QueryResult => {
     const { results, selector } = queryFn()
     return {
-      results:
-        typeof wrapFn === 'function' ? wrapFn(results, customMethods) : results,
+      results: wrapQueryResult(results, customMethods),
       selector
     }
   }
 
   const { results, selector } =
-    timeout > 0
+    timeout! > 0
       ? await waitForQueryResult(queryResult, { timeout, expectEmpty, element })
       : queryResult()
 
@@ -74,21 +78,34 @@ async function _getQueryResult(
   }
 }
 
-function wrapQueryResult(...args) {
-  return bindElementToUtilities(...args)
+// returns a single element if called with a single one, an array if called with an array
+function wrapQueryResult<T extends Element | Element[]>(
+  results: T,
+  customMethods?: Record<string, GenericFunction>
+): T extends Element[] ? QueryOrHelperType[] : QueryOrHelperType {
+  return bindElementToUtilities(results, customMethods)
 }
 
-function getQueryResult(selectorFn, ...args) {
+function getQueryResult(
+  selectorFn: QueryFunction, // e.g. querySelectorParents, querySelectorAll
+  ...args: QueryArguments
+) {
   const { element, selector, options } = parseQueryArguments(...args)
   if (typeof selectorFn !== 'function') {
     throw new Error(
-      '[ui-test-queries] Invalid element query function.',
-      JSON.stringify(selectorFn)
+      '[ui-test-queries] Invalid element query function.' +
+        JSON.stringify(selectorFn)
     )
   }
-  const query = (element, selector, options) => {
+  const query = (
+    element: Element,
+    selector: string | undefined,
+    options: SelectorOptions
+  ): { results: Element[]; selector: string } => {
+    // Note: It really can have this prop
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const selectorBase = selectorFn.displayName || selectorFn.name
-
     return {
       results: selectorFn(element, selector, options),
       selector: selector ? `${selectorBase} ${selector}` : selectorBase
@@ -97,8 +114,7 @@ function getQueryResult(selectorFn, ...args) {
   return _getQueryResult(
     element,
     query.bind(null, element, selector, options),
-    options,
-    wrapQueryResult
+    options
   )
 }
 

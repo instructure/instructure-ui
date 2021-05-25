@@ -21,36 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { fireEvent } from './events'
 
-import * as helpers from './helpers'
-import * as queries from './queries'
-import { bindElementToMethods } from './bindElementToMethods'
-import { bindElementToEvents } from './bindElementToEvents'
-import { isElement } from './isElement'
-
-function bindElementToUtilities(element, customMethods = {}) {
-  if (!element) {
-    return element
-  } else if (Array.isArray(element)) {
-    return element.map((el) => bindElementToUtilities(el, customMethods))
-  } else if (typeof element.getDOMNode === 'function') {
-    // eslint-disable-next-line no-param-reassign
-    element = element.getDOMNode()
-  }
-
-  if (!isElement(element)) {
-    throw new Error(
-      '[ui-test-queries] could not bind utilities to invalid DOM Element!'
-    )
-  }
-
-  return {
-    ...bindElementToMethods(element, queries),
-    ...bindElementToEvents(element, fireEvent),
-    ...bindElementToMethods(element, helpers),
-    ...bindElementToMethods(element, customMethods)
-  }
+function isElement(node: any): boolean {
+  return node instanceof Element || (node && node.nodeType === 1)
 }
 
-export { bindElementToUtilities }
+export { isElement }

@@ -175,7 +175,6 @@ class Position extends Component<Props> {
       ...this.calculatePosition(props)
     }
 
-    // @ts-expect-error ts-migrate(2322) FIXME: Type 'Function' is not assignable to type '() => v... Remove this comment to see the full error message
     this.position = debounce(this.position, 0, {
       leading: false,
       trailing: true

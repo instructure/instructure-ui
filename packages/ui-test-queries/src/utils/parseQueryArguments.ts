@@ -21,16 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export function bindElementToMethods(element, methods) {
-  return Object.entries(methods).reduce((bound, [key, fn]) => {
-    if (typeof fn === 'function') {
-      bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
-      return bound
-    } else {
-      throw new Error(
-        `[ui-test-queries] cannot bind to a non-function of type ${typeof fn}`,
-        key
-      )
+
+import { isElement } from './isElement'
+import { SelectorOptions } from './selectors'
+
+export type QueryArguments = (
+  | string
+  | Element
+  | Document
+  | DocumentFragment
+  | SelectorOptions
+  | undefined
+)[]
+
+export function parseQueryArguments(...args: QueryArguments): {
+  element: Element
+  selector: string | undefined
+  options: SelectorOptions
+} {
+  let element: Element = document.body
+  let selector: string | undefined
+  let options: SelectorOptions = {
+    expectEmpty: false,
+    exact: true,
+    trim: true,
+    collapseWhitespace: true,
+    ignore: 'script,style',
+    timeout: 1900
+  }
+
+  args.forEach((arg) => {
+    if (typeof arg === 'string' || arg instanceof String) {
+      selector = arg as string
+    } else if (isElement(arg)) {
+      element = arg as Element
+    } else if (typeof arg === 'object') {
+      options = arg ? { ...options, ...arg } : options
     }
-  }, {})
+  })
+
+  if (selector && (selector.includes('div') || selector.includes('span'))) {
+    throw new Error(
+      `[ui-test-queries] Selectors should only include semantic elements (not 'div' or 'span'): ${selector}`
+    )
+  }
+  return { element, selector, options }
 }

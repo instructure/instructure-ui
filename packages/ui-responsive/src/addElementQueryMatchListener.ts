@@ -121,7 +121,6 @@ function addElementQueryMatchListener(query, el, cb) {
       }
 
       if (debounced) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'cancel' does not exist on type 'Function... Remove this comment to see the full error message
         debounced.cancel()
       }
     }

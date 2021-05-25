@@ -22,6 +22,12 @@
  * SOFTWARE.
  */
 
+interface DebounceOptions {
+  leading?: boolean
+  maxWait?: number
+  trailing?: boolean
+}
+
 /**
  * ---
  * category: utilities
@@ -52,14 +58,18 @@
  *  Specify invoking on the trailing edge of the timeout.
  * @returns {Function} Returns the new debounced function.
  */
-function debounce(func, wait = 0, options = {}) {
-  let lastArgs, lastThis, result, lastCallTime
+function debounce(
+  func: (...args: unknown[]) => unknown,
+  wait = 0,
+  options: DebounceOptions = {}
+) {
+  let lastArgs: unknown[] | undefined
+  let lastThis: unknown
+  let result: unknown
+  let lastCallTime: number | undefined // TODO this should never be undefined
   let lastInvokeTime = 0
-
-  let timers = []
-
+  let timers: ReturnType<typeof setTimeout>[] = []
   let cancelled = false
-
   if (typeof func !== 'function') {
     throw new TypeError('Expected a function')
   }
@@ -67,22 +77,22 @@ function debounce(func, wait = 0, options = {}) {
   const leading = !!options.leading
   const maxing = 'maxWait' in options
   const trailing = 'trailing' in options ? !!options.trailing : true
+  const maxWait = maxing ? Math.max(+!options.maxWait || 0, wait) : 0
 
-  const maxWait = maxing ? Math.max(+options.maxWait || 0, wait) : 0
-
-  function invokeFunc(time) {
+  function invokeFunc(time: number) {
     const args = lastArgs
     const thisArg = lastThis
 
-    lastArgs = lastThis = undefined
+    lastArgs = undefined
+    lastThis = undefined
     lastInvokeTime = time
-    if (cancelled !== true) {
-      result = func.apply(thisArg, args)
+    if (!cancelled) {
+      result = func.apply(thisArg, args as unknown[])
       return result
     }
   }
 
-  function leadingEdge(time) {
+  function leadingEdge(time: number) {
     // Reset any `maxWait` timer.
     lastInvokeTime = time
     // Start the timer for the trailing edge.
@@ -91,7 +101,9 @@ function debounce(func, wait = 0, options = {}) {
     return leading ? invokeFunc(time) : result
   }
 
-  function remainingWait(time) {
+  function remainingWait(time: number): number {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const timeSinceLastCall = time - lastCallTime
     const timeSinceLastInvoke = time - lastInvokeTime
     const result = wait - timeSinceLastCall
@@ -99,7 +111,10 @@ function debounce(func, wait = 0, options = {}) {
     return maxing ? Math.min(result, maxWait - timeSinceLastInvoke) : result
   }
 
-  function shouldInvoke(time) {
+  function shouldInvoke(time: number): boolean {
+    if (typeof lastCallTime === 'undefined') {
+      return true
+    }
     const timeSinceLastCall = time - lastCallTime
     const timeSinceLastInvoke = time - lastInvokeTime
 
@@ -107,7 +122,6 @@ function debounce(func, wait = 0, options = {}) {
     // trailing edge, the system time has gone backwards and we're treating
     // it as the trailing edge, or we've hit the `maxWait` limit.
     return (
-      typeof lastCallTime === 'undefined' ||
       timeSinceLastCall >= wait ||
       timeSinceLastCall < 0 ||
       (maxing && timeSinceLastInvoke >= maxWait)
@@ -123,15 +137,13 @@ function debounce(func, wait = 0, options = {}) {
     timers.push(setTimeout(timerExpired, remainingWait(time)))
   }
 
-  function trailingEdge(time) {
+  function trailingEdge(time: number) {
     clearAllTimers()
-
     // Only invoke if we have `lastArgs` which means `func` has been
     // debounced at least once.
     if (trailing && lastArgs) {
       return invokeFunc(time)
     }
-
     lastArgs = lastThis = undefined
     return result
   }
@@ -152,11 +164,13 @@ function debounce(func, wait = 0, options = {}) {
     timers = []
   }
 
-  function debounced(...args) {
+  function debounced(...args: unknown[]) {
     const time = Date.now()
     const isInvoking = shouldInvoke(time)
 
     lastArgs = args
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     lastThis = this
     lastCallTime = time
 
