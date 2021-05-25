@@ -55,21 +55,27 @@ class Header extends Component {
     versionsData: undefined
   }
 
-  handleSelect = (_e, selectedItems) => {
+  handleSelect = (_e, [ selectedVersion ]) => {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
-    const [ selectedVersion ] = selectedItems
-    const isCurrentVersion = selectedVersion === latestVersion
+    const isSelectedLatestVersion = selectedVersion === latestVersion
+    const splittedUrl = window.location.pathname.split('/').filter(Boolean)
+    const [ versionInPath ] = splittedUrl
+    const isOnLatestVersion = splittedUrl.length === 0
 
+    // 1: instructure.design, latest: v8, selected: v8 -> navigate to instructure.design/#index
+    // 2: instructure.design/v6/, latest: v8, selected: v6 -> navigate to instructure.design/v6/#index
+    if ((isOnLatestVersion && isSelectedLatestVersion) || selectedVersion === versionInPath) {
+      return window.location.replace('#index')
+    }
     // If we select the latest version from the dropdown,
-    // then navigate to the index (instructure.design/#ndex)
-    // because that was the previous action on clicking the version link.
+    // then navigate to the index (instructure.design/#currentHash).
     // In every other case eg.: v6,v7 navigate to --> instructure.design/v6/#currentHash
-    const versionToNavigate = isCurrentVersion
-      ? `/#index`
+    const versionToNavigate = isSelectedLatestVersion
+      ? `/${window.location.hash}`
       : `/${selectedVersion}/${window.location.hash}`
 
-    window.location.replace(versionToNavigate)
+    return window.location.replace(versionToNavigate)
   }
 
   renderVersionsBlock = () => {
