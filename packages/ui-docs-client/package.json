@@ -42,6 +42,7 @@
     "@instructure/ui-link": "^6.27.1",
     "@instructure/ui-list": "^6.27.1",
     "@instructure/ui-metric": "^6.27.1",
+    "@instructure/ui-menu": "^6.27.1",
     "@instructure/ui-modal": "^6.27.1",
     "@instructure/ui-overlays": "^6.27.1",
     "@instructure/ui-pill": "^6.27.1",
