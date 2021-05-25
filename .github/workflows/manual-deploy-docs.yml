@@ -23,6 +23,8 @@ jobs:
       - name: Set up project.
         run: yarn bootstrap
       - name: Build docs-app.
+        env:
+          COPY_VERSIONS_JSON: 0
         run: yarn build:docs
       - name: Deploy docs-app to netlify
         env:
