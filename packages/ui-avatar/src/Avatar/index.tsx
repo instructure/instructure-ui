@@ -134,14 +134,16 @@ class Avatar extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    let updateConfig: MakeStyleConfig | undefined
+    let makeStyleConfig: MakeStyleConfig | undefined
     if (prevState.loaded == this.state.loaded) {
-      updateConfig = {
-        prevProps: prevProps,
-        styledProps: ['size', 'shape', 'src']
+      makeStyleConfig = {
+        updateConfig: {
+          prevProps: prevProps,
+          styledProps: ['size', 'shape', 'src']
+        }
       }
     }
-    this.props.makeStyles({ ...updateConfig, ...this.state })
+    this.props.makeStyles({ ...makeStyleConfig, ...this.state })
   }
 
   makeInitialsFromName() {
