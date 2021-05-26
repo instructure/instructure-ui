@@ -46,7 +46,7 @@ function getBoundingClientRect(el) {
     return rect
   }
 
-  const node = findDOMNode(el)
+  const node = findDOMNode(el) as any
 
   if (!node) {
     return rect

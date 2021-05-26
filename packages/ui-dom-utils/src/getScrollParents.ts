@@ -50,7 +50,7 @@ function getScrollParents(el) {
     return parents
   }
 
-  const node = findDOMNode(el)
+  const node = findDOMNode(el) as any
 
   if (node) {
     // In firefox if the element is inside an iframe with display: none; window.getComputedStyle() will return null;

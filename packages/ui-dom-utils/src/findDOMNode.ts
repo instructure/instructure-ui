@@ -23,6 +23,7 @@
  */
 
 import ReactDOM from 'react-dom'
+import React from 'react'
 
 /**
  * ---
@@ -32,24 +33,26 @@ import ReactDOM from 'react-dom'
  * Wrapper function for React.findDOMNode
  * @module findDOMNode
  *
- * @param {ReactComponent|DomNode} el - component, DOM node, or function returning a DOM node
- * @returns {DomNode} The root node of this element
+ * @param {Node | React.ReactElement | ((...args: any[]) => any)} el - component, DOM node, or function returning a DOM node
+ * @returns { Node | Window | null | undefined} The root node of this element
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function findDOMNode(el) {
+function findDOMNode(
+  el: Node | React.ReactElement | ((...args: any[]) => any) | undefined
+) {
   const node = typeof el === 'function' ? el() : el
 
   if (node === document) {
-    return document.documentElement
+    return document.documentElement // HTMLElement
   } else if (
     node instanceof Element ||
     node === window ||
     (node && typeof node.nodeType !== 'undefined')
   ) {
-    return node
+    return node as Node | Window
   } else if (node) {
     return ReactDOM.findDOMNode(node) // eslint-disable-line react/no-find-dom-node
   }
+  return undefined
 }
 
 export default findDOMNode

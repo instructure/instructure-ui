@@ -61,7 +61,7 @@ class KeyboardFocusRegion {
     }
   }
 
-  _contextElement = null
+  public _contextElement: null | undefined | Node | Window = null
   _focusLaterElement = null
   _needToFocus = false
   _listeners = []
@@ -120,7 +120,7 @@ class KeyboardFocusRegion {
     return getActiveElement(this.doc)
   }
 
-  get defaultFocusElement() {
+  get defaultFocusElement(): any {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Keyboa... Remove this comment to see the full error message
     const { defaultFocusElement } = this._options
 

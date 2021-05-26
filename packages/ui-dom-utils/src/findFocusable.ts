@@ -38,7 +38,7 @@ import { getComputedStyle, findDOMNode, elementMatches } from './'
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
 function findFocusable(el, filter, shouldSearchRootNode) {
-  const element = findDOMNode(el)
+  const element = findDOMNode(el) as any
 
   if (!element || typeof element.querySelectorAll !== 'function') {
     return []
