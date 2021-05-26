@@ -43,6 +43,7 @@ describe('@withStyle', async () => {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006)
   const generateComponentTheme = function (theme) {
     const { colors } = theme
     return {
@@ -52,6 +53,7 @@ describe('@withStyle', async () => {
     }
   }
 
+  // @ts-expect-error ts-migrate(7006)
   const generateStyle = function (componentTheme, props, state) {
     const { inverse } = props
     const { clearBackground } = state
@@ -87,10 +89,13 @@ describe('@withStyle', async () => {
     }
 
     componentDidMount() {
+      // @ts-expect-error ts-migrate(2339) FIXME
       this.props.makeStyles({ clearBackground: this.state.clearBackground })
     }
 
+    // @ts-expect-error ts-migrate(6133) FIXME
     componentDidUpdate(prevProps, prevState, snapshot) {
+      // @ts-expect-error ts-migrate(2339) FIXME
       this.props.makeStyles({ clearBackground: this.state.clearBackground })
     }
 
@@ -101,6 +106,7 @@ describe('@withStyle', async () => {
     }
 
     render() {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const { styles } = this.props
       return (
         <div css={styles.exampleComponent}>
@@ -113,6 +119,7 @@ describe('@withStyle', async () => {
 
   describe('with theme provided by EmotionThemeProvider', async () => {
     it('should add css class suffixed with label', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -124,6 +131,7 @@ describe('@withStyle', async () => {
     })
 
     it('should apply correct css props', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -137,9 +145,11 @@ describe('@withStyle', async () => {
     })
 
     it('should allow configuration through props', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent
+            // @ts-expect-error ts-migrate(2769) FIXME
             themeOverride={{
               textColor: 'rgb(128, 0, 128)'
             }}
@@ -154,8 +164,10 @@ describe('@withStyle', async () => {
     })
 
     it('should ignore empty themeOverride props', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
+          {/* @ts-expect-error ts-migrate(2769) FIXME */}
           <ThemeableComponent themeOverride={{}} />
         </EmotionThemeProvider>
       )
@@ -173,9 +185,11 @@ describe('@withStyle', async () => {
       // so have to add the theme ad themeOverride here, and suppress the error
       stub(console, 'warn') // suppress "no theme provided error"
 
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <ThemeableComponent
           inverse={false}
+          // @ts-expect-error ts-migrate(2769) FIXME
           themeOverride={{
             textColor: textBrand,
             textColorInverse: textDark,
@@ -193,6 +207,7 @@ describe('@withStyle', async () => {
     })
 
     it('when state is updated', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -216,6 +231,7 @@ describe('@withStyle', async () => {
 
   describe('should apply bi-directional polyfill on styles object', async () => {
     it('in default "ltr" mode', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -230,6 +246,7 @@ describe('@withStyle', async () => {
     })
 
     it('in "rtl" mode', async () => {
+      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <ApplyTextDirection dir="rtl">
           <EmotionThemeProvider theme={exampleTheme}>
@@ -240,6 +257,7 @@ describe('@withStyle', async () => {
       const component = subject
         .getDOMNode()
         .querySelector('[class$=-exampleComponent]')
+      // @ts-expect-error ts-migrate(2345) FIXME
       const computedStyle = getComputedStyle(component)
 
       // `inset-inline-start` should be transformed to 'right' in 'rtl' mode
