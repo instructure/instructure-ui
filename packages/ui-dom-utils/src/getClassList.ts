@@ -49,7 +49,7 @@ const apiForEmptyNode = {
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
 function getClassList(element) {
-  const node = findDOMNode(element)
+  const node = findDOMNode(element) as any
 
   if (!node) return apiForEmptyNode
 

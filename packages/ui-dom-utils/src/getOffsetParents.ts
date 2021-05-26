@@ -50,7 +50,7 @@ function getOffsetParents(el) {
     return parents
   }
 
-  const node = findDOMNode(el)
+  const node = findDOMNode(el) as any
 
   if (node) {
     let parent = node

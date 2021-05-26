@@ -149,7 +149,7 @@ class Responsive extends Component<Props> {
         ? addElementQueryMatchListener
         : addMediaQueryMatchListener
     // TODO: refactor to use a ref to root div instead of `this`
-    return matchListener(query, () => findDOMNode(this), updateMatches)
+    return matchListener(query, () => findDOMNode(this as any), updateMatches)
   }
 
   removeMatchListener() {

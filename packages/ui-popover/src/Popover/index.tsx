@@ -587,7 +587,7 @@ class Popover extends Component<Props> {
       this.props.shouldFocusContentOnTriggerBlur
     ) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_trigger' does not exist on type 'Popove... Remove this comment to see the full error message
-      const trigger = findDOMNode(this._trigger)
+      const trigger = findDOMNode(this._trigger) as any
 
       if (trigger && typeof trigger.focus === 'function') {
         trigger.focus()

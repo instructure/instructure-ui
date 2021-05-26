@@ -88,7 +88,7 @@ class Page extends Component<Props> {
     }
 
     if (defaultFocusElement) {
-      defaultFocusElement = findDOMNode(defaultFocusElement)
+      defaultFocusElement = findDOMNode(defaultFocusElement) as any
     }
 
     if (!defaultFocusElement) {

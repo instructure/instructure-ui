@@ -38,7 +38,7 @@ import { canUseDOM } from './canUseDOM'
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
 function containsWithDOM(context, el) {
-  const container = findDOMNode(context)
+  const container = findDOMNode(context) as any
   const node = findDOMNode(el)
 
   if (!container || !node) {
