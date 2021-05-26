@@ -248,7 +248,7 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await within(modal.getOwnerDocument().documentElement).click()
+    await (within(modal.getOwnerDocument().documentElement) as any).click()
 
     await wait(() => {
       expect(onDismiss).to.have.been.calledOnce()
@@ -279,7 +279,7 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await within(modal.getOwnerDocument().documentElement).click()
+    await (within(modal.getOwnerDocument().documentElement) as any).click()
 
     await wait(() => {
       expect(onDismiss).to.not.have.been.called()
@@ -320,7 +320,6 @@ describe('<Modal />', async () => {
     })
 
     it('should not pass validation when children are invalid', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
@@ -463,7 +462,7 @@ describe('<Modal />', async () => {
         expect(modal.containsFocus()).to.be.true()
       })
 
-      await within(modal.getOwnerDocument().documentElement).keyUp(
+      await (within(modal.getOwnerDocument().documentElement) as any).keyUp(
         'escape',
         null,
         { focusable: false }

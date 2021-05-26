@@ -23,7 +23,12 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wrapQueryResult
+} from '@instructure/ui-test-utils'
 import { addInputModeListener } from '../addInputModeListener'
 
 describe('addInputModeListener', async () => {
@@ -41,7 +46,7 @@ describe('addInputModeListener', async () => {
       onInputModeChange: handleInputModeChange
     })
 
-    const button = within(document.getElementById('button-1'))
+    const button = wrapQueryResult(document.getElementById('button-1')!)
 
     await button.mouseUp()
     expect(inputModeListener.isKeyboardMode()).to.be.false()

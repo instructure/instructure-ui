@@ -24,7 +24,13 @@
 
 import React from 'react'
 
-import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  stub,
+  wait,
+  wrapQueryResult
+} from '@instructure/ui-test-utils'
 
 import { Tray } from '../index'
 import { TrayLocator } from '../TrayLocator'
@@ -160,7 +166,9 @@ describe('<Tray />', async () => {
       expect(tray.containsFocus()).to.be.true()
     })
 
-    await within(tray.getOwnerDocument().documentElement).keyUp(
+    await (
+      wrapQueryResult(tray.getOwnerDocument().documentElement) as any
+    ).keyUp(
       'escape',
       {
         defaultPrevented: false,

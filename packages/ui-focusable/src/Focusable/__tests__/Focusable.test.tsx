@@ -276,7 +276,6 @@ describe('<Focusable />', async () => {
   })
 
   it('should warn when there is more than one focusable descendant', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleWarn = stub(console, 'warn')
     const warning =
       'Warning: [Focusable] Exactly one focusable child is required (2 found).'
@@ -300,7 +299,6 @@ describe('<Focusable />', async () => {
   })
 
   it('should warn when there are no focusable descendants', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleWarn = stub(console, 'warn')
     const warning =
       'Warning: [Focusable] Exactly one focusable child is required (0 found).'

@@ -61,7 +61,7 @@ describe('@bidirectional', async () => {
     )
 
     expect(
-      subject.getDOMNode().childNodes[0].getAttribute('data-dir')
+      (subject.getDOMNode().childNodes[0] as Element).getAttribute('data-dir')
     ).to.equal('rtl')
   })
 })

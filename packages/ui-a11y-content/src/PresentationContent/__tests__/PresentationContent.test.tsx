@@ -55,7 +55,6 @@ describe('<PresentationContent />', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PresentationContent>Hello World</PresentationContent>)
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     expect(await accessible()).to.be.true()
   })
 })

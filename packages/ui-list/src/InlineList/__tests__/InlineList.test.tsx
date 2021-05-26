@@ -64,7 +64,6 @@ describe('<InlineList />', async () => {
   })
 
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
     const warning = `Warning: [InlineList] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.

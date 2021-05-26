@@ -155,7 +155,7 @@ describe('<ToggleGroup />', () => {
 
     const { args } = onToggle.firstCall
 
-    expect(args[0].type).to.equal('click')
+    expect((args[0] as any).type).to.equal('click')
     expect(args[1]).to.equal(true)
   })
 

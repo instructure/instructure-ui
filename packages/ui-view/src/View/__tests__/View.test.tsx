@@ -174,8 +174,8 @@ describe('<View />', async () => {
     const view = within(subject.getDOMNode())
 
     await wait(() => {
-      expect(view.getComputedStyle()['overflow-x']).to.equal('hidden')
-      expect(view.getComputedStyle()['overflow-y']).to.equal('auto')
+      expect(view.getComputedStyle().overflowX).to.equal('hidden')
+      expect(view.getComputedStyle().overflowY).to.equal('auto')
     })
   })
 
@@ -236,7 +236,6 @@ describe('<View />', async () => {
 
   describe('withFocusOutline', async () => {
     it('should warn when withFocusOutline is true without position=relative', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       const warning =
         'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
@@ -251,7 +250,6 @@ describe('<View />', async () => {
     })
 
     it('should warn when withFocusOutline is `true`, display is set to `inline`, and focusPosition is set to `offset`', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       const warning =
         'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'

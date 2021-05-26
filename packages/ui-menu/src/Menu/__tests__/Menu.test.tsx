@@ -23,13 +23,13 @@
  */
 import React from 'react'
 import {
-  within,
   expect,
   mount,
   stub,
   wait,
   accessible,
-  spy
+  spy,
+  wrapQueryResult
 } from '@instructure/ui-test-utils'
 
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
@@ -388,7 +388,6 @@ describe('<Menu />', async () => {
           </Menu>
         )
 
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
         expect(await accessible()).to.be.true()
       })
 
@@ -401,7 +400,6 @@ describe('<Menu />', async () => {
           </Menu>
         )
 
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
         expect(await accessible()).to.be.true()
       })
     })
@@ -475,7 +473,9 @@ describe('<Menu />', async () => {
       })
 
       expect(
-        await (await MenuLocator.find(':label(Flyout)')).findPopoverContent({
+        await (
+          await MenuLocator.find(':label(Flyout)')
+        ).findPopoverContent({
           expectEmpty: true
         })
       ).to.not.exist()
@@ -605,7 +605,9 @@ describe('<Menu />', async () => {
         expect(popover.containsFocus()).to.be.true()
       })
 
-      await within(trigger.getOwnerDocument().documentElement).click()
+      await (
+        wrapQueryResult(trigger.getOwnerDocument().documentElement) as any
+      ).click()
 
       expect(onToggle).to.have.been.calledTwice()
       expect(onToggle.getCall(1).args[0]).to.equal(false)

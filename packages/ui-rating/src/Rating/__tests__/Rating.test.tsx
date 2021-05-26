@@ -122,7 +122,6 @@ describe('<Rating />', async () => {
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
             const warning = `Warning: [Rating] prop '${prop}' is not allowed.`
             const props = {
@@ -138,7 +137,6 @@ describe('<Rating />', async () => {
           it(`should allow the '${prop}' prop`, async () => {
             // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
             const consoleError = stub(console, 'error')
             // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(

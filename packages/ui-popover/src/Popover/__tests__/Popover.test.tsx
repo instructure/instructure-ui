@@ -23,7 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, within, wait } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  spy,
+  wait,
+  wrapQueryResult
+} from '@instructure/ui-test-utils'
 
 import { Popover } from '../index'
 
@@ -85,13 +91,14 @@ describe('<Popover />', async () => {
     await wait(() => {
       expect(content.containsFocus()).to.be.true()
     })
-
-    await within(trigger.getOwnerDocument().documentElement).click()
+    await (
+      wrapQueryResult(trigger.getOwnerDocument().documentElement) as any
+    ).click()
 
     content = await popover.findContent({ expectEmpty: true })
 
     expect(content).to.not.exist()
-    expect(onHideContent.lastCall.args[1].documentClick).to.be.true()
+    expect((onHideContent.lastCall.args[1] as any).documentClick).to.be.true()
   })
 
   it('should hide content when trigger is clicked', async () => {
@@ -118,7 +125,7 @@ describe('<Popover />', async () => {
     const content = await popover.findContent({ expectEmpty: true })
 
     expect(content).to.not.exist()
-    expect(onHideContent.lastCall.args[1].documentClick).to.be.false()
+    expect((onHideContent.lastCall.args[1] as any).documentClick).to.be.false()
   })
 
   it('should show content if defaultIsShowingContent is true', async () => {
@@ -206,7 +213,9 @@ describe('<Popover />', async () => {
       await subject.setProps({ isShowingContent: true })
 
       await trigger.click()
-      expect(onHideContent.lastCall.args[1].documentClick).to.be.false()
+      expect(
+        (onHideContent.lastCall.args[1] as any).documentClick
+      ).to.be.false()
     })
 
     it('should not show content on click', async () => {

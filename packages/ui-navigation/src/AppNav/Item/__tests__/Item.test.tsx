@@ -86,7 +86,6 @@ describe('<AppNav.Item />', async () => {
   })
 
   it('should output a console error if icon is used with non-screenreader label text', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
     const warning =
       'Warning: [AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'

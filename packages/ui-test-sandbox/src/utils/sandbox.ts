@@ -195,7 +195,7 @@ class Sandbox {
   stub<T, K extends keyof T>(
     obj: T,
     method: K,
-    fn: (...args: unknown[]) => unknown
+    fn?: (...args: unknown[]) => unknown
   ) {
     if (!this._sandbox) {
       throw new Error(
@@ -275,7 +275,7 @@ const unmount = sandbox.unmount
 const stub = <T, K extends keyof T>(
   obj: T,
   method: K,
-  fn: (...args: unknown[]) => unknown
+  fn?: (...args: unknown[]) => unknown
 ) => sandbox.stub(obj, method, fn)
 
 const spy = <T, K extends keyof T>(obj: T, method: K) =>
