@@ -1,17 +1,11 @@
-name: AUTO docs deploy to netlify - on master
-on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
+name: Docs deploy to netlify - on master
+on: [workflow_dispatch]
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy docs to Netlify.
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Install packages.
         run: yarn install
       - name: Set up project.
