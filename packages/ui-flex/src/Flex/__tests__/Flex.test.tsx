@@ -101,7 +101,7 @@ describe('<Flex />', async () => {
     const flex = within(subject.getDOMNode())
 
     await wait(() => {
-      expect(flex.getComputedStyle()['flex-direction']).to.equal('column')
+      expect(flex.getComputedStyle().flexDirection).to.equal('column')
     })
   })
 
@@ -132,7 +132,7 @@ describe('<Flex />', async () => {
     const flex = within(subject.getDOMNode())
 
     await wait(() => {
-      expect(flex.getComputedStyle()['align-items']).to.equal('flex-start')
+      expect(flex.getComputedStyle().alignItems).to.equal('flex-start')
     })
   })
 
@@ -148,9 +148,7 @@ describe('<Flex />', async () => {
     const flex = within(subject.getDOMNode())
 
     await wait(() => {
-      expect(flex.getComputedStyle()['justify-content']).to.equal(
-        'space-between'
-      )
+      expect(flex.getComputedStyle().justifyContent).to.equal('space-between')
     })
   })
 
@@ -166,7 +164,7 @@ describe('<Flex />', async () => {
     const flex = within(subject.getDOMNode())
 
     await wait(() => {
-      expect(flex.getComputedStyle()['flex-wrap']).to.equal('wrap')
+      expect(flex.getComputedStyle().flexWrap).to.equal('wrap')
     })
   })
 
@@ -183,8 +181,8 @@ describe('<Flex />', async () => {
     const item = await flex.findWithText('Flex item 1')
 
     await wait(() => {
-      expect(flex.getComputedStyle()['align-items']).to.equal('flex-end')
-      expect(item.getComputedStyle()['align-self']).to.equal('stretch')
+      expect(flex.getComputedStyle().alignItems).to.equal('flex-end')
+      expect(item.getComputedStyle().alignSelf).to.equal('stretch')
     })
   })
 
@@ -202,8 +200,8 @@ describe('<Flex />', async () => {
     const item2 = await flex.findWithText('Flex item 2')
 
     await wait(() => {
-      expect(item1.getComputedStyle()['flex-grow']).to.equal('0')
-      expect(item2.getComputedStyle()['flex-grow']).to.equal('1')
+      expect(item1.getComputedStyle().flexGrow).to.equal('0')
+      expect(item2.getComputedStyle().flexGrow).to.equal('1')
     })
   })
 
@@ -221,8 +219,8 @@ describe('<Flex />', async () => {
     const item2 = await flex.findWithText('Flex item 2')
 
     await wait(() => {
-      expect(item1.getComputedStyle()['flex-shrink']).to.equal('0')
-      expect(item2.getComputedStyle()['flex-shrink']).to.equal('1')
+      expect(item1.getComputedStyle().flexShrink).to.equal('0')
+      expect(item2.getComputedStyle().flexShrink).to.equal('1')
     })
   })
 
@@ -241,9 +239,9 @@ describe('<Flex />', async () => {
     const item3 = await flex.findWithText('Flex item 3')
 
     await wait(() => {
-      expect(item3.getComputedStyle()['flex-basis']).to.equal('100px')
-      expect(item3.getComputedStyle()['min-width']).to.equal('100px')
-      expect(item2.getComputedStyle()['flex-basis']).to.equal('auto')
+      expect(item3.getComputedStyle().flexBasis).to.equal('100px')
+      expect(item3.getComputedStyle().minWidth).to.equal('100px')
+      expect(item2.getComputedStyle().flexBasis).to.equal('auto')
     })
   })
 

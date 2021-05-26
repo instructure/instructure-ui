@@ -37,6 +37,7 @@ describe('addEventListener', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 4 arguments, but got 3.
     const listener = addEventListener(node, 'click', callback)
 
+    // @ts-expect-error TS2339: Property 'click' does not exist on type 'Element'.
     await node.click()
 
     expect(callback).to.have.been.calledOnce()

@@ -85,7 +85,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should be okay with rendering without any children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     stub(console, 'warn') // suppress Focusable warnings
     let error = false
     try {

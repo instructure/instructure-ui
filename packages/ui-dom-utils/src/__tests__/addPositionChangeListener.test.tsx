@@ -32,7 +32,7 @@ describe('addPositionChangeListener', async () => {
     const callback = spy()
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<div />)
-    const node = subject.getDOMNode()
+    const node = subject.getDOMNode() as HTMLDivElement
 
     node.style.position = 'relative'
 

@@ -127,7 +127,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('requires an `onChange` prop with a `value` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(

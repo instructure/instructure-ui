@@ -72,7 +72,6 @@ describe('<Calendar />', async () => {
   })
 
   it(`should warn if the correct number of children are not provided`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
     const count = Calendar.DAY_COUNT - 1
 
@@ -126,7 +125,6 @@ describe('<Calendar />', async () => {
   })
 
   it('should warn if 7 weekday labels are not provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
 
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.

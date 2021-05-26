@@ -41,7 +41,7 @@ describe('<TruncateText />', async () => {
     )
 
     const renderedContent = within(subject.getDOMNode())
-    const text = renderedContent.getTextContent()
+    const text = renderedContent.getTextContent()!
 
     expect(text.indexOf('truncate')).to.equal(-1)
     expect(text.indexOf('\u2026')).to.not.equal(-1)
@@ -185,7 +185,6 @@ describe('<TruncateText />', async () => {
   })
 
   it('should warn if children prop receives too deep of a node tree', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const consoleError = stub(console, 'error')
     const warning =
       'Some children are too deep in the node tree and will not render.'

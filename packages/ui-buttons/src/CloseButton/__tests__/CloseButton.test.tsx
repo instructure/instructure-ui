@@ -30,7 +30,6 @@ import { CloseButtonLocator } from '../CloseButtonLocator'
 
 describe('<CloseButton />', async () => {
   beforeEach(() => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     stub(console, 'warn')
   })
 

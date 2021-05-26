@@ -36,9 +36,8 @@ describe('<Expandable />', async () => {
     const renderSpy = spy(props, 'render')
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
-
-    const args = renderSpy.lastCall.args[0]
-    expect(args.expanded).to.be.false()
+    const lastCallArgs: Expandable[] = renderSpy.lastCall.args
+    expect(lastCallArgs[0].expanded).to.be.false()
   })
 
   it('should correctly provide the aria-expanded attribute', async () => {
@@ -50,9 +49,8 @@ describe('<Expandable />', async () => {
 
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
-
-    const args = renderSpy.lastCall.args[0]
-    const ariaExpanded = args.getToggleProps()['aria-expanded']
+    const lastCallArgs: any[] = renderSpy.lastCall.args
+    const ariaExpanded = lastCallArgs[0].getToggleProps()['aria-expanded']
     expect(ariaExpanded).to.be.false()
   })
 
@@ -66,9 +64,9 @@ describe('<Expandable />', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
 
-    const args = renderSpy.lastCall.args[0]
-    const toggleId = args.getToggleProps()['aria-controls']
-    const detailsId = args.getDetailsProps()['id']
+    const lastCallArgs: any[] = renderSpy.lastCall.args
+    const toggleId = lastCallArgs[0].getToggleProps()['aria-controls']
+    const detailsId = lastCallArgs[0].getDetailsProps()['id']
 
     expect(toggleId).to.exist()
     expect(detailsId).to.exist()
@@ -91,12 +89,13 @@ describe('<Expandable />', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
 
-    const args = renderSpy.lastCall.args[0]
-    const onClick = args.getToggleProps().onClick
+    const lastCallArgs: any[] = renderSpy.lastCall.args
+    const onClick = lastCallArgs[0].getToggleProps().onClick
     onClick(new Event('click'))
 
-    expect(onToggleSpy.firstCall.args[0].type).to.equal('click')
-    expect(onToggleSpy.firstCall.args[1]).to.be.true()
+    const firstCallArgs: any[] = onToggleSpy.firstCall.args
+    expect(firstCallArgs[0].type).to.equal('click')
+    expect(firstCallArgs[1]).to.be.true()
   })
 
   it('should set expanded to true when defaultExpanded is true', async () => {
@@ -110,7 +109,7 @@ describe('<Expandable />', async () => {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
 
-    const args = renderSpy.lastCall.args[0]
-    expect(args.expanded).to.be.true()
+    const lastCallArgs: Expandable[] = renderSpy.lastCall.args
+    expect(lastCallArgs[0].expanded).to.be.true()
   })
 })

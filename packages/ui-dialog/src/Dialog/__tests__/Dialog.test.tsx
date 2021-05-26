@@ -201,7 +201,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should warn when trying to focus or blur a closed dialog', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       let ref
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.

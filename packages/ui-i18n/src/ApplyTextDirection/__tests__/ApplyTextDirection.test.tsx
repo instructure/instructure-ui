@@ -63,9 +63,9 @@ describe('<ApplyTextDirection />', async () => {
       </ApplyTextDirection>
     )
 
-    expect(subject.getDOMNode().childNodes[0].getAttribute('dir')).to.equal(
-      'ltr'
-    )
+    expect(
+      (subject.getDOMNode().childNodes[0] as Element).getAttribute('dir')
+    ).to.equal('ltr')
   })
 
   it('should pass direction via context to bidirectional children', async () => {
