@@ -34,7 +34,7 @@ import { findDOMNode } from './findDOMNode'
  * @param { string } event - a string specifying the event name ('click', 'focus', etc)
  * @param { EventListenerOrEventListenerObject } handler - function to run when event occurs
  * @param { boolean } capture - should the event be executed in the capturing or bubbling phase
- * @returns {Function} a method to remove the event listener
+ * @returns {{ remove(): void }} a method to remove the event listener
  */
 function addEventListener(
   el: Node | Window,

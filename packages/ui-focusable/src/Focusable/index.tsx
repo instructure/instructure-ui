@@ -80,7 +80,7 @@ class Focusable extends Component<Props> {
 
   _focusListener: { remove(): void } | null = null
   _blurListener: { remove(): void } | null = null
-  _inputModeListener = null
+  _inputModeListener: { isKeyboardMode(): void; remove(): void } | null = null
 
   state = {
     focused: false,
@@ -90,7 +90,6 @@ class Focusable extends Component<Props> {
   componentDidMount() {
     const { focusable, focused } = this
     this.addFocusableListeners(focusable, focused)
-    // @ts-expect-error ts-migrate(2322) FIXME: Type '{ isKeyboardMode: () => boolean; remove: () ... Remove this comment to see the full error message
     this._inputModeListener = addInputModeListener({
       onInputModeChange: this.handleInputModeChange
     })
@@ -139,7 +138,6 @@ class Focusable extends Component<Props> {
 
   componentWillUnmount() {
     if (this._inputModeListener) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._inputModeListener.remove()
       this._inputModeListener = null
     }
@@ -245,7 +243,6 @@ class Focusable extends Component<Props> {
     if (!focusable || !focused) return false
 
     // always show focus for keyboard input mode
-    // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
     if (this._inputModeListener && this._inputModeListener.isKeyboardMode())
       return true
 

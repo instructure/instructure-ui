@@ -33,27 +33,24 @@ let _moveListeners: { remove(): void }[] = []
 let _downListeners: { remove(): void }[] = []
 let _mode = MODES.keyboard
 let _registeredCount = 0
-const _modeChangeHandlers = {}
+const _modeChangeHandlers: Record<string, (...args: any[]) => any> = {}
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-const handleInitialPointerMove = (event) => {
+const handleInitialPointerMove = (event: Event) => {
   // Work around a Safari quirk that fires a mousemove on <html> whenever the
   // window blurs, even if you're tabbing out of the page. ¯\_(ツ)_/¯
-  if (event.target.nodeName.toLowerCase() === 'html') {
+  if ((event.target as Node).nodeName.toLowerCase() === 'html') {
     return
   }
   handleInputModeChange(_mode, MODES.pointer)
   _moveListeners.forEach((listener) => listener.remove())
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'currentMode' implicitly has an 'any' ty... Remove this comment to see the full error message
-const handleInputModeChange = (currentMode, newMode) => {
+const handleInputModeChange = (currentMode: string, newMode: string) => {
   if (currentMode === newMode) return
 
   _mode = newMode
 
   Object.keys(_modeChangeHandlers).forEach((handlerId) =>
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     _modeChangeHandlers[handlerId](currentMode, newMode)
   )
 }
@@ -122,12 +119,13 @@ const removeListeners = () => {
   _downListeners = []
 }
 
-// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'onInputModeChange' implicitly has... Remove this comment to see the full error message
-const addInputModeListener = ({ onInputModeChange }) => {
+const addInputModeListener = (handlerObject: {
+  onInputModeChange: (...args: any[]) => any
+}) => {
+  const { onInputModeChange } = handlerObject
   const id = _registeredCount++
 
   if (typeof onInputModeChange === 'function') {
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     _modeChangeHandlers[id] = onInputModeChange
   }
 
@@ -145,7 +143,6 @@ const addInputModeListener = ({ onInputModeChange }) => {
         removeListeners()
       }
 
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       delete _modeChangeHandlers[id]
 
       _registeredCount--
