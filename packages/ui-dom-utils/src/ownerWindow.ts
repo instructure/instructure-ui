@@ -24,6 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { ownerDocument } from './ownerDocument'
+import React from 'react'
 
 /**
  * ---
@@ -32,14 +33,15 @@ import { ownerDocument } from './ownerDocument'
  * Retrieve the owner window object associated with
  * the owner document of the specified element
  * @module ownerWindow
- * @param {ReactElement|DOMNode} el
- * @returns {Object} the owner window
+ * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | null } el
+ * @returns { Window | null } the owner window
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function ownerWindow(el) {
+function ownerWindow(
+  el?: Node | Window | React.ReactElement | ((...args: any[]) => any) | null
+) {
   const node = el && findDOMNode(el)
   const doc = ownerDocument(node)
-  return doc && (doc.defaultView || doc.parentWindow)
+  return doc && doc.defaultView
 }
 
 export default ownerWindow

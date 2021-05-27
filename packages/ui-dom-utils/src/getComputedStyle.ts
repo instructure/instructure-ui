@@ -44,7 +44,10 @@ function getComputedStyle(el) {
 
   if (canUseDOM) {
     const node = el && findDOMNode(el)
-    style = node ? ownerWindow(el).getComputedStyle(node) : {}
+    if (node) {
+      const window = ownerWindow(el)
+      style = window !== null ? window.getComputedStyle(node) : {}
+    }
   }
 
   return style

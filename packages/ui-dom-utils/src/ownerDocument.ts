@@ -23,6 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
+import React from 'react'
 
 /**
  * ---
@@ -31,13 +32,20 @@ import { findDOMNode } from './findDOMNode'
  *
  * Retrieve the owner document of a specified element
  * @module ownerDocument
- * @param {ReactElement|DOMNode} el
- * @returns {DomNode} the owner document
+ * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | undefined | null } el
+ * @returns { Document } the owner document
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function ownerDocument(el) {
+function ownerDocument(
+  el?: Node | Window | React.ReactElement | ((...args: any[]) => any) | null
+) {
   const node = el && findDOMNode(el)
-  return (node && node.ownerDocument) || document
+  let ownerDocument
+
+  if (node && 'ownerDocument' in node) {
+    ownerDocument = node.ownerDocument
+  }
+
+  return ownerDocument || document
 }
 
 export default ownerDocument

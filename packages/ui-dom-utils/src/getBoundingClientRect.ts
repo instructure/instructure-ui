@@ -80,7 +80,7 @@ function getBoundingClientRect(el) {
     rect[k] = boundingRect[k]
   }
 
-  if (doc !== document) {
+  if (doc !== document && doc.defaultView) {
     const frameElement = doc.defaultView.frameElement
     if (frameElement) {
       const frameRect = getBoundingClientRect(frameElement)
