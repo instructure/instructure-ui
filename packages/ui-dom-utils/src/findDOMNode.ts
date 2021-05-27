@@ -33,7 +33,7 @@ import React from 'react'
  * Wrapper function for React.findDOMNode
  * @module findDOMNode
  *
- * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | null } el - component, DOM node, or function returning a DOM node
+ * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) } el - component, DOM node, or function returning a DOM node
  * @returns { Node | Window | null | undefined } The root node of this element
  */
 function findDOMNode(

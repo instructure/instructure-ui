@@ -24,6 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
+import React from 'react'
 
 /**
  * ---
@@ -32,38 +33,48 @@ import { canUseDOM } from './canUseDOM'
  *
  * Determine if an element contains another DOM node
  * @module containsWithDOM
- * @param {ReactComponent|DomNode} context - component or DOM node
- * @param {ReactComponent|DomNode} el - component or DOM node which we want to determine if contained within the context
- * @returns {boolean} if the element is contained within the context
+ * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | null } context - component or DOM node
+ * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | null } el - component or DOM node which we want to determine if contained within the context
+ * @returns { boolean } if the element is contained within the context
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
-function containsWithDOM(context, el) {
-  const container = findDOMNode(context) as any
-  const node = findDOMNode(el)
+function containsWithDOM(
+  context:
+    | Node
+    | Window
+    | React.ReactElement
+    | ((...args: any[]) => any)
+    | null,
+  el: Node | Window | React.ReactElement | ((...args: any[]) => any) | null
+) {
+  const container = context && findDOMNode(context)
+  const node = el && findDOMNode(el)
 
   if (!container || !node) {
     return false
-  } else if (container.contains) {
+  } else if (!(container instanceof Window) && !(node instanceof Window)) {
     return container.contains(node)
-  } else if (container.compareDocumentPosition) {
-    return (
-      container === node || !!(container.compareDocumentPosition(node) & 16)
-    ) // eslint-disable-line no-bitwise
   } else {
     return containsFallback(container, node)
   }
 }
 
 /* istanbul ignore next  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'context' implicitly has an 'any' type.
-function containsFallback(context, el) {
+function containsFallback(
+  context:
+    | Node
+    | Window
+    | React.ReactElement
+    | ((...args: any[]) => any)
+    | null,
+  el: Node | Window | React.ReactElement | ((...args: any[]) => any) | null
+) {
   let node = el
 
   while (node) {
     if (node === context) {
       return true
     }
-    node = node.parentNode
+    node = (node as Node).parentNode
   }
 
   return false
