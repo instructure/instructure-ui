@@ -39,7 +39,7 @@ class InputModeListenerImpl {
     )
     this.init()
   }
-  _listeners = []
+  _listeners: { remove(): void }[] = []
   _initialized = false
   _mode = MODES.keyboard
 
@@ -51,7 +51,6 @@ class InputModeListenerImpl {
       return
     }
     this._mode = MODES.pointer
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type 'never'.
     this._listeners.forEach((listener) => listener.remove())
   }
 
@@ -65,39 +64,30 @@ class InputModeListenerImpl {
 
   addInitialPointerMoveListeners() {
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'mousemove', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'mousedown', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'mouseup', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'pointermove', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'pointerdown', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'pointerup', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'touchmove', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'touchstart', this.onInitialPointerMove, true)
     )
     this._listeners.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ remove(): void; }' is not assi... Remove this comment to see the full error message
       addEventListener(document, 'touchend', this.onInitialPointerMove, true)
     )
   }

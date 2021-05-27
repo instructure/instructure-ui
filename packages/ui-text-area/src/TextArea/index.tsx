@@ -177,6 +177,8 @@ class TextArea extends Component<Props> {
     maxHeight: undefined
   }
 
+  _listener: { remove(): void } | null = null
+
   constructor() {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     super()
@@ -199,9 +201,7 @@ class TextArea extends Component<Props> {
   }
 
   componentWillUnmount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'TextA... Remove this comment to see the full error message
     if (this._listener) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'TextA... Remove this comment to see the full error message
       this._listener.remove()
     }
 
@@ -252,9 +252,8 @@ class TextArea extends Component<Props> {
         })
       }
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'TextA... Remove this comment to see the full error message
       if (!this._listener) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'TextA... Remove this comment to see the full error message
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_debounced' does not exist on type 'Text... Remove this comment to see the full error message
         this._listener = addEventListener(window, 'resize', this._debounced)
       }
 
