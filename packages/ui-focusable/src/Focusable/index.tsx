@@ -78,8 +78,8 @@ class Focusable extends Component<Props> {
     'datetime-local': true
   }
 
-  _focusListener = null
-  _blurListener = null
+  _focusListener: { remove(): void } | null = null
+  _blurListener: { remove(): void } | null = null
   _inputModeListener = null
 
   state = {
@@ -151,7 +151,6 @@ class Focusable extends Component<Props> {
     if (!focusable) return
 
     if (focused && !this._blurListener) {
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
       this._blurListener = addEventListener(
         focusable,
         'blur',
@@ -159,7 +158,6 @@ class Focusable extends Component<Props> {
         true
       )
     } else if (!this._focusListener) {
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
       this._focusListener = addEventListener(
         focusable,
         'focus',
@@ -176,7 +174,6 @@ class Focusable extends Component<Props> {
 
   removeFocusListener() {
     if (this._focusListener) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._focusListener.remove()
       this._focusListener = null
     }
@@ -184,7 +181,6 @@ class Focusable extends Component<Props> {
 
   removeBlurListener() {
     if (this._blurListener) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._blurListener.remove()
       this._blurListener = null
     }

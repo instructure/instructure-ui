@@ -30,19 +30,24 @@ import { findDOMNode } from './findDOMNode'
  * ---
  * Wrapper function for DOM addEventListener
  * @module addEventListener
- * @param {DOMNode} el - DOM node which will have the event listener attached
- * @param {String} event - a string specifying the event name ('click', 'focus', etc)
- * @param {Function} handler - function to run when event occurs
- * @param {Boolean} capture - should the event be executed in the capturing or bubbling phase
+ * @param { Node | Window } el - DOM node which will have the event listener attached
+ * @param { string } event - a string specifying the event name ('click', 'focus', etc)
+ * @param { EventListenerOrEventListenerObject } handler - function to run when event occurs
+ * @param { boolean } capture - should the event be executed in the capturing or bubbling phase
  * @returns {Function} a method to remove the event listener
  */
-function addEventListener(el: any, event: any, handler: any, capture: any) {
+function addEventListener(
+  el: Node | Window,
+  event: string,
+  handler: EventListenerOrEventListenerObject,
+  capture?: boolean
+) {
   const node = el === window || el === document ? el : findDOMNode(el)
-  node.addEventListener(event, handler, capture)
+  node?.addEventListener(event, handler, capture)
 
   return {
     remove() {
-      node.removeEventListener(event, handler, capture)
+      node?.removeEventListener(event, handler, capture)
     }
   }
 }

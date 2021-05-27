@@ -29,10 +29,8 @@ const MODES = {
   pointer: 'pointer'
 }
 
-// @ts-expect-error ts-migrate(7034) FIXME: Variable '_moveListeners' implicitly has type 'any... Remove this comment to see the full error message
-let _moveListeners = []
-// @ts-expect-error ts-migrate(7034) FIXME: Variable '_downListeners' implicitly has type 'any... Remove this comment to see the full error message
-let _downListeners = []
+let _moveListeners: { remove(): void }[] = []
+let _downListeners: { remove(): void }[] = []
 let _mode = MODES.keyboard
 let _registeredCount = 0
 const _modeChangeHandlers = {}
@@ -45,7 +43,6 @@ const handleInitialPointerMove = (event) => {
     return
   }
   handleInputModeChange(_mode, MODES.pointer)
-  // @ts-expect-error ts-migrate(7005) FIXME: Variable '_moveListeners' implicitly has an 'any[]... Remove this comment to see the full error message
   _moveListeners.forEach((listener) => listener.remove())
 }
 
@@ -119,10 +116,8 @@ const addDownListeners = () => {
 }
 
 const removeListeners = () => {
-  // @ts-expect-error ts-migrate(7005) FIXME: Variable '_moveListeners' implicitly has an 'any[]... Remove this comment to see the full error message
   _moveListeners.forEach((listener) => listener.remove())
   _moveListeners = []
-  // @ts-expect-error ts-migrate(7005) FIXME: Variable '_downListeners' implicitly has an 'any[]... Remove this comment to see the full error message
   _downListeners.forEach((listener) => listener.remove())
   _downListeners = []
 }

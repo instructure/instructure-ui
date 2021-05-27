@@ -130,6 +130,10 @@ class RangeInput extends Component<Props> {
     messages: undefined
   }
 
+  _input: HTMLInputElement | null = null
+  _inputListener: { remove(): void } | null = null
+  _changeListener: { remove(): void } | null = null
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -149,36 +153,30 @@ class RangeInput extends Component<Props> {
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RangeInp... Remove this comment to see the full error message
-    if (!this._input) {
-      return
+
+    if (this._input !== null) {
+      // https://connect.microsoft.com/IE/Feedback/Details/856998
+      this._inputListener = addEventListener(
+        this._input,
+        'input',
+        this.handleChange
+      )
+      this._changeListener = addEventListener(
+        this._input,
+        'change',
+        this.handleChange
+      )
     }
-    // https://connect.microsoft.com/IE/Feedback/Details/856998
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputListener' does not exist on type 'R... Remove this comment to see the full error message
-    this.inputListener = addEventListener(
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RangeInp... Remove this comment to see the full error message
-      this._input,
-      'input',
-      this.handleChange
-    )
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'changeListener' does not exist on type '... Remove this comment to see the full error message
-    this.changeListener = addEventListener(
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RangeInp... Remove this comment to see the full error message
-      this._input,
-      'change',
-      this.handleChange
-    )
   }
 
   componentWillUnmount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RangeInp... Remove this comment to see the full error message
     if (!this._input) {
       return
     }
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputListener' does not exist on type 'R... Remove this comment to see the full error message
-    this.inputListener.remove()
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'changeListener' does not exist on type '... Remove this comment to see the full error message
-    this.changeListener.remove()
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_inputListener' does not exist on type 'R... Remove this comment to see the full error message
+    this._inputListener.remove()
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_changeListener' does not exist on type '... Remove this comment to see the full error message
+    this._changeListener.remove()
   }
   /* end workaround */
 
@@ -257,7 +255,6 @@ class RangeInput extends Component<Props> {
           <input
             css={this.props.styles.rangeInputInput}
             ref={(c) => {
-              // @ts-expect-error ts-migrate(2339) FIXME: Property '_input' does not exist on type 'RangeInp... Remove this comment to see the full error message
               this._input = c
             }}
             type="range"
