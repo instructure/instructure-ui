@@ -130,8 +130,8 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
             infoIconBackground: "darkblue",
             infoBorderColor: "darkblue"
           },
-          'InlineList.Item': {
-            color:"red"
+          'List.Item': {
+            color: "red"
           }
         },
         themeOverrides: {
@@ -160,9 +160,11 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
       <Alert variant="info" margin="small">
         My background should be light gray in 'canvas' theme, and the icon background should be dark blue in any theme.
       </Alert>
-      <InlineList margin="large 0">
-        <InlineList.Item>My color should be red</InlineList.Item>
-      </InlineList>
+      <List margin="large 0">
+        <List.Item>These List.Items have red color.</List.Item>
+        <List.Item>These List.Items have red color.</List.Item>
+        <List.Item>These List.Items have red color.</List.Item>
+      </List>
     </EmotionThemeProvider>
   </div>
 ```
