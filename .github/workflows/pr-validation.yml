@@ -18,7 +18,15 @@ jobs:
       - name: Build docs-app
         run: yarn build:docs
       - name: Deploy preview docs.
+        id: deploy_to_netlify
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: npx netlify deploy --dir ./packages/__docs__/__build__
+        # set <preview_url> variable to be available for the following steps
+        run: echo "::set-output name=preview_url::$(npx netlify deploy --dir ./packages/__docs__/__build__ | grep "Website Draft URL" | awk '{print $4}')"
+      - name: Add Comment to PR with the preview URL.
+        uses: actions-cool/maintain-one-comment@v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            Preview URL: ${{ steps.deploy_to_netlify.outputs.preview_url }}
