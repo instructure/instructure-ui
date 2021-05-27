@@ -330,7 +330,7 @@ class PositionData {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'target' does not exist on type 'Position... Remove this comment to see the full error message
     let { left, top } = addOffsets([this.target.position, this.offset])
 
-    if (canUseDOM && win.matchMedia) {
+    if (canUseDOM && win?.matchMedia) {
       const retina =
         win.matchMedia('only screen and (min-resolution: 1.3dppx)').matches ||
         win.matchMedia('only screen and (-webkit-min-device-pixel-ratio: 1.3)')

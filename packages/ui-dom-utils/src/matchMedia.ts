@@ -42,7 +42,11 @@ import { ownerWindow } from './ownerWindow'
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
 function matchMedia(query, el) {
   const node = findDOMNode(el) || document
-  return canUseDOM && ownerWindow(node).matchMedia(query)
+
+  if (canUseDOM) {
+    const window = ownerWindow(node)
+    return window && window.matchMedia(query)
+  }
 }
 
 export default matchMedia
