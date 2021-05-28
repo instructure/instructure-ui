@@ -36,16 +36,14 @@ import { isEmpty } from '@instructure/ui-utils'
  */
 export const useTheme = () => {
   let theme = useEmotionTheme()
-
+  // TODO type theme properly, then this cast might not be needed.
   if (isEmpty(theme as Record<string, unknown>)) {
     if (process.env.NODE_ENV !== 'production') {
       console.warn(
         `No theme provided for [EmotionThemeProvider], using default <canvas> theme.`
       )
     }
-
     theme = canvas
   }
-
   return theme
 }
