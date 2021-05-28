@@ -37,14 +37,12 @@ import { TrayLocator } from '../TrayLocator'
 
 describe('<Tray />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Tray label="Tray Example">Hello World</Tray>)
     const tray = await TrayLocator.find({ expectEmpty: true })
     expect(tray).to.not.exist()
   })
 
   it('should render children and have a node with a parent when open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tray label="Tray Example" open>
         Hello World
@@ -56,7 +54,6 @@ describe('<Tray />', async () => {
   })
 
   it('should apply theme overrides when open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tray
         label="Tray Example"
@@ -77,7 +74,6 @@ describe('<Tray />', async () => {
   })
 
   it('should apply the a11y attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tray label="Tray Example" open>
         Hello World
@@ -90,9 +86,7 @@ describe('<Tray />', async () => {
   })
 
   it('should support onOpen prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tray label="Tray Example" open onOpen={onOpen}>
         Hello World
@@ -105,9 +99,8 @@ describe('<Tray />', async () => {
   })
 
   it('should support onClose prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClose = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Tray label="Tray Example" open onClose={onClose}>
         Hello World
@@ -122,7 +115,6 @@ describe('<Tray />', async () => {
   })
 
   it('should take a prop for finding default focus', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tray
         label="Tray Example"
@@ -144,9 +136,7 @@ describe('<Tray />', async () => {
   })
 
   it('should call onDismiss prop when Esc key pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tray
         open
@@ -219,11 +209,9 @@ describe('<Tray />', async () => {
           // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           const val = placements[dir].enteringPlacements[placement]
           it(`returns ${val} for ${placement} when entering`, async () => {
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
             const onEntered = stub()
             document.documentElement.setAttribute('dir', dir)
 
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             await mount(
               <Tray
                 open
@@ -248,11 +236,9 @@ describe('<Tray />', async () => {
           // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           const val = placements[dir].exitingPlacements[placement]
           it(`returns ${val} for ${placement} when exiting`, async () => {
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
             const onExited = stub()
             document.documentElement.setAttribute('dir', dir)
 
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
             const subject = await mount(
               <Tray
                 open

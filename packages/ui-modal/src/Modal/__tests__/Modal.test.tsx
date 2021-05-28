@@ -30,7 +30,6 @@ import { ModalLocator } from '../ModalLocator'
 
 describe('<Modal />', async () => {
   it('should render nothing and have a node with no parent when closed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -44,7 +43,6 @@ describe('<Modal />', async () => {
   })
 
   it('should apply theme overrides when open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal
         open
@@ -67,7 +65,6 @@ describe('<Modal />', async () => {
   })
 
   it('should render its own positioning context if constrained to parent', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal
         open
@@ -86,7 +83,6 @@ describe('<Modal />', async () => {
   })
 
   it("should not inherit its parent's font color", async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ color: 'rgb(255, 255, 255)' }}>
         <Modal
@@ -109,7 +105,6 @@ describe('<Modal />', async () => {
   })
 
   it('should pass `as` prop to the dialog', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -127,7 +122,6 @@ describe('<Modal />', async () => {
   })
 
   it('should handle null children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         {null}
@@ -141,7 +135,6 @@ describe('<Modal />', async () => {
   })
 
   it('should apply the aria attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -154,14 +147,12 @@ describe('<Modal />', async () => {
   })
 
   it('should use transition', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEnter = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onEntering = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onEntered = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal
         open
@@ -184,9 +175,7 @@ describe('<Modal />', async () => {
   })
 
   it('should support onOpen prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal
         open
@@ -204,9 +193,8 @@ describe('<Modal />', async () => {
   })
 
   it('should support onClose prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClose = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Modal
         open
@@ -226,9 +214,7 @@ describe('<Modal />', async () => {
   })
 
   it('should dismiss when overlay clicked by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal
         open
@@ -256,9 +242,7 @@ describe('<Modal />', async () => {
   })
 
   it('should NOT dismiss when overlay clicked with shouldCloseOnDocumentClick=false', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal
         open
@@ -289,7 +273,6 @@ describe('<Modal />', async () => {
   })
 
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Modal open label="Modal Dialog" shouldReturnFocus={false}>
         <Modal.Body>
@@ -306,7 +289,6 @@ describe('<Modal />', async () => {
   describe('children validation', async () => {
     it('should pass validation when children are valid', async () => {
       await expect(
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         mount(
           <Modal open label="Modal Dialog" shouldReturnFocus={false}>
             <Modal.Header>Hello World</Modal.Header>
@@ -321,7 +303,7 @@ describe('<Modal />', async () => {
 
     it('should not pass validation when children are invalid', async () => {
       const consoleError = stub(console, 'error')
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Modal open label="Modal Dialog" shouldReturnFocus={false}>
           <Modal.Body>Foo Bar Baz</Modal.Body>
@@ -341,7 +323,6 @@ describe('<Modal />', async () => {
       let bodyRef
       let footerRef
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Modal
           open
@@ -370,7 +351,6 @@ describe('<Modal />', async () => {
     it('should pass overflow to Modal.Body', async () => {
       let bodyRef
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Modal open label="Modal" shouldReturnFocus={false} overflow="fit">
           <Modal.Body ref={(el) => (bodyRef = el)}>Foo Bar Baz</Modal.Body>
@@ -410,7 +390,6 @@ describe('<Modal />', async () => {
     }
 
     it('should focus closeButton by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<ModalExample open label="A Modal" />)
 
       const modal = await ModalLocator.find(':label(A Modal)')
@@ -422,7 +401,6 @@ describe('<Modal />', async () => {
     })
 
     it('should take a prop for finding default focus', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <ModalExample
           open
@@ -442,9 +420,8 @@ describe('<Modal />', async () => {
     })
 
     it('should call onDismiss prop when Esc key pressed by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDismiss = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <ModalExample
           open

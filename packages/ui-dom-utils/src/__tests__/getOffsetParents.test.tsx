@@ -72,7 +72,6 @@ describe('getScrollParents', async () => {
   )
 
   it('should find scroll parent for inline elements', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
 
     const child = document.getElementById('scroll-child')
@@ -82,7 +81,6 @@ describe('getScrollParents', async () => {
   })
 
   it('should ignore static parents when absolute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
 
     const child = document.getElementById('scroll-child-rel')
@@ -92,7 +90,6 @@ describe('getScrollParents', async () => {
   })
 
   it('should handle fixed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
 
     const child = document.getElementById('scroll-child-fixed')

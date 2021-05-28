@@ -27,20 +27,17 @@ import { FileDrop } from '../index'
 import { FileDropLocator } from '../FileDropLocator'
 describe('<FileDrop />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<FileDrop renderLabel="fake label" />)
     const fileDrop = await FileDropLocator.find()
     expect(fileDrop).to.exist()
   })
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<FileDrop renderLabel="fake label" />)
     const fileDrop = await FileDropLocator.find()
     expect(await fileDrop.accessible()).to.be.true()
   })
   describe('interactions', async () => {
     it('should functionally disable the input if `interaction` is set to disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" interaction="disabled" />)
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
@@ -54,7 +51,6 @@ describe('<FileDrop />', async () => {
       expect(input.getDOMNode().disabled).to.be.true()
     })
     it('should functionally disable the input if `interaction` is set to readonly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<FileDrop renderLabel="Some label" interaction="readonly" />)
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
@@ -70,9 +66,8 @@ describe('<FileDrop />', async () => {
   })
   describe('file-type checking when onDrop', async () => {
     it('responds to drop event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDrop = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<FileDrop renderLabel="fake label" onDrop={onDrop} />)
       const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
@@ -80,9 +75,8 @@ describe('<FileDrop />', async () => {
       expect(onDrop).to.have.been.called()
     })
     it('responds to change event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDrop = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<FileDrop renderLabel="fake label" onDrop={onDrop} />)
       const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
@@ -94,11 +88,9 @@ describe('<FileDrop />', async () => {
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
         e.persist()
       })
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropAccepted = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropRejected = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop
           renderLabel="fake label"
@@ -125,11 +117,9 @@ describe('<FileDrop />', async () => {
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
         e.persist()
       })
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropAccepted = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropRejected = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop
           renderLabel="fake label"
@@ -157,11 +147,9 @@ describe('<FileDrop />', async () => {
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
         e.persist()
       })
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropAccepted = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropRejected = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop
           renderLabel="fake label"
@@ -185,15 +173,13 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.not.have.been.called()
     })
     it('accepts correct files using extensions', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+      // @ts-expect-error intentionally unused params
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
         e.persist()
       })
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropAccepted = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropRejected = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop
           renderLabel="fake label"
@@ -220,11 +206,9 @@ describe('<FileDrop />', async () => {
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
         e.persist()
       })
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropAccepted = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropRejected = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop
           renderLabel="fake label"
@@ -251,11 +235,9 @@ describe('<FileDrop />', async () => {
       const onDrop = spy((accepted: any, rejected: any, e: any) => {
         e.persist()
       })
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropAccepted = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onDropRejected = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop
           renderLabel="fake label"
@@ -281,7 +263,7 @@ describe('<FileDrop />', async () => {
   describe('label handling', async () => {
     it('renders element label directly', async () => {
       const label = <section id="test-id">This is an element label</section>
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<FileDrop renderLabel={label} />)
       const fileDrop = await FileDropLocator.find()
       expect(await fileDrop.find('section#test-id')).to.exist()
@@ -292,7 +274,7 @@ describe('<FileDrop />', async () => {
         result = { ...props }
         return null
       }
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<FileDrop renderLabel={label} />)
       expect(typeof (result as any).isDragAccepted === 'boolean').to.be.true()
       expect(typeof (result as any).isDragRejected === 'boolean').to.be.true()
@@ -303,7 +285,7 @@ describe('<FileDrop />', async () => {
         result = { ...props }
         return null
       }
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<FileDrop renderLabel={label} />)
       expect((result as any).isDragAccepted).to.be.false()
       expect((result as any).isDragRejected).to.be.false()
@@ -311,9 +293,8 @@ describe('<FileDrop />', async () => {
   })
   describe('onDrag events', async () => {
     it('responds to onDragEnter event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDragEnter = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop renderLabel="fake label" onDragEnter={onDragEnter} />
       )
@@ -323,9 +304,8 @@ describe('<FileDrop />', async () => {
       expect(onDragEnter).to.have.been.called()
     })
     it('responds to onDragOver event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDragOver = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<FileDrop renderLabel="fake label" onDragOver={onDragOver} />)
       const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
@@ -333,9 +313,8 @@ describe('<FileDrop />', async () => {
       expect(onDragOver).to.have.been.called()
     })
     it('responds to onDragLeave event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDragLeave = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <FileDrop renderLabel="fake label" onDragLeave={onDragLeave} />
       )
@@ -346,7 +325,6 @@ describe('<FileDrop />', async () => {
     })
   })
   it('stops propagation when the ESC key is released and file browser is open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<FileDrop renderLabel="fake label" />)
     const fileDrop = await FileDropLocator.find()
     await fileDrop.click()

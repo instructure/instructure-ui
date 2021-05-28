@@ -37,7 +37,6 @@ import { PopoverLocator } from '../PopoverLocator'
 
 describe('<Popover />', async () => {
   it('should not render content by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Popover on="click" renderTrigger={<button>Click Me</button>}>
         <h2>Foo Bar Baz</h2>
@@ -65,9 +64,7 @@ describe('<Popover />', async () => {
   testEventHandler('onBlur', 'focus', 'blur')
 
   it('should hide content when clicked outside content by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onHideContent = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Popover
         on="click"
@@ -102,9 +99,7 @@ describe('<Popover />', async () => {
   })
 
   it('should hide content when trigger is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onHideContent = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Popover
         on="click"
@@ -129,7 +124,6 @@ describe('<Popover />', async () => {
   })
 
   it('should show content if defaultIsShowingContent is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Popover
         on="click"
@@ -147,7 +141,6 @@ describe('<Popover />', async () => {
 
   describe('controlled', async () => {
     it('should show content by default if isShowingContent is true', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Popover
           on="click"
@@ -164,7 +157,6 @@ describe('<Popover />', async () => {
     })
 
     it('should not show content is isShowingContent prop is false', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Popover
           on="click"
@@ -187,11 +179,9 @@ describe('<Popover />', async () => {
     })
 
     it('should call onShowContent and onHideContent', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onShowContent = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onHideContent = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <Popover
           on="click"
@@ -219,7 +209,6 @@ describe('<Popover />', async () => {
     })
 
     it('should not show content on click', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Popover
           on="click"
@@ -242,9 +231,8 @@ describe('<Popover />', async () => {
 
   describe('when shouldFocusContentOnTriggerBlur=true and shouldContainFocus=false', async () => {
     it('should move focus into the content when the trigger is blurred', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onHideContent = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <span>
           <button>focus me first</button>
@@ -292,7 +280,6 @@ describe('<Popover />', async () => {
 function testShowContent(on, eventType, eventInit) {
   it(`should show content on ${on}`, async () => {
     const onValue = [on, on === 'hover' ? 'focus' : null]
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Popover on={onValue} renderTrigger={<button>Click me</button>}>
         <h2>Foo Bar Baz</h2>
@@ -313,12 +300,10 @@ function testShowContent(on, eventType, eventInit) {
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'handler' implicitly has an 'any' type.
 function testEventHandler(handler, ...eventType) {
   it(`should fire ${handler} handler`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const handlerSpy = spy()
     const props = {
       [handler]: handlerSpy
     }
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Popover {...props} renderTrigger={<button>focus me</button>}>
         <h2>Foo Bar Baz</h2>

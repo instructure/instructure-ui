@@ -38,14 +38,12 @@ const icon = (
 
 describe('<AppNav.Item />', async () => {
   it('should render label text', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderLabel="Some label" href="#" />)
     const item = await ItemLocator.find()
     expect(await item.find(':contains(Some label)')).to.exist()
   })
 
   it('should render an icon/image/etc.', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderIcon={icon}
@@ -60,7 +58,6 @@ describe('<AppNav.Item />', async () => {
   })
 
   it('should render content after the label text to accommodate badges, etc.', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderLabel="Some label"
@@ -73,9 +70,7 @@ describe('<AppNav.Item />', async () => {
   })
 
   it('should respond to an onClick event', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderLabel="Some label" onClick={onClick} />)
     const item = await ItemLocator.find()
 
@@ -89,7 +84,6 @@ describe('<AppNav.Item />', async () => {
     const consoleError = stub(console, 'error')
     const warning =
       'Warning: [AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderIcon={icon}
@@ -101,7 +95,6 @@ describe('<AppNav.Item />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item
         renderIcon={icon}

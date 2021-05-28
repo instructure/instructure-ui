@@ -59,20 +59,17 @@ describe('<Img />', () => {
   })
 
   it('should render an overlay color', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} overlay={{ color: '#ff0000', opacity: 7 }} />)
     expect(await ImgLocator.find('[class*=-img__overlay]')).to.exist()
   })
 
   it('should render a blur filter', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} withBlur={true} />)
     const img = await ImgLocator.find()
     expect(img.getComputedStyle().getPropertyValue('filter')).to.contain('blur')
   })
 
   it('should render a grayscale filter', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} withGrayscale={true} />)
     const img = await ImgLocator.find()
     expect(img.getComputedStyle().getPropertyValue('filter')).to.contain(
@@ -82,7 +79,6 @@ describe('<Img />', () => {
 
   // If component renders as simple image
   it('should display block-level when display="block"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Img src={image} display="block" />)
     const img = await ImgLocator.find()
     expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
@@ -90,7 +86,6 @@ describe('<Img />', () => {
 
   // If component has an overlay and renders as image inside containing element
   it('should display block-level with overlay when display="block"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Img
         src={image}
@@ -109,7 +104,6 @@ describe('<Img />', () => {
   })
 
   it('should apply CSS object-fit: cover when constrain="cover"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 16, height: 16 }}>
         <Img src={image} constrain="cover" />
@@ -122,7 +116,6 @@ describe('<Img />', () => {
   })
 
   it('should apply CSS object-fit: contain when constrain="contain"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 16, height: 16 }}>
         <Img src={image} constrain="contain" />
@@ -138,7 +131,6 @@ describe('<Img />', () => {
     const height = 32
     const width = 24
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width, height }}>
         <Img
@@ -161,7 +153,6 @@ describe('<Img />', () => {
     const height = 32
     const width = 24
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width, height }}>
         <Img

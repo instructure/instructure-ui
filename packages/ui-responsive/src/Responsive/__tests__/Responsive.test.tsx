@@ -31,9 +31,7 @@ import { Responsive } from '../index'
 
 describe('<Responsive />', async () => {
   it('should call render with the correct matches', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive
@@ -58,14 +56,12 @@ describe('<Responsive />', async () => {
   })
 
   it('should provide correct props for a given breakpoint', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },
       medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
       large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive
@@ -87,14 +83,12 @@ describe('<Responsive />', async () => {
   })
 
   it('should merge props correctly when more than one breakpoint is applied', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
     const props = {
       small: { withBorder: true, background: 'transparent' },
       medium: { options: [1, 2, 3], icons: { edit: true, flag: false } },
       large: { margin: 'small', label: 'hello world', describedBy: 'fakeId' }
     }
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Responsive
         props={props}
@@ -120,7 +114,6 @@ describe('<Responsive />', async () => {
 
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
     const consoleError = stub(console, 'error')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive
@@ -154,9 +147,7 @@ describe('<Responsive />', async () => {
   })
 
   it('should call render prop only once', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 200 }}>
         <Responsive

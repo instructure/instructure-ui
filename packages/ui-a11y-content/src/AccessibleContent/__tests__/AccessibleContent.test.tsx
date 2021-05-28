@@ -28,7 +28,6 @@ import { AccessibleContent } from '../index'
 
 describe('<AccessibleContent />', async () => {
   it('should render screen reader content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
@@ -41,7 +40,6 @@ describe('<AccessibleContent />', async () => {
   })
 
   it('should render a presentational content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <AccessibleContent alt="Screen Reader Content">
         Presentational Content
@@ -63,7 +61,6 @@ describe('<AccessibleContent />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <AccessibleContent alt="Screenreader test">
         Not screenreader text

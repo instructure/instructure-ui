@@ -33,7 +33,6 @@ describe('truncate', () => {
 
   it('should truncate text when no options are given', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -57,7 +56,6 @@ describe('truncate', () => {
 
   it('should truncate in the middle of a string', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -82,7 +80,6 @@ describe('truncate', () => {
 
   it('should truncate at words', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '220px' }}>
         <span
@@ -107,7 +104,6 @@ describe('truncate', () => {
 
   it('should allow custom ellipsis', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -129,7 +125,6 @@ describe('truncate', () => {
 
   it('should preserve node structure', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px' }}>
         <p
@@ -162,7 +157,6 @@ describe('truncate', () => {
   it('should preserve attributes on nodes', async () => {
     let stage
     let link
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -198,7 +192,6 @@ describe('truncate', () => {
 
   it('should calculate max width properly', async () => {
     let textContainer, stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 'auto' }}>
         <div>
@@ -235,7 +228,6 @@ describe('truncate', () => {
 
   it('should calculate `maxLines: auto` correctly', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '50px', height: '180px', lineHeight: 2.8 }}>
         <span
@@ -260,7 +252,6 @@ describe('truncate', () => {
 
   it('should calculate height correctly when `maxLines` is not `auto`', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px', height: '200px', lineHeight: 1.4 }}>
         <span
@@ -288,7 +279,6 @@ describe('truncate', () => {
     const content = '"><img src=a onerror=console.log("hello world") />'
 
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '1000px', height: '200px' }}>
         <span
@@ -311,7 +301,6 @@ describe('truncate', () => {
 
   it('should truncate when visually hidden', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px', opacity: 0 }}>
         <span

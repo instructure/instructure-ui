@@ -37,7 +37,6 @@ import DayExamples from '../__examples__/Day.examples'
 
 describe('Day', async () => {
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Day date="2019-08-02" label="1 August 2019 Friday">
         8
@@ -55,7 +54,6 @@ describe('Day', async () => {
 
   it('should have an accessible label', async () => {
     const label = '1 August 2019 Friday'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Day date="2019-08-02" label={label}>
         8
@@ -66,7 +64,6 @@ describe('Day', async () => {
   })
 
   it('should set aria-current="date" when `isToday`', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Day date="2019-08-02" label="1 August 2019 Friday" isToday>
         8
@@ -83,7 +80,6 @@ describe('Day', async () => {
   })
 
   it('should not set aria-selected without a role', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Day date="2019-08-02" label="1 August 2019 Friday">
         8
@@ -102,7 +98,6 @@ describe('Day', async () => {
   })
 
   it('should set aria-selected="true/false" when `isSelected` and `role` is `option` or `gridcell`', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Day date="2019-08-02" label="1 August 2019 Friday" role="option">
@@ -123,11 +118,9 @@ describe('Day', async () => {
   })
 
   it('should call onClick with date', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
     const date = '2019-08-02'
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Day date={date} label="1 August 2019 Friday" onClick={onClick}>
         8
@@ -143,11 +136,9 @@ describe('Day', async () => {
   })
 
   it('should call onKeyDown with date', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
     const date = '2019-08-02'
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Day
         date={date}
@@ -168,10 +159,8 @@ describe('Day', async () => {
   })
 
   it('should apply disabled when interaction is `disabled`', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Day
         date="2019-08-02"
@@ -200,7 +189,6 @@ describe('Day', async () => {
       element = el
     }
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Day
         date="2019-08-02"
@@ -216,7 +204,6 @@ describe('Day', async () => {
 
   describe('element type', async () => {
     it('should render as a span by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Day date="2019-08-02" label="1 August 2019 Friday">
           8
@@ -228,7 +215,6 @@ describe('Day', async () => {
     })
 
     it('should render as a button when onClick is provided', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Day date="2019-08-02" label="1 August 2019 Friday" onClick={() => {}}>
           8
@@ -240,7 +226,6 @@ describe('Day', async () => {
     })
 
     it('default elementTypes should be overwritten when `as` prop is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Day
           date="2019-08-02"

@@ -37,7 +37,6 @@ describe('<ToggleButton />', async () => {
   )
 
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -56,7 +55,6 @@ describe('<ToggleButton />', async () => {
     const warning =
       'Warning: Failed prop type: The prop `screenReaderLabel` is marked as required in `ToggleButton`'
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2741) FIXME: Property 'screenReaderLabel' is missing in type '{... Remove this comment to see the full error message
       <ToggleButton
@@ -73,7 +71,6 @@ describe('<ToggleButton />', async () => {
     const warning =
       'Warning: Failed prop type: The prop `status` is marked as required in `ToggleButton`'
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2741) FIXME: Property 'status' is missing in type '{ screenRead... Remove this comment to see the full error message
       <ToggleButton
@@ -87,7 +84,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should set `aria-pressed` to `true` if `status` is `pressed`', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -104,7 +100,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should set `aria-pressed` to `false` if `status` is `unpressed`', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -121,7 +116,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should display a tooltip', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -142,7 +136,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should display a tooltip without hover/focus when isShowingTooltip is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -163,7 +156,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should render an icon', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -177,7 +169,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should pass the `as` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -193,7 +184,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should set the disabled attribute when `interaction` prop is set to disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -208,7 +198,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should set the disabled attribute when `disabled` prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -224,7 +213,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should set the disabled attribute when `interaction` prop is set to readonly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -239,7 +227,6 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should set the disabled attribute when `readOnly` prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
@@ -255,10 +242,8 @@ describe('<ToggleButton />', async () => {
   })
 
   it('should pass the `onClick` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleButton
         screenReaderLabel="This is a screen reader label"

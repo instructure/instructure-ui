@@ -30,7 +30,6 @@ import { ToggleGroupLocator } from '../ToggleGroupLocator'
 
 describe('<ToggleGroup />', () => {
   it('should show its summary and hide its children by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -52,7 +51,6 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should render with children showing with the defaultExpanded prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -73,7 +71,6 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should have an aria-controls attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -95,7 +92,6 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should have an aria-expanded attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -113,7 +109,6 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should toggle on click events', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -138,7 +133,6 @@ describe('<ToggleGroup />', () => {
       e.persist()
     })
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -160,7 +154,6 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should update the toggle screenreader label based on the expanded state', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -195,7 +188,6 @@ describe('<ToggleGroup />', () => {
       </svg>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -226,7 +218,6 @@ describe('<ToggleGroup />', () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}
@@ -243,7 +234,6 @@ describe('<ToggleGroup />', () => {
 
   it('focuses with the focus helper', async () => {
     let toggleRef = null
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleGroup
         transition={false}

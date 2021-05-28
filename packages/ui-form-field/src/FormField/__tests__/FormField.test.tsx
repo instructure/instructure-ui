@@ -29,7 +29,6 @@ import { FormField } from '../index'
 
 describe('<FormField />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormField label="foo" id="bar" />)
 
     const formField = within(subject.getDOMNode())
@@ -38,8 +37,7 @@ describe('<FormField />', async () => {
 
   it('should require a label', async () => {
     const consoleError = stub(console, 'error')
-
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<FormField id="bar" />)
 
     expect(consoleError).to.have.been.calledWithMatch(
@@ -49,8 +47,7 @@ describe('<FormField />', async () => {
 
   it('should require an id', async () => {
     const consoleError = stub(console, 'error')
-
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<FormField label="foo" />)
 
     expect(consoleError).to.have.been.calledWithMatch(
@@ -59,7 +56,6 @@ describe('<FormField />', async () => {
   })
 
   it('passes props through to FormField', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormField label="foo" id="bar" data-automation="baz" />
     )
@@ -68,7 +64,6 @@ describe('<FormField />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormField label="foo" id="bar" />)
 
     const formField = within(subject.getDOMNode())

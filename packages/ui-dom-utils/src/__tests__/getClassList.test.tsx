@@ -28,7 +28,6 @@ import { getClassList } from '../getClassList'
 
 describe('getClassList', async () => {
   it('should provide classlist methods', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<span className="foo bar baz">hello</span>)
     const classes = getClassList(subject.getDOMNode())
 

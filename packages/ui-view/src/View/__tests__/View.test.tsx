@@ -29,7 +29,6 @@ import { View } from '../../index'
 
 describe('<View />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View>
         <h1>Hello!</h1>
@@ -40,7 +39,6 @@ describe('<View />', async () => {
   })
 
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View>
         <h1>Hello!</h1>
@@ -66,7 +64,6 @@ describe('<View />', async () => {
       pointerEvents: 'none'
     }
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { top: string; l... Remove this comment to see the full error message
       <View style={{ ...styleProps }}>
@@ -88,7 +85,6 @@ describe('<View />', async () => {
   })
 
   it('should pass flex style', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { flexBasis: str... Remove this comment to see the full error message
       <View style={{ flexBasis: '200px' }}>
@@ -109,7 +105,6 @@ describe('<View />', async () => {
       opacity: '0.5'
     }
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { backgroundColo... Remove this comment to see the full error message
       <View style={{ ...styleProps }}>
@@ -126,7 +121,7 @@ describe('<View />', async () => {
 
   it('should pass className', async () => {
     const className = 'fooBarBaz'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
       <View className={className}>
@@ -138,9 +133,8 @@ describe('<View />', async () => {
   })
 
   it('should provide an elementRef', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <View elementRef={elementRef}>
         <h1>Hello!</h1>
@@ -152,7 +146,7 @@ describe('<View />', async () => {
 
   it('should pass cursor', async () => {
     const cursor = 'cell'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <View cursor={cursor}>
         <h1>Hello!</h1>
@@ -164,7 +158,6 @@ describe('<View />', async () => {
   })
 
   it('should set overflow', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View overflowX="hidden" overflowY="auto">
         <h1>Hello!</h1>
@@ -180,7 +173,6 @@ describe('<View />', async () => {
   })
 
   it('should set CSS position', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View position="fixed">
         <h1>Hello!</h1>
@@ -195,7 +187,6 @@ describe('<View />', async () => {
   })
 
   it('should set inline offset (top, bottom, left, right)', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View
         insetBlockStart="0"
@@ -218,7 +209,6 @@ describe('<View />', async () => {
   })
 
   it('should override default max-width', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <View>
         <h1>Hello!</h1>
@@ -239,7 +229,7 @@ describe('<View />', async () => {
       const consoleError = stub(console, 'error')
       const warning =
         'Warning: [View] the focus outline will only show if the `position` prop is `relative`.'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <View withFocusOutline>
           <h1>Hello!</h1>
@@ -253,7 +243,7 @@ describe('<View />', async () => {
       const consoleError = stub(console, 'error')
       const warning =
         'Warning: [View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <View withFocusOutline display="inline" focusPosition="offset">
           <h1>Hello!</h1>
@@ -265,7 +255,6 @@ describe('<View />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<View>Hello!</View>)
 
     const view = within(subject.getDOMNode())

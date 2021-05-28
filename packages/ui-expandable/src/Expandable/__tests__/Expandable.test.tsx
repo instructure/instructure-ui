@@ -34,8 +34,8 @@ describe('<Expandable />', async () => {
       render: () => <div>hello</div>
     }
     const renderSpy = spy(props, 'render')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
+    // @ts-expect-error FIXME remove this line to see the error
     const lastCallArgs: Expandable[] = renderSpy.lastCall.args
     expect(lastCallArgs[0].expanded).to.be.false()
   })
@@ -47,7 +47,6 @@ describe('<Expandable />', async () => {
     }
     const renderSpy = spy(props, 'render')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
     const lastCallArgs: any[] = renderSpy.lastCall.args
     const ariaExpanded = lastCallArgs[0].getToggleProps()['aria-expanded']
@@ -61,7 +60,6 @@ describe('<Expandable />', async () => {
     }
     const renderSpy = spy(props, 'render')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
 
     const lastCallArgs: any[] = renderSpy.lastCall.args
@@ -75,7 +73,6 @@ describe('<Expandable />', async () => {
   })
 
   it('should call onToggle when onClick is called', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onToggleSpy = spy()
 
     const props = {
@@ -86,7 +83,6 @@ describe('<Expandable />', async () => {
     }
     const renderSpy = spy(props, 'render')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
 
     const lastCallArgs: any[] = renderSpy.lastCall.args
@@ -106,9 +102,9 @@ describe('<Expandable />', async () => {
     }
     const renderSpy = spy(props, 'render')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Expandable {...props} />)
 
+    // @ts-expect-error FIXME remove this line to see the error
     const lastCallArgs: Expandable[] = renderSpy.lastCall.args
     expect(lastCallArgs[0].expanded).to.be.true()
   })

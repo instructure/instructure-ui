@@ -42,7 +42,6 @@ const ITEMS_DATA = {
 
 describe('<TreeBrowser />', async () => {
   it('should render a tree', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -55,7 +54,6 @@ describe('<TreeBrowser />', async () => {
   })
 
   it('should render subcollections', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -77,7 +75,6 @@ describe('<TreeBrowser />', async () => {
   })
 
   it('should render all collections at top level if showRootCollection is true and rootId is undefined', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TreeBrowser
         collections={COLLECTIONS_DATA}
@@ -94,7 +91,6 @@ describe('<TreeBrowser />', async () => {
 
   describe('expanded', async () => {
     it('should not expand collections or items without defaultExpanded prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -112,7 +108,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should accept an array of default expanded collections', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -131,7 +126,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should persist the state of expanded children when parent collapsed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -165,7 +159,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should not update expanded on click when set as explicit prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -198,7 +191,6 @@ describe('<TreeBrowser />', async () => {
 
   describe('selected', async () => {
     it('should not show the selection if selectionType is none', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -218,7 +210,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should show the selection indicator on last clicked collection or item', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -250,7 +241,6 @@ describe('<TreeBrowser />', async () => {
 
   describe('collections', async () => {
     it('should not show the first keyed collection if showRootCollection is false', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -268,7 +258,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should render first keyed collection if showRootCollection is true and rootId specified', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -284,7 +273,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should render a folder icon by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -307,7 +295,6 @@ describe('<TreeBrowser />', async () => {
         </svg>
       )
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -324,7 +311,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should render without icon if set to null', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -339,9 +325,8 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should call onCollectionToggle when expanding and collapsing with mouse', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onCollectionToggle = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -361,9 +346,8 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should call onCollectionToggle on arrow key expansion or collapse', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onCollectionToggle = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -392,9 +376,8 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should call onCollectionClick on button activation (space/enter or click)', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onCollectionClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -417,7 +400,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should render before, after nodes of the provided collection', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={{
@@ -453,7 +435,6 @@ describe('<TreeBrowser />', async () => {
 
   describe('items', async () => {
     it('should render a document icon by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -477,7 +458,6 @@ describe('<TreeBrowser />', async () => {
         </svg>
       )
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -496,7 +476,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should render without icon if set to null', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -515,7 +494,6 @@ describe('<TreeBrowser />', async () => {
 
   describe('for a11y', async () => {
     it('should meet a11y standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -528,7 +506,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should accept a treeLabel prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -542,7 +519,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should toggle aria-expanded', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -565,7 +541,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should use aria-selected when selectionType is not none', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -593,7 +568,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should move focus with the up/down arrow keys', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -633,7 +607,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should move focus via keyboard shortcuts', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -673,7 +646,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should open collapsed collection with right arrow', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -699,7 +671,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should move focus down when right arrow is pressed on expanded collection', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -730,7 +701,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should collapse expanded collection when left arrow is pressed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -756,7 +726,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should move focus up when left arrow is pressed on collapsed collection', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -785,7 +754,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should select the node on enter or space if selectionType is not "none"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -818,7 +786,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should not expand the node on enter or space if selectionType is not "none"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -843,7 +810,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should move to the top node without expanding/collapsing anything when home is pressed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}
@@ -870,7 +836,6 @@ describe('<TreeBrowser />', async () => {
     })
 
     it('should move to the bottom node without expanding/collapsing anything when end is pressed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeBrowser
           collections={COLLECTIONS_DATA}

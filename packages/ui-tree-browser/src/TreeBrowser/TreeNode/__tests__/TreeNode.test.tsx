@@ -39,7 +39,6 @@ const TreeNodeLocator = locator(TreeNode.selector)
 
 describe('<TreeNode />', async () => {
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TreeNode>
         <button>Hello World</button>
@@ -50,7 +49,6 @@ describe('<TreeNode />', async () => {
   })
 
   it('supports containerRef prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const containerRef = stub()
     const node = (
       <div id="1">
@@ -59,7 +57,6 @@ describe('<TreeNode />', async () => {
         </TreeNode>
       </div>
     )
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(node)
     const div = document.getElementById('1')
     expect(containerRef).to.have.been.calledWith(div)
@@ -68,7 +65,7 @@ describe('<TreeNode />', async () => {
   describe('selected', async () => {
     it('should take the selected CSS props if it is selected', async () => {
       const pink = '#FF00FF'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TreeNode
           id="1"
@@ -85,7 +82,6 @@ describe('<TreeNode />', async () => {
     })
 
     it('should take the focused class if it is focused', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeNode id="1" focused={true}>
           <input />

@@ -35,7 +35,6 @@ describe('getTextDirection', async () => {
   })
 
   it('defaults to the dir of <html> when passed an element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div>
         <h1>Hello</h1>
@@ -45,7 +44,6 @@ describe('getTextDirection', async () => {
   })
 
   it('returns "rtl" if the `dir` of the element is "rtl"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div dir="rtl">
         <h1>Hello</h1>
@@ -55,7 +53,6 @@ describe('getTextDirection', async () => {
   })
 
   it('inherits value set by ancestor', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div dir="rtl">
         <h1>Hello</h1>

@@ -30,7 +30,6 @@ import { RadioInputLocator } from '../RadioInputLocator'
 
 describe('<RadioInput />', async () => {
   it('renders an input with type "radio"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInput label="fake label" value="someValue" name="someName" />
     )
@@ -43,9 +42,8 @@ describe('<RadioInput />', async () => {
 
   describe('events', async () => {
     it('responds to onClick event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           label="fake label"
@@ -66,9 +64,8 @@ describe('<RadioInput />', async () => {
     })
 
     it('does not respond to onClick event when disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           disabled
@@ -90,9 +87,8 @@ describe('<RadioInput />', async () => {
     })
 
     it('does not respond to onClick event when readOnly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           readOnly
@@ -114,9 +110,8 @@ describe('<RadioInput />', async () => {
     })
 
     it('responds to onChange event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           label="fake label"
@@ -137,9 +132,8 @@ describe('<RadioInput />', async () => {
     })
 
     it('does not respond to onChange event when disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           disabled
@@ -161,9 +155,8 @@ describe('<RadioInput />', async () => {
     })
 
     it('does not respond to onChange event when readOnly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           readOnly
@@ -185,9 +178,8 @@ describe('<RadioInput />', async () => {
     })
 
     it('responds to onBlur event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           label="fake label"
@@ -209,9 +201,8 @@ describe('<RadioInput />', async () => {
     })
 
     it('responds to onFocus event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           label="fake label"
@@ -233,7 +224,6 @@ describe('<RadioInput />', async () => {
     })
 
     it('sets input to checked when selected', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           checked
@@ -253,7 +243,7 @@ describe('<RadioInput />', async () => {
 
     it('focuses with the focus helper', async () => {
       let ref
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           label="fake label"
@@ -277,7 +267,6 @@ describe('<RadioInput />', async () => {
 
   describe('for a11y', async () => {
     it('simple variant should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInput
           variant="simple"
@@ -294,7 +283,7 @@ describe('<RadioInput />', async () => {
 
     it('should require a label', async () => {
       const consoleError = stub(console, 'error')
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RadioInput
           variant="simple"

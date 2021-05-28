@@ -29,7 +29,6 @@ import { FormFieldGroup } from '../index'
 
 describe('<FormFieldGroup />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <FormFieldGroup description="Please enter your full name">
         <label>
@@ -56,7 +55,6 @@ describe('<FormFieldGroup />', async () => {
       null
     ]
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup description="Please enter your full name">
         {children}
@@ -70,7 +68,6 @@ describe('<FormFieldGroup />', async () => {
   it('links the messages to the fieldset via aria-describedby', async () => {
     const messages = [{ text: 'Invalid name', type: 'error' }]
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup
         description="Please enter your full name"
@@ -100,7 +97,6 @@ describe('<FormFieldGroup />', async () => {
   it('displays description message inside the legend', async () => {
     const description = 'Please enter your full name'
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup description={description}>
         <label>
@@ -121,7 +117,6 @@ describe('<FormFieldGroup />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldGroup description="Please enter your full name">
         <label>

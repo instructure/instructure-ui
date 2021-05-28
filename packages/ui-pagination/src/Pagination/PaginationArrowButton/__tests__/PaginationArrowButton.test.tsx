@@ -32,7 +32,6 @@ import { PaginationArrowButtonLocator } from '../PaginationArrowButtonLocator'
 
 describe('<PaginationArrowButton />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PaginationArrowButton direction="prev" label="Label" />)
 
     const button = await PaginationArrowButtonLocator.find()
@@ -40,7 +39,6 @@ describe('<PaginationArrowButton />', async () => {
   })
 
   it('should display tooltips', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PaginationArrowButton direction="prev" label="Label" />)
 
     const button = await PaginationArrowButtonLocator.find()
@@ -53,10 +51,8 @@ describe('<PaginationArrowButton />', async () => {
   })
 
   it('should provide a ref to the button element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const buttonRef = spy()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <PaginationArrowButton
         direction="prev"

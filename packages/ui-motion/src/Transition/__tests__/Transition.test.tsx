@@ -56,7 +56,6 @@ describe('<Transition />', async () => {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'type' implicitly has an 'any' type.
   const expectTypeClass = function (type) {
     it(`should correctly apply classes for '${type}'`, async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Transition type={type} in={true}>
           <div>hello</div>
@@ -75,7 +74,7 @@ describe('<Transition />', async () => {
 
   it('should correctly apply enter and exit classes', async () => {
     const type = 'fade'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Transition type={type} in={true}>
         <div>hello</div>
@@ -92,7 +91,6 @@ describe('<Transition />', async () => {
   })
 
   it('should remove component from DOM when `unmountOnExit` is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Transition type="fade" in={true} unmountOnExit={true}>
         <div>hello</div>
@@ -107,9 +105,8 @@ describe('<Transition />', async () => {
   })
 
   it('should not execute enter transition with `transitionEnter` set to false', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEntering = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Transition
         type="fade"
@@ -126,9 +123,8 @@ describe('<Transition />', async () => {
   })
 
   it('should not execute exit transition with `transitionExit` set to false', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onExiting = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Transition
         type="fade"
@@ -145,14 +141,12 @@ describe('<Transition />', async () => {
   })
 
   it('should correctly call enter methods', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEnter = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onEntering = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onEntered = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Transition
         type="fade"
@@ -173,14 +167,12 @@ describe('<Transition />', async () => {
   })
 
   it('should correctly call exit methods', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onExit = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onExiting = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onExited = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Transition
         type="fade"

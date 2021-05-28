@@ -34,7 +34,6 @@ describe('<CloseButton />', async () => {
   })
 
   it('should render with x icon', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CloseButton screenReaderLabel="Close" />)
     const button = await CloseButtonLocator.find()
     const icon = await button.find('svg[name]')
@@ -42,10 +41,8 @@ describe('<CloseButton />', async () => {
   })
 
   it('should pass the `onClick` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CloseButton onClick={onClick} screenReaderLabel="Hello" />)
     const closeButtonRoot = await CloseButtonLocator.find()
     const button = await closeButtonRoot.find(':focusable')

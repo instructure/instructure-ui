@@ -39,7 +39,6 @@ import { MenuLocator } from '../MenuLocator'
 describe('<Menu />', async () => {
   describe('without a trigger', async () => {
     it('should render', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu label="Settings">
           <MenuItem>Account</MenuItem>
@@ -52,7 +51,6 @@ describe('<Menu />', async () => {
     })
 
     it('should meet a11y standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu label="Settings">
           <MenuItem>Account</MenuItem>
@@ -67,7 +65,7 @@ describe('<Menu />', async () => {
     it('should not allow invalid children', async () => {
       const cs = spy(console, 'error')
       const warning = 'Warning: Failed prop type: Expected one of '
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu>
           <div />
@@ -77,9 +75,8 @@ describe('<Menu />', async () => {
     })
 
     it('should call onSelect when menu item is selected', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onSelect = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu label="Settings" onSelect={onSelect}>
           <MenuItem value="Account">Account</MenuItem>
@@ -96,9 +93,8 @@ describe('<Menu />', async () => {
     })
 
     it('should not call onSelect when disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onSelect = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu label="Settings" onSelect={onSelect} disabled>
           <MenuItem value="Account">Account</MenuItem>
@@ -114,7 +110,6 @@ describe('<Menu />', async () => {
     })
 
     it('should move focus properly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu label="Settings">
           <MenuItem value="Account">Account</MenuItem>
@@ -134,9 +129,8 @@ describe('<Menu />', async () => {
     })
 
     it('should provide a menu ref', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const menuRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu label="Settings" menuRef={menuRef}>
           <MenuItem value="Account">Account</MenuItem>
@@ -147,7 +141,6 @@ describe('<Menu />', async () => {
     })
 
     it('should set aria attributes properly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu disabled label="Settings">
           <MenuItem value="Account">Account</MenuItem>
@@ -165,7 +158,6 @@ describe('<Menu />', async () => {
 
       document.body.appendChild(mountNode)
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu
           defaultShow
@@ -183,7 +175,6 @@ describe('<Menu />', async () => {
     })
 
     it('should set aria attributes properly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu trigger={<button>Settings</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
@@ -215,9 +206,8 @@ describe('<Menu />', async () => {
     })
 
     it('should call onFocus on focus', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu trigger={<button>More</button>} onFocus={onFocus}>
           <MenuItem>Learning Mastery</MenuItem>
@@ -234,7 +224,6 @@ describe('<Menu />', async () => {
     })
 
     it('should render when show and onToggle props are set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu trigger={<button>More</button>} show onToggle={() => {}}>
           <MenuItem>Learning Mastery</MenuItem>
@@ -251,7 +240,6 @@ describe('<Menu />', async () => {
     })
 
     it('should not show by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu trigger={<button>More</button>}>
           <MenuItem>Learning Mastery</MenuItem>
@@ -268,7 +256,6 @@ describe('<Menu />', async () => {
     })
 
     it('should accept a default show', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu trigger={<button>More</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
@@ -283,9 +270,8 @@ describe('<Menu />', async () => {
     })
 
     it('should provide a menu ref', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const menuRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu trigger={<button>More</button>} defaultShow menuRef={menuRef}>
           <MenuItem>Learning Mastery</MenuItem>
@@ -301,9 +287,8 @@ describe('<Menu />', async () => {
     })
 
     it('should provide a popoverRef ref', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const popoverRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu
           trigger={<button>More</button>}
@@ -319,7 +304,6 @@ describe('<Menu />', async () => {
     })
 
     it('should focus the menu first', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu trigger={<button>More</button>} defaultShow>
           <MenuItem>Learning Mastery</MenuItem>
@@ -345,9 +329,8 @@ describe('<Menu />', async () => {
     })
 
     it('should call onToggle on click', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onToggle = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu trigger={<button>More</button>} onToggle={onToggle}>
           <MenuItem>Learning Mastery</MenuItem>
@@ -364,7 +347,6 @@ describe('<Menu />', async () => {
     })
 
     it('should have an aria-haspopup attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu trigger={<button>More</button>}>
           <MenuItem>Learning Mastery</MenuItem>
@@ -380,7 +362,6 @@ describe('<Menu />', async () => {
 
     describe('for a11y', async () => {
       it('should meet standards when menu is closed', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <Menu trigger={<button>More</button>}>
             <MenuItem>Learning Mastery</MenuItem>
@@ -392,7 +373,6 @@ describe('<Menu />', async () => {
       })
 
       it('should meet standards when menu is open', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <Menu trigger={<button>More</button>} defaultShow>
             <MenuItem>Learning Mastery</MenuItem>
@@ -420,7 +400,6 @@ describe('<Menu />', async () => {
     })
 
     it('it should not open the sub-menu popover when disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu label="Parent" disabled>
           <Menu label="Flyout">
@@ -443,7 +422,6 @@ describe('<Menu />', async () => {
     })
 
     it('it should close the sub-menu popover on escape press', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout">
@@ -482,7 +460,6 @@ describe('<Menu />', async () => {
     })
 
     it('it should close the sub-menu popover on left press', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout">
@@ -513,9 +490,8 @@ describe('<Menu />', async () => {
     })
 
     it('it should call onDismiss on tab press', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onDismiss = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout" onDismiss={onDismiss}>
@@ -544,9 +520,8 @@ describe('<Menu />', async () => {
     })
 
     it('it should call onSelect when sub-menu popover option is selected', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onSelect = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout" onSelect={onSelect}>
@@ -577,9 +552,8 @@ describe('<Menu />', async () => {
     })
 
     it('it should call onToggle on document click and on dismiss', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onToggle = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout" onToggle={onToggle}>
@@ -614,11 +588,10 @@ describe('<Menu />', async () => {
     })
 
     it('it should call onMouseOver on hover', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onMouseOver = stub()
 
       /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout" onMouseOver={onMouseOver}>
@@ -645,7 +618,6 @@ function testShowFlyoutOnEvent(event) {
   it(`should show flyout menu on ${event.type} ${
     event.which || ''
   }`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Menu label="Parent">
         <Menu label="Flyout">
@@ -673,7 +645,6 @@ function testFocusFlyoutOnEvent(event) {
   it(`expect flyout menu to be focused on ${event.type} ${
     event.which || ''
   }`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Menu label="Parent">
         <Menu label="Flyout">

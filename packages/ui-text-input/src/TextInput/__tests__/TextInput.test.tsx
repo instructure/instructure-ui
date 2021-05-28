@@ -29,7 +29,6 @@ import { TextInput } from '../index'
 
 describe('<TextInput/>', async () => {
   it('should include a label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TextInput renderLabel="Name" />)
     // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
     const label = await find('label')
@@ -38,7 +37,7 @@ describe('<TextInput/>', async () => {
 
   it('should focus the input when focus is called', async () => {
     let ref
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ renderLabel: string; componentRef: (el: an... Remove this comment to see the full error message
       <TextInput renderLabel="Name" componentRef={(el) => (ref = el)} />
@@ -52,9 +51,8 @@ describe('<TextInput/>', async () => {
   })
 
   it('should provide an inputRef prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const inputRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <TextInput renderLabel="Name" inputRef={inputRef} />
     )
@@ -79,7 +77,6 @@ describe('<TextInput/>', async () => {
       </svg>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TextInput
         renderLabel="Name"
@@ -103,7 +100,6 @@ describe('<TextInput/>', async () => {
 
   it('should provide a value getter', async () => {
     let ref
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextInput
         renderLabel="Name"
@@ -118,7 +114,6 @@ describe('<TextInput/>', async () => {
   })
 
   it('should provide messageId to FormField', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TextInput
         renderLabel="Name"
@@ -137,7 +132,6 @@ describe('<TextInput/>', async () => {
   })
 
   it('should have equal messagesId and aria-describedby values', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TextInput
         renderLabel="Name"
@@ -159,7 +153,6 @@ describe('<TextInput/>', async () => {
   })
 
   it('should handle multiple aria-describedby ids', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TextInput
         renderLabel="Name"
@@ -181,9 +174,8 @@ describe('<TextInput/>', async () => {
 
   describe('events', async () => {
     it('responds to onChange event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <TextInput renderLabel="Name" onChange={onChange} />
       )
@@ -195,9 +187,8 @@ describe('<TextInput/>', async () => {
     })
 
     it('responds to onBlur event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <TextInput renderLabel="Name" onBlur={onBlur} />
       )
@@ -209,9 +200,8 @@ describe('<TextInput/>', async () => {
     })
 
     it('responds to onFocus event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <TextInput renderLabel="Name" onFocus={onFocus} />
       )
@@ -225,7 +215,6 @@ describe('<TextInput/>', async () => {
 
   describe('interaction', async () => {
     it('should set the disabled attribute when `interaction` is disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <TextInput renderLabel="Name" interaction="disabled" />
       )
@@ -234,14 +223,13 @@ describe('<TextInput/>', async () => {
     })
 
     it('should set the disabled attribute when `disabled` is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+      // @ts-expect-error FIXME remove this line to see the error
       const subject = await mount(<TextInput renderLabel="Name" disabled />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[disabled]')).to.exist()
     })
 
     it('should set the readonly attribute when `interaction` is readonly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <TextInput renderLabel="Name" interaction="readonly" />
       )
@@ -250,7 +238,7 @@ describe('<TextInput/>', async () => {
     })
 
     it('should set the readonly attribute when `readOnly` is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+      // @ts-expect-error FIXME remove this line to see the error
       const subject = await mount(<TextInput renderLabel="Name" readOnly />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[readonly]')).to.exist()
@@ -259,14 +247,12 @@ describe('<TextInput/>', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<TextInput renderLabel="Name" />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.accessible()).to.be.true()
     })
 
     it('should set aria-invalid when errors prop is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <TextInput
           renderLabel="Name"

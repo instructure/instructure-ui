@@ -32,19 +32,16 @@ import { SpinnerLocator } from '../SpinnerLocator'
 
 describe('<Spinner />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Spinner renderTitle="Loading" size="small" />)
     expect(await SpinnerLocator.find()).to.exist()
   })
 
   it('should render the title prop text in the SVG element title', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Spinner renderTitle="Loading" size="large" />)
     expect(await SpinnerLocator.find(':contains(Loading)')).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Spinner renderTitle="Loading" size="small" />)
     const spinner = await SpinnerLocator.find()
     expect(await spinner.accessible()).to.be.true()
@@ -55,7 +52,6 @@ describe('<Spinner />', async () => {
     const Translation = ({ children }) => (
       <span>I have translated {children}.</span>
     )
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Spinner renderTitle={<Translation>Loading</Translation>} size="small" />
     )
@@ -89,7 +85,7 @@ describe('<Spinner />', async () => {
               [prop]: 'foo'
             }
             const warning = `Warning: [Spinner] prop '${prop}' is not allowed.`
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(<Spinner renderTitle="Loading" {...props} />)
             expect(consoleError).to.be.calledWith(warning)
           })
@@ -98,7 +94,7 @@ describe('<Spinner />', async () => {
             // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(<Spinner renderTitle="Loading" {...props} />)
             expect(consoleError).to.not.be.called()
           })

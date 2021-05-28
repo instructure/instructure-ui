@@ -41,7 +41,6 @@ describe('<TimeSelect />', async () => {
   const lastCall = (spy) => spy.lastCall.args
 
   it('should render an input and list', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TimeSelect renderLabel="Choose a time" />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
@@ -57,9 +56,7 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should fire onChange when selected option changes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -79,9 +76,7 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should fire onFocus when input gains focus', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TimeSelect renderLabel="Choose a time" onFocus={onFocus} />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
@@ -94,9 +89,7 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should behave uncontrolled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TimeSelect renderLabel="Choose a time" onChange={onChange} />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
@@ -112,10 +105,9 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should behave controlled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
     const value = DateTime.parse('1986-05-17T05:00:00.000Z', 'en', 'US/Eastern')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <TimeSelect
         renderLabel="Choose an option"
@@ -144,10 +136,9 @@ describe('<TimeSelect />', async () => {
       'en',
       'US/Eastern'
     )
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onChange = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -169,7 +160,6 @@ describe('<TimeSelect />', async () => {
       'en',
       'US/Eastern'
     )
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -185,7 +175,6 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should default to the first option if defaultToFirstOption is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TimeSelect renderLabel="Choose a time" defaultToFirstOption />)
     const select = await TimeSelectLocator.find()
     const input = await select.findInput()
@@ -205,7 +194,6 @@ describe('<TimeSelect />', async () => {
       'en',
       'US/Eastern'
     )
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -226,7 +214,6 @@ describe('<TimeSelect />', async () => {
 
   it('should use the specified locale', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -246,7 +233,6 @@ describe('<TimeSelect />', async () => {
 
   it('should use the specified step value', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -277,7 +263,6 @@ describe('<TimeSelect />', async () => {
 
   describe('input', async () => {
     it('should render with a custom id if given', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TimeSelect renderLabel="Choose a time" id="timeSelect" />)
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()
@@ -286,7 +271,6 @@ describe('<TimeSelect />', async () => {
     })
 
     it('should render readonly when interaction="readonly"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TimeSelect renderLabel="Choose a time" interaction="readonly" />
       )
@@ -298,7 +282,6 @@ describe('<TimeSelect />', async () => {
     })
 
     it('should render disabled when interaction="disabled"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TimeSelect renderLabel="Choose a time" interaction="disabled" />
       )
@@ -310,7 +293,6 @@ describe('<TimeSelect />', async () => {
     })
 
     it('should render required when isRequired is true', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TimeSelect renderLabel="Choose a time" isRequired />)
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()
@@ -319,7 +301,6 @@ describe('<TimeSelect />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TimeSelect renderLabel="Choose a time" data-custom-attr="true" />
       )
@@ -330,9 +311,8 @@ describe('<TimeSelect />', async () => {
     })
 
     it('should provide a ref to the input element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const inputRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TimeSelect renderLabel="Choose a time" inputRef={inputRef} />
       )
@@ -345,9 +325,8 @@ describe('<TimeSelect />', async () => {
 
   describe('list', async () => {
     it('should provide a ref to the list element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const listRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<TimeSelect renderLabel="Choose a time" listRef={listRef} />)
       const select = await TimeSelectLocator.find()
       const input = await select.findInput()

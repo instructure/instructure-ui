@@ -33,9 +33,7 @@ import { addInputModeListener } from '../addInputModeListener'
 
 describe('addInputModeListener', async () => {
   it('should handle input mode changes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const handleInputModeChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div>
         <button id="button-1">hello</button>

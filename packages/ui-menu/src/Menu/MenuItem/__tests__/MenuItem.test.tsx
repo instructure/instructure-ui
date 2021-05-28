@@ -30,14 +30,12 @@ import { MenuItemLocator } from '../MenuItemLocator'
 
 describe('<MenuItem />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem>Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
     expect(item).to.exist()
   })
 
   it('should render as a link when an href is provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem href="example.html">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -47,7 +45,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should render as a link when a to is provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem to="/example">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -57,9 +54,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should call onSelect after click', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
@@ -76,9 +71,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should call onClick after click', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onClick={onClick} value="foo">
         Hello
@@ -93,9 +86,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should call onSelect after SPACE key is pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
@@ -111,9 +102,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should call onSelect after ENTER key is pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} value="foo">
         Hello
@@ -128,9 +117,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should not be able to select when the disabled prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem onSelect={onSelect} disabled>
         Hello
@@ -147,7 +134,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the tabIndex attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem>Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -156,7 +142,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the aria-controls attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem controls="testId">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -165,7 +150,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the aria-disabled attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem disabled>Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')
@@ -174,7 +158,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the aria-checked attribute when defaultSelected prop is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem type="checkbox" defaultSelected>
         Hello
@@ -187,9 +170,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the aria-checked attribute when selected prop is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItem type="checkbox" selected onSelect={onSelect}>
         Hello
@@ -202,7 +183,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should default to the "menuitem" role', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem>Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 
@@ -210,7 +190,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the role to "menuitemcheckbox" when the type is "checkbox"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem type="checkbox">Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 
@@ -218,7 +197,6 @@ describe('<MenuItem />', async () => {
   })
 
   it('should set the role to "menuitemradio" when the type is "radio"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<MenuItem type="radio">Hello</MenuItem>)
     const item = await MenuItemLocator.find(':label(Hello)')
 

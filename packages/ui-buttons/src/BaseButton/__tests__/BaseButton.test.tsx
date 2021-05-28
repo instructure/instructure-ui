@@ -31,25 +31,21 @@ import { BaseButtonLocator } from '../BaseButtonLocator'
 
 describe('<BaseButton/>', async () => {
   it('should render the children as button text', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BaseButton>Hello World</BaseButton>)
     expect(await BaseButtonLocator.find(':contains(Hello World)')).to.exist()
   })
 
   it('should render a button', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BaseButton>Hello World</BaseButton>)
     expect(await BaseButtonLocator.find('button[type="button"]')).to.exist()
   })
 
   it('should not error with a null child', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BaseButton>Hello World{null}</BaseButton>)
     expect(await BaseButtonLocator.find('button')).to.exist()
   })
 
   it('should render a link styled as a button if href is provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BaseButton href="example.html">Hello World</BaseButton>)
     expect(
       await BaseButtonLocator.findAll('[href="example.html"]')
@@ -57,23 +53,21 @@ describe('<BaseButton/>', async () => {
   })
 
   it('should render as a link when `to` prop is provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<BaseButton to="/example">Test</BaseButton>)
     const link = await BaseButtonLocator.find('a')
     expect(link.getAttribute('to')).to.equal('/example')
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<BaseButton as="span">Hello World</BaseButton>)
     const span = await BaseButtonLocator.find()
     expect(span.getTagName()).to.equal('span')
   })
 
   it('should set role="button"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <BaseButton as="span" onClick={onClick}>
@@ -84,9 +78,7 @@ describe('<BaseButton/>', async () => {
   })
 
   it('should set tabIndex="0"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <BaseButton as="span" onClick={onClick}>
@@ -97,9 +89,7 @@ describe('<BaseButton/>', async () => {
   })
 
   it('should pass down the type prop to the button element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <BaseButton type="submit" onClick={onClick}>
         Hello World
@@ -115,14 +105,12 @@ describe('<BaseButton/>', async () => {
       </svg>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BaseButton renderIcon={SomeIcon}>Hello World</BaseButton>)
     const button = await BaseButtonLocator.find()
     expect(await button.find('svg')).to.exist()
   })
 
   it('focuses with the focus helper', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BaseButton>Hello World</BaseButton>)
     const button = await BaseButtonLocator.find()
     await button.focus()
@@ -130,9 +118,7 @@ describe('<BaseButton/>', async () => {
   })
 
   it('should provide an  elementRef prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BaseButton elementRef={elementRef}>Hello World</BaseButton>)
     const button = await BaseButtonLocator.find(':contains(Hello World)')
     expect(elementRef).to.have.been.calledWith(button.getDOMNode())
@@ -140,9 +126,8 @@ describe('<BaseButton/>', async () => {
 
   describe('onClick', async () => {
     it('should call onClick when clicked', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<BaseButton onClick={onClick}>Hello World</BaseButton>)
       const button = await BaseButtonLocator.find()
       await button.click()
@@ -150,9 +135,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when interaction is "disabled"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <BaseButton interaction="disabled" onClick={onClick}>
           Hello World
@@ -165,9 +149,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when disabled is set"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <BaseButton disabled onClick={onClick}>
@@ -181,9 +164,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when interaction is "readonly"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <BaseButton interaction="readonly" onClick={onClick}>
           Hello World
@@ -196,9 +178,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when readOnly is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <BaseButton readOnly onClick={onClick}>
@@ -212,9 +193,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when button is disabled and an href prop is provided', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<BaseButton href="#">Hello World</BaseButton>)
       const button = await BaseButtonLocator.find()
       await button.click()
@@ -222,9 +202,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when interaction is "readonly" and an href prop is provided', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <BaseButton interaction="readonly" onClick={onClick} href="#">
           Hello World
@@ -238,9 +217,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should call onClick when space key is pressed if href is provided', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <BaseButton onClick={onClick} href="#">
           Hello World
@@ -252,9 +230,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should call onClick when enter key is pressed when not a button or link', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <BaseButton as="span" onClick={onClick}>
@@ -267,9 +244,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when interaction is "disabled" and space key is pressed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <BaseButton interaction="disabled" onClick={onClick} href="#">
           Hello World
@@ -281,9 +257,8 @@ describe('<BaseButton/>', async () => {
     })
 
     it('should not call onClick when interaction is "readonly" and space key is pressed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <BaseButton interaction="readonly" onClick={onClick} href="#">
           Hello World
@@ -297,7 +272,6 @@ describe('<BaseButton/>', async () => {
 
   describe('when passing down props to View', async () => {
     it("passes cursor='pointer' to View by default", async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<BaseButton>Hello World</BaseButton>)
       const button = await BaseButtonLocator.find()
       const cursor = button.getComputedStyle().cursor
@@ -305,7 +279,6 @@ describe('<BaseButton/>', async () => {
     })
 
     it("passes cursor='not-allowed' to View when disabled", async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<BaseButton interaction="disabled">Hello World</BaseButton>)
       const button = await BaseButtonLocator.find()
       const cursor = button.getComputedStyle().cursor
@@ -315,9 +288,8 @@ describe('<BaseButton/>', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards when onClick is given', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(<BaseButton onClick={onClick}>Hello World</BaseButton>)
       const button = await BaseButtonLocator.find()
       await button.click()
@@ -326,7 +298,6 @@ describe('<BaseButton/>', async () => {
 
     describe('when disabled', async () => {
       it('sets the disabled attribute so that the button is not in tab order', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(<BaseButton interaction="disabled">Hello World</BaseButton>)
         const button = await BaseButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()
@@ -335,7 +306,6 @@ describe('<BaseButton/>', async () => {
 
     describe('when readonly', () => {
       it('sets the disabled attribute so that the button is not in tab order', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(<BaseButton interaction="readonly">Hello World</BaseButton>)
         const button = await BaseButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()

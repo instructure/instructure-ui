@@ -30,7 +30,6 @@ import { ListLocator } from '../ListLocator'
 
 describe('<List />', async () => {
   it('should render list items and filter out null/falsy children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <List>
         <List.Item>List item 1</List.Item>
@@ -50,7 +49,6 @@ describe('<List />', async () => {
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
     const consoleError = stub(console, 'error')
     const warning = `Warning: [List] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <List delimiter="dashed" itemSpacing="large">
         <List.Item>List item 1</List.Item>
@@ -64,7 +62,6 @@ describe('<List />', async () => {
   })
 
   it('should render an ordered list', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <List as="ol">
         <List.Item>List item 1</List.Item>
@@ -78,7 +75,6 @@ describe('<List />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <List>
         <List.Item>List item 1</List.Item>

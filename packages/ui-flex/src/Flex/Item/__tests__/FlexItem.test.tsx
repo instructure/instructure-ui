@@ -29,16 +29,14 @@ import { Item } from '../index'
 
 describe('<Item />', async () => {
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Item>Flex item 1</Item>)
     const item = within(subject.getDOMNode())
     expect(item.find(':contains(Flex item 1)')).to.exist()
   })
 
   it('should support an elementRef prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Item elementRef={elementRef}>Flex item 2</Item>
     )
@@ -49,7 +47,6 @@ describe('<Item />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Item>Flex item 3</Item>)
 
     const item = within(subject.getDOMNode())

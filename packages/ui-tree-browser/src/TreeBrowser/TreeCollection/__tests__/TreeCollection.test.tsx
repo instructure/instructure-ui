@@ -63,7 +63,6 @@ const IconUser = (
 
 describe('<TreeCollection />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TreeCollection
         id={1}
@@ -80,7 +79,6 @@ describe('<TreeCollection />', async () => {
 
   describe('collections', async () => {
     it('should render icons on children', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeCollection
           id={1}
@@ -105,9 +103,8 @@ describe('<TreeCollection />', async () => {
     })
 
     it('should support the containerRef prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const containerRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TreeCollection
           id={1}
@@ -125,7 +122,6 @@ describe('<TreeCollection />', async () => {
     })
 
     it('should pass an aria-expanded attribute to its list item', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeCollection
           id={1}
@@ -144,7 +140,6 @@ describe('<TreeCollection />', async () => {
     })
 
     it('should pass an aria-selected attribute to its list item', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeCollection
           id={1}
@@ -164,7 +159,6 @@ describe('<TreeCollection />', async () => {
     })
 
     it('should correctly evaluate `getCollectionProps` for each item', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeCollection
           id={1}
@@ -202,9 +196,8 @@ describe('<TreeCollection />', async () => {
 
     describe('onCollectionClick', async () => {
       it('should return the correct collection params on click', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onCollectionClick = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <TreeCollection
             id={1}
@@ -234,7 +227,6 @@ describe('<TreeCollection />', async () => {
 
   describe('items', async () => {
     it('should not pass an aria-expanded attribute to its button', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeCollection
           id={1}
@@ -255,9 +247,8 @@ describe('<TreeCollection />', async () => {
     })
 
     it('should call custom functions passed by onItemClick', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onItemClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TreeCollection
           id={1}
@@ -284,7 +275,6 @@ describe('<TreeCollection />', async () => {
     })
 
     it('should correctly evaluate `getItemProps` for each item', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeCollection
           id={1}

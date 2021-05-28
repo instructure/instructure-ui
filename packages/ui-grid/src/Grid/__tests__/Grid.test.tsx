@@ -45,7 +45,6 @@ describe('<Grid />', async () => {
   })
 
   it('should pass aria and role attributes to underlying DOM elements', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Grid role="grid" aria-hidden="true">

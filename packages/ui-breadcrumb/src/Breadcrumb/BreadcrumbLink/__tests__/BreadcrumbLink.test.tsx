@@ -31,7 +31,6 @@ import { BreadcrumbLinkLocator } from '../BreadcrumbLinkLocator'
 
 describe('<BreadcrumbLink />', async () => {
   it('should render a anchor tag when given an href prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BreadcrumbLink href="#">Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const anchor = await link.find('a')
@@ -40,9 +39,7 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should render as a button and respond to onClick event', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const button = await link.find('button')
@@ -53,14 +50,12 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should allow to prop to pass through', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BreadcrumbLink to="/example">Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     expect(link.getAttribute('to')).to.equal('/example')
   })
 
   it('should not render a link when not given an href prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BreadcrumbLink>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const tagName = link.getTagName()
@@ -71,7 +66,6 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should not render a button when not given an onClick prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BreadcrumbLink>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     const tagName = link.getTagName()
@@ -82,7 +76,6 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should meet a11y standards as a link', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BreadcrumbLink href="#">Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
 
@@ -90,7 +83,6 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should meet a11y standards as a span', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<BreadcrumbLink>Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
 

@@ -40,7 +40,6 @@ describe('<ScreenReaderContent />', async () => {
   })
 
   it('renders children components', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ScreenReaderContent>
         <span>Screenreader text</span>
@@ -51,7 +50,6 @@ describe('<ScreenReaderContent />', async () => {
   })
 
   it('renders children offscreen', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ScreenReaderContent>
         <span>Screenreader text</span>
@@ -62,7 +60,6 @@ describe('<ScreenReaderContent />', async () => {
   })
 
   it('is accessible by screen readers', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ScreenReaderContent />)
 
     expect(subject.getDOMNode()).to.have.style('height', 0)

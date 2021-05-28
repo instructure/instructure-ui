@@ -28,14 +28,12 @@ import { isVisible } from '../isVisible'
 
 describe('isVisible', async () => {
   it('should recognize visible elements', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<div id="test">Hello world!</div>)
     const visible = isVisible(document.getElementById('test'))
     expect(visible).to.equal(true)
   })
 
   it('should recognize elements with display: none', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div id="test">
         <span id="test-2" style={{ display: 'none' }}>
@@ -48,7 +46,6 @@ describe('isVisible', async () => {
   })
 
   it('should recognize elements hidden with clip', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div id="test">
         <span
@@ -69,7 +66,6 @@ describe('isVisible', async () => {
   })
 
   it('should recognize clipped elements that are not hidden', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div id="test">
         <span
@@ -90,7 +86,6 @@ describe('isVisible', async () => {
   })
 
   it('should recursively check parent visibility', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div id="test" style={{ visibility: 'hidden' }}>
         <span>
@@ -108,7 +103,6 @@ describe('isVisible', async () => {
   })
 
   it('should not recursively check text nodes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div id="test" style={{ visibility: 'hidden' }}>
         <span>

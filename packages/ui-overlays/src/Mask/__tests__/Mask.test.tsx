@@ -28,23 +28,20 @@ import { Mask } from '../index'
 
 describe('<Mask />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Mask />)
     expect(subject.getDOMNode()).to.exist()
   })
 
   it('should have tabIndex -1 when onClick is provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(<Mask onClick={onClick} />)
     expect(subject.getDOMNode().getAttribute('tabindex')).to.equal('-1')
   })
 
   it('should call onClick prop when clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(<Mask onClick={onClick} />)
 
     const mask = within(subject.getDOMNode())
@@ -56,7 +53,6 @@ describe('<Mask />', async () => {
   })
 
   it('should apply fullscreen CSS when prop is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Mask fullscreen />)
     const mask = within(subject.getDOMNode())
     const cssStyleDeclaration = mask.getComputedStyle() // CSSStyleDeclaration type
@@ -65,9 +61,8 @@ describe('<Mask />', async () => {
   })
 
   it('should provide an elementRef', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const elementRef = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(<Mask elementRef={elementRef} />)
     expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
   })

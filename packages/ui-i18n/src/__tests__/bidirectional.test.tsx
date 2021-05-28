@@ -38,7 +38,6 @@ class BidirectionalComponent extends React.Component {
 
 describe('@bidirectional', async () => {
   it('should take on the direction of the document by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<BidirectionalComponent />)
 
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
@@ -52,7 +51,6 @@ describe('@bidirectional', async () => {
   })
 
   it('should give props preference when context and context are present', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="ltr">
         {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}

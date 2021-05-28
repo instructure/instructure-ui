@@ -28,9 +28,8 @@ import { addPositionChangeListener } from '../addPositionChangeListener'
 
 describe('addPositionChangeListener', async () => {
   it('should provide a remove method', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const callback = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(<div />)
     const node = subject.getDOMNode() as HTMLDivElement
 

@@ -33,33 +33,28 @@ const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
 
 describe('<SVGIcon />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon).to.exist()
   })
 
   it('should set rotate to 0 by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('0')
   })
 
   it('should allow rotate prop to be overridden', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon rotate="90" src={SVG_SRC} />)
     const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('90')
   })
 
   it('should set size', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon size="large" src={SVG_SRC} />)
     const sizeLarge = await SVGIconLocator.find()
     const largeFont = sizeLarge.getComputedStyle().fontSize
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<SVGIcon size="small" src={SVG_SRC} />)
     const sizeSmall = await SVGIconLocator.find()
     const smallFont = sizeSmall.getComputedStyle().fontSize

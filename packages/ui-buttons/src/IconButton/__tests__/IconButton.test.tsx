@@ -43,14 +43,12 @@ describe('<IconButton/>', async () => {
   const iconSelector = 'svg[title="myIcon"]'
 
   it('should render an icon when provided as the `children` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<IconButton screenReaderLabel="some action">{icon}</IconButton>)
     const button = await IconButtonLocator.find()
     expect(await button.find(iconSelector)).to.exist()
   })
 
   it('should render an icon when provided as the `renderIcon` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton screenReaderLabel="some action" renderIcon={icon} />
     )
@@ -60,7 +58,7 @@ describe('<IconButton/>', async () => {
 
   it('should fail if `screenReaderLabel` is not provided', async () => {
     const cs = spy(console, 'error')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<IconButton renderIcon={icon} />)
 
     expect(cs).to.have.been.called()
@@ -69,7 +67,6 @@ describe('<IconButton/>', async () => {
   it('should provide a focused getter', async () => {
     let componentRef = null
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton
         screenReaderLabel="some action"
@@ -91,7 +88,6 @@ describe('<IconButton/>', async () => {
   it('should provide a focus function', async () => {
     let componentRef = null
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton
         screenReaderLabel="some action"
@@ -113,7 +109,6 @@ describe('<IconButton/>', async () => {
   })
 
   it('should pass the `href` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton screenReaderLabel="some action" renderIcon={icon} href="#" />
     )
@@ -122,7 +117,6 @@ describe('<IconButton/>', async () => {
   })
 
   it('should pass the `type` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton
         screenReaderLabel="some action"
@@ -135,9 +129,7 @@ describe('<IconButton/>', async () => {
   })
 
   it('should pass the `elementRef` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton
         screenReaderLabel="some action"
@@ -150,7 +142,6 @@ describe('<IconButton/>', async () => {
   })
 
   it('should pass the `as` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <IconButton screenReaderLabel="some action" renderIcon={icon} as="li" />
@@ -160,7 +151,6 @@ describe('<IconButton/>', async () => {
   })
 
   it('should set the disabled attribute when `interaction` is set to disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton
         screenReaderLabel="some action"
@@ -173,7 +163,6 @@ describe('<IconButton/>', async () => {
   })
 
   it('should set the disabled attribute when `disabled` is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <IconButton screenReaderLabel="some action" renderIcon={icon} disabled />
@@ -183,7 +172,6 @@ describe('<IconButton/>', async () => {
   })
 
   it('should set the disabled attribute when `interaction` is set to readonly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton
         screenReaderLabel="some action"
@@ -196,7 +184,6 @@ describe('<IconButton/>', async () => {
   })
 
   it('should set the disabled attribute when `readOnly` is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <IconButton screenReaderLabel="some action" renderIcon={icon} readOnly />
@@ -206,10 +193,8 @@ describe('<IconButton/>', async () => {
   })
 
   it('should pass the `onClick` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <IconButton
         screenReaderLabel="some action"

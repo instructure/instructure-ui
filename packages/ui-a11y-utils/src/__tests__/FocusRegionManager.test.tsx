@@ -31,7 +31,6 @@ describe('FocusRegionManager', async () => {
   })
 
   it('should focus the first tabbable element when focused', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
@@ -82,6 +81,7 @@ describe('FocusRegionManager', async () => {
       await main.find('[data-test-first-tabbable]')
     ).getDOMNode()
 
+    // @ts-expect-error FIXME remove this line to see the error
     await button.focus()
 
     expect(document.activeElement).to.equal(button)
@@ -94,7 +94,6 @@ describe('FocusRegionManager', async () => {
   })
 
   it('should return focus when blurred', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div data-test-parent role="main" aria-label="test app" id="test-parent3">
         <div data-test-ignore role="alert">
@@ -142,6 +141,7 @@ describe('FocusRegionManager', async () => {
     const button = (await main.find('[data-test-button]')).getDOMNode()
     const content = (await main.find('[data-test-content]')).getDOMNode()
 
+    // @ts-expect-error FIXME remove this line to see the error
     await button.focus()
 
     expect(document.activeElement).to.equal(button)

@@ -28,7 +28,6 @@ import { FormFieldLayout } from '../index'
 
 describe('<FormFieldLayout />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLayout label="Username" />)
 
     const formFieldLayout = within(subject.getDOMNode())
@@ -36,7 +35,6 @@ describe('<FormFieldLayout />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLayout label="Username" />)
 
     const formFieldLayout = within(subject.getDOMNode())
@@ -44,7 +42,6 @@ describe('<FormFieldLayout />', async () => {
   })
 
   it('should align label to right by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldLayout label="Username" layout="inline">
         <input type="text" />
@@ -57,7 +54,6 @@ describe('<FormFieldLayout />', async () => {
   })
 
   it('should align label to left', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldLayout label="Username" layout="inline" labelAlign="start">
         <input type="text" />
@@ -70,9 +66,8 @@ describe('<FormFieldLayout />', async () => {
   })
 
   it('should provide a ref to the input container', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const inputContainerRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <FormFieldLayout label="Username" inputContainerRef={inputContainerRef}>
         <input type="text" />

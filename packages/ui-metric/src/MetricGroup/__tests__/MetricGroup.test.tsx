@@ -31,7 +31,6 @@ import { MetricGroupLocator } from '../MetricGroupLocator'
 
 describe('<MetricGroup />', async () => {
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MetricGroup>
         <Metric renderLabel="Grade" renderValue="80%" />
@@ -49,7 +48,6 @@ describe('<MetricGroup />', async () => {
     const warning =
       "Warning: Failed prop type: Expected one of Metric in MetricGroup but found 'div'"
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MetricGroup>
         <div>foo</div>
@@ -60,7 +58,6 @@ describe('<MetricGroup />', async () => {
   })
 
   it('passes props through to MetricGroup element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MetricGroup data-automation="foo">
         <Metric renderLabel="Grade" renderValue="80%" />
@@ -77,7 +74,6 @@ describe('<MetricGroup />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
@@ -91,7 +87,6 @@ describe('<MetricGroup />', async () => {
     })
 
     it('should have role=grid with aria-readonly=true', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
@@ -108,7 +103,6 @@ describe('<MetricGroup />', async () => {
     })
 
     it('should have role=row', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />
@@ -124,7 +118,6 @@ describe('<MetricGroup />', async () => {
     })
 
     it('should have role=gridcell', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <MetricGroup>
           <Metric renderLabel="Grade" renderValue="80%" />

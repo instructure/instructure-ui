@@ -30,7 +30,6 @@ import { MetricLocator } from '../MetricLocator'
 
 describe('<Metric />', async () => {
   it('should render the label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)
 
     const metric = await MetricLocator.find()
@@ -39,7 +38,6 @@ describe('<Metric />', async () => {
   })
 
   it('should render the value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)
 
     const metric = await MetricLocator.find()
@@ -48,7 +46,6 @@ describe('<Metric />', async () => {
   })
 
   it('passes props through to Metric element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Metric data-automation="foo" renderLabel="Grade" renderValue="80%" />
     )
@@ -60,7 +57,6 @@ describe('<Metric />', async () => {
   })
 
   it('should not have role="gridcell" for the value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)
 
     const metric = await MetricLocator.find()
@@ -72,7 +68,6 @@ describe('<Metric />', async () => {
   })
 
   it('should not have role=rowheader for the label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Metric renderLabel="Grade" renderValue="80%" />)
 
     const metric = await MetricLocator.find()

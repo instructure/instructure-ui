@@ -45,7 +45,6 @@ describe('<CondensedButton/>', async () => {
   it('should render children', async () => {
     const children = 'Hello world'
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton>{children}</CondensedButton>)
 
     expect(await CondensedButtonLocator.findWithText(children))
@@ -54,7 +53,6 @@ describe('<CondensedButton/>', async () => {
   it('should provide a focused getter', async () => {
     let componentRef = null
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CondensedButton
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
@@ -76,7 +74,6 @@ describe('<CondensedButton/>', async () => {
   it('should provide a focus function', async () => {
     let componentRef = null
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CondensedButton
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
@@ -98,17 +95,14 @@ describe('<CondensedButton/>', async () => {
   })
 
   it('should pass the type attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton type="submit">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[type="submit"]')).to.exist()
   })
 
   it('should pass the `elementRef` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <CondensedButton elementRef={elementRef}>Hello</CondensedButton>
     )
@@ -118,7 +112,6 @@ describe('<CondensedButton/>', async () => {
   })
 
   it('should pass the `as` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton as="li">Hello</CondensedButton>)
 
     const button = await CondensedButtonLocator.find()
@@ -126,52 +119,44 @@ describe('<CondensedButton/>', async () => {
   })
 
   it('should set the disabled attribute when `interaction` is set to disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton interaction="disabled">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should set the disabled attribute when `disabled` is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton disabled>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should set the disabled attribute when `interaction` is set to readonly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton interaction="readonly">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should set the disabled attribute when `readOnly` is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton readOnly>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
   })
 
   it('should pass the `href` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton href="#">Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[href="#"]')).to.exist()
   })
 
   it('should pass the `renderIcon` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton renderIcon={icon}>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find(iconSelector)).to.exist()
   })
 
   it('should pass the `onClick` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CondensedButton onClick={onClick}>Hello</CondensedButton>)
     const button = await CondensedButtonLocator.find()
 

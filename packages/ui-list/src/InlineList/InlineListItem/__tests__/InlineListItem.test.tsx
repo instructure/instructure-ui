@@ -30,23 +30,19 @@ import { InlineListItemLocator } from '../InlineListItemLocator'
 
 describe('<InlineListItem />', async () => {
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineListItem>hello</InlineListItem>)
     const listItem = await InlineListItemLocator.find()
     expect(await listItem.find(':contains(hello)')).to.exist()
   })
 
   it('should render delimiter', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<InlineListItem delimiter="slash">List item</InlineListItem>)
     const listItem = await InlineListItemLocator.find()
     expect(await listItem.find('[aria-hidden="true"]')).to.exist()
   })
 
   it('should call elementRef', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineListItem elementRef={elementRef}>List item</InlineListItem>
     )

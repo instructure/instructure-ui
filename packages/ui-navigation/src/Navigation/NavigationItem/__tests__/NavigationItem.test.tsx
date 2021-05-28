@@ -32,7 +32,6 @@ import { NavigationItemLocator } from '../NavigationItemLocator'
 
 describe('<NavigationItem />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NavigationItem icon={<IconAdminLine />} label="Admin" href="#" />
     )
@@ -41,9 +40,7 @@ describe('<NavigationItem />', async () => {
   })
 
   it('should show a tooltip when the nav is minimized ', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: 100 }}>
         <NavigationItem
@@ -62,7 +59,6 @@ describe('<NavigationItem />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NavigationItem icon={<IconAdminLine />} label="Dashboard" href="#" />
     )

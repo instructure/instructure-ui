@@ -33,7 +33,6 @@ import { MenuItemGroupLocator } from '../MenuItemGroupLocator'
 
 describe('<MenuItemGroup />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
@@ -48,7 +47,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should set the role to "menu"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
@@ -64,7 +62,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should set the list item role to "none"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Food</MenuItem>
@@ -79,7 +76,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should default to children with type "radio"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
@@ -95,7 +91,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should render children with type "checkbox" if allowMultiple is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select a few" allowMultiple>
         <MenuItem>Foo</MenuItem>
@@ -111,7 +106,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should set aria-disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" disabled>
         <MenuItem>Foo</MenuItem>
@@ -126,7 +120,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should set selected from defaultSelected prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" defaultSelected={[1]}>
         <MenuItem>Foo</MenuItem>
@@ -142,9 +135,7 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should set selected from selected prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect} selected={[1]}>
         <MenuItem>Foo</MenuItem>
@@ -160,7 +151,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should set selected from children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select a few" allowMultiple>
         <MenuItem key="foo" defaultSelected>
@@ -178,7 +168,6 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('should honor the allowMultiple prop (defaults to false)', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem defaultSelected>Foo</MenuItem>
@@ -192,9 +181,7 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('calls onSelect when items are selected', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect} selected={[1]}>
         <MenuItem>Foo</MenuItem>
@@ -213,9 +200,7 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('does not call onSelect when disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect} disabled>
         <MenuItem>Foo</MenuItem>
@@ -233,9 +218,7 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('updates the selected items when allowMultiple is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select some" allowMultiple onSelect={onSelect}>
         <MenuItem>Foo</MenuItem>
@@ -273,9 +256,7 @@ describe('<MenuItemGroup />', async () => {
   })
 
   it('updates the selected items when allowMultiple is false', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onSelect = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <MenuItemGroup label="Select one" onSelect={onSelect}>
         <MenuItem>Foo</MenuItem>

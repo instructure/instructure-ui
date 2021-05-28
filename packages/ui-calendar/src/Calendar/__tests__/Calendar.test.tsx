@@ -59,7 +59,6 @@ describe('<Calendar />', async () => {
   }
 
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
     )
@@ -75,7 +74,6 @@ describe('<Calendar />', async () => {
     const consoleError = stub(console, 'error')
     const count = Calendar.DAY_COUNT - 1
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Calendar renderWeekdayLabels={weekdayLabels}>
         {generateDays(count)}
@@ -88,7 +86,6 @@ describe('<Calendar />', async () => {
   })
 
   it('should render weekday labels', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
     )
@@ -127,7 +124,6 @@ describe('<Calendar />', async () => {
   it('should warn if 7 weekday labels are not provided', async () => {
     const consoleError = stub(console, 'error')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Calendar renderWeekdayLabels={[]}>{generateDays()}</Calendar>)
 
     expect(consoleError).to.have.been.calledWithMatch(
@@ -136,7 +132,6 @@ describe('<Calendar />', async () => {
   })
 
   it('should format the weekday labels and days correctly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Calendar renderWeekdayLabels={weekdayLabels}>{generateDays()}</Calendar>
     )
@@ -167,7 +162,6 @@ describe('<Calendar />', async () => {
       </span>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
@@ -190,7 +184,6 @@ describe('<Calendar />', async () => {
   })
 
   it('should render next and prev buttons', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
@@ -217,12 +210,9 @@ describe('<Calendar />', async () => {
   })
 
   it('should call onRequestRenderNextMonth and onRequestRenderPrevMonth', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onRequestRenderPrevMonth = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onRequestRenderNextMonth = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Calendar
         renderWeekdayLabels={weekdayLabels}
@@ -251,7 +241,6 @@ describe('<Calendar />', async () => {
 
   describe('when role="listbox"', async () => {
     it('should set role="listbox" on table root and role="presentation" on the correct elements', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Calendar renderWeekdayLabels={weekdayLabels} role="listbox">
           {generateDays()}
@@ -275,7 +264,6 @@ describe('<Calendar />', async () => {
     })
 
     it("should link each day with it's weekday header via `aria-describedby`", async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Calendar renderWeekdayLabels={weekdayLabels} role="listbox">
           {generateDays()}
@@ -297,7 +285,6 @@ describe('<Calendar />', async () => {
   })
 
   it('should render root as designated by the `as` prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Calendar renderWeekdayLabels={weekdayLabels} as="ul">

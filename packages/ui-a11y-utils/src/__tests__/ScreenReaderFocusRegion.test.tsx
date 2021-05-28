@@ -68,7 +68,6 @@ describe('ScreenReaderFocusRegion', async () => {
   )
 
   it('should accept a function for liveRegion', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
@@ -85,20 +84,19 @@ describe('ScreenReaderFocusRegion', async () => {
   })
 
   it("should apply aria-hidden to all children of content's parent nodes unless they are live regions", async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const children = await main.findAll('[data-test-child]')
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
+      // @ts-expect-error FIXME remove this line to see the error
       liveRegion: ignore,
       shouldContainFocus: true
     })
 
     screenReaderFocusRegion.activate()
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
     children.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.exist()
     })
@@ -107,7 +105,6 @@ describe('ScreenReaderFocusRegion', async () => {
   })
 
   it("should mute designated attributes for content's parent nodes", async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
@@ -116,7 +113,6 @@ describe('ScreenReaderFocusRegion', async () => {
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
     screenReaderFocusRegion.activate()
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
     parents.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist()
       expect(node.getAttribute('aria-label')).to.not.exist()
@@ -125,7 +121,6 @@ describe('ScreenReaderFocusRegion', async () => {
   })
 
   it('should not apply aria-hidden to descendants', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
@@ -134,14 +129,12 @@ describe('ScreenReaderFocusRegion', async () => {
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
     screenReaderFocusRegion.activate()
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
     descendants.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist()
     })
   })
 
   it('should not apply aria-hidden to dynamically added descendants of content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
@@ -163,7 +156,6 @@ describe('ScreenReaderFocusRegion', async () => {
   })
 
   it('should remove aria-hidden from children unless they had aria-hidden before', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
@@ -177,7 +169,6 @@ describe('ScreenReaderFocusRegion', async () => {
     screenReaderFocusRegion.deactivate()
 
     await wait(() => {
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
       childNodes.forEach((node) => {
         expect(node.getAttribute('aria-hidden')).to.not.exist()
       })
@@ -187,7 +178,6 @@ describe('ScreenReaderFocusRegion', async () => {
   })
 
   it('should properly restore and unmute parent attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(element)
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
@@ -195,7 +185,6 @@ describe('ScreenReaderFocusRegion', async () => {
 
     const attrsMap = {}
     const parentNodes = await main.findAll('[data-test-parent]')
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
     parentNodes.forEach((node) => {
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       attrsMap[node.getAttribute('id')] = [...node.getDOMNode().attributes]
@@ -204,7 +193,6 @@ describe('ScreenReaderFocusRegion', async () => {
     screenReaderFocusRegion.activate()
     screenReaderFocusRegion.deactivate()
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
     parentNodes.forEach((node) => {
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       const preNodeAttrs = attrsMap[node.getAttribute('id')]
@@ -225,7 +213,6 @@ describe('ScreenReaderFocusRegion', async () => {
   })
 
   it('should not apply aria-hidden to elements that have aria-live attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div data-test-main role="main" aria-label="test app">
         <div data-test-live aria-live="assertive"></div>
@@ -245,7 +232,6 @@ describe('ScreenReaderFocusRegion', async () => {
   })
 
   it('should hide the body element of any iframes present on the page', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div>
         <div data-test-ignore>
@@ -287,13 +273,13 @@ describe('ScreenReaderFocusRegion', async () => {
     alwaysHidden.setAttribute('aria-hidden', 'true')
 
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content, {
+      // @ts-expect-error FIXME remove this line to see the error
       liveRegion: ignore,
       shouldContainFocus: true
     })
 
     // verify no iframe bodies are hidden unless they were hidden initially
     const iframes = await main.findAll('iframe:not([title="always-hidden"])')
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'iframe' implicitly has an 'any' type.
     iframes.forEach((iframe) => {
       expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.not.exist()
     })
@@ -305,13 +291,11 @@ describe('ScreenReaderFocusRegion', async () => {
     // once activated, all iframe bodies should be hidden except for iframes that
     // are contained in the defined content element or live region
     const hiddenIframes = await main.findAll('iframe[title="hidden"]')
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'iframe' implicitly has an 'any' type.
     hiddenIframes.forEach((iframe) => {
       expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.equal('true')
     })
 
     const unhiddenIframes = await main.findAll('iframe[title="unhidden"]')
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'iframe' implicitly has an 'any' type.
     unhiddenIframes.forEach((iframe) => {
       expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.not.exist()
     })
@@ -321,7 +305,6 @@ describe('ScreenReaderFocusRegion', async () => {
     screenReaderFocusRegion.deactivate()
 
     // should restore all iframe bodies
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'iframe' implicitly has an 'any' type.
     iframes.forEach((iframe) => {
       expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.not.exist()
     })

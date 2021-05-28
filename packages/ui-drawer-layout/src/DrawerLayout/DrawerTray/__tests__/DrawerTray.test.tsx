@@ -32,7 +32,6 @@ import { DrawerLayoutContext } from '../../index'
 
 describe('<DrawerTray />', async () => {
   it(`should place the tray correctly with placement=start`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -51,7 +50,6 @@ describe('<DrawerTray />', async () => {
   })
 
   it(`should place the tray correctly with placement=end`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -70,7 +68,6 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should render tray content when open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -88,7 +85,6 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should not render tray content when closed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -103,7 +99,6 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should apply theme overrides when open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -122,9 +117,7 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should call the contentRef', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const contentRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -141,9 +134,8 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should call onOpen ', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -167,9 +159,7 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should call onOpen when open initially', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -187,9 +177,8 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should call onClose ', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClose = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <DrawerTray
         label="DrawerTray Example"
@@ -213,9 +202,7 @@ describe('<DrawerTray />', async () => {
   })
 
   it('drops a shadow if the prop is set, and it is overlaying content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEntered = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerLayoutContext.Provider value={true}>
         <EmotionThemeProvider theme={canvas}>
@@ -239,7 +226,6 @@ describe('<DrawerTray />', async () => {
   })
 
   it('should apply the a11y attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerTray
         label="a tray test"

@@ -31,14 +31,12 @@ const ListItemLocator = locator(ListItem.selector)
 
 describe('<ListItem />', async () => {
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ListItem>hello</ListItem>)
     const listItem = await ListItemLocator.find()
     expect(await listItem.find(':contains(hello)')).to.exist()
   })
 
   it('should not render delimiter by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ListItem delimiter="none">List item</ListItem>)
     const listItem = await ListItemLocator.find()
     expect(
@@ -49,9 +47,7 @@ describe('<ListItem />', async () => {
   })
 
   it('should call elementRef', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ListItem elementRef={elementRef}>List item</ListItem>)
     const listItem = await ListItemLocator.find()
     expect(elementRef).to.have.been.calledWith(listItem.getDOMNode())

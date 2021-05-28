@@ -38,7 +38,6 @@ import { AppNavLocator } from '../AppNavLocator'
 describe('<AppNav />', async () => {
   describe('for a11y', () => {
     it('should render a nav element with an aria-label', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <AppNav screenReaderLabel="Screen reader label" visibleItemsCount={2}>
           <AppNav.Item
@@ -57,7 +56,6 @@ describe('<AppNav />', async () => {
     })
 
     it('should render a semantic list of items', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <AppNav screenReaderLabel="App navigation" visibleItemsCount={2}>
           <AppNav.Item
@@ -85,7 +83,6 @@ describe('<AppNav />', async () => {
     })
 
     it('should render with a single item', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <AppNav screenReaderLabel="App navigation" visibleItemsCount={1}>
           <AppNav.Item
@@ -109,7 +106,6 @@ describe('<AppNav />', async () => {
 
   describe('with rendered content', () => {
     it('should render content after the navigation', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <AppNav
           screenReaderLabel="App navigation"
@@ -133,7 +129,6 @@ describe('<AppNav />', async () => {
 
   describe('with item truncation', () => {
     it('should hide and show items based on the containing element width', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onUpdate = stub()
       const itemWidth = 70
 
@@ -161,7 +156,6 @@ describe('<AppNav />', async () => {
         </div>
       )
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<Nav width={800} />)
 
       await wait(() => {
@@ -177,7 +171,6 @@ describe('<AppNav />', async () => {
     })
 
     it('should pass a custom label to the menu trigger', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <AppNav
           screenReaderLabel="App navigation"

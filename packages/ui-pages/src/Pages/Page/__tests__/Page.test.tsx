@@ -31,7 +31,6 @@ describe('<Page />', async () => {
   let _input
 
   it('should render with a function as child', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Page
         defaultFocusElement={() => {
@@ -59,7 +58,6 @@ describe('<Page />', async () => {
   })
 
   it('should focus default element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Page
         defaultFocusElement={() => {

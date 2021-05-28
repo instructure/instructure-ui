@@ -40,7 +40,6 @@ import { Table } from '../index'
 describe('<Table />', async () => {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   const render = (props) =>
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     mount(
       <Table caption="Test table" {...props}>
         <Table.Head>
@@ -121,7 +120,6 @@ describe('<Table />', async () => {
   })
 
   it('can ignore invalid children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Table caption="Test table">
         <Table.Head>
@@ -146,7 +144,6 @@ describe('<Table />', async () => {
   })
 
   it('can handle non-existent head in stacked layout', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const stackedTable = await mount(
       <Table caption="Test table" layout="stacked">
         <Table.Body></Table.Body>
@@ -157,7 +154,6 @@ describe('<Table />', async () => {
   })
 
   it('can handle empty head in stacked layout', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const stackedTable = await mount(
       <Table caption="Test table" layout="stacked">
         <Table.Head></Table.Head>
@@ -168,7 +164,6 @@ describe('<Table />', async () => {
   })
 
   it('can handle invalid header in stacked layout', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const stackedTable = await mount(
       <Table caption="Test table" layout="stacked">
         <Table.Head>
@@ -185,7 +180,6 @@ describe('<Table />', async () => {
   describe('when table is sortable', async () => {
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
     const renderSortableTable = (props, handlers = {}, layout = 'auto') =>
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Table caption="Sortable table" layout={layout}>
@@ -225,7 +219,6 @@ describe('<Table />', async () => {
     })
 
     it('calls onRequestSort when column header is clicked', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestSort = stub()
 
       await renderSortableTable(
@@ -241,7 +234,6 @@ describe('<Table />', async () => {
     })
 
     it('can render table head as a combobox when in stacked layout', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const sortFoo = stub()
 
       await renderSortableTable(
@@ -269,7 +261,6 @@ describe('<Table />', async () => {
           stackedSortByLabel: 'Custom Text'
         },
         {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           onRequestSort: stub()
         },
         'stacked'
@@ -294,7 +285,6 @@ describe('<Table />', async () => {
           sortDirection: 'ascending'
         },
         {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           onRequestSort: stub()
         },
         'stacked'

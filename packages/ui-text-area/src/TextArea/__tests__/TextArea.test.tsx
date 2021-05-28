@@ -31,7 +31,6 @@ import { TextAreaLocator } from '../TextAreaLocator'
 
 describe('TextArea', async () => {
   it('should accept a default value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea label="Name" autoGrow={false} defaultValue="Tom Servo" />
     )
@@ -42,14 +41,12 @@ describe('TextArea', async () => {
   })
 
   it('should include a label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TextArea label="Name" autoGrow={false} />)
     const textArea = await TextAreaLocator.find(':label(Name)')
     expect(textArea).to.exist()
   })
 
   it('should set an initial height', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TextArea label="Name" autoGrow={false} height="100px" />)
     const textArea = await TextAreaLocator.find()
     const input = await textArea.findInput()
@@ -58,7 +55,6 @@ describe('TextArea', async () => {
   })
 
   it('should resize if autoGrow is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TextArea label="Name" autoGrow={true} width="500px" onChange={stub} />
     )
@@ -89,13 +85,11 @@ describe('TextArea', async () => {
   })
 
   it('should set a maxHeight', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
         autoGrow={true}
         maxHeight="10rem"
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         onChange={stub()}
         value={`Chartreuse celiac thundercats, distillery snackwave glossier
         pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
@@ -145,7 +139,6 @@ describe('TextArea', async () => {
 
   it('should focus the textarea when focus is called', async () => {
     let ref
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
@@ -164,7 +157,6 @@ describe('TextArea', async () => {
 
   it('provides a focused getter', async () => {
     let ref
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
@@ -181,9 +173,7 @@ describe('TextArea', async () => {
   })
 
   it('should provide an textareaRef prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const textareaRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea label="Name" autoGrow={false} textareaRef={textareaRef} />
     )
@@ -195,7 +185,6 @@ describe('TextArea', async () => {
 
   it('should provide a value getter', async () => {
     let ref
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <TextArea
         label="Name"
@@ -212,9 +201,8 @@ describe('TextArea', async () => {
 
   describe('events', async () => {
     it('responds to onChange event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TextArea label="Name" autoGrow={false} onChange={onChange} />
       )
@@ -227,9 +215,8 @@ describe('TextArea', async () => {
     })
 
     it('does not respond to onChange event when disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TextArea disabled label="Name" autoGrow={false} onChange={onChange} />
       )
@@ -242,9 +229,8 @@ describe('TextArea', async () => {
     })
 
     it('does not respond to onChange event when readOnly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <TextArea readOnly label="Name" autoGrow={false} onChange={onChange} />
       )
@@ -256,9 +242,9 @@ describe('TextArea', async () => {
     })
 
     it('responds to onBlur event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
+      // @ts-expect-error FIXME remove this line to see the error
       await mount(<TextArea label="Name" autoGrow={false} onBlur={onBlur} />)
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
@@ -269,7 +255,6 @@ describe('TextArea', async () => {
     })
 
     it('responds to onFocus event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TextArea label="Name" autoGrow={false} onFocus={onFocus} />)
@@ -284,14 +269,12 @@ describe('TextArea', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TextArea label="Name" autoGrow={false} />)
       const textArea = await TextAreaLocator.find()
       expect(await textArea.accessible()).to.be.true()
     })
 
     it('should set aria-invalid when errors prop is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TextArea
           label="Name"

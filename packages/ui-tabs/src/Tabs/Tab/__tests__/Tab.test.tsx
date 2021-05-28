@@ -29,7 +29,6 @@ import { Tab } from '../index'
 
 describe('<Tabs.Tab />', async () => {
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
@@ -42,7 +41,6 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should have appropriate role attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
@@ -52,7 +50,6 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should have appropriate aria attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
@@ -66,7 +63,6 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should set the aria-selected attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel" isSelected>
         Tab Label
@@ -76,7 +72,6 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should set the aria-disabled attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel" isDisabled>
         Tab Label
@@ -86,7 +81,6 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should set the tabindex to 0 when selected', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel" isSelected>
         Tab Label
@@ -96,7 +90,6 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should not set the tabindex when not selected', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel">
         Tab Label
@@ -107,7 +100,6 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should remove the tabindex attribute when disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel" isDisabled>
         Tab Label
@@ -120,11 +112,9 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should call onClick when clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
     const index = 2
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={index} controls="foo-panel" onClick={onClick}>
         Tab Label
@@ -139,10 +129,8 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should NOT call onClick when clicked and tab is disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab id="foo" index={0} controls="foo-panel" onClick={onClick} isDisabled>
         Tab Label
@@ -155,11 +143,9 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should call onKeyDown when keys are pressed and tab is selected', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
     const index = 2
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab
         id="foo"
@@ -180,10 +166,8 @@ describe('<Tabs.Tab />', async () => {
   })
 
   it('should NOT call onKeyDown when keys are pressed and tab is disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tab
         id="foo"

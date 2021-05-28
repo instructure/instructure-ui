@@ -35,11 +35,8 @@ import { PresentationContent } from '../index'
 
 describe('<PresentationContent />', async () => {
   it('should render children with an aria-hidden attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PresentationContent>Hello World</PresentationContent>)
-
     const content = await find('[aria-hidden]')
-
     await wait(() => {
       expect(content).to.have.text('Hello World')
     })
@@ -52,9 +49,7 @@ describe('<PresentationContent />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PresentationContent>Hello World</PresentationContent>)
-
     expect(await accessible()).to.be.true()
   })
 })

@@ -28,7 +28,6 @@ import { Pages, Page } from '../index'
 
 describe('<Pages />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages>
         <Page>{() => 'Foo'}</Page>
@@ -40,7 +39,6 @@ describe('<Pages />', async () => {
   })
 
   it('should render a Page', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages>
         <Page>{() => 'Hello World'}</Page>
@@ -51,7 +49,6 @@ describe('<Pages />', async () => {
   })
 
   it('should render the 0th Page by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages>
         <Page>{() => 'Foo'}</Page>
@@ -62,7 +59,6 @@ describe('<Pages />', async () => {
   })
 
   it('should render the active Page', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Pages activePageIndex={1}>
         <Page>{() => 'Foo'}</Page>
@@ -74,9 +70,7 @@ describe('<Pages />', async () => {
   })
 
   it('should pass history and navigateToPreviousPage to Page', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const pageSpy = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Pages>
         <Page>{pageSpy}</Page>
@@ -89,9 +83,8 @@ describe('<Pages />', async () => {
   })
 
   it('should fire onPageIndexChange event', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const onPageIndexChange = spy()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Pages activePageIndex={0} onPageIndexChange={onPageIndexChange}>
         <Page key={0}>{() => 'Foo'}</Page>
