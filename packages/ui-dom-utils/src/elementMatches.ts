@@ -23,6 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
+import React from 'react'
 
 /**
  * ---
@@ -31,17 +32,17 @@ import { findDOMNode } from './findDOMNode'
  *
  * Polyfill for Element.matches (https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
  * @module elementMatches
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @param {String} selectorString - a string representing the selector to test
- * @returns {boolean} if the element would be selected by the specified selector string
+ * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) } el - component or DOM node
+ * @param { string } selectorString - a string representing the selector to test
+ * @returns { boolean } if the element would be selected by the specified selector string
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function elementMatches(el, selectorString) {
+function elementMatches(
+  el: Node | Window | React.ReactElement | ((...args: any[]) => any),
+  selectorString: string
+) {
   const node = el && findDOMNode(el)
   if (!node) return false
-  return node.matches
-    ? node.matches(selectorString)
-    : node.msMatchesSelector(selectorString)
+  return (node as Element).matches(selectorString)
 }
 
 export default elementMatches

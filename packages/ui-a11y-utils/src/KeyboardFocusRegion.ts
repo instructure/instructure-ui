@@ -144,7 +144,10 @@ class KeyboardFocusRegion {
       return firstTabbable
     }
 
-    if (this.focusable.includes(this._contextElement)) {
+    if (
+      this._contextElement &&
+      this.focusable.includes(this._contextElement as Element)
+    ) {
       return this._contextElement
     }
 
