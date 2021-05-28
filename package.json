@@ -109,6 +109,9 @@
     },
     "commitizen": {
       "path": "./node_modules/@instructure/cz-lerna-changelog"
+    },
+    "netlify": {
+      "homepage": "https://preview-instui.netlify.app"
     }
   },
   "lint-staged": {
