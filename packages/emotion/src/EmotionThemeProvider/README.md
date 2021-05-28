@@ -130,8 +130,11 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
             infoIconBackground: "darkblue",
             infoBorderColor: "darkblue"
           },
-          'List.Item': {
+          [List.Item.componentId]: {
             color: "red"
+          },
+          'InlineList.Item': {
+            color: "blue"
           }
         },
         themeOverrides: {
@@ -165,6 +168,14 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
         <List.Item>These List.Items have red color.</List.Item>
         <List.Item>These List.Items have red color.</List.Item>
       </List>
+      <div>
+        <InlineList delimiter="pipe" margin="large 0">
+          <InlineList.Item>This text should be blue</InlineList.Item>
+          <InlineList.Item>10pts</InlineList.Item>
+          <InlineList.Item><b>Due:</b> Oct 1, 2019</InlineList.Item>
+          <InlineList.Item><Link href="#">Pipe Separator</Link></InlineList.Item>
+        </InlineList>
+      </div>
     </EmotionThemeProvider>
   </div>
 ```
