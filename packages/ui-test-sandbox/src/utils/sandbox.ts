@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import sinon from 'sinon'
+import sinon, { SinonStub, SinonStubbedInstance } from 'sinon'
 import { ReactComponentWrapper } from './reactComponentWrapper'
 import initConsole from './initConsole'
 import React from 'react'
@@ -193,30 +193,37 @@ class Sandbox {
   }
 
   stub<T, K extends keyof T>(
-    obj: T,
-    method: K,
+    obj?: T,
+    method?: K,
     fn?: (...args: unknown[]) => unknown
-  ) {
+  ): SinonStub | SinonStubbedInstance<T> {
     if (!this._sandbox) {
       throw new Error(
         '[ui-test-sandbox] a stub cannot be created outside an `it`, `before`, or `beforeEach` block.'
       )
     }
-
-    if (typeof fn === 'function') {
-      return this._sandbox.stub(obj, method).callsFake(fn)
-    } else {
-      return this._sandbox.stub(obj, method)
+    if (typeof fn === 'function' && method && obj) {
+      return this._sandbox.stub(obj, method).callsFake(fn) // SinonStub
+    } else if (method && obj) {
+      return this._sandbox.stub(obj, method) // SinonStub
+    } else if (obj) {
+      return this._sandbox.stub(obj) // SinonStubbedInstance
     }
+    return this._sandbox.stub() // SinonStub
   }
 
-  spy<T, K extends keyof T>(obj: T, method: K) {
+  spy<T, K extends keyof T>(obj?: T, method?: K) {
     if (!this._sandbox) {
       throw new Error(
         '[ui-test-sandbox] a spy cannot be created outside an `it`, `before`, or `beforeEach` block.'
       )
     }
-    return this._sandbox.spy<T, K>(obj, method)
+    if (obj && method) {
+      return this._sandbox.spy<T, K>(obj, method)
+    } else if (obj) {
+      return this._sandbox.spy(obj as any)
+    }
+    return this._sandbox.spy()
   }
 
   mount(
@@ -265,20 +272,24 @@ const viewport = sandbox.viewport
 
 const mount = (
   element: React.ComponentElement<Record<string, unknown>, React.Component>,
-  // TODO make this optional. It will generate a zillions of errors about
-  // FIXME comments that can be removed
-  options: { props?: Record<string, unknown> | undefined }
+  options?: { props?: Record<string, unknown> | undefined }
 ) => sandbox.mount(element, options)
 
 const unmount = sandbox.unmount
 
-const stub = <T, K extends keyof T>(
-  obj: T,
-  method: K,
+// K should be "K extends keyof T" so it can correctly type T's methods.
+// but when its set K always extends string, so it never returns SinonStubbedInstance
+const stub = <T, K>(
+  obj?: T,
+  method?: K,
   fn?: (...args: unknown[]) => unknown
-) => sandbox.stub(obj, method, fn)
+): T extends Record<string, any>
+  ? K extends string
+    ? SinonStub
+    : SinonStubbedInstance<T>
+  : SinonStub => sandbox.stub(obj, method as unknown as keyof T, fn) as any
 
-const spy = <T, K extends keyof T>(obj: T, method: K) =>
+const spy = <T, K extends keyof T>(obj?: T, method?: K) =>
   sandbox.spy(obj, method)
 
 export { viewport, mount, unmount, stub, spy }

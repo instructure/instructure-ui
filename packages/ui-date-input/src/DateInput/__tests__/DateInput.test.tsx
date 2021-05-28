@@ -61,7 +61,6 @@ describe('<DateInput />', async () => {
   }
 
   it('should render an input and a calendar', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DateInput
         renderLabel="Choose date"
@@ -81,7 +80,7 @@ describe('<DateInput />', async () => {
   describe('input', async () => {
     it('should render a label', async () => {
       const renderLabel = 'Choose date'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <DateInput
           renderLabel={renderLabel}
@@ -98,7 +97,7 @@ describe('<DateInput />', async () => {
 
     it('should set value', async () => {
       const value = 'January 5'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -116,10 +115,9 @@ describe('<DateInput />', async () => {
     })
 
     it('should call onChange with the updated value', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
       const value = 'January 5'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -139,9 +137,8 @@ describe('<DateInput />', async () => {
     })
 
     it('should call onBlur', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -160,7 +157,6 @@ describe('<DateInput />', async () => {
     })
 
     it('should correctly set interaction type', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -181,7 +177,6 @@ describe('<DateInput />', async () => {
     })
 
     it('should correctly set disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -199,7 +194,6 @@ describe('<DateInput />', async () => {
     })
 
     it('should correctly set readOnly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -219,7 +213,6 @@ describe('<DateInput />', async () => {
     it('should set placeholder', async () => {
       const placeholder = 'Start typing to choose a date'
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -237,7 +230,6 @@ describe('<DateInput />', async () => {
     })
 
     it('should be requireable', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -255,10 +247,8 @@ describe('<DateInput />', async () => {
     })
 
     it('should provide inputRef', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const inputRef = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -277,7 +267,7 @@ describe('<DateInput />', async () => {
 
     it('should render messages', async () => {
       const text = 'The selected date is invalid'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -296,7 +286,6 @@ describe('<DateInput />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose a date"
@@ -318,7 +307,6 @@ describe('<DateInput />', async () => {
 
   describe('Calendar', async () => {
     it('should show calendar when `isShowingCalendar` is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <DateInput
           renderLabel="Choose date"
@@ -340,9 +328,8 @@ describe('<DateInput />', async () => {
 
     describe('onRequestShowCalendar', async () => {
       it('should call onRequestShowCalendar when root is clicked', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -359,9 +346,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestShowCalendar when input is clicked', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -379,9 +365,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestShowCalendar when input receives space event', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -399,9 +384,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should not call onRequestShowCalendar when input receives space event if calendar is already showing', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -420,9 +404,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestShowCalendar when input receives down arrow event', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -440,9 +423,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should not call onRequestShowCalendar when input receives down arrow event if calendar is already showing', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -461,9 +443,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestShowCalendar when input receives up arrow event', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -481,9 +462,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should not call onRequestShowCalendar when input receives up arrow event if calendar is already showing', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -502,9 +482,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestShowCalendar when input receives onChange event', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -522,9 +501,8 @@ describe('<DateInput />', async () => {
       })
 
       it('should not call onRequestShowCalendar when disabled', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -552,12 +530,9 @@ describe('<DateInput />', async () => {
 
     describe('onRequestHideCalendar and onRequestValidateDate', async () => {
       it('should call onRequestHideCalendar and onRequestValidateDate input receives onBlur event', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestValidateDate = stub()
 
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -578,12 +553,9 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives esc event', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestValidateDate = stub()
 
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -604,9 +576,7 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestHideCalendar and onRequestValidateDate when input receives enter event', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestValidateDate = stub()
 
         const days = generateDays()
@@ -616,7 +586,6 @@ describe('<DateInput />', async () => {
           </Calendar.Day>
         )
 
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -637,12 +606,9 @@ describe('<DateInput />', async () => {
       })
 
       it('should call onRequestHideCalendar and onRequestValidateDate when date is selected', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideCalendar = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestValidateDate = stub()
 
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           <DateInput
             renderLabel="Choose date"
@@ -674,12 +640,10 @@ describe('<DateInput />', async () => {
         </Calendar.Day>
       )
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestHideCalendar = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestValidateDate = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -703,9 +667,8 @@ describe('<DateInput />', async () => {
     })
 
     it('should call onRequestSelectNextDay on down arrow if calendar is showing', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestSelectNextDay = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <DateInput
           renderLabel="Choose date"
@@ -728,9 +691,8 @@ describe('<DateInput />', async () => {
     })
 
     it('should call onRequestSelectNextDay on up arrow if calendar is showing', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestSelectPrevDay = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <DateInput
           renderLabel="Choose date"
@@ -753,12 +715,10 @@ describe('<DateInput />', async () => {
     })
 
     it('should call onRequestRenderNextMonth and onRequestRenderPrevMonth when calendar arrow buttons are clicked', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onRequestRenderNextMonth = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestRenderPrevMonth = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -788,7 +748,7 @@ describe('<DateInput />', async () => {
 
     it('should render calendar navigation label', async () => {
       const label = 'January 2019'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -806,7 +766,6 @@ describe('<DateInput />', async () => {
     })
 
     it('should render calendar weekday labels', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -829,7 +788,6 @@ describe('<DateInput />', async () => {
     })
 
     it('should render all focusable elements in calendar with tabIndex="-1"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -862,7 +820,6 @@ describe('<DateInput />', async () => {
         </Calendar.Day>
       )
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose date"
@@ -896,7 +853,6 @@ describe('<DateInput />', async () => {
         </Calendar.Day>
       )
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DateInput
           renderLabel="Choose date"

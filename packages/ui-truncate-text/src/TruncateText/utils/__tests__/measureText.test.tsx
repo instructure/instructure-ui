@@ -37,7 +37,6 @@ describe('measureText', async () => {
 
   it('should calculate width', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
@@ -57,7 +56,7 @@ describe('measureText', async () => {
 
   it('should account for different nodes', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <div
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
@@ -85,7 +84,7 @@ describe('measureText', async () => {
 
   it('should account for font size styles', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <div
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message
@@ -110,7 +109,7 @@ describe('measureText', async () => {
 
   it('should account for letter spacing styles', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <div
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | Element)[]; componentR... Remove this comment to see the full error message

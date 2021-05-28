@@ -40,7 +40,6 @@ describe('<Focusable />', async () => {
   const lastCall = (spy) => spy.lastCall.args[0]
 
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Focusable>{() => <button>hello world</button>}</Focusable>
     )
@@ -49,10 +48,8 @@ describe('<Focusable />', async () => {
   })
 
   it('should call children function with focused when element receives focus', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Focusable>
         {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
@@ -93,10 +90,8 @@ describe('<Focusable />', async () => {
   })
 
   it('should populate the focusVisible argument', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Focusable>
         {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
@@ -140,7 +135,6 @@ describe('<Focusable />', async () => {
 
     const renderSpy = spy(props, 'render')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Focusable {...props} />)
 
     const firstFocusable = await find(':focusable')
@@ -191,7 +185,6 @@ describe('<Focusable />', async () => {
 
     const renderSpy = spy(props, 'render')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Focusable {...props} />)
 
     const firstFocusable = await find(':focusable')
@@ -225,10 +218,8 @@ describe('<Focusable />', async () => {
   })
 
   it('should update the focus element correctly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Focusable>
         {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
@@ -279,7 +270,6 @@ describe('<Focusable />', async () => {
     const consoleWarn = stub(console, 'warn')
     const warning =
       'Warning: [Focusable] Exactly one focusable child is required (2 found).'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Focusable>
         {/* @ts-expect-error ts-migrate(6133) FIXME: 'args' is declared but its value is never read. */}
@@ -302,7 +292,6 @@ describe('<Focusable />', async () => {
     const consoleWarn = stub(console, 'warn')
     const warning =
       'Warning: [Focusable] Exactly one focusable child is required (0 found).'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Focusable>
         {/* @ts-expect-error ts-migrate(6133) FIXME: 'args' is declared but its value is never read. */}
@@ -315,10 +304,8 @@ describe('<Focusable />', async () => {
   })
 
   it('should attach event listener correctly even when the focusable element is not the root', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
     const renderSpy = spy()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Focusable>
         {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'args' implicitly has an 'any' type. */}
@@ -349,7 +336,6 @@ describe('<Focusable />', async () => {
 
   it('should provide a focus method', async () => {
     let focusable
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Focusable
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
@@ -372,7 +358,6 @@ describe('<Focusable />', async () => {
   it('should provide a focused getter', async () => {
     let focusable
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Focusable
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
@@ -493,7 +478,6 @@ describe('<Focusable />', async () => {
       }
     }
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TestComponent />)
     await wait(() => {
       // @ts-expect-error ts-migrate(7005) FIXME: Variable 'focusableRef' implicitly has an 'any' ty... Remove this comment to see the full error message

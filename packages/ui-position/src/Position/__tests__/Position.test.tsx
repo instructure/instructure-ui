@@ -42,7 +42,6 @@ describe('<Position />', async () => {
   })
 
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -65,7 +64,6 @@ describe('<Position />', async () => {
   })
 
   it('should absolutely position content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -85,9 +83,7 @@ describe('<Position />', async () => {
   })
 
   it('should render right of target', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -122,9 +118,7 @@ describe('<Position />', async () => {
   })
 
   it('should render top stretched inside of target', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -163,9 +157,7 @@ describe('<Position />', async () => {
   })
 
   it('should render below target', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -200,9 +192,7 @@ describe('<Position />', async () => {
   })
 
   it('should render left of target', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -237,9 +227,7 @@ describe('<Position />', async () => {
   })
 
   it('should render above target', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -272,9 +260,7 @@ describe('<Position />', async () => {
   })
 
   it('should center vertically', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -312,9 +298,7 @@ describe('<Position />', async () => {
   })
 
   it('should center horizontally', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onPositionChanged = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ padding: '50px' }}>
         {/* @ts-expect-error ts-migrate(2559) FIXME: Type '{ parentWidth: number; parentHeight: number;... Remove this comment to see the full error message */}
@@ -355,9 +339,8 @@ describe('<Position />', async () => {
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
     function assertOffset(placement, offset, assertion) {
       it(`should render offset for ${placement}`, async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onPositionChanged = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <Position
             constrain="none"
@@ -420,9 +403,8 @@ describe('<Position />', async () => {
 
   describe('when constrained to scroll-parent', async () => {
     it('should re-position below target', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -467,9 +449,8 @@ describe('<Position />', async () => {
     })
 
     it('should re-position above target', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -514,9 +495,8 @@ describe('<Position />', async () => {
     })
 
     it('should re-position after target', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -561,9 +541,8 @@ describe('<Position />', async () => {
     })
 
     it('should re-position before target', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onPositionChanged = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <div style={{ padding: '50px' }}>
           <div id="mountNode">mount</div>
@@ -615,7 +594,6 @@ describe('<Position />', async () => {
     })
 
     it('should position correctly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '100px' }}>
           <Position placement="bottom" renderTarget={<button>Target</button>}>
@@ -638,7 +616,6 @@ describe('<Position />', async () => {
     })
 
     it('should position correctly with mountNode', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div style={{ padding: '100px' }}>
           <div id="mountNode">mount</div>

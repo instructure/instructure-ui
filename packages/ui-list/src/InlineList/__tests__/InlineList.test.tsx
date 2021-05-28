@@ -30,7 +30,6 @@ import { InlineListLocator } from '../InlineListLocator'
 
 describe('<InlineList />', async () => {
   it('should render list items and filter out null/falsy children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>
@@ -48,7 +47,6 @@ describe('<InlineList />', async () => {
   })
 
   it('should render a delimiter when delimiter="pipe"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList delimiter="pipe">
         <InlineList.Item>List item 1</InlineList.Item>
@@ -66,7 +64,6 @@ describe('<InlineList />', async () => {
   it('should warn when itemSpacing is set when delimiter is set to anything other than none', async () => {
     const consoleError = stub(console, 'error')
     const warning = `Warning: [InlineList] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList delimiter="pipe" itemSpacing="large">
         <InlineList.Item>List item 1</InlineList.Item>
@@ -80,7 +77,6 @@ describe('<InlineList />', async () => {
   })
 
   it('should render an ordered list', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList as="ol">
         <InlineList.Item>List item 1</InlineList.Item>
@@ -94,7 +90,6 @@ describe('<InlineList />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <InlineList>
         <InlineList.Item>List item 1</InlineList.Item>

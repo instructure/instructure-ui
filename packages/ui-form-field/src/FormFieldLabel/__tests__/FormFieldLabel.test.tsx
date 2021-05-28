@@ -29,7 +29,6 @@ import { FormFieldLabel } from '../index'
 
 describe('<FormFieldLabel />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)
 
     const formFieldLabel = within(subject.getDOMNode())
@@ -47,7 +46,6 @@ describe('<FormFieldLabel />', async () => {
   it('should require children', async () => {
     const consoleError = stub(console, 'error')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<FormFieldLabel />)
 
     expect(consoleError).to.have.been.calledWithMatch(
@@ -56,7 +54,6 @@ describe('<FormFieldLabel />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)
 
     const formFieldLabel = within(subject.getDOMNode())

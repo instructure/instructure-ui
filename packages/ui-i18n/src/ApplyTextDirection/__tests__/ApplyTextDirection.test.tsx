@@ -38,7 +38,6 @@ class BidirectionalComponent extends React.Component {
 
 describe('<ApplyTextDirection />', async () => {
   it('should take on the direction of the document element by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection>Hello world</ApplyTextDirection>
     )
@@ -47,7 +46,6 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('should take on the context direction if dir prop is not supplied', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">Hello World</ApplyTextDirection>
     )
@@ -56,7 +54,6 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('should give dir prop preference over context and default document element when supplied', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">
         <ApplyTextDirection dir="ltr">Hello world</ApplyTextDirection>
@@ -69,7 +66,6 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('should pass direction via context to bidirectional children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">
         <BidirectionalComponent />
@@ -83,7 +79,6 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('when nested, should override parent ApplyTextDirection context', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyTextDirection dir="rtl">
         <ApplyTextDirection dir="ltr">

@@ -34,7 +34,6 @@ const ModalBodyLocator = locator(ModalBody.selector)
 
 describe('<ModalBody />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ModalBody />)
     const body = await ModalBodyLocator.find()
     expect(body).to.exist()
@@ -43,7 +42,6 @@ describe('<ModalBody />', async () => {
   it('should set inverse styles', async () => {
     const variables = generateComponentTheme(canvas)
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ModalBody variant="inverse" />)
     const body = await ModalBodyLocator.find()
 
@@ -54,7 +52,6 @@ describe('<ModalBody />', async () => {
   })
 
   it('should set 100% width and height when overflow is set to fit', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ModalBody overflow="fit" />)
 
     const body = await ModalBodyLocator.find()
@@ -83,7 +80,7 @@ describe('<ModalBody />', async () => {
             const props = {
               [prop]: 'foo'
             }
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(<ModalBody {...props} />)
             expect(consoleError).to.be.calledWith(warning)
           })
@@ -94,7 +91,7 @@ describe('<ModalBody />', async () => {
               // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
               [prop]: allowedProps[prop]
             }
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(<ModalBody {...props} />)
             expect(consoleError).to.not.be.called()
           })

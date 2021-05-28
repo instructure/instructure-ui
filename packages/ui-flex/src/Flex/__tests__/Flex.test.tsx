@@ -29,7 +29,6 @@ import { Flex } from '../index'
 
 describe('<Flex />', async () => {
   it('should render Flex.Items as children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
@@ -43,7 +42,6 @@ describe('<Flex />', async () => {
   })
 
   it('should render other markup as children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex>
         <div>foo</div>
@@ -56,7 +54,6 @@ describe('<Flex />', async () => {
   })
 
   it('should render children when children is a function', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Flex>{() => <div>hello world</div>}</Flex>)
 
     const flex = within(subject.getDOMNode())
@@ -64,14 +61,12 @@ describe('<Flex />', async () => {
   })
 
   it('should render no markup if there are no children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Flex></Flex>)
 
     expect(subject.getDOMNode()).to.not.exist()
   })
 
   it('should accept width and height as props', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex width="400px" height="200px">
         <Flex.Item>Flex item 1</Flex.Item>
@@ -90,7 +85,6 @@ describe('<Flex />', async () => {
   })
 
   it('should set flex-direction with the direction property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex direction="column">
         <Flex.Item>Flex item 1</Flex.Item>
@@ -106,7 +100,6 @@ describe('<Flex />', async () => {
   })
 
   it('should render an inline-flex container with the display property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex display="inline-flex">
         <Flex.Item>Flex item 1</Flex.Item>
@@ -122,7 +115,6 @@ describe('<Flex />', async () => {
   })
 
   it('should set align-items with the alignItems property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex alignItems="start">
         <Flex.Item>Flex item 1</Flex.Item>
@@ -137,7 +129,6 @@ describe('<Flex />', async () => {
   })
 
   it('should set justify-content with the justifyItems property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex justifyItems="space-between">
         <Flex.Item>Flex item 1</Flex.Item>
@@ -153,7 +144,6 @@ describe('<Flex />', async () => {
   })
 
   it('should set flex-wrap with the wrap property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex wrap="wrap">
         <Flex.Item>Flex item 1</Flex.Item>
@@ -169,7 +159,6 @@ describe('<Flex />', async () => {
   })
 
   it('should let Flex.Items align themselves with the align property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex alignItems="end">
         <Flex.Item align="stretch">Flex item 1</Flex.Item>
@@ -187,7 +176,6 @@ describe('<Flex />', async () => {
   })
 
   it('should let Flex.Items flex-grow with the shouldGrow property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
@@ -206,7 +194,6 @@ describe('<Flex />', async () => {
   })
 
   it('should let Flex.Items flex-shrink with the shouldShrink property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
@@ -225,7 +212,6 @@ describe('<Flex />', async () => {
   })
 
   it('should set flex-basis and min-width on Flex.Items with the size property', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>
@@ -246,9 +232,8 @@ describe('<Flex />', async () => {
   })
 
   it('should support an elementRef prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Flex elementRef={elementRef}>
         <Flex.Item>Flex item</Flex.Item>
@@ -261,7 +246,6 @@ describe('<Flex />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Flex>
         <Flex.Item>Flex item 1</Flex.Item>

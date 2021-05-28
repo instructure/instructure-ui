@@ -94,7 +94,6 @@ describe('EmotionThemeProvider', async () => {
 
   describe('should apply correct theme variables', async () => {
     it('when a whole theme is provided', async () => {
-      // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -109,7 +108,6 @@ describe('EmotionThemeProvider', async () => {
 
     describe('when they are nested:', async () => {
       it('a full child theme should override parent', async () => {
-        // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
         const subject = await mount(
           <EmotionThemeProvider theme={exampleTheme}>
             <EmotionThemeProvider
@@ -133,7 +131,6 @@ describe('EmotionThemeProvider', async () => {
       })
 
       it('a global theme override should merge with parent', async () => {
-        // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
         const subject = await mount(
           <EmotionThemeProvider theme={exampleTheme}>
             <EmotionThemeProvider
@@ -157,7 +154,6 @@ describe('EmotionThemeProvider', async () => {
 
     describe('when overrides are provided:', async () => {
       it('theme specific overrides', async () => {
-        // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
         const subject = await mount(
           <EmotionThemeProvider theme={exampleTheme}>
             <EmotionThemeProvider
@@ -188,7 +184,6 @@ describe('EmotionThemeProvider', async () => {
       })
 
       it('component specific overrides', async () => {
-        // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
         const subject = await mount(
           <EmotionThemeProvider theme={exampleTheme}>
             <EmotionThemeProvider
@@ -215,7 +210,6 @@ describe('EmotionThemeProvider', async () => {
       })
 
       it('combined overrides', async () => {
-        // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
         const subject = await mount(
           <EmotionThemeProvider theme={exampleTheme}>
             <EmotionThemeProvider
@@ -258,14 +252,12 @@ describe('EmotionThemeProvider', async () => {
       const consoleWarning = spy(console, 'warn')
       const warning =
         'No theme provided for [EmotionThemeProvider], using default <canvas> theme.'
-      // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
       await mount(<ThemeableComponent />)
 
       await expect(consoleWarning).to.have.been.calledWith(warning)
     })
 
     it('should fall back to the default "canvas" theme', async () => {
-      // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
       const subject = await mount(<ThemeableComponent />)
       const component = subject.getDOMNode()
       const computedStyle = getComputedStyle(component)
@@ -284,7 +276,6 @@ describe('EmotionThemeProvider', async () => {
           backgroundLight: 'rgb(236, 249, 252)'
         }
       }
-      // @ts-expect-error ts-migrate(2554) Expected 2 arguments, but got 1.
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />

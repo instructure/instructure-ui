@@ -39,7 +39,6 @@ import ItemExamples from '../__examples__/Item.examples'
 
 describe('<Item />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item />)
     const item = await ItemLocator.find()
 
@@ -47,21 +46,19 @@ describe('<Item />', async () => {
   })
 
   it('should render not render as a listitem by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item>Hello World</Item>)
     const item = await ItemLocator.find()
     expect(item.getTagName()).to.not.equal('li')
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Item as="li">Hello World</Item>)
     const item = await ItemLocator.find()
     expect(item.getTagName()).to.equal('li')
   })
 
   it('should render children properly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item>
         <span id="customContent">Hello World</span>
@@ -73,7 +70,6 @@ describe('<Item />', async () => {
   })
 
   it('should render role attributes appropriately when given a role', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item role="option">Hello World</Item>)
     const item = await ItemLocator.find()
     const child = await item.find('[role="option"]')
@@ -83,7 +79,6 @@ describe('<Item />', async () => {
   })
 
   it('should pass props through to label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Item role="option" tabIndex="-1" data-custom-attr="true">
@@ -100,9 +95,8 @@ describe('<Item />', async () => {
   })
 
   it('should pass event handlers through to label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Item onClick={onClick}>Hello World</Item>)
     const item = await ItemLocator.find()
     const label = await item.findWithText('Hello World')
@@ -115,9 +109,7 @@ describe('<Item />', async () => {
   })
 
   it('should allow label to recieve focus', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Item tabIndex="-1" onFocus={onFocus}>
@@ -135,7 +127,6 @@ describe('<Item />', async () => {
   })
 
   it('should render content before label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderBeforeLabel={<IconCheckSolid />}>Hello World</Item>)
     const item = await ItemLocator.find()
     const content = await item.find('[class$=-optionItem__content--before]')
@@ -146,7 +137,6 @@ describe('<Item />', async () => {
   })
 
   it('should render content after label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Item renderAfterLabel={<IconCheckSolid />}>Hello World</Item>)
     const item = await ItemLocator.find()
     const content = await item.find('[class$=-optionItem__content--after]')
@@ -157,7 +147,6 @@ describe('<Item />', async () => {
   })
 
   it('should render nested lists', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Item>
         {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}

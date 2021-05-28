@@ -30,7 +30,6 @@ import { CheckboxLocator } from '../CheckboxLocator'
 
 describe('<Checkbox />', async () => {
   it('renders an input with type "checkbox"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Checkbox
         label="fake label"
@@ -48,7 +47,6 @@ describe('<Checkbox />', async () => {
   })
 
   it('`simple` variant only displays a checkmark when checked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Checkbox
         label="fake label"
@@ -66,7 +64,6 @@ describe('<Checkbox />', async () => {
   })
 
   it('`simple` variant supports indeterminate/mixed state', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Checkbox
         label="fake label"
@@ -87,12 +84,9 @@ describe('<Checkbox />', async () => {
 
   describe('events', async () => {
     it('when clicked, fires onClick and onChange events', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -117,12 +111,9 @@ describe('<Checkbox />', async () => {
     })
 
     it('when clicked, does not call onClick or onChange when disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -146,12 +137,9 @@ describe('<Checkbox />', async () => {
     })
 
     it('when clicked, does not call onClick or onChange when readOnly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -177,10 +165,8 @@ describe('<Checkbox />', async () => {
     })
 
     it('calls onChange when enter key is pressed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -204,10 +190,8 @@ describe('<Checkbox />', async () => {
     })
 
     it('responds to onBlur event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onBlur = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -230,10 +214,8 @@ describe('<Checkbox />', async () => {
     })
 
     it('responds to onFocus event', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onFocus = stub()
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -258,7 +240,6 @@ describe('<Checkbox />', async () => {
     it('focuses with the focus helper', async () => {
       let checkboxRef = null
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -291,11 +272,10 @@ describe('<Checkbox />', async () => {
     })
 
     it('calls onMouseOver', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onMouseOver = stub()
 
       /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Checkbox
           label="fake label"
@@ -318,11 +298,10 @@ describe('<Checkbox />', async () => {
     })
 
     it('calls onMouseOut', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onMouseOut = stub()
 
       /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Checkbox
           label="fake label"
@@ -347,7 +326,6 @@ describe('<Checkbox />', async () => {
 
   describe('for a11y', () => {
     it('`simple` variant should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"
@@ -365,7 +343,6 @@ describe('<Checkbox />', async () => {
     })
 
     it('`toggle` variant should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Checkbox
           label="fake label"

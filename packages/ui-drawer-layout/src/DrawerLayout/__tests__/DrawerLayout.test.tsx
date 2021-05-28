@@ -31,7 +31,6 @@ import { DrawerLayoutLocator } from '../DrawerLayoutLocator'
 
 describe('<DrawerLayout />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<DrawerLayoutFixture />)
     const layout = await DrawerLayoutLocator.find()
 
@@ -39,7 +38,6 @@ describe('<DrawerLayout />', async () => {
   })
 
   it('should render a DrawerTray and DrawerContent', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerLayoutFixture open={true} layoutWidth="800px" trayWidth="250px" />
     )
@@ -53,7 +51,6 @@ describe('<DrawerLayout />', async () => {
   })
 
   it(`with no overlay, layout content should have margin equal to tray width with placement=start`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerLayoutFixture open={true} layoutWidth="800px" trayWidth="250px" />
     )
@@ -69,7 +66,6 @@ describe('<DrawerLayout />', async () => {
   })
 
   it(`with no overlay, layout content should have margin equal to tray width with placement=end`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerLayoutFixture
         open={true}
@@ -90,7 +86,6 @@ describe('<DrawerLayout />', async () => {
   })
 
   it(`with overlay, layout content should have a margin of zero with placement=start`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerLayoutFixture open={true} layoutWidth="700px" trayWidth="250px" />
     )
@@ -106,7 +101,6 @@ describe('<DrawerLayout />', async () => {
   })
 
   it(`with overlay, layout content should have a margin of zero with placement=end`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerLayoutFixture
         open={true}
@@ -127,9 +121,8 @@ describe('<DrawerLayout />', async () => {
   })
 
   it('the tray should overlay the content when the content is less than the minWidth', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <DrawerLayoutFixture
         open={true}
@@ -148,9 +141,8 @@ describe('<DrawerLayout />', async () => {
   })
 
   it('the tray should stop overlaying the content when there is enough space for the content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <DrawerLayoutFixture
         open={true}
@@ -169,9 +161,8 @@ describe('<DrawerLayout />', async () => {
   })
 
   it('the tray should be set to overlay when it is opened and there is not enough space', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <DrawerLayoutFixture
         open={true}
@@ -188,9 +179,8 @@ describe('<DrawerLayout />', async () => {
   })
 
   it('the tray should not overlay on open when there is enough space', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOverlayTrayChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <DrawerLayoutFixture
         open={true}

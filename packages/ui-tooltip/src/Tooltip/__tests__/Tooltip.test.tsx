@@ -37,7 +37,6 @@ import TooltipExamples from '../__examples__/Tooltip.examples'
 
 describe('<Tooltip />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tooltip renderTip="Hello">
         <a href="example.html">Hover or focus me</a>
@@ -50,7 +49,6 @@ describe('<Tooltip />', async () => {
   })
 
   it('should render children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tooltip renderTip="Hello">
         <a href="example.html">Hover or focus me</a>
@@ -66,7 +64,6 @@ describe('<Tooltip />', async () => {
   })
 
   it('should render the tip offscreen', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Tooltip renderTip="Hello" isShowingContent>
         <a href="example.html">Hover or focus me</a>
@@ -87,7 +84,6 @@ describe('<Tooltip />', async () => {
   })
 
   it('should have an aria-describedby attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tooltip renderTip={<h2>Hello</h2>}>
         <a href="example.html">Hover or focus me</a>
@@ -106,7 +102,6 @@ describe('<Tooltip />', async () => {
   })
 
   it('should accept a function for renderTip', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tooltip renderTip={() => 'Hello'}>
         <a href="example.html">Hover or focus me</a>
@@ -120,7 +115,6 @@ describe('<Tooltip />', async () => {
   })
 
   it('should show tip by default when defaultIsShowingContent is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tooltip renderTip="Hello" defaultIsShowingContent>
         <a href="example.html">Hover or focus me</a>
@@ -135,7 +129,6 @@ describe('<Tooltip />', async () => {
 
   describe('using as', async () => {
     it('should render children', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tooltip
           renderTip={<h2>Hello</h2>}
@@ -160,7 +153,6 @@ describe('<Tooltip />', async () => {
     })
 
     it('should have an aria-describedby attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tooltip
           renderTip={<h2>Hello</h2>}
@@ -187,7 +179,6 @@ describe('<Tooltip />', async () => {
     })
 
     it('should pass down the href attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tooltip
           renderTip={<h2>Hello</h2>}
@@ -208,7 +199,6 @@ describe('<Tooltip />', async () => {
 
   describe('when controlled', async () => {
     it('should show tip when isShowingContent is true', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tooltip renderTip={<h2>Hello</h2>} isShowingContent>
           <a href="example.html">Hover or focus me</a>
@@ -221,11 +211,9 @@ describe('<Tooltip />', async () => {
     })
 
     it('should call onShowContent and on onHideContent', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onShowContent = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onHideContent = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <Tooltip
           renderTip={<h2>Hello</h2>}
@@ -255,9 +243,8 @@ describe('<Tooltip />', async () => {
 
   describe('using children', async () => {
     it('should call onClick of child', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const onClick = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Tooltip renderTip={<h2>Hello</h2>}>
           <button onClick={onClick}>Hover or focus me</button>

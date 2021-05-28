@@ -30,7 +30,6 @@ import { TabsLocator } from '../TabsLocator'
 
 describe('<Tabs />', async () => {
   it('should render the correct number of panels', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -48,7 +47,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should render with null children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -67,7 +65,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should render correct number of tabs', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -88,7 +85,6 @@ describe('<Tabs />', async () => {
     stub(console, 'warn') // suppress Focusable warnings
     let error = false
     try {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Tabs></Tabs>)
     } catch (e) {
       error = true
@@ -102,7 +98,6 @@ describe('<Tabs />', async () => {
     const warning =
       "Failed prop type: Expected one of Panel,  in Tabs but found 'div'"
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <div>foo</div>
@@ -115,7 +110,6 @@ describe('<Tabs />', async () => {
   it('should preserve Tab.Panel keys', async () => {
     let tabs
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Tabs
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; componentRef: (el: any)... Remove this comment to see the full error message
@@ -150,7 +144,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should default to selecting the first tab', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -171,7 +164,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should honor the isSelected prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -192,7 +184,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should not allow selecting a disabled tab', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -218,10 +209,8 @@ describe('<Tabs />', async () => {
   })
 
   it('should call onRequestTabChange when selection changes via click', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab" isSelected id="one">
@@ -249,7 +238,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should focus the selected tab when shouldFocusOnRender is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs shouldFocusOnRender>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -271,10 +259,8 @@ describe('<Tabs />', async () => {
   })
 
   it('should call onRequestTabChange with keyboard arrow keys', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -324,9 +310,7 @@ describe('<Tabs />', async () => {
   })
 
   it('should update the selected tab when clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -349,9 +333,7 @@ describe('<Tabs />', async () => {
   })
 
   it('should not call onRequestTabChange when clicking a disabled tab', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs onRequestTabChange={onChange}>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -371,7 +353,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should meet a11y standards when set to the secondary variant', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs variant="secondary">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -387,7 +368,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should meet a11y standards when set to the default variant', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs variant="default">
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -403,7 +383,6 @@ describe('<Tabs />', async () => {
   })
 
   it('should link tabs with the corresponding panels via ids', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Tabs>
         <Tabs.Panel renderTitle="First Tab">Tab 1 content</Tabs.Panel>
@@ -430,7 +409,6 @@ describe('<Tabs />', async () => {
 
   describe('with duplicate-named tabs', async () => {
     it('should still render the correct number of panels', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tabs>
           <Tabs.Panel renderTitle="A Tab">Contents of first tab.</Tabs.Panel>
@@ -448,7 +426,6 @@ describe('<Tabs />', async () => {
 
   describe('with nodes as tab titles', async () => {
     it('should still render the correct number of panels', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Tabs>
           <Tabs.Panel renderTitle={<div />}>Contents of first tab.</Tabs.Panel>
@@ -481,7 +458,6 @@ describe('<Tabs />', async () => {
         </div>
       )
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<Example width="150px" />)
       const tabs = await TabsLocator.find()
 

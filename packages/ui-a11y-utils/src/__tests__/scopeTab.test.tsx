@@ -33,7 +33,6 @@ const MOCK_EVENT = {
 
 describe('scopeTab', async () => {
   it('should scope tab within container', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div>
         <div id="container">
@@ -64,7 +63,6 @@ describe('scopeTab', async () => {
   })
 
   it('should not attempt scoping when no tabbable children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div>
         <div id="container">Hello</div>
@@ -88,9 +86,8 @@ describe('scopeTab', async () => {
   })
 
   it('should execute callback when provided instead of default behavior', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const cb = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <div>
         <div id="container">

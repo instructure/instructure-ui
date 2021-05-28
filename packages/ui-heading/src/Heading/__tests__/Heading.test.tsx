@@ -31,33 +31,28 @@ import { HeadingLocator } from '../HeadingLocator'
 
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Heading>Hello World</Heading>)
     expect(await HeadingLocator.find('h2')).to.exist()
   })
 
   it('should render the children as text content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Heading>Hello World</Heading>)
     expect(await HeadingLocator.find(':contains(Hello World)')).to.exist()
   })
 
   it('should render as a SPAN if level is `reset`', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Heading level="reset">Hello World</Heading>)
     const heading = await HeadingLocator.find()
     expect(heading.getTagName()).to.equal('span')
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Heading>Hello World</Heading>)
     const heading = await HeadingLocator.find()
     expect(await heading.accessible()).to.be.true()
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Heading as="div">Hello World</Heading>)
     const heading = await HeadingLocator.find()
     expect(heading.getTagName()).to.equal('div')

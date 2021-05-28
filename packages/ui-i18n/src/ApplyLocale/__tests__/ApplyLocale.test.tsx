@@ -44,7 +44,6 @@ class LocalizableComponent extends React.Component {
 
 describe('<ApplyLocale />', async () => {
   it('applies locale context', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyLocale locale="fr">
         <LocalizableComponent />
@@ -56,7 +55,6 @@ describe('<ApplyLocale />', async () => {
   })
 
   it('applies timezone context', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <ApplyLocale timezone="Europe/Paris">
         <LocalizableComponent />

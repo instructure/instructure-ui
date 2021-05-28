@@ -42,7 +42,6 @@ describe('<Text />', async () => {
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Text as="li" />)
     expect(await find('li')).to.exist()
   })

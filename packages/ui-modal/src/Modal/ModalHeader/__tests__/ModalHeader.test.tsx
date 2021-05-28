@@ -31,7 +31,6 @@ import { color2hex } from '@instructure/ui-color-utils'
 
 describe('<ModalHeader />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ModalHeader />)
     const header = within(subject.getDOMNode())
     expect(header).to.exist()
@@ -39,7 +38,7 @@ describe('<ModalHeader />', async () => {
 
   it('should set inverse styles', async () => {
     const variables = generateComponentTheme(canvas)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(<ModalHeader variant="inverse" />)
     const header = within(subject.getDOMNode())
 

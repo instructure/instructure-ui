@@ -38,7 +38,6 @@ describe('<Byline />', async () => {
   )
 
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Byline title="Hello World" description="Test Image">
         {image}
@@ -58,7 +57,6 @@ describe('<Byline />', async () => {
       </div>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Byline description={description}>{image}</Byline>
     )
@@ -68,7 +66,6 @@ describe('<Byline />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Byline title="Hello World" description="Test Image">
         {image}
@@ -80,7 +77,6 @@ describe('<Byline />', async () => {
   })
 
   it(`should render a figure by default`, async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(await mount(<Byline>{image}</Byline>))
 
     // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'find'.
@@ -89,7 +85,7 @@ describe('<Byline />', async () => {
 
   it(`should not allow the 'as' prop`, async () => {
     const consoleError = stub(console, 'error')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Byline as="foo">{image}</Byline>)
     expect(consoleError).to.be.calledWith(
       "Warning: [Byline] prop 'as' is not allowed."
@@ -119,7 +115,7 @@ describe('<Byline />', async () => {
             const props = {
               [prop]: 'foo'
             }
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(<Byline {...props}>{image}</Byline>)
             expect(consoleError).to.be.calledWith(warning)
           })
@@ -128,7 +124,7 @@ describe('<Byline />', async () => {
             // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(<Byline {...props}>{image}</Byline>)
             expect(consoleError).to.not.be.called()
           })

@@ -30,7 +30,7 @@ import { RangeInputLocator } from '../RangeInputLocator'
 
 describe('<RangeInput />', async () => {
   it('renders an input with type "range"', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<RangeInput label="Opacity" name="opacity" max={100} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -39,7 +39,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('displays the default value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RangeInput
         label="Opacity"
@@ -57,7 +56,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets input value to default value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RangeInput
         label="Opacity"
@@ -75,7 +73,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets input value to controlled value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RangeInput
         label="Opacity"
@@ -94,7 +91,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets min value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
       <RangeInput label="Opacity" name="opacity" max={100} min={25} />
@@ -106,7 +102,7 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets max value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<RangeInput label="Opacity" name="opacity" max={75} min={0} />)
     const rangeInput = await RangeInputLocator.find()
     const input = await rangeInput.findInput()
@@ -115,7 +111,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('sets step value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
       <RangeInput label="Opacity" name="opacity" max={100} min={0} step={5} />
@@ -128,7 +123,6 @@ describe('<RangeInput />', async () => {
 
   it('requires an `onChange` prop with a `value` prop', async () => {
     const consoleError = stub(console, 'error')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
       <RangeInput label="Opacity" name="opacity" max={100} min={0} value={50} />
@@ -140,7 +134,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('formats the value displayed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RangeInput
         label="Opacity"
@@ -161,7 +154,6 @@ describe('<RangeInput />', async () => {
   })
 
   it('hides the value when displayValue is false', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RangeInput
         label="Opacity"
@@ -180,7 +172,6 @@ describe('<RangeInput />', async () => {
 
   it('sets invalid when error messages are present', async () => {
     let ref
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RangeInput
         label="Opacity"
@@ -200,7 +191,6 @@ describe('<RangeInput />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RangeInput
           label="Opacity"
@@ -216,7 +206,6 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the input role to "slider"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RangeInput
           label="Opacity"
@@ -234,7 +223,6 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the aria-valuenow attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RangeInput
           label="Opacity"
@@ -252,7 +240,6 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the aria-valuemin attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         <RangeInput label="Opacity" name="opacity" max={100} min={20} />
@@ -264,7 +251,6 @@ describe('<RangeInput />', async () => {
     })
 
     it('sets the aria-valuemax attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ label: string; name: string; max: number; ... Remove this comment to see the full error message
         <RangeInput label="Opacity" name="opacity" max={80} min={0} />
@@ -276,7 +262,6 @@ describe('<RangeInput />', async () => {
     })
 
     it('formats the aria-valuetext attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RangeInput
           label="Opacity"
@@ -299,7 +284,6 @@ describe('<RangeInput />', async () => {
 
   describe('when the input value changes', async () => {
     it('should update the value displayed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RangeInput
           label="Opacity"
@@ -321,9 +305,8 @@ describe('<RangeInput />', async () => {
     })
 
     it('should call the onChange prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onChange = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <RangeInput
           label="Opacity"
@@ -344,7 +327,6 @@ describe('<RangeInput />', async () => {
     })
 
     it('should not update the input value when the value prop is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RangeInput
           label="Opacity"

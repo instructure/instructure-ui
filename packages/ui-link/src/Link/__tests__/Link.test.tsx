@@ -35,21 +35,17 @@ class TruncateText extends React.Component {
 
 describe('<Link />', async () => {
   it('should render the children as text content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Link href="https://instructure.design">Hello World</Link>)
     expect(await LinkLocator.find(':contains(Hello World)')).to.exist()
   })
 
   it('should render a button', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Link onClick={onClick}>Hello World</Link>)
     expect(await LinkLocator.find('button[type="button"]')).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Link href="https://instructure.design">Hello World</Link>)
     const link = await LinkLocator.find()
     expect(await link.accessible()).to.be.true()
@@ -57,7 +53,6 @@ describe('<Link />', async () => {
 
   it('should focus with the focus helper', async () => {
     let linkRef
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Link
         href="https://instructure.design"
@@ -81,7 +76,6 @@ describe('<Link />', async () => {
   })
 
   it('should display block when TruncateText is a child', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Link href="example.html">
         <TruncateText>Hello World</TruncateText>
@@ -100,7 +94,6 @@ describe('<Link />', async () => {
       </svg>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Link href="example.html" renderIcon={customIcon}>
         <TruncateText>Hello World</TruncateText>
@@ -112,9 +105,7 @@ describe('<Link />', async () => {
   })
 
   it('should call the onClick prop when clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Link onClick={onClick}>Hello World</Link>)
 
     const link = await LinkLocator.find()
@@ -134,7 +125,6 @@ describe('<Link />', async () => {
       </svg>
     )
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Link href="https://instructure.design" renderIcon={customIcon}>
         Hello World
@@ -149,7 +139,6 @@ describe('<Link />', async () => {
 
   describe('when interaction is disabled', async () => {
     it('should apply aria-disabled when interaction is disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Link href="example.html" interaction="disabled">
           Hello World
@@ -159,7 +148,6 @@ describe('<Link />', async () => {
     })
 
     it('should apply aria-disabled when `disabled` is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Link href="example.html" disabled>
@@ -170,9 +158,8 @@ describe('<Link />', async () => {
     })
 
     it('should not be clickable when interaction is disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Link onClick={onClick} interaction="disabled">
           Hello World
@@ -186,9 +173,8 @@ describe('<Link />', async () => {
     })
 
     it('should not be clickable when `disabled` is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Link onClick={onClick} disabled>
@@ -213,7 +199,6 @@ describe('<Link />', async () => {
       })
 
       it('should render designated tag', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           <Link as="a" onClick={onClick}>
@@ -226,7 +211,6 @@ describe('<Link />', async () => {
       })
 
       it('should set role="button"', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           <Link as="span" onClick={onClick}>
@@ -238,7 +222,6 @@ describe('<Link />', async () => {
 
       describe('should not set type="button", unless it is actually a button', async () => {
         it('should not set type="button" on other things like <span>s', async () => {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           await mount(
             // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             <Link as="span" onClick={onClick}>
@@ -253,7 +236,6 @@ describe('<Link />', async () => {
         })
 
         it('should set type="button" on <button>s', async () => {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           await mount(
             // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             <Link as="button" onClick={onClick}>
@@ -265,7 +247,6 @@ describe('<Link />', async () => {
       })
 
       it('should set tabIndex="0"', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         await mount(
           // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           <Link as="span" onClick={onClick}>
@@ -278,7 +259,7 @@ describe('<Link />', async () => {
 
     describe('without `onClick`', async () => {
       it('should render designated tag', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+        // @ts-expect-error FIXME remove this line to see the error
         await mount(<Link as="a">Hello World</Link>)
         const componentRoot = await LinkLocator.find()
         const link = await componentRoot.findWithText('Hello World')
@@ -319,19 +300,16 @@ describe('<Link />', async () => {
 
   describe('when an href is provided', async () => {
     it('should render an anchor element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Link href="example.html">Hello World</Link>)
       expect(await LinkLocator.find('a')).to.exist()
     })
 
     it('should set the href attribute', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Link href="example.html">Hello World</Link>)
       expect(await LinkLocator.find('[href="example.html"]')).to.exist()
     })
 
     it('should not set role="button"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Link href="example.html">Hello World</Link>)
       expect(
         await LinkLocator.find('[role="button"]', {
@@ -341,7 +319,6 @@ describe('<Link />', async () => {
     })
 
     it('should not set type="button"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Link href="example.html">Hello World</Link>)
       expect(
         await LinkLocator.find('[type="button"]', {

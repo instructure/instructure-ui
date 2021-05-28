@@ -31,14 +31,12 @@ import { OverlayLocator } from '../OverlayLocator'
 
 describe('<Overlay />', async () => {
   it('should render nothing when closed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Overlay label="Overlay Example" />)
     const overlay = await OverlayLocator.find({ expectEmpty: true })
     expect(overlay).to.not.exist()
   })
 
   it('should render children when open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Overlay open label="Overlay Example">
         Hello World
@@ -49,13 +47,11 @@ describe('<Overlay />', async () => {
   })
 
   it('should fire transition callback props', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onEnter = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onEntering = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onEntered = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Overlay
         open
@@ -75,9 +71,7 @@ describe('<Overlay />', async () => {
   })
 
   it('should support onOpen prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Overlay open label="Overlay Example" onOpen={onOpen} />)
 
     await wait(() => {
@@ -86,9 +80,8 @@ describe('<Overlay />', async () => {
   })
 
   it('should support onClose prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClose = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Overlay open label="Overlay Example" onClose={onClose} />
     )

@@ -31,7 +31,6 @@ import { color2hex } from '@instructure/ui-color-utils'
 
 describe('<ModalFooter />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ModalFooter />)
 
     const footer = within(subject.getDOMNode())
@@ -40,7 +39,7 @@ describe('<ModalFooter />', async () => {
 
   it('should set inverse styles', async () => {
     const variables = generateComponentTheme(canvas)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(<ModalFooter variant="inverse" />)
     const footer = within(subject.getDOMNode())
 

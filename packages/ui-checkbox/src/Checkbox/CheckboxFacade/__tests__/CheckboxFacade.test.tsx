@@ -29,13 +29,11 @@ import { CheckboxFacade } from '../index'
 
 describe('<CheckboxFacade />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<CheckboxFacade>label text</CheckboxFacade>)
     const checkboxFacade = within(subject.getDOMNode())
     expect(checkboxFacade).to.exist()
   })
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<CheckboxFacade>label text</CheckboxFacade>)
     const checkboxFacade = within(subject.getDOMNode())
     expect(await checkboxFacade.accessible()).to.be.true()

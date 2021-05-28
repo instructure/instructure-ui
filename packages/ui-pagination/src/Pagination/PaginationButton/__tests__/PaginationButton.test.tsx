@@ -33,16 +33,13 @@ const PaginationButtonLocator = locator(PaginationButton.selector)
 
 describe('<PaginationButton />', async () => {
   it('should designate current page', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PaginationButton current>1</PaginationButton>)
     const button = await PaginationButtonLocator.find(':label(1)')
     expect(button.getAttribute('aria-current')).to.equal('page')
   })
 
   it('should navigate using button when onClick provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<PaginationButton onClick={onClick}>1</PaginationButton>)
     const button = await PaginationButtonLocator.find(':label(1)')
     await button.click()
@@ -50,9 +47,7 @@ describe('<PaginationButton />', async () => {
   })
 
   it('should disable navigation to current page', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <PaginationButton onClick={onClick} current>
@@ -68,7 +63,6 @@ describe('<PaginationButton />', async () => {
   })
 
   it('should navigate using link when href provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <PaginationButton href="https://instructure.design/">1</PaginationButton>

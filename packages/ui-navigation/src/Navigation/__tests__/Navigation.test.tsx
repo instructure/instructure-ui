@@ -33,7 +33,6 @@ import { NavigationLocator } from '../NavigationLocator'
 
 describe('<Navigation />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Navigation
         label="Main navigation"
@@ -55,7 +54,6 @@ describe('<Navigation />', async () => {
   })
 
   it('should render a single semantic nav element', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Navigation
         label="Main navigation"
@@ -76,7 +74,6 @@ describe('<Navigation />', async () => {
   })
 
   it('should render a semantic list for the nav content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Navigation
         label="Main navigation"
@@ -110,7 +107,6 @@ describe('<Navigation />', async () => {
   })
 
   it('should switch aria-expanded when the Toggle Navigation button is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Navigation
         label="Main navigation"
@@ -143,7 +139,6 @@ describe('<Navigation />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Navigation
         label="Main navigation"

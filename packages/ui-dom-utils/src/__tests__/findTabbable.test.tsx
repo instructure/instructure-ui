@@ -32,7 +32,7 @@ describe('findTabbable', async () => {
       /* eslint-disable jsx-a11y/anchor-is-valid */
       /* eslint-disable jsx-a11y/tabindex-no-positive */
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <div>
           <a href="#">Yep</a>
@@ -60,7 +60,6 @@ describe('findTabbable', async () => {
 
   describe('tabbable root', async () => {
     it('should search the root node when shouldSearchRootNode is set', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <button>
           <span>hello</span>

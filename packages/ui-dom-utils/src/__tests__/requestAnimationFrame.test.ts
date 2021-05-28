@@ -27,7 +27,6 @@ import { requestAnimationFrame } from '../requestAnimationFrame'
 
 describe('requestAnimationFrame', async () => {
   it('should provide a cancel method', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const callback = stub()
     const raf = requestAnimationFrame(callback)
 

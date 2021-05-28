@@ -48,7 +48,6 @@ const renderEditButton = (props) => {
 
 describe('<InPlaceEdit />', async () => {
   it('should render view mode', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ id: string; mode: "view"; onChangeMode: ()... Remove this comment to see the full error message
@@ -70,7 +69,6 @@ describe('<InPlaceEdit />', async () => {
   })
 
   it('should render view mode with string button label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"
@@ -90,7 +88,6 @@ describe('<InPlaceEdit />', async () => {
   })
 
   it('should render edit mode', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="edit"
@@ -109,7 +106,6 @@ describe('<InPlaceEdit />', async () => {
   })
 
   it('should render a custom edit button', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"
@@ -131,7 +127,6 @@ describe('<InPlaceEdit />', async () => {
   })
 
   it('should switch mode to edit via props, and focus the editor', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"
@@ -150,7 +145,6 @@ describe('<InPlaceEdit />', async () => {
   })
 
   it('should switch mode to view via props, and focus the edit button', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="edit"
@@ -171,7 +165,6 @@ describe('<InPlaceEdit />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <InPlaceEdit
         mode="view"

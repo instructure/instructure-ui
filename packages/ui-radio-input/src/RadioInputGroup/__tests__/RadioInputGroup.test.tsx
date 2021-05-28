@@ -32,7 +32,6 @@ import { RadioInputGroupLocator } from '../RadioInputGroupLocator'
 
 describe('<RadioInputGroup />', async () => {
   it('adds the name props to all RadioInput types', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
@@ -47,7 +46,6 @@ describe('<RadioInputGroup />', async () => {
 
   it('requires an `onChange` prop with a `value` prop', async () => {
     const consoleError = stub(console, 'error')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup name="fruit" description="Select a fruit" value="banana">
         <RadioInput label="Apple" value="apple" />
@@ -64,9 +62,7 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('calls the onChange prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup
         name="fruit"
@@ -89,9 +85,7 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('does not call the onChange prop when disabled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup
         disabled
@@ -115,9 +109,7 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('does not call the onChange prop when readOnly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup
         readOnly
@@ -141,7 +133,6 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('should not update the value when the value prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup
         name="fruit"
@@ -168,7 +159,6 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('adds the correct tabindex to RadioInputs when none are checked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup name="fruit" description="Select a fruit">
         <RadioInput label="Apple" value="apple" />
@@ -187,7 +177,6 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('adds the correct tabindex to RadioInputs when checked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <RadioInputGroup
         name="fruit"
@@ -211,7 +200,6 @@ describe('<RadioInputGroup />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <RadioInputGroup name="fruit" description="Select a fruit">
           <RadioInput label="Apple" value="apple" />

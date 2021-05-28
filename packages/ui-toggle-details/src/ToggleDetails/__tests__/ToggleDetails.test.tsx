@@ -30,7 +30,6 @@ import { ToggleDetailsLocator } from '../ToggleDetailsLocator'
 
 describe('<ToggleDetails />', async () => {
   it('should hide its content', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
 
     expect(
@@ -41,7 +40,6 @@ describe('<ToggleDetails />', async () => {
   })
 
   it('should place the icon after the summary when prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleDetails iconPosition="end" summary="Click me">
         Content
@@ -56,7 +54,6 @@ describe('<ToggleDetails />', async () => {
   })
 
   it('should have an aria-controls attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
 
     const toggleDetails = await ToggleDetailsLocator.find()
@@ -69,7 +66,6 @@ describe('<ToggleDetails />', async () => {
   })
 
   it('should have an aria-expanded attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
 
     const toggleDetails = await ToggleDetailsLocator.find()
@@ -79,7 +75,6 @@ describe('<ToggleDetails />', async () => {
   })
 
   it('should toggle on click events', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
 
     const toggleDetails = await ToggleDetailsLocator.find()
@@ -95,7 +90,6 @@ describe('<ToggleDetails />', async () => {
       e.persist()
     })
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleDetails summary="Click me" expanded={false} onToggle={onToggle}>
         Details
@@ -112,7 +106,6 @@ describe('<ToggleDetails />', async () => {
   })
 
   it('should be initialized by defaultExpanded prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleDetails summary="Click me" defaultExpanded>
         Content
@@ -129,7 +122,6 @@ describe('<ToggleDetails />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
     const toggleDetails = await ToggleDetailsLocator.find()
     expect(await toggleDetails.accessible()).to.be.true()
@@ -138,7 +130,6 @@ describe('<ToggleDetails />', async () => {
   it('focuses with the focus helper', async () => {
     let toggleRef = null
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ToggleDetails
         summary="Click me"

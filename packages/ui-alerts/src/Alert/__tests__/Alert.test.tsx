@@ -41,7 +41,6 @@ describe('<Alert />', async () => {
   let srdiv
 
   beforeEach(async () => {
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'srdiv' implicitly has an 'any' type.
     stub(console, 'warn') // suppress deprecation warnings
     srdiv = document.createElement('div')
     srdiv.id = '_alertLiveRegion'
@@ -59,7 +58,6 @@ describe('<Alert />', async () => {
   })
 
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success">Success: Sample alert text.</Alert>
     )
@@ -73,7 +71,6 @@ describe('<Alert />', async () => {
   })
 
   it('should not render the Close button when `renderCloseButtonLabel` is not provided', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success">Success: Sample alert text.</Alert>
     )
@@ -117,7 +114,6 @@ describe('<Alert />', async () => {
 
   Object.entries(iconComponentsVariants).forEach(([variant, iconComponent]) => {
     it(`"${variant}" variant should have icon "${iconComponent}".`, async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const subject = await mount(
         // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
         <Alert variant={variant} transition="none">
@@ -132,7 +128,6 @@ describe('<Alert />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success" transition="none">
         Success: Sample alert text.
@@ -145,7 +140,6 @@ describe('<Alert />', async () => {
 
   it('should add alert text to aria live region, when present', async () => {
     const liver = document.getElementById('_alertLiveRegion')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Alert
         variant="success"
@@ -166,7 +160,6 @@ describe('<Alert />', async () => {
   describe('with `screenReaderOnly', async () => {
     it('should not render anything when using `liveRegion`', async () => {
       const liver = document.getElementById('_alertLiveRegion')
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Alert
           variant="success"
@@ -181,11 +174,9 @@ describe('<Alert />', async () => {
     })
 
     it('should warn if `liveRegion` is not defined', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const consoleError = stub(console, 'error')
       const warning =
         "Warning: [Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'."
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Alert variant="success" screenReaderOnly={true}>
           Success: Sample alert text.
@@ -197,7 +188,6 @@ describe('<Alert />', async () => {
 
   it('should set aria-atomic to the aria live region when isLiveRegionAtomic is present', async () => {
     const liver = document.getElementById('_alertLiveRegion')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Alert
         variant="success"
@@ -218,7 +208,6 @@ describe('<Alert />', async () => {
 
   it('should close when told to, with transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success" liveRegion={() => liver}>
         Success: Sample alert text.
@@ -240,7 +229,6 @@ describe('<Alert />', async () => {
 
   it('should close when told to, without transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Alert variant="success" transition="none" liveRegion={() => liver}>
         Success: Sample alert text.

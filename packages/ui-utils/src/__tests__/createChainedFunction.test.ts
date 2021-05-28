@@ -43,7 +43,6 @@ describe('createChainedFunction', () => {
   it('should execute all the functions', () => {
     const spies = Array(5)
       .fill(null)
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       .map(() => spy())
     const chain = createChainedFunction(...spies)
 

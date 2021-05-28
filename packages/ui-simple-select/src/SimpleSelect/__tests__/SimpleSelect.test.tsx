@@ -53,7 +53,6 @@ describe('<SimpleSelect />', async () => {
     ))
 
   it('should render an input and a list', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       <SimpleSelect renderLabel="Choose an option">{getOptions()}</SimpleSelect>
@@ -72,7 +71,6 @@ describe('<SimpleSelect />', async () => {
   })
 
   it('should render groups', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <SimpleSelect renderLabel="Choose an option">
         <SimpleSelect.Option id="0" value="0">
@@ -112,7 +110,6 @@ describe('<SimpleSelect />', async () => {
 
   it('should ignore invalid children', async () => {
     const consoleError = stub(console, 'error')
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <SimpleSelect renderLabel="Choose an option">
         {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
@@ -138,9 +135,7 @@ describe('<SimpleSelect />', async () => {
   })
 
   it('should fire onChange when selected option changes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
         {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
@@ -159,9 +154,7 @@ describe('<SimpleSelect />', async () => {
   })
 
   it('should behave uncontrolled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <SimpleSelect renderLabel="Choose an option" onChange={onChange}>
         {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
@@ -183,9 +176,8 @@ describe('<SimpleSelect />', async () => {
   })
 
   it('should behave controlled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <SimpleSelect
         renderLabel="Choose an option"
@@ -215,9 +207,7 @@ describe('<SimpleSelect />', async () => {
   })
 
   it('should fire onFocus when input gains focus', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <SimpleSelect renderLabel="Choose an option" onFocus={onFocus}>
         {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
@@ -236,7 +226,6 @@ describe('<SimpleSelect />', async () => {
 
   describe('input', async () => {
     it('should render with a custom id if given', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <SimpleSelect renderLabel="Choose an option" id="customSelect" />
       )
@@ -247,7 +236,6 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should always render readonly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <SimpleSelect renderLabel="Choose an option" interaction="enabled" />
       )
@@ -259,7 +247,6 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should render disabled when interaction="disabled"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <SimpleSelect
           renderLabel="Choose an option"
@@ -276,7 +263,6 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should render required when isRequired={true}', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<SimpleSelect renderLabel="Choose an option" isRequired />)
       const select = await SimpleSelectLocator.find()
       const input = await select.findInput()
@@ -285,7 +271,6 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should set input role to "button"', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <SimpleSelect renderLabel="Choose an option">
           {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
@@ -299,7 +284,6 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should allow assistive text', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <SimpleSelect
           renderLabel="Choose an option"
@@ -319,7 +303,6 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <SimpleSelect renderLabel="Choose an option" data-custom-attr="true">
           {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
@@ -333,9 +316,8 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should provide a ref to the input element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const inputRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <SimpleSelect renderLabel="Choose an option" inputRef={inputRef}>
           {/* @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0. */}
@@ -351,7 +333,6 @@ describe('<SimpleSelect />', async () => {
 
   describe('list', async () => {
     it('should set aria-disabled on options when isDisabled={true}', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <SimpleSelect renderLabel="Choose an option">
           {getOptions(null, null, defaultOptions[2])}
@@ -369,9 +350,8 @@ describe('<SimpleSelect />', async () => {
     })
 
     it('should provide a ref to the list element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const listRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <SimpleSelect
           renderLabel="Choose an option"

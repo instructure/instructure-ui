@@ -32,7 +32,6 @@ import { RatingLocator } from '../RatingLocator'
 
 describe('<Rating />', async () => {
   it('should render the correct number of icons', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Rating label="Course rating" iconCount={5} />)
     const rating = await RatingLocator.find()
     const icons = await rating.findAll('svg')
@@ -41,7 +40,6 @@ describe('<Rating />', async () => {
   })
 
   it('should handle a valueMax of zero', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Rating label="Course rating" valueMax={0} />)
     const rating = await RatingLocator.find()
     const icons = await rating.findAll('svg')
@@ -50,7 +48,6 @@ describe('<Rating />', async () => {
   })
 
   it('should fill the correct number of icons', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Rating
         label="Course rating"
@@ -66,7 +63,6 @@ describe('<Rating />', async () => {
   })
 
   it('never renders more than `iconCount` icons', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Rating
         label="Course rating"
@@ -83,7 +79,6 @@ describe('<Rating />', async () => {
   })
 
   it('should render screen reader text to give context', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Rating
         label="Course rating"
@@ -100,7 +95,6 @@ describe('<Rating />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Rating label="Course rating" iconCount={5} />)
     const rating = await RatingLocator.find()
     expect(await rating.accessible()).to.be.true()
@@ -127,7 +121,7 @@ describe('<Rating />', async () => {
             const props = {
               [prop]: 'foo'
             }
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(
               <Rating label="Course rating" iconCount={5} {...props} />
             )
@@ -138,7 +132,7 @@ describe('<Rating />', async () => {
             // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
-            // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
             await mount(
               <Rating label="Course rating" iconCount={5} {...props} />
             )

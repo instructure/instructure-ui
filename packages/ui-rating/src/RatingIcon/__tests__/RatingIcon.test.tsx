@@ -34,7 +34,6 @@ import { RatingIcon } from '../index'
 
 describe('<RatingIcon />', async () => {
   it('transitions when filled on render and animateFill is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <EmotionThemeProvider
         theme={{
@@ -52,7 +51,6 @@ describe('<RatingIcon />', async () => {
   })
 
   it('transitions when filled after render and animateFill is true', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <EmotionThemeProvider
         theme={{
@@ -74,7 +72,6 @@ describe('<RatingIcon />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<RatingIcon filled animateFill />)
 
     const ratingIcon = within(subject.getDOMNode())

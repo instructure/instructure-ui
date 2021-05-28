@@ -36,7 +36,6 @@ import BillboardExamples from '../__examples__/Billboard.examples'
 
 describe('<Billboard />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Billboard />)
     const billboard = within(subject.getDOMNode())
     expect(billboard).to.exist()
@@ -48,7 +47,6 @@ describe('<Billboard />', async () => {
   })
 
   it('should render a heading with the correct tag', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Billboard heading="Test heading" headingAs="h2" />
     )
@@ -58,7 +56,6 @@ describe('<Billboard />', async () => {
   })
 
   it('renders as a link if it has an href prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<Billboard href="#" />)
     const billboard = within(subject.getDOMNode())
     const link = await billboard.find('a')
@@ -66,9 +63,8 @@ describe('<Billboard />', async () => {
   })
 
   it('renders as a button and responds to onClick event', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(<Billboard onClick={onClick} />)
     const billboard = within(subject.getDOMNode())
     const button = await billboard.find('button')
@@ -82,7 +78,6 @@ describe('<Billboard />', async () => {
     it('should render message when passed a node', async () => {
       const message = 'hello some message'
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Billboard heading="Test heading" message={<span>{message}</span>} />
       )
@@ -93,7 +88,6 @@ describe('<Billboard />', async () => {
     it('should render message passed a function', async () => {
       const message = 'hello some message'
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Billboard
           heading="Test heading"
@@ -107,7 +101,6 @@ describe('<Billboard />', async () => {
 
   describe('when disabled', async () => {
     it('should apply aria-disabled to link', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Billboard heading="I am disabled" href="#" disabled={true} />
       )
@@ -118,9 +111,8 @@ describe('<Billboard />', async () => {
     })
 
     it('should not be clickable', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(<Billboard onClick={onClick} disabled />)
       const billboard = within(subject.getDOMNode())
       await billboard.click(null, { clickable: false })
@@ -131,7 +123,6 @@ describe('<Billboard />', async () => {
 
   describe('when readOnly', async () => {
     it('should apply aria-disabled', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Billboard heading="I am disabled" href="#" readOnly />
       )
@@ -142,9 +133,8 @@ describe('<Billboard />', async () => {
     })
 
     it('should not be clickable', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(<Billboard onClick={onClick} readOnly />)
       const billboard = within(subject.getDOMNode())
       await billboard.click(null, { clickable: false })
@@ -155,9 +145,8 @@ describe('<Billboard />', async () => {
 
   describe('when passing down props to View', async () => {
     it('should support an elementRef prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const elementRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       const subject = await mount(
         <Billboard
           elementRef={elementRef}

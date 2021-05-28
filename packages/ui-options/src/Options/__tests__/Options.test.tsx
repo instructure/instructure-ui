@@ -37,7 +37,6 @@ import OptionsExamples from '../__examples__/Options.examples'
 
 describe('<Options />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Options />)
     const options = OptionsLocator.find()
 
@@ -45,7 +44,6 @@ describe('<Options />', async () => {
   })
 
   it('should render items', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options>
         <Options.Item>Option one</Options.Item>
@@ -59,9 +57,7 @@ describe('<Options />', async () => {
   })
 
   it('should provide elementRef', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options elementRef={elementRef} as="ul">
@@ -76,7 +72,6 @@ describe('<Options />', async () => {
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ol">
@@ -91,7 +86,6 @@ describe('<Options />', async () => {
   })
 
   it('should render children as listitems when appropriate', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ul">
@@ -108,7 +102,6 @@ describe('<Options />', async () => {
   })
 
   it('should pass props through to list', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Options as="ul" role="listbox" data-custom-attr="true">
@@ -124,7 +117,6 @@ describe('<Options />', async () => {
   })
 
   it('should render root with appropriate role', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options role="listbox">
         <Options.Item>Option one</Options.Item>
@@ -141,7 +133,6 @@ describe('<Options />', async () => {
     const warning =
       "Warning: Failed prop type: Expected one of Options, Item, Separator in Options but found 'span'"
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options>
         <span />
@@ -151,14 +142,12 @@ describe('<Options />', async () => {
   })
 
   it('should allow null children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Options />)
     const options = await OptionsLocator.find()
     expect(options).to.exist()
   })
 
   it('should render nested options properly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Options>
         <Options.Item>Option one</Options.Item>

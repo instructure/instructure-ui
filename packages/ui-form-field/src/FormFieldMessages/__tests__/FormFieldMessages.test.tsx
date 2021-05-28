@@ -35,7 +35,6 @@ describe('<FormFieldMessages />', () => {
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldMessages messages={messages} />)
 
     const formFieldMessages = within(subject.getDOMNode())
@@ -52,7 +51,6 @@ describe('<FormFieldMessages />', () => {
       { text: 'Full name, first and last', type: 'hint' }
     ]
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldMessages messages={messages} />)
 
     const formFieldMessages = within(subject.getDOMNode())

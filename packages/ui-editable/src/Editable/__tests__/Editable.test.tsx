@@ -55,33 +55,31 @@ const render = ({
 
 describe('<Editable />', async () => {
   it('should render view mode', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Editable mode="view" onChangeMode={noop} render={renderSpy} />)
     const args = renderSpy.lastCall.args[0]
+    // @ts-expect-error FIXME remove this line to see the error
     expect(args.mode).to.equal('view')
   })
 
   it('should render edit mode', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Editable mode="edit" onChangeMode={noop} render={renderSpy} />)
     const args = renderSpy.lastCall.args[0]
+    // @ts-expect-error FIXME remove this line to see the error
     expect(args.mode).to.equal('edit')
   })
 
   it('should change to edit mode on button click', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const onChangeModeSpy = spy((newMode) => {})
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
     let args = renderSpy.lastCall.args[0]
+    // @ts-expect-error FIXME remove this line to see the error
     expect(args.mode).to.equal('view')
 
     const editable = within(subject.getDOMNode())
@@ -95,15 +93,15 @@ describe('<Editable />', async () => {
   })
 
   it('should change to edit mode on component click', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    const onChangeModeSpy = spy((newMode) => {})
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error newMode is intentionally unused
+    const onChangeModeSpy = spy((newMode: any) => {})
     const renderSpy = spy(render)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
     const renderProps = renderSpy.lastCall.args[0]
+    // @ts-expect-error FIXME remove this line to see the error
     expect(renderProps.mode).to.equal('view')
 
     const container = within(subject.getDOMNode())
@@ -114,42 +112,41 @@ describe('<Editable />', async () => {
   })
 
   it('should set the button to visible on mouse over', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error newMode is intentionally unused
     const onChangeModeSpy = spy((newMode) => {})
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-
+    // @ts-expect-error FIXME remove this line to see the error
     let props = renderSpy.lastCall.args[0].getEditButtonProps()
     expect(props.isVisible).to.be.false()
 
     const editable = within(subject.getDOMNode())
     await editable.mouseOver()
-
+    // @ts-expect-error FIXME remove this line to see the error
     props = renderSpy.lastCall.args[0].getEditButtonProps()
 
     expect(props.isVisible).to.be.true()
 
     await editable.mouseOut()
-
+    // @ts-expect-error FIXME remove this line to see the error
     props = renderSpy.lastCall.args[0].getEditButtonProps()
 
     expect(props.isVisible).to.be.false()
   })
 
   it('should change to view mode on editor blur', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error newMode is intentionally unused
     const onChangeModeSpy = spy((newMode) => {})
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Editable mode="edit" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
     let args = renderSpy.lastCall.args[0]
+    // @ts-expect-error FIXME remove this line to see the error
     expect(args.mode).to.equal('edit')
 
     const editable = within(subject.getDOMNode())
@@ -164,9 +161,9 @@ describe('<Editable />', async () => {
   })
 
   it('should change to view mode on escape', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error newMode is intentionally unused
     const onChangeModeSpy = spy((newMode) => {})
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Editable mode="edit" onChangeMode={onChangeModeSpy} render={render} />
     )
@@ -183,11 +180,10 @@ describe('<Editable />', async () => {
   })
 
   it('should call onChange when the user is finished editing', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error newMode is intentionally unused
     const onChangeSpy = spy((newValue) => {})
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const renderSpy = spy(render)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Editable
         mode="edit"
@@ -211,7 +207,6 @@ describe('<Editable />', async () => {
   it('should warn if readOnly + mode="edit"', async () => {
     const warning = spy(console, 'warn')
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Editable
         mode="edit"

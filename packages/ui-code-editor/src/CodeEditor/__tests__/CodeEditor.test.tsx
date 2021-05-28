@@ -30,7 +30,6 @@ import { CodeEditorLocator } from '../CodeEditorLocator'
 
 describe('<CodeEditor />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<CodeEditor label="foo" />)
     const editor = await CodeEditorLocator.find()
     const input = await editor.findInput()
@@ -39,9 +38,8 @@ describe('<CodeEditor />', async () => {
   })
 
   it('should behave controlled', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <CodeEditor label="foo" value="hello worl" onChange={onChange} />
     )

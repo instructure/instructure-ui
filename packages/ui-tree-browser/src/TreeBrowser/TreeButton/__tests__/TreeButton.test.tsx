@@ -32,7 +32,6 @@ const TreeButtonLocator = locator(TreeButton.selector)
 
 describe('<TreeButton />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<TreeButton id="1" />)
     const treeButton = await TreeButtonLocator.find()
     expect(treeButton).to.exist()
@@ -40,9 +39,8 @@ describe('<TreeButton />', async () => {
 
   describe('containerRef', async () => {
     it('should call with parent element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const containerRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <div id="1">
           <TreeButton id="2" containerRef={containerRef} />
@@ -55,7 +53,6 @@ describe('<TreeButton />', async () => {
 
   describe('descriptor', async () => {
     it('should not render a descriptor element if no descriptor passed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" />)
       const treeButton = await TreeButtonLocator.find()
       expect(
@@ -66,7 +63,6 @@ describe('<TreeButton />', async () => {
     })
 
     it('should render a descriptor element if descriptor passed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" descriptor="Some Descriptor" />)
       const descriptor = await TreeButtonLocator.find(
         '[class$="-treeButton__textDescriptor"]:contains(Some Descriptor)'
@@ -84,7 +80,6 @@ describe('<TreeButton />', async () => {
     )
 
     it('should render a collection icon', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton id="1" type="collection" collectionIcon={() => Icon} />
       )
@@ -93,14 +88,12 @@ describe('<TreeButton />', async () => {
     })
 
     it('should render an item icon', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" type="item" itemIcon={() => Icon} />)
       const icon = await TreeButtonLocator.find('svg:contains(Test icon)')
       expect(icon).to.exist()
     })
 
     it('should render no icon if no icon prop passed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" />)
       expect(
         await TreeButtonLocator.find('svg', { expectEmpty: true })
@@ -108,7 +101,6 @@ describe('<TreeButton />', async () => {
     })
 
     it('should render a thumbnail instead of an icon if a thumbnail URL is passed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton
           id="1"
@@ -122,7 +114,6 @@ describe('<TreeButton />', async () => {
     })
 
     it('should not render a thumbnail if no thumbnail URL is passed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<TreeButton id="1" type="item" />)
 
       expect(
@@ -131,7 +122,6 @@ describe('<TreeButton />', async () => {
     })
 
     it('should render a thumbnail if a thumbnail and an icon are passed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton
           id="1"
@@ -150,7 +140,6 @@ describe('<TreeButton />', async () => {
 
   describe('renderContent', async () => {
     it('should render the content passed to renderContent', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <TreeButton
           id="1"

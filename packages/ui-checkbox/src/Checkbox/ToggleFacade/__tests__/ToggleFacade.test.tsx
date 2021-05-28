@@ -29,14 +29,12 @@ import { ToggleFacade } from '../index'
 
 describe('<ToggleFacade />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
     const toggleFacade = within(subject.getDOMNode())
     expect(toggleFacade).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
     const toggleFacade = within(subject.getDOMNode())
     expect(await toggleFacade.accessible()).to.be.true()

@@ -29,14 +29,12 @@ import { ContextView } from '../index'
 
 describe('<ContextView />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ContextView />)
 
     expect(subject.getDOMNode()).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<ContextView />)
 
     const contextView = within(subject.getDOMNode())

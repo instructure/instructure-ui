@@ -29,7 +29,6 @@ import { FormFieldMessage } from '../index'
 
 describe('<FormFieldMessage />', async () => {
   it('should render message', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <FormFieldMessage>hello world</FormFieldMessage>
     )
@@ -39,7 +38,6 @@ describe('<FormFieldMessage />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<FormFieldMessage />)
 
     const formFieldMessage = within(subject.getDOMNode())

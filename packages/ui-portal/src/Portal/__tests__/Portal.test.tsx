@@ -29,14 +29,12 @@ import { Portal } from '../index'
 
 describe(`<Portal />`, async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<Portal open>Hello World</Portal>)
     const portal = await find(':contains(Hello World)')
     expect(portal.getDOMNode()).to.exist()
   })
 
   it('should be accessible', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Portal open id="portal">
@@ -48,9 +46,7 @@ describe(`<Portal />`, async () => {
   })
 
   it('should support onOpen prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Portal open onOpen={onOpen} id="portal">
@@ -62,9 +58,8 @@ describe(`<Portal />`, async () => {
   })
 
   it('should support onClose prop', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClose = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Portal onClose={onClose} open>
         Hello World
@@ -79,9 +74,7 @@ describe(`<Portal />`, async () => {
   })
 
   it('should add a dir attribute to the root DOM node', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onOpen = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Portal open onOpen={onOpen} id="portal">
@@ -93,7 +86,7 @@ describe(`<Portal />`, async () => {
   })
 
   it('should not render if children are empty', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Portal open id="portal" />)
     const portal = await find('#portal', { expectEmpty: true })
     expect(portal).to.not.exist()
@@ -101,16 +94,14 @@ describe(`<Portal />`, async () => {
 
   describe('without a mountNode prop', () => {
     it('should render nothing when closed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Portal>Hello World</Portal>)
       const portal = await find('#portal', { expectEmpty: true })
       expect(portal).to.not.exist()
     })
 
     it('should render children and have a node with a parent when open', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onKeyDown = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Portal open id="portal">
@@ -131,7 +122,6 @@ describe(`<Portal />`, async () => {
 
   describe('when a mountNode prop is provided', () => {
     it('should render nothing when closed', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div>
           <Portal
@@ -154,7 +144,6 @@ describe(`<Portal />`, async () => {
       mountNode.setAttribute('id', 'portal-mount-node')
       document.body.appendChild(mountNode)
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Portal open mountNode={mountNode} id="portal">

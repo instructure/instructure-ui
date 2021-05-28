@@ -33,7 +33,6 @@ describe('<TruncateText />', async () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
 
   it('should truncate text', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
@@ -49,7 +48,7 @@ describe('<TruncateText />', async () => {
 
   it('should recalculate when parent width changes', async () => {
     let container
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <div
         style={{ width: '200px' }}
@@ -85,7 +84,6 @@ describe('<TruncateText />', async () => {
   })
 
   it('should preserve node structure', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div style={{ width: '200px' }}>
         <TruncateText>
@@ -108,7 +106,6 @@ describe('<TruncateText />', async () => {
   })
 
   it('should recalculate if props change', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>
@@ -132,7 +129,6 @@ describe('<TruncateText />', async () => {
   })
 
   it('should re-render with new children if children change', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <TruncateText>
         <span>{defaultText}</span>
@@ -152,11 +148,9 @@ describe('<TruncateText />', async () => {
   })
 
   it('should call onUpdate when text changes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onUpdate = stub()
 
     let container
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div
         style={{ width: '700px' }}
@@ -188,7 +182,6 @@ describe('<TruncateText />', async () => {
     const consoleError = stub(console, 'error')
     const warning =
       'Some children are too deep in the node tree and will not render.'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px' }}>
         <TruncateText>
@@ -207,7 +200,6 @@ describe('<TruncateText />', async () => {
 
   it('should render text at any size with no lineHeight set', async () => {
     let stage
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <div style={{ width: '200px' }}>
         <span
@@ -245,7 +237,6 @@ describe('<TruncateText />', async () => {
     let error = false
 
     try {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<TruncateText>{''}</TruncateText>)
 
       await subject.setProps({ children: 'hello world' })
@@ -258,7 +249,6 @@ describe('<TruncateText />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <div style={{ width: '200px' }}>
         <TruncateText>{defaultText}</TruncateText>

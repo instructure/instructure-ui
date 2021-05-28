@@ -62,7 +62,6 @@ describe('<Selectable />', async () => {
   )
 
   it('should focus trigger when root is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Selectable>
         {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -95,11 +94,10 @@ describe('<Selectable />', async () => {
   })
 
   it('should not blur trigger when root is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onBlur = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Selectable>
         {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -138,13 +136,11 @@ describe('<Selectable />', async () => {
   })
 
   it('should not hide options when list is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onMouseDown = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onRequestHideOptions = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Selectable
         isShowingOptions={true}
@@ -184,13 +180,11 @@ describe('<Selectable />', async () => {
   })
 
   it('should not hide options when an option is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onMouseDown = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onRequestHideOptions = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Selectable
         isShowingOptions={true}
@@ -237,13 +231,11 @@ describe('<Selectable />', async () => {
   })
 
   it('should not prevent events on other children', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onMouseDown = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onClick = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
     const onKeyDown = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Selectable>
         {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -287,9 +279,8 @@ describe('<Selectable />', async () => {
   describe('with callbacks', async () => {
     describe('should fire onRequestShowOptions', async () => {
       it('when root is clicked', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <Selectable
             isShowingOptions={false}
@@ -311,9 +302,8 @@ describe('<Selectable />', async () => {
       })
 
       it('when input is clicked', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <Selectable
             isShowingOptions={false}
@@ -335,9 +325,8 @@ describe('<Selectable />', async () => {
       })
 
       it('when up/down arrows are pressed', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <Selectable
             isShowingOptions={false}
@@ -357,9 +346,8 @@ describe('<Selectable />', async () => {
       })
 
       it('when space is pressed', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <Selectable onRequestShowOptions={onRequestShowOptions}>
             {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -378,9 +366,8 @@ describe('<Selectable />', async () => {
 
     describe('should fire onRequestHideOptions', async () => {
       it('when root is clicked', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <Selectable
             isShowingOptions={true}
@@ -402,9 +389,8 @@ describe('<Selectable />', async () => {
       })
 
       it('when input is clicked', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <Selectable
             isShowingOptions={true}
@@ -426,10 +412,9 @@ describe('<Selectable />', async () => {
       })
 
       it('when escape is pressed', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHideOptions = stub()
         let defaultPrevented = false
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           /* eslint-disable-next-line jsx-a11y/no-static-element-interactions */
           <div
@@ -456,9 +441,8 @@ describe('<Selectable />', async () => {
 
     describe('should fire onRequestHighlightOption', async () => {
       it('when options are hovered', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <Selectable onRequestHighlightOption={onRequestHighlightOption}>
             {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -481,11 +465,10 @@ describe('<Selectable />', async () => {
       })
 
       it('when up/down arrows are pressed', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestShowOptions = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
         const onRequestHighlightOption = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <Selectable
             isShowingOptions={false}
@@ -521,13 +504,12 @@ describe('<Selectable />', async () => {
       })
 
       it('when home/end is pressed', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestHighlightOption = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
         const onRequestHighlightFirstOption = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
         const onRequestHighlightLastOption = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <Selectable
             isShowingOptions={true}
@@ -553,9 +535,8 @@ describe('<Selectable />', async () => {
 
     describe('should fire onRequestSelectOption', async () => {
       it('when enter is pressed', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestSelectOption = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <Selectable
             isShowingOptions={true}
@@ -575,9 +556,8 @@ describe('<Selectable />', async () => {
       })
 
       it('when options are clicked', async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onRequestSelectOption = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         await mount(
           <Selectable
             isShowingOptions={true}
@@ -599,9 +579,8 @@ describe('<Selectable />', async () => {
 
   describe('getRootProps()', async () => {
     it('should provide prop getter for root element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -615,7 +594,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -645,11 +623,10 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow supplemental onClick behavior', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestShowOptions = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -672,11 +649,10 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow supplemental onKeyDown behavior', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onKeyDown = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestHighlightOption = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable
           isShowingOptions={true}
@@ -707,9 +683,8 @@ describe('<Selectable />', async () => {
 
   describe('getLabelProps()', async () => {
     it('should provide prop getter for label element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -723,7 +698,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set htmlFor prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -747,7 +721,7 @@ describe('<Selectable />', async () => {
 
     it('should set htmlFor prop with custom defined id', async () => {
       const id = 'CustomSelect'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable id={id}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -771,7 +745,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -805,9 +778,8 @@ describe('<Selectable />', async () => {
 
   describe('getTriggerProps()', async () => {
     it('should provide prop getter for trigger element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -821,7 +793,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -844,7 +815,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set appropriate props based on isShowingOptions', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable isShowingOptions={false}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -872,7 +842,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set appropriate props based on highlightedOptionId', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable isShowingOptions={true}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -908,7 +877,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -933,7 +901,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow props to be overridden', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -956,9 +923,8 @@ describe('<Selectable />', async () => {
     })
 
     it('should provide a ref to the text input', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const inputRef = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -979,7 +945,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1006,7 +971,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow props to be overridden', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1029,11 +993,10 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow supplemental onClick behavior', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestShowOptions = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable onRequestShowOptions={onRequestShowOptions}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1056,11 +1019,10 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow supplemental onKeyDown behavior', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onKeyDown = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestHighlightOption = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable
           isShowingOptions={true}
@@ -1092,9 +1054,8 @@ describe('<Selectable />', async () => {
 
   describe('getInputProps()', async () => {
     it('should provide prop getter for trigger element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1108,7 +1069,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1127,7 +1087,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set appropriate props when readOnly', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1149,7 +1108,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow props to be overridden', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1172,7 +1130,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1201,9 +1158,8 @@ describe('<Selectable />', async () => {
 
   describe('getListProps()', async () => {
     it('should provide prop getter for list element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1217,7 +1173,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable isShowingOptions={true}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1236,7 +1191,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable isShowingOptions={true}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1264,9 +1218,8 @@ describe('<Selectable />', async () => {
 
   describe('getOptionProps()', async () => {
     it('should provide prop getter for option element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1280,7 +1233,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set appropriate prop defaults', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1305,7 +1257,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set aria-selected based on selectedOptionId', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <Selectable selectedOptionId={defaultOptions[1]}>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1339,7 +1290,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow custom props to pass through', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1373,11 +1323,10 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow supplemental onMouseOver behavior', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onMouseOver = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestHighlightOption = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable
           isShowingOptions={true}
@@ -1411,11 +1360,10 @@ describe('<Selectable />', async () => {
     })
 
     it('should allow supplemental onClick behavior', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
       const onClick = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
+
       const onRequestSelectOption = stub()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable
           isShowingOptions={true}
@@ -1451,9 +1399,8 @@ describe('<Selectable />', async () => {
 
   describe('getDisabledOptionProps()', async () => {
     it('should provide prop getter for disabled option element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1467,7 +1414,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set aria-disabled prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1500,9 +1446,8 @@ describe('<Selectable />', async () => {
 
   describe('getDisabledOptionProps()', async () => {
     it('should provide prop getter for disabled option element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1516,7 +1461,6 @@ describe('<Selectable />', async () => {
     })
 
     it('should set aria-disabled prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}
@@ -1549,9 +1493,8 @@ describe('<Selectable />', async () => {
 
   describe('getDescriptionProps()', async () => {
     it('should provide prop getter for description element', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
       const renderSpy = spy()
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <Selectable>
           {/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'selectable' implicitly has an 'any' typ... Remove this comment to see the full error message */}

@@ -30,7 +30,6 @@ import { ProgressBarLocator } from '../ProgressBarLocator'
 
 describe('<ProgressBar />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ProgressBar
         screenReaderLabel="Chapters read"
@@ -42,7 +41,6 @@ describe('<ProgressBar />', async () => {
   })
 
   it('should render a progress element with correct aria attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ProgressBar
         screenReaderLabel="Chapters read"
@@ -61,7 +59,6 @@ describe('<ProgressBar />', async () => {
   })
 
   it('should format aria-valuetext', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ProgressBar
         screenReaderLabel="Chapters read"
@@ -81,7 +78,6 @@ describe('<ProgressBar />', async () => {
   })
 
   it('should format the displayed text', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ProgressBar
         screenReaderLabel="Chapters read"
@@ -94,7 +90,6 @@ describe('<ProgressBar />', async () => {
   })
 
   it('should meet a11y standards', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <ProgressBar
         screenReaderLabel="Chapters read"

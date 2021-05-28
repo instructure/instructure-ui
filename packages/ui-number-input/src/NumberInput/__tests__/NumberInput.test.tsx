@@ -37,7 +37,6 @@ import NumberInputExamples from '../__examples__/NumberInput.examples'
 
 describe('<NumberInput />', () => {
   it('sets value on the input', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
@@ -53,7 +52,6 @@ describe('<NumberInput />', () => {
   })
 
   it('should accept a number for the value', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
@@ -69,7 +67,6 @@ describe('<NumberInput />', () => {
   })
 
   it('displays the label', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -78,9 +75,7 @@ describe('<NumberInput />', () => {
   })
 
   it('passes the input element to inputRef', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const inputRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" inputRef={inputRef} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -91,12 +86,10 @@ describe('<NumberInput />', () => {
   })
 
   it('passes change events to onChange handler', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onChange = stub().callsFake((event) => {
       event.persist() // so we can make assertions about the event
     })
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onChange={onChange} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -111,9 +104,7 @@ describe('<NumberInput />', () => {
   })
 
   it('passes keyboard events to the onKeyDown handler', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onKeyDown = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onKeyDown={onKeyDown} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -125,9 +116,7 @@ describe('<NumberInput />', () => {
   })
 
   it('passes blur events to onBlur handler', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onBlur = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onBlur={onBlur} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -139,9 +128,7 @@ describe('<NumberInput />', () => {
   })
 
   it('passes focus events to onFocus handler', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onFocus = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onFocus={onFocus} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -153,7 +140,6 @@ describe('<NumberInput />', () => {
   })
 
   it('shows arrow buttons by default', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -163,7 +149,6 @@ describe('<NumberInput />', () => {
   })
 
   it('hides arrow buttons when showArrows is false', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" showArrows={false} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -173,9 +158,7 @@ describe('<NumberInput />', () => {
   })
 
   it('calls onIncrement when up arrow is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onIncrement={onIncrement} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -187,9 +170,7 @@ describe('<NumberInput />', () => {
   })
 
   it('does not call onIncrement when `interaction` is set to readonly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
@@ -207,9 +188,7 @@ describe('<NumberInput />', () => {
   })
 
   it('does not call onIncrement when `readOnly` is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <NumberInput renderLabel="Label" readOnly onIncrement={onIncrement} />
@@ -224,9 +203,7 @@ describe('<NumberInput />', () => {
   })
 
   it('calls onDecrement when down arrow is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onDecrement={onDecrement} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -238,9 +215,7 @@ describe('<NumberInput />', () => {
   })
 
   it('does not call onDecrement when `interaction` is set to readonly', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <NumberInput
         renderLabel="Label"
@@ -258,9 +233,7 @@ describe('<NumberInput />', () => {
   })
 
   it('does not call onDecrement when `readOnly` is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <NumberInput renderLabel="Label" readOnly onDecrement={onDecrement} />
@@ -275,7 +248,6 @@ describe('<NumberInput />', () => {
   })
 
   it('focuses the input when up arrow is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -291,7 +263,6 @@ describe('<NumberInput />', () => {
   })
 
   it('focuses the input when down arrow is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -307,9 +278,7 @@ describe('<NumberInput />', () => {
   })
 
   it('calls onIncrement when up arrow key is pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onIncrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onIncrement={onIncrement} />)
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
@@ -320,9 +289,7 @@ describe('<NumberInput />', () => {
   })
 
   it('calls onDecrement when down arrow key is pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDecrement = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" onDecrement={onDecrement} />)
 
     const numberInput = await NumberInputLocator.find()
@@ -334,7 +301,6 @@ describe('<NumberInput />', () => {
   })
 
   it('does not move caret when up arrow key is pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -346,7 +312,6 @@ describe('<NumberInput />', () => {
   })
 
   it('does not move caret when down arrow key is pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -358,7 +323,6 @@ describe('<NumberInput />', () => {
   })
 
   it('handles other keyDown events normally', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput renderLabel="Label" />)
 
     const numberInput = await NumberInputLocator.find()
@@ -370,7 +334,6 @@ describe('<NumberInput />', () => {
   })
 
   it('puts inputMode prop to input', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(<NumberInput inputMode="decimal" />)
 
     const numberInput = await NumberInputLocator.find()

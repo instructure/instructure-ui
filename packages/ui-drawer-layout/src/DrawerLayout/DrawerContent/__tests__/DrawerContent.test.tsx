@@ -30,7 +30,6 @@ import { DrawerContentLocator } from '../DrawerContentLocator'
 
 describe('<DrawerContent />', async () => {
   it('should render', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
     )
@@ -40,7 +39,6 @@ describe('<DrawerContent />', async () => {
   })
 
   it('should not have a transition class if `shouldTransition` is set to false', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <DrawerContent label="DrawerContentTest" shouldTransition={false}>
@@ -62,9 +60,7 @@ describe('<DrawerContent />', async () => {
   })
 
   it('should call the content ref', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const contentRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <DrawerContent label="DrawerContentTest" contentRef={contentRef}>
         Hello World

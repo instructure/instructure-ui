@@ -35,7 +35,6 @@ import { Dialog } from '../index'
 
 describe('<Dialog />', async () => {
   it('should render nothing when closed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Dialog>
         <button>Hello World</button>
@@ -46,7 +45,6 @@ describe('<Dialog />', async () => {
   })
 
   it('should render children when open', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Dialog open>
         <button>Hello World</button>
@@ -58,7 +56,6 @@ describe('<Dialog />', async () => {
   })
 
   it('should apply the a11y attributes', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(
       <Dialog open label="Dialog Example">
         <button>Hello World</button>
@@ -72,9 +69,8 @@ describe('<Dialog />', async () => {
   })
 
   it('should call onDismiss prop when Esc key pressed', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Dialog open onDismiss={onDismiss}>
         <button>Hello World</button>
@@ -95,9 +91,8 @@ describe('<Dialog />', async () => {
   })
 
   it('should call onDismiss prop when the document is clicked', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
     const onDismiss = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
     const subject = await mount(
       <Dialog open shouldCloseOnDocumentClick onDismiss={onDismiss}>
         <button>Hello World</button>
@@ -174,7 +169,7 @@ describe('<Dialog />', async () => {
 
     it('should provide focus method', async () => {
       let ref
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <div>
           <DialogExample
@@ -203,7 +198,7 @@ describe('<Dialog />', async () => {
     it('should warn when trying to focus or blur a closed dialog', async () => {
       const consoleError = stub(console, 'error')
       let ref
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
       await mount(
         <div>
           <DialogExample
@@ -240,7 +235,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should focus the first tabbable element by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<DialogExample open />)
       const input = await find('#input-one')
       await wait(() => {
@@ -249,7 +243,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should focus the first tabbable element when open prop becomes true', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<DialogExample open={false} />)
 
       await subject.setProps({ open: true })
@@ -262,7 +255,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should take a prop for finding default focus', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DialogExample
           open
@@ -280,7 +272,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should still focus the defaultFocusElement when it is focusable but not tabbable', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <DialogExample
           open
@@ -300,7 +291,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should focus the contentElement by default if focusable and no defaultFocusElement is provided', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(
         <div>
           <DialogExample
@@ -323,7 +313,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should focus the document body if there is no defaultFocusElement, tabbable elements, or focusable contentElement', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(
         <DialogExample open={false}>hello world</DialogExample>
       )
@@ -341,7 +330,6 @@ describe('<Dialog />', async () => {
     })
 
     it('should return focus', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<DialogExample open={false} />)
 
       const trigger = await find('#input-trigger')
@@ -365,9 +353,8 @@ describe('<Dialog />', async () => {
 
     describe('when focus leaves the first and last tabbable', async () => {
       it(`should NOT call onBlur when shouldContainFocus=true and tab pressing last tabbable`, async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <DialogExample
             open
@@ -395,9 +382,8 @@ describe('<Dialog />', async () => {
       })
 
       it(`should NOT call onBlur when shouldContainFocus=true and tab pressing first tabbable`, async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <DialogExample
             open
@@ -427,9 +413,8 @@ describe('<Dialog />', async () => {
       })
 
       it(`should call onBlur when shouldContainFocus=false and tab pressing last tabbable`, async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <DialogExample
             open
@@ -457,9 +442,8 @@ describe('<Dialog />', async () => {
       })
 
       it(`should call onBlur when shouldContainFocus=false and tab pressing first tabbable`, async () => {
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
         const onBlur = stub()
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+
         const subject = await mount(
           <DialogExample
             open
@@ -531,10 +515,8 @@ describe('<Dialog />', async () => {
         }
 
         it(`should contain focus when last tabbable element triggers dialog w/out focusable content`, async () => {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
 
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           const subject = await mount(
             <NestedDialogExample
               onBlur={onBlur}
@@ -563,10 +545,8 @@ describe('<Dialog />', async () => {
         })
 
         it(`should contain focus when first tabbable element triggers dialog w/out focusable content`, async () => {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
 
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           const subject = await mount(
             <NestedDialogExample
               onBlur={onBlur}
@@ -597,10 +577,8 @@ describe('<Dialog />', async () => {
         })
 
         it(`should call onBlur when shouldContainFocus=false and last tabbable element triggers dialog w/out focusable content`, async () => {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
 
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           const subject = await mount(
             <NestedDialogExample
               onBlur={onBlur}
@@ -627,10 +605,8 @@ describe('<Dialog />', async () => {
         })
 
         it(`should call onBlur when shouldContainFocus=false and first tabbable element triggers dialog w/out focusable content`, async () => {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 0.
           const onBlur = stub()
 
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
           const subject = await mount(
             <NestedDialogExample
               onBlur={onBlur}

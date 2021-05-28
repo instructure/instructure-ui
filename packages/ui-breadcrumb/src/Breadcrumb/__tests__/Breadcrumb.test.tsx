@@ -32,7 +32,6 @@ import BreadcrumbExamples from '../__examples__/Breadcrumb.examples'
 
 describe('<Breadcrumb />', async () => {
   it('should render the label as an aria-label attribute', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Breadcrumb label="Settings">
         <Breadcrumb.Link>Account</Breadcrumb.Link>
@@ -50,7 +49,6 @@ describe('<Breadcrumb />', async () => {
   })
 
   it('should render an icon as a separator', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     await mount(
       <Breadcrumb label="Settings">
         <Breadcrumb.Link href="#">Account</Breadcrumb.Link>
