@@ -45,7 +45,7 @@ function scopeTab(element, event, onLeavingFinalTabbable) {
   // (a case that happens with Menu for KO a11y)
   if (containsActiveElement(element)) {
     const activeElement = getActiveElement()
-    if (tabbable.indexOf(activeElement) === -1) {
+    if (activeElement && tabbable.indexOf(activeElement) === -1) {
       tabbable.push(activeElement)
     }
   }
