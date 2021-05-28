@@ -54,7 +54,6 @@ function getFontSize(el?: any, ignoreCache?: boolean) {
   }
 
   const fontSize = parseInt(
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'getPropertyValue' does not exist on type... Remove this comment to see the full error message
     getComputedStyle(container).getPropertyValue('font-size')
   )
 

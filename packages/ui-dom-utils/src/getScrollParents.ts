@@ -50,22 +50,26 @@ function getScrollParents(el) {
     return parents
   }
 
-  const node = findDOMNode(el) as any
+  const node = findDOMNode(el)
 
   if (node) {
     // In firefox if the element is inside an iframe with display: none; window.getComputedStyle() will return null;
     // https://bugzilla.mozilla.org/show_bug.cgi?id=548397
     const computedStyle = getComputedStyle(node) || {}
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'position' does not exist on type '{}'.
     const position = computedStyle.position
 
     if (position === 'fixed') {
-      return [node.ownerDocument]
+      return [(node as Node).ownerDocument]
     }
 
     let parent = node
     // eslint-disable-next-line no-cond-assign
-    while (parent && parent.nodeType === 1 && (parent = parent.parentNode)) {
+    while (
+      parent &&
+      (parent as Node).nodeType === 1 &&
+      // @ts-expect-error ts-migrate(2339) FIXME:
+      (parent = parent.parentNode)
+    ) {
       let style
       try {
         style = getComputedStyle(parent)
@@ -76,13 +80,11 @@ function getScrollParents(el) {
         return parents
       }
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'overflow' does not exist on type '{}'.
-      const { overflow, overflowX, overflowY } = style
+      const { overflow, overflowX, overflowY } = style as CSSStyleDeclaration
 
       if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
         if (
           position !== 'absolute' ||
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'position' does not exist on type '{}'.
           ['relative', 'absolute', 'fixed'].indexOf(style.position) >= 0
         ) {
           parents.push(parent)
@@ -90,11 +92,14 @@ function getScrollParents(el) {
       }
     }
 
-    parents.push(node.ownerDocument.body)
+    const ownerDocument = (node as Node).ownerDocument
+    if (ownerDocument) {
+      parents.push(ownerDocument.body)
 
-    // If the node is within a frame, account for the parent window scroll
-    if (node.ownerDocument !== document) {
-      parents.push(node.ownerDocument.defaultView)
+      // If the node is within a frame, account for the parent window scroll
+      if (ownerDocument !== document) {
+        parents.push(ownerDocument.defaultView)
+      }
     }
   }
 

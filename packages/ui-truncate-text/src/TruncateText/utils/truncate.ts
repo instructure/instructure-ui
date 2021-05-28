@@ -131,12 +131,9 @@ class Truncator {
     const style = getComputedStyle(this._parent)
     // if no explicit lineHeight is inherited, use lineHeight multiplier for calculations
     const actualLineHeight =
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Obje... Remove this comment to see the full error message
       style.lineHeight === 'normal'
-        ? // @ts-expect-error ts-migrate(2339) FIXME: Property 'fontSize' does not exist on type 'Object... Remove this comment to see the full error message
-          lineHeight * parseFloat(style.fontSize)
-        : // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Obje... Remove this comment to see the full error message
-          parseFloat(style.lineHeight)
+        ? lineHeight * parseFloat(style.fontSize)
+        : parseFloat(style.lineHeight)
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message
     const node = this._stage.firstChild.children
       ? // @ts-expect-error ts-migrate(2339) FIXME: Property '_stage' does not exist on type 'Truncato... Remove this comment to see the full error message

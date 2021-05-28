@@ -61,35 +61,23 @@ function measure(string, domNode) {
   let width = 0
   // grab individual font styles
   // some browsers don't report a value for style['font']
-  const font = [
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    style['font-weight'],
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    style['font-style'],
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    style['font-size'],
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    style['font-family']
+  context.font = [
+    style.fontWeight,
+    style.fontStyle,
+    style.fontSize,
+    style.fontFamily
   ].join(' ')
 
-  context.font = font
-
-  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  if (style['text-transform'] === 'uppercase') {
+  if (style.textTransform === 'uppercase') {
     text = string.toUpperCase()
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  } else if (style['text-transform'] === 'lowercase') {
+  } else if (style.textTransform === 'lowercase') {
     text = string.toLowerCase()
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  } else if (style['text-transform'] === 'capitalize') {
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'str' implicitly has an 'any' type.
-    text = string.replace(/\b\w/g, (str) => str.toUpperCase())
+  } else if (style.textTransform === 'capitalize') {
+    text = string.replace(/\b\w/g, (str: string) => str.toUpperCase())
   }
 
-  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  if (style['letter-spacing'] !== 'normal') {
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    letterOffset = text.length * parseInt(style['letter-spacing'])
+  if (style.letterSpacing !== 'normal') {
+    letterOffset = text.length * parseInt(style.letterSpacing as string)
   }
 
   width = context.measureText(text).width + letterOffset
