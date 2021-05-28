@@ -30,7 +30,6 @@ import { InlineSVG } from '@instructure/ui-svg-images'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
 import { themeable } from '@instructure/ui-themeable'
-import { SimpleSelect } from '@instructure/ui-simple-select'
 import { CondensedButton } from '@instructure/ui-buttons'
 import { IconMiniArrowDownLine } from '@instructure/ui-icons'
 import { Menu } from '@instructure/ui-menu'
@@ -60,10 +59,11 @@ class Header extends Component {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
     const isSelectedLatestVersion = selectedVersion === latestVersion
-    const splittedUrl = window.location.pathname.split('/').filter(Boolean)
-    const [versionInPath] = splittedUrl
-    const isOnLatestVersion = splittedUrl.length === 0
+    const pathNameParts = window.location.pathname.split('/').filter(Boolean)
+    const [versionInPath] = pathNameParts
+    const isOnLatestVersion = pathNameParts.length === 0
 
+    // Example scenarios:
     // 1: instructure.design, latest: v8, selected: v8 -> navigate to instructure.design/#index
     // 2: instructure.design/v6/, latest: v8, selected: v6 -> navigate to instructure.design/v6/#index
     if (
@@ -88,6 +88,7 @@ class Header extends Component {
 
     const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
 
+    // this will be hardcoded to v8 in local development
     const currentVersion = versionInPath || latestVersion
 
     return (
@@ -129,11 +130,6 @@ class Header extends Component {
     )
   }
   render() {
-    const { versionsData } = this.props
-    const { latestVersion, previousVersions } = versionsData
-    const allVersions = [latestVersion, ...previousVersions]
-
-    const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
     const corpLogo = (
       <InlineSVG viewBox="0 0 500 500" width="6rem" height="6rem">
         <polygon
