@@ -39,7 +39,6 @@ import { getActiveElement } from './getActiveElement'
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
 function containsActiveElement(el) {
   const node = el && findDOMNode(el)
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
   const active = getActiveElement()
   return node && (active === node || contains(node, active))
 }

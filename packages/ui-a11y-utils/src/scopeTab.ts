@@ -44,7 +44,6 @@ function scopeTab(element, event, onLeavingFinalTabbable) {
   // Account for a changing tabindex of the active element
   // (a case that happens with Menu for KO a11y)
   if (containsActiveElement(element)) {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     const activeElement = getActiveElement()
     if (tabbable.indexOf(activeElement) === -1) {
       tabbable.push(activeElement)

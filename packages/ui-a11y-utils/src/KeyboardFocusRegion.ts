@@ -62,7 +62,7 @@ class KeyboardFocusRegion {
   }
 
   public _contextElement: null | undefined | Node | Window = null
-  _focusLaterElement = null
+  _focusLaterElement: Element | null = null
   _needToFocus = false
   _listeners = []
   _raf = []
@@ -157,14 +157,14 @@ class KeyboardFocusRegion {
   }
 
   focusDefaultElement() {
-    const { defaultFocusElement, shouldContainFocus } = this
+    const { defaultFocusElement, shouldContainFocus, activeElement } = this
 
     if (defaultFocusElement) {
       defaultFocusElement.focus()
     } else {
       if (shouldContainFocus) {
         // Blur the active element to place focus on the document body
-        this.activeElement.blur()
+        activeElement && (activeElement as HTMLElement).blur()
 
         // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
         error(
