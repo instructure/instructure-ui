@@ -25,6 +25,7 @@
 import { findDOMNode } from './findDOMNode'
 import { ownerWindow } from './ownerWindow'
 import { canUseDOM } from './canUseDOM'
+import React from 'react'
 
 /**
  * ---
@@ -35,18 +36,19 @@ import { canUseDOM } from './canUseDOM'
  * specified element
  * @module getComputedStyle
  *
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @returns {Object} object containing css properties and values for the element
+ * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) } el - component or DOM node
+ * @returns { Object } object containing css properties and values for the element
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function getComputedStyle(el) {
-  let style = {}
+function getComputedStyle(
+  el: Node | Window | React.ReactElement | ((...args: any[]) => any)
+) {
+  let style: CSSStyleDeclaration | Record<string, never> = {}
 
   if (canUseDOM) {
     const node = el && findDOMNode(el)
     if (node) {
       const window = ownerWindow(el)
-      style = window !== null ? window.getComputedStyle(node) : {}
+      style = window !== null ? window.getComputedStyle(node as Element) : {}
     }
   }
 

@@ -71,11 +71,9 @@ function findFocusable(el, filter, shouldSearchRootNode) {
 function hidden(element) {
   const cs = getComputedStyle(element)
   return (
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'display' does not exist on type '{}'.
     (cs.display !== 'inline' &&
       element.offsetWidth <= 0 &&
       element.offsetHeight <= 0) ||
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'display' does not exist on type '{}'.
     cs.display === 'none'
   )
 }
@@ -86,7 +84,6 @@ function positioned(element) {
   if (POS.includes(element.style.position.toLowerCase())) return true
   if (
     POS.includes(
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'getPropertyValue' does not exist on type... Remove this comment to see the full error message
       getComputedStyle(element).getPropertyValue('position').toLowerCase()
     )
   )

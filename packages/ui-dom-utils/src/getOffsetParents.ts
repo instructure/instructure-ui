@@ -64,15 +64,10 @@ function getOffsetParents(el) {
     ) {
       const style = getComputedStyle(parent)
       const transform =
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'getPropertyValue' does not exist on type... Remove this comment to see the full error message
         style.getPropertyValue('-webkit-transform') ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'getPropertyValue' does not exist on type... Remove this comment to see the full error message
         style.getPropertyValue('-moz-transform') ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'getPropertyValue' does not exist on type... Remove this comment to see the full error message
         style.getPropertyValue('-ms-transform') ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'getPropertyValue' does not exist on type... Remove this comment to see the full error message
         style.getPropertyValue('-o-transform') ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'getPropertyValue' does not exist on type... Remove this comment to see the full error message
         style.getPropertyValue('transform') ||
         'none'
       // initial value of transform can be 'none' or a matrix equivalent
@@ -81,7 +76,6 @@ function getOffsetParents(el) {
           ? true
           : false
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'position' does not exist on type '{}'.
       if (style.position !== 'static' || !transformDefault) {
         parents.push(parent)
       }

@@ -54,28 +54,21 @@ function isVisible(el, recursive = true) {
 
   const style = getComputedStyle(node)
   // physically and visually hidden
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'display' does not exist on type '{}'.
   if (style.display === 'none') {
     return false
   }
   // visually hidden
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'visibility' does not exist on type '{}'.
   if (style.visibility === 'hidden' || style.opacity === '0') {
     return false
   }
   // hidden by clipping
   if (
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'overflow' does not exist on type '{}'.
     style.overflow === 'hidden' &&
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'position' does not exist on type '{}'.
     style.position === 'absolute' &&
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'clip' does not exist on type '{}'.
     style.clip !== 'auto'
   ) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'clip' does not exist on type '{}'.
     const rect = style.clip.substring(5).slice(0, -1).split(', ')
     let zeros = true
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'a' implicitly has an 'any' type.
     rect.forEach((a) => {
       if (a !== '0px') {
         zeros = false
