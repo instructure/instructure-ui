@@ -35,10 +35,20 @@
  **/
 
 import { getComputedStyle, findDOMNode, elementMatches } from './'
+import React from 'react'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function findFocusable(el, filter, shouldSearchRootNode) {
-  const element = findDOMNode(el)
+function findFocusable(
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null,
+  filter?: (el: Element) => boolean,
+  shouldSearchRootNode?: boolean
+) {
+  const element = el && findDOMNode(el)
 
   if (
     !element ||
@@ -58,7 +68,7 @@ function findFocusable(el, filter, shouldSearchRootNode) {
     matches = [...matches, element as Element]
   }
 
-  return matches.filter((el) => {
+  return matches.filter((el: Element) => {
     if (typeof filter === 'function') {
       return filter(el) && focusable(el)
     } else {
@@ -67,21 +77,20 @@ function findFocusable(el, filter, shouldSearchRootNode) {
   })
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-function hidden(element) {
+function hidden(element: Element | Node) {
   const cs = getComputedStyle(element)
   return (
     (cs.display !== 'inline' &&
-      element.offsetWidth <= 0 &&
-      element.offsetHeight <= 0) ||
+      (element as HTMLElement).offsetWidth <= 0 &&
+      (element as HTMLElement).offsetHeight <= 0) ||
     cs.display === 'none'
   )
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-function positioned(element) {
+function positioned(element: Element | Node) {
   const POS = ['fixed', 'absolute']
-  if (POS.includes(element.style.position.toLowerCase())) return true
+  if (POS.includes((element as HTMLElement).style.position.toLowerCase()))
+    return true
   if (
     POS.includes(
       getComputedStyle(element).getPropertyValue('position').toLowerCase()
@@ -91,20 +100,19 @@ function positioned(element) {
   return false
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-function visible(element) {
-  /* eslint no-param-reassign:0 */
-  while (element) {
-    if (element === document.body) break
-    if (hidden(element)) return false
-    if (positioned(element)) break
-    element = element.parentNode
+function visible(element: Element) {
+  let el: Element | Node | null = element
+
+  while (el) {
+    if (el === document.body) break
+    if (hidden(el)) return false
+    if (positioned(el)) break
+    el = el.parentNode
   }
   return true
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-function focusable(element) {
+function focusable(element: Element & { disabled?: boolean }) {
   return !element.disabled && visible(element)
 }
 
@@ -120,10 +128,10 @@ export {
    * Anchor tags are also focusable if they include an href or
    * tabindex attribute (including tabindeces less than zero).
    * @module findFocusable
-   * @param {ReactComponent|DomNode} el - component or DOM node
-   * @param {Function} filter - a function to filter the matching nodes
-   * @param {Boolean} shouldSearchRootNode - should the root node be included in the search
-   * @returns {Array} array of all tabbable children
+   * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) | null } el - component or DOM node
+   * @param { (el: Element) => boolean } filter - a function to filter the matching nodes
+   * @param { boolean } shouldSearchRootNode - should the root node be included in the search
+   * @returns { Element[] } array of all tabbable children
    */
   findFocusable
 }

@@ -28,7 +28,6 @@ import { findFocusable } from './findFocusable'
 function findTabbable(el, shouldSearchRootNode) {
   return findFocusable(
     el,
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
     (element) => {
       return !isInvalidTabIndex(element.getAttribute('tabindex'))
     },
