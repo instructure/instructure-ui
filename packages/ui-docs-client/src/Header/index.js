@@ -62,10 +62,11 @@ class Header extends Component {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
     const isSelectedLatestVersion = selectedVersion === latestVersion
-    const splittedUrl = window.location.pathname.split('/').filter(Boolean)
-    const [ versionInPath ] = splittedUrl
-    const isOnLatestVersion = splittedUrl.length === 0
+    const pathNameParts = window.location.pathname.split('/').filter(Boolean)
+    const [ versionInPath ] = pathNameParts
+    const isOnLatestVersion = pathNameParts.length === 0
 
+    // Example scenarios:
     // 1: instructure.design, latest: v8, selected: v8 -> navigate to instructure.design/#index
     // 2: instructure.design/v6/, latest: v8, selected: v6 -> navigate to instructure.design/v6/#index
     if ((isOnLatestVersion && isSelectedLatestVersion) || selectedVersion === versionInPath) {
@@ -88,6 +89,7 @@ class Header extends Component {
 
     const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
 
+    // this will be hardcoded to v8 in local development
     const currentVersion = versionInPath || latestVersion
 
     return (
