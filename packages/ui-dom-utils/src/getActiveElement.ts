@@ -29,16 +29,16 @@
  *
  * Get the active element of the specified document
  * @module getActiveElement
- * @param {DomNode} doc - document by default or user specified doc
+ * @param { Document } doc - document by default or user specified doc
  * @throws Will throw an error in ie if no active element
- * @return {DomNode} the active element
+ * @return { Element | null } the active element
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'doc' implicitly has an 'any' type.
-function getActiveElement(doc) {
+function getActiveElement(doc?: Document) {
   try {
     return (doc || document).activeElement
   } catch (e) {
     /* ie throws if no active element */
+    return null
   }
 }
 
