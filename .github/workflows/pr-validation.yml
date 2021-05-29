@@ -33,6 +33,7 @@ jobs:
         run: echo "::set-output name=preview_url::$(npx netlify deploy --dir ./packages/__docs__/__build__ | grep "Website Draft URL" | awk '{print $4}')"
       - name: Add Comment to PR with the preview URL.
         # only run this step if the previous step has not failed
+        # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
         if: ${{ steps.deploy_to_netlify.outcome == 'success' }}
         uses: actions-cool/maintain-one-comment@v2.0.0
         with:
