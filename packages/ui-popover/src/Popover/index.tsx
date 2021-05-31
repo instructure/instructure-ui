@@ -40,6 +40,7 @@ import {
   findDOMNode,
   containsActiveElement,
   requestAnimationFrame,
+  RequestAnimationFrameType,
   handleMouseOverOut
 } from '@instructure/ui-dom-utils'
 import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
@@ -365,7 +366,6 @@ class Popover extends Component<Props> {
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'Popover'.
     this._id = this.props.id || uid('Popover')
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
     this._raf = []
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOver' does not exist on type... Remove this comment to see the full error message
@@ -385,6 +385,8 @@ class Popover extends Component<Props> {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseOutTimeout' does not exist on type ... Remove this comment to see the full error message
     this.mouseOutTimeout = undefined
   }
+
+  _raf: RequestAnimationFrameType[] = []
 
   get isTooltip() {
     return (
@@ -415,9 +417,7 @@ class Popover extends Component<Props> {
   }
 
   componentWillUnmount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
     this._raf.forEach((request) => request.cancel())
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
     this._raf = []
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_focusRegion' does not exist on type 'Po... Remove this comment to see the full error message
@@ -617,7 +617,6 @@ class Popover extends Component<Props> {
 
     if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
       event.preventDefault()
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
       this._raf.push(
         requestAnimationFrame(() => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_dialog' does not exist on type 'Popover... Remove this comment to see the full error message
@@ -641,7 +640,6 @@ class Popover extends Component<Props> {
   handleTriggerBlur = (event) => {
     // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     if (this.props.on.indexOf('focus') > -1) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_raf' does not exist on type 'Popover'.
       this._raf.push(
         requestAnimationFrame(() => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_view' does not exist on type 'Popover'.

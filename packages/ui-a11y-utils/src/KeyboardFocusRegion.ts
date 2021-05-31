@@ -31,7 +31,8 @@ import {
   addEventListener,
   ownerDocument,
   containsActiveElement,
-  requestAnimationFrame
+  requestAnimationFrame,
+  RequestAnimationFrameType
 } from '@instructure/ui-dom-utils'
 
 import { logError as error } from '@instructure/console'
@@ -65,7 +66,7 @@ class KeyboardFocusRegion {
   _focusLaterElement: Element | null = null
   _needToFocus = false
   _listeners = []
-  _raf = []
+  _raf: RequestAnimationFrameType[] = []
   _active = false
 
   get focused() {
@@ -187,7 +188,6 @@ class KeyboardFocusRegion {
     }
 
     this._raf.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ cancel: () => void; }' is not ... Remove this comment to see the full error message
       requestAnimationFrame(() => {
         this.focusDefaultElement()
       })
@@ -260,7 +260,6 @@ class KeyboardFocusRegion {
       // is that the document.body gets focus, and then we focus our element right
       // after, seems fine.
       this._raf.push(
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ cancel: () => void; }' is not ... Remove this comment to see the full error message
         requestAnimationFrame(() => {
           if (containsActiveElement(this._contextElement)) {
             return
@@ -343,7 +342,6 @@ class KeyboardFocusRegion {
       })
       this._listeners = []
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'cancel' does not exist on type 'never'.
       this._raf.forEach((request) => request.cancel())
       this._raf = []
 

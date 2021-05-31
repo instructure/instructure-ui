@@ -26,7 +26,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps, getElementType } from '@instructure/ui-react-utils'
-import { findDOMNode, requestAnimationFrame } from '@instructure/ui-dom-utils'
+import {
+  findDOMNode,
+  requestAnimationFrame,
+  RequestAnimationFrameType
+} from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
@@ -139,7 +143,7 @@ class Dialog extends Component<Props> {
     onDismiss: (event) => {}
   }
 
-  _raf = []
+  _raf: RequestAnimationFrameType[] = []
   _focusRegion = null
 
   componentDidMount() {
@@ -169,7 +173,6 @@ class Dialog extends Component<Props> {
       this.close()
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'cancel' does not exist on type 'never'.
     this._raf.forEach((request) => request.cancel())
     this._raf = []
   }
@@ -178,7 +181,6 @@ class Dialog extends Component<Props> {
     const { open, contentElement, ...options } = this.props
 
     this._raf.push(
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ cancel: () => void; }' is not ... Remove this comment to see the full error message
       requestAnimationFrame(() => {
         // It needs to wait a heartbeat until the content is fully loaded
         // inside the dialog. If it contains a focusable element, it will
