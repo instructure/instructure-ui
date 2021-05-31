@@ -26,6 +26,7 @@
 export { addEventListener } from './addEventListener'
 export { addInputModeListener } from './addInputModeListener'
 export { addPositionChangeListener } from './addPositionChangeListener'
+export type { PositionChangeListenerType } from './addPositionChangeListener'
 export { addResizeListener } from './addResizeListener'
 export { canUseDOM } from './canUseDOM'
 export { contains } from './contains'
