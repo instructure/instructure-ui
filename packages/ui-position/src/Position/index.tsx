@@ -34,6 +34,7 @@ import {
 } from '@instructure/ui-react-utils'
 import {
   addPositionChangeListener,
+  PositionChangeListenerType,
   findDOMNode
 } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
@@ -186,6 +187,7 @@ class Position extends Component<Props> {
   }
 
   _timeouts = []
+  _listener: PositionChangeListenerType | null = null
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -327,18 +329,14 @@ class Position extends Component<Props> {
   }
 
   startTracking() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'Posit... Remove this comment to see the full error message
     this._listener =
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'Posit... Remove this comment to see the full error message
       this._listener || addPositionChangeListener(this._target, this.position)
   }
 
   stopTracking() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'Posit... Remove this comment to see the full error message
     if (this._listener) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'Posit... Remove this comment to see the full error message
       this._listener.remove()
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_listener' does not exist on type 'Posit... Remove this comment to see the full error message
       this._listener = null
     }
   }

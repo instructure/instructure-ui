@@ -28,6 +28,9 @@ import {
   requestAnimationFrame,
   RequestAnimationFrameType
 } from './requestAnimationFrame'
+import React from 'react'
+
+type PositionChangeListenerType = { remove: () => void }
 
 /**
  * ---
@@ -36,12 +39,19 @@ import {
  * Adds a listener to an element and calls a specified handler
  * function whenever the position changes
  * @module
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @param {function} handler - function to run if the position has changed
- * @returns {function} remove - cancel the listener and no longer execute the handler function
+ * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) } el - component or DOM node
+ * @param {(...args: any[]) => any} handler - function to run if the position has changed
+ * @returns {PositionChangeListenerType} remove - cancel the listener and no longer execute the handler function
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function addPositionChangeListener(el, handler) {
+function addPositionChangeListener(
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any),
+  handler: (...args: any[]) => any
+): PositionChangeListenerType {
   const node = findDOMNode(el)
   const raf: RequestAnimationFrameType[] = []
 
@@ -49,7 +59,7 @@ function addPositionChangeListener(el, handler) {
   let cancelled = false
 
   function checkPosition() {
-    if (cancelled === false) {
+    if (!cancelled) {
       const newCoords = getBoundingClientRect(node) || {}
       const positionChanged =
         newCoords.top !== coords.top ||
@@ -81,3 +91,4 @@ function addPositionChangeListener(el, handler) {
 
 export default addPositionChangeListener
 export { addPositionChangeListener }
+export type { PositionChangeListenerType }
