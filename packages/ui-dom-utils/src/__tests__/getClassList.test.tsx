@@ -32,19 +32,13 @@ describe('getClassList', async () => {
     const classes = getClassList(subject.getDOMNode())
 
     expect(classes.toArray().length).to.equal(3)
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'contains' does not exist on type '{ toAr... Remove this comment to see the full error message
     expect(classes.contains('foo')).to.be.true()
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'contains' does not exist on type '{ toAr... Remove this comment to see the full error message
     expect(classes.contains('lorem')).to.be.false()
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'add' does not exist on type '{ toArray()... Remove this comment to see the full error message
     classes.add('lorem')
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'contains' does not exist on type '{ toAr... Remove this comment to see the full error message
     expect(classes.contains('lorem')).to.be.true()
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type '{ toArra... Remove this comment to see the full error message
     classes.remove('lorem')
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'contains' does not exist on type '{ toAr... Remove this comment to see the full error message
     expect(classes.contains('lorem')).to.be.false()
   })
 })

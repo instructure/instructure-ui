@@ -258,20 +258,16 @@ class BaseTransition extends React.Component {
     const baseTransitionClassName = this.props.transitionClassName
 
     if (fromState && transitionDuration && this.transitionEnabled(toState)) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'add' does not exist on type '{ toArray()... Remove this comment to see the full error message
       classList.add(baseTransitionClassName)
     } else {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type '{ toArra... Remove this comment to see the full error message
       classList.remove(baseTransitionClassName)
     }
 
     if (prevTransitionClassName) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type '{ toArra... Remove this comment to see the full error message
       classList.remove(prevTransitionClassName)
     }
 
     if (transitionClassName) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'add' does not exist on type '{ toArray()... Remove this comment to see the full error message
       classList.add(transitionClassName)
     }
 
@@ -305,11 +301,9 @@ class BaseTransition extends React.Component {
       const classList = getClassList(this)
 
       Object.keys(STATES).forEach((state) => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type '{ toArra... Remove this comment to see the full error message
         classList.remove(this.getTransitionClassName(state))
       })
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'remove' does not exist on type '{ toArra... Remove this comment to see the full error message
       classList.remove(transitionClassName)
     })
   }
