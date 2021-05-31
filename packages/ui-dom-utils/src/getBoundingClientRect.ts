@@ -26,6 +26,16 @@ import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
 import { contains } from './contains'
 import { ownerDocument } from './ownerDocument'
+import React from 'react'
+
+type RectType = {
+  top: number
+  bottom: number
+  left: number
+  right: number
+  height: number
+  width: number
+}
 
 /**
  * ---
@@ -35,18 +45,32 @@ import { ownerDocument } from './ownerDocument'
  * Gets the bounding rectangle of an element
  * @module getBoundingClientRect
  *
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) | null } el - component, DOM node, or function returning a DOM node
  * @return {object} rect - object with top, left coords and height and width
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function getBoundingClientRect(el) {
-  const rect = { top: 0, left: 0, height: 0, width: 0 }
+function getBoundingClientRect(
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null
+): RectType {
+  let rect: RectType = {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 0,
+    width: 0
+  }
 
   if (!canUseDOM) {
     return rect
   }
 
-  const node = findDOMNode(el) as any
+  const node = el && findDOMNode(el)
 
   if (!node) {
     return rect
@@ -70,30 +94,21 @@ function getBoundingClientRect(el) {
     return rect
   }
 
-  const boundingRect = node.getBoundingClientRect()
+  const boundingRect = (node as Element).getBoundingClientRect()
 
-  let k
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (k in boundingRect) {
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    rect[k] = boundingRect[k]
-  }
+  rect = { ...boundingRect }
 
   if (doc !== document && doc.defaultView) {
     const frameElement = doc.defaultView.frameElement
     if (frameElement) {
       const frameRect = getBoundingClientRect(frameElement)
       rect.top += frameRect.top
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bottom' does not exist on type '{ top: n... Remove this comment to see the full error message
       rect.bottom += frameRect.top
       rect.left += frameRect.left
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'right' does not exist on type '{ top: nu... Remove this comment to see the full error message
       rect.right += frameRect.left
     }
   }
 
-  /* eslint-disable no-mixed-operators */
   return {
     top:
       rect.top +
@@ -103,12 +118,17 @@ function getBoundingClientRect(el) {
       rect.left +
       (window.pageXOffset || docEl.scrollLeft) -
       (docEl.clientLeft || 0),
-    width: (rect.width == null ? node.offsetWidth : rect.width) || 0,
-    height: (rect.height == null ? node.offsetHeight : rect.height) || 0,
+    // TODO: find out when width and height can be null, might be an old IE hack
+    width:
+      (rect.width == null ? (node as HTMLElement).offsetWidth : rect.width) ||
+      0,
+    height:
+      (rect.height == null
+        ? (node as HTMLElement).offsetHeight
+        : rect.height) || 0,
     right: doc.body.clientWidth - rect.width - rect.left,
     bottom: doc.body.clientHeight - rect.height - rect.top
   }
-  /* eslint-enable no-mixed-operators */
 }
 
 export default getBoundingClientRect

@@ -198,7 +198,8 @@ class AppNav extends Component<Props> {
       // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       const itemWidths = Array.from(this._list.getElementsByTagName('li')).map(
         (item) => {
-          const { width } = getBoundingClientRect(item)
+          // Todo: if item's type isn't `unknown`, can remove `Element`
+          const { width } = getBoundingClientRect(item as Element)
           return width
         }
       )
