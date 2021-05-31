@@ -33,8 +33,8 @@ import React from 'react'
  *
  * Determine if an element contains another DOM node
  * @module containsWithDOM
- * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | null } context - component or DOM node
- * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | null } el - component or DOM node which we want to determine if contained within the context
+ * @param { Node | Window | React.ReactElement | function | null } context - component or DOM node
+ * @param { Node | Window | React.ReactElement | function | null } el - component or DOM node which we want to determine if contained within the context
  * @returns { boolean } if the element is contained within the context
  */
 function containsWithDOM(

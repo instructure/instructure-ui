@@ -34,7 +34,7 @@ import React from 'react'
  *
  * Determine if an element contains the active element
  * @module containsActiveElement
- * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @returns {boolean} if the element contains the active element
  */
 function containsActiveElement(

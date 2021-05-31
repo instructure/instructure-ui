@@ -39,8 +39,8 @@ type PositionChangeListenerType = { remove: () => void }
  * Adds a listener to an element and calls a specified handler
  * function whenever the position changes
  * @module
- * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) } el - component or DOM node
- * @param {(...args: any[]) => any} handler - function to run if the position has changed
+ * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
+ * @param {function} handler - function to run if the position has changed
  * @returns {PositionChangeListenerType} remove - cancel the listener and no longer execute the handler function
  */
 function addPositionChangeListener(

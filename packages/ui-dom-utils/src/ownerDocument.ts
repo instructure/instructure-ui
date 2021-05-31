@@ -32,7 +32,7 @@ import React from 'react'
  *
  * Retrieve the owner document of a specified element
  * @module ownerDocument
- * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | undefined | null } el
+ * @param { Node | Window | React.ReactElement | function | undefined | null } el
  * @returns { Document } the owner document
  */
 function ownerDocument(
