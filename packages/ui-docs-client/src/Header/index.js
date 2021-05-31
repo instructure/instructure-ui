@@ -33,7 +33,7 @@ import { IconMiniArrowDownLine } from '@instructure/ui-icons'
 import { Menu } from '@instructure/ui-menu'
 import { Text } from '@instructure/ui-text'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
-
+import { Heading } from '@instructure/ui-heading'
 
 import PandaLogo from './instui-panda.js'
 import styles from './styles.css'
@@ -89,7 +89,6 @@ class Header extends Component {
 
     const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
 
-    // this will be hardcoded to v8 in local development
     const currentVersion = versionInPath || latestVersion
 
     return (
@@ -132,13 +131,29 @@ class Header extends Component {
   }
 
   render () {
+    const { versionsData } = this.props
+
     return (
       <div className={styles.root}>
         <div className={styles.logo}>
           <PandaLogo />
         </div>
         <div className={styles.banner} role="banner">
-          {this.renderVersionsBlock()}
+          {versionsData ? this.renderVersionsBlock() : (
+            <Heading level="h2" as="h1">
+              <Link href="#index" isWithinText={false} display="block">
+                  <View display="block" margin="small none none">
+                    <Text size="large">
+                      {(
+                        <span>
+                          {this.props.name} {this.props.version}
+                        </span>
+                      ) || 'Documentation'}
+                    </Text>
+                  </View>
+                </Link>
+            </Heading>
+          )}
           { this.props.version && (
             <View display="block" margin="xx-small none none">
               <Link
