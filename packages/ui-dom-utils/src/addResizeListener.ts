@@ -24,7 +24,10 @@
 
 import { findDOMNode } from './findDOMNode'
 import { getBoundingClientRect } from './getBoundingClientRect'
-import { requestAnimationFrame } from './requestAnimationFrame'
+import {
+  requestAnimationFrame,
+  RequestAnimationFrameType
+} from './requestAnimationFrame'
 
 /**
  * ---
@@ -66,8 +69,7 @@ function addResizeListener(el, handler, dimensions = ['width']) {
   const node = findDOMNode(el)
   let origSize = getBoundingClientRect(node)
   let cancelled = false
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'raf' implicitly has type 'any' in some l... Remove this comment to see the full error message
-  let raf
+  let raf: RequestAnimationFrameType
 
   const checkDimensions = () => {
     if (cancelled) {
@@ -99,7 +101,6 @@ function addResizeListener(el, handler, dimensions = ['width']) {
   return {
     remove() {
       cancelled = true
-      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'raf' implicitly has an 'any' type.
       raf.cancel()
     }
   }

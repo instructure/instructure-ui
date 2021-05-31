@@ -32,6 +32,7 @@ import {
   addEventListener,
   isActiveElement,
   requestAnimationFrame,
+  RequestAnimationFrameType,
   getBoundingClientRect
 } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
@@ -178,6 +179,7 @@ class TextArea extends Component<Props> {
   }
 
   _listener: { remove(): void } | null = null
+  _request: RequestAnimationFrameType | undefined
 
   constructor() {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
@@ -211,9 +213,7 @@ class TextArea extends Component<Props> {
       this._textareaResizeListener.disconnect()
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_request' does not exist on type 'TextAr... Remove this comment to see the full error message
     if (this._request) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_request' does not exist on type 'TextAr... Remove this comment to see the full error message
       this._request.cancel()
     }
 
@@ -277,7 +277,6 @@ class TextArea extends Component<Props> {
         this._textareaResizeListener.observe(this._textarea)
       }
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property '_request' does not exist on type 'TextAr... Remove this comment to see the full error message
       this._request = requestAnimationFrame(this.grow)
     }
   }

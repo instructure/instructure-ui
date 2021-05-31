@@ -27,7 +27,10 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { IconStarSolid, IconStarLightSolid } from '@instructure/ui-icons'
-import { requestAnimationFrame } from '@instructure/ui-dom-utils'
+import {
+  requestAnimationFrame,
+  RequestAnimationFrameType
+} from '@instructure/ui-dom-utils'
 import { Transition } from '@instructure/ui-motion'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -82,6 +85,7 @@ class RatingIcon extends Component<Props> {
   }
 
   _timeouts = []
+  _animation: RequestAnimationFrameType | undefined
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -106,7 +110,6 @@ class RatingIcon extends Component<Props> {
   }
 
   componentWillUnmount() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_animation' does not exist on type 'Rati... Remove this comment to see the full error message
     this._animation && this._animation.cancel()
     this._timeouts.forEach((timeout) => clearTimeout(timeout))
   }
@@ -117,7 +120,6 @@ class RatingIcon extends Component<Props> {
   }
 
   fill = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_animation' does not exist on type 'Rati... Remove this comment to see the full error message
     this._animation = requestAnimationFrame(() => {
       this.setState({
         filled: true

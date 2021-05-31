@@ -24,7 +24,10 @@
 
 import { findDOMNode } from './findDOMNode'
 import { getBoundingClientRect } from './getBoundingClientRect'
-import { requestAnimationFrame } from './requestAnimationFrame'
+import {
+  requestAnimationFrame,
+  RequestAnimationFrameType
+} from './requestAnimationFrame'
 
 /**
  * ---
@@ -40,8 +43,7 @@ import { requestAnimationFrame } from './requestAnimationFrame'
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
 function addPositionChangeListener(el, handler) {
   const node = findDOMNode(el)
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'raf' implicitly has type 'any[]' in some... Remove this comment to see the full error message
-  const raf = []
+  const raf: RequestAnimationFrameType[] = []
 
   let coords = getBoundingClientRect(node) || {}
   let cancelled = false
@@ -72,7 +74,6 @@ function addPositionChangeListener(el, handler) {
   return {
     remove() {
       cancelled = true
-      // @ts-expect-error ts-migrate(7005) FIXME: Variable 'raf' implicitly has an 'any[]' type.
       raf.forEach((req) => req.cancel())
     }
   }

@@ -24,6 +24,8 @@
 
 import { canUseDOM } from './canUseDOM'
 
+type RequestAnimationFrameType = { cancel: () => void }
+
 /**
  * ---
  * category: utilities/DOM
@@ -34,7 +36,7 @@ import { canUseDOM } from './canUseDOM'
  * a manual timeout.
  * @module requestAnimationFrame
  *
- * @returns {function} requestAnimationFrame takes a callback function as an argument and returns a cancel method
+ * @returns {RequestAnimationFrameType} requestAnimationFrame takes a callback function as an argument and returns a cancel method
  */
 const requestAnimationFrame = (function () {
   let requestAnimationFrame
@@ -45,8 +47,7 @@ const requestAnimationFrame = (function () {
     window.requestAnimationFrame &&
     window.cancelAnimationFrame
   ) {
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'cb' implicitly has an 'any' type.
-    requestAnimationFrame = (cb) => {
+    requestAnimationFrame = (cb: FrameRequestCallback) => {
       const id = window.requestAnimationFrame(cb)
       return {
         cancel: () => window.cancelAnimationFrame(id)
@@ -56,8 +57,7 @@ const requestAnimationFrame = (function () {
     /* https://github.com/component/raf */
     let prev = new Date().getTime()
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'cb' implicitly has an 'any' type.
-    requestAnimationFrame = (cb) => {
+    requestAnimationFrame = (cb: FrameRequestCallback) => {
       const curr = new Date().getTime()
       const ms = Math.max(0, 16 - (curr - prev))
       const req = setTimeout(cb, ms)
@@ -73,3 +73,4 @@ const requestAnimationFrame = (function () {
 
 export default requestAnimationFrame
 export { requestAnimationFrame }
+export type { RequestAnimationFrameType }
