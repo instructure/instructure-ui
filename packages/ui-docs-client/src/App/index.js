@@ -89,10 +89,7 @@ class App extends Component {
       showMenu: false,
       trayOverlay: false,
       themeKey: Object.keys(props.themes)[0],
-      versionsData: {
-        latestVersion: 'v8',
-        previousVersions: ['v7', 'v6']
-      }
+      versionsData: null
     }
 
     this._content = null
