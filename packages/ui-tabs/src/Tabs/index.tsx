@@ -308,7 +308,6 @@ class Tabs extends Component<Props> {
         : tabListPosition.right + this.getOverlayWidth()
 
       const tabPositionStart = tabPosition.left
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'right' does not exist on type 'object'.
       const tabPositionEnd = tabPosition.right
 
       if (tabListBoundEnd > tabPositionEnd) {

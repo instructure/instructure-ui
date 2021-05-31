@@ -52,9 +52,7 @@ function addPositionChangeListener(el, handler) {
       const positionChanged =
         newCoords.top !== coords.top ||
         newCoords.left !== coords.left ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'right' does not exist on type '{ top: nu... Remove this comment to see the full error message
         newCoords.right !== coords.right ||
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'bottom' does not exist on type '{ top: n... Remove this comment to see the full error message
         newCoords.bottom !== coords.bottom ||
         newCoords.width !== coords.width ||
         newCoords.height !== coords.height

@@ -443,10 +443,8 @@ class PositionData {
 
     return {
       top: top < bounds.top ? bounds.top - top : 0,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bottom' does not exist on type '{ top: n... Remove this comment to see the full error message
       bottom: bottom > bounds.bottom ? bottom - bounds.bottom : 0,
       left: left < bounds.left ? bounds.left - left : 0,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'right' does not exist on type '{ top: nu... Remove this comment to see the full error message
       right: right > bounds.right ? right - bounds.right : 0
     }
   }
