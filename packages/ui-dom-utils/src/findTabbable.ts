@@ -23,9 +23,18 @@
  */
 
 import { findFocusable } from './findFocusable'
+import React from 'react'
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function findTabbable(el, shouldSearchRootNode) {
+function findTabbable(
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null,
+  shouldSearchRootNode?: boolean
+) {
   return findFocusable(
     el,
     (element) => {
@@ -35,8 +44,9 @@ function findTabbable(el, shouldSearchRootNode) {
   )
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'tabIndex' implicitly has an 'any' type.
-function isInvalidTabIndex(tabIndex) {
+function isInvalidTabIndex(tabIndex: unknown) {
+  // @ts-expect-error ts-migrate(2345) TS wants it to be number to be valid,
+  // but this method in fact checks if the parameter is a valid positive number
   return !isNaN(tabIndex) && tabIndex < 0
 }
 
