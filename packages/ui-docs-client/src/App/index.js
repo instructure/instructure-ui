@@ -103,10 +103,7 @@ class App extends Component {
       showMenu: showTrayOnPageLoad,
       themeKey: Object.keys(props.themes)[0],
       layout: 'large',
-      versionsData: {
-        latestVersion: 'v8',
-        previousVersions: ['v7', 'v6']
-      }
+      versionsData: null
     }
 
     this._content = null

@@ -88,7 +88,6 @@ class Header extends Component {
 
     const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
 
-    // this will be hardcoded to v8 in local development
     const currentVersion = versionInPath || latestVersion
 
     return (
@@ -130,6 +129,7 @@ class Header extends Component {
     )
   }
   render() {
+    const { versionsData } = this.props
     const corpLogo = (
       <InlineSVG viewBox="0 0 500 500" width="6rem" height="6rem">
         <polygon
@@ -165,7 +165,21 @@ class Header extends Component {
             </View>
           </Link>
           <View display="block" textAlign="center">
-            {this.renderVersionsBlock()}
+            {versionsData ? (
+              this.renderVersionsBlock()
+            ) : (
+              <Link href="#index" isWithinText={false} display="block">
+                <View display="block" margin="small none none">
+                  <Text size="large">
+                    {(
+                      <span>
+                        {this.props.name} {this.props.version}
+                      </span>
+                    ) || 'Documentation'}
+                  </Text>
+                </View>
+              </Link>
+            )}
           </View>
         </Heading>
       </View>
