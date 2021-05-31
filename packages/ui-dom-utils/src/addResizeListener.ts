@@ -28,6 +28,10 @@ import {
   requestAnimationFrame,
   RequestAnimationFrameType
 } from './requestAnimationFrame'
+import React from 'react'
+
+type ResizeListenerType = { remove: () => void }
+type DimensionTypes = 'width' | 'height'
 
 /**
  * ---
@@ -62,10 +66,19 @@ import {
  *
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @param {function} handler - function to run when resize occurs
+ * @param dimensions
  * @returns {function} remove - cancel the listener and no longer execute the handler function
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function addResizeListener(el, handler, dimensions = ['width']) {
+function addResizeListener(
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any),
+  handler: (dimensions: Record<DimensionTypes, number>) => any,
+  dimensions: DimensionTypes[] = ['width']
+): ResizeListenerType {
   const node = findDOMNode(el)
   let origSize = getBoundingClientRect(node)
   let cancelled = false
@@ -77,20 +90,21 @@ function addResizeListener(el, handler, dimensions = ['width']) {
     }
 
     const boundingRect = getBoundingClientRect(node)
-    const size = {
+    const size: Record<DimensionTypes, number> = {
       width: boundingRect.width,
       height: boundingRect.height
     }
 
     if (
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       dimensions.some((dim) => size[dim] != origSize[dim]) &&
       typeof handler === 'function'
     ) {
       handler(size)
     }
 
-    // @ts-expect-error ts-migrate(2322) FIXME: Type '{ width: any; height: any; }' is not assigna... Remove this comment to see the full error message
+    // @ts-expect-error ts-migrate(2739) Didn't want to touch the code to make
+    // this better, because this method is deprecated in v8, not used anywhere,
+    // and will be deleted in v9 anyway.
     origSize = size
 
     raf = requestAnimationFrame(checkDimensions)
