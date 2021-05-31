@@ -23,10 +23,18 @@
  */
 
 import { findDOMNode } from './findDOMNode'
+import React from 'react'
 
 let classListShimmed = false
 
-const apiForEmptyNode = {
+type ClassListApiType = {
+  toArray: () => string[]
+  contains: (className: string) => boolean
+  add: (className: string) => void
+  remove: (className: string) => void
+}
+
+const apiForEmptyNode: ClassListApiType = {
   toArray: () => [],
   contains: () => false,
   add: () => {},
@@ -44,29 +52,45 @@ const apiForEmptyNode = {
  * element contains a specified class name.
  * @module getClassList
  *
- * @param {ReactComponent|DomNode} element - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function } element - component or DOM node
  * @return {Object} object containing classList functions 'contains', 'add', and 'remove'
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-function getClassList(element) {
-  const node = findDOMNode(element) as any
+function getClassList(
+  element:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+) {
+  const node = findDOMNode(element)
 
   if (!node) return apiForEmptyNode
 
-  const classListApi = {
+  const classListApi: ClassListApiType = {
     toArray() {
       shimClassListForIE()
-      return [...node.classList]
-    }
+      return [...(node as Element).classList]
+    },
+    contains: () => false,
+    add: () => {},
+    remove: () => {}
   }
 
-  ;['contains', 'add', 'remove'].forEach((method) => {
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    classListApi[method] = (className) => {
-      shimClassListForIE()
-      return node.classList[method](className)
-    }
-  })
+  classListApi['add'] = (className: string) => {
+    shimClassListForIE()
+    return (node as Element).classList.add(className)
+  }
+
+  classListApi['remove'] = (className: string) => {
+    shimClassListForIE()
+    return (node as Element).classList.remove(className)
+  }
+
+  classListApi['contains'] = (className: string) => {
+    shimClassListForIE()
+    return (node as Element).classList.contains(className)
+  }
 
   return classListApi
 }
@@ -85,8 +109,7 @@ function shimClassListForIE() {
         HTMLElement.prototype,
         'classList'
       )
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'PropertyDescriptor | undefined' ... Remove this comment to see the full error message
-      Object.defineProperty(SVGElement.prototype, 'classList', descr)
+      descr && Object.defineProperty(SVGElement.prototype, 'classList', descr)
     }
     classListShimmed = true
   }
