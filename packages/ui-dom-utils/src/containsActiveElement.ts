@@ -25,6 +25,7 @@
 import { findDOMNode } from './findDOMNode'
 import { contains } from './contains'
 import { getActiveElement } from './getActiveElement'
+import React from 'react'
 
 /**
  * ---
@@ -33,14 +34,21 @@ import { getActiveElement } from './getActiveElement'
  *
  * Determine if an element contains the active element
  * @module containsActiveElement
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) } el - component or DOM node
  * @returns {boolean} if the element contains the active element
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function containsActiveElement(el) {
+function containsActiveElement(
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null
+) {
   const node = el && findDOMNode(el)
   const active = getActiveElement()
-  return node && (active === node || contains(node, active))
+  return !!node && (active === node || contains(node, active))
 }
 
 export default containsActiveElement
