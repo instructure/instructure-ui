@@ -65,7 +65,7 @@ class Search extends Component {
 
       this._options.push({
         id: `doc${i}`,
-        value: `${window.location.origin}/#${option}`,
+        value: `#${option}`,
         label: option,
         groupLabel: doc.category,
         tags: doc.tags
