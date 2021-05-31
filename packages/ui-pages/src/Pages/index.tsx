@@ -183,7 +183,7 @@ class Pages extends Component<Props> {
           activePage.focus()
         } else {
           // Use first tabbable as last ditch effort
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+          // @ts-expect-error ts-migrate(2339) FIXME:
           const tabbable = findTabbable(this._contentElement)
           const element = tabbable && tabbable[0]
 

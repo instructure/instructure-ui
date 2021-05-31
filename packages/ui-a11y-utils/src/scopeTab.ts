@@ -33,7 +33,6 @@ import {
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
 function scopeTab(element, event, onLeavingFinalTabbable) {
   const node = findDOMNode(element)
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
   const tabbable = findTabbable(node)
 
   if (!tabbable.length) {

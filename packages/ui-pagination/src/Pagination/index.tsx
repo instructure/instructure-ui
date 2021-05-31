@@ -200,7 +200,7 @@ class Pagination extends Component<Props> {
     const { prevButtonFocused, nextButtonFocused } = snapshot || {}
 
     if (prevButtonFocused || nextButtonFocused) {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+      // @ts-expect-error ts-migrate(2339) FIXME:
       const focusable = findTabbable(this._root)
       const focusIndex = prevButtonFocused ? 0 : focusable.length - 1
       // @ts-expect-error ts-migrate(2554) FIXME:

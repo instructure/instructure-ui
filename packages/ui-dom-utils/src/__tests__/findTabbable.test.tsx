@@ -53,7 +53,6 @@ describe('findTabbable', async () => {
       /* eslint-enable jsx-a11y/tabindex-no-positive */
       /* eslint-enable jsx-a11y/anchor-is-valid */
 
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       expect(findTabbable(subject.getDOMNode()).length).to.equal(4)
     })
   })
@@ -65,14 +64,12 @@ describe('findTabbable', async () => {
           <span>hello</span>
         </button>
       )
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       expect(findTabbable(subject.getDOMNode()).length).to.equal(0)
       expect(findTabbable(subject.getDOMNode(), true).length).to.equal(1)
     })
   })
 
   it('should gracefully handle null', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(findTabbable(null).length).to.equal(0)
   })
 })

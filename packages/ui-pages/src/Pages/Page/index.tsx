@@ -92,7 +92,7 @@ class Page extends Component<Props> {
     }
 
     if (!defaultFocusElement) {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+      // @ts-expect-error ts-migrate(2551) FIXME:
       const tabbable = findTabbable(this._content)
       // @ts-expect-error ts-migrate(2554) FIXME:
       defaultFocusElement = tabbable && tabbable[0]
