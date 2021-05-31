@@ -128,10 +128,10 @@ export {
    * Anchor tags are also focusable if they include an href or
    * tabindex attribute (including tabindeces less than zero).
    * @module findFocusable
-   * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) | null } el - component or DOM node
-   * @param { (el: Element) => boolean } filter - a function to filter the matching nodes
+   * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
+   * @param { function } filter - a function to filter the matching nodes
    * @param { boolean } shouldSearchRootNode - should the root node be included in the search
-   * @returns { Element[] } array of all tabbable children
+   * @returns { Array } array of all tabbable children
    */
   findFocusable
 }

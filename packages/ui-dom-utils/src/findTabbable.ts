@@ -64,9 +64,9 @@ export {
    * use findFocusable).
    *
    * @module findTabbable
-   * @param {ReactComponent|DomNode} el - component or DOM node
-   * @param {Boolean} shouldSearchRootNode - should the root node be included in the search
-   * @returns {Array} array of all tabbable children
+   * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
+   * @param { boolean } shouldSearchRootNode - should the root node be included in the search
+   * @returns { Array } array of all tabbable children
    */
   findTabbable
 }

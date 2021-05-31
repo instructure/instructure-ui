@@ -45,7 +45,7 @@ type RectType = {
  * Gets the bounding rectangle of an element
  * @module getBoundingClientRect
  *
- * @param { Node | Window | React.ReactElement | React.Component | ((...args: any[]) => any) | null } el - component, DOM node, or function returning a DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component, DOM node, or function returning a DOM node
  * @return {object} rect - object with top, left coords and height and width
  */
 function getBoundingClientRect(

@@ -32,7 +32,7 @@ import React from 'react'
  *
  * Polyfill for Element.matches (https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
  * @module elementMatches
- * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | function } el - component or DOM node
  * @param { string } selectorString - a string representing the selector to test
  * @returns { boolean } if the element would be selected by the specified selector string
  */

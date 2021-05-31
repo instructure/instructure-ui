@@ -33,7 +33,7 @@ import React from 'react'
  * Retrieve the owner window object associated with
  * the owner document of the specified element
  * @module ownerWindow
- * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) | null } el
+ * @param { Node | Window | React.ReactElement | function | null } el
  * @returns { Window | null } the owner window
  */
 function ownerWindow(

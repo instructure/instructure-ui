@@ -36,7 +36,7 @@ import React from 'react'
  * specified element
  * @module getComputedStyle
  *
- * @param { Node | Window | React.ReactElement | ((...args: any[]) => any) } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | function } el - component or DOM node
  * @returns { Object } object containing css properties and values for the element
  */
 function getComputedStyle(
