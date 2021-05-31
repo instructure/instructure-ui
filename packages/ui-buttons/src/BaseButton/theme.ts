@@ -135,6 +135,8 @@ const generateComponentTheme = (theme) => {
     iconSizeSmall: '1rem',
     iconSizeMedium: '1.25rem',
     iconSizeLarge: '1.625rem',
+    iconTextGap: spacing.xSmall,
+    iconTextGapCondensed: spacing.xxSmall,
 
     ...generateButtonThemeVars({
       style: 'primary',

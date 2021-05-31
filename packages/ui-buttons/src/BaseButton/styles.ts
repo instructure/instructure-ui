@@ -356,6 +356,42 @@ const generateStyle = (componentTheme, props, state) => {
 
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size].iconSVG
+    },
+
+    flex: {
+      label: 'baseButton__flex',
+      display: 'flex',
+      height: '100%',
+      width: '100%',
+      justifyContent:
+        hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'flex-start',
+      boxSizing: 'border-box', // TODO these are from Flex, are they enough?
+      alignItems: 'center',
+      flexDirection: 'row'
+    },
+
+    flexOnlyIcon: {
+      label: 'baseButton__flexOnlyIcon',
+      boxSizing: 'border-box',
+      minWidth: '0.0625rem'
+    },
+
+    flexIcon: {
+      label: 'baseButton__flexIcon',
+      boxSizing: 'border-box',
+      minWidth: '0.0625rem',
+      padding: `0 ${
+        isCondensed
+          ? componentTheme.iconTextGapCondensed
+          : componentTheme.iconTextGap
+      } 0 0`
+    },
+
+    flexIconChildren: {
+      label: 'baseButton__flexIconChildren',
+      boxSizing: 'border-box',
+      minWidth: '0.0625rem',
+      flexShrink: 1
     }
   }
 }

@@ -39,7 +39,6 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
-import { Flex } from '@instructure/ui-flex'
 
 import {
   withStyle,
@@ -343,7 +342,7 @@ class BaseButton extends Component<Props> {
   }
 
   renderChildren() {
-    const { renderIcon, children, textAlign, isCondensed, styles } = this.props
+    const { renderIcon, children, styles } = this.props
 
     const wrappedChildren = <span css={styles.children}>{children}</span>
 
@@ -357,38 +356,21 @@ class BaseButton extends Component<Props> {
     )
 
     const flexChildren = hasOnlyIconVisible ? (
-      <Flex.Item>
+      <span css={styles.flexOnlyIcon}>
         {wrappedIcon}
         {children}
-      </Flex.Item>
+      </span>
     ) : (
       [
-        <Flex.Item
-          key="icon"
-          padding={`0 ${isCondensed ? 'xx-small' : 'x-small'} 0 0`}
-        >
+        <span key="icon" css={styles.flexIcon}>
           {wrappedIcon}
-        </Flex.Item>,
-        <Flex.Item key="children" shouldShrink>
+        </span>,
+        <span key="children" css={styles.flexIconChildren}>
           {wrappedChildren}
-        </Flex.Item>
+        </span>
       ]
     )
-
-    const flexProps = {
-      shouldShrink: true,
-      height: '100%',
-      width: '100%',
-      justifyItems:
-        hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'start'
-    } as {
-      shouldShrink: boolean
-      height: string
-      width: string
-      justifyItems: 'center' | 'start'
-    }
-
-    return <Flex {...flexProps}>{flexChildren}</Flex>
+    return <span css={styles.flex}>{flexChildren}</span>
   }
 
   render() {
