@@ -57,7 +57,9 @@ function getFontSize(
   }
 
   const fontSize = parseInt(
-    getComputedStyle(container).getPropertyValue('font-size')
+    (getComputedStyle(container) as CSSStyleDeclaration).getPropertyValue(
+      'font-size'
+    )
   )
 
   // cache the computed font size so that we don't have to compute it again
