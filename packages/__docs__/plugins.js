@@ -27,8 +27,6 @@ const DocsPlugin = require('@instructure/ui-docs-plugin')
 const projectRoot = path.resolve(__dirname, '../../')
 // eslint-disable-next-line instructure-ui/no-relative-package-imports
 const pkg = require('../../package.json')
-const [majorVersion] = pkg.version.split('.')
-const netlifyHomePage = pkg.config.netlify.homepage
 
 module.exports = [
   new DocsPlugin({
@@ -47,11 +45,11 @@ module.exports = [
         // this is usually whatever webpack entries you've defined
         js_external: [
           // should match entries in webpack.config.js
-          `${netlifyHomePage}/v${majorVersion}/vendors~common~globals~ui-docs.js`,
-          `${netlifyHomePage}/v${majorVersion}/vendors~globals~ui-docs.js`,
-          `${netlifyHomePage}/v${majorVersion}/runtime~common.js`,
-          `${netlifyHomePage}/v${majorVersion}/common.js`,
-          `${netlifyHomePage}/v${majorVersion}/globals.js`
+          `${pkg.homepage}vendors~common~globals~ui-docs.js`,
+          `${pkg.homepage}vendors~globals~ui-docs.js`,
+          `${pkg.homepage}runtime~common.js`,
+          `${pkg.homepage}common.js`,
+          `${pkg.homepage}globals.js`
         ].join(';')
       }
     },
