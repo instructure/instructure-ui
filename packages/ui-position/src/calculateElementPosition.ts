@@ -185,10 +185,14 @@ class PositionedElement {
       const parent = parents[i]
       const child = parents[i - 1]
 
-      offsetY =
-        offsetY +
-        (this.normalizeScrollTop(parent) - this.normalizeScrollTop(child))
-      offsetX = offsetX + (parent.scrollLeft - child.scrollLeft)
+      if (parent) {
+        offsetY =
+          offsetY +
+          (this.normalizeScrollTop(parent) - this.normalizeScrollTop(child))
+        offsetX =
+          offsetX +
+          ((parent as Element).scrollLeft - (child as Element).scrollLeft)
+      }
     }
 
     return { top: offsetY, left: offsetX }
