@@ -44,9 +44,9 @@ function isActiveElement(
     | React.Component
     | ((...args: any[]) => any)
     | null
-) {
+): boolean {
   const node = el && findDOMNode(el)
-  return node && getActiveElement() === node
+  return node ? getActiveElement() === node : false
 }
 
 export default isActiveElement
