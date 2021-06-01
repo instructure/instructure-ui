@@ -133,3 +133,4 @@ function getBoundingClientRect(
 
 export default getBoundingClientRect
 export { getBoundingClientRect }
+export type { RectType }

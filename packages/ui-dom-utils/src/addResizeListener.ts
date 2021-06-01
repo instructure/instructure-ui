@@ -23,7 +23,7 @@
  */
 
 import { findDOMNode } from './findDOMNode'
-import { getBoundingClientRect } from './getBoundingClientRect'
+import { getBoundingClientRect, RectType } from './getBoundingClientRect'
 import {
   requestAnimationFrame,
   RequestAnimationFrameType
@@ -80,7 +80,7 @@ function addResizeListener(
   dimensions: DimensionTypes[] = ['width']
 ): ResizeListenerType {
   const node = findDOMNode(el)
-  let origSize = getBoundingClientRect(node)
+  let origSize: Partial<RectType> = getBoundingClientRect(node)
   let cancelled = false
   let raf: RequestAnimationFrameType
 
@@ -102,9 +102,6 @@ function addResizeListener(
       handler(size)
     }
 
-    // @ts-expect-error ts-migrate(2739) Didn't want to touch the code to make
-    // this better, because this method is deprecated in v8, not used anywhere,
-    // and will be deleted in v9 anyway.
     origSize = size
 
     raf = requestAnimationFrame(checkDimensions)

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function getFrameDocumentSafe(el) {
+function getFrameDocumentSafe(el: HTMLIFrameElement) {
   try {
+    // @ts-expect-error This can throw error, el.contentWindow can be null
     return el.contentDocument || el.contentWindow.document
   } catch (err) {
     return null
