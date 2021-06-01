@@ -365,7 +365,7 @@ const generateStyle = (componentTheme, props, state) => {
       width: '100%',
       justifyContent:
         hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'flex-start',
-      boxSizing: 'border-box', // TODO these are from Flex, are they enough?
+      boxSizing: 'border-box',
       alignItems: 'center',
       flexDirection: 'row'
     },
