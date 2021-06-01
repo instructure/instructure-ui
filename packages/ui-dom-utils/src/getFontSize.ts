@@ -38,7 +38,7 @@ const COMPUTED_CACHE: Record<string, number> = {}
  * @module getFontSize
  * @param { Node | Window | React.ReactElement | function | undefined | null } el - component or DOM node
  * @param { boolean } ignoreCache
- * @returns {Object} font size in px
+ * @returns { number } font size in px
  */
 function getFontSize(
   el?: Node | Window | React.ReactElement | ((...args: any[]) => any) | null,

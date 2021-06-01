@@ -34,7 +34,7 @@ import React from 'react'
  * Determine if an element is visible.
  *
  * @module isVisible
- * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
  * @param {boolean} recursive - by default all parent elements are checked
  * recursively to accurately determine visibility. setting this to `false`
  * will determine visibility based only on the styles of the given node.

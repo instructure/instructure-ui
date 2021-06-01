@@ -38,7 +38,7 @@ import React from 'react'
  * set to auto, scroll, or overlay
  * @module getScrollParents
  *
- * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
  * @returns {Array} scroll parents
  */
 function getScrollParents(
