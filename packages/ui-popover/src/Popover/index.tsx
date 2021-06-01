@@ -349,6 +349,9 @@ class Popover extends Component<Props> {
     children: null
   }
 
+  _handleMouseOver: (...args: any[]) => any | undefined
+  _handleMouseOut: (...args: any[]) => any | undefined
+
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props)
@@ -368,13 +371,11 @@ class Popover extends Component<Props> {
     this._id = this.props.id || uid('Popover')
     this._raf = []
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOver' does not exist on type... Remove this comment to see the full error message
     this._handleMouseOver = handleMouseOverOut.bind(null, (event) => {
       this.show(event)
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseOutTimeout' does not exist on type ... Remove this comment to see the full error message
       clearTimeout(this.mouseOutTimeout)
     })
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOut' does not exist on type ... Remove this comment to see the full error message
     this._handleMouseOut = handleMouseOverOut.bind(null, (event) => {
       // this is needed bc the trigger mouseOut fires before tooltip mouseOver
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseOutTimeout' does not exist on type ... Remove this comment to see the full error message
@@ -701,9 +702,7 @@ class Popover extends Component<Props> {
             ' of the Popover to just mouse users. Consider also including the `"focus"` trigger ' +
             'so that touch and keyboard only users can see the Popover content as well.'
         )
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOver' does not exist on type... Remove this comment to see the full error message
         onMouseOver = this._handleMouseOver
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOut' does not exist on type ... Remove this comment to see the full error message
         onMouseOut = this._handleMouseOut
       }
 
@@ -829,7 +828,6 @@ class Popover extends Component<Props> {
           // Because of a11y reasons popovers should not be hidden when hovered over
           // @ts-expect-error ts-migrate(2322) FIXME: Type '{ onMouseOver: any; onMouseOut: any; ref: (c... Remove this comment to see the full error message
           onMouseOver: this._handleMouseOver,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_handleMouseOut' does not exist on type ... Remove this comment to see the full error message
           onMouseOut: this._handleMouseOut
         }
       }

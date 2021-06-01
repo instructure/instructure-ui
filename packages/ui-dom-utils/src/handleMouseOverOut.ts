@@ -38,12 +38,18 @@ import { contains } from './contains'
  * @param handler {function} Callback function for handling the event
  * @param event {Event} The DOM Event that was fired
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'handler' implicitly has an 'any' type.
-function handleMouseOverOut(handler, event) {
+function handleMouseOverOut(
+  handler: (...args: any[]) => any,
+  event: Event & { relatedTarget: EventTarget | null }
+) {
   const target = event.currentTarget
-  const related = event.relatedTarget || event.nativeEvent.toElement
+  const related = event.relatedTarget
 
-  if (!related || (related !== target && !contains(target, related))) {
+  if (
+    !related ||
+    (related !== target &&
+      !contains(target as Node | Window, related as Node | Window))
+  ) {
     handler(event)
   }
 }
