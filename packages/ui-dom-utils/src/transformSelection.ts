@@ -30,12 +30,19 @@
  * transformSelection - Calculate the resulting text selection
  * of a changing text-containing HTML element
  * @module transformSelection
- * @param {DomNode} element - HTML element with selection capabilities
+ * @param {HTMLElement} element - HTML element with selection capabilities
  * @param {string} cleanedValue - new value that will be given to the HTML element
  * @return {Object} resulting selection values
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
-function transformSelection(element, cleanedValue) {
+function transformSelection(
+  element: HTMLElement & {
+    selectionStart: number
+    selectionEnd: number
+    selectionDirection: 'forward' | 'backward' | 'none'
+    value: string
+  },
+  cleanedValue: string
+) {
   const { selectionStart, selectionEnd, selectionDirection, value } = element
 
   return {
@@ -54,8 +61,11 @@ function transformSelection(element, cleanedValue) {
  * @param {string} cleanedValue - original string with some characters removed
  * @returns {number} resulting cursor index
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'cursorIndex' implicitly has an 'any' ty... Remove this comment to see the full error message
-function transformCursor(cursorIndex, dirtyValue, cleanedValue) {
+function transformCursor(
+  cursorIndex: number,
+  dirtyValue: string,
+  cleanedValue: string
+) {
   if (dirtyValue.length === cleanedValue.length) {
     return cursorIndex
   }
@@ -66,18 +76,15 @@ function transformCursor(cursorIndex, dirtyValue, cleanedValue) {
     return cleanedValue.length
   }
 
-  return (
-    dirtyValue
-      .split('')
-      .slice(0, cursorIndex)
-      // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'result' implicitly has an 'any' type.
-      .reduce((result, value) => {
-        if (value === cleanedValue[result]) {
-          return result + 1
-        }
-        return result
-      }, 0)
-  )
+  return dirtyValue
+    .split('')
+    .slice(0, cursorIndex)
+    .reduce((result, value) => {
+      if (value === cleanedValue[result]) {
+        return result + 1
+      }
+      return result
+    }, 0)
 }
 
 export default transformSelection

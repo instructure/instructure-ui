@@ -39,7 +39,7 @@ describe('transformSelection', () => {
           selectionEnd,
           selectionDirection,
           value
-        },
+        } as HTMLTextAreaElement,
         '12345'
       )
     ).to.eql({
