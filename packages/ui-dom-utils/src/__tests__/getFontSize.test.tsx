@@ -29,7 +29,6 @@ import { getFontSize } from '../getFontSize'
 describe('getFontSize', async () => {
   it('should return font size as a number', async () => {
     const subject = await mount(<span style={{ fontSize: '17px' }}>hello</span>)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     expect(getFontSize(subject.getDOMNode())).to.equal(17)
   })
 })

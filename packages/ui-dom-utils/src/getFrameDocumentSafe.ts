@@ -23,12 +23,7 @@
  */
 
 function getFrameDocumentSafe(el: HTMLIFrameElement) {
-  try {
-    // @ts-expect-error This can throw error, el.contentWindow can be null
-    return el.contentDocument || el.contentWindow.document
-  } catch (err) {
-    return null
-  }
+  return el.contentDocument || el.contentWindow?.document || null
 }
 
 export default getFrameDocumentSafe

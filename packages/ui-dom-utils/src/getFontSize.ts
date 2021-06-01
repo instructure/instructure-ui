@@ -24,8 +24,9 @@
 import { canUseDOM } from './canUseDOM'
 import { ownerDocument } from './ownerDocument'
 import { getComputedStyle } from './getComputedStyle'
+import React from 'react'
 
-const COMPUTED_CACHE = {}
+const COMPUTED_CACHE: Record<string, number> = {}
 
 /**
  * ---
@@ -35,22 +36,24 @@ const COMPUTED_CACHE = {}
  * Gets font size in px
  *
  * @module getFontSize
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @param ignoreCache
+ * @param { Node | Window | React.ReactElement | function | undefined | null } el - component or DOM node
+ * @param { boolean } ignoreCache
  * @returns {Object} font size in px
  */
-function getFontSize(el?: any, ignoreCache?: boolean) {
+function getFontSize(
+  el?: Node | Window | React.ReactElement | ((...args: any[]) => any) | null,
+  ignoreCache = false
+) {
   if (!canUseDOM) {
     return 16
   }
 
   const container = el || ownerDocument(el).documentElement
+  const containerString = container.toString()
 
   // return the cached font size if it's there
-  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  if (!ignoreCache && COMPUTED_CACHE[container]) {
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    return COMPUTED_CACHE[container]
+  if (!ignoreCache && COMPUTED_CACHE[containerString]) {
+    return COMPUTED_CACHE[containerString]
   }
 
   const fontSize = parseInt(
@@ -58,8 +61,7 @@ function getFontSize(el?: any, ignoreCache?: boolean) {
   )
 
   // cache the computed font size so that we don't have to compute it again
-  // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  COMPUTED_CACHE[container] = fontSize
+  COMPUTED_CACHE[containerString] = fontSize
 
   return fontSize
 }
