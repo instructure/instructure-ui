@@ -191,17 +191,15 @@ class Truncator {
   getNodeMap(rootNode) {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_options' does not exist on type 'Trunca... Remove this comment to see the full error message
     const { shouldTruncateWhenInvisible, truncate } = this._options
-    const nodes = Array.from(rootNode.childNodes)
+    const nodes: ChildNode[] = Array.from(rootNode.childNodes)
     // @ts-expect-error ts-migrate(7034) FIXME: Variable 'map' implicitly has type 'any[]' in some... Remove this comment to see the full error message
     const map = []
     // parse child nodes and build a data map to associate each node with its data
     nodes.forEach((node) => {
-      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
       if (node.nodeType === 1 || node.nodeType === 3) {
         const shouldTruncate = shouldTruncateWhenInvisible
           ? true
           : isVisible(node, false)
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         const textContent = node.textContent + ' '
         map.push({
           node,
@@ -212,7 +210,7 @@ class Truncator {
                   textContent.match(/.*?[\.\s\/]+?/g)
                 : ''
               : shouldTruncate
-              ? // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+              ? // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
                 node.textContent.split('')
               : []
         })

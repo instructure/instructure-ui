@@ -24,6 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { getComputedStyle } from './getComputedStyle'
+import React from 'react'
 
 /**
  * ---
@@ -33,26 +34,34 @@ import { getComputedStyle } from './getComputedStyle'
  * Determine if an element is visible.
  *
  * @module isVisible
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @param {boolean} recursive - by default all parent elements are checked
  * recursively to accurately determine visibility. setting this to `false`
  * will determine visibility based only on the styles of the given node.
  * @returns {boolean} if the element is visible
  */
-// @ts-expect-error ts-migrate(7023) FIXME: 'isVisible' implicitly has return type 'any' becau... Remove this comment to see the full error message
-function isVisible(el, recursive = true) {
+function isVisible(
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null,
+  recursive = true
+): boolean {
   const node = el && findDOMNode(el)
   // skip document or window nodes
   if (node === window || node === document || node === document.body) {
     return true
   }
-  const parent = node.parentNode
+  const parent = (node as Node).parentNode
   // skip text node, check parent
-  if (node.nodeType === 3) {
+  if ((node as Node).nodeType === 3) {
     return isVisible(parent, recursive)
   }
 
-  const style = getComputedStyle(node)
+  const style = node ? getComputedStyle(node) : {}
   // physically and visually hidden
   if (style.display === 'none') {
     return false
