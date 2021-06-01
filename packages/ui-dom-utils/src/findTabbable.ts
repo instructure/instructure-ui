@@ -45,8 +45,7 @@ function findTabbable(
 }
 
 function isInvalidTabIndex(tabIndex: unknown) {
-  // @ts-expect-error ts-migrate(2345) TS wants it to be number to be valid,
-  // but this method in fact checks if the parameter is a valid positive number
+  // @ts-expect-error TS wants it to be number to be valid, but this method in fact checks if the parameter is a valid positive number
   return !isNaN(tabIndex) && tabIndex < 0
 }
 

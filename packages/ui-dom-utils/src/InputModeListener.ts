@@ -43,11 +43,10 @@ class InputModeListenerImpl {
   _initialized = false
   _mode = MODES.keyboard
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  onInitialPointerMove = (event) => {
+  onInitialPointerMove = (event: Event) => {
     // Work around a Safari quirk that fires a mousemove on <html> whenever the
     // window blurs, even if you're tabbing out of the page. ¯\_(ツ)_/¯
-    if (event.target.nodeName.toLowerCase() === 'html') {
+    if ((event?.target as Node)?.nodeName?.toLowerCase() === 'html') {
       return
     }
     this._mode = MODES.pointer
