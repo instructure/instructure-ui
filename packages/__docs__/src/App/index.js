@@ -108,14 +108,12 @@ class App extends Component {
     this._content = null
     this._menuTrigger = null
     this._mediaQueryListener = null
-    const promises = Promise.all(
-      ['docs-data.json', 'versions.json'].map((resource) =>
-        fetch(resource).then((response) => response.json())
-      )
-    )
 
-    promises
-      .then(([docsData, versionsData]) => {
+    this.fetchVersionData()
+
+    fetch('docs-data.json')
+      .then((response) => response.json())
+      .then((docsData) => {
         // Assign the component instance to the parsed JSON.
         // This is used to dynamically calculate theme variable values
         for (const key of Object.keys(EveryComponent)) {
@@ -137,14 +135,25 @@ class App extends Component {
         }
         this.setState({
           docsData,
-          themeKey: Object.keys(docsData.themes)[0],
-          versionsData
+          themeKey: Object.keys(docsData.themes)[0]
         })
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
         console.error('Unable to load docs data :(\n' + error)
       })
+  }
+  fetchVersionData = async () => {
+    // eslint-disable-next-line compat/compat
+    const isLocalHost = window.location.hostname === 'localhost'
+
+    if (!isLocalHost) {
+      // eslint-disable-next-line compat/compat
+      const result = await fetch(`${window.location.origin}/versions.json`)
+      const versionsData = await result.json()
+
+      return this.setState({ versionsData })
+    }
   }
 
   /**
