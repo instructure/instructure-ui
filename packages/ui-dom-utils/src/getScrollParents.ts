@@ -25,6 +25,7 @@
 import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
 import { getComputedStyle } from './getComputedStyle'
+import React from 'react'
 
 /**
  * ---
@@ -37,20 +38,25 @@ import { getComputedStyle } from './getComputedStyle'
  * set to auto, scroll, or overlay
  * @module getScrollParents
  *
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @returns {Array} scroll parents
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function getScrollParents(el) {
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'parents' implicitly has type 'any[]' in ... Remove this comment to see the full error message
-  const parents = []
+function getScrollParents(
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null
+) {
+  const parents: (Node | Window | null)[] = []
 
   if (!canUseDOM) {
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'parents' implicitly has an 'any[]' type.
     return parents
   }
 
-  const node = findDOMNode(el)
+  const node = el && findDOMNode(el)
 
   if (node) {
     // In firefox if the element is inside an iframe with display: none; window.getComputedStyle() will return null;
@@ -62,13 +68,12 @@ function getScrollParents(el) {
       return [(node as Node).ownerDocument]
     }
 
-    let parent = node
+    let parent: Node | Window | null = node
     // eslint-disable-next-line no-cond-assign
     while (
       parent &&
       (parent as Node).nodeType === 1 &&
-      // @ts-expect-error ts-migrate(2339) FIXME:
-      (parent = parent.parentNode)
+      (parent = (parent as Node).parentNode)
     ) {
       let style
       try {
@@ -98,6 +103,7 @@ function getScrollParents(el) {
 
       // If the node is within a frame, account for the parent window scroll
       if (ownerDocument !== document) {
+        // ownerDocument.defaultView can be null
         parents.push(ownerDocument.defaultView)
       }
     }
