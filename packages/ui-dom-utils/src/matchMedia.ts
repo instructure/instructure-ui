@@ -25,6 +25,7 @@
 import { canUseDOM } from './canUseDOM'
 import { findDOMNode } from './findDOMNode'
 import { ownerWindow } from './ownerWindow'
+import React from 'react'
 
 /**
  * ---
@@ -36,17 +37,21 @@ import { ownerWindow } from './ownerWindow'
  * see https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
  * @module matchMedia
  * @param {string} query - media query string
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param { Node | Window | React.ReactElement | function } el - component or DOM node
  * @returns {Object} a media query list object
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
-function matchMedia(query, el) {
+function matchMedia(
+  query: string,
+  el: Node | Window | React.ReactElement | ((...args: any[]) => any)
+) {
   const node = findDOMNode(el) || document
 
   if (canUseDOM) {
     const window = ownerWindow(node)
     return window && window.matchMedia(query)
   }
+
+  return null
 }
 
 export default matchMedia
