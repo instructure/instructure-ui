@@ -24,6 +24,7 @@
 
 import { findDOMNode } from './findDOMNode'
 import { getActiveElement } from './getActiveElement'
+import React from 'react'
 
 /**
  * ---
@@ -32,11 +33,18 @@ import { getActiveElement } from './getActiveElement'
  *
  * Determine if an element is the active element
  * @module isActiveElement
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
  * @returns {boolean} if the element is the active element
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function isActiveElement(el) {
+function isActiveElement(
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null
+) {
   const node = el && findDOMNode(el)
   return node && getActiveElement() === node
 }
