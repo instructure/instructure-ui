@@ -26,6 +26,7 @@ import { findDOMNode } from './findDOMNode'
 import { canUseDOM } from './canUseDOM'
 import { getComputedStyle } from './getComputedStyle'
 import { ownerDocument } from './ownerDocument'
+import React from 'react'
 
 /**
  * ---
@@ -37,32 +38,37 @@ import { ownerDocument } from './ownerDocument'
  * as <p> or <div>) that have either been transformed
  * or that do not have static position.
  * @module getOffsetParents
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function | null } el - component or DOM node
  * @returns {Array} offset parents
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-function getOffsetParents(el) {
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'parents' implicitly has type 'any[]' in ... Remove this comment to see the full error message
-  const parents = []
+function getOffsetParents(
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null
+) {
+  const parents: (Node | Window | null)[] = []
 
   if (!canUseDOM) {
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'parents' implicitly has an 'any[]' type.
     return parents
   }
 
-  const node = findDOMNode(el) as any
+  const node = el && findDOMNode(el)
 
   if (node) {
-    let parent = node
+    let parent: Node | Window | null = node
 
     // eslint-disable-next-line no-cond-assign
     while (
-      (parent = parent.parentNode) &&
+      (parent = (parent as Node).parentNode) &&
       parent &&
       parent.nodeType === 1 &&
-      parent.tagName !== 'BODY'
+      (parent as Element).tagName !== 'BODY'
     ) {
-      const style = getComputedStyle(parent)
+      const style = getComputedStyle(parent) as CSSStyleDeclaration
       const transform =
         style.getPropertyValue('-webkit-transform') ||
         style.getPropertyValue('-moz-transform') ||

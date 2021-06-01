@@ -93,7 +93,9 @@ function positioned(element: Element | Node) {
     return true
   if (
     POS.includes(
-      getComputedStyle(element).getPropertyValue('position').toLowerCase()
+      (getComputedStyle(element) as CSSStyleDeclaration)
+        .getPropertyValue('position')
+        .toLowerCase()
     )
   )
     return true
