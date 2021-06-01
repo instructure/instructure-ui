@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
   },
-  "homepage": "https://instructure.github.io/instructure-ui/",
+  "homepage": "https://instructure.design",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "prestart": "node buildScripts/build-docs.js",
@@ -109,6 +109,7 @@
     "react": "^16.8",
     "react-dom": "^16.8",
     "react-github-corner": "^2.1.0",
+    "semver": "^7.3.5",
     "webpack-merge": "^5.7.3"
   },
   "devDependencies": {

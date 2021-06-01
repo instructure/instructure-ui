@@ -25,20 +25,27 @@
 const DOCS_DATA_JSON = 'docs-data.json'
 // eslint-disable-next-line no-console
 console.log('start building application data to file ' + DOCS_DATA_JSON)
+const semver = require('semver')
 const globby = require('globby')
 const path = require('path')
 const getClientProps = require('./utils/getClientProps')
 const processFile = require('./processFile')
 const fs = require('fs')
-//TODO: Rename this env var
-const { DO_THE_VERSION_COPY = '1' } = process.env
-const shouldDoTheVersionCopy = Boolean(parseInt(DO_THE_VERSION_COPY))
+const versionsData = require('../versions.json')
 
 const { COPY_VERSIONS_JSON = '1' } = process.env
 const shouldDoTheVersionCopy = Boolean(parseInt(COPY_VERSIONS_JSON))
 
 const projectRoot = path.resolve(__dirname, '../../../')
 const rootPackage = require(projectRoot + '/package.json') // root package.json
+
+const { major: latestMajorVersion } = semver.coerce(versionsData.latestVersion)
+const { major: rootPackageMajorVersion } = semver.coerce(rootPackage.version)
+
+const isOnLatestMajorVersion = latestMajorVersion === rootPackageMajorVersion
+const resourcePageURL = isOnLatestMajorVersion
+  ? rootPackage.homepage
+  : `${rootPackage.homepage}/v${rootPackageMajorVersion}`
 
 const options = {
   projectRoot: projectRoot,
@@ -54,11 +61,11 @@ const options = {
       // this is usually whatever webpack entries you've defined
       js_external: [
         // should match entries in webpack.config.js
-        `${rootPackage.homepage}vendors~common~globals~ui-docs.js`,
-        `${rootPackage.homepage}vendors~globals~ui-docs.js`,
-        `${rootPackage.homepage}runtime~common.js`,
-        `${rootPackage.homepage}common.js`,
-        `${rootPackage.homepage}globals.js`
+        `${resourcePageURL}/vendors~common~globals~ui-docs.js`,
+        `${resourcePageURL}/vendors~globals~ui-docs.js`,
+        `${resourcePageURL}/runtime~common.js`,
+        `${resourcePageURL}/common.js`,
+        `${resourcePageURL}/globals.js`
       ].join(';')
     }
   },
