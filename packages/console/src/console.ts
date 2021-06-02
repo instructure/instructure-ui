@@ -30,9 +30,10 @@ let loggedInitialDeprecationWarning = false
 function getRenderStack() {
   let renderStack = ''
   try {
-    // @ts-expect-error This does not seem to be typed.
-    renderStack =
-      React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
+    // this is so bad to use, that its not even typed :)
+    renderStack = (
+      React as any
+    ).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
   } catch (error) {
     // log happened outside a react render or couldn't figure out where in the render stack we are.
   }
