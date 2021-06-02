@@ -223,7 +223,6 @@ class Alert extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'liveRegion' implicitly has an 'any' typ... Remove this comment to see the full error message
   initLiveRegion(liveRegion) {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 6 arguments, but got 2.
     error(
       liveRegion.getAttribute('role') === 'alert',
       `[Alert] live region must have role='alert' set on page load in order to announce content`
@@ -390,7 +389,6 @@ class Alert extends Component<Props> {
   render() {
     // Don't render anything if screen reader only
     if (this.props.screenReaderOnly) {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 6 arguments, but got 2.
       error(
         this.getLiveRegion(),
         `[Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'.`

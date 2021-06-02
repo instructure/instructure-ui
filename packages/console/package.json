@@ -19,11 +19,13 @@
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
     "build:watch": "ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json"
+    "build:types": "tsc -p tsconfig.build.json",
+    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.4.0"
+    "@instructure/ui-babel-preset": "8.4.0",
+    "@types/babel-plugin-macros": "^2.8.4"
   },
   "dependencies": {
     "@babel/helper-annotate-as-pure": "^7.8.3",

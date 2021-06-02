@@ -209,7 +209,6 @@ class Focusable extends Component<Props> {
     let focusable = findFocusable(this, () => true, true) || []
     const focusableCount = (focusable && focusable.length) || 0
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       focusableCount === 1,
       `[Focusable] Exactly one focusable child is required (${focusableCount} found).`

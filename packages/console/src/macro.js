@@ -54,12 +54,16 @@ function macro({ babel, references, state }) {
 }
 
 module.exports = createMacro(macro)
+// note: error, warn, warnDeprecrated functions have a third ...args:any[]
+// parameter, but this is currently buggy in JSDoc/TS so it cannot be added
+// in a way that IDEs understand it and the generated .d.ts files are correct.
+
 /**
  * Logs a message to the console if its not a production build.
  * @param isSuppressed Must be false to log anything.
  * @param message The message to log.
  * @param rest anything else to log.
- * @type {function(isSuppressed: boolean, message: string, rest: ...*): *}
+ * @type {function(boolean, string):void}
  */
 exports.error = exports.warn = createMacro(macro)
 
@@ -69,12 +73,12 @@ exports.error = exports.warn = createMacro(macro)
  * @param isSuppressed Must be false to log anything.
  * @param message The message to log.
  * @param rest anything else to log.
- * @type {function(isSuppressed: boolean, message: string, rest: ...*): *}
+ * @type {function(boolean, string): void}
  */
 exports.warnDeprecated = createMacro(macro)
 
 /**
  * Logs a message to the console.
- * @type {function(rest: ...*): *}
+ * @type {function(...*): void}
  */
 exports.info = exports.assert = exports.debug = exports.log = createMacro(macro)

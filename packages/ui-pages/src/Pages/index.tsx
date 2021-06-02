@@ -200,7 +200,7 @@ class Pages extends Component<Props> {
     const activePage =
       activePageIndex < pages.length ? pages[activePageIndex] : null
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
+    // @ts-expect-error ts-migrate(2555) FIXME
     error(activePage, '[Pages] Invalid `activePageIndex`.')
 
     return activePage

@@ -43,7 +43,6 @@ const generateStyle = (componentTheme, props, state) => {
   const withDelimiter = delimiter !== 'none'
   const withSpacing = spacing !== 'none'
 
-  // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
   error(
     !(withDelimiter && withSpacing),
     `[List] \`itemSpacing\` has no effect inside Lists with the \`delimiter\` prop set to anything other than \`none\`.`

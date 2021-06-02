@@ -169,7 +169,6 @@ class KeyboardFocusRegion {
         // Blur the active element to place focus on the document body
         activeElement && (activeElement as HTMLElement).blur()
 
-        // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
         error(
           true,
           `
@@ -200,7 +199,6 @@ class KeyboardFocusRegion {
         // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
         this._focusLaterElement.focus()
       } catch (e) {
-        // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
         error(
           false,
           `

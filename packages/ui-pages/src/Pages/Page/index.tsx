@@ -98,7 +98,6 @@ class Page extends Component<Props> {
       defaultFocusElement = tabbable && tabbable[0]
     }
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'focus' does not exist on type 'ReactElem... Remove this comment to see the full error message
       defaultFocusElement && defaultFocusElement.focus,

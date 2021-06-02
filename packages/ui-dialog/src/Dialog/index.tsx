@@ -209,7 +209,6 @@ class Dialog extends Component<Props> {
 
   focus() {
     if (!this.props.open || !this.contentElement) {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(false, "[Dialog] Can't focus a Dialog that isn't open.")
       return
     }
@@ -222,7 +221,6 @@ class Dialog extends Component<Props> {
 
   blur() {
     if (!this.props.open || !this.contentElement) {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(false, "[Dialog] Can't blur a Dialog that isn't open.")
       return
     }
