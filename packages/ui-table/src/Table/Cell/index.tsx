@@ -48,7 +48,7 @@ parent: Table
 id: Table.Cell
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['textAlign'])
 class Cell extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {

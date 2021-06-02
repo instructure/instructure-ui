@@ -81,7 +81,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, null, [])
 @testable()
 class Pagination extends Component<Props> {
   static propTypes = {
@@ -305,9 +305,8 @@ class Pagination extends Component<Props> {
   renderArrowButton(label, direction, currentPageIndex) {
     // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
     // eslint-disable-next-line react/prop-types
-    const { onClick, disabled } = this.props.children[
-      currentPageIndex + direction
-    ].props
+    const { onClick, disabled } =
+      this.props.children[currentPageIndex + direction].props
 
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
     const handleButtonRef = (el) => {

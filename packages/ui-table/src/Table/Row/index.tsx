@@ -57,7 +57,7 @@ parent: Table
 id: Table.Row
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['hover', 'isStacked'])
 class Row extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {

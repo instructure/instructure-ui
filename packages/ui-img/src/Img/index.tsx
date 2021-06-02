@@ -60,7 +60,13 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'overlay',
+  'withBlur',
+  'withGrayscale',
+  'src',
+  'constrain'
+])
 @testable()
 class Img extends Component<Props> {
   static propTypes = {
@@ -114,13 +120,15 @@ class Img extends Component<Props> {
   }
 
   componentDidMount() {
+    const { supportsObjectFit, hasBackground } = this.makeStylesVariables
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles({ supportsObjectFit, hasBackground })
   }
 
   componentDidUpdate() {
+    const { supportsObjectFit, hasBackground } = this.makeStylesVariables
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles({ supportsObjectFit, hasBackground })
   }
 
   get makeStylesVariables() {

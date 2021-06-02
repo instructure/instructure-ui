@@ -56,7 +56,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['level', 'color', 'border'])
 @testable()
 class Heading extends Component<Props> {
   static propTypes = {

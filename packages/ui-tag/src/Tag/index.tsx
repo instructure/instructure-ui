@@ -62,7 +62,13 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'variant',
+  'size',
+  'dismissible',
+  'onClick',
+  'disabled'
+])
 @testable()
 class Tag extends Component<Props> {
   static propTypes = {

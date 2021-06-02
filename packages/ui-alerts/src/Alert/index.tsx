@@ -75,7 +75,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant'])
 class Alert extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

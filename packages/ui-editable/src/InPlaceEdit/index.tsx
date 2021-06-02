@@ -58,7 +58,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, null, [])
 class InPlaceEdit extends Component<Props> {
   static propTypes = {
     /**

@@ -57,7 +57,13 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'valueNow',
+  'valueMax',
+  'size',
+  'color',
+  'meterColor'
+])
 @testable()
 class ProgressBar extends Component<Props> {
   static propTypes = {

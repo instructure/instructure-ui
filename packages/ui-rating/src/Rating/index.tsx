@@ -52,7 +52,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, null, [])
 @testable()
 class Rating extends Component<Props> {
   static propTypes = {
@@ -146,14 +146,8 @@ class Rating extends Component<Props> {
   }
 
   render() {
-    const {
-      iconCount,
-      animateFill,
-      size,
-      margin,
-      label,
-      formatValueText
-    } = this.props
+    const { iconCount, animateFill, size, margin, label, formatValueText } =
+      this.props
 
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     const valueText = label + ' ' + formatValueText(this.filled, iconCount)

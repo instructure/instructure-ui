@@ -54,7 +54,10 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'onRequestSort',
+  'textAlign'
+])
 class ColHeader extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {
@@ -136,14 +139,8 @@ class ColHeader extends Component<Props> {
   }
 
   render() {
-    const {
-      onRequestSort,
-      width,
-      children,
-      sortDirection,
-      scope,
-      styles
-    } = this.props
+    const { onRequestSort, width, children, sortDirection, scope, styles } =
+      this.props
 
     return (
       <th

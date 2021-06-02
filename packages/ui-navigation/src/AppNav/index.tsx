@@ -61,7 +61,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 @testable()
 class AppNav extends Component<Props> {
   static propTypes = {

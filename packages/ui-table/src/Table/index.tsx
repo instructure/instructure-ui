@@ -62,7 +62,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['layout'])
 class Table extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props
@@ -147,15 +147,8 @@ class Table extends Component<Props> {
   }
 
   render() {
-    const {
-      margin,
-      elementRef,
-      layout,
-      caption,
-      children,
-      hover,
-      styles
-    } = this.props
+    const { margin, elementRef, layout, caption, children, hover, styles } =
+      this.props
     const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : null
 

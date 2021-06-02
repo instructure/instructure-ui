@@ -54,7 +54,7 @@ example: true
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant'])
 class FormFieldMessage extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

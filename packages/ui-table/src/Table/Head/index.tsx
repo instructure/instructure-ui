@@ -58,7 +58,7 @@ parent: Table
 id: Table.Head
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 class Head extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {

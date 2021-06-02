@@ -31,6 +31,7 @@ import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
+import memoized from './memoize'
 /**
  * ---
  * category: utilities/themes
@@ -100,7 +101,12 @@ import { useTheme } from './useTheme'
  * @returns {ReactElement} The decorated WithStyle Component
  */
 const withStyle = decorator(
-  (ComposedComponent: any, generateStyle: any, generateComponentTheme: any) => {
+  (
+    ComposedComponent: any,
+    generateStyle: any,
+    generateComponentTheme: any,
+    propsToListen: any
+  ) => {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
     const WithStyle = forwardRef((props, ref) => {
       const theme = useTheme()
@@ -126,11 +132,33 @@ const withStyle = decorator(
             )
           : {}
       )
-      const makeStyleHandler = (...extraArgs: any[]) => {
-        const calculatedStyles = bidirectionalPolyfill(
-          generateStyle(componentTheme, componentProps, ...extraArgs),
-          dir
-        )
+
+      //Clear cache if it grows too big. This should be replaced with better cache management later
+      if (memoized.cache.size >= 5000) {
+        memoized.cache.clear()
+      }
+      const makeStyleHandler = (extraArgs: any[]) => {
+        const calculatedStyles = propsToListen
+          ? memoized(
+              displayName,
+              propsToListen.reduce(
+                (acc: any, prop: any) => ({
+                  ...acc,
+                  [prop]: componentProps[prop]
+                }),
+                {}
+              ),
+              extraArgs,
+              componentTheme,
+              generateStyle,
+              bidirectionalPolyfill,
+              dir
+            )
+          : bidirectionalPolyfill(
+              generateStyle(componentTheme, componentProps, extraArgs),
+              dir
+            )
+
         if (!isEqual(calculatedStyles, styles)) {
           setStyles(calculatedStyles)
         }

@@ -65,7 +65,12 @@ category: components
 ---
 @module Flex
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'justifyItems',
+  'wrap',
+  'direction',
+  'alignItems'
+])
 class Flex extends Component<Props> {
   constructor(props: Props) {
     super(props)

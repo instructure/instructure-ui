@@ -101,7 +101,7 @@ category: components
 tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['size'])
 @testable()
 class Select extends Component<Props> {
   static propTypes = {
@@ -640,12 +640,8 @@ class Select extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
   renderList(data) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
-    const {
-      isShowingOptions,
-      optionsMaxWidth,
-      visibleOptionsCount,
-      children
-    } = this.props
+    const { isShowingOptions, optionsMaxWidth, visibleOptionsCount, children } =
+      this.props
 
     let lastWasGroup = false
     const viewProps = isShowingOptions

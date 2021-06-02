@@ -65,7 +65,13 @@ id: TreeBrowser.Button
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme, [
+  'size',
+  'variant',
+  'selected',
+  'focused',
+  'level'
+])
 @testable()
 class TreeButton extends Component<Props> {
   static propTypes = {
@@ -157,12 +163,8 @@ class TreeButton extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderCollectionIcon() {
-    const {
-      expanded,
-      collectionIcon,
-      collectionIconExpanded,
-      styles
-    } = this.props
+    const { expanded, collectionIcon, collectionIconExpanded, styles } =
+      this.props
 
     if (collectionIcon || collectionIconExpanded) {
       return (

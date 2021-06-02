@@ -66,7 +66,12 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'isWithinText',
+  'renderIcon',
+  'iconPlacement',
+  'color'
+])
 @testable()
 class Link extends Component<Props> {
   static propTypes = {
@@ -162,14 +167,16 @@ class Link extends Component<Props> {
   state = { hasFocus: false }
 
   componentDidMount() {
+    const { containsTruncateText, hasVisibleChildren } = this.makeStyleProps()
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles({ containsTruncateText, hasVisibleChildren })
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    const { containsTruncateText, hasVisibleChildren } = this.makeStyleProps()
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles({ containsTruncateText, hasVisibleChildren })
   }
 
   makeStyleProps = () => {

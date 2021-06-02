@@ -50,7 +50,7 @@ parent: DrawerLayout
 id: DrawerLayout.Content
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['shouldTransition'])
 @testable()
 class DrawerContent extends Component<Props> {
   static locatorAttribute = 'data-drawer-content'

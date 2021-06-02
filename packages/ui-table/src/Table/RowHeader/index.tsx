@@ -47,7 +47,7 @@ parent: Table
 id: Table.RowHeader
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['textAlign'])
 class RowHeader extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {

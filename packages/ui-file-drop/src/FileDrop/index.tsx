@@ -89,7 +89,7 @@ type State = any
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['height'])
 @testable()
 class FileDrop extends Component<Props, State> {
   static propTypes = {
@@ -240,11 +240,33 @@ class FileDrop extends Component<Props, State> {
     ;(this as any).messagesId = uid('FileDrop-messages')
   }
   componentDidMount() {
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+    const {
+      functionallyDisabled,
+      visuallyDisabled,
+      dragRejected,
+      dragAccepted
+    } = this.makeStyleProps()
+    ;(this.props as any).makeStyles({
+      functionallyDisabled,
+      visuallyDisabled,
+      dragRejected,
+      dragAccepted
+    })
   }
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps: Props, prevState: State, snapshot: any) {
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+    const {
+      functionallyDisabled,
+      visuallyDisabled,
+      dragRejected,
+      dragAccepted
+    } = this.makeStyleProps()
+    ;(this.props as any).makeStyles({
+      functionallyDisabled,
+      visuallyDisabled,
+      dragRejected,
+      dragAccepted
+    })
   }
   makeStyleProps = () => {
     return {
@@ -349,12 +371,8 @@ class FileDrop extends Component<Props, State> {
     return [accepted, rejected]
   }
   handleChange = (e: any) => {
-    const {
-      onDrop,
-      onDropAccepted,
-      onDropRejected,
-      shouldEnablePreview
-    } = this.props
+    const { onDrop, onDropAccepted, onDropRejected, shouldEnablePreview } =
+      this.props
     const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()

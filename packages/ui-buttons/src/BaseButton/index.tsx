@@ -81,7 +81,15 @@ category: components/utilities
 ---
 **/
 
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme, [
+  'size',
+  'color',
+  'textAlign',
+  'shape',
+  'withBackground',
+  'withBorder',
+  'isCondensed'
+])
 @testable()
 class BaseButton extends Component<Props> {
   static propTypes = {
@@ -216,14 +224,16 @@ class BaseButton extends Component<Props> {
   _rootElement = null
 
   componentDidMount() {
+    const { isDisabled, hasOnlyIconVisible } = this.makeStylesVariables
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles({ isDisabled, hasOnlyIconVisible })
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    const { isDisabled, hasOnlyIconVisible } = this.makeStylesVariables
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles({ isDisabled, hasOnlyIconVisible })
   }
 
   get makeStylesVariables() {

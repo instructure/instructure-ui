@@ -73,7 +73,18 @@ parent: Grid
 id: Grid.Col
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'vAlign',
+  'textAlign',
+  'rowSpacing',
+  'colSpacing',
+  'isLastRow',
+  'isLastCol',
+  'startAt',
+  'visualDebug',
+  'width',
+  'offset'
+])
 class GridCol extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {

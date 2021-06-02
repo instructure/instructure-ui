@@ -53,7 +53,7 @@ parent: Table
 id: Table.Body
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 class Body extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {

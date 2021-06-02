@@ -45,7 +45,7 @@ id: Menu.Separator
 ---
 @module MenuItemSeparator
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 @testable()
 class MenuItemSeparator extends Component<Props> {
   static propTypes = {

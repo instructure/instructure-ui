@@ -68,7 +68,7 @@ parent: Menu
 id: Menu.Group
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 @testable()
 class MenuItemGroup extends Component<Props> {
   static propTypes = {

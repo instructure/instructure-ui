@@ -87,7 +87,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, null, [])
 @testable()
 class DateInput extends Component<Props> {
   static Day = Calendar.Day

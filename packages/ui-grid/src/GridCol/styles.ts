@@ -44,6 +44,7 @@ const generateStyle = (componentTheme, props, state) => {
     startAt,
     visualDebug
   } = props
+  let { width, offset } = props
 
   const rowSpacingVariants = {
     small: { marginBottom: componentTheme.spacingSmall },
@@ -108,8 +109,6 @@ const generateStyle = (componentTheme, props, state) => {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getColSize = (breakpoint) => {
-    let { width } = props
-
     if (!width) return
 
     if (width && typeof width === 'object') {
@@ -121,8 +120,6 @@ const generateStyle = (componentTheme, props, state) => {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'breakpoint' implicitly has an 'any' typ... Remove this comment to see the full error message
   const getColOffset = (breakpoint) => {
-    let { offset } = props
-
     if (!offset) return
 
     if (offset && typeof offset === 'object') {

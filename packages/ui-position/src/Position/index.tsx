@@ -74,7 +74,7 @@ type Props = {
 category: components/utilities
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 @testable()
 class Position extends Component<Props> {
   static propTypes = {

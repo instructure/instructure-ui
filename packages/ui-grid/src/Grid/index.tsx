@@ -59,7 +59,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['startAt', 'visualDebug'])
 class Grid extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

@@ -60,7 +60,15 @@ parent: Grid
 id: Grid.Row
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'hAlign',
+  'vAlign',
+  'rowSpacing',
+  'colSpacing',
+  'isLastRow',
+  'startAt',
+  'visualDebug'
+])
 class GridRow extends Component<Props> {
   /* eslint-disable react/require-default-props */
   static propTypes = {

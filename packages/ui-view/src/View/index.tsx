@@ -116,7 +116,34 @@ category: components
 @module View
 **/
 @bidirectional()
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'borderRadius',
+  'borderWidth',
+  'margin',
+  'padding',
+  'position',
+  'display',
+  'focusPosition',
+  'textAlign',
+  'borderColor',
+  'background',
+  'stacking',
+  'shadow',
+  'overflowY',
+  'overflowX',
+  'insetBlockEnd',
+  'insetBlockStart',
+  'insetInlineEnd',
+  'insetInlineStart',
+  'width',
+  'height',
+  'minWidth',
+  'minHeight',
+  'maxWidth',
+  'maxHeight',
+  'withVisualDebug',
+  'dir'
+])
 class View extends Component<Props> {
   static propTypes = {
     /**

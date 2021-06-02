@@ -59,7 +59,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 @testable()
 @hack(['shouldTruncateWhenInvisible'])
 class TruncateText extends Component<Props> {

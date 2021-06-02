@@ -50,7 +50,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant'])
 @testable()
 class ModalBody extends Component<Props> {
   static propTypes = {
@@ -88,15 +88,8 @@ class ModalBody extends Component<Props> {
   }
 
   render() {
-    const {
-      as,
-      elementRef,
-      overflow,
-      variant,
-      padding,
-      children,
-      ...rest
-    } = this.props
+    const { as, elementRef, overflow, variant, padding, children, ...rest } =
+      this.props
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(

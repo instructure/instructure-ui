@@ -67,7 +67,14 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'size',
+  'href',
+  'onClick',
+  'disabled',
+  'hero',
+  'heading'
+])
 class Billboard extends Component<Props> {
   static propTypes = {
     // eslint-disable-next-line react/require-default-props

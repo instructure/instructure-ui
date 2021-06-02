@@ -35,6 +35,7 @@
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
   const { size } = props
+  const { filled } = state
 
   const sizeVariants = {
     small: { fontSize: componentTheme.smallIconFontSize },
@@ -61,7 +62,7 @@ const generateStyle = (componentTheme, props, state) => {
       verticalAlign: 'bottom',
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeVariants[size],
-      color: state.filled
+      color: filled
         ? componentTheme.iconFilledColor
         : componentTheme.iconEmptyColor
     }

@@ -52,7 +52,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['size', 'variant'])
 @testable()
 class Spinner extends Component<Props> {
   static propTypes = {
