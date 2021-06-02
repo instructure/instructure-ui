@@ -48,6 +48,8 @@ jobs:
     name: Deploy docs to Netlify
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Install packages.
         run: yarn install
       - name: Set up project.
