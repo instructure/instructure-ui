@@ -54,26 +54,25 @@ function macro({ babel, references, state }) {
 }
 
 module.exports = createMacro(macro)
-// note: error, warn, warnDeprecrated functions have a third ...args:any[]
-// parameter, but this is currently buggy in JSDoc/TS so it cannot be added
-// in a way that IDEs understand it and the generated .d.ts files are correct.
+
+/**
+ * @callback LogFunc
+ * @param {boolean} isSuppressed Must be false to log anything.
+ * @param {string} message The message to log.
+ * @param {...*} [restParam] anything else to log.
+ * @returns void
+ */
 
 /**
  * Logs a message to the console if its not a production build.
- * @param isSuppressed Must be false to log anything.
- * @param message The message to log.
- * @param rest anything else to log.
- * @type {function(boolean, string):void}
+ * @type LogFunc
  */
 exports.error = exports.warn = createMacro(macro)
 
 /**
  * Logs a deprecation message to the console if its not a production build and
  * the `OMIT_INSTUI_DEPRECATION_WARNINGS` env var is not set or is set to `false`
- * @param isSuppressed Must be false to log anything.
- * @param message The message to log.
- * @param rest anything else to log.
- * @type {function(boolean, string): void}
+ * @type LogFunc
  */
 exports.warnDeprecated = createMacro(macro)
 
