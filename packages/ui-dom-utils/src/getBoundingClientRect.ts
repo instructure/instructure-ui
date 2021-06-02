@@ -56,8 +56,8 @@ function getBoundingClientRect(
     | React.Component
     | ((...args: any[]) => any)
     | null
-): RectType {
-  let rect: RectType = {
+) {
+  const rect: RectType = {
     top: 0,
     bottom: 0,
     left: 0,
@@ -84,7 +84,7 @@ function getBoundingClientRect(
       height: window.innerHeight,
       right: window.innerWidth + window.pageXOffset,
       bottom: window.innerHeight + window.pageYOffset
-    }
+    } as RectType
   }
 
   const doc = el === document ? document : ownerDocument(node)
@@ -96,7 +96,11 @@ function getBoundingClientRect(
 
   const boundingRect = (node as Element).getBoundingClientRect()
 
-  rect = { ...boundingRect }
+  let k: keyof RectType
+
+  for (k in rect) {
+    rect[k] = boundingRect[k]
+  }
 
   if (doc !== document && doc.defaultView) {
     const frameElement = doc.defaultView.frameElement
@@ -128,7 +132,7 @@ function getBoundingClientRect(
         : rect.height) || 0,
     right: doc.body.clientWidth - rect.width - rect.left,
     bottom: doc.body.clientHeight - rect.height - rect.top
-  }
+  } as RectType
 }
 
 export default getBoundingClientRect
