@@ -40,7 +40,6 @@ class FocusRegionManager {
       entry.region.focus()
       return entry.region
     } else {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(
         false,
         `[FocusRegionManager] Could not focus region with element: ${element}`

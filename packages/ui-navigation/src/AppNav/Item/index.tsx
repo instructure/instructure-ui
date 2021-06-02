@@ -176,7 +176,6 @@ class Item extends Component<Props> {
     ])
 
     if (icon) {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(
         labelIsForScreenReaders,
         '[AppNav] If an icon is used, the label text should be wrapped in <ScreenReaderContent />.'

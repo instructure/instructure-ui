@@ -72,7 +72,6 @@ function getShorthandPropValue(
       const themeVariableName = camelize(`${propName}-${shortHandValue}`)
       const themeVariableValue = componentTheme[themeVariableName]
 
-      //@ts-expect-error FIXME:
       error(
         themeVariableValue,
         `[${componentName}] '${themeVariableName}' is an invalid '${propName}' value.`

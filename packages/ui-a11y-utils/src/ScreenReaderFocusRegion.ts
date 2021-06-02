@@ -185,11 +185,9 @@ class ScreenReaderFocusRegion {
         try {
           body = iframe.contentDocument.body
         } catch (e) {
-          // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 3.
           warn(
             false,
-            `[ui-a11y] could not find a document for iframe: ${e}`,
-            iframe
+            `[ui-a11y] could not find a document for iframe: ${e} ${iframe}`
           )
         }
         return body

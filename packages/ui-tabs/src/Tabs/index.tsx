@@ -379,7 +379,6 @@ class Tabs extends Component<Props> {
     const count = tabs.length
     const change = step < 0 ? step + count : step
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       startIndex >= 0 && startIndex < count,
       `[Tabs] Invalid tab index: '${startIndex}'.`
@@ -394,7 +393,6 @@ class Tabs extends Component<Props> {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
     } while (nextTab && nextTab.props && nextTab.props.isDisabled)
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       nextIndex >= 0 && nextIndex < count,
       `[Tabs] Invalid tab index: '${nextIndex}'.`

@@ -97,8 +97,8 @@ class Responsive extends Component<Props> {
   }
 
   componentDidMount() {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
+      // @ts-expect-error FIXME
       this.props.render || this.props.children,
       `[Responsive] must have either a \`render\` prop or \`children\` prop.`
     )
@@ -188,7 +188,6 @@ class Responsive extends Component<Props> {
         // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         const currentValue = mergedProps[prop]
 
-        // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
         error(
           !(prop in mergedProps),
           [

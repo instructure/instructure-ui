@@ -367,7 +367,6 @@ class View extends Component<Props> {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
       this.spanMarginVerified = true
 
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(
         !(function verifySpanMargin(element, margin) {
           if (!element) {
@@ -479,7 +478,6 @@ View.omitViewProps = (props, Component) => {
   if (process.env.NODE_ENV !== 'production') {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     Object.keys(pickProps(props, View.propTypes)).forEach((prop) => {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
     })
   }

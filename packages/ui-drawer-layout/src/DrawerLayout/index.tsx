@@ -341,12 +341,10 @@ class DrawerLayout extends Component<Props> {
       }
     })
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       trayCount <= 1,
       `[DrawerLayout] Only one 'DrawerTray' per 'DrawerLayout' is supported.`
     )
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       contentCount <= 1,
       `[DrawerLayout] Only one 'DrawerContent' per 'DrawerLayout' is supported.`

@@ -122,7 +122,6 @@ class FormFieldLayout extends Component<Props> {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_messagesId' does not exist on type 'For... Remove this comment to see the full error message
     this._messagesId = props.messagesId || uid('FormFieldLayout-messages')
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       typeof props.width !== 'undefined' ||
         !props.inline ||

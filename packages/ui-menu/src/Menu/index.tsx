@@ -290,7 +290,6 @@ class Menu extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
   removeMenuItem = (item) => {
     const index = this.getMenuItemIndex(item)
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(index >= 0, '[Menu] Could not find registered menu item.')
     if (index >= 0) {
       this._menuItems.splice(index, 1)
@@ -428,7 +427,6 @@ class Menu extends Component<Props> {
       // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._menu.focus()
     } else {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(
         // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
         this._trigger && this._trigger.focus,
