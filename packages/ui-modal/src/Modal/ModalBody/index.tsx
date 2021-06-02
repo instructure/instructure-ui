@@ -55,7 +55,7 @@ parent: Modal
 id: Modal.Body
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant'])
 @testable()
 class ModalBody extends Component<Props> {
   static componentId = 'Modal.Body'

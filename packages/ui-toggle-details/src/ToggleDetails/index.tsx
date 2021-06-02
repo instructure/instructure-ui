@@ -61,7 +61,12 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'fluidWidth',
+  'iconPosition',
+  'size',
+  'variant'
+])
 @testable()
 class ToggleDetails extends Component<Props> {
   static componentId = 'ToggleDetails'

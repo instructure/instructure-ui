@@ -55,7 +55,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['alignContent', 'size'])
 class Byline extends Component<Props> {
   static componentId = 'Byline'
 

@@ -66,7 +66,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['placement', 'offset'])
 @testable()
 class CloseButton extends Component<Props> {
   static componentId = 'CloseButton'

@@ -79,7 +79,7 @@ parent: DrawerLayout
 id: DrawerLayout.Tray
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['border'])
 @bidirectional()
 @testable()
 class DrawerTray extends Component<Props & BidirectionalProps> {
@@ -212,7 +212,9 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
   }
   _DOMNode: HTMLSpanElement | null = null
   componentDidMount() {
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+    ;(this.props as any).makeStyles({
+      placement: this.makeStyleProps().placement
+    })
   }
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevState' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps: any, prevState: any, snapshot: any) {
@@ -221,7 +223,9 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
         transitioning: true
       })
     }
-    ;(this.props as any).makeStyles(this.makeStyleProps())
+    ;(this.props as any).makeStyles({
+      placement: this.makeStyleProps().placement
+    })
   }
   makeStyleProps = () => {
     return {

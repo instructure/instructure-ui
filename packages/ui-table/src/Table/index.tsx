@@ -67,7 +67,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['layout'])
 class Table extends Component<Props> {
   static componentId = 'Table'
 

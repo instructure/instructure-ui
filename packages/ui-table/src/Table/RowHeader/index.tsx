@@ -47,7 +47,7 @@ parent: Table
 id: Table.RowHeader
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['textAlign'])
 class RowHeader extends Component<Props> {
   static componentId = 'Table.RowHeader'
 

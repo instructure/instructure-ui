@@ -75,7 +75,12 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'border',
+  'shadow',
+  'size',
+  'placement'
+])
 @bidirectional()
 @testable()
 class Tray extends Component<Props & BidirectionalProps> {

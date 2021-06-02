@@ -106,7 +106,7 @@ category: components
 tags: autocomplete, typeahead, combobox, dropdown, search, form
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['size'])
 @testable()
 class Select extends Component<Props> {
   static componentId = 'Select'

@@ -81,7 +81,7 @@ category: components
 tags: form, field
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['size', 'textAlign', 'as'])
 @testable()
 class TextInput extends Component<Props> {
   static componentId = 'TextInput'
@@ -243,14 +243,16 @@ class TextInput extends Component<Props> {
   }
 
   componentDidMount() {
+    const { disabled, invalid, focused } = this.makeStyleProps()
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles({ disabled, invalid, focused })
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
+    const { disabled, invalid, focused } = this.makeStyleProps()
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles({ disabled, invalid, focused })
   }
 
   makeStyleProps = () => {

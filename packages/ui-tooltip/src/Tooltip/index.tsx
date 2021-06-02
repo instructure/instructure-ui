@@ -72,7 +72,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 @testable()
 class Tooltip extends Component<Props> {
   static componentId = 'Tooltip'

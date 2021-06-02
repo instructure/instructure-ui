@@ -55,7 +55,7 @@ example: true
 <FormFieldMessage variant="error">Invalid value</FormFieldMessage>
 ```
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant'])
 class FormFieldMessage extends Component<Props> {
   static componentId = 'FormFieldMessage'
 

@@ -77,7 +77,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['disabled', 'size'])
 @testable()
 class TextArea extends Component<Props> {
   static componentId = 'TextArea'

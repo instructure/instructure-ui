@@ -60,7 +60,7 @@ example: true
 ]} />
 ```
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 class FormFieldMessages extends Component<Props> {
   static componentId = 'FormFieldMessages'
 

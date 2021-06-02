@@ -62,7 +62,7 @@ parent: Tabs
 id: Tabs.Panel
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['maxHeight'])
 class Panel extends Component<Props> {
   static componentId = 'Tabs.Panel'
 

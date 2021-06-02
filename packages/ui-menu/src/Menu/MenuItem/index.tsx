@@ -64,7 +64,7 @@ parent: Menu
 id: Menu.Item
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['type', 'disabled'])
 @testable()
 class MenuItem extends Component<Props> {
   static componentId = 'Menu.Item'

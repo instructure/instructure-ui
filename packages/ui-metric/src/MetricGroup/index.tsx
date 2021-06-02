@@ -43,7 +43,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [])
 @testable()
 class MetricGroup extends Component<Props> {
   static componentId = 'MetricGroup'

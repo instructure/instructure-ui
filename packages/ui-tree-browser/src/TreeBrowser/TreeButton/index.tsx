@@ -65,7 +65,13 @@ id: TreeBrowser.Button
 
 // Todo: merge TreeButton and TreeNode: TreeButton should be a special type of TreeNode
 
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme, [
+  'size',
+  'variant',
+  'selected',
+  'focused',
+  'level'
+])
 @testable()
 class TreeButton extends Component<Props> {
   static componentId = 'TreeBrowser.Button'

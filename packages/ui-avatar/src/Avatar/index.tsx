@@ -77,7 +77,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['size', 'shape', 'src'])
 @testable()
 class Avatar extends Component<Props> {
   static componentId = 'Avatar'
@@ -153,12 +153,12 @@ class Avatar extends Component<Props> {
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.state)
+    this.props.makeStyles({ loaded: this.state.loaded })
   }
 
   componentDidUpdate() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.state)
+    this.props.makeStyles({ loaded: this.state.loaded })
   }
 
   makeInitialsFromName() {

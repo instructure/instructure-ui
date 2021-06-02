@@ -64,7 +64,13 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'overlay',
+  'withBlur',
+  'withGrayscale',
+  'src',
+  'constrain'
+])
 @testable()
 class Img extends Component<Props> {
   static componentId = 'Img'

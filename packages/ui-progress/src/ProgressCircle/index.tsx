@@ -65,7 +65,13 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'size',
+  'color',
+  'meterColor',
+  'valueNow',
+  'valueMax'
+])
 @testable()
 class ProgressCircle extends Component<Props> {
   static componentId = 'ProgressCircle'
@@ -195,13 +201,17 @@ class ProgressCircle extends Component<Props> {
     }
 
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles({
+      shouldAnimateOnMount: this.makeStylesVariables.shouldAnimateOnMount
+    })
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles({
+      shouldAnimateOnMount: this.makeStylesVariables.shouldAnimateOnMount
+    })
   }
 
   componentWillUnmount() {

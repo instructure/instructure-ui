@@ -76,7 +76,7 @@ id: TreeBrowser.Collection
 ---
 **/
 
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme, ['size', 'variant'])
 @testable()
 class TreeCollection extends Component<Props> {
   static componentId = 'TreeBrowser.Collection'
@@ -234,13 +234,8 @@ class TreeCollection extends Component<Props> {
   }
 
   renderChildren() {
-    const {
-      collections,
-      items,
-      id,
-      renderBeforeItems,
-      renderAfterItems
-    } = this.props
+    const { collections, items, id, renderBeforeItems, renderAfterItems } =
+      this.props
 
     let position = 1
     return (
@@ -356,13 +351,8 @@ class TreeCollection extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type.
   renderItemNode(item, position) {
-    const {
-      selection,
-      onItemClick,
-      onKeyDown,
-      getItemProps,
-      styles
-    } = this.props
+    const { selection, onItemClick, onKeyDown, getItemProps, styles } =
+      this.props
 
     const ariaSelected = {}
 

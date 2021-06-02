@@ -58,7 +58,13 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'disabled',
+  'variant',
+  'context',
+  'size',
+  'inline'
+])
 @testable()
 class RadioInput extends Component<Props> {
   static componentId = 'RadioInput'

@@ -68,7 +68,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['size'])
 @testable()
 class RangeInput extends Component<Props> {
   static componentId = 'RangeInput'

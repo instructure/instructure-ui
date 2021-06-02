@@ -46,7 +46,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['textAlign'])
 @testable()
 class Metric extends Component<Props> {
   static componentId = 'Metric'
@@ -83,13 +83,8 @@ class Metric extends Component<Props> {
   }
 
   render() {
-    const {
-      textAlign,
-      renderLabel,
-      renderValue,
-      isGroupChild,
-      ...rest
-    } = this.props
+    const { textAlign, renderLabel, renderValue, isGroupChild, ...rest } =
+      this.props
 
     return (
       <div

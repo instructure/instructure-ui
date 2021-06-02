@@ -67,7 +67,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['attachment'])
 @testable()
 class CodeEditor extends Component<Props> {
   static componentId = 'CodeEditor'
@@ -165,15 +165,8 @@ class CodeEditor extends Component<Props> {
   }
 
   render() {
-    const {
-      value,
-      label,
-      attachment,
-      readOnly,
-      onChange,
-      styles,
-      ...rest
-    } = this.props
+    const { value, label, attachment, readOnly, onChange, styles, ...rest } =
+      this.props
 
     return (
       <div css={styles.codeEditor}>

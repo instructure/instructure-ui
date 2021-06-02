@@ -48,7 +48,7 @@ parent: Table
 id: Table.Cell
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['textAlign'])
 class Cell extends Component<Props> {
   static componentId = 'Table.Cell'
 

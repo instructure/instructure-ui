@@ -48,7 +48,7 @@ type Props = {
 category: components/utilities
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['placement', 'fullscreen'])
 class Mask extends Component<Props> {
   static componentId = 'Mask'
 

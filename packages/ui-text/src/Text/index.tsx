@@ -63,7 +63,16 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'size',
+  'wrap',
+  'weight',
+  'fontStyle',
+  'transform',
+  'lineHeight',
+  'letterSpacing',
+  'color'
+])
 class Text extends Component<Props> {
   static componentId = 'Text'
 

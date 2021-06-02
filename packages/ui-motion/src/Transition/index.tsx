@@ -70,7 +70,7 @@ category: components/utilities
 ---
 @module Transition
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['type'])
 @testable()
 class Transition extends Component<Props> {
   static componentId = 'Transition'

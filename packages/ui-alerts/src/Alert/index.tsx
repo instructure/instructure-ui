@@ -74,7 +74,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant'])
 class Alert extends Component<Props> {
   static componentId = 'Alert'
 

@@ -49,7 +49,7 @@ parent: Modal
 id: Modal.Header
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant'])
 @testable()
 class ModalHeader extends Component<Props> {
   static componentId = 'Modal.Header'
@@ -71,13 +71,17 @@ class ModalHeader extends Component<Props> {
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles({
+      withCloseButton: this.makeStyleProps().withCloseButton
+    })
   }
 
   // @ts-expect-error ts-migrate(6133) FIXME: 'prevProps' is declared but its value is never rea... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState, snapshot) {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleProps())
+    this.props.makeStyles({
+      withCloseButton: this.makeStyleProps().withCloseButton
+    })
   }
 
   makeStyleProps = () => {

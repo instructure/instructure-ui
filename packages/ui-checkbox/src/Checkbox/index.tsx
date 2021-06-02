@@ -79,7 +79,7 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['inline', 'disabled'])
 @testable()
 class Checkbox extends Component<Props> {
   static componentId = 'Checkbox'

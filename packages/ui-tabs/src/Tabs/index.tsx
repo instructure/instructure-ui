@@ -79,7 +79,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['variant', 'tabOverflow'])
 @bidirectional()
 @testable()
 class Tabs extends Component<Props & BidirectionalProps> {

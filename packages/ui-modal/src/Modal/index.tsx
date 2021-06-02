@@ -88,7 +88,11 @@ category: components
 tags: overlay, portal, dialog
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'size',
+  'variant',
+  'overflow'
+])
 @testable()
 class Modal extends Component<Props> {
   static componentId = 'Modal'

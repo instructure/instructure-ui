@@ -53,7 +53,11 @@ parent: Tabs
 id: Tabs.Tab
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'variant',
+  'isSelected',
+  'isDisabled'
+])
 class Tab extends Component<Props> {
   static componentId = 'Tabs.Tab'
 

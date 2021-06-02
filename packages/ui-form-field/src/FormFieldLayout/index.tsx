@@ -65,7 +65,7 @@ type Props = {
 parent: FormField
 ---
 **/
-@withStyle(generateStyle)
+@withStyle(generateStyle, null, ['inline'])
 class FormFieldLayout extends Component<Props> {
   static componentId = 'FormFieldLayout'
 

@@ -57,7 +57,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, null)
+@withStyle(generateStyle, null, [])
 @bidirectional()
 @testable()
 class DrawerLayout extends Component<Props & BidirectionalProps> {

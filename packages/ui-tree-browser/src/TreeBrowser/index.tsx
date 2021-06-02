@@ -71,7 +71,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyles, generateComponentTheme)
+@withStyle(generateStyles, generateComponentTheme, [])
 @testable()
 class TreeBrowser extends Component<Props> {
   static componentId = 'TreeBrowser'

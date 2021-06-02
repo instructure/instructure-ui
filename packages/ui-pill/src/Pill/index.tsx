@@ -56,7 +56,7 @@ type Props = {
 category: components
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['color'])
 @testable()
 class Pill extends Component<Props> {
   static componentId = 'Pill'

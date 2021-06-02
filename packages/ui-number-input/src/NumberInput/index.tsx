@@ -79,7 +79,7 @@ category: components
 id: NumberInput
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, ['size'])
 @testable()
 class NumberInput extends Component<Props> {
   static componentId = 'NumberInput'
@@ -238,13 +238,15 @@ class NumberInput extends Component<Props> {
   }
 
   componentDidMount() {
+    const { interaction, hasFocus, invalid } = this.makeStyleVariables
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleVariables)
+    this.props.makeStyles({ interaction, hasFocus, invalid })
   }
 
   componentDidUpdate() {
+    const { interaction, hasFocus, invalid } = this.makeStyleVariables
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStyleVariables)
+    this.props.makeStyles({ interaction, hasFocus, invalid })
   }
 
   get makeStyleVariables() {

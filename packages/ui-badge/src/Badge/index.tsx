@@ -65,7 +65,13 @@ category: components
 ---
 **/
 
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'type',
+  'variant',
+  'placement',
+  'standalone',
+  'pulse'
+])
 @testable()
 class Badge extends Component<Props> {
   static componentId = 'Badge'
@@ -164,13 +170,8 @@ class Badge extends Component<Props> {
   }
 
   renderOutput() {
-    const {
-      count,
-      countUntil,
-      formatOverflowText,
-      formatOutput,
-      type
-    } = this.props
+    const { count, countUntil, formatOverflowText, formatOutput, type } =
+      this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop

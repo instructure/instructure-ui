@@ -38,13 +38,13 @@
  */
 // @ts-expect-error ts-migrate(6133) FIXME: 'state' is declared but its value is never read.
 const generateStyle = (componentTheme: any, props: any, state: any) => {
-  const { justifyItems, wrap, direction } = props
+  const { justifyItems, wrap, direction, alignItems: alignItemsProp } = props
 
   // align-items css prop
   // When flex direction is row, 'center' is the most useful default because it
   // vertically aligns Items. For column direction, though, we want 'stretch'.
   const alignItems =
-    props.alignItems ||
+    alignItemsProp ||
     (direction === 'column' || direction === 'column-reverse'
       ? 'stretch'
       : 'center')

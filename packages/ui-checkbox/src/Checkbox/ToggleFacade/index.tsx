@@ -49,7 +49,12 @@ type Props = {
 parent: Checkbox
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'size',
+  'checked',
+  'focused',
+  'labelPlacement'
+])
 class ToggleFacade extends Component<Props> {
   static componentId = 'ToggleFacade'
 

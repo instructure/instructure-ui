@@ -55,7 +55,10 @@ parent: Table
 id: Table.ColHeader
 ---
 **/
-@withStyle(generateStyle, generateComponentTheme)
+@withStyle(generateStyle, generateComponentTheme, [
+  'onRequestSort',
+  'textAlign'
+])
 class ColHeader extends Component<Props> {
   static componentId = 'Table.ColHeader'
 
