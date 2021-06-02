@@ -36,7 +36,7 @@ type RequestAnimationFrameType = { cancel: () => void }
  * a manual timeout.
  * @module requestAnimationFrame
  *
- * @returns {{ cancel: () => void }} requestAnimationFrame takes a callback function as an argument and returns a cancel method
+ * @returns {function} requestAnimationFrame takes a callback function as an argument and returns a cancel method
  */
 const requestAnimationFrame = (function () {
   let requestAnimationFrame
