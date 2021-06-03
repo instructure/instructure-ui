@@ -25,7 +25,7 @@
 import { memoize } from 'lodash'
 
 const fnToMemoize = (
-  displayName: any,
+  _displayName: any,
   componentProps: any,
   extraArgs: any,
   componentTheme: any,
