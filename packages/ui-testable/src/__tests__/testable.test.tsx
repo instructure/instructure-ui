@@ -45,6 +45,7 @@ class Component extends React.Component {
   }
   static displayName = 'Component'
   render() {
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'hide' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     const { hide, children } = this.props
     return !hide ? children : null
   }

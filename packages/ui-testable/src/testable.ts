@@ -34,8 +34,10 @@ const testable =
   // ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
   // We do this because adding those `data-cid` locators slows things down.
   !process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
-    ? () => (Component) => Component
-    : decorator((ComposedComponent) => {
+    ? // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'Component' implicitly has an 'any' type... Remove this comment to see the full error message
+      () => (Component) => Component
+    : // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'ComposedComponent' implicitly has an 'a... Remove this comment to see the full error message
+      decorator((ComposedComponent) => {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
         const locator = {
@@ -45,18 +47,21 @@ const testable =
         const selector = `[${locator.attribute}~="${locator.value}"]`
         class TestableComponent extends ComposedComponent {
           static selector = selector
+          // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
           componentDidMount(...args) {
             if (super.componentDidMount) {
               super.componentDidMount(...args)
             }
             this.appendLocatorAttribute()
           }
+          // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
           componentDidUpdate(...args) {
             if (super.componentDidUpdate) {
               super.componentDidUpdate(...args)
             }
             this.appendLocatorAttribute()
           }
+          // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
           componentWillUnmount(...args) {
             this._testableUnmounted = true
             if (super.componentWillUnmount) {
@@ -72,6 +77,7 @@ const testable =
               }
               try {
                 // Use this.DOMNode for components that render as non-native Portals...
+                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'this' is not assignable to param... Remove this comment to see the full error message
                 node = this.DOMNode || findDOMNode(this)
               } catch (e) {
                 console.warn(
