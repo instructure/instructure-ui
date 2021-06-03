@@ -30,16 +30,10 @@
  * Get the active element of the specified document
  * @module getActiveElement
  * @param { Document } doc - document by default or user specified doc
- * @throws Will throw an error in ie if no active element
  * @return { Element | null } the active element
  */
 function getActiveElement(doc?: Document) {
-  try {
-    return (doc || document).activeElement
-  } catch (e) {
-    /* ie throws if no active element */
-    return null
-  }
+  return (doc || document).activeElement
 }
 
 export default getActiveElement

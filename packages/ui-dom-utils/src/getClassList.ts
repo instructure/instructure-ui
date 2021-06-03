@@ -25,8 +25,6 @@
 import { findDOMNode } from './findDOMNode'
 import React from 'react'
 
-let classListShimmed = false
-
 type ClassListApiType = {
   toArray: () => string[]
   contains: (className: string) => boolean
@@ -69,7 +67,6 @@ function getClassList(
 
   const classListApi: ClassListApiType = {
     toArray() {
-      shimClassListForIE()
       return [...(node as Element).classList]
     },
     contains: () => false,
@@ -78,41 +75,18 @@ function getClassList(
   }
 
   classListApi['add'] = (className: string) => {
-    shimClassListForIE()
     return (node as Element).classList.add(className)
   }
 
   classListApi['remove'] = (className: string) => {
-    shimClassListForIE()
     return (node as Element).classList.remove(className)
   }
 
   classListApi['contains'] = (className: string) => {
-    shimClassListForIE()
     return (node as Element).classList.contains(className)
   }
 
   return classListApi
-}
-
-function shimClassListForIE() {
-  // IE 11 doesn't support classList on SVG elements
-  /* istanbul ignore if */
-  if (!classListShimmed) {
-    if (
-      !(
-        'classList' in
-        document.createElementNS('http://www.w3.org/2000/svg', 'g')
-      )
-    ) {
-      const descr = Object.getOwnPropertyDescriptor(
-        HTMLElement.prototype,
-        'classList'
-      )
-      descr && Object.defineProperty(SVGElement.prototype, 'classList', descr)
-    }
-    classListShimmed = true
-  }
 }
 
 export default getClassList

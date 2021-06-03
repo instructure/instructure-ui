@@ -26,7 +26,7 @@ import { ownerDocument } from './ownerDocument'
 import { getComputedStyle } from './getComputedStyle'
 import React from 'react'
 
-const COMPUTED_CACHE: Record<string, number> = {}
+const COMPUTED_CACHE: WeakMap<any, number> = new WeakMap()
 
 /**
  * ---
@@ -49,11 +49,11 @@ function getFontSize(
   }
 
   const container = el || ownerDocument(el).documentElement
-  const containerString = container.toString()
 
   // return the cached font size if it's there
-  if (!ignoreCache && COMPUTED_CACHE[containerString]) {
-    return COMPUTED_CACHE[containerString]
+  const cachedValue = COMPUTED_CACHE.get(container)
+  if (!ignoreCache && cachedValue) {
+    return cachedValue
   }
 
   const fontSize = parseInt(
@@ -63,7 +63,7 @@ function getFontSize(
   )
 
   // cache the computed font size so that we don't have to compute it again
-  COMPUTED_CACHE[containerString] = fontSize
+  COMPUTED_CACHE.set(container, fontSize)
 
   return fontSize
 }
