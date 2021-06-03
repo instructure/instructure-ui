@@ -29,7 +29,11 @@ import { mount, expect, find, findAll } from '@instructure/ui-test-utils'
 
 import { testable } from '../index'
 
-class Component extends React.Component {
+type Props = {
+  hide?: boolean
+}
+
+class Component extends React.Component<Props> {
   static propTypes = {
     hide: PropTypes.bool,
     children: PropTypes.node
@@ -45,7 +49,6 @@ class Component extends React.Component {
   }
   static displayName = 'Component'
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'hide' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     const { hide, children } = this.props
     return !hide ? children : null
   }
