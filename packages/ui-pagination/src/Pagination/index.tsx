@@ -303,9 +303,9 @@ class Pagination extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'label' implicitly has an 'any' type.
   renderArrowButton(label, direction, currentPageIndex) {
-    // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
     // eslint-disable-next-line react/prop-types
     const { onClick, disabled } =
+      // @ts-expect-error FIXME: Object is possibly 'null' or 'undefined'.
       this.props.children[currentPageIndex + direction].props
 
     // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
