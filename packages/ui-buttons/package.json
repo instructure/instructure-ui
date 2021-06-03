@@ -45,6 +45,7 @@
     "@instructure/ui-tooltip": "8.5.0",
     "@instructure/ui-utils": "8.5.0",
     "@instructure/ui-view": "8.5.0",
+    "@instructure/ui-i18n": "8.5.0",
     "keycode": "^2",
     "prop-types": "^15"
   },
