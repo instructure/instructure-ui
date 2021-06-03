@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+import { DIRECTION } from '@instructure/ui-i18n'
+import { mirrorShorthandEdges } from '@instructure/emotion'
+
 /**
  * ---
  * private: true
@@ -41,7 +44,8 @@ const generateStyle = (componentTheme, props, state) => {
     shape,
     withBackground,
     withBorder,
-    isCondensed
+    isCondensed,
+    dir
   } = props
 
   const { isDisabled, hasOnlyIconVisible } = state
@@ -271,6 +275,16 @@ const generateStyle = (componentTheme, props, state) => {
         }
   }
 
+  const isRtlDirection = dir === DIRECTION.rtl
+  let iconWrapperPadding = `0 ${
+    isCondensed
+      ? componentTheme.iconTextGapCondensed
+      : componentTheme.iconTextGap
+  } 0 0`
+  iconWrapperPadding = isRtlDirection
+    ? mirrorShorthandEdges(iconWrapperPadding)!
+    : iconWrapperPadding
+
   return {
     baseButton: {
       label: 'baseButton',
@@ -358,8 +372,8 @@ const generateStyle = (componentTheme, props, state) => {
       ...sizeVariants[size].iconSVG
     },
 
-    flex: {
-      label: 'baseButton__flex',
+    childrenLayout: {
+      label: 'baseButton__childrenLayout',
       display: 'flex',
       height: '100%',
       width: '100%',
@@ -367,31 +381,45 @@ const generateStyle = (componentTheme, props, state) => {
         hasOnlyIconVisible || textAlign === 'center' ? 'center' : 'flex-start',
       boxSizing: 'border-box',
       alignItems: 'center',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      maxWidth: '100%',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      unicodeBidi: 'isolate'
     },
 
-    flexOnlyIcon: {
-      label: 'baseButton__flexOnlyIcon',
-      boxSizing: 'border-box',
-      minWidth: '0.0625rem'
-    },
-
-    flexIcon: {
-      label: 'baseButton__flexIcon',
+    iconOnly: {
+      label: 'baseButton__iconOnly',
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
-      padding: `0 ${
-        isCondensed
-          ? componentTheme.iconTextGapCondensed
-          : componentTheme.iconTextGap
-      } 0 0`
+      flexShrink: 0,
+      maxWidth: '100%',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      unicodeBidi: 'isolate'
     },
 
-    flexIconChildren: {
-      label: 'baseButton__flexIconChildren',
+    iconWrapper: {
+      label: 'baseButton__iconWrapper',
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
-      flexShrink: 1
+      padding: iconWrapperPadding,
+      flexShrink: 0,
+      maxWidth: '100%',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      unicodeBidi: 'isolate'
+    },
+
+    childrenWrapper: {
+      label: 'baseButton__childrenWrapper',
+      boxSizing: 'border-box',
+      minWidth: '0.0625rem',
+      flexShrink: 1,
+      maxWidth: '100%',
+      overflowX: 'visible',
+      overflowY: 'visible',
+      unicodeBidi: 'isolate'
     }
   }
 }
