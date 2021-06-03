@@ -30,7 +30,7 @@
  * @module capitalizeFirstLetter
  * @param {String} str
  */
-function capitalizeFirstLetter(str: string | undefined) {
+function capitalizeFirstLetter(str?: string) {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : str
 }
 
