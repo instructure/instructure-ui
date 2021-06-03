@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { ComponentState } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import { decorator } from '@instructure/ui-decorator'
@@ -34,10 +35,8 @@ const testable =
   // ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
   // We do this because adding those `data-cid` locators slows things down.
   !process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
-    ? // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'Component' implicitly has an 'any' type... Remove this comment to see the full error message
-      () => (Component) => Component
-    : // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'ComposedComponent' implicitly has an 'a... Remove this comment to see the full error message
-      decorator((ComposedComponent) => {
+    ? () => (Component: any) => Component
+    : decorator((ComposedComponent: any) => {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
         const locator = {
@@ -45,40 +44,48 @@ const testable =
           value: displayName
         }
         const selector = `[${locator.attribute}~="${locator.value}"]`
-        class TestableComponent extends ComposedComponent {
+        class TestableComponent<
+          P = Record<string, unknown>,
+          S = ComponentState
+        > extends ComposedComponent {
           static selector = selector
-          // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-          componentDidMount(...args) {
+          private _testableUnmounted: boolean | undefined
+          _locatorTimeout: NodeJS.Timeout | undefined
+          private DOMNode: any
+          componentDidMount() {
             if (super.componentDidMount) {
-              super.componentDidMount(...args)
+              super.componentDidMount()
             }
             this.appendLocatorAttribute()
           }
-          // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-          componentDidUpdate(...args) {
+          componentDidUpdate?(
+            prevProps: Readonly<P>,
+            prevState: Readonly<S>,
+            snapshot?: any
+          ) {
             if (super.componentDidUpdate) {
-              super.componentDidUpdate(...args)
+              super.componentDidUpdate(prevProps, prevState, snapshot)
             }
             this.appendLocatorAttribute()
           }
-          // @ts-expect-error ts-migrate(7019) FIXME: Rest parameter 'args' implicitly has an 'any[]' ty... Remove this comment to see the full error message
-          componentWillUnmount(...args) {
+          componentWillUnmount() {
             this._testableUnmounted = true
             if (super.componentWillUnmount) {
-              super.componentWillUnmount(...args)
+              super.componentWillUnmount()
             }
-            clearTimeout(this.locatorTimeout)
+            if (this._locatorTimeout) {
+              clearTimeout(this._locatorTimeout)
+            }
           }
           appendLocatorAttribute() {
-            this.locatorTimeout = setTimeout(() => {
+            this._locatorTimeout = setTimeout(() => {
               let node
               if (this._testableUnmounted) {
                 return
               }
               try {
                 // Use this.DOMNode for components that render as non-native Portals...
-                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'this' is not assignable to param... Remove this comment to see the full error message
-                node = this.DOMNode || findDOMNode(this)
+                node = this.DOMNode || findDOMNode(this as any)
               } catch (e) {
                 console.warn(
                   `[ui-testable] Could not append locator attribute: ${e}`
