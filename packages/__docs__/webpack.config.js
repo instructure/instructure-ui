@@ -43,7 +43,7 @@ const config = merge(baseConfig, {
   },
   output: {
     path: outputPath,
-    filename: '[name].[contenthash].js'
+    filename: '[name].js'
   },
 
   devServer: {
