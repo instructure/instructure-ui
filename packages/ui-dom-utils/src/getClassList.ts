@@ -25,14 +25,14 @@
 import { findDOMNode } from './findDOMNode'
 import React from 'react'
 
-type ClassListApiType = {
+type ClassListApi = {
   toArray: () => string[]
   contains: (className: string) => boolean
   add: (className: string) => void
   remove: (className: string) => void
 }
 
-const apiForEmptyNode: ClassListApiType = {
+const apiForEmptyNode: ClassListApi = {
   toArray: () => [],
   contains: () => false,
   add: () => {},
@@ -65,7 +65,7 @@ function getClassList(
 
   if (!node) return apiForEmptyNode
 
-  const classListApi: ClassListApiType = {
+  const classListApi: ClassListApi = {
     toArray() {
       return [...(node as Element).classList]
     },

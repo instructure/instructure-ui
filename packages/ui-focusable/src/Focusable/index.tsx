@@ -80,7 +80,8 @@ class Focusable extends Component<Props> {
 
   _focusListener: { remove(): void } | null = null
   _blurListener: { remove(): void } | null = null
-  _inputModeListener: { isKeyboardMode(): void; remove(): void } | null = null
+  _inputModeListener: { isKeyboardMode(): boolean; remove(): void } | null =
+    null
 
   state = {
     focused: false,

@@ -42,8 +42,7 @@ import React from 'react'
 function getComputedStyle(
   el: Node | Window | React.ReactElement | ((...args: any[]) => any)
 ) {
-  let style: CSSStyleDeclaration | Record<string, never> = {}
-
+  let style = {}
   if (canUseDOM) {
     const node = el && findDOMNode(el)
     if (node) {
@@ -51,8 +50,7 @@ function getComputedStyle(
       style = window !== null ? window.getComputedStyle(node as Element) : {}
     }
   }
-
-  return style
+  return style as CSSStyleDeclaration
 }
 
 export default getComputedStyle
