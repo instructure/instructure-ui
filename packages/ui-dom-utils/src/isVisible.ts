@@ -61,7 +61,7 @@ function isVisible(
     return isVisible(parent, recursive)
   }
 
-  const style = node ? getComputedStyle(node) : {}
+  const style = node ? getComputedStyle(node) : ({} as CSSStyleDeclaration)
   // physically and visually hidden
   if (style.display === 'none') {
     return false
