@@ -61,8 +61,8 @@ const options = {
       // this is usually whatever webpack entries you've defined
       js_external: [
         // should match entries in webpack.config.js
-        `${resourcePageURL}/vendors~common~globals~ui-docs.js`,
-        `${resourcePageURL}/vendors~globals~ui-docs.js`,
+        `${resourcePageURL}/vendors~common~globals~main.js`,
+        `${resourcePageURL}/vendors~globals~main.js`,
         `${resourcePageURL}/runtime~common.js`,
         `${resourcePageURL}/common.js`,
         `${resourcePageURL}/globals.js`
