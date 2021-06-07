@@ -34,7 +34,6 @@
     "@babel/runtime": "^7.13.10",
     "@instructure/emotion": "8.5.0",
     "@instructure/ui-dom-utils": "8.5.0",
-    "@instructure/ui-flex": "8.5.0",
     "@instructure/ui-form-field": "8.5.0",
     "@instructure/ui-icons": "8.5.0",
     "@instructure/ui-prop-types": "8.5.0",
