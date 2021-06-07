@@ -25,11 +25,16 @@
 import { expect } from '@instructure/ui-test-utils'
 import { makeRequirable } from '../index'
 
-function mockValidator(props, propName, componentName) {
+function mockValidator(
+  props: { [key: string]: any },
+  propName: string,
+  componentName: string
+) {
   const propValue = props[propName]
   if (propValue === 'purple') {
     return new Error(`Purple is not accepted in ${componentName}!`)
   }
+  return null
 }
 
 mockValidator.isRequired = makeRequirable(mockValidator)
@@ -40,12 +45,12 @@ describe('makeRequirable', () => {
       value: 'green'
     }
 
-    const args = [props, 'value', 'TestComponent']
-
-    expect(mockValidator(...args)).to.not.exist()
+    expect(mockValidator(props, 'value', 'TestComponent')).to.not.exist()
 
     props.value = 'purple'
-    expect(mockValidator(...args)).to.be.an.instanceOf(Error)
+    expect(mockValidator(props, 'value', 'TestComponent')).to.be.an.instanceOf(
+      Error
+    )
   })
 
   it('should validate when required', () => {
@@ -53,12 +58,14 @@ describe('makeRequirable', () => {
       value: 'green'
     }
 
-    const args = [props, 'value', 'TestComponent']
-
-    expect(mockValidator.isRequired(...args)).to.not.exist()
+    expect(
+      mockValidator.isRequired(props, 'value', 'TestComponent')
+    ).to.not.exist()
 
     props.value = 'purple'
-    expect(mockValidator.isRequired(...args)).to.be.an.instanceOf(Error)
+    expect(
+      mockValidator.isRequired(props, 'value', 'TestComponent')
+    ).to.be.an.instanceOf(Error)
   })
 
   it('should error if required prop is null or undefined', () => {
@@ -66,19 +73,22 @@ describe('makeRequirable', () => {
       value: null
     }
 
-    const args = [props, 'value', 'TestComponent']
-
     // null values are accepted when not required
-    expect(mockValidator(...args)).to.not.exist()
+    expect(mockValidator(props, 'value', 'TestComponent')).to.not.exist()
 
     // null values are rejected when required
-    expect(mockValidator.isRequired(...args)).to.be.an.instanceOf(Error)
+    expect(
+      mockValidator.isRequired(props, 'value', 'TestComponent')
+    ).to.be.an.instanceOf(Error)
 
     // undefined values are accepted when not required
-    args[1] = 'undefinedProp'
-    expect(mockValidator(...args)).to.not.exist()
+    expect(
+      mockValidator(props, 'undefinedProp', 'TestComponent')
+    ).to.not.exist()
 
     // undefined values are rejected when not required
-    expect(mockValidator.isRequired(...args)).to.be.an.instanceOf(Error)
+    expect(
+      mockValidator.isRequired(props, 'value', 'TestComponent')
+    ).to.be.an.instanceOf(Error)
   })
 })

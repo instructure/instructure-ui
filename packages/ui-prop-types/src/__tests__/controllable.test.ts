@@ -29,7 +29,8 @@ import { controllable } from '../index'
 
 describe('controllable', () => {
   afterEach(() => {
-    console.error.restore && console.error.restore()
+    // actually SinonStub type
+    ;(console as any).error.restore && (console.error as any).restore()
   })
 
   it('should accept when prop type is correct and handler is provided', () => {
@@ -40,18 +41,27 @@ describe('controllable', () => {
       onSelect: () => {},
       defaultSelected: false
     }
-
-    const controllableArgs = [
-      (...args) => {
-        checkPropTypes({ selected: PropTypes.bool }, ...args)
-      },
-      'onSelect',
-      'defaultSelected'
-    ]
-
-    const propTypeArgs = [props, 'selected', 'TestComponent']
-
-    expect(controllable(...controllableArgs)(...propTypeArgs)).to.not.exist()
+    // the "as any" casts are needed because its not needed to implement
+    // the full requirable interface for the tests.
+    expect(
+      controllable(
+        ((
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { selected: PropTypes.bool },
+            props,
+            propName,
+            componentName
+          )
+          return null
+        }) as any,
+        'onSelect',
+        'defaultSelected'
+      )(props, 'selected', 'TestComponent')
+    ).to.not.exist()
     expect(errorSpy).to.not.have.been.called()
   })
 
@@ -64,17 +74,25 @@ describe('controllable', () => {
       defaultSelected: false
     }
 
-    const controllableArgs = [
-      (...args) => {
-        checkPropTypes({ selected: PropTypes.bool }, ...args)
-      },
-      'onSelect',
-      'defaultSelected'
-    ]
-
-    const propTypeArgs = [props, 'selected', 'TestComponent']
-
-    expect(controllable(...controllableArgs)(...propTypeArgs)).to.not.exist()
+    expect(
+      controllable(
+        ((
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { selected: PropTypes.bool },
+            props,
+            propName,
+            componentName
+          )
+          return null
+        }) as any,
+        'onSelect',
+        'defaultSelected'
+      )(props, 'selected', 'TestComponent')
+    ).to.not.exist()
     expect(errorSpy).to.have.been.calledOnce()
   })
 
@@ -84,19 +102,24 @@ describe('controllable', () => {
       onSelect: null,
       defaultSelected: false
     }
-
-    const controllableArgs = [
-      (...args) => {
-        checkPropTypes({ selected: PropTypes.bool }, ...args)
-      },
-      'onSelect',
-      'defaultSelected'
-    ]
-
-    const propTypeArgs = [props, 'selected', 'TestComponent']
-
     expect(
-      controllable(...controllableArgs)(...propTypeArgs)
+      controllable(
+        ((
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { selected: PropTypes.bool },
+            props,
+            propName,
+            componentName
+          )
+          return null
+        }) as any,
+        'onSelect',
+        'defaultSelected'
+      )(props, 'selected', 'TestComponent')
     ).to.be.an.instanceOf(Error)
   })
 })
