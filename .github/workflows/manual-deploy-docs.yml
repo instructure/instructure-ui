@@ -5,7 +5,6 @@ on:
       docsVersion:
         description: 'Version of the Docs to release. Must be in format: vX eg.: v6 v7 ...'
         required: true
-        default: 'v7'
 jobs:
   deploy:
     runs-on: ubuntu-latest
