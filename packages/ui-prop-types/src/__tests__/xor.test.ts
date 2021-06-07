@@ -22,20 +22,27 @@
  * SOFTWARE.
  */
 
-import PropTypes, { checkPropTypes } from 'prop-types'
+import PropTypes, { checkPropTypes, string } from 'prop-types'
 import { expect, stub } from '@instructure/ui-test-utils'
 
 import { xor } from '../index'
 
+type XorTestProps = {
+  foo: string | null
+  bar: number | null
+  baz: ((...args: any) => any) | null
+}
+
 describe('xor', () => {
   afterEach(() => {
-    console.error.restore && console.error.restore()
+    // actually SinonStub type
+    ;(console as any).error.restore && (console.error as any).restore()
   })
 
   it('should accept when only one of the specified props is set', () => {
     const errorSpy = stub(console, 'error')
 
-    const props = {
+    const props: XorTestProps = {
       foo: 'foo',
       bar: null,
       baz: null
@@ -45,8 +52,20 @@ describe('xor', () => {
 
     expect(
       xor(
-        (...args) => {
-          checkPropTypes({ foo: PropTypes.string }, ...args)
+        (
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string,
+          location: string,
+          propFullName: string
+        ) => {
+          checkPropTypes(
+            { foo: PropTypes.string },
+            values,
+            location,
+            componentName
+          )
+          return null
         },
         'bar',
         'baz'
@@ -97,7 +116,7 @@ describe('xor', () => {
   })
 
   it('should reject when more than one of the specified props is set', () => {
-    const props = {
+    const props: XorTestProps = {
       foo: 'foo',
       bar: 27,
       baz: null
@@ -143,7 +162,7 @@ describe('xor', () => {
   it('should still validate the prop', () => {
     const errorSpy = stub(console, 'error')
 
-    const props = {
+    const props: XorTestProps = {
       foo: 27,
       bar: null,
       baz: null

@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { Requireable } from 'prop-types'
+
 /**
  * ---
  * category: utilities/PropTypes
@@ -49,13 +51,25 @@
  * @param {string} defaultPropName - name of the default prop
  * @returns {Validator} Returns error if designated prop is supplied without a corresponding handler function
  */
-function controllable(
-  propType,
+function controllable<T>(
+  propType: Requireable<T>,
   handlerName = 'onChange',
   defaultPropName = 'defaultValue'
 ) {
-  return function (props, propName, componentName) {
-    const error = propType.apply(null, arguments)
+  return function (
+    props: Record<string, any>,
+    propName: string,
+    componentName: string,
+    location = '',
+    propFullName = ''
+  ) {
+    const error = propType(
+      props,
+      propName,
+      componentName,
+      location,
+      propFullName
+    )
     if (error) {
       return error
     }
@@ -70,6 +84,7 @@ Otherwise, set '${handlerName}'.`
         ].join('')
       )
     }
+    return null
   }
 }
 

@@ -22,47 +22,48 @@
  * SOFTWARE.
  */
 
+import { Validator } from 'prop-types'
+
 /**
  * ---
  * category: utilities/PropTypes
  * ---
- * Verify that either value is provided as a prop if as="input", and children
- * if provided otherwise
+ * Given a validator function, extends the validator functionality to also
+ * ensure that the prop has been provided if `.isRequired` is specified.
  *
  * ```js
- *  import { childrenOrValue } from '@instructure/ui-prop-types'
+ * function validator (props, propName, componentName) {
+ *   const propValue = props[propName]
+ *   if (propValue === 'purple') {
+ *     return new Error(`Purple is not accepted in ${componentName}!`)
+ *   }
+ * }
  *
- *  class Foo extends Component {
- *    static propTypes = {
- *      children: childrenOrValue,
- *      value: childrenOrValue
- *    }
- *  ...
+ * validator.isRequired = makeRequirable(validator)
  * ```
- * @module childrenOrValue
+ * @module makeRequirable
+ * @param {function} validator - a validator function
+ * @returns {Function} A function that returns Error if designated prop is not provided
  */
-function childrenOrValue(props, propName, componentName) {
-  if (props.as === 'input') {
-    if (
-      (propName === 'children' && props.children) ||
-      props.value == undefined
-    ) {
+function makeRequirable<T>(validator: Validator<T>) {
+  return function (
+    props: Record<string, any>,
+    propName: string,
+    componentName: string,
+    location: string,
+    propFullName: string
+  ) {
+    const propValue = props[propName]
+
+    if (propValue === null || typeof propValue === 'undefined') {
       return new Error(
-        `Prop \`value\` and not \`children\` must be supplied if \`${componentName} as="input"\``
+        `The prop \`${propName}\` is marked as required in \`${componentName}\`, but its value is \`${propValue}\``
       )
-    }
-  } else {
-    if (propName === 'value' && props.value != undefined) {
-      return new Error(
-        `Prop \`children\` and not \`value\` must be supplied unless \`${componentName} as="input"\``
-      )
-    } else if (!props.children) {
-      return new Error(
-        `Prop \`children\` should be supplied unless \`${componentName} as="input"\`.`
-      )
+    } else {
+      return validator(props, propName, componentName, location, propFullName)
     }
   }
-  return
 }
-export default childrenOrValue
-export { childrenOrValue }
+
+export default makeRequirable
+export { makeRequirable }
