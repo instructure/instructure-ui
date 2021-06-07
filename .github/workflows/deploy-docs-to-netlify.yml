@@ -1,4 +1,4 @@
-name: Docs deploy to netlify - on master
+name: Docs deploy to Netlify - on master
 on: [workflow_dispatch]
 jobs:
   deploy:
