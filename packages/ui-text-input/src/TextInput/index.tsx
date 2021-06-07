@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -34,7 +34,6 @@ import {
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
-import { Flex } from '@instructure/ui-flex'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -392,7 +391,7 @@ class TextInput extends Component<Props> {
       renderAfterInput,
       messages,
       inputContainerRef,
-      shouldNotWrap
+      styles
     } = this.props
 
     const hasBeforeElement =
@@ -414,31 +413,31 @@ class TextInput extends Component<Props> {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'layout' does not exist on type 'Readonly... Remove this comment to see the full error message
         layout={this.props.layout} // eslint-disable-line react/prop-types
       >
-        <span css={this.props.styles.facade}>
+        <span css={styles.facade}>
           {renderBeforeOrAfter ? (
-            <Flex wrap={shouldNotWrap ? 'no-wrap' : 'wrap'}>
-              {hasBeforeElement && (
-                <Flex.Item padding="0 0 0 small">
-                  {callRenderProp(renderBeforeInput)}
-                </Flex.Item>
-              )}
-              <Flex.Item shouldGrow shouldShrink>
-                {/*
-                    The input and content after input should not wrap, so they're in their own
-                    Flex container
+            <div>
+              <span css={styles.layout}>
+                {hasBeforeElement && (
+                  <span css={styles.beforeElement}>
+                    {callRenderProp(renderBeforeInput)}
+                  </span>
+                )}
+                <span css={styles.innerWrapper}>
+                  {/*
+                    The input and content after input should not wrap,
+                    so they're in their own flex container
                   */}
-                <Flex>
-                  <Flex.Item shouldGrow shouldShrink>
-                    {this.renderInput()}
-                  </Flex.Item>
-                  {hasAfterElement && (
-                    <Flex.Item padding="0 small 0 0">
-                      {callRenderProp(renderAfterInput)}
-                    </Flex.Item>
-                  )}
-                </Flex>
-              </Flex.Item>
-            </Flex>
+                  <span css={styles.inputLayout}>
+                    <span css={styles.innerWrapper}>{this.renderInput()}</span>
+                    {hasAfterElement && (
+                      <span css={styles.afterElement}>
+                        {callRenderProp(renderAfterInput)}
+                      </span>
+                    )}
+                  </span>
+                </span>
+              </span>
+            </div>
           ) : (
             /* If no prepended or appended content, don't render Flex layout */
             this.renderInput()

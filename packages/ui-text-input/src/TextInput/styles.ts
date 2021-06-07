@@ -34,7 +34,7 @@
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
-  const { size, textAlign, as } = props
+  const { size, textAlign, shouldNotWrap, as } = props
   const { disabled, invalid, focused } = state
 
   const sizeVariants = {
@@ -120,6 +120,28 @@ const generateStyle = (componentTheme, props, state) => {
     textAlign: textAlign
   }
 
+  const viewBase = {
+    boxSizing: 'border-box',
+    fontFamily: componentTheme.fontFamily,
+    maxWidth: '100%',
+    overflow: 'visible',
+    unicodeBidi: 'isolate'
+  }
+
+  const flexBase = {
+    ...viewBase,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row'
+  }
+
+  const flexItemBase = {
+    ...viewBase,
+    minWidth: '0.0625rem',
+    flexShrink: 0
+  }
+
   return {
     textInput: {
       label: 'textInput',
@@ -153,6 +175,31 @@ const generateStyle = (componentTheme, props, state) => {
       },
       ...disabledStyle,
       ...invalidStyle
+    },
+    layout: {
+      label: 'textInput__layout',
+      ...flexBase,
+      ...(!shouldNotWrap && { flexWrap: 'wrap' })
+    },
+    beforeElement: {
+      label: 'textInput__beforeElement',
+      ...flexItemBase,
+      paddingInlineStart: componentTheme.padding
+    },
+    innerWrapper: {
+      label: 'textInput__innerWrapper',
+      ...flexItemBase,
+      flexShrink: 1,
+      flexGrow: 1
+    },
+    inputLayout: {
+      label: 'textInput__inputLayout',
+      ...flexBase
+    },
+    afterElement: {
+      label: 'textInput__afterElement',
+      ...flexItemBase,
+      paddingInlineEnd: componentTheme.padding
     }
   }
 }
