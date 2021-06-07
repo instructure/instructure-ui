@@ -1,5 +1,0 @@
-FROM instructure/node:12
-
-EXPOSE 9876
-
-CMD ["yarn", "run", "test:watch", "--", "--no-launch"]
