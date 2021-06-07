@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { Validator } from 'prop-types'
+
 /**
  * ---
  * category: utilities/PropTypes
@@ -47,8 +49,12 @@
  * @param {...string} otherPropNames - reject if any of these other props are also given
  * @returns {Validator} if any of the other props are also given
  */
-function xor(propType, ...otherPropNames) {
-  return function (props, propName, componentName) {
+function xor<T>(propType: Validator<T>, ...otherPropNames: string[]) {
+  return function (
+    props: Record<string, any>,
+    propName: string,
+    componentName: string
+  ) {
     if (props[propName] != null) {
       const otherProps = otherPropNames
         .map((name) => props[name])
@@ -63,8 +69,7 @@ function xor(propType, ...otherPropNames) {
         )
       }
     }
-
-    return propType.apply(null, arguments)
+    return propType(props, propName, componentName, '', '')
   }
 }
 

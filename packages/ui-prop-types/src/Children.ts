@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ComponentType, ReactElement } from 'react'
 import { makeRequirable } from './makeRequirable'
 
 const Children = {
@@ -68,20 +68,25 @@ const Children = {
    *    <Foo />
    *  </Example>
    * ```
-   * @returns {Validator}
+   * @returns {Function} A validator function that returns Error if validation failed
    */
-  oneOf(validTypes) {
-    function validator(props, propName, componentName) {
+  oneOf(validTypes: string[] | ComponentType[]) {
+    function validator(
+      props: Record<string, any>,
+      propName: string,
+      componentName: string
+    ) {
       const children = React.Children.toArray(props[propName])
-      const validTypeNames = validTypes.map((type) =>
-        type ? getDisplayName(type) : type
+      const validTypeNames = validTypes.map(
+        (type: string | React.ComponentType) =>
+          type ? getDisplayName(type) : type
       )
 
       for (let i = 0; i < children.length; i++) {
         const child = children[i]
 
-        if (child && child.type) {
-          const childName = getDisplayName(child.type)
+        if (child && (child as ReactElement).type) {
+          const childName = getDisplayName((child as ReactElement).type)
 
           if (validTypeNames.indexOf(childName) < 0) {
             return new Error(
@@ -98,9 +103,8 @@ const Children = {
           )
         }
       }
-      return
+      return null
     }
-
     validator.isRequired = makeRequirable(validator)
     return validator
   },
@@ -136,23 +140,29 @@ const Children = {
    *  - If multiple children of the same type are provided (ex. Foo, Foo, Bar, and Baz)
    *
    * @param {Array} validTypes - Array of child types
-   * @returns {Validator}
+   * @returns {Error}
    */
-  oneOfEach(validTypes) {
-    return function (props, propName, componentName) {
+  oneOfEach(validTypes: string[] | ComponentType[]) {
+    return function (
+      props: Record<string, any>,
+      propName: string,
+      componentName: string
+    ) {
       const children = React.Children.toArray(props[propName])
-      const instanceCount = {}
-      const validTypeNames = validTypes.map((type) => {
-        const typeName = getDisplayName(type)
-        instanceCount[typeName] = 0
-        return typeName
-      })
+      const instanceCount: Record<string, any> = {}
+      const validTypeNames = validTypes.map(
+        (type: string | React.ComponentType) => {
+          const typeName = getDisplayName(type)
+          instanceCount[typeName] = 0
+          return typeName
+        }
+      )
 
       for (let i = 0; i < children.length; i++) {
         const child = children[i]
 
-        if (child && child.type) {
-          const childName = getDisplayName(child.type)
+        if (child && (child as ReactElement).type) {
+          const childName = getDisplayName((child as ReactElement).type)
 
           if (validTypeNames.indexOf(childName) < 0) {
             return new Error(
@@ -172,7 +182,7 @@ const Children = {
         }
       }
 
-      const errors = []
+      const errors: string[] = []
       Object.keys(instanceCount).forEach((childName) => {
         if (instanceCount[childName] > 1) {
           errors.push(
@@ -188,10 +198,10 @@ const Children = {
         return new Error(
           `Expected exactly one of each ${validTypeNames.join(
             ', '
-          )} in ${componentName} but found:
-  ${errors.join('\n')}`
+          )} in ${componentName} but found:${errors.join('\n')}`
         )
       }
+      return null
     }
   },
 
@@ -271,10 +281,10 @@ const Children = {
    * ```
    *
    * @param {...Array} validTypeGroups One or more Arrays of valid types
-   * @returns {Validator}
+   * @returns {Error} if validation failed
    */
-  enforceOrder(...validTypeGroups) {
-    function validateTypes(childNames, typeNames) {
+  enforceOrder(...validTypeGroups: string[][]) {
+    function validateTypes(childNames: string[], typeNames: string[]) {
       for (let i = 0; i < childNames.length; i++) {
         if (childNames[i] !== typeNames[i]) {
           return false
@@ -284,13 +294,13 @@ const Children = {
       return true
     }
 
-    function formatGroupTypes(componentName, typeGroups) {
+    function formatGroupTypes(componentName: string, typeGroups: string[][]) {
       return typeGroups
         .map((types) => formatTypes(componentName, types))
         .join('\n\n')
     }
 
-    function formatTypes(componentName, types) {
+    function formatTypes(componentName: string, types: string[]) {
       const children = types
         .map((type) => {
           if (type) {
@@ -305,14 +315,19 @@ const Children = {
       return `<${componentName}>\n${children}\n</${componentName}>`
     }
 
-    function validator(props, propName, componentName) {
+    function validator(
+      props: Record<string, any>,
+      propName: string,
+      componentName: string
+    ) {
       const childNames = React.Children.toArray(props[propName]).map(
         (child) => {
-          if (child && child.type) {
-            return getDisplayName(child.type)
+          if (child && (child as ReactElement).type) {
+            return getDisplayName((child as ReactElement).type)
           } else if (child) {
             return null
           }
+          return
         }
       )
 
@@ -326,8 +341,8 @@ const Children = {
           }
         })
 
-        if (validateTypes(childNames, validTypeNames)) {
-          return
+        if (validateTypes(childNames as string[], validTypeNames)) {
+          return null
         }
       }
 
@@ -337,7 +352,7 @@ const Children = {
 
 
   Instead of:
-  ${formatTypes(componentName, childNames)}`)
+  ${formatTypes(componentName, childNames as string[])}`)
     }
 
     validator.isRequired = makeRequirable(validator)
@@ -345,9 +360,9 @@ const Children = {
   }
 }
 
-// TODO: Remove when we further break up ui-utils and bringing this in no longer creates
-// a circular dep
-const getDisplayName = (Component) => {
+// TODO: Remove when we further break up ui-utils and bringing this in no longer
+// creates a circular dep
+const getDisplayName = (Component: string | ComponentType): string => {
   return typeof Component === 'string'
     ? Component
     : Component.displayName || Component.name
