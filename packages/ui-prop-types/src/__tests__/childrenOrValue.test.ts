@@ -33,9 +33,7 @@ describe('childrenOrValue', () => {
       children: null
     }
 
-    const args = [props, 'children', 'TestComponent']
-
-    expect(childrenOrValue(...args)).to.not.exist()
+    expect(childrenOrValue(props, 'children', 'TestComponent')).to.not.exist()
   })
 
   it('should accept when as is not input, value is null, and children are provided', () => {
@@ -45,36 +43,38 @@ describe('childrenOrValue', () => {
       children: 'hello world'
     }
 
-    const args = [props, 'value', 'TestComponent']
-
-    expect(childrenOrValue(...args)).to.not.exist()
+    expect(childrenOrValue(props, 'value', 'TestComponent')).to.not.exist()
   })
 
   it('should reject when as="input" and children is not null or value is undefined', () => {
-    const props = {
+    const props: { as: string; children: string | null } = {
       as: 'input',
       children: 'hello world'
     }
 
-    const args = [props, 'children', 'TestComponent']
-
-    expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
+    expect(
+      childrenOrValue(props, 'children', 'TestComponent')
+    ).to.be.an.instanceOf(Error)
 
     props.children = null
-    expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
+    expect(
+      childrenOrValue(props, 'children', 'TestComponent')
+    ).to.be.an.instanceOf(Error)
   })
 
   it('should reject when as is not input, value is not null or children are undefined', () => {
-    const props = {
+    const props: { as: string; value: string | null } = {
       as: 'div',
       value: 'hello world'
     }
 
-    const args = [props, 'value', 'TestComponent']
-
-    expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
+    expect(
+      childrenOrValue(props, 'value', 'TestComponent')
+    ).to.be.an.instanceOf(Error)
 
     props.value = null
-    expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
+    expect(
+      childrenOrValue(props, 'value', 'TestComponent')
+    ).to.be.an.instanceOf(Error)
   })
 })

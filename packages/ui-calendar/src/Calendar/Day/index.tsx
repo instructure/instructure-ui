@@ -81,7 +81,6 @@ class Day extends Component<Props> {
      * An ISO 8601 formatted string representing the date corresponding to
      * this `<Calendar.Day />`
      */
-    //@ts-expect-error FIXME:
     date: I18nPropTypes.iso8601.isRequired,
     /**
      * Accessible label to provide more context for the date to assistive

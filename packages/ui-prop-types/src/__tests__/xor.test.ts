@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import PropTypes, { checkPropTypes, string } from 'prop-types'
+import PropTypes, { checkPropTypes } from 'prop-types'
 import { expect, stub } from '@instructure/ui-test-utils'
 
 import { xor } from '../index'
@@ -48,68 +48,93 @@ describe('xor', () => {
       baz: null
     }
 
-    const propTypeArgs = [props, 'foo', 'TestComponent']
-
     expect(
       xor(
         (
           props: { [key: string]: any },
           propName: string,
-          componentName: string,
-          location: string,
-          propFullName: string
+          componentName: string
         ) => {
           checkPropTypes(
             { foo: PropTypes.string },
-            values,
-            location,
+            props,
+            propName,
             componentName
           )
           return null
         },
         'bar',
         'baz'
-      )(...propTypeArgs)
+      )(props, 'foo', 'TestComponent')
     ).to.not.exist()
 
     props.foo = null
     props.bar = 27
-    propTypeArgs[1] = 'bar'
     expect(
       xor(
-        (...args) => {
-          checkPropTypes({ bar: PropTypes.number }, ...args)
+        (
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { bar: PropTypes.number },
+            props,
+            propName,
+            componentName
+          )
+          return null
         },
         'foo',
         'baz'
-      )(...propTypeArgs)
+      )(props, 'bar', 'TestComponent')
     ).to.not.exist()
 
     props.bar = null
     props.baz = () => {}
-    propTypeArgs[1] = 'baz'
+    //propTypeArgs[1] = 'baz'
     expect(
       xor(
-        (...args) => {
-          checkPropTypes({ baz: PropTypes.func }, ...args)
+        (
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { baz: PropTypes.func },
+            props,
+            propName,
+            componentName
+          )
+          return null
         },
         'foo',
         'bar'
-      )(...propTypeArgs)
+      )(props, 'baz', 'TestComponent')
     ).to.not.exist()
 
     props.foo = null
     props.bar = null
     props.baz = null
-    propTypeArgs[1] = 'foo'
+    //propTypeArgs[1] = 'foo'
     expect(
       xor(
-        (...args) => {
-          checkPropTypes({ foo: PropTypes.string }, ...args)
+        (
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { foo: PropTypes.string },
+            props,
+            propName,
+            componentName
+          )
+          return null
         },
         'bar',
         'baz'
-      )(...propTypeArgs)
+      )(props, 'foo', 'TestComponent')
     ).to.not.exist()
 
     expect(errorSpy).to.not.have.been.called()
@@ -122,61 +147,96 @@ describe('xor', () => {
       baz: null
     }
 
-    const propTypeArgs = [props, 'foo', 'TestComponent']
-
     expect(
       xor(
-        (...args) => {
-          checkPropTypes({ foo: PropTypes.string }, ...args)
+        (
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { foo: PropTypes.string },
+            props,
+            propName,
+            componentName
+          )
+          return null
         },
         'bar',
         'baz'
-      )(...propTypeArgs)
+      )(props, 'foo', 'TestComponent')
     ).to.be.an.instanceOf(Error)
 
     props.baz = () => {}
-    propTypeArgs[1] = 'bar'
+
     expect(
       xor(
-        (...args) => {
-          checkPropTypes({ bar: PropTypes.number }, ...args)
+        (
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { bar: PropTypes.number },
+            props,
+            propName,
+            componentName
+          )
+          return null
         },
         'foo',
         'baz'
-      )(...propTypeArgs)
+      )(props, 'bar', 'TestComponent')
     ).to.be.an.instanceOf(Error)
 
     props.foo = null
-    propTypeArgs[1] = 'baz'
     expect(
       xor(
-        (...args) => {
-          checkPropTypes({ baz: PropTypes.func }, ...args)
+        (
+          props: { [key: string]: any },
+          propName: string,
+          componentName: string
+        ) => {
+          checkPropTypes(
+            { baz: PropTypes.func },
+            props,
+            propName,
+            componentName
+          )
+          return null
         },
         'foo',
         'bar'
-      )(...propTypeArgs)
+      )(props, 'baz', 'TestComponent')
     ).to.be.an.instanceOf(Error)
   })
 
   it('should still validate the prop', () => {
     const errorSpy = stub(console, 'error')
 
-    const props: XorTestProps = {
+    const props = {
       foo: 27,
       bar: null,
       baz: null
     }
 
-    const propTypeArgs = [props, 'foo', 'TestComponent']
-
     xor(
-      (...args) => {
-        checkPropTypes({ foo: PropTypes.string }, ...args)
+      (
+        props: { [key: string]: any },
+        propName: string,
+        componentName: string
+      ) => {
+        checkPropTypes(
+          { foo: PropTypes.string },
+          props,
+          propName,
+          componentName
+        )
+        return null
       },
       'bar',
       'baz'
-    )(...propTypeArgs)
+    )(props, 'foo', 'TestComponent')
 
     expect(errorSpy).to.have.been.calledOnce()
   })

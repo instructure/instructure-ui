@@ -50,8 +50,8 @@ function makeRequirable<T>(validator: Validator<T>) {
     props: Record<string, any>,
     propName: string,
     componentName: string,
-    location: string,
-    propFullName: string
+    location = '',
+    propFullName = ''
   ) {
     const propValue = props[propName]
 

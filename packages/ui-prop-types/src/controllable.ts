@@ -59,17 +59,15 @@ function controllable<T>(
   return function (
     props: Record<string, any>,
     propName: string,
-    componentName: string,
-    location = '',
-    propFullName = ''
+    componentName: string
   ) {
-    const error = propType(
-      props,
-      propName,
-      componentName,
-      location,
-      propFullName
-    )
+    // Note: this is not supposed to be called directly. This is a hack that
+    // circumvents this restriction. See http://fb.me/use-check-prop-types
+    // TODO use "DO_NOT_USE_OR_YOU_WILL_BE_FIRED" bla bla here
+    // @ts-expect-error TODO delete this code, its wrong
+    // eslint-disable-next-line prefer-spread,prefer-rest-params
+    const error = propType.apply(null, arguments)
+
     if (error) {
       return error
     }

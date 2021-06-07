@@ -23,6 +23,7 @@
  */
 
 import { makeRequirable } from '@instructure/ui-prop-types'
+import { Requireable } from 'prop-types'
 
 /**
  *
@@ -39,7 +40,7 @@ function iso8601(
   propName: string,
   componentName: string,
   location: string
-) {
+): Error | null {
   const propValue = props[propName]
   if (typeof propValue === 'undefined' || propValue === '') return null
   //this.iso8601.isRequired = makeRequirable(I18nPropTypes.iso8601)
@@ -65,7 +66,7 @@ function iso8601(
 iso8601.isRequired = makeRequirable(iso8601)
 
 const I18nPropTypes = {
-  iso8601: iso8601
+  iso8601: iso8601 as Requireable<any>
 }
 
 export default I18nPropTypes

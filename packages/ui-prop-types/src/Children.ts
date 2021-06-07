@@ -70,7 +70,7 @@ const Children = {
    * ```
    * @returns {Function} A validator function that returns Error if validation failed
    */
-  oneOf(validTypes: string[] | ComponentType[]) {
+  oneOf(validTypes: (string | ComponentType<any> | null)[]) {
     function validator(
       props: Record<string, any>,
       propName: string,
@@ -78,7 +78,7 @@ const Children = {
     ) {
       const children = React.Children.toArray(props[propName])
       const validTypeNames = validTypes.map(
-        (type: string | React.ComponentType) =>
+        (type: string | React.ComponentType | null) =>
           type ? getDisplayName(type) : type
       )
 
@@ -142,7 +142,7 @@ const Children = {
    * @param {Array} validTypes - Array of child types
    * @returns {Error}
    */
-  oneOfEach(validTypes: string[] | ComponentType[]) {
+  oneOfEach(validTypes: (string | ComponentType<any>)[]) {
     return function (
       props: Record<string, any>,
       propName: string,
@@ -283,7 +283,7 @@ const Children = {
    * @param {...Array} validTypeGroups One or more Arrays of valid types
    * @returns {Error} if validation failed
    */
-  enforceOrder(...validTypeGroups: string[][]) {
+  enforceOrder(...validTypeGroups: (string | ComponentType<any>)[][]) {
     function validateTypes(childNames: string[], typeNames: string[]) {
       for (let i = 0; i < childNames.length; i++) {
         if (childNames[i] !== typeNames[i]) {
@@ -294,15 +294,23 @@ const Children = {
       return true
     }
 
-    function formatGroupTypes(componentName: string, typeGroups: string[][]) {
+    function formatGroupTypes(
+      componentName: string,
+      typeGroups: (string | ComponentType)[][]
+    ) {
       return typeGroups
-        .map((types) => formatTypes(componentName, types))
+        .map((types: (string | ComponentType)[]) =>
+          formatTypes(componentName, types)
+        )
         .join('\n\n')
     }
 
-    function formatTypes(componentName: string, types: string[]) {
+    function formatTypes(
+      componentName: string,
+      types: (string | ComponentType)[]
+    ) {
       const children = types
-        .map((type) => {
+        .map((type: string | ComponentType) => {
           if (type) {
             return getDisplayName(type)
           } else {
@@ -333,13 +341,15 @@ const Children = {
 
       // Validate each group, if any of them are valid we're done
       for (let i = 0; i < validTypeGroups.length; i++) {
-        const validTypeNames = validTypeGroups[i].map((type) => {
-          if (type) {
-            return getDisplayName(type)
-          } else {
-            return '??'
+        const validTypeNames = validTypeGroups[i].map(
+          (type: string | React.ComponentType) => {
+            if (type) {
+              return getDisplayName(type)
+            } else {
+              return '??'
+            }
           }
-        })
+        )
 
         if (validateTypes(childNames as string[], validTypeNames)) {
           return null
