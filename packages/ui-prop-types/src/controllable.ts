@@ -24,6 +24,15 @@
 
 import { Requireable } from 'prop-types'
 
+type CheckTypeInternal = (
+  props: Record<any, any>,
+  propName: string,
+  componentName: string,
+  location: string,
+  propFullName: string, // if null it equals propName
+  secret: string
+) => Error | null
+
 /**
  * ---
  * category: utilities/PropTypes
@@ -46,13 +55,13 @@ import { Requireable } from 'prop-types'
  * This will throw an error if the 'selected' prop is supplied without a corresponding
  * 'onSelect' handler and will recommend using 'defaultSelected' instead.
  * @module controllable
- * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
+ * @param {function} checkType - validates the prop type. Returns null if valid, error otherwise
  * @param {string} handlerName - name of the handler function
  * @param {string} defaultPropName - name of the default prop
  * @returns {Validator} Returns error if designated prop is supplied without a corresponding handler function
  */
 function controllable<T>(
-  propType: Requireable<T>,
+  checkType: CheckTypeInternal & Requireable<T>,
   handlerName = 'onChange',
   defaultPropName = 'defaultValue'
 ) {
@@ -61,13 +70,19 @@ function controllable<T>(
     propName: string,
     componentName: string
   ) {
-    // Note: this is not supposed to be called directly. This is a hack that
-    // circumvents this restriction. See http://fb.me/use-check-prop-types
-    // TODO use "DO_NOT_USE_OR_YOU_WILL_BE_FIRED" bla bla here
-    // @ts-expect-error TODO delete this code, its wrong
-    // eslint-disable-next-line prefer-spread,prefer-rest-params
-    const error = propType.apply(null, arguments)
-
+    // TODO this is a hack that should be removed.
+    // This calls an internal function that has a similar signature to
+    // prop-types/Requireable, but has an extra safeguard parameter, so its
+    // not called directly.
+    // See http://fb.me/use-check-prop-types
+    const error = checkType(
+      props,
+      propName,
+      componentName,
+      'prop',
+      propName,
+      'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED'
+    )
     if (error) {
       return error
     }
