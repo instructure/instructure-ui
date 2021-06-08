@@ -36,6 +36,20 @@ const COLLECTIONS_DATA = {
   5: { id: 5, name: 'Nested Sub Collection' }
 }
 
+const COLLECTIONS_DATA_WITH_ZERO = {
+  0: { id: 0, name: 'Root Directory', collections: [3, 4], items: [1] },
+  3: { id: 3, name: 'Sub Root 1', collections: [5] },
+  4: { id: 4, name: 'Sub Root 2' },
+  5: { id: 5, name: 'Nested Sub Collection' }
+}
+
+const COLLECTIONS_DATA_WITH_STRING_IDS = {
+  '2': { id: '2', name: 'Root Directory', collections: ['3', '4'], items: [1] },
+  '3': { id: '3', name: 'Sub Root 1', collections: ['5'] },
+  '4': { id: '4', name: 'Sub Root 2' },
+  '5': { id: '5', name: 'Nested Sub Collection' }
+}
+
 const ITEMS_DATA = {
   1: { id: 1, name: 'Item 1' }
 }
@@ -240,6 +254,23 @@ describe('<TreeBrowser />', async () => {
   })
 
   describe('collections', async () => {
+    it('should render collections with string-keyed ids', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA_WITH_STRING_IDS}
+          items={ITEMS_DATA}
+          rootId={'2'}
+          showRootCollection={true}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+
+      const item = await tree.findItem(':label(Root Directory)')
+
+      expect(item).to.exist()
+    })
+
     it('should not show the first keyed collection if showRootCollection is false', async () => {
       await mount(
         <TreeBrowser
@@ -270,6 +301,23 @@ describe('<TreeBrowser />', async () => {
       const item = await tree.findItem(':label(Root Directory)')
 
       expect(item).to.exist()
+    })
+
+    it('should not show the first keyed collection if showRootCollection is false and rootId is 0', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA_WITH_ZERO}
+          items={ITEMS_DATA}
+          rootId={0}
+          showRootCollection={false}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+
+      const items = await tree.findAllItems()
+
+      expect(items.length).to.equal(3)
     })
 
     it('should render a folder icon by default', async () => {
