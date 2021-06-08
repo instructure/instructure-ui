@@ -47,7 +47,8 @@ import { Validator } from 'prop-types'
  * @module xor
  * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
  * @param {...string} otherPropNames - reject if any of these other props are also given
- * @returns {Validator} if any of the other props are also given
+ * @returns {function} A function that returns Error if any of the other props
+ * are also given, null otherwise
  */
 function xor<T>(propType: Validator<T>, ...otherPropNames: string[]) {
   return function (
