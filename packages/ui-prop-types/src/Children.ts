@@ -68,7 +68,7 @@ const Children = {
    *    <Foo />
    *  </Example>
    * ```
-   * @returns {Function} A validator function that returns Error if validation failed
+   * @returns {function} A validator function that returns Error if validation failed
    */
   oneOf(validTypes: (string | ComponentType<any> | null)[]) {
     function validator(
@@ -140,7 +140,8 @@ const Children = {
    *  - If multiple children of the same type are provided (ex. Foo, Foo, Bar, and Baz)
    *
    * @param {Array} validTypes - Array of child types
-   * @returns {Error}
+   * @returns {function} A validator function that returns error if validation
+   * failed, null otherwise
    */
   oneOfEach(validTypes: (string | ComponentType<any>)[]) {
     return function (
@@ -281,7 +282,8 @@ const Children = {
    * ```
    *
    * @param {...Array} validTypeGroups One or more Arrays of valid types
-   * @returns {Error} if validation failed
+   * @returns {function} A validator function that returns error if validation
+   * failed, null otherwise
    */
   enforceOrder(...validTypeGroups: (string | ComponentType<any>)[][]) {
     function validateTypes(childNames: string[], typeNames: string[]) {
@@ -290,7 +292,6 @@ const Children = {
           return false
         }
       }
-
       return true
     }
 

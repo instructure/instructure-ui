@@ -43,7 +43,7 @@ import { Validator } from 'prop-types'
  * ```
  * @module makeRequirable
  * @param {function} validator - a validator function
- * @returns {Function} A function that returns Error if designated prop is not provided
+ * @returns {function} A function that returns Error if designated prop is not provided
  */
 function makeRequirable<T>(validator: Validator<T>) {
   return function (

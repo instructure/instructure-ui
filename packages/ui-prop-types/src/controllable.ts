@@ -58,7 +58,8 @@ type CheckTypeInternal = (
  * @param {function} checkType - validates the prop type. Returns null if valid, error otherwise
  * @param {string} handlerName - name of the handler function
  * @param {string} defaultPropName - name of the default prop
- * @returns {Validator} Returns error if designated prop is supplied without a corresponding handler function
+ * @returns {function} A function that return Error if designated prop is
+ * supplied without a corresponding handler function
  */
 function controllable<T>(
   checkType: CheckTypeInternal & Requireable<T>,
