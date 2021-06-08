@@ -344,7 +344,11 @@ class TreeBrowser extends Component {
 
   getIsFlattened = (collection) => {
     const { rootId, showRootCollection } = this.props
-    return !showRootCollection && rootId && collection.id === rootId
+    return (
+      !showRootCollection &&
+      typeof rootId !== 'undefined' &&
+      collection.id === rootId
+    )
   }
 
   getCollectionProps(collection) {
