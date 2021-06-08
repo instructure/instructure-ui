@@ -435,7 +435,11 @@ class TreeBrowser extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'collection' implicitly has an 'any' typ... Remove this comment to see the full error message
   getIsFlattened = (collection) => {
     const { rootId, showRootCollection } = this.props
-    return !showRootCollection && rootId && collection.id === rootId
+    return (
+      !showRootCollection &&
+      typeof rootId !== 'undefined' &&
+      collection.id === rootId
+    )
   }
 
   // @ts-expect-error ts-migrate(7023) FIXME: 'getCollectionProps' implicitly has return type 'a... Remove this comment to see the full error message
