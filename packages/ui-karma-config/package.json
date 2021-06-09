@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-karma-config",
-  "version": "7.7.0",
+  "version": "7.7.1",
   "description": "A shared karma config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -17,8 +17,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "^7.7.0",
-    "@instructure/ui-webpack-config": "^7.7.0",
+    "@instructure/config-loader": "^7.7.1",
+    "@instructure/ui-webpack-config": "^7.7.1",
     "choma": "^1",
     "globby": "^10.0.1",
     "karma": "^4.3.0",
