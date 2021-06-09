@@ -1,6 +1,6 @@
 {
   "name": "@instructure/instui-config",
-  "version": "7.7.0",
+  "version": "7.7.1",
   "description": "A package containing Instructure UI specific configuration data for operations such as upgrades and codemod scripts",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -18,9 +18,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@instructure/command-utils": "^7.7.0",
-    "@instructure/pkg-utils": "^7.7.0",
-    "@instructure/ui-upgrade-scripts": "^7.7.0",
+    "@instructure/command-utils": "^7.7.1",
+    "@instructure/pkg-utils": "^7.7.1",
+    "@instructure/ui-upgrade-scripts": "^7.7.1",
     "semver": "^6.3.0"
   }
 }
