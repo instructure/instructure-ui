@@ -146,6 +146,51 @@ describe('<Item />', async () => {
     expect(icon).to.exist()
   })
 
+  it('should render colored icon before label', async () => {
+    await mount(
+      <Item
+        renderBeforeLabel={(props) => {
+          return (
+            <IconCheckSolid
+              {...(props.variant === 'default' && { color: 'warning' })}
+            />
+          )
+        }}
+      >
+        Hello World
+      </Item>
+    )
+    const item = await ItemLocator.find()
+    const content = await item.find('[class$=-optionItem__content--before]')
+    const icon = await content.find('svg[name="IconCheck"]')
+    const iconStyle = getComputedStyle(icon.getDOMNode())
+
+    expect(iconStyle.fill).to.equal('rgb(252, 94, 19)')
+  })
+
+  it('should render colored icon after highlighted label', async () => {
+    await mount(
+      <Item
+        variant="highlighted"
+        renderAfterLabel={(props) => {
+          return (
+            <IconCheckSolid
+              {...(props.variant === 'highlighted' && { color: 'success' })}
+            />
+          )
+        }}
+      >
+        Hello World
+      </Item>
+    )
+    const item = await ItemLocator.find()
+    const content = await item.find('[class$=-optionItem__content--after]')
+    const icon = await content.find('svg[name="IconCheck"]')
+    const iconStyle = getComputedStyle(icon.getDOMNode())
+
+    expect(iconStyle.fill).to.equal('rgb(0, 172, 24)')
+  })
+
   it('should render nested lists', async () => {
     await mount(
       <Item>

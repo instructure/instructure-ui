@@ -167,3 +167,132 @@ render(
   ]} />
 )
 ```
+
+You can recolor the text and the background of the items for their `default`, `highlighted` and `selected` variants.
+
+By default, the icons in the `Option.Item` have the same color as the text. If you want to set the color of the icon separately, pass a function to the `renderBeforeLabel` or `renderAfterLabel` prop. This function will have a `props` parameter, so you can access the properties of that `Option.Item` (e.g. the current `variant`).
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      highlighted: -1,
+      selected: -1
+    }
+  }
+
+  handleKeyDown = (event) => {
+    const { highlighted } = this.state
+    let index = highlighted
+
+    if (event.keyCode === 40 && highlighted < this.props.options.length - 1) {
+      // down arrow
+      event.preventDefault()
+      index = highlighted + 1
+    } else if (event.keyCode === 38 && highlighted > 0) {
+      // up arrow
+      event.preventDefault()
+      index = highlighted - 1
+    } else if (event.keyCode === 13 && highlighted > -1) {
+      // enter
+      this.setState({ selected: index })
+    }
+    this.setState({ highlighted: index })
+  }
+
+  handleFocus = (event, index) => {
+    this.setState({ highlighted: index })
+  }
+
+  handleMouseOver = (event, index) => {
+    this.setState({ highlighted: index })
+  }
+
+  handleClick = (event, index) => {
+    this.setState({ selected: index })
+  }
+
+  render () {
+    return (
+      <View
+        display="block"
+        width="300px"
+        shadow="above"
+      >
+        <Options onKeyDown={this.handleKeyDown} tabIndex="0">
+          {this.props.options.map((option, index) => {
+            let variant = 'default'
+            if (this.state.highlighted === index) {
+              variant = 'highlighted'
+            } else if (this.state.selected === index) {
+              variant = 'selected'
+            }
+            return (
+              <Options.Item
+                key={option.label}
+                variant={variant}
+                tabIndex="-1"
+                onMouseOver={(e) => this.handleMouseOver(e, index)}
+                onFocus={(e) => this.handleFocus(e, index)}
+                onClick={(e) => this.handleClick(e, index)}
+                {...option.extraProps}
+              >
+                { option.label }
+              </Options.Item>
+            )
+          })}
+        </Options>
+      </View>
+    )
+  }
+}
+
+render(
+  <Example options={[
+    {
+      label: 'Default item',
+      extraProps: {
+        renderBeforeLabel: IconCheckSolid
+      }
+    },
+    {
+      label: 'Text is green',
+      extraProps: {
+        renderBeforeLabel: IconCheckSolid,
+        themeOverride: { color: "#00AC18" }
+      }
+    },
+    {
+      label: 'Highlighted text is black',
+      extraProps: {
+        renderBeforeLabel: IconCheckSolid,
+        themeOverride: { highlightedLabelColor: "#2D3B45" }
+
+      }
+    },
+    {
+      label: 'Highlighted background is purple',
+      extraProps: {
+        renderBeforeLabel: IconCheckSolid,
+        themeOverride: { highlightedBackground: "#BF32A4" }
+      }
+    },
+    {
+      label: 'Only the icon is red',
+      extraProps: {
+        renderBeforeLabel: (props) => {
+          return <IconCheckSolid
+            {...(props.variant === "default" && { color: 'warning' }) }
+          />
+        }
+      }
+    }
+  ]} />
+)
+```
