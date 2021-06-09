@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-test-locator",
-  "version": "8.4.0",
+  "version": "8.5.0",
   "description": "A locator component for finding components by their defined selector in tests.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -25,10 +25,10 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/ui-test-queries": "8.4.0"
+    "@instructure/ui-test-queries": "8.5.0"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.4.0"
+    "@instructure/ui-babel-preset": "8.5.0"
   },
   "publishConfig": {
     "access": "public"

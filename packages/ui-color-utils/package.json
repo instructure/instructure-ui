@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-color-utils",
-  "version": "8.4.0",
+  "version": "8.5.0",
   "description": "A color utility library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,8 +23,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.4.0",
-    "@instructure/ui-test-utils": "8.4.0",
+    "@instructure/ui-babel-preset": "8.5.0",
+    "@instructure/ui-test-utils": "8.5.0",
     "@types/tinycolor2": "^1.4.2"
   },
   "dependencies": {

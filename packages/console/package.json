@@ -1,6 +1,6 @@
 {
   "name": "@instructure/console",
-  "version": "8.4.0",
+  "version": "8.5.0",
   "description": "A babel macro made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.4.0",
+    "@instructure/ui-babel-preset": "8.5.0",
     "@types/babel-plugin-macros": "^2.8.4"
   },
   "dependencies": {

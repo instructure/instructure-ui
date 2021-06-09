@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.5.0](https://github.com/instructure/instructure-ui/compare/v8.4.0...v8.5.0) (2021-06-09)
+
+### Bug Fixes
+
+- **emotion:** add componentId to match with componenet name in docs ([cc255eb](https://github.com/instructure/instructure-ui/commit/cc255ebef149ffe19a2102a179c1e7765b633888))
+- **ui-tree-browser:** properly hide root collection if rootId === 0 ([1fb53c8](https://github.com/instructure/instructure-ui/commit/1fb53c85102115e525521bcc86a122c2ba49d6c7))
+
+### Features
+
+- **ui-table:** add `stackedSortByLabel` prop to `Table.ColHeader` ([13f0cce](https://github.com/instructure/instructure-ui/commit/13f0ccea618553d6ecd9ba8ed8effd6621e40c55))
+
 # [8.4.0](https://github.com/instructure/instructure-ui/compare/v8.3.0...v8.4.0) (2021-05-11)
 
 ### Bug Fixes
