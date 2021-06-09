@@ -178,13 +178,10 @@ const getFocusOutline = (props) => {
   }
 
   if (shouldDisplayFocusOutline) {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       display === 'inline' || position === 'relative',
       '[View] the focus outline will only show if the `position` prop is `relative`.'
     )
-
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       display !== 'inline' || focusPosition === 'inset',
       '[View] when display is set to `inline` the focus outline will only show if `focusPosition` is set to `inset`.'

@@ -134,8 +134,8 @@ class Spinner extends Component<Props> {
     )
 
     const hasTitle = this.props.renderTitle
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
+      // @ts-expect-error FIXME
       hasTitle,
       '[Spinner] The renderTitle prop is necessary for screen reader support.'
     )

@@ -287,7 +287,6 @@ class Checkbox extends Component<Props> {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'hovered' does not exist on type 'Readonl... Remove this comment to see the full error message
     const { hovered, focused } = this.state
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       !(variant === 'simple' && labelPlacement !== 'end'),
       `[Checkbox] The \`simple\` variant does not support the \`labelPlacement\` property.  Use the \`toggle\` variant instead.`
@@ -355,7 +354,6 @@ class Checkbox extends Component<Props> {
     // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, Checkbox.propTypes)
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       !(variant === 'toggle' && indeterminate),
       `[Checkbox] The \`toggle\` variant does not support the \`indeterminate\` property. Use the \`simple\` variant instead.`

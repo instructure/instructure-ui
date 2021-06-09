@@ -229,7 +229,6 @@ class TruncateText extends Component<Props> {
   }
 
   checkChildren() {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       !(() => {
         let isTooDeep = false

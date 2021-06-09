@@ -223,7 +223,6 @@ class Calendar extends Component<Props> {
     const { renderWeekdayLabels, styles } = this.props
     const { length } = renderWeekdayLabels
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       length === 7,
       `[Calendar] \`renderWeekdayLabels\` should be an array with 7 labels (one for each weekday). ${length} provided.`
@@ -253,7 +252,6 @@ class Calendar extends Component<Props> {
     const { length } = children
     const role = this.role === 'listbox' ? 'presentation' : null
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       length === Calendar.DAY_COUNT,
       `[Calendar] should have exactly ${Calendar.DAY_COUNT} children. ${length} provided.`

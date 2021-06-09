@@ -335,7 +335,6 @@ class Selectable extends Component<Props> {
 
         // @ts-expect-error ts-migrate(2525) FIXME: Initializer provides no value for this binding ele... Remove this comment to see the full error message
         getOptionProps: ({ id, onMouseOver, onClick, ...rest } = {}) => {
-          // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
           error(
             id,
             `[Selectable] Must provide id for each option via \`getOptionProps\`.`

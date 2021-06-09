@@ -228,7 +228,6 @@ class Link extends Component<Props> {
       }
     })
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       // if display prop is used, warn about icon or TruncateText
       !truncateText || this.props.display === undefined,
@@ -282,7 +281,6 @@ class Link extends Component<Props> {
   }
 
   renderIcon() {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       // if display prop is used, warn about icon or TruncateText
       this.props.display === undefined,

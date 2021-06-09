@@ -206,7 +206,6 @@ class FocusRegion {
   }
 
   focus() {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       this._active,
       `[FocusRegion] Cannot call '.focus()' on a region that is not currently active.`
@@ -216,7 +215,6 @@ class FocusRegion {
   }
 
   blur() {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     error(
       !this._active,
       `[FocusRegion] Cannot call '.blur()' on a region that is currently active.`

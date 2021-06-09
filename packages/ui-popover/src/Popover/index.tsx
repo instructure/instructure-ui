@@ -695,7 +695,6 @@ class Popover extends Component<Props> {
 
       // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
       if (on.indexOf('hover') > -1) {
-        // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
         error(
           !(on === 'hover'),
           '[Popover] Specifying only the `"hover"` trigger limits the visibility' +

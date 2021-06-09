@@ -32,7 +32,6 @@ export const MODES = {
 
 class InputModeListenerImpl {
   constructor() {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       false,
       `[InputModeListener] is deprecated and will be removed in version 7.0.0. Use addInputModeListener instead.`

@@ -30,14 +30,31 @@ let loggedInitialDeprecationWarning = false
 function getRenderStack() {
   let renderStack = ''
   try {
-    renderStack = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
+    // this is so bad to use, that its not even typed :)
+    renderStack = (
+      React as any
+    ).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
   } catch (error) {
     // log happened outside a react render or couldn't figure out where in the render stack we are.
   }
   return renderStack
 }
 
-function logMessage(level, withRenderStack, condition, message, ...args) {
+/**
+ * Logs a message to the console if not in Production and the condition param is false.
+ * @param level The message level
+ * @param withRenderStack Whether to log the React render stack
+ * @param condition if true this method is skipped
+ * @param message the message to log
+ * @param args any extra arguments to be passed to the console.
+ */
+function logMessage(
+  level: keyof Console,
+  withRenderStack: boolean,
+  condition: boolean,
+  message: string,
+  ...args: unknown[]
+) {
   if (process.env.NODE_ENV !== 'production' && !condition) {
     if (typeof console[level] === 'function') {
       const renderStack = withRenderStack ? getRenderStack() : ''
@@ -48,7 +65,11 @@ function logMessage(level, withRenderStack, condition, message, ...args) {
   }
 }
 
-function logDeprecated(condition, message, ...args) {
+function logDeprecated(
+  condition: boolean,
+  message: string,
+  ...args: unknown[]
+) {
   if (!process.env.OMIT_INSTUI_DEPRECATION_WARNINGS) {
     logMessage('warn', true, condition, message, ...args)
   } else if (!condition && !loggedInitialDeprecationWarning) {
@@ -65,12 +86,24 @@ function logDeprecated(condition, message, ...args) {
   }
 }
 
-export const error = (...args) => logMessage('error', true, ...args)
-export const warn = (...args) => logMessage('warn', true, ...args)
-export const warnDeprecated = (...args) => logDeprecated(...args)
-export const info = (...args) => console.info(...args)
-export const assert = (...args) => console.assert(...args)
-export const debug = (...args) => console.debug(...args)
-export const log = (...args) => console.log(...args)
+export const error = (
+  condition: boolean,
+  message: string,
+  ...args: unknown[]
+) => logMessage('error', true, condition, message, ...args)
+export const warn = (condition: boolean, message: string, ...args: unknown[]) =>
+  logMessage('warn', true, condition, message, ...args)
+export const warnDeprecated = (
+  condition: boolean,
+  message: string,
+  ...args: unknown[]
+) => logDeprecated(condition, message, ...args)
+export const info = (...args: unknown[]) => console.info(...args)
+export const assert = (condition?: boolean | undefined, ...data: any[]) =>
+  console.assert(condition, data)
+export const debug = (message?: any, ...optionalParams: any[]) =>
+  console.debug(message, optionalParams)
+export const log = (message?: any, ...optionalParams: any[]) =>
+  console.log(message, optionalParams)
 
 /* eslint-enable no-console */

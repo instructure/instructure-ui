@@ -54,27 +54,30 @@ function macro({ babel, references, state }) {
 }
 
 module.exports = createMacro(macro)
+
+/**
+ * @callback LogFunc
+ * @param {boolean} isSuppressed Must be false to log anything.
+ * @param {string} message The message to log.
+ * @param {...*} [restParam] anything else to log.
+ * @returns void
+ */
+
 /**
  * Logs a message to the console if its not a production build.
- * @param isSuppressed Must be false to log anything.
- * @param message The message to log.
- * @param rest anything else to log.
- * @type {function(isSuppressed: boolean, message: string, rest: ...*): *}
+ * @type LogFunc
  */
 exports.error = exports.warn = createMacro(macro)
 
 /**
  * Logs a deprecation message to the console if its not a production build and
  * the `OMIT_INSTUI_DEPRECATION_WARNINGS` env var is not set or is set to `false`
- * @param isSuppressed Must be false to log anything.
- * @param message The message to log.
- * @param rest anything else to log.
- * @type {function(isSuppressed: boolean, message: string, rest: ...*): *}
+ * @type LogFunc
  */
 exports.warnDeprecated = createMacro(macro)
 
 /**
  * Logs a message to the console.
- * @type {function(rest: ...*): *}
+ * @type {function(...*): void}
  */
 exports.info = exports.assert = exports.debug = exports.log = createMacro(macro)

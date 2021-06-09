@@ -153,7 +153,6 @@ class InPlaceEdit extends Component<Props> {
   constructor(props) {
     super(props)
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       props.readOnly ? props.mode === 'view' : true,
       '[InPlaceEdit] When readOnly is true, mode is forced to "view"'

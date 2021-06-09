@@ -88,7 +88,6 @@ class Truncator {
     }
 
     if (!element) {
-      // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
       error(false, '[Truncator] No element to truncate.')
       return
     }

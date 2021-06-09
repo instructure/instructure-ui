@@ -106,7 +106,6 @@ class Editable extends Component<Props> {
   constructor(props) {
     super(props)
 
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       props.readOnly ? props.mode === 'view' : true,
       '[Editable] When readOnly is true, mode must be "view"'
@@ -141,7 +140,6 @@ class Editable extends Component<Props> {
   }
 
   focusEditor() {
-    // @ts-expect-error ts-migrate(2555) FIXME: Expected at least 5 arguments, but got 2.
     warn(
       !!this._editorRef && !this.props.readOnly,
       '[Editable] Did you forget to connect editorRef to your editor component?'
