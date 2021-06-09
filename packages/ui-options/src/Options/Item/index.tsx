@@ -83,10 +83,12 @@ class Item extends Component<Props> {
     role: PropTypes.string,
     /**
      * Content to render before the label
+     * (if you pass a function, it has the `props` as its parameter)
      */
     renderBeforeLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
      * Content to render after the label
+     * (if you pass a function, it has the `props` as its parameter)
      */
     renderAfterLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
@@ -114,7 +116,7 @@ class Item extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'renderLabel' implicitly has an 'any' ty... Remove this comment to see the full error message
   renderContent(renderLabel, contentVariant) {
-    const { styles } = this.props
+    const { styles, variant, as, role, children } = this.props
 
     return (
       <span
@@ -122,7 +124,12 @@ class Item extends Component<Props> {
         role="presentation"
         aria-hidden="true"
       >
-        {callRenderProp(renderLabel)}
+        {callRenderProp(renderLabel, {
+          variant,
+          as,
+          role,
+          children
+        })}
       </span>
     )
   }
