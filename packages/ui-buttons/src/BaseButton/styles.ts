@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-import { DIRECTION } from '@instructure/ui-i18n'
-import { mirrorShorthandEdges } from '@instructure/emotion'
-
 /**
  * ---
  * private: true
@@ -44,8 +41,7 @@ const generateStyle = (componentTheme, props, state) => {
     shape,
     withBackground,
     withBorder,
-    isCondensed,
-    dir
+    isCondensed
   } = props
 
   const { isDisabled, hasOnlyIconVisible } = state
@@ -275,16 +271,6 @@ const generateStyle = (componentTheme, props, state) => {
         }
   }
 
-  const isRtlDirection = dir === DIRECTION.rtl
-  let iconWrapperPadding = `0 ${
-    isCondensed
-      ? componentTheme.iconTextGapCondensed
-      : componentTheme.iconTextGap
-  } 0 0`
-  iconWrapperPadding = isRtlDirection
-    ? mirrorShorthandEdges(iconWrapperPadding)!
-    : iconWrapperPadding
-
   return {
     baseButton: {
       label: 'baseButton',
@@ -403,7 +389,9 @@ const generateStyle = (componentTheme, props, state) => {
       label: 'baseButton__iconWrapper',
       boxSizing: 'border-box',
       minWidth: '0.0625rem',
-      padding: iconWrapperPadding,
+      paddingInlineEnd: isCondensed
+        ? componentTheme.iconTextGapCondensed
+        : componentTheme.iconTextGap,
       flexShrink: 0,
       maxWidth: '100%',
       overflowX: 'visible',

@@ -36,7 +36,6 @@ import {
   InteractionType
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { bidirectional } from '@instructure/ui-i18n'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 
@@ -73,7 +72,6 @@ type Props = {
   onKeyDown?: (...args: any[]) => any
   renderIcon?: React.ReactNode | ((...args: any[]) => any)
   tabIndex?: number | string
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
 /**
@@ -82,7 +80,6 @@ category: components/utilities
 ---
 **/
 
-@bidirectional()
 @withStyle(generateStyles, generateComponentTheme)
 @testable()
 class BaseButton extends Component<Props> {
@@ -187,10 +184,7 @@ class BaseButton extends Component<Props> {
     /**
      * Specifies the tabindex of the `Button`.
      */
-    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    //@ts-expect-error FIXME:
-    // eslint-disable-next-line react/require-default-props
-    dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   }
 
   static defaultProps = {
