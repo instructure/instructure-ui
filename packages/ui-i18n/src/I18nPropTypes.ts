@@ -43,7 +43,6 @@ function iso8601(
 ): Error | null {
   const propValue = props[propName]
   if (typeof propValue === 'undefined' || propValue === '') return null
-  //this.iso8601.isRequired = makeRequirable(I18nPropTypes.iso8601)
   const propValueType = typeof propValue
   if (typeof propValueType !== 'string') {
     return new Error(
