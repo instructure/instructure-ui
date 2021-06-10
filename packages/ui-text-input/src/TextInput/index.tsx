@@ -262,7 +262,6 @@ class TextInput extends Component<Props> {
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -345,9 +344,7 @@ class TextInput extends Component<Props> {
     const { interaction } = this
 
     let descriptionIds = ''
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (props['aria-describedby']) {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       descriptionIds = `${props['aria-describedby']}`
     }
 

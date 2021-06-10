@@ -434,7 +434,7 @@ class BaseTransition extends React.Component {
   }
 
   renderChildren() {
-    return safeCloneElement(ensureSingleChild(this.props.children), {
+    return safeCloneElement(ensureSingleChild(this.props.children)!, {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'in' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
       'aria-hidden': !this.props.in ? true : null
     })

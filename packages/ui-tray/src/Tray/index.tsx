@@ -376,7 +376,6 @@ class Tray extends Component<Props> {
             transitionExit
           >
             <span
-              // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
               {...omitProps(props, Tray.propTypes)}
               css={this.props.styles.tray}
               ref={contentRef}

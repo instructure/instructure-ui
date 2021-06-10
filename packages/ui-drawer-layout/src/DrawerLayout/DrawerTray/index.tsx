@@ -346,7 +346,6 @@ class DrawerTray extends Component<Props> {
               unmountOnExit
             >
               <div
-                //@ts-expect-error FIXME:
                 {...omitProps(props, DrawerTray.propTypes)}
                 ref={this.handleContentRef}
                 css={trayStyles}

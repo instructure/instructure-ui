@@ -22,50 +22,39 @@
  * SOFTWARE.
  */
 
-import { logWarn as warn } from '@instructure/console'
+import { getDisplayName } from './getDisplayName'
+import { ComponentType, ReactElement, ReactNode } from 'react'
 
 /**
  * ---
  * category: utilities/react
  * ---
- * Get the React element type for a component.
+ * Check if a React component instance (React element) matches one of the
+ * specified types.
  *
- * @module getElementType
- * @param {ReactComponent} Component
- * @param {Object} props
- * @param {Function} getDefault an optional function that returns the default element type
- * @returns {String} the element type
+ * @module matchComponentTypes
+ * @param {ReactElement|any} componentInstance
+ * @param {Array} types an array of React components
+ * @returns {Boolean} true if the component matches at least one of the types
  */
-function getElementType(Component, props, getDefault) {
-  if (props.as && props.as !== Component.defaultProps.as) {
-    return props.as
-  }
-
-  if (typeof getDefault === 'function') {
-    return getDefault()
-  }
-
-  if (props.href) {
-    return 'a'
-  }
-
-  if (props.to) {
-    warn(
-      // if to prop is used without as
-      !props.as,
-      `[${
-        Component.displayName || Component.name
-      }] \`as\` prop should be provided when using \`to\``
+function matchComponentTypes(
+  componentInstance: ReactNode,
+  types: string[] | ComponentType[] | ComponentType<any>[] = []
+) {
+  if (componentInstance && (componentInstance as ReactElement).type) {
+    const displayNames = types.map(
+      (type: string | ComponentType | ComponentType<any>) =>
+        getDisplayName(type)
     )
-    return 'a'
+    return (
+      displayNames.indexOf(
+        getDisplayName((componentInstance as ReactElement).type)
+      ) >= 0
+    )
+  } else {
+    return false
   }
-
-  if (typeof props.onClick === 'function') {
-    return 'button'
-  }
-
-  return Component.defaultProps.as || 'span'
 }
 
-export default getElementType
-export { getElementType }
+export default matchComponentTypes
+export { matchComponentTypes }

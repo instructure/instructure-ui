@@ -98,7 +98,6 @@ class FormFieldMessages extends Component<Props> {
     return messages && messages.length > 0 ? (
       <span
         css={styles.formFieldMessages}
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, FormFieldMessages.propTypes)}
       >
         {messages.map((msg, i) => {

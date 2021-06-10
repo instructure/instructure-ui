@@ -139,11 +139,9 @@ class Text extends Component<Props> {
   render() {
     const { children } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(Text, this.props)
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; css: any; ref: ((...a... Remove this comment to see the full error message
       <ElementType
         {...passthroughProps(this.props)}
         css={this.props.styles.text}

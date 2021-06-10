@@ -22,6 +22,17 @@
  * SOFTWARE.
  */
 
+export type GetInteractionOptions = {
+  props?: {
+    interaction?: InteractionType
+    disabled?: boolean
+    readOnly?: boolean
+    [key: string]: any
+  }
+  interactionTypes?: InteractionType[]
+}
+
+export type InteractionType = 'enabled' | 'disabled' | 'readonly'
 /**
  * ---
  * category: utilities/react
@@ -34,14 +45,14 @@
  * @param {Object} args.props - the component props
  * @param {string} args.props.interaction - specifies the interaction mode, one of 'enabled', 'disabled', or 'readonly'
  * @param {boolean} args.props.disabled - specifies if the component is disabled. Will take precedence over readOnly
- * @param {boolean} args.props.readOnly - specifies if the component is readOnly
- * @param {Array} args.interactionTypes - an array specifying the interaction types available to the component, ['disabled', 'readOnly'] by default
+ * @param {boolean} args.props.readOnly - specifies if the component is readonly
+ * @param {Array} args.interactionTypes - an array specifying the interaction types available to the component, ['disabled', 'readonly'] by default
  * @returns {String} one of 'enabled', 'disabled', or 'readonly'
  */
 export function getInteraction({
   props = {},
-  interactionTypes = ['disabled', 'readOnly']
-} = {}) {
+  interactionTypes = ['disabled', 'readonly']
+}: GetInteractionOptions = {}): InteractionType {
   const { interaction, disabled, readOnly } = props
 
   // interaction is the source of truth when it is provided
@@ -50,7 +61,7 @@ export function getInteraction({
   // if there's no interaction specified, use disabled or readOnly if they are defined as props (note, disabled will win
   // over readOnly if both are provided)
   if (interactionTypes.includes('disabled') && disabled) return 'disabled'
-  if (interactionTypes.includes('readOnly') && readOnly) return 'readonly'
+  if (interactionTypes.includes('readonly') && readOnly) return 'readonly'
 
   // We were provided with nothing, use enabled by default
   return 'enabled'

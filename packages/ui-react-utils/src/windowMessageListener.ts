@@ -23,6 +23,7 @@
  */
 import { decorator } from '@instructure/ui-decorator'
 import { ownerWindow } from '@instructure/ui-dom-utils'
+import { ComponentClass } from 'react'
 
 /**
  * ---
@@ -38,14 +39,22 @@ import { ownerWindow } from '@instructure/ui-dom-utils'
  * @returns {Function} a function that decorates a React component with the behavior
  */
 const windowMessageListener = decorator(
-  (ComposedComponent, messageHandler, validSource) => {
+  (
+    ComposedComponent: ComponentClass,
+    messageHandler: (data: any) => void,
+    validSource: string | (() => string)
+  ) => {
     return class extends ComposedComponent {
-      static postMessage = function (target, message, origin) {
+      static postMessage = function (
+        target: Window,
+        message: any,
+        origin: string
+      ) {
         target.postMessage(message, origin)
       }
 
       componentDidMount() {
-        const win = ownerWindow(this)
+        const win = ownerWindow(this)!
 
         win.addEventListener('message', this.handleMessage, false)
 
@@ -55,7 +64,7 @@ const windowMessageListener = decorator(
       }
 
       componentWillUnmount() {
-        const win = ownerWindow(this)
+        const win = ownerWindow(this)!
         win.removeEventListener('message', this.handleMessage, false)
 
         if (super.componentDidMount) {
@@ -63,7 +72,7 @@ const windowMessageListener = decorator(
         }
       }
 
-      sourceIsValid(eventSource) {
+      sourceIsValid(eventSource: Window | null) {
         const expectedSource =
           typeof validSource === 'function'
             ? validSource.call(this)
@@ -81,10 +90,10 @@ const windowMessageListener = decorator(
         }
       }
 
-      handleMessage = (e) => {
+      handleMessage = (e: MessageEvent) => {
         if (
-          this.sourceIsValid(e.source) &&
-          e.origin === origin(this) &&
+          this.sourceIsValid(e.source as Window) &&
+          e.origin === origin(this as any) &&
           e.data
         ) {
           messageHandler.call(this, e.data)
@@ -102,8 +111,8 @@ const windowMessageListener = decorator(
  * @param {DOMElement} node
  * @returns {String} the origin
  */
-function origin(node) {
-  const ownWindow = ownerWindow(node)
+function origin(node: Element) {
+  const ownWindow = ownerWindow(node)!
 
   const { location } = ownWindow
 

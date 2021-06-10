@@ -87,7 +87,7 @@ describe('callRenderProp', async () => {
     // they are transpiled down they do. So this next line is to make sure
     // the thing we are testing really doesn't have a prototype like it would
     // if it was a real untranspiled fat arrow function.
-    if (Baz.prototype) Baz.prototype = undefined
+    if (Baz.prototype) Baz.prototype! = undefined
 
     const result = callRenderProp(Baz)
 
@@ -98,7 +98,7 @@ describe('callRenderProp', async () => {
 
   describe('passing props', async () => {
     it('should pass props correctly to functions', async () => {
-      const someFunc = ({ shape }) => <div>{shape}</div>
+      const someFunc = ({ shape }: { shape: string }) => <div>{shape}</div>
 
       const result = callRenderProp(someFunc, { shape: 'rectangle' })
 
@@ -108,7 +108,8 @@ describe('callRenderProp', async () => {
     })
 
     it('should pass props correctly to React classes', async () => {
-      class Foo extends React.Component {
+      type FooProps = { shape: 'circle' | 'rectangle' }
+      class Foo extends React.Component<FooProps> {
         static propTypes = {
           shape: PropTypes.oneOf(['circle', 'rectangle'])
         }

@@ -151,7 +151,6 @@ class FormFieldLayout extends Component<Props> {
   }
 
   get elementType() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return getElementType(FormFieldLayout, this.props)
   }
 
@@ -229,9 +228,7 @@ class FormFieldLayout extends Component<Props> {
     const { width, layout, children } = props
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (false | Element)[]; css: any; s... Remove this comment to see the full error message
       <ElementType
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(props, {
           ...FormFieldLayout.propTypes,
           ...Grid.propTypes
@@ -248,7 +245,6 @@ class FormFieldLayout extends Component<Props> {
           startAt={
             layout === 'inline' && this.hasVisibleLabel ? 'medium' : null
           }
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
           {...pickProps(props, Grid.propTypes)}
         >
           <Grid.Row>

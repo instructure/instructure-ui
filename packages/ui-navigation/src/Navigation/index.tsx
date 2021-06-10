@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
@@ -166,7 +166,7 @@ class Navigation extends Component<Props> {
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
-      const navItem = safeCloneElement(child, {
+      const navItem = safeCloneElement(child as ReactElement, {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'minimized' does not exist on type 'Reado... Remove this comment to see the full error message
         minimized: this.state.minimized
       })

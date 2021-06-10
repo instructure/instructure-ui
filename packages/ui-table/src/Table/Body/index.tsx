@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -103,7 +103,7 @@ class Body extends Component<Props> {
       >
         {Children.map(children, (child) =>
           matchComponentTypes(child, [Row])
-            ? safeCloneElement(child, {
+            ? safeCloneElement(child as ReactElement, {
                 // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
                 key: child.props.name,
                 hover,

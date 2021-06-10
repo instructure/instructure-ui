@@ -164,7 +164,6 @@ class Day extends Component<Props> {
 
   get elementType() {
     const { as } = this.props
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return as || getElementType(Day, this.props)
   }
 
@@ -216,7 +215,6 @@ class Day extends Component<Props> {
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(props, Day.propTypes),
       Day
     )

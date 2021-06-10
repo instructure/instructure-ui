@@ -294,7 +294,6 @@ class SimpleSelect extends Component<Props> {
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -585,7 +584,6 @@ class SimpleSelect extends Component<Props> {
         size={size}
         assistiveText={assistiveText}
         placeholder={placeholder}
-        // @ts-expect-error FIXME:
         interaction={this.interaction}
         isRequired={isRequired}
         isInline={isInline}

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+import React, { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -172,7 +172,7 @@ class CheckboxGroup extends Component<Props> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'index' is declared but its value is never read.
     return Children.map(children, (child, index) => {
       if (matchComponentTypes(child, [Checkbox])) {
-        return safeCloneElement(child, {
+        return safeCloneElement(child as ReactElement, {
           // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           key: `${child.props.name}`,
           name,
@@ -199,9 +199,7 @@ class CheckboxGroup extends Component<Props> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, CheckboxGroup.propTypes)}
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormFieldGroup.propTypes)}
         rowSpacing="small"
         vAlign="top"

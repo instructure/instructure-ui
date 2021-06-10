@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -208,7 +208,7 @@ class MenuItemGroup extends Component<Props> {
     const selected = []
 
     const items = Children.toArray(children).filter((child) => {
-      return matchComponentTypes(child, [MenuItem])
+      return matchComponentTypes(child as MenuItem, [MenuItem])
     })
 
     items.forEach((item, index) => {
@@ -272,7 +272,7 @@ class MenuItemGroup extends Component<Props> {
         return (
           <li role="none">
             {' '}
-            {safeCloneElement(child, {
+            {safeCloneElement(child as ReactElement, {
               tabIndex: isTabbable && index === 0 ? 0 : -1,
               controls,
               value,
@@ -293,7 +293,6 @@ class MenuItemGroup extends Component<Props> {
   }
 
   render() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, MenuItemGroup.propTypes)
     return (
       <span

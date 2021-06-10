@@ -166,7 +166,6 @@ class ToggleDetails extends Component<Props> {
     const { variant } = this.props
 
     const props = {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       ...omitProps(this.props, ToggleDetails.propTypes),
       ...toggleProps,
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
@@ -244,7 +243,6 @@ class ToggleDetails extends Component<Props> {
   render() {
     return (
       <Expandable
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, Expandable.propTypes)}
         onToggle={this.handleToggle}
       >

@@ -448,11 +448,9 @@ class View extends Component<Props> {
       ...props
     } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(View, this.props)
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; className: any; css: ... Remove this comment to see the full error message
       <ElementType
         {...passthroughProps(props)}
         className={className}
@@ -476,13 +474,11 @@ class View extends Component<Props> {
 // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
 View.omitViewProps = (props, Component) => {
   if (process.env.NODE_ENV !== 'production') {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     Object.keys(pickProps(props, View.propTypes)).forEach((prop) => {
       error(false, `[${Component.name}] prop '${prop}' is not allowed.`)
     })
   }
 
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
   return omitProps(props, View.propTypes)
 }
 

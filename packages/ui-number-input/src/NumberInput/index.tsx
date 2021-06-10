@@ -230,7 +230,6 @@ class NumberInput extends Component<Props> {
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -359,7 +358,6 @@ class NumberInput extends Component<Props> {
 
     return (
       <FormField
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormField.propTypes)}
         label={callRenderProp(renderLabel)}
         inline={display === 'inline-block'}
@@ -372,7 +370,6 @@ class NumberInput extends Component<Props> {
         >
           <span css={this.props.styles.inputContainer}>
             <input
-              // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
               {...omitProps(this.props, {
                 ...FormField.propTypes,
                 ...NumberInput.propTypes

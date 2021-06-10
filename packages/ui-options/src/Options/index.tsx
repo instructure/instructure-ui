@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -150,17 +150,16 @@ class Options extends Component<Props> {
       if (matchComponentTypes(child, ['Options'])) {
         return this.renderSubList(child)
       }
-
       if (matchComponentTypes(child, ['Item', 'Separator'])) {
-        return safeCloneElement(child, { as: this.childAs })
+        return safeCloneElement(child as ReactElement, { as: this.childAs })
       }
+      return undefined
     })
   }
 
   render() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Options.propTypes),
       Options
     )

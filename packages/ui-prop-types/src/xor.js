@@ -45,7 +45,7 @@
  * @module xor
  * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
  * @param {...string} otherPropNames - reject if any of these other props are also given
- * @returns {Error} if any of the other props are also given
+ * @returns {Validator} if any of the other props are also given
  */
 function xor(propType, ...otherPropNames) {
   return function (props, propName, componentName) {

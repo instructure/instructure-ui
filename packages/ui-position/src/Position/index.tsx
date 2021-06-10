@@ -383,7 +383,6 @@ class Position extends Component<Props> {
 
     if (target) {
       return safeCloneElement(target, {
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
         ref: (el) => {
           // @ts-expect-error ts-migrate(2339) FIXME: Property '_target' does not exist on type 'Positio... Remove this comment to see the full error message
           this._target = el
@@ -394,9 +393,8 @@ class Position extends Component<Props> {
     } else if (this.props.target) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property '_target' does not exist on type 'Positio... Remove this comment to see the full error message
       this._target = callRenderProp(this.props.target)
-    } else {
-      return null
     }
+    return null
   }
 
   render() {

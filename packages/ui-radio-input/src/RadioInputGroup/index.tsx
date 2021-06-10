@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
+import React, { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -164,7 +164,7 @@ class RadioInputGroup extends Component<Props> {
         // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
         const isChecked = this.value === child.props.value
         const defaultFocus = !this.value && index === 0
-        return safeCloneElement(child, {
+        return safeCloneElement(child as ReactElement, {
           name,
           // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           disabled: disabled || child.props.disabled,
@@ -195,9 +195,7 @@ class RadioInputGroup extends Component<Props> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormFieldGroup
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, RadioInputGroup.propTypes)}
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormFieldGroup.propTypes)}
         // TODO: split out toggle variant into its own component
         layout={

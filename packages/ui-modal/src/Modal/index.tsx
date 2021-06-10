@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { Dialog } from '@instructure/ui-dialog'
@@ -339,13 +339,13 @@ class Modal extends Component<Props> {
       if (!child) return // ignore null, falsy children
 
       if (matchComponentTypes(child, [ModalBody])) {
-        return safeCloneElement(child, {
+        return safeCloneElement(child as ReactElement, {
           variant: variant,
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           overflow: child.props.overflow || overflow
         })
       } else {
-        return safeCloneElement(child, {
+        return safeCloneElement(child as ReactElement, {
           variant: variant
         })
       }

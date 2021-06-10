@@ -22,28 +22,23 @@
  * SOFTWARE.
  */
 
-import { getDisplayName } from './getDisplayName'
+import { ComponentType } from 'react'
 
 /**
  * ---
  * category: utilities/react
  * ---
- * Check if a React component instance (React element) matches one of the
- * specified types.
- *
- * @module matchComponentTypes
- * @param {ReactComponent} componentInstance
- * @param {Array} types an array of React components
- * @returns {Boolean} true if the component matches at least one of the types
+ * Get the displayName of a React component.
+ * needs a babel plugin to work https://github.com/facebook/react/issues/4915 !!
+ * @module getDisplayName
+ * @param {ComponentType|String} ReactComponent
+ * @returns {String} the component displayName
  */
-function matchComponentTypes(componentInstance, types = []) {
-  if (componentInstance && componentInstance.type) {
-    const displayNames = types.map((type) => getDisplayName(type))
-    return displayNames.indexOf(getDisplayName(componentInstance.type)) >= 0
-  } else {
-    return false
-  }
+function getDisplayName(ReactComponent: string | ComponentType) {
+  return typeof ReactComponent === 'string'
+    ? ReactComponent
+    : ReactComponent.displayName || ReactComponent.name
 }
 
-export default matchComponentTypes
-export { matchComponentTypes }
+export default getDisplayName
+export { getDisplayName }

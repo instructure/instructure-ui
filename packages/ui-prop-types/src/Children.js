@@ -68,7 +68,7 @@ const Children = {
    *    <Foo />
    *  </Example>
    * ```
-   * @returns {Error} if validation failed
+   * @returns {Validator}
    */
   oneOf(validTypes) {
     function validator(props, propName, componentName) {
@@ -98,6 +98,7 @@ const Children = {
           )
         }
       }
+      return
     }
 
     validator.isRequired = makeRequirable(validator)
@@ -135,7 +136,7 @@ const Children = {
    *  - If multiple children of the same type are provided (ex. Foo, Foo, Bar, and Baz)
    *
    * @param {Array} validTypes - Array of child types
-   * @returns {Error} if validation failed
+   * @returns {Validator}
    */
   oneOfEach(validTypes) {
     return function (props, propName, componentName) {
@@ -270,7 +271,7 @@ const Children = {
    * ```
    *
    * @param {...Array} validTypeGroups One or more Arrays of valid types
-   * @returns {Error} if validation failed
+   * @returns {Validator}
    */
   enforceOrder(...validTypeGroups) {
     function validateTypes(childNames, typeNames) {

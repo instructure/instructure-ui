@@ -200,7 +200,6 @@ class Head extends Component<Props> {
     return isStacked ? (
       this.renderSelect()
     ) : (
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       <thead {...omitProps(this.props, Head.propTypes)} css={styles.head}>
         {Children.map(children, (child) =>
           matchComponentTypes(child, [Row]) ? child : null

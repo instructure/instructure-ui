@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -108,8 +108,7 @@ class GridRow extends Component<Props> {
 
     return Children.map(this.props.children, (child, index) => {
       if (matchComponentTypes(child, [GridCol])) {
-        return safeCloneElement(child, {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+        return safeCloneElement(child as ReactElement, {
           ...pickProps(props, GridRow.propTypes),
           // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
           ...child.props /* child props should override parent */,
@@ -125,7 +124,6 @@ class GridRow extends Component<Props> {
   render() {
     const { styles, ...restProps } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(restProps, GridRow.propTypes)
 
     return (

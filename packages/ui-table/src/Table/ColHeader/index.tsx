@@ -151,7 +151,6 @@ class ColHeader extends Component<Props> {
 
     return (
       <th
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, ColHeader.propTypes)}
         css={styles.colHeader}
         style={{

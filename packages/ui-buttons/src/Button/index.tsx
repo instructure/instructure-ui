@@ -201,7 +201,6 @@ class Button extends Component<Props> {
       ...props
     } = this.props
 
-    // @ts-expect-error ts-migrate(2739) FIXME: Type '{ elementRef?: ((...args: any[]) => any) | u... Remove this comment to see the full error message
     const interaction = getInteraction({ props })
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'themeOverride' does not exist on type 'R... Remove this comment to see the full error message
@@ -228,7 +227,6 @@ class Button extends Component<Props> {
       themeOverride
     }
 
-    // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
     return <BaseButton {...buttonProps}>{children}</BaseButton>
   }
 }

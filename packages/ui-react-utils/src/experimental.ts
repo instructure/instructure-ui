@@ -23,54 +23,75 @@
  */
 import { decorator } from '@instructure/ui-decorator'
 import { logWarn as warn } from '@instructure/console'
+import { ComponentClass } from 'react'
 
 const experimental =
   process.env.NODE_ENV == 'production'
-    ? () => (Component) => Component
-    : decorator((ComposedComponent, experimentalProps, message) => {
-        return class ExperimentalComponent extends ComposedComponent {
-          componentDidMount() {
-            if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
-              if (experimentalProps) {
-                warnExperimentalProps(
-                  ComposedComponent.name,
-                  this.props,
-                  experimentalProps,
-                  message
-                )
-              } else {
-                warnExperimentalComponent(ComposedComponent.name, message)
+    ? () => (ReactComponent: ComponentClass<any>) => ReactComponent
+    : decorator(
+        (
+          ComposedComponent: ComponentClass<any>,
+          experimentalProps: string[],
+          message: string
+        ) => {
+          return class ExperimentalComponent<
+            P,
+            S,
+            SS
+          > extends ComposedComponent {
+            componentDidMount() {
+              if (
+                !(this.props as any).__dangerouslyIgnoreExperimentalWarnings
+              ) {
+                if (experimentalProps) {
+                  warnExperimentalProps(
+                    ComposedComponent.name,
+                    this.props,
+                    experimentalProps,
+                    message
+                  )
+                } else {
+                  warnExperimentalComponent(ComposedComponent.name, message)
+                }
+              }
+
+              if (super.componentDidMount) {
+                super.componentDidMount()
               }
             }
 
-            if (super.componentDidMount) {
-              super.componentDidMount()
-            }
-          }
-
-          componentDidUpdate(prevProps, prevState, prevContext) {
-            if (!this.props.__dangerouslyIgnoreExperimentalWarnings) {
-              if (experimentalProps) {
-                warnExperimentalProps(
-                  ComposedComponent.name,
-                  this.props,
-                  experimentalProps,
-                  message
-                )
-              } else {
-                warnExperimentalComponent(ComposedComponent.name, message)
+            componentDidUpdate(prevProps: P, prevState: S, prevContext: SS) {
+              if (
+                !(this.props as any).__dangerouslyIgnoreExperimentalWarnings
+              ) {
+                if (experimentalProps) {
+                  warnExperimentalProps(
+                    ComposedComponent.name,
+                    this.props,
+                    experimentalProps,
+                    message
+                  )
+                } else {
+                  warnExperimentalComponent(ComposedComponent.name, message)
+                }
               }
-            }
 
-            if (super.componentDidUpdate) {
-              super.componentDidUpdate(prevProps, prevState, prevContext)
+              if (super.componentDidUpdate) {
+                super.componentDidUpdate(prevProps, prevState, prevContext)
+              }
             }
           }
         }
-      })
+      )
 
-function warnExperimentalProps(name, props, experimentalProps, message = '') {
+function warnExperimentalProps(
+  name: string,
+  props: Record<string, any>,
+  experimentalProps: string[],
+  message = ''
+) {
   experimentalProps.forEach((experimentalProp) => {
+    // @ts-expect-error TODO remove if its typed
     warn(
       typeof props[experimentalProp] === 'undefined',
       `[${name}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
@@ -78,7 +99,8 @@ function warnExperimentalProps(name, props, experimentalProps, message = '') {
   })
 }
 
-function warnExperimentalComponent(name, message = '') {
+function warnExperimentalComponent(name: string, message = '') {
+  // @ts-expect-error TODO remove if its typed
   warn(
     false,
     `[${name}] is experimental and its API could change significantly in a future release. ${message}`

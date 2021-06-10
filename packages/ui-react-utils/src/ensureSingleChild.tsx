@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Children } from 'react'
+import React, { Children, ReactElement, ReactNode } from 'react'
 import { safeCloneElement } from './safeCloneElement'
 
 /**
@@ -35,11 +35,11 @@ import { safeCloneElement } from './safeCloneElement'
  * wrap in a span and return the child. Return null if child has
  * no length.
  * @module ensureSingleChild
- * @param {ReactElement} child
+ * @param {ReactNode} child
  * @param {Object} props - props for child
- * @returns {ReactElement} cloned instance for a single child, or children wrapped in a span
+ * @returns {ReactElement|null} cloned instance for a single child, or children wrapped in a span
  */
-function ensureSingleChild(child, props = {}) {
+function ensureSingleChild(child: ReactNode, props = {}) {
   const childCount = Children.count(child)
 
   if (childCount === 0) {
@@ -50,7 +50,13 @@ function ensureSingleChild(child, props = {}) {
   ) {
     return <span {...props}>{child}</span>
   } else {
-    return safeCloneElement(Array.isArray(child) ? child[0] : child, props)
+    // TODO: check that we can only end up here if child is ReactElement
+    return safeCloneElement(
+      Array.isArray(child)
+        ? (child[0] as ReactElement)
+        : (child as ReactElement),
+      props
+    )
   }
 }
 

@@ -232,7 +232,7 @@ class TruncateText extends Component<Props> {
     error(
       !(() => {
         let isTooDeep = false
-        const text = ensureSingleChild(this.props.children)
+        const text = ensureSingleChild(this.props.children)!
         React.Children.forEach(text.props.children, (child) => {
           if (child.props) {
             React.Children.forEach(child.props.children, (grandChild) => {

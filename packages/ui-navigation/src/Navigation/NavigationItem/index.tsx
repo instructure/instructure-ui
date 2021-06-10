@@ -112,16 +112,13 @@ class NavigationItem extends Component<Props> {
   }
 
   renderLink() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(NavigationItem, this.props)
 
     const { href, onClick, icon, label } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, NavigationItem.propTypes)
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (Element | null)[]; href: string... Remove this comment to see the full error message
       <ElementType
         {...props}
         href={href}

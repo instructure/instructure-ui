@@ -130,7 +130,6 @@ const getStyleProps = ({ cursor, style }) => {
   ])
 
   if (cursor) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'cursor' does not exist on type '{}'.
     whitelisted.cursor = cursor
   }
 

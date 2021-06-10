@@ -299,7 +299,6 @@ class TimeSelect extends Component<Props> {
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -687,7 +686,6 @@ class TimeSelect extends Component<Props> {
       <Select
         renderLabel={renderLabel}
         inputValue={inputValue}
-        // @ts-expect-error FIXME:
         interaction={this.interaction}
         placeholder={placeholder}
         id={id}

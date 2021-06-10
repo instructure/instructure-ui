@@ -347,7 +347,6 @@ class Select extends Component<Props> {
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -563,7 +562,6 @@ class Select extends Component<Props> {
 
     let optionProps = {
       // passthrough props
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       ...omitProps(option.props, {
         ...Option.propTypes,
         ...Options.Item.propTypes
@@ -617,7 +615,6 @@ class Select extends Component<Props> {
         as="ul"
         role="group"
         renderLabel={renderLabel}
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(rest, {
           ...Options.propTypes,
           ...Group.propTypes
@@ -642,12 +639,8 @@ class Select extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
   renderList(data) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
-    const {
-      isShowingOptions,
-      optionsMaxWidth,
-      visibleOptionsCount,
-      children
-    } = this.props
+    const { isShowingOptions, optionsMaxWidth, visibleOptionsCount, children } =
+      this.props
 
     let lastWasGroup = false
     const viewProps = isShowingOptions
@@ -738,7 +731,6 @@ class Select extends Component<Props> {
     } = this.props
 
     const { interaction } = this
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const passthroughProps = omitProps(rest, Select.propTypes)
     const { ref, ...triggerProps } = getTriggerProps({ ...passthroughProps })
     const isEditable = typeof onInputChange !== 'undefined'
@@ -752,7 +744,6 @@ class Select extends Component<Props> {
         }
       : {}
     // backdoor to autocomplete attr to work around chrome autofill issues
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     if (passthroughProps['autoComplete']) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'autoComplete' does not exist on type '{ ... Remove this comment to see the full error message
       overrideProps.autoComplete = passthroughProps['autoComplete']

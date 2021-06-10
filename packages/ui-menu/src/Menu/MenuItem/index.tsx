@@ -227,7 +227,6 @@ class MenuItem extends Component<Props> {
   }
 
   get elementType() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return getElementType(MenuItem, this.props)
   }
 
@@ -287,12 +286,10 @@ class MenuItem extends Component<Props> {
   render() {
     const { disabled, controls, onKeyDown, onKeyUp, type, href } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, MenuItem.propTypes)
     const ElementType = this.elementType
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; href: string | undefine... Remove this comment to see the full error message
       <ElementType // eslint-disable-line jsx-a11y/mouse-events-have-key-events
         tabIndex="-1" // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}

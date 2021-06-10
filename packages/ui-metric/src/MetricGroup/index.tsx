@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -75,7 +75,7 @@ class MetricGroup extends Component<Props> {
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
-      return safeCloneElement(child, {
+      return safeCloneElement(child as ReactElement, {
         isGroupChild: true
       })
     })

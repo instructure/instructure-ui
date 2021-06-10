@@ -34,8 +34,12 @@ import React from 'react'
  * @param {object} props
  * @return {ReactElement} A renderable React element
  */
-function callRenderProp(value, props = {}) {
+function callRenderProp(
+  value: any, // TODO type this better
+  props = {}
+) {
   if (typeof value === 'function') {
+    // note: this part is needed for React 16
     // TODO: Simplify this when we drop React 15
     // In react 16, `createElement` accepts a function. In react 15 we get an
     // error on rendering the result. Evaluate the function here if it is not a
@@ -48,10 +52,8 @@ function callRenderProp(value, props = {}) {
     ) {
       return value(props)
     }
-
     return React.createElement(value, props)
   }
-
   return value
 }
 

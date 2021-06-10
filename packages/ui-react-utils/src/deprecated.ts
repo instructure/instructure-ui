@@ -23,23 +23,36 @@
  */
 import { decorator } from '@instructure/ui-decorator'
 import { logWarnDeprecated as warnDeprecated } from '@instructure/console'
+import { ComponentClass } from 'react'
+
+export interface DeprecatedDecorator {
+  (version: string, oldProps?: Record<string, any> | null, message?: string): (
+    ComposedComponent: any
+  ) => any
+  deprecatePropValues: (...args: any[]) => (...args: any[]) => boolean | null
+  warnDeprecatedProps: (...args: any[]) => void
+  warnDeprecatedComponent: (...args: any[]) => void
+  changedPackageWarning: (...args: any[]) => string
+}
 
 const deprecated = (() => {
   if (process.env.NODE_ENV === 'production') {
-    const deprecated = function () {
-      return (ComposedComponent) => ComposedComponent
+    const deprecated: DeprecatedDecorator = function () {
+      return (ComposedComponent: ComponentClass) => ComposedComponent
     }
-
-    deprecated.deprecatePropValues = () => {}
+    deprecated.deprecatePropValues = () => () => null
     deprecated.warnDeprecatedProps = () => {}
     deprecated.warnDeprecatedComponent = () => {}
-    deprecated.changedPackageWarning = () => {}
-
+    deprecated.changedPackageWarning = () => ''
     return deprecated
   }
-
   const deprecated = decorator(
-    (ComposedComponent, version, oldProps, message) => {
+    (
+      ComposedComponent: ComponentClass,
+      version: string,
+      oldProps?: Record<string, any>,
+      message = ''
+    ) => {
       /**
        * ---
        * category: utilities/react
@@ -114,7 +127,6 @@ const deprecated = (() => {
       return DeprecatedComponent
     }
   )
-
   /**
    * ---
    * category: utilities
@@ -125,8 +137,24 @@ const deprecated = (() => {
    * @param {array} deprecated - an array of the deprecated variant names
    * @param {string|function} message - a string with additional information (like the version the prop will be removed) or a function returning a string
    */
-  deprecated.deprecatePropValues = (propType, deprecated = [], message) => {
-    return (props, propName, componentName, ...rest) => {
+  ;(deprecated as DeprecatedDecorator).deprecatePropValues = (
+    propType: (
+      props: Record<string, any>,
+      propName: string,
+      componentName: string,
+      ...rest: any[]
+    ) => boolean,
+    deprecated: string[] = [],
+    message:
+      | string
+      | ((arg: { props: any; propName: string; propValue: any }) => string)
+  ) => {
+    return (
+      props: Record<string, any>,
+      propName: string,
+      componentName: string,
+      ...rest: any[]
+    ) => {
       const isDeprecatedValue = deprecated.includes(props[propName])
 
       const warningMessage =
@@ -137,7 +165,7 @@ const deprecated = (() => {
             }' value for the \`${propName}\` prop is deprecated. ${
               message || ''
             }`
-
+      // @ts-expect-error TODO remove if its typed
       warnDeprecated(!isDeprecatedValue, `[${componentName}] ${warningMessage}`)
 
       return isDeprecatedValue
@@ -147,10 +175,10 @@ const deprecated = (() => {
   }
 
   function warnDeprecatedProps(
-    componentName,
-    version,
-    props,
-    oldProps,
+    componentName: string,
+    version: string,
+    props: Record<string, any>,
+    oldProps: Record<string, any>,
     message = ''
   ) {
     Object.keys(oldProps).forEach((oldProp) => {
@@ -160,6 +188,7 @@ const deprecated = (() => {
 
         const newPropMessage = newProp ? `. Use \`${newProp}\` instead` : ''
 
+        // @ts-expect-error TODO remove if its typed
         warnDeprecated(
           false,
           `[${componentName}] \`${oldProp}\` is deprecated and will be removed in version ${version}${newPropMessage}. ${message}`
@@ -167,9 +196,14 @@ const deprecated = (() => {
       }
     })
   }
-  deprecated.warnDeprecatedProps = warnDeprecatedProps
+  ;(deprecated as DeprecatedDecorator).warnDeprecatedProps = warnDeprecatedProps
 
-  function warnDeprecatedComponent(version, componentName, message) {
+  function warnDeprecatedComponent(
+    version: string,
+    componentName: string,
+    message: string
+  ) {
+    // @ts-expect-error TODO remove if its typed
     warnDeprecated(
       false,
       `[${componentName}] is deprecated and will be removed in version ${version}. ${
@@ -185,7 +219,8 @@ const deprecated = (() => {
    * @param {String} componentName the name of the component or Function.name of the utility function
    * @param {String} message a message to display as a console error in DEV env when condition is false
    */
-  deprecated.warnDeprecatedComponent = warnDeprecatedComponent
+  ;(deprecated as DeprecatedDecorator).warnDeprecatedComponent =
+    warnDeprecatedComponent
 
   /**
    * ---
@@ -195,11 +230,14 @@ const deprecated = (() => {
    * @param {String} newPackage the new version of the package
    * @return {String} the formatted warning string
    */
-  deprecated.changedPackageWarning = (prevPackage, newPackage) => {
+  ;(deprecated as DeprecatedDecorator).changedPackageWarning = (
+    prevPackage: string,
+    newPackage: string
+  ) => {
     return `It has been moved from @instructure/${prevPackage} to @instructure/${newPackage}.`
   }
 
-  return deprecated
+  return deprecated as DeprecatedDecorator
 })()
 
 export default deprecated

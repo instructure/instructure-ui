@@ -184,7 +184,6 @@ class RadioInput extends Component<Props> {
   render() {
     const { disabled, readOnly, label, value, name, styles } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, RadioInput.propTypes)
 
     return (

@@ -293,53 +293,52 @@ class DrawerLayout extends Component<Props> {
     )
 
     // @ts-expect-error ts-migrate(6133) FIXME: 'index' is declared but its value is never read.
-    const children = Children.map(this.props.children, (child, index) => {
-      if (matchComponentTypes(child, [DrawerTray])) {
-        trayCount++
-        return safeCloneElement(child, {
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          key: child.props.label,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
-          [DrawerTray.locatorAttribute]: this._id,
-          contentRef: this.handleTrayContentRef,
-          onEnter: this.handleTrayTransitionEnter,
-          onExit: this.handleTrayTransitionExit
-        })
-      } else if (matchComponentTypes(child, [DrawerContent])) {
-        contentCount++
+    const children = Children.map<ReactNode, ReactNode>(
+      this.props.children,
+      // @ts-expect-error index is unused
+      (child, index) => {
+        if (matchComponentTypes(child, [DrawerTray])) {
+          trayCount++
+          return safeCloneElement(child, {
+            key: child.props.label,
+            // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
+            [DrawerTray.locatorAttribute]: this._id,
+            contentRef: this.handleTrayContentRef,
+            onEnter: this.handleTrayTransitionEnter,
+            onExit: this.handleTrayTransitionExit
+          })
+        } else if (matchComponentTypes(child, [DrawerContent])) {
+          contentCount++
 
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-        const handleContentRef = (el) => {
-          this._content = el
+          // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
+          const handleContentRef = (el) => {
+            this._content = el
 
-          // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-          if (typeof child.props.contentRef === 'function') {
-            // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-            child.props.contentRef(el)
+            if (typeof child.props.contentRef === 'function') {
+              child.props.contentRef(el)
+            }
           }
-        }
 
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
-        return this.state.trayWidth !== null
-          ? safeCloneElement(child, {
-              // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-              key: child.props.label,
-              // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
-              [DrawerContent.locatorAttribute]: this._id,
-              style: this.contentStyle,
-              onSizeChange: createChainedFunction(
-                this.handleContentSizeChange,
-                // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
-                child.props.onSizeChange
-              ),
-              contentRef: handleContentRef,
-              shouldTransition: !shouldOverlayTray
-            })
-          : null
-      } else {
-        return child
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'trayWidth' does not exist on type 'Reado... Remove this comment to see the full error message
+          return this.state.trayWidth !== null
+            ? safeCloneElement(child, {
+                key: child.props.label,
+                // @ts-expect-error ts-migrate(2339) FIXME: Property '_id' does not exist on type 'DrawerLayou... Remove this comment to see the full error message
+                [DrawerContent.locatorAttribute]: this._id,
+                style: this.contentStyle,
+                onSizeChange: createChainedFunction(
+                  this.handleContentSizeChange,
+                  child.props.onSizeChange
+                ),
+                contentRef: handleContentRef,
+                shouldTransition: !shouldOverlayTray
+              })
+            : null
+        } else {
+          return child
+        }
       }
-    })
+    )
 
     error(
       trayCount <= 1,

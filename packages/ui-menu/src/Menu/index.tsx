@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
@@ -515,7 +515,7 @@ class Menu extends Component<Props> {
       if (matchComponentTypes(child, ['MenuItem'])) {
         return (
           <li role="none">
-            {safeCloneElement(child, {
+            {safeCloneElement(child as ReactElement, {
               controls,
               // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               disabled: disabled || child.props.disabled,
@@ -532,7 +532,7 @@ class Menu extends Component<Props> {
       if (matchComponentTypes(child, ['MenuItemGroup'])) {
         return (
           <li role="none">
-            {safeCloneElement(child, {
+            {safeCloneElement(child as ReactElement, {
               controls,
               // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               disabled: disabled || child.props.disabled,
@@ -552,7 +552,7 @@ class Menu extends Component<Props> {
 
         return (
           <li role="none">
-            {safeCloneElement(child, {
+            {safeCloneElement(child as ReactElement, {
               type: 'flyout',
               controls,
               disabled: submenuDisabled,
@@ -680,7 +680,7 @@ class Menu extends Component<Props> {
             popoverRef(el)
           }
         }}
-        renderTrigger={safeCloneElement(trigger, {
+        renderTrigger={safeCloneElement(trigger as ReactElement, {
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
           ref: (el) => {
             this._trigger = el

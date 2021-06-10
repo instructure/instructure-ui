@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -112,14 +112,14 @@ class Row extends Component<Props> {
               return child
             }
             if (matchComponentTypes(child, [RowHeader])) {
-              return safeCloneElement(child, {
+              return safeCloneElement(child as ReactElement, {
                 // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
                 key: child.props.name,
                 isStacked
               })
             }
             if (matchComponentTypes(child, [Cell])) {
-              return safeCloneElement(child, {
+              return safeCloneElement(child as ReactElement, {
                 // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
                 key: child.props.name,
                 isStacked,
