@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ClassAttributes, ReactElement, ReactNode } from 'react'
 
 import { logWarn as warn } from '@instructure/console'
 import { createChainedFunction } from '@instructure/ui-utils'
@@ -35,9 +35,16 @@ import { createChainedFunction } from '@instructure/ui-utils'
  * @module safeCloneElement
  * @param {ReactElement} element
  * @param {object} props
+ * @param children
  * @return {ReactElement}
  */
-function safeCloneElement(element, props, ...children) {
+function safeCloneElement<
+  P extends Record<string, any> & { style?: any } & ClassAttributes<P>
+>(
+  element: ReactElement<P> & { ref?: any },
+  props: P,
+  ...children: ReactNode[]
+) {
   const cloneRef = props.ref
   const originalRef = element.ref
   const originalRefIsAFunction = typeof originalRef === 'function'
@@ -64,7 +71,7 @@ function safeCloneElement(element, props, ...children) {
       (typeof props[prop] === 'function' ||
         typeof element.props[prop] === 'function')
     ) {
-      mergedProps[prop] = createChainedFunction(
+      ;(mergedProps as Record<string, any>)[prop] = createChainedFunction(
         element.props[prop],
         props[prop]
       )
@@ -72,9 +79,10 @@ function safeCloneElement(element, props, ...children) {
   })
 
   if (originalRef == null || cloneRef == null) {
-    return React.cloneElement(element, mergedProps, ...children)
+    return React.cloneElement<P>(element, mergedProps, ...children)
   }
 
+  // @ts-expect-error remove this when console is typed
   warn(
     originalRefIsAFunction,
     `Cloning an element with a ref that will be overwritten because the ref \
@@ -82,12 +90,12 @@ is not a function. Use a composable callback-style ref instead. \
 Ignoring ref: ${originalRef}`
   )
 
-  return React.cloneElement(
+  return React.cloneElement<P>(
     element,
     {
       ...mergedProps,
-      ref(component) {
-        cloneRef(component)
+      ref(component: any) {
+        ;(cloneRef as (instance: any) => void)(component)
         originalRef(component)
       }
     },

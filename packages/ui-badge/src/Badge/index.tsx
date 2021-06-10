@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { PositionPropTypes } from '@instructure/ui-position'
@@ -164,13 +164,8 @@ class Badge extends Component<Props> {
   }
 
   renderOutput() {
-    const {
-      count,
-      countUntil,
-      formatOverflowText,
-      formatOutput,
-      type
-    } = this.props
+    const { count, countUntil, formatOverflowText, formatOutput, type } =
+      this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop
@@ -207,7 +202,7 @@ class Badge extends Component<Props> {
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
-      return safeCloneElement(child, {
+      return safeCloneElement(child as ReactElement, {
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         'aria-describedby': this._defaultId
       })

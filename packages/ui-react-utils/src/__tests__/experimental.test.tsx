@@ -28,8 +28,11 @@ import PropTypes from 'prop-types'
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import { experimental } from '../experimental'
-
-class TestComponent extends Component {
+type TestComponentProps = {
+  bar: string
+  qux: string
+}
+class TestComponent extends Component<TestComponentProps> {
   static propTypes = {
     bar: PropTypes.string,
     qux: PropTypes.string

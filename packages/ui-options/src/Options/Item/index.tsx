@@ -128,21 +128,13 @@ class Item extends Component<Props> {
   }
 
   render() {
-    const {
-      as,
-      role,
-      styles,
-      renderBeforeLabel,
-      renderAfterLabel,
-      children
-    } = this.props
+    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
+      this.props
 
-    const ElementType = getElementType(Item, this.props, () => as)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+    const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.propTypes)
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (false | "" | 0 | Element | null... Remove this comment to see the full error message
       <ElementType role="none" css={styles.item}>
         <span {...passthroughProps} css={styles.container} role={role}>
           {children}

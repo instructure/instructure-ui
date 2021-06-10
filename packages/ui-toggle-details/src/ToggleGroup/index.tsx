@@ -204,17 +204,14 @@ class ToggleGroup extends Component<Props> {
   }
 
   render() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const Element = getElementType(ToggleGroup, this.props)
 
     return (
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       <Expandable {...pickProps(this.props, Expandable.propTypes)}>
         {/* @ts-expect-error ts-migrate(7031) FIXME: Binding element 'expanded' implicitly has an 'any'... Remove this comment to see the full error message */}
         {({ expanded, getToggleProps, getDetailsProps }) => {
           return (
             <View
-              // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
               {...omitProps(this.props, ToggleGroup.propTypes)}
               borderWidth={this.props.border ? 'small' : 'none'}
               as={Element}

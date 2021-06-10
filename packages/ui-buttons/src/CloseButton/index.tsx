@@ -172,7 +172,6 @@ class CloseButton extends Component<Props> {
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -205,7 +204,6 @@ class CloseButton extends Component<Props> {
         <BaseButton
           renderIcon={IconXSolid}
           elementRef={elementRef}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           interaction={this.interaction}
           type={type}
           color={this.color}

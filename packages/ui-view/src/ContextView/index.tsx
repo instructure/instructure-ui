@@ -200,7 +200,6 @@ class ContextView extends Component<Props> {
 
     return (
       <View
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, ContextView.propTypes)}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: any; css: any; b... Remove this comment to see the full error message
         style={style}

@@ -279,7 +279,6 @@ class Overlay extends Component<Props> {
   renderTransition(content) {
     return (
       <Transition
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, Transition.propTypes)}
         in={this.props.open}
         transitionOnMount
@@ -298,9 +297,7 @@ class Overlay extends Component<Props> {
   render() {
     let content = (
       <Dialog
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, Overlay.propTypes)}
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, Dialog.propTypes)}
         defaultFocusElement={this.props.defaultFocusElement}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'open' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -316,7 +313,6 @@ class Overlay extends Component<Props> {
 
     return (
       <Portal
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, Portal.propTypes)}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'transitioning' does not exist on type 'R... Remove this comment to see the full error message
         open={this.props.open || this.state.transitioning}

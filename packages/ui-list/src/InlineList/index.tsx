@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Children, Component } from 'react'
+import React, { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
@@ -105,7 +105,7 @@ class InlineList extends Component<Props> {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children
 
-      return safeCloneElement(child, {
+      return safeCloneElement(child as ReactElement, {
         delimiter: this.props.delimiter,
         size: this.props.size,
         spacing: this.props.itemSpacing

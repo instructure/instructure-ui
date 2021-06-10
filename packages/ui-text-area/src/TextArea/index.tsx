@@ -413,7 +413,6 @@ class TextArea extends Component<Props> {
       resize
     } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, TextArea.propTypes)
 
     const style = {
@@ -451,7 +450,6 @@ class TextArea extends Component<Props> {
     return (
       // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <FormField
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormField.propTypes)}
         vAlign="top"
         id={this.id}

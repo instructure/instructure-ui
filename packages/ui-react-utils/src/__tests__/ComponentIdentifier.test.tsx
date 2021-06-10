@@ -28,7 +28,7 @@ import { mount, expect, stub } from '@instructure/ui-test-utils'
 import { ComponentIdentifier } from '../ComponentIdentifier'
 
 describe('ComponentIdentifier', async () => {
-  class Trigger extends ComponentIdentifier {
+  class Trigger extends ComponentIdentifier<any> {
     static displayName = 'Trigger'
   }
 
@@ -54,16 +54,16 @@ describe('ComponentIdentifier', async () => {
   }
 
   it('should render only child', async () => {
-    let buttonRef
+    let buttonRef: HTMLButtonElement
     await mount(
       <App>
         <Trigger>
-          <button ref={(el) => (buttonRef = el)}>Click Me</button>
+          <button ref={(el) => (buttonRef = el!)}>Click Me</button>
         </Trigger>
       </App>
     )
 
-    expect(buttonRef.textContent).to.equal('Click Me')
+    expect(buttonRef!.textContent).to.equal('Click Me')
   })
 
   it('should not error when no children provided', async () => {
@@ -82,7 +82,7 @@ describe('ComponentIdentifier', async () => {
   })
 
   it('should pass props', async () => {
-    let buttonRef
+    let buttonRef: HTMLButtonElement | null
     const onClick = stub()
     await mount(
       <App>
@@ -92,7 +92,7 @@ describe('ComponentIdentifier', async () => {
       </App>
     )
 
-    await buttonRef.click()
+    await buttonRef!.click()
     expect(onClick).to.have.been.called()
   })
 })

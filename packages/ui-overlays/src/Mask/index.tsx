@@ -113,7 +113,6 @@ class Mask extends Component<Props> {
     })
 
     const props = {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       ...omitProps(this.props, Mask.propTypes),
       css: this.props.styles.mask,
       ref: this.handleElementRef

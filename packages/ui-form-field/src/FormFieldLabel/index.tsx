@@ -83,15 +83,12 @@ class FormFieldLabel extends Component<Props> {
   }
 
   render() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(FormFieldLabel, this.props)
 
     const { styles, children } = this.props
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; css: any; }' is not a... Remove this comment to see the full error message
       <ElementType
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, FormFieldLabel.propTypes)}
         css={styles.formFieldLabel}
       >

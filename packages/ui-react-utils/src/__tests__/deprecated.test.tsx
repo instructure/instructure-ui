@@ -29,7 +29,11 @@ import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
 
 import { deprecated } from '../deprecated'
 
-class TestComponent extends Component {
+type TestComponentProps = {
+  bar: string
+  qux: string
+}
+class TestComponent extends Component<TestComponentProps> {
   static propTypes = {
     bar: PropTypes.string,
     qux: PropTypes.string
@@ -126,8 +130,10 @@ describe('@deprecated', async () => {
   describe('component with deprecated prop values', async () => {
     it('should not warn when an allowed prop value is supplied', async () => {
       const consoleWarn = stub(console, 'warn')
-
-      class DeprecatedPropValueComponent extends Component {
+      type DeprecatedPropValueComponentProps = {
+        color: string
+      }
+      class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
         static propTypes = {
           color: deprecated.deprecatePropValues(
             PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
@@ -153,8 +159,10 @@ describe('@deprecated', async () => {
       const consoleWarn = stub(console, 'warn')
 
       const color = 'orange'
-
-      class DeprecatedPropValueComponent extends Component {
+      type DeprecatedPropValueComponentProps = {
+        color: string
+      }
+      class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
         static propTypes = {
           color: deprecated.deprecatePropValues(
             PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
@@ -183,8 +191,10 @@ describe('@deprecated', async () => {
 
       const color = 'gold'
       const message = 'It will be removed in v8.0.0.'
-
-      class DeprecatedPropValueComponent extends Component {
+      type DeprecatedPropValueComponentProps = {
+        color: string
+      }
+      class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
         static propTypes = {
           color: deprecated.deprecatePropValues(
             PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
@@ -214,8 +224,10 @@ describe('@deprecated', async () => {
       const messageStub = stub()
 
       const color = 'gold'
-
-      class DeprecatedPropValueComponent extends Component {
+      type DeprecatedPropValueComponentProps = {
+        color: string
+      }
+      class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
         static propTypes = {
           color: deprecated.deprecatePropValues(
             PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
@@ -246,13 +258,21 @@ describe('@deprecated', async () => {
       const consoleWarn = stub(console, 'warn')
 
       const color = 'gold'
-
-      class DeprecatedPropValueComponent extends Component {
+      type DeprecatedPropValueComponentProps = {
+        color: string
+      }
+      class DeprecatedPropValueComponent extends Component<DeprecatedPropValueComponentProps> {
         static propTypes = {
           color: deprecated.deprecatePropValues(
             PropTypes.oneOf(['red', 'yellow', 'blue', 'orange', 'gold']),
             ['blue', 'orange', 'gold'],
-            ({ propValue, propName }) =>
+            ({
+              propValue,
+              propName
+            }: {
+              propValue: string
+              propName: string
+            }) =>
               `The ${propValue} value for ${propName} has been deprecated. Use the FooBar component with the 'baz' prop set instead.`
           )
         }

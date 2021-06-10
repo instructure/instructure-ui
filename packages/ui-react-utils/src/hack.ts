@@ -48,43 +48,55 @@ import { logWarn as warn } from '@instructure/console'
  */
 const hack =
   process.env.NODE_ENV == 'production'
-    ? () => (Component) => Component
-    : decorator((ComposedComponent, hackProps, message) => {
-        return class HackComponent extends ComposedComponent {
-          componentDidMount() {
-            if (hackProps) {
-              warnHackProps(
-                ComposedComponent.name,
-                this.props,
-                hackProps,
-                message
-              )
+    ? () => (Component: React.ComponentClass<any>) => Component
+    : decorator(
+        (
+          ComposedComponent: React.ComponentClass<any, any>,
+          hackProps: string[],
+          message: string
+        ) => {
+          return class HackComponent<P, S, SS> extends ComposedComponent {
+            componentDidMount() {
+              if (hackProps) {
+                warnHackProps(
+                  ComposedComponent.name,
+                  this.props,
+                  hackProps,
+                  message
+                )
+              }
+
+              if (super.componentDidMount) {
+                super.componentDidMount()
+              }
             }
 
-            if (super.componentDidMount) {
-              super.componentDidMount()
-            }
-          }
+            componentDidUpdate(prevProps: P, prevState: S, prevContext: SS) {
+              if (hackProps) {
+                warnHackProps(
+                  ComposedComponent.name,
+                  this.props,
+                  hackProps,
+                  message
+                )
+              }
 
-          componentDidUpdate(prevProps, prevState, prevContext) {
-            if (hackProps) {
-              warnHackProps(
-                ComposedComponent.name,
-                this.props,
-                hackProps,
-                message
-              )
-            }
-
-            if (super.componentDidUpdate) {
-              super.componentDidUpdate(prevProps, prevState, prevContext)
+              if (super.componentDidUpdate) {
+                super.componentDidUpdate(prevProps, prevState, prevContext)
+              }
             }
           }
         }
-      })
+      )
 
-function warnHackProps(name, props, hackProps, message = '') {
+function warnHackProps(
+  name: string,
+  props: Record<string, unknown>,
+  hackProps: string[],
+  message = ''
+) {
   hackProps.forEach((hackProp) => {
+    // @ts-expect-error remove this when console is typed
     warn(
       typeof props[hackProp] === 'undefined',
       `[${name}] The \`${hackProp}\` prop is a temporary hack and will be removed in a future release. ${message}`

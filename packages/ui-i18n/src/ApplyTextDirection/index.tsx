@@ -46,13 +46,11 @@ category: components/utilities
 const ApplyTextDirection = (props: ApplyTextDirectionProps) => {
   const context = useTextDirectionContext()
   const dir = props.dir || context
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
   const ElementType = getElementType(ApplyTextDirection, props)
 
   return (
     <TextDirectionContext.Provider value={dir}>
       {
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; dir: any; }' is not assigna... Remove this comment to see the full error message
         <ElementType dir={dir}>
           {typeof props.children === 'function'
             ? props.children(dir, dir === DIRECTION.rtl)

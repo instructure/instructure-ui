@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -113,8 +113,7 @@ class Grid extends Component<Props> {
 
     return children.map((child, index) => {
       if (matchComponentTypes(child, [GridRow])) {
-        return safeCloneElement(child, {
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
+        return safeCloneElement(child as ReactElement, {
           ...pickProps(props, Grid.propTypes),
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'props' does not exist on type 'string | ... Remove this comment to see the full error message
           ...child.props /* child props should override parent */,
@@ -129,7 +128,6 @@ class Grid extends Component<Props> {
   render() {
     const { styles, ...restProps } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(restProps, Grid.propTypes)
 
     return (

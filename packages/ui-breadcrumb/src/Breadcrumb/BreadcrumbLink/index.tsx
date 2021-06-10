@@ -87,7 +87,6 @@ class BreadcrumbLink extends Component<Props> {
   render() {
     const { children, href, renderIcon, iconPlacement, onClick } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, BreadcrumbLink.propTypes)
 
     return (

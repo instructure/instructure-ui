@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
@@ -140,7 +140,7 @@ class List extends Component<Props> {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children
 
-      return safeCloneElement(child, {
+      return safeCloneElement(child as ReactElement, {
         isUnstyled: this.props.isUnstyled,
         delimiter: this.props.delimiter,
         size: this.props.size,

@@ -41,7 +41,7 @@
  * ```
  * @module makeRequirable
  * @param {function} validator - a validator function
- * @returns {Error} if designated prop is not provided
+ * @returns {Validator}
  */
 function makeRequirable(validator) {
   return function (props, propName, componentName, ...rest) {

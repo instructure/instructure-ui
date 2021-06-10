@@ -25,9 +25,9 @@ import isPropValid from '@emotion/is-prop-valid'
 // list of "valid" props https://github.com/emotion-js/emotion/blob/master/packages/is-prop-valid/src/props.js
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
-const omit = (originalObject, keys) => {
+const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
   // code based on babel's _objectWithoutProperties
-  const newObject = {}
+  const newObject: Record<string, unknown> = {}
   for (const key in originalObject) {
     // special case because we always want to omit these and === is faster than concat'ing them in
     if (
@@ -48,15 +48,19 @@ const omit = (originalObject, keys) => {
   return newObject
 }
 
-function omitProps(props, propTypes, exclude) {
+function omitProps(
+  props: Record<string, any>,
+  propTypes: Record<string, any>,
+  exclude?: string[]
+) {
   const keys = Object.keys(propTypes || {})
   const combined = exclude ? keys.concat(exclude) : keys
   return omit(props, combined)
 }
 
 // this was the fastest implementation from testing: https://jsperf.com/pick-props
-function pick(obj, keys) {
-  const res = {}
+function pick(obj: Record<string, unknown>, keys: string[]) {
+  const res: Record<string, unknown> = {}
   const len = keys.length
   let idx = -1
   let key
@@ -70,14 +74,18 @@ function pick(obj, keys) {
   return res
 }
 
-function pickProps(props, propTypes, include) {
+function pickProps(
+  props: Record<string, any>,
+  propTypes: Record<string, any>,
+  include?: string[]
+) {
   const keys = Object.keys(propTypes || {})
   const combined = include ? keys.concat(include) : keys
   return pick(props, combined)
 }
 
-function passthroughProps(props) {
-  const validProps = {}
+function passthroughProps(props: Record<string, any>) {
+  const validProps: Record<string, unknown> = {}
 
   Object.keys(props)
     // style and className need to be explicitly passed through

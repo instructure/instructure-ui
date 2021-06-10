@@ -148,21 +148,14 @@ class Rating extends Component<Props> {
   }
 
   render() {
-    const {
-      iconCount,
-      animateFill,
-      size,
-      margin,
-      label,
-      formatValueText
-    } = this.props
+    const { iconCount, animateFill, size, margin, label, formatValueText } =
+      this.props
 
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     const valueText = label + ' ' + formatValueText(this.filled, iconCount)
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       omitProps(this.props, Rating.propTypes),
       Rating
     )

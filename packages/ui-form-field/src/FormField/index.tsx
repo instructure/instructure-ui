@@ -89,9 +89,7 @@ class FormField extends Component<Props> {
   render() {
     return (
       <FormFieldLayout
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(this.props, FormField.propTypes)}
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(this.props, FormFieldLayout.propTypes)}
         vAlign={this.props.vAlign}
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'ReactElem... Remove this comment to see the full error message

@@ -22,12 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, ComponentType, ReactElement, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import { matchComponentTypes } from './matchComponentTypes'
 import { ensureSingleChild } from './ensureSingleChild'
+import deprecated from './deprecated'
 
+// TODO delete this class, its not used anywhere, see livegrep
 /**
 ---
 category: utilities/react
@@ -64,7 +66,12 @@ Abstract component identifier. Helpful for picking out a specific child.
   ```
   @module ComponentIdentifier
 **/
-class ComponentIdentifier extends Component {
+@deprecated(
+  '8.0.0',
+  undefined,
+  'This component will be removed in InstUI 9.0 since its not used.'
+)
+class ComponentIdentifier<P> extends Component<P> {
   static propTypes = {
     children: PropTypes.node
   }
@@ -73,7 +80,7 @@ class ComponentIdentifier extends Component {
     children: null
   }
 
-  static pick = (component, children) => {
+  static pick = (component: ComponentType, children: ReactNode) => {
     let result
 
     React.Children.forEach(children, (child) => {
@@ -88,7 +95,7 @@ class ComponentIdentifier extends Component {
   render() {
     const { children, ...props } = this.props
 
-    return ensureSingleChild(children, props)
+    return ensureSingleChild(children as ReactElement, props)
   }
 }
 

@@ -143,7 +143,6 @@ class GridCol extends Component<Props> {
   render() {
     const { children, styles } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const props = omitProps(this.props, GridCol.propTypes)
 
     return (

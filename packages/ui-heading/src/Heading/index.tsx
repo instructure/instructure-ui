@@ -140,7 +140,7 @@ class Heading extends Component<Props> {
       if (level === 'reset') {
         return 'span'
       } else {
-        return level
+        return level as string
       }
     })
 

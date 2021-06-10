@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component, createContext } from 'react'
+import React, { Component, createContext, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
@@ -204,7 +204,7 @@ class Pages extends Component<Props> {
     error(activePage, '[Pages] Invalid `activePageIndex`.')
 
     return activePage
-      ? safeCloneElement(activePage, {
+      ? safeCloneElement(activePage as ReactElement, {
           // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
           ref: (el) => {
             // @ts-expect-error ts-migrate(2551) FIXME: Property '_activePage' does not exist on type 'Pag... Remove this comment to see the full error message

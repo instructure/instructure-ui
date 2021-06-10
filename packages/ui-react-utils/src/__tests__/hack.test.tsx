@@ -29,7 +29,11 @@ import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import { hack } from '../hack'
 
-class TestComponent extends Component {
+type TestComponentProps = {
+  bar: string
+  qux: string
+}
+class TestComponent extends Component<TestComponentProps> {
   static propTypes = {
     bar: PropTypes.string,
     qux: PropTypes.string

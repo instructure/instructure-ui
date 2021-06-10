@@ -53,11 +53,9 @@ class PresentationContent extends Component<Props> {
 
   render() {
     const { children, ...props } = this.props
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const ElementType = getElementType(PresentationContent, this.props)
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: ReactNode; "aria-hidden": string... Remove this comment to see the full error message
       <ElementType {...passthroughProps(props)} aria-hidden="true">
         {children}
       </ElementType>

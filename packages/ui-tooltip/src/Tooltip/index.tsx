@@ -201,9 +201,7 @@ class Tooltip extends Component<Props> {
     }
 
     if (as) {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const Trigger = getElementType(Tooltip, this.props)
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
       const props = omitProps(this.props, Tooltip.propTypes)
       return (
         <Trigger {...props} {...triggerProps}>

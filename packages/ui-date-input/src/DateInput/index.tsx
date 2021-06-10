@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Children, Component } from 'react'
+import { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { Calendar } from '@instructure/ui-calendar'
@@ -328,7 +328,6 @@ class DateInput extends Component<Props> {
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 
@@ -418,7 +417,7 @@ class DateInput extends Component<Props> {
           }
         : optionProps
 
-      return safeCloneElement(day, props)
+      return safeCloneElement(day as ReactElement, props)
     })
   }
 

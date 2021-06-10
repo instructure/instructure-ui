@@ -233,7 +233,6 @@ class Billboard extends Component<Props> {
   render() {
     const { href, disabled, readOnly, margin, styles, elementRef } = this.props
 
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     const Element = getElementType(Billboard, this.props)
 
     return (
@@ -243,7 +242,6 @@ class Billboard extends Component<Props> {
         margin={margin}
       >
         <View
-          // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
           {...omitProps(this.props, {
             ...Billboard.propTypes,
             ...View.propTypes

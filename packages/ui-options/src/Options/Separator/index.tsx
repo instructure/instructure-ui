@@ -78,10 +78,9 @@ class Separator extends Component<Props> {
 
   render() {
     const { as, styles, makeStyles, ...rest } = this.props
-    const ElementType = getElementType(Separator, this.props, () => as)
+    const ElementType = getElementType(Separator, this.props, () => as!)
 
     return (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; role: string; }' is not... Remove this comment to see the full error message
       <ElementType role="none">
         <div {...rest} css={styles.separator} role="presentation" />
       </ElementType>

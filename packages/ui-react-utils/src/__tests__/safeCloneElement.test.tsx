@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 
 import { createChainedFunction } from '@instructure/ui-utils'
 import { expect, mount, stub, spy, within } from '@instructure/ui-test-utils'
@@ -30,7 +30,15 @@ import { expect, mount, stub, spy, within } from '@instructure/ui-test-utils'
 import { safeCloneElement } from '../safeCloneElement'
 
 describe('safeCloneElement', async () => {
-  const SafeClone = function ({ element, props, children }) {
+  const SafeClone = function <P>({
+    element,
+    props,
+    children
+  }: {
+    element: ReactElement<P>
+    props: P
+    children?: ReactNode[]
+  }) {
     return safeCloneElement(element, props, children)
   }
 

@@ -274,7 +274,6 @@ class FileDrop extends Component<Props, State> {
     )
   }
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
   get invalid() {
@@ -351,12 +350,8 @@ class FileDrop extends Component<Props, State> {
     return [accepted, rejected]
   }
   handleChange = (e: any) => {
-    const {
-      onDrop,
-      onDropAccepted,
-      onDropRejected,
-      shouldEnablePreview
-    } = this.props
+    const { onDrop, onDropAccepted, onDropRejected, shouldEnablePreview } =
+      this.props
     const fileList = this.getDataTransferItems(e, shouldEnablePreview)
     const [accepted, rejected] = this.parseFiles(fileList)
     e.preventDefault()

@@ -32,7 +32,8 @@ import {
   getElementType,
   getInteraction,
   passthroughProps,
-  callRenderProp
+  callRenderProp,
+  InteractionType
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 
@@ -57,7 +58,7 @@ type Props = {
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
-  interaction?: 'enabled' | 'disabled' | 'readonly'
+  interaction?: InteractionType
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
   focusColor?: 'info' | 'inverse'
   display?: 'inline-block' | 'block'
@@ -241,12 +242,10 @@ class BaseButton extends Component<Props> {
   }
 
   get elementType() {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
     return getElementType(BaseButton, this.props)
   }
 
   get interaction() {
-    // @ts-expect-error ts-migrate(2739) FIXME: Type 'Readonly<Props> & Readonly<{ children?: Reac... Remove this comment to see the full error message
     return getInteraction({ props: this.props })
   }
 

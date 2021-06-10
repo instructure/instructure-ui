@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import { Component, Children } from 'react'
+import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -149,15 +149,8 @@ class Table extends Component<Props> {
   }
 
   render() {
-    const {
-      margin,
-      elementRef,
-      layout,
-      caption,
-      children,
-      hover,
-      styles
-    } = this.props
+    const { margin, elementRef, layout, caption, children, hover, styles } =
+      this.props
     const isStacked = layout === 'stacked'
     const headers = isStacked ? this.getHeaders() : null
 
@@ -179,14 +172,14 @@ class Table extends Component<Props> {
         )}
         {Children.map(children, (child) => {
           if (matchComponentTypes(child, [Head])) {
-            return safeCloneElement(child, {
+            return safeCloneElement(child as ReactElement, {
               // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               key: child.props.name,
               isStacked
             })
           }
           if (matchComponentTypes(child, [Body])) {
-            return safeCloneElement(child, {
+            return safeCloneElement(child as ReactElement, {
               // @ts-expect-error ts-migrate(2533) FIXME: Object is possibly 'null' or 'undefined'.
               key: child.props.name,
               isStacked,

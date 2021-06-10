@@ -172,9 +172,7 @@ class FormFieldGroup extends Component<Props> {
 
     return (
       <FormFieldLayout
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...omitProps(props, FormFieldGroup.propTypes)}
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
         {...pickProps(props, FormFieldLayout.propTypes)}
         // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; vAlign: "top" | "middle... Remove this comment to see the full error message
         vAlign={props.vAlign}
