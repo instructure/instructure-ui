@@ -31,6 +31,7 @@ import {
   generateA11yTests
 } from '@instructure/ui-test-utils'
 
+import { IconCheckSolid } from '@instructure/ui-icons'
 import { SimpleSelect } from '../index'
 import { SimpleSelectLocator } from '../SimpleSelectLocator'
 import SimpleSelectExamples from '../__examples__/SimpleSelect.examples'
@@ -329,6 +330,47 @@ describe('<SimpleSelect />', async () => {
 
       expect(inputRef).to.have.been.calledWith(input.getDOMNode())
     })
+  })
+
+  it('should render dynamically colored icons before option', async () => {
+    const renderBeforeLabel = (props: any) => {
+      return <IconCheckSolid color={props.isDisabled ? 'warning' : 'brand'} />
+    }
+
+    await mount(
+      <SimpleSelect renderLabel="Choose an option">
+        <SimpleSelect.Option
+          id="0"
+          value="0"
+          isDisabled
+          renderBeforeLabel={renderBeforeLabel}
+        >
+          ungrouped option one
+        </SimpleSelect.Option>
+        <SimpleSelect.Option
+          id="1"
+          value="1"
+          renderBeforeLabel={renderBeforeLabel}
+        >
+          grouped option one
+        </SimpleSelect.Option>
+      </SimpleSelect>
+    )
+    const select = await SimpleSelectLocator.find()
+    const input = await select.findInput()
+
+    await input.click()
+
+    const list = await select.findOptionsList()
+    const listbox = await list.find('ul[role="listbox"]')
+    const itemIcons = await listbox.findAll('li [role="presentation"] svg')
+
+    expect(getComputedStyle(itemIcons[0].getDOMNode()).fill).to.equal(
+      'rgb(252, 94, 19)'
+    )
+    expect(getComputedStyle(itemIcons[1].getDOMNode()).fill).to.equal(
+      'rgb(0, 142, 226)'
+    )
   })
 
   describe('list', async () => {

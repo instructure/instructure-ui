@@ -170,7 +170,7 @@ render(
 
 You can recolor the text and the background of the items for their `default`, `highlighted` and `selected` variants.
 
-By default, the icons in the `Option.Item` have the same color as the text. If you want to set the color of the icon separately, pass a function to the `renderBeforeLabel` or `renderAfterLabel` prop. This function will have a `props` parameter, so you can access the properties of that `Option.Item` (e.g. the current `variant`).
+By default, the icons in the `Option.Item` have the same color as the text. If you want to set the color of the icon separately, pass a function to the `renderBeforeLabel` or `renderAfterLabel` prop. This function will have a `props` parameter, so you can access the properties of that `Option.Item` (e.g. the current `variant`). The available props are: `[ variant, as, role, children ]`.
 
 ```js
 ---

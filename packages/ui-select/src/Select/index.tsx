@@ -560,6 +560,18 @@ class Select extends Component<Props> {
       children
     } = option.props
 
+    const getRenderLabel = (renderLabel: any) => {
+      return typeof renderLabel === 'function'
+        ? renderLabel.bind(null, {
+            id,
+            isDisabled,
+            isSelected,
+            isHighlighted,
+            children
+          })
+        : renderLabel
+    }
+
     let optionProps = {
       // passthrough props
       ...omitProps(option.props, {
@@ -569,8 +581,8 @@ class Select extends Component<Props> {
       // props from selectable
       ...getOptionProps({ id }),
       // Options.Item props
-      renderBeforeLabel,
-      renderAfterLabel
+      renderBeforeLabel: getRenderLabel(renderBeforeLabel),
+      renderAfterLabel: getRenderLabel(renderAfterLabel)
     }
     // should option be treated as highlighted or selected
     if (isSelected) {
