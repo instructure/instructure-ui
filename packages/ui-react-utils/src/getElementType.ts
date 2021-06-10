@@ -58,7 +58,6 @@ function getElementType<
   }
 
   if (props.to) {
-    // @ts-expect-error TODO remove when typed
     warn(
       // if to prop is used without as
       !props.as,

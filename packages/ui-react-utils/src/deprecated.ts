@@ -165,7 +165,6 @@ const deprecated = (() => {
             }' value for the \`${propName}\` prop is deprecated. ${
               message || ''
             }`
-      // @ts-expect-error TODO remove if its typed
       warnDeprecated(!isDeprecatedValue, `[${componentName}] ${warningMessage}`)
 
       return isDeprecatedValue
@@ -188,7 +187,6 @@ const deprecated = (() => {
 
         const newPropMessage = newProp ? `. Use \`${newProp}\` instead` : ''
 
-        // @ts-expect-error TODO remove if its typed
         warnDeprecated(
           false,
           `[${componentName}] \`${oldProp}\` is deprecated and will be removed in version ${version}${newPropMessage}. ${message}`
@@ -203,7 +201,6 @@ const deprecated = (() => {
     componentName: string,
     message: string
   ) {
-    // @ts-expect-error TODO remove if its typed
     warnDeprecated(
       false,
       `[${componentName}] is deprecated and will be removed in version ${version}. ${

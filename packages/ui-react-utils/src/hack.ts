@@ -96,7 +96,6 @@ function warnHackProps(
   message = ''
 ) {
   hackProps.forEach((hackProp) => {
-    // @ts-expect-error remove this when console is typed
     warn(
       typeof props[hackProp] === 'undefined',
       `[${name}] The \`${hackProp}\` prop is a temporary hack and will be removed in a future release. ${message}`
