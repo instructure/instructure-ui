@@ -91,7 +91,6 @@ function warnExperimentalProps(
   message = ''
 ) {
   experimentalProps.forEach((experimentalProp) => {
-    // @ts-expect-error TODO remove if its typed
     warn(
       typeof props[experimentalProp] === 'undefined',
       `[${name}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
@@ -100,7 +99,6 @@ function warnExperimentalProps(
 }
 
 function warnExperimentalComponent(name: string, message = '') {
-  // @ts-expect-error TODO remove if its typed
   warn(
     false,
     `[${name}] is experimental and its API could change significantly in a future release. ${message}`

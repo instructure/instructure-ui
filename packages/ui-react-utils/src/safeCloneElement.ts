@@ -82,7 +82,6 @@ function safeCloneElement<
     return React.cloneElement<P>(element, mergedProps, ...children)
   }
 
-  // @ts-expect-error remove this when console is typed
   warn(
     originalRefIsAFunction,
     `Cloning an element with a ref that will be overwritten because the ref \
