@@ -1059,6 +1059,152 @@ render(
 )
 ```
 
+### Icons
+
+To display icons (or other elements) before or after an option, pass it via the `renderBeforeLabel` and `renderAfterLabel` prop to `Select.Option`. You can pass a function as well, which will have a `props` parameter, so you can access the properties of that `Select.Option` (e.g. if it is currently `isHighlighted`). The available props are: `[ id, isDisabled, isSelected, isHighlighted, children ]`.
+
+```javascript
+---
+example: true
+render: false
+---
+class SingleSelectExample extends React.Component {
+  state = {
+    inputValue: this.props.options[0].label,
+    isShowingOptions: false,
+    highlightedOptionId: null,
+    selectedOptionId: this.props.options[0].id,
+    announcement: null
+  }
+
+  getOptionById (queryId) {
+    return this.props.options.find(({ id }) => id === queryId)
+  }
+
+  handleShowOptions = (event) => {
+    this.setState({
+      isShowingOptions: true
+    })
+  }
+
+  handleHideOptions = (event) => {
+    const { selectedOptionId } = this.state
+    const option = this.getOptionById(selectedOptionId).label
+    this.setState({
+      isShowingOptions: false,
+      highlightedOptionId: null,
+      inputValue: selectedOptionId ? option : '',
+      announcement: 'List collapsed.'
+    })
+  }
+
+  handleBlur = (event) => {
+    this.setState({
+      highlightedOptionId: null
+    })
+  }
+
+  handleHighlightOption = (event, { id }) => {
+    event.persist()
+    const optionsAvailable = `${this.props.options.length} options available.`
+    const nowOpen = !this.state.isShowingOptions ? `List expanded. ${optionsAvailable}` : ''
+    const option = this.getOptionById(id).label
+    this.setState((state) => ({
+      highlightedOptionId: id,
+      inputValue: event.type === 'keydown' ? option : state.inputValue,
+      announcement: `${option} ${nowOpen}`
+    }))
+  }
+
+  handleSelectOption = (event, { id }) => {
+    const option = this.getOptionById(id).label
+    this.setState({
+      selectedOptionId: id,
+      inputValue: option,
+      isShowingOptions: false,
+      announcement: `"${option}" selected. List collapsed.`
+    })
+  }
+
+  render () {
+    const {
+      inputValue,
+      isShowingOptions,
+      highlightedOptionId,
+      selectedOptionId,
+      announcement
+    } = this.state
+
+    return (
+      <div>
+        <Select
+          renderLabel="Option Icons"
+          assistiveText="Use arrow keys to navigate options."
+          inputValue={inputValue}
+          isShowingOptions={isShowingOptions}
+          onBlur={this.handleBlur}
+          onRequestShowOptions={this.handleShowOptions}
+          onRequestHideOptions={this.handleHideOptions}
+          onRequestHighlightOption={this.handleHighlightOption}
+          onRequestSelectOption={this.handleSelectOption}
+        >
+          {this.props.options.map((option) => {
+            return (
+              <Select.Option
+                id={option.id}
+                key={option.id}
+                isHighlighted={option.id === highlightedOptionId}
+                isSelected={option.id === selectedOptionId}
+                renderBeforeLabel={option.renderBeforeLabel}
+              >
+                { option.label }
+              </Select.Option>
+            )
+          })}
+        </Select>
+        <Alert
+          liveRegion={() => document.getElementById('flash-messages')}
+          liveRegionPoliteness="assertive"
+          screenReaderOnly
+        >
+          { announcement }
+        </Alert>
+      </div>
+    )
+  }
+}
+
+render(
+  <View>
+    <SingleSelectExample
+      options={[
+        {
+          id: 'opt1',
+          label: 'Text',
+          renderBeforeLabel: 'XY'
+        },
+        {
+          id: 'opt2',
+          label: 'Icon',
+          renderBeforeLabel: <IconCheckSolid />
+        },
+        {
+          id: 'opt3',
+          label: 'Colored Icon',
+          renderBeforeLabel: (props) => {
+            let color = 'brand'
+            if (props.isHighlighted) color = 'primary-inverse'
+            if (props.isSelected) color = 'primary'
+            if (props.isDisabled) color = 'warning'
+            return <IconInstructureSolid color={color} />
+          }
+        }
+      ]}
+    />
+  </View>
+)
+```
+
 #### Providing assistive text for screen readers
 
 It's important to ensure screen reader users receive instruction and feedback while interacting with a `Select`, but screen reader support for the `combobox` role varies. The `assistiveText` prop should always be used to explain how a keyboard user can make a selection. Additionally, a live region should be updated with feedback as the component is interacted with, such as when options are filtered or highlighted. Using an [Alert](#Alert) with the `screenReaderOnly` prop is the easiest way to do this.

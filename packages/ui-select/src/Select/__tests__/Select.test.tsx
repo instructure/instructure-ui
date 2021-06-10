@@ -31,6 +31,7 @@ import {
   generateA11yTests
 } from '@instructure/ui-test-utils'
 
+import { IconCheckSolid } from '@instructure/ui-icons'
 import { Select } from '../index'
 import { SelectLocator } from '../SelectLocator'
 import SelectExamples from '../__examples__/Select.examples'
@@ -437,6 +438,44 @@ describe('<Select />', async () => {
       const listbox = await list.find('ul[role="listbox"]')
 
       expect(listRef).to.have.been.calledWith(listbox.getDOMNode())
+    })
+
+    it('should render dynamically colored icons before option', async () => {
+      const renderBeforeLabel = (props: any) => {
+        return (
+          <IconCheckSolid color={props.isHighlighted ? 'warning' : 'brand'} />
+        )
+      }
+
+      await mount(
+        <Select renderLabel="Choose an option" isShowingOptions>
+          <Select.Option
+            id="0"
+            isHighlighted
+            renderBeforeLabel={renderBeforeLabel}
+          >
+            ungrouped option one
+          </Select.Option>
+          <Select.Option id="1" renderBeforeLabel={renderBeforeLabel}>
+            grouped option one
+          </Select.Option>
+        </Select>
+      )
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+
+      await input.click()
+
+      const list = await select.findOptionsList()
+      const listbox = await list.find('ul[role="listbox"]')
+      const itemIcons = await listbox.findAll('li [role="presentation"] svg')
+
+      expect(getComputedStyle(itemIcons[0].getDOMNode()).fill).to.equal(
+        'rgb(252, 94, 19)'
+      )
+      expect(getComputedStyle(itemIcons[1].getDOMNode()).fill).to.equal(
+        'rgb(0, 142, 226)'
+      )
     })
   })
 

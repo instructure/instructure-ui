@@ -39,7 +39,8 @@
     "@instructure/ui-babel-preset": "8.5.0",
     "@instructure/ui-color-utils": "8.5.0",
     "@instructure/ui-test-locator": "8.5.0",
-    "@instructure/ui-test-utils": "8.5.0"
+    "@instructure/ui-test-utils": "8.5.0",
+    "@instructure/ui-icons": "8.5.0"
   },
   "peerDependencies": {
     "react": "^16.8"
