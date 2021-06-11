@@ -36,7 +36,7 @@ import { Transition } from '@instructure/ui-motion'
 
 type Props = {
   open?: boolean
-  onOpen?: (...args: any[]) => any
+  onOpen?: (DOMNode: HTMLSpanElement | null) => any
   onClose?: (...args: any[]) => any
   mountNode?: any // PropTypes.oneOfType([element, PropTypes.func]),
   insertAt?: 'bottom' | 'top'
@@ -219,6 +219,7 @@ class Overlay extends Component<Props> {
   }
 
   _timeouts = []
+  _DOMNode: HTMLSpanElement | null = null
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
@@ -242,17 +243,14 @@ class Overlay extends Component<Props> {
   }
 
   get DOMNode() {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Overla... Remove this comment to see the full error message
     return this._DOMNode
   }
 
   set DOMNode(el) {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Overla... Remove this comment to see the full error message
     this._DOMNode = el
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'DOMNode' implicitly has an 'any' type.
-  handlePortalOpen = (DOMNode) => {
+  handlePortalOpen = (DOMNode: HTMLSpanElement | null) => {
     this.DOMNode = DOMNode
 
     this._timeouts.push(

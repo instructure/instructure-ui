@@ -35,7 +35,7 @@ const IS_CREATE_PORTAL_SUPPORTED = typeof ReactDOM.createPortal === 'function'
 
 type Props = {
   open?: boolean
-  onOpen?: (...args: any[]) => any
+  onOpen?: (DOMNode: HTMLSpanElement | null) => any
   onClose?: (...args: any[]) => any
   mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
   insertAt?: 'bottom' | 'top'
@@ -97,10 +97,10 @@ class Portal extends Component<Props> {
     elementRef: (el) => {}
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  handleElementRef = (el) => {
+  DOMNode: HTMLSpanElement | null = null
+
+  handleElementRef = (el: HTMLSpanElement | null) => {
     if (el) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'Portal'... Remove this comment to see the full error message
       this.DOMNode = el
       if (typeof this.props.elementRef === 'function') {
         this.props.elementRef(el)

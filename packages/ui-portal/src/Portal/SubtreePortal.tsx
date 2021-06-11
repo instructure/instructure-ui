@@ -35,7 +35,7 @@ import { shallowEqual } from '@instructure/ui-utils'
 
 type Props = {
   open?: boolean
-  onOpen?: (...args: any[]) => any
+  onOpen?: (DOMNode: HTMLSpanElement | null) => any
   onClose?: (...args: any[]) => any
   mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
   insertAt?: 'bottom' | 'top'
@@ -101,6 +101,8 @@ class SubtreePortal extends Component<Props> {
     // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
     elementRef: (el) => {}
   }
+
+  _node: HTMLSpanElement | null = null
 
   componentDidMount() {
     this.renderPortal(this.props)
@@ -232,12 +234,10 @@ class SubtreePortal extends Component<Props> {
   }
 
   get DOMNode() {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_node' does not exist on type 'SubtreePo... Remove this comment to see the full error message
     return this._node
   }
 
   set DOMNode(el) {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_node' does not exist on type 'SubtreePo... Remove this comment to see the full error message
     this._node = el
   }
 
