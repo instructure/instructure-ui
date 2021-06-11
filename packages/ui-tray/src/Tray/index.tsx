@@ -248,6 +248,8 @@ class Tray extends Component<Props> {
     transitioning: false
   }
 
+  _DOMNode: HTMLSpanElement | null = null
+
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     this.props.makeStyles()
@@ -298,17 +300,14 @@ class Tray extends Component<Props> {
   }
 
   get DOMNode() {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Tray'.... Remove this comment to see the full error message
     return this._DOMNode
   }
 
   set DOMNode(el) {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Tray'.... Remove this comment to see the full error message
     this._DOMNode = el
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'DOMNode' implicitly has an 'any' type.
-  handlePortalOpen = (DOMNode) => {
+  handlePortalOpen = (DOMNode: HTMLSpanElement | null) => {
     this.DOMNode = DOMNode
   }
 

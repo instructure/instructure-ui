@@ -31,7 +31,7 @@ import { element } from '@instructure/ui-prop-types'
 
 type Props = {
   open?: boolean
-  onOpen?: (...args: any[]) => any
+  onOpen?: (DOMNode: HTMLSpanElement | null) => any
   onClose?: (...args: any[]) => any
   mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
   insertAt?: 'bottom' | 'top'
@@ -90,7 +90,7 @@ class ReactPortal extends React.Component<Props> {
     open: false,
     insertAt: 'bottom',
     // @ts-expect-error ts-migrate(6133) FIXME: 'DOMNode' is declared but its value is never read.
-    onOpen: (DOMNode) => {},
+    onOpen: (DOMNode: HTMLSpanElement | null) => {},
     onClose: () => {},
     mountNode: undefined,
     children: null,
@@ -98,8 +98,7 @@ class ReactPortal extends React.Component<Props> {
     elementRef: (el) => {}
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -107,10 +106,11 @@ class ReactPortal extends React.Component<Props> {
     }
   }
 
+  DOMNode: HTMLSpanElement | null = null
+
   componentDidMount() {
     // If Portal is mounting in an open condition fire onOpen handler
     if (this.props.open && typeof this.props.onOpen === 'function') {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       this.props.onOpen(this.DOMNode)
     }
   }
@@ -131,7 +131,6 @@ class ReactPortal extends React.Component<Props> {
       !prevProps.open &&
       typeof this.props.onOpen === 'function'
     ) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       this.props.onOpen(this.DOMNode)
     }
 
@@ -164,16 +163,11 @@ class ReactPortal extends React.Component<Props> {
 
   removeNode() {
     if (
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       this.DOMNode &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       this.DOMNode.parentNode &&
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       typeof this.DOMNode.parentNode.removeChild === 'function'
     ) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       this.DOMNode.parentNode.removeChild(this.DOMNode)
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       this.DOMNode = null
       // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       this.props.elementRef(this.DOMNode)
@@ -194,7 +188,6 @@ class ReactPortal extends React.Component<Props> {
     } = this.props
 
     // Create node if it doesn't already exist
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
     if (!this.DOMNode) {
       const node = document.createElement('span')
       const attributes = {
@@ -210,12 +203,11 @@ class ReactPortal extends React.Component<Props> {
       // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
       elementRef(node)
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
       this.DOMNode = node
     }
 
     // Append node to container if it isn't already
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on... Remove this comment to see the full error message
     if (this.DOMNode.parentNode !== this.state.mountNode) {
       if (insertAt === 'bottom') {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on type 'Reado... Remove this comment to see the full error message
@@ -223,7 +215,6 @@ class ReactPortal extends React.Component<Props> {
       } else {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on type 'Reado... Remove this comment to see the full error message
         this.state.mountNode.insertBefore(
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
           this.DOMNode,
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on type 'Reado... Remove this comment to see the full error message
           this.state.mountNode.firstChild
@@ -231,12 +222,10 @@ class ReactPortal extends React.Component<Props> {
       }
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
     return this.DOMNode
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  findMountNode(props) {
+  findMountNode(props: Props) {
     let mountNode
 
     if (typeof props.mountNode === 'function') {
@@ -245,7 +234,7 @@ class ReactPortal extends React.Component<Props> {
       mountNode = props.mountNode
     }
 
-    if (!mountNode || !mountNode.nodeName) {
+    if (!mountNode || !(mountNode as Element).nodeName) {
       mountNode = document.body
     }
 
@@ -253,7 +242,6 @@ class ReactPortal extends React.Component<Props> {
   }
 
   get node() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'DOMNode' does not exist on type 'ReactPo... Remove this comment to see the full error message
     return this.DOMNode
   }
 }

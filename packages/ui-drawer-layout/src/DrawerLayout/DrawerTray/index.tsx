@@ -209,6 +209,7 @@ class DrawerTray extends Component<Props> {
     transitioning: false,
     portalOpen: false
   }
+  _DOMNode: HTMLSpanElement | null = null
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }
@@ -253,18 +254,16 @@ class DrawerTray extends Component<Props> {
       transitioning: false
     })
   }
-  handlePortalOpen = (DOMNode: any) => {
+  handlePortalOpen = (DOMNode: HTMLSpanElement | null) => {
     this.DOMNode = DOMNode
     this.setState({
       portalOpen: true
     })
   }
   get DOMNode() {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Drawer... Remove this comment to see the full error message
     return this._DOMNode
   }
-  set DOMNode(el) {
-    // @ts-expect-error ts-migrate(2551) FIXME: Property '_DOMNode' does not exist on type 'Drawer... Remove this comment to see the full error message
+  set DOMNode(el: HTMLSpanElement | null) {
     this._DOMNode = el
   }
   renderContent() {

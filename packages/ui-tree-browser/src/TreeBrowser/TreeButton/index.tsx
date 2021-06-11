@@ -52,8 +52,8 @@ type Props = {
   selected?: boolean
   focused?: boolean
   level?: number
-  containerRef?: any // TODO: function () {}
-  renderContent?: any // TODO: function () {}
+  containerRef?: (...args: any[]) => any // TODO: function () {}
+  renderContent?: (...args: any[]) => any // TODO: function () {}
 }
 
 /**
@@ -93,8 +93,8 @@ class TreeButton extends Component<Props> {
     selected: PropTypes.bool,
     focused: PropTypes.bool,
     level: PropTypes.number,
-    containerRef: function () {},
-    renderContent: function () {}
+    containerRef: PropTypes.func,
+    renderContent: PropTypes.func
   }
 
   static defaultProps = {
@@ -159,12 +159,8 @@ class TreeButton extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
   renderCollectionIcon() {
-    const {
-      expanded,
-      collectionIcon,
-      collectionIconExpanded,
-      styles
-    } = this.props
+    const { expanded, collectionIcon, collectionIconExpanded, styles } =
+      this.props
 
     if (collectionIcon || collectionIconExpanded) {
       return (
@@ -194,6 +190,7 @@ class TreeButton extends Component<Props> {
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
   handleRef = (el) => {
+    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     el && this.props.containerRef(el.parentElement)
   }
 

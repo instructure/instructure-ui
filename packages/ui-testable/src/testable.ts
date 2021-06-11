@@ -22,10 +22,15 @@
  * SOFTWARE.
  */
 
-import { ComponentState } from 'react'
+import { ComponentState, ComponentClass } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import { decorator } from '@instructure/ui-decorator'
+
+// TODO: Components that render as non-native Portals have a DOMNode property. (Portal, ReactPortal, SubtreePortal, DrawerTray, Modal, Overlay, Tray). Make this a common interface that all of them implements.
+interface ComponentWithDOMNode {
+  DOMNode?: HTMLSpanElement | null
+}
 
 const testable =
   process.env.NODE_ENV === 'production' &&
@@ -35,8 +40,8 @@ const testable =
   // ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
   // We do this because adding those `data-cid` locators slows things down.
   !process.env.ALWAYS_APPEND_UI_TESTABLE_LOCATORS
-    ? () => (Component: any) => Component
-    : decorator((ComposedComponent: any) => {
+    ? () => (Component: ComponentClass<any>) => Component
+    : decorator((ComposedComponent: ComponentClass<any>) => {
         const displayName =
           ComposedComponent.displayName || ComposedComponent.name
         const locator = {
@@ -50,8 +55,7 @@ const testable =
         > extends ComposedComponent {
           static selector = selector
           private _testableUnmounted: boolean | undefined
-          _locatorTimeout: NodeJS.Timeout | undefined
-          private DOMNode: any
+          _locatorTimeout: ReturnType<typeof setTimeout> | undefined
           componentDidMount() {
             if (super.componentDidMount) {
               super.componentDidMount()
@@ -79,26 +83,32 @@ const testable =
           }
           appendLocatorAttribute() {
             this._locatorTimeout = setTimeout(() => {
-              let node
+              let node: HTMLSpanElement | Element | Text | null = null
               if (this._testableUnmounted) {
                 return
               }
               try {
                 // Use this.DOMNode for components that render as non-native Portals...
-                node = this.DOMNode || findDOMNode(this as any)
+                node =
+                  (this as ComponentWithDOMNode).DOMNode || findDOMNode(this)
               } catch (e) {
                 console.warn(
                   `[ui-testable] Could not append locator attribute: ${e}`
                 )
               }
-              if (node?.getAttribute) {
-                const attribute = node.getAttribute(locator.attribute)
+              if ((node as Element)?.getAttribute) {
+                const attribute = (node as Element).getAttribute(
+                  locator.attribute
+                )
                 const values =
                   typeof attribute === 'string' ? attribute.split(/\s+/) : []
                 if (!values.includes(locator.value)) {
                   values.push(locator.value)
                 }
-                node.setAttribute(locator.attribute, values.join(' '))
+                ;(node as Element).setAttribute(
+                  locator.attribute,
+                  values.join(' ')
+                )
               }
             })
           }
