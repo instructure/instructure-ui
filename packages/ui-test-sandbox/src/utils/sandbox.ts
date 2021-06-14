@@ -27,11 +27,6 @@ import { ReactComponentWrapper } from './reactComponentWrapper'
 import initConsole from './initConsole'
 import React from 'react'
 
-// Likely this could be done with /// <reference types
-declare const before: any
-declare const beforeEach: any
-declare const afterEach: any
-
 // Add "sandbox" to the global interface, so TS does not complain about
 // global.sandbox
 declare global {
@@ -48,7 +43,7 @@ declare global {
 
 /* istanbul ignore next */
 class Sandbox {
-  private _timeouts!: NodeJS.Timeout[]
+  private _timeouts!: number[]
   private _sandbox!: sinon.SinonSandbox
   private _raf!: number[]
   private _attributes!: { document: Attr[]; body: Attr[] }
@@ -60,7 +55,7 @@ class Sandbox {
     // eslint-disable-next-line no-console
     console.info('[ui-test-sandbox] Initializing test sandbox...')
     try {
-      // global Mocha (or Jest?) hooks
+      // global Mocha hooks
       before(this.init.bind(this))
       beforeEach(this.setup.bind(this))
       afterEach(this.teardown.bind(this))
@@ -82,8 +77,9 @@ class Sandbox {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const timeoutId = originalSetTimeout(...args)
+
         this._timeouts.push(timeoutId)
-        return timeoutId as any
+        return timeoutId
       }
     }
 
@@ -150,7 +146,6 @@ class Sandbox {
       })
     }
 
-    this._observer.observe(document.head, { childList: true })
     this._observer.observe(document.body, { childList: true })
   }
 
@@ -180,9 +175,7 @@ class Sandbox {
 
     this._addedNodes.forEach((node) => {
       if (node && typeof (node as ChildNode).remove === 'function') {
-        // TODO this code is buggy. It was originally doing nothing, but when
-        // its executed properly it causes an exception
-        //(node as ChildNode).remove()
+        ;(node as ChildNode).remove()
       }
     })
     this._addedNodes = []
