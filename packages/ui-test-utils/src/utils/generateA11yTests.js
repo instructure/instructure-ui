@@ -25,6 +25,7 @@
 import React from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { accessible } from '@instructure/ui-test-queries'
+import { within } from '@instructure/ui-test-utils'
 
 import { expect } from './expect'
 
@@ -55,8 +56,10 @@ export function generateA11yTests({ componentName, sections }, only = []) {
                 )} [${i},${j}]`
               : `${j}`
             it(description, async () => {
-              await mount(<Example />)
-              expect(await accessible()).to.be.true()
+              const subject = await mount(<Example />)
+              const element = within(subject.getDOMNode())
+
+              expect(await element.accessible()).to.be.true()
             })
             j++
           })
