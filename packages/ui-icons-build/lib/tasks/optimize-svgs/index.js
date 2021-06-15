@@ -21,21 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 const gulp = require('gulp')
-const {
-  optimizeSVGs,
-  buildSVGs,
-  buildFonts,
-  buildReact,
-  buildAll,
-  clean
-} = require('@instructure/ui-icons-build')
+const svgmin = require('gulp-svgmin')
+const cheerio = require('gulp-cheerio')
 
-gulp.task('clean', clean)
-gulp.task('optimize', optimizeSVGs)
-gulp.task('build:svgs', buildSVGs)
-gulp.task('build:fonts', buildFonts)
-gulp.task('build:react', buildReact)
-gulp.task('build', buildAll)
+const handleErrors = require('../../util/handle-errors')
+const config = require('../../config')
 
-gulp.task('default', buildAll)
+gulp.task('optimize-svgs', () => {
+  return (
+    gulp
+      .src(config.svg.source)
+      .pipe(
+        svgmin({
+          js2svg: { pretty: true },
+          plugins: [
+            { removeDimensions: true },
+            { removeViewBox: false },
+            { removeDesc: true },
+            { removeTitle: true },
+            { removeRasterImages: true },
+            { cleanupNumericValues: false },
+            { removeUnknownsAndDefaults: false },
+            { removeUselessStrokeAndFill: false },
+            { convertStyleToAttrs: true },
+            { convertPathData: false }
+          ]
+        })
+      )
+      // clean up fills
+      .pipe(
+        cheerio({
+          run: ($) => {
+            $('[fill]').removeAttr('fill')
+          },
+          parserOptions: {
+            xmlMode: true
+          }
+        })
+      )
+      .on('error', handleErrors)
+      .pipe(gulp.dest(config.svg.destination))
+  )
+})

@@ -23,12 +23,12 @@
  */
 const libraryName = 'InstructureIcons'
 const packageName = '@instructure/ui-icons'
-const source = './src/'
+const source = 'svg/'
 const destination = './__build__/'
 
 const svg = {
-  source: `${source}**/*.sketch`,
-  destination: `svg/`
+  source: `${source}**/*.svg`,
+  destination: source
 }
 
 const fonts = {

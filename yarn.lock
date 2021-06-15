@@ -7731,11 +7731,6 @@ clean-deep@^3.0.2:
     lodash.isplainobject "^4.0.6"
     lodash.transform "^4.6.0"
 
-clean-sketch@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/clean-sketch/-/clean-sketch-1.0.1.tgz#8bce810263eba39d52b71b07058fc5e419a36e23"
-  integrity sha1-i86BAmPro51StxsHBY/F5BmjbiM=
-
 clean-stack@^2.0.0, clean-stack@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/clean-stack/-/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
@@ -12742,17 +12737,6 @@ gud@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
-
-gulp-changed@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/gulp-changed/-/gulp-changed-4.0.1.tgz#ca63e51651a649433a49372d271b8b26054a9acc"
-  integrity sha512-VIy/woGGKBvUzj+KuL4C7ZZckT1pvy6pjIVNe8DaCrNvy7Nmh9UW/fZR73iQlOPA2U2/Sr3xLUX2RsSKwcnl/g==
-  dependencies:
-    make-dir "^3.0.0"
-    plugin-error "^1.0.1"
-    replace-ext "^1.0.0"
-    through2 "^3.0.1"
-    touch "^3.1.0"
 
 gulp-cheerio@^0.6.3:
   version "0.6.3"
@@ -17847,13 +17831,6 @@ nopt@^4.0.1:
   dependencies:
     abbrev "1"
     osenv "^0.1.4"
-
-nopt@~1.0.10:
-  version "1.0.10"
-  resolved "https://registry.npmjs.org/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
-  integrity sha1-bd0hvSoxQXuScn3Vhfim83YI6+4=
-  dependencies:
-    abbrev "1"
 
 normalize-css-color@^1.0.2:
   version "1.0.2"
@@ -23980,13 +23957,6 @@ toposort@^1.0.0:
   version "1.0.7"
   resolved "https://registry.npmjs.org/toposort/-/toposort-1.0.7.tgz#2e68442d9f64ec720b8cc89e6443ac6caa950029"
   integrity sha1-LmhELZ9k7HILjMieZEOsbKqVACk=
-
-touch@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/touch/-/touch-3.1.0.tgz#fe365f5f75ec9ed4e56825e0bb76d24ab74af83b"
-  integrity sha512-WBx8Uy5TLtOSRtIq+M03/sKDrXCLHxwDcquSP2c43Le03/9serjQBIztjRz6FkJez9D/hleyAXTBGLwwZUw9lA==
-  dependencies:
-    nopt "~1.0.10"
 
 tough-cookie@^2.3.3, tough-cookie@^2.3.4:
   version "2.5.0"
