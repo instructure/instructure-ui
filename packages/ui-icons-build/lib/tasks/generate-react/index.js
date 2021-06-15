@@ -29,6 +29,8 @@ const rename = require('gulp-rename')
 const cheerio = require('gulp-cheerio')
 const path = require('path')
 const svgtojsx = require('svg-to-jsx')
+const ts = require('gulp-typescript')
+const sourcemaps = require('gulp-sourcemaps')
 
 const formatName = require('../../util/format-name')
 const handleErrors = require('../../util/handle-errors')
@@ -118,10 +120,19 @@ gulp.task('generate-react-components', () => {
           gulp
             .src(require.resolve('./component.ejs'))
             .pipe(consolidate('lodash', data))
+            .pipe(rename({ extname: '.tsx' }))
+            .pipe(sourcemaps.init()) // generate source maps
+            .pipe(ts.createProject('tsconfig.json')())
             .pipe(
               rename({ basename: data.name + data.variant, extname: '.js' })
             )
             .on('error', handleErrors)
+            .pipe(
+              sourcemaps.write('.', {
+                includeContent: false,
+                sourceRoot: '../lib'
+              })
+            )
             .pipe(gulp.dest(config.react.destination))
         )
       })

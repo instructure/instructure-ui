@@ -22,6 +22,7 @@ class <%= name %><%= variant %> extends Component {
     return (
       <SVGIcon
         {...this.props}
+        // @ts-expect-error TODO fix type when SVGIcon is typed
         name="<%= name %>"
         viewBox="<%= viewBox %>"
         <% if (bidirectional) { %>
