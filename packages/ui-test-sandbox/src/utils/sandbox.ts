@@ -43,7 +43,7 @@ declare global {
 
 /* istanbul ignore next */
 class Sandbox {
-  private _timeouts!: number[]
+  private _timeoutIds!: number[]
   private _sandbox!: sinon.SinonSandbox
   private _raf!: number[]
   private _attributes!: { document: Attr[]; body: Attr[] }
@@ -67,7 +67,7 @@ class Sandbox {
   init() {
     initConsole()
 
-    this._timeouts = []
+    this._timeoutIds = []
     const originalSetTimeout = global.setTimeout
     if (typeof originalSetTimeout === 'function') {
       // I could not figure out how to type these properly :(
@@ -78,7 +78,7 @@ class Sandbox {
         // @ts-ignore
         const timeoutId = originalSetTimeout(...args)
 
-        this._timeouts.push(timeoutId)
+        this._timeoutIds.push(timeoutId)
         return timeoutId
       }
     }
@@ -154,10 +154,10 @@ class Sandbox {
 
     this._sandbox.restore()
 
-    this._timeouts.forEach((timeoutId) => {
+    this._timeoutIds.forEach((timeoutId) => {
       clearTimeout(timeoutId)
     })
-    this._timeouts = []
+    this._timeoutIds = []
 
     this._raf.forEach((requestId) => {
       window.cancelAnimationFrame(requestId)
