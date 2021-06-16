@@ -110,6 +110,7 @@ const useResetState = (initialState) => {
 
 const Example = ({ rootId, onChange = (_id) => {}, data }) => {
   const [tempAccountId, setTempAccountId] = useResetState(data[rootId].id)
+  const [isShowingContent, setIsShowingContent] = React.useState(false)
   const menuRef = React.useRef()
   const accountObj = {
     ...data[tempAccountId]
@@ -171,6 +172,13 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
       }) || null
   }
 
+  const handleTabbingOut = (event) => {
+    // Drilldown should close when Tab is pressed
+    if (isShowingContent && (event?.keyCode === 9)) { // 9 = Tab
+      setIsShowingContent(false)
+    }
+  }
+
   return (
     <View as="div">
       <Popover
@@ -190,12 +198,16 @@ const Example = ({ rootId, onChange = (_id) => {}, data }) => {
         placement="bottom start"
         constrain="parent"
         offsetY={16}
+        isShowingContent={isShowingContent}
+        onShowContent={() => { setIsShowingContent(true) }}
+        onHideContent={() => { setIsShowingContent(false) }}
       >
         <Menu
           menuRef={(ref) => {
             menuRef.current = ref
           }}
           themeOverride={{ minWidth: '24rem' }}
+          onKeyDown={ handleTabbingOut }
         >
           {renderBackNavigation()}
           {renderChildList()}
