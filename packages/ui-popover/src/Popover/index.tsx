@@ -466,6 +466,18 @@ class Popover extends Component<Props> {
         this._focusRegion.deactivate()
       }
     }
+
+    // if the props the state is based on change,
+    // we need to recalculate the offset and placement
+    if (
+      this.props.offsetX !== prevProps.offsetX ||
+      this.props.offsetY !== prevProps.offsetY ||
+      this.props.placement !== prevProps.placement
+    ) {
+      this.setState({
+        ...this.computeOffsets(this.placement)
+      })
+    }
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'placement' implicitly has an 'any' type... Remove this comment to see the full error message
