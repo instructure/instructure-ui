@@ -817,7 +817,8 @@ class Popover extends Component<Props> {
           ...viewProps,
           // @ts-expect-error ts-migrate(2322) FIXME: Type '{ borderWidth: string; borderRadius: string;... Remove this comment to see the full error message
           borderWidth: 'small',
-          borderRadius: 'medium'
+          borderRadius: 'medium',
+          ...(color === 'primary-inverse' && { borderColor: 'transparent' })
         }
       }
 
