@@ -787,7 +787,8 @@ class Popover extends Component {
         viewProps = {
           ...viewProps,
           borderWidth: 'small',
-          borderRadius: 'medium'
+          borderRadius: 'medium',
+          ...(color === 'primary-inverse' && { borderColor: 'transparent' })
         }
       }
 
