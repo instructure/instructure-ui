@@ -8,12 +8,35 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v2
-        name: Install Node 15
+        name: Install Node 12
         with:
-          node-version: '15'
+          node-version: '12'
       - name: Install dependencies
         run: yarn install --check-files
       - name: Bootstrap project
         run: yarn bootstrap
       - name: Run test for the patchset
         run: yarn test:patchset
+      - name: Build docs-app
+        run: yarn build:docs
+      - name: Deploy preview docs.
+        id: deploy_to_netlify
+        # since repository secrets are not exposed to forked repos this step
+        # would always would fail for those PRs, so it's better just to
+        # ignore the failure here
+        # see: https://docs.github.com/en/actions/reference/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+        continue-on-error: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        # set <preview_url> variable to be available for the following steps
+        run: echo "::set-output name=preview_url::$(npx netlify deploy --dir ./packages/__docs__/__build__ | grep "Website Draft URL" | awk '{print $4}')"
+      - name: Add Comment to PR with the preview URL.
+        # only run this step if the previous step has not failed
+        # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
+        if: ${{ steps.deploy_to_netlify.outcome == 'success' }}
+        uses: actions-cool/maintain-one-comment@v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            Preview URL: ${{ steps.deploy_to_netlify.outputs.preview_url }}
