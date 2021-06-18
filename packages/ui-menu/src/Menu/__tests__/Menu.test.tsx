@@ -25,6 +25,7 @@ import React from 'react'
 import {
   expect,
   mount,
+  unmount,
   stub,
   wait,
   accessible,
@@ -326,6 +327,54 @@ describe('<Menu />', async () => {
         expect(menu.focused()).to.be.false()
         expect(menu.getAttribute('tabIndex')).to.equal('0')
       })
+    })
+
+    it('should apply offset values to Popover', async () => {
+      const getTransforms = (transform: string) => {
+        const transformValues = transform.match(/([\d])\w*/g)!.slice(-2)
+        return {
+          transformX: parseInt(transformValues[0]),
+          transformY: parseInt(transformValues[1])
+        }
+      }
+      await mount(
+        <Menu trigger={<button>More</button>} defaultShow>
+          <MenuItem>Learning Mastery</MenuItem>
+          <MenuItem disabled>Gradebook</MenuItem>
+        </Menu>
+      )
+
+      const subject = await MenuLocator.find(':label(More)')
+      const popover = await subject.findPopoverContent()
+
+      // offset props influence the transform CSS prop of the Popover
+      const defaultTransform = getComputedStyle(popover.getDOMNode()).transform
+      const { transformX: defaultTransformX, transformY: defaultTransformY } =
+        getTransforms(defaultTransform)
+
+      await unmount()
+
+      await mount(
+        <Menu
+          trigger={<button>More</button>}
+          defaultShow
+          offsetX={-10}
+          offsetY="30px"
+        >
+          <MenuItem>Learning Mastery</MenuItem>
+          <MenuItem disabled>Gradebook</MenuItem>
+        </Menu>
+      )
+
+      const subject2 = await MenuLocator.find(':label(More)')
+      const popover2 = await subject2.findPopoverContent()
+
+      const newTransform = getComputedStyle(popover2.getDOMNode()).transform
+      const { transformX: newTransformX, transformY: newTransformY } =
+        getTransforms(newTransform)
+
+      expect(newTransformX).to.equal(defaultTransformX + 10)
+      expect(newTransformY).to.equal(defaultTransformY + 30)
     })
 
     it('should call onToggle on click', async () => {
