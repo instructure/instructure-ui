@@ -49,7 +49,6 @@ let numStories = 0
 console.log(
   `Creating stories for ${examplesContext.keys().length} components..`
 )
-console.log(`components: ${componentsContext.keys().length}`)
 
 examplesContext.keys().map((requirePath) => {
   const exampleDir = requirePath.split('/').slice(0, -2).join('/')
