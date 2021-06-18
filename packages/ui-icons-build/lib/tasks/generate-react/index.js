@@ -31,6 +31,7 @@ const path = require('path')
 const svgtojsx = require('svg-to-jsx')
 const ts = require('gulp-typescript')
 const sourcemaps = require('gulp-sourcemaps')
+const debug = require('gulp-debug')
 
 const formatName = require('../../util/format-name')
 const handleErrors = require('../../util/handle-errors')
@@ -116,25 +117,38 @@ gulp.task('generate-react-components', () => {
     Object.keys(GLYPHS).forEach((name) => {
       Object.keys(GLYPHS[name]).forEach((variant) => {
         const data = GLYPHS[name][variant]
+        const tsTask = gulp
+          //.src(generateSource(data))
+          .src(require.resolve('./component.ejs'))
+          .pipe(consolidate('lodash', data))
+          .pipe(rename({ extname: '.tsx' }))
+          //.pipe(sourcemaps.init()) // generate source maps
+          .pipe(ts.createProject('tsconfig.build.json')())
         tasks.push(
-          gulp
-            .src(require.resolve('./component.ejs'))
-            .pipe(consolidate('lodash', data))
-            .pipe(rename({ extname: '.tsx' }))
-            .pipe(sourcemaps.init()) // generate source maps
-            .pipe(ts.createProject('tsconfig.json')())
+          tsTask.dts
+            .pipe(debug())
+            .pipe(
+              rename({ basename: data.name + data.variant, extname: '.d.ts' })
+            )
+            //  .on('error', handleErrors)
+            .pipe(gulp.dest(config.react.destination + '/types'))
+        )
+        /*
+        tasks.push(
+          tsTask
+            .js
             .pipe(
               rename({ basename: data.name + data.variant, extname: '.js' })
             )
             .on('error', handleErrors)
-            .pipe(
-              sourcemaps.write('.', {
-                includeContent: false,
-                sourceRoot: '../lib'
-              })
-            )
+            //  .pipe(
+            //    sourcemaps.write('../types', {
+            //      includeContent: false,
+            //      sourceRoot: '../lib'
+            //    })
+            //  )
             .pipe(gulp.dest(config.react.destination))
-        )
+        )*/
       })
     })
     return tasks
@@ -151,3 +165,51 @@ gulp.task(
     'generate-react-index-files'
   )
 )
+
+function generateSource(data) {
+  return `import React, { Component } from 'react'
+  import { SVGIcon } from '@instructure/ui-svg-images'
+
+  class ${data.name}${data.variant} extends Component {
+    static glyphName = '${data.glyphName}';
+    static variant = '${data.variant}';
+    static displayName = '${data.name}${data.variant}';
+    //<% if (deprecated) { %>
+    //static deprecated = true;
+    //<% } %>
+
+    static propTypes = {
+      ...SVGIcon.propTypes
+    }
+
+    valami() : number|string|any {
+      if (3<2) return 2
+      return "asd!"
+    }
+
+    render () {
+      //<% if (deprecated) { %>
+      //if (process.env.NODE_ENV !== 'production') {
+      //  console.warn('<${data.name} />${data.variant} is deprecated. Please use <${data.deprecated} /> instead.')
+      //}
+      //<% } %>
+      return (
+        <SVGIcon
+          {...this.props}
+          // @ts-expect-error TODO fix type when SVGIcon is typed
+          name="${data.name}"
+          viewBox="${data.viewBox}"
+          //<% if (bidirectional) { %>
+          //bidirectional
+          //<% } %>
+        >
+          ${data.source}
+        </SVGIcon>
+      )
+    }
+  }
+
+  export default <%= name %><%= variant %>
+  export { <%= name %><%= variant %> }
+  `
+}

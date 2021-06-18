@@ -16,7 +16,8 @@
   "scripts": {
     "clean": "gulp clean && ui-build --clean",
     "build": "gulp && ui-build __build__ --copy-files --modules es,cjs",
-    "export": "gulp clean && gulp"
+    "export": "gulp clean && gulp",
+    "asd": "yarn clean && yarn build"
   },
   "license": "MIT",
   "devDependencies": {

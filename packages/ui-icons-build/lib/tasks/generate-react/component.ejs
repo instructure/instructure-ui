@@ -13,6 +13,11 @@ class <%= name %><%= variant %> extends Component {
     ...SVGIcon.propTypes
   }
 
+  valami() : number|string|any {
+    if (3<2) return 2
+    return "asd!"
+  }
+
   render () {
     <% if (deprecated) { %>
     if (process.env.NODE_ENV !== 'production') {
