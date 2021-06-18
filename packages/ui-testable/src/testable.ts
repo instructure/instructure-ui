@@ -96,7 +96,7 @@ const testable =
                   `[ui-testable] Could not append locator attribute: ${e}`
                 )
               }
-              if ((node as Element)?.getAttribute) {
+              if (node) {
                 const attribute = (node as Element).getAttribute(
                   locator.attribute
                 )

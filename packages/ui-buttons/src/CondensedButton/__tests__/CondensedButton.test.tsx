@@ -125,6 +125,7 @@ describe('<CondensedButton/>', async () => {
   })
 
   it('should set the disabled attribute when `disabled` is set', async () => {
+    //@ts-expect-error fix this
     await mount(<CondensedButton disabled>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
@@ -137,6 +138,7 @@ describe('<CondensedButton/>', async () => {
   })
 
   it('should set the disabled attribute when `readOnly` is set', async () => {
+    //@ts-expect-error fix this
     await mount(<CondensedButton readOnly>Hello</CondensedButton>)
 
     expect(await CondensedButtonLocator.find('[disabled]')).to.exist()
@@ -157,6 +159,7 @@ describe('<CondensedButton/>', async () => {
   it('should pass the `onClick` prop', async () => {
     const onClick = stub()
 
+    //@ts-expect-error fix this
     await mount(<CondensedButton onClick={onClick}>Hello</CondensedButton>)
     const button = await CondensedButtonLocator.find()
 

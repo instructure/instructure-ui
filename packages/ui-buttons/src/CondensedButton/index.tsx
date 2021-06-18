@@ -41,7 +41,7 @@ type Props = {
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: React.ReactElement | string
   interaction?: 'enabled' | 'disabled' | 'readonly'
   color?: 'primary' | 'primary-inverse'
   margin?: keyof typeof ThemeablePropValues.SPACING

@@ -34,9 +34,9 @@ export default {
   getComponentProps: (props) => {
     return {
       children: [
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <DrawerLayout.Tray
           key="0"
+          // @ts-expect-error ts-migrate(6133) FIXME: id is missing from type
           id="DrawerLayoutTrayExample1"
           open={true}
           placement="start"
@@ -56,9 +56,9 @@ export default {
         <DrawerLayout.Content
           key="1"
           label="Drawer content example"
+          // @ts-expect-error ts-migrate(6133) FIXME: themeOverride is missing from type
           themeOverride={{ duration: 0 }}
         >
-          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
           <div style={{ background: 'white', height: '100%' }}>
             {/* @ts-expect-error ts-migrate(2322) FIXME: Type '"x-large"' is not assignable to type '0 | "s... Remove this comment to see the full error message */}
             <View as="div" padding="x-large">

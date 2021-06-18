@@ -33,7 +33,9 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 type Props = {
-  as?: React.ReactElement
+  //TODO: probably have to make a new type instead of this generic `string` which
+  //will only allow the valid html tags
+  as?: React.ReactElement | string
   color?:
     | 'primary'
     | 'secondary'

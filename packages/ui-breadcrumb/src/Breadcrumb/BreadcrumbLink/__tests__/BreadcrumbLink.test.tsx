@@ -50,6 +50,7 @@ describe('<BreadcrumbLink />', async () => {
   })
 
   it('should allow to prop to pass through', async () => {
+    //@ts-expect-error fix this, but how? `to` is not a prop BreadcrumbLink
     await mount(<BreadcrumbLink to="/example">Test</BreadcrumbLink>)
     const link = await BreadcrumbLinkLocator.find()
     expect(link.getAttribute('to')).to.equal('/example')

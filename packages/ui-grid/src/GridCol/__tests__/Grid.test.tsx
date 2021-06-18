@@ -31,7 +31,6 @@ import { GridCol } from '../index'
 describe('<GridCol />', async () => {
   it('should render content in each column', async () => {
     const elementRef = stub()
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<GridCol elementRef={elementRef}>Foo</GridCol>)
 
     expect(elementRef).to.have.been.calledWith(subject.getDOMNode())

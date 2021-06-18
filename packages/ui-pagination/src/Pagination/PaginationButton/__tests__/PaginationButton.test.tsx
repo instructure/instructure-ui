@@ -40,6 +40,7 @@ describe('<PaginationButton />', async () => {
 
   it('should navigate using button when onClick provided', async () => {
     const onClick = stub()
+    //@ts-expect-error fix this
     await mount(<PaginationButton onClick={onClick}>1</PaginationButton>)
     const button = await PaginationButtonLocator.find(':label(1)')
     await button.click()

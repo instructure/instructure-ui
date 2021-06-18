@@ -334,6 +334,7 @@ describe('<NumberInput />', () => {
   })
 
   it('puts inputMode prop to input', async () => {
+    //@ts-expect-error fix this
     await mount(<NumberInput inputMode="decimal" />)
 
     const numberInput = await NumberInputLocator.find()

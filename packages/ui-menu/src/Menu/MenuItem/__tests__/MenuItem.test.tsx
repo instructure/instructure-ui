@@ -45,6 +45,7 @@ describe('<MenuItem />', async () => {
   })
 
   it('should render as a link when a to is provided', async () => {
+    //@ts-expect-error fix this
     await mount(<MenuItem to="/example">Hello</MenuItem>)
 
     const item = await MenuItemLocator.find(':label(Hello)')

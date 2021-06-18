@@ -57,29 +57,25 @@ describe('<Editable />', async () => {
   it('should render view mode', async () => {
     const renderSpy = spy(render)
     await mount(<Editable mode="view" onChangeMode={noop} render={renderSpy} />)
-    const args = renderSpy.lastCall.args[0]
-    // @ts-expect-error FIXME remove this line to see the error
+    const args = renderSpy.lastCall.args[0] as any
     expect(args.mode).to.equal('view')
   })
 
   it('should render edit mode', async () => {
     const renderSpy = spy(render)
     await mount(<Editable mode="edit" onChangeMode={noop} render={renderSpy} />)
-    const args = renderSpy.lastCall.args[0]
-    // @ts-expect-error FIXME remove this line to see the error
+    const args = renderSpy.lastCall.args[0] as any
     expect(args.mode).to.equal('edit')
   })
 
   it('should change to edit mode on button click', async () => {
     const renderSpy = spy(render)
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
-    const onChangeModeSpy = spy((newMode) => {})
+    const onChangeModeSpy = spy((_newMode: unknown) => {})
 
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    let args = renderSpy.lastCall.args[0]
-    // @ts-expect-error FIXME remove this line to see the error
+    let args = renderSpy.lastCall.args[0] as any
     expect(args.mode).to.equal('view')
 
     const editable = within(subject.getDOMNode())
@@ -93,15 +89,13 @@ describe('<Editable />', async () => {
   })
 
   it('should change to edit mode on component click', async () => {
-    // @ts-expect-error newMode is intentionally unused
-    const onChangeModeSpy = spy((newMode: any) => {})
+    const onChangeModeSpy = spy((_newMode: unknown) => {})
     const renderSpy = spy(render)
 
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    const renderProps = renderSpy.lastCall.args[0]
-    // @ts-expect-error FIXME remove this line to see the error
+    const renderProps = renderSpy.lastCall.args[0] as any
     expect(renderProps.mode).to.equal('view')
 
     const container = within(subject.getDOMNode())
@@ -112,41 +106,35 @@ describe('<Editable />', async () => {
   })
 
   it('should set the button to visible on mouse over', async () => {
-    // @ts-expect-error newMode is intentionally unused
-    const onChangeModeSpy = spy((newMode) => {})
+    const onChangeModeSpy = spy((_newMode: unknown) => {})
     const renderSpy = spy(render)
 
     const subject = await mount(
       <Editable mode="view" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    // @ts-expect-error FIXME remove this line to see the error
-    let props = renderSpy.lastCall.args[0].getEditButtonProps()
+    let props = (renderSpy.lastCall.args[0] as any).getEditButtonProps()
     expect(props.isVisible).to.be.false()
 
     const editable = within(subject.getDOMNode())
     await editable.mouseOver()
-    // @ts-expect-error FIXME remove this line to see the error
-    props = renderSpy.lastCall.args[0].getEditButtonProps()
+    props = (renderSpy.lastCall.args[0] as any).getEditButtonProps()
 
     expect(props.isVisible).to.be.true()
 
     await editable.mouseOut()
-    // @ts-expect-error FIXME remove this line to see the error
-    props = renderSpy.lastCall.args[0].getEditButtonProps()
+    props = (renderSpy.lastCall.args[0] as any).getEditButtonProps()
 
     expect(props.isVisible).to.be.false()
   })
 
   it('should change to view mode on editor blur', async () => {
-    // @ts-expect-error newMode is intentionally unused
-    const onChangeModeSpy = spy((newMode) => {})
+    const onChangeModeSpy = spy((_newMode: string) => {})
     const renderSpy = spy(render)
 
     const subject = await mount(
       <Editable mode="edit" onChangeMode={onChangeModeSpy} render={renderSpy} />
     )
-    let args = renderSpy.lastCall.args[0]
-    // @ts-expect-error FIXME remove this line to see the error
+    let args = renderSpy.lastCall.args[0] as any
     expect(args.mode).to.equal('edit')
 
     const editable = within(subject.getDOMNode())
@@ -161,8 +149,7 @@ describe('<Editable />', async () => {
   })
 
   it('should change to view mode on escape', async () => {
-    // @ts-expect-error newMode is intentionally unused
-    const onChangeModeSpy = spy((newMode) => {})
+    const onChangeModeSpy = spy((_newMode: string) => {})
 
     const subject = await mount(
       <Editable mode="edit" onChangeMode={onChangeModeSpy} render={render} />
@@ -180,8 +167,7 @@ describe('<Editable />', async () => {
   })
 
   it('should call onChange when the user is finished editing', async () => {
-    // @ts-expect-error newMode is intentionally unused
-    const onChangeSpy = spy((newValue) => {})
+    const onChangeSpy = spy((_newValue: string) => {})
     const renderSpy = spy(render)
 
     const subject = await mount(
