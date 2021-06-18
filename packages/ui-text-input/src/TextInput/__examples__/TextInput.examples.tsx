@@ -48,7 +48,6 @@ const renderBeforeInput = () => {
     />
   )
 }
-
 export default {
   sectionProp: 'size',
   maxExamplesPerPage: 50,

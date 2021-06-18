@@ -35,7 +35,6 @@ export default {
     return {
       count: 100,
       children: (
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
         <View display="block" width="2rem" height="2rem" borderWidth="small" />
       )
     }

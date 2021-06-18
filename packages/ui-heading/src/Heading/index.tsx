@@ -46,7 +46,9 @@ type Props = {
     | 'secondary-inverse'
     | 'inherit'
   level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'reset'
-  as?: React.ReactElement
+  //TODO: probably have to make a new type instead of this generic `string` which
+  //will only allow the valid html tags
+  as?: React.ReactElement | string
   margin?: any // TODO: ThemeablePropTypes.spacing
   elementRef?: (...args: any[]) => any
 }

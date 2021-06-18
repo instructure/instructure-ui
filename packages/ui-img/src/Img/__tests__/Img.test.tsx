@@ -38,21 +38,18 @@ describe('<Img />', () => {
 
   describe('for a11y', () => {
     it('should meet standards', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Img src={image} />)
       const img = await ImgLocator.find()
       expect(await img.accessible()).to.be.true()
     })
 
     it('should render an empty alt attribute by default', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Img src={image} />)
       expect(await ImgLocator.find('[alt=""]')).to.exist()
     })
 
     it('should render the provided alt attribute', async () => {
       const alt = 'Foo'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Img src={image} alt={alt} />)
       expect(await ImgLocator.find(`[alt="${alt}"]`)).to.exist()
     })

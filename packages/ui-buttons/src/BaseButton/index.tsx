@@ -55,7 +55,7 @@ type Props = {
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: React.ReactElement | string
   interaction?: InteractionType
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
   focusColor?: 'info' | 'inverse'
@@ -419,7 +419,6 @@ class BaseButton extends Component<Props> {
         elementRef={this.handleElementRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
-        // @ts-expect-error ts-migrate(2367) FIXME: This condition will always return 'true' since the... Remove this comment to see the full error message
         role={onClick && as !== 'button' ? 'button' : null}
         tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}

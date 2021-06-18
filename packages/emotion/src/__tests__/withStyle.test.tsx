@@ -119,7 +119,6 @@ describe('@withStyle', async () => {
 
   describe('with theme provided by EmotionThemeProvider', async () => {
     it('should add css class suffixed with label', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -131,7 +130,6 @@ describe('@withStyle', async () => {
     })
 
     it('should apply correct css props', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -145,7 +143,6 @@ describe('@withStyle', async () => {
     })
 
     it('should allow configuration through props', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent
@@ -164,7 +161,6 @@ describe('@withStyle', async () => {
     })
 
     it('should ignore empty themeOverride props', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           {/* @ts-expect-error ts-migrate(2769) FIXME */}
@@ -185,7 +181,6 @@ describe('@withStyle', async () => {
       // so have to add the theme ad themeOverride here, and suppress the error
       stub(console, 'warn') // suppress "no theme provided error"
 
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <ThemeableComponent
           inverse={false}
@@ -207,7 +202,6 @@ describe('@withStyle', async () => {
     })
 
     it('when state is updated', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -231,7 +225,6 @@ describe('@withStyle', async () => {
 
   describe('should apply bi-directional polyfill on styles object', async () => {
     it('in default "ltr" mode', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <EmotionThemeProvider theme={exampleTheme}>
           <ThemeableComponent />
@@ -246,7 +239,6 @@ describe('@withStyle', async () => {
     })
 
     it('in "rtl" mode', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME
       const subject = await mount(
         <ApplyTextDirection dir="rtl">
           <EmotionThemeProvider theme={exampleTheme}>

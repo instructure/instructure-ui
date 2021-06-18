@@ -35,8 +35,7 @@ describe('<Expandable />', async () => {
     }
     const renderSpy = spy(props, 'render')
     await mount(<Expandable {...props} />)
-    // @ts-expect-error FIXME remove this line to see the error
-    const lastCallArgs: Expandable[] = renderSpy.lastCall.args
+    const lastCallArgs: Expandable[] = renderSpy.lastCall.args as Expandable[]
     expect(lastCallArgs[0].expanded).to.be.false()
   })
 
@@ -104,8 +103,7 @@ describe('<Expandable />', async () => {
 
     await mount(<Expandable {...props} />)
 
-    // @ts-expect-error FIXME remove this line to see the error
-    const lastCallArgs: Expandable[] = renderSpy.lastCall.args
+    const lastCallArgs: Expandable[] = renderSpy.lastCall.args as Expandable[]
     expect(lastCallArgs[0].expanded).to.be.true()
   })
 })

@@ -60,7 +60,6 @@ describe('<BaseButton/>', async () => {
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<BaseButton as="span">Hello World</BaseButton>)
     const span = await BaseButtonLocator.find()
     expect(span.getTagName()).to.equal('span')
@@ -69,7 +68,6 @@ describe('<BaseButton/>', async () => {
   it('should set role="button"', async () => {
     const onClick = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <BaseButton as="span" onClick={onClick}>
         Hello World
       </BaseButton>
@@ -80,7 +78,6 @@ describe('<BaseButton/>', async () => {
   it('should set tabIndex="0"', async () => {
     const onClick = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <BaseButton as="span" onClick={onClick}>
         Hello World
       </BaseButton>
@@ -233,7 +230,6 @@ describe('<BaseButton/>', async () => {
       const onClick = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <BaseButton as="span" onClick={onClick}>
           Hello World
         </BaseButton>
