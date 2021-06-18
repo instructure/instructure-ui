@@ -80,6 +80,8 @@ type Props = {
   type?: 'flyout'
   id?: string
   withArrow?: boolean
+  offsetX?: string | number
+  offsetY?: string | number
 }
 
 /**
@@ -207,7 +209,17 @@ class Menu extends Component<Props> {
     /**
      * Whether or not an arrow pointing to the trigger should be rendered
      */
-    withArrow: PropTypes.bool
+    withArrow: PropTypes.bool,
+    /**
+     * The horizontal offset for the positioned content.
+     * Works only if `trigger` is provided.
+     */
+    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * The vertical offset for the positioned content.
+     * Works only if `trigger` is provided.
+     */
+    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
@@ -245,7 +257,9 @@ class Menu extends Component<Props> {
     show: undefined,
     id: undefined,
     type: undefined,
-    withArrow: true
+    withArrow: true,
+    offsetX: 0,
+    offsetY: 0
   }
 
   static Item = MenuItem
@@ -650,7 +664,9 @@ class Menu extends Component<Props> {
       disabled,
       onDismiss,
       onFocus,
-      onMouseOver
+      onMouseOver,
+      offsetX,
+      offsetY
     } = this.props
 
     return trigger ? (
@@ -673,6 +689,8 @@ class Menu extends Component<Props> {
         shouldReturnFocus
         onFocus={onFocus}
         onMouseOver={onMouseOver}
+        offsetX={offsetX}
+        offsetY={offsetY}
         ref={(el) => {
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'Popover | null' is not assignable to type 'n... Remove this comment to see the full error message
           this._popover = el
