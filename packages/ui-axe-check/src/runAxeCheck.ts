@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import axeCore from 'axe-core'
+import axeCore, { Result } from 'axe-core'
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'element' implicitly has an 'any' type.
 export default async function runAxe(element, options = {}) {
@@ -79,19 +79,24 @@ export default async function runAxe(element, options = {}) {
   return result
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'violations' implicitly has an 'any' typ... Remove this comment to see the full error message
-function formatError(violations) {
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'violation' implicitly has an 'any' type... Remove this comment to see the full error message
+function formatError(violations: Result[]) {
   return violations.map((violation) => {
+    const violationErros = violation.nodes
+      .map((node) => {
+        return `
+        <Axe-Check> error occured on target: ${node.target}
+          HTML element: ${node.html}
+          ${
+            node.failureSummary ? `Failure summary: ${node.failureSummary}` : ''
+          }
+      `
+      })
+      .join('\n')
+
     return [
       `[${violation.id}] ${violation.help}`,
-      violation.nodes
-        // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'node' implicitly has an 'any' type.
-        .map(function (node) {
-          return node.target.toString()
-        })
-        .join('\n'),
       violation.description,
+      violationErros,
       `${violation.helpUrl}\n`
     ].join('\n')
   })

@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@instructure/ui-test-locator": "8.5.0",
+    "@instructure/ui-test-utils": "8.5.0",
     "@instructure/ui-test-queries": "8.5.0",
     "@instructure/ui-test-sandbox": "8.5.0",
     "@sheerun/mutationobserver-shim": "^0.3.2",
