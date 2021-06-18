@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.8.0](https://github.com/instructure/instructure-ui/compare/v7.7.1...v7.8.0) (2021-06-18)
+
+**Note:** Version bump only for package @instructure/command-utils
+
 ## [7.7.1](https://github.com/instructure/instructure-ui/compare/v7.7.0...v7.7.1) (2021-06-09)
 
 **Note:** Version bump only for package @instructure/command-utils
