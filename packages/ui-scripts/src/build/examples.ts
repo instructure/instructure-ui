@@ -56,7 +56,14 @@ export const examples = () => {
     // --no-manager-cache is a workaround for
     // https://github.com/storybookjs/storybook/issues/13200
     // -c: config directory
-    commandArgs = ['-c', '.storybook', '-p', port, '--no-manager-cache']
+    commandArgs = [
+      '-c',
+      '.storybook',
+      '-p',
+      port,
+      '--no-manager-cache',
+      '--quiet'
+    ]
     envVars = envVars
       .concat([
         'NODE_ENV=development',
@@ -68,7 +75,7 @@ export const examples = () => {
       .filter(Boolean)
   } else {
     command = 'build-storybook'
-    commandArgs = ['-c', '.storybook', '-o', '__build__']
+    commandArgs = ['-c', '.storybook', '-o', '__build__', '--quiet']
     envVars = envVars
       .concat([
         `NODE_ENV=production`,

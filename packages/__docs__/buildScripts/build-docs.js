@@ -109,7 +109,6 @@ const options = {
     '**/template-app/**',
     '**/template-component/**',
     '**/template-package/**',
-    '**/ui-component-examples/src/**',
     '**/ui-test-*/src/**',
     '**/ui-scripts/src/**',
 

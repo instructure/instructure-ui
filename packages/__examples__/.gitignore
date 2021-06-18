@@ -2,3 +2,4 @@ node_modules/
 __build__/
 .babel-cache
 *.asketch.json
+prop-data.json

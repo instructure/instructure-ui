@@ -23,5 +23,5 @@
  */
 
 module.exports = {
-  stories: ['../stories.js']
+  stories: ['./stories/stories.js']
 }
