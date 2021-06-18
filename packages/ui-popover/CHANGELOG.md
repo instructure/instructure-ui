@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
+
+### Bug Fixes
+
+- **ui-popover:** inverse color Popover without arrow shouldn't have light border ([e7eea77](https://github.com/instructure/instructure-ui/commit/e7eea778a25070f55e3226664a20bb45ea2275c8))
+- **ui-popover:** recalculate offset and position on prop change ([c35c9f2](https://github.com/instructure/instructure-ui/commit/c35c9f24729ba23551a4cf48f5fbe19c30b7e182))
+
 # [8.5.0](https://github.com/instructure/instructure-ui/compare/v8.4.0...v8.5.0) (2021-06-09)
 
 ### Bug Fixes
