@@ -169,7 +169,17 @@ class Menu extends Component {
     /**
      * Whether or not an arrow pointing to the trigger should be rendered
      */
-    withArrow: PropTypes.bool
+    withArrow: PropTypes.bool,
+    /**
+     * The horizontal offset for the positioned content.
+     * Works only if `trigger` is provided.
+     */
+    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * The vertical offset for the positioned content.
+     * Works only if `trigger` is provided.
+     */
+    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
@@ -197,7 +207,9 @@ class Menu extends Component {
     show: undefined,
     id: undefined,
     type: undefined,
-    withArrow: true
+    withArrow: true,
+    offsetX: 0,
+    offsetY: 0
   }
 
   static Item = MenuItem
@@ -556,7 +568,9 @@ class Menu extends Component {
       disabled,
       onDismiss,
       onFocus,
-      onMouseOver
+      onMouseOver,
+      offsetX,
+      offsetY
     } = this.props
 
     return trigger ? (
@@ -577,6 +591,8 @@ class Menu extends Component {
         shouldReturnFocus
         onFocus={onFocus}
         onMouseOver={onMouseOver}
+        offsetX={offsetX}
+        offsetY={offsetY}
         ref={(el) => {
           this._popover = el
           if (typeof popoverRef === 'function') {
