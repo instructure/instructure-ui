@@ -467,8 +467,9 @@ class Popover extends Component<Props> {
       }
     }
 
-    // if the props the state is based on change,
-    // we need to recalculate the offset and placement
+    // since `offsetX`, `offsetY` and `placement` are saved into the state
+    // in the constructor and used from the state later,
+    // we need to update the state if these props change
     if (
       this.props.offsetX !== prevProps.offsetX ||
       this.props.offsetY !== prevProps.offsetY ||
