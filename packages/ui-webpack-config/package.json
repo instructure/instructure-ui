@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-webpack-config",
-  "version": "7.7.1",
+  "version": "7.8.0",
   "description": "A shared webpack config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -17,10 +17,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/babel-plugin-themeable-styles": "^7.7.1",
-    "@instructure/config-loader": "^7.7.1",
-    "@instructure/ui-babel-preset": "^7.7.1",
-    "@instructure/ui-component-examples": "^7.7.1",
+    "@instructure/babel-plugin-themeable-styles": "^7.8.0",
+    "@instructure/config-loader": "^7.8.0",
+    "@instructure/ui-babel-preset": "^7.8.0",
+    "@instructure/ui-component-examples": "^7.8.0",
     "css-loader": "^3.2.0",
     "dotenv": "^8.1.0",
     "eslint-loader": "^3.0.0",

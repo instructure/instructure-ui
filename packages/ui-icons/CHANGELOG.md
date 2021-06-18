@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.8.0](https://github.com/instructure/instructure-ui/compare/v7.7.1...v7.8.0) (2021-06-18)
+
+### Features
+
+- **ui-icons:** add crop, rotate-right and rotate-left icons ([6d184ba](https://github.com/instructure/instructure-ui/commit/6d184ba))
+- **ui-icons-build,ui-icons:** generate icons from svg files ([bc2935d](https://github.com/instructure/instructure-ui/commit/bc2935d))
+
 ## [7.7.1](https://github.com/instructure/instructure-ui/compare/v7.7.0...v7.7.1) (2021-06-09)
 
 **Note:** Version bump only for package @instructure/ui-icons
