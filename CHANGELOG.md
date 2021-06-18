@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
+
+### Bug Fixes
+
+- **ui-popover:** inverse color Popover without arrow shouldn't have light border ([e7eea77](https://github.com/instructure/instructure-ui/commit/e7eea778a25070f55e3226664a20bb45ea2275c8))
+- **ui-popover:** recalculate offset and position on prop change ([c35c9f2](https://github.com/instructure/instructure-ui/commit/c35c9f24729ba23551a4cf48f5fbe19c30b7e182))
+- **ui-test-sandbox:** fix issue with `emotion` can't insert node inside `head` ([361909c](https://github.com/instructure/instructure-ui/commit/361909c3718c35d190d4249918cc0bf7db6e93dc))
+
+### Features
+
+- **ui-menu:** propagate offset props from `Menu` to `Popover` ([ad54d1f](https://github.com/instructure/instructure-ui/commit/ad54d1f86585568dbe3a5b5aa6bd6b2711045b27))
+- add "tabbing out" logic to the `Drilldown Menu` pattern ([d5e5db3](https://github.com/instructure/instructure-ui/commit/d5e5db351c0425ad157af24305d4d540cd9f97f6))
+- **ui-icons:** add crop, rotate-right and rotate-left icons ([1d91032](https://github.com/instructure/instructure-ui/commit/1d9103226033768cfc150d9ff2f36f5de1cae0b5))
+- **ui-options:** add option to recolor the icon of Option.Item ([39e1caf](https://github.com/instructure/instructure-ui/commit/39e1caf04dc2e89c9dd812d85cc7af008262b104))
+- **ui-select,ui-simple-select:** pass option props to the label before/after render prop ([d548752](https://github.com/instructure/instructure-ui/commit/d548752fc0d7ba5d7943622d136d7022858bf8e2))
+
+### Performance Improvements
+
+- **ui-buttons:** use span instead of Flex ([e019e94](https://github.com/instructure/instructure-ui/commit/e019e94c7c8bce8434f7b348b7d9fd8e96b76191))
+- **ui-text-input:** replace Flex with styled spans ([51c3922](https://github.com/instructure/instructure-ui/commit/51c3922e3af43695476dc1a81014babc87c6aac6))
+
 # [8.5.0](https://github.com/instructure/instructure-ui/compare/v8.4.0...v8.5.0) (2021-06-09)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
+
+### Performance Improvements
+
+- **ui-text-input:** replace Flex with styled spans ([51c3922](https://github.com/instructure/instructure-ui/commit/51c3922e3af43695476dc1a81014babc87c6aac6))
+
 # [8.5.0](https://github.com/instructure/instructure-ui/compare/v8.4.0...v8.5.0) (2021-06-09)
 
 ### Bug Fixes

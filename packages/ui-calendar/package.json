@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-calendar",
-  "version": "8.5.0",
+  "version": "8.6.0",
   "description": "A calendar component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -25,24 +25,24 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.5.0",
-    "@instructure/ui-color-utils": "8.5.0",
-    "@instructure/ui-test-locator": "8.5.0",
-    "@instructure/ui-test-utils": "8.5.0",
-    "@instructure/ui-themes": "8.5.0"
+    "@instructure/ui-babel-preset": "8.6.0",
+    "@instructure/ui-color-utils": "8.6.0",
+    "@instructure/ui-test-locator": "8.6.0",
+    "@instructure/ui-test-utils": "8.6.0",
+    "@instructure/ui-themes": "8.6.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.5.0",
-    "@instructure/emotion": "8.5.0",
-    "@instructure/ui-a11y-content": "8.5.0",
-    "@instructure/ui-i18n": "8.5.0",
-    "@instructure/ui-prop-types": "8.5.0",
-    "@instructure/ui-react-utils": "8.5.0",
-    "@instructure/ui-testable": "8.5.0",
-    "@instructure/ui-utils": "8.5.0",
-    "@instructure/ui-view": "8.5.0",
-    "@instructure/uid": "8.5.0",
+    "@instructure/console": "8.6.0",
+    "@instructure/emotion": "8.6.0",
+    "@instructure/ui-a11y-content": "8.6.0",
+    "@instructure/ui-i18n": "8.6.0",
+    "@instructure/ui-prop-types": "8.6.0",
+    "@instructure/ui-react-utils": "8.6.0",
+    "@instructure/ui-testable": "8.6.0",
+    "@instructure/ui-utils": "8.6.0",
+    "@instructure/ui-view": "8.6.0",
+    "@instructure/uid": "8.6.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

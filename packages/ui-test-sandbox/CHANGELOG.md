@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
+
+### Bug Fixes
+
+- **ui-test-sandbox:** fix issue with `emotion` can't insert node inside `head` ([361909c](https://github.com/instructure/instructure-ui/commit/361909c3718c35d190d4249918cc0bf7db6e93dc))
+
 # [8.5.0](https://github.com/instructure/instructure-ui/compare/v8.4.0...v8.5.0) (2021-06-09)
 
 **Note:** Version bump only for package @instructure/ui-test-sandbox
