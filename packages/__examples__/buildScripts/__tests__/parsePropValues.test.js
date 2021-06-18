@@ -21,10 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const path = require('path')
 
-module.exports = {
-  getComponentPath: (configFilePath) => {
-    return path.resolve(path.dirname(configFilePath), '../index.tsx')
+import { expect } from '@instructure/ui-test-utils'
+import parsePropValues from '../parsePropValues'
+
+const src = `import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+export default class TestComponent extends Component {
+  static propTypes = {
+    variant: PropTypes.oneOf(['circle', 'rectangle']),
+    show: PropTypes.bool,
+    message: PropTypes.object,
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    variant: 'circle',
+    show: true,
+    message: null
+  }
+
+  render () {
+    return (
+      <span>{this.props.children}</span>
+    )
   }
 }
+`
+
+describe('parsePropValues', () => {
+  it('should parse a component correctly', () => {
+    expect(parsePropValues(src, 'testFilename')).to.deep.equal({
+      variant: ['circle', 'rectangle'],
+      show: [false, true]
+    })
+  })
+})

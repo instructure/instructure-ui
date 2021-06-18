@@ -44,8 +44,6 @@ const { resolver, parse } = require('react-docgen')
  * The prop values could be parsed via the `parsePropValues` function as follows:
  *
  * ```js
- * import parsePropValues from '@instructure/ui-component-examples'
- *
  * const sourceFilePath = 'path/to/MyComponent'
  * const propValues = parsePropValues(fs.readFileSync(sourceFilePath, 'utf8'))
  * ```

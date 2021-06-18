@@ -30,9 +30,6 @@ module.exports = {
   bail: !DEBUG,
   devtool: ENV === 'production' ? 'none' : 'cheap-module-source-map',
   node: { fs: 'empty' },
-  resolveLoader: {
-    alias: require('./resolveLoader/alias')
-  },
   module: {
     rules: require('./module/rules')
   },
