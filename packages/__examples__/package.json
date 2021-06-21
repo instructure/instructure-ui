@@ -11,15 +11,16 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "prestart": "node buildScripts/build-examples-json.js && yarn bundle",
+    "prestart": "yarn build:examples && yarn bundle",
     "start": " ui-scripts --server -p 9001",
-    "start:watch": "node buildScripts/build-examples-json.js && ui-build --examples --watch -p 9090",
+    "start:watch": "yarn build:examples && ui-build --examples --watch -p 9090",
     "build-storybook": "yarn bundle",
     "test:vrt": "ui-test --vrt -p 9001",
     "accept:vrt": "ui-test --vrt -p 9001 --auto-accept-changes",
-    "bundle": "node buildScripts/build-examples-json.js && ui-build --examples",
+    "bundle": "yarn build:examples && ui-build --examples",
     "clean": "ui-scripts --clean",
-    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json"
+    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json",
+    "build:examples": "node buildScripts/build-examples-json.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -31,8 +32,8 @@
     "@instructure/ui-icons": "8.6.0",
     "@instructure/ui-tooltip": "8.6.0",
     "@instructure/ui-view": "8.6.0",
-    "@instructure/uid": "8.6.0",
     "@instructure/ui-webpack-config": "8.6.0",
+    "@instructure/uid": "8.6.0",
     "@storybook/addons": "6.1.21",
     "@storybook/react": "6.1.21",
     "@storybook/theming": "6.1.21",
@@ -45,7 +46,7 @@
   "devDependencies": {
     "@instructure/ui-test-utils": "8.6.0",
     "globby": "^11",
-    "react-docgen": "^5",
-    "prop-types": "^15"
+    "prop-types": "^15",
+    "react-docgen": "^5"
   }
 }

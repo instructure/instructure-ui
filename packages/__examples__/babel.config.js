@@ -22,10 +22,5 @@
  * SOFTWARE.
  */
 module.exports = {
-  shouldPrintComment(value) {
-    const isTsRelatedComment = /@ts-expect-error|FIXME/.test(value)
-
-    return !isTsRelatedComment
-  },
   presets: ['@instructure/ui-babel-preset']
 }
