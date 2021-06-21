@@ -29,29 +29,42 @@ console.log('starting to build example prop combinations to ' + outputName)
 const path = require('path')
 const fs = require('fs')
 const globby = require('globby')
+const { fileURLToPath } = require('url')
 const parsePropValues = require('./parsePropValues')
 
 const projectRoot = path.resolve(__dirname, '../../')
-const filesToParse = '**/src/**/*.examples.ts*'
-const files = path.resolve(projectRoot, filesToParse)
+const packages = process.argv.slice(2)
 
-const ignorePaths = ['**/node_modules/**', '**/lib/**', '**/es/**']
-const ignore = ignorePaths.map((file) => '!' + path.resolve(projectRoot, file))
-const componentProps = {}
-globby([files, ...ignore]).then((matches) => {
-  matches.map((filepath) => {
+async function newFunction(packages) {
+  const files = packages.map((package) =>
+    path.resolve(projectRoot, `${package}/src/**/*.examples.ts*`)
+  )
+
+  const ignorePaths = ['**/node_modules/**', '**/lib/**', '**/es/**']
+  const ignore = ignorePaths.map(
+    (file) => '!' + path.resolve(projectRoot, file)
+  )
+
+  const matches = await globby([...files, ...ignore])
+
+  const componentProps = matches.reduce((result, current) => {
     // path to the component that is tested, e.g. /ui-tag/src/Tag/index.js
-    const componentPath = path.resolve(path.dirname(filepath), '../index.tsx')
+    const componentPath = path.resolve(path.dirname(current), '../index.tsx')
     const componentSource = fs.readFileSync(componentPath)
     // contains all the prop values and its variants
     const generatedPropValues = parsePropValues(componentSource, componentPath)
     const pathParts = componentPath.split('/')
     const componentName = pathParts[pathParts.length - 2]
-    componentProps[componentName] = generatedPropValues
-  })
+
+    return { ...result, [componentName]: generatedPropValues }
+  }, {})
+
   const everything = JSON.stringify(componentProps)
+
   fs.writeFileSync(outputName, everything)
 
   // eslint-disable-next-line no-console
   console.log('finished generating example prop combinations.')
-})
+}
+
+newFunction(packages.length ? packages : ['**'])
