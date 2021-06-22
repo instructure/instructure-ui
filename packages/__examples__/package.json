@@ -31,8 +31,8 @@
     "@instructure/ui-icons": "8.6.0",
     "@instructure/ui-tooltip": "8.6.0",
     "@instructure/ui-view": "8.6.0",
-    "@instructure/uid": "8.6.0",
     "@instructure/ui-webpack-config": "8.6.0",
+    "@instructure/uid": "8.6.0",
     "@storybook/addons": "6.1.21",
     "@storybook/react": "6.1.21",
     "@storybook/theming": "6.1.21",
@@ -45,7 +45,7 @@
   "devDependencies": {
     "@instructure/ui-test-utils": "8.6.0",
     "globby": "^11",
-    "react-docgen": "^5",
-    "prop-types": "^15"
+    "prop-types": "^15",
+    "react-docgen": "^5"
   }
 }
