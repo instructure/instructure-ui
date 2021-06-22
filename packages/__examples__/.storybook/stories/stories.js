@@ -26,7 +26,6 @@ import { storiesOf } from '@storybook/react'
 import { renderExample } from './renderExample.js'
 import { renderPage } from './renderPage.js'
 import generateComponentExamples from './generateComponentExamples.js'
-import React from 'react'
 // must be imported with Webpack because this file cannot contain async calls
 import propJSONData from '../../prop-data.json'
 
@@ -47,48 +46,50 @@ const componentsContext = require.context(
 let numStories = 0
 // eslint-disable-next-line no-console
 console.log(
-  `Creating stories for ${examplesContext.keys().length} components..`
+  `Creating stories for ${Object.keys(propJSONData).length} components..`
 )
 
-examplesContext.keys().map((requirePath) => {
-  const exampleDir = requirePath.split('/').slice(0, -2).join('/')
-  const Component = componentsContext(exampleDir + '/index.tsx').default
-  const ExamplesModule = examplesContext(requirePath).default // xy.example.jsx
-  const componentName = Component.displayName || Component.name
-  const generatedPropValues = propJSONData[componentName]
-  // merge in generated prop values:
-  ExamplesModule.propValues = Object.assign(
-    generatedPropValues,
-    ExamplesModule.propValues || {}
-  )
-  ExamplesModule.maxExamples = ExamplesModule.maxExamples
-    ? ExamplesModule.maxExamples
-    : 500
+Object.entries(propJSONData).map(
+  ([componentName, { exampleFilePath, generatedPropValues }]) => {
+    const requirePath = `./${exampleFilePath}`
 
-  const sections = generateComponentExamples(Component, ExamplesModule)
+    const exampleDir = requirePath.split('/').slice(0, -2).join('/')
+    const Component = componentsContext(exampleDir + '/index.tsx').default
+    const ExamplesModule = examplesContext(requirePath).default // xy.example.jsx
+    // merge in generated prop values:
+    ExamplesModule.propValues = Object.assign(
+      generatedPropValues,
+      ExamplesModule.propValues || {}
+    )
+    ExamplesModule.maxExamples = ExamplesModule.maxExamples
+      ? ExamplesModule.maxExamples
+      : 500
 
-  if (sections && sections.length > 0) {
-    const stories = storiesOf(componentName, module)
-    sections.forEach(({ pages, sectionName }) => {
-      pages.forEach((page, i) => {
-        // eslint-disable-next-line no-param-reassign
-        page.renderExample = renderExample
-        numStories++
-        stories.add(
-          `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
-          renderPage.bind(null, page),
-          {
-            chromatic: {
-              viewports: [1200],
-              pauseAnimationAtEnd: true,
-              delay: 700,
-              ...page.parameters
+    const sections = generateComponentExamples(Component, ExamplesModule)
+
+    if (sections && sections.length > 0) {
+      const stories = storiesOf(componentName, module)
+      sections.forEach(({ pages, sectionName }) => {
+        pages.forEach((page, i) => {
+          // eslint-disable-next-line no-param-reassign
+          page.renderExample = renderExample
+          numStories++
+          stories.add(
+            `${sectionName}${pages.length > 1 ? ` (page ${i + 1})` : ''}`,
+            renderPage.bind(null, page),
+            {
+              chromatic: {
+                viewports: [1200],
+                pauseAnimationAtEnd: true,
+                delay: 700,
+                ...page.parameters
+              }
             }
-          }
-        )
+          )
+        })
       })
-    })
+    }
   }
-})
+)
 // eslint-disable-next-line no-console
 console.log(`Created ${numStories} stories!`)

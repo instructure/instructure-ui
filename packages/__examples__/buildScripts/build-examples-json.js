@@ -29,13 +29,13 @@ console.log('starting to build example prop combinations to ' + outputName)
 const path = require('path')
 const fs = require('fs')
 const globby = require('globby')
-const { fileURLToPath } = require('url')
 const parsePropValues = require('./parsePropValues')
 
 const projectRoot = path.resolve(__dirname, '../../')
 const packages = process.argv.slice(2)
 
-async function newFunction(packages) {
+async function buildExamplesJSON(packagesToBuild = []) {
+  const packages = packagesToBuild.length ? packagesToBuild : ['**']
   const files = packages.map((package) =>
     path.resolve(projectRoot, `${package}/src/**/*.examples.ts*`)
   )
@@ -46,17 +46,35 @@ async function newFunction(packages) {
   )
 
   const matches = await globby([...files, ...ignore])
-
-  const componentProps = matches.reduce((result, current) => {
+  const componentProps = matches.reduce((result, absoluteExampleFilePath) => {
     // path to the component that is tested, e.g. /ui-tag/src/Tag/index.js
-    const componentPath = path.resolve(path.dirname(current), '../index.tsx')
+    const componentPath = path.resolve(
+      path.dirname(absoluteExampleFilePath),
+      '../index.tsx'
+    )
+    const componentFilePathParts = componentPath.split('/')
+    const exampleFilePathParts = absoluteExampleFilePath.split('/')
+    const [packageName] = componentFilePathParts.filter((path) =>
+      path.startsWith('ui-')
+    )
+
     const componentSource = fs.readFileSync(componentPath)
     // contains all the prop values and its variants
     const generatedPropValues = parsePropValues(componentSource, componentPath)
-    const pathParts = componentPath.split('/')
-    const componentName = pathParts[pathParts.length - 2]
+    const packageIndex = exampleFilePathParts.findIndex(
+      (value) => value === packageName
+    )
+    const exampleFilePath = exampleFilePathParts.slice(packageIndex).join('/')
+    const componentName =
+      componentFilePathParts[componentFilePathParts.length - 2]
 
-    return { ...result, [componentName]: generatedPropValues }
+    return {
+      ...result,
+      [componentName]: {
+        generatedPropValues,
+        exampleFilePath
+      }
+    }
   }, {})
 
   const everything = JSON.stringify(componentProps)
@@ -67,4 +85,4 @@ async function newFunction(packages) {
   console.log('finished generating example prop combinations.')
 }
 
-newFunction(packages.length ? packages : ['**'])
+buildExamplesJSON(packages)

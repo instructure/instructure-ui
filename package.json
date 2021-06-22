@@ -65,7 +65,7 @@
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
     "husky:pre-commit": "npm-run-all update:package:list commit:package:list lint:staged",
     "husky:pre-push": "yarn lint:commit",
-    "build-storybook": "lerna run build-storybook --stream --scope docs-examples",
+    "build-storybook": "lerna run bundle --stream --scope docs-examples",
     "prepare": "husky install",
     "ts:check": "lerna run ts:check --stream",
     "postinstall": "yarn build:node-scripts"
