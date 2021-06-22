@@ -12,14 +12,14 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "prestart": "yarn build:examples && yarn bundle",
-    "start": " ui-scripts --server -p 9001",
+    "start": "ui-scripts --server -p 9001",
     "start:watch": "yarn build:examples && ui-build --examples --watch -p 9090",
-    "build-storybook": "yarn bundle",
     "test:vrt": "ui-test --vrt -p 9001",
     "accept:vrt": "ui-test --vrt -p 9001 --auto-accept-changes",
     "bundle": "yarn build:examples && ui-build --examples",
     "clean": "ui-scripts --clean",
     "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json",
+    "build:storybook": "ui-build --examples",
     "build:examples": "node buildScripts/build-examples-json.js"
   },
   "license": "MIT",
