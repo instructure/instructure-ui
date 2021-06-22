@@ -117,3 +117,4 @@ export { Figure } from './src/Figure'
 // eslint-disable-next-line no-restricted-imports
 export { ToggleBlockquote } from './src/ToggleBlockquote'
 export { EmotionThemeProvider } from '@instructure/emotion'
+export { canvas, canvasHighContrast, instructure } from '@instructure/ui-themes'
