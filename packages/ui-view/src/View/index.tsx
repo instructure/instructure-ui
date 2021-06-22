@@ -107,6 +107,7 @@ type Props = {
   borderRadius: keyof typeof ThemeablePropValues.BORDER_RADII
   shadow: keyof typeof ThemeablePropValues.SHADOW_TYPES
   stacking: keyof typeof ThemeablePropValues.STACKING_TYPES
+  test: string
 }
 
 /**

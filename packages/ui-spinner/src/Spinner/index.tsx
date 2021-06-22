@@ -45,6 +45,7 @@ type Props = {
   margin?: any // TODO: ThemeablePropTypes.spacing
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
+  test: string
 }
 
 /**
