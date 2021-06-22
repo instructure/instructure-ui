@@ -100,7 +100,7 @@ type Props = {
   withVisualDebug?: boolean
   makeStyles?: (...args: any[]) => any
   styles?: any
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+  dir?: any
   margin: keyof typeof ThemeablePropValues.SPACING
   padding: keyof typeof ThemeablePropValues.SPACING
   borderWidth: keyof typeof ThemeablePropValues.BORDER_WIDTHS

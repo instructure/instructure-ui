@@ -44,6 +44,7 @@ jobs:
           yarn build:examples ${{ steps.changed_packages.outputs.changed_packages }}
           yarn build:storybook
       - name: Publish to Chromatic
+        continue-on-error: true
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
