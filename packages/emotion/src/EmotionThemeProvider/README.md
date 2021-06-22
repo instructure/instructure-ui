@@ -50,17 +50,19 @@ ReactDOM.render(
 ---
 example: true
 ---
-<div>
-  <Heading level="h3" margin="small small medium">I should have default font family.</Heading>
+<EmotionThemeProvider theme={canvas}>
+  <div>
+    <Heading level="h3" margin="small small medium">I should have default font family.</Heading>
 
-  <EmotionThemeProvider
-    theme={{
-      typography: { fontFamily: 'monospace' }
-    }}
-  >
-    <Heading level="h3" margin="small small">I should have monospace font family.</Heading>
-  </EmotionThemeProvider>
-</div>
+    <EmotionThemeProvider
+      theme={{
+        typography: { fontFamily: 'monospace' }
+      }}
+    >
+      <Heading level="h3" margin="small small">I should have monospace font family.</Heading>
+    </EmotionThemeProvider>
+  </div>
+</EmotionThemeProvider>
 ```
 
 ### Theme overrides
@@ -71,7 +73,8 @@ In case you are using multiple themes in your app, you can target a specific the
 ---
   example: true
 ---
-<div>
+<EmotionThemeProvider theme={canvas}>
+  <div>
   <Alert variant="info" margin="small">
     I am a default style Alert.
   </Alert>
@@ -101,6 +104,7 @@ In case you are using multiple themes in your app, you can target a specific the
     </Alert>
   </EmotionThemeProvider>
 </div>
+</EmotionThemeProvider>
 ```
 
 ### Global component theme overrides
@@ -118,6 +122,7 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
 ---
   example: true
 ---
+<EmotionThemeProvider theme={canvas}>
   <div>
     <Alert variant="info" margin="small">
       I am a default style Alert.
@@ -178,4 +183,5 @@ The `componentOverrides` can also be nested inside `themeOverrides`.
       </div>
     </EmotionThemeProvider>
   </div>
+</EmotionThemeProvider>
 ```
