@@ -1,9 +1,5 @@
 name: AUTO Visual Regression Test
 on:
-#   push:
-#     branches:
-#       - master
-#       - v7_maintenance
   pull_request:
     branches:
       - master
@@ -24,8 +20,29 @@ jobs:
         run: yarn install --check-files
       - name: Bootstrap project
         run: yarn bootstrap
+      - id: changed_files
+        uses: jitterbit/get-changed-files@v1
+      - name: Calculate changed packages
+        id: changed_packages
+        run: |
+          regexp="ui-[a-z0-9-]*"
+          packages=()
+
+          for changed_file in ${{ steps.changed_files.outputs.all }}; do
+             if [[ $changed_file =~ $regexp ]]; then
+              package_name=$(echo $changed_file | grep -o "$regexp")
+
+              if [[ ! " ${packages[@]} " =~ " ${package_name} " ]]; then
+                packages+=($package_name)
+              fi
+            fi
+          done
+          echo "::set-output name=changed_packages::${packages[@]}"
       - name: Build Storybook examples
-        run: yarn build-storybook
+        run: |
+          cd ./packages/__examples__/
+          yarn build:examples ${{ steps.changed_packages.outputs.changed_packages }}
+          yarn build:storybook
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
