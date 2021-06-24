@@ -23,6 +23,7 @@
  */
 
 const path = require('path')
+const fs = require('fs')
 const fse = require('fs-extra')
 
 const yargsInteractive = require('yargs-interactive')
@@ -33,10 +34,11 @@ const createFromTemplate = require('../utils/createFromTemplate')
 const promptContentName = require('../utils/promptContentName')
 
 module.exports = async ({
-  template,
-  name,
-  path: sourcePath = process.cwd(),
-  values: rawValues
+  template, // path the the /template folder
+  name, // e.g. 'myApp'
+  path: sourcePath = process.cwd(), // the path where it will be created
+  values: rawValues,
+  copyConfigFiles = false
 } = {}) => {
   let values = rawValues
 
@@ -82,18 +84,49 @@ module.exports = async ({
   info(`Creating \`${contentName}\` in \`${sourcePath}\``)
 
   try {
+    const generatedValues =
+      typeof values === 'function' ? values({ name: contentName }) : values
     createFromTemplate({
-      template,
+      template, // template-XX/template folder
       dest: destPath,
-      values: generateValues({ values, name: contentName })
+      values: generatedValues
     })
   } catch (err) {
     error('Encountered an error generating source from the template: ', err)
     process.exit(1)
   }
 
+  if (copyConfigFiles) {
+    copyFilesFromDependency(
+      '@instructure/ui-babel-preset',
+      destPath,
+      'babel-preset'
+    )
+    copyFilesFromDependency(
+      '@instructure/ui-eslint-config',
+      destPath,
+      'eslint-config'
+    )
+    copyFilesFromDependency(
+      '@instructure/ui-stylelint-config',
+      destPath,
+      'stylelint-config'
+    )
+    copyFilesFromDependency(
+      '@instructure/ui-webpack-config',
+      destPath,
+      'webpack-config'
+    )
+  }
   info('Success!')
 }
 
-const generateValues = ({ values, name }) =>
-  typeof values === 'function' ? values({ name }) : values
+function copyFilesFromDependency(dependencyId, destPath, destFolder) {
+  const fullDestPath = path.join(destPath, destFolder)
+  if (!fs.existsSync(fullDestPath)) {
+    fs.mkdirSync(fullDestPath)
+  }
+  // path to index.js in the dependency
+  const dependencyPath = require.resolve(dependencyId)
+  fse.copySync(path.dirname(dependencyPath), fullDestPath)
+}

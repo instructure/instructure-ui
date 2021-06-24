@@ -66,7 +66,7 @@ module.exports = (argv = {}) => {
   const { template: templatePath, dest, values = {} } = argv
 
   // Replace any template vars in filenames/dirnames
-  const replaceBasenameTemplateVars = ({ basename }) => {
+  const replaceBasenameTemplateVars = (basename) => {
     let newBasename = basename
     Object.keys(values).forEach((templateValue) => {
       newBasename = newBasename.replace(
@@ -82,7 +82,7 @@ module.exports = (argv = {}) => {
     if (fse.statSync(currentPath).isDirectory()) {
       // Create the directory at the dest path
       const basename = path.basename(currentPath)
-      const newBasename = replaceBasenameTemplateVars({ basename })
+      const newBasename = replaceBasenameTemplateVars(basename)
       const outputPath =
         basename !== newBasename
           ? path.join(path.dirname(destPath), newBasename)
@@ -118,7 +118,7 @@ module.exports = (argv = {}) => {
       fse.outputFileSync(
         path.join(
           path.dirname(destPath),
-          replaceBasenameTemplateVars({ basename })
+          replaceBasenameTemplateVars(basename)
         ),
         result,
         'utf-8'

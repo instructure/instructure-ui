@@ -11,6 +11,8 @@ category: packages
 
 A package containing template files to generate an instructure-ui component.
 
+DEPRECATED. This will be deleted in InstUI v9, please just copy and modify and exising component.
+
 ### Installation
 
 ```sh

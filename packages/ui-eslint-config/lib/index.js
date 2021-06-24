@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-const loadConfig = require('@instructure/config-loader')
-
 module.exports = {
   extends: [
     'eslint:recommended',
@@ -104,9 +102,7 @@ module.exports = {
       version: process.env.REACT_VERSION || '16.8.6'
     },
     polyfills:
-      loadConfig(
-        'polyfill',
-        require('@instructure/browserslist-config-instui/polyfills')
-      ).features || []
+      require('@instructure/browserslist-config-instui/polyfills').features ||
+      []
   }
 }

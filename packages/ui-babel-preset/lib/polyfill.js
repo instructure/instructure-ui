@@ -21,8 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const loadConfig = require('@instructure/config-loader')
-module.exports = loadConfig(
-  'polyfill',
-  require('@instructure/browserslist-config-instui/polyfills')
-).modules
+
+module.exports =
+  require('@instructure/browserslist-config-instui/polyfills').modules
