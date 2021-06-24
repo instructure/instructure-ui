@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-const loadConfig = require('@instructure/config-loader')
-
 module.exports = function (
   context,
   opts = {
@@ -175,10 +173,7 @@ function getNodeEnvConfig() {
 function getWebEnvConfig(opts) {
   return {
     targets: {
-      browsers: loadConfig(
-        'browserslist',
-        require('@instructure/browserslist-config-instui')
-      )
+      browsers: require('@instructure/browserslist-config-instui')
     },
     useBuiltIns: 'entry',
     corejs: 3,

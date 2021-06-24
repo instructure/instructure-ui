@@ -44,6 +44,7 @@ instui create app --name MyInstuiApp
 - **upgrade-packages** | Upgrade instructure-ui packages to the latest stable version.
 - **codemod** | Apply instructure-ui codemods to source at a specified path.
 - **codemod-v8** | Apply instructure-ui v8 codemods to source at a specified path.
+- **version** | Return the current version of instui-cli and exit.
 
 ### Documentation
 

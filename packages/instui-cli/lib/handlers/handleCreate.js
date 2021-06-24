@@ -31,30 +31,33 @@ const {
 } = require('@instructure/ui-template-scripts/lib/handlers')
 
 module.exports = async ({
-  contentType,
-  path: sourcePath,
-  name,
-  initialVersion
+  contentType, // e.g. 'package' or 'app'
+  path: sourcePath, // the path where it will be created
+  name // e.g. 'myApp'
 }) => {
   const pkgPath = require.resolve(
     `@instructure/template-${contentType}/package.json`
   )
   const pkg = require(pkgPath)
 
-  const dependencies = formatDependencies({ dependencies: pkg.dependencies })
-  const devDependencies = formatDependencies({
-    dependencies: pkg.devDependencies
-  })
+  const dependencies = formatDependencies(pkg.dependencies)
+  const pkgDependencies = Object.assign({}, pkg.devDependencies)
+  if (contentType === 'app') {
+    mergeInDependencies(pkgDependencies, '@instructure/ui-babel-preset')
+    mergeInDependencies(pkgDependencies, '@instructure/ui-eslint-config')
+    mergeInDependencies(pkgDependencies, '@instructure/ui-stylelint-config')
+    mergeInDependencies(pkgDependencies, '@instructure/ui-webpack-config')
+  }
+  const devDependencies = formatDependencies(pkgDependencies)
+
   const peerDependencies = formatDependencies({
     dependencies: pkg.peerDependencies
   })
 
-  const templateDirname = 'template'
-
-  const template = path.join(path.dirname(pkgPath), templateDirname)
+  const template = path.join(path.dirname(pkgPath), 'template')
 
   if (contentType === 'app') {
-    handleCreateFromTemplate({
+    await handleCreateFromTemplate({
       template,
       path: sourcePath,
       name,
@@ -62,10 +65,11 @@ module.exports = async ({
         NAME: name,
         DEPENDENCIES: dependencies,
         DEV_DEPENDENCIES: devDependencies
-      })
+      }),
+      copyConfigFiles: true
     })
   } else if (contentType === 'package') {
-    handleCreatePackage({
+    await handleCreatePackage({
       template,
       path: sourcePath,
       name,
@@ -95,10 +99,15 @@ module.exports = async ({
   }
 }
 
-const formatDependencies = ({ dependencies }) => {
+const formatDependencies = (dependencies) => {
   if (!dependencies) return ''
-
   return Object.keys(dependencies)
     .map((dependency) => `    "${dependency}": "${dependencies[dependency]}"`)
     .join(',\n')
+}
+
+const mergeInDependencies = (currentDependencies, packageToMerge) => {
+  const pkgPath = require.resolve(`${packageToMerge}/package.json`)
+  const pkg = require(pkgPath)
+  Object.assign(currentDependencies, pkg.dependencies)
 }

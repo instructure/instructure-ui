@@ -27,11 +27,6 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.6.0",
-    "@instructure/ui-eslint-config": "8.6.0",
-    "@instructure/ui-scripts": "8.6.0",
-    "@instructure/ui-stylelint-config": "8.6.0",
-    "@instructure/ui-webpack-config": "8.6.0",
     "html-webpack-plugin": "^4"
   }
 }

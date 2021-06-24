@@ -21,5 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const { info } = require('@instructure/command-utils')
 
-module.exports = require('./stylelint-config')
+exports.command = 'version'
+exports.desc = 'Return the current version of instui-cli and exit.'
+
+exports.handler = (argv) => {
+  const pjson = require('../../package.json')
+  info(pjson.version)
+}

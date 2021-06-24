@@ -2,17 +2,20 @@
   "name": "<%= NAME %>",
   "version": "1.0.0",
   "scripts": {
-    "start": "ui-build --bundle --watch -p 3000",
-    "build": "ui-build --bundle",
-    "lint": "ui-test --lint",
-    "lint:fix": "ui-test --lint --fix",
-    "clean": "ui-build --clean",
-    "open:sandbox": "ui-scripts open-sandbox"
+    "start": "node build-scripts/webpack.js --watch -p 3000",
+    "build": "node build-scripts/webpack.js --bundle",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx && stylelint **/*.css --allow-empty-input",
+    "lint:fix": "eslint ./src --ext .js,.jsx,.ts,.tsx  --fix && stylelint src/**/*.css --allow-empty-input --fix",
+    "clean": "rimraf __build__ .babel-cache .cache"
   },
   "dependencies": {
 <%= DEPENDENCIES %>
   },
   "devDependencies": {
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1",
+    "rimraf": "^3.0.0",
+    "eslint": "^7",
 <%= DEV_DEPENDENCIES %>
   }
 }
