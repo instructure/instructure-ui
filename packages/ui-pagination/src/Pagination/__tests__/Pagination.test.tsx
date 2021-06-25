@@ -408,64 +408,6 @@ describe('<Pagination />', async () => {
       expect(nextButton).to.not.exist()
     })
 
-    describe('when passing down props to View', async () => {
-      const allowedProps = {
-        margin: 'small',
-        as: 'section'
-      }
-
-      Object.keys(View.allowedProps)
-        .filter(
-          (prop) =>
-            prop !== 'theme' &&
-            prop !== 'children' &&
-            prop !== 'elementRef' &&
-            prop !== 'makeStyles' &&
-            prop !== 'styles'
-        )
-        .forEach((prop) => {
-          if (Object.keys(allowedProps).indexOf(prop) < 0) {
-            it(`should NOT allow the '${prop}' prop`, async () => {
-              const consoleError = stub(console, 'error')
-              const warning = `Warning: [Pagination] prop '${prop}' is not allowed.`
-              const props = { [prop]: 'foo' }
-
-              await mount(
-                <Pagination
-                  variant="compact"
-                  labelNext="Next"
-                  labelPrev="Previous"
-                  {...props}
-                >
-                  {buildPages(6)}
-                </Pagination>
-              )
-              await wait(() => {
-                expect(consoleError).to.be.calledWith(warning)
-              })
-            })
-          } else {
-            it(`should allow the '${prop}' prop`, async () => {
-              // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-              const props = { [prop]: allowedProps[prop] }
-              const consoleError = stub(console, 'error')
-
-              await mount(
-                <Pagination
-                  variant="compact"
-                  labelNext="Next"
-                  labelPrev="Previous"
-                  {...props}
-                >
-                  {buildPages(6)}
-                </Pagination>
-              )
-              expect(consoleError).to.not.be.called()
-            })
-          }
-        })
-    })
-
     it(`should pass down the elementRef prop`, async () => {
       const elementRef = stub()
 
