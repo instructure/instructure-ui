@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export { ThemeablePropValues } from './ThemeablePropValues'
+export * from './ThemeablePropValues'
 export { ThemeablePropTypes } from './ThemeablePropTypes'
 export { makeThemeVars } from './makeThemeVars'
 export { getShorthandPropValue } from './getShorthandPropValue'
