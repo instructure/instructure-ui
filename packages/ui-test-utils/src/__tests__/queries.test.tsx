@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import React, { BaseSyntheticEvent } from 'react'
 import {
   findWithLabel,
   findWithTitle,
@@ -449,7 +449,7 @@ describe('queries', async () => {
         expect(button.focused()).to.be.true()
       })
       it('should support initializing the event object', async () => {
-        const handleFocus = spy((e) => {
+        const handleFocus = spy((e: BaseSyntheticEvent) => {
           e.persist() // so that we can get the native event later
         })
 
@@ -459,14 +459,16 @@ describe('queries', async () => {
 
         await button.focus({ bubbles: true })
 
-        const nativeEvent = handleFocus.getCall(0).args[0].nativeEvent
+        const nativeEvent = (
+          handleFocus.getCall(0).args[0] as BaseSyntheticEvent<Event>
+        ).nativeEvent
 
         expect(nativeEvent.bubbles).to.be.true()
       })
     })
     describe('#click', async () => {
       it('should support spies on event methods', async () => {
-        const handleClick = spy((e) => {
+        const handleClick = spy((e: BaseSyntheticEvent) => {
           e.persist() // so that we can get the native event later
           e.preventDefault()
         })

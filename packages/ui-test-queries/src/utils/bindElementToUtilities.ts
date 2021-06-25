@@ -30,7 +30,9 @@ import { bindElementToEvents } from './bindElementToEvents'
 import { isElement } from './isElement'
 
 type EventMapTypes = {
-  [K in Extract<keyof typeof eventMap, string>]: (...args: any) => void
+  [K in Extract<keyof typeof eventMap, string>]: (
+    ...args: any
+  ) => Promise<Event>
 }
 
 // Cuts off the first element of a Function's parameter, e.g.
