@@ -22,10 +22,15 @@
  * SOFTWARE.
  */
 import {
-  ThemeablePropValues,
   WithStyleProps,
-  CSSObject
+  CSSObject,
+  Spacing,
+  BorderWidth,
+  BorderRadii,
+  Shadow,
+  Stacking
 } from '@instructure/emotion'
+
 export type ViewProps = WithStyleProps & {
   /**
    * The element to render as the component root, `span` by default
@@ -135,32 +140,32 @@ export type ViewProps = WithStyleProps & {
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
   /**
    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
    */
-  padding?: keyof typeof ThemeablePropValues.SPACING
+  padding?: Spacing
   /**
    * Accepts the familiar CSS shorthand to designate border widths corresponding
    * to edges
    */
-  borderWidth?: keyof typeof ThemeablePropValues.BORDER_WIDTHS
+  borderWidth?: BorderWidth
   /**
    * Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be
    * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
    */
-  borderRadius?: keyof typeof ThemeablePropValues.BORDER_RADII
+  borderRadius?: BorderRadii
   /**
    * Controls the shadow depth for the `<View />`
    */
-  shadow?: keyof typeof ThemeablePropValues.SHADOW_TYPES
+  shadow?: Shadow
 
   /**
    * Controls the z-index depth for the `<View />`
    */
-  stacking?: keyof typeof ThemeablePropValues.STACKING_TYPES
+  stacking?: Stacking
   /**
    * Specify a mouse cursor to use when hovering over the `<View />`
    */

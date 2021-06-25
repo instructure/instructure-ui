@@ -85,40 +85,33 @@ const ThemeablePropValues = {
   }
 } as const
 
-// SPACING
 type SpacingKeys = keyof typeof ThemeablePropValues.SPACING
-type SpacingValues = typeof ThemeablePropValues.SPACING[SpacingKeys]
-type Spacing =
+export type SpacingValues = typeof ThemeablePropValues.SPACING[SpacingKeys]
+export type Spacing =
   | `${SpacingValues}`
   | `${SpacingValues} ${SpacingValues}`
   | `${SpacingValues} ${SpacingValues} ${SpacingValues}`
   | `${SpacingValues} ${SpacingValues} ${SpacingValues} ${SpacingValues}`
 
-// SHADOW_TYPES
 type ShadowKeys = keyof typeof ThemeablePropValues.SHADOW_TYPES
-type Shadow = typeof ThemeablePropValues.SHADOW_TYPES[ShadowKeys]
-
-// STACKING_TYPES
-type StackingKeys = keyof typeof ThemeablePropValues.STACKING_TYPES
-type Stacking = typeof ThemeablePropValues.STACKING_TYPES[StackingKeys]
-
-// BACKGROUNDS
+export type Shadow = typeof ThemeablePropValues.SHADOW_TYPES[ShadowKeys]
+type Stackingkeys = keyof typeof ThemeablePropValues.STACKING_TYPES
+export type Stacking = typeof ThemeablePropValues.STACKING_TYPES[Stackingkeys]
 type BackgroundKeys = keyof typeof ThemeablePropValues.BACKGROUNDS
-type Background = typeof ThemeablePropValues.BACKGROUNDS[BackgroundKeys]
-
-// BORDER_RADII
+export type Background = typeof ThemeablePropValues.BACKGROUNDS[BackgroundKeys]
 type BorderRadiiKeys = keyof typeof ThemeablePropValues.BORDER_RADII
-type BorderRadiiValues = typeof ThemeablePropValues.BORDER_RADII[BorderRadiiKeys]
-type BorderRadii =
+export type BorderRadiiValues =
+  typeof ThemeablePropValues.BORDER_RADII[BorderRadiiKeys]
+export type BorderRadii =
   | `${BorderRadiiValues}`
   | `${BorderRadiiValues} ${BorderRadiiValues}`
   | `${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues}`
   | `${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues}`
 
-// BORDER_WIDTHS
 type BorderWidthKeys = keyof typeof ThemeablePropValues.BORDER_WIDTHS
-type BorderWidthValues = typeof ThemeablePropValues.BORDER_WIDTHS[BorderWidthKeys]
-type BorderWidth =
+export type BorderWidthValues =
+  typeof ThemeablePropValues.BORDER_WIDTHS[BorderWidthKeys]
+export type BorderWidth =
   | `${BorderWidthValues}`
   | `${BorderWidthValues} ${BorderWidthValues}`
   | `${BorderWidthValues} ${BorderWidthValues} ${BorderWidthValues}`
@@ -126,14 +119,3 @@ type BorderWidth =
 
 export default ThemeablePropValues
 export { ThemeablePropValues }
-export type {
-  SpacingValues,
-  Spacing,
-  Shadow,
-  Stacking,
-  Background,
-  BorderRadiiValues,
-  BorderRadii,
-  BorderWidthValues,
-  BorderWidth
-}
