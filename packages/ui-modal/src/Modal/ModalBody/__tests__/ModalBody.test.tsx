@@ -59,43 +59,4 @@ describe('<ModalBody />', async () => {
     expect(body.getDOMNode().style.width).to.equal('100%')
     expect(body.getDOMNode().style.height).to.equal('100%')
   })
-
-  describe('when passing down props to View', async () => {
-    const allowedProps = {
-      padding: 'small',
-      elementRef: () => {},
-      as: 'section'
-    }
-
-    Object.keys(View.allowedProps)
-      .filter(
-        (prop) =>
-          prop !== 'styles' && prop !== 'makeStyles' && prop !== 'children'
-      )
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, async () => {
-            const warning = `Warning: [ModalBody] prop '${prop}' is not allowed.`
-            const consoleError = stub(console, 'error')
-            const props = {
-              [prop]: 'foo'
-            }
-
-            await mount(<ModalBody {...props} />)
-            expect(consoleError).to.be.calledWith(warning)
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, async () => {
-            const consoleError = stub(console, 'error')
-            const props = {
-              // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-              [prop]: allowedProps[prop]
-            }
-
-            await mount(<ModalBody {...props} />)
-            expect(consoleError).to.not.be.called()
-          })
-        }
-      })
-  })
 })

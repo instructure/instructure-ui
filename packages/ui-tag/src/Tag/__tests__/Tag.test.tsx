@@ -63,43 +63,4 @@ describe('<Tag />', async () => {
     const tag = await TagLocator.find()
     expect(await tag.accessible()).to.be.true()
   })
-
-  describe('when passing down props to View', async () => {
-    const allowedProps = {
-      margin: 'small',
-      elementRef: () => {}
-    }
-
-    Object.keys(View.allowedProps)
-      .filter(
-        (prop) =>
-          prop !== 'theme' &&
-          prop !== 'children' &&
-          prop !== 'styles' &&
-          prop !== 'makeStyles'
-      )
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, async () => {
-            const warning = `Warning: [Tag] prop '${prop}' is not allowed.`
-            const props = {
-              [prop]: 'foo'
-            }
-            const consoleError = spy(console, 'error')
-
-            await mount(<Tag text="Summer" {...props} />)
-            expect(consoleError.firstCall.args[0]).to.be.equal(warning)
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, async () => {
-            // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-            const props = { [prop]: allowedProps[prop] }
-            const consoleError = stub(console, 'error')
-
-            await mount(<Tag text="Summer" {...props} />)
-            expect(consoleError).to.not.be.called()
-          })
-        }
-      })
-  })
 })
