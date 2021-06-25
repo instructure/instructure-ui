@@ -33,7 +33,12 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import { Item } from './Item'
 
@@ -45,8 +50,8 @@ type Props = {
   elementRef?: (...args: any[]) => any
   height?: string | number
   width?: string | number
-  margin?: any // TODO: ThemeablePropTypes.spacing
-  padding?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
+  padding?: Spacing
   display?: 'flex' | 'inline-flex'
   textAlign?: 'start' | 'center' | 'end'
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
@@ -219,7 +224,6 @@ class Flex extends Component<Props> {
       return (
         <View
           {...passthroughProps(this.props)}
-          //@ts-expect-error FIXME:
           css={styles.flex}
           elementRef={elementRef}
           as={as}

@@ -30,7 +30,12 @@ import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -40,8 +45,8 @@ type Props = {
   styles?: any
   delimiter?: 'none' | 'dashed' | 'solid'
   size?: 'small' | 'medium' | 'large'
-  margin?: any // TODO: ThemeablePropTypes.spacing
-  padding?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
+  padding?: Spacing
   spacing?:
     | 'none'
     | 'xxx-small'
@@ -143,7 +148,6 @@ class ListItem extends Component<Props> {
     return (
       <View
         {...passthroughProps(rest)}
-        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.listItem}
         as="li"
         margin={margin}

@@ -36,14 +36,12 @@ const renderBeforeInput = () => {
             type="notification"
             variant="primary"
             standalone
-            // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type '{ 0: stri... Remove this comment to see the full error message
             margin="0 xx-small xxx-small 0"
           />
           Dismissible tag
         </span>
       }
       dismissible
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       margin="0 xx-small 0 0"
     />
   )

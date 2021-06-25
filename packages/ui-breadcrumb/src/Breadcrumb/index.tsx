@@ -35,7 +35,7 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  ThemeablePropValues
+  Spacing
 } from '@instructure/emotion'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
@@ -47,7 +47,7 @@ type Props = {
   styles?: any
   label: string
   size?: 'small' | 'medium' | 'large'
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
 }
 
 /**
@@ -131,7 +131,6 @@ class Breadcrumb extends Component<Props> {
       <View
         role="navigation"
         as="div"
-        // @ts-expect-error ts-migrate(2322) FIXME:
         margin={this.props.margin}
         aria-label={this.props.label}
       >

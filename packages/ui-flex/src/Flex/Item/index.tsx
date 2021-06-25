@@ -28,7 +28,12 @@ import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -37,8 +42,8 @@ type Props = {
   styles?: any
   as?: React.ReactElement
   elementRef?: (...args: any[]) => any
-  margin?: any // TODO: ThemeablePropTypes.spacing
-  padding?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
+  padding?: Spacing
   align?: 'center' | 'start' | 'end' | 'stretch'
   direction?: 'row' | 'column'
   textAlign?: 'start' | 'center' | 'end'
@@ -171,7 +176,6 @@ class Item extends Component<Props> {
     return (
       <View
         {...props}
-        //@ts-expect-error FIXME:
         css={styles.flexItem}
         elementRef={elementRef}
         as={as}

@@ -43,7 +43,7 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  ThemeablePropValues
+  Spacing
 } from '@instructure/emotion'
 
 import generateStyles from './styles'
@@ -65,7 +65,7 @@ type Props = {
   withBackground?: boolean
   withBorder?: boolean
   isCondensed?: boolean
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
   cursor?: string
   href?: string
   onClick?: (...args: any[]) => any
@@ -411,7 +411,6 @@ class BaseButton extends Component<Props> {
         background="transparent"
         padding="none"
         borderWidth="none"
-        // @ts-expect-error ts-migrate(2322) FIXME:
         margin={margin}
         cursor={isDisabled ? 'not-allowed' : cursor}
         href={href}

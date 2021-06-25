@@ -33,7 +33,7 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  ThemeablePropValues
+  Spacing
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -45,7 +45,7 @@ type Props = {
   title?: React.ReactNode
   description?: string | React.ReactNode
   alignContent?: 'top' | 'center'
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
 }

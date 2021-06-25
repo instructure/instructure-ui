@@ -135,7 +135,6 @@ class Tab extends Component<Props> {
       <View
         {...passthroughProps(props)}
         as="div"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any; as: string; role: string; i... Remove this comment to see the full error message
         role="tab"
         id={id}
         onClick={this.handleClick}

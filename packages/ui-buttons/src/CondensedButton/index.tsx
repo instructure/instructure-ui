@@ -28,11 +28,7 @@ import PropTypes from 'prop-types'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import {
-  withStyle,
-  ThemeablePropTypes,
-  ThemeablePropValues
-} from '@instructure/emotion'
+import { withStyle, ThemeablePropTypes, Spacing } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
@@ -44,7 +40,7 @@ type Props = {
   as?: React.ReactElement | string
   interaction?: 'enabled' | 'disabled' | 'readonly'
   color?: 'primary' | 'primary-inverse'
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
   cursor?: string
   href?: string
   renderIcon?: React.ReactNode | ((...args: any[]) => any)

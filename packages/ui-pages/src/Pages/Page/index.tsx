@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { ThemeablePropTypes } from '@instructure/emotion'
+import { Spacing, ThemeablePropTypes } from '@instructure/emotion'
 import { findDOMNode, findTabbable } from '@instructure/ui-dom-utils'
 import { logError as error } from '@instructure/console'
 import { View } from '@instructure/ui-view'
@@ -33,7 +33,7 @@ import { PagesContext } from '..'
 
 type Props = {
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
-  padding?: any // TODO: ThemeablePropTypes.spacing
+  padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
 }
 

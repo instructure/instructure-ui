@@ -32,7 +32,12 @@ import { uid } from '@instructure/uid'
 import { Children } from '@instructure/ui-prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
@@ -69,7 +74,7 @@ type Props = {
   labelNext?: string
   labelPrev?: string
   variant?: 'full' | 'compact'
-  margin?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
   as?: React.ReactElement
   elementRef?: (...args: any[]) => any
   shouldHandleFocus?: boolean
@@ -239,7 +244,6 @@ class Pagination extends Component<Props> {
     return (
       <View
         as="span"
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '"small" | "0"' is not assignable to type '0 ... Remove this comment to see the full error message
         padding={visibleLabel ? 'small' : '0'}
         display={visibleLabel ? display : 'auto'}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_labelId' does not exist on type 'Pagina... Remove this comment to see the full error message
@@ -295,7 +299,6 @@ class Pagination extends Component<Props> {
     }
 
     return (
-      // @ts-expect-error ts-migrate(2740) FIXME:
       <View display="inline-block">
         {this.transferDisabledPropToChildren(visiblePages)}
       </View>
@@ -359,11 +362,7 @@ class Pagination extends Component<Props> {
         aria-labelledby={this.props.label && this._labelId}
       >
         {this.props.label && this.renderLabel()}
-        <View
-          display="inline-block"
-          // @ts-expect-error ts-migrate(2322) FIXME:
-          css={this.props.styles.pages}
-        >
+        <View display="inline-block" css={this.props.styles.pages}>
           {shouldShowPrevButton(this.props, currentPageIndex) &&
             this.renderArrowButton(this.props.labelPrev, -1, currentPageIndex)}
           {this.renderPages(currentPageIndex)}

@@ -25,7 +25,7 @@ import React, { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { ThemeablePropTypes } from '@instructure/emotion'
+import { Spacing, ThemeablePropTypes } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
@@ -34,7 +34,7 @@ import { InlineListItem } from './InlineListItem'
 
 type Props = {
   as?: 'ul' | 'ol'
-  margin?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
   size?: 'small' | 'medium' | 'large'
   delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'
   itemSpacing?:
@@ -121,7 +121,6 @@ class InlineList extends Component<Props> {
         {...passthroughProps(rest)}
         as={as}
         margin={margin}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '"0"' is not assignable to type '0 | "small" ... Remove this comment to see the full error message
         padding="0"
         elementRef={elementRef}
         display="block"

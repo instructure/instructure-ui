@@ -69,7 +69,7 @@ describe('<Spinner />', async () => {
       as: 'div'
     }
 
-    Object.keys(View.propTypes)
+    Object.keys(View.allowedProps)
       .filter(
         (prop) =>
           prop !== 'theme' &&

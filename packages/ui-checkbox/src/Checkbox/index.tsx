@@ -329,7 +329,6 @@ class Checkbox extends Component<Props> {
     const { messages } = this.props
 
     return messages && messages.length > 0 ? (
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '"small 0 0"' is not assignable to type '0 | ... Remove this comment to see the full error message
       <View display="block" margin="small 0 0">
         <FormFieldMessages messages={messages} />
       </View>
