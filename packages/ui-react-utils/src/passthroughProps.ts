@@ -24,6 +24,8 @@
 import isPropValid from '@emotion/is-prop-valid'
 // list of "valid" props https://github.com/emotion-js/emotion/blob/master/packages/is-prop-valid/src/props.js
 
+type PropTypesOrAllowedPropList = Record<string, any> | string[]
+
 const hasOwnProperty = Object.prototype.hasOwnProperty
 const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
   // code based on babel's _objectWithoutProperties
@@ -74,13 +76,16 @@ function pick(obj: Record<string, unknown>, keys: string[]) {
   return res
 }
 
-function pickProps(
-  props: Record<string, any>,
-  propTypes: Record<string, any>,
+function pickProps<T extends Record<string, any>>(
+  props: T,
+  propTypesOrAllowedPropList: PropTypesOrAllowedPropList,
   include?: string[]
 ) {
-  const keys = Object.keys(propTypes || {})
-  const combined = include ? keys.concat(include) : keys
+  const propsKeys = Array.isArray(propTypesOrAllowedPropList)
+    ? propTypesOrAllowedPropList
+    : Object.keys(propTypesOrAllowedPropList || {})
+  const combined = include ? propsKeys.concat(include) : propsKeys
+
   return pick(props, combined)
 }
 
