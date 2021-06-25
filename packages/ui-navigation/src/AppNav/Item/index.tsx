@@ -185,7 +185,6 @@ class Item extends Component<Props> {
       <View
         {...passthroughProps(this.props)}
         as={ElementType}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: any[]; as: string; href: string ... Remove this comment to see the full error message
         href={href}
         onClick={this.handleClick}
         disabled={isDisabled}

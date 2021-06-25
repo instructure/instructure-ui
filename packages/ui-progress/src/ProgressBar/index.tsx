@@ -29,7 +29,12 @@ import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -47,7 +52,7 @@ type Props = {
   meterColor?:
     | ((...args: any[]) => any)
     | ('info' | 'warning' | 'danger' | 'alert' | 'success' | 'brand')
-  margin?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
 }
@@ -186,7 +191,6 @@ class ProgressBar extends Component<Props> {
       <View
         {...passthroughProps(props)}
         as={this.props.as}
-        // @ts-expect-error ts-migrate(2322) FIXME:
         css={styles.progressBar}
         margin={this.props.margin}
         elementRef={this.props.elementRef}

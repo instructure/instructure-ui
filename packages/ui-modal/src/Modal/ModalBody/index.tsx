@@ -30,12 +30,17 @@ import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 type Props = {
-  padding?: any // TODO: ThemeablePropTypes.spacing
+  padding?: Spacing
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
   variant?: 'default' | 'inverse'

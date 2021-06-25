@@ -38,7 +38,7 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  ThemeablePropValues
+  Spacing
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -59,7 +59,7 @@ type Props = {
   href?: string
   disabled?: boolean
   readOnly?: boolean
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
 }
 
 /**
@@ -231,17 +231,12 @@ class Billboard extends Component<Props> {
     const Element = getElementType(Billboard, this.props)
 
     return (
-      <View
-        as="div"
-        // @ts-expect-error ts-migrate(2322) FIXME:
-        margin={margin}
-      >
+      <View as="div" margin={margin}>
         <View
           {...omitProps(this.props, {
             ...Billboard.propTypes,
-            ...View.propTypes
+            ...View.allowedProps
           })}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; type: string | null; as... Remove this comment to see the full error message
           type={Element === 'button' ? 'button' : null}
           as={Element}
           elementRef={elementRef}

@@ -34,7 +34,7 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  ThemeablePropValues
+  Spacing
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -49,7 +49,7 @@ type Props = {
   size?: 'auto' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
   shape?: 'circle' | 'rectangle'
   display?: 'inline-block' | 'block'
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
   onImageLoaded?: (...args: any[]) => any
   as?: React.ReactElement
   elementRef?: (...args: any[]) => any
@@ -190,7 +190,6 @@ class Avatar extends Component<Props> {
         role={this.props.alt ? 'img' : null}
         as={this.props.as}
         elementRef={this.props.elementRef}
-        // @ts-expect-error FIXME:
         margin={this.props.margin}
         css={styles.avatar}
         display={this.props.display}

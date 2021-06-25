@@ -414,7 +414,7 @@ describe('<Pagination />', async () => {
         as: 'section'
       }
 
-      Object.keys(View.propTypes)
+      Object.keys(View.allowedProps)
         .filter(
           (prop) =>
             prop !== 'theme' &&

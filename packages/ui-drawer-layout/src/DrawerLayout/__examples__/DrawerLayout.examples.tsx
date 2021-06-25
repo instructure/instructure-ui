@@ -46,7 +46,6 @@ export default {
             as="div"
             maxWidth="16rem"
             textAlign="center"
-            // @ts-expect-error ts-migrate(2322) FIXME: Type '"large auto"' is not assignable to type '0 |... Remove this comment to see the full error message
             margin="large auto"
             padding="small"
           >
@@ -60,7 +59,6 @@ export default {
           themeOverride={{ duration: 0 }}
         >
           <div style={{ background: 'white', height: '100%' }}>
-            {/* @ts-expect-error ts-migrate(2322) FIXME: Type '"x-large"' is not assignable to type '0 | "s... Remove this comment to see the full error message */}
             <View as="div" padding="x-large">
               Drawer content
             </View>

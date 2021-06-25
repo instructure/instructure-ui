@@ -29,11 +29,7 @@ import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import {
-  withStyle,
-  ThemeablePropTypes,
-  ThemeablePropValues
-} from '@instructure/emotion'
+import { withStyle, ThemeablePropTypes, Spacing } from '@instructure/emotion'
 
 import generateComponentTheme from './theme'
 import { BaseButton } from '../BaseButton'
@@ -51,7 +47,7 @@ type Props = {
   shape?: 'rectangle' | 'circle'
   withBackground?: boolean
   withBorder?: boolean
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
   cursor?: string
   href?: string
 }

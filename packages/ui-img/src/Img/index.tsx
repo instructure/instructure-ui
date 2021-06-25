@@ -30,7 +30,12 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { supportsObjectFit } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +46,7 @@ type Props = {
   src: string
   alt?: string
   display?: 'inline-block' | 'block'
-  margin?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
   overlay?: {
     color: string
     opacity: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
@@ -185,7 +190,6 @@ class Img extends Component<Props> {
       }
 
       return (
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (false | Element | undefined)[];... Remove this comment to see the full error message
         <View {...rootProps} as="span" css={styles.container}>
           {
             !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
@@ -195,7 +199,6 @@ class Img extends Component<Props> {
       )
     } else {
       return (
-        // @ts-expect-error ts-migrate(2739) FIXME: Type '{ as: string; alt: string; css: any; src: st... Remove this comment to see the full error message
         <View {...containerProps} {...imageProps} {...a11yProps} as="img" />
       )
     }

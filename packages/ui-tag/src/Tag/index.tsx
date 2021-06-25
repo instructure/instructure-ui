@@ -34,7 +34,7 @@ import {
   withStyle,
   jsx,
   ThemeablePropTypes,
-  ThemeablePropValues
+  Spacing
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -49,7 +49,7 @@ type Props = {
   disabled?: boolean
   readOnly?: boolean
   dismissible?: boolean
-  margin?: keyof typeof ThemeablePropValues.SPACING
+  margin?: Spacing
   onClick?: (...args: any[]) => any
   elementRef?: (...args: any[]) => any
   size?: 'small' | 'medium' | 'large'

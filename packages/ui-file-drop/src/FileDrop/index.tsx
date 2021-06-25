@@ -469,7 +469,6 @@ class FileDrop extends Component<Props, State> {
     const focusColor =
       this.state.isDragRejected || this.invalid ? 'danger' : undefined
     return (
-      // @ts-expect-error ts-migrate(2739) FIXME:
       <View
         display={display}
         position="relative" // contain visually hidden file input element
@@ -487,7 +486,6 @@ class FileDrop extends Component<Props, State> {
           onDragLeave={this.handleDragLeave}
           onDrop={this.handleChange}
         >
-          {/* @ts-expect-error ts-migrate(2739) FIXME: */}
           <View
             display="block"
             position="relative"
@@ -498,7 +496,6 @@ class FileDrop extends Component<Props, State> {
           >
             <span css={(this.props as any).styles.fileDropLabelContent}>
               <span css={(this.props as any).styles.fileDropLayout}>
-                {/* @ts-expect-error ts-migrate(2740) FIXME: */}
                 <View height={height}>{this.renderLabel()}</View>
               </span>
             </span>
@@ -522,7 +519,6 @@ class FileDrop extends Component<Props, State> {
           disabled={this.functionallyDisabled}
         />
         {this.hasMessages ? (
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '"small 0 0"' is not assignable to type '0 | ... Remove this comment to see the full error message
           <View display="block" margin="small 0 0">
             <FormFieldMessages
               // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.

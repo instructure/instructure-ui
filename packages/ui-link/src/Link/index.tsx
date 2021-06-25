@@ -39,7 +39,12 @@ import {
 import { logWarn as warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -49,7 +54,7 @@ type Props = {
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
   interaction?: 'enabled' | 'disabled'
-  margin?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
   renderIcon?: ((...args: any[]) => any) | React.ReactNode
   iconPlacement?: 'start' | 'end'
   display?: 'auto' | 'block' | 'inline-block' | 'flex' | 'inline-flex'
@@ -319,7 +324,6 @@ class Link extends Component<Props> {
         as={this.element}
         display={this.display}
         margin={margin}
-        // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: (string | number | boolean | {} ... Remove this comment to see the full error message
         href={href}
         onClick={this.handleClick}
         onFocus={this.handleFocus}

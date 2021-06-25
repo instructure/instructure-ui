@@ -47,7 +47,7 @@ import { safeCloneElement, callRenderProp } from '@instructure/ui-react-utils'
 import { createChainedFunction, shallowEqual, px } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
-import { ThemeablePropTypes } from '@instructure/emotion'
+import { Shadow, Stacking, ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 
 import { FocusRegion } from '@instructure/ui-a11y-utils'
@@ -59,8 +59,8 @@ type Props = {
   withArrow?: boolean
   color?: 'primary' | 'primary-inverse'
   placement?: any // TODO: PositionPropTypes.placement
-  shadow?: any // TODO: ThemeablePropTypes.shadow
-  stacking?: any // TODO: ThemeablePropTypes.stacking
+  shadow?: Shadow
+  stacking?: Stacking
   contentRef?: (...args: any[]) => any
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   screenReaderLabel?: string

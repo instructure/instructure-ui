@@ -31,7 +31,12 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { RatingIcon } from '../RatingIcon'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 import generateStyle from './styles'
 
 type Props = {
@@ -42,7 +47,7 @@ type Props = {
   valueMax?: number
   valueNow?: number
   animateFill?: boolean
-  margin?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
