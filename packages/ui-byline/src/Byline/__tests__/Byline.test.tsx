@@ -105,7 +105,7 @@ describe('<Byline />', async () => {
       'elementRef'
     ]
 
-    Object.keys(View.propTypes)
+    Object.keys(View.allowedProps)
       .filter((prop) => !ignoreProps.includes(prop))
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {

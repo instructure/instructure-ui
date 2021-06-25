@@ -67,7 +67,7 @@ describe('<ModalBody />', async () => {
       as: 'section'
     }
 
-    Object.keys(View.propTypes)
+    Object.keys(View.allowedProps)
       .filter(
         (prop) =>
           prop !== 'styles' && prop !== 'makeStyles' && prop !== 'children'

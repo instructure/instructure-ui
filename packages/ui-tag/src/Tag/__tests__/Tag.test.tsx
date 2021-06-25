@@ -70,7 +70,7 @@ describe('<Tag />', async () => {
       elementRef: () => {}
     }
 
-    Object.keys(View.propTypes)
+    Object.keys(View.allowedProps)
       .filter(
         (prop) =>
           prop !== 'theme' &&
