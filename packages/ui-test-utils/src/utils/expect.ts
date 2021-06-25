@@ -30,7 +30,7 @@ import promised from 'chai-as-promised'
 
 import assertions from './assertions'
 
-const init = (chai) => {
+const init = (chai: Chai.ChaiStatic) => {
   chai.use(sinon)
   chai.use(exclude)
   chai.use(string)

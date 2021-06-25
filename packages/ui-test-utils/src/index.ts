@@ -59,6 +59,50 @@ import { expect } from './utils/expect'
 
 import { generateA11yTests } from './utils/generateA11yTests'
 
+// these are defined in assertions.ts
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  export namespace Chai {
+    interface Assertion {
+      // @ts-expect-error This is intentionally overridden in Assertions.ts
+      readonly contain: Assertion
+      exactly(expected: number): Assertion
+      text(expected: string): void
+      className(expected: string): void
+      descendants(expected: string): void
+      children(expected: string): void
+      ancestors(expected: string): void
+      parents(expected: string): void
+      attribute(
+        expectedAttribute: string,
+        expectedAttributeValue?: string
+      ): void
+      style(expected: string, expectedAttributeValue?: string | number): void
+      bounds(expected: string, expectedAttributeValue?: string | number): void
+      tagName(expected: string): void
+      id(expected: string): void
+      visible(): void
+      clickable(): void
+      focus(): void
+      focused(): void
+      focusable(): void
+      tabbable(): void
+      checked(): void
+      selected(): void
+      disabled(): void
+      enabled(): void
+      readonly(): void
+      accessible(): void
+      role(expected: string): void
+      title(expected: string): void
+      value(expected: string): void
+      label(expected: string): void
+      children(expected: string): void
+      children(expected: string): void
+    }
+  }
+}
+
 // aliases for backwards compat:
 const within = wrapQueryResult
 const wrap = wrapQueryResult

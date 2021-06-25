@@ -3502,6 +3502,13 @@
   dependencies:
     type-detect "4.0.8"
 
+"@sinonjs/fake-timers@^7.1.0":
+  version "7.1.2"
+  resolved "https://registry.npmjs.org/@sinonjs/fake-timers/-/fake-timers-7.1.2.tgz#2524eae70c4910edccf99b2f4e6efc5894aff7b5"
+  integrity sha512-iQADsW4LBMISqZ6Ci1dupJL9pprqwcVFTcOsEmQOEhW+KLCVn/Y4Jrvg2k19fIHCp+iFprriYPTdRcQR8NbUPg==
+  dependencies:
+    "@sinonjs/commons" "^1.7.0"
+
 "@sinonjs/formatio@^3.2.1":
   version "3.2.2"
   resolved "https://registry.npmjs.org/@sinonjs/formatio/-/formatio-3.2.2.tgz#771c60dfa75ea7f2d68e3b94c7e888a78781372c"
@@ -4442,6 +4449,25 @@
     "@types/node" "*"
     "@types/responselike" "*"
 
+"@types/chai-as-promised@*", "@types/chai-as-promised@^7.1.1":
+  version "7.1.4"
+  resolved "https://registry.npmjs.org/@types/chai-as-promised/-/chai-as-promised-7.1.4.tgz#caf64e76fb056b8c8ced4b761ed499272b737601"
+  integrity sha512-1y3L1cHePcIm5vXkh1DSGf/zQq5n5xDKG1fpCvf18+uOkpce0Z1ozNFPkyWsVswK7ntN1sZBw3oU6gmN+pDUcA==
+  dependencies:
+    "@types/chai" "*"
+
+"@types/chai-string@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.npmjs.org/@types/chai-string/-/chai-string-1.4.2.tgz#0f116504a666b6c6a3c42becf86634316c9a19ac"
+  integrity sha512-ld/1hV5qcPRGuwlPdvRfvM3Ka/iofOk2pH4VkasK4b1JJP1LjNmWWn0LsISf6RRzyhVOvs93rb9tM09e+UuF8Q==
+  dependencies:
+    "@types/chai" "*"
+
+"@types/chai@*", "@types/chai@^4.2.0":
+  version "4.2.19"
+  resolved "https://registry.npmjs.org/@types/chai/-/chai-4.2.19.tgz#80f286b515897413c7a35bdda069cc80f2344233"
+  integrity sha512-jRJgpRBuY+7izT7/WNXP/LsMO9YonsstuL+xuvycDyESpoDoIAsMd7suwpB4h9oEWB+ZlPTqJJ8EHomzNhwTPQ==
+
 "@types/color-convert@^2.0.0":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@types/color-convert/-/color-convert-2.0.0.tgz#8f5ee6b9e863dcbee5703f5a517ffb13d3ea4e22"
@@ -4475,6 +4501,14 @@
   integrity sha512-W24e3Ycz1UZPgr1ZEDHlK4XnvOr+CpJH3qNsFeqXwwlW/9END9gxn3oJSsp7gYdiQxrXUHwUUd3xuzVz37MrZQ==
   dependencies:
     "@types/node" "*"
+
+"@types/dirty-chai@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/@types/dirty-chai/-/dirty-chai-2.0.2.tgz#eeac4802329a41ed7815ac0c1a6360335bf77d0c"
+  integrity sha512-BruwIN/UQEU0ePghxEX+OyjngpOfOUKJQh3cmfeq2h2Su/g001iljVi3+Y2y2EFp3IPgjf4sMrRU33Hxv1FUqw==
+  dependencies:
+    "@types/chai" "*"
+    "@types/chai-as-promised" "*"
 
 "@types/download@^8.0.0":
   version "8.0.0"
@@ -4775,6 +4809,21 @@
   version "7.3.6"
   resolved "https://registry.npmjs.org/@types/semver/-/semver-7.3.6.tgz#e9831776f4512a7ba6da53e71c26e5fb67882d63"
   integrity sha512-0caWDWmpCp0uifxFh+FaqK3CuZ2SkRR/ZRxAV5+zNdC3QVUi6wyOJnefhPvtNt8NQWXB5OA93BUvZsXpWat2Xw==
+
+"@types/sinon-chai@^3.2.5":
+  version "3.2.5"
+  resolved "https://registry.npmjs.org/@types/sinon-chai/-/sinon-chai-3.2.5.tgz#df21ae57b10757da0b26f512145c065f2ad45c48"
+  integrity sha512-bKQqIpew7mmIGNRlxW6Zli/QVyc3zikpGzCa797B/tRnD9OtHvZ/ts8sYXV+Ilj9u3QRaUEM8xrjgd1gwm1BpQ==
+  dependencies:
+    "@types/chai" "*"
+    "@types/sinon" "*"
+
+"@types/sinon@*":
+  version "10.0.2"
+  resolved "https://registry.npmjs.org/@types/sinon/-/sinon-10.0.2.tgz#f360d2f189c0fd433d14aeb97b9d705d7e4cc0e4"
+  integrity sha512-BHn8Bpkapj8Wdfxvh2jWIUoaYB/9/XhsL0oOvBfRagJtKlSl9NWPcFOz2lRukI9szwGxFtYZCTejJSqsGDbdmw==
+  dependencies:
+    "@sinonjs/fake-timers" "^7.1.0"
 
 "@types/sinon@^7.4.2":
   version "7.5.2"

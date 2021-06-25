@@ -22,19 +22,46 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { ElementType } from 'react'
 import { mount } from '@instructure/ui-test-sandbox'
 import { accessible } from '@instructure/ui-test-queries'
 
 import { expect } from './expect'
 
-const renderExample = ({ Component, componentProps, key }) => (
-  <Component key={key} {...componentProps} />
-)
+type ComponentExample = {
+  Component: ElementType
+  componentProps: any
+  exampleProps: any
+  key: string
+}
 
-export function generateA11yTests({ componentName, sections }, only = []) {
+type ExampleSection = {
+  sectionName: string
+  propName: string
+  propValue: string
+  pages: {
+    examples: ComponentExample[]
+    index: number
+  }[]
+}
+
+const renderExample = ({
+  Component,
+  componentProps,
+  key
+}: ComponentExample) => <Component key={key} {...componentProps} />
+
+// this is coming from generateComponentExamples.js in __examples__
+// TODO This is broken. It was using the examples-loader to preprocess the data.
+export function generateA11yTests(
+  {
+    componentName,
+    sections
+  }: { componentName: string; sections: ExampleSection[] },
+  only: any[] = []
+) {
   describe(`${componentName} should meet accessibility standards`, async () => {
-    sections.forEach(({ pages, sectionName, propName, propValue }, i) => {
+    sections.forEach(({ pages, propName, propValue }, i) => {
       if (only[0] && i === only[0]) return
       const description = propName
         ? `rendered with prop '${propName}' = '${propValue}'`

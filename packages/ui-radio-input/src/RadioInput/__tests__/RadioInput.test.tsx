@@ -260,6 +260,7 @@ describe('<RadioInput />', async () => {
       ref.focus()
 
       await wait(() => {
+        // @ts-expect-error This is intentionally overridden in assertions.ts
         expect(radioInput).to.contain.focus()
       })
     })

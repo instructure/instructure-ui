@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+
+import React, { ReactInstance } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import {
@@ -30,30 +31,49 @@ import {
   isElement,
   matches
 } from '@instructure/ui-test-queries'
+import { WrappedRef } from '@instructure/ui-test-sandbox/src/utils/reactComponentWrapper'
+import { QueryOrHelperType } from '@instructure/ui-test-queries/src/utils/bindElementToUtilities'
 
-export default function assertions(chai, utils) {
+type AssertionParams = {
+  wrapper?: QueryOrHelperType
+  markup: () => string
+  flag?: any
+  arg1?: any
+  arg2?: any
+  arg3?: any
+  sig?: string
+  inspect?: any //ChaiUtils.inspect
+}
+type AssertionMethod = (arg: AssertionParams) => void
+
+export default function assertions(
+  chai: Chai.ChaiStatic,
+  utils: Chai.ChaiUtils
+) {
   const { flag, inspect } = utils
   const { Assertion } = chai
 
-  function wrapObj(obj) {
-    if (obj && typeof obj.getDOMNode === 'function') {
-      return obj
+  function wrapObj(obj: ReactInstance | undefined | Element | WrappedRef) {
+    if (obj && typeof (obj as WrappedRef).getDOMNode === 'function') {
+      return obj as unknown as QueryOrHelperType
     }
 
     let node
 
     if (isElement(obj)) {
-      node = obj
+      node = obj as Element
     } else if (React.isValidElement(obj)) {
-      node = findDOMNode(obj)
+      node = findDOMNode(obj as ReactInstance)
     }
 
     if (node) {
-      return wrapQueryResult(node)
+      return wrapQueryResult(node as Element)
     }
+    return undefined
   }
 
-  function addAssertion(name, assertion) {
+  function addAssertion(name: string, assertion: AssertionMethod) {
+    // @ts-expect-error don't know how to type this..
     if (Assertion.prototype[name]) {
       overwriteMethod(name, assertion)
     } else {
@@ -61,45 +81,53 @@ export default function assertions(chai, utils) {
     }
   }
 
-  function overwriteProperty(name, assertion) {
-    Assertion.overwriteProperty(name, function (_super) {
-      return wrapOverwriteAssertion(assertion, _super)
-    })
+  function overwriteProperty(name: string, assertion: AssertionMethod) {
+    Assertion.overwriteProperty(
+      name,
+      function (_super?: (...args: any[]) => any) {
+        return wrapOverwriteAssertion(assertion, _super!)
+      }
+    )
   }
 
-  function overwriteMethod(name, assertion) {
+  function overwriteMethod(name: string, assertion: AssertionMethod) {
     Assertion.overwriteMethod(name, function (_super) {
       return wrapOverwriteAssertion(assertion, _super)
     })
   }
 
-  function addMethod(name, assertion) {
+  function addMethod(name: string, assertion: AssertionMethod) {
     Assertion.addMethod(name, wrapAssertion(assertion))
   }
 
-  function addChainableMethod(name, assertion) {
+  function addChainableMethod(name: string, assertion: AssertionMethod) {
     Assertion.addChainableMethod(name, wrapAssertion(assertion))
   }
 
-  function overwriteChainableMethod(name, assertion) {
+  function overwriteChainableMethod(name: string, assertion: AssertionMethod) {
     Assertion.overwriteChainableMethod(
       name,
       function (_super) {
         return wrapOverwriteAssertion(assertion, _super)
       },
-      function (_super) {
-        return function () {
-          _super.call(this)
+      function (_super?: () => unknown) {
+        return function (this: unknown) {
+          _super!.call(this)
         }
       }
     )
   }
 
-  function wrapOverwriteAssertion(assertion, _super) {
-    return function (arg1, arg2) {
+  function wrapOverwriteAssertion(
+    assertion: AssertionMethod,
+    _super: (...args: any[]) => any
+  ) {
+    return function (this: any, arg1: any, arg2: any) {
       const wrapper = wrapObj(flag(this, 'object'))
 
       if (!wrapper) {
+        // @ts-expect-error TODO this needs new syntax
+        // eslint-disable-next-line prefer-rest-params
         return _super.apply(this, arguments)
       }
 
@@ -115,11 +143,11 @@ export default function assertions(chai, utils) {
     }
   }
 
-  function wrapAssertion(assertion) {
-    return function (arg1, arg2) {
+  function wrapAssertion(assertion: AssertionMethod) {
+    return function (this: any, arg1: any, arg2: any) {
       const wrapper = wrapObj(flag(this, 'object'))
 
-      const config = {
+      const config: Partial<AssertionParams> = {
         wrapper,
         arg1,
         flag,
@@ -135,96 +163,113 @@ export default function assertions(chai, utils) {
         config.arg2 = arg2
       }
 
-      assertion.call(this, config)
+      assertion.call(this, config as AssertionParams)
     }
   }
 
-  overwriteProperty('not', function () {
+  overwriteProperty('not', function (this: Record<string, any>) {
     flag(this, 'negate', true)
   })
 
-  addChainableMethod('exactly', function exactly({ flag, arg1 }) {
-    flag(this, 'exactlyCount', arg1)
-  })
+  addChainableMethod(
+    'exactly',
+    function exactly(this: unknown, { flag, arg1 }) {
+      flag(this, 'exactlyCount', arg1)
+    }
+  )
 
-  addAssertion('text', function text({
-    wrapper,
-    markup,
-    flag,
-    arg1,
-    arg2,
-    sig
-  }) {
-    const actual = wrapper.text()
+  addAssertion(
+    'text',
+    function text(
+      this: Chai.AssertionPrototype,
+      { wrapper, markup, flag, arg1, arg2, sig }
+    ) {
+      const actual = wrapper!.text() // TODO check if this is this never null
 
-    if (typeof arg1 !== 'undefined') {
-      if (flag(this, 'contains')) {
+      if (typeof arg1 !== 'undefined') {
+        if (flag(this, 'contains')) {
+          this.assert(
+            actual && actual.indexOf(String(arg1)) > -1,
+            () =>
+              `expected ${sig} to contain text #{exp}, but it has #{act} ${markup()}`,
+            () =>
+              `expected ${sig} not to contain text #{exp}, but it has #{act} ${markup()}`,
+            arg1,
+            actual
+          )
+        } else {
+          this.assert(
+            actual && matches(actual, arg1, arg2),
+            () =>
+              `expected ${sig} to have text #{exp}, but it has #{act} ${markup()}`,
+            () =>
+              `expected ${sig} to not have text #{exp}, but it has #{act} ${markup()}`,
+            arg1,
+            actual
+          )
+        }
+      }
+
+      flag(this, 'object', actual)
+    }
+  )
+
+  overwriteChainableMethod(
+    'contain',
+    function contain(
+      this: Chai.AssertionPrototype,
+      { wrapper, markup, arg1, sig }
+    ) {
+      if (arg1) {
         this.assert(
-          actual && actual.indexOf(String(arg1)) > -1,
+          wrapper && wrapper.contains(arg1),
           () =>
-            `expected ${sig} to contain text #{exp}, but it has #{act} ${markup()}`,
+            `expected ${sig} to contain ${elementToString(arg1)} ${markup()}`,
           () =>
-            `expected ${sig} not to contain text #{exp}, but it has #{act} ${markup()}`,
-          arg1,
-          actual
-        )
-      } else {
-        this.assert(
-          actual && matches(actual, arg1, arg2),
-          () =>
-            `expected ${sig} to have text #{exp}, but it has #{act} ${markup()}`,
-          () =>
-            `expected ${sig} to not have text #{exp}, but it has #{act} ${markup()}`,
-          arg1,
-          actual
+            `expected ${sig} to not contain ${elementToString(
+              arg1
+            )} ${markup()}`,
+          arg1
         )
       }
     }
+  )
 
-    flag(this, 'object', actual)
-  })
+  addAssertion(
+    'className',
+    function className(
+      this: Chai.AssertionPrototype,
+      { wrapper, markup, arg1, sig }: AssertionParams
+    ) {
+      const actual = wrapper!.classNames() // TODO check if this is this never null
 
-  overwriteChainableMethod('contain', function contain({
-    wrapper,
-    markup,
-    arg1,
-    sig
-  }) {
-    if (arg1) {
       this.assert(
-        wrapper && wrapper.contains(arg1),
-        () => `expected ${sig} to contain ${elementToString(arg1)} ${markup()}`,
+        wrapper && wrapper.hasClass(arg1),
         () =>
-          `expected ${sig} to not contain ${elementToString(arg1)} ${markup()}`,
+          `expected ${sig} to have a #{exp} class, but it has #{act} ${markup()}`,
+        () =>
+          `expected ${sig} to not have a #{exp} class, but it has #{act} ${markup()}`,
+        arg1,
+        actual
+      )
+    }
+  )
+
+  addAssertion(
+    'match',
+    function match(
+      this: Chai.AssertionPrototype,
+      { wrapper, markup, arg1, sig }: AssertionParams
+    ) {
+      this.assert(
+        wrapper && wrapper.matches(arg1),
+        () => `expected ${sig} to match #{exp} ${markup()}`,
+        () => `expected ${sig} to not match #{exp} ${markup()}`,
         arg1
       )
     }
-  })
+  )
 
-  addAssertion('className', function className({ wrapper, markup, arg1, sig }) {
-    const actual = wrapper.classNames()
-
-    this.assert(
-      wrapper && wrapper.hasClass(arg1),
-      () =>
-        `expected ${sig} to have a #{exp} class, but it has #{act} ${markup()}`,
-      () =>
-        `expected ${sig} to not have a #{exp} class, but it has #{act} ${markup()}`,
-      arg1,
-      actual
-    )
-  })
-
-  addAssertion('match', function match({ wrapper, markup, arg1, sig }) {
-    this.assert(
-      wrapper && wrapper.matches(arg1),
-      () => `expected ${sig} to match #{exp} ${markup()}`,
-      () => `expected ${sig} to not match #{exp} ${markup()}`,
-      arg1
-    )
-  })
-
-  addAssertion('visible', booleanAssertion('visible', 'visible'))
   addAssertion(
     'descendants',
     listAndCountAssertion('descendants', 'descendants')
@@ -261,8 +306,14 @@ export default function assertions(chai, utils) {
   addAssertion('label', valueAssertion('label', 'label'))
 }
 
-function getActual(wrapper, assertion, ...args) {
-  const methodOrProperty = wrapper ? wrapper[assertion] : undefined
+function getActual(
+  wrapper: QueryOrHelperType | undefined,
+  assertion: string,
+  ...args: unknown[]
+) {
+  const methodOrProperty = wrapper
+    ? (wrapper as Record<string, unknown>)[assertion]
+    : undefined
   if (typeof methodOrProperty === 'function') {
     return methodOrProperty(...args)
   } else {
@@ -270,8 +321,8 @@ function getActual(wrapper, assertion, ...args) {
   }
 }
 
-function propAndValueAssertion(assertion, desc) {
-  return function (args) {
+function propAndValueAssertion(assertion: string, desc: string) {
+  return function (this: Chai.AssertionPrototype, args: AssertionParams) {
     const { wrapper, markup, flag, inspect, arg1, arg2, arg3, sig } = args
     const actual = getActual(wrapper, assertion, arg1)
 
@@ -303,19 +354,26 @@ function propAndValueAssertion(assertion, desc) {
   }
 }
 
-function booleanAssertion(assertion, desc) {
-  return function ({ wrapper, markup, sig }) {
+function booleanAssertion(assertion: string, desc: string) {
+  return function (
+    this: Chai.AssertionPrototype,
+    { wrapper, markup, sig }: AssertionParams
+  ) {
     const actual = getActual(wrapper, assertion)
     this.assert(
       actual,
       () => `expected ${sig} to be ${desc} ${markup()}`,
-      () => `expected ${sig} to not be ${desc} ${markup()}`
+      () => `expected ${sig} to not be ${desc} ${markup()}`,
+      undefined
     )
   }
 }
 
-function valueAssertion(assertion, desc) {
-  return function ({ wrapper, markup, arg1, arg2, sig }) {
+function valueAssertion(assertion: string, desc: string) {
+  return function (
+    this: Chai.AssertionPrototype,
+    { wrapper, markup, arg1, arg2, sig }: AssertionParams
+  ) {
     const actual = getActual(wrapper, assertion)
 
     this.assert(
@@ -330,8 +388,11 @@ function valueAssertion(assertion, desc) {
   }
 }
 
-function listAndCountAssertion(assertion, desc) {
-  return function ({ wrapper, markup, arg1, sig, flag }) {
+function listAndCountAssertion(assertion: string, desc: string) {
+  return function (
+    this: Chai.AssertionPrototype,
+    { wrapper, markup, arg1, sig, flag }: AssertionParams
+  ) {
     const exactlyCount = flag(this, 'exactlyCount')
     const actual = getActual(wrapper, assertion, arg1)
     const count = actual.length
