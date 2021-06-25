@@ -50,13 +50,16 @@ const omit = (originalObject: Record<string, unknown>, keys: string[]) => {
   return newObject
 }
 
-function omitProps(
-  props: Record<string, any>,
-  propTypes: Record<string, any>,
+function omitProps<T extends Record<string, any>>(
+  props: T,
+  propTypesOrAllowedPropList: PropTypesOrAllowedPropList,
   exclude?: string[]
 ) {
-  const keys = Object.keys(propTypes || {})
-  const combined = exclude ? keys.concat(exclude) : keys
+  const propKeys = Array.isArray(propTypesOrAllowedPropList)
+    ? propTypesOrAllowedPropList
+    : Object.keys(propTypesOrAllowedPropList || {})
+  const combined = exclude ? propKeys.concat(exclude) : propKeys
+
   return omit(props, combined)
 }
 
@@ -81,10 +84,10 @@ function pickProps<T extends Record<string, any>>(
   propTypesOrAllowedPropList: PropTypesOrAllowedPropList,
   include?: string[]
 ) {
-  const propsKeys = Array.isArray(propTypesOrAllowedPropList)
+  const propKeys = Array.isArray(propTypesOrAllowedPropList)
     ? propTypesOrAllowedPropList
     : Object.keys(propTypesOrAllowedPropList || {})
-  const combined = include ? propsKeys.concat(include) : propsKeys
+  const combined = include ? propKeys.concat(include) : propKeys
 
   return pick(props, combined)
 }
