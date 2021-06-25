@@ -31,7 +31,7 @@ import {
   Stacking
 } from '@instructure/emotion'
 
-export type ViewProps = WithStyleProps & {
+export type ViewOwnProps = {
   /**
    * The element to render as the component root, `span` by default
    */
@@ -172,13 +172,16 @@ export type ViewProps = WithStyleProps & {
   cursor?: any
   className?: string
   style?: CSSObject
-  // View seems to accept all kind of other props from other components for example:
-  // `role` from the Avatar component
-  // TODO: investigate how to resolve this better
-  [key: string]: unknown
 }
+// View seems to accept all kind of other props from other components for example:
+// `role` from the Avatar component
+// TODO: investigate how to resolve this better
 
-export type AllowedPropKeys = Readonly<Array<keyof ViewProps>>
+export type RestProps = Record<string, unknown>
+export type ViewProps = ViewOwnProps & WithStyleProps & RestProps
+export type AllowedPropKeys = Readonly<
+  Array<keyof (ViewOwnProps & WithStyleProps)>
+>
 
 export const allowedProps: AllowedPropKeys = [
   'as',
