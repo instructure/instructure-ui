@@ -65,7 +65,6 @@
   "@instructure/ui-pages",
   "@instructure/ui-pagination",
   "@instructure/ui-pill",
-  "@instructure/ui-polyfill-loader",
   "@instructure/ui-popover",
   "@instructure/ui-portal",
   "@instructure/ui-position",

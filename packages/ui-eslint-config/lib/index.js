@@ -100,9 +100,6 @@ module.exports = {
   settings: {
     react: {
       version: process.env.REACT_VERSION || '16.8.6'
-    },
-    polyfills:
-      require('@instructure/browserslist-config-instui/polyfills').features ||
-      []
+    }
   }
 }
