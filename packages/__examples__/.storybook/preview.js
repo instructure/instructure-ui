@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-// eslint-disable-next-line import/no-unresolved
-import '@instructure/ui-polyfill-loader!'
-
 import { addParameters } from '@storybook/react'
 
 addParameters({

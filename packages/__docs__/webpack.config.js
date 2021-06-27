@@ -38,7 +38,7 @@ const config = merge(baseConfig, {
     // main entry point
     main: './src/index.js',
     // Note: these entries have to keep these names so that old codepens still work
-    common: ['@instructure/ui-polyfill-loader!', 'react', 'react-dom'],
+    common: ['react', 'react-dom'],
     globals: './globals.js'
   },
   output: {

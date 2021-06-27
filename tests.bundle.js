@@ -21,6 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-require('@instructure/ui-polyfill-loader!')
 
 require('ui-tests-loader!')

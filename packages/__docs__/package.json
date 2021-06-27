@@ -116,7 +116,6 @@
     "@instructure/config-loader": "8.6.0",
     "@instructure/ui-babel-preset": "8.6.0",
     "@instructure/ui-eslint-config": "8.6.0",
-    "@instructure/ui-polyfill-loader": "8.6.0",
     "@instructure/ui-scripts": "8.6.0",
     "@instructure/ui-stylelint-config": "8.6.0",
     "@instructure/ui-webpack-config": "8.6.0",
