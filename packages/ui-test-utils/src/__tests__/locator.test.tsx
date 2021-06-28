@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -35,7 +36,7 @@ const props = {
   [componentLocator.attribute]: componentLocator.value
 }
 
-class Component extends React.Component {
+class Component extends React.Component<{ hide: boolean }> {
   static displayName = 'Component'
   static selector = `[${componentLocator.attribute}~="${componentLocator.value}"]`
 

@@ -24,7 +24,12 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.6.0",
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.6.2",
+    "@types/chai": "^4.2.0",
+    "@types/sinon-chai": "^3.2.5",
+    "@types/chai-string": "^1.4.2",
+    "@types/dirty-chai": "^2.0.2",
+    "@types/chai-as-promised": "^7.1.1"
   },
   "dependencies": {
     "@instructure/ui-test-locator": "8.6.0",

@@ -27,7 +27,13 @@ import { ReactComponentWrapper } from '@instructure/ui-test-sandbox'
 
 import { expect, stub } from '../index'
 
-class Component extends React.Component {
+type TestComponentProps = {
+  foo: string
+  onUnmount: () => void
+  componentRef?: (el: Component) => void
+}
+
+class Component extends React.Component<TestComponentProps> {
   static displayName = 'Component'
 
   static propTypes = {
@@ -36,15 +42,11 @@ class Component extends React.Component {
   }
 
   static defaultProps = {
-    foo: null,
+    foo: null, // or 'foo'?
     onUnmount: null
   }
 
-  static defaultProps = {
-    foo: 'foo'
-  }
-
-  test(cb) {
+  test(cb: (test: string) => void) {
     cb('test')
   }
 
@@ -68,7 +70,7 @@ describe('reactComponentWrapper', async () => {
   })
 
   it('should allow a componentRef to be passed via props', async () => {
-    let component
+    let component: Component
     await ReactComponentWrapper.mount(
       <Component
         componentRef={(el) => {
@@ -77,13 +79,13 @@ describe('reactComponentWrapper', async () => {
       />
     )
     const test = stub()
-    component.test(test)
+    component!.test(test)
 
     expect(test).to.have.been.calledWith('test')
   })
 
   it('should omit componentRef when passing props to component', async () => {
-    let component
+    let component: Component
     await ReactComponentWrapper.mount(
       <Component
         componentRef={(el) => {
@@ -91,7 +93,7 @@ describe('reactComponentWrapper', async () => {
         }}
       />
     )
-    expect(component.props.componentRef).to.not.exist()
+    expect(component!.props.componentRef).to.not.exist()
   })
 
   it('should unmount', async () => {
@@ -110,7 +112,7 @@ describe('reactComponentWrapper', async () => {
 
   describe('options', async () => {
     it('should support setting props', async () => {
-      let component
+      let component: Component
       await ReactComponentWrapper.mount(
         <Component
           componentRef={(el) => {
@@ -124,13 +126,13 @@ describe('reactComponentWrapper', async () => {
         }
       )
 
-      expect(component.props.foo).to.equal('bar')
+      expect(component!.props.foo).to.equal('bar')
     })
   })
 
   describe('#setProps', async () => {
     it('should support setting props', async () => {
-      let component
+      let component: Component
       const subject = await ReactComponentWrapper.mount(
         <Component
           componentRef={(el) => {
@@ -143,7 +145,7 @@ describe('reactComponentWrapper', async () => {
         foo: 'bar'
       })
 
-      expect(component.props.foo).to.equal('bar')
+      expect(component!.props.foo).to.equal('bar')
     })
   })
 })

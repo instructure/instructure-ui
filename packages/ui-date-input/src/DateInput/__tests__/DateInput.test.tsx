@@ -281,6 +281,7 @@ describe('<DateInput />', async () => {
       const dateInput = await DateInputLocator.find()
 
       await wait(() => {
+        // @ts-expect-error This is intentionally overridden in assertions.ts
         expect(dateInput).to.contain.text(text, { exact: false })
       })
     })

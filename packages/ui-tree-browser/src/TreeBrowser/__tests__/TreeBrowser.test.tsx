@@ -411,6 +411,7 @@ describe('<TreeBrowser />', async () => {
       await item.focus()
 
       await wait(() => {
+        // @ts-expect-error This is intentionally overridden in assertions.ts
         expect(item).to.contain.focus()
       })
 

@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+// @ts-expect-error no type definitions :/
 import MutationObserverShim from '@sheerun/mutationobserver-shim'
 
 if (typeof document === 'undefined') {
@@ -28,6 +30,7 @@ if (typeof document === 'undefined') {
 }
 // jsdom doesn't provide Date on the window object and we need it for wait-for-expect
 global.window.Date =
+  // @ts-expect-error this is needed for jsdom?
   global.window.Date && global.window.Date.now
     ? global.window.Date
     : global.Date
@@ -38,7 +41,3 @@ global.setImmediate =
   function setImmediate(fn) {
     return setTimeout(fn, 0)
   }
-if (!global.Element.prototype.matches) {
-  // polyfill for IE and JSDOM
-  global.Element.prototype.matches = global.Element.prototype.msMatchesSelector
-}
