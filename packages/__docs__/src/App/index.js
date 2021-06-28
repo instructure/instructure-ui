@@ -42,6 +42,7 @@ import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
 import { IconButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
+import { Link } from '@instructure/ui-link'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
 import {
   IconHamburgerSolid,
@@ -60,6 +61,8 @@ import { Select } from '../Select'
 import { Section } from '../Section'
 import { Icons } from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
+
+import { fetchVersionData, versionInPath } from '../versionData'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -143,17 +146,10 @@ class App extends Component {
         console.error('Unable to load docs data :(\n' + error)
       })
   }
+
   fetchVersionData = async () => {
-    // eslint-disable-next-line compat/compat
-    const isLocalHost = window.location.hostname === 'localhost'
-
-    if (!isLocalHost) {
-      // eslint-disable-next-line compat/compat
-      const result = await fetch(`${window.location.origin}/versions.json`)
-      const versionsData = await result.json()
-
-      return this.setState({ versionsData })
-    }
+    const versionsData = await fetchVersionData()
+    return this.setState({ versionsData })
   }
 
   /**
@@ -641,6 +637,51 @@ class App extends Component {
     )
   }
 
+  renderLegacyDocWarning() {
+    const { versionsData } = this.state
+
+    if (!versionsData) {
+      return null
+    }
+
+    // tf there is a version in the path, e.g. "/v6", then it is a legacy page
+    return versionInPath ? (
+      <div css={this.props.styles.legacyVersionAlert}>
+        <EmotionThemeProvider
+          theme={{
+            componentOverrides: {
+              BaseButton: {
+                secondaryGhostColor: 'white'
+              }
+            }
+          }}
+        >
+          <Alert
+            variant="warning"
+            transition="none"
+            margin="none"
+            renderCloseButtonLabel="Close"
+            themeOverride={{
+              background: '#BF32A4',
+              color: 'white',
+              borderRadius: '0rem',
+              warningBorderColor: '#BF32A4',
+              warningIconBackground: '#BF32A4',
+              boxShadow: 'none'
+            }}
+          >
+            You are currently viewing the documentation of an older version of
+            Instructure UI. For the latest version,{' '}
+            <Link color="link-inverse" href={`/${window.location.hash}`}>
+              click here
+            </Link>
+            .
+          </Alert>
+        </EmotionThemeProvider>
+      </div>
+    ) : null
+  }
+
   render() {
     const key = this.state.key
     const { showMenu, layout, docsData } = this.state
@@ -685,6 +726,7 @@ class App extends Component {
             {this.renderFooter()}
           </div>
         </div>
+        {this.renderLegacyDocWarning()}
       </AppContext.Provider>
     )
   }
