@@ -31,12 +31,7 @@ import { View } from '@instructure/ui-view'
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -54,7 +49,7 @@ type Props = {
   meterColor?:
     | ((...args: any[]) => any)
     | ('info' | 'warning' | 'danger' | 'alert' | 'success' | 'brand')
-  margin?: Spacing
+  margin?: string
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
   shouldAnimateOnMount?: boolean

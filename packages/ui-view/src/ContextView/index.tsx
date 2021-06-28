@@ -29,10 +29,7 @@ import {
   jsx,
   withStyle,
   ThemeablePropTypes,
-  CSSObject,
-  Shadow,
-  Spacing,
-  Stacking
+  CSSObject
 } from '@instructure/emotion'
 import { PositionPropTypes, mirrorPlacement } from '@instructure/ui-position'
 import { omitProps } from '@instructure/ui-react-utils'

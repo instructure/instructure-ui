@@ -23,9 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, spy } from '@instructure/ui-test-utils'
-
-import { View } from '@instructure/ui-view'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Tag } from '../index'
 import { TagLocator } from '../TagLocator'

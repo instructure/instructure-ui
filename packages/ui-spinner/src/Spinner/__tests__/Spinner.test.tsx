@@ -23,9 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
-
-import { View } from '@instructure/ui-view'
+import { expect, mount } from '@instructure/ui-test-utils'
 
 import { Spinner } from '../index'
 import { SpinnerLocator } from '../SpinnerLocator'

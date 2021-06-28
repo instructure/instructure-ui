@@ -33,12 +33,7 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import { Item } from './Item'
 
@@ -50,8 +45,8 @@ type Props = {
   elementRef?: (...args: any[]) => any
   height?: string | number
   width?: string | number
-  margin?: Spacing
-  padding?: Spacing
+  margin?: string
+  padding?: string
   display?: 'flex' | 'inline-flex'
   textAlign?: 'start' | 'center' | 'end'
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'

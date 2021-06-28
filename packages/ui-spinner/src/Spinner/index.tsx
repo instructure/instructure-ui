@@ -31,12 +31,7 @@ import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { logError as error } from '@instructure/console'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -47,7 +42,7 @@ type Props = {
   renderTitle?: ((...args: any[]) => any) | React.ReactNode
   size?: 'x-small' | 'small' | 'medium' | 'large'
   variant?: 'default' | 'inverse'
-  margin?: Spacing
+  margin?: string
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
 }

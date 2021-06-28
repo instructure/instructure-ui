@@ -25,7 +25,6 @@
 import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
-import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
 import { Pagination, PaginationButton } from '../index'

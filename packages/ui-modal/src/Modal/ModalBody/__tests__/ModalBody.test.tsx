@@ -23,8 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
-import { View } from '@instructure/ui-view'
+import { expect, mount, locator } from '@instructure/ui-test-utils'
 import { ModalBody } from '../index'
 import generateComponentTheme from '../theme'
 import { canvas } from '@instructure/ui-themes'

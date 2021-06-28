@@ -35,12 +35,7 @@ import { logError as error } from '@instructure/console'
 
 import { Page } from './Page'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -53,7 +48,7 @@ type Props = {
   defaultPageIndex?: number
   activePageIndex?: any // TODO: controllable( PropTypes.number, 'onPageIndexChange', 'defaultPageIndex' )
   onPageIndexChange?: (...args: any[]) => any
-  margin?: Spacing
+  margin?: string
   makeStyles?: (...args: any[]) => any
   styles?: any
 }

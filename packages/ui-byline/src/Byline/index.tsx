@@ -29,12 +29,7 @@ import PropTypes from 'prop-types'
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -45,7 +40,7 @@ type Props = {
   title?: React.ReactNode
   description?: string | React.ReactNode
   alignContent?: 'top' | 'center'
-  margin?: Spacing
+  margin?: string
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
 }
