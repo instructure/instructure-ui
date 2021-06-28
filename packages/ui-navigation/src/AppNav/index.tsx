@@ -26,12 +26,7 @@
 import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
@@ -52,7 +47,7 @@ type Props = {
   debounce?: number
   renderBeforeItems?: React.ReactNode | ((...args: any[]) => any)
   renderAfterItems?: React.ReactNode | ((...args: any[]) => any)
-  margin?: Spacing
+  margin?: string
   elementRef?: (...args: any[]) => any
   renderTruncateLabel?: React.ReactNode | ((...args: any[]) => any)
   onUpdate?: (...args: any[]) => any

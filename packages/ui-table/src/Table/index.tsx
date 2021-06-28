@@ -35,12 +35,7 @@ import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -56,7 +51,7 @@ type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   caption: React.ReactNode
-  margin?: Spacing
+  margin?: string
   elementRef?: (...args: any[]) => any
   hover?: boolean
   layout?: 'auto' | 'fixed' | 'stacked'

@@ -25,7 +25,7 @@ import React, { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
-import { Spacing, ThemeablePropTypes } from '@instructure/emotion'
+import { ThemeablePropTypes } from '@instructure/emotion'
 import { passthroughProps, safeCloneElement } from '@instructure/ui-react-utils'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
@@ -34,7 +34,7 @@ import { InlineListItem } from './InlineListItem'
 
 type Props = {
   as?: 'ul' | 'ol'
-  margin?: Spacing
+  margin?: string
   size?: 'small' | 'medium' | 'large'
   delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'
   itemSpacing?:

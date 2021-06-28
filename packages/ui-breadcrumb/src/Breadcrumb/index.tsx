@@ -31,12 +31,7 @@ import { IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { Children } from '@instructure/ui-prop-types'
 import { testable } from '@instructure/ui-testable'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 import { BreadcrumbLink } from './BreadcrumbLink'
 
 import generateStyle from './styles'
@@ -47,7 +42,7 @@ type Props = {
   styles?: any
   label: string
   size?: 'small' | 'medium' | 'large'
-  margin?: Spacing
+  margin?: string
 }
 
 /**

@@ -24,8 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
-import { View } from '@instructure/ui-view'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import { Byline } from '../index'
 
 describe('<Byline />', async () => {

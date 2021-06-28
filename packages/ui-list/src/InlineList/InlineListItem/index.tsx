@@ -29,12 +29,7 @@ import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
 import { passthroughProps } from '@instructure/ui-react-utils'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -44,8 +39,8 @@ type Props = {
   styles?: any
   delimiter?: 'none' | 'pipe' | 'slash' | 'arrow'
   size?: 'small' | 'medium' | 'large'
-  margin?: Spacing
-  padding?: Spacing
+  margin?: string
+  padding?: string
   spacing?:
     | 'none'
     | 'xxx-small'

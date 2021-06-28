@@ -30,12 +30,7 @@ import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { Transition } from '@instructure/ui-motion'
 
-import {
-  withStyle,
-  jsx,
-  ThemeablePropTypes,
-  Spacing
-} from '@instructure/emotion'
+import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -51,7 +46,7 @@ type Props = {
   minHeight?: string | number
   id?: string
   labelledBy?: string
-  padding?: Spacing
+  padding?: string
   textAlign?: 'start' | 'center' | 'end'
   elementRef?: (...args: any[]) => any
 }
