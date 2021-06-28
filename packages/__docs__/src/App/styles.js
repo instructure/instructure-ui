@@ -40,7 +40,10 @@ const generateStyle = (componentTheme, props, state) => {
       height: '100%',
       overflow: 'hidden',
       boxSizing: 'border-box',
-      display: 'flex'
+      display: 'flex',
+      position: 'relative',
+      flexShrink: 1,
+      flexGrow: 1
     },
     content: {
       label: 'app__content',
@@ -48,6 +51,11 @@ const generateStyle = (componentTheme, props, state) => {
       overflowY: 'auto',
       overflowX: 'hidden',
       width: '100%'
+    },
+    legacyVersionAlert: {
+      label: 'app__legacyVersionAlert',
+      flexShrink: 0,
+      flexGrow: 0
     },
     hamburger: {
       label: 'app__hamburger',
@@ -60,7 +68,7 @@ const generateStyle = (componentTheme, props, state) => {
       label: 'app__inlineNavigation',
       overflowY: 'auto',
       overflowX: 'hidden',
-      minHeight: '100vh',
+      minHeight: '100%',
       flexShrink: 0,
       borderInlineEndColor: componentTheme.navBorderColor,
       borderInlineEndWidth: componentTheme.navBorderWidth,
