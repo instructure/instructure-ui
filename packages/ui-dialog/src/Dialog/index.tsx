@@ -143,6 +143,7 @@ class Dialog extends Component<Props> {
     onDismiss: (event) => {}
   }
 
+  _timeouts: ReturnType<typeof setTimeout>[] = []
   _raf: RequestAnimationFrameType[] = []
   _focusRegion = null
 
@@ -173,6 +174,8 @@ class Dialog extends Component<Props> {
       this.close()
     }
 
+    this._timeouts.forEach((timeout) => clearTimeout(timeout))
+    this._timeouts = []
     this._raf.forEach((request) => request.cancel())
     this._raf = []
   }
@@ -187,15 +190,17 @@ class Dialog extends Component<Props> {
         // get focused on open, and browsers scroll to the focused element.
         // If the css is not fully applied, the element may not be in their
         // final position, making the page jump.
-        setTimeout(() => {
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'FocusRegion' is not assignable to type 'null... Remove this comment to see the full error message
-          this._focusRegion = FocusRegionManager.activateRegion(
-            this.contentElement,
-            {
-              ...options
-            }
-          )
-        }, 0)
+        this._timeouts.push(
+          setTimeout(() => {
+            // @ts-expect-error ts-migrate(2322) FIXME: Type 'FocusRegion' is not assignable to type 'null... Remove this comment to see the full error message
+            this._focusRegion = FocusRegionManager.activateRegion(
+              this.contentElement,
+              {
+                ...options
+              }
+            )
+          }, 0)
+        )
       })
     )
   }
