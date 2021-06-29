@@ -33,8 +33,9 @@ import { View } from '@instructure/ui-view'
 import { AccessibleContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Pill } from '@instructure/ui-pill'
-import { IconButton } from '@instructure/ui-buttons'
+import { IconButton, BaseButton } from '@instructure/ui-buttons'
 import { Tray } from '@instructure/ui-tray'
+import { Link } from '@instructure/ui-link'
 import { addMediaQueryMatchListener } from '@instructure/ui-responsive'
 
 import {
@@ -55,6 +56,8 @@ import { Section } from '../Section'
 import { Icons } from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 import { LibraryPropType } from '../propTypes'
+
+import { fetchVersionData, versionInPath } from '../versionData'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -113,17 +116,10 @@ class App extends Component {
   }
 
   fetchVersionData = async () => {
-    // eslint-disable-next-line compat/compat
-    const isLocalHost = window.location.hostname === 'localhost'
-
-    if (!isLocalHost) {
-      // eslint-disable-next-line compat/compat
-      const result = await fetch(`${window.location.origin}/versions.json`)
-      const versionsData = await result.json()
-
-      return this.setState({ versionsData })
-    }
+    const versionsData = await fetchVersionData()
+    return this.setState({ versionsData })
   }
+
   componentDidMount() {
     this._defaultDocumentTitle = document.title
     this.updateKey()
@@ -577,39 +573,85 @@ class App extends Component {
     )
   }
 
+  renderLegacyDocWarning() {
+    const { versionsData } = this.state
+
+    if (!versionsData) {
+      return null
+    }
+
+    // tf there is a version in the path, e.g. "/v6", then it is a legacy page
+    return versionInPath ? (
+      <div className={styles.legacyVersionAlert}>
+        <ApplyTheme
+          theme={{
+            [BaseButton.theme]: {
+              secondaryGhostColor: 'white'
+            }
+          }}
+        >
+          <Alert
+            variant="warning"
+            transition="none"
+            margin="none"
+            renderCloseButtonLabel="Close"
+            theme={{
+              background: '#BF32A4',
+              color: 'white',
+              borderRadius: '0rem',
+              warningBorderColor: '#BF32A4',
+              warningIconBackground: '#BF32A4',
+              boxShadow: 'none'
+            }}
+          >
+            You are currently viewing the documentation of an older version of
+            Instructure UI. For the latest version,{' '}
+            <Link color="link-inverse" href={`/${window.location.hash}`}>
+              click here
+            </Link>
+            .
+          </Alert>
+        </ApplyTheme>
+      </div>
+    ) : null
+  }
+
   render() {
     const key = this.state.key
     const { showMenu, layout } = this.state
 
     return (
-      <div className={styles.root}>
-        {showMenu && layout === 'small' && (
-          <Mask onClick={this.handleMenuClose} />
-        )}
-        {this.renderNavigation()}
-        <div
-          className={styles.content}
-          label={key || this.props.library.name}
-          role="main"
-          ref={this.handleContentRef}
-        >
-          {!showMenu && (
-            <div className={styles.hamburger}>
-              <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
-                <IconButton
-                  onClick={this.handleMenuOpen}
-                  elementRef={this.handleMenuTriggerRef}
-                  renderIcon={IconHamburgerSolid}
-                  screenReaderLabel="Open Navigation"
-                  shape="circle"
-                />
-              </ApplyTheme>
-            </div>
+      <>
+        <div className={styles.root}>
+          {showMenu && layout === 'small' && (
+            <Mask onClick={this.handleMenuClose} />
           )}
-          {this.renderContent(key)}
-          {this.renderFooter()}
+          {this.renderNavigation()}
+          <div
+            className={styles.content}
+            label={key || this.props.library.name}
+            role="main"
+            ref={this.handleContentRef}
+          >
+            {!showMenu && (
+              <div className={styles.hamburger}>
+                <ApplyTheme theme={ApplyTheme.generateTheme('instructure')}>
+                  <IconButton
+                    onClick={this.handleMenuOpen}
+                    elementRef={this.handleMenuTriggerRef}
+                    renderIcon={IconHamburgerSolid}
+                    screenReaderLabel="Open Navigation"
+                    shape="circle"
+                  />
+                </ApplyTheme>
+              </div>
+            )}
+            {this.renderContent(key)}
+            {this.renderFooter()}
+          </div>
         </div>
-      </div>
+        {this.renderLegacyDocWarning()}
+      </>
     )
   }
 }

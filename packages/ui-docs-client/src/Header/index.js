@@ -35,6 +35,8 @@ import { IconMiniArrowDownLine } from '@instructure/ui-icons'
 import { Menu } from '@instructure/ui-menu'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 
+import { versionInPath } from '../versionData'
+
 import { Heading } from '../Heading'
 
 import theme from './theme'
@@ -59,9 +61,7 @@ class Header extends Component {
     const { versionsData } = this.props
     const { latestVersion } = versionsData
     const isSelectedLatestVersion = selectedVersion === latestVersion
-    const pathNameParts = window.location.pathname.split('/').filter(Boolean)
-    const [versionInPath] = pathNameParts
-    const isOnLatestVersion = pathNameParts.length === 0
+    const isOnLatestVersion = !versionInPath
 
     // Example scenarios:
     // 1: instructure.design, latest: v8, selected: v8 -> navigate to instructure.design/#index
@@ -86,8 +86,6 @@ class Header extends Component {
     const { latestVersion, previousVersions } = versionsData
     const allVersions = [latestVersion, ...previousVersions]
 
-    const [versionInPath] = window.location.pathname.split('/').filter(Boolean)
-
     const currentVersion = versionInPath || latestVersion
 
     return (
@@ -96,7 +94,7 @@ class Header extends Component {
           placement="bottom"
           label="Select InstUI version"
           onSelect={this.handleSelect}
-          themeOverride={{ minWidth: '12rem' }}
+          theme={{ minWidth: '12rem' }}
           trigger={
             <CondensedButton padding="0.25rem">
               <Text size="large">
