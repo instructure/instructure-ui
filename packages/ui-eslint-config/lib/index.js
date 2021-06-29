@@ -95,6 +95,12 @@ module.exports = {
       rules: {
         'mocha/no-exclusive-tests': 'error'
       }
+    },
+    {
+      files: '*.ejs',
+      rules: {
+        'import/no-unresolved': 'off'
+      }
     }
   ],
   settings: {

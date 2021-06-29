@@ -10,6 +10,9 @@
   },
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
