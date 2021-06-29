@@ -27,14 +27,16 @@ import PropTypes from 'prop-types'
 
 import GithubCorner from 'react-github-corner'
 
-import { themeable } from '@instructure/ui-themeable'
+import { themeable, ApplyTheme } from '@instructure/ui-themeable'
 import { DrawerLayout } from '@instructure/ui-drawer-layout'
 import { View } from '@instructure/ui-view'
 import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { Mask } from '@instructure/ui-overlays'
 import { Heading } from '@instructure/ui-heading'
 import { Pill } from '@instructure/ui-pill'
-import { IconButton } from '@instructure/ui-buttons'
+import { Link } from '@instructure/ui-link'
+import { Alert } from '@instructure/ui-alerts'
+import { IconButton, BaseButton } from '@instructure/ui-buttons'
 
 import {
   IconGithubSolid,
@@ -52,6 +54,8 @@ import { Section } from '../Section'
 import { Icons } from '../Icons'
 import { compileMarkdown } from '../compileMarkdown'
 import { LibraryPropType } from '../propTypes'
+
+import { fetchVersionData, versionInPath } from '../versionData'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -99,17 +103,10 @@ class App extends Component {
   }
 
   fetchVersionData = async () => {
-    // eslint-disable-next-line compat/compat
-    const isLocalHost = window.location.hostname === 'localhost'
-
-    if (!isLocalHost) {
-      // eslint-disable-next-line compat/compat
-      const result = await fetch(`${window.location.origin}/versions.json`)
-      const versionsData = await result.json()
-
-      return this.setState({ versionsData })
-    }
+    const versionsData = await fetchVersionData()
+    return this.setState({ versionsData })
   }
+
   getChildContext() {
     return {
       library: this.props.library,
@@ -382,87 +379,133 @@ class App extends Component {
     ) : null
   }
 
+  renderLegacyDocWarning() {
+    const { versionsData } = this.state
+
+    if (!versionsData) {
+      return null
+    }
+
+    // tf there is a version in the path, e.g. "/v6", then it is a legacy page
+    return versionInPath ? (
+      <div className={styles.legacyVersionAlert}>
+        <ApplyTheme
+          theme={{
+            [BaseButton.theme]: {
+              secondaryGhostColor: 'white'
+            }
+          }}
+        >
+          <Alert
+            variant="warning"
+            transition="none"
+            margin="none"
+            renderCloseButtonLabel="Close"
+            theme={{
+              background: '#BF32A4',
+              color: 'white',
+              borderRadius: '0rem',
+              warningBorderColor: '#BF32A4',
+              warningIconBackground: '#BF32A4',
+              boxShadow: 'none'
+            }}
+          >
+            You are currently viewing the documentation of an older version of
+            Instructure UI. For the latest version,{' '}
+            <Link color="link-inverse" href={`/${window.location.hash}`}>
+              click here
+            </Link>
+            .
+          </Alert>
+        </ApplyTheme>
+      </div>
+    ) : null
+  }
+
   render() {
     const { name, version, repository } = this.props.library
     const { versionsData } = this.state
 
     return (
-      <div className={styles.root}>
-        {this.state.trayOverlay && this.state.showMenu && (
-          <Mask onClick={this.handleMenuToggle} />
-        )}
-        <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
-          <DrawerLayout.Tray
-            label="Navigation"
-            placement="start"
-            open={this.state.showMenu}
-            mountNode={this.state.trayOverlay ? document.body : null}
-            onDismiss={this.handleTrayDismiss}
-            onExited={this.handleTrayExited}
-          >
-            <View
-              as="div"
-              width="16rem"
-              padding="medium none none none"
-              position="relative"
+      <div className={styles.app}>
+        <div className={styles.root}>
+          {this.state.trayOverlay && this.state.showMenu && (
+            <Mask onClick={this.handleMenuToggle} />
+          )}
+          <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
+            <DrawerLayout.Tray
+              label="Navigation"
+              placement="start"
+              open={this.state.showMenu}
+              mountNode={this.state.trayOverlay ? document.body : null}
+              onDismiss={this.handleTrayDismiss}
+              onExited={this.handleTrayExited}
             >
               <View
                 as="div"
-                position="absolute"
-                insetInlineEnd="0rem"
-                insetBlockStart="0rem"
+                width="16rem"
+                padding="medium none none none"
+                position="relative"
               >
-                <IconButton
-                  renderIcon={IconXSolid}
-                  screenReaderLabel="Close Navigation"
-                  withBackground={false}
-                  withBorder={false}
-                  onClick={this.handleMenuClose}
-                  margin="small small none none"
+                <View
+                  as="div"
+                  position="absolute"
+                  insetInlineEnd="0rem"
+                  insetBlockStart="0rem"
+                >
+                  <IconButton
+                    renderIcon={IconXSolid}
+                    screenReaderLabel="Close Navigation"
+                    withBackground={false}
+                    withBorder={false}
+                    onClick={this.handleMenuClose}
+                    margin="small small none none"
+                  />
+                </View>
+                <Header name={name} version={version} versionsData={versionsData} />
+                <Nav
+                  selected={this.state.key}
+                  sections={this.props.sections}
+                  docs={this.props.docs}
+                  themes={this.props.themes}
+                  icons={this.props.icons}
                 />
               </View>
-              <Header name={name} version={version} versionsData={versionsData} />
-              <Nav
-                selected={this.state.key}
-                sections={this.props.sections}
-                docs={this.props.docs}
-                themes={this.props.themes}
-                icons={this.props.icons}
-              />
-            </View>
-          </DrawerLayout.Tray>
-          <DrawerLayout.Content
-            label={this.state.key || this.props.library.name}
-            role="main"
-            contentRef={this.handleContentRef}
-          >
-            {!this.state.showMenu && (
-              <div className={styles.hamburger}>
-                <IconButton
-                  renderIcon={IconHamburgerSolid}
-                  screenReaderLabel="Open Navigation"
-                  withBackground={false}
-                  withBorder={false}
-                  onClick={this.handleMenuOpen}
-                  elementRef={this.handleMenuTriggerRef}
-                  size="large"
-                />
-              </div>
-            )}
-            <View
-              as="div"
-              padding="x-large xx-large"
-              minWidth="18rem"
-              height="100vh"
+            </DrawerLayout.Tray>
+            <DrawerLayout.Content
+              label={this.state.key || this.props.library.name}
+              role="main"
+              contentRef={this.handleContentRef}
             >
-              <div className={styles.main} id="main">
-                {this.renderContent(this.state.key)}
-                {this.renderFooter()}
-              </div>
-            </View>
-          </DrawerLayout.Content>
-        </DrawerLayout>
-        {repository && <GithubCorner href={repository} />}
+              {!this.state.showMenu && (
+                <div className={styles.hamburger}>
+                  <IconButton
+                    renderIcon={IconHamburgerSolid}
+                    screenReaderLabel="Open Navigation"
+                    withBackground={false}
+                    withBorder={false}
+                    onClick={this.handleMenuOpen}
+                    elementRef={this.handleMenuTriggerRef}
+                    size="large"
+                  />
+                </div>
+              )}
+              <View
+                as="div"
+                padding="x-large xx-large"
+                minWidth="18rem"
+                height="100%"
+              >
+                <div className={styles.main} id="main">
+                  {this.renderContent(this.state.key)}
+                  {this.renderFooter()}
+                </div>
+              </View>
+            </DrawerLayout.Content>
+          </DrawerLayout>
+          {repository && <GithubCorner href={repository} />}
+        </div>
+        {this.renderLegacyDocWarning()}
       </div>
     )
   }
