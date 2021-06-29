@@ -40,7 +40,7 @@ export const lint = () => {
   if (jspaths.length) {
     commands['eslint'] = getCommand('eslint', [
       ...jspaths,
-      '--ext .js,.jsx,.ts,.tsx'
+      '--ext .js,.jsx,.ts,.tsx,js.ejs'
     ])
   }
 

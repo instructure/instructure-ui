@@ -76,7 +76,7 @@ if (args.includes('--watch')) {
   webpackArgs = ['--mode=production']
 }
 const child = childProcess.spawn(command, webpackArgs, {env: {...envVars, ...process.env}})
-child.stdout.setEncoding('utf8');
+child.stdout.setEncoding('utf8')
 child.stdout.on('data', function(data) {
   // eslint-disable-next-line no-console
   console.log(data)
