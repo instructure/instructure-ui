@@ -65,6 +65,14 @@ blockquote {
   overflow: hidden;
   box-sizing: border-box;
   display: flex;
+  position: relative;
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+
+.legacyVersionAlert {
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 
 .hamburger {
@@ -77,7 +85,7 @@ blockquote {
 .inlineNavigation {
   overflow-y: auto;
   overflow-x: hidden;
-  min-height: 100vh;
+  min-height: 100%;
   flex-shrink: 0;
   border-inline-end-color: var(--navBorderColor);
   border-inline-end-width: var(--navBorderWidth);
