@@ -123,9 +123,7 @@ module.exports = async ({
 
 function copyFilesFromDependency(dependencyId, destPath, destFolder) {
   const fullDestPath = path.join(destPath, destFolder)
-  if (!fs.existsSync(fullDestPath)) {
-    fs.mkdirSync(fullDestPath)
-  }
+  fs.mkdirSync(fullDestPath, { recursive: true })
   // path to index.js in the dependency
   const dependencyPath = require.resolve(dependencyId)
   fse.copySync(path.dirname(dependencyPath), fullDestPath)
