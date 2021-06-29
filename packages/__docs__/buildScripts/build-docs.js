@@ -152,9 +152,7 @@ globby(files, { ignore })
     props.showMenu = options.showMenu ? 'true' : 'false'
     const everything = JSON.stringify(props)
     const buildDir = './__build__/'
-    if (!fs.existsSync(buildDir)) {
-      fs.mkdirSync(buildDir)
-    }
+    fs.mkdirSync(buildDir, { recursive: true })
     fs.writeFileSync(buildDir + DOCS_DATA_JSON, everything)
     // eslint-disable-next-line no-console
     console.log('Finished building documentation data')

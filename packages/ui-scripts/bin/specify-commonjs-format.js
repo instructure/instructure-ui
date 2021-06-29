@@ -26,9 +26,8 @@
 
 const fs = require('fs')
 
-if (!fs.existsSync('lib')) {
-  fs.mkdirSync('lib')
-}
+// create if does not exist https://stackoverflow.com/a/24311711
+fs.mkdirSync('lib', { recursive: true })
 
 if (!fs.existsSync('lib/package.json')) {
   fs.writeFileSync('lib/package.json', '{"type":"commonjs"}\n', 'utf8')
