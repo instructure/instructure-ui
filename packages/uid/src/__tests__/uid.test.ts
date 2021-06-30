@@ -23,7 +23,7 @@
  */
 import { expect } from '@instructure/ui-test-utils'
 
-import { uid } from '../index'
+import { uid } from '../uid'
 
 describe('uid', () => {
   it('generates a specified length', () => {
@@ -43,5 +43,9 @@ describe('uid', () => {
 
   it('adds a prefix', () => {
     expect(uid('foo', 5)).to.startWith('foo__')
+  })
+
+  it('works with no parameters', () => {
+    expect(uid()).to.exist()
   })
 })
