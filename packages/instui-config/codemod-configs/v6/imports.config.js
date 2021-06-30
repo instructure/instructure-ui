@@ -535,7 +535,6 @@ module.exports = {
           'ownerDocument',
           'ownerWindow',
           'requestAnimationFrame',
-          'supportsObjectFit',
           'transformSelection'
         ]
       },

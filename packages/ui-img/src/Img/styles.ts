@@ -34,9 +34,7 @@
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
-  const { overlay, withBlur, withGrayscale, src, constrain } = props
-
-  const { supportsObjectFit, hasBackground } = state
+  const { overlay, withBlur, withGrayscale, constrain } = props
 
   const isCover = constrain === 'cover'
   const isContain = constrain === 'contain'
@@ -108,17 +106,7 @@ const generateStyle = (componentTheme, props, state) => {
           'hidden' /* stops blurred images extending past overlay borders */
       }),
       ...(isCover && fillContainer),
-      ...(isContain && { height: 'inherit' }),
-
-      // if browser does not support ObjectFit CSS, and Img needs "constrain",
-      // serve up a background-image instead
-      ...(hasBackground && {
-        ...fillContainer,
-        backgroundImage: `url(${src})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        ...(constrain && { backgroundSize: constrain })
-      })
+      ...(isContain && { height: 'inherit' })
     },
 
     img: {
@@ -147,11 +135,8 @@ const generateStyle = (componentTheme, props, state) => {
         // avoid extra space at bottom from inline/line-height
         display: 'block'
       }),
-
-      ...(supportsObjectFit && {
-        ...(isCover && imgCoverStyle),
-        ...(isContain && imgContainStyle)
-      })
+      ...(isCover && imgCoverStyle),
+      ...(isContain && imgContainStyle)
     }
   }
 }
