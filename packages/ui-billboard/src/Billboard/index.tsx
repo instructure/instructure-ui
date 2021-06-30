@@ -235,7 +235,7 @@ class Billboard extends Component<Props> {
         <View
           {...omitProps(this.props, {
             ...Billboard.propTypes,
-            ...View.allowedProps
+            ...View.propTypes
           })}
           type={Element === 'button' ? 'button' : null}
           as={Element}

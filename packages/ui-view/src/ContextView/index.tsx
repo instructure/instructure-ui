@@ -196,7 +196,7 @@ class ContextView extends Component<Props> {
       padding,
       shadow,
       stacking,
-      style, // eslint-disable-line react/prop-types
+      style,
       textAlign,
       styles
     } = this.props
@@ -204,8 +204,8 @@ class ContextView extends Component<Props> {
     return (
       <View
         {...omitProps(this.props, ContextView.propTypes)}
-        style={style}
         css={styles?.contextView}
+        style={style}
         borderWidth="none"
         display="inline-block"
         as={as}

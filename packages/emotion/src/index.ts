@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/// <reference types="@emotion/react/types/css-prop" />
+
 export * from '@emotion/react'
 
 export { EmotionThemeProvider } from './EmotionThemeProvider'

@@ -26,6 +26,7 @@ import React from 'react'
 
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { View } from '../../index'
+import { CSSObject } from '@instructure/emotion'
 
 describe('<View />', async () => {
   it('should render', async () => {
@@ -52,7 +53,7 @@ describe('<View />', async () => {
   })
 
   it('should pass whitelisted style attributes', async () => {
-    const styleProps = {
+    const styleProps: CSSObject = {
       top: '160px',
       left: '5px',
       minWidth: '20px',
@@ -65,7 +66,6 @@ describe('<View />', async () => {
     }
 
     const subject = await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { top: string; l... Remove this comment to see the full error message
       <View style={{ ...styleProps }}>
         <h1>Hello!</h1>
       </View>
@@ -86,7 +86,6 @@ describe('<View />', async () => {
 
   it('should pass flex style', async () => {
     const subject = await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { flexBasis: str... Remove this comment to see the full error message
       <View style={{ flexBasis: '200px' }}>
         <h1>Hello!</h1>
       </View>
@@ -99,14 +98,13 @@ describe('<View />', async () => {
   })
 
   it('should not pass all styles', async () => {
-    const styleProps = {
+    const styleProps: CSSObject = {
       backgroundColor: 'red',
       borderStyle: 'dotted',
       opacity: '0.5'
     }
 
     const subject = await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; style: { backgroundColo... Remove this comment to see the full error message
       <View style={{ ...styleProps }}>
         <h1>Hello!</h1>
       </View>
@@ -123,7 +121,6 @@ describe('<View />', async () => {
     const className = 'fooBarBaz'
 
     const subject = await mount(
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
       <View className={className}>
         <h1>Hello!</h1>
       </View>
