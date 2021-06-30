@@ -38,7 +38,11 @@ import {
   callRenderProp
 } from '@instructure/ui-react-utils'
 import { FormPropTypes } from '@instructure/ui-form-field'
-import { PositionPropTypes } from '@instructure/ui-position'
+import {
+  PositionConstaint,
+  PositionPlacement,
+  PositionPropTypes
+} from '@instructure/ui-position'
 import { testable } from '@instructure/ui-testable'
 import { Select } from '@instructure/ui-select'
 import { uid } from '@instructure/uid'
@@ -59,8 +63,8 @@ type Props = {
   optionsMaxWidth?: string
   visibleOptionsCount?: number
   messages?: any[] // TODO: FormPropTypes.message
-  placement?: any // TODO: PositionPropTypes.placement
-  constrain?: any // TODO: PositionPropTypes.constrain
+  placement?: PositionPlacement
+  constrain?: PositionConstaint
   onChange?: (...args: any[]) => any
   onFocus?: (...args: any[]) => any
   onBlur?: (...args: any[]) => any

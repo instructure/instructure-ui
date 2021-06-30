@@ -40,7 +40,12 @@ import {
   isActiveElement
 } from '@instructure/ui-dom-utils'
 
-import { PositionPropTypes } from '@instructure/ui-position'
+import {
+  PositionConstaint,
+  PositionMountNode,
+  PositionPlacement,
+  PositionPropTypes
+} from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { Selectable } from '@instructure/ui-selectable'
 import { Popover } from '@instructure/ui-popover'
@@ -78,9 +83,9 @@ type Props = {
   optionsMaxWidth?: string
   visibleOptionsCount?: number
   messages?: any[] // TODO: FormPropTypes.message
-  placement?: any // TODO: PositionPropTypes.placement
-  constrain?: any // TODO: PositionPropTypes.constrain
-  mountNode?: any // TODO: PositionPropTypes.mountNode
+  placement?: PositionPlacement
+  constrain?: PositionConstaint
+  mountNode?: PositionMountNode
   onFocus?: (...args: any[]) => any
   onBlur?: (...args: any[]) => any
   onInputChange?: (...args: any[]) => any
@@ -321,7 +326,7 @@ class Select extends Component<Props> {
   _defaultId = uid('Select')
   _assistId = uid('Select-assistiveText')
   _input = null
-  _inputContainer = null
+  _inputContainer = undefined
   _list = null
   // temporarily stores actionable options
   _optionIds = []

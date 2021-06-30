@@ -33,7 +33,10 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { Dialog } from '@instructure/ui-dialog'
 import { Portal } from '@instructure/ui-portal'
-import { mirrorHorizontalPlacement } from '@instructure/ui-position'
+import {
+  mirrorHorizontalPlacement,
+  PositionMountNode
+} from '@instructure/ui-position'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { DrawerLayoutContext } from '../index'
@@ -55,7 +58,7 @@ type Props = {
   onExiting?: (...args: any[]) => any
   onExited?: (...args: any[]) => any
   contentRef?: (...args: any[]) => any
-  mountNode?: typeof element | ((...args: any[]) => any)
+  mountNode?: PositionMountNode
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   liveRegion?:
     | React.ReactElement[]

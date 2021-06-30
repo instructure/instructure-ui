@@ -50,17 +50,22 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 import { calculateElementPosition } from '../calculateElementPosition'
-import { PositionPropTypes } from '../PositionPropTypes'
+import {
+  PositionConstaint,
+  PositionMountNode,
+  PositionPlacement,
+  PositionPropTypes
+} from '../PositionPropTypes'
 
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   renderTarget?: React.ReactNode | ((...args: any[]) => any)
-  target?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
-  placement?: any // TODO: PositionPropTypes.placement
-  mountNode?: any // TODO: PositionPropTypes.mountNode
+  target?: PositionMountNode
+  placement?: PositionPlacement
+  mountNode?: PositionMountNode
   insertAt?: 'bottom' | 'top'
-  constrain?: any // TODO: PositionPropTypes.constrain
+  constrain?: PositionConstaint
   offsetX?: string | number
   offsetY?: string | number
   id?: string

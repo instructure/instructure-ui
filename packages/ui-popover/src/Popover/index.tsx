@@ -30,7 +30,10 @@ import {
   Position,
   PositionPropTypes,
   parsePlacement,
-  mirrorHorizontalPlacement
+  mirrorHorizontalPlacement,
+  PositionPlacement,
+  PositionConstaint,
+  PositionMountNode
 } from '@instructure/ui-position'
 import { ContextView, View } from '@instructure/ui-view'
 import { Dialog } from '@instructure/ui-dialog'
@@ -58,7 +61,6 @@ type Props = {
   on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
   withArrow?: boolean
   color?: 'primary' | 'primary-inverse'
-  placement?: any // TODO: PositionPropTypes.placement
   shadow?: Shadow
   stacking?: Stacking
   contentRef?: (...args: any[]) => any
@@ -66,9 +68,10 @@ type Props = {
   screenReaderLabel?: string
   offsetX?: string | number
   offsetY?: string | number
-  constrain?: any // TODO: PositionPropTypes.constrain
-  positionTarget?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
-  mountNode?: any // TODO: PositionPropTypes.mountNode
+  placement?: PositionPlacement
+  constrain?: PositionConstaint
+  mountNode?: PositionMountNode
+  positionTarget?: PositionMountNode
   insertAt?: 'bottom' | 'top'
   liveRegion?:
     | React.ReactElement[]

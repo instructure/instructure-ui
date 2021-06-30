@@ -37,7 +37,7 @@ type Props = {
   open?: boolean
   onOpen?: (DOMNode: HTMLSpanElement | null) => any
   onClose?: (...args: any[]) => any
-  mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
+  mountNode?: Element | (() => Element)
   insertAt?: 'bottom' | 'top'
   elementRef?: (...args: any[]) => any
 }

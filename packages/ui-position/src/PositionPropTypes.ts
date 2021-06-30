@@ -69,6 +69,40 @@ const PositionPropTypes = {
   ])
 }
 
+export type PositionPlacement =
+  | 'top'
+  | 'end'
+  | 'bottom'
+  | 'start'
+  | 'top start'
+  | 'start top'
+  | 'start center'
+  | 'start bottom'
+  | 'bottom start'
+  | 'bottom center'
+  | 'bottom end'
+  | 'end bottom'
+  | 'end center'
+  | 'end top'
+  | 'top end'
+  | 'top center'
+  | 'center end'
+  | 'center start'
+  | 'top stretch'
+  | 'bottom stretch'
+  | 'end stretch'
+  | 'start stretch'
+  | 'offscreen'
+
+export type PositionMountNode = Element | (() => Element)
+
+export type PositionConstaint =
+  | PositionMountNode
+  | 'window'
+  | 'scroll-parent'
+  | 'parent'
+  | 'none'
+
 export default PositionPropTypes
 export {
   /**

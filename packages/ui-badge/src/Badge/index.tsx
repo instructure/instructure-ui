@@ -26,7 +26,7 @@
 import { Component, Children, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
-import { PositionPropTypes } from '@instructure/ui-position'
+import { PositionPlacement, PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
 import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
@@ -56,7 +56,7 @@ type Props = {
   formatOutput?: (...args: any[]) => any
   as?: React.ReactElement
   margin: Spacing
-  placement: any //TODO: typeof PositionPropTypes.placement
+  placement: PositionPlacement
 }
 
 /**

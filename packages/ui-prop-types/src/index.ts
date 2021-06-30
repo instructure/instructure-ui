@@ -26,19 +26,12 @@ import { Children } from './Children'
 import { childrenOrValue } from './childrenOrValue'
 import { controllable } from './controllable'
 import { cursor } from './cursor'
-import { element } from './element'
-import { makeRequirable } from './makeRequirable'
 import { xor } from './xor'
+import { makeRequirable } from './makeRequirable'
+import { element } from './element'
 
-export {
-  Children,
-  childrenOrValue,
-  controllable,
-  cursor,
-  element,
-  makeRequirable,
-  xor
-}
+export * from './element'
+export { Children, childrenOrValue, controllable, cursor, makeRequirable, xor }
 
 // Provide everything as a default export as well. That way we can easily
 // codemod users that have `import CustomPropTypes from '@instructure/ui-utils/...'
