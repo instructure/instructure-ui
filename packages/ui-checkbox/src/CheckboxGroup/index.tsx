@@ -29,7 +29,11 @@ import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
+import {
+  FormPropTypes,
+  FormFieldGroup,
+  FormMessage
+} from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import {
   matchComponentTypes,
@@ -49,7 +53,7 @@ type Props = {
   onChange?: (...args: any[]) => any
   disabled?: boolean
   readOnly?: boolean
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   size?: 'small' | 'medium' | 'large'
   layout?: 'stacked' | 'columns' | 'inline'
 }

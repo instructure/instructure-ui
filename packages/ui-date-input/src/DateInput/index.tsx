@@ -43,7 +43,7 @@ import {
   controllable
 } from '@instructure/ui-prop-types'
 import { PositionPlacement, PositionPropTypes } from '@instructure/ui-position'
-import { FormPropTypes } from '@instructure/ui-form-field'
+import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 
 import { withStyle, jsx } from '@instructure/emotion'
@@ -66,7 +66,7 @@ type Props = {
   layout?: 'stacked' | 'inline'
   width?: string
   inputRef?: (...args: any[]) => any
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   placement?: PositionPlacement
   isShowingCalendar?: boolean
   onRequestValidateDate?: (...args: any[]) => any

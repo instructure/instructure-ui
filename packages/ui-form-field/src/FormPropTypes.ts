@@ -38,5 +38,15 @@ const FormPropTypes = {
   })
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+type LiteralUnion<T extends U, U = string> = T | (U & {})
+export type FormMessageType = LiteralUnion<
+  'error' | 'hint' | 'success' | 'screenreader-only'
+>
+export type FormMessage = {
+  text: string
+  type: FormMessageType
+}
+
 export default FormPropTypes
 export { FormPropTypes }

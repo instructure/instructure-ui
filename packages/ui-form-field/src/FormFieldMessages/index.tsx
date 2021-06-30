@@ -30,7 +30,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
-import { FormPropTypes } from '../FormPropTypes'
+import { FormPropTypes, FormMessage } from '../FormPropTypes'
 import { FormFieldMessage } from '../FormFieldMessage'
 
 import generateStyle from './styles'
@@ -39,7 +39,7 @@ import generateComponentTheme from './theme'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
 }
 
 /**
@@ -95,6 +95,7 @@ class FormFieldMessages extends Component<Props> {
 
   render() {
     const { messages, styles } = this.props
+
     return messages && messages.length > 0 ? (
       <span
         css={styles.formFieldMessages}

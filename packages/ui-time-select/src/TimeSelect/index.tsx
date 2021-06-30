@@ -37,7 +37,7 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { FormPropTypes } from '@instructure/ui-form-field'
+import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import {
   PositionConstaint,
   PositionPlacement,
@@ -62,7 +62,7 @@ type Props = {
   width?: string
   optionsMaxWidth?: string
   visibleOptionsCount?: number
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   placement?: PositionPlacement
   constrain?: PositionConstaint
   onChange?: (...args: any[]) => any

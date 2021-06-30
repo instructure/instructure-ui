@@ -41,7 +41,7 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLabel } from '../FormFieldLabel'
 import { FormFieldMessages } from '../FormFieldMessages'
-import { FormPropTypes } from '../FormPropTypes'
+import { FormPropTypes, FormMessage } from '../FormPropTypes'
 
 import generateStyle from './styles'
 
@@ -51,7 +51,7 @@ type Props = {
   label: React.ReactNode
   id?: string
   as?: React.ReactElement
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   messagesId?: string
   inline?: boolean
   layout?: 'stacked' | 'inline'

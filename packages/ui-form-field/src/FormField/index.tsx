@@ -27,13 +27,13 @@ import PropTypes from 'prop-types'
 
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
-import { FormPropTypes } from '../FormPropTypes'
+import { FormPropTypes, FormMessage } from '../FormPropTypes'
 import { FormFieldLayout } from '../FormFieldLayout'
 
 type Props = {
   label: React.ReactNode
   id: string
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   messagesId?: string
   inline?: boolean
   layout?: 'stacked' | 'inline'
