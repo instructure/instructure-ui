@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { supportsObjectFit } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
 
 import {
@@ -122,27 +121,12 @@ class Img extends Component<Props> {
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
+    this.props.makeStyles()
   }
 
   componentDidUpdate() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-    this.props.makeStyles(this.makeStylesVariables)
-  }
-
-  get makeStylesVariables() {
-    return {
-      supportsObjectFit: this.supportsObjectFit,
-      hasBackground: this.hasBackground
-    }
-  }
-
-  get supportsObjectFit() {
-    return supportsObjectFit()
-  }
-
-  get hasBackground() {
-    return !this.supportsObjectFit && this.props.constrain
+    this.props.makeStyles()
   }
 
   render() {
@@ -162,8 +146,6 @@ class Img extends Component<Props> {
       ...props
     } = this.props
 
-    const { hasBackground } = this
-
     const a11yProps = {
       alt: alt || ''
     }
@@ -182,17 +164,16 @@ class Img extends Component<Props> {
       elementRef
     }
 
-    if (overlay || hasBackground) {
+    if (overlay) {
       // if a background image is rendered we add the a11y props on the container element
       const rootProps = {
-        ...(hasBackground && a11yProps),
         ...containerProps
       }
 
       return (
         <View {...rootProps} as="span" css={styles.container}>
           {
-            !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
+            <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
           }
           {overlay && <span css={styles.overlay} />}
         </View>
