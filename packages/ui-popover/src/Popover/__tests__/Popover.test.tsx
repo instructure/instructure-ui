@@ -241,7 +241,7 @@ describe('<Popover />', async () => {
             onHideContent={onHideContent}
             renderTrigger={<button>focus me</button>}
             on={['hover', 'focus', 'click']}
-            mountNode={() => document.getElementById('container')}
+            mountNode={() => document.getElementById('container')!}
             shouldContainFocus={false}
             shouldReturnFocus={false}
             shouldFocusContentOnTriggerBlur

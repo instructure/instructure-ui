@@ -33,7 +33,12 @@ import {
   passthroughProps,
   callRenderProp
 } from '@instructure/ui-react-utils'
-import { PositionPropTypes } from '@instructure/ui-position'
+import {
+  PositionConstaint,
+  PositionMountNode,
+  PositionPlacement,
+  PositionPropTypes
+} from '@instructure/ui-position'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { Popover } from '@instructure/ui-popover'
@@ -52,9 +57,9 @@ type Props = {
   as?: React.ReactElement
   on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
   color?: 'primary' | 'primary-inverse'
-  placement?: any // TODO: PositionPropTypes.placement
-  mountNode?: any // TODO: PositionPropTypes.mountNode
-  constrain?: any // TODO: PositionPropTypes.constrain
+  placement?: PositionPlacement
+  mountNode?: PositionMountNode
+  constrain?: PositionConstaint
   offsetX?: string | number
   offsetY?: string | number
   positionTarget?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),

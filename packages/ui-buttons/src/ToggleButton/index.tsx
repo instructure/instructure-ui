@@ -26,7 +26,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { testable } from '@instructure/ui-testable'
-import { PositionPropTypes } from '@instructure/ui-position'
+import {
+  PositionConstaint,
+  PositionMountNode,
+  PositionPlacement,
+  PositionPropTypes
+} from '@instructure/ui-position'
 
 import { callRenderProp, passthroughProps } from '@instructure/ui-react-utils'
 
@@ -44,9 +49,9 @@ type Props = {
   onClick?: (...args: any[]) => any
   color?: string
   isShowingTooltip?: boolean
-  mountNode?: any // TODO: PositionPropTypes.mountNode
-  placement?: any // TODO: PositionPropTypes.placement
-  constrain?: any // TODO: PositionPropTypes.constrain
+  mountNode?: PositionMountNode
+  placement?: PositionPlacement
+  constrain?: PositionConstaint
 }
 
 /**

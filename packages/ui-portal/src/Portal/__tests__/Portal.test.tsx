@@ -125,8 +125,8 @@ describe(`<Portal />`, async () => {
       await mount(
         <div>
           <Portal
+            // @ts-expect-error ts-migrate(2769) FIXME:
             mountNode={() => document.getElementById('portal-mount-node')}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             id="portal"
           >
             Hello World

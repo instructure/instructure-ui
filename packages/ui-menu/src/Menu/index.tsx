@@ -32,7 +32,12 @@ import {
   controllable,
   Children as ChildrenPropTypes
 } from '@instructure/ui-prop-types'
-import { PositionPropTypes } from '@instructure/ui-position'
+import {
+  PositionConstaint,
+  PositionMountNode,
+  PositionPlacement,
+  PositionPropTypes
+} from '@instructure/ui-position'
 import {
   safeCloneElement,
   matchComponentTypes
@@ -56,7 +61,7 @@ type Props = {
   label?: string
   disabled?: boolean
   trigger?: React.ReactNode
-  placement?: any // TODO: PositionPropTypes.placement
+  placement?: PositionPlacement
   defaultShow?: boolean
   show?: any // TODO: controllable(PropTypes.bool, 'onToggle', 'defaultShow')
   onToggle?: (...args: any[]) => any
@@ -69,8 +74,8 @@ type Props = {
   onKeyUp?: (...args: any[]) => any
   menuRef?: (...args: any[]) => any
   popoverRef?: (...args: any[]) => any
-  mountNode?: any // TODO: PositionPropTypes.mountNode
-  constrain?: any // TODO: PositionPropTypes.constrain
+  mountNode?: PositionMountNode
+  constrain?: PositionConstaint
   liveRegion?:
     | React.ReactElement[]
     | React.ReactElement

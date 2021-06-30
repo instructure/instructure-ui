@@ -42,7 +42,7 @@ import {
   Children as ChildrenPropTypes,
   controllable
 } from '@instructure/ui-prop-types'
-import { PositionPropTypes } from '@instructure/ui-position'
+import { PositionPlacement, PositionPropTypes } from '@instructure/ui-position'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { testable } from '@instructure/ui-testable'
 
@@ -67,7 +67,7 @@ type Props = {
   width?: string
   inputRef?: (...args: any[]) => any
   messages?: any[] // TODO: FormPropTypes.message
-  placement?: any // TODO: PositionPropTypes.placement
+  placement?: PositionPlacement
   isShowingCalendar?: boolean
   onRequestValidateDate?: (...args: any[]) => any
   onRequestShowCalendar?: (...args: any[]) => any
@@ -313,7 +313,7 @@ class DateInput extends Component<Props> {
     hasInputRef: false
   }
 
-  _input = null
+  _input = undefined
 
   get selectedDateId() {
     let selectedDateId

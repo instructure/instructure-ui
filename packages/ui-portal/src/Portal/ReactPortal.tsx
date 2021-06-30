@@ -33,9 +33,12 @@ type Props = {
   open?: boolean
   onOpen?: (DOMNode: HTMLSpanElement | null) => any
   onClose?: (...args: any[]) => any
-  mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
+  mountNode?: Element | (() => Element)
   insertAt?: 'bottom' | 'top'
   elementRef?: (...args: any[]) => any
+}
+type State = {
+  mountNode: Element
 }
 
 /**
@@ -45,7 +48,7 @@ private: true
 @module ReactPortal
 **/
 @bidirectional()
-class ReactPortal extends React.Component<Props & BidirectionalProps> {
+class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
   static propTypes = {
     /**
      * Whether or not the `<Portal />` is open
@@ -117,7 +120,6 @@ class ReactPortal extends React.Component<Props & BidirectionalProps> {
   componentDidUpdate(prevProps) {
     const mountNode = this.findMountNode(this.props)
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on type 'Reado... Remove this comment to see the full error message
     if (mountNode !== this.state.mountNode) {
       // set state here to make the component re-render
       this.setState({ mountNode })
@@ -205,16 +207,12 @@ class ReactPortal extends React.Component<Props & BidirectionalProps> {
     }
 
     // Append node to container if it isn't already
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on... Remove this comment to see the full error message
     if (this.DOMNode.parentNode !== this.state.mountNode) {
       if (insertAt === 'bottom') {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on type 'Reado... Remove this comment to see the full error message
         this.state.mountNode.appendChild(this.DOMNode)
       } else {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on type 'Reado... Remove this comment to see the full error message
         this.state.mountNode.insertBefore(
           this.DOMNode,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'mountNode' does not exist on type 'Reado... Remove this comment to see the full error message
           this.state.mountNode.firstChild
         )
       }
@@ -232,7 +230,7 @@ class ReactPortal extends React.Component<Props & BidirectionalProps> {
       mountNode = props.mountNode
     }
 
-    if (!mountNode || !(mountNode as Element).nodeName) {
+    if (!mountNode || !mountNode.nodeName) {
       mountNode = document.body
     }
 
