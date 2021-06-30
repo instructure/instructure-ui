@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-// TODO these are implemented in ui-utils, get them from there
+// These cannot be retrieved from ui-utils, because it creates an invalid package
+// build order.
 const capitalizeFirstLetter = (exports.capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 })

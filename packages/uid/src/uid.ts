@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-//  based on: https://github.com/ai/nanoid/blob/master/non-secure.js
+//  based on: https://github.com/ai/nanoid/blob/main/non-secure/index.js
 
 const dictionary =
   'getRandomVcryp0123456789bfhijklqsuvwxzABCDEFGHIJKLMNOPQSTUWXYZ'
@@ -36,11 +36,11 @@ const dictionaryLengthMinus1 = dictionary.length - 1
  *
  * @module uid
  * @param {String} prefix a string to prefix the id for debugging in non-production env
- * @param {Number} length id length (in characters, minus the prefix)
+ * @param {Number} length id length (in characters, minus the prefix). Default is 12
  * @returns {String} a unique id
  */
 function uid(prefix = '', length = 12) {
-  const id = `u${_uid('', length - 1)}`
+  const id = `u${_uid(length - 1)}`
   if (prefix && process.env.NODE_ENV !== 'production') {
     return `${prefix}__${id}`
   } else {
@@ -48,18 +48,17 @@ function uid(prefix = '', length = 12) {
   }
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'size' implicitly has an 'any' type.
-function _random(size) {
+function _random(size: number) {
   const result = []
   /* eslint-disable-next-line no-param-reassign */
   while (0 < size--) {
-    result.push(Math.floor(Math.random() * 256))
+    // `| 0` is faster than `Math.floor()`.
+    result.push((Math.random() * 256) | 0)
   }
   return result
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter '_ignored' implicitly has an 'any' type.
-function _uid(_ignored, idLength = 12) {
+function _uid(idLength: number) {
   let id = ''
   const bytes = _random(idLength)
   /* eslint-disable-next-line no-param-reassign */
