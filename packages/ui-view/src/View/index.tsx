@@ -42,7 +42,12 @@ import {
   jsx,
   withStyle,
   ThemeablePropTypes,
-  ThemeablePropValues
+  Spacing,
+  BorderWidth,
+  BorderRadii,
+  Shadow,
+  Stacking,
+  CSSObject
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -100,12 +105,15 @@ type Props = {
   withVisualDebug?: boolean
   makeStyles?: (...args: any[]) => any
   styles?: any
-  margin: keyof typeof ThemeablePropValues.SPACING
-  padding: keyof typeof ThemeablePropValues.SPACING
-  borderWidth: keyof typeof ThemeablePropValues.BORDER_WIDTHS
-  borderRadius: keyof typeof ThemeablePropValues.BORDER_RADII
-  shadow: keyof typeof ThemeablePropValues.SHADOW_TYPES
-  stacking: keyof typeof ThemeablePropValues.STACKING_TYPES
+  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+  margin?: Spacing
+  padding?: Spacing
+  borderWidth?: BorderWidth
+  borderRadius?: BorderRadii
+  shadow?: Shadow
+  stacking?: Stacking
+  style?: CSSObject
+  [key: string]: unknown
 }
 
 /**
@@ -439,7 +447,6 @@ class View extends Component<Props & BidirectionalProps> {
       focusColor,
       shouldAnimateFocus,
       borderColor,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
       className, // eslint-disable-line react/prop-types
       styles,
       makeStyles,

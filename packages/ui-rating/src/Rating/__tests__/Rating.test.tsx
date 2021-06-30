@@ -105,7 +105,7 @@ describe('<Rating />', async () => {
       margin: 'small'
     }
 
-    Object.keys(View.allowedProps)
+    Object.keys(View.propTypes)
       .filter(
         (prop) =>
           prop !== 'theme' &&
