@@ -27,22 +27,17 @@ import { getElementType } from '@instructure/ui-react-utils'
 
 import { DIRECTION, TextDirectionContext } from '../TextDirectionContext'
 
-type OwnApplyTextDirectionProps = {
+type ApplyTextDirectionProps = {
   dir?: 'ltr' | 'rtl'
   children?: React.ReactNode | ((...args: any[]) => any)
   as?: React.ReactElement
 }
-
-// @ts-expect-error ts-migrate(2456) FIXME: Type alias 'ApplyTextDirectionProps' circularly re... Remove this comment to see the full error message
-type ApplyTextDirectionProps = OwnApplyTextDirectionProps &
-  typeof ApplyTextDirection.defaultProps
 
 /**
 ---
 category: components/utilities
 ---
 **/
-// @ts-expect-error ts-migrate(7022) FIXME: 'ApplyTextDirection' implicitly has type 'any' bec... Remove this comment to see the full error message
 const ApplyTextDirection = (props: ApplyTextDirectionProps) => {
   const context = useTextDirectionContext()
   const dir = props.dir || context
@@ -70,9 +65,7 @@ ApplyTextDirection.defaultProps = {
 ApplyTextDirection.DIRECTION = DIRECTION
 
 const useTextDirectionContext = () => {
-  const context = useContext(TextDirectionContext)
-
-  return context
+  return useContext(TextDirectionContext)
 }
 
 export { ApplyTextDirection, useTextDirectionContext }

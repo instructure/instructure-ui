@@ -318,7 +318,6 @@ class TimeSelect extends Component<Props> {
     } else if (this.context && this.context.locale) {
       return this.context.locale
     }
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     return Locale.browserLocale()
   }
 

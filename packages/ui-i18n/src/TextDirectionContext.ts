@@ -21,11 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { createContext } from 'react'
 import { getTextDirection } from './getTextDirection'
 
-// @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
 const TextDirectionContext = createContext(getTextDirection() || 'ltr')
+
 const DIRECTION = {
   ltr: 'ltr',
   rtl: 'rtl'

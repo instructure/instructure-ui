@@ -38,6 +38,7 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   label: string
@@ -69,7 +70,6 @@ type Props = {
   shadow?: boolean
   makeStyles?: (...args: any[]) => any
   styles?: any
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 /**
 ---
@@ -79,7 +79,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class Tray extends Component<Props> {
+class Tray extends Component<Props & BidirectionalProps> {
   static componentId = 'Tray'
 
   static propTypes = {
@@ -208,7 +208,6 @@ class Tray extends Component<Props> {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
@@ -266,9 +265,7 @@ class Tray extends Component<Props> {
 
   get placement() {
     const { placement, dir } = this.props
-    //@ts-expect-error FIXME:
     const isRtl = dir === bidirectional.DIRECTION.rtl
-
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 

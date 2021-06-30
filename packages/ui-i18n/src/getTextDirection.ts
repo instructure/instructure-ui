@@ -21,8 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { canUseDOM, getComputedStyle } from '@instructure/ui-dom-utils'
-let defaultDir: any, dirAttribute: any, observer: any
+
+type HtmlDir = CSSDirection | 'auto' | null
+type CSSDirection = 'ltr' | 'rtl' | null
+
+let defaultDir: HtmlDir
+let dirAttribute: HtmlDir
+let observer: MutationObserver
+
 const getDefaultDir = () => {
   /**
    * use a cached value for the default of <html> element's "dir" so we don't
@@ -33,11 +41,14 @@ const getDefaultDir = () => {
   }
   if (canUseDOM) {
     const htmlEl = document.documentElement
-    dirAttribute = htmlEl.getAttribute('dir')
-    defaultDir = dirAttribute || (getComputedStyle(htmlEl) as any).direction
+    dirAttribute = htmlEl.getAttribute('dir') as HtmlDir
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/direction
+    defaultDir =
+      dirAttribute || (getComputedStyle(htmlEl).direction as CSSDirection)
     if (!observer) {
       observer = new MutationObserver(() => {
-        const attr = htmlEl.getAttribute('dir')
+        // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
+        const attr = htmlEl.getAttribute('dir') as HtmlDir
         if (attr && attr !== dirAttribute) {
           dirAttribute = defaultDir = attr
         }
@@ -46,6 +57,7 @@ const getDefaultDir = () => {
     }
     return defaultDir
   }
+  return undefined
 }
 /**
  * ---
@@ -57,15 +69,16 @@ const getDefaultDir = () => {
  * @param {Element} element will use the <html> element by default
  * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
  */
-function getTextDirection(element: any) {
+function getTextDirection(element?: Element) {
   if (canUseDOM) {
     if (typeof element === 'undefined' || element === document.documentElement)
       return getDefaultDir()
     return (
-      element.getAttribute('dir') ||
-      (getComputedStyle(element) as any).direction
+      (element.getAttribute('dir') as HtmlDir) ||
+      (getComputedStyle(element).direction as CSSDirection)
     )
   }
+  return undefined
 }
 export default getTextDirection
 export { getTextDirection }

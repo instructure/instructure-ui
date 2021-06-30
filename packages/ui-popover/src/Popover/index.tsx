@@ -51,6 +51,7 @@ import { ThemeablePropTypes } from '@instructure/emotion'
 import { testable } from '@instructure/ui-testable'
 
 import { FocusRegion } from '@instructure/ui-a11y-utils'
+import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   isShowingContent?: boolean
@@ -95,7 +96,6 @@ type Props = {
   onMouseOver?: (...args: any[]) => any
   onMouseOut?: (...args: any[]) => any
   renderTrigger?: React.ReactNode | ((...args: any[]) => any)
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
 /**
@@ -106,7 +106,7 @@ tags: overlay, portal, dialog
 **/
 @bidirectional()
 @testable()
-class Popover extends Component<Props> {
+class Popover extends Component<Props & BidirectionalProps> {
   static componentId = 'Popover'
 
   static propTypes = {
@@ -289,7 +289,6 @@ class Popover extends Component<Props> {
      * The content to be shown by the popover
      */
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
@@ -513,9 +512,7 @@ class Popover extends Component<Props> {
   get placement() {
     let { placement } = this.props
     const { dir } = this.props
-    //@ts-expect-error FIXME:
     const isRtl = dir === bidirectional.DIRECTION.rtl
-
     if (isRtl) {
       placement = mirrorHorizontalPlacement(placement, ' ')
     }
@@ -819,7 +816,6 @@ class Popover extends Component<Props> {
           // @ts-expect-error ts-migrate(2322) FIXME: Type '"default" | "inverse"' is not assignable to ... Remove this comment to see the full error message
           background: color === 'primary' ? 'default' : 'inverse',
           placement:
-            //@ts-expect-error FIXME:
             this.props.dir === bidirectional.DIRECTION.rtl
               ? mirrorHorizontalPlacement(placement, ' ')
               : placement

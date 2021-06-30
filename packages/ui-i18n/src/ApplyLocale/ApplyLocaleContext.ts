@@ -24,7 +24,10 @@
 
 import { createContext } from 'react'
 
-export const ApplyLocaleContext = createContext({
+export const ApplyLocaleContext = createContext<{
+  locale?: string
+  timezone?: string
+}>({
   locale: undefined,
   timezone: undefined
 })

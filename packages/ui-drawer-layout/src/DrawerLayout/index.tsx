@@ -44,13 +44,13 @@ import { DrawerTray } from './DrawerTray'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
+import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   minWidth?: string
   onOverlayTrayChange?: (...args: any[]) => any
   makeStyles?: (...args: any[]) => any
   styles?: any
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
 /**
@@ -61,7 +61,7 @@ category: components
 @withStyle(generateStyle, null)
 @bidirectional()
 @testable()
-class DrawerLayout extends Component<Props> {
+class DrawerLayout extends Component<Props & BidirectionalProps> {
   static componentId = 'DrawerLayout'
 
   static locatorAttribute = 'data-drawer-layout'
@@ -84,7 +84,6 @@ class DrawerLayout extends Component<Props> {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
@@ -136,10 +135,7 @@ class DrawerLayout extends Component<Props> {
 
   get trayPlacement() {
     const { placement, dir } = this.trayProps
-    //@ts-expect-error FIXME:
-
     const isRtl = dir === bidirectional.DIRECTION.rtl
-
     return isRtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
