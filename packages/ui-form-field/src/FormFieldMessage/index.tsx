@@ -32,11 +32,12 @@ import { withStyle, jsx } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { FormMessageType } from '../FormPropTypes'
 
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  variant?: 'error' | 'hint' | 'success' | 'screenreader-only'
+  variant?: FormMessageType
 }
 
 /**

@@ -26,7 +26,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import {
+  FormField,
+  FormMessage,
+  FormPropTypes
+} from '@instructure/ui-form-field'
 import {
   IconArrowOpenDownLine,
   IconArrowOpenUpLine
@@ -51,7 +55,7 @@ type Props = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
   id?: string
   interaction?: 'enabled' | 'disabled' | 'readonly'
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   placeholder?: string
   isRequired?: boolean
   showArrows?: boolean

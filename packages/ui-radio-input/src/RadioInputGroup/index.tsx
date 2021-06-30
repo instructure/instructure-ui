@@ -26,7 +26,11 @@ import React, { Children, Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldGroup } from '@instructure/ui-form-field'
+import {
+  FormPropTypes,
+  FormFieldGroup,
+  FormMessage
+} from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -46,7 +50,7 @@ type Props = {
   onChange?: (...args: any[]) => any
   disabled?: boolean
   readOnly?: boolean
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   variant?: 'simple' | 'toggle'
   size?: 'small' | 'medium' | 'large'
   layout?: 'stacked' | 'columns' | 'inline'

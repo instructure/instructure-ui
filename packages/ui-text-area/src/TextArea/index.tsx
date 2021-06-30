@@ -27,7 +27,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import {
+  FormField,
+  FormMessage,
+  FormPropTypes
+} from '@instructure/ui-form-field'
 import {
   addEventListener,
   isActiveElement,
@@ -54,7 +58,7 @@ type Props = {
   width?: string
   height?: string
   maxHeight?: number | string
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   inline?: boolean
   placeholder?: string
   disabled?: boolean
@@ -416,10 +420,10 @@ class TextArea extends Component<Props> {
     const props = omitProps(this.props, TextArea.propTypes)
 
     const style = {
-      width: width,
-      resize: resize,
+      width,
+      resize,
       height: !autoGrow ? height : null,
-      maxHeight: maxHeight
+      maxHeight
     }
 
     const textarea = (
@@ -461,8 +465,8 @@ class TextArea extends Component<Props> {
         <div
           css={this.props.styles.textAreaLayout}
           style={{
-            width: width,
-            maxHeight: maxHeight
+            width,
+            maxHeight
           }}
           ref={this.handleContainerRef}
         >

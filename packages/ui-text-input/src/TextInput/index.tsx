@@ -33,7 +33,11 @@ import {
   passthroughProps
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import {
+  FormField,
+  FormMessage,
+  FormPropTypes
+} from '@instructure/ui-form-field'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -47,7 +51,7 @@ type Props = {
   value?: any // TODO: controllable(PropTypes.string)
   defaultValue?: string
   interaction?: 'enabled' | 'disabled' | 'readonly'
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   size?: 'small' | 'medium' | 'large'
   textAlign?: 'start' | 'center'
   width?: string

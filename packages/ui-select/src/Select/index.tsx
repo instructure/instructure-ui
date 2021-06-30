@@ -27,7 +27,7 @@ import { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
+import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import {
@@ -82,7 +82,7 @@ type Props = {
   htmlSize?: string | number
   optionsMaxWidth?: string
   visibleOptionsCount?: number
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   placement?: PositionPlacement
   constrain?: PositionConstaint
   mountNode?: PositionMountNode

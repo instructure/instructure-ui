@@ -31,7 +31,7 @@ import { pickProps, omitProps } from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLayout } from '../FormFieldLayout'
-import { FormPropTypes } from '../FormPropTypes'
+import { FormPropTypes, FormMessage } from '../FormPropTypes'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -41,7 +41,7 @@ type Props = {
   styles?: any
   description: React.ReactNode
   as?: React.ReactElement
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   messagesId?: string
   disabled?: boolean
   layout?: 'stacked' | 'columns' | 'inline'

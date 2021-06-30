@@ -25,7 +25,11 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
-import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
+import {
+  FormPropTypes,
+  FormFieldMessages,
+  FormMessage
+} from '@instructure/ui-form-field'
 import { View } from '@instructure/ui-view'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
@@ -58,7 +62,7 @@ type Props = {
   id?: string
   renderLabel: ((...args: any[]) => any) | React.ReactNode
   accept?: string | string[]
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   onClick?: (...args: any[]) => any
   onDrop?: (...args: any[]) => any
   onDropAccepted?: (...args: any[]) => any

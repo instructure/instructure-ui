@@ -28,7 +28,11 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { FormPropTypes, FormFieldMessages } from '@instructure/ui-form-field'
+import {
+  FormPropTypes,
+  FormFieldMessages,
+  FormMessage
+} from '@instructure/ui-form-field'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { logError as error } from '@instructure/console'
 import { uid } from '@instructure/uid'
@@ -51,7 +55,7 @@ type Props = {
   label: React.ReactNode
   id?: string
   value?: string | number
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   defaultChecked?: boolean
   checked?: any // TODO: controllable(PropTypes.bool, 'onChange', 'defaultChecked')
   onChange?: (...args: any[]) => any

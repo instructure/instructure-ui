@@ -28,7 +28,11 @@ import PropTypes from 'prop-types'
 
 import { ContextView } from '@instructure/ui-view'
 import { controllable } from '@instructure/ui-prop-types'
-import { FormField, FormPropTypes } from '@instructure/ui-form-field'
+import {
+  FormField,
+  FormMessage,
+  FormPropTypes
+} from '@instructure/ui-form-field'
 import { addEventListener } from '@instructure/ui-dom-utils'
 import { uid } from '@instructure/uid'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -44,7 +48,7 @@ type Props = {
   defaultValue?: number
   value?: any // TODO: controllable(PropTypes.number)
   onChange?: (...args: any[]) => any
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   size?: 'small' | 'medium' | 'large'
   layout?: 'stacked' | 'inline'
   id?: string

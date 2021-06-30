@@ -26,7 +26,7 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { FormPropTypes } from '@instructure/ui-form-field'
+import { FormMessage, FormPropTypes } from '@instructure/ui-form-field'
 import {
   PositionConstaint,
   PositionMountNode,
@@ -60,7 +60,7 @@ type Props = {
   width?: string
   optionsMaxWidth?: string
   visibleOptionsCount?: number
-  messages?: any[] // TODO: FormPropTypes.message
+  messages?: FormMessage[]
   placement?: PositionPlacement
   constrain?: PositionConstaint
   mountNode?: PositionMountNode
