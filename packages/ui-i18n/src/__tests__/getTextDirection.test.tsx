@@ -28,7 +28,6 @@ import { getTextDirection } from '../getTextDirection'
 
 describe('getTextDirection', async () => {
   it('defaults the dir of <html>', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1 arguments, but got 0.
     expect(getTextDirection()).to.equal(
       document.documentElement.getAttribute('dir')
     )
@@ -58,6 +57,8 @@ describe('getTextDirection', async () => {
         <h1>Hello</h1>
       </div>
     )
-    expect(getTextDirection(subject.getDOMNode().firstChild)).to.equal('rtl')
+    expect(
+      getTextDirection(subject.getDOMNode().firstChild as Element)
+    ).to.equal('rtl')
   })
 })

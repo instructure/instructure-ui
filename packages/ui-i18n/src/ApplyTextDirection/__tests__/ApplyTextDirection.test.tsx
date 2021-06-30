@@ -26,12 +26,11 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import { ApplyTextDirection } from '../index'
-import { bidirectional } from '../../bidirectional'
+import { bidirectional, BidirectionalProps } from '../../bidirectional'
 
 @bidirectional()
-class BidirectionalComponent extends React.Component {
+class BidirectionalComponent extends React.Component<BidirectionalProps> {
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dir' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
     return <div data-dir={this.props.dir}>Hello world</div>
   }
 }

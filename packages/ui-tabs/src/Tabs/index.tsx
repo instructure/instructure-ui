@@ -51,6 +51,7 @@ import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
+import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   makeStyles?: (...args: any[]) => any
@@ -67,7 +68,6 @@ type Props = {
   elementRef?: (...args: any[]) => any
   tabOverflow?: 'stack' | 'scroll'
   shouldFocusOnRender?: boolean
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
 /**
@@ -78,7 +78,7 @@ category: components
 @withStyle(generateStyle, generateComponentTheme)
 @bidirectional()
 @testable()
-class Tabs extends Component<Props> {
+class Tabs extends Component<Props & BidirectionalProps> {
   static componentId = 'Tabs'
 
   static propTypes = {
@@ -122,7 +122,6 @@ class Tabs extends Component<Props> {
      */
     tabOverflow: PropTypes.oneOf(['stack', 'scroll']),
     shouldFocusOnRender: PropTypes.bool,
-    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
@@ -293,7 +292,6 @@ class Tabs extends Component<Props> {
       typeof this._tabList.scrollTo === 'function' // test for scrollTo support
     ) {
       const { dir } = this.props
-      //@ts-expect-error FIXME:
       const isRtl = dir === bidirectional.DIRECTION.rtl
 
       const tabPosition = getBoundingClientRect(activeTabEl)

@@ -47,6 +47,7 @@ import {
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
+import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   as?: React.ReactElement | string
@@ -100,7 +101,6 @@ type Props = {
   withVisualDebug?: boolean
   makeStyles?: (...args: any[]) => any
   styles?: any
-  dir?: any
   margin: keyof typeof ThemeablePropValues.SPACING
   padding: keyof typeof ThemeablePropValues.SPACING
   borderWidth: keyof typeof ThemeablePropValues.BORDER_WIDTHS
@@ -117,7 +117,7 @@ category: components
 **/
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
-class View extends Component<Props> {
+class View extends Component<Props & BidirectionalProps> {
   static componentId = 'View'
 
   static propTypes = {
@@ -294,7 +294,6 @@ class View extends Component<Props> {
     makeStyles: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
-    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }

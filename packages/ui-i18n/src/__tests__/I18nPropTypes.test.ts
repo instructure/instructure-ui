@@ -30,11 +30,8 @@ describe('I18nPropTypes', () => {
     const { iso8601 } = I18nPropTypes
 
     // Test cases taken from https://www.myintervals.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/
-
     it('should not return error when provided with a valid ISO8601 string', () => {
-      const props = { date: null }
-      const args = [props, 'date', 'TestComponent']
-
+      const props: { date: string | null } = { date: null }
       const validISO8601Strings = [
         '2009-12T12:34',
         '2009',
@@ -76,19 +73,14 @@ describe('I18nPropTypes', () => {
         '2009-05-19 143922.500',
         '2009-05-19 1439,55'
       ]
-
       validISO8601Strings.forEach((iso8601string) => {
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
         props.date = iso8601string
-        // @ts-expect-error ts-migrate(2556) FIXME: Expected 4 arguments, but got 0 or more.
-        expect(iso8601(...args)).to.not.exist()
+        expect(iso8601(props, 'date', 'TestComponent', '', '')).to.not.exist()
       })
     })
 
     it('should return error when provided with an invalid ISO8601 string', () => {
-      const props = { date: null }
-      const args = [props, 'date', 'TestComponent']
-
+      const props: { date: string | null } = { date: null }
       const invalidISO8601Strings = [
         'some text',
         'June 27, 1990',
@@ -116,12 +108,11 @@ describe('I18nPropTypes', () => {
         '2010-02-18T16:23.33.600',
         '2010-02-18T16,25:23:48,444'
       ]
-
       invalidISO8601Strings.forEach((iso8601string) => {
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'null'.
         props.date = iso8601string
-        // @ts-expect-error ts-migrate(2556) FIXME: Expected 4 arguments, but got 0 or more.
-        expect(iso8601(...args)).to.be.an.instanceOf(Error)
+        expect(
+          iso8601(props, 'date', 'TestComponent', '', '')
+        ).to.be.an.instanceOf(Error)
       })
     })
   })

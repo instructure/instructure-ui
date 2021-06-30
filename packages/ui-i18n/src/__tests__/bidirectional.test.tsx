@@ -25,13 +25,12 @@
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
-import { bidirectional } from '../bidirectional'
+import { bidirectional, BidirectionalProps } from '../bidirectional'
 import { ApplyTextDirection } from '../ApplyTextDirection'
 
 @bidirectional()
-class BidirectionalComponent extends React.Component {
+class BidirectionalComponent extends React.Component<BidirectionalProps> {
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'dir' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
     return <div data-dir={this.props.dir}>Hello World</div>
   }
 }
@@ -39,25 +38,20 @@ class BidirectionalComponent extends React.Component {
 describe('@bidirectional', async () => {
   it('should take on the direction of the document by default', async () => {
     const subject = await mount(<BidirectionalComponent />)
-
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
   })
 
   it('should set the text direction via props', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<BidirectionalComponent dir="rtl" />)
-
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
 
   it('should give props preference when context and context are present', async () => {
     const subject = await mount(
       <ApplyTextDirection dir="ltr">
-        {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
         <BidirectionalComponent dir="rtl" />
       </ApplyTextDirection>
     )
-
     expect(
       (subject.getDOMNode().childNodes[0] as Element).getAttribute('data-dir')
     ).to.equal('rtl')

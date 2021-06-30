@@ -33,7 +33,7 @@ describe('DateTime', () => {
   it('checks params', () => {
     let whoops = false
     try {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 0.
+      // @ts-expect-error intentionally wrong
       now()
     } catch (ex) {
       whoops = true
@@ -42,7 +42,7 @@ describe('DateTime', () => {
     }
     whoops = false
     try {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
+      // @ts-expect-error intentionally wrong
       now(locale)
     } catch (ex) {
       whoops = true
@@ -145,7 +145,6 @@ describe('DateTime', () => {
     result = toLocaleString('2018-04-15T13:00Z', 'fr', 'UTC', 'LLL')
     expect(result).to.equal('15 avril 2018 13:00')
     // iso8601 in given timezone
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 4 arguments, but got 3.
     result = toLocaleString('2018-04-15T13:00Z', 'fr', 'America/Halifax') // -3
     expect(result).to.equal('2018-04-15T10:00:00.000-03:00')
   })

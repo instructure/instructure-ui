@@ -21,12 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { forwardRef } from 'react'
+import React, { ComponentClass, ForwardedRef, forwardRef } from 'react'
 import { decorator } from '@instructure/ui-decorator'
 import { DIRECTION, TextDirectionContext } from './TextDirectionContext'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'hois... Remove this comment to see the full error message
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
+// This is a workaround because TS cannot take type information from
+// decorators into account. This type needs to be added to every component,
+// that uses the bidirectional decorator.
+// see https://github.com/microsoft/TypeScript/issues/4881
+export type BidirectionalProps = {
+  dir?: 'ltr' | 'rtl'
+}
+
+type BidirectionalInternalProps = {
+  forwardedRef: ForwardedRef<any>
+}
+
+type BidirectionalType = {
+  // TODO likely this can be typed better.
+  (): (ComposedComponent: any) => any
+  DIRECTION: typeof DIRECTION
+}
 /**
  * ---
  * category: utilities/i18n
@@ -54,35 +70,38 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
  * if it is not present.
  *
  * @module bidirectional
- * @return {function} composes the bidirectional component.
+ * @return The decorator that composes the bidirectional component.
  */
-const bidirectional = decorator((ComposedComponent: any) => {
-  class BidirectionalComponent extends React.Component {
-    render() {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'forwardedRef' does not exist on type 'Re... Remove this comment to see the full error message
-      const { forwardedRef, ...rest } = this.props
-      return (
-        <TextDirectionContext.Consumer>
-          {(dir) => (
-            <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
-          )}
-        </TextDirectionContext.Consumer>
-      )
+const bidirectional: BidirectionalType = decorator(
+  (ComposedComponent: ComponentClass<any>) => {
+    class BidirectionalComponent extends React.Component<BidirectionalInternalProps> {
+      render() {
+        const { forwardedRef, ...rest } = this.props
+        return (
+          <TextDirectionContext.Consumer>
+            {(dir) => (
+              <ComposedComponent ref={forwardedRef} dir={dir} {...rest} />
+            )}
+          </TextDirectionContext.Consumer>
+        )
+      }
     }
+
+    const BidirectionalForwardingRef = forwardRef<any, BidirectionalProps>(
+      (props, ref) => <BidirectionalComponent {...props} forwardedRef={ref} />
+    )
+    if (process.env.NODE_ENV !== 'production') {
+      const displayName =
+        ComposedComponent.displayName || ComposedComponent.name
+      BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${displayName})`
+    }
+    hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
+    BidirectionalForwardingRef.defaultProps = ComposedComponent.defaultProps
+    BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
+    return BidirectionalForwardingRef
   }
-  const BidirectionalForwardingRef = forwardRef((props, ref) => (
-    // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-    <BidirectionalComponent {...props} forwardedRef={ref} />
-  ))
-  if (process.env.NODE_ENV !== 'production') {
-    const displayName = ComposedComponent.displayName || ComposedComponent.name
-    BidirectionalForwardingRef.displayName = `BidirectionalForwardingRef(${displayName})`
-  }
-  hoistNonReactStatics(BidirectionalForwardingRef, ComposedComponent)
-  BidirectionalForwardingRef.defaultProps = ComposedComponent.defaultProps
-  BidirectionalForwardingRef.propTypes = ComposedComponent.propTypes
-  return BidirectionalForwardingRef
-})
-;(bidirectional as any).DIRECTION = DIRECTION
+) as BidirectionalType
+
+bidirectional.DIRECTION = DIRECTION
 export default bidirectional
 export { bidirectional }

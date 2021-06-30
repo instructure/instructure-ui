@@ -40,7 +40,6 @@ category: components/utilities
 **/
 export const ApplyLocale = ({ children, locale, timezone }: Props) => {
   return (
-    // @ts-expect-error ts-migrate(2322) FIXME: Remove this comment to see the full error message
     <ApplyLocaleContext.Provider value={{ locale, timezone }}>
       {ensureSingleChild(children)}
     </ApplyLocaleContext.Provider>

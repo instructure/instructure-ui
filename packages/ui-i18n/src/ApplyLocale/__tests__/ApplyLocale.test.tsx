@@ -23,15 +23,12 @@
  */
 
 import React from 'react'
-
 import { expect, mount, within } from '@instructure/ui-test-utils'
-
 import { ApplyLocale } from '../index'
 import { ApplyLocaleContext } from '../ApplyLocaleContext'
 
 class LocalizableComponent extends React.Component {
   static contextType = ApplyLocaleContext
-
   render() {
     return (
       <div>

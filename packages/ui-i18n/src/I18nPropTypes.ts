@@ -33,14 +33,14 @@ import { Requireable } from 'prop-types'
  * @param {string} propName - name of the given prop
  * @param {string} componentName - name of the component
  * @param {string} location
- * @returns {undefined|Error} if prop is an invalid ISO 8601 string
+ * @returns {null|Error} if prop is an invalid ISO 8601 string
  */
-function iso8601(
-  props: Record<string, any>,
-  propName: string,
-  componentName: string,
-  location: string
-): Error | null {
+const iso8601: Requireable<any> = function (
+  props,
+  propName,
+  componentName,
+  location
+) {
   const propValue = props[propName]
   if (typeof propValue === 'undefined' || propValue === '') return null
   const propValueType = typeof propValue
@@ -65,7 +65,7 @@ function iso8601(
 iso8601.isRequired = makeRequirable(iso8601)
 
 const I18nPropTypes = {
-  iso8601: iso8601 as Requireable<any>
+  iso8601: iso8601
 }
 
 export default I18nPropTypes

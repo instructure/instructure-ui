@@ -34,14 +34,12 @@ describe('browserLocale', () => {
   describe('with document lang attribute', () => {
     it('returns the document locale if no navigator is passed', () => {
       document.documentElement.lang = 'fr'
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
       expect(Locale.browserLocale()).to.equal('fr')
     })
   })
 
   it('returns the browser locale if no navigator is passed, or "en-US" if no browser locale is set', () => {
     const expectedLanguage = navigator ? navigator.language : 'en-US'
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 1-2 arguments, but got 0.
     expect(Locale.browserLocale()).to.equal(expectedLanguage)
   })
 

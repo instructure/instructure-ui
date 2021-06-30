@@ -28,6 +28,7 @@ import ReactDOM from 'react-dom'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
+import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   open?: boolean
@@ -36,7 +37,6 @@ type Props = {
   mountNode?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
   insertAt?: 'bottom' | 'top'
   elementRef?: (...args: any[]) => any
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
 /**
@@ -46,10 +46,10 @@ private: true
 @module ReactPortal
 **/
 @bidirectional()
-class ReactPortal extends React.Component<Props> {
+class ReactPortal extends React.Component<Props & BidirectionalProps> {
   static propTypes = {
     /**
-     * Wheter or not the `<Portal />` is open
+     * Whether or not the `<Portal />` is open
      */
     open: PropTypes.bool,
 
@@ -81,7 +81,6 @@ class ReactPortal extends React.Component<Props> {
      * provides a reference to the underlying html element
      */
     elementRef: PropTypes.func,
-    //@ts-expect-error FIXME:
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
   }
