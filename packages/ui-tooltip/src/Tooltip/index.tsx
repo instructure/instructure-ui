@@ -60,9 +60,9 @@ type Props = {
   placement?: PositionPlacement
   mountNode?: PositionMountNode
   constrain?: PositionConstaint
+  positionTarget?: PositionMountNode
   offsetX?: string | number
   offsetY?: string | number
-  positionTarget?: any // TODO: PropTypes.oneOfType([element, PropTypes.func]),
   onShowContent?: (...args: any[]) => any
   onHideContent?: (...args: any[]) => any
 }
