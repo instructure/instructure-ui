@@ -30,12 +30,15 @@ const path = require('path')
 const fs = require('fs')
 const globby = require('globby')
 const parsePropValues = require('./parsePropValues')
+const { getTransitiveDependents } = require('./getTransitiveDependents')
 
 const projectRoot = path.resolve(__dirname, '../../')
 const packages = process.argv.slice(2)
 
 async function buildExamplesJSON(packagesToBuild = []) {
-  const packages = packagesToBuild.length ? packagesToBuild : ['**']
+  const packages = packagesToBuild.length
+    ? await getTransitiveDependents(packagesToBuild)
+    : ['**']
   const files = packages.map((package) =>
     path.resolve(projectRoot, `${package}/src/**/*.examples.ts*`)
   )
