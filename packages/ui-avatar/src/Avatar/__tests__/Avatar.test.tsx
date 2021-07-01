@@ -31,6 +31,7 @@ import { AvatarLocator } from '../AvatarLocator'
 describe('<Avatar />', async () => {
   describe('for a11y', async () => {
     it('should be accessible', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica Jones" />)
 
       const avatar = await AvatarLocator.find()
@@ -39,6 +40,7 @@ describe('<Avatar />', async () => {
     })
 
     it('initials should have aria-hidden=true', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica Jones" />)
 
       const avatar = await AvatarLocator.find()
@@ -50,6 +52,7 @@ describe('<Avatar />', async () => {
 
   describe('with the default props', async () => {
     it('should display as a circle', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica Jones" />)
       const avatar = await AvatarLocator.find()
 
@@ -57,6 +60,7 @@ describe('<Avatar />', async () => {
     })
 
     it('should render initials', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica Jones" />)
 
       expect(await AvatarLocator.findWithText('JJ')).to.exist()
@@ -69,6 +73,7 @@ describe('<Avatar />', async () => {
       'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
     it('should display the image url provided', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Foo bar" src={src} />)
 
       const avatar = await AvatarLocator.find()
@@ -83,6 +88,7 @@ describe('<Avatar />', async () => {
       const onImageLoaded = stub()
 
       await mount(
+        // @ts-expect-error fix this
         <Avatar name="Foo bar" src={src} onImageLoaded={onImageLoaded} />
       )
 
@@ -97,6 +103,7 @@ describe('<Avatar />', async () => {
 
   describe('when shape is set to "rectangle"', async () => {
     it('should display as a rectangle', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica Jones" shape="rectangle" />)
 
       const avatar = await AvatarLocator.find()
@@ -107,6 +114,7 @@ describe('<Avatar />', async () => {
 
   describe('when the user name has no spaces', async () => {
     it('should render a single initial', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica" />)
 
       expect(await AvatarLocator.find()).to.have.text('J')
@@ -115,6 +123,7 @@ describe('<Avatar />', async () => {
 
   describe('when the user name has leading spaces', async () => {
     it('should skip them', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name=" Jessica Jones" />)
 
       expect(await AvatarLocator.find()).to.have.text('JJ')
@@ -123,6 +132,7 @@ describe('<Avatar />', async () => {
 
   describe('when the user name is empty', async () => {
     it('should render', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="" />)
 
       const avatar = await AvatarLocator.find()
@@ -135,12 +145,14 @@ describe('<Avatar />', async () => {
 
   describe('when alt text is provided', async () => {
     it('should render the text as an aria-label attribute', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
 
       expect(await AvatarLocator.find()).to.have.label('This is a test')
     })
 
     it('should set the role attribute to img', async () => {
+      // @ts-expect-error fix this
       await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
       expect(await AvatarLocator.find()).to.contain('[role="img"]')
     })
