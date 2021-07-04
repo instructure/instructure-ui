@@ -51,7 +51,7 @@ type Props = {
   renderLabel: React.ReactNode | ((...args: any[]) => any)
   defaultToFirstOption?: boolean
   value?: any // TODO: controllable(I18nPropTypes.iso8601, 'onChange'),
-  defaultValue?: any // TODO: I18nPropTypes.iso8601
+  defaultValue?: Date
   id?: string
   format?: string
   step?: 5 | 10 | 15 | 20 | 30 | 60
