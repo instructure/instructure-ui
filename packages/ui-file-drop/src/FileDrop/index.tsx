@@ -41,7 +41,12 @@ import {
 import { isEdge } from '@instructure/ui-utils'
 import { accepts, getAcceptList } from './utils/accepts'
 import { getEventFiles } from './utils/getEventFiles'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 function keyEventIsClickButton(e: any) {
@@ -81,7 +86,7 @@ type Props = {
   width?: string | number
   maxWidth?: string | number
   minWidth?: string | number
-  margin?: any // TODO: ThemeablePropTypes.spacing
+  margin?: Spacing
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
