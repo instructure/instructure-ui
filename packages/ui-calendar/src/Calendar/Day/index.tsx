@@ -45,7 +45,7 @@ import generateComponentTheme from './theme'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  date: any // TODO: I18nPropTypes.iso8601
+  date: Date
   label: string
   interaction?: 'enabled' | 'disabled'
   isSelected?: boolean
