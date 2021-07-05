@@ -354,7 +354,6 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
                 ) : (
                   <Dialog
                     open
-                    //@ts-expect-error FIXME:
                     role={shouldOverlayTray ? 'dialog' : 'region'}
                     label={label}
                     shouldReturnFocus={shouldReturnFocus}

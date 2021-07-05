@@ -52,6 +52,8 @@ type Props = {
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
   shouldFocusOnOpen?: boolean
+  //Other props which are passed down to the underliyng element
+  [key: string]: unknown
 }
 
 /**
@@ -267,7 +269,6 @@ class Dialog extends Component<Props> {
         ref={this.getRef}
         role={this.props.label ? 'dialog' : null}
         aria-label={this.props.label}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'className' does not exist on type 'Reado... Remove this comment to see the full error message
         className={this.props.className} // eslint-disable-line react/prop-types
       >
         {this.props.children}
