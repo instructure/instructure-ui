@@ -113,6 +113,7 @@ type Props = {
   shadow?: Shadow
   stacking?: Stacking
   style?: CSSObject
+  //Other props which are passed down to the underliyng element
   [key: string]: unknown
 }
 
