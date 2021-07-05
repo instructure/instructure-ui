@@ -21,7 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { WithStyleProps, CSSObject } from '@instructure/emotion'
+import PropTypes from 'prop-types'
+import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
+import { bidirectional } from '@instructure/ui-i18n'
+import {
+  ThemeablePropTypes,
+  WithStyleProps,
+  CSSObject
+} from '@instructure/emotion'
 
 export type ViewOwnProps = {
   /**
@@ -174,6 +181,79 @@ export type ViewProps = ViewOwnProps & WithStyleProps & RestProps
 export type AllowedPropKeys = Readonly<
   Array<keyof (ViewOwnProps & WithStyleProps)>
 >
+
+export const propTypes = {
+  as: PropTypes.elementType,
+  elementRef: PropTypes.func,
+  display: PropTypes.oneOf([
+    'auto',
+    'inline',
+    'block',
+    'inline-block',
+    'flex',
+    'inline-flex'
+  ]),
+  overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+  overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+  margin: ThemeablePropTypes.spacing,
+  padding: ThemeablePropTypes.spacing,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  children: PropTypes.node,
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  borderWidth: ThemeablePropTypes.borderWidth,
+  borderRadius: ThemeablePropTypes.borderRadius,
+  borderColor: PropTypes.oneOf([
+    'transparent',
+    'primary',
+    'secondary',
+    'brand',
+    'info',
+    'success',
+    'warning',
+    'alert',
+    'danger'
+  ]),
+  background: PropTypes.oneOf([
+    'transparent',
+    'primary',
+    'secondary',
+    'primary-inverse',
+    'brand',
+    'info',
+    'alert',
+    'success',
+    'danger',
+    'warning'
+  ]),
+  shadow: ThemeablePropTypes.shadow,
+  stacking: ThemeablePropTypes.stacking,
+  cursor: cursorPropTypes,
+  position: PropTypes.oneOf([
+    'static',
+    'absolute',
+    'relative',
+    'sticky',
+    'fixed'
+  ]),
+  insetInlineStart: PropTypes.string,
+  insetInlineEnd: PropTypes.string,
+  insetBlockStart: PropTypes.string,
+  insetBlockEnd: PropTypes.string,
+  withFocusOutline: PropTypes.bool,
+  focusPosition: PropTypes.oneOf(['offset', 'inset']),
+  focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
+  shouldAnimateFocus: PropTypes.bool,
+  withVisualDebug: PropTypes.bool,
+  makeStyles: PropTypes.func,
+  styles: PropTypes.object,
+  //@ts-expect-error fix
+  dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
+}
 
 export const allowedProps: AllowedPropKeys = [
   'as',

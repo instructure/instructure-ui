@@ -29,6 +29,7 @@ import { Component } from 'react'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { logError as error } from '@instructure/console'
+
 import {
   getElementType,
   omitProps,
@@ -40,23 +41,26 @@ import { jsx, withStyle } from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { allowedProps, ViewProps } from './types'
+import { allowedProps, ViewProps, propTypes } from './types'
 
 /**
 ---
 category: components
+
 ---
+API:
+  - [View](https://instructure.design/#View)
 @module View
+
 **/
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
 class View extends Component<ViewProps> {
   static componentId = 'View'
   static allowedProps = allowedProps
+  static propTypes = propTypes
   static defaultProps = {
     display: 'auto',
-    // - Any props used to set inline styles should be undefined so that they
-    // don't break consuming components' CSS
     overflowX: 'visible',
     overflowY: 'visible',
     withVisualDebug: false,
@@ -67,8 +71,7 @@ class View extends Component<ViewProps> {
     shouldAnimateFocus: true
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+  constructor(props: ViewProps) {
     super(props)
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'spanMarginVerified' does not exist on ty... Remove this comment to see the full error message
     this.spanMarginVerified = false
