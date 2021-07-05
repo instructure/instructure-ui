@@ -39,16 +39,17 @@ import generateComponentTheme from './theme'
 
 import { BaseTransition } from './BaseTransition'
 
+export type TransitionType =
+  | 'fade'
+  | 'scale'
+  | 'slide-down'
+  | 'slide-up'
+  | 'slide-left'
+  | 'slide-right'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  type?:
-    | 'fade'
-    | 'scale'
-    | 'slide-down'
-    | 'slide-up'
-    | 'slide-left'
-    | 'slide-right'
+  type?: TransitionType
   in?: boolean
   unmountOnExit?: boolean
   transitionOnMount?: boolean

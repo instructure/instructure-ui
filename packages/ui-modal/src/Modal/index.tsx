@@ -37,10 +37,11 @@ import {
   matchComponentTypes
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { Transition } from '@instructure/ui-motion'
+import { Transition, TransitionType } from '@instructure/ui-motion'
 import { Portal } from '@instructure/ui-portal'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
+import { PositionMountNode } from '@instructure/ui-position'
 import { Mask } from '@instructure/ui-overlays'
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
@@ -62,13 +63,13 @@ type Props = {
   onClose?: (...args: any[]) => any
   onDismiss?: (...args: any[]) => any
   contentRef?: (...args: any[]) => any
-  mountNode?: any // PropTypes.oneOfType([element, PropTypes.func]),
+  mountNode?: PositionMountNode
   insertAt?: 'bottom' | 'top'
   liveRegion?:
     | React.ReactElement[]
     | React.ReactElement
     | ((...args: any[]) => any)
-  transition?: any // TODO: Transition.propTypes.type
+  transition?: TransitionType
   onEnter?: (...args: any[]) => any
   onEntering?: (...args: any[]) => any
   onEntered?: (...args: any[]) => any

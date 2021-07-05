@@ -32,13 +32,14 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 
 import { Portal } from '@instructure/ui-portal'
-import { Transition } from '@instructure/ui-motion'
+import { Transition, TransitionType } from '@instructure/ui-motion'
+import { PositionMountNode } from '@instructure/ui-position'
 
 type Props = {
   open?: boolean
   onOpen?: (DOMNode: HTMLSpanElement | null) => any
   onClose?: (...args: any[]) => any
-  mountNode?: any // PropTypes.oneOfType([element, PropTypes.func]),
+  mountNode?: PositionMountNode
   insertAt?: 'bottom' | 'top'
   label: string
   onDismiss?: (...args: any[]) => any
@@ -52,7 +53,7 @@ type Props = {
   shouldReturnFocus?: boolean
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
-  transition?: any // TODO: Transition.propTypes.type
+  transition?: TransitionType
   in?: boolean
   unmountOnExit?: boolean
   transitionOnMount?: boolean
