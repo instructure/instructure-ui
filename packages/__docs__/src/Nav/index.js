@@ -46,6 +46,8 @@ class Nav extends Component {
     }
 
     this._themeId = '__themes'
+
+    this.searchTimeout = null
   }
 
   static propTypes = {
@@ -79,12 +81,16 @@ class Nav extends Component {
       !!value,
       this.state.expandedSections
     )
-    this.setState({
-      query: value ? new RegExp(value, 'i') : null,
-      queryStr: value,
-      expandedSections,
-      userToggling: false
-    })
+
+    clearTimeout(this.searchTimeout)
+    this.searchTimeout = setTimeout(() => {
+      this.setState({
+        query: value ? new RegExp(value, 'i') : null,
+        queryStr: value,
+        expandedSections,
+        userToggling: false
+      })
+    }, 500)
   }
 
   handleToggleSection = (sectionId, expanded) => {

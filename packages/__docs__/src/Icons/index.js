@@ -70,6 +70,7 @@ class Icons extends Component {
       glyph: null,
       rtl: false
     }
+    this.searchTimeout = null
   }
 
   componentDidMount() {
@@ -111,7 +112,14 @@ class Icons extends Component {
     return glyphs
   }
 
-  handleSearchChange = (e) => this.setState({ query: e.target.value })
+  handleSearchChange = (e) => {
+    const query = e.target.value
+
+    clearTimeout(this.searchTimeout)
+    this.searchTimeout = setTimeout(() => {
+      this.setState({ query })
+    }, 500)
+  }
 
   handleFormatChange = (e, o) => {
     window.location.hash = `#${o.value}`
@@ -143,7 +151,6 @@ class Icons extends Component {
         >
           <TextInput
             placeholder="Filter icons..."
-            value={this.state.query}
             onChange={this.handleSearchChange}
             renderLabel={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
             size="large"
