@@ -22,6 +22,17 @@
  * SOFTWARE.
  */
 import { px } from '@instructure/ui-utils'
+import { BreakpointQueries, ValidQueryKey } from './QueryType'
+
+/**
+ * An object consisting of query names and boolean true false if it matches
+ */
+type MatchingQueries = Record<string, boolean>
+
+type Size = {
+  width: number
+  height: number
+}
 
 /**
  * ---
@@ -34,37 +45,34 @@ import { px } from '@instructure/ui-utils'
  * @module parseQuery
  * @param {Object} query - an object consisting of query names
  *  mapped to individual queries
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {Document | Window | Node | null} el - component or DOM node
  * @returns {function} takes size {width, height} as an argument
  *  and returns an object consisting of query names and boolean
  *  true false if it matches
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
-function parseQuery(query, el) {
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'rules' implicitly has type 'any[]' in so... Remove this comment to see the full error message
-  const rules = []
+function parseQuery(
+  query: BreakpointQueries,
+  el?: Document | Window | Node | null
+) {
+  const rules: Record<string, Record<ValidQueryKey, number>> = {}
 
+  // converting values to numerical values and adding initial values to all query keys
   Object.keys(query).forEach((selectorName) => {
     const { minWidth, maxWidth, minHeight, maxHeight } = query[selectorName]
-    rules.push([
-      selectorName,
-      {
-        minWidth: px(minWidth, el) || 0,
-        maxWidth: px(maxWidth, el) || Infinity,
-        minHeight: px(minHeight, el) || 0,
-        maxHeight: px(maxHeight, el) || Infinity
-      }
-    ])
+    rules[selectorName] = {
+      minWidth: (minWidth && px(minWidth, el)) || 0,
+      maxWidth: (maxWidth && px(maxWidth, el)) || Infinity,
+      minHeight: (minHeight && px(minHeight, el)) || 0,
+      maxHeight: (maxHeight && px(maxHeight, el)) || Infinity
+    }
   })
 
-  // @ts-expect-error ts-migrate(7031) FIXME: Binding element 'width' implicitly has an 'any' ty... Remove this comment to see the full error message
-  return function ({ width, height }) {
-    const selectorMap = {}
+  return function ({ width, height }: Size) {
+    const selectorMap: MatchingQueries = {}
 
-    // @ts-expect-error ts-migrate(7005) FIXME: Variable 'rules' implicitly has an 'any[]' type.
-    rules.forEach((rule) => {
-      const [selectorName, { minWidth, maxWidth, minHeight, maxHeight }] = rule
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+    Object.entries(rules).forEach(([selectorName, query]) => {
+      const { minWidth, maxWidth, minHeight, maxHeight } = query
+
       selectorMap[selectorName] =
         minWidth <= width &&
         width <= maxWidth &&
@@ -78,3 +86,4 @@ function parseQuery(query, el) {
 
 export default parseQuery
 export { parseQuery }
+export type { Size }

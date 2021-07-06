@@ -22,48 +22,26 @@
  * SOFTWARE.
  */
 
-import { getFontSize } from '@instructure/ui-dom-utils'
-import { parseUnit } from './parseUnit'
-import React from 'react'
+/**
+ * Valid keys for the Query object
+ */
+type ValidQueryKey = 'minHeight' | 'maxHeight' | 'minWidth' | 'maxWidth'
 
 /**
- * ---
- * category: utilities
- * ---
- * Converts a unit value size combination (em, rem, px) to a number representing px
- *
- * Example inputs:
- *  - '100rem'
- *  - '20em'
- *  - '40px'
- *
- * @module px
- *
- * @param {String} val
- * @param {Document|Window|Node|React.ReactElement |React.Component|null} el - containing element, for context measure is em (defaults to document.body)
- * @returns {Number} Returns numerical representation of pixels
+ * Query objects with keys representing the breakpoint condition and values representing a breakpoint value as a string or number. Ex. `{ maxWidth: 400 }`, `{ minWidth: '600em'}`
  */
-function px(
-  val: string | number,
-  el?: Document | Window | Node | React.ReactElement | React.Component | null
-): number {
-  const container = el || document.body
-
-  // TODO !val should not be needed
-  if (!val || typeof val === 'number') {
-    return val as number
-  }
-
-  const [num, unit] = parseUnit(val)
-
-  if (unit === 'rem') {
-    return num * getFontSize()
-  } else if (unit === 'em') {
-    return num * getFontSize(container)
-  } else {
-    return num
-  }
+type Query = {
+  [queryKey in ValidQueryKey]?: string | number
 }
 
-export default px
-export { px }
+/**
+ * Consists of an object where the keys define the names of breakpoints and the values are Query objects. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}`
+ */
+type BreakpointQueries = { [breakpointName: string]: Query }
+
+/**
+ * List of query names (breakpoints) currently matching
+ */
+type QueriesMatching = string[]
+
+export type { BreakpointQueries, Query, ValidQueryKey, QueriesMatching }

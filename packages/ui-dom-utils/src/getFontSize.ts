@@ -36,12 +36,18 @@ const COMPUTED_CACHE: WeakMap<any, number> = new WeakMap()
  * Gets font size in px
  *
  * @module getFontSize
- * @param { Node | Window | React.ReactElement | function | undefined | null } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function | undefined | null } el - component or DOM node
  * @param { boolean } ignoreCache
  * @returns { number } font size in px
  */
 function getFontSize(
-  el?: Node | Window | React.ReactElement | ((...args: any[]) => any) | null,
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
+    | null,
   ignoreCache = false
 ) {
   if (!canUseDOM) {

@@ -37,12 +37,17 @@ import React from 'react'
  * see https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
  * @module matchMedia
  * @param {string} query - media query string
- * @param { Node | Window | React.ReactElement | function } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @returns {Object} a media query list object
  */
 function matchMedia(
   query: string,
-  el: Node | Window | React.ReactElement | ((...args: any[]) => any)
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
 ) {
   const node = findDOMNode(el) || document
 

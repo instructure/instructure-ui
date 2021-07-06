@@ -34,16 +34,32 @@ import {
 } from '../addElementQueryMatchListener'
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
+import { BreakpointQueries, QueriesMatching } from '../QueryType'
 import { findDOMNode } from '@instructure/ui-dom-utils'
 
-type Props = {
-  query: any // TODO: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
-  match?: 'element' | 'media'
-  props?: {
-    [key: string]: any
-  }
-  render?: (...args: any[]) => any
+interface PropsObject {
+  [propName: string]: any
 }
+
+/**
+ * Consists of an object where the keys match the breakpoint names used in the query. The values are objects with keys representing prop names and values representing prop values Ex. `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}`
+ */
+type ByBreakpointProps = {
+  [breakpointName: string]: PropsObject
+}
+
+type Props = {
+  query: BreakpointQueries
+  match?: 'element' | 'media'
+  props?: ByBreakpointProps
+  render?: (props: PropsObject | null, matches: QueriesMatching) => any
+  children?: (props: PropsObject | null, matches: QueriesMatching) => any
+}
+
+type UpdateMatches = (
+  matches: QueriesMatching,
+  cb?: (...args: any[]) => any
+) => void
 
 /**
 ---
@@ -61,7 +77,6 @@ class Responsive extends Component<Props> {
      * with keys representing the breakpoint condition and values representing a breakpoint value as a
      * string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}`
      */
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '(props: any, propName: any, comp... Remove this comment to see the full error message
     query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
     /**
      * Consists of an object where the keys match the breakpoint names used in the query. The values
@@ -89,17 +104,16 @@ class Responsive extends Component<Props> {
     props: null
   }
 
-  _matchListener = null
+  _matchListener: { remove(): void } | null = null
 
-  state = {
+  state: { matches: QueriesMatching; hasRendered: boolean } = {
     matches: [],
     hasRendered: false
   }
 
   componentDidMount() {
     error(
-      // @ts-expect-error FIXME
-      this.props.render || this.props.children,
+      !!(this.props.render || this.props.children),
       `[Responsive] must have either a \`render\` prop or \`children\` prop.`
     )
 
@@ -107,8 +121,8 @@ class Responsive extends Component<Props> {
       // Because Responsive renders an empty div initially, it always needs to
       // re-render with the children provided. If there are no matches the match
       // listener won't trigger an update, so we handle this update explicitly.
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 4 arguments, but got 2.
-      const initialMatches = updateElementMatches(this.props.query, this) || []
+      const initialMatches: QueriesMatching =
+        updateElementMatches(this.props.query, this) || []
       this.setState({
         matches: initialMatches,
         hasRendered: true
@@ -116,7 +130,7 @@ class Responsive extends Component<Props> {
     } else {
       this.setState({ hasRendered: true })
     }
-    // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
+
     this._matchListener = this.addMatchListener(
       this.props.query,
       this.updateMatches
@@ -127,13 +141,11 @@ class Responsive extends Component<Props> {
     this.removeMatchListener()
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     const { match, query } = this.props
 
     if (match !== prevProps.match || !deepEqual(query, prevProps.query)) {
       this.removeMatchListener()
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ remove(): void; }' is not assignable to ty... Remove this comment to see the full error message
       this._matchListener = this.addMatchListener(
         query,
         this.updateMatches,
@@ -142,25 +154,25 @@ class Responsive extends Component<Props> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
-  addMatchListener(query, updateMatches, match = this.props.match) {
+  addMatchListener(
+    query: BreakpointQueries,
+    updateMatches: UpdateMatches,
+    match = this.props.match
+  ) {
     const matchListener =
       match === 'element'
         ? addElementQueryMatchListener
         : addMediaQueryMatchListener
-    // TODO: refactor to use a ref to root div instead of `this`
-    return matchListener(query, () => findDOMNode(this as any), updateMatches)
+    return matchListener(query, () => findDOMNode(this) as Node, updateMatches)
   }
 
   removeMatchListener() {
     if (this._matchListener) {
-      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
       this._matchListener.remove()
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'matches' implicitly has an 'any' type.
-  updateMatches = (matches, cb) => {
+  updateMatches: UpdateMatches = (matches, cb) => {
     this.setState({ matches }, () => {
       if (typeof cb === 'function') {
         cb()
@@ -168,15 +180,13 @@ class Responsive extends Component<Props> {
     })
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'matches' implicitly has an 'any' type.
-  mergeProps(matches, props) {
+  mergeProps(matches: QueriesMatching, props?: ByBreakpointProps) {
     if (!props) {
       return null
     }
 
-    const mergedProps = {}
+    const mergedProps: PropsObject = {}
 
-    // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'match' implicitly has an 'any' type.
     matches.forEach((match) => {
       const matchProps = props[match]
 
@@ -185,7 +195,6 @@ class Responsive extends Component<Props> {
       // multiple breakpoints, and more than one of those breakpoints is being
       // currently applied so we log an error.
       Object.keys(matchProps).forEach((prop) => {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         const currentValue = mergedProps[prop]
 
         error(
@@ -196,7 +205,6 @@ class Responsive extends Component<Props> {
             `will be overwritten as \`${matchProps[prop]}\`.`
           ].join(' ')
         )
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         mergedProps[prop] = matchProps[prop]
       })
     })
@@ -218,7 +226,6 @@ class Responsive extends Component<Props> {
     }
     return (
       <div>
-        {/* @ts-expect-error ts-migrate(2349) FIXME: This expression is not callable. */}
         {renderFunc && renderFunc(this.mergeProps(matches, props), matches)}
       </div>
     )

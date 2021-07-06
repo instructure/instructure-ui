@@ -36,11 +36,16 @@ import React from 'react'
  * specified element
  * @module getComputedStyle
  *
- * @param { Node | Window | React.ReactElement | function } el - component or DOM node
+ * @param { Node | Window | React.ReactElement | React.Component | function } el - component or DOM node
  * @returns { Object } object containing css properties and values for the element
  */
 function getComputedStyle(
-  el: Node | Window | React.ReactElement | ((...args: any[]) => any)
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any)
 ) {
   let style = {}
   if (canUseDOM) {
