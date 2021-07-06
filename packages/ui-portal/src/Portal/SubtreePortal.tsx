@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, DOMElement, HTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
@@ -31,16 +31,20 @@ import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
 import { shallowEqual } from '@instructure/ui-utils'
 
+import { PortalNode } from './PortalType'
+
 /* istanbul ignore file */
 
 type Props = {
   open?: boolean
-  onOpen?: (DOMNode: HTMLSpanElement | null) => any
-  onClose?: (...args: any[]) => any
-  mountNode?: Element | (() => Element)
+  onOpen?: (DOMNode: PortalNode) => any
+  onClose?: () => any
+  mountNode?: Element | (() => Element) | null
   insertAt?: 'bottom' | 'top'
   elementRef?: (...args: any[]) => any
-}
+  children?: React.ReactNode | null
+} & HTMLAttributes<Props> &
+  BidirectionalProps
 
 /**
 ---
@@ -49,7 +53,7 @@ private: true
 @module SubtreePortal
 **/
 @bidirectional()
-class SubtreePortal extends Component<Props & BidirectionalProps> {
+class SubtreePortal extends Component<Props> {
   static propTypes = {
     /**
      * Whether or not the `<Portal />` is open
@@ -91,30 +95,29 @@ class SubtreePortal extends Component<Props & BidirectionalProps> {
   static defaultProps = {
     open: false,
     insertAt: 'bottom',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'DOMNode' is declared but its value is never read.
-    onOpen: (DOMNode) => {},
+    onOpen: () => {},
     onClose: () => {},
     mountNode: null,
     children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    elementRef: () => {}
   }
 
-  _node: HTMLSpanElement | null = null
+  _node: PortalNode = null
 
   componentDidMount() {
     this.renderPortal(this.props)
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(
+    nextProps: Record<string, unknown>,
+    nextState: Record<string, unknown>
+  ) {
     return !(
       shallowEqual(this.props, nextProps) && shallowEqual(this.state, nextState)
     )
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'nextProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     this.renderPortal(nextProps)
   }
 
@@ -126,8 +129,7 @@ class SubtreePortal extends Component<Props & BidirectionalProps> {
     return null
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  renderPortal(props) {
+  renderPortal(props: Props) {
     const {
       open,
       insertAt,
@@ -135,6 +137,7 @@ class SubtreePortal extends Component<Props & BidirectionalProps> {
       onClose,
       elementRef,
       children,
+      dir,
       ...passThroughProps
     } = props
 
@@ -153,16 +156,15 @@ class SubtreePortal extends Component<Props & BidirectionalProps> {
       // Create node if it doesn't already exist
       if (!this.DOMNode) {
         const node = document.createElement('span')
-        const attributes = {
-          ...passthroughProps(passThroughProps),
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'dir' does not exist on type 'SubtreePort... Remove this comment to see the full error message
-          dir: this.dir
+        const attributes: Partial<Props> = {
+          ...passthroughProps(passThroughProps as Partial<Props>),
+          dir
         }
-        Object.keys(attributes).forEach((name) => {
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-          node.setAttribute(name, attributes[name])
+
+        ;(Object.keys(attributes) as Array<keyof Props>).forEach((name) => {
+          node.setAttribute(name, attributes[name] as string)
         })
-        elementRef(node)
+        elementRef!(node)
         this.DOMNode = node
       }
 
@@ -188,7 +190,7 @@ class SubtreePortal extends Component<Props & BidirectionalProps> {
 
       ReactDOM.unstable_renderSubtreeIntoContainer(
         this,
-        content,
+        content as DOMElement<any, any>,
         this.DOMNode,
         handleMount
       )
@@ -197,8 +199,7 @@ class SubtreePortal extends Component<Props & BidirectionalProps> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  removePortal(props) {
+  removePortal(props: Props) {
     let unmounted
 
     if (this.DOMNode) {
@@ -206,8 +207,7 @@ class SubtreePortal extends Component<Props & BidirectionalProps> {
       this.DOMNode.parentNode &&
         this.DOMNode.parentNode.removeChild(this.DOMNode)
       this.DOMNode = null
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.elementRef(this.DOMNode)
+      this.props.elementRef!(this.DOMNode)
     }
 
     if (unmounted && typeof props.onClose === 'function') {
