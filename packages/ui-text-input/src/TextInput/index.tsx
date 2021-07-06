@@ -23,7 +23,7 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import React, { Component, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import { controllable } from '@instructure/ui-prop-types'
@@ -69,7 +69,7 @@ type Props = {
   onFocus?: (...args: any[]) => any
   makeStyles?: (...args: any[]) => any
   styles?: any
-}
+} & InputHTMLAttributes<Props>
 
 /**
 ---

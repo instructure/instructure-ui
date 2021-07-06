@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Component, HTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
@@ -30,17 +30,21 @@ import { element } from '@instructure/ui-prop-types'
 
 import { ReactPortal } from './ReactPortal'
 import { SubtreePortal } from './SubtreePortal'
+import { BidirectionalProps } from '@instructure/ui-i18n'
+
+import { PortalNode } from './PortalType'
 
 const IS_CREATE_PORTAL_SUPPORTED = typeof ReactDOM.createPortal === 'function'
 
 type Props = {
   open?: boolean
-  onOpen?: (DOMNode: HTMLSpanElement | null) => any
-  onClose?: (...args: any[]) => any
-  mountNode?: Element | (() => Element)
+  onOpen?: (DOMNode: PortalNode) => any
+  onClose?: () => any
+  mountNode?: Element | (() => Element) | null
   insertAt?: 'bottom' | 'top'
-  elementRef?: (...args: any[]) => any
-}
+  elementRef?: (el: PortalNode) => any
+} & HTMLAttributes<Props> &
+  BidirectionalProps
 
 /**
 ---
@@ -88,18 +92,16 @@ class Portal extends Component<Props> {
   static defaultProps = {
     open: false,
     insertAt: 'bottom',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'DOMNode' is declared but its value is never read.
-    onOpen: (DOMNode) => {},
+    onOpen: () => {},
     onClose: () => {},
     mountNode: null,
     children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    elementRef: () => {}
   }
 
-  DOMNode: HTMLSpanElement | null = null
+  DOMNode: PortalNode = null
 
-  handleElementRef = (el: HTMLSpanElement | null) => {
+  handleElementRef = (el: PortalNode) => {
     if (el) {
       this.DOMNode = el
       if (typeof this.props.elementRef === 'function') {

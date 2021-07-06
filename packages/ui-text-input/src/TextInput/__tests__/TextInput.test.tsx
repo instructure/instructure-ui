@@ -223,7 +223,6 @@ describe('<TextInput/>', async () => {
     })
 
     it('should set the disabled attribute when `disabled` is set', async () => {
-      // @ts-expect-error FIXME remove this line to see the error
       const subject = await mount(<TextInput renderLabel="Name" disabled />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[disabled]')).to.exist()
@@ -238,7 +237,6 @@ describe('<TextInput/>', async () => {
     })
 
     it('should set the readonly attribute when `readOnly` is set', async () => {
-      // @ts-expect-error FIXME remove this line to see the error
       const subject = await mount(<TextInput renderLabel="Name" readOnly />)
       const textInput = within(subject.getDOMNode())
       expect(await textInput.find('input[readonly]')).to.exist()

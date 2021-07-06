@@ -36,7 +36,6 @@ describe(`<Portal />`, async () => {
 
   it('should be accessible', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Portal open id="portal">
         Hello World
       </Portal>
@@ -48,7 +47,6 @@ describe(`<Portal />`, async () => {
   it('should support onOpen prop', async () => {
     const onOpen = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Portal open onOpen={onOpen} id="portal">
         Hello World
       </Portal>
@@ -76,7 +74,6 @@ describe(`<Portal />`, async () => {
   it('should add a dir attribute to the root DOM node', async () => {
     const onOpen = stub()
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Portal open onOpen={onOpen} id="portal">
         Hello World
       </Portal>
@@ -86,7 +83,6 @@ describe(`<Portal />`, async () => {
   })
 
   it('should not render if children are empty', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Portal open id="portal" />)
     const portal = await find('#portal', { expectEmpty: true })
     expect(portal).to.not.exist()
@@ -103,7 +99,6 @@ describe(`<Portal />`, async () => {
       const onKeyDown = stub()
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Portal open id="portal">
           <button onKeyDown={onKeyDown}>Hello World</button>
         </Portal>
@@ -125,8 +120,7 @@ describe(`<Portal />`, async () => {
       await mount(
         <div>
           <Portal
-            // @ts-expect-error ts-migrate(2769) FIXME:
-            mountNode={() => document.getElementById('portal-mount-node')}
+            mountNode={() => document.getElementById('portal-mount-node')!}
             id="portal"
           >
             Hello World
@@ -145,7 +139,6 @@ describe(`<Portal />`, async () => {
       document.body.appendChild(mountNode)
 
       await mount(
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
         <Portal open mountNode={mountNode} id="portal">
           Hello World
         </Portal>

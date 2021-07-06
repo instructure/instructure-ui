@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
@@ -29,14 +29,18 @@ import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
 
+import { PortalNode } from './PortalType'
+
 type Props = {
   open?: boolean
-  onOpen?: (DOMNode: HTMLSpanElement | null) => any
-  onClose?: (...args: any[]) => any
-  mountNode?: Element | (() => Element)
+  onOpen?: (DOMNode: PortalNode) => any
+  onClose?: () => any
+  mountNode?: Element | (() => Element) | null
   insertAt?: 'bottom' | 'top'
-  elementRef?: (...args: any[]) => any
-}
+  elementRef?: (el: PortalNode) => any
+} & HTMLAttributes<Props> &
+  BidirectionalProps
+
 type State = {
   mountNode: Element
 }
@@ -48,7 +52,7 @@ private: true
 @module ReactPortal
 **/
 @bidirectional()
-class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
+class ReactPortal extends React.Component<Props, State> {
   static propTypes = {
     /**
      * Whether or not the `<Portal />` is open
@@ -90,13 +94,11 @@ class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
   static defaultProps = {
     open: false,
     insertAt: 'bottom',
-    // @ts-expect-error ts-migrate(6133) FIXME: 'DOMNode' is declared but its value is never read.
-    onOpen: (DOMNode: HTMLSpanElement | null) => {},
+    onOpen: () => {},
     onClose: () => {},
     mountNode: undefined,
     children: null,
-    // @ts-expect-error ts-migrate(6133) FIXME: 'el' is declared but its value is never read.
-    elementRef: (el) => {}
+    elementRef: () => {}
   }
 
   constructor(props: Props) {
@@ -107,7 +109,7 @@ class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
     }
   }
 
-  DOMNode: HTMLSpanElement | null = null
+  DOMNode: PortalNode = null
 
   componentDidMount() {
     // If Portal is mounting in an open condition fire onOpen handler
@@ -116,8 +118,7 @@ class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
     }
   }
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     const mountNode = this.findMountNode(this.props)
 
     if (mountNode !== this.state.mountNode) {
@@ -169,8 +170,7 @@ class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
     ) {
       this.DOMNode.parentNode.removeChild(this.DOMNode)
       this.DOMNode = null
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      this.props.elementRef(this.DOMNode)
+      this.props.elementRef!(this.DOMNode)
     }
   }
 
@@ -190,18 +190,16 @@ class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
     // Create node if it doesn't already exist
     if (!this.DOMNode) {
       const node = document.createElement('span')
-      const attributes = {
-        ...passthroughProps(props),
+      const attributes: Partial<Props> = {
+        ...passthroughProps(props as Partial<Props>),
         dir
       }
 
-      Object.keys(attributes).forEach((name) => {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        node.setAttribute(name, attributes[name])
+      ;(Object.keys(attributes) as Array<keyof Props>).forEach((name) => {
+        node.setAttribute(name, attributes[name] as string)
       })
 
-      // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
-      elementRef(node)
+      elementRef!(node)
 
       this.DOMNode = node
     }
@@ -222,7 +220,7 @@ class ReactPortal extends React.Component<Props & BidirectionalProps, State> {
   }
 
   findMountNode(props: Props) {
-    let mountNode
+    let mountNode: Element | undefined
 
     if (typeof props.mountNode === 'function') {
       mountNode = props.mountNode()
