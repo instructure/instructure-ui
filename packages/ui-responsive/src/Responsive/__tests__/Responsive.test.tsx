@@ -130,8 +130,7 @@ describe('<Responsive />', async () => {
             medium: { maxWidth: 300 },
             large: { minWidth: 800 }
           }}
-          // @ts-expect-error ts-migrate(6133) FIXME: 'props' is declared but its value is never read.
-          render={(props, matches) => {
+          render={() => {
             return <div>hello</div>
           }}
         />

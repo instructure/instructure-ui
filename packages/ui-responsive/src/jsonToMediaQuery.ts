@@ -23,6 +23,9 @@
  */
 import { px } from '@instructure/ui-utils'
 
+import { Query, ValidQueryKey } from './QueryType'
+import React from 'react'
+
 /**
  * ---
  * category: utilities/layout
@@ -43,21 +46,27 @@ import { px } from '@instructure/ui-utils'
  * ```
  * @module jsonToMediaQuery
  * @param {Object} query - an object consisting of the query type and value
- * @param {ReactComponent|DomNode} el - component or DOM node which will be
- *  passed to the pixel conversion if the unit type is `em`
+ * @param {Document | Window | Node | React.ReactElement | React.Component} el - component or DOM node which will be passed to the pixel conversion if the unit type is `em`
  * @returns {string} media query string
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
-function jsonToMediaQuery(query, el) {
+function jsonToMediaQuery(
+  query: Query,
+  el?: Document | Window | Node | React.ReactElement | React.Component
+) {
   // Ensure the query is of the correct form
-  const keys = Object.keys(query)
+  const keys = Object.keys(query) as Array<keyof typeof query>
   if (keys.length !== 1) {
     throw new Error('Expected exactly one key in query object.')
   }
 
   const key = keys[0]
 
-  const validKeys = ['minHeight', 'maxHeight', 'minWidth', 'maxWidth']
+  const validKeys: ValidQueryKey[] = [
+    'minHeight',
+    'maxHeight',
+    'minWidth',
+    'maxWidth'
+  ]
 
   if (validKeys.indexOf(key) === -1) {
     throw new Error(
@@ -68,6 +77,7 @@ function jsonToMediaQuery(query, el) {
 
   const value = query[key]
 
+  // TS catches this, but we want to throw error in runtime too
   if (typeof value !== 'string' && typeof value !== 'number') {
     throw new Error('The value of the query object must be a string or number.')
   }
@@ -76,12 +86,12 @@ function jsonToMediaQuery(query, el) {
     throw new Error('No value supplied for query object')
   }
 
-  return `(${hyphenateQueryKey(key.toLowerCase())}: ${px(value, el)}px)`
+  return `(${hyphenateQueryKey(key)}: ${px(value, el)}px)`
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'key' implicitly has an 'any' type.
-function hyphenateQueryKey(key) {
-  return key.slice(0, 3) + '-' + key.slice(3)
+function hyphenateQueryKey(key: ValidQueryKey) {
+  const lowerCaseKey = key.toLowerCase()
+  return lowerCaseKey.slice(0, 3) + '-' + lowerCaseKey.slice(3)
 }
 
 export default jsonToMediaQuery

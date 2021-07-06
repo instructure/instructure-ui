@@ -21,10 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { parseQuery } from './parseQuery'
+import React from 'react'
+
+import { parseQuery, Size } from './parseQuery'
 
 import { findDOMNode, getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
+
+import { BreakpointQueries, QueriesMatching } from './QueryType'
 
 /**
  * ---
@@ -76,27 +80,35 @@ import { debounce } from '@instructure/debounce'
  * ```
  * @module addElementQueryMatchListener
  * @param {Object} query - object consisting of names and query objects
- * @param {ReactComponent|DomNode} el - a DOM node or a function returning a DOM node
+ * @param {Node|Window|React.ReactElement|React.Component|function} el - a DOM node or a function returning a DOM node
  * @param {function} cb - called with an array of the names of the currently
  * matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
-function addElementQueryMatchListener(query, el, cb) {
+function addElementQueryMatchListener(
+  query: BreakpointQueries,
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((
+        ...args: any[]
+      ) => Node | Window | React.ReactElement | React.Component),
+  cb: (queriesMatching: QueriesMatching) => any
+): { remove(): void } {
   const node = typeof el === 'function' ? el() : el
   const { width, height } = getBoundingClientRect(node)
 
-  // @ts-expect-error ts-migrate(7034) FIXME: Variable 'matches' implicitly has type 'any[]' in ... Remove this comment to see the full error message
-  let matches = []
+  let matches: QueriesMatching = []
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'size' implicitly has an 'any' type.
-  const update = (size) => {
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
+  const update = (size: Size) => {
     const newMatches = updateElementMatches(query, node, matches, size)
     if (newMatches) {
       matches = newMatches
       cb(matches)
     }
+    return
   }
 
   const debounced = debounce(update, 100, { leading: false, trailing: true })
@@ -110,7 +122,7 @@ function addElementQueryMatchListener(query, el, cb) {
     }
   })
 
-  elementResizeListener.observe(node)
+  elementResizeListener.observe(node as Element)
 
   update({ width, height })
 
@@ -127,13 +139,21 @@ function addElementQueryMatchListener(query, el, cb) {
   }
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
-function updateElementMatches(query, el, matches = [], size) {
+function updateElementMatches(
+  query: BreakpointQueries,
+  el?:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((...args: any[]) => any),
+  matches: string[] = [],
+  size?: Size
+): QueriesMatching | null {
   const node = findDOMNode(el)
   const { width, height } = size || getBoundingClientRect(node)
   const matchingQueries = parseQuery(query, node)({ width, height })
   const newMatches = Object.keys(matchingQueries)
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     .filter((key) => matchingQueries[key])
     .map((key) => key)
 

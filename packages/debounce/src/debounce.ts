@@ -59,7 +59,7 @@ interface DebounceOptions {
  * @returns {Function} Returns the new debounced function.
  */
 function debounce(
-  func: (...args: unknown[]) => unknown,
+  func: (...args: any[]) => unknown,
   wait = 0,
   options: DebounceOptions = {}
 ) {

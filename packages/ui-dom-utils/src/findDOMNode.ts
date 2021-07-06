@@ -42,7 +42,7 @@ function findDOMNode(
     | Window
     | React.ReactElement
     | React.Component
-    | ((...args: any[]) => any)
+    | ((...args: any[]) => Node | Window | null | undefined)
 ) {
   const node = typeof el === 'function' ? el() : el
 
@@ -51,11 +51,11 @@ function findDOMNode(
   } else if (
     node instanceof Element ||
     node === window ||
-    (node && typeof node.nodeType !== 'undefined')
+    (node && typeof (node as Node).nodeType !== 'undefined')
   ) {
     return node as Node | Window
   } else if (node) {
-    return ReactDOM.findDOMNode(node) // eslint-disable-line react/no-find-dom-node
+    return ReactDOM.findDOMNode(node as React.ReactInstance) // eslint-disable-line react/no-find-dom-node
   }
   return undefined
 }

@@ -23,6 +23,7 @@
  */
 
 import { jsonToMediaQuery } from './jsonToMediaQuery'
+import { BreakpointQueries } from './QueryType'
 
 const ResponsivePropTypes = {
   /**
@@ -52,11 +53,14 @@ const ResponsivePropTypes = {
    * @param {string} componentName - name of the component
    * @returns {Error} if prop is an invalid query
    */
-  // @ts-expect-error ts-migrate(7030) FIXME: Not all code paths return a value.
-  validQuery(props, propName, componentName) {
+  validQuery(
+    props: BreakpointQueries,
+    propName: string,
+    componentName: string
+  ) {
     try {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       jsonToMediaQuery(props[propName])
+      return null
     } catch (e) {
       return new Error(
         `Invalid query prop supplied to \`${componentName}\`. ${e.message}`

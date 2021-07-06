@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+
 import { matchMedia as defaultMatchMedia } from '@instructure/ui-dom-utils'
 
+import { BreakpointQueries, QueriesMatching } from './QueryType'
 import { jsonToMediaQuery } from './jsonToMediaQuery'
 
 /**
@@ -72,32 +75,45 @@ import { jsonToMediaQuery } from './jsonToMediaQuery'
  * ```
  * @module addMediaQueryMatchListener
  * @param {Object} query - object consisting of names and query objects
- * @param {ReactComponent|DomNode} el - a DOM node or a function returning a DOM node
- * @param {function} cb - called with an array of the names of the currently
- * matching queries whenever a matching query changes
+ * @param {Node|Window|React.ReactElement|React.Component|function} el - a DOM node or a function returning a DOM node
+ * @param {function} cb - called with an array of the names of the currently matching queries whenever a matching query changes
+ * @param {object} matchMedia - called with an array of the names of the currently matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
 function addMediaQueryMatchListener(
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'query' implicitly has an 'any' type.
-  query,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'el' implicitly has an 'any' type.
-  el,
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'cb' implicitly has an 'any' type.
-  cb,
-  matchMedia = defaultMatchMedia
-) {
+  query: BreakpointQueries,
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((
+        ...args: any[]
+      ) => Node | Window | React.ReactElement | React.Component),
+  cb: (queriesMatching: QueriesMatching) => any,
+  matchMedia: (
+    query: string,
+    el:
+      | Node
+      | Window
+      | React.ReactElement
+      | React.Component
+      | ((...args: any[]) => any)
+  ) => MediaQueryList | null = defaultMatchMedia
+): { remove(): void } {
   const node = typeof el === 'function' ? el() : el
 
-  // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'mediaQueryLists' implicitly has an 'any... Remove this comment to see the full error message
-  const updateMediaMatches = (mediaQueryLists) => {
-    const matches = Object.keys(mediaQueryLists)
+  const updateMediaMatches = (
+    mediaQueryLists: Record<string, MediaQueryList>
+  ) => {
+    const matches: QueriesMatching = Object.keys(mediaQueryLists)
       .filter((key) => mediaQueryLists[key].matches)
       .map((key) => key)
 
     cb(matches)
   }
 
-  const mediaQueryLists = {}
+  const mediaQueryLists: Record<string, MediaQueryList> = {}
 
   const listenerCallback = () => {
     updateMediaMatches(mediaQueryLists)
@@ -107,7 +123,6 @@ function addMediaQueryMatchListener(
     const mediaQueryList = matchMedia(jsonToMediaQuery(query[key], node), node)
     if (mediaQueryList) {
       mediaQueryList.addListener(listenerCallback)
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       mediaQueryLists[key] = mediaQueryList
     }
   })
@@ -117,7 +132,6 @@ function addMediaQueryMatchListener(
     remove() {
       if (mediaQueryLists) {
         Object.keys(mediaQueryLists).forEach((key) => {
-          // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           mediaQueryLists[key].removeListener(listenerCallback)
         })
       }
