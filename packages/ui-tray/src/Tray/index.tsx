@@ -30,7 +30,7 @@ import { Dialog } from '@instructure/ui-dialog'
 import { omitProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { testable } from '@instructure/ui-testable'
 import { Portal } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
@@ -38,7 +38,6 @@ import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   label: string
