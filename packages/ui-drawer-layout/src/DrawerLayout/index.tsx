@@ -26,7 +26,7 @@
 import { Children, Component, createContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { bidirectional } from '@instructure/ui-i18n'
+import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import {
   matchComponentTypes,
@@ -44,7 +44,6 @@ import { DrawerTray } from './DrawerTray'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
-import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   minWidth?: string

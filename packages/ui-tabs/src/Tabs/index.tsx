@@ -42,7 +42,7 @@ import { Focusable } from '@instructure/ui-focusable'
 import { getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 
 import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
 
@@ -51,7 +51,6 @@ import generateComponentTheme from './theme'
 
 import { Tab } from './Tab'
 import { Panel } from './Panel'
-import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   makeStyles?: (...args: any[]) => any

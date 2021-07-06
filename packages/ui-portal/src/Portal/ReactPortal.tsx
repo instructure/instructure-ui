@@ -26,9 +26,8 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
-import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   open?: boolean

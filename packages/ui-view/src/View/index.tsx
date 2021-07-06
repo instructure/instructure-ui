@@ -28,7 +28,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { getComputedStyle } from '@instructure/ui-dom-utils'
-import { bidirectional } from '@instructure/ui-i18n'
+import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { logError as error } from '@instructure/console'
 import {
@@ -47,7 +47,6 @@ import {
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   as?: React.ReactElement | string

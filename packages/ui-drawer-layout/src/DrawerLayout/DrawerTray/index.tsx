@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyle, jsx } from '@instructure/emotion'
-import { bidirectional } from '@instructure/ui-i18n'
+import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { Transition } from '@instructure/ui-motion'
 import { omitProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
@@ -37,7 +37,6 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 import { DrawerLayoutContext } from '../index'
-import { BidirectionalProps } from '@instructure/ui-i18n/src/bidirectional'
 
 type Props = {
   label: string

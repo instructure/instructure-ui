@@ -26,6 +26,7 @@ export { ApplyLocale } from './ApplyLocale'
 export { ApplyLocaleContext } from './ApplyLocale/ApplyLocaleContext'
 
 export { bidirectional } from './bidirectional'
+export type { BidirectionalProps } from './bidirectional'
 export { DateTime } from './DateTime'
 export { getTextDirection } from './getTextDirection'
 export { I18nPropTypes } from './I18nPropTypes'
