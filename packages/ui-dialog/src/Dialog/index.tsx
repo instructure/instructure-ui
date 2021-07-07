@@ -34,6 +34,7 @@ import {
 import { logError as error } from '@instructure/console'
 
 import { FocusRegionManager } from '@instructure/ui-a11y-utils'
+import { AllHTMLAttributes, Nullable } from '@instructure/ui-prop-types'
 type Props = {
   as?: React.ReactElement | keyof HTMLElementTagNameMap
   display?: 'auto' | 'block' | 'inline-block'
@@ -61,9 +62,7 @@ category: components/utilities
 @module Dialog
 **/
 
-class Dialog extends Component<
-  Props & Omit<React.AllHTMLAttributes<Props>, keyof Props>
-> {
+class Dialog extends Component<Props & Nullable<AllHTMLAttributes<Props>>> {
   static componentId = 'Dialog'
 
   static propTypes = {

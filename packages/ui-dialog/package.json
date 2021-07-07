@@ -34,7 +34,8 @@
   "devDependencies": {
     "@instructure/console": "8.6.0",
     "@instructure/ui-babel-preset": "8.6.0",
-    "@instructure/ui-test-utils": "8.6.0"
+    "@instructure/ui-test-utils": "8.6.0",
+    "@instructure/ui-prop-types": "8.6.0"
   },
   "peerDependencies": {
     "react": "^16.8"

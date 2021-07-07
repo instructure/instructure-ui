@@ -143,6 +143,7 @@ class Tab extends Component<Props> {
         aria-selected={isSelected ? 'true' : null}
         aria-disabled={isDisabled ? 'true' : null}
         aria-controls={controls}
+        //@ts-expect-error fix this to be number
         tabIndex={isSelected && !isDisabled ? '0' : null}
       >
         {callRenderProp(children)}

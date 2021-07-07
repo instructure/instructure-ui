@@ -419,6 +419,7 @@ class BaseButton extends Component<Props> {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         role={onClick && as !== 'button' ? 'button' : null}
+        //@ts-expect-error fix this later to be number
         tabIndex={onClick && as ? tabIndex || '0' : tabIndex}
         disabled={isDisabled || isReadOnly}
         css={isEnabled ? styles.baseButton : null}
