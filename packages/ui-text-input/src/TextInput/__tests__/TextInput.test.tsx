@@ -195,7 +195,7 @@ describe('<TextInput/>', async () => {
       const textInput = within(subject.getDOMNode())
       const input = await textInput.find('input')
 
-      await input.blur()
+      await input.focusOut()
       expect(onBlur).to.have.been.called()
     })
 

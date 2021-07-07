@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
+import { expect, mount, wait, stub, match } from '@instructure/ui-test-utils'
 
 import { RadioInput } from '../../RadioInput'
 import { RadioInputGroup } from '../index'
@@ -54,11 +54,11 @@ describe('<RadioInputGroup />', async () => {
       </RadioInputGroup>
     )
 
-    await wait(() => {
-      expect(consoleError).to.have.been.calledWithMatch(
-        `provided a 'value' prop without an 'onChange' handler`
-      )
-    })
+    expect(consoleError).to.have.been.calledWithMatch(
+      match.string,
+      match.string,
+      `provided a 'value' prop without an 'onChange' handler`
+    )
   })
 
   it('calls the onChange prop', async () => {

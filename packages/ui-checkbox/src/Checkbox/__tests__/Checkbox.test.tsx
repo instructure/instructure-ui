@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, match, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Checkbox } from '../index'
 import { CheckboxLocator } from '../CheckboxLocator'
@@ -206,7 +206,7 @@ describe('<Checkbox />', async () => {
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
 
-      await input.blur()
+      await input.focusOut()
 
       await wait(() => {
         expect(onBlur).to.have.been.called()
@@ -365,11 +365,11 @@ describe('<Checkbox />', async () => {
       // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       await mount(<Checkbox defaultChecked value="someValue" name="someName" />)
 
-      await wait(() => {
-        expect(consoleError).to.have.been.calledWithMatch(
-          'prop `label` is marked as required in `Checkbox`'
-        )
-      })
+      expect(consoleError).to.have.been.calledWithMatch(
+        match.string,
+        match.string,
+        'prop `label` is marked as required in `Checkbox`'
+      )
     })
   })
 })

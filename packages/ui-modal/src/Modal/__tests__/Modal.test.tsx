@@ -23,7 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
+import {
+  expect,
+  match,
+  mount,
+  stub,
+  wait,
+  within
+} from '@instructure/ui-test-utils'
 
 import { Modal } from '../index'
 import { ModalLocator } from '../ModalLocator'
@@ -314,6 +321,8 @@ describe('<Modal />', async () => {
         </Modal>
       )
       expect(consoleError).to.have.been.calledWithMatch(
+        match.string,
+        match.string,
         'Expected children of Modal in one of the following formats:'
       )
     })
@@ -439,11 +448,9 @@ describe('<Modal />', async () => {
         expect(modal.containsFocus()).to.be.true()
       })
 
-      await (within(modal.getOwnerDocument().documentElement) as any).keyUp(
-        'escape',
-        null,
-        { focusable: false }
-      )
+      await (within(
+        modal.getOwnerDocument().documentElement
+      ) as any).keyUp('escape', null, { focusable: false })
 
       await wait(() => {
         expect(onDismiss).to.have.been.called()

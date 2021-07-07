@@ -28,7 +28,8 @@ import {
   mount,
   stub,
   wait,
-  generateA11yTests
+  generateA11yTests,
+  match
 } from '@instructure/ui-test-utils'
 
 import { IconCheckSolid } from '@instructure/ui-icons'
@@ -128,11 +129,11 @@ describe('<SimpleSelect />', async () => {
     })
 
     expect(div).to.not.exist()
-    await wait(() => {
-      expect(consoleError).to.have.been.calledWithMatch(
-        'Expected one of Group, Option'
-      )
-    })
+    expect(consoleError).to.have.been.calledWithMatch(
+      match.string,
+      match.string,
+      'Expected one of Group, Option'
+    )
   })
 
   it('should fire onChange when selected option changes', async () => {

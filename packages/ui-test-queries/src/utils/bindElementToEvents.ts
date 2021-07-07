@@ -27,13 +27,14 @@ import keycode from 'keycode'
 import { isElement } from './isElement'
 import { find } from './queries'
 import { GenericFunction } from './bindElementToMethods'
+import { FireEvent, FireEventMethod } from './events'
 
-export function bindElementToEvents(
-  element: Element,
-  events: (element: EventTarget, event: Event) => Event
-) {
+export function bindElementToEvents(element: Element, events: FireEvent) {
   return Object.entries(events).reduce(
-    (bound: Record<string, GenericFunction>, [key, fn]) => {
+    (
+      bound: Record<string, GenericFunction>,
+      [key, fn]: [string, FireEventMethod]
+    ) => {
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireKeyboardEvent.bind(null, element, fn)
@@ -64,7 +65,11 @@ export function bindElementToEvents(
   )
 }
 
-function fireDOMEvent(element: Element, fn: GenericFunction, init: unknown) {
+function fireDOMEvent(
+  element: Element,
+  fn: FireEventMethod,
+  init?: Record<string, unknown>
+) {
   const fireEvent = fn.bind(null, element)
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -79,8 +84,8 @@ function fireDOMEvent(element: Element, fn: GenericFunction, init: unknown) {
 
 async function firePointerEvent(
   element: Element,
-  fn: GenericFunction,
-  init: unknown,
+  fn: FireEventMethod,
+  init?: Record<string, unknown>,
   options = { clickable: true }
 ) {
   let clickable = element as any // TODO remove these casts
@@ -114,10 +119,10 @@ async function firePointerEvent(
   })
 }
 
-async function fireClickEvent<T>(
-  element: T,
-  fn: GenericFunction,
-  init: unknown,
+async function fireClickEvent(
+  element: Element,
+  fn: FireEventMethod,
+  init?: Record<string, unknown>,
   options = { clickable: true, simulate: false }
 ) {
   let clickable = element as any
@@ -157,8 +162,8 @@ async function fireClickEvent<T>(
 
 async function fireBlurEvent(
   element: Element,
-  fn: GenericFunction,
-  init: unknown,
+  fn: FireEventMethod,
+  init?: Record<string, unknown>,
   options = { focusable: true, simulate: false }
 ) {
   let focusable = element as any
@@ -185,7 +190,7 @@ async function fireBlurEvent(
             resolve(fireEvent(init))
           } else {
             // We need to call Element.blur here because firing the FocusEvent doesn't actually move focus.
-            resolve((focusable as any).blur())
+            resolve((focusable as HTMLElement).blur())
           }
         } else {
           reject(
@@ -202,10 +207,10 @@ async function fireBlurEvent(
   })
 }
 
-async function fireFocusEvent<T>(
-  element: T,
-  fn: GenericFunction,
-  init: unknown,
+async function fireFocusEvent(
+  element: Element,
+  fn: FireEventMethod,
+  init?: Record<string, unknown>,
   options = { focusable: true, simulate: false }
 ) {
   let focusable = element as any
@@ -251,9 +256,9 @@ async function fireFocusEvent<T>(
 
 async function fireKeyboardEvent(
   element: Element,
-  fn: GenericFunction,
-  whichKey: any,
-  init: any,
+  fn: FireEventMethod,
+  whichKey: string | number,
+  init?: Record<string, unknown>,
   options = { focusable: true }
 ) {
   let focusable = element as any
@@ -278,7 +283,7 @@ async function fireKeyboardEvent(
             fireEvent({
               ...init,
               key,
-              which: keyCode,
+              which: keyCode, // TODO remove it, its deprecated
               keyCode
             })
           )

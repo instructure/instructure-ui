@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
+import { expect, mount, within, stub, match } from '@instructure/ui-test-utils'
 
 import { FormField } from '../index'
 
@@ -37,21 +37,25 @@ describe('<FormField />', async () => {
 
   it('should require a label', async () => {
     const consoleError = stub(console, 'error')
-    // @ts-expect-error FIXME remove this line to see the error
+    // @ts-expect-error 'label' is intentionally missing
     await mount(<FormField id="bar" />)
 
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `label` is marked as required in `FormField`'
+    expect(consoleError).to.have.been.calledWith(
+      match.string,
+      match.string,
+      'The prop `label` is marked as required in `FormField`, but its value is `undefined`.'
     )
   })
 
   it('should require an id', async () => {
     const consoleError = stub(console, 'error')
-    // @ts-expect-error FIXME remove this line to see the error
+    // @ts-expect-error 'id' is intentionally missing
     await mount(<FormField label="foo" />)
 
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `id` is marked as required in `FormField`'
+    expect(consoleError).to.have.been.calledWith(
+      match.string,
+      match.string,
+      'The prop `id` is marked as required in `FormField`, but its value is `undefined`.'
     )
   })
 

@@ -106,8 +106,8 @@
     "marked": "^2.0.3",
     "moment": "^2.23.0",
     "prop-types": "^15",
-    "react": "^16.8",
-    "react-dom": "^16.8",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-github-corner": "^2.1.0",
     "semver": "^7.3.5",
     "webpack-merge": "^5.7.3"

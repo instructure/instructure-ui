@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, match, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { RadioInput } from '../index'
 import { RadioInputLocator } from '../RadioInputLocator'
@@ -193,7 +193,7 @@ describe('<RadioInput />', async () => {
       const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
-      await input.blur()
+      await input.focusOut()
 
       await wait(() => {
         expect(onBlur).to.have.been.called()
@@ -294,11 +294,11 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      await wait(() => {
-        expect(consoleError).to.have.been.calledWithMatch(
-          'prop `label` is marked as required'
-        )
-      })
+      expect(consoleError).to.have.been.calledWithMatch(
+        match.string,
+        match.string,
+        'prop `label` is marked as required'
+      )
     })
   })
 })

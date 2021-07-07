@@ -42,7 +42,7 @@
     "react-codemirror2": "^7.1.0"
   },
   "peerDependencies": {
-    "react": "^16.8"
+    "react": ">=16.8 <=17"
   },
   "publishConfig": {
     "access": "public"

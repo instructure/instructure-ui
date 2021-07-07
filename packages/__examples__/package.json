@@ -38,8 +38,8 @@
     "@storybook/react": "6.1.21",
     "@storybook/theming": "6.1.21",
     "chromatic": "^5",
-    "react": "^16.8",
-    "react-dom": "^16.8",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "story2sketch": "^1.7.1",
     "webpack-merge": "^4.2.1"
   },

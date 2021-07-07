@@ -280,9 +280,11 @@ const stub = <T, K>(
   ? K extends string
     ? SinonStub
     : SinonStubbedInstance<T>
-  : SinonStub => sandbox.stub(obj, method as unknown as keyof T, fn) as any
+  : SinonStub => sandbox.stub(obj, (method as unknown) as keyof T, fn) as any
 
 const spy = <T, K extends keyof T>(obj?: T, method?: K) =>
   sandbox.spy(obj, method)
 
-export { viewport, mount, unmount, stub, spy }
+const match = sinon.match
+
+export { viewport, mount, unmount, stub, spy, match }

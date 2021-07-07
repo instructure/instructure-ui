@@ -30,7 +30,8 @@ import {
   wait,
   accessible,
   spy,
-  wrapQueryResult
+  wrapQueryResult,
+  match
 } from '@instructure/ui-test-utils'
 
 import { Menu, MenuItem, MenuItemSeparator } from '../index'
@@ -65,14 +66,18 @@ describe('<Menu />', async () => {
 
     it('should not allow invalid children', async () => {
       const cs = spy(console, 'error')
-      const warning = 'Warning: Failed prop type: Expected one of '
+      const warning = 'Expected one of '
 
       await mount(
         <Menu>
           <div />
         </Menu>
       )
-      expect(cs).to.have.been.calledWithMatch(warning)
+      expect(cs).to.have.been.calledWithMatch(
+        match.string,
+        match.string,
+        warning
+      )
     })
 
     it('should call onSelect when menu item is selected', async () => {
@@ -349,8 +354,10 @@ describe('<Menu />', async () => {
 
       // offset props influence the transform CSS prop of the Popover
       const defaultTransform = getComputedStyle(popover.getDOMNode()).transform
-      const { transformX: defaultTransformX, transformY: defaultTransformY } =
-        getTransforms(defaultTransform)
+      const {
+        transformX: defaultTransformX,
+        transformY: defaultTransformY
+      } = getTransforms(defaultTransform)
 
       await unmount()
 
@@ -370,8 +377,10 @@ describe('<Menu />', async () => {
       const popover2 = await subject2.findPopoverContent()
 
       const newTransform = getComputedStyle(popover2.getDOMNode()).transform
-      const { transformX: newTransformX, transformY: newTransformY } =
-        getTransforms(newTransform)
+      const {
+        transformX: newTransformX,
+        transformY: newTransformY
+      } = getTransforms(newTransform)
 
       expect(newTransformX).to.equal(defaultTransformX + 10)
       expect(newTransformY).to.equal(defaultTransformY + 30)
@@ -500,9 +509,7 @@ describe('<Menu />', async () => {
       })
 
       expect(
-        await (
-          await MenuLocator.find(':label(Flyout)')
-        ).findPopoverContent({
+        await (await MenuLocator.find(':label(Flyout)')).findPopoverContent({
           expectEmpty: true
         })
       ).to.not.exist()
@@ -628,9 +635,9 @@ describe('<Menu />', async () => {
         expect(popover.containsFocus()).to.be.true()
       })
 
-      await (
-        wrapQueryResult(trigger.getOwnerDocument().documentElement) as any
-      ).click()
+      await (wrapQueryResult(
+        trigger.getOwnerDocument().documentElement
+      ) as any).click()
 
       expect(onToggle).to.have.been.calledTwice()
       expect(onToggle.getCall(1).args[0]).to.equal(false)

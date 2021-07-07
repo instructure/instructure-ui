@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 
-export { viewport, mount, unmount, stub, spy } from './utils/sandbox'
+export { viewport, mount, unmount, stub, spy, match } from './utils/sandbox'
 
 export { ReactComponentWrapper } from './utils/reactComponentWrapper'

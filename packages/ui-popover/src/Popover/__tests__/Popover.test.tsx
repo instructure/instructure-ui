@@ -61,7 +61,7 @@ describe('<Popover />', async () => {
 
   testEventHandler('onClick', 'click')
   testEventHandler('onFocus', 'focus')
-  testEventHandler('onBlur', 'focus', 'blur')
+  testEventHandler('onBlur', 'focusOut', 'blur')
 
   it('should hide content when clicked outside content by default', async () => {
     const onHideContent = spy()
@@ -88,9 +88,9 @@ describe('<Popover />', async () => {
     await wait(() => {
       expect(content.containsFocus()).to.be.true()
     })
-    await (
-      wrapQueryResult(trigger.getOwnerDocument().documentElement) as any
-    ).click()
+    await (wrapQueryResult(
+      trigger.getOwnerDocument().documentElement
+    ) as any).click()
 
     content = await popover.findContent({ expectEmpty: true })
 

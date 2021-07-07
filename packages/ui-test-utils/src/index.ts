@@ -49,7 +49,8 @@ import {
   unmount,
   stub,
   spy,
-  viewport
+  viewport,
+  match
 } from '@instructure/ui-test-sandbox'
 
 import './utils/shims'
@@ -81,18 +82,18 @@ declare global {
       bounds(expected: string, expectedAttributeValue?: string | number): void
       tagName(expected: string): void
       id(expected: string): void
-      visible(): void
-      clickable(): void
-      focus(): void
-      focused(): void
-      focusable(): void
-      tabbable(): void
-      checked(): void
-      selected(): void
-      disabled(): void
-      enabled(): void
-      readonly(): void
-      accessible(): void
+      visible(): boolean
+      clickable(): boolean
+      focus(): boolean
+      focused(): boolean
+      focusable(): boolean
+      tabbable(): boolean
+      checked(): boolean
+      selected(): boolean
+      disabled(): boolean
+      enabled(): boolean
+      readonly(): boolean
+      accessible(): boolean
       role(expected: string): void
       title(expected: string): void
       value(expected: string): void
@@ -133,6 +134,7 @@ export {
   unmount,
   stub,
   spy,
+  match,
   find,
   findAll,
   findAllFrames,

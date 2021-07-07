@@ -249,7 +249,7 @@ describe('TextArea', async () => {
       const textArea = await TextAreaLocator.find()
       const input = await textArea.findInput()
 
-      await input.blur()
+      await input.focusOut()
 
       expect(onBlur).to.have.been.called()
     })
