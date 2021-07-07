@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import { View } from '../../index'
-import { CSSObject } from '@instructure/emotion'
 
 describe('<View />', async () => {
   it('should render', async () => {
@@ -53,7 +52,7 @@ describe('<View />', async () => {
   })
 
   it('should pass whitelisted style attributes', async () => {
-    const styleProps: CSSObject = {
+    const styleProps: CSSProperties = {
       top: '160px',
       left: '5px',
       minWidth: '20px',
@@ -98,7 +97,7 @@ describe('<View />', async () => {
   })
 
   it('should not pass all styles', async () => {
-    const styleProps: CSSObject = {
+    const styleProps: CSSProperties = {
       backgroundColor: 'red',
       borderStyle: 'dotted',
       opacity: '0.5'

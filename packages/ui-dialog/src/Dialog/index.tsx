@@ -52,8 +52,6 @@ type Props = {
   shouldCloseOnDocumentClick?: boolean
   shouldCloseOnEscape?: boolean
   shouldFocusOnOpen?: boolean
-  //Other props which are passed down to the underliyng element
-  [key: string]: unknown
 }
 
 /**
@@ -63,7 +61,9 @@ category: components/utilities
 @module Dialog
 **/
 
-class Dialog extends Component<Props> {
+class Dialog extends Component<
+  Props & Omit<React.AllHTMLAttributes<Props>, keyof Props>
+> {
   static componentId = 'Dialog'
 
   static propTypes = {
@@ -263,6 +263,7 @@ class Dialog extends Component<Props> {
 
   render() {
     const ElementType = getElementType(Dialog, this.props)
+
     return this.props.open ? (
       <ElementType
         {...omitProps(this.props, Dialog.propTypes)}
