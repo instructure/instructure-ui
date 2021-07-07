@@ -33,3 +33,4 @@ export {
   mirrorShorthandEdges
 } from './styleUtils'
 export { withStyle } from './withStyle'
+export type { MakeStyleConfig, MakeStyles } from './withStyle'

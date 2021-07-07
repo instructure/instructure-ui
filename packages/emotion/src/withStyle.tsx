@@ -30,6 +30,21 @@ import { useTextDirectionContext } from '@instructure/ui-i18n'
 import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
+
+export type MakeStyleConfig = {
+  updateConfig?: {
+    // The previous prop object that will be compared to the current props
+    prevProps: Record<string, unknown>
+    // An array of property names used in styles.js. The style object will
+    // recalculate if any of these properties change. It cannot be used to compare
+    // nested properties.
+    styledProps: string[]
+  }
+  // Extra properties that will be passed to the `generateStyle` method
+  [K: string]: unknown
+}
+export type MakeStyles = (config?: MakeStyleConfig) => void
+
 /**
  * ---
  * category: utilities/themes
@@ -126,9 +141,31 @@ const withStyle = decorator(
             )
           : {}
       )
-      const makeStyleHandler = (...extraArgs: any[]) => {
+      /**
+       * This method generates and sets the styles for the component (it calls
+       * the `generateStyle` method in the decorator's parameter).
+       * @param config You can use this object to to pass your own data to the
+       * `generateStyle` method and to prevent unnecessary style recalculations
+       * for performance reasons.
+       */
+      const makeStyleHandler: MakeStyles = (config) => {
+        if (config && config.updateConfig) {
+          let changed = false
+          for (const propToCheck in config.updateConfig.styledProps) {
+            if (
+              config.updateConfig.prevProps[propToCheck] !=
+              componentProps[propToCheck]
+            ) {
+              changed = true
+              break
+            }
+          }
+          if (!changed) {
+            return
+          }
+        }
         const calculatedStyles = bidirectionalPolyfill(
-          generateStyle(componentTheme, componentProps, ...extraArgs),
+          generateStyle(componentTheme, componentProps, config),
           dir
         )
         if (!isEqual(calculatedStyles, styles)) {
