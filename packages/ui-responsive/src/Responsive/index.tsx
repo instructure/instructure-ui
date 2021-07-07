@@ -34,7 +34,7 @@ import {
 } from '../addElementQueryMatchListener'
 import { addMediaQueryMatchListener } from '../addMediaQueryMatchListener'
 import { ResponsivePropTypes } from '../ResponsivePropTypes'
-import { BreakpointQueries, QueriesMatching } from '../QueryType'
+import { BreakpointQueries, QueriesMatching, UpdateMatches } from '../QueryType'
 import { findDOMNode } from '@instructure/ui-dom-utils'
 
 interface PropsObject {
@@ -55,11 +55,6 @@ type Props = {
   render?: (props: PropsObject | null, matches: QueriesMatching) => any
   children?: (props: PropsObject | null, matches: QueriesMatching) => any
 }
-
-type UpdateMatches = (
-  matches: QueriesMatching,
-  cb?: (...args: any[]) => any
-) => void
 
 /**
 ---

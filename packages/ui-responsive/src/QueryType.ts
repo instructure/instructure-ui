@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+
 /**
  * Valid keys for the Query object
  */
@@ -44,4 +46,57 @@ type BreakpointQueries = { [breakpointName: string]: Query }
  */
 type QueriesMatching = string[]
 
-export type { BreakpointQueries, Query, ValidQueryKey, QueriesMatching }
+type UpdateMatches = (
+  matches: QueriesMatching,
+  cb?: (...args: any[]) => any
+) => void
+
+/**
+ * Signature for `addMediaQueryMatchListener` and `addElementQueryMatchListener` methods.
+ *
+ * Given an object of named queries, listens for changes
+ * and notifies which queries match via a function
+ * callback. The callback method is only called when the query
+ * matches change, not on all window resizes.
+ *
+ * The [Responsive](#Responsive) component with the `match` prop
+ * set to `media` or `element` utilizes this function.
+ * This is a low level utility method and, in most cases,
+ * [Responsive](#Responsive) should be used instead.
+ *
+ * @param {Object} query - object consisting of names and query objects
+ * @param {Node|Window|React.ReactElement|React.Component|function} el - a DOM node or a function returning a DOM node
+ * @param {function} cb - called with an array of the names of the currently matching queries whenever a matching query changes
+ * @param {object} matchMedia - called with an array of the names of the currently matching queries whenever a matching query changes. Only used by `addMediaQueryMatchListener`.
+ * @returns {function} remove() function to call to remove the listener
+ */
+type QueryMatchListener = (
+  query: BreakpointQueries,
+  el:
+    | Node
+    | Window
+    | React.ReactElement
+    | React.Component
+    | ((
+        ...args: any[]
+      ) => Node | Window | React.ReactElement | React.Component),
+  cb: UpdateMatches,
+  matchMedia?: (
+    query: string,
+    el:
+      | Node
+      | Window
+      | React.ReactElement
+      | React.Component
+      | ((...args: any[]) => any)
+  ) => MediaQueryList | null
+) => { remove: () => void }
+
+export type {
+  BreakpointQueries,
+  Query,
+  ValidQueryKey,
+  QueriesMatching,
+  UpdateMatches,
+  QueryMatchListener
+}
