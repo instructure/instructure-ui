@@ -151,7 +151,7 @@ describe('<DateInput />', async () => {
 
       const dateInput = await DateInputLocator.find()
       const input = await dateInput.findInput()
-      await input.blur()
+      await input.focusOut()
 
       expect(onBlur).to.have.been.calledOnce()
     })
@@ -548,7 +548,7 @@ describe('<DateInput />', async () => {
 
         const dateInput = await DateInputLocator.find()
         const input = await dateInput.findInput()
-        await input.blur()
+        await input.focusOut()
         expect(onRequestHideCalendar).to.have.been.calledOnce()
         expect(onRequestValidateDate).to.have.been.calledOnce()
       })

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy } from '@instructure/ui-test-utils'
+import { expect, mount, spy, match } from '@instructure/ui-test-utils'
 
 import { MetricGroup } from '../index'
 import { Metric } from '../../Metric'
@@ -45,16 +45,14 @@ describe('<MetricGroup />', async () => {
 
   it('should not allow invalid children', async () => {
     const cs = spy(console, 'error')
-    const warning =
-      "Warning: Failed prop type: Expected one of Metric in MetricGroup but found 'div'"
+    const warning = "Expected one of Metric in MetricGroup but found 'div'"
 
     await mount(
       <MetricGroup>
         <div>foo</div>
       </MetricGroup>
     )
-
-    expect(cs).to.have.been.calledWithMatch(warning)
+    expect(cs).to.have.been.calledWith(match.string, match.string, warning)
   })
 
   it('passes props through to MetricGroup element', async () => {

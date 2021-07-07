@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
+import { expect, mount, within, stub, match } from '@instructure/ui-test-utils'
 
 import { FormFieldLabel } from '../index'
 
@@ -48,8 +48,10 @@ describe('<FormFieldLabel />', async () => {
 
     await mount(<FormFieldLabel />)
 
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `children` is marked as required in `FormFieldLabel`'
+    expect(consoleError).to.have.been.calledWith(
+      match.string,
+      match.string,
+      'The prop `children` is marked as required in `FormFieldLabel`, but its value is `undefined`.'
     )
   })
 

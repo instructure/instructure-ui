@@ -122,7 +122,7 @@ describe('<NumberInput />', () => {
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
 
-    await input.blur()
+    await input.focusOut()
 
     expect(onBlur).to.have.been.calledOnce()
   })
@@ -134,7 +134,7 @@ describe('<NumberInput />', () => {
     const numberInput = await NumberInputLocator.find()
     const input = await numberInput.findInput()
 
-    await input.focus({ target: {} }) // this only works if we pass a target
+    await input.focusIn({ target: {} }) // this only works if we pass a target
 
     expect(onFocus).to.have.been.calledOnce()
   })

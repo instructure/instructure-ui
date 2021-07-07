@@ -28,7 +28,8 @@ import {
   mount,
   stub,
   generateA11yTests,
-  spy
+  spy,
+  match
 } from '@instructure/ui-test-utils'
 
 import { Options } from '../index'
@@ -131,14 +132,14 @@ describe('<Options />', async () => {
   it('should not allow invalid children', async () => {
     const cs = spy(console, 'error')
     const warning =
-      "Warning: Failed prop type: Expected one of Options, Item, Separator in Options but found 'span'"
+      "Expected one of Options, Item, Separator in Options but found 'span'"
 
     await mount(
       <Options>
         <span />
       </Options>
     )
-    expect(cs).to.have.been.calledWithMatch(warning)
+    expect(cs).to.have.been.calledWith(match.string, match.string, warning)
   })
 
   it('should allow null children', async () => {

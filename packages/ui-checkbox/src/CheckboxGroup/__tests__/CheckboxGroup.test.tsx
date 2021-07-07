@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, match, mount, stub } from '@instructure/ui-test-utils'
 
 import { CheckboxGroupLocator } from '../CheckboxGroupLocator'
 
@@ -102,7 +102,9 @@ describe('<CheckboxGroup />', async () => {
     )
 
     expect(consoleError).to.have.been.calledWithMatch(
-      `Failed prop type: You provided a 'value' prop without an 'onChange' handler on 'CheckboxGroup'`
+      match.string,
+      match.string,
+      `You provided a 'value' prop without an 'onChange' handler on 'CheckboxGroup'`
     )
   })
 

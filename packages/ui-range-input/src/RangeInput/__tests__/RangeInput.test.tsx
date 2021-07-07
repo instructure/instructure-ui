@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, match, mount, stub } from '@instructure/ui-test-utils'
 
 import { RangeInput } from '../index'
 import { RangeInputLocator } from '../RangeInputLocator'
@@ -129,7 +129,9 @@ describe('<RangeInput />', async () => {
     )
 
     expect(consoleError).to.have.been.calledWithMatch(
-      `provided a 'value' prop without an 'onChange' handler`
+      match.string,
+      match.string,
+      `You provided a 'value' prop without an 'onChange' handler on`
     )
   })
 

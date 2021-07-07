@@ -45,8 +45,8 @@
     "wait-for-expect": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "^16.8",
-    "react-dom": "^16.8"
+    "react": ">=16.8 <=17",
+    "react-dom": ">=16.8 <=17"
   },
   "publishConfig": {
     "access": "public"

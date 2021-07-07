@@ -457,11 +457,10 @@ describe('queries', async () => {
 
         const button = await find('button')
 
-        await button.focus({ bubbles: true })
+        await button.focusIn({ bubbles: true })
 
-        const nativeEvent = (
-          handleFocus.getCall(0).args[0] as BaseSyntheticEvent<Event>
-        ).nativeEvent
+        const nativeEvent = (handleFocus.getCall(0)
+          .args[0] as BaseSyntheticEvent<Event>).nativeEvent
 
         expect(nativeEvent.bubbles).to.be.true()
       })

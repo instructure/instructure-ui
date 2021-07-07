@@ -23,7 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, stub, wait } from '@instructure/ui-test-utils'
+import {
+  expect,
+  match,
+  mount,
+  spy,
+  stub,
+  wait
+} from '@instructure/ui-test-utils'
 
 import { ToggleButton } from '../index'
 import { ToggleButtonLocator } from '../ToggleButtonLocator'
@@ -53,34 +60,33 @@ describe('<ToggleButton />', async () => {
   it('should fail if `screenReaderLabel` is not provided', async () => {
     const cs = spy(console, 'error')
     const warning =
-      'Warning: Failed prop type: The prop `screenReaderLabel` is marked as required in `ToggleButton`'
+      'The prop `screenReaderLabel` is marked as required in `ToggleButton`, but its value is `undefined`.'
 
     await mount(
-      // @ts-expect-error ts-migrate(2741) FIXME: Property 'screenReaderLabel' is missing in type '{... Remove this comment to see the full error message
+      // @ts-expect-error screenReaderLabel is intentionally missing
       <ToggleButton
         renderIcon={icon}
         renderTooltipContent="This is tooltip content"
         status="pressed"
       />
     )
-    expect(cs).to.have.been.calledWithMatch(warning)
+    expect(cs).to.have.been.calledWith(match.string, match.string, warning)
   })
 
   it('should fail if `status` is not provided', async () => {
     const cs = spy(console, 'error')
     const warning =
-      'Warning: Failed prop type: The prop `status` is marked as required in `ToggleButton`'
+      'The prop `status` is marked as required in `ToggleButton`, but its value is `undefined`.'
 
     await mount(
-      // @ts-expect-error ts-migrate(2741) FIXME: Property 'status' is missing in type '{ screenRead... Remove this comment to see the full error message
+      // @ts-expect-error status is intentionally missing
       <ToggleButton
         screenReaderLabel="This is a screen reader label"
         renderIcon={icon}
         renderTooltipContent="This is tooltip content"
       />
     )
-
-    expect(cs).to.have.been.calledWithMatch(warning)
+    expect(cs).to.have.been.calledWith(match.string, match.string, warning)
   })
 
   it('should set `aria-pressed` to `true` if `status` is `pressed`', async () => {
