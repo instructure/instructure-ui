@@ -55,7 +55,6 @@ type Props = {
   debug?: boolean
   makeStyles?: (...args: any[]) => any
   styles?: CSSObject
-  style?: CSSObject
   margin: Spacing
   padding: Spacing
   shadow: Shadow
@@ -70,7 +69,9 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-class ContextView extends Component<Props> {
+class ContextView extends Component<
+  Props & Omit<React.AllHTMLAttributes<Props>, keyof Props>
+> {
   static componentId = 'ContextView'
 
   static propTypes = {

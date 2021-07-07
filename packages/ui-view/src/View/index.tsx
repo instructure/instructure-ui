@@ -46,8 +46,7 @@ import {
   BorderWidth,
   BorderRadii,
   Shadow,
-  Stacking,
-  CSSObject
+  Stacking
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -112,9 +111,6 @@ type Props = {
   borderRadius?: BorderRadii
   shadow?: Shadow
   stacking?: Stacking
-  style?: CSSObject
-  //Other props which are passed down to the underliyng element
-  [key: string]: unknown
 }
 
 /**
@@ -125,7 +121,9 @@ category: components
 **/
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
-class View extends Component<Props & BidirectionalProps> {
+class View extends Component<
+  Props & BidirectionalProps & Omit<React.AllHTMLAttributes<Props>, keyof Props>
+> {
   static componentId = 'View'
 
   static propTypes = {
