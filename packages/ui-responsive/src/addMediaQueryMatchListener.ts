@@ -21,11 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-
 import { matchMedia as defaultMatchMedia } from '@instructure/ui-dom-utils'
 
-import { BreakpointQueries, QueriesMatching } from './QueryType'
+import { QueriesMatching, QueryMatchListener } from './QueryType'
 import { jsonToMediaQuery } from './jsonToMediaQuery'
 
 /**
@@ -80,27 +78,12 @@ import { jsonToMediaQuery } from './jsonToMediaQuery'
  * @param {object} matchMedia - called with an array of the names of the currently matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
-function addMediaQueryMatchListener(
-  query: BreakpointQueries,
-  el:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((
-        ...args: any[]
-      ) => Node | Window | React.ReactElement | React.Component),
-  cb: (queriesMatching: QueriesMatching) => any,
-  matchMedia: (
-    query: string,
-    el:
-      | Node
-      | Window
-      | React.ReactElement
-      | React.Component
-      | ((...args: any[]) => any)
-  ) => MediaQueryList | null = defaultMatchMedia
-): { remove(): void } {
+const addMediaQueryMatchListener: QueryMatchListener = (
+  query,
+  el,
+  cb,
+  matchMedia = defaultMatchMedia
+): { remove(): void } => {
   const node = typeof el === 'function' ? el() : el
 
   const updateMediaMatches = (

@@ -28,7 +28,11 @@ import { parseQuery, Size } from './parseQuery'
 import { findDOMNode, getBoundingClientRect } from '@instructure/ui-dom-utils'
 import { debounce } from '@instructure/debounce'
 
-import { BreakpointQueries, QueriesMatching } from './QueryType'
+import {
+  BreakpointQueries,
+  QueriesMatching,
+  QueryMatchListener
+} from './QueryType'
 
 /**
  * ---
@@ -85,18 +89,11 @@ import { BreakpointQueries, QueriesMatching } from './QueryType'
  * matching queries whenever a matching query changes
  * @returns {function} remove() function to call to remove the listener
  */
-function addElementQueryMatchListener(
-  query: BreakpointQueries,
-  el:
-    | Node
-    | Window
-    | React.ReactElement
-    | React.Component
-    | ((
-        ...args: any[]
-      ) => Node | Window | React.ReactElement | React.Component),
-  cb: (queriesMatching: QueriesMatching) => any
-): { remove(): void } {
+const addElementQueryMatchListener: QueryMatchListener = (
+  query,
+  el,
+  cb
+): { remove(): void } => {
   const node = typeof el === 'function' ? el() : el
   const { width, height } = getBoundingClientRect(node)
 
