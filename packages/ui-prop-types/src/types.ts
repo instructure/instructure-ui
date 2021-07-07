@@ -22,26 +22,14 @@
  * SOFTWARE.
  */
 
-import { Children } from './Children'
-import { childrenOrValue } from './childrenOrValue'
-import { controllable } from './controllable'
-import { cursor } from './cursor'
-import { xor } from './xor'
-import { makeRequirable } from './makeRequirable'
-import { element } from './element'
-
-export * from './element'
-export * from './types'
-export { Children, childrenOrValue, controllable, cursor, makeRequirable, xor }
-
-// Provide everything as a default export as well. That way we can easily
-// codemod users that have `import CustomPropTypes from '@instructure/ui-utils/...'
-export default {
-  Children,
-  childrenOrValue,
-  controllable,
-  cursor,
-  element,
-  makeRequirable,
-  xor
+/**
+ * Make all properties in T nullable
+ */
+export type Nullable<T> = {
+  [P in keyof T]: T[P] | null
 }
+/**
+ * A wrapper type around `React.AllHTMLAttributes`, except it will
+ * omit properties from it which can be found in T
+ */
+export type AllHTMLAttributes<T> = Omit<React.AllHTMLAttributes<T>, keyof T>

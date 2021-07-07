@@ -164,8 +164,13 @@ class Badge extends Component<Props> {
   }
 
   renderOutput() {
-    const { count, countUntil, formatOverflowText, formatOutput, type } =
-      this.props
+    const {
+      count,
+      countUntil,
+      formatOverflowText,
+      formatOutput,
+      type
+    } = this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop
@@ -189,6 +194,7 @@ class Badge extends Component<Props> {
       <View
         margin={standalone ? margin : 'none'}
         css={styles.badge}
+        //@ts-expect-error fix this, should be string
         title={type === 'count' && this.countOverflow() ? count : null}
         id={!standalone ? this._defaultId : null}
         display={standalone ? 'inline-block' : 'block'}

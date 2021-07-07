@@ -21,9 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/// <reference types="@emotion/react/types/css-prop" />
 
 export * from '@emotion/react'
+// this is likely a hack, investigate how to properly include
+// external package type definitions into our own typings
+// because /// <reference types="@emotion/react/types/css-prop" /> doesn't
+// seem to work properly
+// eslint-disable-next-line import/no-unresolved
+import '@emotion/react/types/css-prop'
 
 export { EmotionThemeProvider } from './EmotionThemeProvider'
 export * from './styleUtils'

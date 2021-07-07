@@ -331,6 +331,7 @@ class Link extends Component<Props> {
         aria-disabled={isDisabled ? 'true' : null}
         role={role}
         type={type}
+        //@ts-expect-error fix to be number
         tabIndex={tabIndex}
         css={this.props.styles.link}
       >

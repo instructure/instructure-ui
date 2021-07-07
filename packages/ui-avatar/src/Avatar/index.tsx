@@ -51,7 +51,7 @@ type Props = {
   display?: 'inline-block' | 'block'
   margin?: Spacing
   onImageLoaded?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: React.ReactElement | string
   elementRef?: (...args: any[]) => any
 }
 
