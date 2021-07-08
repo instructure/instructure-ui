@@ -39,6 +39,10 @@ const generateStyle = (componentTheme, { size, shape, src }, { loaded }) => {
       fontSize: 'inherit',
       borderWidth: componentTheme.borderWidthSmall
     },
+    'xx-small': {
+      fontSize: '0.5rem',
+      borderWidth: componentTheme.borderWidthSmall
+    },
     'x-small': {
       fontSize: '0.75rem',
       borderWidth: componentTheme.borderWidthSmall
@@ -57,6 +61,10 @@ const generateStyle = (componentTheme, { size, shape, src }, { loaded }) => {
     },
     'x-large': {
       fontSize: '1.75rem',
+      borderWidth: componentTheme.borderWidthMedium
+    },
+    'xx-large': {
+      fontSize: '2rem',
       borderWidth: componentTheme.borderWidthMedium
     }
   }
