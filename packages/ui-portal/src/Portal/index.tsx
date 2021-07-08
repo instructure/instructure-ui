@@ -38,11 +38,11 @@ type PortalNode = HTMLSpanElement | null
 
 type Props = {
   open?: boolean
-  onOpen?: (DOMNode: PortalNode) => any
-  onClose?: () => any
+  onOpen?: (DOMNode: PortalNode) => void
+  onClose?: () => void
   mountNode?: Element | (() => Element) | null
   insertAt?: 'bottom' | 'top'
-  elementRef?: (el: PortalNode) => any
+  elementRef?: (el: PortalNode) => void
 } & HTMLAttributes<Props> &
   BidirectionalProps
 
