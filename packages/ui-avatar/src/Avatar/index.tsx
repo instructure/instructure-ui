@@ -46,7 +46,15 @@ type Props = {
   name: string
   src?: string
   alt?: string
-  size?: 'auto' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+  size?:
+    | 'auto'
+    | 'xx-small'
+    | 'x-small'
+    | 'small'
+    | 'medium'
+    | 'large'
+    | 'x-large'
+    | 'xx-large'
   shape?: 'circle' | 'rectangle'
   display?: 'inline-block' | 'block'
   margin?: Spacing
@@ -82,11 +90,13 @@ class Avatar extends Component<Props> {
     alt: PropTypes.string,
     size: PropTypes.oneOf([
       'auto',
+      'xx-small',
       'x-small',
       'small',
       'medium',
       'large',
-      'x-large'
+      'x-large',
+      'xx-large'
     ]),
     shape: PropTypes.oneOf(['circle', 'rectangle']),
     /**
