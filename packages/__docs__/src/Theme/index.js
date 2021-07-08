@@ -32,6 +32,7 @@ import { px } from '@instructure/ui-utils'
 import { Table } from '@instructure/ui-table'
 import { Text } from '@instructure/ui-text'
 import { View } from '@instructure/ui-view'
+import { Alert } from '@instructure/ui-alerts'
 
 import { Heading } from '../Heading'
 import { Description } from '../Description'
@@ -146,6 +147,7 @@ class Theme extends Component {
     const margin = sub ? 'small none small' : 'small none large'
     const padding = 'small'
     const label = name + 'variables'
+
     return (
       <View key={label} as="div" padding={sub ? padding : 'none'}>
         <Heading as={headingElement} level={headingLevel}>
@@ -256,6 +258,12 @@ class Theme extends Component {
             {description}
           </Text>
         )}
+
+        <Alert margin="large 0">
+          The <code>rem</code> values on this page are based on{' '}
+          <code>1rem={px('1rem')}px</code>. The <code>rem</code> unit represents
+          the font-size of the root <code>&lt;html&gt;</code> element.
+        </Alert>
 
         {sections}
         {vars.length > 0 && this.renderTable('brand variables', vars)}
