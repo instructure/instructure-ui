@@ -32,7 +32,6 @@
     "@instructure/ui-i18n": "8.6.0",
     "@instructure/ui-prop-types": "8.6.0",
     "@instructure/ui-react-utils": "8.6.0",
-    "@instructure/ui-utils": "8.6.0",
     "prop-types": "^15"
   },
   "peerDependencies": {
