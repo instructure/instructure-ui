@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { alpha } from '@instructure/ui-color-utils'
+
 /**
  * Generates the theme object for the component from the theme and provided additional information
  * @param  {Object} theme The actual theme object.
@@ -39,6 +41,8 @@ const generateComponentTheme = (theme) => {
     borderWidthSmall: borders?.widthSmall,
     borderWidthMedium: borders?.widthMedium,
     borderColor: colors?.borderMedium,
+    boxShadowColor: alpha(colors?.backgroundDarkest, 12),
+    boxShadowBlur: '1rem',
     fontFamily: typography?.fontFamily,
     fontWeight: typography?.fontWeightBold
   }

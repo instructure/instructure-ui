@@ -33,7 +33,10 @@
  * @return {Object} The final style object, which will be used in the component
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
-const generateStyle = (componentTheme, { size, shape, src }, { loaded }) => {
+const generateStyle = (componentTheme, props, state) => {
+  const { size, shape, src } = props
+  const { loaded } = state
+
   const sizeStyles = {
     auto: {
       fontSize: 'inherit',
@@ -84,8 +87,6 @@ const generateStyle = (componentTheme, { size, shape, src }, { loaded }) => {
     avatar: {
       label: 'avatar',
       height: '2.5em',
-      borderStyle: 'solid',
-      borderColor: componentTheme.borderColor,
       boxSizing: 'border-box',
       backgroundColor: componentTheme.background,
       backgroundPosition: 'center',
@@ -95,11 +96,21 @@ const generateStyle = (componentTheme, { size, shape, src }, { loaded }) => {
       overflow: 'hidden',
       lineHeight: 0,
       textAlign: 'center',
-      backgroundImage: loaded ? `url('${src}')` : undefined,
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       ...sizeStyles[size],
       // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      ...variantStyles[shape]
+      ...variantStyles[shape],
+      ...(loaded
+        ? {
+            backgroundImage: `url('${src}')`,
+            border: 0,
+            boxShadow: `inset 0 0 ${componentTheme.boxShadowBlur} 0 ${componentTheme.boxShadowColor}`
+          }
+        : {
+            backgroundImage: undefined,
+            borderStyle: 'solid',
+            borderColor: componentTheme.borderColor
+          })
     },
     initials: {
       label: 'avatar__initials',
