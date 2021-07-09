@@ -33,10 +33,11 @@ import { alpha } from '@instructure/ui-color-utils'
 const generateComponentTheme = (theme) => {
   const { colors, borders, typography, key: themeName } = theme
 
+  const { brand, shamrock, barney, crimson, fire, licorice, ash } = colors
+
   const themeSpecificStyles = {}
 
   const componentVariables = {
-    color: colors?.textBrand,
     background: colors?.backgroundLightest,
     borderWidthSmall: borders?.widthSmall,
     borderWidthMedium: borders?.widthMedium,
@@ -44,7 +45,17 @@ const generateComponentTheme = (theme) => {
     boxShadowColor: alpha(colors?.backgroundDarkest, 12),
     boxShadowBlur: '1rem',
     fontFamily: typography?.fontFamily,
-    fontWeight: typography?.fontWeightBold
+    fontWeight: typography?.fontWeightBold,
+
+    // these colors have sufficient contrast with the white background
+    // in the normal and high contrast themes
+    color: brand,
+    colorShamrock: shamrock,
+    colorBarney: barney,
+    colorCrimson: crimson,
+    colorFire: fire,
+    colorLicorice: licorice,
+    colorAsh: ash
   }
 
   return {

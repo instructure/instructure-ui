@@ -55,6 +55,14 @@ type Props = {
     | 'large'
     | 'x-large'
     | 'xx-large'
+  color?:
+    | 'default' // = brand
+    | 'shamrock'
+    | 'barney'
+    | 'crimson'
+    | 'fire'
+    | 'licorice'
+    | 'ash'
   shape?: 'circle' | 'rectangle'
   display?: 'inline-block' | 'block'
   margin?: Spacing
@@ -98,6 +106,15 @@ class Avatar extends Component<Props> {
       'x-large',
       'xx-large'
     ]),
+    color: PropTypes.oneOf([
+      'default',
+      'shamrock',
+      'barney',
+      'crimson',
+      'fire',
+      'licorice',
+      'ash'
+    ]),
     shape: PropTypes.oneOf(['circle', 'rectangle']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -126,6 +143,7 @@ class Avatar extends Component<Props> {
     margin: undefined,
     elementRef: undefined,
     size: 'medium',
+    color: 'default',
     shape: 'circle',
     display: 'inline-block',
     onImageLoaded: () => {}
