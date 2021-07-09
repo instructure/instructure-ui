@@ -6,7 +6,7 @@
   "type": "commonjs",
   "module": "./es/index.js",
   "main": "./lib/index.js",
-  "types": "./types/index.d.ts",
+  "types": "./types/global.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -19,8 +19,8 @@
     "clean": "ui-build --clean",
     "build": "ui-build --modules es,cjs",
     "build:watch": "yarn ts:check --watch & ui-build --watch",
-    "build:types": "tsc -p tsconfig.build.json",
-    "ts:check": "tsc -p tsconfig.build.json --noEmit --emitDeclarationOnly false"
+    "build:types": "tsc -p tsconfig.build.json && cpy './global.d.ts' './types'",
+    "ts:check": "tsc -p tsconfig.build.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -38,7 +38,8 @@
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.6.0",
-    "@instructure/ui-test-utils": "8.6.0"
+    "@instructure/ui-test-utils": "8.6.0",
+    "cpy-cli": "^3.1.1"
   },
   "peerDependencies": {
     "react": "^16.8"
