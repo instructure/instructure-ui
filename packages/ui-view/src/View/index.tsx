@@ -30,9 +30,8 @@ import PropTypes from 'prop-types'
 import { getComputedStyle } from '@instructure/ui-dom-utils'
 import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import {
-  AllHTMLAttributes,
   cursor as cursorPropTypes,
-  Nullable
+  OtherHTMLAttributes
 } from '@instructure/ui-prop-types'
 import { logError as error } from '@instructure/console'
 import {
@@ -126,7 +125,7 @@ category: components
 @bidirectional()
 @withStyle(generateStyle, generateComponentTheme)
 class View extends Component<
-  Props & BidirectionalProps & Nullable<AllHTMLAttributes<Props>>
+  Props & BidirectionalProps & OtherHTMLAttributes<Props>
 > {
   static componentId = 'View'
 

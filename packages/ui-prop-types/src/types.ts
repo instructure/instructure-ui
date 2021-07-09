@@ -29,7 +29,13 @@ export type Nullable<T> = {
   [P in keyof T]: T[P] | null
 }
 /**
- * A wrapper type around `React.AllHTMLAttributes`, except it will
- * omit properties from it which can be found in T
+ * Generates a type which contains HTML attributes for the given element
+ * excluding attributes which are defined in Props.
+ *
+ * @example
+ * class Button extends React.Component<ButtonProps & OtherHTMLAttributes<ButtonProps, React.ButtonHTMLAttributes<ButtonProps>>> {}
  */
-export type AllHTMLAttributes<T> = Omit<React.AllHTMLAttributes<T>, keyof T>
+export type OtherHTMLAttributes<
+  Props,
+  Attributes extends React.HTMLAttributes<Props> = React.AllHTMLAttributes<Props>
+> = Nullable<Omit<Attributes, keyof Props>>
