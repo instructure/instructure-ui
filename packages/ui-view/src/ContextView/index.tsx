@@ -40,7 +40,7 @@ import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '../View'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
-import { AllHTMLAttributes, Nullable } from '@instructure/ui-prop-types'
+import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
 type Props = {
   as?: React.ReactElement
@@ -70,9 +70,7 @@ category: components
 **/
 
 @withStyle(generateStyle, generateComponentTheme)
-class ContextView extends Component<
-  Props & Nullable<AllHTMLAttributes<Props>>
-> {
+class ContextView extends Component<Props & OtherHTMLAttributes<Props>> {
   static componentId = 'ContextView'
 
   static propTypes = {
