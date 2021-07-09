@@ -31,12 +31,6 @@ import { bidirectionalPolyfill } from './styleUtils/bidirectionalPolyfill'
 import { getComponentThemeOverride } from './getComponentThemeOverride'
 import { useTheme } from './useTheme'
 
-import { CSSObject } from '@emotion/react'
-
-export type WithStyleProps = Partial<{
-  styles: CSSObject
-  makeStyles: (...extraArgs: unknown[]) => void
-}>
 /**
  * ---
  * category: utilities/themes
