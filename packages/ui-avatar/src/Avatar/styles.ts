@@ -34,7 +34,7 @@
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'componentTheme' implicitly has an 'any'... Remove this comment to see the full error message
 const generateStyle = (componentTheme, props, state) => {
-  const { size, shape, src } = props
+  const { size, color, shape, src } = props
   const { loaded } = state
 
   const sizeStyles = {
@@ -83,6 +83,17 @@ const generateStyle = (componentTheme, props, state) => {
       width: '3em'
     }
   }
+
+  const initialsColor = {
+    default: componentTheme.color, // = brand
+    shamrock: componentTheme.colorShamrock,
+    barney: componentTheme.colorBarney,
+    crimson: componentTheme.colorCrimson,
+    fire: componentTheme.colorFire,
+    licorice: componentTheme.colorLicorice,
+    ash: componentTheme.colorAsh
+  }
+
   return {
     avatar: {
       label: 'avatar',
@@ -114,7 +125,8 @@ const generateStyle = (componentTheme, props, state) => {
     },
     initials: {
       label: 'avatar__initials',
-      color: componentTheme.color,
+      // @ts-expect-error TS7053: FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+      color: initialsColor[color],
       lineHeight: '2.375em',
       fontFamily: componentTheme.fontFamily,
       fontWeight: componentTheme.fontWeight,
