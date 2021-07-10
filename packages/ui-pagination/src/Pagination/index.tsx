@@ -32,7 +32,12 @@ import { uid } from '@instructure/uid'
 import { Children } from '@instructure/ui-prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { findTabbable, getActiveElement } from '@instructure/ui-dom-utils'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import { PaginationButton } from './PaginationButton'
 import { PaginationArrowButton } from './PaginationArrowButton'
@@ -69,7 +74,7 @@ type Props = {
   labelNext?: string
   labelPrev?: string
   variant?: 'full' | 'compact'
-  margin?: string
+  margin?: Spacing
   as?: React.ReactElement
   elementRef?: (...args: any[]) => any
   shouldHandleFocus?: boolean

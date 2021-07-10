@@ -83,6 +83,56 @@ const ThemeablePropValues = {
     xLarge: 'x-large',
     xxLarge: 'xx-large'
   }
-}
+} as const
+// SPACING
+type SpacingKeys = keyof typeof ThemeablePropValues.SPACING
+type SpacingValues = typeof ThemeablePropValues.SPACING[SpacingKeys]
+type Spacing =
+  | `${SpacingValues}`
+  | `${SpacingValues} ${SpacingValues}`
+  | `${SpacingValues} ${SpacingValues} ${SpacingValues}`
+  | `${SpacingValues} ${SpacingValues} ${SpacingValues} ${SpacingValues}`
+
+// SHADOW_TYPES
+type ShadowKeys = keyof typeof ThemeablePropValues.SHADOW_TYPES
+type Shadow = typeof ThemeablePropValues.SHADOW_TYPES[ShadowKeys]
+
+// STACKING_TYPES
+type StackingKeys = keyof typeof ThemeablePropValues.STACKING_TYPES
+type Stacking = typeof ThemeablePropValues.STACKING_TYPES[StackingKeys]
+
+// BACKGROUNDS
+type BackgroundKeys = keyof typeof ThemeablePropValues.BACKGROUNDS
+type Background = typeof ThemeablePropValues.BACKGROUNDS[BackgroundKeys]
+
+// BORDER_RADII
+type BorderRadiiKeys = keyof typeof ThemeablePropValues.BORDER_RADII
+type BorderRadiiValues = typeof ThemeablePropValues.BORDER_RADII[BorderRadiiKeys]
+type BorderRadii =
+  | `${BorderRadiiValues}`
+  | `${BorderRadiiValues} ${BorderRadiiValues}`
+  | `${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues}`
+  | `${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues} ${BorderRadiiValues}`
+
+// BORDER_WIDTHS
+type BorderWidthKeys = keyof typeof ThemeablePropValues.BORDER_WIDTHS
+type BorderWidthValues = typeof ThemeablePropValues.BORDER_WIDTHS[BorderWidthKeys]
+type BorderWidth =
+  | `${BorderWidthValues}`
+  | `${BorderWidthValues} ${BorderWidthValues}`
+  | `${BorderWidthValues} ${BorderWidthValues} ${BorderWidthValues}`
+  | `${BorderWidthValues} ${BorderWidthValues} ${BorderWidthValues} ${BorderWidthValues}`
+
 export default ThemeablePropValues
 export { ThemeablePropValues }
+export type {
+  SpacingValues,
+  Spacing,
+  Shadow,
+  Stacking,
+  Background,
+  BorderRadiiValues,
+  BorderRadii,
+  BorderWidthValues,
+  BorderWidth
+}

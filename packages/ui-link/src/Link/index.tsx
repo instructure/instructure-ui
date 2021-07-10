@@ -39,7 +39,12 @@ import {
 import { logWarn as warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
@@ -49,7 +54,7 @@ type Props = {
   elementRef?: (...args: any[]) => any
   as?: React.ReactElement
   interaction?: 'enabled' | 'disabled'
-  margin?: string
+  margin?: Spacing
   renderIcon?: ((...args: any[]) => any) | React.ReactNode
   iconPlacement?: 'start' | 'end'
   display?: 'auto' | 'block' | 'inline-block' | 'flex' | 'inline-flex'

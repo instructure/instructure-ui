@@ -44,7 +44,12 @@ import { debounce } from '@instructure/debounce'
 import { px } from '@instructure/ui-utils'
 import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -61,8 +66,8 @@ type Props = {
   maxWidth?: string | number
   maxHeight?: string | number
   minHeight?: string | number
-  margin?: string
-  padding?: string
+  margin?: Spacing
+  padding?: Spacing
   textAlign?: 'start' | 'center' | 'end'
   elementRef?: (...args: any[]) => any
   tabOverflow?: 'stack' | 'scroll'

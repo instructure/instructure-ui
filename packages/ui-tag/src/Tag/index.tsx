@@ -30,7 +30,12 @@ import { View } from '@instructure/ui-view'
 import { omitProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -44,7 +49,7 @@ type Props = {
   disabled?: boolean
   readOnly?: boolean
   dismissible?: boolean
-  margin?: string
+  margin?: Spacing
   onClick?: (...args: any[]) => any
   elementRef?: (...args: any[]) => any
   size?: 'small' | 'medium' | 'large'

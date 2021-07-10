@@ -39,7 +39,12 @@ import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
 import { View } from '@instructure/ui-view'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyles from './styles'
 import generateComponentTheme from './theme'
@@ -60,7 +65,7 @@ type Props = {
   withBackground?: boolean
   withBorder?: boolean
   isCondensed?: boolean
-  margin?: string
+  margin?: Spacing
   cursor?: string
   href?: string
   onClick?: (...args: any[]) => any
