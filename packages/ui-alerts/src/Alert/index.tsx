@@ -47,7 +47,7 @@ import {
   jsx,
   ThemeablePropTypes,
   EmotionThemeProvider,
-  ThemeablePropValues
+  Spacing
 } from '@instructure/emotion'
 
 import generateStyle from './styles'
@@ -62,8 +62,7 @@ type Props = {
   isLiveRegionAtomic?: boolean
   screenReaderOnly?: boolean
   timeout?: number
-  margin?: keyof typeof ThemeablePropValues.SPACING
-
+  margin?: Spacing
   renderCloseButtonLabel?: ((...args: any[]) => any) | React.ReactNode
   onDismiss?: (...args: any[]) => any
   transition?: 'none' | 'fade'
@@ -374,7 +373,6 @@ class Alert extends Component<Props> {
     return (
       <View
         as="div"
-        // @ts-expect-error ts-migrate(2322) FIXME:
         margin={this.props.margin}
         css={this.props.styles.alert}
         onKeyUp={this.handleKeyUp}
