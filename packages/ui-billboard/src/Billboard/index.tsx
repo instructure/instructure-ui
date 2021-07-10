@@ -34,7 +34,12 @@ import {
   getElementType
 } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -54,7 +59,7 @@ type Props = {
   href?: string
   disabled?: boolean
   readOnly?: boolean
-  margin?: string
+  margin?: Spacing
 }
 
 /**

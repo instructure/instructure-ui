@@ -33,7 +33,12 @@ import { testable } from '@instructure/ui-testable'
 
 import { ListItem } from './ListItem'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -44,7 +49,7 @@ type Props = {
   as?: 'ul' | 'ol'
   delimiter?: 'none' | 'dashed' | 'solid'
   isUnstyled?: boolean
-  margin?: string
+  margin?: Spacing
   size?: 'small' | 'medium' | 'large'
   itemSpacing?:
     | 'none'

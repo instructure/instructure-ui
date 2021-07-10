@@ -32,7 +32,12 @@ import { TruncateText } from '@instructure/ui-truncate-text'
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -43,7 +48,7 @@ type Props = {
   as?: React.ReactElement
   color?: 'primary' | 'success' | 'danger' | 'info' | 'warning' | 'alert'
   elementRef?: (...args: any[]) => any
-  margin?: string
+  margin?: Spacing
 }
 
 /**

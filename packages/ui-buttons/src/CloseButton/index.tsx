@@ -31,7 +31,12 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { testable } from '@instructure/ui-testable'
 import { getInteraction, passthroughProps } from '@instructure/ui-react-utils'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -46,7 +51,7 @@ type Props = {
   elementRef?: (...args: any[]) => any
   size?: 'small' | 'medium' | 'large'
   onClick?: (...args: any[]) => any
-  margin?: string
+  margin?: Spacing
   placement?: 'start' | 'end' | 'static'
   offset?: 'none' | 'x-small' | 'small' | 'medium'
   type?: 'button' | 'submit' | 'reset'

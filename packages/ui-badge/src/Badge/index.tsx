@@ -32,7 +32,12 @@ import { safeCloneElement } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -159,8 +164,13 @@ class Badge extends Component<Props> {
   }
 
   renderOutput() {
-    const { count, countUntil, formatOverflowText, formatOutput, type } =
-      this.props
+    const {
+      count,
+      countUntil,
+      formatOverflowText,
+      formatOutput,
+      type
+    } = this.props
 
     // If the badge count is >= than the countUntil limit, format the badge text
     // via the formatOverflowText function prop
@@ -184,6 +194,7 @@ class Badge extends Component<Props> {
       <View
         margin={standalone ? margin : 'none'}
         css={styles.badge}
+        //@ts-expect-error has to be string
         title={type === 'count' && this.countOverflow() ? count : null}
         // @ts-expect-error ts-migrate(2339) FIXME: Property '_defaultId' does not exist on type 'Badg... Remove this comment to see the full error message
         id={!standalone ? this._defaultId : null}

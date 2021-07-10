@@ -30,7 +30,12 @@ import { childrenOrValue } from '@instructure/ui-prop-types'
 import { getElementType, passthroughProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
@@ -49,7 +54,7 @@ type Props = {
   //TODO: probably have to make a new type instead of this generic `string` which
   //will only allow the valid html tags
   as?: React.ReactElement | string
-  margin?: string
+  margin?: Spacing
   elementRef?: (...args: any[]) => any
 }
 

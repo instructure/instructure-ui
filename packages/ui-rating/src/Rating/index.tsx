@@ -31,7 +31,12 @@ import { ScreenReaderContent } from '@instructure/ui-a11y-content'
 import { omitProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { RatingIcon } from '../RatingIcon'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 import generateStyle from './styles'
 
 type Props = {
@@ -42,7 +47,7 @@ type Props = {
   valueMax?: number
   valueNow?: number
   animateFill?: boolean
-  margin?: string
+  margin?: Spacing
   makeStyles?: (...args: any[]) => any
   styles?: any
 }
@@ -148,8 +153,14 @@ class Rating extends Component<Props> {
   }
 
   render() {
-    const { iconCount, animateFill, size, margin, label, formatValueText } =
-      this.props
+    const {
+      iconCount,
+      animateFill,
+      size,
+      margin,
+      label,
+      formatValueText
+    } = this.props
 
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     const valueText = label + ' ' + formatValueText(this.filled, iconCount)

@@ -28,7 +28,12 @@ import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-react-utils'
 import { View } from '@instructure/ui-view'
-import { withStyle, jsx, ThemeablePropTypes } from '@instructure/emotion'
+import {
+  withStyle,
+  jsx,
+  ThemeablePropTypes,
+  Spacing
+} from '@instructure/emotion'
 
 import generateStyle from './styles'
 
@@ -37,8 +42,8 @@ type Props = {
   styles?: any
   as?: React.ReactElement
   elementRef?: (...args: any[]) => any
-  margin?: string
-  padding?: string
+  margin?: Spacing
+  padding?: Spacing
   align?: 'center' | 'start' | 'end' | 'stretch'
   direction?: 'row' | 'column'
   textAlign?: 'start' | 'center' | 'end'

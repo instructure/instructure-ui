@@ -22,12 +22,19 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
-import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
+import {
+  cursor as cursorPropTypes,
+  OtherHTMLAttributes
+} from '@instructure/ui-prop-types'
 import { bidirectional } from '@instructure/ui-i18n'
 import {
   ThemeablePropTypes,
   WithStyleProps,
-  CSSObject
+  Spacing,
+  BorderWidth,
+  BorderRadii,
+  Shadow,
+  Stacking
 } from '@instructure/emotion'
 
 export type ViewOwnProps = {
@@ -133,51 +140,47 @@ export type ViewOwnProps = {
    */
   withVisualDebug?: boolean
 
-  dir?: any // TODO: PropTypes.oneOf(Object.values(bidirectional.DIRECTION)),
+  dir?: 'ltr' | 'rtl'
   /**
    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
    */
-  margin?: string
+  margin?: Spacing
   /**
    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
    */
-  padding?: string
+  padding?: Spacing
   /**
    * Accepts the familiar CSS shorthand to designate border widths corresponding
    * to edges
    */
-  borderWidth?: string
+  borderWidth?: BorderWidth
   /**
    * Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be
    * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
    */
-  borderRadius?: string
+  borderRadius?: BorderRadii
   /**
    * Controls the shadow depth for the `<View />`
    */
-  shadow?: string
+  shadow?: Shadow
 
   /**
    * Controls the z-index depth for the `<View />`
    */
-  stacking?: string
+  stacking?: Stacking
   /**
    * Specify a mouse cursor to use when hovering over the `<View />`
    */
   cursor?: any
-  className?: string
-  style?: CSSObject
 }
-// View seems to accept all kind of other props from other components for example:
-// `role` from the Avatar component
-// TODO: investigate how to resolve this better
 
-export type RestProps = Record<string, unknown>
-export type ViewProps = ViewOwnProps & WithStyleProps & RestProps
+export type ViewProps = ViewOwnProps &
+  WithStyleProps &
+  OtherHTMLAttributes<ViewOwnProps>
 export type AllowedPropKeys = Readonly<
   Array<keyof (ViewOwnProps & WithStyleProps)>
 >
@@ -251,7 +254,6 @@ export const propTypes = {
   withVisualDebug: PropTypes.bool,
   makeStyles: PropTypes.func,
   styles: PropTypes.object,
-  //@ts-expect-error fix
   dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
 }
 
@@ -262,7 +264,6 @@ export const allowedProps: AllowedPropKeys = [
   'borderRadius',
   'borderWidth',
   'cursor',
-  'className',
   'dir',
   'display',
   'elementRef',
@@ -286,7 +287,6 @@ export const allowedProps: AllowedPropKeys = [
   'shadow',
   'shouldAnimateFocus',
   'stacking',
-  'style',
   'styles',
   'textAlign',
   'width',
