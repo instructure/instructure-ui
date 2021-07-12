@@ -77,19 +77,43 @@ class Properties extends Component {
       })
       .map((name) => {
         const prop = props[name]
+
         return (
           <Table.Row key={name}>
             <Table.Cell>
               <code>{name}</code>
             </Table.Cell>
             <Table.Cell>
-              <code>{this.renderType(prop.type)}</code>
+              <code>
+                {prop.tsType
+                  ? this.renderTSType(prop.tsType)
+                  : this.renderType(prop.type)}
+              </code>
             </Table.Cell>
             <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
             <Table.Cell>{this.renderDescription(prop)}</Table.Cell>
           </Table.Row>
         )
       })
+  }
+  renderTSType = (tsType) => {
+    const { name } = tsType
+    /*
+    possible types:
+      - signature
+      - union
+      - custom
+    */
+    //TODO: currently custom imported types are just showing
+    // the name of the type, implement a solution which
+    // can somehow link to these custom types
+    switch (name) {
+      case 'union':
+      case 'signature':
+        return tsType.raw
+      default:
+        return name
+    }
   }
 
   renderType(type) {
@@ -118,12 +142,14 @@ class Properties extends Component {
   }
 
   renderDescription(prop) {
-    const { description } = prop || {}
+    const { description, tsType } = prop || {}
+
     return (
       <div>
         {description && compileMarkdown(description)}
-        {this.renderEnum(prop)}
-        {this.renderUnion(prop)}
+        {/* This would be duplicate information in case we have proper TS types */}
+        {!tsType ? this.renderEnum(prop) : null}
+        {!tsType ? this.renderUnion(prop) : null}
       </div>
     )
   }
