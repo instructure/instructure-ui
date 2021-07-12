@@ -126,7 +126,12 @@ class Options extends Component<Props> {
   renderLabel() {
     const { renderLabel, styles } = this.props
     return (
-      <span id={this._labelId} role="presentation" css={styles.label}>
+      <span
+        id={this._labelId}
+        role="presentation"
+        aria-hidden="true"
+        css={styles.label}
+      >
         {callRenderProp(renderLabel)}
       </span>
     )
