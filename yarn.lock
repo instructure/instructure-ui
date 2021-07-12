@@ -16544,17 +16544,10 @@ moize@^6.0.0:
     fast-equals "^2.0.1"
     micro-memoize "^4.0.9"
 
-moment-timezone@^0.5:
+moment-timezone@^0.5, moment-timezone@^0.5.33:
   version "0.5.33"
   resolved "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.33.tgz#b252fd6bb57f341c9b59a5ab61a8e51a73bbd22c"
   integrity sha512-PTc2vcT8K9J5/9rDEPe5czSIKgLoGsH8UNpA4qZTVw0Vd/Uz19geE9abbIOQKaAQFcnQ3v5YEXrbSc5BpshH+w==
-  dependencies:
-    moment ">= 2.9.0"
-
-moment-timezone@^0.5.33:
-  version "0.5.33"
-  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/moment-timezone/-/moment-timezone-0.5.33.tgz#b252fd6bb57f341c9b59a5ab61a8e51a73bbd22c"
-  integrity sha1-slL9a7V/NBybWaWrYajlGnO70iw=
   dependencies:
     moment ">= 2.9.0"
 
