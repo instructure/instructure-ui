@@ -16551,6 +16551,13 @@ moment-timezone@^0.5:
   dependencies:
     moment ">= 2.9.0"
 
+moment-timezone@^0.5.33:
+  version "0.5.33"
+  resolved "https://instructure.jfrog.io/instructure/api/npm/npm-cache/moment-timezone/-/moment-timezone-0.5.33.tgz#b252fd6bb57f341c9b59a5ab61a8e51a73bbd22c"
+  integrity sha1-slL9a7V/NBybWaWrYajlGnO70iw=
+  dependencies:
+    moment ">= 2.9.0"
+
 "moment@>= 2.9.0", moment@^2.18.1, moment@^2.19.3, moment@^2.23.0:
   version "2.29.1"
   resolved "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
