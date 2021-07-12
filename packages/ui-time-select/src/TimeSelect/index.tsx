@@ -25,12 +25,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  I18nPropTypes,
-  ApplyLocaleContext,
-  DateTime,
-  Locale
-} from '@instructure/ui-i18n'
+import { I18nPropTypes, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
+
+import moment from 'moment-timezone'
+
 import { controllable } from '@instructure/ui-prop-types'
 import {
   getInteraction,
@@ -331,7 +329,7 @@ class TimeSelect extends Component<Props> {
     } else if (this.context && this.context.timezone) {
       return this.context.timezone
     }
-    return DateTime.browserTimeZone()
+    return moment.tz.guess()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
@@ -387,7 +385,12 @@ class TimeSelect extends Component<Props> {
         return option
       }
       // value does not match an existing option
-      const date = DateTime.parse(initialValue, this.locale(), this.timezone())
+      const date = moment.tz(
+        initialValue,
+        moment.ISO_8601,
+        this.locale(),
+        this.timezone()
+      )
       return { label: date.format(format) }
     }
     // otherwise return first option, if desired
@@ -416,9 +419,14 @@ class TimeSelect extends Component<Props> {
     let baseDate
     const baseValue = this.props.value || this.props.defaultValue
     if (baseValue) {
-      baseDate = DateTime.parse(baseValue, this.locale(), this.timezone())
+      baseDate = moment.tz(
+        baseValue,
+        moment.ISO_8601,
+        this.locale(),
+        this.timezone()
+      )
     } else {
-      baseDate = DateTime.now(this.locale(), this.timezone())
+      baseDate = moment().locale(this.locale()).tz(this.timezone())
     }
     return baseDate.second(0).millisecond(0)
   }
@@ -546,8 +554,9 @@ class TimeSelect extends Component<Props> {
     let prevValue = ''
 
     if (this.props.defaultValue) {
-      const date = DateTime.parse(
+      const date = moment.tz(
         this.props.defaultValue,
+        moment.ISO_8601,
         this.locale(),
         this.timezone()
       )
