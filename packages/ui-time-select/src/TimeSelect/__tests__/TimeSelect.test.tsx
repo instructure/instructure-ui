@@ -31,7 +31,7 @@ import {
   wait
 } from '@instructure/ui-test-utils'
 
-import { DateTime } from '@instructure/ui-i18n'
+import moment from 'moment-timezone'
 import { TimeSelect } from '../index'
 import { TimeSelectLocator } from '../TimeSelectLocator'
 import TimeSelectExamples from '../__examples__/TimeSelect.examples'
@@ -106,7 +106,12 @@ describe('<TimeSelect />', async () => {
 
   it('should behave controlled', async () => {
     const onChange = stub()
-    const value = DateTime.parse('1986-05-17T05:00:00.000Z', 'en', 'US/Eastern')
+    const value = moment.tz(
+      '1986-05-17T05:00:00.000Z',
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
 
     const subject = await mount(
       <TimeSelect
@@ -131,8 +136,9 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should render a default value', async () => {
-    const defaultValue = DateTime.parse(
+    const defaultValue = moment.tz(
       '1986-05-17T18:00:00.000Z',
+      moment.ISO_8601,
       'en',
       'US/Eastern'
     )
@@ -154,9 +160,15 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should display value when both defaultValue and value are set', async () => {
-    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
-    const defaultValue = DateTime.parse(
+    const value = moment.tz(
+      '1986-05-17T18:00:00.000Z',
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
+    const defaultValue = moment.tz(
       '1986-05-25T19:00:00.000Z',
+      moment.ISO_8601,
       'en',
       'US/Eastern'
     )
@@ -183,14 +195,21 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should use the specified timezone', async () => {
-    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Central')
-    const oneHourBackValue = DateTime.parse(
+    const value = moment.tz(
       '1986-05-17T18:00:00.000Z',
+      moment.ISO_8601,
+      'en',
+      'US/Central'
+    )
+    const oneHourBackValue = moment.tz(
+      '1986-05-17T18:00:00.000Z',
+      moment.ISO_8601,
       'en',
       'US/Mountain'
     )
-    const oneHourForwardBackValue = DateTime.parse(
+    const oneHourForwardBackValue = moment.tz(
       '1986-05-17T18:00:00.000Z',
+      moment.ISO_8601,
       'en',
       'US/Eastern'
     )
@@ -213,7 +232,12 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should use the specified locale', async () => {
-    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
+    const value = moment.tz(
+      '1986-05-17T18:00:00.000Z',
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
@@ -232,7 +256,12 @@ describe('<TimeSelect />', async () => {
   })
 
   it('should use the specified step value', async () => {
-    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
+    const value = moment.tz(
+      '1986-05-17T18:00:00.000Z',
+      moment.ISO_8601,
+      'en',
+      'US/Eastern'
+    )
     await mount(
       <TimeSelect
         renderLabel="Choose a time"
