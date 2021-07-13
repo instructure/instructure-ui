@@ -25,7 +25,6 @@ import { alpha } from '@instructure/ui-color-utils'
 
 export default function generator({ colors, borders, typography }) {
   return {
-    color: colors.textBrand,
     background: colors.backgroundLightest,
     borderWidthSmall: borders.widthSmall,
     borderWidthMedium: borders.widthMedium,
@@ -33,6 +32,16 @@ export default function generator({ colors, borders, typography }) {
     boxShadowColor: alpha(colors.backgroundDarkest, 12),
     boxShadowBlur: '1rem',
     fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightBold
+    fontWeight: typography.fontWeightBold,
+
+    // these colors have sufficient contrast with the white background
+    // in the normal and high contrast themes
+    color: colors.brand,
+    colorShamrock: colors.shamrock,
+    colorBarney: colors.barney,
+    colorCrimson: colors.crimson,
+    colorFire: colors.fire,
+    colorLicorice: colors.licorice,
+    colorAsh: colors.ash
   }
 }

@@ -66,6 +66,15 @@ class Avatar extends Component {
       'x-large',
       'xx-large'
     ]),
+    color: PropTypes.oneOf([
+      'default',
+      'shamrock',
+      'barney',
+      'crimson',
+      'fire',
+      'licorice',
+      'ash'
+    ]),
     shape: PropTypes.oneOf(['circle', 'rectangle']),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -104,6 +113,7 @@ class Avatar extends Component {
     margin: undefined,
     elementRef: undefined,
     size: 'medium',
+    color: 'default',
     shape: 'circle',
     display: 'inline-block',
     onImageLoaded: (event) => {}
@@ -170,6 +180,7 @@ class Avatar extends Component {
           [styles.root]: true,
           [styles[this.props.size]]: true,
           [styles[this.props.variant || this.props.shape]]: true,
+          [styles[this.props.color]]: true,
           [styles.loaded]: loaded
         })}
         aria-label={this.props.alt ? this.props.alt : null}
