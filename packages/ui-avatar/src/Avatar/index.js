@@ -158,19 +158,19 @@ class Avatar extends Component {
 
   render() {
     const { onImageLoaded, ...props } = this.props
+    const { loaded } = this.state
 
     return (
       <View
         {...passthroughProps(props)}
         style={{
-          backgroundImage: this.state.loaded
-            ? `url('${this.props.src}')`
-            : undefined
+          backgroundImage: loaded ? `url('${this.props.src}')` : undefined
         }}
         className={classnames({
           [styles.root]: true,
           [styles[this.props.size]]: true,
-          [styles[this.props.variant || this.props.shape]]: true
+          [styles[this.props.variant || this.props.shape]]: true,
+          [styles.loaded]: loaded
         })}
         aria-label={this.props.alt ? this.props.alt : null}
         role={this.props.alt ? 'img' : null}
@@ -184,7 +184,7 @@ class Avatar extends Component {
         }
       >
         {this.renderLoadImage()}
-        {!this.state.loaded && this.renderInitials()}
+        {!loaded && this.renderInitials()}
       </View>
     )
   }

@@ -24,8 +24,6 @@
 
 .root {
   height: 2.5em;
-  border-style: solid;
-  border-color: var(--borderColor);
   box-sizing: border-box;
   background-color: var(--background);
   background-position: center;
@@ -74,6 +72,16 @@
   &.xx-large {
     font-size: 2rem;
     border-width: var(--borderWidthMedium);
+  }
+
+  &.loaded {
+    border: 0;
+    box-shadow: inset 0 0 var(--boxShadowBlur) 0 var(--boxShadowColor);
+  }
+
+  &:not(.loaded) {
+    border-style: solid;
+    border-color: var(--borderColor);
   }
 }
 
