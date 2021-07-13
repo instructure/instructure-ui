@@ -99,6 +99,7 @@ class Options extends Component {
       <span
         id={this._labelId}
         role="presentation"
+        aria-hidden="true"
         className={classnames({
           [styles.label]: true
         })}
