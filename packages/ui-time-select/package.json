@@ -35,12 +35,13 @@
     "@instructure/ui-test-locator": "8.6.0",
     "@instructure/ui-testable": "8.6.0",
     "@instructure/uid": "8.6.0",
-    "moment-timezone": "^0.5.33",
+    "dayjs": "^1.10.6",
     "prop-types": "^15"
   },
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.6.0",
-    "@instructure/ui-test-utils": "8.6.0"
+    "@instructure/ui-test-utils": "8.6.0",
+    "moment-timezone": "^0.5.33"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17"
