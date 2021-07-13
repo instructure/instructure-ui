@@ -30,6 +30,7 @@ export {
 } from '@instructure/ui-a11y-content'
 export { Alert } from '@instructure/ui-alerts'
 export { Avatar } from '@instructure/ui-avatar'
+
 export { Badge } from '@instructure/ui-badge'
 export { Billboard } from '@instructure/ui-billboard'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'

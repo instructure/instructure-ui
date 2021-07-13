@@ -34,7 +34,7 @@ const borders = Object.freeze({
   widthLarge: '0.25rem', // 4px
 
   style: 'solid'
-})
+} as const)
 
 export default borders
 export { borders }

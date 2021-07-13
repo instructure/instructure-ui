@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { instructure } from '@instructure/ui-theme-tokens'
+import { BaseTheme, instructure } from '@instructure/ui-theme-tokens'
 
 const {
   borders,
@@ -39,7 +39,7 @@ const {
 
 const key = 'instructure'
 
-const theme = {
+const theme: BaseTheme = {
   key,
   ...instructure
 }

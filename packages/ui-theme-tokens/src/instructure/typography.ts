@@ -49,7 +49,7 @@ const typography = Object.freeze({
   letterSpacingNormal: 0,
   letterSpacingCondensed: '-0.0625rem',
   letterSpacingExpanded: '0.0625rem'
-})
+} as const)
 
 export default typography
 export { typography }
