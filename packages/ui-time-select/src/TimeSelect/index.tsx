@@ -27,7 +27,15 @@ import PropTypes from 'prop-types'
 
 import { I18nPropTypes, ApplyLocaleContext, Locale } from '@instructure/ui-i18n'
 
-import moment from 'moment-timezone'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+import './locales'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.extend(localizedFormat)
 
 import { controllable } from '@instructure/ui-prop-types'
 import {
@@ -329,7 +337,7 @@ class TimeSelect extends Component<Props> {
     } else if (this.context && this.context.timezone) {
       return this.context.timezone
     }
-    return moment.tz.guess()
+    return dayjs.tz.guess()
   }
 
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
@@ -385,12 +393,9 @@ class TimeSelect extends Component<Props> {
         return option
       }
       // value does not match an existing option
-      const date = moment.tz(
-        initialValue,
-        moment.ISO_8601,
-        this.locale(),
-        this.timezone()
-      )
+      const date = dayjs(initialValue)
+        .tz(this.timezone(), true)
+        .locale(this.locale())
       return { label: date.format(format) }
     }
     // otherwise return first option, if desired
@@ -419,14 +424,11 @@ class TimeSelect extends Component<Props> {
     let baseDate
     const baseValue = this.props.value || this.props.defaultValue
     if (baseValue) {
-      baseDate = moment.tz(
-        baseValue,
-        moment.ISO_8601,
-        this.locale(),
-        this.timezone()
-      )
+      baseDate = dayjs(baseValue)
+        .tz(this.timezone(), true)
+        .locale(this.locale())
     } else {
-      baseDate = moment().locale(this.locale()).tz(this.timezone())
+      baseDate = dayjs().tz(this.timezone(), true).locale(this.locale())
     }
     return baseDate.second(0).millisecond(0)
   }
@@ -440,12 +442,12 @@ class TimeSelect extends Component<Props> {
       for (let minute = 0; minute < 60 / this.props.step; minute++) {
         // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
         const minutes = minute * this.props.step
-        date.hour(hour).minute(minutes)
+        const newDate = date.hour(hour).minute(minutes)
         // store time options
         options.push({
-          id: this.getFormattedId(date), // iso no spaces
-          value: date.toISOString(), // iso
-          label: date.format(this.props.format) // formatted string
+          id: this.getFormattedId(newDate), // iso no spaces
+          value: newDate.toISOString(), // iso
+          label: newDate.format(this.props.format) // formatted string
         })
       }
     }
@@ -554,12 +556,16 @@ class TimeSelect extends Component<Props> {
     let prevValue = ''
 
     if (this.props.defaultValue) {
-      const date = moment.tz(
-        this.props.defaultValue,
-        moment.ISO_8601,
-        this.locale(),
-        this.timezone()
-      )
+      // const date = moment.tz(
+      //   this.props.defaultValue,
+      //   moment.ISO_8601,
+      //   this.locale(),
+      //   this.timezone()
+      // )
+      const date = dayjs(this.props.defaultValue)
+        .tz(this.timezone(), true)
+        .locale(this.locale())
+
       prevValue = date.format(this.props.format)
     }
 
