@@ -58,11 +58,13 @@ class Avatar extends Component {
     alt: PropTypes.string,
     size: PropTypes.oneOf([
       'auto',
+      'xx-small',
       'x-small',
       'small',
       'medium',
       'large',
-      'x-large'
+      'x-large',
+      'xx-large'
     ]),
     shape: PropTypes.oneOf(['circle', 'rectangle']),
     /**

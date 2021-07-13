@@ -41,6 +41,11 @@
     border-width: var(--borderWidthSmall);
   }
 
+  &.xx-small {
+    font-size: 0.5rem;
+    border-width: var(--borderWidthSmall);
+  }
+
   &.x-small {
     font-size: 0.75rem;
     border-width: var(--borderWidthSmall);
@@ -63,6 +68,11 @@
 
   &.x-large {
     font-size: 1.75rem;
+    border-width: var(--borderWidthMedium);
+  }
+
+  &.xx-large {
+    font-size: 2rem;
     border-width: var(--borderWidthMedium);
   }
 }
