@@ -28,7 +28,8 @@ import moment from 'moment-timezone'
  * ---
  * category: utilities/i18n
  * ---
- * ##### DEPRECATION WARNING: Will be removed in v9 since it provides no further benefit over using moment itself
+ * @deprecated
+ * ##### DEPRECATION WARNING: Will be removed in v9 since it provides no further benefit over using dayjs
  * A wrapper for [moment](https://momentjs.com/) utils.
  * @module DateTime
  */
