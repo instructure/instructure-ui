@@ -62,6 +62,16 @@ describe('<Avatar />', async () => {
 
       expect(await AvatarLocator.findWithText('JJ')).to.exist()
     })
+
+    it('should have border and now box-shadow', async () => {
+      const subject = await mount(<Avatar name="Jessica Jones" />)
+
+      const avatar = subject.getDOMNode()
+      const computedStyle = getComputedStyle(avatar)
+
+      expect(computedStyle.borderWidth).not.to.equal('0px')
+      expect(computedStyle.boxShadow).to.equal('none')
+    })
   })
 
   describe('when an image src url is provided', async () => {
@@ -93,6 +103,20 @@ describe('<Avatar />', async () => {
       await image.load()
 
       expect(onImageLoaded).to.have.been.called()
+    })
+
+    it('should have box-shadow instead of border', async () => {
+      const subject = await mount(<Avatar name="Foo bar" src={src} />)
+
+      const avatar = await AvatarLocator.find()
+      const image = await avatar.find('img')
+
+      await image.load()
+
+      const computedStyle = getComputedStyle(subject.getDOMNode())
+
+      expect(computedStyle.borderWidth).to.equal('0px')
+      expect(computedStyle.boxShadow).not.to.equal('none')
     })
   })
 

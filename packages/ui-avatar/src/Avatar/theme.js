@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { alpha } from '@instructure/ui-color-utils'
 
 export default function generator({ colors, borders, typography }) {
   return {
@@ -29,6 +30,8 @@ export default function generator({ colors, borders, typography }) {
     borderWidthSmall: borders.widthSmall,
     borderWidthMedium: borders.widthMedium,
     borderColor: colors.borderMedium,
+    boxShadowColor: alpha(colors.backgroundDarkest, 12),
+    boxShadowBlur: '1rem',
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightBold
   }
