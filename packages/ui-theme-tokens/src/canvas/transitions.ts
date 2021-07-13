@@ -25,7 +25,7 @@
 const transitions = Object.freeze({
   duration: '300ms',
   timing: 'ease-in-out'
-})
+} as const)
 
 export default transitions
 export { transitions }

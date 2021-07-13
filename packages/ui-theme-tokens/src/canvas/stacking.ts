@@ -27,7 +27,6 @@ const stacking = Object.freeze({
   above: 1,
   below: -1,
   deepest: -9999
-})
-
+} as const)
 export default stacking
 export { stacking }

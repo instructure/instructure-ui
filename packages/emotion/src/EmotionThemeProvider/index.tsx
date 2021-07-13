@@ -25,6 +25,34 @@ import React from 'react'
 import { ThemeProvider } from '@emotion/react'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { merge, cloneDeep } from 'lodash'
+import { BaseTheme } from '@instructure/ui-theme-tokens'
+
+type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>
+}
+
+type PartialTheme = DeepPartial<Exclude<BaseTheme, 'key'>>
+// type ComponentOverride = {}
+
+type T = PartialTheme | (PartialTheme & { [key: string]: PartialTheme })
+type OverridableTheme = { themeOverrides: T }
+
+const t: OverridableTheme = {
+  themeOverrides: {
+    canvas: {
+      colors: {
+        ash: 's'
+      }
+    },
+    colors: {
+      ash: 'a'
+    }
+  }
+}
+
+type ThemeProviderProps = {
+  theme: BaseTheme | OverridableTheme
+}
 
 /**
  * ---
@@ -67,7 +95,10 @@ import { merge, cloneDeep } from 'lodash'
  *
  * @param {object} theme - A full theme or an override object
  */
-function EmotionThemeProvider({ children, theme = {} }: any) {
+function EmotionThemeProvider({
+  children,
+  theme
+}: React.PropsWithChildren<ThemeProviderProps>) {
   return <ThemeProvider theme={getTheme(theme)}>{children}</ThemeProvider>
 }
 
@@ -79,31 +110,36 @@ function EmotionThemeProvider({ children, theme = {} }: any) {
  * If an override object is given, it returns the ancestor theme and
  * the overrides merged together.
  *
- * @param {object} theme - A full theme or an override object
+ * @param {object} themeOrOverride - A full theme or an override object
  * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
  */
-const getTheme = (theme: any) => (ancestorTheme = {}) => {
+const getTheme = (themeOrOverride: BaseTheme | OverridableTheme) => (
+  ancestorTheme: BaseTheme
+) => {
   // themeable themes have a 'key' property (= name of the theme),
   // so without it it's just an overrides objects
-  const overrides = !theme.key ? theme : null
-
-  if (!overrides) {
-    return theme
+  if (isBaseTheme(themeOrOverride)) {
+    return themeOrOverride
   }
 
   // we need to clone the ancestor theme not to override it
-  const currentTheme = cloneDeep(ancestorTheme)
+  const currentTheme: BaseTheme = cloneDeep(ancestorTheme)
 
   const themeName = currentTheme.key
 
   // we pick the overrides for the current theme from the override object
-  const currentThemeOverrides = overrides?.themeOverrides?.[themeName] || {}
+  //@ts-expect-error FIX
+  const currentThemeOverrides = themeOrOverride.themeOverrides[themeName]
 
   // saving any other overrides
+  //@ts-expect-error FIX
   const { themes, ...otherOverrides } = overrides
 
   return merge(currentTheme, merge(otherOverrides, currentThemeOverrides))
 }
+
+const isBaseTheme = (theme: BaseTheme | OverridableTheme): theme is BaseTheme =>
+  !!(theme as BaseTheme).key
 
 export default EmotionThemeProvider
 export { EmotionThemeProvider }
