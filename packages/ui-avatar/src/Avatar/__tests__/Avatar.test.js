@@ -63,7 +63,7 @@ describe('<Avatar />', async () => {
       expect(await AvatarLocator.findWithText('JJ')).to.exist()
     })
 
-    it('should have border and now box-shadow', async () => {
+    it('should have border and no box-shadow', async () => {
       const subject = await mount(<Avatar name="Jessica Jones" />)
 
       const avatar = subject.getDOMNode()
@@ -71,6 +71,17 @@ describe('<Avatar />', async () => {
 
       expect(computedStyle.borderWidth).not.to.equal('0px')
       expect(computedStyle.boxShadow).to.equal('none')
+    })
+
+    it('should display the initials in brand color', async () => {
+      await mount(<Avatar name="Jessica Jones" />)
+
+      const avatar = await AvatarLocator.find()
+      const initials = await avatar.findWithText('JJ')
+
+      expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
+        'rgb(0, 142, 226)'
+      )
     })
   })
 
@@ -128,6 +139,19 @@ describe('<Avatar />', async () => {
       const rectangle = await avatar.find(`.${styles.rectangle}`)
 
       expect(rectangle).to.exist()
+    })
+  })
+
+  describe('when the color is set to "shamrock"', async () => {
+    it('should display the initials in green (shamrock)', async () => {
+      await mount(<Avatar name="Jessica Jones" color="shamrock" />)
+
+      const avatar = await AvatarLocator.find()
+      const initials = await avatar.findWithText('JJ')
+
+      expect(getComputedStyle(initials.getDOMNode()).color).to.equal(
+        'rgb(0, 172, 24)'
+      )
     })
   })
 

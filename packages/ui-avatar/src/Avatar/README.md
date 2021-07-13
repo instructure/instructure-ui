@@ -29,6 +29,8 @@ example: true
 </div>
 ```
 
+### Size
+
 The `size` prop allows you to select from `xx-small`, `x-small`, `small`, `medium`, `large`, `x-large`, and `xx-large`. If the `auto` prop is set, the avatar size will adjust according to the font-size of its container.
 
 ```js
@@ -36,13 +38,55 @@ The `size` prop allows you to select from `xx-small`, `x-small`, `small`, `mediu
 example: true
 ---
 <div>
-  <Avatar name="Arthr C. Clarke" size="xx-small" margin="0 small 0 0" />
-  <Avatar name="James Arias" size="x-small" margin="0 small 0 0" />
-  <Avatar name="Charles Kimball" size="small" margin="0 small 0 0" />
-  <Avatar name="Melissa Reed" size="medium" margin="0 small 0 0" />
-  <Avatar name="Heather Wheeler" size="large" margin="0 small 0 0" />
-  <Avatar name="David Herbert" size="x-large" margin="0 small 0 0" />
-  <Avatar name="Isaac Asimov" size="xx-large" />
+  <View display="block" padding="small medium">
+    <Avatar name="Arthur C. Clarke" size="xx-small" margin="0 small 0 0" />
+    <Avatar name="James Arias" size="x-small" margin="0 small 0 0" />
+    <Avatar name="Charles Kimball" size="small" margin="0 small 0 0" />
+    <Avatar name="Melissa Reed" size="medium" margin="0 small 0 0" />
+    <Avatar name="Heather Wheeler" size="large" margin="0 small 0 0" />
+    <Avatar name="David Herbert" size="x-large" margin="0 small 0 0" />
+    <Avatar name="Isaac Asimov" size="xx-large" />
+  </View>
+  <View display="block" padding="small medium" background="primary">
+    <Avatar name="Arthur C. Clarke" size="xx-small" margin="0 small 0 0"  src={avatarSquare} />
+    <Avatar name="James Arias" size="x-small" margin="0 small 0 0"  src={avatarSquare} />
+    <Avatar name="Charles Kimball" size="small" margin="0 small 0 0"  src={avatarSquare} />
+    <Avatar name="Melissa Reed" size="medium" margin="0 small 0 0"  src={avatarSquare} />
+    <Avatar name="Heather Wheeler" size="large" margin="0 small 0 0"  src={avatarSquare} />
+    <Avatar name="David Herbert" size="x-large" margin="0 small 0 0"  src={avatarSquare} />
+    <Avatar name="Isaac Asimov" size="xx-large"  src={avatarSquare} />
+  </View>
+</div>
+```
+
+### Color of the initials
+
+The color of the initials can be set with the `color` prop, and it allows you to select from `default`, `shamrock`, `barney`, `crimson`, `fire`, `licorice` and `ash`.
+
+```js
+---
+example: true
+---
+<div>
+  <Avatar name="Arthur C. Clarke" margin="0 small 0 0" />
+  <Avatar name="James Arias" color="shamrock" margin="0 small 0 0" />
+  <Avatar name="Charles Kimball" color="barney" margin="0 small 0 0" />
+  <Avatar name="Melissa Reed" color="crimson" margin="0 small 0 0" />
+  <Avatar name="Heather Wheeler" color="fire" margin="0 small 0 0" />
+  <Avatar name="David Herbert" color="licorice" margin="0 small 0 0" />
+  <Avatar name="Isaac Asimov" color="ash" />
+</div>
+```
+
+In case you need more control over the color, feel free to use the `theme` prop, and override the default theme variables.
+
+```js
+---
+example: true
+---
+<div>
+  <Avatar name="Isaac Asimov" theme={{ color: '#efb410' }} margin="0 small 0 0" />
+  <Avatar name="Heather Wheeler" color="fire" theme={{ colorFire: 'magenta' }} />
 </div>
 ```
 

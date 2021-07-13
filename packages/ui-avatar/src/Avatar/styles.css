@@ -86,11 +86,38 @@
 }
 
 .initials {
-  color: var(--color);
   line-height: 2.375em;
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   letter-spacing: 0.0313em;
+
+  .default & {
+    color: var(--color);
+  }
+
+  .shamrock & {
+    color: var(--colorShamrock);
+  }
+
+  .barney & {
+    color: var(--colorBarney);
+  }
+
+  .crimson & {
+    color: var(--colorCrimson);
+  }
+
+  .fire & {
+    color: var(--colorFire);
+  }
+
+  .licorice & {
+    color: var(--colorLicorice);
+  }
+
+  .ash & {
+    color: var(--colorAsh);
+  }
 }
 
 .loadImage {
