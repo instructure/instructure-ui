@@ -32,6 +32,7 @@ import { element } from './element'
 
 export * from './element'
 export * from './types'
+export * from './components'
 export { Children, childrenOrValue, controllable, cursor, makeRequirable, xor }
 
 // Provide everything as a default export as well. That way we can easily
