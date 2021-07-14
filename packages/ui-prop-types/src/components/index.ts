@@ -24,6 +24,7 @@
 import {
   BaseTheme,
   Border,
+  Breakpoints,
   Forms,
   Shadows,
   Spacing,
@@ -48,7 +49,7 @@ type AlertThemeVariables = {
   borderRadius: Border['radiusMedium']
   borderWidth: Border['widthMedium']
   borderStyle: Border['style']
-  contentPadding: `${Spacing['small']} ${Spacing['medium']} `
+  contentPadding: `${Spacing['small']} ${Spacing['medium']}`
   contentFontSize: Typography['fontSizeMedium']
   contentFontFamily: Typography['fontFamily']
   contentFontWeight: Typography['fontWeightNormal']
@@ -200,6 +201,151 @@ type CloseButtonThemeVariables = {
   offsetXSmall: Spacing['xSmall']
   zIndex: Stacking['above']
 }
+
+type BylineThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  background: BaseTheme['colors']['backgroundLightest']
+  color: BaseTheme['colors']['textDarkest']
+  figureMargin: Spacing['small']
+  titleMargin: Spacing['xSmall']
+  titleFontSize: Typography['fontSizeLarge']
+  titleFontWeight: Typography['fontWeightNormal']
+  titleLineHeight: Typography['lineHeightFit']
+  descriptionFontSize: Typography['fontSizeMedium']
+  descriptionFontWeight: Typography['fontWeightNormal']
+  descriptionLineHeight: Typography['lineHeightCondensed']
+  small: Breakpoints['small']
+  medium: Breakpoints['medium']
+  large: Breakpoints['large']
+}
+
+type CalendarDayThemeVariables = {
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  fontSize: Typography['fontSizeMedium']
+  padding: Spacing['xxSmall']
+  height: Forms['inputHeightSmall']
+  minWidth: Forms['inputHeightSmall']
+  outsideMonthColor: BaseTheme['colors']['textDark']
+  selectedBackground: BaseTheme['colors']['backgroundSuccess']
+  selectedColor: BaseTheme['colors']['textLightest']
+  selectedBorderRadius: Border['radiusMedium']
+  todayBackground: BaseTheme['colors']['backgroundBrand']
+  todayColor: BaseTheme['colors']['textLightest']
+  todayBorderRadius: Forms['inputHeightSmall']
+}
+
+type CalendarThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  navMargin: Spacing['small']
+  maxHeaderWidth: Spacing['medium']
+}
+type CheckboxFacadeThemeVariables = {
+  color: BaseTheme['colors']['textLightest']
+  borderWidth: Border['widthSmall']
+  borderColor: BaseTheme['colors']['borderDark']
+  borderRadius: Border['radiusMedium']
+  background: BaseTheme['colors']['backgroundLightest']
+  marginRight: Spacing['xSmall']
+  padding: Spacing['xxxSmall']
+  checkedBackground: BaseTheme['colors']['backgroundDarkest']
+  checkedBorderColor: BaseTheme['colors']['borderDarkest']
+  hoverBorderColor: BaseTheme['colors']['borderDarkest']
+  focusBorderColor: BaseTheme['colors']['borderBrand']
+  focusBorderWidth: Border['widthMedium']
+  focusBorderStyle: Border['style']
+  labelColor: BaseTheme['colors']['textDarkest']
+  checkedLabelColor: BaseTheme['colors']['textDarkest']
+  labelFontFamily: Typography['fontFamily']
+  labelFontWeight: Typography['fontWeightNormal']
+  labelLineHeight: Typography['lineHeightCondensed']
+  labelFontSizeSmall: Typography['fontSizeSmall']
+  labelFontSizeMedium: Typography['fontSizeMedium']
+  labelFontSizeLarge: Typography['fontSizeLarge']
+}
+
+type ToggleFacadeThemeVariables = {
+  color: BaseTheme['colors']['textLightest']
+  background: BaseTheme['colors']['backgroundLight']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderWidth: Border['widthMedium']
+  marginEnd: Spacing['small']
+  marginStart: Spacing['small']
+  marginVertical: Spacing['xSmall']
+  checkedBackground: BaseTheme['colors']['backgroundSuccess']
+  uncheckedIconColor: BaseTheme['colors']['textDarkest']
+  checkedIconColor: BaseTheme['colors']['textSuccess']
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  focusBorderWidth: Border['widthMedium']
+  focusBorderStyle: Border['style']
+  toggleBackground: BaseTheme['colors']['backgroundLightest']
+  toggleShadow: Shadows['depth1']
+  toggleSize: Forms['inputHeightSmall']
+  labelColor: BaseTheme['colors']['textDarkest']
+  labelFontFamily: Typography['fontFamily']
+  labelFontWeight: Typography['fontWeightNormal']
+  labelLineHeight: Typography['lineHeightCondensed']
+  labelFontSizeSmall: Typography['fontSizeSmall']
+  labelFontSizeMedium: Typography['fontSizeMedium']
+  labelFontSizeLarge: Typography['fontSizeLarge']
+}
+
+type CodeEditorThemeVariables = {
+  fontFamily: Typography['fontFamilyMonospace']
+  fontSize: Typography['fontSizeSmall']
+  background: BaseTheme['colors']['backgroundLight']
+  border: `${Border['widthSmall']} ${string} ${BaseTheme['colors']['borderLight']}`
+  borderRadius: Border['radiusMedium']
+  focusBorderColor: BaseTheme['colors']['borderBrand']
+  focusBoxShadow: BaseTheme['colors']['borderLightest']
+  horizontalPadding: Spacing['xSmall']
+  verticalPadding: Spacing['xxSmall']
+  color: BaseTheme['colors']['textDarkest']
+  lineNumberColor: BaseTheme['colors']['textDark']
+  gutterBorder: BaseTheme['colors']['borderLight']
+  gutterBackground: BaseTheme['colors']['backgroundLight']
+  gutterMarkerColor: BaseTheme['colors']['textBrand']
+  gutterMarkerSubtleColor: BaseTheme['colors']['textDark']
+  cursorColor: BaseTheme['colors']['textDarkest']
+  secondaryCursorColor: BaseTheme['colors']['textDark']
+  rulerColor: BaseTheme['colors']['borderDark']
+  matchingBracketOutline: BaseTheme['colors']['textDark']
+  nonMatchingBracketColor: BaseTheme['colors']['textDanger']
+  activeLineBackground: BaseTheme['colors']['backgroundLight']
+  selectedBackground: BaseTheme['colors']['backgroundLight']
+  fatCursorBackground: BaseTheme['colors']['backgroundSuccess']
+  zIndex: Stacking['above']
+  quoteColor: BaseTheme['colors']['textSuccess']
+  headerColor: BaseTheme['colors']['textWarning']
+  negativeColor: BaseTheme['colors']['textDanger']
+  positiveColor: BaseTheme['colors']['textSuccess']
+  keywordColor: BaseTheme['colors']['textBrand']
+  atomColor: BaseTheme['colors']['textWarning']
+  numberColor: BaseTheme['colors']['textWarning']
+  defColor: BaseTheme['colors']['textDarkest']
+  variableColor: BaseTheme['colors']['textBrand']
+  secondaryVariableColor: BaseTheme['colors']['textWarning']
+  typeColor: BaseTheme['colors']['textBrand']
+  commentColor: BaseTheme['colors']['textDark']
+  stringColor: BaseTheme['colors']['textBrand']
+  secondaryStringColor: BaseTheme['colors']['textDanger']
+  metaColor: BaseTheme['colors']['textDarkest']
+  qualifierColor: BaseTheme['colors']['textSuccess']
+  builtInColor: BaseTheme['colors']['textWarning']
+  bracketColor: BaseTheme['colors']['borderDark']
+  tagColor: BaseTheme['colors']['textSuccess']
+  attributeColor: BaseTheme['colors']['textBrand']
+  hrColor: BaseTheme['colors']['borderDark']
+  linkColor: BaseTheme['colors']['textBrand']
+  errorColor: BaseTheme['colors']['textDanger']
+  propertyColor: BaseTheme['colors']['textAlert']
+  nodeColor: BaseTheme['colors']['textWarning']
+  operatorColor: BaseTheme['colors']['textDarkest']
+}
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
   Alert: AlertThemeVariables
@@ -211,6 +357,12 @@ type ThemeVariables = {
   CloseButton: CloseButtonThemeVariables
   CondensedButton: BaseButtonThemeVariables
   IconButton: BaseButtonThemeVariables
+  Byline: BylineThemeVariables
+  'Calendar.Day': CalendarDayThemeVariables
+  Calendar: CalendarThemeVariables
+  CheckboxFacade: CheckboxFacadeThemeVariables
+  ToggleFacade: ToggleFacadeThemeVariables
+  CodeEditor: CodeEditorThemeVariables
 }
 type ComponentThemeMap = ComponentTheme<ThemeVariables>
 
