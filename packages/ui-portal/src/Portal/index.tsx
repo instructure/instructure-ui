@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { Component, HTMLAttributes } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { element } from '@instructure/ui-prop-types'
+import { element, OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
 import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
@@ -36,15 +36,16 @@ import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
  */
 type PortalNode = HTMLSpanElement | null
 
-type Props = {
+type OwnProps = {
   open?: boolean
   onOpen?: (DOMNode: PortalNode) => void
   onClose?: () => void
   mountNode?: Element | (() => Element) | null
   insertAt?: 'bottom' | 'top'
   elementRef?: (el: PortalNode) => void
-} & HTMLAttributes<Props> &
-  BidirectionalProps
+}
+
+type Props = OwnProps & OtherHTMLAttributes<OwnProps> & BidirectionalProps
 
 type State = {
   mountNode: Element

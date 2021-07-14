@@ -24,9 +24,9 @@
 
 export type GetInteractionOptions = {
   props?: {
-    interaction?: InteractionType
-    disabled?: boolean
-    readOnly?: boolean
+    interaction?: InteractionType | null
+    disabled?: boolean | null
+    readOnly?: boolean | null
     [key: string]: any
   }
   interactionTypes?: InteractionType[]
