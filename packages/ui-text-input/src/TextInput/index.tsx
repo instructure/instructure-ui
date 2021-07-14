@@ -26,11 +26,12 @@
 import React, { Component, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
-import { controllable } from '@instructure/ui-prop-types'
+import { controllable, OtherHTMLAttributes } from '@instructure/ui-prop-types'
 import {
   callRenderProp,
   getInteraction,
-  passthroughProps
+  passthroughProps,
+  InteractionType
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import {
@@ -44,13 +45,13 @@ import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
-type Props = {
+type OwnProps = {
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
   type?: 'text' | 'email' | 'url' | 'tel' | 'search' | 'password'
   id?: string
   value?: any // TODO: controllable(PropTypes.string)
   defaultValue?: string
-  interaction?: 'enabled' | 'disabled' | 'readonly'
+  interaction?: InteractionType
   messages?: FormMessage[]
   size?: 'small' | 'medium' | 'large'
   textAlign?: 'start' | 'center'
@@ -69,7 +70,10 @@ type Props = {
   onFocus?: (...args: any[]) => any
   makeStyles?: (...args: any[]) => any
   styles?: any
-} & InputHTMLAttributes<Props>
+}
+
+type Props = OwnProps &
+  OtherHTMLAttributes<OwnProps, InputHTMLAttributes<OwnProps>>
 
 /**
 ---
