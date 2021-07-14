@@ -38,31 +38,16 @@ type T =
   | (PartialTheme & {
       [key: string]:
         | PartialTheme
-        | { componentOverrides?: Partial<ComponentThemeMap> }
+        | { componentOverrides?: DeepPartial<ComponentThemeMap> }
     })
 type OverridableTheme = {
   themeOverrides?: T
-  componentOverrides?: Partial<ComponentThemeMap>
+  componentOverrides?: DeepPartial<ComponentThemeMap>
 }
 
-// const t: OverridableTheme = {
-//   componentOverrides: {
-//     Avatar: {
-//       fontWeight: 1
-//     }
-//   },
-//   themeOverrides: {
-//     colors: {
-//       ash: '#saasd'
-//     },
-//     canvas: {
-//       componentOverrides: {}
-//     }
-//   }
-// }
-
+type ThemeOrOverride = BaseTheme | OverridableTheme | DeepPartial<PartialTheme>
 type ThemeProviderProps = {
-  theme: BaseTheme | OverridableTheme | DeepPartial<BaseTheme>
+  theme: ThemeOrOverride
 }
 
 /**
@@ -124,9 +109,9 @@ function EmotionThemeProvider({
  * @param {object} themeOrOverride - A full theme or an override object
  * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
  */
-const getTheme = (
-  themeOrOverride: BaseTheme | OverridableTheme | DeepPartial<BaseTheme>
-) => (ancestorTheme: BaseTheme) => {
+const getTheme = (themeOrOverride: ThemeOrOverride) => (
+  ancestorTheme: BaseTheme
+) => {
   // themeable themes have a 'key' property (= name of the theme),
   // so without it it's just an overrides objects
   if (isBaseTheme(themeOrOverride)) {
@@ -149,9 +134,8 @@ const getTheme = (
   return merge(currentTheme, merge(otherOverrides, currentThemeOverrides))
 }
 
-const isBaseTheme = (
-  theme: BaseTheme | OverridableTheme | DeepPartial<BaseTheme>
-): theme is BaseTheme => !!(theme as BaseTheme).key
+const isBaseTheme = (theme: ThemeOrOverride): theme is BaseTheme =>
+  !!(theme as BaseTheme).key
 
 export default EmotionThemeProvider
 export { EmotionThemeProvider }
