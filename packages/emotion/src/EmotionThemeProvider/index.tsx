@@ -26,32 +26,43 @@ import { ThemeProvider } from '@emotion/react'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { merge, cloneDeep } from 'lodash'
 import { BaseTheme } from '@instructure/ui-theme-tokens'
-
+import { ComponentThemeMap } from '@instructure/ui-prop-types'
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>
 }
 
 type PartialTheme = DeepPartial<Exclude<BaseTheme, 'key'>>
-// type ComponentOverride = {}
 
-type T = PartialTheme | (PartialTheme & { [key: string]: PartialTheme })
-type OverridableTheme = { themeOverrides: T }
-
-const t: OverridableTheme = {
-  themeOverrides: {
-    canvas: {
-      colors: {
-        ash: 's'
-      }
-    },
-    colors: {
-      ash: 'a'
-    }
-  }
+type T =
+  | PartialTheme
+  | (PartialTheme & {
+      [key: string]:
+        | PartialTheme
+        | { componentOverrides?: Partial<ComponentThemeMap> }
+    })
+type OverridableTheme = {
+  themeOverrides?: T
+  componentOverrides?: Partial<ComponentThemeMap>
 }
 
+// const t: OverridableTheme = {
+//   componentOverrides: {
+//     Avatar: {
+//       fontWeight: 1
+//     }
+//   },
+//   themeOverrides: {
+//     colors: {
+//       ash: '#saasd'
+//     },
+//     canvas: {
+//       componentOverrides: {}
+//     }
+//   }
+// }
+
 type ThemeProviderProps = {
-  theme: BaseTheme | OverridableTheme
+  theme: BaseTheme | OverridableTheme | DeepPartial<BaseTheme>
 }
 
 /**
@@ -113,9 +124,9 @@ function EmotionThemeProvider({
  * @param {object} themeOrOverride - A full theme or an override object
  * @returns {function} A function that returns with the theme object for the [ThemeProvider](https://emotion.sh/docs/theming#themeprovider-reactcomponenttype)
  */
-const getTheme = (themeOrOverride: BaseTheme | OverridableTheme) => (
-  ancestorTheme: BaseTheme
-) => {
+const getTheme = (
+  themeOrOverride: BaseTheme | OverridableTheme | DeepPartial<BaseTheme>
+) => (ancestorTheme: BaseTheme) => {
   // themeable themes have a 'key' property (= name of the theme),
   // so without it it's just an overrides objects
   if (isBaseTheme(themeOrOverride)) {
@@ -138,8 +149,9 @@ const getTheme = (themeOrOverride: BaseTheme | OverridableTheme) => (
   return merge(currentTheme, merge(otherOverrides, currentThemeOverrides))
 }
 
-const isBaseTheme = (theme: BaseTheme | OverridableTheme): theme is BaseTheme =>
-  !!(theme as BaseTheme).key
+const isBaseTheme = (
+  theme: BaseTheme | OverridableTheme | DeepPartial<BaseTheme>
+): theme is BaseTheme => !!(theme as BaseTheme).key
 
 export default EmotionThemeProvider
 export { EmotionThemeProvider }

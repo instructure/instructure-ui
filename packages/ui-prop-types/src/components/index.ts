@@ -21,12 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { BaseTheme, Border, Typography } from '@instructure/ui-theme-tokens'
 
-import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
-import { theme as canvas } from '@instructure/canvas-theme'
-import { theme as instructure } from '@instructure/instructure-theme'
-import { BaseTheme } from '@instructure/ui-theme-tokens'
+type AvatarThemeVariables = {
+  color: BaseTheme['colors']['textBrand']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderWidthSmall: Border['widthSmall']
+  borderWidthMedium: Border['widthMedium']
+  borderColor: BaseTheme['colors']['borderMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightBold']
+}
 
-export { canvas, canvasHighContrast, instructure }
-export default canvas
-export type { BaseTheme }
+type ThemeVariables = {
+  Avatar: Partial<AvatarThemeVariables>
+}
+type ComponentThemeMap = ComponentTheme<ThemeVariables>
+
+type ComponentTheme<Type> = {
+  [Key in keyof Type]: Type[Key]
+}
+
+export type { ThemeVariables, ComponentThemeMap, AvatarThemeVariables }

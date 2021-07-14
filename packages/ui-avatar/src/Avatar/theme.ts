@@ -31,11 +31,10 @@ import { alpha } from '@instructure/ui-color-utils'
  */
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'theme' implicitly has an 'any' type.
 const generateComponentTheme = (theme) => {
-  const { colors, borders, typography, key: themeName } = theme
+  const { colors, borders, typography } = theme
 
   const { brand, shamrock, barney, crimson, fire, licorice, ash } = colors
 
-  const themeSpecificStyles = {}
 
   const componentVariables = {
     background: colors?.backgroundLightest,
@@ -59,9 +58,7 @@ const generateComponentTheme = (theme) => {
   }
 
   return {
-    ...componentVariables,
-    // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    ...themeSpecificStyles[themeName]
+    ...componentVariables
   }
 }
 
