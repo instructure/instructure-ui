@@ -49,10 +49,36 @@ type ByBreakpointProps = {
 }
 
 type Props = {
+  /**
+   * Consists of an object where the keys define the names of breakpoints. The values are query objects
+   * with keys representing the breakpoint condition and values representing a breakpoint value as a
+   * string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}`
+   */
   query: BreakpointQueries
+
+  /**
+   * Specifies if the `<Responsive />` component should use element or media queries
+   */
   match?: 'element' | 'media'
+
+  /**
+   * Consists of an object where the keys match the breakpoint names used in the query. The values
+   * are objects with keys representing prop names and values representing prop values Ex.
+   * `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}`
+   */
   props?: ByBreakpointProps
+
+  /**
+   * Function called on render with the following form `(props, matches) => {...}` where the props
+   * are the current props to be applied and matches is an array of current matches from the query
+   * prop. Either this or a `children` prop function must be supplied.
+   */
   render?: (props: PropsObject | null, matches: QueriesMatching) => any
+
+  /**
+   * Function that takes the same form and arguments as the render prop. Either this or a `render`
+   * prop function must be supplied.
+   */
   children?: (props: PropsObject | null, matches: QueriesMatching) => any
 }
 
@@ -60,35 +86,14 @@ type Props = {
 ---
 category: components
 ---
+@tsProps
 **/
 class Responsive extends Component<Props> {
   static propTypes = {
-    /**
-     * Specifies if the `<Responsive />` component should use element or media queries
-     */
     match: PropTypes.oneOf(['element', 'media']),
-    /**
-     * Consists of an object where the keys define the names of breakpoints. The values are query objects
-     * with keys representing the breakpoint condition and values representing a breakpoint value as a
-     * string or number. Ex. `{small: { maxWidth: 400 }, large: { minWidth: '600em'}}`
-     */
     query: PropTypes.objectOf(ResponsivePropTypes.validQuery).isRequired,
-    /**
-     * Consists of an object where the keys match the breakpoint names used in the query. The values
-     * are objects with keys representing prop names and values representing prop values Ex.
-     * `{small: { myProp: 'fillscreen' }, large: { myProp: 'fillcontainer' }}`
-     */
     props: PropTypes.objectOf(PropTypes.object),
-    /**
-     * Function called on render with the following form `(props, matches) => {...}` where the props
-     * are the current props to be applied and matches is an array of current matches from the query
-     * prop. Either this or a `children` prop function must be supplied.
-     */
     render: PropTypes.func,
-    /**
-     * Function that takes the same form and arguments as the render prop. Either this or a `render`
-     * prop function must be supplied.
-     */
     children: PropTypes.func
   }
 

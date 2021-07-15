@@ -37,6 +37,7 @@ type Props = {
 ---
 category: components/utilities
 ---
+@tsProps
 **/
 export const ApplyLocale = ({ children, locale, timezone }: Props) => {
   return (
