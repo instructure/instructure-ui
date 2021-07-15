@@ -108,7 +108,7 @@ class Properties extends Component {
   }
 
   renderTSType = (tsType) => {
-    const { name, elements, type } = tsType
+    let { name, elements, type } = tsType
     let isEnum = true
     /*
     possible types:
@@ -127,10 +127,14 @@ class Properties extends Component {
         })
         return isEnum ? 'enum' : 'union'
       case 'signature':
-        if (type === 'function') {
-          return 'func'
+        switch (type) {
+          case 'function':
+            return 'func'
+          case 'object':
+            return 'object'
+          default:
+            return tsType.raw
         }
-        return tsType.raw
       case 'boolean':
         return 'bool'
       default:

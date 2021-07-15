@@ -37,11 +37,35 @@ import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 type PortalNode = HTMLSpanElement | null
 
 type OwnProps = {
+  /**
+   * Whether or not the `<Portal />` is open
+   */
   open?: boolean
+
+  /**
+   * Callback fired when `<Portal />` content has been mounted in the DOM. Ha the Portal DOMNode as parameter.
+   */
   onOpen?: (DOMNode: PortalNode) => void
+
+  /**
+   * Callback fired when `<Portal />` has been unmounted from the DOM
+   */
   onClose?: () => void
+
+  /**
+   * An element or a function returning an element to use as the mount node
+   * for the `<Portal />` (defaults to `document.body`)
+   */
   mountNode?: Element | (() => Element) | null
+
+  /**
+   * Insert the element at the 'top' of the mountNode or at the 'bottom'
+   */
   insertAt?: 'bottom' | 'top'
+
+  /**
+   * Provides a reference to the underlying html element. Ha the Portal DOMNode as parameter.
+   */
   elementRef?: (el: PortalNode) => void
 }
 
@@ -61,38 +85,15 @@ category: components/utilities
 @bidirectional()
 class Portal extends Component<Props, State> {
   static propTypes = {
-    /**
-     * Wheter or not the `<Portal />` is open
-     */
     open: PropTypes.bool,
-
-    /**
-     * Callback fired when `<Portal />` content has been mounted in the DOM. Ha the Portal DOMNode as parameter.
-     */
     onOpen: PropTypes.func,
-
-    /**
-     * Callback fired when `<Portal />` has been unmounted from the DOM
-     */
     onClose: PropTypes.func,
-
-    /**
-     * An element or a function returning an element to use as the mount node
-     * for the `<Portal />` (defaults to `document.body`)
-     */
     mountNode: PropTypes.oneOfType([element, PropTypes.func]),
-    /**
-     * Insert the element at the 'top' of the mountNode or at the 'bottom'
-     */
     insertAt: PropTypes.oneOf(['bottom', 'top']),
-
     /**
      * The children to be rendered within the `<Portal />`
      */
     children: PropTypes.node,
-    /**
-     * Provides a reference to the underlying html element. Ha the Portal DOMNode as parameter.
-     */
     elementRef: PropTypes.func,
     // eslint-disable-next-line react/require-default-props
     dir: PropTypes.oneOf(Object.values(bidirectional.DIRECTION))
