@@ -22,4 +22,26 @@
  * SOFTWARE.
  */
 
-require('ui-tests-loader!')
+const path = require('path')
+const globby = require('globby')
+
+module.exports = function (uiTestScopePaths) {
+  const files = ['packages/**/*.test.{js,ts,tsx}']
+  const ignore = ['packages/ui-codemods/**', '**/node_modules/**']
+
+  return globby
+    .sync(files, { ignore })
+    .map((filePath) => path.normalize(filePath))
+    .filter((testFilePath) => {
+      if (typeof uiTestScopePaths !== 'string') return true
+      const scopePaths = uiTestScopePaths
+        .split(',')
+        .map((p) => path.normalize(p.trim()))
+      return (
+        scopePaths.findIndex(
+          (scopePath) =>
+            testFilePath === scopePath || testFilePath.startsWith(scopePath)
+        ) >= 0
+      )
+    })
+}
