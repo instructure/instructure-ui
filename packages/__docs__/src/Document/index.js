@@ -86,13 +86,20 @@ class Document extends Component {
   }
 
   renderProps(doc) {
-    const { id, props } = doc
+    const { id, props, description } = doc
+    const hasTsProps =
+      typeof description === 'string' && description.includes('@tsProps')
+
     return props ? (
       <View margin="x-large 0" display="block">
         <Heading level="h2" as="h3" id={`${id}Properties`} margin="0 0 small 0">
           Properties
         </Heading>
-        <Properties props={props} layout={this.props.layout} />
+        <Properties
+          props={props}
+          hasTsProps={hasTsProps}
+          layout={this.props.layout}
+        />
       </View>
     ) : null
   }

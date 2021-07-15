@@ -69,6 +69,11 @@ const generateStyle = (componentTheme, props, state) => {
       label: 'properties__oneOf',
       fontWeight: 200,
       fontStyle: 'italic'
+    },
+
+    noWrap: {
+      label: 'properties__noWrap',
+      whiteSpace: 'nowrap'
     }
   }
 }

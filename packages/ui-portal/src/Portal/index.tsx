@@ -56,6 +56,7 @@ type State = {
 category: components/utilities
 ---
 @module Portal
+@tsProps
 **/
 @bidirectional()
 class Portal extends Component<Props, State> {
