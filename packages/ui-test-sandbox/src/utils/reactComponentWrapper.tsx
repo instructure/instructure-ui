@@ -44,7 +44,9 @@ class WrapperComponent extends React.Component<WrapperProp, WrapperProp> {
 
   constructor(props: WrapperProp) {
     super(props)
-    this.state = this.props
+    // wrapping props and destructuring is a workaround to silence the
+    // "It is not recommended to assign props directly to state" warning
+    this.state = { ...this.props }
   }
 
   getDOMNode() {

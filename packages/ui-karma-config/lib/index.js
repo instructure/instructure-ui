@@ -21,9 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const path = require('path')
+
 const constants = require('karma').constants
 const choma = require.resolve('choma')
+const filePathCalculator = require('./FilePathCalculator')
 
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 const noHeadless = process.argv.some((arg) => arg === '--no-headless')
@@ -31,10 +32,9 @@ const randomizeTestOrder = process.argv.some((arg) => arg === '--randomize')
 
 const baseWebpackConfig = require('@instructure/ui-webpack-config')
 
-const DEBUG = process.env.DEBUG
+const NO_DEBUG = !!process.env.NO_DEBUG
 const withCoverage = process.env.COVERAGE
-const IS_SCOPED = process.env.UI_TEST_SCOPE_PATHS
-
+const testPaths = process.env.UI_TEST_SCOPE_PATHS
 const CHROME_FLAGS = [
   '--no-sandbox',
   '--disable-setuid-sandbox',
@@ -50,13 +50,27 @@ const CHROME_FLAGS = [
   '--allow-file-access-from-files'
 ]
 
-module.exports = function makeConfig({
-  bundle,
-  coverageDirectory,
-  coverageThreshold
-}) {
+module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
   const browsers = []
 
+  const filesToTest = filePathCalculator(testPaths)
+  if (testPaths) {
+    // eslint-disable-next-line no-console
+    console.log('Testing files:', filesToTest)
+  } else {
+    // eslint-disable-next-line no-console
+    console.log('Running every Karma test')
+  }
+  const preprocessors = {}
+  for (const filePaths of filesToTest) {
+    preprocessors[filePaths] = ['webpack', 'sourcemap']
+  }
+
+  // Use watched: false as we use webpack's watch, see
+  // https://github.com/ryanclark/karma-webpack#usage
+  const karmaFiles = filesToTest.map((filePath) => {
+    return { pattern: filePath, watched: false }
+  })
   if (!noLaunchers) {
     if (noHeadless) {
       browsers.push('CustomChrome')
@@ -70,19 +84,16 @@ module.exports = function makeConfig({
   if (withCoverage) {
     reporters.push('coverage-istanbul')
   }
-
   let coverageIstanbulReporter
-
   if (withCoverage) {
     coverageIstanbulReporter = {
       dir: coverageDirectory,
       reports: ['text-summary', 'lcov'],
       // enforce percentage thresholds
       // anything under these percentages will cause karma to fail with an exit code of 1 if not running in watch mode
-      thresholds: IS_SCOPED ? undefined : coverageThreshold
+      thresholds: testPaths ? undefined : coverageThreshold
     }
   }
-
   return function config(config) {
     config.set({
       basePath: '',
@@ -93,11 +104,11 @@ module.exports = function makeConfig({
 
       frameworks: ['mocha', 'viewport', 'webpack'],
 
-      files: randomizeTestOrder ? [choma, bundle] : [bundle],
+      files: randomizeTestOrder ? [choma, ...karmaFiles] : karmaFiles,
 
       preprocessors: {
         [choma]: ['webpack'],
-        [bundle]: ['webpack', 'sourcemap']
+        ...preprocessors
       },
 
       reporters,
@@ -117,8 +128,8 @@ module.exports = function makeConfig({
       logLevel: constants.LOG_ERROR,
 
       autoWatch: true,
-
-      singleRun: !DEBUG,
+      // when set to true, quit after running the tests
+      singleRun: NO_DEBUG,
 
       reportSlowerThan: 500,
 
@@ -148,6 +159,7 @@ module.exports = function makeConfig({
       browserNoActivityTimeout: 30000, // default 10000
 
       webpack: {
+        watch: !NO_DEBUG,
         module: {
           ...baseWebpackConfig.module,
           rules: [
@@ -166,9 +178,9 @@ module.exports = function makeConfig({
             ...baseWebpackConfig.module.rules
           ]
         },
-        cache: !DEBUG,
         mode: 'development',
-        devtool: DEBUG ? 'inline-source-map' : 'none',
+        //devtool: NO_DEBUG ? 'none' : 'inline-source-map',
+        devtool: NO_DEBUG ? 'none' : 'eval-source-map',
 
         //TODO: this is probably a hack and webpack 5 will remove these features
         //investigate how to do this properly
@@ -176,17 +188,12 @@ module.exports = function makeConfig({
         resolve: {
           extensions: baseWebpackConfig.resolve.extensions
         },
-        resolveLoader: {
-          alias: {
-            'ui-tests-loader': path.join(__dirname, './loaders/ui-tests-loader')
-          }
-        },
         externals: {
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,
           'react/addons': true,
           // The karma mocha plugin exposes a mocha instance as `window.mocha`,
-          // but the mocha npm package exports the mocha contructor function.
+          // but the mocha npm package exports the mocha constructor function.
           // The choma script needs access to the mocha constructor so it can
           // monkey-patch it for random test ordering.
           mocha: 'mocha.constructor'

@@ -22,11 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { ElementType } from 'react'
-import { mount } from '@instructure/ui-test-sandbox'
-import { accessible } from '@instructure/ui-test-queries'
-
-import { expect } from './expect'
+import { ElementType } from 'react'
 
 type ComponentExample = {
   Component: ElementType
@@ -45,21 +41,24 @@ type ExampleSection = {
   }[]
 }
 
-const renderExample = ({
-  Component,
-  componentProps,
-  key
-}: ComponentExample) => <Component key={key} {...componentProps} />
+//const renderExample = ({
+//  Component,
+//  componentProps,
+//  key
+//}: ComponentExample) => <Component key={key} {...componentProps} />
 
 // this is coming from generateComponentExamples.js in __examples__
 // TODO This is broken. It was using the examples-loader to preprocess the data.
 export function generateA11yTests(
+  // @ts-expect-error this is not used now
   {
     componentName,
     sections
   }: { componentName: string; sections: ExampleSection[] },
+  // @ts-expect-error this is not used now
   only: any[] = []
 ) {
+  /*
   describe(`${componentName} should meet accessibility standards`, async () => {
     sections.forEach(({ pages, propName, propValue }, i) => {
       if (only[0] && i === only[0]) return
@@ -91,5 +90,5 @@ export function generateA11yTests(
         })
       })
     })
-  })
+  })*/
 }

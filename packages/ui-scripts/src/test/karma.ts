@@ -50,7 +50,6 @@ export const karma = () => {
   if (args.includes('--watch')) {
     envVars = envVars
       .concat([
-        `DEBUG=1`,
         `UNMANGLED_CLASS_NAMES=1`,
         `USE_WEBPACK_CSS_LOADERS=1`,
         'DISABLE_SPEEDY_STYLESHEET=1'
@@ -59,6 +58,7 @@ export const karma = () => {
   } else {
     envVars = envVars
       .concat([
+        `NO_DEBUG=1`,
         `${React.version}`.startsWith('15') || args.includes('--no-coverage')
           ? false
           : 'COVERAGE=1',
