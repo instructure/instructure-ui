@@ -31,13 +31,13 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { omitProps, pickProps } from '@instructure/ui-react-utils'
 import { element } from '@instructure/ui-prop-types'
 
-import { Portal } from '@instructure/ui-portal'
+import { Portal, PortalNode } from '@instructure/ui-portal'
 import { Transition, TransitionType } from '@instructure/ui-motion'
 import { PositionMountNode } from '@instructure/ui-position'
 
 type Props = {
   open?: boolean
-  onOpen?: (DOMNode: HTMLSpanElement | null) => any
+  onOpen?: (DOMNode: PortalNode) => any
   onClose?: (...args: any[]) => any
   mountNode?: PositionMountNode
   insertAt?: 'bottom' | 'top'
@@ -220,7 +220,7 @@ class Overlay extends Component<Props> {
   }
 
   _timeouts = []
-  _DOMNode: HTMLSpanElement | null = null
+  _DOMNode: PortalNode = null
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2339) FIXME: Property '_isMounted' does not exist on type 'Over... Remove this comment to see the full error message
@@ -251,7 +251,7 @@ class Overlay extends Component<Props> {
     this._DOMNode = el
   }
 
-  handlePortalOpen = (DOMNode: HTMLSpanElement | null) => {
+  handlePortalOpen = (DOMNode: PortalNode) => {
     this.DOMNode = DOMNode
 
     this._timeouts.push(

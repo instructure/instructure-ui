@@ -34,7 +34,7 @@ import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 /**
  * The DOM Node of the Portal. It is created as a `span` element.
  */
-type PortalNode = HTMLSpanElement | null
+type PortalNode = HTMLSpanElement | null | undefined
 
 type OwnProps = {
   /**
@@ -45,7 +45,7 @@ type OwnProps = {
   /**
    * Callback fired when `<Portal />` content has been mounted in the DOM. Ha the Portal DOMNode as parameter.
    */
-  onOpen?: (DOMNode: PortalNode) => void
+  onOpen?: (DOMNode?: PortalNode) => void
 
   /**
    * Callback fired when `<Portal />` has been unmounted from the DOM
@@ -66,7 +66,7 @@ type OwnProps = {
   /**
    * Provides a reference to the underlying html element. Ha the Portal DOMNode as parameter.
    */
-  elementRef?: (el: PortalNode) => void
+  elementRef?: (el?: PortalNode) => void
 }
 
 type Props = OwnProps & OtherHTMLAttributes<OwnProps> & BidirectionalProps
@@ -255,3 +255,4 @@ class Portal extends Component<Props, State> {
 
 export default Portal
 export { Portal }
+export type { PortalNode }
