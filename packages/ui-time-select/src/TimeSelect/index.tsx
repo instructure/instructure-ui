@@ -556,12 +556,6 @@ class TimeSelect extends Component<Props> {
     let prevValue = ''
 
     if (this.props.defaultValue) {
-      // const date = moment.tz(
-      //   this.props.defaultValue,
-      //   moment.ISO_8601,
-      //   this.locale(),
-      //   this.timezone()
-      // )
       const date = dayjs(this.props.defaultValue)
         .tz(this.timezone(), true)
         .locale(this.locale())
