@@ -108,7 +108,7 @@ class Properties extends Component {
   }
 
   renderTSType = (tsType) => {
-    let { name, elements, type } = tsType
+    let { name, elements, type, raw } = tsType
     let isEnum = true
     /*
     possible types:
@@ -116,6 +116,7 @@ class Properties extends Component {
       - union
       - custom
       - boolean
+      - array
     */
     // TODO: currently custom imported types are just showing the name of the can somehow link to these custom types
     switch (name) {
@@ -133,10 +134,12 @@ class Properties extends Component {
           case 'object':
             return 'object'
           default:
-            return tsType.raw
+            return raw
         }
       case 'boolean':
         return 'bool'
+      case 'Array':
+        return 'array'
       default:
         return name
     }
@@ -183,6 +186,7 @@ class Properties extends Component {
         {!isTsProp ? this.renderEnum(prop) : null}
         {isTsProp ? this.renderTsUnion(prop) : this.renderUnion(prop)}
         {isTsProp && this.renderTsSignature(prop)}
+        {isTsProp && this.renderTsArrayType(prop)}
       </div>
     )
   }
@@ -283,6 +287,22 @@ class Properties extends Component {
     return (
       <span>
         <span css={styles.oneOf}>Type of:</span>{' '}
+        <ul css={styles.list}>{tsType.raw}</ul>
+      </span>
+    )
+  }
+
+  renderTsArrayType(prop) {
+    const { styles } = this.props
+    const { tsType } = prop
+
+    if (!tsType || tsType.name !== 'Array') {
+      return
+    }
+
+    return (
+      <span>
+        <span css={styles.oneOf}>Array of:</span>{' '}
         <ul css={styles.list}>{tsType.raw}</ul>
       </span>
     )
