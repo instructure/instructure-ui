@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
+
+### Bug Fixes
+
+- emotionThemeProvider examples not working in Codepen ([545b326](https://github.com/instructure/instructure-ui/commit/545b326d1db14b389b0010cf8758bdf356cd7168))
+
+### Features
+
+- add support for React 17 ([f647826](https://github.com/instructure/instructure-ui/commit/f64782688b404f950e03c7f83a8328f0ca588248))
+- remove polyfills, since all supported browsers are feature rich enough ([40d3a65](https://github.com/instructure/instructure-ui/commit/40d3a650f9fd563896ae087243b5e051704e4160))
+
 # [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
 
 **Note:** Version bump only for package docs-app

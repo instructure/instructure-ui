@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
+
+### Features
+
+- remove polyfills, since all supported browsers are feature rich enough ([40d3a65](https://github.com/instructure/instructure-ui/commit/40d3a650f9fd563896ae087243b5e051704e4160))
+
 # [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
 
 **Note:** Version bump only for package @instructure/ui-babel-preset

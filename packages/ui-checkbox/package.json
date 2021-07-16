@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-checkbox",
-  "version": "8.6.0",
+  "version": "8.7.0",
   "description": " styled HTML input type='checkbox' component.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -25,27 +25,27 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.6.0",
-    "@instructure/emotion": "8.6.0",
-    "@instructure/ui-dom-utils": "8.6.0",
-    "@instructure/ui-form-field": "8.6.0",
-    "@instructure/ui-icons": "8.6.0",
-    "@instructure/ui-prop-types": "8.6.0",
-    "@instructure/ui-react-utils": "8.6.0",
-    "@instructure/ui-svg-images": "8.6.0",
-    "@instructure/ui-testable": "8.6.0",
-    "@instructure/ui-utils": "8.6.0",
-    "@instructure/ui-view": "8.6.0",
-    "@instructure/uid": "8.6.0",
+    "@instructure/console": "8.7.0",
+    "@instructure/emotion": "8.7.0",
+    "@instructure/ui-dom-utils": "8.7.0",
+    "@instructure/ui-form-field": "8.7.0",
+    "@instructure/ui-icons": "8.7.0",
+    "@instructure/ui-prop-types": "8.7.0",
+    "@instructure/ui-react-utils": "8.7.0",
+    "@instructure/ui-svg-images": "8.7.0",
+    "@instructure/ui-testable": "8.7.0",
+    "@instructure/ui-utils": "8.7.0",
+    "@instructure/ui-view": "8.7.0",
+    "@instructure/uid": "8.7.0",
     "keycode": "^2",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.6.0",
-    "@instructure/ui-color-utils": "8.6.0",
-    "@instructure/ui-test-locator": "8.6.0",
-    "@instructure/ui-test-utils": "8.6.0",
-    "@instructure/ui-themes": "8.6.0"
+    "@instructure/ui-babel-preset": "8.7.0",
+    "@instructure/ui-color-utils": "8.7.0",
+    "@instructure/ui-test-locator": "8.7.0",
+    "@instructure/ui-test-utils": "8.7.0",
+    "@instructure/ui-themes": "8.7.0"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17"
