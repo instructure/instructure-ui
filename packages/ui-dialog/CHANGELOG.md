@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
+
+### Bug Fixes
+
+- **ui-dialog:** cleanup pending timeouts on unmount ([02d1cdf](https://github.com/instructure/instructure-ui/commit/02d1cdf4801dc578fed25e9f327f089aa37d0e92)), closes [#623](https://github.com/instructure/instructure-ui/issues/623)
+
+### Features
+
+- add support for React 17 ([f647826](https://github.com/instructure/instructure-ui/commit/f64782688b404f950e03c7f83a8328f0ca588248))
+
 # [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
 
 **Note:** Version bump only for package @instructure/ui-dialog

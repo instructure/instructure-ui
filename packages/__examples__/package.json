@@ -2,7 +2,7 @@
   "name": "docs-examples",
   "description": "UI libraries made by Instructure Inc.",
   "private": true,
-  "version": "8.6.0",
+  "version": "8.7.0",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -25,15 +25,15 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/canvas-theme": "8.6.0",
-    "@instructure/ui-babel-preset": "8.6.0",
-    "@instructure/ui-buttons": "8.6.0",
-    "@instructure/ui-i18n": "8.6.0",
-    "@instructure/ui-icons": "8.6.0",
-    "@instructure/ui-tooltip": "8.6.0",
-    "@instructure/ui-view": "8.6.0",
-    "@instructure/ui-webpack-config": "8.6.0",
-    "@instructure/uid": "8.6.0",
+    "@instructure/canvas-theme": "8.7.0",
+    "@instructure/ui-babel-preset": "8.7.0",
+    "@instructure/ui-buttons": "8.7.0",
+    "@instructure/ui-i18n": "8.7.0",
+    "@instructure/ui-icons": "8.7.0",
+    "@instructure/ui-tooltip": "8.7.0",
+    "@instructure/ui-view": "8.7.0",
+    "@instructure/ui-webpack-config": "8.7.0",
+    "@instructure/uid": "8.7.0",
     "@storybook/addons": "6.1.21",
     "@storybook/react": "6.1.21",
     "@storybook/theming": "6.1.21",
@@ -44,7 +44,7 @@
     "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
-    "@instructure/ui-test-utils": "8.6.0",
+    "@instructure/ui-test-utils": "8.7.0",
     "globby": "^11",
     "prop-types": "^15",
     "react-docgen": "^5"

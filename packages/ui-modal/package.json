@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-modal",
-  "version": "8.6.0",
+  "version": "8.7.0",
   "description": "A component for displaying content in a dialog overlay",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -25,30 +25,30 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@instructure/console": "8.6.0",
-    "@instructure/emotion": "8.6.0",
-    "@instructure/ui-buttons": "8.6.0",
-    "@instructure/ui-dialog": "8.6.0",
-    "@instructure/ui-motion": "8.6.0",
-    "@instructure/ui-overlays": "8.6.0",
-    "@instructure/ui-portal": "8.6.0",
-    "@instructure/ui-prop-types": "8.6.0",
-    "@instructure/ui-react-utils": "8.6.0",
-    "@instructure/ui-testable": "8.6.0",
-    "@instructure/ui-utils": "8.6.0",
-    "@instructure/ui-view": "8.6.0",
+    "@instructure/console": "8.7.0",
+    "@instructure/emotion": "8.7.0",
+    "@instructure/ui-buttons": "8.7.0",
+    "@instructure/ui-dialog": "8.7.0",
+    "@instructure/ui-motion": "8.7.0",
+    "@instructure/ui-overlays": "8.7.0",
+    "@instructure/ui-portal": "8.7.0",
+    "@instructure/ui-prop-types": "8.7.0",
+    "@instructure/ui-react-utils": "8.7.0",
+    "@instructure/ui-testable": "8.7.0",
+    "@instructure/ui-utils": "8.7.0",
+    "@instructure/ui-view": "8.7.0",
     "prop-types": "^15"
   },
   "peerDependencies": {
     "react": ">=16.8 <=17"
   },
   "devDependencies": {
-    "@instructure/ui-babel-preset": "8.6.0",
-    "@instructure/ui-color-utils": "8.6.0",
-    "@instructure/ui-test-locator": "8.6.0",
-    "@instructure/ui-test-utils": "8.6.0",
-    "@instructure/ui-themes": "8.6.0",
-    "@instructure/ui-position": "8.6.0"
+    "@instructure/ui-babel-preset": "8.7.0",
+    "@instructure/ui-color-utils": "8.7.0",
+    "@instructure/ui-position": "8.7.0",
+    "@instructure/ui-test-locator": "8.7.0",
+    "@instructure/ui-test-utils": "8.7.0",
+    "@instructure/ui-themes": "8.7.0"
   },
   "publishConfig": {
     "access": "public"

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.7.0](https://github.com/instructure/instructure-ui/compare/v8.6.0...v8.7.0) (2021-07-16)
+
+### Bug Fixes
+
+- **ui-dom-utils:** remove supportsObjectFit from the repo, since it was for IE11 support ([1a94c52](https://github.com/instructure/instructure-ui/commit/1a94c525836b81bf0de2b54c1bbea3efe38aea67))
+- **ui-dialog:** cleanup pending timeouts on unmount ([02d1cdf](https://github.com/instructure/instructure-ui/commit/02d1cdf4801dc578fed25e9f327f089aa37d0e92)), closes [#623](https://github.com/instructure/instructure-ui/issues/623)
+- **ui-options:** add aria-hidden to Options label span ([29dab5a](https://github.com/instructure/instructure-ui/commit/29dab5a03f1125f6cb07ff2ab2e00470c32d0753))
+- emotionThemeProvider examples not working in Codepen ([545b326](https://github.com/instructure/instructure-ui/commit/545b326d1db14b389b0010cf8758bdf356cd7168))
+
+### Features
+
+- **ui-avatar:** add `color` prop for setting the color of the initials ([7c65e4e](https://github.com/instructure/instructure-ui/commit/7c65e4e4f49ca0b0d803beb042ddef97df3a1b5d))
+- **ui-avatar:** add `xx-small` and `xx-large` sizes to Avatar ([cee3840](https://github.com/instructure/instructure-ui/commit/cee38402fec15fbcba5779a42bf2de4aa9e598bb))
+- **ui-avatar:** loaded image in `Avatar` has box-shadow instead of border (small visual change!) ([8eb9075](https://github.com/instructure/instructure-ui/commit/8eb9075ca2dc04eefb88875772637c3372dbdde2))
+- **ui-icons:** add `important-dates` icon ([3a3b2d8](https://github.com/instructure/instructure-ui/commit/3a3b2d8a273aeeea72f77ede0e853d4592327cce))
+- **ui-icons-build:** update `gulp-svgmin` dependency to v4 ([31de5b2](https://github.com/instructure/instructure-ui/commit/31de5b2a6a3eda82cfd16ba54661b4b8dc58ff90))
+- **ui-i18n:** Deprecate DateTime. This is a thin wrapper around moment.js, please use moment or some other time library instead.
+- **ui-portal:** remove `SubtreePortal` private component, not needed with react 16 ([396ea60](https://github.com/instructure/instructure-ui/commit/396ea6081bc26673b2ac59dd9adf72e2e9fa6ff2))
+- **ui-scripts:** update `http-server` dependency from `^0.11.1` to `^0.12.0` ([8ccef24](https://github.com/instructure/instructure-ui/commit/8ccef242c0d194ab3af52fa189ffa3f485a9ba41))
+- **ui-time-select:** replace moment.js with dayjs. We only support locales, supported by canvas. (https://community.canvaslms.com/t5/Canvas-Basics-Guide/What-languages-does-Canvas-support/ta-p/19) ([11211fc](https://github.com/instructure/instructure-ui/commit/11211fc4435dfb3fc2f5e69566d449203b92dfff))
+- add support for React 17 ([f647826](https://github.com/instructure/instructure-ui/commit/f64782688b404f950e03c7f83a8328f0ca588248))
+- remove polyfills, since all supported browsers are feature rich enough ([40d3a65](https://github.com/instructure/instructure-ui/commit/40d3a650f9fd563896ae087243b5e051704e4160))
+
 # [8.6.0](https://github.com/instructure/instructure-ui/compare/v8.5.0...v8.6.0) (2021-06-18)
 
 ### Bug Fixes
