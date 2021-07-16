@@ -32,7 +32,7 @@ import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { bidirectional, BidirectionalProps } from '@instructure/ui-i18n'
 import { testable } from '@instructure/ui-testable'
-import { Portal } from '@instructure/ui-portal'
+import { Portal, PortalNode } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-position'
 import { Transition } from '@instructure/ui-motion'
 import { withStyle, jsx } from '@instructure/emotion'
@@ -246,7 +246,7 @@ class Tray extends Component<Props & BidirectionalProps> {
     transitioning: false
   }
 
-  _DOMNode: HTMLSpanElement | null = null
+  _DOMNode: PortalNode = null
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -303,7 +303,7 @@ class Tray extends Component<Props & BidirectionalProps> {
     this._DOMNode = el
   }
 
-  handlePortalOpen = (DOMNode: HTMLSpanElement | null) => {
+  handlePortalOpen = (DOMNode: PortalNode) => {
     this.DOMNode = DOMNode
   }
 

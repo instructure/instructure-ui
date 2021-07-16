@@ -73,13 +73,13 @@ type Props = {
    * are the current props to be applied and matches is an array of current matches from the query
    * prop. Either this or a `children` prop function must be supplied.
    */
-  render?: (props: PropsObject | null, matches: QueriesMatching) => any
+  render?: (props?: PropsObject | null, matches?: QueriesMatching) => any
 
   /**
    * Function that takes the same form and arguments as the render prop. Either this or a `render`
    * prop function must be supplied.
    */
-  children?: (props: PropsObject | null, matches: QueriesMatching) => any
+  children?: (props?: PropsObject | null, matches?: QueriesMatching) => any
 }
 
 /**
