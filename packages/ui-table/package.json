@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-table",
-  "version": "7.8.0",
+  "version": "7.9.0",
   "description": "A styled HTML table component",
   "author": "Instructure, Inc. Engineering and Product Design",
   "type": "commonjs",
@@ -23,22 +23,22 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^7.8.0",
-    "@instructure/ui-color-utils": "^7.8.0",
-    "@instructure/ui-test-utils": "^7.8.0"
+    "@instructure/ui-babel-preset": "^7.9.0",
+    "@instructure/ui-color-utils": "^7.9.0",
+    "@instructure/ui-test-utils": "^7.9.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "@instructure/console": "^7.8.0",
-    "@instructure/ui-a11y-content": "^7.8.0",
-    "@instructure/ui-icons": "^7.8.0",
-    "@instructure/ui-prop-types": "^7.8.0",
-    "@instructure/ui-react-utils": "^7.8.0",
-    "@instructure/ui-simple-select": "^7.8.0",
-    "@instructure/ui-testable": "^7.8.0",
-    "@instructure/ui-themeable": "^7.8.0",
-    "@instructure/ui-utils": "^7.8.0",
-    "@instructure/ui-view": "^7.8.0",
+    "@instructure/console": "^7.9.0",
+    "@instructure/ui-a11y-content": "^7.9.0",
+    "@instructure/ui-icons": "^7.9.0",
+    "@instructure/ui-prop-types": "^7.9.0",
+    "@instructure/ui-react-utils": "^7.9.0",
+    "@instructure/ui-simple-select": "^7.9.0",
+    "@instructure/ui-testable": "^7.9.0",
+    "@instructure/ui-themeable": "^7.9.0",
+    "@instructure/ui-utils": "^7.9.0",
+    "@instructure/ui-view": "^7.9.0",
     "classnames": "^2",
     "prop-types": "^15"
   },

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.9.0](https://github.com/instructure/instructure-ui/compare/v7.8.0...v7.9.0) (2021-07-16)
+
+### Features
+
+- **ui-avatar:** add `color` prop for setting the color of the initials ([e60c281](https://github.com/instructure/instructure-ui/commit/e60c281))
+- **ui-avatar:** add `xx-small` and `xx-large` sizes to Avatar ([ded6a0a](https://github.com/instructure/instructure-ui/commit/ded6a0a))
+- **ui-avatar:** loaded image in `Avatar` has box-shadow instead of border (small visual change!) ([671436e](https://github.com/instructure/instructure-ui/commit/671436e))
+
 # [7.8.0](https://github.com/instructure/instructure-ui/compare/v7.7.1...v7.8.0) (2021-06-18)
 
 **Note:** Version bump only for package @instructure/ui-avatar
