@@ -29,6 +29,7 @@ import {
   Shadows,
   Spacing,
   Stacking,
+  Transitions,
   Typography
 } from '@instructure/ui-theme-tokens'
 
@@ -346,6 +347,63 @@ type CodeEditorThemeVariables = {
   nodeColor: BaseTheme['colors']['textWarning']
   operatorColor: BaseTheme['colors']['textDarkest']
 }
+
+type DrawerLayoutContentThemeVariables = {
+  duration: Transitions['duration']
+}
+type DrawerLayoutTrayThemeVariables = {
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+  zIndex: Stacking['topmost']
+  boxShadow: Shadows['depth3']
+}
+
+type FileDropThemeVariables = {
+  backgroundColor: BaseTheme['colors']['backgroundLightest']
+  borderRadius: Border['radiusLarge']
+  borderWidth: Border['widthMedium']
+  borderColor: BaseTheme['colors']['borderMedium']
+  hoverBorderColor: BaseTheme['colors']['borderBrand']
+  acceptedColor: BaseTheme['colors']['textBrand']
+  rejectedColor: BaseTheme['colors']['textDanger']
+}
+
+type FlexThemeVariables = {
+  fontFamily: Typography['fontFamily']
+}
+
+type FormFieldGroupThemeVariables = {
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+  borderRadius: Border['radiusMedium']
+  errorBorderColor: BaseTheme['colors']['borderDanger']
+  errorFieldsPadding: Spacing['xSmall']
+}
+
+type FormFieldLabelThemeVariables = {
+  color: BaseTheme['colors']['textDarkest']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightBold']
+  fontSize: Typography['fontSizeMedium']
+  lineHeight: Typography['lineHeightFit']
+}
+
+type FormFieldMessageThemeVariables = {
+  colorHint: BaseTheme['colors']['textDarkest']
+  colorError: BaseTheme['colors']['textDanger']
+  colorSuccess: BaseTheme['colors']['textSuccess']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  fontSize: Typography['fontSizeSmall']
+  lineHeight: Typography['lineHeight']
+}
+
+type FormFieldMessagesThemeVariables = {
+  topMargin: Spacing['xxSmall']
+}
+
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
   Alert: AlertThemeVariables
@@ -363,10 +421,18 @@ type ThemeVariables = {
   CheckboxFacade: CheckboxFacadeThemeVariables
   ToggleFacade: ToggleFacadeThemeVariables
   CodeEditor: CodeEditorThemeVariables
+  'DrawerLayout.Content': DrawerLayoutContentThemeVariables
+  'DrawerLayout.Tray': DrawerLayoutTrayThemeVariables
+  FileDrop: FileDropThemeVariables
+  Flex: FlexThemeVariables
+  FormFieldGroup: FormFieldGroupThemeVariables
+  FormFieldLabel: FormFieldLabelThemeVariables
+  FormFieldMessage: FormFieldMessageThemeVariables
+  FormFieldMessages: FormFieldMessagesThemeVariables
 }
-type ComponentThemeMap = ComponentTheme<ThemeVariables>
-
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]
 }
+type ComponentThemeMap = ComponentTheme<ThemeVariables>
+
 export type { ThemeVariables, ComponentThemeMap, AvatarThemeVariables }
