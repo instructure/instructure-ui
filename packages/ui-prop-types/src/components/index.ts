@@ -26,6 +26,7 @@ import {
   Border,
   Breakpoints,
   Forms,
+  Media,
   Shadows,
   Spacing,
   Stacking,
@@ -404,6 +405,104 @@ type FormFieldMessagesThemeVariables = {
   topMargin: Spacing['xxSmall']
 }
 
+type GridThemeVariables = {
+  spacingSmall: Spacing['small']
+  spacingMedium: Spacing['medium']
+  spacingLarge: Spacing['large']
+  mediumMin: Media['mediumMin']
+  largeMin: Media['largeMin']
+  xLargeMin: Media['xLargeMin']
+}
+type HeadingThemeVariables = {
+  lineHeight: Typography['lineHeightFit']
+  h1FontSize: Typography['fontSizeXXLarge']
+  h1FontWeight: Typography['fontWeightLight']
+  h1FontFamily: Typography['fontFamily']
+  h2FontSize: Typography['fontSizeXLarge']
+  h2FontWeight: Typography['fontWeightNormal']
+  h2FontFamily: Typography['fontFamily']
+  h3FontSize: Typography['fontSizeLarge']
+  h3FontWeight: Typography['fontWeightBold']
+  h3FontFamily: Typography['fontFamily']
+  h4FontSize: Typography['fontSizeMedium']
+  h4FontWeight: Typography['fontWeightBold']
+  h4FontFamily: Typography['fontFamily']
+  h5FontSize: Typography['fontSizeSmall']
+  h5FontWeight: Typography['fontWeightNormal']
+  h5FontFamily: Typography['fontFamily']
+  primaryInverseColor: BaseTheme['colors']['textLightest']
+  primaryColor: BaseTheme['colors']['textDarkest']
+  secondaryColor: BaseTheme['colors']['textDark']
+  secondaryInverseColor: BaseTheme['colors']['textLight']
+  borderPadding: Spacing['xxxSmall']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+}
+
+type LinkThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textLink']
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  focusOutlineStyle: Border['style']
+  hoverColor: BaseTheme['colors']['textLink']
+  colorInverse: BaseTheme['colors']['textLight']
+  focusInverseOutlineColor: BaseTheme['colors']['borderLightest']
+  focusInverseIconOutlineColor: BaseTheme['colors']['borderLightest']
+  iconPlusTextMargin: Spacing['xxSmall']
+}
+
+type InlineListItemThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  fontSizeSmall: Typography['fontSizeSmall']
+  fontSizeMedium: Typography['fontSizeMedium']
+  fontSizeLarge: Typography['fontSizeLarge']
+  color: BaseTheme['colors']['textDark']
+  lineHeight: Typography['lineHeightCondensed']
+  noneSpacing: Spacing['xSmall']
+  pipeSpacing: Spacing['xSmall']
+  slashSpacing: Spacing['xSmall']
+  arrowSpacing: Spacing['xSmall']
+  marginBottomDefault: Spacing['xxxSmall']
+  spacingXXXSmall: Spacing['xxxSmall']
+  spacingXXSmall: Spacing['xxSmall']
+  spacingXSmall: Spacing['xSmall']
+  spacingSmall: Spacing['small']
+  spacingMedium: Spacing['medium']
+  spacingLarge: Spacing['large']
+  spacingXLarge: Spacing['xLarge']
+  spacingXXLarge: Spacing['xxLarge']
+}
+
+type ListItemThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeight']
+  fontSizeSmall: Typography['fontSizeSmall']
+  fontSizeMedium: Typography['fontSizeMedium']
+  fontSizeLarge: Typography['fontSizeLarge']
+  color: BaseTheme['colors']['textDarkest']
+  spacingXXXSmall: Spacing['xxxSmall']
+  spacingXXSmall: Spacing['xxSmall']
+  spacingXSmall: Spacing['xSmall']
+  spacingSmall: Spacing['small']
+  spacingMedium: Spacing['medium']
+  spacingLarge: Spacing['large']
+  spacingXLarge: Spacing['xLarge']
+  spacingXXLarge: Spacing['xxLarge']
+  delimiterDashedBorder: `${Border['widthSmall']} ${string} ${BaseTheme['colors']['borderMedium']}`
+  delimiterSolidBorder: `${Border['widthSmall']} ${string} ${BaseTheme['colors']['borderMedium']}`
+}
+
+type ListThemeVariables = {
+  listPadding: Spacing['large']
+  orderedNumberFontWeight: Typography['fontWeightBold']
+  orderedNumberMargin: Spacing['xSmall']
+}
+
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
   Alert: AlertThemeVariables
@@ -429,6 +528,14 @@ type ThemeVariables = {
   FormFieldLabel: FormFieldLabelThemeVariables
   FormFieldMessage: FormFieldMessageThemeVariables
   FormFieldMessages: FormFieldMessagesThemeVariables
+  Grid: GridThemeVariables
+  GridCol: GridThemeVariables
+  GridRow: GridThemeVariables
+  Heading: HeadingThemeVariables
+  Link: LinkThemeVariables
+  'InlineList.Item': InlineListItemThemeVariables
+  'List.Item': ListItemThemeVariables
+  List: ListThemeVariables
 }
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]
