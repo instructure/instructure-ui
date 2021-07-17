@@ -503,6 +503,136 @@ type ListThemeVariables = {
   orderedNumberMargin: Spacing['xSmall']
 }
 
+type MenuItemThemeVariables = {
+  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeightCondensed']
+  fontSize: Typography['fontSizeMedium']
+  labelPadding: Spacing['large']
+  labelColor: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  iconColor: BaseTheme['colors']['textDarkest']
+  iconPadding: Spacing['small']
+  activeBackground: BaseTheme['colors']['backgroundBrand']
+  activeLabelColor: BaseTheme['colors']['textLightest']
+  activeIconColor: BaseTheme['colors']['textLightest']
+}
+
+type MenuGroupThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightBold']
+  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+}
+type MenuSeparatorThemeVariables = {
+  background: BaseTheme['colors']['backgroundMedium']
+  height: Border['widthSmall']
+  margin: `${string} ${Spacing['small']}`
+}
+type MetricThemeVariables = {
+  padding: `${string} ${Spacing['xSmall']}`
+  fontFamily: Typography['fontFamily']
+  valueColor: BaseTheme['colors']['textDarkest']
+  valueFontSize: Typography['fontSizeXLarge']
+  valueFontWeight: Typography['fontWeightBold']
+  labelColor: BaseTheme['colors']['textDarkest']
+  labelFontSize: Typography['fontSizeXSmall']
+}
+type MetricGroupThemeVariables = {
+  lineHeight: Typography['lineHeightCondensed']
+}
+
+type ModalBodyThemeVariables = {
+  inverseBackground: BaseTheme['colors']['backgroundBrandSecondary']
+}
+type ModalFooterThemeVariables = {
+  background: BaseTheme['colors']['backgroundLight']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderWidth: Border['widthSmall']
+  borderRadius: Border['radiusMedium']
+  padding: Spacing['small']
+  inverseBackground: BaseTheme['colors']['backgroundDarkest']
+  inverseBorderColor: BaseTheme['colors']['borderDarkest']
+}
+
+type ModalHeaderThemeVariables = {
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  padding: Spacing['medium']
+  inverseBackground: BaseTheme['colors']['backgroundDarkest']
+  inverseBorderColor: BaseTheme['colors']['backgroundDarkest']
+}
+
+type ModalThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  textColor: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderRadius: Border['radiusMedium']
+  inverseBackground: BaseTheme['colors']['backgroundBrandSecondary']
+  inverseTextColor: BaseTheme['colors']['textLightest']
+  autoMinWidth: Breakpoints['xSmall']
+  smallMaxWidth: Breakpoints['small']
+  mediumMaxWidth: Breakpoints['medium']
+  largeMaxWidth: Breakpoints['large']
+  boxShadow: Shadows['depth3']
+  zIndex: Stacking['topmost']
+}
+
+type TransitionThemeVariables = {
+  duration: Transitions['duration']
+  timing: Transitions['timing']
+}
+
+type AppNavItemThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightBold']
+  textColor: BaseTheme['colors']['textLink']
+  textColorSelected: BaseTheme['colors']['textDarkest']
+  padding: Spacing['small']
+  backgroundColor: BaseTheme['colors']['backgroundLightest']
+}
+
+type AppNavThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderStyle: Border['style']
+  borderWidth: Border['widthSmall']
+  horizontalMargin: Spacing['xxSmall']
+}
+
+type NavigationItemThemeVariables = {
+  fontSize: Typography['fontSizeSmall']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightLight']
+  fontColor: BaseTheme['colors']['textLightest']
+  iconColor: BaseTheme['colors']['textLightest']
+  lineHeight: Typography['lineHeight']
+  hoverBackgroundColor: BaseTheme['colors']['backgroundDarkest']
+  outerFocusOutline: `${string} ${string} ${string} ${string} ${string} ${BaseTheme['colors']['borderDarkest']}`
+  innerFocusOutline: `${string} ${string} ${string} ${string} ${string} ${BaseTheme['colors']['borderLightest']}`
+  selectedFontColor: BaseTheme['colors']['textBrand']
+  selectedIconColor: BaseTheme['colors']['textBrand']
+  selectedBackgroundColor: BaseTheme['colors']['backgroundLightest']
+  selectedOuterFocusOutline: `${string} ${string} ${string} ${string} ${string} ${BaseTheme['colors']['borderLightest']}`
+  selectedInnerFocusOutline: `${string} ${string} ${string} ${string} ${string} ${BaseTheme['colors']['borderBrand']}`
+  contentPadding: Spacing['xxSmall']
+}
+
+type NavigationThemeVariables = {
+  fontColor: BaseTheme['colors']['textLightest']
+  backgroundColor: BaseTheme['colors']['backgroundBrandSecondary']
+  fill: BaseTheme['colors']['textLightest']
+  focusOutlineInnerWidth: Border['widthMedium']
+  focusOutlineOuterWidth: Border['widthSmall']
+  focusOutlineInnerColor: BaseTheme['colors']['borderBrand']
+  focusOutlineOuterColor: BaseTheme['colors']['borderLightest']
+  marginBottom: Spacing['small']
+  toggleTransition: Transitions['duration']
+}
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
   Alert: AlertThemeVariables
@@ -536,6 +666,20 @@ type ThemeVariables = {
   'InlineList.Item': InlineListItemThemeVariables
   'List.Item': ListItemThemeVariables
   List: ListThemeVariables
+  'Menu.Item': MenuItemThemeVariables
+  'Menu.Group': MenuGroupThemeVariables
+  'Menu.Separator': MenuSeparatorThemeVariables
+  Metric: MetricThemeVariables
+  MetricGroup: MetricGroupThemeVariables
+  'Modal.Body': ModalBodyThemeVariables
+  'Modal.Footer': ModalFooterThemeVariables
+  'Modal.Header': ModalHeaderThemeVariables
+  Modal: ModalThemeVariables
+  Transition: TransitionThemeVariables
+  'AppNav.Item': AppNavItemThemeVariables
+  AppNav: AppNavThemeVariables
+  'Navigation.Item': NavigationItemThemeVariables
+  Navigation: NavigationThemeVariables
 }
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]
