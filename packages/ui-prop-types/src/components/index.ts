@@ -798,6 +798,167 @@ type ProgressCircleThemeVariables = {
   meterColorWarning: BaseTheme['colors']['backgroundWarning']
   meterColorWarningInverse: BaseTheme['colors']['backgroundWarning']
 }
+
+type RangeInputThemeVariables = {
+  handleBackground: BaseTheme['colors']['backgroundBrand']
+  handleShadowColor: BaseTheme['colors']['borderBrand']
+  handleHoverBackground: BaseTheme['colors']['backgroundBrand']
+  handleFocusBackground: BaseTheme['colors']['backgroundBrand']
+  handleFocusOutlineColor: BaseTheme['colors']['borderBrand']
+  trackBackground: BaseTheme['colors']['backgroundDark']
+  valueColor: BaseTheme['colors']['textLightest']
+  valueFontFamily: Typography['fontFamily']
+  valueFontWeight: Typography['fontWeightNormal']
+  valueSmallFontSize: Typography['fontSizeSmall']
+  valueSmallPadding: `${string} ${Spacing['xSmall']}`
+  valueSmallLineHeight: Forms['inputHeightSmall']
+  valueMediumFontSize: Typography['fontSizeMedium']
+  valueMediumPadding: `${string} ${Spacing['small']}`
+  valueMediumLineHeight: Forms['inputHeightMedium']
+  valueLargeFontSize: Typography['fontSizeLarge']
+  valueLargePadding: `${string} ${Spacing['medium']}`
+  valueLargeLineHeight: Forms['inputHeightLarge']
+}
+
+type RadioInputThemeVariables = {
+  labelColor: BaseTheme['colors']['textDarkest']
+  labelFontFamily: Typography['fontFamily']
+  labelFontWeight: Typography['fontWeightNormal']
+  labelLineHeight: Typography['lineHeightCondensed']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderDarkest']
+  hoverBorderColor: BaseTheme['colors']['borderDarkest']
+  focusBorderColor: BaseTheme['colors']['borderBrand']
+  focusBorderWidth: Border['widthMedium']
+  focusBorderStyle: Border['style']
+  simpleFontSizeSmall: Typography['fontSizeSmall']
+  simpleFontSizeMedium: Typography['fontSizeMedium']
+  simpleFontSizeLarge: Typography['fontSizeLarge']
+  simpleFacadeMarginEnd: Spacing['xSmall']
+  toggleBorderRadius: Border['radiusSmall']
+  toggleBorderWidth: Border['widthLarge']
+  toggleBackgroundSuccess: BaseTheme['colors']['backgroundSuccess']
+  toggleBackgroundOff: BaseTheme['colors']['backgroundDark']
+  toggleBackgroundDanger: BaseTheme['colors']['backgroundDanger']
+  toggleBackgroundWarning: BaseTheme['colors']['backgroundWarning']
+  toggleHandleText: BaseTheme['colors']['textLightest']
+  toggleSmallHeight: Forms['inputHeightSmall']
+  toggleMediumHeight: Forms['inputHeightMedium']
+  toggleLargeHeight: Forms['inputHeightLarge']
+  toggleShadow: Shadows['depth1']
+  toggleSmallFontSize: Typography['fontSizeXSmall']
+  toggleMediumFontSize: Typography['fontSizeSmall']
+  toggleLargeFontSize: Typography['fontSizeMedium']
+}
+
+type RatingIconThemeVariables = {
+  iconMargin: Spacing['xxxSmall']
+  iconEmptyColor: BaseTheme['colors']['textBrand']
+  iconFilledColor: BaseTheme['colors']['textBrand']
+  smallIconFontSize: Typography['fontSizeMedium']
+  mediumIconFontSize: Typography['fontSizeLarge']
+  largeIconFontSize: Typography['fontSizeXXLarge']
+}
+
+type SelectThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  smallIconSize: Typography['fontSizeXSmall']
+  mediumIconSize: Typography['fontSizeSmall']
+  largeIconSize: Typography['fontSizeMedium']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+}
+
+type SpinnerThemeVariables = {
+  trackColor: BaseTheme['colors']['backgroundLight']
+  color: BaseTheme['colors']['backgroundBrand']
+  inverseColor: BaseTheme['colors']['backgroundBrand']
+}
+
+type InlineSVGThemeVariables = {
+  primaryInverseColor: BaseTheme['colors']['textLightest']
+  primaryColor: BaseTheme['colors']['textDarkest']
+  secondaryColor: BaseTheme['colors']['textDark']
+  secondaryInverseColor: BaseTheme['colors']['textLight']
+  warningColor: BaseTheme['colors']['textWarning']
+  brandColor: BaseTheme['colors']['textBrand']
+  errorColor: BaseTheme['colors']['textDanger']
+  alertColor: BaseTheme['colors']['textAlert']
+  successColor: BaseTheme['colors']['textSuccess']
+}
+
+type TableBodyThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+}
+
+type TableCellThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  lineHeight: Typography['lineHeightCondensed']
+  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+}
+
+type TableColHeaderThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  lineHeight: Typography['lineHeightCondensed']
+  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineStyle: Border['style']
+}
+
+type TableHeadThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+}
+
+type TableRowThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  hoverBorderColor: BaseTheme['colors']['borderBrand']
+  padding: `${Spacing['xSmall']} ${string}`
+}
+
+type TableRowHeaderThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  lineHeight: Typography['lineHeightCondensed']
+  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+}
+
+type TableThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+}
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
   Alert: AlertThemeVariables
@@ -855,6 +1016,19 @@ type ThemeVariables = {
   Position: PositionThemeVariables
   ProgressBar: ProgressBarThemeVariables
   ProgressCircle: ProgressCircleThemeVariables
+  RangeInput: RangeInputThemeVariables
+  RadioInput: RadioInputThemeVariables
+  'Rating.Icon': RatingIconThemeVariables
+  Select: SelectThemeVariables
+  Spinner: SpinnerThemeVariables
+  InlineSVG: InlineSVGThemeVariables
+  'Table.Body': TableBodyThemeVariables
+  'Table.Cell': TableCellThemeVariables
+  'Table.ColHeader': TableColHeaderThemeVariables
+  'Table.Head': TableHeadThemeVariables
+  'Table.Row': TableRowThemeVariables
+  'Table.RowHeader': TableRowHeaderThemeVariables
+  Table: TableThemeVariables
 }
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]
