@@ -32,20 +32,21 @@ type DeepPartial<T> = {
 }
 
 type PartialTheme = DeepPartial<Exclude<BaseTheme, 'key'>>
+type ComponentOverride =
+  | DeepPartial<ComponentThemeMap>
+  | { [otherComponent: string]: any }
 
-type T =
+type ThemeOverride =
   | PartialTheme
   | (PartialTheme & {
-      [key: string]:
-        | PartialTheme
-        | { componentOverrides?: DeepPartial<ComponentThemeMap> }
+      [key: string]: PartialTheme | { componentOverrides?: ComponentOverride }
     })
 type OverridableTheme = {
-  themeOverrides?: T
-  componentOverrides?: DeepPartial<ComponentThemeMap>
+  themeOverrides?: ThemeOverride
+  componentOverrides?: ComponentOverride
 }
 
-type ThemeOrOverride = BaseTheme | OverridableTheme | DeepPartial<PartialTheme>
+type ThemeOrOverride = BaseTheme | OverridableTheme | PartialTheme
 type ThemeProviderProps = {
   theme: ThemeOrOverride
 }
