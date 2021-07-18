@@ -1107,6 +1107,147 @@ type ToggleDetailsThemeVariables = {
   filledBorderRadius: Border['radiusMedium']
   filledPadding: Spacing['small']
 }
+
+type TooltipThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  fontSize: Typography['fontSizeSmall']
+  padding: Spacing['small']
+}
+
+type TrayThemeVariables = {
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+  boxShadow: Shadows['depth3']
+  xSmallWidth: Breakpoints['xSmall']
+  regularWidth: Breakpoints['small']
+  mediumWidth: Breakpoints['medium']
+  largeWidth: Breakpoints['large']
+  zIndex: Stacking['topmost']
+}
+
+type TreeBrowserButtonThemeVariables = {
+  hoverBackgroundColor: BaseTheme['colors']['backgroundBrand']
+  hoverTextColor: BaseTheme['colors']['textLightest']
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  focusOutlineStyle: Border['style']
+  iconColor: BaseTheme['colors']['textDarkest']
+  iconsMarginRight: Spacing['xSmall']
+  descriptorMarginTop: Spacing['xxxSmall']
+  descriptorTextColor: BaseTheme['colors']['textDarkest']
+  descriptorFontSizeSmall: Typography['fontSizeXSmall']
+  descriptorFontSizeMedium: Typography['fontSizeXSmall']
+  descriptorFontSizeLarge: Typography['fontSizeSmall']
+  nameTextColor: BaseTheme['colors']['textBrand']
+  nameFontSizeSmall: Typography['fontSizeXSmall']
+  nameFontSizeMedium: Typography['fontSizeSmall']
+  nameFontSizeLarge: Typography['fontSizeMedium']
+  baseSpacingSmall: Spacing['xSmall']
+  baseSpacingMedium: Spacing['small']
+  borderWidth: Border['widthSmall']
+  borderRadius: Border['radiusMedium']
+  borderColor: BaseTheme['colors']['borderDark']
+  textLineHeight: Typography['lineHeightCondensed']
+  selectedTextColor: BaseTheme['colors']['textLightest']
+  selectedBackgroundColor: BaseTheme['colors']['backgroundDark']
+  selectedOutlineWidth: Border['widthLarge']
+}
+
+type TreeBrowserCollectionThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  baseSpacingSmall: Spacing['xSmall']
+  baseSpacingMedium: Spacing['small']
+  borderWidth: Border['widthSmall']
+  borderColor: BaseTheme['colors']['borderDark']
+}
+
+type TreeBrowserThemeVariables = {
+  borderRadius: Border['radiusMedium']
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  focusOutlineStyle: Border['style']
+}
+type TruncateTextThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  lineHeight: Typography['lineHeight']
+}
+
+type ContextViewThemeVariables = {
+  arrowBorderWidth: Border['widthSmall']
+  arrowBackgroundColor: BaseTheme['colors']['white']
+  arrowBorderColor: BaseTheme['colors']['tiara']
+  arrowBackgroundColorInverse: BaseTheme['colors']['licorice']
+}
+
+type ViewThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  color: BaseTheme['colors']['textDarkest']
+  colorPrimaryInverse: BaseTheme['colors']['textLightest']
+  borderColorPrimary: BaseTheme['colors']['borderMedium']
+  borderColorSecondary: BaseTheme['colors']['borderDark']
+  borderColorSuccess: BaseTheme['colors']['borderSuccess']
+  borderColorBrand: BaseTheme['colors']['borderBrand']
+  borderColorInfo: BaseTheme['colors']['borderInfo']
+  borderColorAlert: BaseTheme['colors']['borderAlert']
+  borderColorWarning: BaseTheme['colors']['borderWarning']
+  borderColorDanger: BaseTheme['colors']['borderDanger']
+  debugOutlineColor: BaseTheme['colors']['borderDebug']
+  backgroundPrimary: BaseTheme['colors']['backgroundLightest']
+  backgroundSecondary: BaseTheme['colors']['backgroundLight']
+  backgroundPrimaryInverse: BaseTheme['colors']['backgroundDarkest']
+  backgroundBrand: BaseTheme['colors']['backgroundBrand']
+  backgroundInfo: BaseTheme['colors']['backgroundInfo']
+  backgroundAlert: BaseTheme['colors']['backgroundAlert']
+  backgroundSuccess: BaseTheme['colors']['backgroundSuccess']
+  backgroundDanger: BaseTheme['colors']['backgroundDanger']
+  backgroundWarning: BaseTheme['colors']['backgroundWarning']
+  focusOutlineStyle: Border['style']
+  focusOutlineWidth: Border['widthMedium']
+  focusColorInfo: BaseTheme['colors']['borderInfo']
+  focusColorDanger: BaseTheme['colors']['borderDanger']
+  focusColorSuccess: BaseTheme['colors']['borderSuccess']
+  focusColorInverse: BaseTheme['colors']['borderLightest']
+  xSmallMaxWidth: Breakpoints['xSmall']
+  smallMaxWidth: Breakpoints['small']
+  mediumMaxWidth: Breakpoints['medium']
+  largeMaxWidth: Breakpoints['large']
+  marginXxxSmall: string
+  marginXxSmall: string
+  marginXSmall: string
+  marginSmall: string
+  marginMedium: string
+  marginLarge: string
+  marginXLarge: string
+  marginXxLarge: string
+  paddingXxxSmall: string
+  paddingXxSmall: string
+  paddingXSmall: string
+  paddingSmall: string
+  paddingMedium: string
+  paddingLarge: string
+  paddingXLarge: string
+  paddingXxLarge: string
+  shadowDepth1: string
+  shadowDepth2: string
+  shadowDepth3: string
+  shadowResting: string
+  shadowAbove: string
+  shadowTopmost: string
+  stackingTopmost: number
+  stackingAbove: number
+  stackingBelow: number
+  stackingDeepest: number
+  borderRadiusSmall: string
+  borderRadiusMedium: string
+  borderRadiusLarge: string
+  borderWidthSmall: string
+  borderWidthMedium: string
+  borderWidthLarge: string
+  borderStyle: string
+}
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
   Alert: AlertThemeVariables
@@ -1184,6 +1325,14 @@ type ThemeVariables = {
   Text: TextThemeVariables
   TextArea: TextAreaThemeVariables
   ToggleDetails: ToggleDetailsThemeVariables
+  Tooltip: TooltipThemeVariables
+  Tray: TrayThemeVariables
+  'TreeBrowser.Button': TreeBrowserButtonThemeVariables
+  'TreeBrowser.Collection': TreeBrowserCollectionThemeVariables
+  TreeBrowser: TreeBrowserThemeVariables
+  TruncateText: TruncateTextThemeVariables
+  ContextView: ContextViewThemeVariables
+  View: ViewThemeVariables
 }
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]
