@@ -31,7 +31,10 @@ import {
   Spacing,
   Stacking,
   Transitions,
-  Typography
+  Typography,
+  Size,
+  Radius,
+  StrokeWidth
 } from '@instructure/ui-theme-tokens'
 
 type AvatarThemeVariables = {
@@ -633,6 +636,168 @@ type NavigationThemeVariables = {
   marginBottom: Spacing['small']
   toggleTransition: Transitions['duration']
 }
+
+type NumberInputThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderRadius: Border['radiusMedium']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  padding: `${string} ${Spacing['small']}`
+  arrowsColor: BaseTheme['colors']['textDarkest']
+  arrowsBackgroundColor: BaseTheme['colors']['backgroundLight']
+  arrowsHoverBackgroundColor: BaseTheme['colors']['backgroundMedium']
+  arrowsBorderColor: BaseTheme['colors']['borderMedium']
+  arrowsActiveBoxShadow: `${string} ${string} ${string} ${string} ${string} ${BaseTheme['colors']['borderMedium']}`
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineStyle: Border['style']
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  errorBorderColor: BaseTheme['colors']['borderDanger']
+  errorOutlineColor: BaseTheme['colors']['borderDanger']
+  placeholderColor: BaseTheme['colors']['textDark']
+  mediumFontSize: Typography['fontSizeMedium']
+  mediumHeight: Forms['inputHeightMedium']
+  largeFontSize: Typography['fontSizeLarge']
+  largeHeight: Forms['inputHeightLarge']
+}
+
+type OptionsItemThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeightCondensed']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  highlightedLabelColor: BaseTheme['colors']['textLightest']
+  highlightedBackground: BaseTheme['colors']['backgroundBrand']
+  selectedLabelColor: BaseTheme['colors']['textLightest']
+  selectedBackground: BaseTheme['colors']['backgroundDark']
+  padding: `${Spacing['xSmall']} ${Spacing['small']}`
+  iconPadding: Spacing['small']
+  nestedPadding: Spacing['medium']
+}
+
+type OptionsSeparatorThemeVariables = {
+  background: BaseTheme['colors']['backgroundMedium']
+  height: Border['widthSmall']
+  margin: `${string} ${Spacing['small']}`
+}
+
+type OptionsThemeVariables = {
+  labelFontWeight: Typography['fontWeightBold']
+  background: BaseTheme['colors']['backgroundLightest']
+  labelColor: BaseTheme['colors']['textDarkest']
+  labelPadding: `${Spacing['xSmall']} ${string}`
+  nestedLabelPadding: `${Spacing['xSmall']} ${Spacing['small']}`
+}
+
+type MaskThemeVariables = {
+  zIndex: Stacking['topmost']
+  focusBorderColor: BaseTheme['colors']['borderBrand']
+  borderRadius: Border['radiusMedium']
+  borderWidth: Border['widthSmall']
+}
+
+type PagesThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+}
+
+type PillThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  padding: `${string} ${Spacing['xSmall']}`
+  background: BaseTheme['colors']['backgroundLightest']
+  textFontSize: Typography['fontSizeXSmall']
+  textFontWeight: Typography['fontWeightBold']
+  primaryColor: BaseTheme['colors']['textDark']
+  infoColor: BaseTheme['colors']['textInfo']
+  dangerColor: BaseTheme['colors']['textDanger']
+  successColor: BaseTheme['colors']['textSuccess']
+  warningColor: BaseTheme['colors']['textWarning']
+  alertColor: BaseTheme['colors']['textAlert']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+}
+
+type PositionThemeVariables = {
+  zIndex: Stacking['topmost']
+}
+
+type ProgressBarThemeVariables = {
+  color: BaseTheme['colors']['textDarkest']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeightCondensed']
+  fontSize: Typography['fontSizeMedium']
+  xSmallHeight: Spacing['xSmall']
+  xSmallValueFontSize: Typography['fontSizeXSmall']
+  smallHeight: Spacing['small']
+  smallValueFontSize: Typography['fontSizeXSmall']
+  mediumHeight: Spacing['medium']
+  mediumValueFontSize: Typography['fontSizeSmall']
+  largeHeight: Spacing['large']
+  largeValueFontSize: Typography['fontSizeMedium']
+  valuePadding: `${Spacing['xxSmall']}`
+  meterColorBrand: BaseTheme['colors']['backgroundBrand']
+  meterColorBrandInverse: BaseTheme['colors']['backgroundBrand']
+  meterColorInfo: BaseTheme['colors']['backgroundInfo']
+  meterColorInfoInverse: BaseTheme['colors']['backgroundInfo']
+  meterColorSuccessInverse: BaseTheme['colors']['backgroundSuccess']
+  meterColorDangerInverse: BaseTheme['colors']['backgroundDanger']
+}
+
+type ProgressCircleThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeightCondensed']
+  xSmallSize: `${Size['xSmall']}em`
+  xSmallRadius: `${Radius['xSmall']}em`
+  xSmallCircumference: `${Radius['xSmall']}em`
+  xSmallTransform: `${Size['xSmall']}em`
+  xSmallStrokeWidth: `${StrokeWidth['xSmall']}em`
+  xSmallBorderOffset: `${Radius['xSmall']}em`
+  smallSize: `${Size['small']} em`
+  smallRadius: `${Radius['small']}em`
+  smallCircumference: `${Radius['small']}em`
+  smallTransform: `${Size['small']}em`
+  smallStrokeWidth: `${StrokeWidth['small']}em`
+  smallBorderOffset: `${Radius['small']}em`
+  mediumSize: `${Size['medium']}em`
+  mediumRadius: `${Radius['medium']}em`
+  mediumCircumference: `${Radius['medium']}em`
+  mediumTransform: `${Size['medium']}em`
+  mediumStrokeWidth: `${StrokeWidth['medium']}em`
+  mediumBorderOffset: `${Radius['medium']}em`
+  largeSize: `${Size['large']} em`
+  largeRadius: `${Radius['large']}em`
+  largeCircumference: `${Radius['large']} em`
+  largeTransform: `${Size['large']}em`
+  largeStrokeWidth: `${StrokeWidth['large']}em`
+  largeBorderOffset: `${Radius['large']}em`
+  color: BaseTheme['colors']['textDarkest']
+  colorInverse: BaseTheme['colors']['textLightest']
+  trackColor: BaseTheme['colors']['backgroundLightest']
+  trackBorderColor: BaseTheme['colors']['borderMedium']
+  trackBorderColorInverse: BaseTheme['colors']['borderLightest']
+  meterColorBrand: BaseTheme['colors']['backgroundBrand']
+  meterColorBrandInverse: BaseTheme['colors']['backgroundBrand']
+  meterColorInfo: BaseTheme['colors']['backgroundInfo']
+  meterColorInfoInverse: BaseTheme['colors']['backgroundInfo']
+  meterColorSuccess: BaseTheme['colors']['backgroundSuccess']
+  meterColorSuccessInverse: BaseTheme['colors']['backgroundSuccess']
+  meterColorDanger: BaseTheme['colors']['backgroundDanger']
+  meterColorDangerInverse: BaseTheme['colors']['backgroundDanger']
+  meterColorAlert: BaseTheme['colors']['backgroundAlert']
+  meterColorAlertInverse: BaseTheme['colors']['backgroundAlert']
+  meterColorWarning: BaseTheme['colors']['backgroundWarning']
+  meterColorWarningInverse: BaseTheme['colors']['backgroundWarning']
+}
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
   Alert: AlertThemeVariables
@@ -680,6 +845,16 @@ type ThemeVariables = {
   AppNav: AppNavThemeVariables
   'Navigation.Item': NavigationItemThemeVariables
   Navigation: NavigationThemeVariables
+  NumberInput: NumberInputThemeVariables
+  'Options.Item': OptionsItemThemeVariables
+  'Options.Separator': OptionsSeparatorThemeVariables
+  Options: OptionsThemeVariables
+  Mask: MaskThemeVariables
+  Pages: PagesThemeVariables
+  Pill: PillThemeVariables
+  Position: PositionThemeVariables
+  ProgressBar: ProgressBarThemeVariables
+  ProgressCircle: ProgressCircleThemeVariables
 }
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]

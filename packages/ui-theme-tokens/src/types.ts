@@ -28,11 +28,9 @@ type Border = {
   radiusSmall: string
   radiusMedium: string
   radiusLarge: string
-
   widthSmall: string
   widthMedium: string
   widthLarge: string
-
   style: string
 }
 type Breakpoints = {
@@ -115,6 +113,16 @@ type Typography = {
   letterSpacingExpanded: string
 }
 
+type Size = {
+  xSmall: number
+  small: number
+  medium: number
+  large: number
+}
+
+type Radius = Size
+type StrokeWidth = Size
+
 type BaseTheme = {
   key: string
   description?: string
@@ -140,5 +148,8 @@ export type {
   Spacing,
   Stacking,
   Transitions,
-  Typography
+  Typography,
+  Size,
+  Radius,
+  StrokeWidth
 }
