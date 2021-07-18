@@ -952,12 +952,160 @@ type TableRowHeaderThemeVariables = {
   padding: `${Spacing['xSmall']} ${Spacing['small']}`
 }
 
+type TabsPanelThemeVariables = {
+  fontSize: Typography['fontSizeMedium']
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeight']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderColor: BaseTheme['colors']['borderMedium']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+}
+
+type TabsTabThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeightCondensed']
+  fontSize: Typography['fontSizeMedium']
+  defaultColor: BaseTheme['colors']['textDarkest']
+  defaultHoverBorderColor: BaseTheme['colors']['borderMedium']
+  defaultSelectedBorderColor: BaseTheme['colors']['borderBrand']
+  secondaryColor: BaseTheme['colors']['textDarkest']
+  secondarySelectedBackground: BaseTheme['colors']['backgroundLightest']
+  secondarySelectedBorderColor: BaseTheme['colors']['borderMedium']
+  zIndex: Stacking['above']
+}
+
 type TableThemeVariables = {
   fontSize: Typography['fontSizeMedium']
   fontFamily: Typography['fontFamily']
   fontWeight: Typography['fontWeightNormal']
   color: BaseTheme['colors']['textDarkest']
   background: BaseTheme['colors']['backgroundLightest']
+}
+
+type TabsThemeVariables = {
+  defaultBackground: BaseTheme['colors']['backgroundLightest']
+  scrollFadeColor: BaseTheme['colors']['backgroundLightest']
+  tabVerticalOffset: Border['widthSmall']
+  zIndex: Stacking['above']
+}
+
+type TagThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  heightMedium: Forms['inputHeightSmall']
+  heightLarge: Forms['inputHeightMedium']
+  fontSizeSmall: Typography['fontSizeXSmall']
+  fontSizeMedium: Typography['fontSizeSmall']
+  fontSizeLarge: Typography['fontSizeMedium']
+  padding: `${string} ${Spacing['xSmall']}`
+  paddingSmall: `${string} ${Spacing['xSmall']}`
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineStyle: Border['style']
+  iconMargin: Spacing['small']
+  defaultBackgroundHover: string
+  defaultBackground: string
+  defaultBorderColor: string
+  defaultBorderRadius: string
+  defaultBorderStyle: string
+  defaultBorderWidth: string
+  defaultColor: string
+  defaultIconColor: string
+  defaultIconHoverColor: string
+  inlineBackgroundHover: string
+  inlineBackground: string
+  inlineBorderColor: string
+  inlineBorderRadius: string
+  inlineBorderStyle: string
+  inlineBorderWidth: string
+  inlineColor: string
+  inlineIconColor: string
+  inlineIconHoverColor: string
+}
+
+type TextThemeVariables = {
+  fontFamily: string
+  fontFamilyMonospace: string
+  fontFamilyHeading?: string
+  fontSizeXSmall: string
+  fontSizeSmall: string
+  fontSizeMedium: string
+  fontSizeLarge: string
+  fontSizeXLarge: string
+  fontSizeXXLarge: string
+  fontWeightLight: number
+  fontWeightNormal: number
+  fontWeightBold: number
+  lineHeight: number
+  lineHeightFit: number
+  lineHeightCondensed: number
+  lineHeightDouble: number
+  letterSpacingNormal: number
+  letterSpacingCondensed: string
+  letterSpacingExpanded: string
+  primaryInverseColor: BaseTheme['colors']['textLightest']
+  primaryColor: BaseTheme['colors']['textDarkest']
+  secondaryColor: BaseTheme['colors']['textDark']
+  secondaryInverseColor: BaseTheme['colors']['textLight']
+  warningColor: BaseTheme['colors']['textWarning']
+  brandColor: BaseTheme['colors']['textBrand']
+  dangerColor: BaseTheme['colors']['textDanger']
+  successColor: BaseTheme['colors']['textSuccess']
+  alertColor: BaseTheme['colors']['textAlert']
+  paragraphMargin: `${Spacing['medium']} ${string}`
+}
+
+type TextAreaThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  color: BaseTheme['colors']['textDarkest']
+  background: BaseTheme['colors']['backgroundLightest']
+  borderWidth: Border['widthSmall']
+  borderStyle: Border['style']
+  borderTopColor: BaseTheme['colors']['borderMedium']
+  borderRightColor: BaseTheme['colors']['borderMedium']
+  borderBottomColor: BaseTheme['colors']['borderMedium']
+  borderLeftColor: BaseTheme['colors']['borderMedium']
+  borderRadius: Border['radiusMedium']
+  padding: Spacing['small']
+  focusOutlineColor: BaseTheme['colors']['borderBrand']
+  focusOutlineWidth: Border['widthMedium']
+  focusOutlineStyle: Border['style']
+  errorBorderColor: BaseTheme['colors']['borderDanger']
+  errorOutlineColor: BaseTheme['colors']['borderDanger']
+  placeholderColor: BaseTheme['colors']['textDark']
+  smallFontSize: Typography['fontSizeSmall']
+  smallHeight: Forms['inputHeightSmall']
+  mediumFontSize: Typography['fontSizeMedium']
+  mediumHeight: Forms['inputHeightMedium']
+  largeFontSize: Typography['fontSizeLarge']
+  largeHeight: Forms['inputHeightLarge']
+}
+
+type ToggleDetailsThemeVariables = {
+  fontFamily: Typography['fontFamily']
+  fontWeight: Typography['fontWeightNormal']
+  lineHeight: Typography['lineHeight']
+  textColor: BaseTheme['colors']['textDarkest']
+  fontSizeSmall: Typography['fontSizeSmall']
+  fontSizeMedium: Typography['fontSizeMedium']
+  fontSizeLarge: Typography['fontSizeLarge']
+  iconMargin: Spacing['xxSmall']
+  iconColor: BaseTheme['colors']['textDarkest']
+  togglePadding: Spacing['xxSmall']
+  toggleBorderRadius: Border['radiusMedium']
+  toggleBorderWidth: Border['widthMedium']
+  toggleBorderStyle: Border['style']
+  toggleFocusBorderColor: BaseTheme['colors']['borderBrand']
+  filledBackgroundColor: BaseTheme['colors']['backgroundLight']
+  filledBorderWidth: Border['widthSmall']
+  filledBorderStyle: Border['style']
+  filledBorderColor: BaseTheme['colors']['borderMedium']
+  filledBorderRadius: Border['radiusMedium']
+  filledPadding: Spacing['small']
 }
 type ThemeVariables = {
   Avatar: AvatarThemeVariables
@@ -1029,6 +1177,13 @@ type ThemeVariables = {
   'Table.Row': TableRowThemeVariables
   'Table.RowHeader': TableRowHeaderThemeVariables
   Table: TableThemeVariables
+  'Tabs.Panel': TabsPanelThemeVariables
+  'Tabs.Tab': TabsTabThemeVariables
+  Tabs: TabsThemeVariables
+  Tag: TagThemeVariables
+  Text: TextThemeVariables
+  TextArea: TextAreaThemeVariables
+  ToggleDetails: ToggleDetailsThemeVariables
 }
 type ComponentTheme<Type> = {
   [Key in keyof Type]: Type[Key]
