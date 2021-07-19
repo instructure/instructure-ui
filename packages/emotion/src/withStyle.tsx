@@ -24,7 +24,6 @@
 
 import React, { forwardRef, useState } from 'react'
 import { decorator } from '@instructure/ui-decorator'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { isEqual } from 'lodash'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import { useTextDirectionContext } from '@instructure/ui-i18n'
