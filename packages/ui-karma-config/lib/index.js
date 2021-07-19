@@ -179,8 +179,7 @@ module.exports = function makeConfig({ coverageDirectory, coverageThreshold }) {
           ]
         },
         mode: 'development',
-        //devtool: NO_DEBUG ? 'none' : 'inline-source-map',
-        devtool: NO_DEBUG ? 'none' : 'eval-source-map',
+        devtool: NO_DEBUG ? 'none' : 'inline-source-map',
 
         //TODO: this is probably a hack and webpack 5 will remove these features
         //investigate how to do this properly
