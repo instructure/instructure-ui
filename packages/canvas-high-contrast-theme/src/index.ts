@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { BaseTheme, canvasHighContrast } from '@instructure/ui-theme-tokens'
+import { canvasHighContrast } from '@instructure/ui-theme-tokens'
+import { BaseTheme } from '@instructure/types'
 
 const {
   borders,

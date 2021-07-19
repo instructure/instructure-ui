@@ -58,7 +58,6 @@ type Shadows = {
   depth1: string
   depth2: string
   depth3: string
-
   resting: string
   above: string
   topmost: string
@@ -91,24 +90,19 @@ type Typography = {
   fontFamily: string
   fontFamilyMonospace: string
   fontFamilyHeading?: string
-
   fontSizeXSmall: string
   fontSizeSmall: string
   fontSizeMedium: string
-
   fontSizeLarge: string
   fontSizeXLarge: string
   fontSizeXXLarge: string
-
   fontWeightLight: number
   fontWeightNormal: number
   fontWeightBold: number
-
   lineHeight: number
   lineHeightFit: number
   lineHeightCondensed: number
   lineHeightDouble: number
-
   letterSpacingNormal: number
   letterSpacingCondensed: string
   letterSpacingExpanded: string

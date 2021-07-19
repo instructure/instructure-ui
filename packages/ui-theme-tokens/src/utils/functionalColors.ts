@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import baseColorsType from './baseColorsType'
+import { BaseColors, Colors } from '@instructure/types'
 
-function functionalColors(colors: baseColorsType) {
+function functionalColors(colors: BaseColors): Colors {
   const text = {
     textDarkest: colors.licorice,
     textDark: colors.ash,
