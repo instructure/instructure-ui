@@ -24,7 +24,8 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "8.7.0",
-    "@instructure/ui-theme-tokens": "8.7.0"
+    "@instructure/ui-theme-tokens": "8.7.0",
+    "@instructure/types": "8.7.0"
   },
   "dependencies": {
     "@instructure/canvas-high-contrast-theme": "8.7.0",

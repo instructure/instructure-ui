@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 
-import {
-  BaseTheme,
-  canvas,
-  functionalColors
-} from '@instructure/ui-theme-tokens'
+import { canvas, functionalColors } from '@instructure/ui-theme-tokens'
+
+import { BaseTheme } from '@instructure/types'
 
 const {
   borders,
