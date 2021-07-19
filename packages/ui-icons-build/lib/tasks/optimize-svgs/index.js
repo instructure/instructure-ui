@@ -37,16 +37,64 @@ gulp.task('optimize-svgs', () => {
         svgmin({
           js2svg: { pretty: true },
           plugins: [
-            { removeDimensions: true },
-            { removeViewBox: false },
-            { removeDesc: true },
-            { removeTitle: true },
-            { removeRasterImages: true },
-            { cleanupNumericValues: false },
-            { removeUnknownsAndDefaults: false },
-            { removeUselessStrokeAndFill: false },
-            { convertStyleToAttrs: true },
-            { convertPathData: false }
+            'mergePaths',
+            'removeDimensions',
+            'removeDesc',
+            'removeTitle',
+            'removeRasterImages',
+            'convertStyleToAttrs',
+            {
+              name: 'removeViewBox',
+              active: false
+            },
+            {
+              name: 'cleanupNumericValues',
+              active: false
+            },
+            {
+              name: 'removeUnknownsAndDefaults',
+              active: false
+            },
+            {
+              name: 'removeUselessStrokeAndFill',
+              active: false
+            },
+            {
+              name: 'convertPathData',
+              active: false
+            },
+            {
+              // Custom plugin for wrapping multiple path svg-s into a `<g>` tag.
+              // This is needed because all svg files are supposed to have
+              // a single child element for it to display correctly.
+              name: 'wrapMultiplePathsInGroup',
+              type: 'perItem',
+              fn: (node) => {
+                if (
+                  node.type === 'element' &&
+                  node.name === 'svg' &&
+                  node.children.length > 1
+                ) {
+                  const group = new node.constructor(
+                    {
+                      type: 'element',
+                      name: 'g',
+                      attributes: {
+                        'fill-rule': 'evenodd',
+                        'clip-rule': 'evenodd',
+                        stroke: 'none',
+                        'stroke-width': '1'
+                      },
+                      children: node.children
+                    },
+                    node
+                  )
+
+                  // eslint-disable-next-line no-param-reassign
+                  node.children = [group]
+                }
+              }
+            }
           ]
         })
       )
