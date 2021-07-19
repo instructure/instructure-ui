@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { BaseTheme, instructure } from '@instructure/ui-theme-tokens'
+import { instructure } from '@instructure/ui-theme-tokens'
+import { BaseTheme } from '@instructure/types'
 
 const {
   borders,
