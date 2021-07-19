@@ -43,7 +43,7 @@ const generateStyle = (componentTheme, props, state) => {
       billboard: { padding: componentTheme.paddingSmall },
       hero: { fontSize: '3rem' },
       message: { fontSize: componentTheme.messageFontSizeSmall },
-      heading: { ...(hero && { margin: `${componentTheme.largeMargin} 0 0` }) }
+      heading: { ...(hero && { margin: `${componentTheme.mediumMargin} 0 0` }) }
     },
     medium: {
       billboard: { padding: componentTheme.paddingMedium },
