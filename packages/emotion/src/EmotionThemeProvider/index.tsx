@@ -25,11 +25,7 @@ import React from 'react'
 import { ThemeProvider } from '@emotion/react'
 // @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { merge, cloneDeep } from 'lodash'
-import { BaseTheme } from '@instructure/ui-theme-tokens'
-import { ComponentThemeMap } from '@instructure/ui-prop-types'
-type DeepPartial<T> = {
-  [P in keyof T]?: DeepPartial<T[P]>
-}
+import { ComponentThemeMap, DeepPartial, BaseTheme } from '@instructure/types'
 
 type PartialTheme = DeepPartial<Exclude<BaseTheme, 'key'>>
 type ComponentOverride =
