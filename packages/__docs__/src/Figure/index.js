@@ -23,10 +23,10 @@
  */
 
 /** @jsx jsx */
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, ComponentIdentifier } from '@instructure/ui-react-utils'
+import { omitProps, ensureSingleChild } from '@instructure/ui-react-utils'
 import { Children } from '@instructure/ui-prop-types'
 import {
   IconCheckMarkSolid,
@@ -44,8 +44,22 @@ import generateComponentTheme from './theme'
 
 import { Heading } from '../Heading'
 
-class FigureItem extends ComponentIdentifier {
+class FigureItem extends Component {
   static displayName = 'FigureItem'
+
+  static propTypes = {
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    children: null
+  }
+
+  render() {
+    const { children, ...props } = this.props
+
+    return ensureSingleChild(children, props)
+  }
 }
 
 @withStyle(generateStyle, generateComponentTheme)

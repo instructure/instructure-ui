@@ -32,7 +32,7 @@ import { element } from '@instructure/ui-prop-types'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 import { Dialog } from '@instructure/ui-dialog'
-import { Portal } from '@instructure/ui-portal'
+import { Portal, PortalNode } from '@instructure/ui-portal'
 import {
   mirrorHorizontalPlacement,
   PositionMountNode
@@ -210,7 +210,7 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
     transitioning: false,
     portalOpen: false
   }
-  _DOMNode: HTMLSpanElement | null = null
+  _DOMNode?: PortalNode = null
   componentDidMount() {
     ;(this.props as any).makeStyles(this.makeStyleProps())
   }
@@ -254,7 +254,7 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
       transitioning: false
     })
   }
-  handlePortalOpen = (DOMNode: HTMLSpanElement | null) => {
+  handlePortalOpen = (DOMNode?: PortalNode) => {
     this.DOMNode = DOMNode
     this.setState({
       portalOpen: true
@@ -263,7 +263,7 @@ class DrawerTray extends Component<Props & BidirectionalProps> {
   get DOMNode() {
     return this._DOMNode
   }
-  set DOMNode(el: HTMLSpanElement | null) {
+  set DOMNode(el: PortalNode) {
     this._DOMNode = el
   }
   renderContent() {

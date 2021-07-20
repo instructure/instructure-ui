@@ -42,11 +42,13 @@ class Properties extends Component {
     // eslint-disable-next-line react/require-default-props
     styles: PropTypes.object,
     props: PropTypes.object.isRequired,
-    layout: PropTypes.string
+    layout: PropTypes.string,
+    hasTsProps: PropTypes.bool
   }
 
   static defaultProps = {
-    layout: 'small'
+    layout: 'small',
+    hasTsProps: false
   }
 
   componentDidMount() {
@@ -57,8 +59,16 @@ class Properties extends Component {
     this.props.makeStyles()
   }
 
+  isTsProp(prop) {
+    return this.props.hasTsProps && prop.tsType
+  }
+
   unquote(string) {
     return string.replace(/^'|'$/g, '')
+  }
+
+  isTsGeneralFunction(string) {
+    return string.includes('(...args: any[]) => any')
   }
 
   renderRows() {
@@ -77,19 +87,62 @@ class Properties extends Component {
       })
       .map((name) => {
         const prop = props[name]
+
         return (
           <Table.Row key={name}>
             <Table.Cell>
               <code>{name}</code>
             </Table.Cell>
             <Table.Cell>
-              <code>{this.renderType(prop.type)}</code>
+              <code>
+                {this.isTsProp(prop)
+                  ? this.renderTSType(prop.tsType)
+                  : this.renderType(prop.type)}
+              </code>
             </Table.Cell>
             <Table.Cell>{this.renderDefault(prop)}</Table.Cell>
             <Table.Cell>{this.renderDescription(prop)}</Table.Cell>
           </Table.Row>
         )
       })
+  }
+
+  renderTSType = (tsType) => {
+    let { name, elements, type, raw } = tsType
+    let isEnum = true
+    /*
+    possible types:
+      - signature
+      - union
+      - custom
+      - boolean
+      - array
+    */
+    // TODO: currently custom imported types are just showing the name of the can somehow link to these custom types
+    switch (name) {
+      case 'union':
+        elements.forEach((element) => {
+          if (element.name !== 'literal') {
+            isEnum = false
+          }
+        })
+        return isEnum ? 'enum' : 'union'
+      case 'signature':
+        switch (type) {
+          case 'function':
+            return 'func'
+          case 'object':
+            return 'object'
+          default:
+            return raw
+        }
+      case 'boolean':
+        return 'bool'
+      case 'Array':
+        return 'array'
+      default:
+        return name
+    }
   }
 
   renderType(type) {
@@ -111,19 +164,29 @@ class Properties extends Component {
     if (prop.required) {
       return <span css={styles.required}>Required</span>
     } else if (prop.defaultValue) {
-      return <code>{this.unquote(prop.defaultValue.value)}</code>
+      let defaultValue = this.unquote(prop.defaultValue.value)
+      if (defaultValue === '() => {}') {
+        defaultValue = <span css={styles.noWrap}>{defaultValue}</span>
+      }
+      return <code>{defaultValue}</code>
     } else {
       return ''
     }
   }
 
   renderDescription(prop) {
-    const { description } = prop || {}
+    const { description, tsType } = prop || {}
+
+    const isTsProp = this.isTsProp(prop)
+
     return (
       <div>
         {description && compileMarkdown(description)}
-        {this.renderEnum(prop)}
-        {this.renderUnion(prop)}
+        {/* This would be duplicate information in case we have proper TS types */}
+        {!isTsProp ? this.renderEnum(prop) : null}
+        {isTsProp ? this.renderTsUnion(prop) : this.renderUnion(prop)}
+        {isTsProp && this.renderTsSignature(prop)}
+        {isTsProp && this.renderTsArrayType(prop)}
       </div>
     )
   }
@@ -173,6 +236,74 @@ class Properties extends Component {
       <span>
         <span css={styles.oneOf}>One of type:</span>{' '}
         <ul css={styles.list}>{values}</ul>
+      </span>
+    )
+  }
+
+  renderTsUnion(prop) {
+    const { styles } = this.props
+    const { tsType } = prop
+
+    if (!tsType || tsType.name !== 'union') {
+      return
+    }
+
+    if (!Array.isArray(tsType.elements)) {
+      return <span>{tsType.elements}</span>
+    }
+
+    // react-docgen doesn't recognise functions if they are in parentheses,
+    // so we have to parse the raw data
+    const elements = tsType.raw.split('|')
+
+    const values = elements.map((rawValue) => {
+      let value = rawValue.trim()
+      if (this.isTsGeneralFunction(value)) {
+        value = 'function'
+      }
+      return (
+        <li css={styles.listItem} key={value}>
+          <code>{value ? this.unquote(value) : value}</code>
+        </li>
+      )
+    })
+
+    return (
+      <span>
+        <span css={styles.oneOf}>One of:</span>{' '}
+        <ul css={styles.list}>{values}</ul>
+      </span>
+    )
+  }
+
+  renderTsSignature(prop) {
+    const { styles } = this.props
+    const { tsType } = prop
+
+    if (!tsType || tsType.name !== 'signature') {
+      return
+    }
+
+    return (
+      <span>
+        <span css={styles.oneOf}>Type of:</span>{' '}
+        <ul css={styles.list}>{tsType.raw}</ul>
+      </span>
+    )
+  }
+
+  renderTsArrayType(prop) {
+    const { styles } = this.props
+    const { tsType } = prop
+
+    if (!tsType || tsType.name !== 'Array') {
+      return
+    }
+
+    return (
+      <span>
+        <span css={styles.oneOf}>Array of:</span>{' '}
+        <ul css={styles.list}>{tsType.raw}</ul>
       </span>
     )
   }

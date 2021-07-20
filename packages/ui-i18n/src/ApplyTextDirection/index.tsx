@@ -37,6 +37,7 @@ type ApplyTextDirectionProps = {
 ---
 category: components/utilities
 ---
+@tsProps
 **/
 const ApplyTextDirection = (props: ApplyTextDirectionProps) => {
   const context = useTextDirectionContext()

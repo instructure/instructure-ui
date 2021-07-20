@@ -38,7 +38,7 @@ import {
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { Transition, TransitionType } from '@instructure/ui-motion'
-import { Portal } from '@instructure/ui-portal'
+import { Portal, PortalNode } from '@instructure/ui-portal'
 import { testable } from '@instructure/ui-testable'
 import { withStyle, jsx } from '@instructure/emotion'
 import { PositionMountNode } from '@instructure/ui-position'
@@ -59,7 +59,7 @@ type Props = {
   defaultFocusElement?: React.ReactElement | ((...args: any[]) => any)
   shouldReturnFocus?: boolean
   shouldCloseOnDocumentClick?: boolean
-  onOpen?: (DOMNode: HTMLSpanElement | null) => any
+  onOpen?: (DOMNode: PortalNode) => any
   onClose?: (...args: any[]) => any
   onDismiss?: (...args: any[]) => any
   contentRef?: (...args: any[]) => any
@@ -274,7 +274,7 @@ class Modal extends Component<Props> {
     }
   }
 
-  _DOMNode: HTMLSpanElement | null = null
+  _DOMNode: PortalNode = null
 
   componentDidMount() {
     // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
@@ -309,11 +309,11 @@ class Modal extends Component<Props> {
     }
   }
 
-  set DOMNode(el: HTMLSpanElement | null) {
+  set DOMNode(el: PortalNode) {
     this._DOMNode = el
   }
 
-  handlePortalOpen = (DOMNode: HTMLSpanElement | null) => {
+  handlePortalOpen = (DOMNode: PortalNode) => {
     this.DOMNode = DOMNode
   }
 
