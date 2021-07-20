@@ -29,7 +29,8 @@ import PropTypes from 'prop-types'
 import {
   omitProps,
   getElementType,
-  callRenderProp
+  callRenderProp,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 
@@ -41,7 +42,7 @@ import generateComponentTheme from './theme'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  as?: React.ReactElement
+  as?: AsElementType
   variant?: 'default' | 'highlighted' | 'selected' | 'disabled'
   role?: string
   renderBeforeLabel?: React.ReactNode | ((...args: any[]) => any)
@@ -135,8 +136,14 @@ class Item extends Component<Props> {
   }
 
   render() {
-    const { as, role, styles, renderBeforeLabel, renderAfterLabel, children } =
-      this.props
+    const {
+      as,
+      role,
+      styles,
+      renderBeforeLabel,
+      renderAfterLabel,
+      children
+    } = this.props
 
     const ElementType = getElementType(Item, this.props, () => as!)
     const passthroughProps = omitProps(this.props, Item.propTypes)

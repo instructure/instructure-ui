@@ -286,7 +286,6 @@ describe('<Calendar />', async () => {
 
   it('should render root as designated by the `as` prop', async () => {
     await mount(
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Calendar renderWeekdayLabels={weekdayLabels} as="ul">
         {generateDays()}
       </Calendar>

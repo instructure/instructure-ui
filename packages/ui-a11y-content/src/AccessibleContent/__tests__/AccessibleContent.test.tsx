@@ -53,7 +53,6 @@ describe('<AccessibleContent />', async () => {
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
-    // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
     const subject = await mount(<AccessibleContent as="div" />)
     const accessibleContent = within(subject.getDOMNode())
 

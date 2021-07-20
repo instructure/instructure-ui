@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 
 import { PositionPlacement, PositionPropTypes } from '@instructure/ui-position'
 import { View } from '@instructure/ui-view'
-import { safeCloneElement } from '@instructure/ui-react-utils'
+import { safeCloneElement, AsElementType } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { testable } from '@instructure/ui-testable'
 
@@ -54,7 +54,7 @@ type Props = {
   elementRef?: (...args: any[]) => any
   formatOverflowText?: (...args: any[]) => any
   formatOutput?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   margin: Spacing
   placement: PositionPlacement
 }

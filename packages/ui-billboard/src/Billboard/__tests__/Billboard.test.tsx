@@ -160,7 +160,6 @@ describe('<Billboard />', async () => {
     })
 
     it('should support an `as` prop', async () => {
-      // @ts-expect-error ts-migrate(2554) FIXME: Expected 2 arguments, but got 1.
       const subject = await mount(<Billboard as="div" />)
       const billboard = within(subject.getDOMNode())
       expect(billboard.getTagName()).to.equal('div')

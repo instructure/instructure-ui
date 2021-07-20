@@ -231,7 +231,6 @@ describe('Day', async () => {
           date="2019-08-02"
           label="1 August 2019 Friday"
           onClick={() => {}}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           as="li"
         >
           8

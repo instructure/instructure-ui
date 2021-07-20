@@ -38,7 +38,8 @@ import {
   getElementType,
   omitProps,
   pickProps,
-  passthroughProps
+  passthroughProps,
+  AsElementType
 } from '@instructure/ui-react-utils'
 
 import {
@@ -56,7 +57,7 @@ import generateStyle from './styles'
 import generateComponentTheme from './theme'
 
 type Props = {
-  as?: React.ReactElement | string
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
   display?:
     | 'auto'

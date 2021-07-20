@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, AsElementType } from '@instructure/ui-react-utils'
 
 import {
   withStyle,
@@ -42,7 +42,7 @@ import generateComponentTheme from './theme'
 type Props = {
   padding?: Spacing
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   variant?: 'default' | 'inverse'
   overflow?: 'scroll' | 'fit'
   makeStyles?: (...args: any[]) => any
@@ -95,8 +95,15 @@ class ModalBody extends Component<Props> {
   }
 
   render() {
-    const { as, elementRef, overflow, variant, padding, children, ...rest } =
-      this.props
+    const {
+      as,
+      elementRef,
+      overflow,
+      variant,
+      padding,
+      children,
+      ...rest
+    } = this.props
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'omitViewProps' does not exist on type 't... Remove this comment to see the full error message
     const passthroughProps = View.omitViewProps(

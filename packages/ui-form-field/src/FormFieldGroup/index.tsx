@@ -27,7 +27,11 @@ import { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import { Grid } from '@instructure/ui-grid'
-import { pickProps, omitProps } from '@instructure/ui-react-utils'
+import {
+  pickProps,
+  omitProps,
+  AsElementType
+} from '@instructure/ui-react-utils'
 import { withStyle, jsx } from '@instructure/emotion'
 
 import { FormFieldLayout } from '../FormFieldLayout'
@@ -40,7 +44,7 @@ type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
   description: React.ReactNode
-  as?: React.ReactElement
+  as?: AsElementType
   messages?: FormMessage[]
   messagesId?: string
   disabled?: boolean

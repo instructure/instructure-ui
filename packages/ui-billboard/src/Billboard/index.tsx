@@ -31,7 +31,8 @@ import { View } from '@instructure/ui-view'
 import {
   omitProps,
   callRenderProp,
-  getElementType
+  getElementType,
+  AsElementType
 } from '@instructure/ui-react-utils'
 
 import {
@@ -49,7 +50,7 @@ type Props = {
   styles?: any
   hero?: React.ReactElement | ((...args: any[]) => any)
   size?: 'small' | 'medium' | 'large'
-  as?: React.ReactElement
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
   heading?: string
   headingAs?: 'h1' | 'h2' | 'h3' | 'span'

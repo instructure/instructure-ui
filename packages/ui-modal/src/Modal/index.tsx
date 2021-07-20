@@ -34,7 +34,8 @@ import {
 import {
   passthroughProps,
   safeCloneElement,
-  matchComponentTypes
+  matchComponentTypes,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { Transition, TransitionType } from '@instructure/ui-motion'
@@ -52,7 +53,7 @@ import generateComponentTheme from './theme'
 
 type Props = {
   label: string
-  as?: React.ReactElement
+  as?: AsElementType
   size?: 'auto' | 'small' | 'medium' | 'large' | 'fullscreen'
   variant?: 'default' | 'inverse'
   open?: boolean

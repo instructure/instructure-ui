@@ -627,8 +627,8 @@ class Select extends Component<Props> {
     // a wrapping listitem will be created by Options
     groupChildren.push(
       <Options
-        id={id}
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+        id={id}
         as="ul"
         role="group"
         renderLabel={renderLabel}
@@ -656,8 +656,12 @@ class Select extends Component<Props> {
   // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'data' implicitly has an 'any' type.
   renderList(data) {
     const { getListProps, getOptionProps, getDisabledOptionProps } = data
-    const { isShowingOptions, optionsMaxWidth, visibleOptionsCount, children } =
-      this.props
+    const {
+      isShowingOptions,
+      optionsMaxWidth,
+      visibleOptionsCount,
+      children
+    } = this.props
 
     let lastWasGroup = false
     const viewProps = isShowingOptions

@@ -26,7 +26,11 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  getElementType,
+  AsElementType
+} from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 import generateStyle from './styles'
@@ -35,7 +39,7 @@ import generateComponentTheme from './theme'
 type Props = {
   //TODO: probably have to make a new type instead of this generic `string` which
   //will only allow the valid html tags
-  as?: React.ReactElement | string
+  as?: AsElementType
   color?:
     | 'primary'
     | 'secondary'

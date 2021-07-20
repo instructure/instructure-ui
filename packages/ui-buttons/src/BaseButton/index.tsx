@@ -33,7 +33,8 @@ import {
   getInteraction,
   passthroughProps,
   callRenderProp,
-  InteractionType
+  InteractionType,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -55,7 +56,7 @@ type Props = {
   type?: 'button' | 'submit' | 'reset'
   size?: 'small' | 'medium' | 'large'
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement | string
+  as?: AsElementType
   interaction?: InteractionType
   color?: 'primary' | 'primary-inverse' | 'secondary' | 'success' | 'danger'
   focusColor?: 'info' | 'inverse'

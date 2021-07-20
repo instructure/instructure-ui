@@ -26,7 +26,11 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  getElementType,
+  AsElementType
+} from '@instructure/ui-react-utils'
 
 import { withStyle, jsx } from '@instructure/emotion'
 
@@ -35,7 +39,7 @@ import generateStyle from './styles'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  as?: React.ReactElement
+  as?: AsElementType
 }
 
 /**

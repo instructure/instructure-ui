@@ -31,7 +31,8 @@ import {
   omitProps,
   ensureSingleChild,
   passthroughProps,
-  callRenderProp
+  callRenderProp,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import {
   PositionConstaint,
@@ -54,7 +55,7 @@ type Props = {
   renderTip: React.ReactNode | ((...args: any[]) => any)
   isShowingContent?: boolean
   defaultIsShowingContent?: boolean
-  as?: React.ReactElement
+  as?: AsElementType
   on?: ('click' | 'hover' | 'focus') | ('click' | 'hover' | 'focus')[]
   color?: 'primary' | 'primary-inverse'
   placement?: PositionPlacement

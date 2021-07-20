@@ -25,6 +25,20 @@
 import { logWarn as warn } from '@instructure/console'
 import { ComponentType, ReactElement } from 'react'
 
+type AsElementType =
+  | ReactElement
+  | keyof HTMLElementTagNameMap
+  | undefined
+  | null
+
+interface ComponentWithAsProp {
+  as?: AsElementType
+  to?: any | null
+  href?: string | null
+  onClick?: ((...args: any) => any) | null
+  defaultProps?: Record<string, any> & { as?: AsElementType }
+}
+
 /**
  * ---
  * category: utilities/react
@@ -37,15 +51,13 @@ import { ComponentType, ReactElement } from 'react'
  * @param {Function} getDefault an optional function that returns the default element type
  * @returns {String} the element type
  */
-function getElementType<
-  T extends { as?: ReactElement | string; [key: string]: any }
->(
+function getElementType<T extends ComponentWithAsProp>(
   // TODO remove |any and as any casts when propTypes are removed
   Component: ComponentType<T> | any,
   props: T,
-  getDefault?: () => string | ReactElement
+  getDefault?: () => AsElementType
 ) {
-  if (props.as && props.as !== (Component.defaultProps as any).as) {
+  if (props.as && props.as !== Component.defaultProps.as) {
     return props.as
   }
 
@@ -72,8 +84,9 @@ function getElementType<
     return 'button'
   }
 
-  return (Component.defaultProps as any).as || 'span'
+  return Component.defaultProps.as || 'span'
 }
 
 export default getElementType
 export { getElementType }
+export type { AsElementType }

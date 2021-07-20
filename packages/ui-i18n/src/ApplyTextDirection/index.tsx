@@ -23,14 +23,14 @@
  */
 
 import React, { useContext } from 'react'
-import { getElementType } from '@instructure/ui-react-utils'
+import { getElementType, AsElementType } from '@instructure/ui-react-utils'
 
 import { DIRECTION, TextDirectionContext } from '../TextDirectionContext'
 
 type ApplyTextDirectionProps = {
   dir?: 'ltr' | 'rtl'
   children?: React.ReactNode | ((...args: any[]) => any)
-  as?: React.ReactElement
+  as?: AsElementType
 }
 
 /**

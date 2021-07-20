@@ -133,8 +133,8 @@ describe('<Tooltip />', async () => {
         <Tooltip
           renderTip={<h2>Hello</h2>}
           placement="end"
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           as="a"
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           href="example.html"
         >
           Hover or focus me
@@ -157,8 +157,8 @@ describe('<Tooltip />', async () => {
         <Tooltip
           renderTip={<h2>Hello</h2>}
           placement="end"
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           as="a"
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           href="example.html"
         >
           Hover or focus me
@@ -183,8 +183,8 @@ describe('<Tooltip />', async () => {
         <Tooltip
           renderTip={<h2>Hello</h2>}
           placement="end"
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           as="a"
+          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           href="example.html"
         >
           Hover or focus me

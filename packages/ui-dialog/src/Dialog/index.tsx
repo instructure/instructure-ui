@@ -25,7 +25,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  getElementType,
+  AsElementType
+} from '@instructure/ui-react-utils'
 import {
   findDOMNode,
   requestAnimationFrame,
@@ -37,7 +41,7 @@ import { FocusRegionManager } from '@instructure/ui-a11y-utils'
 import { OtherHTMLAttributes } from '@instructure/ui-prop-types'
 
 type Props = {
-  as?: React.ReactElement | keyof HTMLElementTagNameMap
+  as?: AsElementType
   display?: 'auto' | 'block' | 'inline-block'
   label?: string
   open?: boolean

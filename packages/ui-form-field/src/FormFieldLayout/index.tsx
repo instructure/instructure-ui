@@ -33,7 +33,8 @@ import { logError as error } from '@instructure/console'
 import {
   omitProps,
   pickProps,
-  getElementType
+  getElementType,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 
@@ -50,7 +51,7 @@ type Props = {
   styles?: any
   label: React.ReactNode
   id?: string
-  as?: React.ReactElement
+  as?: AsElementType
   messages?: FormMessage[]
   messagesId?: string
   inline?: boolean
@@ -192,7 +193,6 @@ class FormFieldLayout extends Component<Props> {
     // note: the legend element must be the first child of a fieldset element for SR
     // so we render it twice in that case (once for SR-only and one that is visible)
     return (
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <ScreenReaderContent as="legend">
         {this.props.label}
         {this.hasMessages && (

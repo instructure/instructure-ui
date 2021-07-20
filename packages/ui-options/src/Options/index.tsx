@@ -31,7 +31,8 @@ import {
   omitProps,
   matchComponentTypes,
   callRenderProp,
-  safeCloneElement
+  safeCloneElement,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { uid } from '@instructure/uid'
@@ -49,7 +50,7 @@ import { Separator } from './Separator'
 type Props = {
   makeStyles?: (...args: any[]) => any
   styles?: any
-  as?: React.ReactElement
+  as?: AsElementType
   role?: string
   elementRef?: (...args: any[]) => any
   renderLabel?: React.ReactNode | ((...args: any[]) => any)
@@ -116,7 +117,6 @@ class Options extends Component<Props> {
 
   get childAs() {
     const { as } = this.props
-    // @ts-expect-error ts-migrate(2367) FIXME: This condition will always return 'false' since th... Remove this comment to see the full error message
     if (as === 'ul' || as === 'ol') {
       return 'li'
     }
@@ -141,7 +141,6 @@ class Options extends Component<Props> {
   renderSubList(children) {
     const { styles } = this.props
     return (
-      // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
       <Item as={this.childAs} role="presentation" css={styles.label}>
         {children}
       </Item>

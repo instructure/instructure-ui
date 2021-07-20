@@ -52,7 +52,6 @@ describe('<Item />', async () => {
   })
 
   it('should render designated tag if `as` prop is specified', async () => {
-    // @ts-expect-error FIXME remove this line to see the error
     await mount(<Item as="li">Hello World</Item>)
     const item = await ItemLocator.find()
     expect(item.getTagName()).to.equal('li')
@@ -194,7 +193,6 @@ describe('<Item />', async () => {
   it('should render nested lists', async () => {
     await mount(
       <Item>
-        {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. */}
         <Options as="ul" renderLabel={'Nested list'}>
           <Item>Sub item</Item>
         </Options>

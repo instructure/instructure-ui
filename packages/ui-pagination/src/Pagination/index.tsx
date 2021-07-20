@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { View } from '@instructure/ui-view'
 import { testable } from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { omitProps, AsElementType } from '@instructure/ui-react-utils'
 import { uid } from '@instructure/uid'
 import { Children } from '@instructure/ui-prop-types'
 import { hasVisibleChildren } from '@instructure/ui-a11y-utils'
@@ -75,7 +75,7 @@ type Props = {
   labelPrev?: string
   variant?: 'full' | 'compact'
   margin?: Spacing
-  as?: React.ReactElement
+  as?: AsElementType
   elementRef?: (...args: any[]) => any
   shouldHandleFocus?: boolean
 }

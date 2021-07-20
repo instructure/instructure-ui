@@ -29,7 +29,11 @@ import keycode from 'keycode'
 import { IconCheckSolid, IconArrowOpenEndSolid } from '@instructure/ui-icons'
 import { uid } from '@instructure/uid'
 import { controllable } from '@instructure/ui-prop-types'
-import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  omitProps,
+  getElementType,
+  AsElementType
+} from '@instructure/ui-react-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { testable } from '@instructure/ui-testable'
@@ -52,7 +56,7 @@ type Props = {
   onMouseOver?: (...args: any[]) => any
   controls?: string
   disabled?: boolean
-  as?: React.ReactElement
+  as?: AsElementType
   type?: 'button' | 'checkbox' | 'radio' | 'flyout'
   value?: string | number
   href?: string

@@ -34,7 +34,8 @@ import {
   getInteraction,
   matchComponentTypes,
   passthroughProps,
-  callRenderProp
+  callRenderProp,
+  AsElementType
 } from '@instructure/ui-react-utils'
 import { logWarn as warn } from '@instructure/console'
 import { testable } from '@instructure/ui-testable'
@@ -52,7 +53,7 @@ type Props = {
   href?: string
   color?: 'link' | 'link-inverse'
   elementRef?: (...args: any[]) => any
-  as?: React.ReactElement
+  as?: AsElementType
   interaction?: 'enabled' | 'disabled'
   margin?: Spacing
   renderIcon?: ((...args: any[]) => any) | React.ReactNode

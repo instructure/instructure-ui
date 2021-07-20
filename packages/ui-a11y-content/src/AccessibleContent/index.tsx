@@ -25,14 +25,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { passthroughProps, getElementType } from '@instructure/ui-react-utils'
+import {
+  passthroughProps,
+  getElementType,
+  AsElementType
+} from '@instructure/ui-react-utils'
 
 import { PresentationContent } from '../PresentationContent'
 import { ScreenReaderContent } from '../ScreenReaderContent'
 
 type Props = {
   alt?: string
-  as?: React.ReactElement
+  as?: AsElementType
 }
 
 /**
