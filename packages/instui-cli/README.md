@@ -5,7 +5,6 @@ category: packages
 ## instui-cli
 
 [![npm][npm]][npm-url]&nbsp;
-[![build-status][build-status]][build-status-url]&nbsp;
 [![MIT License][license-badge]][license]&nbsp;
 [![Code of Conduct][coc-badge]][coc]
 
@@ -37,9 +36,9 @@ instui create app --name MyInstuiApp
 
 ### Available commands
 
-- **create app** | Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.
-- **create component** | Create an Instructure UI component.
-- **create package** | Create an Instructure UI package.
+- **create app** | Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app. DEPRECATED, this will be deleted in InstUI 9
+- **create component** | Create an Instructure UI component. DEPRECATED, will be removed in InstUI v9.
+- **create package** | Create an Instructure UI package. DEPRECATED, will be removed in InstUI v9.
 - **upgrade** | Upgrades instructure-ui in a designated repository to the latest stable version including upgrading packages and applying codemods.
 - **upgrade-packages** | Upgrade instructure-ui packages to the latest stable version.
 - **codemod** | Apply instructure-ui codemods to source at a specified path.

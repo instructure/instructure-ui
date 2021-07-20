@@ -27,7 +27,8 @@ import { handleCreatePackage } from '../handlers'
 
 export default {
   command: 'create-package',
-  desc: 'Generate a package from a template. (Note: This command has been moved to `@instructure/ui-template-scripts`)',
+  desc:
+    'Generate a package from a template. DEPRECATED, this will be deleted in InstUI 9',
   builder: (yargs: any) => {
     yargs.option('template', {
       alias: 't',

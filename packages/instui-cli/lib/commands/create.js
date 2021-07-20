@@ -25,7 +25,8 @@
 const { handleCreate } = require('../handlers')
 
 exports.command = 'create'
-exports.desc = 'Create content generated from Instructure UI template packages.'
+exports.desc =
+  'Create content generated from Instructure UI template packages. DEPRECATED, this will be deleted in InstUI 9'
 
 exports.builder = (yargs) => {
   const generatePathOption = ({ yargs, contentType }) => {
@@ -49,7 +50,7 @@ exports.builder = (yargs) => {
   const appCommand = 'app'
   yargs.command(
     appCommand,
-    'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.',
+    'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app. DEPRECATED, this will be deleted in InstUI 9',
     (yargs) => {
       const options = { yargs, contentType: appCommand }
       generatePathOption(options)
@@ -64,7 +65,7 @@ exports.builder = (yargs) => {
   const packageCommand = 'package'
   yargs.command(
     packageCommand,
-    'Create an Instructure UI package.',
+    'Create an Instructure UI package. DEPRECATED, this will be deleted in InstUI 9',
     (yargs) => {
       const options = { yargs, contentType: packageCommand }
       generatePathOption(options)
@@ -79,7 +80,7 @@ exports.builder = (yargs) => {
   const componentCommand = 'component'
   yargs.command(
     componentCommand,
-    'Create an Instructure UI component.',
+    'Create an Instructure UI component. DEPRECATED, this will be deleted in InstUI 9',
     (yargs) => {
       const options = { yargs, contentType: componentCommand }
       generatePathOption(options)

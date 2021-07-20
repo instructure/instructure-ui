@@ -27,7 +27,8 @@ import { handleCreateComponent } from '../handlers'
 
 export default {
   command: 'create-component',
-  desc: 'Generate a component within a new package or within an existing package. (Note: This command has been moved to `@instructure/ui-template-scripts`)',
+  desc:
+    'Generate a component within a new package or within an existing package. DEPRECATED, this will be deleted in InstUI 9',
   builder: (yargs: any) => {
     yargs.option('template', {
       alias: 't',
